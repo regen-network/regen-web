@@ -3,7 +3,7 @@ import {postgraphql} from 'postgraphql';
 
 const app = express();
 
-app.use(postgraphql('postgres://localhost:5432/xrn', 'public', {
+app.use(postgraphql('postgres://postgres@localhost:5432/xrn', 'public', {
   graphiql:true,
   watchPg: true
 }));

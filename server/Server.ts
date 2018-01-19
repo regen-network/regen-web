@@ -1,8 +1,11 @@
 import * as express from 'express';
-import * as postgraphql from 'postgraphql';
+import {postgraphql} from 'postgraphql';
 
 const app = express();
 
-app.use(postgraphql('postgres://localhost:5432'));
+app.use(postgraphql('postgres://localhost:5432/xrn', 'public', {
+  graphiql:true,
+  watchPg: true
+}));
 
 app.listen(3001);

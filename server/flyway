@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-nix-shell -p flyway --run "flyway -password='' $@" 
+nix-shell -p flyway --run "flyway $@" 

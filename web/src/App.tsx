@@ -1,34 +1,50 @@
+// React
 import * as React from 'react';
-import {BrowserRouter as Router } from 'react-router-dom';
+import { View } from 'react-native';
+
+// Routing
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+
+// GraphQL
 import { ApolloProvider } from 'react-apollo';
 import { ApolloClient } from 'apollo-client';
+import { ApolloLink, concat } from 'apollo-link';
 import { HttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
-import './App.css';
+
+// Cryptography
+// import * as Sodium from 'libsodium-wrappers';
+
+// App
+import Home from './Home';
+import TargetPage from './TargetPage';
+import SubmissionPage from './SubmissionPage';
+
+const authMiddleware = new ApolloLink((operation, forward) => {
+  operation.setContext({
+    headers: {
+    }
+  });
+  return forward ? forward(operation) : null;
+});
 
 const client = new ApolloClient({
   // By default, this client will send queries to the
   //  `/graphql` endpoint on the same host
-  link: new HttpLink(),
+  link: concat(authMiddleware, new HttpLink()),
   cache: new InMemoryCache()
 });
-
-const logo = require('./logo.svg');
 
 class App extends React.Component {
   render() {
     return (
-      <ApolloProvider>
+      <ApolloProvider client={client}>
         <Router>
-            <div className="App">
-                <header className="App-header">
-                    <img src={logo} className="App-logo" alt="logo" />
-                    <h1 className="App-title">Welcome to React</h1>
-                </header>
-                <p className="App-intro">
-                    To get started, edit <code>src/App.tsx</code> and save to reload.
-                </p>
-            </div>
+          <View>
+            <Route exact={true} path="/" component={Home} />
+            <Route path="/target/:id" component={TargetPage} />
+            <Route path="/submission/:id" component={SubmissionPage} />
+          </View>
         </Router>
       </ApolloProvider>
     );

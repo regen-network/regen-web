@@ -12,10 +12,22 @@
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
-    "noImplicitAny": true,
+    "noImplicitAny": false,
     "strictNullChecks": true,
     "suppressImplicitAnyIndexErrors": true,
-    "noUnusedLocals": true
+    "noUnusedLocals": true,
+    "types": [
+      "react",
+      "react-native",
+      "react-dom",
+      "react-router",
+      "react-router-dom",
+      "jest",
+      "graphql",
+      "async",
+      "history",
+      "zen-observable"
+    ]
   },
   "exclude": [
     "node_modules",

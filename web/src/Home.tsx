@@ -18,9 +18,16 @@ const HOME_QUERY = gql`
   }
   `;
 
-const Home = ({data:{allTargets}}:any) => 
-  <View>
-   <Text>{JSON.stringify(allTargets)}</Text>
-  </View>;
+const Home = ({data: {loading, allTargets}}:any) => {
+  if(loading)
+    return <Text>Loading</Text>;
+  return (
+    <View>
+      {allTargets.nodes.map(({id, title, description}) =>
+        <View><Text>{title}</Text></View>
+        )}
+    </View>
+  );
+};
 
 export default graphql(HOME_QUERY)(Home);

@@ -2,8 +2,6 @@ CREATE TYPE agent_type AS ENUM ('User', 'Org');
 
 CREATE ROLE "guest";
 
-GRANT SELECT ON ALL TABLES IN SCHEMA public TO PUBLIC ;
-
 CREATE TABLE agent
 (
   id bigserial primary key,
@@ -51,3 +49,6 @@ CREATE TABLE photo
   hash text not null,
   url text not null
 );
+
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO PUBLIC ;
+

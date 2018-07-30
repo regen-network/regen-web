@@ -1,8 +1,12 @@
 web:
   stage: build
   image: node:8
+  cache:
+    paths:
+      - web/node_modules
   script:
     - cd web
+    - yarn
     - yarn build
     
 

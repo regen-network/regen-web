@@ -1,5 +1,5 @@
 web:
-  stages: build
+  stage: build
   image: node:8
   script:
     - cd web

@@ -1,0 +1,10 @@
+web:
+  stages: build
+  image: node:8
+  script:
+    - cd web
+    - yarn build
+    
+
+
+    

@@ -1,35 +1,28 @@
 {
-  "name": "regen-network",
+  "name": "regen-prototype1",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "apollo-client-preset": "^1.0.6",
-    "graphql": "^0.12.3",
-    "graphql-tag": "^2.6.1",
-    "libsodium-wrappers": "^0.7.3",
-    "react": "^16.2.0",
-    "react-apollo": "^2.0.4",
-    "react-dom": "^16.2.0",
-    "react-native-web": "^0.3.2",
-    "react-router": "^4.2.0",
-    "react-router-dom": "^4.2.2",
-    "react-scripts-ts": "^2.13.0"
+    "@mapbox/mapbox-gl-draw": "^1.0.9",
+    "mapbox-gl": "^0.47.0",
+    "ol": "^5.1.3",
+    "ol-mapbox-style": "^3.0.1",
+    "prop-types": "^15.6.2",
+    "react": "^16.4.1",
+    "react-art": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "react-mapbox-gl": "^3.8.0",
+    "react-native-web": "^0.8.9"
+  },
+  "devDependencies": {
+    "flow-bin": "^0.77.0",
+    "react-scripts": "1.1.4"
   },
   "scripts": {
-    "start": "react-scripts-ts start",
-    "build": "react-scripts-ts build",
-    "test": "react-scripts-ts test --env=jsdom",
-    "eject": "react-scripts-ts eject"
-  },
-  "proxy": "http://localhost:3001",
-  "devDependencies": {
-    "@types/graphql": "^0.12.1",
-    "@types/jest": "^22.0.1",
-    "@types/react": "^16.0.34",
-    "@types/react-dom": "^16.0.3",
-    "@types/react-native": "^0.52.2",
-    "@types/react-router": "^4.0.20",
-    "@types/react-router-dom": "^4.2.3",
-    "typescript": "^2.6.2"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "flow": "flow"
   }
 }

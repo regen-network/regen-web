@@ -13,11 +13,11 @@
     "react-dom": "^16.4.1",
     "react-mapbox-gl": "^3.8.0",
     "react-native-web": "^0.8.9",
-    "serve": "^9.4.0"
-  },
-  "devDependencies": {
+    "serve": "^9.4.0",
     "flow-bin": "^0.77.0",
     "react-scripts": "1.1.4"
+  },
+  "devDependencies": {
   },
   "scripts": {
     "start": "react-scripts start",

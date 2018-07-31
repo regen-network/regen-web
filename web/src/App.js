@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
-import ReactMapboxGl, { Layer, Feature } from "react-mapbox-gl";
+import { View } from 'react-native';
+import ReactMapboxGl from "react-mapbox-gl";
 import * as mapbox from "mapbox-gl";
 import 'mapbox-gl/dist/mapbox-gl.css';
 import '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css';
@@ -32,6 +32,7 @@ class App extends Component {
     return (
       <View>
         <Map
+        // eslint-disable-next-line
           style="https://maps.tilehosting.com/styles/hybrid/style.json?key=UHsj69rAYb2gCUY60Put"
           containerStyle={{
             height: "100vh",

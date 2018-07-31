@@ -1,0 +1,11 @@
+{
+  "name": "root",
+  "private": true,
+  "devDependencies": {
+    "lerna": "^3.0.0-rc.0"
+  },
+  "scripts":{
+    "postinstall": "lerna run build --stream",
+    "start":"lerna run --scope=regen-network-web serve --stream"
+  }
+}

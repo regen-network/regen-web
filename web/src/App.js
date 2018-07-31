@@ -4,7 +4,7 @@ import ReactMapboxGl, { Layer, Feature } from "react-mapbox-gl";
 import * as mapbox from "mapbox-gl";
 import 'mapbox-gl/dist/mapbox-gl.css';
 import '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css';
-import * as MapboxDraw from '@mapbox/mapbox-gl-draw';
+import * as MapboxDraw from '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw';
 
 const Map = ReactMapboxGl({
   accessToken: "undefined"

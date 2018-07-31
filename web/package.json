@@ -1,5 +1,5 @@
 {
-  "name": "regen-prototype1",
+  "name": "regen-network-web",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -12,7 +12,8 @@
     "react-art": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-mapbox-gl": "^3.8.0",
-    "react-native-web": "^0.8.9"
+    "react-native-web": "^0.8.9",
+    "serve": "^9.4.0"
   },
   "devDependencies": {
     "flow-bin": "^0.77.0",
@@ -23,6 +24,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "flow": "flow"
+    "flow": "flow",
+    "serve":"serve -s build"
   }
 }

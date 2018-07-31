@@ -6,6 +6,7 @@
   },
   "scripts":{
     "postinstall": "lerna bootstrap && lerna run build --stream",
-    "start":"lerna run --scope=regen-network-web serve --stream"
+    "start":"lerna run --scope=regen-network-web serve --stream",
+    "test":"echo 'No tests yet'"
   }
 }

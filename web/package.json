@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "@mapbox/mapbox-gl-draw": "^1.0.9",
+    "@mapbox/mapbox-gl-geocoder": "^2.3.0",
+    "flow-bin": "^0.77.0",
     "mapbox-gl": "^0.47.0",
     "ol": "^5.1.3",
     "ol-mapbox-style": "^3.0.1",
@@ -13,18 +15,16 @@
     "react-dom": "^16.4.1",
     "react-mapbox-gl": "^3.8.0",
     "react-native-web": "^0.8.9",
-    "serve": "^9.4.0",
-    "flow-bin": "^0.77.0",
-    "react-scripts": "1.1.4"
+    "react-scripts": "1.1.4",
+    "serve": "^9.4.0"
   },
-  "devDependencies": {
-  },
+  "devDependencies": {},
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "flow": "flow",
-    "serve":"serve -s build"
+    "serve": "serve -s build"
   }
 }

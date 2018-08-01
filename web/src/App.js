@@ -7,7 +7,7 @@ import '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css';
 import * as MapboxDraw from '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw';
 
 const Map = ReactMapboxGl({
-  accessToken: "undefined"
+  accessToken: "pk.eyJ1IjoiYWFyb25jLXJlZ2VuIiwiYSI6ImNqa2I4dW9sbjBob3czcHA4amJqM2NhczAifQ.4HW-QDLUBJiHxOjDakKm2w"
 });
 
 const onMapLoad = (map) => {
@@ -33,7 +33,8 @@ class App extends Component {
       <View>
         <Map
         // eslint-disable-next-line
-          style="https://maps.tilehosting.com/styles/hybrid/style.json?key=UHsj69rAYb2gCUY60Put"
+        style="mapbox://styles/mapbox/satellite-streets-v10"
+        //  style="https://maps.tilehosting.com/styles/hybrid/style.json?key=UHsj69rAYb2gCUY60Put"
           containerStyle={{
             height: "100vh",
             width: "100vw"

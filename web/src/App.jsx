@@ -22,7 +22,7 @@ class App extends Component {
   }
 
   onDrawUpdated = (e) => {
-      this.setState({ features: this.state.drawControl.getAll() });
+    this.setState({ features: this.state.drawControl.getAll() });
   }
 
   onMapLoad = (map) => {
@@ -33,7 +33,7 @@ class App extends Component {
       },
       displayControlsDefault: false
     });
-    this.setState({drawControl});
+    this.setState({ drawControl });
     map.addControl(drawControl, 'top-left');
     map.addControl(new mapbox.GeolocateControl({
       positionOptions: {
@@ -54,7 +54,7 @@ class App extends Component {
   render() {
     return (
       <View style={{ flex: 1, flexDirection: 'column' }}>
-        <View style={{ flex: 7, flexDirection: 'row' }}>
+        <View style={{ flex: 8, flexDirection: 'row' }}>
           <View style={{ flex: 2 }}>
             <FlatList
               data={this.state.features.features}
@@ -69,25 +69,25 @@ class App extends Component {
               //  style="https://maps.tilehosting.com/styles/hybrid/style.json?key=UHsj69rAYb2gCUY60Put"
               containerStyle={{
                 width: '80vw',
-                height: '70vh'
+                height: '80vh'
               }}
               onStyleLoad={this.onMapLoad}
             />
           </View>
         </View>
-        <View style={{ flex: 3 }}></View>
+        <View style={{ flex: 2 }}></View>
       </View>
     );
   }
 }
 
-const FeatureListItem = ({item}) => {
-   return (
-   <View style={{flexDirection:'column'}}>
-     <Text style={{fontWeight:'bold'}}>{item.geometry.type}</Text>
-     <Text style={{fontSize:10}}>{JSON.stringify(item.geometry.coordinates[0])}</Text>
-   </View>
-   );
+const FeatureListItem = ({ item }) => {
+  return (
+    <View style={{ flexDirection: 'column' }}>
+      <Text style={{ fontWeight: 'bold' }}>{item.geometry.type}</Text>
+      <Text style={{ fontSize: 10 }}>{JSON.stringify(item.geometry.coordinates[0])}</Text>
+    </View>
+  );
 }
 
 // <Map containerStyle={{height:"100vh", width:"100vw"}} />

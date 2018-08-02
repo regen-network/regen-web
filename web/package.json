@@ -5,6 +5,8 @@
   "dependencies": {
     "@mapbox/mapbox-gl-draw": "^1.0.9",
     "@mapbox/mapbox-gl-geocoder": "^2.3.0",
+    "@material-ui/core": "^1.4.2",
+    "@material-ui/icons": "^2.0.0",
     "flow-bin": "^0.77.0",
     "mapbox-gl": "^0.47.0",
     "ol": "^5.1.3",

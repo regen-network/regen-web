@@ -14,3 +14,8 @@ using [Flyway](https://flywaydb.org/)
 run `brew install flyway`. If you have [Nix](https://nixos.org/nix/) installed on
 linux you can use the provided `./flyway` script
 2. Run `flyway migrate`
+
+## Run Server
+
+1. Run `yarn`
+2. Run `yarn start`

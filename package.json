@@ -4,9 +4,13 @@
   "dependencies": {
     "lerna": "^3.0.0-rc.0"
   },
-  "scripts":{
+  "scripts": {
     "postinstall": "lerna bootstrap && lerna run build --stream",
-    "start":"lerna run --scope=regen-network-mvp-server start --stream",
-    "test":"echo 'No tests yet'"
+    "dev":"pm2 start pm2.config.js && pm2 monit",
+    "start": "lerna run --scope=regen-network-mvp-server start --stream",
+    "test": "echo 'No tests yet'"
+  },
+  "devDependencies": {
+    "pm2": "^3.0.3"
   }
 }

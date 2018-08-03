@@ -1,5 +1,5 @@
 {
-  "name": "xrn-server",
+  "name": "regen-network-mvp-server",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

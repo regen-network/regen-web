@@ -17,8 +17,7 @@
     "react-dom": "^16.4.1",
     "react-mapbox-gl": "^3.8.0",
     "react-native-web": "^0.8.9",
-    "react-scripts": "1.1.4",
-    "serve": "^9.4.0"
+    "react-scripts": "1.1.4"
   },
   "devDependencies": {},
   "scripts": {
@@ -26,8 +25,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "flow": "flow",
-    "serve": "serve -s build"
+    "flow": "flow"
   },
   "proxy":"http://localhost:5000"
 }

@@ -5,7 +5,7 @@
   "dependencies": {
     "express": "^4.16.2",
     "libsodium-wrappers": "^0.7.3",
-    "postgraphql": "^3.5.4"
+    "postgraphile": "^4.0.0-rc.2"
   },
   "scripts": {
     "start": "ts-node Server.ts"

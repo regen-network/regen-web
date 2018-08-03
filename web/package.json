@@ -28,5 +28,6 @@
     "eject": "react-scripts eject",
     "flow": "flow",
     "serve": "serve -s build"
-  }
+  },
+  "proxy":"http://localhost:5000"
 }

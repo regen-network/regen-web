@@ -35,8 +35,10 @@ app.use(postgraphile(process.env.DATABASE_URL || 'postgres://postgres@localhost:
   dynamicJson: true,
   pgSettings: (req) => {
     console.log(req.user);
+    const sub = req.user.sub;
+    // TODO create pg role from sub
     return {
-      role: 'guest'
+      role: sub || 'guest'
     };
   }
 }));

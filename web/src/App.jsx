@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { View } from 'react-native';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -17,23 +19,26 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { withTheme } from '@material-ui/core/styles';
 
+import { actions as mapActions } from "./actions/map";
+
 const mapboxAccessToken = "pk.eyJ1IjoiYWFyb25jLXJlZ2VuIiwiYSI6ImNqa2I4dW9sbjBob3czcHA4amJqM2NhczAifQ.4HW-QDLUBJiHxOjDakKm2w";
 
 const Map = ReactMapboxGl({
   accessToken: mapboxAccessToken
 });
 
-class App extends Component {
+class app extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      features: {},
       selected: {}
    };
   }
 
   onDrawUpdated = (e) => {
-    this.setState({ features: this.state.drawControl.getAll() });
+    const { updateFeatures } = this.props.actions;
+    const updatedFeatures = this.state.drawControl.getAll();
+    updateFeatures(updatedFeatures.features);
   }
 
   onSelectionChange = (e) => {
@@ -41,7 +46,7 @@ class App extends Component {
     e.features.forEach((feature) => {
       selected[feature.id] = true;
     });
-    this.setState({selected});
+    this.setState({ selected });
   }
 
   onMapLoad = (map) => {
@@ -72,7 +77,7 @@ class App extends Component {
   }
 
   toggleSelectItem = (id) => {
-    const {selected, drawControl} = this.state;
+    const { selected, drawControl } = this.state;
     const newSelected = {...selected};
     newSelected[id] = !selected[id];
     const featureIds = [];
@@ -80,13 +85,14 @@ class App extends Component {
       if(newSelected[k]) featureIds.push(k);
     });
     drawControl.changeMode('simple_select', {featureIds});
-    this.setState({selected:newSelected});
+    this.setState({ selected: newSelected });
     //this.state.drawControl.changeMode('direct_select', {featureId: id});
   }
 
   render() {
-    const {features, selected} = this.state;
-    const { theme } = this.props;
+    const { selected } = this.state;
+    const { theme, features } = this.props;
+    console.log("inside Component", features);
     const styles = {
       primaryColor: {
         backgroundColor: theme.palette.primary.main,
@@ -128,10 +134,10 @@ class App extends Component {
   }
 }
 
-const FeatureList = withTheme()(({features, selected, toggleSelectItem, theme}) => {
+const FeatureList = withTheme()(({ features, selected, toggleSelectItem, theme }) => {
   return (
   <List subheader={<ListSubheader>Features</ListSubheader>}>
-    {features && features.features && features.features.map((feature) =>
+    {features && features.map((feature) =>
       <FeatureListItem item={feature} theme={theme} selected={selected[feature.id]}
         toggleSelectThis={() => toggleSelectItem(feature.id)}
       />
@@ -150,5 +156,17 @@ const FeatureListItem = ({ item, selected, toggleSelectThis, theme }) => {
 }
 
 // <Map containerStyle={{height:"100vh", width:"100vw"}} />
+
+const mapStateToProps = ({ map }) => ({
+  features: map.toJS(),
+});
+
+const mapDispatchToProps = (dispatch) => {
+  const { updateFeatures } = mapActions;
+  const actions = bindActionCreators({ updateFeatures }, dispatch);
+  return { actions }
+};
+
+export const App = connect(mapStateToProps, mapDispatchToProps)(app);
 
 export default withTheme()(App);

@@ -14,17 +14,19 @@ CREATE TABLE polygon
   owner text NOT NULL
 );
 
+-- Enables row level security on polygon
 ALTER TABLE polygon ENABLE ROW LEVEL SECURITY;
 
-GRANT ALL ON polygon TO app_user;
+-- Use this instead of GRANT ALL because that also enables TRUNCATE
+GRANT SELECT, INSERT, UPDATE, DELETE ON polygon TO app_user;
 
 CREATE POLICY polygon_owner_access ON polygon TO app_user
   USING (pg_has_role(owner, 'member'));
 
 COMMENT ON POLICY polygon_owner_access ON polygon IS
-  'This policy allows users to view and update polygons for their own user account and member orgs. pg_has_role allows the built-in postgres grant mechanism to be used for user/org inheritance relationships.';
+  'This policy allows users to view and update polygons for their own user account and member organizations. pg_has_role allows the built-in postgres grant mechanism to be used for user/org inheritance relationships.';
 
-
+-- Test cases:
 
 -- CREATE ROLE aaronc;
 --
@@ -50,5 +52,6 @@ COMMENT ON POLICY polygon_owner_access ON polygon IS
 --         'another_org' );
 --
 -- SELECT * from polygon;
---
+-- delete from polygon;
+
 -- SET ROLE 'postgres';

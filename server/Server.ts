@@ -1,6 +1,8 @@
 import * as express from 'express';
 import * as path from 'path';
 import {postgraphile} from 'postgraphile';
+import * as jwks from 'jwks-rsa';
+import * as jwt from 'express-jwt';
 
 const app = express();
 
@@ -10,11 +12,33 @@ app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, '../web/build', 'index.html'));
 });
 
+app.use(jwt({
+  secret: jwks.expressJwtSecret({
+      cache: true,
+      rateLimit: true,
+      jwksRequestsPerMinute: 5,
+      jwksUri: "https://regen-network.auth0.com/.well-known/jwks.json"
+  }),
+  credentialsRequired: false,
+  audience: 'https://app.regen.network/graphql',
+  issuer: "https://regen-network.auth0.com/",
+  algorithms: ['RS256']
+}));
+
+app.get('/test', (req, res) => {
+  res.send(JSON.stringify(req.user));
+});
+
 app.use(postgraphile(process.env.DATABASE_URL || 'postgres://postgres@localhost:5432/xrn', 'public', {
   graphiql:true,
   watchPg: true,
-  pgDefaultRole: 'guest',
-  dynamicJson: true
+  dynamicJson: true,
+  pgSettings: (req) => {
+    console.log(req.user);
+    return {
+      role: 'guest'
+    };
+  }
 }));
 
 const port = process.env.PORT || 5000;

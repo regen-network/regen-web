@@ -72,8 +72,6 @@ class App extends Component {
   }
 
   toggleSelectItem = (id) => {
-    // TODO I was trying to get the toggling to work, but somehow changeMode isn't working with simple_select - @aaronc
-    // either we just use direct_select or do a bit of debugging
     const {selected, drawControl} = this.state;
     const newSelected = {...selected};
     newSelected[id] = !selected[id];

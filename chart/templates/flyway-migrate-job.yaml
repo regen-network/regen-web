@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: "{{.Release.Name}}"
+  name: "{{.Release.Name}}-migrate"
   labels:
     heritage: {{.Release.Service | quote }}
     release: {{.Release.Name | quote }}
@@ -25,7 +25,7 @@ spec:
       containers:
         - name: flyway
           image: boxfuse/flyway:5
-          args: ["migrate","-url=jdbc:postgresql://{{ .Values.postgresql.fullname }}:5432/{{ .Values.postgresql.postgresDatabase }}","-user={{ .Values.postgresql.postgresUser }}","-password={{ .Values.postgresql.postgresPassword }}","-locations=/flyway-migrations/sql"]
+          args: ["migrate","-url=jdbc:postgresql://{{ .Release.Name }}-postgres:5432/{{ .Values.postgresql.postgresDatabase }}","-user={{ .Values.postgresql.postgresUser }}","-password={{ .Values.postgresql.postgresPassword }}","-locations=/flyway-migrations/sql"]
           volumeMounts:
             - name: shared
               mountPath: /flyway-migrations
@@ -35,7 +35,7 @@ spec:
           volumeMounts:
             - name: shared
               mountPath: /flyway-migrations
-          command: ["cp","-r","sql/","/flyway-migrations"]
+          command: ["cp","-r","/app/sql/","/flyway-migrations"]
       volumes:
         - name: shared
           emptyDir: {}

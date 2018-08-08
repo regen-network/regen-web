@@ -54,15 +54,16 @@ app.use(postgraphile(pgPool, 'public', {
   watchPg: true,
   dynamicJson: true,
   pgSettings: (req) => {
-    const { sub, ...user } = req.user;
-    if (!sub) return { role: 'guest' };
-    const settings = { role: sub };
-    // TODO need to deal with keys that aren't strings properly
-    // Object.keys(user).map(k =>
-    //   settings['jwt.claims.' + k] = user[k]
-    // );
-    return settings;
-  }
+    if(req.user && req.user.sub) {
+      const { sub, ...user } = req.user;
+      const settings = { role: sub };
+      // TODO need to deal with keys that aren't strings properly
+      // Object.keys(user).map(k =>
+      //   settings['jwt.claims.' + k] = user[k]
+      // );
+      return settings;
+    } else return { role: 'guest' };
+   } 
 }));
 
 const port = process.env.PORT || 5000;

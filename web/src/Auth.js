@@ -4,8 +4,8 @@ export default class Auth {
   auth0 = new auth0.WebAuth({
     domain: 'regen-network.auth0.com',
     clientID: 'SabnXOxTOiSbfUHOaSvrsEMSGWr7xabm',
-    redirectUri: 'http://localhost:3000/callback',
-    audience: 'https://regen-network.auth0.com/userinfo',
+    redirectUri: process.env.AUTO_DEVOPS_DOMAIN ? `${process.env.AUTO_DEVOPS_DOMAIN}/callback` : 'http://localhost:3000/callback',
+    audience: 'https://app.regen.network/graphql',
     responseType: 'token id_token',
     scope: 'openid'
   });
@@ -18,6 +18,14 @@ export default class Auth {
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
         this.setSession(authResult);
+        fetch('/api/login', {
+          headers: {
+            Authorization: `Bearer ${authResult.accessToken}`
+          },
+          method: "POST",
+        }).then((res) => {
+          console.log(res);
+        });
       } else if (err) {
         console.log(err);
       }
@@ -30,8 +38,6 @@ export default class Auth {
     localStorage.setItem('access_token', authResult.accessToken);
     localStorage.setItem('id_token', authResult.idToken);
     localStorage.setItem('expires_at', expiresAt);
-    // navigate to the home route
-    //history.replace('/home');
   }
 
   logout = () => {
@@ -39,8 +45,6 @@ export default class Auth {
     localStorage.removeItem('access_token');
     localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
-    // navigate to the home route
-    //history.replace('/home');
   }
 
   isAuthenticated = () => {

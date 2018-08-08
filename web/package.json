@@ -8,6 +8,7 @@
     "@material-ui/core": "^1.4.2",
     "@material-ui/icons": "^2.0.0",
     "apollo-boost": "^0.1.12",
+    "apollo-link-http": "^1.5.4",
     "auth0-js": "^9.7.3",
     "flow-bin": "^0.77.0",
     "graphql": "^0.13.2",

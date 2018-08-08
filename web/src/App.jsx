@@ -18,12 +18,6 @@ import * as MapboxDraw from '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw';
 import '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css';
 import * as MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import { withTheme } from '@material-ui/core/styles';
-//import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 import Auth from './Auth';
 
@@ -114,19 +108,15 @@ class app extends Component {
       <View style={{ flex: 1, flexDirection: 'column' }}>
         <AppBar position="static">
           <Toolbar style={{display: 'flex', justifyContent: 'space-between'}}>
-
-{/*
-  * Use React Link once react-router-dom is imported. For now, use HTML <a> anchor.
-
-            <Link to={`regen.network`}><img id="logo" src="logo_white.png" width="136" height="80" alt="logo image link to regen.network" title="Regen Logo"/></Link>
-*/}
-
-	          <a href="http://regen.network"><img id="logo" src="logo_white.png" width="136" height="80" alt="logo image link to regen.network" title="Regen Logo"/></a>
+	          <a href="http://regen.network"><img id="logo" src="logo_white.png" width="136" height="80" alt="logo link to regen.network" title="Regen Logo"/></a>
             <Typography variant="title" style={{color: styles.primaryColor.color, fontFamily: styles.fontFamily}}>
               Welcome, User!
             </Typography>
-            <Button style={{color: styles.primaryColor.color}} onClick={() => auth.login()}>Login</Button>
-            <Button style={{color: styles.primaryColor.color}}>Logout</Button>
+            {
+              auth.isAuthenticated()
+              ? <Button style={{color: styles.primaryColor.color}} onClick={() => auth.logout()}>Logout</Button>
+              : <Button style={{color: styles.primaryColor.color}} onClick={() => auth.login()}>Login</Button>
+            }
           </Toolbar>
         </AppBar>
         <View style={{ flex: 8, flexDirection: 'row' }}>

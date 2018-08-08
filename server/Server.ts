@@ -1,6 +1,8 @@
 import * as express from 'express';
 import * as path from 'path';
-import {postgraphile} from 'postgraphile';
+import { Pool } from 'pg';
+import { parse as parsePgConnectionString } from 'pg-connection-string';
+import { postgraphile } from 'postgraphile';
 import * as jwks from 'jwks-rsa';
 import * as jwt from 'express-jwt';
 
@@ -14,10 +16,10 @@ app.get('/', function (req, res) {
 
 app.use(jwt({
   secret: jwks.expressJwtSecret({
-      cache: true,
-      rateLimit: true,
-      jwksRequestsPerMinute: 5,
-      jwksUri: "https://regen-network.auth0.com/.well-known/jwks.json"
+    cache: true,
+    rateLimit: true,
+    jwksRequestsPerMinute: 5,
+    jwksUri: "https://regen-network.auth0.com/.well-known/jwks.json"
   }),
   credentialsRequired: false,
   audience: 'https://app.regen.network/graphql',
@@ -25,21 +27,27 @@ app.use(jwt({
   algorithms: ['RS256']
 }));
 
-app.get('/test', (req, res) => {
+const pgPool = new Pool(
+  parsePgConnectionString(
+    process.env.DATABASE_URL || 'postgres://postgres@localhost:5432/xrn'));
+
+app.get('/api/login', (req, res) => {
+  // TODO create pg role for user if does not exist
   res.send(JSON.stringify(req.user));
 });
 
-app.use(postgraphile(process.env.DATABASE_URL || 'postgres://postgres@localhost:5432/xrn', 'public', {
-  graphiql:true,
+app.use(postgraphile(pgPool, 'public', {
+  graphiql: true,
   watchPg: true,
   dynamicJson: true,
   pgSettings: (req) => {
-    console.log(req.user);
-    const sub = req.user.sub;
-    // TODO create pg role from sub
-    return {
-      role: sub || 'guest'
-    };
+    const { sub, ...user } = req.user;
+    if (!sub) return { role: 'guest' };
+    const settings = { role: sub };
+    Object.keys(user).map(k =>
+      settings['jwt.claims.' + k] = user[k]
+    );
+    return settings;
   }
 }));
 

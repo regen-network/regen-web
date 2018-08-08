@@ -9,7 +9,7 @@ metadata:
   annotations:
     # This is what defines this resource as a hook. Without this line, the
     # job is considered part of the release.
-    "helm.sh/hook": post-install
+    "helm.sh/hook": post-install,post-upgrade
     "helm.sh/hook-weight": "-5"
     "helm.sh/hook-delete-policy": hook-succeeded
 spec:
@@ -25,13 +25,17 @@ spec:
       containers:
         - name: flyway
           image: boxfuse/flyway:5
-          command: ["migrate"]
+          args: ["migrate","-url=jdbc:postgresql://{{ .Values.postgresql.fullname }}:5432/{{ .Values.postgresql.postgresDatabase }}","-user={{ .Values.postgresql.postgresUser }}","-password={{ .Values.postgresql.postgresPassword }}","-locations=/flyway-migrations/sql"]
+          volumeMounts:
+            - name: shared
+              mountPath: /flyway-migrations
         - name: app
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           volumeMounts:
             - name: shared
-              mountPath: /flyway
+              mountPath: /flyway-migrations
+          command: ["cp","-r","sql/","/flyway-migrations"]
       volumes:
         - name: shared
           emptyDir: {}

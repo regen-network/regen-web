@@ -57,9 +57,10 @@ app.use(postgraphile(pgPool, 'public', {
     const { sub, ...user } = req.user;
     if (!sub) return { role: 'guest' };
     const settings = { role: sub };
-    Object.keys(user).map(k =>
-      settings['jwt.claims.' + k] = user[k]
-    );
+    // TODO need to deal with keys that aren't strings properly
+    // Object.keys(user).map(k =>
+    //   settings['jwt.claims.' + k] = user[k]
+    // );
     return settings;
   }
 }));

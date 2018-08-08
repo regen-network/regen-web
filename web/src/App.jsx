@@ -16,6 +16,8 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { withTheme } from '@material-ui/core/styles';
+//import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+
 
 const mapboxAccessToken = "pk.eyJ1IjoiYWFyb25jLXJlZ2VuIiwiYSI6ImNqa2I4dW9sbjBob3czcHA4amJqM2NhczAifQ.4HW-QDLUBJiHxOjDakKm2w";
 
@@ -101,6 +103,14 @@ class App extends Component {
       <View style={{ flex: 1, flexDirection: 'column' }}>
         <AppBar position="static">
           <Toolbar style={{display: 'flex', justifyContent: 'space-between'}}>
+
+{/*
+  * Use React Link once react-router-dom is imported. For now, use HTML <a> anchor.
+
+            <Link to={`regen.network`}><img id="logo" src="logo_white.png" width="136" height="80" alt="logo image link to regen.network" title="Regen Logo"/></Link>
+*/}
+            
+	    <a href="http://regen.network"><img id="logo" src="logo_white.png" width="136" height="80" alt="logo image link to regen.network" title="Regen Logo"/></a>
             <Typography variant="title" style={{color: styles.primaryColor.color, fontFamily: styles.fontFamily}}>
               Welcome, User!
             </Typography>

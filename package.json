@@ -2,11 +2,12 @@
   "name": "root",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^1.4.3",
     "lerna": "^3.0.0-rc.0"
   },
   "scripts": {
     "postinstall": "lerna bootstrap && lerna run build --stream",
-    "dev":"pm2 start pm2.config.js && pm2 monit",
+    "dev": "pm2 start pm2.config.js && pm2 monit",
     "start": "lerna run --scope=regen-network-mvp-server start --stream",
     "test": "echo 'No tests yet'"
   },

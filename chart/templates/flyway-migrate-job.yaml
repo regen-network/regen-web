@@ -25,7 +25,7 @@ spec:
       containers:
         - name: flyway
           image: boxfuse/flyway:5
-          args: ["migrate","-url=jdbc:postgresql://{{ .Release.Name }}-postgres:5432/{{ .Values.postgresql.postgresDatabase }}","-user={{ .Values.postgresql.postgresUser }}","-password={{ .Values.postgresql.postgresPassword }}","-locations=/flyway-migrations/sql"]
+          args: ["migrate","-url=jdbc:postgresql://{{ .Release.Name }}-postgres:5432/{{ .Values.postgresql.postgresDatabase }}","-user={{ .Values.postgresql.postgresUser }}","-password={{ .Values.postgresql.postgresPassword }}","-locations=filesystem:/flyway-migrations/sql"]
           volumeMounts:
             - name: shared
               mountPath: /flyway-migrations

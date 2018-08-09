@@ -23,12 +23,6 @@ spec:
     spec:
       restartPolicy: Never
       containers:
-        - name: flyway
-          image: boxfuse/flyway:5
-          args: ["migrate","-url=jdbc:postgresql://{{ .Release.Name }}-postgres:5432/{{ .Values.postgresql.postgresDatabase }}","-user={{ .Values.postgresql.postgresUser }}","-password={{ .Values.postgresql.postgresPassword }}","-locations=filesystem:/flyway-migrations/sql"]
-          volumeMounts:
-            - name: shared
-              mountPath: /flyway-migrations
         - name: app
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
@@ -36,6 +30,12 @@ spec:
             - name: shared
               mountPath: /flyway-migrations
           command: ["cp","-r","/app/sql/","/flyway-migrations"]
+        - name: flyway
+          image: boxfuse/flyway:5
+          args: ["migrate","-url=jdbc:postgresql://{{ .Release.Name }}-postgres:5432/{{ .Values.postgresql.postgresDatabase }}","-user={{ .Values.postgresql.postgresUser }}","-password={{ .Values.postgresql.postgresPassword }}","-locations=filesystem:/flyway-migrations/sql"]
+          volumeMounts:
+            - name: shared
+              mountPath: /flyway-migrations
       volumes:
         - name: shared
           emptyDir: {}

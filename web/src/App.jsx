@@ -123,13 +123,18 @@ class app extends Component {
       fontFamily: theme.fontFamily
     };
 
+
     return (
+
+
     <Query query={GET_USER}>
     {({loading, error, data}) => {
+      let auth0_profile;
 
       if (auth.isAuthenticated()) {
         auth.getProfile((err, profile) => {
-          console.log(profile);
+	 auth0_profile = profile;
+	 console.log(profile);
         });
       }
 
@@ -139,7 +144,7 @@ class app extends Component {
             <Toolbar style={{display: 'flex', justifyContent: 'space-between'}}>
   	          <a href="http://regen.network"><img id="logo" src="logo_white.png" width="136" height="80" alt="logo link to regen.network" title="Regen Logo"/></a>
               <Typography variant="title" style={{color: styles.primaryColor.color, fontFamily: styles.fontFamily}}>
-                Welcome, {data.getCurrentUser}!
+                Welcome, {(auth0_profile && auth0_profile.given_name) ? auth0_profile.given_name :  "guest"}!
               </Typography>
               {
                 auth.isAuthenticated()

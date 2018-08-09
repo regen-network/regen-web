@@ -20,7 +20,7 @@ import * as MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import { actions as mapActions } from "./actions/map";
 import gql from "graphql-tag";
-import { Query } from "react-apollo";
+import { Query, Mutation } from "react-apollo";
 
 import Auth from './Auth';
 const auth = new Auth();
@@ -34,6 +34,19 @@ const Map = ReactMapboxGl({
 const GET_USER = gql`
   {
     getCurrentUser
+  }
+`;
+
+const CREATE_POLYGON = gql`
+   mutation CreatePolygon($name: String!,  $geojson: JSON!, $owner: String!) {
+    createPolygonByJson(input: {name: $name, geojson: $geojson, owner: $owner}) {
+      polygon{
+        id
+        name
+        geomJson
+        owner
+      }
+    }
   }
 `;
 
@@ -114,9 +127,11 @@ class app extends Component {
     <Query query={GET_USER}>
     {({loading, error, data}) => {
 
-      auth.getProfile((err, profile) => {
-        console.log(profile);
-      });
+      if (auth.isAuthenticated()) {
+        auth.getProfile((err, profile) => {
+          console.log(profile);
+        });
+      }
 
       return (
         <View style={{ flex: 1, flexDirection: 'column' }}>
@@ -178,10 +193,16 @@ const FeatureList = withTheme()(({ features, selected, toggleSelectItem, theme, 
 const FeatureListItem = ({ item, selected, toggleSelectThis, theme, user, styles }) => {
   const style = selected ? {backgroundColor: theme.palette.primary.main} : {};
   return (
-    <ListItem dense button style={style} key={item.id} onClick={toggleSelectThis}>
-      <ListItemText primary={"Unsaved Polygon " + item.id} />
-      <Button style={{color: styles.primaryColor.color}} onClick={() => {}}>Save</Button>
-    </ListItem>
+    <Mutation mutation={CREATE_POLYGON}>
+      {( createPolygonByJson, {data}) => (
+      
+	  <ListItem dense button style={style} key={item.id} onClick={toggleSelectThis}>
+           <ListItemText primary={"Unsaved Polygon " + item.id}/>
+           <Button style={{color: styles.primaryColor.color}} onClick={() => createPolygonByJson({variables: {name: "foobar" , geojson: item.geometry, owner: user }})}>Save</Button>
+          </ListItem>
+        )
+      }
+    </Mutation>
   );
 }
 

@@ -7,7 +7,7 @@ export default class Auth {
     redirectUri: process.env.AUTO_DEVOPS_DOMAIN ? `${process.env.AUTO_DEVOPS_DOMAIN}/callback` : 'http://localhost:3000/callback',
     audience: 'https://app.regen.network/graphql',
     responseType: 'token id_token',
-    scope: 'openid'
+    scope: 'openid profile',
   });
 
   login = () => {
@@ -52,6 +52,24 @@ export default class Auth {
     // Access Token's expiry time
     const expiresAt = JSON.parse(localStorage.getItem('expires_at'));
     return new Date().getTime() < expiresAt;
+  }
+
+  getAccessToken() {
+    const accessToken = localStorage.getItem('access_token');
+    if (!accessToken) {
+      throw new Error('No access token found');
+    }
+    return accessToken;
+  }
+
+  getProfile(cb) {
+    let accessToken = this.getAccessToken();
+    this.auth0.client.userInfo(accessToken, (err, profile) => {
+      if (profile) {
+        this.userProfile = profile;
+      }
+      cb(err, profile);
+    });
   }
 
 }

@@ -18,10 +18,12 @@ import * as MapboxDraw from '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw';
 import '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css';
 import * as MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
+import { actions as mapActions } from "./actions/map";
+import gql from "graphql-tag";
+import { Query } from "react-apollo";
 
 import Auth from './Auth';
-
-import { actions as mapActions } from "./actions/map";
+const auth = new Auth();
 
 const mapboxAccessToken = "pk.eyJ1IjoiYWFyb25jLXJlZ2VuIiwiYSI6ImNqa2I4dW9sbjBob3czcHA4amJqM2NhczAifQ.4HW-QDLUBJiHxOjDakKm2w";
 
@@ -29,7 +31,11 @@ const Map = ReactMapboxGl({
   accessToken: mapboxAccessToken
 });
 
-const auth = new Auth();
+const GET_USER = gql`
+  {
+    getCurrentUser
+  }
+`;
 
 class app extends Component {
   constructor(props) {
@@ -105,48 +111,63 @@ class app extends Component {
     };
 
     return (
-      <View style={{ flex: 1, flexDirection: 'column' }}>
-        <AppBar position="static">
-          <Toolbar style={{display: 'flex', justifyContent: 'space-between'}}>
-	          <a href="http://regen.network"><img id="logo" src="logo_white.png" width="136" height="80" alt="logo link to regen.network" title="Regen Logo"/></a>
-            <Typography variant="title" style={{color: styles.primaryColor.color, fontFamily: styles.fontFamily}}>
-              Welcome, User!
-            </Typography>
-            {
-              auth.isAuthenticated()
-              ? <Button style={{color: styles.primaryColor.color}} onClick={() => auth.logout()}>Logout</Button>
-              : <Button style={{color: styles.primaryColor.color}} onClick={() => auth.login()}>Login</Button>
-            }
-          </Toolbar>
-        </AppBar>
-        <View style={{ flex: 8, flexDirection: 'row' }}>
-          <View style={{ flex: 2 }}>
-            <FeatureList features={features} selected={selected} toggleSelectItem={this.toggleSelectItem} />
+    <Query query={GET_USER}>
+    {({loading, error, data}) => {
+
+      auth.getProfile((err, profile) => {
+        console.log(profile);
+      });
+
+      return (
+        <View style={{ flex: 1, flexDirection: 'column' }}>
+          <AppBar position="static">
+            <Toolbar style={{display: 'flex', justifyContent: 'space-between'}}>
+  	          <a href="http://regen.network"><img id="logo" src="logo_white.png" width="136" height="80" alt="logo link to regen.network" title="Regen Logo"/></a>
+              <Typography variant="title" style={{color: styles.primaryColor.color, fontFamily: styles.fontFamily}}>
+                Welcome, {data.getCurrentUser}!
+              </Typography>
+              {
+                auth.isAuthenticated()
+                ? <Button style={{color: styles.primaryColor.color}} onClick={() => auth.logout()}>Logout</Button>
+                : <Button style={{color: styles.primaryColor.color}} onClick={() => auth.login()}>Login</Button>
+              }
+            </Toolbar>
+          </AppBar>
+          <View style={{ flex: 8, flexDirection: 'row' }}>
+            <View style={{ flex: 2 }}>
+              <FeatureList
+                features={features}
+                selected={selected}
+                toggleSelectItem={this.toggleSelectItem}
+                user={data.getCurrentUser}
+                styles={styles} />
+            </View>
+            <View style={{ flex: 8 }}>
+              <Map
+                // eslint-disable-next-line
+                style="mapbox://styles/mapbox/satellite-streets-v10"
+                //  style="https://maps.tilehosting.com/styles/hybrid/style.json?key=UHsj69rAYb2gCUY60Put"
+                containerStyle={{
+                  width: '80vw',
+                  height: '80vh'
+                }}
+                onStyleLoad={this.onMapLoad}
+              />
+            </View>
           </View>
-          <View style={{ flex: 8 }}>
-            <Map
-              // eslint-disable-next-line
-              style="mapbox://styles/mapbox/satellite-streets-v10"
-              //  style="https://maps.tilehosting.com/styles/hybrid/style.json?key=UHsj69rAYb2gCUY60Put"
-              containerStyle={{
-                width: '80vw',
-                height: '80vh'
-              }}
-              onStyleLoad={this.onMapLoad}
-            />
-          </View>
+          <View style={{ flex: 2 }}></View>
         </View>
-        <View style={{ flex: 2 }}></View>
-      </View>
-    );
+        );
+      }}
+      </Query>);
   }
 }
 
-const FeatureList = withTheme()(({ features, selected, toggleSelectItem, theme }) => {
+const FeatureList = withTheme()(({ features, selected, toggleSelectItem, theme, user, styles }) => {
   return (
   <List subheader={<ListSubheader>Features</ListSubheader>}>
     {features && features.map((feature) =>
-      <FeatureListItem item={feature} theme={theme} selected={selected[feature.id]}
+      <FeatureListItem item={feature} theme={theme} selected={selected[feature.id]} user={user} styles={styles}
         toggleSelectThis={() => toggleSelectItem(feature.id)}
       />
     )}
@@ -154,11 +175,12 @@ const FeatureList = withTheme()(({ features, selected, toggleSelectItem, theme }
   );
 });
 
-const FeatureListItem = ({ item, selected, toggleSelectThis, theme }) => {
+const FeatureListItem = ({ item, selected, toggleSelectThis, theme, user, styles }) => {
   const style = selected ? {backgroundColor: theme.palette.primary.main} : {};
   return (
     <ListItem dense button style={style} key={item.id} onClick={toggleSelectThis}>
       <ListItemText primary={"Unsaved Polygon " + item.id} />
+      <Button style={{color: styles.primaryColor.color}} onClick={() => {}}>Save</Button>
     </ListItem>
   );
 }

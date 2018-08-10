@@ -11,7 +11,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { withTheme } from '@material-ui/core/styles';
-import ReactMapboxGl from "react-mapbox-gl";
+import ReactMapboxGl, { GeoJSONLayer } from "react-mapbox-gl";
 import * as mapbox from "mapbox-gl";
 import 'mapbox-gl/dist/mapbox-gl.css';
 import * as MapboxDraw from '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw';
@@ -19,6 +19,7 @@ import '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css';
 import * as MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import { actions as mapActions } from "./actions/map";
+import formatPolygons from "./helpers/formatPolygons";
 import gql from "graphql-tag";
 import { Query, Mutation } from "react-apollo";
 
@@ -31,10 +32,18 @@ const Map = ReactMapboxGl({
   accessToken: mapboxAccessToken
 });
 
-const GET_USER = gql`
-  {
-    getCurrentUser
+const GET_POLYGONS = gql`
+{
+  getCurrentUser
+  allPolygons {
+    nodes {
+      id
+      name
+      geomJson
+      owner
+    }
   }
+}
 `;
 
 const CREATE_POLYGON = gql`
@@ -126,64 +135,94 @@ class app extends Component {
 
     return (
 
+      <Query query={GET_POLYGONS}>
+      {({loading, error, data}) => {
+        console.log(data);
 
-    <Query query={GET_USER}>
-    {({loading, error, data}) => {
-      let auth0_profile;
+        let auth0_profile;
+        let polygons;
 
-      if (auth.isAuthenticated()) {
-        auth.getProfile((err, profile) => {
-	 auth0_profile = profile;
-	 console.log(profile);
-        });
-      }
+        if (data && data.allPolygons) {
+          polygons = formatPolygons(data.allPolygons.nodes);
+          // possible save to store to trigger reload
+        }
 
-      return (
-        <View style={{ flex: 1, flexDirection: 'column' }}>
-          <AppBar position="static">
-            <Toolbar style={{display: 'flex', justifyContent: 'space-between'}}>
-  	          <a href="http://regen.network"><img id="logo" src="logo_white.png" width="136" height="80" alt="logo link to regen.network" title="Regen Logo"/></a>
-              <Typography variant="title" style={{color: styles.primaryColor.color, fontFamily: styles.fontFamily}}>
-                Welcome, {(auth0_profile && auth0_profile.given_name) ? auth0_profile.given_name :  "guest"}!
-              </Typography>
-              {
-                auth.isAuthenticated()
-                ? <Button style={{color: styles.primaryColor.color}} onClick={() => auth.logout()}>Logout</Button>
-                : <Button style={{color: styles.primaryColor.color}} onClick={() => auth.login()}>Login</Button>
-              }
-            </Toolbar>
-          </AppBar>
-          <View style={{ flex: 8, flexDirection: 'row' }}>
-            <View style={{ flex: 2 }}>
-              <FeatureList
-                features={features}
-                selected={selected}
-                toggleSelectItem={this.toggleSelectItem}
-                user={data.getCurrentUser}
-                styles={styles} />
+        if (auth.isAuthenticated()) {
+            auth.getProfile((err, profile) => {
+        	     auth0_profile = profile;
+          });
+        }
+
+        return (
+          <View style={{ flex: 1, flexDirection: 'column' }}>
+            <AppBar position="static">
+              <Toolbar style={{display: 'flex', justifyContent: 'space-between'}}>
+    	          <a href="http://regen.network">
+                  <img id="logo" src="logo_white.png" width="136" height="80" alt="logo link to regen.network" title="Regen Logo"/>
+                </a>
+                <Typography variant="title" style={{color: styles.primaryColor.color, fontFamily: styles.fontFamily}}>
+                  Welcome, {(auth0_profile && auth0_profile.given_name) ? auth0_profile.given_name :  "guest"}!
+                </Typography>
+                {
+                  auth.isAuthenticated()
+                  ? <Button style={{color: styles.primaryColor.color}} onClick={() => auth.logout()}>Logout</Button>
+                  : <Button style={{color: styles.primaryColor.color}} onClick={() => auth.login()}>Login</Button>
+                }
+              </Toolbar>
+            </AppBar>
+            <View style={{ flex: 8, flexDirection: 'row' }}>
+              <View style={{ flex: 2 }}>
+                <FeatureList
+                  features={features}
+                  selected={selected}
+                  polygons={polygons}
+                  toggleSelectItem={this.toggleSelectItem}
+                  user={data ? data.getCurrentUser : "guest"}
+                  styles={styles} />
+              </View>
+              <View style={{ flex: 8 }}>
+                <Map
+                  // eslint-disable-next-line
+                  style="mapbox://styles/mapbox/satellite-streets-v10"
+                  //  style="https://maps.tilehosting.com/styles/hybrid/style.json?key=UHsj69rAYb2gCUY60Put"
+                  containerStyle={{
+                    width: '80vw',
+                    height: '80vh'
+                  }}
+                  onStyleLoad={this.onMapLoad}>
+                  {
+                    (polygons && polygons.length) ?
+                      polygons.map(polygon => {
+                        return (
+                          <GeoJSONLayer
+                            data={polygon}
+                            fillPaint={{
+                              'fill-color': '#088',
+                              'fill-opacity': 0.8
+                            }}
+                            symbolLayout={{
+                              "text-field": polygon.name,
+                              "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+                              "text-offset": [0, 0.6],
+                              "text-anchor": "top"
+                            }}/>
+                        )
+                      })
+                    : null
+                  }
+
+                </Map>
+              </View>
             </View>
-            <View style={{ flex: 8 }}>
-              <Map
-                // eslint-disable-next-line
-                style="mapbox://styles/mapbox/satellite-streets-v10"
-                //  style="https://maps.tilehosting.com/styles/hybrid/style.json?key=UHsj69rAYb2gCUY60Put"
-                containerStyle={{
-                  width: '80vw',
-                  height: '80vh'
-                }}
-                onStyleLoad={this.onMapLoad}
-              />
-            </View>
+            <View style={{ flex: 2 }}></View>
           </View>
-          <View style={{ flex: 2 }}></View>
-        </View>
-        );
-      }}
+          );
+        }}
       </Query>);
   }
 }
 
-const FeatureList = withTheme()(({ features, selected, toggleSelectItem, theme, user, styles }) => {
+const FeatureList = withTheme()(({ features, selected, polygons, toggleSelectItem, theme, user, styles }) => {
   return (
   <List subheader={<ListSubheader>Features</ListSubheader>}>
     {features && features.map((feature) =>
@@ -191,19 +230,36 @@ const FeatureList = withTheme()(({ features, selected, toggleSelectItem, theme, 
         toggleSelectThis={() => toggleSelectItem(feature.id)}
       />
     )}
+    {polygons && polygons.map((polygon) =>
+      <SavedFeatureItem item={polygon} theme={theme} selected={selected[polygon.id]} user={user} styles={styles}
+        toggleSelectThis={() => toggleSelectItem(polygon.id)}
+      />
+    )}
   </List>
   );
 });
+
+const SavedFeatureItem = ({ item, selected, toggleSelectThis, theme, user, styles }) => {
+  const style = selected ? {backgroundColor: theme.palette.primary.main} : {};
+  return (
+	  <ListItem dense button style={style} key={item.id} onClick={toggleSelectThis}>
+      <ListItemText primary={item.name}/>
+      {item.coordinates}
+    </ListItem>
+  );
+}
 
 const FeatureListItem = ({ item, selected, toggleSelectThis, theme, user, styles }) => {
   const style = selected ? {backgroundColor: theme.palette.primary.main} : {};
   return (
     <Mutation mutation={CREATE_POLYGON}>
       {( createPolygonByJson, {data}) => (
-      
-	  <ListItem dense button style={style} key={item.id} onClick={toggleSelectThis}>
-           <ListItemText primary={"Unsaved Polygon " + item.id}/>
-           <Button style={{color: styles.primaryColor.color}} onClick={() => createPolygonByJson({variables: {name: "foobar" , geojson: item.geometry, owner: user }})}>Save</Button>
+	       <ListItem dense button style={style} key={item.id} onClick={toggleSelectThis}>
+          <ListItemText primary={"Unsaved Polygon " + item.id}/>
+          <Button style={{color: styles.primaryColor.color}}
+            onClick={() => createPolygonByJson({variables: {name: "foobar" , geojson: item.geometry, owner: user }})}>
+            Save
+          </Button>
           </ListItem>
         )
       }

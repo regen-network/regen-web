@@ -243,7 +243,7 @@ review:
     - persist_environment_url
   environment:
     name: review/$CI_COMMIT_REF_NAME
-    url: http://$CI_ENVIRONMENT_SLUG.$AUTO_DEVOPS_DOMAIN
+    url: https://$CI_ENVIRONMENT_SLUG.$AUTO_DEVOPS_DOMAIN
     on_stop: stop_review
   artifacts:
     paths: [environment_url.txt]
@@ -302,7 +302,7 @@ staging:
     - deploy
   environment:
     name: staging
-    url: http://staging.$AUTO_DEVOPS_DOMAIN
+    url: https://staging.$AUTO_DEVOPS_DOMAIN
   only:
     refs:
       - master
@@ -326,7 +326,7 @@ canary:
     - deploy canary
   environment:
     name: production
-    url: http://$AUTO_DEVOPS_DOMAIN
+    url: https://$AUTO_DEVOPS_DOMAIN
   when: manual
   only:
     refs:
@@ -350,7 +350,7 @@ canary:
     - persist_environment_url
   environment:
     name: production
-    url: http://$CI_PROJECT_PATH_SLUG.$AUTO_DEVOPS_DOMAIN
+    url: https://$CI_PROJECT_PATH_SLUG.$AUTO_DEVOPS_DOMAIN
   artifacts:
     paths: [environment_url.txt]
 
@@ -398,7 +398,7 @@ production_manual:
     - persist_environment_url
   environment:
     name: production
-    url: http://$CI_PROJECT_PATH_SLUG.$AUTO_DEVOPS_DOMAIN
+    url: https://$$AUTO_DEVOPS_DOMAIN
   artifacts:
     paths: [environment_url.txt]
 

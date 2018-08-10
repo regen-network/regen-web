@@ -28,7 +28,7 @@ spec:
         env:
         - name: DATABASE_URL
           value: {{ .Values.application.database_url | quote }}
-        - name: APP_URL
+        - name: CI_ENVIRONMENT_URL
           value: {{ .Values.service.url | quote }}
         ports:
         - name: "{{ .Values.service.name }}"

@@ -32,12 +32,6 @@ const Map = ReactMapboxGl({
   accessToken: mapboxAccessToken
 });
 
-const GET_USER = gql`
-{
-  getCurrentUser
-}
-`;
-
 const GET_POLYGONS = gql`
 {
   getCurrentUser
@@ -87,7 +81,7 @@ class app extends Component {
     this.setState({ selected });
   }
 
-  onMapLoad = (map, polygons) => {
+  onMapLoad = (map) => {
     const drawControl = new MapboxDraw({
       controls: {
         polygon: true,
@@ -112,12 +106,6 @@ class app extends Component {
     map.on('draw.uncombine', this.onDrawUpdated);
     map.on('draw.update', this.onDrawUpdated);
     map.on('draw.selectionchange', this.onSelectionChange);
-
-    // if (polygons && polygons.length) {
-    //   polygons.forEach(polygon => {
-    //     map.addLayer(polygon);
-    //   });
-    // }
   }
 
   toggleSelectItem = (id) => {
@@ -154,7 +142,7 @@ class app extends Component {
         let auth0_profile;
         let polygons;
 
-        if (data.allPolygons) {
+        if (data && data.allPolygons) {
           polygons = formatPolygons(data.allPolygons.nodes);
           // possible save to store to trigger reload
         }
@@ -187,6 +175,7 @@ class app extends Component {
                 <FeatureList
                   features={features}
                   selected={selected}
+                  polygons={polygons}
                   toggleSelectItem={this.toggleSelectItem}
                   user={data ? data.getCurrentUser : "guest"}
                   styles={styles} />
@@ -200,13 +189,17 @@ class app extends Component {
                     width: '80vw',
                     height: '80vh'
                   }}
-                  onStyleLoad={(map) => this.onMapLoad(map, polygons)}>
+                  onStyleLoad={this.onMapLoad}>
                   {
                     (polygons && polygons.length) ?
-                      polygons.forEach(polygon => {
+                      polygons.map(polygon => {
                         return (
                           <GeoJSONLayer
                             data={polygon}
+                            fillPaint={{
+                              'fill-color': '#088',
+                              'fill-opacity': 0.8
+                            }}
                             symbolLayout={{
                               "text-field": polygon.name,
                               "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
@@ -217,6 +210,7 @@ class app extends Component {
                       })
                     : null
                   }
+
                 </Map>
               </View>
             </View>
@@ -228,7 +222,7 @@ class app extends Component {
   }
 }
 
-const FeatureList = withTheme()(({ features, selected, toggleSelectItem, theme, user, styles }) => {
+const FeatureList = withTheme()(({ features, selected, polygons, toggleSelectItem, theme, user, styles }) => {
   return (
   <List subheader={<ListSubheader>Features</ListSubheader>}>
     {features && features.map((feature) =>
@@ -236,9 +230,24 @@ const FeatureList = withTheme()(({ features, selected, toggleSelectItem, theme, 
         toggleSelectThis={() => toggleSelectItem(feature.id)}
       />
     )}
+    {polygons && polygons.map((polygon) =>
+      <SavedFeatureItem item={polygon} theme={theme} selected={selected[polygon.id]} user={user} styles={styles}
+        toggleSelectThis={() => toggleSelectItem(polygon.id)}
+      />
+    )}
   </List>
   );
 });
+
+const SavedFeatureItem = ({ item, selected, toggleSelectThis, theme, user, styles }) => {
+  const style = selected ? {backgroundColor: theme.palette.primary.main} : {};
+  return (
+	  <ListItem dense button style={style} key={item.id} onClick={toggleSelectThis}>
+      <ListItemText primary={item.name}/>
+      {item.coordinates}
+    </ListItem>
+  );
+}
 
 const FeatureListItem = ({ item, selected, toggleSelectThis, theme, user, styles }) => {
   const style = selected ? {backgroundColor: theme.palette.primary.main} : {};

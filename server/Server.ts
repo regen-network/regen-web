@@ -44,6 +44,9 @@ pgPool.connect((err, client, release) => {
     const user = process.env.POSTGRES_USER || 'postgres';
     const password = process.env.POSTGRES_PASSWORD || '';
     const flywayBin = path.join(__dirname, "../node_modules/.bin/flyway");
+    console.log("Flyway path debug");
+    console.log(__dirname);
+    console.log(flywayBin);
     const flywayCmd =
       `${flywayBin} migrate -url="jdbc:postgresql://${host}:${port}/${db}" -user=${user} -password=${password}`;
     childProcess.exec(flywayCmd, {}, (err, stdout, stderr) => {

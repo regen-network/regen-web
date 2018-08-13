@@ -9,6 +9,9 @@ import ListSubheader from '@material-ui/core/ListSubheader';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 import Typography from '@material-ui/core/Typography';
 import { withTheme } from '@material-ui/core/styles';
 import ReactMapboxGl, { GeoJSONLayer } from "react-mapbox-gl";
@@ -22,6 +25,8 @@ import { actions as mapActions } from "./actions/map";
 import formatPolygons from "./helpers/formatPolygons";
 import gql from "graphql-tag";
 import { Query, Mutation } from "react-apollo";
+
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 import Auth from './Auth';
 const auth = new Auth();
@@ -66,6 +71,14 @@ class app extends Component {
       selected: {}
    };
   }
+
+  onMenuClick = (e) => {
+    this.setState({ anchorEl: e.currentTarget });
+  }
+
+  onMenuClose = () => {
+    this.setState({ anchorEl: null })
+  };
 
   onDrawUpdated = (e) => {
     const { updateFeatures } = this.props.actions;
@@ -131,6 +144,7 @@ class app extends Component {
       },
       fontFamily: theme.fontFamily
     };
+    const { anchorEl } = this.state;
 
 
     return (
@@ -149,25 +163,50 @@ class app extends Component {
 
         if (auth.isAuthenticated()) {
             auth.getProfile((err, profile) => {
-        	     auth0_profile = profile;
+                auth0_profile = profile;
           });
         }
 
         return (
           <View style={{ flex: 1, flexDirection: 'column' }}>
             <AppBar position="static">
-              <Toolbar style={{display: 'flex', justifyContent: 'space-between'}}>
-    	          <a href="http://regen.network">
-                  <img id="logo" src="logo_white.png" width="136" height="80" alt="logo link to regen.network" title="Regen Logo"/>
-                </a>
+              <Toolbar variant="dense" style={{display: 'flex', justifyContent: 'space-between'}}>
+                <Link to={"regen.network"}> <img id="logo" src="logo_white.png"  style={{height:50}} alt="logo link to regen.network" title="Regen Logo"/></Link>
+
                 <Typography variant="title" style={{color: styles.primaryColor.color, fontFamily: styles.fontFamily}}>
+
+{console.log("profile", auth.profile)}
+{console.log("auth0_profile", auth0_profile)}
+{console.log("isAuthenticated", auth.isAuthenticated())}
+
                   Welcome, {(auth0_profile && auth0_profile.given_name) ? auth0_profile.given_name :  "guest"}!
                 </Typography>
+                <IconButton 
+		  aria-owns={anchorEl ? 'user-menu' : null}
+                  aria-label="More"
+                  aria-haspopup="true"
+                  onClick={this.onMenuClick}
+                >
+		Foo
+                </IconButton>
+		<Menu
+		  id="user-menu"
+		  anchorEl={anchorEl}
+		  open={Boolean(anchorEl)}
+		  onClose={this.onMenuClose}
+		>
+		  <MenuItem onClick={this.onMenuClose}>Profile</MenuItem>
                 {
                   auth.isAuthenticated()
+               
+		?  <MenuItem onClick={() => auth.logout()}>Sign Out</MenuItem>
+	        :  <MenuItem onClick={() => auth.login()}>Sign In</MenuItem>
+		}
+		</Menu>
+{/*
                   ? <Button style={{color: styles.primaryColor.color}} onClick={() => auth.logout()}>Logout</Button>
                   : <Button style={{color: styles.primaryColor.color}} onClick={() => auth.login()}>Login</Button>
-                }
+*/}
               </Toolbar>
             </AppBar>
             <View style={{ flex: 8, flexDirection: 'row' }}>

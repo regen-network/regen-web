@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import Modal from 'react-modal';
 import { withTheme } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';

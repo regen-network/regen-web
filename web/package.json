@@ -22,6 +22,7 @@
     "react-art": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-mapbox-gl": "^3.8.0",
+    "react-modal": "^3.5.1",
     "react-native-web": "^0.8.9",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",

@@ -69,7 +69,7 @@ class Welcome extends React.Component {
             background: styles.background,
             backgroundSize: "cover"
           }}>
-            <img id="logo" src="logo_white.png" width="136" height="80" alt="logo link to regen.network"/>
+            <img id="logo" src="regen_starburst.png" width="60" height="40" alt="logo link to regen.network"/>
             <h2 style={{fontFamily: styles.title.font}}>Welcome to Regen Network</h2>
             <div style={{fontFamily: styles.content.font, width: "300px", textAlign: "center", fontSize: "1.2em"}}>
               <p>This eco-app is a tool for farmers to share farm practices and geospatial data with the Regen Science team.

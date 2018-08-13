@@ -4,7 +4,7 @@ export default class Auth {
   auth0 = new auth0.WebAuth({
     domain: 'regen-network.auth0.com',
     clientID: 'SabnXOxTOiSbfUHOaSvrsEMSGWr7xabm',
-    redirectUri: process.env.CI_ENVIRONMENT_URL ? `${process.env.CI_ENVIRONMENT_URL}/callback` : 'http://localhost:3000/callback',
+    redirectUri: process.env.PUBLIC_URL ? `${process.env.PUBLIC_URL}/callback` : 'http://localhost:3000/callback',
     audience: 'https://app.regen.network/graphql',
     responseType: 'token id_token',
     scope: 'openid'

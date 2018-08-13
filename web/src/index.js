@@ -10,10 +10,13 @@ import { ApolloProvider } from "react-apollo";
 import store from './store';
 import makeMainRoutes from './routes';
 
+import Auth from './Auth';
+const auth = new Auth();
+
 const client = new ApolloClient({
   uri: "/graphql",
   request: async (operation) => {
-    const token = localStorage.getItem("access_token");
+    const token = auth.getValidToken();
     if (token) {
       console.log('got token');
       console.log(token);

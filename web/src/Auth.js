@@ -7,7 +7,7 @@ export default class Auth {
     redirectUri: window.location.protocol + '//' + window.location.host + '/callback',
     audience: 'https://app.regen.network/graphql',
     responseType: 'token id_token',
-    scope: 'openid'
+    scope: 'openid profile',
   });
 
   login = () => {
@@ -52,6 +52,28 @@ export default class Auth {
     // Access Token's expiry time
     const expiresAt = JSON.parse(localStorage.getItem('expires_at'));
     return new Date().getTime() < expiresAt;
+  }
+
+  getAccessToken() {
+    const accessToken = localStorage.getItem('access_token');
+    return accessToken;
+  }
+
+  getValidToken() {
+    if (this.isAuthenticated()) {
+      return this.getAccessToken();
+    }
+    return null;
+  }
+
+  getProfile(cb) {
+    let accessToken = this.getAccessToken();
+    this.auth0.client.userInfo(accessToken, (err, profile) => {
+      if (profile) {
+        this.userProfile = profile;
+      }
+      cb(err, profile);
+    });
   }
 
 }

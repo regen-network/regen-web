@@ -8,9 +8,9 @@
   "scripts": {
     "postinstall": "lerna bootstrap && lerna run build --stream",
     "serve": "lerna run --scope=regen-network-mvp-server start --stream",
-    "start":"pm2 start pm2.config.js",
+    "start": "pm2 start pm2.config.js",
     "dev": "pm2 start pm2.config.js && pm2 monit",
-    "restart":"pm2 restart all",
+    "restart": "pm2 restart all",
     "stop": "pm2 stop all",
     "test": "echo 'No tests yet'"
   },

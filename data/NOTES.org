@@ -1,0 +1,39 @@
+Gets all "soil management for plant production" topics:
+
+#+BEGIN_SRC sparql
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skosxl: <http://www.w3.org/2008/05/skos-xl#>
+
+SELECT ?x ?label
+WHERE {
+  <http://id.agrisemantics.org/gacs/G_SM> skos:member ?x.
+  ?x skos:prefLabel ?label
+  FILTER (lang(?label) = "en")
+}
+#+END_SRC
+
+*  soil management for plant production: http://id.agrisemantics.org/gacs/G_SM
+*  plant production: http://id.agrisemantics.org/gacs/G_SQ
+*  organisms, by non-taxonomic groups: http://id.agrisemantics.org/gacs/G_NC
+  
+*  Get all plants by non-taxonomic name:
+
+#+BEGIN_SRC sparql
+PREFIX : <http://id.agrisemantics.org/vocab#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skosxl: <http://www.w3.org/2008/05/skos-xl#>
+
+SELECT ?x ?label
+WHERE {
+  ?x a :Product.
+  { <http://id.agrisemantics.org/gacs/G_NC> skos:member ?x. } UNION
+  {  <http://id.agrisemantics.org/gacs/G_SX> skos:member ?x. }.
+  ?x skos:prefLabel ?label
+  FILTER (lang(?label) = "en")
+}#+END_SRC
+
+  

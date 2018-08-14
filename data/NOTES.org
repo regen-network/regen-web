@@ -1,4 +1,6 @@
-Gets all "soil management for plant production" topics:
+#+TITLE: Notes on incorporating GACS vocabulary
+
+*  Gets all "soil management for plant production" topics:
 
 #+BEGIN_SRC sparql
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>

@@ -77,8 +77,18 @@ class app extends Component {
   }
 
   onMenuClose = () => {
-    this.setState({ anchorEl: null })
+    this.setState({ anchorEl: null });
   };
+
+  onLogout = (e) => {
+    this.setState({ anchorEl: null });
+    auth.logout();
+    console.log("isAuthenticated:",auth.isAuthenticated());
+  }
+
+  gotoRegen = () => {
+   <Link to={"regen.network"}></Link>
+  }
 
   onDrawUpdated = (e) => {
     const { updateFeatures } = this.props.actions;
@@ -181,28 +191,27 @@ class app extends Component {
 
                   Welcome, {(auth0_profile && auth0_profile.given_name) ? auth0_profile.given_name :  "guest"}!
                 </Typography>
-                <IconButton 
-		  aria-owns={anchorEl ? 'user-menu' : null}
-                  aria-label="More"
-                  aria-haspopup="true"
-                  onClick={this.onMenuClick}
-                >
-		Foo
-                </IconButton>
-		<Menu
-		  id="user-menu"
-		  anchorEl={anchorEl}
-		  open={Boolean(anchorEl)}
-		  onClose={this.onMenuClose}
-		>
-		  <MenuItem onClick={this.onMenuClose}>Profile</MenuItem>
-                {
-                  auth.isAuthenticated()
-               
-		?  <MenuItem onClick={() => auth.logout()}>Sign Out</MenuItem>
-	        :  <MenuItem onClick={() => auth.login()}>Sign In</MenuItem>
-		}
-		</Menu>
+                
+		 <div>
+                   { auth.isAuthenticated()
+		     ? <div> 
+		      <IconButton 
+		        aria-owns={anchorEl ? 'user-menu' : null}
+                        aria-label="More"
+                        aria-haspopup="true"
+                        onClick={this.onMenuClick}
+                      >
+		      PF 
+                      </IconButton>
+		      <Menu id="user-menu" anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={this.onMenuClose}>
+		        <MenuItem onClick={this.gotoRegen}>Regen</MenuItem>
+		        <MenuItem onClick={this.onLogout}>Sign Out</MenuItem>
+		      </Menu>
+		      </div>
+		     : <div> <Button onClick={() => auth.login()}>Sign In</Button> </div>
+		   }
+		  </div>
+
 {/*
                   ? <Button style={{color: styles.primaryColor.color}} onClick={() => auth.logout()}>Logout</Button>
                   : <Button style={{color: styles.primaryColor.color}} onClick={() => auth.login()}>Login</Button>

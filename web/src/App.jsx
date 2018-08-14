@@ -22,6 +22,7 @@ import { actions as mapActions } from "./actions/map";
 import formatPolygons from "./helpers/formatPolygons";
 import gql from "graphql-tag";
 import { Query, Mutation } from "react-apollo";
+import Welcome from './components/welcome';
 
 import Auth from './Auth';
 const auth = new Auth();
@@ -155,6 +156,7 @@ class app extends Component {
 
         return (
           <View style={{ flex: 1, flexDirection: 'column' }}>
+            <Welcome />
             <AppBar position="static">
               <Toolbar style={{display: 'flex', justifyContent: 'space-between'}}>
     	          <a href="http://regen.network">

@@ -22,6 +22,7 @@ import '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css';
 import * as MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import { actions as mapActions } from "./actions/map";
+import { actions as userActions } from "./actions/user";
 import formatPolygons from "./helpers/formatPolygons";
 import gql from "graphql-tag";
 import { Query, Mutation } from "react-apollo";
@@ -146,7 +147,8 @@ class app extends Component {
 
   render() {
     const { selected } = this.state;
-    const { theme, features } = this.props;
+    const { theme, features, user, actions } = this.props;
+    console.log("user=",user);
     const styles = {
       primaryColor: {
         backgroundColor: theme.palette.primary.main,
@@ -174,6 +176,8 @@ class app extends Component {
         if (auth.isAuthenticated()) {
             auth.getProfile((err, profile) => {
                 auth0_profile = profile;
+{console.log("profile", profile)}
+		actions.updateUser(profile);
           });
         }
 
@@ -185,11 +189,7 @@ class app extends Component {
 
                 <Typography variant="title" style={{color: styles.primaryColor.color, fontFamily: styles.fontFamily}}>
 
-{console.log("profile", auth.profile)}
-{console.log("auth0_profile", auth0_profile)}
-{console.log("isAuthenticated", auth.isAuthenticated())}
-
-                  Welcome, {(auth0_profile && auth0_profile.given_name) ? auth0_profile.given_name :  "guest"}!
+                  Welcome,  { user.given_name }!
                 </Typography>
                 
 		 <div>
@@ -225,7 +225,7 @@ class app extends Component {
                   selected={selected}
                   polygons={polygons}
                   toggleSelectItem={this.toggleSelectItem}
-                  user={data ? data.getCurrentUser : "guest"}
+                  user={user ? user.given_name : "guest"}
                   styles={styles} />
               </View>
               <View style={{ flex: 8 }}>
@@ -317,13 +317,15 @@ const FeatureListItem = ({ item, selected, toggleSelectThis, theme, user, styles
 
 // <Map containerStyle={{height:"100vh", width:"100vw"}} />
 
-const mapStateToProps = ({ map }) => ({
+const mapStateToProps = ({ map, user }) => ({
   features: map.toJS(),
+  user: user.toJS(),
 });
 
 const mapDispatchToProps = (dispatch) => {
   const { updateFeatures } = mapActions;
-  const actions = bindActionCreators({ updateFeatures }, dispatch);
+  const { updateUser } = userActions;
+  const actions = bindActionCreators({ updateFeatures, updateUser }, dispatch);
   return { actions }
 };
 

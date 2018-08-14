@@ -27,6 +27,7 @@ import formatPolygons from "./helpers/formatPolygons";
 import gql from "graphql-tag";
 import { Query, Mutation } from "react-apollo";
 import Welcome from './components/welcome';
+import PolygonIcon from './components/polygonIcon';
 
 import { BrowserRouter as Redirect, Router, Route, Link } from "react-router-dom";
 
@@ -151,7 +152,7 @@ class app extends Component {
   render() {
     const { selected } = this.state;
     const { theme, features, user, actions } = this.props;
-    console.log("user=",user);
+
     const styles = {
       primaryColor: {
         backgroundColor: theme.palette.primary.main,
@@ -191,8 +192,8 @@ class app extends Component {
                 </Typography>
                   <div>
                     { auth.isAuthenticated()
-  	  	              ? <div> 
-	  	                  <IconButton 
+  	  	              ? <div>
+	  	                  <IconButton
 		                      aria-owns={anchorEl ? 'user-menu' : null}
                           aria-label="More"
                           aria-haspopup="true"
@@ -283,8 +284,8 @@ const SavedFeatureItem = ({ item, selected, toggleSelectThis, theme, user, style
   const style = selected ? {backgroundColor: theme.palette.primary.main} : {};
   return (
 	  <ListItem dense button style={style} key={item.id} onClick={toggleSelectThis}>
+      <PolygonIcon polygon={item}/>
       <ListItemText primary={item.name}/>
-      {item.coordinates}
     </ListItem>
   );
 }

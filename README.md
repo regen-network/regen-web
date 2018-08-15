@@ -16,4 +16,4 @@ of NodeJS for this project.
 2. Start a development server with `yarn dev`
 3. Postgres migrations will run automatically when you start the development server. They can be run manually by running `flyway migrate`.
 4. Open your browser to `localhost:3000`
-5. Start coding!
+5. Start coding!!

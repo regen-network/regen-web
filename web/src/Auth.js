@@ -4,7 +4,7 @@ export default class Auth {
   auth0 = new auth0.WebAuth({
     domain: 'regen-network.auth0.com',
     clientID: 'SabnXOxTOiSbfUHOaSvrsEMSGWr7xabm',
-    redirectUri: window.location.protocol + '//' + window.location.host + '/callback',
+    redirectUri: window.location.protocol + '//' + window.location.host,
     audience: 'https://app.regen.network/graphql',
     responseType: 'token id_token',
     scope: 'openid profile',

@@ -12,6 +12,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import AddIcon from '@material-ui/icons/Add';
+import Modal from '@material-ui/core/Modal';
 import { withTheme } from '@material-ui/core/styles';
 import ReactMapboxGl, { GeoJSONLayer } from "react-mapbox-gl";
 import * as mapbox from "mapbox-gl";
@@ -25,6 +26,7 @@ import formatPolygons from "./helpers/formatPolygons";
 import gql from "graphql-tag";
 import { Query, Mutation } from "react-apollo";
 import Welcome from './components/welcome';
+import AddEntryModal from './components/AddEntryModal.jsx';
 
 import Auth from './Auth';
 const auth = new Auth();
@@ -66,7 +68,8 @@ class app extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selected: {}
+        selected: {},
+        addModalOpen: false
    };
   }
 
@@ -124,8 +127,12 @@ class app extends Component {
     //this.state.drawControl.changeMode('direct_select', {featureId: id});
   }
 
+  openAddModal = () => this.setState({addModalOpen: true});
+
+  closeAddModal = () => this.setState({addModalOpen: false});
+
   render() {
-    const { selected } = this.state;
+    const { selected, addModalOpen } = this.state;
     const { theme, features } = this.props;
     const styles = {
       primaryColor: {
@@ -216,7 +223,7 @@ class app extends Component {
                   }
 
                     <div className="button-add">
-                      <Button variant="fab" mini>
+                      <Button variant="fab" mini onClick={this.openAddModal}>
                           <AddIcon />
                       </Button>
                     </div>
@@ -224,6 +231,7 @@ class app extends Component {
               </View>
             </View>
             <View style={{ flex: 2 }}></View>
+            <AddEntryModal open={addModalOpen} onClose={this.closeAddModal} />
           </View>
           );
         }}

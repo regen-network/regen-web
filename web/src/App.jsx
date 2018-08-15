@@ -26,6 +26,7 @@ import { actions as userActions } from "./actions/user";
 import formatPolygons from "./helpers/formatPolygons";
 import gql from "graphql-tag";
 import { Query, Mutation } from "react-apollo";
+import Welcome from './components/welcome';
 
 import { BrowserRouter as Redirect, Router, Route, Link } from "react-router-dom";
 
@@ -181,6 +182,7 @@ class app extends Component {
 
         return (
           <View style={{ flex: 1, flexDirection: 'column' }}>
+            <Welcome />
             <AppBar position="static">
               <Toolbar variant="dense" style={{display: 'flex', justifyContent: 'space-between'}}>
                 <a target="_blank" href="http://regen.network"> <img id="logo" src="logo_white.png"  style={{height:50}} alt="logo link to regen.network" title="Regen Logo"/></a>

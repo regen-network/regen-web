@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './App.css';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { View } from 'react-native';
@@ -10,6 +11,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import AddIcon from '@material-ui/icons/Add';
 import { withTheme } from '@material-ui/core/styles';
 import ReactMapboxGl, { GeoJSONLayer } from "react-mapbox-gl";
 import * as mapbox from "mapbox-gl";
@@ -213,6 +215,11 @@ class app extends Component {
                     : null
                   }
 
+                    <div className="button-add">
+                      <Button variant="fab" mini>
+                          <AddIcon />
+                      </Button>
+                    </div>
                 </Map>
               </View>
             </View>

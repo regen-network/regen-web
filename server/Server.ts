@@ -5,6 +5,7 @@ import { parse as parsePgConnectionString } from 'pg-connection-string';
 import { postgraphile } from 'postgraphile';
 import * as jwks from 'jwks-rsa';
 import * as jwt from 'express-jwt';
+import * as childProcess from 'child_process';
 
 const app = express();
 
@@ -31,6 +32,30 @@ const pgPool = new Pool(
   parsePgConnectionString(
     process.env.DATABASE_URL || 'postgres://postgres@localhost:5432/xrn'));
 
+pgPool.connect((err, client, release) => {
+  if(err)
+    return;
+  release();
+  try {
+    console.log("Calling Flyway")
+    const host = process.env.POSTGRES_HOST || 'localhost';
+    const port = process.env.POSTGRES_PORT || '5432';
+    const db = process.env.POSTGRES_DATABASE || 'xrn';
+    const user = process.env.POSTGRES_USER || 'postgres';
+    const password = process.env.POSTGRES_PASSWORD || '';
+    const flywayBin = path.join(__dirname, "../node_modules/.bin/flyway");
+    const flywayCmd =
+      `${flywayBin} migrate -url="jdbc:postgresql://${host}:${port}/${db}" -user=${user} -password=${password}`;
+    childProcess.exec(flywayCmd, {}, (err, stdout, stderr) => {
+      if(err) console.error(err);
+      if(stderr) console.error(stderr);
+      console.log(stdout);
+    });
+  } catch(e) {
+    console.error(e);
+  }
+});
+
 app.post('/api/login', (req, res) => {
   // Create Postgres ROLE for Auth0 user
   if(req.user && req.user.sub) {
@@ -40,6 +65,7 @@ app.post('/api/login', (req, res) => {
         res.sendStatus(500);
         console.error('Error acquiring postgres client', err.stack);
       } else client.query('SELECT private.create_app_user_if_needed($1)', [sub], (err, qres) => {
+        release();
         if(err) {
           res.sendStatus(500);
           console.error('Error creating role', err.stack);

@@ -3,7 +3,10 @@ module.exports = {
       name: 'server',
       script: 'server/Server.ts',
       interpreter: 'server/node_modules/.bin/ts-node',
-      watch: true,
+      watch: ['server/'],
+      watch_options: {
+        usePolling: true,
+      },
       log: true
     },
     {

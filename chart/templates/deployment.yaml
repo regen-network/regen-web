@@ -28,6 +28,8 @@ spec:
         env:
         - name: DATABASE_URL
           value: {{ .Values.application.database_url | quote }}
+        - name: PUBLIC_URL
+          value: {{ .Values.service.url | quote }}
         ports:
         - name: "{{ .Values.service.name }}"
           containerPort: {{ .Values.service.internalPort }}

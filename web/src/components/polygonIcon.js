@@ -15,10 +15,15 @@ class PolygonIcon extends React.Component {
       turfCollection.push(turfPoint);
     });
 
-    const features = turf.featureCollection(turfCollection);
-    const center = turf.center(features);
-    const centerPoint = center.geometry.coordinates;
-    const viewbox = `${centerPoint[0]} ${centerPoint[1]} 2 2`;
+    var line = turf.lineString(polygon.coordinates[0]);
+    var bbox = turf.bbox(line);
+    var boxWidth = bbox[2] - bbox[0];
+    var boxHeight = bbox[3] - bbox[1];
+    var boxSize = boxWidth > boxHeight ? boxWidth : boxHeight;
+    var boxCenter = boxSize / 2;
+
+    const viewbox = `${bbox[0]} ${bbox[3]} ${boxWidth} ${boxHeight}`;
+    const translate = `translate(${boxCenter} ${boxCenter})`;
 
     const styles = {
       color: theme.palette.accent.yellow
@@ -27,8 +32,8 @@ class PolygonIcon extends React.Component {
     return (
       <div>
         <svg viewBox={viewbox} width="50" height="50" overflow="visible" xmlns="http://www.w3.org/2000/svg">
-          <polygon points={coordinates} transform='translate(1 1)'
-                stroke={styles.color} />
+          <polygon points={coordinates} transform={""}
+                fill={styles.color} stroke="none" />
         </svg>
       </div>
     );

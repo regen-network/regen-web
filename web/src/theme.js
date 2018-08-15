@@ -86,6 +86,9 @@ const theme = createMuiTheme({
     // selectedTextColor: palette.accent1Color,
     // rightIconDesktopFill: grey600,
   },
+  listItemText: {
+    color: "green"
+  },
   title: {
     fontFamily: ['Muli', 'sans-serif'].join(','),
   }

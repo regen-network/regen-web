@@ -21,15 +21,14 @@ class PolygonIcon extends React.Component {
     const viewbox = `${centerPoint[0]} ${centerPoint[1]} 2 2`;
 
     const styles = {
-      fillColor: theme.palette.accent.yellow,
-      color: theme.palette.common.white
+      color: theme.palette.accent.yellow
     };
 
     return (
       <div>
         <svg viewBox={viewbox} width="50" height="50" overflow="visible" xmlns="http://www.w3.org/2000/svg">
-          <polygon points={coordinates} x="1" y="1"
-                stroke={styles.fillColor} />
+          <polygon points={coordinates} transform='translate(1 1)'
+                stroke={styles.color} />
         </svg>
       </div>
     );

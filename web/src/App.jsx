@@ -5,7 +5,6 @@ import { View } from 'react-native';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import ListSubheader from '@material-ui/core/ListSubheader';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
@@ -27,6 +26,7 @@ import formatPolygons from "./helpers/formatPolygons";
 import gql from "graphql-tag";
 import { Query, Mutation } from "react-apollo";
 import Welcome from './components/welcome';
+import PolygonIcon from './components/polygonIcon';
 
 import { BrowserRouter as Redirect, Router, Route, Link } from "react-router-dom";
 
@@ -151,13 +151,18 @@ class app extends Component {
   render() {
     const { selected } = this.state;
     const { theme, features, user, actions } = this.props;
-    console.log("user=",user);
+
     const styles = {
       primaryColor: {
         backgroundColor: theme.palette.primary.main,
         color: theme.palette.common.white,
       },
-      fontFamily: theme.fontFamily
+      fontFamily: theme.fontFamily,
+      fontSize: "16px",
+      title: {
+        fontFamily: theme.title.fontFamily,
+        fontSize: "20px"
+      }
     };
     const { anchorEl } = this.state;
 
@@ -191,8 +196,8 @@ class app extends Component {
                 </Typography>
                   <div>
                     { auth.isAuthenticated()
-  	  	              ? <div> 
-	  	                  <IconButton 
+  	  	              ? <div>
+	  	                  <IconButton
 		                      aria-owns={anchorEl ? 'user-menu' : null}
                           aria-label="More"
                           aria-haspopup="true"
@@ -264,18 +269,28 @@ class app extends Component {
 
 const FeatureList = withTheme()(({ features, selected, polygons, toggleSelectItem, theme, user, styles }) => {
   return (
-  <List subheader={<ListSubheader>Features</ListSubheader>}>
-    {features && features.map((feature) =>
-      <FeatureListItem item={feature} theme={theme} selected={selected[feature.id]} user={user} styles={styles}
-        toggleSelectThis={() => toggleSelectItem(feature.id)}
-      />
-    )}
-    {polygons && polygons.map((polygon) =>
-      <SavedFeatureItem item={polygon} theme={theme} selected={selected[polygon.id]} user={user} styles={styles}
-        toggleSelectThis={() => toggleSelectItem(polygon.id)}
-      />
-    )}
-  </List>
+    <div>
+      <List>
+        <Typography variant="title" style={{fontFamily: styles.title.fontFamily, fontSize: styles.title.fontSize, marginLeft: "25px"}}>
+          {features && features.length ? "New Plots" : ""}
+        </Typography>
+        {features && features.map((feature) =>
+          <FeatureListItem item={feature} theme={theme} selected={selected[feature.id]} user={user} styles={styles}
+            toggleSelectThis={() => toggleSelectItem(feature.id)}
+          />
+        )}
+      </List>
+      <List>
+        <Typography variant="title" style={{fontFamily: styles.title.fontFamily, fontSize: styles.title.fontSize, marginLeft: "25px"}}>
+          {polygons && polygons.length ? "Saved Plots" : ""}
+        </Typography>
+        {polygons && polygons.map((polygon) =>
+          <SavedFeatureItem item={polygon} theme={theme} selected={selected[polygon.id]} user={user} styles={styles}
+            toggleSelectThis={() => toggleSelectItem(polygon.id)}
+          />
+        )}
+      </List>
+    </div>
   );
 });
 
@@ -283,8 +298,10 @@ const SavedFeatureItem = ({ item, selected, toggleSelectThis, theme, user, style
   const style = selected ? {backgroundColor: theme.palette.primary.main} : {};
   return (
 	  <ListItem dense button style={style} key={item.id} onClick={toggleSelectThis}>
-      <ListItemText primary={item.name}/>
-      {item.coordinates}
+      <PolygonIcon polygon={item}/>
+      <ListItemText
+        disableTypography
+        primary={<Typography style={{fontSize: styles.fontSize}}>{item.name}</Typography>} />
     </ListItem>
   );
 }
@@ -295,7 +312,9 @@ const FeatureListItem = ({ item, selected, toggleSelectThis, theme, user, styles
     <Mutation mutation={CREATE_POLYGON}>
       {( createPolygonByJson, {data}) => (
 	       <ListItem dense button style={style} key={item.id} onClick={toggleSelectThis}>
-          <ListItemText primary={"Unsaved Polygon " + item.id}/>
+          <ListItemText
+            disableTypography
+            primary={<Typography style={{fontSize: styles.fontSize}}>{"Unsaved Polygon " + item.id}</Typography>} />
           <Button style={{color: styles.primaryColor.color}}
             onClick={() => createPolygonByJson({variables: {name: "foobar" , geojson: item.geometry, owner: user }})}>
             Save
@@ -306,8 +325,6 @@ const FeatureListItem = ({ item, selected, toggleSelectThis, theme, user, styles
     </Mutation>
   );
 }
-
-// <Map containerStyle={{height:"100vh", width:"100vw"}} />
 
 const mapStateToProps = ({ map, user }) => ({
   features: map.toJS(),

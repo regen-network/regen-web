@@ -38,6 +38,11 @@ export default class Auth {
     localStorage.setItem('access_token', authResult.accessToken);
     localStorage.setItem('id_token', authResult.idToken);
     localStorage.setItem('expires_at', expiresAt);
+
+    // schedule a token renewal
+    this.scheduleRenewal();
+
+
   }
 
   logout = () => {
@@ -45,6 +50,9 @@ export default class Auth {
     localStorage.removeItem('access_token');
     localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
+
+    clearTimeout(this.tokenRenewalTimeout);
+
   }
 
   isAuthenticated = () => {
@@ -74,6 +82,28 @@ export default class Auth {
       }
       cb(err, profile);
     });
+  }
+
+  renewToken() {
+    this.auth0.checkSession({}, (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        this.setSession(result);
+      }
+    });
+  }
+
+  tokenRenewalTimeout;
+
+  scheduleRenewal() {
+    const expiresAt = JSON.parse(localStorage.getItem('expires_at'));
+    const delay = expiresAt - Date.now();
+    if (delay > 0) {
+      this.tokenRenewalTimeout = setTimeout(() => {
+        this.renewToken();
+      }, delay);
+    }
   }
 
 }

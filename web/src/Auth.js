@@ -15,9 +15,12 @@ export default class Auth {
   }
 
   handleAuthentication = () => {
-    this.auth0.parseHash((err, authResult) => {
+    return new Promise ((resolve, reject) => {
+      this.auth0.parseHash((err, authResult) => {
+
       if (authResult && authResult.accessToken && authResult.idToken) {
         this.setSession(authResult);
+	resolve(null);
         fetch('/api/login', {
           headers: {
             Authorization: `Bearer ${authResult.accessToken}`
@@ -27,8 +30,10 @@ export default class Auth {
           console.log(res);
         });
       } else if (err) {
+	reject(err);
         console.log(err);
       }
+      });
     });
   }
 
@@ -73,6 +78,7 @@ export default class Auth {
         this.userProfile = profile;
       }
       cb(err, profile);
+      return profile;
     });
   }
 

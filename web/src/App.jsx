@@ -9,6 +9,9 @@ import ListSubheader from '@material-ui/core/ListSubheader';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 import Typography from '@material-ui/core/Typography';
 import { withTheme } from '@material-ui/core/styles';
 import ReactMapboxGl, { GeoJSONLayer } from "react-mapbox-gl";
@@ -19,10 +22,13 @@ import '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css';
 import * as MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import { actions as mapActions } from "./actions/map";
+import { actions as userActions } from "./actions/user";
 import formatPolygons from "./helpers/formatPolygons";
 import gql from "graphql-tag";
 import { Query, Mutation } from "react-apollo";
 import Welcome from './components/welcome';
+
+import { BrowserRouter as Redirect, Router, Route, Link } from "react-router-dom";
 
 import Auth from './Auth';
 const auth = new Auth();
@@ -66,6 +72,26 @@ class app extends Component {
     this.state = {
       selected: {}
    };
+  }
+
+  onMenuClick = (e) => {
+    this.setState({ anchorEl: e.currentTarget });
+  }
+
+  onMenuClose = () => {
+    this.setState({ anchorEl: null });
+  };
+
+  onLogout = (e) => {
+    this.setState({ anchorEl: null });
+    auth.logout();
+  }
+
+  gotoRegen = () => {
+      window.open(
+        'http://regen.network',
+        '_blank'
+      );
   }
 
   onDrawUpdated = (e) => {
@@ -124,7 +150,8 @@ class app extends Component {
 
   render() {
     const { selected } = this.state;
-    const { theme, features } = this.props;
+    const { theme, features, user, actions } = this.props;
+    console.log("user=",user);
     const styles = {
       primaryColor: {
         backgroundColor: theme.palette.primary.main,
@@ -132,7 +159,7 @@ class app extends Component {
       },
       fontFamily: theme.fontFamily
     };
-
+    const { anchorEl } = this.state;
 
     return (
 
@@ -140,7 +167,6 @@ class app extends Component {
       {({loading, error, data}) => {
         console.log(data);
 
-        let auth0_profile;
         let polygons;
 
         if (data && data.allPolygons) {
@@ -150,7 +176,7 @@ class app extends Component {
 
         if (auth.isAuthenticated()) {
             auth.getProfile((err, profile) => {
-        	     auth0_profile = profile;
+		            actions.updateUser(profile);
           });
         }
 
@@ -158,18 +184,30 @@ class app extends Component {
           <View style={{ flex: 1, flexDirection: 'column' }}>
             <Welcome />
             <AppBar position="static">
-              <Toolbar style={{display: 'flex', justifyContent: 'space-between'}}>
-    	          <a href="http://regen.network">
-                  <img id="logo" src="logo_white.png" width="136" height="80" alt="logo link to regen.network" title="Regen Logo"/>
-                </a>
+              <Toolbar variant="dense" style={{display: 'flex', justifyContent: 'space-between'}}>
+                <a target="_blank" href="http://regen.network"> <img id="logo" src="logo_white.png"  style={{height:50}} alt="logo link to regen.network" title="Regen Logo"/></a>
                 <Typography variant="title" style={{color: styles.primaryColor.color, fontFamily: styles.fontFamily}}>
-                  Welcome, {(auth0_profile && auth0_profile.given_name) ? auth0_profile.given_name :  "guest"}!
+                  {auth.isAuthenticated() ? "Welcome, " +  user.given_name  + "!" : "Welcome!"}
                 </Typography>
-                {
-                  auth.isAuthenticated()
-                  ? <Button style={{color: styles.primaryColor.color}} onClick={() => auth.logout()}>Logout</Button>
-                  : <Button style={{color: styles.primaryColor.color}} onClick={() => auth.login()}>Login</Button>
-                }
+                  <div>
+                    { auth.isAuthenticated()
+  	  	              ? <div> 
+	  	                  <IconButton 
+		                      aria-owns={anchorEl ? 'user-menu' : null}
+                          aria-label="More"
+                          aria-haspopup="true"
+                          onClick={this.onMenuClick}
+                        >
+                          <img style={{height:50}} src={user.picture}/>
+                        </IconButton>
+		                    <Menu id="user-menu" anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={this.onMenuClose}>
+		                      <MenuItem onClick={this.gotoRegen}>Regen</MenuItem>
+		                      <MenuItem onClick={this.onLogout}>Sign Out</MenuItem>
+		                    </Menu>
+		                   </div>
+		                 : <div> <Button onClick={() => auth.login()}>Sign In</Button> </div>
+		               }
+		            </div>
               </Toolbar>
             </AppBar>
             <View style={{ flex: 8, flexDirection: 'row' }}>
@@ -179,7 +217,7 @@ class app extends Component {
                   selected={selected}
                   polygons={polygons}
                   toggleSelectItem={this.toggleSelectItem}
-                  user={data ? data.getCurrentUser : "guest"}
+                  user={user ? user.given_name : "guest"}
                   styles={styles} />
               </View>
               <View style={{ flex: 8 }}>
@@ -271,13 +309,15 @@ const FeatureListItem = ({ item, selected, toggleSelectThis, theme, user, styles
 
 // <Map containerStyle={{height:"100vh", width:"100vw"}} />
 
-const mapStateToProps = ({ map }) => ({
+const mapStateToProps = ({ map, user }) => ({
   features: map.toJS(),
+  user: user.toJS(),
 });
 
 const mapDispatchToProps = (dispatch) => {
   const { updateFeatures } = mapActions;
-  const actions = bindActionCreators({ updateFeatures }, dispatch);
+  const { updateUser } = userActions;
+  const actions = bindActionCreators({ updateFeatures, updateUser }, dispatch);
   return { actions }
 };
 

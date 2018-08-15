@@ -4,7 +4,7 @@ export default class Auth {
   auth0 = new auth0.WebAuth({
     domain: 'regen-network.auth0.com',
     clientID: 'SabnXOxTOiSbfUHOaSvrsEMSGWr7xabm',
-    redirectUri: process.env.AUTO_DEVOPS_DOMAIN ? `${process.env.AUTO_DEVOPS_DOMAIN}/callback` : 'http://localhost:3000/callback',
+    redirectUri: process.env.AUTO_DEVOPS_DOMAIN ? `${process.env.AUTO_DEVOPS_DOMAIN}` : 'http://localhost:3000',
     audience: 'https://app.regen.network/graphql',
     responseType: 'token id_token',
     scope: 'openid profile',
@@ -15,9 +15,12 @@ export default class Auth {
   }
 
   handleAuthentication = () => {
-    this.auth0.parseHash((err, authResult) => {
+    return new Promise ((resolve, reject) => {
+      this.auth0.parseHash((err, authResult) => {
+
       if (authResult && authResult.accessToken && authResult.idToken) {
         this.setSession(authResult);
+	resolve(null);
         fetch('/api/login', {
           headers: {
             Authorization: `Bearer ${authResult.accessToken}`
@@ -27,8 +30,10 @@ export default class Auth {
           console.log(res);
         });
       } else if (err) {
+	reject(err);
         console.log(err);
       }
+      });
     });
   }
 

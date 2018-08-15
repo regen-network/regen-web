@@ -27,7 +27,7 @@ import formatPolygons from "./helpers/formatPolygons";
 import gql from "graphql-tag";
 import { Query, Mutation } from "react-apollo";
 
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Redirect, Router, Route, Link } from "react-router-dom";
 
 import Auth from './Auth';
 const auth = new Auth();
@@ -84,11 +84,13 @@ class app extends Component {
   onLogout = (e) => {
     this.setState({ anchorEl: null });
     auth.logout();
-    console.log("isAuthenticated:",auth.isAuthenticated());
   }
 
   gotoRegen = () => {
-   <Link to={"regen.network"}></Link>
+      window.open(
+        'http://regen.network',
+        '_blank'
+      );
   }
 
   onDrawUpdated = (e) => {
@@ -158,14 +160,12 @@ class app extends Component {
     };
     const { anchorEl } = this.state;
 
-
     return (
 
       <Query query={GET_POLYGONS}>
       {({loading, error, data}) => {
         console.log(data);
 
-        let auth0_profile;
         let polygons;
 
         if (data && data.allPolygons) {
@@ -175,9 +175,7 @@ class app extends Component {
 
         if (auth.isAuthenticated()) {
             auth.getProfile((err, profile) => {
-                auth0_profile = profile;
-{console.log("profile", profile)}
-		actions.updateUser(profile);
+		            actions.updateUser(profile);
           });
         }
 
@@ -185,37 +183,29 @@ class app extends Component {
           <View style={{ flex: 1, flexDirection: 'column' }}>
             <AppBar position="static">
               <Toolbar variant="dense" style={{display: 'flex', justifyContent: 'space-between'}}>
-                <Link to={"regen.network"}> <img id="logo" src="logo_white.png"  style={{height:50}} alt="logo link to regen.network" title="Regen Logo"/></Link>
-
+                <a target="_blank" href="http://regen.network"> <img id="logo" src="logo_white.png"  style={{height:50}} alt="logo link to regen.network" title="Regen Logo"/></a>
                 <Typography variant="title" style={{color: styles.primaryColor.color, fontFamily: styles.fontFamily}}>
-
-                  Welcome,  { user.given_name }!
+                  {auth.isAuthenticated() ? "Welcome, " +  user.given_name  + "!" : "Welcome!"}
                 </Typography>
-                
-		 <div>
-                   { auth.isAuthenticated()
-		     ? <div> 
-		      <IconButton 
-		        aria-owns={anchorEl ? 'user-menu' : null}
-                        aria-label="More"
-                        aria-haspopup="true"
-                        onClick={this.onMenuClick}
-                      >
-		      PF 
-                      </IconButton>
-		      <Menu id="user-menu" anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={this.onMenuClose}>
-		        <MenuItem onClick={this.gotoRegen}>Regen</MenuItem>
-		        <MenuItem onClick={this.onLogout}>Sign Out</MenuItem>
-		      </Menu>
-		      </div>
-		     : <div> <Button onClick={() => auth.login()}>Sign In</Button> </div>
-		   }
-		  </div>
-
-{/*
-                  ? <Button style={{color: styles.primaryColor.color}} onClick={() => auth.logout()}>Logout</Button>
-                  : <Button style={{color: styles.primaryColor.color}} onClick={() => auth.login()}>Login</Button>
-*/}
+                  <div>
+                    { auth.isAuthenticated()
+  	  	              ? <div> 
+	  	                  <IconButton 
+		                      aria-owns={anchorEl ? 'user-menu' : null}
+                          aria-label="More"
+                          aria-haspopup="true"
+                          onClick={this.onMenuClick}
+                        >
+                          <img style={{height:50}} src={user.picture}/>
+                        </IconButton>
+		                    <Menu id="user-menu" anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={this.onMenuClose}>
+		                      <MenuItem onClick={this.gotoRegen}>Regen</MenuItem>
+		                      <MenuItem onClick={this.onLogout}>Sign Out</MenuItem>
+		                    </Menu>
+		                   </div>
+		                 : <div> <Button onClick={() => auth.login()}>Sign In</Button> </div>
+		               }
+		            </div>
               </Toolbar>
             </AppBar>
             <View style={{ flex: 8, flexDirection: 'row' }}>

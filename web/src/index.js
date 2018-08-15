@@ -13,6 +13,8 @@ import makeMainRoutes from './routes';
 import Auth from './Auth';
 const auth = new Auth();
 
+
+
 const client = new ApolloClient({
   uri: "/graphql",
   request: async (operation) => {
@@ -34,12 +36,19 @@ const Root = () => {
     <ApolloProvider client={client}>
       <Provider store={store}>
         <MuiThemeProvider theme={theme}>
-    				{ makeMainRoutes() }
+    				{ makeMainRoutes(auth) }
         </MuiThemeProvider>
       </Provider>
     </ApolloProvider>
   );
 }
 
-ReactDOM.render(<Root />, document.getElementById('root'));
-registerServiceWorker();
+async function init() {
+  if (/access_token|id_token|error/.test(window.location.hash)) {
+    await auth.handleAuthentication();
+  }
+  ReactDOM.render(<Root />, document.getElementById('root'));
+  registerServiceWorker();
+}
+
+init();

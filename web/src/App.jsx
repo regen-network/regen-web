@@ -256,7 +256,12 @@ class app extends Component {
                             fillOnClick={() => this.toggleSelectedSavedPolygon(polygon.id)}
                             fillPaint={{
                               'fill-color': fillColor,
-                              'fill-opacity': 0.8
+                              'fill-opacity': 0.7
+                            }}
+                            linePaint={{
+                              'line-color': fillColor,
+                              'line-opacity': 0.9,
+                              'line-width': 5
                             }}
                             symbolLayout={{
                               "text-field": polygon.name,

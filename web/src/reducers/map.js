@@ -1,13 +1,20 @@
 import { constants } from "../actions/map";
 import { List } from 'immutable';
 
-let initialState = List();
+const initialState = {
+    features: [],
+    newEntry: {}
+}
 
 const reducerMap = {};
 
 reducerMap[constants.UPDATE_FEATURES] = (state, { payload }) => {
     const { features } = payload;
-	  return state.merge(List(features));
+	  return { ...state, features: [] };
+};
+
+reducerMap[constants.PATCH_NEW_ENTRY] = ({newEntry, ...state}, { attrs }) => {
+    return {...state, newEntry: {...newEntry, ...attrs}};
 };
 
 export default (state = initialState, action) => {
@@ -16,5 +23,5 @@ export default (state = initialState, action) => {
 		console.log(`${action.type} not found`)
 		return state;
 	}
-	return state.merge(fn(state, action));
+	return fn(state, action);
 }

@@ -64,7 +64,7 @@ const CREATE_POLYGON = gql`
   }
 `;
 
-class app extends Component {
+class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -286,9 +286,10 @@ const FeatureListItem = ({ item, selected, toggleSelectThis, theme, user, styles
 
 // <Map containerStyle={{height:"100vh", width:"100vw"}} />
 
-const mapStateToProps = ({ map }) => ({
-  features: map.toJS(),
-});
+const mapStateToProps = (state) => {
+    console.log(state)
+    return {features: state.feature}
+};
 
 const mapDispatchToProps = (dispatch) => {
   const { updateFeatures } = mapActions;
@@ -296,6 +297,4 @@ const mapDispatchToProps = (dispatch) => {
   return { actions }
 };
 
-export const App = connect(mapStateToProps, mapDispatchToProps)(app);
-
-export default withTheme()(App);
+export default withTheme()(connect(mapStateToProps, mapDispatchToProps)(App));

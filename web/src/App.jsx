@@ -120,7 +120,7 @@ class app extends Component {
     const { drawControl } = this.state;
     const { updateSelected } = this.props.actions;
     const selected = this.props.map.selected;
-    console.log("drawSelected", selected);
+
     if (id in selected) {
       selected[id] = !selected[id];
     }
@@ -134,10 +134,21 @@ class app extends Component {
         featureIds.push(k);
       }
     });
-    console.log("selected ids", featureIds);
+
     drawControl.changeMode('simple_select', {featureIds});
     updateSelected(selected);
     //this.state.drawControl.changeMode('direct_select', {featureId: id});
+  }
+
+  toggleSelectedSavedPolygon = (id) => {
+    const selected = this.props.map.selected;
+    const { updateSelected } = this.props.actions;
+    let currentState = selected[id];
+    Object.keys(selected).forEach((k) => {
+      selected[k] = false;
+    });
+    selected[id] = !currentState;
+    updateSelected(selected);
   }
 
   render() {
@@ -149,7 +160,10 @@ class app extends Component {
         backgroundColor: theme.palette.primary.main,
         color: theme.palette.common.white,
       },
-      accent: theme.palette.accent.blue,
+      accent: {
+        blue: theme.palette.accent.blue,
+        yellow: theme.palette.accent.yellow
+      },
       fontFamily: theme.fontFamily,
       fontSize: "16px",
       title: {
@@ -216,7 +230,8 @@ class app extends Component {
                   features={features}
                   selected={selected}
                   polygons={polygons}
-                  toggleSelect={this.drawSelected}
+                  multiSelect={this.drawSelected}
+                  toggleSelect={this.toggleSelectedSavedPolygon}
                   user={user ? user.sub : "guest"}
                   styles={styles}
                   optimisticSaveFeature={actions.optimisticSaveFeature} />
@@ -234,11 +249,13 @@ class app extends Component {
                   {
                     (polygons && polygons.length) ?
                       polygons.map(polygon => {
+                        let fillColor = selected[polygon.id] ? styles.accent.yellow : styles.accent.blue;
                         return (
                           <GeoJSONLayer
                             data={polygon}
+                            fillOnClick={() => this.toggleSelectedSavedPolygon(polygon.id)}
                             fillPaint={{
-                              'fill-color': styles.accent,
+                              'fill-color': fillColor,
                               'fill-opacity': 0.8
                             }}
                             symbolLayout={{

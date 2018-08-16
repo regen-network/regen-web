@@ -23,7 +23,7 @@ class PolygonIcon extends React.Component {
     var boxCenter = boxSize / 2;
 
     const viewbox = `${bbox[0]} ${bbox[3]} ${boxWidth} ${boxHeight}`;
-    const translate = `translate(${boxCenter} ${boxCenter})`;
+    const translate = `translate(0 ${boxCenter})`;
 
     const styles = {
       color: theme.palette.accent.yellow
@@ -32,7 +32,7 @@ class PolygonIcon extends React.Component {
     return (
       <div>
         <svg viewBox={viewbox} width="50" height="50" overflow="visible" xmlns="http://www.w3.org/2000/svg">
-          <polygon points={coordinates} transform={""}
+          <polygon points={coordinates} transform={translate}
                 fill={styles.color} stroke="none" />
         </svg>
       </div>

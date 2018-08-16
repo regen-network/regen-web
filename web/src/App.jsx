@@ -187,7 +187,7 @@ class app extends Component {
 
         return (
           <View style={{ flex: 1, flexDirection: 'column' }}>
-            <Welcome />
+            {auth.isAuthenticated() ? null : <Welcome/> } 
             <AppBar position="static">
               <Toolbar variant="dense" style={{display: 'flex', justifyContent: 'space-between'}}>
                 <a target="_blank" href="http://regen.network"> <img id="logo" src="logo_white.png"  style={{height:50}} alt="logo link to regen.network" title="Regen Logo"/></a>

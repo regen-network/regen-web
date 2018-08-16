@@ -27,11 +27,11 @@ export default class Auth {
           },
           method: "POST",
         }).then((res) => {
-          console.log(res);
+          //console.log(res);
         });
       } else if (err) {
-	reject(err);
-        console.log(err);
+	      reject(err);
+        console.error(err);
       }
       });
     });
@@ -57,7 +57,7 @@ export default class Auth {
     localStorage.removeItem('expires_at');
 
     clearTimeout(this.tokenRenewalTimeout);
-
+    window.location.reload();
   }
 
   isAuthenticated = () => {
@@ -93,7 +93,7 @@ export default class Auth {
   renewToken() {
     this.auth0.checkSession({}, (err, result) => {
       if (err) {
-        console.log(err);
+        console.error(err);
       } else {
         this.setSession(result);
       }

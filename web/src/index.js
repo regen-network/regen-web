@@ -8,20 +8,17 @@ import registerServiceWorker from './registerServiceWorker';
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
 import store from './store';
+import createBrowserHistory from 'history/createBrowserHistory';
 import makeMainRoutes from './routes';
 
 import Auth from './Auth';
 const auth = new Auth();
-
-
 
 const client = new ApolloClient({
   uri: "/graphql",
   request: async (operation) => {
     const token = auth.getValidToken();
     if (token) {
-      console.log('got token');
-      console.log(token);
       operation.setContext({
         headers: {
           Authorization: `Bearer ${token}`
@@ -31,12 +28,14 @@ const client = new ApolloClient({
   }
 });
 
+const history = createBrowserHistory();
+
 const Root = () => {
   return (
     <ApolloProvider client={client}>
       <Provider store={store}>
         <MuiThemeProvider theme={theme}>
-    				{ makeMainRoutes(auth) }
+    				{ makeMainRoutes(auth, history) }
         </MuiThemeProvider>
       </Provider>
     </ApolloProvider>
@@ -44,8 +43,11 @@ const Root = () => {
 }
 
 async function init() {
-  if (/access_token|id_token|error/.test(window.location.hash)) {
+  const {pathname, hash, search, state} = history.location;
+  console.log(history.location);
+  if (/access_token|id_token|error/.test(hash)) {
     await auth.handleAuthentication();
+    history.replace({pathname, search, state});
   }
   ReactDOM.render(<Root />, document.getElementById('root'));
   registerServiceWorker();

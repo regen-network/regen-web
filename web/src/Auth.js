@@ -4,7 +4,7 @@ export default class Auth {
   auth0 = new auth0.WebAuth({
     domain: 'regen-network.auth0.com',
     clientID: 'SabnXOxTOiSbfUHOaSvrsEMSGWr7xabm',
-    redirectUri: window.location.protocol + '//' + window.location.host + '/callback',
+    redirectUri: window.location.protocol + '//' + window.location.host,
     audience: 'https://app.regen.network/graphql',
     responseType: 'token id_token',
     scope: 'openid profile',
@@ -27,11 +27,11 @@ export default class Auth {
           },
           method: "POST",
         }).then((res) => {
-          console.log(res);
+          //console.log(res);
         });
       } else if (err) {
-	reject(err);
-        console.log(err);
+	      reject(err);
+        console.error(err);
       }
       });
     });
@@ -43,6 +43,11 @@ export default class Auth {
     localStorage.setItem('access_token', authResult.accessToken);
     localStorage.setItem('id_token', authResult.idToken);
     localStorage.setItem('expires_at', expiresAt);
+
+    // schedule a token renewal
+    this.scheduleRenewal();
+
+
   }
 
   logout = () => {
@@ -50,6 +55,9 @@ export default class Auth {
     localStorage.removeItem('access_token');
     localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
+
+    clearTimeout(this.tokenRenewalTimeout);
+    window.location.reload();
   }
 
   isAuthenticated = () => {
@@ -80,6 +88,28 @@ export default class Auth {
       cb(err, profile);
       return profile;
     });
+  }
+
+  renewToken() {
+    this.auth0.checkSession({}, (err, result) => {
+      if (err) {
+        console.error(err);
+      } else {
+        this.setSession(result);
+      }
+    });
+  }
+
+  tokenRenewalTimeout;
+
+  scheduleRenewal() {
+    const expiresAt = JSON.parse(localStorage.getItem('expires_at'));
+    const delay = expiresAt - Date.now();
+    if (delay > 0) {
+      this.tokenRenewalTimeout = setTimeout(() => {
+        this.renewToken();
+      }, delay);
+    }
   }
 
 }

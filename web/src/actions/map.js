@@ -4,7 +4,10 @@ const updateFeatures = (features) => ({ type: UPDATE_FEATURES, payload: { featur
 const OPTIMISTIC_SAVE_FEATURE = "OPTIMISTIC_SAVE_FEATURE";
 const optimisticSaveFeature = (id) => ({ type: OPTIMISTIC_SAVE_FEATURE, payload: { id }});
 
-const constants = { UPDATE_FEATURES, OPTIMISTIC_SAVE_FEATURE };
-const actions =  { updateFeatures, optimisticSaveFeature };
+const UPDATE_SELECTED = "UPDATE_SELECTED";
+const updateSelected = (selected) => ({ type: UPDATE_SELECTED, payload: { selected }});
+
+const constants = { UPDATE_FEATURES, OPTIMISTIC_SAVE_FEATURE, UPDATE_SELECTED };
+const actions =  { updateFeatures, optimisticSaveFeature, updateSelected };
 
 export { constants, actions };

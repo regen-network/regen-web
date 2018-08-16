@@ -22,7 +22,7 @@ const CREATE_POLYGON = gql`
   }
 `;
 
-const FeatureList = withTheme()(({ features, selected, polygons, toggleSelectItem, theme, user, styles, optimisticSaveFeature }) => {
+const FeatureList = withTheme()(({ features, selected, polygons, toggleSelect, theme, user, styles, optimisticSaveFeature }) => {
 
   // remove optimistic saved feature (if any) from features and add to polygons
   let unsavedFeatures = [];
@@ -48,7 +48,9 @@ const FeatureList = withTheme()(({ features, selected, polygons, toggleSelectIte
           </Typography>
           {unsavedFeatures.map((feature) =>
             <FeatureListItem item={feature} theme={theme} selected={selected[feature.id]} user={user} styles={styles} optimisticSaveFeature={optimisticSaveFeature}
-              toggleSelectThis={() => toggleSelectItem(feature.id)}
+              toggleSelectThis={() => {
+                toggleSelect(feature.id);
+              }}
             />
           )}
         </List>
@@ -61,7 +63,9 @@ const FeatureList = withTheme()(({ features, selected, polygons, toggleSelectIte
           </Typography>
           {polygons && polygons.map((polygon) =>
             <SavedFeatureItem item={polygon} theme={theme} selected={selected[polygon.id]} styles={styles}
-              toggleSelectThis={() => toggleSelectItem(polygon.id)}
+              toggleSelectThis={() => {
+                toggleSelect(polygon.id);
+              }}
             />
           )}
         </List>

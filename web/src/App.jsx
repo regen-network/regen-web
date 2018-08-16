@@ -51,9 +51,7 @@ const GET_POLYGONS = gql`
 class app extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      selected: {}
-   };
+    this.state = {};
   }
 
   onMenuClick = (e) => {
@@ -83,11 +81,12 @@ class app extends Component {
   }
 
   onSelectionChange = (e) => {
-    var selected = {};
+    const { updateSelected } = this.props.actions;
+    let selected = {};
     e.features.forEach((feature) => {
       selected[feature.id] = true;
     });
-    this.setState({ selected });
+    updateSelected(selected);
   }
 
   onMapLoad = (map) => {
@@ -117,30 +116,40 @@ class app extends Component {
     map.on('draw.selectionchange', this.onSelectionChange);
   }
 
-  toggleSelectItem = (id) => {
-    const { selected, drawControl } = this.state;
-    const newSelected = {...selected};
-    newSelected[id] = !selected[id];
+  drawSelected = (id) => {
+    const { drawControl } = this.state;
+    const { updateSelected } = this.props.actions;
+    const selected = this.props.map.selected;
+    console.log("drawSelected", selected);
+    if (id in selected) {
+      selected[id] = !selected[id];
+    }
+    else {
+      selected[id] = true;
+    }
+
     const featureIds = [];
-    Object.getOwnPropertyNames(newSelected).forEach((k) => {
-      if(newSelected[k]) featureIds.push(k);
+    Object.keys(selected).forEach((k) => {
+      if (selected[k]) {
+        featureIds.push(k);
+      }
     });
+    console.log("selected ids", featureIds);
     drawControl.changeMode('simple_select', {featureIds});
-    this.setState({ selected: newSelected });
+    updateSelected(selected);
     //this.state.drawControl.changeMode('direct_select', {featureId: id});
   }
 
   render() {
-    const { selected } = this.state;
     const { theme, map, user, actions } = this.props;
-    console.log("features from props", map, map.features);
-    const { features } = map;
+    const { features, selected } = map;
 
     const styles = {
       primaryColor: {
         backgroundColor: theme.palette.primary.main,
         color: theme.palette.common.white,
       },
+      accent: theme.palette.accent.blue,
       fontFamily: theme.fontFamily,
       fontSize: "16px",
       title: {
@@ -207,7 +216,7 @@ class app extends Component {
                   features={features}
                   selected={selected}
                   polygons={polygons}
-                  toggleSelectItem={this.toggleSelectItem}
+                  toggleSelect={this.drawSelected}
                   user={user ? user.sub : "guest"}
                   styles={styles}
                   optimisticSaveFeature={actions.optimisticSaveFeature} />
@@ -229,12 +238,12 @@ class app extends Component {
                           <GeoJSONLayer
                             data={polygon}
                             fillPaint={{
-                              'fill-color': '#088',
+                              'fill-color': styles.accent,
                               'fill-opacity': 0.8
                             }}
                             symbolLayout={{
                               "text-field": polygon.name,
-                              "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+                              "text-font": ["Lato Regular"],
                               "text-offset": [0, 0.6],
                               "text-anchor": "top"
                             }}/>
@@ -260,9 +269,9 @@ const mapStateToProps = ({ map, user }) => ({
 });
 
 const mapDispatchToProps = (dispatch) => {
-  const { updateFeatures, optimisticSaveFeature } = mapActions;
+  const { updateFeatures, optimisticSaveFeature, updateSelected } = mapActions;
   const { updateUser } = userActions;
-  const actions = bindActionCreators({ updateFeatures, optimisticSaveFeature, updateUser }, dispatch);
+  const actions = bindActionCreators({ updateFeatures, optimisticSaveFeature, updateSelected, updateUser }, dispatch);
   return { actions }
 };
 

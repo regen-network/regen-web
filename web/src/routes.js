@@ -1,11 +1,10 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import { Router, Route, Switch } from 'react-router-dom';
 import App from './App';
-const supportsHistory = 'pushState' in window.history;
 
-const makeMainRoutes = (auth) => {
+const makeMainRoutes = (auth, history) => {
   return (
-    <Router component={App} forceRefresh={!supportsHistory}>
+    <Router history={history}>
       <Switch>
         <Route exact path="/" render={(props) => <App auth={auth} {...props} />} />
       </Switch>

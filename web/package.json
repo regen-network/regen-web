@@ -13,6 +13,7 @@
     "auth0-js": "^9.7.3",
     "flow-bin": "^0.77.0",
     "graphql": "^0.13.2",
+    "history": "^4.7.2",
     "immutable": "^3.8.2",
     "mapbox-gl": "^0.47.0",
     "ol": "^5.1.3",

@@ -22,20 +22,13 @@ const CREATE_POLYGON = gql`
   }
 `;
 
-const FeatureList = withTheme()(({ features, selected, polygons, multiSelect, toggleSelect, theme, user, styles, optimisticSaveFeature }) => {
+const FeatureList = withTheme()(({ features, selected, polygons, toggleSelect, clearSelected, theme, user, styles, optimisticSaveFeature }) => {
 
-  // remove optimistic saved feature (if any) from features and add to polygons
+  // remove optimistic saved feature (if any) from features
   let unsavedFeatures = [];
   features.forEach((feature) => {
     if (!feature.saved) {
       unsavedFeatures.push(feature);
-    }
-    else {
-      let optimisticSavedFeature = Object.assign({}, feature, {
-        coordinates: feature.geometry.coordinates,
-        name: "New Saved Field"
-      });
-      polygons.unshift(optimisticSavedFeature);
     }
   });
 
@@ -47,9 +40,16 @@ const FeatureList = withTheme()(({ features, selected, polygons, multiSelect, to
             {"New Plots"}
           </Typography>
           {unsavedFeatures.map((feature) =>
-            <FeatureListItem item={feature} theme={theme} selected={selected[feature.id]} user={user} styles={styles} optimisticSaveFeature={optimisticSaveFeature}
+            <FeatureListItem
+              item={feature}
+              theme={theme}
+              selected={selected[feature.id]}
+              user={user}
+              styles={styles}
+              optimisticSaveFeature={optimisticSaveFeature}
+              clearSelected={clearSelected}
               toggleSelectThis={() => {
-                multiSelect(feature.id);
+                toggleSelect(feature.id);
               }}
             />
           )}
@@ -87,24 +87,26 @@ const SavedFeatureItem = ({ item, selected, toggleSelectThis, theme, styles }) =
   );
 }
 
-const FeatureListItem = ({ item, selected, toggleSelectThis, theme, user, styles, optimisticSaveFeature }) => {
+const FeatureListItem = ({ item, selected, toggleSelectThis, theme, user, styles, optimisticSaveFeature, clearSelected }) => {
   const style = selected ? {backgroundColor: theme.palette.primary.main} : {};
 
   return (
     <Mutation mutation={CREATE_POLYGON}>
       {( createPolygonByJson, {data}) => (
 	       <ListItem dense button style={style} key={item.id} onClick={toggleSelectThis}>
-         <PolygonIcon polygon={item.geometry}/>
-          <ListItemText
-            disableTypography
-            primary={<Typography style={{fontSize: styles.fontSize}}>{"Unsaved Plot"}</Typography>} />
-          <Button style={{color: styles.primaryColor.color}}
-            onClick={() => {
-              createPolygonByJson({variables: {name: "foobar" , geojson: item.geometry, owner: user }});
-              optimisticSaveFeature(item.id);
-            }}>
-            Save
-          </Button>
+            <PolygonIcon polygon={item.geometry}/>
+            <ListItemText
+              disableTypography
+              primary={<Typography style={{fontSize: styles.fontSize}}>{"Unsaved Plot"}</Typography>} />
+            <Button style={{color: styles.primaryColor.color}}
+              onClick={(e) => {
+                e.stopPropagation();
+                createPolygonByJson({variables: {name: "foobar" , geojson: item.geometry, owner: user }});
+                optimisticSaveFeature(item.id);
+                clearSelected(item.id); // delete from map
+              }}>
+              Save
+            </Button>
           </ListItem>
         )
       }

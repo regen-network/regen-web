@@ -121,34 +121,49 @@ class app extends Component {
     const { updateSelected } = this.props.actions;
     const selected = this.props.map.selected;
 
-    if (id in selected) {
-      selected[id] = !selected[id];
+    let mapFeatureIds = {};
+    drawControl.getAll().features.forEach((feature) => {
+      mapFeatureIds[feature.id] = true;
+    });
+
+    if (mapFeatureIds[id]) {
+      if (id in selected) {
+        selected[id] = !selected[id];
+      }
+      else {
+        selected[id] = true;
+      }
+
+      const featureIds = [];
+      Object.keys(selected).forEach((k) => {
+        if (selected[k] && mapFeatureIds[k]) {
+          featureIds.push(k);
+        }
+        else {
+          selected[k] = false;
+        }
+      });
+
+      drawControl.changeMode('simple_select', {featureIds});
     }
     else {
-      selected[id] = true;
+      let currentState = selected[id] ? selected[id] : false;
+
+      Object.keys(selected).forEach((k) => {
+        selected[k] = false;
+      });
+      selected[id] = !currentState;
+
+      drawControl.changeMode('simple_select'); // deselect drawn polygons
     }
 
-    const featureIds = [];
-    Object.keys(selected).forEach((k) => {
-      if (selected[k]) {
-        featureIds.push(k);
-      }
-    });
-
-    drawControl.changeMode('simple_select', {featureIds});
     updateSelected(selected);
-    //this.state.drawControl.changeMode('direct_select', {featureId: id});
   }
 
-  toggleSelectedSavedPolygon = (id) => {
-    const selected = this.props.map.selected;
-    const { updateSelected } = this.props.actions;
-    let currentState = selected[id];
-    Object.keys(selected).forEach((k) => {
-      selected[k] = false;
-    });
-    selected[id] = !currentState;
-    updateSelected(selected);
+  clearSelected = (id) => {
+    // delete a new drawn polygon
+    const { drawControl } = this.state;
+    drawControl.delete(id);
   }
 
   render() {
@@ -177,13 +192,20 @@ class app extends Component {
 
       <Query query={GET_POLYGONS}>
       {({loading, error, data}) => {
-        console.log(data);
-
         let polygons;
 
         if (data && data.allPolygons) {
           polygons = formatPolygons(data.allPolygons.nodes);
-          // possible save to store to trigger reload
+          // add optimisticSavedFeature to polygons
+          features.forEach((feature) => {
+            if (feature.saved) {
+              let optimisticSavedFeature = Object.assign({}, feature, {
+                coordinates: feature.geometry.coordinates,
+                name: "New Saved Field"
+              });
+              polygons.unshift(optimisticSavedFeature);
+            }
+          });
         }
 
         if (auth.isAuthenticated()) {
@@ -230,8 +252,8 @@ class app extends Component {
                   features={features}
                   selected={selected}
                   polygons={polygons}
-                  multiSelect={this.drawSelected}
-                  toggleSelect={this.toggleSelectedSavedPolygon}
+                  toggleSelect={this.drawSelected}
+                  clearSelected={this.clearSelected}
                   user={user ? user.sub : "guest"}
                   styles={styles}
                   optimisticSaveFeature={actions.optimisticSaveFeature} />

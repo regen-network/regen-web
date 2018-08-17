@@ -25,6 +25,7 @@ import * as MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import { actions as mapActions } from "./actions/map";
 import { actions as userActions } from "./actions/user";
+import { actions as newEntryActions } from "./actions/newEntry";
 import formatPolygons from "./helpers/formatPolygons";
 import gql from "graphql-tag";
 import { Query, Mutation } from "react-apollo";
@@ -74,8 +75,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        selected: {},
-        addModalOpen: false
+        selected: {}
    };
   }
 
@@ -153,13 +153,9 @@ class App extends Component {
     //this.state.drawControl.changeMode('direct_select', {featureId: id});
   }
 
-  openAddModal = () => this.setState({addModalOpen: true});
-
-  closeAddModal = () => this.setState({addModalOpen: false});
-
   render() {
-    const { selected, addModalOpen } = this.state;
-    const { theme, features, user, actions } = this.props;
+    const { selected } = this.state;
+    const { theme, features, user, addModalOpen, actions } = this.props;
 
     const styles = {
       primaryColor: {
@@ -264,7 +260,7 @@ class App extends Component {
                   }
 
                     <div className="button-add">
-                      <Button variant="fab" mini onClick={this.openAddModal}>
+                      <Button variant="fab" mini onClick={actions.openNewEntryModal}>
                           <AddIcon />
                       </Button>
                     </div>
@@ -272,7 +268,7 @@ class App extends Component {
               </View>
             </View>
             <View style={{ flex: 2 }}></View>
-            <AddEntryModal open={addModalOpen} onClose={this.closeAddModal} />
+            <AddEntryModal open={addModalOpen} onClose={actions.closeNewEntryModal} />
           </View>
           );
         }}
@@ -339,15 +335,17 @@ const FeatureListItem = ({ item, selected, toggleSelectThis, theme, user, styles
   );
 }
 
-const mapStateToProps = ({ map, user }) => ({
+const mapStateToProps = ({ map, user, newEntry }) => ({
   features: map.toJS(),
   user: user.toJS(),
+  addModalOpen: newEntry.open
 });
 
 const mapDispatchToProps = (dispatch) => {
   const { updateFeatures } = mapActions;
   const { updateUser } = userActions;
-  const actions = bindActionCreators({ updateFeatures, updateUser }, dispatch);
+  const { openNewEntryModal, closeNewEntryModal } = newEntryActions;
+  const actions = bindActionCreators({ updateFeatures, updateUser, openNewEntryModal, closeNewEntryModal}, dispatch);
   return { actions }
 };
 

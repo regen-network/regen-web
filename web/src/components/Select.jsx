@@ -188,6 +188,7 @@ class Select extends React.Component {
                 placeholder={placeholder}
                 options={options}
                 defaultMenuIsOpen="false"
+                clearable
               />
             </NoSsr>
         );

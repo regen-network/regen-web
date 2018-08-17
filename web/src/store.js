@@ -8,7 +8,6 @@ let middlewares = [ReduxThunk];
 
 if (process.env.NODE_ENV !== 'production') {
     const { logger } = require(`redux-logger`);
-
     middlewares.push(logger);
 }
 

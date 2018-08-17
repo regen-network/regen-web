@@ -5,6 +5,10 @@ import { bindActionCreators } from 'redux';
 import { actions as newEntryActions } from "../actions/newEntry";
 import Modal from '@material-ui/core/Modal';
 import Select from './Select.jsx';
+import 'react-dates/initialize';
+import { SingleDatePicker} from 'react-dates';
+import 'react-dates/lib/css/_datepicker.css';
+import * as moment from 'moment';
 
 const entryTypes = [
     {type:'Planting', category: 'PlantRelated'},
@@ -26,12 +30,24 @@ const plants = [
 
 class AddEntryModal extends React.Component {
     render() {
-        const {open, onClose, entry, patchNewEntry} = this.props;
-        const {type, species} = entry;
+        const {open, onClose, entry, patchNewEntry, dateFocused, focusNewEntryDatePicker} = this.props;
+        const {type, species, date} = entry;
 
         return (
-            <Modal open={open} onClose={onClose}>
+            <Modal open={open}
+                   onClose={onClose}
+                   onRendered={() => {
+                     patchNewEntry({date:moment()})
+                   }}
+            >
                 <div className="modal-add-entry">
+                    <SingleDatePicker
+                      date={date}
+                      onDateChange={(date) => patchNewEntry({date})}
+                      focused={dateFocused}
+                      onFocusChange={focusNewEntryDatePicker}
+                      id="addEntryModal__date-picker"
+                    />
                     <Select
                         options={entryTypes.map(({type}) => {return {value:type, label:type}})}
                         value={{value:type,label:type}}
@@ -51,12 +67,13 @@ class AddEntryModal extends React.Component {
 }
 
 const mapStateToProps = ({ newEntry }) => ({
-    entry: newEntry.entry
+    entry: newEntry.entry,
+    dateFocused: newEntry.datePickerFocus
 });
 
 const mapDispatchToProps = (dispatch) => {
-    const { patchNewEntry } = newEntryActions;
-    return bindActionCreators({ patchNewEntry }, dispatch);
+    const { patchNewEntry, focusNewEntryDatePicker } = newEntryActions;
+    return bindActionCreators({ patchNewEntry, focusNewEntryDatePicker }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddEntryModal);

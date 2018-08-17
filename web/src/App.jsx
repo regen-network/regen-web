@@ -192,6 +192,7 @@ class app extends Component {
 
       <Query query={GET_POLYGONS}>
       {({loading, error, data}) => {
+
         let polygons;
 
         if (data && data.allPolygons) {
@@ -216,7 +217,7 @@ class app extends Component {
 
         return (
           <View style={{ flex: 1, flexDirection: 'column' }}>
-            <Welcome />
+            {auth.isAuthenticated() ? null : <Welcome/> } 
             <AppBar position="static">
               <Toolbar variant="dense" style={{display: 'flex', justifyContent: 'space-between'}}>
                 <a target="_blank" href="http://regen.network" rel="noopener noreferrer">
@@ -257,6 +258,7 @@ class app extends Component {
                   user={user ? user.sub : "guest"}
                   styles={styles}
                   optimisticSaveFeature={actions.optimisticSaveFeature} />
+                  user={data ? data.getCurrentUser : 'guest'} />
               </View>
               <View style={{ flex: 8 }}>
                 <Map

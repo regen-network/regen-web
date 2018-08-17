@@ -170,7 +170,6 @@ class app extends Component {
 
       <Query query={GET_POLYGONS}>
       {({loading, error, data}) => {
-        console.log(data);
 
         let polygons;
 
@@ -222,7 +221,7 @@ class app extends Component {
                   selected={selected}
                   polygons={polygons}
                   toggleSelectItem={this.toggleSelectItem}
-                  user={user ? user.given_name : "guest"}
+                  user={data ? data.getCurrentUser : 'guest'}
                   styles={styles} />
               </View>
               <View style={{ flex: 8 }}>

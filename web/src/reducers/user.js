@@ -18,7 +18,6 @@ reducerMap[constants.UPDATE_USER] = (state, { payload }) => {
 export default (state = initialState, action) => {
 	const fn = reducerMap[action.type];
 	if (!fn) {
-		console.log(`${action.type} not found`)
 		return state;
 	}
 	return state.merge(fn(state, action));

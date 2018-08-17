@@ -179,8 +179,6 @@ class App extends Component {
 
       <Query query={GET_POLYGONS}>
       {({loading, error, data}) => {
-        console.log(data);
-
         let polygons;
 
         if (data && data.allPolygons) {

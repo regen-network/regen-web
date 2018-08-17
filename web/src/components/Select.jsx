@@ -180,14 +180,14 @@ class Select extends React.Component {
         return (
             <NoSsr>
               <ReactSelect
-              classes={classes}
-              styles={selectStyles}
-              components={components}
-              value={value}
-              onChange={onChange}
-              placeholder={placeholder}
-              options={options}
-              defaultMenuIsOpen="false"
+                classes={classes}
+                styles={selectStyles}
+                components={components}
+                value={value}
+                onChange={onChange}
+                placeholder={placeholder}
+                options={options}
+                defaultMenuIsOpen="false"
               />
             </NoSsr>
         );

@@ -1,11 +1,16 @@
 import { combineReducers, createStore, applyMiddleware } from 'redux';
 import ReduxThunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import logger from 'redux-logger'
-
 import * as reducers from './reducers';
 const combinedReducers = combineReducers(reducers);
-const middlewares = [logger, ReduxThunk];
+
+let middlewares = [ReduxThunk];
+
+if (process.env.NODE_ENV !== 'production') {
+    const { logger } = require(`redux-logger`);
+
+    middlewares.push(logger);
+}
 
 const configureStore = (initialState = {}) => {
   const composer = composeWithDevTools;

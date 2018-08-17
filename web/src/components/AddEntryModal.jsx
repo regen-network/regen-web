@@ -1,5 +1,8 @@
 import React from 'react';
 import './AddEntryModal.css';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { actions as newEntryActions } from "../actions/newEntry";
 import Modal from '@material-ui/core/Modal';
 import Select from './Select.jsx';
 
@@ -11,7 +14,7 @@ const entryTypes = [
 
 const entryTypeCategories = new Map(entryTypes.map(({type,category}) => [type, category]));
 
-const isPlantRelated = (type) => entryTypeCategories[type] === 'PlantRelated';
+const isPlantRelated = (type) => entryTypeCategories.get(type) === 'PlantRelated';
 
 const plants = [
     {name:'Wheat'},
@@ -22,34 +25,24 @@ const plants = [
 ]
 
 class AddEntryModal extends React.Component {
-    state = {
-        type: null,
-        species: null
-    }
-
-    onTypeSelected = (e) => this.setState({type:e.value});
-    onSpeciesSelected = (e) => this.setState({species:e.value});
-
     render() {
-        const {open, onClose} = this.props;
-        const {type, species} = this.state;
-        console.log(this.state);
-        console.log(entryTypes);
-        console.log(entryTypeCategories);
+        const {open, onClose, entry, patchNewEntry} = this.props;
+        const {type, species} = entry;
 
         return (
             <Modal open={open} onClose={onClose}>
                 <div className="modal-add-entry">
                     <Select
                         options={entryTypes.map(({type}) => {return {value:type, label:type}})}
-                        value={type}
-                        onChange={this.onTypeSelected}
+                        value={{value:type,label:type}}
+                        onChange={(e) => patchNewEntry({type:e.value})}
                     />
                     {isPlantRelated(type) ?
                        <Select
                            options={plants.map(({name}) => {return {value:name, label:name}})}
-                           value={species}
-                           onChange={this.onSpeciesSelected} /> : null
+                           value={{value:species,label:species}}
+                           onChange={(e) => patchNewEntry({species:e.value})}
+                       /> : null
                     }
                 </div>
             </Modal>
@@ -57,5 +50,14 @@ class AddEntryModal extends React.Component {
     }
 }
 
-export default AddEntryModal;
+const mapStateToProps = ({ newEntry }) => ({
+    entry: newEntry.entry
+});
+
+const mapDispatchToProps = (dispatch) => {
+    const { patchNewEntry } = newEntryActions;
+    return bindActionCreators({ patchNewEntry }, dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddEntryModal);
 

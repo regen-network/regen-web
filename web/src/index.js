@@ -44,7 +44,6 @@ const Root = () => {
 
 async function init() {
   const {pathname, hash, search, state} = history.location;
-  console.log(history.location);
   if (/access_token|id_token|error/.test(hash)) {
     await auth.handleAuthentication();
     history.replace({pathname, search, state});

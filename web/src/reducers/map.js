@@ -1,13 +1,12 @@
 import { constants } from "../actions/map";
-import { List } from 'immutable';
 
-let initialState = List();
+let initialState = [];
 
 const reducerMap = {};
 
 reducerMap[constants.UPDATE_FEATURES] = (state, { payload }) => {
     const { features } = payload;
-	  return state.merge(List(features));
+	  return features;
 };
 
 export default (state = initialState, action) => {
@@ -15,5 +14,5 @@ export default (state = initialState, action) => {
 	if (!fn) {
 		return state;
 	}
-	return state.merge(fn(state, action));
+	return fn(state, action);
 }

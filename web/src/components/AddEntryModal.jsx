@@ -9,6 +9,8 @@ import 'react-dates/initialize';
 import { SingleDatePicker} from 'react-dates';
 import 'react-dates/lib/css/_datepicker.css';
 import * as moment from 'moment';
+import TimePicker from 'rc-time-picker';
+import 'rc-time-picker/assets/index.css';
 
 const entryTypes = [
     {type:'Planting', category: 'PlantRelated'},
@@ -31,22 +33,31 @@ const plants = [
 class AddEntryModal extends React.Component {
     render() {
         const {open, onClose, entry, patchNewEntry, dateFocused, focusNewEntryDatePicker} = this.props;
-        const {type, species, date} = entry;
+        const {type, species, date, time} = entry;
 
         return (
             <Modal open={open}
                    onClose={onClose}
-                   onRendered={() => {
-                     patchNewEntry({date:moment()})
-                   }}
+                   onRendered={() =>
+                       {
+                           const now = moment();
+                           patchNewEntry({date:now, time: now});
+                       }}
             >
                 <div className="modal-add-entry">
                     <SingleDatePicker
                       date={date}
-                      onDateChange={(date) => patchNewEntry({date})}
+                        onDateChange={(date) => {
+                          patchNewEntry({date});
+                          focusNewEntryDatePicker({focus: false});
+                        }}
                       focused={dateFocused}
                       onFocusChange={focusNewEntryDatePicker}
                       id="addEntryModal__date-picker"
+                    />
+                    <TimePicker
+                      value={time}
+                      onChange={(time) => patchNewEntry({time})}
                     />
                     <Select
                         options={entryTypes.map(({type}) => {return {value:type, label:type}})}

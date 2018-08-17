@@ -5,6 +5,7 @@ const initialState = {
     datePickerFocus: false,
     entry: {
         date: null,
+        time: null,
         type: null,
         species: null
     }
@@ -24,8 +25,8 @@ reducerMap[constants.CLOSE_NEW_ENTRY_MODAL] = (state, _) => {
     return {...state, open: false};
 };
 
-reducerMap[constants.NEW_ENTRY_FOCUS_DATE_PICKER] = (state, { focus }) => {
-    return {...state, datePickerFocus: focus};
+reducerMap[constants.NEW_ENTRY_FOCUS_DATE_PICKER] = (state, { focused }) => {
+    return {...state, datePickerFocus: focused};
 };
 
 export default (state = initialState, action) => {

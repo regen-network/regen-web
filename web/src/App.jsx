@@ -336,8 +336,8 @@ const FeatureListItem = ({ item, selected, toggleSelectThis, theme, user, styles
 }
 
 const mapStateToProps = ({ map, user, newEntry }) => ({
-  features: map.toJS(),
-  user: user.toJS(),
+  features: map,
+  user: user,
   addModalOpen: newEntry.open
 });
 

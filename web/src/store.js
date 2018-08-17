@@ -2,6 +2,8 @@ import { combineReducers, createStore, applyMiddleware } from 'redux';
 import ReduxThunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import * as reducers from './reducers';
+import Immutable from 'immutable';
+
 const combinedReducers = combineReducers(reducers);
 
 let middlewares = [ReduxThunk];
@@ -12,6 +14,17 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 const configureStore = (initialState = {}) => {
+    // const composer = composeWithDevTools({
+    //     serialize: {
+    //         immutable: Immutable,
+    //     //     reviver: (key, value) => {
+    //     //         if (typeof value === 'object' && value !== null && '__serializedType__'  in value) {
+    //     //             switch (value.__serializedType__) {
+    //     //             }
+    //     //         }
+    //     //     }
+    //     // }
+    // });
   const composer = composeWithDevTools;
 	const store = composer(applyMiddleware(...middlewares))(createStore)(combinedReducers, initialState);
 

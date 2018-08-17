@@ -1,18 +1,17 @@
 import { constants } from "../actions/user";
-import { Map } from "immutable";
 
-let initialState = Map({
+let initialState = {
     given_name: "guest",
     family_name: "",
     picture: "",
     email: ""
-});
+};
 
 const reducerMap = {};
 
 reducerMap[constants.UPDATE_USER] = (state, { payload }) => {
     const { user } = payload;
-	  return state.merge( user );
+	  return {...state, ...user}
 };
 
 export default (state = initialState, action) => {
@@ -20,5 +19,5 @@ export default (state = initialState, action) => {
 	if (!fn) {
 		return state;
 	}
-	return state.merge(fn(state, action));
+	fn(state, action);
 }

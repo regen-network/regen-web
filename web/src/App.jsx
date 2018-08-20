@@ -217,7 +217,7 @@ class app extends Component {
 
         return (
           <View style={{ flex: 1, flexDirection: 'column' }}>
-            {auth.isAuthenticated() ? null : <Welcome/> } 
+            {auth.isAuthenticated() ? null : <Welcome/> }
             <AppBar position="static">
               <Toolbar variant="dense" style={{display: 'flex', justifyContent: 'space-between'}}>
                 <a target="_blank" href="http://regen.network" rel="noopener noreferrer">
@@ -255,9 +255,8 @@ class app extends Component {
                   polygons={polygons}
                   toggleSelect={this.drawSelected}
                   clearSelected={this.clearSelected}
-                  user={user ? user.sub : "guest"}
                   styles={styles}
-                  optimisticSaveFeature={actions.optimisticSaveFeature} />
+                  optimisticSaveFeature={actions.optimisticSaveFeature}
                   user={data ? data.getCurrentUser : 'guest'} />
               </View>
               <View style={{ flex: 8 }}>

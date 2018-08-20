@@ -49,7 +49,7 @@ class AddEntryModal extends React.Component {
                       date={date}
                         onDateChange={(date) => {
                           patchNewEntry({date});
-                          focusNewEntryDatePicker({focus: false});
+                          focusNewEntryDatePicker({focused: false});
                         }}
                       focused={dateFocused}
                       onFocusChange={focusNewEntryDatePicker}

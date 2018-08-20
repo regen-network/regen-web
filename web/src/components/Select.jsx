@@ -1,10 +1,8 @@
 // Based off of: https://github.com/mui-org/material-ui/blob/35b1810f8e95a91649b11e3f98f8ef1df1daa52b/docs/src/pages/demos/autocomplete/IntegrationReactSelect.js
 
 import React from 'react';
-import { withTheme } from '@material-ui/core/styles';
 import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
-import Modal from '@material-ui/core/Modal';
 import ReactSelect from 'react-select';
 import Typography from '@material-ui/core/Typography';
 import NoSsr from '@material-ui/core/NoSsr';

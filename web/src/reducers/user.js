@@ -16,8 +16,5 @@ reducerMap[constants.UPDATE_USER] = (state, { payload }) => {
 
 export default (state = initialState, action) => {
 	const fn = reducerMap[action.type];
-	if (!fn) {
-		return state;
-	}
-	fn(state, action);
+	return fn ? fn(state, action) : state;
 }

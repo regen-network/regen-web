@@ -11,6 +11,7 @@ import {
 const palette = {
     primary: {
       main: "#4fb573", // Regen Green
+      contrastText: "#FFF"
     },
     common: {
       white: "#FFF",

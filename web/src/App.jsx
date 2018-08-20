@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './App.css';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { View } from 'react-native';
@@ -11,7 +10,6 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Typography from '@material-ui/core/Typography';
 import AddIcon from '@material-ui/icons/Add';
-import Modal from '@material-ui/core/Modal';
 import { withTheme } from '@material-ui/core/styles';
 import ReactMapboxGl, { GeoJSONLayer } from "react-mapbox-gl";
 import * as mapbox from "mapbox-gl";
@@ -53,7 +51,7 @@ const GET_POLYGONS = gql`
 }
 `;
 
-class app extends Component {
+class App extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -216,7 +214,7 @@ class app extends Component {
 
         if (auth.isAuthenticated()) {
             auth.getProfile((err, profile) => {
-		            actions.updateUser(profile);
+              err ? console.log(err) : actions.updateUser(profile);
           });
         }
 
@@ -302,8 +300,11 @@ class app extends Component {
                     : null
                   }
 
-                    <div className="button-add">
-                      <Button variant="fab" mini onClick={actions.openNewEntryModal}>
+                    <div style={{position: "absolute", bottom: "25px", right: "10px"}}>
+                      <Button
+                        variant="fab"
+                        color="primary"
+                        onClick={actions.openNewEntryModal}>
                           <AddIcon />
                       </Button>
                     </div>
@@ -311,7 +312,7 @@ class app extends Component {
               </View>
             </View>
             <View style={{ flex: 2 }}></View>
-            <AddEntryModal open={addModalOpen} onClose={actions.closeNewEntryModal} />
+            <AddEntryModal open={addModalOpen} onClose={actions.closeNewEntryModal} polygons={polygons} />
           </View>
           );
         }}
@@ -320,8 +321,8 @@ class app extends Component {
 }
 
 const mapStateToProps = ({ map, user, newEntry }) => ({
-  map: map.toJS(),
-  user: user.toJS(),
+  map: map,
+  user: user,
   addModalOpen: newEntry.open
 });
 

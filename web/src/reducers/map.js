@@ -1,18 +1,18 @@
 import { constants } from "../actions/map";
 
-let initialState = [];
+let initialState = {
+  features: [],
+  selected: {}
+};
 
 const reducerMap = {};
 
 reducerMap[constants.UPDATE_FEATURES] = (state, { payload }) => {
     const { features } = payload;
-	  return features;
+	  return {...state, features: features};
 };
 
 export default (state = initialState, action) => {
 	const fn = reducerMap[action.type];
-	if (!fn) {
-		return state;
-	}
-	return fn(state, action);
+	return fn ? fn(state, action) : state;
 }

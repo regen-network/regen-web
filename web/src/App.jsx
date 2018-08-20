@@ -276,7 +276,7 @@ class app extends Component {
                         return (
                           <GeoJSONLayer
                             data={polygon}
-                            fillOnClick={() => this.toggleSelectedSavedPolygon(polygon.id)}
+                            fillOnClick={() => this.drawSelected(polygon.id)}
                             fillPaint={{
                               'fill-color': fillColor,
                               'fill-opacity': 0.7

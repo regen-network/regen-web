@@ -303,7 +303,7 @@ class App extends Component {
                     <div style={{position: "absolute", bottom: "25px", right: "10px"}}>
                       <Button
                         variant="fab"
-                        color="primary"
+                        color="secondary"
                         onClick={actions.openNewEntryModal}>
                           <AddIcon />
                       </Button>

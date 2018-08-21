@@ -5,7 +5,6 @@ const initialState = {
     datePickerFocus: false,
     entry: {
         date: null,
-        time: null,
         type: null,
         species: null
     }

@@ -13,6 +13,9 @@ const palette = {
       main: "#4fb573", // Regen Green
       contrastText: "#FFF"
     },
+    secondary: {
+      main: "#ffc433"
+    },
     common: {
       white: "#FFF",
     },

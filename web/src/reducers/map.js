@@ -9,7 +9,7 @@ const reducerMap = {};
 
 reducerMap[constants.UPDATE_FEATURES] = (state, { payload }) => {
     const { features } = payload;
-	  return {...state, ...features};
+	  return {...state, features};
 };
 
 reducerMap[constants.OPTIMISTIC_SAVE_FEATURE] = (state, { payload }) => {

@@ -9,6 +9,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Typography from '@material-ui/core/Typography';
+import AddIcon from '@material-ui/icons/Add';
 import { withTheme } from '@material-ui/core/styles';
 import ReactMapboxGl, { GeoJSONLayer } from "react-mapbox-gl";
 import * as mapbox from "mapbox-gl";
@@ -19,11 +20,13 @@ import * as MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import { actions as mapActions } from "./actions/map";
 import { actions as userActions } from "./actions/user";
+import { actions as newEntryActions } from "./actions/newEntry";
 import formatPolygons from "./helpers/formatPolygons";
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
 import Welcome from './components/welcome';
 import FeatureList from './components/featureList';
+import AddEntryModal from './components/AddEntryModal.jsx';
 
 import Auth from './Auth';
 const auth = new Auth();
@@ -48,7 +51,7 @@ const GET_POLYGONS = gql`
 }
 `;
 
-class app extends Component {
+class App extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -167,7 +170,7 @@ class app extends Component {
   }
 
   render() {
-    const { theme, map, user, actions } = this.props;
+    const { theme, map, user, actions, addModalOpen } = this.props;
     const { features, selected } = map;
 
     const styles = {
@@ -211,7 +214,7 @@ class app extends Component {
 
         if (auth.isAuthenticated()) {
             auth.getProfile((err, profile) => {
-		            actions.updateUser(profile);
+              err ? console.log(err) : actions.updateUser(profile);
           });
         }
 
@@ -297,10 +300,19 @@ class app extends Component {
                     : null
                   }
 
+                    <div style={{position: "absolute", bottom: "25px", right: "10px"}}>
+                      <Button
+                        variant="fab"
+                        color="secondary"
+                        onClick={actions.openNewEntryModal}>
+                          <AddIcon />
+                      </Button>
+                    </div>
                 </Map>
               </View>
             </View>
             <View style={{ flex: 2 }}></View>
+            <AddEntryModal open={addModalOpen} onClose={actions.closeNewEntryModal} polygons={polygons} />
           </View>
           );
         }}
@@ -308,18 +320,18 @@ class app extends Component {
   }
 }
 
-const mapStateToProps = ({ map, user }) => ({
-  map: map.toJS(),
-  user: user.toJS(),
+const mapStateToProps = ({ map, user, newEntry }) => ({
+  map: map,
+  user: user,
+  addModalOpen: newEntry.open
 });
 
 const mapDispatchToProps = (dispatch) => {
   const { updateFeatures, optimisticSaveFeature, updateSelected } = mapActions;
   const { updateUser } = userActions;
-  const actions = bindActionCreators({ updateFeatures, optimisticSaveFeature, updateSelected, updateUser }, dispatch);
+  const { openNewEntryModal, closeNewEntryModal } = newEntryActions;
+  const actions = bindActionCreators({ updateFeatures, optimisticSaveFeature, updateSelected, updateUser, openNewEntryModal, closeNewEntryModal}, dispatch);
   return { actions }
 };
 
-export const App = connect(mapStateToProps, mapDispatchToProps)(app);
-
-export default withTheme()(App);
+export default withTheme()(connect(mapStateToProps, mapDispatchToProps)(App));

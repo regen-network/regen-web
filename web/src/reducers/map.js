@@ -1,22 +1,21 @@
 import { constants } from "../actions/map";
-import { Map } from 'immutable';
 
-let initialState = Map({
+let initialState = {
   features: [],
   selected: {}
-});
+};
 
 const reducerMap = {};
 
 reducerMap[constants.UPDATE_FEATURES] = (state, { payload }) => {
     const { features } = payload;
-	  return state.merge({features});
+	  return {...state, features};
 };
 
 reducerMap[constants.OPTIMISTIC_SAVE_FEATURE] = (state, { payload }) => {
     const { id } = payload;
     let selected = {};
-    let features = state.toJS().features.map((feature) => {
+    let features = state.features.map((feature) => {
       if (feature.id === id) {
         feature.saved = true;
         selected[id] = true;
@@ -24,19 +23,16 @@ reducerMap[constants.OPTIMISTIC_SAVE_FEATURE] = (state, { payload }) => {
       return feature;
     });
 
-	  return state.merge({features, selected});
+	  return {...state, ...features, ...selected};
 };
 
 reducerMap[constants.UPDATE_SELECTED] = (state, { payload }) => {
     const { selected } = payload;
-	  return state.merge({selected});
+	  return {...state, ...selected};
 };
+
 
 export default (state = initialState, action) => {
 	const fn = reducerMap[action.type];
-	if (!fn) {
-		console.log(`${action.type} not found`)
-		return state;
-	}
-	return state.merge(fn(state, action));
+	return fn ? fn(state, action) : state;
 }

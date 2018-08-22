@@ -38,7 +38,7 @@ const mapboxAccessToken = "pk.eyJ1IjoiYWFyb25jLXJlZ2VuIiwiYSI6ImNqa2I4dW9sbjBob3
 
 const Map = ReactMapboxGl({
     accessToken: mapboxAccessToken,
-    logoPosition: 'top-left',
+    logoPosition: 'bottom-left',
     jumpTo: true,
 //    interactive: false,
     flyTo: false
@@ -74,8 +74,8 @@ const CREATE_POLYGON = gql`
   }
 `;
 
-let  zoom=[1.2];
-let center=[0, 0];
+let  zoom=[1];
+let center;
 
 class app extends Component {
   constructor(props) {
@@ -187,15 +187,12 @@ class app extends Component {
         let polygons;
         let centroid;
         let featureCollectionObj = {"type":"FeatureCollection","features":[]};
-        let coords = [];
-        let featuresArr = [];
 
         if (data && data.allPolygons) {
           polygons = formatPolygons(data.allPolygons.nodes);
           // possible save to store to trigger reload
-            // need to test for presence of geomJson!
-
-            // Handrolling a GeoJSON object for turf.centroid()
+            // TODO: need to test for presence of geomJson!
+            // Handrolling a GeoJSON FeatureCollection for turf.centroid()
             data.allPolygons.nodes.forEach(polygon => {
                 // populate the geometryObj from geomJson
                 let geomJson = JSON.parse(polygon.geomJson);
@@ -203,22 +200,16 @@ class app extends Component {
                 let geometryObj = {"type": "", "coordinates":[]}
                 geometryObj.type = geomJson.type;
                 geometryObj.coordinates = Object.values(geomJson.coordinates);
-
-                coords.push(geometryObj.coordinates);
-
                 // now complete a Feature object
                 Object.assign(featuresObj.geometry, geometryObj);
                 // ...and push it into the FeaturesCollection
                 featureCollectionObj.features.push(featuresObj);
-
-                // alternative method
-                featuresArr.push(geometryObj.coordinates);
             });
-
             console.log("featureCollectionObj=",JSON.stringify(featureCollectionObj));
-            centroid = turf.centerOfMass(featureCollectionObj);
-            // cool. getting a valid centroid back from featureCollection
-            console.log("centroid=", centroid);
+            // Seems to be no difference between the centerOfMass() and centroid()
+            //let c = turf.centerOfMass(featureCollectionObj);
+            let c = turf.centroid(featureCollectionObj);
+            centroid = c.geometry.coordinates;
         }
 
         if (auth.isAuthenticated()) {
@@ -226,10 +217,10 @@ class app extends Component {
 		            actions.updateUser(profile);
                 this.zoom = [12];
                 this.center = centroid;
-                {/* this.center = [8.9, 46.15]; Porto Ronco */}
-
           });
-        }
+          }else{
+              this.zoom = [1.2];
+          }
 
         return (
           <View style={{ flex: 1, flexDirection: 'column' }}>
@@ -281,7 +272,8 @@ class app extends Component {
                     height: '80vh'
                   }}
                   options={{
-                      logoPosition: 'top-right'
+                      // options seem to be ignored here. why?
+                      logoPosition: 'top-left'
                   }}
 
                   center={this.center}

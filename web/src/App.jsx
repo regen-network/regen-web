@@ -27,6 +27,7 @@ import gql from "graphql-tag";
 import { Query, Mutation } from "react-apollo";
 import Welcome from './components/welcome';
 import PolygonIcon from './components/polygonIcon';
+import * as turf from '@turf/turf';
 
 import { BrowserRouter as Redirect, Router, Route, Link } from "react-router-dom";
 
@@ -36,8 +37,15 @@ const auth = new Auth();
 const mapboxAccessToken = "pk.eyJ1IjoiYWFyb25jLXJlZ2VuIiwiYSI6ImNqa2I4dW9sbjBob3czcHA4amJqM2NhczAifQ.4HW-QDLUBJiHxOjDakKm2w";
 
 const Map = ReactMapboxGl({
-  accessToken: mapboxAccessToken
+    accessToken: mapboxAccessToken,
+    logoPosition: 'top-left',
+    jumpTo: true,
+//    interactive: false,
+    flyTo: false
 });
+
+const TEST_COORDS = [[[-0.24967984727266,51.520868329044],[-0.228050513774832,51.5247134268546],[-0.22599057724949,51.5219364443387],[-0.239723487410316,51.5183047501306],[-0.24967984727266,51.520868329044]],[[-0.370186133907936,51.5294125499453],[-0.337227149532964,51.5482041927455],[-0.302551551390053,51.5262086549911],[-0.342720313597738,51.5063394738109],[-0.364692969847738,51.5089037261625],[-0.360229774047411,51.5198001887005],[-0.370186133907936,51.5294125499453]],[[-0.294778540012828,51.5224811719843],[-0.293460840559931,51.5225757737119],[-0.291560312498945,51.5208098423641],[-0.295310687866191,51.5207625396905],[-0.294778540012828,51.5224811719843]]];
+
 
 const GET_POLYGONS = gql`
 {
@@ -66,12 +74,16 @@ const CREATE_POLYGON = gql`
   }
 `;
 
+let  zoom=[1.2];
+let center=[0, 0];
+
 class app extends Component {
   constructor(props) {
     super(props);
     this.state = {
       selected: {}
    };
+
   }
 
   onMenuClick = (e) => {
@@ -170,18 +182,52 @@ class app extends Component {
 
       <Query query={GET_POLYGONS}>
       {({loading, error, data}) => {
-        console.log(data);
+          console.log("data=",data);
 
         let polygons;
+        let centroid;
+        let featureCollectionObj = {"type":"FeatureCollection","features":[]};
+        let coords = [];
+        let featuresArr = [];
 
         if (data && data.allPolygons) {
           polygons = formatPolygons(data.allPolygons.nodes);
           // possible save to store to trigger reload
+            // need to test for presence of geomJson!
+
+            // Handrolling a GeoJSON object for turf.centroid()
+            data.allPolygons.nodes.forEach(polygon => {
+                // populate the geometryObj from geomJson
+                let geomJson = JSON.parse(polygon.geomJson);
+                let featuresObj = {"type":"Feature", "geometry":{}, "properties":{}};
+                let geometryObj = {"type": "", "coordinates":[]}
+                geometryObj.type = geomJson.type;
+                geometryObj.coordinates = Object.values(geomJson.coordinates);
+
+                coords.push(geometryObj.coordinates);
+
+                // now complete a Feature object
+                Object.assign(featuresObj.geometry, geometryObj);
+                // ...and push it into the FeaturesCollection
+                featureCollectionObj.features.push(featuresObj);
+
+                // alternative method
+                featuresArr.push(geometryObj.coordinates);
+            });
+
+            console.log("featureCollectionObj=",JSON.stringify(featureCollectionObj));
+            centroid = turf.centerOfMass(featureCollectionObj);
+            // cool. getting a valid centroid back from featureCollection
+            console.log("centroid=", centroid);
         }
 
         if (auth.isAuthenticated()) {
             auth.getProfile((err, profile) => {
 		            actions.updateUser(profile);
+                this.zoom = [12];
+                this.center = centroid;
+                {/* this.center = [8.9, 46.15]; Porto Ronco */}
+
           });
         }
 
@@ -234,6 +280,13 @@ class app extends Component {
                     width: '80vw',
                     height: '80vh'
                   }}
+                  options={{
+                      logoPosition: 'top-right'
+                  }}
+
+                  center={this.center}
+                  zoom={this.zoom}
+
                   onStyleLoad={this.onMapLoad}>
                   {
                     (polygons && polygons.length) ?

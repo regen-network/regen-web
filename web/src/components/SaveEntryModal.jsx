@@ -9,9 +9,6 @@ import { actions as entryActions } from "../actions/entry";
 import Modal from '@material-ui/core/Modal';
 import TextField from '@material-ui/core/TextField';
 import Select from './Select.jsx';
-// import 'react-dates/initialize';
-// import { SingleDatePicker} from 'react-dates';
-// import 'react-dates/lib/css/_datepicker.css';
 import * as moment from 'moment';
 import PolygonIcon from './polygonIcon';
 import gql from "graphql-tag";
@@ -37,17 +34,6 @@ const entryTypes = [
     {type:'Tillage'}
 ];
 
-// <SingleDatePicker
-//   date={date}
-//   onDateChange={(date) => {
-//     patchNewEntry({date});
-//     focusNewEntryDatePicker({focused: false});
-//   }}
-//   focused={dateFocused}
-//   onFocusChange={focusNewEntryDatePicker}
-//   id="addEntryModal__date-picker"
-// />
-
 const entryTypeCategories = new Map(entryTypes.map(({type,category}) => [type, category]));
 
 const isPlantRelated = (type) => entryTypeCategories.get(type) === 'PlantRelated';
@@ -60,7 +46,7 @@ const plants = [
     {name: 'Buckwheat'}
 ];
 
-class AddEntryModal extends Component {
+class SavePolygonModal extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -69,20 +55,8 @@ class AddEntryModal extends Component {
     }
 
     render() {
-        const {open, onClose, entry, patchNewEntry, theme, map, polygons} = this.props;
+        const {open, onClose, entry, patchNewEntry, theme, polygon} = this.props;
         const {type, species, date} = entry;
-        const {features, selected} = map;
-
-        let selectedPolygon = null;
-        const combinedFeatures = polygons ? polygons.concat(features) : features;
-
-        if (combinedFeatures && combinedFeatures.length) {
-          combinedFeatures.forEach((feature) => {
-            if (selected[feature.id]) {
-              selectedPolygon = feature;
-            }
-          });
-        }
 
         const styles = {
           primaryColor: {
@@ -110,17 +84,17 @@ class AddEntryModal extends Component {
                }}>
                 <div className="modal-add-entry">
                   <div style={{margin: "25px"}}>
-                      {selectedPolygon
+                      {polygon
                         ?
                         <div>
                           <Typography variant="title" style={{color: styles.accent.blue, fontFamily: styles.title.fontFamily, margin: "15px"}}>
-                            {"Report an activity or observation\nfor the selected plot"}
+                            {"Tell us more about this parcel"}
                           </Typography>
                           <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
                             <Typography variant="title" style={{color: styles.accent.blue, fontFamily: styles.title.fontFamily, fontSize: styles.title.fontSize, marginRight: "25px"}}>
-                              {selectedPolygon.name}
+                              {polygon.name}
                             </Typography>
-                            <PolygonIcon polygon={selectedPolygon}/>
+                            <PolygonIcon polygon={polygon}/>
                           </div>
                           <div style={{margin: "25px"}}>
                             <form noValidate>
@@ -167,7 +141,7 @@ class AddEntryModal extends Component {
                             ? <Mutation mutation={LOG_ENTRY}>
                                 {( logEntry, {data}) => (
                                   <Button onClick={() => {
-                                    logEntry({variables: {type: type, polygon: selectedPolygon, species: species, happenedAt: date }});
+                                    logEntry({variables: {type: type, polygon: polygon, species: species, happenedAt: date }});
                                     onClose();
                                   }}
                                     style={{
@@ -183,7 +157,7 @@ class AddEntryModal extends Component {
                         </div>
                         :
                         <Typography variant="title" style={{color: styles.accent.blue, fontFamily: styles.title.fontFamily}}>
-                          {"Please select a plot to save an activity or observation."}
+                          {"Please log in to access this feature."}
                         </Typography>
                       }
                   </div>
@@ -193,14 +167,13 @@ class AddEntryModal extends Component {
     }
 }
 
-const mapStateToProps = ({ entry, map }) => ({
+const mapStateToProps = ({ entry }) => ({
     entry: entry.entry,
-    map: map,
 });
 
 const mapDispatchToProps = (dispatch) => {
-    const { patchNewEntry } = entryActions;
-    return bindActionCreators({ patchNewEntry }, dispatch);
+    const { patchNewEntry, closeSaveEntryModal } = entryActions;
+    return bindActionCreators({ patchNewEntry, closeSaveEntryModal }, dispatch);
 };
 
-export default withTheme()(connect(mapStateToProps, mapDispatchToProps)(AddEntryModal));
+export default withTheme()(connect(mapStateToProps, mapDispatchToProps)(SavePolygonModal));

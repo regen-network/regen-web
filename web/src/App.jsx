@@ -20,7 +20,7 @@ import * as MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import { actions as mapActions } from "./actions/map";
 import { actions as userActions } from "./actions/user";
-import { actions as newEntryActions } from "./actions/newEntry";
+import { actions as entryActions } from "./actions/entry";
 import formatPolygons from "./helpers/formatPolygons";
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
@@ -260,6 +260,7 @@ class App extends Component {
                   clearSelected={this.clearSelected}
                   styles={styles}
                   optimisticSaveFeature={actions.optimisticSaveFeature}
+                  saveModalOpen={actions.openSaveEntryModal}
                   user={data ? data.getCurrentUser : 'guest'} />
               </View>
               <View style={{ flex: 8 }}>
@@ -320,17 +321,18 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = ({ map, user, newEntry }) => ({
+const mapStateToProps = ({ map, user, entry }) => ({
   map: map,
   user: user,
-  addModalOpen: newEntry.open
+  addModalOpen: entry.addModalOpen,
+  saveModalOpen: entry.saveModalOpen
 });
 
 const mapDispatchToProps = (dispatch) => {
   const { updateFeatures, optimisticSaveFeature, updateSelected } = mapActions;
   const { updateUser } = userActions;
-  const { openNewEntryModal, closeNewEntryModal } = newEntryActions;
-  const actions = bindActionCreators({ updateFeatures, optimisticSaveFeature, updateSelected, updateUser, openNewEntryModal, closeNewEntryModal}, dispatch);
+  const { openNewEntryModal, closeNewEntryModal, openSaveEntryModal, closeSaveEntryModal } = entryActions;
+  const actions = bindActionCreators({ updateFeatures, optimisticSaveFeature, updateSelected, updateUser, openNewEntryModal, closeNewEntryModal, openSaveEntryModal, closeSaveEntryModal}, dispatch);
   return { actions }
 };
 

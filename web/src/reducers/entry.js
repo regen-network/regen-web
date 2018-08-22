@@ -1,8 +1,8 @@
-import { constants } from "../actions/newEntry";
+import { constants } from "../actions/entry";
 
 const initialState = {
-    open: false,
-    datePickerFocus: false,
+    addModalOpen: false,
+    saveModalOpen: false,
     entry: {
         date: null,
         type: null,
@@ -17,15 +17,19 @@ reducerMap[constants.PATCH_NEW_ENTRY] = ({entry, ...state}, { attrs }) => {
 };
 
 reducerMap[constants.OPEN_NEW_ENTRY_MODAL] = (state, _) => {
-    return {...state, open: true};
+    return {...state, addModalOpen: true};
 };
 
 reducerMap[constants.CLOSE_NEW_ENTRY_MODAL] = (state, _) => {
-    return {...state, open: false};
+    return {...state, addModalOpen: false};
 };
 
-reducerMap[constants.NEW_ENTRY_FOCUS_DATE_PICKER] = (state, { focused }) => {
-    return {...state, datePickerFocus: focused};
+reducerMap[constants.OPEN_SAVE_ENTRY_MODAL] = (state, _) => {
+    return {...state, saveModalOpen: true};
+};
+
+reducerMap[constants.CLOSE_SAVE_ENTRY_MODAL] = (state, _) => {
+    return {...state, saveModalOpen: false};
 };
 
 export default (state = initialState, action) => {

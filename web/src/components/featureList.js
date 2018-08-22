@@ -8,6 +8,7 @@ import { withTheme } from '@material-ui/core/styles';
 import gql from "graphql-tag";
 import { Mutation } from "react-apollo";
 import PolygonIcon from './polygonIcon';
+import SaveEntryModal from './SaveEntryModal';
 
 const CREATE_POLYGON = gql`
    mutation CreatePolygon($name: String!,  $geojson: JSON!, $owner: String!) {
@@ -22,7 +23,7 @@ const CREATE_POLYGON = gql`
   }
 `;
 
-const FeatureList = withTheme()(({ features, selected, polygons, toggleSelect, clearSelected, theme, user, styles, optimisticSaveFeature }) => {
+const FeatureList = withTheme()(({ features, selected, polygons, toggleSelect, clearSelected, theme, user, styles, optimisticSaveFeature, saveModalOpen }) => {
 
   // remove optimistic saved feature (if any) from features
   let unsavedFeatures = [];
@@ -48,6 +49,7 @@ const FeatureList = withTheme()(({ features, selected, polygons, toggleSelect, c
               styles={styles}
               optimisticSaveFeature={optimisticSaveFeature}
               clearSelected={clearSelected}
+              saveModalOpen={saveModalOpen}
               toggleSelectThis={() => {
                 toggleSelect(feature.id);
               }}
@@ -87,7 +89,7 @@ const SavedFeatureItem = ({ item, selected, toggleSelectThis, theme, styles }) =
   );
 }
 
-const FeatureListItem = ({ item, selected, toggleSelectThis, theme, user, styles, optimisticSaveFeature, clearSelected }) => {
+const FeatureListItem = ({ item, selected, toggleSelectThis, theme, user, styles, optimisticSaveFeature, clearSelected, saveModalOpen }) => {
   const style = selected ? {backgroundColor: theme.palette.primary.main} : {};
 
   return (
@@ -101,12 +103,14 @@ const FeatureListItem = ({ item, selected, toggleSelectThis, theme, user, styles
             <Button style={{color: styles.primaryColor.color}}
               onClick={(e) => {
                 e.stopPropagation();
-                createPolygonByJson({variables: {name: "foobar" , geojson: item.geometry, owner: user }});
-                optimisticSaveFeature(item.id);
-                clearSelected(item.id); // delete from map
+                saveModalOpen();
+                // createPolygonByJson({variables: {name: "foobar" , geojson: item.geometry, owner: user }});
+                // optimisticSaveFeature(item.id);
+                // clearSelected(item.id); // delete from map
               }}>
               Save
             </Button>
+            <SaveEntryModal open={saveModalOpen} onClose={() => {}} polygon={item} />
           </ListItem>
         )
       }

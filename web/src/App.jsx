@@ -27,6 +27,7 @@ import { Query } from "react-apollo";
 import Welcome from './components/welcome';
 import FeatureList from './components/featureList';
 import AddEntryModal from './components/AddEntryModal.jsx';
+import SaveEntryModal from './components/SaveEntryModal.jsx';
 
 import Auth from './Auth';
 const auth = new Auth();
@@ -204,8 +205,7 @@ class App extends Component {
           features.forEach((feature) => {
             if (feature.saved) {
               let optimisticSavedFeature = Object.assign({}, feature, {
-                coordinates: feature.geometry.coordinates,
-                name: "New Saved Field"
+                coordinates: feature.geometry.coordinates
               });
               polygons.unshift(optimisticSavedFeature);
             }
@@ -245,7 +245,11 @@ class App extends Component {
 		                      <MenuItem onClick={this.onLogout}>Sign Out</MenuItem>
 		                    </Menu>
 		                   </div>
-		                 : <div><Button onClick={() => auth.login()}>Sign In</Button></div>
+		                 : <Button onClick={() => auth.login()}
+                         style={{
+                           border: "2px solid #FFF",
+                           fontFamily: styles.fontFamily,
+                           color: styles.primaryColor.color}}>Sign In</Button>
 		               }
 		            </div>
               </Toolbar>
@@ -257,13 +261,8 @@ class App extends Component {
                   selected={selected}
                   polygons={polygons}
                   toggleSelect={this.drawSelected}
-                  clearSelected={this.clearSelected}
                   styles={styles}
-                  optimisticSaveFeature={actions.optimisticSaveFeature}
-                  saveModalOpen={saveModalOpen}
-                  openSaveEntryModal={actions.openSaveEntryModal}
-                  closeSaveEntryModal={actions.closeSaveEntryModal}
-                  user={data ? data.getCurrentUser : 'guest'} />
+                  openSaveEntryModal={actions.openSaveEntryModal} />
               </View>
               <View style={{ flex: 8 }}>
                 <Map
@@ -316,6 +315,7 @@ class App extends Component {
             </View>
             <View style={{ flex: 2 }}></View>
             <AddEntryModal open={addModalOpen} onClose={actions.closeNewEntryModal} polygons={polygons} />
+            <SaveEntryModal open={saveModalOpen} onClose={actions.closeSaveEntryModal} user={data ? data.getCurrentUser : 'guest'} clearSelected={this.clearSelected} />
           </View>
           );
         }}

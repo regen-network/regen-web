@@ -5,25 +5,9 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { withTheme } from '@material-ui/core/styles';
-import gql from "graphql-tag";
-import { Mutation } from "react-apollo";
 import PolygonIcon from './polygonIcon';
-import SaveEntryModal from './SaveEntryModal';
 
-const CREATE_POLYGON = gql`
-   mutation CreatePolygon($name: String!,  $geojson: JSON!, $owner: String!) {
-    createPolygonByJson(input: {name: $name, geojson: $geojson, owner: $owner}) {
-      polygon{
-        id
-        name
-        geomJson
-        owner
-      }
-    }
-  }
-`;
-
-const FeatureList = withTheme()(({ features, selected, polygons, toggleSelect, clearSelected, theme, user, styles, optimisticSaveFeature, saveModalOpen, openSaveEntryModal, closeSaveEntryModal }) => {
+const FeatureList = withTheme()(({ features, selected, polygons, toggleSelect, theme, styles, openSaveEntryModal }) => {
 
   // remove optimistic saved feature (if any) from features
   let unsavedFeatures = [];
@@ -46,20 +30,17 @@ const FeatureList = withTheme()(({ features, selected, polygons, toggleSelect, c
               theme={theme}
               selected={selected[feature.id]}
               key={feature.id}
-              user={user}
               styles={styles}
-              optimisticSaveFeature={optimisticSaveFeature}
-              clearSelected={clearSelected}
-              saveModalOpen={saveModalOpen}
               openSaveEntryModal={openSaveEntryModal}
-              closeSaveEntryModal={closeSaveEntryModal}
               toggleSelectThis={() => {
                 toggleSelect(feature.id);
               }}
             />
           )}
         </List>
-        : ""
+        : <Typography variant="subheading" style={{fontFamily: styles.title.fontFamily, fontSize: "16px", margin: "25px 25px 0"}}>
+            {"Add a new parcel by drawing a shape outlining its boundaries on the map."}
+          </Typography>
       }
       {polygons && polygons.length ?
         <List>
@@ -92,32 +73,27 @@ const SavedFeatureItem = ({ key, item, selected, toggleSelectThis, theme, styles
   );
 }
 
-const FeatureListItem = ({ key, item, selected, toggleSelectThis, theme, user, styles, optimisticSaveFeature, clearSelected, saveModalOpen, openSaveEntryModal, closeSaveEntryModal }) => {
+const FeatureListItem = ({ key, item, selected, toggleSelectThis, theme, styles, openSaveEntryModal }) => {
   const style = selected ? {backgroundColor: theme.palette.primary.main} : {};
 
   return (
-    <Mutation mutation={CREATE_POLYGON}>
-      {( createPolygonByJson, {data}) => (
-	       <ListItem dense button style={style} key={key} onClick={toggleSelectThis}>
-            <PolygonIcon polygon={item.geometry}/>
-            <ListItemText
-              disableTypography
-              primary={<Typography style={{fontSize: styles.fontSize}}>{"Unsaved Plot"}</Typography>} />
-            <Button style={{color: styles.primaryColor.color}}
-              onClick={(e) => {
-                e.stopPropagation();
-                openSaveEntryModal();
-                // createPolygonByJson({variables: {name: "foobar" , geojson: item.geometry, owner: user }});
-                // optimisticSaveFeature(item.id);
-                // clearSelected(item.id); // delete from map
-              }}>
-              Save
-            </Button>
-            <SaveEntryModal open={saveModalOpen} onClose={closeSaveEntryModal} polygon={item} />
-          </ListItem>
-        )
-      }
-    </Mutation>
+     <ListItem dense button style={style} key={key} onClick={toggleSelectThis}>
+        <PolygonIcon polygon={item.geometry}/>
+        <ListItemText
+          disableTypography
+          primary={<Typography style={{fontSize: styles.fontSize}}>{"Unsaved Plot"}</Typography>} />
+        <Button
+          style={{
+            backgroundColor: styles.primaryColor.backgroundColor,
+            fontFamily: styles.fontFamily,
+            color: styles.primaryColor.color}}
+          onClick={(e) => {
+            e.stopPropagation();
+            openSaveEntryModal(item);
+          }}>
+          Save
+        </Button>
+      </ListItem>
   );
 }
 

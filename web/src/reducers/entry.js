@@ -7,7 +7,8 @@ const initialState = {
         date: null,
         type: null,
         species: null
-    }
+    },
+    currentFeature: null
 }
 
 const reducerMap = {};
@@ -24,8 +25,9 @@ reducerMap[constants.CLOSE_NEW_ENTRY_MODAL] = (state, _) => {
     return {...state, addModalOpen: false};
 };
 
-reducerMap[constants.OPEN_SAVE_ENTRY_MODAL] = (state, _) => {
-    return {...state, saveModalOpen: true};
+reducerMap[constants.OPEN_SAVE_ENTRY_MODAL] = (state, { payload }) => {
+    const { feature } = payload;
+    return {...state, saveModalOpen: true, currentFeature: feature};
 };
 
 reducerMap[constants.CLOSE_SAVE_ENTRY_MODAL] = (state, _) => {

@@ -165,17 +165,20 @@ class AddEntryModal extends Component {
                           </div>
                           { this.state.completed
                             ? <Mutation mutation={LOG_ENTRY}>
-                                {( logEntry, {data}) => (
-                                  <Button onClick={() => {
-                                    logEntry({variables: {type: type, polygon: selectedPolygon, species: species, happenedAt: date }});
-                                    onClose();
-                                  }}
-                                    style={{
-                                      margin: "25px",
-                                      backgroundColor: styles.accent.blue,
-                                      fontFamily: styles.fontFamily,
-                                      color: styles.primaryColor.color}}>
-                                    Submit</Button>
+                                {( logEntry, {loading, error}) => (
+                                  <div>
+                                    {error ? <p style={{color: styles.accent.red}}>"There was an error saving your update. Please try again."</p> : null}
+                                    <Button onClick={() => {
+                                      logEntry({variables: {type: type, polygon: selectedPolygon, species: species, happenedAt: date }});
+                                      onClose();
+                                    }}
+                                      style={{
+                                        margin: "25px",
+                                        backgroundColor: styles.accent.blue,
+                                        fontFamily: styles.fontFamily,
+                                        color: styles.primaryColor.color}}>
+                                      Submit</Button>
+                                  </div>
                                 )}
                               </Mutation>
                             : null

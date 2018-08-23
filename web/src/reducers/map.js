@@ -13,22 +13,23 @@ reducerMap[constants.UPDATE_FEATURES] = (state, { payload }) => {
 };
 
 reducerMap[constants.OPTIMISTIC_SAVE_FEATURE] = (state, { payload }) => {
-    const { id } = payload;
+    const { id, name } = payload;
     let selected = {};
     let features = state.features.map((feature) => {
       if (feature.id === id) {
         feature.saved = true;
+        feature.name = name;
         selected[id] = true;
       }
       return feature;
     });
 
-	  return {...state, ...features, ...selected};
+	  return {...state, features, selected};
 };
 
 reducerMap[constants.UPDATE_SELECTED] = (state, { payload }) => {
     const { selected } = payload;
-	  return {...state, ...selected};
+	  return {...state, selected};
 };
 
 

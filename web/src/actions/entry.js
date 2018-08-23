@@ -8,7 +8,7 @@ const CLOSE_NEW_ENTRY_MODAL= "CLOSE_NEW_ENTRY_MODAL";
 const closeNewEntryModal = () => ({type: CLOSE_NEW_ENTRY_MODAL});
 
 const OPEN_SAVE_ENTRY_MODAL= "OPEN_SAVE_ENTRY_MODAL";
-const openSaveEntryModal = () => ({type: OPEN_SAVE_ENTRY_MODAL});
+const openSaveEntryModal = (feature) => ({type: OPEN_SAVE_ENTRY_MODAL, payload: { feature }});
 
 const CLOSE_SAVE_ENTRY_MODAL= "CLOSE_SAVE_ENTRY_MODAL";
 const closeSaveEntryModal = () => ({type: CLOSE_SAVE_ENTRY_MODAL});

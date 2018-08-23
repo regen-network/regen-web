@@ -180,54 +180,24 @@ class app extends Component {
 
       <Query query={GET_POLYGONS}>
       {({loading, error, data}) => {
-          let polygons;
-          let centroid;
-          let featureCollectionObj = {"type":"FeatureCollection","features":[]};
+        const nodes = data && data.allPolygons && data.allPolygons.nodes;
+        const polygons = nodes && nodes.map(p => Object.assign({}, JSON.parse(p.geomJson), {id: p.id, name: p.name}));
+        const bbox = polygons ?
+              turf.bbox({
+                type: 'FeatureCollection',
+                features: polygons.map(p => ({
+                  type: 'Feature',
+                  geometry: p
+                }))
+              }) : [0,0,0,0];
 
-          if (data && data.allPolygons) {
-              if (data.allPolygons.nodes) {
-                  polygons = formatPolygons(data.allPolygons.nodes);
-                  // possible save to store to trigger reload
-                  // TODO: need to test for presence of geomJson!
-                  // Handrolling a GeoJSON FeatureCollection for turf.centroid()
-                  data.allPolygons.nodes.forEach(polygon => {
-                      // populate the geometryObj from geomJson
-                      let geomJson = JSON.parse(polygon.geomJson);
-                      let featuresObj = {"type":"Feature", "geometry":{}, "properties":{}};
-                      let geometryObj = {"type": "", "coordinates":[]}
-                      geometryObj.type = geomJson.type;
-                      geometryObj.coordinates = Object.values(geomJson.coordinates);
-                      // now complete a Feature object
-                      Object.assign(featuresObj.geometry, geometryObj);
-                      // ...and push it into the FeaturesCollection
-                      featureCollectionObj.features.push(featuresObj);
-                  });
-                  console.log("featureCollectionObj=",JSON.stringify(featureCollectionObj));
-                  // Seems to be no difference between the centerOfMass() and centroid()
-                  //let c = turf.centerOfMass(featureCollectionObj);
-                  if (featureCollectionObj.features.Feature) {
-                      centroid = turf.centroid(featureCollectionObj);
-                      center = centroid.geometry.coordinates;
-                  }else{
-                      zoom = [1];
-                  }
-              }
-        }
+        console.log("bbox",bbox);
 
         if (auth.isAuthenticated() && data) {
-            auth.getProfile((err, profile) => {
-		            actions.updateUser(profile);
+          auth.getProfile((err, profile) => {
+		        actions.updateUser(profile);
           });
-            if(data.allPolygons) {
-                if(data.allPolygons.nodes.length > 0) {
-                  this.zoom = [12];
-                  this.center = center;
-                }
-            }
-          }else{
-              this.zoom = [1];
-//              this.center = [5,5];
-          }
+        }
 
         return (
           <View style={{ flex: 1, flexDirection: 'column' }}>
@@ -283,8 +253,10 @@ class app extends Component {
                       logoPosition: 'top-left'
                   }}
 
-                  center={this.center}
-                  zoom={this.zoom}
+                  /* center={this.center} */
+                  /* zoom={this.zoom} */
+                  fitBounds={bbox && [[bbox[0], bbox[1]], [bbox[2], bbox[3]]]}
+
 
                   onStyleLoad={this.onMapLoad}>
                   {

@@ -23,7 +23,7 @@ const CREATE_POLYGON = gql`
   }
 `;
 
-const FeatureList = withTheme()(({ features, selected, polygons, toggleSelect, clearSelected, theme, user, styles, optimisticSaveFeature, saveModalOpen }) => {
+const FeatureList = withTheme()(({ features, selected, polygons, toggleSelect, clearSelected, theme, user, styles, optimisticSaveFeature, saveModalOpen, openSaveEntryModal, closeSaveEntryModal }) => {
 
   // remove optimistic saved feature (if any) from features
   let unsavedFeatures = [];
@@ -45,11 +45,14 @@ const FeatureList = withTheme()(({ features, selected, polygons, toggleSelect, c
               item={feature}
               theme={theme}
               selected={selected[feature.id]}
+              key={feature.id}
               user={user}
               styles={styles}
               optimisticSaveFeature={optimisticSaveFeature}
               clearSelected={clearSelected}
               saveModalOpen={saveModalOpen}
+              openSaveEntryModal={openSaveEntryModal}
+              closeSaveEntryModal={closeSaveEntryModal}
               toggleSelectThis={() => {
                 toggleSelect(feature.id);
               }}
@@ -64,7 +67,7 @@ const FeatureList = withTheme()(({ features, selected, polygons, toggleSelect, c
             {"Saved Plots"}
           </Typography>
           {polygons && polygons.map((polygon) =>
-            <SavedFeatureItem item={polygon} theme={theme} selected={selected[polygon.id]} styles={styles}
+            <SavedFeatureItem key={polygon.id} item={polygon} theme={theme} selected={selected[polygon.id]} styles={styles}
               toggleSelectThis={() => {
                 toggleSelect(polygon.id);
               }}
@@ -77,10 +80,10 @@ const FeatureList = withTheme()(({ features, selected, polygons, toggleSelect, c
   );
 });
 
-const SavedFeatureItem = ({ item, selected, toggleSelectThis, theme, styles }) => {
+const SavedFeatureItem = ({ key, item, selected, toggleSelectThis, theme, styles }) => {
   const style = selected ? {backgroundColor: theme.palette.primary.main} : {};
   return (
-	  <ListItem dense button style={style} key={item.id} onClick={toggleSelectThis}>
+	  <ListItem dense button style={style} key={key} onClick={toggleSelectThis}>
       <PolygonIcon polygon={item}/>
       <ListItemText
         disableTypography
@@ -89,13 +92,13 @@ const SavedFeatureItem = ({ item, selected, toggleSelectThis, theme, styles }) =
   );
 }
 
-const FeatureListItem = ({ item, selected, toggleSelectThis, theme, user, styles, optimisticSaveFeature, clearSelected, saveModalOpen }) => {
+const FeatureListItem = ({ key, item, selected, toggleSelectThis, theme, user, styles, optimisticSaveFeature, clearSelected, saveModalOpen, openSaveEntryModal, closeSaveEntryModal }) => {
   const style = selected ? {backgroundColor: theme.palette.primary.main} : {};
 
   return (
     <Mutation mutation={CREATE_POLYGON}>
       {( createPolygonByJson, {data}) => (
-	       <ListItem dense button style={style} key={item.id} onClick={toggleSelectThis}>
+	       <ListItem dense button style={style} key={key} onClick={toggleSelectThis}>
             <PolygonIcon polygon={item.geometry}/>
             <ListItemText
               disableTypography
@@ -103,14 +106,14 @@ const FeatureListItem = ({ item, selected, toggleSelectThis, theme, user, styles
             <Button style={{color: styles.primaryColor.color}}
               onClick={(e) => {
                 e.stopPropagation();
-                saveModalOpen();
+                openSaveEntryModal();
                 // createPolygonByJson({variables: {name: "foobar" , geojson: item.geometry, owner: user }});
                 // optimisticSaveFeature(item.id);
                 // clearSelected(item.id); // delete from map
               }}>
               Save
             </Button>
-            <SaveEntryModal open={saveModalOpen} onClose={() => {}} polygon={item} />
+            <SaveEntryModal open={saveModalOpen} onClose={closeSaveEntryModal} polygon={item} />
           </ListItem>
         )
       }

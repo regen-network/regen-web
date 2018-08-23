@@ -13,6 +13,8 @@ import * as moment from 'moment';
 import PolygonIcon from './polygonIcon';
 import gql from "graphql-tag";
 import { Mutation } from "react-apollo";
+import Auth from '../Auth';
+const auth = new Auth();
 
 const LOG_ENTRY = gql`
    mutation LogEntry($type: String!, $comment: String, $polygon: JSON!, $point: JSON, $species: String, $unit: String, $numericValue: BigFloat, $happenedAt: Datetime) {
@@ -55,7 +57,7 @@ class SavePolygonModal extends Component {
     }
 
     render() {
-        const {open, onClose, entry, patchNewEntry, theme, polygon} = this.props;
+        const {open, onClose, entry, patchNewEntry, theme, polygon, authenticated} = this.props;
         const {type, species, date} = entry;
 
         const styles = {
@@ -84,7 +86,7 @@ class SavePolygonModal extends Component {
                }}>
                 <div className="modal-add-entry">
                   <div style={{margin: "25px"}}>
-                      {polygon
+                      {polygon && authenticated
                         ?
                         <div>
                           <Typography variant="title" style={{color: styles.accent.blue, fontFamily: styles.title.fontFamily, margin: "15px"}}>
@@ -141,7 +143,7 @@ class SavePolygonModal extends Component {
                             ? <Mutation mutation={LOG_ENTRY}>
                                 {( logEntry, {data}) => (
                                   <Button onClick={() => {
-                                    logEntry({variables: {type: type, polygon: polygon, species: species, happenedAt: date }});
+                                    // logEntry({variables: {type: type, polygon: polygon, species: species, happenedAt: date }});
                                     onClose();
                                   }}
                                     style={{
@@ -158,6 +160,7 @@ class SavePolygonModal extends Component {
                         :
                         <Typography variant="title" style={{color: styles.accent.blue, fontFamily: styles.title.fontFamily}}>
                           {"Please log in to access this feature."}
+                          <Button onClick={() => auth.login()}>Sign In</Button>
                         </Typography>
                       }
                   </div>
@@ -167,8 +170,9 @@ class SavePolygonModal extends Component {
     }
 }
 
-const mapStateToProps = ({ entry }) => ({
+const mapStateToProps = ({ entry, user }) => ({
     entry: entry.entry,
+    authenticated: user.authenticated
 });
 
 const mapDispatchToProps = (dispatch) => {

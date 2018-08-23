@@ -170,7 +170,7 @@ class App extends Component {
   }
 
   render() {
-    const { theme, map, user, actions, addModalOpen } = this.props;
+    const { theme, map, user, actions, addModalOpen, saveModalOpen } = this.props;
     const { features, selected } = map;
 
     const styles = {
@@ -245,7 +245,7 @@ class App extends Component {
 		                      <MenuItem onClick={this.onLogout}>Sign Out</MenuItem>
 		                    </Menu>
 		                   </div>
-		                 : <div> <Button onClick={() => auth.login()}>Sign In</Button> </div>
+		                 : <div><Button onClick={() => auth.login()}>Sign In</Button></div>
 		               }
 		            </div>
               </Toolbar>
@@ -260,7 +260,9 @@ class App extends Component {
                   clearSelected={this.clearSelected}
                   styles={styles}
                   optimisticSaveFeature={actions.optimisticSaveFeature}
-                  saveModalOpen={actions.openSaveEntryModal}
+                  saveModalOpen={saveModalOpen}
+                  openSaveEntryModal={actions.openSaveEntryModal}
+                  closeSaveEntryModal={actions.closeSaveEntryModal}
                   user={data ? data.getCurrentUser : 'guest'} />
               </View>
               <View style={{ flex: 8 }}>

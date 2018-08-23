@@ -44,6 +44,7 @@ const Map = ReactMapboxGl({
     flyTo: false
 });
 
+
 const GET_POLYGONS = gql`
 {
   getCurrentUser
@@ -179,44 +180,53 @@ class app extends Component {
 
       <Query query={GET_POLYGONS}>
       {({loading, error, data}) => {
-          console.log("data=",data);
+          let polygons;
+          let centroid;
+          let featureCollectionObj = {"type":"FeatureCollection","features":[]};
 
-        let polygons;
-        let centroid;
-        let featureCollectionObj = {"type":"FeatureCollection","features":[]};
-
-        if (data && data.allPolygons) {
-          polygons = formatPolygons(data.allPolygons.nodes);
-          // possible save to store to trigger reload
-            // TODO: need to test for presence of geomJson!
-            // Handrolling a GeoJSON FeatureCollection for turf.centroid()
-            data.allPolygons.nodes.forEach(polygon => {
-                // populate the geometryObj from geomJson
-                let geomJson = JSON.parse(polygon.geomJson);
-                let featuresObj = {"type":"Feature", "geometry":{}, "properties":{}};
-                let geometryObj = {"type": "", "coordinates":[]}
-                geometryObj.type = geomJson.type;
-                geometryObj.coordinates = Object.values(geomJson.coordinates);
-                // now complete a Feature object
-                Object.assign(featuresObj.geometry, geometryObj);
-                // ...and push it into the FeaturesCollection
-                featureCollectionObj.features.push(featuresObj);
-            });
-            console.log("featureCollectionObj=",JSON.stringify(featureCollectionObj));
-            // Seems to be no difference between the centerOfMass() and centroid()
-            //let c = turf.centerOfMass(featureCollectionObj);
-            let c = turf.centroid(featureCollectionObj);
-            centroid = c.geometry.coordinates;
+          if (data && data.allPolygons) {
+              if (data.allPolygons.nodes) {
+                  polygons = formatPolygons(data.allPolygons.nodes);
+                  // possible save to store to trigger reload
+                  // TODO: need to test for presence of geomJson!
+                  // Handrolling a GeoJSON FeatureCollection for turf.centroid()
+                  data.allPolygons.nodes.forEach(polygon => {
+                      // populate the geometryObj from geomJson
+                      let geomJson = JSON.parse(polygon.geomJson);
+                      let featuresObj = {"type":"Feature", "geometry":{}, "properties":{}};
+                      let geometryObj = {"type": "", "coordinates":[]}
+                      geometryObj.type = geomJson.type;
+                      geometryObj.coordinates = Object.values(geomJson.coordinates);
+                      // now complete a Feature object
+                      Object.assign(featuresObj.geometry, geometryObj);
+                      // ...and push it into the FeaturesCollection
+                      featureCollectionObj.features.push(featuresObj);
+                  });
+                  console.log("featureCollectionObj=",JSON.stringify(featureCollectionObj));
+                  // Seems to be no difference between the centerOfMass() and centroid()
+                  //let c = turf.centerOfMass(featureCollectionObj);
+                  if (featureCollectionObj.features.Feature) {
+                      centroid = turf.centroid(featureCollectionObj);
+                      center = centroid.geometry.coordinates;
+                  }else{
+                      zoom = [1];
+                  }
+              }
         }
 
-        if (auth.isAuthenticated()) {
+        if (auth.isAuthenticated() && data) {
             auth.getProfile((err, profile) => {
 		            actions.updateUser(profile);
-                this.zoom = [12];
-                this.center = centroid;
           });
+            if(data.allPolygons) {
+                if(data.allPolygons.nodes.length > 0) {
+                  this.zoom = [12];
+                  this.center = center;
+                }
+            }
           }else{
-              this.zoom = [1.2];
+              this.zoom = [1];
+//              this.center = [5,5];
           }
 
         return (

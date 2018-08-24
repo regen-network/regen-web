@@ -1,10 +1,11 @@
 import { constants } from "../actions/entry";
+import * as moment from 'moment';
 
 const initialState = {
     addModalOpen: false,
     saveModalOpen: false,
     entry: {
-        date: null,
+        date: moment(),
         type: null,
         species: null
     },

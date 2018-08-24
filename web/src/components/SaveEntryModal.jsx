@@ -17,6 +17,8 @@ import * as moment from 'moment';
 import PolygonIcon from './polygonIcon';
 import gql from "graphql-tag";
 import { Mutation } from "react-apollo";
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 import Auth from '../Auth';
 const auth = new Auth();
 
@@ -95,6 +97,8 @@ class SavePolygonModal extends Component {
         const { currentFeature } = entry;
         const { type, species, date } = entry.entry;
 
+        console.log("DATE", date);
+
         const now = moment().format();
 
         const styles = {
@@ -117,10 +121,7 @@ class SavePolygonModal extends Component {
 
         return (
             <Modal open={open}
-               onClose={onClose}
-               onRendered={() => {
-                   patchNewEntry({date: now});
-               }}>
+               onClose={onClose}>
                 <div className="modal-add-entry">
                   <div style={{margin: "25px"}}>
                       { authenticated
@@ -254,20 +255,11 @@ class SavePolygonModal extends Component {
                             <Typography variant="subheading" style={{fontFamily: styles.title.fontFamily, margin: "15px"}}>
                               {"What was the last activity that occured in this parcel?"}
                             </Typography>
-                            <TextField
-                              id="date"
-                              label="Date of Activity"
-                              type="date"
-                              defaultValue={moment().format("YYYY-MM-DD")}
-                              className={""}
-                              InputLabelProps={{
-                                shrink: true,
-                              }}
-                              onChange={(e) => {
-                                const happened_at = moment(e.target.value).format();
-                                patchNewEntry({date: happened_at});
-                              }}
-                            />
+                            <DatePicker
+                                selected={date}
+                                onChange={(date) => {
+                                  patchNewEntry({date});
+                                }}/>
                             <Select
                                 options={entryTypes.map(({type}) => {return {value: type, label: type}})}
                                 value={{value: type, label: type}}

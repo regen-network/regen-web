@@ -61,10 +61,10 @@ const FeatureList = withTheme()(({ features, selected, polygons, toggleSelect, t
   );
 });
 
-const SavedFeatureItem = ({ key, item, selected, toggleSelectThis, theme, styles }) => {
+const SavedFeatureItem = ({ item, selected, toggleSelectThis, theme, styles }) => {
   const style = selected ? {backgroundColor: theme.palette.primary.main} : {};
   return (
-	  <ListItem dense button style={style} key={key} onClick={toggleSelectThis}>
+	  <ListItem dense button style={style} onClick={toggleSelectThis}>
       <PolygonIcon polygon={item}/>
       <ListItemText
         disableTypography

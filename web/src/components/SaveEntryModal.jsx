@@ -12,13 +12,11 @@ import TextField from '@material-ui/core/TextField';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
-import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import Select from './Select.jsx';
 import * as moment from 'moment';
 import PolygonIcon from './polygonIcon';
 import gql from "graphql-tag";
-import { compose, Mutation } from "react-apollo";
+import { Mutation } from "react-apollo";
 import Auth from '../Auth';
 const auth = new Auth();
 
@@ -73,6 +71,7 @@ class SavePolygonModal extends Component {
         this.state = {
           completed: false,
           name: "",
+          submittedName: false,
           hasTrees: false,
           hasWatercourse: false,
           hasWetland: false,
@@ -83,18 +82,20 @@ class SavePolygonModal extends Component {
 
     handleNameChange = name => event => {
       this.setState({
-        [name]: event.target.value,
+        [name]: event.target.value
       });
     };
 
-    handleFeatureChange = name => event => {
-      this.setState({ [name]: event.target.checked });
+    handleFeatureChange = (e, name) => {
+      this.setState({ [name]: e.target.checked });
     };
 
     render() {
-        const {open, onClose, entry, patchNewEntry, theme, authenticated, map, user, clearSelected, optimisticSaveFeature} = this.props;
+        const {open, onClose, entry, patchNewEntry, theme, authenticated, user, clearSelected, optimisticSaveFeature} = this.props;
         const { currentFeature } = entry;
         const { type, species, date } = entry.entry;
+
+        const now = moment().format();
 
         const styles = {
           primaryColor: {
@@ -118,7 +119,6 @@ class SavePolygonModal extends Component {
             <Modal open={open}
                onClose={onClose}
                onRendered={() => {
-                   const now = moment().format();
                    patchNewEntry({date: now});
                }}>
                 <div className="modal-add-entry">
@@ -144,18 +144,27 @@ class SavePolygonModal extends Component {
                             <Mutation mutation={CREATE_POLYGON}>
                                 {(createPolygonByJson, {loading, error}) => (
                                   <div>
-                                    {error ? <p style={{color: styles.accent.red}}>"There was an error saving your parcel. Please try again."</p> : null}
-                                    <Button onClick={() => {
-                                      createPolygonByJson({variables: {name: this.state.name, geojson: currentFeature.geometry, owner: user }});
-                                      optimisticSaveFeature(currentFeature.id, this.state.name);
-                                      clearSelected(currentFeature.id); // delete from map
-                                    }}
-                                      style={{
-                                        margin: "25px",
-                                        backgroundColor: styles.accent.blue,
-                                        fontFamily: styles.fontFamily,
-                                        color: styles.primaryColor.color}}>
-                                      Save Parcel</Button>
+                                    { this.state.submittedName ?
+                                      <Typography variant="subheading" style={{fontFamily: styles.title.fontFamily, margin: "15px"}}>
+                                        {"Saved!"}
+                                      </Typography>
+                                    :
+                                      <div>
+                                        {error ? <p style={{color: styles.accent.red}}>"There was an error saving your parcel. Please try again."</p> : null}
+                                        <Button onClick={() => {
+                                          createPolygonByJson({variables: {name: this.state.name, geojson: currentFeature.geometry, owner: user }});
+                                          optimisticSaveFeature(currentFeature.id, this.state.name);
+                                          clearSelected(currentFeature.id); // delete from map
+                                          this.setState({submittedName: true});
+                                        }}
+                                          style={{
+                                            margin: "25px",
+                                            backgroundColor: styles.accent.blue,
+                                            fontFamily: styles.fontFamily,
+                                            color: styles.primaryColor.color}}>
+                                          Save Parcel</Button>
+                                      </div>
+                                    }
                                   </div>
                                 )}
                               </Mutation>
@@ -164,63 +173,82 @@ class SavePolygonModal extends Component {
                             <Typography variant="subheading" style={{fontFamily: styles.title.fontFamily, margin: "15px"}}>
                               {"Please choose if any of these features are present within the parcel limits:"}
                             </Typography>
-                            <FormGroup row>
-                              <FormControlLabel
-                                control={
-                                  <Checkbox
-                                    checked={this.state.hasTrees}
-                                    onChange={this.handleFeatureChange('hasTrees')}
-                                    value="hasTrees"
-                                    color="primary"
-                                  />
-                                }
-                                label="Area with trees"
-                              />
-                              <FormControlLabel
-                                control={
-                                  <Checkbox
-                                    checked={this.state.hasWatercourse}
-                                    onChange={this.handleFeatureChange('hasWatercourse')}
-                                    value="hasWatercourse"
-                                    color="primary"
-                                  />
-                                }
-                                label="Watercourse"
-                              />
-                              <FormControlLabel
-                                control={
-                                  <Checkbox
-                                    checked={this.state.hasWetland}
-                                    onChange={this.handleFeatureChange('hasWetland')}
-                                    value="hasWetland"
-                                    color="primary"
-                                  />
-                                }
-                                label="Wetland"
-                              />
-                              <FormControlLabel
-                                control={
-                                  <Checkbox
-                                    checked={this.state.hasNativeBuffer}
-                                    onChange={this.handleFeatureChange('hasNativeBuffer')}
-                                    value="hasNativeBuffer"
-                                    color="primary"
-                                  />
-                                }
-                                label="Native or wild vegetation buffer strip"
-                              />
-                              <FormControlLabel
-                                control={
-                                  <Checkbox
-                                    checked={this.state.hasWildlifeCorridor}
-                                    onChange={this.handleFeatureChange('hasWildlifeCorridor')}
-                                    value="hasWildlifeCorridor"
-                                    color="primary"
-                                  />
-                                }
-                                label="Other kind of corridor for wildlife"
-                              />
-                            </FormGroup>
+                            <Mutation mutation={LOG_ENTRY}>
+                            {(logEntry, {loading, error}) => (
+                              <FormGroup row>
+                                <FormControlLabel
+                                  control={
+                                    <Checkbox
+                                      checked={this.state.hasTrees}
+                                      onChange={(e) => {
+                                        this.handleFeatureChange(e, 'hasTrees');
+                                        logEntry({variables: {type: 'hasTrees', polygon: currentFeature.geometry, happenedAt: now }});
+                                      }}
+                                      value="hasTrees"
+                                      color="primary"
+                                    />
+                                  }
+                                  label="Area with trees"
+                                />
+                                <FormControlLabel
+                                  control={
+                                    <Checkbox
+                                      checked={this.state.hasWatercourse}
+                                      onChange={(e) => {
+                                        this.handleFeatureChange(e, 'hasWatercourse');
+                                        logEntry({variables: {type: 'hasWatercourse', polygon: currentFeature.geometry, happenedAt: now }});
+                                      }}
+                                      value="hasWatercourse"
+                                      color="primary"
+                                    />
+                                  }
+                                  label="Watercourse"
+                                />
+                                <FormControlLabel
+                                  control={
+                                    <Checkbox
+                                      checked={this.state.hasWetland}
+                                      onChange={(e) => {
+                                        this.handleFeatureChange(e, 'hasWetland');
+                                        logEntry({variables: {type: 'hasWetland', polygon: currentFeature.geometry, happenedAt: now }});
+                                      }}
+                                      value="hasWetland"
+                                      color="primary"
+                                    />
+                                  }
+                                  label="Wetland"
+                                />
+                                <FormControlLabel
+                                  control={
+                                    <Checkbox
+                                      checked={this.state.hasNativeBuffer}
+                                      onChange={(e) => {
+                                        this.handleFeatureChange(e, 'hasNativeBuffer');
+                                        logEntry({variables: {type: 'hasNativeBuffer', polygon: currentFeature.geometry, happenedAt: now }});
+                                      }}
+                                      value="hasNativeBuffer"
+                                      color="primary"
+                                    />
+                                  }
+                                  label="Native or wild vegetation buffer strip"
+                                />
+                                <FormControlLabel
+                                  control={
+                                    <Checkbox
+                                      checked={this.state.hasWildlifeCorridor}
+                                      onChange={(e) => {
+                                        this.handleFeatureChange(e, 'hasWildlifeCorridor');
+                                        logEntry({variables: {type: 'hasWildlifeCorridor', polygon: currentFeature.geometry, happenedAt: now }});
+                                      }}
+                                      value="hasWildlifeCorridor"
+                                      color="primary"
+                                    />
+                                  }
+                                  label="Other kind of corridor for wildlife"
+                                />
+                              </FormGroup>
+                            )}
+                            </Mutation>
                           </div>
                           <div>
                             <Typography variant="subheading" style={{fontFamily: styles.title.fontFamily, margin: "15px"}}>
@@ -269,7 +297,7 @@ class SavePolygonModal extends Component {
                                     {error ? <p style={{color: styles.accent.red}}>"There was an error saving your update. Please try again."</p> : null}
                                     <Button onClick={() => {
                                       currentFeature.name = this.state.name;
-                                      logEntry({variables: {type: type, polygon: currentFeature, species: species, happenedAt: date }});
+                                      logEntry({variables: {type: type, polygon: currentFeature.geometry, species: species, happenedAt: date }});
                                       onClose();
                                     }}
                                       style={{
@@ -307,10 +335,9 @@ class SavePolygonModal extends Component {
     }
 }
 
-const mapStateToProps = ({ entry, user, map }) => ({
+const mapStateToProps = ({ entry, user }) => ({
     entry: entry,
     authenticated: user.authenticated,
-    map: map,
 });
 
 const mapDispatchToProps = (dispatch) => {

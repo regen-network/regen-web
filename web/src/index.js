@@ -10,14 +10,16 @@ import { ApolloProvider } from "react-apollo";
 import store from './store';
 import createBrowserHistory from 'history/createBrowserHistory';
 import makeMainRoutes from './routes';
+import { actions as authActions } from './actions/auth';
+const { getValidToken, handleAuthentication } = authActions;
 
-import Auth from './Auth';
-const auth = new Auth();
+// import Auth from './Auth';
+// const auth = new Auth();
 
 const client = new ApolloClient({
   uri: "/graphql",
   request: async (operation) => {
-    const token = auth.getValidToken();
+    const token = getValidToken();
     if (token) {
       operation.setContext({
         headers: {
@@ -35,7 +37,7 @@ const Root = () => {
     <ApolloProvider client={client}>
       <Provider store={store}>
         <MuiThemeProvider theme={theme}>
-    				{ makeMainRoutes(auth, history) }
+    				{ makeMainRoutes(history) }
         </MuiThemeProvider>
       </Provider>
     </ApolloProvider>
@@ -45,7 +47,7 @@ const Root = () => {
 async function init() {
   const {pathname, hash, search, state} = history.location;
   if (/access_token|id_token|error/.test(hash)) {
-    await auth.handleAuthentication();
+    await handleAuthentication();
     history.replace({pathname, search, state});
   }
   ReactDOM.render(<Root />, document.getElementById('root'));

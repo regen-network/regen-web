@@ -2,11 +2,11 @@ import React from 'react';
 import { Router, Route, Switch } from 'react-router-dom';
 import App from './App';
 
-const makeMainRoutes = (auth, history) => {
+const makeMainRoutes = (history) => {
   return (
     <Router history={history}>
       <Switch>
-        <Route exact path="/" render={(props) => <App auth={auth} {...props} />} />
+        <Route exact path="/" render={(props) => <App {...props} />} />
       </Switch>
     </Router>
   );

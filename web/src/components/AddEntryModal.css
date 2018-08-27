@@ -8,5 +8,5 @@
     margin-top: -40vh;
     background: white;
     text-align: center;
-    overflow-y: scroll;
+    overflow: scroll;
 }

@@ -20,13 +20,14 @@ import * as MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import { actions as mapActions } from "./actions/map";
 import { actions as userActions } from "./actions/user";
-import { actions as newEntryActions } from "./actions/newEntry";
+import { actions as entryActions } from "./actions/entry";
 import formatPolygons from "./helpers/formatPolygons";
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
 import Welcome from './components/welcome';
 import FeatureList from './components/featureList';
 import AddEntryModal from './components/AddEntryModal.jsx';
+import SaveEntryModal from './components/SaveEntryModal.jsx';
 
 import Auth from './Auth';
 const auth = new Auth();
@@ -170,7 +171,7 @@ class App extends Component {
   }
 
   render() {
-    const { theme, map, user, actions, addModalOpen } = this.props;
+    const { theme, map, user, actions, addModalOpen, saveModalOpen } = this.props;
     const { features, selected } = map;
 
     const styles = {
@@ -204,8 +205,7 @@ class App extends Component {
           features.forEach((feature) => {
             if (feature.saved) {
               let optimisticSavedFeature = Object.assign({}, feature, {
-                coordinates: feature.geometry.coordinates,
-                name: "New Saved Field"
+                coordinates: feature.geometry.coordinates
               });
               polygons.unshift(optimisticSavedFeature);
             }
@@ -245,7 +245,11 @@ class App extends Component {
 		                      <MenuItem onClick={this.onLogout}>Sign Out</MenuItem>
 		                    </Menu>
 		                   </div>
-		                 : <div> <Button onClick={() => auth.login()}>Sign In</Button> </div>
+		                 : <Button onClick={() => auth.login()}
+                         style={{
+                           border: "2px solid #FFF",
+                           fontFamily: styles.fontFamily,
+                           color: styles.primaryColor.color}}>Sign In</Button>
 		               }
 		            </div>
               </Toolbar>
@@ -257,10 +261,8 @@ class App extends Component {
                   selected={selected}
                   polygons={polygons}
                   toggleSelect={this.drawSelected}
-                  clearSelected={this.clearSelected}
                   styles={styles}
-                  optimisticSaveFeature={actions.optimisticSaveFeature}
-                  user={data ? data.getCurrentUser : 'guest'} />
+                  openSaveEntryModal={actions.openSaveEntryModal} />
               </View>
               <View style={{ flex: 8 }}>
                 <Map
@@ -279,6 +281,7 @@ class App extends Component {
                         return (
                           <GeoJSONLayer
                             data={polygon}
+                            key={polygon.id}
                             fillOnClick={() => this.drawSelected(polygon.id)}
                             fillPaint={{
                               'fill-color': fillColor,
@@ -313,6 +316,7 @@ class App extends Component {
             </View>
             <View style={{ flex: 2 }}></View>
             <AddEntryModal open={addModalOpen} onClose={actions.closeNewEntryModal} polygons={polygons} />
+            <SaveEntryModal open={saveModalOpen} onClose={actions.closeSaveEntryModal} user={data ? data.getCurrentUser : 'guest'} clearSelected={this.clearSelected} />
           </View>
           );
         }}
@@ -320,17 +324,18 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = ({ map, user, newEntry }) => ({
+const mapStateToProps = ({ map, user, entry }) => ({
   map: map,
   user: user,
-  addModalOpen: newEntry.open
+  addModalOpen: entry.addModalOpen,
+  saveModalOpen: entry.saveModalOpen
 });
 
 const mapDispatchToProps = (dispatch) => {
   const { updateFeatures, optimisticSaveFeature, updateSelected } = mapActions;
   const { updateUser } = userActions;
-  const { openNewEntryModal, closeNewEntryModal } = newEntryActions;
-  const actions = bindActionCreators({ updateFeatures, optimisticSaveFeature, updateSelected, updateUser, openNewEntryModal, closeNewEntryModal}, dispatch);
+  const { openNewEntryModal, closeNewEntryModal, openSaveEntryModal, closeSaveEntryModal } = entryActions;
+  const actions = bindActionCreators({ updateFeatures, optimisticSaveFeature, updateSelected, updateUser, openNewEntryModal, closeNewEntryModal, openSaveEntryModal, closeSaveEntryModal}, dispatch);
   return { actions }
 };
 

@@ -12,9 +12,9 @@ class PolygonIcon extends React.Component {
     const [cx, cy] = center.geometry.coordinates;
     const boxWidth = maxX - minX
     const boxHeight = maxY - minY
-
+    const coordinateArray = polygon.coordinates || polygon.geometry.coordinates;
     let coordinates = "";
-    polygon.coordinates[0].forEach((point) => {
+    coordinateArray[0].forEach((point) => {
         coordinates += `${point[0] - cx},${point[1] - cy} `;
     });
 

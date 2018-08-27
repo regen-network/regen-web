@@ -4,13 +4,15 @@ let initialState = {
     given_name: "guest",
     family_name: "",
     picture: "",
-    email: ""
+    email: "",
+    authenticated: false
 };
 
 const reducerMap = {};
 
 reducerMap[constants.UPDATE_USER] = (state, { payload }) => {
     const { user } = payload;
+    state.authenticated = true;
 	  return {...state, ...user}
 };
 

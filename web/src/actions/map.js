@@ -2,7 +2,7 @@ const UPDATE_FEATURES = "UPDATE_FEATURES";
 const updateFeatures = (features) => ({ type: UPDATE_FEATURES, payload: { features }});
 
 const OPTIMISTIC_SAVE_FEATURE = "OPTIMISTIC_SAVE_FEATURE";
-const optimisticSaveFeature = (id) => ({ type: OPTIMISTIC_SAVE_FEATURE, payload: { id }});
+const optimisticSaveFeature = (id, name) => ({ type: OPTIMISTIC_SAVE_FEATURE, payload: { id, name }});
 
 const UPDATE_SELECTED = "UPDATE_SELECTED";
 const updateSelected = (selected) => ({ type: UPDATE_SELECTED, payload: { selected }});

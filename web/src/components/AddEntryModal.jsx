@@ -5,17 +5,14 @@ import { bindActionCreators } from 'redux';
 import { withTheme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import { actions as newEntryActions } from "../actions/newEntry";
+import { actions as entryActions } from "../actions/entry";
 import Modal from '@material-ui/core/Modal';
-import TextField from '@material-ui/core/TextField';
 import Select from './Select.jsx';
-// import 'react-dates/initialize';
-// import { SingleDatePicker} from 'react-dates';
-// import 'react-dates/lib/css/_datepicker.css';
-import * as moment from 'moment';
 import PolygonIcon from './polygonIcon';
 import gql from "graphql-tag";
 import { Mutation } from "react-apollo";
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 const LOG_ENTRY = gql`
    mutation LogEntry($type: String!, $comment: String, $polygon: JSON!, $point: JSON, $species: String, $unit: String, $numericValue: BigFloat, $happenedAt: Datetime) {
@@ -36,17 +33,6 @@ const entryTypes = [
     {type:'Harvesting', category: 'PlantRelated'},
     {type:'Tillage'}
 ];
-
-// <SingleDatePicker
-//   date={date}
-//   onDateChange={(date) => {
-//     patchNewEntry({date});
-//     focusNewEntryDatePicker({focused: false});
-//   }}
-//   focused={dateFocused}
-//   onFocusChange={focusNewEntryDatePicker}
-//   id="addEntryModal__date-picker"
-// />
 
 const entryTypeCategories = new Map(entryTypes.map(({type,category}) => [type, category]));
 
@@ -69,8 +55,8 @@ class AddEntryModal extends Component {
     }
 
     render() {
-        const {open, onClose, entry, patchNewEntry, dateFocused, focusNewEntryDatePicker, theme, map, polygons} = this.props;
-        const {type, species, date} = entry;
+        const {open, onClose, entry, patchNewEntry, theme, map, polygons} = this.props;
+        const {type, species, date} = entry.entry;
         const {features, selected} = map;
 
         let selectedPolygon = null;
@@ -103,11 +89,7 @@ class AddEntryModal extends Component {
 
         return (
             <Modal open={open}
-               onClose={onClose}
-               onRendered={() => {
-                   const now = moment().format();
-                   patchNewEntry({date: now});
-               }}>
+               onClose={onClose}>
                 <div className="modal-add-entry">
                   <div style={{margin: "25px"}}>
                       {selectedPolygon
@@ -123,22 +105,11 @@ class AddEntryModal extends Component {
                             <PolygonIcon polygon={selectedPolygon}/>
                           </div>
                           <div style={{margin: "25px"}}>
-                            <form noValidate>
-                              <TextField
-                                id="date"
-                                label="Date of Activity"
-                                type="date"
-                                defaultValue={moment().format("YYYY-MM-DD")}
-                                className={""}
-                                InputLabelProps={{
-                                  shrink: true,
-                                }}
-                                onChange={(e) => {
-                                  const happened_at = moment(e.target.value).format();
-                                  patchNewEntry({date: happened_at});
-                                }}
-                              />
-                            </form>
+                            <DatePicker
+                                selected={date}
+                                onChange={(date) => {
+                                  patchNewEntry({date});
+                                }}/>
                           </div>
                           <div>
                             <Select
@@ -165,17 +136,20 @@ class AddEntryModal extends Component {
                           </div>
                           { this.state.completed
                             ? <Mutation mutation={LOG_ENTRY}>
-                                {( logEntry, {data}) => (
-                                  <Button onClick={() => {
-                                    logEntry({variables: {type: type, polygon: selectedPolygon, species: species, happenedAt: date }});
-                                    onClose();
-                                  }}
-                                    style={{
-                                      margin: "25px",
-                                      backgroundColor: styles.accent.blue,
-                                      fontFamily: styles.fontFamily,
-                                      color: styles.primaryColor.color}}>
-                                    Submit</Button>
+                                {( logEntry, {loading, error}) => (
+                                  <div>
+                                    {error ? <p style={{color: styles.accent.red}}>"There was an error saving your update. Please try again."</p> : null}
+                                    <Button onClick={() => {
+                                      logEntry({variables: {type: type, polygon: selectedPolygon, species: species, happenedAt: date }});
+                                      onClose();
+                                    }}
+                                      style={{
+                                        margin: "25px",
+                                        backgroundColor: styles.accent.blue,
+                                        fontFamily: styles.fontFamily,
+                                        color: styles.primaryColor.color}}>
+                                      Submit</Button>
+                                  </div>
                                 )}
                               </Mutation>
                             : null
@@ -193,15 +167,14 @@ class AddEntryModal extends Component {
     }
 }
 
-const mapStateToProps = ({ newEntry, map }) => ({
-    entry: newEntry.entry,
-    dateFocused: newEntry.datePickerFocus,
+const mapStateToProps = ({ entry, map }) => ({
+    entry: entry,
     map: map,
 });
 
 const mapDispatchToProps = (dispatch) => {
-    const { patchNewEntry, focusNewEntryDatePicker } = newEntryActions;
-    return bindActionCreators({ patchNewEntry, focusNewEntryDatePicker }, dispatch);
+    const { patchNewEntry } = entryActions;
+    return bindActionCreators({ patchNewEntry }, dispatch);
 };
 
 export default withTheme()(connect(mapStateToProps, mapDispatchToProps)(AddEntryModal));

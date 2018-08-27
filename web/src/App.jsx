@@ -191,9 +191,6 @@ class app extends Component {
                 }))
               }) : [-75, -75, 75, 75];
 
-          if (isNaN(bbox[0])) {
-              console.log("bbox is NaN");
-          }
         console.log("bbox",bbox);
 
         if (auth.isAuthenticated() && data) {

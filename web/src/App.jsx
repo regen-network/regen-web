@@ -189,7 +189,7 @@ class app extends Component {
                   type: 'Feature',
                   geometry: p
                 }))
-              }) : [-75, -75, 75, 75];
+              }) : [-60, -60, 60, 60]; // hello, worldview
 
         console.log("bbox",bbox);
 

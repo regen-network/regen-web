@@ -1,0 +1,12 @@
+.modal-add-entry {
+    width: 40vw;
+    max-height: 80vh;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -20vw;
+    margin-top: -40vh;
+    background: white;
+    text-align: center;
+    overflow: scroll;
+}

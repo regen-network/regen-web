@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { View } from 'react-native';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
@@ -12,6 +9,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Typography from '@material-ui/core/Typography';
+import AddIcon from '@material-ui/icons/Add';
 import { withTheme } from '@material-ui/core/styles';
 import ReactMapboxGl, { GeoJSONLayer } from "react-mapbox-gl";
 import * as mapbox from "mapbox-gl";
@@ -22,14 +20,21 @@ import * as MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import { actions as mapActions } from "./actions/map";
 import { actions as userActions } from "./actions/user";
+import { actions as entryActions } from "./actions/entry";
 import formatPolygons from "./helpers/formatPolygons";
 import gql from "graphql-tag";
-import { Query, Mutation } from "react-apollo";
+import { Query } from "react-apollo";
 import Welcome from './components/welcome';
+<<<<<<< HEAD
 import PolygonIcon from './components/polygonIcon';
 import * as turf from '@turf/turf';
 
 import { BrowserRouter as Redirect, Router, Route, Link } from "react-router-dom";
+=======
+import FeatureList from './components/featureList';
+import AddEntryModal from './components/AddEntryModal.jsx';
+import SaveEntryModal from './components/SaveEntryModal.jsx';
+>>>>>>> master
 
 import Auth from './Auth';
 const auth = new Auth();
@@ -59,6 +64,7 @@ const GET_POLYGONS = gql`
 }
 `;
 
+<<<<<<< HEAD
 const CREATE_POLYGON = gql`
    mutation CreatePolygon($name: String!,  $geojson: JSON!, $owner: String!) {
     createPolygonByJson(input: {name: $name, geojson: $geojson, owner: $owner}) {
@@ -82,6 +88,12 @@ class app extends Component {
       selected: {}
    };
 
+=======
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+>>>>>>> master
   }
 
   onMenuClick = (e) => {
@@ -111,11 +123,12 @@ class app extends Component {
   }
 
   onSelectionChange = (e) => {
-    var selected = {};
+    const { updateSelected } = this.props.actions;
+    let selected = {};
     e.features.forEach((feature) => {
       selected[feature.id] = true;
     });
-    this.setState({ selected });
+    updateSelected(selected);
   }
 
   onMapLoad = (map) => {
@@ -145,28 +158,72 @@ class app extends Component {
     map.on('draw.selectionchange', this.onSelectionChange);
   }
 
-  toggleSelectItem = (id) => {
-    const { selected, drawControl } = this.state;
-    const newSelected = {...selected};
-    newSelected[id] = !selected[id];
-    const featureIds = [];
-    Object.getOwnPropertyNames(newSelected).forEach((k) => {
-      if(newSelected[k]) featureIds.push(k);
+  drawSelected = (id) => {
+    const { drawControl } = this.state;
+    const { updateSelected } = this.props.actions;
+    const selected = this.props.map.selected;
+
+    let mapFeatureIds = {};
+    drawControl.getAll().features.forEach((feature) => {
+      mapFeatureIds[feature.id] = true;
     });
-    drawControl.changeMode('simple_select', {featureIds});
-    this.setState({ selected: newSelected });
-    //this.state.drawControl.changeMode('direct_select', {featureId: id});
+
+    if (mapFeatureIds[id]) {
+      if (id in selected) {
+        selected[id] = !selected[id];
+      }
+      else {
+        selected[id] = true;
+      }
+
+      const featureIds = [];
+      Object.keys(selected).forEach((k) => {
+        if (selected[k] && mapFeatureIds[k]) {
+          featureIds.push(k);
+        }
+        else {
+          selected[k] = false;
+        }
+      });
+
+      drawControl.changeMode('simple_select', {featureIds});
+    }
+    else {
+      let currentState = selected[id] ? selected[id] : false;
+
+      Object.keys(selected).forEach((k) => {
+        selected[k] = false;
+      });
+      selected[id] = !currentState;
+
+      drawControl.changeMode('simple_select'); // deselect drawn polygons
+    }
+
+    updateSelected(selected);
+  }
+
+  clearSelected = (id) => {
+    // delete a new drawn polygon
+    const { drawControl } = this.state;
+    drawControl.delete(id);
   }
 
   render() {
-    const { selected } = this.state;
-    const { theme, features, user, actions } = this.props;
+<<<<<<< HEAD
     const worldview = [-60, -60, 60, 60]; // default mapbox worldview
+=======
+    const { theme, map, user, actions, addModalOpen, saveModalOpen } = this.props;
+    const { features, selected } = map;
+>>>>>>> master
 
     const styles = {
       primaryColor: {
         backgroundColor: theme.palette.primary.main,
         color: theme.palette.common.white,
+      },
+      accent: {
+        blue: theme.palette.accent.blue,
+        yellow: theme.palette.accent.yellow
       },
       fontFamily: theme.fontFamily,
       fontSize: "16px",
@@ -181,13 +238,14 @@ class app extends Component {
 
       <Query query={GET_POLYGONS}>
       {({loading, error, data}) => {
+<<<<<<< HEAD
           /* If the user has saved polygons, roll them into a GeoJson FeatureCollection
              and pass them to turf.bbox(). This bbox can be passed to mapbox's fitBounds()
              method which will ease the view to the centroid of the user's polygons.
              Otherwise display a world map. 
           */
         const nodes = data && data.allPolygons && data.allPolygons.nodes;
-        const polygons = nodes && nodes.map(p => Object.assign({}, JSON.parse(p.geomJson), {id: p.id, name: p.name}));
+        let polygons = nodes && nodes.map(p => Object.assign({}, JSON.parse(p.geomJson), {id: p.id, name: p.name}));
         const bbox = polygons ?
               turf.bbox({
                 type: 'FeatureCollection',
@@ -200,15 +258,33 @@ class app extends Component {
         if (auth.isAuthenticated() && data) {
           auth.getProfile((err, profile) => {
 		        actions.updateUser(profile);
+=======
+
+          // add optimisticSavedFeature to polygons
+          features.forEach((feature) => {
+            if (feature.saved) {
+              let optimisticSavedFeature = Object.assign({}, feature, {
+                coordinates: feature.geometry.coordinates
+              });
+              polygons.unshift(optimisticSavedFeature);
+            }
+          });
+
+        if (auth.isAuthenticated()) {
+            auth.getProfile((err, profile) => {
+              err ? console.log(err) : actions.updateUser(profile);
+>>>>>>> master
           });
         }
 
         return (
           <View style={{ flex: 1, flexDirection: 'column' }}>
-            <Welcome />
+            {auth.isAuthenticated() ? null : <Welcome/> }
             <AppBar position="static">
               <Toolbar variant="dense" style={{display: 'flex', justifyContent: 'space-between'}}>
-                <a target="_blank" href="http://regen.network"> <img id="logo" src="logo_white.png"  style={{height:50}} alt="logo link to regen.network" title="Regen Logo"/></a>
+                <a target="_blank" href="http://regen.network" rel="noopener noreferrer">
+                  <img id="logo" src="logo_white.png"  style={{height:50}} alt="logo link to regen.network" title="Regen Logo"/>
+                </a>
                 <Typography variant="title" style={{color: styles.primaryColor.color, fontFamily: styles.fontFamily}}>
                   {auth.isAuthenticated() ? "Welcome, " +  user.given_name  + "!" : "Welcome!"}
                 </Typography>
@@ -221,14 +297,18 @@ class app extends Component {
                           aria-haspopup="true"
                           onClick={this.onMenuClick}
                         >
-                          <img style={{height:50}} src={user.picture}/>
+                          <img style={{height:50}} src={user.picture} alt="user" />
                         </IconButton>
 		                    <Menu id="user-menu" anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={this.onMenuClose}>
 		                      <MenuItem onClick={this.gotoRegen}>Regen</MenuItem>
 		                      <MenuItem onClick={this.onLogout}>Sign Out</MenuItem>
 		                    </Menu>
 		                   </div>
-		                 : <div> <Button onClick={() => auth.login()}>Sign In</Button> </div>
+		                 : <Button onClick={() => auth.login()}
+                         style={{
+                           border: "2px solid #FFF",
+                           fontFamily: styles.fontFamily,
+                           color: styles.primaryColor.color}}>Sign In</Button>
 		               }
 		            </div>
               </Toolbar>
@@ -239,9 +319,9 @@ class app extends Component {
                   features={features}
                   selected={selected}
                   polygons={polygons}
-                  toggleSelectItem={this.toggleSelectItem}
-                  user={user ? user.given_name : "guest"}
-                  styles={styles} />
+                  toggleSelect={this.drawSelected}
+                  styles={styles}
+                  openSaveEntryModal={actions.openSaveEntryModal} />
               </View>
               <View style={{ flex: 8 }}>
                 <Map
@@ -263,16 +343,24 @@ class app extends Component {
                   {
                     (polygons && polygons.length) ?
                       polygons.map(polygon => {
+                        let fillColor = selected[polygon.id] ? styles.accent.yellow : styles.accent.blue;
                         return (
                           <GeoJSONLayer
                             data={polygon}
+                            key={polygon.id}
+                            fillOnClick={() => this.drawSelected(polygon.id)}
                             fillPaint={{
-                              'fill-color': '#088',
-                              'fill-opacity': 0.8
+                              'fill-color': fillColor,
+                              'fill-opacity': 0.7
+                            }}
+                            linePaint={{
+                              'line-color': fillColor,
+                              'line-opacity': 0.9,
+                              'line-width': 5
                             }}
                             symbolLayout={{
                               "text-field": polygon.name,
-                              "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+                              "text-font": ["Lato Regular"],
                               "text-offset": [0, 0.6],
                               "text-anchor": "top"
                             }}/>
@@ -281,10 +369,20 @@ class app extends Component {
                     : null
                   }
 
+                    <div style={{position: "absolute", bottom: "25px", right: "10px"}}>
+                      <Button
+                        variant="fab"
+                        color="secondary"
+                        onClick={actions.openNewEntryModal}>
+                          <AddIcon />
+                      </Button>
+                    </div>
                 </Map>
               </View>
             </View>
             <View style={{ flex: 2 }}></View>
+            <AddEntryModal open={addModalOpen} onClose={actions.closeNewEntryModal} polygons={polygons} />
+            <SaveEntryModal open={saveModalOpen} onClose={actions.closeSaveEntryModal} user={data ? data.getCurrentUser : 'guest'} clearSelected={this.clearSelected} />
           </View>
           );
         }}
@@ -292,77 +390,19 @@ class app extends Component {
   }
 }
 
-const FeatureList = withTheme()(({ features, selected, polygons, toggleSelectItem, theme, user, styles }) => {
-  return (
-    <div>
-      <List>
-        <Typography variant="title" style={{fontFamily: styles.title.fontFamily, fontSize: styles.title.fontSize, marginLeft: "25px"}}>
-          {features && features.length ? "New Plots" : ""}
-        </Typography>
-        {features && features.map((feature) =>
-          <FeatureListItem item={feature} theme={theme} selected={selected[feature.id]} user={user} styles={styles}
-            toggleSelectThis={() => toggleSelectItem(feature.id)}
-          />
-        )}
-      </List>
-      <List>
-        <Typography variant="title" style={{fontFamily: styles.title.fontFamily, fontSize: styles.title.fontSize, marginLeft: "25px"}}>
-          {polygons && polygons.length ? "Saved Plots" : ""}
-        </Typography>
-        {polygons && polygons.map((polygon) =>
-          <SavedFeatureItem item={polygon} theme={theme} selected={selected[polygon.id]} user={user} styles={styles}
-            toggleSelectThis={() => toggleSelectItem(polygon.id)}
-          />
-        )}
-      </List>
-    </div>
-  );
-});
-
-const SavedFeatureItem = ({ item, selected, toggleSelectThis, theme, user, styles }) => {
-  const style = selected ? {backgroundColor: theme.palette.primary.main} : {};
-  return (
-	  <ListItem dense button style={style} key={item.id} onClick={toggleSelectThis}>
-      <PolygonIcon polygon={item}/>
-      <ListItemText
-        disableTypography
-        primary={<Typography style={{fontSize: styles.fontSize}}>{item.name}</Typography>} />
-    </ListItem>
-  );
-}
-
-const FeatureListItem = ({ item, selected, toggleSelectThis, theme, user, styles }) => {
-  const style = selected ? {backgroundColor: theme.palette.primary.main} : {};
-  return (
-    <Mutation mutation={CREATE_POLYGON}>
-      {( createPolygonByJson, {data}) => (
-	       <ListItem dense button style={style} key={item.id} onClick={toggleSelectThis}>
-          <ListItemText
-            disableTypography
-            primary={<Typography style={{fontSize: styles.fontSize}}>{"Unsaved Polygon " + item.id}</Typography>} />
-          <Button style={{color: styles.primaryColor.color}}
-            onClick={() => createPolygonByJson({variables: {name: "foobar" , geojson: item.geometry, owner: user }})}>
-            Save
-          </Button>
-          </ListItem>
-        )
-      }
-    </Mutation>
-  );
-}
-
-const mapStateToProps = ({ map, user }) => ({
-  features: map.toJS(),
-  user: user.toJS(),
+const mapStateToProps = ({ map, user, entry }) => ({
+  map: map,
+  user: user,
+  addModalOpen: entry.addModalOpen,
+  saveModalOpen: entry.saveModalOpen
 });
 
 const mapDispatchToProps = (dispatch) => {
-  const { updateFeatures } = mapActions;
+  const { updateFeatures, optimisticSaveFeature, updateSelected } = mapActions;
   const { updateUser } = userActions;
-  const actions = bindActionCreators({ updateFeatures, updateUser }, dispatch);
+  const { openNewEntryModal, closeNewEntryModal, openSaveEntryModal, closeSaveEntryModal } = entryActions;
+  const actions = bindActionCreators({ updateFeatures, optimisticSaveFeature, updateSelected, updateUser, openNewEntryModal, closeNewEntryModal, openSaveEntryModal, closeSaveEntryModal}, dispatch);
   return { actions }
 };
 
-export const App = connect(mapStateToProps, mapDispatchToProps)(app);
-
-export default withTheme()(App);
+export default withTheme()(connect(mapStateToProps, mapDispatchToProps)(App));

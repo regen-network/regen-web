@@ -20,7 +20,7 @@ export default class Auth {
 
       if (authResult && authResult.accessToken && authResult.idToken) {
         this.setSession(authResult);
-	resolve(null);
+	      resolve(null);
         fetch('/api/login', {
           headers: {
             Authorization: `Bearer ${authResult.accessToken}`

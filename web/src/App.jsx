@@ -201,7 +201,6 @@ class App extends Component {
 
       <Query query={GET_POLYGONS}>
       {({loading, error, data}) => {
-        console.log(data);
           /* If the user has saved polygons, roll them into a GeoJson FeatureCollection
              and pass them to turf.bbox(). This bbox can be passed to mapbox's fitBounds()
              method which will ease the view to the centroid of the user's polygons.

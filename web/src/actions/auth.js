@@ -77,13 +77,11 @@ const getAccessToken = () => {
 
 const getValidToken = () => {
   if (isAuthenticated()) {
-    console.log("AUTHED");
     getProfile((err, profile) => {
         err ? console.log(err) : store.dispatch(loginSuccess(profile));
     });
     return getAccessToken();
   }
-  console.log("NOT  AUTHED");
   return null;
 }
 

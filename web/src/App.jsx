@@ -21,10 +21,12 @@ import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import { actions as mapActions } from "./actions/map";
 import { actions as userActions } from "./actions/user";
 import { actions as entryActions } from "./actions/entry";
-import formatPolygons from "./helpers/formatPolygons";
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
 import Welcome from './components/welcome';
+
+import * as turf from '@turf/turf';
+
 import FeatureList from './components/featureList';
 import AddEntryModal from './components/AddEntryModal.jsx';
 import SaveEntryModal from './components/SaveEntryModal.jsx';
@@ -35,8 +37,13 @@ const auth = new Auth();
 const mapboxAccessToken = "pk.eyJ1IjoiYWFyb25jLXJlZ2VuIiwiYSI6ImNqa2I4dW9sbjBob3czcHA4amJqM2NhczAifQ.4HW-QDLUBJiHxOjDakKm2w";
 
 const Map = ReactMapboxGl({
-  accessToken: mapboxAccessToken
+    accessToken: mapboxAccessToken,
+    logoPosition: 'bottom-left',
+    jumpTo: true,
+//    interactive: false,
+    flyTo: false
 });
+
 
 const GET_POLYGONS = gql`
 {
@@ -171,6 +178,7 @@ class App extends Component {
   }
 
   render() {
+    const worldview = [-60, -60, 60, 60]; // default mapbox worldview
     const { theme, map, user, actions, addModalOpen, saveModalOpen } = this.props;
     const { features, selected } = map;
 
@@ -196,11 +204,22 @@ class App extends Component {
 
       <Query query={GET_POLYGONS}>
       {({loading, error, data}) => {
+          /* If the user has saved polygons, roll them into a GeoJson FeatureCollection
+             and pass them to turf.bbox(). This bbox can be passed to mapbox's fitBounds()
+             method which will ease the view to the centroid of the user's polygons.
+             Otherwise display a world map. 
+          */
+        const nodes = data && data.allPolygons && data.allPolygons.nodes;
+        let polygons = nodes && nodes.map(p => Object.assign({}, JSON.parse(p.geomJson), {id: p.id, name: p.name}));
+        const bbox = polygons ?
+              turf.bbox({
+                type: 'FeatureCollection',
+                features: polygons.map(p => ({
+                  type: 'Feature',
+                  geometry: p
+                }))
+              }) : worldview ; 
 
-        let polygons;
-
-        if (data && data.allPolygons) {
-          polygons = formatPolygons(data.allPolygons.nodes);
           // add optimisticSavedFeature to polygons
           features.forEach((feature) => {
             if (feature.saved) {
@@ -210,9 +229,8 @@ class App extends Component {
               polygons.unshift(optimisticSavedFeature);
             }
           });
-        }
 
-        if (auth.isAuthenticated()) {
+        if (auth.isAuthenticated() && data) {
             auth.getProfile((err, profile) => {
               err ? console.log(err) : actions.updateUser(profile);
           });
@@ -273,6 +291,13 @@ class App extends Component {
                     width: '80vw',
                     height: '80vh'
                   }}
+                  options={{
+                      // options seem to be ignored here. why?
+                      logoPosition: 'top-left'
+                  }}
+
+                  fitBounds={bbox && [[bbox[0], bbox[1]], [bbox[2], bbox[3]]]}
+
                   onStyleLoad={this.onMapLoad}>
                   {
                     (polygons && polygons.length) ?

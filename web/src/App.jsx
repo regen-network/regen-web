@@ -21,20 +21,15 @@ import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import { actions as mapActions } from "./actions/map";
 import { actions as userActions } from "./actions/user";
 import { actions as entryActions } from "./actions/entry";
-import formatPolygons from "./helpers/formatPolygons";
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
 import Welcome from './components/welcome';
-<<<<<<< HEAD
-import PolygonIcon from './components/polygonIcon';
+
 import * as turf from '@turf/turf';
 
-import { BrowserRouter as Redirect, Router, Route, Link } from "react-router-dom";
-=======
 import FeatureList from './components/featureList';
 import AddEntryModal from './components/AddEntryModal.jsx';
 import SaveEntryModal from './components/SaveEntryModal.jsx';
->>>>>>> master
 
 import Auth from './Auth';
 const auth = new Auth();
@@ -64,7 +59,6 @@ const GET_POLYGONS = gql`
 }
 `;
 
-<<<<<<< HEAD
 const CREATE_POLYGON = gql`
    mutation CreatePolygon($name: String!,  $geojson: JSON!, $owner: String!) {
     createPolygonByJson(input: {name: $name, geojson: $geojson, owner: $owner}) {
@@ -78,9 +72,6 @@ const CREATE_POLYGON = gql`
   }
 `;
 
-let  zoom=[1];
-let center;
-
 class app extends Component {
   constructor(props) {
     super(props);
@@ -88,12 +79,10 @@ class app extends Component {
       selected: {}
    };
 
-=======
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {};
->>>>>>> master
   }
 
   onMenuClick = (e) => {
@@ -209,12 +198,9 @@ class App extends Component {
   }
 
   render() {
-<<<<<<< HEAD
     const worldview = [-60, -60, 60, 60]; // default mapbox worldview
-=======
     const { theme, map, user, actions, addModalOpen, saveModalOpen } = this.props;
     const { features, selected } = map;
->>>>>>> master
 
     const styles = {
       primaryColor: {
@@ -238,7 +224,6 @@ class App extends Component {
 
       <Query query={GET_POLYGONS}>
       {({loading, error, data}) => {
-<<<<<<< HEAD
           /* If the user has saved polygons, roll them into a GeoJson FeatureCollection
              and pass them to turf.bbox(). This bbox can be passed to mapbox's fitBounds()
              method which will ease the view to the centroid of the user's polygons.
@@ -258,7 +243,6 @@ class App extends Component {
         if (auth.isAuthenticated() && data) {
           auth.getProfile((err, profile) => {
 		        actions.updateUser(profile);
-=======
 
           // add optimisticSavedFeature to polygons
           features.forEach((feature) => {
@@ -273,7 +257,6 @@ class App extends Component {
         if (auth.isAuthenticated()) {
             auth.getProfile((err, profile) => {
               err ? console.log(err) : actions.updateUser(profile);
->>>>>>> master
           });
         }
 

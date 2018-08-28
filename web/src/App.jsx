@@ -161,6 +161,7 @@ class app extends Component {
   render() {
     const { selected } = this.state;
     const { theme, features, user, actions } = this.props;
+    const worldview = [-60, -60, 60, 60]; // default mapbox worldview
 
     const styles = {
       primaryColor: {
@@ -180,6 +181,11 @@ class app extends Component {
 
       <Query query={GET_POLYGONS}>
       {({loading, error, data}) => {
+          /* If the user has saved polygons, roll them into a GeoJson FeatureCollection
+             and pass them to turf.bbox(). This bbox can be passed to mapbox's fitBounds()
+             method which will ease the view to the centroid of the user's polygons.
+             Otherwise display a world map. 
+          */
         const nodes = data && data.allPolygons && data.allPolygons.nodes;
         const polygons = nodes && nodes.map(p => Object.assign({}, JSON.parse(p.geomJson), {id: p.id, name: p.name}));
         const bbox = polygons ?
@@ -189,9 +195,7 @@ class app extends Component {
                   type: 'Feature',
                   geometry: p
                 }))
-              }) : [-60, -60, 60, 60]; // hello, worldview
-
-        console.log("bbox",bbox);
+              }) : worldview ; 
 
         if (auth.isAuthenticated() && data) {
           auth.getProfile((err, profile) => {
@@ -253,10 +257,7 @@ class app extends Component {
                       logoPosition: 'top-left'
                   }}
 
-                  /* center={this.center} */
-                  /* zoom={this.zoom} */
                   fitBounds={bbox && [[bbox[0], bbox[1]], [bbox[2], bbox[3]]]}
-
 
                   onStyleLoad={this.onMapLoad}>
                   {

@@ -19,7 +19,7 @@ reducerMap[constants.LOGIN_SUCCESS] = (state, { payload }) => {
 };
 
 reducerMap[constants.LOGOUT_SUCCESS] = (state, _) => {
-	  return {...state, status: "LOGGED_OUT", authenticated: false};
+	  return {...state, status: "LOGGED_OUT", authenticated: false, user: {}};
 };
 
 export default (state = initialState, action) => {

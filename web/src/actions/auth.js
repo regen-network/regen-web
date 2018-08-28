@@ -1,4 +1,5 @@
 import auth0 from 'auth0-js';
+import store from '../store';
 
 const webAuth = new auth0.WebAuth({
   domain: 'regen-network.auth0.com',
@@ -11,47 +12,28 @@ const webAuth = new auth0.WebAuth({
 
 const login = () => {
   webAuth.authorize();
-  // (dispatch, getState) =>
-  //   new Promise((resolve, reject) => {
-  //     auth0instance.authorize()
-  //     .then((res) => {
-  //         console.log("LOGIN RES", res);
-  //           dispatch(loginSuccess());
-  //           resolve();
-  //       },
-  //       (err) => {
-  //           dispatch(loginError())
-  //           reject(err);
-  //       }
-  //     );
-  //   })
-  };
+}
 
 const handleAuthentication = () => {
-  (dispatch, getState) =>
     new Promise ((resolve, reject) => {
       webAuth.parseHash((err, authResult) => {
         if (authResult && authResult.accessToken && authResult.idToken) {
-          setSession(authResult);
-          // resolve(null);
-          fetch('/api/login', {
-            headers: {
-              Authorization: `Bearer ${authResult.accessToken}`
-            },
-            method: "POST",
+            setSession(authResult);
+            store.dispatch(loginSuccess(authResult.idTokenPayload));
+            fetch('/api/login', {
+              headers: {
+                Authorization: `Bearer ${authResult.accessToken}`
+              },
+              method: "POST",
           }).then((res) => {
-            console.log(res);
-            getProfile((err, profile) => {
-                err ? console.log(err) : dispatch(loginSuccess(profile));
-            });
-            resolve();
+              resolve(res);
           },
           (err) => {
-              dispatch(loginError())
+              store.dispatch(loginError())
               reject(err);
           });
         } else if (err) {
-          dispatch(loginError());
+          store.dispatch(loginError());
           reject(err);
           console.error(err);
         }
@@ -77,6 +59,7 @@ const logout = () => {
   localStorage.removeItem('expires_at');
 
   clearTimeout(tokenRenewalTimeout);
+  store.dispatch(logoutSuccess);
   window.location.reload();
 }
 
@@ -94,17 +77,19 @@ const getAccessToken = () => {
 
 const getValidToken = () => {
   if (isAuthenticated()) {
+    console.log("AUTHED");
+    getProfile((err, profile) => {
+        err ? console.log(err) : store.dispatch(loginSuccess(profile));
+    });
     return getAccessToken();
   }
+  console.log("NOT  AUTHED");
   return null;
 }
 
 const getProfile = (cb) => {
   let accessToken = getAccessToken();
   webAuth.client.userInfo(accessToken, (err, profile) => {
-    // if (profile) {
-    //   userProfile = profile;
-    // }
     cb(err, profile);
     return profile;
   });

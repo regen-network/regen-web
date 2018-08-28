@@ -13,9 +13,6 @@ import makeMainRoutes from './routes';
 import { actions as authActions } from './actions/auth';
 const { getValidToken, handleAuthentication } = authActions;
 
-// import Auth from './Auth';
-// const auth = new Auth();
-
 const client = new ApolloClient({
   uri: "/graphql",
   request: async (operation) => {

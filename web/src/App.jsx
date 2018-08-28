@@ -20,20 +20,15 @@ import * as MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import { actions as authActions } from "./actions/auth";
 import { actions as mapActions } from "./actions/map";
-import { actions as userActions } from "./actions/user";
 import { actions as entryActions } from "./actions/entry";
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
 import Welcome from './components/welcome';
-
 import * as turf from '@turf/turf';
-
 import FeatureList from './components/featureList';
 import AddEntryModal from './components/AddEntryModal.jsx';
 import SaveEntryModal from './components/SaveEntryModal.jsx';
 
-// import Auth from './Auth';
-// const auth = new Auth();
 
 const mapboxAccessToken = "pk.eyJ1IjoiYWFyb25jLXJlZ2VuIiwiYSI6ImNqa2I4dW9sbjBob3czcHA4amJqM2NhczAifQ.4HW-QDLUBJiHxOjDakKm2w";
 
@@ -206,6 +201,7 @@ class App extends Component {
 
       <Query query={GET_POLYGONS}>
       {({loading, error, data}) => {
+        console.log(data);
           /* If the user has saved polygons, roll them into a GeoJson FeatureCollection
              and pass them to turf.bbox(). This bbox can be passed to mapbox's fitBounds()
              method which will ease the view to the centroid of the user's polygons.
@@ -231,12 +227,6 @@ class App extends Component {
               polygons.unshift(optimisticSavedFeature);
             }
           });
-
-        // if (isAuthenticated) {
-        //     getProfile((err, profile) => {
-        //       err ? console.log(err) : actions.updateUser(profile);
-        //   });
-        // }
 
         return (
           <View style={{ flex: 1, flexDirection: 'column' }}>
@@ -360,13 +350,11 @@ const mapStateToProps = ({ map, entry, auth }) => ({
 const mapDispatchToProps = (dispatch) => {
   const { logout, login } = authActions;
   const { updateFeatures, optimisticSaveFeature, updateSelected } = mapActions;
-  const { updateUser } = userActions;
   const { openNewEntryModal, closeNewEntryModal, openSaveEntryModal, closeSaveEntryModal } = entryActions;
   const actions = bindActionCreators({
     updateFeatures,
     optimisticSaveFeature,
     updateSelected,
-    updateUser,
     openNewEntryModal,
     closeNewEntryModal,
     openSaveEntryModal,

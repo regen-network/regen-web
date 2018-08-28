@@ -226,7 +226,7 @@ class App extends Component {
             <AppBar position="static">
               <Toolbar variant="dense" style={{display: 'flex', justifyContent: 'space-between'}}>
                 <a target="_blank" href="http://regen.network" rel="noopener noreferrer">
-                  <img id="logo" src="logo_white.png"  style={{height:50}} alt="logo link to regen.network" title="Regen Logo"/>
+                  <img id="logo" src="logo_landscape.png" style={{height: 40, paddingTop: "5px"}} alt="logo link to regen.network" title="Regen Logo"/>
                 </a>
                 <Typography variant="title" style={{color: styles.primaryColor.color, fontFamily: styles.fontFamily}}>
                   {isAuthenticated ? "Welcome, " +  user.given_name  + "!" : "Welcome!"}

@@ -59,26 +59,6 @@ const GET_POLYGONS = gql`
 }
 `;
 
-const CREATE_POLYGON = gql`
-   mutation CreatePolygon($name: String!,  $geojson: JSON!, $owner: String!) {
-    createPolygonByJson(input: {name: $name, geojson: $geojson, owner: $owner}) {
-      polygon{
-        id
-        name
-        geomJson
-        owner
-      }
-    }
-  }
-`;
-
-class app extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      selected: {}
-   };
-
 class App extends Component {
   constructor(props) {
     super(props);
@@ -240,10 +220,6 @@ class App extends Component {
                 }))
               }) : worldview ; 
 
-        if (auth.isAuthenticated() && data) {
-          auth.getProfile((err, profile) => {
-		        actions.updateUser(profile);
-
           // add optimisticSavedFeature to polygons
           features.forEach((feature) => {
             if (feature.saved) {
@@ -254,7 +230,7 @@ class App extends Component {
             }
           });
 
-        if (auth.isAuthenticated()) {
+        if (auth.isAuthenticated() && data) {
             auth.getProfile((err, profile) => {
               err ? console.log(err) : actions.updateUser(profile);
           });

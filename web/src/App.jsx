@@ -18,22 +18,18 @@ import * as MapboxDraw from '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw';
 import '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css';
 import * as MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
+import { actions as authActions } from "./actions/auth";
 import { actions as mapActions } from "./actions/map";
-import { actions as userActions } from "./actions/user";
 import { actions as entryActions } from "./actions/entry";
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
 import Welcome from './components/welcome';
-
 import * as turf from '@turf/turf';
-
 import FeatureList from './components/featureList';
 import DetailView from './components/detailView';
 import AddEntryModal from './components/AddEntryModal.jsx';
 import SaveEntryModal from './components/SaveEntryModal.jsx';
 
-import Auth from './Auth';
-const auth = new Auth();
 
 const mapboxAccessToken = "pk.eyJ1IjoiYWFyb25jLXJlZ2VuIiwiYSI6ImNqa2I4dW9sbjBob3czcHA4amJqM2NhczAifQ.4HW-QDLUBJiHxOjDakKm2w";
 
@@ -76,7 +72,7 @@ class App extends Component {
 
   onLogout = (e) => {
     this.setState({ anchorEl: null });
-    auth.logout();
+    this.props.actions.logout();
   }
 
   gotoRegen = () => {
@@ -180,8 +176,9 @@ class App extends Component {
 
   render() {
     const worldview = [-60, -60, 60, 60]; // default mapbox worldview
-    const { theme, map, user, actions, addModalOpen, saveModalOpen } = this.props;
+    const { theme, map, user, actions, addModalOpen, saveModalOpen, isAuthenticated } = this.props;
     const { features, selected } = map;
+    const { login } = actions;
 
     const styles = {
       primaryColor: {
@@ -231,25 +228,19 @@ class App extends Component {
             }
           });
 
-        if (auth.isAuthenticated() && data) {
-            auth.getProfile((err, profile) => {
-              err ? console.log(err) : actions.updateUser(profile);
-          });
-        }
-
         return (
           <View style={{ flex: 1, flexDirection: 'column' }}>
-            {auth.isAuthenticated() ? null : <Welcome/> }
+            {isAuthenticated ? null : <Welcome/> }
             <AppBar position="static">
               <Toolbar variant="dense" style={{display: 'flex', justifyContent: 'space-between'}}>
                 <a target="_blank" href="http://regen.network" rel="noopener noreferrer">
-                  <img id="logo" src="logo_white.png"  style={{height:50}} alt="logo link to regen.network" title="Regen Logo"/>
+                  <img id="logo" src="logo_landscape.png" style={{height: 40, paddingTop: "5px"}} alt="logo link to regen.network" title="Regen Logo"/>
                 </a>
                 <Typography variant="title" style={{color: styles.primaryColor.color, fontFamily: styles.fontFamily}}>
-                  {auth.isAuthenticated() ? "Welcome, " +  user.given_name  + "!" : "Welcome!"}
+                  {isAuthenticated ? "Welcome, " +  user.given_name  + "!" : "Welcome!"}
                 </Typography>
                   <div>
-                    { auth.isAuthenticated()
+                    { isAuthenticated
   	  	              ? <div>
 	  	                  <IconButton
 		                      aria-owns={anchorEl ? 'user-menu' : null}
@@ -264,7 +255,7 @@ class App extends Component {
 		                      <MenuItem onClick={this.onLogout}>Sign Out</MenuItem>
 		                    </Menu>
 		                   </div>
-		                 : <Button onClick={() => auth.login()}
+		                 : <Button onClick={() => login()}
                          style={{
                            border: "2px solid #FFF",
                            fontFamily: styles.fontFamily,
@@ -296,9 +287,7 @@ class App extends Component {
                       // options seem to be ignored here. why?
                       logoPosition: 'top-left'
                   }}
-
                   fitBounds={bbox && [[bbox[0], bbox[1]], [bbox[2], bbox[3]]]}
-
                   onStyleLoad={this.onMapLoad}>
                   {
                     (polygons && polygons.length) ?
@@ -353,18 +342,29 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = ({ map, user, entry }) => ({
+const mapStateToProps = ({ map, entry, auth }) => ({
   map: map,
-  user: user,
+  user: auth.user,
   addModalOpen: entry.addModalOpen,
-  saveModalOpen: entry.saveModalOpen
+  saveModalOpen: entry.saveModalOpen,
+  isAuthenticated: auth.authenticated
 });
 
 const mapDispatchToProps = (dispatch) => {
+  const { logout, login } = authActions;
   const { updateFeatures, optimisticSaveFeature, updateSelected } = mapActions;
-  const { updateUser } = userActions;
   const { openNewEntryModal, closeNewEntryModal, openSaveEntryModal, closeSaveEntryModal } = entryActions;
-  const actions = bindActionCreators({ updateFeatures, optimisticSaveFeature, updateSelected, updateUser, openNewEntryModal, closeNewEntryModal, openSaveEntryModal, closeSaveEntryModal}, dispatch);
+  const actions = bindActionCreators({
+    updateFeatures,
+    optimisticSaveFeature,
+    updateSelected,
+    openNewEntryModal,
+    closeNewEntryModal,
+    openSaveEntryModal,
+    closeSaveEntryModal,
+    logout,
+    login
+  }, dispatch);
   return { actions }
 };
 

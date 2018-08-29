@@ -28,6 +28,7 @@ import Welcome from './components/welcome';
 import * as turf from '@turf/turf';
 
 import FeatureList from './components/featureList';
+import DetailView from './components/detailView';
 import AddEntryModal from './components/AddEntryModal.jsx';
 import SaveEntryModal from './components/SaveEntryModal.jsx';
 
@@ -207,7 +208,7 @@ class App extends Component {
           /* If the user has saved polygons, roll them into a GeoJson FeatureCollection
              and pass them to turf.bbox(). This bbox can be passed to mapbox's fitBounds()
              method which will ease the view to the centroid of the user's polygons.
-             Otherwise display a world map. 
+             Otherwise display a world map.
           */
         const nodes = data && data.allPolygons && data.allPolygons.nodes;
         let polygons = nodes && nodes.map(p => Object.assign({}, JSON.parse(p.geomJson), {id: p.id, name: p.name}));
@@ -218,7 +219,7 @@ class App extends Component {
                   type: 'Feature',
                   geometry: p
                 }))
-              }) : worldview ; 
+              }) : worldview ;
 
           // add optimisticSavedFeature to polygons
           features.forEach((feature) => {
@@ -339,7 +340,10 @@ class App extends Component {
                 </Map>
               </View>
             </View>
-            <View style={{ flex: 2 }}></View>
+            <View style={{ flex: 2 }}>
+              <div>Event and Observation Detail View</div>
+              <DetailView features={features} selected={selected} polygons={polygons} styles={styles} />
+            </View>
             <AddEntryModal open={addModalOpen} onClose={actions.closeNewEntryModal} polygons={polygons} />
             <SaveEntryModal open={saveModalOpen} onClose={actions.closeSaveEntryModal} user={data ? data.getCurrentUser : 'guest'} clearSelected={this.clearSelected} />
           </View>

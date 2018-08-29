@@ -97,8 +97,6 @@ class SavePolygonModal extends Component {
         const { currentFeature } = entry;
         const { type, species, date } = entry.entry;
 
-        console.log("DATE", date);
-
         const now = moment().format();
 
         const styles = {

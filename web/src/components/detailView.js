@@ -1,12 +1,12 @@
 import React from 'react';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
 import { withTheme } from '@material-ui/core/styles';
 import PolygonIcon from './polygonIcon';
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
+import * as moment from 'moment';
 
 const GET_ENTRIES = gql`
   query FindEntries($polygon: JSON!) {
@@ -28,32 +28,24 @@ const GET_ENTRIES = gql`
 
 const DetailView = withTheme()(({ features, selected, polygons, theme, styles }) => {
 
-  let selectedPolygon = null;
+  let polygon = null;
   const combinedFeatures = polygons ? polygons.concat(features) : features;
 
   if (combinedFeatures && combinedFeatures.length) {
     combinedFeatures.forEach((feature) => {
       if (selected[feature.id]) {
-        selectedPolygon = feature;
+        polygon = feature;
       }
     });
   }
 
-  console.log(selectedPolygon);
-
-  const fakeEntryItems = [
-    {type: 'Planting', polygon: selectedPolygon, species: 'Wheat', date: "2018-08-01", id: "1" },
-    {type: 'Harvesting', polygon: selectedPolygon, species: 'Wheat', date: "2018-08-01", id: "2" },
-    {type: 'Cover crop', polygon: selectedPolygon, species: 'Rye', date: "2018-08-01", id: "3" },
-    {type: 'Tillage', polygon: selectedPolygon, date: "2018-08-01", id: "4" }
-  ];
-
   return (
     <div>
-      { selectedPolygon ?
-        <Query query={GET_ENTRIES} variables={{ polygon: selectedPolygon }}>
+      { polygon ?
+        <Query query={GET_ENTRIES} variables={{ polygon }}>
           {({loading, error, data}) => {
             console.log("GET_ENTRIES", data);
+            const entries = data && data.findEntries && data.findEntries.nodes;
 
             return (
               <div>
@@ -61,19 +53,23 @@ const DetailView = withTheme()(({ features, selected, polygons, theme, styles })
                   <Typography variant="title" style={{fontFamily: styles.title.fontFamily, fontSize: styles.title.fontSize, marginRight: "25px"}}>
                     {"Plot Details"}
                   </Typography>
-                  <Typography variant="title" style={{color: styles.accent.blue, fontFamily: styles.title.fontFamily, fontSize: styles.title.fontSize, marginRight: "16px"}}>
-                    {selectedPolygon.name}
+                  <Typography variant="title" style={{color: styles.accent.blue, fontFamily: styles.title.fontFamily, fontSize: styles.title.fontSize, marginRight: "25px"}}>
+                    {polygon.name}
                   </Typography>
-                  <PolygonIcon polygon={selectedPolygon}/>
+                  <PolygonIcon polygon={polygon}/>
                 </div>
                 <div style={{textAlign: "center"}}>
-                  <List style={{width: "300px", margin: "0 auto"}}>
-                    {fakeEntryItems.map((entry) =>
+                  <List style={{width: "600px", margin: "0 auto"}}>
+                    {entries && entries.length ? entries.map((entry) =>
                       <EntryItem
                         entry={entry}
                         styles={styles}
                         key={entry.id} />
-                    )}
+                    ) :
+                    <Typography variant="subheading" style={{fontFamily: styles.title.fontFamily, fontSize: styles.fontSize}}>
+                      {"No records saved yet for this parcel."}
+                    </Typography>
+                  }
                   </List>
                 </div>
               </div>
@@ -88,9 +84,9 @@ const DetailView = withTheme()(({ features, selected, polygons, theme, styles })
 const EntryItem = ({ entry, styles }) => {
   return (
 	  <ListItem dense>
-      <ListItemText
-        disableTypography
-        primary={<Typography style={{fontSize: styles.fontSize}}>{entry.type} {entry.species} {entry.date}</Typography>} />
+      <Typography style={{fontSize: styles.fontSize, fontFamily: styles.fontFamily}}>
+        {`Event Type: ${entry.type}, Plant Type: ${entry.species}, Date: ${moment(entry.when).format("YYYY-MM-DD")}`}
+      </Typography>
     </ListItem>
   );
 }

@@ -330,7 +330,6 @@ class App extends Component {
               </View>
             </View>
             <View style={{ flex: 2 }}>
-              <div>Event and Observation Detail View</div>
               <DetailView features={features} selected={selected} polygons={polygons} styles={styles} />
             </View>
             <AddEntryModal open={addModalOpen} onClose={actions.closeNewEntryModal} polygons={polygons} />

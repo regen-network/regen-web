@@ -20,10 +20,10 @@ const DetailView = withTheme()(({ features, selected, polygons, theme, styles })
   }
 
   const fakeEntryItems = [
-    {type: 'Planting', polygon: selectedPolygon, species: 'Wheat', happenedAt: "2018-08-01" },
-    {type: 'Harvesting', polygon: selectedPolygon, species: 'Wheat', happenedAt: "2018-08-01" },
-    {type: 'Cover crop', polygon: selectedPolygon, species: 'Rye', happenedAt: "2018-08-01" },
-    {type: 'Tillage', polygon: selectedPolygon, happenedAt: "2018-08-01" }
+    {type: 'Planting', polygon: selectedPolygon, species: 'Wheat', date: "2018-08-01" },
+    {type: 'Harvesting', polygon: selectedPolygon, species: 'Wheat', date: "2018-08-01" },
+    {type: 'Cover crop', polygon: selectedPolygon, species: 'Rye', date: "2018-08-01" },
+    {type: 'Tillage', polygon: selectedPolygon, date: "2018-08-01" }
   ];
 
   return (
@@ -31,19 +31,24 @@ const DetailView = withTheme()(({ features, selected, polygons, theme, styles })
       { selectedPolygon ?
         <div>
           <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
-            <Typography variant="title" style={{color: styles.accent.blue, fontFamily: styles.title.fontFamily, fontSize: styles.title.fontSize, marginRight: "25px"}}>
+            <Typography variant="title" style={{fontFamily: styles.title.fontFamily, fontSize: styles.title.fontSize, marginRight: "25px"}}>
+              {"Plot Details"}
+            </Typography>
+            <Typography variant="title" style={{color: styles.accent.blue, fontFamily: styles.title.fontFamily, fontSize: styles.title.fontSize, marginRight: "16px"}}>
               {selectedPolygon.name}
             </Typography>
             <PolygonIcon polygon={selectedPolygon}/>
           </div>
-          <List>
-            {fakeEntryItems.map((entry) =>
-              <EntryItem
-                entry={entry}
-                styles={styles}
-                key={entry.polygon.id} />
-            )}
-          </List>
+          <div style={{textAlign: "center"}}>
+            <List style={{width: "300px", margin: "0 auto"}}>
+              {fakeEntryItems.map((entry) =>
+                <EntryItem
+                  entry={entry}
+                  styles={styles}
+                  key={entry.polygon.id} />
+              )}
+            </List>
+          </div>
         </div>
         : null
       }

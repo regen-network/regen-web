@@ -209,14 +209,14 @@ class App extends Component {
           */
         const nodes = data && data.allPolygons && data.allPolygons.nodes;
         let polygons = nodes && nodes.map(p => Object.assign({}, JSON.parse(p.geomJson), {id: p.id, name: p.name}));
-        const bbox = polygons ?
+        const bbox = polygons && polygons.length ?
               turf.bbox({
                 type: 'FeatureCollection',
                 features: polygons.map(p => ({
                   type: 'Feature',
                   geometry: p
                 }))
-              }) : worldview ;
+              }) : worldview;
 
           // add optimisticSavedFeature to polygons
           features.forEach((feature) => {
@@ -224,7 +224,9 @@ class App extends Component {
               let optimisticSavedFeature = Object.assign({}, feature, {
                 coordinates: feature.geometry.coordinates
               });
-              polygons.unshift(optimisticSavedFeature);
+              polygons && polygons.length
+              ? polygons.unshift(optimisticSavedFeature)
+              : polygons = [optimisticSavedFeature];
             }
           });
 
@@ -333,7 +335,7 @@ class App extends Component {
               <DetailView features={features} selected={selected} polygons={polygons} styles={styles} />
             </View>
             <AddEntryModal open={addModalOpen} onClose={actions.closeNewEntryModal} polygons={polygons} />
-            <SaveEntryModal open={saveModalOpen} onClose={actions.closeSaveEntryModal} user={data ? data.getCurrentUser : 'guest'} clearSelected={this.clearSelected} />
+            <SaveEntryModal open={saveModalOpen} onClose={actions.closeSaveEntryModal} user={data && data.getCurrentUser} clearSelected={this.clearSelected} />
           </View>
           );
         }}

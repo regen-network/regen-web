@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { actions as entryActions } from "../actions/entry";
 import { actions as mapActions } from "../actions/map";
+import { actions as authActions } from "../actions/auth";
 import Modal from '@material-ui/core/Modal';
 import TextField from '@material-ui/core/TextField';
 import FormGroup from '@material-ui/core/FormGroup';
@@ -19,8 +20,6 @@ import gql from "graphql-tag";
 import { Mutation } from "react-apollo";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import Auth from '../Auth';
-const auth = new Auth();
 
 const LOG_ENTRY = gql`
    mutation LogEntry($type: String!, $comment: String, $polygon: JSON!, $point: JSON, $species: String, $unit: String, $numericValue: BigFloat, $happenedAt: Datetime) {
@@ -93,11 +92,9 @@ class SavePolygonModal extends Component {
     };
 
     render() {
-        const {open, onClose, entry, patchNewEntry, theme, authenticated, user, clearSelected, optimisticSaveFeature} = this.props;
+        const {open, onClose, entry, patchNewEntry, theme, authenticated, clearSelected, optimisticSaveFeature, user, login} = this.props;
         const { currentFeature } = entry;
         const { type, species, date } = entry.entry;
-
-        console.log("DATE", date);
 
         const now = moment().format();
 
@@ -310,7 +307,7 @@ class SavePolygonModal extends Component {
                             {"Please log in to access this feature."}
                           </Typography>
                           <Button
-                            onClick={() => auth.login()}
+                            onClick={() => login()}
                             style={{
                               marginTop: "25px",
                               backgroundColor: styles.primaryColor.backgroundColor,
@@ -327,15 +324,16 @@ class SavePolygonModal extends Component {
     }
 }
 
-const mapStateToProps = ({ entry, user }) => ({
+const mapStateToProps = ({ entry, auth }) => ({
     entry: entry,
-    authenticated: user.authenticated,
+    authenticated: auth.authenticated,
 });
 
 const mapDispatchToProps = (dispatch) => {
     const { patchNewEntry, closeSaveEntryModal } = entryActions;
     const { optimisticSaveFeature } = mapActions;
-    return bindActionCreators({ patchNewEntry, closeSaveEntryModal, optimisticSaveFeature }, dispatch);
+    const { login } = authActions;
+    return bindActionCreators({ patchNewEntry, closeSaveEntryModal, optimisticSaveFeature, login }, dispatch);
 };
 
 export default withTheme()(connect(mapStateToProps, mapDispatchToProps)(SavePolygonModal));

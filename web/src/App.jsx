@@ -30,6 +30,7 @@ import * as turf from '@turf/turf';
 import FeatureList from './components/featureList';
 import AddEntryModal from './components/AddEntryModal.jsx';
 import SaveEntryModal from './components/SaveEntryModal.jsx';
+import ImportFile from './components/ImportFile.jsx';
 
 import Auth from './Auth';
 const auth = new Auth();
@@ -73,7 +74,7 @@ class App extends Component {
     this.setState({ anchorEl: null });
   };
 
-  onLogout = (e) => {
+  onLogout = () => {
     this.setState({ anchorEl: null });
     auth.logout();
   }
@@ -83,6 +84,15 @@ class App extends Component {
         'http://regen.network',
         '_blank'
       );
+      // close the menu
+      this.setState({ anchorEl: null });
+  }
+
+  onImport = () => {
+    console.log("Import select3d");
+      console.log("react version",React.version);
+    // close menu
+    this.setState({ anchorEl: null });
   }
 
   onDrawUpdated = (e) => {
@@ -260,6 +270,7 @@ class App extends Component {
                         </IconButton>
 		                    <Menu id="user-menu" anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={this.onMenuClose}>
 		                      <MenuItem onClick={this.gotoRegen}>Regen</MenuItem>
+		                      <MenuItem onClick={this.onImport}>Import</MenuItem>
 		                      <MenuItem onClick={this.onLogout}>Sign Out</MenuItem>
 		                    </Menu>
 		                   </div>

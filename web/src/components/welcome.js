@@ -70,11 +70,11 @@ class Welcome extends React.Component {
             backgroundSize: "cover"
           }}>
             <img id="logo" src="white_splash.png" alt="logo link to regen.network"/>
-            <h2 style={{fontFamily: styles.title.font}}>Welcome to Regen Network</h2>
-            <div style={{fontFamily: styles.content.font, width: "300px", textAlign: "center", fontSize: "1.2em"}}>
+            <h2 style={{fontFamily: styles.title.font, margin: "0 auto"}}>Welcome to Regen Network</h2>
+            <div style={{fontFamily: styles.content.font, width: "300px", textAlign: "center", fontSize: "1.2em", margin: "0 auto"}}>
               <p>This eco-app is a tool for farmers to share farm practices and geospatial data with the Regen science team.
             We promise to keep your information private as we use what you share with us to build a system that rewards you for ecological regeneration.</p>
-            <p>Thanks for collaborating with us.</p>
+              <p>Thanks for collaborating with us.</p>
             </div>
             <Button style={{color: styles.content.color, marginTop: "25px", border: "3px solid white", fontFamily: styles.title.font}} onClick={this.closeModal}>Let's Get Started</Button>
           </div>

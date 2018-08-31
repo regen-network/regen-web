@@ -3,4 +3,3 @@ SELECT * FROM entry WHERE st_intersects(st_geomfromgeojson(find_entries.polygon:
 $$ language sql stable;
 
 create index entry_polygon on entry using gist (polygon);
-vacuum analyze entry (polygon);

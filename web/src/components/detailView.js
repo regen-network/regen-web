@@ -34,7 +34,7 @@ const DetailView = withTheme()(({ features, selected, polygons, theme, styles })
   if (combinedFeatures && combinedFeatures.length) {
     combinedFeatures.forEach((feature) => {
       if (selected[feature.id]) {
-        polygon = feature;
+        polygon = feature.geometry || feature;
       }
     });
   }
@@ -44,7 +44,7 @@ const DetailView = withTheme()(({ features, selected, polygons, theme, styles })
       { polygon ?
         <Query query={GET_ENTRIES} variables={{ polygon }}>
           {({loading, error, data}) => {
-            console.log("GET_ENTRIES", data);
+
             const entries = data && data.findEntries && data.findEntries.nodes;
 
             return (

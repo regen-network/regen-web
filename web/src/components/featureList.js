@@ -4,6 +4,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import Divider from '@material-ui/core/Divider';
 import { withTheme } from '@material-ui/core/styles';
 import PolygonIcon from './polygonIcon';
 
@@ -42,6 +43,7 @@ const FeatureList = withTheme()(({ features, selected, polygons, toggleSelect, t
             {"Add a new parcel by drawing a shape outlining its boundaries on the map."}
           </Typography>
       }
+      <Divider style={{marginTop: "15px"}} />
       {polygons && polygons.length ?
         <List>
           <Typography variant="title" style={{fontFamily: styles.title.fontFamily, fontSize: styles.title.fontSize, margin: "25px"}}>
@@ -57,6 +59,7 @@ const FeatureList = withTheme()(({ features, selected, polygons, toggleSelect, t
         </List>
         : ""
       }
+      <Divider />
     </div>
   );
 });

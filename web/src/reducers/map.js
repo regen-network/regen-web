@@ -3,7 +3,7 @@ import { constants } from "../actions/map";
 let initialState = {
     features: [],
     selected: {},
-    zoom: null
+    zoom: false
 };
 
 const reducerMap = {};
@@ -13,9 +13,8 @@ reducerMap[constants.UPDATE_FEATURES] = (state, { payload }) => {
 	  return {...state, features};
 };
 
-reducerMap[constants.UPDATE_ZOOM] = (state, { payload }) => {
-    const { zoom} = payload;
-	  return {...state, zoom};
+reducerMap[constants.UPDATE_ZOOM] = (state, _ ) => {
+	  return {...state, zoom:true };
 };
 
 reducerMap[constants.OPTIMISTIC_SAVE_FEATURE] = (state, { payload }) => {

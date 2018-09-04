@@ -2,7 +2,7 @@ const UPDATE_FEATURES = "UPDATE_FEATURES";
 const updateFeatures = (features) => ({ type: UPDATE_FEATURES, payload: { features }});
 
 const UPDATE_ZOOM = "UPDATE_ZOOM";
-const updateZoom = (zoom) => ({ type: UPDATE_ZOOM, payload: { zoom }});
+const updateZoom = () => ({ type: UPDATE_ZOOM });
 
 const OPTIMISTIC_SAVE_FEATURE = "OPTIMISTIC_SAVE_FEATURE";
 const optimisticSaveFeature = (id, name) => ({ type: OPTIMISTIC_SAVE_FEATURE, payload: { id, name }});

@@ -15,7 +15,7 @@ const login = () => {
 }
 
 const handleAuthentication = () => {
-    new Promise ((resolve, reject) => {
+    return new Promise ((resolve, reject) => {
       webAuth.parseHash((err, authResult) => {
         if (authResult && authResult.accessToken && authResult.idToken) {
             setSession(authResult);
@@ -42,6 +42,7 @@ const handleAuthentication = () => {
 }
 
 const setSession = (authResult) => {
+  console.log("inside setSession");
   // Set the time that the Access Token will expire at
   const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
   localStorage.setItem('access_token', authResult.accessToken);
@@ -77,20 +78,19 @@ const getAccessToken = () => {
 
 const getValidToken = () => {
   if (isAuthenticated()) {
-    getProfile((err, profile) => {
-        err ? console.log(err) : store.dispatch(loginSuccess(profile));
-    });
     return getAccessToken();
   }
   return null;
 }
 
 const getProfile = (cb) => {
-  let accessToken = getAccessToken();
-  webAuth.client.userInfo(accessToken, (err, profile) => {
-    cb(err, profile);
-    return profile;
-  });
+  let accessToken = getValidToken();
+  if (accessToken) {
+    webAuth.client.userInfo(accessToken, (err, profile) => {
+      cb(err, profile);
+      return profile;
+    });
+  }
 }
 
 const renewToken = () => {

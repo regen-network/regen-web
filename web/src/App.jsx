@@ -216,7 +216,8 @@ class App extends Component {
                   type: 'Feature',
                   geometry: p
                 }))
-              }) : worldview;
+              })
+               : worldview;
 
           // add optimisticSavedFeature to polygons
           features.forEach((feature) => {

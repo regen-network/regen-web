@@ -11,7 +11,7 @@ import store from './store';
 import createBrowserHistory from 'history/createBrowserHistory';
 import makeMainRoutes from './routes';
 import { actions as authActions } from './actions/auth';
-const { getValidToken, handleAuthentication } = authActions;
+const { getValidToken, handleAuthentication, getProfile, loginSuccess } = authActions;
 
 const client = new ApolloClient({
   uri: "/graphql",
@@ -46,6 +46,11 @@ async function init() {
   if (/access_token|id_token|error/.test(hash)) {
     await handleAuthentication();
     history.replace({pathname, search, state});
+  }
+  else {
+    getProfile((err, profile) => {
+        err ? console.log(err) : store.dispatch(loginSuccess(profile));
+    });
   }
   ReactDOM.render(<Root />, document.getElementById('root'));
   registerServiceWorker();

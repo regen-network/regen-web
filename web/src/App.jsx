@@ -98,7 +98,6 @@ class App extends Component {
   }
 
   onMapLoad = (map) => {
-
     const drawControl = new MapboxDraw({
       controls: {
         polygon: true,
@@ -123,7 +122,6 @@ class App extends Component {
     map.on('draw.uncombine', this.onDrawUpdated);
     map.on('draw.update', this.onDrawUpdated);
     map.on('draw.selectionchange', this.onSelectionChange);
-
   }
 
   drawSelected = (id) => {
@@ -209,7 +207,6 @@ class App extends Component {
              method which will ease the view to the centroid of the user's polygons.
              Otherwise display a world map.
           */
-          let z;
         const nodes = data && data.allPolygons && data.allPolygons.nodes;
         let polygons = nodes && nodes.map(p => Object.assign({}, JSON.parse(p.geomJson), {id: p.id, name: p.name}));
 /*

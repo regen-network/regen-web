@@ -62,6 +62,11 @@ class App extends Component {
     this.state = {};
   }
 
+  componentWillMount = () => {
+    const unsavedFeatures = localStorage.getItem("features");
+    this.setState({ unsavedFeatures: JSON.parse(unsavedFeatures) });
+  }
+
   onMenuClick = (e) => {
     this.setState({ anchorEl: e.currentTarget });
   }
@@ -85,6 +90,10 @@ class App extends Component {
   onDrawUpdated = (e) => {
     const { updateFeatures } = this.props.actions;
     const updatedFeatures = this.state.drawControl.getAll();
+    if (!this.props.isAuthenticated) {
+      // if user is not logged in, save to local storage
+      localStorage.setItem("features", JSON.stringify(updatedFeatures.features));
+    }
     updateFeatures(updatedFeatures.features);
   }
 
@@ -177,7 +186,7 @@ class App extends Component {
   render() {
     const worldview = [-60, -60, 60, 60]; // default mapbox worldview
     const { theme, map, user, actions, addModalOpen, saveModalOpen, isAuthenticated } = this.props;
-    const { features, selected } = map;
+    let { features, selected } = map;
     const { login } = actions;
 
     const styles = {
@@ -187,7 +196,8 @@ class App extends Component {
       },
       accent: {
         blue: theme.palette.accent.blue,
-        yellow: theme.palette.accent.yellow
+        yellow: theme.palette.accent.yellow,
+        red: theme.palette.accent.red
       },
       fontFamily: theme.fontFamily,
       fontSize: "16px",
@@ -196,7 +206,12 @@ class App extends Component {
         fontSize: "20px"
       }
     };
-    const { anchorEl } = this.state;
+    const { anchorEl, unsavedFeatures } = this.state;
+
+    if (unsavedFeatures && unsavedFeatures.length) {
+      features = features.concat(unsavedFeatures);
+      // localStorage.removeItem("features");
+    }
 
     return (
 
@@ -320,7 +335,34 @@ class App extends Component {
                       })
                     : null
                   }
-
+                  {
+                    (unsavedFeatures && unsavedFeatures.length) ?
+                      unsavedFeatures.map(feature => {
+                        let fillColor = selected[feature.id] ? styles.accent.yellow : styles.accent.red;
+                        return (
+                          <GeoJSONLayer
+                            data={feature}
+                            key={feature.id}
+                            fillOnClick={() => this.drawSelected(feature.id)}
+                            fillPaint={{
+                              'fill-color': fillColor,
+                              'fill-opacity': 0.7
+                            }}
+                            linePaint={{
+                              'line-color': fillColor,
+                              'line-opacity': 0.9,
+                              'line-width': 5
+                            }}
+                            symbolLayout={{
+                              "text-field": "Unsaved Plot",
+                              "text-font": ["Lato Regular"],
+                              "text-offset": [0, 0.6],
+                              "text-anchor": "top"
+                            }}/>
+                        )
+                      })
+                    : null
+                  }
                     <div style={{position: "absolute", bottom: "25px", right: "10px"}}>
                       <Button
                         variant="fab"

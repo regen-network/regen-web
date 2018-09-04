@@ -35,7 +35,7 @@ const mapboxAccessToken = "pk.eyJ1IjoiYWFyb25jLXJlZ2VuIiwiYSI6ImNqa2I4dW9sbjBob3
 const Map = ReactMapboxGl({
     accessToken: mapboxAccessToken,
     logoPosition: 'bottom-left',
-    jumpTo: true,
+    easeTo: true,
 //    interactive: false,
     flyTo: false
 });
@@ -96,7 +96,7 @@ class App extends Component {
     updateSelected(selected);
   }
 
-  onMapLoad = (map) => {
+    onMapLoad = (map, bbox) => {
     const drawControl = new MapboxDraw({
       controls: {
         polygon: true,
@@ -121,6 +121,8 @@ class App extends Component {
     map.on('draw.uncombine', this.onDrawUpdated);
     map.on('draw.update', this.onDrawUpdated);
     map.on('draw.selectionchange', this.onSelectionChange);
+
+        map.fitBounds([[bbox[0], bbox[1]], [bbox[2], bbox[3]]]);
   }
 
   drawSelected = (id) => {
@@ -206,6 +208,7 @@ class App extends Component {
              method which will ease the view to the centroid of the user's polygons.
              Otherwise display a world map.
           */
+          let z;
         const nodes = data && data.allPolygons && data.allPolygons.nodes;
         let polygons = nodes && nodes.map(p => Object.assign({}, JSON.parse(p.geomJson), {id: p.id, name: p.name}));
         const bbox = polygons ?
@@ -286,8 +289,9 @@ class App extends Component {
                       // options seem to be ignored here. why?
                       logoPosition: 'top-left'
                   }}
-                  fitBounds={bbox && [[bbox[0], bbox[1]], [bbox[2], bbox[3]]]}
-                  onStyleLoad={this.onMapLoad}>
+
+
+                  onStyleLoad={(map) => {this.onMapLoad(map, bbox)}}>
                   {
                     (polygons && polygons.length) ?
                       polygons.map(polygon => {

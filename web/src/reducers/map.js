@@ -2,7 +2,8 @@ import { constants } from "../actions/map";
 
 let initialState = {
   features: [],
-  selected: {}
+  selected: {},
+  warningModalOpen: false
 };
 
 const reducerMap = {};
@@ -30,6 +31,14 @@ reducerMap[constants.OPTIMISTIC_SAVE_FEATURE] = (state, { payload }) => {
 reducerMap[constants.UPDATE_SELECTED] = (state, { payload }) => {
     const { selected } = payload;
 	  return {...state, selected};
+};
+
+reducerMap[constants.OPEN_WARNING_MODAL] = (state, _) => {
+    return {...state, warningModalOpen: true};
+};
+
+reducerMap[constants.CLOSE_WARNING_MODAL] = (state, _) => {
+    return {...state, warningModalOpen: false};
 };
 
 

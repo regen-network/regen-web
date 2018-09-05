@@ -42,7 +42,6 @@ const handleAuthentication = () => {
 }
 
 const setSession = (authResult) => {
-  console.log("inside setSession");
   // Set the time that the Access Token will expire at
   const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
   localStorage.setItem('access_token', authResult.accessToken);
@@ -58,6 +57,9 @@ const logout = () => {
   localStorage.removeItem('access_token');
   localStorage.removeItem('id_token');
   localStorage.removeItem('expires_at');
+
+  // clear unsaved polygons
+  localStorage.removeItem('features');
 
   clearTimeout(tokenRenewalTimeout);
   store.dispatch(logoutSuccess);

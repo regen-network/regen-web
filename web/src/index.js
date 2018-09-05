@@ -51,6 +51,7 @@ async function init() {
     getProfile((err, profile) => {
         err ? console.log(err) : store.dispatch(loginSuccess(profile));
     });
+    // check local storage for feature
   }
   ReactDOM.render(<Root />, document.getElementById('root'));
   registerServiceWorker();

@@ -7,7 +7,13 @@ const optimisticSaveFeature = (id, name) => ({ type: OPTIMISTIC_SAVE_FEATURE, pa
 const UPDATE_SELECTED = "UPDATE_SELECTED";
 const updateSelected = (selected) => ({ type: UPDATE_SELECTED, payload: { selected }});
 
-const constants = { UPDATE_FEATURES, OPTIMISTIC_SAVE_FEATURE, UPDATE_SELECTED };
-const actions =  { updateFeatures, optimisticSaveFeature, updateSelected };
+const OPEN_WARNING_MODAL = "OPEN_WARNING_MODAL";
+const openWarningModal = () => ({type: OPEN_WARNING_MODAL});
+
+const CLOSE_WARNING_MODAL = "CLOSE_WARNING_MODAL";
+const closeWarningModal = () => ({type: CLOSE_WARNING_MODAL});
+
+const constants = { UPDATE_FEATURES, OPTIMISTIC_SAVE_FEATURE, UPDATE_SELECTED, OPEN_WARNING_MODAL, CLOSE_WARNING_MODAL };
+const actions =  { updateFeatures, optimisticSaveFeature, updateSelected, openWarningModal, closeWarningModal };
 
 export { constants, actions };

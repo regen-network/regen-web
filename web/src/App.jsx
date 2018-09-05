@@ -29,6 +29,7 @@ import FeatureList from './components/featureList';
 import DetailView from './components/detailView';
 import AddEntryModal from './components/AddEntryModal.jsx';
 import SaveEntryModal from './components/SaveEntryModal.jsx';
+import UnsavedPolygonWarning from './components/unsavedPolygonWarning';
 
 
 const mapboxAccessToken = "pk.eyJ1IjoiYWFyb25jLXJlZ2VuIiwiYSI6ImNqa2I4dW9sbjBob3czcHA4amJqM2NhczAifQ.4HW-QDLUBJiHxOjDakKm2w";
@@ -71,8 +72,13 @@ class App extends Component {
   };
 
   onLogout = (e) => {
-    this.setState({ anchorEl: null });
-    this.props.actions.logout();
+    if (this.props.map.features) {
+      this.props.actions.openWarningModal();
+    }
+    else {
+      this.setState({ anchorEl: null });
+      this.props.actions.logout();
+    }
   }
 
   gotoRegen = () => {
@@ -85,6 +91,10 @@ class App extends Component {
   onDrawUpdated = (e) => {
     const { updateFeatures } = this.props.actions;
     const updatedFeatures = this.state.drawControl.getAll();
+    if (!this.props.isAuthenticated) {
+      // if user is not logged in, save to local storage
+      localStorage.setItem("features", JSON.stringify(updatedFeatures.features));
+    }
     updateFeatures(updatedFeatures.features);
   }
 
@@ -105,7 +115,6 @@ class App extends Component {
       },
       displayControlsDefault: false
     });
-    this.setState({ drawControl });
     map.addControl(drawControl, 'top-left');
     map.addControl(new mapbox.GeolocateControl({
       positionOptions: {
@@ -116,6 +125,19 @@ class App extends Component {
     map.addControl(new MapboxGeocoder({
       accessToken: mapboxAccessToken
     }));
+
+
+    const unsavedFeatures = JSON.parse(localStorage.getItem("features"));
+    if (unsavedFeatures && unsavedFeatures.length) {
+      this.props.actions.updateFeatures(unsavedFeatures);
+
+      drawControl.set({
+        type: 'FeatureCollection',
+        features: unsavedFeatures
+      });
+    }
+
+    this.setState({ drawControl });
     map.on('draw.create', this.onDrawUpdated);
     map.on('draw.delete', this.onDrawUpdated);
     map.on('draw.combine', this.onDrawUpdated);
@@ -176,7 +198,7 @@ class App extends Component {
 
   render() {
     const worldview = [-60, -60, 60, 60]; // default mapbox worldview
-    const { theme, map, user, actions, addModalOpen, saveModalOpen, isAuthenticated } = this.props;
+    const { theme, map, user, actions, addModalOpen, saveModalOpen, isAuthenticated, warningModalOpen } = this.props;
     const { features, selected } = map;
     const { login } = actions;
 
@@ -187,7 +209,8 @@ class App extends Component {
       },
       accent: {
         blue: theme.palette.accent.blue,
-        yellow: theme.palette.accent.yellow
+        yellow: theme.palette.accent.yellow,
+        red: theme.palette.accent.red
       },
       fontFamily: theme.fontFamily,
       fontSize: "16px",
@@ -320,7 +343,6 @@ class App extends Component {
                       })
                     : null
                   }
-
                     <div style={{position: "absolute", bottom: "25px", right: "10px"}}>
                       <Button
                         variant="fab"
@@ -337,6 +359,7 @@ class App extends Component {
             </View>
             <AddEntryModal open={addModalOpen} onClose={actions.closeNewEntryModal} polygons={polygons} />
             <SaveEntryModal open={saveModalOpen} onClose={actions.closeSaveEntryModal} user={data && data.getCurrentUser} clearSelected={this.clearSelected} />
+            <UnsavedPolygonWarning open={warningModalOpen} onClose={actions.closeWarningModal} logout={actions.logout} />
           </View>
           );
         }}
@@ -349,12 +372,13 @@ const mapStateToProps = ({ map, entry, auth }) => ({
   user: auth.user,
   addModalOpen: entry.addModalOpen,
   saveModalOpen: entry.saveModalOpen,
-  isAuthenticated: auth.authenticated
+  isAuthenticated: auth.authenticated,
+  warningModalOpen: map.warningModalOpen
 });
 
 const mapDispatchToProps = (dispatch) => {
   const { logout, login } = authActions;
-  const { updateFeatures, optimisticSaveFeature, updateSelected } = mapActions;
+  const { updateFeatures, optimisticSaveFeature, updateSelected, openWarningModal, closeWarningModal } = mapActions;
   const { openNewEntryModal, closeNewEntryModal, openSaveEntryModal, closeSaveEntryModal } = entryActions;
   const actions = bindActionCreators({
     updateFeatures,
@@ -364,6 +388,8 @@ const mapDispatchToProps = (dispatch) => {
     closeNewEntryModal,
     openSaveEntryModal,
     closeSaveEntryModal,
+    openWarningModal,
+    closeWarningModal,
     logout,
     login
   }, dispatch);

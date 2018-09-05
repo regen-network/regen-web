@@ -219,11 +219,9 @@ class App extends Component {
                   geometry: p
                 }))
               });
-            console.log("bbox=",bbox);
               updateZoom();
-	        }else{
-              console.log("conditions false, zoom=",zoom)
-          }
+	        }
+
           // add optimisticSavedFeature to polygons
           features.forEach((feature) => {
             if (feature.saved) {
@@ -295,9 +293,7 @@ class App extends Component {
                       // options seem to be ignored here. why?
                       logoPosition: 'top-left'
                   }}
-
-		              fitBounds = { !zoom ? ([[bbox[0], bbox[1]], [bbox[2], bbox[3]]]) : null }
-
+		              fitBounds={!zoom ? ([[bbox[0], bbox[1]], [bbox[2], bbox[3]]]) : null}
                   onStyleLoad={this.onMapLoad}>
                   {
                     (polygons && polygons.length) ?

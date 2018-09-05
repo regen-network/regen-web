@@ -64,10 +64,10 @@ class App extends Component {
   }
 
   componentWillMount = () => {
-    const unsavedFeatures = JSON.parse(localStorage.getItem("features"));
-    if (unsavedFeatures && unsavedFeatures.length) {
-      this.props.actions.updateUnsavedFeatures(unsavedFeatures);
-    }
+    // const unsavedFeatures = JSON.parse(localStorage.getItem("features"));
+    // if (unsavedFeatures && unsavedFeatures.length) {
+    //   this.props.actions.updateUnsavedFeatures(unsavedFeatures);
+    // }
   }
 
   onMenuClick = (e) => {
@@ -79,10 +79,7 @@ class App extends Component {
   };
 
   onLogout = (e) => {
-    // check if unsaved polygons
     if (this.props.map.unsavedFeatures) {
-      console.log("unsaved features remain!")
-      // show verification alert
       this.props.actions.openWarningModal();
     }
     else {
@@ -118,6 +115,7 @@ class App extends Component {
   }
 
   onMapLoad = (map) => {
+
     const drawControl = new MapboxDraw({
       controls: {
         polygon: true,
@@ -125,7 +123,6 @@ class App extends Component {
       },
       displayControlsDefault: false
     });
-    this.setState({ drawControl });
     map.addControl(drawControl, 'top-left');
     map.addControl(new mapbox.GeolocateControl({
       positionOptions: {
@@ -136,6 +133,20 @@ class App extends Component {
     map.addControl(new MapboxGeocoder({
       accessToken: mapboxAccessToken
     }));
+
+
+    const unsavedFeatures = JSON.parse(localStorage.getItem("features"));
+    console.log("unsavedFeatures present", unsavedFeatures);
+    if (unsavedFeatures && unsavedFeatures.length) {
+      this.props.actions.updateFeatures(unsavedFeatures);
+
+      drawControl.set({
+        type: 'FeatureCollection',
+        features: unsavedFeatures
+      });
+    }
+
+    this.setState({ drawControl });
     map.on('draw.create', this.onDrawUpdated);
     map.on('draw.delete', this.onDrawUpdated);
     map.on('draw.combine', this.onDrawUpdated);
@@ -197,7 +208,7 @@ class App extends Component {
   render() {
     const worldview = [-60, -60, 60, 60]; // default mapbox worldview
     const { theme, map, user, actions, addModalOpen, saveModalOpen, isAuthenticated, warningModalOpen } = this.props;
-    let { features, selected, unsavedFeatures } = map;
+    let { features, selected } = map;
     const { login } = actions;
 
     const styles = {
@@ -219,9 +230,9 @@ class App extends Component {
     };
     const { anchorEl } = this.state;
 
-    if (unsavedFeatures && unsavedFeatures.length) {
-      features = features.concat(unsavedFeatures);
-    }
+    // if (unsavedFeatures && unsavedFeatures.length) {
+    //   features = features.concat(unsavedFeatures);
+    // }
 
     return (
 
@@ -337,34 +348,6 @@ class App extends Component {
                             }}
                             symbolLayout={{
                               "text-field": polygon.name,
-                              "text-font": ["Lato Regular"],
-                              "text-offset": [0, 0.6],
-                              "text-anchor": "top"
-                            }}/>
-                        )
-                      })
-                    : null
-                  }
-                  {
-                    (unsavedFeatures && unsavedFeatures.length) ?
-                      unsavedFeatures.map(feature => {
-                        let fillColor = selected[feature.id] ? styles.accent.yellow : styles.accent.red;
-                        return (
-                          <GeoJSONLayer
-                            data={feature}
-                            key={feature.id}
-                            fillOnClick={() => this.drawSelected(feature.id)}
-                            fillPaint={{
-                              'fill-color': fillColor,
-                              'fill-opacity': 0.7
-                            }}
-                            linePaint={{
-                              'line-color': fillColor,
-                              'line-opacity': 0.9,
-                              'line-width': 5
-                            }}
-                            symbolLayout={{
-                              "text-field": "Unsaved Plot",
                               "text-font": ["Lato Regular"],
                               "text-offset": [0, 0.6],
                               "text-anchor": "top"

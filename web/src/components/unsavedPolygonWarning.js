@@ -17,6 +17,7 @@ class UnsavedPolygonWarning extends Component {
     const styles = {
       white: theme.palette.common.white,
       color: theme.palette.accent.blue,
+      warning: theme.palette.accent.red,
       font: theme.title.fontFamily
     };
 
@@ -29,10 +30,19 @@ class UnsavedPolygonWarning extends Component {
                 {"You have unsaved parcels drawn on the map. Erase them and sign out?"}
               </Typography>
               <Button
-                onClick={() => logout()}
+                onClick={onClose}
                 style={{
                   marginTop: "25px",
                   backgroundColor: styles.color,
+                  fontFamily: styles.font,
+                  color: styles.white}}>
+                Cancel
+              </Button>
+              <Button
+                onClick={() => logout()}
+                style={{
+                  marginTop: "25px",
+                  backgroundColor: styles.warning,
                   fontFamily: styles.font,
                   color: styles.white}}>
                 Sign Out

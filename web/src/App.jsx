@@ -63,13 +63,6 @@ class App extends Component {
     this.state = {};
   }
 
-  componentWillMount = () => {
-    // const unsavedFeatures = JSON.parse(localStorage.getItem("features"));
-    // if (unsavedFeatures && unsavedFeatures.length) {
-    //   this.props.actions.updateUnsavedFeatures(unsavedFeatures);
-    // }
-  }
-
   onMenuClick = (e) => {
     this.setState({ anchorEl: e.currentTarget });
   }
@@ -79,7 +72,7 @@ class App extends Component {
   };
 
   onLogout = (e) => {
-    if (this.props.map.unsavedFeatures) {
+    if (this.props.map.features) {
       this.props.actions.openWarningModal();
     }
     else {
@@ -115,7 +108,6 @@ class App extends Component {
   }
 
   onMapLoad = (map) => {
-
     const drawControl = new MapboxDraw({
       controls: {
         polygon: true,
@@ -136,7 +128,6 @@ class App extends Component {
 
 
     const unsavedFeatures = JSON.parse(localStorage.getItem("features"));
-    console.log("unsavedFeatures present", unsavedFeatures);
     if (unsavedFeatures && unsavedFeatures.length) {
       this.props.actions.updateFeatures(unsavedFeatures);
 
@@ -208,7 +199,7 @@ class App extends Component {
   render() {
     const worldview = [-60, -60, 60, 60]; // default mapbox worldview
     const { theme, map, user, actions, addModalOpen, saveModalOpen, isAuthenticated, warningModalOpen } = this.props;
-    let { features, selected } = map;
+    const { features, selected } = map;
     const { login } = actions;
 
     const styles = {
@@ -229,10 +220,6 @@ class App extends Component {
       }
     };
     const { anchorEl } = this.state;
-
-    // if (unsavedFeatures && unsavedFeatures.length) {
-    //   features = features.concat(unsavedFeatures);
-    // }
 
     return (
 
@@ -391,13 +378,12 @@ const mapStateToProps = ({ map, entry, auth }) => ({
 
 const mapDispatchToProps = (dispatch) => {
   const { logout, login } = authActions;
-  const { updateFeatures, optimisticSaveFeature, updateSelected, updateUnsavedFeatures, openWarningModal, closeWarningModal } = mapActions;
+  const { updateFeatures, optimisticSaveFeature, updateSelected, openWarningModal, closeWarningModal } = mapActions;
   const { openNewEntryModal, closeNewEntryModal, openSaveEntryModal, closeSaveEntryModal } = entryActions;
   const actions = bindActionCreators({
     updateFeatures,
     optimisticSaveFeature,
     updateSelected,
-    updateUnsavedFeatures,
     openNewEntryModal,
     closeNewEntryModal,
     openSaveEntryModal,

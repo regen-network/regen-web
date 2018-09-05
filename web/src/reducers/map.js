@@ -2,7 +2,6 @@ import { constants } from "../actions/map";
 
 let initialState = {
   features: [],
-  unsavedFeatures: [],
   selected: {},
   warningModalOpen: false
 };
@@ -14,36 +13,19 @@ reducerMap[constants.UPDATE_FEATURES] = (state, { payload }) => {
 	  return {...state, features};
 };
 
-reducerMap[constants.UPDATE_UNSAVED_FEATURES] = (state, { payload }) => {
-    const { unsavedFeatures } = payload;
-	  return {...state, unsavedFeatures};
-};
-
 reducerMap[constants.OPTIMISTIC_SAVE_FEATURE] = (state, { payload }) => {
-    const { newFeature, name } = payload;
-    let featureIdentified = false;
-    let unsavedFeatures = state.unsavedFeatures;
+    const { id, name } = payload;
     let selected = {};
     let features = state.features.map((feature) => {
-      if (feature.id === newFeature.id) {
+      if (feature.id === id) {
         feature.saved = true;
         feature.name = name;
-        featureIdentified = true;
+        selected[id] = true;
       }
       return feature;
     });
 
-    if (!featureIdentified) {
-      unsavedFeatures = state.unsavedFeatures.filter((feature) => {
-        return feature.id !== newFeature.id;
-      });
-
-      features.push(Object.assign({}, newFeature, {saved: true, name: name}));
-    }
-
-    selected[newFeature.id] = true;
-
-	  return {...state, features, selected, unsavedFeatures};
+	  return {...state, features, selected};
 };
 
 reducerMap[constants.UPDATE_SELECTED] = (state, { payload }) => {

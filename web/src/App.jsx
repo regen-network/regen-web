@@ -174,6 +174,7 @@ class App extends Component {
     drawControl.delete(id);
   }
 
+
   render() {
     const worldview = [-60, -60, 60, 60]; // default mapbox worldview
     const { theme, map, user, actions, addModalOpen, saveModalOpen, isAuthenticated } = this.props;
@@ -209,18 +210,6 @@ class App extends Component {
           */
         const nodes = data && data.allPolygons && data.allPolygons.nodes;
         let polygons = nodes && nodes.map(p => Object.assign({}, JSON.parse(p.geomJson), {id: p.id, name: p.name}));
-/*
-        const bbox = polygons && polygons.length && !zoom ?
-              { turf.bbox({
-                type: 'FeatureCollection',
-                features: polygons.map(p => ({
-                  type: 'Feature',
-                  geometry: p
-                }))
-              });
-              updateZoom() }
-              : worldview;
-*/
         let bbox = worldview;
         if (polygons && polygons.length && !zoom ) {
           bbox = turf.bbox({
@@ -230,8 +219,11 @@ class App extends Component {
                   geometry: p
                 }))
               });
+            console.log("bbox=",bbox);
               updateZoom();
-	}
+	        }else{
+              console.log("conditions false, zoom=",zoom)
+          }
           // add optimisticSavedFeature to polygons
           features.forEach((feature) => {
             if (feature.saved) {
@@ -304,9 +296,7 @@ class App extends Component {
                       logoPosition: 'top-left'
                   }}
 
-		  fitBounds = {
-		    zoom ? ([[bbox[0], bbox[1]], [bbox[2], bbox[3]]]) : null
-		  }
+		              fitBounds = { !zoom ? ([[bbox[0], bbox[1]], [bbox[2], bbox[3]]]) : null }
 
                   onStyleLoad={this.onMapLoad}>
                   {

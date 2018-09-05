@@ -91,6 +91,14 @@ class SavePolygonModal extends Component {
       this.setState({ [name]: e.target.checked });
     };
 
+    removeItemFromStorage = (id) => {
+      const unsavedFeatures = JSON.parse(localStorage.getItem("features"));
+      const remainingUnsavedFeatures = unsavedFeatures.filter((feature) => {
+        return feature.id !== id;
+      });
+      localStorage.setItem("features", JSON.stringify(remainingUnsavedFeatures));
+    }
+
     render() {
         const {open, onClose, entry, patchNewEntry, theme, authenticated, clearSelected, optimisticSaveFeature, user, login} = this.props;
         const { currentFeature } = entry;
@@ -151,8 +159,9 @@ class SavePolygonModal extends Component {
                                         {error ? <p style={{color: styles.accent.red}}>"There was an error saving your parcel. Please try again."</p> : null}
                                         <Button onClick={() => {
                                           createPolygonByJson({variables: {name: this.state.name, geojson: currentFeature.geometry, owner: user }});
-                                          optimisticSaveFeature(currentFeature.id, this.state.name);
+                                          optimisticSaveFeature(currentFeature, this.state.name);
                                           clearSelected(currentFeature.id); // delete from map
+                                          this.removeItemFromStorage(currentFeature.id);
                                           this.setState({submittedName: true});
                                         }}
                                           style={{
@@ -331,9 +340,9 @@ const mapStateToProps = ({ entry, auth }) => ({
 
 const mapDispatchToProps = (dispatch) => {
     const { patchNewEntry, closeSaveEntryModal } = entryActions;
-    const { optimisticSaveFeature } = mapActions;
+    const { optimisticSaveFeature, updateUnsavedFeatures } = mapActions;
     const { login } = authActions;
-    return bindActionCreators({ patchNewEntry, closeSaveEntryModal, optimisticSaveFeature, login }, dispatch);
+    return bindActionCreators({ patchNewEntry, closeSaveEntryModal, optimisticSaveFeature, updateUnsavedFeatures, login }, dispatch);
 };
 
 export default withTheme()(connect(mapStateToProps, mapDispatchToProps)(SavePolygonModal));

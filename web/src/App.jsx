@@ -29,6 +29,7 @@ import FeatureList from './components/featureList';
 import DetailView from './components/detailView';
 import AddEntryModal from './components/AddEntryModal.jsx';
 import SaveEntryModal from './components/SaveEntryModal.jsx';
+import UnsavedPolygonWarning from './components/unsavedPolygonWarning';
 
 
 const mapboxAccessToken = "pk.eyJ1IjoiYWFyb25jLXJlZ2VuIiwiYSI6ImNqa2I4dW9sbjBob3czcHA4amJqM2NhczAifQ.4HW-QDLUBJiHxOjDakKm2w";
@@ -63,8 +64,10 @@ class App extends Component {
   }
 
   componentWillMount = () => {
-    const unsavedFeatures = localStorage.getItem("features");
-    this.setState({ unsavedFeatures: JSON.parse(unsavedFeatures) });
+    const unsavedFeatures = JSON.parse(localStorage.getItem("features"));
+    if (unsavedFeatures && unsavedFeatures.length) {
+      this.props.actions.updateUnsavedFeatures(unsavedFeatures);
+    }
   }
 
   onMenuClick = (e) => {
@@ -76,8 +79,16 @@ class App extends Component {
   };
 
   onLogout = (e) => {
-    this.setState({ anchorEl: null });
-    this.props.actions.logout();
+    // check if unsaved polygons
+    if (this.props.map.unsavedFeatures) {
+      console.log("unsaved features remain!")
+      // show verification alert
+      this.props.actions.openWarningModal();
+    }
+    else {
+      this.setState({ anchorEl: null });
+      this.props.actions.logout();
+    }
   }
 
   gotoRegen = () => {
@@ -185,8 +196,8 @@ class App extends Component {
 
   render() {
     const worldview = [-60, -60, 60, 60]; // default mapbox worldview
-    const { theme, map, user, actions, addModalOpen, saveModalOpen, isAuthenticated } = this.props;
-    let { features, selected } = map;
+    const { theme, map, user, actions, addModalOpen, saveModalOpen, isAuthenticated, warningModalOpen } = this.props;
+    let { features, selected, unsavedFeatures } = map;
     const { login } = actions;
 
     const styles = {
@@ -206,11 +217,10 @@ class App extends Component {
         fontSize: "20px"
       }
     };
-    const { anchorEl, unsavedFeatures } = this.state;
+    const { anchorEl } = this.state;
 
     if (unsavedFeatures && unsavedFeatures.length) {
       features = features.concat(unsavedFeatures);
-      // localStorage.removeItem("features");
     }
 
     return (
@@ -379,6 +389,7 @@ class App extends Component {
             </View>
             <AddEntryModal open={addModalOpen} onClose={actions.closeNewEntryModal} polygons={polygons} />
             <SaveEntryModal open={saveModalOpen} onClose={actions.closeSaveEntryModal} user={data && data.getCurrentUser} clearSelected={this.clearSelected} />
+            <UnsavedPolygonWarning open={warningModalOpen} onClose={actions.closeWarningModal} logout={actions.logout} />
           </View>
           );
         }}
@@ -391,21 +402,25 @@ const mapStateToProps = ({ map, entry, auth }) => ({
   user: auth.user,
   addModalOpen: entry.addModalOpen,
   saveModalOpen: entry.saveModalOpen,
-  isAuthenticated: auth.authenticated
+  isAuthenticated: auth.authenticated,
+  warningModalOpen: map.warningModalOpen
 });
 
 const mapDispatchToProps = (dispatch) => {
   const { logout, login } = authActions;
-  const { updateFeatures, optimisticSaveFeature, updateSelected } = mapActions;
+  const { updateFeatures, optimisticSaveFeature, updateSelected, updateUnsavedFeatures, openWarningModal, closeWarningModal } = mapActions;
   const { openNewEntryModal, closeNewEntryModal, openSaveEntryModal, closeSaveEntryModal } = entryActions;
   const actions = bindActionCreators({
     updateFeatures,
     optimisticSaveFeature,
     updateSelected,
+    updateUnsavedFeatures,
     openNewEntryModal,
     closeNewEntryModal,
     openSaveEntryModal,
     closeSaveEntryModal,
+    openWarningModal,
+    closeWarningModal,
     logout,
     login
   }, dispatch);

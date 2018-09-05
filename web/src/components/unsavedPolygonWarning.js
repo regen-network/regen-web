@@ -15,9 +15,13 @@ class UnsavedPolygonWarning extends Component {
     const { open, onClose, theme, logout } = this.props;
 
     const styles = {
-      white: theme.palette.common.white,
-      color: theme.palette.accent.blue,
-      warning: theme.palette.accent.red,
+      primaryColor: {
+        backgroundColor: theme.palette.primary.main,
+        color: theme.palette.common.white,
+      },
+      accent: {
+        blue: theme.palette.accent.blue
+      },
       font: theme.title.fontFamily
     };
 
@@ -26,27 +30,29 @@ class UnsavedPolygonWarning extends Component {
          onClose={onClose}>
           <div className="modal-add-entry">
             <div style={{margin: "25px"}}>
-              <Typography variant="title" style={{color: styles.color, fontFamily: styles.font}}>
+              <Typography variant="title" style={{fontFamily: styles.font}}>
                 {"You have unsaved parcels drawn on the map. Erase them and sign out?"}
               </Typography>
-              <Button
-                onClick={onClose}
-                style={{
-                  marginTop: "25px",
-                  backgroundColor: styles.color,
-                  fontFamily: styles.font,
-                  color: styles.white}}>
-                Cancel
-              </Button>
-              <Button
-                onClick={() => logout()}
-                style={{
-                  marginTop: "25px",
-                  backgroundColor: styles.warning,
-                  fontFamily: styles.font,
-                  color: styles.white}}>
-                Sign Out
-              </Button>
+              <div style={{display: 'flex', justifyContent: 'space-around'}}>
+                <Button
+                  onClick={onClose}
+                  style={{
+                    marginTop: "25px",
+                    backgroundColor: styles.accent.blue,
+                    fontFamily: styles.font,
+                    color: styles.primaryColor.color}}>
+                  Cancel
+                </Button>
+                <Button
+                  onClick={() => logout()}
+                  style={{
+                    marginTop: "25px",
+                    backgroundColor: styles.primaryColor.backgroundColor,
+                    fontFamily: styles.font,
+                    color: styles.primaryColor.color}}>
+                  Sign Out
+                </Button>
+              </div>
             </div>
           </div>
       </Modal>

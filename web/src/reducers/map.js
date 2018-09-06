@@ -14,7 +14,7 @@ reducerMap[constants.UPDATE_FEATURES] = (state, { payload }) => {
 	  return {...state, features};
 };
 
-reducerMap[constants.UPDATE_ZOOM] = (state, _ ) => {
+reducerMap[constants.UPDATE_ZOOM] = (state, _) => {
 	  return {...state, zoom: true };
 };
 

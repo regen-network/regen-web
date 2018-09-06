@@ -63,6 +63,11 @@ class App extends Component {
     this.state = {};
   }
 
+  componentWillMount = () => {
+    const unsavedFeatures = JSON.parse(localStorage.getItem("features"));
+    this.setState({ unsavedFeatures });
+  }
+
   onMenuClick = (e) => {
     this.setState({ anchorEl: e.currentTarget });
   }
@@ -72,8 +77,12 @@ class App extends Component {
   };
 
   onLogout = (e) => {
-    if (this.props.map.features) {
-      this.props.actions.openWarningModal();
+    const unsaved = this.props.map.features.length && this.props.map.features.some((feature) => {
+      return !feature.saved;
+    });
+
+    if (unsaved) {
+        this.props.actions.openWarningModal();
     }
     else {
       this.setState({ anchorEl: null });
@@ -220,7 +229,7 @@ class App extends Component {
         fontSize: "20px"
       }
     };
-    const { anchorEl } = this.state;
+    const { anchorEl, unsavedFeatures } = this.state;
 
     return (
 
@@ -236,14 +245,21 @@ class App extends Component {
         let bbox = worldview;
         if (polygons && polygons.length && !zoom ) {
           bbox = turf.bbox({
-                type: 'FeatureCollection',
-                features: polygons.map(p => ({
-                  type: 'Feature',
-                  geometry: p
-                }))
-              });
-              updateZoom();
-	        }
+            type: 'FeatureCollection',
+            features: polygons.map(p => ({
+              type: 'Feature',
+              geometry: p
+            }))
+          });
+          updateZoom();
+        }
+        else if (unsavedFeatures && unsavedFeatures.length && !zoom) {
+          bbox = turf.bbox({
+            type: 'FeatureCollection',
+            features: unsavedFeatures
+          });
+          updateZoom();
+        }
 
           // add optimisticSavedFeature to polygons
           features.forEach((feature) => {
@@ -317,7 +333,12 @@ class App extends Component {
                       logoPosition: 'top-left'
                   }}
 		              fitBounds={!zoom ? ([[bbox[0], bbox[1]], [bbox[2], bbox[3]]]) : null}
-                  onStyleLoad={this.onMapLoad}>
+                  onStyleLoad={this.onMapLoad}
+                  onZoomEnd={(e) => {
+                    if (!zoom) {
+                      updateZoom();
+                    }
+                  }}>
                   {
                     (polygons && polygons.length) ?
                       polygons.map(polygon => {

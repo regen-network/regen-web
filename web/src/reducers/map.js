@@ -3,7 +3,8 @@ import { constants } from "../actions/map";
 let initialState = {
     features: [],
     selected: {},
-    zoom: false
+    zoom: false,
+    warningModalOpen: false
 };
 
 const reducerMap = {};
@@ -14,7 +15,7 @@ reducerMap[constants.UPDATE_FEATURES] = (state, { payload }) => {
 };
 
 reducerMap[constants.UPDATE_ZOOM] = (state, _ ) => {
-	  return {...state, zoom:true };
+	  return {...state, zoom: true };
 };
 
 reducerMap[constants.OPTIMISTIC_SAVE_FEATURE] = (state, { payload }) => {
@@ -35,6 +36,14 @@ reducerMap[constants.OPTIMISTIC_SAVE_FEATURE] = (state, { payload }) => {
 reducerMap[constants.UPDATE_SELECTED] = (state, { payload }) => {
     const { selected } = payload;
 	  return {...state, selected};
+};
+
+reducerMap[constants.OPEN_WARNING_MODAL] = (state, _) => {
+    return {...state, warningModalOpen: true};
+};
+
+reducerMap[constants.CLOSE_WARNING_MODAL] = (state, _) => {
+    return {...state, warningModalOpen: false};
 };
 
 

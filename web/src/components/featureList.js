@@ -76,11 +76,11 @@ const SavedFeatureItem = ({ item, selected, toggleSelectThis, theme, styles }) =
   );
 }
 
-const FeatureListItem = ({ key, item, selected, toggleSelectThis, theme, styles, openSaveEntryModal }) => {
+const FeatureListItem = ({ item, selected, toggleSelectThis, theme, styles, openSaveEntryModal }) => {
   const style = selected ? {backgroundColor: theme.palette.primary.main} : {};
 
   return (
-     <ListItem dense button style={style} key={key} onClick={toggleSelectThis}>
+     <ListItem dense button style={style} key={item.id} onClick={toggleSelectThis}>
         <PolygonIcon polygon={item.geometry}/>
         <ListItemText
           disableTypography

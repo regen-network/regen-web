@@ -37,7 +37,7 @@ const mapboxAccessToken = "pk.eyJ1IjoiYWFyb25jLXJlZ2VuIiwiYSI6ImNqa2I4dW9sbjBob3
 const Map = ReactMapboxGl({
     accessToken: mapboxAccessToken,
     logoPosition: 'bottom-left',
-    jumpTo: true,
+    easeTo: true,
 //    interactive: false,
     flyTo: false
 });
@@ -196,11 +196,12 @@ class App extends Component {
     drawControl.delete(id);
   }
 
+
   render() {
     const worldview = [-60, -60, 60, 60]; // default mapbox worldview
     const { theme, map, user, actions, addModalOpen, saveModalOpen, isAuthenticated, warningModalOpen } = this.props;
-    const { features, selected } = map;
-    const { login } = actions;
+    const { features, selected, zoom } = map;
+    const { login, updateZoom } = actions;
 
     const styles = {
       primaryColor: {
@@ -232,15 +233,17 @@ class App extends Component {
           */
         const nodes = data && data.allPolygons && data.allPolygons.nodes;
         let polygons = nodes && nodes.map(p => Object.assign({}, JSON.parse(p.geomJson), {id: p.id, name: p.name}));
-        const bbox = polygons && polygons.length ?
-              turf.bbox({
+        let bbox = worldview;
+        if (polygons && polygons.length && !zoom ) {
+          bbox = turf.bbox({
                 type: 'FeatureCollection',
                 features: polygons.map(p => ({
                   type: 'Feature',
                   geometry: p
                 }))
-              })
-               : worldview;
+              });
+              updateZoom();
+	        }
 
           // add optimisticSavedFeature to polygons
           features.forEach((feature) => {
@@ -313,7 +316,7 @@ class App extends Component {
                       // options seem to be ignored here. why?
                       logoPosition: 'top-left'
                   }}
-                  fitBounds={bbox && [[bbox[0], bbox[1]], [bbox[2], bbox[3]]]}
+		              fitBounds={!zoom ? ([[bbox[0], bbox[1]], [bbox[2], bbox[3]]]) : null}
                   onStyleLoad={this.onMapLoad}>
                   {
                     (polygons && polygons.length) ?
@@ -378,7 +381,7 @@ const mapStateToProps = ({ map, entry, auth }) => ({
 
 const mapDispatchToProps = (dispatch) => {
   const { logout, login } = authActions;
-  const { updateFeatures, optimisticSaveFeature, updateSelected, openWarningModal, closeWarningModal } = mapActions;
+  const { updateZoom, updateFeatures, optimisticSaveFeature, updateSelected, openWarningModal, closeWarningModal } = mapActions;
   const { openNewEntryModal, closeNewEntryModal, openSaveEntryModal, closeSaveEntryModal } = entryActions;
   const actions = bindActionCreators({
     updateFeatures,
@@ -390,6 +393,7 @@ const mapDispatchToProps = (dispatch) => {
     closeSaveEntryModal,
     openWarningModal,
     closeWarningModal,
+    updateZoom,
     logout,
     login
   }, dispatch);

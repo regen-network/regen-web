@@ -1,6 +1,9 @@
 const UPDATE_FEATURES = "UPDATE_FEATURES";
 const updateFeatures = (features) => ({ type: UPDATE_FEATURES, payload: { features }});
 
+const UPDATE_ZOOM = "UPDATE_ZOOM";
+const updateZoom = () => ({ type: UPDATE_ZOOM });
+
 const OPTIMISTIC_SAVE_FEATURE = "OPTIMISTIC_SAVE_FEATURE";
 const optimisticSaveFeature = (id, name) => ({ type: OPTIMISTIC_SAVE_FEATURE, payload: { id, name }});
 
@@ -13,7 +16,7 @@ const openWarningModal = () => ({type: OPEN_WARNING_MODAL});
 const CLOSE_WARNING_MODAL = "CLOSE_WARNING_MODAL";
 const closeWarningModal = () => ({type: CLOSE_WARNING_MODAL});
 
-const constants = { UPDATE_FEATURES, OPTIMISTIC_SAVE_FEATURE, UPDATE_SELECTED, OPEN_WARNING_MODAL, CLOSE_WARNING_MODAL };
-const actions =  { updateFeatures, optimisticSaveFeature, updateSelected, openWarningModal, closeWarningModal };
+const constants = { UPDATE_FEATURES, OPTIMISTIC_SAVE_FEATURE, UPDATE_SELECTED, OPEN_WARNING_MODAL, CLOSE_WARNING_MODAL, UPDATE_ZOOM };
+const actions =  { updateFeatures, optimisticSaveFeature, updateSelected, openWarningModal, closeWarningModal, updateZoom };
 
 export { constants, actions };

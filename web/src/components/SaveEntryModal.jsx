@@ -159,7 +159,7 @@ class SavePolygonModal extends Component {
                                         {error ? <p style={{color: styles.accent.red}}>"There was an error saving your parcel. Please try again."</p> : null}
                                         <Button onClick={() => {
                                           createPolygonByJson({variables: {name: this.state.name, geojson: currentFeature.geometry, owner: user }});
-                                          optimisticSaveFeature(currentFeature, this.state.name);
+                                          optimisticSaveFeature(currentFeature.id, this.state.name);
                                           clearSelected(currentFeature.id); // delete from map
                                           this.removeItemFromStorage(currentFeature.id);
                                           this.setState({submittedName: true});

@@ -6,7 +6,6 @@ import { withTheme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { actions as entryActions } from "../actions/entry";
-import { actions as authActions } from "../actions/auth";
 import Modal from '@material-ui/core/Modal';
 import Select from './Select.jsx';
 import PolygonIcon from './polygonIcon';
@@ -56,7 +55,7 @@ class AddEntryModal extends Component {
     }
 
     render() {
-        const {open, onClose, entry, patchNewEntry, theme, map, polygons, isAuthenticated, login} = this.props;
+        const {open, onClose, entry, patchNewEntry, theme, map, polygons} = this.props;
         const {type, species, date} = entry.entry;
         const {features, selected} = map;
 
@@ -91,34 +90,23 @@ class AddEntryModal extends Component {
         const ModalContent = () => {
           let modalContent;
 
-          if (!isAuthenticated) {
+          if (!selectedPolygon) {
             modalContent =
-              <div>
-                <Typography variant="title" style={{color: styles.accent.blue, fontFamily: styles.title.fontFamily}}>
-                  {"Please log in to access this feature."}
-                </Typography>
-                <Button
-                  onClick={() => login()}
-                  style={{
-                    marginTop: "25px",
-                    backgroundColor: styles.primaryColor.backgroundColor,
-                    fontFamily: styles.fontFamily,
-                    color: styles.primaryColor.color}}>
-                  Sign In
-                </Button>
-              </div>
+              <Typography variant="title" style={{color: styles.accent.blue, fontFamily: styles.title.fontFamily}}>
+                {"Please select a parcel to save an activity or observation."}
+              </Typography>
           }
-          else if (!selectedPolygon) {
+          else if (!selectedPolygon.name || !selectedPolygon.saved) {
               modalContent =
                 <Typography variant="title" style={{color: styles.accent.blue, fontFamily: styles.title.fontFamily}}>
-                  {"Please select a plot to save an activity or observation."}
+                  {"Please save the parcel to add an activity or observation."}
                 </Typography>
           }
           else {
               modalContent =
                 <div>
                   <Typography variant="title" style={{color: styles.accent.blue, fontFamily: styles.title.fontFamily, margin: "15px"}}>
-                    {"Report an activity or observation\nfor the selected plot"}
+                    {"Report an activity or observation\nfor the selected parcel"}
                   </Typography>
                   <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
                     <Typography variant="title" style={{color: styles.accent.blue, fontFamily: styles.title.fontFamily, fontSize: styles.title.fontSize, marginRight: "25px"}}>
@@ -162,6 +150,7 @@ class AddEntryModal extends Component {
                           <div>
                             {error ? <p style={{color: styles.accent.red}}>"There was an error saving your update. Please try again."</p> : null}
                             <Button onClick={() => {
+                              console.log("add new entry", selectedPolygon);
                               logEntry({variables: {type: type, polygon: selectedPolygon, species: species, happenedAt: date }});
                               onClose();
                             }}
@@ -178,7 +167,7 @@ class AddEntryModal extends Component {
                   }
                 </div>
             }
-            
+
             return modalContent;
           };
 
@@ -195,16 +184,14 @@ class AddEntryModal extends Component {
     }
 }
 
-const mapStateToProps = ({ entry, map, auth }) => ({
+const mapStateToProps = ({ entry, map }) => ({
     entry: entry,
-    map: map,
-    isAuthenticated: auth.authenticated
+    map: map
 });
 
 const mapDispatchToProps = (dispatch) => {
     const { patchNewEntry } = entryActions;
-    const { login } = authActions;
-    return bindActionCreators({ patchNewEntry, login }, dispatch);
+    return bindActionCreators({ patchNewEntry }, dispatch);
 };
 
 export default withTheme()(connect(mapStateToProps, mapDispatchToProps)(AddEntryModal));

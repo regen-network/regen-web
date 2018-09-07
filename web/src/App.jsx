@@ -100,10 +100,7 @@ class App extends Component {
   onDrawUpdated = (e) => {
     const { updateFeatures } = this.props.actions;
     const updatedFeatures = this.state.drawControl.getAll();
-    if (!this.props.isAuthenticated) {
-      // if user is not logged in, save to local storage
-      localStorage.setItem("features", JSON.stringify(updatedFeatures.features));
-    }
+    localStorage.setItem("features", JSON.stringify(updatedFeatures.features));
     updateFeatures(updatedFeatures.features);
   }
 
@@ -367,14 +364,18 @@ class App extends Component {
                       })
                     : null
                   }
-                    <div style={{position: "absolute", bottom: "25px", right: "10px"}}>
-                      <Button
-                        variant="fab"
-                        color="secondary"
-                        onClick={actions.openNewEntryModal}>
-                          <AddIcon />
-                      </Button>
-                    </div>
+                  {
+                    isAuthenticated ?
+                      <div style={{position: "absolute", bottom: "25px", right: "10px"}}>
+                        <Button
+                          variant="fab"
+                          color="secondary"
+                          onClick={actions.openNewEntryModal}>
+                            <AddIcon />
+                        </Button>
+                      </div>
+                      : null
+                  }
                 </Map>
               </View>
             </View>

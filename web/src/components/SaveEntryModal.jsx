@@ -126,7 +126,19 @@ class SavePolygonModal extends Component {
 
         return (
             <Modal open={open}
-               onClose={onClose}>
+               onClose={() => {
+                 this.setState({
+                   completed: false,
+                   name: "",
+                   submittedName: false,
+                   hasTrees: false,
+                   hasWatercourse: false,
+                   hasWetland: false,
+                   hasNativeBuffer: false,
+                   hasWildlifeCorridor: false
+                 });
+                 onClose();
+               }}>
                 <div className="modal-add-entry">
                   <div style={{margin: "25px"}}>
                       { authenticated
@@ -297,6 +309,16 @@ class SavePolygonModal extends Component {
                                       currentFeature.name = this.state.name;
                                       logEntry({variables: {type: type, polygon: currentFeature.geometry, species: species, happenedAt: date }});
                                       onClose();
+                                      this.setState({
+                                        completed: false,
+                                        name: "",
+                                        submittedName: false,
+                                        hasTrees: false,
+                                        hasWatercourse: false,
+                                        hasWetland: false,
+                                        hasNativeBuffer: false,
+                                        hasWildlifeCorridor: false
+                                      });
                                     }}
                                       style={{
                                         margin: "25px",

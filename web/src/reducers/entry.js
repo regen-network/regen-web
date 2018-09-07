@@ -23,7 +23,8 @@ reducerMap[constants.OPEN_NEW_ENTRY_MODAL] = (state, _) => {
 };
 
 reducerMap[constants.CLOSE_NEW_ENTRY_MODAL] = (state, _) => {
-    return {...state, addModalOpen: false};
+    let clearedEntry = Object.assign({}, state.entry, {type: null, species: null});
+    return {...state, addModalOpen: false, entry: clearedEntry};
 };
 
 reducerMap[constants.OPEN_SAVE_ENTRY_MODAL] = (state, { payload }) => {
@@ -32,7 +33,8 @@ reducerMap[constants.OPEN_SAVE_ENTRY_MODAL] = (state, { payload }) => {
 };
 
 reducerMap[constants.CLOSE_SAVE_ENTRY_MODAL] = (state, _) => {
-    return {...state, saveModalOpen: false};
+    let clearedEntry = Object.assign({}, state.entry, {type: null, species: null});
+    return {...state, saveModalOpen: false, entry: clearedEntry};
 };
 
 export default (state = initialState, action) => {

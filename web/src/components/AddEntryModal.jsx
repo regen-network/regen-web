@@ -96,7 +96,7 @@ class AddEntryModal extends Component {
                 {"Please select a parcel to save an activity or observation."}
               </Typography>
           }
-          else if (!selectedPolygon.name || !selectedPolygon.saved) {
+          else if (!selectedPolygon.name && !selectedPolygon.saved) {
               modalContent =
                 <Typography variant="title" style={{color: styles.accent.blue, fontFamily: styles.title.fontFamily}}>
                   {"Please save the parcel to add an activity or observation."}
@@ -150,9 +150,9 @@ class AddEntryModal extends Component {
                           <div>
                             {error ? <p style={{color: styles.accent.red}}>"There was an error saving your update. Please try again."</p> : null}
                             <Button onClick={() => {
-                              console.log("add new entry", selectedPolygon);
                               logEntry({variables: {type: type, polygon: selectedPolygon, species: species, happenedAt: date }});
                               onClose();
+                              this.setState({completed: false});
                             }}
                               style={{
                                 margin: "25px",

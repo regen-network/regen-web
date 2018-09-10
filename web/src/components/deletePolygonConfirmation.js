@@ -15,6 +15,19 @@ const DELETE_POLYGON = gql`
   }
 `;
 
+const GET_POLYGONS = gql`
+{
+  allPolygons {
+    nodes {
+      id
+      name
+      geomJson
+      owner
+    }
+  }
+}
+`;
+
 class DeletePolygonConfirmation extends Component {
   constructor(props) {
     super(props);
@@ -43,7 +56,8 @@ class DeletePolygonConfirmation extends Component {
               <Typography variant="title" style={{fontFamily: styles.font}}>
                 {"Are you sure you want to delete this parcel?"}
               </Typography>
-              <Mutation mutation={DELETE_POLYGON}>
+              <Mutation mutation={DELETE_POLYGON}
+                refetchQueries={[{query: GET_POLYGONS}]}>
                   {(deletePolygonById, {loading, error}) => (
                     <div style={{display: 'flex', justifyContent: 'space-around'}}>
                       <Button

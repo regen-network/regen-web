@@ -30,6 +30,7 @@ import DetailView from './components/detailView';
 import AddEntryModal from './components/AddEntryModal.jsx';
 import SaveEntryModal from './components/SaveEntryModal.jsx';
 import UnsavedPolygonWarning from './components/unsavedPolygonWarning';
+import DeletePolygonConfirmation from './components/deletePolygonConfirmation';
 
 
 const mapboxAccessToken = "pk.eyJ1IjoiYWFyb25jLXJlZ2VuIiwiYSI6ImNqa2I4dW9sbjBob3czcHA4amJqM2NhczAifQ.4HW-QDLUBJiHxOjDakKm2w";
@@ -205,8 +206,8 @@ class App extends Component {
 
   render() {
     const worldview = [-60, -60, 60, 60]; // default mapbox worldview
-    const { theme, map, user, actions, addModalOpen, saveModalOpen, isAuthenticated, warningModalOpen } = this.props;
-    const { features, selected, zoom } = map;
+    const { theme, map, user, actions, addModalOpen, saveModalOpen, isAuthenticated } = this.props;
+    const { features, selected, zoom, deletePolygonModalOpen, warningModalOpen, deletedFeature } = map;
     const { login, updateZoom } = actions;
 
     const styles = {
@@ -314,7 +315,8 @@ class App extends Component {
                   polygons={polygons}
                   toggleSelect={this.drawSelected}
                   styles={styles}
-                  openSaveEntryModal={actions.openSaveEntryModal} />
+                  openSaveEntryModal={actions.openSaveEntryModal}
+                  openDeletePolygonModal={actions.openDeleteModal} />
               </View>
               <View style={{ flex: 8 }}>
                 <Map
@@ -385,6 +387,7 @@ class App extends Component {
             <AddEntryModal open={addModalOpen} onClose={actions.closeNewEntryModal} polygons={polygons} />
             <SaveEntryModal open={saveModalOpen} onClose={actions.closeSaveEntryModal} user={data && data.getCurrentUser} clearSelected={this.clearSelected} />
             <UnsavedPolygonWarning open={warningModalOpen} onClose={actions.closeWarningModal} logout={actions.logout} />
+            <DeletePolygonConfirmation open={deletePolygonModalOpen} onClose={actions.closeDeleteModal} deletedFeature={deletedFeature} />
           </View>
           );
         }}
@@ -397,13 +400,12 @@ const mapStateToProps = ({ map, entry, auth }) => ({
   user: auth.user,
   addModalOpen: entry.addModalOpen,
   saveModalOpen: entry.saveModalOpen,
-  isAuthenticated: auth.authenticated,
-  warningModalOpen: map.warningModalOpen
+  isAuthenticated: auth.authenticated
 });
 
 const mapDispatchToProps = (dispatch) => {
   const { logout, login } = authActions;
-  const { updateZoom, updateFeatures, optimisticSaveFeature, updateSelected, openWarningModal, closeWarningModal } = mapActions;
+  const { updateZoom, updateFeatures, optimisticSaveFeature, updateSelected, openWarningModal, closeWarningModal, openDeleteModal, closeDeleteModal } = mapActions;
   const { openNewEntryModal, closeNewEntryModal, openSaveEntryModal, closeSaveEntryModal } = entryActions;
   const actions = bindActionCreators({
     updateFeatures,
@@ -415,6 +417,8 @@ const mapDispatchToProps = (dispatch) => {
     closeSaveEntryModal,
     openWarningModal,
     closeWarningModal,
+    openDeleteModal,
+    closeDeleteModal,
     updateZoom,
     logout,
     login

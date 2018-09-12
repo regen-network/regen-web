@@ -80,7 +80,7 @@ const SavedFeatureItem = ({ item, selected, toggleSelectThis, theme, styles, ope
         disableTypography
         primary={<Typography style={{fontSize: styles.fontSize}}>{item.name}</Typography>} />
       {
-        selected ?
+        selected && !item.saved ? // only possible to delete polygons saved to db
         <DeleteOutlinedIcon
           style={{color: styles.primaryColor.color}}
           onClick={(e) => {

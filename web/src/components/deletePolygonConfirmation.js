@@ -72,7 +72,6 @@ class DeletePolygonConfirmation extends Component {
                       <Button
                         onClick={() => {
                           deletePolygonById({variables: {id: deletedFeature.id}});
-                          // TODO optimistic delete
                           onClose();
                         }}
                         style={{

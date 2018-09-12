@@ -13,7 +13,7 @@ import TextField from '@material-ui/core/TextField';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import Select from './Select.jsx';
+import SingleSelect from './select.js';
 import * as moment from 'moment';
 import PolygonIcon from './polygonIcon';
 import gql from "graphql-tag";
@@ -278,9 +278,10 @@ class SavePolygonModal extends Component {
                                 onChange={(date) => {
                                   patchNewEntry({date});
                                 }}/>
-                            <Select
+                            <SingleSelect
+                                placeholder={"Select an action..."}
                                 options={entryTypes.map(({type}) => {return {value: type, label: type}})}
-                                value={{value: type, label: type}}
+                                value={type ? {value: type, label: type} : null}
                                 onChange={(e) => {
                                   patchNewEntry({type: e.value})
                                   if (!isPlantRelated(e.value)) {
@@ -289,9 +290,10 @@ class SavePolygonModal extends Component {
                                 }}
                             />
                             {isPlantRelated(type) ?
-                               <Select
+                               <SingleSelect
+                                   placeholder={"Select a crop..."}
                                    options={plants.map(({name}) => {return {value: name, label: name}})}
-                                   value={{value: species, label: species}}
+                                   value={species ? {value: species, label: species} : ""}
                                    onChange={(e) => {
                                      patchNewEntry({species: e.value});
                                      this.setState({completed: true});

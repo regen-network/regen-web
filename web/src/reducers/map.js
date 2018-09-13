@@ -4,7 +4,9 @@ let initialState = {
     features: [],
     selected: {},
     zoom: false,
-    warningModalOpen: false
+    warningModalOpen: false,
+    deletePolygonModalOpen: false,
+    deletedFeature: {}
 };
 
 const reducerMap = {};
@@ -46,6 +48,14 @@ reducerMap[constants.CLOSE_WARNING_MODAL] = (state, _) => {
     return {...state, warningModalOpen: false};
 };
 
+reducerMap[constants.OPEN_DELETE_MODAL] = (state, { payload }) => {
+    const { feature } = payload;
+    return {...state, deletePolygonModalOpen: true, deletedFeature: feature};
+};
+
+reducerMap[constants.CLOSE_DELETE_MODAL] = (state, _) => {
+    return {...state, deletePolygonModalOpen: false};
+};
 
 export default (state = initialState, action) => {
 	const fn = reducerMap[action.type];

@@ -3,12 +3,13 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
+import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
 import { withTheme } from '@material-ui/core/styles';
 import PolygonIcon from './polygonIcon';
 
-const FeatureList = withTheme()(({ features, selected, polygons, toggleSelect, theme, styles, openSaveEntryModal }) => {
+const FeatureList = withTheme()(({ features, selected, polygons, toggleSelect, theme, styles, openSaveEntryModal, openDeletePolygonModal }) => {
 
   // remove optimistic saved feature (if any) from features
   let unsavedFeatures = [];
@@ -50,7 +51,13 @@ const FeatureList = withTheme()(({ features, selected, polygons, toggleSelect, t
             {"Saved Plots"}
           </Typography>
           {polygons && polygons.map((polygon) =>
-            <SavedFeatureItem key={polygon.id} item={polygon} theme={theme} selected={selected[polygon.id]} styles={styles}
+            <SavedFeatureItem
+              key={polygon.id}
+              item={polygon}
+              theme={theme}
+              selected={selected[polygon.id]}
+              styles={styles}
+              openDeletePolygonModal={openDeletePolygonModal}
               toggleSelectThis={() => {
                 toggleSelect(polygon.id);
               }}
@@ -64,7 +71,7 @@ const FeatureList = withTheme()(({ features, selected, polygons, toggleSelect, t
   );
 });
 
-const SavedFeatureItem = ({ item, selected, toggleSelectThis, theme, styles }) => {
+const SavedFeatureItem = ({ item, selected, toggleSelectThis, theme, styles, openDeletePolygonModal }) => {
   const style = selected ? {backgroundColor: theme.palette.primary.main} : {};
   return (
 	  <ListItem dense button style={style} onClick={toggleSelectThis}>
@@ -72,6 +79,16 @@ const SavedFeatureItem = ({ item, selected, toggleSelectThis, theme, styles }) =
       <ListItemText
         disableTypography
         primary={<Typography style={{fontSize: styles.fontSize}}>{item.name}</Typography>} />
+      {
+        selected && !item.saved ? // only possible to delete polygons saved to db
+        <DeleteOutlinedIcon
+          style={{color: styles.primaryColor.color}}
+          onClick={(e) => {
+            e.stopPropagation();
+            openDeletePolygonModal(item);
+          }} /> :
+        null
+      }
     </ListItem>
   );
 }

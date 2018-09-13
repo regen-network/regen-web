@@ -70,9 +70,7 @@ class SavePolygonModal extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          completed: false,
           name: "",
-          submittedName: false,
           hasTrees: false,
           hasWatercourse: false,
           hasWetland: false,
@@ -126,12 +124,7 @@ class SavePolygonModal extends Component {
         };
 
         const SavePolygonName = () => {
-          return <div>
-              <Typography variant="title" style={{color: styles.accent.blue, fontFamily: styles.title.fontFamily, margin: "15px"}}>
-                {"Tell us about this parcel"}
-              </Typography>
-              <PolygonIcon polygon={currentFeature}/>
-              <div style={{margin: "25px"}}>
+          return <div style={{margin: "25px"}}>
                 <form noValidate>
                   <TextField
                     id="name"
@@ -145,33 +138,24 @@ class SavePolygonModal extends Component {
                 <Mutation mutation={CREATE_POLYGON}>
                     {(createPolygonByJson, {loading, error}) => (
                       <div>
-                        { this.state.submittedName ?
-                          <Typography variant="subheading" style={{fontFamily: styles.title.fontFamily, margin: "15px"}}>
-                            {"Saved!"}
-                          </Typography>
-                        :
-                          <div>
-                            {error ? <p style={{color: styles.accent.red}}>"There was an error saving your parcel. Please try again."</p> : null}
-                            <Button onClick={() => {
-                              createPolygonByJson({variables: {name: this.state.name, geojson: currentFeature.geometry, owner: user }});
-                              optimisticSaveFeature(currentFeature.id, this.state.name);
-                              clearSelected(currentFeature.id); // delete from map
-                              this.removeItemFromStorage(currentFeature.id);
-                              this.setState({submittedName: true, stage: 0});
-                            }}
-                              style={{
-                                margin: "25px",
-                                backgroundColor: styles.accent.blue,
-                                fontFamily: styles.fontFamily,
-                                color: styles.primaryColor.color}}>
-                              Save Parcel</Button>
-                          </div>
-                        }
+                          {error ? <p style={{color: styles.accent.red}}>"There was an error saving your parcel. Please try again."</p> : null}
+                          <Button onClick={() => {
+                            createPolygonByJson({variables: {name: this.state.name, geojson: currentFeature.geometry, owner: user }});
+                            optimisticSaveFeature(currentFeature.id, this.state.name);
+                            clearSelected(currentFeature.id); // delete from map
+                            this.removeItemFromStorage(currentFeature.id);
+                            this.setState({stage: 1});
+                          }}
+                          style={{
+                            margin: "25px",
+                            backgroundColor: styles.accent.blue,
+                            fontFamily: styles.fontFamily,
+                            color: styles.primaryColor.color}}>
+                          Save Parcel</Button>
                       </div>
                     )}
                   </Mutation>
-              </div>
-            </div>;
+              </div>;
           }
 
           const ChoosePolygonFeatures = () => {
@@ -255,6 +239,15 @@ class SavePolygonModal extends Component {
                 </FormGroup>
               )}
               </Mutation>
+              <Button onClick={() => {
+                this.setState({stage: 2});
+              }}
+              style={{
+                margin: "25px",
+                backgroundColor: styles.accent.blue,
+                fontFamily: styles.fontFamily,
+                color: styles.primaryColor.color}}>
+              Submit</Button>
             </div>;
         }
 
@@ -273,10 +266,7 @@ class SavePolygonModal extends Component {
                   options={entryTypes.map(({type}) => {return {value: type, label: type}})}
                   value={type ? {value: type, label: type} : null}
                   onChange={(e) => {
-                    patchNewEntry({type: e.value})
-                    // if (!isPlantRelated(e.value)) {
-                    //   this.setState({completed: true});
-                    // }
+                    patchNewEntry({type: e.value});
                   }}
               />
               {isPlantRelated(type) ?
@@ -286,7 +276,6 @@ class SavePolygonModal extends Component {
                      value={species ? {value: species, label: species} : ""}
                      onChange={(e) => {
                        patchNewEntry({species: e.value});
-                       // this.setState({completed: true});
                      }}
                  />
                  : null
@@ -300,9 +289,7 @@ class SavePolygonModal extends Component {
                       logEntry({variables: {type: type, polygon: currentFeature.geometry, species: species, happenedAt: date }});
                       onClose();
                       this.setState({
-                        completed: false,
                         name: "",
-                        submittedName: false,
                         hasTrees: false,
                         hasWatercourse: false,
                         hasWetland: false,
@@ -339,9 +326,7 @@ class SavePolygonModal extends Component {
             <Modal open={open}
                onClose={() => {
                  this.setState({
-                   completed: false,
                    name: "",
-                   submittedName: false,
                    hasTrees: false,
                    hasWatercourse: false,
                    hasWetland: false,
@@ -355,7 +340,22 @@ class SavePolygonModal extends Component {
                   <div style={{margin: "25px"}}>
                       { authenticated
                         ?
-                          renderStage(this.state.stage)
+                        <div>
+                          <Typography variant="title" style={{color: styles.accent.blue, fontFamily: styles.title.fontFamily, margin: "15px"}}>
+                            {"Tell us about this parcel"}
+                          </Typography>
+                          <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
+                            {
+                              this.state.name ?
+                              <Typography variant="title" style={{color: styles.accent.blue, fontFamily: styles.title.fontFamily, fontSize: styles.title.fontSize, marginRight: "25px"}}>
+                                {this.state.name}
+                              </Typography>
+                              : null
+                            }
+                            <PolygonIcon polygon={currentFeature}/>
+                          </div>
+                          {renderStage(this.state.stage)}
+                        </div>
                         :
                         <div>
                           <Typography variant="title" style={{color: styles.accent.blue, fontFamily: styles.title.fontFamily}}>

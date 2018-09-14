@@ -91,6 +91,14 @@ class SavePolygonModal extends Component {
       this.setState({ [name]: e.target.checked });
     };
 
+    removeItemFromStorage = (id) => {
+      const unsavedFeatures = JSON.parse(localStorage.getItem("features"));
+      const remainingUnsavedFeatures = unsavedFeatures.filter((feature) => {
+        return feature.id !== id;
+      });
+      localStorage.setItem("features", JSON.stringify(remainingUnsavedFeatures));
+    }
+
     render() {
         const {open, onClose, entry, patchNewEntry, theme, authenticated, clearSelected, optimisticSaveFeature, user, login} = this.props;
         const { currentFeature } = entry;
@@ -118,7 +126,19 @@ class SavePolygonModal extends Component {
 
         return (
             <Modal open={open}
-               onClose={onClose}>
+               onClose={() => {
+                 this.setState({
+                   completed: false,
+                   name: "",
+                   submittedName: false,
+                   hasTrees: false,
+                   hasWatercourse: false,
+                   hasWetland: false,
+                   hasNativeBuffer: false,
+                   hasWildlifeCorridor: false
+                 });
+                 onClose();
+               }}>
                 <div className="modal-add-entry">
                   <div style={{margin: "25px"}}>
                       { authenticated
@@ -153,6 +173,7 @@ class SavePolygonModal extends Component {
                                           createPolygonByJson({variables: {name: this.state.name, geojson: currentFeature.geometry, owner: user }});
                                           optimisticSaveFeature(currentFeature.id, this.state.name);
                                           clearSelected(currentFeature.id); // delete from map
+                                          this.removeItemFromStorage(currentFeature.id);
                                           this.setState({submittedName: true});
                                         }}
                                           style={{
@@ -288,6 +309,16 @@ class SavePolygonModal extends Component {
                                       currentFeature.name = this.state.name;
                                       logEntry({variables: {type: type, polygon: currentFeature.geometry, species: species, happenedAt: date }});
                                       onClose();
+                                      this.setState({
+                                        completed: false,
+                                        name: "",
+                                        submittedName: false,
+                                        hasTrees: false,
+                                        hasWatercourse: false,
+                                        hasWetland: false,
+                                        hasNativeBuffer: false,
+                                        hasWildlifeCorridor: false
+                                      });
                                     }}
                                       style={{
                                         margin: "25px",
@@ -331,9 +362,9 @@ const mapStateToProps = ({ entry, auth }) => ({
 
 const mapDispatchToProps = (dispatch) => {
     const { patchNewEntry, closeSaveEntryModal } = entryActions;
-    const { optimisticSaveFeature } = mapActions;
+    const { optimisticSaveFeature, updateUnsavedFeatures } = mapActions;
     const { login } = authActions;
-    return bindActionCreators({ patchNewEntry, closeSaveEntryModal, optimisticSaveFeature, login }, dispatch);
+    return bindActionCreators({ patchNewEntry, closeSaveEntryModal, optimisticSaveFeature, updateUnsavedFeatures, login }, dispatch);
 };
 
 export default withTheme()(connect(mapStateToProps, mapDispatchToProps)(SavePolygonModal));

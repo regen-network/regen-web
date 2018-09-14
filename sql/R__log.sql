@@ -5,6 +5,6 @@ VALUES (current_user, current_timestamp, type, comment, st_geomfromgeojson(polyg
     RETURNING *;
 -- "security definer" implies that the function gets called with the
 -- permissions of the definer (the root user) and thus bypasseses RLS
-$$ language sql volatile security definer;
+$$ language sql volatile;
 
 COMMENT ON FUNCTION public.log_entry(type text, comment text, polygon json, point json, species text, unit text, numeric_value numeric, happened_at timestamptz) IS 'Inserts a log entry into the entry table';

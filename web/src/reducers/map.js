@@ -1,8 +1,12 @@
 import { constants } from "../actions/map";
 
 let initialState = {
-  features: [],
-  selected: {}
+    features: [],
+    selected: {},
+    zoom: false,
+    warningModalOpen: false,
+    deletePolygonModalOpen: false,
+    deletedFeature: {}
 };
 
 const reducerMap = {};
@@ -10,6 +14,10 @@ const reducerMap = {};
 reducerMap[constants.UPDATE_FEATURES] = (state, { payload }) => {
     const { features } = payload;
 	  return {...state, features};
+};
+
+reducerMap[constants.UPDATE_ZOOM] = (state, _) => {
+	  return {...state, zoom: true };
 };
 
 reducerMap[constants.OPTIMISTIC_SAVE_FEATURE] = (state, { payload }) => {
@@ -32,6 +40,22 @@ reducerMap[constants.UPDATE_SELECTED] = (state, { payload }) => {
 	  return {...state, selected};
 };
 
+reducerMap[constants.OPEN_WARNING_MODAL] = (state, _) => {
+    return {...state, warningModalOpen: true};
+};
+
+reducerMap[constants.CLOSE_WARNING_MODAL] = (state, _) => {
+    return {...state, warningModalOpen: false};
+};
+
+reducerMap[constants.OPEN_DELETE_MODAL] = (state, { payload }) => {
+    const { feature } = payload;
+    return {...state, deletePolygonModalOpen: true, deletedFeature: feature};
+};
+
+reducerMap[constants.CLOSE_DELETE_MODAL] = (state, _) => {
+    return {...state, deletePolygonModalOpen: false};
+};
 
 export default (state = initialState, action) => {
 	const fn = reducerMap[action.type];

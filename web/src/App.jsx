@@ -26,9 +26,11 @@ import { Query } from "react-apollo";
 import Welcome from './components/welcome';
 import * as turf from '@turf/turf';
 import FeatureList from './components/featureList';
+import DetailView from './components/detailView';
 import AddEntryModal from './components/AddEntryModal.jsx';
 import SaveEntryModal from './components/SaveEntryModal.jsx';
-import ImportFile from './components/ImportFile.jsx';
+import UnsavedPolygonWarning from './components/unsavedPolygonWarning';
+import DeletePolygonConfirmation from './components/deletePolygonConfirmation';
 
 
 const mapboxAccessToken = "pk.eyJ1IjoiYWFyb25jLXJlZ2VuIiwiYSI6ImNqa2I4dW9sbjBob3czcHA4amJqM2NhczAifQ.4HW-QDLUBJiHxOjDakKm2w";
@@ -36,7 +38,7 @@ const mapboxAccessToken = "pk.eyJ1IjoiYWFyb25jLXJlZ2VuIiwiYSI6ImNqa2I4dW9sbjBob3
 const Map = ReactMapboxGl({
     accessToken: mapboxAccessToken,
     logoPosition: 'bottom-left',
-    jumpTo: true,
+    easeTo: true,
 //    interactive: false,
     flyTo: false
 });
@@ -62,6 +64,11 @@ class App extends Component {
     this.state = {};
   }
 
+  componentWillMount = () => {
+    const unsavedFeatures = JSON.parse(localStorage.getItem("features"));
+    this.setState({ unsavedFeatures });
+  }
+
   onMenuClick = (e) => {
     this.setState({ anchorEl: e.currentTarget });
   }
@@ -70,9 +77,18 @@ class App extends Component {
     this.setState({ anchorEl: null });
   };
 
-  onLogout = () => {
-    this.setState({ anchorEl: null });
-    this.props.actions.logout();
+  onLogout = (e) => {
+    const unsaved = this.props.map.features.length && this.props.map.features.some((feature) => {
+      return !feature.saved;
+    });
+
+    if (unsaved) {
+        this.props.actions.openWarningModal();
+    }
+    else {
+      this.setState({ anchorEl: null });
+      this.props.actions.logout();
+    }
   }
 
   gotoRegen = () => {
@@ -94,6 +110,7 @@ class App extends Component {
   onDrawUpdated = (e) => {
     const { updateFeatures } = this.props.actions;
     const updatedFeatures = this.state.drawControl.getAll();
+    localStorage.setItem("features", JSON.stringify(updatedFeatures.features));
     updateFeatures(updatedFeatures.features);
   }
 
@@ -114,7 +131,6 @@ class App extends Component {
       },
       displayControlsDefault: false
     });
-    this.setState({ drawControl });
     map.addControl(drawControl, 'top-left');
     map.addControl(new mapbox.GeolocateControl({
       positionOptions: {
@@ -125,6 +141,19 @@ class App extends Component {
     map.addControl(new MapboxGeocoder({
       accessToken: mapboxAccessToken
     }));
+
+
+    const unsavedFeatures = JSON.parse(localStorage.getItem("features"));
+    if (unsavedFeatures && unsavedFeatures.length) {
+      this.props.actions.updateFeatures(unsavedFeatures);
+
+      drawControl.set({
+        type: 'FeatureCollection',
+        features: unsavedFeatures
+      });
+    }
+
+    this.setState({ drawControl });
     map.on('draw.create', this.onDrawUpdated);
     map.on('draw.delete', this.onDrawUpdated);
     map.on('draw.combine', this.onDrawUpdated);
@@ -183,11 +212,12 @@ class App extends Component {
     drawControl.delete(id);
   }
 
+
   render() {
     const worldview = [-60, -60, 60, 60]; // default mapbox worldview
     const { theme, map, user, actions, addModalOpen, saveModalOpen, isAuthenticated } = this.props;
-    const { features, selected } = map;
-    const { login } = actions;
+    const { features, selected, zoom, deletePolygonModalOpen, warningModalOpen, deletedFeature } = map;
+    const { login, updateZoom } = actions;
 
     const styles = {
       primaryColor: {
@@ -196,7 +226,8 @@ class App extends Component {
       },
       accent: {
         blue: theme.palette.accent.blue,
-        yellow: theme.palette.accent.yellow
+        yellow: theme.palette.accent.yellow,
+        red: theme.palette.accent.red
       },
       fontFamily: theme.fontFamily,
       fontSize: "16px",
@@ -205,7 +236,7 @@ class App extends Component {
         fontSize: "20px"
       }
     };
-    const { anchorEl } = this.state;
+    const { anchorEl, unsavedFeatures } = this.state;
 
     return (
 
@@ -218,14 +249,24 @@ class App extends Component {
           */
         const nodes = data && data.allPolygons && data.allPolygons.nodes;
         let polygons = nodes && nodes.map(p => Object.assign({}, JSON.parse(p.geomJson), {id: p.id, name: p.name}));
-        const bbox = polygons ?
-              turf.bbox({
-                type: 'FeatureCollection',
-                features: polygons.map(p => ({
-                  type: 'Feature',
-                  geometry: p
-                }))
-              }) : worldview ;
+        let bbox = worldview;
+        if (polygons && polygons.length && !zoom ) {
+          bbox = turf.bbox({
+            type: 'FeatureCollection',
+            features: polygons.map(p => ({
+              type: 'Feature',
+              geometry: p
+            }))
+          });
+          updateZoom();
+        }
+        else if (unsavedFeatures && unsavedFeatures.length && !zoom) {
+          bbox = turf.bbox({
+            type: 'FeatureCollection',
+            features: unsavedFeatures
+          });
+          updateZoom();
+        }
 
           // add optimisticSavedFeature to polygons
           features.forEach((feature) => {
@@ -233,7 +274,9 @@ class App extends Component {
               let optimisticSavedFeature = Object.assign({}, feature, {
                 coordinates: feature.geometry.coordinates
               });
-              polygons.unshift(optimisticSavedFeature);
+              polygons && polygons.length
+              ? polygons.unshift(optimisticSavedFeature)
+              : polygons = [optimisticSavedFeature];
             }
           });
 
@@ -282,7 +325,8 @@ class App extends Component {
                   polygons={polygons}
                   toggleSelect={this.drawSelected}
                   styles={styles}
-                  openSaveEntryModal={actions.openSaveEntryModal} />
+                  openSaveEntryModal={actions.openSaveEntryModal}
+                  openDeletePolygonModal={actions.openDeleteModal} />
               </View>
               <View style={{ flex: 8 }}>
                 <Map
@@ -297,8 +341,13 @@ class App extends Component {
                       // options seem to be ignored here. why?
                       logoPosition: 'top-left'
                   }}
-                  fitBounds={bbox && [[bbox[0], bbox[1]], [bbox[2], bbox[3]]]}
-                  onStyleLoad={this.onMapLoad}>
+		              fitBounds={!zoom ? ([[bbox[0], bbox[1]], [bbox[2], bbox[3]]]) : null}
+                  onStyleLoad={this.onMapLoad}
+                  onZoomEnd={(e) => {
+                    if (!zoom) {
+                      updateZoom();
+                    }
+                  }}>
                   {
                     (polygons && polygons.length) ?
                       polygons.map(polygon => {
@@ -327,21 +376,28 @@ class App extends Component {
                       })
                     : null
                   }
-
-                    <div style={{position: "absolute", bottom: "25px", right: "10px"}}>
-                      <Button
-                        variant="fab"
-                        color="secondary"
-                        onClick={actions.openNewEntryModal}>
-                          <AddIcon />
-                      </Button>
-                    </div>
+                  {
+                    isAuthenticated ?
+                      <div style={{position: "absolute", bottom: "25px", right: "10px"}}>
+                        <Button
+                          variant="fab"
+                          color="secondary"
+                          onClick={actions.openNewEntryModal}>
+                            <AddIcon />
+                        </Button>
+                      </div>
+                      : null
+                  }
                 </Map>
               </View>
             </View>
-            <View style={{ flex: 2 }}></View>
+            <View style={{ flex: 2 }}>
+              <DetailView features={features} selected={selected} polygons={polygons} styles={styles} />
+            </View>
             <AddEntryModal open={addModalOpen} onClose={actions.closeNewEntryModal} polygons={polygons} />
-            <SaveEntryModal open={saveModalOpen} onClose={actions.closeSaveEntryModal} user={data ? data.getCurrentUser : 'guest'} clearSelected={this.clearSelected} />
+            <SaveEntryModal open={saveModalOpen} onClose={actions.closeSaveEntryModal} user={data && data.getCurrentUser} clearSelected={this.clearSelected} />
+            <UnsavedPolygonWarning open={warningModalOpen} onClose={actions.closeWarningModal} logout={actions.logout} />
+            <DeletePolygonConfirmation open={deletePolygonModalOpen} onClose={actions.closeDeleteModal} deletedFeature={deletedFeature} />
           </View>
           );
         }}
@@ -359,7 +415,7 @@ const mapStateToProps = ({ map, entry, auth }) => ({
 
 const mapDispatchToProps = (dispatch) => {
   const { logout, login } = authActions;
-  const { updateFeatures, optimisticSaveFeature, updateSelected } = mapActions;
+  const { updateZoom, updateFeatures, optimisticSaveFeature, updateSelected, openWarningModal, closeWarningModal, openDeleteModal, closeDeleteModal } = mapActions;
   const { openNewEntryModal, closeNewEntryModal, openSaveEntryModal, closeSaveEntryModal } = entryActions;
   const actions = bindActionCreators({
     updateFeatures,
@@ -369,6 +425,11 @@ const mapDispatchToProps = (dispatch) => {
     closeNewEntryModal,
     openSaveEntryModal,
     closeSaveEntryModal,
+    openWarningModal,
+    closeWarningModal,
+    openDeleteModal,
+    closeDeleteModal,
+    updateZoom,
     logout,
     login
   }, dispatch);

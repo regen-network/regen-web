@@ -9,100 +9,17 @@ import { actions as entryActions } from "../actions/entry";
 import { actions as mapActions } from "../actions/map";
 import { actions as authActions } from "../actions/auth";
 import Modal from '@material-ui/core/Modal';
-import TextField from '@material-ui/core/TextField';
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import SingleSelect from './select.js';
-import * as moment from 'moment';
 import PolygonIcon from './polygonIcon';
-import gql from "graphql-tag";
-import { Mutation } from "react-apollo";
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
-
-const LOG_ENTRY = gql`
-   mutation LogEntry($type: String!, $comment: String, $polygon: JSON!, $point: JSON, $species: String, $unit: String, $numericValue: BigFloat, $happenedAt: Datetime) {
-    logEntry(input: {type: $type, comment: $comment, polygon: $polygon, point: $point, species: $species, unit: $unit, numericValue: $numericValue, happenedAt: $happenedAt}) {
-      entry{
-        id
-        type
-        polygon
-        species
-        when
-      }
-    }
-  }
-`;
-
-const CREATE_POLYGON = gql`
-   mutation CreatePolygon($name: String!,  $geojson: JSON!, $owner: String!) {
-    createPolygonByJson(input: {name: $name, geojson: $geojson, owner: $owner}) {
-      polygon{
-        id
-        name
-        geomJson
-        owner
-      }
-    }
-  }
-`;
-
-const entryTypes = [
-    {type:'Planting', category: 'PlantRelated'},
-    {type:'Harvesting', category: 'PlantRelated'},
-    {type:'Tillage'}
-];
-
-const entryTypeCategories = new Map(entryTypes.map(({type,category}) => [type, category]));
-
-const isPlantRelated = (type) => entryTypeCategories.get(type) === 'PlantRelated';
-
-const plants = [
-    {name: 'Wheat'},
-    {name: 'Rye'},
-    {name: 'Soy'},
-    {name: 'Corn'},
-    {name: 'Buckwheat'}
-];
-
-const tillage = [
-    {name: 'No-till'},
-    {name: 'Conservation till'},
-    {name: 'Till'}
-];
-
-const fieldFeatures = [
-  {type: "hasTrees", label: "Area with trees"},
-  {type: "hasWatercourse", label: "Watercourse"},
-  {type: "hasWetland", label: "Wetland"},
-  {type: "hasNativeBuffer", label: "Native or wild vegetation buffer strip"},
-  {type: "hasWildlifeCorridor", label: "Wildlife corridor"},
-];
-
-const fieldPractices = [
-  {type: "cropRotation", label: "Crop rotation"},
-  {type: "intercropping", label: "Intercropping", category: "PlantRelated"},
-  {type: "coverCropping", label: "Cover cropping", category: "PlantRelated"},
-  {type: "agroforestry", label: "Agroforestry", category: "PlantRelated"},
-  {type: "organicAnnualCrops", label: "Organic annual crops", category: "PlantRelated"},
-  {type: "perennialCrops", label: "Perennial crops", category: "PlantRelated"},
-  {type: "silvopasture", label: "Silvopasture", category: "PlantRelated"},
-  {type: "pastureCropping", label: "Pasture cropping", category: "PlantRelated"},
-  {type: "holisticManagement", label: "Holistic management"},
-  {type: "tilling", label: "Tilling", category: "Tilling"}
-]
+import SavePolygonName from "./polygonModal/savePolygonName";
+import ChoosePolygonFeatures from "./polygonModal/choosePolygonFeatures";
+import ChoosePolygonPractices from "./polygonModal/choosePolygonPractices";
+import PolygonCropHistory from "./polygonModal/polygonCropHistory";
 
 class SavePolygonModal extends Component {
     constructor(props) {
         super(props);
         this.state = {
           name: "",
-          hasTrees: false,
-          hasWatercourse: false,
-          hasWetland: false,
-          hasNativeBuffer: false,
-          hasWildlifeCorridor: false,
           stage: 0
         };
     }
@@ -113,24 +30,14 @@ class SavePolygonModal extends Component {
       });
     };
 
-    handleFeatureChange = (e, name) => {
-      this.setState({ [name]: e.target.checked });
-    };
-
-    removeItemFromStorage = (id) => {
-      const unsavedFeatures = JSON.parse(localStorage.getItem("features"));
-      const remainingUnsavedFeatures = unsavedFeatures.filter((feature) => {
-        return feature.id !== id;
-      });
-      localStorage.setItem("features", JSON.stringify(remainingUnsavedFeatures));
+    updateStage = () => {
+      let current = this.state.stage;
+      this.setState({stage: current < 3 ? current + 1 : 0});
     }
 
     render() {
         const {open, onClose, entry, patchNewEntry, theme, authenticated, clearSelected, optimisticSaveFeature, user, login} = this.props;
         const { currentFeature } = entry;
-        const { type, species, date } = entry.entry;
-
-        const now = moment().format();
 
         const styles = {
           primaryColor: {
@@ -150,196 +57,38 @@ class SavePolygonModal extends Component {
           }
         };
 
-        const SavePolygonName = () => {
-          return <div style={{margin: "25px"}}>
-                <form noValidate>
-                  <TextField
-                    id="name"
-                    label="Name"
-                    autoFocus={true}
-                    value={this.state.name}
-                    onChange={this.handleNameChange('name')}
-                    margin="normal"
-                  />
-                </form>
-                <Mutation mutation={CREATE_POLYGON}>
-                    {(createPolygonByJson, {loading, error}) => (
-                      <div>
-                          {error ? <p style={{color: styles.accent.red}}>"There was an error saving your parcel. Please try again."</p> : null}
-                          <Button onClick={() => {
-                            createPolygonByJson({variables: {name: this.state.name, geojson: currentFeature.geometry, owner: user }});
-                            optimisticSaveFeature(currentFeature.id, this.state.name);
-                            clearSelected(currentFeature.id); // delete from map
-                            this.removeItemFromStorage(currentFeature.id);
-                            this.setState({stage: 1});
-                          }}
-                          style={{
-                            margin: "25px",
-                            backgroundColor: styles.accent.blue,
-                            fontFamily: styles.fontFamily,
-                            color: styles.primaryColor.color}}>
-                          Save Parcel</Button>
-                      </div>
-                    )}
-                  </Mutation>
-              </div>;
-          }
-
-          const ChoosePolygonFeatures = () => {
-            return <div>
-              <Typography variant="subheading" style={{fontFamily: styles.title.fontFamily, margin: "15px"}}>
-                {"Please choose if any of these features are present within the parcel limits:"}
-              </Typography>
-              <Mutation mutation={LOG_ENTRY}>
-              {(logEntry, {loading, error}) => (
-                <FormGroup row>
-                  {
-                    fieldFeatures.map((feature) => {
-                      return <FormControlLabel
-                              control={
-                                <Checkbox
-                                  checked={this.state[feature.type]}
-                                  onChange={(e) => {
-                                    this.handleFeatureChange(e, feature.type);
-                                    logEntry({variables: {type: feature.type, polygon: currentFeature.geometry, happenedAt: now }});
-                                  }}
-                                  value={feature.type}
-                                  color="primary"
-                                />
-                              }
-                              label={feature.label}
-                              key={feature.type}
-                            />
-                    })
-                  }
-                </FormGroup>
-              )}
-              </Mutation>
-              <Button onClick={() => {
-                this.setState({stage: 2});
-              }}
-              style={{
-                margin: "25px",
-                backgroundColor: styles.accent.blue,
-                fontFamily: styles.fontFamily,
-                color: styles.primaryColor.color}}>
-              Submit</Button>
-            </div>;
-        }
-
-        const ChoosePolygonPractices = () => {
-          return <div>
-            <Typography variant="subheading" style={{fontFamily: styles.title.fontFamily, margin: "15px"}}>
-              {"Please choose if any of these are practiced within the parcel limits:"}
-            </Typography>
-            <Mutation mutation={LOG_ENTRY}>
-            {(logEntry, {loading, error}) => (
-              <FormGroup row>
-                {
-                  fieldPractices.map((practice) => {
-                    return <FormControlLabel
-                            control={
-                              <Checkbox
-                                checked={this.state[practice.type]}
-                                onChange={(e) => {
-                                  this.handleFeatureChange(e, practice.type);
-                                  logEntry({variables: {type: practice.type, polygon: currentFeature.geometry, happenedAt: now }});
-                                }}
-                                value={practice.type}
-                                color="primary"
-                              />
-                            }
-                            label={practice.label}
-                            key={practice.type}
-                          />
-                  })
-                }
-              </FormGroup>
-            )}
-            </Mutation>
-            <Button onClick={() => {
-              this.setState({stage: 3});
-            }}
-            style={{
-              margin: "25px",
-              backgroundColor: styles.accent.blue,
-              fontFamily: styles.fontFamily,
-              color: styles.primaryColor.color}}>
-            Submit</Button>
-          </div>;
-      }
-
-        const PolygonEntries = () => {
-          return <div>
-              <Typography variant="subheading" style={{fontFamily: styles.title.fontFamily, margin: "15px"}}>
-                {"What was the last activity that occured in this parcel?"}
-              </Typography>
-              <DatePicker
-                  selected={date}
-                  onChange={(date) => {
-                    patchNewEntry({date});
-                  }}/>
-              <SingleSelect
-                  placeholder={"Select an action..."}
-                  options={entryTypes.map(({type}) => {return {value: type, label: type}})}
-                  value={type ? {value: type, label: type} : null}
-                  onChange={(e) => {
-                    patchNewEntry({type: e.value});
-                  }}
-              />
-              {isPlantRelated(type) ?
-                 <SingleSelect
-                     placeholder={"Select a crop..."}
-                     options={plants.map(({name}) => {return {value: name, label: name}})}
-                     value={species ? {value: species, label: species} : ""}
-                     onChange={(e) => {
-                       patchNewEntry({species: e.value});
-                     }}
-                 />
-                 : null
-              }
-              <Mutation mutation={LOG_ENTRY}>
-                {(logEntry, {loading, error}) => (
-                  <div>
-                    {error ? <p style={{color: styles.accent.red}}>"There was an error saving your update. Please try again."</p> : null}
-                    <Button onClick={() => {
-                      currentFeature.name = this.state.name;
-                      logEntry({variables: {type: type, polygon: currentFeature.geometry, species: species, happenedAt: date }});
-                      onClose();
-                      this.setState({
-                        name: "",
-                        hasTrees: false,
-                        hasWatercourse: false,
-                        hasWetland: false,
-                        hasNativeBuffer: false,
-                        hasWildlifeCorridor: false,
-                        stage: 0
-                      });
-                    }}
-                      style={{
-                        margin: "25px",
-                        backgroundColor: styles.accent.blue,
-                        fontFamily: styles.fontFamily,
-                        color: styles.primaryColor.color}}>
-                      Submit</Button>
-                  </div>
-                )}
-              </Mutation>
-          </div>;
-        }
-
         const renderStage = (stage) => {
             if (stage === 0) {
-              return <SavePolygonName />;
+              return <SavePolygonName
+                      styles={styles}
+                      handleNameChange={this.handleNameChange}
+                      name={this.state.name}
+                      user={user}
+                      currentFeature={currentFeature}
+                      optimisticSaveFeature={optimisticSaveFeature}
+                      clearSelected={clearSelected}
+                      updateStage={this.updateStage} />;
             }
             else if (stage === 1) {
-              return <ChoosePolygonFeatures />;
+              return <ChoosePolygonFeatures
+                      styles={styles}
+                      currentFeature={currentFeature}
+                      updateStage={this.updateStage} />;
             }
             else if (stage === 2) {
-              return <ChoosePolygonPractices />;
+              return <ChoosePolygonPractices
+                      styles={styles}
+                      currentFeature={currentFeature}
+                      updateStage={this.updateStage} />;
             }
             else if (stage === 3) {
-              return <PolygonEntries />;
+              return <PolygonCropHistory
+                      styles={styles}
+                      entry={entry}
+                      patchNewEntry={patchNewEntry}
+                      currentFeature={currentFeature}
+                      updateStage={this.updateStage}
+                      onClose={onClose} />;
             }
         }
 
@@ -348,11 +97,6 @@ class SavePolygonModal extends Component {
                onClose={() => {
                  this.setState({
                    name: "",
-                   hasTrees: false,
-                   hasWatercourse: false,
-                   hasWetland: false,
-                   hasNativeBuffer: false,
-                   hasWildlifeCorridor: false,
                    stage: 0
                  });
                  onClose();

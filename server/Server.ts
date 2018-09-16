@@ -6,10 +6,33 @@ import { postgraphile } from 'postgraphile';
 import * as jwks from 'jwks-rsa';
 import * as jwt from 'express-jwt';
 import * as childProcess from 'child_process';
+import * as fileUpload from 'express-fileupload';
+import * as cors from 'cors';
 
 const app = express();
 
 app.use(express.static(path.join(__dirname, '../web/build')));
+app.use(cors());
+app.use(fileUpload());
+
+
+app.post('/upload', (req, res, next) => {
+    let uploadFile = req.files.file
+    const fileName = req.files.file.name
+
+    uploadFile.mv(
+        `${__dirname}/public/files/${fileName}`,
+        function (err) {
+            if (err) {
+                res.sendStatus(500);
+            }
+            res.json({
+                file: `public/${req.files.file.name}`,
+            })
+        },
+    )
+});
+
 
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, '../web/build', 'index.html'));

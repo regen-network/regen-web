@@ -31,6 +31,7 @@ import AddEntryModal from './components/AddEntryModal.jsx';
 import SaveEntryModal from './components/SaveEntryModal.jsx';
 import UnsavedPolygonWarning from './components/unsavedPolygonWarning';
 import DeletePolygonConfirmation from './components/deletePolygonConfirmation';
+import ImportFile from './components/ImportFile';
 
 
 const mapboxAccessToken = "pk.eyJ1IjoiYWFyb25jLXJlZ2VuIiwiYSI6ImNqa2I4dW9sbjBob3czcHA4amJqM2NhczAifQ.4HW-QDLUBJiHxOjDakKm2w";
@@ -104,7 +105,9 @@ class App extends Component {
     console.log("Import select3d");
       console.log("react version",React.version);
     // close menu
+    const f =   <ImportFile/>
     this.setState({ anchorEl: null });
+      return <input type="file" id="file"/>
   }
 
   onDrawUpdated = (e) => {

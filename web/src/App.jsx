@@ -103,11 +103,11 @@ class App extends Component {
 
   onImport = () => {
     console.log("Import select3d");
-      console.log("react version",React.version);
+    console.log("react version",React.version);
     // close menu
-    const f =   <ImportFile/>
+    // const f =   <ImportFile/>
+    document.getElementById("file").click();
     this.setState({ anchorEl: null });
-      return <input type="file" id="file"/>
   }
 
   onDrawUpdated = (e) => {
@@ -307,7 +307,9 @@ class App extends Component {
                         </IconButton>
 		                    <Menu id="user-menu" anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={this.onMenuClose}>
 		                      <MenuItem onClick={this.gotoRegen}>Regen</MenuItem>
-		                      <MenuItem onClick={this.onImport}>Import</MenuItem>
+		                      <MenuItem onClick={this.onImport}>Import
+                            <input type="file" id="file" hidden/>
+                         </MenuItem>
 		                      <MenuItem onClick={this.onLogout}>Sign Out</MenuItem>
 		                    </Menu>
 		                   </div>

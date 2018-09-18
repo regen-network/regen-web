@@ -18,7 +18,7 @@ export default class SingleSelect extends React.Component {
           value={value}
           onChange={onChange}
           placeholder={placeholder}
-          name="flavor"
+          name="entry"
           options={options}
         />
     );

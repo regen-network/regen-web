@@ -24,7 +24,8 @@ const LOG_ENTRY = gql`
 const entryTypes = [
     {type:'Planting', category: 'PlantRelated'},
     {type:'Harvesting', category: 'PlantRelated'},
-    {type:'Tillage'}
+    {type:'Tillage'},
+    {type: 'Natural pasture'}
 ];
 
 const entryTypeCategories = new Map(entryTypes.map(({type,category}) => [type, category]));
@@ -36,7 +37,12 @@ const plants = [
     {name: 'Rye'},
     {name: 'Soy'},
     {name: 'Corn'},
-    {name: 'Buckwheat'}
+    {name: 'Buckwheat'},
+    {name: 'Sorghum'},
+    {name: 'Oat'},
+    {name: 'Barley'},
+    {name: 'Rice'},
+    {name: 'Other'}
 ];
 
 export default class PolygonCropHistory extends Component {
@@ -52,7 +58,7 @@ export default class PolygonCropHistory extends Component {
         return (
           <div>
               <Typography variant="subheading" style={{fontFamily: styles.title.fontFamily, margin: "15px"}}>
-                {"What was the last activity that occured in this parcel?"}
+                {"Please tell us about land cover for this parcel over the last few years"}
               </Typography>
               <DatePicker
                   selected={date}
@@ -83,8 +89,6 @@ export default class PolygonCropHistory extends Component {
                   <div>
                     {error ? <p style={{color: styles.accent.red}}>"There was an error saving your update. Please try again."</p> : null}
                     <Button onClick={() => {
-                      console.log(currentFeature);
-                      // currentFeature.name = this.state.name;
                       logEntry({variables: {type: type, polygon: currentFeature.geometry, species: species, happenedAt: date }});
                       onClose();
                     }}

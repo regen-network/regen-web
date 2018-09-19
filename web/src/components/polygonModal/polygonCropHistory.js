@@ -4,8 +4,6 @@ import Button from '@material-ui/core/Button';
 import SingleSelect from '../select.js';
 import gql from "graphql-tag";
 import { Mutation } from "react-apollo";
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
 import * as moment from 'moment';
 
 const LOG_ENTRY = gql`

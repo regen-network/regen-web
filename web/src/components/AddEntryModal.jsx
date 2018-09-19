@@ -29,9 +29,11 @@ const LOG_ENTRY = gql`
 `;
 
 const entryTypes = [
-    {type:'Planting', category: 'PlantRelated'},
-    {type:'Harvesting', category: 'PlantRelated'},
-    {type:'Tillage'}
+    {type: 'Planting', category: 'PlantRelated'},
+    {type: 'Harvesting', category: 'PlantRelated'},
+    {type: 'Tillage'},
+    {type: 'Natural pasture'},
+    {type: 'Other'}
 ];
 
 const entryTypeCategories = new Map(entryTypes.map(({type,category}) => [type, category]));
@@ -39,11 +41,16 @@ const entryTypeCategories = new Map(entryTypes.map(({type,category}) => [type, c
 const isPlantRelated = (type) => entryTypeCategories.get(type) === 'PlantRelated';
 
 const plants = [
-    {name: 'Wheat'},
-    {name: 'Rye'},
-    {name: 'Soy'},
+    {name: 'Barley'},
+    {name: 'Buckwheat'},
     {name: 'Corn'},
-    {name: 'Buckwheat'}
+    {name: 'Oat'},
+    {name: 'Other'},
+    {name: 'Rice'},
+    {name: 'Rye'},
+    {name: 'Sorghum'},
+    {name: 'Soy'},
+    {name: 'Wheat'}
 ];
 
 class AddEntryModal extends Component {

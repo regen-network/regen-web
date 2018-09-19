@@ -31,7 +31,12 @@ export default class SavePolygonName extends Component {
         const { styles, handleNameChange, name, user, currentFeature, optimisticSaveFeature, clearSelected, updateStage } = this.props;
 
         return (
-          <div style={{margin: "25px"}}>
+          <div style={{margin: "25px"}}
+            onKeyPress={(e) => {
+              if (e.key === "Enter") {
+                  e.preventDefault();
+              }
+            }}>
                 <form noValidate>
                   <TextField
                     id="name"

@@ -58,8 +58,9 @@ class SavePolygonModal extends Component {
         };
 
         const renderStage = (stage) => {
-            if (stage === 0) {
-              return <SavePolygonName
+            switch(stage) {
+              case 0:
+                return <SavePolygonName
                       styles={styles}
                       handleNameChange={this.handleNameChange}
                       name={this.state.name}
@@ -68,21 +69,18 @@ class SavePolygonModal extends Component {
                       optimisticSaveFeature={optimisticSaveFeature}
                       clearSelected={clearSelected}
                       updateStage={this.updateStage} />;
-            }
-            else if (stage === 1) {
-              return <ChoosePolygonFeatures
+              case 1:
+                return <ChoosePolygonFeatures
                       styles={styles}
                       currentFeature={currentFeature}
                       updateStage={this.updateStage} />;
-            }
-            else if (stage === 2) {
-              return <ChoosePolygonPractices
+              case 2:
+                return <ChoosePolygonPractices
                       styles={styles}
                       currentFeature={currentFeature}
                       updateStage={this.updateStage} />;
-            }
-            else if (stage === 3) {
-              return <PolygonCropHistory
+              case 3:
+                return <PolygonCropHistory
                       styles={styles}
                       entry={entry}
                       patchNewEntry={patchNewEntry}
@@ -90,6 +88,8 @@ class SavePolygonModal extends Component {
                       updateStage={this.updateStage}
                       clearEntry={clearEntry}
                       onClose={onClose} />;
+              default:
+                console.log("err in stages");
             }
         }
 

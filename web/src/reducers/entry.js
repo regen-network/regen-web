@@ -22,6 +22,11 @@ reducerMap[constants.OPEN_NEW_ENTRY_MODAL] = (state, _) => {
     return {...state, addModalOpen: true};
 };
 
+reducerMap[constants.CLEAR_ENTRY] = (state, _) => {
+    let clearedEntry = Object.assign({}, state.entry, {type: null, species: null});
+    return {...state, entry: clearedEntry};
+};
+
 reducerMap[constants.CLOSE_NEW_ENTRY_MODAL] = (state, _) => {
     let clearedEntry = Object.assign({}, state.entry, {type: null, species: null});
     return {...state, addModalOpen: false, entry: clearedEntry};

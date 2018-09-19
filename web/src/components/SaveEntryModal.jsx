@@ -36,7 +36,7 @@ class SavePolygonModal extends Component {
     }
 
     render() {
-        const {open, onClose, entry, patchNewEntry, theme, authenticated, clearSelected, optimisticSaveFeature, user, login} = this.props;
+        const {open, onClose, entry, patchNewEntry, theme, authenticated, clearSelected, optimisticSaveFeature, user, login, clearEntry} = this.props;
         const { currentFeature } = entry;
 
         const styles = {
@@ -88,6 +88,7 @@ class SavePolygonModal extends Component {
                       patchNewEntry={patchNewEntry}
                       currentFeature={currentFeature}
                       updateStage={this.updateStage}
+                      clearEntry={clearEntry}
                       onClose={onClose} />;
             }
         }
@@ -150,10 +151,10 @@ const mapStateToProps = ({ entry, auth }) => ({
 });
 
 const mapDispatchToProps = (dispatch) => {
-    const { patchNewEntry, closeSaveEntryModal } = entryActions;
+    const { patchNewEntry, closeSaveEntryModal, clearEntry } = entryActions;
     const { optimisticSaveFeature, updateUnsavedFeatures } = mapActions;
     const { login } = authActions;
-    return bindActionCreators({ patchNewEntry, closeSaveEntryModal, optimisticSaveFeature, updateUnsavedFeatures, login }, dispatch);
+    return bindActionCreators({ patchNewEntry, closeSaveEntryModal, optimisticSaveFeature, updateUnsavedFeatures, login, clearEntry }, dispatch);
 };
 
 export default withTheme()(connect(mapStateToProps, mapDispatchToProps)(SavePolygonModal));

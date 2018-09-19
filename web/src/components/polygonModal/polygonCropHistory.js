@@ -35,16 +35,16 @@ const entryTypeCategories = new Map(entryTypes.map(({type,category}) => [type, c
 const isPlantRelated = (type) => entryTypeCategories.get(type) === 'PlantRelated';
 
 const plants = [
-    {name: 'Wheat'},
-    {name: 'Rye'},
-    {name: 'Soy'},
-    {name: 'Corn'},
-    {name: 'Buckwheat'},
-    {name: 'Sorghum'},
-    {name: 'Oat'},
     {name: 'Barley'},
+    {name: 'Buckwheat'},
+    {name: 'Corn'},
+    {name: 'Oat'},
+    {name: 'Other'},
     {name: 'Rice'},
-    {name: 'Other'}
+    {name: 'Rye'},
+    {name: 'Sorghum'},
+    {name: 'Soy'},
+    {name: 'Wheat'}
 ];
 
 const now = moment().format();
@@ -66,7 +66,7 @@ export default class PolygonCropHistory extends Component {
     }
 
     render() {
-        const { styles, entry, currentFeature, patchNewEntry, onClose } = this.props;
+        const { styles, entry, currentFeature, patchNewEntry, onClose, clearEntry } = this.props;
         const { type, species, date } = entry.entry;
 
         const entries = this.state.entries.map((entry) =>
@@ -92,7 +92,7 @@ export default class PolygonCropHistory extends Component {
                   placeholder={"Select an action..."}
                   options={entryTypes.map(({type}) => {return {value: type, label: type}})}
                   onChange={(e) => {
-                    patchNewEntry({type: e.value});
+                    patchNewEntry({type: e.value, species: isPlantRelated(e.value) ? species : null});
                   }}
               />
               {isPlantRelated(type) ?
@@ -110,22 +110,24 @@ export default class PolygonCropHistory extends Component {
                   <div>
                     {error ? <p style={{color: styles.accent.red}}>"There was an error saving your update. Please try again."</p> : null}
                     <Button onClick={() => {
-                      // TODO reset form
-                      // TODO clear species if no longer plant related
                       const update = `${type} ${species || ""} in ${moment(date).format("YYYY")}`;
                       this.setState(prevState => ({
                           entries: [...prevState.entries, update]
                       }));
                       logEntry({variables: {type: type, polygon: currentFeature.geometry, species: species, happenedAt: date }});
+                      clearEntry();
                     }}
                       style={{
                         margin: "25px",
                         backgroundColor: styles.primaryColor.backgroundColor,
                         fontFamily: styles.fontFamily,
                         color: styles.primaryColor.color}}>
-                      Add Another</Button>
+                      Save and Add Another</Button>
                     <Button onClick={() => {
-                      logEntry({variables: {type: type, polygon: currentFeature.geometry, species: species, happenedAt: date }});
+                      if (type) {
+                        logEntry({variables: {type: type, polygon: currentFeature.geometry, species: species, happenedAt: date }});
+                        clearEntry();
+                      }
                       onClose();
                     }}
                       style={{

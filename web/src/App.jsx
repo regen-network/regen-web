@@ -259,18 +259,6 @@ class App extends Component {
           updateZoom();
         }
 
-          // add optimisticSavedFeature to polygons
-          features.forEach((feature) => {
-            if (feature.saved) {
-              let optimisticSavedFeature = Object.assign({}, feature, {
-                coordinates: feature.geometry.coordinates
-              });
-              polygons && polygons.length
-              ? polygons.unshift(optimisticSavedFeature)
-              : polygons = [optimisticSavedFeature];
-            }
-          });
-
         return (
           <View style={{ flex: 1, flexDirection: 'column' }}>
             {isAuthenticated ? null : <Welcome/> }

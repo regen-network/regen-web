@@ -14,7 +14,7 @@ const CLOSE_SAVE_ENTRY_MODAL= "CLOSE_SAVE_ENTRY_MODAL";
 const closeSaveEntryModal = () => ({type: CLOSE_SAVE_ENTRY_MODAL});
 
 const OPEN_UPLOAD_MODAL= "OPEN_UPLOAD_MODAL";
-const openUploadModal = (feature) => ({type: OPEN_UPLOAD_MODAL, payload: { feature }});
+const openUploadModal = () => ({ type: OPEN_UPLOAD_MODAL });
 
 const CLOSE_UPLOAD_MODAL= "CLOSE_UPLOAD_MODAL";
 const closeUploadModal = () => ({type: CLOSE_UPLOAD_MODAL});

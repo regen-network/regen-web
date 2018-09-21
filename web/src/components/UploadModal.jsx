@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Modal from '@material-ui/core/Modal';
 
 
 class UploadModal extends React.Component {
@@ -25,11 +26,15 @@ class UploadModal extends React.Component {
     }
 
     render() {
+        const {open, onClose} = this.props;
         {console.log("rendering UploadModal")}
         return (
-            <div onSubmit={this.handleSubmit}>
-                <input type="file" ref={this.fileInput} />
-            </div>
+            <Modal open={open}
+               onClose={onClose}>
+                <div id="uploadModal">
+                  <p>here is some stuff</p>
+                </div>
+            </Modal>
         );
     }
 }

@@ -220,9 +220,9 @@ class App extends Component {
 
   render() {
     const worldview = [-60, -60, 60, 60]; // default mapbox worldview
-      const { theme, map, user, actions, addModalOpen, saveModalOpen, uploadModalOpen, isAuthenticated } = this.props;
+    const { theme, map, user, actions, addModalOpen, saveModalOpen, uploadModalOpen, isAuthenticated } = this.props;
     const { features, selected, zoom, deletePolygonModalOpen, warningModalOpen, deletedFeature } = map;
-    const { login, updateZoom } = actions;
+      const { login, updateZoom, openUploadModal } = actions;
 
     const styles = {
       primaryColor: {
@@ -309,7 +309,7 @@ class App extends Component {
                         </IconButton>
 		                    <Menu id="user-menu" anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={this.onMenuClose}>
 		                      <MenuItem onClick={this.gotoRegen}>Regen</MenuItem>
-		                      <MenuItem onClick={actions.openUploadModal}>Import
+		                      <MenuItem onClick={openUploadModal}>Upload
                               {/*
 		                      <MenuItem onClick={this.onImport}>Import
                             <input type="file" id="file" hidden/>
@@ -337,6 +337,7 @@ class App extends Component {
                   toggleSelect={this.drawSelected}
                   styles={styles}
                   openSaveEntryModal={actions.openSaveEntryModal}
+                  openUploadModal={actions.openUploadModal}
                   openDeletePolygonModal={actions.openDeleteModal} />
               </View>
               <View style={{ flex: 8 }}>
@@ -422,7 +423,7 @@ const mapStateToProps = ({ map, entry, auth }) => ({
   user: auth.user,
   addModalOpen: entry.addModalOpen,
   saveModalOpen: entry.saveModalOpen,
-    uploadModalOpen: entry.uploadModalOpen,
+  uploadModalOpen: entry.uploadModalOpen,
   isAuthenticated: auth.authenticated
 });
 

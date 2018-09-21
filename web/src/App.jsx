@@ -10,6 +10,7 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Typography from '@material-ui/core/Typography';
 import AddIcon from '@material-ui/icons/Add';
+import Avatar from '@material-ui/core/Avatar';
 import { withTheme } from '@material-ui/core/styles';
 import ReactMapboxGl, { GeoJSONLayer } from "react-mapbox-gl";
 import * as mapbox from "mapbox-gl";
@@ -212,7 +213,8 @@ class App extends Component {
 
     const styles = {
       primaryColor: {
-        backgroundColor: theme.palette.primary.main,
+        backgroundColor: theme.palette.common.black,
+        green: theme.palette.primary.main,
         color: theme.palette.common.white,
       },
       accent: {
@@ -262,36 +264,36 @@ class App extends Component {
         return (
           <View style={{ flex: 1, flexDirection: 'column' }}>
             {isAuthenticated ? null : <Welcome/> }
-            <AppBar position="static">
-              <Toolbar variant="dense" style={{display: 'flex', justifyContent: 'space-between'}}>
-                <a target="_blank" href="http://regen.network" rel="noopener noreferrer">
+            <AppBar position="static" style={{backgroundColor: styles.primaryColor.backgroundColor, height: "50px"}}>
+              <Toolbar variant="dense">
+                <a target="_blank" href="http://regen.network" rel="noopener noreferrer" style={{position: "absolute", left: "20px"}}>
                   <img id="logo" src="logo_landscape.png" style={{height: 40, paddingTop: "5px"}} alt="logo link to regen.network" title="Regen Logo"/>
                 </a>
-                <Typography variant="title" style={{color: styles.primaryColor.color, fontFamily: styles.fontFamily}}>
-                  {isAuthenticated ? "Welcome, " +  user.given_name  + "!" : "Welcome!"}
+                <Typography variant="title" style={{color: styles.primaryColor.color, fontFamily: styles.fontFamily, fontSize: "18px", textAlign: "center", width: "100%", letterSpacing: "1px"}}>
+                  {isAuthenticated ? <div>Welcome <span style={{fontFamily: styles.title.fontFamily}}>{user.given_name}!</span></div> : "Welcome!"}
                 </Typography>
-                  <div>
-                    { isAuthenticated
-  	  	              ? <div>
-	  	                  <IconButton
-		                      aria-owns={anchorEl ? 'user-menu' : null}
-                          aria-label="More"
-                          aria-haspopup="true"
-                          onClick={this.onMenuClick}
-                        >
-                          <img style={{height:50}} src={user.picture} alt="user" />
-                        </IconButton>
-		                    <Menu id="user-menu" anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={this.onMenuClose}>
-		                      <MenuItem onClick={this.gotoRegen}>Regen</MenuItem>
-		                      <MenuItem onClick={this.onLogout}>Sign Out</MenuItem>
-		                    </Menu>
-		                   </div>
-		                 : <Button onClick={() => login()}
-                         style={{
-                           border: "2px solid #FFF",
-                           fontFamily: styles.fontFamily,
-                           color: styles.primaryColor.color}}>Sign In</Button>
-		               }
+                <div style={{position: "absolute", right: "20px"}}>
+                  { isAuthenticated
+	  	              ? <div>
+  	                  <IconButton
+	                      aria-owns={anchorEl ? 'user-menu' : null}
+                        aria-label="More"
+                        aria-haspopup="true"
+                        onClick={this.onMenuClick}
+                      >
+                        <Avatar alt="user" src={user.picture} />
+                      </IconButton>
+	                    <Menu id="user-menu" anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={this.onMenuClose}>
+	                      <MenuItem onClick={this.gotoRegen}>Regen</MenuItem>
+	                      <MenuItem onClick={this.onLogout}>Sign Out</MenuItem>
+	                    </Menu>
+	                   </div>
+	                 : <Button onClick={() => login()}
+                       style={{
+                         border: "2px solid #FFF",
+                         fontFamily: styles.fontFamily,
+                         color: styles.primaryColor.color}}>Sign In</Button>
+	               }
 		            </div>
               </Toolbar>
             </AppBar>

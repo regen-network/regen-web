@@ -18,6 +18,8 @@ const palette = {
     },
     common: {
       white: "#FFF",
+      grey: "#585E66",
+      black: "#202020"
     },
     accent: {
       yellow: "#ffc433",

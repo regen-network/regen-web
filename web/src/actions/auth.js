@@ -129,7 +129,13 @@ const logoutSuccess = () => ({ type: LOGOUT_SUCCESS });
 const LOGOUT_ERROR = "LOGOUT_ERROR";
 const logoutError = () => ({ type: LOGOUT_ERROR });
 
-const constants = { LOGIN_SUCCESS, LOGIN_ERROR, LOGOUT_SUCCESS, LOGOUT_ERROR };
-const actions = { handleAuthentication, isAuthenticated, getValidToken, getProfile, login, loginSuccess, loginError, logout, logoutSuccess, logoutError };
+const OPEN_MENU_MODAL= "OPEN_MENU_MODAL";
+const openMenuModal = () => ({type: OPEN_MENU_MODAL});
+
+const CLOSE_MENU_MODAL= "CLOSE_MENU_MODAL";
+const closeMenuModal = () => ({type: CLOSE_MENU_MODAL});
+
+const constants = { LOGIN_SUCCESS, LOGIN_ERROR, LOGOUT_SUCCESS, LOGOUT_ERROR, OPEN_MENU_MODAL, CLOSE_MENU_MODAL };
+const actions = { handleAuthentication, isAuthenticated, getValidToken, getProfile, login, loginSuccess, loginError, logout, logoutSuccess, logoutError, openMenuModal, closeMenuModal };
 
 export { constants, actions };

@@ -10,6 +10,7 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Typography from '@material-ui/core/Typography';
 import AddIcon from '@material-ui/icons/Add';
+import Avatar from '@material-ui/core/Avatar';
 import { withTheme } from '@material-ui/core/styles';
 import ReactMapboxGl, { GeoJSONLayer } from "react-mapbox-gl";
 import * as mapbox from "mapbox-gl";
@@ -206,13 +207,14 @@ class App extends Component {
 
   render() {
     const worldview = [-60, -60, 60, 60]; // default mapbox worldview
-    const { theme, map, user, actions, addModalOpen, saveModalOpen, isAuthenticated } = this.props;
+    const { theme, map, user, actions, addModalOpen, saveModalOpen, isAuthenticated, menuModalOpen } = this.props;
     const { features, selected, zoom, deletePolygonModalOpen, warningModalOpen, deletedFeature } = map;
     const { login, updateZoom } = actions;
 
     const styles = {
       primaryColor: {
-        backgroundColor: theme.palette.primary.main,
+        backgroundColor: theme.palette.common.black,
+        green: theme.palette.primary.main,
         color: theme.palette.common.white,
       },
       accent: {
@@ -261,37 +263,38 @@ class App extends Component {
 
         return (
           <View style={{ flex: 1, flexDirection: 'column' }}>
-            {isAuthenticated ? null : <Welcome/> }
-            <AppBar position="static">
-              <Toolbar variant="dense" style={{display: 'flex', justifyContent: 'space-between'}}>
-                <a target="_blank" href="http://regen.network" rel="noopener noreferrer">
+            <Welcome open={menuModalOpen} onClose={actions.closeMenuModal} user={isAuthenticated ? user : null} />
+            <AppBar position="static" style={{backgroundColor: styles.primaryColor.backgroundColor, height: "50px"}}>
+              <Toolbar variant="dense">
+                <a target="_blank" href="http://regen.network" rel="noopener noreferrer" style={{position: "absolute", left: "20px"}}>
                   <img id="logo" src="logo_landscape.png" style={{height: 40, paddingTop: "5px"}} alt="logo link to regen.network" title="Regen Logo"/>
                 </a>
-                <Typography variant="title" style={{color: styles.primaryColor.color, fontFamily: styles.fontFamily}}>
-                  {isAuthenticated ? "Welcome, " +  user.given_name  + "!" : "Welcome!"}
+                <Typography variant="title" style={{color: styles.primaryColor.color, fontFamily: styles.fontFamily, fontSize: "18px", textAlign: "center", width: "100%", letterSpacing: "1px"}}>
+                  {isAuthenticated ? <div>Welcome <span style={{fontFamily: styles.title.fontFamily}}>{user.given_name}!</span></div> : "Welcome!"}
                 </Typography>
-                  <div>
-                    { isAuthenticated
-  	  	              ? <div>
-	  	                  <IconButton
-		                      aria-owns={anchorEl ? 'user-menu' : null}
-                          aria-label="More"
-                          aria-haspopup="true"
-                          onClick={this.onMenuClick}
-                        >
-                          <img style={{height:50}} src={user.picture} alt="user" />
-                        </IconButton>
-		                    <Menu id="user-menu" anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={this.onMenuClose}>
-		                      <MenuItem onClick={this.gotoRegen}>Regen</MenuItem>
-		                      <MenuItem onClick={this.onLogout}>Sign Out</MenuItem>
-		                    </Menu>
-		                   </div>
-		                 : <Button onClick={() => login()}
-                         style={{
-                           border: "2px solid #FFF",
-                           fontFamily: styles.fontFamily,
-                           color: styles.primaryColor.color}}>Sign In</Button>
-		               }
+                <div style={{position: "absolute", right: "20px"}}>
+                  { isAuthenticated
+	  	              ? <div>
+  	                  <IconButton
+	                      aria-owns={anchorEl ? 'user-menu' : null}
+                        aria-label="More"
+                        aria-haspopup="true"
+                        onClick={this.onMenuClick}
+                      >
+                        <Avatar alt="user" src={user.picture} />
+                      </IconButton>
+	                    <Menu id="user-menu" anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={this.onMenuClose}>
+                        <MenuItem onClick={actions.openMenuModal}>Menu</MenuItem>
+                        <MenuItem onClick={this.gotoRegen}>Regen</MenuItem>
+	                      <MenuItem onClick={this.onLogout}>Sign Out</MenuItem>
+	                    </Menu>
+	                   </div>
+	                 : <Button onClick={() => login()}
+                       style={{
+                         border: "1px solid #FFF",
+                         fontFamily: styles.fontFamily,
+                         color: styles.primaryColor.color}}>Sign In</Button>
+	               }
 		            </div>
               </Toolbar>
             </AppBar>
@@ -386,13 +389,14 @@ class App extends Component {
 const mapStateToProps = ({ map, entry, auth }) => ({
   map: map,
   user: auth.user,
+  menuModalOpen: auth.menuModalOpen,
   addModalOpen: entry.addModalOpen,
   saveModalOpen: entry.saveModalOpen,
   isAuthenticated: auth.authenticated
 });
 
 const mapDispatchToProps = (dispatch) => {
-  const { logout, login } = authActions;
+  const { logout, login, openMenuModal, closeMenuModal } = authActions;
   const { updateZoom, updateFeatures, optimisticSaveFeature, updateSelected, openWarningModal, closeWarningModal, openDeleteModal, closeDeleteModal } = mapActions;
   const { openNewEntryModal, closeNewEntryModal, openSaveEntryModal, closeSaveEntryModal } = entryActions;
   const actions = bindActionCreators({
@@ -409,7 +413,9 @@ const mapDispatchToProps = (dispatch) => {
     closeDeleteModal,
     updateZoom,
     logout,
-    login
+    login,
+    openMenuModal,
+    closeMenuModal
   }, dispatch);
   return { actions }
 };

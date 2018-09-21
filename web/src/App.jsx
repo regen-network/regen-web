@@ -207,7 +207,7 @@ class App extends Component {
 
   render() {
     const worldview = [-60, -60, 60, 60]; // default mapbox worldview
-    const { theme, map, user, actions, addModalOpen, saveModalOpen, isAuthenticated } = this.props;
+    const { theme, map, user, actions, addModalOpen, saveModalOpen, isAuthenticated, menuModalOpen } = this.props;
     const { features, selected, zoom, deletePolygonModalOpen, warningModalOpen, deletedFeature } = map;
     const { login, updateZoom } = actions;
 
@@ -263,7 +263,7 @@ class App extends Component {
 
         return (
           <View style={{ flex: 1, flexDirection: 'column' }}>
-            {isAuthenticated ? null : <Welcome /> }
+            <Welcome open={menuModalOpen} onClose={actions.closeMenuModal} user={isAuthenticated ? user : null} />
             <AppBar position="static" style={{backgroundColor: styles.primaryColor.backgroundColor, height: "50px"}}>
               <Toolbar variant="dense">
                 <a target="_blank" href="http://regen.network" rel="noopener noreferrer" style={{position: "absolute", left: "20px"}}>
@@ -284,7 +284,8 @@ class App extends Component {
                         <Avatar alt="user" src={user.picture} />
                       </IconButton>
 	                    <Menu id="user-menu" anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={this.onMenuClose}>
-	                      <MenuItem onClick={this.gotoRegen}>Regen</MenuItem>
+                        <MenuItem onClick={actions.openMenuModal}>Menu</MenuItem>
+                        <MenuItem onClick={this.gotoRegen}>Regen</MenuItem>
 	                      <MenuItem onClick={this.onLogout}>Sign Out</MenuItem>
 	                    </Menu>
 	                   </div>
@@ -388,13 +389,14 @@ class App extends Component {
 const mapStateToProps = ({ map, entry, auth }) => ({
   map: map,
   user: auth.user,
+  menuModalOpen: auth.menuModalOpen,
   addModalOpen: entry.addModalOpen,
   saveModalOpen: entry.saveModalOpen,
   isAuthenticated: auth.authenticated
 });
 
 const mapDispatchToProps = (dispatch) => {
-  const { logout, login } = authActions;
+  const { logout, login, openMenuModal, closeMenuModal } = authActions;
   const { updateZoom, updateFeatures, optimisticSaveFeature, updateSelected, openWarningModal, closeWarningModal, openDeleteModal, closeDeleteModal } = mapActions;
   const { openNewEntryModal, closeNewEntryModal, openSaveEntryModal, closeSaveEntryModal } = entryActions;
   const actions = bindActionCreators({
@@ -411,7 +413,9 @@ const mapDispatchToProps = (dispatch) => {
     closeDeleteModal,
     updateZoom,
     logout,
-    login
+    login,
+    openMenuModal,
+    closeMenuModal
   }, dispatch);
   return { actions }
 };

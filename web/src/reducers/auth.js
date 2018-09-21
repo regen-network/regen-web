@@ -3,6 +3,7 @@ import { constants } from "../actions/auth";
 let initialState = {
     status: "INIT",
     authenticated: false,
+    menuModalOpen: true,
     user: {
       given_name: "guest",
       family_name: "",
@@ -20,6 +21,14 @@ reducerMap[constants.LOGIN_SUCCESS] = (state, { payload }) => {
 
 reducerMap[constants.LOGOUT_SUCCESS] = (state, _) => {
 	  return {...state, status: "LOGGED_OUT", authenticated: false, user: {}};
+};
+
+reducerMap[constants.OPEN_MENU_MODAL] = (state, _) => {
+    return {...state, menuModalOpen: true};
+};
+
+reducerMap[constants.CLOSE_MENU_MODAL] = (state, _) => {
+    return {...state, menuModalOpen: false};
 };
 
 export default (state = initialState, action) => {

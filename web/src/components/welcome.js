@@ -5,31 +5,13 @@ import Modal from '@material-ui/core/Modal';
 import Typography from '@material-ui/core/Typography';
 
 class Welcome extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      modalIsOpen: true
-    };
-
-    this.openModal = this.openModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
-  }
-
-  openModal() {
-    this.setState({modalIsOpen: true});
-  }
-
-  closeModal() {
-    this.setState({modalIsOpen: false});
-  }
 
   render() {
-    const { theme } = this.props;
+    const { theme, open, onClose, user } = this.props;
 
     const styles = {
       content: {
-        height: "75vh",
+        height: "80vh",
         width: "70vw",
         marginLeft: "15vw",
         marginTop: "10vh",
@@ -70,10 +52,17 @@ class Welcome extends React.Component {
 
 
     return (
-      <Modal open={this.state.modalIsOpen}
-         onClose={this.closeModal}>
+      <Modal open={open}
+         onClose={onClose}>
          <div style={styles.content}>
             <div style={{padding: "25px", textAlign: "center"}}>
+              {
+                user ?
+                <Typography variant="title" style={{color: styles.content.green, fontFamily: styles.title.font, fontSize: "20px", margin: "10px auto"}}>
+                  Hi {user.given_name} {user.family_name}.
+                </Typography>
+                : null
+              }
               <Typography variant="title" style={{color: styles.content.color, fontFamily: styles.content.font, fontSize: "20px", margin: "10px auto"}}>
                 Welcome to <span style={{fontFamily: styles.title.font}}>Regen Network</span>.
               </Typography>
@@ -114,7 +103,7 @@ class Welcome extends React.Component {
               </div>
               <Button
                 style={{backgroundColor: styles.content.green, color: "#fff", marginTop: "25px", fontFamily: styles.content.font}}
-                onClick={this.closeModal}>Get Started</Button>
+                onClick={onClose}>Get Started</Button>
             </div>
          </div>
       </Modal>

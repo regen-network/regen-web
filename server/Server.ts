@@ -7,30 +7,45 @@ import * as jwks from 'jwks-rsa';
 import * as jwt from 'express-jwt';
 import * as childProcess from 'child_process';
 import * as fileUpload from 'express-fileupload';
-import * as cors from 'cors';
+import * as xmldom from 'xmldom';
+import * as togeojson from '@mapbox/togeojson';
 
 const app = express();
 
 app.use(express.static(path.join(__dirname, '../web/build')));
-app.use(cors());
 app.use(fileUpload());
 
 
-app.post('/upload', (req, res, next) => {
-    let uploadFile = req.files.file
+app.post('/upload', (req, res) => {
+
+    if (!req.files)
+        return res.status(400).send('No files were uploaded.\n');
+
+    const uploadFile = req.files.file
     const fileName = req.files.file.name
 
-    uploadFile.mv(
-        `${__dirname}/public/files/${fileName}`,
-        function (err) {
-            if (err) {
-                res.sendStatus(500);
-            }
-            res.json({
-                file: `public/${req.files.file.name}`,
-            })
-        },
-    )
+/*
+    uploadFile.mv(`${__dirname}/public/files/${fileName}`, function (err) {
+      if (err) 
+        return res.status(500).send(err);
+           
+      res.send("File uploaded!");
+    });
+*/
+
+    const dom = (new xmldom.DOMParser()).parseFromString(uploadFile.data.toString('utf8'), 'text/xml');
+
+    const featuresCollection = togeojson.kml(dom);
+    const geometry = featuresCollection && featuresCollection.features && featuresCollection.features.geometry;
+    console.log(typeof featuresCollection.features);
+    const j = featuresCollection.features;
+    const foo = JSON.stringify(featuresCollection);
+    const bar = JSON.parse(foo);
+    console.log(bar.features)
+//    if (featuresCollection.features && featuresCollection.features.geometry)
+//      console.log(featuresCollection.features.geometry);
+
+    res.sendStatus(200);
 });
 
 

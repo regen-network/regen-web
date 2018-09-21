@@ -31,7 +31,7 @@ import AddEntryModal from './components/AddEntryModal.jsx';
 import SaveEntryModal from './components/SaveEntryModal.jsx';
 import UnsavedPolygonWarning from './components/unsavedPolygonWarning';
 import DeletePolygonConfirmation from './components/deletePolygonConfirmation';
-import ImportFile from './components/ImportFile';
+import UploadModal from './components/UploadModal';
 
 
 const mapboxAccessToken = "pk.eyJ1IjoiYWFyb25jLXJlZ2VuIiwiYSI6ImNqa2I4dW9sbjBob3czcHA4amJqM2NhczAifQ.4HW-QDLUBJiHxOjDakKm2w";
@@ -101,12 +101,14 @@ class App extends Component {
       this.setState({ anchorEl: null });
   }
 
-  onImport = () => {
+  onImport = (e) => {
+      console.log("e=",e);
     console.log("Import select3d");
     console.log("react version",React.version);
-    // close menu
-    // const f =   <ImportFile/>
     document.getElementById("file").click();
+//    document.getElementById("submit").click();
+
+    // close menu
     this.setState({ anchorEl: null });
   }
 
@@ -218,7 +220,7 @@ class App extends Component {
 
   render() {
     const worldview = [-60, -60, 60, 60]; // default mapbox worldview
-    const { theme, map, user, actions, addModalOpen, saveModalOpen, isAuthenticated } = this.props;
+      const { theme, map, user, actions, addModalOpen, saveModalOpen, uploadModalOpen, isAuthenticated } = this.props;
     const { features, selected, zoom, deletePolygonModalOpen, warningModalOpen, deletedFeature } = map;
     const { login, updateZoom } = actions;
 
@@ -261,7 +263,7 @@ class App extends Component {
               geometry: p
             }))
           });
-          updateZoom();
+            updateZoom();
         }
         else if (unsavedFeatures && unsavedFeatures.length && !zoom) {
           bbox = turf.bbox({
@@ -307,8 +309,12 @@ class App extends Component {
                         </IconButton>
 		                    <Menu id="user-menu" anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={this.onMenuClose}>
 		                      <MenuItem onClick={this.gotoRegen}>Regen</MenuItem>
+		                      <MenuItem onClick={actions.openUploadModal}>Import
+                              {/*
 		                      <MenuItem onClick={this.onImport}>Import
                             <input type="file" id="file" hidden/>
+                            <input type="submit" id="submit" hidden/>
+                               */}
                          </MenuItem>
 		                      <MenuItem onClick={this.onLogout}>Sign Out</MenuItem>
 		                    </Menu>
@@ -403,6 +409,7 @@ class App extends Component {
             <SaveEntryModal open={saveModalOpen} onClose={actions.closeSaveEntryModal} user={data && data.getCurrentUser} clearSelected={this.clearSelected} />
             <UnsavedPolygonWarning open={warningModalOpen} onClose={actions.closeWarningModal} logout={actions.logout} />
             <DeletePolygonConfirmation open={deletePolygonModalOpen} onClose={actions.closeDeleteModal} deletedFeature={deletedFeature} />
+            <UploadModal open={uploadModalOpen} onClose={actions.closeUploadModal}/>
           </View>
           );
         }}
@@ -415,12 +422,13 @@ const mapStateToProps = ({ map, entry, auth }) => ({
   user: auth.user,
   addModalOpen: entry.addModalOpen,
   saveModalOpen: entry.saveModalOpen,
+    uploadModalOpen: entry.uploadModalOpen,
   isAuthenticated: auth.authenticated
 });
 
 const mapDispatchToProps = (dispatch) => {
   const { logout, login } = authActions;
-  const { updateZoom, updateFeatures, optimisticSaveFeature, updateSelected, openWarningModal, closeWarningModal, openDeleteModal, closeDeleteModal } = mapActions;
+  const { updateZoom, updateFeatures, optimisticSaveFeature, updateSelected, openWarningModal, closeWarningModal, openDeleteModal, closeDeleteModal, openUploadModal, closeUploadModal } = mapActions;
   const { openNewEntryModal, closeNewEntryModal, openSaveEntryModal, closeSaveEntryModal } = entryActions;
   const actions = bindActionCreators({
     updateFeatures,
@@ -434,6 +442,8 @@ const mapDispatchToProps = (dispatch) => {
     closeWarningModal,
     openDeleteModal,
     closeDeleteModal,
+    openUploadModal,
+    closeUploadModal,
     updateZoom,
     logout,
     login

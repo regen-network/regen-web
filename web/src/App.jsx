@@ -263,7 +263,7 @@ class App extends Component {
 
         return (
           <View style={{ flex: 1, flexDirection: 'column' }}>
-            {isAuthenticated ? null : <Welcome/> }
+            {isAuthenticated ? null : <Welcome /> }
             <AppBar position="static" style={{backgroundColor: styles.primaryColor.backgroundColor, height: "50px"}}>
               <Toolbar variant="dense">
                 <a target="_blank" href="http://regen.network" rel="noopener noreferrer" style={{position: "absolute", left: "20px"}}>
@@ -290,7 +290,7 @@ class App extends Component {
 	                   </div>
 	                 : <Button onClick={() => login()}
                        style={{
-                         border: "2px solid #FFF",
+                         border: "1px solid #FFF",
                          fontFamily: styles.fontFamily,
                          color: styles.primaryColor.color}}>Sign In</Button>
 	               }

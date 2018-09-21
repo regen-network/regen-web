@@ -17,6 +17,19 @@ const CREATE_POLYGON = gql`
   }
 `;
 
+const GET_POLYGONS = gql`
+{
+  allPolygons {
+    nodes {
+      id
+      name
+      geomJson
+      owner
+    }
+  }
+}
+`;
+
 export default class SavePolygonName extends Component {
 
     removeItemFromStorage = (id) => {
@@ -47,7 +60,8 @@ export default class SavePolygonName extends Component {
                     margin="normal"
                   />
                 </form>
-                <Mutation mutation={CREATE_POLYGON}>
+                <Mutation mutation={CREATE_POLYGON}
+                  refetchQueries={[{query: GET_POLYGONS}]}>
                     {(createPolygonByJson, {loading, error}) => (
                       <div>
                           {error ? <p style={{color: styles.accent.red}}>"There was an error saving your parcel. Please try again."</p> : null}

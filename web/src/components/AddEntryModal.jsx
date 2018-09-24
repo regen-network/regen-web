@@ -13,6 +13,7 @@ import gql from "graphql-tag";
 import { Mutation } from "react-apollo";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import * as moment from 'moment';
 
 const LOG_ENTRY = gql`
    mutation LogEntry($type: String!, $comment: String, $polygon: JSON!, $point: JSON, $species: String, $unit: String, $numericValue: BigFloat, $happenedAt: Datetime) {
@@ -28,12 +29,42 @@ const LOG_ENTRY = gql`
   }
 `;
 
+const GET_ENTRIES = gql`
+  query FindEntries($polygon: JSON!) {
+    findEntries(polygon: $polygon) {
+      nodes {
+        when
+        type
+        unit
+        point
+        comment
+        species
+        numericValue
+        id
+      }
+      totalCount
+    }
+  }
+`;
+
 const entryTypes = [
     {type: 'Planting', category: 'PlantRelated'},
     {type: 'Harvesting', category: 'PlantRelated'},
     {type: 'Tillage'},
     {type: 'Natural pasture'},
-    {type: 'Other'}
+    {type: 'Other'},
+    {type: "Crop Rotation"},
+    {type: "Intercropping", category: "PlantRelated"},
+    {type: "Cover Cropping", category: "PlantRelated"},
+    {type: "Agroforestry", category: "PlantRelated"},
+    {type: "Organic Annual Crops", category: "PlantRelated"},
+    {type: "Perennial Crops", category: "PlantRelated"},
+    {type: "Silvopasture", category: "PlantRelated"},
+    {type: "Pasture Cropping", category: "PlantRelated"},
+    {type: "Holistic Management"},
+    {type: "Tilling", category: "Tilling"},
+    {type: "Conservation Till", category: "Tilling"},
+    {type: "No-Till", category: "Tilling"}
 ];
 
 const entryTypeCategories = new Map(entryTypes.map(({type,category}) => [type, category]));
@@ -65,6 +96,7 @@ class AddEntryModal extends Component {
         const {open, onClose, entry, patchNewEntry, theme, map, polygons} = this.props;
         const {type, species, date} = entry.entry;
         const {features, selected} = map;
+        const now = moment();
 
         let selectedPolygon = null;
         const combinedFeatures = polygons ? polygons.concat(features) : features;
@@ -110,8 +142,10 @@ class AddEntryModal extends Component {
                 </Typography>
           }
           else {
+              const polygon = selectedPolygon.geometry || selectedPolygon; // for refetchQueries
+              
               modalContent =
-                <div>
+                <div style={{height: "80vh"}}>
                   <Typography variant="title" style={{color: styles.accent.blue, fontFamily: styles.title.fontFamily, margin: "15px"}}>
                     {"Report an activity or observation\nfor the selected parcel"}
                   </Typography>
@@ -123,7 +157,7 @@ class AddEntryModal extends Component {
                   </div>
                   <div style={{margin: "25px"}}>
                     <DatePicker
-                        selected={date}
+                        selected={now}
                         onChange={(date) => {
                           patchNewEntry({date});
                         }}/>
@@ -153,7 +187,8 @@ class AddEntryModal extends Component {
                     }
                   </div>
                   { this.state.completed
-                    ? <Mutation mutation={LOG_ENTRY}>
+                    ? <Mutation mutation={LOG_ENTRY}
+                        refetchQueries={[{query: GET_ENTRIES, variables: {polygon}}]}>
                         {( logEntry, {loading, error}) => (
                           <div>
                             {error ? <p style={{color: styles.accent.red}}>"There was an error saving your update. Please try again."</p> : null}
@@ -183,7 +218,7 @@ class AddEntryModal extends Component {
             <Modal open={open}
                onClose={onClose}>
                 <div className="modal-add-entry">
-                  <div style={{margin: "25px", minHeight: "80vh"}}>
+                  <div style={{margin: "25px"}}>
                     <ModalContent />
                   </div>
                 </div>

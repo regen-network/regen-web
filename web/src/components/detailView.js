@@ -63,25 +63,29 @@ const DetailView = withTheme()(({ features, selected, polygons, theme, styles })
                   <PolygonIcon polygon={polygon}/>
                 </div>
                 <Paper style={{margin: "0 auto 100px", width: "90%"}}>
-                  <Table>
-                    <TableHead>
-                      <TableRow>
-                        <TableCell>Event</TableCell>
-                        <TableCell>Crop</TableCell>
-                        <TableCell>Date</TableCell>
-                      </TableRow>
-                    </TableHead>
-                    {entries && entries.length ? entries.map((entry) =>
-                      <EntryItem
-                        entry={entry}
-                        styles={styles}
-                        key={entry.id} />
-                    ) :
+                  {entries && entries.length ?
+                    <Table>
+                      <TableHead>
+                        <TableRow>
+                          <TableCell>Event</TableCell>
+                          <TableCell>Crop</TableCell>
+                          <TableCell>Date</TableCell>
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                      {entries.map((entry) =>
+                        <EntryItem
+                          entry={entry}
+                          styles={styles}
+                          key={entry.id} />
+                      )}
+                      </TableBody>
+                    </Table>
+                    :
                     <Typography variant="subheading" style={{fontFamily: styles.title.fontFamily, fontSize: styles.fontSize}}>
                       {"No records saved yet for this parcel."}
                     </Typography>
                   }
-                  </Table>
                 </Paper>
               </div>
           )}}

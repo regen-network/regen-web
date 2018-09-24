@@ -22,12 +22,30 @@ const LOG_ENTRY = gql`
   }
 `;
 
+const GET_ENTRIES = gql`
+  query FindEntries($polygon: JSON!) {
+    findEntries(polygon: $polygon) {
+      nodes {
+        when
+        type
+        unit
+        point
+        comment
+        species
+        numericValue
+        id
+      }
+      totalCount
+    }
+  }
+`;
+
 const fieldFeatures = [
-  {type: "hasTrees", label: "Area with trees"},
-  {type: "hasWatercourse", label: "Watercourse"},
-  {type: "hasWetland", label: "Wetland"},
-  {type: "hasNativeBuffer", label: "Native or wild vegetation buffer strip"},
-  {type: "hasWildlifeCorridor", label: "Wildlife corridor"},
+  {type: "Trees", label: "Area with trees"},
+  {type: "Watercourse", label: "Watercourse"},
+  {type: "Wetland", label: "Wetland"},
+  {type: "Native Buffer", label: "Native or wild vegetation buffer strip"},
+  {type: "Wildlife Corridor", label: "Wildlife corridor"},
 ];
 
 export default class ChoosePolygonFeatures extends Component {
@@ -49,13 +67,15 @@ export default class ChoosePolygonFeatures extends Component {
     render() {
         const {styles, currentFeature, updateStage} = this.props;
         const now = moment().format();
+        const polygon = currentFeature.geometry;
 
         return (
           <div>
             <Typography variant="subheading" style={{fontFamily: styles.title.fontFamily, margin: "15px"}}>
               {"Please choose if any of these features are present within the parcel limits:"}
             </Typography>
-            <Mutation mutation={LOG_ENTRY}>
+            <Mutation mutation={LOG_ENTRY}
+              refetchQueries={[{query: GET_ENTRIES, variables: {polygon}}]}>
             {(logEntry, {loading, error}) => (
               <FormGroup row>
                 {

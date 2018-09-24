@@ -22,20 +22,38 @@ const LOG_ENTRY = gql`
   }
 `;
 
+const GET_ENTRIES = gql`
+  query FindEntries($polygon: JSON!) {
+    findEntries(polygon: $polygon) {
+      nodes {
+        when
+        type
+        unit
+        point
+        comment
+        species
+        numericValue
+        id
+      }
+      totalCount
+    }
+  }
+`;
+
 const fieldPractices = [
-  {type: "cropRotation", label: "Crop rotation"},
-  {type: "intercropping", label: "Intercropping", category: "PlantRelated"},
-  {type: "coverCropping", label: "Cover cropping", category: "PlantRelated"},
-  {type: "agroforestry", label: "Agroforestry", category: "PlantRelated"},
-  {type: "organicAnnualCrops", label: "Organic annual crops", category: "PlantRelated"},
-  {type: "perennialCrops", label: "Perennial crops", category: "PlantRelated"},
-  {type: "silvopasture", label: "Silvopasture", category: "PlantRelated"},
-  {type: "pastureCropping", label: "Pasture cropping", category: "PlantRelated"},
-  {type: "holisticManagement", label: "Holistic management"},
-  {type: "tilling", label: "Tilling", category: "Tilling"},
-  {type: "conservationTill", label: "Conservation till", category: "Tilling"},
-  {type: "noTill", label: "No-till", category: "Tilling"}
-]
+  {type: "Crop Rotation", label: "Crop rotation"},
+  {type: "Intercropping", label: "Intercropping", category: "PlantRelated"},
+  {type: "Cover Cropping", label: "Cover cropping", category: "PlantRelated"},
+  {type: "Agroforestry", label: "Agroforestry", category: "PlantRelated"},
+  {type: "Organic Annual Crops", label: "Organic annual crops", category: "PlantRelated"},
+  {type: "Perennial Crops", label: "Perennial crops", category: "PlantRelated"},
+  {type: "Silvopasture", label: "Silvopasture", category: "PlantRelated"},
+  {type: "Pasture Cropping", label: "Pasture cropping", category: "PlantRelated"},
+  {type: "Holistic Management", label: "Holistic management"},
+  {type: "Tilling", label: "Tilling", category: "Tilling"},
+  {type: "Conservation Till", label: "Conservation till", category: "Tilling"},
+  {type: "No-Till", label: "No-till", category: "Tilling"}
+];
 
 export default class ChoosePolygonPractices extends Component {
     constructor(props) {
@@ -50,13 +68,15 @@ export default class ChoosePolygonPractices extends Component {
     render() {
         const {styles, currentFeature, updateStage} = this.props;
         const now = moment().format();
+        const polygon = currentFeature.geometry;
 
         return (
           <div>
             <Typography variant="subheading" style={{fontFamily: styles.title.fontFamily, margin: "15px"}}>
               {"Please choose if any of these are practiced within the parcel limits:"}
             </Typography>
-            <Mutation mutation={LOG_ENTRY}>
+            <Mutation mutation={LOG_ENTRY}
+              refetchQueries={[{query: GET_ENTRIES, variables: {polygon}}]}>
             {(logEntry, {loading, error}) => (
               <FormGroup row>
                 {

@@ -20,6 +20,24 @@ const LOG_ENTRY = gql`
   }
 `;
 
+const GET_ENTRIES = gql`
+  query FindEntries($polygon: JSON!) {
+    findEntries(polygon: $polygon) {
+      nodes {
+        when
+        type
+        unit
+        point
+        comment
+        species
+        numericValue
+        id
+      }
+      totalCount
+    }
+  }
+`;
+
 const entryTypes = [
     {type: 'Planting', category: 'PlantRelated'},
     {type: 'Harvesting', category: 'PlantRelated'},
@@ -66,6 +84,7 @@ export default class PolygonCropHistory extends Component {
     render() {
         const { styles, entry, currentFeature, patchNewEntry, onClose, clearEntry } = this.props;
         const { type, species, date } = entry.entry;
+        const polygon = currentFeature.geometry;
 
         const entries = this.state.entries.map((entry) =>
           <Typography variant="subheading" key={this.state.entries.indexOf(entry)} style={{fontFamily: styles.fontFamily, margin: "15px"}}>
@@ -103,7 +122,8 @@ export default class PolygonCropHistory extends Component {
                  />
                  : null
               }
-              <Mutation mutation={LOG_ENTRY}>
+              <Mutation mutation={LOG_ENTRY}
+                refetchQueries={[{query: GET_ENTRIES, variables: {polygon}}]}>
                 {(logEntry, {loading, error}) => (
                   <div>
                     {error ? <p style={{color: styles.accent.red}}>"There was an error saving your update. Please try again."</p> : null}

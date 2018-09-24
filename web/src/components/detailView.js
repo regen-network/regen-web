@@ -1,7 +1,11 @@
 import React from 'react';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
 import Typography from '@material-ui/core/Typography';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
 import { withTheme } from '@material-ui/core/styles';
 import PolygonIcon from './polygonIcon';
 import gql from "graphql-tag";
@@ -48,7 +52,7 @@ const DetailView = withTheme()(({ features, selected, polygons, theme, styles })
             const entries = data && data.findEntries && data.findEntries.nodes;
 
             return (
-              <div>
+              <div style={{margin: "25px auto", textAlign: "center"}}>
                 <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
                   <Typography variant="title" style={{fontFamily: styles.title.fontFamily, fontSize: styles.title.fontSize, marginRight: "25px"}}>
                     {"Plot Details"}
@@ -58,8 +62,15 @@ const DetailView = withTheme()(({ features, selected, polygons, theme, styles })
                   </Typography>
                   <PolygonIcon polygon={polygon}/>
                 </div>
-                <div style={{textAlign: "center"}}>
-                  <List style={{width: "600px", margin: "0 auto"}}>
+                <Paper style={{margin: "0 auto 100px", width: "90%"}}>
+                  <Table>
+                    <TableHead>
+                      <TableRow>
+                        <TableCell>Event</TableCell>
+                        <TableCell>Crop</TableCell>
+                        <TableCell>Date</TableCell>
+                      </TableRow>
+                    </TableHead>
                     {entries && entries.length ? entries.map((entry) =>
                       <EntryItem
                         entry={entry}
@@ -70,8 +81,8 @@ const DetailView = withTheme()(({ features, selected, polygons, theme, styles })
                       {"No records saved yet for this parcel."}
                     </Typography>
                   }
-                  </List>
-                </div>
+                  </Table>
+                </Paper>
               </div>
           )}}
         </Query>
@@ -83,11 +94,13 @@ const DetailView = withTheme()(({ features, selected, polygons, theme, styles })
 
 const EntryItem = ({ entry, styles }) => {
   return (
-	  <ListItem dense>
-      <Typography style={{fontSize: styles.fontSize, fontFamily: styles.fontFamily}}>
-        {`Event Type: ${entry.type}, Plant Type: ${entry.species}, Date: ${moment(entry.when).format("YYYY-MM-DD")}`}
-      </Typography>
-    </ListItem>
+    <TableRow key={entry.id}>
+      <TableCell component="th" scope="row">
+        {entry.type}
+      </TableCell>
+      <TableCell>{entry.species}</TableCell>
+      <TableCell>{moment(entry.when).format("YYYY-MM-DD")}</TableCell>
+    </TableRow>
   );
 }
 

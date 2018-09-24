@@ -370,10 +370,8 @@ class App extends Component {
                       : null
                   }
                 </Map>
+                <DetailView features={features} selected={selected} polygons={polygons} styles={styles} />
               </View>
-            </View>
-            <View style={{ flex: 2 }}>
-              <DetailView features={features} selected={selected} polygons={polygons} styles={styles} />
             </View>
             <AddEntryModal open={addModalOpen} onClose={actions.closeNewEntryModal} polygons={polygons} />
             <SaveEntryModal open={saveModalOpen} onClose={actions.closeSaveEntryModal} user={data && data.getCurrentUser} clearSelected={this.clearSelected} />

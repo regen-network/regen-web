@@ -3,8 +3,15 @@ import { withTheme } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Modal from '@material-ui/core/Modal';
 import Typography from '@material-ui/core/Typography';
+import './welcome.css';
 
 class Welcome extends React.Component {
+
+  gotoInvisionDemo = () => {
+      window.open(
+        'https://projects.invisionapp.com/share/3VO8HG8M4D8#/screens/321828395_Landing_Screen_2'
+      );
+  }
 
   render() {
     const { theme, open, onClose, user } = this.props;
@@ -70,8 +77,10 @@ class Welcome extends React.Component {
                 Click Get Started to set up the app for your ranch.
               </Typography>
               <div style={{display: "flex", justifyContent: "center"}}>
-                <div style={{background: styles.background.commons, backgroundSize: "cover", width: "275px", borderRadius: "3px", margin: "5px", boxShadow: "0 1px 3px 0 rgba(0, 0, 0, 0.47)"}}>
-                    <div style={{backgroundColor: styles.content.backgroundColor, height: "150px", marginTop: "170px", padding: "8px", overflow: "hidden"}}>
+                <div style={{background: styles.background.commons, backgroundSize: "cover"}}
+                  className="welcome__paper"
+                  onClick={this.gotoInvisionDemo}>
+                    <div className="welcome__card">
                         <Typography variant="title" style={{color: styles.content.color, fontFamily: styles.title.font, fontSize: "20px", margin: "10px auto"}}>
                           Data Commons
                         </Typography>
@@ -80,8 +89,10 @@ class Welcome extends React.Component {
                         </Typography>
                     </div>
                 </div>
-                <div style={{background: styles.background.projects, backgroundSize: "cover", width: "275px", borderRadius: "3px", margin: "5px", boxShadow: "0 1px 3px 0 rgba(0, 0, 0, 0.47)"}}>
-                    <div style={{backgroundColor: styles.content.backgroundColor, height: "150px", marginTop: "170px", padding: "8px", overflow: "hidden"}}>
+                <div style={{background: styles.background.projects, backgroundSize: "cover"}}
+                  className="welcome__paper"
+                  onClick={this.gotoInvisionDemo}>
+                    <div className="welcome__card">
                         <Typography variant="title" style={{color: styles.content.color, fontFamily: styles.title.font, fontSize: "20px", margin: "10px auto"}}>
                           Ranching Projects
                         </Typography>
@@ -90,8 +101,10 @@ class Welcome extends React.Component {
                         </Typography>
                     </div>
                 </div>
-                <div style={{background: styles.background.community, backgroundSize: "cover", width: "275px", borderRadius: "3px", margin: "5px", boxShadow: "0 1px 3px 0 rgba(0, 0, 0, 0.47)"}}>
-                    <div style={{backgroundColor: styles.content.backgroundColor, height: "150px", marginTop: "170px", padding: "8px", overflow: "hidden"}}>
+                <div style={{background: styles.background.community, backgroundSize: "cover"}}
+                  className="welcome__paper"
+                  onClick={this.gotoInvisionDemo}>
+                    <div className="welcome__card">
                         <Typography variant="title" style={{color: styles.content.color, fontFamily: styles.title.font, fontSize: "20px", margin: "10px auto"}}>
                           Join the Community
                         </Typography>
@@ -102,8 +115,10 @@ class Welcome extends React.Component {
                 </div>
               </div>
               <Button
-                style={{backgroundColor: styles.content.green, color: "#fff", marginTop: "25px", fontFamily: styles.content.font}}
-                onClick={onClose}>Get Started</Button>
+                style={{marginTop: "25px", fontFamily: styles.content.font}}
+                onClick={onClose}
+                variant="contained"
+                color="primary">Get Started</Button>
             </div>
          </div>
       </Modal>

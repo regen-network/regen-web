@@ -1,0 +1,20 @@
+.welcome__paper {
+  width: 275px;
+  border-radius: 3px;
+  margin: 5px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.47);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.welcome__paper:hover {
+  box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.6);
+}
+
+.welcome__card {
+  background-color: #fefefe;
+  height: 150px;
+  margin-top: 170px;
+  padding: 8px;
+  overflow: hidden;
+}

@@ -101,17 +101,6 @@ class App extends Component {
       this.setState({ anchorEl: null });
   }
 
-  onImport = (e) => {
-      console.log("e=",e);
-    console.log("Import select3d");
-    console.log("react version",React.version);
-    document.getElementById("file").click();
-//    document.getElementById("submit").click();
-
-    // close menu
-    this.setState({ anchorEl: null });
-  }
-
   onDrawUpdated = (e) => {
     const { updateFeatures } = this.props.actions;
     const updatedFeatures = this.state.drawControl.getAll();
@@ -222,7 +211,7 @@ class App extends Component {
     const worldview = [-60, -60, 60, 60]; // default mapbox worldview
     const { theme, map, user, actions, addModalOpen, saveModalOpen, uploadModalOpen, isAuthenticated } = this.props;
     const { features, selected, zoom, deletePolygonModalOpen, warningModalOpen, deletedFeature } = map;
-      const { login, updateZoom, openUploadModal } = actions;
+    const { login, updateZoom, openUploadModal } = actions;
 
     const styles = {
       primaryColor: {
@@ -309,13 +298,7 @@ class App extends Component {
                         </IconButton>
 		                    <Menu id="user-menu" anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={this.onMenuClose}>
 		                      <MenuItem onClick={this.gotoRegen}>Regen</MenuItem>
-		                      <MenuItem onClick={openUploadModal}>Upload
-                              {/*
-		                      <MenuItem onClick={this.onImport}>Import
-                            <input type="file" id="file" hidden/>
-                            <input type="submit" id="submit" hidden/>
-                               */}
-                         </MenuItem>
+		                      <MenuItem onClick={openUploadModal}>Upload</MenuItem>
 		                      <MenuItem onClick={this.onLogout}>Sign Out</MenuItem>
 		                    </Menu>
 		                   </div>
@@ -423,7 +406,7 @@ const mapStateToProps = ({ map, entry, auth }) => ({
   user: auth.user,
   addModalOpen: entry.addModalOpen,
   saveModalOpen: entry.saveModalOpen,
-  uploadModalOpen: entry.uploadModalOpen,
+  uploadModalOpen: map.uploadModalOpen,
   isAuthenticated: auth.authenticated
 });
 

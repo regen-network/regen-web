@@ -1,6 +1,6 @@
 import * as express from 'express';
 import * as path from 'path';
-import { Pool } from 'pg';
+import { Pool, Client } from 'pg';
 import { parse as parsePgConnectionString } from 'pg-connection-string';
 import { postgraphile } from 'postgraphile';
 import * as jwks from 'jwks-rsa';
@@ -14,39 +14,6 @@ const app = express();
 
 app.use(express.static(path.join(__dirname, '../web/build')));
 app.use(fileUpload());
-
-
-app.post('/upload', (req, res) => {
-
-    if (!req.files)
-        return res.status(400).send('No files were uploaded.\n');
-
-    const uploadFile = req.files.file
-    const fileName = req.files.file.name
-
-/*
-    uploadFile.mv(`${__dirname}/public/files/${fileName}`, function (err) {
-      if (err) 
-        return res.status(500).send(err);
-           
-      res.send("File uploaded!");
-    });
-*/
-
-    const dom = (new xmldom.DOMParser()).parseFromString(uploadFile.data.toString('utf8'), 'text/xml');
-
-    const featuresCollection = togeojson.kml(dom);
-    const geometry = featuresCollection && featuresCollection.features && featuresCollection.features.geometry;
-    console.log(typeof featuresCollection.features);
-    const j = featuresCollection.features;
-    const foo = JSON.stringify(featuresCollection);
-    const bar = JSON.parse(foo);
-    console.log(bar.features)
-//    if (featuresCollection.features && featuresCollection.features.geometry)
-//      console.log(featuresCollection.features.geometry);
-
-    res.sendStatus(200);
-});
 
 
 app.get('/', function (req, res) {
@@ -111,6 +78,47 @@ app.post('/api/login', (req, res) => {
       });
     });
   } else res.sendStatus(200);
+});
+
+
+app.post('/upload', (req, res) => {
+
+    if (!req.files)
+        return res.status(400).send('No files were uploaded.\n');
+
+    const uploadFile = req.files.file
+    const fileName = req.files.file.name
+
+    if (req.user && req.user.sub) {
+        const sub = req.user.sub;
+        // call SET ROLE on sub
+        console.log("req.user.sub=",req.user.sub);
+    }
+
+/*
+    We're processing the stream, not uploading the file.
+
+    uploadFile.mv(`${__dirname}/public/files/${fileName}`, function (err) {
+      if (err)
+        return res.status(500).send(err);
+
+      res.send("File uploaded!");
+    });
+*/
+
+    const dom = (new xmldom.DOMParser()).parseFromString(uploadFile.data.toString('utf8'), 'text/xml');
+    const featuresCollection = togeojson.kml(dom);
+    const features = featuresCollection && featuresCollection.features;
+    features.forEach((feature) => {
+        const geometry = feature && feature.geometry;
+        const name = feature && feature.properties && feature.properties.name;
+
+//        console.log("feature.geometry.coordinates=",feature.geometry.coordinates);
+        console.log("name=",name);
+    });
+
+
+    res.sendStatus(200);
 });
 
 app.use(postgraphile(pgPool, 'public', {

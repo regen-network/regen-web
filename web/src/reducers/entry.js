@@ -9,7 +9,7 @@ const initialState = {
         date: moment(),
         type: null,
         species: null
-    },
+        },
     currentFeature: null
 }
 
@@ -36,14 +36,6 @@ reducerMap[constants.OPEN_SAVE_ENTRY_MODAL] = (state, { payload }) => {
 reducerMap[constants.CLOSE_SAVE_ENTRY_MODAL] = (state, _) => {
     let clearedEntry = Object.assign({}, state.entry, {type: null, species: null});
     return {...state, saveModalOpen: false, entry: clearedEntry};
-};
-
-reducerMap[constants.OPEN_UPLOAD_MODAL] = (state, _ ) => {
-    return {...state, openUploadModal: true};
-};
-
-reducerMap[constants.CLOSE_UPLOAD_MODAL] = (state, _) => {
-    return {...state, uploadModalOpen: false };
 };
 
 export default (state = initialState, action) => {

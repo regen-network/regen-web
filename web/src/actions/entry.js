@@ -13,14 +13,7 @@ const openSaveEntryModal = (feature) => ({type: OPEN_SAVE_ENTRY_MODAL, payload: 
 const CLOSE_SAVE_ENTRY_MODAL= "CLOSE_SAVE_ENTRY_MODAL";
 const closeSaveEntryModal = () => ({type: CLOSE_SAVE_ENTRY_MODAL});
 
-const OPEN_UPLOAD_MODAL= "OPEN_UPLOAD_MODAL";
-const openUploadModal = () => ({ type: OPEN_UPLOAD_MODAL });
-
-const CLOSE_UPLOAD_MODAL= "CLOSE_UPLOAD_MODAL";
-const closeUploadModal = () => ({type: CLOSE_UPLOAD_MODAL});
-
-
-const constants = { PATCH_NEW_ENTRY, OPEN_NEW_ENTRY_MODAL, CLOSE_NEW_ENTRY_MODAL, OPEN_SAVE_ENTRY_MODAL, CLOSE_SAVE_ENTRY_MODAL, OPEN_UPLOAD_MODAL, CLOSE_UPLOAD_MODAL };
-const actions =  { patchNewEntry, openNewEntryModal, closeNewEntryModal, openSaveEntryModal, closeSaveEntryModal, openUploadModal, closeUploadModal };
+const constants = { PATCH_NEW_ENTRY, OPEN_NEW_ENTRY_MODAL, CLOSE_NEW_ENTRY_MODAL, OPEN_SAVE_ENTRY_MODAL, CLOSE_SAVE_ENTRY_MODAL };
+const actions =  { patchNewEntry, openNewEntryModal, closeNewEntryModal, openSaveEntryModal, closeSaveEntryModal };
 
 export { constants, actions };

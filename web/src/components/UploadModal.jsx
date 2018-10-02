@@ -3,88 +3,76 @@ import './AddEntryModal.css';
 import { withTheme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Modal from '@material-ui/core/Modal';
-import Uppy from '@uppy/core';
-import Dashboard from '@uppy/dashboard';
-import GoogleDrive from '@uppy/google-drive';
-import DragDrop from '@uppy/drag-drop';
-import Tus from '@uppy/tus';
-//import 'uppy/dist/uppy.css';
 
+import Uppy from '@uppy/core';
+import Dashboard from '@uppy/react/lib/Dashboard';
+import DashboardModal from '@uppy/react/lib/DashboardModal';
+import DragDrop from '@uppy/react/lib/DragDrop';
+import GoogleDrive from '@uppy/google-drive';
+import Tus from '@uppy/tus';
+import '@uppy/dashboard/dist/style.css';
 
 class UploadModal extends React.Component {
-//    const {open, onClose, theme, importedFile} = this.props;
-//    private readonly inputOpenFileRef : RefObject<HTMLInputElement>
     constructor (props) {
         super(props);
-    }
-//        this.handleSubmit.bind(this);
-//        this.inputRef = React.createRef();
 
+        const uppy = Uppy({
+            target: "body",
+            autoProceed: false,
+            inline: true,
+            restrictions: {
+                maxFileSize: 1000000,
+                maxNumberOfFiles: 10,
+                minNumberOfFiles: 1,
+                allowedFileTypes: false
+            }
+        });
 
-    handleSubmit(e) {
-        e.preventDefault();
-        alert(
-            `Selected file - ${
-        this.fileInput.current.files[0].name
-      }`
-        );
+        uppy.use(Tus, { endpoint: '/upload' });
+
+        uppy.on('complete', (result) => {
+            const url = result.successful[0].uploadURL
+        })
+
+        uppy.use(DragDrop, {target: 'body'});
+
+        uppy.run();
+
     }
+    handleUploadModalOpen = () => this.setState({ modalOpen: true });
+    handleUploadModalClose = () => this.setState({ modalOpen: false });
 
 
     componentWillMount() {
         console.log("component iwll mount");
         this.host = "localhost:5000";
-// only for debugging. Change to an FP statement later.
-/*
-    const uppy = Uppy({
-        autoProceed: false,
-        restrictions: {
-            maxFileSize: 1000000,
-            maxNumberOfFiles: 10,
-            minNumberOfFiles: 1,
-            allowedFileTypes: false
-        }
-    });
 
-    uppy.use(Tus, { endpoint: 'localhost:5000/upload' });
-        console.log(Dashboard);
-        uppy.use(Dashboard, {
-            target: 'body',
-            inline: true
-        });
-*/
     }
 
     render() {
         const {open, onClose, theme} = this.props;
-        {console.log("rendering UploadModal")}
-
-    const styles = {
-      primaryColor: {
-        backgroundColor: theme.palette.primary.main,
-        color: theme.palette.common.white,
-      },
-      accent: {
-        blue: theme.palette.accent.blue
-      },
-      font: theme.title.fontFamily
-    };
+        const styles = {
+          primaryColor: {
+          backgroundColor: theme.palette.primary.main,
+          color: theme.palette.common.white,
+        },
+          accent: {
+            blue: theme.palette.accent.blue
+          },
+          font: theme.title.fontFamily
+        };
 
         return (
-
-            <Modal open={open}
-                   onClose={onClose}>
-              <div className="modal-add-entry">
-                <div style={{margin: "25px"}}>
-                  <Typography variant="title" style={{fontFamily: styles.font}}>
-                    {"thank you. Be my modal please."}
-                  </Typography>
-                  <div>
-                    <input type="file"/>
-                  </div>
-                </div>
-                </div>
-            </Modal>
+          <div>
+            <DragDrop
+              uppy={this.uppy}
+              locale={{
+                  strings: {
+                      chooseFile: 'Pick a new avatar'
+                  }
+              }}
+              />
+          </div>
         );
     }
 }

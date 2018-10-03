@@ -14,6 +14,7 @@ import { Mutation } from "react-apollo";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import * as moment from 'moment';
+import { entryTypes, plants } from '../constants';
 
 const LOG_ENTRY = gql`
    mutation LogEntry($type: String!, $comment: String, $polygon: JSON!, $point: JSON, $species: String, $unit: String, $numericValue: BigFloat, $happenedAt: Datetime) {
@@ -47,42 +48,8 @@ const GET_ENTRIES = gql`
   }
 `;
 
-const entryTypes = [
-    {type: 'Planting', category: 'PlantRelated'},
-    {type: 'Harvesting', category: 'PlantRelated'},
-    {type: 'Tillage'},
-    {type: 'Natural pasture'},
-    {type: 'Other'},
-    {type: "Crop Rotation"},
-    {type: "Intercropping", category: "PlantRelated"},
-    {type: "Cover Cropping", category: "PlantRelated"},
-    {type: "Agroforestry", category: "PlantRelated"},
-    {type: "Organic Annual Crops", category: "PlantRelated"},
-    {type: "Perennial Crops", category: "PlantRelated"},
-    {type: "Silvopasture", category: "PlantRelated"},
-    {type: "Pasture Cropping", category: "PlantRelated"},
-    {type: "Holistic Management"},
-    {type: "Tilling", category: "Tilling"},
-    {type: "Conservation Till", category: "Tilling"},
-    {type: "No-Till", category: "Tilling"}
-];
-
 const entryTypeCategories = new Map(entryTypes.map(({type,category}) => [type, category]));
-
 const isPlantRelated = (type) => entryTypeCategories.get(type) === 'PlantRelated';
-
-const plants = [
-    {name: 'Barley'},
-    {name: 'Buckwheat'},
-    {name: 'Corn'},
-    {name: 'Oat'},
-    {name: 'Other'},
-    {name: 'Rice'},
-    {name: 'Rye'},
-    {name: 'Sorghum'},
-    {name: 'Soy'},
-    {name: 'Wheat'}
-];
 
 class AddEntryModal extends Component {
     constructor(props) {
@@ -143,7 +110,7 @@ class AddEntryModal extends Component {
           }
           else {
               const polygon = selectedPolygon.geometry || selectedPolygon; // for refetchQueries
-              
+
               modalContent =
                 <div style={{height: "80vh"}}>
                   <Typography variant="title" style={{color: styles.accent.blue, fontFamily: styles.title.fontFamily, margin: "15px"}}>

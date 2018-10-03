@@ -5,6 +5,7 @@ import SingleSelect from '../select.js';
 import gql from "graphql-tag";
 import { Mutation } from "react-apollo";
 import * as moment from 'moment';
+import { entryTypes, plants } from '../../constants';
 
 const LOG_ENTRY = gql`
    mutation LogEntry($type: String!, $comment: String, $polygon: JSON!, $point: JSON, $species: String, $unit: String, $numericValue: BigFloat, $happenedAt: Datetime) {
@@ -38,30 +39,8 @@ const GET_ENTRIES = gql`
   }
 `;
 
-const entryTypes = [
-    {type: 'Planting', category: 'PlantRelated'},
-    {type: 'Harvesting', category: 'PlantRelated'},
-    {type: 'Tillage'},
-    {type: 'Natural pasture'},
-    {type: 'Other'}
-];
-
 const entryTypeCategories = new Map(entryTypes.map(({type,category}) => [type, category]));
-
 const isPlantRelated = (type) => entryTypeCategories.get(type) === 'PlantRelated';
-
-const plants = [
-    {name: 'Barley'},
-    {name: 'Buckwheat'},
-    {name: 'Corn'},
-    {name: 'Oat'},
-    {name: 'Other'},
-    {name: 'Rice'},
-    {name: 'Rye'},
-    {name: 'Sorghum'},
-    {name: 'Soy'},
-    {name: 'Wheat'}
-];
 
 const now = moment().format();
 const currentYear = parseInt(moment().format("YYYY"));

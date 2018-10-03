@@ -45,6 +45,7 @@ const fieldPractices = [
   {type: "Intercropping", label: "Intercropping", category: "PlantRelated"},
   {type: "Cover Cropping", label: "Cover cropping", category: "PlantRelated"},
   {type: "Agroforestry", label: "Agroforestry", category: "PlantRelated"},
+  {type: "Keyline Planting", label: "Keyline planting", category: "PlantRelated"},
   {type: "Organic Annual Crops", label: "Organic annual crops", category: "PlantRelated"},
   {type: "Perennial Crops", label: "Perennial crops", category: "PlantRelated"},
   {type: "Silvopasture", label: "Silvopasture", category: "PlantRelated"},

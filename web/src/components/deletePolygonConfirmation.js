@@ -48,7 +48,8 @@ class DeletePolygonConfirmation extends Component {
       font: theme.title.fontFamily
     };
 
-    return (
+     return (
+
       <Modal open={open}
          onClose={onClose}>
           <div className="modal-add-entry">

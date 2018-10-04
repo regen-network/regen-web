@@ -9,12 +9,16 @@ import * as childProcess from 'child_process';
 import * as fileUpload from 'express-fileupload';
 import * as xmldom from 'xmldom';
 import * as togeojson from '@mapbox/togeojson';
+import * as cors from 'cors';
+import { release } from 'os';
+import escape from 'pg-escape';
 
 const app = express();
 
 app.use(express.static(path.join(__dirname, '../web/build')));
 app.use(fileUpload());
 
+app.use(cors());
 
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, '../web/build', 'index.html'));
@@ -89,37 +93,56 @@ app.post('/upload', (req, res) => {
     const uploadFile = req.files.file
     const fileName = req.files.file.name
 
-    if (req.user && req.user.sub) {
-        const sub = req.user.sub;
-        // call SET ROLE on sub
-        console.log("req.user.sub=",req.user.sub);
-    }
+    if (req.body && req.body.accessToken) {
+      const owner = req.body.accessToken;
+        const spoo = req.body.accessToken;
+      // call SET ROLE on accessToken
+      console.log("owner=",owner);
+      const dom = (new xmldom.DOMParser()).parseFromString(uploadFile.data.toString('utf8'), 'text/xml');
+      const featuresCollection = togeojson.kml(dom);
+      const features = featuresCollection && featuresCollection.features;
+      pgPool.connect((err, client, release) => {
+          if(err) {
+              res.sendStatus(500);
+              console.error('Error acquiring postgres client', err.stack);
+          }else{
+//              client.query('SET ROLE "google-oauth2|113866112308051151519"',[], (err, qres) => {
+//              client.query('SET ROLE $1', ['google-oauth2|113866112308051151519'], (err, qres) => {
+              var q = {
+                  text: 'SET ROLE $1::text',
+                  values: [spoo]
+              };
+              client.query(q, (err, qres) => {
+                  // release();
+                  if(err) {
+                      res.sendStatus(500);
+                      console.error('Error setting role', err.stack);
+                  }
+              });
+              /*
+              features.forEach((feature) => {
+                const geometry = feature && feature.geometry;
+                const name = feature && feature.properties && feature.properties.name;
+                console.log("name=",name);
+                  client.query('SELECT * FROM polygon', [], (err, qres) => {
+                      if(err) {
+                          res.sendStatus(500);
+                          console.error('Error SELECT', err.stack);
+                      }else{
+                          console.log("hooray!");
+                      }
+                  });
+              }); //forEach
+              */
+              release();
+          }
+      });
 
-/*
-    We're processing the stream, not uploading the file.
+      res.sendStatus(200);
 
-    uploadFile.mv(`${__dirname}/public/files/${fileName}`, function (err) {
-      if (err)
-        return res.status(500).send(err);
-
-      res.send("File uploaded!");
-    });
-*/
-
-    const dom = (new xmldom.DOMParser()).parseFromString(uploadFile.data.toString('utf8'), 'text/xml');
-    const featuresCollection = togeojson.kml(dom);
-    const features = featuresCollection && featuresCollection.features;
-    features.forEach((feature) => {
-        const geometry = feature && feature.geometry;
-        const name = feature && feature.properties && feature.properties.name;
-
-//        console.log("feature.geometry.coordinates=",feature.geometry.coordinates);
-        console.log("name=",name);
-    });
-
-
-    res.sendStatus(200);
+    } else res.sendStatus(200);
 });
+
 
 app.use(postgraphile(pgPool, 'public', {
   graphiql: true,

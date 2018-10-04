@@ -4,53 +4,39 @@ import { withTheme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Modal from '@material-ui/core/Modal';
 
-import Uppy from '@uppy/core';
-import Dashboard from '@uppy/react/lib/Dashboard';
-import DashboardModal from '@uppy/react/lib/DashboardModal';
-import DragDrop from '@uppy/react/lib/DragDrop';
-import GoogleDrive from '@uppy/google-drive';
-import Tus from '@uppy/tus';
-import '@uppy/dashboard/dist/style.css';
 
 class UploadModal extends React.Component {
-    constructor (props) {
+    constructor(props) {
         super(props);
 
-        const uppy = Uppy({
-            target: "body",
-            autoProceed: false,
-            inline: true,
-            restrictions: {
-                maxFileSize: 1000000,
-                maxNumberOfFiles: 10,
-                minNumberOfFiles: 1,
-                allowedFileTypes: false
-            }
-        });
-
-        uppy.use(Tus, { endpoint: '/upload' });
-
-        uppy.on('complete', (result) => {
-            const url = result.successful[0].uploadURL
-        })
-
-        uppy.use(DragDrop, {target: 'body'});
-
-        uppy.run();
-
+        this.handleUpload = this.handleUpload.bind(this);
     }
-    handleUploadModalOpen = () => this.setState({ modalOpen: true });
-    handleUploadModalClose = () => this.setState({ modalOpen: false });
 
+    handleUpload(e) {
+        e.preventDefault();
+
+        const data = new FormData();
+        data.append('file', this.uploadInput.files[0]);
+        data.append('accessToken', this.props.accessToken);
+
+        fetch('http://localhost:5000/upload', {
+            method: 'POST',
+            body: data,
+        }).then((res) => {
+            console.log("res=",res);
+            console.log("data=",data);
+            console.log("accessToken=",this.props.accessToken);
+        });
+    }
 
     componentWillMount() {
         console.log("component iwll mount");
         this.host = "localhost:5000";
-
     }
 
     render() {
-        const {open, onClose, theme} = this.props;
+        const {open, onClose, theme, accessToken } = this.props;
+        console.log("accessToken=",accessToken);
         const styles = {
           primaryColor: {
           backgroundColor: theme.palette.primary.main,
@@ -63,16 +49,28 @@ class UploadModal extends React.Component {
         };
 
         return (
-          <div>
-            <DragDrop
-              uppy={this.uppy}
-              locale={{
-                  strings: {
-                      chooseFile: 'Pick a new avatar'
-                  }
-              }}
-              />
-          </div>
+            <Modal open={open}
+                   onClose={onClose}>
+              <div className="modal-add-entry">
+                <div style={{margin: "25px"}}>
+                  <Typography variant="title" style={{fontFamily: styles.font}}>
+                    {"Be my modal please."}
+
+                    <form encType="multipart/form-data" onSubmit={this.handleUpload} >
+                      <div>
+                        <input ref={(ref) => { this.uploadInput = ref; }} type="file" accept=".kml" />
+                        <input type="hidden" ref={(input) => { this.actionInput = input }} name="accessToken" value="{accessToken}"/>
+                      </div>
+                      <br />
+                      <div>
+                        <input type="submit"/>
+                      </div>
+                    </form>
+
+                  </Typography>
+                </div>
+              </div>
+            </Modal>
         );
     }
 }

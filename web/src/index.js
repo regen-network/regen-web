@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import './index.css';
 import theme from './theme';
 import { MuiThemeProvider } from '@material-ui/core/styles';
-import registerServiceWorker from './registerServiceWorker';
+import * as serviceWorker from './registerServiceWorker';
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
 import store from './store';
@@ -54,7 +54,7 @@ async function init() {
     // check local storage for feature
   }
   ReactDOM.render(<Root />, document.getElementById('root'));
-  registerServiceWorker();
+  serviceWorker.unregister();
 }
 
 init();

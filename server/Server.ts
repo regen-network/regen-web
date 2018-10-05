@@ -85,6 +85,26 @@ app.post('/api/login', (req, res) => {
 });
 
 
+app.post('/argtest', (req, res) => {
+    pgPool.connect((err, client, release) => {
+      if(err) {
+        res.sendStatus(500);
+        console.error('Error acquiring postgres client', err.stack);
+//      } else client.query('SELECT id FROM polygon WHERE 1 = $1', [1], (err, qres) => {
+        } else client.query('SELECT id FROM polygon WHERE name = $1', ['squatney'], (err, qres) => {
+          release();
+        if(err) {
+          res.sendStatus(500);
+          console.error('Error creating role', err.stack);
+        } else {
+            console.log("ARG TEST WORKED!");
+            res.sendStatus(200);
+        }
+      });
+    });
+});
+
+
 app.post('/upload', (req, res) => {
 
     if (!req.files)

@@ -90,12 +90,14 @@ app.post('/argtest', (req, res) => {
       if(err) {
         res.sendStatus(500);
         console.error('Error acquiring postgres client', err.stack);
+// the next two lines work as expected. Can't use SET ROLE with an argument.
 //      } else client.query('SELECT id FROM polygon WHERE 1 = $1', [1], (err, qres) => {
-        } else client.query('SELECT id FROM polygon WHERE name = $1', ['squatney'], (err, qres) => {
+//        } else client.query('SELECT id FROM polygon WHERE name = $1', ['squatney'], (err, qres) => {
+      } else client.query('SET ROLE $1', ['google-oauth2|113866112308051151519'], (err, qres) => {
           release();
         if(err) {
           res.sendStatus(500);
-          console.error('Error creating role', err.stack);
+          console.error(err.stack);
         } else {
             console.log("ARG TEST WORKED!");
             res.sendStatus(200);
@@ -115,7 +117,6 @@ app.post('/upload', (req, res) => {
 
     if (req.body && req.body.accessToken) {
       const owner = req.body.accessToken;
-        const spoo = req.body.accessToken;
       // call SET ROLE on accessToken
       console.log("owner=",owner);
       const dom = (new xmldom.DOMParser()).parseFromString(uploadFile.data.toString('utf8'), 'text/xml');
@@ -126,11 +127,13 @@ app.post('/upload', (req, res) => {
               res.sendStatus(500);
               console.error('Error acquiring postgres client', err.stack);
           }else{
+              /*
 //              client.query('SET ROLE "google-oauth2|113866112308051151519"',[], (err, qres) => {
 //              client.query('SET ROLE $1', ['google-oauth2|113866112308051151519'], (err, qres) => {
               var q = {
-                  text: 'SET ROLE $1::text',
-                  values: [spoo]
+                  //text: 'SET ROLE $1::text',
+                  text: 'SET ROLE $1',
+                  values: ['google-oauth2|113866112308051151519']
               };
               client.query(q, (err, qres) => {
                   // release();
@@ -139,28 +142,47 @@ app.post('/upload', (req, res) => {
                       console.error('Error setting role', err.stack);
                   }
               });
-              /*
+              */
+              const xml = new xmldom.XMLSerializer();
               features.forEach((feature) => {
-                const geometry = feature && feature.geometry;
+//                const geometry = feature && feature.geometry;
+//                console.log("geometry=",geometry);
+
                 const name = feature && feature.properties && feature.properties.name;
                 console.log("name=",name);
-                  client.query('SELECT * FROM polygon', [], (err, qres) => {
+                  const geomElem = dom.getElementsByTagName('Polygon')[0];
+                  const geomString  = xml.serializeToString(geomElem);
+//                  console.log("s=",s);
+//                  client.query('SELECT * FROM polygon', [], (err, qres) => {
+//                  client.query('INSERT INTO polygon(id,name,geom,owner) VALUES(NULL,$1,ST_GeomFromGeoJSON(ST_Force2D($2)),$3)', [name,geometry,owner], (err, qres) => {
+//                  client.query('INSERT INTO polygon(id,name,geom,owner) VALUES(NULL,$1,ST_GeomFromKML($2),$3)', [name,geometry,owner], (err, qres) => {
+                  //client.query('INSERT INTO polygon(id,name,geom,owner) VALUES(NULL,$1,(ST_GeomFromKML(ST_Force2D($2))),$3)', [name,s,owner], (err, qres) => {
+                  client.query('SELECT ST_GeomFromKML($1)', [geomString], (err, qres) => {
                       if(err) {
                           res.sendStatus(500);
                           console.error('Error SELECT', err.stack);
                       }else{
-                          console.log("hooray!");
+                          const geom = qres.rows[0].st_geomfromkml;
+                          console.log("geom =",geom);
+                          client.query('INSERT INTO polygon(name,geom,owner) VALUES($1,ST_Force2D($2),$3)', [name,geom,owner], (err, qres) => {
+                              if(err) {
+                                res.sendStatus(500);
+                                console.error('Error SELECT', err.stack);
+                              }else{
+                                  console.log("hooray!");
+                                  res.sendStatus(200);
+                              }
+                          });
                       }
                   });
               }); //forEach
-              */
               release();
           }
       });
 
-      res.sendStatus(200);
+//      res.sendStatus(200);
 
-    } else res.sendStatus(200);
+    } else res.sendStatus(400);
 });
 
 
@@ -180,6 +202,7 @@ app.use(postgraphile(pgPool, 'public', {
     } else return { role: 'guest' };
    } 
 }));
+
 
 const port = process.env.PORT || 5000;
 

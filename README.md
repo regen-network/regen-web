@@ -17,3 +17,11 @@ of NodeJS for this project.
 3. Postgres migrations will run automatically when you start the development server. They can be run manually by running `flyway migrate`.
 4. Open your browser to `localhost:3000`
 5. Start coding!!
+
+## Production PostgreSQL
+
+We are using the following PostgreSQL/Postgis docker image: `https://github.com/appropriate/docker-postgis`. Due to the fact that
+the maintainer may occassionally update the Postgis version without changing the docker image tag, Postgis support may unexpectedly
+break and we may need to log into our docker containers in Kubernetes and run `update-postgis.sh` to get things working again. The
+long term solution is use a more stable PostgreSQL solution - either something like AWS RDS or build our own docker images with
+https://nixos.org/nix/.

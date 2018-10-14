@@ -11,6 +11,11 @@ import * as xmldom from 'xmldom';
 import * as togeojson from '@mapbox/togeojson';
 import * as cors from 'cors';
 import { release } from 'os';
+import * as unzipper from 'unzipper';
+
+import * as fs from 'fs';
+import * as etl from 'etl';
+import { Readable } from 'stream';
 
 const app = express();
 
@@ -91,9 +96,71 @@ app.post('/upload', (req, res) => {
     const uploadFile = req.files.file
     const fileName = req.files.file.name
 
+    const stream = new Readable({
+        read() {}
+    });
+
+    stream.push(uploadFile.data);
+
+    stream.pipe(unzipper.Parse())
+        .pipe(etl.map(entry => {
+            if (entry.path == "doc.kml")
+                entry
+                .buffer()
+                .then(function(docKml) {
+                    if (req.body && req.body.accessToken) {
+                        const owner = req.body.accessToken;
+                        const dom = (new xmldom.DOMParser()).parseFromString(docKml.toString('utf8'),'text/xml');
+                        const featuresCollection = togeojson.kml(dom);
+                        const features = featuresCollection && featuresCollection.features;
+                        pgPool.connect((err, client, release) => {
+                            if(err) {
+                                res.sendStatus(500);
+                                console.error('Error acquiring postgres client', err.stack);
+                            }else{
+                                const xml = new xmldom.XMLSerializer();
+                                console.log("still on track!");
+                                features.forEach((feature) => {
+                                    const name = feature && feature.properties && feature.properties.name;
+                  // Will probably need to go one level higher up the XML tree to get features other than type Polygon.
+                  // Using only Polygon type for now.
+                                    const geomElem = dom.getElementsByTagName('Polygon')[0];
+                                    const geomString  = xml.serializeToString(geomElem);
+                                    client.query('SELECT ST_GeomFromKML($1)', [geomString], (err, qres) => {
+                                        if(err) {
+                                            res.sendStatus(500);
+                                            console.error('Error getting geometry from KML input file.', err.stack);
+                                        }else{
+                                            const geom = qres.rows[0].st_geomfromkml; // the binary geom data that the query needs
+                        // ST_Force2D() the input to get rid of the Z-dimension in KML
+                                            client.query('INSERT INTO polygon(name,geom,owner) VALUES($1,ST_Force2D($2),$3)', [name,geom,owner], (err, qres) => {
+                                                if(err) {
+                                                    res.sendStatus(500);
+                                                    console.error('Error SELECT', err.stack);
+                                                }else{
+                                                    res.sendStatus(200);
+                                                }
+                                            });
+                                        }
+                                    });
+                                }); //forEach
+                            }
+                            release();
+
+                        })
+
+                    }else{
+                        console.log("SPOO!!!!!!!");
+                    }
+
+                });
+            else
+                entry.autodrain();
+        }));
+/*
     if (req.body && req.body.accessToken) {
       const owner = req.body.accessToken;
-      const dom = (new xmldom.DOMParser()).parseFromString(uploadFile.data.toString('utf8'), 'text/xml');
+      const dom = (new xmldom.DOMParser()).parseFromString(docKml.data.toString('utf8'), 'text/xml');
       const featuresCollection = togeojson.kml(dom);
       const features = featuresCollection && featuresCollection.features;
       pgPool.connect((err, client, release) => {
@@ -101,20 +168,23 @@ app.post('/upload', (req, res) => {
               res.sendStatus(500);
               console.error('Error acquiring postgres client', err.stack);
           }else{
+
+*/
 /*
-These next few lines are silly, because featuresCollection already holds the geometery data.
+These next few lines are silly, because featuresCollection already holds the geometry data.
 The problem is that I had problems getting ST_GeomFromGeoJSON() to work as expected, while
 ST_GeomFromKML() works. This is meant to explain why I'm converting a piece of the dom back
 to an XML string. It seems wasteful and stupid because the original data is already XML.
 May investigate later.
  */
+/*
               const xml = new xmldom.XMLSerializer();
               features.forEach((feature) => {
                 const name = feature && feature.properties && feature.properties.name;
-                // Will probably need to go one level higher to get features other than type Polygon
+                  // Will probably need to go one level higher up the XML tree to get features other than type Polygon.
+                  // Using only Polygon type for now.
                 const geomElem = dom.getElementsByTagName('Polygon')[0];
                 const geomString  = xml.serializeToString(geomElem);
-
                 client.query('SELECT ST_GeomFromKML($1)', [geomString], (err, qres) => {
                     if(err) {
                         res.sendStatus(500);
@@ -136,7 +206,9 @@ May investigate later.
                release();
           }
        });
-    } else res.sendStatus(400);
+    } else res.sendStatus(400).send('Unauthorised. Check login credentials.');
+  */
+    res.sendStatus(200);
 });
 
 app.use(postgraphile(pgPool, 'public', {

@@ -58,7 +58,7 @@ class UploadModal extends React.Component {
 
                     <form encType="multipart/form-data" onSubmit={this.handleUpload} >
                       <div>
-                        <input ref={(ref) => { this.uploadInput = ref; }} type="file" accept=".kml" />
+                        <input ref={(ref) => { this.uploadInput = ref; }} type="file" accept=".kmz" />
                         <input type="hidden" ref={(input) => { this.actionInput = input }} name="accessToken" value="{accessToken}"/>
                       </div>
                       <br />

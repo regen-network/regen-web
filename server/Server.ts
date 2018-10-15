@@ -88,20 +88,45 @@ app.post('/api/login', (req, res) => {
   } else res.sendStatus(200);
 });
 
+/*
+  This /upload endpoint does a lot, so it's worth noting up front the processing steps.
 
+  In broad terms, we need to collect three fields from the input then insert them in the polygon table.
+  The columns are owner, name, and geom, where:
+    owner = Auth0 accessToken,
+    name = feature name (name of the polygon defined with GoogleEarth)
+    geom = polygon coordinates in 2d postgis geom format 
+
+  The file data, a .kmz file, is a zipped file containing an XML/KML file called doc.kml.
+  ├── Foo.kmz
+      ├── doc.kml
+
+  Steps:
+  1. Unzips input file and streams to a buffer that contains the doc.xml dat,
+  2. then get the accessToken (owner column),
+  3. parse the XML data into a DOM object,
+  4. pull the features out of the GeoJSON,
+  5. get a db connection from the pool,
+  6. loop thru the features
+    a) get the name (name column),
+    b) get the Polygon element from the DOM,
+    c) convert this element /back/ to XML (necessary due to problems with ST_GeomFromGeoJSON() -- using ST_GeomFromKML() instead)
+    d) INSERT owner,name,geom,
+  7. send the 200 OK response
+  8. release the db connection
+*/
 app.post('/upload', (req, res) => {
     if (!req.files)
         return res.status(400).send('No files were uploaded.\n');
 
-    const uploadFile = req.files.file
-    const fileName = req.files.file.name
+    const uploadFile = req.files.file;
 
     const stream = new Readable({
         read() {}
     });
 
     stream.push(uploadFile.data);
-
+// 1. unzip the file
     stream.pipe(unzipper.Parse())
         .pipe(etl.map(entry => {
             if (entry.path == "doc.kml")
@@ -109,35 +134,42 @@ app.post('/upload', (req, res) => {
                 .buffer()
                 .then(function(docKml) {
                     if (req.body && req.body.accessToken) {
+// 2. get the owner
                         const owner = req.body.accessToken;
+// 3. XML to DOM
                         const dom = (new xmldom.DOMParser()).parseFromString(docKml.toString('utf8'),'text/xml');
+// 4. get the features
                         const featuresCollection = togeojson.kml(dom);
                         const features = featuresCollection && featuresCollection.features;
+// 5. db connect
                         pgPool.connect((err, client, release) => {
                             if(err) {
                                 res.sendStatus(500);
                                 console.error('Error acquiring postgres client', err.stack);
                             }else{
                                 const xml = new xmldom.XMLSerializer();
-                                console.log("still on track!");
+// 6. loop thru features
                                 features.forEach((feature) => {
+// 6a. get name
                                     const name = feature && feature.properties && feature.properties.name;
-                  // Will probably need to go one level higher up the XML tree to get features other than type Polygon.
-                  // Using only Polygon type for now.
+// 6b. get polygon
                                     const geomElem = dom.getElementsByTagName('Polygon')[0];
                                     const geomString  = xml.serializeToString(geomElem);
+// 6c. use postgis to convert the XML string to binary postgis geom format
                                     client.query('SELECT ST_GeomFromKML($1)', [geomString], (err, qres) => {
                                         if(err) {
                                             res.sendStatus(500);
                                             console.error('Error getting geometry from KML input file.', err.stack);
                                         }else{
                                             const geom = qres.rows[0].st_geomfromkml; // the binary geom data that the query needs
-                        // ST_Force2D() the input to get rid of the Z-dimension in KML
+// 6d. insert, use ST_Force2D() to get rid of the Z-dimension in the KML
+// Note that this INSERT query is nested within the SELECT above.
                                             client.query('INSERT INTO polygon(name,geom,owner) VALUES($1,ST_Force2D($2),$3)', [name,geom,owner], (err, qres) => {
                                                 if(err) {
                                                     res.sendStatus(500);
-                                                    console.error('Error SELECT', err.stack);
+                                                    console.error('Error on INSERT', err.stack);
                                                 }else{
+// 7. all good, send 200
                                                     res.sendStatus(200);
                                                 }
                                             });
@@ -145,70 +177,15 @@ app.post('/upload', (req, res) => {
                                     });
                                 }); //forEach
                             }
+// 8. cleanup
                             release();
-
                         })
-
-                    }else{
-                        console.log("SPOO!!!!!!!");
                     }
-
                 });
             else
+// from unzipper, returns an empty stream that provides 'error' and 'finish' events. Not yet implemented.
                 entry.autodrain();
         }));
-/*
-    if (req.body && req.body.accessToken) {
-      const owner = req.body.accessToken;
-      const dom = (new xmldom.DOMParser()).parseFromString(docKml.data.toString('utf8'), 'text/xml');
-      const featuresCollection = togeojson.kml(dom);
-      const features = featuresCollection && featuresCollection.features;
-      pgPool.connect((err, client, release) => {
-          if(err) {
-              res.sendStatus(500);
-              console.error('Error acquiring postgres client', err.stack);
-          }else{
-
-*/
-/*
-These next few lines are silly, because featuresCollection already holds the geometry data.
-The problem is that I had problems getting ST_GeomFromGeoJSON() to work as expected, while
-ST_GeomFromKML() works. This is meant to explain why I'm converting a piece of the dom back
-to an XML string. It seems wasteful and stupid because the original data is already XML.
-May investigate later.
- */
-/*
-              const xml = new xmldom.XMLSerializer();
-              features.forEach((feature) => {
-                const name = feature && feature.properties && feature.properties.name;
-                  // Will probably need to go one level higher up the XML tree to get features other than type Polygon.
-                  // Using only Polygon type for now.
-                const geomElem = dom.getElementsByTagName('Polygon')[0];
-                const geomString  = xml.serializeToString(geomElem);
-                client.query('SELECT ST_GeomFromKML($1)', [geomString], (err, qres) => {
-                    if(err) {
-                        res.sendStatus(500);
-                        console.error('Error getting geometry from KML input file.', err.stack);
-                    }else{
-                        const geom = qres.rows[0].st_geomfromkml; // the binary geom data that the query needs
-                        // ST_Force2D() the input to get rid of the Z-dimension in KML
-                        client.query('INSERT INTO polygon(name,geom,owner) VALUES($1,ST_Force2D($2),$3)', [name,geom,owner], (err, qres) => {
-                          if(err) {
-                            res.sendStatus(500);
-                            console.error('Error SELECT', err.stack);
-                          }else{
-                            res.sendStatus(200);
-                          }
-                        });
-                    }
-                 });
-               }); //forEach
-               release();
-          }
-       });
-    } else res.sendStatus(400).send('Unauthorised. Check login credentials.');
-  */
-    res.sendStatus(200);
 });
 
 app.use(postgraphile(pgPool, 'public', {

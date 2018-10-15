@@ -12,8 +12,7 @@ import * as togeojson from '@mapbox/togeojson';
 import * as cors from 'cors';
 import { release } from 'os';
 import * as unzipper from 'unzipper';
-
-import * as fs from 'fs';
+//import * as fs from 'fs';
 import * as etl from 'etl';
 import { Readable } from 'stream';
 
@@ -21,7 +20,6 @@ const app = express();
 
 app.use(express.static(path.join(__dirname, '../web/build')));
 app.use(fileUpload());
-
 app.use(cors());
 
 app.get('/', function (req, res) {
@@ -89,7 +87,8 @@ app.post('/api/login', (req, res) => {
 });
 
 /*
-  This /upload endpoint does a lot, so it's worth noting up front the processing steps.
+  This /upload endpoint does a lot, so it's worth noting the processing steps up front in order
+  to keep from going insane as you read the code.
 
   In broad terms, we need to collect three fields from the input then insert them in the polygon table.
   The columns are owner, name, and geom, where:
@@ -98,8 +97,15 @@ app.post('/api/login', (req, res) => {
     geom = polygon coordinates in 2d postgis geom format 
 
   The file data, a .kmz file, is a zipped file containing an XML/KML file called doc.kml.
-  ├── Foo.kmz
-      ├── doc.kml
+  Foo.kmz
+  ├── doc.kml
+
+  ETL pipeline:
+  stream - from raw uploaded file
+  ├── unzip the file, get the XML data (doc.kml)
+      ├── loop thru geojson features
+          ├── outer query - transform XML features to postgis, ST_GeomFromKML()
+              ├── inner query - INSERT INTO polygon...
 
   Steps:
   1. Unzips input file and streams to a buffer that contains the doc.xml dat,
@@ -149,11 +155,12 @@ app.post('/upload', (req, res) => {
                             }else{
                                 const xml = new xmldom.XMLSerializer();
 // 6. loop thru features
+                                let i = 0; // polygon counter
                                 features.forEach((feature) => {
 // 6a. get name
                                     const name = feature && feature.properties && feature.properties.name;
 // 6b. get polygon
-                                    const geomElem = dom.getElementsByTagName('Polygon')[0];
+                                    const geomElem = dom.getElementsByTagName('Polygon')[i++];
                                     const geomString  = xml.serializeToString(geomElem);
 // 6c. use postgis to convert the XML string to binary postgis geom format
                                     client.query('SELECT ST_GeomFromKML($1)', [geomString], (err, qres) => {
@@ -177,7 +184,7 @@ app.post('/upload', (req, res) => {
                                     });
                                 }); //forEach
                             }
-// 8. cleanup
+// 8. done with db
                             release();
                         })
                     }

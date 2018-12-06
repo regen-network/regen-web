@@ -3,23 +3,10 @@ import './AddEntryModal.css';
 import { withTheme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Modal from '@material-ui/core/Modal';
-import { Query } from "react-apollo";
-import gql from "graphql-tag";
+//import { Query } from "react-apollo";
+//import gql from "graphql-tag";
 
 
-const GET_POLYGONS = gql`
-{
-  getCurrentUser
-  allPolygons {
-    nodes {
-      id
-      name
-      geomJson
-      owner
-    }
-  }
-}
-`;
 
 class UploadModal extends React.Component {
     constructor(props) {
@@ -42,7 +29,12 @@ class UploadModal extends React.Component {
             console.log("res=",res);
             console.log("data=",data);
             console.log("accessToken=",this.props.accessToken);
+
+            this.props.refetch().then((res) => {
+                console.log("data refetched");
+            });
         });
+
     }
 
     componentWillMount() {
@@ -71,8 +63,6 @@ class UploadModal extends React.Component {
                 <div style={{margin: "25px"}}>
                   <Typography variant="title" style={{fontFamily: styles.font}}>
                     {"Select a .kmz file."}
-                  </Typography>
-                  {/* <Query query={GET_POLYGONS} refetchQueries={[{query: GET_POLYGONS}]}> */}
 
                     <form encType="multipart/form-data" onSubmit={this.handleUpload} >
                       <div>
@@ -84,7 +74,7 @@ class UploadModal extends React.Component {
                         <input type="submit"/>
                       </div>
                     </form>
-                    {/* </Query> */}
+                  </Typography>
 
                 </div>
               </div>

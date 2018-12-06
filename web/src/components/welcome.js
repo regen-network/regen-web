@@ -1,12 +1,58 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { withTheme } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Modal from '@material-ui/core/Modal';
 import Typography from '@material-ui/core/Typography';
 import './welcome.css';
 
-class Welcome extends React.Component {
+class WelcomeCard extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      hover: false
+    };
+  }
 
+  toggleHover = () => {
+    let currentHover = this.state.hover;
+    this.setState({
+      hover: !currentHover
+    });
+  }
+
+  render() {
+    const { styles, background, text } = this.props;
+
+    return (
+      <div style={{background: background, backgroundSize: "cover"}}
+        className="welcome__paper">
+          <div className="welcome__card" onMouseEnter={this.toggleHover} onMouseLeave={this.toggleHover}>
+            {
+              this.state.hover ?
+              <div className="welcome__comingsoon">
+                  <Typography variant="title" style={{color: styles.content.color, fontFamily: styles.title.font, fontSize: "20px", margin: "10px auto"}}>
+                    Coming Soon
+                  </Typography>
+              </div>
+              :
+              <div>
+                  <Typography variant="title" style={{color: styles.content.color, fontFamily: styles.title.font, fontSize: "20px", margin: "10px auto"}}>
+                    {text.title}
+                  </Typography>
+                  <Typography variant="subheading" style={{color: styles.content.color, fontFamily: styles.content.font, fontSize: "16px", margin: "10px auto"}}>
+                    {text.body}
+                  </Typography>
+              </div>
+            }
+          </div>
+      </div>
+    );
+  }
+}
+
+class Welcome extends Component {
+
+  // Link removed for now as Invision page 'Over Quota'
   gotoInvisionDemo = () => {
       window.open(
         'https://projects.invisionapp.com/share/3VO8HG8M4D8#/screens/321828395_Landing_Screen_2'
@@ -40,23 +86,20 @@ class Welcome extends React.Component {
       }
     };
 
-    // SAVING FOR LATER
-    // <div style={{
-    //   padding: "30px",
-    //   textAlign: "center",
-    //   background: styles.background,
-    //   backgroundSize: "cover"
-    // }}>
-    //   <img id="logo" src="white_splash.png" alt="logo link to regen.network"/>
-    //   <h2 style={{fontFamily: styles.title.font, margin: "0 auto"}}>Welcome to Regen Network</h2>
-    //   <div style={{fontFamily: styles.content.font, width: "300px", textAlign: "center", fontSize: "1.2em", margin: "0 auto"}}>
-    //     <p>This eco-app is a tool for farmers to share farm practices and geospatial data with the Regen science team.
-    //   We promise to keep your information private as we use what you share with us to build a system that rewards you for ecological regeneration.</p>
-    //     <p>Thanks for collaborating with us.</p>
-    //   </div>
-    //   <Button style={{color: styles.content.color, marginTop: "25px", border: "3px solid white", fontFamily: styles.title.font}} onClick={this.closeModal}>Get Started</Button>
-    // </div>
-
+    const cards = {
+      commons: {
+        title: "Data Commons",
+        body: "Share or sell information on your ranch and find the data you need to help you manage your ranch."
+      },
+      projects: {
+        title: "Ranching Projects",
+        body: "Browse projects you qualify for or start your own project, and earn more money."
+      },
+      community: {
+        title: "Join the Community",
+        body: "Connect with other ranchers like you and with funding organizations in the world of ranching."
+      }
+    }
 
     return (
       <Modal open={open}
@@ -77,42 +120,9 @@ class Welcome extends React.Component {
                 Click Get Started to set up the app for your ranch.
               </Typography>
               <div style={{display: "flex", justifyContent: "center"}}>
-                <div style={{background: styles.background.commons, backgroundSize: "cover"}}
-                  className="welcome__paper"
-                  onClick={this.gotoInvisionDemo}>
-                    <div className="welcome__card">
-                        <Typography variant="title" style={{color: styles.content.color, fontFamily: styles.title.font, fontSize: "20px", margin: "10px auto"}}>
-                          Data Commons
-                        </Typography>
-                        <Typography variant="subheading" style={{color: styles.content.color, fontFamily: styles.content.font, fontSize: "16px", margin: "10px auto"}}>
-                          Share or sell information on your ranch and find the data you need to help you manage your ranch.
-                        </Typography>
-                    </div>
-                </div>
-                <div style={{background: styles.background.projects, backgroundSize: "cover"}}
-                  className="welcome__paper"
-                  onClick={this.gotoInvisionDemo}>
-                    <div className="welcome__card">
-                        <Typography variant="title" style={{color: styles.content.color, fontFamily: styles.title.font, fontSize: "20px", margin: "10px auto"}}>
-                          Ranching Projects
-                        </Typography>
-                        <Typography variant="subheading" style={{color: styles.content.color, fontFamily: styles.content.font, fontSize: "16px", margin: "10px auto"}}>
-                          Browse projects you qualify for or start your own project, and earn more money.
-                        </Typography>
-                    </div>
-                </div>
-                <div style={{background: styles.background.community, backgroundSize: "cover"}}
-                  className="welcome__paper"
-                  onClick={this.gotoInvisionDemo}>
-                    <div className="welcome__card">
-                        <Typography variant="title" style={{color: styles.content.color, fontFamily: styles.title.font, fontSize: "20px", margin: "10px auto"}}>
-                          Join the Community
-                        </Typography>
-                        <Typography variant="subheading" style={{color: styles.content.color, fontFamily: styles.content.font, fontSize: "16px", margin: "10px auto"}}>
-                          Connect with other ranchers like you and with funding organizations in the world of ranching.
-                        </Typography>
-                    </div>
-                </div>
+                <WelcomeCard styles={styles} background={styles.background.commons} text={cards.commons} />
+                <WelcomeCard styles={styles} background={styles.background.projects} text={cards.projects} />
+                <WelcomeCard styles={styles} background={styles.background.community} text={cards.community} />
               </div>
               <Button
                 style={{marginTop: "25px", fontFamily: styles.content.font}}

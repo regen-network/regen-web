@@ -99,6 +99,7 @@ class App extends Component {
       );
   }
 
+  // Link removed for now as Invision page 'Over Quota'
   gotoInvisionDemo = () => {
       window.open(
         'https://projects.invisionapp.com/share/3VO8HG8M4D8#/screens/321828395_Landing_Screen_2'
@@ -291,7 +292,6 @@ class App extends Component {
                       </IconButton>
 	                    <Menu id="user-menu" anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={this.onMenuClose}>
                         <MenuItem onClick={actions.openMenuModal}>Menu</MenuItem>
-                        <MenuItem onClick={this.gotoInvisionDemo}>Demo</MenuItem>
                         <MenuItem onClick={this.gotoRegen}>Regen</MenuItem>
 	                      <MenuItem onClick={this.onLogout}>Sign Out</MenuItem>
 	                    </Menu>

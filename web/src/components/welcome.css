@@ -7,6 +7,13 @@
   transition: all 0.25s ease;
 }
 
+.welcome__comingsoon {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
 .welcome__paper:hover {
   box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.6);
 }
@@ -17,4 +24,8 @@
   margin-top: 170px;
   padding: 8px;
   overflow: hidden;
+}
+
+.welcome__card:hover {
+  background-color: #eee;
 }

@@ -60,7 +60,7 @@ reducerMap[constants.CLOSE_DELETE_MODAL] = (state, _) => {
 
 
 reducerMap[constants.OPEN_UPLOAD_MODAL] = (state, _ ) => {
-    return {...state, uploadModalOpen: true};
+    return {...state, uploadModalOpen: true };
 };
 
 reducerMap[constants.CLOSE_UPLOAD_MODAL] = (state, _) => {

@@ -3,8 +3,8 @@ import './AddEntryModal.css';
 import { withTheme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Modal from '@material-ui/core/Modal';
-//import { Query } from "react-apollo";
-//import gql from "graphql-tag";
+import { Query } from "react-apollo";
+import gql from "graphql-tag";
 
 
 
@@ -17,6 +17,7 @@ class UploadModal extends React.Component {
 
     handleUpload(e) {
         e.preventDefault();
+        console.log("props=",this.props);
 
         const data = new FormData();
         data.append('file', this.uploadInput.files[0]);
@@ -30,9 +31,9 @@ class UploadModal extends React.Component {
             console.log("data=",data);
             console.log("accessToken=",this.props.accessToken);
 
-            this.props.refetch().then((res) => {
-                console.log("data refetched");
-            });
+            this.props.refetch;
+//            this.props.onClose({open: false});
+
         });
 
     }
@@ -43,7 +44,7 @@ class UploadModal extends React.Component {
     }
 
     render() {
-        const {open, onClose, theme, accessToken } = this.props;
+        const {open, onClose, theme, accessToken, refetch } = this.props;
 
         const styles = {
           primaryColor: {
@@ -71,7 +72,8 @@ class UploadModal extends React.Component {
                       </div>
                       <br />
                       <div>
-                        <input type="submit"/>
+                        {/* <input type="submit" onClick={this.props.onClose()}/> */}
+                        <input type="submit"  /> 
                       </div>
                     </form>
                   </Typography>

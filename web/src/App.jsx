@@ -296,7 +296,7 @@ class App extends Component {
                         <MenuItem onClick={actions.openMenuModal}>Menu</MenuItem>
                         <MenuItem onClick={this.gotoInvisionDemo}>Demo</MenuItem>
                         <MenuItem onClick={this.gotoRegen}>Regen</MenuItem>
-		                    <MenuItem onClick={openUploadModal}>Upload</MenuItem>
+		                        <MenuItem onClick={openUploadModal}>Upload</MenuItem>
 	                      <MenuItem onClick={this.onLogout}>Sign Out</MenuItem>
 	                    </Menu>
 	                   </div>
@@ -389,7 +389,7 @@ class App extends Component {
             <SaveEntryModal open={saveModalOpen} onClose={actions.closeSaveEntryModal} user={data && data.getCurrentUser} clearSelected={this.clearSelected} />
             <UnsavedPolygonWarning open={warningModalOpen} onClose={actions.closeWarningModal} logout={actions.logout} />
             <DeletePolygonConfirmation open={deletePolygonModalOpen} onClose={actions.closeDeleteModal} deletedFeature={deletedFeature} />
-                <UploadModal accessToken={this.props.user.sub} open={uploadModalOpen} onClose={actions.closeUploadModal}/>
+                <UploadModal refetch={refetch()} accessToken={this.props.user.sub} open={uploadModalOpen} onClose={actions.closeUploadModal}/>
           </View>
           );
         }}

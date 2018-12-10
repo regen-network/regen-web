@@ -102,6 +102,12 @@ class App extends Component {
       this.setState({ anchorEl: null });
   }
 
+  handleUpload = () => {
+      // close the menu
+      this.props.actions.openUploadModal();
+      this.setState({ anchorEl: null });
+  }
+
   gotoInvisionDemo = () => {
       window.open(
         'https://projects.invisionapp.com/share/3VO8HG8M4D8#/screens/321828395_Landing_Screen_2'
@@ -296,7 +302,7 @@ class App extends Component {
                         <MenuItem onClick={actions.openMenuModal}>Menu</MenuItem>
                         <MenuItem onClick={this.gotoInvisionDemo}>Demo</MenuItem>
                         <MenuItem onClick={this.gotoRegen}>Regen</MenuItem>
-		                        <MenuItem onClick={openUploadModal}>Upload</MenuItem>
+		                        <MenuItem onClick={this.handleUpload}>Upload</MenuItem>
 	                      <MenuItem onClick={this.onLogout}>Sign Out</MenuItem>
 	                    </Menu>
 	                   </div>

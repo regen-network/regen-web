@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import './AddEntryModal.css';
 import { withTheme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import Input from '@material-ui/core/Input';
 import Modal from '@material-ui/core/Modal';
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
-
 
 
 class UploadModal extends React.Component {
@@ -73,7 +74,11 @@ class UploadModal extends React.Component {
                       <br />
                       <div>
                         {/* <input type="submit" onClick={this.props.onClose()}/> */}
-                        <input type="submit"  /> 
+                        {/* <Button
+                          type="submit"
+                          label="fire!"
+                              onClick={onClose}/> */}
+                        <input type="submit"/>
                       </div>
                     </form>
                   </Typography>

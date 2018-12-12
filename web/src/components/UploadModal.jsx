@@ -3,10 +3,7 @@ import './AddEntryModal.css';
 import { withTheme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import Input from '@material-ui/core/Input';
 import Modal from '@material-ui/core/Modal';
-import { Query } from "react-apollo";
-import gql from "graphql-tag";
 
 
 class UploadModal extends React.Component {
@@ -18,25 +15,20 @@ class UploadModal extends React.Component {
 
     handleUpload(e) {
         e.preventDefault();
-        console.log("props=",this.props);
 
         const data = new FormData();
         data.append('file', this.uploadInput.files[0]);
         data.append('accessToken', this.props.accessToken);
 
+        console.log("accessToken=",this.props.accessToken);
+
         fetch('http://localhost:5000/upload', {
             method: 'POST',
             body: data,
         }).then((res) => {
-            console.log("res=",res);
-            console.log("data=",data);
-            console.log("accessToken=",this.props.accessToken);
-
             this.props.refetch;
-//            this.props.onClose({open: false});
-
         });
-
+        this.props.onClose();
     }
 
     componentWillMount() {
@@ -66,21 +58,25 @@ class UploadModal extends React.Component {
                   <Typography variant="title" style={{fontFamily: styles.font}}>
                     {"Select a .kmz file."}
 
-                    <form encType="multipart/form-data" onSubmit={this.handleUpload} >
-                      <div>
-                        <input ref={(ref) => { this.uploadInput = ref; }} type="file" accept=".kmz" />
-                        <input type="hidden" ref={(input) => { this.actionInput = input }} name="accessToken" value="{accessToken}"/>
-                      </div>
-                      <br />
-                      <div>
-                        {/* <input type="submit" onClick={this.props.onClose()}/> */}
-                        {/* <Button
-                          type="submit"
-                          label="fire!"
-                              onClick={onClose}/> */}
-                        <input type="submit"/>
-                      </div>
-                    </form>
+                     <input
+                       accept=".kmz"
+                       style={{ display: 'none' }}
+                       id="raised-button-file"
+                       type="file"
+                       ref={(ref) => { this.uploadInput = ref; }}
+                     />
+                       <br/>
+                     <label htmlFor="raised-button-file">
+                       <Button variant="raised" component="span">
+                         Upload
+                       </Button>
+                     </label>
+
+                     <br/>
+                     <Button variant="raised" type="submit" onClick={this.handleUpload} >
+                       Submit
+                     </Button>
+
                   </Typography>
 
                 </div>

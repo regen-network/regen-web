@@ -102,7 +102,7 @@ class App extends Component {
       this.setState({ anchorEl: null });
   }
 
-  handleUpload = () => {
+  handleUploadMenu = () => {
       // close the menu
       this.props.actions.openUploadModal();
       this.setState({ anchorEl: null });
@@ -302,7 +302,7 @@ class App extends Component {
                         <MenuItem onClick={actions.openMenuModal}>Menu</MenuItem>
                         <MenuItem onClick={this.gotoInvisionDemo}>Demo</MenuItem>
                         <MenuItem onClick={this.gotoRegen}>Regen</MenuItem>
-		                        <MenuItem onClick={this.handleUpload}>Upload</MenuItem>
+		                        <MenuItem onClick={this.handleUploadMenu}>Upload</MenuItem>
 	                      <MenuItem onClick={this.onLogout}>Sign Out</MenuItem>
 	                    </Menu>
 	                   </div>
@@ -395,7 +395,7 @@ class App extends Component {
             <SaveEntryModal open={saveModalOpen} onClose={actions.closeSaveEntryModal} user={data && data.getCurrentUser} clearSelected={this.clearSelected} />
             <UnsavedPolygonWarning open={warningModalOpen} onClose={actions.closeWarningModal} logout={actions.logout} />
             <DeletePolygonConfirmation open={deletePolygonModalOpen} onClose={actions.closeDeleteModal} deletedFeature={deletedFeature} />
-                <UploadModal refetch={refetch()} accessToken={this.props.user.sub} open={uploadModalOpen} onClose={actions.closeUploadModal}/>
+            <UploadModal refetch={refetch()} accessToken={this.props.user.sub} open={uploadModalOpen} onClose={actions.closeUploadModal}/>
           </View>
           );
         }}

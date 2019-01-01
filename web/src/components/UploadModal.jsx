@@ -4,6 +4,7 @@ import { withTheme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Modal from '@material-ui/core/Modal';
+import TextField from '@material-ui/core/TextField';
 
 
 class UploadModal extends React.Component {
@@ -19,8 +20,6 @@ class UploadModal extends React.Component {
         const data = new FormData();
         data.append('file', this.uploadInput.files[0]);
         data.append('accessToken', this.props.accessToken);
-
-        console.log("accessToken=",this.props.accessToken);
 
         fetch('http://localhost:5000/upload', {
             method: 'POST',
@@ -57,27 +56,38 @@ class UploadModal extends React.Component {
                 <div style={{margin: "25px"}}>
                   <Typography variant="title" style={{fontFamily: styles.font}}>
                     {"Select a .kmz file."}
+                  </Typography>
 
                      <input
                        accept=".kmz"
                        style={{ display: 'none' }}
-                       id="raised-button-file"
+                       id="button-file"
                        type="file"
+                       name= {this.Input}
                        ref={(ref) => { this.uploadInput = ref; }}
                      />
-                       <br/>
-                     <label htmlFor="raised-button-file">
-                       <Button variant="raised" component="span">
-                         Upload
+                       <div style={{display: 'flex', justifyContent: 'space-around'}}>
+                     <label htmlFor="button-file">
+                       <Button  component="span"
+                        style={{
+                          marginTop: "25px",
+                          backgroundColor: styles.primaryColor.backgroundColor,
+                          fontFamily: styles.font,
+                          color: styles.primaryColor.color}}>
+                         Choose
                        </Button>
                      </label>
 
-                     <br/>
-                     <Button variant="raised" type="submit" onClick={this.handleUpload} >
-                       Submit
+                     <Button type="submit" onClick={this.handleUpload}
+                        style={{
+                          marginTop: "25px",
+                          backgroundColor: styles.primaryColor.backgroundColor,
+                          fontFamily: styles.font,
+                          color: styles.primaryColor.color}}>
+                       Upload
                      </Button>
+                     </div>
 
-                  </Typography>
 
                 </div>
               </div>

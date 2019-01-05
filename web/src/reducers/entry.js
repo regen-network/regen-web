@@ -4,11 +4,12 @@ import * as moment from 'moment';
 const initialState = {
     addModalOpen: false,
     saveModalOpen: false,
+    uploadModalOpen: false,
     entry: {
         date: moment(),
         type: null,
         species: null
-    },
+        },
     currentFeature: null
 }
 

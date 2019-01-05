@@ -2,6 +2,7 @@
   "name": "root",
   "private": true,
   "dependencies": {
+    "@uppy/tus": "^0.27.4",
     "flywaydb-cli": "^0.5.0",
     "lerna": "^3.0.0-rc.0"
   },

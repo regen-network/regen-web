@@ -32,6 +32,7 @@ import AddEntryModal from './components/AddEntryModal.jsx';
 import SaveEntryModal from './components/SaveEntryModal.jsx';
 import UnsavedPolygonWarning from './components/unsavedPolygonWarning';
 import DeletePolygonConfirmation from './components/deletePolygonConfirmation';
+import UploadModal from './components/UploadModal';
 
 
 const mapboxAccessToken = "pk.eyJ1IjoiYWFyb25jLXJlZ2VuIiwiYSI6ImNqa2I4dW9sbjBob3czcHA4amJqM2NhczAifQ.4HW-QDLUBJiHxOjDakKm2w";
@@ -97,6 +98,14 @@ class App extends Component {
         'http://regen.network',
         '_blank'
       );
+      // close the menu
+      this.setState({ anchorEl: null });
+  }
+
+  handleUploadMenu = () => {
+      // close the menu
+      this.props.actions.openUploadModal();
+      this.setState({ anchorEl: null });
   }
 
   // Link removed for now as Invision page 'Over Quota'
@@ -214,9 +223,9 @@ class App extends Component {
 
   render() {
     const worldview = [-60, -60, 60, 60]; // default mapbox worldview
-    const { theme, map, user, actions, addModalOpen, saveModalOpen, isAuthenticated, menuModalOpen } = this.props;
+    const { theme, map, user, actions, addModalOpen, saveModalOpen, uploadModalOpen, isAuthenticated, menuModalOpen } = this.props;
     const { features, selected, zoom, deletePolygonModalOpen, warningModalOpen, deletedFeature } = map;
-    const { login, updateZoom } = actions;
+    const { login, updateZoom, openUploadModal } = actions;
 
     const styles = {
       primaryColor: {
@@ -241,7 +250,7 @@ class App extends Component {
     return (
 
       <Query query={GET_POLYGONS}>
-      {({loading, error, data}) => {
+        {({loading, error, data, refetch}) => {
           /* If the user has saved polygons, roll them into a GeoJson FeatureCollection
              and pass them to turf.bbox(). This bbox can be passed to mapbox's fitBounds()
              method which will ease the view to the centroid of the user's polygons.
@@ -258,7 +267,7 @@ class App extends Component {
               geometry: p
             }))
           });
-          updateZoom();
+            updateZoom();
         }
         else if (unsavedFeatures && unsavedFeatures.length && !zoom) {
           bbox = turf.bbox({
@@ -293,6 +302,7 @@ class App extends Component {
 	                    <Menu id="user-menu" anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={this.onMenuClose}>
                         <MenuItem onClick={actions.openMenuModal}>Menu</MenuItem>
                         <MenuItem onClick={this.gotoRegen}>Regen</MenuItem>
+		                        <MenuItem onClick={this.handleUploadMenu}>Upload</MenuItem>
 	                      <MenuItem onClick={this.onLogout}>Sign Out</MenuItem>
 	                    </Menu>
 	                   </div>
@@ -314,6 +324,7 @@ class App extends Component {
                   toggleSelect={this.drawSelected}
                   styles={styles}
                   openSaveEntryModal={actions.openSaveEntryModal}
+                  openUploadModal={actions.openUploadModal}
                   openDeletePolygonModal={actions.openDeleteModal} />
               </View>
               <View style={{ flex: 8 }}>
@@ -384,6 +395,7 @@ class App extends Component {
             <SaveEntryModal open={saveModalOpen} onClose={actions.closeSaveEntryModal} user={data && data.getCurrentUser} clearSelected={this.clearSelected} />
             <UnsavedPolygonWarning open={warningModalOpen} onClose={actions.closeWarningModal} logout={actions.logout} />
             <DeletePolygonConfirmation open={deletePolygonModalOpen} onClose={actions.closeDeleteModal} deletedFeature={deletedFeature} />
+            <UploadModal refetch={refetch()} accessToken={this.props.user.sub} open={uploadModalOpen} onClose={actions.closeUploadModal}/>
           </View>
           );
         }}
@@ -397,12 +409,13 @@ const mapStateToProps = ({ map, entry, auth }) => ({
   menuModalOpen: auth.menuModalOpen,
   addModalOpen: entry.addModalOpen,
   saveModalOpen: entry.saveModalOpen,
+  uploadModalOpen: map.uploadModalOpen,
   isAuthenticated: auth.authenticated
 });
 
 const mapDispatchToProps = (dispatch) => {
   const { logout, login, openMenuModal, closeMenuModal } = authActions;
-  const { updateZoom, updateFeatures, optimisticSaveFeature, updateSelected, openWarningModal, closeWarningModal, openDeleteModal, closeDeleteModal } = mapActions;
+  const { updateZoom, updateFeatures, optimisticSaveFeature, updateSelected, openWarningModal, closeWarningModal, openDeleteModal, closeDeleteModal, openUploadModal, closeUploadModal } = mapActions;
   const { openNewEntryModal, closeNewEntryModal, openSaveEntryModal, closeSaveEntryModal } = entryActions;
   const actions = bindActionCreators({
     updateFeatures,
@@ -416,6 +429,8 @@ const mapDispatchToProps = (dispatch) => {
     closeWarningModal,
     openDeleteModal,
     closeDeleteModal,
+    openUploadModal,
+    closeUploadModal,
     updateZoom,
     logout,
     login,

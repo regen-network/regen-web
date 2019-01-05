@@ -22,7 +22,14 @@ const openDeleteModal = (feature) => ({type: OPEN_DELETE_MODAL, payload: { featu
 const CLOSE_DELETE_MODAL = "CLOSE_DELETE_MODAL";
 const closeDeleteModal = () => ({type: CLOSE_DELETE_MODAL});
 
-const constants = { UPDATE_FEATURES, OPTIMISTIC_SAVE_FEATURE, UPDATE_SELECTED, OPEN_WARNING_MODAL, CLOSE_WARNING_MODAL, UPDATE_ZOOM, OPEN_DELETE_MODAL, CLOSE_DELETE_MODAL };
-const actions =  { updateFeatures, optimisticSaveFeature, updateSelected, openWarningModal, closeWarningModal, updateZoom, openDeleteModal, closeDeleteModal };
+const OPEN_UPLOAD_MODAL= "OPEN_UPLOAD_MODAL";
+const openUploadModal = () => ({ type: OPEN_UPLOAD_MODAL });
+
+const CLOSE_UPLOAD_MODAL= "CLOSE_UPLOAD_MODAL";
+const closeUploadModal = () => ({type: CLOSE_UPLOAD_MODAL});
+
+
+const constants = { UPDATE_FEATURES, OPTIMISTIC_SAVE_FEATURE, UPDATE_SELECTED, OPEN_WARNING_MODAL, CLOSE_WARNING_MODAL, UPDATE_ZOOM, OPEN_DELETE_MODAL, CLOSE_DELETE_MODAL, OPEN_UPLOAD_MODAL, CLOSE_UPLOAD_MODAL};
+const actions =  { updateFeatures, optimisticSaveFeature, updateSelected, openWarningModal, closeWarningModal, updateZoom, openDeleteModal, closeDeleteModal, openUploadModal, closeUploadModal };
 
 export { constants, actions };

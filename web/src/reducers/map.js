@@ -6,6 +6,7 @@ let initialState = {
     zoom: false,
     warningModalOpen: false,
     deletePolygonModalOpen: false,
+    uploadModalOpen: false,
     deletedFeature: {}
 };
 
@@ -55,6 +56,15 @@ reducerMap[constants.OPEN_DELETE_MODAL] = (state, { payload }) => {
 
 reducerMap[constants.CLOSE_DELETE_MODAL] = (state, _) => {
     return {...state, deletePolygonModalOpen: false};
+};
+
+
+reducerMap[constants.OPEN_UPLOAD_MODAL] = (state, _ ) => {
+    return {...state, uploadModalOpen: true };
+};
+
+reducerMap[constants.CLOSE_UPLOAD_MODAL] = (state, _) => {
+    return {...state, uploadModalOpen: false };
 };
 
 export default (state = initialState, action) => {

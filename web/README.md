@@ -4,30 +4,30 @@
 2. Run `yarn start` to start the dev server
 3. Open your browser to `http://localhost:3000` and start editing.
 
-In addition, there is this to consider:
-
-Wild Geese
-By Mary Oliver
-
-You do not have to be good.
-You do not have to walk on your knees
-for a hundred miles through the desert repenting.
-You only have to let the soft animal of your body
-love what it loves.
-Tell me about despair, yours, and I will tell you mine.
-Meanwhile the world goes on.
-Meanwhile the sun and the clear pebbles of the rain
-are moving across the landscapes,
-over the prairies and the deep trees,
-the mountains and the rivers.
-Meanwhile the wild geese, high in the clean blue air,
-are heading home again.
-Whoever you are, no matter how lonely,
-the world offers itself to your imagination,
-calls to you like the wild geese, harsh and exciting 
-over and over announcing your place
-in the family of things.
-
-from Dream Work by Mary Oliver
-published by Atlantic Monthly Press
-© Mary Oliver
+In addition, there is this to consider:<br />
+<br />
+Wild Geese <br />
+By Mary Oliver <br />
+<br />
+You do not have to be good. <br />
+You do not have to walk on your knees <br />
+for a hundred miles through the desert repenting. <br />
+You only have to let the soft animal of your body <br />
+love what it loves. <br />
+Tell me about despair, yours, and I will tell you mine. <br />
+Meanwhile the world goes on. <br />
+Meanwhile the sun and the clear pebbles of the rain <br />
+are moving across the landscapes, <br />
+over the prairies and the deep trees, <br />
+the mountains and the rivers.<br />
+Meanwhile the wild geese, high in the clean blue air,<br />
+are heading home again.<br />
+Whoever you are, no matter how lonely,<br />
+the world offers itself to your imagination,<br />
+calls to you like the wild geese, harsh and exciting <br />
+over and over announcing your place<br />
+in the family of things.<br />
+<br />
+from Dream Work by Mary Oliver<br />
+published by Atlantic Monthly Press<br />
+© Mary Oliver<br />

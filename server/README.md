@@ -12,7 +12,7 @@
 
 
 ## Notes on upload endpoint
-
+```
   This /upload endpoint does a lot, so it's worth noting the processing steps up front in order
   to keep from going insane as you read the code.
 
@@ -22,16 +22,15 @@
     name = feature name (name of the polygon defined with GoogleEarth)
     geom = polygon coordinates in 2d postgis geom format 
 
-  The file data, a .kmz file, is a zipped file containing an XML/KML file called doc.kml.
+ The file data, a .kmz file, is a zipped file containing an XML/KML file called doc.kml.
   Foo.kmz
   ├── doc.kml
-
-  ETL pipeline:
-  stream - from raw uploaded file
-  ├── unzip the file, get the XML data (doc.kml)
-      ├── loop thru geojson features
-          ├── outer query - transform XML features to postgis, ST_GeomFromKML()
-              ├── inner query - INSERT INTO polygon...
+      ETL pipeline: stream - from raw uploaded file
+      ├── unzip the file, get the XML data (doc.kml)
+          ├── loop thru geojson features
+              ├── outer query - transform XML features to postgis, ST_GeomFromKML()
+                  ├── inner query - INSERT INTO polygon...
+```
 
   Steps:
   1. Unzips input file and streams to a buffer that contains the doc.xml dat,

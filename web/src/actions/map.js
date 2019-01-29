@@ -8,7 +8,7 @@ const OPTIMISTIC_SAVE_FEATURE = "OPTIMISTIC_SAVE_FEATURE";
 const optimisticSaveFeature = (id, name) => ({ type: OPTIMISTIC_SAVE_FEATURE, payload: { id, name }});
 
 const UPDATE_SELECTED = "UPDATE_SELECTED";
-const updateSelected = (selected) => ({ type: UPDATE_SELECTED, payload: { selected }});
+const updateSelected = (selected) => ({type: UPDATE_SELECTED, payload: { selected }});
 
 const OPEN_WARNING_MODAL = "OPEN_WARNING_MODAL";
 const openWarningModal = () => ({type: OPEN_WARNING_MODAL});
@@ -22,14 +22,34 @@ const openDeleteModal = (feature) => ({type: OPEN_DELETE_MODAL, payload: { featu
 const CLOSE_DELETE_MODAL = "CLOSE_DELETE_MODAL";
 const closeDeleteModal = () => ({type: CLOSE_DELETE_MODAL});
 
-const OPEN_UPLOAD_MODAL= "OPEN_UPLOAD_MODAL";
-const openUploadModal = () => ({ type: OPEN_UPLOAD_MODAL });
+const OPEN_UPLOAD_MODAL = "OPEN_UPLOAD_MODAL";
+const openUploadModal = () => ({type: OPEN_UPLOAD_MODAL});
 
-const CLOSE_UPLOAD_MODAL= "CLOSE_UPLOAD_MODAL";
+const CLOSE_UPLOAD_MODAL = "CLOSE_UPLOAD_MODAL";
 const closeUploadModal = () => ({type: CLOSE_UPLOAD_MODAL});
 
+const UPLOAD_KMZ = "UPLOAD_KMZ";
+const uploadKMZ = (data) => {
 
-const constants = { UPDATE_FEATURES, OPTIMISTIC_SAVE_FEATURE, UPDATE_SELECTED, OPEN_WARNING_MODAL, CLOSE_WARNING_MODAL, UPDATE_ZOOM, OPEN_DELETE_MODAL, CLOSE_DELETE_MODAL, OPEN_UPLOAD_MODAL, CLOSE_UPLOAD_MODAL};
-const actions =  { updateFeatures, optimisticSaveFeature, updateSelected, openWarningModal, closeWarningModal, updateZoom, openDeleteModal, closeDeleteModal, openUploadModal, closeUploadModal };
+	return (dispatch) => {
+		return fetch(`/api/upload`, {
+			credentials: 'same-origin',
+      method: 'POST',
+      body: data,
+		})
+		.then((res) => {
+      console.log(res);
+			return dispatch(closeUploadModal());
+		})
+    .catch((error) => {
+      console.log("Upload Err", error);
+			// TODO dispatch display error
+		});
+	};
+};
+
+
+const constants = { UPDATE_FEATURES, OPTIMISTIC_SAVE_FEATURE, UPDATE_SELECTED, OPEN_WARNING_MODAL, CLOSE_WARNING_MODAL, UPDATE_ZOOM, OPEN_DELETE_MODAL, CLOSE_DELETE_MODAL, OPEN_UPLOAD_MODAL, CLOSE_UPLOAD_MODAL, UPLOAD_KMZ};
+const actions =  { updateFeatures, optimisticSaveFeature, updateSelected, openWarningModal, closeWarningModal, updateZoom, openDeleteModal, closeDeleteModal, openUploadModal, closeUploadModal, uploadKMZ };
 
 export { constants, actions };

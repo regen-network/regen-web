@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './AddEntryModal.css';
 import { withTheme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Modal from '@material-ui/core/Modal';
-import TextField from '@material-ui/core/TextField';
 
 
 class UploadModal extends React.Component {
@@ -21,19 +20,20 @@ class UploadModal extends React.Component {
         data.append('file', this.uploadInput.files[0]);
         data.append('accessToken', this.props.accessToken);
 
-        fetch('http://localhost:5000/upload', {
-            method: 'POST',
-            body: data,
-        }).then((res) => {
-            this.props.refetch;
-        });
-        this.props.onClose();
+        this.props.uploadKMZ(data);
+
+        // fetch('/upload', {
+        //     method: 'POST',
+        //     body: data,
+        // }).then((res) => {
+        //     this.props.refetch;
+        // });
+        // this.props.onClose();
     }
 
-    componentWillMount() {
-        console.log("component iwll mount");
-        this.host = "localhost:5000";
-    }
+    // componentWillMount() {
+    //     this.host = "localhost:5000";
+    // }
 
     render() {
         const {open, onClose, theme, accessToken, refetch } = this.props;

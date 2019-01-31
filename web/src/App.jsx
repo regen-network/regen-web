@@ -225,7 +225,7 @@ class App extends Component {
     const worldview = [-60, -60, 60, 60]; // default mapbox worldview
     const { theme, map, user, actions, addModalOpen, saveModalOpen, uploadModalOpen, isAuthenticated, menuModalOpen } = this.props;
     const { features, selected, zoom, deletePolygonModalOpen, warningModalOpen, deletedFeature } = map;
-    const { login, updateZoom, openUploadModal } = actions;
+    const { login, updateZoom } = actions;
 
     const styles = {
       primaryColor: {
@@ -395,7 +395,7 @@ class App extends Component {
             <SaveEntryModal open={saveModalOpen} onClose={actions.closeSaveEntryModal} user={data && data.getCurrentUser} clearSelected={this.clearSelected} />
             <UnsavedPolygonWarning open={warningModalOpen} onClose={actions.closeWarningModal} logout={actions.logout} />
             <DeletePolygonConfirmation open={deletePolygonModalOpen} onClose={actions.closeDeleteModal} deletedFeature={deletedFeature} />
-            <UploadModal refetch={refetch()} accessToken={this.props.user.sub} open={uploadModalOpen} onClose={actions.closeUploadModal}/>
+            <UploadModal refetch={refetch()} accessToken={this.props.user.sub} uploadKMZ={actions.uploadKMZ} open={uploadModalOpen} onClose={actions.closeUploadModal}/>
           </View>
           );
         }}
@@ -415,7 +415,7 @@ const mapStateToProps = ({ map, entry, auth }) => ({
 
 const mapDispatchToProps = (dispatch) => {
   const { logout, login, openMenuModal, closeMenuModal } = authActions;
-  const { updateZoom, updateFeatures, optimisticSaveFeature, updateSelected, openWarningModal, closeWarningModal, openDeleteModal, closeDeleteModal, openUploadModal, closeUploadModal } = mapActions;
+  const { updateZoom, updateFeatures, optimisticSaveFeature, updateSelected, openWarningModal, closeWarningModal, openDeleteModal, closeDeleteModal, openUploadModal, closeUploadModal, uploadKMZ } = mapActions;
   const { openNewEntryModal, closeNewEntryModal, openSaveEntryModal, closeSaveEntryModal } = entryActions;
   const actions = bindActionCreators({
     updateFeatures,
@@ -435,7 +435,8 @@ const mapDispatchToProps = (dispatch) => {
     logout,
     login,
     openMenuModal,
-    closeMenuModal
+    closeMenuModal,
+    uploadKMZ
   }, dispatch);
   return { actions }
 };

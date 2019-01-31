@@ -30,7 +30,6 @@ const closeUploadModal = () => ({type: CLOSE_UPLOAD_MODAL});
 
 const UPLOAD_KMZ = "UPLOAD_KMZ";
 const uploadKMZ = (data) => {
-
 	return (dispatch) => {
 		return fetch(`/api/upload`, {
 			credentials: 'same-origin',
@@ -38,7 +37,6 @@ const uploadKMZ = (data) => {
       body: data,
 		})
 		.then((res) => {
-      console.log(res);
 			return dispatch(closeUploadModal());
 		})
     .catch((error) => {

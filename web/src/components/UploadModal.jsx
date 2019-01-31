@@ -21,22 +21,11 @@ class UploadModal extends React.Component {
         data.append('accessToken', this.props.accessToken);
 
         this.props.uploadKMZ(data);
-
-        // fetch('/upload', {
-        //     method: 'POST',
-        //     body: data,
-        // }).then((res) => {
-        //     this.props.refetch;
-        // });
-        // this.props.onClose();
+        this.props.refetch();
     }
 
-    // componentWillMount() {
-    //     this.host = "localhost:5000";
-    // }
-
     render() {
-        const {open, onClose, theme, accessToken, refetch } = this.props;
+        const {open, onClose, theme } = this.props;
 
         const styles = {
           primaryColor: {

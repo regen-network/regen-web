@@ -10,6 +10,11 @@ class UploadModal extends React.Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+          fileName: "",
+          uploadInstructions: "Select a .kmz file."
+        };
+
         this.handleUpload = this.handleUpload.bind(this);
     }
 
@@ -44,40 +49,43 @@ class UploadModal extends React.Component {
               <div className="modal-add-entry">
                 <div style={{margin: "25px"}}>
                   <Typography variant="title" style={{fontFamily: styles.font}}>
-                    {"Select a .kmz file."}
+                    {this.state.fileName ? `Click Upload to import ${this.state.fileName}` : "Select a .kmz file."}
                   </Typography>
+                    <input
+                     accept=".kmz"
+                     style={{ display: 'none' }}
+                     id="button-file"
+                     type="file"
+                     name={this.Input}
+                     ref={(ref) => {
+                       this.uploadInput = ref; }}
+                     onChange={() => {
+                       if (this.uploadInput && this.uploadInput.files.length) {
+                         this.setState({fileName: this.uploadInput.files[0].name})
+                       }
+                     }}
+                    />
+                    <div style={{display: 'flex', justifyContent: 'space-around'}}>
+                       <label htmlFor="button-file">
+                         <Button component="span"
+                          style={{
+                            marginTop: "25px",
+                            backgroundColor: styles.primaryColor.backgroundColor,
+                            fontFamily: styles.font,
+                            color: styles.primaryColor.color}}>
+                           Choose
+                         </Button>
+                       </label>
 
-                     <input
-                       accept=".kmz"
-                       style={{ display: 'none' }}
-                       id="button-file"
-                       type="file"
-                       name= {this.Input}
-                       ref={(ref) => { this.uploadInput = ref; }}
-                     />
-                       <div style={{display: 'flex', justifyContent: 'space-around'}}>
-                     <label htmlFor="button-file">
-                       <Button  component="span"
-                        style={{
-                          marginTop: "25px",
-                          backgroundColor: styles.primaryColor.backgroundColor,
-                          fontFamily: styles.font,
-                          color: styles.primaryColor.color}}>
-                         Choose
+                       <Button type="submit" onClick={this.handleUpload}
+                          style={{
+                            marginTop: "25px",
+                            backgroundColor: styles.primaryColor.backgroundColor,
+                            fontFamily: styles.font,
+                            color: styles.primaryColor.color}}>
+                         Upload
                        </Button>
-                     </label>
-
-                     <Button type="submit" onClick={this.handleUpload}
-                        style={{
-                          marginTop: "25px",
-                          backgroundColor: styles.primaryColor.backgroundColor,
-                          fontFamily: styles.font,
-                          color: styles.primaryColor.color}}>
-                       Upload
-                     </Button>
-                     </div>
-
-
+                  </div>
                 </div>
               </div>
             </Modal>

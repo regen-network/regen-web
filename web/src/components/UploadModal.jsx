@@ -11,8 +11,7 @@ class UploadModal extends React.Component {
         super(props);
 
         this.state = {
-          fileName: "",
-          uploadInstructions: "Select a .kmz file."
+          fileName: ""
         };
 
         this.handleUpload = this.handleUpload.bind(this);
@@ -76,7 +75,7 @@ class UploadModal extends React.Component {
                            Choose
                          </Button>
                        </label>
-
+                       {this.state.fileName ?
                        <Button type="submit" onClick={this.handleUpload}
                           style={{
                             marginTop: "25px",
@@ -84,7 +83,7 @@ class UploadModal extends React.Component {
                             fontFamily: styles.font,
                             color: styles.primaryColor.color}}>
                          Upload
-                       </Button>
+                       </Button> : null }
                   </div>
                 </div>
               </div>

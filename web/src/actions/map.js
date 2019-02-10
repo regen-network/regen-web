@@ -36,12 +36,16 @@ const uploadKMZ = (data) => {
       method: 'POST',
       body: data,
 		})
-		.then((res) => {
-			return dispatch(closeUploadModal());
+		.then((res) => res.json())
+		.then((resData) => {
+			if (resData.status === 200) {
+				return dispatch(closeUploadModal());
+			}
+			// TODO dispatch display error
+			console.log("Upload Err", resData);
 		})
     .catch((error) => {
-      console.log("Upload Err", error);
-			// TODO dispatch display error
+      console.log("Catch Upload Err", error);
 		});
 	};
 };

@@ -115,8 +115,8 @@ app.post('/api/upload', (req, res) => {
                         // 5. db connect
                         pgPool.connect((err, client, release) => {
                             if (err) {
-                                res.sendStatus(500);
-                                console.error('Error acquiring postgres client', err.stack);
+                                res.status(500).json({message: 'Error connecting to the database. Please try again later.'});
+                                console.error(err);
                             }
                             else {
                                 const xml = new xmldom.XMLSerializer();
@@ -131,8 +131,8 @@ app.post('/api/upload', (req, res) => {
                                     // 6c. use postgis to convert the XML string to binary postgis geom format
                                     client.query('SELECT ST_GeomFromKML($1)', [geomString], (err, qres) => {
                                         if (err) {
-                                            res.sendStatus(500);
-                                            console.error('Error getting geometry from KML input file.', err.stack);
+                                            res.status(500).json({message: 'Error getting geometry from KML input file.'});
+                                            console.error(err);
                                         }
                                         else {
                                             const geom = qres.rows[0].st_geomfromkml; // the binary geom data that the query needs
@@ -140,8 +140,8 @@ app.post('/api/upload', (req, res) => {
                                             // Note that this INSERT query is nested within the SELECT above.
                                             client.query('INSERT INTO polygon(name,geom,owner) VALUES($1,ST_Force2D($2),$3)', [name,geom,owner], (err, qres) => {
                                                 if (err) {
-                                                    res.sendStatus(500);
-                                                    console.error('Error on INSERT', err.stack);
+                                                    res.status(500).json({message: 'Error saving data, please try again later.'});
+                                                    console.error(err);
                                                 }
                                                 else {
                                                     // 7. all good, send 200

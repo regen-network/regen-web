@@ -7,7 +7,8 @@ let initialState = {
     warningModalOpen: false,
     deletePolygonModalOpen: false,
     uploadModalOpen: false,
-    deletedFeature: {}
+    deletedFeature: {},
+    uploadError: ""
 };
 
 const reducerMap = {};
@@ -64,7 +65,12 @@ reducerMap[constants.OPEN_UPLOAD_MODAL] = (state, _ ) => {
 };
 
 reducerMap[constants.CLOSE_UPLOAD_MODAL] = (state, _) => {
-    return {...state, uploadModalOpen: false };
+    return {...state, uploadModalOpen: false, uploadError: "" };
+};
+
+reducerMap[constants.UPDATE_UPLOAD_ERROR] = (state, { payload }) => {
+    const { message } = payload;
+	  return {...state, uploadError: message};
 };
 
 export default (state = initialState, action) => {

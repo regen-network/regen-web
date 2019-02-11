@@ -86,7 +86,7 @@ app.post('/api/login', (req, res) => {
   } else res.sendStatus(200);
 });
 
-app.post('/upload', (req, res) => {
+app.post('/api/upload', (req, res) => {
     if (!req.files)
         return res.status(400).send('No files were uploaded.\n');
 
@@ -97,7 +97,7 @@ app.post('/upload', (req, res) => {
     });
 
     stream.push(uploadFile.data);
-// 1. unzip the file
+    // 1. unzip the file
     stream.pipe(unzipper.Parse())
         .pipe(etl.map(entry => {
             if (entry.path == "doc.kml")
@@ -105,43 +105,47 @@ app.post('/upload', (req, res) => {
                 .buffer()
                 .then(function(docKml) {
                     if (req.body && req.body.accessToken) {
-// 2. get the owner
+                        // 2. get the owner
                         const owner = req.body.accessToken;
-// 3. XML to DOM
+                        // 3. XML to DOM
                         const dom = (new xmldom.DOMParser()).parseFromString(docKml.toString('utf8'),'text/xml');
-// 4. get the features
+                        // 4. get the features
                         const featuresCollection = togeojson.kml(dom);
                         const features = featuresCollection && featuresCollection.features;
-// 5. db connect
+                        // 5. db connect
                         pgPool.connect((err, client, release) => {
-                            if(err) {
-                                res.sendStatus(500);
-                                console.error('Error acquiring postgres client', err.stack);
-                            }else{
+                            if (err) {
+                                res.status(500).json({message: 'Error connecting to the database. Please try again later.'});
+                                console.error(err);
+                            }
+                            else {
                                 const xml = new xmldom.XMLSerializer();
-// 6. loop thru features
+                                // 6. loop thru features
                                 let i = 0; // polygon counter
                                 features.forEach((feature) => {
-// 6a. get name
+                                    // 6a. get name
                                     const name = feature && feature.properties && feature.properties.name;
-// 6b. get polygon
+                                    // 6b. get polygon
                                     const geomElem = dom.getElementsByTagName('Polygon')[i++];
                                     const geomString  = xml.serializeToString(geomElem);
-// 6c. use postgis to convert the XML string to binary postgis geom format
+                                    // 6c. use postgis to convert the XML string to binary postgis geom format
                                     client.query('SELECT ST_GeomFromKML($1)', [geomString], (err, qres) => {
-                                        if(err) {
-                                            res.sendStatus(500);
-                                            console.error('Error getting geometry from KML input file.', err.stack);
-                                        }else{
+                                        if (err) {
+                                            res.status(500).json({
+                                              message: 'Error getting geometry from KML input file. Please make sure your file contains only polygons.'});
+                                            console.error(err);
+                                        }
+                                        else {
                                             const geom = qres.rows[0].st_geomfromkml; // the binary geom data that the query needs
-// 6d. insert, use ST_Force2D() to get rid of the Z-dimension in the KML
-// Note that this INSERT query is nested within the SELECT above.
+                                            // 6d. insert, use ST_Force2D() to get rid of the Z-dimension in the KML
+                                            // Note that this INSERT query is nested within the SELECT above.
                                             client.query('INSERT INTO polygon(name,geom,owner) VALUES($1,ST_Force2D($2),$3)', [name,geom,owner], (err, qres) => {
-                                                if(err) {
-                                                    res.sendStatus(500);
-                                                    console.error('Error on INSERT', err.stack);
-                                                }else{
-// 7. all good, send 200
+                                                if (err) {
+                                                    res.status(500).json({message: 'Error saving data, please try again later.'});
+                                                    console.error(err);
+                                                }
+                                                else {
+                                                    // 7. all good, send 200
                                                     res.sendStatus(200);
                                                 }
                                             });
@@ -149,13 +153,13 @@ app.post('/upload', (req, res) => {
                                     });
                                 }); //forEach
                             }
-// 8. done with db
+                            // 8. done with db
                             release();
                         })
                     }
                 });
             else
-// from unzipper, returns an empty stream that provides 'error' and 'finish' events. Not yet implemented.
+                // from unzipper, returns an empty stream that provides 'error' and 'finish' events. Not yet implemented.
                 entry.autodrain();
         }));
 });
@@ -174,7 +178,7 @@ app.use(postgraphile(pgPool, 'public', {
       // );
       return settings;
     } else return { role: 'guest' };
-   } 
+   }
 }));
 
 

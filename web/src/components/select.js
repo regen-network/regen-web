@@ -1,5 +1,4 @@
 import React from 'react';
-import Select from 'react-select';
 import CreatableSelect from 'react-select/lib/Creatable';
 
 export default class SingleSelect extends React.Component {

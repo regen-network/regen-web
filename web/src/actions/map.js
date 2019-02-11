@@ -28,6 +28,9 @@ const openUploadModal = () => ({type: OPEN_UPLOAD_MODAL});
 const CLOSE_UPLOAD_MODAL = "CLOSE_UPLOAD_MODAL";
 const closeUploadModal = () => ({type: CLOSE_UPLOAD_MODAL});
 
+const UPDATE_UPLOAD_ERROR = "UPDATE_UPLOAD_ERROR";
+const updateUploadError = (message) => ({type: UPDATE_UPLOAD_ERROR, payload: { message }});
+
 const UPLOAD_KMZ = "UPLOAD_KMZ";
 const uploadKMZ = (data) => {
 	return (dispatch) => {
@@ -41,8 +44,7 @@ const uploadKMZ = (data) => {
 			if (resData.status === 200) {
 				return dispatch(closeUploadModal());
 			}
-			// TODO dispatch display error
-			console.log("Upload Err", resData);
+			return dispatch(updateUploadError(resData.message));
 		})
     .catch((error) => {
       console.log("Catch Upload Err", error);
@@ -51,7 +53,7 @@ const uploadKMZ = (data) => {
 };
 
 
-const constants = { UPDATE_FEATURES, OPTIMISTIC_SAVE_FEATURE, UPDATE_SELECTED, OPEN_WARNING_MODAL, CLOSE_WARNING_MODAL, UPDATE_ZOOM, OPEN_DELETE_MODAL, CLOSE_DELETE_MODAL, OPEN_UPLOAD_MODAL, CLOSE_UPLOAD_MODAL, UPLOAD_KMZ};
-const actions =  { updateFeatures, optimisticSaveFeature, updateSelected, openWarningModal, closeWarningModal, updateZoom, openDeleteModal, closeDeleteModal, openUploadModal, closeUploadModal, uploadKMZ };
+const constants = { UPDATE_FEATURES, OPTIMISTIC_SAVE_FEATURE, UPDATE_SELECTED, OPEN_WARNING_MODAL, CLOSE_WARNING_MODAL, UPDATE_ZOOM, OPEN_DELETE_MODAL, CLOSE_DELETE_MODAL, OPEN_UPLOAD_MODAL, CLOSE_UPLOAD_MODAL, UPLOAD_KMZ, UPDATE_UPLOAD_ERROR};
+const actions =  { updateFeatures, optimisticSaveFeature, updateSelected, openWarningModal, closeWarningModal, updateZoom, openDeleteModal, closeDeleteModal, openUploadModal, closeUploadModal, uploadKMZ, updateUploadError };
 
 export { constants, actions };

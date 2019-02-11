@@ -224,7 +224,7 @@ class App extends Component {
   render() {
     const worldview = [-60, -60, 60, 60]; // default mapbox worldview
     const { theme, map, user, actions, addModalOpen, saveModalOpen, uploadModalOpen, isAuthenticated, menuModalOpen } = this.props;
-    const { features, selected, zoom, deletePolygonModalOpen, warningModalOpen, deletedFeature } = map;
+    const { features, selected, zoom, deletePolygonModalOpen, warningModalOpen, deletedFeature, uploadError } = map;
     const { login, updateZoom } = actions;
 
     const styles = {
@@ -395,7 +395,7 @@ class App extends Component {
             <SaveEntryModal open={saveModalOpen} onClose={actions.closeSaveEntryModal} user={data && data.getCurrentUser} clearSelected={this.clearSelected} />
             <UnsavedPolygonWarning open={warningModalOpen} onClose={actions.closeWarningModal} logout={actions.logout} />
             <DeletePolygonConfirmation open={deletePolygonModalOpen} onClose={actions.closeDeleteModal} deletedFeature={deletedFeature} />
-            <UploadModal refetch={refetch} accessToken={this.props.user.sub} uploadKMZ={actions.uploadKMZ} open={uploadModalOpen} onClose={actions.closeUploadModal}/>
+            <UploadModal refetch={refetch} accessToken={this.props.user.sub} uploadKMZ={actions.uploadKMZ} uploadError={uploadError} open={uploadModalOpen} onClose={actions.closeUploadModal}/>
           </View>
           );
         }}

@@ -29,15 +29,16 @@ class UploadModal extends React.Component {
     }
 
     render() {
-        const {open, onClose, theme } = this.props;
+        const {open, onClose, theme, uploadError } = this.props;
 
         const styles = {
           primaryColor: {
-          backgroundColor: theme.palette.primary.main,
-          color: theme.palette.common.white,
-        },
+            backgroundColor: theme.palette.primary.main,
+            color: theme.palette.common.white,
+          },
           accent: {
-            blue: theme.palette.accent.blue
+            blue: theme.palette.accent.blue,
+            red: theme.palette.accent.red
           },
           font: theme.title.fontFamily
         };
@@ -49,6 +50,9 @@ class UploadModal extends React.Component {
                 <div style={{margin: "25px"}}>
                   <Typography variant="title" style={{fontFamily: styles.font}}>
                     {this.state.fileName ? `Click Upload to import ${this.state.fileName}` : "Select a .kmz file."}
+                  </Typography>
+                  <Typography variant="subheading" style={{fontFamily: styles.font, color: styles.accent.red}}>
+                    {uploadError || null}
                   </Typography>
                     <input
                      accept=".kmz"

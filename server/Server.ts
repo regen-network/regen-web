@@ -131,7 +131,8 @@ app.post('/api/upload', (req, res) => {
                                     // 6c. use postgis to convert the XML string to binary postgis geom format
                                     client.query('SELECT ST_GeomFromKML($1)', [geomString], (err, qres) => {
                                         if (err) {
-                                            res.status(500).json({message: 'Error getting geometry from KML input file.'});
+                                            res.status(500).json({
+                                              message: 'Error getting geometry from KML input file. Please make sure your file contains only polygons.'});
                                             console.error(err);
                                         }
                                         else {

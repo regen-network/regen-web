@@ -87,7 +87,13 @@ class SavePolygonModal extends Component {
                       currentFeature={currentFeature}
                       updateStage={this.updateStage}
                       clearEntry={clearEntry}
-                      onClose={onClose} />;
+                      onClose={() => {
+                        this.setState({
+                          name: "",
+                          stage: 0
+                        });
+                        onClose();
+                      }} />;
               default:
                 console.log("err in stages");
             }

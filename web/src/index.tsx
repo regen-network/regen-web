@@ -48,7 +48,7 @@ async function init() {
     history.replace({pathname, search, state});
   }
   else {
-    getProfile((err, profile) => {
+    getProfile((err: any, profile: any) => {
         err ? console.log(err) : store.dispatch(loginSuccess(profile));
     });
     // check local storage for feature

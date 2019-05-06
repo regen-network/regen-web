@@ -18,11 +18,16 @@ import { Readable } from 'stream';
 
 const app = express();
 
-app.use(express.static(path.join(__dirname, '../web/build')));
 app.use(fileUpload());
 app.use(cors());
 
-app.get('/', function (req, res) {
+app.use('/storybook/', express.static(path.join(__dirname, '../web/build-storybook')));
+app.get('/storybook/*', function (req, res) {
+  res.sendFile(path.join(__dirname, '../web/build-storybook', 'index.html'));
+});
+
+app.use('/', express.static(path.join(__dirname, '../web/build')));
+app.get('/*', function (req, res) {
   res.sendFile(path.join(__dirname, '../web/build', 'index.html'));
 });
 

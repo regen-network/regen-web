@@ -4,7 +4,6 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
-import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
 import { withTheme } from '@material-ui/core/styles';
 import PolygonIcon from './polygonIcon';

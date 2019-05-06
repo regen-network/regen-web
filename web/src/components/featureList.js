@@ -8,6 +8,7 @@ import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
 import { withTheme } from '@material-ui/core/styles';
 import PolygonIcon from './polygonIcon';
+import FeatureListItem from './FeatureListItem';
 
 const FeatureList = withTheme()(({ features, selected, polygons, toggleSelect, theme, styles, openSaveEntryModal, openDeletePolygonModal }) => {
 
@@ -32,7 +33,6 @@ const FeatureList = withTheme()(({ features, selected, polygons, toggleSelect, t
               theme={theme}
               selected={selected[feature.id]}
               key={feature.id}
-              styles={styles}
               openSaveEntryModal={openSaveEntryModal}
               toggleSelectThis={() => {
                 toggleSelect(feature.id);
@@ -90,30 +90,6 @@ const SavedFeatureItem = ({ item, selected, toggleSelectThis, theme, styles, ope
         null
       }
     </ListItem>
-  );
-}
-
-const FeatureListItem = ({ item, selected, toggleSelectThis, theme, styles, openSaveEntryModal }) => {
-  const style = selected ? {backgroundColor: theme.palette.primary.main} : {};
-
-  return (
-     <ListItem dense button style={style} key={item.id} onClick={toggleSelectThis}>
-        <PolygonIcon polygon={item.geometry}/>
-        <ListItemText
-          disableTypography
-          primary={<Typography style={{fontSize: styles.fontSize}}>{"Unsaved Plot"}</Typography>} />
-        <Button
-          style={{
-            backgroundColor: styles.primaryColor.backgroundColor,
-            fontFamily: styles.fontFamily,
-            color: styles.primaryColor.color}}
-          onClick={(e) => {
-            e.stopPropagation();
-            openSaveEntryModal(item);
-          }}>
-          Save
-        </Button>
-      </ListItem>
   );
 }
 

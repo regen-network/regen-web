@@ -21,9 +21,9 @@ const app = express();
 app.use(fileUpload());
 app.use(cors());
 
-app.use('/storybook/', express.static(path.join(__dirname, '../web/build-storybook')));
-app.get('/storybook/*', function (req, res) {
-  res.sendFile(path.join(__dirname, '../web/build-storybook', 'index.html'));
+app.use('/.storybook/', express.static(path.join(__dirname, '../web/build/storybook')));
+app.get('/.storybook/*', function (req, res) {
+  res.sendFile(path.join(__dirname, '../web/build/storybook', 'index.html'));
 });
 
 app.use('/', express.static(path.join(__dirname, '../web/build')));

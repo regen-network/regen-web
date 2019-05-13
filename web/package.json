@@ -57,13 +57,11 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && build-storybook -s public -o build/storybook -c .storybook",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "flow": "flow",
-    "storybook": "start-storybook -p 9009 -s public",
-    "build-storybook": "build-storybook -s public",
-    "deploy-storybook": "build-storybook -c .storybook -o build-storybook"
+    "storybook": "start-storybook -p 9009 -s public"
   },
   "proxy": "http://localhost:5000",
   "browserslist": {

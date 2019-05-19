@@ -7,6 +7,10 @@
     "@mapbox/mapbox-gl-geocoder": "^2.3.0",
     "@material-ui/core": "^1.4.2",
     "@material-ui/icons": "^2.0.0",
+    "@storybook/addon-actions": "^5.0.11",
+    "@storybook/addon-links": "^5.0.11",
+    "@storybook/addons": "^5.0.11",
+    "@storybook/react": "^5.0.11",
     "@turf/turf": "^5.1.6",
     "@types/graphql": "^14.2.0",
     "@types/history": "^4.7.2",
@@ -18,6 +22,7 @@
     "apollo-boost": "^0.1.12",
     "apollo-link-http": "^1.5.4",
     "auth0-js": "^9.7.3",
+    "babel-loader": "^8.0.6",
     "classnames": "^2.2.6",
     "flow-bin": "^0.77.0",
     "graphql": "^0.13.2",
@@ -28,7 +33,7 @@
     "ol": "^5.1.3",
     "ol-mapbox-style": "^3.0.1",
     "prop-types": "^15.6.2",
-    "react": "^16.4.1",
+    "react": "^16.8.6",
     "react-apollo": "^2.1.9",
     "react-art": "^16.4.1",
     "react-datepicker": "^1.6.0",
@@ -45,13 +50,10 @@
     "redux-devtools-extension": "^2.13.5",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
-    "typescript": "^3.4.5",
-    "@storybook/react": "^5.0.11",
-    "@storybook/addon-actions": "^5.0.11",
-    "@storybook/addon-links": "^5.0.11",
-    "@storybook/addons": "^5.0.11"
+    "typescript": "^3.4.5"
   },
   "devDependencies": {
+    "@babel/core": "^7.4.4"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -73,5 +75,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "engines": {
+    "node": ">=11.8.0"
   }
 }

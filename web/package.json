@@ -22,7 +22,6 @@
     "apollo-boost": "^0.1.12",
     "apollo-link-http": "^1.5.4",
     "auth0-js": "^9.7.3",
-    "babel-loader": "^8.0.6",
     "classnames": "^2.2.6",
     "flow-bin": "^0.77.0",
     "graphql": "^0.13.2",
@@ -77,6 +76,6 @@
     ]
   },
   "engines": {
-    "node": ">=11.8.0"
+    "node": ">=8.11.4"
   }
 }

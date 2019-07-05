@@ -1,11 +1,10 @@
 import React from 'react';
-import { withTheme } from '@material-ui/core/styles';
 import * as turf from '@turf/turf';
 
 class PolygonIcon extends React.Component {
 
   render() {
-    const { theme, polygon } = this.props;
+    const { polygon } = this.props;
     const bbox = turf.bbox(polygon);
     const [minX, minY, maxX, maxY] = bbox;
     const center = turf.center(polygon);
@@ -21,19 +20,15 @@ class PolygonIcon extends React.Component {
     const viewbox = `${minX - cx} ${minY - cy} ${boxWidth} ${boxHeight}`;
     const transform = `scale(1,-1)`
 
-    const styles = {
-      color: theme.palette.accent.yellow
-    };
-
     return (
       <div>
         <svg viewBox={viewbox} width="50" height="50" overflow="visible" xmlns="http://www.w3.org/2000/svg">
           <polygon points={coordinates} transform={transform}
-                fill={styles.color} stroke="none" />
+                fill={"#ffc433"} stroke="none" />
         </svg>
       </div>
     );
   }
 }
 
-export default withTheme()(PolygonIcon);
+export default PolygonIcon;

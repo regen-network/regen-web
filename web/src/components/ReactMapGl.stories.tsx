@@ -24,7 +24,7 @@ class Map extends Component {
         height="100%"
         mapStyle="mapbox://styles/mapbox/satellite-streets-v10"
         {...this.state.viewport} onViewportChange={(viewport) => this.setState({viewport})}
-        mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
+        mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
       >
         {this.props.children}
       </ReactMapGL>

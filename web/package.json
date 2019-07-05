@@ -65,7 +65,7 @@
     "build": "react-scripts build && build-storybook -o build/.storybook",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "storybook": "start-storybook"
+    "storybook": "start-storybook -p 9090"
   },
   "proxy": "http://localhost:5000",
   "browserslist": {

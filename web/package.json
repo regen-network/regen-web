@@ -19,6 +19,7 @@
     "@types/node": "^11.13.9",
     "@types/react": "^16.8.15",
     "@types/react-dom": "^16.8.4",
+    "@types/react-map-gl": "^5.0.0",
     "@types/react-redux": "^7.0.8",
     "apollo-boost": "^0.1.12",
     "apollo-link-http": "^1.5.4",
@@ -61,10 +62,10 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build && build-storybook -s public -o build/storybook -c .storybook",
+    "build": "react-scripts build && build-storybook -o build/.storybook",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "storybook": "start-storybook -p 9009 -s public"
+    "storybook": "start-storybook"
   },
   "proxy": "http://localhost:5000",
   "browserslist": {

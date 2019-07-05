@@ -3192,6 +3192,16 @@
   dependencies:
     "@babel/types" "^7.3.0"
 
+"@types/geojson@*":
+  version "7946.0.7"
+  resolved "https://registry.yarnpkg.com/@types/geojson/-/geojson-7946.0.7.tgz#c8fa532b60a0042219cdf173ca21a975ef0666ad"
+  integrity sha512-wE2v81i4C4Ol09RtsWFAqg3BUitWbHSpSlIo+bNdsCJijO9sjme+zm+73ZMCa/qMC8UEERxzGbvmr1cffo2SiQ==
+
+"@types/gl-matrix@*":
+  version "2.4.5"
+  resolved "https://registry.yarnpkg.com/@types/gl-matrix/-/gl-matrix-2.4.5.tgz#80630d88fb74ff8897a2a2855a8a700e6ee19d3e"
+  integrity sha512-0L8Mq1+oaIW0oVzGUDbSW+HnTjCNb4CmoIQE5BkoHt/A7x20z0MJ1PnwfH3atty/vbWLGgvJwVu2Mz3SKFiEFw==
+
 "@types/graphql@^14.2.0":
   version "14.2.2"
   resolved "https://registry.yarnpkg.com/@types/graphql/-/graphql-14.2.2.tgz#10f197e6f8559c11b16d630c5e9c10c3c8e61c5e"
@@ -3250,6 +3260,13 @@
     csstype "^2.0.0"
     indefinite-observable "^1.0.1"
 
+"@types/mapbox-gl@*":
+  version "0.51.9"
+  resolved "https://registry.yarnpkg.com/@types/mapbox-gl/-/mapbox-gl-0.51.9.tgz#1be6e73907f81a8210b6ac2bc9eae82b98d5c25c"
+  integrity sha512-pIosJM1usb40n1Y0xTxdDlGt5ORAr9WcOCYc45vJZEwkuCWzgXJ0JxuLEZVEaM/lMTkPZK8NhsuHwJIzwX0waw==
+  dependencies:
+    "@types/geojson" "*"
+
 "@types/node@*", "@types/node@>=6":
   version "12.0.12"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-12.0.12.tgz#cc791b402360db1eaf7176479072f91ee6c6c7ca"
@@ -3276,6 +3293,16 @@
   integrity sha512-eIRpEW73DCzPIMaNBDP5pPIpK1KXyZwNgfxiVagb5iGiz6da+9A5hslSX6GAQKdO7SayVCS/Fr2kjqprgAvkfA==
   dependencies:
     "@types/react" "*"
+
+"@types/react-map-gl@^5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@types/react-map-gl/-/react-map-gl-5.0.0.tgz#fc1c14966dd62ebf879b0727fb409a90163314a2"
+  integrity sha512-iy/fdGQy6l6A6lE/h+rUAeIus8GSopIpgXoeVNv/uYIosfpaytHCxU1VLwRj4GvLOzBmgsgJfHiirbROdljOuQ==
+  dependencies:
+    "@types/geojson" "*"
+    "@types/mapbox-gl" "*"
+    "@types/react" "*"
+    "@types/viewport-mercator-project" "*"
 
 "@types/react-redux@^7.0.8":
   version "7.1.1"
@@ -3336,6 +3363,13 @@
     "@types/node" "*"
     "@types/unist" "*"
     "@types/vfile-message" "*"
+
+"@types/viewport-mercator-project@*":
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/@types/viewport-mercator-project/-/viewport-mercator-project-6.1.0.tgz#df6964a08daa18e24761e38320d34429f09898cf"
+  integrity sha512-wbdVb9Uvb9dX/EAtugpD3tMqsBVFQqVFYNdK5B7wUhZHK8G2gMWd+wq14JEn2h96Yq4trDQrpWVna8S8FTLM8A==
+  dependencies:
+    "@types/gl-matrix" "*"
 
 "@types/webpack-env@*":
   version "1.13.9"

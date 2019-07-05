@@ -48,7 +48,7 @@ storiesOf('Maps|ReactMapGL', module)
   .addDecorator(story =>
     <Map>{story()}</Map>
   )
-  .add("default", () => null)
+  .add("default", () => [])
   .add("marker", () => <Marker latitude={37.8} longitude={-122.5} key={0}>
     <svg
       height={size}

@@ -1,4 +1,4 @@
 {
-  "packages": ["web", "server"],
+  "packages": ["web"],
   "version": "0.0.0"
 }

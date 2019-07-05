@@ -8,6 +8,7 @@
     "@material-ui/core": "^1.4.2",
     "@material-ui/icons": "^2.0.0",
     "@storybook/addon-actions": "^5.0.11",
+    "@storybook/addon-info": "^5.1.9",
     "@storybook/addon-links": "^5.0.11",
     "@storybook/addons": "^5.0.11",
     "@storybook/react": "^5.0.11",
@@ -37,6 +38,7 @@
     "react-art": "^16.4.1",
     "react-datepicker": "^1.6.0",
     "react-dom": "^16.4.1",
+    "react-map-gl": "^5.0.3",
     "react-mapbox-gl": "^3.8.0",
     "react-modal": "^3.5.1",
     "react-native-web": "^0.8.9",
@@ -52,14 +54,16 @@
     "typescript": "^3.4.5"
   },
   "devDependencies": {
-    "@babel/core": "^7.4.4"
+    "@babel/core": "^7.5.0",
+    "@types/storybook__react": "^4.0.2",
+    "babel-loader": "^8.0.6",
+    "react-docgen-typescript-loader": "^3.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build && build-storybook -s public -o build/storybook -c .storybook",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "flow": "flow",
     "storybook": "start-storybook -p 9009 -s public"
   },
   "proxy": "http://localhost:5000",

@@ -24,7 +24,8 @@ class Map extends Component {
         height="100%"
         mapStyle="mapbox://styles/mapbox/satellite-streets-v10"
         {...this.state.viewport} onViewportChange={(viewport) => this.setState({viewport})}
-        mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
+        mapboxApiAccessToken={'pk.eyJ1IjoiYWFyb25jLXJlZ2VuIiwiYSI6ImNqeHEydjF5ZjAxN2IzbW84aTE5M2V5c2sifQ.NPkqPbEWD7reqYbx_0jf3A'
+        || process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
       >
         {this.props.children}
       </ReactMapGL>
@@ -58,6 +59,6 @@ storiesOf('Maps|ReactMapGL', module)
         transform: `translate(${-size / 2}px,${-size}px)`
       }}
     >
-      <path d={ICON} />
+      <path d={ICON}/>
     </svg>
   </Marker>)

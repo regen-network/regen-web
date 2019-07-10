@@ -62,10 +62,11 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build && build-storybook -o build/.storybook",
+    "build": "react-scripts build && yan build-storybook",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "storybook": "start-storybook -p 9090"
+    "storybook": "start-storybook -p 9090",
+    "build-storybook": "build-storybook -o build/.storybook"
   },
   "proxy": "http://localhost:5000",
   "browserslist": {

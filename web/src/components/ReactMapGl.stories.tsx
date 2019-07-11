@@ -42,12 +42,24 @@ const pinStyle = {
 
 const size = 20;
 
-storiesOf('Components|Maps/ReactMapGL', module)
+storiesOf('Components|Maps/react-map-gl', module)
   .addDecorator(story =>
     <Map>{story()}</Map>
   )
   .add("default", () => [])
   .add("marker", () => <Marker latitude={37.8} longitude={-122.5} key={0}>
+    <svg
+      height={size}
+      viewBox="0 0 24 24"
+      style={{
+        ...pinStyle,
+        transform: `translate(${-size / 2}px,${-size}px)`
+      }}
+    >
+      <path d={ICON}/>
+    </svg>
+  </Marker>)
+  .add("polygon", () => <Marker latitude={37.8} longitude={-122.5} key={0}>
     <svg
       height={size}
       viewBox="0 0 24 24"

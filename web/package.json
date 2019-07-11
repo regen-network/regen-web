@@ -65,12 +65,14 @@
     "@storybook/addons": "^5.0.11",
     "@storybook/react": "^5.0.11",
     "@types/react-intl": "^2.3.18",
+    "@types/storybook__addon-knobs": "^5.0.2",
     "@types/storybook__addon-storyshots": "^4.0.1",
     "@types/storybook__react": "^4.0.2",
     "babel-loader": "^8.0.6",
     "react-docgen-typescript-loader": "^3.1.0",
     "storybook-addon-intl": "^2.4.1",
-    "storybook-addon-material-ui": "^0.9.0-alpha.20"
+    "storybook-addon-material-ui": "^0.9.0-alpha.20",
+    "paths.macro": "latest"
   },
   "scripts": {
     "start": "react-scripts start",

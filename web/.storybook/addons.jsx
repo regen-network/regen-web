@@ -6,3 +6,4 @@ require("@storybook/addon-knobs/register");
 require("@storybook/addon-viewport/register");
 require("storybook-addon-material-ui/register");
 require("@storybook/addon-a11y/register");
+require("storybook-addon-intl/register");

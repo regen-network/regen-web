@@ -1,41 +1,33 @@
-import {createMuiTheme, Theme} from '@material-ui/core/styles';
-import {
-  blue
-  // cyan500,
-  // grey100, grey500, grey400, grey300,
-  // purple500,
-  // pinkA200,
-  // darkBlack, fullBlack,
-} from '@material-ui/core/colors';
+import {blue} from '@material-ui/core/colors';
 
 const palette = {
-    primary: {
-      main: "#4fb573", // Regen Green
-      contrastText: "#FFF"
-    },
-    secondary: {
-      main: "#ffc433"
-    },
-    common: {
-      white: "#FFF",
-      light: "#fefefe",
-      grey: "#585E66",
-      black: "#202020"
-    },
-    accent: {
-      yellow: "#ffc433",
-      red: "#de4526",
-      blue: "#3d7acf"
-    }
+  primary: {
+    main: "#4fb573", // Regen Green
+    contrastText: "#FFF"
+  },
+  secondary: {
+    main: "#ffc433"
+  },
+  common: {
+    white: "#FFF",
+    light: "#fefefe",
+    grey: "#585E66",
+    black: "#202020"
+  },
+  accent: {
+    yellow: "#ffc433",
+    red: "#de4526",
+    blue: "#3d7acf"
+  }
 };
 
 const theme = {
-  themeName: "Greent Theme",
+  themeName: "Green Theme",
   palette,
   typography: {
     fontFamily: ['Lato', 'sans-serif'].join(','),
   },
-	// appBar: {
+  // appBar: {
   //   // color: white,
   //   // padding: "40px",
   //   textColor: white,
@@ -105,7 +97,6 @@ const theme = {
 };
 
 export default theme;
-
 
 export const theme2 =
   {

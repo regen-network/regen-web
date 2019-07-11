@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/regen-network-mvp.iml" filepath="$PROJECT_DIR$/.idea/regen-network-mvp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/regen-app.iml" filepath="$PROJECT_DIR$/.idea/regen-app.iml" />
     </modules>
   </component>
 </project>

@@ -69,7 +69,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build && yan build-storybook",
+    "build": "react-scripts build && yarn build-storybook",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 9090",

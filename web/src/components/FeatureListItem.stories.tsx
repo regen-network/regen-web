@@ -1,13 +1,10 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import theme from 'theme';
 
-import FeatureListItem from '../components/FeatureListItem';
+import FeatureListItem, {Item} from 'components/FeatureListItem';
 
-// item, selected, toggleSelectThis, theme, openSaveEntryModal
-
-export const item = {
+export const item: Item = {
   id: '1',
   geometry: {
         "type": "Polygon",
@@ -42,5 +39,5 @@ export const actions = {
 };
 
 storiesOf('Components|Geo/FeatureListItem', module)
-  .add('default', () => <FeatureListItem item={item} selected={false} theme={theme} {...actions} />)
-  .add('selected', () => <FeatureListItem item={item} selected={true} theme={theme} {...actions} />);
+  .add('default', () => <FeatureListItem item={item} selected={false} {...actions} />)
+  .add('selected', () => <FeatureListItem item={item} selected={true} {...actions} />);

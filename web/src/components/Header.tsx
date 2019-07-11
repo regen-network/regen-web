@@ -20,33 +20,21 @@ const useStyles = makeStyles(theme => ({
   menuButton: {},
 }));
 
-const theme: Theme =
-  createMuiTheme({
-    palette: {
-      primary: {
-        main: '#1a237e',
-      },
-      secondary: blue,
-    },
-  });
-
 export default function Header(props: HeaderProps) {
   const classes = useStyles();
 
   return (
-    <ThemeProvider theme={theme}>
-      <div className={classes.root}>
-        <AppBar position="static">
-          <Toolbar variant="dense">
-            <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="Menu">
-              <MenuIcon/>
-            </IconButton>
-            <Typography variant="h6" color="inherit">
-            </Typography>
-          </Toolbar>
-        </AppBar>
-      </div>
-    </ThemeProvider>
+    <div className={classes.root}>
+      <AppBar position="static">
+        <Toolbar variant="dense">
+          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="Menu" href="#">
+            <MenuIcon/>
+          </IconButton>
+          <Typography variant="h6" color="inherit">
+          </Typography>
+        </Toolbar>
+      </AppBar>
+    </div>
   );
 }
 

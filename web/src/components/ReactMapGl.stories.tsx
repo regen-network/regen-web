@@ -42,7 +42,7 @@ const pinStyle = {
 
 const size = 20;
 
-storiesOf('Maps|ReactMapGL', module)
+storiesOf('Components|Maps/ReactMapGL', module)
   .addDecorator(story =>
     <Map>{story()}</Map>
   )

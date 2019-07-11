@@ -10,10 +10,10 @@ import { actions as mapActions } from "../actions/map";
 import { actions as authActions } from "../actions/auth";
 import Modal from '@material-ui/core/Modal';
 import PolygonIcon from './polygonIcon';
-import SavePolygonName from "./polygonModal/savePolygonName";
-import ChoosePolygonFeatures from "./polygonModal/choosePolygonFeatures";
-import ChoosePolygonPractices from "./polygonModal/choosePolygonPractices";
-import PolygonCropHistory from "./polygonModal/polygonCropHistory";
+import SavePolygonName from "../../legacy/components/polygonModal/savePolygonName";
+import ChoosePolygonFeatures from "../../legacy/components/polygonModal/choosePolygonFeatures";
+import ChoosePolygonPractices from "../../legacy/components/polygonModal/choosePolygonPractices";
+import PolygonCropHistory from "../../legacy/components/polygonModal/polygonCropHistory";
 
 class SavePolygonModal extends Component {
     constructor(props) {

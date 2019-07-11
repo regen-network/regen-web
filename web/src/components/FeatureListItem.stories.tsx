@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import theme from '../theme';
+import theme from 'theme';
 
 import FeatureListItem from '../components/FeatureListItem';
 
@@ -41,6 +41,6 @@ export const actions = {
   openSaveEntryModal: action('openSaveEntryModal'),
 };
 
-storiesOf('FeatureListItem', module)
+storiesOf('Components|Geo/FeatureListItem', module)
   .add('default', () => <FeatureListItem item={item} selected={false} theme={theme} {...actions} />)
   .add('selected', () => <FeatureListItem item={item} selected={true} theme={theme} {...actions} />);

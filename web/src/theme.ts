@@ -31,7 +31,9 @@ const palette = {
 
 const theme = createMuiTheme({
   palette,
-  fontFamily: ['Lato', 'sans-serif'].join(','),
+  typography: {
+    fontFamily: ['Lato', 'sans-serif'].join(','),
+  },
 	appBar: {
     // color: white,
     // padding: "40px",

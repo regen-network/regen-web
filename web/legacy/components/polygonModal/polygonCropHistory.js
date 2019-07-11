@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import SingleSelect from '../select.js';
+import SingleSelect from '../../../src/components/select.js';
 import gql from "graphql-tag";
 import { Mutation } from "react-apollo";
 import * as moment from 'moment';

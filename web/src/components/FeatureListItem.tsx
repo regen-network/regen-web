@@ -3,7 +3,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import PolygonIcon from './polygonIcon';
+import PolygonIcon from 'components/polygonIcon';
 
 export default function FeatureListItem({ item, selected, toggleSelectThis, theme, openSaveEntryModal }) {
   const style = selected ? {backgroundColor: theme.palette.primary.main} : {};

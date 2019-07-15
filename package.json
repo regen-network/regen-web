@@ -1,11 +1,13 @@
 {
   "name": "root",
   "dependencies": {
-    "lerna": "^3.0.0-rc.0"
+    "lerna": "^3.0.0-rc.0",
+    "serve": "^11.1.0"
   },
   "scripts": {
     "postinstall": "NODE_ENV=development lerna bootstrap",
-    "build": " lerna run build --stream"
+    "build": " lerna run build --stream",
+    "serve": "serve web/build -l ${PORT:-5000}"
   },
   "devDependencies": {}
 }

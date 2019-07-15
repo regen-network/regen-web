@@ -25,6 +25,6 @@ export class Map extends Component<MapProps> {
         height: '97vh'
       }}
       fitBounds={[[boundingBox[0], boundingBox[1]], [boundingBox[2], boundingBox[3]]]}
-      children={children} />;
+      children={children as any} />;
   }
 }

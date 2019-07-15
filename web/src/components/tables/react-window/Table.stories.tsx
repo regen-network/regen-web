@@ -5,7 +5,7 @@ import {TableRow, TableCell, Paper, TableHead} from "@material-ui/core";
 import AutoSizer from 'react-virtualized-auto-sizer';
 
 
-const Row = ({index, style}) => (
+const Row = ({index, style}: any) => (
   <div style={style}>
     <TableRow>
       <TableCell>Reforestation Event</TableCell>

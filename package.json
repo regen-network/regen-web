@@ -1,13 +1,13 @@
 {
   "name": "root",
   "dependencies": {
-    "lerna": "^3.0.0-rc.0"
+    "lerna": "^3.0.0-rc.0",
+    "mui-datatables": "^2.6.2"
   },
   "scripts": {
     "postinstall": "lerna bootstrap && lerna run build --stream"
   },
-  "devDependencies": {
-  },
+  "devDependencies": {},
   "engines": {
     "node": ">=10.15.3"
   }

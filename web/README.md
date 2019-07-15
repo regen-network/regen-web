@@ -1,5 +1,16 @@
 # Getting Started
 
+## Storybook
+
+Components should be developed and tested first using [Storybook](https://storybook.js.org/).
+
+1. Run `yarn` to install dependencies
+2. Run `yarn storybook` to start storybook
+
+## Running the app
+
+This app uses [Create React App](https://facebook.github.io/create-react-app/).
+
 1. Run `yarn` to install dependencies
 2. Run `yarn start` to start the dev server
 3. Open your browser to `http://localhost:3000` and start editing.

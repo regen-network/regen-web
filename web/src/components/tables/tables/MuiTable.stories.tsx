@@ -25,6 +25,7 @@ import Switch from "@material-ui/core/Switch";
 import DeleteIcon from "@material-ui/icons/Delete";
 import FilterListIcon from "@material-ui/icons/FilterList";
 import { storiesOf } from "@storybook/react";
+import { withKnobs, number } from "@storybook/addon-knobs";
 
 interface Data {
   calories: number;
@@ -44,21 +45,34 @@ function createData(
   return { name, calories, fat, carbs, protein };
 }
 
-const rows = [
-  createData("Cupcake", 305, 3.7, 67, 4.3),
-  createData("Donut", 452, 25.0, 51, 4.9),
-  createData("Eclair", 262, 16.0, 24, 6.0),
-  createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-  createData("Gingerbread", 356, 16.0, 49, 3.9),
-  createData("Honeycomb", 408, 3.2, 87, 6.5),
-  createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-  createData("Jelly Bean", 375, 0.0, 94, 0.0),
-  createData("KitKat", 518, 26.0, 65, 7.0),
-  createData("Lollipop", 392, 0.2, 98, 0.0),
-  createData("Marshmallow", 318, 0, 81, 2.0),
-  createData("Nougat", 360, 19.0, 9, 37.0),
-  createData("Oreo", 437, 18.0, 63, 4.0)
-];
+function getRandomArbitrary(min: number, max: number): number {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+const generateRows = (rows: number): ReadonlyArray<Data> => {
+  const foodRows: Data[] = [];
+
+  for (let i = 0; i < rows; i++) {
+    const name = Math.random()
+      .toString(36)
+      .substring(7);
+    const calories = getRandomArbitrary(50, 1200);
+    const fat = (Math.random() * 150).toFixed(1);
+    const carbs = getRandomArbitrary(4, 100);
+    const protein = (Math.random() * 450).toFixed(1);
+
+    const food = createData(
+      name,
+      calories,
+      Number(fat),
+      carbs,
+      Number(protein)
+    );
+    foodRows.push(food);
+  }
+
+  return foodRows;
+};
 
 function desc<T>(a: T, b: T, orderBy: keyof T) {
   if (b[orderBy] < a[orderBy]) {
@@ -70,7 +84,7 @@ function desc<T>(a: T, b: T, orderBy: keyof T) {
   return 0;
 }
 
-function stableSort<T>(array: T[], cmp: (a: T, b: T) => number) {
+function stableSort<T>(array: ReadonlyArray<T>, cmp: (a: T, b: T) => number) {
   const stabilizedThis = array.map((el, index) => [el, index] as [T, number]);
   stabilizedThis.sort((a, b) => {
     const order = cmp(a[0], b[0]);
@@ -281,14 +295,21 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-function EnhancedTable() {
+interface Props {
+  readonly rowsPage: number;
+  readonly totalRows: number;
+}
+
+function EnhancedTable({ rowsPage, totalRows }: Props) {
   const classes = useStyles();
   const [order, setOrder] = React.useState<Order>("asc");
   const [orderBy, setOrderBy] = React.useState<keyof Data>("calories");
   const [selected, setSelected] = React.useState<string[]>([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = React.useState(() => rowsPage);
+
+  const rows = generateRows(totalRows);
 
   function handleRequestSort(
     event: React.MouseEvent<unknown>,
@@ -411,7 +432,7 @@ function EnhancedTable() {
           </Table>
         </div>
         <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
+          rowsPerPageOptions={[5, 10, 25, rowsPage]}
           component="div"
           count={rows.length}
           rowsPerPage={rowsPerPage}
@@ -434,6 +455,13 @@ function EnhancedTable() {
   );
 }
 
-storiesOf("Components|Tables/mui-tables", module).add("default", () => (
-  <EnhancedTable />
-));
+storiesOf("Components|Tables/mui-tables", module)
+  .addDecorator(withKnobs)
+  .add("default", () =>
+    React.createElement(() => (
+      <EnhancedTable
+        rowsPage={number("Rows per page", 200)}
+        totalRows={number("Total rows of the table", 1000)}
+      />
+    ))
+  );

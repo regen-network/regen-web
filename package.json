@@ -1,9 +1,23 @@
 {
-  "name": "root",
+  "name": "regen-app-root",
+  "description": "Regen App frontend packages",
+  "homepage": "https://github.com/regen-network/regen-app",
+  "bugs": {
+    "url": "https://github.com/regen-network/regen-app/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/regen-network/regen-app"
+  },
   "dependencies": {
-    "lerna": "^3.0.0-rc.0",
+    "lerna": "^3.15.0",
     "serve": "^11.1.0"
   },
+  "workspaces": [
+    "web",
+    "web-components",
+    "web-storybook"
+  ],
   "scripts": {
     "postinstall": "NODE_ENV=development lerna bootstrap",
     "build": " lerna run build --stream",

@@ -1,5 +1,6 @@
 {
   "name": "regen-app-root",
+  "private": true,
   "description": "Regen App frontend packages",
   "homepage": "https://github.com/regen-network/regen-app",
   "bugs": {
@@ -19,7 +20,7 @@
     "web-storybook"
   ],
   "scripts": {
-    "postinstall": "NODE_ENV=development lerna bootstrap",
+    "bootstrap": "lerna bootstrap",
     "build": " lerna run build --stream",
     "serve": "serve web-old/build -l ${PORT:-5000}",
     "test": "echo TODO"

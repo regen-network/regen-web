@@ -5,7 +5,8 @@
   "dependencies": {
     "react": "16.9.0-alpha.0",
     "react-dom": "16.9.0-alpha.0",
-    "react-scripts": "3.0.1"
+    "react-scripts": "3.0.1",
+    "web-components": "0.0.0"
   },
   "scripts": {
     "start": "react-scripts start",

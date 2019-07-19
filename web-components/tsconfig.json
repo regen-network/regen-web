@@ -1,0 +1,16 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "declaration": true,
+    "jsx": "react",
+    "noEmitOnError": true,
+    "outDir": "lib",
+    "paths": {
+      "~/*": ["src/*"]
+    },
+    "rootDir": "src"
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "exclude": ["src/**/*stories.tsx"]
+}

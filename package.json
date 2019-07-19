@@ -21,7 +21,7 @@
   ],
   "scripts": {
     "bootstrap": "lerna bootstrap",
-    "build": " lerna run build --stream",
+    "build": "lerna run build --stream",
     "build-storybook": "lerna run build-storybook --stream",
     "serve": "serve web-old/build -l ${PORT:-5000}",
     "storybook": "lerna run storybook --stream",
@@ -40,6 +40,7 @@
     "eslint-config-prettier": "^6.0.0",
     "eslint-plugin-prettier": "^3.1.0",
     "prettier": "1.18.2",
+    "shx": "^0.3.2",
     "typescript": "3.5.3"
   }
 }

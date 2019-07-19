@@ -1,5 +1,5 @@
 {
-  "name": "regen-app-root",
+  "name": "regen-app",
   "private": true,
   "description": "Regen App frontend packages",
   "homepage": "https://github.com/regen-network/regen-app",
@@ -11,7 +11,6 @@
     "url": "https://github.com/regen-network/regen-app"
   },
   "dependencies": {
-    "lerna": "^3.15.0",
     "serve": "^11.1.0"
   },
   "workspaces": [
@@ -28,17 +27,20 @@
     "test": "echo TODO"
   },
   "devDependencies": {
-    "@storybook/addon-actions": "^5.2.0-beta.2",
-    "@storybook/addon-links": "^5.2.0-beta.2",
-    "@storybook/addon-viewport": "^5.2.0-beta.2",
-    "@storybook/addons": "^5.2.0-beta.2",
-    "@storybook/react": "^5.2.0-beta.2",
+    "@storybook/addon-actions": "^5.2.0-beta.3",
+    "@storybook/addon-knobs": "^5.2.0-beta.3",
+    "@storybook/addon-links": "^5.2.0-beta.3",
+    "@storybook/addon-viewport": "^5.2.0-beta.3",
+    "@storybook/addons": "^5.2.0-beta.3",
+    "@storybook/react": "^5.2.0-beta.3",
     "@types/jest": "24.0.15",
     "@types/node": "12.6.8",
     "@types/react": "16.8.23",
     "@types/react-dom": "16.8.4",
+    "babel-loader": "8.0.5",
     "eslint-config-prettier": "^6.0.0",
     "eslint-plugin-prettier": "^3.1.0",
+    "lerna": "^3.15.0",
     "prettier": "1.18.2",
     "shx": "^0.3.2",
     "typescript": "3.5.3"

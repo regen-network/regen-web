@@ -22,10 +22,17 @@
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "build": " lerna run build --stream",
+    "build-storybook": "lerna run build-storybook --stream",
     "serve": "serve web-old/build -l ${PORT:-5000}",
+    "storybook": "lerna run storybook --stream",
     "test": "echo TODO"
   },
   "devDependencies": {
+    "@storybook/addon-actions": "^5.2.0-beta.2",
+    "@storybook/addon-links": "^5.2.0-beta.2",
+    "@storybook/addon-viewport": "^5.2.0-beta.2",
+    "@storybook/addons": "^5.2.0-beta.2",
+    "@storybook/react": "^5.2.0-beta.2",
     "@types/jest": "24.0.15",
     "@types/node": "12.6.8",
     "@types/react": "16.8.23",

@@ -1,0 +1,19 @@
+{
+  "name": "web-storybook",
+  "version": "0.0.4",
+  "private": true,
+  "scripts": {
+    "build-storybook": "build-storybook -s public",
+    "storybook": "start-storybook -p 9009 -s public"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "devDependencies": {}
+}

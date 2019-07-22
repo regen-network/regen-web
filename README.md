@@ -4,8 +4,4 @@ The frontend app for the [Regen Network](https://www.regen.network) decentralize
 
 ## Getting started
 
-See [web/README.md](web/README.md).
-
-
-
-
+See [web/README.md](web-old/README.md).

@@ -1,14 +1,51 @@
 {
-  "name": "root",
+  "name": "regen-app",
+  "private": true,
+  "description": "Regen App frontend packages",
+  "homepage": "https://github.com/regen-network/regen-app",
+  "bugs": {
+    "url": "https://github.com/regen-network/regen-app/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/regen-network/regen-app"
+  },
   "dependencies": {
-    "lerna": "^3.0.0-rc.0",
     "serve": "^11.1.0"
   },
+  "workspaces": [
+    "web",
+    "web-components",
+    "web-storybook"
+  ],
   "scripts": {
-    "postinstall": "NODE_ENV=development lerna bootstrap",
-    "build": " lerna run build --stream",
-    "serve": "serve web/build -l ${PORT:-5000}",
+    "bootstrap": "lerna bootstrap",
+    "build": "lerna run build --stream",
+    "build-storybook": "lerna run build-storybook --stream",
+    "serve": "serve web-old/build -l ${PORT:-5000}",
+    "storybook": "lerna run storybook --stream",
     "test": "echo TODO"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@storybook/addon-actions": "^5.2.0-beta.3",
+    "@storybook/addon-knobs": "^5.2.0-beta.3",
+    "@storybook/addon-links": "^5.2.0-beta.3",
+    "@storybook/addon-viewport": "^5.2.0-beta.3",
+    "@storybook/addons": "^5.2.0-beta.3",
+    "@storybook/react": "^5.2.0-beta.3",
+    "@types/jest": "24.0.15",
+    "@types/node": "12.6.8",
+    "@types/react": "16.8.23",
+    "@types/react-dom": "16.8.4",
+    "babel-loader": "8.0.5",
+    "eslint-config-prettier": "^6.0.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "lerna": "^3.15.0",
+    "prettier": "1.18.2",
+    "shx": "^0.3.2",
+    "typescript": "3.5.3"
+  },
+  "resolutions": {
+    "webpack": "4.29.6"
+  }
 }

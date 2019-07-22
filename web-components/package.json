@@ -1,0 +1,28 @@
+{
+  "name": "web-components",
+  "version": "0.0.0",
+  "private": true,
+  "main": "build/index.js",
+  "scripts": {
+    "build": "shx rm -rf ./lib/* && tsc && cp ./src/theme/fonts.css ./lib/theme/fonts.css && cp -R ./src/theme/assets ./lib/theme/",
+    "format": "prettier --write --loglevel warn './src/**/*.{ts,tsx,json,md,css}'",
+    "lint": "tsc --noEmit && eslint -c .eslintrc.js --max-warnings 0 'src/**/*.ts{,x}'"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "dependencies": {
+    "@material-ui/core": "4.2.1",
+    "@material-ui/icons": "4.2.1",
+    "@material-ui/styles": "4.2.1",
+    "react": "16.9.0-alpha.0",
+    "react-dom": "16.9.0-alpha.0"
+  },
+  "resolutions": {
+    "react": "16.9.0-alpha.0",
+    "react-dom": "16.9.0-alpha.0"
+  }
+}

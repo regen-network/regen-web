@@ -21,7 +21,7 @@
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "build": "lerna run build --stream",
-    "build-storybook": "lerna run build-storybook --stream",
+    "build-storybook": "yarn build && lerna run build-storybook --stream",
     "serve": "serve web-old/build -l ${PORT:-5000}",
     "storybook": "lerna run storybook --stream",
     "test": "echo TODO"

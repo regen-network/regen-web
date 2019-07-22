@@ -6,20 +6,18 @@ import { lighten } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
-import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
-import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
+import RegenTableHead, { HeadRow, Order } from './TableHead';
 
 interface Data {
   calories: number;
@@ -76,86 +74,12 @@ function stableSort<T>(array: ReadonlyArray<T>, cmp: (a: T, b: T) => number): an
   return stabilizedThis.map(el => el[0]);
 }
 
-type Order = 'asc' | 'desc';
-
 function getSorting<K extends keyof any>(
   order: Order,
   orderBy: K,
 ): (a: { [key in K]: number | string }, b: { [key in K]: number | string }) => number {
   return order === 'desc' ? (a, b) => desc(a, b, orderBy) : (a, b) => -desc(a, b, orderBy);
 }
-
-interface HeadRow {
-  disablePadding: boolean;
-  id: keyof Data;
-  label: string;
-  numeric: boolean;
-}
-
-const headRows: HeadRow[] = [
-  {
-    id: 'name',
-    numeric: false,
-    disablePadding: true,
-    label: 'Dessert (100g serving)',
-  },
-  { id: 'calories', numeric: true, disablePadding: false, label: 'Calories' },
-  { id: 'fat', numeric: true, disablePadding: false, label: 'Fat (g)' },
-  { id: 'carbs', numeric: true, disablePadding: false, label: 'Carbs (g)' },
-  { id: 'protein', numeric: true, disablePadding: false, label: 'Protein (g)' },
-];
-
-interface EnhancedTableProps {
-  numSelected: number;
-  onRequestSort: (event: React.MouseEvent<unknown>, property: keyof Data) => void;
-  onSelectAllClick: (event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => void;
-  order: Order;
-  orderBy: string;
-  rowCount: number;
-}
-
-function EnhancedTableHead(props: EnhancedTableProps): any {
-  const { onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort } = props;
-  const createSortHandler = (property: keyof Data): any => (event: React.MouseEvent<unknown>) => {
-    onRequestSort(event, property);
-  };
-
-  return (
-    <TableHead>
-      <TableRow>
-        <TableCell padding="checkbox">
-          <Checkbox
-            indeterminate={numSelected > 0 && numSelected < rowCount}
-            checked={numSelected === rowCount}
-            onChange={onSelectAllClick}
-            inputProps={{ 'aria-label': 'Select all desserts' }}
-          />
-        </TableCell>
-        {headRows.map(row => (
-          <TableCell
-            key={row.id}
-            align={row.numeric ? 'right' : 'left'}
-            padding={row.disablePadding ? 'none' : 'default'}
-            sortDirection={orderBy === row.id ? order : false}
-          >
-            <TableSortLabel active={orderBy === row.id} direction={order} onClick={createSortHandler(row.id)}>
-              {row.label}
-            </TableSortLabel>
-          </TableCell>
-        ))}
-      </TableRow>
-    </TableHead>
-  );
-}
-
-EnhancedTableHead.propTypes = {
-  numSelected: PropTypes.number.isRequired,
-  onRequestSort: PropTypes.func.isRequired,
-  onSelectAllClick: PropTypes.func.isRequired,
-  order: PropTypes.string.isRequired,
-  orderBy: PropTypes.string.isRequired,
-  rowCount: PropTypes.number.isRequired,
-};
 
 const useToolbarStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -254,6 +178,19 @@ interface Props {
   readonly totalRows: number;
 }
 
+const headRows: HeadRow<Data>[] = [
+  {
+    id: 'name',
+    numeric: false,
+    disablePadding: true,
+    label: 'Dessert (100g serving)',
+  },
+  { id: 'calories', numeric: true, disablePadding: false, label: 'Calories' },
+  { id: 'fat', numeric: true, disablePadding: false, label: 'Fat (g)' },
+  { id: 'carbs', numeric: true, disablePadding: false, label: 'Carbs (g)' },
+  { id: 'protein', numeric: true, disablePadding: false, label: 'Protein (g)' },
+];
+
 export default function EnhancedTable({ rowsPage, totalRows }: Props): JSX.Element {
   const classes = useStyles({});
   const [order, setOrder] = React.useState<Order>('asc');
@@ -327,44 +264,49 @@ export default function EnhancedTable({ rowsPage, totalRows }: Props): JSX.Eleme
         <EnhancedTableToolbar numSelected={selected.length} />
         <div className={classes.tableWrapper}>
           <Table className={classes.table} aria-labelledby="tableTitle" size={dense ? 'small' : 'medium'}>
-            <EnhancedTableHead
-              numSelected={selected.length}
+            <RegenTableHead
+              headRows={headRows}
               order={order}
               orderBy={orderBy}
-              onSelectAllClick={handleSelectAllClick}
               onRequestSort={handleRequestSort}
-              rowCount={rows.length}
             />
             <TableBody>
               {stableSort(rows, getSorting(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row: any, index: any): any => {
-                  const isItemSelected = isSelected(`${row.name}`);
-                  const labelId = `enhanced-table-checkbox-${index}`;
+                .map(
+                  (row: Data, index: number): JSX.Element => {
+                    const isItemSelected = isSelected(`${row.name}`);
+                    const labelId = `enhanced-table-checkbox-${index}`;
 
-                  return (
-                    <TableRow
-                      hover
-                      onClick={event => handleClick(event, `${row.name}`)}
-                      role="checkbox"
-                      aria-checked={isItemSelected}
-                      tabIndex={-1}
-                      key={row.name}
-                      selected={isItemSelected}
-                    >
-                      <TableCell padding="checkbox">
-                        <Checkbox checked={isItemSelected} inputProps={{ 'aria-labelledby': labelId }} />
-                      </TableCell>
-                      <TableCell component="th" id={labelId} scope="row" padding="none">
-                        {row.name}
-                      </TableCell>
-                      <TableCell align="right">{row.calories}</TableCell>
-                      <TableCell align="right">{row.fat}</TableCell>
-                      <TableCell align="right">{row.carbs}</TableCell>
-                      <TableCell align="right">{row.protein}</TableCell>
-                    </TableRow>
-                  );
-                })}
+                    const rowComponent = Object.keys(row).map((key: string, index: number) => {
+                      const isFirst = index === 0;
+                      const value = row[key as keyof Data];
+                      if (isFirst) {
+                        return (
+                          <TableCell component="th" id={labelId} scope="row" padding="none">
+                            {value}
+                          </TableCell>
+                        );
+                      }
+
+                      return <TableCell>{value}</TableCell>;
+                    });
+
+                    return (
+                      <TableRow
+                        hover
+                        onClick={event => handleClick(event, `${row.name}`)}
+                        role="checkbox"
+                        aria-checked={isItemSelected}
+                        tabIndex={-1}
+                        key={row.name}
+                        selected={isItemSelected}
+                      >
+                        {rowComponent}
+                      </TableRow>
+                    );
+                  },
+                )}
               {emptyRows > 0 && (
                 <TableRow style={{ height: 49 * emptyRows }}>
                   <TableCell colSpan={6} />

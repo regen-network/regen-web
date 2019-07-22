@@ -4,6 +4,7 @@
     "baseUrl": ".",
     "declaration": true,
     "jsx": "react",
+    "incremental": true,
     "noEmitOnError": true,
     "outDir": "lib",
     "paths": {

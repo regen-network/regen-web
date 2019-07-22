@@ -4,7 +4,10 @@
   "private": true,
   "main": "build/index.js",
   "scripts": {
-    "build": "shx rm -rf ./lib/* && tsc && cp ./src/theme/fonts.css ./lib/theme/fonts.css && cp -R ./src/theme/assets ./lib/theme/",
+    "remove-previous-files": "shx rm -rf ./lib/* ./tsconfig.tsbuildinfo",
+    "copy-assets": "cp ./src/theme/fonts.css ./lib/theme/fonts.css && cp -R ./src/theme/assets ./lib/theme/",
+    "watch": "yarn remove-previous-files && tsc --watch && yarn copy-assets",
+    "build": "yarn remove-previous-files && tsc && yarn copy-assets",
     "format": "prettier --write --loglevel warn './src/**/*.{ts,tsx,json,md,css}'",
     "lint": "tsc --noEmit && eslint -c .eslintrc.js --max-warnings 0 'src/**/*.ts{,x}'"
   },

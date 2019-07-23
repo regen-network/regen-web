@@ -15,42 +15,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
-import RegenTableHead, { HeadRow, Order } from './TableHead';
-
-interface Data {
-  calories: number;
-  carbs: number;
-  fat: number;
-  name: string;
-  protein: number;
-}
-
-function createData(name: string, calories: number, fat: number, carbs: number, protein: number): Data {
-  return { name, calories, fat, carbs, protein };
-}
-
-function getRandomArbitrary(min: number, max: number): number {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-const generateRows = (rows: number): ReadonlyArray<Data> => {
-  const foodRows: Data[] = [];
-
-  for (let i = 0; i < rows; i++) {
-    const name = Math.random()
-      .toString(36)
-      .substring(7);
-    const calories = getRandomArbitrary(50, 1200);
-    const fat = (Math.random() * 150).toFixed(1);
-    const carbs = getRandomArbitrary(4, 100);
-    const protein = (Math.random() * 450).toFixed(1);
-
-    const food = createData(name, calories, Number(fat), carbs, Number(protein));
-    foodRows.push(food);
-  }
-
-  return foodRows;
-};
+import RegenTableHead, { Order, HeadRow } from './TableHead';
 
 function desc<T>(a: T, b: T, orderBy: keyof T): any {
   if (b[orderBy] < a[orderBy]) {
@@ -171,53 +136,33 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-interface Props {
+interface Props<T> {
   readonly rowsPage: number;
-  readonly totalRows: number;
+  readonly initialOrderBy: keyof T;
+  readonly rows: ReadonlyArray<T>;
+  readonly headRows: ReadonlyArray<HeadRow<T>>;
 }
 
-const headRows: HeadRow<Data>[] = [
-  {
-    id: 'name',
-    numeric: false,
-    disablePadding: true,
-    label: 'Dessert (100g serving)',
-  },
-  { id: 'calories', numeric: true, disablePadding: false, label: 'Calories' },
-  { id: 'fat', numeric: true, disablePadding: false, label: 'Fat (g)' },
-  { id: 'carbs', numeric: true, disablePadding: false, label: 'Carbs (g)' },
-  { id: 'protein', numeric: true, disablePadding: false, label: 'Protein (g)' },
-];
-
-export default function EnhancedTable({ rowsPage, totalRows }: Props): JSX.Element {
+export default function EnhancedTable<T>({
+  initialOrderBy,
+  headRows,
+  rowsPage,
+  rows,
+}: Props<T>): JSX.Element {
   const classes = useStyles({});
   const [order, setOrder] = React.useState<Order>('asc');
-  const [orderBy, setOrderBy] = React.useState<keyof Data>('calories');
+  const [orderBy, setOrderBy] = React.useState<keyof T>(initialOrderBy);
   const [selected, setSelected] = React.useState<string[]>([]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(() => rowsPage);
 
-  const rows = generateRows(totalRows);
-
-  // eslint-disable-next-line
-  function handleRequestSort(event: React.MouseEvent<unknown>, property: keyof Data) {
+  function handleRequestSort(event: React.MouseEvent<unknown>, property: keyof T): void {
     const isDesc = orderBy === property && order === 'desc';
     setOrder(isDesc ? 'asc' : 'desc');
     setOrderBy(property);
   }
 
-  // eslint-disable-next-line
-  function handleSelectAllClick(event: React.ChangeEvent<HTMLInputElement>) {
-    if (event.target.checked) {
-      const newSelecteds = rows.map(n => n.name);
-      setSelected(newSelecteds);
-      return;
-    }
-    setSelected([]);
-  }
-
-  // eslint-disable-next-line
-  function handleClick(event: React.MouseEvent<unknown>, name: string) {
+  function handleClick(event: React.MouseEvent<unknown>, name: string): void {
     const selectedIndex = selected.indexOf(name);
     let newSelected: string[] = [];
 
@@ -264,13 +209,12 @@ export default function EnhancedTable({ rowsPage, totalRows }: Props): JSX.Eleme
               {stableSort(rows, getSorting(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map(
-                  (row: Data, index: number): JSX.Element => {
-                    const isItemSelected = isSelected(`${row.name}`);
+                  (row: T, index: number): JSX.Element => {
                     const labelId = `enhanced-table-checkbox-${index}`;
 
                     const rowComponent = Object.keys(row).map((key: string, index: number) => {
                       const isFirst = index === 0;
-                      const value = row[key as keyof Data];
+                      const value = row[key as keyof T];
                       return isFirst ? (
                         <TableCell component="th" id={labelId} scope="row" padding="none">
                           {value}
@@ -285,10 +229,8 @@ export default function EnhancedTable({ rowsPage, totalRows }: Props): JSX.Eleme
                         hover
                         onClick={event => handleClick(event, `${row.name}`)}
                         role="checkbox"
-                        aria-checked={isItemSelected}
                         tabIndex={-1}
                         key={row.name}
-                        selected={isItemSelected}
                       >
                         {rowComponent}
                       </TableRow>

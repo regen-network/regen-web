@@ -14,10 +14,10 @@ export interface HeadRow<T> {
 export type Order = 'asc' | 'desc';
 
 interface EnhancedTableProps<T> {
-  headRows: HeadRow<T>[];
+  headRows: ReadonlyArray<HeadRow<T>>;
   onRequestSort: (event: React.MouseEvent<unknown>, id: keyof T) => void;
   order: Order;
-  orderBy: string;
+  orderBy: keyof T;
 }
 
 function RegenTableHead<T>(props: EnhancedTableProps<T>): JSX.Element {

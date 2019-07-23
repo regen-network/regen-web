@@ -1,5 +1,64 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import Table from 'web-components/lib/components/table';
+import { HeadRow } from 'web-components/lib/components/table/TableHead';
 
-storiesOf('Components|Views', module).add('welcome', () => <Table rowsPage={200} totalRows={500} />);
+interface Data {
+  calories: number;
+  carbs: number;
+  fat: number;
+  name: string;
+  protein: number;
+}
+
+function getRandomArbitrary(min: number, max: number): number {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function createData(name: string, calories: number, fat: number, carbs: number, protein: number): Data {
+  return { name, calories, fat, carbs, protein };
+}
+
+const generateRows = (rows: number): ReadonlyArray<Data> => {
+  const foodRows: Data[] = [];
+
+  for (let i = 0; i < rows; i++) {
+    const name = Math.random()
+      .toString(36)
+      .substring(7);
+    const calories = getRandomArbitrary(50, 1200);
+    const fat = (Math.random() * 150).toFixed(1);
+    const carbs = getRandomArbitrary(4, 100);
+    const protein = (Math.random() * 450).toFixed(1);
+
+    const food = createData(name, calories, Number(fat), carbs, Number(protein));
+    foodRows.push(food);
+  }
+
+  return foodRows;
+};
+
+const headRows: ReadonlyArray<HeadRow<Data>> = [
+  {
+    id: 'name',
+    numeric: false,
+    disablePadding: true,
+    label: 'Dessert (100g serving)',
+  },
+  { id: 'calories', numeric: true, disablePadding: false, label: 'Calories' },
+  { id: 'fat', numeric: true, disablePadding: false, label: 'Fat (g)' },
+  { id: 'carbs', numeric: true, disablePadding: false, label: 'Carbs (g)' },
+  { id: 'protein', numeric: true, disablePadding: false, label: 'Protein (g)' },
+];
+
+const rows = generateRows(1000);
+
+storiesOf('Components|Views', module).add('welcome', () => (
+  <Table
+    initialOrderBy={'calories' as keyof Data}
+    rows={rows}
+    headRows={headRows}
+    rowsPage={200}
+    totalRows={500}
+  />
+));

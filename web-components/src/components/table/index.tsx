@@ -13,8 +13,6 @@ import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Switch from '@material-ui/core/Switch';
 import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import RegenTableHead, { HeadRow, Order } from './TableHead';
@@ -197,7 +195,6 @@ export default function EnhancedTable({ rowsPage, totalRows }: Props): JSX.Eleme
   const [orderBy, setOrderBy] = React.useState<keyof Data>('calories');
   const [selected, setSelected] = React.useState<string[]>([]);
   const [page, setPage] = React.useState(0);
-  const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(() => rowsPage);
 
   const rows = generateRows(totalRows);
@@ -237,20 +234,13 @@ export default function EnhancedTable({ rowsPage, totalRows }: Props): JSX.Eleme
     setSelected(newSelected);
   }
 
-  // eslint-disable-next-line
-  function handleChangePage(event: unknown, newPage: number) {
+  function handleChangePage(event: unknown, newPage: number): void {
     setPage(newPage);
   }
 
-  // eslint-disable-next-line
-  function handleChangeRowsPerPage(event: React.ChangeEvent<HTMLInputElement>) {
+  function handleChangeRowsPerPage(event: React.ChangeEvent<HTMLInputElement>): void {
     setRowsPerPage(+event.target.value);
     setPage(0);
-  }
-
-  // eslint-disable-next-line
-  function handleChangeDense(event: React.ChangeEvent<HTMLInputElement>) {
-    setDense(event.target.checked);
   }
 
   // eslint-disable-next-line
@@ -263,7 +253,7 @@ export default function EnhancedTable({ rowsPage, totalRows }: Props): JSX.Eleme
       <Paper className={classes.paper}>
         <EnhancedTableToolbar numSelected={selected.length} />
         <div className={classes.tableWrapper}>
-          <Table className={classes.table} aria-labelledby="tableTitle" size={dense ? 'small' : 'medium'}>
+          <Table className={classes.table} aria-labelledby="tableTitle" size="medium">
             <RegenTableHead
               headRows={headRows}
               order={order}
@@ -281,15 +271,13 @@ export default function EnhancedTable({ rowsPage, totalRows }: Props): JSX.Eleme
                     const rowComponent = Object.keys(row).map((key: string, index: number) => {
                       const isFirst = index === 0;
                       const value = row[key as keyof Data];
-                      if (isFirst) {
-                        return (
-                          <TableCell component="th" id={labelId} scope="row" padding="none">
-                            {value}
-                          </TableCell>
-                        );
-                      }
-
-                      return <TableCell>{value}</TableCell>;
+                      return isFirst ? (
+                        <TableCell component="th" id={labelId} scope="row" padding="none">
+                          {value}
+                        </TableCell>
+                      ) : (
+                        <TableCell>{value}</TableCell>
+                      );
                     });
 
                     return (
@@ -331,10 +319,6 @@ export default function EnhancedTable({ rowsPage, totalRows }: Props): JSX.Eleme
           onChangeRowsPerPage={handleChangeRowsPerPage}
         />
       </Paper>
-      <FormControlLabel
-        control={<Switch checked={dense} onChange={handleChangeDense} />}
-        label="Dense padding"
-      />
     </div>
   );
 }

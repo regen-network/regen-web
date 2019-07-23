@@ -37,10 +37,7 @@ function stableSort<T>(array: ReadonlyArray<T>, cmp: (a: T, b: T) => number): an
   return stabilizedThis.map(el => el[0]);
 }
 
-function getSorting<K extends keyof any>(
-  order: Order,
-  orderBy: K,
-): (a: { [key in K]: number | string }, b: { [key in K]: number | string }) => number {
+function getSorting<T>(order: Order, orderBy: keyof T): (a: T, b: T) => number {
   return order === 'desc' ? (a, b) => desc(a, b, orderBy) : (a, b) => -desc(a, b, orderBy);
 }
 
@@ -187,9 +184,6 @@ export default function EnhancedTable<T>({
     setRowsPerPage(+event.target.value);
     setPage(0);
   }
-
-  // eslint-disable-next-line
-  const isSelected = (name: string) => selected.indexOf(name) !== -1;
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 

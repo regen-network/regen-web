@@ -140,7 +140,7 @@ interface Props<T> {
   readonly headRows: ReadonlyArray<HeadRow<T>>;
 }
 
-export default function EnhancedTable<T>({
+export default function EnhancedTable<T extends { name: string }>({
   initialOrderBy,
   headRows,
   rowsPage,

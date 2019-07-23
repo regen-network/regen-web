@@ -54,11 +54,5 @@ const headRows: ReadonlyArray<HeadRow<Data>> = [
 const rows = generateRows(1000);
 
 storiesOf('Components|Views', module).add('welcome', () => (
-  <Table
-    initialOrderBy={'calories' as keyof Data}
-    rows={rows}
-    headRows={headRows}
-    rowsPage={200}
-    totalRows={500}
-  />
+  <Table initialOrderBy="calories" rows={rows} headRows={headRows} rowsPage={200} totalRows={500} />
 ));

@@ -51,8 +51,8 @@ const headRows: ReadonlyArray<HeadRow<Data>> = [
   { id: 'protein', numeric: true, disablePadding: false, label: 'Protein (g)' },
 ];
 
-const rows = generateRows(1000);
+const rows = generateRows(20);
 
 storiesOf('Components|Views', module).add('welcome', () => (
-  <Table initialOrderBy="calories" rows={rows} headRows={headRows} rowsPage={200} />
+  <Table initialOrderBy="calories" rows={rows} headRows={headRows} rowsPage={10} />
 ));

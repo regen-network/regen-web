@@ -6,32 +6,9 @@ import TableCell from '@material-ui/core/TableCell';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import RegenTableHead, { Order, HeadRow } from './TableHead';
+import RegenTableHead, { HeadRow } from './TableHead';
 import TablePageFiller from './TablePageFiller';
-
-function desc<T>(a: T, b: T, orderBy: keyof T): any {
-  if (b[orderBy] < a[orderBy]) {
-    return -1;
-  }
-  if (b[orderBy] > a[orderBy]) {
-    return 1;
-  }
-  return 0;
-}
-
-function stableSort<T>(array: ReadonlyArray<T>, cmp: (a: T, b: T) => number): any {
-  const stabilizedThis = array.map((el, index) => [el, index] as [T, number]);
-  stabilizedThis.sort((a, b) => {
-    const order = cmp(a[0], b[0]);
-    if (order !== 0) return order;
-    return a[1] - b[1];
-  });
-  return stabilizedThis.map(el => el[0]);
-}
-
-function getSorting<T>(order: Order, orderBy: keyof T): (a: T, b: T) => number {
-  return order === 'desc' ? (a, b) => desc(a, b, orderBy) : (a, b) => -desc(a, b, orderBy);
-}
+import { Order, stableSort, getSorting } from './sorting';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {

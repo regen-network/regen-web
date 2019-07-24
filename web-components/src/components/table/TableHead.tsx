@@ -3,6 +3,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import TableHead from '@material-ui/core/TableHead';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
+import { Order } from './sorting';
 
 export interface HeadRow<T> {
   disablePadding: boolean;
@@ -10,8 +11,6 @@ export interface HeadRow<T> {
   label: string;
   numeric: boolean;
 }
-
-export type Order = 'asc' | 'desc';
 
 interface EnhancedTableProps<T> {
   headRows: ReadonlyArray<HeadRow<T>>;

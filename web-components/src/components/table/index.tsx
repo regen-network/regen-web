@@ -52,8 +52,10 @@ export default function EnhancedTable<T extends { name: string; [key: string]: s
     setOrderBy(property);
   }
 
-  function handleClick(_event: React.MouseEvent<unknown>, name: string): void {
-    console.log('Clicked on... ' + name); // eslint-disable-line
+  function onRowClick(name: string): () => void {
+    return () => {
+      console.log('Clicked on... ' + name); // eslint-disable-line
+    };
   }
 
   function handleChangePage(event: unknown, newPage: number): void {
@@ -90,12 +92,7 @@ export default function EnhancedTable<T extends { name: string; [key: string]: s
                     ));
 
                     return (
-                      <TableRow
-                        hover
-                        onClick={event => handleClick(event, `${row.name}`)}
-                        tabIndex={-1}
-                        key={row.name}
-                      >
+                      <TableRow hover onClick={onRowClick(`${row.name}`)} tabIndex={-1} key={row.name}>
                         {cells}
                       </TableRow>
                     );

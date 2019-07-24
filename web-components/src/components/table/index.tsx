@@ -103,7 +103,7 @@ export default function EnhancedTable<T extends { name: string; [key: string]: s
           </Table>
         </div>
         <TablePagination
-          rowsPerPageOptions={[5, 10, 25, rowsPage]}
+          rowsPerPageOptions={[5, 10, 25, rowsPage > 25 ? rowsPage : 30]}
           component="div"
           count={rows.length}
           rowsPerPage={rowsPerPage}

@@ -2,11 +2,11 @@ import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import RegenTableHead, { HeadRow } from './TableHead';
+import RegenTableCell from './TableCell';
 import TablePageFiller from './TablePageFiller';
 import { Order, stableSort, getSorting } from './sorting';
 
@@ -34,7 +34,7 @@ interface Props<T> {
   readonly headRows: ReadonlyArray<HeadRow<T>>;
 }
 
-export default function EnhancedTable<T extends { name: string }>({
+export default function EnhancedTable<T extends { name: string; [key: string]: string | number }>({
   initialOrderBy,
   headRows,
   rowsPage,
@@ -85,27 +85,18 @@ export default function EnhancedTable<T extends { name: string }>({
                   (row: T, index: number): JSX.Element => {
                     const labelId = `enhanced-table-checkbox-${index}`;
 
-                    const rowComponent = Object.keys(row).map((key: string, index: number) => {
-                      const isFirst = index === 0;
-                      const value = row[key as keyof T];
-                      return isFirst ? (
-                        <TableCell component="th" id={labelId} scope="row" padding="none">
-                          {value}
-                        </TableCell>
-                      ) : (
-                        <TableCell>{value}</TableCell>
-                      );
-                    });
+                    const cells = Object.keys(row).map((key: string, index: number) => (
+                      <RegenTableCell isFirst={index === 0} value={row[key]} labelId={labelId} />
+                    ));
 
                     return (
                       <TableRow
                         hover
                         onClick={event => handleClick(event, `${row.name}`)}
-                        role="checkbox"
                         tabIndex={-1}
                         key={row.name}
                       >
-                        {rowComponent}
+                        {cells}
                       </TableRow>
                     );
                   },

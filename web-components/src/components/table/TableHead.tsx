@@ -32,7 +32,7 @@ function RegenTableHead<T>(props: EnhancedTableProps<T>): JSX.Element {
         {headRows.map(row => (
           <TableCell
             key={`${row.id}`}
-            align={row.numeric ? 'right' : 'left'}
+            align="left"
             padding={row.disablePadding ? 'none' : 'default'}
             sortDirection={orderBy === row.id ? order : false}
           >

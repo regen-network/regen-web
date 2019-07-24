@@ -2,6 +2,7 @@ import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import Table from 'web-components/lib/components/table';
 import { HeadRow } from 'web-components/lib/components/table/TableHead';
+import { withKnobs, number } from '@storybook/addon-knobs';
 
 interface Data {
   calories: number;
@@ -53,6 +54,27 @@ const headRows: ReadonlyArray<HeadRow<Data>> = [
 
 const rows = generateRows(20);
 
-storiesOf('Components|Views', module).add('welcome', () => (
-  <Table initialOrderBy="calories" rows={rows} headRows={headRows} rowsPage={10} />
-));
+storiesOf('Components|Tables/ Regen Tables', module)
+  .addDecorator(withKnobs)
+  .add('Sort and Pagination table', () =>
+    React.createElement(() => (
+      <Table
+        initialOrderBy="calories"
+        rows={rows}
+        headRows={headRows}
+        rowsPage={number('Rows per page', 10)}
+      />
+    )),
+  )
+  .add('5000 rows displaying 1000 rows per page', () => {
+    const rows = generateRows(5000);
+
+    return React.createElement(() => (
+      <Table
+        initialOrderBy="calories"
+        rows={rows}
+        headRows={headRows}
+        rowsPage={number('Rows per page', 1000)}
+      />
+    ));
+  });

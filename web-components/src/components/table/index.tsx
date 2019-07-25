@@ -39,7 +39,7 @@ export interface TableType {
   [key: string]: string | number;
 }
 
-export default function EnhancedTable<T extends TableType>({
+export default function RegenTable<T extends TableType>({
   initialOrderBy,
   headRows,
   rowsPage,

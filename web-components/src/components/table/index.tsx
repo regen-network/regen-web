@@ -27,14 +27,19 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-interface Props<T> {
+interface Props<TableType> {
   readonly rowsPage: number;
-  readonly initialOrderBy: keyof T;
-  readonly rows: ReadonlyArray<T>;
-  readonly headRows: ReadonlyArray<HeadRow<T>>;
+  readonly initialOrderBy: keyof TableType;
+  readonly rows: ReadonlyArray<TableType>;
+  readonly headRows: ReadonlyArray<HeadRow<TableType>>;
 }
 
-export default function EnhancedTable<T extends { name: string; [key: string]: string | number }>({
+export interface TableType {
+  name: string;
+  [key: string]: string | number;
+}
+
+export default function EnhancedTable<T extends TableType>({
   initialOrderBy,
   headRows,
   rowsPage,

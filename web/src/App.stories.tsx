@@ -1,10 +1,11 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import Table from 'web-components/lib/components/table';
+import Table, { TableType } from 'web-components/lib/components/table';
 import { HeadRow } from 'web-components/lib/components/table/TableHead';
 import { withKnobs, number } from '@storybook/addon-knobs';
 
-interface Data {
+// https://stackoverflow.com/questions/37006008/typescript-index-signature-is-missing-in-type
+interface Data extends TableType {
   calories: number;
   carbs: number;
   fat: number;

@@ -55,9 +55,13 @@ const headRows: ReadonlyArray<HeadRow<Data>> = [
 
 const rows = generateRows(20);
 
-storiesOf('Components|Tables/ Regen Tables', module)
-  .addDecorator(withKnobs)
-  .add('Sort and Pagination table', () =>
+export default {
+  title: 'Components|Tables/ Regen Tables',
+  component: Table,
+  decorators: [withKnobs]
+};
+
+export const sortAndPaginationTable = () =>
     React.createElement(() => (
       <Table
         initialOrderBy="calories"
@@ -65,9 +69,9 @@ storiesOf('Components|Tables/ Regen Tables', module)
         headRows={headRows}
         rowsPage={number('Rows per page', 10)}
       />
-    )),
-  )
-  .add('5000 rows displaying 1000 rows per page', () => {
+    ));
+
+export const displaying1000RowsPerPage = () => {
     const rows = generateRows(5000);
 
     return React.createElement(() => (
@@ -78,4 +82,4 @@ storiesOf('Components|Tables/ Regen Tables', module)
         rowsPage={number('Rows per page', 1000)}
       />
     ));
-  });
+  };

@@ -4,14 +4,35 @@ import { ThemeOptions } from '@material-ui/core/styles/createMuiTheme';
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: '#4fb573',
-      contrastText: 'white',
+      main: '#fff',
+      contrastText: '#000',
     },
     secondary: {
-      main: '#ffc433',
+      main: '#545555',
+    },
+    info: {
+      main: '#4FB573',
     },
     contrastThreshold: 3,
     tonalOffset: 0.2,
+  },
+  typography: {
+    fontFamily: [
+      '"Lato"',
+      'sans-serif',
+    ].join(','),
+    body2: {
+      fontFamily: [
+        '"Muli"',
+        'sans-serif',
+      ].join(','),
+    },
+    h1: {
+      fontSize: '1.5rem'
+    },
+    h2: {
+      fontSize: '1.3rem'
+    }
   },
 });
 

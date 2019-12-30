@@ -1,6 +1,5 @@
 import { ThemeProvider } from '@material-ui/styles';
 import * as React from 'react';
-
 import theme from './muiTheme';
 
 interface Props {
@@ -15,7 +14,7 @@ const MedulasThemeProvider = ({ injectFonts = false, injectStyles, children }: P
   }
 
   if (injectFonts) {
-    require('./fonts.css');
+    require('web-components/src/theme/fonts.css');
   }
 
   return <ThemeProvider theme={theme}>{children}</ThemeProvider>;

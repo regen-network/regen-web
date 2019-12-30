@@ -11,7 +11,7 @@
     "url": "https://github.com/regen-network/regen-app"
   },
   "dependencies": {
-    "serve": "^11.1.0"
+    "serve": "^11.2.0"
   },
   "workspaces": [
     "web",
@@ -35,18 +35,18 @@
     "@storybook/addon-viewport": "^5.2.8",
     "@storybook/addons": "^5.2.8",
     "@storybook/react": "^5.2.8",
-    "@types/jest": "24.0.15",
-    "@types/node": "12.6.8",
-    "@types/react": "16.8.23",
-    "@types/react-dom": "16.8.4",
-    "babel-loader": "8.0.5",
-    "eslint-config-prettier": "^6.0.0",
-    "eslint-plugin-prettier": "^3.1.0",
-    "husky": "^1.3.1",
-    "lerna": "^3.15.0",
-    "prettier": "1.18.2",
+    "@types/jest": "24.0.25",
+    "@types/node": "13.1.1",
+    "@types/react": "16.9.17",
+    "@types/react-dom": "16.9.4",
+    "babel-loader": "8.0.6",
+    "eslint-config-prettier": "^6.8.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "husky": "^3.1.0",
+    "lerna": "^3.19.0",
+    "prettier": "1.19.1",
     "shx": "^0.3.2",
-    "typescript": "3.5.3"
+    "typescript": "3.7.4"
   },
   "husky": {
     "hooks": {

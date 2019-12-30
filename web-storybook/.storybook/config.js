@@ -1,5 +1,10 @@
-import { addParameters, configure } from '@storybook/react';
+import { addDecorator, addParameters, configure } from '@storybook/react';
 import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
+import theme from 'web-components/lib/theme/muiTheme';
+import { muiTheme } from 'storybook-addon-material-ui';
+import 'web-components/src/theme/fonts.css';
+
+addDecorator(muiTheme([theme]));
 
 addParameters({
   viewport: {

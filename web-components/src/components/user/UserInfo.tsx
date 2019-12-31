@@ -30,7 +30,6 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     fontWeight: 'bold',
   }),
   title: {
-    color: theme.palette.secondary.main,
     fontSize: '0.875rem',
   },
   place: props => ({
@@ -56,7 +55,12 @@ export default function UserInfo({
       </Grid>
       <Grid item className={classes.text}>
         <Typography className={classes.name}>{name}</Typography>
-        {title && <Typography className={classes.title}>{title}</Typography>}
+        {title &&
+          <Typography
+            color="secondary"
+            className={classes.title}>
+              {title}
+          </Typography>}
         {place && <Typography className={classes.place}>{place}</Typography>}
       </Grid>
     </Grid>

@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build-storybook": "build-storybook -s public",
-    "storybook": "start-storybook -p 9009 -s public"
+    "storybook": "start-storybook -p 9009 -s ./public"
   },
   "browserslist": [
     ">0.2%",

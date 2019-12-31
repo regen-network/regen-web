@@ -4,7 +4,7 @@ import UserInfo from 'web-components/lib/components/user/UserInfo';
 
 export default {
   title: 'Components|User',
-  component: UserAvatar,
+  component: UserInfo,
 }
 
 const name: string = "Odonata";

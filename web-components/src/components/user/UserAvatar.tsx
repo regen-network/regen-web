@@ -26,7 +26,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
 export default function UserAvatar({ alt, src, size }: UserAvatarProps): JSX.Element {
   const spacing: number = getSize(size);
   // TODO: is fallback icon when src not provided ok? what about the bg color?
-  const classes = useStyles({spacing});
+  const classes = useStyles({ spacing });
   return (
     <Avatar className={classes.root} alt={alt} src={src} />
   );

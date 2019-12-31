@@ -16,3 +16,22 @@ export function getSize(size?: string): number {
   }
   return spacing;
 }
+
+export function getFontSize(size?: string): string {
+  let fontSize: string;
+  switch(size) {
+    case 'big':
+      fontSize = '1.125';
+      break;
+    case 'medium':
+      fontSize = '1';
+      break;
+    case 'small':
+      fontSize = '0.875';
+      break;
+    default:
+      fontSize = '1';
+      break;
+  }
+  return fontSize + 'rem';
+}

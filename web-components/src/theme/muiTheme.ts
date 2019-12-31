@@ -16,6 +16,7 @@ const theme = createMuiTheme({
     contrastThreshold: 3,
     tonalOffset: 0.2,
   },
+  spacing: factor => `${0.25 * factor}rem`,
   typography: {
     fontFamily: [
       '"Lato"',

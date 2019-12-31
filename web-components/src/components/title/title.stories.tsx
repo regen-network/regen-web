@@ -1,6 +1,5 @@
 import * as React from 'react';
 import Title from 'web-components/lib/components/title';
-import { muiTheme } from 'storybook-addon-material-ui';
 
 // https://github.com/storybookjs/storybook/issues/7677
 // export interface StoryMetadata {

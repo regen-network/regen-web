@@ -19,7 +19,6 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 export default function Title({ size, children, color }: TitleProps): JSX.Element {
   const classes = useStyles({});
-  console.log(color)
   return (
     <Typography
       className={classes.root}

@@ -5,6 +5,7 @@ import Card from '@material-ui/core/Card';
 interface RegenCardProps {
   children?: any;
   width?: string;
+  onClick?: () => void;
 }
 
 interface StyleProps {
@@ -19,10 +20,14 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   }),
 }));
 
-export default function RegenCard({ children, width }: RegenCardProps): JSX.Element {
+export default function RegenCard({ children, width, onClick }: RegenCardProps): JSX.Element {
   const classes = useStyles({ width });
   return (
-    <Card classes={{ root: classes.root }} elevation={0}>
+    <Card
+      onClick={onClick}
+      classes={{ root: classes.root }}
+      elevation={0}
+    >
       {children}
     </Card>
   );

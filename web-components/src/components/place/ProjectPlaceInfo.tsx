@@ -5,11 +5,12 @@ interface ProjectPlaceInfoProps {
   place: string;
   area: number;
   fontSize?: string;
+  color?: string;
 }
 
-export default function ProjectPlaceInfo({ place, area, fontSize }: ProjectPlaceInfoProps): JSX.Element {
+export default function ProjectPlaceInfo({ place, area, fontSize, color }: ProjectPlaceInfoProps): JSX.Element {
   return (
-    <PlaceInfo fontSize={fontSize}>
+    <PlaceInfo fontSize={fontSize} color={color}>
       {place} | {area} hectares
     </PlaceInfo>
   );

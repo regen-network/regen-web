@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
+import { useTheme } from '@material-ui/core/styles';
 import PlaceInfo from './PlaceInfo';
 
 interface CreditPlaceInfoProps {
@@ -16,8 +17,10 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 export default function CreditPlaceInfo({ place, outcome, fontSize }: CreditPlaceInfoProps): JSX.Element {
   const classes = useStyles({});
+  const theme = useTheme();
+
   return (
-    <PlaceInfo fontSize={fontSize} color="#202020">
+    <PlaceInfo fontSize={fontSize} color={theme.palette.primary.light}>
       {place}
       {outcome && " in "}
       {outcome && <span className={classes.outcome}>{outcome}</span>}

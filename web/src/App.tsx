@@ -9,7 +9,7 @@ const App: React.FC = (): JSX.Element => {
     <ThemeProvider injectFonts>
       <div className="App">
         <header className="App-header">
-          <Title size="h1">Sheok Hill</Title>
+          <Title variant="h1">Sheok Hill</Title>
           <img src={logo} className="App-logo" alt="logo" />
           <p>
             Edit <code>src/App.tsx</code> and save to reload.

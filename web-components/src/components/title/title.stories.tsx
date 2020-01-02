@@ -23,19 +23,19 @@ export default {
 };
 
 export const mainTitle = (): JSX.Element => (
-  <Title size="h1">
+  <Title variant="h1">
     Sheok Hill
   </Title>
 );
 
 export const subtitle = (): JSX.Element => (
-  <Title size="h2">
+  <Title variant="h2">
     Ecological Practices
   </Title>
 );
 
 export const whiteTitle = (): JSX.Element => (
-  <Title color="primary" size="h1">
+  <Title color="primary" variant="h1">
     Satellite Imagery
   </Title>
 );

@@ -5,9 +5,16 @@ import PlaceIcon from '@material-ui/icons/Place';
 
 interface PlaceInfoProps {
   children?: any;
+  fontSize?: string;
+  color?: string;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+interface StyleProps {
+  fontSize?: string;
+  color?: string;
+}
+
+const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   root: {
     display: 'flex',
     alignItems: 'center',
@@ -17,14 +24,15 @@ const useStyles = makeStyles((theme: Theme) => ({
     color: theme.palette.info.main,
     marginRight: theme.spacing(0.75),
   },
-  content: {
-    fontSize: '0.875rem',
-  },
+  content: props => ({
+    fontSize: props.fontSize || '0.875rem',
+    color: props.color || theme.palette.primary.contrastText,
+  }),
 }));
 
 
-export default function PlaceInfo({ children }: PlaceInfoProps): JSX.Element {
-  const classes = useStyles({});
+export default function PlaceInfo({ children, fontSize, color }: PlaceInfoProps): JSX.Element {
+  const classes = useStyles({ fontSize, color });
   return (
     <div className={classes.root}>
       <PlaceIcon className={classes.icon} />

@@ -5,6 +5,7 @@ import PlaceInfo from './PlaceInfo';
 interface CreditPlaceInfoProps {
   place: string;
   outcome?: string;
+  fontSize?: string;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -13,10 +14,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function CreditPlaceInfo({ place, outcome }: CreditPlaceInfoProps): JSX.Element {
+export default function CreditPlaceInfo({ place, outcome, fontSize }: CreditPlaceInfoProps): JSX.Element {
   const classes = useStyles({});
   return (
-    <PlaceInfo>
+    <PlaceInfo fontSize={fontSize} color="#202020">
       {place}
       {outcome && " in "}
       {outcome && <span className={classes.outcome}>{outcome}</span>}

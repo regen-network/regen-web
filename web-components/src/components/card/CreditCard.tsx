@@ -29,6 +29,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontSize: '0.875rem',
     lineHeight: '150%',
     marginBottom: theme.spacing(3),
+    color: theme.palette.info.main,
   },
   creditsContainer: {
     marginTop: theme.spacing(3.75),
@@ -45,7 +46,6 @@ export default function CreditCard({ credit, onClick }: CreditCardProps): JSX.El
       name={credit.name}
     >
       <Typography
-        color="secondary"
         className={classes.description}>
         {credit.description}
       </Typography>

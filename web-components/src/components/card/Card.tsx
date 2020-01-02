@@ -14,7 +14,7 @@ interface StyleProps {
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   root: props => ({
-    border: `1px solid ${theme.palette.secondary.light}`,
+    border: `1px solid ${theme.palette.info.light}`,
     borderRadius: '5px',
     maxWidth: props.width || '100%',
   }),

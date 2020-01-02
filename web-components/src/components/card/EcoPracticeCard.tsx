@@ -28,6 +28,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   description: {
     fontSize: '0.75rem',
     textAlign: 'center',
+    color: theme.palette.info.main,
   },
 }));
 
@@ -44,7 +45,6 @@ export default function EcoPractiveCard({
         <CardMedia className={classes.image} image={imgSrc} />
         <Typography className={classes.name}>{name}</Typography>
         <Typography
-          color="secondary"
           className={classes.description}>
           {description}
         </Typography>

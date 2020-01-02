@@ -11,7 +11,7 @@ interface CreditPlaceInfoProps {
 
 const useStyles = makeStyles((theme: Theme) => ({
   outcome: {
-    color: theme.palette.info.main,
+    color: theme.palette.secondary.main,
   },
 }));
 

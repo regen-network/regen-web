@@ -33,7 +33,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     fontSize: '0.875rem',
   },
   place: props => ({
-    color: props.title ? '#8F8F8F' : theme.palette.secondary.main,
+    color: props.title ? '#8F8F8F' : theme.palette.info.main,
     fontSize: '0.75rem',
   }),
 }));

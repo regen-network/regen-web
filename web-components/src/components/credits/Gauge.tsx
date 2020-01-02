@@ -14,12 +14,12 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   root: {
     height: theme.spacing(1.25),
     borderRadius: '0.5rem',
-    backgroundColor: theme.palette.secondary.light,
+    backgroundColor: theme.palette.info.light,
   },
   gauge: props => ({
     width: `${props.percentage}%`,
     height: '100%',
-    backgroundColor: theme.palette.info.main,
+    backgroundColor: theme.palette.secondary.main,
     borderRadius: '0.5rem',
   }),
 }));

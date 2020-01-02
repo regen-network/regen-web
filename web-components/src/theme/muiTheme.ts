@@ -9,14 +9,15 @@ const theme = createMuiTheme({
       light: '#202020',
     },
     secondary: {
+      main: '#4FB573',
+      light: '#DCF0E3',
+    },
+    info: {
       main: '#545555',
       light: '#EFEFEF'
     },
-    info: {
-      main: '#4FB573',
-    },
-    contrastThreshold: 3,
-    tonalOffset: 0.2,
+    // contrastThreshold: 3,
+    // tonalOffset: 0.2,
   },
   spacing: factor => `${0.25 * factor}rem`,
   typography: {

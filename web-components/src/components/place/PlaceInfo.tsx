@@ -21,7 +21,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   },
   icon: {
     fontSize: '1rem',
-    color: theme.palette.info.main,
+    color: theme.palette.secondary.main,
     marginRight: theme.spacing(0.75),
   },
   content: props => ({

@@ -2,12 +2,12 @@ import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 
 interface GaugeProps {
-  amount: number,
-  totalAmount: number,
+  amount: number;
+  totalAmount: number;
 }
 
 interface StyleProps {
-  percentage: number,
+  percentage: number;
 }
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
@@ -26,7 +26,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
 
 export default function Gauge({ amount, totalAmount }: GaugeProps): JSX.Element {
   const classes = useStyles({
-    percentage: totalAmount? 100 * amount / totalAmount : 0,
+    percentage: totalAmount ? (100 * amount) / totalAmount : 0,
   });
   return (
     <div className={classes.root}>

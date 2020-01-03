@@ -6,18 +6,12 @@ import CreditPlaceInfo from 'web-components/lib/components/place/CreditPlaceInfo
 export default {
   title: 'Components|Place',
   component: PlaceInfo,
-}
+};
 
-export const basicPlaceInfo = (): JSX.Element => (
-  <PlaceInfo>
-    Victoria, Australia
-  </PlaceInfo>
-);
+export const basicPlaceInfo = (): JSX.Element => <PlaceInfo>Victoria, Australia</PlaceInfo>;
 
 export const projectPlaceInfo = (): JSX.Element => (
-  <ProjectPlaceInfo place="Melbourne, Victoria, Australia" area={440}/>
+  <ProjectPlaceInfo place="Melbourne, Victoria, Australia" area={440} />
 );
 
-export const creditPlaceInfo = (): JSX.Element => (
-  <CreditPlaceInfo place="Brazil" outcome="carbon" />
-);
+export const creditPlaceInfo = (): JSX.Element => <CreditPlaceInfo place="Brazil" outcome="carbon" />;

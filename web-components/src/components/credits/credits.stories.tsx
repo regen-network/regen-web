@@ -24,25 +24,12 @@ export const creditsWithGauge = (): JSX.Element => (
   />
 );
 
-export const gauge = (): JSX.Element => (
-  <Gauge
-    amount={credit.amount}
-    totalAmount={credit.totalAmount}
-  />
-);
+export const gauge = (): JSX.Element => <Gauge amount={credit.amount} totalAmount={credit.totalAmount} />;
 
 export const formattedText = (): JSX.Element => (
-  <GaugeText
-    number={credit.totalAmount}
-    label="credits issued"
-    format
-  />
+  <GaugeText number={credit.totalAmount} label="credits issued" format />
 );
 
 export const smallText = (): JSX.Element => (
-  <GaugeText
-    number={credit.numberOfProjects}
-    label="projects"
-    variant="body2"
-  />
+  <GaugeText number={credit.numberOfProjects} label="projects" variant="body2" />
 );

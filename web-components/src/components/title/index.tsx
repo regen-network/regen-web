@@ -24,7 +24,8 @@ export default function Title({ variant, children, color, className }: TitleProp
       className={`${classes.root} ${className}`}
       color={color || 'textPrimary'}
       align="left"
-      variant={variant}>
+      variant={variant}
+    >
       {children}
     </Typography>
   );

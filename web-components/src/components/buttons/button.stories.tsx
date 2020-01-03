@@ -1,6 +1,5 @@
 import * as React from 'react';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
-import PlayButton from 'web-components/lib/components/buttons/PlayButton';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 
 export default {
@@ -9,7 +8,5 @@ export default {
 };
 
 export const outlinedButton = (): JSX.Element => (
-  <OutlinedButton startIcon={<ArrowDownwardIcon />}>
-    read more
-  </OutlinedButton>
+  <OutlinedButton startIcon={<ArrowDownwardIcon />}>read more</OutlinedButton>
 );

@@ -27,7 +27,5 @@ export default function UserAvatar({ alt, src, size }: UserAvatarProps): JSX.Ele
   const spacing: number = getSize(size);
   // TODO: is fallback icon when src not provided ok? what about the bg color?
   const classes = useStyles({ spacing });
-  return (
-    <Avatar className={classes.root} alt={alt} src={src} />
-  );
+  return <Avatar className={classes.root} alt={alt} src={src} />;
 }

@@ -3341,7 +3341,7 @@
     pretty-hrtime "^1.0.3"
     regenerator-runtime "^0.12.1"
 
-"@storybook/react@^5.2.8":
+"@storybook/react@^5.2.0", "@storybook/react@^5.2.8":
   version "5.2.8"
   resolved "https://registry.yarnpkg.com/@storybook/react/-/react-5.2.8.tgz#8d44c2d34caa1d7d748ec1fc9cf0fe2a88b001f9"
   integrity sha512-T1DoWpSz33vaGx85Dh7q2KYetg7dQyiYhuOnZm2WxZTFZOw1jP62si53JGFp0PKxnT6iOBLHo3v2QkRkjt2mdQ==
@@ -3753,6 +3753,13 @@
 "@types/stack-utils@^1.0.1":
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@types/stack-utils/-/stack-utils-1.0.1.tgz#0a851d3bd96498fa25c33ab7278ed3bd65f06c3e"
+
+"@types/storybook__addon-storyshots@^5.1.2":
+  version "5.1.2"
+  resolved "https://registry.yarnpkg.com/@types/storybook__addon-storyshots/-/storybook__addon-storyshots-5.1.2.tgz#b5a298c60fae60f594497fa67f9b9d82b074049f"
+  integrity sha512-+wSNb0JtRMg5AJ7LVTSKmVqU63TLoLXApljQekLvamAZPJnX08nmr1CmHzoniuK/ZpEJ3xErKoYQtrJWWdSw5Q==
+  dependencies:
+    "@storybook/react" "^5.2.0"
 
 "@types/webpack-env@^1.13.7", "@types/webpack-env@^1.14.0":
   version "1.14.1"

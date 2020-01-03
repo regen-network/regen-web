@@ -1,6 +1,5 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
-import Typography from '@material-ui/core/Typography';
 import CardMedia from '@material-ui/core/CardMedia';
 import Card from './Card';
 import Title from '../title';
@@ -29,13 +28,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function MediaCard({
-  children,
-  name,
-  imgSrc,
-  onClick,
-  width,
-}: MediaCardProps): JSX.Element {
+export default function MediaCard({ children, name, imgSrc, onClick, width }: MediaCardProps): JSX.Element {
   const classes = useStyles({});
 
   return (
@@ -43,9 +36,7 @@ export default function MediaCard({
       <CardMedia className={classes.image} image={imgSrc} />
       <div className={classes.container}>
         <Title variant="h3">{name}</Title>
-        <div className={classes.content}>
-          {children}
-        </div>
+        <div className={classes.content}>{children}</div>
       </div>
     </Card>
   );

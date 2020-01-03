@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   searchIcon: {
     color: '#D2D5D9', // TODO: change with color from theme.palette
     marginRight: theme.spacing(6.25),
-    marginBottom: theme.spacing(1)
+    marginBottom: theme.spacing(1),
   },
   menuIcon: {
     color: theme.palette.primary.contrastText,
@@ -32,13 +32,7 @@ export default function Header({ logo }: HeaderProps): JSX.Element {
   const classes = useStyles({});
   // TODO: Add search/menu logic
   return (
-    <Grid
-      container
-      direction="row"
-      className={classes.root}
-      alignItems="center"
-      justify="space-between"
-    >
+    <Grid container direction="row" className={classes.root} alignItems="center" justify="space-between">
       <Grid item>
         <a href="https://www.regen.network/">
           <img alt="Regen Network" src={logo} className={classes.image} />

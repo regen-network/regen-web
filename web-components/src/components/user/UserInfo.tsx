@@ -44,7 +44,7 @@ export default function UserInfo({
   place,
   imgSrc,
   size,
-  direction
+  direction,
 }: UserInfoProps): JSX.Element {
   const fontSize: string = getFontSize(size);
   const classes = useStyles({ fontSize, title, direction });
@@ -55,12 +55,11 @@ export default function UserInfo({
       </Grid>
       <Grid item className={classes.text}>
         <Typography className={classes.name}>{name}</Typography>
-        {title &&
-          <Typography
-            color="secondary"
-            className={classes.title}>
-              {title}
-          </Typography>}
+        {title && (
+          <Typography color="secondary" className={classes.title}>
+            {title}
+          </Typography>
+        )}
         {place && <Typography className={classes.place}>{place}</Typography>}
       </Grid>
     </Grid>

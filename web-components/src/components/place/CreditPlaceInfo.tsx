@@ -22,7 +22,7 @@ export default function CreditPlaceInfo({ place, outcome, fontSize }: CreditPlac
   return (
     <PlaceInfo fontSize={fontSize} color={theme.palette.primary.light}>
       {place}
-      {outcome && " in "}
+      {outcome && ' in '}
       {outcome && <span className={classes.outcome}>{outcome}</span>}
     </PlaceInfo>
   );

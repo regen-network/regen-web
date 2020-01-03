@@ -44,10 +44,7 @@ export default function EcoPractiveCard({
       <Grid className={classes.container} container alignItems="center" direction="column">
         <CardMedia className={classes.image} image={imgSrc} />
         <Typography className={classes.name}>{name}</Typography>
-        <Typography
-          className={classes.description}>
-          {description}
-        </Typography>
+        <Typography className={classes.description}>{description}</Typography>
       </Grid>
     </Card>
   );

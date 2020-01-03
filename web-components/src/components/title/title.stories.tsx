@@ -22,17 +22,9 @@ export default {
   component: Title,
 };
 
-export const mainTitle = (): JSX.Element => (
-  <Title variant="h1">
-    Sheok Hill
-  </Title>
-);
+export const mainTitle = (): JSX.Element => <Title variant="h1">Sheok Hill</Title>;
 
-export const subtitle = (): JSX.Element => (
-  <Title variant="h2">
-    Ecological Practices
-  </Title>
-);
+export const subtitle = (): JSX.Element => <Title variant="h2">Ecological Practices</Title>;
 
 export const whiteTitle = (): JSX.Element => (
   <Title color="primary" variant="h1">

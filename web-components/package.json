@@ -9,7 +9,8 @@
     "watch": "yarn remove-previous-files && tsc --watch && yarn copy-assets",
     "build": "yarn remove-previous-files && tsc && yarn copy-assets",
     "format": "prettier --write --loglevel warn './src/**/*.{ts,tsx,json,md,css}'",
-    "lint": "tsc --noEmit && eslint -c .eslintrc.js --max-warnings 0 'src/**/*.ts{,x}'"
+    "lint": "tsc --noEmit && eslint -c .eslintrc.js --max-warnings 0 'src/**/*.ts{,x}'",
+    "lint-fix": "tsc --noEmit && eslint --fix -c .eslintrc.js --max-warnings 0 'src/**/*.ts{,x}'"
   },
   "browserslist": [
     ">0.2%",

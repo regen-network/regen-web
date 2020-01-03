@@ -15,7 +15,5 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 export default function Description({ children }: DescriptionProps): JSX.Element {
   const classes = useStyles({});
-  return (
-    <Typography className={classes.root}>{children}</Typography>
-  );
+  return <Typography className={classes.root}>{children}</Typography>;
 }

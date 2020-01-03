@@ -8,7 +8,12 @@ interface ProjectPlaceInfoProps {
   color?: string;
 }
 
-export default function ProjectPlaceInfo({ place, area, fontSize, color }: ProjectPlaceInfoProps): JSX.Element {
+export default function ProjectPlaceInfo({
+  place,
+  area,
+  fontSize,
+  color,
+}: ProjectPlaceInfoProps): JSX.Element {
   return (
     <PlaceInfo fontSize={fontSize} color={color}>
       {place} | {area} hectares

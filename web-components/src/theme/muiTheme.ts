@@ -14,35 +14,27 @@ const theme = createMuiTheme({
     },
     info: {
       main: '#545555',
-      light: '#EFEFEF'
+      light: '#EFEFEF',
     },
     // contrastThreshold: 3,
     // tonalOffset: 0.2,
   },
   spacing: factor => `${0.25 * factor}rem`,
   typography: {
-    fontFamily: [
-      '-apple-system',
-      '"Lato"',
-      'sans-serif',
-    ].join(','),
+    fontFamily: ['-apple-system', '"Lato"', 'sans-serif'].join(','),
     h1: {
       fontSize: '1.5rem',
-      fontFamily: [
-        '-apple-system',
-        '"Muli"',
-        'sans-serif',
-      ].join(','),
+      fontFamily: ['-apple-system', '"Muli"', 'sans-serif'].join(','),
     },
     h2: {
-      fontSize: '1.3125rem'
+      fontSize: '1.3125rem',
     },
     h3: {
-      fontSize: '1.125rem'
+      fontSize: '1.125rem',
     },
     body2: {
-      fontSize: '0.875rem'
-    }
+      fontSize: '0.875rem',
+    },
   },
   props: {
     MuiTypography: {

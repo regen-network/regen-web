@@ -1,8 +1,6 @@
 import React from 'react';
 import { withStyles, Theme } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import Title from '../title';
 
 interface OutlinedButtonProps {
   children?: any;
@@ -30,11 +28,7 @@ const CustomButton = withStyles((theme: Theme) => ({
 
 export default function OutlinedButton(props: OutlinedButtonProps): JSX.Element {
   return (
-    <CustomButton
-      color="secondary"
-      startIcon={props.startIcon}
-      fullWidth={props.fullWidth}
-    >
+    <CustomButton color="secondary" startIcon={props.startIcon} fullWidth={props.fullWidth}>
       {props.children}
     </CustomButton>
   );

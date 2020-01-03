@@ -11,10 +11,10 @@ export interface CreditInfo {
   imgSrc: string;
   place: string;
   outcome: string;
-  numberOfHolders: number,
-  numberOfProjects: number,
-  amount: number, //  current purchased amount
-  totalAmount: number, // total available amount
+  numberOfHolders: number;
+  numberOfProjects: number;
+  amount: number; //  current purchased amount
+  totalAmount: number; // total available amount
   unit?: string; // currency?
 }
 
@@ -40,21 +40,9 @@ const useStyles = makeStyles((theme: Theme) => ({
 export default function CreditCard({ credit, onClick, width }: CreditCardProps): JSX.Element {
   const classes = useStyles({});
   return (
-    <MediaCard
-      onClick={onClick}
-      imgSrc={credit.imgSrc}
-      name={credit.name}
-      width={width}
-    >
-      <Typography
-        className={classes.description}>
-        {credit.description}
-      </Typography>
-      <CreditPlaceInfo
-        place={credit.place}
-        outcome={credit.outcome}
-        fontSize="0.8125rem"
-      />
+    <MediaCard onClick={onClick} imgSrc={credit.imgSrc} name={credit.name} width={width}>
+      <Typography className={classes.description}>{credit.description}</Typography>
+      <CreditPlaceInfo place={credit.place} outcome={credit.outcome} fontSize="0.8125rem" />
       <div className={classes.creditsContainer}>
         <Credits
           numberOfHolders={credit.numberOfHolders}

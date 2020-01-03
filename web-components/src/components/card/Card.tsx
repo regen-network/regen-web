@@ -23,11 +23,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
 export default function RegenCard({ children, width, onClick }: RegenCardProps): JSX.Element {
   const classes = useStyles({ width });
   return (
-    <Card
-      onClick={onClick}
-      classes={{ root: classes.root }}
-      elevation={0}
-    >
+    <Card onClick={onClick} classes={{ root: classes.root }} elevation={0}>
       {children}
     </Card>
   );

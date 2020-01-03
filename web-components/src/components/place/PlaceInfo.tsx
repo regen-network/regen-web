@@ -31,7 +31,6 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   }),
 }));
 
-
 export default function PlaceInfo({ children, fontSize, color }: PlaceInfoProps): JSX.Element {
   const classes = useStyles({ fontSize, color });
   return (

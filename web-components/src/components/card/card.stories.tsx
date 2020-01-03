@@ -19,25 +19,16 @@ const practiceSrc: string = '/no-till-ag.png';
 const practiceDescription: string = 'South Melbourne, Victoria, Australia';
 
 export const projectDeveloperCard = (): JSX.Element => (
-  <ProjectDeveloperCard
-    name={projectName}
-    place={projectPlace}
-    imgSrc={projectSrc}
-  />
+  <ProjectDeveloperCard name={projectName} place={projectPlace} imgSrc={projectSrc} />
 );
 
 export const ecoPracticeCard = (): JSX.Element => (
-  <EcoPracticeCard
-    name={practiceName}
-    description={practiceDescription}
-    imgSrc={practiceSrc}
-  />
+  <EcoPracticeCard name={practiceName} description={practiceDescription} imgSrc={practiceSrc} />
 );
 
 const creditInfo: CreditInfo = {
   name: 'REDD+ in the Amazon',
-  description: 'Reduce the emissions from deforestation and \
-    forest degradation in the Amazon',
+  description: 'Reduce the emissions from deforestation and forest degradation in the Amazon',
   imgSrc: '/Polyculture.png',
   place: 'Brazil',
   outcome: 'carbon sequestration',
@@ -49,7 +40,7 @@ const creditInfo: CreditInfo = {
 };
 
 function onClick(): void {
-  console.log('clicked');
+  // console.log('clicked');
 }
 
 export const creditCard = (): JSX.Element => (
@@ -63,6 +54,4 @@ const projectInfo: ProjectInfo = {
   imgSrc: '/orana.png',
 };
 
-export const projectCard = (): JSX.Element => (
-  <ProjectCard project={projectInfo} onClick={onClick} />
-);
+export const projectCard = (): JSX.Element => <ProjectCard project={projectInfo} onClick={onClick} />;

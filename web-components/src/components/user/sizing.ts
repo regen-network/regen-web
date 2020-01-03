@@ -1,6 +1,6 @@
 export function getSize(size?: string): number {
   let spacing: number;
-  switch(size) {
+  switch (size) {
     case 'big':
       spacing = 14.5;
       break;
@@ -19,7 +19,7 @@ export function getSize(size?: string): number {
 
 export function getFontSize(size?: string): string {
   let fontSize: string;
-  switch(size) {
+  switch (size) {
     case 'big':
       fontSize = '1.125';
       break;

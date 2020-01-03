@@ -1,18 +1,15 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
-import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
-import { ThemeStyle } from '@material-ui/core/styles/createTypography';
-import Title from '../title';
 import Gauge from './Gauge';
 import GaugeText from './GaugeText';
 import { pluralize } from './pluralize';
 
 export interface CreditsProps {
-  numberOfHolders: number,
-  numberOfProjects: number,
-  amount: number, // current purchased amount
-  totalAmount: number, // total available amount
+  numberOfHolders: number;
+  numberOfProjects: number;
+  amount: number; // current purchased amount
+  totalAmount: number; // total available amount
   unit?: string; // currency?
 }
 
@@ -22,7 +19,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginBottom: theme.spacing(1.5),
   },
 }));
-
 
 export default function Credits(props: CreditsProps): JSX.Element {
   const classes = useStyles({});
@@ -34,12 +30,9 @@ export default function Credits(props: CreditsProps): JSX.Element {
         format
       />
       <Grid item className={classes.gauge}>
-        <Gauge
-          amount={props.amount}
-          totalAmount={props.totalAmount}
-        />
+        <Gauge amount={props.amount} totalAmount={props.totalAmount} />
       </Grid>
-      <Grid item container direction="row" >
+      <Grid item container direction="row">
         <GaugeText
           number={props.numberOfHolders}
           label={`credit ${pluralize(props.numberOfHolders, 'holder')}`}

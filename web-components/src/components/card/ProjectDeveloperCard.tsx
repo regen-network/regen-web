@@ -12,7 +12,7 @@ interface ProjectDeveloperCardProps {
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
-    margin:  `${theme.spacing(4.5)} ${theme.spacing(5.25)}`,
+    margin: `${theme.spacing(4.5)} ${theme.spacing(5.25)}`,
   },
   title: {
     fontSize: '0.6875rem',
@@ -23,17 +23,17 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function ProjectDeveloperCard({ name, place, imgSrc }: ProjectDeveloperCardProps): JSX.Element {
+export default function ProjectDeveloperCard({
+  name,
+  place,
+  imgSrc,
+}: ProjectDeveloperCardProps): JSX.Element {
   const classes = useStyles({});
   return (
     <Card>
       <div className={classes.container}>
         <Typography className={classes.title}>this project is developed by</Typography>
-        <UserInfo
-          name={name}
-          place={place}
-          imgSrc={imgSrc}
-        />
+        <UserInfo name={name} place={place} imgSrc={imgSrc} />
       </div>
     </Card>
   );

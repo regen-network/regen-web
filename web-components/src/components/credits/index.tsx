@@ -32,7 +32,7 @@ export default function Credits(props: CreditsProps): JSX.Element {
       <Grid item className={classes.gauge}>
         <Gauge amount={props.amount} totalAmount={props.totalAmount} />
       </Grid>
-      <Grid item container direction="row">
+      <Grid item container direction="row" justify="space-between">
         <GaugeText
           number={props.numberOfHolders}
           label={`credit ${pluralize(props.numberOfHolders, 'holder')}`}

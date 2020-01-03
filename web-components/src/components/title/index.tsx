@@ -7,6 +7,7 @@ interface TitleProps {
   variant: ThemeStyle;
   children?: any;
   color?: any;
+  className?: string;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -16,11 +17,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function Title({ variant, children, color }: TitleProps): JSX.Element {
+export default function Title({ variant, children, color, className }: TitleProps): JSX.Element {
   const classes = useStyles({});
   return (
     <Typography
-      className={classes.root}
+      className={`${classes.root} ${className}`}
       color={color || 'textPrimary'}
       align="left"
       variant={variant}>

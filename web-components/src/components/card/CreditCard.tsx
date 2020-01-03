@@ -21,7 +21,7 @@ export interface CreditInfo {
 interface CreditCardProps {
   credit: CreditInfo;
   // TODO: add func + variable related to heart round icon, need more info on this
-  onClick(): () => void;
+  onClick: () => void;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -41,7 +41,6 @@ export default function CreditCard({ credit, onClick }: CreditCardProps): JSX.El
   return (
     <MediaCard
       onClick={onClick}
-      width="20.5rem"
       imgSrc={credit.imgSrc}
       name={credit.name}
     >

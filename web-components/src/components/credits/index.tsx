@@ -6,6 +6,7 @@ import { ThemeStyle } from '@material-ui/core/styles/createTypography';
 import Title from '../title';
 import Gauge from './Gauge';
 import GaugeText from './GaugeText';
+import { pluralize } from './pluralize';
 
 export interface CreditsProps {
   numberOfHolders: number,
@@ -29,7 +30,7 @@ export default function Credits(props: CreditsProps): JSX.Element {
     <Grid container direction="column">
       <GaugeText
         number={props.totalAmount}
-        label="credits issued"
+        label={`${pluralize(props.totalAmount, 'credit')} issued`}
         format
       />
       <Grid item className={classes.gauge}>
@@ -41,12 +42,12 @@ export default function Credits(props: CreditsProps): JSX.Element {
       <Grid item container direction="row" justify="space-between">
         <GaugeText
           number={props.numberOfHolders}
-          label="credit holders"
+          label={`credit ${pluralize(props.numberOfHolders, 'holder')}`}
           variant="body2"
         />
         <GaugeText
           number={props.numberOfProjects}
-          label="projects"
+          label={pluralize(props.numberOfProjects, 'project')}
           variant="body2"
         />
       </Grid>

@@ -9,5 +9,7 @@ export default {
 };
 
 export const outlinedButton = (): JSX.Element => (
-  <OutlinedButton text="read more" startIcon={<ArrowDownwardIcon />} />
+  <OutlinedButton startIcon={<ArrowDownwardIcon />}>
+    read more
+  </OutlinedButton>
 );

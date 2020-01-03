@@ -7,6 +7,7 @@ interface PlaceInfoProps {
   children?: any;
   fontSize?: string;
   color?: string;
+  className?: string;
 }
 
 interface StyleProps {

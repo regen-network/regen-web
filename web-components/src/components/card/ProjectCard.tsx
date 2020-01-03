@@ -13,7 +13,7 @@ export interface ProjectInfo {
 
 interface ProjectCardProps {
   project: ProjectInfo;
-  onClick(): () => void;
+  onClick: () => void;
 }
 
 export default function ProjectCard({ project, onClick }: ProjectCardProps): JSX.Element {

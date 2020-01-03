@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import Title from '../title';
 
 interface OutlinedButtonProps {
-  text: string;
+  children?: any;
   startIcon: JSX.Element;
   fullWidth?: boolean;
 }
@@ -21,6 +21,7 @@ const CustomButton = withStyles((theme: Theme) => ({
     paddingBottom: theme.spacing(2),
     paddingRight: theme.spacing(4),
     paddingLeft: theme.spacing(4),
+    backgroundColor: theme.palette.primary.main,
   },
   startIcon: {
     marginRight: 0,
@@ -34,7 +35,7 @@ export default function OutlinedButton(props: OutlinedButtonProps): JSX.Element 
       startIcon={props.startIcon}
       fullWidth={props.fullWidth}
     >
-      {props.text}
+      {props.children}
     </CustomButton>
   );
 }

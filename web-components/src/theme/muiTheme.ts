@@ -22,12 +22,14 @@ const theme = createMuiTheme({
   spacing: factor => `${0.25 * factor}rem`,
   typography: {
     fontFamily: [
+      '-apple-system',
       '"Lato"',
       'sans-serif',
     ].join(','),
     h1: {
       fontSize: '1.5rem',
       fontFamily: [
+        '-apple-system',
         '"Muli"',
         'sans-serif',
       ].join(','),

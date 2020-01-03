@@ -26,5 +26,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@storybook/addon-storyshots": "^5.2.8",
+    "react-test-renderer": "^16.12.0",
+    "require-context.macro": "^1.2.2"
   }
 }

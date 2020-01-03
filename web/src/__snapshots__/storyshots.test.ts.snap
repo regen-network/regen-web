@@ -1,0 +1,834 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Components|Button Outlined Button 1`] = `
+<div>
+  <button
+    className="MuiButtonBase-root MuiButton-root WithStyles(ForwardRef(Button))-root-44 MuiButton-text MuiButton-textSecondary"
+    disabled={false}
+    onBlur={[Function]}
+    onDragLeave={[Function]}
+    onFocus={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    onMouseDown={[Function]}
+    onMouseLeave={[Function]}
+    onMouseUp={[Function]}
+    onTouchEnd={[Function]}
+    onTouchMove={[Function]}
+    onTouchStart={[Function]}
+    tabIndex={0}
+    type="button"
+  >
+    <span
+      className="MuiButton-label"
+    >
+      <span
+        className="MuiButton-startIcon WithStyles(ForwardRef(Button))-startIcon-45 MuiButton-iconSizeMedium"
+      >
+        <svg
+          aria-hidden="true"
+          className="MuiSvgIcon-root"
+          focusable="false"
+          role="presentation"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M20 12l-1.41-1.41L13 16.17V4h-2v12.17l-5.58-5.59L4 12l8 8 8-8z"
+          />
+        </svg>
+      </span>
+      read more
+    </span>
+    <span
+      className="MuiTouchRipple-root"
+    />
+  </button>
+</div>
+`;
+
+exports[`Storyshots Components|Card Credit Card 1`] = `
+<div>
+  <div
+    className="MuiPaper-root MuiCard-root makeStyles-root-1006 makeStyles-root-1007 MuiPaper-elevation0 MuiPaper-rounded"
+    onClick={[Function]}
+  >
+    <div
+      className="MuiCardMedia-root makeStyles-image-1005"
+      style={
+        Object {
+          "backgroundImage": "url(\\"/Polyculture.png\\")",
+        }
+      }
+    />
+    <div
+      className="makeStyles-container-1003"
+    >
+      <h3
+        className="MuiTypography-root makeStyles-root-1040 undefined MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+      >
+        REDD+ in the Amazon
+      </h3>
+      <div
+        className="makeStyles-content-1004"
+      >
+        <p
+          className="MuiTypography-root makeStyles-description-1001 MuiTypography-body1"
+        >
+          Reduce the emissions from deforestation and     forest degradation in the Amazon
+        </p>
+        <div
+          className="makeStyles-root-1072"
+        >
+          <svg
+            aria-hidden="true"
+            className="MuiSvgIcon-root makeStyles-icon-1073"
+            focusable="false"
+            role="presentation"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
+            />
+          </svg>
+          <p
+            className="MuiTypography-root makeStyles-content-1074 makeStyles-content-1075 MuiTypography-body1"
+          >
+            Brazil
+             in 
+            <span
+              className="makeStyles-outcome-1071"
+            >
+              carbon sequestration
+            </span>
+          </p>
+        </div>
+        <div
+          className="makeStyles-creditsContainer-1002"
+        >
+          <div
+            className="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-column"
+          >
+            <p
+              className="MuiTypography-root MuiTypography-body1"
+            >
+              <span
+                className="makeStyles-number-1190"
+              >
+                93,211
+                 
+              </span>
+              <span
+                className="makeStyles-text-1191"
+              >
+                credits issued
+              </span>
+            </p>
+            <div
+              className="MuiGrid-root makeStyles-gauge-1085 MuiGrid-item"
+            >
+              <div
+                className="makeStyles-root-1192"
+              >
+                <div
+                  className="makeStyles-gauge-1193 makeStyles-gauge-1194"
+                />
+              </div>
+            </div>
+            <div
+              className="MuiGrid-root MuiGrid-container MuiGrid-item"
+            >
+              <p
+                className="MuiTypography-root MuiTypography-body2"
+              >
+                <span
+                  className="makeStyles-number-1190"
+                >
+                  1021
+                   
+                </span>
+                <span
+                  className="makeStyles-text-1191"
+                >
+                  credit holders
+                </span>
+              </p>
+              <p
+                className="MuiTypography-root MuiTypography-body2"
+              >
+                <span
+                  className="makeStyles-number-1190"
+                >
+                  25
+                   
+                </span>
+                <span
+                  className="makeStyles-text-1191"
+                >
+                  projects
+                </span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components|Card Eco Practice Card 1`] = `
+<div>
+  <div
+    className="MuiPaper-root MuiCard-root makeStyles-root-639 makeStyles-root-640 MuiPaper-elevation0 MuiPaper-rounded"
+  >
+    <div
+      className="MuiGrid-root makeStyles-container-635 MuiGrid-container MuiGrid-direction-xs-column MuiGrid-align-items-xs-center"
+    >
+      <div
+        className="MuiCardMedia-root makeStyles-image-636"
+        style={
+          Object {
+            "backgroundImage": "url(\\"/no-till-ag.png\\")",
+          }
+        }
+      />
+      <p
+        className="MuiTypography-root makeStyles-name-637 MuiTypography-body1"
+      >
+        Odonata
+      </p>
+      <p
+        className="MuiTypography-root makeStyles-description-638 MuiTypography-body1"
+      >
+        South Melbourne, Victoria, Australia
+      </p>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components|Card Project Card 1`] = `
+<div>
+  <div
+    className="MuiPaper-root MuiCard-root makeStyles-root-1279 makeStyles-root-1280 MuiPaper-elevation0 MuiPaper-rounded"
+    onClick={[Function]}
+  >
+    <div
+      className="MuiCardMedia-root makeStyles-image-1278"
+      style={
+        Object {
+          "backgroundImage": "url(\\"/orana.png\\")",
+        }
+      }
+    />
+    <div
+      className="makeStyles-container-1276"
+    >
+      <h3
+        className="MuiTypography-root makeStyles-root-1313 undefined MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+      >
+        Orana Park
+      </h3>
+      <div
+        className="makeStyles-content-1277"
+      >
+        <div
+          className="makeStyles-root-1344"
+        >
+          <svg
+            aria-hidden="true"
+            className="MuiSvgIcon-root makeStyles-icon-1345"
+            focusable="false"
+            role="presentation"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
+            />
+          </svg>
+          <p
+            className="MuiTypography-root makeStyles-content-1346 makeStyles-content-1347 MuiTypography-body1"
+          >
+            Bendigo, Victoria, Australia
+             | 
+            4500
+             hectares
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components|Card Project Developer Card 1`] = `
+<div>
+  <div
+    className="MuiPaper-root MuiCard-root makeStyles-root-282 makeStyles-root-283 MuiPaper-elevation0 MuiPaper-rounded"
+  >
+    <div
+      className="makeStyles-container-280"
+    >
+      <p
+        className="MuiTypography-root makeStyles-title-281 MuiTypography-body1"
+      >
+        this project is developed by
+      </p>
+      <div
+        className="MuiGrid-root MuiGrid-container MuiGrid-align-items-xs-center"
+      >
+        <div
+          className="MuiGrid-root MuiGrid-item"
+        >
+          <div
+            className="MuiAvatar-root MuiAvatar-circle makeStyles-root-454 makeStyles-root-455"
+          >
+            <img
+              alt="Odonata"
+              className="MuiAvatar-img"
+              src="http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png"
+            />
+          </div>
+        </div>
+        <div
+          className="MuiGrid-root makeStyles-text-343 makeStyles-text-347 MuiGrid-item"
+        >
+          <p
+            className="MuiTypography-root makeStyles-name-344 makeStyles-name-348 MuiTypography-body1"
+          >
+            Odonata
+          </p>
+          <p
+            className="MuiTypography-root makeStyles-place-346 makeStyles-place-349 MuiTypography-body1"
+          >
+            South Melbourne, Victoria, Australia
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components|Credits Credits With Gauge 1`] = `
+<div>
+  <div
+    className="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-column"
+  >
+    <p
+      className="MuiTypography-root MuiTypography-body1"
+    >
+      <span
+        className="makeStyles-number-1602"
+      >
+        93,211
+         
+      </span>
+      <span
+        className="makeStyles-text-1603"
+      >
+        credits issued
+      </span>
+    </p>
+    <div
+      className="MuiGrid-root makeStyles-gauge-1497 MuiGrid-item"
+    >
+      <div
+        className="makeStyles-root-1634"
+      >
+        <div
+          className="makeStyles-gauge-1635 makeStyles-gauge-1636"
+        />
+      </div>
+    </div>
+    <div
+      className="MuiGrid-root MuiGrid-container MuiGrid-item"
+    >
+      <p
+        className="MuiTypography-root MuiTypography-body2"
+      >
+        <span
+          className="makeStyles-number-1602"
+        >
+          1021
+           
+        </span>
+        <span
+          className="makeStyles-text-1603"
+        >
+          credit holders
+        </span>
+      </p>
+      <p
+        className="MuiTypography-root MuiTypography-body2"
+      >
+        <span
+          className="makeStyles-number-1602"
+        >
+          25
+           
+        </span>
+        <span
+          className="makeStyles-text-1603"
+        >
+          projects
+        </span>
+      </p>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components|Credits Formatted Text 1`] = `
+<div>
+  <p
+    className="MuiTypography-root MuiTypography-body1"
+  >
+    <span
+      className="makeStyles-number-1675"
+    >
+      93,211
+       
+    </span>
+    <span
+      className="makeStyles-text-1676"
+    >
+      credits issued
+    </span>
+  </p>
+</div>
+`;
+
+exports[`Storyshots Components|Credits Gauge 1`] = `
+<div>
+  <div
+    className="makeStyles-root-1640"
+  >
+    <div
+      className="makeStyles-gauge-1641 makeStyles-gauge-1642"
+    />
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components|Credits Small Text 1`] = `
+<div>
+  <p
+    className="MuiTypography-root MuiTypography-body2"
+  >
+    <span
+      className="makeStyles-number-1739"
+    >
+      25
+       
+    </span>
+    <span
+      className="makeStyles-text-1740"
+    >
+      projects
+    </span>
+  </p>
+</div>
+`;
+
+exports[`Storyshots Components|Description Description 1`] = `
+<div>
+  <p
+    className="MuiTypography-root makeStyles-root-1802 MuiTypography-body1"
+  >
+    Sheoak Hill, 60km west of Melbourne, has the potential to revolutionise how our natural areas are funded to be restored and maintained in perpetuity. The concept is underpinned by the power of values-aligned landholders working collaboratively to purchase and lovingly maintain manageable areas (40ha) of covented bushland and work toward a common goal.
+  </p>
+</div>
+`;
+
+exports[`Storyshots Components|Place Basic Place Info 1`] = `
+<div>
+  <div
+    className="makeStyles-root-1876"
+  >
+    <svg
+      aria-hidden="true"
+      className="MuiSvgIcon-root makeStyles-icon-1877"
+      focusable="false"
+      role="presentation"
+      viewBox="0 0 24 24"
+    >
+      <path
+        d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
+      />
+    </svg>
+    <p
+      className="MuiTypography-root makeStyles-content-1878 makeStyles-content-1879 MuiTypography-body1"
+    >
+      Victoria, Australia
+    </p>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components|Place Credit Place Info 1`] = `
+<div>
+  <div
+    className="makeStyles-root-2050"
+  >
+    <svg
+      aria-hidden="true"
+      className="MuiSvgIcon-root makeStyles-icon-2051"
+      focusable="false"
+      role="presentation"
+      viewBox="0 0 24 24"
+    >
+      <path
+        d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
+      />
+    </svg>
+    <p
+      className="MuiTypography-root makeStyles-content-2052 makeStyles-content-2053 MuiTypography-body1"
+    >
+      Brazil
+       in 
+      <span
+        className="makeStyles-outcome-2049"
+      >
+        carbon
+      </span>
+    </p>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components|Place Project Place Info 1`] = `
+<div>
+  <div
+    className="makeStyles-root-1962"
+  >
+    <svg
+      aria-hidden="true"
+      className="MuiSvgIcon-root makeStyles-icon-1963"
+      focusable="false"
+      role="presentation"
+      viewBox="0 0 24 24"
+    >
+      <path
+        d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
+      />
+    </svg>
+    <p
+      className="MuiTypography-root makeStyles-content-1964 makeStyles-content-1965 MuiTypography-body1"
+    >
+      Melbourne, Victoria, Australia
+       | 
+      440
+       hectares
+    </p>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components|Title Main Title 1`] = `
+<div>
+  <h1
+    className="MuiTypography-root makeStyles-root-2124 undefined MuiTypography-h1 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+  >
+    Sheok Hill
+  </h1>
+</div>
+`;
+
+exports[`Storyshots Components|Title Subtitle 1`] = `
+<div>
+  <h2
+    className="MuiTypography-root makeStyles-root-2186 undefined MuiTypography-h2 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+  >
+    Ecological Practices
+  </h2>
+</div>
+`;
+
+exports[`Storyshots Components|Title White Title 1`] = `
+<div>
+  <h1
+    className="MuiTypography-root makeStyles-root-2248 undefined MuiTypography-h1 MuiTypography-colorPrimary MuiTypography-alignLeft"
+  >
+    Satellite Imagery
+  </h1>
+</div>
+`;
+
+exports[`Storyshots Components|User Basic User Info 1`] = `
+<div>
+  <div
+    className="MuiGrid-root MuiGrid-container MuiGrid-align-items-xs-center"
+  >
+    <div
+      className="MuiGrid-root MuiGrid-item"
+    >
+      <div
+        className="MuiAvatar-root MuiAvatar-circle makeStyles-root-2930 makeStyles-root-2931"
+      >
+        <img
+          alt="Odonata"
+          className="MuiAvatar-img"
+          src="http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png"
+        />
+      </div>
+    </div>
+    <div
+      className="MuiGrid-root makeStyles-text-2819 makeStyles-text-2823 MuiGrid-item"
+    >
+      <p
+        className="MuiTypography-root makeStyles-name-2820 makeStyles-name-2824 MuiTypography-body1"
+      >
+        Odonata
+      </p>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components|User Big User Avatar 1`] = `
+<div>
+  <div
+    className="MuiAvatar-root MuiAvatar-circle makeStyles-root-2306 makeStyles-root-2307"
+  >
+    <img
+      alt="Odonata"
+      className="MuiAvatar-img"
+      src="http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png"
+    />
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components|User Big User Info 1`] = `
+<div>
+  <div
+    className="MuiGrid-root MuiGrid-container MuiGrid-align-items-xs-center"
+  >
+    <div
+      className="MuiGrid-root MuiGrid-item"
+    >
+      <div
+        className="MuiAvatar-root MuiAvatar-circle makeStyles-root-3530 makeStyles-root-3531"
+      >
+        <img
+          alt="Odonata"
+          className="MuiAvatar-img"
+          src="http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png"
+        />
+      </div>
+    </div>
+    <div
+      className="MuiGrid-root makeStyles-text-3419 makeStyles-text-3423 MuiGrid-item"
+    >
+      <p
+        className="MuiTypography-root makeStyles-name-3420 makeStyles-name-3424 MuiTypography-body1"
+      >
+        Odonata
+      </p>
+      <p
+        className="MuiTypography-root makeStyles-place-3422 makeStyles-place-3425 MuiTypography-body1"
+      >
+        South Melbourne, Victoria, Australia
+      </p>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components|User Column User Info 1`] = `
+<div>
+  <div
+    className="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-column MuiGrid-align-items-xs-center"
+  >
+    <div
+      className="MuiGrid-root MuiGrid-item"
+    >
+      <div
+        className="MuiAvatar-root MuiAvatar-circle makeStyles-root-3830 makeStyles-root-3831"
+      >
+        <img
+          alt="Odonata"
+          className="MuiAvatar-img"
+          src="http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png"
+        />
+      </div>
+    </div>
+    <div
+      className="MuiGrid-root makeStyles-text-3719 makeStyles-text-3723 MuiGrid-item"
+    >
+      <p
+        className="MuiTypography-root makeStyles-name-3720 makeStyles-name-3724 MuiTypography-body1"
+      >
+        Odonata
+      </p>
+      <p
+        className="MuiTypography-root makeStyles-place-3722 makeStyles-place-3725 MuiTypography-body1"
+      >
+        South Melbourne, Victoria, Australia
+      </p>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components|User Extended User Info 1`] = `
+<div>
+  <div
+    className="MuiGrid-root MuiGrid-container MuiGrid-align-items-xs-center"
+  >
+    <div
+      className="MuiGrid-root MuiGrid-item"
+    >
+      <div
+        className="MuiAvatar-root MuiAvatar-circle makeStyles-root-4130 makeStyles-root-4131"
+      >
+        <img
+          alt="Joseph McFann, Ph.D"
+          className="MuiAvatar-img"
+          src="http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png"
+        />
+      </div>
+    </div>
+    <div
+      className="MuiGrid-root makeStyles-text-4019 makeStyles-text-4023 MuiGrid-item"
+    >
+      <p
+        className="MuiTypography-root makeStyles-name-4020 makeStyles-name-4024 MuiTypography-body1"
+      >
+        Joseph McFann, Ph.D
+      </p>
+      <p
+        className="MuiTypography-root makeStyles-title-4021 MuiTypography-body1 MuiTypography-colorSecondary"
+      >
+        Professor of Atmospheric Studies
+      </p>
+      <p
+        className="MuiTypography-root makeStyles-place-4022 makeStyles-place-4025 MuiTypography-body1"
+      >
+        Oxford University
+      </p>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components|User Fallback User Avatar 1`] = `
+<div>
+  <div
+    className="MuiAvatar-root MuiAvatar-circle makeStyles-root-2351 makeStyles-root-2352 MuiAvatar-colorDefault"
+  >
+    <svg
+      aria-hidden="true"
+      className="MuiSvgIcon-root MuiAvatar-fallback"
+      focusable="false"
+      role="presentation"
+      viewBox="0 0 24 24"
+    >
+      <path
+        d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
+      />
+    </svg>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components|User Medium User Avatar 1`] = `
+<div>
+  <div
+    className="MuiAvatar-root MuiAvatar-circle makeStyles-root-2288 makeStyles-root-2289"
+  >
+    <img
+      alt="Odonata"
+      className="MuiAvatar-img"
+      src="http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png"
+    />
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components|User Medium User Info 1`] = `
+<div>
+  <div
+    className="MuiGrid-root MuiGrid-container MuiGrid-align-items-xs-center"
+  >
+    <div
+      className="MuiGrid-root MuiGrid-item"
+    >
+      <div
+        className="MuiAvatar-root MuiAvatar-circle makeStyles-root-2630 makeStyles-root-2631"
+      >
+        <img
+          alt="Odonata"
+          className="MuiAvatar-img"
+          src="http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png"
+        />
+      </div>
+    </div>
+    <div
+      className="MuiGrid-root makeStyles-text-2519 makeStyles-text-2523 MuiGrid-item"
+    >
+      <p
+        className="MuiTypography-root makeStyles-name-2520 makeStyles-name-2524 MuiTypography-body1"
+      >
+        Odonata
+      </p>
+      <p
+        className="MuiTypography-root makeStyles-place-2522 makeStyles-place-2525 MuiTypography-body1"
+      >
+        South Melbourne, Victoria, Australia
+      </p>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components|User Small User Avatar 1`] = `
+<div>
+  <div
+    className="MuiAvatar-root MuiAvatar-circle makeStyles-root-2324 makeStyles-root-2325"
+  >
+    <img
+      alt="Odonata"
+      className="MuiAvatar-img"
+      src="http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png"
+    />
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components|User Small User Info 1`] = `
+<div>
+  <div
+    className="MuiGrid-root MuiGrid-container MuiGrid-align-items-xs-center"
+  >
+    <div
+      className="MuiGrid-root MuiGrid-item"
+    >
+      <div
+        className="MuiAvatar-root MuiAvatar-circle makeStyles-root-3230 makeStyles-root-3231"
+      >
+        <img
+          alt="Odonata"
+          className="MuiAvatar-img"
+          src="http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png"
+        />
+      </div>
+    </div>
+    <div
+      className="MuiGrid-root makeStyles-text-3119 makeStyles-text-3123 MuiGrid-item"
+    >
+      <p
+        className="MuiTypography-root makeStyles-name-3120 makeStyles-name-3124 MuiTypography-body1"
+      >
+        Odonata
+      </p>
+      <p
+        className="MuiTypography-root makeStyles-place-3122 makeStyles-place-3125 MuiTypography-body1"
+      >
+        South Melbourne, Victoria, Australia
+      </p>
+    </div>
+  </div>
+</div>
+`;

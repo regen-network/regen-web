@@ -22,6 +22,7 @@ interface CreditCardProps {
   credit: CreditInfo;
   // TODO: add func + variable related to heart round icon, need more info on this
   onClick: () => void;
+  width?: string;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -36,13 +37,14 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function CreditCard({ credit, onClick }: CreditCardProps): JSX.Element {
+export default function CreditCard({ credit, onClick, width }: CreditCardProps): JSX.Element {
   const classes = useStyles({});
   return (
     <MediaCard
       onClick={onClick}
       imgSrc={credit.imgSrc}
       name={credit.name}
+      width={width}
     >
       <Typography
         className={classes.description}>

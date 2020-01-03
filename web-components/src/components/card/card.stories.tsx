@@ -53,7 +53,7 @@ function onClick(): void {
 }
 
 export const creditCard = (): JSX.Element => (
-  <CreditCard credit={creditInfo} onClick={onClick} />
+  <CreditCard credit={creditInfo} onClick={onClick} width="20.5rem" />
 );
 
 const projectInfo: ProjectInfo = {

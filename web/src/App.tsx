@@ -3,7 +3,7 @@ import coorong from './assets/coorong.png';
 import biodiversity from './assets/biodiversity.png';
 import map from './assets/map.png';
 import abu from './assets/abu.png';
-// import logo from './assets/logo.png';
+import logo from './assets/logo.png';
 import './App.css';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import ThemeProvider from 'web-components/lib/theme/RegenThemeProvider';
@@ -14,6 +14,7 @@ import ProjectDeveloperCard from 'web-components/lib/components/card/ProjectDeve
 import EcoPracticeCard from 'web-components/lib/components/card/EcoPracticeCard';
 import CreditCard from 'web-components/lib/components/card/CreditCard';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
+import Header from 'web-components/lib/components/header';
 
 interface User {
   name: string;
@@ -110,6 +111,7 @@ function onClick() {
 const App: React.FC = (): JSX.Element => {
   return (
     <ThemeProvider injectFonts>
+      <Header logo={logo} />
       <div className="project-page">
         <img alt={project.name} src={coorong} />
         <div className="project-content">

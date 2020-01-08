@@ -1,1 +1,1 @@
-COMING SOON
+See main [README.md](../README.md)

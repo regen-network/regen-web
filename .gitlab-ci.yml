@@ -1,0 +1,33 @@
+image: orangecloudfoundry/orange-cf-bosh-cli
+
+stages:
+  - build
+  - deploy
+
+build:
+  stage: build
+  script: 
+    - echo "Building $CI_PROJECT_NAME"
+    - yarn
+    - yarn run build-storybook
+  artifacts:
+    paths:
+      - web-storybook/storybook-static
+
+dev:
+  stage: deploy
+  script:
+    - cf login -a $CF_URL -u $CF_USER -p $CF_PASS
+    - cf target -o "$CF_ORG" -s $CF_SPACE
+    - cf push storybook
+  only:
+    - dev
+
+production:
+  stage: deploy
+  script:
+    - cf login -a $CF_URL -u $CF_USER -p $CF_PASS
+    - cf target -o "$CF_ORG" -s $CF_SPACE
+#   - cf push APP NAMES 
+  only:
+    - master

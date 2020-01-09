@@ -6,7 +6,7 @@
   "bugs": {
     "url": "https://github.com/regen-network/regen-app/issues"
   },
-  "repository": {
+   "repository": {
     "type": "git",
     "url": "https://github.com/regen-network/regen-app"
   },
@@ -52,8 +52,5 @@
     "hooks": {
       "pre-push": "yarn lint"
     }
-  },
-  "resolutions": {
-    "webpack": "4.29.6"
   }
 }

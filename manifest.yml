@@ -1,15 +1,14 @@
 ---
 applications:
-- name: registry
-  command: yarn run storybook
-  memory: 256M
+- name: storybook
+  path: web-storybook/storybook-static
+  memory: 64M
   instances: 1
   routes:
      - route: regen-storybook.cfapps.io
 #    - route: storybook.regen.network
- 
-  buildpacks: 
-    - https://github.com/cloudfoundry/nodejs-buildpack
+#  buildpacks: 
+#    - https://github.com/cloudfoundry/nodejs-buildpack
 #  services:  
 #    - registry_mysql
 #    - registry-s3-service

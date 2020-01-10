@@ -23,11 +23,11 @@ const theme = createMuiTheme({
   typography: {
     fontFamily: ['-apple-system', '"Lato"', 'sans-serif'].join(','),
     h1: {
-      fontSize: '1.5rem',
+      fontSize: '3rem',
       fontFamily: ['-apple-system', '"Muli"', 'sans-serif'].join(','),
     },
     h2: {
-      fontSize: '1.3125rem',
+      fontSize: '2rem',
     },
     h3: {
       fontSize: '1.125rem',
@@ -49,6 +49,11 @@ const theme = createMuiTheme({
         subtitle2: 'h2',
         body1: 'p',
         body2: 'p',
+      },
+    },
+    MuiAvatar: {
+      img: {
+        objectFit: 'scale-down',
       },
     },
   },

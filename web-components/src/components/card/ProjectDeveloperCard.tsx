@@ -1,39 +1,46 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
-import Typography from '@material-ui/core/Typography';
 import Card from './Card';
-import UserInfo from '../user/UserInfo';
+import UserInfoWithTitle from '../user/UserInfoWithTitle';
+import { User } from '../user/UserInfo';
 
 interface ProjectDeveloperCardProps {
-  name: string;
-  place?: string;
-  imgSrc: string;
+  projectDeveloper: User;
+  landSteward?: User;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
-    margin: `${theme.spacing(4.5)} ${theme.spacing(5.25)}`,
+    margin: `${theme.spacing(7)} ${theme.spacing(6.5)}`,
   },
-  title: {
-    fontSize: '0.6875rem',
-    textTransform: 'uppercase',
-    fontWeight: 'bold',
-    letterSpacing: theme.spacing(0.125),
-    marginBottom: theme.spacing(4.25),
-  },
+  separator: {
+    border: '1px solid #D2D5D9',
+    marginTop: theme.spacing(7),
+    marginBottom: theme.spacing(7),
+  }
 }));
 
 export default function ProjectDeveloperCard({
-  name,
-  place,
-  imgSrc,
+  projectDeveloper,
+  landSteward,
 }: ProjectDeveloperCardProps): JSX.Element {
   const classes = useStyles({});
   return (
     <Card>
       <div className={classes.container}>
-        <Typography className={classes.title}>this project is developed by</Typography>
-        <UserInfo name={name} place={place} imgSrc={imgSrc} />
+        <UserInfoWithTitle
+          user={projectDeveloper}
+          title="project developer"
+        />
+        {landSteward &&
+          <div>
+            <hr className={classes.separator} />
+            <UserInfoWithTitle
+              user={landSteward}
+              title="land steward"
+            />
+          </div>
+        }
       </div>
     </Card>
   );

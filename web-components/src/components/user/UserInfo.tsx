@@ -5,18 +5,22 @@ import Typography from '@material-ui/core/Typography';
 import UserAvatar from './UserAvatar';
 import { getFontSize } from './sizing';
 
-interface UserInfoProps {
+export interface User {
   name: string;
-  title?: string;
   place?: string;
   imgSrc: string;
+  description?: string;
+}
+
+interface UserInfoProps {
+  user: User;
   size?: string;
   direction?: GridDirection;
 }
 
 interface StyleProps {
   fontSize: string;
-  title?: string;
+  description?: string;
   direction?: GridDirection;
 }
 
@@ -28,39 +32,43 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   name: props => ({
     fontSize: props.fontSize,
     fontWeight: 'bold',
+    // paddingBottom: theme.spacing(1.5),
   }),
-  title: {
-    fontSize: '0.875rem',
+  description: {
+    color: theme.palette.info.main,
   },
   place: props => ({
-    color: props.title ? '#8F8F8F' : theme.palette.info.main,
-    fontSize: '0.75rem',
+    color: theme.palette.info.main,
+    // color: props.description ? '#8F8F8F' : theme.palette.info.main,
+    fontSize: '0.875rem',
+    paddingBottom: theme.spacing(2.75),
   }),
 }));
 
 export default function UserInfo({
-  name,
-  title,
-  place,
-  imgSrc,
+  user,
   size,
   direction,
 }: UserInfoProps): JSX.Element {
   const fontSize: string = getFontSize(size);
-  const classes = useStyles({ fontSize, title, direction });
+  const classes = useStyles({ fontSize, description: user.description, direction });
   return (
-    <Grid container alignItems="center" direction={direction}>
+    <Grid container direction={direction} wrap="nowrap">
       <Grid item>
-        <UserAvatar alt={name} src={imgSrc} size={size} />
+        <UserAvatar alt={user.name} src={user.imgSrc} size={size} />
       </Grid>
       <Grid item className={classes.text}>
-        <Typography className={classes.name}>{name}</Typography>
-        {title && (
-          <Typography color="secondary" className={classes.title}>
-            {title}
+        <Typography className={classes.name}>{user.name}</Typography>
+        {user.place && (
+          <Typography className={classes.place}>
+            {user.place}
           </Typography>
         )}
-        {place && <Typography className={classes.place}>{place}</Typography>}
+        {user.description && (
+          <Typography className={classes.description}>
+            {user.description}
+          </Typography>
+        )}
       </Grid>
     </Grid>
   );

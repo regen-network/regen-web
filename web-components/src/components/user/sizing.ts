@@ -2,7 +2,7 @@ export function getSize(size?: string): number {
   let spacing: number;
   switch (size) {
     case 'big':
-      spacing = 14.5;
+      spacing = 12;
       break;
     case 'medium':
       spacing = 10;

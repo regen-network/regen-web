@@ -1,44 +1,44 @@
 import * as React from 'react';
 import UserAvatar from 'web-components/lib/components/user/UserAvatar';
-import UserInfo from 'web-components/lib/components/user/UserInfo';
+import UserInfo, { User } from 'web-components/lib/components/user/UserInfo';
+import UserInfoWithTitle from 'web-components/lib/components/user/UserInfoWithTitle';
 
 export default {
   title: 'Components|User',
   component: UserInfo,
 };
 
-const name: string = 'Odonata';
-const src: string = 'http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png';
-const place: string = 'South Melbourne, Victoria, Australia';
+const user: User = {
+  name: 'Odonata',
+  place: 'South Melbourne, Victoria, Australia',
+  imgSrc: 'http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png',
+  description: 'Odonata is a not-for-profit entity supporting biodiversity impact solutions.',
+}
 
-export const mediumUserAvatar = (): JSX.Element => <UserAvatar alt={name} src={src} />;
+const { name, imgSrc } = user;
 
-export const bigUserAvatar = (): JSX.Element => <UserAvatar alt={name} src={src} size="big" />;
+export const mediumUserAvatar = (): JSX.Element => <UserAvatar alt={name} src={imgSrc} />;
 
-export const smallUserAvatar = (): JSX.Element => <UserAvatar alt={name} src={src} size="small" />;
+export const bigUserAvatar = (): JSX.Element => <UserAvatar alt={name} src={imgSrc} size="big" />;
+
+export const smallUserAvatar = (): JSX.Element => <UserAvatar alt={name} src={imgSrc} size="small" />;
 
 export const fallbackUserAvatar = (): JSX.Element => <UserAvatar />;
 
-export const mediumUserInfo = (): JSX.Element => <UserInfo name={name} place={place} imgSrc={src} />;
-
-export const basicUserInfo = (): JSX.Element => <UserInfo name={name} imgSrc={src} />;
+export const mediumUserInfo = (): JSX.Element => <UserInfo user={user} />;
 
 export const smallUserInfo = (): JSX.Element => (
-  <UserInfo name={name} place={place} imgSrc={src} size="small" />
+  <UserInfo user={user} size="small" />
 );
 
-export const bigUserInfo = (): JSX.Element => <UserInfo name={name} place={place} imgSrc={src} size="big" />;
+export const bigUserInfo = (): JSX.Element => (
+  <UserInfo user={user} size="big" />
+);
 
 export const columnUserInfo = (): JSX.Element => (
-  <UserInfo name={name} place={place} imgSrc={src} direction="column" />
+  <UserInfo user={user} direction="column" />
 );
 
-export const extendedUserInfo = (): JSX.Element => (
-  <UserInfo
-    name="Joseph McFann, Ph.D"
-    title="Professor of Atmospheric Studies"
-    place="Oxford University"
-    imgSrc={src}
-    size="big"
-  />
+export const withTitle = (): JSX.Element => (
+  <UserInfoWithTitle user={user} title="project developer" />
 );

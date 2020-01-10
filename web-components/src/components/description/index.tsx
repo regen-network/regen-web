@@ -10,10 +10,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   root: {
     color: theme.palette.info.main,
     marginBottom: theme.spacing(1.5),
+    whiteSpace: 'pre-wrap',
   },
 }));
 
 export default function Description({ children }: DescriptionProps): JSX.Element {
   const classes = useStyles({});
-  return <Typography className={classes.root}>{children}</Typography>;
+  return <Typography component="div" className={classes.root}>{children}</Typography>;
 }

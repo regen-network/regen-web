@@ -51,11 +51,11 @@ const theme = createMuiTheme({
         body2: 'p',
       },
     },
-    MuiAvatar: {
-      img: {
-        objectFit: 'scale-down',
-      },
-    },
+    // MuiAvatar: {
+    //   img: {
+    //     objectFit: 'scale-down',
+    //   },
+    // },
   },
 });
 

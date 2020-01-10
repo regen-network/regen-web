@@ -6,6 +6,7 @@ interface OutlinedButtonProps {
   children?: any;
   startIcon: JSX.Element;
   fullWidth?: boolean;
+  onClick: () => void;
 }
 
 const CustomButton = withStyles((theme: Theme) => ({
@@ -28,7 +29,12 @@ const CustomButton = withStyles((theme: Theme) => ({
 
 export default function OutlinedButton(props: OutlinedButtonProps): JSX.Element {
   return (
-    <CustomButton color="secondary" startIcon={props.startIcon} fullWidth={props.fullWidth}>
+    <CustomButton
+      color="secondary"
+      startIcon={props.startIcon}
+      fullWidth={props.fullWidth}
+      onClick={props.onClick}
+    >
       {props.children}
     </CustomButton>
   );

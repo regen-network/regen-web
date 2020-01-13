@@ -5,7 +5,7 @@ import Description from '../description';
 // TODO use svg icon from figma
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
-import { truncate } from './truncate';
+// import { truncate } from './truncate';
 
 interface ReadMoreProps {
   children: string;
@@ -23,23 +23,23 @@ export default function ReadMore({ children, length = 757 }: ReadMoreProps): JSX
   const [expanded, setExpanded] = useState(false);
   const trimText = children.substring(0, length);
   // const trimText = truncate(children, length);
-  const expandedText = expanded ?
-    <Description>{children}</Description> :
-    <Description>{trimText}</Description>;
+  const expandedText = expanded ? (
+    <Description>{children}</Description>
+  ) : (
+    <Description>{trimText}</Description>
+  );
 
   return (
     <div>
-      <div className={classes.textContainer}>
-        {expandedText}
-      </div>
-      {children.length > length &&
+      <div className={classes.textContainer}>{expandedText}</div>
+      {children.length > length && (
         <OutlinedButton
           onClick={() => setExpanded(!expanded)}
           startIcon={expanded ? <ArrowUpwardIcon /> : <ArrowDownwardIcon />}
         >
           read {expanded ? 'less' : 'more'}
         </OutlinedButton>
-      }
+      )}
     </div>
-  )
+  );
 }

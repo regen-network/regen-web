@@ -10,11 +10,11 @@ interface UserInfoWithTitleProps {
 
 const useStyles = makeStyles((theme: Theme) => ({
   title: {
-    [theme.breakpoints.up('sm')] : {
+    [theme.breakpoints.up('sm')]: {
       fontSize: '0.75rem',
       marginBottom: theme.spacing(4.25),
     },
-    [theme.breakpoints.down('xs')] : {
+    [theme.breakpoints.down('xs')]: {
       fontSize: '0.6875rem',
       marginBottom: theme.spacing(4),
     },
@@ -24,18 +24,12 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function UserInfoWithTitle({
-  user,
-  title
-}: UserInfoWithTitleProps): JSX.Element {
+export default function UserInfoWithTitle({ user, title }: UserInfoWithTitleProps): JSX.Element {
   const classes = useStyles({});
   return (
     <div>
       <Typography className={classes.title}>{title}</Typography>
-      <UserInfo
-        user={user}
-        size="big"
-      />
+      <UserInfo user={user} size="big" />
     </div>
   );
 }

@@ -18,11 +18,11 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     borderWidth: '1px',
     borderStyle: 'solid',
     borderColor: '#D2D5D9',
-    [theme.breakpoints.up('sm')] : {
+    [theme.breakpoints.up('sm')]: {
       width: theme.spacing(props.spacing.sm),
       height: theme.spacing(props.spacing.sm),
     },
-    [theme.breakpoints.down('xs')] : {
+    [theme.breakpoints.down('xs')]: {
       width: theme.spacing(props.spacing.xs),
       height: theme.spacing(props.spacing.xs),
     },

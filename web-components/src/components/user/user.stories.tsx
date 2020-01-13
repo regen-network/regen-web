@@ -13,7 +13,7 @@ const user: User = {
   place: 'South Melbourne, Victoria, Australia',
   imgSrc: 'http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png',
   description: 'Odonata is a not-for-profit entity supporting biodiversity impact solutions.',
-}
+};
 
 const { name, imgSrc } = user;
 
@@ -27,18 +27,10 @@ export const fallbackUserAvatar = (): JSX.Element => <UserAvatar />;
 
 export const mediumUserInfo = (): JSX.Element => <UserInfo user={user} />;
 
-export const smallUserInfo = (): JSX.Element => (
-  <UserInfo user={user} size="small" />
-);
+export const smallUserInfo = (): JSX.Element => <UserInfo user={user} size="small" />;
 
-export const bigUserInfo = (): JSX.Element => (
-  <UserInfo user={user} size="big" />
-);
+export const bigUserInfo = (): JSX.Element => <UserInfo user={user} size="big" />;
 
-export const columnUserInfo = (): JSX.Element => (
-  <UserInfo user={user} direction="column" />
-);
+export const columnUserInfo = (): JSX.Element => <UserInfo user={user} direction="column" />;
 
-export const withTitle = (): JSX.Element => (
-  <UserInfoWithTitle user={user} title="project developer" />
-);
+export const withTitle = (): JSX.Element => <UserInfoWithTitle user={user} title="project developer" />;

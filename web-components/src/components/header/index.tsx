@@ -1,8 +1,8 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
-import SearchIcon from '@material-ui/icons/Search';
-import MenuIcon from '@material-ui/icons/Menu';
+// import SearchIcon from '@material-ui/icons/Search';
+// import MenuIcon from '@material-ui/icons/Menu';
 
 interface HeaderProps {
   logo: string;

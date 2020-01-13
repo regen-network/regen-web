@@ -6,7 +6,8 @@ export default {
   component: ReadMore,
 };
 
-const text: string = 'This property is a rare pocket of wetlands and woodlands located near ' +
+const text: string =
+  'This property is a rare pocket of wetlands and woodlands located near ' +
   'the township of Menindee South Australia, nestled in between the Coorong ' +
   'national park and Lake Albert.\n\nAs one of the few remaining sections of ' +
   'privately owned remnant vegetation in the area, this represents a unique ' +
@@ -24,8 +25,4 @@ const text: string = 'This property is a rare pocket of wetlands and woodlands l
   'cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat ' +
   'non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
 
-export const readMore = (): JSX.Element => (
-  <ReadMore>
-    {text}
-  </ReadMore>
-);
+export const readMore = (): JSX.Element => <ReadMore>{text}</ReadMore>;

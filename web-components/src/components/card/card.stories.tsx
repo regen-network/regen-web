@@ -16,14 +16,14 @@ const projectDeveloper: User = {
   place: 'South Melbourne, Victoria, Australia',
   imgSrc: 'http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png',
   description: 'Odonata is a not-for-profit entity supporting biodiversity impact solutions.',
-}
+};
 
 const landSteward: User = {
   name: 'Ngarrindjeri Tribe',
   place: 'Southern Australia',
   imgSrc: '/tribe.png',
   description: 'The Ngarrindjeri culture is centered around the lower lakes of the Murray River.',
-}
+};
 
 const practiceName: string = 'Odonata';
 const practiceSrc: string = '/no-till-ag.png';

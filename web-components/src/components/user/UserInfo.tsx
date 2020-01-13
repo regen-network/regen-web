@@ -30,20 +30,20 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     textAlign: props.direction === 'column' ? 'center' : 'left',
   }),
   name: props => ({
-    [theme.breakpoints.up('sm')] : {
+    [theme.breakpoints.up('sm')]: {
       fontSize: props.fontSize.sm,
     },
-    [theme.breakpoints.down('xs')] : {
+    [theme.breakpoints.down('xs')]: {
       fontSize: props.fontSize.xs,
     },
     fontWeight: 'bold',
     // paddingBottom: theme.spacing(1.5),
   }),
   description: {
-    [theme.breakpoints.up('sm')] : {
+    [theme.breakpoints.up('sm')]: {
       fontSize: getFontSize('medium').sm,
     },
-    [theme.breakpoints.down('xs')] : {
+    [theme.breakpoints.down('xs')]: {
       fontSize: getFontSize('medium').xs,
     },
     color: theme.palette.info.main,
@@ -51,21 +51,17 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   place: props => ({
     color: theme.palette.info.main,
     // color: props.description ? '#8F8F8F' : theme.palette.info.main,
-    [theme.breakpoints.up('sm')] : {
+    [theme.breakpoints.up('sm')]: {
       fontSize: getFontSize('small').sm,
     },
-    [theme.breakpoints.down('xs')] : {
+    [theme.breakpoints.down('xs')]: {
       fontSize: getFontSize('small').xs,
     },
     paddingBottom: theme.spacing(2.75),
   }),
 }));
 
-export default function UserInfo({
-  user,
-  size,
-  direction,
-}: UserInfoProps): JSX.Element {
+export default function UserInfo({ user, size, direction }: UserInfoProps): JSX.Element {
   const fontSize: FontSizes = getFontSize(size);
   const classes = useStyles({ fontSize, description: user.description, direction });
   return (
@@ -75,16 +71,8 @@ export default function UserInfo({
       </Grid>
       <Grid item className={classes.text}>
         <Typography className={classes.name}>{user.name}</Typography>
-        {user.place && (
-          <Typography className={classes.place}>
-            {user.place}
-          </Typography>
-        )}
-        {user.description && (
-          <Typography className={classes.description}>
-            {user.description}
-          </Typography>
-        )}
+        {user.place && <Typography className={classes.place}>{user.place}</Typography>}
+        {user.description && <Typography className={classes.description}>{user.description}</Typography>}
       </Grid>
     </Grid>
   );

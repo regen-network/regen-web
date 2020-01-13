@@ -12,7 +12,7 @@ interface StyleProps {
 }
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
-  root: (props) => ({
+  root: props => ({
     color: theme.palette.info.main,
     marginBottom: theme.spacing(1.5),
     whiteSpace: 'pre-wrap',
@@ -25,5 +25,9 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
 
 export default function Description({ children, size = 'big' }: DescriptionProps): JSX.Element {
   const classes = useStyles({ size });
-  return <Typography component="div" className={classes.root}>{children}</Typography>;
+  return (
+    <Typography component="div" className={classes.root}>
+      {children}
+    </Typography>
+  );
 }

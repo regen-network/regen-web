@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     border: '1px solid #D2D5D9',
     marginTop: theme.spacing(7),
     marginBottom: theme.spacing(7),
-  }
+  },
 }));
 
 export default function ProjectDeveloperCard({
@@ -28,19 +28,13 @@ export default function ProjectDeveloperCard({
   return (
     <Card>
       <div className={classes.container}>
-        <UserInfoWithTitle
-          user={projectDeveloper}
-          title="project developer"
-        />
-        {landSteward &&
+        <UserInfoWithTitle user={projectDeveloper} title="project developer" />
+        {landSteward && (
           <div>
             <hr className={classes.separator} />
-            <UserInfoWithTitle
-              user={landSteward}
-              title="land steward"
-            />
+            <UserInfoWithTitle user={landSteward} title="land steward" />
           </div>
-        }
+        )}
       </div>
     </Card>
   );

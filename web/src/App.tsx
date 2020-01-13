@@ -17,7 +17,6 @@ import Description from 'web-components/lib/components/description';
 import ReadMore from 'web-components/lib/components/read-more';
 import { User } from 'web-components/lib/components/user/UserInfo';
 
-
 interface Practice {
   name: string;
   description: string;
@@ -64,12 +63,14 @@ const project: Project = {
   steward: {
     name: 'Ngarrindjeri Tribe',
     place: 'Southern Australia',
-    imgSrc: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Ngarrindjeri_Nation_Flag.svg/250px-Ngarrindjeri_Nation_Flag.svg.png',
+    imgSrc:
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Ngarrindjeri_Nation_Flag.svg/250px-Ngarrindjeri_Nation_Flag.svg.png',
     description: 'The Ngarrindjeri culture is centered around the lower lakes of the Murray River.',
   },
   summaryDescription:
     'This project is restoring and conserving a large area of native grassland in Southern Australia.',
-  detailedDescription: 'This property is a rare pocket of wetlands and woodlands located near the township of Menindee South Australia, nestled in between the Coorong national park and Lake Albert.\n\nAs one of the few remaining sections of privately owned remnant vegetation in the area, this represents a unique opportunity for long term preservation. The Coorong, Lake Alexandrina and Lake Albert Wetland is an international significant RAMSAR wetland ecosystems at the intersection of the Murray River and Southern Ocean.\n\nThis vital habitat comprises a unique mix of both freshwater and saltwater wetlands and coastal woodlands. The Coorong is the heart of the traditional lands of Ngarrindjeri people, who have hunted and camped on the Mt Sandy property for thousands of years.\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+  detailedDescription:
+    'This property is a rare pocket of wetlands and woodlands located near the township of Menindee South Australia, nestled in between the Coorong national park and Lake Albert.\n\nAs one of the few remaining sections of privately owned remnant vegetation in the area, this represents a unique opportunity for long term preservation. The Coorong, Lake Alexandrina and Lake Albert Wetland is an international significant RAMSAR wetland ecosystems at the intersection of the Murray River and Southern Ocean.\n\nThis vital habitat comprises a unique mix of both freshwater and saltwater wetlands and coastal woodlands. The Coorong is the heart of the traditional lands of Ngarrindjeri people, who have hunted and camped on the Mt Sandy property for thousands of years.\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
   creditClass: {
     name: "Australian Biodiversity Units (ABU's)",
     description:
@@ -173,10 +174,7 @@ function ProjectDetails({ project }: ProjectProps): JSX.Element {
           </div>
           <Description size="small">{project.summaryDescription}</Description>
           <div className={classes.projectDeveloper}>
-            <ProjectDeveloperCard
-              projectDeveloper={project.developer}
-              landSteward={project.steward}
-            />
+            <ProjectDeveloperCard projectDeveloper={project.developer} landSteward={project.steward} />
           </div>
         </Grid>
       </Grid>
@@ -203,7 +201,7 @@ function ProjectDetails({ project }: ProjectProps): JSX.Element {
       </div>
       <img alt={project.name} src={map} />
     </div>
-  )
+  );
 }
 
 // TODO: create component for project page

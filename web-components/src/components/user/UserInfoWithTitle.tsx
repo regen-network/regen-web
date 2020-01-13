@@ -10,11 +10,17 @@ interface UserInfoWithTitleProps {
 
 const useStyles = makeStyles((theme: Theme) => ({
   title: {
-    fontSize: '0.75rem',
+    [theme.breakpoints.up('sm')] : {
+      fontSize: '0.75rem',
+      marginBottom: theme.spacing(4.25),
+    },
+    [theme.breakpoints.down('xs')] : {
+      fontSize: '0.6875rem',
+      marginBottom: theme.spacing(4),
+    },
+    letterSpacing: theme.spacing(0.125),
     textTransform: 'uppercase',
     fontWeight: 'bold',
-    letterSpacing: theme.spacing(0.125),
-    marginBottom: theme.spacing(4.25),
   },
 }));
 

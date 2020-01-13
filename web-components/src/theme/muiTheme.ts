@@ -1,6 +1,8 @@
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeOptions } from '@material-ui/core/styles/createMuiTheme';
 
+const defaultTheme = createMuiTheme();
+
 const theme = createMuiTheme({
   palette: {
     primary: {
@@ -23,11 +25,19 @@ const theme = createMuiTheme({
   typography: {
     fontFamily: ['-apple-system', '"Lato"', 'sans-serif'].join(','),
     h1: {
-      fontSize: '3rem',
+      [defaultTheme.breakpoints.up('sm')]: {
+        fontSize: '3rem',
+      },
+      fontSize: '2rem',
       fontFamily: ['-apple-system', '"Muli"', 'sans-serif'].join(','),
     },
     h2: {
-      fontSize: '2rem',
+      [defaultTheme.breakpoints.up('sm')]: {
+        fontSize: '2rem',
+      },
+      [defaultTheme.breakpoints.down('xs')]: {
+        fontSize: '1.5rem',
+      },
     },
     h3: {
       fontSize: '1.125rem',

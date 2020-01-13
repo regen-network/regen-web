@@ -1,37 +1,47 @@
-export function getSize(size?: string): number {
-  let spacing: number;
+export interface Sizes {
+  xs: number;
+  sm: number;
+}
+
+export interface FontSizes {
+  xs: string;
+  sm: string;
+}
+
+export function getSize(size?: string): Sizes {
+  let spacing: Sizes;
   switch (size) {
     case 'big':
-      spacing = 12;
+      spacing = { xs: 10, sm: 12 };
       break;
     case 'medium':
-      spacing = 10;
+      spacing = { xs: 7, sm: 10 };
       break;
     case 'small':
-      spacing = 7;
+      spacing = { xs: 7, sm: 7 };
       break;
     default:
-      spacing = 10;
+      spacing = { xs: 7, sm: 10 };
       break;
   }
   return spacing;
 }
 
-export function getFontSize(size?: string): string {
-  let fontSize: string;
+export function getFontSize(size?: string): FontSizes {
+  let fontSize: FontSizes;
   switch (size) {
     case 'big':
-      fontSize = '1.125';
+      fontSize = { xs: '1rem', sm: '1.125rem' };
       break;
     case 'medium':
-      fontSize = '1';
+      fontSize = { xs: '0.875rem', sm: '1rem' };
       break;
     case 'small':
-      fontSize = '0.875';
+      fontSize = { xs: '0.75rem', sm: '0.875rem' };
       break;
     default:
-      fontSize = '1';
+      fontSize = { xs: '0.875rem', sm: '1rem' };
       break;
   }
-  return fontSize + 'rem';
+  return fontSize;
 }

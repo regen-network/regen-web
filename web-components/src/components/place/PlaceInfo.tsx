@@ -26,6 +26,9 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     marginRight: theme.spacing(0.75),
   },
   content: props => ({
+    [theme.breakpoints.up('sm')]: {
+      fontSize: props.fontSize || '1rem',
+    },
     fontSize: props.fontSize || '0.875rem',
     color: props.color || theme.palette.primary.contrastText,
   }),

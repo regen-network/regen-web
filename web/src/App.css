@@ -31,34 +31,3 @@
     transform: rotate(360deg);
   }
 }
-
-.project-page {
-  background-color: #f8f8f8;
-}
-
-.project-page img {
-  width: 100%;
-}
-
-.project-content {
-  margin: 1.125rem 0.9375rem 3.375rem;
-}
-
-.project-description {
-  margin-top: 0.8125rem;
-  margin-bottom: 0.8125rem;
-  margin-: 1rem;
-}
-
-.project-content h1 {
-  margin-bottom: 1rem;
-}
-
-.project-content h2 {
-  margin-top: 2.6875rem;
-  margin-bottom: 1.6875rem;
-}
-
-.project-map {
-  margin-top: 3.375rem;
-}

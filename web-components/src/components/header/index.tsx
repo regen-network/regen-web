@@ -38,10 +38,10 @@ export default function Header({ logo }: HeaderProps): JSX.Element {
           <img alt="Regen Network" src={logo} className={classes.image} />
         </a>
       </Grid>
-      <Grid item alignItems="center">
+      {/*<Grid item alignItems="center">
         <SearchIcon className={classes.searchIcon} />
         <MenuIcon className={classes.menuIcon} fontSize="large" />
-      </Grid>
+      </Grid>*/}
     </Grid>
   );
 }

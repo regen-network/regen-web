@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 import { useTheme } from '@material-ui/core/styles';
 
-import Grid from '@material-ui/core/Grid';
+// import Grid from '@material-ui/core/Grid';
 import TimelineItem from './TimelineItem';
 
 export interface Event {
@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexDirection: 'column',
   },
   item: {
-    alignSelf: 'flex-end'
+    alignSelf: 'flex-end',
   },
   greenBar: {
     backgroundColor: theme.palette.secondary.main,
@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     left: '55%',
     height: '100%',
     position: 'absolute',
-  }
+  },
 }));
 
 export default function Timeline({ events }: TimelineProps): JSX.Element {
@@ -45,18 +45,18 @@ export default function Timeline({ events }: TimelineProps): JSX.Element {
 
   return (
     <div className={classes.root}>
-    {events.map((event, index) => (
-      <div className={classes.item}>
-        <TimelineItem
-          date={event.date}
-          title={event.title}
-          description={event.description}
-          color={theme.palette.secondary.main}
-        />
-      </div>
-    ))}
+      {events.map((event, index) => (
+        <div className={classes.item}>
+          <TimelineItem
+            date={event.date}
+            title={event.title}
+            description={event.description}
+            color={theme.palette.secondary.main}
+          />
+        </div>
+      ))}
       <div className={classes.greyBar} />
       <div className={classes.greenBar} />
     </div>
-  )
+  );
 }

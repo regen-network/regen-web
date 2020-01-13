@@ -35,7 +35,7 @@ export default function MediaCard({ children, name, imgSrc, onClick, width }: Me
     <Card onClick={onClick} width={width}>
       <CardMedia className={classes.image} image={imgSrc} />
       <div className={classes.container}>
-        <Title variant="h3">{name}</Title>
+        <Title variant="h4">{name}</Title>
         <div className={classes.content}>{children}</div>
       </div>
     </Card>

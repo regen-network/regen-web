@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function ReadMore({ children, length = 700 }: ReadMoreProps): JSX.Element {
+export default function ReadMore({ children, length = 757 }: ReadMoreProps): JSX.Element {
   const classes = useStyles({});
   const [expanded, setExpanded] = useState(false);
   const trimText = children.substring(0, length);

@@ -3,7 +3,7 @@ import { makeStyles, Theme } from '@material-ui/core';
 import Grid, { GridDirection } from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import UserAvatar from './UserAvatar';
-import { getFontSize } from './sizing';
+import { getFontSize, FontSizes } from './sizing';
 
 export interface User {
   name: string;
@@ -19,7 +19,7 @@ interface UserInfoProps {
 }
 
 interface StyleProps {
-  fontSize: string;
+  fontSize: FontSizes;
   description?: string;
   direction?: GridDirection;
 }
@@ -30,17 +30,33 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     textAlign: props.direction === 'column' ? 'center' : 'left',
   }),
   name: props => ({
-    fontSize: props.fontSize,
+    [theme.breakpoints.up('sm')] : {
+      fontSize: props.fontSize.sm,
+    },
+    [theme.breakpoints.down('xs')] : {
+      fontSize: props.fontSize.xs,
+    },
     fontWeight: 'bold',
     // paddingBottom: theme.spacing(1.5),
   }),
   description: {
+    [theme.breakpoints.up('sm')] : {
+      fontSize: getFontSize('medium').sm,
+    },
+    [theme.breakpoints.down('xs')] : {
+      fontSize: getFontSize('medium').xs,
+    },
     color: theme.palette.info.main,
   },
   place: props => ({
     color: theme.palette.info.main,
     // color: props.description ? '#8F8F8F' : theme.palette.info.main,
-    fontSize: '0.875rem',
+    [theme.breakpoints.up('sm')] : {
+      fontSize: getFontSize('small').sm,
+    },
+    [theme.breakpoints.down('xs')] : {
+      fontSize: getFontSize('small').xs,
+    },
     paddingBottom: theme.spacing(2.75),
   }),
 }));
@@ -50,7 +66,7 @@ export default function UserInfo({
   size,
   direction,
 }: UserInfoProps): JSX.Element {
-  const fontSize: string = getFontSize(size);
+  const fontSize: FontSizes = getFontSize(size);
   const classes = useStyles({ fontSize, description: user.description, direction });
   return (
     <Grid container direction={direction} wrap="nowrap">

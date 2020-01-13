@@ -28,7 +28,9 @@ const theme = createMuiTheme({
       [defaultTheme.breakpoints.up('sm')]: {
         fontSize: '3rem',
       },
-      fontSize: '2rem',
+      [defaultTheme.breakpoints.down('xs')]: {
+        fontSize: '2rem',
+      },
       fontFamily: ['-apple-system', '"Muli"', 'sans-serif'].join(','),
     },
     h2: {

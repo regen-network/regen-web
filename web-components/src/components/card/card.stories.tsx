@@ -2,7 +2,6 @@ import * as React from 'react';
 import Card from 'web-components/lib/components/card/Card';
 import ProjectDeveloperCard from 'web-components/lib/components/card/ProjectDeveloperCard';
 import { User } from 'web-components/lib/components/user/UserInfo';
-import EcoPracticeCard from 'web-components/lib/components/card/EcoPracticeCard';
 // import CreditCard, { CreditInfo } from 'web-components/lib/components/card/CreditCard';
 // import ProjectCard, { ProjectInfo } from 'web-components/lib/components/card/ProjectCard';
 
@@ -25,16 +24,8 @@ const landSteward: User = {
   description: 'The Ngarrindjeri culture is centered around the lower lakes of the Murray River.',
 };
 
-const practiceName: string = 'Odonata';
-const practiceSrc: string = '/no-till-ag.png';
-const practiceDescription: string = 'South Melbourne, Victoria, Australia';
-
 export const projectDeveloperCard = (): JSX.Element => (
   <ProjectDeveloperCard projectDeveloper={projectDeveloper} landSteward={landSteward} />
-);
-
-export const ecoPracticeCard = (): JSX.Element => (
-  <EcoPracticeCard name={practiceName} description={practiceDescription} imgSrc={practiceSrc} />
 );
 
 // const creditInfo: CreditInfo = {

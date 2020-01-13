@@ -21,13 +21,13 @@ export const mediumUserAvatar = (): JSX.Element => <UserAvatar alt={name} src={i
 
 export const bigUserAvatar = (): JSX.Element => <UserAvatar alt={name} src={imgSrc} size="big" />;
 
-export const smallUserAvatar = (): JSX.Element => <UserAvatar alt={name} src={imgSrc} size="small" />;
+// export const smallUserAvatar = (): JSX.Element => <UserAvatar alt={name} src={imgSrc} size="small" />;
 
 export const fallbackUserAvatar = (): JSX.Element => <UserAvatar />;
 
 export const mediumUserInfo = (): JSX.Element => <UserInfo user={user} />;
 
-export const smallUserInfo = (): JSX.Element => <UserInfo user={user} size="small" />;
+// export const smallUserInfo = (): JSX.Element => <UserInfo user={user} size="small" />;
 
 export const bigUserInfo = (): JSX.Element => <UserInfo user={user} size="big" />;
 

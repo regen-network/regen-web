@@ -1,14 +1,15 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
+import { getFontSize, FontSizes } from '../../theme/sizing';
 
 interface DescriptionProps {
   children?: any;
-  size?: string;
+  fontSize?: FontSizes;
 }
 
 interface StyleProps {
-  size: string;
+  fontSize: FontSizes;
 }
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
@@ -17,14 +18,19 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     marginBottom: theme.spacing(1.5),
     whiteSpace: 'pre-wrap',
     [theme.breakpoints.up('sm')]: {
-      fontSize: props.size === 'big' ? '1.375rem' : '1.125rem',
+      fontSize: props.fontSize.sm,
     },
-    fontSize: '1rem',
+    [theme.breakpoints.down('xs')]: {
+      fontSize: props.fontSize.xs,
+    },
   }),
 }));
 
-export default function Description({ children, size = 'big' }: DescriptionProps): JSX.Element {
-  const classes = useStyles({ size });
+export default function Description({
+  children,
+  fontSize = getFontSize('medium'),
+}: DescriptionProps): JSX.Element {
+  const classes = useStyles({ fontSize });
   return (
     <Typography component="div" className={classes.root}>
       {children}

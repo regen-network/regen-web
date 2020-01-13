@@ -10,9 +10,9 @@ interface ActionProps {
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
-  container: {
-    marginTop: theme.spacing(3.75),
-    marginBottom: theme.spacing(3.75),
+  root: {
+    // marginTop: theme.spacing(3.75),
+    // marginBottom: theme.spacing(3.75),
   },
   image: {
     width: '100%',
@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 export default function Action({ name, description, imgSrc }: ActionProps): JSX.Element {
   const classes = useStyles({});
   return (
-    <Grid className={classes.container} container direction="column">
+    <Grid className={classes.root} container direction="column">
       <img className={classes.image} src={imgSrc} alt={name} />
       <Typography className={classes.name}>{name}</Typography>
       <Typography className={classes.description}>{description}</Typography>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 import Avatar from '@material-ui/core/Avatar';
-import { getSize, Sizes } from './sizing';
+import { getSize, Sizes } from '../../theme/sizing';
 
 interface UserAvatarProps {
   alt?: string;

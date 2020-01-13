@@ -6,6 +6,7 @@ import Description from '../description';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 // import { truncate } from './truncate';
+import { FontSizes } from '../../theme/sizing';
 
 interface ReadMoreProps {
   children: string;
@@ -21,12 +22,13 @@ const useStyles = makeStyles((theme: Theme) => ({
 export default function ReadMore({ children, length = 757 }: ReadMoreProps): JSX.Element {
   const classes = useStyles({});
   const [expanded, setExpanded] = useState(false);
-  const trimText = children.substring(0, length);
+  const trimText: string = children.substring(0, length);
+  const fontSize: FontSizes = { xs: '1rem', sm: '1.375rem' };
   // const trimText = truncate(children, length);
   const expandedText = expanded ? (
-    <Description>{children}</Description>
+    <Description fontSize={fontSize}>{children}</Description>
   ) : (
-    <Description>{trimText}</Description>
+    <Description fontSize={fontSize}>{trimText}</Description>
   );
 
   return (

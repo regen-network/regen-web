@@ -3,7 +3,7 @@ import { makeStyles, Theme } from '@material-ui/core';
 import Grid, { GridDirection } from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import UserAvatar from './UserAvatar';
-import { getFontSize, FontSizes } from './sizing';
+import { getFontSize, FontSizes } from '../../theme/sizing';
 
 export interface User {
   name: string;

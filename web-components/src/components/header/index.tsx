@@ -12,6 +12,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   root: {
     height: '3.75rem',
     padding: `${theme.spacing(2.5)} ${theme.spacing(3.75)}`,
+    backgroundColor: theme.palette.primary.main,
   },
   image: {
     height: '2.5625rem',

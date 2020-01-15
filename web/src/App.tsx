@@ -6,13 +6,13 @@ import coorong from './assets/coorong.png';
 import map from './assets/map.png';
 import logo from './assets/logo.png';
 import './App.css';
-import { project, Project } from './mocks';
+import { project, Project, Impact } from './mocks';
 
 import { getFontSize } from 'web-components/lib/theme/sizing';
 import Title from 'web-components/lib/components/title';
 import ProjectPlaceInfo from 'web-components/lib/components/place/ProjectPlaceInfo';
 import ProjectDeveloperCard from 'web-components/lib/components/cards/ProjectDeveloperCard';
-// import EcoPracticeCard from 'web-components/lib/components/cards/EcoPracticeCard';
+import ImpactCard from 'web-components/lib/components/cards/ImpactCard';
 import Header from 'web-components/lib/components/header';
 import Description from 'web-components/lib/components/description';
 import Action from 'web-components/lib/components/action';
@@ -74,7 +74,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   projectTimeline: {},
-  projectActions: {
+  projectDetails: {
     [theme.breakpoints.up('sm')]: {
       padding: `${theme.spacing(17.25)} ${theme.spacing(32.25)} 0 ${theme.spacing(34.875)}`,
     },
@@ -109,8 +109,15 @@ interface ProjectProps {
   project: Project;
 }
 
+// function isMonitored(impact: Impact): boolean {
+//   return impact.monitored;
+// }
+
 function ProjectDetails({ project }: ProjectProps): JSX.Element {
   const classes = useStyles({});
+  const monitoredImpact: Impact | undefined = project.creditClass.methodology.impacts.find(
+    ({ monitored }) => monitored === true,
+  );
   return (
     <div className={classes.root}>
       <Grid container className={classes.projectTop}>
@@ -146,11 +153,22 @@ function ProjectDetails({ project }: ProjectProps): JSX.Element {
           <ReadMore>{project.detailedDescription}</ReadMore>
         </div>
       </div>
-      <div className={classes.projectTimeline}>
-        <Title variant="h2">Timeline</Title>
-      </div>
       <img alt={project.name} src={map} />
-      <div className={classes.projectActions}>
+      <Grid container className={classes.projectDetails}>
+        {monitoredImpact && (
+          <Grid item xs={12} sm={8}>
+            <Title variant="h2">Monitored Impact</Title>
+            <ImpactCard
+              name={monitoredImpact.name}
+              description={monitoredImpact.description}
+              imgSrc={monitoredImpact.imgSrc}
+              monitored
+            />
+          </Grid>
+        )}
+        <Grid item xs={12} sm={4}></Grid>
+      </Grid>
+      <div className={classes.projectDetails}>
         <Title variant="h2">Land Management Actions</Title>
         <Description>
           This is how the project developers are planning to achieve the primary impact.
@@ -162,6 +180,12 @@ function ProjectDetails({ project }: ProjectProps): JSX.Element {
             </Grid>
           ))}
         </Grid>
+      </div>
+      <div className={classes.projectDetails}>
+        <Title variant="h2">Monitoring, Verification, and Reporting</Title>
+      </div>
+      <div className={classes.projectDetails}>
+        <Title variant="h2">Timeline</Title>
       </div>
     </div>
   );

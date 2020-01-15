@@ -6,6 +6,7 @@ import weeds from './assets/weeds.png';
 import water from './assets/water.png';
 import mammals from './assets/mammals.png';
 import herbivory from './assets/herbivory.png';
+import biodiversity from './assets/biodiversity.png';
 
 interface Action {
   name: string;
@@ -13,8 +14,16 @@ interface Action {
   imgSrc: string;
 }
 
+export interface Impact {
+  name: string;
+  description: string;
+  imgSrc: string;
+  monitored: boolean;
+}
+
 interface Metholody {
   actions: Action[];
+  impacts: Impact[];
 }
 
 interface CreditClass {
@@ -113,6 +122,14 @@ export const project: Project = {
           description:
             'Establish a minimum of three fenced exclosures to prevent grazing from herbivores (both native and introduced).',
           imgSrc: herbivory,
+        },
+      ],
+      impacts: [
+        {
+          name: 'Biodiversity',
+          description: 'Healthy ecosystems and rich biodiversity are fundamental to life on our planet.',
+          imgSrc: biodiversity,
+          monitored: true,
         },
       ],
     },

@@ -1,13 +1,21 @@
 image: orangecloudfoundry/orange-cf-bosh-cli
 
 stages:
+  - prebuild
   - build
   - deploy
+
+prebuild:
+  stage: prebuild
+  script:
+    - echo "Building $CI_PROJECT_NAME"
+    - yarn
+  cache:
+    key: "$CI_JOB_NAME-$CI_COMMIT_REF_SLUG"
 
 build-storybook:
   stage: build
   script: 
-    - yarn
     - yarn run build-storybook
   artifacts:
     paths:
@@ -16,7 +24,6 @@ build-storybook:
 build-web:
   stage: build
   script:
-    - echo "Building $CI_PROJECT_NAME"
     - yarn build
   artifacts:
     paths:

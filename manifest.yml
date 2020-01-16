@@ -6,12 +6,15 @@ applications:
   instances: 1
   routes:
      - route: regen-storybook.cfapps.io
-#    - route: storybook.regen.network
-#  buildpacks: 
-#    - https://github.com/cloudfoundry/nodejs-buildpack
-#  services:  
-#    - registry_mysql
-#    - registry-s3-service
+- name: registry
+  path: web/build
+  memory: 64M
+  instances: 1
+  routes:
+     - route: regen-registry.cfapps.io
+  buildpacks: 
+     - staticfile_buildpack
+     
 
 
 

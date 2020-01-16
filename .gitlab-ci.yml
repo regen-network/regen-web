@@ -4,22 +4,38 @@ stages:
   - build
   - deploy
 
-build:
+build-storybook:
   stage: build
   script: 
-    - echo "Building $CI_PROJECT_NAME"
     - yarn
     - yarn run build-storybook
   artifacts:
     paths:
       - web-storybook/storybook-static
 
-dev:
+build-web:
+  stage: build
+  script:
+    - echo "Building $CI_PROJECT_NAME"
+    - yarn build
+  artifacts:
+    paths:
+      - web/build
+
+dev-storybook:
   stage: deploy
   script:
     - cf login -a $CF_URL -u $CF_USER -p $CF_PASS
     - cf target -o "$CF_ORG" -s $CF_SPACE
     - cf push storybook
+  only:
+    - dev
+dev-web:
+  stage: deploy
+  script:
+    - cf login -a $CF_URL -u $CF_USER -p $CF_PASS
+    - cf target -o "$CF_ORG" -s $CF_SPACE
+    - cf push registry
   only:
     - dev
 

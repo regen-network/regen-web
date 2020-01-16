@@ -14,7 +14,7 @@ build-deploy-all:
     - cf target -o "$CF_ORG" -s $CF_SPACE
     - cf push storybook
     - cf push registry
- artifacts:
+  artifacts:
     paths:
       - web-storybook/storybook-static
       - web/build

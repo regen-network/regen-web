@@ -1,7 +1,6 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 import { useTheme } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Card from './Card';
 import VerifiedIcon from '../icons/VerifiedIcon';
@@ -27,11 +26,12 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     textAlign: 'center',
     position: 'relative',
     [theme.breakpoints.up('sm')]: {
-      backgroundSize: 'auto 70%',
+      backgroundSize: props.monitored ? 'auto 70%' : '100% auto',
     },
     [theme.breakpoints.down('xs')]: {
       backgroundSize: '100% auto',
     },
+    height: '100%',
   }),
   text: props => ({
     [theme.breakpoints.up('sm')]: {
@@ -70,6 +70,9 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     color: theme.palette.info.main,
   }),
   monitored: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
     fontFamily: theme.typography.h1.fontFamily,
     color: theme.palette.secondary.main,
     textTransform: 'uppercase',
@@ -84,6 +87,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       paddingLeft: theme.spacing(8),
       paddingRight: theme.spacing(8),
     },
+    textAlign: 'left',
   },
   backgroundGradient: props => ({
     height: props.monitored ? '70%' : '85%',
@@ -94,20 +98,12 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     background: 'linear-gradient(180deg, rgba(250, 250, 250, 0) 2.48%, #FAFAFA 64.06%)',
   }),
   monitoredIcon: {
-    [theme.breakpoints.down('xs')]: {
-      flexGrow: 0,
-      maxWidth: '20%',
-      flexBasis: '20%',
-    },
+    // [theme.breakpoints.down('xs')]: {
+    //   flexGrow: 0,
+    //   maxWidth: '20%',
+    //   flexBasis: '20%',
+    // },
     paddingRight: theme.spacing(2),
-  },
-  monitoredText: {
-    [theme.breakpoints.down('xs')]: {
-      flexGrow: 0,
-      maxWidth: '80%',
-      flexBasis: '80%',
-    },
-    textAlign: 'left',
   },
 }));
 
@@ -126,15 +122,12 @@ export default function ImpactCard({
         <div className={classes.text}>
           <Typography className={classes.name}>{name}</Typography>
           <Typography className={classes.description}>{description}</Typography>
-          {monitored && (
-            <Grid container className={classes.monitored} alignItems="center" justify="center">
-              <Grid item className={classes.monitoredIcon}>
-                <VerifiedIcon color={theme.palette.secondary.main} />
-              </Grid>
-              <Grid item className={classes.monitoredText}>
-                verified and tracked on the regen blockchain
-              </Grid>
-            </Grid>
+          {monitored && (<span className={classes.monitored}>
+            <span className={classes.monitoredIcon}>
+              <VerifiedIcon color={theme.palette.secondary.main} />
+            </span>
+            verified and tracked on the regen blockchain
+          </span>
           )}
         </div>
       </div>

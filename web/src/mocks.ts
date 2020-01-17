@@ -7,6 +7,9 @@ import water from './assets/water.png';
 import mammals from './assets/mammals.png';
 import herbivory from './assets/herbivory.png';
 import biodiversity from './assets/biodiversity.png';
+import soc from './assets/soc.png';
+import biomass from './assets/biomass.png';
+// import soil from './assets/soil.png';
 
 interface Action {
   name: string;
@@ -23,7 +26,7 @@ export interface Impact {
 
 interface Metholody {
   actions: Action[];
-  impacts: Impact[];
+  impact: Impact[];
 }
 
 interface CreditClass {
@@ -124,12 +127,30 @@ export const project: Project = {
           imgSrc: herbivory,
         },
       ],
-      impacts: [
+      impact: [
         {
           name: 'Biodiversity',
           description: 'Healthy ecosystems and rich biodiversity are fundamental to life on our planet.',
           imgSrc: biodiversity,
           monitored: true,
+        },
+        {
+          name: 'Soil organic carbon',
+          description: 'Sequestering carbon in SOC is one way to mitigate climate change.',
+          imgSrc: soc,
+          monitored: false,
+        },
+        {
+          name: 'Above ground biomass',
+          description: 'Increasing all living biomass which is located above the ground.',
+          imgSrc: biomass,
+          monitored: false,
+        },
+        {
+          name: 'Soil health',
+          description: 'The capacity of soil to function as a vital living ecosystem that sustains plants, animals, and humans.',
+          imgSrc: require('./assets/soil.png'),
+          monitored: false,
         },
       ],
     },

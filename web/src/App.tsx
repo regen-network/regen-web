@@ -95,12 +95,26 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingTop: theme.spacing(2),
     },
   },
-  projectAction: {
+  projectGridItem: {
     [theme.breakpoints.up('sm')]: {
       padding: `${theme.spacing(3.5)} ${theme.spacing(5.25)} ${theme.spacing(2.5)} 0`,
     },
     [theme.breakpoints.down('xs')]: {
       paddingBottom: theme.spacing(13),
+    },
+  },
+  projectImpactContainer: {
+    [theme.breakpoints.down('xs')]: {
+      flexWrap: 'nowrap',
+      overflowX: 'auto',
+    },
+  },
+  projectImpact: {
+    display: 'flex',
+    [theme.breakpoints.down('xs')]: {
+      flex: '0 0 auto',
+      marginRight: theme.spacing(4),
+      width: '80%',
     },
   },
 }));
@@ -115,9 +129,16 @@ interface ProjectProps {
 
 function ProjectDetails({ project }: ProjectProps): JSX.Element {
   const classes = useStyles({});
-  const monitoredImpact: Impact | undefined = project.creditClass.methodology.impacts.find(
+  const impact: Impact[] = project.creditClass.methodology.impact;
+  const monitoredImpact: Impact | undefined = impact.find(
     ({ monitored }) => monitored === true,
   );
+
+  if (monitoredImpact) {
+    const monitoredIndex = impact.indexOf(monitoredImpact)
+    impact.splice(monitoredIndex, 1)
+  }
+
   return (
     <div className={classes.root}>
       <Grid container className={classes.projectTop}>
@@ -129,24 +150,17 @@ function ProjectDetails({ project }: ProjectProps): JSX.Element {
           <div className={classes.projectPlace}>
             <ProjectPlaceInfo place={project.place} area={project.area} />
           </div>
-          <Description fontSize={getFontSize('big')}>{project.summaryDescription}</Description>
+          <Description fontSize={getFontSize('big')}>
+            {project.summaryDescription}
+          </Description>
           <div className={classes.projectDeveloper}>
-            <ProjectDeveloperCard projectDeveloper={project.developer} landSteward={project.steward} />
+            <ProjectDeveloperCard
+              projectDeveloper={project.developer}
+              landSteward={project.steward}
+            />
           </div>
         </Grid>
       </Grid>
-      {/*<div className="project-content">
-        <Title variant="h2">Ecological Practices</Title>
-        <div>
-          {project.creditClass.methodology.practices.map(practice => (
-            <EcoPracticeCard
-              name={practice.name}
-              description={practice.description}
-              imgSrc={biodiversity}
-            />
-          ))}
-        </div>
-      </div>*/}
       <div className={classes.projectStory}>
         <div className={classes.projectStoryText}>
           <Title variant="h2">Story</Title>
@@ -166,8 +180,35 @@ function ProjectDetails({ project }: ProjectProps): JSX.Element {
             />
           </Grid>
         )}
-        <Grid item xs={12} sm={4}></Grid>
+        <Grid item xs={12} sm={4}>
+          <Title variant="h3">Protected Species</Title>
+
+        </Grid>
       </Grid>
+      <div className={classes.projectDetails}>
+        <Title variant="h2">Non-monitored Impact</Title>
+        <Description>
+          These outcomes are natural by-products of the primary impact above,
+          but will not be measured or verified.
+        </Description>
+        <Grid container className={classes.projectImpactContainer}>
+          {impact.map((item, index) => (
+            <Grid
+              item
+              xs={12}
+              sm={4}
+              className={`${classes.projectGridItem} ${classes.projectImpact}`}
+              key={`${index}-${item.name}`}
+            >
+              <ImpactCard
+                name={item.name}
+                description={item.description}
+                imgSrc={item.imgSrc}
+              />
+            </Grid>
+          ))}
+        </Grid>
+      </div>
       <div className={classes.projectDetails}>
         <Title variant="h2">Land Management Actions</Title>
         <Description>
@@ -175,15 +216,25 @@ function ProjectDetails({ project }: ProjectProps): JSX.Element {
         </Description>
         <Grid container className={classes.projectActionsGrid}>
           {project.creditClass.methodology.actions.map((action, index) => (
-            <Grid item xs={12} sm={4} className={classes.projectAction}>
-              <Action name={action.name} description={action.description} imgSrc={action.imgSrc} />
+            <Grid
+              item
+              xs={12}
+              sm={4}
+              className={classes.projectGridItem}
+              key={`${index}-${action.name}`}
+            >
+              <Action
+                name={action.name}
+                description={action.description}
+                imgSrc={action.imgSrc}
+              />
             </Grid>
           ))}
         </Grid>
       </div>
-      <div className={classes.projectDetails}>
+      {/*<div className={classes.projectDetails}>
         <Title variant="h2">Monitoring, Verification, and Reporting</Title>
-      </div>
+      </div>*/}
       <div className={classes.projectDetails}>
         <Title variant="h2">Timeline</Title>
       </div>

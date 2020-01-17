@@ -122,12 +122,13 @@ export default function ImpactCard({
         <div className={classes.text}>
           <Typography className={classes.name}>{name}</Typography>
           <Typography className={classes.description}>{description}</Typography>
-          {monitored && (<span className={classes.monitored}>
-            <span className={classes.monitoredIcon}>
-              <VerifiedIcon color={theme.palette.secondary.main} />
+          {monitored && (
+            <span className={classes.monitored}>
+              <span className={classes.monitoredIcon}>
+                <VerifiedIcon color={theme.palette.secondary.main} />
+              </span>
+              verified and tracked on the regen blockchain
             </span>
-            verified and tracked on the regen blockchain
-          </span>
           )}
         </div>
       </div>

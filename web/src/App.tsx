@@ -130,13 +130,11 @@ interface ProjectProps {
 function ProjectDetails({ project }: ProjectProps): JSX.Element {
   const classes = useStyles({});
   const impact: Impact[] = project.creditClass.methodology.impact;
-  const monitoredImpact: Impact | undefined = impact.find(
-    ({ monitored }) => monitored === true,
-  );
+  const monitoredImpact: Impact | undefined = impact.find(({ monitored }) => monitored === true);
 
   if (monitoredImpact) {
-    const monitoredIndex = impact.indexOf(monitoredImpact)
-    impact.splice(monitoredIndex, 1)
+    const monitoredIndex = impact.indexOf(monitoredImpact);
+    impact.splice(monitoredIndex, 1);
   }
 
   return (
@@ -150,14 +148,9 @@ function ProjectDetails({ project }: ProjectProps): JSX.Element {
           <div className={classes.projectPlace}>
             <ProjectPlaceInfo place={project.place} area={project.area} />
           </div>
-          <Description fontSize={getFontSize('big')}>
-            {project.summaryDescription}
-          </Description>
+          <Description fontSize={getFontSize('big')}>{project.summaryDescription}</Description>
           <div className={classes.projectDeveloper}>
-            <ProjectDeveloperCard
-              projectDeveloper={project.developer}
-              landSteward={project.steward}
-            />
+            <ProjectDeveloperCard projectDeveloper={project.developer} landSteward={project.steward} />
           </div>
         </Grid>
       </Grid>
@@ -182,14 +175,13 @@ function ProjectDetails({ project }: ProjectProps): JSX.Element {
         )}
         <Grid item xs={12} sm={4}>
           <Title variant="h3">Protected Species</Title>
-
         </Grid>
       </Grid>
       <div className={classes.projectDetails}>
         <Title variant="h2">Non-monitored Impact</Title>
         <Description>
-          These outcomes are natural by-products of the primary impact above,
-          but will not be measured or verified.
+          These outcomes are natural by-products of the primary impact above, but will not be measured or
+          verified.
         </Description>
         <Grid container className={classes.projectImpactContainer}>
           {impact.map((item, index) => (
@@ -200,11 +192,7 @@ function ProjectDetails({ project }: ProjectProps): JSX.Element {
               className={`${classes.projectGridItem} ${classes.projectImpact}`}
               key={`${index}-${item.name}`}
             >
-              <ImpactCard
-                name={item.name}
-                description={item.description}
-                imgSrc={item.imgSrc}
-              />
+              <ImpactCard name={item.name} description={item.description} imgSrc={item.imgSrc} />
             </Grid>
           ))}
         </Grid>
@@ -216,18 +204,8 @@ function ProjectDetails({ project }: ProjectProps): JSX.Element {
         </Description>
         <Grid container className={classes.projectActionsGrid}>
           {project.creditClass.methodology.actions.map((action, index) => (
-            <Grid
-              item
-              xs={12}
-              sm={4}
-              className={classes.projectGridItem}
-              key={`${index}-${action.name}`}
-            >
-              <Action
-                name={action.name}
-                description={action.description}
-                imgSrc={action.imgSrc}
-              />
+            <Grid item xs={12} sm={4} className={classes.projectGridItem} key={`${index}-${action.name}`}>
+              <Action name={action.name} description={action.description} imgSrc={action.imgSrc} />
             </Grid>
           ))}
         </Grid>

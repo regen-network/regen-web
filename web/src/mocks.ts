@@ -148,7 +148,8 @@ export const project: Project = {
         },
         {
           name: 'Soil health',
-          description: 'The capacity of soil to function as a vital living ecosystem that sustains plants, animals, and humans.',
+          description:
+            'The capacity of soil to function as a vital living ecosystem that sustains plants, animals, and humans.',
           imgSrc: require('./assets/soil.png'),
           monitored: false,
         },

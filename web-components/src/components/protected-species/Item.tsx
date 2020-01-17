@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 
-interface ItemProps {
+export interface ItemProps {
   name: string;
   imgSrc: string;
 }

@@ -31,3 +31,7 @@
     transform: rotate(360deg);
   }
 }
+
+.project-top {
+  background-image: url(./assets/background3.jpg);
+}

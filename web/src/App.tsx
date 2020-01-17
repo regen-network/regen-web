@@ -5,6 +5,9 @@ import Grid from '@material-ui/core/Grid';
 import coorong from './assets/coorong.png';
 import map from './assets/map.png';
 import logo from './assets/logo.png';
+// import background3 from './assets/background3.jpg';
+import background from './assets/background.jpg';
+
 import './App.css';
 import { project, Project, Impact } from './mocks';
 
@@ -17,6 +20,21 @@ import Header from 'web-components/lib/components/header';
 import Description from 'web-components/lib/components/description';
 import Action from 'web-components/lib/components/action';
 import ReadMore from 'web-components/lib/components/read-more';
+import CreditDetails from 'web-components/lib/components/credits/CreditDetails';
+
+// import { ItemProps } from 'web-components/lib/components/protected-species/Item';
+// import ProtectedSpecies, { ProtectedSpeciesProps } from 'web-components/lib/components/protected-species';
+// import "slick-carousel/slick/slick.css";
+// import "slick-carousel/slick/slick-theme.css";
+
+// const protectedSpeciesItem: ItemProps = {
+//   name: 'Melaleuca halmaturum',
+//   imgSrc: require('./assets/melaleuca.png')
+// }
+//
+// const species = [
+//   protectedSpeciesItem, protectedSpeciesItem, protectedSpeciesItem, protectedSpeciesItem,
+// ]
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -30,7 +48,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       padding: `${theme.spacing(15.5)} ${theme.spacing(25)}`,
     },
-    backgroundColor: '#f9f9f9', // TODO add colors to palette
+    backgroundSize: 'contain',
     borderTop: '1px solid #D2D5D9',
     borderBottom: '1px solid #D2D5D9',
   },
@@ -117,15 +135,12 @@ const useStyles = makeStyles((theme: Theme) => ({
       width: '80%',
     },
   },
+  creditDetailsContainer: {},
 }));
 
 interface ProjectProps {
   project: Project;
 }
-
-// function isMonitored(impact: Impact): boolean {
-//   return impact.monitored;
-// }
 
 function ProjectDetails({ project }: ProjectProps): JSX.Element {
   const classes = useStyles({});
@@ -139,7 +154,7 @@ function ProjectDetails({ project }: ProjectProps): JSX.Element {
 
   return (
     <div className={classes.root}>
-      <Grid container className={classes.projectTop}>
+      <Grid container className={`${classes.projectTop} project-top`}>
         <Grid item xs={12} sm={6}>
           <img alt={project.name} src={coorong} />
         </Grid>
@@ -197,6 +212,16 @@ function ProjectDetails({ project }: ProjectProps): JSX.Element {
           ))}
         </Grid>
       </div>
+
+      <div className={classes.projectDetails}>
+        <CreditDetails
+          name={project.creditClass.name}
+          description={project.creditClass.description}
+          activities={project.creditClass.activities}
+          background={background}
+        />
+      </div>
+
       <div className={classes.projectDetails}>
         <Title variant="h2">Land Management Actions</Title>
         <Description>

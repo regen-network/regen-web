@@ -66,7 +66,7 @@ export default function TimelineItem({ date, title, description, color }: Timeli
   return (
     <div className={classes.content}>
       <div className={classes.date}>{date}</div>
-      <Title variant="h3">{title}</Title>
+      <Title variant="h4">{title}</Title>
       <div className={classes.description}>{description}</div>
       <span className={classes.circle} />
     </div>

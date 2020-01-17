@@ -1,12 +1,13 @@
 import * as React from 'react';
-import Card from 'web-components/lib/components/card/Card';
-import ProjectDeveloperCard from 'web-components/lib/components/card/ProjectDeveloperCard';
+import Card from 'web-components/lib/components/cards/Card';
+import ProjectDeveloperCard from 'web-components/lib/components/cards/ProjectDeveloperCard';
+import ImpactCard from 'web-components/lib/components/cards/ImpactCard';
 import { User } from 'web-components/lib/components/user/UserInfo';
-// import CreditCard, { CreditInfo } from 'web-components/lib/components/card/CreditCard';
-// import ProjectCard, { ProjectInfo } from 'web-components/lib/components/card/ProjectCard';
+// import CreditCard, { CreditInfo } from 'web-components/lib/components/cards/CreditCard';
+// import ProjectCard, { ProjectInfo } from 'web-components/lib/components/cards/ProjectCard';
 
 export default {
-  title: 'Components|Card',
+  title: 'Components|Cards',
   component: Card,
 };
 
@@ -26,6 +27,23 @@ const landSteward: User = {
 
 export const projectDeveloperCard = (): JSX.Element => (
   <ProjectDeveloperCard projectDeveloper={projectDeveloper} landSteward={landSteward} />
+);
+
+export const impactCard = (): JSX.Element => (
+  <ImpactCard
+    title="Above ground biomass"
+    description="Increasing all living biomass which is located above the ground."
+    imgSrc="/biomass.png"
+  />
+);
+
+export const monitoredImpactCard = (): JSX.Element => (
+  <ImpactCard
+    title="Biodiversity"
+    description="Healthy ecosystems and rich biodiversity are fundamental to life on our planet."
+    imgSrc="/biodiversity.png"
+    monitored
+  />
 );
 
 // const creditInfo: CreditInfo = {

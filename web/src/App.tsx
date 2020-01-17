@@ -5,18 +5,36 @@ import Grid from '@material-ui/core/Grid';
 import coorong from './assets/coorong.png';
 import map from './assets/map.png';
 import logo from './assets/logo.png';
+// import background3 from './assets/background3.jpg';
+import background from './assets/background.jpg';
+
 import './App.css';
-import { project, Project } from './mocks';
+import { project, Project, Impact } from './mocks';
 
 import { getFontSize } from 'web-components/lib/theme/sizing';
 import Title from 'web-components/lib/components/title';
 import ProjectPlaceInfo from 'web-components/lib/components/place/ProjectPlaceInfo';
-import ProjectDeveloperCard from 'web-components/lib/components/card/ProjectDeveloperCard';
-// import EcoPracticeCard from 'web-components/lib/components/card/EcoPracticeCard';
+import ProjectDeveloperCard from 'web-components/lib/components/cards/ProjectDeveloperCard';
+import ImpactCard from 'web-components/lib/components/cards/ImpactCard';
 import Header from 'web-components/lib/components/header';
 import Description from 'web-components/lib/components/description';
 import Action from 'web-components/lib/components/action';
 import ReadMore from 'web-components/lib/components/read-more';
+import CreditDetails from 'web-components/lib/components/credits/CreditDetails';
+
+// import { ItemProps } from 'web-components/lib/components/protected-species/Item';
+// import ProtectedSpecies, { ProtectedSpeciesProps } from 'web-components/lib/components/protected-species';
+// import "slick-carousel/slick/slick.css";
+// import "slick-carousel/slick/slick-theme.css";
+
+// const protectedSpeciesItem: ItemProps = {
+//   name: 'Melaleuca halmaturum',
+//   imgSrc: require('./assets/melaleuca.png')
+// }
+//
+// const species = [
+//   protectedSpeciesItem, protectedSpeciesItem, protectedSpeciesItem, protectedSpeciesItem,
+// ]
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -30,7 +48,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       padding: `${theme.spacing(15.5)} ${theme.spacing(25)}`,
     },
-    backgroundColor: '#f9f9f9', // TODO add colors to palette
+    backgroundSize: 'contain',
     borderTop: '1px solid #D2D5D9',
     borderBottom: '1px solid #D2D5D9',
   },
@@ -74,7 +92,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   projectTimeline: {},
-  projectActions: {
+  projectDetails: {
     [theme.breakpoints.up('sm')]: {
       padding: `${theme.spacing(17.25)} ${theme.spacing(32.25)} 0 ${theme.spacing(34.875)}`,
     },
@@ -95,7 +113,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingTop: theme.spacing(2),
     },
   },
-  projectAction: {
+  projectGridItem: {
     [theme.breakpoints.up('sm')]: {
       padding: `${theme.spacing(3.5)} ${theme.spacing(5.25)} ${theme.spacing(2.5)} 0`,
     },
@@ -103,6 +121,21 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingBottom: theme.spacing(13),
     },
   },
+  projectImpactContainer: {
+    [theme.breakpoints.down('xs')]: {
+      flexWrap: 'nowrap',
+      overflowX: 'auto',
+    },
+  },
+  projectImpact: {
+    display: 'flex',
+    [theme.breakpoints.down('xs')]: {
+      flex: '0 0 auto',
+      marginRight: theme.spacing(4),
+      width: '80%',
+    },
+  },
+  creditDetailsContainer: {},
 }));
 
 interface ProjectProps {
@@ -111,9 +144,17 @@ interface ProjectProps {
 
 function ProjectDetails({ project }: ProjectProps): JSX.Element {
   const classes = useStyles({});
+  const impact: Impact[] = project.creditClass.methodology.impact;
+  const monitoredImpact: Impact | undefined = impact.find(({ monitored }) => monitored === true);
+
+  if (monitoredImpact) {
+    const monitoredIndex = impact.indexOf(monitoredImpact);
+    impact.splice(monitoredIndex, 1);
+  }
+
   return (
     <div className={classes.root}>
-      <Grid container className={classes.projectTop}>
+      <Grid container className={`${classes.projectTop} project-top`}>
         <Grid item xs={12} sm={6}>
           <img alt={project.name} src={coorong} />
         </Grid>
@@ -128,40 +169,77 @@ function ProjectDetails({ project }: ProjectProps): JSX.Element {
           </div>
         </Grid>
       </Grid>
-      {/*<div className="project-content">
-        <Title variant="h2">Ecological Practices</Title>
-        <div>
-          {project.creditClass.methodology.practices.map(practice => (
-            <EcoPracticeCard
-              name={practice.name}
-              description={practice.description}
-              imgSrc={biodiversity}
-            />
-          ))}
-        </div>
-      </div>*/}
       <div className={classes.projectStory}>
         <div className={classes.projectStoryText}>
           <Title variant="h2">Story</Title>
           <ReadMore>{project.detailedDescription}</ReadMore>
         </div>
       </div>
-      <div className={classes.projectTimeline}>
-        <Title variant="h2">Timeline</Title>
-      </div>
       <img alt={project.name} src={map} />
-      <div className={classes.projectActions}>
+      <Grid container className={classes.projectDetails}>
+        {monitoredImpact && (
+          <Grid item xs={12} sm={8}>
+            <Title variant="h2">Monitored Impact</Title>
+            <ImpactCard
+              name={monitoredImpact.name}
+              description={monitoredImpact.description}
+              imgSrc={monitoredImpact.imgSrc}
+              monitored
+            />
+          </Grid>
+        )}
+        <Grid item xs={12} sm={4}>
+          <Title variant="h3">Protected Species</Title>
+        </Grid>
+      </Grid>
+      <div className={classes.projectDetails}>
+        <Title variant="h2">Non-monitored Impact</Title>
+        <Description>
+          These outcomes are natural by-products of the primary impact above, but will not be measured or
+          verified.
+        </Description>
+        <Grid container className={classes.projectImpactContainer}>
+          {impact.map((item, index) => (
+            <Grid
+              item
+              xs={12}
+              sm={4}
+              className={`${classes.projectGridItem} ${classes.projectImpact}`}
+              key={`${index}-${item.name}`}
+            >
+              <ImpactCard name={item.name} description={item.description} imgSrc={item.imgSrc} />
+            </Grid>
+          ))}
+        </Grid>
+      </div>
+
+      <div className={classes.projectDetails}>
+        <CreditDetails
+          name={project.creditClass.name}
+          description={project.creditClass.description}
+          activities={project.creditClass.activities}
+          background={background}
+        />
+      </div>
+
+      <div className={classes.projectDetails}>
         <Title variant="h2">Land Management Actions</Title>
         <Description>
           This is how the project developers are planning to achieve the primary impact.
         </Description>
         <Grid container className={classes.projectActionsGrid}>
           {project.creditClass.methodology.actions.map((action, index) => (
-            <Grid item xs={12} sm={4} className={classes.projectAction}>
+            <Grid item xs={12} sm={4} className={classes.projectGridItem} key={`${index}-${action.name}`}>
               <Action name={action.name} description={action.description} imgSrc={action.imgSrc} />
             </Grid>
           ))}
         </Grid>
+      </div>
+      {/*<div className={classes.projectDetails}>
+        <Title variant="h2">Monitoring, Verification, and Reporting</Title>
+      </div>*/}
+      <div className={classes.projectDetails}>
+        <Title variant="h2">Timeline</Title>
       </div>
     </div>
   );

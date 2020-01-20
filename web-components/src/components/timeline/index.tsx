@@ -12,7 +12,7 @@ export interface Event {
 }
 
 interface TimelineProps {
-  events: [Event];
+  events: Event[];
 }
 
 const useStyles = makeStyles((theme: Theme) => ({

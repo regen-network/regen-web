@@ -1,5 +1,6 @@
 import { User } from 'web-components/lib/components/user/UserInfo';
 import { ItemProps as ProtectedSpeciesItem } from 'web-components/lib/components/protected-species/Item';
+import { Event } from 'web-components/lib/components/timeline';
 import abu from './assets/abu.png';
 import pest from './assets/pest.png';
 import fox from './assets/fox.png';
@@ -54,6 +55,7 @@ export interface Project {
   detailedDescription: string;
   creditClass: CreditClass;
   protectedSpecies?: ProtectedSpeciesItem[];
+  timeline: Event[];
 }
 
 export const project: Project = {
@@ -188,6 +190,38 @@ export const project: Project = {
     {
       name: 'Tecticornia sp.',
       imgSrc: require('./assets/tecticornia.png'),
+    },
+  ],
+  timeline: [
+    {
+      date: 'September 2, 2019',
+      title: 'Project starts',
+      description:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+    },
+    {
+      date: 'October 21, 2019',
+      title: 'Approval complete',
+      description:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+    },
+    {
+      date: 'February 20, 2020',
+      title: 'Credits issued',
+      description:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+    },
+    {
+      date: 'September 2022',
+      title: 'Site visit',
+      description:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+    },
+    {
+      date: 'February 2029',
+      title: 'Project completion',
+      description:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
     },
   ],
 };

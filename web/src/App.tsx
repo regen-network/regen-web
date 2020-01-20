@@ -18,6 +18,7 @@ import ImpactCard from 'web-components/lib/components/cards/ImpactCard';
 import Header from 'web-components/lib/components/header';
 import Description from 'web-components/lib/components/description';
 import Action from 'web-components/lib/components/action';
+import Timeline from 'web-components/lib/components/timeline';
 import ReadMore from 'web-components/lib/components/read-more';
 import CreditDetails from 'web-components/lib/components/credits/CreditDetails';
 import ProtectedSpecies from 'web-components/lib/components/protected-species';
@@ -92,6 +93,14 @@ const useStyles = makeStyles((theme: Theme) => ({
       [theme.breakpoints.down('xs')]: {
         marginBottom: theme.spacing(3.25),
       },
+    },
+  },
+  projectActions: {
+    [theme.breakpoints.up('sm')]: {
+      paddingBottom: theme.spacing(27.5),
+    },
+    [theme.breakpoints.down('xs')]: {
+      paddingBottom: theme.spacing(17.5),
     },
   },
   projectActionsGrid: {
@@ -225,7 +234,7 @@ function ProjectDetails({ project }: ProjectProps): JSX.Element {
         />
       </div>
 
-      <div className={classes.projectDetails}>
+      <div className={`${classes.projectDetails} ${classes.projectActions}`}>
         <Title variant="h2">Land Management Actions</Title>
         <Description>
           This is how the project developers are planning to achieve the primary impact.
@@ -238,11 +247,14 @@ function ProjectDetails({ project }: ProjectProps): JSX.Element {
           ))}
         </Grid>
       </div>
-      {/*<div className={classes.projectDetails}>
-        <Title variant="h2">Monitoring, Verification, and Reporting</Title>
-      </div>*/}
-      <div className={classes.projectDetails}>
-        <Title variant="h2">Timeline</Title>
+      <div className="project-bottom">
+        {/*<div className={classes.projectDetails}>
+          <Title variant="h2">Monitoring, Verification, and Reporting</Title>
+        </div>*/}
+        <div className={classes.projectDetails}>
+          <Title variant="h2">Timeline</Title>
+          <Timeline events={project.timeline} />
+        </div>
       </div>
     </div>
   );

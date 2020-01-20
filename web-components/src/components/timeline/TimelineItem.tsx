@@ -22,10 +22,10 @@ interface StyleProps {
 // TODO: define spacing object with elements sizings for computation
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   content: props => ({
-    maxWidth: '70%',
+    backgroundColor: theme.palette.primary.main,
+    maxWidth: '75%',
     position: 'relative',
     border: `1px solid ${theme.palette.info.light}`,
-    boxSizing: 'border-box',
     borderRadius: '10px',
     paddingTop: theme.spacing(4.75),
     paddingRight: theme.spacing(5.5),
@@ -84,7 +84,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     paddingTop: theme.spacing(1.5),
   },
   bar: props => ({
-    backgroundColor: props.barColor, //theme.palette.secondary.main, // '#8F8F8F'
+    backgroundColor: props.barColor,
     [theme.breakpoints.up('sm')]: {
       right: props.odd ? 'auto' : `calc(${theme.spacing(-7.75 - 1.5 / 2)} - 1px)`,
       left: props.odd ? `calc(${theme.spacing(-7.75 - 1.5 / 2)} - 1px)` : 'auto',
@@ -108,20 +108,21 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     borderColor: props.circleColor,
     borderStyle: 'solid',
     position: 'absolute',
+    boxSizing: 'border-box',
     [theme.breakpoints.up('sm')]: {
-      right: props.odd ? 'auto' : theme.spacing(-7.75 - 5.75 / 2),
+      right: props.odd ? 'auto' : `calc(${theme.spacing(-7.75 - 5.75 / 2)} - 1px)`,
       left: props.odd ? `calc(${theme.spacing(-7.75 - 5.75 / 2)} - 1px)` : 'auto',
       top: props.last ? 'auto' : theme.spacing(2),
       bottom: props.last ? theme.spacing(2) : 'auto',
-      width: theme.spacing(3.75),
-      height: theme.spacing(3.75),
+      width: theme.spacing(5.75),
+      height: theme.spacing(5.75),
       borderWidth: theme.spacing(1),
     },
     [theme.breakpoints.down('xs')]: {
       left: theme.spacing(-5.75 - 4.5 / 2),
       top: theme.spacing(2),
-      width: theme.spacing(3),
-      height: theme.spacing(3),
+      width: theme.spacing(4.5),
+      height: theme.spacing(4.5),
       borderWidth: theme.spacing(0.75),
     },
     zIndex: 100,

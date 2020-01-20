@@ -7,6 +7,7 @@ module.exports = {
   rules: {
     'no-empty': 'off',
     'no-console': 'warn',
+    'no-useless-escape': 'off',
     '@typescript-eslint/explicit-function-return-type': [
       'error',
       {

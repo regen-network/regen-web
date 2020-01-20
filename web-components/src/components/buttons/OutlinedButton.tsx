@@ -4,7 +4,7 @@ import Button from '@material-ui/core/Button';
 
 interface OutlinedButtonProps {
   children?: any;
-  startIcon: JSX.Element;
+  startIcon?: JSX.Element;
   fullWidth?: boolean;
   onClick: () => void;
 }

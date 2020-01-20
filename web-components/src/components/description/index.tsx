@@ -29,10 +29,11 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
 export default function Description({
   children,
   fontSize = getFontSize('medium'),
+  ...props
 }: DescriptionProps): JSX.Element {
   const classes = useStyles({ fontSize });
   return (
-    <Typography component="div" className={classes.root}>
+    <Typography {...props} component="div" className={classes.root}>
       {children}
     </Typography>
   );

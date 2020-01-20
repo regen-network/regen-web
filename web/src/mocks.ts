@@ -1,4 +1,6 @@
 import { User } from 'web-components/lib/components/user/UserInfo';
+import { ItemProps as ProtectedSpeciesItem } from 'web-components/lib/components/protected-species/Item';
+import { Event } from 'web-components/lib/components/timeline';
 import abu from './assets/abu.png';
 import pest from './assets/pest.png';
 import fox from './assets/fox.png';
@@ -49,9 +51,12 @@ export interface Project {
   area: number;
   developer: User;
   steward: User;
+  creditsIssuer: User;
   summaryDescription: string;
   detailedDescription: string;
   creditClass: CreditClass;
+  protectedSpecies?: ProtectedSpeciesItem[];
+  timeline: Event[];
 }
 
 export const project: Project = {
@@ -70,6 +75,11 @@ export const project: Project = {
     imgSrc:
       'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Ngarrindjeri_Nation_Flag.svg/250px-Ngarrindjeri_Nation_Flag.svg.png',
     description: 'The Ngarrindjeri culture is centered around the lower lakes of the Murray River.',
+  },
+  creditsIssuer: {
+    name: 'Regen Network',
+    place: 'Massachussets, United States',
+    imgSrc: require('./assets/regen.png'),
   },
   summaryDescription:
     'This project is restoring and conserving a large area of native grassland in Southern Australia.',
@@ -154,4 +164,70 @@ export const project: Project = {
       ],
     },
   },
+  protectedSpecies: [
+    {
+      name: 'Melaleuca halmaturum',
+      imgSrc: require('./assets/melaleuca-h.png'),
+    },
+    {
+      name: 'Banksia ornata',
+      imgSrc: require('./assets/banksia.png'),
+    },
+    {
+      name: 'Tecticornia sp.',
+      imgSrc: require('./assets/tecticornia.png'),
+    },
+    {
+      name: 'Melaleuca brevifolia',
+      imgSrc: require('./assets/melaleuca-b.png'),
+    },
+    {
+      name: 'Banksia ornata',
+      imgSrc: require('./assets/banksia.png'),
+    },
+    {
+      name: 'Melaleuca halmaturum',
+      imgSrc: require('./assets/melaleuca-h.png'),
+    },
+    {
+      name: 'Melaleuca brevifolia',
+      imgSrc: require('./assets/melaleuca-b.png'),
+    },
+    {
+      name: 'Tecticornia sp.',
+      imgSrc: require('./assets/tecticornia.png'),
+    },
+  ],
+  timeline: [
+    {
+      date: 'September 2, 2019',
+      title: 'Project starts',
+      description:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+    },
+    {
+      date: 'October 21, 2019',
+      title: 'Approval complete',
+      description:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+    },
+    {
+      date: 'February 20, 2020',
+      title: 'Credits issued',
+      description:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+    },
+    {
+      date: 'September 2022',
+      title: 'Site visit',
+      description:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+    },
+    {
+      date: 'February 2029',
+      title: 'Project completion',
+      description:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+    },
+  ],
 };

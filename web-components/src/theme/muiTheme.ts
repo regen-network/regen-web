@@ -50,7 +50,12 @@ const theme = createMuiTheme({
       },
     },
     h4: {
-      fontSize: '1.3125rem',
+      [defaultTheme.breakpoints.up('sm')]: {
+        fontSize: '1.3125rem',
+      },
+      [defaultTheme.breakpoints.down('xs')]: {
+        fontSize: '1.125rem',
+      },
     },
     h5: {
       fontSize: '1.125rem',

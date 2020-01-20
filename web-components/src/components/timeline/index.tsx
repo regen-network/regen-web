@@ -12,7 +12,7 @@ export interface Event {
 }
 
 interface TimelineProps {
-  events: [Event];
+  events: Event[];
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -21,21 +21,22 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexDirection: 'column',
   },
   item: {
-    alignSelf: 'flex-end',
-  },
-  greenBar: {
-    backgroundColor: theme.palette.secondary.main,
-    width: '0.375rem',
-    left: '55%',
-    height: '55%', // XXX placeholder for now
-    position: 'absolute',
-  },
-  greyBar: {
-    backgroundColor: '#8F8F8F', // TODO add to theme palette
-    width: '0.375rem',
-    left: '55%',
-    height: '100%',
-    position: 'absolute',
+    display: 'flex',
+    [theme.breakpoints.up('sm')]: {
+      width: '50%',
+      justifyContent: 'flex-start',
+      alignSelf: 'flex-end',
+    },
+    [theme.breakpoints.down('xs')]: {
+      justifyContent: 'flex-end',
+      alignSelf: 'flex-start',
+    },
+    '&:nth-child(odd)': {
+      [theme.breakpoints.up('sm')]: {
+        justifyContent: 'flex-end',
+        alignSelf: 'flex-start',
+      },
+    },
   },
 }));
 
@@ -45,18 +46,26 @@ export default function Timeline({ events }: TimelineProps): JSX.Element {
 
   return (
     <div className={classes.root}>
-      {events.map((event, index) => (
-        <div className={classes.item}>
-          <TimelineItem
-            date={event.date}
-            title={event.title}
-            description={event.description}
-            color={theme.palette.secondary.main}
-          />
-        </div>
-      ))}
-      <div className={classes.greyBar} />
-      <div className={classes.greenBar} />
+      {events.map((event, index) => {
+        const currentEventDate: Date = new Date(event.date);
+        let nextEventDate: Date = currentEventDate;
+        if (index + 1 < events.length) {
+          nextEventDate = new Date(events[index + 1].date);
+        }
+        return (
+          <div className={classes.item} key={`${index}-${event.title}`}>
+            <TimelineItem
+              date={event.date}
+              title={event.title}
+              description={event.description}
+              circleColor={currentEventDate <= new Date() ? theme.palette.secondary.main : '#8F8F8F'}
+              barColor={nextEventDate < new Date() ? theme.palette.secondary.main : '#8F8F8F'}
+              odd={index % 2 !== 0}
+              last={index === events.length - 1}
+            />
+          </div>
+        );
+      })}
     </div>
   );
 }

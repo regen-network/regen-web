@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
+import { useTheme } from '@material-ui/core/styles';
+import Fade from '@material-ui/core/Fade';
+
 import OutlinedButton from '../buttons/OutlinedButton';
 import Description from '../description';
-// TODO use svg icon from figma
-import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
-import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
-// import { truncate } from './truncate';
+import ArrowDownIcon from '../icons/ArrowDownIcon';
+import { truncate, Texts } from './truncate';
 import { FontSizes } from '../../theme/sizing';
 
 interface ReadMoreProps {
@@ -16,28 +17,42 @@ interface ReadMoreProps {
 const useStyles = makeStyles((theme: Theme) => ({
   textContainer: {
     marginBottom: theme.spacing(7),
+    '& div:first-child': {
+      marginBottom: '0px',
+    },
   },
 }));
 
 export default function ReadMore({ children, length = 757 }: ReadMoreProps): JSX.Element {
   const classes = useStyles({});
+  const theme = useTheme();
+
   const [expanded, setExpanded] = useState(false);
-  const trimText: string = children.substring(0, length);
   const fontSize: FontSizes = { xs: '1rem', sm: '1.375rem' };
-  // const trimText = truncate(children, length);
-  const expandedText = expanded ? (
-    <Description fontSize={fontSize}>{children}</Description>
-  ) : (
-    <Description fontSize={fontSize}>{trimText}</Description>
-  );
+  const texts: Texts = truncate(children, length);
+
+  const handleChange = (): void => {
+    setExpanded(prev => !prev);
+  };
 
   return (
     <div>
-      <div className={classes.textContainer}>{expandedText}</div>
+      <div className={classes.textContainer}>
+        <Description fontSize={fontSize}>{texts.truncated}</Description>
+        <Fade in={expanded} unmountOnExit>
+          <Description fontSize={fontSize}>{texts.rest}</Description>
+        </Fade>
+      </div>
       {children.length > length && (
         <OutlinedButton
-          onClick={() => setExpanded(!expanded)}
-          startIcon={expanded ? <ArrowUpwardIcon /> : <ArrowDownwardIcon />}
+          onClick={handleChange}
+          startIcon={
+            expanded ? (
+              <ArrowDownIcon direction="up" color={theme.palette.secondary.main} />
+            ) : (
+              <ArrowDownIcon direction="down" color={theme.palette.secondary.main} />
+            )
+          }
         >
           read {expanded ? 'less' : 'more'}
         </OutlinedButton>

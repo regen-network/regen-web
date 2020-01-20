@@ -60,9 +60,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       marginTop: theme.spacing(2.25),
     },
   },
-  projectStory: {
-    // backgroundColor: theme.palette.primary.main,
-  },
   projectStoryText: {
     '& h2': {
       [theme.breakpoints.up('sm')]: {
@@ -188,7 +185,7 @@ function ProjectDetails({ project }: ProjectProps): JSX.Element {
           </div>
         </Grid>
       </Grid>
-      <div className={classes.projectStory}>
+      <div>
         <div className={classes.projectStoryText}>
           <Title variant="h2">Story</Title>
           <ReadMore>{project.detailedDescription}</ReadMore>

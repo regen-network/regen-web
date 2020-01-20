@@ -8,6 +8,9 @@ export interface ItemProps {
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
+  root: {
+    paddingLeft: theme.spacing(5),
+  },
   name: {
     fontWeight: 'bold',
     fontSize: '0.875rem',
@@ -18,7 +21,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 export default function Item({ name, imgSrc }: ItemProps): JSX.Element {
   const classes = useStyles({});
   return (
-    <div>
+    <div className={classes.root}>
       <img src={imgSrc} alt={name} />
       <Typography className={classes.name}>{name}</Typography>
     </div>

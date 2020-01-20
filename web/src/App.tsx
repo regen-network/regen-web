@@ -5,7 +5,6 @@ import Grid from '@material-ui/core/Grid';
 import coorong from './assets/coorong.png';
 import map from './assets/map.png';
 import logo from './assets/logo.png';
-// import background3 from './assets/background3.jpg';
 import background from './assets/background.jpg';
 
 import './App.css';
@@ -21,20 +20,7 @@ import Description from 'web-components/lib/components/description';
 import Action from 'web-components/lib/components/action';
 import ReadMore from 'web-components/lib/components/read-more';
 import CreditDetails from 'web-components/lib/components/credits/CreditDetails';
-
-// import { ItemProps } from 'web-components/lib/components/protected-species/Item';
-// import ProtectedSpecies, { ProtectedSpeciesProps } from 'web-components/lib/components/protected-species';
-// import "slick-carousel/slick/slick.css";
-// import "slick-carousel/slick/slick-theme.css";
-
-// const protectedSpeciesItem: ItemProps = {
-//   name: 'Melaleuca halmaturum',
-//   imgSrc: require('./assets/melaleuca.png')
-// }
-//
-// const species = [
-//   protectedSpeciesItem, protectedSpeciesItem, protectedSpeciesItem, protectedSpeciesItem,
-// ]
+import ProtectedSpecies from 'web-components/lib/components/protected-species';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -48,7 +34,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       padding: `${theme.spacing(15.5)} ${theme.spacing(25)}`,
     },
-    backgroundSize: 'contain',
+    backgroundSize: 'cover',
     borderTop: '1px solid #D2D5D9',
     borderBottom: '1px solid #D2D5D9',
   },
@@ -104,7 +90,7 @@ const useStyles = makeStyles((theme: Theme) => ({
         marginBottom: theme.spacing(7),
       },
       [theme.breakpoints.down('xs')]: {
-        marginBottom: theme.spacing(1.75),
+        marginBottom: theme.spacing(3.25),
       },
     },
   },
@@ -135,7 +121,21 @@ const useStyles = makeStyles((theme: Theme) => ({
       width: '80%',
     },
   },
-  creditDetailsContainer: {},
+  protectedSpecies: {
+    [theme.breakpoints.up('sm')]: {
+      paddingLeft: theme.spacing(5),
+    },
+    '& h3': {
+      [theme.breakpoints.up('sm')]: {
+        marginBottom: theme.spacing(7),
+        marginTop: theme.spacing(2.5),
+      },
+      [theme.breakpoints.down('xs')]: {
+        marginBottom: theme.spacing(3.25),
+        marginTop: theme.spacing(8.5),
+      },
+    },
+  },
 }));
 
 interface ProjectProps {
@@ -188,9 +188,12 @@ function ProjectDetails({ project }: ProjectProps): JSX.Element {
             />
           </Grid>
         )}
-        <Grid item xs={12} sm={4}>
-          <Title variant="h3">Protected Species</Title>
-        </Grid>
+        {project.protectedSpecies && (
+          <Grid item xs={12} sm={4} className={classes.protectedSpecies}>
+            <Title variant="h3">Protected Species</Title>
+            <ProtectedSpecies species={project.protectedSpecies} />
+          </Grid>
+        )}
       </Grid>
       <div className={classes.projectDetails}>
         <Title variant="h2">Non-monitored Impact</Title>

@@ -1,4 +1,5 @@
 import { User } from 'web-components/lib/components/user/UserInfo';
+import { ItemProps as ProtectedSpeciesItem } from 'web-components/lib/components/protected-species/Item';
 import abu from './assets/abu.png';
 import pest from './assets/pest.png';
 import fox from './assets/fox.png';
@@ -52,6 +53,7 @@ export interface Project {
   summaryDescription: string;
   detailedDescription: string;
   creditClass: CreditClass;
+  protectedSpecies?: ProtectedSpeciesItem[];
 }
 
 export const project: Project = {
@@ -154,4 +156,38 @@ export const project: Project = {
       ],
     },
   },
+  protectedSpecies: [
+    {
+      name: 'Melaleuca halmaturum',
+      imgSrc: require('./assets/melaleuca-h.png'),
+    },
+    {
+      name: 'Banksia ornata',
+      imgSrc: require('./assets/banksia.png'),
+    },
+    {
+      name: 'Tecticornia sp.',
+      imgSrc: require('./assets/tecticornia.png'),
+    },
+    {
+      name: 'Melaleuca brevifolia',
+      imgSrc: require('./assets/melaleuca-b.png'),
+    },
+    {
+      name: 'Banksia ornata',
+      imgSrc: require('./assets/banksia.png'),
+    },
+    {
+      name: 'Melaleuca halmaturum',
+      imgSrc: require('./assets/melaleuca-h.png'),
+    },
+    {
+      name: 'Melaleuca brevifolia',
+      imgSrc: require('./assets/melaleuca-b.png'),
+    },
+    {
+      name: 'Tecticornia sp.',
+      imgSrc: require('./assets/tecticornia.png'),
+    },
+  ],
 };

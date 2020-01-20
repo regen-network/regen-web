@@ -51,6 +51,7 @@ export interface Project {
   area: number;
   developer: User;
   steward: User;
+  creditsIssuer: User;
   summaryDescription: string;
   detailedDescription: string;
   creditClass: CreditClass;
@@ -74,6 +75,11 @@ export const project: Project = {
     imgSrc:
       'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Ngarrindjeri_Nation_Flag.svg/250px-Ngarrindjeri_Nation_Flag.svg.png',
     description: 'The Ngarrindjeri culture is centered around the lower lakes of the Murray River.',
+  },
+  creditsIssuer: {
+    name: 'Regen Network',
+    place: 'Massachussets, United States',
+    imgSrc: require('./assets/regen.png'),
   },
   summaryDescription:
     'This project is restoring and conserving a large area of native grassland in Southern Australia.',

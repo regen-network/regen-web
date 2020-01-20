@@ -19,6 +19,7 @@ import Header from 'web-components/lib/components/header';
 import Description from 'web-components/lib/components/description';
 import Action from 'web-components/lib/components/action';
 import Timeline from 'web-components/lib/components/timeline';
+import BuyFooter from 'web-components/lib/components/buy-footer';
 import ReadMore from 'web-components/lib/components/read-more';
 import CreditDetails from 'web-components/lib/components/credits/CreditDetails';
 import ProtectedSpecies from 'web-components/lib/components/protected-species';
@@ -78,7 +79,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       padding: `${theme.spacing(11)} ${theme.spacing(3.75)}`,
     },
   },
-  projectTimeline: {},
   projectDetails: {
     [theme.breakpoints.up('sm')]: {
       padding: `${theme.spacing(17.25)} ${theme.spacing(32.25)} 0 ${theme.spacing(34.875)}`,
@@ -145,6 +145,16 @@ const useStyles = makeStyles((theme: Theme) => ({
       },
     },
   },
+  projectTimeline: {
+    paddingBottom: theme.spacing(30.5),
+  },
+  buyFooter: {
+    position: 'fixed',
+    bottom: '0px',
+    left: '0px',
+    width: '100%',
+    zIndex: 1000,
+  },
 }));
 
 interface ProjectProps {
@@ -204,6 +214,7 @@ function ProjectDetails({ project }: ProjectProps): JSX.Element {
           </Grid>
         )}
       </Grid>
+
       <div className={classes.projectDetails}>
         <Title variant="h2">Non-monitored Impact</Title>
         <Description>
@@ -247,14 +258,18 @@ function ProjectDetails({ project }: ProjectProps): JSX.Element {
           ))}
         </Grid>
       </div>
+
       <div className="project-bottom">
         {/*<div className={classes.projectDetails}>
           <Title variant="h2">Monitoring, Verification, and Reporting</Title>
         </div>*/}
-        <div className={classes.projectDetails}>
+        <div className={`${classes.projectDetails} ${classes.projectTimeline}`}>
           <Title variant="h2">Timeline</Title>
           <Timeline events={project.timeline} />
         </div>
+      </div>
+      <div className={classes.buyFooter}>
+        <BuyFooter onClick={() => {}} user={project.creditsIssuer} />
       </div>
     </div>
   );

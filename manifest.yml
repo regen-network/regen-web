@@ -5,16 +5,15 @@ applications:
   memory: 64M
   instances: 1
   routes:
-     - route: regen-storybook.cfapps.io
+     - route: storybook.registry.regen.network
 - name: registry
   path: web/build
   memory: 64M
   instances: 1
   routes:
-     - route: regen-registry.cfapps.io
+     - route: app.registry.regen.network
   buildpacks: 
      - staticfile_buildpack
-     
 
 
 

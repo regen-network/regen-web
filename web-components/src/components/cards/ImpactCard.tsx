@@ -43,7 +43,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     [theme.breakpoints.down('xs')]: {
       paddingLeft: props.monitored ? theme.spacing(5) : theme.spacing(3.75),
       paddingRight: props.monitored ? theme.spacing(5) : theme.spacing(3.75),
-      paddingBottom: props.monitored ? theme.spacing(8) : theme.spacing(6),
+      paddingBottom: props.monitored ? theme.spacing(8) : theme.spacing(1.5),
       paddingTop: props.monitored ? theme.spacing(33.75) : theme.spacing(28.5),
     },
     position: 'relative',
@@ -127,7 +127,7 @@ export default function ImpactCard({
               <span className={classes.monitoredIcon}>
                 <VerifiedIcon color={theme.palette.secondary.main} />
               </span>
-              verified and tracked on the regen blockchain
+              verified and tracked on the regen ledger
             </span>
           )}
         </div>

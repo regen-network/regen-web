@@ -19,7 +19,7 @@ import Header from 'web-components/lib/components/header';
 import Description from 'web-components/lib/components/description';
 import Action from 'web-components/lib/components/action';
 import Timeline from 'web-components/lib/components/timeline';
-import BuyFooter from 'web-components/lib/components/buy-footer';
+// import BuyFooter from 'web-components/lib/components/buy-footer';
 import ReadMore from 'web-components/lib/components/read-more';
 import CreditDetails from 'web-components/lib/components/credits/CreditDetails';
 import ProtectedSpecies from 'web-components/lib/components/protected-species';
@@ -28,7 +28,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   root: {
     backgroundColor: theme.palette.primary.main,
     '& img': {
-      borderRadius: '5px',
       width: '100%',
     },
   },
@@ -57,7 +56,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       marginTop: theme.spacing(6.5),
     },
     [theme.breakpoints.down('xs')]: {
-      marginTop: theme.spacing(2.25),
+      marginTop: theme.spacing(4),
     },
   },
   projectStoryText: {
@@ -108,6 +107,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   projectGridItem: {
     [theme.breakpoints.up('sm')]: {
       padding: `${theme.spacing(3.5)} ${theme.spacing(5.25)} ${theme.spacing(2.5)} 0`,
+      '&:nth-child(3n+3)': {
+        paddingRight: '0',
+      },
     },
     [theme.breakpoints.down('xs')]: {
       paddingBottom: theme.spacing(13),
@@ -152,6 +154,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: '100%',
     zIndex: 1000,
   },
+  map: {
+    maxHeight: '50rem',
+    borderRadius: 'none',
+  },
 }));
 
 interface ProjectProps {
@@ -191,7 +197,7 @@ function ProjectDetails({ project }: ProjectProps): JSX.Element {
           <ReadMore>{project.detailedDescription}</ReadMore>
         </div>
       </div>
-      <img alt={project.name} src={map} />
+      <img className={classes.map} alt={project.name} src={map} />
       <Grid container className={classes.projectDetails}>
         {monitoredImpact && (
           <Grid item xs={12} sm={8}>
@@ -265,9 +271,9 @@ function ProjectDetails({ project }: ProjectProps): JSX.Element {
           <Timeline events={project.timeline} />
         </div>
       </div>
-      <div className={classes.buyFooter}>
+      {/*<div className={classes.buyFooter}>
         <BuyFooter onClick={() => {}} user={project.creditsIssuer} />
-      </div>
+      </div>*/}
     </div>
   );
 }

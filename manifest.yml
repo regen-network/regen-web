@@ -14,6 +14,14 @@ applications:
      - route: app.registry.regen.network
   buildpacks: 
      - staticfile_buildpack
+- name: presale
+  path: web-presale
+  memory: 64M
+  instances: 1
+  routes:
+     - route: presale.registry.regen.network
+  buildpacks: 
+     - staticfile_buildpack
 
 
 

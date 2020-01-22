@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
+import RegenIcon from '../icons/RegenIcon';
 // import SearchIcon from '@material-ui/icons/Search';
 // import MenuIcon from '@material-ui/icons/Menu';
 
@@ -10,14 +11,24 @@ interface HeaderProps {
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    height: '3.75rem',
-    padding: `${theme.spacing(2.5)} ${theme.spacing(3.75)}`,
     backgroundColor: theme.palette.primary.main,
-  },
-  image: {
-    height: '2.5625rem',
-    // margin: `${theme.spacing(2.5)} ${theme.spacing(3.75)} ${theme.spacing(2.25)}`,
-    cursor: 'pointer',
+    [theme.breakpoints.up('sm')]: {
+      padding: `${theme.spacing(2.5)} ${theme.spacing(25)}`,
+      height: theme.spacing(27.5),
+      '& svg': {
+        fontSize: '12rem',
+        height: theme.spacing(20.75),
+      },
+    },
+    [theme.breakpoints.down('xs')]: {
+      padding: `${theme.spacing(2.5)} ${theme.spacing(3.75)}`,
+      height: theme.spacing(15),
+      '& svg': {
+        // fontSize: '5rem',
+        height: theme.spacing(10.25),
+        width: theme.spacing(23),
+      },
+    },
   },
   searchIcon: {
     color: '#D2D5D9', // TODO: change with color from theme.palette
@@ -36,7 +47,7 @@ export default function Header({ logo }: HeaderProps): JSX.Element {
     <Grid container direction="row" className={classes.root} alignItems="center" justify="space-between">
       <Grid item>
         <a href="https://www.regen.network/">
-          <img alt="Regen Network" src={logo} className={classes.image} />
+          <RegenIcon />
         </a>
       </Grid>
       {/*<Grid item alignItems="center">

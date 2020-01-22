@@ -16,12 +16,13 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   image: {
     width: '100%',
+    borderRadius: '5px',
   },
   name: {
     fontWeight: 'bold',
     [theme.breakpoints.up('sm')]: {
       fontSize: '1.125rem',
-      paddingTop: theme.spacing(3.5),
+      paddingTop: theme.spacing(2.5),
       paddingBottom: theme.spacing(2.25),
     },
     [theme.breakpoints.down('xs')]: {

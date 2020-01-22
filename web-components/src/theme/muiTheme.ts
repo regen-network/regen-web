@@ -23,7 +23,7 @@ const theme = createMuiTheme({
   },
   spacing: factor => `${0.25 * factor}rem`,
   typography: {
-    fontFamily: ['-apple-system', '"Lato"', 'sans-serif'].join(','),
+    fontFamily: ['"Lato"', '-apple-system', 'sans-serif'].join(','),
     h1: {
       [defaultTheme.breakpoints.up('sm')]: {
         fontSize: '3rem',
@@ -31,7 +31,7 @@ const theme = createMuiTheme({
       [defaultTheme.breakpoints.down('xs')]: {
         fontSize: '2rem',
       },
-      fontFamily: ['-apple-system', '"Muli"', 'sans-serif'].join(','),
+      fontFamily: ['"Muli"', '-apple-system', 'sans-serif'].join(','),
     },
     h2: {
       [defaultTheme.breakpoints.up('sm')]: {

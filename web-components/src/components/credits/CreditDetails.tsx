@@ -45,6 +45,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     color: theme.palette.info.main,
     [theme.breakpoints.up('sm')]: {
       marginRight: theme.spacing(11.75),
+      fontSize: '1.375rem',
     },
     marginTop: theme.spacing(3.75),
   },
@@ -52,14 +53,31 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     [theme.breakpoints.down('xs')]: {
       marginTop: theme.spacing(3.75),
     },
+    '& h3': {
+      [theme.breakpoints.up('sm')]: {
+        marginTop: theme.spacing(3.5),
+      },
+    },
   },
   activities: {
     fontSize: '0.875rem',
     color: theme.palette.info.main,
     marginTop: theme.spacing(4.5),
+    [theme.breakpoints.up('sm')]: {
+      marginTop: theme.spacing(9.5),
+    },
   },
   icon: {
     marginRight: theme.spacing(2.5),
+    [theme.breakpoints.down('xs')]: {
+      display: 'block',
+      marginBottom: theme.spacing(2),
+    },
+    '& svg': {
+      width: '3.125rem',
+      height: '2.875rem',
+      marginBottom: theme.spacing(-2),
+    },
   },
 }));
 

@@ -10,7 +10,7 @@ import CreditsIcon from '../icons/CreditsIcon';
 interface CreditInfoProps {
   name: string;
   description: string;
-  activities: string;
+  activities: string[];
   background: string;
 }
 
@@ -39,12 +39,16 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   descriptionContainer: {
     [theme.breakpoints.up('sm')]: {
       fontSize: '1.375rem',
+      paddingRight: theme.spacing(10),
+      '& h2': {
+        height: '5.25rem',
+      },
     },
   },
   description: {
     color: theme.palette.info.main,
     [theme.breakpoints.up('sm')]: {
-      marginRight: theme.spacing(11.75),
+      // marginRight: theme.spacing(11.75),
       fontSize: '1.375rem',
     },
     marginTop: theme.spacing(3.75),
@@ -56,15 +60,28 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     '& h3': {
       [theme.breakpoints.up('sm')]: {
         marginTop: theme.spacing(3.5),
+        height: '6.25rem',
       },
     },
   },
   activities: {
-    fontSize: '0.875rem',
     color: theme.palette.info.main,
-    marginTop: theme.spacing(4.5),
-    [theme.breakpoints.up('sm')]: {
-      marginTop: theme.spacing(9.5),
+    margin: 0,
+    paddingInlineStart: theme.spacing(2.5),
+    listStyle: 'none',
+    [theme.breakpoints.down('xs')]: {
+      marginTop: theme.spacing(4.5),
+    },
+  },
+  activity: {
+    fontSize: '0.875rem',
+    paddingBottom: theme.spacing(1.5),
+    '& li::before': {
+      content: "'\\2022'",
+      color: theme.palette.secondary.main,
+      display: 'inline-block',
+      width: '1em',
+      marginLeft: '-1em',
     },
   },
   icon: {
@@ -104,7 +121,13 @@ export default function CreditInfo({
       </Grid>
       <Grid item xs={12} sm={4} className={classes.activitiesContainer}>
         <Title variant="h3">Key activities and outcomes</Title>
-        <Typography className={classes.activities}>{activities}</Typography>
+        <ul className={classes.activities}>
+          {activities.map((activity, index) => (
+            <Typography key={index} className={classes.activity}>
+              <li>{activity}</li>
+            </Typography>
+          ))}
+        </ul>
       </Grid>
     </Grid>
   );

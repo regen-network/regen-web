@@ -65,7 +65,7 @@ export default function ProtectedSpecies({ species }: ProtectedSpeciesProps): JS
         className={classes.root}
       >
         {species.map((item, index) => (
-          <div className={classes.item}>
+          <div className={classes.item} key={index}>
             <ProtectedSpeciesItem name={item.name} imgSrc={item.imgSrc} />
           </div>
         ))}

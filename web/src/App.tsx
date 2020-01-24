@@ -162,11 +162,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       flex: '0 0 auto',
       marginRight: theme.spacing(4),
       width: '80%',
-      // paddingBottom: theme.spacing(13),
     },
-    // [theme.breakpoints.up('sm')]: {
-    //   padding: `${theme.spacing(3.5)} ${theme.spacing(5.25)} ${theme.spacing(2.5)} 0`,
-    // },
   },
   protectedSpecies: {
     [theme.breakpoints.up('sm')]: {
@@ -232,13 +228,16 @@ function ProjectDetails({ project }: ProjectProps): JSX.Element {
           </Grid>
         </Grid>
       </div>
+
       <div className={classes.projectContent}>
         <div className={classes.projectStoryText}>
           <Title variant="h2">Story</Title>
           <ReadMore>{project.detailedDescription}</ReadMore>
         </div>
       </div>
+
       <img className={classes.map} alt={project.name} src={map} />
+
       <Grid container className={`${classes.projectDetails} ${classes.projectContent}`}>
         {monitoredImpact && (
           <Grid item xs={12} sm={8}>
@@ -259,7 +258,9 @@ function ProjectDetails({ project }: ProjectProps): JSX.Element {
         )}
       </Grid>
 
-      <div className={`${classes.projectDetails} ${classes.projectContent} ${classes.projectImpactContainer}`}>
+      <div
+        className={`${classes.projectDetails} ${classes.projectContent} ${classes.projectImpactContainer}`}
+      >
         <Title variant="h2">Non-monitored Impact</Title>
         <Description>
           These outcomes are natural by-products of the primary impact above, but will not be measured or

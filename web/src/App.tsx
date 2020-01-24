@@ -32,12 +32,22 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   projectTop: {
-    [theme.breakpoints.up('sm')]: {
-      padding: `${theme.spacing(15.5)} ${theme.spacing(25)}`,
-    },
     backgroundSize: 'cover',
     borderTop: '1px solid #D2D5D9',
     borderBottom: '1px solid #D2D5D9',
+  },
+  projectContent: {
+    maxWidth: theme.breakpoints.values.lg,
+    margin: '0 auto',
+  },
+  projectTopContent: {
+    [theme.breakpoints.up('sm')]: {
+      padding: `${theme.spacing(15.5)} ${theme.spacing(25)}`,
+    },
+    [theme.breakpoints.up('xl')]: {
+      paddingRight: theme.spacing(5),
+      paddingLeft: theme.spacing(5),
+    },
   },
   projectTopText: {
     [theme.breakpoints.up('sm')]: {
@@ -69,15 +79,24 @@ const useStyles = makeStyles((theme: Theme) => ({
       },
     },
     [theme.breakpoints.up('sm')]: {
-      padding: `${theme.spacing(17.25)} ${theme.spacing(61.75)}`,
+      padding: `${theme.spacing(17.25)} ${theme.spacing(40)}`,
     },
     [theme.breakpoints.down('xs')]: {
       padding: `${theme.spacing(11)} ${theme.spacing(3.75)}`,
     },
   },
   projectDetails: {
+    [theme.breakpoints.up('xl')]: {
+      paddingRight: theme.spacing(5),
+      paddingLeft: theme.spacing(5),
+    },
+    [theme.breakpoints.between('sm', 'lg')]: {
+      paddingLeft: theme.spacing(34.875),
+      paddingRight: theme.spacing(32.25),
+    },
     [theme.breakpoints.up('sm')]: {
-      padding: `${theme.spacing(17.25)} ${theme.spacing(32.25)} 0 ${theme.spacing(34.875)}`,
+      paddingTop: theme.spacing(17.25),
+      // padding: `${theme.spacing(17.25)} ${theme.spacing(32.25)} 0 ${theme.spacing(34.875)}`,
     },
     [theme.breakpoints.down('xs')]: {
       padding: `${theme.spacing(13)} ${theme.spacing(3.75)} 0`,
@@ -95,8 +114,19 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingBottom: theme.spacing(27.5),
     },
+    [theme.breakpoints.between('sm', 'lg')]: {
+      paddingRight: theme.spacing(27.25),
+    },
     [theme.breakpoints.down('xs')]: {
       paddingBottom: theme.spacing(17.5),
+    },
+    [theme.breakpoints.up('xl')]: {
+      paddingRight: 0,
+    },
+  },
+  projectGrid: {
+    [theme.breakpoints.up('sm')]: {
+      marginLeft: theme.spacing(-2.5),
     },
   },
   projectActionsGrid: {
@@ -106,16 +136,21 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   projectGridItem: {
     [theme.breakpoints.up('sm')]: {
-      padding: `${theme.spacing(3.5)} ${theme.spacing(5.25)} ${theme.spacing(2.5)} 0`,
-      '&:nth-child(3n+3)': {
-        paddingRight: '0',
-      },
+      padding: `${theme.spacing(3.5)} ${theme.spacing(2.5)} ${theme.spacing(2.5)}`,
     },
     [theme.breakpoints.down('xs')]: {
       paddingBottom: theme.spacing(13),
     },
   },
   projectImpactContainer: {
+    [theme.breakpoints.between('sm', 'lg')]: {
+      paddingRight: theme.spacing(27.25),
+    },
+    [theme.breakpoints.up('xl')]: {
+      paddingRight: 0,
+    },
+  },
+  projectImpactGrid: {
     [theme.breakpoints.down('xs')]: {
       flexWrap: 'nowrap',
       overflowX: 'auto',
@@ -127,7 +162,11 @@ const useStyles = makeStyles((theme: Theme) => ({
       flex: '0 0 auto',
       marginRight: theme.spacing(4),
       width: '80%',
+      // paddingBottom: theme.spacing(13),
     },
+    // [theme.breakpoints.up('sm')]: {
+    //   padding: `${theme.spacing(3.5)} ${theme.spacing(5.25)} ${theme.spacing(2.5)} 0`,
+    // },
   },
   protectedSpecies: {
     [theme.breakpoints.up('sm')]: {
@@ -176,29 +215,31 @@ function ProjectDetails({ project }: ProjectProps): JSX.Element {
 
   return (
     <div className={classes.root}>
-      <Grid container className={`${classes.projectTop} project-top`}>
-        <Grid item xs={12} sm={6}>
-          <img alt={project.name} src={coorong} />
+      <div className={`${classes.projectTop} project-top`}>
+        <Grid container className={`${classes.projectContent} ${classes.projectTopContent}`}>
+          <Grid item xs={12} sm={6}>
+            <img alt={project.name} src={coorong} />
+          </Grid>
+          <Grid item xs={12} sm={6} className={classes.projectTopText}>
+            <Title variant="h1">{project.name}</Title>
+            <div className={classes.projectPlace}>
+              <ProjectPlaceInfo place={project.place} area={project.area} />
+            </div>
+            <Description fontSize={getFontSize('big')}>{project.summaryDescription}</Description>
+            <div className={classes.projectDeveloper}>
+              <ProjectDeveloperCard projectDeveloper={project.developer} landSteward={project.steward} />
+            </div>
+          </Grid>
         </Grid>
-        <Grid item xs={12} sm={6} className={classes.projectTopText}>
-          <Title variant="h1">{project.name}</Title>
-          <div className={classes.projectPlace}>
-            <ProjectPlaceInfo place={project.place} area={project.area} />
-          </div>
-          <Description fontSize={getFontSize('big')}>{project.summaryDescription}</Description>
-          <div className={classes.projectDeveloper}>
-            <ProjectDeveloperCard projectDeveloper={project.developer} landSteward={project.steward} />
-          </div>
-        </Grid>
-      </Grid>
-      <div>
+      </div>
+      <div className={classes.projectContent}>
         <div className={classes.projectStoryText}>
           <Title variant="h2">Story</Title>
           <ReadMore>{project.detailedDescription}</ReadMore>
         </div>
       </div>
       <img className={classes.map} alt={project.name} src={map} />
-      <Grid container className={classes.projectDetails}>
+      <Grid container className={`${classes.projectDetails} ${classes.projectContent}`}>
         {monitoredImpact && (
           <Grid item xs={12} sm={8}>
             <Title variant="h2">Monitored Impact</Title>
@@ -218,13 +259,13 @@ function ProjectDetails({ project }: ProjectProps): JSX.Element {
         )}
       </Grid>
 
-      <div className={classes.projectDetails}>
+      <div className={`${classes.projectDetails} ${classes.projectContent} ${classes.projectImpactContainer}`}>
         <Title variant="h2">Non-monitored Impact</Title>
         <Description>
           These outcomes are natural by-products of the primary impact above, but will not be measured or
           verified.
         </Description>
-        <Grid container className={classes.projectImpactContainer}>
+        <Grid container className={`${classes.projectGrid} ${classes.projectImpactGrid}`}>
           {impact.map((item, index) => (
             <Grid
               item
@@ -239,7 +280,7 @@ function ProjectDetails({ project }: ProjectProps): JSX.Element {
         </Grid>
       </div>
 
-      <div className={classes.projectDetails}>
+      <div className={`${classes.projectDetails} ${classes.projectContent}`}>
         <CreditDetails
           name={project.creditClass.name}
           description={project.creditClass.description}
@@ -248,12 +289,12 @@ function ProjectDetails({ project }: ProjectProps): JSX.Element {
         />
       </div>
 
-      <div className={`${classes.projectDetails} ${classes.projectActions}`}>
+      <div className={`${classes.projectDetails} ${classes.projectActions} ${classes.projectContent}`}>
         <Title variant="h2">Land Management Actions</Title>
         <Description>
           This is how the project developers are planning to achieve the primary impact.
         </Description>
-        <Grid container className={classes.projectActionsGrid}>
+        <Grid container className={`${classes.projectGrid} ${classes.projectActionsGrid}`}>
           {project.creditClass.methodology.actions.map((action, index) => (
             <Grid item xs={12} sm={4} className={classes.projectGridItem} key={`${index}-${action.name}`}>
               <Action name={action.name} description={action.description} imgSrc={action.imgSrc} />
@@ -266,7 +307,7 @@ function ProjectDetails({ project }: ProjectProps): JSX.Element {
         {/*<div className={classes.projectDetails}>
           <Title variant="h2">Monitoring, Verification, and Reporting</Title>
         </div>*/}
-        <div className={`${classes.projectDetails} ${classes.projectTimeline}`}>
+        <div className={`${classes.projectDetails} ${classes.projectTimeline} ${classes.projectContent}`}>
           <Title variant="h2">Timeline</Title>
           <Timeline events={project.timeline} />
         </div>

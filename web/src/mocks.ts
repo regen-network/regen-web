@@ -64,7 +64,7 @@ export const project: Project = {
   place: 'Meningie, South Australia, Australia',
   area: 200,
   developer: {
-    name: 'Odonota',
+    name: 'Odonata',
     place: 'South Melbourne, Victoria, Australia',
     imgSrc: 'http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png',
     description: 'Odonata is a not-for-profit entity supporting biodiversity impact solutions.',
@@ -171,11 +171,11 @@ export const project: Project = {
     },
     {
       name: 'Banksia ornata',
-      imgSrc: require('./assets/banksia.png'),
+      imgSrc: require('./assets/banksia.jpg'),
     },
     {
       name: 'Tecticornia sp.',
-      imgSrc: require('./assets/tecticornia.png'),
+      imgSrc: require('./assets/tecticornia.jpg'),
     },
     {
       name: 'Melaleuca brevifolia',
@@ -183,7 +183,7 @@ export const project: Project = {
     },
     {
       name: 'Banksia ornata',
-      imgSrc: require('./assets/banksia.png'),
+      imgSrc: require('./assets/banksia.jpg'),
     },
     {
       name: 'Melaleuca halmaturum',
@@ -195,7 +195,7 @@ export const project: Project = {
     },
     {
       name: 'Tecticornia sp.',
-      imgSrc: require('./assets/tecticornia.png'),
+      imgSrc: require('./assets/tecticornia.jpg'),
     },
   ],
   timeline: [

@@ -61,11 +61,44 @@ Launches the test runner in the interactive watch mode.
 
 ## Code style
 
-[Prettier](https://prettier.io/) and [ESLint](https://eslint.org/) are used as code formatter and linter respectively:
+[Prettier](https://prettier.io/) and [ESLint](https://eslint.org/) are used as 
+code formatter and linter respectively:
 ```sh
 yarn format
 ```
 
 ```sh
 yarn lint
+```
+
+## Git 
+### Branching Strategy
+tbd
+
+### Commit Template
+The following git commit template is recommended and includes the following 
+sections
+
+
+* One Line Summary: replace with short headline about this commit
+* Details: replace will bulleted list of notable changes
+* Story: use the product story id to link this commit to,  
+* Test: n | y | local | other notes to describe any testing completed
+* Review: include others who reviewed this work
+
+```One line summary
+
+* details
+*
+
+[Story] [#storyid]
+[Test] n
+[Review] na
+```
+
+After saving the template above run the following command to set you email and
+the commit template for this 
+
+```git config user.email username@regen.network 
+git config commit.template .gitcommit
 ```

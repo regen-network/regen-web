@@ -64,6 +64,15 @@ const theme = createMuiTheme({
       fontSize: '0.875rem',
     },
   },
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 960,
+      lg: 1280,
+      xl: 1400,
+    },
+  },
   props: {
     MuiTypography: {
       variantMapping: {

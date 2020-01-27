@@ -1,12 +1,14 @@
 import * as React from 'react';
 import ReadMore from 'web-components/lib/components/read-more';
+import { withKnobs, text } from '@storybook/addon-knobs';
 
 export default {
   title: 'Components|ReadMore',
   component: ReadMore,
+  decorators: [withKnobs],
 };
 
-const text: string =
+const readMoreText: string =
   'This property is a rare pocket of wetlands and woodlands located near ' +
   'the township of Menindee South Australia, nestled in between the Coorong ' +
   'national park and Lake Albert.\n\nAs one of the few remaining sections of ' +
@@ -25,4 +27,4 @@ const text: string =
   'cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat ' +
   'non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
 
-export const readMore = (): JSX.Element => <ReadMore>{text}</ReadMore>;
+export const readMore = (): JSX.Element => <ReadMore>{text('Text', readMoreText)}</ReadMore>;

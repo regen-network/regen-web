@@ -3,12 +3,15 @@ import Card from 'web-components/lib/components/cards/Card';
 import ProjectDeveloperCard from 'web-components/lib/components/cards/ProjectDeveloperCard';
 import ImpactCard from 'web-components/lib/components/cards/ImpactCard';
 import { User } from 'web-components/lib/components/user/UserInfo';
+import { withKnobs, text, object } from '@storybook/addon-knobs';
+
 // import CreditCard, { CreditInfo } from 'web-components/lib/components/cards/CreditCard';
 // import ProjectCard, { ProjectInfo } from 'web-components/lib/components/cards/ProjectCard';
 
 export default {
   title: 'Components|Cards',
   component: Card,
+  decorators: [withKnobs],
 };
 
 const projectDeveloper: User = {
@@ -26,21 +29,27 @@ const landSteward: User = {
 };
 
 export const projectDeveloperCard = (): JSX.Element => (
-  <ProjectDeveloperCard projectDeveloper={projectDeveloper} landSteward={landSteward} />
+  <ProjectDeveloperCard
+    projectDeveloper={object('project developer', projectDeveloper)}
+    landSteward={object('land steward', landSteward)}
+  />
 );
 
 export const impactCard = (): JSX.Element => (
   <ImpactCard
-    title="Above ground biomass"
-    description="Increasing all living biomass which is located above the ground."
+    title={text('title', 'Above ground biomass')}
+    description={text('description', 'Increasing all living biomass which is located above the ground.')}
     imgSrc="/biomass.png"
   />
 );
 
 export const monitoredImpactCard = (): JSX.Element => (
   <ImpactCard
-    title="Biodiversity"
-    description="Healthy ecosystems and rich biodiversity are fundamental to life on our planet."
+    title={text('title', 'Biodiversity')}
+    description={text(
+      'description',
+      'Healthy ecosystems and rich biodiversity are fundamental to life on our planet.',
+    )}
     imgSrc="/biodiversity.png"
     monitored
   />

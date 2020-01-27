@@ -6,7 +6,7 @@ import { useTheme } from '@material-ui/core/styles';
 import TimelineItem from './TimelineItem';
 
 export interface Event {
-  date: string;
+  date: Date | string;
   title: string;
   description?: string;
 }

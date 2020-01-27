@@ -1,9 +1,69 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Storyshots Components|Action Action 1`] = `
+<div>
+  <div
+    className="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-column"
+  >
+    <img
+      alt="Reduce pest populations"
+      className="makeStyles-image-138"
+      src="/pest.png"
+    />
+    <p
+      className="MuiTypography-root makeStyles-name-139 MuiTypography-body1"
+    >
+      Reduce pest populations
+    </p>
+    <p
+      className="MuiTypography-root makeStyles-description-140 MuiTypography-body1"
+    >
+      Monitor and reduce the population of foxes, cats, dingos/wild dogs.
+    </p>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components|Button Next Button 1`] = `
+<div>
+  <div
+    className="makeStyles-root-383"
+  >
+    <svg
+      aria-hidden="true"
+      className="MuiSvgIcon-root makeStyles-icon-384 makeStyles-icon-385"
+      focusable="false"
+      role="presentation"
+      viewBox="0 0 24 24"
+    >
+      <svg
+        fill="none"
+        height="24"
+        viewBox="0 0 24 24"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <g
+          id="Icon / Arrow / Large"
+        >
+          <path
+            clipRule="evenodd"
+            d="M11 4.25C11 4.11193 11.1119 4 11.25 4H12.75C12.8881 4 13 4.11193 13 4.25V16.4L18.2232 11.1768C18.3209 11.0791 18.4792 11.0791 18.5768 11.1768L19.6375 12.2374C19.7351 12.3351 19.7351 12.4934 19.6375 12.591L12.1721 20.0564C12.1219 20.1065 12.0557 20.1309 11.99 20.1295C11.9243 20.1309 11.8581 20.1065 11.8079 20.0564L4.34257 12.591C4.24494 12.4934 4.24494 12.3351 4.34257 12.2374L5.40323 11.1768C5.50086 11.0791 5.65915 11.0791 5.75678 11.1768L11 16.42V4.25Z"
+            fill="#4FB573"
+            fillRule="evenodd"
+            id="Union"
+          />
+        </g>
+      </svg>
+    </svg>
+  </div>
+</div>
+`;
+
 exports[`Storyshots Components|Button Outlined Button 1`] = `
 <div>
   <button
-    className="MuiButtonBase-root MuiButton-root WithStyles(ForwardRef(Button))-root-44 MuiButton-text MuiButton-textSecondary"
+    className="MuiButtonBase-root MuiButton-root WithStyles(ForwardRef(Button))-root-318 MuiButton-text MuiButton-textSecondary"
     disabled={false}
     onBlur={[Function]}
     onDragLeave={[Function]}
@@ -23,7 +83,7 @@ exports[`Storyshots Components|Button Outlined Button 1`] = `
       className="MuiButton-label"
     >
       <span
-        className="MuiButton-startIcon WithStyles(ForwardRef(Button))-startIcon-45 MuiButton-iconSizeMedium"
+        className="MuiButton-startIcon WithStyles(ForwardRef(Button))-startIcon-319 MuiButton-iconSizeMedium"
       >
         <svg
           aria-hidden="true"
@@ -46,126 +106,237 @@ exports[`Storyshots Components|Button Outlined Button 1`] = `
 </div>
 `;
 
-exports[`Storyshots Components|Card Credit Card 1`] = `
+exports[`Storyshots Components|Button Prev Button 1`] = `
 <div>
   <div
-    className="MuiPaper-root MuiCard-root makeStyles-root-1006 makeStyles-root-1007 MuiPaper-elevation0 MuiPaper-rounded"
-    onClick={[Function]}
+    className="makeStyles-root-407"
+  >
+    <svg
+      aria-hidden="true"
+      className="MuiSvgIcon-root makeStyles-icon-408 makeStyles-icon-409"
+      focusable="false"
+      role="presentation"
+      viewBox="0 0 24 24"
+    >
+      <svg
+        fill="none"
+        height="24"
+        viewBox="0 0 24 24"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <g
+          id="Icon / Arrow / Large"
+        >
+          <path
+            clipRule="evenodd"
+            d="M11 4.25C11 4.11193 11.1119 4 11.25 4H12.75C12.8881 4 13 4.11193 13 4.25V16.4L18.2232 11.1768C18.3209 11.0791 18.4792 11.0791 18.5768 11.1768L19.6375 12.2374C19.7351 12.3351 19.7351 12.4934 19.6375 12.591L12.1721 20.0564C12.1219 20.1065 12.0557 20.1309 11.99 20.1295C11.9243 20.1309 11.8581 20.1065 11.8079 20.0564L4.34257 12.591C4.24494 12.4934 4.24494 12.3351 4.34257 12.2374L5.40323 11.1768C5.50086 11.0791 5.65915 11.0791 5.75678 11.1768L11 16.42V4.25Z"
+            fill="#4FB573"
+            fillRule="evenodd"
+            id="Union"
+          />
+        </g>
+      </svg>
+    </svg>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components|Cards Impact Card 1`] = `
+<div>
+  <div
+    className="MuiPaper-root MuiCard-root makeStyles-root-880 makeStyles-root-881 MuiPaper-elevation0 MuiPaper-rounded"
   >
     <div
-      className="MuiCardMedia-root makeStyles-image-1005"
-      style={
-        Object {
-          "backgroundImage": "url(\\"/Polyculture.png\\")",
-        }
-      }
-    />
-    <div
-      className="makeStyles-container-1003"
+      className="makeStyles-background-868 makeStyles-background-875"
     >
-      <h3
-        className="MuiTypography-root makeStyles-root-1040 undefined MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
-      >
-        REDD+ in the Amazon
-      </h3>
       <div
-        className="makeStyles-content-1004"
+        className="makeStyles-backgroundGradient-873 makeStyles-backgroundGradient-879"
+      />
+      <div
+        className="makeStyles-text-869 makeStyles-text-876"
       >
         <p
-          className="MuiTypography-root makeStyles-description-1001 MuiTypography-body1"
+          className="MuiTypography-root makeStyles-name-870 makeStyles-name-877 MuiTypography-body1"
+        />
+        <p
+          className="MuiTypography-root makeStyles-description-871 makeStyles-description-878 MuiTypography-body1"
         >
-          Reduce the emissions from deforestation and     forest degradation in the Amazon
+          Increasing all living biomass which is located above the ground.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components|Cards Monitored Impact Card 1`] = `
+<div>
+  <div
+    className="MuiPaper-root MuiCard-root makeStyles-root-1035 makeStyles-root-1036 MuiPaper-elevation0 MuiPaper-rounded"
+  >
+    <div
+      className="makeStyles-background-1023 makeStyles-background-1030"
+    >
+      <div
+        className="makeStyles-backgroundGradient-1028 makeStyles-backgroundGradient-1034"
+      />
+      <div
+        className="makeStyles-text-1024 makeStyles-text-1031"
+      >
+        <p
+          className="MuiTypography-root makeStyles-name-1025 makeStyles-name-1032 MuiTypography-body1"
+        />
+        <p
+          className="MuiTypography-root makeStyles-description-1026 makeStyles-description-1033 MuiTypography-body1"
+        >
+          Healthy ecosystems and rich biodiversity are fundamental to life on our planet.
+        </p>
+        <span
+          className="makeStyles-monitored-1027"
+        >
+          <span
+            className="makeStyles-monitoredIcon-1029"
+          >
+            <svg
+              aria-hidden="true"
+              className="MuiSvgIcon-root"
+              focusable="false"
+              role="presentation"
+              viewBox="0 0 24 24"
+            >
+              <svg
+                fill="none"
+                height="25"
+                viewBox="0 0 25 25"
+                width="25"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12.3875 1.73937C12.4076 1.71659 12.4445 1.69499 12.5 1.69499C12.5555 1.69499 12.5924 1.71659 12.6125 1.73937C15.3639 4.85786 19.362 6.83299 23.8174 6.85551C22.4923 13.9684 18.2962 20.051 12.5 23.8168C6.70382 20.051 2.50766 13.9684 1.18257 6.85551C5.638 6.83299 9.63613 4.85786 12.3875 1.73937Z"
+                  stroke="#4FB573"
+                />
+                <rect
+                  fill="#4FB573"
+                  height="11.7178"
+                  rx="0.25"
+                  transform="rotate(45 18.1241 9)"
+                  width="2"
+                  x="18.1241"
+                  y="9"
+                />
+                <rect
+                  fill="#4FB573"
+                  height="5.99902"
+                  rx="0.25"
+                  transform="matrix(-0.707107 0.707107 0.707107 0.707107 8.41422 13.0438)"
+                  width="2"
+                />
+              </svg>
+            </svg>
+          </span>
+          verified and tracked on the regen ledger
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components|Cards Project Developer Card 1`] = `
+<div>
+  <div
+    className="MuiPaper-root MuiCard-root makeStyles-root-609 makeStyles-root-610 MuiPaper-elevation0 MuiPaper-rounded"
+  >
+    <div
+      className="makeStyles-container-607"
+    >
+      <div>
+        <p
+          className="MuiTypography-root makeStyles-title-640 MuiTypography-body1"
+        >
+          project developer
         </p>
         <div
-          className="makeStyles-root-1072"
-        >
-          <svg
-            aria-hidden="true"
-            className="MuiSvgIcon-root makeStyles-icon-1073"
-            focusable="false"
-            role="presentation"
-            viewBox="0 0 24 24"
-          >
-            <path
-              d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
-            />
-          </svg>
-          <p
-            className="MuiTypography-root makeStyles-content-1074 makeStyles-content-1075 MuiTypography-body1"
-          >
-            Brazil
-             in 
-            <span
-              className="makeStyles-outcome-1071"
-            >
-              carbon sequestration
-            </span>
-          </p>
-        </div>
-        <div
-          className="makeStyles-creditsContainer-1002"
+          className="MuiGrid-root MuiGrid-container MuiGrid-wrap-xs-nowrap"
         >
           <div
-            className="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-column"
+            className="MuiGrid-root MuiGrid-item"
+          >
+            <div
+              className="MuiAvatar-root MuiAvatar-circle makeStyles-root-782 makeStyles-root-783"
+            >
+              <img
+                alt="Odonata"
+                className="MuiAvatar-img"
+                src="http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png"
+              />
+            </div>
+          </div>
+          <div
+            className="MuiGrid-root makeStyles-text-671 makeStyles-text-675 MuiGrid-item"
           >
             <p
-              className="MuiTypography-root MuiTypography-body1"
+              className="MuiTypography-root makeStyles-name-672 makeStyles-name-676 MuiTypography-body1"
             >
-              <span
-                className="makeStyles-number-1190"
-              >
-                93,211
-                 
-              </span>
-              <span
-                className="makeStyles-text-1191"
-              >
-                credits issued
-              </span>
+              Odonata
             </p>
+            <p
+              className="MuiTypography-root makeStyles-place-674 makeStyles-place-677 MuiTypography-body1"
+            >
+              South Melbourne, Victoria, Australia
+            </p>
+            <p
+              className="MuiTypography-root makeStyles-description-673 MuiTypography-body1"
+            >
+              Odonata is a not-for-profit entity supporting biodiversity impact solutions.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <hr
+          className="makeStyles-separator-608"
+        />
+        <div>
+          <p
+            className="MuiTypography-root makeStyles-title-640 MuiTypography-body1"
+          >
+            land steward
+          </p>
+          <div
+            className="MuiGrid-root MuiGrid-container MuiGrid-wrap-xs-nowrap"
+          >
             <div
-              className="MuiGrid-root makeStyles-gauge-1085 MuiGrid-item"
+              className="MuiGrid-root MuiGrid-item"
             >
               <div
-                className="makeStyles-root-1192"
+                className="MuiAvatar-root MuiAvatar-circle makeStyles-root-782 makeStyles-root-794"
               >
-                <div
-                  className="makeStyles-gauge-1193 makeStyles-gauge-1194"
+                <img
+                  alt="Ngarrindjeri Tribe"
+                  className="MuiAvatar-img"
+                  src="/tribe.png"
                 />
               </div>
             </div>
             <div
-              className="MuiGrid-root MuiGrid-container MuiGrid-item"
+              className="MuiGrid-root makeStyles-text-671 makeStyles-text-791 MuiGrid-item"
             >
               <p
-                className="MuiTypography-root MuiTypography-body2"
+                className="MuiTypography-root makeStyles-name-672 makeStyles-name-792 MuiTypography-body1"
               >
-                <span
-                  className="makeStyles-number-1190"
-                >
-                  1021
-                   
-                </span>
-                <span
-                  className="makeStyles-text-1191"
-                >
-                  credit holders
-                </span>
+                Ngarrindjeri Tribe
               </p>
               <p
-                className="MuiTypography-root MuiTypography-body2"
+                className="MuiTypography-root makeStyles-place-674 makeStyles-place-793 MuiTypography-body1"
               >
-                <span
-                  className="makeStyles-number-1190"
-                >
-                  25
-                   
-                </span>
-                <span
-                  className="makeStyles-text-1191"
-                >
-                  projects
-                </span>
+                Southern Australia
+              </p>
+              <p
+                className="MuiTypography-root makeStyles-description-673 MuiTypography-body1"
+              >
+                The Ngarrindjeri culture is centered around the lower lakes of the Murray River.
               </p>
             </div>
           </div>
@@ -176,291 +347,172 @@ exports[`Storyshots Components|Card Credit Card 1`] = `
 </div>
 `;
 
-exports[`Storyshots Components|Card Eco Practice Card 1`] = `
+exports[`Storyshots Components|Credits Credit Details 1`] = `
 <div>
   <div
-    className="MuiPaper-root MuiCard-root makeStyles-root-639 makeStyles-root-640 MuiPaper-elevation0 MuiPaper-rounded"
+    className="MuiGrid-root makeStyles-root-1258 makeStyles-root-1266 MuiGrid-container"
   >
     <div
-      className="MuiGrid-root makeStyles-container-635 MuiGrid-container MuiGrid-direction-xs-column MuiGrid-align-items-xs-center"
-    >
-      <div
-        className="MuiCardMedia-root makeStyles-image-636"
-        style={
-          Object {
-            "backgroundImage": "url(\\"/no-till-ag.png\\")",
-          }
-        }
-      />
-      <p
-        className="MuiTypography-root makeStyles-name-637 MuiTypography-body1"
-      >
-        Odonata
-      </p>
-      <p
-        className="MuiTypography-root makeStyles-description-638 MuiTypography-body1"
-      >
-        South Melbourne, Victoria, Australia
-      </p>
-    </div>
-  </div>
-</div>
-`;
-
-exports[`Storyshots Components|Card Project Card 1`] = `
-<div>
-  <div
-    className="MuiPaper-root MuiCard-root makeStyles-root-1279 makeStyles-root-1280 MuiPaper-elevation0 MuiPaper-rounded"
-    onClick={[Function]}
-  >
-    <div
-      className="MuiCardMedia-root makeStyles-image-1278"
-      style={
-        Object {
-          "backgroundImage": "url(\\"/orana.png\\")",
-        }
-      }
+      className="makeStyles-topBar-1259"
     />
     <div
-      className="makeStyles-container-1276"
+      className="MuiGrid-root makeStyles-descriptionContainer-1260 MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
     >
-      <h3
-        className="MuiTypography-root makeStyles-root-1313 undefined MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+      <h2
+        className="MuiTypography-root makeStyles-root-1371 undefined MuiTypography-h2 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
       >
-        Orana Park
-      </h3>
-      <div
-        className="makeStyles-content-1277"
-      >
-        <div
-          className="makeStyles-root-1344"
+        <span
+          className="makeStyles-icon-1265"
         >
           <svg
             aria-hidden="true"
-            className="MuiSvgIcon-root makeStyles-icon-1345"
+            className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
             focusable="false"
             role="presentation"
-            viewBox="0 0 24 24"
+            viewBox="0 0 25 23"
           >
-            <path
-              d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
-            />
+            <svg
+              fill="none"
+              height="23"
+              viewBox="0 0 25 23"
+              width="25"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M1 5V17C1 19.2091 4.13401 21 8 21C9.4225 21 10.7459 20.7575 11.8505 20.341"
+                stroke="#4FB573"
+                strokeWidth="2"
+              />
+              <path
+                d="M1 14C1 16.2091 4.13401 18 8 18C8.4894 18 8.96708 17.9713 9.42815 17.9167"
+                stroke="#4FB573"
+              />
+              <path
+                d="M1 11C1 13.2091 4.13401 15 8 15C8.33952 15 8.6734 14.9862 9 14.9595"
+                stroke="#4FB573"
+              />
+              <path
+                d="M1 8C1 10.2091 4.13401 12 8 12C8.33952 12 8.6734 11.9862 9 11.9595"
+                stroke="#4FB573"
+              />
+              <ellipse
+                cx="8"
+                cy="5"
+                rx="7"
+                ry="4"
+                stroke="#4FB573"
+                strokeWidth="2"
+              />
+              <circle
+                cx="16.5"
+                cy="14.5"
+                r="7.5"
+                stroke="#4FB573"
+                strokeWidth="2"
+              />
+            </svg>
           </svg>
-          <p
-            className="MuiTypography-root makeStyles-content-1346 makeStyles-content-1347 MuiTypography-body1"
-          >
-            Bendigo, Victoria, Australia
-             | 
-            4500
-             hectares
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-`;
-
-exports[`Storyshots Components|Card Project Developer Card 1`] = `
-<div>
-  <div
-    className="MuiPaper-root MuiCard-root makeStyles-root-282 makeStyles-root-283 MuiPaper-elevation0 MuiPaper-rounded"
-  >
-    <div
-      className="makeStyles-container-280"
-    >
+        </span>
+        Australian Biodiversity Units (ABU’s)
+      </h2>
       <p
-        className="MuiTypography-root makeStyles-title-281 MuiTypography-body1"
+        className="MuiTypography-root makeStyles-description-1261 MuiTypography-body1"
       >
-        this project is developed by
-      </p>
-      <div
-        className="MuiGrid-root MuiGrid-container MuiGrid-align-items-xs-center"
-      >
-        <div
-          className="MuiGrid-root MuiGrid-item"
-        >
-          <div
-            className="MuiAvatar-root MuiAvatar-circle makeStyles-root-454 makeStyles-root-455"
-          >
-            <img
-              alt="Odonata"
-              className="MuiAvatar-img"
-              src="http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png"
-            />
-          </div>
-        </div>
-        <div
-          className="MuiGrid-root makeStyles-text-343 makeStyles-text-347 MuiGrid-item"
-        >
-          <p
-            className="MuiTypography-root makeStyles-name-344 makeStyles-name-348 MuiTypography-body1"
-          >
-            Odonata
-          </p>
-          <p
-            className="MuiTypography-root makeStyles-place-346 makeStyles-place-349 MuiTypography-body1"
-          >
-            South Melbourne, Victoria, Australia
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-`;
-
-exports[`Storyshots Components|Credits Credits With Gauge 1`] = `
-<div>
-  <div
-    className="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-column"
-  >
-    <p
-      className="MuiTypography-root MuiTypography-body1"
-    >
-      <span
-        className="makeStyles-number-1602"
-      >
-        93,211
-         
-      </span>
-      <span
-        className="makeStyles-text-1603"
-      >
-        credits issued
-      </span>
-    </p>
-    <div
-      className="MuiGrid-root makeStyles-gauge-1497 MuiGrid-item"
-    >
-      <div
-        className="makeStyles-root-1634"
-      >
-        <div
-          className="makeStyles-gauge-1635 makeStyles-gauge-1636"
-        />
-      </div>
-    </div>
-    <div
-      className="MuiGrid-root MuiGrid-container MuiGrid-item"
-    >
-      <p
-        className="MuiTypography-root MuiTypography-body2"
-      >
-        <span
-          className="makeStyles-number-1602"
-        >
-          1021
-           
-        </span>
-        <span
-          className="makeStyles-text-1603"
-        >
-          credit holders
-        </span>
-      </p>
-      <p
-        className="MuiTypography-root MuiTypography-body2"
-      >
-        <span
-          className="makeStyles-number-1602"
-        >
-          25
-           
-        </span>
-        <span
-          className="makeStyles-text-1603"
-        >
-          projects
-        </span>
+        ABU’s are an Australian Government endorsed biodiversity credit. An individual ABU represents a 1.5m square area of land of significant environmental value that has been placed under a conservation covenant and agreed management plan. The covenant and management plan secure the long term preservation of the site and ensure the biodiversity value is protected in perpetuity. Vegetation types may include forests, grasslands, mallees, saltmarshes, scrubs, shrublands, wetlands, and woodlands. ABU’s are an innovative and unique way for organisations to preserve a tangible section of Australia’s unique natural habitat.
       </p>
     </div>
-  </div>
-</div>
-`;
-
-exports[`Storyshots Components|Credits Formatted Text 1`] = `
-<div>
-  <p
-    className="MuiTypography-root MuiTypography-body1"
-  >
-    <span
-      className="makeStyles-number-1675"
-    >
-      93,211
-       
-    </span>
-    <span
-      className="makeStyles-text-1676"
-    >
-      credits issued
-    </span>
-  </p>
-</div>
-`;
-
-exports[`Storyshots Components|Credits Gauge 1`] = `
-<div>
-  <div
-    className="makeStyles-root-1640"
-  >
     <div
-      className="makeStyles-gauge-1641 makeStyles-gauge-1642"
-    />
+      className="MuiGrid-root makeStyles-activitiesContainer-1262 MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+    >
+      <h3
+        className="MuiTypography-root makeStyles-root-1371 undefined MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+      >
+        Key activities and outcomes
+      </h3>
+      <ul
+        className="makeStyles-activities-1263"
+      >
+        <p
+          className="MuiTypography-root makeStyles-activity-1264 MuiTypography-body1"
+        >
+          <li>
+            Site accredited as a Specific Environmental Benefit (SEB) site and credits created by the South Australian Department of Environment and Water.
+          </li>
+        </p>
+        <p
+          className="MuiTypography-root makeStyles-activity-1264 MuiTypography-body1"
+        >
+          <li>
+            A land management services agreement will be established with a local indigenous group, employing people from the local community.
+          </li>
+        </p>
+        <p
+          className="MuiTypography-root makeStyles-activity-1264 MuiTypography-body1"
+        >
+          <li>
+            The site will be managed in accordance with an agreed management plan to reduce weed pressure, improve the biodiversity value of the location and preserve the value of the land in perpetuity.
+          </li>
+        </p>
+        <p
+          className="MuiTypography-root makeStyles-activity-1264 MuiTypography-body1"
+        >
+          <li>
+            After 10 years the land will be vetted to Rigney Namawi Pty Ltd (local indigenous traditional owners). Six monthly project updates in the form of videos, blog posts and photographs will be produced for the first 5 years of the project.
+          </li>
+        </p>
+      </ul>
+    </div>
   </div>
-</div>
-`;
-
-exports[`Storyshots Components|Credits Small Text 1`] = `
-<div>
-  <p
-    className="MuiTypography-root MuiTypography-body2"
-  >
-    <span
-      className="makeStyles-number-1739"
-    >
-      25
-       
-    </span>
-    <span
-      className="makeStyles-text-1740"
-    >
-      projects
-    </span>
-  </p>
 </div>
 `;
 
 exports[`Storyshots Components|Description Description 1`] = `
 <div>
-  <p
-    className="MuiTypography-root makeStyles-root-1802 MuiTypography-body1"
+  <div
+    className="MuiTypography-root makeStyles-root-1443 makeStyles-root-1444 MuiTypography-body1"
   >
     Sheoak Hill, 60km west of Melbourne, has the potential to revolutionise how our natural areas are funded to be restored and maintained in perpetuity. The concept is underpinned by the power of values-aligned landholders working collaboratively to purchase and lovingly maintain manageable areas (40ha) of covented bushland and work toward a common goal.
-  </p>
+  </div>
 </div>
 `;
 
 exports[`Storyshots Components|Place Basic Place Info 1`] = `
 <div>
   <div
-    className="makeStyles-root-1876"
+    className="makeStyles-root-1517"
   >
     <svg
       aria-hidden="true"
-      className="MuiSvgIcon-root makeStyles-icon-1877"
+      className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
       focusable="false"
       role="presentation"
-      viewBox="0 0 24 24"
+      viewBox="0 0 13 16"
     >
       <path
-        d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
+        d="M13 6.375C13 11.2343 7.97202 14.9913 6.76036 15.8261C6.60169 15.9354 6.39831 15.9354 6.23964 15.8261C5.02798 14.9913 0 11.2343 0 6.375C0 2.85418 2.91015 0 6.5 0C10.0899 0 13 2.85418 13 6.375Z"
+        fill="#D2D5D9"
+      />
+      <circle
+        cx="6.5"
+        cy="6.5"
+        fill="white"
+        r="3.5"
+      />
+      <path
+        d="M13 6.375C13 11.2343 7.97202 14.9913 6.76036 15.8261C6.60169 15.9354 6.39831 15.9354 6.23964 15.8261C5.02798 14.9913 0 11.2343 0 6.375C0 2.85418 2.91015 0 6.5 0C10.0899 0 13 2.85418 13 6.375Z"
+        fill="#4FB573"
+      />
+      <circle
+        cx="6.5"
+        cy="6.5"
+        fill="white"
+        r="3.5"
       />
     </svg>
     <p
-      className="MuiTypography-root makeStyles-content-1878 makeStyles-content-1879 MuiTypography-body1"
+      className="MuiTypography-root makeStyles-content-1518 makeStyles-content-1519 MuiTypography-body1"
     >
-      Victoria, Australia
+      Melbourne, Victoria, Australia
     </p>
   </div>
 </div>
@@ -469,26 +521,43 @@ exports[`Storyshots Components|Place Basic Place Info 1`] = `
 exports[`Storyshots Components|Place Credit Place Info 1`] = `
 <div>
   <div
-    className="makeStyles-root-2050"
+    className="makeStyles-root-1689"
   >
     <svg
       aria-hidden="true"
-      className="MuiSvgIcon-root makeStyles-icon-2051"
+      className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
       focusable="false"
       role="presentation"
-      viewBox="0 0 24 24"
+      viewBox="0 0 13 16"
     >
       <path
-        d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
+        d="M13 6.375C13 11.2343 7.97202 14.9913 6.76036 15.8261C6.60169 15.9354 6.39831 15.9354 6.23964 15.8261C5.02798 14.9913 0 11.2343 0 6.375C0 2.85418 2.91015 0 6.5 0C10.0899 0 13 2.85418 13 6.375Z"
+        fill="#D2D5D9"
+      />
+      <circle
+        cx="6.5"
+        cy="6.5"
+        fill="white"
+        r="3.5"
+      />
+      <path
+        d="M13 6.375C13 11.2343 7.97202 14.9913 6.76036 15.8261C6.60169 15.9354 6.39831 15.9354 6.23964 15.8261C5.02798 14.9913 0 11.2343 0 6.375C0 2.85418 2.91015 0 6.5 0C10.0899 0 13 2.85418 13 6.375Z"
+        fill="#4FB573"
+      />
+      <circle
+        cx="6.5"
+        cy="6.5"
+        fill="white"
+        r="3.5"
       />
     </svg>
     <p
-      className="MuiTypography-root makeStyles-content-2052 makeStyles-content-2053 MuiTypography-body1"
+      className="MuiTypography-root makeStyles-content-1690 makeStyles-content-1691 MuiTypography-body1"
     >
       Brazil
        in 
       <span
-        className="makeStyles-outcome-2049"
+        className="makeStyles-outcome-1688"
       >
         carbon
       </span>
@@ -500,24 +569,45 @@ exports[`Storyshots Components|Place Credit Place Info 1`] = `
 exports[`Storyshots Components|Place Project Place Info 1`] = `
 <div>
   <div
-    className="makeStyles-root-1962"
+    className="makeStyles-root-1603"
   >
     <svg
       aria-hidden="true"
-      className="MuiSvgIcon-root makeStyles-icon-1963"
+      className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
       focusable="false"
       role="presentation"
-      viewBox="0 0 24 24"
+      viewBox="0 0 13 16"
     >
       <path
-        d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
+        d="M13 6.375C13 11.2343 7.97202 14.9913 6.76036 15.8261C6.60169 15.9354 6.39831 15.9354 6.23964 15.8261C5.02798 14.9913 0 11.2343 0 6.375C0 2.85418 2.91015 0 6.5 0C10.0899 0 13 2.85418 13 6.375Z"
+        fill="#D2D5D9"
+      />
+      <circle
+        cx="6.5"
+        cy="6.5"
+        fill="white"
+        r="3.5"
+      />
+      <path
+        d="M13 6.375C13 11.2343 7.97202 14.9913 6.76036 15.8261C6.60169 15.9354 6.39831 15.9354 6.23964 15.8261C5.02798 14.9913 0 11.2343 0 6.375C0 2.85418 2.91015 0 6.5 0C10.0899 0 13 2.85418 13 6.375Z"
+        fill="#4FB573"
+      />
+      <circle
+        cx="6.5"
+        cy="6.5"
+        fill="white"
+        r="3.5"
       />
     </svg>
     <p
-      className="MuiTypography-root makeStyles-content-1964 makeStyles-content-1965 MuiTypography-body1"
+      className="MuiTypography-root makeStyles-content-1604 makeStyles-content-1605 MuiTypography-body1"
     >
       Melbourne, Victoria, Australia
-       | 
+      <span
+        className="makeStyles-separator-1602"
+      >
+          |  
+      </span>
       440
        hectares
     </p>
@@ -525,10 +615,1081 @@ exports[`Storyshots Components|Place Project Place Info 1`] = `
 </div>
 `;
 
+exports[`Storyshots Components|Protected Species Item 1`] = `
+<div>
+  <div
+    className="makeStyles-root-1764"
+  >
+    <img
+      alt="Melaleuca brevifolia"
+      className="makeStyles-img-1765"
+      src="./melaleuca-b.png"
+    />
+    <p
+      className="MuiTypography-root makeStyles-name-1766 MuiTypography-body1"
+    >
+      Melaleuca brevifolia
+    </p>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components|Protected Species Protected Species 1`] = `
+<div>
+  <div
+    className="MuiGrid-root MuiGrid-container"
+  >
+    <div
+      className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+    >
+      <div>
+        <div
+          className="slick-slider makeStyles-root-2054 slick-initialized"
+          dir="ltr"
+        >
+          <div
+            className="slick-list"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            onMouseDown={[Function]}
+            onMouseLeave={null}
+            onMouseMove={null}
+            onMouseUp={[Function]}
+            onTouchCancel={null}
+            onTouchEnd={[Function]}
+            onTouchMove={null}
+            onTouchStart={[Function]}
+            style={Object {}}
+          >
+            <div
+              className="slick-track"
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
+              onMouseOver={[Function]}
+              style={
+                Object {
+                  "WebkitTransform": "translate3d(0px, 0px, 0px)",
+                  "WebkitTransition": "",
+                  "msTransform": "translateX(0px)",
+                  "opacity": 1,
+                  "transform": "translate3d(0px, 0px, 0px)",
+                  "transition": "",
+                }
+              }
+            >
+              <div
+                aria-hidden={true}
+                className="slick-slide slick-cloned"
+                data-index={-1}
+                onClick={[Function]}
+                style={
+                  Object {
+                    "width": 0,
+                  }
+                }
+                tabIndex="-1"
+              >
+                <div>
+                  <div
+                    className="makeStyles-item-2055"
+                    style={
+                      Object {
+                        "display": "inline-block",
+                        "width": "50%",
+                      }
+                    }
+                    tabIndex={-1}
+                  >
+                    <div
+                      className="makeStyles-root-2057"
+                    >
+                      <img
+                        alt="Melaleuca brevifolia"
+                        className="makeStyles-img-2058"
+                        src="./melaleuca-b.png"
+                      />
+                      <p
+                        className="MuiTypography-root makeStyles-name-2059 MuiTypography-body1"
+                      >
+                        Melaleuca brevifolia
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    className="makeStyles-item-2055"
+                    style={
+                      Object {
+                        "display": "inline-block",
+                        "width": "50%",
+                      }
+                    }
+                    tabIndex={-1}
+                  >
+                    <div
+                      className="makeStyles-root-2057"
+                    >
+                      <img
+                        alt="Melaleuca brevifolia"
+                        className="makeStyles-img-2058"
+                        src="./melaleuca-b.png"
+                      />
+                      <p
+                        className="MuiTypography-root makeStyles-name-2059 MuiTypography-body1"
+                      >
+                        Melaleuca brevifolia
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div />
+              </div>
+              <div
+                aria-hidden={false}
+                className="slick-slide slick-active slick-current"
+                data-index={0}
+                onClick={[Function]}
+                style={
+                  Object {
+                    "outline": "none",
+                    "width": 0,
+                  }
+                }
+                tabIndex="-1"
+              >
+                <div>
+                  <div
+                    className="makeStyles-item-2055"
+                    style={
+                      Object {
+                        "display": "inline-block",
+                        "width": "50%",
+                      }
+                    }
+                    tabIndex={-1}
+                  >
+                    <div
+                      className="makeStyles-root-2057"
+                    >
+                      <img
+                        alt="Melaleuca brevifolia"
+                        className="makeStyles-img-2058"
+                        src="./melaleuca-b.png"
+                      />
+                      <p
+                        className="MuiTypography-root makeStyles-name-2059 MuiTypography-body1"
+                      >
+                        Melaleuca brevifolia
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    className="makeStyles-item-2055"
+                    style={
+                      Object {
+                        "display": "inline-block",
+                        "width": "50%",
+                      }
+                    }
+                    tabIndex={-1}
+                  >
+                    <div
+                      className="makeStyles-root-2057"
+                    >
+                      <img
+                        alt="Melaleuca brevifolia"
+                        className="makeStyles-img-2058"
+                        src="./melaleuca-b.png"
+                      />
+                      <p
+                        className="MuiTypography-root makeStyles-name-2059 MuiTypography-body1"
+                      >
+                        Melaleuca brevifolia
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <div
+                    className="makeStyles-item-2055"
+                    style={
+                      Object {
+                        "display": "inline-block",
+                        "width": "50%",
+                      }
+                    }
+                    tabIndex={-1}
+                  >
+                    <div
+                      className="makeStyles-root-2057"
+                    >
+                      <img
+                        alt="Melaleuca brevifolia"
+                        className="makeStyles-img-2058"
+                        src="./melaleuca-b.png"
+                      />
+                      <p
+                        className="MuiTypography-root makeStyles-name-2059 MuiTypography-body1"
+                      >
+                        Melaleuca brevifolia
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    className="makeStyles-item-2055"
+                    style={
+                      Object {
+                        "display": "inline-block",
+                        "width": "50%",
+                      }
+                    }
+                    tabIndex={-1}
+                  >
+                    <div
+                      className="makeStyles-root-2057"
+                    >
+                      <img
+                        alt="Melaleuca brevifolia"
+                        className="makeStyles-img-2058"
+                        src="./melaleuca-b.png"
+                      />
+                      <p
+                        className="MuiTypography-root makeStyles-name-2059 MuiTypography-body1"
+                      >
+                        Melaleuca brevifolia
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                aria-hidden={true}
+                className="slick-slide"
+                data-index={1}
+                onClick={[Function]}
+                style={
+                  Object {
+                    "outline": "none",
+                    "width": 0,
+                  }
+                }
+                tabIndex="-1"
+              >
+                <div>
+                  <div
+                    className="makeStyles-item-2055"
+                    style={
+                      Object {
+                        "display": "inline-block",
+                        "width": "50%",
+                      }
+                    }
+                    tabIndex={-1}
+                  >
+                    <div
+                      className="makeStyles-root-2057"
+                    >
+                      <img
+                        alt="Melaleuca brevifolia"
+                        className="makeStyles-img-2058"
+                        src="./melaleuca-b.png"
+                      />
+                      <p
+                        className="MuiTypography-root makeStyles-name-2059 MuiTypography-body1"
+                      >
+                        Melaleuca brevifolia
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    className="makeStyles-item-2055"
+                    style={
+                      Object {
+                        "display": "inline-block",
+                        "width": "50%",
+                      }
+                    }
+                    tabIndex={-1}
+                  >
+                    <div
+                      className="makeStyles-root-2057"
+                    >
+                      <img
+                        alt="Melaleuca brevifolia"
+                        className="makeStyles-img-2058"
+                        src="./melaleuca-b.png"
+                      />
+                      <p
+                        className="MuiTypography-root makeStyles-name-2059 MuiTypography-body1"
+                      >
+                        Melaleuca brevifolia
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <div
+                    className="makeStyles-item-2055"
+                    style={
+                      Object {
+                        "display": "inline-block",
+                        "width": "50%",
+                      }
+                    }
+                    tabIndex={-1}
+                  >
+                    <div
+                      className="makeStyles-root-2057"
+                    >
+                      <img
+                        alt="Melaleuca brevifolia"
+                        className="makeStyles-img-2058"
+                        src="./melaleuca-b.png"
+                      />
+                      <p
+                        className="MuiTypography-root makeStyles-name-2059 MuiTypography-body1"
+                      >
+                        Melaleuca brevifolia
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    className="makeStyles-item-2055"
+                    style={
+                      Object {
+                        "display": "inline-block",
+                        "width": "50%",
+                      }
+                    }
+                    tabIndex={-1}
+                  >
+                    <div
+                      className="makeStyles-root-2057"
+                    >
+                      <img
+                        alt="Melaleuca brevifolia"
+                        className="makeStyles-img-2058"
+                        src="./melaleuca-b.png"
+                      />
+                      <p
+                        className="MuiTypography-root makeStyles-name-2059 MuiTypography-body1"
+                      >
+                        Melaleuca brevifolia
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                aria-hidden={true}
+                className="slick-slide"
+                data-index={2}
+                onClick={[Function]}
+                style={
+                  Object {
+                    "outline": "none",
+                    "width": 0,
+                  }
+                }
+                tabIndex="-1"
+              >
+                <div>
+                  <div
+                    className="makeStyles-item-2055"
+                    style={
+                      Object {
+                        "display": "inline-block",
+                        "width": "50%",
+                      }
+                    }
+                    tabIndex={-1}
+                  >
+                    <div
+                      className="makeStyles-root-2057"
+                    >
+                      <img
+                        alt="Melaleuca brevifolia"
+                        className="makeStyles-img-2058"
+                        src="./melaleuca-b.png"
+                      />
+                      <p
+                        className="MuiTypography-root makeStyles-name-2059 MuiTypography-body1"
+                      >
+                        Melaleuca brevifolia
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    className="makeStyles-item-2055"
+                    style={
+                      Object {
+                        "display": "inline-block",
+                        "width": "50%",
+                      }
+                    }
+                    tabIndex={-1}
+                  >
+                    <div
+                      className="makeStyles-root-2057"
+                    >
+                      <img
+                        alt="Melaleuca brevifolia"
+                        className="makeStyles-img-2058"
+                        src="./melaleuca-b.png"
+                      />
+                      <p
+                        className="MuiTypography-root makeStyles-name-2059 MuiTypography-body1"
+                      >
+                        Melaleuca brevifolia
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div />
+              </div>
+              <div
+                aria-hidden={true}
+                className="slick-slide slick-cloned"
+                data-index={3}
+                onClick={[Function]}
+                style={
+                  Object {
+                    "width": 0,
+                  }
+                }
+                tabIndex="-1"
+              >
+                <div>
+                  <div
+                    className="makeStyles-item-2055"
+                    style={
+                      Object {
+                        "display": "inline-block",
+                        "width": "50%",
+                      }
+                    }
+                    tabIndex={-1}
+                  >
+                    <div
+                      className="makeStyles-root-2057"
+                    >
+                      <img
+                        alt="Melaleuca brevifolia"
+                        className="makeStyles-img-2058"
+                        src="./melaleuca-b.png"
+                      />
+                      <p
+                        className="MuiTypography-root makeStyles-name-2059 MuiTypography-body1"
+                      >
+                        Melaleuca brevifolia
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    className="makeStyles-item-2055"
+                    style={
+                      Object {
+                        "display": "inline-block",
+                        "width": "50%",
+                      }
+                    }
+                    tabIndex={-1}
+                  >
+                    <div
+                      className="makeStyles-root-2057"
+                    >
+                      <img
+                        alt="Melaleuca brevifolia"
+                        className="makeStyles-img-2058"
+                        src="./melaleuca-b.png"
+                      />
+                      <p
+                        className="MuiTypography-root makeStyles-name-2059 MuiTypography-body1"
+                      >
+                        Melaleuca brevifolia
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <div
+                    className="makeStyles-item-2055"
+                    style={
+                      Object {
+                        "display": "inline-block",
+                        "width": "50%",
+                      }
+                    }
+                    tabIndex={-1}
+                  >
+                    <div
+                      className="makeStyles-root-2057"
+                    >
+                      <img
+                        alt="Melaleuca brevifolia"
+                        className="makeStyles-img-2058"
+                        src="./melaleuca-b.png"
+                      />
+                      <p
+                        className="MuiTypography-root makeStyles-name-2059 MuiTypography-body1"
+                      >
+                        Melaleuca brevifolia
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    className="makeStyles-item-2055"
+                    style={
+                      Object {
+                        "display": "inline-block",
+                        "width": "50%",
+                      }
+                    }
+                    tabIndex={-1}
+                  >
+                    <div
+                      className="makeStyles-root-2057"
+                    >
+                      <img
+                        alt="Melaleuca brevifolia"
+                        className="makeStyles-img-2058"
+                        src="./melaleuca-b.png"
+                      />
+                      <p
+                        className="MuiTypography-root makeStyles-name-2059 MuiTypography-body1"
+                      >
+                        Melaleuca brevifolia
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                aria-hidden={true}
+                className="slick-slide slick-cloned"
+                data-index={4}
+                onClick={[Function]}
+                style={
+                  Object {
+                    "width": 0,
+                  }
+                }
+                tabIndex="-1"
+              >
+                <div>
+                  <div
+                    className="makeStyles-item-2055"
+                    style={
+                      Object {
+                        "display": "inline-block",
+                        "width": "50%",
+                      }
+                    }
+                    tabIndex={-1}
+                  >
+                    <div
+                      className="makeStyles-root-2057"
+                    >
+                      <img
+                        alt="Melaleuca brevifolia"
+                        className="makeStyles-img-2058"
+                        src="./melaleuca-b.png"
+                      />
+                      <p
+                        className="MuiTypography-root makeStyles-name-2059 MuiTypography-body1"
+                      >
+                        Melaleuca brevifolia
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    className="makeStyles-item-2055"
+                    style={
+                      Object {
+                        "display": "inline-block",
+                        "width": "50%",
+                      }
+                    }
+                    tabIndex={-1}
+                  >
+                    <div
+                      className="makeStyles-root-2057"
+                    >
+                      <img
+                        alt="Melaleuca brevifolia"
+                        className="makeStyles-img-2058"
+                        src="./melaleuca-b.png"
+                      />
+                      <p
+                        className="MuiTypography-root makeStyles-name-2059 MuiTypography-body1"
+                      >
+                        Melaleuca brevifolia
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <div
+                    className="makeStyles-item-2055"
+                    style={
+                      Object {
+                        "display": "inline-block",
+                        "width": "50%",
+                      }
+                    }
+                    tabIndex={-1}
+                  >
+                    <div
+                      className="makeStyles-root-2057"
+                    >
+                      <img
+                        alt="Melaleuca brevifolia"
+                        className="makeStyles-img-2058"
+                        src="./melaleuca-b.png"
+                      />
+                      <p
+                        className="MuiTypography-root makeStyles-name-2059 MuiTypography-body1"
+                      >
+                        Melaleuca brevifolia
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    className="makeStyles-item-2055"
+                    style={
+                      Object {
+                        "display": "inline-block",
+                        "width": "50%",
+                      }
+                    }
+                    tabIndex={-1}
+                  >
+                    <div
+                      className="makeStyles-root-2057"
+                    >
+                      <img
+                        alt="Melaleuca brevifolia"
+                        className="makeStyles-img-2058"
+                        src="./melaleuca-b.png"
+                      />
+                      <p
+                        className="MuiTypography-root makeStyles-name-2059 MuiTypography-body1"
+                      >
+                        Melaleuca brevifolia
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                aria-hidden={true}
+                className="slick-slide slick-cloned"
+                data-index={5}
+                onClick={[Function]}
+                style={
+                  Object {
+                    "width": 0,
+                  }
+                }
+                tabIndex="-1"
+              >
+                <div>
+                  <div
+                    className="makeStyles-item-2055"
+                    style={
+                      Object {
+                        "display": "inline-block",
+                        "width": "50%",
+                      }
+                    }
+                    tabIndex={-1}
+                  >
+                    <div
+                      className="makeStyles-root-2057"
+                    >
+                      <img
+                        alt="Melaleuca brevifolia"
+                        className="makeStyles-img-2058"
+                        src="./melaleuca-b.png"
+                      />
+                      <p
+                        className="MuiTypography-root makeStyles-name-2059 MuiTypography-body1"
+                      >
+                        Melaleuca brevifolia
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    className="makeStyles-item-2055"
+                    style={
+                      Object {
+                        "display": "inline-block",
+                        "width": "50%",
+                      }
+                    }
+                    tabIndex={-1}
+                  >
+                    <div
+                      className="makeStyles-root-2057"
+                    >
+                      <img
+                        alt="Melaleuca brevifolia"
+                        className="makeStyles-img-2058"
+                        src="./melaleuca-b.png"
+                      />
+                      <p
+                        className="MuiTypography-root makeStyles-name-2059 MuiTypography-body1"
+                      >
+                        Melaleuca brevifolia
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          className="MuiGrid-root makeStyles-buttons-2056 MuiGrid-container MuiGrid-justify-xs-flex-end"
+        >
+          <div
+            className="makeStyles-root-2090"
+            onClick={[Function]}
+          >
+            <svg
+              aria-hidden="true"
+              className="MuiSvgIcon-root makeStyles-icon-2091 makeStyles-icon-2092"
+              focusable="false"
+              role="presentation"
+              viewBox="0 0 24 24"
+            >
+              <svg
+                fill="none"
+                height="24"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g
+                  id="Icon / Arrow / Large"
+                >
+                  <path
+                    clipRule="evenodd"
+                    d="M11 4.25C11 4.11193 11.1119 4 11.25 4H12.75C12.8881 4 13 4.11193 13 4.25V16.4L18.2232 11.1768C18.3209 11.0791 18.4792 11.0791 18.5768 11.1768L19.6375 12.2374C19.7351 12.3351 19.7351 12.4934 19.6375 12.591L12.1721 20.0564C12.1219 20.1065 12.0557 20.1309 11.99 20.1295C11.9243 20.1309 11.8581 20.1065 11.8079 20.0564L4.34257 12.591C4.24494 12.4934 4.24494 12.3351 4.34257 12.2374L5.40323 11.1768C5.50086 11.0791 5.65915 11.0791 5.75678 11.1768L11 16.42V4.25Z"
+                    fill="#4FB573"
+                    fillRule="evenodd"
+                    id="Union"
+                  />
+                </g>
+              </svg>
+            </svg>
+          </div>
+          <div
+            className="makeStyles-root-2090"
+            onClick={[Function]}
+          >
+            <svg
+              aria-hidden="true"
+              className="MuiSvgIcon-root makeStyles-icon-2091 makeStyles-icon-2102"
+              focusable="false"
+              role="presentation"
+              viewBox="0 0 24 24"
+            >
+              <svg
+                fill="none"
+                height="24"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g
+                  id="Icon / Arrow / Large"
+                >
+                  <path
+                    clipRule="evenodd"
+                    d="M11 4.25C11 4.11193 11.1119 4 11.25 4H12.75C12.8881 4 13 4.11193 13 4.25V16.4L18.2232 11.1768C18.3209 11.0791 18.4792 11.0791 18.5768 11.1768L19.6375 12.2374C19.7351 12.3351 19.7351 12.4934 19.6375 12.591L12.1721 20.0564C12.1219 20.1065 12.0557 20.1309 11.99 20.1295C11.9243 20.1309 11.8581 20.1065 11.8079 20.0564L4.34257 12.591C4.24494 12.4934 4.24494 12.3351 4.34257 12.2374L5.40323 11.1768C5.50086 11.0791 5.65915 11.0791 5.75678 11.1768L11 16.42V4.25Z"
+                    fill="#4FB573"
+                    fillRule="evenodd"
+                    id="Union"
+                  />
+                </g>
+              </svg>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components|ReadMore Read More 1`] = `
+<div>
+  <div>
+    <div
+      className="makeStyles-textContainer-2181"
+    >
+      <div
+        className="MuiTypography-root makeStyles-root-2182 makeStyles-root-2183 MuiTypography-body1"
+      >
+        This property is a rare pocket of wetlands and woodlands located near the township of Menindee South Australia, nestled in between the Coorong national park and Lake Albert.
+
+As one of the few remaining sections of privately owned remnant vegetation in the area, this represents a unique opportunity for long term preservation. The Coorong, Lake Alexandrina and Lake Albert Wetland is an international significant RAMSAR wetland ecosystems at the intersection of the Murray River and Southern Ocean.
+
+This vital habitat comprises a unique mix of both freshwater and saltwater wetlands and coastal woodlands. The Coorong is the heart of the traditional lands of Ngarrindjeri people, who have hunted and camped on the Mt Sandy property for thousands of years.
+      </div>
+    </div>
+    <button
+      className="MuiButtonBase-root MuiButton-root WithStyles(ForwardRef(Button))-root-2214 MuiButton-text MuiButton-textSecondary"
+      disabled={false}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onDragLeave={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onKeyUp={[Function]}
+      onMouseDown={[Function]}
+      onMouseLeave={[Function]}
+      onMouseUp={[Function]}
+      onTouchEnd={[Function]}
+      onTouchMove={[Function]}
+      onTouchStart={[Function]}
+      tabIndex={0}
+      type="button"
+    >
+      <span
+        className="MuiButton-label"
+      >
+        <span
+          className="MuiButton-startIcon WithStyles(ForwardRef(Button))-startIcon-2215 MuiButton-iconSizeMedium"
+        >
+          <svg
+            aria-hidden="true"
+            className="MuiSvgIcon-root makeStyles-icon-2248 makeStyles-icon-2249"
+            focusable="false"
+            role="presentation"
+            viewBox="0 0 24 24"
+          >
+            <svg
+              fill="none"
+              height="24"
+              viewBox="0 0 24 24"
+              width="24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g
+                id="Icon / Arrow / Large"
+              >
+                <path
+                  clipRule="evenodd"
+                  d="M11 4.25C11 4.11193 11.1119 4 11.25 4H12.75C12.8881 4 13 4.11193 13 4.25V16.4L18.2232 11.1768C18.3209 11.0791 18.4792 11.0791 18.5768 11.1768L19.6375 12.2374C19.7351 12.3351 19.7351 12.4934 19.6375 12.591L12.1721 20.0564C12.1219 20.1065 12.0557 20.1309 11.99 20.1295C11.9243 20.1309 11.8581 20.1065 11.8079 20.0564L4.34257 12.591C4.24494 12.4934 4.24494 12.3351 4.34257 12.2374L5.40323 11.1768C5.50086 11.0791 5.65915 11.0791 5.75678 11.1768L11 16.42V4.25Z"
+                  fill="#4FB573"
+                  fillRule="evenodd"
+                  id="Union"
+                />
+              </g>
+            </svg>
+          </svg>
+        </span>
+        read 
+        more
+      </span>
+      <span
+        className="MuiTouchRipple-root"
+      />
+    </button>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components|Timeline Timeline 1`] = `
+<div>
+  <div
+    className="makeStyles-root-2322"
+  >
+    <div
+      className="makeStyles-item-2323"
+    >
+      <div
+        className="makeStyles-content-2324 makeStyles-content-2329"
+      >
+        <div
+          className="makeStyles-date-2325"
+        >
+          September 2, 2019
+        </div>
+        <h4
+          className="MuiTypography-root makeStyles-root-2332 undefined MuiTypography-h4 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+        >
+          Project starts
+        </h4>
+        <div
+          className="makeStyles-description-2326"
+        >
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        </div>
+        <span
+          className="makeStyles-circle-2328 makeStyles-circle-2331"
+        />
+        <div
+          className="makeStyles-bar-2327 makeStyles-bar-2330"
+        />
+      </div>
+    </div>
+    <div
+      className="makeStyles-item-2323"
+    >
+      <div
+        className="makeStyles-content-2324 makeStyles-content-2363"
+      >
+        <div
+          className="makeStyles-date-2325"
+        >
+          October 21, 2019
+        </div>
+        <h4
+          className="MuiTypography-root makeStyles-root-2332 undefined MuiTypography-h4 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+        >
+          Approval complete
+        </h4>
+        <div
+          className="makeStyles-description-2326"
+        >
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        </div>
+        <span
+          className="makeStyles-circle-2328 makeStyles-circle-2365"
+        />
+        <div
+          className="makeStyles-bar-2327 makeStyles-bar-2364"
+        />
+      </div>
+    </div>
+    <div
+      className="makeStyles-item-2323"
+    >
+      <div
+        className="makeStyles-content-2324 makeStyles-content-2366"
+      >
+        <div
+          className="makeStyles-date-2325"
+        >
+          February 20, 2020
+        </div>
+        <h4
+          className="MuiTypography-root makeStyles-root-2332 undefined MuiTypography-h4 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+        >
+          Credits issued
+        </h4>
+        <div
+          className="makeStyles-description-2326"
+        >
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        </div>
+        <span
+          className="makeStyles-circle-2328 makeStyles-circle-2368"
+        />
+        <div
+          className="makeStyles-bar-2327 makeStyles-bar-2367"
+        />
+      </div>
+    </div>
+    <div
+      className="makeStyles-item-2323"
+    >
+      <div
+        className="makeStyles-content-2324 makeStyles-content-2369"
+      >
+        <div
+          className="makeStyles-date-2325"
+        >
+          September 1, 2022
+        </div>
+        <h4
+          className="MuiTypography-root makeStyles-root-2332 undefined MuiTypography-h4 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+        >
+          Site visit
+        </h4>
+        <div
+          className="makeStyles-description-2326"
+        >
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        </div>
+        <span
+          className="makeStyles-circle-2328 makeStyles-circle-2371"
+        />
+        <div
+          className="makeStyles-bar-2327 makeStyles-bar-2370"
+        />
+      </div>
+    </div>
+    <div
+      className="makeStyles-item-2323"
+    >
+      <div
+        className="makeStyles-content-2324 makeStyles-content-2372"
+      >
+        <div
+          className="makeStyles-date-2325"
+        >
+          February 1, 2029
+        </div>
+        <h4
+          className="MuiTypography-root makeStyles-root-2332 undefined MuiTypography-h4 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+        >
+          Project completion
+        </h4>
+        <div
+          className="makeStyles-description-2326"
+        >
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        </div>
+        <span
+          className="makeStyles-circle-2328 makeStyles-circle-2374"
+        />
+        <div
+          className="makeStyles-bar-2327 makeStyles-bar-2373"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components|Timeline Timeline Item 1`] = `
+<div>
+  <div
+    className="makeStyles-content-2414 makeStyles-content-2419"
+  >
+    <div
+      className="makeStyles-date-2415"
+    >
+      September 2, 2019
+    </div>
+    <h4
+      className="MuiTypography-root makeStyles-root-2422 undefined MuiTypography-h4 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+    >
+      Project starts
+    </h4>
+    <div
+      className="makeStyles-description-2416"
+    >
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    </div>
+    <span
+      className="makeStyles-circle-2418 makeStyles-circle-2421"
+    />
+    <div
+      className="makeStyles-bar-2417 makeStyles-bar-2420"
+    />
+  </div>
+</div>
+`;
+
 exports[`Storyshots Components|Title Main Title 1`] = `
 <div>
   <h1
-    className="MuiTypography-root makeStyles-root-2124 undefined MuiTypography-h1 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+    className="MuiTypography-root makeStyles-root-2484 undefined MuiTypography-h1 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
   >
     Sheok Hill
   </h1>
@@ -538,58 +1699,27 @@ exports[`Storyshots Components|Title Main Title 1`] = `
 exports[`Storyshots Components|Title Subtitle 1`] = `
 <div>
   <h2
-    className="MuiTypography-root makeStyles-root-2186 undefined MuiTypography-h2 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+    className="MuiTypography-root makeStyles-root-2546 undefined MuiTypography-h2 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
   >
     Ecological Practices
   </h2>
 </div>
 `;
 
-exports[`Storyshots Components|Title White Title 1`] = `
+exports[`Storyshots Components|Title Title 1`] = `
 <div>
   <h1
-    className="MuiTypography-root makeStyles-root-2248 undefined MuiTypography-h1 MuiTypography-colorPrimary MuiTypography-alignLeft"
+    className="MuiTypography-root makeStyles-root-2608 undefined MuiTypography-h1 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
   >
-    Satellite Imagery
+    Ecological Practices
   </h1>
-</div>
-`;
-
-exports[`Storyshots Components|User Basic User Info 1`] = `
-<div>
-  <div
-    className="MuiGrid-root MuiGrid-container MuiGrid-align-items-xs-center"
-  >
-    <div
-      className="MuiGrid-root MuiGrid-item"
-    >
-      <div
-        className="MuiAvatar-root MuiAvatar-circle makeStyles-root-2930 makeStyles-root-2931"
-      >
-        <img
-          alt="Odonata"
-          className="MuiAvatar-img"
-          src="http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png"
-        />
-      </div>
-    </div>
-    <div
-      className="MuiGrid-root makeStyles-text-2819 makeStyles-text-2823 MuiGrid-item"
-    >
-      <p
-        className="MuiTypography-root makeStyles-name-2820 makeStyles-name-2824 MuiTypography-body1"
-      >
-        Odonata
-      </p>
-    </div>
-  </div>
 </div>
 `;
 
 exports[`Storyshots Components|User Big User Avatar 1`] = `
 <div>
   <div
-    className="MuiAvatar-root MuiAvatar-circle makeStyles-root-2306 makeStyles-root-2307"
+    className="MuiAvatar-root MuiAvatar-circle makeStyles-root-2666 makeStyles-root-2667"
   >
     <img
       alt="Odonata"
@@ -603,13 +1733,13 @@ exports[`Storyshots Components|User Big User Avatar 1`] = `
 exports[`Storyshots Components|User Big User Info 1`] = `
 <div>
   <div
-    className="MuiGrid-root MuiGrid-container MuiGrid-align-items-xs-center"
+    className="MuiGrid-root MuiGrid-container MuiGrid-wrap-xs-nowrap"
   >
     <div
       className="MuiGrid-root MuiGrid-item"
     >
       <div
-        className="MuiAvatar-root MuiAvatar-circle makeStyles-root-3530 makeStyles-root-3531"
+        className="MuiAvatar-root MuiAvatar-circle makeStyles-root-3272 makeStyles-root-3273"
       >
         <img
           alt="Odonata"
@@ -619,17 +1749,22 @@ exports[`Storyshots Components|User Big User Info 1`] = `
       </div>
     </div>
     <div
-      className="MuiGrid-root makeStyles-text-3419 makeStyles-text-3423 MuiGrid-item"
+      className="MuiGrid-root makeStyles-text-3161 makeStyles-text-3165 MuiGrid-item"
     >
       <p
-        className="MuiTypography-root makeStyles-name-3420 makeStyles-name-3424 MuiTypography-body1"
+        className="MuiTypography-root makeStyles-name-3162 makeStyles-name-3166 MuiTypography-body1"
       >
         Odonata
       </p>
       <p
-        className="MuiTypography-root makeStyles-place-3422 makeStyles-place-3425 MuiTypography-body1"
+        className="MuiTypography-root makeStyles-place-3164 makeStyles-place-3167 MuiTypography-body1"
       >
         South Melbourne, Victoria, Australia
+      </p>
+      <p
+        className="MuiTypography-root makeStyles-description-3163 MuiTypography-body1"
+      >
+        Odonata is a not-for-profit entity supporting biodiversity impact solutions.
       </p>
     </div>
   </div>
@@ -639,13 +1774,13 @@ exports[`Storyshots Components|User Big User Info 1`] = `
 exports[`Storyshots Components|User Column User Info 1`] = `
 <div>
   <div
-    className="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-column MuiGrid-align-items-xs-center"
+    className="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-column MuiGrid-wrap-xs-nowrap"
   >
     <div
       className="MuiGrid-root MuiGrid-item"
     >
       <div
-        className="MuiAvatar-root MuiAvatar-circle makeStyles-root-3830 makeStyles-root-3831"
+        className="MuiAvatar-root MuiAvatar-circle makeStyles-root-3572 makeStyles-root-3573"
       >
         <img
           alt="Odonata"
@@ -655,58 +1790,22 @@ exports[`Storyshots Components|User Column User Info 1`] = `
       </div>
     </div>
     <div
-      className="MuiGrid-root makeStyles-text-3719 makeStyles-text-3723 MuiGrid-item"
+      className="MuiGrid-root makeStyles-text-3461 makeStyles-text-3465 MuiGrid-item"
     >
       <p
-        className="MuiTypography-root makeStyles-name-3720 makeStyles-name-3724 MuiTypography-body1"
+        className="MuiTypography-root makeStyles-name-3462 makeStyles-name-3466 MuiTypography-body1"
       >
         Odonata
       </p>
       <p
-        className="MuiTypography-root makeStyles-place-3722 makeStyles-place-3725 MuiTypography-body1"
+        className="MuiTypography-root makeStyles-place-3464 makeStyles-place-3467 MuiTypography-body1"
       >
         South Melbourne, Victoria, Australia
       </p>
-    </div>
-  </div>
-</div>
-`;
-
-exports[`Storyshots Components|User Extended User Info 1`] = `
-<div>
-  <div
-    className="MuiGrid-root MuiGrid-container MuiGrid-align-items-xs-center"
-  >
-    <div
-      className="MuiGrid-root MuiGrid-item"
-    >
-      <div
-        className="MuiAvatar-root MuiAvatar-circle makeStyles-root-4130 makeStyles-root-4131"
-      >
-        <img
-          alt="Joseph McFann, Ph.D"
-          className="MuiAvatar-img"
-          src="http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png"
-        />
-      </div>
-    </div>
-    <div
-      className="MuiGrid-root makeStyles-text-4019 makeStyles-text-4023 MuiGrid-item"
-    >
       <p
-        className="MuiTypography-root makeStyles-name-4020 makeStyles-name-4024 MuiTypography-body1"
+        className="MuiTypography-root makeStyles-description-3463 MuiTypography-body1"
       >
-        Joseph McFann, Ph.D
-      </p>
-      <p
-        className="MuiTypography-root makeStyles-title-4021 MuiTypography-body1 MuiTypography-colorSecondary"
-      >
-        Professor of Atmospheric Studies
-      </p>
-      <p
-        className="MuiTypography-root makeStyles-place-4022 makeStyles-place-4025 MuiTypography-body1"
-      >
-        Oxford University
+        Odonata is a not-for-profit entity supporting biodiversity impact solutions.
       </p>
     </div>
   </div>
@@ -716,7 +1815,7 @@ exports[`Storyshots Components|User Extended User Info 1`] = `
 exports[`Storyshots Components|User Fallback User Avatar 1`] = `
 <div>
   <div
-    className="MuiAvatar-root MuiAvatar-circle makeStyles-root-2351 makeStyles-root-2352 MuiAvatar-colorDefault"
+    className="MuiAvatar-root MuiAvatar-circle makeStyles-root-2693 makeStyles-root-2694 MuiAvatar-colorDefault"
   >
     <svg
       aria-hidden="true"
@@ -736,7 +1835,7 @@ exports[`Storyshots Components|User Fallback User Avatar 1`] = `
 exports[`Storyshots Components|User Medium User Avatar 1`] = `
 <div>
   <div
-    className="MuiAvatar-root MuiAvatar-circle makeStyles-root-2288 makeStyles-root-2289"
+    className="MuiAvatar-root MuiAvatar-circle makeStyles-root-2648 makeStyles-root-2649"
   >
     <img
       alt="Odonata"
@@ -750,13 +1849,13 @@ exports[`Storyshots Components|User Medium User Avatar 1`] = `
 exports[`Storyshots Components|User Medium User Info 1`] = `
 <div>
   <div
-    className="MuiGrid-root MuiGrid-container MuiGrid-align-items-xs-center"
+    className="MuiGrid-root MuiGrid-container MuiGrid-wrap-xs-nowrap"
   >
     <div
       className="MuiGrid-root MuiGrid-item"
     >
       <div
-        className="MuiAvatar-root MuiAvatar-circle makeStyles-root-2630 makeStyles-root-2631"
+        className="MuiAvatar-root MuiAvatar-circle makeStyles-root-2972 makeStyles-root-2973"
       >
         <img
           alt="Odonata"
@@ -766,68 +1865,71 @@ exports[`Storyshots Components|User Medium User Info 1`] = `
       </div>
     </div>
     <div
-      className="MuiGrid-root makeStyles-text-2519 makeStyles-text-2523 MuiGrid-item"
+      className="MuiGrid-root makeStyles-text-2861 makeStyles-text-2865 MuiGrid-item"
     >
       <p
-        className="MuiTypography-root makeStyles-name-2520 makeStyles-name-2524 MuiTypography-body1"
+        className="MuiTypography-root makeStyles-name-2862 makeStyles-name-2866 MuiTypography-body1"
       >
         Odonata
       </p>
       <p
-        className="MuiTypography-root makeStyles-place-2522 makeStyles-place-2525 MuiTypography-body1"
+        className="MuiTypography-root makeStyles-place-2864 makeStyles-place-2867 MuiTypography-body1"
       >
         South Melbourne, Victoria, Australia
+      </p>
+      <p
+        className="MuiTypography-root makeStyles-description-2863 MuiTypography-body1"
+      >
+        Odonata is a not-for-profit entity supporting biodiversity impact solutions.
       </p>
     </div>
   </div>
 </div>
 `;
 
-exports[`Storyshots Components|User Small User Avatar 1`] = `
+exports[`Storyshots Components|User With Title 1`] = `
 <div>
-  <div
-    className="MuiAvatar-root MuiAvatar-circle makeStyles-root-2324 makeStyles-root-2325"
-  >
-    <img
-      alt="Odonata"
-      className="MuiAvatar-img"
-      src="http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png"
-    />
-  </div>
-</div>
-`;
-
-exports[`Storyshots Components|User Small User Info 1`] = `
-<div>
-  <div
-    className="MuiGrid-root MuiGrid-container MuiGrid-align-items-xs-center"
-  >
+  <div>
+    <p
+      className="MuiTypography-root makeStyles-title-3762 MuiTypography-body1"
+    >
+      project developer
+    </p>
     <div
-      className="MuiGrid-root MuiGrid-item"
+      className="MuiGrid-root MuiGrid-container MuiGrid-wrap-xs-nowrap"
     >
       <div
-        className="MuiAvatar-root MuiAvatar-circle makeStyles-root-3230 makeStyles-root-3231"
+        className="MuiGrid-root MuiGrid-item"
       >
-        <img
-          alt="Odonata"
-          className="MuiAvatar-img"
-          src="http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png"
-        />
+        <div
+          className="MuiAvatar-root MuiAvatar-circle makeStyles-root-3904 makeStyles-root-3905"
+        >
+          <img
+            alt="Odonata"
+            className="MuiAvatar-img"
+            src="http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png"
+          />
+        </div>
       </div>
-    </div>
-    <div
-      className="MuiGrid-root makeStyles-text-3119 makeStyles-text-3123 MuiGrid-item"
-    >
-      <p
-        className="MuiTypography-root makeStyles-name-3120 makeStyles-name-3124 MuiTypography-body1"
+      <div
+        className="MuiGrid-root makeStyles-text-3793 makeStyles-text-3797 MuiGrid-item"
       >
-        Odonata
-      </p>
-      <p
-        className="MuiTypography-root makeStyles-place-3122 makeStyles-place-3125 MuiTypography-body1"
-      >
-        South Melbourne, Victoria, Australia
-      </p>
+        <p
+          className="MuiTypography-root makeStyles-name-3794 makeStyles-name-3798 MuiTypography-body1"
+        >
+          Odonata
+        </p>
+        <p
+          className="MuiTypography-root makeStyles-place-3796 makeStyles-place-3799 MuiTypography-body1"
+        >
+          South Melbourne, Victoria, Australia
+        </p>
+        <p
+          className="MuiTypography-root makeStyles-description-3795 MuiTypography-body1"
+        >
+          Odonata is a not-for-profit entity supporting biodiversity impact solutions.
+        </p>
+      </div>
     </div>
   </div>
 </div>

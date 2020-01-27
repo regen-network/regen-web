@@ -55,7 +55,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   },
   activitiesContainer: {
     [theme.breakpoints.down('xs')]: {
-      marginTop: theme.spacing(3.75),
+      marginTop: theme.spacing(7),
     },
     '& h3': {
       [theme.breakpoints.up('sm')]: {

@@ -117,7 +117,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingRight: theme.spacing(27.25),
     },
     [theme.breakpoints.down('xs')]: {
-      paddingBottom: theme.spacing(17.5),
+      paddingBottom: theme.spacing(4),
     },
     [theme.breakpoints.up('xl')]: {
       paddingRight: 0,
@@ -138,7 +138,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       padding: `${theme.spacing(3.5)} ${theme.spacing(2.5)} ${theme.spacing(2.5)}`,
     },
     [theme.breakpoints.down('xs')]: {
-      paddingBottom: theme.spacing(13),
+      paddingBottom: theme.spacing(8),
     },
   },
   projectImpactContainer: {

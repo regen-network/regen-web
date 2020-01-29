@@ -2,7 +2,6 @@ import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 import { useTheme } from '@material-ui/core/styles';
 
-import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Title from '../title';
 import CreditsIcon from '../icons/CreditsIcon';
@@ -24,8 +23,13 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     backgroundSize: 'cover',
     border: `1px solid ${theme.palette.info.light}`,
     borderRadius: '5px',
-    padding: `${theme.spacing(11.5)} ${theme.spacing(5)}`,
     position: 'relative',
+    [theme.breakpoints.up('sm')]: {
+      padding: `${theme.spacing(14.5)} ${theme.spacing(8)} ${theme.spacing(18)}`,
+    },
+    [theme.breakpoints.down('xs')]: {
+      padding: `${theme.spacing(14)} ${theme.spacing(5)} ${theme.spacing(11.5)}`,
+    },
   }),
   topBar: {
     height: '10px',
@@ -36,22 +40,14 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     background: '#B9E1C7',
     borderRadius: '5px 5px 0px 0px',
   },
-  descriptionContainer: {
-    [theme.breakpoints.up('sm')]: {
-      fontSize: '1.375rem',
-      paddingRight: theme.spacing(10),
-      '& h2': {
-        height: '5.25rem',
-      },
-    },
-  },
   description: {
     color: theme.palette.info.main,
+    whiteSpace: 'pre-wrap',
+    marginTop: theme.spacing(3.75),
     [theme.breakpoints.up('sm')]: {
       // marginRight: theme.spacing(11.75),
       fontSize: '1.375rem',
     },
-    marginTop: theme.spacing(3.75),
   },
   activitiesContainer: {
     [theme.breakpoints.down('xs')]: {
@@ -67,11 +63,9 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   activities: {
     color: theme.palette.info.main,
     margin: 0,
-    paddingInlineStart: theme.spacing(2.5),
+    paddingInlineStart: theme.spacing(4),
     listStyle: 'none',
-    [theme.breakpoints.down('xs')]: {
-      marginTop: theme.spacing(4.5),
-    },
+    marginTop: theme.spacing(4.5),
   },
   activity: {
     fontSize: '0.875rem',
@@ -96,6 +90,46 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       marginBottom: theme.spacing(-2),
     },
   },
+  container: {
+    [theme.breakpoints.up('sm')]: {
+      display: 'grid',
+      gridTemplateColumns: '66% 33%',
+    },
+    [theme.breakpoints.down('xs')]: {
+      display: 'block',
+    },
+  },
+  descriptionTitle: {
+    [theme.breakpoints.up('sm')]: {
+      gridColumnStart: 1,
+      gridColumnEnd: 2,
+      gridRowStart: 1,
+      gridRownEnd: 2,
+      paddingRight: theme.spacing(10),
+      '& h2': {
+        marginBottom: '0 !important',
+      },
+    },
+  },
+  descriptionItem: {
+    [theme.breakpoints.up('sm')]: {
+      gridColumnStart: 1,
+      gridColumnEnd: 2,
+      gridRowStart: 2,
+      gridRownEnd: 3,
+      paddingRight: theme.spacing(10),
+    },
+  },
+  activitiesTitle: {
+    [theme.breakpoints.down('xs')]: {
+      marginTop: theme.spacing(7),
+    },
+    '& h3': {
+      [theme.breakpoints.up('sm')]: {
+        marginTop: theme.spacing(3.5),
+      },
+    },
+  },
 }));
 
 export default function CreditInfo({
@@ -108,27 +142,33 @@ export default function CreditInfo({
   const theme = useTheme();
 
   return (
-    <Grid container className={classes.root}>
+    <div className={classes.root}>
       <div className={classes.topBar} />
-      <Grid item xs={12} sm={8} className={classes.descriptionContainer}>
-        <Title variant="h2">
-          <span className={classes.icon}>
-            <CreditsIcon color={theme.palette.secondary.main} />
-          </span>
-          {name}
-        </Title>
-        <Typography className={classes.description}>{description}</Typography>
-      </Grid>
-      <Grid item xs={12} sm={4} className={classes.activitiesContainer}>
-        <Title variant="h3">Key activities and outcomes</Title>
-        <ul className={classes.activities}>
-          {activities.map((activity, index) => (
-            <Typography key={index} className={classes.activity}>
-              <li>{activity}</li>
-            </Typography>
-          ))}
-        </ul>
-      </Grid>
-    </Grid>
+      <div className={classes.container}>
+        <div className={classes.descriptionTitle}>
+          <Title variant="h2">
+            <span className={classes.icon}>
+              <CreditsIcon color={theme.palette.secondary.main} />
+            </span>
+            {name}
+          </Title>
+        </div>
+        <div className={classes.descriptionItem}>
+          <Typography className={classes.description}>{description}</Typography>
+        </div>
+        <div className={classes.activitiesTitle}>
+          <Title variant="h3">Key activities and outcomes</Title>
+        </div>
+        <div className={classes.activitiesItem}>
+          <ul className={classes.activities}>
+            {activities.map((activity, index) => (
+              <Typography key={index} className={classes.activity}>
+                <li>{activity}</li>
+              </Typography>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
   );
 }

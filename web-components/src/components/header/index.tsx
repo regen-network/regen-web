@@ -46,7 +46,7 @@ export default function Header({ logo }: HeaderProps): JSX.Element {
   return (
     <Grid container direction="row" className={classes.root} alignItems="center" justify="space-between">
       <Grid item>
-        <a href="https://www.regen.network/">
+        <a href="/">
           <RegenIcon />
         </a>
       </Grid>

@@ -14,6 +14,7 @@ build-deploy-all:
     - cf target -o "$CF_ORG" -s $CF_SPACE
     - cf push storybook
     - cf push registry
+    - cf push presale
   artifacts:
     paths:
       - web-storybook/storybook-static
@@ -21,11 +22,12 @@ build-deploy-all:
   only:
     - dev
 
-production:
-  stage: deploy
-  script:
-    - cf login -a $CF_URL -u $CF_USER -p $CF_PASS
-    - cf target -o "$CF_ORG" -s $CF_SPACE
+# TBD
+#production:
+#  stage: deploy
+#  script:
+#    - cf login -a $CF_URL -u $CF_USER -p $CF_PASS
+#    - cf target -o "$CF_ORG" -s $CF_SPACE
 #   - cf push APP NAMES 
-  only:
-    - master
+#  only:
+#    - master

@@ -10,6 +10,8 @@ applications:
   path: web/build
   memory: 64M
   instances: 1
+  services:
+     - registrystaging-psql
   routes:
      - route: app.registry.regen.network
   buildpacks: 

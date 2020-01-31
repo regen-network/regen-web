@@ -9,6 +9,7 @@ interface UserInfoWithTitleProps {
   title: string;
   border?: boolean;
   size?: string;
+  icon?: any;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -32,12 +33,13 @@ export default function UserInfoWithTitle({
   title,
   border = true,
   size = 'big',
+  icon,
 }: UserInfoWithTitleProps): JSX.Element {
   const classes = useStyles({});
   return (
     <div>
       <Typography className={classes.title}>{title}</Typography>
-      <UserInfo user={user} size={size} border={border} />
+      <UserInfo user={user} size={size} border={border} icon={icon} />
     </div>
   );
 }

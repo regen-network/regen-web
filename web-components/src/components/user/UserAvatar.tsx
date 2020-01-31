@@ -9,6 +9,7 @@ interface UserAvatarProps {
   size?: string;
   border?: boolean;
   href?: string;
+  icon?: any;
 }
 
 interface StyleProps {
@@ -27,15 +28,30 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       width: theme.spacing(props.spacing.xs),
       height: theme.spacing(props.spacing.xs),
     },
+    backgroundColor: 'transparent',
   }),
 }));
 
-export default function UserAvatar({ alt, src, size, border = true, href }: UserAvatarProps): JSX.Element {
+export default function UserAvatar({
+  alt,
+  src,
+  size,
+  border = true,
+  href,
+  icon,
+}: UserAvatarProps): JSX.Element {
   const spacing: Sizes = getSize(size);
   // TODO: is fallback icon when src not provided ok? what about the bg color?
   const classes = useStyles({ spacing, border });
-  const avatar = <Avatar className={classes.root} alt={alt} src={src} />;
-  if (avatar) {
+  const avatar = icon ? (
+    <Avatar className={classes.root} alt={alt}>
+      {icon}
+    </Avatar>
+  ) : (
+    <Avatar className={classes.root} alt={alt} src={src} />
+  );
+
+  if (href) {
     return (
       <a href={href} target="_blank" rel="noopener noreferrer">
         {avatar}

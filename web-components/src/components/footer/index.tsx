@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import UserInfoWithTitle from '../user/UserInfoWithTitle';
 import { User } from '../user/UserInfo';
+import RegenLogoIcon from '../icons/RegenLogoIcon';
 
 interface FooterProps {
   user: User;
@@ -44,7 +45,13 @@ export default function Footer({ user }: FooterProps): JSX.Element {
   return (
     <Grid container wrap="nowrap" alignItems="center" justify="space-between" className={classes.root}>
       <Grid item>
-        <UserInfoWithTitle title="credits issued by" user={user} border={false} size="xl" />
+        <UserInfoWithTitle
+          title="credits issued by"
+          user={user}
+          border={false}
+          size="xl"
+          icon={<RegenLogoIcon />}
+        />
       </Grid>
       <Grid item className={classes.copyrightContainer}>
         <Typography className={classes.copyright} variant="body2">

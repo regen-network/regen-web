@@ -1,6 +1,5 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
-import { useTheme } from '@material-ui/core/styles';
+import { makeStyles, useTheme, Theme } from '@material-ui/core/styles';
 // import Fab from '@material-ui/core/Fab';
 // import Button from '@material-ui/core/Button';
 import ArrowDownIcon from '../icons/ArrowDownIcon';

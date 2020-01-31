@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   description: {
     fontSize: '0.875rem',
-    color: theme.palette.info.main,
+    color: theme.palette.info.dark,
   },
 }));
 

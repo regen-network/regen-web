@@ -58,8 +58,10 @@ export default function Timeline({ events }: TimelineProps): JSX.Element {
               date={event.date}
               title={event.title}
               description={event.description}
-              circleColor={currentEventDate <= new Date() ? theme.palette.secondary.main : '#8F8F8F'}
-              barColor={nextEventDate < new Date() ? theme.palette.secondary.main : '#8F8F8F'}
+              circleColor={
+                currentEventDate <= new Date() ? theme.palette.secondary.main : theme.palette.info.main
+              }
+              barColor={nextEventDate < new Date() ? theme.palette.secondary.main : theme.palette.info.main}
               odd={index % 2 !== 0}
               last={index === events.length - 1}
             />

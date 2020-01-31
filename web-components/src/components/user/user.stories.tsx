@@ -25,6 +25,15 @@ export const bigUserAvatar = (): JSX.Element => (
   <UserAvatar alt={name} src={text('imgSrc', imgSrc)} size="big" />
 );
 
+export const userAvatarWithLink = (): JSX.Element => (
+  <UserAvatar
+    alt={name}
+    src={text('imgSrc', imgSrc)}
+    size="big"
+    href={text('href', 'http://www.odonata.org.au')}
+  />
+);
+
 export const fallbackUserAvatar = (): JSX.Element => <UserAvatar />;
 
 export const mediumUserInfo = (): JSX.Element => <UserInfo user={object('User', user)} />;

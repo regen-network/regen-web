@@ -263,15 +263,20 @@ exports[`Storyshots Components|Cards Project Developer Card 1`] = `
           <div
             className="MuiGrid-root MuiGrid-item"
           >
-            <div
-              className="MuiAvatar-root MuiAvatar-circle makeStyles-root-782 makeStyles-root-783"
+            <a
+              rel="noopener noreferrer"
+              target="_blank"
             >
-              <img
-                alt="Odonata"
-                className="MuiAvatar-img"
-                src="http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png"
-              />
-            </div>
+              <div
+                className="MuiAvatar-root MuiAvatar-circle makeStyles-root-782 makeStyles-root-783"
+              >
+                <img
+                  alt="Odonata"
+                  className="MuiAvatar-img"
+                  src="http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png"
+                />
+              </div>
+            </a>
           </div>
           <div
             className="MuiGrid-root makeStyles-text-671 makeStyles-text-675 MuiGrid-item"
@@ -310,15 +315,20 @@ exports[`Storyshots Components|Cards Project Developer Card 1`] = `
             <div
               className="MuiGrid-root MuiGrid-item"
             >
-              <div
-                className="MuiAvatar-root MuiAvatar-circle makeStyles-root-782 makeStyles-root-794"
+              <a
+                rel="noopener noreferrer"
+                target="_blank"
               >
-                <img
-                  alt="Ngarrindjeri Tribe"
-                  className="MuiAvatar-img"
-                  src="/tribe.png"
-                />
-              </div>
+                <div
+                  className="MuiAvatar-root MuiAvatar-circle makeStyles-root-782 makeStyles-root-794"
+                >
+                  <img
+                    alt="Ngarrindjeri Tribe"
+                    className="MuiAvatar-img"
+                    src="/tribe.png"
+                  />
+                </div>
+              </a>
             </div>
             <div
               className="MuiGrid-root makeStyles-text-671 makeStyles-text-791 MuiGrid-item"
@@ -1728,15 +1738,20 @@ exports[`Storyshots Components|Title Title 1`] = `
 
 exports[`Storyshots Components|User Big User Avatar 1`] = `
 <div>
-  <div
-    className="MuiAvatar-root MuiAvatar-circle makeStyles-root-2464 makeStyles-root-2465"
+  <a
+    rel="noopener noreferrer"
+    target="_blank"
   >
-    <img
-      alt="Odonata"
-      className="MuiAvatar-img"
-      src="http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png"
-    />
-  </div>
+    <div
+      className="MuiAvatar-root MuiAvatar-circle makeStyles-root-2464 makeStyles-root-2465"
+    >
+      <img
+        alt="Odonata"
+        className="MuiAvatar-img"
+        src="http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png"
+      />
+    </div>
+  </a>
 </div>
 `;
 
@@ -1748,31 +1763,36 @@ exports[`Storyshots Components|User Big User Info 1`] = `
     <div
       className="MuiGrid-root MuiGrid-item"
     >
-      <div
-        className="MuiAvatar-root MuiAvatar-circle makeStyles-root-3070 makeStyles-root-3071"
+      <a
+        rel="noopener noreferrer"
+        target="_blank"
       >
-        <img
-          alt="Odonata"
-          className="MuiAvatar-img"
-          src="http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png"
-        />
-      </div>
+        <div
+          className="MuiAvatar-root MuiAvatar-circle makeStyles-root-3088 makeStyles-root-3089"
+        >
+          <img
+            alt="Odonata"
+            className="MuiAvatar-img"
+            src="http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png"
+          />
+        </div>
+      </a>
     </div>
     <div
-      className="MuiGrid-root makeStyles-text-2959 makeStyles-text-2963 MuiGrid-item"
+      className="MuiGrid-root makeStyles-text-2977 makeStyles-text-2981 MuiGrid-item"
     >
       <p
-        className="MuiTypography-root makeStyles-name-2960 makeStyles-name-2964 MuiTypography-body1"
+        className="MuiTypography-root makeStyles-name-2978 makeStyles-name-2982 MuiTypography-body1"
       >
         Odonata
       </p>
       <p
-        className="MuiTypography-root makeStyles-place-2962 makeStyles-place-2965 MuiTypography-body1"
+        className="MuiTypography-root makeStyles-place-2980 makeStyles-place-2983 MuiTypography-body1"
       >
         South Melbourne, Victoria, Australia
       </p>
       <p
-        className="MuiTypography-root makeStyles-description-2961 MuiTypography-body1"
+        className="MuiTypography-root makeStyles-description-2979 MuiTypography-body1"
       >
         Odonata is a not-for-profit entity supporting biodiversity impact solutions.
       </p>
@@ -1789,31 +1809,36 @@ exports[`Storyshots Components|User Column User Info 1`] = `
     <div
       className="MuiGrid-root MuiGrid-item"
     >
-      <div
-        className="MuiAvatar-root MuiAvatar-circle makeStyles-root-3370 makeStyles-root-3371"
+      <a
+        rel="noopener noreferrer"
+        target="_blank"
       >
-        <img
-          alt="Odonata"
-          className="MuiAvatar-img"
-          src="http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png"
-        />
-      </div>
+        <div
+          className="MuiAvatar-root MuiAvatar-circle makeStyles-root-3388 makeStyles-root-3389"
+        >
+          <img
+            alt="Odonata"
+            className="MuiAvatar-img"
+            src="http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png"
+          />
+        </div>
+      </a>
     </div>
     <div
-      className="MuiGrid-root makeStyles-text-3259 makeStyles-text-3263 MuiGrid-item"
+      className="MuiGrid-root makeStyles-text-3277 makeStyles-text-3281 MuiGrid-item"
     >
       <p
-        className="MuiTypography-root makeStyles-name-3260 makeStyles-name-3264 MuiTypography-body1"
+        className="MuiTypography-root makeStyles-name-3278 makeStyles-name-3282 MuiTypography-body1"
       >
         Odonata
       </p>
       <p
-        className="MuiTypography-root makeStyles-place-3262 makeStyles-place-3265 MuiTypography-body1"
+        className="MuiTypography-root makeStyles-place-3280 makeStyles-place-3283 MuiTypography-body1"
       >
         South Melbourne, Victoria, Australia
       </p>
       <p
-        className="MuiTypography-root makeStyles-description-3261 MuiTypography-body1"
+        className="MuiTypography-root makeStyles-description-3279 MuiTypography-body1"
       >
         Odonata is a not-for-profit entity supporting biodiversity impact solutions.
       </p>
@@ -1824,35 +1849,45 @@ exports[`Storyshots Components|User Column User Info 1`] = `
 
 exports[`Storyshots Components|User Fallback User Avatar 1`] = `
 <div>
-  <div
-    className="MuiAvatar-root MuiAvatar-circle makeStyles-root-2491 makeStyles-root-2492 MuiAvatar-colorDefault"
+  <a
+    rel="noopener noreferrer"
+    target="_blank"
   >
-    <svg
-      aria-hidden="true"
-      className="MuiSvgIcon-root MuiAvatar-fallback"
-      focusable="false"
-      role="presentation"
-      viewBox="0 0 24 24"
+    <div
+      className="MuiAvatar-root MuiAvatar-circle makeStyles-root-2509 makeStyles-root-2510 MuiAvatar-colorDefault"
     >
-      <path
-        d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
-      />
-    </svg>
-  </div>
+      <svg
+        aria-hidden="true"
+        className="MuiSvgIcon-root MuiAvatar-fallback"
+        focusable="false"
+        role="presentation"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
+        />
+      </svg>
+    </div>
+  </a>
 </div>
 `;
 
 exports[`Storyshots Components|User Medium User Avatar 1`] = `
 <div>
-  <div
-    className="MuiAvatar-root MuiAvatar-circle makeStyles-root-2446 makeStyles-root-2447"
+  <a
+    rel="noopener noreferrer"
+    target="_blank"
   >
-    <img
-      alt="Odonata"
-      className="MuiAvatar-img"
-      src="http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png"
-    />
-  </div>
+    <div
+      className="MuiAvatar-root MuiAvatar-circle makeStyles-root-2446 makeStyles-root-2447"
+    >
+      <img
+        alt="Odonata"
+        className="MuiAvatar-img"
+        src="http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png"
+      />
+    </div>
+  </a>
 </div>
 `;
 
@@ -1864,31 +1899,36 @@ exports[`Storyshots Components|User Medium User Info 1`] = `
     <div
       className="MuiGrid-root MuiGrid-item"
     >
-      <div
-        className="MuiAvatar-root MuiAvatar-circle makeStyles-root-2770 makeStyles-root-2771"
+      <a
+        rel="noopener noreferrer"
+        target="_blank"
       >
-        <img
-          alt="Odonata"
-          className="MuiAvatar-img"
-          src="http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png"
-        />
-      </div>
+        <div
+          className="MuiAvatar-root MuiAvatar-circle makeStyles-root-2788 makeStyles-root-2789"
+        >
+          <img
+            alt="Odonata"
+            className="MuiAvatar-img"
+            src="http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png"
+          />
+        </div>
+      </a>
     </div>
     <div
-      className="MuiGrid-root makeStyles-text-2659 makeStyles-text-2663 MuiGrid-item"
+      className="MuiGrid-root makeStyles-text-2677 makeStyles-text-2681 MuiGrid-item"
     >
       <p
-        className="MuiTypography-root makeStyles-name-2660 makeStyles-name-2664 MuiTypography-body1"
+        className="MuiTypography-root makeStyles-name-2678 makeStyles-name-2682 MuiTypography-body1"
       >
         Odonata
       </p>
       <p
-        className="MuiTypography-root makeStyles-place-2662 makeStyles-place-2665 MuiTypography-body1"
+        className="MuiTypography-root makeStyles-place-2680 makeStyles-place-2683 MuiTypography-body1"
       >
         South Melbourne, Victoria, Australia
       </p>
       <p
-        className="MuiTypography-root makeStyles-description-2661 MuiTypography-body1"
+        className="MuiTypography-root makeStyles-description-2679 MuiTypography-body1"
       >
         Odonata is a not-for-profit entity supporting biodiversity impact solutions.
       </p>
@@ -1897,11 +1937,31 @@ exports[`Storyshots Components|User Medium User Info 1`] = `
 </div>
 `;
 
+exports[`Storyshots Components|User User Avatar With Link 1`] = `
+<div>
+  <a
+    href="http://www.odonata.org.au"
+    rel="noopener noreferrer"
+    target="_blank"
+  >
+    <div
+      className="MuiAvatar-root MuiAvatar-circle makeStyles-root-2482 makeStyles-root-2483"
+    >
+      <img
+        alt="Odonata"
+        className="MuiAvatar-img"
+        src="http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png"
+      />
+    </div>
+  </a>
+</div>
+`;
+
 exports[`Storyshots Components|User With Title 1`] = `
 <div>
   <div>
     <p
-      className="MuiTypography-root makeStyles-title-3560 MuiTypography-body1"
+      className="MuiTypography-root makeStyles-title-3578 MuiTypography-body1"
     >
       project developer
     </p>
@@ -1911,31 +1971,36 @@ exports[`Storyshots Components|User With Title 1`] = `
       <div
         className="MuiGrid-root MuiGrid-item"
       >
-        <div
-          className="MuiAvatar-root MuiAvatar-circle makeStyles-root-3702 makeStyles-root-3703"
+        <a
+          rel="noopener noreferrer"
+          target="_blank"
         >
-          <img
-            alt="Odonata"
-            className="MuiAvatar-img"
-            src="http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png"
-          />
-        </div>
+          <div
+            className="MuiAvatar-root MuiAvatar-circle makeStyles-root-3720 makeStyles-root-3721"
+          >
+            <img
+              alt="Odonata"
+              className="MuiAvatar-img"
+              src="http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png"
+            />
+          </div>
+        </a>
       </div>
       <div
-        className="MuiGrid-root makeStyles-text-3591 makeStyles-text-3595 MuiGrid-item"
+        className="MuiGrid-root makeStyles-text-3609 makeStyles-text-3613 MuiGrid-item"
       >
         <p
-          className="MuiTypography-root makeStyles-name-3592 makeStyles-name-3596 MuiTypography-body1"
+          className="MuiTypography-root makeStyles-name-3610 makeStyles-name-3614 MuiTypography-body1"
         >
           Odonata
         </p>
         <p
-          className="MuiTypography-root makeStyles-place-3594 makeStyles-place-3597 MuiTypography-body1"
+          className="MuiTypography-root makeStyles-place-3612 makeStyles-place-3615 MuiTypography-body1"
         >
           South Melbourne, Victoria, Australia
         </p>
         <p
-          className="MuiTypography-root makeStyles-description-3593 MuiTypography-body1"
+          className="MuiTypography-root makeStyles-description-3611 MuiTypography-body1"
         >
           Odonata is a not-for-profit entity supporting biodiversity impact solutions.
         </p>

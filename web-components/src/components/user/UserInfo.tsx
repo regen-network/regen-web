@@ -3,25 +3,27 @@ import { makeStyles, Theme } from '@material-ui/core';
 import Grid, { GridDirection } from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import UserAvatar from './UserAvatar';
-import { getFontSize, FontSizes } from '../../theme/sizing';
+import { getFontSize } from '../../theme/sizing';
 
 export interface User {
   name: string;
   place?: string;
   imgSrc: string;
   description?: string;
+  link?: string;
 }
 
 interface UserInfoProps {
   user: User;
   size?: string;
   direction?: GridDirection;
+  border?: boolean;
 }
 
 interface StyleProps {
-  fontSize: FontSizes;
   description?: string;
   direction?: GridDirection;
+  size: string;
 }
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
@@ -31,13 +33,13 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   }),
   name: props => ({
     [theme.breakpoints.up('sm')]: {
-      fontSize: props.fontSize.sm,
+      fontSize: getFontSize(props.size).sm,
     },
     [theme.breakpoints.down('xs')]: {
-      fontSize: props.fontSize.xs,
+      fontSize: getFontSize(props.size).xs,
     },
-    fontWeight: 'bold',
-    // paddingBottom: theme.spacing(1.5),
+    fontFamily: props.size === 'xl' ? theme.typography.h1.fontFamily : theme.typography.fontFamily,
+    fontWeight: props.size === 'xl' ? 900 : 'bold',
   }),
   description: {
     [theme.breakpoints.up('sm')]: {
@@ -46,11 +48,10 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     [theme.breakpoints.down('xs')]: {
       fontSize: getFontSize('medium').xs,
     },
-    color: theme.palette.info.main,
+    color: theme.palette.info.dark,
   },
   place: props => ({
-    color: theme.palette.info.main,
-    // color: props.description ? '#8F8F8F' : theme.palette.info.main,
+    color: theme.palette.info.dark,
     [theme.breakpoints.up('sm')]: {
       fontSize: getFontSize('small').sm,
     },
@@ -61,13 +62,18 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   }),
 }));
 
-export default function UserInfo({ user, size, direction }: UserInfoProps): JSX.Element {
-  const fontSize: FontSizes = getFontSize(size);
-  const classes = useStyles({ fontSize, description: user.description, direction });
+export default function UserInfo({
+  user,
+  size = 'big',
+  direction,
+  border = true,
+}: UserInfoProps): JSX.Element {
+  const classes = useStyles({ description: user.description, direction, size });
+
   return (
     <Grid container direction={direction} wrap="nowrap">
       <Grid item>
-        <UserAvatar alt={user.name} src={user.imgSrc} size={size} />
+        <UserAvatar alt={user.name} src={user.imgSrc} href={user.link} size={size} border={border} />
       </Grid>
       <Grid item className={classes.text}>
         <Typography className={classes.name}>{user.name}</Typography>

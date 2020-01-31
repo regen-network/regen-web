@@ -14,7 +14,7 @@ interface StyleProps {
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   root: props => ({
-    color: theme.palette.info.main,
+    color: theme.palette.info.dark,
     marginBottom: theme.spacing(1.5),
     whiteSpace: 'pre-wrap',
     [theme.breakpoints.up('sm')]: {

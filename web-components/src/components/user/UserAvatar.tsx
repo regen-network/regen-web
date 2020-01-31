@@ -7,17 +7,18 @@ interface UserAvatarProps {
   alt?: string;
   src?: string;
   size?: string;
+  border?: boolean;
+  href?: string;
 }
 
 interface StyleProps {
   spacing: Sizes;
+  border: boolean;
 }
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   root: props => ({
-    borderWidth: '1px',
-    borderStyle: 'solid',
-    borderColor: '#D2D5D9',
+    border: props.border ? '1px solid #D2D5D9' : 'none',
     [theme.breakpoints.up('sm')]: {
       width: theme.spacing(props.spacing.sm),
       height: theme.spacing(props.spacing.sm),
@@ -29,9 +30,17 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   }),
 }));
 
-export default function UserAvatar({ alt, src, size }: UserAvatarProps): JSX.Element {
+export default function UserAvatar({ alt, src, size, border = true, href }: UserAvatarProps): JSX.Element {
   const spacing: Sizes = getSize(size);
   // TODO: is fallback icon when src not provided ok? what about the bg color?
-  const classes = useStyles({ spacing });
-  return <Avatar className={classes.root} alt={alt} src={src} />;
+  const classes = useStyles({ spacing, border });
+  const avatar = <Avatar className={classes.root} alt={alt} src={src} />;
+  if (avatar) {
+    return (
+      <a href={href} target="_blank" rel="noopener noreferrer">
+        {avatar}
+      </a>
+    );
+  }
+  return avatar;
 }

@@ -41,7 +41,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     borderRadius: '5px 5px 0px 0px',
   },
   description: {
-    color: theme.palette.info.main,
+    color: theme.palette.info.dark,
     whiteSpace: 'pre-wrap',
     marginTop: theme.spacing(3.75),
     [theme.breakpoints.up('sm')]: {
@@ -61,7 +61,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     },
   },
   activities: {
-    color: theme.palette.info.main,
+    color: theme.palette.info.dark,
     margin: 0,
     paddingInlineStart: theme.spacing(4),
     listStyle: 'none',

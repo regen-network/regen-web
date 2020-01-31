@@ -1,11 +1,14 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
+
 import UserInfo, { User } from '../user/UserInfo';
 
 interface UserInfoWithTitleProps {
   user: User;
   title: string;
+  border?: boolean;
+  size?: string;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -24,12 +27,17 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function UserInfoWithTitle({ user, title }: UserInfoWithTitleProps): JSX.Element {
+export default function UserInfoWithTitle({
+  user,
+  title,
+  border = true,
+  size = 'big',
+}: UserInfoWithTitleProps): JSX.Element {
   const classes = useStyles({});
   return (
     <div>
       <Typography className={classes.title}>{title}</Typography>
-      <UserInfo user={user} size="big" />
+      <UserInfo user={user} size={size} border={border} />
     </div>
   );
 }

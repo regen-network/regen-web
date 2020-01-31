@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontSize: '0.875rem',
     lineHeight: '150%',
     marginBottom: theme.spacing(3),
-    color: theme.palette.info.main,
+    color: theme.palette.info.dark,
   },
   creditsContainer: {
     marginTop: theme.spacing(3.75),

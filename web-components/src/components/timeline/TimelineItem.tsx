@@ -67,14 +67,14 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     },
   }),
   date: {
-    color: '#8F8F8F',
+    color: theme.palette.info.main,
     paddingBottom: theme.spacing(0.75),
     [theme.breakpoints.down('xs')]: {
       fontSize: '0.875rem',
     },
   },
   description: {
-    color: '#8F8F8F',
+    color: theme.palette.info.main,
     [theme.breakpoints.up('sm')]: {
       fontSize: '0.875rem',
     },

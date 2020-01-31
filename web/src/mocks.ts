@@ -79,8 +79,9 @@ export const project: Project = {
   },
   creditsIssuer: {
     name: 'Regen Network',
-    place: 'Massachussets, United States',
+    description: 'Realigning the Economics of Agriculture',
     imgSrc: require('./assets/regen.png'),
+    link: 'https://www.regen.network/',
   },
   summaryDescription:
     'This project is restoring and conserving a large area of native grassland in Southern Australia.',

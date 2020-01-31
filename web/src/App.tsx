@@ -19,7 +19,7 @@ import Header from 'web-components/lib/components/header';
 import Description from 'web-components/lib/components/description';
 import Action from 'web-components/lib/components/action';
 import Timeline from 'web-components/lib/components/timeline';
-// import BuyFooter from 'web-components/lib/components/buy-footer';
+import Footer from 'web-components/lib/components/footer';
 import ReadMore from 'web-components/lib/components/read-more';
 import CreditDetails from 'web-components/lib/components/credits/CreditDetails';
 import ProtectedSpecies from 'web-components/lib/components/protected-species';
@@ -312,9 +312,6 @@ function ProjectDetails({ project }: ProjectProps): JSX.Element {
           <Timeline events={project.timeline} />
         </div>
       </div>
-      {/*<div className={classes.buyFooter}>
-        <BuyFooter onClick={() => {}} user={project.creditsIssuer} />
-      </div>*/}
     </div>
   );
 }
@@ -325,6 +322,7 @@ const App: React.FC = (): JSX.Element => {
     <div>
       <Header logo={logo} />
       <ProjectDetails project={project} />
+      <Footer user={project.creditsIssuer} />
     </div>
   );
 };

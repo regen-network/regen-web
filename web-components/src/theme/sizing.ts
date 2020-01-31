@@ -11,6 +11,9 @@ export interface FontSizes {
 export function getSize(size?: string): Sizes {
   let spacing: Sizes;
   switch (size) {
+    case 'xl':
+      spacing = { xs: 12.5, sm: 16 };
+      break;
     case 'big':
       spacing = { xs: 10, sm: 12 };
       break;
@@ -30,6 +33,9 @@ export function getSize(size?: string): Sizes {
 export function getFontSize(size?: string): FontSizes {
   let fontSize: FontSizes;
   switch (size) {
+    case 'xl':
+      fontSize = { xs: '1.125rem', sm: '1.3125em' };
+      break;
     case 'big':
       fontSize = { xs: '1rem', sm: '1.125rem' };
       break;

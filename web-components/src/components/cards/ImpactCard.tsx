@@ -67,7 +67,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       paddingBottom: props.monitored ? theme.spacing(6.75) : theme.spacing(6),
     },
     paddingTop: props.monitored ? theme.spacing(3) : theme.spacing(2.25),
-    color: theme.palette.info.main,
+    color: theme.palette.info.dark,
   }),
   monitored: {
     display: 'flex',

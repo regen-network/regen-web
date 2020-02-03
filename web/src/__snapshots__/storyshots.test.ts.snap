@@ -619,7 +619,8 @@ exports[`Storyshots Components|Place Project Place Info 1`] = `
           |  
       </span>
       440
-       hectares
+       
+      hectares
     </p>
   </div>
 </div>

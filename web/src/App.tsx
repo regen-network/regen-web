@@ -2,7 +2,6 @@ import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 
-import coorong from './assets/coorong.png';
 import map from './assets/map.png';
 import logo from './assets/logo.png';
 import background from './assets/background.jpg';
@@ -23,6 +22,7 @@ import Footer from 'web-components/lib/components/footer';
 import ReadMore from 'web-components/lib/components/read-more';
 import CreditDetails from 'web-components/lib/components/credits/CreditDetails';
 import ProtectedSpecies from 'web-components/lib/components/protected-species';
+import { ItemProps as ProtectedSpeciesItem } from 'web-components/lib/components/protected-species/Item';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -200,7 +200,7 @@ interface ProjectProps {
 
 function ProjectDetails({ project }: ProjectProps): JSX.Element {
   const classes = useStyles({});
-  const impact: Impact[] = project.creditClass.methodology.impact;
+  const impact: Impact[] = project.impact;
   const monitoredImpact: Impact | undefined = impact.find(({ monitored }) => monitored === true);
 
   if (monitoredImpact) {
@@ -208,19 +208,28 @@ function ProjectDetails({ project }: ProjectProps): JSX.Element {
     impact.splice(monitoredIndex, 1);
   }
 
+  let protectedSpecies: ProtectedSpeciesItem[] = [];
+
+  if (project.protectedSpecies) {
+    protectedSpecies = project.protectedSpecies.map(item => ({
+      name: item.name,
+      imgSrc: require(`./assets/${item.imgSrc}`),
+    }));
+  }
+
   return (
     <div className={classes.root}>
       <div className={`${classes.projectTop} project-top`}>
         <Grid container className={`${classes.projectContent} ${classes.projectTopContent}`}>
           <Grid item xs={12} sm={6}>
-            <img alt={project.name} src={coorong} />
+            <img alt={project.name} src={require(`./assets/${project.photos[0]}`)} />
           </Grid>
           <Grid item xs={12} sm={6} className={classes.projectTopText}>
             <Title variant="h1">{project.name}</Title>
             <div className={classes.projectPlace}>
-              <ProjectPlaceInfo place={project.place} area={project.area} />
+              <ProjectPlaceInfo place={project.place} area={project.area} areaUnit={project.areaUnit} />
             </div>
-            <Description fontSize={getFontSize('big')}>{project.summaryDescription}</Description>
+            <Description fontSize={getFontSize('big')}>{project.shortDescription}</Description>
             <div className={classes.projectDeveloper}>
               <ProjectDeveloperCard projectDeveloper={project.developer} landSteward={project.steward} />
             </div>
@@ -231,7 +240,7 @@ function ProjectDetails({ project }: ProjectProps): JSX.Element {
       <div className={classes.projectContent}>
         <div className={classes.projectStoryText}>
           <Title variant="h2">Story</Title>
-          <ReadMore>{project.detailedDescription}</ReadMore>
+          <ReadMore>{project.longDescription}</ReadMore>
         </div>
       </div>
 
@@ -244,15 +253,15 @@ function ProjectDetails({ project }: ProjectProps): JSX.Element {
             <ImpactCard
               name={monitoredImpact.name}
               description={monitoredImpact.description}
-              imgSrc={monitoredImpact.imgSrc}
+              imgSrc={require(`./assets/${monitoredImpact.imgSrc}`)}
               monitored
             />
           </Grid>
         )}
-        {project.protectedSpecies && (
+        {protectedSpecies && (
           <Grid item xs={12} sm={4} className={classes.protectedSpecies}>
             <Title variant="h3">Protected Species</Title>
-            <ProtectedSpecies species={project.protectedSpecies} />
+            <ProtectedSpecies species={protectedSpecies} />
           </Grid>
         )}
       </Grid>
@@ -274,7 +283,11 @@ function ProjectDetails({ project }: ProjectProps): JSX.Element {
               className={`${classes.projectGridItem} ${classes.projectImpact}`}
               key={`${index}-${item.name}`}
             >
-              <ImpactCard name={item.name} description={item.description} imgSrc={item.imgSrc} />
+              <ImpactCard
+                name={item.name}
+                description={item.description}
+                imgSrc={require(`./assets/${item.imgSrc}`)}
+              />
             </Grid>
           ))}
         </Grid>
@@ -284,7 +297,7 @@ function ProjectDetails({ project }: ProjectProps): JSX.Element {
         <CreditDetails
           name={project.creditClass.name}
           description={project.creditClass.description}
-          activities={project.creditClass.activities}
+          activities={project.keyOutcomesActivities}
           background={background}
         />
       </div>
@@ -295,9 +308,13 @@ function ProjectDetails({ project }: ProjectProps): JSX.Element {
           This is how the project developers are planning to achieve the primary impact.
         </Description>
         <Grid container className={`${classes.projectGrid} ${classes.projectActionsGrid}`}>
-          {project.creditClass.methodology.actions.map((action, index) => (
+          {project.landManagementActions.map((action, index) => (
             <Grid item xs={12} sm={4} className={classes.projectGridItem} key={`${index}-${action.name}`}>
-              <Action name={action.name} description={action.description} imgSrc={action.imgSrc} />
+              <Action
+                name={action.name}
+                description={action.description}
+                imgSrc={require(`./assets/${action.imgSrc}`)}
+              />
             </Grid>
           ))}
         </Grid>

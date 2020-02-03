@@ -5,6 +5,7 @@ import { makeStyles, Theme } from '@material-ui/core';
 interface ProjectPlaceInfoProps {
   place: string;
   area: number;
+  areaUnit: string;
   fontSize?: string;
   color?: string;
 }
@@ -18,6 +19,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 export default function ProjectPlaceInfo({
   place,
   area,
+  areaUnit,
   fontSize,
   color,
 }: ProjectPlaceInfoProps): JSX.Element {
@@ -27,7 +29,7 @@ export default function ProjectPlaceInfo({
     <PlaceInfo fontSize={fontSize} color={color}>
       {place}
       <span className={classes.separator}>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
-      {area} hectares
+      {area} {areaUnit}
     </PlaceInfo>
   );
 }

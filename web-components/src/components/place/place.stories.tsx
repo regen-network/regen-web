@@ -15,7 +15,11 @@ export const basicPlaceInfo = (): JSX.Element => (
 );
 
 export const projectPlaceInfo = (): JSX.Element => (
-  <ProjectPlaceInfo place={text('place', 'Melbourne, Victoria, Australia')} area={number('area', 440)} />
+  <ProjectPlaceInfo
+    place={text('place', 'Melbourne, Victoria, Australia')}
+    area={number('area', 440)}
+    areaUnit={text('areaUnit', 'hectares')}
+  />
 );
 
 export const creditPlaceInfo = (): JSX.Element => (

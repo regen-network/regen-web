@@ -8,6 +8,7 @@ export interface ProjectInfo {
   imgSrc: string;
   place: string;
   area: number;
+  areaUnit: string;
 }
 
 interface ProjectCardProps {
@@ -22,6 +23,7 @@ export default function ProjectCard({ project, onClick }: ProjectCardProps): JSX
       <ProjectPlaceInfo
         place={project.place}
         area={project.area}
+        areaUnit={project.areaUnit}
         fontSize="0.75rem"
         color={theme.palette.primary.light}
       />

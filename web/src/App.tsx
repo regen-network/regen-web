@@ -24,6 +24,7 @@ import ReadMore from 'web-components/lib/components/read-more';
 import CreditDetails from 'web-components/lib/components/credits/CreditDetails';
 import ProtectedSpecies from 'web-components/lib/components/protected-species';
 import { ItemProps as ProtectedSpeciesItem } from 'web-components/lib/components/protected-species/Item';
+import { User } from 'web-components/lib/components/user/UserInfo';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -199,6 +200,28 @@ interface ProjectProps {
   project: Project;
 }
 
+function validURL(str: string): boolean {
+  return str.startsWith('http');
+}
+
+function getImgSrc(imgSrc: string): string {
+  if (!validURL(imgSrc)) {
+    return require(`./assets/${imgSrc}`);
+  }
+  return imgSrc;
+}
+
+function getProjectUser(projectUser: User): User {
+  const user: User = {
+    name: projectUser.name,
+    description: projectUser.description,
+  };
+  if (projectUser.imgSrc) {
+    user.imgSrc = getImgSrc(projectUser.imgSrc);
+  }
+  return user;
+}
+
 function ProjectDetails({ project }: ProjectProps): JSX.Element {
   const classes = useStyles({});
   const impact: Impact[] = project.impact;
@@ -210,13 +233,15 @@ function ProjectDetails({ project }: ProjectProps): JSX.Element {
   }
 
   let protectedSpecies: ProtectedSpeciesItem[] = [];
-
   if (project.protectedSpecies) {
     protectedSpecies = project.protectedSpecies.map(item => ({
       name: item.name,
-      imgSrc: require(`./assets/${item.imgSrc}`),
+      imgSrc: getImgSrc(item.imgSrc),
     }));
   }
+
+  const projectDeveloper: User = getProjectUser(project.developer);
+  const landSteward: User = getProjectUser(project.steward);
 
   return (
     <div className={classes.root}>
@@ -232,7 +257,7 @@ function ProjectDetails({ project }: ProjectProps): JSX.Element {
             </div>
             <Description fontSize={getFontSize('big')}>{project.shortDescription}</Description>
             <div className={classes.projectDeveloper}>
-              <ProjectDeveloperCard projectDeveloper={project.developer} landSteward={project.steward} />
+              <ProjectDeveloperCard projectDeveloper={projectDeveloper} landSteward={landSteward} />
             </div>
           </Grid>
         </Grid>
@@ -357,11 +382,15 @@ function Projects(): JSX.Element {
 
   return (
     <div>
-      {projects.map((p, i) => (
-        <Link key={i} to={`${url}/${p.id}`}>
-          {p.name}
-        </Link>
-      ))}
+      <ul>
+        {projects.map((p, i) => (
+          <li key={p.id}>
+            <Link key={i} to={`${url}/${p.id}`}>
+              {p.name}
+            </Link>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

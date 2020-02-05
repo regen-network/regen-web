@@ -24,12 +24,12 @@ export default function ProjectPlaceInfo({
   color,
 }: ProjectPlaceInfoProps): JSX.Element {
   const classes = useStyles({});
-
+  const displayedArea: string = new Intl.NumberFormat('en-US').format(area);
   return (
     <PlaceInfo fontSize={fontSize} color={color}>
       {place}
       <span className={classes.separator}>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
-      {area} {areaUnit}
+      {displayedArea} {areaUnit}
     </PlaceInfo>
   );
 }

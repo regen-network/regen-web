@@ -1,13 +1,14 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
+import { BrowserRouter as Router, Switch, Route, Link, useParams, useRouteMatch } from 'react-router-dom';
 
 import map from './assets/map.png';
 import logo from './assets/logo.png';
 import background from './assets/background.jpg';
 
 import './App.css';
-import { project, Project, Impact } from './mocks';
+import { projects, creditsIssuer, Project, Impact } from './mocks';
 
 import { getFontSize } from 'web-components/lib/theme/sizing';
 import Title from 'web-components/lib/components/title';
@@ -333,14 +334,63 @@ function ProjectDetails({ project }: ProjectProps): JSX.Element {
   );
 }
 
+function Home(): JSX.Element {
+  return (
+    <div>
+      <Link to="/p">Project list</Link>
+    </div>
+  );
+}
+
+function ProjectContainer(): JSX.Element {
+  let { projectId } = useParams();
+  const project: Project | undefined = projects.find(p => p.id === projectId);
+
+  if (project) {
+    return <ProjectDetails project={project} />;
+  }
+  return <div>No project found</div>;
+}
+
+function Projects(): JSX.Element {
+  let { url } = useRouteMatch();
+
+  return (
+    <div>
+      {projects.map((p, i) => (
+        <Link key={i} to={`${url}/${p.id}`}>
+          {p.name}
+        </Link>
+      ))}
+    </div>
+  );
+}
+
 // TODO: create component for project page
 const App: React.FC = (): JSX.Element => {
   return (
-    <div>
-      <Header logo={logo} />
-      <ProjectDetails project={project} />
-      <Footer user={project.creditsIssuer} />
-    </div>
+    <Router>
+      <div>
+        <Header logo={logo} />
+        <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          <Route
+            path="/p"
+            render={({ match: { path } }) => (
+              <>
+                <Route path={`${path}`} component={Projects} exact />
+                <Route path={`${path}/:projectId`} component={ProjectContainer} />
+              </>
+            )}
+          />
+        </Switch>
+        <footer>
+          <Footer user={creditsIssuer} />
+        </footer>
+      </div>
+    </Router>
   );
 };
 

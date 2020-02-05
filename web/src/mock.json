@@ -1,8 +1,14 @@
 {
+  "creditsIssuer": {
+    "name": "Regen Network",
+    "description": "Realigning the Economics of Agriculture",
+    "imgSrc": "regen.png",
+    "link": "https://www.regen.network/"
+  },
   "projects": [
     {
       "id": "odonata",
-      "name": "Doorong Project",
+      "name": "Coorong Project",
       "place": "Meningie, South Australia, Australia",
       "type": "Conservation project",
       "area": 200,
@@ -20,12 +26,6 @@
         "place": "Southern Australia",
         "imgSrc": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Ngarrindjeri_Nation_Flag.svg/250px-Ngarrindjeri_Nation_Flag.svg.png",
         "description": "The Ngarrindjeri culture is centered around the lower lakes of the Murray River."
-      },
-      "creditsIssuer": {
-        "name": "Regen Network",
-        "description": "Realigning the Economics of Agriculture",
-        "imgSrc": "regen.png",
-        "link": "https://www.regen.network/"
       },
       "shortDescription": "This project is restoring and conserving a large area of native grassland in Southern Australia.",
       "longDescription": "The project will see up to 1.3M Biodiversity Offset Units become available via formal accreditation with the South Australian Department of Environment and Water. The unique site comprises a pristine example of shrub and woodlands associated with the RAMSAR recognised Coorong Region, of particular cultural and environmental significance. A comprehensive site management plan will be undertaken in partnership with local indigenous land owners with the ownership of this and eventually passed on to these groups.\n\nThis project represents a truly unique offsetting opportunity, in proximity to Adelaide and in a vitally important bioregion.\n\nThis property is a rare pocket of wetlands and woodlands located near the township of Menindee South Australia, nestled in between the Coorong national park and Lake Albert.\n\nAs one of the few remaining sections of privately owned remnant vegetation in the area, this represents a unique opportunity for long term preservation. The Coorong, Lake Alexandrina and Lake Albert Wetland is an international significant RAMSAR wetland ecosystems at the intersection of the Murray River and Southern Ocean.\n\nThis vital habitat comprises a unique mix of both freshwater and saltwater wetlands and coastal woodlands. The Coorong is the heart of the traditional lands of Ngarrindjeri people, who have hunted and camped on the Mt Sandy property for thousands of years.",

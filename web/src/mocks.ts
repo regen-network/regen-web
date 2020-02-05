@@ -43,7 +43,6 @@ export interface Project {
   developer: User;
   steward: User;
   owner?: User;
-  creditsIssuer: User;
   shortDescription: string;
   longDescription: string;
   photos: string[];
@@ -56,4 +55,10 @@ export interface Project {
   // missing: gis, documents
 }
 
-export const project = mock.projects[0];
+export interface Mock {
+  creditsIssuer: User;
+  projects: Project[];
+}
+
+export const creditsIssuer: User = mock.creditsIssuer;
+export const projects: Project[] = mock.projects;

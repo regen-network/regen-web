@@ -37,7 +37,7 @@ export interface Project {
   place: string;
   type: string;
   area: number;
-  areaUnit: string; // 'hectares' | 'acres';
+  areaUnit: string;
   startDate: Date | string;
   endDate: Date | string;
   developer: User;

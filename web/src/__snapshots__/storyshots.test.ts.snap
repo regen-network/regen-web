@@ -243,6 +243,117 @@ exports[`Storyshots Components|Cards Monitored Impact Card 1`] = `
 </div>
 `;
 
+exports[`Storyshots Components|Cards Project Card 1`] = `
+<div>
+  <div
+    className="MuiPaper-root MuiCard-root makeStyles-root-1316 makeStyles-root-1317 MuiPaper-elevation1 MuiPaper-rounded"
+    onClick={[Function]}
+  >
+    <div
+      className="MuiCardMedia-root makeStyles-image-1314"
+      style={
+        Object {
+          "backgroundImage": "url(\\"/coorong.png\\")",
+        }
+      }
+    >
+      <div
+        className="makeStyles-tag-1315"
+      >
+        biodiversity
+      </div>
+    </div>
+    <div
+      className="makeStyles-container-1312"
+    >
+      <h3
+        className="MuiTypography-root makeStyles-root-1350 undefined MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+      >
+        Coorong Project
+      </h3>
+      <div
+        className="makeStyles-content-1313"
+      >
+        <div
+          className="makeStyles-root-1382"
+        >
+          <svg
+            aria-hidden="true"
+            className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
+            focusable="false"
+            role="presentation"
+            viewBox="0 0 13 16"
+          >
+            <path
+              d="M13 6.375C13 11.2343 7.97202 14.9913 6.76036 15.8261C6.60169 15.9354 6.39831 15.9354 6.23964 15.8261C5.02798 14.9913 0 11.2343 0 6.375C0 2.85418 2.91015 0 6.5 0C10.0899 0 13 2.85418 13 6.375Z"
+              fill="#D2D5D9"
+            />
+            <circle
+              cx="6.5"
+              cy="6.5"
+              fill="white"
+              r="3.5"
+            />
+            <path
+              d="M13 6.375C13 11.2343 7.97202 14.9913 6.76036 15.8261C6.60169 15.9354 6.39831 15.9354 6.23964 15.8261C5.02798 14.9913 0 11.2343 0 6.375C0 2.85418 2.91015 0 6.5 0C10.0899 0 13 2.85418 13 6.375Z"
+              fill="#4FB573"
+            />
+            <circle
+              cx="6.5"
+              cy="6.5"
+              fill="white"
+              r="3.5"
+            />
+          </svg>
+          <p
+            className="MuiTypography-root makeStyles-content-1383 makeStyles-content-1384 MuiTypography-body1"
+          >
+            Adelaide, South Australia, Australia
+            <span
+              className="makeStyles-separator-1381"
+            >
+                |  
+            </span>
+            4,500
+             
+            ha.
+          </p>
+        </div>
+        <hr
+          className="makeStyles-separator-1311"
+        />
+        <div
+          className="MuiGrid-root MuiGrid-container MuiGrid-wrap-xs-nowrap"
+        >
+          <div
+            className="MuiGrid-root MuiGrid-item"
+          >
+            <div
+              className="MuiAvatar-root MuiAvatar-circle makeStyles-root-1506 makeStyles-root-1507"
+            >
+              <img
+                alt="Odonata"
+                className="MuiAvatar-img"
+                src="http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png"
+              />
+            </div>
+          </div>
+          <div
+            className="MuiGrid-root makeStyles-text-1394 makeStyles-text-1399 MuiGrid-item"
+          >
+            <p
+              className="MuiTypography-root makeStyles-name-1395 makeStyles-name-1400 MuiTypography-body1"
+            >
+              Odonata
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
 exports[`Storyshots Components|Cards Project Developer Card 1`] = `
 <div>
   <div
@@ -350,22 +461,22 @@ exports[`Storyshots Components|Cards Project Developer Card 1`] = `
 exports[`Storyshots Components|Credits Credit Details 1`] = `
 <div>
   <div
-    className="makeStyles-root-1159 makeStyles-root-1170"
+    className="makeStyles-root-1567 makeStyles-root-1578"
   >
     <div
-      className="makeStyles-topBar-1160"
+      className="makeStyles-topBar-1568"
     />
     <div
-      className="makeStyles-container-1166"
+      className="makeStyles-container-1574"
     >
       <div
-        className="makeStyles-descriptionTitle-1167"
+        className="makeStyles-descriptionTitle-1575"
       >
         <h2
-          className="MuiTypography-root makeStyles-root-1171 undefined MuiTypography-h2 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+          className="MuiTypography-root makeStyles-root-1579 undefined MuiTypography-h2 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
         >
           <span
-            className="makeStyles-icon-1165"
+            className="makeStyles-icon-1573"
           >
             <svg
               aria-hidden="true"
@@ -420,50 +531,50 @@ exports[`Storyshots Components|Credits Credit Details 1`] = `
         </h2>
       </div>
       <div
-        className="makeStyles-descriptionItem-1168"
+        className="makeStyles-descriptionItem-1576"
       >
         <p
-          className="MuiTypography-root makeStyles-description-1161 MuiTypography-body1"
+          className="MuiTypography-root makeStyles-description-1569 MuiTypography-body1"
         >
           ABU’s are an Australian Government endorsed biodiversity credit. An individual ABU represents a 1.5m square area of land of significant environmental value that has been placed under a conservation covenant and agreed management plan. The covenant and management plan secure the long term preservation of the site and ensure the biodiversity value is protected in perpetuity. Vegetation types may include forests, grasslands, mallees, saltmarshes, scrubs, shrublands, wetlands, and woodlands. ABU’s are an innovative and unique way for organisations to preserve a tangible section of Australia’s unique natural habitat.
         </p>
       </div>
       <div
-        className="makeStyles-activitiesTitle-1169"
+        className="makeStyles-activitiesTitle-1577"
       >
         <h3
-          className="MuiTypography-root makeStyles-root-1171 undefined MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+          className="MuiTypography-root makeStyles-root-1579 undefined MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
         >
           Key activities and outcomes
         </h3>
       </div>
       <div>
         <ul
-          className="makeStyles-activities-1163"
+          className="makeStyles-activities-1571"
         >
           <p
-            className="MuiTypography-root makeStyles-activity-1164 MuiTypography-body1"
+            className="MuiTypography-root makeStyles-activity-1572 MuiTypography-body1"
           >
             <li>
               Site accredited as a Specific Environmental Benefit (SEB) site and credits created by the South Australian Department of Environment and Water.
             </li>
           </p>
           <p
-            className="MuiTypography-root makeStyles-activity-1164 MuiTypography-body1"
+            className="MuiTypography-root makeStyles-activity-1572 MuiTypography-body1"
           >
             <li>
               A land management services agreement will be established with a local indigenous group, employing people from the local community.
             </li>
           </p>
           <p
-            className="MuiTypography-root makeStyles-activity-1164 MuiTypography-body1"
+            className="MuiTypography-root makeStyles-activity-1572 MuiTypography-body1"
           >
             <li>
               The site will be managed in accordance with an agreed management plan to reduce weed pressure, improve the biodiversity value of the location and preserve the value of the land in perpetuity.
             </li>
           </p>
           <p
-            className="MuiTypography-root makeStyles-activity-1164 MuiTypography-body1"
+            className="MuiTypography-root makeStyles-activity-1572 MuiTypography-body1"
           >
             <li>
               After 10 years the land will be vetted to Rigney Namawi Pty Ltd (local indigenous traditional owners). Six monthly project updates in the form of videos, blog posts and photographs will be produced for the first 5 years of the project.
@@ -479,7 +590,7 @@ exports[`Storyshots Components|Credits Credit Details 1`] = `
 exports[`Storyshots Components|Description Description 1`] = `
 <div>
   <div
-    className="MuiTypography-root makeStyles-root-1243 makeStyles-root-1244 MuiTypography-body1"
+    className="MuiTypography-root makeStyles-root-1651 makeStyles-root-1652 MuiTypography-body1"
   >
     Sheoak Hill, 60km west of Melbourne, has the potential to revolutionise how our natural areas are funded to be restored and maintained in perpetuity. The concept is underpinned by the power of values-aligned landholders working collaboratively to purchase and lovingly maintain manageable areas (40ha) of covented bushland and work toward a common goal.
   </div>
@@ -489,7 +600,7 @@ exports[`Storyshots Components|Description Description 1`] = `
 exports[`Storyshots Components|Place Basic Place Info 1`] = `
 <div>
   <div
-    className="makeStyles-root-1317"
+    className="makeStyles-root-1725"
   >
     <svg
       aria-hidden="true"
@@ -520,7 +631,7 @@ exports[`Storyshots Components|Place Basic Place Info 1`] = `
       />
     </svg>
     <p
-      className="MuiTypography-root makeStyles-content-1318 makeStyles-content-1319 MuiTypography-body1"
+      className="MuiTypography-root makeStyles-content-1726 makeStyles-content-1727 MuiTypography-body1"
     >
       Melbourne, Victoria, Australia
     </p>
@@ -531,7 +642,7 @@ exports[`Storyshots Components|Place Basic Place Info 1`] = `
 exports[`Storyshots Components|Place Credit Place Info 1`] = `
 <div>
   <div
-    className="makeStyles-root-1489"
+    className="makeStyles-root-1897"
   >
     <svg
       aria-hidden="true"
@@ -562,12 +673,12 @@ exports[`Storyshots Components|Place Credit Place Info 1`] = `
       />
     </svg>
     <p
-      className="MuiTypography-root makeStyles-content-1490 makeStyles-content-1491 MuiTypography-body1"
+      className="MuiTypography-root makeStyles-content-1898 makeStyles-content-1899 MuiTypography-body1"
     >
       Brazil
        in 
       <span
-        className="makeStyles-outcome-1488"
+        className="makeStyles-outcome-1896"
       >
         carbon
       </span>
@@ -579,7 +690,7 @@ exports[`Storyshots Components|Place Credit Place Info 1`] = `
 exports[`Storyshots Components|Place Project Place Info 1`] = `
 <div>
   <div
-    className="makeStyles-root-1403"
+    className="makeStyles-root-1811"
   >
     <svg
       aria-hidden="true"
@@ -610,11 +721,11 @@ exports[`Storyshots Components|Place Project Place Info 1`] = `
       />
     </svg>
     <p
-      className="MuiTypography-root makeStyles-content-1404 makeStyles-content-1405 MuiTypography-body1"
+      className="MuiTypography-root makeStyles-content-1812 makeStyles-content-1813 MuiTypography-body1"
     >
       Melbourne, Victoria, Australia
       <span
-        className="makeStyles-separator-1402"
+        className="makeStyles-separator-1810"
       >
           |  
       </span>
@@ -629,15 +740,15 @@ exports[`Storyshots Components|Place Project Place Info 1`] = `
 exports[`Storyshots Components|Protected Species Item 1`] = `
 <div>
   <div
-    className="makeStyles-root-1564"
+    className="makeStyles-root-1972"
   >
     <img
       alt="Melaleuca brevifolia"
-      className="makeStyles-img-1565"
+      className="makeStyles-img-1973"
       src="./melaleuca-b.png"
     />
     <p
-      className="MuiTypography-root makeStyles-name-1566 MuiTypography-body1"
+      className="MuiTypography-root makeStyles-name-1974 MuiTypography-body1"
     >
       Melaleuca brevifolia
     </p>
@@ -655,7 +766,7 @@ exports[`Storyshots Components|Protected Species Protected Species 1`] = `
     >
       <div>
         <div
-          className="slick-slider makeStyles-root-1854 slick-initialized"
+          className="slick-slider makeStyles-root-2262 slick-initialized"
           dir="ltr"
         >
           <div
@@ -702,7 +813,7 @@ exports[`Storyshots Components|Protected Species Protected Species 1`] = `
               >
                 <div>
                   <div
-                    className="makeStyles-item-1855"
+                    className="makeStyles-item-2263"
                     style={
                       Object {
                         "display": "inline-block",
@@ -712,22 +823,22 @@ exports[`Storyshots Components|Protected Species Protected Species 1`] = `
                     tabIndex={-1}
                   >
                     <div
-                      className="makeStyles-root-1857"
+                      className="makeStyles-root-2265"
                     >
                       <img
                         alt="Melaleuca brevifolia"
-                        className="makeStyles-img-1858"
+                        className="makeStyles-img-2266"
                         src="./melaleuca-b.png"
                       />
                       <p
-                        className="MuiTypography-root makeStyles-name-1859 MuiTypography-body1"
+                        className="MuiTypography-root makeStyles-name-2267 MuiTypography-body1"
                       >
                         Melaleuca brevifolia
                       </p>
                     </div>
                   </div>
                   <div
-                    className="makeStyles-item-1855"
+                    className="makeStyles-item-2263"
                     style={
                       Object {
                         "display": "inline-block",
@@ -737,15 +848,15 @@ exports[`Storyshots Components|Protected Species Protected Species 1`] = `
                     tabIndex={-1}
                   >
                     <div
-                      className="makeStyles-root-1857"
+                      className="makeStyles-root-2265"
                     >
                       <img
                         alt="Melaleuca brevifolia"
-                        className="makeStyles-img-1858"
+                        className="makeStyles-img-2266"
                         src="./melaleuca-b.png"
                       />
                       <p
-                        className="MuiTypography-root makeStyles-name-1859 MuiTypography-body1"
+                        className="MuiTypography-root makeStyles-name-2267 MuiTypography-body1"
                       >
                         Melaleuca brevifolia
                       </p>
@@ -769,7 +880,7 @@ exports[`Storyshots Components|Protected Species Protected Species 1`] = `
               >
                 <div>
                   <div
-                    className="makeStyles-item-1855"
+                    className="makeStyles-item-2263"
                     style={
                       Object {
                         "display": "inline-block",
@@ -779,22 +890,22 @@ exports[`Storyshots Components|Protected Species Protected Species 1`] = `
                     tabIndex={-1}
                   >
                     <div
-                      className="makeStyles-root-1857"
+                      className="makeStyles-root-2265"
                     >
                       <img
                         alt="Melaleuca brevifolia"
-                        className="makeStyles-img-1858"
+                        className="makeStyles-img-2266"
                         src="./melaleuca-b.png"
                       />
                       <p
-                        className="MuiTypography-root makeStyles-name-1859 MuiTypography-body1"
+                        className="MuiTypography-root makeStyles-name-2267 MuiTypography-body1"
                       >
                         Melaleuca brevifolia
                       </p>
                     </div>
                   </div>
                   <div
-                    className="makeStyles-item-1855"
+                    className="makeStyles-item-2263"
                     style={
                       Object {
                         "display": "inline-block",
@@ -804,15 +915,15 @@ exports[`Storyshots Components|Protected Species Protected Species 1`] = `
                     tabIndex={-1}
                   >
                     <div
-                      className="makeStyles-root-1857"
+                      className="makeStyles-root-2265"
                     >
                       <img
                         alt="Melaleuca brevifolia"
-                        className="makeStyles-img-1858"
+                        className="makeStyles-img-2266"
                         src="./melaleuca-b.png"
                       />
                       <p
-                        className="MuiTypography-root makeStyles-name-1859 MuiTypography-body1"
+                        className="MuiTypography-root makeStyles-name-2267 MuiTypography-body1"
                       >
                         Melaleuca brevifolia
                       </p>
@@ -821,7 +932,7 @@ exports[`Storyshots Components|Protected Species Protected Species 1`] = `
                 </div>
                 <div>
                   <div
-                    className="makeStyles-item-1855"
+                    className="makeStyles-item-2263"
                     style={
                       Object {
                         "display": "inline-block",
@@ -831,22 +942,22 @@ exports[`Storyshots Components|Protected Species Protected Species 1`] = `
                     tabIndex={-1}
                   >
                     <div
-                      className="makeStyles-root-1857"
+                      className="makeStyles-root-2265"
                     >
                       <img
                         alt="Melaleuca brevifolia"
-                        className="makeStyles-img-1858"
+                        className="makeStyles-img-2266"
                         src="./melaleuca-b.png"
                       />
                       <p
-                        className="MuiTypography-root makeStyles-name-1859 MuiTypography-body1"
+                        className="MuiTypography-root makeStyles-name-2267 MuiTypography-body1"
                       >
                         Melaleuca brevifolia
                       </p>
                     </div>
                   </div>
                   <div
-                    className="makeStyles-item-1855"
+                    className="makeStyles-item-2263"
                     style={
                       Object {
                         "display": "inline-block",
@@ -856,15 +967,15 @@ exports[`Storyshots Components|Protected Species Protected Species 1`] = `
                     tabIndex={-1}
                   >
                     <div
-                      className="makeStyles-root-1857"
+                      className="makeStyles-root-2265"
                     >
                       <img
                         alt="Melaleuca brevifolia"
-                        className="makeStyles-img-1858"
+                        className="makeStyles-img-2266"
                         src="./melaleuca-b.png"
                       />
                       <p
-                        className="MuiTypography-root makeStyles-name-1859 MuiTypography-body1"
+                        className="MuiTypography-root makeStyles-name-2267 MuiTypography-body1"
                       >
                         Melaleuca brevifolia
                       </p>
@@ -887,7 +998,7 @@ exports[`Storyshots Components|Protected Species Protected Species 1`] = `
               >
                 <div>
                   <div
-                    className="makeStyles-item-1855"
+                    className="makeStyles-item-2263"
                     style={
                       Object {
                         "display": "inline-block",
@@ -897,22 +1008,22 @@ exports[`Storyshots Components|Protected Species Protected Species 1`] = `
                     tabIndex={-1}
                   >
                     <div
-                      className="makeStyles-root-1857"
+                      className="makeStyles-root-2265"
                     >
                       <img
                         alt="Melaleuca brevifolia"
-                        className="makeStyles-img-1858"
+                        className="makeStyles-img-2266"
                         src="./melaleuca-b.png"
                       />
                       <p
-                        className="MuiTypography-root makeStyles-name-1859 MuiTypography-body1"
+                        className="MuiTypography-root makeStyles-name-2267 MuiTypography-body1"
                       >
                         Melaleuca brevifolia
                       </p>
                     </div>
                   </div>
                   <div
-                    className="makeStyles-item-1855"
+                    className="makeStyles-item-2263"
                     style={
                       Object {
                         "display": "inline-block",
@@ -922,15 +1033,15 @@ exports[`Storyshots Components|Protected Species Protected Species 1`] = `
                     tabIndex={-1}
                   >
                     <div
-                      className="makeStyles-root-1857"
+                      className="makeStyles-root-2265"
                     >
                       <img
                         alt="Melaleuca brevifolia"
-                        className="makeStyles-img-1858"
+                        className="makeStyles-img-2266"
                         src="./melaleuca-b.png"
                       />
                       <p
-                        className="MuiTypography-root makeStyles-name-1859 MuiTypography-body1"
+                        className="MuiTypography-root makeStyles-name-2267 MuiTypography-body1"
                       >
                         Melaleuca brevifolia
                       </p>
@@ -939,7 +1050,7 @@ exports[`Storyshots Components|Protected Species Protected Species 1`] = `
                 </div>
                 <div>
                   <div
-                    className="makeStyles-item-1855"
+                    className="makeStyles-item-2263"
                     style={
                       Object {
                         "display": "inline-block",
@@ -949,22 +1060,22 @@ exports[`Storyshots Components|Protected Species Protected Species 1`] = `
                     tabIndex={-1}
                   >
                     <div
-                      className="makeStyles-root-1857"
+                      className="makeStyles-root-2265"
                     >
                       <img
                         alt="Melaleuca brevifolia"
-                        className="makeStyles-img-1858"
+                        className="makeStyles-img-2266"
                         src="./melaleuca-b.png"
                       />
                       <p
-                        className="MuiTypography-root makeStyles-name-1859 MuiTypography-body1"
+                        className="MuiTypography-root makeStyles-name-2267 MuiTypography-body1"
                       >
                         Melaleuca brevifolia
                       </p>
                     </div>
                   </div>
                   <div
-                    className="makeStyles-item-1855"
+                    className="makeStyles-item-2263"
                     style={
                       Object {
                         "display": "inline-block",
@@ -974,15 +1085,15 @@ exports[`Storyshots Components|Protected Species Protected Species 1`] = `
                     tabIndex={-1}
                   >
                     <div
-                      className="makeStyles-root-1857"
+                      className="makeStyles-root-2265"
                     >
                       <img
                         alt="Melaleuca brevifolia"
-                        className="makeStyles-img-1858"
+                        className="makeStyles-img-2266"
                         src="./melaleuca-b.png"
                       />
                       <p
-                        className="MuiTypography-root makeStyles-name-1859 MuiTypography-body1"
+                        className="MuiTypography-root makeStyles-name-2267 MuiTypography-body1"
                       >
                         Melaleuca brevifolia
                       </p>
@@ -1005,7 +1116,7 @@ exports[`Storyshots Components|Protected Species Protected Species 1`] = `
               >
                 <div>
                   <div
-                    className="makeStyles-item-1855"
+                    className="makeStyles-item-2263"
                     style={
                       Object {
                         "display": "inline-block",
@@ -1015,22 +1126,22 @@ exports[`Storyshots Components|Protected Species Protected Species 1`] = `
                     tabIndex={-1}
                   >
                     <div
-                      className="makeStyles-root-1857"
+                      className="makeStyles-root-2265"
                     >
                       <img
                         alt="Melaleuca brevifolia"
-                        className="makeStyles-img-1858"
+                        className="makeStyles-img-2266"
                         src="./melaleuca-b.png"
                       />
                       <p
-                        className="MuiTypography-root makeStyles-name-1859 MuiTypography-body1"
+                        className="MuiTypography-root makeStyles-name-2267 MuiTypography-body1"
                       >
                         Melaleuca brevifolia
                       </p>
                     </div>
                   </div>
                   <div
-                    className="makeStyles-item-1855"
+                    className="makeStyles-item-2263"
                     style={
                       Object {
                         "display": "inline-block",
@@ -1040,15 +1151,15 @@ exports[`Storyshots Components|Protected Species Protected Species 1`] = `
                     tabIndex={-1}
                   >
                     <div
-                      className="makeStyles-root-1857"
+                      className="makeStyles-root-2265"
                     >
                       <img
                         alt="Melaleuca brevifolia"
-                        className="makeStyles-img-1858"
+                        className="makeStyles-img-2266"
                         src="./melaleuca-b.png"
                       />
                       <p
-                        className="MuiTypography-root makeStyles-name-1859 MuiTypography-body1"
+                        className="MuiTypography-root makeStyles-name-2267 MuiTypography-body1"
                       >
                         Melaleuca brevifolia
                       </p>
@@ -1071,7 +1182,7 @@ exports[`Storyshots Components|Protected Species Protected Species 1`] = `
               >
                 <div>
                   <div
-                    className="makeStyles-item-1855"
+                    className="makeStyles-item-2263"
                     style={
                       Object {
                         "display": "inline-block",
@@ -1081,22 +1192,22 @@ exports[`Storyshots Components|Protected Species Protected Species 1`] = `
                     tabIndex={-1}
                   >
                     <div
-                      className="makeStyles-root-1857"
+                      className="makeStyles-root-2265"
                     >
                       <img
                         alt="Melaleuca brevifolia"
-                        className="makeStyles-img-1858"
+                        className="makeStyles-img-2266"
                         src="./melaleuca-b.png"
                       />
                       <p
-                        className="MuiTypography-root makeStyles-name-1859 MuiTypography-body1"
+                        className="MuiTypography-root makeStyles-name-2267 MuiTypography-body1"
                       >
                         Melaleuca brevifolia
                       </p>
                     </div>
                   </div>
                   <div
-                    className="makeStyles-item-1855"
+                    className="makeStyles-item-2263"
                     style={
                       Object {
                         "display": "inline-block",
@@ -1106,15 +1217,15 @@ exports[`Storyshots Components|Protected Species Protected Species 1`] = `
                     tabIndex={-1}
                   >
                     <div
-                      className="makeStyles-root-1857"
+                      className="makeStyles-root-2265"
                     >
                       <img
                         alt="Melaleuca brevifolia"
-                        className="makeStyles-img-1858"
+                        className="makeStyles-img-2266"
                         src="./melaleuca-b.png"
                       />
                       <p
-                        className="MuiTypography-root makeStyles-name-1859 MuiTypography-body1"
+                        className="MuiTypography-root makeStyles-name-2267 MuiTypography-body1"
                       >
                         Melaleuca brevifolia
                       </p>
@@ -1123,7 +1234,7 @@ exports[`Storyshots Components|Protected Species Protected Species 1`] = `
                 </div>
                 <div>
                   <div
-                    className="makeStyles-item-1855"
+                    className="makeStyles-item-2263"
                     style={
                       Object {
                         "display": "inline-block",
@@ -1133,22 +1244,22 @@ exports[`Storyshots Components|Protected Species Protected Species 1`] = `
                     tabIndex={-1}
                   >
                     <div
-                      className="makeStyles-root-1857"
+                      className="makeStyles-root-2265"
                     >
                       <img
                         alt="Melaleuca brevifolia"
-                        className="makeStyles-img-1858"
+                        className="makeStyles-img-2266"
                         src="./melaleuca-b.png"
                       />
                       <p
-                        className="MuiTypography-root makeStyles-name-1859 MuiTypography-body1"
+                        className="MuiTypography-root makeStyles-name-2267 MuiTypography-body1"
                       >
                         Melaleuca brevifolia
                       </p>
                     </div>
                   </div>
                   <div
-                    className="makeStyles-item-1855"
+                    className="makeStyles-item-2263"
                     style={
                       Object {
                         "display": "inline-block",
@@ -1158,15 +1269,15 @@ exports[`Storyshots Components|Protected Species Protected Species 1`] = `
                     tabIndex={-1}
                   >
                     <div
-                      className="makeStyles-root-1857"
+                      className="makeStyles-root-2265"
                     >
                       <img
                         alt="Melaleuca brevifolia"
-                        className="makeStyles-img-1858"
+                        className="makeStyles-img-2266"
                         src="./melaleuca-b.png"
                       />
                       <p
-                        className="MuiTypography-root makeStyles-name-1859 MuiTypography-body1"
+                        className="MuiTypography-root makeStyles-name-2267 MuiTypography-body1"
                       >
                         Melaleuca brevifolia
                       </p>
@@ -1188,7 +1299,7 @@ exports[`Storyshots Components|Protected Species Protected Species 1`] = `
               >
                 <div>
                   <div
-                    className="makeStyles-item-1855"
+                    className="makeStyles-item-2263"
                     style={
                       Object {
                         "display": "inline-block",
@@ -1198,22 +1309,22 @@ exports[`Storyshots Components|Protected Species Protected Species 1`] = `
                     tabIndex={-1}
                   >
                     <div
-                      className="makeStyles-root-1857"
+                      className="makeStyles-root-2265"
                     >
                       <img
                         alt="Melaleuca brevifolia"
-                        className="makeStyles-img-1858"
+                        className="makeStyles-img-2266"
                         src="./melaleuca-b.png"
                       />
                       <p
-                        className="MuiTypography-root makeStyles-name-1859 MuiTypography-body1"
+                        className="MuiTypography-root makeStyles-name-2267 MuiTypography-body1"
                       >
                         Melaleuca brevifolia
                       </p>
                     </div>
                   </div>
                   <div
-                    className="makeStyles-item-1855"
+                    className="makeStyles-item-2263"
                     style={
                       Object {
                         "display": "inline-block",
@@ -1223,15 +1334,15 @@ exports[`Storyshots Components|Protected Species Protected Species 1`] = `
                     tabIndex={-1}
                   >
                     <div
-                      className="makeStyles-root-1857"
+                      className="makeStyles-root-2265"
                     >
                       <img
                         alt="Melaleuca brevifolia"
-                        className="makeStyles-img-1858"
+                        className="makeStyles-img-2266"
                         src="./melaleuca-b.png"
                       />
                       <p
-                        className="MuiTypography-root makeStyles-name-1859 MuiTypography-body1"
+                        className="MuiTypography-root makeStyles-name-2267 MuiTypography-body1"
                       >
                         Melaleuca brevifolia
                       </p>
@@ -1240,7 +1351,7 @@ exports[`Storyshots Components|Protected Species Protected Species 1`] = `
                 </div>
                 <div>
                   <div
-                    className="makeStyles-item-1855"
+                    className="makeStyles-item-2263"
                     style={
                       Object {
                         "display": "inline-block",
@@ -1250,22 +1361,22 @@ exports[`Storyshots Components|Protected Species Protected Species 1`] = `
                     tabIndex={-1}
                   >
                     <div
-                      className="makeStyles-root-1857"
+                      className="makeStyles-root-2265"
                     >
                       <img
                         alt="Melaleuca brevifolia"
-                        className="makeStyles-img-1858"
+                        className="makeStyles-img-2266"
                         src="./melaleuca-b.png"
                       />
                       <p
-                        className="MuiTypography-root makeStyles-name-1859 MuiTypography-body1"
+                        className="MuiTypography-root makeStyles-name-2267 MuiTypography-body1"
                       >
                         Melaleuca brevifolia
                       </p>
                     </div>
                   </div>
                   <div
-                    className="makeStyles-item-1855"
+                    className="makeStyles-item-2263"
                     style={
                       Object {
                         "display": "inline-block",
@@ -1275,15 +1386,15 @@ exports[`Storyshots Components|Protected Species Protected Species 1`] = `
                     tabIndex={-1}
                   >
                     <div
-                      className="makeStyles-root-1857"
+                      className="makeStyles-root-2265"
                     >
                       <img
                         alt="Melaleuca brevifolia"
-                        className="makeStyles-img-1858"
+                        className="makeStyles-img-2266"
                         src="./melaleuca-b.png"
                       />
                       <p
-                        className="MuiTypography-root makeStyles-name-1859 MuiTypography-body1"
+                        className="MuiTypography-root makeStyles-name-2267 MuiTypography-body1"
                       >
                         Melaleuca brevifolia
                       </p>
@@ -1305,7 +1416,7 @@ exports[`Storyshots Components|Protected Species Protected Species 1`] = `
               >
                 <div>
                   <div
-                    className="makeStyles-item-1855"
+                    className="makeStyles-item-2263"
                     style={
                       Object {
                         "display": "inline-block",
@@ -1315,22 +1426,22 @@ exports[`Storyshots Components|Protected Species Protected Species 1`] = `
                     tabIndex={-1}
                   >
                     <div
-                      className="makeStyles-root-1857"
+                      className="makeStyles-root-2265"
                     >
                       <img
                         alt="Melaleuca brevifolia"
-                        className="makeStyles-img-1858"
+                        className="makeStyles-img-2266"
                         src="./melaleuca-b.png"
                       />
                       <p
-                        className="MuiTypography-root makeStyles-name-1859 MuiTypography-body1"
+                        className="MuiTypography-root makeStyles-name-2267 MuiTypography-body1"
                       >
                         Melaleuca brevifolia
                       </p>
                     </div>
                   </div>
                   <div
-                    className="makeStyles-item-1855"
+                    className="makeStyles-item-2263"
                     style={
                       Object {
                         "display": "inline-block",
@@ -1340,15 +1451,15 @@ exports[`Storyshots Components|Protected Species Protected Species 1`] = `
                     tabIndex={-1}
                   >
                     <div
-                      className="makeStyles-root-1857"
+                      className="makeStyles-root-2265"
                     >
                       <img
                         alt="Melaleuca brevifolia"
-                        className="makeStyles-img-1858"
+                        className="makeStyles-img-2266"
                         src="./melaleuca-b.png"
                       />
                       <p
-                        className="MuiTypography-root makeStyles-name-1859 MuiTypography-body1"
+                        className="MuiTypography-root makeStyles-name-2267 MuiTypography-body1"
                       >
                         Melaleuca brevifolia
                       </p>
@@ -1361,15 +1472,15 @@ exports[`Storyshots Components|Protected Species Protected Species 1`] = `
           </div>
         </div>
         <div
-          className="MuiGrid-root makeStyles-buttons-1856 MuiGrid-container MuiGrid-justify-xs-flex-end"
+          className="MuiGrid-root makeStyles-buttons-2264 MuiGrid-container MuiGrid-justify-xs-flex-end"
         >
           <div
-            className="makeStyles-root-1890"
+            className="makeStyles-root-2298"
             onClick={[Function]}
           >
             <svg
               aria-hidden="true"
-              className="MuiSvgIcon-root makeStyles-icon-1891 makeStyles-icon-1892"
+              className="MuiSvgIcon-root makeStyles-icon-2299 makeStyles-icon-2300"
               focusable="false"
               role="presentation"
               viewBox="0 0 24 24"
@@ -1396,12 +1507,12 @@ exports[`Storyshots Components|Protected Species Protected Species 1`] = `
             </svg>
           </div>
           <div
-            className="makeStyles-root-1890"
+            className="makeStyles-root-2298"
             onClick={[Function]}
           >
             <svg
               aria-hidden="true"
-              className="MuiSvgIcon-root makeStyles-icon-1891 makeStyles-icon-1902"
+              className="MuiSvgIcon-root makeStyles-icon-2299 makeStyles-icon-2310"
               focusable="false"
               role="presentation"
               viewBox="0 0 24 24"
@@ -1438,10 +1549,10 @@ exports[`Storyshots Components|ReadMore Read More 1`] = `
 <div>
   <div>
     <div
-      className="makeStyles-textContainer-1981"
+      className="makeStyles-textContainer-2389"
     >
       <div
-        className="MuiTypography-root makeStyles-root-1982 makeStyles-root-1983 MuiTypography-body1"
+        className="MuiTypography-root makeStyles-root-2390 makeStyles-root-2391 MuiTypography-body1"
       >
         This property is a rare pocket of wetlands and woodlands located near the township of Menindee South Australia, nestled in between the Coorong national park and Lake Albert.
 
@@ -1451,7 +1562,7 @@ This vital habitat comprises a unique mix of both freshwater and saltwater wetla
       </div>
     </div>
     <button
-      className="MuiButtonBase-root MuiButton-root WithStyles(ForwardRef(Button))-root-2014 MuiButton-text MuiButton-textSecondary"
+      className="MuiButtonBase-root MuiButton-root WithStyles(ForwardRef(Button))-root-2422 MuiButton-text MuiButton-textSecondary"
       disabled={false}
       onBlur={[Function]}
       onClick={[Function]}
@@ -1472,11 +1583,11 @@ This vital habitat comprises a unique mix of both freshwater and saltwater wetla
         className="MuiButton-label"
       >
         <span
-          className="MuiButton-startIcon WithStyles(ForwardRef(Button))-startIcon-2015 MuiButton-iconSizeMedium"
+          className="MuiButton-startIcon WithStyles(ForwardRef(Button))-startIcon-2423 MuiButton-iconSizeMedium"
         >
           <svg
             aria-hidden="true"
-            className="MuiSvgIcon-root makeStyles-icon-2048 makeStyles-icon-2049"
+            className="MuiSvgIcon-root makeStyles-icon-2456 makeStyles-icon-2457"
             focusable="false"
             role="presentation"
             viewBox="0 0 24 24"
@@ -1516,150 +1627,150 @@ This vital habitat comprises a unique mix of both freshwater and saltwater wetla
 exports[`Storyshots Components|Timeline Timeline 1`] = `
 <div>
   <div
-    className="makeStyles-root-2122"
+    className="makeStyles-root-2530"
   >
     <div
-      className="makeStyles-item-2123"
+      className="makeStyles-item-2531"
     >
       <div
-        className="makeStyles-content-2124 makeStyles-content-2129"
+        className="makeStyles-content-2532 makeStyles-content-2537"
       >
         <div
-          className="makeStyles-date-2125"
+          className="makeStyles-date-2533"
         >
           September 2, 2019
         </div>
         <h4
-          className="MuiTypography-root makeStyles-root-2132 undefined MuiTypography-h4 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+          className="MuiTypography-root makeStyles-root-2540 undefined MuiTypography-h4 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
         >
           Project starts
         </h4>
         <div
-          className="makeStyles-description-2126"
+          className="makeStyles-description-2534"
         >
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
         </div>
         <span
-          className="makeStyles-circle-2128 makeStyles-circle-2131"
+          className="makeStyles-circle-2536 makeStyles-circle-2539"
         />
         <div
-          className="makeStyles-bar-2127 makeStyles-bar-2130"
+          className="makeStyles-bar-2535 makeStyles-bar-2538"
         />
       </div>
     </div>
     <div
-      className="makeStyles-item-2123"
+      className="makeStyles-item-2531"
     >
       <div
-        className="makeStyles-content-2124 makeStyles-content-2163"
+        className="makeStyles-content-2532 makeStyles-content-2571"
       >
         <div
-          className="makeStyles-date-2125"
+          className="makeStyles-date-2533"
         >
           October 21, 2019
         </div>
         <h4
-          className="MuiTypography-root makeStyles-root-2132 undefined MuiTypography-h4 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+          className="MuiTypography-root makeStyles-root-2540 undefined MuiTypography-h4 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
         >
           Approval complete
         </h4>
         <div
-          className="makeStyles-description-2126"
+          className="makeStyles-description-2534"
         >
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
         </div>
         <span
-          className="makeStyles-circle-2128 makeStyles-circle-2165"
+          className="makeStyles-circle-2536 makeStyles-circle-2573"
         />
         <div
-          className="makeStyles-bar-2127 makeStyles-bar-2164"
+          className="makeStyles-bar-2535 makeStyles-bar-2572"
         />
       </div>
     </div>
     <div
-      className="makeStyles-item-2123"
+      className="makeStyles-item-2531"
     >
       <div
-        className="makeStyles-content-2124 makeStyles-content-2166"
+        className="makeStyles-content-2532 makeStyles-content-2574"
       >
         <div
-          className="makeStyles-date-2125"
+          className="makeStyles-date-2533"
         >
           February 20, 2020
         </div>
         <h4
-          className="MuiTypography-root makeStyles-root-2132 undefined MuiTypography-h4 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+          className="MuiTypography-root makeStyles-root-2540 undefined MuiTypography-h4 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
         >
           Credits issued
         </h4>
         <div
-          className="makeStyles-description-2126"
+          className="makeStyles-description-2534"
         >
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
         </div>
         <span
-          className="makeStyles-circle-2128 makeStyles-circle-2168"
+          className="makeStyles-circle-2536 makeStyles-circle-2576"
         />
         <div
-          className="makeStyles-bar-2127 makeStyles-bar-2167"
+          className="makeStyles-bar-2535 makeStyles-bar-2575"
         />
       </div>
     </div>
     <div
-      className="makeStyles-item-2123"
+      className="makeStyles-item-2531"
     >
       <div
-        className="makeStyles-content-2124 makeStyles-content-2169"
+        className="makeStyles-content-2532 makeStyles-content-2577"
       >
         <div
-          className="makeStyles-date-2125"
+          className="makeStyles-date-2533"
         >
           September 1, 2022
         </div>
         <h4
-          className="MuiTypography-root makeStyles-root-2132 undefined MuiTypography-h4 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+          className="MuiTypography-root makeStyles-root-2540 undefined MuiTypography-h4 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
         >
           Site visit
         </h4>
         <div
-          className="makeStyles-description-2126"
+          className="makeStyles-description-2534"
         >
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
         </div>
         <span
-          className="makeStyles-circle-2128 makeStyles-circle-2171"
+          className="makeStyles-circle-2536 makeStyles-circle-2579"
         />
         <div
-          className="makeStyles-bar-2127 makeStyles-bar-2170"
+          className="makeStyles-bar-2535 makeStyles-bar-2578"
         />
       </div>
     </div>
     <div
-      className="makeStyles-item-2123"
+      className="makeStyles-item-2531"
     >
       <div
-        className="makeStyles-content-2124 makeStyles-content-2172"
+        className="makeStyles-content-2532 makeStyles-content-2580"
       >
         <div
-          className="makeStyles-date-2125"
+          className="makeStyles-date-2533"
         >
           February 1, 2029
         </div>
         <h4
-          className="MuiTypography-root makeStyles-root-2132 undefined MuiTypography-h4 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+          className="MuiTypography-root makeStyles-root-2540 undefined MuiTypography-h4 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
         >
           Project completion
         </h4>
         <div
-          className="makeStyles-description-2126"
+          className="makeStyles-description-2534"
         >
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
         </div>
         <span
-          className="makeStyles-circle-2128 makeStyles-circle-2174"
+          className="makeStyles-circle-2536 makeStyles-circle-2582"
         />
         <div
-          className="makeStyles-bar-2127 makeStyles-bar-2173"
+          className="makeStyles-bar-2535 makeStyles-bar-2581"
         />
       </div>
     </div>
@@ -1670,28 +1781,28 @@ exports[`Storyshots Components|Timeline Timeline 1`] = `
 exports[`Storyshots Components|Timeline Timeline Item 1`] = `
 <div>
   <div
-    className="makeStyles-content-2214 makeStyles-content-2219"
+    className="makeStyles-content-2622 makeStyles-content-2627"
   >
     <div
-      className="makeStyles-date-2215"
+      className="makeStyles-date-2623"
     >
       September 2, 2019
     </div>
     <h4
-      className="MuiTypography-root makeStyles-root-2222 undefined MuiTypography-h4 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+      className="MuiTypography-root makeStyles-root-2630 undefined MuiTypography-h4 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
     >
       Project starts
     </h4>
     <div
-      className="makeStyles-description-2216"
+      className="makeStyles-description-2624"
     >
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
     </div>
     <span
-      className="makeStyles-circle-2218 makeStyles-circle-2221"
+      className="makeStyles-circle-2626 makeStyles-circle-2629"
     />
     <div
-      className="makeStyles-bar-2217 makeStyles-bar-2220"
+      className="makeStyles-bar-2625 makeStyles-bar-2628"
     />
   </div>
 </div>
@@ -1700,7 +1811,7 @@ exports[`Storyshots Components|Timeline Timeline Item 1`] = `
 exports[`Storyshots Components|Title Main Title 1`] = `
 <div>
   <h1
-    className="MuiTypography-root makeStyles-root-2284 undefined MuiTypography-h1 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+    className="MuiTypography-root makeStyles-root-2692 undefined MuiTypography-h1 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
   >
     Sheok Hill
   </h1>
@@ -1710,7 +1821,7 @@ exports[`Storyshots Components|Title Main Title 1`] = `
 exports[`Storyshots Components|Title Subtitle 1`] = `
 <div>
   <h2
-    className="MuiTypography-root makeStyles-root-2346 undefined MuiTypography-h2 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+    className="MuiTypography-root makeStyles-root-2754 undefined MuiTypography-h2 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
   >
     Ecological Practices
   </h2>
@@ -1720,7 +1831,7 @@ exports[`Storyshots Components|Title Subtitle 1`] = `
 exports[`Storyshots Components|Title Title 1`] = `
 <div>
   <h1
-    className="MuiTypography-root makeStyles-root-2408 undefined MuiTypography-h1 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+    className="MuiTypography-root makeStyles-root-2816 undefined MuiTypography-h1 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
   >
     Ecological Practices
   </h1>
@@ -1730,7 +1841,7 @@ exports[`Storyshots Components|Title Title 1`] = `
 exports[`Storyshots Components|User Big User Avatar 1`] = `
 <div>
   <div
-    className="MuiAvatar-root MuiAvatar-circle makeStyles-root-2466 makeStyles-root-2467"
+    className="MuiAvatar-root MuiAvatar-circle makeStyles-root-2874 makeStyles-root-2875"
   >
     <img
       alt="Odonata"
@@ -1750,7 +1861,7 @@ exports[`Storyshots Components|User Big User Info 1`] = `
       className="MuiGrid-root MuiGrid-item"
     >
       <div
-        className="MuiAvatar-root MuiAvatar-circle makeStyles-root-3094 makeStyles-root-3095"
+        className="MuiAvatar-root MuiAvatar-circle makeStyles-root-3502 makeStyles-root-3503"
       >
         <img
           alt="Odonata"
@@ -1760,20 +1871,20 @@ exports[`Storyshots Components|User Big User Info 1`] = `
       </div>
     </div>
     <div
-      className="MuiGrid-root makeStyles-text-2982 makeStyles-text-2987 MuiGrid-item"
+      className="MuiGrid-root makeStyles-text-3390 makeStyles-text-3395 MuiGrid-item"
     >
       <p
-        className="MuiTypography-root makeStyles-name-2983 makeStyles-name-2988 MuiTypography-body1"
+        className="MuiTypography-root makeStyles-name-3391 makeStyles-name-3396 MuiTypography-body1"
       >
         Odonata
       </p>
       <p
-        className="MuiTypography-root makeStyles-place-2986 makeStyles-place-2989 MuiTypography-body1"
+        className="MuiTypography-root makeStyles-place-3394 makeStyles-place-3397 MuiTypography-body1"
       >
         South Melbourne, Victoria, Australia
       </p>
       <p
-        className="MuiTypography-root makeStyles-description-2985 MuiTypography-body1"
+        className="MuiTypography-root makeStyles-description-3393 MuiTypography-body1"
       >
         Odonata is a not-for-profit entity supporting biodiversity impact solutions.
       </p>
@@ -1791,7 +1902,7 @@ exports[`Storyshots Components|User Column User Info 1`] = `
       className="MuiGrid-root MuiGrid-item"
     >
       <div
-        className="MuiAvatar-root MuiAvatar-circle makeStyles-root-3396 makeStyles-root-3397"
+        className="MuiAvatar-root MuiAvatar-circle makeStyles-root-3804 makeStyles-root-3805"
       >
         <img
           alt="Odonata"
@@ -1801,20 +1912,20 @@ exports[`Storyshots Components|User Column User Info 1`] = `
       </div>
     </div>
     <div
-      className="MuiGrid-root makeStyles-text-3284 makeStyles-text-3289 MuiGrid-item"
+      className="MuiGrid-root makeStyles-text-3692 makeStyles-text-3697 MuiGrid-item"
     >
       <p
-        className="MuiTypography-root makeStyles-name-3285 makeStyles-name-3290 MuiTypography-body1"
+        className="MuiTypography-root makeStyles-name-3693 makeStyles-name-3698 MuiTypography-body1"
       >
         Odonata
       </p>
       <p
-        className="MuiTypography-root makeStyles-place-3288 makeStyles-place-3291 MuiTypography-body1"
+        className="MuiTypography-root makeStyles-place-3696 makeStyles-place-3699 MuiTypography-body1"
       >
         South Melbourne, Victoria, Australia
       </p>
       <p
-        className="MuiTypography-root makeStyles-description-3287 MuiTypography-body1"
+        className="MuiTypography-root makeStyles-description-3695 MuiTypography-body1"
       >
         Odonata is a not-for-profit entity supporting biodiversity impact solutions.
       </p>
@@ -1826,7 +1937,7 @@ exports[`Storyshots Components|User Column User Info 1`] = `
 exports[`Storyshots Components|User Fallback User Avatar 1`] = `
 <div>
   <div
-    className="MuiAvatar-root MuiAvatar-circle makeStyles-root-2511 makeStyles-root-2512 MuiAvatar-colorDefault"
+    className="MuiAvatar-root MuiAvatar-circle makeStyles-root-2919 makeStyles-root-2920 MuiAvatar-colorDefault"
   >
     <svg
       aria-hidden="true"
@@ -1846,7 +1957,7 @@ exports[`Storyshots Components|User Fallback User Avatar 1`] = `
 exports[`Storyshots Components|User Medium User Avatar 1`] = `
 <div>
   <div
-    className="MuiAvatar-root MuiAvatar-circle makeStyles-root-2448 makeStyles-root-2449"
+    className="MuiAvatar-root MuiAvatar-circle makeStyles-root-2856 makeStyles-root-2857"
   >
     <img
       alt="Odonata"
@@ -1866,7 +1977,7 @@ exports[`Storyshots Components|User Medium User Info 1`] = `
       className="MuiGrid-root MuiGrid-item"
     >
       <div
-        className="MuiAvatar-root MuiAvatar-circle makeStyles-root-2792 makeStyles-root-2793"
+        className="MuiAvatar-root MuiAvatar-circle makeStyles-root-3200 makeStyles-root-3201"
       >
         <img
           alt="Odonata"
@@ -1876,20 +1987,20 @@ exports[`Storyshots Components|User Medium User Info 1`] = `
       </div>
     </div>
     <div
-      className="MuiGrid-root makeStyles-text-2680 makeStyles-text-2685 MuiGrid-item"
+      className="MuiGrid-root makeStyles-text-3088 makeStyles-text-3093 MuiGrid-item"
     >
       <p
-        className="MuiTypography-root makeStyles-name-2681 makeStyles-name-2686 MuiTypography-body1"
+        className="MuiTypography-root makeStyles-name-3089 makeStyles-name-3094 MuiTypography-body1"
       >
         Odonata
       </p>
       <p
-        className="MuiTypography-root makeStyles-place-2684 makeStyles-place-2687 MuiTypography-body1"
+        className="MuiTypography-root makeStyles-place-3092 makeStyles-place-3095 MuiTypography-body1"
       >
         South Melbourne, Victoria, Australia
       </p>
       <p
-        className="MuiTypography-root makeStyles-description-2683 MuiTypography-body1"
+        className="MuiTypography-root makeStyles-description-3091 MuiTypography-body1"
       >
         Odonata is a not-for-profit entity supporting biodiversity impact solutions.
       </p>
@@ -1906,7 +2017,7 @@ exports[`Storyshots Components|User User Avatar With Link 1`] = `
     target="_blank"
   >
     <div
-      className="MuiAvatar-root MuiAvatar-circle makeStyles-root-2484 makeStyles-root-2485"
+      className="MuiAvatar-root MuiAvatar-circle makeStyles-root-2892 makeStyles-root-2893"
     >
       <img
         alt="Odonata"
@@ -1922,7 +2033,7 @@ exports[`Storyshots Components|User With Title 1`] = `
 <div>
   <div>
     <p
-      className="MuiTypography-root makeStyles-title-3587 MuiTypography-body1"
+      className="MuiTypography-root makeStyles-title-3995 MuiTypography-body1"
     >
       project developer
     </p>
@@ -1933,7 +2044,7 @@ exports[`Storyshots Components|User With Title 1`] = `
         className="MuiGrid-root MuiGrid-item"
       >
         <div
-          className="MuiAvatar-root MuiAvatar-circle makeStyles-root-3730 makeStyles-root-3731"
+          className="MuiAvatar-root MuiAvatar-circle makeStyles-root-4138 makeStyles-root-4139"
         >
           <img
             alt="Odonata"
@@ -1943,20 +2054,20 @@ exports[`Storyshots Components|User With Title 1`] = `
         </div>
       </div>
       <div
-        className="MuiGrid-root makeStyles-text-3618 makeStyles-text-3623 MuiGrid-item"
+        className="MuiGrid-root makeStyles-text-4026 makeStyles-text-4031 MuiGrid-item"
       >
         <p
-          className="MuiTypography-root makeStyles-name-3619 makeStyles-name-3624 MuiTypography-body1"
+          className="MuiTypography-root makeStyles-name-4027 makeStyles-name-4032 MuiTypography-body1"
         >
           Odonata
         </p>
         <p
-          className="MuiTypography-root makeStyles-place-3622 makeStyles-place-3625 MuiTypography-body1"
+          className="MuiTypography-root makeStyles-place-4030 makeStyles-place-4033 MuiTypography-body1"
         >
           South Melbourne, Victoria, Australia
         </p>
         <p
-          className="MuiTypography-root makeStyles-description-3621 MuiTypography-body1"
+          className="MuiTypography-root makeStyles-description-4029 MuiTypography-body1"
         >
           Odonata is a not-for-profit entity supporting biodiversity impact solutions.
         </p>

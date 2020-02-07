@@ -6,6 +6,7 @@ import PinIcon from '../icons/PinIcon';
 interface PlaceInfoProps {
   children?: any;
   fontSize?: string;
+  smFontSize?: string;
   color?: string;
   className?: string;
 }
@@ -13,6 +14,7 @@ interface PlaceInfoProps {
 interface StyleProps {
   fontSize?: string;
   color?: string;
+  smFontSize?: string;
 }
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
@@ -25,7 +27,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   },
   content: props => ({
     [theme.breakpoints.up('sm')]: {
-      fontSize: props.fontSize || '1rem',
+      fontSize: props.smFontSize || props.fontSize || '1rem',
     },
     marginLeft: theme.spacing(1.6),
     fontSize: props.fontSize || '0.875rem',
@@ -33,8 +35,8 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   }),
 }));
 
-export default function PlaceInfo({ children, fontSize, color }: PlaceInfoProps): JSX.Element {
-  const classes = useStyles({ fontSize, color });
+export default function PlaceInfo({ children, fontSize, color, smFontSize }: PlaceInfoProps): JSX.Element {
+  const classes = useStyles({ smFontSize, fontSize, color });
   return (
     <div className={classes.root}>
       <PinIcon />

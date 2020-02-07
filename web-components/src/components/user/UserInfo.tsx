@@ -31,6 +31,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   text: props => ({
     marginLeft: theme.spacing(2.4),
     textAlign: props.direction === 'column' ? 'center' : 'left',
+    alignSelf: 'center',
   }),
   name: props => ({
     [theme.breakpoints.up('sm')]: {

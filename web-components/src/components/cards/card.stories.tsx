@@ -6,7 +6,7 @@ import { User } from 'web-components/lib/components/user/UserInfo';
 import { withKnobs, text, object } from '@storybook/addon-knobs';
 
 // import CreditCard, { CreditInfo } from 'web-components/lib/components/cards/CreditCard';
-// import ProjectCard, { ProjectInfo } from 'web-components/lib/components/cards/ProjectCard';
+import ProjectCard, { ProjectInfo } from 'web-components/lib/components/cards/ProjectCard';
 
 export default {
   title: 'Components|Cards',
@@ -68,19 +68,25 @@ export const monitoredImpactCard = (): JSX.Element => (
 //   // unit: 'USD'
 // };
 //
-// function onClick(): void {}
 //
 // export const creditCard = (): JSX.Element => (
 //   <CreditCard credit={creditInfo} onClick={onClick} width="20.5rem" />
 // );
 
-// const projectInfo: ProjectInfo = {
-//   name: 'Orana Park',
-//   place: 'Bendigo, Victoria, Australia',
-//   area: 4500,
-//   imgSrc: '/orana.png',
-// };
-//
-// export const projectCard = (): JSX.Element => (
-//   <ProjectCard project={projectInfo} onClick={onClick} />
-// );
+function onClick(): void {}
+
+const projectInfo: ProjectInfo = {
+  name: 'Coorong Project',
+  place: 'Adelaide, South Australia, Australia',
+  area: 4500,
+  areaUnit: 'hectares',
+  imgSrc: '/coorong.png',
+  developer: {
+    name: 'Odonata',
+    imgSrc: 'http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png',
+  },
+};
+
+export const projectCard = (): JSX.Element => (
+  <ProjectCard project={projectInfo} tag="biodiversity" onClick={onClick} />
+);

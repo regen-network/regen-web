@@ -23,6 +23,9 @@ export function getSize(size?: string): Sizes {
     case 'small':
       spacing = { xs: 7, sm: 7 };
       break;
+    case 'project':
+      spacing = { xs: 8.75, sm: 8.75 };
+      break;
     default:
       spacing = { xs: 7, sm: 10 };
       break;
@@ -44,6 +47,9 @@ export function getFontSize(size?: string): FontSizes {
       break;
     case 'small':
       fontSize = { xs: '0.75rem', sm: '0.875rem' };
+      break;
+    case 'project':
+      fontSize = { xs: '0.875rem', sm: '0.875rem' };
       break;
     default:
       fontSize = { xs: '0.875rem', sm: '1rem' };

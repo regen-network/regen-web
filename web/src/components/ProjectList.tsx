@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import { Project } from '../mocks';
-
+import Grid from '@material-ui/core/Grid';
 import projects from '../assets/projects.png';
 import Title from 'web-components/lib/components/title';
 
@@ -36,6 +36,12 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingBottom: theme.spacing(13.5),
       paddingLeft: theme.spacing(3.75),
     },
+    [theme.breakpoints.up('xl')]: {
+      paddingRight: theme.spacing(5),
+      paddingLeft: theme.spacing(5),
+    },
+    maxWidth: theme.breakpoints.values.lg,
+    margin: '0 auto',
   },
   subTitle: {
     [theme.breakpoints.up('sm')]: {
@@ -47,6 +53,34 @@ const useStyles = makeStyles((theme: Theme) => ({
       fontSize: '1.125rem',
     },
     color: theme.palette.primary.main,
+  },
+  projects: {
+    backgroundColor: '#f9f9f9',
+    [theme.breakpoints.up('sm')]: {
+      padding: `${theme.spacing(17.25)} ${theme.spacing(37.75)} ${theme.spacing(24.75)}`,
+    },
+    [theme.breakpoints.down('xs')]: {
+      padding: `${theme.spacing(11.5)} ${theme.spacing(3.75)} ${theme.spacing(24.75)}`,
+    },
+    [theme.breakpoints.up('xl')]: {
+      paddingRight: theme.spacing(5),
+      paddingLeft: theme.spacing(5),
+    },
+    maxWidth: theme.breakpoints.values.lg,
+    margin: '0 auto',
+  },
+  australia: {
+    color: theme.palette.info.dark,
+    letterSpacing: '1px',
+    textTransform: 'uppercase',
+    fontWeight: 800,
+    fontFamily: theme.typography.h1.fontFamily,
+    [theme.breakpoints.up('sm')]: {
+      fontSize: '1.125rem',
+    },
+    [theme.breakpoints.up('sm')]: {
+      fontSize: '0.875rem',
+    },
   },
 }));
 
@@ -67,6 +101,13 @@ export default function ProjectList({ projects }: ProjectsProps): JSX.Element {
           </Title>
           <div className={classes.subTitle}>Learn more about our pilot projects.</div>
         </div>
+      </div>
+      <div className={classes.projects}>
+        <div className={classes.australia}>australia</div>
+        <Grid container>
+          <Grid item xs={12} sm={4}></Grid>
+          <Grid item xs={12} sm={4}></Grid>
+        </Grid>
       </div>
     </div>
   );

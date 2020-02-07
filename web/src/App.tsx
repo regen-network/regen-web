@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route, Link, useParams, useRouteMatch } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Link, useParams } from 'react-router-dom';
 
 import logo from './assets/logo.png';
 
@@ -8,6 +8,7 @@ import { projects, creditsIssuer, Project } from './mocks';
 import Footer from 'web-components/lib/components/footer';
 import Header from 'web-components/lib/components/header';
 import ProjectDetails from './components/ProjectDetails';
+import ProjectList from './components/ProjectList';
 
 function Home(): JSX.Element {
   return (
@@ -28,21 +29,7 @@ function ProjectContainer(): JSX.Element {
 }
 
 function Projects(): JSX.Element {
-  let { url } = useRouteMatch();
-
-  return (
-    <div>
-      <ul>
-        {projects.map((p, i) => (
-          <li key={p.id}>
-            <Link key={i} to={`${url}/${p.id}`}>
-              {p.name}
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
+  return <ProjectList projects={projects} />;
 }
 
 const App: React.FC = (): JSX.Element => {

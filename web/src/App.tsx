@@ -12,7 +12,7 @@ import ProjectDetails from './components/ProjectDetails';
 function Home(): JSX.Element {
   return (
     <div>
-      <Link to="/p">Project list</Link>
+      <Link to="/projects">Project list</Link>
     </div>
   );
 }
@@ -55,7 +55,7 @@ const App: React.FC = (): JSX.Element => {
             <Home />
           </Route>
           <Route
-            path="/p"
+            path="/projects"
             render={({ match: { path } }) => (
               <>
                 <Route path={`${path}`} component={Projects} exact />

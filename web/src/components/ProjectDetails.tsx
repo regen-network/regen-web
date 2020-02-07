@@ -19,6 +19,7 @@ import CreditDetails from 'web-components/lib/components/credits/CreditDetails';
 import ProtectedSpecies from 'web-components/lib/components/protected-species';
 import { ItemProps as ProtectedSpeciesItem } from 'web-components/lib/components/protected-species/Item';
 import { User } from 'web-components/lib/components/user/UserInfo';
+import { getImgSrc } from '../lib/imgSrc';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -192,17 +193,6 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 interface ProjectProps {
   project: Project;
-}
-
-function validURL(str: string): boolean {
-  return str.startsWith('http');
-}
-
-function getImgSrc(imgSrc: string): string {
-  if (!validURL(imgSrc)) {
-    return require(`../assets/${imgSrc}`);
-  }
-  return imgSrc;
 }
 
 function getProjectUser(projectUser: User): User {

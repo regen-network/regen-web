@@ -1,9 +1,12 @@
 import React from 'react';
+import { Link, useRouteMatch } from 'react-router-dom';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import { Project } from '../mocks';
 import Grid from '@material-ui/core/Grid';
 import projects from '../assets/projects.png';
 import Title from 'web-components/lib/components/title';
+import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
+import { getImgSrc } from '../lib/imgSrc';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {},
@@ -57,10 +60,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   projects: {
     backgroundColor: '#f9f9f9',
     [theme.breakpoints.up('sm')]: {
-      padding: `${theme.spacing(17.25)} ${theme.spacing(37.75)} ${theme.spacing(24.75)}`,
+      padding: `${theme.spacing(17.25)} ${theme.spacing(37.75)} ${theme.spacing(22.25)}`,
     },
     [theme.breakpoints.down('xs')]: {
-      padding: `${theme.spacing(11.5)} ${theme.spacing(3.75)} ${theme.spacing(24.75)}`,
+      padding: `${theme.spacing(11.5)} ${theme.spacing(3.75)} ${theme.spacing(16.75)}`,
     },
     [theme.breakpoints.up('xl')]: {
       paddingRight: theme.spacing(5),
@@ -77,10 +80,28 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontFamily: theme.typography.h1.fontFamily,
     [theme.breakpoints.up('sm')]: {
       fontSize: '1.125rem',
+      paddingBottom: theme.spacing(9),
     },
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.down('xs')]: {
       fontSize: '0.875rem',
+      paddingBottom: theme.spacing(6.75),
     },
+  },
+  projectList: {
+    [theme.breakpoints.up('sm')]: {
+      marginLeft: theme.spacing(-2.5),
+    },
+  },
+  project: {
+    [theme.breakpoints.up('sm')]: {
+      padding: `${theme.spacing(0)} ${theme.spacing(2.5)} ${theme.spacing(2.5)}`,
+    },
+    [theme.breakpoints.down('xs')]: {
+      paddingBottom: theme.spacing(8),
+    },
+  },
+  projectLink: {
+    textDecoration: 'none',
   },
 }));
 
@@ -90,7 +111,7 @@ interface ProjectsProps {
 
 export default function ProjectList({ projects }: ProjectsProps): JSX.Element {
   const classes = useStyles({});
-
+  let { url } = useRouteMatch();
   return (
     <div className={classes.root}>
       <div className={classes.header}>
@@ -104,9 +125,22 @@ export default function ProjectList({ projects }: ProjectsProps): JSX.Element {
       </div>
       <div className={classes.projects}>
         <div className={classes.australia}>australia</div>
-        <Grid container>
-          <Grid item xs={12} sm={4}></Grid>
-          <Grid item xs={12} sm={4}></Grid>
+        <Grid container className={classes.projectList}>
+          {projects.map((p, i) => (
+            <Grid className={classes.project} item xs={12} sm={4} key={p.id}>
+              <Link className={classes.projectLink} to={`${url}/${p.id}`}>
+                <ProjectCard
+                  name={p.name}
+                  place={p.place}
+                  area={p.area}
+                  areaUnit={p.areaUnit}
+                  imgSrc={getImgSrc(p.photos[0])}
+                  developer={{ name: p.developer.name, imgSrc: getImgSrc(p.developer.imgSrc) }}
+                  tag={p.creditClass.tag}
+                />
+              </Link>
+            </Grid>
+          ))}
         </Grid>
       </div>
     </div>

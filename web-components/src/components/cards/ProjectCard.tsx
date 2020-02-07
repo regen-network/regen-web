@@ -9,14 +9,19 @@ export interface ProjectInfo {
   imgSrc: string;
   place: string;
   area: number;
-  areaUnit: 'hectares' | 'acres';
+  areaUnit: string;
   developer: User;
 }
 
 interface ProjectCardProps {
-  project: ProjectInfo;
+  name: string;
+  imgSrc: string;
+  place: string;
+  area: number;
+  areaUnit: string;
+  developer: User;
   tag?: string;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 interface AreaUnits {
@@ -24,10 +29,16 @@ interface AreaUnits {
   acres: string;
 }
 
-const areaUnits: AreaUnits = {
-  hectares: 'ha.',
-  acres: 'a.',
-};
+function getAbbreviation(unit: string): string {
+  switch (unit) {
+    case 'hectares':
+      return 'ha.';
+    case 'acres':
+      return 'a.';
+    default:
+      return 'ha.';
+  }
+}
 
 const useStyles = makeStyles((theme: Theme) => ({
   separator: {
@@ -43,15 +54,24 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function ProjectCard({ project, onClick, tag }: ProjectCardProps): JSX.Element {
+export default function ProjectCard({
+  name,
+  imgSrc,
+  place,
+  area,
+  areaUnit,
+  developer,
+  onClick,
+  tag,
+}: ProjectCardProps): JSX.Element {
   const theme = useTheme();
   const classes = useStyles();
 
   return (
     <MediaCard
       onClick={onClick}
-      imgSrc={project.imgSrc}
-      name={project.name}
+      imgSrc={imgSrc}
+      name={name}
       elevation={1}
       titleVariant="h3"
       borderRadius="10px"
@@ -59,15 +79,15 @@ export default function ProjectCard({ project, onClick, tag }: ProjectCardProps)
       tag={tag}
     >
       <ProjectPlaceInfo
-        place={project.place}
-        area={project.area}
-        areaUnit={areaUnits[project.areaUnit]}
+        place={place}
+        area={area}
+        areaUnit={getAbbreviation(areaUnit)}
         smFontSize="0.8125rem"
         fontSize="0.75rem"
         color={theme.palette.primary.light}
       />
       <hr className={classes.separator} />
-      <UserInfo user={project.developer} size="project" />
+      <UserInfo user={developer} size="project" />
     </MediaCard>
   );
 }

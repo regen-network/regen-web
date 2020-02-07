@@ -97,7 +97,8 @@
       "creditClass": {
         "name": "Australian Biodiversity Units (ABU’s)",
         "description": "ABU’s are an Australian Government endorsed biodiversity credit. An individual ABU represents a 1.5m square area of land of significant environmental value that has been placed under a conservation covenant and agreed management plan. The covenant and management plan secure the long term preservation of the site and ensure the biodiversity value is protected in perpetuity. Vegetation types may include forests, grasslands, mallees, saltmarshes, scrubs, shrublands, wetlands, and woodlands. \n\nABU’s are an innovative and unique way for organisations to preserve a tangible section of Australia’s unique natural habitat.",
-        "imgSrc": "abu.png"
+        "imgSrc": "abu.png",
+        "tag": "biodiversity"
       },
       "protectedSpecies": [
         {
@@ -254,7 +255,8 @@
       "creditClass": {
         "name": "Australian Biodiversity Units (ABU’s)",
         "description": "ABU’s are an Australian Government endorsed biodiversity credit. An individual ABU represents a 1.5m square area of land of significant environmental value that has been placed under a conservation covenant and agreed management plan. The covenant and management plan secure the long term preservation of the site and ensure the biodiversity value is protected in perpetuity. Vegetation types may include forests, grasslands, mallees, saltmarshes, scrubs, shrublands, wetlands, and woodlands. \n\nABU’s are an innovative and unique way for organisations to preserve a tangible section of Australia’s unique natural habitat.",
-        "imgSrc": "abu.png"
+        "imgSrc": "abu.png",
+        "tag": "biodiversity"
       },
       "protectedSpecies": [
         {

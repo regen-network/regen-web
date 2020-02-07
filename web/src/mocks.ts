@@ -28,6 +28,7 @@ interface CreditClass {
   name: string;
   description: string;
   methodology?: Metholody;
+  tag: string;
   imgSrc: string;
 }
 

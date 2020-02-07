@@ -3,10 +3,10 @@ import Card from 'web-components/lib/components/cards/Card';
 import ProjectDeveloperCard from 'web-components/lib/components/cards/ProjectDeveloperCard';
 import ImpactCard from 'web-components/lib/components/cards/ImpactCard';
 import { User } from 'web-components/lib/components/user/UserInfo';
-import { withKnobs, text, object } from '@storybook/addon-knobs';
+import { withKnobs, text, object, number } from '@storybook/addon-knobs';
 
 // import CreditCard, { CreditInfo } from 'web-components/lib/components/cards/CreditCard';
-import ProjectCard, { ProjectInfo } from 'web-components/lib/components/cards/ProjectCard';
+import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
 
 export default {
   title: 'Components|Cards',
@@ -75,18 +75,18 @@ export const monitoredImpactCard = (): JSX.Element => (
 
 function onClick(): void {}
 
-const projectInfo: ProjectInfo = {
-  name: 'Coorong Project',
-  place: 'Adelaide, South Australia, Australia',
-  area: 4500,
-  areaUnit: 'hectares',
-  imgSrc: '/coorong.png',
-  developer: {
-    name: 'Odonata',
-    imgSrc: 'http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png',
-  },
-};
-
 export const projectCard = (): JSX.Element => (
-  <ProjectCard project={projectInfo} tag="biodiversity" onClick={onClick} />
+  <ProjectCard
+    name={text('name', 'Coorong Project')}
+    place={text('place', 'Adelaide, South Australia, Australia')}
+    area={number('area', 200)}
+    areaUnit={text('areaUnit', 'hectares')}
+    imgSrc={text('imgSrc', '/coorong.png')}
+    developer={object('developer', {
+      name: 'Odonata',
+      imgSrc: 'http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png',
+    })}
+    tag="biodiversity"
+    onClick={onClick}
+  />
 );

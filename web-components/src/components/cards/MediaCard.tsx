@@ -49,6 +49,15 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontFamily: theme.typography.fontFamily,
     padding: `${theme.spacing(1.75)} ${theme.spacing(3.75)}`,
   },
+  backgroundGradient: {
+    height: '100%',
+    zIndex: 0,
+    position: 'absolute',
+    bottom: 0,
+    width: '100%',
+    borderRadius: '9px 9px 0px 0px',
+    background: 'linear-gradient(180.28deg, rgba(0, 0, 0, 0) 65.91%, rgba(0, 0, 0, 0.4) 99.59%)',
+  },
 }));
 
 export default function MediaCard({
@@ -74,6 +83,7 @@ export default function MediaCard({
       borderRadius={borderRadius}
     >
       <CardMedia className={classes.image} image={imgSrc}>
+        <div className={classes.backgroundGradient} />
         {tag && <div className={classes.tag}>{tag}</div>}
       </CardMedia>
       <div className={classes.container}>

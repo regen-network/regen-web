@@ -4,11 +4,12 @@ import { BrowserRouter as Router, Switch, Route, Link, useParams } from 'react-r
 import logo from './assets/logo.png';
 
 import './App.css';
-import { projects, creditsIssuer, Project } from './mocks';
+import { projects, creditsIssuer, purchasedCredits, Project, PurchasedCredits } from './mocks';
 import Footer from 'web-components/lib/components/footer';
 import Header from 'web-components/lib/components/header';
 import ProjectDetails from './components/ProjectDetails';
 import ProjectList from './components/ProjectList';
+import UserCredits from './components/UserCredits';
 
 function Home(): JSX.Element {
   return (
@@ -16,6 +17,15 @@ function Home(): JSX.Element {
       <Link to="/projects">Project list</Link>
     </div>
   );
+}
+
+function CreditsContainer(): JSX.Element {
+  let { userId } = useParams();
+  const userCredits: PurchasedCredits | undefined = purchasedCredits.find(p => p.userId === userId);
+  if (userCredits) {
+    return <UserCredits credits={userCredits} />;
+  }
+  return <div>User not found</div>;
 }
 
 function ProjectContainer(): JSX.Element {
@@ -47,6 +57,14 @@ const App: React.FC = (): JSX.Element => {
               <>
                 <Route path={`${path}`} component={Projects} exact />
                 <Route path={`${path}/:projectId`} component={ProjectContainer} />
+              </>
+            )}
+          />
+          <Route
+            path="/credits"
+            render={({ match: { path } }) => (
+              <>
+                <Route path={`${path}/:userId`} component={CreditsContainer} />
               </>
             )}
           />

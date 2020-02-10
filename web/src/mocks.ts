@@ -72,7 +72,7 @@ interface Purchase {
   date: Date | string;
 }
 
-interface PurchasedCredits {
+export interface PurchasedCredits {
   userId: string;
   project: BasicProject;
   currentPurchase: Purchase;
@@ -87,4 +87,5 @@ export interface Mock {
 }
 
 export const creditsIssuer: User = mock.creditsIssuer;
+export const purchasedCredits: PurchasedCredits[] = mock.purchasedCredits;
 export const projects: Project[] = mock.projects;

@@ -33,6 +33,11 @@ interface CreditClass {
   imgSrc: string;
 }
 
+interface Timeline {
+  events: Event[];
+  completedItemIndex: number;
+}
+
 export interface Project {
   id: string; // human-readable id for now
   name: string;
@@ -53,7 +58,7 @@ export interface Project {
   impact: Impact[];
   creditClass: CreditClass;
   protectedSpecies?: ProtectedSpeciesItem[];
-  timeline: Event[];
+  timeline: Timeline;
   // missing: gis, documents
 }
 

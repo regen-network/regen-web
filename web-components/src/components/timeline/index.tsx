@@ -6,13 +6,14 @@ import { useTheme } from '@material-ui/core/styles';
 import TimelineItem from './TimelineItem';
 
 export interface Event {
-  date: Date | string;
+  date?: Date | string;
   title: string;
   description?: string;
 }
 
 interface TimelineProps {
   events: Event[];
+  completedItemIndex: number;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -40,18 +41,18 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function Timeline({ events }: TimelineProps): JSX.Element {
+export default function Timeline({ events, completedItemIndex }: TimelineProps): JSX.Element {
   const classes = useStyles({});
   const theme = useTheme();
 
   return (
     <div className={classes.root}>
       {events.map((event, index) => {
-        const currentEventDate: Date = new Date(event.date);
-        let nextEventDate: Date = currentEventDate;
-        if (index + 1 < events.length) {
-          nextEventDate = new Date(events[index + 1].date);
-        }
+        // const currentEventDate: Date = new Date(event.date);
+        // let nextEventDate: Date = currentEventDate;
+        // if (index + 1 < events.length) {
+        //   nextEventDate = new Date(events[index + 1].date);
+        // }
         return (
           <div className={classes.item} key={`${index}-${event.title}`}>
             <TimelineItem
@@ -59,9 +60,9 @@ export default function Timeline({ events }: TimelineProps): JSX.Element {
               title={event.title}
               description={event.description}
               circleColor={
-                currentEventDate <= new Date() ? theme.palette.secondary.main : theme.palette.info.main
+                index <= completedItemIndex ? theme.palette.secondary.main : theme.palette.info.main
               }
-              barColor={nextEventDate < new Date() ? theme.palette.secondary.main : theme.palette.info.main}
+              barColor={index < completedItemIndex ? theme.palette.secondary.main : theme.palette.info.main}
               odd={index % 2 !== 0}
               last={index === events.length - 1}
             />

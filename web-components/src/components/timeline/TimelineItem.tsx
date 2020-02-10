@@ -3,7 +3,7 @@ import { makeStyles, Theme } from '@material-ui/core';
 import Title from '../title';
 
 interface TimelineItemProps {
-  date: Date | string;
+  date?: Date | string;
   title: string;
   description?: string;
   circleColor: string;
@@ -143,7 +143,7 @@ export default function TimelineItem({
   const classes = useStyles({ circleColor, barColor, odd, last });
   return (
     <div className={classes.content}>
-      <div className={classes.date}>{new Date(date).toLocaleDateString('en-US', options)}</div>
+      {date && <div className={classes.date}>{new Date(date).toLocaleDateString('en-US', options)}</div>}
       <Title variant="h6">{title}</Title>
       <div className={classes.description}>{description}</div>
       <span className={classes.circle} />

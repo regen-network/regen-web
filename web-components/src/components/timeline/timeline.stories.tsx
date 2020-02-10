@@ -43,7 +43,7 @@ const events: Event[] = [
   },
 ];
 
-export const timeline = (): JSX.Element => <Timeline events={object('Events', events)} />;
+export const timeline = (): JSX.Element => <Timeline events={object('Events', events)} completedItemIndex={1} />;
 export const timelineItem = (): JSX.Element => (
   <TimelineItem
     date={date('Date', new Date(events[0].date))}

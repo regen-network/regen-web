@@ -337,7 +337,10 @@ export default function ProjectDetails({ project }: ProjectProps): JSX.Element {
         </div>*/}
         <div className={`${classes.projectDetails} ${classes.projectTimeline} ${classes.projectContent}`}>
           <Title variant="h2">Timeline</Title>
-          <Timeline events={project.timeline} />
+          <Timeline
+            events={project.timeline.events}
+            completedItemIndex={project.timeline.completedItemIndex}
+          />
         </div>
       </div>
     </div>

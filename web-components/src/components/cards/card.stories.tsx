@@ -16,14 +16,21 @@ export default {
 
 const projectDeveloper: User = {
   name: 'Odonata',
-  place: 'South Melbourne, Victoria, Australia',
+  place: {
+    city: 'South Melbourne',
+    state: 'Victoria',
+    country: 'Australia',
+  },
   imgSrc: 'http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png',
   description: 'Odonata is a not-for-profit entity supporting biodiversity impact solutions.',
 };
 
 const landSteward: User = {
   name: 'Ngarrindjeri Tribe',
-  place: 'Southern Australia',
+  place: {
+    state: 'Southern Australia',
+    country: 'Australia',
+  },
   imgSrc: '/tribe.png',
   description: 'The Ngarrindjeri culture is centered around the lower lakes of the Murray River.',
 };
@@ -78,7 +85,11 @@ function onClick(): void {}
 export const projectCard = (): JSX.Element => (
   <ProjectCard
     name={text('name', 'Coorong Project')}
-    place={text('place', 'Adelaide, South Australia, Australia')}
+    place={object('place', {
+      city: 'Adelaide',
+      state: 'South Australia',
+      country: 'Australia',
+    })}
     area={number('area', 200)}
     areaUnit={text('areaUnit', 'hectares')}
     imgSrc={text('imgSrc', '/coorong.png')}

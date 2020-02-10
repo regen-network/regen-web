@@ -11,9 +11,11 @@ interface FooterProps {
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
+  background: {
+    backgroundColor: theme.palette.info.light,
+  },
   root: {
     width: '100%',
-    backgroundColor: theme.palette.info.light,
     [theme.breakpoints.up('sm')]: {
       padding: `${theme.spacing(9.25)} ${theme.spacing(38.5)} ${theme.spacing(11.25)}`,
     },
@@ -21,6 +23,12 @@ const useStyles = makeStyles((theme: Theme) => ({
       display: 'block',
       padding: `${theme.spacing(9.25)} ${theme.spacing(4)} ${theme.spacing(12.5)}`,
     },
+    [theme.breakpoints.up('xl')]: {
+      paddingRight: theme.spacing(5),
+      paddingLeft: theme.spacing(5),
+    },
+    maxWidth: theme.breakpoints.values.lg,
+    margin: '0 auto',
   },
   copyrightContainer: {
     [theme.breakpoints.up('sm')]: {
@@ -43,21 +51,23 @@ export default function Footer({ user }: FooterProps): JSX.Element {
   const classes = useStyles({});
 
   return (
-    <Grid container wrap="nowrap" alignItems="center" justify="space-between" className={classes.root}>
-      <Grid item>
-        <UserInfoWithTitle
-          title="credits issued by"
-          user={user}
-          border={false}
-          size="xl"
-          icon={<RegenLogoIcon />}
-        />
+    <div className={classes.background}>
+      <Grid container wrap="nowrap" alignItems="center" justify="space-between" className={classes.root}>
+        <Grid item>
+          <UserInfoWithTitle
+            title="credits issued by"
+            user={user}
+            border={false}
+            size="xl"
+            icon={<RegenLogoIcon />}
+          />
+        </Grid>
+        <Grid item className={classes.copyrightContainer}>
+          <Typography className={classes.copyright} variant="body2">
+            © 2020 Regen Network
+          </Typography>
+        </Grid>
       </Grid>
-      <Grid item className={classes.copyrightContainer}>
-        <Typography className={classes.copyright} variant="body2">
-          © 2020 Regen Network
-        </Typography>
-      </Grid>
-    </Grid>
+    </div>
   );
 }

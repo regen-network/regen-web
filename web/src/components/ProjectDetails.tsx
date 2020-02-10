@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   projectTopContent: {
     [theme.breakpoints.up('sm')]: {
-      padding: `${theme.spacing(15.5)} ${theme.spacing(25)}`,
+      padding: `${theme.spacing(15.5)} ${theme.spacing(37)}`,
     },
     [theme.breakpoints.up('xl')]: {
       paddingRight: theme.spacing(5),
@@ -76,7 +76,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       },
     },
     [theme.breakpoints.up('sm')]: {
-      padding: `${theme.spacing(17.25)} ${theme.spacing(40)}`,
+      padding: `${theme.spacing(17.25)} ${theme.spacing(60)}`,
     },
     [theme.breakpoints.down('xs')]: {
       padding: `${theme.spacing(11)} ${theme.spacing(3.75)}`,
@@ -88,8 +88,9 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingLeft: theme.spacing(5),
     },
     [theme.breakpoints.between('sm', 'lg')]: {
-      paddingLeft: theme.spacing(34.875),
-      paddingRight: theme.spacing(32.25),
+      paddingLeft: theme.spacing(35.875),
+      paddingRight: theme.spacing(35.875),
+      // paddingRight: theme.spacing(33.25),
     },
     [theme.breakpoints.up('sm')]: {
       paddingTop: theme.spacing(17.25),
@@ -111,7 +112,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingBottom: theme.spacing(27.5),
     },
     [theme.breakpoints.between('sm', 'lg')]: {
-      paddingRight: theme.spacing(27.25),
+      paddingRight: theme.spacing(30.375),
     },
     [theme.breakpoints.down('xs')]: {
       paddingBottom: theme.spacing(4),
@@ -140,7 +141,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   projectImpactContainer: {
     [theme.breakpoints.between('sm', 'lg')]: {
-      paddingRight: theme.spacing(27.25),
+      paddingRight: theme.spacing(30.375),
     },
     [theme.breakpoints.up('xl')]: {
       paddingRight: 0,

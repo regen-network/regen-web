@@ -15,10 +15,12 @@ interface HeaderProps {
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
-  root: {
+  background: {
     backgroundColor: theme.palette.primary.main,
+  },
+  root: {
     [theme.breakpoints.up('sm')]: {
-      padding: `${theme.spacing(2.5)} ${theme.spacing(25)}`,
+      padding: `${theme.spacing(2.5)} ${theme.spacing(37)}`,
       height: theme.spacing(27.5),
       '& svg': {
         fontSize: '12rem',
@@ -34,6 +36,12 @@ const useStyles = makeStyles((theme: Theme) => ({
         width: theme.spacing(23),
       },
     },
+    [theme.breakpoints.up('xl')]: {
+      paddingRight: theme.spacing(5),
+      paddingLeft: theme.spacing(5),
+    },
+    maxWidth: theme.breakpoints.values.lg,
+    margin: '0 auto',
   },
   searchIcon: {
     color: '#D2D5D9', // TODO: change with color from theme.palette
@@ -49,16 +57,18 @@ export default function Header({ logo }: HeaderProps): JSX.Element {
   const classes = useStyles({});
   // TODO: Add search/menu logic
   return (
-    <Grid container direction="row" className={classes.root} alignItems="center" justify="space-between">
-      <Grid item>
-        <a href="/">
-          <RegenIcon />
-        </a>
+    <div className={classes.background}>
+      <Grid container direction="row" className={classes.root} alignItems="center" justify="space-between">
+        <Grid item>
+          <a href="/">
+            <RegenIcon />
+          </a>
+        </Grid>
+        {/*<Grid item alignItems="center">
+          <SearchIcon className={classes.searchIcon} />
+          <MenuIcon className={classes.menuIcon} fontSize="large" />
+        </Grid>*/}
       </Grid>
-      {/*<Grid item alignItems="center">
-        <SearchIcon className={classes.searchIcon} />
-        <MenuIcon className={classes.menuIcon} fontSize="large" />
-      </Grid>*/}
-    </Grid>
+    </div>
   );
 }

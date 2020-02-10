@@ -6,7 +6,7 @@ import { Event } from 'web-components/lib/components/timeline';
 import mock from './mock.json';
 
 // imgSrc should be either web url or static image filenames within web/src/assets/
-// (eg to load web/src/assets/coorong.png, use « coorong.png » as imgSrc)
+// (eg to load web/src/assets/coorong.jpg, use "coorong.jpg" as imgSrc)
 
 interface Action {
   name: string;

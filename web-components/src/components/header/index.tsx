@@ -19,13 +19,18 @@ const useStyles = makeStyles((theme: Theme) => ({
     backgroundColor: theme.palette.primary.main,
   },
   root: {
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up('md')]: {
       padding: `${theme.spacing(2.5)} ${theme.spacing(37)}`,
+    },
+    [theme.breakpoints.up('sm')]: {
       height: theme.spacing(27.5),
       '& svg': {
         fontSize: '12rem',
         height: theme.spacing(20.75),
       },
+    },
+    [theme.breakpoints.down('sm')]: {
+      padding: `${theme.spacing(2.5)} ${theme.spacing(10)}`,
     },
     [theme.breakpoints.down('xs')]: {
       padding: `${theme.spacing(2.5)} ${theme.spacing(3.75)}`,

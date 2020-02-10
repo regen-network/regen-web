@@ -37,9 +37,20 @@ const useStyles = makeStyles((theme: Theme) => ({
     maxWidth: theme.breakpoints.values.lg,
     margin: '0 auto',
   },
-  projectTopContent: {
+  projectTopImage: {
     [theme.breakpoints.up('sm')]: {
+      borderRadius: '5px',
+    },
+  },
+  projectTopContent: {
+    [theme.breakpoints.up('md')]: {
       padding: `${theme.spacing(15.5)} ${theme.spacing(37)}`,
+    },
+    [theme.breakpoints.down('sm')]: {
+      padding: `${theme.spacing(15.5)} ${theme.spacing(10)}`,
+    },
+    [theme.breakpoints.down('xs')]: {
+      padding: 0,
     },
     [theme.breakpoints.up('xl')]: {
       paddingRight: theme.spacing(5),
@@ -75,8 +86,11 @@ const useStyles = makeStyles((theme: Theme) => ({
         marginBottom: theme.spacing(3.75),
       },
     },
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up('md')]: {
       padding: `${theme.spacing(17.25)} ${theme.spacing(60)}`,
+    },
+    [theme.breakpoints.down('sm')]: {
+      padding: `${theme.spacing(17.25)} ${theme.spacing(22)}`,
     },
     [theme.breakpoints.down('xs')]: {
       padding: `${theme.spacing(11)} ${theme.spacing(3.75)}`,
@@ -87,10 +101,14 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingRight: theme.spacing(5),
       paddingLeft: theme.spacing(5),
     },
-    [theme.breakpoints.between('sm', 'lg')]: {
+    [theme.breakpoints.between('md', 'lg')]: {
       paddingLeft: theme.spacing(35.875),
       paddingRight: theme.spacing(35.875),
       // paddingRight: theme.spacing(33.25),
+    },
+    [theme.breakpoints.down('sm')]: {
+      paddingLeft: theme.spacing(10),
+      paddingRight: theme.spacing(10),
     },
     [theme.breakpoints.up('sm')]: {
       paddingTop: theme.spacing(17.25),
@@ -111,8 +129,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingBottom: theme.spacing(27.5),
     },
-    [theme.breakpoints.between('sm', 'lg')]: {
+    [theme.breakpoints.between('md', 'lg')]: {
       paddingRight: theme.spacing(30.375),
+    },
+    [theme.breakpoints.down('sm')]: {
+      paddingRight: theme.spacing(5),
     },
     [theme.breakpoints.down('xs')]: {
       paddingBottom: theme.spacing(4),
@@ -140,8 +161,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   projectImpactContainer: {
-    [theme.breakpoints.between('sm', 'lg')]: {
+    [theme.breakpoints.between('md', 'lg')]: {
       paddingRight: theme.spacing(30.375),
+    },
+    [theme.breakpoints.down('sm')]: {
+      paddingRight: theme.spacing(5),
     },
     [theme.breakpoints.up('xl')]: {
       paddingRight: 0,
@@ -165,7 +189,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingLeft: theme.spacing(5),
     },
-    '& h3': {
+    '& h4': {
       [theme.breakpoints.up('sm')]: {
         marginBottom: theme.spacing(7),
         marginTop: theme.spacing(2.5),
@@ -233,7 +257,11 @@ export default function ProjectDetails({ project }: ProjectProps): JSX.Element {
       <div className={`${classes.projectTop} project-top`}>
         <Grid container className={`${classes.projectContent} ${classes.projectTopContent}`}>
           <Grid item xs={12} sm={6}>
-            <img alt={project.name} src={require(`../assets/${project.photos[0]}`)} />
+            <img
+              className={classes.projectTopImage}
+              alt={project.name}
+              src={require(`../assets/${project.photos[0]}`)}
+            />
           </Grid>
           <Grid item xs={12} sm={6} className={classes.projectTopText}>
             <Title variant="h1">{project.name}</Title>

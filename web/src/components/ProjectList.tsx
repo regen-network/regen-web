@@ -29,10 +29,15 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   text: {
     position: 'relative',
+    [theme.breakpoints.up('md')]: {
+      paddingLeft: theme.spacing(36.75),
+    },
+    [theme.breakpoints.down('sm')]: {
+      paddingLeft: theme.spacing(10),
+    },
     [theme.breakpoints.up('sm')]: {
       paddingTop: theme.spacing(28.75),
       paddingBottom: theme.spacing(17.25),
-      paddingLeft: theme.spacing(36.75),
     },
     [theme.breakpoints.down('xs')]: {
       paddingTop: theme.spacing(38.75),
@@ -59,8 +64,13 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   projects: {
     backgroundColor: '#f9f9f9',
-    [theme.breakpoints.up('sm')]: {
-      padding: `${theme.spacing(17.25)} ${theme.spacing(37.75)} ${theme.spacing(22.25)}`,
+    [theme.breakpoints.up('md')]: {
+      padding: `${theme.spacing(17.25)} ${theme.spacing(32.75)} ${theme.spacing(22.25)} ${theme.spacing(
+        37.75,
+      )}`,
+    },
+    [theme.breakpoints.down('sm')]: {
+      padding: `${theme.spacing(17.25)} ${theme.spacing(5)} ${theme.spacing(22.25)} ${theme.spacing(10)}`,
     },
     [theme.breakpoints.down('xs')]: {
       padding: `${theme.spacing(11.5)} ${theme.spacing(3.75)} ${theme.spacing(16.75)}`,
@@ -99,6 +109,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.down('xs')]: {
       paddingBottom: theme.spacing(8),
     },
+    // [theme.breakpoints.down(900)]: {
+    //   maxWidth: '100%',
+    //   flexBasis: '100%',
+    // },
   },
   projectLink: {
     textDecoration: 'none',
@@ -124,7 +138,7 @@ export default function ProjectList({ projects }: ProjectsProps): JSX.Element {
         </div>
       </div>
       <div className={classes.projects}>
-        <div className={classes.australia}>australia</div>
+        {/**<div className={classes.australia}>australia</div>**/}
         <Grid container className={classes.projectList}>
           {projects.map((p, i) => (
             <Grid className={classes.project} item xs={12} sm={6} md={4} key={p.id}>
@@ -138,7 +152,6 @@ export default function ProjectList({ projects }: ProjectsProps): JSX.Element {
                   developer={{ name: p.developer.name, imgSrc: getImgSrc(p.developer.imgSrc) }}
                   tag={p.creditClass.tag}
                   displayCity={false}
-                  displayCountry={false}
                 />
               </Link>
             </Grid>

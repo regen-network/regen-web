@@ -271,7 +271,7 @@ export default function ProjectDetails({ project }: ProjectProps): JSX.Element {
         )}
         {protectedSpecies && (
           <Grid item xs={12} sm={4} className={classes.protectedSpecies}>
-            <Title variant="h3">Protected Species</Title>
+            <Title variant="h4">Protected Species</Title>
             <ProtectedSpecies species={protectedSpecies} />
           </Grid>
         )}

@@ -144,7 +144,7 @@ export default function TimelineItem({
   return (
     <div className={classes.content}>
       <div className={classes.date}>{new Date(date).toLocaleDateString('en-US', options)}</div>
-      <Title variant="h4">{title}</Title>
+      <Title variant="h6">{title}</Title>
       <div className={classes.description}>{description}</div>
       <span className={classes.circle} />
       <div className={classes.bar} />

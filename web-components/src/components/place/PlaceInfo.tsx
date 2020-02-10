@@ -20,10 +20,13 @@ interface StyleProps {
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   root: {
     display: 'flex',
-    alignItems: 'center',
+    // alignItems: 'center',
     [theme.breakpoints.down('xs')]: {
       alignItems: 'baseline',
     },
+  },
+  icon: {
+    paddingTop: '2px',
   },
   content: props => ({
     [theme.breakpoints.up('sm')]: {
@@ -39,7 +42,9 @@ export default function PlaceInfo({ children, fontSize, color, smFontSize }: Pla
   const classes = useStyles({ smFontSize, fontSize, color });
   return (
     <div className={classes.root}>
-      <PinIcon />
+      <span className={classes.icon}>
+        <PinIcon />
+      </span>
       <Typography className={classes.content}>{children}</Typography>
     </div>
   );

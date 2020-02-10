@@ -157,7 +157,7 @@ export default function CreditInfo({
           <Typography className={classes.description}>{description}</Typography>
         </div>
         <div className={classes.activitiesTitle}>
-          <Title variant="h3">Key activities and outcomes</Title>
+          <Title variant="h4">Key activities and outcomes</Title>
         </div>
         <div className={classes.activitiesItem}>
           <ul className={classes.activities}>

@@ -44,7 +44,7 @@ function getAbbreviation(unit: string): string {
 
 const useStyles = makeStyles((theme: Theme) => ({
   separator: {
-    border: '1px solid #D2D5D9',
+    border: '0.5px solid #D2D5D9',
     [theme.breakpoints.up('sm')]: {
       marginTop: theme.spacing(6.25),
       marginBottom: theme.spacing(5.25),

@@ -1,7 +1,17 @@
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeOptions } from '@material-ui/core/styles/createMuiTheme';
 
-const defaultTheme = createMuiTheme();
+const defaultTheme = createMuiTheme({
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 700,
+      md: 1074,
+      lg: 1280,
+      xl: 1400,
+    },
+  },
+});
 
 const theme = createMuiTheme({
   palette: {
@@ -47,10 +57,18 @@ const theme = createMuiTheme({
         fontSize: '1.5rem',
       },
       [defaultTheme.breakpoints.down('xs')]: {
-        fontSize: '1.125rem',
+        fontSize: '1.3125rem',
       },
     },
     h4: {
+      [defaultTheme.breakpoints.up('sm')]: {
+        fontSize: '1.5rem',
+      },
+      [defaultTheme.breakpoints.down('xs')]: {
+        fontSize: '1.125rem',
+      },
+    },
+    h5: {
       [defaultTheme.breakpoints.up('sm')]: {
         fontSize: '1.3125rem',
       },
@@ -58,22 +76,14 @@ const theme = createMuiTheme({
         fontSize: '1.125rem',
       },
     },
-    h5: {
+    h6: {
       fontSize: '1.125rem',
     },
     body2: {
       fontSize: '0.875rem',
     },
   },
-  breakpoints: {
-    values: {
-      xs: 0,
-      sm: 600,
-      md: 960,
-      lg: 1280,
-      xl: 1400,
-    },
-  },
+  breakpoints: defaultTheme.breakpoints,
   shadows: [
     defaultTheme.shadows[0],
     '0px 4px 10px rgba(0, 0, 0, 0.05)',

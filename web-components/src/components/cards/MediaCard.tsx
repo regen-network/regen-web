@@ -44,6 +44,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     color: theme.palette.primary.main,
     boxShadow: '0px 0px 4px rgba(0, 0, 0, 0.1)',
     borderRadius: '50px',
+    textShadow: '0px 0px 2px rgba(0, 0, 0, 0.3)',
     textTransform: 'uppercase',
     fontWeight: 900,
     fontFamily: theme.typography.fontFamily,
@@ -56,7 +57,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     bottom: 0,
     width: '100%',
     borderRadius: '9px 9px 0px 0px',
-    background: 'linear-gradient(180.28deg, rgba(0, 0, 0, 0) 65.91%, rgba(0, 0, 0, 0.4) 99.59%)',
+    background: 'linear-gradient(180.28deg, rgba(0, 0, 0, 0) 65.91%, rgba(0, 0, 0, 0.6) 99.59%)',
   },
 }));
 

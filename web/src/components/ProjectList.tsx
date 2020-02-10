@@ -127,7 +127,7 @@ export default function ProjectList({ projects }: ProjectsProps): JSX.Element {
         <div className={classes.australia}>australia</div>
         <Grid container className={classes.projectList}>
           {projects.map((p, i) => (
-            <Grid className={classes.project} item xs={12} sm={4} key={p.id}>
+            <Grid className={classes.project} item xs={12} sm={6} md={4} key={p.id}>
               <Link className={classes.projectLink} to={`${url}/${p.id}`}>
                 <ProjectCard
                   name={p.name}

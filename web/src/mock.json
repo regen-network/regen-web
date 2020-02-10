@@ -9,7 +9,11 @@
     {
       "id": "odonata",
       "name": "Coorong Project",
-      "place": "Meningie, South Australia, Australia",
+      "place": {
+        "city": "Meningie",
+        "state": "South Australia",
+        "country": "Australia"
+      },
       "type": "Conservation project",
       "area": 200,
       "areaUnit": "hectares",
@@ -17,13 +21,20 @@
       "endDate": "February 2029",
       "developer": {
         "name": "Odonata",
-        "place": "South Melbourne, Victoria, Australia",
+        "place": {
+          "city": "South Melbourne",
+          "state": "Victoria",
+          "country": "Australia"
+        },
         "imgSrc": "https://media-exp1.licdn.com/dms/image/C560BAQHdwgTnJg5_iw/company-logo_200_200/0?e=2159024400&v=beta&t=wjeW2njk4G7GcF8Vz4Hkce8pdpZvWsrOjcyynlMTv_Q",
         "description": "Odonata is a not-for-profit entity supporting biodiversity impact solutions."
       },
       "steward": {
         "name": "Ngarrindjeri Tribe",
-        "place": "Southern Australia",
+        "place": {
+          "state": "Southern Australia",
+          "country": "Australia"
+        },
         "imgSrc": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Ngarrindjeri_Nation_Flag.svg/250px-Ngarrindjeri_Nation_Flag.svg.png",
         "description": "The Ngarrindjeri culture is centered around the lower lakes of the Murray River."
       },
@@ -165,7 +176,11 @@
     {
       "id": "woa",
       "name": "Andover Farm",
-      "place": "Kojonup, Western Australia, Australia",
+      "place": {
+        "city": "Kojonup",
+        "state": "Western Australia",
+        "country": "Australia"
+      },
       "type": "Conservation project",
       "area": 1787,
       "areaUnit": "hectares",
@@ -173,13 +188,20 @@
       "endDate": "February 2029",
       "developer": {
         "name": "Wide Open Agriculture",
-        "place": "Williams, Western Australia, Australia",
+        "place": {
+          "city": "Williams",
+          "state": "Western Australia",
+          "country": "Australia"
+        },
         "imgSrc": "woa.png",
         "description": "Wide Open Agriculture (ASX: WOA) is a Regenerative Food & Farming company."
       },
       "steward": {
         "name": "Rob Rex and Carolyn Rex",
-        "place": "Western Australia, Australia",
+        "place": {
+          "state": "Western Australia",
+          "country": "Australia"
+        },
         "imgSrc": "rex.png",
         "description": "Rob and Carolyn Rex farm and manage this land using the principles of regenerative agriculture."
       },

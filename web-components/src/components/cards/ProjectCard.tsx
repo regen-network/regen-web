@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTheme, makeStyles, Theme } from '@material-ui/core/styles';
 import MediaCard from './MediaCard';
-import ProjectPlaceInfo from '../place/ProjectPlaceInfo';
+import ProjectPlaceInfo, { Place } from '../place/ProjectPlaceInfo';
 import UserInfo, { User } from '../user/UserInfo';
 
 export interface ProjectInfo {
@@ -16,12 +16,14 @@ export interface ProjectInfo {
 interface ProjectCardProps {
   name: string;
   imgSrc: string;
-  place: string;
+  place: Place;
   area: number;
   areaUnit: string;
   developer: User;
   tag?: string;
   onClick?: () => void;
+  displayCity?: boolean;
+  displayCountry?: boolean;
 }
 
 interface AreaUnits {
@@ -63,6 +65,8 @@ export default function ProjectCard({
   developer,
   onClick,
   tag,
+  displayCity = true,
+  displayCountry = true,
 }: ProjectCardProps): JSX.Element {
   const theme = useTheme();
   const classes = useStyles();
@@ -85,6 +89,8 @@ export default function ProjectCard({
         smFontSize="0.8125rem"
         fontSize="0.75rem"
         color={theme.palette.primary.light}
+        displayCity={displayCity}
+        displayCountry={displayCountry}
       />
       <hr className={classes.separator} />
       <UserInfo user={developer} size="project" />

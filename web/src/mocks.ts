@@ -1,4 +1,5 @@
 import { User } from 'web-components/lib/components/user/UserInfo';
+import { Place } from 'web-components/lib/components/place/ProjectPlaceInfo';
 import { ItemProps as ProtectedSpeciesItem } from 'web-components/lib/components/protected-species/Item';
 import { Event } from 'web-components/lib/components/timeline';
 
@@ -35,7 +36,7 @@ interface CreditClass {
 export interface Project {
   id: string; // human-readable id for now
   name: string;
-  place: string;
+  place: Place;
   type: string;
   area: number;
   areaUnit: string;

@@ -311,7 +311,7 @@ exports[`Storyshots Components|Cards Project Card 1`] = `
           <p
             className="MuiTypography-root makeStyles-content-1385 makeStyles-content-1386 MuiTypography-body1"
           >
-            Adelaide, South Australia, Australia
+            undefined, undefined
             <span
               className="makeStyles-separator-1383"
             >
@@ -398,7 +398,7 @@ exports[`Storyshots Components|Cards Project Developer Card 1`] = `
             <p
               className="MuiTypography-root makeStyles-place-676 makeStyles-place-679 MuiTypography-body1"
             >
-              South Melbourne, Victoria, Australia
+              undefined, undefined
             </p>
             <p
               className="MuiTypography-root makeStyles-description-675 MuiTypography-body1"
@@ -445,7 +445,7 @@ exports[`Storyshots Components|Cards Project Developer Card 1`] = `
               <p
                 className="MuiTypography-root makeStyles-place-676 makeStyles-place-795 MuiTypography-body1"
               >
-                Southern Australia
+                undefined, undefined
               </p>
               <p
                 className="MuiTypography-root makeStyles-description-675 MuiTypography-body1"
@@ -726,7 +726,7 @@ exports[`Storyshots Components|Place Project Place Info 1`] = `
     <p
       className="MuiTypography-root makeStyles-content-1814 makeStyles-content-1815 MuiTypography-body1"
     >
-      Melbourne, Victoria, Australia
+      undefined, undefined
       <span
         className="makeStyles-separator-1812"
       >
@@ -1884,7 +1884,7 @@ exports[`Storyshots Components|User Big User Info 1`] = `
       <p
         className="MuiTypography-root makeStyles-place-3396 makeStyles-place-3399 MuiTypography-body1"
       >
-        South Melbourne, Victoria, Australia
+        undefined, undefined
       </p>
       <p
         className="MuiTypography-root makeStyles-description-3395 MuiTypography-body1"
@@ -1925,7 +1925,7 @@ exports[`Storyshots Components|User Column User Info 1`] = `
       <p
         className="MuiTypography-root makeStyles-place-3698 makeStyles-place-3701 MuiTypography-body1"
       >
-        South Melbourne, Victoria, Australia
+        undefined, undefined
       </p>
       <p
         className="MuiTypography-root makeStyles-description-3697 MuiTypography-body1"
@@ -2000,7 +2000,7 @@ exports[`Storyshots Components|User Medium User Info 1`] = `
       <p
         className="MuiTypography-root makeStyles-place-3094 makeStyles-place-3097 MuiTypography-body1"
       >
-        South Melbourne, Victoria, Australia
+        undefined, undefined
       </p>
       <p
         className="MuiTypography-root makeStyles-description-3093 MuiTypography-body1"
@@ -2067,7 +2067,7 @@ exports[`Storyshots Components|User With Title 1`] = `
         <p
           className="MuiTypography-root makeStyles-place-4032 makeStyles-place-4035 MuiTypography-body1"
         >
-          South Melbourne, Victoria, Australia
+          undefined, undefined
         </p>
         <p
           className="MuiTypography-root makeStyles-description-4031 MuiTypography-body1"

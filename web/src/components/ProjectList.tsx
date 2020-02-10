@@ -137,6 +137,8 @@ export default function ProjectList({ projects }: ProjectsProps): JSX.Element {
                   imgSrc={getImgSrc(p.photos[0])}
                   developer={{ name: p.developer.name, imgSrc: getImgSrc(p.developer.imgSrc) }}
                   tag={p.creditClass.tag}
+                  displayCity={false}
+                  displayCountry={false}
                 />
               </Link>
             </Grid>

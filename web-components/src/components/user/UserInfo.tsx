@@ -4,10 +4,12 @@ import Grid, { GridDirection } from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import UserAvatar from './UserAvatar';
 import { getFontSize } from '../../theme/sizing';
+import { getFormattedPlace } from '../place/place';
+import { Place } from '../place/ProjectPlaceInfo';
 
 export interface User {
   name: string;
-  place?: string;
+  place?: Place;
   imgSrc?: string;
   description?: string;
   link?: string;
@@ -18,6 +20,8 @@ interface UserInfoProps {
   size?: string;
   direction?: GridDirection;
   border?: boolean;
+  displayCity?: boolean;
+  displayCountry?: boolean;
   icon?: any;
 }
 
@@ -76,6 +80,8 @@ export default function UserInfo({
   direction,
   border = true,
   icon,
+  displayCity = true,
+  displayCountry = true,
 }: UserInfoProps): JSX.Element {
   const classes = useStyles({ description: user.description, direction, size });
   const name = <Typography className={classes.name}>{user.name}</Typography>;
@@ -100,7 +106,11 @@ export default function UserInfo({
         ) : (
           name
         )}
-        {user.place && <Typography className={classes.place}>{user.place}</Typography>}
+        {user.place && (
+          <Typography className={classes.place}>
+            {getFormattedPlace(user.place, displayCity, displayCountry)}
+          </Typography>
+        )}
         {user.description && <Typography className={classes.description}>{user.description}</Typography>}
       </Grid>
     </Grid>

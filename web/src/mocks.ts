@@ -62,9 +62,28 @@ export interface Project {
   // missing: gis, documents
 }
 
+interface BasicProject {
+  id: string;
+  name: string;
+}
+
+interface Purchase {
+  total: number;
+  date: Date | string;
+}
+
+interface PurchasedCredits {
+  userId: string;
+  project: BasicProject;
+  currentPurchase: Purchase;
+  totalPurchased: number;
+  totalAvailable: number;
+}
+
 export interface Mock {
   creditsIssuer: User;
   projects: Project[];
+  purchasedCredits: PurchasedCredits[];
 }
 
 export const creditsIssuer: User = mock.creditsIssuer;

@@ -5,6 +5,21 @@
     "imgSrc": "regen.png",
     "link": "https://www.regen.network/"
   },
+  "purchasedCredits": [
+    {
+      "userId": "userId",
+      "project": {
+        "id": "odonata",
+        "name": "Coorong Project"
+      },
+      "currentPurchase": {
+        "total": 3000,
+        "date": "Feb 15, 2020"
+      },
+      "totalPurchased": 4000,
+      "totalAvailable": 65000
+    }
+  ],
   "projects": [
     {
       "id": "odonata",

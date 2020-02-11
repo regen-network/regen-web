@@ -2,7 +2,7 @@ import * as React from 'react';
 import TimelineItem from 'web-components/lib/components/timeline/TimelineItem';
 import Timeline, { Event } from 'web-components/lib/components/timeline';
 import theme from '../../theme/muiTheme';
-import { withKnobs, object, date, boolean, text } from '@storybook/addon-knobs';
+import { withKnobs, object, date, boolean, text, number } from '@storybook/addon-knobs';
 
 export default {
   title: 'Components|Timeline',
@@ -44,7 +44,7 @@ const events: Event[] = [
 ];
 
 export const timeline = (): JSX.Element => (
-  <Timeline events={object('Events', events)} completedItemIndex={1} />
+  <Timeline events={object('Events', events)} completedItemIndex={number('completedItemIndex', 1)} />
 );
 export const timelineItem = (): JSX.Element => (
   <TimelineItem

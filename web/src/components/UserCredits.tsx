@@ -80,13 +80,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   cardContainer: {
     [theme.breakpoints.up('sm')]: {
       marginLeft: theme.spacing(-2.5),
-      marginTop: theme.spacing(11.5),
       paddingTop: theme.spacing(11.5),
       paddingRight: theme.spacing(5),
       paddingLeft: theme.spacing(10),
     },
     [theme.breakpoints.down('xs')]: {
-      marginTop: theme.spacing(8.75),
       paddingTop: theme.spacing(8.25),
       paddingRight: theme.spacing(4),
       paddingLeft: theme.spacing(4),

@@ -44,7 +44,7 @@ function getAbbreviation(unit: string): string {
 
 const useStyles = makeStyles((theme: Theme) => ({
   separator: {
-    border: '0.5px solid #D2D5D9',
+    border: `0.5px solid ${theme.palette.grey[50]}`,
     [theme.breakpoints.up('sm')]: {
       marginTop: theme.spacing(6.25),
       marginBottom: theme.spacing(5.25),
@@ -79,7 +79,7 @@ export default function ProjectCard({
       elevation={1}
       titleVariant="h3"
       borderRadius="10px"
-      borderColor="#D2D5D9"
+      borderColor={theme.palette.grey[50]}
       tag={tag}
     >
       <ProjectPlaceInfo

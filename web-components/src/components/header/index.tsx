@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     margin: '0 auto',
   },
   searchIcon: {
-    color: '#D2D5D9', // TODO: change with color from theme.palette
+    color: theme.palette.grey[50],
     marginRight: theme.spacing(6.25),
     marginBottom: theme.spacing(1),
   },

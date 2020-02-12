@@ -6,6 +6,8 @@ import { User } from 'web-components/lib/components/user/UserInfo';
 import { withKnobs, text, object, number } from '@storybook/addon-knobs';
 
 // import CreditCard, { CreditInfo } from 'web-components/lib/components/cards/CreditCard';
+import PurchasedCreditsCard from 'web-components/lib/components/cards/PurchasedCreditsCard';
+import CurrentCreditsIcon from 'web-components/lib/components/icons/CurrentCreditsIcon';
 import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
 
 export default {
@@ -99,5 +101,14 @@ export const projectCard = (): JSX.Element => (
     })}
     tag="biodiversity"
     onClick={onClick}
+  />
+);
+
+export const purchasedCreditsCard = (): JSX.Element => (
+  <PurchasedCreditsCard
+    number={number('number', 3000)}
+    description={text('description', 'Credits you purchased')}
+    date={text('date', 'Feb 15, 2020')}
+    icon={<CurrentCreditsIcon />}
   />
 );

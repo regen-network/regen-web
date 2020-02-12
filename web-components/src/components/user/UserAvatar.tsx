@@ -19,7 +19,7 @@ interface StyleProps {
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   root: props => ({
-    border: props.border ? '1px solid #D2D5D9' : 'none',
+    border: props.border ? `1px solid ${theme.palette.grey[50]}` : 'none',
     [theme.breakpoints.up('sm')]: {
       width: theme.spacing(props.spacing.sm),
       height: theme.spacing(props.spacing.sm),

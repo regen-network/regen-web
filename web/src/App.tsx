@@ -1,5 +1,5 @@
-import React from 'react';
-import { BrowserRouter as Router, Switch, Route, Link, useParams } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Switch, Route, Link, useParams, useLocation } from 'react-router-dom';
 
 import logo from './assets/logo.png';
 
@@ -10,6 +10,16 @@ import Header from 'web-components/lib/components/header';
 import ProjectDetails from './components/ProjectDetails';
 import ProjectList from './components/ProjectList';
 import UserCredits from './components/UserCredits';
+
+function ScrollToTop(): null {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
 
 function Home(): JSX.Element {
   return (
@@ -45,6 +55,7 @@ function Projects(): JSX.Element {
 const App: React.FC = (): JSX.Element => {
   return (
     <Router>
+      <ScrollToTop />
       <div>
         <Header logo={logo} />
         <Switch>

@@ -25,7 +25,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     border: `1px solid ${props.borderColor || theme.palette.info.light}`,
     borderRadius: props.borderRadius || '5px',
     maxWidth: props.width || '100%',
-    maxHeight: props.height || 'inherit',
+    height: props.height || 'inherit',
     cursor: props.onClick ? 'pointer' : 'inherit',
   }),
 }));

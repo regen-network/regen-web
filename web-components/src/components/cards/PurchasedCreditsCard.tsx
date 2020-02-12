@@ -15,6 +15,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     backgroundColor: theme.palette.primary.main,
     paddingTop: theme.spacing(8.75),
     paddingBottom: theme.spacing(7.75),
+    paddingRight: theme.spacing(4.5),
+    paddingLeft: theme.spacing(4.5),
   },
   iconContainer: {
     backgroundColor: theme.palette.secondary.light,
@@ -59,7 +61,7 @@ export default function CreditCard({ number, description, date, icon }: CreditCa
   const classes = useStyles({});
   const theme = useTheme();
   return (
-    <Card borderRadius="10px" borderColor={theme.palette.grey[50]} elevation={1} height="16.3125rem">
+    <Card borderRadius="10px" borderColor={theme.palette.grey[50]} elevation={1} height="100%">
       <div className={classes.container}>
         <div className={classes.iconContainer}>
           <Grid className={classes.icon} container alignItems="center" justify="center">

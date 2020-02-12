@@ -124,7 +124,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     [theme.breakpoints.down('xs')]: {
       marginTop: theme.spacing(7),
     },
-    '& h3': {
+    '& h4': {
       [theme.breakpoints.up('sm')]: {
         marginTop: theme.spacing(3.5),
       },

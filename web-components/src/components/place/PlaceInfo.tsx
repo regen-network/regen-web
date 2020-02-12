@@ -20,16 +20,13 @@ interface StyleProps {
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   root: {
     display: 'flex',
-    // [theme.breakpoints.down('xs')]: {
-    //   alignItems: 'baseline',
-    // },
   },
   icon: {
     [theme.breakpoints.up('sm')]: {
       paddingTop: '2px',
     },
     [theme.breakpoints.down('xs')]: {
-      paddingTop: '4px',
+      paddingTop: '1px',
     },
   },
   content: props => ({

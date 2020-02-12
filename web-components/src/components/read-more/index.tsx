@@ -43,7 +43,7 @@ export default function ReadMore({ children, length = 757 }: ReadMoreProps): JSX
           <Description fontSize={fontSize}>{texts.rest}</Description>
         </Fade>
       </div>
-      {children.length > length && (
+      {texts.rest.length !== 0 && (
         <OutlinedButton
           onClick={handleChange}
           startIcon={

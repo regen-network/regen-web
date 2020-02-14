@@ -20,16 +20,19 @@ export interface MediaCardProps {
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
-  container: {
-    [theme.breakpoints.up('sm')]: {
-      padding: `${theme.spacing(4.5)} ${theme.spacing(5.25)} ${theme.spacing(5.25)}`,
+  root: {
+    height: '100%',
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    '& h3': {
+      [theme.breakpoints.up('sm')]: {
+        padding: `${theme.spacing(4.5)} ${theme.spacing(5.25)} ${theme.spacing(3)}`,
+      },
+      [theme.breakpoints.down('xs')]: {
+        padding: `${theme.spacing(4)} ${theme.spacing(4.5)} ${theme.spacing(3)}`,
+      },
     },
-    [theme.breakpoints.down('xs')]: {
-      padding: `${theme.spacing(4)} ${theme.spacing(4.5)} ${theme.spacing(5.25)}`,
-    },
-  },
-  content: {
-    marginTop: theme.spacing(3),
   },
   image: {
     height: theme.spacing(48.75),
@@ -83,13 +86,13 @@ export default function MediaCard({
       borderColor={borderColor}
       borderRadius={borderRadius}
     >
-      <CardMedia className={classes.image} image={imgSrc}>
-        <div className={classes.backgroundGradient} />
-        {tag && <div className={classes.tag}>{tag}</div>}
-      </CardMedia>
-      <div className={classes.container}>
+      <div className={classes.root}>
+        <CardMedia className={classes.image} image={imgSrc}>
+          <div className={classes.backgroundGradient} />
+          {tag && <div className={classes.tag}>{tag}</div>}
+        </CardMedia>
         <Title variant={titleVariant}>{name}</Title>
-        <div className={classes.content}>{children}</div>
+        {children}
       </div>
     </Card>
   );

@@ -48,10 +48,31 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       marginTop: theme.spacing(6.25),
       marginBottom: theme.spacing(5.25),
+      marginRight: theme.spacing(5.25),
+      marginLeft: theme.spacing(5.25),
     },
     [theme.breakpoints.down('xs')]: {
       marginTop: theme.spacing(4.5),
       marginBottom: theme.spacing(5),
+      marginRight: theme.spacing(4.5),
+      marginLeft: theme.spacing(4.5),
+    },
+  },
+  placeInfo: {
+    flex: '1 0 auto',
+    [theme.breakpoints.up('sm')]: {
+      padding: `0 ${theme.spacing(5.25)}`,
+    },
+    [theme.breakpoints.down('xs')]: {
+      padding: `0 ${theme.spacing(4.5)}`,
+    },
+  },
+  userInfo: {
+    [theme.breakpoints.up('sm')]: {
+      padding: `0 ${theme.spacing(5.25)} ${theme.spacing(5.25)}`,
+    },
+    [theme.breakpoints.down('xs')]: {
+      padding: `0 ${theme.spacing(4.5)} ${theme.spacing(5.25)}`,
     },
   },
 }));
@@ -82,18 +103,22 @@ export default function ProjectCard({
       borderColor={theme.palette.grey[50]}
       tag={tag}
     >
-      <ProjectPlaceInfo
-        place={place}
-        area={area}
-        areaUnit={getAbbreviation(areaUnit)}
-        smFontSize="0.8125rem"
-        fontSize="0.75rem"
-        color={theme.palette.primary.light}
-        displayCity={displayCity}
-        displayCountry={displayCountry}
-      />
-      <hr className={classes.separator} />
-      <UserInfo user={developer} size="project" />
+      <div className={classes.placeInfo}>
+        <ProjectPlaceInfo
+          place={place}
+          area={area}
+          areaUnit={getAbbreviation(areaUnit)}
+          smFontSize="0.8125rem"
+          fontSize="0.75rem"
+          color={theme.palette.primary.light}
+          displayCity={displayCity}
+          displayCountry={displayCountry}
+        />
+      </div>
+      <div className={classes.separator} />
+      <div className={classes.userInfo}>
+        <UserInfo user={developer} size="project" />
+      </div>
     </MediaCard>
   );
 }

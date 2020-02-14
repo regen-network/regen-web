@@ -391,7 +391,7 @@
           "state": "New South Wales",
           "country": "Australia"
         },
-        "imgSrc": "impactag.png",
+        "imgSrc": "impactag.jpg",
         "description": "We deliver strong economic returns whilst regenerating environmental assets."
       },
       "steward": {
@@ -401,7 +401,7 @@
           "state": "New South Wales",
           "country": "Australia"
         },
-        "imgSrc": "wilmot.png",
+        "imgSrc": "wilmot.jpg",
         "description": "Wilmot Cattle Company is an innovative land, cattle, and natural grass-fed beef business."
       },
       "owner": {
@@ -445,7 +445,7 @@
           "name": "Soil organic carbon",
           "description": "Sequestering carbon in SOC is one way to mitigate climate change.",
           "monitored": true,
-          "imgSrc": "soc.png"
+          "imgSrc": "impactag-soc.jpg"
         },
         {
           "name": "Above ground biomass",

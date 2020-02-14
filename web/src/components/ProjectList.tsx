@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useRouteMatch } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import { Project } from '../mocks';
 import { User } from 'web-components/lib/components/user/UserInfo';
@@ -126,7 +126,7 @@ interface ProjectsProps {
 
 export default function ProjectList({ projects }: ProjectsProps): JSX.Element {
   const classes = useStyles({});
-  let { url } = useRouteMatch();
+  // let { url } = useRouteMatch();
 
   return (
     <div className={classes.root}>
@@ -152,7 +152,7 @@ export default function ProjectList({ projects }: ProjectsProps): JSX.Element {
             }
             return (
               <Grid className={classes.project} item xs={12} sm={6} md={4} key={p.id}>
-                <Link className={classes.projectLink} to={`${url}/${p.id}`}>
+                <Link className={classes.projectLink} to={`/projects/${p.id}`}>
                   <ProjectCard
                     name={p.name}
                     place={p.place}

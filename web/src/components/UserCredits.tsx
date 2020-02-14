@@ -116,7 +116,7 @@ export default function UserCredits({ credits }: PurchasedCreditsProps): JSX.Ele
   const classes = useStyles({});
   return (
     <div className={classes.root}>
-      <Grid container alignItems="center" justify="space-between" className={classes.title}>
+      <Grid container alignItems="flex-end" justify="space-between" className={classes.title}>
         <Grid item sm={6} xs={12}>
           <Title variant="h2">
             Credits for{' '}
@@ -125,9 +125,9 @@ export default function UserCredits({ credits }: PurchasedCreditsProps): JSX.Ele
             </Link>
           </Title>
         </Grid>
-        <Grid item sm={6} xs={12} className={classes.ledgerText}>
+        {/*<Grid item sm={6} xs={12} className={classes.ledgerText}>
           see on the ledger»
-        </Grid>
+        </Grid>*/}
       </Grid>
       <Grid container className={classes.cardContainer}>
         <Grid className={classes.card} item xs={12} sm={4}>

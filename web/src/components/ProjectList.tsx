@@ -104,6 +104,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   project: {
+    display: 'flex',
     [theme.breakpoints.up('sm')]: {
       padding: `${theme.spacing(0)} ${theme.spacing(2.5)} ${theme.spacing(2.5)}`,
     },
@@ -117,6 +118,8 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   projectLink: {
     textDecoration: 'none',
+    height: '100%',
+    width: '100%',
   },
 }));
 

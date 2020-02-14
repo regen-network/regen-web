@@ -6,6 +6,7 @@ import UserAvatar from './UserAvatar';
 import { getFontSize } from '../../theme/sizing';
 import { getFormattedPlace } from '../place/place';
 import { Place } from '../place/ProjectPlaceInfo';
+import OrganizationIcon from '../icons/OrganizationIcon';
 
 export interface User {
   name: string;
@@ -13,6 +14,7 @@ export interface User {
   imgSrc?: string;
   description?: string;
   link?: string;
+  type: string; // user or organization
 }
 
 interface UserInfoProps {
@@ -95,7 +97,7 @@ export default function UserInfo({
           href={user.link}
           size={size}
           border={border}
-          icon={icon}
+          icon={!user.imgSrc && user.type === 'organization' ? <OrganizationIcon /> : icon}
         />
       </Grid>
       <Grid item className={classes.text}>

@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import Card from './Card';
 import VerifiedIcon from '../icons/VerifiedIcon';
 
-interface ImpactCardProps {
+export interface ImpactCardProps {
   name: string;
   description: string;
   imgSrc: string;

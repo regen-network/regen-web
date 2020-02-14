@@ -1,6 +1,8 @@
 import * as React from 'react';
-import Item, { ItemProps } from 'web-components/lib/components/protected-species/Item';
-import ProtectedSpecies, { ProtectedSpeciesProps } from 'web-components/lib/components/protected-species';
+import Item, { ItemProps } from 'web-components/lib/components/sliders/Item';
+import ProtectedSpecies, {
+  ProtectedSpeciesProps,
+} from 'web-components/lib/components/sliders/ProtectedSpecies';
 import Grid from '@material-ui/core/Grid';
 import { withKnobs, text, object } from '@storybook/addon-knobs';
 

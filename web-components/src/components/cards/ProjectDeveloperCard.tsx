@@ -7,6 +7,7 @@ import { User } from '../user/UserInfo';
 interface ProjectDeveloperCardProps {
   projectDeveloper: User;
   landSteward?: User;
+  landOwner?: User;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -23,6 +24,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 export default function ProjectDeveloperCard({
   projectDeveloper,
   landSteward,
+  landOwner,
 }: ProjectDeveloperCardProps): JSX.Element {
   const classes = useStyles({});
   return (
@@ -33,6 +35,12 @@ export default function ProjectDeveloperCard({
           <div>
             <hr className={classes.separator} />
             <UserInfoWithTitle user={landSteward} title="land steward" />
+          </div>
+        )}
+        {landOwner && (
+          <div>
+            <hr className={classes.separator} />
+            <UserInfoWithTitle user={landOwner} title="land owner" />
           </div>
         )}
       </div>

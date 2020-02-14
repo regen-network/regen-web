@@ -1,6 +1,6 @@
 import initStoryshots from '@storybook/addon-storyshots';
 import path from 'path';
-import './matchMedia.mock';
+import './jest.mock';
 
 initStoryshots({
   configPath: path.resolve(__dirname, '../../web-storybook/.storybook'),

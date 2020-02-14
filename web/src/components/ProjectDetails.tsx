@@ -2,7 +2,6 @@ import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 
 import Grid from '@material-ui/core/Grid';
-import map from '../assets/map.png';
 import background from '../assets/background.jpg';
 import { Project, Impact } from '../mocks';
 
@@ -16,8 +15,9 @@ import Action from 'web-components/lib/components/action';
 import Timeline from 'web-components/lib/components/timeline';
 import ReadMore from 'web-components/lib/components/read-more';
 import CreditDetails from 'web-components/lib/components/credits/CreditDetails';
-import ProtectedSpecies from 'web-components/lib/components/protected-species';
-import { ItemProps as ProtectedSpeciesItem } from 'web-components/lib/components/protected-species/Item';
+import ProtectedSpecies from 'web-components/lib/components/sliders/ProtectedSpecies';
+import NonMonitoredImpact from 'web-components/lib/components/sliders/NonMonitoredImpact';
+import { ItemProps as ProtectedSpeciesItem } from 'web-components/lib/components/sliders/Item';
 import { User } from 'web-components/lib/components/user/UserInfo';
 import { getImgSrc } from '../lib/imgSrc';
 
@@ -212,7 +212,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   map: {
     maxHeight: '50rem',
-    borderRadius: 'none',
   },
 }));
 
@@ -224,6 +223,8 @@ function getProjectUser(projectUser: User): User {
   const user: User = {
     name: projectUser.name,
     description: projectUser.description,
+    place: projectUser.place,
+    type: projectUser.type,
   };
   if (projectUser.imgSrc) {
     user.imgSrc = getImgSrc(projectUser.imgSrc);
@@ -233,7 +234,7 @@ function getProjectUser(projectUser: User): User {
 
 export default function ProjectDetails({ project }: ProjectProps): JSX.Element {
   const classes = useStyles({});
-  const impact: Impact[] = project.impact;
+  const impact: Impact[] = project.impact.map(item => ({ ...item, imgSrc: getImgSrc(item.imgSrc) }));
   const monitoredImpact: Impact | undefined = impact.find(({ monitored }) => monitored === true);
 
   if (monitoredImpact) {
@@ -251,6 +252,10 @@ export default function ProjectDetails({ project }: ProjectProps): JSX.Element {
 
   const projectDeveloper: User = getProjectUser(project.developer);
   const landSteward: User = getProjectUser(project.steward);
+  let landOwner: any;
+  if (project.owner) {
+    landOwner = getProjectUser(project.owner);
+  }
 
   return (
     <div className={classes.root}>
@@ -270,7 +275,11 @@ export default function ProjectDetails({ project }: ProjectProps): JSX.Element {
             </div>
             <Description fontSize={getFontSize('big')}>{project.shortDescription}</Description>
             <div className={classes.projectDeveloper}>
-              <ProjectDeveloperCard projectDeveloper={projectDeveloper} landSteward={landSteward} />
+              <ProjectDeveloperCard
+                projectDeveloper={projectDeveloper}
+                landSteward={landSteward}
+                landOwner={landOwner}
+              />
             </div>
           </Grid>
         </Grid>
@@ -283,7 +292,7 @@ export default function ProjectDetails({ project }: ProjectProps): JSX.Element {
         </div>
       </div>
 
-      <img className={classes.map} alt={project.name} src={map} />
+      <img className={classes.map} alt={project.name} src={require(`../assets/${project.map}`)} />
 
       <Grid container className={`${classes.projectDetails} ${classes.projectContent}`}>
         {monitoredImpact && (
@@ -292,45 +301,52 @@ export default function ProjectDetails({ project }: ProjectProps): JSX.Element {
             <ImpactCard
               name={monitoredImpact.name}
               description={monitoredImpact.description}
-              imgSrc={require(`../assets/${monitoredImpact.imgSrc}`)}
+              imgSrc={monitoredImpact.imgSrc}
               monitored
             />
           </Grid>
         )}
-        {protectedSpecies && (
+        {protectedSpecies.length > 0 ? (
           <Grid item xs={12} sm={4} className={classes.protectedSpecies}>
             <Title variant="h4">Protected Species</Title>
             <ProtectedSpecies species={protectedSpecies} />
           </Grid>
+        ) : (
+          <Grid item xs={12} sm={4} className={classes.protectedSpecies}>
+            <Title variant="h4">Non-monitored Impact</Title>
+            <Description fontSize={getFontSize('project')}>
+              These outcomes are natural by-products of the primary impact above, but will not be measured or
+              verified.
+            </Description>
+            <NonMonitoredImpact impact={impact} />
+          </Grid>
         )}
       </Grid>
 
-      <div
-        className={`${classes.projectDetails} ${classes.projectContent} ${classes.projectImpactContainer}`}
-      >
-        <Title variant="h2">Non-monitored Impact</Title>
-        <Description>
-          These outcomes are natural by-products of the primary impact above, but will not be measured or
-          verified.
-        </Description>
-        <Grid container className={`${classes.projectGrid} ${classes.projectImpactGrid}`}>
-          {impact.map((item, index) => (
-            <Grid
-              item
-              xs={12}
-              sm={4}
-              className={`${classes.projectGridItem} ${classes.projectImpact}`}
-              key={`${index}-${item.name}`}
-            >
-              <ImpactCard
-                name={item.name}
-                description={item.description}
-                imgSrc={require(`../assets/${item.imgSrc}`)}
-              />
-            </Grid>
-          ))}
-        </Grid>
-      </div>
+      {protectedSpecies.length > 0 && (
+        <div
+          className={`${classes.projectDetails} ${classes.projectContent} ${classes.projectImpactContainer}`}
+        >
+          <Title variant="h2">Non-monitored Impact</Title>
+          <Description>
+            These outcomes are natural by-products of the primary impact above, but will not be measured or
+            verified.
+          </Description>
+          <Grid container className={`${classes.projectGrid} ${classes.projectImpactGrid}`}>
+            {impact.map((item, index) => (
+              <Grid
+                item
+                xs={12}
+                sm={4}
+                className={`${classes.projectGridItem} ${classes.projectImpact}`}
+                key={`${index}-${item.name}`}
+              >
+                <ImpactCard name={item.name} description={item.description} imgSrc={item.imgSrc} />
+              </Grid>
+            ))}
+          </Grid>
+        </div>
+      )}
 
       <div className={`${classes.projectDetails} ${classes.projectContent}`}>
         <CreditDetails

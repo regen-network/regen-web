@@ -8,4 +8,6 @@ window.matchMedia = jest.fn().mockImplementation(query => {
   };
 });
 
+window.scrollTo = jest.fn();
+
 export {};

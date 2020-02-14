@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useRouteMatch } from 'react-router-dom';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import { Project } from '../mocks';
+import { User } from 'web-components/lib/components/user/UserInfo';
 import Grid from '@material-ui/core/Grid';
 import projects from '../assets/projects.png';
 import Title from 'web-components/lib/components/title';
@@ -126,6 +127,7 @@ interface ProjectsProps {
 export default function ProjectList({ projects }: ProjectsProps): JSX.Element {
   const classes = useStyles({});
   let { url } = useRouteMatch();
+
   return (
     <div className={classes.root}>
       <div className={classes.header}>
@@ -140,22 +142,31 @@ export default function ProjectList({ projects }: ProjectsProps): JSX.Element {
       <div className={classes.projects}>
         {/**<div className={classes.australia}>australia</div>**/}
         <Grid container className={classes.projectList}>
-          {projects.map((p, i) => (
-            <Grid className={classes.project} item xs={12} sm={6} md={4} key={p.id}>
-              <Link className={classes.projectLink} to={`${url}/${p.id}`}>
-                <ProjectCard
-                  name={p.name}
-                  place={p.place}
-                  area={p.area}
-                  areaUnit={p.areaUnit}
-                  imgSrc={getImgSrc(p.photos[0])}
-                  developer={{ name: p.developer.name, imgSrc: getImgSrc(p.developer.imgSrc) }}
-                  tag={p.creditClass.tag}
-                  displayCity={false}
-                />
-              </Link>
-            </Grid>
-          ))}
+          {projects.map((p, i) => {
+            const developer: User = {
+              name: p.developer.name,
+              type: p.developer.type,
+            };
+            if (p.developer.imgSrc) {
+              developer.imgSrc = getImgSrc(p.developer.imgSrc);
+            }
+            return (
+              <Grid className={classes.project} item xs={12} sm={6} md={4} key={p.id}>
+                <Link className={classes.projectLink} to={`${url}/${p.id}`}>
+                  <ProjectCard
+                    name={p.name}
+                    place={p.place}
+                    area={p.area}
+                    areaUnit={p.areaUnit}
+                    imgSrc={getImgSrc(p.photos[0])}
+                    developer={developer}
+                    tag={p.creditClass.tag}
+                    displayCity={false}
+                  />
+                </Link>
+              </Grid>
+            );
+          })}
         </Grid>
       </div>
     </div>

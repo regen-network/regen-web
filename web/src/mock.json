@@ -3,7 +3,8 @@
     "name": "Regen Network",
     "description": "Realigning the Economics of Agriculture",
     "imgSrc": "regen.png",
-    "link": "https://www.regen.network/"
+    "link": "https://www.regen.network/",
+    "type": "organization"
   },
   "purchasedCredits": [
     {
@@ -36,6 +37,7 @@
       "endDate": "February 2029",
       "developer": {
         "name": "Odonata",
+        "type": "organization",
         "place": {
           "city": "South Melbourne",
           "state": "Victoria",
@@ -46,6 +48,7 @@
       },
       "steward": {
         "name": "Ngarrindjeri Tribe",
+        "type": "user",
         "place": {
           "state": "Southern Australia",
           "country": "Australia"
@@ -56,6 +59,7 @@
       "shortDescription": "This project is restoring and conserving a large area of native grassland in Southern Australia.",
       "longDescription": "The project will see up to 1.3M Biodiversity Offset Units become available via formal accreditation with the South Australian Department of Environment and Water. The unique site comprises a pristine example of shrub and woodlands associated with the RAMSAR recognised Coorong Region, of particular cultural and environmental significance. A comprehensive site management plan will be undertaken in partnership with local indigenous land owners with the ownership of this and eventually passed on to these groups.\n\nThis project represents a truly unique offsetting opportunity, in proximity to Adelaide and in a vitally important bioregion.\n\nThis property is a rare pocket of wetlands and woodlands located near the township of Menindee South Australia, nestled in between the Coorong national park and Lake Albert.\n\nAs one of the few remaining sections of privately owned remnant vegetation in the area, this represents a unique opportunity for long term preservation. The Coorong, Lake Alexandrina and Lake Albert Wetland is an international significant RAMSAR wetland ecosystems at the intersection of the Murray River and Southern Ocean.\n\nThis vital habitat comprises a unique mix of both freshwater and saltwater wetlands and coastal woodlands. The Coorong is the heart of the traditional lands of Ngarrindjeri people, who have hunted and camped on the Mt Sandy property for thousands of years.",
       "photos": ["coorong.jpg"],
+      "map": "map.png",
       "keyOutcomesActivities": [
         "Site accredited as a Specific Environmental Benefit (SEB) site and credits created by the South Australian Department of Environment and Water.",
         "A land management services agreement will be established with a local indigenous group, employing people from the local community.",
@@ -206,6 +210,7 @@
       "endDate": "February 2029",
       "developer": {
         "name": "Wide Open Agriculture",
+        "type": "organization",
         "place": {
           "city": "Williams",
           "state": "Western Australia",
@@ -216,6 +221,7 @@
       },
       "steward": {
         "name": "Rob Rex and Carolyn Rex",
+        "type": "user",
         "place": {
           "state": "Western Australia",
           "country": "Australia"
@@ -226,6 +232,7 @@
       "shortDescription": "Andover is a 1787 hectare broadacre cropping and sheep farm near Kojonup in Western Australia’s Wheatbelt.",
       "longDescription": "Andover (1137 Boscabel-Chittinup Road, Boscabel) is a 1787 ha broadacre property producing canola, wheat, barley and sheep. At latitude -33.68065 and longitude 116.97219, it is situated in the Shire of Kojonup on the border of the Shire of West Arthur.\n\nThere are three partners involved in the long-term management of Andover. The property is owned by two Dutch investors who require a sign-off on key decisions. It is farmed and managed by Rob and Carolyn Rex in a partnership model operating on the principles of regenerative agriculture and Wide Open Agriculture (WOA) who act as a bridge between the landowners and farmers/land managers.\n\nAdditionally, the South West Catchment Council (SWCC) is providing some funding for fencing, revegetation, monitoring and the development of this 5-year revegetation implementation plan through their “Managing Vegetation on Farm Targeting Pollinators and Farm Resilience” project.",
       "photos": ["andover.jpg"],
+      "map": "map-woa.png",
       "keyOutcomesActivities": [
         "The Conservation Covenant protects land for 100 years minimum.",
         "The land will be protected and managed to mitigate fire risk.",
@@ -332,6 +339,132 @@
           "imgSrc": "conostylis.png"
         }
       ],
+      "timeline": {
+        "completedItemIndex": 1,
+        "events": [
+          {
+            "date": "September 2, 2019",
+            "title": "Project starts",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+          },
+          {
+            "date": "October 21, 2019",
+            "title": "Approval complete",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+          },
+          {
+            "date": "February 20, 2020",
+            "title": "Credits issued",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+          },
+          {
+            "date": "September 2022",
+            "title": "Site visit",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+          },
+          {
+            "date": "February 2029",
+            "title": "Project completion",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+          }
+        ]
+      }
+    },
+    {
+      "id": "impactag",
+      "name": "Wilmot Cattle Company",
+      "place": {
+        "city": "Hernani",
+        "state": "New South Wales",
+        "country": "Australia"
+      },
+      "type": "Farm",
+      "area": 1854,
+      "areaUnit": "hectares",
+      "startDate": "September 2, 2019",
+      "endDate": "February 2029",
+      "developer": {
+        "name": "Impact Ag",
+        "type": "organization",
+        "place": {
+          "city": "Armidale",
+          "state": "New South Wales",
+          "country": "Australia"
+        },
+        "imgSrc": "impactag.png",
+        "description": "We deliver strong economic returns whilst regenerating environmental assets."
+      },
+      "steward": {
+        "name": "Wilmot Cattle Co.",
+        "type": "organization",
+        "place": {
+          "state": "New South Wales",
+          "country": "Australia"
+        },
+        "imgSrc": "wilmot.png",
+        "description": "Wilmot Cattle Company is an innovative land, cattle, and natural grass-fed beef business."
+      },
+      "owner": {
+        "name": "Wyelba Pty Ltd.",
+        "type": "organization",
+        "place": {
+          "state": "New South Wales",
+          "country": "Australia"
+        }
+      },
+      "shortDescription": "Currently operating two properties, Wilmot in the high rainfall basalt zone on the Ebor Plateau, and Woodburn on the eastern fall between Uralla and Walcha.",
+      "longDescription": "Wilmot is an extraordinary property high in the New England Tablelands at Ebor. Set on 1,854ha and at approximately 1,200m above sea level, average annual rainfall of 1,200mm, highly fertile volcanic basalt soils, and complimented by a series of pristine spring fed, year-round natural waterways including five waterfalls, it is quite simply a unique environment for growing cattle.\n\nPrior to the commencement of Wilmot Cattle Company operations in 2008 the property had been conventionally managed. In 2013, a transformation of the property began, moving to more regenerative and holistic management practices, resulting in significant gains in the overall ecological health of the farm.\n\nToday the property is managed in an intensive rotationally grazed system with small numbers of large mobs moving across the landscape, mimicking nature, to create ecological change and improve landscape health and biological function. At shovel depth, our soil organic carbon has improved from 2.5% to 4.5%, with a goal of getting it to 6% by 2023.",
+      "photos": ["wilmotcattlecompany.jpg"],
+      "map": "map-impactag.png",
+      "keyOutcomesActivities": [
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et.",
+        "Dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut.",
+        "Aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.",
+        "Excepteur sint occaecat cupidatat non proident.",
+        "In culpa qui officia deserunt mollit anim id est laborum."
+      ],
+      "landManagementActions": [
+        {
+          "name": "Rotational grazing",
+          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+          "imgSrc": "impactag-grazing.png"
+        },
+        {
+          "name": "Multi species crops",
+          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+          "imgSrc": "crops.png"
+        },
+        {
+          "name": "Stock grazing",
+          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+          "imgSrc": "stock-grazing.png"
+        }
+      ],
+      "impact": [
+        {
+          "name": "Soil organic carbon",
+          "description": "Sequestering carbon in SOC is one way to mitigate climate change.",
+          "monitored": true,
+          "imgSrc": "soc.png"
+        },
+        {
+          "name": "Above ground biomass",
+          "description": "Increasing all living biomass which is located above the ground.",
+          "monitored": false,
+          "imgSrc": "biomass.png"
+        },
+        {
+          "name": "Soil health",
+          "description": "The capacity of soil to function as a vital living ecosystem that sustains plants, animals, and humans.",
+          "monitored": false,
+          "imgSrc": "soil.png"
+        }
+      ],
+      "creditClass": {
+        "name": "Carbon Credit Lorem Ipsum",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+        "tag": "soil organic carbon"
+      },
       "timeline": {
         "completedItemIndex": 1,
         "events": [

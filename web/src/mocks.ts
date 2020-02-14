@@ -1,6 +1,6 @@
 import { User } from 'web-components/lib/components/user/UserInfo';
 import { Place } from 'web-components/lib/components/place/ProjectPlaceInfo';
-import { ItemProps as ProtectedSpeciesItem } from 'web-components/lib/components/protected-species/Item';
+import { ItemProps as ProtectedSpeciesItem } from 'web-components/lib/components/sliders/Item';
 import { Event } from 'web-components/lib/components/timeline';
 
 import mock from './mock.json';
@@ -30,7 +30,7 @@ interface CreditClass {
   description: string;
   methodology?: Metholody;
   tag: string;
-  imgSrc: string;
+  imgSrc?: string;
 }
 
 interface Timeline {
@@ -53,6 +53,7 @@ export interface Project {
   shortDescription: string;
   longDescription: string;
   photos: string[];
+  map: string;
   keyOutcomesActivities: string[];
   landManagementActions: Action[];
   impact: Impact[];

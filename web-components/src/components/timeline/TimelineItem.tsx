@@ -141,9 +141,14 @@ export default function TimelineItem({
   last,
 }: TimelineItemProps): JSX.Element {
   const classes = useStyles({ circleColor, barColor, odd, last });
+
   return (
     <div className={classes.content}>
-      {date && <div className={classes.date}>{new Date(date).toLocaleDateString('en-US', options)}</div>}
+      {date && (
+        <div className={classes.date}>
+          {typeof date === 'string' ? date : new Date(date).toLocaleDateString('en-US', options)}
+        </div>
+      )}
       <Title variant="h6">{title}</Title>
       <div className={classes.description}>{description}</div>
       <span className={classes.circle} />

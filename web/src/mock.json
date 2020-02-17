@@ -216,61 +216,61 @@
           "state": "Western Australia",
           "country": "Australia"
         },
-        "imgSrc": "woa.png",
+        "imgSrc": "woa.jpg",
         "description": "Wide Open Agriculture (ASX: WOA) is a Regenerative Food & Farming company."
       },
       "steward": {
-        "name": "Rob Rex and Carolyn Rex",
+        "name": "Rob and Carolyn Rex",
         "type": "user",
         "place": {
           "state": "Western Australia",
           "country": "Australia"
         },
-        "imgSrc": "rex.png",
+        "imgSrc": "rex.jpg",
         "description": "Rob and Carolyn Rex farm and manage this land using the principles of regenerative agriculture."
       },
       "shortDescription": "Andover is a 1787 hectare broadacre cropping and sheep farm near Kojonup in Western Australia’s Wheatbelt.",
-      "longDescription": "Andover (1137 Boscabel-Chittinup Road, Boscabel) is a 1787 ha broadacre property producing canola, wheat, barley and sheep. At latitude -33.68065 and longitude 116.97219, it is situated in the Shire of Kojonup on the border of the Shire of West Arthur.\n\nThere are three partners involved in the long-term management of Andover. The property is owned by two Dutch investors who require a sign-off on key decisions. It is farmed and managed by Rob and Carolyn Rex in a partnership model operating on the principles of regenerative agriculture and Wide Open Agriculture (WOA) who act as a bridge between the landowners and farmers/land managers.\n\nAdditionally, the South West Catchment Council (SWCC) is providing some funding for fencing, revegetation, monitoring and the development of this 5-year revegetation implementation plan through their “Managing Vegetation on Farm Targeting Pollinators and Farm Resilience” project.",
+      "longDescription": "Andover (1137 Boscabel-Chittinup Road, Boscabel) is a 1787 ha broadacre property producing canola, wheat, barley and sheep. At latitude -33.68065 and longitude 116.97219, it is situated in the Shire of Kojonup on the border of the Shire of West Arthur.\n\nAndover was purchased by the current owners in 2016, with the farm’s long term management being a 3 way partnership between Wide Open Agriculture, local family farmers and impact investors.\n\nPrior to purchase the farm had been conventionally managed for many years, which had resulted in degraded soil that had been leached of nutrients, and devoid of good biology. The creeklines had been degraded by stock grazing, with inundation and rising salinity levels limiting production. Since taking over and transitioning from conventional to regenerative agricultural practises, the Rexs’ have reduced grazing pressure and better managed livestock rotations to rejuvenate perennial pastures. They have introduced multi species cropping to help rebuild soil health and microbial activity, increasing above and below ground diversity. The implementation of no till practices have helped to reduce erosion and soil degredation.\n\nThere is a limitation to what the Rexs’ can achieve within their farming system to regenerate the nature zone, or their biodiversity.  They are eager to take this further, but require support to take the next step in their regenerative journey. This is where the creation and registration of Biodiversity Credits can make a great impact to their whole landscape function.",
       "photos": ["andover.jpg"],
       "map": "map-woa.png",
       "keyOutcomesActivities": [
-        "The Conservation Covenant protects land for 100 years minimum.",
-        "The land will be protected and managed to mitigate fire risk.",
-        "Weed management will be undertaken for the natural vegetation to flourish.",
-        "Pest control",
-        "Will be fenced against feral pests and predators",
-        "Threatened species sanctuary (specific to each area)"
+        "The Conservation Covenant protects land for 100 years minimum",
+        "Fire management Plan to reduce fire risk",
+        "Revegetation to connect and establishment of new nature zones",
+        "New fencing and protection of waterways",
+        "Control introduced predators and invasive weeds",
+        "Financially support a farming family to transition to regenerative practices"
       ],
       "landManagementActions": [
         {
-          "name": "Four year rotation",
-          "description": "The 2019 Crop plan for Andover is based on a 4 year rotational system encompassing a cereal crop – canola crop – cereal crop – legume crop. A good rotation including a legume crop that fixes nitrogen ensures healthier soil and more resistance to pest and disease build up.",
-          "imgSrc": "rotation.png"
+          "name": "Fence existing biodiversity",
+          "description": "Fencing to exclude stock removes grazing pressure from native species and helps the ecosystem to regenerate.",
+          "imgSrc": "fence-biodiversity.png"
         },
         {
-          "name": "Multi species crops",
-          "description": "Various multi species crops were planted this season for a mix of soil amelioration and fodder. Multi species crops are even more efficient at improving the health and resilience of the soil to pathogens, and providing a healthy environment for soil biology.",
-          "imgSrc": "crops.png"
+          "name": "Establish and manage fire breaks",
+          "description": "Fire can be mitigated by creating fire breaks and working with an approved management plan that reduces fuel build up in the vegetation under story.",
+          "imgSrc": "fire-breaks.png"
         },
         {
-          "name": "Stock grazing",
-          "description": "A mix of rye corn, serradella and sub clover has been planted as a pasture mix for stock grazing. Sheep are currently being grazed in several paddocks along with the low wetland area along the creekline.",
+          "name": "Revegetate to reconnect fragments",
+          "description": "Reconnecting fragmented vegetation provides a more resilient ecosystem and creates corridors for wildlife to move through.",
+          "imgSrc": "revegetate.png"
+        },
+        {
+          "name": "Multi species croppings",
+          "description": "Multi species crops are more efficient at improving the health and resilience of the the soil to pathogens, increasing soil microbial health by promoting above and below ground diversity, and can be grazed as a fodder crop.",
+          "imgSrc": "multi-species-croppings.png"
+        },
+        {
+          "name": "High density rotational grazing",
+          "description": "Increased stock density and long recovery periods maximizes grass growth and carbon drawdown into the soil.",
           "imgSrc": "grazing.png"
         },
         {
-          "name": "Feed mix",
-          "description": "A Lupin, pea and canola mix has been planted to be harvested as a multispecies feed mix.",
-          "imgSrc": "feed-mix.png"
-        },
-        {
-          "name": "Prevent any new weeds or pests becoming established",
-          "description": "Monitor sites for any new weeds or pests. If observed, plan and implement a control program.",
-          "imgSrc": "fox-woa.png"
-        },
-        {
-          "name": "Establish wind breaks to protect bushland",
-          "description": "Wind breaks placed in the paddocks to the west could protect 10 tree heights down wind.",
-          "imgSrc": "wind-breaks.png"
+          "name": "Perennial pasture",
+          "description": "Establishing perennial pasture on salt effected, low lying or marginally productive land increases the agricultural production of the land as well as supporting a more stable year round climate for soil biology.",
+          "imgSrc": "perennial-pasture.png"
         }
       ],
       "impact": [
@@ -340,32 +340,37 @@
         }
       ],
       "timeline": {
-        "completedItemIndex": 1,
+        "completedItemIndex": 0,
         "events": [
           {
-            "date": "September 2, 2019",
-            "title": "Project starts",
-            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+            "date": "February 2020",
+            "title": "Funding Pledges",
+            "description": "Open credits for sale, seek out supporters to fund the project."
           },
           {
-            "date": "October 21, 2019",
-            "title": "Approval complete",
-            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+            "title": "Tipping Point",
+            "description": "Once we reach 25% support the project can commence."
           },
           {
-            "date": "February 20, 2020",
-            "title": "Credits issued",
-            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+            "title": "Baselining",
+            "description": "An independent 3rd party verifies existing state of land and approve the proposed management plan."
           },
           {
-            "date": "September 2022",
-            "title": "Site visit",
-            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+            "title": "Conservation Covenant",
+            "description": "A conservation covenant is formally established on the land title."
           },
           {
-            "date": "February 2029",
-            "title": "Project completion",
-            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+            "title": "Management Plan Commences",
+            "description": "On ground works such as fencing and revegetation program begin to be rolled out."
+          },
+          {
+            "title": "Biennial Audits and Impact Reports",
+            "description": "Every 2 years the investor is issued with independent 3rd party audit and impact report."
+          },
+          {
+            "date": "2029",
+            "title": "Project Completion",
+            "description": "This project has a 10 year total timeframe."
           }
         ]
       }

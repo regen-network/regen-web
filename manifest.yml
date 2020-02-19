@@ -12,6 +12,7 @@ applications:
   instances: 1
   services:
      - registrystaging-psql
+     - registrystaging-apikeys
   routes:
      - route: app.registry.regen.network
   buildpacks: 

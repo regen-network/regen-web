@@ -90,7 +90,7 @@ const theme = createMuiTheme({
   shadows: [
     defaultTheme.shadows[0],
     '0px 4px 10px rgba(0, 0, 0, 0.05)',
-    defaultTheme.shadows[2],
+    '-4px 0px 10px rgba(0, 0, 0, 0.25)',
     defaultTheme.shadows[3],
     defaultTheme.shadows[4],
     defaultTheme.shadows[5],

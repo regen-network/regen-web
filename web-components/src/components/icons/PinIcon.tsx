@@ -3,12 +3,13 @@ import SvgIcon from '@material-ui/core/SvgIcon';
 
 interface PinIconProps {
   // color: string;
+  onClick?: () => void;
   fontSize?: 'inherit' | 'default' | 'small' | 'large';
 }
 
-export default function PinIcon({ fontSize = 'inherit' }: PinIconProps): JSX.Element {
+export default function PinIcon({ fontSize = 'inherit', onClick }: PinIconProps): JSX.Element {
   return (
-    <SvgIcon fontSize={fontSize} viewBox="0 0 13 16">
+    <SvgIcon fontSize={fontSize} viewBox="0 0 13 16" onClick={onClick}>
       <path
         d="M13 6.375C13 11.2343 7.97202 14.9913 6.76036 15.8261C6.60169 15.9354 6.39831 15.9354 6.23964 15.8261C5.02798 14.9913 0 11.2343 0 6.375C0 2.85418 2.91015 0 6.5 0C10.0899 0 13 2.85418 13 6.375Z"
         fill="#D2D5D9"

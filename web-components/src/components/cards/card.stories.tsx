@@ -2,6 +2,7 @@ import * as React from 'react';
 import Card from 'web-components/lib/components/cards/Card';
 import ProjectDeveloperCard from 'web-components/lib/components/cards/ProjectDeveloperCard';
 import ImpactCard from 'web-components/lib/components/cards/ImpactCard';
+import MapCard from 'web-components/lib/components/cards/MapCard';
 import { User } from 'web-components/lib/components/user/UserInfo';
 import { withKnobs, text, object, number } from '@storybook/addon-knobs';
 
@@ -110,5 +111,18 @@ export const purchasedCreditsCard = (): JSX.Element => (
     description={text('description', 'Credits you purchased')}
     date={text('date', 'Feb 15, 2020')}
     icon={<CurrentCreditsIcon />}
+  />
+);
+
+export const mapCard = (): JSX.Element => (
+  <MapCard
+    isPopup
+    imgSrc="diversifola.png"
+    color={text('color', '#FFE7AD')}
+    name={text('name', 'Euc diversifola mallee')}
+    description={text(
+      'description',
+      'This species from the Hawkesbury region of New South Wales may grow into a multi-trunked mallee, or as a single trunked small tree.',
+    )}
   />
 );

@@ -1,10 +1,12 @@
 import * as React from 'react';
 import Map from 'web-components/lib/components/map';
 // import * as togeojson from '@mapbox/togeojson';
+import { withKnobs, object } from '@storybook/addon-knobs';
 
 export default {
   title: 'Components|Map',
   component: Map,
+  decorators: [withKnobs],
 };
 
 // const kml: string = `<?xml version="1.0" encoding="utf-8" ?><kml xmlns="http://www.opengis.net/kml/2.2"><Document id="root_doc"><Schema name="Reveg_upper" id="Reveg_upper"><SimpleField name="tessellate" type="int"></SimpleField></Schema><Folder><name>Reveg_upper</name><Placemark><name>Reveg upper</name><Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style><ExtendedData><SchemaData schemaUrl="#Reveg_upper"><SimpleData name="tessellate">1</SimpleData></SchemaData></ExtendedData><Polygon><outerBoundaryIs><LinearRing><coordinates>139.301964544446,-35.7334349941573 139.302618507057,-35.734016351157 139.30292109905,-35.7311592633386 139.302927249187,-35.7307320552533 139.301964544446,-35.7334349941573</coordinates></LinearRing></outerBoundaryIs></Polygon></Placemark></Folder></Document></kml>`;
@@ -16,11 +18,16 @@ const geojson = {
   features: [
     {
       type: 'Feature',
+      id: 'polygon1',
       properties: {
         stroke: '#FFC432',
         fill: '#ffe7ad',
         'fill-opacity': 0.8,
         'stroke-opacity': 1,
+        name: 'Euc diversifola mallee 1',
+        imgSrc: './diversifola.png',
+        description:
+          'This species from the Hawkesbury region of New South Wales may grow into a multi-trunked mallee, or as a single trunked small tree.',
       },
       geometry: {
         type: 'Polygon',
@@ -38,7 +45,13 @@ const geojson = {
     },
     {
       type: 'Feature',
-      properties: {},
+      id: 'marker',
+      properties: {
+        name: 'Marker',
+        imgSrc: './diversifola.png',
+        description:
+          'This species from the Hawkesbury region of New South Wales may grow into a multi-trunked mallee, or as a single trunked small tree.',
+      },
       geometry: {
         type: 'Point',
         coordinates: [4.717238545417786, 45.75410230522118],
@@ -46,8 +59,10 @@ const geojson = {
     },
     {
       type: 'Feature',
+      id: 'boundary',
       properties: {
         boundary: 1,
+        name: 'Boundary',
       },
       geometry: {
         type: 'Polygon',
@@ -65,11 +80,16 @@ const geojson = {
     },
     {
       type: 'Feature',
+      id: 'polygon2',
       properties: {
         stroke: '#3D7ACF',
         fill: '#B1CAEC',
         'fill-opacity': 0.7,
         'stroke-opacity': 1,
+        name: 'Euc diversifola mallee 2',
+        imgSrc: './diversifola.png',
+        description:
+          'This species from the Hawkesbury region of New South Wales may grow into a multi-trunked mallee, or as a single trunked small tree.',
       },
       geometry: {
         type: 'Polygon',
@@ -87,4 +107,6 @@ const geojson = {
   ],
 };
 
-export const map = (): JSX.Element => <Map geojson={geojson} token={process.env.STORYBOOK_MAPBOX_TOKEN} />;
+export const map = (): JSX.Element => (
+  <Map geojson={object('geojson', geojson)} token={process.env.STORYBOOK_MAPBOX_TOKEN} />
+);

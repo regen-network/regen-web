@@ -1,0 +1,50 @@
+import React from 'react';
+import { makeStyles, Theme } from '@material-ui/core';
+import Slider from 'react-slick';
+import MapCard from '../cards/MapCard';
+
+export interface MapCardsProps {
+  features: any[];
+  afterChange: (id: string) => void;
+}
+
+const useStyles = makeStyles((theme: Theme) => ({
+  root: {
+    // marginLeft: theme.spacing(-5.25),
+  },
+  item: {
+    '& > div:first-child': {
+      marginLeft: theme.spacing(1.875),
+      marginRight: theme.spacing(1.875),
+    },
+  },
+}));
+
+export default function MapCards({ features, afterChange }: MapCardsProps): JSX.Element {
+  const classes = useStyles({});
+  const settings = {
+    centerMode: true,
+    speed: 500,
+    rows: 1,
+    slidesPerRow: 1,
+    arrows: false,
+  };
+
+  return (
+    <div>
+      <Slider {...settings} afterChange={index => afterChange(features[index].id)} className={classes.root}>
+        {features.map((item, index) => (
+          <div className={classes.item} key={index}>
+            <MapCard
+              name={item.properties.name}
+              imgSrc={item.properties.imgSrc}
+              description={item.properties.description}
+              color={item.properties.fill || '#B9E1C7'}
+              isPopup={false}
+            />
+          </div>
+        ))}
+      </Slider>
+    </div>
+  );
+}

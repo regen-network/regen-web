@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-// import { makeStyles, useTheme, Theme } from '@material-ui/core';
 import bbox from '@turf/bbox';
 // import { FeatureCollection } from 'geojson';
 // import { AllGeoJSON } from '@turf/helpers';
@@ -15,6 +14,7 @@ import ReactMapGL, {
 } from 'react-map-gl';
 
 import PinIcon from '../icons/PinIcon';
+import PointerIcon from '../icons/PointerIcon';
 import MapCard from '../cards/MapCard';
 import MapCards from '../sliders/MapCards';
 
@@ -37,13 +37,47 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.down('xs')]: {
       height: theme.spacing(126),
     },
+    '& .mapboxgl-marker svg': {
+      cursor: 'pointer',
+    },
   },
   scaleControl: {
     position: 'absolute',
     bottom: theme.spacing(4),
     right: theme.spacing(4),
-    '& span': {
-      backgroundColor: theme.palette.secondary.main,
+    '& .mapboxgl-ctrl': {
+      background: 'none',
+      '& button': {
+        '&.mapboxgl-ctrl-icon': {
+          backgroundColor: theme.palette.secondary.main,
+          '&:hover': {
+            backgroundColor: theme.palette.secondary.main,
+          },
+          borderTop: 'none',
+          borderRadius: '2px',
+          height: '30px',
+          width: '30px',
+          '&.mapboxgl-ctrl-zoom-in': {
+            marginBottom: theme.spacing(3),
+            '& span': {
+              height: '30px',
+              width: '30px',
+              background: `linear-gradient(${theme.palette.primary.main},${theme.palette.primary.main}), linear-gradient(${theme.palette.primary.main},${theme.palette.primary.main})`,
+              backgroundPosition: 'center',
+              backgroundSize: '18px 4px,4px 18px',
+              backgroundRepeat: 'no-repeat',
+            },
+          },
+          '&.mapboxgl-ctrl-zoom-out': {
+            '& span': {
+              background: theme.palette.primary.main,
+              height: '4px',
+              width: '18px',
+              marginLeft: '6px',
+            },
+          },
+        },
+      },
     },
     [theme.breakpoints.down('xs')]: {
       display: 'none',
@@ -55,11 +89,19 @@ const useStyles = makeStyles((theme: Theme) => ({
       background: 'none',
       boxShadow: 'none',
     },
+    '& .mapboxgl-popup-tip': {
+      display: 'none',
+    },
   },
   slider: {
     position: 'absolute',
     bottom: '30px',
     width: '100%',
+  },
+  arrowContainer: {
+    position: 'absolute',
+    bottom: '-31px',
+    left: 'calc(50% - 17.5px)',
   },
 }));
 
@@ -97,20 +139,18 @@ export default function Map({ geojson, token }: MapProps): JSX.Element {
 
   const onMapClick = (e: any): void => {
     let popupInfo = null;
-    setPopupInfo(popupInfo);
+
     const feature = e.features[0];
-    if (feature) {
+    if (feature && filteredFeatures.find(f => feature.layer.id === f.id)) {
       popupInfo = {
         lngLat: e.lngLat,
         feature: feature.properties,
       };
-
-      setPopupInfo(popupInfo);
     }
+    setPopupInfo(popupInfo);
   };
 
   const onMarkerClick = (feature: any): void => {
-    setPopupInfo(null);
     setPopupInfo({
       lngLat: [feature.geometry.coordinates[0], feature.geometry.coordinates[1]],
       feature: { ...feature.properties, fill: '#B9E1C7' },
@@ -126,6 +166,9 @@ export default function Map({ geojson, token }: MapProps): JSX.Element {
           latitude={popupInfo.lngLat[1]}
           closeButton={false}
         >
+          <div className={classes.arrowContainer}>
+            <PointerIcon />
+          </div>
           <MapCard
             isPopup
             onClose={() => setPopupInfo(null)}
@@ -168,6 +211,7 @@ export default function Map({ geojson, token }: MapProps): JSX.Element {
                   (matches || (!matches && feature.id === shownLayer)) && (
                     <Source type="geojson" data={feature}>
                       <Layer
+                        id={feature.id}
                         type="fill"
                         paint={{
                           'fill-opacity': feature.properties['fill-opacity'],
@@ -186,6 +230,7 @@ export default function Map({ geojson, token }: MapProps): JSX.Element {
                 {feature.geometry.type === 'Polygon' && feature.properties.boundary && (
                   <Source type="geojson" data={feature}>
                     <Layer
+                      id={feature.id}
                       type="line"
                       paint={{
                         'line-color': theme.palette.primary.main,

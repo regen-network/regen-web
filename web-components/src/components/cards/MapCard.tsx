@@ -31,17 +31,17 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       paddingRight: theme.spacing(3.75),
     },
   },
-  container: props => ({
+  container: {
     position: 'relative',
     [theme.breakpoints.up('sm')]: {
-      borderTop: `solid 9px ${props.color}`,
+      borderTop: props => `solid 9px ${props.color}`,
       padding: `${theme.spacing(9.5)} ${theme.spacing(7.75)} ${theme.spacing(7.25)}`,
     },
     [theme.breakpoints.down('xs')]: {
-      borderTop: `solid 6px ${props.color}`,
+      borderTop: props => `solid 6px ${props.color}`,
       padding: `${theme.spacing(6)} ${theme.spacing(3.75)} ${theme.spacing(4.25)}`,
     },
-  }),
+  },
   name: {
     fontWeight: 'bold',
     [theme.breakpoints.up('sm')]: {
@@ -99,11 +99,6 @@ export default function CreditCard({
         {isPopup && (
           <div className={classes.closeIcon} onClick={onClose}>
             <CloseIcon />
-          </div>
-        )}
-        {isPopup && (
-          <div className={classes.arrowContainer}>
-            <div className={classes.arrowDown} />
           </div>
         )}
         <Grid container className={classes.grid}>

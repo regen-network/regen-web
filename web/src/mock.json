@@ -397,7 +397,7 @@
           "country": "Australia"
         },
         "imgSrc": "impactag.jpg",
-        "description": "We deliver strong economic returns whilst regenerating environmental assets."
+        "description": "Impact Ag utilises a variety of pathways and partners to measure and monitise natural capital on assets under management or advisory."
       },
       "steward": {
         "name": "Wilmot Cattle Co.",
@@ -407,18 +407,10 @@
           "country": "Australia"
         },
         "imgSrc": "wilmot.jpg",
-        "description": "Wilmot Cattle Company is an innovative land, cattle, and natural grass-fed beef business."
+        "description": "Wilmot Cattle Company is an innovative, regenerative, grass-fed beef business."
       },
-      "owner": {
-        "name": "Wyelba Pty Ltd.",
-        "type": "organization",
-        "place": {
-          "state": "New South Wales",
-          "country": "Australia"
-        }
-      },
-      "shortDescription": "Currently operating two properties, Wilmot in the high rainfall basalt zone on the Ebor Plateau, and Woodburn on the eastern fall between Uralla and Walcha.",
-      "longDescription": "Wilmot is an extraordinary property high in the New England Tablelands at Ebor. Set on 1,854ha and at approximately 1,200m above sea level, average annual rainfall of 1,200mm, highly fertile volcanic basalt soils, and complimented by a series of pristine spring fed, year-round natural waterways including five waterfalls, it is quite simply a unique environment for growing cattle.\n\nPrior to the commencement of Wilmot Cattle Company operations in 2008 the property had been conventionally managed. In 2013, a transformation of the property began, moving to more regenerative and holistic management practices, resulting in significant gains in the overall ecological health of the farm.\n\nToday the property is managed in an intensive rotationally grazed system with small numbers of large mobs moving across the landscape, mimicking nature, to create ecological change and improve landscape health and biological function. At shovel depth, our soil organic carbon has improved from 2.5% to 4.5%, with a goal of getting it to 6% by 2023.",
+      "shortDescription": "Currently operating three properties in northeastern NSW, including Wilmot in the high rainfall basalt zone on the Ebor Plateau, Woodburn on the eastern fall north of Walcha and Morocco, north of Gunnedah.",
+      "longDescription": "Wilmot is an extraordinary property high in the New England Tablelands at Ebor. Set on 1,854ha and at approximately 1,200m above sea level, average annual rainfall of 1,200mm, highly fertile volcanic basalt soils, and complimented by a series of pristine spring fed, year-round natural waterways including five waterfalls, it is quite simply a unique environment for growing cattle.\n\nPrior to the commencement of Wilmot Cattle Company operations in 2008 the property had been conventionally managed. In 2013, a transformation of the property began, moving to more regenerative and holistic management practices, resulting in significant gains in the overall ecological health of the farm.\n\nToday the property is managed in an intensive rotationally grazed system with small numbers of large mobs moving across the landscape, mimicking nature, to create ecological change and improve landscape health and biological function. At shovel depth, our soil organic carbon (SOC) has improved from ~2.5% to >4.5%, with a goal of getting it to >6% by 2023.",
       "photos": ["wilmotcattlecompany.jpg"],
       "map": "map-impactag.png",
       "keyOutcomesActivities": [

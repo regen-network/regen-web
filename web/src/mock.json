@@ -435,8 +435,8 @@
           "name": "Increase Stock Density",
           "description": "Carefully managed, high stock densities will lead to evenly grazed pastures and nutrient recycling. At high stock densities animals will increase pasture health and performance by trampling (or recycling) a higher proportion of biomass and evenly distributing dung and urine (nutrients).",
           "imgSrc": "increase-stock-density.jpg"
-        }
-          {
+        },
+        {
           "name": "Monitor Pasture Growth",
           "description": "Accurate and timely measurement of pasture growth, and therefore available feed, is required to determine how many animals should be in a paddock and for how long.",
           "imgSrc": "monitor-pasture-growth.jpg"

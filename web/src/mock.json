@@ -424,32 +424,32 @@
         {
           "name": "Time Controlled Rotational Grazing",
           "description": "Since 2013 the Wilmot Cattle Co. has implemented time controlled rotational grazing at the Wilmot property. Simply, time controlled rotational grazing optimises the number of stock in a paddock and matches grazing period with available pasture. The aim is to mirror natural herding behaviours by having short graze periods at high density followed by long rest periods allowing the pasture to recover. When managed well, this grazing system increases groundcover, biomass, plant diversity, animal and plant nutrition, soil health, water infiltration and soil organic carbon. A more complete explanation of the science, monitoring tools and management practices is provided below.",
-          "imgSrc": "impactag-grazing.png"
+          "imgSrc": "time-controlled-rotational-grazing.jpg"
         },
         {
           "name": "Decrease Paddock Size",
           "description": "Paddock sizes need to decrease to enable effective grazing of the whole paddock at a controllable density. A significant subdivision program has been completed resulting in an average paddock size at Wilmot of 25 hectares.",
-          "imgSrc": "crops.png"
+          "imgSrc": "decrease-paddock-size.jpg"
         },
         {
           "name": "Increase Stock Density",
           "description": "Carefully managed, high stock densities will lead to evenly grazed pastures and nutrient recycling. At high stock densities animals will increase pasture health and performance by trampling (or recycling) a higher proportion of biomass and evenly distributing dung and urine (nutrients).",
-          "imgSrc": "stock-grazing.png"
+          "imgSrc": "increase-stock-density.jpg"
         }
           {
           "name": "Monitor Pasture Growth",
           "description": "Accurate and timely measurement of pasture growth, and therefore available feed, is required to determine how many animals should be in a paddock and for how long.",
-          "imgSrc": "impactag-grazing.png"
+          "imgSrc": "monitor-pasture-growth.jpg"
         },
         {
           "name": "Animal Welfare",
           "description": "Animal welfare is an important component in a well managed grazing enterprise. Low stress stock handling techniques have been adopted to ensure animals have higher quality life.",
-          "imgSrc": "crops.png"
+          "imgSrc": "animal-welfare.jpg"
         },
         {
           "name": "Manage Grazing Periods",
           "description": "To ensure grazing practices are implemented effectively, and that there is a record of management practices, Wilmot utilises the online tool Maia Grazing. Maia Grazing uses climatic data and field observations to determine pasture growth and optimal stocking rates. It then tracks all stock movements and ensures the stocking rate does not exceed the carrying capacity of each paddock.",
-          "imgSrc": "stock-grazing.png"
+          "imgSrc": "manage-grazing-periods.pjg"
         }
       ],
       "impact": [

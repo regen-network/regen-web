@@ -376,7 +376,11 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
         <Title variant="h2">{projectDefault.landManagementActions.title}</Title>
         {landManagementActions.map((actionsType, i) => (
           <div key={i} className={i > 0 ? classes.projectActionsGroup : ''}>
-            <Description>{actionsType.title || projectDefault.landManagementActions.subtitle}</Description>
+            <Description
+              fontSize={landManagementActions.length > 1 ? getFontSize('big') : getFontSize('medium')}
+            >
+              {actionsType.title || projectDefault.landManagementActions.subtitle}
+            </Description>
             <LandManagementActions actions={actionsType.actions} />
 
             {/*<div className={`${classes.projectGrid} ${classes.projectActionsGrid}`}>

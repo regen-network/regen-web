@@ -6,6 +6,8 @@ applications:
   instances: 1
   routes:
      - route: storybook.registry.regen.network
+  buildpacks:
+     - staticfile_buildpack
 - name: registry
   path: web/build
   memory: 64M

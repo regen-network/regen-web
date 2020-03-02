@@ -11,6 +11,7 @@ interface CreditInfoProps {
   description: string;
   activities: string[];
   background: string;
+  title: string;
 }
 
 interface StyleProps {
@@ -137,6 +138,7 @@ export default function CreditInfo({
   description,
   activities,
   background,
+  title,
 }: CreditInfoProps): JSX.Element {
   const classes = useStyles({ background });
   const theme = useTheme();
@@ -157,7 +159,7 @@ export default function CreditInfo({
           <Typography className={classes.description}>{description}</Typography>
         </div>
         <div className={classes.activitiesTitle}>
-          <Title variant="h4">Key activities and outcomes</Title>
+          <Title variant="h4">{title}</Title>
         </div>
         <div className={classes.activitiesItem}>
           <ul className={classes.activities}>

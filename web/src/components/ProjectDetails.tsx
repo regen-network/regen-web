@@ -302,7 +302,11 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
 
       <div className={classes.projectContent}>
         <div className={classes.projectStoryText}>
-          <Title variant="h2">Story</Title>
+          <Title variant="h2">
+            {project.fieldsOverride && project.fieldsOverride.story
+              ? project.fieldsOverride.story.title
+              : projectDefault.story.title}
+          </Title>
           <ReadMore>{project.longDescription}</ReadMore>
         </div>
       </div>
@@ -312,7 +316,11 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
       <Grid container className={`${classes.projectDetails} ${classes.projectContent}`}>
         {monitoredImpact && (
           <Grid item xs={12} sm={8}>
-            <Title variant="h2">Monitored Impact</Title>
+            <Title variant="h2">
+              {project.fieldsOverride && project.fieldsOverride.monitoredImpact
+                ? project.fieldsOverride.monitoredImpact.title
+                : projectDefault.monitoredImpact.title}
+            </Title>
             <ImpactCard
               name={monitoredImpact.name}
               description={monitoredImpact.description}
@@ -323,15 +331,26 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
         )}
         {protectedSpecies.length > 0 ? (
           <Grid item xs={12} sm={4} className={classes.protectedSpecies}>
-            <Title variant="h4">Protected Species</Title>
+            <Title variant="h4">
+              {project.fieldsOverride && project.fieldsOverride.protectedSpecies
+                ? project.fieldsOverride.protectedSpecies.title
+                : projectDefault.protectedSpecies.title}
+            </Title>
             <ProtectedSpecies species={protectedSpecies} />
           </Grid>
         ) : (
           <Grid item xs={12} sm={4} className={classes.protectedSpecies}>
-            <Title variant="h4">Non-monitored Impact</Title>
+            <Title variant="h4">
+              {project.fieldsOverride && project.fieldsOverride.nonMonitoredImpact
+                ? project.fieldsOverride.nonMonitoredImpact.title
+                : projectDefault.nonMonitoredImpact.title}
+            </Title>
             <Description fontSize={getFontSize('project')}>
-              These outcomes are natural by-products of the primary impact above, but will not be measured or
-              verified.
+              {project.fieldsOverride &&
+              project.fieldsOverride.nonMonitoredImpact &&
+              project.fieldsOverride.nonMonitoredImpact.subtitle
+                ? project.fieldsOverride.nonMonitoredImpact.subtitle
+                : projectDefault.nonMonitoredImpact.subtitle}
             </Description>
             <NonMonitoredImpact impact={impact} />
           </Grid>
@@ -342,10 +361,17 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
         <div
           className={`${classes.projectDetails} ${classes.projectContent} ${classes.projectImpactContainer}`}
         >
-          <Title variant="h2">Non-monitored Impact</Title>
+          <Title variant="h2">
+            {project.fieldsOverride && project.fieldsOverride.nonMonitoredImpact
+              ? project.fieldsOverride.nonMonitoredImpact.title
+              : projectDefault.nonMonitoredImpact.title}
+          </Title>
           <Description>
-            These outcomes are natural by-products of the primary impact above, but will not be measured or
-            verified.
+            {project.fieldsOverride &&
+            project.fieldsOverride.nonMonitoredImpact &&
+            project.fieldsOverride.nonMonitoredImpact.subtitle
+              ? project.fieldsOverride.nonMonitoredImpact.subtitle
+              : projectDefault.nonMonitoredImpact.subtitle}
           </Description>
           <Grid container className={`${classes.projectGrid} ${classes.projectImpactGrid}`}>
             {impact.map((item, index) => (
@@ -369,11 +395,20 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
           description={project.creditClass.description}
           activities={project.keyOutcomesActivities}
           background={background}
+          title={
+            project.fieldsOverride && project.fieldsOverride.keyOutcomesActivities
+              ? project.fieldsOverride.keyOutcomesActivities.title
+              : projectDefault.keyOutcomesActivities.title
+          }
         />
       </div>
 
       <div className={`${classes.projectDetails} ${classes.projectActions} ${classes.projectContent}`}>
-        <Title variant="h2">{projectDefault.landManagementActions.title}</Title>
+        <Title variant="h2">
+          {project.fieldsOverride && project.fieldsOverride.landManagementActions
+            ? project.fieldsOverride.landManagementActions.title
+            : projectDefault.landManagementActions.title}
+        </Title>
         {landManagementActions.map((actionsType, i) => (
           <div key={i} className={i > 0 ? classes.projectActionsGroup : ''}>
             <Description
@@ -404,7 +439,11 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
           <Title variant="h2">Monitoring, Verification, and Reporting</Title>
         </div>*/}
           <div className={`${classes.projectDetails} ${classes.projectTimeline} ${classes.projectContent}`}>
-            <Title variant="h2">Timeline</Title>
+            <Title variant="h2">
+              {project.fieldsOverride && project.fieldsOverride.timeline
+                ? project.fieldsOverride.timeline.title
+                : projectDefault.timeline.title}
+            </Title>
             <Timeline
               events={project.timeline.events}
               completedItemIndex={project.timeline.completedItemIndex}

@@ -36,6 +36,7 @@ export const creditDetails = (): JSX.Element => (
     description={text('description', details.description)}
     activities={array('activities', details.activities, ':')}
     background="./background.jpg"
+    title="Key activities and outcomes"
   />
 );
 

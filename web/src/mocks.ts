@@ -60,6 +60,7 @@ export interface Project {
   creditClass: CreditClass;
   protectedSpecies?: ProtectedSpeciesItem[];
   timeline?: Timeline;
+  fieldsOverride?: ProjectOverride;
   // missing: gis, documents
 }
 
@@ -81,11 +82,29 @@ export interface PurchasedCredits {
   totalAvailable: number;
 }
 
+interface ProjectDefaultFields {
+  title: string;
+  subtitle?: string;
+}
+
 export interface ProjectDefault {
-  landManagementActions: {
-    title: string;
-    subtitle: string;
-  };
+  story: ProjectDefaultFields;
+  monitoredImpact: ProjectDefaultFields;
+  nonMonitoredImpact: ProjectDefaultFields;
+  protectedSpecies: ProjectDefaultFields;
+  landManagementActions: ProjectDefaultFields;
+  keyOutcomesActivities: ProjectDefaultFields;
+  timeline: ProjectDefaultFields;
+}
+
+export interface ProjectOverride {
+  story?: ProjectDefaultFields;
+  monitoredImpact?: ProjectDefaultFields;
+  nonMonitoredImpact?: ProjectDefaultFields;
+  protectedSpecies?: ProjectDefaultFields;
+  landManagementActions?: ProjectDefaultFields;
+  keyOutcomesActivities?: ProjectDefaultFields;
+  timeline?: ProjectDefaultFields;
 }
 
 export interface Mock {

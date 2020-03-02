@@ -7,9 +7,28 @@
     "type": "organization"
   },
   "projectDefault": {
+    "story": {
+      "title": "Story"
+    },
+    "monitoredImpact": {
+      "title": "Monitored Impact"
+    },
+    "nonMonitoredImpact": {
+      "title": "Non-monitored Impact",
+      "subtitle": "These outcomes are natural by-products of the primary impact above, but will not be measured or verified."
+    },
+    "protectedSpecies": {
+      "title": "Protected Species"
+    },
     "landManagementActions": {
       "title": "Land Management Actions",
       "subtitle": "This is how the project developers are planning to achieve the primary impact."
+    },
+    "keyOutcomesActivities": {
+      "title": "Key activities and outcomes"
+    },
+    "timeline": {
+      "title": "Timeline"
     }
   },
   "purchasedCredits": [
@@ -205,6 +224,11 @@
     },
     {
       "id": "woa",
+      "fieldsOverride": {
+        "protectedSpecies": {
+          "title": "Threatened Species"
+        }
+      },
       "name": "Andover Farm",
       "place": {
         "city": "Kojonup",

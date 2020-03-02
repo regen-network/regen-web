@@ -701,9 +701,7 @@ exports[`Storyshots Components|Credits Credit Details 1`] = `
       >
         <h4
           className="MuiTypography-root makeStyles-root-1887 undefined MuiTypography-h4 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
-        >
-          Key activities and outcomes
-        </h4>
+        />
       </div>
       <div>
         <ul

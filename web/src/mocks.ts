@@ -59,7 +59,7 @@ export interface Project {
   impact: Impact[];
   creditClass: CreditClass;
   protectedSpecies?: ProtectedSpeciesItem[];
-  timeline: Timeline;
+  timeline?: Timeline;
   // missing: gis, documents
 }
 

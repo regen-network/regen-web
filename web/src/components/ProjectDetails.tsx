@@ -398,18 +398,20 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
         ))}
       </div>
 
-      <div className="project-bottom">
-        {/*<div className={classes.projectDetails}>
+      {project.timeline && (
+        <div className="project-bottom">
+          {/*<div className={classes.projectDetails}>
           <Title variant="h2">Monitoring, Verification, and Reporting</Title>
         </div>*/}
-        <div className={`${classes.projectDetails} ${classes.projectTimeline} ${classes.projectContent}`}>
-          <Title variant="h2">Timeline</Title>
-          <Timeline
-            events={project.timeline.events}
-            completedItemIndex={project.timeline.completedItemIndex}
-          />
+          <div className={`${classes.projectDetails} ${classes.projectTimeline} ${classes.projectContent}`}>
+            <Title variant="h2">Timeline</Title>
+            <Timeline
+              events={project.timeline.events}
+              completedItemIndex={project.timeline.completedItemIndex}
+            />
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

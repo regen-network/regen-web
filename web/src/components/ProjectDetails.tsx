@@ -3,7 +3,7 @@ import { makeStyles, Theme } from '@material-ui/core/styles';
 
 import Grid from '@material-ui/core/Grid';
 import background from '../assets/background.jpg';
-import { Project, Impact } from '../mocks';
+import { Project, Impact, ProjectDefault, ActionGroup } from '../mocks';
 
 import { getFontSize } from 'web-components/lib/theme/sizing';
 import Title from 'web-components/lib/components/title';
@@ -11,12 +11,13 @@ import ProjectPlaceInfo from 'web-components/lib/components/place/ProjectPlaceIn
 import ProjectDeveloperCard from 'web-components/lib/components/cards/ProjectDeveloperCard';
 import ImpactCard from 'web-components/lib/components/cards/ImpactCard';
 import Description from 'web-components/lib/components/description';
-import Action from 'web-components/lib/components/action';
+// import Action from 'web-components/lib/components/action';
 import Timeline from 'web-components/lib/components/timeline';
 import ReadMore from 'web-components/lib/components/read-more';
 import CreditDetails from 'web-components/lib/components/credits/CreditDetails';
 import ProtectedSpecies from 'web-components/lib/components/sliders/ProtectedSpecies';
 import NonMonitoredImpact from 'web-components/lib/components/sliders/NonMonitoredImpact';
+import LandManagementActions from 'web-components/lib/components/sliders/LandManagementActions';
 import { ItemProps as ProtectedSpeciesItem } from 'web-components/lib/components/sliders/Item';
 import { User } from 'web-components/lib/components/user/UserInfo';
 import { getImgSrc } from '../lib/imgSrc';
@@ -130,16 +131,17 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingBottom: theme.spacing(27.5),
     },
     [theme.breakpoints.between('md', 'lg')]: {
-      paddingRight: theme.spacing(30.375),
+      paddingRight: theme.spacing(33.375),
     },
-    [theme.breakpoints.down('sm')]: {
-      paddingRight: theme.spacing(5),
+    // [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.between('sm', 'sm')]: {
+      paddingRight: theme.spacing(7.5),
     },
     [theme.breakpoints.down('xs')]: {
       paddingBottom: theme.spacing(4),
     },
     [theme.breakpoints.up('xl')]: {
-      paddingRight: 0,
+      paddingRight: theme.spacing(2.5),
     },
   },
   projectGrid: {
@@ -213,10 +215,19 @@ const useStyles = makeStyles((theme: Theme) => ({
   map: {
     maxHeight: '50rem',
   },
+  projectActionsGroup: {
+    [theme.breakpoints.up('sm')]: {
+      marginTop: theme.spacing(6),
+    },
+    [theme.breakpoints.down('xs')]: {
+      marginTop: theme.spacing(6),
+    },
+  },
 }));
 
 interface ProjectProps {
   project: Project;
+  projectDefault: ProjectDefault;
 }
 
 function getProjectUser(projectUser: User): User {
@@ -232,9 +243,13 @@ function getProjectUser(projectUser: User): User {
   return user;
 }
 
-export default function ProjectDetails({ project }: ProjectProps): JSX.Element {
+export default function ProjectDetails({ project, projectDefault }: ProjectProps): JSX.Element {
   const classes = useStyles({});
   const impact: Impact[] = project.impact.map(item => ({ ...item, imgSrc: getImgSrc(item.imgSrc) }));
+  const landManagementActions: ActionGroup[] = project.landManagementActions.map(group => ({
+    ...group,
+    actions: group.actions.map(action => ({ ...action, imgSrc: getImgSrc(action.imgSrc) })),
+  }));
   const monitoredImpact: Impact | undefined = impact.find(({ monitored }) => monitored === true);
 
   if (monitoredImpact) {
@@ -358,21 +373,25 @@ export default function ProjectDetails({ project }: ProjectProps): JSX.Element {
       </div>
 
       <div className={`${classes.projectDetails} ${classes.projectActions} ${classes.projectContent}`}>
-        <Title variant="h2">Land Management Actions</Title>
-        <Description>
-          This is how the project developers are planning to achieve the primary impact.
-        </Description>
-        <Grid container className={`${classes.projectGrid} ${classes.projectActionsGrid}`}>
-          {project.landManagementActions.map((action, index) => (
-            <Grid item xs={12} sm={4} className={classes.projectGridItem} key={`${index}-${action.name}`}>
-              <Action
-                name={action.name}
-                description={action.description}
-                imgSrc={require(`../assets/${action.imgSrc}`)}
-              />
-            </Grid>
-          ))}
-        </Grid>
+        <Title variant="h2">{projectDefault.landManagementActions.title}</Title>
+        {landManagementActions.map((actionsType, i) => (
+          <div key={i} className={i > 0 ? classes.projectActionsGroup : ''}>
+            <Description>{actionsType.title || projectDefault.landManagementActions.subtitle}</Description>
+            <LandManagementActions actions={actionsType.actions} />
+
+            {/*<div className={`${classes.projectGrid} ${classes.projectActionsGrid}`}>
+              {actionsType.actions.map((action, j) => (
+                <Grid item xs={12} sm={4} className={classes.projectGridItem} key={`${j}-${action.name}`}>
+                  <Action
+                    name={action.name}
+                    description={action.description}
+                    imgSrc={require(`../assets/${action.imgSrc}`)}
+                  />
+                </Grid>
+              ))
+            </div>*/}
+          </div>
+        ))}
       </div>
 
       <div className="project-bottom">

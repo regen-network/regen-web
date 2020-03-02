@@ -6,6 +6,12 @@
     "link": "https://www.regen.network/",
     "type": "organization"
   },
+  "projectDefault": {
+    "landManagementActions": {
+      "title": "Land Management Actions",
+      "subtitle": "This is how the project developers are planning to achieve the primary impact."
+    }
+  },
   "purchasedCredits": [
     {
       "userId": "userId",
@@ -66,38 +72,40 @@
         "The site will be managed in accordance with an agreed management plan to reduce weed pressure, improve the biodiversity value of the location and preserve the value of the land in perpetuity.",
         "After 10 years the land will be vetted to Rigney Namawi Pty Ltd (local indigenous traditional owners). Six monthly project updates in the form of videos, blog posts and photographs will be produced for the first 5 years of the project."
       ],
-      "landManagementActions": [
-        {
-          "name": "Reduce pest populations",
-          "description": "Monitor and reduce the population of foxes, cats, dingos/wild dogs.",
-          "imgSrc": "pest.png"
-        },
-        {
-          "name": "Prevent any new weeds or pests becoming established",
-          "description": "Monitor sites for any new weeds or pests. If observed, plan and implement a control program.",
-          "imgSrc": "fox.png"
-        },
-        {
-          "name": "Eradicate populations of declared weeds",
-          "description": "Conserving the plant habitats in the area along rivers and streams.",
-          "imgSrc": "weeds.png"
-        },
-        {
-          "name": "Decommission all artificial water sources",
-          "description": "Identify artificial water sources. Prioritise those close to boundaries and decommission by either blocking inflow or excluding stock with fences.",
-          "imgSrc": "water.png"
-        },
-        {
-          "name": "Limit impact from native mammals",
-          "description": "Determine the carrying capacity for the property and monitor the population to keep the number below carrying capacity.",
-          "imgSrc": "mammals.png"
-        },
-        {
-          "name": "Determine impacts for herbivory on native vegetation",
-          "description": "Establish a minimum of three fenced exclosures to prevent grazing from herbivores (both native and introduced).",
-          "imgSrc": "herbivory.png"
-        }
-      ],
+      "landManagementActions": [{
+        "actions": [
+          {
+            "name": "Reduce pest populations",
+            "description": "Monitor and reduce the population of foxes, cats, dingos/wild dogs.",
+            "imgSrc": "pest.png"
+          },
+          {
+            "name": "Prevent any new weeds or pests becoming established",
+            "description": "Monitor sites for any new weeds or pests. If observed, plan and implement a control program.",
+            "imgSrc": "fox.png"
+          },
+          {
+            "name": "Eradicate populations of declared weeds",
+            "description": "Conserving the plant habitats in the area along rivers and streams.",
+            "imgSrc": "weeds.png"
+          },
+          {
+            "name": "Decommission all artificial water sources",
+            "description": "Identify artificial water sources. Prioritise those close to boundaries and decommission by either blocking inflow or excluding stock with fences.",
+            "imgSrc": "water.png"
+          },
+          {
+            "name": "Limit impact from native mammals",
+            "description": "Determine the carrying capacity for the property and monitor the population to keep the number below carrying capacity.",
+            "imgSrc": "mammals.png"
+          },
+          {
+            "name": "Determine impacts for herbivory on native vegetation",
+            "description": "Establish a minimum of three fenced exclosures to prevent grazing from herbivores (both native and introduced).",
+            "imgSrc": "herbivory.png"
+          }
+        ]
+      }],
       "impact": [
         {
           "name": "Biodiversity",
@@ -241,38 +249,45 @@
         "Control introduced predators and invasive weeds",
         "Financially support a farming family to transition to regenerative practices"
       ],
-      "landManagementActions": [
-        {
-          "name": "Fence existing biodiversity",
-          "description": "Fencing to exclude stock removes grazing pressure from native species and helps the ecosystem to regenerate.",
-          "imgSrc": "fence-biodiversity.png"
-        },
-        {
-          "name": "Establish and manage fire breaks",
-          "description": "Fire can be mitigated by creating fire breaks and working with an approved management plan that reduces fuel build up in the vegetation under story.",
-          "imgSrc": "fire-breaks.png"
-        },
-        {
-          "name": "Revegetate to reconnect fragments",
-          "description": "Reconnecting fragmented vegetation provides a more resilient ecosystem and creates corridors for wildlife to move through.",
-          "imgSrc": "revegetate.png"
-        },
-        {
-          "name": "Multi species croppings",
-          "description": "Multi species crops are more efficient at improving the health and resilience of the the soil to pathogens, increasing soil microbial health by promoting above and below ground diversity, and can be grazed as a fodder crop.",
-          "imgSrc": "multi-species-croppings.png"
-        },
-        {
-          "name": "High density rotational grazing",
-          "description": "Increased stock density and long recovery periods maximizes grass growth and carbon drawdown into the soil.",
-          "imgSrc": "grazing.png"
-        },
-        {
-          "name": "Perennial pasture",
-          "description": "Establishing perennial pasture on salt effected, low lying or marginally productive land increases the agricultural production of the land as well as supporting a more stable year round climate for soil biology.",
-          "imgSrc": "perennial-pasture.png"
-        }
-      ],
+      "landManagementActions": [{
+        "title": "Funded activities within the nature zone, this is how the project developers are planning to achieve the primary impact.",
+        "actions": [
+          {
+            "name": "Fence existing biodiversity",
+            "description": "Fencing to exclude stock removes grazing pressure from native species and helps the ecosystem to regenerate.",
+            "imgSrc": "fence-biodiversity.png"
+          },
+          {
+            "name": "Establish and manage fire breaks",
+            "description": "Fire can be mitigated by creating fire breaks and working with an approved management plan that reduces fuel build up in the vegetation under story.",
+            "imgSrc": "fire-breaks.png"
+          },
+          {
+            "name": "Revegetate to reconnect fragments",
+            "description": "Reconnecting fragmented vegetation provides a more resilient ecosystem and creates corridors for wildlife to move through.",
+            "imgSrc": "revegetate.png"
+          }
+        ]
+      }, {
+        "title": "Flow on impact by supporting a regenerative farmer. Secondary impact as a result of biodiversity credits purchased.",
+        "actions": [
+          {
+            "name": "Multi species croppings",
+            "description": "Multi species crops are more efficient at improving the health and resilience of the the soil to pathogens, increasing soil microbial health by promoting above and below ground diversity, and can be grazed as a fodder crop.",
+            "imgSrc": "multi-species-croppings.png"
+          },
+          {
+            "name": "High density rotational grazing",
+            "description": "Increased stock density and long recovery periods maximizes grass growth and carbon drawdown into the soil.",
+            "imgSrc": "grazing.png"
+          },
+          {
+            "name": "Perennial pasture",
+            "description": "Establishing perennial pasture on salt effected, low lying or marginally productive land increases the agricultural production of the land as well as supporting a more stable year round climate for soil biology.",
+            "imgSrc": "perennial-pasture.png"
+          }
+        ]
+      }],
       "impact": [
         {
           "name": "Biodiversity",

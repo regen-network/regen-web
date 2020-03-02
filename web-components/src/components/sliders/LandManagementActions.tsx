@@ -1,26 +1,25 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles, useTheme, Theme } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Grid from '@material-ui/core/Grid';
+// import LandManagementActionsItem, { ItemProps } from './Item';
 import Slider from 'react-slick';
 import PrevNextButton from '../buttons/PrevNextButton';
-import ImpactCard, { ImpactCardProps } from '../cards/ImpactCard';
+import Action, { ActionProps } from '../action';
 
-export interface NonMonitoredImpactProps {
-  impact: ImpactCardProps[];
+export interface LandManagementActionsProps {
+  actions: ActionProps[];
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    marginLeft: theme.spacing(-5.25),
-    paddingTop: theme.spacing(3),
+    [theme.breakpoints.up('sm')]: {
+      marginLeft: theme.spacing(-2.5),
+    },
   },
   item: {
-    paddingLeft: theme.spacing(5),
     [theme.breakpoints.up('sm')]: {
-      marginBottom: theme.spacing(5.75),
-    },
-    [theme.breakpoints.down('xs')]: {
-      marginBottom: theme.spacing(4.5),
+      padding: `${theme.spacing(3.5)} ${theme.spacing(2.5)} ${theme.spacing(2.5)}`,
     },
   },
   buttons: {
@@ -31,15 +30,15 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function NonMonitoredImpact({ impact }: NonMonitoredImpactProps): JSX.Element {
+export default function LandManagementActions({ actions }: LandManagementActionsProps): JSX.Element {
   const classes = useStyles({});
+  const theme: Theme = useTheme();
+  const slides: number = useMediaQuery(theme.breakpoints.up('sm')) ? 3 : 1;
+
   const settings = {
-    // className: 'center',
-    // centerMode: true,
-    // infinite: false,
     speed: 500,
-    rows: 1,
-    slidesPerRow: 1,
+    slidesToShow: slides,
+    slidesToScroll: slides,
     arrows: false,
   };
 
@@ -66,18 +65,13 @@ export default function NonMonitoredImpact({ impact }: NonMonitoredImpactProps):
         }}
         className={classes.root}
       >
-        {impact.map((item, index) => (
-          <div className={classes.item} key={index}>
-            <ImpactCard
-              name={item.name}
-              imgSrc={item.imgSrc}
-              description={item.description}
-              monitored={item.monitored}
-            />
+        {actions.map((action, index) => (
+          <div className={classes.item}>
+            <Action name={action.name} description={action.description} imgSrc={action.imgSrc} />
           </div>
         ))}
       </Slider>
-      {impact.length > 1 && (
+      {actions.length > slides && (
         <Grid container justify="flex-end" className={classes.buttons}>
           <PrevNextButton direction="prev" onClick={slickPrev} />
           <PrevNextButton direction="next" onClick={slickNext} />

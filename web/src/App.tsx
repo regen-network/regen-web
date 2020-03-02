@@ -4,7 +4,14 @@ import { BrowserRouter as Router, Switch, Route, Link, useParams, useLocation } 
 import logo from './assets/logo.png';
 
 import './App.css';
-import { projects, creditsIssuer, purchasedCredits, Project, PurchasedCredits } from './mocks';
+import {
+  projects,
+  creditsIssuer,
+  purchasedCredits,
+  projectDefault,
+  Project,
+  PurchasedCredits,
+} from './mocks';
 import Footer from 'web-components/lib/components/footer';
 import Header from 'web-components/lib/components/header';
 import ProjectDetails from './components/ProjectDetails';
@@ -43,7 +50,7 @@ function ProjectContainer(): JSX.Element {
   const project: Project | undefined = projects.find(p => p.id === projectId);
 
   if (project) {
-    return <ProjectDetails project={project} />;
+    return <ProjectDetails project={project} projectDefault={projectDefault} />;
   }
   return <div>No project found</div>;
 }

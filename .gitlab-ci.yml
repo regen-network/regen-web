@@ -8,7 +8,7 @@ build-deploy-all:
   script:
     - echo "Building $CI_PROJECT_NAME"
     - yarn
-    - yarn run build-storybook    
+    - STORYBOOK_MAPBOX_TOKEN=$STORYBOOK_MAPBOX_TOKEN yarn run build-storybook    
     - yarn build
     - cf login -a $CF_URL -u $CF_USER -p $CF_PASS
     - cf target -o "$CF_ORG" -s $CF_SPACE
@@ -28,6 +28,6 @@ build-deploy-all:
 #  script:
 #    - cf login -a $CF_URL -u $CF_USER -p $CF_PASS
 #    - cf target -o "$CF_ORG" -s $CF_SPACE
-#   - cf push APP NAMES 
+#   - cf push APP NAMES
 #  only:
 #    - master

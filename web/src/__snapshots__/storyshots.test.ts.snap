@@ -390,7 +390,7 @@ exports[`Storyshots Components|Cards Project Card 1`] = `
                 |  
             </span>
             200
-
+             
             ha.
           </p>
         </div>
@@ -1459,7 +1459,7 @@ exports[`Storyshots Components|Place Project Place Info 1`] = `
           |  
       </span>
       440
-
+       
       hectares
     </p>
   </div>
@@ -2342,7 +2342,7 @@ This vital habitat comprises a unique mix of both freshwater and saltwater wetla
             </svg>
           </svg>
         </span>
-        read
+        read 
         more
       </span>
       <span

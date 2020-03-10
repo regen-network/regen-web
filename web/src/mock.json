@@ -515,7 +515,7 @@
         "name": "Soil Carbon Credit",
         "description": "Measured increases in SOC have been used to calculate the carbon sequestration rate in the top 15cm of topsoil across the Wilmot property. Using Wilmot’s soil monitoring database and remote sensing technology, the Regen Network has been able to calculate and verify a Soil Carbon Credit for the Wilmot property.",
         "tag": "soil organic carbon"
-      }
+      },
       "timeline": {
         "completedItemIndex": 0,
         "events": [

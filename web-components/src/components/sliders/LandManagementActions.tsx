@@ -24,6 +24,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   buttons: {
     paddingTop: theme.spacing(0.25),
+    [theme.breakpoints.down('xs')]: {
+      paddingTop: theme.spacing(3.75),
+      paddingBottom: theme.spacing(10),
+    },
     '& div': {
       marginLeft: theme.spacing(2.5),
     },
@@ -56,6 +60,7 @@ export default function LandManagementActions({ actions }: LandManagementActions
     }
   }
 
+  // TODO build reusable HOC slider component
   return (
     <div>
       <Slider

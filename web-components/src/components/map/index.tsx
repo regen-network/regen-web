@@ -199,6 +199,7 @@ export default function Map({ geojson, token }: MapProps): JSX.Element {
       </div>
     );
   };
+
   return (
     <div className={classes.root}>
       <ReactMapGL

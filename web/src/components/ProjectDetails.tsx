@@ -218,10 +218,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     maxHeight: '50rem',
   },
   projectActionsGroup: {
-    [theme.breakpoints.up('sm')]: {
-      marginTop: theme.spacing(6),
-    },
-    [theme.breakpoints.down('xs')]: {
+    '&:first-child': {
       marginTop: theme.spacing(6),
     },
   },
@@ -433,7 +430,9 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
         {landManagementActions.map((actionsType, i) => (
           <div key={i} className={i > 0 ? classes.projectActionsGroup : ''}>
             <Description
-              fontSize={landManagementActions.length > 1 ? getFontSize('big') : getFontSize('medium')}
+              fontSize={
+                landManagementActions.length > 1 ? { xs: '0.95rem', sm: '1.125rem' } : getFontSize('medium')
+              }
             >
               {actionsType.title || projectDefault.landManagementActions.subtitle}
             </Description>

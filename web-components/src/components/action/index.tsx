@@ -23,8 +23,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     [theme.breakpoints.down('xs')]: {
       fontSize: '1rem',
-      paddingTop: theme.spacing(2.25),
-      paddingBottom: theme.spacing(1.75),
+      paddingTop: theme.spacing(2.8),
+      paddingBottom: theme.spacing(1.2),
     },
   },
   description: {

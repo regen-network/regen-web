@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles, Theme, useTheme } from '@material-ui/core';
 import Slider from 'react-slick';
 import MapCard from '../cards/MapCard';
 
@@ -10,9 +10,18 @@ export interface MapCardsProps {
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    // marginLeft: theme.spacing(-5.25),
+    '& .slick-track': {
+      display: 'flex',
+      '& .slick-slide': {
+        height: 'inherit',
+        '& > div:first-child': {
+          height: '100%',
+        },
+      },
+    },
   },
   item: {
+    height: '100%',
     '& > div:first-child': {
       marginLeft: theme.spacing(1.875),
       marginRight: theme.spacing(1.875),
@@ -22,6 +31,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 export default function MapCards({ features, afterChange }: MapCardsProps): JSX.Element {
   const classes = useStyles({});
+  const theme = useTheme();
   const settings = {
     centerMode: true,
     speed: 500,
@@ -29,7 +39,6 @@ export default function MapCards({ features, afterChange }: MapCardsProps): JSX.
     slidesPerRow: 1,
     arrows: false,
   };
-
   return (
     <div>
       <Slider {...settings} afterChange={index => afterChange(features[index].id)} className={classes.root}>
@@ -39,7 +48,7 @@ export default function MapCards({ features, afterChange }: MapCardsProps): JSX.
               name={item.properties.name}
               imgSrc={item.properties.imgSrc}
               description={item.properties.description}
-              color={item.properties.fill || '#B9E1C7'}
+              color={item.properties.fill || theme.palette.secondary.main}
               isPopup={false}
             />
           </div>

@@ -24,7 +24,7 @@ interface GeoJson {
 
 interface MapProps {
   geojson: GeoJson;
-  token: string;
+  token: string | undefined;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -114,13 +114,20 @@ export default function Map({ geojson, token }: MapProps): JSX.Element {
   const classes = useStyles();
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up('sm'));
+
   const filteredFeatures: any[] = geojson.features.filter(feature => !feature.properties.boundary);
 
-  const [viewPort, setViewPort] = useState({ zoom: 11, latitude: 1, longitude: 1 });
+  const [viewPort, setViewPort] = useState({ zoom: 11, latitude: 0.0, longitude: 0.0 });
   const [popupInfo, setPopupInfo] = useState<PopupInfo | null>(null);
   const [shownLayer, setShownLayer] = useState<string | null>(
     filteredFeatures.length ? filteredFeatures[0].id : null,
   );
+
+  const interactiveLayerIds: string[] = geojson.features
+    ? geojson.features
+        .filter(f => f.geometry.type === 'Polygon' && !f.properties.boundary)
+        .map((f, i) => f.id || i.toString())
+    : [];
 
   const onLoad = (): void => {
     const [minLng, minLat, maxLng, maxLat] = bbox(geojson);
@@ -131,7 +138,10 @@ export default function Map({ geojson, token }: MapProps): JSX.Element {
         [maxLng, maxLat],
       ],
       {
-        padding: matches ? 10 : { top: 10, bottom: 300, left: 10, right: 10 },
+        padding:
+          matches || (!matches && interactiveLayerIds.length === 0)
+            ? 10
+            : { top: 10, bottom: 300, left: 10, right: 10 },
       },
     );
     setViewPort({ longitude, latitude, zoom });
@@ -150,10 +160,10 @@ export default function Map({ geojson, token }: MapProps): JSX.Element {
     setPopupInfo(popupInfo);
   };
 
-  const onMarkerClick = (feature: any): void => {
+  const onMarkerClick = (feature: any, index: string): void => {
     setPopupInfo({
       lngLat: [feature.geometry.coordinates[0], feature.geometry.coordinates[1]],
-      feature: { ...feature.properties, fill: '#B9E1C7' },
+      feature: { ...feature.properties, id: feature.id || index },
     });
   };
 
@@ -189,11 +199,11 @@ export default function Map({ geojson, token }: MapProps): JSX.Element {
       </div>
     );
   };
-
   return (
     <div className={classes.root}>
       <ReactMapGL
         {...viewPort}
+        scrollZoom={false}
         onLoad={onLoad}
         width="100%"
         height="100%"
@@ -201,6 +211,7 @@ export default function Map({ geojson, token }: MapProps): JSX.Element {
         onViewportChange={v => setViewPort(v)}
         mapboxApiAccessToken={token}
         onClick={onMapClick}
+        interactiveLayerIds={interactiveLayerIds}
       >
         {geojson.features &&
           geojson.features.map((feature, index) => {
@@ -211,17 +222,17 @@ export default function Map({ geojson, token }: MapProps): JSX.Element {
                   (matches || (!matches && feature.id === shownLayer)) && (
                     <Source type="geojson" data={feature}>
                       <Layer
-                        id={feature.id}
+                        id={feature.id || index.toString()}
                         type="fill"
                         paint={{
-                          'fill-opacity': feature.properties['fill-opacity'],
-                          'fill-color': feature.properties['fill'],
+                          'fill-opacity': parseFloat(feature.properties['fill-opacity']) || 0,
+                          'fill-color': feature.properties['fill'] || '#000000',
                         }}
                       />
                       <Layer
                         type="line"
                         paint={{
-                          'line-color': feature.properties['stroke'],
+                          'line-color': feature.properties['stroke'] || '#000000',
                           'line-width': 2,
                         }}
                       />
@@ -230,7 +241,7 @@ export default function Map({ geojson, token }: MapProps): JSX.Element {
                 {feature.geometry.type === 'Polygon' && feature.properties.boundary && (
                   <Source type="geojson" data={feature}>
                     <Layer
-                      id={feature.id}
+                      id={feature.id || index.toString()}
                       type="line"
                       paint={{
                         'line-color': theme.palette.primary.main,
@@ -245,7 +256,7 @@ export default function Map({ geojson, token }: MapProps): JSX.Element {
                     latitude={feature.geometry.coordinates[1]}
                     longitude={feature.geometry.coordinates[0]}
                   >
-                    <PinIcon fontSize="large" onClick={() => onMarkerClick(feature)} />
+                    <PinIcon fontSize="large" onClick={() => onMarkerClick(feature, index.toString())} />
                   </Marker>
                 )}
               </div>

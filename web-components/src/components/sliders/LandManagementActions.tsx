@@ -66,7 +66,7 @@ export default function LandManagementActions({ actions }: LandManagementActions
         className={classes.root}
       >
         {actions.map((action, index) => (
-          <div className={classes.item}>
+          <div className={classes.item} key={index}>
             <Action name={action.name} description={action.description} imgSrc={action.imgSrc} />
           </div>
         ))}

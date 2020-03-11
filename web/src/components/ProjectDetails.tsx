@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
-
+import * as togeojson from '@mapbox/togeojson';
 import Grid from '@material-ui/core/Grid';
+
 import background from '../assets/background.jpg';
 import { Project, Impact, ProjectDefault, ActionGroup } from '../mocks';
 
@@ -18,6 +19,7 @@ import CreditDetails from 'web-components/lib/components/credits/CreditDetails';
 import ProtectedSpecies from 'web-components/lib/components/sliders/ProtectedSpecies';
 import NonMonitoredImpact from 'web-components/lib/components/sliders/NonMonitoredImpact';
 import LandManagementActions from 'web-components/lib/components/sliders/LandManagementActions';
+import Map from 'web-components/lib/components/map';
 import { ItemProps as ProtectedSpeciesItem } from 'web-components/lib/components/sliders/Item';
 import { User } from 'web-components/lib/components/user/UserInfo';
 import { getImgSrc } from '../lib/imgSrc';
@@ -272,6 +274,21 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
     landOwner = getProjectUser(project.owner);
   }
 
+  const [geojson, setGeojson] = useState<any | null>(null);
+
+  // Convert kml to geojson
+  const mapFile: string = require(`../assets/${project.map}`);
+  const isGISFile: boolean = /\.(json|kml)$/i.test(project.map);
+
+  if (!geojson && isGISFile) {
+    fetch(mapFile)
+      .then(r => r.text())
+      .then(kml => {
+        const dom = new DOMParser().parseFromString(kml, 'text/xml');
+        setGeojson(togeojson.kml(dom));
+      });
+  }
+
   return (
     <div className={classes.root}>
       <div className={`${classes.projectTop} project-top`}>
@@ -311,7 +328,11 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
         </div>
       </div>
 
-      <img className={classes.map} alt={project.name} src={require(`../assets/${project.map}`)} />
+      {geojson && isGISFile ? (
+        <Map geojson={geojson} token={process.env.REACT_APP_MAPBOX_TOKEN} />
+      ) : (
+        <img className={classes.map} alt={project.name} src={mapFile} />
+      )}
 
       <Grid container className={`${classes.projectDetails} ${classes.projectContent}`}>
         {monitoredImpact && (

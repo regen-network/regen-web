@@ -30,8 +30,13 @@ function ScrollToTop(): null {
 
 function Home(): JSX.Element {
   return (
-    <div>
-      <Link to="/projects">Project list</Link>
+    <div style={{ paddingLeft: '1rem' }}>
+      <p>
+        <Link to="/projects">Project list</Link>
+      </p>
+      <p>
+        <Link to="/credits/userId">Credits page</Link>
+      </p>
     </div>
   );
 }

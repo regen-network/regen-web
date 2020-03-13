@@ -27,5 +27,14 @@ applications:
      - route: presale.registry.regen.network
   buildpacks: 
      - staticfile_buildpack
-
+- name: graphql
+  memory: 64M
+  command: './cli.js --connection $DATABASE_URL'
+  instances: 1
+  docker: 
+     image: graphile/postgraphile
+  routes:
+     - route: graphql.registry.regen.network
+  services:
+     - registrystaging-psql
 

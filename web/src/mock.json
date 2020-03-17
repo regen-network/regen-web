@@ -516,60 +516,6 @@
         "description": "Measured increases in SOC have been used to calculate the carbon sequestration rate in the top 15cm of topsoil across the Wilmot property. Using Wilmot’s soil monitoring database and remote sensing technology, the Regen Network has been able to calculate and verify a Soil Carbon Credit for the Wilmot property.",
         "tag": "soil organic carbon"
       },
-      "timeline": {
-        "completedItemIndex": 0,
-        "events": [
-          {
-            "date": "2008",
-            "title": "Land purchased",
-            "description": "At the time of purchase the land was being managed conventionally, being set stocked and used to breed or finish cattle for sale. There was little to no record of soil health, pasture growth or biodiversity."
-          },
-          {
-            "date": "2011",
-            "title": "Project research",
-            "description": "In order to improve the ecological health and production of Wilmot, data collection and management trials start. Baseline sampling of soil and plant health is completed, use of synthetic fertilisers ceases and use of rotational grazing, compost and biological foliar sprays commences. Soil organic carbon levels measure on average 2.5%."
-          },
-          {
-            "date": "2013",
-            "title": "Time Controlled Rotational Grazing",
-            "description": "Following a period of trials, time controlled rotation grazing is implemented across the whole farm. This involved an ongoing project over a number of years to subdivide paddocks, increase herd sizes and decrease grazing periods."
-          },
-          {
-            "date": "2015",
-            "title": "Maia Grazing",
-            "description": "From 2015 Maia Grazing is used to guide and verify the effective implementation of Time Controlled Rotational Grazing."
-          },
-          {
-            "date": "2017",
-            "title": "Project start",
-            "description": "The sentinel satellite program provides imagery from 2017 onwards that is calibrated with annual soil sampling programs to determine soil organic carbon levels across the entire farm."
-          },
-          {
-            "date": "2018 - 2019",
-            "title": "Drought",
-            "description": "From early 2018 to the end of 2019 the region experiences the worst drought in recorded history. Wilmot actively manages stock numbers to ensure ground cover is maintained and soil and pasture health is prioritised."
-          },
-          {
-            "date": "2019",
-            "title": "Verification",
-            "description": "Impact Ag engages Regen Network to correlate and verify soil carbon levels using satellite imagery."
-          },
-          {
-            "title": "Credits issued",
-            "description": "Regen Network verifies soil carbon increases over the project period to date and issues credits."
-          },
-          {
-            "date": "Annually to 2030",
-            "title": "Monitoring",
-            "description": "Annual monitoring program to be maintained throughout the project life, including use of Maia Grazing as verification tool."
-          },
-          {
-            "date": "2030",
-            "title": "Project concludes",
-            "description": "Wilmot Cattle Co. contracted to maintain management practices for ten years from crediting period."
-          }
-        ]
-      }
     }
   ]
 }

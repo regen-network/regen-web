@@ -491,7 +491,11 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
 
       {project.creditPrice && (
         <div className={classes.buyFooter}>
-          <BuyFooter href={project.presaleUrl} creditPrice={project.creditPrice} />
+          <BuyFooter
+            href={project.presaleUrl}
+            unitPrice={project.creditPrice.unitPrice}
+            currency={project.creditPrice.currency}
+          />
         </div>
       )}
     </div>

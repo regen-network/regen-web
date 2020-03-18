@@ -8,18 +8,25 @@ import CurrentCreditsIcon from '../icons/CurrentCreditsIcon';
 import ContainedButton from '../buttons/ContainedButton';
 
 interface BuyFooterProps {
-  creditPrice: number;
+  unitPrice: number;
+  currency: string;
   href?: string;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
-  root: {
+  background: {
     backgroundColor: theme.palette.primary.main,
-    boxShadow: '0px -4px 10px rgba(0, 0, 0, 0.1)',
+    width: '100%',
     [theme.breakpoints.up('sm')]: {
       height: theme.spacing(30),
     },
-    width: '100%',
+    [theme.breakpoints.down('xs')]: {
+      height: theme.spacing(19),
+    },
+    boxShadow: '0px -4px 10px rgba(0, 0, 0, 0.1)',
+  },
+  root: {
+    height: '100%',
     [theme.breakpoints.up('md')]: {
       paddingRight: theme.spacing(37.5),
       paddingLeft: theme.spacing(37.5),
@@ -83,37 +90,39 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function BuyFooter({ creditPrice, href }: BuyFooterProps): JSX.Element {
+export default function BuyFooter({ unitPrice, currency, href }: BuyFooterProps): JSX.Element {
   const classes = useStyles({});
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up('sm'));
 
   return (
-    <Grid
-      container
-      wrap="nowrap"
-      alignItems="center"
-      justify={matches ? 'flex-end' : 'space-between'}
-      className={classes.root}
-    >
-      <Grid item className={classes.creditPrice}>
-        <Typography>
-          <span className={classes.number}>${creditPrice}</span>
-          <span className={classes.creditsText}>/credit USD</span>
-        </Typography>
+    <div className={classes.background}>
+      <Grid
+        container
+        wrap="nowrap"
+        alignItems="center"
+        justify={matches ? 'flex-end' : 'space-between'}
+        className={classes.root}
+      >
+        <Grid item className={classes.creditPrice}>
+          <Typography>
+            <span className={classes.number}>${unitPrice}</span>
+            <span className={classes.creditsText}>/credit {currency}</span>
+          </Typography>
+        </Grid>
+        <Grid item>
+          <a href={href} target="_blank" rel="noopener noreferrer">
+            <ContainedButton>
+              <CurrentCreditsIcon
+                height={matches ? '1.625rem' : '1.375rem'}
+                width={matches ? '1.75rem' : '1.5rem'}
+                color={theme.palette.primary.main}
+              />
+              <span className={classes.buyText}>buy credits</span>
+            </ContainedButton>
+          </a>
+        </Grid>
       </Grid>
-      <Grid item>
-        <a href={href} target="_blank" rel="noopener noreferrer">
-          <ContainedButton>
-            <CurrentCreditsIcon
-              height={matches ? '1.625rem' : '1.375rem'}
-              width={matches ? '1.75rem' : '1.5rem'}
-              color={theme.palette.primary.main}
-            />
-            <span className={classes.buyText}>buy credits</span>
-          </ContainedButton>
-        </a>
-      </Grid>
-    </Grid>
+    </div>
   );
 }

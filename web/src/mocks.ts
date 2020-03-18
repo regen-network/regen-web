@@ -65,7 +65,10 @@ export interface Project {
     purchased: number;
     issued: number; // total number of issued credits
   };
-  creditPrice?: number;
+  creditPrice?: {
+    unitPrice: number;
+    currency: string;
+  };
   presaleUrl?: string;
   // missing: documents
 }

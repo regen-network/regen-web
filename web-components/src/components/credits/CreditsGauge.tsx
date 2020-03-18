@@ -6,8 +6,8 @@ import GaugeText from './GaugeText';
 import { pluralize } from './pluralize';
 
 export interface CreditsProps {
-  amount: number; // current purchased amount
-  totalAmount: number; // total issued amount
+  purchased: number; // current purchased amount
+  issued: number; // total issued amount
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -19,27 +19,23 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 export default function CreditsGauge(props: CreditsProps): JSX.Element {
   const classes = useStyles({});
-  const available: number = props.totalAmount - props.amount;
+  const available: number = props.issued - props.purchased;
   return (
     <Grid container direction="column">
       <Grid item container direction="row" justify="space-between">
         <GaugeText
-          number={props.amount}
-          label={`${pluralize(props.amount, 'credit')} purchased`}
+          number={props.purchased}
+          label={`${pluralize(props.purchased, 'credit')} purchased`}
           variant="body2"
         />
-        <GaugeText
-          number={available}
-          label={`${pluralize(available, 'credit')} available`}
-          variant="body2"
-        />
+        <GaugeText number={available} label={`${pluralize(available, 'credit')} available`} variant="body2" />
       </Grid>
       <Grid item className={classes.gauge}>
         <Gauge
           height="1.6875rem"
           borderRadius="3.125rem"
-          amount={props.amount}
-          totalAmount={props.totalAmount}
+          amount={props.purchased}
+          totalAmount={props.issued}
         />
       </Grid>
     </Grid>

@@ -16,6 +16,7 @@ import Description from 'web-components/lib/components/description';
 import Timeline from 'web-components/lib/components/timeline';
 import ReadMore from 'web-components/lib/components/read-more';
 import CreditDetails from 'web-components/lib/components/credits/CreditDetails';
+import CreditsGauge from 'web-components/lib/components/credits/CreditsGauge';
 import ProtectedSpecies from 'web-components/lib/components/sliders/ProtectedSpecies';
 import NonMonitoredImpact from 'web-components/lib/components/sliders/NonMonitoredImpact';
 import LandManagementActions from 'web-components/lib/components/sliders/LandManagementActions';
@@ -222,6 +223,15 @@ const useStyles = makeStyles((theme: Theme) => ({
       marginTop: theme.spacing(6),
     },
   },
+  creditsGauge: {
+    [theme.breakpoints.up('sm')]: {
+      marginTop: theme.spacing(5),
+    },
+    [theme.breakpoints.down('xs')]: {
+      marginBottom: theme.spacing(5),
+      marginTop: theme.spacing(3.75),
+    },
+  },
 }));
 
 interface ProjectProps {
@@ -303,6 +313,11 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
               <ProjectPlaceInfo place={project.place} area={project.area} areaUnit={project.areaUnit} />
             </div>
             <Description fontSize={getFontSize('big')}>{project.shortDescription}</Description>
+            {project.credits && (
+              <div className={classes.creditsGauge}>
+                <CreditsGauge purchased={project.credits.purchased} issued={project.credits.issued} />
+              </div>
+            )}
             <div className={classes.projectDeveloper}>
               <ProjectDeveloperCard
                 projectDeveloper={projectDeveloper}

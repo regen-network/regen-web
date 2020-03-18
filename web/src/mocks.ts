@@ -61,7 +61,11 @@ export interface Project {
   protectedSpecies?: ProtectedSpeciesItem[];
   timeline?: Timeline;
   fieldsOverride?: ProjectOverride;
-  // missing: gis, documents
+  credits?: {
+    purchased: number;
+    issued: number; // total number of issued credits
+  };
+  // missing: documents
 }
 
 interface BasicProject {

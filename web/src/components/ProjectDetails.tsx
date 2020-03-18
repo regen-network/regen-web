@@ -23,6 +23,8 @@ import LandManagementActions from 'web-components/lib/components/sliders/LandMan
 import Map from 'web-components/lib/components/map';
 import { ItemProps as ProtectedSpeciesItem } from 'web-components/lib/components/sliders/Item';
 import { User } from 'web-components/lib/components/user/UserInfo';
+import BuyFooter from 'web-components/lib/components/buy-footer';
+
 import { getImgSrc } from '../lib/imgSrc';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -484,6 +486,12 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
               completedItemIndex={project.timeline.completedItemIndex}
             />
           </div>
+        </div>
+      )}
+
+      {project.creditPrice && (
+        <div className={classes.buyFooter}>
+          <BuyFooter href={project.presaleUrl} creditPrice={project.creditPrice} />
         </div>
       )}
     </div>

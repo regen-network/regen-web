@@ -4,7 +4,7 @@ import PrevNextButton from 'web-components/lib/components/buttons/PrevNextButton
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 
 export default {
-  title: 'Components|Button',
+  title: 'Components|Buttons',
   component: OutlinedButton,
 };
 

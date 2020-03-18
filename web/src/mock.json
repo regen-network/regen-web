@@ -420,7 +420,9 @@
       "credits": {
         "purchased": 0,
         "issued": 0
-      }
+      },
+      "creditPrice": 10,
+      "presaleUrl": "https://regen-network.gitlab.io/presale-woa/woa-adovar.html#content7-1l"
     },
     {
       "id": "impactag",
@@ -527,7 +529,8 @@
       "credits": {
         "purchased": 0,
         "issued": 0
-      }
+      },
+      "creditPrice": 10
     }
   ]
 }

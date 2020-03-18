@@ -4,7 +4,7 @@ import Button from '@material-ui/core/Button';
 
 interface ContainedButtonProps {
   children?: any;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 const CustomButton = withStyles((theme: Theme) => ({
@@ -16,10 +16,10 @@ const CustomButton = withStyles((theme: Theme) => ({
     letterSpacing: '1px',
     boxShadow: 'none',
     [theme.breakpoints.down('xs')]: {
-      padding: theme.spacing(4),
+      padding: `${theme.spacing(3)} ${theme.spacing(7.5)}`,
     },
     [theme.breakpoints.up('sm')]: {
-      padding: `${theme.spacing(5)} ${theme.spacing(10)}`,
+      padding: `${theme.spacing(4.5)} ${theme.spacing(12.5)}`,
       fontSize: '1.3125rem',
     },
   },

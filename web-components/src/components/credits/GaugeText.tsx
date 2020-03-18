@@ -14,9 +14,22 @@ const useStyles = makeStyles((theme: Theme) => ({
   number: {
     fontFamily: theme.typography.h1.fontFamily,
     fontWeight: 900,
+    [theme.breakpoints.up('sm')]: {
+      fontSize: '1.5rem',
+    },
+    [theme.breakpoints.down('xs')]: {
+      fontSize: '1.125rem',
+    },
   },
   text: {
-    fontSize: '0.75rem',
+    // fontSize: '0.75rem',
+    color: theme.palette.info.dark,
+    [theme.breakpoints.up('sm')]: {
+      fontSize: '1.125rem',
+    },
+    [theme.breakpoints.down('xs')]: {
+      fontSize: '0.85rem',
+    },
   },
 }));
 

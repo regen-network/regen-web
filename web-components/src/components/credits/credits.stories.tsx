@@ -1,16 +1,18 @@
 import * as React from 'react';
 import CreditDetails, { CreditDetailsProps } from 'web-components/lib/components/credits/CreditDetails';
-import { withKnobs, text, array } from '@storybook/addon-knobs';
+import { withKnobs, text, array, number } from '@storybook/addon-knobs';
 
+// import Credits from 'web-components/lib/components/credits/';
 // import Gauge from 'web-components/lib/components/credits/Gauge';
 // import GaugeText from 'web-components/lib/components/credits/GaugeText';
+import CreditsGauge from 'web-components/lib/components/credits/CreditsGauge';
 
-// const credit: CreditsProps = {
-//   numberOfHolders: 1021,
-//   numberOfProjects: 25,
-//   amount: 70000,
-//   totalAmount: 93211,
-// };
+const credit: CreditsProps = {
+  numberOfHolders: 1021,
+  numberOfProjects: 25,
+  amount: 70000,
+  totalAmount: 93211,
+};
 
 export default {
   title: 'Components|Credits',
@@ -40,6 +42,13 @@ export const creditDetails = (): JSX.Element => (
   />
 );
 
+export const creditsGauge = (): JSX.Element => (
+  <CreditsGauge
+    amount={number('purchased', 1527)}
+    totalAmount={number('total issued', 2237)}
+  />
+);
+
 // export const creditsWithGauge = (): JSX.Element => (
 //   <Credits
 //     numberOfHolders={credit.numberOfHolders}
@@ -48,9 +57,9 @@ export const creditDetails = (): JSX.Element => (
 //     totalAmount={credit.totalAmount}
 //   />
 // );
-//
+
 // export const gauge = (): JSX.Element => <Gauge amount={credit.amount} totalAmount={credit.totalAmount} />;
-//
+
 // export const formattedText = (): JSX.Element => (
 //   <GaugeText number={credit.totalAmount} label="credits issued" format />
 // );

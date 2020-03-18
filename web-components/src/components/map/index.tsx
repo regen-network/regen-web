@@ -213,6 +213,7 @@ export default function Map({ geojson, token }: MapProps): JSX.Element {
         mapboxApiAccessToken={token}
         onClick={onMapClick}
         interactiveLayerIds={interactiveLayerIds}
+        attributionControl={false}
       >
         {geojson.features &&
           geojson.features.map((feature, index) => {

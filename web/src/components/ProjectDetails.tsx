@@ -315,7 +315,7 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
               <ProjectPlaceInfo place={project.place} area={project.area} areaUnit={project.areaUnit} />
             </div>
             <Description fontSize={getFontSize('big')}>{project.shortDescription}</Description>
-            {project.credits && (
+            {(project.credits && project.credits.issued > 0) && (
               <div className={classes.creditsGauge}>
                 <CreditsGauge purchased={project.credits.purchased} issued={project.credits.issued} />
               </div>

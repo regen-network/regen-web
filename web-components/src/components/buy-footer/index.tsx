@@ -52,14 +52,14 @@ const useStyles = makeStyles((theme: Theme) => ({
       fontSize: '1.125rem',
     },
     [theme.breakpoints.down('xs')]: {
-      fontSize: '0.85rem',
+      fontSize: '0.75rem',
     },
   },
   number: {
     fontFamily: theme.typography.h1.fontFamily,
     fontWeight: 800,
     [theme.breakpoints.up('sm')]: {
-      fontSize: '1.5rem',
+      fontSize: '1.3125rem',
     },
     [theme.breakpoints.down('xs')]: {
       fontSize: '1.125rem',
@@ -99,7 +99,7 @@ export default function BuyFooter({ creditPrice, href }: BuyFooterProps): JSX.El
       <Grid item className={classes.creditPrice}>
         <Typography>
           <span className={classes.number}>${creditPrice}</span>
-          <span className={classes.creditsText}>/credits</span>
+          <span className={classes.creditsText}>/credit USD</span>
         </Typography>
       </Grid>
       <Grid item>

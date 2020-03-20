@@ -45,7 +45,7 @@ const assets: Media[] = [
 ];
 
 export const projectMedia = (): JSX.Element => (
-  <div style={{ height: 298, width: 400 }}>
+  <div style={{ width: '100%', height: 400 }}>
     <ProjectMedia assets={object('assets', assets)} />
   </div>
 );

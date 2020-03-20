@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles, Theme, useMediaQuery, useTheme } from '@material-ui/core';
 import Slider from 'react-slick';
 import PlayIcon from '../icons/PlayIcon';
 
@@ -20,17 +20,36 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     '& .slick-dots': {
       bottom: 'auto',
-      textAlign: 'left',
       '& ul': {
         padding: 0,
-        marginLeft: '-8px',
-        '& li': {
-          width: 60,
-          height: 60,
-          margin: '0 8px',
-          '&.slick-active': {
-            '& img': {
-              border: '2px solid #7BC796',
+      },
+      [theme.breakpoints.up('sm')]: {
+        textAlign: 'left',
+        '& ul': {
+          marginLeft: '-8px',
+          '& li': {
+            width: 60,
+            height: 60,
+            margin: '0 8px',
+            '&.slick-active': {
+              '& img': {
+                border: '2px solid #7BC796',
+              },
+            },
+          },
+        },
+      },
+      [theme.breakpoints.down('xs')]: {
+        '& ul': {
+          margin: '8px 0 -6.5px',
+          '& li': {
+            height: theme.spacing(2.5),
+            width: theme.spacing(2.5),
+            margin: '0 6.5px',
+            '&.slick-active': {
+              '& div': {
+                backgroundColor: '#7BC796', // TODO add color to muiTheme
+              },
             },
           },
         },
@@ -61,12 +80,22 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   item: {
     width: '100%',
-    borderRadius: '5px',
+    [theme.breakpoints.up('sm')]: {
+      borderRadius: '5px',
+    },
+  },
+  dot: {
+    height: theme.spacing(2.5),
+    width: theme.spacing(2.5),
+    backgroundColor: theme.palette.grey[50],
+    borderRadius: '50%',
   },
 }));
 
 export default function ProjectMedia({ assets }: ProjectMediaProps): JSX.Element {
   const classes = useStyles({});
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.up('sm'));
 
   const imageReg = /[\.](gif|jpg|jpeg|tiff|png)/g;
   const videoReg = /[\.](m4v|avi|mpg|mp4)/g;
@@ -94,16 +123,20 @@ export default function ProjectMedia({ assets }: ProjectMediaProps): JSX.Element
         <ul> {dots} </ul>
       </div>
     ),
-    customPaging: (i: number) => (
-      <div className={classes.thumbnail}>
-        <img width={60} height={60} src={filteredAssets[i].thumbnail} alt={filteredAssets[i].thumbnail} />
-        {filteredAssets[i].type === 'video' && (
-          <div className={classes.play}>
-            <PlayIcon width="10.85px" height="10.85px" />
-          </div>
-        )}
-      </div>
-    ),
+    customPaging: (i: number) => {
+      return matches ? (
+        <div className={classes.thumbnail}>
+          <img width={60} height={60} src={filteredAssets[i].thumbnail} alt={filteredAssets[i].thumbnail} />
+          {filteredAssets[i].type === 'video' && (
+            <div className={classes.play}>
+              <PlayIcon width="10.85px" height="10.85px" />
+            </div>
+          )}
+        </div>
+      ) : (
+        <div className={classes.dot} />
+      );
+    },
   };
 
   return (

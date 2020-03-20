@@ -2946,14 +2946,14 @@ exports[`Storyshots Components|Sliders Project Media 1`] = `
   <div
     style={
       Object {
-        "height": 298,
-        "width": 400,
+        "height": 400,
+        "width": "100%",
       }
     }
   >
     <div>
       <div
-        className="slick-slider makeStyles-root-3740 slick-initialized"
+        className="slick-slider makeStyles-root-3730 slick-initialized"
         dir="ltr"
       >
         <div
@@ -3000,7 +3000,7 @@ exports[`Storyshots Components|Sliders Project Media 1`] = `
             >
               <div>
                 <video
-                  className="makeStyles-item-3743"
+                  className="makeStyles-item-3733"
                   controls={true}
                   style={
                     Object {
@@ -3032,7 +3032,7 @@ exports[`Storyshots Components|Sliders Project Media 1`] = `
               <div>
                 <img
                   alt="./andover.jpg"
-                  className="makeStyles-item-3743"
+                  className="makeStyles-item-3733"
                   src="./andover.jpg"
                   style={
                     Object {
@@ -3059,7 +3059,7 @@ exports[`Storyshots Components|Sliders Project Media 1`] = `
             >
               <div>
                 <video
-                  className="makeStyles-item-3743"
+                  className="makeStyles-item-3733"
                   controls={true}
                   style={
                     Object {
@@ -3090,7 +3090,7 @@ exports[`Storyshots Components|Sliders Project Media 1`] = `
               <div>
                 <img
                   alt="./andover.jpg"
-                  className="makeStyles-item-3743"
+                  className="makeStyles-item-3733"
                   src="./andover.jpg"
                   style={
                     Object {
@@ -3116,7 +3116,7 @@ exports[`Storyshots Components|Sliders Project Media 1`] = `
             >
               <div>
                 <video
-                  className="makeStyles-item-3743"
+                  className="makeStyles-item-3733"
                   controls={true}
                   style={
                     Object {
@@ -3146,47 +3146,17 @@ exports[`Storyshots Components|Sliders Project Media 1`] = `
               className="slick-active"
             >
               <div
-                className="makeStyles-thumbnail-3741"
+                className="makeStyles-dot-3734"
                 onClick={[Function]}
-              >
-                <img
-                  alt="./andover.jpg"
-                  height={60}
-                  src="./andover.jpg"
-                  width={60}
-                />
-              </div>
+              />
             </li>
             <li
               className=""
             >
               <div
-                className="makeStyles-thumbnail-3741"
+                className="makeStyles-dot-3734"
                 onClick={[Function]}
-              >
-                <img
-                  alt="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/BigBuckBunny.jpg"
-                  height={60}
-                  src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/BigBuckBunny.jpg"
-                  width={60}
-                />
-                <div
-                  className="makeStyles-play-3742"
-                >
-                  <svg
-                    aria-hidden="true"
-                    className="MuiSvgIcon-root makeStyles-root-3744 makeStyles-root-3745"
-                    focusable="false"
-                    role="presentation"
-                    viewBox="0 0 9 9"
-                  >
-                    <path
-                      d="M8.36279 4.18667C8.69613 4.37912 8.69613 4.86024 8.36279 5.05269L1.72899 8.88272C1.39566 9.07517 0.97899 8.83461 0.97899 8.44971L0.97899 0.789649C0.978991 0.404749 1.39566 0.164188 1.72899 0.356638L8.36279 4.18667Z"
-                      fill="#4FB573"
-                    />
-                  </svg>
-                </div>
-              </div>
+              />
             </li>
              
           </ul>
@@ -3989,150 +3959,150 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
 exports[`Storyshots Components|Timeline Timeline 1`] = `
 <div>
   <div
-    className="makeStyles-root-3808"
+    className="makeStyles-root-3788"
   >
     <div
-      className="makeStyles-item-3809"
+      className="makeStyles-item-3789"
     >
       <div
-        className="makeStyles-content-3810 makeStyles-content-3815"
+        className="makeStyles-content-3790 makeStyles-content-3795"
       >
         <div
-          className="makeStyles-date-3811"
+          className="makeStyles-date-3791"
         >
           September 2, 2019
         </div>
         <h6
-          className="MuiTypography-root makeStyles-root-3818 undefined MuiTypography-h6 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+          className="MuiTypography-root makeStyles-root-3798 undefined MuiTypography-h6 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
         >
           Project starts
         </h6>
         <div
-          className="makeStyles-description-3812"
+          className="makeStyles-description-3792"
         >
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
         </div>
         <span
-          className="makeStyles-circle-3814 makeStyles-circle-3817"
+          className="makeStyles-circle-3794 makeStyles-circle-3797"
         />
         <div
-          className="makeStyles-bar-3813 makeStyles-bar-3816"
+          className="makeStyles-bar-3793 makeStyles-bar-3796"
         />
       </div>
     </div>
     <div
-      className="makeStyles-item-3809"
+      className="makeStyles-item-3789"
     >
       <div
-        className="makeStyles-content-3810 makeStyles-content-3849"
+        className="makeStyles-content-3790 makeStyles-content-3829"
       >
         <div
-          className="makeStyles-date-3811"
+          className="makeStyles-date-3791"
         >
           October 21, 2019
         </div>
         <h6
-          className="MuiTypography-root makeStyles-root-3818 undefined MuiTypography-h6 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+          className="MuiTypography-root makeStyles-root-3798 undefined MuiTypography-h6 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
         >
           Approval complete
         </h6>
         <div
-          className="makeStyles-description-3812"
+          className="makeStyles-description-3792"
         >
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
         </div>
         <span
-          className="makeStyles-circle-3814 makeStyles-circle-3851"
+          className="makeStyles-circle-3794 makeStyles-circle-3831"
         />
         <div
-          className="makeStyles-bar-3813 makeStyles-bar-3850"
+          className="makeStyles-bar-3793 makeStyles-bar-3830"
         />
       </div>
     </div>
     <div
-      className="makeStyles-item-3809"
+      className="makeStyles-item-3789"
     >
       <div
-        className="makeStyles-content-3810 makeStyles-content-3852"
+        className="makeStyles-content-3790 makeStyles-content-3832"
       >
         <div
-          className="makeStyles-date-3811"
+          className="makeStyles-date-3791"
         >
           February 20, 2020
         </div>
         <h6
-          className="MuiTypography-root makeStyles-root-3818 undefined MuiTypography-h6 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+          className="MuiTypography-root makeStyles-root-3798 undefined MuiTypography-h6 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
         >
           Credits issued
         </h6>
         <div
-          className="makeStyles-description-3812"
+          className="makeStyles-description-3792"
         >
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
         </div>
         <span
-          className="makeStyles-circle-3814 makeStyles-circle-3854"
+          className="makeStyles-circle-3794 makeStyles-circle-3834"
         />
         <div
-          className="makeStyles-bar-3813 makeStyles-bar-3853"
+          className="makeStyles-bar-3793 makeStyles-bar-3833"
         />
       </div>
     </div>
     <div
-      className="makeStyles-item-3809"
+      className="makeStyles-item-3789"
     >
       <div
-        className="makeStyles-content-3810 makeStyles-content-3855"
+        className="makeStyles-content-3790 makeStyles-content-3835"
       >
         <div
-          className="makeStyles-date-3811"
+          className="makeStyles-date-3791"
         >
           September 2022
         </div>
         <h6
-          className="MuiTypography-root makeStyles-root-3818 undefined MuiTypography-h6 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+          className="MuiTypography-root makeStyles-root-3798 undefined MuiTypography-h6 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
         >
           Site visit
         </h6>
         <div
-          className="makeStyles-description-3812"
+          className="makeStyles-description-3792"
         >
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
         </div>
         <span
-          className="makeStyles-circle-3814 makeStyles-circle-3857"
+          className="makeStyles-circle-3794 makeStyles-circle-3837"
         />
         <div
-          className="makeStyles-bar-3813 makeStyles-bar-3856"
+          className="makeStyles-bar-3793 makeStyles-bar-3836"
         />
       </div>
     </div>
     <div
-      className="makeStyles-item-3809"
+      className="makeStyles-item-3789"
     >
       <div
-        className="makeStyles-content-3810 makeStyles-content-3858"
+        className="makeStyles-content-3790 makeStyles-content-3838"
       >
         <div
-          className="makeStyles-date-3811"
+          className="makeStyles-date-3791"
         >
           February 2029
         </div>
         <h6
-          className="MuiTypography-root makeStyles-root-3818 undefined MuiTypography-h6 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+          className="MuiTypography-root makeStyles-root-3798 undefined MuiTypography-h6 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
         >
           Project completion
         </h6>
         <div
-          className="makeStyles-description-3812"
+          className="makeStyles-description-3792"
         >
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
         </div>
         <span
-          className="makeStyles-circle-3814 makeStyles-circle-3860"
+          className="makeStyles-circle-3794 makeStyles-circle-3840"
         />
         <div
-          className="makeStyles-bar-3813 makeStyles-bar-3859"
+          className="makeStyles-bar-3793 makeStyles-bar-3839"
         />
       </div>
     </div>
@@ -4143,28 +4113,28 @@ exports[`Storyshots Components|Timeline Timeline 1`] = `
 exports[`Storyshots Components|Timeline Timeline Item 1`] = `
 <div>
   <div
-    className="makeStyles-content-3900 makeStyles-content-3905"
+    className="makeStyles-content-3880 makeStyles-content-3885"
   >
     <div
-      className="makeStyles-date-3901"
+      className="makeStyles-date-3881"
     >
       September 2, 2019
     </div>
     <h6
-      className="MuiTypography-root makeStyles-root-3908 undefined MuiTypography-h6 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+      className="MuiTypography-root makeStyles-root-3888 undefined MuiTypography-h6 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
     >
       Project starts
     </h6>
     <div
-      className="makeStyles-description-3902"
+      className="makeStyles-description-3882"
     >
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
     </div>
     <span
-      className="makeStyles-circle-3904 makeStyles-circle-3907"
+      className="makeStyles-circle-3884 makeStyles-circle-3887"
     />
     <div
-      className="makeStyles-bar-3903 makeStyles-bar-3906"
+      className="makeStyles-bar-3883 makeStyles-bar-3886"
     />
   </div>
 </div>
@@ -4173,7 +4143,7 @@ exports[`Storyshots Components|Timeline Timeline Item 1`] = `
 exports[`Storyshots Components|Title Main Title 1`] = `
 <div>
   <h1
-    className="MuiTypography-root makeStyles-root-3970 undefined MuiTypography-h1 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+    className="MuiTypography-root makeStyles-root-3950 undefined MuiTypography-h1 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
   >
     Sheok Hill
   </h1>
@@ -4183,7 +4153,7 @@ exports[`Storyshots Components|Title Main Title 1`] = `
 exports[`Storyshots Components|Title Subtitle 1`] = `
 <div>
   <h2
-    className="MuiTypography-root makeStyles-root-4032 undefined MuiTypography-h2 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+    className="MuiTypography-root makeStyles-root-4012 undefined MuiTypography-h2 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
   >
     Ecological Practices
   </h2>
@@ -4193,7 +4163,7 @@ exports[`Storyshots Components|Title Subtitle 1`] = `
 exports[`Storyshots Components|Title Title 1`] = `
 <div>
   <h1
-    className="MuiTypography-root makeStyles-root-4094 undefined MuiTypography-h1 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+    className="MuiTypography-root makeStyles-root-4074 undefined MuiTypography-h1 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
   >
     Ecological Practices
   </h1>
@@ -4203,7 +4173,7 @@ exports[`Storyshots Components|Title Title 1`] = `
 exports[`Storyshots Components|User Big User Avatar 1`] = `
 <div>
   <div
-    className="MuiAvatar-root MuiAvatar-circle makeStyles-root-4152 makeStyles-root-4153"
+    className="MuiAvatar-root MuiAvatar-circle makeStyles-root-4132 makeStyles-root-4133"
   >
     <img
       alt="Odonata"
@@ -4223,7 +4193,7 @@ exports[`Storyshots Components|User Big User Info 1`] = `
       className="MuiGrid-root MuiGrid-item"
     >
       <div
-        className="MuiAvatar-root MuiAvatar-circle makeStyles-root-4780 makeStyles-root-4781"
+        className="MuiAvatar-root MuiAvatar-circle makeStyles-root-4760 makeStyles-root-4761"
       >
         <img
           alt="Odonata"
@@ -4233,20 +4203,20 @@ exports[`Storyshots Components|User Big User Info 1`] = `
       </div>
     </div>
     <div
-      className="MuiGrid-root makeStyles-text-4668 makeStyles-text-4673 MuiGrid-item"
+      className="MuiGrid-root makeStyles-text-4648 makeStyles-text-4653 MuiGrid-item"
     >
       <p
-        className="MuiTypography-root makeStyles-name-4669 makeStyles-name-4674 MuiTypography-body1"
+        className="MuiTypography-root makeStyles-name-4649 makeStyles-name-4654 MuiTypography-body1"
       >
         Odonata
       </p>
       <p
-        className="MuiTypography-root makeStyles-place-4672 makeStyles-place-4675 MuiTypography-body1"
+        className="MuiTypography-root makeStyles-place-4652 makeStyles-place-4655 MuiTypography-body1"
       >
         South Melbourne, Victoria, Australia
       </p>
       <p
-        className="MuiTypography-root makeStyles-description-4671 MuiTypography-body1"
+        className="MuiTypography-root makeStyles-description-4651 MuiTypography-body1"
       >
         Odonata is a not-for-profit entity supporting biodiversity impact solutions.
       </p>
@@ -4264,7 +4234,7 @@ exports[`Storyshots Components|User Column User Info 1`] = `
       className="MuiGrid-root MuiGrid-item"
     >
       <div
-        className="MuiAvatar-root MuiAvatar-circle makeStyles-root-5082 makeStyles-root-5083"
+        className="MuiAvatar-root MuiAvatar-circle makeStyles-root-5062 makeStyles-root-5063"
       >
         <img
           alt="Odonata"
@@ -4274,20 +4244,20 @@ exports[`Storyshots Components|User Column User Info 1`] = `
       </div>
     </div>
     <div
-      className="MuiGrid-root makeStyles-text-4970 makeStyles-text-4975 MuiGrid-item"
+      className="MuiGrid-root makeStyles-text-4950 makeStyles-text-4955 MuiGrid-item"
     >
       <p
-        className="MuiTypography-root makeStyles-name-4971 makeStyles-name-4976 MuiTypography-body1"
+        className="MuiTypography-root makeStyles-name-4951 makeStyles-name-4956 MuiTypography-body1"
       >
         Odonata
       </p>
       <p
-        className="MuiTypography-root makeStyles-place-4974 makeStyles-place-4977 MuiTypography-body1"
+        className="MuiTypography-root makeStyles-place-4954 makeStyles-place-4957 MuiTypography-body1"
       >
         South Melbourne, Victoria, Australia
       </p>
       <p
-        className="MuiTypography-root makeStyles-description-4973 MuiTypography-body1"
+        className="MuiTypography-root makeStyles-description-4953 MuiTypography-body1"
       >
         Odonata is a not-for-profit entity supporting biodiversity impact solutions.
       </p>
@@ -4299,7 +4269,7 @@ exports[`Storyshots Components|User Column User Info 1`] = `
 exports[`Storyshots Components|User Fallback User Avatar 1`] = `
 <div>
   <div
-    className="MuiAvatar-root MuiAvatar-circle makeStyles-root-4197 makeStyles-root-4198 MuiAvatar-colorDefault"
+    className="MuiAvatar-root MuiAvatar-circle makeStyles-root-4177 makeStyles-root-4178 MuiAvatar-colorDefault"
   >
     <svg
       aria-hidden="true"
@@ -4319,7 +4289,7 @@ exports[`Storyshots Components|User Fallback User Avatar 1`] = `
 exports[`Storyshots Components|User Medium User Avatar 1`] = `
 <div>
   <div
-    className="MuiAvatar-root MuiAvatar-circle makeStyles-root-4134 makeStyles-root-4135"
+    className="MuiAvatar-root MuiAvatar-circle makeStyles-root-4114 makeStyles-root-4115"
   >
     <img
       alt="Odonata"
@@ -4339,7 +4309,7 @@ exports[`Storyshots Components|User Medium User Info 1`] = `
       className="MuiGrid-root MuiGrid-item"
     >
       <div
-        className="MuiAvatar-root MuiAvatar-circle makeStyles-root-4478 makeStyles-root-4479"
+        className="MuiAvatar-root MuiAvatar-circle makeStyles-root-4458 makeStyles-root-4459"
       >
         <img
           alt="Odonata"
@@ -4349,20 +4319,20 @@ exports[`Storyshots Components|User Medium User Info 1`] = `
       </div>
     </div>
     <div
-      className="MuiGrid-root makeStyles-text-4366 makeStyles-text-4371 MuiGrid-item"
+      className="MuiGrid-root makeStyles-text-4346 makeStyles-text-4351 MuiGrid-item"
     >
       <p
-        className="MuiTypography-root makeStyles-name-4367 makeStyles-name-4372 MuiTypography-body1"
+        className="MuiTypography-root makeStyles-name-4347 makeStyles-name-4352 MuiTypography-body1"
       >
         Odonata
       </p>
       <p
-        className="MuiTypography-root makeStyles-place-4370 makeStyles-place-4373 MuiTypography-body1"
+        className="MuiTypography-root makeStyles-place-4350 makeStyles-place-4353 MuiTypography-body1"
       >
         South Melbourne, Victoria, Australia
       </p>
       <p
-        className="MuiTypography-root makeStyles-description-4369 MuiTypography-body1"
+        className="MuiTypography-root makeStyles-description-4349 MuiTypography-body1"
       >
         Odonata is a not-for-profit entity supporting biodiversity impact solutions.
       </p>
@@ -4379,7 +4349,7 @@ exports[`Storyshots Components|User User Avatar With Link 1`] = `
     target="_blank"
   >
     <div
-      className="MuiAvatar-root MuiAvatar-circle makeStyles-root-4170 makeStyles-root-4171"
+      className="MuiAvatar-root MuiAvatar-circle makeStyles-root-4150 makeStyles-root-4151"
     >
       <img
         alt="Odonata"
@@ -4395,7 +4365,7 @@ exports[`Storyshots Components|User With Title 1`] = `
 <div>
   <div>
     <p
-      className="MuiTypography-root makeStyles-title-5273 MuiTypography-body1"
+      className="MuiTypography-root makeStyles-title-5253 MuiTypography-body1"
     >
       project developer
     </p>
@@ -4406,7 +4376,7 @@ exports[`Storyshots Components|User With Title 1`] = `
         className="MuiGrid-root MuiGrid-item"
       >
         <div
-          className="MuiAvatar-root MuiAvatar-circle makeStyles-root-5416 makeStyles-root-5417"
+          className="MuiAvatar-root MuiAvatar-circle makeStyles-root-5396 makeStyles-root-5397"
         >
           <img
             alt="Odonata"
@@ -4416,20 +4386,20 @@ exports[`Storyshots Components|User With Title 1`] = `
         </div>
       </div>
       <div
-        className="MuiGrid-root makeStyles-text-5304 makeStyles-text-5309 MuiGrid-item"
+        className="MuiGrid-root makeStyles-text-5284 makeStyles-text-5289 MuiGrid-item"
       >
         <p
-          className="MuiTypography-root makeStyles-name-5305 makeStyles-name-5310 MuiTypography-body1"
+          className="MuiTypography-root makeStyles-name-5285 makeStyles-name-5290 MuiTypography-body1"
         >
           Odonata
         </p>
         <p
-          className="MuiTypography-root makeStyles-place-5308 makeStyles-place-5311 MuiTypography-body1"
+          className="MuiTypography-root makeStyles-place-5288 makeStyles-place-5291 MuiTypography-body1"
         >
           South Melbourne, Victoria, Australia
         </p>
         <p
-          className="MuiTypography-root makeStyles-description-5307 MuiTypography-body1"
+          className="MuiTypography-root makeStyles-description-5287 MuiTypography-body1"
         >
           Odonata is a not-for-profit entity supporting biodiversity impact solutions.
         </p>

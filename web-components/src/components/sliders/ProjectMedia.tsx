@@ -8,7 +8,7 @@ export interface Media {
   thumbnail?: string;
   type?: string;
 }
-export interface ProjectMediaProps {
+interface ProjectMediaProps {
   assets: Media[];
 }
 
@@ -97,18 +97,17 @@ export default function ProjectMedia({ assets }: ProjectMediaProps): JSX.Element
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up('sm'));
 
-  const imageReg = /[\.](gif|jpg|jpeg|tiff|png)/g;
-  const videoReg = /[\.](m4v|avi|mpg|mp4)/g;
-
   const filteredAssets: Media[] = assets
     .map(item => {
-      let type: string | undefined;
+      const imageReg = /[\.](gif|jpg|jpeg|tiff|png)/g;
+      const videoReg = /[\.](m4v|avi|mpg|mp4|mov)/g;
+
       if (imageReg.test(item.src.toLowerCase())) {
-        type = 'image';
+        return { ...item, type: 'image' };
       } else if (videoReg.test(item.src.toLowerCase())) {
-        type = 'video';
+        return { ...item, type: 'video' };
       }
-      return { ...item, type };
+      return item;
     })
     .filter(item => item.type === 'image' || item.type === 'video');
 

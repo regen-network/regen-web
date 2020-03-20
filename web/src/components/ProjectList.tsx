@@ -161,7 +161,7 @@ export default function ProjectList({ projects }: ProjectsProps): JSX.Element {
                     place={p.place}
                     area={p.area}
                     areaUnit={p.areaUnit}
-                    imgSrc={getImgSrc(p.photos[0])}
+                    imgSrc={getImgSrc(p.image)}
                     developer={developer}
                     tag={p.creditClass.tag}
                     displayCity={false}

@@ -20,6 +20,7 @@ import CreditsGauge from 'web-components/lib/components/credits/CreditsGauge';
 import ProtectedSpecies from 'web-components/lib/components/sliders/ProtectedSpecies';
 import NonMonitoredImpact from 'web-components/lib/components/sliders/NonMonitoredImpact';
 import LandManagementActions from 'web-components/lib/components/sliders/LandManagementActions';
+import ProjectMedia, { Media } from 'web-components/lib/components/sliders/ProjectMedia';
 import Map from 'web-components/lib/components/map';
 import { ItemProps as ProtectedSpeciesItem } from 'web-components/lib/components/sliders/Item';
 import { User } from 'web-components/lib/components/user/UserInfo';
@@ -276,6 +277,11 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
     }));
   }
 
+  const assets: Media[] = project.media.map(item => ({
+    src: getImgSrc(item.src),
+    thumbnail: getImgSrc(item.thumbnail),
+  }));
+
   const projectDeveloper: User = getProjectUser(project.developer);
   const landSteward: User = getProjectUser(project.steward);
   let landOwner: any;
@@ -303,11 +309,12 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
       <div className={`${classes.projectTop} project-top`}>
         <Grid container className={`${classes.projectContent} ${classes.projectTopContent}`}>
           <Grid item xs={12} sm={6}>
-            <img
+            {/*<img
               className={classes.projectTopImage}
               alt={project.name}
               src={require(`../assets/${project.photos[0]}`)}
-            />
+            />*/}
+            <ProjectMedia assets={assets} />
           </Grid>
           <Grid item xs={12} sm={6} className={classes.projectTopText}>
             <Title variant="h1">{project.name}</Title>

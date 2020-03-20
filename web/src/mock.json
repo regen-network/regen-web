@@ -83,7 +83,11 @@
       },
       "shortDescription": "This project is restoring and conserving a large area of native grassland in Southern Australia.",
       "longDescription": "The project will see up to 1.3M Biodiversity Offset Units become available via formal accreditation with the South Australian Department of Environment and Water. The unique site comprises a pristine example of shrub and woodlands associated with the RAMSAR recognised Coorong Region, of particular cultural and environmental significance. A comprehensive site management plan will be undertaken in partnership with local indigenous land owners with the ownership of this and eventually passed on to these groups.\n\nThis project represents a truly unique offsetting opportunity, in proximity to Adelaide and in a vitally important bioregion.\n\nThis property is a rare pocket of wetlands and woodlands located near the township of Menindee South Australia, nestled in between the Coorong national park and Lake Albert.\n\nAs one of the few remaining sections of privately owned remnant vegetation in the area, this represents a unique opportunity for long term preservation. The Coorong, Lake Alexandrina and Lake Albert Wetland is an international significant RAMSAR wetland ecosystems at the intersection of the Murray River and Southern Ocean.\n\nThis vital habitat comprises a unique mix of both freshwater and saltwater wetlands and coastal woodlands. The Coorong is the heart of the traditional lands of Ngarrindjeri people, who have hunted and camped on the Mt Sandy property for thousands of years.",
-      "photos": ["coorong.jpg"],
+      "media": [{
+        "src":"coorong.jpg",
+        "thumbnail":"coorong.jpg"
+      }],
+      "image": "coorong.jpg",
       "map": "map.png",
       "keyOutcomesActivities": [
         "Site accredited as a Specific Environmental Benefit (SEB) site and credits created by the South Australian Department of Environment and Water.",
@@ -267,7 +271,11 @@
       },
       "shortDescription": "Andover is a 1787 hectare broadacre cropping and sheep farm near Kojonup in Western Australia’s Wheatbelt.",
       "longDescription": "Andover (1137 Boscabel-Chittinup Road, Boscabel) is a 1787 ha broadacre property producing canola, wheat, barley and sheep. At latitude -33.68065 and longitude 116.97219, it is situated in the Shire of Kojonup on the border of the Shire of West Arthur.\n\nAndover was purchased by the current owners in 2016, with the farm’s long term management being a 3 way partnership between Wide Open Agriculture, local family farmers and impact investors.\n\nPrior to purchase the farm had been conventionally managed for many years, which had resulted in degraded soil that had been leached of nutrients, and devoid of good biology. The creeklines had been degraded by stock grazing, with inundation and rising salinity levels limiting production. Since taking over and transitioning from conventional to regenerative agricultural practises, the Rexs’ have reduced grazing pressure and better managed livestock rotations to rejuvenate perennial pastures. They have introduced multi species cropping to help rebuild soil health and microbial activity, increasing above and below ground diversity. The implementation of no till practices have helped to reduce erosion and soil degredation.\n\nThere is a limitation to what the Rexs’ can achieve within their farming system to regenerate the nature zone, or their biodiversity.  They are eager to take this further, but require support to take the next step in their regenerative journey. This is where the creation and registration of Biodiversity Credits can make a great impact to their whole landscape function.",
-      "photos": ["andover.jpg"],
+      "media": [{
+        "src":"andover.jpg",
+        "thumbnail":"andover.jpg"
+      }],
+      "image": "andover.jpg",
       "map": "woa.kml",
       "keyOutcomesActivities": [
         "The Conservation Covenant protects land for 100 years minimum",
@@ -463,7 +471,16 @@
       },
       "shortDescription": "Currently operating three properties in northeastern NSW, including Wilmot in the high rainfall basalt zone on the Ebor Plateau, Woodburn on the eastern fall north of Walcha and Morocco, north of Gunnedah.",
       "longDescription": "Wilmot is an extraordinary property high in the New England Tablelands at Ebor. Set on 1,854ha and at approximately 1,200m above sea level, average annual rainfall of 1,200mm, highly fertile volcanic basalt soils, and complimented by a series of pristine spring fed, year-round natural waterways including five waterfalls, it is quite simply a unique environment for growing cattle.\n\nPrior to the commencement of Wilmot Cattle Company operations in 2008 the property had been conventionally managed. In 2013, a transformation of the property began, moving to more regenerative and holistic management practices, resulting in significant gains in the overall ecological health of the farm.\n\nToday the property is managed in an intensive rotationally grazed system with small numbers of large mobs moving across the landscape, mimicking nature, to create ecological change and improve landscape health and biological function. At shovel depth, our soil organic carbon (SOC) has improved from ~2.5% to >4.5%, with a goal of getting it to >6% by 2023.",
-      "photos": ["wilmotcattlecompany.jpg"],
+      "media": [{
+        "src": "wilmotcattlecompany.jpg",
+        "thumbnail": "wilmotcattlecompany.jpg"
+      },
+      {
+        "src": "99D630701C84FDBD8CD9A96E7E989489.mov",
+        "thumbnail": "impactag-tn-2.png"
+        }
+      ],
+      "image": "wilmotcattlecompany.jpg",
       "map": "Wilmot_boundary.kml",
       "keyOutcomesActivities": [
         "We will limit mechanical, chemical and physical disturbance of soil wherever possible.",

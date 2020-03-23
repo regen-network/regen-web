@@ -44,7 +44,10 @@ export default function ReadMore({
       <div className={classes.textContainer}>
         <Description fontSize={fontSize}>{texts.truncated}</Description>
         <Fade in={expanded} unmountOnExit>
-          <Description fontSize={fontSize}>{texts.rest}</Description>
+          <Description fontSize={fontSize}>
+            {!texts.rest.startsWith('\n') && '\n'}
+            {texts.rest}
+          </Description>
         </Fade>
       </div>
       {texts.rest.length !== 0 && (

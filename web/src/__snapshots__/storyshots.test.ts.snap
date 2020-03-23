@@ -4095,11 +4095,11 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
 exports[`Storyshots Components|Table Mrv Table 1`] = `
 <div>
   <div
-    className="MuiTableContainer-root"
+    className="MuiTableContainer-root makeStyles-tableContainer-3854"
   >
     <table
       aria-label="documentation table"
-      className="MuiTable-root makeStyles-table-3854"
+      className="MuiTable-root"
     >
       <thead
         className="MuiTableHead-root"

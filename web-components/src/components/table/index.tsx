@@ -38,7 +38,10 @@ const headCells: HeadCell[] = [
 ];
 
 const useStyles = makeStyles((theme: Theme) => ({
-  table: {},
+  tableContainer: {
+    paddingTop: theme.spacing(5),
+    paddingBottom: theme.spacing(10),
+  },
   headerCell: {
     fontFamily: theme.typography.h1.fontFamily,
     fontWeight: 800,
@@ -148,8 +151,8 @@ export default function RegenTable({ rows }: RegenTableProps): JSX.Element {
   const options = { year: 'numeric', month: 'long', day: 'numeric' };
 
   return (
-    <TableContainer>
-      <Table className={classes.table} aria-label="documentation table">
+    <TableContainer className={classes.tableContainer}>
+      <Table aria-label="documentation table">
         <EnhancedTableHead
           classes={classes}
           order={order}

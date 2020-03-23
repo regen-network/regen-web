@@ -20,10 +20,11 @@ interface StyleProps {
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   root: props => ({
-    backgroundImage: `url("${props.background}")`,
-    backgroundSize: 'cover',
-    border: `1px solid ${theme.palette.info.light}`,
-    borderRadius: '5px',
+    // backgroundImage: `url("${props.background}")`,
+    // backgroundSize: 'cover',
+    // border: `1px solid ${theme.palette.info.light}`,
+    // borderRadius: '5px',
+    background: 'transparent',
     position: 'relative',
     [theme.breakpoints.up('sm')]: {
       padding: `${theme.spacing(14.5)} ${theme.spacing(8)} ${theme.spacing(18)}`,
@@ -145,7 +146,6 @@ export default function CreditInfo({
 
   return (
     <div className={classes.root}>
-      <div className={classes.topBar} />
       <div className={classes.container}>
         <div className={classes.descriptionTitle}>
           <Title variant="h2">

@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme: Theme) => ({
             margin: '0 8px',
             '&.slick-active': {
               '& img': {
-                border: '2px solid #7BC796',
+                border: `2px solid ${theme.palette.secondary.dark}`,
               },
             },
           },
@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme: Theme) => ({
             margin: '0 6.5px',
             '&.slick-active': {
               '& div': {
-                backgroundColor: '#7BC796', // TODO add color to muiTheme
+                backgroundColor: theme.palette.secondary.dark,
               },
             },
           },

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
-import { useTheme } from '@material-ui/core/styles';
+import { makeStyles, useTheme, Theme } from '@material-ui/core/styles';
 import Fade from '@material-ui/core/Fade';
 
 import OutlinedButton from '../buttons/OutlinedButton';

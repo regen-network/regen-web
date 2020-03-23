@@ -2947,7 +2947,7 @@ exports[`Storyshots Components|Sliders Project Media 1`] = `
     style={
       Object {
         "height": 400,
-        "width": "100%",
+        "width": 600,
       }
     }
   >

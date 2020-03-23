@@ -11,7 +11,8 @@ import { FontSizes } from '../../theme/sizing';
 
 interface ReadMoreProps {
   children: string;
-  length?: number;
+  maxLength?: number;
+  restMinLength?: number;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -23,13 +24,17 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function ReadMore({ children, length = 757 }: ReadMoreProps): JSX.Element {
+export default function ReadMore({
+  children,
+  maxLength = 700,
+  restMinLength = 300,
+}: ReadMoreProps): JSX.Element {
   const classes = useStyles({});
   const theme = useTheme();
 
   const [expanded, setExpanded] = useState(false);
   const fontSize: FontSizes = { xs: '1rem', sm: '1.375rem' };
-  const texts: Texts = truncate(children, length);
+  const texts: Texts = truncate(children, maxLength, restMinLength);
 
   const handleChange = (): void => {
     setExpanded(prev => !prev);

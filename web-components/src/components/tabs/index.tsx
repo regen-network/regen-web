@@ -51,7 +51,7 @@ const CustomTab = withStyles((theme: Theme) => ({
   root: {
     fontFamily: theme.typography.h1.fontFamily,
     fontWeight: 800,
-    letterSpacing: 1,
+    letterSpacing: '1px',
     opacity: 1,
     zIndex: 1,
     borderBottom: `2px solid ${theme.palette.secondary.dark}`,
@@ -77,7 +77,7 @@ const CustomTab = withStyles((theme: Theme) => ({
       },
     },
     '&:not(:first-child)': {
-      marginLeft: -2,
+      marginLeft: '-2px',
     },
     '&:nth-child(odd)': {
       borderTopLeftRadius: 5,

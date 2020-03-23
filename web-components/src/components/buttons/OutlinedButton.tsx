@@ -6,7 +6,7 @@ interface OutlinedButtonProps {
   children?: any;
   startIcon?: JSX.Element;
   fullWidth?: boolean;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 const CustomButton = withStyles((theme: Theme) => ({

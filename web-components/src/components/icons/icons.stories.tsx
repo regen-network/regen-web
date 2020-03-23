@@ -12,6 +12,8 @@ import RegenLogoIcon from 'web-components/lib/components/icons/RegenLogoIcon';
 import TotalCreditsIcon from 'web-components/lib/components/icons/TotalCreditsIcon';
 import VerifiedIcon from 'web-components/lib/components/icons/VerifiedIcon';
 import PlayIcon from 'web-components/lib/components/icons/PlayIcon';
+import DocumentIcon from 'web-components/lib/components/icons/DocumentIcon';
+import EyeIcon from 'web-components/lib/components/icons/EyeIcon';
 import { withKnobs, text } from '@storybook/addon-knobs';
 
 export default {
@@ -29,6 +31,10 @@ export const availableCreditsIcon = (): JSX.Element => <AvailableCreditsIcon />;
 export const closeIcon = (): JSX.Element => <CloseIcon />;
 
 export const playIcon = (): JSX.Element => <PlayIcon />;
+
+export const eyeIcon = (): JSX.Element => <EyeIcon />;
+
+export const documentIcon = (): JSX.Element => <DocumentIcon />;
 
 export const creditsIcon = (): JSX.Element => <CreditsIcon color={text('color', '#000')} />;
 

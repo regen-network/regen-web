@@ -49,7 +49,6 @@ const creditDetailsTab: RegenTab = {
       name={details.name}
       description={details.description}
       activities={details.activities}
-      background="./background.jpg"
       title="Key activities and outcomes"
     />
   ),

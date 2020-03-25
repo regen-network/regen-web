@@ -10,21 +10,20 @@ interface CreditInfoProps {
   name: string;
   description: string;
   activities: string[];
-  background: string;
+  background?: string;
   title: string;
 }
 
 interface StyleProps {
-  background: string;
+  background?: string;
 }
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   root: props => ({
-    // backgroundImage: `url("${props.background}")`,
-    // backgroundSize: 'cover',
-    // border: `1px solid ${theme.palette.info.light}`,
-    // borderRadius: '5px',
-    background: 'transparent',
+    backgroundImage: props.background ? `url("${props.background}")` : 'transparent',
+    backgroundSize: 'cover',
+    border: props.background ? `1px solid ${theme.palette.info.light}` : 'none',
+    borderRadius: props.background ? '5px' : 'none',
     position: 'relative',
     [theme.breakpoints.up('sm')]: {
       padding: `${theme.spacing(14.5)} ${theme.spacing(8)} ${theme.spacing(18)}`,
@@ -47,7 +46,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     whiteSpace: 'pre-wrap',
     marginTop: theme.spacing(3.75),
     [theme.breakpoints.up('sm')]: {
-      // marginRight: theme.spacing(11.75),
+      marginRight: props => (props.background ? theme.spacing(11.75) : 0),
       fontSize: '1.375rem',
     },
   },

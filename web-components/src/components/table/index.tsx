@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles, withStyles, Theme } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -30,6 +30,12 @@ interface HeadCell {
   numeric: boolean;
 }
 
+const CustomTableCell = withStyles((theme: Theme) => ({
+  root: {
+    verticalAlign: 'baseline',
+  },
+}))(TableCell);
+
 const headCells: HeadCell[] = [
   { id: 'name', numeric: false, label: 'Name of document' },
   { id: 'type', numeric: true, label: 'Document type' },
@@ -51,6 +57,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     color: theme.palette.primary.light,
     backgroundColor: 'transparent',
     borderBottom: `1px solid ${theme.palette.grey[50]}`,
+    lineHeight: '1.25rem',
   },
   row: {
     color: theme.palette.info.dark,
@@ -69,7 +76,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   cell: {
     border: 'none',
-    lineHeight: '40px',
+    [theme.breakpoints.up('sm')]: {
+      lineHeight: '40px',
+    },
   },
   nameCell: {
     fontWeight: 'bold',
@@ -91,6 +100,9 @@ const useStyles = makeStyles((theme: Theme) => ({
       marginRight: '8px',
     },
   },
+  documentCell: {
+    minWidth: theme.spacing(50),
+  },
 }));
 
 interface EnhancedTableProps {
@@ -110,7 +122,7 @@ function EnhancedTableHead(props: EnhancedTableProps): JSX.Element {
     <TableHead>
       <TableRow>
         {headCells.map(headCell => (
-          <TableCell
+          <CustomTableCell
             className={classes.headerCell}
             key={headCell.id}
             align="left"
@@ -129,7 +141,7 @@ function EnhancedTableHead(props: EnhancedTableProps): JSX.Element {
                 </span>
               ) : null*/}
             </TableSortLabel>
-          </TableCell>
+          </CustomTableCell>
         ))}
       </TableRow>
     </TableHead>
@@ -167,31 +179,31 @@ export default function RegenTable({ rows }: RegenTableProps): JSX.Element {
 
               return (
                 <TableRow tabIndex={-1} key={row.name} className={classes.row}>
-                  <TableCell
+                  <CustomTableCell
                     className={`${classes.cell} ${classes.nameCell}`}
                     component="th"
                     id={labelId}
                     scope="row"
                   >
                     <DocumentIcon className={classes.icon} /> {row.name}
-                  </TableCell>
-                  <TableCell className={classes.cell} align="left">
+                  </CustomTableCell>
+                  <CustomTableCell className={classes.cell} align="left">
                     {row.type}
-                  </TableCell>
-                  <TableCell className={classes.cell} align="left">
+                  </CustomTableCell>
+                  <CustomTableCell className={classes.cell} align="left">
                     {new Date(row.date).toLocaleDateString('en-US', options)}
-                  </TableCell>
-                  <TableCell className={classes.cell} align="left">
+                  </CustomTableCell>
+                  <CustomTableCell className={`${classes.cell} ${classes.documentCell}`} align="left">
                     <a href={row.url} target="_blank" rel="noopener noreferrer" className={classes.link}>
                       <OutlinedButton startIcon={<EyeIcon />}>view document</OutlinedButton>
                     </a>
-                  </TableCell>
+                  </CustomTableCell>
                 </TableRow>
               );
             })}
           {/*emptyRows > 0 && (
             <TableRow style={{ height: (dense ? 33 : 53) * emptyRows }}>
-              <TableCell colSpan={6} />
+              <CustomTableCell colSpan={6} />
             </TableRow>
           )*/}
         </TableBody>

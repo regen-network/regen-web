@@ -4109,7 +4109,7 @@ exports[`Storyshots Components|Table Mrv Table 1`] = `
         >
           <th
             aria-sort="ascending"
-            className="MuiTableCell-root WithStyles(ForwardRef(TableCell))-root-3875 MuiTableCell-head makeStyles-headerCell-3859 MuiTableCell-alignLeft"
+            className="MuiTableCell-root MuiTableCell-head makeStyles-headerCell-3859 MuiTableCell-alignLeft"
             scope="col"
           >
             <span
@@ -4146,7 +4146,7 @@ exports[`Storyshots Components|Table Mrv Table 1`] = `
           </th>
           <th
             aria-sort={null}
-            className="MuiTableCell-root WithStyles(ForwardRef(TableCell))-root-3875 MuiTableCell-head makeStyles-headerCell-3859 MuiTableCell-alignLeft"
+            className="MuiTableCell-root MuiTableCell-head makeStyles-headerCell-3859 MuiTableCell-alignLeft"
             scope="col"
           >
             <span
@@ -4183,7 +4183,7 @@ exports[`Storyshots Components|Table Mrv Table 1`] = `
           </th>
           <th
             aria-sort={null}
-            className="MuiTableCell-root WithStyles(ForwardRef(TableCell))-root-3875 MuiTableCell-head makeStyles-headerCell-3859 MuiTableCell-alignLeft"
+            className="MuiTableCell-root MuiTableCell-head makeStyles-headerCell-3859 MuiTableCell-alignLeft"
             scope="col"
           >
             <span
@@ -4220,7 +4220,7 @@ exports[`Storyshots Components|Table Mrv Table 1`] = `
           </th>
           <th
             aria-sort={null}
-            className="MuiTableCell-root WithStyles(ForwardRef(TableCell))-root-3875 MuiTableCell-head makeStyles-headerCell-3859 MuiTableCell-alignLeft"
+            className="MuiTableCell-root MuiTableCell-head makeStyles-headerCell-3859 MuiTableCell-alignLeft"
             scope="col"
           >
             <span
@@ -4266,130 +4266,134 @@ exports[`Storyshots Components|Table Mrv Table 1`] = `
         >
           <th
             aria-sort={null}
-            className="MuiTableCell-root WithStyles(ForwardRef(TableCell))-root-3875 MuiTableCell-body makeStyles-cell-3861 makeStyles-nameCell-3862"
+            className="MuiTableCell-root MuiTableCell-body makeStyles-cell-3861 makeStyles-nameCell-3862"
             id="enhanced-table-checkbox-0"
             scope="row"
           >
-            <svg
-              aria-hidden="true"
-              className="MuiSvgIcon-root makeStyles-icon-3863"
-              focusable="false"
-              role="presentation"
-              viewBox="0 0 18 22"
+            <div
+              className="makeStyles-name-3863"
             >
               <svg
-                fill="none"
-                height="22"
+                aria-hidden="true"
+                className="MuiSvgIcon-root makeStyles-icon-3864"
+                focusable="false"
+                role="presentation"
                 viewBox="0 0 18 22"
-                width="18"
-                xmlns="http://www.w3.org/2000/svg"
               >
-                <path
-                  d="M1 21V1H9H12.0601L17 6.38898V21H1Z"
-                  fill="white"
-                  stroke="black"
-                  strokeWidth="2"
-                />
-                <rect
-                  fill="black"
-                  height="10"
-                  rx="0.25"
-                  transform="rotate(-90 4 11)"
-                  width="1"
-                  x="4"
-                  y="11"
-                />
-                <rect
-                  fill="black"
-                  height="10"
-                  rx="0.25"
-                  transform="rotate(-90 4 14)"
-                  width="1"
-                  x="4"
-                  y="14"
-                />
-                <rect
-                  fill="black"
-                  height="8"
-                  rx="0.25"
-                  transform="rotate(-90 4 17)"
-                  width="1"
-                  x="4"
-                  y="17"
-                />
-                <path
-                  d="M11.5 1V6.25C11.5 6.38807 11.6119 6.5 11.75 6.5H17.5"
-                  stroke="black"
-                />
-                <path
-                  d="M1 21V1H9H12.0601L17 6.38898V21H1Z"
-                  fill="white"
-                  stroke="#B9E1C7"
-                  strokeWidth="2"
-                />
-                <rect
-                  fill="#7BC796"
-                  height="10"
-                  rx="0.25"
-                  transform="rotate(-90 4 11)"
-                  width="1"
-                  x="4"
-                  y="11"
-                />
-                <rect
-                  fill="#7BC796"
-                  height="10"
-                  rx="0.25"
-                  transform="rotate(-90 4 14)"
-                  width="1"
-                  x="4"
-                  y="14"
-                />
-                <rect
-                  fill="#7BC796"
-                  height="8"
-                  rx="0.25"
-                  transform="rotate(-90 4 17)"
-                  width="1"
-                  x="4"
-                  y="17"
-                />
-                <path
-                  d="M11.6432 6.49983L11.6432 1.07539L16.9998 6.5L11.6432 6.49983Z"
-                  fill="#DCF0E3"
-                />
-                <path
-                  d="M11.5 1V6.25C11.5 6.38807 11.6119 6.5 11.75 6.5H17.5"
-                  stroke="#B9E1C7"
-                />
-                <path
-                  d="M1 21V1H9H12.0601L17 6.38898V21H1Z"
-                  stroke="#7BC796"
-                  strokeWidth="2"
-                />
+                <svg
+                  fill="none"
+                  height="22"
+                  viewBox="0 0 18 22"
+                  width="18"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M1 21V1H9H12.0601L17 6.38898V21H1Z"
+                    fill="white"
+                    stroke="black"
+                    strokeWidth="2"
+                  />
+                  <rect
+                    fill="black"
+                    height="10"
+                    rx="0.25"
+                    transform="rotate(-90 4 11)"
+                    width="1"
+                    x="4"
+                    y="11"
+                  />
+                  <rect
+                    fill="black"
+                    height="10"
+                    rx="0.25"
+                    transform="rotate(-90 4 14)"
+                    width="1"
+                    x="4"
+                    y="14"
+                  />
+                  <rect
+                    fill="black"
+                    height="8"
+                    rx="0.25"
+                    transform="rotate(-90 4 17)"
+                    width="1"
+                    x="4"
+                    y="17"
+                  />
+                  <path
+                    d="M11.5 1V6.25C11.5 6.38807 11.6119 6.5 11.75 6.5H17.5"
+                    stroke="black"
+                  />
+                  <path
+                    d="M1 21V1H9H12.0601L17 6.38898V21H1Z"
+                    fill="white"
+                    stroke="#B9E1C7"
+                    strokeWidth="2"
+                  />
+                  <rect
+                    fill="#7BC796"
+                    height="10"
+                    rx="0.25"
+                    transform="rotate(-90 4 11)"
+                    width="1"
+                    x="4"
+                    y="11"
+                  />
+                  <rect
+                    fill="#7BC796"
+                    height="10"
+                    rx="0.25"
+                    transform="rotate(-90 4 14)"
+                    width="1"
+                    x="4"
+                    y="14"
+                  />
+                  <rect
+                    fill="#7BC796"
+                    height="8"
+                    rx="0.25"
+                    transform="rotate(-90 4 17)"
+                    width="1"
+                    x="4"
+                    y="17"
+                  />
+                  <path
+                    d="M11.6432 6.49983L11.6432 1.07539L16.9998 6.5L11.6432 6.49983Z"
+                    fill="#DCF0E3"
+                  />
+                  <path
+                    d="M11.5 1V6.25C11.5 6.38807 11.6119 6.5 11.75 6.5H17.5"
+                    stroke="#B9E1C7"
+                  />
+                  <path
+                    d="M1 21V1H9H12.0601L17 6.38898V21H1Z"
+                    stroke="#7BC796"
+                    strokeWidth="2"
+                  />
+                </svg>
               </svg>
-            </svg>
-             
-            Issuance Documents
+               
+              Issuance Documents
+            </div>
           </th>
           <td
             aria-sort={null}
-            className="MuiTableCell-root WithStyles(ForwardRef(TableCell))-root-3875 MuiTableCell-body makeStyles-cell-3861 MuiTableCell-alignLeft"
+            className="MuiTableCell-root MuiTableCell-body makeStyles-cell-3861 MuiTableCell-alignLeft"
           >
             Issuance
           </td>
           <td
             aria-sort={null}
-            className="MuiTableCell-root WithStyles(ForwardRef(TableCell))-root-3875 MuiTableCell-body makeStyles-cell-3861 MuiTableCell-alignLeft"
+            className="MuiTableCell-root MuiTableCell-body makeStyles-cell-3861 MuiTableCell-alignLeft"
           >
             February 10, 2020
           </td>
           <td
             aria-sort={null}
-            className="MuiTableCell-root WithStyles(ForwardRef(TableCell))-root-3875 MuiTableCell-body makeStyles-cell-3861 makeStyles-documentCell-3865 MuiTableCell-alignLeft"
+            className="MuiTableCell-root MuiTableCell-body makeStyles-cell-3861 makeStyles-documentCell-3866 MuiTableCell-alignLeft"
           >
             <a
-              className="makeStyles-link-3864"
+              className="makeStyles-link-3865"
               href="test"
               rel="noopener noreferrer"
               target="_blank"
@@ -4463,130 +4467,134 @@ exports[`Storyshots Components|Table Mrv Table 1`] = `
         >
           <th
             aria-sort={null}
-            className="MuiTableCell-root WithStyles(ForwardRef(TableCell))-root-3875 MuiTableCell-body makeStyles-cell-3861 makeStyles-nameCell-3862"
+            className="MuiTableCell-root MuiTableCell-body makeStyles-cell-3861 makeStyles-nameCell-3862"
             id="enhanced-table-checkbox-1"
             scope="row"
           >
-            <svg
-              aria-hidden="true"
-              className="MuiSvgIcon-root makeStyles-icon-3863"
-              focusable="false"
-              role="presentation"
-              viewBox="0 0 18 22"
+            <div
+              className="makeStyles-name-3863"
             >
               <svg
-                fill="none"
-                height="22"
+                aria-hidden="true"
+                className="MuiSvgIcon-root makeStyles-icon-3864"
+                focusable="false"
+                role="presentation"
                 viewBox="0 0 18 22"
-                width="18"
-                xmlns="http://www.w3.org/2000/svg"
               >
-                <path
-                  d="M1 21V1H9H12.0601L17 6.38898V21H1Z"
-                  fill="white"
-                  stroke="black"
-                  strokeWidth="2"
-                />
-                <rect
-                  fill="black"
-                  height="10"
-                  rx="0.25"
-                  transform="rotate(-90 4 11)"
-                  width="1"
-                  x="4"
-                  y="11"
-                />
-                <rect
-                  fill="black"
-                  height="10"
-                  rx="0.25"
-                  transform="rotate(-90 4 14)"
-                  width="1"
-                  x="4"
-                  y="14"
-                />
-                <rect
-                  fill="black"
-                  height="8"
-                  rx="0.25"
-                  transform="rotate(-90 4 17)"
-                  width="1"
-                  x="4"
-                  y="17"
-                />
-                <path
-                  d="M11.5 1V6.25C11.5 6.38807 11.6119 6.5 11.75 6.5H17.5"
-                  stroke="black"
-                />
-                <path
-                  d="M1 21V1H9H12.0601L17 6.38898V21H1Z"
-                  fill="white"
-                  stroke="#B9E1C7"
-                  strokeWidth="2"
-                />
-                <rect
-                  fill="#7BC796"
-                  height="10"
-                  rx="0.25"
-                  transform="rotate(-90 4 11)"
-                  width="1"
-                  x="4"
-                  y="11"
-                />
-                <rect
-                  fill="#7BC796"
-                  height="10"
-                  rx="0.25"
-                  transform="rotate(-90 4 14)"
-                  width="1"
-                  x="4"
-                  y="14"
-                />
-                <rect
-                  fill="#7BC796"
-                  height="8"
-                  rx="0.25"
-                  transform="rotate(-90 4 17)"
-                  width="1"
-                  x="4"
-                  y="17"
-                />
-                <path
-                  d="M11.6432 6.49983L11.6432 1.07539L16.9998 6.5L11.6432 6.49983Z"
-                  fill="#DCF0E3"
-                />
-                <path
-                  d="M11.5 1V6.25C11.5 6.38807 11.6119 6.5 11.75 6.5H17.5"
-                  stroke="#B9E1C7"
-                />
-                <path
-                  d="M1 21V1H9H12.0601L17 6.38898V21H1Z"
-                  stroke="#7BC796"
-                  strokeWidth="2"
-                />
+                <svg
+                  fill="none"
+                  height="22"
+                  viewBox="0 0 18 22"
+                  width="18"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M1 21V1H9H12.0601L17 6.38898V21H1Z"
+                    fill="white"
+                    stroke="black"
+                    strokeWidth="2"
+                  />
+                  <rect
+                    fill="black"
+                    height="10"
+                    rx="0.25"
+                    transform="rotate(-90 4 11)"
+                    width="1"
+                    x="4"
+                    y="11"
+                  />
+                  <rect
+                    fill="black"
+                    height="10"
+                    rx="0.25"
+                    transform="rotate(-90 4 14)"
+                    width="1"
+                    x="4"
+                    y="14"
+                  />
+                  <rect
+                    fill="black"
+                    height="8"
+                    rx="0.25"
+                    transform="rotate(-90 4 17)"
+                    width="1"
+                    x="4"
+                    y="17"
+                  />
+                  <path
+                    d="M11.5 1V6.25C11.5 6.38807 11.6119 6.5 11.75 6.5H17.5"
+                    stroke="black"
+                  />
+                  <path
+                    d="M1 21V1H9H12.0601L17 6.38898V21H1Z"
+                    fill="white"
+                    stroke="#B9E1C7"
+                    strokeWidth="2"
+                  />
+                  <rect
+                    fill="#7BC796"
+                    height="10"
+                    rx="0.25"
+                    transform="rotate(-90 4 11)"
+                    width="1"
+                    x="4"
+                    y="11"
+                  />
+                  <rect
+                    fill="#7BC796"
+                    height="10"
+                    rx="0.25"
+                    transform="rotate(-90 4 14)"
+                    width="1"
+                    x="4"
+                    y="14"
+                  />
+                  <rect
+                    fill="#7BC796"
+                    height="8"
+                    rx="0.25"
+                    transform="rotate(-90 4 17)"
+                    width="1"
+                    x="4"
+                    y="17"
+                  />
+                  <path
+                    d="M11.6432 6.49983L11.6432 1.07539L16.9998 6.5L11.6432 6.49983Z"
+                    fill="#DCF0E3"
+                  />
+                  <path
+                    d="M11.5 1V6.25C11.5 6.38807 11.6119 6.5 11.75 6.5H17.5"
+                    stroke="#B9E1C7"
+                  />
+                  <path
+                    d="M1 21V1H9H12.0601L17 6.38898V21H1Z"
+                    stroke="#7BC796"
+                    strokeWidth="2"
+                  />
+                </svg>
               </svg>
-            </svg>
-             
-            Monitoring
+               
+              Monitoring
+            </div>
           </th>
           <td
             aria-sort={null}
-            className="MuiTableCell-root WithStyles(ForwardRef(TableCell))-root-3875 MuiTableCell-body makeStyles-cell-3861 MuiTableCell-alignLeft"
+            className="MuiTableCell-root MuiTableCell-body makeStyles-cell-3861 MuiTableCell-alignLeft"
           >
             Monitoring
           </td>
           <td
             aria-sort={null}
-            className="MuiTableCell-root WithStyles(ForwardRef(TableCell))-root-3875 MuiTableCell-body makeStyles-cell-3861 MuiTableCell-alignLeft"
+            className="MuiTableCell-root MuiTableCell-body makeStyles-cell-3861 MuiTableCell-alignLeft"
           >
             March 15, 2020
           </td>
           <td
             aria-sort={null}
-            className="MuiTableCell-root WithStyles(ForwardRef(TableCell))-root-3875 MuiTableCell-body makeStyles-cell-3861 makeStyles-documentCell-3865 MuiTableCell-alignLeft"
+            className="MuiTableCell-root MuiTableCell-body makeStyles-cell-3861 makeStyles-documentCell-3866 MuiTableCell-alignLeft"
           >
             <a
-              className="makeStyles-link-3864"
+              className="makeStyles-link-3865"
               href="test"
               rel="noopener noreferrer"
               target="_blank"
@@ -4660,130 +4668,134 @@ exports[`Storyshots Components|Table Mrv Table 1`] = `
         >
           <th
             aria-sort={null}
-            className="MuiTableCell-root WithStyles(ForwardRef(TableCell))-root-3875 MuiTableCell-body makeStyles-cell-3861 makeStyles-nameCell-3862"
+            className="MuiTableCell-root MuiTableCell-body makeStyles-cell-3861 makeStyles-nameCell-3862"
             id="enhanced-table-checkbox-2"
             scope="row"
           >
-            <svg
-              aria-hidden="true"
-              className="MuiSvgIcon-root makeStyles-icon-3863"
-              focusable="false"
-              role="presentation"
-              viewBox="0 0 18 22"
+            <div
+              className="makeStyles-name-3863"
             >
               <svg
-                fill="none"
-                height="22"
+                aria-hidden="true"
+                className="MuiSvgIcon-root makeStyles-icon-3864"
+                focusable="false"
+                role="presentation"
                 viewBox="0 0 18 22"
-                width="18"
-                xmlns="http://www.w3.org/2000/svg"
               >
-                <path
-                  d="M1 21V1H9H12.0601L17 6.38898V21H1Z"
-                  fill="white"
-                  stroke="black"
-                  strokeWidth="2"
-                />
-                <rect
-                  fill="black"
-                  height="10"
-                  rx="0.25"
-                  transform="rotate(-90 4 11)"
-                  width="1"
-                  x="4"
-                  y="11"
-                />
-                <rect
-                  fill="black"
-                  height="10"
-                  rx="0.25"
-                  transform="rotate(-90 4 14)"
-                  width="1"
-                  x="4"
-                  y="14"
-                />
-                <rect
-                  fill="black"
-                  height="8"
-                  rx="0.25"
-                  transform="rotate(-90 4 17)"
-                  width="1"
-                  x="4"
-                  y="17"
-                />
-                <path
-                  d="M11.5 1V6.25C11.5 6.38807 11.6119 6.5 11.75 6.5H17.5"
-                  stroke="black"
-                />
-                <path
-                  d="M1 21V1H9H12.0601L17 6.38898V21H1Z"
-                  fill="white"
-                  stroke="#B9E1C7"
-                  strokeWidth="2"
-                />
-                <rect
-                  fill="#7BC796"
-                  height="10"
-                  rx="0.25"
-                  transform="rotate(-90 4 11)"
-                  width="1"
-                  x="4"
-                  y="11"
-                />
-                <rect
-                  fill="#7BC796"
-                  height="10"
-                  rx="0.25"
-                  transform="rotate(-90 4 14)"
-                  width="1"
-                  x="4"
-                  y="14"
-                />
-                <rect
-                  fill="#7BC796"
-                  height="8"
-                  rx="0.25"
-                  transform="rotate(-90 4 17)"
-                  width="1"
-                  x="4"
-                  y="17"
-                />
-                <path
-                  d="M11.6432 6.49983L11.6432 1.07539L16.9998 6.5L11.6432 6.49983Z"
-                  fill="#DCF0E3"
-                />
-                <path
-                  d="M11.5 1V6.25C11.5 6.38807 11.6119 6.5 11.75 6.5H17.5"
-                  stroke="#B9E1C7"
-                />
-                <path
-                  d="M1 21V1H9H12.0601L17 6.38898V21H1Z"
-                  stroke="#7BC796"
-                  strokeWidth="2"
-                />
+                <svg
+                  fill="none"
+                  height="22"
+                  viewBox="0 0 18 22"
+                  width="18"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M1 21V1H9H12.0601L17 6.38898V21H1Z"
+                    fill="white"
+                    stroke="black"
+                    strokeWidth="2"
+                  />
+                  <rect
+                    fill="black"
+                    height="10"
+                    rx="0.25"
+                    transform="rotate(-90 4 11)"
+                    width="1"
+                    x="4"
+                    y="11"
+                  />
+                  <rect
+                    fill="black"
+                    height="10"
+                    rx="0.25"
+                    transform="rotate(-90 4 14)"
+                    width="1"
+                    x="4"
+                    y="14"
+                  />
+                  <rect
+                    fill="black"
+                    height="8"
+                    rx="0.25"
+                    transform="rotate(-90 4 17)"
+                    width="1"
+                    x="4"
+                    y="17"
+                  />
+                  <path
+                    d="M11.5 1V6.25C11.5 6.38807 11.6119 6.5 11.75 6.5H17.5"
+                    stroke="black"
+                  />
+                  <path
+                    d="M1 21V1H9H12.0601L17 6.38898V21H1Z"
+                    fill="white"
+                    stroke="#B9E1C7"
+                    strokeWidth="2"
+                  />
+                  <rect
+                    fill="#7BC796"
+                    height="10"
+                    rx="0.25"
+                    transform="rotate(-90 4 11)"
+                    width="1"
+                    x="4"
+                    y="11"
+                  />
+                  <rect
+                    fill="#7BC796"
+                    height="10"
+                    rx="0.25"
+                    transform="rotate(-90 4 14)"
+                    width="1"
+                    x="4"
+                    y="14"
+                  />
+                  <rect
+                    fill="#7BC796"
+                    height="8"
+                    rx="0.25"
+                    transform="rotate(-90 4 17)"
+                    width="1"
+                    x="4"
+                    y="17"
+                  />
+                  <path
+                    d="M11.6432 6.49983L11.6432 1.07539L16.9998 6.5L11.6432 6.49983Z"
+                    fill="#DCF0E3"
+                  />
+                  <path
+                    d="M11.5 1V6.25C11.5 6.38807 11.6119 6.5 11.75 6.5H17.5"
+                    stroke="#B9E1C7"
+                  />
+                  <path
+                    d="M1 21V1H9H12.0601L17 6.38898V21H1Z"
+                    stroke="#7BC796"
+                    strokeWidth="2"
+                  />
+                </svg>
               </svg>
-            </svg>
-             
-            Project Review
+               
+              Project Review
+            </div>
           </th>
           <td
             aria-sort={null}
-            className="MuiTableCell-root WithStyles(ForwardRef(TableCell))-root-3875 MuiTableCell-body makeStyles-cell-3861 MuiTableCell-alignLeft"
+            className="MuiTableCell-root MuiTableCell-body makeStyles-cell-3861 MuiTableCell-alignLeft"
           >
             Project Review
           </td>
           <td
             aria-sort={null}
-            className="MuiTableCell-root WithStyles(ForwardRef(TableCell))-root-3875 MuiTableCell-body makeStyles-cell-3861 MuiTableCell-alignLeft"
+            className="MuiTableCell-root MuiTableCell-body makeStyles-cell-3861 MuiTableCell-alignLeft"
           >
             November 1, 2019
           </td>
           <td
             aria-sort={null}
-            className="MuiTableCell-root WithStyles(ForwardRef(TableCell))-root-3875 MuiTableCell-body makeStyles-cell-3861 makeStyles-documentCell-3865 MuiTableCell-alignLeft"
+            className="MuiTableCell-root MuiTableCell-body makeStyles-cell-3861 makeStyles-documentCell-3866 MuiTableCell-alignLeft"
           >
             <a
-              className="makeStyles-link-3864"
+              className="makeStyles-link-3865"
               href="test"
               rel="noopener noreferrer"
               target="_blank"

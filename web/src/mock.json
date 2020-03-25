@@ -443,6 +443,7 @@
         "state": "New South Wales",
         "country": "Australia"
       },
+      "hideCreditsDetails": true,
       "type": "Farm",
       "area": 1854,
       "areaUnit": "hectares",
@@ -550,10 +551,7 @@
         "purchased": 0,
         "issued": 0
       },
-      "creditPrice": {
-        "unitPrice": 10,
-        "currency": "AUD"
-      }
+      "presaleUrl": "https://airtable.com/shrd5xPzFPiyQSSMX "
     }
   ]
 }

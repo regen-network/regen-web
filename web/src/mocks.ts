@@ -4,6 +4,7 @@ import { ItemProps as ProtectedSpeciesItem } from 'web-components/lib/components
 import { Media } from 'web-components/lib/components/sliders/ProjectMedia';
 import { Event } from 'web-components/lib/components/timeline';
 import { ActionProps } from 'web-components/lib/components/action';
+import { CreditPrice } from 'web-components/lib/components/buy-footer';
 
 import mock from './mock.json';
 
@@ -67,11 +68,9 @@ export interface Project {
     purchased: number;
     issued: number; // total number of issued credits
   };
-  creditPrice?: {
-    unitPrice: number;
-    currency: string;
-  };
+  creditPrice?: CreditPrice;
   presaleUrl?: string;
+  hideCreditDetails?: boolean;
   // missing: documents
 }
 

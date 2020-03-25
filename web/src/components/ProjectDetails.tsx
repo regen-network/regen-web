@@ -431,19 +431,21 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
         </div>
       )}
 
-      <div className={`${classes.projectDetails} ${classes.projectContent}`}>
-        <CreditDetails
-          name={project.creditClass.name}
-          description={project.creditClass.description}
-          activities={project.keyOutcomesActivities}
-          background={background}
-          title={
-            project.fieldsOverride && project.fieldsOverride.keyOutcomesActivities
-              ? project.fieldsOverride.keyOutcomesActivities.title
-              : projectDefault.keyOutcomesActivities.title
-          }
-        />
-      </div>
+      {!project.hideCreditDetails && (
+        <div className={`${classes.projectDetails} ${classes.projectContent}`}>
+          <CreditDetails
+            name={project.creditClass.name}
+            description={project.creditClass.description}
+            activities={project.keyOutcomesActivities}
+            background={background}
+            title={
+              project.fieldsOverride && project.fieldsOverride.keyOutcomesActivities
+                ? project.fieldsOverride.keyOutcomesActivities.title
+                : projectDefault.keyOutcomesActivities.title
+            }
+          />
+        </div>
+      )}
 
       <div className={`${classes.projectDetails} ${classes.projectActions} ${classes.projectContent}`}>
         <Title variant="h2">
@@ -496,13 +498,9 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
         </div>
       )}
 
-      {project.creditPrice && (
+      {project.presaleUrl && (
         <div className={classes.buyFooter}>
-          <BuyFooter
-            href={project.presaleUrl}
-            unitPrice={project.creditPrice.unitPrice}
-            currency={project.creditPrice.currency}
-          />
+          <BuyFooter href={project.presaleUrl} creditPrice={project.creditPrice} />
         </div>
       )}
     </div>

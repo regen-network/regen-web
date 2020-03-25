@@ -7,10 +7,14 @@ import Typography from '@material-ui/core/Typography';
 import CurrentCreditsIcon from '../icons/CurrentCreditsIcon';
 import ContainedButton from '../buttons/ContainedButton';
 
-interface BuyFooterProps {
+export interface CreditPrice {
   unitPrice: number;
   currency: string;
-  href?: string;
+}
+
+interface BuyFooterProps {
+  creditPrice?: CreditPrice;
+  href: string;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -90,7 +94,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function BuyFooter({ unitPrice, currency, href }: BuyFooterProps): JSX.Element {
+export default function BuyFooter({ creditPrice, href }: BuyFooterProps): JSX.Element {
   const classes = useStyles({});
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up('sm'));
@@ -104,12 +108,14 @@ export default function BuyFooter({ unitPrice, currency, href }: BuyFooterProps)
         justify={matches ? 'flex-end' : 'space-between'}
         className={classes.root}
       >
-        <Grid item className={classes.creditPrice}>
-          <Typography>
-            <span className={classes.number}>${unitPrice}</span>
-            <span className={classes.creditsText}>/credit {currency}</span>
-          </Typography>
-        </Grid>
+        {creditPrice && (
+          <Grid item className={classes.creditPrice}>
+            <Typography>
+              <span className={classes.number}>${creditPrice.unitPrice}</span>
+              <span className={classes.creditsText}>/credit {creditPrice.currency}</span>
+            </Typography>
+          </Grid>
+        )}
         <Grid item>
           <a href={href} target="_blank" rel="noopener noreferrer">
             <ContainedButton>

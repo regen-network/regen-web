@@ -280,6 +280,7 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
   const assets: Media[] = project.media.map(item => ({
     src: getImgSrc(item.src),
     thumbnail: getImgSrc(item.thumbnail),
+    preview: getImgSrc(item.preview),
   }));
 
   const projectDeveloper: User = getProjectUser(project.developer);

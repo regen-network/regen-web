@@ -7,6 +7,7 @@ export interface Media {
   src: string;
   thumbnail?: string;
   type?: string;
+  preview?: string;
 }
 interface ProjectMediaProps {
   assets: Media[];
@@ -15,11 +16,7 @@ interface ProjectMediaProps {
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     [theme.breakpoints.down('xs')]: {
-      paddingBottom: theme.spacing(8.75),
-    },
-    '& .slick-track': {
-      display: 'flex',
-      alignItems: 'center',
+      marginBottom: theme.spacing(8.75),
     },
     '& .slick-dots': {
       bottom: 'auto',
@@ -120,6 +117,7 @@ export default function ProjectMedia({ assets }: ProjectMediaProps): JSX.Element
     slidesPerRow: 1,
     arrows: false,
     dots: true,
+    adaptiveHeight: true,
     appendDots: (dots: any) => (
       <div>
         <ul> {dots} </ul>
@@ -146,10 +144,10 @@ export default function ProjectMedia({ assets }: ProjectMediaProps): JSX.Element
       <Slider {...settings} className={classes.root}>
         {filteredAssets.map((item, index) => {
           if (item.type === 'image') {
-            return <img key={index} className={classes.item} src={item.src} alt={item.src} />;
+            return <img key={index} src={item.src} className={classes.item} alt={item.src} />;
           } else if (item.type === 'video') {
             return (
-              <video key={index} controls className={classes.item}>
+              <video key={index} className={classes.item} controls poster={item.preview}>
                 <source src={item.src} />
               </video>
             );

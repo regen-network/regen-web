@@ -14,6 +14,9 @@ interface ProjectMediaProps {
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
+    [theme.breakpoints.down('xs')]: {
+      paddingBottom: theme.spacing(8.75),
+    },
     '& .slick-track': {
       display: 'flex',
       alignItems: 'center',

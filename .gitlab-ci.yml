@@ -15,7 +15,7 @@ build-deploy-all:
     - cf push storybook
     - cf push registry
     - cf push presale
-    - cf push graphql
+    # - cf push graphql
   artifacts:
     paths:
       - web-storybook/storybook-static

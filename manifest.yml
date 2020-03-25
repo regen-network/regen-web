@@ -17,7 +17,7 @@ applications:
      - registrystaging-apikeys
   routes:
      - route: app.registry.regen.network
-  buildpacks: 
+  buildpacks:
      - staticfile_buildpack
 - name: presale
   path: web-presale
@@ -25,16 +25,15 @@ applications:
   instances: 1
   routes:
      - route: presale.registry.regen.network
-  buildpacks: 
+  buildpacks:
      - staticfile_buildpack
-- name: graphql
-  memory: 64M
-  command: './cli.js --connection $DATABASE_URL'
-  instances: 1
-  docker: 
-     image: graphile/postgraphile
-  routes:
-     - route: graphql.registry.regen.network
-  services:
-     - registrystaging-psql
-
+# - name: graphql
+#   memory: 64M
+#   command: './cli.js --connection $DATABASE_URL'
+#   instances: 1
+#   docker:
+#      image: graphile/postgraphile
+#   routes:
+#      - route: graphql.registry.regen.network
+#   services:
+#      - registrystaging-psql

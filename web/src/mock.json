@@ -320,12 +320,6 @@
           "imgSrc": "soil.png"
         }
       ],
-      "creditClass": {
-        "name": "Australian Biodiversity Units (ABU’s)",
-        "description": "ABU’s are an Australian Government endorsed biodiversity credit. An individual ABU represents a 1.5m square area of land of significant environmental value that has been placed under a conservation covenant and agreed management plan. The covenant and management plan secure the long term preservation of the site and ensure the biodiversity value is protected in perpetuity. Vegetation types may include forests, grasslands, mallees, saltmarshes, scrubs, shrublands, wetlands, and woodlands. \n\nABU’s are an innovative and unique way for organisations to preserve a tangible section of Australia’s unique natural habitat.",
-        "imgSrc": "abu.png",
-        "tag": "biodiversity"
-      },
       "protectedSpecies": [
         {
           "name": "Conostylis drummondii",
@@ -360,41 +354,6 @@
           "imgSrc": "conostylis.png"
         }
       ],
-      "timeline": {
-        "completedItemIndex": 0,
-        "events": [
-          {
-            "date": "2020",
-            "title": "Funding Pledges",
-            "description": "Open credits for sale, seek out supporters to fund the project."
-          },
-          {
-            "title": "Tipping Point",
-            "description": "Once we reach 25% support the project can commence."
-          },
-          {
-            "title": "Baselining",
-            "description": "An independent 3rd party verifies existing state of land and approve the proposed management plan."
-          },
-          {
-            "title": "Conservation Covenant",
-            "description": "A conservation covenant is formally established on the land title."
-          },
-          {
-            "title": "Management Plan Commences",
-            "description": "On ground works such as fencing and revegetation program begin to be rolled out."
-          },
-          {
-            "title": "Biennial Audits and Impact Reports",
-            "description": "Every 2 years the investor is issued with independent 3rd party audit and impact report."
-          },
-          {
-            "date": "2029",
-            "title": "Project Completion",
-            "description": "This project has a 10 year total timeframe."
-          }
-        ]
-      },
       "credits": {
         "purchased": 0,
         "issued": 0
@@ -518,13 +477,13 @@
         },
         {
           "name": "Above ground biomass",
-          "description": "Increasing all living biomass which is located above the ground.",
+          "description": "We will encourage all plant diversity and endeavour to keep a living plant in the soil as much as possible.",
           "monitored": false,
           "imgSrc": "biomass.png"
         },
         {
           "name": "Soil health",
-          "description": "The capacity of soil to function as a vital living ecosystem that sustains plants, animals, and humans.",
+          "description": "We will limit mechanical, chemical and physical disturbance of soil wherever possible, and aim for 100% groundcover 100% of the time.",
           "monitored": false,
           "imgSrc": "soil.png"
         }

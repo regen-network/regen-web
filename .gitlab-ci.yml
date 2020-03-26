@@ -26,7 +26,6 @@ build-deploy-impactag:
   script:
     - echo "Building $CI_PROJECT_NAME"
     - yarn
-    - STORYBOOK_MAPBOX_TOKEN=$MAPBOX_TOKEN yarn run build-storybook
     - REACT_APP_MAPBOX_TOKEN=$MAPBOX_TOKEN yarn build
     - cf login -a $CF_URL -u $CF_USER -p $CF_PASS
     - cf target -o "$CF_ORG" -s $CF_SPACE

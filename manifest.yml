@@ -16,6 +16,17 @@ applications:
      - registrystaging-psql
      - registrystaging-apikeys
   routes:
+     - route: dev.registry.regen.network
+  buildpacks:
+     - staticfile_buildpack
+- name: registry-impactag
+  path: web/build
+  memory: 64M
+  instances: 1
+  services:
+     - registrystaging-psql
+     - registrystaging-apikeys
+  routes:
      - route: app.registry.regen.network
   buildpacks:
      - staticfile_buildpack

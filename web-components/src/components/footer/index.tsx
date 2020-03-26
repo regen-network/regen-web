@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     [theme.breakpoints.down('xs')]: {
       display: 'block',
-      padding: `${theme.spacing(9.25)} ${theme.spacing(4)} ${theme.spacing(38)}`,
+      padding: `${theme.spacing(9.25)} ${theme.spacing(4)} ${theme.spacing(12.5)}`,
     },
     [theme.breakpoints.up('xl')]: {
       paddingRight: theme.spacing(5),

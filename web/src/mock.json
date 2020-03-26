@@ -83,10 +83,12 @@
       },
       "shortDescription": "This project is restoring and conserving a large area of native grassland in Southern Australia.",
       "longDescription": "The project will see up to 1.3M Biodiversity Offset Units become available via formal accreditation with the South Australian Department of Environment and Water. The unique site comprises a pristine example of shrub and woodlands associated with the RAMSAR recognised Coorong Region, of particular cultural and environmental significance. A comprehensive site management plan will be undertaken in partnership with local indigenous land owners with the ownership of this and eventually passed on to these groups.\n\nThis project represents a truly unique offsetting opportunity, in proximity to Adelaide and in a vitally important bioregion.\n\nThis property is a rare pocket of wetlands and woodlands located near the township of Menindee South Australia, nestled in between the Coorong national park and Lake Albert.\n\nAs one of the few remaining sections of privately owned remnant vegetation in the area, this represents a unique opportunity for long term preservation. The Coorong, Lake Alexandrina and Lake Albert Wetland is an international significant RAMSAR wetland ecosystems at the intersection of the Murray River and Southern Ocean.\n\nThis vital habitat comprises a unique mix of both freshwater and saltwater wetlands and coastal woodlands. The Coorong is the heart of the traditional lands of Ngarrindjeri people, who have hunted and camped on the Mt Sandy property for thousands of years.",
-      "media": [{
-        "src":"coorong.jpg",
-        "thumbnail":"coorong.jpg"
-      }],
+      "media": [
+        {
+          "src": "coorong.jpg",
+          "thumbnail": "coorong.jpg"
+        }
+      ],
       "image": "coorong.jpg",
       "map": "map.png",
       "keyOutcomesActivities": [
@@ -95,40 +97,42 @@
         "The site will be managed in accordance with an agreed management plan to reduce weed pressure, improve the biodiversity value of the location and preserve the value of the land in perpetuity.",
         "After 10 years the land will be vetted to Rigney Namawi Pty Ltd (local indigenous traditional owners). Six monthly project updates in the form of videos, blog posts and photographs will be produced for the first 5 years of the project."
       ],
-      "landManagementActions": [{
-        "actions": [
-          {
-            "name": "Reduce pest populations",
-            "description": "Monitor and reduce the population of foxes, cats, dingos/wild dogs.",
-            "imgSrc": "pest.png"
-          },
-          {
-            "name": "Prevent any new weeds or pests becoming established",
-            "description": "Monitor sites for any new weeds or pests. If observed, plan and implement a control program.",
-            "imgSrc": "fox.png"
-          },
-          {
-            "name": "Eradicate populations of declared weeds",
-            "description": "Conserving the plant habitats in the area along rivers and streams.",
-            "imgSrc": "weeds.png"
-          },
-          {
-            "name": "Decommission all artificial water sources",
-            "description": "Identify artificial water sources. Prioritise those close to boundaries and decommission by either blocking inflow or excluding stock with fences.",
-            "imgSrc": "water.png"
-          },
-          {
-            "name": "Limit impact from native mammals",
-            "description": "Determine the carrying capacity for the property and monitor the population to keep the number below carrying capacity.",
-            "imgSrc": "mammals.png"
-          },
-          {
-            "name": "Determine impacts for herbivory on native vegetation",
-            "description": "Establish a minimum of three fenced exclosures to prevent grazing from herbivores (both native and introduced).",
-            "imgSrc": "herbivory.png"
-          }
-        ]
-      }],
+      "landManagementActions": [
+        {
+          "actions": [
+            {
+              "name": "Reduce pest populations",
+              "description": "Monitor and reduce the population of foxes, cats, dingos/wild dogs.",
+              "imgSrc": "pest.png"
+            },
+            {
+              "name": "Prevent any new weeds or pests becoming established",
+              "description": "Monitor sites for any new weeds or pests. If observed, plan and implement a control program.",
+              "imgSrc": "fox.png"
+            },
+            {
+              "name": "Eradicate populations of declared weeds",
+              "description": "Conserving the plant habitats in the area along rivers and streams.",
+              "imgSrc": "weeds.png"
+            },
+            {
+              "name": "Decommission all artificial water sources",
+              "description": "Identify artificial water sources. Prioritise those close to boundaries and decommission by either blocking inflow or excluding stock with fences.",
+              "imgSrc": "water.png"
+            },
+            {
+              "name": "Limit impact from native mammals",
+              "description": "Determine the carrying capacity for the property and monitor the population to keep the number below carrying capacity.",
+              "imgSrc": "mammals.png"
+            },
+            {
+              "name": "Determine impacts for herbivory on native vegetation",
+              "description": "Establish a minimum of three fenced exclosures to prevent grazing from herbivores (both native and introduced).",
+              "imgSrc": "herbivory.png"
+            }
+          ]
+        }
+      ],
       "impact": [
         {
           "name": "Biodiversity",
@@ -241,10 +245,12 @@
       },
       "shortDescription": "Andover is a 1787 hectare broadacre cropping and sheep farm near Kojonup in Western Australia’s Wheatbelt.",
       "longDescription": "Andover (1137 Boscabel-Chittinup Road, Boscabel) is a 1787 ha broadacre property producing canola, wheat, barley and sheep. At latitude -33.68065 and longitude 116.97219, it is situated in the Shire of Kojonup on the border of the Shire of West Arthur.\n\nAndover was purchased by the current owners in 2016, with the farm’s long term management being a 3 way partnership between Wide Open Agriculture, local family farmers and impact investors.\n\nPrior to purchase the farm had been conventionally managed for many years, which had resulted in degraded soil that had been leached of nutrients, and devoid of good biology. The creeklines had been degraded by stock grazing, with inundation and rising salinity levels limiting production. Since taking over and transitioning from conventional to regenerative agricultural practises, the Rexs’ have reduced grazing pressure and better managed livestock rotations to rejuvenate perennial pastures. They have introduced multi species cropping to help rebuild soil health and microbial activity, increasing above and below ground diversity. The implementation of no till practices have helped to reduce erosion and soil degredation.\n\nThere is a limitation to what the Rexs’ can achieve within their farming system to regenerate the nature zone, or their biodiversity.  They are eager to take this further, but require support to take the next step in their regenerative journey. This is where the creation and registration of Biodiversity Credits can make a great impact to their whole landscape function.",
-      "media": [{
-        "src":"andover.jpg",
-        "thumbnail":"andover.jpg"
-      }],
+      "media": [
+        {
+          "src": "andover.jpg",
+          "thumbnail": "andover.jpg"
+        }
+      ],
       "image": "andover.jpg",
       "map": "woa.kml",
       "keyOutcomesActivities": [
@@ -255,45 +261,48 @@
         "Control introduced predators and invasive weeds",
         "Financially support a farming family to transition to regenerative practices"
       ],
-      "landManagementActions": [{
-        "title": "Funded activities within the nature zone, this is how the project developers are planning to achieve the primary impact.",
-        "actions": [
-          {
-            "name": "Fence existing biodiversity",
-            "description": "Fencing to exclude stock removes grazing pressure from native species and helps the ecosystem to regenerate.",
-            "imgSrc": "fence-biodiversity.png"
-          },
-          {
-            "name": "Establish and manage fire breaks",
-            "description": "Fire can be mitigated by creating fire breaks and working with an approved management plan that reduces fuel build up in the vegetation under story.",
-            "imgSrc": "fire-breaks.png"
-          },
-          {
-            "name": "Revegetate to reconnect fragments",
-            "description": "Reconnecting fragmented vegetation provides a more resilient ecosystem and creates corridors for wildlife to move through.",
-            "imgSrc": "revegetate.png"
-          }
-        ]
-      }, {
-        "title": "Flow on impact by supporting a regenerative farmer. Secondary impact as a result of biodiversity credits purchased.",
-        "actions": [
-          {
-            "name": "Multi species croppings",
-            "description": "Multi species crops are more efficient at improving the health and resilience of the the soil to pathogens, increasing soil microbial health by promoting above and below ground diversity, and can be grazed as a fodder crop.",
-            "imgSrc": "multi-species-croppings.png"
-          },
-          {
-            "name": "High density rotational grazing",
-            "description": "Increased stock density and long recovery periods maximizes grass growth and carbon drawdown into the soil.",
-            "imgSrc": "grazing.png"
-          },
-          {
-            "name": "Perennial pasture",
-            "description": "Establishing perennial pasture on salt effected, low lying or marginally productive land increases the agricultural production of the land as well as supporting a more stable year round climate for soil biology.",
-            "imgSrc": "perennial-pasture.png"
-          }
-        ]
-      }],
+      "landManagementActions": [
+        {
+          "title": "Funded activities within the nature zone, this is how the project developers are planning to achieve the primary impact.",
+          "actions": [
+            {
+              "name": "Fence existing biodiversity",
+              "description": "Fencing to exclude stock removes grazing pressure from native species and helps the ecosystem to regenerate.",
+              "imgSrc": "fence-biodiversity.png"
+            },
+            {
+              "name": "Establish and manage fire breaks",
+              "description": "Fire can be mitigated by creating fire breaks and working with an approved management plan that reduces fuel build up in the vegetation under story.",
+              "imgSrc": "fire-breaks.png"
+            },
+            {
+              "name": "Revegetate to reconnect fragments",
+              "description": "Reconnecting fragmented vegetation provides a more resilient ecosystem and creates corridors for wildlife to move through.",
+              "imgSrc": "revegetate.png"
+            }
+          ]
+        },
+        {
+          "title": "Flow on impact by supporting a regenerative farmer. Secondary impact as a result of biodiversity credits purchased.",
+          "actions": [
+            {
+              "name": "Multi species croppings",
+              "description": "Multi species crops are more efficient at improving the health and resilience of the the soil to pathogens, increasing soil microbial health by promoting above and below ground diversity, and can be grazed as a fodder crop.",
+              "imgSrc": "multi-species-croppings.png"
+            },
+            {
+              "name": "High density rotational grazing",
+              "description": "Increased stock density and long recovery periods maximizes grass growth and carbon drawdown into the soil.",
+              "imgSrc": "grazing.png"
+            },
+            {
+              "name": "Perennial pasture",
+              "description": "Establishing perennial pasture on salt effected, low lying or marginally productive land increases the agricultural production of the land as well as supporting a more stable year round climate for soil biology.",
+              "imgSrc": "perennial-pasture.png"
+            }
+          ]
+        }
+      ],
       "impact": [
         {
           "name": "Biodiversity",
@@ -320,6 +329,12 @@
           "imgSrc": "soil.png"
         }
       ],
+      "creditClass": {
+        "name": "Australian Biodiversity Units (ABU’s)",
+        "description": "ABU’s are an Australian Government endorsed biodiversity credit. An individual ABU represents a 1.5m square area of land of significant environmental value that has been placed under a conservation covenant and agreed management plan. The covenant and management plan secure the long term preservation of the site and ensure the biodiversity value is protected in perpetuity. Vegetation types may include forests, grasslands, mallees, saltmarshes, scrubs, shrublands, wetlands, and woodlands. \n\nABU’s are an innovative and unique way for organisations to preserve a tangible section of Australia’s unique natural habitat.",
+        "imgSrc": "abu.png",
+        "tag": "biodiversity"
+      },
       "protectedSpecies": [
         {
           "name": "Conostylis drummondii",
@@ -436,38 +451,42 @@
         "We will endeavour to keep a living plant in the soil as much as possible, in order to sustain biological life in the soil.",
         "We will use animals to assist in improving soil health."
       ],
-      "landManagementActions": [{
-        "actions": [{
-          "name": "Time Controlled Rotational Grazing",
-          "description": "Since 2013 the Wilmot Cattle Co. has implemented time controlled rotational grazing at the Wilmot property. Simply, time controlled rotational grazing optimises the number of stock in a paddock and matches grazing period with available pasture. The aim is to mirror natural herding behaviours by having short graze periods at high density followed by long rest periods allowing the pasture to recover. When managed well, this grazing system increases groundcover, biomass, plant diversity, animal and plant nutrition, soil health, water infiltration and soil organic carbon. A more complete explanation of the science, monitoring tools and management practices is provided below.",
-          "imgSrc": "time-controlled-rotational-grazing.jpg"
-        },
+      "landManagementActions": [
         {
-          "name": "Decrease Paddock Size",
-          "description": "Paddock sizes need to decrease to enable effective grazing of the whole paddock at a controllable density. A significant subdivision program has been completed resulting in an average paddock size at Wilmot of 25 hectares.",
-          "imgSrc": "decrease-paddock-size.jpg"
-        },
-        {
-          "name": "Increase Stock Density",
-          "description": "Carefully managed, high stock densities will lead to evenly grazed pastures and nutrient recycling. At high stock densities animals will increase pasture health and performance by trampling (or recycling) a higher proportion of biomass and evenly distributing dung and urine (nutrients).",
-          "imgSrc": "increase-stock-density.jpg"
-        },
-        {
-          "name": "Monitor Pasture Growth",
-          "description": "Accurate and timely measurement of pasture growth, and therefore available feed, is required to determine how many animals should be in a paddock and for how long.",
-          "imgSrc": "monitor-pasture-growth.jpg"
-        },
-        {
-          "name": "Animal Welfare",
-          "description": "Animal welfare is an important component in a well managed grazing enterprise. Low stress stock handling techniques have been adopted to ensure animals have higher quality life.",
-          "imgSrc": "animal-welfare.jpg"
-        },
-        {
-          "name": "Manage Grazing Periods",
-          "description": "To ensure grazing practices are implemented effectively, and that there is a record of management practices, Wilmot utilises the online tool Maia Grazing. Maia Grazing uses climatic data and field observations to determine pasture growth and optimal stocking rates. It then tracks all stock movements and ensures the stocking rate does not exceed the carrying capacity of each paddock.",
-          "imgSrc": "manage-grazing-periods.jpg"
-        }]
-      }],
+          "actions": [
+            {
+              "name": "Time Controlled Rotational Grazing",
+              "description": "Since 2013 the Wilmot Cattle Co. has implemented time controlled rotational grazing at the Wilmot property. Simply, time controlled rotational grazing optimises the number of stock in a paddock and matches grazing period with available pasture. The aim is to mirror natural herding behaviours by having short graze periods at high density followed by long rest periods allowing the pasture to recover. When managed well, this grazing system increases groundcover, biomass, plant diversity, animal and plant nutrition, soil health, water infiltration and soil organic carbon. A more complete explanation of the science, monitoring tools and management practices is provided below.",
+              "imgSrc": "time-controlled-rotational-grazing.jpg"
+            },
+            {
+              "name": "Decrease Paddock Size",
+              "description": "Paddock sizes need to decrease to enable effective grazing of the whole paddock at a controllable density. A significant subdivision program has been completed resulting in an average paddock size at Wilmot of 25 hectares.",
+              "imgSrc": "decrease-paddock-size.jpg"
+            },
+            {
+              "name": "Increase Stock Density",
+              "description": "Carefully managed, high stock densities will lead to evenly grazed pastures and nutrient recycling. At high stock densities animals will increase pasture health and performance by trampling (or recycling) a higher proportion of biomass and evenly distributing dung and urine (nutrients).",
+              "imgSrc": "increase-stock-density.jpg"
+            },
+            {
+              "name": "Monitor Pasture Growth",
+              "description": "Accurate and timely measurement of pasture growth, and therefore available feed, is required to determine how many animals should be in a paddock and for how long.",
+              "imgSrc": "monitor-pasture-growth.jpg"
+            },
+            {
+              "name": "Animal Welfare",
+              "description": "Animal welfare is an important component in a well managed grazing enterprise. Low stress stock handling techniques have been adopted to ensure animals have higher quality life.",
+              "imgSrc": "animal-welfare.jpg"
+            },
+            {
+              "name": "Manage Grazing Periods",
+              "description": "To ensure grazing practices are implemented effectively, and that there is a record of management practices, Wilmot utilises the online tool Maia Grazing. Maia Grazing uses climatic data and field observations to determine pasture growth and optimal stocking rates. It then tracks all stock movements and ensures the stocking rate does not exceed the carrying capacity of each paddock.",
+              "imgSrc": "manage-grazing-periods.jpg"
+            }
+          ]
+        }
+      ],
       "impact": [
         {
           "name": "Soil organic carbon",

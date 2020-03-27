@@ -475,11 +475,6 @@
               "imgSrc": "monitor-pasture-growth.jpg"
             },
             {
-              "name": "Animal Welfare",
-              "description": "Animal welfare is an important component in a well managed grazing enterprise. Low stress stock handling techniques have been adopted to ensure animals have higher quality life.",
-              "imgSrc": "animal-welfare.jpg"
-            },
-            {
               "name": "Manage Grazing Periods",
               "description": "To ensure grazing practices are implemented effectively, and that there is a record of management practices, Wilmot utilises the online tool Maia Grazing. Maia Grazing uses climatic data and field observations to determine pasture growth and optimal stocking rates. It then tracks all stock movements and ensures the stocking rate does not exceed the carrying capacity of each paddock.",
               "imgSrc": "manage-grazing-periods.jpg"
@@ -499,6 +494,12 @@
           "description": "We will encourage all plant diversity and endeavour to keep a living plant in the soil as much as possible.",
           "monitored": false,
           "imgSrc": "biomass.png"
+        },
+        {
+          "name": "Animal Welfare",
+          "description": "Animal welfare is an important component in a well managed grazing enterprise. Low stress stock handling techniques have been adopted to ensure animals have higher quality life.",
+          "monitored": false,
+          "imgSrc": "animal-welfare.png"
         },
         {
           "name": "Soil health",

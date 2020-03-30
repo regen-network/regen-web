@@ -14,7 +14,8 @@ export interface CreditPrice {
 
 interface BuyFooterProps {
   creditPrice?: CreditPrice;
-  href: string;
+  href?: string;
+  onClick?: () => void;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -94,7 +95,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function BuyFooter({ creditPrice, href }: BuyFooterProps): JSX.Element {
+export default function BuyFooter({ creditPrice, href, onClick }: BuyFooterProps): JSX.Element {
   const classes = useStyles({});
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up('sm'));
@@ -117,16 +118,16 @@ export default function BuyFooter({ creditPrice, href }: BuyFooterProps): JSX.El
           </Grid>
         )}
         <Grid item>
-          <a href={href} target="_blank" rel="noopener noreferrer">
-            <ContainedButton>
-              <CurrentCreditsIcon
-                height={matches ? '1.625rem' : '1.375rem'}
-                width={matches ? '1.75rem' : '1.5rem'}
-                color={theme.palette.primary.main}
-              />
-              <span className={classes.buyText}>buy credits</span>
-            </ContainedButton>
-          </a>
+          {/*<a href={href} target="_blank" rel="noopener noreferrer">*/}
+          <ContainedButton onClick={onClick}>
+            <CurrentCreditsIcon
+              height={matches ? '1.625rem' : '1.375rem'}
+              width={matches ? '1.75rem' : '1.5rem'}
+              color={theme.palette.primary.main}
+            />
+            <span className={classes.buyText}>buy credits</span>
+          </ContainedButton>
+          {/*</a>*/}
         </Grid>
       </Grid>
     </div>

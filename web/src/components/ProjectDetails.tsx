@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import * as togeojson from '@mapbox/togeojson';
 import Grid from '@material-ui/core/Grid';
+import Modal from '@material-ui/core/Modal';
 
 import background from '../assets/background.jpg';
 import { Project, Impact, ProjectDefault, ActionGroup } from '../mocks';
@@ -235,6 +236,17 @@ const useStyles = makeStyles((theme: Theme) => ({
       marginTop: theme.spacing(3.75),
     },
   },
+  modal: {
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    position: 'absolute',
+    width: 400,
+    backgroundColor: theme.palette.background.paper,
+    // border: '2px solid #000',
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+  },
 }));
 
 interface ProjectProps {
@@ -304,6 +316,15 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
         setGeojson(togeojson.kml(dom));
       });
   }
+
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = (): void => {
+    setOpen(true);
+  };
+
+  const handleClose = (): void => {
+    setOpen(false);
+  };
 
   return (
     <div className={classes.root}>
@@ -501,9 +522,18 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
 
       {project.presaleUrl && (
         <div className={classes.buyFooter}>
-          <BuyFooter href={project.presaleUrl} creditPrice={project.creditPrice} />
+          <BuyFooter onClick={handleOpen} href={project.presaleUrl} creditPrice={project.creditPrice} />
         </div>
       )}
+
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="presale-modal"
+        aria-describedby="presale-form"
+      >
+        <div className={classes.modal}>MODAL</div>
+      </Modal>
     </div>
   );
 }

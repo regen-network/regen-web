@@ -381,6 +381,11 @@
     {
       "id": "impactag",
       "name": "Wilmot Cattle Company",
+      "fieldsOverride": {
+        "nonMonitoredImpact": {
+          "title": "Co-benefits"
+        }
+      },
       "place": {
         "city": "Hernani",
         "state": "New South Wales",

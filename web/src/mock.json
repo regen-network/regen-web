@@ -380,7 +380,7 @@
     },
     {
       "id": "impactag",
-      "name": "Wilmot Cattle Company",
+      "name": "Wilmot Farm",
       "fieldsOverride": {
         "nonMonitoredImpact": {
           "title": "Co-benefits"

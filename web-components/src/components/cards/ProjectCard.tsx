@@ -23,6 +23,7 @@ interface ProjectCardProps {
   tag?: string;
   onClick?: () => void;
   displayCity?: boolean;
+  displayRegion?: boolean;
   displayCountry?: boolean;
 }
 
@@ -87,6 +88,7 @@ export default function ProjectCard({
   onClick,
   tag,
   displayCity = true,
+  displayRegion = true,
   displayCountry = true,
 }: ProjectCardProps): JSX.Element {
   const theme = useTheme();
@@ -112,6 +114,7 @@ export default function ProjectCard({
           fontSize="0.75rem"
           color={theme.palette.primary.light}
           displayCity={displayCity}
+          displayRegion={displayRegion}
           displayCountry={displayCountry}
         />
       </div>

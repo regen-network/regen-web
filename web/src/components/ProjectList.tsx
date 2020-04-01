@@ -165,6 +165,7 @@ export default function ProjectList({ projects }: ProjectsProps): JSX.Element {
                     developer={developer}
                     tag={p.creditClass.tag}
                     displayCity={false}
+                    displayRegion={false}
                   />
                 </Link>
               </Grid>

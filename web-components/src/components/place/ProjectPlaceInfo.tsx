@@ -5,6 +5,7 @@ import { getFormattedPlace } from './place';
 
 export interface Place {
   city?: string;
+  region?: string;
   state: string;
   country: string;
 }
@@ -17,6 +18,7 @@ interface ProjectPlaceInfoProps {
   smFontSize?: string;
   color?: string;
   displayCity?: boolean;
+  displayRegion?: boolean;
   displayCountry?: boolean;
 }
 
@@ -34,13 +36,14 @@ export default function ProjectPlaceInfo({
   smFontSize,
   color,
   displayCity = true,
+  displayRegion = true,
   displayCountry = true,
 }: ProjectPlaceInfoProps): JSX.Element {
   const classes = useStyles({});
   const displayedArea: string = new Intl.NumberFormat('en-US').format(area);
   return (
     <PlaceInfo fontSize={fontSize} smFontSize={smFontSize} color={color}>
-      {getFormattedPlace(place, displayCity, displayCountry)}
+      {getFormattedPlace(place, displayCity, displayRegion, displayCountry)}
       <span className={classes.separator}>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
       {displayedArea} {areaUnit}
     </PlaceInfo>

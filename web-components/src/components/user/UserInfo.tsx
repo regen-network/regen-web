@@ -24,6 +24,7 @@ interface UserInfoProps {
   border?: boolean;
   displayCity?: boolean;
   displayCountry?: boolean;
+  displayRegion?: boolean;
   icon?: any;
 }
 
@@ -83,6 +84,7 @@ export default function UserInfo({
   border = true,
   icon,
   displayCity = true,
+  displayRegion = true,
   displayCountry = true,
 }: UserInfoProps): JSX.Element {
   const classes = useStyles({ description: user.description, direction, size });
@@ -110,7 +112,7 @@ export default function UserInfo({
         )}
         {user.place && (
           <Typography className={classes.place}>
-            {getFormattedPlace(user.place, displayCity, displayCountry)}
+            {getFormattedPlace(user.place, displayCity, displayRegion, displayCountry)}
           </Typography>
         )}
         {user.description && <Typography className={classes.description}>{user.description}</Typography>}

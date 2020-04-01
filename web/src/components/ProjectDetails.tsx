@@ -236,16 +236,36 @@ const useStyles = makeStyles((theme: Theme) => ({
       marginTop: theme.spacing(3.75),
     },
   },
-  modal: {
+  modalContent: {
+    outline: 'none',
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
     position: 'absolute',
-    width: 400,
+    width: '70%',
+    height: '70%',
     backgroundColor: theme.palette.background.paper,
-    // border: '2px solid #000',
     boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
+    '& iframe': {
+      width: '100%',
+      height: '100%',
+      border: 'none',
+    },
+  },
+  closeButton: {
+    position: 'absolute',
+    top: theme.spacing(-5),
+    right: theme.spacing(-5),
+    height: theme.spacing(10),
+    width: theme.spacing(10),
+    backgroundColor: theme.palette.primary.main,
+    borderRadius: '50%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    cursor: 'pointer',
+    fontWeight: 'bold',
+    boxShadow: theme.shadows[5],
   },
 }));
 
@@ -522,18 +542,25 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
 
       {project.presaleUrl && (
         <div className={classes.buyFooter}>
-          <BuyFooter onClick={handleOpen} href={project.presaleUrl} creditPrice={project.creditPrice} />
+          <BuyFooter onClick={handleOpen} creditPrice={project.creditPrice} />
         </div>
       )}
 
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="presale-modal"
-        aria-describedby="presale-form"
-      >
-        <div className={classes.modal}>MODAL</div>
-      </Modal>
+      {project.presaleUrl && (
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="presale-modal"
+          aria-describedby="presale-form"
+        >
+          <div className={classes.modalContent}>
+            <iframe title="airtable-presale-form" src={project.presaleUrl} />
+            <div onClick={handleClose} className={classes.closeButton}>
+              X
+            </div>
+          </div>
+        </Modal>
+      )}
     </div>
   );
 }

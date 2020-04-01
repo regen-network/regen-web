@@ -26,6 +26,7 @@ import Map from 'web-components/lib/components/map';
 import { ItemProps as ProtectedSpeciesItem } from 'web-components/lib/components/sliders/Item';
 import { User } from 'web-components/lib/components/user/UserInfo';
 import BuyFooter from 'web-components/lib/components/buy-footer';
+import CloseIcon from 'web-components/lib/components/icons/CloseIcon';
 
 import { getImgSrc } from '../lib/imgSrc';
 
@@ -556,7 +557,7 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
           <div className={classes.modalContent}>
             <iframe title="airtable-presale-form" src={project.presaleUrl} />
             <div onClick={handleClose} className={classes.closeButton}>
-              X
+              <CloseIcon />
             </div>
           </div>
         </Modal>

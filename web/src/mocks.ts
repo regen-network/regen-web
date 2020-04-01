@@ -5,6 +5,7 @@ import { Media } from 'web-components/lib/components/sliders/ProjectMedia';
 import { Event } from 'web-components/lib/components/timeline';
 import { ActionProps } from 'web-components/lib/components/action';
 import { CreditPrice } from 'web-components/lib/components/buy-footer';
+import { Data } from 'web-components/lib/components/table';
 
 import mock from './mock.json';
 
@@ -71,7 +72,7 @@ export interface Project {
   creditPrice?: CreditPrice;
   presaleUrl?: string;
   hideCreditDetails?: boolean;
-  // missing: documents
+  documents: Data[];
 }
 
 interface BasicProject {

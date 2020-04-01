@@ -26,6 +26,8 @@ import Map from 'web-components/lib/components/map';
 import { ItemProps as ProtectedSpeciesItem } from 'web-components/lib/components/sliders/Item';
 import { User } from 'web-components/lib/components/user/UserInfo';
 import BuyFooter from 'web-components/lib/components/buy-footer';
+import MrvTabs from 'web-components/lib/components/tabs';
+import Table from 'web-components/lib/components/table';
 import CloseIcon from 'web-components/lib/components/icons/CloseIcon';
 
 import { getImgSrc } from '../lib/imgSrc';
@@ -338,6 +340,7 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
       });
   }
 
+  // Modal
   const [open, setOpen] = React.useState(false);
   const handleOpen = (): void => {
     setOpen(true);
@@ -346,6 +349,21 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
   const handleClose = (): void => {
     setOpen(false);
   };
+
+  // Credits Details and MRV table
+  const creditDetails: JSX.Element = (
+    <CreditDetails
+      name={project.creditClass.name}
+      description={project.creditClass.description}
+      activities={project.keyOutcomesActivities}
+      background={background}
+      title={
+        project.fieldsOverride && project.fieldsOverride.keyOutcomesActivities
+          ? project.fieldsOverride.keyOutcomesActivities.title
+          : projectDefault.keyOutcomesActivities.title
+      }
+    />
+  );
 
   return (
     <div className={classes.root}>
@@ -476,17 +494,23 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
 
       {!project.hideCreditDetails && (
         <div className={`${classes.projectDetails} ${classes.projectContent}`}>
-          <CreditDetails
-            name={project.creditClass.name}
-            description={project.creditClass.description}
-            activities={project.keyOutcomesActivities}
-            background={background}
-            title={
-              project.fieldsOverride && project.fieldsOverride.keyOutcomesActivities
-                ? project.fieldsOverride.keyOutcomesActivities.title
-                : projectDefault.keyOutcomesActivities.title
-            }
-          />
+          {project.documents.length > 0 ? (
+            <MrvTabs
+              tabs={[
+                {
+                  label: 'Overview',
+                  children: creditDetails,
+                },
+                {
+                  label: 'Documentation',
+                  children: <Table rows={project.documents} />,
+                },
+              ]}
+              background={background}
+            />
+          ) : (
+            creditDetails
+          )}
         </div>
       )}
 

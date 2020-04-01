@@ -49,6 +49,7 @@
   "projects": [
     {
       "id": "odonata",
+      "documents": [],
       "name": "Mt. Sandy",
       "place": {
         "city": "Meningie",
@@ -206,6 +207,7 @@
     },
     {
       "id": "woa",
+      "documents": [],
       "fieldsOverride": {
         "protectedSpecies": {
           "title": "Threatened Species"
@@ -380,6 +382,12 @@
     },
     {
       "id": "impactag",
+      "documents": [{
+        "name": "Example name",
+        "type": "Example type",
+        "date": "March 15, 2020",
+        "url": "test"
+      }],
       "name": "Wilmot Farm",
       "fieldsOverride": {
         "nonMonitoredImpact": {
@@ -391,7 +399,7 @@
         "state": "New South Wales",
         "country": "Australia"
       },
-      "hideCreditDetails": true,
+      "hideCreditDetails": false,
       "type": "Farm",
       "area": 1854,
       "areaUnit": "hectares",
@@ -520,7 +528,7 @@
       },
       "credits": {
         "purchased": 0,
-        "issued": 0
+        "issued": 1000
       },
       "presaleUrl": "https://airtable.com/embed/shrd5xPzFPiyQSSMX?backgroundColor=gray"
     }

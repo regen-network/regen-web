@@ -245,8 +245,21 @@ const useStyles = makeStyles((theme: Theme) => ({
     left: '50%',
     transform: 'translate(-50%, -50%)',
     position: 'absolute',
-    width: '70%',
-    height: '70%',
+    [theme.breakpoints.up('md')]: {
+      width: '50%',
+      height: '70%',
+    },
+    [theme.breakpoints.between('sm', 'sm')]: {
+      width: '70%',
+      height: '70%',
+    },
+    [theme.breakpoints.down('xs')]: {
+      width: `calc(100% - 40px)`,
+      height: `calc(100% - 20px)`,
+      left: '20px',
+      top: '20px',
+      transform: 'none',
+    },
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     '& iframe': {
@@ -257,10 +270,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   closeButton: {
     position: 'absolute',
-    top: theme.spacing(-5),
-    right: theme.spacing(-5),
-    height: theme.spacing(10),
-    width: theme.spacing(10),
+    top: '-20px',
+    right: '-20px',
+    height: '40px',
+    width: '40px',
     backgroundColor: theme.palette.primary.main,
     borderRadius: '50%',
     display: 'flex',

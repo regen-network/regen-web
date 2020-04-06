@@ -17,6 +17,7 @@ import Header from 'web-components/lib/components/header';
 import ProjectDetails from './components/ProjectDetails';
 import ProjectList from './components/ProjectList';
 import UserCredits from './components/UserCredits';
+import CreditsIssue from './components/CreditsIssue';
 
 function ScrollToTop(): null {
   const { pathname } = useLocation();
@@ -64,6 +65,17 @@ function Projects(): JSX.Element {
   return <ProjectList projects={projects} />;
 }
 
+function Admin(): JSX.Element {
+  // TODO Add authentication with auth0
+  return (
+    <div style={{ paddingLeft: '1rem' }}>
+      <p>
+        <Link to="/admin/credits/issue">Issue Credits</Link>
+      </p>
+    </div>
+  );
+}
+
 const App: React.FC = (): JSX.Element => {
   return (
     <Router>
@@ -88,6 +100,15 @@ const App: React.FC = (): JSX.Element => {
             render={({ match: { path } }) => (
               <>
                 <Route path={`${path}/:userId`} component={CreditsContainer} />
+              </>
+            )}
+          />
+          <Route
+            path="/admin"
+            render={({ match: { path } }) => (
+              <>
+                <Route path={`${path}`} component={Admin} exact />
+                <Route path={`${path}/credits/issue`} component={CreditsIssue} />
               </>
             )}
           />

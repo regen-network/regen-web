@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import Title from 'web-components/lib/components/title';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation, useQuery } from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
 
 const ISSUE_CREDITS = gql`
   mutation IssueCredits($input: IssueCreditsInput!) {
@@ -19,13 +23,27 @@ const ISSUE_CREDITS = gql`
   }
 `;
 
+const ALL_PROJECTS = gql`
+  {
+    allProjects {
+      edges {
+        node {
+          id
+          name
+        }
+      }
+    }
+  }
+`;
+
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     padding: theme.spacing(5),
   },
   ownershipTitle: {
     paddingTop: theme.spacing(5),
-    fontSize: '1.5rem',
+    paddingBottom: theme.spacing(4),
+    fontSize: '1.3rem',
   },
   input: {
     padding: theme.spacing(1),
@@ -37,17 +55,33 @@ const useStyles = makeStyles((theme: Theme) => ({
   button: {
     marginTop: theme.spacing(3),
   },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
 }));
 
 export default function CreditsIssue(): JSX.Element {
   const classes = useStyles();
+
   const [issueCredits, { data, loading, error }] = useMutation(ISSUE_CREDITS, { errorPolicy: 'ignore' });
-  const [projectId, setProjectId] = useState('562393f2-77dd-11ea-8513-a0999b1d07df');
-  const [issuerPartyId, setIssuerPartyId] = useState('f977af8a-77dc-11ea-8513-a0999b1d07df');
+  const { data: projectsData, loading: projectsLoading, error: projectsError } = useQuery(ALL_PROJECTS, {
+    errorPolicy: 'ignore',
+  });
+
+  const [projectId, setProjectId] = useState('');
+  const issuerPartyId: string = '6ffb7c4e-797d-11ea-8513-a0999b1d07df'; // XXX hardcoded for testing purposes
   const [units, setUnits] = useState(10);
   const [projectDeveloper, setProjectDeveloper] = useState(60);
   const [landSteward, setLandSteward] = useState(0);
   const [landOwner, setLandOwner] = useState(0);
+
+  const handleProjectChange = (event: React.ChangeEvent<{ value: unknown }>): void => {
+    setProjectId(event.target.value as string);
+  };
+
+  if (projectsLoading) return <div>'Loading projects...'</div>;
+  if (projectsError) return <div>`Error! ${projectsError.message}`</div>;
 
   return (
     <div className={classes.root}>
@@ -76,20 +110,30 @@ export default function CreditsIssue(): JSX.Element {
         noValidate
         autoComplete="off"
       >
-        <TextField
-          className={classes.input}
-          required
-          value={projectId}
-          onChange={e => setProjectId(e.target.value)}
-          label="Project id"
-        />
-        <TextField
+        <FormControl className={classes.formControl}>
+          <InputLabel id="project-select-label">Project</InputLabel>
+          <Select
+            labelId="project-select-label"
+            id="project-select"
+            value={projectId}
+            onChange={handleProjectChange}
+          >
+            {projectsData &&
+              projectsData.allProjects &&
+              projectsData.allProjects.edges.map(({ node }: any) => (
+                <MenuItem key={node.id} value={node.id}>
+                  {node.name}
+                </MenuItem>
+              ))}
+          </Select>
+        </FormControl>
+        {/*<TextField
           className={classes.input}
           required
           value={issuerPartyId}
           onChange={e => setIssuerPartyId(e.target.value)}
           label="Issuer id"
-        />
+        />*/}
         <TextField
           className={classes.input}
           required
@@ -102,7 +146,6 @@ export default function CreditsIssue(): JSX.Element {
         <div>
           <TextField
             className={classes.input}
-            required
             type="number"
             value={projectDeveloper}
             onChange={e => setProjectDeveloper(parseInt(e.target.value))}
@@ -110,7 +153,6 @@ export default function CreditsIssue(): JSX.Element {
           />
           <TextField
             className={classes.input}
-            required
             type="number"
             value={landSteward}
             onChange={e => setLandSteward(parseInt(e.target.value))}
@@ -118,7 +160,6 @@ export default function CreditsIssue(): JSX.Element {
           />
           <TextField
             className={classes.input}
-            required
             type="number"
             value={landOwner}
             onChange={e => setLandOwner(parseInt(e.target.value))}

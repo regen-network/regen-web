@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Switch, Route, Link, useParams, useLocation } from 'react-router-dom';
+import { Router, Switch, Route, Link, useParams, useLocation } from 'react-router-dom';
+import NavBar from './components/NavBar';
+import { useAuth0 } from './react-auth0-spa';
 
 import logo from './assets/logo.png';
 
@@ -18,6 +20,7 @@ import ProjectDetails from './components/ProjectDetails';
 import ProjectList from './components/ProjectList';
 import UserCredits from './components/UserCredits';
 import CreditsIssue from './components/CreditsIssue';
+import history from './lib/history';
 
 function ScrollToTop(): null {
   const { pathname } = useLocation();
@@ -77,11 +80,19 @@ function Admin(): JSX.Element {
 }
 
 const App: React.FC = (): JSX.Element => {
+  const { loading } = useAuth0();
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   return (
-    <Router>
+    <Router history={history}>
       <ScrollToTop />
       <div>
-        <Header logo={logo} />
+        <Header logo={logo}>
+          <NavBar />
+        </Header>
         <Switch>
           <Route exact path="/">
             <Home />

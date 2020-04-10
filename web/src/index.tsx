@@ -5,31 +5,41 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import ThemeProvider from 'web-components/lib/theme/RegenThemeProvider';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { ApolloProvider } from '@apollo/react-hooks';
-import ApolloClient from 'apollo-boost';
+// import { ApolloProvider } from '@apollo/react-hooks';
+// import ApolloClient from 'apollo-boost';
 
-const client = new ApolloClient({
-  uri: process.env.API_URI || 'http://localhost:5000/graphql',
-  // request: async operation => {
-  //   const token = getValidToken();
-  //   if (token) {
-  //     operation.setContext({
-  //       headers: {
-  //         Authorization: `Bearer ${token}`,
-  //       },
-  //     });
-  //   }
-  // },
-});
+import { Auth0Provider } from './react-auth0-spa';
+import { AuthApolloProvider } from './apollo';
+import history from './lib/history';
+
+const onRedirectCallback = (appState: any): void => {
+  history.push(appState && appState.targetUrl ? appState.targetUrl : window.location.pathname);
+};
+
+const config = {
+  domain: process.env.REACT_APP_AUTH0_DOMAIN || 'regen-network-registry.auth0.com',
+  clientId: process.env.REACT_APP_AUTH0_CLIENT_ID || 'rEuc1WLPAQVXZ7gJrWg4AL9EhWMHmLu8',
+  returnTo: process.env.REACT_APP_URI || 'http://localhost:3000/',
+  audience: 'https://regen-registry-server.herokuapp.com/',
+};
 
 ReactDOM.render(
-  <ApolloProvider client={client}>
-    <ThemeProvider injectFonts>
-      {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-      <CssBaseline />
-      <App />
-    </ThemeProvider>
-  </ApolloProvider>,
+  <Auth0Provider
+    domain={config.domain}
+    client_id={config.clientId}
+    redirect_uri={window.location.origin}
+    onRedirectCallback={onRedirectCallback}
+    returnTo={config.returnTo}
+    audience={config.audience}
+  >
+    <AuthApolloProvider>
+      <ThemeProvider injectFonts>
+        {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+        <CssBaseline />
+        <App />
+      </ThemeProvider>
+    </AuthApolloProvider>
+  </Auth0Provider>,
   document.getElementById('root'),
 );
 

@@ -12,6 +12,7 @@ import RegenIcon from '../icons/RegenIcon';
 
 interface HeaderProps {
   logo: string;
+  children?: any;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -58,7 +59,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function Header({ logo }: HeaderProps): JSX.Element {
+export default function Header({ children, logo }: HeaderProps): JSX.Element {
   const classes = useStyles({});
   // TODO: Add search/menu logic
   return (
@@ -69,6 +70,7 @@ export default function Header({ logo }: HeaderProps): JSX.Element {
             <RegenIcon />
           </a>
         </Grid>
+        <Grid item>{children}</Grid>
         {/*<Grid item alignItems="center">
           <SearchIcon className={classes.searchIcon} />
           <MenuIcon className={classes.menuIcon} fontSize="large" />

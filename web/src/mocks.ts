@@ -54,6 +54,8 @@ export interface Project {
   steward: User;
   owner?: User;
   shortDescription: string;
+  glanceText?: string[];
+  glanceImgSrc?: string;
   longDescription: string;
   media: Media[];
   image: string;

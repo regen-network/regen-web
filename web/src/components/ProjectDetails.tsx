@@ -12,6 +12,7 @@ import Title from 'web-components/lib/components/title';
 import ProjectPlaceInfo from 'web-components/lib/components/place/ProjectPlaceInfo';
 import ProjectDeveloperCard from 'web-components/lib/components/cards/ProjectDeveloperCard';
 import ImpactCard from 'web-components/lib/components/cards/ImpactCard';
+import GlanceCard from 'web-components/lib/components/cards/GlanceCard';
 import Description from 'web-components/lib/components/description';
 // import Action from 'web-components/lib/components/action';
 import Timeline from 'web-components/lib/components/timeline';
@@ -399,6 +400,9 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
               <div className={classes.creditsGauge}>
                 <CreditsGauge purchased={project.credits.purchased} issued={project.credits.issued} />
               </div>
+            )}
+            {project.glanceImgSrc && project.glanceText && (
+              <GlanceCard imgSrc={require(`../assets/${project.glanceImgSrc}`)} text={project.glanceText} />
             )}
             <div className={classes.projectDeveloper}>
               <ProjectDeveloperCard

@@ -3,8 +3,9 @@ import Card from 'web-components/lib/components/cards/Card';
 import ProjectDeveloperCard from 'web-components/lib/components/cards/ProjectDeveloperCard';
 import ImpactCard from 'web-components/lib/components/cards/ImpactCard';
 import MapCard from 'web-components/lib/components/cards/MapCard';
+import GlanceCard from 'web-components/lib/components/cards/GlanceCard';
 import { User } from 'web-components/lib/components/user/UserInfo';
-import { withKnobs, text, object, number } from '@storybook/addon-knobs';
+import { withKnobs, text, object, number, array } from '@storybook/addon-knobs';
 
 // import CreditCard, { CreditInfo } from 'web-components/lib/components/cards/CreditCard';
 import PurchasedCreditsCard from 'web-components/lib/components/cards/PurchasedCreditsCard';
@@ -124,5 +125,15 @@ export const mapCard = (): JSX.Element => (
       'description',
       'This species from the Hawkesbury region of New South Wales may grow into a multi-trunked mallee, or as a single trunked small tree.',
     )}
+  />
+);
+
+export const glanceCard = (): JSX.Element => (
+  <GlanceCard
+    imgSrc="./map-ss.png"
+    text={array('text', [
+      'Shifting to Managed Grazing can potentially sequester 16.4- 26 CO2e (Gt) by 2050.',
+      'Wilmot Cattle Co has increased Soil Organic Carbon to 4.5% and removed 33,000 tons of CO2e in two years.',
+    ])}
   />
 );

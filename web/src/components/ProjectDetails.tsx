@@ -84,12 +84,13 @@ const useStyles = makeStyles((theme: Theme) => ({
   projectDeveloper: {
     [theme.breakpoints.up('sm')]: {
       marginTop: theme.spacing(6.5),
+      paddingLeft: theme.spacing(7.5),
     },
     [theme.breakpoints.down('xs')]: {
       marginTop: theme.spacing(4),
     },
   },
-  projectStoryText: {
+  projectStory: {
     '& h2': {
       [theme.breakpoints.up('sm')]: {
         marginBottom: theme.spacing(5),
@@ -98,15 +99,18 @@ const useStyles = makeStyles((theme: Theme) => ({
         marginBottom: theme.spacing(3.75),
       },
     },
-    [theme.breakpoints.up('md')]: {
-      padding: `${theme.spacing(17.25)} ${theme.spacing(60)}`,
-    },
-    [theme.breakpoints.down('sm')]: {
-      padding: `${theme.spacing(17.25)} ${theme.spacing(22)}`,
-    },
-    [theme.breakpoints.down('xs')]: {
-      padding: `${theme.spacing(11)} ${theme.spacing(3.75)}`,
-    },
+    // [theme.breakpoints.up('sm')]: {
+    //   paddingRight: theme.spacing(13),
+    // },
+    // [theme.breakpoints.up('md')]: {
+    //   padding: `${theme.spacing(17.25)} ${theme.spacing(60)}`,
+    // },
+    // [theme.breakpoints.down('sm')]: {
+    //   padding: `${theme.spacing(17.25)} ${theme.spacing(22)}`,
+    // },
+    // [theme.breakpoints.down('xs')]: {
+    //   padding: `${theme.spacing(11)} ${theme.spacing(3.75)}`,
+    // },
   },
   projectDetails: {
     [theme.breakpoints.up('xl')]: {
@@ -140,6 +144,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   projectActions: {
     [theme.breakpoints.up('sm')]: {
       paddingBottom: theme.spacing(27.5),
+      marginTop: theme.spacing(20),
     },
     [theme.breakpoints.between('md', 'lg')]: {
       paddingRight: theme.spacing(33.375),
@@ -150,6 +155,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     [theme.breakpoints.down('xs')]: {
       paddingBottom: theme.spacing(4),
+      marginTop: theme.spacing(13),
     },
     [theme.breakpoints.up('xl')]: {
       paddingRight: theme.spacing(2.5),
@@ -232,11 +238,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   creditsGauge: {
+    marginBottom: theme.spacing(5),
     [theme.breakpoints.up('sm')]: {
       marginTop: theme.spacing(5),
     },
     [theme.breakpoints.down('xs')]: {
-      marginBottom: theme.spacing(5),
       marginTop: theme.spacing(3.75),
     },
   },
@@ -382,7 +388,7 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
     <div className={classes.root}>
       <div className={`${classes.projectTop} project-top`}>
         <Grid container className={`${classes.projectContent} ${classes.projectTopContent}`}>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={7}>
             {/*<img
               className={classes.projectTopImage}
               alt={project.name}
@@ -390,7 +396,7 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
             />*/}
             <ProjectMedia assets={assets} />
           </Grid>
-          <Grid item xs={12} sm={6} className={classes.projectTopText}>
+          <Grid item xs={12} sm={5} className={classes.projectTopText}>
             <Title variant="h1">{project.name}</Title>
             <div className={classes.projectPlace}>
               <ProjectPlaceInfo place={project.place} area={project.area} areaUnit={project.areaUnit} />
@@ -404,6 +410,21 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
             {project.glanceImgSrc && project.glanceText && (
               <GlanceCard imgSrc={require(`../assets/${project.glanceImgSrc}`)} text={project.glanceText} />
             )}
+          </Grid>
+        </Grid>
+      </div>
+
+      <div className={`${classes.projectDetails} ${classes.projectContent}`}>
+        <Grid container>
+          <Grid item xs={12} sm={7} className={classes.projectStory}>
+            <Title variant="h2">
+              {project.fieldsOverride && project.fieldsOverride.story
+                ? project.fieldsOverride.story.title
+                : projectDefault.story.title}
+            </Title>
+            <ReadMore>{project.longDescription}</ReadMore>
+          </Grid>
+          <Grid item xs={12} sm={5}>
             <div className={classes.projectDeveloper}>
               <ProjectDeveloperCard
                 projectDeveloper={projectDeveloper}
@@ -415,26 +436,9 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
         </Grid>
       </div>
 
-      <div className={classes.projectContent}>
-        <div className={classes.projectStoryText}>
-          <Title variant="h2">
-            {project.fieldsOverride && project.fieldsOverride.story
-              ? project.fieldsOverride.story.title
-              : projectDefault.story.title}
-          </Title>
-          <ReadMore>{project.longDescription}</ReadMore>
-        </div>
-      </div>
-
-      {geojson && isGISFile ? (
-        <Map geojson={geojson} token={process.env.REACT_APP_MAPBOX_TOKEN} />
-      ) : (
-        <img className={classes.map} alt={project.name} src={mapFile} />
-      )}
-
       <Grid container className={`${classes.projectDetails} ${classes.projectContent}`}>
         {monitoredImpact && (
-          <Grid item xs={12} sm={8}>
+          <Grid item xs={12} sm={7}>
             <Title variant="h2">
               {project.fieldsOverride && project.fieldsOverride.monitoredImpact
                 ? project.fieldsOverride.monitoredImpact.title
@@ -449,8 +453,8 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
           </Grid>
         )}
         {protectedSpecies.length > 0 ? (
-          <Grid item xs={12} sm={4} className={classes.protectedSpecies}>
-            <Title variant="h4">
+          <Grid item xs={12} sm={5} className={classes.protectedSpecies}>
+            <Title variant="h2">
               {project.fieldsOverride && project.fieldsOverride.protectedSpecies
                 ? project.fieldsOverride.protectedSpecies.title
                 : projectDefault.protectedSpecies.title}
@@ -458,19 +462,19 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
             <ProtectedSpecies species={protectedSpecies} />
           </Grid>
         ) : (
-          <Grid item xs={12} sm={4} className={classes.protectedSpecies}>
-            <Title variant="h4">
+          <Grid item xs={12} sm={5} className={classes.protectedSpecies}>
+            <Title variant="h2">
               {project.fieldsOverride && project.fieldsOverride.nonMonitoredImpact
                 ? project.fieldsOverride.nonMonitoredImpact.title
                 : projectDefault.nonMonitoredImpact.title}
             </Title>
-            <Description fontSize={getFontSize('project')}>
+            {/*<Description fontSize={getFontSize('project')}>
               {project.fieldsOverride &&
               project.fieldsOverride.nonMonitoredImpact &&
               project.fieldsOverride.nonMonitoredImpact.subtitle
                 ? project.fieldsOverride.nonMonitoredImpact.subtitle
                 : projectDefault.nonMonitoredImpact.subtitle}
-            </Description>
+            </Description>*/}
             <NonMonitoredImpact impact={impact} />
           </Grid>
         )}
@@ -530,7 +534,9 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
         </div>
       )}
 
-      <div className={`${classes.projectDetails} ${classes.projectActions} ${classes.projectContent}`}>
+      <div
+        className={`project-background ${classes.projectDetails} ${classes.projectActions} ${classes.projectContent}`}
+      >
         <Title variant="h2">
           {project.fieldsOverride && project.fieldsOverride.landManagementActions
             ? project.fieldsOverride.landManagementActions.title
@@ -562,8 +568,14 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
         ))}
       </div>
 
+      {geojson && isGISFile ? (
+        <Map geojson={geojson} token={process.env.REACT_APP_MAPBOX_TOKEN} />
+      ) : (
+        <img className={classes.map} alt={project.name} src={mapFile} />
+      )}
+
       {project.timeline && (
-        <div className="project-bottom">
+        <div>
           {/*<div className={classes.projectDetails}>
           <Title variant="h2">Monitoring, Verification, and Reporting</Title>
         </div>*/}

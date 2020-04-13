@@ -12,7 +12,7 @@ export interface NonMonitoredImpactProps {
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     marginLeft: theme.spacing(-5.25),
-    paddingTop: theme.spacing(3),
+    // paddingTop: theme.spacing(3),
   },
   item: {
     paddingLeft: theme.spacing(5),

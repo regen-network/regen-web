@@ -181,8 +181,8 @@ exports[`Storyshots Components|Cards Glance Card 1`] = `
         className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-5"
       >
         <img
-          alt="./map-ss.png"
-          src="./map-ss.png"
+          alt="./impactag-smallmap-top.jpg"
+          src="./impactag-smallmap-top.jpg"
         />
       </div>
     </div>

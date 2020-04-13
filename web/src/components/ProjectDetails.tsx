@@ -99,9 +99,6 @@ const useStyles = makeStyles((theme: Theme) => ({
         marginBottom: theme.spacing(3.75),
       },
     },
-    // [theme.breakpoints.up('sm')]: {
-    //   paddingRight: theme.spacing(13),
-    // },
     // [theme.breakpoints.up('md')]: {
     //   padding: `${theme.spacing(17.25)} ${theme.spacing(60)}`,
     // },
@@ -238,12 +235,12 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   creditsGauge: {
-    marginBottom: theme.spacing(5),
     [theme.breakpoints.up('sm')]: {
       marginTop: theme.spacing(5),
     },
     [theme.breakpoints.down('xs')]: {
       marginTop: theme.spacing(3.75),
+      marginBottom: theme.spacing(5),
     },
   },
   modalContent: {
@@ -289,6 +286,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     cursor: 'pointer',
     fontWeight: 'bold',
     boxShadow: theme.shadows[5],
+  },
+  glanceCard: {
+    marginTop: theme.spacing(5),
   },
 }));
 
@@ -408,7 +408,9 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
               </div>
             )}
             {project.glanceImgSrc && project.glanceText && (
-              <GlanceCard imgSrc={require(`../assets/${project.glanceImgSrc}`)} text={project.glanceText} />
+              <div className={classes.glanceCard}>
+                <GlanceCard imgSrc={require(`../assets/${project.glanceImgSrc}`)} text={project.glanceText} />
+              </div>
             )}
           </Grid>
         </Grid>

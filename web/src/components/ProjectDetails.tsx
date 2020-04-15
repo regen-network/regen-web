@@ -74,7 +74,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingLeft: theme.spacing(7.5),
     },
     [theme.breakpoints.down('xs')]: {
-      padding: `${theme.spacing(4.5)} ${theme.spacing(3.75)}`,
+      padding: `${theme.spacing(4.5)} ${theme.spacing(3.75)} ${theme.spacing(13)}`,
     },
   },
   projectPlace: {
@@ -98,6 +98,9 @@ const useStyles = makeStyles((theme: Theme) => ({
       [theme.breakpoints.down('xs')]: {
         marginBottom: theme.spacing(3.75),
       },
+    },
+    [theme.breakpoints.up('sm')]: {
+      paddingRight: theme.spacing(7.5),
     },
     // [theme.breakpoints.up('md')]: {
     //   padding: `${theme.spacing(17.25)} ${theme.spacing(60)}`,
@@ -202,6 +205,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   protectedSpecies: {
+    [theme.breakpoints.down('xs')]: {
+      paddingTop: theme.spacing(13),
+    },
     [theme.breakpoints.up('sm')]: {
       paddingLeft: theme.spacing(5),
     },
@@ -289,6 +295,17 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   glanceCard: {
     marginTop: theme.spacing(5),
+  },
+  projectMedia: {
+    [theme.breakpoints.up('sm')]: {
+      paddingBottom: theme.spacing(16),
+      paddingRight: theme.spacing(7.5),
+    },
+  },
+  monitoredImpact: {
+    [theme.breakpoints.up('sm')]: {
+      paddingRight: theme.spacing(7.5),
+    },
   },
 }));
 
@@ -388,7 +405,7 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
     <div className={classes.root}>
       <div className={`${classes.projectTop} project-top`}>
         <Grid container className={`${classes.projectContent} ${classes.projectTopContent}`}>
-          <Grid item xs={12} sm={7}>
+          <Grid item xs={12} sm={7} className={classes.projectMedia}>
             {/*<img
               className={classes.projectTopImage}
               alt={project.name}
@@ -440,7 +457,7 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
 
       <Grid container className={`${classes.projectDetails} ${classes.projectContent}`}>
         {monitoredImpact && (
-          <Grid item xs={12} sm={7}>
+          <Grid item xs={12} sm={7} className={classes.monitoredImpact}>
             <Title variant="h2">
               {project.fieldsOverride && project.fieldsOverride.monitoredImpact
                 ? project.fieldsOverride.monitoredImpact.title
@@ -536,38 +553,40 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
         </div>
       )}
 
-      <div
-        className={`project-background ${classes.projectDetails} ${classes.projectActions} ${classes.projectContent}`}
-      >
-        <Title variant="h2">
-          {project.fieldsOverride && project.fieldsOverride.landManagementActions
-            ? project.fieldsOverride.landManagementActions.title
-            : projectDefault.landManagementActions.title}
-        </Title>
-        {landManagementActions.map((actionsType, i) => (
-          <div key={i} className={i > 0 ? classes.projectActionsGroup : ''}>
-            <Description
-              fontSize={
-                landManagementActions.length > 1 ? { xs: '0.95rem', sm: '1.125rem' } : getFontSize('medium')
-              }
-            >
-              {actionsType.title || projectDefault.landManagementActions.subtitle}
-            </Description>
-            <LandManagementActions actions={actionsType.actions} />
+      <div className={`project-background`}>
+        <div
+          className={`${classes.projectTopContent} ${classes.projectDetails} ${classes.projectActions} ${classes.projectContent}`}
+        >
+          <Title variant="h2">
+            {project.fieldsOverride && project.fieldsOverride.landManagementActions
+              ? project.fieldsOverride.landManagementActions.title
+              : projectDefault.landManagementActions.title}
+          </Title>
+          {landManagementActions.map((actionsType, i) => (
+            <div key={i} className={i > 0 ? classes.projectActionsGroup : ''}>
+              <Description
+                fontSize={
+                  landManagementActions.length > 1 ? { xs: '0.95rem', sm: '1.125rem' } : getFontSize('medium')
+                }
+              >
+                {actionsType.title || projectDefault.landManagementActions.subtitle}
+              </Description>
+              <LandManagementActions actions={actionsType.actions} />
 
-            {/*<div className={`${classes.projectGrid} ${classes.projectActionsGrid}`}>
-              {actionsType.actions.map((action, j) => (
-                <Grid item xs={12} sm={4} className={classes.projectGridItem} key={`${j}-${action.name}`}>
-                  <Action
-                    name={action.name}
-                    description={action.description}
-                    imgSrc={require(`../assets/${action.imgSrc}`)}
-                  />
-                </Grid>
-              ))
-            </div>*/}
-          </div>
-        ))}
+              {/*<div className={`${classes.projectGrid} ${classes.projectActionsGrid}`}>
+                {actionsType.actions.map((action, j) => (
+                  <Grid item xs={12} sm={4} className={classes.projectGridItem} key={`${j}-${action.name}`}>
+                    <Action
+                      name={action.name}
+                      description={action.description}
+                      imgSrc={require(`../assets/${action.imgSrc}`)}
+                    />
+                  </Grid>
+                ))
+              </div>*/}
+            </div>
+          ))}
+        </div>
       </div>
 
       {geojson && isGISFile ? (

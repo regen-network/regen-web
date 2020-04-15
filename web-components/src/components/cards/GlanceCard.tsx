@@ -14,15 +14,23 @@ interface GlanceCardProps {
 const useStyles = makeStyles((theme: Theme) => ({
   title: {
     textTransform: 'uppercase',
-    marginTop: theme.spacing(5.25),
+    [theme.breakpoints.up('sm')]: {
+      marginTop: theme.spacing(5.25),
+    },
+    [theme.breakpoints.down('xs')]: {
+      marginTop: theme.spacing(2),
+      fontSize: theme.spacing(2.75),
+    },
     marginBottom: theme.spacing(2.75),
   },
   container: {
-    paddingTop: theme.spacing(3.75),
-    paddingBottom: theme.spacing(4.25),
-    paddingRight: theme.spacing(3.75),
-    paddingLeft: theme.spacing(5),
-    flexWrap: 'nowrap',
+    paddingTop: theme.spacing(4.5),
+    paddingBottom: theme.spacing(4.5),
+    paddingRight: theme.spacing(4.5),
+    paddingLeft: theme.spacing(4.5),
+    [theme.breakpoints.up('sm')]: {
+      flexWrap: 'nowrap',
+    },
   },
   texts: {
     color: theme.palette.info.dark,
@@ -45,6 +53,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   textContainer: {
     paddingRight: theme.spacing(5),
+    [theme.breakpoints.down('xs')]: {
+      paddingBottom: theme.spacing(4.5),
+    },
   },
 }));
 
@@ -54,7 +65,7 @@ export default function GlanceCard({ title = 'At a glance', text, imgSrc }: Glan
   return (
     <Card>
       <Grid className={classes.container} container>
-        <Grid xs={7} item className={classes.textContainer}>
+        <Grid xs={12} sm={7} item className={classes.textContainer}>
           <Title variant="body2" className={classes.title}>
             {title}
           </Title>
@@ -66,7 +77,7 @@ export default function GlanceCard({ title = 'At a glance', text, imgSrc }: Glan
             ))}
           </ul>
         </Grid>
-        <Grid xs={5} item>
+        <Grid xs={12} sm={5} item>
           <img src={imgSrc} alt={imgSrc} />
         </Grid>
       </Grid>

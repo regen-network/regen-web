@@ -12,7 +12,8 @@ interface ProjectDeveloperCardProps {
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
-    margin: `${theme.spacing(7)} ${theme.spacing(6.5)}`,
+    padding: `${theme.spacing(7)} ${theme.spacing(6.5)}`,
+    backgroundColor: '#FAFAFA',
   },
   separator: {
     border: `1px solid ${theme.palette.grey[50]}`,

@@ -1,9 +1,9 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
-import { useTheme } from '@material-ui/core/styles';
+// import { useTheme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Card from './Card';
-import VerifiedIcon from '../icons/VerifiedIcon';
+// import VerifiedIcon from '../icons/VerifiedIcon';
 
 export interface ImpactCardProps {
   name: string;
@@ -114,7 +114,7 @@ export default function ImpactCard({
   monitored = false,
 }: ImpactCardProps): JSX.Element {
   const classes = useStyles({ imgSrc, monitored });
-  const theme = useTheme();
+  // const theme = useTheme();
   return (
     <Card>
       <div className={classes.background}>
@@ -122,14 +122,14 @@ export default function ImpactCard({
         <div className={classes.text}>
           <Typography className={classes.name}>{name}</Typography>
           <Typography className={classes.description}>{description}</Typography>
-          {monitored && (
+          {/*monitored && (
             <span className={classes.monitored}>
               <span className={classes.monitoredIcon}>
                 <VerifiedIcon color={theme.palette.secondary.main} />
               </span>
               verified and tracked on the regen ledger
             </span>
-          )}
+          )*/}
         </div>
       </div>
     </Card>

@@ -15,7 +15,6 @@ const ISSUE_CREDITS = gql`
     issueCredits(input: $input) {
       creditVintage {
         id
-        issuerId
         projectId
         units
       }
@@ -70,7 +69,6 @@ export default function CreditsIssue(): JSX.Element {
   });
 
   const [projectId, setProjectId] = useState('');
-  const issuerPartyId: string = '6ffb7c4e-797d-11ea-8513-a0999b1d07df'; // XXX hardcoded for testing purposes
   const [units, setUnits] = useState(10);
   const [projectDeveloper, setProjectDeveloper] = useState(60);
   const [landSteward, setLandSteward] = useState(0);
@@ -95,7 +93,6 @@ export default function CreditsIssue(): JSX.Element {
               variables: {
                 input: {
                   projectId,
-                  issuerPartyId,
                   units,
                   initialDistribution: {
                     projectDeveloper: projectDeveloper / 100,

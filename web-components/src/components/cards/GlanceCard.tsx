@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     paddingBottom: theme.spacing(4.5),
     paddingRight: theme.spacing(4.5),
     paddingLeft: theme.spacing(4.5),
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up('md')]: {
       flexWrap: 'nowrap',
     },
   },
@@ -53,8 +53,16 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   textContainer: {
     paddingRight: theme.spacing(5),
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('md')]: {
       paddingBottom: theme.spacing(4.5),
+    },
+  },
+  image: {
+    border: `1px solid ${theme.palette.info.light}`,
+    borderRadius: '5px',
+    objectFit: 'cover',
+    [theme.breakpoints.up('md')]: {
+      height: '100%',
     },
   },
 }));
@@ -65,7 +73,7 @@ export default function GlanceCard({ title = 'At a glance', text, imgSrc }: Glan
   return (
     <Card>
       <Grid className={classes.container} container>
-        <Grid xs={12} sm={7} item className={classes.textContainer}>
+        <Grid xs={12} md={7} item className={classes.textContainer}>
           <Title variant="body2" className={classes.title}>
             {title}
           </Title>
@@ -77,8 +85,8 @@ export default function GlanceCard({ title = 'At a glance', text, imgSrc }: Glan
             ))}
           </ul>
         </Grid>
-        <Grid xs={12} sm={5} item>
-          <img src={imgSrc} alt={imgSrc} />
+        <Grid xs={12} md={5} item>
+          <img className={classes.image} src={imgSrc} alt={imgSrc} />
         </Grid>
       </Grid>
     </Card>

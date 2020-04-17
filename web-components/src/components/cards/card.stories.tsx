@@ -130,7 +130,7 @@ export const mapCard = (): JSX.Element => (
 
 export const glanceCard = (): JSX.Element => (
   <GlanceCard
-    imgSrc="./impactag-smallmap-top.jpg"
+    imgSrc="./impactag-smallmap-top-v2.jpg"
     text={array('text', [
       'Shifting to Managed Grazing can potentially sequester 16.4- 26 CO2e (Gt) by 2050.',
       'Wilmot Cattle Co has increased Soil Organic Carbon to 4.5% and removed 33,000 tons of CO2e in two years.',

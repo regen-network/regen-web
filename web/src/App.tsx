@@ -33,6 +33,8 @@ function ScrollToTop(): null {
 }
 
 function Home(): JSX.Element {
+  const { user } = useAuth0();
+
   return (
     <div style={{ paddingLeft: '1rem' }}>
       <p>
@@ -41,6 +43,13 @@ function Home(): JSX.Element {
       <p>
         <Link to="/credits/userId">Credits page</Link>
       </p>
+      {user &&
+        user['https://regen-registry.com/roles'] &&
+        user['https://regen-registry.com/roles'].indexOf('admin') > -1 && (
+          <p>
+            <Link to="/admin/credits/issue">Issue credits</Link>
+          </p>
+        )}
     </div>
   );
 }

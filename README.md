@@ -108,3 +108,16 @@ the commit template for this
 ```git config user.email username@regen.network
 git config commit.template .gitcommit
 ```
+
+### Timeout Issue on Slower Connections
+_some larger packages don't manage to get downloaded in time for yarn's 30 second timeout, you might see an error like this one_
+```
+info There appears to be trouble with your network connection. Retrying...
+error An unexpected error occurred: "https://registry.yarnpkg.com/@material-ui/icons/-/icons-4.5.1.tgz: ESOCKETTIMEDOUT".
+info If you think this is a bug, please open a bug report with the information provided in "/Users/jared/Dev/registry/yarn-error.log".
+```
+a simple workaround via https://github.com/mui-org/material-ui/issues/12432 is to run
+```
+yarn install --network-timeout 500000
+```
+instead of `yarn install`

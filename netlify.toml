@@ -1,5 +1,11 @@
 [context.deploy-preview.environment]
   REACT_APP_API_URI = "https://regen-registry-server-staging.herokuapp.com/"
+  REACT_APP_URI= "https://regen-registry.netlify.com/"
 
 [context.dev.environment]
   REACT_APP_API_URI = "https://regen-registry-server-staging.herokuapp.com/"
+  REACT_APP_URI= "https://regen-registry.netlify.com/"
+
+[context.171544945-issue-credits.environment]
+  REACT_APP_API_URI = "https://regen-registry-server-staging.herokuapp.com/"
+  REACT_APP_URI= "https://regen-registry.netlify.com/"

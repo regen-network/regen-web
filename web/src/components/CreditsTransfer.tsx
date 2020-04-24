@@ -50,26 +50,26 @@ const ALL_CREDIT_VINTAGES = gql`
 `;
 
 const ALL_PARTIES = gql`
-{
-  allParties {
-    nodes {
-      id
-      type
-      usersByPartyId {
-        nodes {
-          name
-          walletId
+  {
+    allParties {
+      nodes {
+        id
+        type
+        usersByPartyId {
+          nodes {
+            name
+            walletId
+          }
         }
-      }
-      organizationsByPartyId {
-        nodes {
-          name
-          walletId
+        organizationsByPartyId {
+          nodes {
+            name
+            walletId
+          }
         }
       }
     }
   }
-}
 `;
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -95,10 +95,15 @@ const useStyles = makeStyles((theme: Theme) => ({
 export default function CreditsTransfer(): JSX.Element {
   const classes = useStyles();
 
-  const [transferCredits, { data, loading, error }] = useMutation(TRANSFER_CREDITS, { errorPolicy: 'ignore' });
-  const { data: vintagesData, loading: vintagesLoading, error: vintagesError } = useQuery(ALL_CREDIT_VINTAGES, {
+  const [transferCredits, { data, loading, error }] = useMutation(TRANSFER_CREDITS, {
     errorPolicy: 'ignore',
   });
+  const { data: vintagesData, loading: vintagesLoading, error: vintagesError } = useQuery(
+    ALL_CREDIT_VINTAGES,
+    {
+      errorPolicy: 'ignore',
+    },
+  );
   const { data: partiesData, loading: partiesLoading, error: partiesError } = useQuery(ALL_PARTIES, {
     errorPolicy: 'ignore',
   });
@@ -115,7 +120,6 @@ export default function CreditsTransfer(): JSX.Element {
   };
 
   const handleBuyerWalletChange = (event: React.ChangeEvent<{ value: unknown }>): void => {
-    console.log(event.target.value)
     setBuyerWalletId(event.target.value as string);
   };
 
@@ -148,7 +152,9 @@ export default function CreditsTransfer(): JSX.Element {
         autoComplete="off"
       >
         <FormControl className={classes.formControl}>
-          <InputLabel required id="credit-vintage-select-label">Credit Vintage</InputLabel>
+          <InputLabel required id="credit-vintage-select-label">
+            Credit Vintage
+          </InputLabel>
           <Select
             required
             labelId="credit-vintage-select-label"
@@ -166,7 +172,9 @@ export default function CreditsTransfer(): JSX.Element {
           </Select>
         </FormControl>
         <FormControl className={classes.formControl}>
-          <InputLabel required id="buyer-wallet-select-label">Buyer</InputLabel>
+          <InputLabel required id="buyer-wallet-select-label">
+            Buyer
+          </InputLabel>
           <Select
             required
             labelId="buyer-wallet-select-label"
@@ -176,14 +184,20 @@ export default function CreditsTransfer(): JSX.Element {
           >
             {partiesData &&
               partiesData.allParties &&
-              partiesData.allParties.nodes.map((node: any) => (
-                ((node.type === 'USER' && node.usersByPartyId.nodes[0].walletId) ||
-                (node.type === 'ORGANIZATION' && node.organizationsByPartyId.nodes[0].walletId))
-                 && (node.type === 'USER' ? <MenuItem key={node.id} value={node.usersByPartyId.nodes[0].walletId}>
-                   {node.usersByPartyId.nodes[0].name} ({node.type.toLowerCase()}) </MenuItem> :
-                   <MenuItem key={node.id} value={node.organizationsByPartyId.nodes[0].walletId}>
-                     {node.organizationsByPartyId.nodes[0].name} ({node.type.toLowerCase()}) </MenuItem>)
-              ))}
+              partiesData.allParties.nodes.map(
+                (node: any) =>
+                  ((node.type === 'USER' && node.usersByPartyId.nodes[0].walletId) ||
+                    (node.type === 'ORGANIZATION' && node.organizationsByPartyId.nodes[0].walletId)) &&
+                  (node.type === 'USER' ? (
+                    <MenuItem key={node.id} value={node.usersByPartyId.nodes[0].walletId}>
+                      {node.usersByPartyId.nodes[0].name} ({node.type.toLowerCase()}){' '}
+                    </MenuItem>
+                  ) : (
+                    <MenuItem key={node.id} value={node.organizationsByPartyId.nodes[0].walletId}>
+                      {node.organizationsByPartyId.nodes[0].name} ({node.type.toLowerCase()}){' '}
+                    </MenuItem>
+                  )),
+              )}
           </Select>
         </FormControl>
         <TextField

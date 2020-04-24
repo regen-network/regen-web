@@ -49,8 +49,12 @@ function Home(): JSX.Element {
         user['https://regen-registry.com/roles'].indexOf('admin') > -1 && (
           <div>
             Admin:
-            <p><Link to="/admin/credits/issue">Issue credits</Link></p>
-            <p><Link to="/admin/credits/transfer">Transfer credits</Link></p>
+            <p>
+              <Link to="/admin/credits/issue">Issue credits</Link>
+            </p>
+            <p>
+              <Link to="/admin/credits/transfer">Transfer credits</Link>
+            </p>
           </div>
         )}
     </div>

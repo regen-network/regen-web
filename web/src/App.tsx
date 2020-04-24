@@ -20,6 +20,7 @@ import ProjectDetails from './components/ProjectDetails';
 import ProjectList from './components/ProjectList';
 import UserCredits from './components/UserCredits';
 import CreditsIssue from './components/CreditsIssue';
+import CreditsTransfer from './components/CreditsTransfer';
 import history from './lib/history';
 
 function ScrollToTop(): null {
@@ -46,9 +47,11 @@ function Home(): JSX.Element {
       {user &&
         user['https://regen-registry.com/roles'] &&
         user['https://regen-registry.com/roles'].indexOf('admin') > -1 && (
-          <p>
-            <Link to="/admin/credits/issue">Issue credits</Link>
-          </p>
+          <div>
+            Admin:
+            <p><Link to="/admin/credits/issue">Issue credits</Link></p>
+            <p><Link to="/admin/credits/transfer">Transfer credits</Link></p>
+          </div>
         )}
     </div>
   );
@@ -129,6 +132,7 @@ const App: React.FC = (): JSX.Element => {
               <>
                 <Route path={`${path}`} component={Admin} exact />
                 <Route path={`${path}/credits/issue`} component={CreditsIssue} />
+                <Route path={`${path}/credits/transfer`} component={CreditsTransfer} />
               </>
             )}
           />

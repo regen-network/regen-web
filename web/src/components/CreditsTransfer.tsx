@@ -113,8 +113,8 @@ export default function CreditsTransfer(): JSX.Element {
 
   const [vintageId, setVintageId] = useState('');
   const [buyerWalletId, setBuyerWalletId] = useState('');
-  const [units, setUnits] = useState(0);
-  const [creditPrice, setCreditPrice] = useState(0);
+  const [units, setUnits] = useState(1);
+  const [creditPrice, setCreditPrice] = useState(1);
 
   const handleVintageChange = (event: React.ChangeEvent<{ value: unknown }>): void => {
     setVintageId(event.target.value as string);
@@ -206,7 +206,7 @@ export default function CreditsTransfer(): JSX.Element {
           required
           type="number"
           value={units}
-          onChange={e => setUnits(parseInt(e.target.value))}
+          onChange={e => setUnits(Math.max(0.01, parseInt(e.target.value)))}
           label="Units"
         />
         <TextField
@@ -214,7 +214,7 @@ export default function CreditsTransfer(): JSX.Element {
           required
           type="number"
           value={creditPrice}
-          onChange={e => setCreditPrice(parseInt(e.target.value))}
+          onChange={e => setCreditPrice(Math.max(0.01, parseInt(e.target.value)))}
           label="Credit price"
         />
         <Button className={classes.button} variant="contained" type="submit">

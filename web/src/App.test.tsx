@@ -11,10 +11,11 @@ const user = {
   sub: 'google-oauth2|2147627834623744883746',
 };
 jest.mock('./react-auth0-spa');
+const mockedAuth0 = useAuth0 as jest.Mock;
 
 describe('App - logged in', () => {
   // Mock the Auth0 hook and make it return a logged in state
-  useAuth0.mockReturnValue({
+  mockedAuth0.mockReturnValue({
     isAuthenticated: true,
     user,
     logout: jest.fn(),
@@ -29,7 +30,7 @@ describe('App - logged in', () => {
 });
 
 describe('App - not logged in', () => {
-  useAuth0.mockReturnValue({
+  mockedAuth0.mockReturnValue({
     isAuthenticated: false,
     logout: jest.fn(),
     loginWithRedirect: jest.fn(),

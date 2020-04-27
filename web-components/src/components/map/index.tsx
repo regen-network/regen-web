@@ -12,7 +12,7 @@ import ReactMapGL, {
   NavigationControl,
   WebMercatorViewport,
 } from 'react-map-gl';
-
+import 'mapbox-gl/dist/mapbox-gl.css';
 import PinIcon from '../icons/PinIcon';
 import PointerIcon from '../icons/PointerIcon';
 import MapCard from '../cards/MapCard';
@@ -34,10 +34,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: '100%',
     position: 'relative',
     [theme.breakpoints.up('sm')]: {
-      height: theme.spacing(195),
+      height: theme.spacing(150),
     },
     [theme.breakpoints.down('xs')]: {
-      height: theme.spacing(126),
+      height: theme.spacing(121),
     },
     '& .mapboxgl-marker svg': {
       cursor: 'pointer',
@@ -157,7 +157,7 @@ export default function Map({ geojson, token }: MapProps): JSX.Element {
       {
         padding:
           matches || (!matches && interactiveLayerIds.length === 0)
-            ? 10
+            ? 0
             : { top: 10, bottom: 300, left: 10, right: 10 },
       },
     );
@@ -277,7 +277,7 @@ export default function Map({ geojson, token }: MapProps): JSX.Element {
                   feature.properties.boundary &&
                   viewPort.zoom < boundary.zoom - 1 && (
                     <Marker latitude={boundary.latitude} longitude={boundary.longitude}>
-                      <PinIcon fontSize="large" />
+                      <PinIcon fontSize="large" size={35} />
                     </Marker>
                   )}
                 {feature.geometry.type === 'Point' && (matches || (!matches && feature.id === shownLayer)) && (
@@ -285,7 +285,11 @@ export default function Map({ geojson, token }: MapProps): JSX.Element {
                     latitude={feature.geometry.coordinates[1]}
                     longitude={feature.geometry.coordinates[0]}
                   >
-                    <PinIcon fontSize="large" onClick={() => onMarkerClick(feature, index.toString())} />
+                    <PinIcon
+                      fontSize="large"
+                      size={35}
+                      onClick={() => onMarkerClick(feature, index.toString())}
+                    />
                   </Marker>
                 )}
               </div>

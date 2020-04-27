@@ -360,6 +360,11 @@ exports[`Storyshots Components|Cards Project Card 1`] = `
               className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
               focusable="false"
               role="presentation"
+              style={
+                Object {
+                  "transform": "none",
+                }
+              }
               viewBox="0 0 13 16"
             >
               <path
@@ -1586,6 +1591,11 @@ exports[`Storyshots Components|Icons Pin Icon 1`] = `
     className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
     focusable="false"
     role="presentation"
+    style={
+      Object {
+        "transform": "none",
+      }
+    }
     viewBox="0 0 13 16"
   >
     <path
@@ -3012,6 +3022,11 @@ exports[`Storyshots Components|Place Project Place Info 1`] = `
         className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
         focusable="false"
         role="presentation"
+        style={
+          Object {
+            "transform": "none",
+          }
+        }
         viewBox="0 0 13 16"
       >
         <path

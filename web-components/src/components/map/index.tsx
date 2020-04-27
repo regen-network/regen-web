@@ -17,6 +17,8 @@ import PinIcon from '../icons/PinIcon';
 import PointerIcon from '../icons/PointerIcon';
 import MapCard from '../cards/MapCard';
 import MapCards from '../sliders/MapCards';
+import OutlinedButton from '../buttons/OutlinedButton';
+import ZoomIcon from '../icons/ZoomIcon';
 
 interface GeoJson {
   features: any[];
@@ -103,6 +105,20 @@ const useStyles = makeStyles((theme: Theme) => ({
     bottom: '-31px',
     left: 'calc(50% - 17.5px)',
   },
+  zoomButton: {
+    position: 'absolute',
+    [theme.breakpoints.up('sm')]: {
+      top: theme.spacing(5),
+      right: theme.spacing(5),
+    },
+    [theme.breakpoints.down('xs')]: {
+      top: theme.spacing(3.75),
+      right: theme.spacing(3.75),
+    },
+    '& .MuiButton-startIcon': {
+      marginRight: '5px',
+    },
+  },
 }));
 
 interface PopupInfo {
@@ -118,6 +134,7 @@ export default function Map({ geojson, token }: MapProps): JSX.Element {
   const filteredFeatures: any[] = geojson.features.filter(feature => !feature.properties.boundary);
 
   const [viewPort, setViewPort] = useState({ zoom: 11, latitude: 0.0, longitude: 0.0 });
+  const [boundary, setBoundary] = useState({ zoom: 11, latitude: 0.0, longitude: 0.0 });
   const [popupInfo, setPopupInfo] = useState<PopupInfo | null>(null);
   const [shownLayer, setShownLayer] = useState<string | null>(
     filteredFeatures.length ? filteredFeatures[0].id : null,
@@ -144,7 +161,8 @@ export default function Map({ geojson, token }: MapProps): JSX.Element {
             : { top: 10, bottom: 300, left: 10, right: 10 },
       },
     );
-    setViewPort({ longitude, latitude, zoom });
+    setViewPort({ longitude, latitude, zoom: 4 });
+    setBoundary({ longitude, latitude, zoom });
   };
 
   const onMapClick = (e: any): void => {
@@ -240,19 +258,28 @@ export default function Map({ geojson, token }: MapProps): JSX.Element {
                       />
                     </Source>
                   )}
-                {feature.geometry.type === 'Polygon' && feature.properties.boundary && (
-                  <Source type="geojson" data={feature}>
-                    <Layer
-                      id={feature.id || index.toString()}
-                      type="line"
-                      paint={{
-                        'line-color': theme.palette.primary.main,
-                        'line-width': 2,
-                        'line-dasharray': [2, 1.5],
-                      }}
-                    />
-                  </Source>
-                )}
+                {feature.geometry.type === 'Polygon' &&
+                  feature.properties.boundary &&
+                  viewPort.zoom >= boundary.zoom - 1 && (
+                    <Source type="geojson" data={feature}>
+                      <Layer
+                        id={feature.id || index.toString()}
+                        type="line"
+                        paint={{
+                          'line-color': theme.palette.primary.main,
+                          'line-width': 2,
+                          'line-dasharray': [2, 1.5],
+                        }}
+                      />
+                    </Source>
+                  )}
+                {feature.geometry.type === 'Polygon' &&
+                  feature.properties.boundary &&
+                  viewPort.zoom < boundary.zoom - 1 && (
+                    <Marker latitude={boundary.latitude} longitude={boundary.longitude}>
+                      <PinIcon fontSize="large" />
+                    </Marker>
+                  )}
                 {feature.geometry.type === 'Point' && (matches || (!matches && feature.id === shownLayer)) && (
                   <Marker
                     latitude={feature.geometry.coordinates[1]}
@@ -269,6 +296,16 @@ export default function Map({ geojson, token }: MapProps): JSX.Element {
           <NavigationControl showCompass={false} />
         </div>
       </ReactMapGL>
+      <div className={classes.zoomButton}>
+        <OutlinedButton
+          onClick={() =>
+            setViewPort({ longitude: boundary.longitude, latitude: boundary.latitude, zoom: boundary.zoom })
+          }
+          startIcon={<ZoomIcon />}
+        >
+          zoom to farm
+        </OutlinedButton>
+      </div>
       {!matches && renderSlider()}
     </div>
   );

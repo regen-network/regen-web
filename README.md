@@ -27,6 +27,10 @@ Prepare some artifacts needed to run in dev mode:
 yarn build
 ```
 
+## Environment variables
+
+Set variables in `.env` files in `web/` and `web-storybook/` folders based on provided `.env.example` files.
+
 ## Development
 
 First, run:

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import Title from 'web-components/lib/components/title';
+import { pluralize } from 'web-components/lib/components/credits/pluralize';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
 import TextField from '@material-ui/core/TextField';
@@ -119,7 +120,7 @@ export default function CreditsTransfer(): JSX.Element {
     setVintageId(event.target.value as string);
   };
 
-  const handleBuyerWalletChange = (event: React.ChangeEvent<{ value: unknown }>): void => {
+  const handleBuyerWalletChange = (event: React.ChangeEvent<{ value: any }>): void => {
     setBuyerWalletId(event.target.value as string);
   };
 
@@ -221,7 +222,15 @@ export default function CreditsTransfer(): JSX.Element {
         </Button>
       </form>
       {loading && <div>Loading...</div>}
-      {data && <code>{JSON.stringify(data, null, 1)}</code>}
+      {data && (
+        <div>
+          <p>
+            {units} {pluralize(units, 'credit')} successfully transfered.
+          </p>
+          <p>Total amount of tradable credits: {data.transferCredits.accountBalance.liquidBalance}.</p>
+          <pre>{JSON.stringify(data, null, 2)}</pre>
+        </div>
+      )}
       {error && (
         <div>
           Error:

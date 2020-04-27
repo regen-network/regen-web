@@ -1,4 +1,4 @@
-# Regen Registry
+# Regen Website
 
 The website for the [Regen Network](https://regen.network) decentralized infrastructure.
 

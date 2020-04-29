@@ -6,7 +6,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 const Science = (): JSX.Element => {
   const classes = useStyles();
-  return <div>Science</div>;
+  return <div className={classes.root}>Science</div>;
 };
 
 export default Science;

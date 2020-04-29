@@ -6,7 +6,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 const Home = (): JSX.Element => {
   const classes = useStyles();
-  return <div>Home</div>;
+  return <div className={classes.root}>Home</div>;
 };
 
 export default Home;

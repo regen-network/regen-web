@@ -6,7 +6,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 const LandStewards = (): JSX.Element => {
   const classes = useStyles();
-  return <div>Land Stewards</div>;
+  return <div className={classes.root}>Land Stewards</div>;
 };
 
 export default LandStewards;

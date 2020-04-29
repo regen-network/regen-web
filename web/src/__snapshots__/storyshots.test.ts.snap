@@ -2459,7 +2459,7 @@ exports[`Storyshots Components|Map Map 1`] = `
               />
             </svg>
           </span>
-          zoom to farm
+          zoom to project area
         </span>
         <span
           className="MuiTouchRipple-root"

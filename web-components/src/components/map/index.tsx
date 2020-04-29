@@ -307,7 +307,7 @@ export default function Map({ geojson, token }: MapProps): JSX.Element {
           }
           startIcon={<ZoomIcon />}
         >
-          zoom to farm
+          zoom to project area
         </OutlinedButton>
       </div>
       {!matches && renderSlider()}

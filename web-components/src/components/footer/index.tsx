@@ -1,10 +1,5 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import UserInfoWithTitle from '../user/UserInfoWithTitle';
-import { User } from '../user/UserInfo';
-import RegenLogoIcon from '../icons/RegenLogoIcon';
 
 interface FooterProps {}
 

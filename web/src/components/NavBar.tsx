@@ -1,25 +1,14 @@
 import React from 'react';
-import { useAuth0 } from '../react-auth0-spa';
-import Button from '@material-ui/core/Button';
+import { makeStyles, Theme } from '@material-ui/core/styles';
 
+const useStyles = makeStyles((theme: Theme) => ({
+  root: {
+    color: 'rgba(229, 9, 9, 0.87)',
+  },
+}));
 const NavBar = (): JSX.Element => {
-  const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
-
-  return (
-    <div>
-      {!isAuthenticated && (
-        <Button variant="outlined" onClick={() => loginWithRedirect({})}>
-          Log in
-        </Button>
-      )}
-
-      {isAuthenticated && (
-        <Button variant="outlined" onClick={() => logout()}>
-          Log out
-        </Button>
-      )}
-    </div>
-  );
+  const classes = useStyles();
+  return <div>Navbar</div>;
 };
 
 export default NavBar;

@@ -12,7 +12,7 @@ export const AuthApolloProvider = ({ children }: AuthApolloProviderProps): any =
   const { loading, getTokenSilently } = useAuth0();
 
   if (loading) {
-    return <div></div>;
+    return <div>Loading...</div>;
   }
   const apiUri = process.env.REACT_APP_API_URI || 'http://localhost:5000';
   const client = new ApolloClient({

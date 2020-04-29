@@ -12,7 +12,7 @@ import Buyers from './pages/Buyers';
 import LandStewards from './pages/LandStewards';
 import Developers from './pages/Developers';
 import Science from './pages/Science';
-import logo from './assets/logo.png';
+let logo = './assets/logo.svg';
 
 // import { ApolloProvider } from '@apollo/react-hooks';
 // import ApolloClient from 'apollo-boost';

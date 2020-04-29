@@ -16,6 +16,7 @@ import {
 } from './mocks';
 import Footer from 'web-components/lib/components/footer';
 import Header from 'web-components/lib/components/header';
+import Title from 'web-components/lib/components/title';
 import ProjectDetails from './components/ProjectDetails';
 import ProjectList from './components/ProjectList';
 import UserCredits from './components/UserCredits';
@@ -84,16 +85,25 @@ function Projects(): JSX.Element {
   return <ProjectList projects={projects} />;
 }
 
-function Admin(): JSX.Element {
-  // TODO Add authentication with auth0
+function VerifyEmail(): JSX.Element {
+  const search = new URLSearchParams(window.location.search);
   return (
-    <div style={{ paddingLeft: '1rem' }}>
-      <p>
-        <Link to="/admin/credits/issue">Issue Credits</Link>
-      </p>
+    <div style={{ padding: '1rem' }}>
+      <Title variant="h2">Please confirm your email address</Title>
+      We’ve just sent a confirmation email to: {search.get('email')}
     </div>
   );
 }
+
+// function Admin(): JSX.Element {
+//   return (
+//     <div style={{ paddingLeft: '1rem' }}>
+//       <p>
+//         <Link to="/admin/credits/issue">Issue Credits</Link>
+//       </p>
+//     </div>
+//   );
+// }
 
 const App: React.FC = (): JSX.Element => {
   const { loading } = useAuth0();
@@ -112,6 +122,9 @@ const App: React.FC = (): JSX.Element => {
         <Switch>
           <Route exact path="/">
             <Home />
+          </Route>
+          <Route exact path="/verify-email">
+            <VerifyEmail />
           </Route>
           <Route
             path="/projects"
@@ -134,7 +147,6 @@ const App: React.FC = (): JSX.Element => {
             path="/admin"
             render={({ match: { path } }) => (
               <>
-                <Route path={`${path}`} component={Admin} exact />
                 <Route path={`${path}/credits/issue`} component={CreditsIssue} />
                 <Route path={`${path}/credits/transfer`} component={CreditsTransfer} />
               </>

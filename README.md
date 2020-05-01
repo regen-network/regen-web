@@ -1,6 +1,6 @@
-# Regen Registry
+# Regen Website
 
-The frontend registry app for the [Regen Network](https://www.regen.network) decentralized infrastructure.
+The website for the [Regen Network](https://regen.network) decentralized infrastructure.
 
 ## Table of Contents
 - [Installation](#installation)

@@ -1,14 +1,14 @@
 {
-  "name": "regen-app",
+  "name": "regen-web",
   "private": true,
-  "description": "Regen App frontend packages",
-  "homepage": "https://github.com/regen-network/regen-app",
+  "description": "Regen Website",
+  "homepage": "https://github.com/regen-network/regen-web",
   "bugs": {
-    "url": "https://github.com/regen-network/regen-app/issues"
+    "url": "https://github.com/regen-network/regen-web/issues"
   },
    "repository": {
     "type": "git",
-    "url": "https://github.com/regen-network/regen-app"
+    "url": "https://github.com/regen-network/regen-wb"
   },
   "dependencies": {
     "serve": "^11.2.0"

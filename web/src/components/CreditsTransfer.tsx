@@ -135,19 +135,22 @@ export default function CreditsTransfer(): JSX.Element {
         className={classes.form}
         onSubmit={async e => {
           e.preventDefault();
-          try {
-            await transferCredits({
-              variables: {
-                input: {
-                  vintageId,
-                  buyerWalletId,
-                  units,
-                  creditPrice,
-                  txState: 'SUCCEEDED',
+          const confirmAlert = window.confirm('Are you sure you want to transfer credits?');
+          if (confirmAlert) {
+            try {
+              await transferCredits({
+                variables: {
+                  input: {
+                    vintageId,
+                    buyerWalletId,
+                    units,
+                    creditPrice,
+                    txState: 'SUCCEEDED',
+                  },
                 },
-              },
-            });
-          } catch (e) {}
+              });
+            } catch (e) {}
+          }
         }}
         noValidate
         autoComplete="off"

@@ -19,6 +19,7 @@
     "react-scripts": "3.3.0",
     "react-slick": "^0.25.2",
     "slick-carousel": "^1.8.1",
+    "url-search-params-polyfill": "^8.1.0",
     "web-components": "0.0.0"
   },
   "scripts": {

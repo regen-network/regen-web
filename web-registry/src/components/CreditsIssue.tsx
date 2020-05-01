@@ -168,7 +168,7 @@ export default function CreditsIssue(): JSX.Element {
         </Button>
       </form>
       {loading && <div>Loading...</div>}
-      {data && <code>{JSON.stringify(data, null, 1)}</code>}
+      {data && <pre>{JSON.stringify(data, null, 2)}</pre>}
       {error && (
         <div>
           Error:

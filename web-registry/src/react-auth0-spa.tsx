@@ -17,7 +17,7 @@ interface Auth0Context {
 }
 interface Auth0ProviderOptions {
   children: React.ReactElement;
-  onRedirectCallback?(result: RedirectLoginResult): void;
+  onRedirectCallback?(result: RedirectLoginResult, verifyEmail?: string): void;
 }
 
 const DEFAULT_REDIRECT_CALLBACK = (): void =>
@@ -40,36 +40,54 @@ export const Auth0Provider = ({
 
   useEffect(() => {
     const initAuth0 = async (): Promise<void> => {
-      const auth0FromHook = await createAuth0Client(initOptions);
-      setAuth0(auth0FromHook);
+      try {
+        const auth0FromHook = await createAuth0Client(initOptions);
+        setAuth0(auth0FromHook);
 
-      if (window.location.search.includes('code=')) {
-        const { appState } = await auth0FromHook.handleRedirectCallback();
-        onRedirectCallback(appState);
-      }
-
-      const isAuthenticated = await auth0FromHook.isAuthenticated();
-      setIsAuthenticated(isAuthenticated);
-      if (isAuthenticated) {
-        const user = await auth0FromHook.getUser();
-        const token = await auth0FromHook.getTokenSilently();
-        if (user) {
-          const apiUri = process.env.REACT_APP_API_URI || 'http://localhost:5000';
-          try {
-            await fetch(`${apiUri}/api/login`, {
-              headers: {
-                Authorization: `Bearer ${token}`,
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify(user),
-              method: 'POST',
-            });
-            setUser(user);
-          } catch (e) {}
+        if (
+          window.location.search.includes('error=unauthorized') &&
+          window.location.search.includes('error_description=email_not_verified')
+        ) {
+          const search = new URLSearchParams(window.location.search);
+          const errorDescription: string | null = search.get('error_description');
+          if (errorDescription) {
+            onRedirectCallback({}, errorDescription.split(':')[1]);
+          }
         }
-      }
 
-      setLoading(false);
+        if (window.location.search.includes('code=')) {
+          const { appState } = await auth0FromHook.handleRedirectCallback();
+          onRedirectCallback(appState);
+        }
+
+        const isAuthenticated = await auth0FromHook.isAuthenticated();
+        setIsAuthenticated(isAuthenticated);
+        if (isAuthenticated) {
+          const user = await auth0FromHook.getUser();
+          const token = await auth0FromHook.getTokenSilently();
+          if (user) {
+            const apiUri = process.env.REACT_APP_API_URI || 'http://localhost:5000';
+            try {
+              await fetch(`${apiUri}/api/login`, {
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(user),
+                method: 'POST',
+              });
+              setUser(user);
+            } catch (e) {}
+          }
+        }
+
+        setLoading(false);
+      } catch (e) {
+        if (e.error === 'unauthorized' && e['error_description'].indexOf('email_not_verified:') > -1) {
+          onRedirectCallback({}, e['error_description'].split(':')[1]);
+        }
+        setLoading(false);
+      }
     };
     initAuth0();
     // eslint-disable-next-line

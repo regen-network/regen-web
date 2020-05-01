@@ -21,6 +21,9 @@ const CustomButton = withStyles((theme: Theme) => ({
     paddingRight: theme.spacing(4),
     paddingLeft: theme.spacing(4),
     backgroundColor: theme.palette.primary.main,
+    '&:hover': {
+      backgroundColor: theme.palette.primary.main,
+    },
   },
   startIcon: {
     marginRight: 0,

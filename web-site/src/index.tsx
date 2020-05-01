@@ -5,14 +5,14 @@ import './index.css';
 import * as serviceWorker from './serviceWorker';
 import ThemeProvider from 'web-components/lib/theme/RegenThemeProvider';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Footer from 'web-components/lib/components/footer';
-import Header from 'web-components/lib/components/header';
+import Footer from './components/footer';
+import Header from './components/header';
 import Home from './pages/Home';
 import Buyers from './pages/Buyers';
 import LandStewards from './pages/LandStewards';
 import Developers from './pages/Developers';
 import Science from './pages/Science';
-let logo = './assets/logo.svg';
+//let logo = './assets/logo.svg';
 
 // import { ApolloProvider } from '@apollo/react-hooks';
 // import ApolloClient from 'apollo-boost';
@@ -23,7 +23,7 @@ ReactDOM.render(
     <CssBaseline />
     <Router>
       <div>
-        <Header logo={logo}></Header>
+        <Header></Header>
         <Switch>
           <Route path="/" exact>
             <Home />

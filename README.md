@@ -121,3 +121,11 @@ a simple workaround via https://github.com/mui-org/material-ui/issues/12432 is t
 yarn install --network-timeout 500000
 ```
 instead of `yarn install`
+
+### `Yarn start` or `react-scripts start` not working
+_Sometimes after trying either of the above commands, you may see_
+```
+Jareds-MacBook-Pro:regen-web jared$ react-scripts start
+bash: react-scripts: command not found
+```
+First, make sure you're running `yarn start` from within one of the project directories, and not the root of the repo, if it persists, delete yarn.lock, and run `yarn install` again and it should work.

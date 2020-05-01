@@ -5,6 +5,8 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import ThemeProvider from 'web-components/lib/theme/RegenThemeProvider';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import 'url-search-params-polyfill';
+import './url-search-params-polyfill.d';
 // import { ApolloProvider } from '@apollo/react-hooks';
 // import ApolloClient from 'apollo-boost';
 
@@ -12,8 +14,9 @@ import { Auth0Provider } from './react-auth0-spa';
 import { AuthApolloProvider } from './apollo';
 import history from './lib/history';
 
-const onRedirectCallback = (appState: any): void => {
-  history.push(appState && appState.targetUrl ? appState.targetUrl : window.location.pathname);
+const onRedirectCallback = (appState: any, verifyEmail: string): void => {
+  const path: string = verifyEmail ? `/verify-email?email=${verifyEmail}` : window.location.pathname;
+  history.push(appState && appState.targetUrl ? appState.targetUrl : path);
 };
 
 const config = {

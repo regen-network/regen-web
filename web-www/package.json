@@ -16,6 +16,7 @@
 	"gatsby-plugin-typescript":"",
 	"gatsby-plugin-eslint":"^2.0.8",
 	"eslint-config-react-app":"^5.2.1",
+	"react-laag":"1.7.3",
 	"typescript-eslint":"0.0.1-alpha.0",
 	"typescript":"3.8.3",
     "prop-types": "^15.7.2",

@@ -78,8 +78,8 @@ export default function CreditsIssue(): JSX.Element {
     setProjectId(event.target.value as string);
   };
 
-  if (projectsLoading) return <div>'Loading projects...'</div>;
-  if (projectsError) return <div>`Error! ${projectsError.message}`</div>;
+  if (projectsLoading) return <div>Loading projects...</div>;
+  if (projectsError) return <div>Error! ${projectsError.message}</div>;
 
   return (
     <div className={classes.root}>

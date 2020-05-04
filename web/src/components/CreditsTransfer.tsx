@@ -10,6 +10,12 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
 
 const TRANSFER_CREDITS = gql`
   mutation TransferCredits($input: TransferCreditsInput!) {
@@ -36,6 +42,12 @@ const TRANSFER_CREDITS = gql`
   }
 `;
 
+const AVAILABLE_CREDITS = gql`
+  query GetAvailableCredits($vintageId: UUID) {
+    getAvailableCredits(vintageId: $vintageId)
+  }
+`;
+
 const ALL_CREDIT_VINTAGES = gql`
   {
     allCreditVintages {
@@ -44,6 +56,13 @@ const ALL_CREDIT_VINTAGES = gql`
         createdAt
         projectByProjectId {
           name
+        }
+        accountBalancesByCreditVintageId {
+          nodes {
+            id
+            walletId
+            liquidBalance
+          }
         }
       }
     }
@@ -56,18 +75,8 @@ const ALL_PARTIES = gql`
       nodes {
         id
         type
-        usersByPartyId {
-          nodes {
-            name
-            walletId
-          }
-        }
-        organizationsByPartyId {
-          nodes {
-            name
-            walletId
-          }
-        }
+        name
+        walletId
       }
     }
   }
@@ -93,18 +102,34 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
+interface Balance {
+  liquidBalance: string;
+  id: string;
+  walletId: string;
+}
+
+interface Result {
+  oldBalance: string;
+  newBalance: string;
+  name: string;
+  walletId: string;
+}
+
 export default function CreditsTransfer(): JSX.Element {
   const classes = useStyles();
 
   const [transferCredits, { data, loading, error }] = useMutation(TRANSFER_CREDITS, {
     errorPolicy: 'ignore',
   });
-  const { data: vintagesData, loading: vintagesLoading, error: vintagesError } = useQuery(
-    ALL_CREDIT_VINTAGES,
-    {
-      errorPolicy: 'ignore',
-    },
-  );
+  const {
+    data: vintagesData,
+    loading: vintagesLoading,
+    error: vintagesError,
+    refetch: refetchVintages,
+  } = useQuery(ALL_CREDIT_VINTAGES, {
+    errorPolicy: 'ignore',
+  });
+
   const { data: partiesData, loading: partiesLoading, error: partiesError } = useQuery(ALL_PARTIES, {
     errorPolicy: 'ignore',
   });
@@ -112,21 +137,68 @@ export default function CreditsTransfer(): JSX.Element {
   const dateFormat = new Intl.DateTimeFormat('en', { year: 'numeric', month: 'numeric', day: '2-digit' });
 
   const [vintageId, setVintageId] = useState('');
+  const [oldBalances, setOldBalances] = useState<Balance[]>([]);
   const [buyerWalletId, setBuyerWalletId] = useState('');
   const [units, setUnits] = useState(1);
   const [creditPrice, setCreditPrice] = useState(1);
 
+  const { data: availableCreditsData, refetch: refetchAvailableCredits } = useQuery(AVAILABLE_CREDITS, {
+    errorPolicy: 'ignore',
+    variables: { vintageId },
+  });
+
   const handleVintageChange = (event: React.ChangeEvent<{ value: unknown }>): void => {
     setVintageId(event.target.value as string);
+    setOldBalances(
+      vintagesData.allCreditVintages.nodes.find((node: any) => node.id === event.target.value)
+        .accountBalancesByCreditVintageId.nodes,
+    );
   };
 
   const handleBuyerWalletChange = (event: React.ChangeEvent<{ value: any }>): void => {
     setBuyerWalletId(event.target.value as string);
   };
 
-  if (vintagesLoading || partiesLoading) return <div>'Loading...'</div>;
-  if (vintagesError) return <div>`Error! ${vintagesError.message}`</div>;
-  if (partiesError) return <div>`Error! ${partiesError.message}`</div>;
+  if (vintagesLoading || partiesLoading) return <div>Loading...</div>;
+  if (vintagesError) return <div>Error! ${vintagesError.message}</div>;
+  if (partiesError) return <div>Error! ${partiesError.message}</div>;
+
+  let newBalances: Balance[];
+  let sendersBalances: Result[] = [];
+  let receiverBalance: Result | undefined;
+  if (partiesData && partiesData.allParties && vintagesData && vintagesData.allCreditVintages && vintageId) {
+    newBalances = vintagesData.allCreditVintages.nodes.find((node: any) => node.id === vintageId)
+      .accountBalancesByCreditVintageId.nodes;
+
+    const findOldBalance = (i: number): any =>
+      oldBalances.find((oldBalance: any) => oldBalance.id === newBalances[i].id);
+    const findParty = (i: number): any =>
+      partiesData.allParties.nodes.find((party: any) => party.walletId === newBalances[i].walletId);
+
+    for (var i: number = 0; i < newBalances.length; i++) {
+      const oldBalance = findOldBalance(i);
+      const party = findParty(i);
+      if (party) {
+        if (oldBalance && parseFloat(oldBalance.liquidBalance) > parseFloat(newBalances[i].liquidBalance)) {
+          // sender
+          sendersBalances.push({
+            walletId: party.walletId,
+            name: party.name,
+            oldBalance: oldBalance.liquidBalance,
+            newBalance: newBalances[i].liquidBalance,
+          });
+        } else {
+          // buyer
+          receiverBalance = {
+            walletId: party.walletId,
+            name: party.name,
+            oldBalance: oldBalance && oldBalance.liquidBalance ? oldBalance.liquidBalance : '0',
+            newBalance: newBalances[i].liquidBalance,
+          };
+        }
+      }
+    }
+  }
 
   return (
     <div className={classes.root}>
@@ -149,6 +221,8 @@ export default function CreditsTransfer(): JSX.Element {
                   },
                 },
               });
+              await refetchVintages();
+              await refetchAvailableCredits();
             } catch (e) {}
           }
         }}
@@ -190,17 +264,11 @@ export default function CreditsTransfer(): JSX.Element {
               partiesData.allParties &&
               partiesData.allParties.nodes.map(
                 (node: any) =>
-                  ((node.type === 'USER' && node.usersByPartyId.nodes[0].walletId) ||
-                    (node.type === 'ORGANIZATION' && node.organizationsByPartyId.nodes[0].walletId)) &&
-                  (node.type === 'USER' ? (
-                    <MenuItem key={node.id} value={node.usersByPartyId.nodes[0].walletId}>
-                      {node.usersByPartyId.nodes[0].name} ({node.type.toLowerCase()}){' '}
+                  node.walletId && (
+                    <MenuItem key={node.id} value={node.walletId}>
+                      {node.name} ({node.type.toLowerCase()}){' '}
                     </MenuItem>
-                  ) : (
-                    <MenuItem key={node.id} value={node.organizationsByPartyId.nodes[0].walletId}>
-                      {node.organizationsByPartyId.nodes[0].name} ({node.type.toLowerCase()}){' '}
-                    </MenuItem>
-                  )),
+                  ),
               )}
           </Select>
         </FormControl>
@@ -225,13 +293,62 @@ export default function CreditsTransfer(): JSX.Element {
         </Button>
       </form>
       {loading && <div>Loading...</div>}
-      {data && (
+      {availableCreditsData && availableCreditsData.getAvailableCredits && (
+        <div>Available credits to transfer: {availableCreditsData.getAvailableCredits}</div>
+      )}
+      {data && receiverBalance && (
         <div>
           <p>
             {units} {pluralize(units, 'credit')} successfully transfered.
           </p>
-          <p>Total amount of tradable credits: {data.transferCredits.accountBalance.liquidBalance}.</p>
-          <pre>{JSON.stringify(data, null, 2)}</pre>
+          <Title variant="h3">Senders:</Title>
+          <TableContainer>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Name</TableCell>
+                  <TableCell>Wallet id</TableCell>
+                  <TableCell align="right">Old balance</TableCell>
+                  <TableCell align="right">New balance</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {sendersBalances.map(row => (
+                  <TableRow key={row.name}>
+                    <TableCell component="th" scope="row">
+                      {row.name}
+                    </TableCell>
+                    <TableCell>{row.walletId}</TableCell>
+                    <TableCell align="right">{row.oldBalance}</TableCell>
+                    <TableCell align="right">{row.newBalance}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <Title variant="h3">Buyer:</Title>
+          <TableContainer>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Name</TableCell>
+                  <TableCell>Wallet id</TableCell>
+                  <TableCell align="right">Old balance</TableCell>
+                  <TableCell align="right">New balance</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                <TableRow key={receiverBalance.name}>
+                  <TableCell component="th" scope="row">
+                    {receiverBalance.name}
+                  </TableCell>
+                  <TableCell>{receiverBalance.walletId}</TableCell>
+                  <TableCell align="right">{receiverBalance.oldBalance}</TableCell>
+                  <TableCell align="right">{receiverBalance.newBalance}</TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </TableContainer>
         </div>
       )}
       {error && (

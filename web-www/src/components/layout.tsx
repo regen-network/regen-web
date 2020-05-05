@@ -5,15 +5,15 @@
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-import React from "react"
-import PropTypes from "prop-types"
-import { useStaticQuery, graphql } from "gatsby"
+import React from 'react';
+import PropTypes from 'prop-types';
+import { useStaticQuery, graphql } from 'gatsby';
 
-import Header from "./header"
-import "./layout.css"
+import Header from './header';
+import './layout.css';
 
 interface propTypes {
-	children: Array<React.ReactElement>
+  children: Array<React.ReactElement>;
 }
 
 const Layout = ({ children }: propTypes): JSX.Element => {
@@ -25,7 +25,7 @@ const Layout = ({ children }: propTypes): JSX.Element => {
         }
       }
     }
-  `)
+  `);
 
   return (
     <>
@@ -45,11 +45,11 @@ const Layout = ({ children }: propTypes): JSX.Element => {
         </footer>
       </div>
     </>
-  )
-}
+  );
+};
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
-}
+};
 
-export default Layout
+export default Layout;

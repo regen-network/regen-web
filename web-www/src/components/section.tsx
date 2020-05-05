@@ -3,12 +3,12 @@
  *
  */
 
-import React from "react"
-import PropTypes from "prop-types"
-import "./layout.css"
+import React from 'react';
+import PropTypes from 'prop-types';
+import './layout.css';
 
 interface propTypes {
-  children: Array<React.ReactElement>
+  children: Array<React.ReactElement>;
 }
 
 const Section = ({ children }: propTypes): JSX.Element => {
@@ -21,11 +21,11 @@ const Section = ({ children }: propTypes): JSX.Element => {
         padding: `0 1.0875rem 1.45rem`,
       }}
     ></div>
-  )
-}
+  );
+};
 
 Section.propTypes = {
   children: PropTypes.node.isRequired,
-}
+};
 
-export default Section
+export default Section;

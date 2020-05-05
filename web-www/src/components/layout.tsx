@@ -9,8 +9,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useStaticQuery, graphql } from 'gatsby';
 
-import Header from './header';
+import Header from 'web-components/lib/components/header';
 import './layout.css';
+
+let logo = 'images/logo.png';
 
 interface propTypes {
   children: Array<React.ReactElement>;
@@ -29,7 +31,8 @@ const Layout = ({ children }: propTypes): JSX.Element => {
 
   return (
     <>
-      <Header siteTitle={data.site.siteMetadata.title} />
+      //
+      <Header logo={logo}></Header>
       <div
         style={{
           margin: `0 auto`,

@@ -33,5 +33,8 @@
     "react-slick": "^0.25.2",
     "slick-carousel": "^1.8.1",
     "storybook-addon-material-ui": "^0.9.0-alpha.20"
+  },
+  "devDependencies": {
+    "prettier": "2.0.5"
   }
 }

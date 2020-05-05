@@ -7,6 +7,7 @@ import SEO from '../components/seo';
 import styled from 'styled-components';
 
 const Section = styled.section`
+  background-image: url('images/image43.jpg')
   background-color: #ccc;
   height: 500px;
 `;

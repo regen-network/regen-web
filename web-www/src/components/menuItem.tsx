@@ -11,7 +11,7 @@ interface propTypes {
   children: Array<React.ReactElement>;
 }
 
-const Section = ({ children }: propTypes): JSX.Element => {
+const MenuItem = (): JSX.Element => {
   return (
     <div
       style={{
@@ -23,8 +23,4 @@ const Section = ({ children }: propTypes): JSX.Element => {
   );
 };
 
-Section.propTypes = {
-  children: PropTypes.node.isRequired,
-};
-
-export default Section;
+export default MenuItem;

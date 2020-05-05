@@ -62,7 +62,14 @@ const ALL_CREDIT_VINTAGES = gql`
           partyByLandOwnerId {
             name
           }
+          partyByStewardId {
+            name
+          }
+          partyByDeveloperId {
+            name
+          }
         }
+        initialDistribution
         accountBalancesByCreditVintageId {
           nodes {
             id
@@ -330,6 +337,31 @@ export default function CreditsTransfer(): JSX.Element {
       {loading && <div>Loading...</div>}
       {vintage && vintage.projectByProjectId && vintage.projectByProjectId.partyByLandOwnerId && (
         <div>Project land owner: {vintage.projectByProjectId.partyByLandOwnerId.name}</div>
+      )}
+      {vintage && vintage.initialDistribution && vintage.projectByProjectId && (
+        <div>
+          Ownership breakdown (%):
+          <ul>
+            {vintage.projectByProjectId.partyByLandOwnerId && (
+              <li>
+                Land Owner ({vintage.projectByProjectId.partyByLandOwnerId.name}):{' '}
+                {100 * vintage.initialDistribution.landOwner || 0}
+              </li>
+            )}
+            {vintage.projectByProjectId.partyByDeveloperId && (
+              <li>
+                Project Developer ({vintage.projectByProjectId.partyByDeveloperId.name}):{' '}
+                {100 * vintage.initialDistribution.projectDeveloper || 0}
+              </li>
+            )}
+            {vintage.projectByProjectId.partyByStewardId && (
+              <li>
+                Land Steward ({vintage.projectByProjectId.partyByStewardId.name}):{' '}
+                {100 * vintage.initialDistribution.landSteward || 0}
+              </li>
+            )}
+          </ul>
+        </div>
       )}
       {availableCreditsData && availableCreditsData.getAvailableCredits && (
         <div>Available credits to transfer: {availableCreditsData.getAvailableCredits}</div>

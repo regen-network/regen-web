@@ -8,17 +8,17 @@
     "gatsby-plugin-react-helmet": "^3.3.0",
     "gatsby-plugin-sharp": "^2.6.0",
     "gatsby-source-filesystem": "^2.3.0",
-	"gatsby-transformer-sharp": "^2.5.0",
-	"gatsby-plugin-typescript":"",
-	"gatsby-plugin-eslint":"^2.0.8",
-	"eslint-config-react-app":"^5.2.1",
-	"react-laag":"1.7.3",
-	"typescript-eslint":"0.0.1-alpha.0",
-	"typescript":"3.8.3",
+    "gatsby-transformer-sharp": "^2.5.0",
+    "gatsby-plugin-typescript": "",
+    "gatsby-plugin-eslint": "^2.0.8",
+    "eslint-config-react-app": "^5.2.1",
+    "react-laag": "1.7.3",
+    "typescript-eslint": "0.0.1-alpha.0",
+    "typescript": "3.8.3",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
-	"react-helmet": "^6.0.0"
+    "react-helmet": "^6.0.0"
   },
   "devDependencies": {
     "prettier": "2.0.5"
@@ -29,7 +29,7 @@
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
-    "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
+    "format": "prettier --write \"**/*.{js,jsx,json,md,tsx}\"",
     "start": "npm run develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",

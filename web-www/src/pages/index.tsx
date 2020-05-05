@@ -5,6 +5,7 @@ import Layout from '../components/layout';
 import Image from '../components/image';
 import SEO from '../components/seo';
 import styled from 'styled-components';
+import ThemeProvider from 'web-components/lib/theme/RegenThemeProvider';
 
 const Section = styled.section`
   background-image: url('images/image43.jpg')
@@ -13,11 +14,13 @@ const Section = styled.section`
 `;
 
 const IndexPage = (): JSX.Element => (
-  <Layout>
-    <SEO title="Home" />
-    <Section></Section>
-    <Link to="/page-2/">Go to page 2</Link>
-  </Layout>
+  <ThemeProvider injectFonts>
+    <Layout>
+      <SEO title="Home" />
+      <Section></Section>
+      <Link to="/page-2/">Go to page 2</Link>
+    </Layout>
+  </ThemeProvider>
 );
 
 export default IndexPage;

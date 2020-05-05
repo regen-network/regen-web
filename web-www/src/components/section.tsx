@@ -17,8 +17,7 @@ const Section = ({ children }: propTypes): JSX.Element => {
       style={{
         width: `100%`,
         margin: `0 auto`,
-        maxWidth: 960,
-        padding: `0 1.0875rem 1.45rem`,
+        padding: `1rem`,
       }}
     ></div>
   );

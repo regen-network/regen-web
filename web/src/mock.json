@@ -505,7 +505,7 @@
           "name": "Ecosystem health",
           "description": "In the ecological realm, ‘health’ is characterized by system integrity and the exhibition of certain fundamental properties of self-organizing complex systems.",
           "monitored": false,
-          "imgSrc": "ecosystem-health.png"
+          "imgSrc": "ecological-health.png"
         },
         {
           "name": "Animal welfare",

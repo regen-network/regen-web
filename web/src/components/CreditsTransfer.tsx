@@ -56,6 +56,12 @@ const ALL_CREDIT_VINTAGES = gql`
         createdAt
         projectByProjectId {
           name
+          developerId
+          stewardId
+          landOwnerId
+          partyByLandOwnerId {
+            name
+          }
         }
         accountBalancesByCreditVintageId {
           nodes {
@@ -141,6 +147,7 @@ export default function CreditsTransfer(): JSX.Element {
   const [buyerWalletId, setBuyerWalletId] = useState('');
   const [units, setUnits] = useState(1);
   const [creditPrice, setCreditPrice] = useState(1);
+  const [showResult, setShowResult] = useState(false);
 
   const { data: availableCreditsData, refetch: refetchAvailableCredits } = useQuery(AVAILABLE_CREDITS, {
     errorPolicy: 'ignore',
@@ -148,6 +155,9 @@ export default function CreditsTransfer(): JSX.Element {
   });
 
   const handleVintageChange = (event: React.ChangeEvent<{ value: unknown }>): void => {
+    if (showResult) {
+      setShowResult(false);
+    }
     setVintageId(event.target.value as string);
     setOldBalances(
       vintagesData.allCreditVintages.nodes.find((node: any) => node.id === event.target.value)
@@ -156,6 +166,9 @@ export default function CreditsTransfer(): JSX.Element {
   };
 
   const handleBuyerWalletChange = (event: React.ChangeEvent<{ value: any }>): void => {
+    if (showResult) {
+      setShowResult(false);
+    }
     setBuyerWalletId(event.target.value as string);
   };
 
@@ -166,15 +179,17 @@ export default function CreditsTransfer(): JSX.Element {
   let newBalances: Balance[];
   let sendersBalances: Result[] = [];
   let receiverBalance: Result | undefined;
+  let vintage: any;
   if (partiesData && partiesData.allParties && vintagesData && vintagesData.allCreditVintages && vintageId) {
-    newBalances = vintagesData.allCreditVintages.nodes.find((node: any) => node.id === vintageId)
-      .accountBalancesByCreditVintageId.nodes;
+    vintage = vintagesData.allCreditVintages.nodes.find((node: any) => node.id === vintageId);
+    newBalances = vintage.accountBalancesByCreditVintageId.nodes;
 
     const findOldBalance = (i: number): any =>
       oldBalances.find((oldBalance: any) => oldBalance.id === newBalances[i].id);
     const findParty = (i: number): any =>
       partiesData.allParties.nodes.find((party: any) => party.walletId === newBalances[i].walletId);
 
+    // Build response list of senders/buyer old/new balance
     for (var i: number = 0; i < newBalances.length; i++) {
       const oldBalance = findOldBalance(i);
       const party = findParty(i);
@@ -187,7 +202,7 @@ export default function CreditsTransfer(): JSX.Element {
             oldBalance: oldBalance.liquidBalance,
             newBalance: newBalances[i].liquidBalance,
           });
-        } else {
+        } else if (party.walletId === buyerWalletId) {
           // buyer
           receiverBalance = {
             walletId: party.walletId,
@@ -223,6 +238,11 @@ export default function CreditsTransfer(): JSX.Element {
               });
               await refetchVintages();
               await refetchAvailableCredits();
+              setShowResult(true);
+              setOldBalances(
+                vintagesData.allCreditVintages.nodes.find((node: any) => node.id === vintageId)
+                  .accountBalancesByCreditVintageId.nodes,
+              );
             } catch (e) {}
           }
         }}
@@ -264,7 +284,12 @@ export default function CreditsTransfer(): JSX.Element {
               partiesData.allParties &&
               partiesData.allParties.nodes.map(
                 (node: any) =>
-                  node.walletId && (
+                  node.walletId &&
+                  (!vintage ||
+                    (vintage &&
+                      vintage.projectByProjectId.developerId !== node.id &&
+                      vintage.projectByProjectId.stewardId !== node.id &&
+                      vintage.projectByProjectId.landOwnerId !== node.id)) && (
                     <MenuItem key={node.id} value={node.walletId}>
                       {node.name} ({node.type.toLowerCase()}){' '}
                     </MenuItem>
@@ -277,7 +302,12 @@ export default function CreditsTransfer(): JSX.Element {
           required
           type="number"
           value={units}
-          onChange={e => setUnits(Math.max(0.01, parseInt(e.target.value)))}
+          onChange={e => {
+            if (showResult) {
+              setShowResult(false);
+            }
+            setUnits(Math.max(0.01, parseInt(e.target.value)));
+          }}
           label="Units"
         />
         <TextField
@@ -285,7 +315,12 @@ export default function CreditsTransfer(): JSX.Element {
           required
           type="number"
           value={creditPrice}
-          onChange={e => setCreditPrice(Math.max(0.01, parseInt(e.target.value)))}
+          onChange={e => {
+            if (showResult) {
+              setShowResult(false);
+            }
+            setCreditPrice(Math.max(0.01, parseInt(e.target.value)));
+          }}
           label="Credit price"
         />
         <Button className={classes.button} variant="contained" type="submit">
@@ -293,10 +328,13 @@ export default function CreditsTransfer(): JSX.Element {
         </Button>
       </form>
       {loading && <div>Loading...</div>}
+      {vintage && vintage.projectByProjectId && vintage.projectByProjectId.partyByLandOwnerId && (
+        <div>Project land owner: {vintage.projectByProjectId.partyByLandOwnerId.name}</div>
+      )}
       {availableCreditsData && availableCreditsData.getAvailableCredits && (
         <div>Available credits to transfer: {availableCreditsData.getAvailableCredits}</div>
       )}
-      {data && receiverBalance && (
+      {data && receiverBalance && showResult && (
         <div>
           <p>
             {units} {pluralize(units, 'credit')} successfully transfered.

@@ -16,19 +16,22 @@
   "workspaces": [
     "web-registry",
     "web-components",
-    "web-storybook"
+    "web-storybook",
+    "web-www"
   ],
   "scripts": {
     "bootstrap": "lerna bootstrap",
-    "build": "lerna run build --stream",
-    "build-storybook": "yarn build && lerna run build-storybook --stream",
+    "build": "yarn build-components && lerna run --scope web-registry build --stream",
+    "build-components": "lerna run --scope web-components build --stream",
+    "build-storybook": "yarn build-components && lerna run build-storybook --stream",
     "format": "lerna run format",
     "lint": "lerna run lint",
     "serve": "serve web-old/build -l ${PORT:-5000}",
     "storybook": "lerna run storybook --stream",
     "test": "lerna run test --stream",
     "start": "lerna run --scope web-registry start --stream",
-    "watch": "lerna run watch --stream"
+    "watch": "lerna run watch --stream",
+    "build-www": "yarn build-components && lerna run --scope web-www build --stream"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^5.2.8",

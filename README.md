@@ -52,14 +52,22 @@ yarn storybook
 
 ## Deployment
 
+### Registry
 Compile `web-components` and `web-registry` to `web-components/lib` and `web-registry/build` respectively:
 ```sh
 yarn build
 ```
 
+### Storybook
 Compile `web-components` and `web-storybook` to `web-components/lib` and `web-storybook/build` respectively:
 ```sh
 yarn build-storybook
+```
+
+### Website
+Compile `web-components` and `web-www` to `web-components/lib` and `web-www/public` respectively:
+```sh
+yarn build-www
 ```
 
 ## Testing

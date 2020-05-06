@@ -502,13 +502,13 @@
           "imgSrc": "impactag-soc.jpg"
         },
         {
-          "name": "Above ground biomass",
-          "description": "We will encourage all plant diversity and endeavour to keep a living plant in the soil as much as possible.",
+          "name": "Ecosystem health",
+          "description": "In the ecological realm, ‘health’ is characterized by system integrity and the exhibition of certain fundamental properties of self-organizing complex systems.",
           "monitored": false,
-          "imgSrc": "biomass.png"
+          "imgSrc": "ecological-health.png"
         },
         {
-          "name": "Animal Welfare",
+          "name": "Animal welfare",
           "description": "Animal welfare is an important component in a well managed grazing enterprise. Low stress stock handling techniques have been adopted to ensure animals have higher quality life.",
           "monitored": false,
           "imgSrc": "animal-welfare.png"

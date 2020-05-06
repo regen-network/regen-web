@@ -1,0 +1,8 @@
+{
+	"extends": "../tsconfig.json",
+	"jsx": "react",
+	"compilerOptions": {
+	  "jsx": "preserve",                    
+  
+	  }
+  }

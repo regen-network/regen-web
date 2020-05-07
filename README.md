@@ -45,6 +45,11 @@ Then, to run the registry app:
 yarn start
 ```
 
+Then, to run the website (Gatsby):
+```sh
+yarn start-www
+```
+
 To run Storybook:
 ```sh
 yarn storybook

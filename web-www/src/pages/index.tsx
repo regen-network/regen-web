@@ -18,6 +18,7 @@ const IndexPage = (): JSX.Element => (
     <Layout>
       <SEO title="Home" />
       <Section></Section>
+
       <Link to="/page-2/">Go to page 2</Link>
     </Layout>
   </ThemeProvider>

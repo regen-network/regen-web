@@ -11,11 +11,10 @@ import { useStaticQuery, graphql } from 'gatsby';
 import styled from 'styled-components';
 import Header from 'web-components/lib/components/header';
 import './layout.css';
+import MenuHover from '../components/menuHover';
+import { MenuItem, Link } from '@material-ui/core';
 
 let logo = 'images/logo.png';
-let styledHeader = styled(Header)`
-  max-width: 200px;
-`;
 interface propTypes {
   children: Array<React.ReactElement>;
 }
@@ -33,7 +32,16 @@ const Layout = ({ children }: propTypes): JSX.Element => {
 
   return (
     <>
-      <Header logo={logo}></Header>
+      <Header logo={logo}>
+        <MenuHover text="Resources">
+          <MenuItem>
+            <Link href="https://github.com/regen-network">GitHub</Link>
+          </MenuItem>
+          <MenuItem>
+            <Link href="whitepaper/WhitePaper.pdf">WhitePaper</Link>
+          </MenuItem>
+        </MenuHover>
+      </Header>
       <div
         style={{
           margin: `0 auto`,

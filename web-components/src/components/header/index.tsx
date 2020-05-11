@@ -11,7 +11,6 @@ import RegenIcon from '../icons/RegenIcon';
 // import MenuIcon from '@material-ui/icons/Menu';
 
 interface HeaderProps {
-  logo: string;
   children?: any;
 }
 
@@ -59,7 +58,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function Header({ children, logo }: HeaderProps): JSX.Element {
+export default function Header({ children }: HeaderProps): JSX.Element {
   const classes = useStyles({});
   // TODO: Add search/menu logic
   return (

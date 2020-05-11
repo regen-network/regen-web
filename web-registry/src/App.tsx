@@ -3,7 +3,6 @@ import { Router, Switch, Route, Link, useParams, useLocation } from 'react-route
 import NavBar from './components/NavBar';
 import { useAuth0 } from './react-auth0-spa';
 import isAdmin from './lib/admin';
-import logo from './assets/logo.png';
 
 import './App.css';
 import {
@@ -47,19 +46,19 @@ function Home(): JSX.Element {
         <Link to="/credits/userId">Credits page</Link>
       </p>
       {isAdmin(user) && (
-          <div>
-            Admin:
-            <p>
-              <Link to="/admin/credits/issue">Issue credits</Link>
-            </p>
-            <p>
-              <Link to="/admin/credits/transfer">Transfer credits</Link>
-            </p>
-            <p>
-              <Link to="/admin/buyer/create">Create Buyer</Link>
-            </p>
-          </div>
-        )}
+        <div>
+          Admin:
+          <p>
+            <Link to="/admin/credits/issue">Issue credits</Link>
+          </p>
+          <p>
+            <Link to="/admin/credits/transfer">Transfer credits</Link>
+          </p>
+          <p>
+            <Link to="/admin/buyer/create">Create Buyer</Link>
+          </p>
+        </div>
+      )}
     </div>
   );
 }
@@ -118,7 +117,7 @@ const App: React.FC = (): JSX.Element => {
     <Router history={history}>
       <ScrollToTop />
       <div>
-        <Header logo={logo}>
+        <Header>
           <NavBar />
         </Header>
         <Switch>
@@ -145,16 +144,18 @@ const App: React.FC = (): JSX.Element => {
               </>
             )}
           />
-          {isAdmin(user) && <Route
-            path="/admin"
-            render={({ match: { path } }) => (
-              <>
-                <Route path={`${path}/credits/issue`} component={CreditsIssue} />
-                <Route path={`${path}/credits/transfer`} component={CreditsTransfer} />
-                <Route path={`${path}/buyer/create`} component={BuyerCreate} />
-              </>
-            )}
-          />}
+          {isAdmin(user) && (
+            <Route
+              path="/admin"
+              render={({ match: { path } }) => (
+                <>
+                  <Route path={`${path}/credits/issue`} component={CreditsIssue} />
+                  <Route path={`${path}/credits/transfer`} component={CreditsTransfer} />
+                  <Route path={`${path}/buyer/create`} component={BuyerCreate} />
+                </>
+              )}
+            />
+          )}
         </Switch>
         <footer>
           <Footer user={creditsIssuer} />

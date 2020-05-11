@@ -9,18 +9,34 @@ const useStyles = makeStyles((theme) => ({
   popoverContent: {
     pointerEvents: 'auto',
   },
+  text: (props: styleProps) => ({
+    '& a': {
+      color: props.color || '#ccc',
+    },
+    backgroundColor: 'rgba(51, 170, 51, 0)',
+  }),
 }));
+
+interface styleProps {
+  color: string;
+}
 
 interface Props {
   children: React.ReactNode;
   text: string;
+  color?: string;
 }
 
-const MenuHover = ({ text, children }: Props) => {
+/**
+ *
+ * @param object contains text, color, children. Where text is the anchor text. Color is a string for link text color, and children are MenuItems typically with Links.
+ */
+const MenuHover = ({ text, color, children }: Props) => {
   const [openedPopover, setOpenedPopover] = useState(false);
   const popoverAnchor = useRef(null);
 
-  const classes = useStyles();
+  // nullish coalescing operator ?? to avoid typescript error on undefined
+  const classes = useStyles({ color: color ?? '' });
 
   const popoverEnter = ({ currentTarget }: any) => {
     setOpenedPopover(true);
@@ -60,7 +76,7 @@ const MenuHover = ({ text, children }: Props) => {
         PaperProps={{ onMouseEnter: popoverEnter, onMouseLeave: popoverLeave }}
       >
         <Paper>
-          <MenuList>{children}</MenuList>
+          <MenuList className={`${classes.text}`}>{children}</MenuList>
         </Paper>
       </Popover>
     </div>

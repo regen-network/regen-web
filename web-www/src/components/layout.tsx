@@ -12,12 +12,38 @@ import styled from 'styled-components';
 import Header from 'web-components/lib/components/header';
 import './layout.css';
 import MenuHover from '../components/menuHover';
-import { MenuItem, Link } from '@material-ui/core';
+import { MenuItem, MenuList, Link } from '@material-ui/core';
 
 let logo = 'images/logo.png';
 interface propTypes {
   children: Array<React.ReactElement>;
 }
+
+let StyledMenuItem = styled(MenuItem)`
+  a {
+    color: #000;
+  }
+`;
+
+let StyledMenuList = styled(MenuList)`
+  display: flex;
+`;
+
+let StyledMenuHover = styled(MenuHover)`
+  div {
+    width: auto;
+    overflow: hidden;
+    font-size: 1rem;
+    box-sizing: border-box;
+    min-height: 48px;
+    font-family: 'Lato', -apple-system, sans-serif;
+    font-weight: 400;
+    line-height: 1.5;
+    padding-top: 6px;
+    white-space: nowrap;
+    padding-bottom: 6px;
+  }
+`;
 
 const Layout = ({ children }: propTypes): JSX.Element => {
   const data = useStaticQuery(graphql`
@@ -33,14 +59,27 @@ const Layout = ({ children }: propTypes): JSX.Element => {
   return (
     <>
       <Header logo={logo}>
-        <MenuHover text="Resources">
+        <StyledMenuList>
+          <StyledMenuItem>
+            <Link href="">Buyers</Link>
+          </StyledMenuItem>
+          <StyledMenuItem>
+            <Link href="">Land Stewards</Link>
+          </StyledMenuItem>
           <MenuItem>
-            <Link href="https://github.com/regen-network">GitHub</Link>
+            <MenuHover color="black" text="Learn More">
+              <MenuItem>
+                <Link href="https://regen.network/#">Case Studies</Link>
+              </MenuItem>
+              <MenuItem>
+                <Link href="https://regen.network/#">FAQ</Link>
+              </MenuItem>
+              <MenuItem>
+                <Link href="https://regen.network/#">Team</Link>
+              </MenuItem>
+            </MenuHover>
           </MenuItem>
-          <MenuItem>
-            <Link href="whitepaper/WhitePaper.pdf">WhitePaper</Link>
-          </MenuItem>
-        </MenuHover>
+        </StyledMenuList>
       </Header>
       <div
         style={{

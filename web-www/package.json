@@ -1,5 +1,5 @@
 {
-  "name": "regen-web-www",
+  "name": "web-www",
   "version": "0.0.1",
   "dependencies": {
     "@material-ui/core": "4.8.1",

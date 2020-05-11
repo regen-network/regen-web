@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Router, Switch, Route, Link, useParams, useLocation } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import { useAuth0 } from './react-auth0-spa';
-
+import isAdmin from './lib/admin';
 import logo from './assets/logo.png';
 
 import './App.css';
@@ -22,6 +22,7 @@ import ProjectList from './components/ProjectList';
 import UserCredits from './components/UserCredits';
 import CreditsIssue from './components/CreditsIssue';
 import CreditsTransfer from './components/CreditsTransfer';
+import BuyerCreate from './components/BuyerCreate';
 import history from './lib/history';
 
 function ScrollToTop(): null {
@@ -45,9 +46,7 @@ function Home(): JSX.Element {
       <p>
         <Link to="/credits/userId">Credits page</Link>
       </p>
-      {user &&
-        user['https://regen-registry.com/roles'] &&
-        user['https://regen-registry.com/roles'].indexOf('admin') > -1 && (
+      {isAdmin(user) && (
           <div>
             Admin:
             <p>
@@ -55,6 +54,9 @@ function Home(): JSX.Element {
             </p>
             <p>
               <Link to="/admin/credits/transfer">Transfer credits</Link>
+            </p>
+            <p>
+              <Link to="/admin/buyer/create">Create Buyer</Link>
             </p>
           </div>
         )}
@@ -106,7 +108,7 @@ function VerifyEmail(): JSX.Element {
 // }
 
 const App: React.FC = (): JSX.Element => {
-  const { loading } = useAuth0();
+  const { user, loading } = useAuth0();
 
   if (loading) {
     return <div>Loading...</div>;
@@ -143,15 +145,16 @@ const App: React.FC = (): JSX.Element => {
               </>
             )}
           />
-          <Route
+          {isAdmin(user) && <Route
             path="/admin"
             render={({ match: { path } }) => (
               <>
                 <Route path={`${path}/credits/issue`} component={CreditsIssue} />
                 <Route path={`${path}/credits/transfer`} component={CreditsTransfer} />
+                <Route path={`${path}/buyer/create`} component={BuyerCreate} />
               </>
             )}
-          />
+          />}
         </Switch>
         <footer>
           <Footer user={creditsIssuer} />

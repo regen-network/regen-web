@@ -18,25 +18,26 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 interface styleProps {
-  color: string;
+  menuTextColor: string;
 }
 
 interface Props {
   children: React.ReactNode;
   text: string;
-  color?: string;
+  menuTextColor?: string;
+  anchorTextColor?: string;
 }
 
 /**
  *
  * @param object contains text, color, children. Where text is the anchor text. Color is a string for link text color, and children are MenuItems typically with Links.
  */
-const MenuHover = ({ text, color, children }: Props) => {
+const MenuHover = ({ text, anchorTextColor, menuTextColor, children }: Props) => {
   const [openedPopover, setOpenedPopover] = useState(false);
   const popoverAnchor = useRef(null);
 
   // nullish coalescing operator ?? to avoid typescript error on undefined
-  const classes = useStyles({ color: color ?? '' });
+  const classes = useStyles({ menuTextColor: menuTextColor ?? '' });
 
   const popoverEnter = ({ currentTarget }: any) => {
     setOpenedPopover(true);
@@ -49,6 +50,7 @@ const MenuHover = ({ text, color, children }: Props) => {
   return (
     <div>
       <span
+        style={{ color: `${anchorTextColor}` }}
         ref={popoverAnchor}
         aria-owns="mouse-over-popover"
         aria-haspopup="true"

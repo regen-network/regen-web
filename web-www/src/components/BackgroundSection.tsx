@@ -5,16 +5,15 @@ import styled from 'styled-components';
 import BackgroundImage from 'gatsby-background-image';
 
 interface Props {
-  className: string;
-  imgPath: string;
+  className?: string;
   children?: React.ReactNode;
 }
 
-const BackgroundSection = ({ className, imgPath, children }: Props) => (
+const BackgroundSection = ({ className, children }: Props) => (
   <StaticQuery
     query={graphql`
       query {
-        desktop: file(relativePath: { eq: "seamless-bg-desktop.jpg" }) {
+        desktop: file(relativePath: { eq: "image43.jpg" }) {
           childImageSharp {
             fluid(quality: 90, maxWidth: 1920) {
               ...GatsbyImageSharpFluid_withWebp
@@ -28,7 +27,7 @@ const BackgroundSection = ({ className, imgPath, children }: Props) => (
       const imageData = data.desktop.childImageSharp.fluid;
       return (
         <BackgroundImage Tag="section" className={className} fluid={imageData} backgroundColor={`#040e18`}>
-          <h2>gatsby-background-image</h2>
+          {children}
         </BackgroundImage>
       );
     }}

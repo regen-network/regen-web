@@ -2,6 +2,8 @@ import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import RegenIcon from '../icons/RegenIcon';
+import clsx from 'clsx';
+import NavbarContext from '../../../../web-www/src/components/navbarContext';
 // import {
 //   Link,
 //   useParams,
@@ -12,12 +14,27 @@ import RegenIcon from '../icons/RegenIcon';
 
 interface HeaderProps {
   logo: string;
+  absolute?: boolean;
   children?: any;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
   background: {
     backgroundColor: theme.palette.primary.main,
+  },
+  transparent: {
+    backgroundColor: `rgba(0,0,0,0)`,
+  },
+  absolute: {
+    position: 'absolute',
+    'z-index': 10,
+    width: '100%',
+  },
+  blackText: {
+    color: '#000',
+  },
+  whiteText: {
+    color: '#fff',
   },
   root: {
     [theme.breakpoints.up('md')]: {
@@ -59,11 +76,21 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function Header({ children, logo }: HeaderProps): JSX.Element {
+export default function Header({
+  children,
+  logo,
+  transparent,
+  whiteText,
+  absolute,
+}: HeaderProps): JSX.Element {
   const classes = useStyles({});
+  let headerClass = [];
+  headerClass.push(transparent ? classes.transparent : classes.background);
+  headerClass.push(absolute ? classes.absolute : '');
+  headerClass.push(whiteText ? classes.whiteText : classes.blackText);
   // TODO: Add search/menu logic
   return (
-    <div className={classes.background}>
+    <div className={clsx(headerClass)}>
       <Grid container direction="row" className={classes.root} alignItems="center" justify="space-between">
         <Grid item>
           <a href="/">

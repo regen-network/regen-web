@@ -135,6 +135,17 @@ export default function BuyerCreate(): JSX.Element {
               label="Organization name"
             />
             <Geocoder
+              types={[
+                'address',
+                'country',
+                'region',
+                'postcode',
+                'district',
+                'place',
+                'locality',
+                'neighborhood',
+                'address',
+              ]}
               className={classes.input}
               token={process.env.REACT_APP_MAPBOX_TOKEN}
               fullWidth
@@ -169,6 +180,17 @@ export default function BuyerCreate(): JSX.Element {
               label="Full name"
             />
             <Geocoder
+              types={[
+                'address',
+                'country',
+                'region',
+                'postcode',
+                'district',
+                'place',
+                'locality',
+                'neighborhood',
+                'address',
+              ]}
               className={classes.input}
               token={process.env.REACT_APP_MAPBOX_TOKEN}
               fullWidth

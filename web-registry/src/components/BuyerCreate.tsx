@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
-import Title from 'web-components/lib/components/title';
 import { useMutation } from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
 import TextField from '@material-ui/core/TextField';
@@ -10,6 +9,9 @@ import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import Radio from '@material-ui/core/Radio';
+
+import Title from 'web-components/lib/components/title';
+import Geocoder from 'web-components/lib/components/map/Geocoder';
 
 const CREATE_USER = gql`
   mutation ReallyCreateUser($input: ReallyCreateUserInput!) {
@@ -66,7 +68,9 @@ export default function BuyerCreate(): JSX.Element {
 
   const [buyerType, setBuyerType] = useState<string>('organization');
   const [orgName, setOrgName] = useState<string>('');
+  const [orgAddress, setOrgAddress] = useState<string | object>('');
   const [name, setName] = useState<string>('');
+  const [address, setAddress] = useState<string | object>('');
   const [email, setEmail] = useState<string>('');
 
   return (
@@ -85,6 +89,7 @@ export default function BuyerCreate(): JSX.Element {
                     email,
                     name,
                     orgName,
+                    orgAddress,
                     walletAddr: name, // fake tmp wallet address (required for org)
                   },
                 },
@@ -96,14 +101,12 @@ export default function BuyerCreate(): JSX.Element {
                     roles: ['buyer'],
                     email,
                     name,
+                    address,
+                    walletAddr: name, // fake tmp wallet address (to make user able to buy credits)
                   },
                 },
               });
             }
-            // Reset text fields
-            setName('');
-            setOrgName('');
-            setEmail('');
           } catch (e) {}
         }}
         noValidate
@@ -130,6 +133,13 @@ export default function BuyerCreate(): JSX.Element {
               value={orgName}
               onChange={e => setOrgName(e.target.value)}
               label="Organization name"
+            />
+            <Geocoder
+              className={classes.input}
+              token={process.env.REACT_APP_MAPBOX_TOKEN}
+              fullWidth
+              setFeature={setOrgAddress}
+              label="Organization address"
             />
             <TextField
               fullWidth
@@ -158,6 +168,13 @@ export default function BuyerCreate(): JSX.Element {
               onChange={e => setName(e.target.value)}
               label="Full name"
             />
+            <Geocoder
+              className={classes.input}
+              token={process.env.REACT_APP_MAPBOX_TOKEN}
+              fullWidth
+              setFeature={setAddress}
+              label="Address"
+            />
             <TextField
               fullWidth
               className={classes.input}
@@ -172,8 +189,7 @@ export default function BuyerCreate(): JSX.Element {
           Create buyer
         </Button>
       </form>
-      {userData && <div>User successfully created</div>}
-      {userOrganizationData && <div>User and Organization successfully created</div>}
+      {(userData || userOrganizationData) && <div>Buyer successfully created</div>}
       {userError && (
         <div>
           Error:

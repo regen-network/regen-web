@@ -3,7 +3,6 @@ import { makeStyles, Theme } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import RegenIcon from '../icons/RegenIcon';
 import clsx from 'clsx';
-import NavbarContext from '../../../../web-www/src/components/navbarContext';
 // import {
 //   Link,
 //   useParams,
@@ -16,6 +15,8 @@ interface HeaderProps {
   logo: string;
   absolute?: boolean;
   children?: any;
+  transparent?: boolean;
+  color?: string;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -30,12 +31,12 @@ const useStyles = makeStyles((theme: Theme) => ({
     'z-index': 10,
     width: '100%',
   },
-  blackText: {
-    color: '#000',
-  },
-  whiteText: {
-    color: '#fff',
-  },
+  color: (props: any) => ({
+    color: props.textColor || '#000',
+    '& ul > li > a': {
+      color: props.textColor || '#000',
+    },
+  }),
   root: {
     [theme.breakpoints.up('md')]: {
       padding: `${theme.spacing(2.5)} ${theme.spacing(37)}`,
@@ -76,22 +77,22 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function Header({
-  children,
-  logo,
-  transparent,
-  whiteText,
-  absolute,
-}: HeaderProps): JSX.Element {
-  const classes = useStyles({});
+export default function Header({ children, logo, transparent, color, absolute }: HeaderProps): JSX.Element {
+  const classes = useStyles({ textColor: color });
   let headerClass = [];
   headerClass.push(transparent ? classes.transparent : classes.background);
   headerClass.push(absolute ? classes.absolute : '');
-  headerClass.push(whiteText ? classes.whiteText : classes.blackText);
+  headerClass.push(classes.color, classes.root);
   // TODO: Add search/menu logic
   return (
-    <div className={clsx(headerClass)}>
-      <Grid container direction="row" className={classes.root} alignItems="center" justify="space-between">
+    <div>
+      <Grid
+        className={clsx(headerClass)}
+        container
+        direction="row"
+        alignItems="center"
+        justify="space-between"
+      >
         <Grid item>
           <a href="/">
             <RegenIcon />

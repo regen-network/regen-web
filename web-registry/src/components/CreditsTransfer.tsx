@@ -20,24 +20,7 @@ import TableRow from '@material-ui/core/TableRow';
 const TRANSFER_CREDITS = gql`
   mutation TransferCredits($input: TransferCreditsInput!) {
     transferCredits(input: $input) {
-      accountBalance {
-        id
-        walletId
-        liquidBalance
-        creditVintageByCreditVintageId {
-          createdAt
-          creditClassByCreditClassId {
-            creditClassVersionsById {
-              nodes {
-                name
-              }
-            }
-          }
-          projectByProjectId {
-            name
-          }
-        }
-      }
+      uuid
     }
   }
 `;
@@ -90,6 +73,7 @@ const ALL_PARTIES = gql`
         type
         name
         walletId
+        addressId
       }
     }
   }
@@ -152,6 +136,7 @@ export default function CreditsTransfer(): JSX.Element {
   const [vintageId, setVintageId] = useState('');
   const [oldBalances, setOldBalances] = useState<Balance[]>([]);
   const [buyerWalletId, setBuyerWalletId] = useState('');
+  const [addressId, setAddressId] = useState('');
   const [units, setUnits] = useState(1);
   const [creditPrice, setCreditPrice] = useState(1);
   const [showResult, setShowResult] = useState(false);
@@ -177,6 +162,10 @@ export default function CreditsTransfer(): JSX.Element {
       setShowResult(false);
     }
     setBuyerWalletId(event.target.value as string);
+    if (partiesData && partiesData.allParties) {
+      const selectedParty = partiesData.allParties.nodes.find((party: any) => party.walletId === event.target.value);
+      setAddressId(selectedParty.addressId);
+    }
   };
 
   if (vintagesLoading || partiesLoading) return <div>Loading...</div>;
@@ -240,6 +229,7 @@ export default function CreditsTransfer(): JSX.Element {
                     units,
                     creditPrice,
                     txState: 'SUCCEEDED',
+                    addressId,
                   },
                 },
               });
@@ -291,7 +281,7 @@ export default function CreditsTransfer(): JSX.Element {
               partiesData.allParties &&
               partiesData.allParties.nodes.map(
                 (node: any) =>
-                  node.walletId &&
+                  node.walletId && node.addressId &&
                   (!vintage ||
                     (vintage &&
                       vintage.projectByProjectId.developerId !== node.id &&
@@ -366,8 +356,11 @@ export default function CreditsTransfer(): JSX.Element {
       {availableCreditsData && availableCreditsData.getAvailableCredits && (
         <div>Available credits to transfer: {availableCreditsData.getAvailableCredits}</div>
       )}
-      {data && receiverBalance && showResult && (
+      {data && data.transferCredits && receiverBalance && showResult && (
         <div>
+          <p>
+            Transaction id: {data.transferCredits.uuid}
+          </p>
           <p>
             {units} {pluralize(units, 'credit')} successfully transfered.
           </p>

@@ -163,7 +163,9 @@ export default function CreditsTransfer(): JSX.Element {
     }
     setBuyerWalletId(event.target.value as string);
     if (partiesData && partiesData.allParties) {
-      const selectedParty = partiesData.allParties.nodes.find((party: any) => party.walletId === event.target.value);
+      const selectedParty = partiesData.allParties.nodes.find(
+        (party: any) => party.walletId === event.target.value,
+      );
       setAddressId(selectedParty.addressId);
     }
   };
@@ -281,7 +283,8 @@ export default function CreditsTransfer(): JSX.Element {
               partiesData.allParties &&
               partiesData.allParties.nodes.map(
                 (node: any) =>
-                  node.walletId && node.addressId &&
+                  node.walletId &&
+                  node.addressId &&
                   (!vintage ||
                     (vintage &&
                       vintage.projectByProjectId.developerId !== node.id &&
@@ -358,9 +361,7 @@ export default function CreditsTransfer(): JSX.Element {
       )}
       {data && data.transferCredits && receiverBalance && showResult && (
         <div>
-          <p>
-            Transaction id: {data.transferCredits.uuid}
-          </p>
+          <p>Transaction id: {data.transferCredits.uuid}</p>
           <p>
             {units} {pluralize(units, 'credit')} successfully transfered.
           </p>

@@ -11,10 +11,11 @@ The website for the [Regen Network](https://regen.network) decentralized infrast
 
 ## Installation
 
-This project uses [lerna](https://github.com/lerna/lerna) to manage multiple packages:
-- `web`: Main React application
+This project uses [lerna](https://github.com/lerna/lerna) with [yarn workspaces](https://classic.yarnpkg.com/en/docs/workspaces/) to manage multiple packages:
+- `web-registry`: Registry React application
 - `web-components`: React components and [material-ui](https://material-ui.com/) custom theme
 - `web-storybook`: [Storybook](https://storybook.js.org/) config
+- `web-www`: Regen website based on [Gatsby](https://www.gatsbyjs.org/)
 
 Install dependencies using:
 ```sh
@@ -29,7 +30,7 @@ yarn build
 
 ## Environment variables
 
-Set variables in `.env` files in `web/` and `web-storybook/` folders based on provided `.env.example` files.
+Set variables in `.env` files in `web-registry/` and `web-storybook/` folders based on provided `.env.example` files.
 
 ## Development
 
@@ -39,9 +40,14 @@ yarn watch
 ```
 It will watch for changes in `web-components` and rebuild them in `web-components/lib` directory.
 
-Then, to run the main app:
+Then, to run the registry app:
 ```sh
 yarn start
+```
+
+Then, to run the website (Gatsby):
+```sh
+yarn start-www
 ```
 
 To run Storybook:
@@ -51,14 +57,22 @@ yarn storybook
 
 ## Deployment
 
-Compile `web-components` and `web` to `web-components/lib` and `web/build` respectively:
+### Registry
+Compile `web-components` and `web-registry` to `web-components/lib` and `web-registry/build` respectively:
 ```sh
 yarn build
 ```
 
+### Storybook
 Compile `web-components` and `web-storybook` to `web-components/lib` and `web-storybook/build` respectively:
 ```sh
 yarn build-storybook
+```
+
+### Website
+Compile `web-components` and `web-www` to `web-components/lib` and `web-www/public` respectively:
+```sh
+yarn build-www
 ```
 
 ## Testing

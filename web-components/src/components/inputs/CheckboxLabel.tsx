@@ -23,7 +23,7 @@ export default function CheckboxLabel({ label, ...props }: CheckboxLabelProps): 
   const classes = useStyles();
   return (
     <FormControlLabel
-      className={classes.root}
+      className={`${classes.root} ${props.className}`}
       control={
         <Checkbox {...props} color="secondary" icon={<UncheckedIcon />} checkedIcon={<CheckedIcon />} />
       }

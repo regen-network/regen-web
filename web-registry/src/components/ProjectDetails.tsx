@@ -29,6 +29,7 @@ import BuyFooter from 'web-components/lib/components/buy-footer';
 import MrvTabs from 'web-components/lib/components/tabs';
 import Table from 'web-components/lib/components/table';
 import Modal from 'web-components/lib/components/modal';
+import CreditsPurchaseForm from './CreditsPurchaseForm';
 
 import { getImgSrc } from '../lib/imgSrc';
 
@@ -333,7 +334,7 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
   }
 
   // Modal
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   const handleOpen = (): void => {
     setOpen(true);
   };
@@ -575,9 +576,10 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
         </div>
       )}
 
-      {project.presaleUrl && (
+      {project.creditPrice && (
         <Modal open={open} onClose={handleClose}>
-          <iframe title="airtable-presale-form" src={project.presaleUrl} />
+          <CreditsPurchaseForm creditPrice={project.creditPrice} />
+          {/*<iframe title="airtable-presale-form" src={project.presaleUrl} />*/}
         </Modal>
       )}
     </div>

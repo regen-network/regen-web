@@ -2,14 +2,15 @@ import React from 'react';
 
 import DropdownIcon from '../icons/DropdownIcon';
 import TextField from './TextField';
+import { StandardTextFieldProps as TextFieldProps } from '@material-ui/core/TextField';
 
 export interface Option {
   value: string;
   label: string;
 }
 
-interface SelectTextFieldProps {
-  options: Option[];
+interface SelectTextFieldProps extends TextFieldProps {
+  options?: Option[];
 }
 
 export default function SelectTextField({ options, ...props }: SelectTextFieldProps): JSX.Element {
@@ -22,11 +23,12 @@ export default function SelectTextField({ options, ...props }: SelectTextFieldPr
         IconComponent: DropdownIcon,
       }}
     >
-      {options.map(option => (
-        <option key={option.value} value={option.value}>
-          {option.label}
-        </option>
-      ))}
+      {options &&
+        options.map(option => (
+          <option key={option.value} value={option.value}>
+            {option.label}
+          </option>
+        ))}
     </TextField>
   );
 }

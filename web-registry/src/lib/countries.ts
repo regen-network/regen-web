@@ -1,4 +1,4 @@
-export const countries = {
+export const countries: { [key: string]: string } = {
   AD: 'Andorra',
   AE: 'United Arab Emirates',
   AF: 'Afghanistan',

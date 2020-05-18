@@ -2,11 +2,8 @@ import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import TextField, { StandardTextFieldProps as TextFieldProps } from '@material-ui/core/TextField';
 
-const useStyles = makeStyles((theme: Theme) => ({
-  root: {
-    '&.MuiTextField-root': {
-      margin: theme.spacing(1),
-    },
+const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
+  root: props => ({
     '& label': {
       transform: 'scale(1)',
       color: theme.palette.primary.contrastText,
@@ -22,7 +19,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       },
     },
     '& .MuiInput-formControl': {
-      marginTop: theme.spacing(7),
+      marginTop: props.label ? theme.spacing(7) : 0,
     },
     '& .MuiSvgIcon-root': {
       width: theme.spacing(3.25),
@@ -50,19 +47,21 @@ const useStyles = makeStyles((theme: Theme) => ({
         paddingRight: theme.spacing(3.25),
       },
     },
-  },
+  }),
 }));
 
 interface RegenTextFieldProps extends TextFieldProps {
   children?: any;
 }
 
+interface StyleProps extends TextFieldProps {}
+
 export default function RegenTextField({ children, ...props }: RegenTextFieldProps): JSX.Element {
-  const classes = useStyles();
+  const classes = useStyles({ ...props });
   return (
     <TextField
       {...props}
-      className={classes.root}
+      className={`${classes.root} ${props.className}`}
       InputProps={{ disableUnderline: true }}
       InputLabelProps={{ focused: false }}
       fullWidth

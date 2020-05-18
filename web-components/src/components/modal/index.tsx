@@ -13,6 +13,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   content: {
     outline: 'none',
     position: 'absolute',
+    overflow: 'auto',
     [theme.breakpoints.up('sm')]: {
       borderRadius: '20px',
       transform: 'translate(-50%, -50%)',
@@ -22,11 +23,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     [theme.breakpoints.up('md')]: {
       width: '50%',
-      height: '70%',
+      height: '80%',
     },
     [theme.breakpoints.between('sm', 'sm')]: {
       width: '70%',
-      height: '70%',
+      height: '80%',
     },
     [theme.breakpoints.down('xs')]: {
       width: `calc(100% - 40px)`,

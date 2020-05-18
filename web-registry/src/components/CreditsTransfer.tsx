@@ -385,9 +385,7 @@ export default function CreditsTransfer(): JSX.Element {
               <TableBody>
                 {sendersBalances.map(row => (
                   <TableRow key={row.name}>
-                    <TableCell component="th" scope="row">
-                      {row.name}
-                    </TableCell>
+                    <TableCell scope="row">{row.name}</TableCell>
                     <TableCell>{row.walletId}</TableCell>
                     <TableCell align="right">{row.oldBalance}</TableCell>
                     <TableCell align="right">{row.newBalance}</TableCell>
@@ -409,9 +407,7 @@ export default function CreditsTransfer(): JSX.Element {
               </TableHead>
               <TableBody>
                 <TableRow key={receiverBalance.name}>
-                  <TableCell component="th" scope="row">
-                    {receiverBalance.name}
-                  </TableCell>
+                  <TableCell scope="row">{receiverBalance.name}</TableCell>
                   <TableCell>{receiverBalance.walletId}</TableCell>
                   <TableCell align="right">{receiverBalance.oldBalance}</TableCell>
                   <TableCell align="right">{receiverBalance.newBalance}</TableCell>

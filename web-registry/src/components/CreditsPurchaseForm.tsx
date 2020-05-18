@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+import axios from 'axios';
 
 import Title from 'web-components/lib/components/title';
 import Description from 'web-components/lib/components/description';
@@ -74,6 +75,14 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   stateCountryTextField: {
     marginTop: theme.spacing(6),
+    [theme.breakpoints.up('sm')]: {
+      '&:first-of-type': {
+        marginRight: theme.spacing(2.375),
+      },
+      '&:last-of-type': {
+        marginLeft: theme.spacing(2.375),
+      },
+    },
   },
   orgCheckbox: {
     marginTop: theme.spacing(4.5),
@@ -111,8 +120,25 @@ export default function CreditsPurchaseForm({ creditPrice }: CreditsPurchaseForm
   const [city, setCity] = useState<string>('');
   const [state, setState] = useState<string>('');
   const [country, setCountry] = useState<string>('US');
-  const [stateOptions] = useState<Option[]>([]);
-  // const [stateOptions, setStateOptions] = useState<Option[]>([]);
+  const [stateOptions, setStateOptions] = useState<Option[]>([]);
+
+  const searchState = async (countryId: string): Promise<void> => {
+    const resp = await axios({
+      url: 'https://geodata.solutions/api/api.php?type=getStates&countryId=' + countryId,
+      method: 'POST',
+    });
+    const respOK = resp && resp.status === 200 && resp.statusText === 'OK';
+    if (respOK) {
+      const data = await resp.data;
+      setStateOptions(Object.keys(data.result).map(key => ({ value: key, label: data.result[key] })));
+    }
+  };
+
+  useEffect(() => {
+    if (stateOptions.length === 0) {
+      searchState(country);
+    }
+  });
 
   const total: number = units * creditPrice.unitPrice;
   const formattedTotal: string = new Intl.NumberFormat('en-US', { minimumFractionDigits: 2 }).format(total);
@@ -182,7 +208,7 @@ export default function CreditsPurchaseForm({ creditPrice }: CreditsPurchaseForm
           value={city}
           onChange={e => setCity(e.target.value)}
         />
-        <Grid container alignItems="center">
+        <Grid container alignItems="center" wrap="nowrap">
           <Grid item xs={12} sm={6} className={classes.stateCountryTextField}>
             <SelectTextField
               options={stateOptions}
@@ -195,7 +221,10 @@ export default function CreditsPurchaseForm({ creditPrice }: CreditsPurchaseForm
             <SelectTextField
               options={Object.keys(countries).map(key => ({ value: key, label: countries[key] }))}
               value={country}
-              onChange={e => setCountry(e.target.value)}
+              onChange={async e => {
+                setCountry(e.target.value);
+                await searchState(e.target.value);
+              }}
               label="Country"
             />
           </Grid>

@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import TextField from 'web-components/lib/components/inputs/TextField';
+import CheckboxLabel from 'web-components/lib/components/inputs/CheckboxLabel';
 import SelectTextField, { Option } from 'web-components/lib/components/inputs/SelectTextField';
 import { withKnobs, text, boolean } from '@storybook/addon-knobs';
 
 export default {
-  title: 'Components|TextField',
+  title: 'Components|Inputs',
   component: TextField,
   decorators: [withKnobs],
 };
@@ -54,5 +55,17 @@ function EditableSelectTextField(): JSX.Element {
   );
 }
 
+function EditableCheckboxLabel(): JSX.Element {
+  const [value, setValue] = useState(true);
+  return (
+    <CheckboxLabel
+      checked={value}
+      onChange={e => setValue(e.target.checked)}
+      label={text('Label', 'This is a label')}
+    />
+  );
+}
+
 export const textField = (): JSX.Element => <EditableTextField />;
 export const selectTextField = (): JSX.Element => <EditableSelectTextField />;
+export const checkboxLabel = (): JSX.Element => <EditableCheckboxLabel />;

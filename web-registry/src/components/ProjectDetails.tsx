@@ -576,9 +576,9 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
         </div>
       )}
 
-      {project.creditPrice && (
+      {project.creditPrice && project.stripePrice &&(
         <Modal open={open} onClose={handleClose}>
-          <CreditsPurchaseForm creditPrice={project.creditPrice} />
+          <CreditsPurchaseForm creditPrice={project.creditPrice} stripePrice={project.stripePrice} />
           {/*<iframe title="airtable-presale-form" src={project.presaleUrl} />*/}
         </Modal>
       )}

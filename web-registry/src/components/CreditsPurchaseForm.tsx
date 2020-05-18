@@ -3,6 +3,7 @@ import { makeStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import axios from 'axios';
+import { loadStripe } from '@stripe/stripe-js';
 
 import Title from 'web-components/lib/components/title';
 import Description from 'web-components/lib/components/description';
@@ -13,6 +14,8 @@ import SelectTextField, { Option } from 'web-components/lib/components/inputs/Se
 import { CreditPrice } from 'web-components/lib/components/buy-footer';
 
 import { countries } from '../lib/countries';
+
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_API_KEY || '');
 
 const useStyles = makeStyles((theme: Theme) => ({
   title: {
@@ -107,9 +110,10 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 interface CreditsPurchaseFormProps {
   creditPrice: CreditPrice;
+  stripePrice: string;
 }
 
-export default function CreditsPurchaseForm({ creditPrice }: CreditsPurchaseFormProps): JSX.Element {
+export default function CreditsPurchaseForm({ creditPrice, stripePrice }: CreditsPurchaseFormProps): JSX.Element {
   const classes = useStyles();
   const [units, setUnits] = useState<number>(0);
   const [orgType, setOrgType] = useState<boolean>(false);
@@ -148,7 +152,24 @@ export default function CreditsPurchaseForm({ creditPrice }: CreditsPurchaseForm
       <Title variant="h3" className={classes.title}>
         Buy Credit
       </Title>
-      <form className={classes.form} onSubmit={() => {}}>
+      <form className={classes.form} onSubmit={
+        async (event) => {
+          // TODO create user/org with address
+          const stripe = await stripePromise!;
+            // const { error } = await stripe!.redirectToCheckout({
+            await stripe!.redirectToCheckout({
+              items: [
+                { sku: stripePrice, quantity: units }
+              ],
+              successUrl: window.location.href, // TODO replace with post purchase page
+              cancelUrl: window.location.href,
+              customerEmail: email,
+            });
+            // TODO If `redirectToCheckout` fails due to a browser or network
+            // error, display the localized error message to your customer
+            // using `error.message`.
+        }}
+      >
         <Title className={classes.subtitle} variant="h5">
           Number of credits
         </Title>

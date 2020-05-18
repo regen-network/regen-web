@@ -384,6 +384,7 @@
         "date": "March 15, 2020",
         "url": "test"
       }],
+      "stripePrice": "sku_HAqf7cJtNFynOf",
       "creditPrice": {
         "unitPrice": 27.50,
         "currency": "AUD"

@@ -527,8 +527,9 @@
       },
       "credits": {
         "purchased": 0,
-        "issued": 1000
+        "issued": 22500
       },
+      "hideCreditDetails": true,
       "presaleUrl": "https://airtable.com/embed/shrd5xPzFPiyQSSMX?backgroundColor=gray"
     }
   ]

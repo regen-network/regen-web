@@ -334,7 +334,7 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
   }
 
   // Modal
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const handleOpen = (): void => {
     setOpen(true);
   };

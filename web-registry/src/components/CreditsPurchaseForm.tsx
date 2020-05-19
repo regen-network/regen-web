@@ -147,29 +147,31 @@ export default function CreditsPurchaseForm({ creditPrice, stripePrice }: Credit
   const total: number = units * creditPrice.unitPrice;
   const formattedTotal: string = new Intl.NumberFormat('en-US', { minimumFractionDigits: 2 }).format(total);
 
+  const handleClick = async (event: any) => {
+    // TODO create user/org with address
+    const stripe = await stripePromise;
+    if (stripe) {
+      // const { error } = await stripe.redirectToCheckout({
+      await stripe.redirectToCheckout({
+        items: [
+          { sku: stripePrice, quantity: units }
+        ],
+        successUrl: window.location.href, // TODO replace with post purchase page
+        cancelUrl: window.location.href,
+        customerEmail: email,
+      });
+      // TODO If `redirectToCheckout` fails due to a browser or network
+      // error, display the localized error message to your customer
+      // using `error.message`.
+    }
+  };
+
   return (
     <div>
       <Title variant="h3" className={classes.title}>
         Buy Credit
       </Title>
-      <form className={classes.form} onSubmit={
-        async (event) => {
-          // TODO create user/org with address
-          const stripe = await stripePromise!;
-            // const { error } = await stripe!.redirectToCheckout({
-            await stripe!.redirectToCheckout({
-              items: [
-                { sku: stripePrice, quantity: units }
-              ],
-              successUrl: window.location.href, // TODO replace with post purchase page
-              cancelUrl: window.location.href,
-              customerEmail: email,
-            });
-            // TODO If `redirectToCheckout` fails due to a browser or network
-            // error, display the localized error message to your customer
-            // using `error.message`.
-        }}
-      >
+      <form className={classes.form}>
         <Title className={classes.subtitle} variant="h5">
           Number of credits
         </Title>
@@ -258,11 +260,10 @@ export default function CreditsPurchaseForm({ creditPrice, stripePrice }: Credit
             label="Yes, I’d like to receive news and updates about this project!"
           />
         </div>
-
-        <div className={classes.submitButton}>
-          <ContainedButton type="submit">buy for ${formattedTotal}</ContainedButton>
-        </div>
       </form>
+      <div className={classes.submitButton}>
+        <ContainedButton onClick={handleClick}>buy for ${formattedTotal}</ContainedButton>
+      </div>
     </div>
   );
 }

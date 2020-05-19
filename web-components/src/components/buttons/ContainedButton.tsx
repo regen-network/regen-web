@@ -4,7 +4,7 @@ import Button, { ButtonProps } from '@material-ui/core/Button';
 
 interface ContainedButtonProps extends ButtonProps {
   children?: any;
-  onClick?: () => void;
+  onClick?: (e: any) => void | Promise<void>;
 }
 
 const CustomButton = withStyles((theme: Theme) => ({

@@ -23,21 +23,31 @@ export default function CreditsGauge(props: CreditsProps): JSX.Element {
   return (
     <Grid container direction="column">
       <Grid item container direction="row" justify="space-between">
+        {props.purchased > 0 && (
+          <GaugeText
+            format
+            number={props.purchased}
+            label={`${pluralize(props.purchased, 'credit')} purchased`}
+            variant="body2"
+          />
+        )}
         <GaugeText
-          number={props.purchased}
-          label={`${pluralize(props.purchased, 'credit')} purchased`}
+          format
+          number={available}
+          label={`${pluralize(available, 'credit')} available`}
           variant="body2"
         />
-        <GaugeText number={available} label={`${pluralize(available, 'credit')} available`} variant="body2" />
       </Grid>
-      <Grid item className={classes.gauge}>
-        <Gauge
-          height="1.6875rem"
-          borderRadius="3.125rem"
-          amount={props.purchased}
-          totalAmount={props.issued}
-        />
-      </Grid>
+      {props.purchased > 0 && (
+        <Grid item className={classes.gauge}>
+          <Gauge
+            height="1.6875rem"
+            borderRadius="3.125rem"
+            amount={props.purchased}
+            totalAmount={props.issued}
+          />
+        </Grid>
+      )}
     </Grid>
   );
 }

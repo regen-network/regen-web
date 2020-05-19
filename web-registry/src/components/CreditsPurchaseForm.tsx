@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import axios from 'axios';
 import { loadStripe } from '@stripe/stripe-js';
+import { useParams } from 'react-router-dom';
 
 import Title from 'web-components/lib/components/title';
 import Description from 'web-components/lib/components/description';
@@ -113,7 +114,10 @@ interface CreditsPurchaseFormProps {
   stripePrice: string;
 }
 
-export default function CreditsPurchaseForm({ creditPrice, stripePrice }: CreditsPurchaseFormProps): JSX.Element {
+export default function CreditsPurchaseForm({
+  creditPrice,
+  stripePrice,
+}: CreditsPurchaseFormProps): JSX.Element {
   const classes = useStyles();
   const [units, setUnits] = useState<number>(0);
   const [orgType, setOrgType] = useState<boolean>(false);
@@ -125,6 +129,7 @@ export default function CreditsPurchaseForm({ creditPrice, stripePrice }: Credit
   const [state, setState] = useState<string>('');
   const [country, setCountry] = useState<string>('US');
   const [stateOptions, setStateOptions] = useState<Option[]>([]);
+  const { projectId } = useParams();
 
   const searchState = async (countryId: string): Promise<void> => {
     const resp = await axios({
@@ -147,16 +152,14 @@ export default function CreditsPurchaseForm({ creditPrice, stripePrice }: Credit
   const total: number = units * creditPrice.unitPrice;
   const formattedTotal: string = new Intl.NumberFormat('en-US', { minimumFractionDigits: 2 }).format(total);
 
-  const handleClick = async (event: any) => {
+  const handleClick = async (event: any): Promise<void> => {
     // TODO create user/org with address
     const stripe = await stripePromise;
     if (stripe) {
       // const { error } = await stripe.redirectToCheckout({
       await stripe.redirectToCheckout({
-        items: [
-          { sku: stripePrice, quantity: units }
-        ],
-        successUrl: window.location.href, // TODO replace with post purchase page
+        items: [{ sku: stripePrice, quantity: units }],
+        successUrl: `${window.location.origin}/post-purchase/${projectId}`,
         cancelUrl: window.location.href,
         customerEmail: email,
       });

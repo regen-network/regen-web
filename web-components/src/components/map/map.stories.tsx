@@ -1,5 +1,6 @@
 import * as React from 'react';
 import Map from 'web-components/lib/components/map';
+// import Geocoder from 'web-components/lib/components/map/Geocoder';
 // import * as togeojson from '@mapbox/togeojson';
 import { withKnobs, object } from '@storybook/addon-knobs';
 
@@ -110,3 +111,14 @@ const geojson = {
 export const map = (): JSX.Element => (
   <Map geojson={object('geojson', geojson)} token={process.env.STORYBOOK_MAPBOX_TOKEN} />
 );
+
+// export const geocoder = (): JSX.Element => {
+//   return (
+//     <Geocoder
+//       token={process.env.STORYBOOK_MAPBOX_TOKEN || ''}
+//       fullWidth
+//       setFeature={() => {}}
+//       label="Address"
+//     />
+//   );
+// };

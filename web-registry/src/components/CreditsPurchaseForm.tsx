@@ -135,16 +135,13 @@ export default function CreditsPurchaseForm({
   const [country, setCountry] = useState<string>('US');
   const [stateOptions, setStateOptions] = useState<Option[]>([]);
 
-  const [createUser, { data: userData, error: userError }] = useMutation(CREATE_USER, {
+  const [createUser] = useMutation(CREATE_USER, {
     errorPolicy: 'ignore',
   });
 
-  const [createUserOrganization, { data: userOrganizationData, error: userOrganizationError }] = useMutation(
-    CREATE_USER_ORGANIZATION,
-    {
-      errorPolicy: 'ignore',
-    },
-  );
+  const [createUserOrganization] = useMutation(CREATE_USER_ORGANIZATION, {
+    errorPolicy: 'ignore',
+  });
 
   const { projectId } = useParams();
 
@@ -176,15 +173,15 @@ export default function CreditsPurchaseForm({
       let clientReferenceId: string;
       let result;
       const address = {
-        'place_type': ['place'],
+        place_type: ['place'],
         text: city,
         context: [
           { id: 'region', text: state },
           { id: 'country', text: countries.country },
-        ]
+        ],
       };
       if (orgType === true) {
-        const result = await createUserOrganization({
+        result = await createUserOrganization({
           variables: {
             input: {
               roles: ['buyer'],
@@ -198,7 +195,7 @@ export default function CreditsPurchaseForm({
         });
         clientReferenceId = result.data.createUserOrganization.uuid;
       } else {
-        const result = await createUser({
+        result = await createUser({
           variables: {
             input: {
               roles: ['buyer'],
@@ -225,8 +222,7 @@ export default function CreditsPurchaseForm({
         // error, display the localized error message to your customer
         // using `error.message`.
       }
-    } catch (e) {
-    }
+    } catch (e) {}
   };
 
   return (

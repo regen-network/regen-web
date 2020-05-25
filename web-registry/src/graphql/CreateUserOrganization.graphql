@@ -1,5 +1,9 @@
 mutation CreateUserOrganization($input: CreateUserOrganizationInput!) {
   createUserOrganization(input: $input) {
-    uuid
+    organization {
+      id
+      walletId
+      addressId
+    }
   }
 }

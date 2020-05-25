@@ -2,6 +2,8 @@ mutation ReallyCreateUser($input: ReallyCreateUserInput!) {
   reallyCreateUser(input: $input) {
     user {
       id
+      walletId
+      addressId
     }
   }
 }

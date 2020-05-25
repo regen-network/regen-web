@@ -170,7 +170,8 @@ export default function CreditsPurchaseForm({
     e.preventDefault();
     // Create user or organization
     try {
-      let clientReferenceId: string;
+      let walletId: string;
+      let addressId: string;
       let result;
       const address = {
         place_type: ['place'],
@@ -193,7 +194,8 @@ export default function CreditsPurchaseForm({
             },
           },
         });
-        clientReferenceId = result.data.createUserOrganization.uuid;
+        walletId = result.data.createUserOrganization.organization.walletId;
+        addressId = result.data.createUserOrganization.organization.addressId;
       } else {
         result = await createUser({
           variables: {
@@ -206,7 +208,8 @@ export default function CreditsPurchaseForm({
             },
           },
         });
-        clientReferenceId = result.data.reallyCreateUser.user.id;
+        walletId = result.data.reallyCreateUser.user.walletId;
+        addressId = result.data.reallyCreateUser.user.addressId;
       }
       const stripe = await stripePromise;
       if (stripe) {
@@ -216,7 +219,7 @@ export default function CreditsPurchaseForm({
           successUrl: `${window.location.origin}/post-purchase/${projectId}`,
           cancelUrl: window.location.href,
           customerEmail: email,
-          clientReferenceId,
+          clientReferenceId: JSON.stringify({ walletId, addressId }),
         });
         // TODO If `redirectToCheckout` fails due to a browser or network
         // error, display the localized error message to your customer

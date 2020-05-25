@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import { useMutation } from '@apollo/react-hooks';
-import { gql } from 'apollo-boost';
+// import { gql } from 'apollo-boost';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import FormLabel from '@material-ui/core/FormLabel';
@@ -9,27 +9,13 @@ import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import Radio from '@material-ui/core/Radio';
+import { loader } from 'graphql.macro';
 
 import Title from 'web-components/lib/components/title';
 import Geocoder from 'web-components/lib/components/map/Geocoder';
 
-const CREATE_USER = gql`
-  mutation ReallyCreateUser($input: ReallyCreateUserInput!) {
-    reallyCreateUser(input: $input) {
-      user {
-        id
-      }
-    }
-  }
-`;
-
-const CREATE_USER_ORGANIZATION = gql`
-  mutation CreateUserOrganization($input: CreateUserOrganizationInput!) {
-    createUserOrganization(input: $input) {
-      uuid
-    }
-  }
-`;
+const CREATE_USER = loader('../graphql/ReallyCreateUser.graphql');
+const CREATE_USER_ORGANIZATION = loader('../graphql/CreateUserOrganization.graphql');
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {

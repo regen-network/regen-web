@@ -5,6 +5,8 @@ import Typography from '@material-ui/core/Typography';
 import axios from 'axios';
 import { loadStripe } from '@stripe/stripe-js';
 import { useParams } from 'react-router-dom';
+import { loader } from 'graphql.macro';
+import { useMutation } from '@apollo/react-hooks';
 
 import Title from 'web-components/lib/components/title';
 import Description from 'web-components/lib/components/description';
@@ -17,6 +19,9 @@ import { CreditPrice } from 'web-components/lib/components/buy-footer';
 import { countries } from '../lib/countries';
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_API_KEY || '');
+
+const CREATE_USER = loader('../graphql/ReallyCreateUser.graphql');
+const CREATE_USER_ORGANIZATION = loader('../graphql/CreateUserOrganization.graphql');
 
 const useStyles = makeStyles((theme: Theme) => ({
   title: {
@@ -119,16 +124,28 @@ export default function CreditsPurchaseForm({
   stripePrice,
 }: CreditsPurchaseFormProps): JSX.Element {
   const classes = useStyles();
-  const [units, setUnits] = useState<number>(0);
+  const [units, setUnits] = useState<number>(2);
   const [orgType, setOrgType] = useState<boolean>(false);
   const [updates, setUpdates] = useState<boolean>(false);
-  const [name, setName] = useState<string>('');
+  const [name, setName] = useState<string>('buyer1');
   const [orgName, setOrgName] = useState<string>('');
-  const [email, setEmail] = useState<string>('');
-  const [city, setCity] = useState<string>('');
-  const [state, setState] = useState<string>('');
+  const [email, setEmail] = useState<string>('buyer1@gmail.com');
+  const [city, setCity] = useState<string>('AAA');
+  const [state, setState] = useState<string>('Alaska');
   const [country, setCountry] = useState<string>('US');
   const [stateOptions, setStateOptions] = useState<Option[]>([]);
+
+  const [createUser, { data: userData, error: userError }] = useMutation(CREATE_USER, {
+    errorPolicy: 'ignore',
+  });
+
+  const [createUserOrganization, { data: userOrganizationData, error: userOrganizationError }] = useMutation(
+    CREATE_USER_ORGANIZATION,
+    {
+      errorPolicy: 'ignore',
+    },
+  );
+
   const { projectId } = useParams();
 
   const searchState = async (countryId: string): Promise<void> => {
@@ -152,20 +169,63 @@ export default function CreditsPurchaseForm({
   const total: number = units * creditPrice.unitPrice;
   const formattedTotal: string = new Intl.NumberFormat('en-US', { minimumFractionDigits: 2 }).format(total);
 
-  const handleClick = async (event: any): Promise<void> => {
-    // TODO create user/org with address
-    const stripe = await stripePromise;
-    if (stripe) {
-      // const { error } = await stripe.redirectToCheckout({
-      await stripe.redirectToCheckout({
-        items: [{ sku: stripePrice, quantity: units }],
-        successUrl: `${window.location.origin}/post-purchase/${projectId}`,
-        cancelUrl: window.location.href,
-        customerEmail: email,
-      });
-      // TODO If `redirectToCheckout` fails due to a browser or network
-      // error, display the localized error message to your customer
-      // using `error.message`.
+  const handleClick = async (e: any): Promise<void> => {
+    e.preventDefault();
+    // Create user or organization
+    try {
+      let clientReferenceId: string;
+      let result;
+      const address = {
+        'place_type': ['place'],
+        text: city,
+        context: [
+          { id: 'region', text: state },
+          { id: 'country', text: countries.country },
+        ]
+      };
+      if (orgType === true) {
+        const result = await createUserOrganization({
+          variables: {
+            input: {
+              roles: ['buyer'],
+              email,
+              name,
+              orgName,
+              orgAddress: address,
+              walletAddr: name, // fake tmp wallet address (required for org)
+            },
+          },
+        });
+        clientReferenceId = result.data.createUserOrganization.uuid;
+      } else {
+        const result = await createUser({
+          variables: {
+            input: {
+              roles: ['buyer'],
+              email,
+              name,
+              address,
+              walletAddr: name, // fake tmp wallet address (to make user able to buy credits)
+            },
+          },
+        });
+        clientReferenceId = result.data.reallyCreateUser.user.id;
+      }
+      const stripe = await stripePromise;
+      if (stripe) {
+        // const { error } = await stripe.redirectToCheckout({
+        await stripe.redirectToCheckout({
+          items: [{ sku: stripePrice, quantity: units }],
+          successUrl: `${window.location.origin}/post-purchase/${projectId}`,
+          cancelUrl: window.location.href,
+          customerEmail: email,
+          clientReferenceId,
+        });
+        // TODO If `redirectToCheckout` fails due to a browser or network
+        // error, display the localized error message to your customer
+        // using `error.message`.
+      }
+    } catch (e) {
     }
   };
 

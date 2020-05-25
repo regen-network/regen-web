@@ -13,6 +13,7 @@
     "auth0-js": "^9.13.1",
     "axios": "^0.19.2",
     "graphql": "^15.0.0",
+    "graphql.macro": "^1.4.2",
     "react": "^16.13.1",
     "react-apollo": "^3.1.4",
     "react-dom": "^16.13.1",

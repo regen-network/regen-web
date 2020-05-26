@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Popover, MenuList, Paper } from '@material-ui/core';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   popover: {
     pointerEvents: 'none',
   },
@@ -11,9 +11,13 @@ const useStyles = makeStyles((theme) => ({
   },
   text: (props: styleProps) => ({
     '& a': {
-      color: props.textColor || '#000',
+      color: props.textColor || theme.palette.primary.contrastText,
+      textDecoration: 'none',
+      '&:link, &:visited, &:hover, &:active': {
+        textDecoration: 'none',
+      },
     },
-    backgroundColor: 'rgba(51, 170, 51, 0)',
+    backgroundColor: 'rgba(0, 0, 0, 0)',
   }),
 }));
 

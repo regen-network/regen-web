@@ -1,8 +1,9 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles, Theme, MenuItem, MenuList, Link } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import RegenIcon from '../icons/RegenIcon';
 import clsx from 'clsx';
+import MenuHover from '../menu-hover';
 // import {
 //   Link,
 //   useParams,
@@ -20,6 +21,12 @@ interface HeaderProps {
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
+  menuList: {
+    display: 'flex',
+    position: 'unset',
+    width: 'unset',
+    'z-index': 0,
+  },
   background: {
     backgroundColor: theme.palette.primary.main,
   },
@@ -98,7 +105,29 @@ export default function Header({ children, logo, transparent, color, absolute }:
             <RegenIcon />
           </a>
         </Grid>
-        <Grid item>{children}</Grid>
+        <Grid item>
+          <MenuList className={classes.menuList}>
+            <MenuItem>
+              <Link href="/buyers">Buyers</Link>
+            </MenuItem>
+            <MenuItem>
+              <Link href="">Land Stewards</Link>
+            </MenuItem>
+            <MenuItem>
+              <MenuHover text="Learn More">
+                <MenuItem>
+                  <Link href="https://regen.network/#">Case Studies</Link>
+                </MenuItem>
+                <MenuItem>
+                  <Link href="https://regen.network/#">FAQ</Link>
+                </MenuItem>
+                <MenuItem>
+                  <Link href="https://regen.network/#">Team</Link>
+                </MenuItem>
+              </MenuHover>
+            </MenuItem>
+          </MenuList>
+        </Grid>
         {/*<Grid item alignItems="center">
           <SearchIcon className={classes.searchIcon} />
           <MenuIcon className={classes.menuIcon} fontSize="large" />

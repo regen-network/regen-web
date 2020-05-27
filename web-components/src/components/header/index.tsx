@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import RegenIcon from '../icons/RegenIcon';
 import clsx from 'clsx';
 import MenuHover from '../menu-hover';
+
 // import {
 //   Link,
 //   useParams,
@@ -12,12 +13,17 @@ import MenuHover from '../menu-hover';
 // import SearchIcon from '@material-ui/icons/Search';
 // import MenuIcon from '@material-ui/icons/Menu';
 
+export interface node {
+  [key: number]: React.ReactNode;
+}
+
 interface HeaderProps {
   logo: string;
   absolute?: boolean;
   children?: any;
   transparent?: boolean;
   color?: string;
+  menu: node | JSX.Element | React.ReactNode;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -39,9 +45,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: '100%',
   },
   color: (props: any) => ({
-    color: props.textColor || '#000',
+    color: props.textColor || theme.palette.primary.contrastText,
     '& ul > li > a': {
-      color: props.textColor || '#000',
+      color: props.textColor || theme.palette.primary.contrastText,
     },
   }),
   root: {
@@ -84,13 +90,55 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function Header({ children, logo, transparent, color, absolute }: HeaderProps): JSX.Element {
+export default function Header({
+  menu,
+  children,
+  logo,
+  transparent,
+  color,
+  absolute,
+}: HeaderProps): JSX.Element {
   const classes = useStyles({ textColor: color });
   let headerClass = [];
   headerClass.push(transparent ? classes.transparent : classes.background);
   headerClass.push(absolute ? classes.absolute : '');
   headerClass.push(classes.color, classes.root);
-  // TODO: Add search/menu logic
+
+  let buffer = [];
+  for (let [k, v] of Object.entries(menu)) {
+    if (React.isValidElement(v)) {
+      buffer.push(React.cloneElement(v, '', k));
+    } else {
+      let subBuffer: JSX.Element[] = [];
+      for (let [sk, sv] of Object.entries(v)) {
+        subBuffer.push(React.createElement('MenuItem', null, React.cloneElement(sv, null, sk)));
+      }
+      buffer.push(subBuffer);
+    }
+  }
+  let list = (
+    <MenuList className={classes.menuList}>
+      <MenuItem>
+        <Link href="/buyers">Buyers</Link>
+      </MenuItem>
+      <MenuItem>
+        <Link href="">Land Stewards</Link>
+      </MenuItem>
+      <MenuItem>
+        <MenuHover text="Learn More">
+          <MenuItem>
+            <Link href="https://regen.network/#">Case Studies</Link>
+          </MenuItem>
+          <MenuItem>
+            <Link href="https://regen.network/#">FAQ</Link>
+          </MenuItem>
+          <MenuItem>
+            <Link href="https://regen.network/#">Team</Link>
+          </MenuItem>
+        </MenuHover>
+      </MenuItem>
+    </MenuList>
+  );
   return (
     <div>
       <Grid
@@ -105,29 +153,7 @@ export default function Header({ children, logo, transparent, color, absolute }:
             <RegenIcon />
           </a>
         </Grid>
-        <Grid item>
-          <MenuList className={classes.menuList}>
-            <MenuItem>
-              <Link href="/buyers">Buyers</Link>
-            </MenuItem>
-            <MenuItem>
-              <Link href="">Land Stewards</Link>
-            </MenuItem>
-            <MenuItem>
-              <MenuHover text="Learn More">
-                <MenuItem>
-                  <Link href="https://regen.network/#">Case Studies</Link>
-                </MenuItem>
-                <MenuItem>
-                  <Link href="https://regen.network/#">FAQ</Link>
-                </MenuItem>
-                <MenuItem>
-                  <Link href="https://regen.network/#">Team</Link>
-                </MenuItem>
-              </MenuHover>
-            </MenuItem>
-          </MenuList>
-        </Grid>
+        <Grid item>{buffer}</Grid>
         {/*<Grid item alignItems="center">
           <SearchIcon className={classes.searchIcon} />
           <MenuIcon className={classes.menuIcon} fontSize="large" />

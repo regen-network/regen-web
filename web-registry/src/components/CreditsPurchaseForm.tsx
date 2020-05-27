@@ -208,7 +208,7 @@ export default function CreditsPurchaseForm({
           const errors: Partial<Values> = {};
           if (!values.email) {
             errors.email = requiredMessage;
-          } else if (!/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,10})$/i.test(values.email)) {
+          } else if (!/^([a-zA-Z0-9_\-.]+)@([a-zA-Z0-9_\-.]+)\.([a-zA-Z]{2,10})$/i.test(values.email)) {
             errors.email = 'Please enter a valid email address';
           }
           if (!values.name) {

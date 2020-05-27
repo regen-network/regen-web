@@ -7,6 +7,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import { useParams } from 'react-router-dom';
 import { loader } from 'graphql.macro';
 import { useMutation } from '@apollo/react-hooks';
+import { Formik, Form, Field } from 'formik';
 
 import Title from 'web-components/lib/components/title';
 import Description from 'web-components/lib/components/description';
@@ -98,11 +99,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   updatesCheckbox: {
     [theme.breakpoints.up('sm')]: {
-      marginTop: theme.spacing(12.5),
+      marginTop: theme.spacing(7.25),
       marginBottom: theme.spacing(12.5),
     },
     [theme.breakpoints.down('xs')]: {
-      marginTop: theme.spacing(10),
+      marginTop: theme.spacing(5.25),
       marginBottom: theme.spacing(8.75),
     },
   },
@@ -112,6 +113,22 @@ const useStyles = makeStyles((theme: Theme) => ({
   otherTitle: {
     marginTop: theme.spacing(13),
   },
+  textFields: {
+    [theme.breakpoints.up('sm')]: {
+      width: '70%',
+    },
+  },
+  error: {
+    color: theme.palette.error.main,
+    fontWeight: 'bold',
+    marginTop: theme.spacing(2),
+    [theme.breakpoints.up('sm')]: {
+      fontSize: theme.spacing(3.5),
+    },
+    [theme.breakpoints.down('xs')]: {
+      fontSize: theme.spacing(3),
+    },
+  },
 }));
 
 interface CreditsPurchaseFormProps {
@@ -119,20 +136,25 @@ interface CreditsPurchaseFormProps {
   stripePrice: string;
 }
 
+interface Values {
+  units: number;
+  orgType: boolean;
+  updates: boolean;
+  email: string;
+  name: string;
+  orgName: string;
+  city: string;
+  state: string;
+  country: string;
+}
+
 export default function CreditsPurchaseForm({
   creditPrice,
   stripePrice,
 }: CreditsPurchaseFormProps): JSX.Element {
   const classes = useStyles();
-  const [units, setUnits] = useState<number>(2);
-  const [orgType, setOrgType] = useState<boolean>(false);
-  const [updates, setUpdates] = useState<boolean>(false);
-  const [name, setName] = useState<string>('buyer1');
-  const [orgName, setOrgName] = useState<string>('');
-  const [email, setEmail] = useState<string>('buyer1@gmail.com');
-  const [city, setCity] = useState<string>('AAA');
-  const [state, setState] = useState<string>('Alaska');
-  const [country, setCountry] = useState<string>('US');
+  const initialCountry = 'US';
+  const { projectId } = useParams();
   const [stateOptions, setStateOptions] = useState<Option[]>([]);
 
   const [createUser] = useMutation(CREATE_USER, {
@@ -143,8 +165,6 @@ export default function CreditsPurchaseForm({
     errorPolicy: 'ignore',
   });
 
-  const { projectId } = useParams();
-
   const searchState = async (countryId: string): Promise<void> => {
     const resp = await axios({
       url: 'https://geodata.solutions/api/api.php?type=getStates&countryId=' + countryId,
@@ -153,179 +173,255 @@ export default function CreditsPurchaseForm({
     const respOK = resp && resp.status === 200 && resp.statusText === 'OK';
     if (respOK) {
       const data = await resp.data;
-      setStateOptions(Object.keys(data.result).map(key => ({ value: key, label: data.result[key] })));
+      const options = Object.keys(data.result).map(key => ({ value: key, label: data.result[key] }));
+      options.push({ value: '', label: 'Please choose a state' });
+      setStateOptions(options);
     }
   };
 
   useEffect(() => {
     if (stateOptions.length === 0) {
-      searchState(country);
+      searchState(initialCountry);
     }
   });
 
-  const total: number = units * creditPrice.unitPrice;
-  const formattedTotal: string = new Intl.NumberFormat('en-US', { minimumFractionDigits: 2 }).format(total);
-
-  const handleClick = async (e: any): Promise<void> => {
-    e.preventDefault();
-    // Create user or organization
-    try {
-      let walletId: string;
-      let addressId: string;
-      let result;
-      const address = {
-        place_type: ['place'],
-        text: city,
-        context: [
-          { id: 'region', text: state },
-          { id: 'country', text: countries.country },
-        ],
-      };
-      if (orgType === true) {
-        result = await createUserOrganization({
-          variables: {
-            input: {
-              roles: ['buyer'],
-              email,
-              name,
-              orgName,
-              orgAddress: address,
-              walletAddr: name, // fake tmp wallet address (required for org)
-            },
-          },
-        });
-        walletId = result.data.createUserOrganization.organization.walletId;
-        addressId = result.data.createUserOrganization.organization.addressId;
-      } else {
-        result = await createUser({
-          variables: {
-            input: {
-              roles: ['buyer'],
-              email,
-              name,
-              address,
-              walletAddr: name, // fake tmp wallet address (to make user able to buy credits)
-            },
-          },
-        });
-        walletId = result.data.reallyCreateUser.user.walletId;
-        addressId = result.data.reallyCreateUser.user.addressId;
-      }
-      const stripe = await stripePromise;
-      if (stripe) {
-        // const { error } = await stripe.redirectToCheckout({
-        await stripe.redirectToCheckout({
-          items: [{ sku: stripePrice, quantity: units }],
-          successUrl: `${window.location.origin}/post-purchase/${projectId}`,
-          cancelUrl: window.location.href,
-          customerEmail: email,
-          clientReferenceId: JSON.stringify({ walletId, addressId }),
-        });
-        // TODO If `redirectToCheckout` fails due to a browser or network
-        // error, display the localized error message to your customer
-        // using `error.message`.
-      }
-    } catch (e) {}
-  };
+  const requiredMessage: string = 'This field is required';
 
   return (
     <div>
       <Title variant="h3" className={classes.title}>
         Buy Credit
       </Title>
-      <form className={classes.form}>
-        <Title className={classes.subtitle} variant="h5">
-          Number of credits
-        </Title>
-        <Description>
-          (${creditPrice.unitPrice} {creditPrice.currency}/each), includes 10% service fee
-        </Description>
-        <Grid container alignItems="center" className={classes.unitsGrid}>
-          <Grid item xs={6}>
-            <TextField type="number" value={units} onChange={e => setUnits(parseInt(e.target.value))} />
-          </Grid>
-          <Grid item xs={6}>
-            <Typography>
-              <span className={classes.units}>= ${formattedTotal}</span>
-              <span className={classes.currency}>{creditPrice.currency}</span>
-            </Typography>
-          </Grid>
-        </Grid>
+      <Formik
+        initialValues={{
+          units: 1,
+          orgType: false,
+          updates: false,
+          name: '',
+          orgName: '',
+          email: '',
+          city: '',
+          state: '',
+          country: initialCountry,
+        }}
+        validate={values => {
+          const errors: Partial<Values> = {};
+          if (!values.email) {
+            errors.email = requiredMessage;
+          } else if (!/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,10})$/i.test(values.email)) {
+            errors.email = 'Please enter a valid email address';
+          }
+          if (!values.name) {
+            errors.name = requiredMessage;
+          }
+          if (values.orgType && !values.orgName) {
+            errors.orgName = requiredMessage;
+          }
+          if (!values.city) {
+            errors.city = requiredMessage;
+          }
+          if (!values.state) {
+            errors.state = requiredMessage;
+          }
+          if (!values.country) {
+            errors.country = requiredMessage;
+          }
+          return errors;
+        }}
+        onSubmit={async (
+          { orgType, units, email, name, orgName, city, state, country },
+          { setSubmitting, setStatus },
+        ) => {
+          setSubmitting(true);
+          try {
+            let walletId: string;
+            let addressId: string;
+            let result;
+            const address = {
+              place_type: ['place'],
+              text: city,
+              context: [
+                { id: 'region', text: state },
+                { id: 'country', text: countries[country] },
+              ],
+            };
+            if (orgType === true) {
+              result = await createUserOrganization({
+                variables: {
+                  input: {
+                    roles: ['buyer'],
+                    email,
+                    name,
+                    orgName,
+                    orgAddress: address,
+                    walletAddr: name, // fake tmp wallet address (required for org)
+                  },
+                },
+              });
+              walletId = result.data.createUserOrganization.organization.walletId;
+              addressId = result.data.createUserOrganization.organization.addressId;
+            } else {
+              result = await createUser({
+                variables: {
+                  input: {
+                    roles: ['buyer'],
+                    email,
+                    name,
+                    address,
+                    walletAddr: name, // fake tmp wallet address (to make user able to buy credits)
+                  },
+                },
+              });
+              walletId = result.data.reallyCreateUser.user.walletId;
+              addressId = result.data.reallyCreateUser.user.addressId;
+            }
+            const stripe = await stripePromise;
+            if (stripe) {
+              const { error } = await stripe.redirectToCheckout({
+                items: [{ sku: stripePrice, quantity: units }],
+                successUrl: `${window.location.origin}/post-purchase/${projectId}`,
+                cancelUrl: window.location.href,
+                customerEmail: email,
+                clientReferenceId: JSON.stringify({ walletId, addressId }),
+              });
+              if (error) {
+                setStatus({ serverError: error.message });
+              }
+            }
+            setSubmitting(false);
+          } catch (e) {
+            setStatus({ serverError: 'Server error' }); // TODO: display more explicit msg?
+            setSubmitting(false);
+          }
+        }}
+      >
+        {({ values, errors, submitForm, isSubmitting, isValid, submitCount, status }) => {
+          const formattedTotal: string = new Intl.NumberFormat('en-US', { minimumFractionDigits: 2 }).format(
+            values.units * creditPrice.unitPrice,
+          );
 
-        <Title className={`${classes.subtitle} ${classes.otherTitle}`} variant="h5">
-          Credit ownership
-        </Title>
-        <TextField label="Your full name" value={name} onChange={e => setName(e.target.value)} />
-        <TextField
-          className={classes.textField}
-          type="email"
-          label="Your email address"
-          value={email}
-          onChange={e => setEmail(e.target.value)}
-        />
-        <div className={classes.orgCheckbox}>
-          <CheckboxLabel
-            checked={orgType}
-            onChange={e => setOrgType(e.target.checked)}
-            label="I am buying these credits on behalf of my organization"
-          />
-        </div>
-        {orgType && (
-          <TextField
-            className={classes.textField}
-            label="Organization name"
-            value={orgName}
-            onChange={e => setOrgName(e.target.value)}
-          />
-        )}
+          return (
+            <div>
+              <Form className={classes.form} translate="yes">
+                <Title className={classes.subtitle} variant="h5">
+                  Number of credits
+                </Title>
+                <Description>
+                  (${creditPrice.unitPrice} {creditPrice.currency}/each), includes 10% service fee
+                </Description>
+                <Grid container alignItems="center" className={classes.unitsGrid}>
+                  <Grid item xs={6}>
+                    <Field
+                      component={TextField}
+                      type="number"
+                      name="units"
+                      transformValue={(v: number): number => Math.max(1, v)}
+                    />
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Typography>
+                      <span className={classes.units}>= ${formattedTotal}</span>
+                      <span className={classes.currency}>{creditPrice.currency}</span>
+                    </Typography>
+                  </Grid>
+                </Grid>
 
-        <Title className={`${classes.subtitle} ${classes.otherTitle}`} variant="h5">
-          Location of purchase
-        </Title>
-        <Description>
-          Please enter a location for the retirement of these credits. This prevents{' '}
-          <span className={classes.green}>double counting</span> of credits in different locations. These
-          credits will auto-retire.
-        </Description>
-        <TextField
-          className={classes.cityTextField}
-          label="City"
-          value={city}
-          onChange={e => setCity(e.target.value)}
-        />
-        <Grid container alignItems="center" wrap="nowrap">
-          <Grid item xs={12} sm={6} className={classes.stateCountryTextField}>
-            <SelectTextField
-              options={stateOptions}
-              value={state}
-              onChange={e => setState(e.target.value)}
-              label="State / Province / Region"
-            />
-          </Grid>
-          <Grid item xs={12} sm={6} className={classes.stateCountryTextField}>
-            <SelectTextField
-              options={Object.keys(countries).map(key => ({ value: key, label: countries[key] }))}
-              value={country}
-              onChange={async e => {
-                setCountry(e.target.value);
-                await searchState(e.target.value);
-              }}
-              label="Country"
-            />
-          </Grid>
-        </Grid>
+                <Title className={`${classes.subtitle} ${classes.otherTitle}`} variant="h5">
+                  Credit ownership
+                </Title>
+                <div className={classes.textFields}>
+                  <Field component={TextField} label="Your full name" name="name" />
+                  <Field
+                    component={TextField}
+                    className={classes.textField}
+                    type="email"
+                    label="Your email address"
+                    name="email"
+                  />
+                </div>
+                <div className={classes.orgCheckbox}>
+                  <Field
+                    component={CheckboxLabel}
+                    name="orgType"
+                    label="I am buying these credits on behalf of my organization"
+                    type="checkbox"
+                  />
+                </div>
+                {values.orgType && (
+                  <div className={classes.textFields}>
+                    <Field
+                      component={TextField}
+                      name="orgName"
+                      className={classes.textField}
+                      label="Organization name"
+                    />
+                  </div>
+                )}
 
-        <div className={classes.updatesCheckbox}>
-          <CheckboxLabel
-            checked={updates}
-            onChange={e => setUpdates(e.target.checked)}
-            label="Yes, I’d like to receive news and updates about this project!"
-          />
-        </div>
-      </form>
-      <div className={classes.submitButton}>
-        <ContainedButton onClick={handleClick}>buy for ${formattedTotal}</ContainedButton>
-      </div>
+                <Title className={`${classes.subtitle} ${classes.otherTitle}`} variant="h5">
+                  Location of purchase
+                </Title>
+                <Description>
+                  Please enter a location for the retirement of these credits. This prevents{' '}
+                  <span className={classes.green}>double counting</span> of credits in different locations.
+                  These credits will auto-retire.
+                </Description>
+                <Field component={TextField} className={classes.cityTextField} label="City" name="city" />
+                <Grid container alignItems="center" wrap="nowrap">
+                  <Grid item xs={12} sm={6} className={classes.stateCountryTextField}>
+                    <Field
+                      options={stateOptions}
+                      component={SelectTextField}
+                      label="State / Province / Region"
+                      name="state"
+                      errors
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={6} className={classes.stateCountryTextField}>
+                    <Field
+                      component={SelectTextField}
+                      options={Object.keys(countries).map(key => ({ value: key, label: countries[key] }))}
+                      name="country"
+                      label="Country"
+                      triggerOnChange={searchState}
+                      errors
+                    />
+                  </Grid>
+                </Grid>
+
+                <div className={classes.updatesCheckbox}>
+                  <Field
+                    component={CheckboxLabel}
+                    type="checkbox"
+                    name="updates"
+                    label="Yes, I’d like to receive news and updates about this project!"
+                  />
+                </div>
+              </Form>
+              <Grid container direction="column" justify="flex-end" className={classes.submitButton}>
+                <Grid item>
+                  <ContainedButton
+                    disabled={(submitCount > 0 && !isValid) || isSubmitting}
+                    onClick={submitForm}
+                  >
+                    buy for ${formattedTotal}
+                  </ContainedButton>
+                </Grid>
+                {submitCount > 0 && !isValid && (
+                  <Grid item className={classes.error}>
+                    Please correct the errors above
+                  </Grid>
+                )}
+                {status && status.serverError && (
+                  <Grid item className={classes.error}>
+                    {status.serverError}
+                  </Grid>
+                )}
+              </Grid>
+            </div>
+          );
+        }}
+      </Formik>
     </div>
   );
 }

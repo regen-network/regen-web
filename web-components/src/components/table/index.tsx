@@ -178,12 +178,7 @@ export default function RegenTable({ rows }: RegenTableProps): JSX.Element {
 
               return (
                 <TableRow tabIndex={-1} key={row.name} className={classes.row}>
-                  <TableCell
-                    className={`${classes.cell} ${classes.nameCell}`}
-                    component="th"
-                    id={labelId}
-                    scope="row"
-                  >
+                  <TableCell className={`${classes.cell} ${classes.nameCell}`} id={labelId} scope="row">
                     <div className={classes.name}>
                       <DocumentIcon className={classes.icon} /> {row.name}
                     </div>

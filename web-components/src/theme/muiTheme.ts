@@ -33,6 +33,9 @@ const theme = createMuiTheme({
     grey: {
       50: '#D2D5D9',
     },
+    error: {
+      main: '#DE4526',
+    },
     // contrastThreshold: 3,
     // tonalOffset: 0.2,
   },

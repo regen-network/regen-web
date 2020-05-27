@@ -1,9 +1,10 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox, { CheckboxProps } from '@material-ui/core/Checkbox';
+import Checkbox from '@material-ui/core/Checkbox';
 import CheckedIcon from '../icons/CheckedIcon';
 import UncheckedIcon from '../icons/UncheckedIcon';
+import { fieldToCheckbox, CheckboxProps } from 'formik-material-ui';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -25,7 +26,12 @@ export default function CheckboxLabel({ label, ...props }: CheckboxLabelProps): 
     <FormControlLabel
       className={`${classes.root} ${props.className}`}
       control={
-        <Checkbox {...props} color="secondary" icon={<UncheckedIcon />} checkedIcon={<CheckedIcon />} />
+        <Checkbox
+          {...fieldToCheckbox(props)}
+          color="secondary"
+          icon={<UncheckedIcon />}
+          checkedIcon={<CheckedIcon />}
+        />
       }
       label={label}
     />

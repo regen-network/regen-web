@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
-import TextField, { StandardTextFieldProps as TextFieldProps } from '@material-ui/core/TextField';
+import { fieldToTextField, TextFieldProps } from 'formik-material-ui';
+import MuiTextField from '@material-ui/core/TextField';
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   root: props => ({
@@ -20,6 +21,28 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     },
     '& .MuiInput-formControl': {
       marginTop: props.label ? theme.spacing(7) : 0,
+      [theme.breakpoints.up('sm')]: {
+        marginBottom: props.errors ? theme.spacing(5.25) : 0,
+      },
+      [theme.breakpoints.down('xs')]: {
+        marginBottom: props.errors ? theme.spacing(4.75) : 0,
+      },
+    },
+    '& .MuiFormLabel-root': {
+      '&.Mui-error': {
+        color: theme.palette.primary.contrastText,
+      },
+    },
+    '& .MuiFormHelperText-root': {
+      fontWeight: 'bold',
+      position: props.errors ? 'absolute' : 'inherit',
+      bottom: 0,
+      [theme.breakpoints.up('sm')]: {
+        fontSize: theme.spacing(3.5),
+      },
+      [theme.breakpoints.down('xs')]: {
+        fontSize: theme.spacing(3),
+      },
     },
     '& .MuiSvgIcon-root': {
       width: theme.spacing(3.25),
@@ -33,6 +56,13 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       },
       position: 'absolute',
       pointerEvents: 'none',
+    },
+    '& .MuiInputBase-root': {
+      '&.Mui-error': {
+        '& input': {
+          borderColor: theme.palette.error.main,
+        },
+      },
     },
     '& input, & select.MuiSelect-select': {
       border: `1px solid ${theme.palette.grey[50]}`,
@@ -50,23 +80,57 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   }),
 }));
 
-interface RegenTextFieldProps extends TextFieldProps {
-  children?: any;
+interface TriggerTextFieldProps extends TextFieldProps {
+  triggerOnChange?: (v: any) => Promise<void>;
+  transformValue?: (v: any) => any;
 }
 
-interface StyleProps extends TextFieldProps {}
+function TriggerTextField({ triggerOnChange, transformValue, ...props }: TriggerTextFieldProps): JSX.Element {
+  const {
+    form: { setFieldValue },
+    field: { name },
+  } = props;
 
-export default function RegenTextField({ children, ...props }: RegenTextFieldProps): JSX.Element {
-  const classes = useStyles({ ...props });
+  const onChange = async (event: any): Promise<void> => {
+    const { value } = event.target;
+    if (triggerOnChange) {
+      await triggerOnChange(value);
+    }
+    setFieldValue(name, transformValue ? transformValue(value) : value);
+  };
+  return <MuiTextField {...fieldToTextField(props)} onChange={onChange} />;
+}
+
+interface RegenTextFieldProps extends TextFieldProps {
+  children?: any;
+  errors?: boolean;
+  triggerOnChange?: (v: any) => Promise<void>;
+  transformValue?: (v: any) => void;
+}
+
+interface StyleProps extends TextFieldProps {
+  errors: boolean;
+}
+
+export default function RegenTextField({
+  transformValue,
+  triggerOnChange,
+  errors = false,
+  children,
+  ...props
+}: RegenTextFieldProps): JSX.Element {
+  const classes = useStyles({ ...props, errors });
   return (
-    <TextField
+    <TriggerTextField
       {...props}
+      transformValue={transformValue}
+      triggerOnChange={triggerOnChange}
       className={`${classes.root} ${props.className}`}
       InputProps={{ disableUnderline: true }}
       InputLabelProps={{ focused: false }}
       fullWidth
     >
       {children}
-    </TextField>
+    </TriggerTextField>
   );
 }

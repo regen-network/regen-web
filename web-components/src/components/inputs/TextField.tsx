@@ -59,7 +59,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     },
     '& .MuiInputBase-root': {
       '&.Mui-error': {
-        '& input': {
+        '& input, & .MuiSelect-select': {
           borderColor: theme.palette.error.main,
         },
       },

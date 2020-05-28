@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     'z-index': 0,
   },
   background: {
-    // backgroundColor: theme.palette.primary.main,
+    backgroundColor: theme.palette.primary.main,
   },
   transparent: {
     backgroundColor: `rgba(0,0,0,0)`,

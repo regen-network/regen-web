@@ -27,9 +27,9 @@ interface HeaderProps {
 }
 
 interface HeaderMenuItem {
-  title: string,
-  href?: string,
-  dropdownItems?: {title: string, href: string}[]
+  title: string;
+  href?: string;
+  dropdownItems?: { title: string; href: string }[];
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -96,8 +96,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-
-
 export default function Header({
   children,
   logo,
@@ -128,21 +126,21 @@ export default function Header({
         </Grid>
         <Grid item>
           <MenuList className={classes.menuList}>
-            {menuItems?.map((item, index) => 
+            {menuItems?.map((item, index) => (
               <MenuItem key={index}>
-              {
-                item.dropdownItems ? 
-                 <MenuHover text={item.title}>
-                  {item.dropdownItems.map((dropdownItem, index) => 
-                    <MenuItem key={index}>
-                      <Link href={dropdownItem.href}>{dropdownItem.title}</Link>
-                    </MenuItem>
-                  )}
-                 </MenuHover> :
-              <Link href={item.href}>{item.title}</Link>
-              }
+                {item.dropdownItems ? (
+                  <MenuHover text={item.title}>
+                    {item.dropdownItems.map((dropdownItem, index) => (
+                      <MenuItem key={index}>
+                        <Link href={dropdownItem.href}>{dropdownItem.title}</Link>
+                      </MenuItem>
+                    ))}
+                  </MenuHover>
+                ) : (
+                  <Link href={item.href}>{item.title}</Link>
+                )}
               </MenuItem>
-            )}
+            ))}
           </MenuList>
         </Grid>
         {/*<Grid item alignItems="center">

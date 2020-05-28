@@ -113,14 +113,17 @@ const App: React.FC = (): JSX.Element => {
   }
 
   const menuItems = [
-    {title: "Buyers", href: "/buyers"},
-    {title: "Land Steward", href: "/landsteward"},
-    {title: "Learn More", dropdownItems: [
-      {title: "Case Studies", href: "/casestudies"},
-      {title: "FAQ", href: "/faq"},
-      {title: "Team", href: "/team"},
-    ]}
-  ]
+    { title: 'Buyers', href: '/buyers' },
+    { title: 'Land Steward', href: '/landsteward' },
+    {
+      title: 'Learn More',
+      dropdownItems: [
+        { title: 'Case Studies', href: '/casestudies' },
+        { title: 'FAQ', href: '/faq' },
+        { title: 'Team', href: '/team' },
+      ],
+    },
+  ];
 
   return (
     <Router history={history}>

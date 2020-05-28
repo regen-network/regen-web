@@ -39,8 +39,6 @@ const Layout = ({ children }: propTypes): JSX.Element => {
     color = theme.palette.primary.main;
   }
 
-
-
   return (
     <>
       <Header transparent={true} color={color} logo={logo} absolute={true}></Header>

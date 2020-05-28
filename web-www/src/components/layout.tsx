@@ -39,21 +39,11 @@ const Layout = ({ children }: propTypes): JSX.Element => {
     color = theme.palette.primary.main;
   }
 
-  let menu = [
-    { Buyers: <Link to="/buyers">Buyers</Link> },
-    { 'Land Steward': <Link to="/landsteward">Land Steward</Link> },
-    {
-      'Learn More': [
-        { 'Case Studies': <Link to="/casestudies">Case Studies</Link> },
-        { FAQ: <Link to="/faq">FAQ</Link> },
-        { Team: <Link to="/team">Team</Link> },
-      ],
-    },
-  ];
+
 
   return (
     <>
-      <Header transparent={true} menu={menu} color={color} logo={logo} absolute={true}></Header>
+      <Header transparent={true} color={color} logo={logo} absolute={true}></Header>
       <div
         style={{
           margin: `0 auto`,

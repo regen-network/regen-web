@@ -136,7 +136,7 @@ export default function Header({
       >
         <Grid item>
           <a href="/">
-            <RegenIcon />
+            <RegenIcon color={color} />
           </a>
         </Grid>
         <Grid item>

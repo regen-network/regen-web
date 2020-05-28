@@ -54,6 +54,21 @@ const useStyles = makeStyles((theme: Theme) => ({
     color: props.textColor || theme.palette.primary.contrastText,
     '& ul > li > a': {
       color: props.textColor || theme.palette.primary.contrastText,
+      textDecoration: 'none',
+      'font-family': 'Muli',
+      'text-transform': 'uppercase',
+      '&:link, &:visited, &:hover, &:active': {
+        textDecoration: 'none',
+      },
+    },
+    '& ul > li > div > span': {
+      color: props.textColor || theme.palette.primary.contrastText,
+      textDecoration: 'none',
+      'font-family': 'Muli',
+      'text-transform': 'uppercase',
+      '&:link, &:visited, &:hover, &:active': {
+        textDecoration: 'none',
+      },
     },
   }),
   root: {

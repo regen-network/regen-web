@@ -1,24 +1,30 @@
 import React, { useState, useRef } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Popover, MenuList, Paper } from '@material-ui/core';
+import { Popover, MenuList, Paper, Theme } from '@material-ui/core';
 
-const useStyles = makeStyles(theme => ({
+//replacing #000 on line 15, color property, with theme.palette.primary.contrastText doesn't yield black text in the dropdown. Not sure why
+const useStyles = makeStyles((theme: Theme) => ({
   popover: {
     pointerEvents: 'none',
   },
   popoverContent: {
     pointerEvents: 'auto',
   },
-  text: (props: styleProps) => ({
-    '& a': {
-      color: props.textColor || theme.palette.primary.contrastText,
+  text: {
+    '& li > a': {
+      'font-family': 'lato',
+      color: '#000',
       textDecoration: 'none',
       '&:link, &:visited, &:hover, &:active': {
         textDecoration: 'none',
       },
     },
     backgroundColor: 'rgba(0, 0, 0, 0)',
-  }),
+  },
+  paper: {
+    'border-radius': '0px',
+    border: '1px solid grey',
+  },
 }));
 
 interface styleProps {
@@ -53,7 +59,6 @@ const MenuHover = ({ text, textColor, children }: Props): JSX.Element => {
   return (
     <div>
       <span
-        style={{ color: `${textColor}` }}
         ref={popoverAnchor}
         aria-owns="mouse-over-popover"
         aria-haspopup="true"
@@ -80,7 +85,7 @@ const MenuHover = ({ text, textColor, children }: Props): JSX.Element => {
         }}
         PaperProps={{ onMouseEnter: popoverEnter, onMouseLeave: popoverLeave }}
       >
-        <Paper>
+        <Paper className={`${classes.paper}`}>
           <MenuList className={`${classes.text}`}>{children}</MenuList>
         </Paper>
       </Popover>

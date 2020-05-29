@@ -14,22 +14,25 @@
     "serve": "^11.2.0"
   },
   "workspaces": [
-    "web",
-    "web-www",
+    "web-registry",
     "web-components",
-    "web-storybook"
+    "web-storybook",
+    "web-www"
   ],
   "scripts": {
     "bootstrap": "lerna bootstrap",
-    "build": "lerna run build --stream",
-    "build-storybook": "yarn build && lerna run build-storybook --stream",
+    "build": "yarn build-components && lerna run --scope web-registry build --stream",
+    "build-components": "lerna run --scope web-components build --stream",
+    "build-storybook": "yarn build-components && lerna run build-storybook --stream",
     "format": "lerna run format",
     "lint": "lerna run lint",
     "serve": "serve web-old/build -l ${PORT:-5000}",
     "storybook": "lerna run storybook --stream",
-    "test": "lerna run --scope web test --stream",
-    "start": "lerna run start --stream",
-    "watch": "lerna run watch --stream"
+    "test": "lerna run --scope web-registry test --stream",
+    "start": "lerna run --scope web-registry start --stream",
+    "start-www": "lerna run --scope web-www start --stream",
+    "watch": "lerna run watch --stream",
+    "build-www": "yarn build-components && lerna run --scope web-www build --stream"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^5.2.8",
@@ -49,7 +52,7 @@
     "lerna": "^3.19.0",
     "prettier": "1.19.1",
     "shx": "^0.3.2",
-    "typescript": "3.7.4"
+    "typescript": "^3.9.2"
   },
   "husky": {
     "hooks": {

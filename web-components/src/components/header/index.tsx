@@ -18,7 +18,6 @@ export interface node {
 }
 
 interface HeaderProps {
-  logo: string;
   absolute?: boolean;
   children?: any;
   transparent?: boolean;
@@ -113,7 +112,6 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 export default function Header({
   children,
-  logo,
   transparent,
   color,
   absolute,

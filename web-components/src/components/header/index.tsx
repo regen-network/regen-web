@@ -23,7 +23,13 @@ interface HeaderProps {
   children?: any;
   transparent?: boolean;
   color?: string;
-  menu: node | JSX.Element | React.ReactNode;
+  menuItems?: HeaderMenuItem[];
+}
+
+interface HeaderMenuItem {
+  title: string;
+  href?: string;
+  dropdownItems?: { title: string; href: string }[];
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -48,6 +54,21 @@ const useStyles = makeStyles((theme: Theme) => ({
     color: props.textColor || theme.palette.primary.contrastText,
     '& ul > li > a': {
       color: props.textColor || theme.palette.primary.contrastText,
+      textDecoration: 'none',
+      'font-family': 'Muli',
+      'text-transform': 'uppercase',
+      '&:link, &:visited, &:hover, &:active': {
+        textDecoration: 'none',
+      },
+    },
+    '& ul > li > div > span': {
+      color: props.textColor || theme.palette.primary.contrastText,
+      textDecoration: 'none',
+      'font-family': 'Muli',
+      'text-transform': 'uppercase',
+      '&:link, &:visited, &:hover, &:active': {
+        textDecoration: 'none',
+      },
     },
   }),
   root: {
@@ -91,12 +112,12 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 export default function Header({
-  menu,
   children,
   logo,
   transparent,
   color,
   absolute,
+  menuItems,
 }: HeaderProps): JSX.Element {
   const classes = useStyles({ textColor: color });
   let headerClass = [];
@@ -104,41 +125,6 @@ export default function Header({
   headerClass.push(absolute ? classes.absolute : '');
   headerClass.push(classes.color, classes.root);
 
-  let buffer = [];
-  for (let [k, v] of Object.entries(menu)) {
-    if (React.isValidElement(v)) {
-      buffer.push(React.cloneElement(v, '', k));
-    } else {
-      let subBuffer: JSX.Element[] = [];
-      for (let [sk, sv] of Object.entries(v)) {
-        subBuffer.push(React.createElement('MenuItem', null, React.cloneElement(sv, null, sk)));
-      }
-      buffer.push(subBuffer);
-    }
-  }
-  let list = (
-    <MenuList className={classes.menuList}>
-      <MenuItem>
-        <Link href="/buyers">Buyers</Link>
-      </MenuItem>
-      <MenuItem>
-        <Link href="">Land Stewards</Link>
-      </MenuItem>
-      <MenuItem>
-        <MenuHover text="Learn More">
-          <MenuItem>
-            <Link href="https://regen.network/#">Case Studies</Link>
-          </MenuItem>
-          <MenuItem>
-            <Link href="https://regen.network/#">FAQ</Link>
-          </MenuItem>
-          <MenuItem>
-            <Link href="https://regen.network/#">Team</Link>
-          </MenuItem>
-        </MenuHover>
-      </MenuItem>
-    </MenuList>
-  );
   return (
     <div>
       <Grid
@@ -150,10 +136,28 @@ export default function Header({
       >
         <Grid item>
           <a href="/">
-            <RegenIcon />
+            <RegenIcon color={color} />
           </a>
         </Grid>
-        <Grid item>{buffer}</Grid>
+        <Grid item>
+          <MenuList className={classes.menuList}>
+            {menuItems?.map((item, index) => (
+              <MenuItem key={index}>
+                {item.dropdownItems ? (
+                  <MenuHover text={item.title}>
+                    {item.dropdownItems.map((dropdownItem, index) => (
+                      <MenuItem key={index}>
+                        <Link href={dropdownItem.href}>{dropdownItem.title}</Link>
+                      </MenuItem>
+                    ))}
+                  </MenuHover>
+                ) : (
+                  <Link href={item.href}>{item.title}</Link>
+                )}
+              </MenuItem>
+            ))}
+          </MenuList>
+        </Grid>
         {/*<Grid item alignItems="center">
           <SearchIcon className={classes.searchIcon} />
           <MenuIcon className={classes.menuIcon} fontSize="large" />

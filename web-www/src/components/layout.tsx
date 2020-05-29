@@ -39,21 +39,22 @@ const Layout = ({ children }: propTypes): JSX.Element => {
     color = theme.palette.primary.main;
   }
 
-  let menu = [
-    { Buyers: <Link to="/buyers">Buyers</Link> },
-    { 'Land Steward': <Link to="/landsteward">Land Steward</Link> },
+  const menuItems = [
+    { title: 'Buyers', href: '/buyers' },
+    { title: 'Land Steward', href: '/landsteward' },
     {
-      'Learn More': [
-        { 'Case Studies': <Link to="/casestudies">Case Studies</Link> },
-        { FAQ: <Link to="/faq">FAQ</Link> },
-        { Team: <Link to="/team">Team</Link> },
+      title: 'Learn More',
+      dropdownItems: [
+        { title: 'Case Studies', href: '/casestudies' },
+        { title: 'FAQ', href: '/faq' },
+        { title: 'Team', href: '/team' },
       ],
     },
   ];
 
   return (
     <>
-      <Header transparent={true} menu={menu} color={color} logo={logo} absolute={true}></Header>
+      <Header menuItems={menuItems} transparent={true} color={color} logo={logo} absolute={true}></Header>
       <div
         style={{
           margin: `0 auto`,

@@ -112,11 +112,24 @@ const App: React.FC = (): JSX.Element => {
     return <div>Loading...</div>;
   }
 
+  const menuItems = [
+    { title: 'Buyers', href: '/buyers' },
+    { title: 'Land Steward', href: '/landsteward' },
+    {
+      title: 'Learn More',
+      dropdownItems: [
+        { title: 'Case Studies', href: '/casestudies' },
+        { title: 'FAQ', href: '/faq' },
+        { title: 'Team', href: '/team' },
+      ],
+    },
+  ];
+
   return (
     <Router history={history}>
       <ScrollToTop />
       <div>
-        <Header logo={logo}>
+        <Header logo={logo} menuItems={menuItems}>
           <NavBar />
         </Header>
         <Switch>

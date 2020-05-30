@@ -45,12 +45,7 @@ yarn watch
 
 It will watch for changes in `web-components` and rebuild them in `web-components/lib` directory.
 
-<<<<<<< HEAD
-Then, to run the main app:
-
-=======
 Then, to run the registry app:
->>>>>>> master
 ```sh
 yarn start
 ```

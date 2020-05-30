@@ -130,7 +130,7 @@ const App: React.FC = (): JSX.Element => {
     <Router history={history}>
       <ScrollToTop />
       <div>
-        <Header menuItems={menuItems}>
+        <Header menuItems={menuItems} transparent={false}>
           <NavBar />
         </Header>
         <Switch>

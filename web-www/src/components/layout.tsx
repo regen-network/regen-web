@@ -54,7 +54,7 @@ const Layout = ({ children }: propTypes): JSX.Element => {
 
   return (
     <>
-      <Header menuItems={menuItems} transparent={true} color={color} logo={logo} absolute={true}></Header>
+      <Header menuItems={menuItems} absolute transparent color={color}></Header>
       <div
         style={{
           margin: `0 auto`,

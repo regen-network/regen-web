@@ -63,13 +63,9 @@ yarn storybook
 
 ## Deployment
 
-<<<<<<< HEAD
-Compile `web-components` and `web` to `web-components/lib` and `web/build` respectively:
-
-=======
 ### Registry
 Compile `web-components` and `web-registry` to `web-components/lib` and `web-registry/build` respectively:
->>>>>>> master
+
 ```sh
 yarn build
 ```
@@ -96,6 +92,12 @@ yarn test
 Launches the test runner in the interactive watch mode.
 [Jest](https://jestjs.io/) is used as test runner.
 
+We're using [StoryShots](https://storybook.js.org/docs/testing/structural-testing/#using-storyshots) for snapshots testing.
+Update web-components snapshots:
+```sh
+yarn test-update-snapshot
+```
+
 ## Code style
 
 [Prettier](https://prettier.io/) and [ESLint](https://eslint.org/) are used as
@@ -109,41 +111,7 @@ yarn format
 yarn lint
 ```
 
-## Git
-
-### Branching Strategy
-
-tbd
-
-### Commit Template
-
-The following git commit template is recommended and includes the following
-sections
-
-- One Line Summary: replace with short headline about this commit
-- Details: replace will bulleted list of notable changes
-- Story: use the product story id to link this commit to,
-- Test: n | y | local | other notes to describe any testing completed
-- Review: include others who reviewed this work
-
-```One line summary
-
-* details
-*
-
-[Story] [#storyid]
-[Test] n
-[Review] na
-```
-
-After saving the template above run the following command to set you email and
-the commit template for this
-
-```git config user.email username@regen.network
-git config commit.template .gitcommit
-```
-
-### Timeout Issue on Slower Connections
+## Timeout Issue on Slower Connections
 
 _some larger packages don't manage to get downloaded in time for yarn's 30 second timeout, you might see an error like this one_
 

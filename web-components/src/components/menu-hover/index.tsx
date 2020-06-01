@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   paper: {
     'border-radius': '0px',
-    border: '1px solid grey',
+    border: `1px solid ${theme.palette.info.light}`,
   },
 }));
 
@@ -73,7 +73,7 @@ const MenuHover = ({ text, textColor, children }: Props): JSX.Element => {
         classes={{
           paper: classes.popoverContent,
         }}
-        open={openedPopover}
+        open={true}
         anchorEl={popoverAnchor.current}
         anchorOrigin={{
           vertical: 'bottom',

@@ -119,12 +119,13 @@ export default function Header({
 }: HeaderProps): JSX.Element {
   const classes = useStyles({ textColor: color });
   let headerClass = [];
-  headerClass.push(transparent ? classes.transparent : classes.background);
+  let rootClass = [];
+  rootClass.push(transparent ? classes.transparent : classes.background);
   headerClass.push(absolute ? classes.absolute : '');
   headerClass.push(classes.color, classes.root);
 
   return (
-    <div>
+    <div className={clsx(rootClass)}>
       <Grid
         className={clsx(headerClass)}
         container

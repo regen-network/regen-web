@@ -53,16 +53,21 @@ const Layout = ({ children }: propTypes): JSX.Element => {
   ];
 
   return (
-    <div>
-      <Header menuItems={menuItems} transparent={true} color={color} logo={logo} absolute={true}></Header>
-
-      <main>{children}</main>
-      <footer>
-        © {new Date().getFullYear()}, Built with
-        {` `}
-        <a href="https://www.gatsbyjs.org">Gatsby</a>
-      </footer>
-    </div>
+    <>
+      <Header menuItems={menuItems} absolute transparent color={color}></Header>
+      <div
+        style={{
+          margin: `0 auto`,
+        }}
+      >
+        <main>{children}</main>
+        <footer>
+          © {new Date().getFullYear()}, Built with
+          {` `}
+          <a href="https://www.gatsbyjs.org">Gatsby</a>
+        </footer>
+      </div>
+    </>
   );
 };
 

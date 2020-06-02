@@ -157,6 +157,7 @@ export default function Header({
             ))}
           </MenuList>
         </Grid>
+        {children}
         {/*<Grid item alignItems="center">
           <SearchIcon className={classes.searchIcon} />
           <MenuIcon className={classes.menuIcon} fontSize="large" />

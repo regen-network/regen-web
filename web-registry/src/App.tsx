@@ -117,7 +117,7 @@ const App: React.FC = (): JSX.Element => {
     <Router history={history}>
       <ScrollToTop />
       <div>
-        <Header>
+        <Header transparent={false}>
           <NavBar />
         </Header>
         <Switch>

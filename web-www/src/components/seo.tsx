@@ -11,10 +11,10 @@ import { Helmet } from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
 
 interface propTypes {
-	description: string,
-	lang: string,
-	meta:  Array <string>, 
-	title: string
+  description: string
+  lang: string
+  meta: Array<string>
+  title: string
 }
 
 function SEO({ description, lang, meta, title }: propTypes) {

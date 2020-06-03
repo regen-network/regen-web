@@ -11,6 +11,12 @@ const useStyles = makeStyles((theme: Theme) => ({
     'font-family': theme.typography.h1.fontFamily,
     'text-align': 'center',
     'padding-top': theme.spacing(45),
+    '& h2': {
+      'margin-bottom': '1rem',
+    },
+    '& p': {
+      'margin-bottom': '0px',
+    },
   },
 }));
 

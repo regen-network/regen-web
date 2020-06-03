@@ -8,6 +8,14 @@ const useStyles = makeStyles((theme: Theme) => ({
     '& #mlb2-2154348.ml-form-embedContainer div.ml-form-embedWrapper': {
       'background-color': 'rgba(0,0,0,0)',
     },
+    '& #mlb2-2154348.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody div.ml-form-successContent h4': {
+      'text-align': 'center',
+      color: '#fff',
+    },
+    '& #mlb2-2154348.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody div.ml-form-successContent p': {
+      'text-align': 'center',
+      color: '#fff',
+    },
   },
 }));
 
@@ -17,8 +25,8 @@ const MailSubmit = (): JSX.Element => {
   return (
     <div
       className={clsx('ml-form-embed', classes.root)}
-      data-account="1227754:o0l3c1z1f3"
-      data-form="2154348:v8j6q8"
+      data-account={`${process.env.GATSBY_MAILERLITE_DATA_ACCOUNT}`}
+      data-form={`${process.env.GATSBY_MAILERLITE_DATA_FORM}`}
     ></div>
   );
 };

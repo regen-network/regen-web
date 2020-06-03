@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import StyledComponentsWrapper from '../components/styledComponentsWrapper';
 import BackgroundSection from '../components/BackgroundSection';
 
-import EmailSubmitSectiion from '../sections/EmailSubmitSection';
+import EmailSubmitSection from '../sections/EmailSubmitSection';
 
 const Section = styled(BackgroundSection)`
   background-image: url('images/image43.jpg');
@@ -21,8 +21,8 @@ const IndexPage = (): JSX.Element => {
     <StyledComponentsWrapper>
       <Layout>
         <SEO title="Home" />
-        <Section></Section>
-        <EmailSubmitSectiion></EmailSubmitSectiion>
+        <Section />
+        <EmailSubmitSection />
         <Link to="/page-2/">Go to page 2</Link>
       </Layout>
     </StyledComponentsWrapper>

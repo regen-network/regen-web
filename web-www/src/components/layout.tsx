@@ -8,7 +8,6 @@
 import React from 'react';
 import PropTypes, { string } from 'prop-types';
 import { useStaticQuery, graphql } from 'gatsby';
-import styled from 'styled-components';
 import Header from 'web-components/lib/components/header';
 import { useTheme } from '@material-ui/core/styles';
 import { Link } from 'gatsby';
@@ -35,6 +34,7 @@ const Layout = ({ children }: propTypes): JSX.Element => {
   const url = typeof window !== 'undefined' ? window.location.href : '';
 
   let color = theme.palette.primary.contrastText;
+  console.log(`url: ${url}`);
   if (url.includes('page')) {
     color = theme.palette.primary.main;
   }

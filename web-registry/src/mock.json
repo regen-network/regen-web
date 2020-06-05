@@ -396,7 +396,7 @@
         }
       },
       "glanceImgSrc": "impactag-smallmap-top-v3.jpg",
-      "glanceText": ["Shifting to Managed Grazing can potentially sequester 16.4- 26 CO2e (Gt) by 2050.", "Wilmot Cattle Co has increased Soil Organic Carbon to 4.5% and removed 33,000 tons of CO2e in two years."],
+      "glanceText": ["Shifting to Managed Grazing can potentially sequester 16.4- 26 CO2e (Gt) by 2050.", "Wilmot Cattle Co has increased Soil Organic Carbon to 4.5% and removed 22,500 tons of CO2e in two years."],
       "place": {
         "city": "Hernani",
         "region": "New England",
@@ -528,7 +528,7 @@
       },
       "credits": {
         "purchased": 0,
-        "issued": 22500
+        "issued": 0
       },
       "hideCreditDetails": true,
       "presaleUrl": "https://airtable.com/embed/shrd5xPzFPiyQSSMX?backgroundColor=gray"

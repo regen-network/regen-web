@@ -1,7 +1,10 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles, Theme, MenuItem, MenuList, Link } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import RegenIcon from '../icons/RegenIcon';
+import clsx from 'clsx';
+import MenuHover from '../menu-hover';
+
 // import {
 //   Link,
 //   useParams,
@@ -10,14 +13,63 @@ import RegenIcon from '../icons/RegenIcon';
 // import SearchIcon from '@material-ui/icons/Search';
 // import MenuIcon from '@material-ui/icons/Menu';
 
+export interface node {
+  [key: number]: React.ReactNode;
+}
+
 interface HeaderProps {
+  absolute?: boolean;
   children?: any;
+  transparent?: boolean;
+  color?: string;
+  menuItems?: HeaderMenuItem[];
+}
+
+interface HeaderMenuItem {
+  title: string;
+  href?: string;
+  dropdownItems?: { title: string; href: string }[];
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
+  menuList: {
+    display: 'flex',
+    position: 'unset',
+    width: 'unset',
+    'z-index': 0,
+  },
   background: {
     backgroundColor: theme.palette.primary.main,
   },
+  transparent: {
+    backgroundColor: `rgba(0,0,0,0)`,
+  },
+  absolute: {
+    position: 'absolute',
+    'z-index': 10,
+    width: '100%',
+  },
+  color: (props: any) => ({
+    color: props.textColor || theme.palette.primary.contrastText,
+    '& ul > li > a': {
+      color: props.textColor || theme.palette.primary.contrastText,
+      textDecoration: 'none',
+      'font-family': 'Muli',
+      'text-transform': 'uppercase',
+      '&:link, &:visited, &:hover, &:active': {
+        textDecoration: 'none',
+      },
+    },
+    '& ul > li > div > span': {
+      color: props.textColor || theme.palette.primary.contrastText,
+      textDecoration: 'none',
+      'font-family': 'Muli',
+      'text-transform': 'uppercase',
+      '&:link, &:visited, &:hover, &:active': {
+        textDecoration: 'none',
+      },
+    },
+  }),
   root: {
     [theme.breakpoints.up('md')]: {
       padding: `${theme.spacing(2.5)} ${theme.spacing(37)}`,
@@ -58,18 +110,54 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function Header({ children }: HeaderProps): JSX.Element {
-  const classes = useStyles({});
-  // TODO: Add search/menu logic
+export default function Header({
+  children,
+  transparent,
+  color,
+  absolute,
+  menuItems,
+}: HeaderProps): JSX.Element {
+  const classes = useStyles({ textColor: color });
+  let headerClass = [];
+  let rootClass = [];
+  rootClass.push(transparent ? classes.transparent : classes.background);
+  headerClass.push(absolute ? classes.absolute : '');
+  headerClass.push(classes.color, classes.root);
+
   return (
-    <div className={classes.background}>
-      <Grid container direction="row" className={classes.root} alignItems="center" justify="space-between">
+    <div className={clsx(rootClass)}>
+      <Grid
+        className={clsx(headerClass)}
+        container
+        direction="row"
+        alignItems="center"
+        justify="space-between"
+      >
         <Grid item>
           <a href="/">
-            <RegenIcon />
+            <RegenIcon color={color} />
           </a>
         </Grid>
-        <Grid item>{children}</Grid>
+        <Grid item>
+          <MenuList className={classes.menuList}>
+            {menuItems?.map((item, index) => (
+              <MenuItem key={index}>
+                {item.dropdownItems ? (
+                  <MenuHover text={item.title}>
+                    {item.dropdownItems.map((dropdownItem, index) => (
+                      <MenuItem key={index}>
+                        <Link href={dropdownItem.href}>{dropdownItem.title}</Link>
+                      </MenuItem>
+                    ))}
+                  </MenuHover>
+                ) : (
+                  <Link href={item.href}>{item.title}</Link>
+                )}
+              </MenuItem>
+            ))}
+          </MenuList>
+        </Grid>
+        {children}
         {/*<Grid item alignItems="center">
           <SearchIcon className={classes.searchIcon} />
           <MenuIcon className={classes.menuIcon} fontSize="large" />

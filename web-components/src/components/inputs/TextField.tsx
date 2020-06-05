@@ -3,6 +3,22 @@ import { makeStyles, Theme } from '@material-ui/core/styles';
 import { fieldToTextField, TextFieldProps } from 'formik-material-ui';
 import MuiTextField from '@material-ui/core/TextField';
 
+interface TriggerTextFieldProps extends TextFieldProps {
+  triggerOnChange?: (v: any) => Promise<void>;
+  transformValue?: (v: any) => any;
+}
+
+interface RegenTextFieldProps extends TextFieldProps {
+  children?: any;
+  errors?: boolean;
+  triggerOnChange?: (v: any) => Promise<void>;
+  transformValue?: (v: any) => void;
+}
+
+interface StyleProps extends TextFieldProps {
+  errors: boolean;
+}
+
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   root: props => ({
     '& label': {
@@ -77,20 +93,20 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
         paddingRight: theme.spacing(3.25),
       },
     },
+    '& input[type=number]': {
+      '&::-webkit-inner-spin-button, &::-webkit-outer-spin-button': {
+        '-webkit-appearance': 'none',
+        margin: 0,
+      },
+    },
   }),
 }));
-
-interface TriggerTextFieldProps extends TextFieldProps {
-  triggerOnChange?: (v: any) => Promise<void>;
-  transformValue?: (v: any) => any;
-}
 
 function TriggerTextField({ triggerOnChange, transformValue, ...props }: TriggerTextFieldProps): JSX.Element {
   const {
     form: { setFieldValue },
     field: { name },
   } = props;
-
   const onChange = async (event: any): Promise<void> => {
     const { value } = event.target;
     if (triggerOnChange) {
@@ -99,17 +115,6 @@ function TriggerTextField({ triggerOnChange, transformValue, ...props }: Trigger
     setFieldValue(name, transformValue ? transformValue(value) : value);
   };
   return <MuiTextField {...fieldToTextField(props)} onChange={onChange} />;
-}
-
-interface RegenTextFieldProps extends TextFieldProps {
-  children?: any;
-  errors?: boolean;
-  triggerOnChange?: (v: any) => Promise<void>;
-  transformValue?: (v: any) => void;
-}
-
-interface StyleProps extends TextFieldProps {
-  errors: boolean;
 }
 
 export default function RegenTextField({

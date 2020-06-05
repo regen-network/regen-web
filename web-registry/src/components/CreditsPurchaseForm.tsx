@@ -14,6 +14,7 @@ import Title from 'web-components/lib/components/title';
 import Description from 'web-components/lib/components/description';
 import CheckboxLabel from 'web-components/lib/components/inputs/CheckboxLabel';
 import TextField from 'web-components/lib/components/inputs/TextField';
+import NumberTextField from 'web-components/lib/components/inputs/NumberTextField';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import SelectTextField, { Option } from 'web-components/lib/components/inputs/SelectTextField';
 import { CreditPrice } from 'web-components/lib/components/buy-footer';
@@ -136,11 +137,25 @@ const useStyles = makeStyles((theme: Theme) => ({
       fontSize: theme.spacing(3),
     },
   },
+  cancel: {
+    fontSize: theme.spacing(3),
+    fontFamily: theme.typography.h1.fontFamily,
+    textTransform: 'uppercase',
+    color: theme.palette.info.main,
+    cursor: 'pointer',
+    [theme.breakpoints.up('sm')]: {
+      paddingLeft: theme.spacing(32.5),
+    },
+    // [theme.breakpoints.down('xs')]: {
+    //   paddingRight: theme.spacing(4.25),
+    // },
+  },
 }));
 
 interface CreditsPurchaseFormProps {
   creditPrice: CreditPrice;
   stripePrice: string;
+  onClose: () => void;
 }
 
 interface Values {
@@ -158,6 +173,7 @@ interface Values {
 export default function CreditsPurchaseForm({
   creditPrice,
   stripePrice,
+  onClose,
 }: CreditsPurchaseFormProps): JSX.Element {
   const classes = useStyles();
   const initialCountry = 'US';
@@ -342,9 +358,9 @@ export default function CreditsPurchaseForm({
                 <Grid container alignItems="center" className={classes.unitsGrid}>
                   <Grid item xs={6}>
                     <Field
-                      component={TextField}
-                      type="number"
+                      component={NumberTextField}
                       name="units"
+                      min={1}
                       transformValue={(v: number): number => Math.max(1, v)}
                     />
                   </Grid>
@@ -428,25 +444,38 @@ export default function CreditsPurchaseForm({
                   />
                 </div>
               </Form>
-              <Grid container direction="column" justify="flex-end" className={classes.submitButton}>
-                <Grid item>
-                  <ContainedButton
-                    disabled={(submitCount > 0 && !isValid) || isSubmitting}
-                    onClick={submitForm}
-                  >
-                    buy for ${formattedTotal}
-                  </ContainedButton>
+              <Grid container wrap="nowrap" alignItems="center" justify="flex-end">
+                <Grid
+                  item
+                  className={classes.cancel}
+                  onClick={() => {
+                    if (!isSubmitting) {
+                      onClose();
+                    }
+                  }}
+                >
+                  cancel
                 </Grid>
-                {submitCount > 0 && !isValid && (
-                  <Grid item className={classes.error}>
-                    Please correct the errors above
+                <Grid item container direction="column" justify="flex-end" className={classes.submitButton}>
+                  <Grid item>
+                    <ContainedButton
+                      disabled={(submitCount > 0 && !isValid) || isSubmitting}
+                      onClick={submitForm}
+                    >
+                      buy for ${formattedTotal}
+                    </ContainedButton>
                   </Grid>
-                )}
-                {status && status.serverError && (
-                  <Grid item className={classes.error}>
-                    {status.serverError}
-                  </Grid>
-                )}
+                  {submitCount > 0 && !isValid && (
+                    <Grid item className={classes.error}>
+                      Please correct the errors above
+                    </Grid>
+                  )}
+                  {status && status.serverError && (
+                    <Grid item className={classes.error}>
+                      {status.serverError}
+                    </Grid>
+                  )}
+                </Grid>
               </Grid>
             </div>
           );

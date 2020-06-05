@@ -58,6 +58,8 @@ export default function BuyerCreate(): JSX.Element {
   const [name, setName] = useState<string>('');
   const [address, setAddress] = useState<string | object>('');
   const [email, setEmail] = useState<string>('');
+  const [walletId, setWalletId] = useState<string>('');
+  const [addressId, setAddressId] = useState<string>('');
 
   return (
     <div className={classes.root}>
@@ -66,9 +68,10 @@ export default function BuyerCreate(): JSX.Element {
         className={classes.form}
         onSubmit={async e => {
           e.preventDefault();
+          let result;
           try {
             if (buyerType === 'organization') {
-              await createUserOrganization({
+              result = await createUserOrganization({
                 variables: {
                   input: {
                     roles: ['buyer'],
@@ -80,8 +83,10 @@ export default function BuyerCreate(): JSX.Element {
                   },
                 },
               });
+              setAddressId(result.data.createUserOrganization.organization.addressId);
+              setWalletId(result.data.createUserOrganization.organization.walletId);
             } else {
-              await createUser({
+              result = await createUser({
                 variables: {
                   input: {
                     roles: ['buyer'],
@@ -92,6 +97,8 @@ export default function BuyerCreate(): JSX.Element {
                   },
                 },
               });
+              setAddressId(result.data.reallyCreateUser.user.addressId);
+              setWalletId(result.data.reallyCreateUser.user.walletId);
             }
           } catch (e) {}
         }}
@@ -197,7 +204,13 @@ export default function BuyerCreate(): JSX.Element {
           Create buyer
         </Button>
       </form>
-      {(userData || userOrganizationData) && <div>Buyer successfully created</div>}
+      {(userData || userOrganizationData) && (
+        <div>
+          Buyer successfully created:
+          <pre>wallet_id: {walletId}</pre>
+          <pre>address_id: {addressId}</pre>
+        </div>
+      )}
       {userError && (
         <div>
           Error:

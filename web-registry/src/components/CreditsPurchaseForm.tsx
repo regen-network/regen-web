@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import axios from 'axios';
@@ -8,6 +8,7 @@ import { useParams } from 'react-router-dom';
 import { loader } from 'graphql.macro';
 import { useMutation } from '@apollo/react-hooks';
 import { Formik, Form, Field } from 'formik';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 import Title from 'web-components/lib/components/title';
 import Description from 'web-components/lib/components/description';
@@ -84,6 +85,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   cityTextField: {
     marginTop: theme.spacing(4),
   },
+  stateCountryGrid: {
+    [theme.breakpoints.up('sm')]: {
+      flexWrap: 'nowrap',
+    },
+  },
   stateCountryTextField: {
     marginTop: theme.spacing(6),
     [theme.breakpoints.up('sm')]: {
@@ -157,6 +163,8 @@ export default function CreditsPurchaseForm({
   const initialCountry = 'US';
   const { projectId } = useParams();
   const [stateOptions, setStateOptions] = useState<Option[]>([]);
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.up('sm'));
 
   const [createUser] = useMutation(CREATE_USER, {
     errorPolicy: 'ignore',
@@ -195,7 +203,7 @@ export default function CreditsPurchaseForm({
   return (
     <div>
       <Title variant="h3" className={classes.title}>
-        Buy Credit
+        Buy Credits
       </Title>
       <Formik
         initialValues={{
@@ -315,6 +323,9 @@ export default function CreditsPurchaseForm({
         }}
       >
         {({ values, errors, submitForm, isSubmitting, isValid, submitCount, status }) => {
+          const formattedUnitPrice: string = new Intl.NumberFormat('en-US', {
+            minimumFractionDigits: 2,
+          }).format(creditPrice.unitPrice);
           const formattedTotal: string = new Intl.NumberFormat('en-US', { minimumFractionDigits: 2 }).format(
             values.units * creditPrice.unitPrice,
           );
@@ -326,7 +337,7 @@ export default function CreditsPurchaseForm({
                   Number of credits
                 </Title>
                 <Description>
-                  (${creditPrice.unitPrice} {creditPrice.currency}/each), includes 10% service fee
+                  (${formattedUnitPrice} {creditPrice.currency}/each), includes 10% service fee
                 </Description>
                 <Grid container alignItems="center" className={classes.unitsGrid}>
                   <Grid item xs={6}>
@@ -386,14 +397,14 @@ export default function CreditsPurchaseForm({
                   These credits will auto-retire.
                 </Description>
                 <Field component={TextField} className={classes.cityTextField} label="City" name="city" />
-                <Grid container alignItems="center" wrap="nowrap">
+                <Grid container alignItems="center" className={classes.stateCountryGrid}>
                   <Grid item xs={12} sm={6} className={classes.stateCountryTextField}>
                     <Field
                       options={stateOptions}
                       component={SelectTextField}
                       label="State / Province / Region"
                       name="state"
-                      errors
+                      errors={matches}
                     />
                   </Grid>
                   <Grid item xs={12} sm={6} className={classes.stateCountryTextField}>
@@ -403,7 +414,7 @@ export default function CreditsPurchaseForm({
                       name="country"
                       label="Country"
                       triggerOnChange={searchState}
-                      errors
+                      errors={matches}
                     />
                   </Grid>
                 </Grid>

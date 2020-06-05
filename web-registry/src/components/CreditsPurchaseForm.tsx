@@ -275,7 +275,6 @@ export default function CreditsPurchaseForm({
                     walletAddr: name, // fake tmp wallet address (required for org),
                     updates,
                   },
-                  q,
                 },
               });
               walletId = result.data.createUserOrganizationIfNeeded.organization.walletId;

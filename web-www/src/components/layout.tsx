@@ -16,9 +16,10 @@ import './layout.css';
 let logo = 'images/logo.png';
 interface propTypes {
   children: Array<React.ReactElement>;
+  color: string;
 }
 
-const Layout = ({ children }: propTypes): JSX.Element => {
+const Layout = ({ children, color }: propTypes): JSX.Element => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -29,15 +30,15 @@ const Layout = ({ children }: propTypes): JSX.Element => {
     }
   `);
 
-  const theme = useTheme();
+  //   const theme = useTheme();
 
-  const url = typeof window !== 'undefined' ? window.location.href : '';
+  //   const url = typeof window !== 'undefined' ? window.location.href : '';
 
-  let color = theme.palette.primary.contrastText;
-  console.log(`url: ${url}`);
-  if (url.includes('page')) {
-    color = theme.palette.primary.main;
-  }
+  //   let color = theme.palette.primary.contrastText;
+  //   console.log(`url: ${url}`);
+  //   if (url.includes('page')) {
+  //     color = theme.palette.primary.main;
+  //   }
 
   const menuItems = [
     { title: 'Buyers', href: '/buyers' },
@@ -54,7 +55,7 @@ const Layout = ({ children }: propTypes): JSX.Element => {
 
   return (
     <>
-      <Header menuItems={menuItems} absolute transparent color={color}></Header>
+      <Header menuItems={menuItems} absolute transparent color={color ? color : null}></Header>
       <div
         style={{
           margin: `0 auto`,

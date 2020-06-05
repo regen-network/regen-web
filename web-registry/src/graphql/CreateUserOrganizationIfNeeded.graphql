@@ -1,0 +1,9 @@
+mutation CreateUserOrganizationIfNeeded($input: CreateUserOrganizationIfNeededInput!) {
+  createUserOrganizationIfNeeded(input: $input) {
+    organization {
+      id
+      walletId
+      addressId
+    }
+  }
+}

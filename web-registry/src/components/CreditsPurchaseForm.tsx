@@ -21,8 +21,9 @@ import { countries } from '../lib/countries';
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_API_KEY || '');
 
-const CREATE_USER = loader('../graphql/ReallyCreateUser.graphql');
-const CREATE_USER_ORGANIZATION = loader('../graphql/CreateUserOrganization.graphql');
+const CREATE_USER = loader('../graphql/ReallyCreateUserIfNeeded.graphql');
+const CREATE_USER_ORGANIZATION = loader('../graphql/CreateUserOrganizationIfNeeded.graphql');
+const CREATE_ADDRESS = loader('../graphql/CreateAddress.graphql');
 
 const useStyles = makeStyles((theme: Theme) => ({
   title: {
@@ -165,6 +166,10 @@ export default function CreditsPurchaseForm({
     errorPolicy: 'ignore',
   });
 
+  const [createAddress] = useMutation(CREATE_ADDRESS, {
+    errorPolicy: 'ignore',
+  });
+
   const searchState = async (countryId: string): Promise<void> => {
     const resp = await axios({
       url: 'https://geodata.solutions/api/api.php?type=getStates&countryId=' + countryId,
@@ -204,7 +209,7 @@ export default function CreditsPurchaseForm({
           state: '',
           country: initialCountry,
         }}
-        validate={values => {
+        validate={(values: Values) => {
           const errors: Partial<Values> = {};
           if (!values.email) {
             errors.email = requiredMessage;
@@ -229,7 +234,7 @@ export default function CreditsPurchaseForm({
           return errors;
         }}
         onSubmit={async (
-          { orgType, units, email, name, orgName, city, state, country },
+          { orgType, units, email, name, orgName, city, state, country, updates },
           { setSubmitting, setStatus },
         ) => {
           setSubmitting(true);
@@ -237,7 +242,9 @@ export default function CreditsPurchaseForm({
             let walletId: string;
             let addressId: string;
             let result;
-            const address = {
+
+            // Create address
+            const feature = {
               place_type: ['place'],
               text: city,
               context: [
@@ -245,6 +252,18 @@ export default function CreditsPurchaseForm({
                 { id: 'country', text: countries[country] },
               ],
             };
+            const addressResult = await createAddress({
+              variables: {
+                input: {
+                  address: {
+                    feature,
+                  },
+                },
+              },
+            });
+            addressId = addressResult.data.createAddress.address.id;
+
+            // Create user/org
             if (orgType === true) {
               result = await createUserOrganization({
                 variables: {
@@ -253,28 +272,29 @@ export default function CreditsPurchaseForm({
                     email,
                     name,
                     orgName,
-                    orgAddress: address,
-                    walletAddr: name, // fake tmp wallet address (required for org)
+                    walletAddr: name, // fake tmp wallet address (required for org),
+                    updates,
                   },
+                  q,
                 },
               });
-              walletId = result.data.createUserOrganization.organization.walletId;
-              addressId = result.data.createUserOrganization.organization.addressId;
+              walletId = result.data.createUserOrganizationIfNeeded.organization.walletId;
             } else {
               result = await createUser({
                 variables: {
                   input: {
                     roles: ['buyer'],
-                    email,
+                    userEmail: email,
                     name,
-                    address,
                     walletAddr: name, // fake tmp wallet address (to make user able to buy credits)
+                    updates,
                   },
                 },
               });
-              walletId = result.data.reallyCreateUser.user.walletId;
-              addressId = result.data.reallyCreateUser.user.addressId;
+              walletId = result.data.reallyCreateUserIfNeeded.user.walletId;
             }
+
+            // Redirect to Stripe Checkout page
             const stripe = await stripePromise;
             if (stripe) {
               const { error } = await stripe.redirectToCheckout({

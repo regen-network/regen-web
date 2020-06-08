@@ -387,7 +387,7 @@
       "stripePrice": "sku_HAqf7cJtNFynOf",
       "creditPrice": {
         "unitPrice": 27.50,
-        "currency": "AUD"
+        "currency": "USD"
       },
       "name": "Wilmot Farm",
       "fieldsOverride": {

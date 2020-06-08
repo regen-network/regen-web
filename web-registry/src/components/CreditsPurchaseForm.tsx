@@ -385,14 +385,14 @@ export default function CreditsPurchaseForm({
                     name="email"
                   />
                 </div>
-                <div className={classes.orgCheckbox}>
+                {/*<div className={classes.orgCheckbox}>
                   <Field
                     component={CheckboxLabel}
                     name="orgType"
                     label="I am buying these credits on behalf of my organization"
                     type="checkbox"
                   />
-                </div>
+                </div>*/}
                 {values.orgType && (
                   <div className={classes.textFields}>
                     <Field

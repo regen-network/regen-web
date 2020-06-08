@@ -83,14 +83,17 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     '& input, & select.MuiSelect-select': {
       border: `1px solid ${theme.palette.grey[50]}`,
       borderRadius: '2px',
-      height: theme.spacing(12.5),
       [theme.breakpoints.up('sm')]: {
         paddingLeft: theme.spacing(3.75),
         paddingRight: theme.spacing(3.75),
+        fontSize: theme.spacing(4.5),
+        height: theme.spacing(11.25),
       },
       [theme.breakpoints.down('xs')]: {
         paddingLeft: theme.spacing(3.25),
         paddingRight: theme.spacing(3.25),
+        fontSize: theme.spacing(4),
+        height: theme.spacing(8.75),
       },
     },
     '& input[type=number]': {

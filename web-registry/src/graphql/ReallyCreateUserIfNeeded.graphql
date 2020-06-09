@@ -2,8 +2,10 @@ mutation ReallyCreateUserIfNeeded($input: ReallyCreateUserIfNeededInput!) {
   reallyCreateUserIfNeeded(input: $input) {
     user {
       id
-      walletId
-      addressId
+      partyByPartyId {
+        walletId
+        addressId
+      }
     }
   }
 }

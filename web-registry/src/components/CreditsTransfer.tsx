@@ -20,7 +20,7 @@ import TableRow from '@material-ui/core/TableRow';
 const TRANSFER_CREDITS = gql`
   mutation TransferCredits($input: TransferCreditsInput!) {
     transferCredits(input: $input) {
-      uuid
+      json
     }
   }
 `;
@@ -361,7 +361,7 @@ export default function CreditsTransfer(): JSX.Element {
       )}
       {data && data.transferCredits && receiverBalance && showResult && (
         <div>
-          <p>Transaction id: {data.transferCredits.uuid}</p>
+          <p>Transaction id: {data.transferCredits.json.purchaseId}</p>
           <p>
             {units} {pluralize(units, 'credit')} successfully transfered.
           </p>

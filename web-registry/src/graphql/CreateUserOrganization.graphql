@@ -2,8 +2,10 @@ mutation CreateUserOrganization($input: CreateUserOrganizationInput!) {
   createUserOrganization(input: $input) {
     organization {
       id
-      walletId
-      addressId
+      partyByPartyId {
+        walletId
+        addressId
+      }
     }
   }
 }

@@ -301,7 +301,7 @@ export default function CreditsPurchaseForm({
                   },
                 },
               });
-              walletId = result.data.createUserOrganizationIfNeeded.organization.walletId;
+              walletId = result.data.createUserOrganizationIfNeeded.organization.partyByPartyId.walletId;
             } else {
               result = await createUser({
                 variables: {
@@ -314,7 +314,7 @@ export default function CreditsPurchaseForm({
                   },
                 },
               });
-              walletId = result.data.reallyCreateUserIfNeeded.user.walletId;
+              walletId = result.data.reallyCreateUserIfNeeded.user.partyByPartyId.walletId;
             }
 
             // Redirect to Stripe Checkout page

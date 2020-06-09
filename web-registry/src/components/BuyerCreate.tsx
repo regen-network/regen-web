@@ -83,8 +83,8 @@ export default function BuyerCreate(): JSX.Element {
                   },
                 },
               });
-              setAddressId(result.data.createUserOrganization.organization.addressId);
-              setWalletId(result.data.createUserOrganization.organization.walletId);
+              setAddressId(result.data.createUserOrganization.organization.partyByPartyId.addressId);
+              setWalletId(result.data.createUserOrganization.organization.partyByPartyId.walletId);
             } else {
               result = await createUser({
                 variables: {
@@ -97,8 +97,8 @@ export default function BuyerCreate(): JSX.Element {
                   },
                 },
               });
-              setAddressId(result.data.reallyCreateUser.user.addressId);
-              setWalletId(result.data.reallyCreateUser.user.walletId);
+              setAddressId(result.data.reallyCreateUser.user.partyByPartyId.addressId);
+              setWalletId(result.data.reallyCreateUser.user.partyByPartyId.walletId);
             }
           } catch (e) {}
         }}

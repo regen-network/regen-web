@@ -3,6 +3,8 @@ import { graphql, StaticQuery } from 'gatsby';
 import { makeStyles, Theme } from '@material-ui/core';
 import clsx from 'clsx';
 import BackgroundImage from 'gatsby-background-image';
+import Img from 'gatsby-image';
+import VideoPopup from '../components/videoPopup';
 
 interface Props {
   className?: string;
@@ -10,11 +12,12 @@ interface Props {
 
 let useStyles = makeStyles((theme: Theme) => ({
   root: {
+    'text-shadow': '0px 4px 10px rgba(0, 0, 0, 0.1)',
     'text-align': 'center',
     'padding-left': '20vw',
     'padding-right': '20vw',
     color: theme.palette.primary.main,
-    'padding-top': '20vh',
+    'padding-top': '13vh',
     'padding-bottom': '40vh',
     width: '100%',
     height: '60vh',
@@ -28,9 +31,18 @@ let useStyles = makeStyles((theme: Theme) => ({
     opacity: 0.8,
   },
   tag: {
+    'text-shadow': '0px 4px 10px rgba(0, 0, 0, 0.1)',
     'text-align': 'center',
     width: '25vw',
     margin: '0 auto',
+  },
+  icon: {
+    position: 'absolute',
+    width: '80%',
+    height: '80%',
+    top: '50%',
+    left: '54%',
+    transform: 'translate(-50%, -50%)',
   },
   '& p': {
     'line-height': '160%',
@@ -51,6 +63,20 @@ const HomeFoldSection = ({ className }: Props) => {
               }
             }
           }
+          play: file(relativePath: { eq: "play.png" }) {
+            childImageSharp {
+              fixed(quality: 90, width: 45) {
+                ...GatsbyImageSharpFixed_withWebp
+              }
+            }
+          }
+          whiteEllipse: file(relativePath: { eq: "white-ellipse.png" }) {
+            childImageSharp {
+              fixed(quality: 90, width: 100) {
+                ...GatsbyImageSharpFixed_withWebp
+              }
+            }
+          }
         }
       `}
       render={data => {
@@ -64,6 +90,7 @@ const HomeFoldSection = ({ className }: Props) => {
               fluid={imageData}
               backgroundColor={`#040e18`}
             >
+              <VideoPopup></VideoPopup>
               <h1>Platform for a Thriving Planet</h1>
               <div className={classes.tag}>
                 <p>Regen Network aligns economics with ecology to drive regenerative land management.</p>

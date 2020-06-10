@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
-import ContainedButtonThin from 'web-components/lib/components/buttons/ContainedButtonThin';
+import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import { useStaticQuery, graphql } from 'gatsby';
 import BackgroundImage from 'gatsby-background-image';
 import Img from 'gatsby-image';
@@ -73,6 +73,16 @@ const useStyles = makeStyles((theme: Theme) => ({
     'padding-right': theme.spacing(40),
     'padding-left': theme.spacing(40),
   },
+  button: {
+    [theme.breakpoints.down('xs')]: {
+      padding: `${theme.spacing(1)} ${theme.spacing(2)}`,
+      fontSize: theme.spacing(4.5),
+    },
+    [theme.breakpoints.up('sm')]: {
+      padding: `${theme.spacing(2)} ${theme.spacing(8.5)}`,
+      fontSize: theme.spacing(4.5),
+    },
+  }
 }));
 
 const MarketplaceSection = () => {
@@ -126,7 +136,7 @@ const MarketplaceSection = () => {
               Get paid for your ecological practices, such as cover cropping, crop rotation, agroforestry,
               rotational grazing, and more.
             </p>
-            <ContainedButtonThin>List Your Project</ContainedButtonThin>
+            <ContainedButton className={classes.button}>List Your Project</ContainedButton>
           </Grid>
           <Grid item xs>
             <BackgroundImage className={classes.bgdiv} Tag="div" fixed={data.ellipse.childImageSharp.fixed}>
@@ -142,7 +152,7 @@ const MarketplaceSection = () => {
               Whether you are an individual or a business looking to take climate action, we make it easy to
               sponsor ecological practices.
             </p>
-            <ContainedButtonThin>Browse Projects</ContainedButtonThin>
+            <ContainedButton className={classes.button}>Browse Projects</ContainedButton>
           </Grid>
         </Grid>
       </div>

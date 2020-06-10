@@ -25,8 +25,8 @@ const MailSubmit = (): JSX.Element => {
   return (
     <div
       className={clsx('ml-form-embed', classes.root)}
-      data-account={`${process.env.GATSBY_MAILERLITE_DATA_ACCOUNT}`}
-      data-form={`${process.env.GATSBY_MAILERLITE_DATA_FORM}`}
+      data-account={process.env.GATSBY_MAILERLITE_DATA_ACCOUNT}
+      data-form={process.env.GATSBY_MAILERLITE_DATA_FORM}
     ></div>
   );
 };

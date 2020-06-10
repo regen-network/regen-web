@@ -9,7 +9,7 @@ interface Props {
   children?: React.ReactNode;
 }
 
-let useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles((theme: Theme) => ({
   root: {
     width: '100%',
     'background-position': 'bottom center',
@@ -18,8 +18,12 @@ let useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
+/**
+ * This is a template for creating background sections. It's not actually used as a component anywhere.
+ * @param Object {className, Children}
+ */
 const BackgroundSection = ({ className, children }: Props) => {
-  let classes = useStyles({});
+  const classes = useStyles({});
   return (
     <StaticQuery
       query={graphql`

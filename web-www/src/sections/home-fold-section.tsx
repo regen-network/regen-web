@@ -48,7 +48,7 @@ let useStyles = makeStyles((theme: Theme) => ({
     'line-height': '160%',
     'font-family': 'Lato',
   },
-  '& h1': {
+  title: {
     'font-family': 'Muli',
     'line-height': '130%',
   },
@@ -95,7 +95,7 @@ const HomeFoldSection = ({ className }: Props) => {
               backgroundColor={`#040e18`}
             >
               <VideoPopup></VideoPopup>
-              <h1>Platform for a Thriving Planet</h1>
+              <h1 className={classes.title}>Platform for a Thriving Planet</h1>
               <div className={classes.tag}>
                 <p>Regen Network aligns economics with ecology to drive regenerative land management.</p>
               </div>

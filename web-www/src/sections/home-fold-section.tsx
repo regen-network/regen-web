@@ -48,6 +48,10 @@ let useStyles = makeStyles((theme: Theme) => ({
     'line-height': '160%',
     'font-family': 'Lato',
   },
+  '& h1': {
+    'font-family': 'Muli',
+    'line-height': '130%',
+  },
 }));
 
 const HomeFoldSection = ({ className }: Props) => {

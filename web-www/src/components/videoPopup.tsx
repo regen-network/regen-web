@@ -34,41 +34,38 @@ const useStyles = makeStyles(theme => ({
     width: '50vw',
     height: '40vh',
   },
+  close: {
+    cursor: 'pointer',
+    'font-size': '4rem',
+    'z-index': 150,
+    position: 'absolute',
+    color: '#fff',
+    left: '95vw',
+    'font-family': 'sans-serif',
+    top: '-34px',
+  },
 }));
 
 export default function VideoPopup() {
   const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
+  const [open, setOpen] = React.useState(false);
 
-  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
+  const handleOpen = () => {
+    setOpen(true);
   };
 
   const handleClose = () => {
-    setAnchorEl(null);
+    console.log('CLOSE');
+    setOpen(false);
   };
 
-  const open = Boolean(anchorEl);
-  const id = open ? 'simple-popover' : undefined;
   return (
-    <div className={classes.root} onClick={handleClick}>
-      <div className={classes.play}>
+    <div className={classes.root}>
+      <div className={classes.play} onClick={handleOpen}>
         <PlayIcon width="60%" height="60%" className={classes.icon} />
       </div>
-      <Modal
-        id={id}
-        open={open}
-        onClose={handleClose}
-        anchorOrigin={{
-          vertical: 'top',
-          horizontal: 'center',
-        }}
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'center',
-        }}
-      >
-        <div className={classes.vid} style={{ padding: '56.25% 0 0 0', position: 'relative' }}>
+      <Modal open={open} onClose={handleClose}>
+        <div className={classes.vid}>
           <iframe
             title="Kiss the Ground Video"
             src="https://player.vimeo.com/video/299326236?autoplay=1"
@@ -83,6 +80,9 @@ export default function VideoPopup() {
             allow="autoplay; fullscreen"
             allowFullScreen
           />
+          <div className={classes.close} onClick={handleClose}>
+            x
+          </div>
         </div>
       </Modal>
     </div>

@@ -30,10 +30,7 @@ const useStyles = makeStyles(theme => ({
     left: theme.spacing(10),
     transform: 'translate(-50%, -50%)',
   },
-  vid: {
-    width: '50vw',
-    height: '40vh',
-  },
+  vid: {},
   close: {
     cursor: 'pointer',
     'font-size': '4rem',

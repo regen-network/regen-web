@@ -3,8 +3,9 @@ import { graphql, StaticQuery } from 'gatsby';
 import { makeStyles, Theme } from '@material-ui/core';
 import clsx from 'clsx';
 import BackgroundImage from 'gatsby-background-image';
-import Img from 'gatsby-image';
 import VideoPopup from '../components/videoPopup';
+import Title from 'web-components/lib/components/title';
+import { useTheme } from '@material-ui/core/styles';
 
 interface Props {
   className?: string;
@@ -48,6 +49,9 @@ let useStyles = makeStyles((theme: Theme) => ({
     'line-height': '160%',
     'font-family': 'Lato',
   },
+  '& h1.MuiTypography-h1': {
+    color: theme.palette.primary.main,
+  },
   title: {
     'font-family': 'Muli',
     'line-height': '130%',
@@ -55,7 +59,8 @@ let useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const HomeFoldSection = ({ className }: Props) => {
-  let classes = useStyles({});
+  const classes = useStyles({});
+  const theme = useTheme();
   return (
     <StaticQuery
       query={graphql`
@@ -64,20 +69,6 @@ const HomeFoldSection = ({ className }: Props) => {
             childImageSharp {
               fluid(quality: 90, maxWidth: 1920) {
                 ...GatsbyImageSharpFluid_withWebp
-              }
-            }
-          }
-          play: file(relativePath: { eq: "play.png" }) {
-            childImageSharp {
-              fixed(quality: 90, width: 45) {
-                ...GatsbyImageSharpFixed_withWebp
-              }
-            }
-          }
-          whiteEllipse: file(relativePath: { eq: "white-ellipse.png" }) {
-            childImageSharp {
-              fixed(quality: 90, width: 100) {
-                ...GatsbyImageSharpFixed_withWebp
               }
             }
           }
@@ -95,7 +86,9 @@ const HomeFoldSection = ({ className }: Props) => {
               backgroundColor={`#040e18`}
             >
               <VideoPopup></VideoPopup>
-              <h1 className={classes.title}>Platform for a Thriving Planet</h1>
+              <Title align="center" color={theme.palette.primary.main} variant="h1" className={classes.title}>
+                Platform for a Thriving Planet
+              </Title>
               <div className={classes.tag}>
                 <p>Regen Network aligns economics with ecology to drive regenerative land management.</p>
               </div>

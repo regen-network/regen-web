@@ -20,12 +20,12 @@ const useStyles = makeStyles((theme: Theme) => ({
       margin: '0 auto',
       'line-height': '150%',
       'padding-bottom': theme.spacing(10),
-      'margin-bottom': '1rem',
+      'margin-bottom': theme.spacing(2),
       'font-weight': 900,
     },
     '& h3': {
       'line-height': '140%',
-      'margin-bottom': '.8rem',
+      'margin-bottom': theme.spacing(1),
     },
     '& p': {
       'margin-bottom': '0px',
@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       'padding-right': theme.spacing(3),
       '& p': {
         color: theme.palette.info.dark,
-        'margin-bottom': '2rem',
+        'margin-bottom': theme.spacing(3),
       },
     },
   },
@@ -82,7 +82,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       padding: `${theme.spacing(2)} ${theme.spacing(8.5)}`,
       fontSize: theme.spacing(4.5),
     },
-  }
+  },
 }));
 
 const MarketplaceSection = () => {
@@ -128,7 +128,7 @@ const MarketplaceSection = () => {
                 fixed={data.farmer.childImageSharp.fixed}
                 style={{ position: 'absolute' }}
                 className={classes.icon}
-              ></Img>
+              />
             </BackgroundImage>
             <div className={classes.smallTitle}>Land Stewards</div>
             <h3>Register a project</h3>
@@ -144,7 +144,7 @@ const MarketplaceSection = () => {
                 fixed={data.buyers.childImageSharp.fixed}
                 style={{ position: 'absolute' }}
                 className={classes.icon}
-              ></Img>
+              />
             </BackgroundImage>
             <div className={classes.smallTitle}>Buyers</div>
             <h3>Purchase credits</h3>

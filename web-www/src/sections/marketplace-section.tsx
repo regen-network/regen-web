@@ -124,11 +124,7 @@ const MarketplaceSection = () => {
         <Grid className={classes.container} container spacing={3}>
           <Grid item xs>
             <BackgroundImage className={classes.bgdiv} Tag="div" fixed={data.ellipse.childImageSharp.fixed}>
-              <Img
-                fixed={data.farmer.childImageSharp.fixed}
-                style={{ position: 'absolute' }}
-                className={classes.icon}
-              />
+              <Img fixed={data.farmer.childImageSharp.fixed} className={classes.icon} />
             </BackgroundImage>
             <div className={classes.smallTitle}>Land Stewards</div>
             <h3>Register a project</h3>
@@ -140,11 +136,7 @@ const MarketplaceSection = () => {
           </Grid>
           <Grid item xs>
             <BackgroundImage className={classes.bgdiv} Tag="div" fixed={data.ellipse.childImageSharp.fixed}>
-              <Img
-                fixed={data.buyers.childImageSharp.fixed}
-                style={{ position: 'absolute' }}
-                className={classes.icon}
-              />
+              <Img fixed={data.buyers.childImageSharp.fixed} className={classes.icon} />
             </BackgroundImage>
             <div className={classes.smallTitle}>Buyers</div>
             <h3>Purchase credits</h3>

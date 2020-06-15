@@ -28,7 +28,7 @@ const CustomButton = withStyles((theme: Theme) => ({
 
 export default function ContainedButton(props: ContainedButtonProps): JSX.Element {
   return (
-    <CustomButton color="secondary" variant="contained" onClick={props.onClick}>
+    <CustomButton color="secondary" variant="contained" onClick={props.onClick} {...props}>
       {props.children}
     </CustomButton>
   );

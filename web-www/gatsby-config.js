@@ -5,6 +5,7 @@ module.exports = {
     author: `@gatsbyjs`,
   },
   plugins: [
+    'gatsby-plugin-layout',
     {
       resolve: `gatsby-plugin-material-ui`,
       options: {
@@ -21,10 +22,6 @@ module.exports = {
         name: `images`,
         path: `${__dirname}/src/images`,
       },
-    },
-    {
-      resolve: `gatsby-plugin-styled-components`,
-      options: {},
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,

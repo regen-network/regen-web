@@ -7,38 +7,16 @@
 
 import React from 'react';
 import PropTypes, { string } from 'prop-types';
-import { useStaticQuery, graphql } from 'gatsby';
-import styled from 'styled-components';
 import Header from 'web-components/lib/components/header';
 import { useTheme } from '@material-ui/core/styles';
-import { Link } from 'gatsby';
 import './layout.css';
 
-let logo = 'images/logo.png';
 interface propTypes {
   children: Array<React.ReactElement>;
 }
 
 const Layout = ({ children }: propTypes): JSX.Element => {
-  const data = useStaticQuery(graphql`
-    query SiteTitleQuery {
-      site {
-        siteMetadata {
-          title
-        }
-      }
-    }
-  `);
-
   const theme = useTheme();
-
-  const url = typeof window !== 'undefined' ? window.location.href : '';
-
-  let color = theme.palette.primary.contrastText;
-  if (url.includes('page')) {
-    color = theme.palette.primary.main;
-  }
-
   const menuItems = [
     { title: 'Buyers', href: '/buyers' },
     { title: 'Land Steward', href: '/landsteward' },
@@ -51,10 +29,10 @@ const Layout = ({ children }: propTypes): JSX.Element => {
       ],
     },
   ];
-
+  const color = theme.palette.primary.main;
   return (
     <>
-      <Header menuItems={menuItems} absolute transparent color={color}></Header>
+      <Header menuItems={menuItems} absolute transparent color={color ? color : null}></Header>
       <div
         style={{
           margin: `0 auto`,

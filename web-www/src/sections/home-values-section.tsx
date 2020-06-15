@@ -1,43 +1,50 @@
-import React from "react"
-import { graphql, StaticQuery, useStaticQuery } from "gatsby"
-import Grid, { GridSpacing } from "@material-ui/core/Grid"
-import BackgroundImage from "gatsby-background-image"
-import { makeStyles } from "@material-ui/core"
-import clsx from "clsx"
-import Img from "gatsby-image"
+import React from 'react';
+import { graphql, StaticQuery, useStaticQuery } from 'gatsby';
+import Grid, { GridSpacing } from '@material-ui/core/Grid';
+import BackgroundImage from 'gatsby-background-image';
+import Title from 'web-components/lib/components/Title';
+import { makeStyles, Theme } from '@material-ui/core';
+import clsx from 'clsx';
+import Img from 'gatsby-image';
 
 interface Props {
-  className?: string
+  className?: string;
 }
 
-let useStyles = makeStyles({
+let useStyles = makeStyles((theme: Theme) => ({
   root: {},
   values: {},
   section: {
-    "& .MuiGrid-item": {
-      "max-width": "20vw",
+    '& .MuiGrid-item': {
+      'max-width': theme.spacing(70),
     },
-    " & p": {
-      "font-size": "0.75rem",
-      "line-height": "150%",
+    '& h2': {
+      'margin-bottom': theme.spacing(15),
+      'line-height': '130%',
     },
-    " & h4": {
-      "margin-bottom": "1vh",
+    ' & p': {
+      'font-family': 'Lato',
+      'font-size': theme.typography.body2.fontSize,
+      'line-height': '150%',
     },
-    "text-align": "center",
-    height: "15vh",
-    "padding-top": "6vh",
+    ' & h4': {
+      'margin-bottom': theme.spacing(5),
+    },
+    'text-align': 'center',
+    height: 'min-content',
+    'padding-bottom': theme.spacing(15),
+    'padding-top': theme.spacing(15),
   },
   ellipse: {},
   icon: {
-    position: "absolute",
-    width: "80%",
-    height: "80%",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
+    position: 'absolute',
+    width: '80%',
+    height: '80%',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
   },
-})
+}));
 
 const HomeValues = ({ className }: Props) => {
   const data = useStaticQuery(graphql`
@@ -85,9 +92,9 @@ const HomeValues = ({ className }: Props) => {
         }
       }
     }
-  `)
+  `);
 
-  const classes = useStyles()
+  const classes = useStyles();
 
   return (
     <BackgroundImage
@@ -95,7 +102,9 @@ const HomeValues = ({ className }: Props) => {
       className={clsx(className, classes.section)}
       fluid={data.bg.childImageSharp.fluid}
     >
-      <h2>The values grounding our work</h2>
+      <Title align="center" variant="h2">
+        The values grounding our work
+      </Title>
       <Grid container justify="center" spacing={3}>
         <Grid item>
           <BackgroundImage
@@ -105,14 +114,16 @@ const HomeValues = ({ className }: Props) => {
           >
             <Img
               fixed={data.eye.childImageSharp.fixed}
-              style={{ position: "absolute" }}
+              style={{ position: 'absolute' }}
               className={classes.icon}
             ></Img>
           </BackgroundImage>
-          <h4>Transparency</h4>
+          <Title align="center" variant="h4">
+            Transparency
+          </Title>
           <p>
-            We not only monitor ecological impact, we share our data and
-            insights for the betterment of the whole system.
+            We not only monitor ecological impact, we share our data and insights for the betterment of the
+            whole system.
           </p>
         </Grid>
         <Grid item>
@@ -123,14 +134,16 @@ const HomeValues = ({ className }: Props) => {
           >
             <Img
               fixed={data.handshake.childImageSharp.fixed}
-              style={{ position: "absolute" }}
+              style={{ position: 'absolute' }}
               className={classes.icon}
             ></Img>
           </BackgroundImage>
-          <h4>Trust</h4>
+          <Title align="center" variant="h4">
+            Trust
+          </Title>
           <p>
-            By tracking and verifying outcomes, we enable stakeholders to know
-            that credits represent real impact.
+            By tracking and verifying outcomes, we enable stakeholders to know that credits represent real
+            impact.
           </p>
         </Grid>
         <Grid item>
@@ -141,14 +154,16 @@ const HomeValues = ({ className }: Props) => {
           >
             <Img
               fixed={data.shield.childImageSharp.fixed}
-              style={{ position: "absolute" }}
+              style={{ position: 'absolute' }}
               className={classes.icon}
             ></Img>
           </BackgroundImage>
-          <h4>Accountability</h4>
+          <Title align="center" variant="h4">
+            Accountability
+          </Title>
           <p>
-            Our fully auditable ecosystem services contracts ensure integrity
-            and mutual responsibility between parties.
+            Our fully auditable ecosystem services contracts ensure integrity and mutual responsibility
+            between parties.
           </p>
         </Grid>
         <Grid item>
@@ -159,19 +174,21 @@ const HomeValues = ({ className }: Props) => {
           >
             <Img
               fixed={data.boxes.childImageSharp.fixed}
-              style={{ position: "absolute" }}
+              style={{ position: 'absolute' }}
               className={classes.icon}
             ></Img>
           </BackgroundImage>
-          <h4>Decentralization</h4>
+          <Title align="center" variant="h4">
+            Decentralization
+          </Title>
           <p>
-            Our platform builds an empowered collective of actors, forgoing the
-            expenses and inefficiencies of third parties
+            Our platform builds an empowered collective of actors, forgoing the expenses and inefficiencies of
+            third parties
           </p>
         </Grid>
       </Grid>
     </BackgroundImage>
-  )
-}
+  );
+};
 
-export default HomeValues
+export default HomeValues;

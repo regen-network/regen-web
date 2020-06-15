@@ -906,7 +906,11 @@
   version "7.9.5"
   resolved "https://registry.yarnpkg.com/@babel/standalone/-/standalone-7.9.5.tgz#aba82195a39a8ed8ae56eacff72cf2bda551a7c3"
   integrity sha512-J6mHRjRUh4pKCd1uz5ghF2LpUwMuGwxy4z+TM+jbvt0dM6NiXd8Z2UOD1ftmGfkuAuDYlgcz4fm62MIjt8iUlg==
+<<<<<<< HEAD
 >>>>>>> origin
+=======
+>>>>>>> master
+>>>>>>> jared/values-section
 
 "@babel/template@^7.8.3", "@babel/template@^7.8.6":
   version "7.8.6"
@@ -942,7 +946,11 @@
   version "7.9.5"
   resolved "https://registry.yarnpkg.com/@babel/traverse/-/traverse-7.9.5.tgz#6e7c56b44e2ac7011a948c21e283ddd9d9db97a2"
   integrity sha512-c4gH3jsvSuGUezlP6rzSJ6jf8fYjLj3hsMZRx/nX0h+fmHN0w+ekubRrHPqnMec0meycA2nwCsJ7dC8IPem2FQ==
+<<<<<<< HEAD
 >>>>>>> origin
+=======
+>>>>>>> master
+>>>>>>> jared/values-section
   dependencies:
     "@babel/code-frame" "^7.8.3"
     "@babel/generator" "^7.9.5"
@@ -975,7 +983,11 @@
   integrity sha512-kBJtf7PH6aWwZ6fka3zQ0p6SBYzx4fl1LoZXE2RrnYST9Xljm7WfKJrU4g/Xr3Beg72MLrp1AWNUmuYJTL7Cow==
 
 =======
+<<<<<<< HEAD
 >>>>>>> origin
+=======
+>>>>>>> master
+>>>>>>> jared/values-section
 "@emotion/is-prop-valid@^0.8.8":
   version "0.8.8"
   resolved "https://registry.yarnpkg.com/@emotion/is-prop-valid/-/is-prop-valid-0.8.8.tgz#db28b1c4368a259b60a97311d6a952d4fd01ac1a"
@@ -1746,7 +1758,11 @@
   version "0.62.7"
   resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.62.7.tgz#bfc5ed03ba576f288603daa3f67f0f67d9a8bf57"
   integrity sha512-FGFEt9GcFVl//XxWmxkeBxAx0YnzyEhJpR8hOJrjfaFKZm0KjHzzyCmCksBAP2qHSTrcJCiBkIvYCX/kGiOgww==
+<<<<<<< HEAD
 >>>>>>> origin
+=======
+>>>>>>> master
+>>>>>>> jared/values-section
   dependencies:
     "@types/react" "*"
 
@@ -6081,7 +6097,11 @@ gatsby-plugin-typescript@:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-typescript/-/gatsby-plugin-typescript-2.4.0.tgz#4ef561acb28ae980e96125f70ae06954fa5de646"
   integrity sha512-PAP6/a83yK7HRv5o0paY000HYL7O4vS0x38t1gxP4tsDpd9L35vNeHeZfklifCE67n9PsElgfSmtCL2Za0M4KQ==
+<<<<<<< HEAD
 >>>>>>> origin
+=======
+>>>>>>> master
+>>>>>>> jared/values-section
   dependencies:
     "@babel/runtime" "^7.9.6"
 
@@ -6969,7 +6989,11 @@ hmac-drbg@^1.0.0:
 hoist-non-react-statics@^3.0.0, hoist-non-react-statics@^3.2.1, hoist-non-react-statics@^3.3.0, hoist-non-react-statics@^3.3.2:
 =======
 hoist-non-react-statics@^3.0.0, hoist-non-react-statics@^3.3.0:
+<<<<<<< HEAD
 >>>>>>> origin
+=======
+>>>>>>> master
+>>>>>>> jared/values-section
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-3.3.2.tgz#ece0acaf71d62c2969c2ec59feff42a4b1a85b45"
   integrity sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==

@@ -29,11 +29,12 @@
     "styled-components": "5.1.0",
     "typescript": "3.8.3",
     "clsx": "1.1.0",
-    "typescript-eslint": "0.0.1-alpha.0"
+    "typescript-eslint": "0.0.1-alpha.0",
+    "web-components": "0.0.0"
   },
   "devDependencies": {
-    "@types/styled-components": "^5.0.1",
-    "prettier": "2.0.5"
+    "prettier": "2.0.5",
+    "@types/styled-components": "^5.0.1"
   },
   "keywords": [
     "gatsby"

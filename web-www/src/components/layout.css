@@ -1,3 +1,10 @@
+.header {
+  position: fixed;
+  background-color: null;
+  z-index: 10;
+  width: 100%;
+}
+
 html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;

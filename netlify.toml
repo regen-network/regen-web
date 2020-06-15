@@ -3,3 +3,6 @@
 
 [context.branch-deploy]
   environment = { REACT_APP_API_URI = "https://regen-registry-server-staging.herokuapp.com" }
+
+[context.deploy-preview]
+  environment = { REACT_APP_API_URI = "https://regen-registry-server-staging.herokuapp.com" }

@@ -1,5 +1,5 @@
 {
-  "name": "web",
+  "name": "web-registry",
   "version": "0.0.0",
   "private": true,
   "dependencies": {
@@ -11,9 +11,9 @@
     "apollo-boost": "^0.4.7",
     "auth0-js": "^9.13.1",
     "graphql": "^15.0.0",
-    "react": "16.12.0",
+    "react": "^16.13.1",
     "react-apollo": "^3.1.4",
-    "react-dom": "16.12.0",
+    "react-dom": "^16.13.1",
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.3.0",
@@ -28,7 +28,8 @@
     "format": "prettier --write --loglevel warn './src/**/*.{ts,tsx,json,md,css}'",
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test"
+    "test": "react-scripts test",
+    "test-update-snapshot": "react-scripts test --updateSnapshot"
   },
   "browserslist": {
     "production": [

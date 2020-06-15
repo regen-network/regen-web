@@ -1,43 +1,43 @@
-import React from "react"
-import { graphql, StaticQuery, useStaticQuery } from "gatsby"
-import Grid, { GridSpacing } from "@material-ui/core/Grid"
-import BackgroundImage from "gatsby-background-image"
-import { makeStyles } from "@material-ui/core"
-import clsx from "clsx"
-import Img from "gatsby-image"
+import React from 'react';
+import { graphql, StaticQuery, useStaticQuery } from 'gatsby';
+import Grid, { GridSpacing } from '@material-ui/core/Grid';
+import BackgroundImage from 'gatsby-background-image';
+import { makeStyles } from '@material-ui/core';
+import clsx from 'clsx';
+import Img from 'gatsby-image';
 
 interface Props {
-  className?: string
+  className?: string;
 }
 
 let useStyles = makeStyles({
   root: {},
   values: {},
   section: {
-    "& .MuiGrid-item": {
-      "max-width": "20vw",
+    '& .MuiGrid-item': {
+      'max-width': '20vw',
     },
-    " & p": {
-      "font-size": "0.75rem",
-      "line-height": "150%",
+    ' & p': {
+      'font-size': '0.75rem',
+      'line-height': '150%',
     },
-    " & h4": {
-      "margin-bottom": "1vh",
+    ' & h4': {
+      'margin-bottom': '1vh',
     },
-    "text-align": "center",
-    height: "15vh",
-    "padding-top": "6vh",
+    'text-align': 'center',
+    height: '45vh',
+    'padding-top': '6vh',
   },
   ellipse: {},
   icon: {
-    position: "absolute",
-    width: "80%",
-    height: "80%",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
+    position: 'absolute',
+    width: '80%',
+    height: '80%',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
   },
-})
+});
 
 const HomeValues = ({ className }: Props) => {
   const data = useStaticQuery(graphql`
@@ -85,9 +85,9 @@ const HomeValues = ({ className }: Props) => {
         }
       }
     }
-  `)
+  `);
 
-  const classes = useStyles()
+  const classes = useStyles();
 
   return (
     <BackgroundImage
@@ -105,14 +105,14 @@ const HomeValues = ({ className }: Props) => {
           >
             <Img
               fixed={data.eye.childImageSharp.fixed}
-              style={{ position: "absolute" }}
+              style={{ position: 'absolute' }}
               className={classes.icon}
             ></Img>
           </BackgroundImage>
           <h4>Transparency</h4>
           <p>
-            We not only monitor ecological impact, we share our data and
-            insights for the betterment of the whole system.
+            We not only monitor ecological impact, we share our data and insights for the betterment of the
+            whole system.
           </p>
         </Grid>
         <Grid item>
@@ -123,14 +123,14 @@ const HomeValues = ({ className }: Props) => {
           >
             <Img
               fixed={data.handshake.childImageSharp.fixed}
-              style={{ position: "absolute" }}
+              style={{ position: 'absolute' }}
               className={classes.icon}
             ></Img>
           </BackgroundImage>
           <h4>Trust</h4>
           <p>
-            By tracking and verifying outcomes, we enable stakeholders to know
-            that credits represent real impact.
+            By tracking and verifying outcomes, we enable stakeholders to know that credits represent real
+            impact.
           </p>
         </Grid>
         <Grid item>
@@ -141,14 +141,14 @@ const HomeValues = ({ className }: Props) => {
           >
             <Img
               fixed={data.shield.childImageSharp.fixed}
-              style={{ position: "absolute" }}
+              style={{ position: 'absolute' }}
               className={classes.icon}
             ></Img>
           </BackgroundImage>
           <h4>Accountability</h4>
           <p>
-            Our fully auditable ecosystem services contracts ensure integrity
-            and mutual responsibility between parties.
+            Our fully auditable ecosystem services contracts ensure integrity and mutual responsibility
+            between parties.
           </p>
         </Grid>
         <Grid item>
@@ -159,19 +159,19 @@ const HomeValues = ({ className }: Props) => {
           >
             <Img
               fixed={data.boxes.childImageSharp.fixed}
-              style={{ position: "absolute" }}
+              style={{ position: 'absolute' }}
               className={classes.icon}
             ></Img>
           </BackgroundImage>
           <h4>Decentralization</h4>
           <p>
-            Our platform builds an empowered collective of actors, forgoing the
-            expenses and inefficiencies of third parties
+            Our platform builds an empowered collective of actors, forgoing the expenses and inefficiencies of
+            third parties
           </p>
         </Grid>
       </Grid>
     </BackgroundImage>
-  )
-}
+  );
+};
 
-export default HomeValues
+export default HomeValues;

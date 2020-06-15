@@ -2,7 +2,7 @@ import React from 'react';
 import { graphql, StaticQuery, useStaticQuery } from 'gatsby';
 import Grid, { GridSpacing } from '@material-ui/core/Grid';
 import BackgroundImage from 'gatsby-background-image';
-import { makeStyles } from '@material-ui/core';
+import { makeStyles, Theme } from '@material-ui/core';
 import clsx from 'clsx';
 import Img from 'gatsby-image';
 
@@ -10,12 +10,12 @@ interface Props {
   className?: string;
 }
 
-let useStyles = makeStyles({
+let useStyles = makeStyles((theme: Theme) => ({
   root: {},
   values: {},
   section: {
     '& .MuiGrid-item': {
-      'max-width': '20vw',
+      'max-width': '240px',
     },
     ' & p': {
       'font-size': '0.75rem',
@@ -25,8 +25,9 @@ let useStyles = makeStyles({
       'margin-bottom': '1vh',
     },
     'text-align': 'center',
-    height: '45vh',
-    'padding-top': '6vh',
+    height: 'min-content',
+    'padding-bottom': theme.spacing(15),
+    'padding-top': theme.spacing(15),
   },
   ellipse: {},
   icon: {
@@ -37,7 +38,7 @@ let useStyles = makeStyles({
     left: '50%',
     transform: 'translate(-50%, -50%)',
   },
-});
+}));
 
 const HomeValues = ({ className }: Props) => {
   const data = useStaticQuery(graphql`

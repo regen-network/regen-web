@@ -2,6 +2,7 @@ import React from 'react';
 import { graphql, StaticQuery, useStaticQuery } from 'gatsby';
 import Grid, { GridSpacing } from '@material-ui/core/Grid';
 import BackgroundImage from 'gatsby-background-image';
+import Title from 'web-components/lib/components/Title';
 import { makeStyles, Theme } from '@material-ui/core';
 import clsx from 'clsx';
 import Img from 'gatsby-image';
@@ -15,14 +16,19 @@ let useStyles = makeStyles((theme: Theme) => ({
   values: {},
   section: {
     '& .MuiGrid-item': {
-      'max-width': '240px',
+      'max-width': theme.spacing(70),
+    },
+    '& h2': {
+      'margin-bottom': theme.spacing(15),
+      'line-height': '130%',
     },
     ' & p': {
-      'font-size': '0.75rem',
+      'font-family': 'Lato',
+      'font-size': theme.typography.body2.fontSize,
       'line-height': '150%',
     },
     ' & h4': {
-      'margin-bottom': '1vh',
+      'margin-bottom': theme.spacing(5),
     },
     'text-align': 'center',
     height: 'min-content',
@@ -96,7 +102,9 @@ const HomeValues = ({ className }: Props) => {
       className={clsx(className, classes.section)}
       fluid={data.bg.childImageSharp.fluid}
     >
-      <h2>The values grounding our work</h2>
+      <Title align="center" variant="h2">
+        The values grounding our work
+      </Title>
       <Grid container justify="center" spacing={3}>
         <Grid item>
           <BackgroundImage
@@ -110,7 +118,9 @@ const HomeValues = ({ className }: Props) => {
               className={classes.icon}
             ></Img>
           </BackgroundImage>
-          <h4>Transparency</h4>
+          <Title align="center" variant="h4">
+            Transparency
+          </Title>
           <p>
             We not only monitor ecological impact, we share our data and insights for the betterment of the
             whole system.
@@ -128,7 +138,9 @@ const HomeValues = ({ className }: Props) => {
               className={classes.icon}
             ></Img>
           </BackgroundImage>
-          <h4>Trust</h4>
+          <Title align="center" variant="h4">
+            Trust
+          </Title>
           <p>
             By tracking and verifying outcomes, we enable stakeholders to know that credits represent real
             impact.
@@ -146,7 +158,9 @@ const HomeValues = ({ className }: Props) => {
               className={classes.icon}
             ></Img>
           </BackgroundImage>
-          <h4>Accountability</h4>
+          <Title align="center" variant="h4">
+            Accountability
+          </Title>
           <p>
             Our fully auditable ecosystem services contracts ensure integrity and mutual responsibility
             between parties.
@@ -164,7 +178,9 @@ const HomeValues = ({ className }: Props) => {
               className={classes.icon}
             ></Img>
           </BackgroundImage>
-          <h4>Decentralization</h4>
+          <Title align="center" variant="h4">
+            Decentralization
+          </Title>
           <p>
             Our platform builds an empowered collective of actors, forgoing the expenses and inefficiencies of
             third parties

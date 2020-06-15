@@ -82,7 +82,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       padding: `${theme.spacing(2)} ${theme.spacing(8.5)}`,
       fontSize: theme.spacing(4.5),
     },
-  }
+  },
 }));
 
 const MarketplaceSection = () => {

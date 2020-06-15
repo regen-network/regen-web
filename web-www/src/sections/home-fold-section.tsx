@@ -86,7 +86,7 @@ const HomeFoldSection = ({ className }: Props) => {
               backgroundColor={`#040e18`}
             >
               <VideoPopup></VideoPopup>
-              <Title align="center" color={theme.palette.primary.main} variant="h1" className={classes.title}>
+              <Title align="center" color="primary" variant="h1" className={classes.title}>
                 Platform for a Thriving Planet
               </Title>
               <div className={classes.tag}>

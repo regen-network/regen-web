@@ -8,6 +8,7 @@ interface TitleProps {
   children?: any;
   color?: any;
   className?: string;
+  align?: 'left' | 'right' | 'inherit' | 'center' | 'justify' | undefined;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -17,13 +18,13 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function Title({ variant, children, color, className }: TitleProps): JSX.Element {
+export default function Title({ variant, children, color, className, align }: TitleProps): JSX.Element {
   const classes = useStyles({});
   return (
     <Typography
       className={`${classes.root} ${className}`}
       color={color || 'textPrimary'}
-      align="left"
+      align={align || 'left'}
       variant={variant}
     >
       {children}

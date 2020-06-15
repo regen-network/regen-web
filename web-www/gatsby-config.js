@@ -5,6 +5,7 @@ module.exports = {
     author: `@gatsbyjs`,
   },
   plugins: [
+    'gatsby-plugin-layout',
     {
       resolve: `gatsby-plugin-material-ui`,
       options: {

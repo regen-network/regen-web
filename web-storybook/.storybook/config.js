@@ -25,7 +25,7 @@ addParameters({
 
 const loaderFn = () => {
   const allExports = [];
-  const webStories = requireContext('../../web', true, /\.stories\.((js|ts)x?)$/);
+  const webStories = requireContext('../../web-registry', true, /\.stories\.((js|ts)x?)$/);
   const webComponentStories = requireContext('../../web-components', true, /\.stories\.((js|ts)x?)$/);
   webStories.keys().forEach(filename => allExports.push(webStories(filename)));
   webComponentStories.keys().forEach(filename => allExports.push(webComponentStories(filename)));

@@ -1,3 +1,0 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-See main [README.md](../README.md)

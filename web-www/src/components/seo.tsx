@@ -5,16 +5,18 @@
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-import React from "react"
-import PropTypes from "prop-types"
-import { Helmet } from "react-helmet"
-import { useStaticQuery, graphql } from "gatsby"
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { Helmet } from 'react-helmet';
+import { useStaticQuery, graphql } from 'gatsby';
+// @ts-ignore
+//import mailer from '../js/mailerlite.js';
 
 interface propTypes {
-	description: string,
-	lang: string,
-	meta:  Array <string>, 
-	title: string
+  description: string;
+  lang: string;
+  meta: Array<string>;
+  title: string;
 }
 
 function SEO({ description, lang, meta, title }: propTypes) {
@@ -29,10 +31,12 @@ function SEO({ description, lang, meta, title }: propTypes) {
           }
         }
       }
-    `
-  )
+    `,
+  );
 
-  const metaDescription = description || site.siteMetadata.description
+  //console.log(`mailer: ${JSON.stringify(mailer)}`);
+
+  const metaDescription = description || site.siteMetadata.description;
 
   return (
     <Helmet
@@ -75,21 +79,23 @@ function SEO({ description, lang, meta, title }: propTypes) {
           content: metaDescription,
         },
       ]}
-    />
-  )
+    >
+      <script src="mailerlite.js" type="text/javascript"></script>
+    </Helmet>
+  );
 }
 
 SEO.defaultProps = {
   lang: `en`,
   meta: [],
   description: ``,
-}
+};
 
 SEO.propTypes = {
   description: PropTypes.string,
   lang: PropTypes.string,
   meta: PropTypes.arrayOf(PropTypes.object),
   title: PropTypes.string.isRequired,
-}
+};
 
-export default SEO
+export default SEO;

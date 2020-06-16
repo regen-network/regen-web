@@ -20,12 +20,12 @@ const useStyles = makeStyles((theme: Theme) => ({
       margin: '0 auto',
       'line-height': '150%',
       'padding-bottom': theme.spacing(10),
-      'margin-bottom': '1rem',
+      'margin-bottom': theme.spacing(2),
       'font-weight': 900,
     },
     '& h3': {
       'line-height': '140%',
-      'margin-bottom': '.8rem',
+      'margin-bottom': theme.spacing(1),
     },
     '& p': {
       'margin-bottom': '0px',
@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       'padding-right': theme.spacing(3),
       '& p': {
         color: theme.palette.info.dark,
-        'margin-bottom': '2rem',
+        'margin-bottom': theme.spacing(3),
       },
     },
   },
@@ -124,11 +124,7 @@ const MarketplaceSection = () => {
         <Grid className={classes.container} container spacing={3}>
           <Grid item xs>
             <BackgroundImage className={classes.bgdiv} Tag="div" fixed={data.ellipse.childImageSharp.fixed}>
-              <Img
-                fixed={data.farmer.childImageSharp.fixed}
-                style={{ position: 'absolute' }}
-                className={classes.icon}
-              ></Img>
+              <Img fixed={data.farmer.childImageSharp.fixed} className={classes.icon} />
             </BackgroundImage>
             <div className={classes.smallTitle}>Land Stewards</div>
             <h3>Register a project</h3>
@@ -140,11 +136,7 @@ const MarketplaceSection = () => {
           </Grid>
           <Grid item xs>
             <BackgroundImage className={classes.bgdiv} Tag="div" fixed={data.ellipse.childImageSharp.fixed}>
-              <Img
-                fixed={data.buyers.childImageSharp.fixed}
-                style={{ position: 'absolute' }}
-                className={classes.icon}
-              ></Img>
+              <Img fixed={data.buyers.childImageSharp.fixed} className={classes.icon} />
             </BackgroundImage>
             <div className={classes.smallTitle}>Buyers</div>
             <h3>Purchase credits</h3>

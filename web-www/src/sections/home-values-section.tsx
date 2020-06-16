@@ -1,6 +1,6 @@
 import React from 'react';
-import { graphql, StaticQuery, useStaticQuery } from 'gatsby';
-import Grid, { GridSpacing } from '@material-ui/core/Grid';
+import { graphql, useStaticQuery } from 'gatsby';
+import Grid from '@material-ui/core/Grid';
 import BackgroundImage from 'gatsby-background-image';
 import Title from 'web-components/lib/components/Title';
 import { makeStyles, Theme } from '@material-ui/core';
@@ -12,8 +12,6 @@ interface Props {
 }
 
 let useStyles = makeStyles((theme: Theme) => ({
-  root: {},
-  values: {},
   section: {
     '& .MuiGrid-item': {
       'max-width': theme.spacing(70),

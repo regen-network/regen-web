@@ -2,7 +2,7 @@ import React from 'react';
 import { graphql, StaticQuery, useStaticQuery } from 'gatsby';
 import Grid, { GridSpacing } from '@material-ui/core/Grid';
 import BackgroundImage from 'gatsby-background-image';
-import Title from 'web-components/lib/components/Title';
+import Title from 'web-components/lib/components/title';
 import { makeStyles, Theme } from '@material-ui/core';
 import clsx from 'clsx';
 import Img from 'gatsby-image';

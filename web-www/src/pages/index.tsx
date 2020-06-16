@@ -14,9 +14,9 @@ const IndexPage = (): JSX.Element => {
     <>
       <SEO title="Home" />
       <HomeFoldSection></HomeFoldSection>
-      <HomeLedger></HomeLedger>
       <MarketplaceSection></MarketplaceSection>
       <EmailSubmitSection />
+      <HomeLedger></HomeLedger>
       <HomeValuesSection></HomeValuesSection>
     </>
   );

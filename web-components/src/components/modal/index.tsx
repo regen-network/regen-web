@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import CloseIcon from '../icons/CloseIcon';
+import { RemoveScroll } from 'react-remove-scroll';
 
 interface RegenModalProps {
   open: boolean;
@@ -14,6 +15,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     outline: 'none',
     position: 'absolute',
     overflow: 'auto',
+    '-webkit-overflow-scrolling': 'touch',
     [theme.breakpoints.up('sm')]: {
       '&::-webkit-scrollbar': {
         width: '0.5em',
@@ -87,12 +89,14 @@ export default function RegenModal({ open, onClose, children }: RegenModalProps)
   const classes = useStyles({});
   return (
     <Modal open={open} onClose={onClose}>
-      <div className={classes.content}>
-        {children}
-        <div className={classes.closeIcon} onClick={onClose}>
-          <CloseIcon />
+      <RemoveScroll>
+        <div className={classes.content}>
+          {children}
+          <div className={classes.closeIcon} onClick={onClose}>
+            <CloseIcon />
+          </div>
         </div>
-      </div>
+      </RemoveScroll>
     </Modal>
   );
 }

@@ -1,10 +1,10 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
-import { ThemeStyle } from '@material-ui/core/styles/createTypography';
+import { Variant } from '@material-ui/core/styles/createTypography';
 
 interface TitleProps {
-  variant: ThemeStyle;
+  variant: Variant;
   children?: any;
   color?: any;
   className?: string;

@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import RegenIcon from '../icons/RegenIcon';
 import clsx from 'clsx';
 import MenuHover from '../menu-hover';
+import MobileMenu from '../mobile-menu';
 
 // import {
 //   Link,
@@ -32,8 +33,21 @@ interface HeaderMenuItem {
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
+  mobile: {
+    [theme.breakpoints.up('md')]: {
+      display: 'none',
+    },
+    [theme.breakpoints.down('sm')]: {
+      display: 'inline-block',
+    },
+  },
   menuList: {
-    display: 'flex',
+    [theme.breakpoints.up('md')]: {
+      display: 'flex',
+    },
+    [theme.breakpoints.down('sm')]: {
+      display: 'none',
+    },
     position: 'unset',
     width: 'unset',
     'z-index': 0,
@@ -139,6 +153,7 @@ export default function Header({
           </a>
         </Grid>
         <Grid item>
+          <MobileMenu className={classes.mobile}></MobileMenu>
           <MenuList className={classes.menuList}>
             {menuItems?.map((item, index) => (
               <MenuItem key={index}>

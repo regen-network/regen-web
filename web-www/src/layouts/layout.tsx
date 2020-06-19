@@ -32,7 +32,7 @@ const Layout = ({ children }: propTypes): JSX.Element => {
   const color = theme.palette.primary.main;
   return (
     <>
-      <Header menuItems={menuItems} absolute transparent color={color ? color : null}></Header>
+      <Header menuItems={menuItems} absolute transparent color={color ? color : undefined}></Header>
       <div
         style={{
           margin: `0 auto`,

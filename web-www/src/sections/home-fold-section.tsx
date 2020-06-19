@@ -32,9 +32,15 @@ let useStyles = makeStyles((theme: Theme) => ({
     opacity: 0.8,
   },
   tag: {
+    [theme.breakpoints.up('lg')]: {
+      width: '25vw',
+    },
+    [theme.breakpoints.down('md')]: {
+      width: '80%',
+    },
     'text-shadow': '0px 4px 10px rgba(0, 0, 0, 0.1)',
     'text-align': 'center',
-    width: '25vw',
+
     margin: '0 auto',
   },
   icon: {

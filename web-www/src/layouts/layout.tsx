@@ -15,9 +15,11 @@ import './layout.css';
 
 interface propTypes {
   children: Array<React.ReactElement>;
+  location: Location;
 }
 
-const Layout = ({ children }: propTypes): JSX.Element => {
+const Layout = ({ children, location }: propTypes): JSX.Element => {
+
   const theme = useTheme();
   const menuItems = [
     { title: 'Buyers', href: '/buyers' },
@@ -31,6 +33,7 @@ const Layout = ({ children }: propTypes): JSX.Element => {
       ],
     },
   ];
+  // TODO Header absolute prop will also needs to be set based on location
   const matches = useMediaQuery(theme.breakpoints.up('sm'));
 
   return (

@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 import CardMedia from '@material-ui/core/CardMedia';
-import { ThemeStyle } from '@material-ui/core/styles/createTypography';
+import { Variant } from '@material-ui/core/styles/createTypography';
 
 import Card from './Card';
 import Title from '../title';
@@ -13,7 +13,7 @@ export interface MediaCardProps {
   tag?: string;
   onClick?: () => void;
   width?: string;
-  titleVariant?: ThemeStyle;
+  titleVariant?: Variant;
   elevation?: number;
   borderColor?: string;
   borderRadius?: string;

@@ -9,7 +9,7 @@ import HomeValuesSection from '../sections/home-values-section';
 const IndexPage = (): JSX.Element => {
   return (
     <>
-      <SEO title="Home" />
+      <SEO title="Home" mailerlite />
       <HomeFoldSection />
       <MarketplaceSection />
       <EmailSubmitSection />

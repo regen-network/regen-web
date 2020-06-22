@@ -42,8 +42,8 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   projectTop: {
     backgroundSize: 'cover',
-    borderTop: `1px solid ${theme.palette.grey[50]}`,
-    borderBottom: `1px solid ${theme.palette.grey[50]}`,
+    borderTop: `1px solid ${theme.palette.grey[100]}`,
+    borderBottom: `1px solid ${theme.palette.grey[100]}`,
   },
   projectContent: {
     maxWidth: theme.breakpoints.values.lg,

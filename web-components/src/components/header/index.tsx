@@ -102,7 +102,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     zIndex: 10,
   },
   searchIcon: {
-    color: theme.palette.grey[50],
+    color: theme.palette.grey[100],
     marginRight: theme.spacing(6.25),
     marginBottom: theme.spacing(1),
   },

@@ -18,9 +18,18 @@ interface propTypes {
   location: Location;
 }
 
-const Layout = ({ children, location }: propTypes): JSX.Element => {
+interface HeaderColors {
+  [key: string]: string;
+}
 
+const Layout = ({ children, location }: propTypes): JSX.Element => {
   const theme = useTheme();
+
+  const headerColors: HeaderColors = {
+    '/': theme.palette.primary.main,
+    '/buyers/': theme.palette.primary.light,
+  };
+
   const menuItems = [
     { title: 'Buyers', href: '/buyers' },
     { title: 'Land Steward', href: '/landsteward' },
@@ -35,6 +44,7 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
   ];
   // TODO Header absolute prop will also needs to be set based on location
   const matches = useMediaQuery(theme.breakpoints.up('sm'));
+  const desktopColor: string = headerColors[location.pathname] ? headerColors[location.pathname] : theme.palette.primary.main;
 
   return (
     <>
@@ -42,7 +52,7 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
         menuItems={menuItems}
         absolute={matches}
         transparent
-        color={matches ? theme.palette.primary.main : theme.palette.primary.contrastText}
+        color={matches ? desktopColor : theme.palette.primary.light}
       />
       <div
         style={{

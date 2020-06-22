@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontSize: '0.75rem',
     color: theme.palette.primary.light,
     backgroundColor: 'transparent',
-    borderBottom: `1px solid ${theme.palette.grey[50]}`,
+    borderBottom: `1px solid ${theme.palette.grey[100]}`,
     lineHeight: '1.25rem',
   },
   row: {

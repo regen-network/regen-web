@@ -69,7 +69,7 @@ const TopSection = () => {
     <StaticQuery
       query={graphql`
         query {
-          desktop: file(relativePath: { eq: "buyers-top.png" }) {
+          desktop: file(relativePath: { eq: "buyers-top.jpg" }) {
             childImageSharp {
               fluid(quality: 90) {
                 ...GatsbyImageSharpFluid_withWebp

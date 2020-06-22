@@ -10,10 +10,10 @@ const IndexPage = (): JSX.Element => {
   return (
     <>
       <SEO title="Home" />
-      <HomeFoldSection></HomeFoldSection>
-      <MarketplaceSection></MarketplaceSection>
+      <HomeFoldSection />
+      <MarketplaceSection />
       <EmailSubmitSection />
-      <HomeValuesSection></HomeValuesSection>
+      <HomeValuesSection />
     </>
   );
 };

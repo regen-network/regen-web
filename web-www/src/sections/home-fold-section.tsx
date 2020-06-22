@@ -5,7 +5,6 @@ import clsx from 'clsx';
 import BackgroundImage from 'gatsby-background-image';
 import VideoPopup from '../components/videoPopup';
 import Title from 'web-components/lib/components/title';
-import { useTheme } from '@material-ui/core/styles';
 
 interface Props {
   className?: string;
@@ -60,7 +59,6 @@ let useStyles = makeStyles((theme: Theme) => ({
 
 const HomeFoldSection = ({ className }: Props) => {
   const classes = useStyles({});
-  const theme = useTheme();
   return (
     <StaticQuery
       query={graphql`
@@ -85,7 +83,7 @@ const HomeFoldSection = ({ className }: Props) => {
               fluid={imageData}
               backgroundColor={`#040e18`}
             >
-              <VideoPopup></VideoPopup>
+              <VideoPopup />
               <Title align="center" color="primary" variant="h1" className={classes.title}>
                 Platform for a Thriving Planet
               </Title>

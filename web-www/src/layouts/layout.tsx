@@ -6,7 +6,9 @@
  */
 
 import React from 'react';
-import PropTypes, { string } from 'prop-types';
+import PropTypes from 'prop-types';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+
 import Header from 'web-components/lib/components/header';
 import { useTheme } from '@material-ui/core/styles';
 import './layout.css';
@@ -29,21 +31,23 @@ const Layout = ({ children }: propTypes): JSX.Element => {
       ],
     },
   ];
-  const color = theme.palette.primary.main;
+  const matches = useMediaQuery(theme.breakpoints.up('sm'));
+
   return (
     <>
-      <Header menuItems={menuItems} absolute transparent color={color ? color : null}></Header>
+      <Header
+        menuItems={menuItems}
+        absolute={matches}
+        transparent
+        color={matches ? theme.palette.primary.main : theme.palette.primary.contrastText}
+      />
       <div
         style={{
           margin: `0 auto`,
         }}
       >
         <main>{children}</main>
-        <footer>
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.org">Gatsby</a>
-        </footer>
+        <footer></footer>
       </div>
     </>
   );

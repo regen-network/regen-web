@@ -9,7 +9,7 @@ interface PlayIconProps extends React.HTMLProps<HTMLDivElement> {
 }
 
 const useStyles = makeStyles<Theme, PlayIconProps>((theme: Theme) => ({
-  root: (props) => ({
+  root: props => ({
     width: props.width || 'inherit',
     height: props.height || 'inherit',
   }),

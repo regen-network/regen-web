@@ -27,8 +27,12 @@ const useStyles = makeStyles(theme => ({
   icon: {
     position: 'relative',
     top: theme.spacing(6),
-    left: theme.spacing(10),
+    left: theme.spacing(6.8),
     transform: 'translate(-50%, -50%)',
+    '& path': {
+      position: 'relative',
+      left: '4px',
+    },
   },
   vid: {
     display: 'inline-block',

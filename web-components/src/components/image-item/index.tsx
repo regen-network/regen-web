@@ -4,7 +4,7 @@ import Title from '../title';
 import Description from '../description';
 import { getFontSize } from '../../theme/sizing';
 
-interface ImageItemProps {
+export interface ImageItemProps {
   img: JSX.Element; // using pure img tag or gatsby-image
   title: string;
   description: string;

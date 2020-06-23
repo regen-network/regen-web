@@ -1,6 +1,6 @@
 backend:
   name: git-gateway
-  branch: master
+  branch: "clevinson/netlify-cms"
 
 media_folder: "static/media"
 public_folder: "/media"

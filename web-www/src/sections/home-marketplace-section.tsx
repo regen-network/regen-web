@@ -88,20 +88,6 @@ const useStyles = makeStyles((theme: Theme) => ({
 const MarketplaceSection = () => {
   const data = useStaticQuery(graphql`
     query {
-      farmer: file(relativePath: { eq: "farmer.png" }) {
-        childImageSharp {
-          fixed(quality: 90, width: 80) {
-            ...GatsbyImageSharpFixed_withWebp
-          }
-        }
-      }
-      buyers: file(relativePath: { eq: "buyers.png" }) {
-        childImageSharp {
-          fixed(quality: 90, width: 80) {
-            ...GatsbyImageSharpFixed_withWebp
-          }
-        }
-      }
       ellipse: file(relativePath: { eq: "green-ellipse.png" }) {
         childImageSharp {
           fixed(quality: 90, width: 120) {
@@ -109,43 +95,54 @@ const MarketplaceSection = () => {
           }
         }
       }
+      text: contentYaml {
+        marketplaceSection {
+          header
+          body
+          callToActions {
+            image {
+              childImageSharp {
+                fixed(quality: 90, width: 80) {
+                  ...GatsbyImageSharpFixed_withWebp
+                }
+              }
+            }
+            caption
+            header
+            description
+            linkText
+          }
+        }
+      }
     }
   `);
+
+  const content = data.text.marketplaceSection;
 
   const classes = useStyles({});
   return (
     <div className={classes.root}>
       <div className={classes.inner}>
-        <div className={classes.smallTag}>The Marketplace for Climate Solutions</div>
-        <h2>
-          The Regen Registry allows land stewards to sell their ecosystem services directly to buyers around
-          the world.
-        </h2>
+        <div className={classes.smallTag}>{content.header}</div>
+        <h2>{content.body}</h2>
         <Grid className={classes.container} container spacing={3}>
-          <Grid item xs>
-            <BackgroundImage className={classes.bgdiv} Tag="div" fixed={data.ellipse.childImageSharp.fixed}>
-              <Img fixed={data.farmer.childImageSharp.fixed} className={classes.icon} />
-            </BackgroundImage>
-            <div className={classes.smallTitle}>Land Stewards</div>
-            <h3>Register a project</h3>
-            <p>
-              Get paid for your ecological practices, such as cover cropping, crop rotation, agroforestry,
-              rotational grazing, and more.
-            </p>
-            <ContainedButton className={classes.button}>List Your Project</ContainedButton>
-          </Grid>
-          <Grid item xs>
-            <BackgroundImage className={classes.bgdiv} Tag="div" fixed={data.ellipse.childImageSharp.fixed}>
-              <Img fixed={data.buyers.childImageSharp.fixed} className={classes.icon} />
-            </BackgroundImage>
-            <div className={classes.smallTitle}>Buyers</div>
-            <h3>Purchase credits</h3>
-            <p>
-              Whether you are an individual or a business looking to take climate action, we make it easy to
-              sponsor ecological practices.
-            </p>
-            <ContainedButton className={classes.button}>Browse Projects</ContainedButton>
-          </Grid>
+          {content.callToActions.map(cta => {
+            return (
+              <Grid item xs>
+                <BackgroundImage
+                  className={classes.bgdiv}
+                  Tag="div"
+                  fixed={data.ellipse.childImageSharp.fixed}
+                >
+                  <Img fixed={cta.image.childImageSharp.fixed} className={classes.icon} />
+                </BackgroundImage>
+                <div className={classes.smallTitle}>{cta.caption}</div>
+                <h3>{cta.header}</h3>
+                <p>{cta.description}</p>
+                <ContainedButton className={classes.button}>{cta.linkText}</ContainedButton>
+              </Grid>
+            );
+          })}
         </Grid>
       </div>
     </div>

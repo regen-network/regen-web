@@ -3,7 +3,7 @@ import { graphql, StaticQuery } from 'gatsby';
 import { makeStyles, Theme } from '@material-ui/core';
 import clsx from 'clsx';
 import BackgroundImage from 'gatsby-background-image';
-import VideoPopup from '../components/videoPopup';
+import VideoPopup from '../../components/videoPopup';
 import Title from 'web-components/lib/components/title';
 import { useTheme } from '@material-ui/core/styles';
 

@@ -48,11 +48,11 @@ let useStyles = makeStyles((theme: Theme) => ({
   subtitle: {
     [theme.breakpoints.down('xs')]: {
       paddingTop: theme.spacing(3),
-      fontSize: theme.spacing(5.5),
+      fontSize: theme.spacing(4.5),
     },
     [theme.breakpoints.up('sm')]: {
       paddingTop: theme.spacing(3.75),
-      fontSize: theme.spacing(4.5),
+      fontSize: theme.spacing(5.5),
     },
     lineHeight: '160%',
     color: theme.palette.primary.main,

@@ -614,3 +614,12 @@ pre tt:after {
     font-size: 100%;
   }
 }
+
+p {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 0.75rem;
+  line-height: 140%;
+  color: #545555;
+}

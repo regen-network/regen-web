@@ -4,6 +4,7 @@ import SEO from '../components/seo';
 import HomeFoldSection from '../sections/home-fold-section';
 import MarketplaceSection from '../sections/home-marketplace-section';
 import EmailSubmitSection from '../sections/shared-email-submit-section';
+import HomeLedger from '../sections/home-ledger';
 import HomeValuesSection from '../sections/home-values-section';
 
 const IndexPage = (): JSX.Element => {
@@ -13,6 +14,7 @@ const IndexPage = (): JSX.Element => {
       <HomeFoldSection></HomeFoldSection>
       <MarketplaceSection></MarketplaceSection>
       <EmailSubmitSection />
+      <HomeLedger></HomeLedger>
       <HomeValuesSection></HomeValuesSection>
     </>
   );

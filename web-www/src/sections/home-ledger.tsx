@@ -5,7 +5,7 @@ import { graphql, StaticQuery, useStaticQuery } from 'gatsby';
 import Grid, { GridSpacing } from '@material-ui/core/Grid';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import { makeStyles, Theme } from '@material-ui/core';
-import Title from 'web-components/lib/components/Title';
+import Title from 'web-components/lib/components/title';
 import Img from 'gatsby-image';
 
 let useStyles = makeStyles((theme: Theme) => ({

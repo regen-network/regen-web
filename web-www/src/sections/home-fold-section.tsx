@@ -15,13 +15,11 @@ let useStyles = makeStyles((theme: Theme) => ({
   root: {
     'text-shadow': '0px 4px 10px rgba(0, 0, 0, 0.1)',
     'text-align': 'center',
-    'padding-left': '20vw',
-    'padding-right': '20vw',
     color: theme.palette.primary.main,
-    'padding-top': '13vh',
+    'padding-top': '19vh',
     'padding-bottom': '40vh',
     width: '100%',
-    height: '60vh',
+    height: '75vh',
     'background-position': 'bottom center',
     'background-repeat': 'repeat-y',
     'background-size': 'cover',
@@ -32,15 +30,17 @@ let useStyles = makeStyles((theme: Theme) => ({
     opacity: 0.8,
   },
   tag: {
-    [theme.breakpoints.up('lg')]: {
-      width: '25vw',
+    '& p': {
+      'font-size': '1.62rem',
+      'line-height': '160%',
+      'font-family': 'Lato',
+      width: '650px',
+      margin: '0 auto',
     },
-    [theme.breakpoints.down('md')]: {
-      width: '80%',
-    },
-    'text-shadow': '0px 4px 10px rgba(0, 0, 0, 0.1)',
+    [theme.breakpoints.up('lg')]: {},
+    [theme.breakpoints.down('md')]: {},
+    'text-shadow': '0px 4px 10px rgba(0, 0, 0, 0.3)',
     'text-align': 'center',
-
     margin: '0 auto',
   },
   icon: {
@@ -50,10 +50,6 @@ let useStyles = makeStyles((theme: Theme) => ({
     top: '50%',
     left: '54%',
     transform: 'translate(-50%, -50%)',
-  },
-  '& p': {
-    'line-height': '160%',
-    'font-family': 'Lato',
   },
   '& h1.MuiTypography-h1': {
     color: theme.palette.primary.main,

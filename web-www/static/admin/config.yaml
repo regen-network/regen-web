@@ -1,0 +1,33 @@
+backend:
+  name: git-gateway
+  branch: master
+
+collections:
+  - name: 'pages'
+    label: 'Pages'
+    files:
+      - label: "Homepage"
+        name: "homepage"
+        file: "site/content/homepage.yaml"
+        fields:
+          - label: "Marketplace Section"
+            name: "marketplaceSection"
+            widget: "object"
+            fields:
+              - {label: Header, name: header, widget: string}
+              - {label: Body, name: body, widget: text}
+              - label: "Call To Actions"
+                name: "callToActions"
+                widget: list
+                collapsed: false
+                fields:
+                  - {label: "Caption", name: "caption", widget: string}
+                  - label: "Image"
+                    name: "image"
+                    widget: select
+                    options:
+                      - { label: "Buyer Icon", value: "../src/images/buyers.png"}
+                      - { label: "Farmer Icon", value: "../src/images/farmer.png"}
+                  - {label: "Header", name: "header", widget: string}
+                  - {label: "Description", name: "description", widget: text}
+                  - {label: "Link Text", name: "linkText", widget: string}

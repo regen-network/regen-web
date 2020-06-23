@@ -9,12 +9,12 @@ import Img from 'gatsby-image';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    height: theme.spacing(200),
+    height: 'min-content',
     color: theme.palette.primary.contrastText,
     'background-color': theme.palette.primary.main,
     'font-family': theme.typography.h1.fontFamily,
     'text-align': 'center',
-    'padding-top': theme.spacing(10),
+    padding: theme.spacing(10),
     '& h2': {
       width: '70%',
       'font-family': 'Muli',

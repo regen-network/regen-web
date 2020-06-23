@@ -18,6 +18,7 @@ let useStyles = makeStyles((theme: Theme) => ({
     '& p': {
       'max-width': theme.spacing(100),
       'text-align': 'left',
+      color: theme.palette.primary.contrastText,
     },
   },
   img: {

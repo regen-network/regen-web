@@ -1,14 +1,14 @@
 import * as React from 'react';
 import Title from 'web-components/lib/components/title';
 import { withKnobs, text, select } from '@storybook/addon-knobs';
-import { ThemeStyle } from '@material-ui/core/styles/createTypography';
+import { Variant } from '@material-ui/core/styles/createTypography';
 
 interface Options {
-  h1: ThemeStyle;
-  h2: ThemeStyle;
-  h3: ThemeStyle;
-  h4: ThemeStyle;
-  h5: ThemeStyle;
+  h1: Variant;
+  h2: Variant;
+  h3: Variant;
+  h4: Variant;
+  h5: Variant;
 }
 
 const options: Options = {

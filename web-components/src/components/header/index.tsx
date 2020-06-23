@@ -85,8 +85,12 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   }),
   root: {
+    '& .MuiMenuItem-root > a, .MuiMenuItem-root > div > span': {
+      'font-size': '.8125rem',
+    },
     [theme.breakpoints.up('md')]: {
-      padding: `${theme.spacing(2.5)} ${theme.spacing(37)}`,
+      padding: `${theme.spacing(2.5)} ${theme.spacing(12)}`,
+      'padding-right': `0px`,
     },
     [theme.breakpoints.up('sm')]: {
       height: theme.spacing(27.5),

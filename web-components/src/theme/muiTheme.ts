@@ -51,7 +51,7 @@ const theme = createMuiTheme({
     },
     h2: {
       [defaultTheme.breakpoints.up('sm')]: {
-        fontSize: '2rem',
+        fontSize: '2.375rem',
       },
       [defaultTheme.breakpoints.down('xs')]: {
         fontSize: '1.5rem',
@@ -59,10 +59,10 @@ const theme = createMuiTheme({
     },
     h3: {
       [defaultTheme.breakpoints.up('sm')]: {
-        fontSize: '1.5rem',
+        fontSize: '2rem',
       },
       [defaultTheme.breakpoints.down('xs')]: {
-        fontSize: '1.3125rem',
+        fontSize: '1.5rem', // possible override: 1.3125rem
       },
     },
     h4: {
@@ -70,7 +70,7 @@ const theme = createMuiTheme({
         fontSize: '1.5rem',
       },
       [defaultTheme.breakpoints.down('xs')]: {
-        fontSize: '1.125rem',
+        fontSize: '1.3125rem', // possible override: 1.125rem
       },
     },
     h5: {

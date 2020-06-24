@@ -35,6 +35,14 @@ let useStyles = makeStyles((theme: Theme) => ({
     margin: '0 auto',
     position: 'relative',
   },
+  title: {
+    [theme.breakpoints.down('xs')]: {
+      lineHeight: '130%',
+    },
+    [theme.breakpoints.up('sm')]: {
+      lineHeight: '140%',
+    },
+  },
   image: {
     backgroundSize: 'cover',
     [theme.breakpoints.down('xs')]: {
@@ -107,7 +115,7 @@ const TopSection = () => {
             >
               <div className={classes.backgroundGradient} />
               <div className={classes.text}>
-                <Title color="primary" variant="h1">
+                <Title color="primary" variant="h1" className={classes.title}>
                   {content.header}
                 </Title>
                 <Typography component="div" className={classes.subtitle}>

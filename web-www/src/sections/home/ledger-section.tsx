@@ -5,6 +5,7 @@ import { graphql, StaticQuery, useStaticQuery } from 'gatsby';
 import Grid, { GridSpacing } from '@material-ui/core/Grid';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import { makeStyles, Theme } from '@material-ui/core';
+import Typography from '@material-ui/core/Typography';
 import Title from 'web-components/lib/components/title';
 import Img from 'gatsby-image';
 
@@ -82,12 +83,12 @@ const HomeLedger = ({ className }: Props) => {
           <Title align="left" variant="h2">
             The <span className={classes.green}>Regen Ledger</span> powers our work
           </Title>
-          <p>
+          <Typography variant="body1">
             Regen Ledger is a public, proof of stake (POS) blockchain developed with the Cosmos Software
             Development Kit (SDK) built for verification of claims, agreements & data related to ecological
             state. Regen Ledger enables multiple registries to communicate and transact with each other
             producing a public ecological accounting system. Get involved with our community of developers.
-          </p>
+          </Typography>
           <ContainedButton className={classes.button}>Learn More</ContainedButton>
         </Grid>
       </Grid>

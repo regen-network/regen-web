@@ -4,6 +4,7 @@ import { makeStyles, Theme } from '@material-ui/core';
 import clsx from 'clsx';
 import BackgroundImage from 'gatsby-background-image';
 import VideoPopup from '../../components/videoPopup';
+import Typography from '@material-ui/core/Typography';
 import Title from 'web-components/lib/components/title';
 import { useTheme } from '@material-ui/core/styles';
 
@@ -34,11 +35,14 @@ let useStyles = makeStyles((theme: Theme) => ({
       'font-size': '1.62rem',
       'line-height': '160%',
       'font-family': 'Lato',
-      width: '650px',
+      [theme.breakpoints.up('sm')]: {
+        width: '650px',
+      },
+      [theme.breakpoints.down('xs')]: {
+        width: 'unset',
+      },
       margin: '0 auto',
     },
-    [theme.breakpoints.up('lg')]: {},
-    [theme.breakpoints.down('md')]: {},
     'text-shadow': '0px 4px 10px rgba(0, 0, 0, 0.3)',
     'text-align': 'center',
     margin: '0 auto',
@@ -57,6 +61,23 @@ let useStyles = makeStyles((theme: Theme) => ({
   title: {
     'font-family': 'Muli',
     'line-height': '130%',
+    'margin-bottom': '12px',
+    [theme.breakpoints.down('xs')]: {
+      'margin-top': '25px',
+    },
+    [theme.breakpoints.up('sm')]: {
+      'margin-top': '37px',
+    },
+  },
+  backgroundGradient: {
+    height: '100%',
+    zIndex: -1,
+    position: 'absolute',
+    bottom: 0,
+    width: '100%',
+    background:
+      'linear-gradient(217.94deg, rgba(250, 235, 209, 0.5) 22.17%, rgba(125, 201, 191, 0.5) 46.11%, rgba(81, 93, 137, 0.5) 70.05%);',
+    opacity: 0.8,
   },
 }));
 
@@ -80,22 +101,23 @@ const HomeFoldSection = ({ className }: Props) => {
         // Set ImageData.
         const imageData = data.desktop.childImageSharp.fluid;
         return (
-          <div className={classes.gradient}>
-            <BackgroundImage
-              Tag="section"
-              className={clsx(classes.root, className)}
-              fluid={imageData}
-              backgroundColor={`#040e18`}
-            >
-              <VideoPopup></VideoPopup>
-              <Title align="center" color="primary" variant="h1" className={classes.title}>
-                Platform for a Thriving Planet
-              </Title>
-              <div className={classes.tag}>
-                <p>Regen Network aligns economics with ecology to drive regenerative land management.</p>
-              </div>
-            </BackgroundImage>
-          </div>
+          <BackgroundImage
+            Tag="section"
+            className={clsx(classes.root, className)}
+            fluid={imageData}
+            backgroundColor={`#040e18`}
+          >
+            <div className={classes.backgroundGradient}></div>
+            <VideoPopup></VideoPopup>
+            <Title align="center" color="primary" variant="h1" className={classes.title}>
+              Platform for a Thriving Planet
+            </Title>
+            <div className={classes.tag}>
+              <Typography variant="body1">
+                Regen Network aligns economics with ecology to drive regenerative land management.
+              </Typography>
+            </div>
+          </BackgroundImage>
         );
       }}
     />

@@ -1,8 +1,9 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import { StaticQuery, graphql } from 'gatsby';
 import Img from 'gatsby-image';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import PlayIcon from 'web-components/lib/components/icons/PlayIcon';
 
 const useStyles = makeStyles(theme => ({
@@ -16,8 +17,14 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(2),
   },
   play: {
-    width: theme.spacing(20),
-    height: theme.spacing(20),
+    [theme.breakpoints.up('sm')]: {
+      width: '112px',
+      height: '112px',
+    },
+    [theme.breakpoints.down('xs')]: {
+      width: '80px',
+      height: '80px',
+    },
     backgroundColor: theme.palette.primary.main,
     borderRadius: '50%',
     display: 'flex',
@@ -26,8 +33,14 @@ const useStyles = makeStyles(theme => ({
   },
   icon: {
     position: 'relative',
-    top: theme.spacing(6),
-    left: theme.spacing(6.8),
+    [theme.breakpoints.up('sm')]: {
+      top: theme.spacing(7.2),
+      left: theme.spacing(7.6),
+    },
+    [theme.breakpoints.down('xs')]: {
+      top: theme.spacing(4.8),
+      left: theme.spacing(4.8),
+    },
     transform: 'translate(-50%, -50%)',
     '& path': {
       position: 'relative',
@@ -52,6 +65,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function VideoPopup() {
   const classes = useStyles();
+  const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
   const handleOpen = () => {
@@ -63,10 +77,14 @@ export default function VideoPopup() {
     setOpen(false);
   };
 
+  const desktop = useMediaQuery(theme.breakpoints.up('sm'));
+
+  const playIconSize = desktop ? '55.21px' : '34.51px';
+
   return (
     <div className={classes.root}>
       <div className={classes.play} onClick={handleOpen}>
-        <PlayIcon width="60%" height="60%" className={classes.icon} />
+        <PlayIcon width={playIconSize} height={playIconSize} className={classes.icon} />
       </div>
       <Modal open={open} onClose={handleClose}>
         <div className={classes.vid}>

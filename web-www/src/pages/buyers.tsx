@@ -1,12 +1,13 @@
 import React from 'react';
 
 import SEO from '../components/seo';
+import TopSection from '../sections/buyers/top-section';
 
-const IndexPage = (): JSX.Element => (
+const BuyersPage = (): JSX.Element => (
   <>
-    <SEO title="Home" />
-    <h4>Buyers</h4>
+    <SEO title="For Buyers" />
+    <TopSection />
   </>
 );
 
-export default IndexPage;
+export default BuyersPage;

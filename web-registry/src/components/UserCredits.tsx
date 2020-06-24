@@ -118,7 +118,7 @@ export default function UserCredits({ credits }: PurchasedCreditsProps): JSX.Ele
     <div className={classes.root}>
       <Grid container alignItems="flex-end" justify="space-between" className={classes.title}>
         <Grid item sm={6} xs={12}>
-          <Title variant="h2">
+          <Title variant="h3">
             Credits for{' '}
             <Link to={`/projects/${credits.project.id}`} className={classes.projectName}>
               {credits.project.name}

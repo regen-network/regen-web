@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   smallTag: {
     'text-transform': 'uppercase',
     'font-family': 'Muli',
-    color: theme.palette.grey[50],
+    color: theme.palette.grey[100],
     'margin-bottom': theme.spacing(5),
   },
   smallTitle: {

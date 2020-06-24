@@ -55,7 +55,7 @@ const CustomTab = withStyles((theme: Theme) => ({
     opacity: 1,
     zIndex: 1,
     borderBottom: `2px solid ${theme.palette.secondary.dark}`,
-    border: `2px solid ${theme.palette.grey[50]}`,
+    border: `2px solid ${theme.palette.grey[100]}`,
     color: theme.palette.secondary.main,
     backgroundColor: theme.palette.info.light,
     maxWidth: 'none',

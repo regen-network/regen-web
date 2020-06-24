@@ -94,7 +94,7 @@ export default function CreditCard({
   // const matches = useMediaQuery(theme.breakpoints.up('sm'));
 
   return (
-    <Card borderColor={theme.palette.grey[50]} elevation={2} width="28rem">
+    <Card borderColor={theme.palette.grey[100]} elevation={2} width="28rem">
       <div className={classes.container}>
         {isPopup && (
           <div className={classes.closeIcon} onClick={onClose}>

@@ -36,26 +36,25 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     position: 'unset',
     width: 'unset',
-    'z-index': 0,
+    zIndex: 0,
   },
   background: {
     backgroundColor: theme.palette.primary.main,
   },
-  transparent: {
-    backgroundColor: `rgba(0,0,0,0)`,
-  },
   absolute: {
     position: 'absolute',
-    'z-index': 10,
     width: '100%',
+  },
+  transparent: {
+    backgroundColor: `rgba(0,0,0,0)`,
   },
   color: (props: any) => ({
     color: props.textColor || theme.palette.primary.contrastText,
     '& ul > li > a': {
       color: props.textColor || theme.palette.primary.contrastText,
       textDecoration: 'none',
-      'font-family': 'Muli',
-      'text-transform': 'uppercase',
+      fontFamily: 'Muli',
+      textTransform: 'uppercase',
       '&:link, &:visited, &:hover, &:active': {
         textDecoration: 'none',
       },
@@ -63,8 +62,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     '& ul > li > div > span': {
       color: props.textColor || theme.palette.primary.contrastText,
       textDecoration: 'none',
-      'font-family': 'Muli',
-      'text-transform': 'uppercase',
+      fontFamily: 'Muli',
+      textTransform: 'uppercase',
       '&:link, &:visited, &:hover, &:active': {
         textDecoration: 'none',
       },
@@ -99,9 +98,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     maxWidth: theme.breakpoints.values.lg,
     margin: '0 auto',
+    position: 'relative',
+    zIndex: 10,
   },
   searchIcon: {
-    color: theme.palette.grey[50],
+    color: theme.palette.grey[100],
     marginRight: theme.spacing(6.25),
     marginBottom: theme.spacing(1),
   },
@@ -111,17 +112,17 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 export default function Header({
+  absolute = false,
   children,
   transparent,
   color,
-  absolute,
   menuItems,
 }: HeaderProps): JSX.Element {
   const classes = useStyles({ textColor: color });
   let headerClass = [];
   let rootClass = [];
   rootClass.push(transparent ? classes.transparent : classes.background);
-  headerClass.push(absolute ? classes.absolute : '');
+  rootClass.push(absolute ? classes.absolute : '');
   headerClass.push(classes.color, classes.root);
 
   return (

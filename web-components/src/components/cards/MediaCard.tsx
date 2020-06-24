@@ -19,20 +19,16 @@ export interface MediaCardProps {
   borderRadius?: string;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+interface StyleProps {
+  titleVariant: Variant;
+}
+
+const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   root: {
     height: '100%',
     width: '100%',
     display: 'flex',
     flexDirection: 'column',
-    '& h3': {
-      [theme.breakpoints.up('sm')]: {
-        padding: `${theme.spacing(4.5)} ${theme.spacing(5.25)} ${theme.spacing(3)}`,
-      },
-      [theme.breakpoints.down('xs')]: {
-        padding: `${theme.spacing(4)} ${theme.spacing(4.5)} ${theme.spacing(3)}`,
-      },
-    },
   },
   image: {
     height: theme.spacing(48.75),
@@ -62,6 +58,15 @@ const useStyles = makeStyles((theme: Theme) => ({
     borderRadius: '9px 9px 0px 0px',
     background: 'linear-gradient(180.28deg, rgba(0, 0, 0, 0) 65.91%, rgba(0, 0, 0, 0.6) 99.59%)',
   },
+  title: props => ({
+    [theme.breakpoints.up('sm')]: {
+      padding: `${theme.spacing(4.5)} ${theme.spacing(5.25)} ${theme.spacing(3)}`,
+    },
+    [theme.breakpoints.down('xs')]: {
+      padding: `${theme.spacing(4)} ${theme.spacing(4.5)} ${theme.spacing(3)}`,
+      fontSize: props.titleVariant === 'h4' ? theme.spacing(4.5) : 'inherit',
+    },
+  }),
 }));
 
 export default function MediaCard({
@@ -70,13 +75,13 @@ export default function MediaCard({
   imgSrc,
   onClick,
   width,
-  titleVariant = 'h5',
+  titleVariant = 'h4',
   elevation = 0,
   borderColor,
   borderRadius,
   tag,
 }: MediaCardProps): JSX.Element {
-  const classes = useStyles({});
+  const classes = useStyles({ titleVariant });
 
   return (
     <Card
@@ -91,7 +96,9 @@ export default function MediaCard({
           <div className={classes.backgroundGradient} />
           {tag && <div className={classes.tag}>{tag}</div>}
         </CardMedia>
-        <Title variant={titleVariant}>{name}</Title>
+        <Title className={titleVariant === 'h4' ? classes.title : ''} variant={titleVariant}>
+          {name}
+        </Title>
         {children}
       </div>
     </Card>

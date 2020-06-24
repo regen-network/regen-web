@@ -31,7 +31,8 @@ const theme = createMuiTheme({
       light: '#EFEFEF',
     },
     grey: {
-      50: '#D2D5D9',
+      50: '#FAFAFA',
+      100: '#D2D5D9',
     },
     // contrastThreshold: 3,
     // tonalOffset: 0.2,
@@ -50,7 +51,7 @@ const theme = createMuiTheme({
     },
     h2: {
       [defaultTheme.breakpoints.up('sm')]: {
-        fontSize: '2rem',
+        fontSize: '2.375rem',
       },
       [defaultTheme.breakpoints.down('xs')]: {
         fontSize: '1.5rem',
@@ -58,10 +59,10 @@ const theme = createMuiTheme({
     },
     h3: {
       [defaultTheme.breakpoints.up('sm')]: {
-        fontSize: '1.5rem',
+        fontSize: '2rem',
       },
       [defaultTheme.breakpoints.down('xs')]: {
-        fontSize: '1.3125rem',
+        fontSize: '1.5rem', // possible override: 1.3125rem
       },
     },
     h4: {
@@ -69,7 +70,7 @@ const theme = createMuiTheme({
         fontSize: '1.5rem',
       },
       [defaultTheme.breakpoints.down('xs')]: {
-        fontSize: '1.125rem',
+        fontSize: '1.3125rem', // possible override: 1.125rem
       },
     },
     h5: {
@@ -92,7 +93,7 @@ const theme = createMuiTheme({
     defaultTheme.shadows[0],
     '0px 4px 10px rgba(0, 0, 0, 0.05)',
     '-4px 0px 10px rgba(0, 0, 0, 0.25)',
-    defaultTheme.shadows[3],
+    '0px 4px 10px rgba(0, 0, 0, 0.1)',
     defaultTheme.shadows[4],
     defaultTheme.shadows[5],
     defaultTheme.shadows[6],

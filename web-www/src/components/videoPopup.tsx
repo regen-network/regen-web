@@ -57,9 +57,9 @@ const useStyles = makeStyles(theme => ({
     'z-index': 150,
     position: 'absolute',
     color: '#fff',
-    left: '95vw',
+    left: '97.5vw',
     'font-family': 'sans-serif',
-    top: '-34px',
+    top: '8px',
   },
 }));
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, Theme, MenuItem, MenuList, Link } from '@material-ui/core';
+import { makeStyles, Theme, MenuItem, MenuList, Link, useMediaQuery, useTheme } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import RegenIcon from '../icons/RegenIcon';
 import clsx from 'clsx';
@@ -34,19 +34,25 @@ interface HeaderMenuItem {
 
 const useStyles = makeStyles((theme: Theme) => ({
   mobile: {
-    [theme.breakpoints.up('md')]: {
-      display: 'none',
-    },
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('xs')]: {
       display: 'inline-block',
+      padding: theme.spacing(1),
+      'align-items': 'unset',
     },
   },
-  menuList: {
-    [theme.breakpoints.up('md')]: {
-      display: 'flex',
+  menuItem: {
+    [theme.breakpoints.down('xs')]: {
+      position: 'absolute',
+      left: '85vw',
+      top: '1vh',
     },
-    [theme.breakpoints.down('sm')]: {
-      display: 'none',
+  },
+  logoItem: {
+    [theme.breakpoints.down('xs')]: {},
+  },
+  menuList: {
+    [theme.breakpoints.up('sm')]: {
+      display: 'flex',
     },
     position: 'unset',
     width: 'unset',
@@ -137,11 +143,39 @@ export default function Header({
   menuItems,
 }: HeaderProps): JSX.Element {
   const classes = useStyles({ textColor: color });
-  let headerClass = [];
-  let rootClass = [];
+  const headerClass = [];
+  const rootClass = [];
   rootClass.push(transparent ? classes.transparent : classes.background);
   rootClass.push(absolute ? classes.absolute : '');
   headerClass.push(classes.color, classes.root);
+
+  const theme = useTheme();
+  const desktop = useMediaQuery(theme.breakpoints.up('sm'));
+
+  let menu;
+  if (desktop) {
+    menu = (
+      <MenuList className={classes.menuList}>
+        {menuItems?.map((item, index) => (
+          <MenuItem key={index}>
+            {item.dropdownItems ? (
+              <MenuHover text={item.title}>
+                {item.dropdownItems.map((dropdownItem, index) => (
+                  <MenuItem key={index}>
+                    <Link href={dropdownItem.href}>{dropdownItem.title}</Link>
+                  </MenuItem>
+                ))}
+              </MenuHover>
+            ) : (
+              <Link href={item.href}>{item.title}</Link>
+            )}
+          </MenuItem>
+        ))}
+      </MenuList>
+    );
+  } else {
+    menu = <MobileMenu className={classes.mobile}></MobileMenu>;
+  }
 
   return (
     <div className={clsx(rootClass)}>
@@ -152,30 +186,13 @@ export default function Header({
         alignItems="center"
         justify="space-between"
       >
-        <Grid item>
+        <Grid className={classes.logoItem} item>
           <a href="/">
             <RegenIcon color={color} />
           </a>
         </Grid>
-        <Grid item>
-          <MobileMenu className={classes.mobile}></MobileMenu>
-          <MenuList className={classes.menuList}>
-            {menuItems?.map((item, index) => (
-              <MenuItem key={index}>
-                {item.dropdownItems ? (
-                  <MenuHover text={item.title}>
-                    {item.dropdownItems.map((dropdownItem, index) => (
-                      <MenuItem key={index}>
-                        <Link href={dropdownItem.href}>{dropdownItem.title}</Link>
-                      </MenuItem>
-                    ))}
-                  </MenuHover>
-                ) : (
-                  <Link href={item.href}>{item.title}</Link>
-                )}
-              </MenuItem>
-            ))}
-          </MenuList>
+        <Grid className={classes.menuItem} item>
+          {menu}
         </Grid>
         {children}
         {/*<Grid item alignItems="center">

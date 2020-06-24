@@ -6,11 +6,12 @@ import clsx from 'clsx';
 //replacing #000 on line 15, color property, with theme.palette.primary.contrastText doesn't yield black text in the dropdown. Not sure why
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    width: '80px',
+    width: '8vh',
   },
   bar: {
+    'margin-bottom': '15px',
     width: '80%',
-    height: '3px',
+    height: '2px',
     'background-color': theme.palette.primary.contrastText,
     color: theme.palette.primary.contrastText,
     'border-color': theme.palette.primary.contrastText,

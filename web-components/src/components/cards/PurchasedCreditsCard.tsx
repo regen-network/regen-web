@@ -61,7 +61,7 @@ export default function CreditCard({ number, description, date, icon }: CreditCa
   const classes = useStyles({});
   const theme = useTheme();
   return (
-    <Card borderRadius="10px" borderColor={theme.palette.grey[50]} elevation={1} height="100%">
+    <Card borderRadius="10px" borderColor={theme.palette.grey[100]} elevation={1} height="100%">
       <div className={classes.container}>
         <div className={classes.iconContainer}>
           <Grid className={classes.icon} container alignItems="center" justify="center">

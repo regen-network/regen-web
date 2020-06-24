@@ -6,17 +6,30 @@
  */
 
 import React from 'react';
-import PropTypes, { string } from 'prop-types';
+import PropTypes from 'prop-types';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+
 import Header from 'web-components/lib/components/header';
 import { useTheme } from '@material-ui/core/styles';
 import './layout.css';
 
 interface propTypes {
   children: Array<React.ReactElement>;
+  location: Location;
 }
 
-const Layout = ({ children }: propTypes): JSX.Element => {
+interface HeaderColors {
+  [key: string]: string;
+}
+
+const Layout = ({ children, location }: propTypes): JSX.Element => {
   const theme = useTheme();
+
+  const headerColors: HeaderColors = {
+    '/': theme.palette.primary.main,
+    '/buyers/': theme.palette.primary.light,
+  };
+
   const menuItems = [
     { title: 'Buyers', href: '/buyers' },
     { title: 'Land Steward', href: '/landsteward' },
@@ -29,21 +42,27 @@ const Layout = ({ children }: propTypes): JSX.Element => {
       ],
     },
   ];
-  const color = theme.palette.primary.main;
+  // TODO Header absolute prop will also needs to be set based on location
+  const matches = useMediaQuery(theme.breakpoints.up('sm'));
+  const desktopColor: string = headerColors[location.pathname]
+    ? headerColors[location.pathname]
+    : theme.palette.primary.main;
+
   return (
     <>
-      <Header menuItems={menuItems} absolute transparent color={color ? color : undefined}></Header>
+      <Header
+        menuItems={menuItems}
+        absolute={matches}
+        transparent
+        color={matches ? desktopColor : theme.palette.primary.light}
+      />
       <div
         style={{
           margin: `0 auto`,
         }}
       >
         <main>{children}</main>
-        <footer>
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.org">Gatsby</a>
-        </footer>
+        <footer></footer>
       </div>
     </>
   );

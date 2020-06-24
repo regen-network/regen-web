@@ -6,7 +6,6 @@ import BackgroundImage from 'gatsby-background-image';
 import VideoPopup from '../../components/videoPopup';
 import Typography from '@material-ui/core/Typography';
 import Title from 'web-components/lib/components/title';
-import { useTheme } from '@material-ui/core/styles';
 
 interface Props {
   className?: string;
@@ -83,7 +82,6 @@ let useStyles = makeStyles((theme: Theme) => ({
 
 const HomeFoldSection = ({ className }: Props) => {
   const classes = useStyles({});
-  const theme = useTheme();
   return (
     <StaticQuery
       query={graphql`

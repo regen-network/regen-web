@@ -1,16 +1,17 @@
 import React from 'react';
 import ThemeProvider from 'web-components/lib/theme/RegenThemeProvider';
-import Layout from './layout.tsx';
+import Layout from './layout';
 
 interface propTypes {
   children: Array<React.ReactElement>;
+  location: Location;
 }
 
-const ThemeWrap = ({ children }: propTypes): JSX.Element => {
+const ThemeWrap = ({ children, location }: propTypes): JSX.Element => {
   return (
     <>
       <ThemeProvider injectFonts>
-        <Layout>{children}</Layout>
+        <Layout location={location}>{children}</Layout>
       </ThemeProvider>
     </>
   );

@@ -16,7 +16,7 @@ let useStyles = makeStyles((theme: Theme) => ({
     '& .MuiGrid-item': {
       'max-width': theme.spacing(70),
     },
-    '& h2': {
+    '& h3': {
       'margin-bottom': theme.spacing(15),
       'line-height': '130%',
     },
@@ -43,6 +43,11 @@ let useStyles = makeStyles((theme: Theme) => ({
     left: '50%',
     transform: 'translate(-50%, -50%)',
   },
+  title: {
+    [theme.breakpoints.down('xs')]: {
+      fontSize: '1.3125rem',
+    },
+  }
 }));
 
 const HomeValues = ({ className }: Props) => {
@@ -101,7 +106,7 @@ const HomeValues = ({ className }: Props) => {
       className={clsx(className, classes.section)}
       fluid={data.bg.childImageSharp.fluid}
     >
-      <Title align="center" variant="h2">
+      <Title align="center" variant="h3">
         The values grounding our work
       </Title>
       <Grid container justify="center" spacing={3}>
@@ -117,7 +122,7 @@ const HomeValues = ({ className }: Props) => {
               className={classes.icon}
             ></Img>
           </BackgroundImage>
-          <Title align="center" variant="h4">
+          <Title align="center" variant="h3" className={classes.title}>
             Transparency
           </Title>
           <p>
@@ -137,7 +142,7 @@ const HomeValues = ({ className }: Props) => {
               className={classes.icon}
             ></Img>
           </BackgroundImage>
-          <Title align="center" variant="h4">
+          <Title align="center" variant="h3" className={classes.title}>
             Trust
           </Title>
           <p>
@@ -157,7 +162,7 @@ const HomeValues = ({ className }: Props) => {
               className={classes.icon}
             ></Img>
           </BackgroundImage>
-          <Title align="center" variant="h4">
+          <Title align="center" variant="h3" className={classes.title}>
             Accountability
           </Title>
           <p>
@@ -177,7 +182,7 @@ const HomeValues = ({ className }: Props) => {
               className={classes.icon}
             ></Img>
           </BackgroundImage>
-          <Title align="center" variant="h4">
+          <Title align="center" variant="h3" className={classes.title}>
             Decentralization
           </Title>
           <p>

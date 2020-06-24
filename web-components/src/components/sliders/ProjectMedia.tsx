@@ -87,7 +87,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   dot: {
     height: theme.spacing(2.5),
     width: theme.spacing(2.5),
-    backgroundColor: theme.palette.grey[50],
+    backgroundColor: theme.palette.grey[100],
     borderRadius: '50%',
   },
 }));

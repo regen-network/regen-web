@@ -50,17 +50,6 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       fontSize: '1.375rem',
     },
   },
-  activitiesContainer: {
-    [theme.breakpoints.down('xs')]: {
-      marginTop: theme.spacing(7),
-    },
-    '& h3': {
-      [theme.breakpoints.up('sm')]: {
-        marginTop: theme.spacing(3.5),
-        height: '6.25rem',
-      },
-    },
-  },
   activities: {
     color: theme.palette.info.dark,
     margin: 0,
@@ -107,9 +96,11 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       gridRowStart: 1,
       gridRownEnd: 2,
       paddingRight: theme.spacing(10),
-      '& h2': {
-        marginBottom: '0 !important',
-      },
+    },
+  },
+  title: {
+    [theme.breakpoints.up('sm')]: {
+      marginBottom: '0 !important',
     },
   },
   descriptionItem: {
@@ -121,14 +112,17 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       paddingRight: theme.spacing(10),
     },
   },
-  activitiesTitle: {
+  activitiesTitleContainer: {
     [theme.breakpoints.down('xs')]: {
       marginTop: theme.spacing(7),
     },
-    '& h4': {
-      [theme.breakpoints.up('sm')]: {
-        marginTop: theme.spacing(3.5),
-      },
+  },
+  activitiesTitle: {
+    [theme.breakpoints.up('sm')]: {
+      marginTop: theme.spacing(3.5),
+    },
+    [theme.breakpoints.down('xs')]: {
+      fontSize: '1.125rem',
     },
   },
 }));
@@ -147,7 +141,7 @@ export default function CreditInfo({
     <div className={classes.root}>
       <div className={classes.container}>
         <div className={classes.descriptionTitle}>
-          <Title variant="h2">
+          <Title className={classes.title} variant="h3">
             <span className={classes.icon}>
               <CreditsIcon color={theme.palette.secondary.main} />
             </span>
@@ -157,8 +151,10 @@ export default function CreditInfo({
         <div className={classes.descriptionItem}>
           <Typography className={classes.description}>{description}</Typography>
         </div>
-        <div className={classes.activitiesTitle}>
-          <Title variant="h4">{title}</Title>
+        <div className={classes.activitiesTitleContainer}>
+          <Title className={classes.activitiesTitle} variant="h4">
+            {title}
+          </Title>
         </div>
         <div className={classes.activitiesItem}>
           <ul className={classes.activities}>

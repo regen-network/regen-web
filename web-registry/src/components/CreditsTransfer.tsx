@@ -365,7 +365,7 @@ export default function CreditsTransfer(): JSX.Element {
           <p>
             {units} {pluralize(units, 'credit')} successfully transfered.
           </p>
-          <Title variant="h3">Senders:</Title>
+          <Title variant="h4">Senders:</Title>
           <TableContainer>
             <Table>
               <TableHead>
@@ -390,7 +390,7 @@ export default function CreditsTransfer(): JSX.Element {
               </TableBody>
             </Table>
           </TableContainer>
-          <Title variant="h3">Buyer:</Title>
+          <Title variant="h4">Buyer:</Title>
           <TableContainer>
             <Table>
               <TableHead>

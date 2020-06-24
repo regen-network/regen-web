@@ -12,9 +12,21 @@ marketplaceSection:
       header: "Purchase credits"
       description: "Whether you are an individual or a business looking to take climate action, we make it easy to sponsor ecological practices."
       linkText: "Browse Projects"
-topSection: # TODO put in another file buyers.yaml
+topSection: # TODO move to another file and/or subfolder once architecture discussed
   header: "Meet your climate commitments. Regenerate the planet."
   body:
     start: "Buy"
     underlined: "ecosystem service credits"
     end: "and motivate land stewards around the world to sequester carbon, improve biodiversity, and more."
+approachSection: # TODO same as above
+  header: "Our innovative approach directly incentivizes land stewards to do good for the planet"
+  imageItems:
+    - header: "Maximize ecological return"
+      image: "../src/images/eco-return.svg"
+      description: "Make a bigger impact"
+    - header: "Verified outcomes"
+      image: "../src/images/verified-outcomes.svg"
+      description: "Software-based and remote-sensing monitoring keeps costs low and transparency high."
+    - header: "Share impact through story"
+      image: "../src/images/story.svg"
+      description: "Demonstrate climate commitments to your customers through photos, video, stories, and updates."

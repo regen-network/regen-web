@@ -27,6 +27,12 @@ let useStyles = makeStyles((theme: Theme) => ({
         lineHeight: '140%',
       },
     },
+    [theme.breakpoints.up('xl')]: {
+      paddingRight: '25%',
+      paddingLeft: theme.spacing(5),
+    },
+    maxWidth: theme.breakpoints.values.lg,
+    margin: '0 auto',
     position: 'relative',
   },
   image: {

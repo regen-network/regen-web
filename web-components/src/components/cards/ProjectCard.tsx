@@ -100,7 +100,6 @@ export default function ProjectCard({
       imgSrc={imgSrc}
       name={name}
       elevation={1}
-      titleVariant="h3"
       borderRadius="10px"
       borderColor={theme.palette.grey[100]}
       tag={tag}

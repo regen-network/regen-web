@@ -27,7 +27,21 @@ const useStyles = makeStyles((theme: Theme) => ({
         lineHeight: '140%',
       },
     },
+    [theme.breakpoints.up('xl')]: {
+      paddingRight: '25%',
+      paddingLeft: theme.spacing(5),
+    },
+    maxWidth: theme.breakpoints.values.lg,
+    margin: '0 auto',
     position: 'relative',
+  },
+  title: {
+    [theme.breakpoints.down('xs')]: {
+      lineHeight: '130%',
+    },
+    [theme.breakpoints.up('sm')]: {
+      lineHeight: '140%',
+    },
   },
   image: {
     backgroundSize: 'cover',
@@ -48,11 +62,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   subtitle: {
     [theme.breakpoints.down('xs')]: {
       paddingTop: theme.spacing(3),
-      fontSize: theme.spacing(5.5),
+      fontSize: theme.spacing(4.5),
     },
     [theme.breakpoints.up('sm')]: {
       paddingTop: theme.spacing(3.75),
-      fontSize: theme.spacing(4.5),
+      fontSize: theme.spacing(5.5),
     },
     lineHeight: '160%',
     color: theme.palette.primary.main,
@@ -69,10 +83,20 @@ const TopSection = () => {
     <StaticQuery
       query={graphql`
         query {
-          desktop: file(relativePath: { eq: "buyers-top.png" }) {
+          desktop: file(relativePath: { eq: "buyers-top.jpg" }) {
             childImageSharp {
               fluid(quality: 90) {
                 ...GatsbyImageSharpFluid_withWebp
+              }
+            }
+          }
+          text: contentYaml {
+            topSection {
+              header
+              body {
+                start
+                underlined
+                end
               }
             }
           }
@@ -80,6 +104,7 @@ const TopSection = () => {
       `}
       render={data => {
         const imageData = data.desktop.childImageSharp.fluid;
+        const content = data.text.topSection;
         return (
           <div>
             <BackgroundImage
@@ -90,20 +115,19 @@ const TopSection = () => {
             >
               <div className={classes.backgroundGradient} />
               <div className={classes.text}>
-                <Title color="primary" variant="h1">
-                  Meet your climate commitments. Regenerate the planet.
+                <Title color="primary" variant="h1" className={classes.title}>
+                  {content.header}
                 </Title>
                 <Typography component="div" className={classes.subtitle}>
-                  Buying{' '}
+                  {content.body.start}{' '}
                   <Tooltip
                     arrow
                     placement="top"
                     title="Ecosystem services are the benefits people receive from healthy ecosystems, including clean air and water, resilient food systems, and mitigation of extreme climate events."
                   >
-                    <span className={classes.tooltip}>ecosystem service credits</span>
+                    <span className={classes.tooltip}>{content.body.underlined}</span>
                   </Tooltip>{' '}
-                  motivates land stewards around the world to sequester carbon, improve biodiversity, and
-                  more.
+                  {content.body.end}
                 </Typography>
               </div>
             </BackgroundImage>

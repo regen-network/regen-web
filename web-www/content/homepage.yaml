@@ -1,20 +1,23 @@
 marketplaceSection:
-  header: "The marketplace for climate solutions"
-  body: "The Regen Registry allows land stewards to sell their ecosystem services directly to buyers around the world."
+  header: 'The marketplace for climate solutions'
+  body: 'The Regen Registry allows land stewards to sell their ecosystem services directly to buyers around the world.'
   callToActions:
-    - caption: "Land Stewards"
-      image: "../src/images/farmer.png"
-      header: "Register a project"
-      description: "Get paid for your ecological practices, such as cover cropping, crop rotation, agroforestry, rotational grazing, and more."
-      linkText: "List Your Project"
-    - caption: "Buyers"
-      image: "../src/images/buyers.png"
-      header: "Purchase credits"
-      description: "Whether you are an individual or a business looking to take climate action, we make it easy to sponsor ecological practices."
-      linkText: "Browse Projects"
+    - caption: 'Land Stewards'
+      image: '../src/images/farmer.png'
+      header: 'Register a project'
+      description: 'Get paid for your ecological practices, such as cover cropping, crop rotation, agroforestry, rotational grazing, and more.'
+      linkText: 'List Your Project'
+    - caption: 'Buyers'
+      image: '../src/images/buyers.png'
+      header: 'Purchase credits'
+      description: 'Whether you are an individual or a business looking to take climate action, we make it easy to sponsor ecological practices.'
+      linkText: 'Browse Projects'
+foldSection:
+  tagline: Platform for a Thriving Planet
+  description: Regen Network aligns economics with ecology to drive regenerative land management.
 topSection: # TODO put in another file buyers.yaml
-  header: "Meet your climate commitments. Regenerate the planet."
+  header: 'Meet your climate commitments. Regenerate the planet.'
   body:
-    start: "Buy"
-    underlined: "ecosystem service credits"
-    end: "and motivate land stewards around the world to sequester carbon, improve biodiversity, and more."
+    start: 'Buy'
+    underlined: 'ecosystem service credits'
+    end: 'and motivate land stewards around the world to sequester carbon, improve biodiversity, and more.'

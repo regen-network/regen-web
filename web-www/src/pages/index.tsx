@@ -6,6 +6,7 @@ import MarketplaceSection from '../sections/home/marketplace-section';
 import EmailSubmitSection from '../sections/shared-email-submit-section';
 import HomeLedger from '../sections/home/ledger-section';
 import HomeValuesSection from '../sections/home/values-section';
+import CarbonPlusSection from '../sections/home/carbonplus-section';
 
 const IndexPage = (): JSX.Element => {
   return (
@@ -14,6 +15,7 @@ const IndexPage = (): JSX.Element => {
       <HomeFoldSection />
       <MarketplaceSection />
       <EmailSubmitSection />
+      <CarbonPlusSection />
       <HomeLedger></HomeLedger>
       <HomeValuesSection></HomeValuesSection>
     </>

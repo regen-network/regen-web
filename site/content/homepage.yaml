@@ -1,0 +1,9 @@
+marketplaceSection:
+  header: testing
+  body: somethin
+  callToActions:
+    - caption: this
+      image: ../src/images/buyers.png
+      header: help
+      description: what about
+      linkText: something else

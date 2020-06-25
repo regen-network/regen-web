@@ -2,9 +2,8 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Theme } from '@material-ui/core';
 import clsx from 'clsx';
-import HamburgerIcon from 'web-components/lib/components/icons/HamburgerIcon';
+import HamburgerIcon from '../icons/HamburgerIcon';
 
-//replacing #000 on line 15, color property, with theme.palette.primary.contrastText doesn't yield black text in the dropdown. Not sure why
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     width: '8vh',

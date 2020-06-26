@@ -16,29 +16,30 @@ let useStyles = makeStyles((theme: Theme) => ({
     'text-shadow': '0px 4px 10px rgba(0, 0, 0, 0.1)',
     'text-align': 'center',
     color: theme.palette.primary.main,
-    'padding-top': '19vh',
-    'padding-bottom': '40vh',
     width: '100%',
     height: '75vh',
     'background-position': 'bottom center',
     'background-repeat': 'repeat-y',
     'background-size': 'cover',
-  },
-  gradient: {
-    background:
-      'linear-gradient(217.94deg, rgba(250, 235, 209, 0.5) 22.17%, rgba(125, 201, 191, 0.5) 46.11%, rgba(81, 93, 137, 0.5) 70.05%)',
-    opacity: 0.8,
+    [theme.breakpoints.up('sm')]: {
+      'padding-top': '19vh',
+      'padding-bottom': '40vh',
+    },
+    [theme.breakpoints.down('xs')]: {
+      'padding-top': '50px',
+    },
   },
   tag: {
     '& p': {
-      'font-size': '1.62rem',
       'line-height': '160%',
       'font-family': 'Lato',
       [theme.breakpoints.up('sm')]: {
+        'font-size': '1.62rem',
         width: '650px',
       },
       [theme.breakpoints.down('xs')]: {
-        width: 'unset',
+        width: '90%',
+        'font-size': '1.125em',
       },
       margin: '0 auto',
     },
@@ -62,7 +63,10 @@ let useStyles = makeStyles((theme: Theme) => ({
     'line-height': '130%',
     'margin-bottom': '12px',
     [theme.breakpoints.down('xs')]: {
+      margin: '0 auto',
       'margin-top': '25px',
+      'margin-bottom': '12px',
+      width: '80%',
     },
     [theme.breakpoints.up('sm')]: {
       'margin-top': '37px',

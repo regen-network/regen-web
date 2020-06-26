@@ -42,9 +42,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   menuItem: {
     [theme.breakpoints.down('xs')]: {
-      position: 'absolute',
-      left: '85vw',
-      top: '1vh',
+      'margin-right': '2em',
     },
   },
   logoItem: {

@@ -20,9 +20,10 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingLeft: theme.spacing(10),
     },
     [theme.breakpoints.down('xs')]: {
-      '&:first-child': {
+      '& h1, h2': {
         paddingRight: theme.spacing(4),
       },
+      paddingRight: 0,
       paddingLeft: theme.spacing(4),
     },
     [theme.breakpoints.up('xl')]: {

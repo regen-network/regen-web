@@ -17,6 +17,13 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingTop: theme.spacing(17.75),
     },
   },
+  title: {
+    lineHeight: '140%',
+    [theme.breakpoints.up('sm')]: {
+      paddingRight: '8%',
+      paddingLeft: '8%',
+    },
+  },
   container: {
     [theme.breakpoints.down('xs')]: {
       flexWrap: 'nowrap',
@@ -65,7 +72,7 @@ const ApproachSection = () => {
 
   return (
     <Section className={classes.root}>
-      <Title variant="subtitle1" align="center">
+      <Title className={classes.title} variant="subtitle1" align="center">
         {content.header}
       </Title>
       <Grid className={classes.container} container spacing={3}>

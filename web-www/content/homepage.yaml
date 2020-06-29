@@ -32,15 +32,13 @@ approachSection: # TODO same as above
       description: "Demonstrate climate commitments to your customers through photos, video, stories, and updates."
 investingSection: # TODO same as above
   header: "Investing in Land Stewards"
+  note: "*Transaction Costs in Carbon Offset Markets"
   items:
-    # - image: "../static/media/other-org.svg"
     - header: "< $.30 of every dollar*"
-      image: "../static/media/eco-return.svg"
+      image: "../static/media/other-org.svg"
       caption: "other organizations:"
       description: "goes to land stewards"
-      note: "*Transaction Costs in Carbon Offset Markets"
-    # - image: "../static/media/buying-through-regen.svg"
     - header: "> $.80 of every dollar"
-      image: "../static/media/eco-return.svg"
+      image: "../static/media/buying-through-regen.svg"
       caption: "buying through regen:"
       description: "goes to land stewards"

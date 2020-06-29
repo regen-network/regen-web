@@ -8,7 +8,7 @@ import Title from 'web-components/lib/components/title';
 interface SectionProps {
   children?: any;
   className?: string;
-  title: string;
+  title?: string;
   titleVariant?: Variant;
 }
 
@@ -49,13 +49,13 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const Section = ({ children, className, titleVariant = 'subtitle1', title }: SectionProps) => {
+const Section = ({ children, className, titleVariant = 'h2', title }: SectionProps) => {
   const classes = useStyles({});
   return (
     <div className={clsx(classes.root, className)}>
-      <Title className={classes.title} variant={titleVariant} align="center">
+      {title && <Title className={classes.title} variant={titleVariant} align="center">
         {title}
-      </Title>
+      </Title>}
       {children}
     </div>
   );

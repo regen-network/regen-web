@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   caption: {
     [theme.breakpoints.up('sm')]: {
-      paddingTop: theme.spacing(9.5),
+      paddingTop: theme.spacing(5),
       paddingBottom: theme.spacing(3.5),
     },
     [theme.breakpoints.down('xs')]: {
@@ -84,6 +84,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   note: {
     fontSize: theme.spacing(3.5),
     lineHeight: '150%',
+    textAlign: 'center',
     color: theme.palette.info.dark,
     textDecorationLine: 'underline',
     [theme.breakpoints.up('sm')]: {
@@ -111,11 +112,6 @@ const ApproachSection = () => {
           note
           items {
             image {
-              childImageSharp {
-                fixed(quality: 90) {
-                  ...GatsbyImageSharpFixed_withWebp
-                }
-              }
               extension
               publicURL
             }

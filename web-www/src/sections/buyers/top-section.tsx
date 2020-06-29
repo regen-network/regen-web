@@ -7,7 +7,7 @@ import BackgroundImage from 'gatsby-background-image';
 import Title from 'web-components/lib/components/title';
 import Tooltip from 'web-components/lib/components/tooltip';
 
-let useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles((theme: Theme) => ({
   text: {
     [theme.breakpoints.down('xs')]: {
       paddingTop: theme.spacing(38),

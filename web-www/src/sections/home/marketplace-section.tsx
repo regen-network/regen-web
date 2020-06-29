@@ -5,6 +5,7 @@ import ContainedButton from 'web-components/lib/components/buttons/ContainedButt
 import { useStaticQuery, graphql } from 'gatsby';
 import BackgroundImage from 'gatsby-background-image';
 import Title from 'web-components/lib/components/title';
+import Section from '../../components/Section';
 import Img from 'gatsby-image';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -14,9 +15,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     'background-color': theme.palette.primary.main,
     'font-family': theme.typography.h1.fontFamily,
     'text-align': 'center',
-    padding: theme.spacing(10),
     '& h2': {
-      width: '70%',
+		width: '70%',
+	  [theme.breakpoints.down('sm')]: {
+		width: '100%',
+	},
       'font-family': 'Muli',
       margin: '0 auto',
       'line-height': '150%',
@@ -58,6 +61,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     margin: '0 auto',
   },
   smallTag: {
+	[theme.breakpoints.down('sm')]: {
+		'margin-top': theme.spacing(7)
+	},
     'text-transform': 'uppercase',
     'font-family': 'Muli',
     color: theme.palette.info.main,
@@ -76,15 +82,19 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   icon: {
     position: 'absolute',
-    width: '80%',
-    height: '80%',
-    top: '50%',
-    left: '35%',
+    width: '95%',
+    height: '95%',
+    top: '52%',
+    left: '33%',
     transform: 'translate(-50%, -50%)',
   },
   container: {
-    'padding-right': theme.spacing(15),
-    'padding-left': theme.spacing(15),
+  },
+  gridItem: {
+	[theme.breakpoints.down('sm')]: {
+		'flex-basis':'auto',
+		'margin-bottom': theme.spacing(8)
+	}
   },
   button: {
     [theme.breakpoints.down('xs')]: {
@@ -103,7 +113,7 @@ const MarketplaceSection = () => {
     query {
       ellipse: file(relativePath: { eq: "green-ellipse.png" }) {
         childImageSharp {
-          fixed(quality: 90, width: 120) {
+          fixed(quality: 90, width: 159) {
             ...GatsbyImageSharpFixed_withWebp
           }
         }
@@ -115,7 +125,7 @@ const MarketplaceSection = () => {
           callToActions {
             image {
               childImageSharp {
-                fixed(quality: 90, width: 80) {
+                fixed(quality: 90, width: 100) {
                   ...GatsbyImageSharpFixed_withWebp
                 }
               }
@@ -134,14 +144,14 @@ const MarketplaceSection = () => {
 
   const classes = useStyles({});
   return (
-    <div className={classes.root}>
+    <Section className={classes.root}>
       <div className={classes.inner}>
         <div className={classes.smallTag}>{content.header}</div>
-        <h2>{content.body}</h2>
+        <Title variant="h2" align="center">{content.body}</Title>
         <Grid className={classes.container} container spacing={3}>
           {content.callToActions.map(cta => {
             return (
-              <Grid item xs>
+              <Grid className={classes.gridItem} item xs>
                 <BackgroundImage
                   className={classes.bgdiv}
                   Tag="div"
@@ -150,7 +160,9 @@ const MarketplaceSection = () => {
                   <Img fixed={cta.image.childImageSharp.fixed} className={classes.icon} />
                 </BackgroundImage>
                 <div className={classes.smallTitle}>{cta.caption}</div>
-                <h3>{cta.header}</h3>
+                <Title variant="h3" align="center">
+                  {cta.header}
+                </Title>
                 <p>{cta.description}</p>
                 <ContainedButton className={classes.button}>{cta.linkText}</ContainedButton>
               </Grid>
@@ -158,7 +170,7 @@ const MarketplaceSection = () => {
           })}
         </Grid>
       </div>
-    </div>
+    </Section>
   );
 };
 

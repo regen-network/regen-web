@@ -16,8 +16,8 @@ let useStyles = makeStyles((theme: Theme) => ({
     'text-shadow': '0px 4px 10px rgba(0, 0, 0, 0.1)',
     'text-align': 'center',
     color: theme.palette.primary.main,
-    width: '100%',
-    height: '75vh',
+	width: '100%',
+	height: '75vh',
     'background-position': 'bottom center',
     'background-repeat': 'repeat-y',
     'background-size': 'cover',
@@ -26,7 +26,8 @@ let useStyles = makeStyles((theme: Theme) => ({
       'padding-bottom': '40vh',
     },
     [theme.breakpoints.down('xs')]: {
-      'padding-top': '50px',
+	  'padding-top': '50px',
+	  height:'60vh',
     },
   },
   tag: {

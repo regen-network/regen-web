@@ -23,7 +23,7 @@ approachSection: # TODO same as above
   imageItems:
     - header: "Maximize ecological return"
       image: "../src/images/eco-return.svg"
-      description: "Make a bigger impact"
+      description: "Make a bigger impact–Regen runs without expensive middlemen auditors or verification agencies."
     - header: "Verified outcomes"
       image: "../src/images/verified-outcomes.svg"
       description: "Software-based and remote-sensing monitoring keeps costs low and transparency high."

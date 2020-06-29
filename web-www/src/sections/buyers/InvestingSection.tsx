@@ -11,8 +11,6 @@ import Title from 'web-components/lib/components/title';
 import Section from '../../components/Section';
 
 const useStyles = makeStyles((theme: Theme) => ({
-  // root: {
-  // },
   image: {
     backgroundSize: 'cover',
     [theme.breakpoints.down('xs')]: {

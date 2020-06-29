@@ -10,6 +10,7 @@ interface RegenCardProps {
   elevation?: number;
   borderColor?: string;
   borderRadius?: string;
+  className?: string;
 }
 
 interface StyleProps {
@@ -38,10 +39,11 @@ export default function RegenCard({
   elevation = 0,
   borderColor,
   borderRadius,
+  className,
 }: RegenCardProps): JSX.Element {
   const classes = useStyles({ width, height, borderColor, borderRadius, onClick });
   return (
-    <Card onClick={onClick} classes={{ root: classes.root }} elevation={elevation}>
+    <Card onClick={onClick} className={`${classes.root} ${className}`} elevation={elevation}>
       {children}
     </Card>
   );

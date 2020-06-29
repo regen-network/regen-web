@@ -12,7 +12,7 @@ collections:
     files:
       - label: "Homepage"
         name: "homepage"
-        file: "site/content/homepage.yaml"
+        file: "web-www/content/homepage.yaml"
         fields:
           - label: "Marketplace Section"
             name: "marketplaceSection"

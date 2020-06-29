@@ -2,10 +2,10 @@ import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 import Img from "gatsby-image";
 import { useStaticQuery, graphql } from 'gatsby';
-import Grid from '@material-ui/core/Grid';
 
 import Title from 'web-components/lib/components/title';
-import ImageItem from 'web-components/lib/components/image-item';
+import { ImageItemProps } from 'web-components/lib/components/image-item';
+import ImageItems from 'web-components/lib/components/sliders/ImageItems';
 import Section from '../../components/Section';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -69,31 +69,22 @@ const ApproachSection = () => {
   `);
   const content = data.text.approachSection;
   const classes = useStyles({});
+  const imageItems: ImageItemProps[] = content.imageItems.map(({ image, header: title, description }) => ({
+    img: !image.childImageSharp && image.extension === 'svg' ? (
+      <img src={image.publicURL} alt={image.publicURL} />
+    ) : (
+      <Img fixed={image.childImageSharp.fixed} />
+    ),
+    title,
+    description,
+  }));
 
   return (
     <Section className={classes.root}>
       <Title className={classes.title} variant="subtitle1" align="center">
         {content.header}
       </Title>
-      <Grid className={classes.container} container spacing={3}>
-        {content.imageItems.map((item, index) => {
-          return (
-            <Grid sm={4} item key={index} className={classes.item}>
-              <ImageItem
-                img={
-                  !item.image.childImageSharp && item.image.extension === 'svg' ? (
-                    <img src={item.image.publicURL} alt={item.image.publicURL} />
-                  ) : (
-                    <Img fixed={item.image.childImageSharp.fixed} />
-                  )
-                }
-                title={item.header}
-                description={item.description}
-              />
-            </Grid>
-          );
-        })}
-      </Grid>
+      <ImageItems items={imageItems} />
     </Section>
   );
 };

@@ -49,3 +49,5 @@ export const projectMedia = (): JSX.Element => (
     <ProjectMedia assets={object('assets', assets)} />
   </div>
 );
+
+// TODO: add other sliders

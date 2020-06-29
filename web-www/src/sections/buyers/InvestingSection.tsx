@@ -11,8 +11,6 @@ import Title from 'web-components/lib/components/title';
 import Section from '../../components/Section';
 
 const useStyles = makeStyles((theme: Theme) => ({
-  // root: {
-  // },
   image: {
     backgroundSize: 'cover',
     [theme.breakpoints.down('xs')]: {
@@ -110,6 +108,7 @@ const ApproachSection = () => {
         investingSection {
           header
           note
+          noteLink
           items {
             image {
               extension
@@ -129,6 +128,15 @@ const ApproachSection = () => {
   
   const content = data.text.investingSection;
   const imageData = data.background.childImageSharp.fluid;
+  const note: JSX.Element = (
+    <a
+      target="_blank"
+      rel="noopener noreferrer"
+      href={content.noteLink}
+    >
+      <Typography className={classes.note}>{content.note}</Typography>
+    </a>
+  );
 
   return (
     <BackgroundImage Tag="section" className={classes.image} fluid={imageData} backgroundColor="#040e18">
@@ -150,11 +158,11 @@ const ApproachSection = () => {
               <Title align="center" variant="h6" className={clsx(classes.description, classes.uppercase)}>
                 {item.description}
               </Title>
-              {index === 0 && desktop && <Typography className={classes.note}>{content.note}</Typography>}
+              {index === 0 && desktop && note}
             </Grid>
           ))}
         </Grid>
-        {!desktop && <Typography className={classes.note}>{content.note}</Typography>}
+        {!desktop && note}
       </Section>
     </BackgroundImage>
   );

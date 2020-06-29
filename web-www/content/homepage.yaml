@@ -33,6 +33,7 @@ approachSection: # TODO same as above
 investingSection: # TODO same as above
   header: "Investing in Land Stewards"
   note: "*Transaction Costs in Carbon Offset Markets"
+  noteLink: "https://www.c-agg.org/wp-content/uploads/Zook_C-AGG_Presentation_March_8.pdf"
   items:
     - header: "< $.30 of every dollar*"
       image: "../static/media/other-org.svg"

@@ -34,6 +34,10 @@ const theme = createMuiTheme({
       50: '#FAFAFA',
       100: '#D2D5D9',
     },
+    error: {
+      main: '#DE4526',
+      light: '#E6735C',
+    },
     // contrastThreshold: 3,
     // tonalOffset: 0.2,
   },
@@ -89,7 +93,7 @@ const theme = createMuiTheme({
         fontSize: '2.375rem',
       },
       [defaultTheme.breakpoints.down('xs')]: {
-        fontSize: '1.5rem',
+        fontSize: '2rem',
       },
     },
     body2: {

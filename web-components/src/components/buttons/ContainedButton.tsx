@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 interface ContainedButtonProps {
   children?: any;
   onClick?: () => void;
+  href?: string;
 }
 
 const CustomButton = withStyles((theme: Theme) => ({
@@ -28,7 +29,7 @@ const CustomButton = withStyles((theme: Theme) => ({
 
 export default function ContainedButton(props: ContainedButtonProps): JSX.Element {
   return (
-    <CustomButton color="secondary" variant="contained" onClick={props.onClick} {...props}>
+    <CustomButton href={props.href} color="secondary" variant="contained" onClick={props.onClick} {...props}>
       {props.children}
     </CustomButton>
   );

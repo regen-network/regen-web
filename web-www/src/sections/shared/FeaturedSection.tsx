@@ -4,12 +4,45 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { useStaticQuery, graphql } from 'gatsby';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
+import ReactHtmlParser from 'react-html-parser'; 
+import Img from 'gatsby-image';
 
 import FeaturedCard from 'web-components/lib/components/cards/FeaturedCard';
+import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
+import Title from 'web-components/lib/components/title';
 import Section from '../../components/Section';
 
 const useStyles = makeStyles((theme: Theme) => ({
-  section: {
+  section: {},
+  title: {
+    lineHeight: '140%',
+  },
+  description: {
+    color: theme.palette.info.dark,
+    lineHeight: '150%',
+    [theme.breakpoints.down('xs')]: {
+      fontSize: theme.spacing(3.5),
+      paddingBottom: theme.spacing(9.5),
+      paddingTop: theme.spacing(7.5),
+    },
+    [theme.breakpoints.up('sm')]: {
+      fontSize: theme.spacing(4.5),
+      paddingTop: theme.spacing(5),
+      paddingBottom: theme.spacing(7),
+    },
+  },
+  card: {
+    [theme.breakpoints.down('xs')]: {
+      paddingTop: theme.spacing(8),
+    },
+    [theme.breakpoints.up('sm')]: {
+      paddingTop: theme.spacing(5),
+    },
+  },
+  text: {
+    [theme.breakpoints.up('sm')]: {
+      paddingRight: theme.spacing(10),
+    },
   },
 }));
 
@@ -22,8 +55,8 @@ const ApproachSection = () => {
           title
           image {
             childImageSharp {
-              fixed(quality: 90) {
-                ...GatsbyImageSharpFixed_withWebp
+              fluid(quality: 90) {
+                ...GatsbyImageSharpFluid_withWebp
               }
             }
           }
@@ -40,7 +73,22 @@ const ApproachSection = () => {
 
   return (
     <Section className={classes.section} title={content.header} titleVariant="subtitle1">
-      <FeaturedCard />
+      <div className={classes.card}>
+        <FeaturedCard>
+          <Grid container>
+            <Grid item className={classes.text}>
+              <Title className={classes.title} variant="h3">
+                {ReactHtmlParser(content.title)}
+              </Title>
+              <Typography className={classes.description}>{ReactHtmlParser(content.description)}</Typography>
+              <ContainedButton href={content.link}>buy</ContainedButton>
+            </Grid>
+            <Grid item>
+              <Img fluid={content.image.childImageSharp.fluid} />
+            </Grid>
+          </Grid>
+        </FeaturedCard>
+      </div>
     </Section>
   );
 };

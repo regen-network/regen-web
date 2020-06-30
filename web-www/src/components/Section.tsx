@@ -16,6 +16,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   root: {
     maxWidth: theme.breakpoints.values.lg,
     margin: '0 auto',
+    overflow: 'hidden',
     [theme.breakpoints.up('sm')]: {
       paddingTop: theme.spacing(22.25),
     },
@@ -28,10 +29,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingLeft: theme.spacing(10),
     },
     [theme.breakpoints.down('xs')]: {
-      '& h1, h2': {
-        paddingRight: theme.spacing(4),
-      },
-      paddingRight: 0,
+      paddingRight: theme.spacing(4),
       paddingLeft: theme.spacing(4),
       paddingTop: theme.spacing(17.75),
     },

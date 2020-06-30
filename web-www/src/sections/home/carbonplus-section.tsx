@@ -30,7 +30,7 @@ const CarbonplusSection = () => {
     query {
       cow: file(relativePath: { eq: "cow.png" }) {
         childImageSharp {
-          fixed(quality: 90, width: 671) {
+          fixed(quality: 90) {
             ...GatsbyImageSharpFixed_withWebp
           }
         }
@@ -51,6 +51,7 @@ const CarbonplusSection = () => {
   const classes = useStyles({});
   const theme = useTheme();
   const content = data.text.carbonPlusSection;
+
   return (
     <section>
       <div className={classes.textBlock}>

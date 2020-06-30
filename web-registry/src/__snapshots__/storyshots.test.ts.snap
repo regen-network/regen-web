@@ -4347,11 +4347,10 @@ exports[`Storyshots Components|Table Mrv Table 1`] = `
           role={null}
           tabIndex={-1}
         >
-          <th
+          <td
             aria-sort={null}
             className="MuiTableCell-root MuiTableCell-body makeStyles-cell-465 makeStyles-nameCell-466"
             id="enhanced-table-checkbox-0"
-            role="cell"
             scope="row"
           >
             <div
@@ -4458,7 +4457,7 @@ exports[`Storyshots Components|Table Mrv Table 1`] = `
                
               Issuance Documents
             </div>
-          </th>
+          </td>
           <td
             aria-sort={null}
             className="MuiTableCell-root MuiTableCell-body makeStyles-cell-465 MuiTableCell-alignLeft"
@@ -4548,11 +4547,10 @@ exports[`Storyshots Components|Table Mrv Table 1`] = `
           role={null}
           tabIndex={-1}
         >
-          <th
+          <td
             aria-sort={null}
             className="MuiTableCell-root MuiTableCell-body makeStyles-cell-465 makeStyles-nameCell-466"
             id="enhanced-table-checkbox-1"
-            role="cell"
             scope="row"
           >
             <div
@@ -4659,7 +4657,7 @@ exports[`Storyshots Components|Table Mrv Table 1`] = `
                
               Monitoring
             </div>
-          </th>
+          </td>
           <td
             aria-sort={null}
             className="MuiTableCell-root MuiTableCell-body makeStyles-cell-465 MuiTableCell-alignLeft"
@@ -4749,11 +4747,10 @@ exports[`Storyshots Components|Table Mrv Table 1`] = `
           role={null}
           tabIndex={-1}
         >
-          <th
+          <td
             aria-sort={null}
             className="MuiTableCell-root MuiTableCell-body makeStyles-cell-465 makeStyles-nameCell-466"
             id="enhanced-table-checkbox-2"
-            role="cell"
             scope="row"
           >
             <div
@@ -4860,7 +4857,7 @@ exports[`Storyshots Components|Table Mrv Table 1`] = `
                
               Project Review
             </div>
-          </th>
+          </td>
           <td
             aria-sort={null}
             className="MuiTableCell-root MuiTableCell-body makeStyles-cell-465 MuiTableCell-alignLeft"

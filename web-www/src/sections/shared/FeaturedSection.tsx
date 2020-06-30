@@ -13,10 +13,14 @@ import Title from 'web-components/lib/components/title';
 import Section from '../../components/Section';
 
 const useStyles = makeStyles((theme: Theme) => ({
-  section: {},
+  root: {
+    [theme.breakpoints.up(theme.breakpoints.values.tablet)]: {
+      paddingBottom: theme.spacing(22.5),
+    },
+  },
   title: {
     lineHeight: '140%',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
       paddingTop: theme.spacing(5),
     },
   },
@@ -34,8 +38,16 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingBottom: theme.spacing(7),
     },
   },
+  button: {
+    [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
+      width: '60%',
+    },
+    [theme.breakpoints.up('sm')]: {
+      width: '50%',
+    },
+  },
   card: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
       paddingTop: theme.spacing(8),
     },
     [theme.breakpoints.up('sm')]: {
@@ -56,6 +68,7 @@ const ApproachSection = () => {
         featuredSection {
           header
           title
+          link
           image {
             childImageSharp {
               fluid(quality: 90) {
@@ -70,23 +83,29 @@ const ApproachSection = () => {
   `);
   const classes = useStyles();
   const theme = useTheme();
-  const desktop = useMediaQuery(theme.breakpoints.up('sm'));
+  const desktop = useMediaQuery(theme.breakpoints.up('tablet'));
   
   const content = data.text.featuredSection;
-
   return (
-    <Section className={classes.section} title={content.header} titleVariant="subtitle1">
+    <Section className={classes.root} title={content.header} titleVariant="subtitle1">
       <div className={classes.card}>
         <FeaturedCard>
-          <Grid container wrap="nowrap" direction={desktop? 'row' : 'column-reverse'}>
-            <Grid item xs={12} sm={6} className={classes.text}>
+          <Grid container wrap="nowrap" direction={desktop ? 'row' : 'column-reverse'}>
+            <Grid item xs={12} className={classes.text}>
               <Title className={classes.title} variant="h3">
                 {ReactHtmlParser(content.title)}
               </Title>
               <Typography className={classes.description}>{ReactHtmlParser(content.description)}</Typography>
-              <ContainedButton href={content.link}>buy</ContainedButton>
+              <ContainedButton
+                rel="noopener noreferrer"
+                target="_blank"
+                href={content.link}
+                className={classes.button}
+              >
+                buy
+              </ContainedButton>
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12}>
               <Img fluid={content.image.childImageSharp.fluid} />
             </Grid>
           </Grid>

@@ -1,11 +1,23 @@
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeOptions } from '@material-ui/core/styles/createMuiTheme';
 
+declare module '@material-ui/core/styles/createBreakpoints' {
+  interface BreakpointOverrides {
+    xs: true;
+    sm: true;
+    tablet: true; // adds the `tablet` breakpoint
+    md: true;
+    lg: true;
+    xl: true;
+  }
+}
+
 const defaultTheme = createMuiTheme({
   breakpoints: {
     values: {
       xs: 0,
       sm: 600,
+      tablet: 768,
       md: 1064,
       lg: 1280,
       xl: 1400,

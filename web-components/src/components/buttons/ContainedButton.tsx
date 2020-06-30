@@ -1,12 +1,6 @@
 import React from 'react';
 import { withStyles, Theme } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-
-interface ContainedButtonProps {
-  children?: any;
-  onClick?: () => void;
-  href?: string;
-}
+import Button, { ButtonProps } from '@material-ui/core/Button';
 
 const CustomButton = withStyles((theme: Theme) => ({
   root: {
@@ -27,9 +21,9 @@ const CustomButton = withStyles((theme: Theme) => ({
   },
 }))(Button);
 
-export default function ContainedButton(props: ContainedButtonProps): JSX.Element {
+export default function ContainedButton(props: ButtonProps): JSX.Element {
   return (
-    <CustomButton href={props.href} color="secondary" variant="contained" onClick={props.onClick} {...props}>
+    <CustomButton color="secondary" variant="contained" onClick={props.onClick} {...props}>
       {props.children}
     </CustomButton>
   );

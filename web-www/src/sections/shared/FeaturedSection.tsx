@@ -16,14 +16,17 @@ const useStyles = makeStyles((theme: Theme) => ({
   section: {},
   title: {
     lineHeight: '140%',
+    [theme.breakpoints.down('xs')]: {
+      paddingTop: theme.spacing(5),
+    },
   },
   description: {
     color: theme.palette.info.dark,
     lineHeight: '150%',
     [theme.breakpoints.down('xs')]: {
       fontSize: theme.spacing(3.5),
-      paddingBottom: theme.spacing(9.5),
-      paddingTop: theme.spacing(7.5),
+      paddingTop: theme.spacing(2.5),
+      paddingBottom: theme.spacing(4.5),
     },
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.spacing(4.5),
@@ -75,15 +78,15 @@ const ApproachSection = () => {
     <Section className={classes.section} title={content.header} titleVariant="subtitle1">
       <div className={classes.card}>
         <FeaturedCard>
-          <Grid container>
-            <Grid item className={classes.text}>
+          <Grid container wrap="nowrap" direction={desktop? 'row' : 'column-reverse'}>
+            <Grid item xs={12} sm={6} className={classes.text}>
               <Title className={classes.title} variant="h3">
                 {ReactHtmlParser(content.title)}
               </Title>
               <Typography className={classes.description}>{ReactHtmlParser(content.description)}</Typography>
               <ContainedButton href={content.link}>buy</ContainedButton>
             </Grid>
-            <Grid item>
+            <Grid item xs={12} sm={6}>
               <Img fluid={content.image.childImageSharp.fluid} />
             </Grid>
           </Grid>

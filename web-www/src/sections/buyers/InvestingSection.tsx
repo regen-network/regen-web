@@ -133,7 +133,7 @@ const ApproachSection = () => {
   const imageData = data.background.childImageSharp.fluid;
 
   return (
-    <BackgroundImage Tag="section" className={classes.image} fluid={imageData} backgroundColor="#040e18">
+    <BackgroundImage Tag="section" className={classes.image} fluid={imageData} backgroundColor={theme.palette.grey['50']}>
       <Section className={classes.section} title={content.header} titleVariant="subtitle1">
         <Grid container justify="space-evenly" className={classes.grid}>
           {content.items.map((item: any, index: number) => (

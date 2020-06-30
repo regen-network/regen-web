@@ -7,19 +7,19 @@ import BackgroundImage from 'gatsby-background-image';
 import Title from 'web-components/lib/components/title';
 import Section from '../../components/Section';
 import Img from 'gatsby-image';
+import Tooltip from 'web-components/lib/components/tooltip';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
+	paddingTop: theme.spacing(7),
+	paddingBottom: theme.spacing(7),
     height: 'min-content',
     color: theme.palette.primary.contrastText,
     'background-color': theme.palette.primary.main,
     'font-family': theme.typography.h1.fontFamily,
     'text-align': 'center',
     '& h2': {
-		width: '70%',
-	  [theme.breakpoints.down('sm')]: {
 		width: '100%',
-	},
       'font-family': 'Muli',
       margin: '0 auto',
       'line-height': '150%',
@@ -61,9 +61,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     margin: '0 auto',
   },
   smallTag: {
-	[theme.breakpoints.down('sm')]: {
-		'margin-top': theme.spacing(7)
-	},
     'text-transform': 'uppercase',
     'font-family': 'Muli',
     color: theme.palette.info.main,
@@ -106,6 +103,14 @@ const useStyles = makeStyles((theme: Theme) => ({
       fontSize: theme.spacing(4.5),
     },
   },
+  green: {
+	  color: theme.palette.secondary.main,
+  },
+  popover: {
+	'cursor': 'pointer',
+	'text-decoration-line': 'underline',
+	'text-decoration-style': 'dotted',
+  }
 }));
 
 const MarketplaceSection = () => {
@@ -121,7 +126,14 @@ const MarketplaceSection = () => {
       text: contentYaml {
         marketplaceSection {
           header
-          body
+		  tooltip
+          body {
+			  start
+			  green
+			  middle
+			  popover
+			  end
+		  }
           callToActions {
             image {
               childImageSharp {
@@ -147,11 +159,11 @@ const MarketplaceSection = () => {
     <Section className={classes.root}>
       <div className={classes.inner}>
         <div className={classes.smallTag}>{content.header}</div>
-        <Title variant="h2" align="center">{content.body}</Title>
+        <Title variant="h2" align="center">{content.body.start}<span className={classes.green}>{content.body.green}</span>{content.body.middle}<Tooltip title={content.tooltip}><span className={classes.popover}>{content.body.popover}</span></Tooltip>{content.body.end}</Title>
         <Grid className={classes.container} container spacing={3}>
           {content.callToActions.map(cta => {
             return (
-              <Grid className={classes.gridItem} item xs>
+              <Grid key={cta.header} className={classes.gridItem} item xs>
                 <BackgroundImage
                   className={classes.bgdiv}
                   Tag="div"

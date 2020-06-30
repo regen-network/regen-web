@@ -1,6 +1,12 @@
 marketplaceSection:
   header: 'The marketplace for climate solutions'
-  body: 'The Regen Registry allows land stewards to sell their ecosystem services directly to buyers around the world.'
+  tooltip: 'Ecosystem services are the benefits people receive from healthy ecosystems, including clean air and water, resilient food systems, and mitigation of extreme climate events.'
+  body: 
+    start: 'The '
+    green: 'Regen Registry '
+    middle: 'allows land stewards to sell their '
+    popover: 'ecosystem services '
+    end: 'directly to buyers around the world.'
   callToActions:
     - caption: 'Land Stewards'
       image: '../src/images/farmer.png'

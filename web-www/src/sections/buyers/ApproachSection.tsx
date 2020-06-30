@@ -54,7 +54,7 @@ const ApproachSection = () => {
   }));
 
   return (
-    <Section className={classes.root} title={content.header}>
+    <Section withSlider className={classes.root} title={content.header}>
       <ImageItems items={imageItems} />
     </Section>
   );

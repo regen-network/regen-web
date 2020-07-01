@@ -26,6 +26,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: '100%',
     display: 'flex',
     flexDirection: 'column',
+    position: 'relative',
   },
   image: {
     height: theme.spacing(48.75),

@@ -79,9 +79,9 @@ comingSoonSection: # TODO same as above
       image: "../static/media/andover-farm.png"
       location: "Western Australia, Australia"
       area: 1787
-      areaUnit: "ha."
+      areaUnit: "hectares"
     - name: "Mt. Sandy"
       image: "../static/media/mt-sandy.png"
       location: "South Australia, Australia"
       area: 200
-      areaUnit: "ha."
+      areaUnit: "hectares"

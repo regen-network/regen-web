@@ -1,9 +1,10 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
-import Img from "gatsby-image";
+import { makeStyles, Theme, useTheme } from '@material-ui/core';
 import { useStaticQuery, graphql } from 'gatsby';
+import BackgroundImage from 'gatsby-background-image';
 
 import Section from '../../components/Section';
+import ProjectCards from 'web-components/lib/components/sliders/ProjectCards';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -11,7 +12,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingBottom: theme.spacing(14),
     },
     [theme.breakpoints.up('sm')]: {
-      paddingBottom: theme.spacing(25),
+      paddingBottom: theme.spacing(19.75),
     },
   },
 }));
@@ -19,6 +20,13 @@ const useStyles = makeStyles((theme: Theme) => ({
 const ComingSoonSection = () => {
   const data = useStaticQuery(graphql`
     query {
+      background: file(relativePath: { eq: "coming-soon-bg.jpg" }) {
+        childImageSharp {
+          fluid(quality: 90) {
+            ...GatsbyImageSharpFluid_withWebp
+          }
+        }
+      }
       text: contentYaml {
         comingSoonSection {
           header
@@ -33,6 +41,7 @@ const ComingSoonSection = () => {
                   ...GatsbyImageSharpFixed_withWebp
                 }
               }
+              publicURL
             }
           }
         }
@@ -41,10 +50,28 @@ const ComingSoonSection = () => {
   `);
   const content = data.text.comingSoonSection;
   const classes = useStyles({});
+  const theme = useTheme();
+  const imageData = data.background.childImageSharp.fluid;
 
   return (
-    <Section withSlider className={classes.root} title={content.header}>
-    </Section>
+    <BackgroundImage
+      Tag="section"
+      fluid={imageData}
+      backgroundColor={theme.palette.grey['50']}
+    >
+      <Section withSlider className={classes.root} title={content.header}>
+        <ProjectCards
+          projects={content.projects.map(({ name, image, location, area, areaUnit }) => ({
+            name,
+            area,
+            areaUnit,
+            comingSoon: true,
+            imgSrc: image.publicURL,
+            place: location,
+          }))}
+        />
+      </Section>
+    </BackgroundImage>
   );
 };
 

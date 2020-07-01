@@ -26,11 +26,6 @@ const ApproachSection = () => {
           header
           imageItems {
             image {
-              childImageSharp {
-                fixed(quality: 90) {
-                  ...GatsbyImageSharpFixed_withWebp
-                }
-              }
               extension
               publicURL
             }
@@ -44,11 +39,7 @@ const ApproachSection = () => {
   const content = data.text.approachSection;
   const classes = useStyles({});
   const imageItems: ImageItemProps[] = content.imageItems.map(({ image, header: title, description }) => ({
-    img: !image.childImageSharp && image.extension === 'svg' ? (
-      <img src={image.publicURL} alt={image.publicURL} />
-    ) : (
-      <Img fixed={image.childImageSharp.fixed} />
-    ),
+    img:  <img src={image.publicURL} alt={image.publicURL} />,
     title,
     description,
   }));

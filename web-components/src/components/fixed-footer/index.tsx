@@ -9,6 +9,10 @@ interface FixedFooterProps {
 
 const useStyles = makeStyles((theme: Theme) => ({
   background: {
+    position: 'fixed',
+    bottom: '0px',
+    left: '0px',
+    zIndex: 1000,
     backgroundColor: theme.palette.primary.main,
     width: '100%',
     [theme.breakpoints.up('sm')]: {

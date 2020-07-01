@@ -225,13 +225,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   projectTimeline: {
     paddingBottom: theme.spacing(30.5),
   },
-  buyFooter: {
-    position: 'fixed',
-    bottom: '0px',
-    left: '0px',
-    width: '100%',
-    zIndex: 1000,
-  },
   map: {
     maxHeight: '50rem',
   },
@@ -614,11 +607,7 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
         </div>
       )}
 
-      {project.presaleUrl && (
-        <div className={classes.buyFooter}>
-          <BuyFooter onClick={handleOpen} creditPrice={project.creditPrice} />
-        </div>
-      )}
+      {project.presaleUrl && <BuyFooter onClick={handleOpen} creditPrice={project.creditPrice} />}
 
       {project.presaleUrl && (
         <Modal

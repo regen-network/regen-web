@@ -14,6 +14,8 @@ import VerifiedIcon from 'web-components/lib/components/icons/VerifiedIcon';
 import PlayIcon from 'web-components/lib/components/icons/PlayIcon';
 import DocumentIcon from 'web-components/lib/components/icons/DocumentIcon';
 import EyeIcon from 'web-components/lib/components/icons/EyeIcon';
+import EmailIcon from 'web-components/lib/components/icons/EmailIcon';
+import PhoneIcon from 'web-components/lib/components/icons/PhoneIcon';
 import { withKnobs, text } from '@storybook/addon-knobs';
 
 export default {
@@ -47,6 +49,10 @@ export const pinIcon = (): JSX.Element => <PinIcon fontSize={text('fontSize', 's
 export const pointerIcon = (): JSX.Element => <PointerIcon />;
 
 export const regenIcon = (): JSX.Element => <RegenIcon />;
+
+export const emailIcon = (): JSX.Element => <EmailIcon />;
+
+export const phoneIcon = (): JSX.Element => <PhoneIcon />;
 
 export const regenLogoIcon = (): JSX.Element => <RegenLogoIcon />;
 

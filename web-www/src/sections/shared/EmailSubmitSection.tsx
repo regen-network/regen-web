@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 import { graphql, StaticQuery } from 'gatsby';
 import BackgroundImage from 'gatsby-background-image';
-import MailSubmit from '../components/mailSubmit';
+import MailSubmit from '../../components/mailSubmit';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {

@@ -64,7 +64,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     color: theme.palette.primary.main,
   },
   projects: {
-    backgroundColor: '#f9f9f9',
+    backgroundColor: theme.palette.grey['200'],
     [theme.breakpoints.up('md')]: {
       padding: `${theme.spacing(17.25)} ${theme.spacing(32.75)} ${theme.spacing(22.25)} ${theme.spacing(
         37.75,

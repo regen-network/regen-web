@@ -21,6 +21,12 @@ const useStyles = makeStyles((theme: Theme) => ({
       display: 'flex',
       '& .slick-slide': {
         height: 'inherit',
+        [theme.breakpoints.down('xs')]: {
+          paddingRight: theme.spacing(5),
+          '&:last-child': {
+            paddingRight: 0,
+          },
+        },
         '& > div:first-child': {
           height: '100%',
         },
@@ -45,7 +51,6 @@ export default function ImageItems({ items }: ImageItemsProps): JSX.Element {
     slidesToShow: slides,
     slidesToScroll: slides,
     initialSlide: 0,
-    centerPadding: '50px',
     arrows: false,
   };
   return (

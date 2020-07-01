@@ -43,3 +43,9 @@ investingSection: # TODO same as above
       image: "../static/media/buying-through-regen.svg"
       caption: "buying through regen:"
       description: "goes to land stewards"
+featuredSection: # TODO same as above
+  header: "Featured Credit"
+  title: "Carbon<i>Plus</i> Credit"
+  link: "https://regen-registry.netlify.app/projects/impactag"
+  image: "../static/media/cow.png"
+  description: "<p>Shifting to managed grazing can potentially sequester 16.4 - 26 CO2e (Gt) by 2050. Wilmot Cattle Co. has increased soil organic carbon to 4.5% and removed over 30,000 tons of CO2e in two years.</p><p>Co-benefits include ecosystem health, animal welfare and soil health.</p>"

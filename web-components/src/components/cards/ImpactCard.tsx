@@ -22,7 +22,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     backgroundImage: `url(${props.imgSrc})`,
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center top',
-    backgroundColor: '#f9f9f9',
+    backgroundColor: theme.palette.grey['200'],
     textAlign: 'center',
     position: 'relative',
     [theme.breakpoints.up('sm')]: {

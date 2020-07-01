@@ -4,6 +4,7 @@ import SEO from '../components/seo';
 import TopSection from '../sections/buyers/TopSection';
 import ApproachSection from '../sections/buyers/ApproachSection';
 import InvestingSection from '../sections/buyers/InvestingSection';
+import FeaturedSection from '../sections/shared/FeaturedSection';
 
 const BuyersPage = (): JSX.Element => (
   <>
@@ -11,6 +12,7 @@ const BuyersPage = (): JSX.Element => (
     <TopSection />
     <ApproachSection />
     <InvestingSection />
+    <FeaturedSection />
   </>
 );
 

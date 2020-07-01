@@ -30,8 +30,8 @@ collections:
                     name: "image"
                     widget: select
                     options:
-                      - { label: "Buyer Icon", value: "../src/images/buyers.png"}
-                      - { label: "Farmer Icon", value: "../src/images/farmer.png"}
+                      - { label: "Buyer Icon", value: "../static/media/buyers.png"}
+                      - { label: "Farmer Icon", value: "../static/media/farmer.png"}
                   - {label: "Header", name: "header", widget: string}
                   - {label: "Description", name: "description", widget: text}
                   - {label: "Link Text", name: "linkText", widget: string}

@@ -44,7 +44,9 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
   ];
   // TODO Header absolute prop will also needs to be set based on location
   const matches = useMediaQuery(theme.breakpoints.up('sm'));
-  const desktopColor: string = headerColors[location.pathname] ? headerColors[location.pathname] : theme.palette.primary.main;
+  const desktopColor: string = headerColors[location.pathname]
+    ? headerColors[location.pathname]
+    : theme.palette.primary.main;
 
   return (
     <>
@@ -54,11 +56,7 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
         transparent
         color={matches ? desktopColor : theme.palette.primary.light}
       />
-      <div
-        style={{
-          margin: `0 auto`,
-        }}
-      >
+      <div>
         <main>{children}</main>
         <footer></footer>
       </div>

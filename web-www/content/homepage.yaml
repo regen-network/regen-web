@@ -1,90 +1,72 @@
 marketplaceSection:
-  header: 'The marketplace for climate solutions'
-  body: 'The Regen Registry allows land stewards to sell their ecosystem services directly to buyers around the world.'
+  header: The marketplace
+  body: The Regen Registry allows land stewards to sell their ecosystem services
+    directly to buyers around the world.
   callToActions:
-    - caption: 'Land Stewards'
-      image: '../static/media/farmer.png'
-      header: 'Register a project'
-      description: 'Get paid for your ecological practices, such as cover cropping, crop rotation, agroforestry, rotational grazing, and more.'
-      linkText: 'List Your Project'
-    - caption: 'Buyers'
-      image: '../static/media/buyers.png'
-      header: 'Purchase credits'
-      description: 'Whether you are an individual or a business looking to take climate action, we make it easy to sponsor ecological practices.'
-      linkText: 'Browse Projects'
-foldSection:
-  tagline: Platform for a Thriving Planet
-  description: Regen Network aligns economics with ecology to drive regenerative land management.
+    - caption: Land Stewards
+      image: ../static/media/farmer.png
+      header: Register a project
+      description: Get paid for your ecological practices, such as cover cropping,
+        crop rotation, agroforestry, rotational grazing, and more.
+      linkText: List Your Project
+    - caption: Buyers
+      image: ../static/media/buyers.png
+      header: Purchase credits
+      description: Whether you are an individual or a business looking to take climate
+        action, we make it easy to sponsor ecological practices.
+      linkText: Browse Projects
 carbonPlusSection:
-  smallHeader: 'Featured Credit: CarbonPlus'
-  smallHeaderApplyGreen: 'CarbonPlus'
-  header: 'CarbonPlus Credits remove carbon and restore natural grassland ecosystems'
-  headerApplyItalicize: 'Plus'
-  descriptionOne: 'Shifting to managed grazing can potentially sequester 16.4 ------- 26 CO2e (Gt) by 2050. Wilmot Cattle Co. has increased soil organic carbon to 4.5% and removed over 30,000 tons of CO2e in two years.'
-  descriptionTwo: 'Co-benefits include ecosystem health, animal welfare and soil health.'
-  linkText: 'Buy'
-topSection: # TODO put in another file buyers.yaml
-  header: 'Meet your climate commitments. Regenerate the planet.'
+  smallHeader: "Featured Credit: CarbonPlus"
+  smallHeaderApplyGreen: CarbonPlus
+  header: CarbonPlus Credits remove carbon and restore natural grassland ecosystems
+  headerApplyItalicize: Plus
+  descriptionOne: Shifting to managed grazing can potentially sequester 16.4
+    ------- 26 CO2e (Gt) by 2050. Wilmot Cattle Co. has increased soil organic
+    carbon to 4.5% and removed over 30,000 tons of CO2e in two years.
+  descriptionTwo: Co-benefits include ecosystem health, animal welfare and soil health.
+  linkText: Buy
+topSection:
+  header: Meet your climate commitments. Regenerate the planet.
   body:
-    start: 'Buy'
-    underlined: 'ecosystem service credits'
-    end: 'and motivate land stewards around the world to sequester carbon, improve biodiversity, and more.'
-approachSection: # TODO same as above
-  header: 'Our innovative approach directly incentivizes land stewards to do good for the planet'
+    start: Buy
+    underlined: ecosystem service credits
+    end: and motivate land stewards around the world to sequester carbon, improve
+      biodiversity, and more.
+approachSection:
+  header: Our innovative approach directly incentivizes land stewards to do good
+    for the planet
   imageItems:
-    - header: "Maximize ecological return"
-      image: "../static/media/eco-return.svg"
-      description: "Make a bigger impact–Regen runs without expensive middlemen auditors or verification agencies."
-    - header: "Verified outcomes"
-      image: "../static/media/verified-outcomes.svg"
-      description: "Software-based and remote-sensing monitoring keeps costs low and transparency high."
-    - header: "Share impact through story"
-      image: "../static/media/story.svg"
-      description: "Demonstrate climate commitments to your customers through photos, video, stories, and updates."
-investingSection: # TODO same as above
-  header: "Investing in Land Stewards"
+    - header: Maximize ecological return
+      image: ../static/media/eco-return.svg
+      description: Make a bigger impact–Regen runs without expensive middlemen
+        auditors or verification agencies.
+    - header: Verified outcomes
+      image: ../static/media/verified-outcomes.svg
+      description: Software-based and remote-sensing monitoring keeps costs low and
+        transparency high.
+    - header: Share impact through story
+      image: ../static/media/story.svg
+      description: Demonstrate climate commitments to your customers through photos,
+        video, stories, and updates.
+investingSection:
+  header: Investing in Land Stewards
   note: "*Transaction Costs in Carbon Offset Markets"
-  noteLink: "https://www.c-agg.org/wp-content/uploads/Zook_C-AGG_Presentation_March_8.pdf"
+  noteLink: https://www.c-agg.org/wp-content/uploads/Zook_C-AGG_Presentation_March_8.pdf
   items:
-    - header: "< $.30 of every dollar*"
-      image: "../static/media/other-org.svg"
+    - header: < $.30 of every dollar*
+      image: ../static/media/other-org.svg
       caption: "other organizations:"
-      description: "goes to land stewards"
+      description: goes to land stewards
     - header: "> $.80 of every dollar"
-      image: "../static/media/buying-through-regen.svg"
+      image: ../static/media/buying-through-regen.svg
       caption: "buying through regen:"
-      description: "goes to land stewards"
-featuredSection: # TODO same as above
-  header: "Featured Credit"
-  title: "Carbon<i>Plus</i> Credit"
-  link: "https://regen-registry.netlify.app/projects/impactag"
-  image: "../static/media/featured-cow.png"
-  description: "Shifting to managed grazing can potentially sequester 16.4 - 26 CO2e (Gt) by 2050. Wilmot Cattle Co. has increased soil organic carbon to 4.5% and removed over 30,000 tons of CO2e in two years.<br><br>Co-benefits include ecosystem health, animal welfare and soil health."
-comingSoonSection: # TODO same as above
-  header: "Coming Soon"
-  projects:
-    - name: "Woodburn"
-      image: "../static/media/woodburn.png"
-      location: "Walcha, New South Wales, Australia"
-      area: 6313
-      areaUnit: "acres"
-    - name: "Cavan Station"
-      image: "../static/media/cavan-station.png"
-      location: "Bookham, New South Wales, Australia"
-      area: 25000
-      areaUnit: "acres"
-    - name: "Wongelia"
-      image: "../static/media/wongelia.png"
-      location: "Kilkivan, Queensland, Australia"
-      area: 10000
-      areaUnit: "acres"
-    - name: "Andover Farm"
-      image: "../static/media/andover-farm.png"
-      location: "Western Australia, Australia"
-      area: 1787
-      areaUnit: "hectares"
-    - name: "Mt. Sandy"
-      image: "../static/media/mt-sandy.png"
-      location: "South Australia, Australia"
-      area: 200
-      areaUnit: "hectares"
+      description: goes to land stewards
+featuredSection:
+  header: Featured Credit
+  title: Carbon<i>Plus</i> Credit
+  link: https://regen-registry.netlify.app/projects/impactag
+  image: ../static/media/featured-cow.png
+  description: Shifting to managed grazing can potentially sequester 16.4 - 26
+    CO2e (Gt) by 2050. Wilmot Cattle Co. has increased soil organic carbon to
+    4.5% and removed over 30,000 tons of CO2e in two years.<br><br>Co-benefits
+    include ecosystem health, animal welfare and soil health.

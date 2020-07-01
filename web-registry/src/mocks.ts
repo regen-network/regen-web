@@ -4,7 +4,7 @@ import { ItemProps as ProtectedSpeciesItem } from 'web-components/lib/components
 import { Media } from 'web-components/lib/components/sliders/ProjectMedia';
 import { Event } from 'web-components/lib/components/timeline';
 import { ActionProps } from 'web-components/lib/components/action';
-import { CreditPrice } from 'web-components/lib/components/buy-footer';
+import { CreditPrice } from 'web-components/lib/components/fixed-footer/BuyFooter';
 import { Data } from 'web-components/lib/components/table';
 
 import mock from './mock.json';

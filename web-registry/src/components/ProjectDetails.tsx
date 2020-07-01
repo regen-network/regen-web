@@ -26,7 +26,7 @@ import ProjectMedia, { Media } from 'web-components/lib/components/sliders/Proje
 import Map from 'web-components/lib/components/map';
 import { ItemProps as ProtectedSpeciesItem } from 'web-components/lib/components/sliders/Item';
 import { User } from 'web-components/lib/components/user/UserInfo';
-import BuyFooter from 'web-components/lib/components/buy-footer';
+import BuyFooter from 'web-components/lib/components/fixed-footer/BuyFooter';
 import MrvTabs from 'web-components/lib/components/tabs';
 import Table from 'web-components/lib/components/table';
 import CloseIcon from 'web-components/lib/components/icons/CloseIcon';

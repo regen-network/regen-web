@@ -57,3 +57,31 @@ featuredSection: # TODO same as above
   link: "https://regen-registry.netlify.app/projects/impactag"
   image: "../static/media/featured-cow.png"
   description: "Shifting to managed grazing can potentially sequester 16.4 - 26 CO2e (Gt) by 2050. Wilmot Cattle Co. has increased soil organic carbon to 4.5% and removed over 30,000 tons of CO2e in two years.<br><br>Co-benefits include ecosystem health, animal welfare and soil health."
+comingSoonSection: # TODO same as above
+  header: "Coming Soon"
+  projects:
+    - name: "Woodburn"
+      image: "../static/media/woodburn.png"
+      location: "Walcha, New South Wales, Australia"
+      area: 6313
+      areaUnit: "acres"
+    - name: "Cavan Station"
+      image: "../static/media/cavan-station.png"
+      location: "Bookham, New South Wales, Australia"
+      area: 25000
+      areaUnit: "acres"
+    - name: "Wongelia"
+      image: "../static/media/wongelia.png"
+      location: "Kilkivan, Queensland, Australia"
+      area: 10000
+      areaUnit: "acres"
+    - name: "Andover Farm"
+      image: "../static/media/andover-farm.png"
+      location: "Western Australia, Australia"
+      area: 1787
+      areaUnit: "ha."
+    - name: "Mt. Sandy"
+      image: "../static/media/mt-sandy.png"
+      location: "South Australia, Australia"
+      area: 200
+      areaUnit: "ha."

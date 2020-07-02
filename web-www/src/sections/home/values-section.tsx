@@ -24,6 +24,7 @@ let useStyles = makeStyles((theme: Theme) => ({
       'font-family': 'Lato',
       'font-size': theme.typography.body2.fontSize,
       'line-height': '150%',
+      color: theme.palette.primary.contrastText,
     },
     ' & h4': {
       'margin-bottom': theme.spacing(5),

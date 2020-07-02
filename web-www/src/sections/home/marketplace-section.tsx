@@ -4,16 +4,17 @@ import Grid from '@material-ui/core/Grid';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import { useStaticQuery, graphql } from 'gatsby';
 import BackgroundImage from 'gatsby-background-image';
+import Title from 'web-components/lib/components/title';
 import Img from 'gatsby-image';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    height: theme.spacing(200),
+    height: 'min-content',
     color: theme.palette.primary.contrastText,
     'background-color': theme.palette.primary.main,
     'font-family': theme.typography.h1.fontFamily,
     'text-align': 'center',
-    'padding-top': theme.spacing(45),
+    padding: theme.spacing(10),
     '& h2': {
       width: '70%',
       'font-family': 'Muli',
@@ -31,6 +32,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       'margin-bottom': '0px',
       'line-height': '150%',
       'font-family': 'Lato',
+      'font-size': '1.375rem',
     },
     '& .MuiGrid-item.MuiGrid-root': {
       padding: theme.spacing(1),
@@ -41,6 +43,9 @@ const useStyles = makeStyles((theme: Theme) => ({
         'margin-bottom': theme.spacing(3),
       },
     },
+  },
+  registry: {
+    color: theme.palette.secondary.main,
   },
   bgdiv: {
     'margin-bottom': theme.spacing(4),
@@ -55,23 +60,31 @@ const useStyles = makeStyles((theme: Theme) => ({
   smallTag: {
     'text-transform': 'uppercase',
     'font-family': 'Muli',
-    color: theme.palette.grey[100],
+    color: theme.palette.info.main,
     'margin-bottom': theme.spacing(5),
+    'font-weight': 800,
+    'font-size': '1.125rem',
+    'letter-spacing': '1px',
+    'line-height': '23px',
   },
   smallTitle: {
-    color: theme.palette.info.main,
+    color: theme.palette.info.dark,
+    'font-weight': 800,
+    'font-size': '1.125rem',
+    'letter-spacing': '1px',
+    'line-height': '23px',
   },
   icon: {
     position: 'absolute',
     width: '80%',
     height: '80%',
     top: '50%',
-    left: '50%',
+    left: '35%',
     transform: 'translate(-50%, -50%)',
   },
   container: {
-    'padding-right': theme.spacing(40),
-    'padding-left': theme.spacing(40),
+    'padding-right': theme.spacing(15),
+    'padding-left': theme.spacing(15),
   },
   button: {
     [theme.breakpoints.down('xs')]: {

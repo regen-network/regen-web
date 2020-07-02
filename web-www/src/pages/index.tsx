@@ -1,10 +1,12 @@
 import React from 'react';
 
 import SEO from '../components/seo';
-import HomeFoldSection from '../sections/home-fold-section';
-import MarketplaceSection from '../sections/home-marketplace-section';
-import EmailSubmitSection from '../sections/shared-email-submit-section';
-import HomeValuesSection from '../sections/home-values-section';
+import HomeFoldSection from '../sections/home/fold-section';
+import MarketplaceSection from '../sections/home/marketplace-section';
+import HomeLedger from '../sections/home/ledger-section';
+import HomeValuesSection from '../sections/home/values-section';
+import CarbonPlusSection from '../sections/home/carbonplus-section';
+import EmailSubmitSection from '../sections/shared/EmailSubmitSection';
 
 const IndexPage = (): JSX.Element => {
   return (
@@ -13,7 +15,9 @@ const IndexPage = (): JSX.Element => {
       <HomeFoldSection />
       <MarketplaceSection />
       <EmailSubmitSection />
-      <HomeValuesSection />
+      <CarbonPlusSection />
+      <HomeLedger></HomeLedger>
+      <HomeValuesSection></HomeValuesSection>
     </>
   );
 };

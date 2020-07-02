@@ -1,14 +1,14 @@
 marketplaceSection:
-  header: The marketplace
+  header: The marketplace for climate solutions
   body: The Regen Registry allows land stewards to sell their ecosystem services
     directly to buyers around the world.
   callToActions:
-    - caption: Land Stewards
+    - caption: Monitors
       image: ../static/media/eye.png
-      header: Register a project
+      header: Sign up for monitoring with Regen Network
       description: Get paid for your ecological practices, such as cover cropping,
         crop rotation, agroforestry, rotational grazing, and more.
-      linkText: List Your Project
+      linkText: Register your Oracle
     - caption: Buyers
       image: ../static/media/buyers.png
       header: Purchase credits

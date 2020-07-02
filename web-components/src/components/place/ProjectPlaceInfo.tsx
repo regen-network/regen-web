@@ -11,7 +11,7 @@ export interface Place {
 }
 
 interface ProjectPlaceInfoProps {
-  place: Place;
+  place: Place | string;
   area: number;
   areaUnit: string;
   fontSize?: string;
@@ -41,9 +41,11 @@ export default function ProjectPlaceInfo({
 }: ProjectPlaceInfoProps): JSX.Element {
   const classes = useStyles({});
   const displayedArea: string = new Intl.NumberFormat('en-US').format(area);
+  const formattedPlace: string =
+    typeof place === 'string' ? place : getFormattedPlace(place, displayCity, displayRegion, displayCountry);
   return (
     <PlaceInfo fontSize={fontSize} smFontSize={smFontSize} color={color}>
-      {getFormattedPlace(place, displayCity, displayRegion, displayCountry)}
+      {formattedPlace}
       <span className={classes.separator}>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
       {displayedArea} {areaUnit}
     </PlaceInfo>

@@ -30,7 +30,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   image: {
     height: theme.spacing(48.75),
-    cursor: 'pointer',
     position: 'relative',
   },
   tag: {

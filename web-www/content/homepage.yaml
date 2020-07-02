@@ -4,7 +4,7 @@ marketplaceSection:
     directly to buyers around the world.
   callToActions:
     - caption: Land Stewards
-      image: ../static/media/buying-through-regen.svg
+      image: ../static/media/eye.png
       header: Register a project
       description: Get paid for your ecological practices, such as cover cropping,
         crop rotation, agroforestry, rotational grazing, and more.

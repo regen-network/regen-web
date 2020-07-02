@@ -52,6 +52,17 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       display: 'flex',
     },
+    '& li': {
+      paddingRight: '29.5px',
+      paddingLeft: '29.5px',
+    },
+    '& li.MuiListItem-button': {
+      '& :hover': {
+        borderBottom: '3px dashed #b0ddc0',
+      },
+      'background-color': 'inherit',
+      'text-decoration': 'none',
+    },
     position: 'unset',
     width: 'unset',
     zIndex: 0,
@@ -89,7 +100,8 @@ const useStyles = makeStyles((theme: Theme) => ({
   }),
   root: {
     '& .MuiMenuItem-root > a, .MuiMenuItem-root > div > span': {
-      'font-size': '.8125rem',
+      'font-size': '.87rem',
+      letterSpacing: '1px',
     },
     [theme.breakpoints.up('md')]: {
       padding: `${theme.spacing(2.5)} ${theme.spacing(12)}`,
@@ -97,7 +109,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     [theme.breakpoints.up('sm')]: {
       height: theme.spacing(27.5),
-      '& svg': {
+      '& a > svg': {
         fontSize: '12rem',
         height: theme.spacing(20.75),
       },

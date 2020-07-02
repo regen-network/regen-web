@@ -20,6 +20,21 @@ carbonPlusSection:
   descriptionOne: 'Shifting to managed grazing can potentially sequester 16.4 ------- 26 CO2e (Gt) by 2050. Wilmot Cattle Co. has increased soil organic carbon to 4.5% and removed over 30,000 tons of CO2e in two years.'
   descriptionTwo: 'Co-benefits include ecosystem health, animal welfare and soil health.'
   linkText: 'Buy'
+valuesSection:
+  header: 'The values grounding our work'
+  imageItems:
+    - header: 'Transparency'
+      image: '../static/media/eye.png'
+      description: 'We not only monitor ecological impact, we share our data and insights for the betterment of the whole system.'
+    - header: 'Trust'
+      image: '../static/media/handshake.png'
+      description: 'By tracking and verifying outcomes, we enable stakeholders to know that credits represent real impact.'
+    - header: 'Accountability'
+      image: '../static/media/shield-icon.png'
+      description: 'Our fully auditable ecosystem services contracts ensure integrity and mutual responsibility between parties.'
+    - header: 'Decentralization'
+      image: '../static/media/boxes.png'
+      description: 'Our platform builds an empowered collective of actors, forgoing the expenses and inefficiencies of third parties'
 topSection: # TODO put in another file buyers.yaml
   header: 'Meet your climate commitments. Regenerate the planet.'
   body:

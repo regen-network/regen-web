@@ -41,9 +41,9 @@ const useStyles = makeStyles((theme: Theme) => ({
 export default function ImageItems({ items }: ImageItemsProps): JSX.Element {
   const classes = useStyles({});
   const theme = useTheme();
-  const desktop = useMediaQuery(theme.breakpoints.up('md'));
-  const mobile = useMediaQuery(theme.breakpoints.down('xs'));
-  const slides: number = desktop ? 3 : mobile ? 1 : 2;
+  const desktop = useMediaQuery(theme.breakpoints.up('tablet'));
+  const mobile = useMediaQuery(theme.breakpoints.down('tablet'));
+  const slides: number = desktop ? items.length : mobile ? 1 : 2;
 
   const settings = {
     infinite: false,

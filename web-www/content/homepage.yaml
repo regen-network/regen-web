@@ -21,7 +21,7 @@ carbonPlusSection:
   descriptionTwo: 'Co-benefits include ecosystem health, animal welfare and soil health.'
   linkText: 'Buy'
 valuesSection:
-  header: 'The values grounding our work'
+  header: 'Why Regen Network?'
   imageItems:
     - header: 'Transparency'
       image: '../static/media/eye.png'

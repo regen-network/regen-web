@@ -6,7 +6,7 @@ import HamburgerIcon from '../icons/HamburgerIcon';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    width: '8vh',
+    // width: '8vh',
   },
   bar: {
     'margin-bottom': '15px',
@@ -32,7 +32,7 @@ const MobileMenu = ({ textColor, children, className }: Props): JSX.Element => {
   let classes = useStyles({});
   return (
     <div className={clsx(className, classes.root)}>
-      <HamburgerIcon />
+      <HamburgerIcon width="29px" height="22px" />
     </div>
   );
 };

@@ -48,7 +48,7 @@ function arrowGenerator(): any {
   };
 }
 
-const CustomTooltip = withStyles((theme: Theme) => ({
+const CustomTooltip: any = withStyles((theme: Theme) => ({
   tooltip: {
     color: theme.palette.info.dark,
     boxShadow: theme.shadows[3],

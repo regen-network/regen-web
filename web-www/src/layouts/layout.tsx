@@ -56,11 +56,7 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
         transparent
         color={matches ? desktopColor : theme.palette.primary.light}
       />
-      <div
-        style={{
-          margin: `0 auto`,
-        }}
-      >
+      <div>
         <main>{children}</main>
         <footer></footer>
       </div>

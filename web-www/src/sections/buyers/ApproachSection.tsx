@@ -3,43 +3,17 @@ import { makeStyles, Theme } from '@material-ui/core';
 import Img from "gatsby-image";
 import { useStaticQuery, graphql } from 'gatsby';
 
-import Title from 'web-components/lib/components/title';
 import { ImageItemProps } from 'web-components/lib/components/image-item';
 import ImageItems from 'web-components/lib/components/sliders/ImageItems';
 import Section from '../../components/Section';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    [theme.breakpoints.up('sm')]: {
-      paddingTop: theme.spacing(22.25),
-    },
     [theme.breakpoints.down('xs')]: {
-      paddingTop: theme.spacing(17.75),
-    },
-  },
-  title: {
-    lineHeight: '140%',
-    [theme.breakpoints.up('sm')]: {
-      paddingRight: '8%',
-      paddingLeft: '8%',
-    },
-  },
-  container: {
-    [theme.breakpoints.down('xs')]: {
-      flexWrap: 'nowrap',
-      overflowX: 'auto',
-      paddingTop: theme.spacing(11.75),
+      paddingBottom: theme.spacing(14),
     },
     [theme.breakpoints.up('sm')]: {
-      paddingTop: theme.spacing(8),
-    },
-  },
-  item: {
-    display: 'flex',
-    [theme.breakpoints.down('xs')]: {
-      flex: '0 0 auto',
-      marginRight: theme.spacing(4),
-      maxWidth: '75%',
+      paddingBottom: theme.spacing(25),
     },
   },
 }));
@@ -80,10 +54,7 @@ const ApproachSection = () => {
   }));
 
   return (
-    <Section className={classes.root}>
-      <Title className={classes.title} variant="subtitle1" align="center">
-        {content.header}
-      </Title>
+    <Section withSlider className={classes.root} title={content.header}>
       <ImageItems items={imageItems} />
     </Section>
   );

@@ -11,8 +11,12 @@ import Tooltip from 'web-components/lib/components/tooltip';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-	paddingTop: theme.spacing(7),
-	paddingBottom: theme.spacing(7),
+	paddingTop: theme.spacing(25),
+	paddingBottom: theme.spacing(25),
+	[theme.breakpoints.down('xs')]:{
+		paddingTop: theme.spacing(20),
+		paddingBottom: theme.spacing(20),	
+	},
     height: 'min-content',
     color: theme.palette.primary.contrastText,
     'background-color': theme.palette.primary.main,
@@ -43,7 +47,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       'padding-right': theme.spacing(3),
       '& p': {
         color: theme.palette.info.dark,
-        'margin-bottom': theme.spacing(3),
+        'margin-bottom': theme.spacing(6.75),
       },
     },
   },
@@ -66,24 +70,18 @@ const useStyles = makeStyles((theme: Theme) => ({
     color: theme.palette.info.main,
     'margin-bottom': theme.spacing(5),
     'font-weight': 800,
-    'font-size': '1.125rem',
+    'font-size': '1.3125rem',
     'letter-spacing': '1px',
     'line-height': '23px',
   },
   smallTitle: {
+	marginTop: theme.spacing(6.5),
+	'text-transform': 'uppercase',
     color: theme.palette.info.dark,
     'font-weight': 800,
     'font-size': '1.125rem',
     'letter-spacing': '1px',
     'line-height': '23px',
-  },
-  icon: {
-    position: 'absolute',
-    width: '95%',
-    height: '95%',
-    top: '52%',
-    left: '33%',
-    transform: 'translate(-50%, -50%)',
   },
   container: {
   },
@@ -108,27 +106,21 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   popover: {
 	'cursor': 'pointer',
-	'text-decoration-line': 'underline',
-	'text-decoration-style': 'dotted',
+    borderBottom: '3px dashed #b0ddc0',
+  },
+  h3: {
+	  marginTop: theme.spacing(3.5)
   }
 }));
 
 const MarketplaceSection = () => {
   const data = useStaticQuery(graphql`
     query {
-      ellipse: file(relativePath: { eq: "green-ellipse.png" }) {
-        childImageSharp {
-          fixed(quality: 90, width: 159) {
-            ...GatsbyImageSharpFixed_withWebp
-          }
-        }
-      }
       text: contentYaml {
         marketplaceSection {
           header
 		  tooltip
           body {
-			  start
 			  green
 			  middle
 			  popover
@@ -137,7 +129,7 @@ const MarketplaceSection = () => {
           callToActions {
             image {
               childImageSharp {
-                fixed(quality: 90, width: 100) {
+                fixed(quality: 90, width: 159) {
                   ...GatsbyImageSharpFixed_withWebp
                 }
               }
@@ -159,20 +151,14 @@ const MarketplaceSection = () => {
     <Section className={classes.root}>
       <div className={classes.inner}>
         <div className={classes.smallTag}>{content.header}</div>
-        <Title variant="h2" align="center">{content.body.start}<span className={classes.green}>{content.body.green}</span>{content.body.middle}<Tooltip title={content.tooltip}><span className={classes.popover}>{content.body.popover}</span></Tooltip>{content.body.end}</Title>
+  <Title variant="h2" align="center"><span className={classes.green}>{content.body.green}{' '}</span>{content.body.middle}{' '}<Tooltip arrow placement="top" title={content.tooltip}><span className={classes.popover}>{content.body.popover}{' '}</span></Tooltip>{content.body.end}</Title>
         <Grid className={classes.container} container spacing={3}>
           {content.callToActions.map(cta => {
             return (
               <Grid key={cta.header} className={classes.gridItem} item xs>
-                <BackgroundImage
-                  className={classes.bgdiv}
-                  Tag="div"
-                  fixed={data.ellipse.childImageSharp.fixed}
-                >
-                  <Img fixed={cta.image.childImageSharp.fixed} className={classes.icon} />
-                </BackgroundImage>
+                  <Img fixed={cta.image.childImageSharp.fixed} />
                 <div className={classes.smallTitle}>{cta.caption}</div>
-                <Title variant="h3" align="center">
+                <Title className={classes.h3} variant="h3" align="center">
                   {cta.header}
                 </Title>
                 <p>{cta.description}</p>

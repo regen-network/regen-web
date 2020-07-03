@@ -12,6 +12,9 @@ marketplaceSection:
       header: 'Purchase credits'
       description: 'Whether you are an individual or a business looking to take climate action, we make it easy to sponsor ecological practices.'
       linkText: 'Browse Projects'
+foldSection:
+  tagline: Platform for a Thriving Planet
+  description: Regen Network aligns economics with ecology to drive regenerative land management.
 carbonPlusSection:
   smallHeader: 'Featured Credit: CarbonPlus'
   smallHeaderApplyGreen: 'CarbonPlus'

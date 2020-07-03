@@ -39,7 +39,10 @@ const useStyles = makeStyles((theme: Theme) => ({
       'margin-bottom': '0px',
       'line-height': '150%',
       'font-family': 'Lato',
-      'font-size': '1.375rem',
+	  'font-size': '1.375rem',
+	  [theme.breakpoints.down("xs")]: {
+		  fontSize: "1rem"
+	  }
     },
     '& .MuiGrid-item.MuiGrid-root': {
       padding: theme.spacing(1),
@@ -61,7 +64,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     padding: '0px',
   },
   inner: {
-    'max-width': '85%',
+	[theme.breakpoints.up('sm')]: {
+		'max-width': '85%',
+	},
     margin: '0 auto',
   },
   smallTag: {
@@ -79,7 +84,10 @@ const useStyles = makeStyles((theme: Theme) => ({
 	'text-transform': 'uppercase',
     color: theme.palette.info.dark,
     'font-weight': 800,
-    'font-size': '1.125rem',
+	'font-size': '1.125rem',
+	[theme.breakpoints.down("xs")]:{
+		fontSize: '0.875rem'
+	},
     'letter-spacing': '1px',
     'line-height': '23px',
   },
@@ -93,7 +101,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   button: {
     [theme.breakpoints.down('xs')]: {
-      padding: `${theme.spacing(1)} ${theme.spacing(2)}`,
+      padding: `${theme.spacing(4)} ${theme.spacing(4)}`,
       fontSize: theme.spacing(4.5),
     },
     [theme.breakpoints.up('sm')]: {
@@ -109,7 +117,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     borderBottom: '3px dashed #b0ddc0',
   },
   h3: {
-	  marginTop: theme.spacing(3.5)
+	  marginTop: theme.spacing(3.5),
+	  [theme.breakpoints.down("xs")]: {
+		  fontSize: "1.3125rem",
+	  }
   }
 }));
 

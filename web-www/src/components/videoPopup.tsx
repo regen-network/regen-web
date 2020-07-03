@@ -22,8 +22,8 @@ const useStyles = makeStyles(theme => ({
       height: '112px',
     },
     [theme.breakpoints.down('xs')]: {
-      width: '80px',
-      height: '80px',
+      width: '70px',
+      height: '70px',
     },
     backgroundColor: theme.palette.primary.main,
     borderRadius: '50%',

@@ -1,15 +1,15 @@
 import React from 'react';
 import SvgIcon from '@material-ui/core/SvgIcon';
-// import { makeStyles, Theme } from '@material-ui/core';
 
 interface Props {
   color?: string;
+  className?: string;
 }
 
-export default function RegenIcon({ color }: Props): JSX.Element {
+export default function RegenIcon({ color, className }: Props): JSX.Element {
   color = color ? color : '#000';
   return (
-    <SvgIcon viewBox="0 0 361 161">
+    <SvgIcon viewBox="0 0 361 161" className={className}>
       <path
         fillRule="evenodd"
         clipRule="evenodd"

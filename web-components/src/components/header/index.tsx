@@ -41,11 +41,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   menuItem: {
-    [theme.breakpoints.down('xs')]: {
-      position: 'absolute',
-      left: '85vw',
-      top: '1vh',
-    },
+    // [theme.breakpoints.down('xs')]: {
+    //   'margin-right': '2em',
+    // },
   },
   logoItem: {
     [theme.breakpoints.down('xs')]: {},
@@ -110,11 +108,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.down('xs')]: {
       padding: `${theme.spacing(2.5)} ${theme.spacing(3.75)}`,
       height: theme.spacing(15),
-      '& svg': {
-        // fontSize: '5rem',
-        height: theme.spacing(10.25),
-        width: theme.spacing(23),
-      },
     },
     [theme.breakpoints.up('xl')]: {
       paddingRight: theme.spacing(5),
@@ -132,6 +125,12 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   menuIcon: {
     color: theme.palette.primary.contrastText,
+  },
+  regenIcon: {
+    [theme.breakpoints.down('xs')]: {
+      height: theme.spacing(10.25),
+      width: theme.spacing(23),
+    },
   },
 }));
 
@@ -188,7 +187,7 @@ export default function Header({
       >
         <Grid className={classes.logoItem} item>
           <a href="/">
-            <RegenIcon color={color} />
+            <RegenIcon className={classes.regenIcon} color={color} />
           </a>
         </Grid>
         <Grid className={classes.menuItem} item>

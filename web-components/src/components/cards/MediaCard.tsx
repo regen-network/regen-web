@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 import CardMedia from '@material-ui/core/CardMedia';
 import { Variant } from '@material-ui/core/styles/createTypography';
+import clsx from 'clsx';
 
 import Card from './Card';
 import Title from '../title';
@@ -19,20 +20,16 @@ export interface MediaCardProps {
   borderRadius?: string;
 }
 
-interface StyleProps {
-  titleVariant: Variant;
-}
-
-const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
+const useStyles = makeStyles((theme: Theme) => ({
   root: {
     height: '100%',
     width: '100%',
     display: 'flex',
     flexDirection: 'column',
+    position: 'relative',
   },
   image: {
     height: theme.spacing(48.75),
-    cursor: 'pointer',
     position: 'relative',
   },
   tag: {
@@ -58,15 +55,19 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     borderRadius: '9px 9px 0px 0px',
     background: 'linear-gradient(180.28deg, rgba(0, 0, 0, 0) 65.91%, rgba(0, 0, 0, 0.6) 99.59%)',
   },
-  title: props => ({
+  title: {
     [theme.breakpoints.up('sm')]: {
       padding: `${theme.spacing(4.5)} ${theme.spacing(5.25)} ${theme.spacing(3)}`,
     },
     [theme.breakpoints.down('xs')]: {
       padding: `${theme.spacing(4)} ${theme.spacing(4.5)} ${theme.spacing(3)}`,
-      fontSize: props.titleVariant === 'h4' ? theme.spacing(4.5) : 'inherit',
     },
-  }),
+  },
+  h4title: {
+    [theme.breakpoints.down('xs')]: {
+      fontSize: theme.spacing(4.5),
+    },
+  },
 }));
 
 export default function MediaCard({
@@ -81,7 +82,7 @@ export default function MediaCard({
   borderRadius,
   tag,
 }: MediaCardProps): JSX.Element {
-  const classes = useStyles({ titleVariant });
+  const classes = useStyles({});
 
   return (
     <Card
@@ -96,7 +97,10 @@ export default function MediaCard({
           <div className={classes.backgroundGradient} />
           {tag && <div className={classes.tag}>{tag}</div>}
         </CardMedia>
-        <Title className={titleVariant === 'h4' ? classes.title : ''} variant={titleVariant}>
+        <Title
+          className={titleVariant === 'h4' ? clsx(classes.h4title, classes.title) : classes.title}
+          variant={titleVariant}
+        >
           {name}
         </Title>
         {children}

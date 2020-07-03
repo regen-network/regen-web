@@ -53,12 +53,12 @@ const useStyles = makeStyles((theme: Theme) => ({
       display: 'flex',
     },
     '& li': {
-      paddingRight: '29.5px',
-      paddingLeft: '29.5px',
+      paddingRight: theme.spacing(7.375),
+      paddingLeft: theme.spacing(7.375),
     },
-    '& li.MuiListItem-button': {
+    '& li.MuiListItem-button > a, li.MuiListItem-button > div > span': {
       '& :hover': {
-        borderBottom: '3px dashed #b0ddc0',
+        borderBottom: '3px solid #b0ddc0',
       },
       'background-color': 'inherit',
       'text-decoration': 'none',

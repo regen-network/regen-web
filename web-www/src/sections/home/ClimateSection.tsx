@@ -17,7 +17,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(20.75),
-      paddingBottom: theme.spacing(20.75),
     },
   },
   card: {

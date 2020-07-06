@@ -1,15 +1,11 @@
 import React, { useState, useRef } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Popover, MenuList, Paper, Theme } from '@material-ui/core';
+import DropDownIcon from '../icons/DropDownIcon';
 
 //replacing #000 on line 15, color property, with theme.palette.primary.contrastText doesn't yield black text in the dropdown. Not sure why
 const useStyles = makeStyles((theme: Theme) => ({
-  root: {
-    '& svg': {
-      position: 'relative',
-      top: '-1px',
-    },
-  },
+  root: {},
   popover: {
     pointerEvents: 'none',
   },
@@ -73,12 +69,7 @@ const MenuHover = ({ text, textColor, children }: Props): JSX.Element => {
       >
         {text}
       </span>{' '}
-      <svg width="11" height="8" viewBox="0 0 11 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path
-          d="M5.69995 7.7336C5.59994 7.86684 5.40006 7.86684 5.30005 7.7336L0.171111 0.900071C0.0474202 0.735273 0.165005 0.5 0.371057 0.5L10.6289 0.500001C10.835 0.500001 10.9526 0.735274 10.8289 0.900072L5.69995 7.7336Z"
-          fill="#B9E1C7"
-        />
-      </svg>
+      <DropDownIcon />
       <Popover
         id="mouse-over-popover"
         className={classes.popover}

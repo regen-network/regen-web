@@ -16,8 +16,8 @@ const IndexPage = (): JSX.Element => {
       <MarketplaceSection />
       <EmailSubmitSection />
       <CarbonPlusSection />
-      <HomeLedger></HomeLedger>
-      <HomeValuesSection></HomeValuesSection>
+      <HomeLedger />
+      <HomeValuesSection />
     </>
   );
 };

@@ -1,55 +1,92 @@
 import React from 'react';
 import BackgroundImage from 'gatsby-background-image';
 import clsx from 'clsx';
-import { graphql, StaticQuery, useStaticQuery } from 'gatsby';
-import Grid, { GridSpacing } from '@material-ui/core/Grid';
+import { graphql, useStaticQuery } from 'gatsby';
+import Grid from '@material-ui/core/Grid';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles, Theme, useTheme } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import Title from 'web-components/lib/components/title';
 import Img from 'gatsby-image';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 let useStyles = makeStyles((theme: Theme) => ({
-  section: {
-    height: 'min-content',
-    'font-size': theme.typography.body2.fontSize,
-    'padding-top': theme.spacing(30),
-    'padding-bottom': theme.spacing(45),
-    'text-align': 'center',
-    '& p': {
-      'max-width': theme.spacing(100),
-      'text-align': 'left',
-      color: theme.palette.primary.contrastText,
+  grid: {
+    [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
+      paddingTop: theme.spacing(20),
+      paddingBottom: theme.spacing(51.25),
+    },
+    [theme.breakpoints.up(theme.breakpoints.values.tablet)]: {
+      paddingTop: theme.spacing(24.25),
+      paddingRight: theme.spacing(30.25),
+      paddingBottom: theme.spacing(39.5),
+    },
+  },
+  title: {
+    [theme.breakpoints.down('xs')]: {
+      fontSize: theme.spacing(6),
+    },
+    [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
+      paddingTop: theme.spacing(10),
     },
   },
   img: {
-    'min-width': 'fit-content',
-    'margin-right': theme.spacing(10),
+    width: '100%',
   },
-  grid: {
-    width: 'auto',
-    display: 'inline-flex',
+  imgContainer: {
+    [theme.breakpoints.up(theme.breakpoints.values.tablet)]: {
+      paddingRight: theme.spacing(25),
+      flexGrow: 0,
+      maxWidth: '45%',
+      flexBasis: '45%',
+    },
+    [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
+      paddingRight: theme.spacing(4),
+      width: '100%',
+    },
   },
   button: {
     [theme.breakpoints.down('xs')]: {
-      padding: `${theme.spacing(1)} ${theme.spacing(2)}`,
+      height: theme.spacing(12.5),
       fontSize: theme.spacing(4.5),
     },
     [theme.breakpoints.up('sm')]: {
-      padding: `${theme.spacing(2)} ${theme.spacing(8.5)}`,
-      fontSize: theme.spacing(4.5),
+      height: theme.spacing(15),
+      fontSize: theme.spacing(5.25),
+    },
+  },
+  description: {
+    color: theme.palette.info.dark,
+    [theme.breakpoints.down('xs')]: {
+      fontSize: theme.spacing(4),
+      lineHeight: '150%',
+      paddingTop: theme.spacing(3),
+      paddingBottom: theme.spacing(6),
+    },
+    [theme.breakpoints.up('sm')]: {
+      fontSize: theme.spacing(5.5),
+      lineHeight: '160%',
+      paddingTop: theme.spacing(5),
+      paddingBottom: theme.spacing(8.5),
     },
   },
   green: {
     color: theme.palette.secondary.main,
   },
+  text: {
+    [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
+      paddingRight: theme.spacing(4),
+      paddingLeft: theme.spacing(4),
+    },
+    [theme.breakpoints.up(theme.breakpoints.values.tablet)]: {
+      flexGrow: 0,
+      maxWidth: '55%',
+      flexBasis: '55%',
+    },
+  },
 }));
 
-interface Props {
-  className?: string;
-}
-
-const HomeLedger = ({ className }: Props) => {
+const HomeLedger = () => {
   const data = useStaticQuery(graphql`
     query {
       bg: file(relativePath: { eq: "farm-background.png" }) {
@@ -61,35 +98,46 @@ const HomeLedger = ({ className }: Props) => {
       }
       ledger: file(relativePath: { eq: "ledger.png" }) {
         childImageSharp {
-          fixed(quality: 90, width: 300) {
-            ...GatsbyImageSharpFixed_withWebp
+          fluid(quality: 90) {
+            ...GatsbyImageSharpFluid_withWebp
           }
+        }
+      }
+      text: contentYaml {
+        ledgerSection {
+          description
         }
       }
     }
   `);
-  let classes = useStyles();
+  const classes = useStyles();
+  const theme = useTheme();
+  const desktop = useMediaQuery(theme.breakpoints.up('tablet'));
+  const content = data.text.ledgerSection; // TODO add title content to yaml once structure for styling set
+  
   return (
-    <BackgroundImage
-      Tag="section"
-      className={clsx(classes.section, className)}
-      fluid={data.bg.childImageSharp.fluid}
-    >
-      <Grid className={classes.grid} wrap="nowrap" container spacing={3}>
-        <Grid className={classes.img} item sm={4}>
-          <Img fixed={data.ledger.childImageSharp.fixed}></Img>
+    <BackgroundImage Tag="section" fluid={data.bg.childImageSharp.fluid}>
+      <Grid
+        className={classes.grid}
+        container
+        alignItems="center"
+        wrap="nowrap"
+        direction={desktop ? 'row' : 'column'}
+      >
+        <Grid className={classes.imgContainer} item xs={12}>
+          <Img className={classes.img} fluid={data.ledger.childImageSharp.fluid} />
         </Grid>
-        <Grid item sm={6} md={8}>
-          <Title align="left" variant="h2">
-            The <span className={classes.green}>Regen Ledger</span> powers our work
+        <Grid item xs={12} className={classes.text}>
+          <Title align="left" variant="h1" className={classes.title}>
+            <span className={classes.green}>Regen Ledger</span> powers{' '}
+            <span className={classes.green}>Regen Registry</span>
           </Title>
-          <Typography variant="body1">
-            Regen Ledger is a public, proof of stake (POS) blockchain developed with the Cosmos Software
-            Development Kit (SDK) built for verification of claims, agreements & data related to ecological
-            state. Regen Ledger enables multiple registries to communicate and transact with each other
-            producing a public ecological accounting system. Get involved with our community of developers.
+          <Typography className={classes.description}>
+            {content.description}
           </Typography>
-          <ContainedButton className={classes.button}>Learn More</ContainedButton>
+          <ContainedButton href="/developers" className={classes.button}>
+            Learn More
+          </ContainedButton>
         </Grid>
       </Grid>
     </BackgroundImage>

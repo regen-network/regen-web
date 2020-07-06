@@ -1,27 +1,42 @@
 import React from 'react';
 import { makeStyles, Theme, useTheme } from '@material-ui/core';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
 import { useStaticQuery, graphql } from 'gatsby';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Img from 'gatsby-image';
 import ReactHtmlParser from 'react-html-parser'; 
+import clsx from 'clsx';
 
-import Section from '../../components/Section';
 import Title from 'web-components/lib/components/title';
 import Card from 'web-components/lib/components/cards/Card';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     position: 'relative',
+    [theme.breakpoints.up('md')]: {
+      paddingTop: theme.spacing(9),
+    },
+    [theme.breakpoints.down('sm')]: {
+      paddingTop: theme.spacing(20.75),
+      paddingBottom: theme.spacing(20.75),
+    },
   },
   card: {
-    padding: `${theme.spacing(3.75)} ${theme.spacing(5)}`,
+    [theme.breakpoints.up('md')]: {
+      padding: theme.spacing(5),
+      width: theme.spacing(83.75),
+      position: 'absolute',
+    },
+    [theme.breakpoints.down('sm')]: {
+      padding: `${theme.spacing(6)} ${theme.spacing(5)}`,
+    },
   },
   title: {
     lineHeight: '145%',
     [theme.breakpoints.down('xs')]: {
       fontSize: theme.spacing(6),
+    },
+    [theme.breakpoints.down('sm')]: {
+      paddingBottom: theme.spacing(3),
     },
   },
   cardTitle: {
@@ -35,11 +50,117 @@ const useStyles = makeStyles((theme: Theme) => ({
       lineHeight: theme.spacing(4.5),
     },
   },
+  cardContent: {
+    color: theme.palette.info.dark,
+    paddingTop: theme.spacing(2),
+    [theme.breakpoints.up('xs')]: {
+      fontSize: theme.spacing(4.5),
+    },
+  },
   description: {
     lineHeight: '140%',
     color: theme.palette.info.dark,
     [theme.breakpoints.down('xs')]: {
       fontSize: theme.spacing(5.25),
+    },
+  },
+  image: {
+    [theme.breakpoints.up('md')]: {
+      width: '60%',
+    },
+    [theme.breakpoints.down('sm')]: {
+      width: '100%',
+    },
+  },
+  line: {
+    position: 'absolute',
+    borderTop: `1px solid ${theme.palette.grey[100]}`,
+  },
+  problemLine: {
+    zIndex: -1,
+    [theme.breakpoints.up('md')]: {
+      transform: 'rotate(78.11deg)',
+      width: theme.spacing(115),
+      bottom: theme.spacing(60),
+      left: '0',
+    },
+    [theme.breakpoints.up('xl')]: {
+      width: theme.spacing(70),
+      bottom: theme.spacing(57),
+      left: '5%',
+    },
+    [theme.breakpoints.down('sm')]: {
+      transform: 'rotate(116.57deg)',
+      width: theme.spacing(65),
+      top: theme.spacing(70),
+      left: theme.spacing(-5),
+    },
+    [theme.breakpoints.down('xs')]: {
+      top: theme.spacing(50),
+      left: theme.spacing(-15),
+    }, 
+  },
+  solutionLine: {
+    [theme.breakpoints.up('md')]: {
+      transform: 'rotate(9.71deg)',
+      width: theme.spacing(57.75),
+      right: 'calc(6% + 20.9375rem - 4px)',
+      top: theme.spacing(52),
+    },
+    [theme.breakpoints.up('xl')]: {
+      top: theme.spacing(58),
+      width: '25%',
+    },
+    [theme.breakpoints.down('sm')]: {
+      zIndex: -1,
+      transform: 'rotate(68.36deg)',
+      right: '12%',
+      width: theme.spacing(87.5),
+      top: theme.spacing(-20),
+    },
+    [theme.breakpoints.down('xs')]: {
+      width: theme.spacing(37.5),
+    },
+  },
+  problemCard: {
+    [theme.breakpoints.up('md')]: {
+      left: '10%',
+      bottom: 0,
+    },
+    [theme.breakpoints.down('sm')]: {
+      marginRight: '20%',
+      marginLeft: theme.spacing(5),
+    },
+  },
+  solutionCard: {
+    [theme.breakpoints.up('md')]: {
+      right: '6%',
+      top: theme.spacing(48.5),
+    },
+    [theme.breakpoints.up('xl')]: {
+      top: theme.spacing(60),
+    },
+    [theme.breakpoints.down('sm')]: {
+      position: 'relative',
+      overflow: 'visible',
+      marginLeft: '30%',
+      marginRight: theme.spacing(5),
+      marginTop: theme.spacing(-11.25),
+    },
+  },
+  titleContainer: {
+    [theme.breakpoints.up('md')]: {
+      paddingLeft: 'calc(15% + 20.9375rem)',
+      paddingRight: '8%',
+      marginTop: '-10%',
+    },
+    [theme.breakpoints.up('xl')]: {
+      marginTop: 0,
+    },
+    [theme.breakpoints.down('sm')]: {
+      paddingTop: theme.spacing(15),
+      paddingRight: theme.spacing(4),
+      paddingLeft: theme.spacing(4),
     },
   },
 }));
@@ -62,8 +183,8 @@ const ClimateSection = () => {
           }
           image {
             childImageSharp {
-              fixed(quality: 90) {
-                ...GatsbyImageSharpFixed_withWebp
+              fluid(quality: 90) {
+                ...GatsbyImageSharpFluid_withWebp
               }
             }
           }
@@ -73,26 +194,44 @@ const ClimateSection = () => {
   `);
   const classes = useStyles();
   const theme = useTheme();
-
+  const downSm = useMediaQuery(theme.breakpoints.down('sm'));
   const content = data.text.climateSection;
+
   return (
-    <Section className={classes.root}>
-      <Title variant="h1" className={classes.title}>
-        {content.header}
-      </Title>
-      <Title variant="h3" className={classes.description}>
-        {ReactHtmlParser(content.description)}
-      </Title>
-      <Img fixed={content.image.childImageSharp.fixed} />
-      <Card className={classes.card} borderColor={theme.palette.grey['100']} borderRadius="10px">
-        <Title className={classes.cardTitle} variant="body2">{content.solution.header}</Title>
-        <p>{content.solution.description}</p>
+    <div className={classes.root}>
+      <hr className={clsx(classes.line, classes.problemLine)} />
+      <Card
+        className={clsx(classes.card, classes.problemCard)}
+        borderColor={theme.palette.grey['100']}
+        borderRadius="10px"
+      >
+        <Title className={classes.cardTitle} variant="body2">
+          {content.problem.header}
+        </Title>
+        <div className={classes.cardContent}>{content.problem.description}</div>
       </Card>
-      <Card className={classes.card} borderColor={theme.palette.grey['100']} borderRadius="10px">
-        <Title className={classes.cardTitle} variant="body2">{content.problem.header}</Title>
-        <p>{content.problem.description}</p>
+      <Img className={classes.image} fluid={content.image.childImageSharp.fluid} />
+      {!downSm && <hr className={clsx(classes.line, classes.solutionLine)} />}
+      <Card
+        className={clsx(classes.card, classes.solutionCard)}
+        borderColor={theme.palette.grey['100']}
+        borderRadius="10px"
+      >
+        <Title className={classes.cardTitle} variant="body2">
+          {content.solution.header}
+        </Title>
+        <div className={classes.cardContent}>{content.solution.description}</div>
+        {downSm && <hr className={clsx(classes.line, classes.solutionLine)} />}
       </Card>
-    </Section>
+      <div className={classes.titleContainer}>
+        <Title variant="h1" className={classes.title}>
+          {content.header}
+        </Title>
+        <Title variant="h3" className={classes.description}>
+          {ReactHtmlParser(content.description)}
+        </Title>
+      </div>
+    </div>
   );
 };
 

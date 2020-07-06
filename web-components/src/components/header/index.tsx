@@ -56,7 +56,10 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingRight: theme.spacing(7.375),
       paddingLeft: theme.spacing(7.375),
     },
-    '& li.MuiListItem-button, li.MuiListItem-button > div > span': {
+    '& li.MuiListItem-button, li.MuiListItem-button > div': {
+      '& span:hover, svg:hover, path:hover': {
+        borderBottom: 'none',
+      },
       '& :hover': {
         'background-color': 'inherit',
         borderBottom: '3px solid #b0ddc0',

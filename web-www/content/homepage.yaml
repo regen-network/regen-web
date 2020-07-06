@@ -88,3 +88,6 @@ comingSoonSection: # TODO same as above
       location: "South Australia, Australia"
       area: 200
       areaUnit: "hectares"
+newsletterSection:
+  header: Join the movement to incentivize regeneration.
+  description: sign up for our newsletter

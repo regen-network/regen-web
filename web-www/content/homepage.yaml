@@ -26,12 +26,11 @@ foldSection:
   tagline: Platform for a Thriving Planet
   description: Regen Network aligns economics with ecology to drive regenerative land management.
 carbonPlusSection:
-  smallHeader: 'Featured Credit: CarbonPlus'
-  smallHeaderApplyGreen: 'CarbonPlus'
-  header: 'CarbonPlus Credits remove carbon and restore natural grassland ecosystems'
-  headerApplyItalicize: 'Plus'
-  descriptionOne: 'Shifting to managed grazing can potentially sequester 16.4 ------- 26 CO2e (Gt) by 2050. Wilmot Cattle Co. has increased soil organic carbon to 4.5% and removed over 30,000 tons of CO2e in two years.'
-  descriptionTwo: 'Co-benefits include ecosystem health, animal welfare and soil health.'
+  smallHeader:
+    featured: 'Featured Credits:'
+    creditName: 'Carbon<i>Plus</i>'
+  header: 'Carbon<i>Plus</i> Credits remove carbon and restore natural grassland ecosystems'
+  description: 'Shifting to managed grazing can potentially sequester 16.4 ------- 26 CO2e (Gt) by 2050. Wilmot Cattle Co. has increased soil organic carbon to 4.5% and removed over 30,000 tons of CO2e in two years.<br><br>Co-benefits include ecosystem health, animal welfare and soil health.'
   linkText: 'Buy'
 topSection: # TODO put in another file buyers.yaml
   header: 'Meet your climate commitments. Regenerate the planet.'

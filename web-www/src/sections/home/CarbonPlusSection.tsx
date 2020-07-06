@@ -2,9 +2,11 @@ import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import { makeStyles, useTheme, Theme } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
 import Title from 'web-components/lib/components/title';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import Img from 'gatsby-image';
+import ReactHtmlParser from 'react-html-parser'; 
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {},
@@ -23,6 +25,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   smallHeader: {
     color: theme.palette.primary.contrastText,
   },
+  creditName: {
+    color: theme.palette.secondary.main,
+  },
 }));
 
 const CarbonplusSection = () => {
@@ -37,12 +42,12 @@ const CarbonplusSection = () => {
       }
       text: contentYaml {
         carbonPlusSection {
-          smallHeader
-          smallHeaderApplyGreen
+          smallHeader {
+            featured
+            creditName
+          }
           header
-          headerApplyItalicize
-          descriptionOne
-          descriptionTwo
+          description
           linkText
         }
       }
@@ -54,25 +59,19 @@ const CarbonplusSection = () => {
 
   return (
     <section>
-      <div className={classes.textBlock}>
-        <Typography
-          className={classes.smallHeader}
-          dangerouslySetInnerHTML={{
-            __html: content.smallHeader.replace(
-              content.smallHeaderApplyGreen,
-              `<span style="color:${theme.palette.secondary.main}">${content.smallHeaderApplyGreen}</span>`,
-            ),
-          }}
-        ></Typography>
-        <Title variant="h3">CarbonPlus Credits remove carbon and restore natural grassland ecosystems</Title>
-        <Typography variant="body2">
-          Shifting to managed grazing can potentially sequester 16.4 ------- 26 CO2e (Gt) by 2050. Wilmot
-          Cattle Co. has increased soil organic carbon to 4.5% and removed over 30,000 tons of CO2e in two
-          years. Co-benefits include ecosystem health, animal welfare and soil health.
-        </Typography>
-      </div>
-      <Img className={classes.img} fixed={data.cow.childImageSharp.fixed} />
-      <div style={{ clear: 'both' }} />
+      <Grid container className={classes.textBlock}>
+        <Grid item>
+          <Typography className={classes.smallHeader}>
+            <span>{content.smallHeader.featured}</span>
+            <span className={classes.creditName}>{ReactHtmlParser(content.smallHeader.creditName)}</span>
+          </Typography>
+          <Title variant="h3">{ReactHtmlParser(content.header)}</Title>
+          <Typography variant="body2">{ReactHtmlParser(content.description)}</Typography>
+        </Grid>
+        <Grid item>
+          <Img className={classes.img} fixed={data.cow.childImageSharp.fixed} />
+        </Grid>
+      </Grid>
     </section>
   );
 };

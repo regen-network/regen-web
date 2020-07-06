@@ -17,7 +17,7 @@ let useStyles = makeStyles((theme: Theme) => ({
     'text-align': 'center',
     color: theme.palette.primary.main,
     width: '100%',
-    height: '75vh',
+    height: '90vh',
     'background-position': 'bottom center',
     'background-repeat': 'repeat-y',
     'background-size': 'cover',

@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     lineHeight: '140%',
   },
   featured: {
-    color: theme.palette.info.dark,
+    color: theme.palette.info.main,
   },
   creditName: {
     color: theme.palette.secondary.main,
@@ -113,7 +113,7 @@ const CarbonplusSection = () => {
 
   return (
     <div className={classes.root}>
-      <Grid container wrap="nowrap" direction={desktop ? 'row' : 'column-reverse'}>
+      <Grid container wrap="nowrap" alignItems={desktop && 'center'} direction={desktop ? 'row' : 'column-reverse'}>
         <Grid item xs={12} className={classes.text}>
           <Title variant="h6" className={classes.smallHeader}>
             <span className={classes.featured}>{content.smallHeader.featured} </span>

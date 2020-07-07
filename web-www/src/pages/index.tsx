@@ -13,17 +13,7 @@ import ClimateSection from '../sections/home/ClimateSection';
 import CarbonPlusSection from '../sections/home/CarbonPlusSection';
 import EmailSubmitSection from '../sections/shared/EmailSubmitSection';
 
-const useStyles = makeStyles((theme: Theme) => ({
-  image: {
-    backgroundSize: 'cover',
-    '&:before, :after': {
-      height: '70% !important',
-    },
-  },
-}));
-
 const IndexPage = (): JSX.Element => {
-  const classes = useStyles();
   const theme = useTheme();
   const data = useStaticQuery(graphql`
     query {
@@ -64,7 +54,6 @@ const IndexPage = (): JSX.Element => {
       Tag="div"
       fluid={data.background.childImageSharp.fluid}
       backgroundColor={theme.palette.grey['50']}
-      className={classes.image}
     >
       <ClimateSection />
       <CarbonPlusSection />

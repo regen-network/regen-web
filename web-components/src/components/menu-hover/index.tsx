@@ -69,7 +69,7 @@ const MenuHover = ({ text, textColor, children }: Props): JSX.Element => {
       >
         {text}
       </span>{' '}
-      <DropDownIcon color="#b0ddc0" />
+      <DropDownIcon />
       <Popover
         id="mouse-over-popover"
         className={classes.popover}

@@ -60,7 +60,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   description: {
     lineHeight: '140%',
-    color: theme.palette.info.dark,
+    color: theme.palette.info.main,
     [theme.breakpoints.down('xs')]: {
       fontSize: theme.spacing(5.25),
     },
@@ -120,7 +120,8 @@ const useStyles = makeStyles((theme: Theme) => ({
       top: theme.spacing(-20),
     },
     [theme.breakpoints.down('xs')]: {
-      width: theme.spacing(37.5),
+      width: theme.spacing(35),
+      top: theme.spacing(-16),
     },
   },
   problemCard: {
@@ -156,7 +157,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       marginTop: '-6%',
     },
     [theme.breakpoints.up('xl')]: {
-      marginTop: 0,
+      marginTop: '-8%',
     },
     [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(15),

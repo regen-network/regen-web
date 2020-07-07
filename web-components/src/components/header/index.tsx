@@ -171,21 +171,31 @@ export default function Header({
   if (desktop) {
     menu = (
       <MenuList className={classes.menuList}>
-        {menuItems?.map((item, index) => (
-          <MenuItem key={index}>
-            {item.dropdownItems ? (
-              <MenuHover text={item.title}>
-                {item.dropdownItems.map((dropdownItem, index) => (
-                  <MenuItem key={index}>
-                    <Link href={dropdownItem.href}>{dropdownItem.title}</Link>
-                  </MenuItem>
-                ))}
-              </MenuHover>
-            ) : (
-              <Link href={item.href}>{item.title}</Link>
-            )}
-          </MenuItem>
-        ))}
+        {menuItems?.map((item, index) => {
+          return (
+            <MenuItem
+              key={index}
+              style={{
+                boxSizing: item.dropdownItems ? 'unset' : 'border-box',
+                height: item.dropdownItems ? 'unset' : '100%',
+              }}
+            >
+              {item.dropdownItems ? (
+                <MenuHover text={item.title}>
+                  {item.dropdownItems.map((dropdownItem, index) => {
+                    return (
+                      <MenuItem key={index}>
+                        <Link href={dropdownItem.href}>{dropdownItem.title}</Link>
+                      </MenuItem>
+                    );
+                  })}
+                </MenuHover>
+              ) : (
+                <Link href={item.href}>{item.title}</Link>
+              )}
+            </MenuItem>
+          );
+        })}
       </MenuList>
     );
   } else {

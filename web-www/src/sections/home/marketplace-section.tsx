@@ -31,10 +31,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       'margin-bottom': theme.spacing(2),
       'font-weight': 900,
     },
-    '& h3': {
-      'line-height': '140%',
-      'margin-bottom': theme.spacing(1),
-    },
     '& p': {
       'margin-bottom': '0px',
       'line-height': '150%',
@@ -77,7 +73,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     'font-weight': 800,
     'font-size': '1.3125rem',
     'letter-spacing': '1px',
-    'line-height': '23px',
+    'line-height': '27px',
   },
   smallTitle: {
 	marginTop: theme.spacing(6.5),
@@ -101,7 +97,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   button: {
     [theme.breakpoints.down('xs')]: {
-      padding: `${theme.spacing(4)} ${theme.spacing(4)}`,
+      padding: `${theme.spacing(1)} ${theme.spacing(2)}`,
       fontSize: theme.spacing(4.5),
     },
     [theme.breakpoints.up('sm')]: {
@@ -114,12 +110,16 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   popover: {
 	'cursor': 'pointer',
-    borderBottom: '3px dashed #b0ddc0',
+    borderBottom: `3px dashed ${theme.palette.secondary.main}`,
   },
   h3: {
 	  marginTop: theme.spacing(3.5),
+	  'line-height': '140%',
+      'margin-bottom': theme.spacing(2.4),
 	  [theme.breakpoints.down("xs")]: {
-		  fontSize: "1.3125rem",
+		marginTop: theme.spacing(3),
+		marginBottom: theme.spacing(3),
+		fontSize: "1.3125rem",
 	  }
   }
 }));
@@ -162,7 +162,7 @@ const MarketplaceSection = () => {
     <Section className={classes.root}>
       <div className={classes.inner}>
         <div className={classes.smallTag}>{content.header}</div>
-  <Title variant="h2" align="center"><span className={classes.green}>{content.body.green}{' '}</span>{content.body.middle}{' '}<Tooltip arrow placement="top" title={content.tooltip}><span className={classes.popover}>{content.body.popover}{' '}</span></Tooltip>{content.body.end}</Title>
+  <Title variant="h2" align="center"><span className={classes.green}>{content.body.green}{' '}</span>{content.body.middle}{' '}<Tooltip arrow placement="top" title={content.tooltip}><span className={classes.popover}>{content.body.popover}</span></Tooltip>{' '}{content.body.end}</Title>
         <Grid className={classes.container} container spacing={3}>
           {content.callToActions.map(cta => {
             return (

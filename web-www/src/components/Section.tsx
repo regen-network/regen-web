@@ -11,10 +11,12 @@ interface SectionProps {
   title?: string;
   titleVariant?: Variant;
   withSlider?: boolean;
+  titleLineHeight?: string;
 }
 
 interface StyleProps {
   withSlider: boolean;
+  titleLineHeight?: string;
 }
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
@@ -44,7 +46,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     },
   }),
   title: props => ({
-    lineHeight: '140%',
+    lineHeight: props.titleLineHeight || '140%',
     [theme.breakpoints.up('sm')]: {
       paddingRight: '8%',
       paddingLeft: '8%',
@@ -55,8 +57,8 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   }),
 }));
 
-const Section = ({ children, className, titleVariant = 'h2', title, withSlider = false }: SectionProps) => {
-  const classes = useStyles({ withSlider });
+const Section = ({ children, className, titleLineHeight, titleVariant = 'h2', title, withSlider = false }: SectionProps) => {
+  const classes = useStyles({ withSlider, titleLineHeight });
   return (
     <div className={clsx(classes.root, className)}>
       {title && (

@@ -27,7 +27,16 @@ let useStyles = makeStyles((theme: Theme) => ({
   section: {
     '& .MuiGrid-item': {
       'max-width': theme.spacing(70),
-    },
+	},
+	'& h1': {
+		[theme.breakpoints.down('xs')]: {
+			marginBottom: theme.spacing(5.5)
+		},
+		[theme.breakpoints.up('sm')]: {
+			marginBottom: theme.spacing(5.5)
+		},
+		
+	},
     '& h3': {
       'margin-bottom': theme.spacing(15),
       'line-height': '130%',
@@ -45,15 +54,6 @@ let useStyles = makeStyles((theme: Theme) => ({
     height: 'min-content',
     'padding-bottom': theme.spacing(15),
     'padding-top': theme.spacing(15),
-  },
-  ellipse: {},
-  icon: {
-    position: 'absolute',
-    width: '80%',
-    height: '80%',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
   },
   title: {
     [theme.breakpoints.down('xs')]: {
@@ -112,14 +112,16 @@ const HomeValues = ({ className }: Props) => {
     description,
   }));
 
+
   return (
     <BackgroundImage
       Tag="section"
       className={clsx(className, classes.section)}
       fluid={data.bg.childImageSharp.fluid}
     >
-      <Section withSlider className={classes.root} title={content.header}>
-      <ImageItems items={imageItems} />
+      <Section withSlider className={classes.root} titleVariant="h1" titleLineHeight="130%" title={content.header}>
+		  		<ImageItems items={imageItems} />
+      
     </Section>
     </BackgroundImage>
   );

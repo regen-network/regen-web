@@ -51,6 +51,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   cardContent: {
     color: theme.palette.info.dark,
+    lineHeight: '140%',
     paddingTop: theme.spacing(2),
     [theme.breakpoints.up('xs')]: {
       fontSize: theme.spacing(4.5),
@@ -58,7 +59,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   description: {
     lineHeight: '140%',
-    color: theme.palette.info.dark,
+    color: theme.palette.info.main,
     [theme.breakpoints.down('xs')]: {
       fontSize: theme.spacing(5.25),
     },
@@ -80,7 +81,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('md')]: {
       transform: 'rotate(78.11deg)',
       width: theme.spacing(115),
-      bottom: theme.spacing(60),
+      bottom: theme.spacing(64),
       left: '0',
     },
     [theme.breakpoints.up('xl')]: {
@@ -97,7 +98,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.down('xs')]: {
       top: theme.spacing(50),
       left: theme.spacing(-15),
-    }, 
+    },
   },
   solutionLine: {
     [theme.breakpoints.up('md')]: {
@@ -118,7 +119,8 @@ const useStyles = makeStyles((theme: Theme) => ({
       top: theme.spacing(-20),
     },
     [theme.breakpoints.down('xs')]: {
-      width: theme.spacing(37.5),
+      width: theme.spacing(35),
+      top: theme.spacing(-16),
     },
   },
   problemCard: {
@@ -151,10 +153,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('md')]: {
       paddingLeft: 'calc(15% + 20.9375rem)',
       paddingRight: '8%',
-      marginTop: '-10%',
+      marginTop: '-6%',
     },
     [theme.breakpoints.up('xl')]: {
-      marginTop: 0,
+      marginTop: '-8%',
     },
     [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(15),

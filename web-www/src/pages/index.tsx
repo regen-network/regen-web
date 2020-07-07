@@ -2,6 +2,7 @@ import React from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 import { makeStyles, Theme, useTheme } from '@material-ui/core';
 import BackgroundImage from 'gatsby-background-image';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 import SEO from '../components/seo';
 import HomeFoldSection from '../sections/home/FoldSection';
@@ -14,9 +15,10 @@ import EmailSubmitSection from '../sections/shared/EmailSubmitSection';
 
 const useStyles = makeStyles((theme: Theme) => ({
   image: {
-    backgroundSize: 'cover',
-    [theme.breakpoints.down('xs')]: {
-      backgroundPositionX: '-700px',
+    '&:before, :after': {
+      [theme.breakpoints.down('xs')]: {
+        // top: '-33% !important',
+      },
     },
   },
 }));
@@ -33,23 +35,49 @@ const IndexPage = (): JSX.Element => {
           }
         }
       }
+      backgroundMobile: file(relativePath: { eq: "home-climate-bg-mobile.jpg" }) {
+        childImageSharp {
+          fluid(quality: 90) {
+            ...GatsbyImageSharpFluid_withWebp
+          }
+        }
+      }
     }
   `);
+
+  const mobile = useMediaQuery(theme.breakpoints.down('xs'));
+  const climateChangeCarbonSection = mobile ? (
+    <>
+      <BackgroundImage
+        Tag="div"
+        fluid={data.backgroundMobile.childImageSharp.fluid}
+        backgroundColor={theme.palette.grey['50']}
+        style={{
+          backgroundPosition: 'left 78%',
+        }}
+      >
+        <ClimateSection />
+      </BackgroundImage>
+      <CarbonPlusSection />
+    </>
+  ) : (
+    <BackgroundImage
+      Tag="div"
+      fluid={data.background.childImageSharp.fluid}
+      backgroundColor={theme.palette.grey['50']}
+    >
+      <ClimateSection />
+      <CarbonPlusSection />
+    </BackgroundImage>
+  );
+
   return (
     <>
       <SEO title="Home" mailerlite />
       <HomeFoldSection />
       <MarketplaceSection />
       <EmailSubmitSection />
-      <BackgroundImage
-        Tag="section"
-        className={classes.image}
-        fluid={data.background.childImageSharp.fluid}
-        backgroundColor={theme.palette.grey['50']}
-      >
-        <ClimateSection />
-        <CarbonPlusSection />
-      </BackgroundImage>
+      {climateChangeCarbonSection}
       <HomeLedger />
       <HomeValuesSection />
     </>

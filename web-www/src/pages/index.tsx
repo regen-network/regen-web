@@ -15,10 +15,9 @@ import EmailSubmitSection from '../sections/shared/EmailSubmitSection';
 
 const useStyles = makeStyles((theme: Theme) => ({
   image: {
+    backgroundSize: 'cover',
     '&:before, :after': {
-      [theme.breakpoints.down('xs')]: {
-        // top: '-33% !important',
-      },
+      height: '70% !important',
     },
   },
 }));
@@ -53,7 +52,7 @@ const IndexPage = (): JSX.Element => {
         fluid={data.backgroundMobile.childImageSharp.fluid}
         backgroundColor={theme.palette.grey['50']}
         style={{
-          backgroundPosition: 'left 78%',
+          backgroundPosition: 'left 70%',
         }}
       >
         <ClimateSection />
@@ -65,6 +64,7 @@ const IndexPage = (): JSX.Element => {
       Tag="div"
       fluid={data.background.childImageSharp.fluid}
       backgroundColor={theme.palette.grey['50']}
+      className={classes.image}
     >
       <ClimateSection />
       <CarbonPlusSection />

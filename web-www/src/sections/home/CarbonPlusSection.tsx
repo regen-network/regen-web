@@ -113,7 +113,7 @@ const CarbonplusSection = () => {
 
   return (
     <div className={classes.root}>
-      <Grid container wrap="nowrap" alignItems={desktop && 'center'} direction={desktop ? 'row' : 'column-reverse'}>
+      <Grid container wrap="nowrap" alignItems={desktop ? 'center' : undefined} direction={desktop ? 'row' : 'column-reverse'}>
         <Grid item xs={12} className={classes.text}>
           <Title variant="h6" className={classes.smallHeader}>
             <span className={classes.featured}>{content.smallHeader.featured} </span>

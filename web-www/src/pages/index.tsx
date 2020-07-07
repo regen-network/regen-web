@@ -7,6 +7,7 @@ import HomeLedger from '../sections/home/ledger-section';
 import HomeValuesSection from '../sections/home/values-section';
 import CarbonPlusSection from '../sections/home/carbonplus-section';
 import EmailSubmitSection from '../sections/shared/EmailSubmitSection';
+import BlogSection from '../sections/shared/BlogSection';
 
 const IndexPage = (): JSX.Element => {
   return (
@@ -18,6 +19,7 @@ const IndexPage = (): JSX.Element => {
       <CarbonPlusSection />
       <HomeLedger></HomeLedger>
       <HomeValuesSection></HomeValuesSection>
+      <BlogSection />
     </>
   );
 };

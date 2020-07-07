@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 export default function BlogPost({ header, description, img, url }: BlogPostProps): JSX.Element {
   const classes = useStyles({});
   return (
-    <Grid container direction="column">
+    <div>
       <div className={classes.image}>{img}</div>
       <Title variant="h5" className={classes.header}>
         {header}
@@ -60,6 +60,6 @@ export default function BlogPost({ header, description, img, url }: BlogPostProp
       <OutlinedButton className={classes.button} href={url} target="_blank" rel="noopener noreferrer">
         read more
       </OutlinedButton>
-    </Grid>
+    </div>
   );
 }

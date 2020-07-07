@@ -30,12 +30,15 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   title: {
-    lineHeight: '145%',
+    lineHeight: '135%',
     [theme.breakpoints.down('xs')]: {
       fontSize: theme.spacing(6),
     },
     [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(3),
+    },
+    [theme.breakpoints.up('md')]: {
+      paddingBottom: theme.spacing(4),
     },
   },
   cardTitle: {

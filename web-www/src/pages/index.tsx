@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   image: {
     '&:before, :after': {
       [theme.breakpoints.down('xs')]: {
-        top: '-33% !important',
+        // top: '-33% !important',
       },
     },
   },
@@ -46,6 +46,30 @@ const IndexPage = (): JSX.Element => {
   `);
 
   const mobile = useMediaQuery(theme.breakpoints.down('xs'));
+  const climateChangeCarbonSection = mobile ? (
+    <>
+      <BackgroundImage
+        Tag="div"
+        fluid={data.backgroundMobile.childImageSharp.fluid}
+        backgroundColor={theme.palette.grey['50']}
+        style={{
+          backgroundPosition: 'left 78%',
+        }}
+      >
+        <ClimateSection />
+      </BackgroundImage>
+      <CarbonPlusSection />
+    </>
+  ) : (
+    <BackgroundImage
+      Tag="div"
+      fluid={data.background.childImageSharp.fluid}
+      backgroundColor={theme.palette.grey['50']}
+    >
+      <ClimateSection />
+      <CarbonPlusSection />
+    </BackgroundImage>
+  );
 
   return (
     <>
@@ -53,20 +77,7 @@ const IndexPage = (): JSX.Element => {
       <HomeFoldSection />
       <MarketplaceSection />
       <EmailSubmitSection />
-      <BackgroundImage
-        Tag="div"
-        fluid={
-          mobile ? data.backgroundMobile.childImageSharp.fluid : data.background.childImageSharp.fluid
-        }
-        backgroundColor={theme.palette.grey['50']}
-        className={classes.image}
-        style={{
-          backgroundPosition: mobile ? 'left center' : 'center',
-        }}
-      >
-        <ClimateSection />
-        <CarbonPlusSection />
-      </BackgroundImage>
+      {climateChangeCarbonSection}
       <HomeLedger />
       <HomeValuesSection />
     </>

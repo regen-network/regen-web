@@ -1,11 +1,23 @@
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeOptions } from '@material-ui/core/styles/createMuiTheme';
 
+declare module '@material-ui/core/styles/createBreakpoints' {
+  interface BreakpointOverrides {
+    xs: true;
+    sm: true;
+    tablet: true; // adds the `tablet` breakpoint
+    md: true;
+    lg: true;
+    xl: true;
+  }
+}
+
 const defaultTheme = createMuiTheme({
   breakpoints: {
     values: {
       xs: 0,
       sm: 600,
+      tablet: 768,
       md: 1064,
       lg: 1280,
       xl: 1400,
@@ -31,10 +43,13 @@ const theme = createMuiTheme({
       light: '#EFEFEF',
     },
     grey: {
-      50: '#D2D5D9',
+      50: '#FAFAFA',
+      100: '#D2D5D9',
+      200: '#F9F9F9',
     },
     error: {
       main: '#DE4526',
+      light: '#E6735C',
     },
     // contrastThreshold: 3,
     // tonalOffset: 0.2,
@@ -53,7 +68,7 @@ const theme = createMuiTheme({
     },
     h2: {
       [defaultTheme.breakpoints.up('sm')]: {
-        fontSize: '2rem',
+        fontSize: '2.375rem',
       },
       [defaultTheme.breakpoints.down('xs')]: {
         fontSize: '1.5rem',
@@ -61,10 +76,10 @@ const theme = createMuiTheme({
     },
     h3: {
       [defaultTheme.breakpoints.up('sm')]: {
-        fontSize: '1.5rem',
+        fontSize: '2rem',
       },
       [defaultTheme.breakpoints.down('xs')]: {
-        fontSize: '1.3125rem',
+        fontSize: '1.5rem', // possible override: 1.3125rem
       },
     },
     h4: {
@@ -72,7 +87,7 @@ const theme = createMuiTheme({
         fontSize: '1.5rem',
       },
       [defaultTheme.breakpoints.down('xs')]: {
-        fontSize: '1.125rem',
+        fontSize: '1.3125rem', // possible override: 1.125rem
       },
     },
     h5: {
@@ -86,6 +101,14 @@ const theme = createMuiTheme({
     h6: {
       fontSize: '1.125rem',
     },
+    subtitle1: {
+      [defaultTheme.breakpoints.up('sm')]: {
+        fontSize: '2.375rem',
+      },
+      [defaultTheme.breakpoints.down('xs')]: {
+        fontSize: '2rem',
+      },
+    },
     body2: {
       fontSize: '0.875rem',
     },
@@ -96,7 +119,7 @@ const theme = createMuiTheme({
     '0px 4px 10px rgba(0, 0, 0, 0.05)',
     '-4px 0px 10px rgba(0, 0, 0, 0.25)',
     '0px 0px 20px rgba(0, 0, 0, 0.25)',
-    defaultTheme.shadows[4],
+    '0px 4px 10px rgba(0, 0, 0, 0.1)',
     defaultTheme.shadows[5],
     defaultTheme.shadows[6],
     defaultTheme.shadows[7],

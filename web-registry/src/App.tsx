@@ -90,7 +90,7 @@ function VerifyEmail(): JSX.Element {
   const search = new URLSearchParams(window.location.search);
   return (
     <div style={{ padding: '1rem' }}>
-      <Title variant="h2">Please confirm your email address</Title>
+      <Title variant="h3">Please confirm your email address</Title>
       We’ve just sent a confirmation email to: {search.get('email')}
     </div>
   );

@@ -19,7 +19,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     height: props => props.height || theme.spacing(1.25),
     borderRadius: props => props.borderRadius || '0.5rem',
     backgroundColor: theme.palette.info.light,
-    border: `1px solid ${theme.palette.grey[50]}`,
+    border: `1px solid ${theme.palette.grey[100]}`,
   },
   gauge: props => ({
     width: `${props.percentage}%`,

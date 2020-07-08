@@ -81,7 +81,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       },
     },
     '& input, & select.MuiSelect-select': {
-      border: `1px solid ${theme.palette.grey[50]}`,
+      border: `1px solid ${theme.palette.grey[100]}`,
       borderRadius: '2px',
       [theme.breakpoints.up('sm')]: {
         paddingLeft: theme.spacing(3.75),

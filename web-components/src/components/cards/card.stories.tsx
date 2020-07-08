@@ -5,12 +5,13 @@ import ImpactCard from 'web-components/lib/components/cards/ImpactCard';
 import MapCard from 'web-components/lib/components/cards/MapCard';
 import GlanceCard from 'web-components/lib/components/cards/GlanceCard';
 import { User } from 'web-components/lib/components/user/UserInfo';
-import { withKnobs, text, object, number, array } from '@storybook/addon-knobs';
+import { withKnobs, boolean, text, object, number, array } from '@storybook/addon-knobs';
 
 // import CreditCard, { CreditInfo } from 'web-components/lib/components/cards/CreditCard';
 import PurchasedCreditsCard from 'web-components/lib/components/cards/PurchasedCreditsCard';
 import CurrentCreditsIcon from 'web-components/lib/components/icons/CurrentCreditsIcon';
 import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
+import FeaturedCard from 'web-components/lib/components/cards/FeaturedCard';
 
 export default {
   title: 'Components|Cards',
@@ -95,6 +96,7 @@ export const projectCard = (): JSX.Element => (
       country: 'Australia',
     })}
     area={number('area', 200)}
+    comingSoon={boolean('coming soon', false)}
     areaUnit={text('areaUnit', 'hectares')}
     imgSrc={text('imgSrc', '/coorong.png')}
     developer={object('developer', {
@@ -136,4 +138,10 @@ export const glanceCard = (): JSX.Element => (
       'Wilmot Cattle Co has increased Soil Organic Carbon to 4.5% and removed 22,500 tons of CO2e in two years.',
     ])}
   />
+);
+
+export const featuredCard = (): JSX.Element => (
+  <FeaturedCard>
+    <p>Featured card content</p>
+  </FeaturedCard>
 );

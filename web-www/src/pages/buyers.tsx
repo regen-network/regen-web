@@ -1,19 +1,21 @@
-import React from "react"
-import { Link } from "gatsby"
+import React from 'react';
 
-import Layout from "../components/layout"
-import SEO from "../components/seo"
-import styled from "styled-components"
-import StyledComponentsWrapper from "../components/styledComponentsWrapper"
-import BackgroundSection from "../components/BackgroundSection"
+import SEO from '../components/seo';
+import TopSection from '../sections/buyers/TopSection';
+import ApproachSection from '../sections/buyers/ApproachSection';
+import InvestingSection from '../sections/buyers/InvestingSection';
+import FeaturedSection from '../sections/shared/FeaturedSection';
+import ComingSoonSection from '../sections/shared/ComingSoonSection';
 
-const IndexPage = (): JSX.Element => (
-  <StyledComponentsWrapper>
-    <Layout>
-      <SEO title="Home" />
-      <h4>Buyers</h4>
-    </Layout>
-  </StyledComponentsWrapper>
-)
+const BuyersPage = (): JSX.Element => (
+  <>
+    <SEO title="For Buyers" />
+    <TopSection />
+    <ApproachSection />
+    <InvestingSection />
+    <FeaturedSection />
+    <ComingSoonSection />
+  </>
+);
 
-export default IndexPage
+export default BuyersPage;

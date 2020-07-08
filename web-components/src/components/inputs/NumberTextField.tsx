@@ -30,9 +30,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     alignItems: 'center',
     justifyContent: 'center',
     borderRight: '1px solid transparent',
-    borderLeft: `1px solid ${theme.palette.grey[50]}`,
+    borderLeft: `1px solid ${theme.palette.grey[100]}`,
     '&:first-of-type': {
-      borderBottom: `1px solid ${theme.palette.grey[50]}`,
+      borderBottom: `1px solid ${theme.palette.grey[100]}`,
     },
   },
 }));

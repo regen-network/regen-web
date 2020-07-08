@@ -42,8 +42,8 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   projectTop: {
     backgroundSize: 'cover',
-    borderTop: `1px solid ${theme.palette.grey[50]}`,
-    borderBottom: `1px solid ${theme.palette.grey[50]}`,
+    borderTop: `1px solid ${theme.palette.grey[100]}`,
+    borderBottom: `1px solid ${theme.palette.grey[100]}`,
   },
   projectContent: {
     maxWidth: theme.breakpoints.values.lg,
@@ -91,7 +91,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   projectStory: {
-    '& h2': {
+    '& h3': {
       [theme.breakpoints.up('sm')]: {
         marginBottom: theme.spacing(5),
       },
@@ -132,7 +132,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.down('xs')]: {
       padding: `${theme.spacing(13)} ${theme.spacing(3.75)} 0`,
     },
-    '& h2': {
+    '& h3': {
       [theme.breakpoints.up('sm')]: {
         marginBottom: theme.spacing(7),
       },
@@ -392,7 +392,7 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
       <div className={`${classes.projectDetails} ${classes.projectContent}`}>
         <Grid container>
           <Grid item xs={12} sm={7} className={classes.projectStory}>
-            <Title variant="h2">
+            <Title variant="h3">
               {project.fieldsOverride && project.fieldsOverride.story
                 ? project.fieldsOverride.story.title
                 : projectDefault.story.title}
@@ -414,7 +414,7 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
       <Grid container className={`${classes.projectDetails} ${classes.projectContent}`}>
         {monitoredImpact && (
           <Grid item xs={12} sm={7} className={classes.monitoredImpact}>
-            <Title variant="h2">
+            <Title variant="h3">
               {project.fieldsOverride && project.fieldsOverride.monitoredImpact
                 ? project.fieldsOverride.monitoredImpact.title
                 : projectDefault.monitoredImpact.title}
@@ -429,7 +429,7 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
         )}
         {protectedSpecies.length > 0 ? (
           <Grid item xs={12} sm={5} className={classes.protectedSpecies}>
-            <Title variant="h2">
+            <Title variant="h3">
               {project.fieldsOverride && project.fieldsOverride.protectedSpecies
                 ? project.fieldsOverride.protectedSpecies.title
                 : projectDefault.protectedSpecies.title}
@@ -438,7 +438,7 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
           </Grid>
         ) : (
           <Grid item xs={12} sm={5} className={classes.protectedSpecies}>
-            <Title variant="h2">
+            <Title variant="h3">
               {project.fieldsOverride && project.fieldsOverride.nonMonitoredImpact
                 ? project.fieldsOverride.nonMonitoredImpact.title
                 : projectDefault.nonMonitoredImpact.title}
@@ -459,7 +459,7 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
         <div
           className={`${classes.projectDetails} ${classes.projectContent} ${classes.projectImpactContainer}`}
         >
-          <Title variant="h2">
+          <Title variant="h3">
             {project.fieldsOverride && project.fieldsOverride.nonMonitoredImpact
               ? project.fieldsOverride.nonMonitoredImpact.title
               : projectDefault.nonMonitoredImpact.title}
@@ -513,7 +513,7 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
         <div
           className={`${classes.projectTopContent} ${classes.projectDetails} ${classes.projectActions} ${classes.projectContent}`}
         >
-          <Title variant="h2">
+          <Title variant="h3">
             {project.fieldsOverride && project.fieldsOverride.landManagementActions
               ? project.fieldsOverride.landManagementActions.title
               : projectDefault.landManagementActions.title}
@@ -554,10 +554,10 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
       {project.timeline && (
         <div>
           {/*<div className={classes.projectDetails}>
-          <Title variant="h2">Monitoring, Verification, and Reporting</Title>
+          <Title variant="h3">Monitoring, Verification, and Reporting</Title>
         </div>*/}
           <div className={`${classes.projectDetails} ${classes.projectTimeline} ${classes.projectContent}`}>
-            <Title variant="h2">
+            <Title variant="h3">
               {project.fieldsOverride && project.fieldsOverride.timeline
                 ? project.fieldsOverride.timeline.title
                 : projectDefault.timeline.title}

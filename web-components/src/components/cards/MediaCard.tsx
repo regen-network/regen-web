@@ -1,7 +1,8 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 import CardMedia from '@material-ui/core/CardMedia';
-import { ThemeStyle } from '@material-ui/core/styles/createTypography';
+import { Variant } from '@material-ui/core/styles/createTypography';
+import clsx from 'clsx';
 
 import Card from './Card';
 import Title from '../title';
@@ -13,7 +14,7 @@ export interface MediaCardProps {
   tag?: string;
   onClick?: () => void;
   width?: string;
-  titleVariant?: ThemeStyle;
+  titleVariant?: Variant;
   elevation?: number;
   borderColor?: string;
   borderRadius?: string;
@@ -25,18 +26,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: '100%',
     display: 'flex',
     flexDirection: 'column',
-    '& h3': {
-      [theme.breakpoints.up('sm')]: {
-        padding: `${theme.spacing(4.5)} ${theme.spacing(5.25)} ${theme.spacing(3)}`,
-      },
-      [theme.breakpoints.down('xs')]: {
-        padding: `${theme.spacing(4)} ${theme.spacing(4.5)} ${theme.spacing(3)}`,
-      },
-    },
+    position: 'relative',
   },
   image: {
     height: theme.spacing(48.75),
-    cursor: 'pointer',
     position: 'relative',
   },
   tag: {
@@ -62,6 +55,19 @@ const useStyles = makeStyles((theme: Theme) => ({
     borderRadius: '9px 9px 0px 0px',
     background: 'linear-gradient(180.28deg, rgba(0, 0, 0, 0) 65.91%, rgba(0, 0, 0, 0.6) 99.59%)',
   },
+  title: {
+    [theme.breakpoints.up('sm')]: {
+      padding: `${theme.spacing(4.5)} ${theme.spacing(5.25)} ${theme.spacing(3)}`,
+    },
+    [theme.breakpoints.down('xs')]: {
+      padding: `${theme.spacing(4)} ${theme.spacing(4.5)} ${theme.spacing(3)}`,
+    },
+  },
+  h4title: {
+    [theme.breakpoints.down('xs')]: {
+      fontSize: theme.spacing(4.5),
+    },
+  },
 }));
 
 export default function MediaCard({
@@ -70,7 +76,7 @@ export default function MediaCard({
   imgSrc,
   onClick,
   width,
-  titleVariant = 'h5',
+  titleVariant = 'h4',
   elevation = 0,
   borderColor,
   borderRadius,
@@ -91,7 +97,12 @@ export default function MediaCard({
           <div className={classes.backgroundGradient} />
           {tag && <div className={classes.tag}>{tag}</div>}
         </CardMedia>
-        <Title variant={titleVariant}>{name}</Title>
+        <Title
+          className={titleVariant === 'h4' ? clsx(classes.h4title, classes.title) : classes.title}
+          variant={titleVariant}
+        >
+          {name}
+        </Title>
         {children}
       </div>
     </Card>

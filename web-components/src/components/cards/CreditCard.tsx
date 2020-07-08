@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 export default function CreditCard({ credit, onClick, width }: CreditCardProps): JSX.Element {
   const classes = useStyles({});
   return (
-    <MediaCard onClick={onClick} imgSrc={credit.imgSrc} name={credit.name} width={width}>
+    <MediaCard titleVariant="h5" onClick={onClick} imgSrc={credit.imgSrc} name={credit.name} width={width}>
       <Typography className={classes.description}>{credit.description}</Typography>
       <CreditPlaceInfo place={credit.place} outcome={credit.outcome} fontSize="0.8125rem" />
       <div className={classes.creditsContainer}>

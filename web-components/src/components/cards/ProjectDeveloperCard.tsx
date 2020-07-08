@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     backgroundColor: '#FAFAFA',
   },
   separator: {
-    border: `1px solid ${theme.palette.grey[50]}`,
+    border: `1px solid ${theme.palette.grey[100]}`,
     marginTop: theme.spacing(7),
     marginBottom: theme.spacing(7),
   },

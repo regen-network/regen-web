@@ -1,5 +1,5 @@
 import React from 'react';
-import { graphql, StaticQuery } from 'gatsby';
+import { graphql, StaticQuery, useStaticQuery } from 'gatsby';
 import { makeStyles, Theme } from '@material-ui/core';
 import clsx from 'clsx';
 import BackgroundImage from 'gatsby-background-image';
@@ -101,11 +101,18 @@ const HomeFoldSection = ({ className }: Props) => {
               }
             }
           }
+          text: contentYaml {
+            foldSection {
+              tagline
+              description
+            }
+          }
         }
       `}
       render={data => {
         // Set ImageData.
         const imageData = data.desktop.childImageSharp.fluid;
+        const content = data.text.foldSection;
         return (
           <BackgroundImage
             Tag="section"
@@ -116,12 +123,10 @@ const HomeFoldSection = ({ className }: Props) => {
             <div className={classes.backgroundGradient}></div>
             <VideoPopup></VideoPopup>
             <Title align="center" color="primary" variant="h1" className={classes.title}>
-              Platform for a Thriving Planet
+              {content.tagline}
             </Title>
             <div className={classes.tag}>
-              <Typography variant="body1">
-                Regen Network aligns economics with ecology to drive regenerative land management.
-              </Typography>
+              <Typography variant="body1">{content.description}</Typography>
             </div>
           </BackgroundImage>
         );

@@ -220,7 +220,7 @@ img {
   padding-left: 0;
   padding-right: 0;
   padding-top: 0;
-  margin-bottom: 1.45rem;
+  margin-bottom: 0;
 }
 hgroup {
   margin-left: 0;
@@ -267,16 +267,6 @@ dl {
   margin-bottom: 1.45rem;
 }
 dd {
-  margin-left: 0;
-  margin-right: 0;
-  margin-top: 0;
-  padding-bottom: 0;
-  padding-left: 0;
-  padding-right: 0;
-  padding-top: 0;
-  margin-bottom: 1.45rem;
-}
-p {
   margin-left: 0;
   margin-right: 0;
   margin-top: 0;
@@ -372,19 +362,6 @@ iframe {
   padding-right: 0;
   padding-top: 0;
   margin-bottom: 1.45rem;
-}
-hr {
-  margin-left: 0;
-  margin-right: 0;
-  margin-top: 0;
-  padding-bottom: 0;
-  padding-left: 0;
-  padding-right: 0;
-  padding-top: 0;
-  margin-bottom: calc(1.45rem - 1px);
-  background: hsla(0, 0%, 0%, 0.2);
-  border: none;
-  height: 1px;
 }
 address {
   margin-left: 0;

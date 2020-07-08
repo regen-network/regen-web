@@ -13,18 +13,19 @@ export interface ProjectInfo {
   developer: User;
 }
 
-interface ProjectCardProps {
+export interface ProjectCardProps {
   name: string;
   imgSrc: string;
-  place: Place;
+  place: Place | string;
   area: number;
   areaUnit: string;
-  developer: User;
+  developer?: User;
   tag?: string;
   onClick?: () => void;
   displayCity?: boolean;
   displayRegion?: boolean;
   displayCountry?: boolean;
+  comingSoon?: boolean;
 }
 
 interface AreaUnits {
@@ -37,7 +38,7 @@ function getAbbreviation(unit: string): string {
     case 'hectares':
       return 'ha.';
     case 'acres':
-      return 'a.';
+      return 'acres';
     default:
       return 'ha.';
   }
@@ -48,13 +49,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     border: `0.5px solid ${theme.palette.grey[100]}`,
     [theme.breakpoints.up('sm')]: {
       marginTop: theme.spacing(6.25),
-      marginBottom: theme.spacing(5.25),
       marginRight: theme.spacing(5.25),
       marginLeft: theme.spacing(5.25),
     },
     [theme.breakpoints.down('xs')]: {
       marginTop: theme.spacing(4.5),
-      marginBottom: theme.spacing(5),
       marginRight: theme.spacing(4.5),
       marginLeft: theme.spacing(4.5),
     },
@@ -62,10 +61,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   placeInfo: {
     flex: '1 0 auto',
     [theme.breakpoints.up('sm')]: {
-      padding: `0 ${theme.spacing(5.25)}`,
+      padding: `0 ${theme.spacing(5.25)} ${theme.spacing(5.25)}`,
     },
     [theme.breakpoints.down('xs')]: {
-      padding: `0 ${theme.spacing(4.5)}`,
+      padding: `0 ${theme.spacing(4.5)} ${theme.spacing(5)}`,
     },
   },
   userInfo: {
@@ -75,6 +74,30 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.down('xs')]: {
       padding: `0 ${theme.spacing(4.5)} ${theme.spacing(5.25)}`,
     },
+  },
+  comingSoon: {
+    position: 'absolute',
+    borderBottom: `${theme.spacing(5.75)} solid ${theme.palette.primary.main}`,
+    borderLeft: `${theme.spacing(5.75)} solid transparent`,
+    borderRight: `${theme.spacing(5.75)} solid transparent`,
+    height: 0,
+    width: theme.spacing(30.5),
+    lineHeight: theme.spacing(5.75),
+    opacity: 0.8,
+    transform: 'rotate(45deg)',
+    fontFamily: theme.typography.h1.fontFamily,
+    fontWeight: 900,
+    textAlign: 'center',
+    letterSpacing: '1px',
+    textTransform: 'uppercase',
+    color: theme.palette.info.dark,
+    fontSize: theme.spacing(2.5),
+    right: theme.spacing(-6.5),
+    top: theme.spacing(5.75),
+    whiteSpace: 'nowrap',
+  },
+  comingSoonText: {
+    marginLeft: theme.spacing(-1),
   },
 }));
 
@@ -90,6 +113,7 @@ export default function ProjectCard({
   displayCity = true,
   displayRegion = true,
   displayCountry = true,
+  comingSoon = false,
 }: ProjectCardProps): JSX.Element {
   const theme = useTheme();
   const classes = useStyles();
@@ -117,10 +141,17 @@ export default function ProjectCard({
           displayCountry={displayCountry}
         />
       </div>
-      <div className={classes.separator} />
-      <div className={classes.userInfo}>
-        <UserInfo user={developer} size="project" />
-      </div>
+      {comingSoon && (
+        <div className={classes.comingSoon}>
+          <span className={classes.comingSoonText}>coming soon</span>
+        </div>
+      )}
+      {developer && <div className={classes.separator} />}
+      {developer && (
+        <div className={classes.userInfo}>
+          <UserInfo user={developer} size="project" />
+        </div>
+      )}
     </MediaCard>
   );
 }

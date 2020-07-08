@@ -33,9 +33,7 @@ exports[`Storyshots Components|Blog Post Blog Post 1`] = `
       }
     }
   >
-    <div
-      className="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-column"
-    >
+    <div>
       <div
         className="makeStyles-image-14"
       >

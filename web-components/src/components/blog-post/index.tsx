@@ -1,7 +1,6 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
 import Title from '../title';
 import OutlinedButton from '../buttons/OutlinedButton';
 
@@ -14,10 +13,16 @@ export interface BlogPostProps {
 
 const useStyles = makeStyles((theme: Theme) => ({
   image: {
-    '& img': {
+    '& :first-child': {
       width: '100%',
       borderRadius: '10px',
       border: `1px solid ${theme.palette.info.light}`,
+      [theme.breakpoints.down('xs')]: {
+        height: theme.spacing(50.75),
+      },
+      [theme.breakpoints.up('sm')]: {
+        height: theme.spacing(63),
+      },
     },
   },
   header: {
@@ -43,7 +48,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     lineHeight: '150%',
   },
   button: {
-    width: '50%',
+    width: '56%',
     height: theme.spacing(10),
   },
 }));

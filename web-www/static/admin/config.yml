@@ -1,18 +1,23 @@
 backend:
   name: git-gateway
   branch: master
+  preview_context: netlify/regen-website/deploy-preview 
 
-media_folder: "static/media"
+media_folder: "web-www/static/media"
 public_folder: "/media"
 publish_mode: editorial_workflow
 
 collections:
   - name: 'pages'
     label: 'Pages'
+    media_folder: '../static/media'
+    public_folder: '../static/media'
+    editor:
+      preview: false
     files:
       - label: "Homepage"
         name: "homepage"
-        file: "site/content/homepage.yaml"
+        file: "web-www/content/homepage.yaml"
         fields:
           - label: "Marketplace Section"
             name: "marketplaceSection"
@@ -26,12 +31,48 @@ collections:
                 collapsed: false
                 fields:
                   - {label: "Caption", name: "caption", widget: string}
-                  - label: "Image"
-                    name: "image"
-                    widget: select
-                    options:
-                      - { label: "Buyer Icon", value: "../static/media/buyers.png"}
-                      - { label: "Farmer Icon", value: "../static/media/farmer.png"}
+                  - {label: "Image", name: "image", widget: image}
                   - {label: "Header", name: "header", widget: string}
                   - {label: "Description", name: "description", widget: text}
                   - {label: "Link Text", name: "linkText", widget: string}
+          - label: "Top Section"
+            name: "topSection"
+            widget: "object"
+            fields:
+              - {label: Header, name: header, widget: string}
+              - label: Body
+                name: body
+                widget: "object"
+                fields:
+                  - {label: Start, name: start, widget: string}
+                  - {label: Underlined, name: underlined, widget: string}
+                  - {label: End, name: end, widget: string}
+          - label: "Approach Section"
+            name: "approachSection"
+            widget: "object"
+            fields:
+              - {label: Header, name: header, widget: string}
+              - label: "Image Items"
+                name: imageItems
+                widget: list
+                collapsed: false
+                fields:
+                  - {label: "Header", name: header, widget: string}
+                  - {label: "Image", name: image, widget: image}
+                  - {label: "Description", name: description, widget: text}
+          - label: "Investing Section"
+            name: "investingSection"
+            widget: "object"
+            fields:
+              - {label: Header, name: header, widget: string}
+              - {label: Note, name: note, widget: string}
+              - {label: "Note Link", name: noteLink, widget: string}
+              - label: "Items"
+                name: items
+                widget: list
+                collapsed: false
+                fields:
+                  - {label: "Header", name: header, widget: string}
+                  - {label: "Image", name: image, widget: image}
+                  - {label: "Caption", name: caption, widget: string}
+                  - {label: "Description", name: description, widget: string}

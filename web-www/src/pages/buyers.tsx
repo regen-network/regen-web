@@ -5,6 +5,7 @@ import TopSection from '../sections/buyers/TopSection';
 import ApproachSection from '../sections/buyers/ApproachSection';
 import InvestingSection from '../sections/buyers/InvestingSection';
 import FeaturedSection from '../sections/shared/FeaturedSection';
+import ComingSoonSection from '../sections/shared/ComingSoonSection';
 
 const BuyersPage = (): JSX.Element => (
   <>
@@ -13,6 +14,7 @@ const BuyersPage = (): JSX.Element => (
     <ApproachSection />
     <InvestingSection />
     <FeaturedSection />
+    <ComingSoonSection />
   </>
 );
 

@@ -62,7 +62,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       },
       '& :hover': {
         'background-color': 'inherit',
-        borderBottom: `3px solid ${theme.palette.secondary.main}`,
+        borderBottom: `2px solid ${theme.palette.secondary.main}`,
       },
       'background-color': 'inherit',
       'text-decoration': 'none',

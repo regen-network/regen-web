@@ -120,7 +120,7 @@ const HomeValues = ({ className }: Props) => {
       fluid={data.bg.childImageSharp.fluid}
     >
       <Section withSlider className={classes.root} titleVariant="h1" titleLineHeight="130%" title={content.header}>
-		  		<ImageItems items={imageItems} />
+		  		<ImageItems withEllipse items={imageItems} />
       
     </Section>
     </BackgroundImage>

@@ -6,6 +6,7 @@ import ImageItem, { ImageItemProps } from '../image-item';
 
 export interface ImageItemsProps {
   items: ImageItemProps[];
+  withEllipse: boolean;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -38,11 +39,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function ImageItems({ items }: ImageItemsProps): JSX.Element {
+export default function ImageItems({ items, withEllipse }: ImageItemsProps): JSX.Element {
   const classes = useStyles({});
   const theme = useTheme();
   const desktop = useMediaQuery(theme.breakpoints.up('tablet'));
-  const mobile = useMediaQuery(theme.breakpoints.down('tablet'));
+  const mobile = useMediaQuery(theme.breakpoints.down('xs'));
   const slides: number = desktop ? items.length : mobile ? 1 : 2;
 
   const settings = {
@@ -58,7 +59,12 @@ export default function ImageItems({ items }: ImageItemsProps): JSX.Element {
       <Slider {...settings} className={classes.root}>
         {items.map((item, index) => (
           <div className={classes.item} key={index}>
-            <ImageItem img={item.img} title={item.title} description={item.description} />
+            <ImageItem
+              withEllipse={withEllipse}
+              img={item.img}
+              title={item.title}
+              description={item.description}
+            />
           </div>
         ))}
       </Slider>

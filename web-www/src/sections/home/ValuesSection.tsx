@@ -3,7 +3,7 @@ import { graphql, useStaticQuery } from 'gatsby';
 import Grid from '@material-ui/core/Grid';
 import BackgroundImage from 'gatsby-background-image';
 import Title from 'web-components/lib/components/title';
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles, useTheme, Theme } from '@material-ui/core';
 import clsx from 'clsx';
 import Img from 'gatsby-image';
 
@@ -101,6 +101,7 @@ const HomeValues = ({ className }: Props) => {
   `);
   const content = data.text.valuesSection;
   const classes = useStyles();
+  const theme = useTheme();
 
   const imageItems: ImageItemProps[] = content.imageItems.map(({ image, header: title, description }) => ({
     img: !image.childImageSharp && image.extension === 'svg' ? (
@@ -120,7 +121,7 @@ const HomeValues = ({ className }: Props) => {
       fluid={data.bg.childImageSharp.fluid}
     >
       <Section withSlider className={classes.root} titleVariant="h1" titleLineHeight="130%" title={content.header}>
-		  		<ImageItems withEllipse titleVariant="h3" items={imageItems} />
+		  		<ImageItems imageHeight={theme.spacing(39)} titleVariant="h3" items={imageItems} />
       
     </Section>
     </BackgroundImage>

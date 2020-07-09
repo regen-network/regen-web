@@ -12,12 +12,12 @@ export interface ImageItemProps {
   img: JSX.Element; // using pure img tag or gatsby-image
   title: string;
   description: string;
-  withEllipse?: boolean;
+  imageHeight?: string;
   titleVariant?: Variant;
 }
 
 export interface StyleProps {
-  withEllipse?: boolean;
+  imageHeight?: boolean;
   titleVariant: string;
 }
 
@@ -30,7 +30,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     paddingBottom: theme.spacing(2.5),
   },
   image: props => ({
-    height: props.withEllipse ? theme.spacing(39) : theme.spacing(32.5),
+    height: props.imageHeight || theme.spacing(32.5),
     [theme.breakpoints.up('xs')]: {
       marginBottom: theme.spacing(9),
     },
@@ -48,11 +48,11 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
 export default function ImageItem({
   img,
   title,
-  withEllipse,
+  imageHeight,
   description,
   titleVariant = 'h4',
 }: ImageItemProps): JSX.Element {
-  const classes = useStyles({ titleVariant, withEllipse });
+  const classes = useStyles({ titleVariant, imageHeight });
 
   return (
     <div className={classes.root}>

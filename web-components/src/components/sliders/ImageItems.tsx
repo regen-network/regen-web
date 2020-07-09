@@ -8,7 +8,7 @@ import ImageItem, { ImageItemProps } from '../image-item';
 export interface ImageItemsProps {
   items: ImageItemProps[];
   titleVariant?: Variant;
-  withEllipse: boolean;
+  imageHeight: string;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function ImageItems({ items, withEllipse, titleVariant }: ImageItemsProps): JSX.Element {
+export default function ImageItems({ items, imageHeight, titleVariant }: ImageItemsProps): JSX.Element {
   const classes = useStyles({});
   const theme = useTheme();
   const desktop = useMediaQuery(theme.breakpoints.up('tablet'));
@@ -62,7 +62,7 @@ export default function ImageItems({ items, withEllipse, titleVariant }: ImageIt
         {items.map((item, index) => (
           <div className={classes.item} key={index}>
             <ImageItem
-              withEllipse={withEllipse}
+              imageHeight={imageHeight}
               img={item.img}
               title={item.title}
               titleVariant={titleVariant}

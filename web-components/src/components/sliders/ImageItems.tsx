@@ -1,11 +1,13 @@
 import React from 'react';
 import { makeStyles, Theme, useTheme } from '@material-ui/core';
+import { Variant } from '@material-ui/core/styles/createTypography';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Slider from 'react-slick';
 import ImageItem, { ImageItemProps } from '../image-item';
 
 export interface ImageItemsProps {
   items: ImageItemProps[];
+  titleVariant?: Variant;
   withEllipse: boolean;
 }
 
@@ -39,7 +41,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function ImageItems({ items, withEllipse }: ImageItemsProps): JSX.Element {
+export default function ImageItems({ items, withEllipse, titleVariant }: ImageItemsProps): JSX.Element {
   const classes = useStyles({});
   const theme = useTheme();
   const desktop = useMediaQuery(theme.breakpoints.up('tablet'));
@@ -63,6 +65,7 @@ export default function ImageItems({ items, withEllipse }: ImageItemsProps): JSX
               withEllipse={withEllipse}
               img={item.img}
               title={item.title}
+              titleVariant={titleVariant}
               description={item.description}
             />
           </div>

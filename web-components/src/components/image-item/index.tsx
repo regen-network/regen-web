@@ -12,12 +12,12 @@ export interface ImageItemProps {
   img: JSX.Element; // using pure img tag or gatsby-image
   title: string;
   description: string;
-  withEllipse: boolean;
+  withEllipse?: boolean;
   titleVariant?: Variant;
 }
 
 export interface StyleProps {
-  withEllipse: boolean;
+  withEllipse?: boolean;
   titleVariant: string;
 }
 

@@ -32,10 +32,10 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   image: props => ({
     height: props.withEllipse ? theme.spacing(39) : theme.spacing(32.5),
     [theme.breakpoints.up('xs')]: {
-      marginBottom: '46px',
+      marginBottom: theme.spacing(11.5),
     },
     [theme.breakpoints.down('xs')]: {
-      marginBottom: '25px',
+      marginBottom: theme.spacing(6.25),
     },
   }),
   h3title: {

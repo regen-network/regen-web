@@ -97,11 +97,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   button: {
     [theme.breakpoints.down('xs')]: {
-      padding: `${theme.spacing(1)} ${theme.spacing(2)}`,
+      padding: `${theme.spacing(3)} ${theme.spacing(7.5)}`,
       fontSize: theme.spacing(4.5),
     },
     [theme.breakpoints.up('sm')]: {
-      padding: `${theme.spacing(2)} ${theme.spacing(8.5)}`,
+      padding: `${theme.spacing(4.5)} ${theme.spacing(12.5)}`,
       fontSize: theme.spacing(4.5),
     },
   },

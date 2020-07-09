@@ -32,7 +32,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   image: props => ({
     height: props.withEllipse ? theme.spacing(39) : theme.spacing(32.5),
     [theme.breakpoints.up('xs')]: {
-      marginBottom: theme.spacing(11.5),
+      marginBottom: theme.spacing(9),
     },
     [theme.breakpoints.down('xs')]: {
       marginBottom: theme.spacing(6.25),

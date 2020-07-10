@@ -27,7 +27,8 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
 
   const headerColors: HeaderColors = {
     '/': theme.palette.primary.main,
-    '/buyers/': theme.palette.primary.light,
+	'/buyers/': theme.palette.primary.light,
+	'/privacy-policy/': theme.palette.primary.light,
   };
 
   const menuItems = [
@@ -47,7 +48,8 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
   const desktopColor: string = headerColors[location.pathname]
     ? headerColors[location.pathname]
     : theme.palette.primary.main;
-
+	console.log(location.pathname)
+	console.log(desktopColor)
   return (
     <>
       <Header

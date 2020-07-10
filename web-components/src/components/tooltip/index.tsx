@@ -58,6 +58,8 @@ const CustomTooltip: any = withStyles((theme: Theme) => ({
     [theme.breakpoints.down('xs')]: {
       fontSize: theme.spacing(5.25),
       padding: theme.spacing(3.75),
+      paddingLeft: theme.spacing(6),
+      paddingRight: theme.spacing(6),
       maxWidth: theme.spacing(100),
     },
     [theme.breakpoints.up('sm')]: {

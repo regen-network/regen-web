@@ -22,7 +22,25 @@ module.exports = {
         name: `images`,
         path: `${__dirname}/static/media`,
       },
-    },
+	},
+	{
+		resolve: `gatsby-transformer-remark`,
+		options: {
+		  commonmark: true,
+		  footnotes: true,
+		  pedantic: true,
+		  gfm: true,
+		  // Plugins configs
+		  plugins: [],
+		},
+	  },
+	{
+		resolve: `gatsby-source-filesystem`,
+		options: {
+		  name: `md`,
+		  path: `${__dirname}/content/md`,
+		},
+	  },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     `gatsby-plugin-typescript`,

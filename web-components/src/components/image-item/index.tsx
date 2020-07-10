@@ -17,7 +17,7 @@ export interface ImageItemProps {
 }
 
 export interface StyleProps {
-  imageHeight?: boolean;
+  imageHeight?: string;
   titleVariant: string;
 }
 

@@ -49,6 +49,11 @@ function arrowGenerator(): any {
 }
 
 const CustomTooltip: any = withStyles((theme: Theme) => ({
+  popper: {
+    [theme.breakpoints.down('xs')]: {
+      width: '90%',
+    },
+  },
   tooltip: {
     color: theme.palette.info.dark,
     boxShadow: theme.shadows[3],
@@ -57,11 +62,9 @@ const CustomTooltip: any = withStyles((theme: Theme) => ({
     borderRadius: '5px',
     [theme.breakpoints.down('xs')]: {
       fontSize: theme.spacing(5.25),
-      padding: theme.spacing(3.75),
-      paddingLeft: theme.spacing(6),
-      paddingRight: theme.spacing(6),
-      maxWidth: '90vw',
-      left: '-5vw',
+      padding: `${theme.spacing(6)} ${theme.spacing(3.75)}`,
+      marginLeft: theme.spacing(2),
+      marginRight: theme.spacing(2),
     },
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.spacing(5.5),

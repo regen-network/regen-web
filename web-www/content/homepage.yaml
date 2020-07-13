@@ -97,6 +97,22 @@ comingSoonSection: # TODO same as above
       image: '../static/media/mt-sandy.png'
       location: 'South Australia, Australia'
       area: 200
+      areaUnit: "hectares"
+blogSection:
+  header: Regen Network Blog
+  posts:
+    - header: 'Planetary Regeneration Podcast | Episode 19: Tom Newmark'
+      description: This blog is a transcription of the 19th episode of the Planetary Regeneration Podcast, hosted by Regen Network’s Chief Regeneration…
+      image: ../static/media/blog1.jpeg
+      url: https://medium.com/regen-network/planetary-regeneration-podcast-episode-19-tom-newmark-c3d37980a7eb
+    - header: 'Planetary Regeneration Podcast | Episode 18: Lary Kopald'
+      description: This blog is a transcription of the 18th episode of the Planetary Regeneration Podcast, hosted by Regen Network’s Chief Regeneration…
+      image: ../static/media/blog2.jpeg
+      url: https://medium.com/regen-network/planetary-regeneration-podcast-episode-18-lary-kopald-211f61ac253d
+    - header: Mobilizing Community Co-Creation for Soil Health
+      description: OpenTEAM & Regen Network
+      image: ../static/media/blog3.jpeg
+      url: https://medium.com/regen-network/mobilizing-community-co-creation-for-soil-health-61090e27c6ba
 ledgerSection:
   description: Regen Ledger is a public, proof of stake (POS) blockchain developed with the Cosmos Software
             Development Kit (SDK) built for verification of claims, agreements & data related to ecological

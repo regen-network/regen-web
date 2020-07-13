@@ -3,20 +3,26 @@ import { makeStyles, Theme } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import { useStaticQuery, graphql } from 'gatsby';
-import BackgroundImage from 'gatsby-background-image';
 import Title from 'web-components/lib/components/title';
+import Section from '../../components/Section';
 import Img from 'gatsby-image';
+import Tooltip from 'web-components/lib/components/tooltip';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
+    paddingTop: theme.spacing(25),
+    paddingBottom: theme.spacing(25),
+    [theme.breakpoints.down('xs')]:{
+      paddingTop: theme.spacing(20),
+      paddingBottom: theme.spacing(20),	
+	  },
     height: 'min-content',
     color: theme.palette.primary.contrastText,
     'background-color': theme.palette.primary.main,
     'font-family': theme.typography.h1.fontFamily,
     'text-align': 'center',
-    padding: theme.spacing(10),
     '& h2': {
-      width: '70%',
+		width: '100%',
       'font-family': 'Muli',
       margin: '0 auto',
       'line-height': '150%',
@@ -24,15 +30,14 @@ const useStyles = makeStyles((theme: Theme) => ({
       'margin-bottom': theme.spacing(2),
       'font-weight': 900,
     },
-    '& h3': {
-      'line-height': '140%',
-      'margin-bottom': theme.spacing(1),
-    },
     '& p': {
       'margin-bottom': '0px',
       'line-height': '150%',
       'font-family': 'Lato',
       'font-size': '1.375rem',
+      [theme.breakpoints.down("xs")]: {
+        fontSize: "1rem"
+      },
     },
     '& .MuiGrid-item.MuiGrid-root': {
       padding: theme.spacing(1),
@@ -40,7 +45,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       'padding-right': theme.spacing(3),
       '& p': {
         color: theme.palette.info.dark,
-        'margin-bottom': theme.spacing(3),
+        'margin-bottom': theme.spacing(6.75),
       },
     },
   },
@@ -54,7 +59,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     padding: '0px',
   },
   inner: {
-    'max-width': '85%',
+    [theme.breakpoints.up('sm')]: {
+      'max-width': '85%',
+    },
     margin: '0 auto',
   },
   smallTag: {
@@ -63,59 +70,74 @@ const useStyles = makeStyles((theme: Theme) => ({
     color: theme.palette.info.main,
     'margin-bottom': theme.spacing(5),
     'font-weight': 800,
-    'font-size': '1.125rem',
+    'font-size': '1.3125rem',
     'letter-spacing': '1px',
-    'line-height': '23px',
+    'line-height': '27px',
   },
   smallTitle: {
+    marginTop: theme.spacing(6.5),
+    'text-transform': 'uppercase',
     color: theme.palette.info.dark,
     'font-weight': 800,
     'font-size': '1.125rem',
+    [theme.breakpoints.down("xs")]:{
+      fontSize: '0.875rem'
+    },
     'letter-spacing': '1px',
     'line-height': '23px',
   },
-  icon: {
-    position: 'absolute',
-    width: '80%',
-    height: '80%',
-    top: '50%',
-    left: '35%',
-    transform: 'translate(-50%, -50%)',
-  },
-  container: {
-    'padding-right': theme.spacing(15),
-    'padding-left': theme.spacing(15),
+  gridItem: {
+    [theme.breakpoints.down('sm')]: {
+      'flex-basis':'auto',
+      'margin-bottom': theme.spacing(8)
+    },
   },
   button: {
     [theme.breakpoints.down('xs')]: {
-      padding: `${theme.spacing(1)} ${theme.spacing(2)}`,
+      padding: `${theme.spacing(3)} ${theme.spacing(7.5)}`,
       fontSize: theme.spacing(4.5),
     },
     [theme.breakpoints.up('sm')]: {
-      padding: `${theme.spacing(2)} ${theme.spacing(8.5)}`,
+      padding: `${theme.spacing(4.5)} ${theme.spacing(12.5)}`,
       fontSize: theme.spacing(4.5),
     },
+  },
+  green: {
+	  color: theme.palette.secondary.main,
+  },
+  popover: {
+    cursor: 'pointer',
+      borderBottom: `3px dashed ${theme.palette.secondary.main}`,
+    },
+  h3: {
+	  marginTop: theme.spacing(3.5),
+	  'line-height': '140%',
+    'margin-bottom': theme.spacing(2.4),
+	  [theme.breakpoints.down('xs')]: {
+      marginTop: theme.spacing(3),
+      marginBottom: theme.spacing(3),
+      fontSize: theme.spacing(5.25),
+	  },
   },
 }));
 
 const MarketplaceSection = () => {
   const data = useStaticQuery(graphql`
     query {
-      ellipse: file(relativePath: { eq: "green-ellipse.png" }) {
-        childImageSharp {
-          fixed(quality: 90, width: 120) {
-            ...GatsbyImageSharpFixed_withWebp
-          }
-        }
-      }
       text: contentYaml {
         marketplaceSection {
           header
-          body
+		      tooltip
+          body {
+            green
+            middle
+            popover
+            end
+          }
           callToActions {
             image {
               childImageSharp {
-                fixed(quality: 90, width: 80) {
+                fixed(quality: 90, width: 159) {
                   ...GatsbyImageSharpFixed_withWebp
                 }
               }
@@ -134,23 +156,26 @@ const MarketplaceSection = () => {
 
   const classes = useStyles({});
   return (
-    <div className={classes.root}>
+    <Section className={classes.root}>
       <div className={classes.inner}>
         <div className={classes.smallTag}>{content.header}</div>
-        <h2>{content.body}</h2>
-        <Grid className={classes.container} container spacing={3}>
+        <Title variant="h2" align="center">
+          <span className={classes.green}>{content.body.green}{' '}</span>
+          {content.body.middle}{' '}
+          <Tooltip arrow placement="top" title={content.tooltip}>
+            <span className={classes.popover}>{content.body.popover}</span>
+          </Tooltip>
+          {' '}{content.body.end}
+        </Title>
+        <Grid container spacing={3}>
           {content.callToActions.map(cta => {
             return (
-              <Grid item xs>
-                <BackgroundImage
-                  className={classes.bgdiv}
-                  Tag="div"
-                  fixed={data.ellipse.childImageSharp.fixed}
-                >
-                  <Img fixed={cta.image.childImageSharp.fixed} className={classes.icon} />
-                </BackgroundImage>
+              <Grid key={cta.header} className={classes.gridItem} item xs>
+                  <Img fixed={cta.image.childImageSharp.fixed} />
                 <div className={classes.smallTitle}>{cta.caption}</div>
-                <h3>{cta.header}</h3>
+                <Title className={classes.h3} variant="h3" align="center">
+                  {cta.header}
+                </Title>
                 <p>{cta.description}</p>
                 <ContainedButton className={classes.button}>{cta.linkText}</ContainedButton>
               </Grid>
@@ -158,7 +183,7 @@ const MarketplaceSection = () => {
           })}
         </Grid>
       </div>
-    </div>
+    </Section>
   );
 };
 

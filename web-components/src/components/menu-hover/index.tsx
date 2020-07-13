@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Popover, MenuList, Paper, Theme } from '@material-ui/core';
-import DropDownIcon from '../icons/DropDownIcon';
+import DropdownIcon from '../icons/DropdownIcon';
 
 const useStyles = makeStyles((theme: Theme) => ({
   popover: {
@@ -65,7 +65,7 @@ const MenuHover = ({ text, textColor, dropdownColor, children }: Props): JSX.Ele
       >
         {text}
       </span>{' '}
-      <DropDownIcon color={dropdownColor} />
+      <DropdownIcon color={dropdownColor} />
       <Popover
         id="mouse-over-popover"
         className={classes.popover}

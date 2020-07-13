@@ -98,6 +98,14 @@ function VerifyEmail(): JSX.Element {
   );
 }
 
+function PostPurchase(): JSX.Element {
+  return (
+    <div style={{ padding: '1rem', display: 'flex', justifyContent: 'center' }}>
+      <Title variant="h1">Thank you for your purchase</Title>
+    </div>
+  );
+}
+
 // function Admin(): JSX.Element {
 //   return (
 //     <div style={{ paddingLeft: '1rem' }}>
@@ -140,10 +148,18 @@ const App: React.FC = (): JSX.Element => {
             )}
           />
           <Route
+            path="/post-purchase"
+            render={({ match: { path } }) => (
+              <>
+                <Route path={`${path}/:projectId`} component={PostPurchase} />
+              </>
+            )}
+          />
+          <Route
             path="/credits"
             render={({ match: { path } }) => (
               <>
-                <Route path={`${path}/:userId`} component={CreditsContainer} />
+                <Route path={`${path}/:projectId`} component={CreditsContainer} />
               </>
             )}
           />

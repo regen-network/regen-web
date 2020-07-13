@@ -1,12 +1,10 @@
 import React from 'react';
 import { withStyles, Theme } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
+import Button, { ButtonProps } from '@material-ui/core/Button';
 
-interface OutlinedButtonProps {
-  children?: any;
-  startIcon?: JSX.Element;
-  fullWidth?: boolean;
-  onClick?: () => void;
+interface OutlinedButtonProps extends ButtonProps {
+  target?: string;
+  rel?: string;
 }
 
 const CustomButton = withStyles((theme: Theme) => ({
@@ -22,7 +20,7 @@ const CustomButton = withStyles((theme: Theme) => ({
     paddingLeft: theme.spacing(4),
     backgroundColor: theme.palette.primary.main,
     '&:hover': {
-      backgroundColor: theme.palette.primary.main,
+      backgroundColor: theme.palette.secondary.light,
     },
   },
   startIcon: {
@@ -32,12 +30,7 @@ const CustomButton = withStyles((theme: Theme) => ({
 
 export default function OutlinedButton(props: OutlinedButtonProps): JSX.Element {
   return (
-    <CustomButton
-      color="secondary"
-      startIcon={props.startIcon}
-      fullWidth={props.fullWidth}
-      onClick={props.onClick}
-    >
+    <CustomButton color="secondary" {...props}>
       {props.children}
     </CustomButton>
   );

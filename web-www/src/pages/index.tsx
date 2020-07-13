@@ -12,6 +12,7 @@ import HomeValuesSection from '../sections/home/ValuesSection';
 import ClimateSection from '../sections/home/ClimateSection';
 import CarbonPlusSection from '../sections/home/CarbonPlusSection';
 import EmailSubmitSection from '../sections/shared/EmailSubmitSection';
+import BlogSection from '../sections/shared/BlogSection';
 
 const IndexPage = (): JSX.Element => {
   const theme = useTheme();
@@ -69,6 +70,7 @@ const IndexPage = (): JSX.Element => {
       {climateChangeCarbonSection}
       <HomeLedger />
       <HomeValuesSection />
+      <BlogSection />
     </>
   );
 };

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import * as togeojson from '@mapbox/togeojson';
 import Grid from '@material-ui/core/Grid';
-import Modal from '@material-ui/core/Modal';
 
 import background from '../assets/background.jpg';
 import { Project, Impact, ProjectDefault, ActionGroup } from '../mocks';
@@ -29,7 +28,8 @@ import { User } from 'web-components/lib/components/user/UserInfo';
 import BuyFooter from 'web-components/lib/components/buy-footer';
 import MrvTabs from 'web-components/lib/components/tabs';
 import Table from 'web-components/lib/components/table';
-import CloseIcon from 'web-components/lib/components/icons/CloseIcon';
+import Modal from 'web-components/lib/components/modal';
+import CreditsPurchaseForm from './CreditsPurchaseForm';
 
 import { getImgSrc } from '../lib/imgSrc';
 
@@ -249,50 +249,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       marginBottom: theme.spacing(5),
     },
   },
-  modalContent: {
-    outline: 'none',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    position: 'absolute',
-    [theme.breakpoints.up('md')]: {
-      width: '50%',
-      height: '70%',
-    },
-    [theme.breakpoints.between('sm', 'sm')]: {
-      width: '70%',
-      height: '70%',
-    },
-    [theme.breakpoints.down('xs')]: {
-      width: `calc(100% - 40px)`,
-      height: `calc(100% - 20px)`,
-      left: '20px',
-      top: '20px',
-      transform: 'none',
-    },
-    backgroundColor: theme.palette.background.paper,
-    boxShadow: theme.shadows[5],
-    '& iframe': {
-      width: '100%',
-      height: '100%',
-      border: 'none',
-    },
-  },
-  closeButton: {
-    position: 'absolute',
-    top: '-20px',
-    right: '-20px',
-    height: '40px',
-    width: '40px',
-    backgroundColor: theme.palette.primary.main,
-    borderRadius: '50%',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    cursor: 'pointer',
-    fontWeight: 'bold',
-    boxShadow: theme.shadows[5],
-  },
   glanceCard: {
     marginTop: theme.spacing(5),
   },
@@ -378,7 +334,7 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
   }
 
   // Modal
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const handleOpen = (): void => {
     setOpen(true);
   };
@@ -620,19 +576,14 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
         </div>
       )}
 
-      {project.presaleUrl && (
-        <Modal
-          open={open}
-          onClose={handleClose}
-          aria-labelledby="presale-modal"
-          aria-describedby="presale-form"
-        >
-          <div className={classes.modalContent}>
-            <iframe title="airtable-presale-form" src={project.presaleUrl} />
-            <div onClick={handleClose} className={classes.closeButton}>
-              <CloseIcon />
-            </div>
-          </div>
+      {project.creditPrice && project.stripePrice && (
+        <Modal open={open} onClose={handleClose}>
+          <CreditsPurchaseForm
+            onClose={handleClose}
+            creditPrice={project.creditPrice}
+            stripePrice={project.stripePrice}
+          />
+          {/*<iframe title="airtable-presale-form" src={project.presaleUrl} />*/}
         </Modal>
       )}
     </div>

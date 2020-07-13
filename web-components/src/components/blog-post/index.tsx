@@ -48,8 +48,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     lineHeight: '150%',
   },
   button: {
-    width: '56%',
+    width: theme.spacing(38),
     height: theme.spacing(10),
+    paddingRight: theme.spacing(0),
+    paddingLeft: theme.spacing(0),
   },
 }));
 

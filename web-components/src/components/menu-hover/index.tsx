@@ -23,8 +23,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     backgroundColor: 'rgba(0, 0, 0, 0)',
   },
   paper: {
-    'border-radius': '0px',
-    border: `1px solid ${theme.palette.info.light}`,
+    'border-radius': '2px',
+    border: `1px solid ${theme.palette.grey[400]}`,
   },
 }));
 
@@ -82,9 +82,10 @@ const MenuHover = ({ text, textColor, dropdownColor, children }: Props): JSX.Ele
           vertical: 'top',
           horizontal: 'left',
         }}
+        disableScrollLock
         PaperProps={{ onMouseEnter: popoverEnter, onMouseLeave: popoverLeave }}
       >
-        <Paper className={classes.paper}>
+        <Paper className={classes.paper} elevation={5}>
           <MenuList className={classes.text}>{children}</MenuList>
         </Paper>
       </Popover>

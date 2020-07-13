@@ -9,6 +9,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   popoverContent: {
     pointerEvents: 'auto',
+    marginTop: theme.spacing(1),
   },
   text: {
     '& li > a': {
@@ -83,8 +84,8 @@ const MenuHover = ({ text, textColor, dropdownColor, children }: Props): JSX.Ele
         }}
         PaperProps={{ onMouseEnter: popoverEnter, onMouseLeave: popoverLeave }}
       >
-        <Paper className={`${classes.paper}`}>
-          <MenuList className={`${classes.text}`}>{children}</MenuList>
+        <Paper className={classes.paper}>
+          <MenuList className={classes.text}>{children}</MenuList>
         </Paper>
       </Popover>
     </div>

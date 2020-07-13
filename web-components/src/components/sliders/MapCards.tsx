@@ -41,7 +41,11 @@ export default function MapCards({ features, afterChange }: MapCardsProps): JSX.
   };
   return (
     <div>
-      <Slider {...settings} afterChange={index => afterChange(features[index].id)} className={classes.root}>
+      <Slider
+        {...settings}
+        afterChange={index => afterChange(features[index] ? features[index].id : null)}
+        className={classes.root}
+      >
         {features.map((item, index) => (
           <div className={classes.item} key={index}>
             <MapCard

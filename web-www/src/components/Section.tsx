@@ -58,14 +58,14 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
 const Section = ({ children, className, titleVariant = 'h2', title, withSlider = false }: SectionProps) => {
   const classes = useStyles({ withSlider });
   return (
-    <div className={clsx(classes.root, className)}>
+    <section className={clsx(classes.root, className)}>
       {title && (
         <Title className={classes.title} variant={titleVariant} align="center">
           {title}
         </Title>
       )}
       {children}
-    </div>
+    </section>
   );
 };
 

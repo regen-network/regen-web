@@ -56,7 +56,7 @@ const CustomTooltip: any = withStyles((theme: Theme) => ({
   },
   tooltip: {
     color: theme.palette.info.dark,
-    boxShadow: theme.shadows[3],
+    boxShadow: theme.shadows[4],
     background: theme.palette.grey[50],
     border: `1px solid ${theme.palette.grey[50]}`,
     borderRadius: '5px',

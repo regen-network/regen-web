@@ -1,0 +1,11 @@
+mutation ReallyCreateUser($input: ReallyCreateUserInput!) {
+  reallyCreateUser(input: $input) {
+    user {
+      id
+      partyByPartyId {
+        walletId
+        addressId
+      }
+    }
+  }
+}

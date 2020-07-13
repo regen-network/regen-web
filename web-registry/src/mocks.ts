@@ -75,6 +75,7 @@ export interface Project {
   presaleUrl?: string;
   hideCreditDetails?: boolean;
   documents: Data[];
+  stripePrice?: string;
 }
 
 interface BasicProject {

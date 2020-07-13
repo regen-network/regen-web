@@ -56,10 +56,6 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       '& span:hover, svg:hover, path:hover': {
         borderBottom: 'none',
       },
-      '& :hover': {
-        'background-color': 'inherit',
-        borderBottom: `2px solid ${theme.palette.secondary.main}`,
-      },
       'background-color': 'inherit',
       'text-decoration': 'none',
     },
@@ -149,6 +145,10 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     lineHeight: theme.spacing(6),
     paddingRight: theme.spacing(7.375),
     paddingLeft: theme.spacing(7.375),
+    'background-color': 'inherit',
+    '&:not(:last-child) > a:hover': {
+      borderBottom: `2px solid ${theme.palette.secondary.main}`,
+    },
     '&:last-child': {
       paddingTop: theme.spacing(1.25),
     },

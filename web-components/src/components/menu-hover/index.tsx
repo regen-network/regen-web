@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   popoverContent: {
     pointerEvents: 'auto',
-    marginTop: theme.spacing(1),
+    marginTop: theme.spacing(4.75),
   },
   text: {
     '& li > a': {

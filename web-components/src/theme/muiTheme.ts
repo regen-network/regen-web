@@ -36,6 +36,7 @@ const theme = createMuiTheme({
       main: '#4FB573',
       light: '#DCF0E3',
       dark: '#7BC796',
+      contrastText: '#B9E1C7',
     },
     info: {
       dark: '#545555',
@@ -47,6 +48,7 @@ const theme = createMuiTheme({
       100: '#D2D5D9',
       200: '#F9F9F9',
       300: '#cccfd4',
+      400: '#C0C5C4',
     },
     error: {
       main: '#DE4526',
@@ -121,7 +123,7 @@ const theme = createMuiTheme({
     '-4px 0px 10px rgba(0, 0, 0, 0.25)',
     '0px 0px 20px rgba(0, 0, 0, 0.25)',
     '0px 4px 10px rgba(0, 0, 0, 0.1)',
-    defaultTheme.shadows[5],
+    '0px 0px 4px rgba(0, 0, 0, 0.05)',
     defaultTheme.shadows[6],
     defaultTheme.shadows[7],
     defaultTheme.shadows[8],

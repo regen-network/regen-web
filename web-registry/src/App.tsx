@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import { Router, Switch, Route, Link, useParams, useLocation } from 'react-router-dom';
+import { useTheme } from '@material-ui/core/styles';
+
 import NavBar from './components/NavBar';
 import { useAuth0 } from './react-auth0-spa';
 import isAdmin from './lib/admin';
@@ -116,6 +118,7 @@ function PostPurchase(): JSX.Element {
 
 const App: React.FC = (): JSX.Element => {
   const { user, loading } = useAuth0();
+  const theme = useTheme();
 
   if (loading) {
     return <div>Loading...</div>;
@@ -125,7 +128,7 @@ const App: React.FC = (): JSX.Element => {
     <Router history={history}>
       <ScrollToTop />
       <div>
-        <Header transparent={false}>
+        <Header color={theme.palette.primary.light} transparent={false}>
           <NavBar />
         </Header>
         <Switch>

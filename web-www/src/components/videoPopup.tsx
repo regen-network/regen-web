@@ -49,17 +49,32 @@ const useStyles = makeStyles(theme => ({
   },
   vid: {
     display: 'inline-block',
-    width: 'min-content',
+	width: 'min-content',
+	[theme.breakpoints.up('xs')]: {
+		position: 'relative',
+		top: '15vh',
+		width: '100vw',
+		height: '50vh',
+	}
   },
   close: {
     cursor: 'pointer',
     'font-size': '4rem',
     'z-index': 150,
-    position: 'absolute',
+    position: 'fixed',
     color: '#fff',
-    left: '97.5vw',
-    'font-family': 'sans-serif',
-    top: '8px',
+	'font-family': 'sans-serif',
+	[theme.breakpoints.down('sm')]: {
+		left: '89vw',
+		top: '10vh',
+	},
+	[theme.breakpoints.up('sm')]: {
+		top: '5vh',
+		left: '94.5vw',
+	},
+	[theme.breakpoints.down('xs')]: {
+
+	}
   },
 }));
 

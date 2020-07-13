@@ -32,7 +32,7 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
 
   const menuItems = [
     { title: 'Buyers', href: '/buyers' },
-    { title: 'Land Steward', href: '/landsteward' },
+    { title: 'Land Stewards', href: '/landstewards' },
     {
       title: 'Learn More',
       dropdownItems: [
@@ -46,7 +46,7 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
   const matches = useMediaQuery(theme.breakpoints.up('sm'));
   const desktopColor: string = headerColors[location.pathname]
     ? headerColors[location.pathname]
-    : theme.palette.primary.main;
+    : theme.palette.primary.light;
 
   return (
     <>

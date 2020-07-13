@@ -16,18 +16,21 @@ let useStyles = makeStyles((theme: Theme) => ({
     'text-shadow': '0px 4px 10px rgba(0, 0, 0, 0.1)',
     'text-align': 'center',
     color: theme.palette.primary.main,
-	width: '100%',
-	height: '75vh',
+    width: '100%',
+    height: '90vh',
     'background-position': 'bottom center',
     'background-repeat': 'repeat-y',
     'background-size': 'cover',
     [theme.breakpoints.up('sm')]: {
-      'padding-top': '19vh',
+      'padding-top': '29vh',
       'padding-bottom': '40vh',
-    },
+	},
+	[theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
+		paddingTop: '12vh',
+	 },
     [theme.breakpoints.down('xs')]: {
-	  'padding-top': '50px',
-	  height:'60vh',
+	  'padding-top': '15vh',
+	  height: '80vh',
     },
   },
   tag: {

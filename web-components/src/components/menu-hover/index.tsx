@@ -3,9 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Popover, MenuList, Paper, Theme } from '@material-ui/core';
 import DropDownIcon from '../icons/DropDownIcon';
 
-//replacing #000 on line 15, color property, with theme.palette.primary.contrastText doesn't yield black text in the dropdown. Not sure why
 const useStyles = makeStyles((theme: Theme) => ({
-  root: {},
   popover: {
     pointerEvents: 'none',
   },
@@ -29,21 +27,18 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-interface styleProps {
-  textColor: string;
-}
-
 interface Props {
   children: React.ReactNode;
   text: string;
   textColor?: string;
+  dropdownColor?: string;
 }
 
 /**
  *
  * @param object contains text, color, children. Where text is the anchor text. Color is a string for link text color, and children are MenuItems typically with Links.
  */
-const MenuHover = ({ text, textColor, children }: Props): JSX.Element => {
+const MenuHover = ({ text, textColor, dropdownColor, children }: Props): JSX.Element => {
   const [openedPopover, setOpenedPopover] = useState(false);
   const popoverAnchor = useRef(null);
 
@@ -59,7 +54,7 @@ const MenuHover = ({ text, textColor, children }: Props): JSX.Element => {
   };
 
   return (
-    <div className={classes.root}>
+    <div>
       <span
         ref={popoverAnchor}
         aria-owns="mouse-over-popover"
@@ -69,7 +64,7 @@ const MenuHover = ({ text, textColor, children }: Props): JSX.Element => {
       >
         {text}
       </span>{' '}
-      <DropDownIcon />
+      <DropDownIcon color={dropdownColor} />
       <Popover
         id="mouse-over-popover"
         className={classes.popover}

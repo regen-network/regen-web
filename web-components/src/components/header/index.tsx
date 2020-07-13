@@ -18,11 +18,15 @@ export interface node {
   [key: number]: React.ReactNode;
 }
 
+interface StyleProps {
+  color: string;
+}
+
 interface HeaderProps {
   absolute?: boolean;
   children?: any;
   transparent?: boolean;
-  color?: string;
+  color: string;
   menuItems?: HeaderMenuItem[];
 }
 
@@ -32,7 +36,7 @@ interface HeaderMenuItem {
   dropdownItems?: { title: string; href: string }[];
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   mobile: {
     [theme.breakpoints.down('xs')]: {
       display: 'inline-block',
@@ -40,21 +44,13 @@ const useStyles = makeStyles((theme: Theme) => ({
       'align-items': 'unset',
     },
   },
-  menuItem: {
-    // [theme.breakpoints.down('xs')]: {
-    //   'margin-right': '2em',
-    // },
-  },
   logoItem: {
     [theme.breakpoints.down('xs')]: {},
   },
-  menuList: {
+  menuList: props => ({
     [theme.breakpoints.up('sm')]: {
       display: 'flex',
-    },
-    '& li': {
-      paddingRight: theme.spacing(7.375),
-      paddingLeft: theme.spacing(7.375),
+      paddingTop: theme.spacing(6.5),
     },
     '& li.MuiListItem-button, li.MuiListItem-button > div': {
       '& span:hover, svg:hover, path:hover': {
@@ -70,7 +66,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     position: 'unset',
     width: 'unset',
     zIndex: 0,
-  },
+  }),
   background: {
     backgroundColor: theme.palette.primary.main,
   },
@@ -81,10 +77,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   transparent: {
     backgroundColor: `rgba(0,0,0,0)`,
   },
-  color: (props: any) => ({
-    color: props.textColor || theme.palette.primary.contrastText,
+  color: props => ({
+    color: props.color,
     '& ul > li > a': {
-      color: props.textColor || theme.palette.primary.contrastText,
+      color: props.color,
       textDecoration: 'none',
       fontFamily: 'Muli',
       textTransform: 'uppercase',
@@ -93,7 +89,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       },
     },
     '& ul > li > div > span': {
-      color: props.textColor || theme.palette.primary.contrastText,
+      color: props.color,
       textDecoration: 'none',
       fontFamily: 'Muli',
       textTransform: 'uppercase',
@@ -104,12 +100,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   }),
   root: {
     '& .MuiMenuItem-root > a, .MuiMenuItem-root > div > span': {
-      'font-size': '.87rem',
+      fontSize: theme.spacing(3.25),
       letterSpacing: '1px',
     },
     [theme.breakpoints.up('md')]: {
-      padding: `${theme.spacing(2.5)} ${theme.spacing(12)}`,
-      'padding-right': `0px`,
+      padding: `${theme.spacing(2.5)} 0 ${theme.spacing(2.5)} ${theme.spacing(12)}`,
     },
     [theme.breakpoints.up('sm')]: {
       height: theme.spacing(27.5),
@@ -148,6 +143,24 @@ const useStyles = makeStyles((theme: Theme) => ({
       width: theme.spacing(23),
     },
   },
+  menuItem: {
+    boxSizing: 'border-box',
+    height: '100%',
+    lineHeight: theme.spacing(6),
+    paddingRight: theme.spacing(7.375),
+    paddingLeft: theme.spacing(7.375),
+    '&:last-child': {
+      paddingTop: theme.spacing(1.25),
+    },
+    [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
+      paddingRight: theme.spacing(1.25),
+      paddingLeft: theme.spacing(1.25),
+    },
+  },
+  menu: {
+    height: '100%',
+    lineHeight: theme.spacing(6),
+  },
 }));
 
 export default function Header({
@@ -157,7 +170,7 @@ export default function Header({
   color,
   menuItems,
 }: HeaderProps): JSX.Element {
-  const classes = useStyles({ textColor: color });
+  const classes = useStyles({ color });
   const headerClass = [];
   const rootClass = [];
   rootClass.push(transparent ? classes.transparent : classes.background);
@@ -173,15 +186,16 @@ export default function Header({
       <MenuList className={classes.menuList}>
         {menuItems?.map((item, index) => {
           return (
-            <MenuItem
-              key={index}
-              style={{
-                boxSizing: item.dropdownItems ? 'unset' : 'border-box',
-                height: item.dropdownItems ? 'unset' : '100%',
-              }}
-            >
+            <MenuItem key={index} className={classes.menuItem}>
               {item.dropdownItems ? (
-                <MenuHover text={item.title}>
+                <MenuHover
+                  dropdownColor={
+                    color === theme.palette.primary.light
+                      ? theme.palette.secondary.main
+                      : theme.palette.secondary.contrastText
+                  }
+                  text={item.title}
+                >
                   {item.dropdownItems.map((dropdownItem, index) => {
                     return (
                       <MenuItem key={index}>
@@ -216,7 +230,7 @@ export default function Header({
             <RegenIcon className={classes.regenIcon} color={color} />
           </a>
         </Grid>
-        <Grid className={classes.menuItem} item>
+        <Grid className={classes.menu} item>
           {menu}
         </Grid>
         {children}

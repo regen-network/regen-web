@@ -46,7 +46,7 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
   const matches = useMediaQuery(theme.breakpoints.up('sm'));
   const desktopColor: string = headerColors[location.pathname]
     ? headerColors[location.pathname]
-    : theme.palette.primary.main;
+    : theme.palette.primary.light;
 
   return (
     <>

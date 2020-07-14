@@ -374,10 +374,6 @@
       "credits": {
         "purchased": 0,
         "issued": 0
-      },
-      "creditPrice": {
-        "unitPrice": 10,
-        "currency": "AUD"
       }
     },
     {
@@ -388,6 +384,11 @@
         "date": "March 15, 2020",
         "url": "test"
       }],
+      "stripePrice": "sku_HAqf7cJtNFynOf",
+      "creditPrice": {
+        "unitPrice": 27.50,
+        "currency": "USD"
+      },
       "name": "Wilmot Farm",
       "fieldsOverride": {
         "nonMonitoredImpact": {

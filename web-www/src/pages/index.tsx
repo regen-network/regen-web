@@ -1,6 +1,6 @@
 import React from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
-import { makeStyles, Theme, useTheme } from '@material-ui/core';
+import { useTheme } from '@material-ui/core';
 import BackgroundImage from 'gatsby-background-image';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 
@@ -12,6 +12,7 @@ import HomeValuesSection from '../sections/home/ValuesSection';
 import ClimateSection from '../sections/home/ClimateSection';
 import CarbonPlusSection from '../sections/home/CarbonPlusSection';
 import EmailSubmitSection from '../sections/shared/EmailSubmitSection';
+import BlogSection from '../sections/shared/BlogSection';
 
 const IndexPage = (): JSX.Element => {
   const theme = useTheme();
@@ -69,6 +70,7 @@ const IndexPage = (): JSX.Element => {
       {climateChangeCarbonSection}
       <HomeLedger />
       <HomeValuesSection />
+      <BlogSection />
     </>
   );
 };

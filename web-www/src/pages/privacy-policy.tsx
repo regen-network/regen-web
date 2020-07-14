@@ -2,7 +2,7 @@ import React from 'react';
 import SEO from '../components/seo';
 import { useStaticQuery, graphql } from 'gatsby';
 import { makeStyles, Theme } from '@material-ui/core';
-import Title from 'web-components/lib/components/Title';
+import Title from 'web-components/lib/components/title';
 import clsx from 'clsx';
 
 const useStyles = makeStyles((theme:Theme) => ({

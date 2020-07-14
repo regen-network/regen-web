@@ -33,8 +33,12 @@ const useStyles = makeStyles((theme:Theme) => ({
 		color: theme.palette.info.dark,
 		'& h2': {
 			color: theme.palette.primary.contrastText,
+			marginTop: theme.spacing(15),
+			marginBottom: theme.spacing(10.5),
 		},
 		'& h4': {
+			marginBottom: theme.spacing(7.25),
+			marginTop: theme.spacing(10.5),
 			color: theme.palette.primary.contrastText,
 			fontSize: theme.spacing(4.7),
 			textTransform: 'uppercase',

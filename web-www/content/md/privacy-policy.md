@@ -1,6 +1,6 @@
 ## 1. Introduction
 
-Welcome to Regen Network Development, Inc.
+Welcome to __Regen Network Development, Inc__.
 
 Regen Network Development, Inc. (“RND”, “us”, “we”, or “our”) operates https://www.regen.network (hereinafter referred to as Service). At RND, we are committed to protecting the privacy and security of your personal information. This Privacy Policy describes the types of personal information we may collect, how we may use this information and when (under certain circumstances) we may disclose this information. This Privacy Policy also details the steps we have taken to secure your personal information. By visiting our Site, you accept the practices described in this Privacy Policy. We are not responsible for the content on, or privacy practices of, any non-RND web site to which this Site links or that links to this Site. 
  
@@ -24,3 +24,62 @@ THE USER is the individual using our Service. The User corresponds to the Data S
 
 REGEN LEDGER is a decentralized data persistence layer that RND leverages to track the issuance, transfer and sale of ecosystem service credits.
 REGEN REGISTRY is an ecosystem service credit marketplace operated by RND.
+
+## 3.	Information Collection and Use
+
+We collect several different types of information for various purposes to provide and improve our Service to you.
+
+## 4.	Types of Data Collected and the Right to Be Forgotten
+
+#### User Profile Data
+While using our Service, we may ask you to provide us with certain personally identifiable information that can be used to contact or identify you (User Profile Data). Personally identifiable information may include, but is not limited to:
+
+1.	Email address
+2.	First name, last name, entity/company name
+3.	Phone number
+
+4.	Address, State, Province, ZIP/Postal code, City, Country
+
+5.	Farm data to enable the creation of ecosystem service credits, which could include, but is not limited to GIS data, land management history (including photos), soil samples, lab results etc.
+
+6.	Financial information (bank account or credit card) to distribute proceeds from purchase or sale of ecosystem services
+
+We may use your User Profile Data to contact you with newsletters, marketing or promotional materials and other information that may be of interest to you. You may opt out of receiving any, or all, of these communications from us by following the unsubscribe link.
+
+#### Project Data
+While using our Service, we may ask you to provide us with certain information that can be used in the development of ecosystem service credits (Project Data). Information may include, but is not limited to:
+
+1.	Farm data to enable the creation of ecosystem service credits, which could include, but is not limited to GIS data, land management history (including photos), soil samples, lab results etc.
+2.	Land tenure
+
+#### Usage Data
+We may also collect information that your browser sends whenever you visit our Service or when you access Service by or through a mobile device (Usage Data).
+ 
+This Usage Data may include information such as your computer's Internet Protocol address (e.g. IP address), browser type, browser version, the pages of our Service that you visit, the time and date of your visit, the time spent on those pages, unique device identifiers and other diagnostic data.
+When you access Service with a mobile device, this Usage Data may include information such as the type of mobile device you use, your mobile device unique ID, the IP address of your mobile device, your mobile operating system, the type of mobile Internet browser you use, unique device identifiers and other diagnostic data.
+
+#### Location Data
+We may use and store information about your location if you give us permission to do so (Location Data). We use this data to provide features of our Service, to improve and customize our Service.
+You can enable or disable location services when you use our Service at any time by way of your device settings.
+The Right to Be Forgotten
+Users shall have the right to the erasure of personal data without undue delay and RND shall have the obligation to erase personal data without undue delay. In the case where information can be stripped of identifiers, RND retains the rights to the use of this data. Inquiries can be sent by email to office@regen.network.
+
+#### Tracking Cookies Data
+RND may use any number of tools to collect information about you, your computer access points, and the web browser that you use to connect to our Site, including cookie, web beacon, pixel tag  and  clear gif  technology. We use cookies and web beacons to identify your device, provide website user authentication, conduct fraud prevention and management services, distinguish you from other visitors, record your IP address and understand your use of our application, and identify the name of the website from which you linked to RND. This information is used for fulfilling contracts with our business partners, and to help us serve you better by improving our Site design, as well as our products, services, and promotions. We do not otherwise track any information about your use of other web sites. Information obtained through cookies and web beacons may be shared with or obtained by service providers on our behalf.
+A cookie is a small data file that is placed on the hard drive of your computer when you visit a web site. A session cookie expires immediately when you end your session (i.e., close your browser). A persistent cookie stores information on the hard drive so when you end your session and return to the same web site at a later date, the cookie information is still available. A web beacon is a small string of code that represents a clear graphic image and is used in conjunction with a cookie.
+
+When you visit our Site, we may use both a session and a persistent cookie. This RND-placed cookie may contain information (such as a unique user ID) that is used to track your usage of our Site and in some cases, your email address. Your email address is only saved in this RND-placed cookie if you register with us. A web beacon allows us to capture certain additional types of information about a visitor’s actions on a web site, such as a visitor’s cookie number, the time, date, duration and number of page views, a description of the page where the web beacon is placed, and details about any items that were purchased.
+
+If you register with us, this RND-placed cookie allows us to recognize you when you return to our Site, and provides you with access to your account information. If you save your information with or order from us, we may also use cookies to monitor and maintain information about your use of our Site. If you have not saved your information with or ordered from us, we may monitor and maintain information about your use of our Site in a manner that does not identify you. You can disable cookies at any time by using your browser options; however, if you turn off cookies, we will not be able to track your order or enable you to make a purchase from our Site. In addition, we will not be able to recognize you as a registered user to allow you access to your account information.
+
+We may use Flash Cookies (also known as Local Stored Objects) or other similar technologies. A Flash cookie is a small data file placed on a computer using Adobe Flash technology that may be built into your computer or downloaded by you to your computer. We use these technologies to personalize and enhance your online experience, facilitate processes, personalize and store your settings. Flash cookies may help our Site visitors to, for example, set volume preferences associated with a video experience, play games and perform surveys. They help us improve our web sites by measuring which areas are of greatest interest to customers. We do not use Flash cookies for marketing or behavioral targeting purposes. Flash cookies are different from browser cookies and the cookie management tools provided by your browser will not remove Flash cookies. If you disable Flash cookies or other similar technologies, please be aware that you may not have access to certain features and services that make your online experience more efficient and enjoyable.
+
+Before using the Site, you are advised to check your current browser settings to ensure that the settings reflect your consent for RND to place cookies on your devices.
+
+#### Device Identifiers
+When you use a mobile device like a tablet or phone to access our Site, we may access, collect, monitor, store on your device, and/or remotely store one or more device identifiers. Device identifiers are small data files or similar data structures stored on or associated with your mobile device, which uniquely identify your mobile device. A device identifier may be data stored in connection with the device hardware, data stored in connection with the device’s operating system or other software, or data sent to the device by RND.
+
+A device identifier may deliver information to us or to a third-party partner about how you browse and use the Site and may help us or others provide reports or personalized content and ads. Some features of the Site may not function properly if use or availability of device identifiers is impaired or disabled.
+
+#### Other Data
+While using our Service, we may also collect the following information: sex, age, date of birth, place of birth, passport details, citizenship, registration at place of residence and actual address, telephone number (work, mobile), details of documents on education, qualification, professional training, employment agreements, non-disclosure agreements, information on bonuses and compensation, information on marital status, family members, social security (or other taxpayer identification) number, office location and other data. 

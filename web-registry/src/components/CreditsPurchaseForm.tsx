@@ -15,9 +15,10 @@ import Description from 'web-components/lib/components/description';
 import CheckboxLabel from 'web-components/lib/components/inputs/CheckboxLabel';
 import TextField from 'web-components/lib/components/inputs/TextField';
 import NumberTextField from 'web-components/lib/components/inputs/NumberTextField';
-import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import SelectTextField, { Option } from 'web-components/lib/components/inputs/SelectTextField';
 import { CreditPrice } from 'web-components/lib/components/buy-footer';
+import { requiredMessage } from 'web-components/lib/components/inputs/messages';
+import Submit from 'web-components/lib/components/form/Submit';
 
 import { countries } from '../lib/countries';
 
@@ -33,9 +34,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: '2rem',
     },
-  },
-  submitButton: {
-    textAlign: 'right',
   },
   subtitle: {
     [theme.breakpoints.up('sm')]: {
@@ -126,30 +124,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       width: '70%',
     },
   },
-  error: {
-    color: theme.palette.error.main,
-    fontWeight: 'bold',
-    marginTop: theme.spacing(2),
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(3.5),
-    },
-    [theme.breakpoints.down('xs')]: {
-      fontSize: theme.spacing(3),
-    },
-  },
-  cancel: {
-    fontSize: theme.spacing(3),
-    fontFamily: theme.typography.h1.fontFamily,
-    textTransform: 'uppercase',
-    color: theme.palette.info.main,
-    cursor: 'pointer',
-    [theme.breakpoints.up('sm')]: {
-      paddingLeft: theme.spacing(32.5),
-    },
-    // [theme.breakpoints.down('xs')]: {
-    //   paddingRight: theme.spacing(4.25),
-    // },
-  },
 }));
 
 interface CreditsPurchaseFormProps {
@@ -213,8 +187,6 @@ export default function CreditsPurchaseForm({
       searchState(initialCountry);
     }
   });
-
-  const requiredMessage: string = 'This field is required';
 
   return (
     <div>
@@ -444,39 +416,15 @@ export default function CreditsPurchaseForm({
                   />
                 </div>
               </Form>
-              <Grid container wrap="nowrap" alignItems="center" justify="flex-end">
-                <Grid
-                  item
-                  className={classes.cancel}
-                  onClick={() => {
-                    if (!isSubmitting) {
-                      onClose();
-                    }
-                  }}
-                >
-                  cancel
-                </Grid>
-                <Grid item container direction="column" justify="flex-end" className={classes.submitButton}>
-                  <Grid item>
-                    <ContainedButton
-                      disabled={(submitCount > 0 && !isValid) || isSubmitting}
-                      onClick={submitForm}
-                    >
-                      buy for ${formattedTotal}
-                    </ContainedButton>
-                  </Grid>
-                  {submitCount > 0 && !isValid && (
-                    <Grid item className={classes.error}>
-                      Please correct the errors above
-                    </Grid>
-                  )}
-                  {status && status.serverError && (
-                    <Grid item className={classes.error}>
-                      {status.serverError}
-                    </Grid>
-                  )}
-                </Grid>
-              </Grid>
+              <Submit
+                isSubmitting={isSubmitting}
+                onClose={onClose}
+                status={status}
+                isValid={isValid}
+                submitCount={submitCount}
+                submitForm={submitForm}
+                label={`buy for ${formattedTotal}`}
+              />
             </div>
           );
         }}

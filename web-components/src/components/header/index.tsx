@@ -20,6 +20,7 @@ export interface node {
 
 interface StyleProps {
   color: string;
+  borderBottom?: boolean;
 }
 
 interface HeaderProps {
@@ -28,6 +29,7 @@ interface HeaderProps {
   transparent?: boolean;
   color: string;
   menuItems?: HeaderMenuItem[];
+  borderBottom?: boolean;
 }
 
 interface HeaderMenuItem {
@@ -94,7 +96,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       },
     },
   }),
-  root: {
+  root: props => ({
     '& .MuiMenuItem-root > a, .MuiMenuItem-root > div > span': {
       fontSize: theme.spacing(3.25),
       letterSpacing: '1px',
@@ -120,11 +122,12 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       paddingRight: theme.spacing(5),
       paddingLeft: theme.spacing(5),
     },
+    borderBottom: props.borderBottom ? '1px #D2D5D9 solid' : 'none',
     maxWidth: theme.breakpoints.values.lg,
     margin: '0 auto',
     position: 'relative',
     zIndex: 10,
-  },
+  }),
   searchIcon: {
     color: theme.palette.grey[100],
     marginRight: theme.spacing(6.25),
@@ -169,8 +172,9 @@ export default function Header({
   transparent,
   color,
   menuItems,
+  borderBottom,
 }: HeaderProps): JSX.Element {
-  const classes = useStyles({ color });
+  const classes = useStyles({ color, borderBottom });
   const headerClass = [];
   const rootClass = [];
   rootClass.push(transparent ? classes.transparent : classes.background);

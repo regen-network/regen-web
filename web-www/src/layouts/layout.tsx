@@ -32,6 +32,10 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
   };
    // Links in rest of the site must use the trailing '/' in order for these to work appropriately
 
+   const headerBorderBottomPages: Array<string> = [
+	   '/privacy-policy/',
+   ]
+
   const menuItems = [
     { title: 'Buyers', href: '/buyers' },
     { title: 'Land Stewards', href: '/landstewards' },
@@ -56,7 +60,8 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
         menuItems={menuItems}
         absolute={matches}
         transparent
-        color={matches ? desktopColor : theme.palette.primary.light}
+		color={matches ? desktopColor : theme.palette.primary.light}
+		borderBottom={headerBorderBottomPages.includes(location.pathname) ? true : false}
       />
       <div>
         <main>{children}</main>

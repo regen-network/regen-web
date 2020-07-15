@@ -29,22 +29,18 @@ const useStyles = makeStyles((theme: Theme) => ({
     paddingBottom: theme.spacing(10),
   },
   textFields: {},
-  textField: {
-    marginTop: theme.spacing(8.25),
-  },
-  error: {
-    color: theme.palette.error.main,
-    fontWeight: 'bold',
-    marginTop: theme.spacing(2),
+  usd: {
+    fontSize: theme.spacing(4),
+    marginTop: theme.spacing(7),
     [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(3.5),
+      marginLeft: theme.spacing(4.875),
     },
     [theme.breakpoints.down('xs')]: {
-      fontSize: theme.spacing(3),
+      marginLeft: theme.spacing(2.75),
     },
   },
-  submitButton: {
-    textAlign: 'right',
+  textField: {
+    marginTop: theme.spacing(8.25),
   },
 }));
 
@@ -76,9 +72,6 @@ export default function MoreInfoForm({
           }
           if (!values.name) {
             errors.name = requiredMessage;
-          }
-          if (!values.budget) {
-            errors.budget = requiredMessage;
           }
           return errors;
         }}
@@ -116,6 +109,7 @@ export default function MoreInfoForm({
                     <Field
                       component={NumberTextField}
                       name="budget"
+                      adornment="$"
                       min={1}
                       arrows={false}
                       label="Budget"
@@ -123,7 +117,7 @@ export default function MoreInfoForm({
                     />
                   </Grid>
                   <Grid item xs={6}>
-                    <Typography>USD</Typography>
+                    <Typography className={classes.usd}>USD</Typography>
                   </Grid>
                 </Grid>
               </Form>

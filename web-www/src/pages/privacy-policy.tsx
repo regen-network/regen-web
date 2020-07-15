@@ -22,19 +22,34 @@ const useStyles = makeStyles((theme:Theme) => ({
 			marginBottom: theme.spacing(11.25)
 		},
 		[theme.breakpoints.down('xs')]: {
+			fontSize: '38px',
 			paddingTop: theme.spacing(18.25),
 			marginBottom: theme.spacing(12.75)
 		},
 		
 	},
 	text: {
-		fontSize: theme.spacing(4.5),
+		fontSize: '18px',
+		[theme.breakpoints.down('sm')]: {
+			fontSize: '16px',
+		},
 		lineHeight: '150%',
 		color: theme.palette.info.dark,
+		'& a, a:visited': {
+			textDecoration: 'none',
+			color: theme.palette.info.dark,
+		},
 		'& h2': {
 			color: theme.palette.primary.contrastText,
 			marginTop: theme.spacing(15),
 			marginBottom: theme.spacing(10.5),
+			fontFamily: 'Muli',
+			[theme.breakpoints.down('xs')]:{
+				fontSize: '21px',
+			},
+			[theme.breakpoints.up('sm')]:{
+				fontSize: '24px',
+			},
 		},
 		'& h4': {
 			marginBottom: theme.spacing(7.25),

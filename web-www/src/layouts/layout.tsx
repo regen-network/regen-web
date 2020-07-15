@@ -30,9 +30,7 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
 	'/buyers/': theme.palette.primary.light,
 	'/privacy-policy/': theme.palette.primary.light,
   };
-  /**
-   * Links in rest of the site must use the trailing '/' in order for these to work appropriately
-   */
+   // Links in rest of the site must use the trailing '/' in order for these to work appropriately
 
   const menuItems = [
     { title: 'Buyers', href: '/buyers' },

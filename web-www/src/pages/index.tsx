@@ -1,6 +1,6 @@
 import React from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
-import { makeStyles, Theme, useTheme } from '@material-ui/core';
+import { useTheme } from '@material-ui/core';
 import BackgroundImage from 'gatsby-background-image';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 

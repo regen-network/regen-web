@@ -12,6 +12,7 @@ interface TriggerTextFieldProps extends TextFieldProps {
 interface RegenTextFieldProps extends TextFieldProps {
   children?: any;
   errors?: boolean;
+  optional?: boolean;
   adornment?: string;
   triggerOnChange?: (v: any) => Promise<void>;
   transformValue?: (v: any) => void;
@@ -19,6 +20,7 @@ interface RegenTextFieldProps extends TextFieldProps {
 
 interface StyleProps extends TextFieldProps {
   errors: boolean;
+  optional: boolean;
 }
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
@@ -47,6 +49,17 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       },
     },
     '& .MuiFormLabel-root': {
+      '&::after': {
+        content: props.optional ? '" (optional)"' : '',
+        fontWeight: 'normal',
+        color: theme.palette.info.main,
+        [theme.breakpoints.up('sm')]: {
+          fontSize: theme.spacing(4),
+        },
+        [theme.breakpoints.down('xs')]: {
+          fontSize: theme.spacing(3.5),
+        },
+      },
       '&.Mui-error': {
         color: theme.palette.primary.contrastText,
       },
@@ -128,11 +141,12 @@ export default function RegenTextField({
   transformValue,
   triggerOnChange,
   errors = false,
+  optional = false,
   children,
   adornment,
   ...props
 }: RegenTextFieldProps): JSX.Element {
-  const classes = useStyles({ ...props, errors });
+  const classes = useStyles({ ...props, optional, errors });
   return (
     <TriggerTextField
       {...props}
@@ -143,7 +157,7 @@ export default function RegenTextField({
         disableUnderline: true,
         startAdornment: adornment ? <InputAdornment position="start">{adornment}</InputAdornment> : null,
       }}
-      InputLabelProps={{ focused: false }}
+      InputLabelProps={{ focused: false, required: false }}
       fullWidth
     >
       {children}

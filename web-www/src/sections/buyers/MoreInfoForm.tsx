@@ -61,7 +61,7 @@ export default function MoreInfoForm({
       </Description>
       <Formik
         initialValues={{
-          budget: 1,
+          budget: undefined,
           name: '',
           orgName: '',
           email: '',
@@ -105,6 +105,7 @@ export default function MoreInfoForm({
                     name="orgName"
                     className={classes.textField}
                     label="Organization name"
+                    optional
                   />
                 </div>
                 <Grid container alignItems="center" className={classes.textField}>
@@ -117,6 +118,7 @@ export default function MoreInfoForm({
                       arrows={false}
                       label="Budget"
                       transformValue={(v: number): number => Math.max(1, v)}
+                      optional
                     />
                   </Grid>
                   <Grid item xs={6}>

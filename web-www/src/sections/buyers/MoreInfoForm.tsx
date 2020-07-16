@@ -19,6 +19,13 @@ interface MoreInfoFormProps {
   onClose: () => void;
 }
 
+interface Values {
+  budget: number | undefined;
+  email: string;
+  name: string;
+  orgName: string;
+}
+
 const useStyles = makeStyles((theme: Theme) => ({
   title: {
     [theme.breakpoints.up('sm')]: {

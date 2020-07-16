@@ -59,6 +59,7 @@ export default function Cancel({
   return (
     <Grid container wrap="nowrap" alignItems="center" justify="flex-end">
       <Grid
+        xs={5}
         item
         className={classes.cancel}
         onClick={() => {
@@ -69,7 +70,7 @@ export default function Cancel({
       >
         cancel
       </Grid>
-      <Grid item container direction="column" justify="flex-end" className={classes.submitButton}>
+      <Grid xs={7} item container direction="column" justify="flex-end" className={classes.submitButton}>
         <Grid item>
           <ContainedButton disabled={(submitCount > 0 && !isValid) || isSubmitting} onClick={submitForm}>
             {label}

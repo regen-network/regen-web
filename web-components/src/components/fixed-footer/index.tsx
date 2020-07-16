@@ -1,10 +1,11 @@
 import React from 'react';
 import { makeStyles, useTheme, Theme } from '@material-ui/core';
-import Grid from '@material-ui/core/Grid';
+import Grid, { GridJustification } from '@material-ui/core/Grid';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 interface FixedFooterProps {
   children?: any;
+  justify?: GridJustification;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -53,7 +54,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function FixedFooter({ children }: FixedFooterProps): JSX.Element {
+export default function FixedFooter({ children, justify }: FixedFooterProps): JSX.Element {
   const classes = useStyles({});
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up('sm'));
@@ -64,7 +65,7 @@ export default function FixedFooter({ children }: FixedFooterProps): JSX.Element
         container
         wrap="nowrap"
         alignItems="center"
-        justify={matches ? 'flex-end' : 'space-between'}
+        justify={justify ? justify : matches ? 'flex-end' : 'space-between'}
         className={classes.root}
       >
         {children}

@@ -44,7 +44,7 @@ const BuyersPage = (): JSX.Element => {
       <InvestingSection />
       <FeaturedSection />
       <ComingSoonSection />
-      <FixedFooter>
+      <FixedFooter justify="flex-end">
         <>
           <ContainedButton onClick={handleOpen} startIcon={<EmailIcon />}>
             send me more info

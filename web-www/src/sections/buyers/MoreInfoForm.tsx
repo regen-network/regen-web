@@ -3,6 +3,8 @@ import { makeStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { Formik, Form, Field } from 'formik';
+import axios from 'axios';
+import { navigate } from 'gatsby';
 
 import Title from 'web-components/lib/components/title';
 import Description from 'web-components/lib/components/description';
@@ -85,11 +87,30 @@ export default function MoreInfoForm({
           }
           return errors;
         }}
-        onSubmit={async (
+        onSubmit={(
           { budget, email, name, orgName },
           { setSubmitting, setStatus },
         ) => {
           setSubmitting(true);
+          const apiUri: string = process.env.GATSBY_API_URI || 'http://localhost:5000';
+          axios
+            .post(`${apiUri}/buyers-info`, {
+              budget,
+              email,
+              name,
+              orgName,
+            })
+            .then(resp => {
+              setSubmitting(false);
+              navigate('/buyers', {
+                state: { submitted: true },
+                replace: true,
+              });
+            })
+            .catch(e => {
+              console.log(e);
+              setSubmitting(false);
+            });
         }}
       >
         {({ values, errors, submitForm, isSubmitting, isValid, submitCount, status }) => {

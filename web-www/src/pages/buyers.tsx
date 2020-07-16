@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import SEO from '../components/seo';
 import TopSection from '../sections/buyers/TopSection';
@@ -11,6 +11,7 @@ import FixedFooter from 'web-components/lib/components/fixed-footer';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import EmailIcon from 'web-components/lib/components/icons/EmailIcon';
 import Modal from 'web-components/lib/components/modal';
+import Banner from 'web-components/lib/components/banner';
 
 // const useStyles = makeStyles((theme: Theme) => ({
 //   callButton: {
@@ -26,7 +27,7 @@ import Modal from 'web-components/lib/components/modal';
 //   },
 // }));
 
-const BuyersPage = (): JSX.Element => {
+const BuyersPage = ({ location }): JSX.Element => {
   const [open, setOpen] = useState(false);
   const handleOpen = (): void => {
     setOpen(true);
@@ -35,6 +36,12 @@ const BuyersPage = (): JSX.Element => {
   const handleClose = (): void => {
     setOpen(false);
   };
+
+  useEffect(() => {
+    if (location && location.state && location.state.submitted) {
+      setOpen(false);
+    }
+  }, [location]);
 
   return (
     <>
@@ -53,10 +60,10 @@ const BuyersPage = (): JSX.Element => {
         </>
       </FixedFooter>
       <Modal open={open} onClose={handleClose}>
-        <MoreInfoForm
-          onClose={handleClose}
-        />
+        <MoreInfoForm onClose={handleClose} />
       </Modal>
+      {location && location.state && location.state.submitted &&
+      <Banner text="Thanks for submitting your information!" />}
     </>
   );
 };

@@ -2,6 +2,7 @@
   "name": "web-www",
   "version": "0.0.1",
   "dependencies": {
+    "axios": "^0.19.2",
     "babel-plugin-styled-components": "1.10.7",
     "clsx": "1.1.0",
     "eslint-config-react-app": "^5.2.1",

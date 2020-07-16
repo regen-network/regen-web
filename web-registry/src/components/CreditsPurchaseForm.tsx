@@ -17,7 +17,11 @@ import TextField from 'web-components/lib/components/inputs/TextField';
 import NumberTextField from 'web-components/lib/components/inputs/NumberTextField';
 import SelectTextField, { Option } from 'web-components/lib/components/inputs/SelectTextField';
 import { CreditPrice } from 'web-components/lib/components/buy-footer';
-import { requiredMessage } from 'web-components/lib/components/inputs/messages';
+import {
+  requiredMessage,
+  validateEmail,
+  invalidEmailMessage,
+} from 'web-components/lib/components/inputs/validation';
 import Submit from 'web-components/lib/components/form/Submit';
 
 import { countries } from '../lib/countries';
@@ -209,8 +213,8 @@ export default function CreditsPurchaseForm({
           const errors: Partial<Values> = {};
           if (!values.email) {
             errors.email = requiredMessage;
-          } else if (!/^([a-zA-Z0-9_\-.]+)@([a-zA-Z0-9_\-.]+)\.([a-zA-Z]{2,10})$/i.test(values.email)) {
-            errors.email = 'Please enter a valid email address';
+          } else if (!validateEmail(values.email)) {
+            errors.email = invalidEmailMessage;
           }
           if (!values.name) {
             errors.name = requiredMessage;

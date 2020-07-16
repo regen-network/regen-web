@@ -34,7 +34,7 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
 
    const headerBorderBottomPages: Array<string> = [
 	   '/privacy-policy/',
-   ]
+   ];
 
   const menuItems = [
     { title: 'Buyers', href: '/buyers' },
@@ -61,7 +61,7 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
         absolute={matches}
         transparent
 		color={matches ? desktopColor : theme.palette.primary.light}
-		borderBottom={headerBorderBottomPages.includes(location.pathname) ? true : false}
+		borderBottom={headerBorderBottomPages.includes(location.pathname)}
       />
       <div>
         <main>{children}</main>

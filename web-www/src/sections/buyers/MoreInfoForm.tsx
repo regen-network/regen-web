@@ -28,7 +28,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     paddingTop: theme.spacing(7.5),
     paddingBottom: theme.spacing(10),
   },
-  textFields: {},
   usd: {
     fontSize: theme.spacing(4),
     marginTop: theme.spacing(7),
@@ -86,7 +85,7 @@ export default function MoreInfoForm({
           return (
             <div>
               <Form className={classes.form} translate="yes">
-                <div className={classes.textFields}>
+                <div>
                   <Field component={TextField} label="Your full name" name="name" />
                   <Field
                     component={TextField}
@@ -96,7 +95,7 @@ export default function MoreInfoForm({
                     name="email"
                   />
                 </div>
-                <div className={classes.textFields}>
+                <div>
                   <Field
                     component={TextField}
                     name="orgName"

@@ -25,8 +25,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     color: theme.palette.info.main,
     cursor: 'pointer',
     letterSpacing: '1px',
+    textAlign: 'right',
     [theme.breakpoints.up('sm')]: {
-      paddingLeft: theme.spacing(32.5),
       fontSize: theme.spacing(3.5),
     },
     [theme.breakpoints.down('xs')]: {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, useTheme, Theme } from '@material-ui/core';
+import { makeStyles, Theme } from '@material-ui/core';
 
 interface BannerProps {
   text: string;

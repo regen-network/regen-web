@@ -1,11 +1,21 @@
 import React from 'react';
-import SEO from '../components/seo';
-import { useStaticQuery, graphql } from 'gatsby';
 import { makeStyles, Theme } from '@material-ui/core';
-import Title from 'web-components/lib/components/title';
 import clsx from 'clsx';
-import MarkdownSection from '../components/MarkdownSection';
-import { ThemeConsumer } from 'styled-components';
+import { Variant } from '@material-ui/core/styles/createTypography';
+import Title from 'web-components/lib/components/title';
+
+interface SectionProps {
+  children?: any;
+  mdContent: string;
+  className?: string;
+  title?: string;
+  titleVariant?: Variant;
+  titleLineHeight?: string;
+}
+
+interface StyleProps {
+  titleLineHeight?: string;
+}
 
 const useStyles = makeStyles((theme:Theme) => ({
 	sectionPadding: {
@@ -58,18 +68,19 @@ const useStyles = makeStyles((theme:Theme) => ({
 			lineHeight: '150%',
 			[theme.breakpoints.down('xs')]:{
 				fontSize: theme.spacing(5.25),
-			},
-			[theme.breakpoints.up('sm')]:{
-				fontSize: theme.spacing(4.8),
 				marginTop: theme.spacing(8),
 				marginBottom: theme.spacing(4)
+			},
+			[theme.breakpoints.up('sm')]:{
+				fontSize: theme.spacing(6),
+
 			},
 		},
 		'& h4': {
 			marginBottom: theme.spacing(7.25),
 			marginTop: theme.spacing(10.5),
 			color: theme.palette.primary.contrastText,
-			fontSize: theme.spacing(4.7),
+			fontSize: theme.spacing(4.5),
 			textTransform: 'uppercase',
 			letterSpacing: theme.spacing(0.20),
 			[theme.breakpoints.down('xs')]: {
@@ -83,18 +94,14 @@ const useStyles = makeStyles((theme:Theme) => ({
 	}
 }))
 
-const PrivacyPolicy = (): JSX.Element => {
-	const data = useStaticQuery(graphql`
-	query {
-		markdownRemark(fileAbsolutePath: {regex: "/^.*/privacy-policy.md$/"}) {
-			html
-		}
-	}`);	
-	return (
-		<>
-		<SEO title="Privacy Policy"/>
-		<MarkdownSection title="Privacy Policy" mdContent={data.markdownRemark.html}></MarkdownSection>
-		</>
-)};
+const MarkdownSection = ({ children, mdContent, className, titleLineHeight, titleVariant = 'h2', title}: SectionProps) => {
+  const classes = useStyles({ titleLineHeight });
+  return (
+	<>
+	<Title className={clsx(classes.title, classes.sectionPadding)} variant="h1">{title}</Title>
+	<div className={clsx(classes.sectionPadding, classes.text)} dangerouslySetInnerHTML={{ __html: mdContent }} />
+</>
+  );
+};
 
-export default PrivacyPolicy
+export default MarkdownSection;

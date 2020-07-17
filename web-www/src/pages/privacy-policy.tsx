@@ -17,6 +17,8 @@ const useStyles = makeStyles((theme:Theme) => ({
 		},
 	},
 	title: {
+		maxWidth: theme.spacing(350),
+		margin: '0px auto',
 		[theme.breakpoints.up('sm')]: {
 			paddingTop: theme.spacing(48.75),
 			marginBottom: theme.spacing(11.25)
@@ -34,7 +36,12 @@ const useStyles = makeStyles((theme:Theme) => ({
 			fontSize: theme.spacing(4),
 		},
 		lineHeight: '150%',
+		maxWidth: theme.spacing(350),
+		margin: '0px auto',
 		color: theme.palette.info.dark,
+		'& ol, ul': {
+			marginLeft: theme.spacing(10)
+		},
 		'& a, a:visited': {
 			textDecoration: 'none',
 			color: theme.palette.info.dark,

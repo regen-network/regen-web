@@ -62,7 +62,7 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
         absolute={matches}
         transparent
 		color={matches ? desktopColor : theme.palette.primary.light}
-		borderBottom={headerBorderBottomPages.includes(location.pathname) ? true : false}
+		borderBottom={headerBorderBottomPages.includes(location.pathname)}
       />
       <div>
         <main>{children}</main>

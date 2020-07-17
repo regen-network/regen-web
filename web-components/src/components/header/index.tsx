@@ -122,7 +122,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       paddingRight: theme.spacing(5),
       paddingLeft: theme.spacing(5),
     },
-    borderBottom: props.borderBottom ? '1px #D2D5D9 solid' : 'none',
+    borderBottom: props.borderBottom ? `1px ${theme.palette.grey[100]} solid` : 'none',
     maxWidth: theme.breakpoints.values.lg,
     margin: '0 auto',
     position: 'relative',

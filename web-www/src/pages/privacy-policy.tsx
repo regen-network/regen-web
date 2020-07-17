@@ -4,6 +4,7 @@ import { useStaticQuery, graphql } from 'gatsby';
 import { makeStyles, Theme } from '@material-ui/core';
 import Title from 'web-components/lib/components/title';
 import clsx from 'clsx';
+import { ThemeConsumer } from 'styled-components';
 
 const useStyles = makeStyles((theme:Theme) => ({
 	sectionPadding: {
@@ -21,12 +22,10 @@ const useStyles = makeStyles((theme:Theme) => ({
 		margin: '0px auto',
 		[theme.breakpoints.up('sm')]: {
 			paddingTop: theme.spacing(48.75),
-			marginBottom: theme.spacing(11.25)
 		},
 		[theme.breakpoints.down('xs')]: {
 			fontSize: theme.spacing(9.5),
 			paddingTop: theme.spacing(18.25),
-			marginBottom: theme.spacing(12.75)
 		},
 		
 	},
@@ -39,6 +38,9 @@ const useStyles = makeStyles((theme:Theme) => ({
 		maxWidth: theme.spacing(350),
 		margin: '0px auto',
 		color: theme.palette.info.dark,
+		'& p:first-of-type': {
+			marginBottom: theme.spacing(11.25),
+		  },
 		'& ol, ul': {
 			marginLeft: theme.spacing(10)
 		},
@@ -51,11 +53,15 @@ const useStyles = makeStyles((theme:Theme) => ({
 			marginTop: theme.spacing(15),
 			marginBottom: theme.spacing(10.5),
 			fontFamily: theme.typography.h1.fontFamily,
+			fontWeight: 900,
+			lineHeight: '150%',
 			[theme.breakpoints.down('xs')]:{
 				fontSize: theme.spacing(5.25),
 			},
 			[theme.breakpoints.up('sm')]:{
 				fontSize: theme.spacing(4.8),
+				marginTop: theme.spacing(8),
+				marginBottom: theme.spacing(4)
 			},
 		},
 		'& h4': {
@@ -64,7 +70,12 @@ const useStyles = makeStyles((theme:Theme) => ({
 			color: theme.palette.primary.contrastText,
 			fontSize: theme.spacing(4.7),
 			textTransform: 'uppercase',
-			letterSpacing: theme.spacing(0.20)
+			letterSpacing: theme.spacing(0.20),
+			[theme.breakpoints.down('xs')]: {
+				fontSize: theme.spacing(4),
+				marginTop: theme.spacing(4),
+				marginBottom: theme.spacing(4)
+			}
 		}
 
 

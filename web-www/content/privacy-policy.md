@@ -83,3 +83,266 @@ A device identifier may deliver information to us or to a third-party partner ab
 
 #### Other Data
 While using our Service, we may also collect the following information: sex, age, date of birth, place of birth, passport details, citizenship, registration at place of residence and actual address, telephone number (work, mobile), details of documents on education, qualification, professional training, employment agreements, non-disclosure agreements, information on bonuses and compensation, information on marital status, family members, social security (or other taxpayer identification) number, office location and other data. 
+ 
+## 5. Use of Data
+
+We do not sell or rent information about our users and all information provided to CONSENT remains absolutely confidential, except that we may use information that we receive to:
+
+1. Help you efficiently access your information after you sign in;
+
+3. Remember information so you will not have to re-enter it during your visit or the next time you visit the Site;
+
+4. Provide personalized content and information to you and others, which could include online ads or other forms of marketing;
+
+5. Provide, improve, test and monitor the effectiveness of our Site; 
+
+6. Develop and test new products and features; 
+
+7. Monitor metrics such as total number of visitors, traffic and demographic patterns; and diagnose or fix technology problems.
+
+Regen Network Development, Inc. uses the collected data for various purposes:
+ 
+1. to develop methodologies and serve in the generation of ecosystem service credits
+
+2. to create project pages including farm data and available ecosystem service credits
+
+3. to provide and maintain our Service;
+
+4. to notify you about changes to our Service; 
+
+5. to allow you to participate in interactive features of our Service when you choose to do so; 
+
+6. to provide customer support; 
+
+7. to gather analysis or valuable information so that we can improve our Service; 
+
+8. to monitor the usage of our Service;
+
+9. to detect, prevent and address technical issues;
+
+10. to fulfill any other purpose for which you provide it;
+
+11. to carry out our obligations and enforce our rights arising from any contracts entered into between you and us, including for billing and collection;
+
+12. to provide you with notices about your account and/or subscription, including expiration and renewal notices, email-instructions, etc.;
+
+13. to provide you with news, special offers and general information about other goods, services and events which we offer that are similar to those that you have already purchased or enquired about unless you have opted not to receive such information;
+
+14. in any other way we may describe when you provide the information;
+
+15. for any other purpose with your consent. 
+
+## 6. Retention of Data
+
+We will retain your User Data only for as long as is necessary for the purposes set out in this Privacy Policy. We will retain and use your User Data to the extent necessary to comply with our legal obligations (for example, if we are required to retain your data to comply with applicable laws), resolve disputes, and enforce our legal agreements and policies.
+
+Project Data will be retained indefinitely, as it backs ecosystem service credits, which are durable assets that are required to meet compliance standards.
+
+We will also retain Usage Data for internal analysis purposes. Usage Data is generally retained for a shorter period, except when this data is used to strengthen the security or to improve the functionality of our Service, or we are legally obligated to retain this data for longer time periods.
+
+#### STORAGE OF YOUR INFORMATION
+Your information collected through the Site may be stored and processed in the United States or any other country in which RND, its Affiliates or Service Providers maintain facilities.
+
+RND, its Affiliates, or Service Providers may transfer information that we collect about you, including personal information across borders and from your country or jurisdiction to other countries or jurisdictions around the world. If you are located in the European Union or other regions with laws governing data collection and use that may differ from U.S. law, please note that we may transfer information, including personal information, to a country and jurisdiction that does not have the same data protection laws as your jurisdiction.
+
+By using the Site, you consent to the transfer of information to the U.S. or to any other country in which RND, its Affiliates or Service Providers maintain facilities and the use and disclosure of information about you as described in this Privacy Policy.
+
+We use commercially reasonable safeguards to help keep the information collected through the App secure and take reasonable steps (such as requesting a unique password) to verify your identity before granting you access to your account. However, RND cannot ensure the security of any information you transmit to RND or guarantee that information on the Site may not be accessed, disclosed, altered, or destroyed.
+
+Please do your part to help us. You are responsible for maintaining the secrecy of your unique password and account information, and for controlling access to emails between you and RND, at all times. Your privacy settings may also be affected by changes to the social media services you connect to RND make to their services. We are not responsible for the functionality, privacy, or security measures of any other organization.
+
+#### OFFLINE COLLECTION, USE; DISCLOSURE OF INFORMATION 
+We will not rent or sell your information to third parties outside RND without your consent, except as noted in this Policy.
+
+Parties with whom we may share your information: 
+We may share information (including but not limited to, information from cookies, log files, device identifiers, location data, and usage data) with businesses that are legally part of the same group of companies that RND is part of, or that become part of that group (Affiliates). Affiliates may use this information to help provide, understand, and improve the service we provide (including by providing analytics) and Affiliates own services (including by providing you with better and more relevant experiences).
+
+We also may share your information as well as information from tools like cookies, log files, and device identifiers and location data, with third-party organizations that help us provide services to you (Service Providers). Our Service Providers will be given access to your information as is reasonably necessary to provide the Service under reasonable confidentiality terms.
+
+We may also share certain information such as cookie data with third-party advertising partners. This information would allow third-party ad networks to, among other things, deliver targeted advertisements that they believe will be of most interest to you.
+
+We may remove parts of data that can identify you and share anonymized data with other parties. We may also combine your information with other information in a way that it is no longer associated with you and share that aggregated information.
+
+Parties with whom you may choose to share your information: 
+Any information or content that you voluntarily disclose, such as comments, becomes available to the public. Once you have shared content or made it public, that content may be re-shared by others.
+
+If you remove information that you posted to the Site, copies may remain viewable in cached and archived pages, or if other users or third parties using the Site have copied or saved that information.
+ 
+## 7. Transfer of Data
+
+Your information, including User Data, may be transferred to and maintained on computers located outside of your state, province, country or other governmental jurisdiction where the data protection laws may differ from those of your jurisdiction.
+ 
+If you are located outside the United States and choose to provide information to us, please note that we transfer the data, including User Data, to the United States and process it there.
+ 
+Your consent to this Privacy Policy followed by your submission of such information represents your agreement to that transfer.
+
+Regen Network Development, Inc. will take all the steps reasonably necessary to ensure that your data is treated securely and in accordance with this Privacy Policy and no transfer of your User Data will take place to an organization or a country unless there are adequate controls in place including the security of your data and other personal information.
+ 
+## 8. Disclosure of Data
+
+We may disclose personal information that we collect, or you provide:
+ 
+1. __Disclosure for Ecosystem Service Credit Registry listings__. In order to list your project on the Regen Registry, we may need to disclose various aspects of farm data through our Registry marketplace.
+
+2. __Disclose for the Creation of Ecosystem Service Credits on Regen Ledger__. We will disclose a subset of Project Data for the creation of credits on Regen Ledger
+
+3. __Disclosure for Law Enforcement__. Under certain circumstances, we may be required to disclose your User Data or Project Data if required to do so by law or in response to valid requests by public authorities.
+
+4. __Business Transaction__. If we or our subsidiaries are involved in a merger, acquisition or asset sale, your User Data and Project Data may be transferred.
+
+5. __Other cases__. We may disclose your information:
+
+	1. To our subsidiaries and affiliates;
+
+	2. To fulfill the purpose for which you provide it;
+
+	3. For the purpose of including your company’s logo on our website;
+
+	4. For any other purpose disclosed by us when you provide the information;
+
+## 9. Security of Data
+
+The security of your data is important to us but remember that no method of transmission over the Internet or method of electronic storage is 100% secure. While we strive to use commercially acceptable means to protect your User Data, we cannot guarantee its absolute security.
+
+#### PROTECTING YOUR INFORMATION
+Your personal information including your name and address is encrypted so that it cannot be read as it is transmitted over the Internet. Regardless of these efforts, no data transmission over the Internet can be guaranteed to be 100% secure. Therefore, any information you transmit to us is sent at your own risk.
+
+## 10. Your Data Protection Rights Under General Data Protection Regulation (GDPR)
+
+If you are a resident of the European Union (EU) and European Economic Area (EEA), you have certain data protection rights, covered by GDPR. See more at  
+https://eur-lex.europa.eu/eli/reg/2016/679/oj
+
+We aim to take reasonable steps to allow you to correct, amend, delete, or limit the use of your User Data. If you wish to be informed what User Data we hold about you and if you want it to be removed from our systems, please email us at office@regen.network. 
+ 
+In certain circumstances, you have the following data protection rights:
+
+1. the right to access, update or to delete the information we have on you;
+
+2. the right of rectification. You have the right to have your information rectified if that information is inaccurate or incomplete;
+
+3. the right to object. You have the right to object to our processing of your User Data;
+
+4. the right of restriction. You have the right to request that we restrict the processing of your personal information;
+
+5. the right to data portability. You have the right to be provided with a copy of your User Data in a structured, machine-readable and commonly used format;
+
+6. the right to withdraw consent.Â You also have the right to withdraw your consent at any time where we rely on your consent to process your personal information;
+ 
+Please note that we may ask you to verify your identity before responding to such requests. Please note, we may not be able to provide Service without some necessary data.
+ 
+You have the right to complain to a Data Protection Authority about our collection and use of your User Data. For more information, please contact your local data protection authority in the European Economic Area (EEA).
+ 
+## 11. Your Data Protection Rights under the California Privacy Protection Act (CalOPPA)
+
+CalOPPA is the first state law in the nation to require commercial websites and online services to post a privacy policy. The law's reach stretches well beyond California to require a person or company in the United States (and conceivable the world) that operates websites collecting personally identifiable information from California consumers to post a conspicuous privacy policy on its website stating exactly the information being collected and those individuals with whom it is being shared, and to comply with this policy. See more at  
+https://consumercal.org/about-cfc/cfc-education-foundation/california-online-privacy-protection-act-caloppa-3/ 
+
+According to CalOPPA we agree to the following:
+ 
+1. users can visit our site anonymously;
+
+2. our Privacy Policy link includes the word Privacy, and can easily be found on the page specified above on the home page of our website;
+
+3. users will be notified of any privacy policy changes on our Privacy Policy Page;
+
+4. users are able to change their personal information by emailing us at office@regen.network.
+
+Our Policy on Do Not Track Signals:
+
+We honor Do Not Track signals and do not track or plant cookies when a Do Not Track browser mechanism is in place. Do Not Track is a preference you can set in your web browser to inform websites that you do not want to be tracked.
+ 
+You can enable or disable Do Not Track by visiting the Preferences or Settings page of your web browser.
+ 
+## 12. Service Providers
+
+We may employ third party companies and individuals to facilitate our Service (__Service Providers__), provide Service on our behalf, perform Service-related services or assist us in analysing how our Service is used.
+
+These third parties have access to your User Data only to perform these tasks on our behalf and are obligated not to disclose or use it for any other purpose.
+
+#### Amazon Web Services
+Amazon Web Services (AWS) is a hosting service. Read more about their legal policies here:  
+https://aws.amazon.com/legal/?nc1=f_cc 
+
+#### Auth0
+Auth0 is an authentication service. Read more about their Privacy Policy here:  
+https://auth0.com/privacy/ 
+
+
+#### Airtable
+Airtable is a survey management tool. Read more about their Privacy Policy here:  
+https://airtable.com/privacy 
+ 
+## 13. Analytics
+
+We may use third-party Service Providers to monitor and analyze the use of our Service. 
+
+#### Google Analytics
+Google Analytics is a web analytics service offered by Google that tracks and reports website traffic. Google uses the data collected to track and monitor the use of our Service. This data is shared with other Google services. Google may use the collected data to contextualize and personalize the ads of its own advertising network.
+ 
+For more information on the privacy practices of Google, please visit the Google Privacy Terms web page:  
+https://policies.google.com/privacy?hl=en
+
+We also encourage you to review Google's policy for safeguarding your data:  
+https://support.google.com/analytics/answer/6004245.
+
+#### Mixpanel
+Mixpanel is a web analytics service. Read more about their privacy policy here:  
+https://mixpanel.com/legal/privacy-policy/
+ 
+## 14. Code Repositories
+ 
+We may use third-party Service Providers to automate the development process of our Service.
+
+#### GitHub
+GitHub is provided by GitHub, Inc. GitHub is a development platform to host and review code, manage projects, and build software. For more information on what data GitHub collects for what purpose and how the protection of the data is ensured, please visit GitHub Privacy Policy page:  
+https://help.github.com/en/articles/github-privacy-statement.
+
+#### Netlify CMS
+Netlify CMS is an open-source content management system for Git workflow. Read their Code of Conduct here:  
+https://github.com/netlify/netlify-cms/blob/master/CODE_OF_CONDUCT.md 
+
+#### Heroku
+Hekoku is a Platform-as-a-Service for running applications in the cloud. Read more about their Privacy Policy here:  
+https://www.salesforce.com/company/privacy/
+
+
+## 15. Payments
+
+We may provide paid products and/or services within Service. In that case, we use third-party services for payment processing (e.g. payment processors).
+
+We will not store or collect your payment card details. That information is provided directly to our third-party payment processors whose use of your personal information is governed by their Privacy Policy. These payment processors adhere to the standards set by PCI-DSS as managed by the PCI Security Standards Council, which is a joint effort of brands like Visa, Mastercard, American Express and Discover. PCI-DSS requirements help ensure the secure handling of payment information.
+ 
+The payment processors we work with are:
+ 
+#### Stripe
+Their Privacy Policy can be viewed at:  
+https://stripe.com/us/privacy
+ 
+## 16. Links to Other Sites
+
+Our Service may contain links to other sites that are not operated by us. If you click a third party link, you will be directed to that third party's site. We strongly advise you to review the Privacy Policy of every site you visit.
+ 
+We have no control over and assume no responsibility for the content, privacy policies or practices of any third party sites or services.
+ 
+## 17. Children's Privacy
+ 
+Our Services are not intended for use by children under the age of 18 (Child or Children). 
+ 
+We do not knowingly collect personally identifiable information from Children under 18. If you become aware that a Child has provided us with User Data, please contact us. If we become aware that we have collected User Data from Children without verification of parental consent, we take steps to remove that information from our servers.
+ 
+## 18. Changes to This Privacy Policy
+
+We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page.
+
+We will let you know via email and/or a prominent notice on our Service, prior to the change becoming effective and update effective date at the top of this Privacy Policy.
+ 
+You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.
+
+#### ENFORCEMENT
+RND uses a self-assessment approach to assure compliance with this privacy policy and periodically verifies that the policy is accurate, comprehensive for the information intended to be covered, prominently displayed, completely implemented and accessible. We encourage interested persons to raise any concerns using the contact information provided and we will investigate and attempt to resolve any complaints and disputes regarding use and disclosure of Personal Information in accordance with the principles.
+
+
+## 19. Contact Us
+
+If you have any questions about this Privacy Policy, please contact us:
+By email: office@regen.network.

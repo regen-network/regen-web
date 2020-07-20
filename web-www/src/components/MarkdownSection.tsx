@@ -58,7 +58,8 @@ const useStyles = makeStyles<Theme, StyleProps>((theme:Theme) => ({
 		},
 		'& a, a:visited': {
 			textDecoration: 'none',
-			color: theme.palette.info.dark,
+			color: theme.palette.secondary.main,
+			fontWeight: 'bold'
 		},
 		'& h2': {
 			color: theme.palette.primary.contrastText,
@@ -90,7 +91,6 @@ const useStyles = makeStyles<Theme, StyleProps>((theme:Theme) => ({
 				marginBottom: theme.spacing(4)
 			}
 		}
-
 
 	}
 }))

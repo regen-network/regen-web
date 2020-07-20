@@ -35,6 +35,7 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
 
    const headerBorderBottomPages: Array<string> = [
 	   '/privacy-policy/',
+	   '/404/',
    ];
 
   const menuItems = [

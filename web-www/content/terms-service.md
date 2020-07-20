@@ -1,11 +1,11 @@
  
 ## 1. Preamble
-Regen Network Development Inc. Registry is a standard to quantify and certify impacts towards climate security and Sustainable Development Goals. Please read on to find out more about your rights as a user of Regen Registry, as well as our expectations of You.
+__Regen Network Development Inc. Registry__ is a standard to quantify and certify impacts towards climate security and Sustainable Development Goals. Please read on to find out more about your rights as a user of Regen Registry, as well as our expectations of You.
 
 ## 2. Introduction
-Welcome to Regen Network Development, Inc (“Company”, “we”, “our”, “us”)!
+Welcome to __Regen Network Development, Inc__ (“Company”, “we”, “our”, “us”)!
  
-These Terms of Service (“Terms”, “Terms of Service”) govern your use of our web pages located at https://www.regen.network and our mobile application Regen Registry (together or individually “Service”) operated by Regen Network Development, Inc. 
+These Terms of Service (“Terms”, “Terms of Service”) govern your use of our web pages located at https://www.regen.network and our mobile application __Regen Registry__ (together or individually “Service”) operated by __Regen Network Development, Inc__. 
  
 Our Privacy Policy also governs your use of our Service and explains how we collect, safeguard and disclose information that results from your use of our web pages. Please read it here https://www.regen.network/privacy.
  
@@ -19,20 +19,31 @@ The purpose of these Terms and Conditions is to provide a master agreement betwe
 	2. Brand Guidelines
 
 ## 4. Role of Regen Registry
-Regen Registry is a third-party standard and certification system for climate, agriculture, and development actions that provide comprehensive oversight, certification and regulation of Projects and the issuance or generation of Products. You agree that:
-Regen Registry is not a party to any agreement to a Project or Product between or among Project Developers, Buyers or any other parties;
-Regen Registry will not have any liability or obligation in connection with any Project (regardless of its status in the Regen Registry project cycle) or Product at any time;
-Regen Registry will not have any liability for any acts or omissions by any Project Developers, Project Participant or Buyer;
-Regen Registry has not control over any Project Developer, Project Participant or Buyer;
-Regen Registry disclaims any liability related to the reliability, capability, or qualifications of any Project Developer, Project Participant or Buyer.
+__Regen Registry__ is a third-party standard and certification system for climate, agriculture, and development actions that provide comprehensive oversight, certification and regulation of Projects and the issuance or generation of Products. You agree that:
+
+* Regen Registry is not a party to any agreement to a Project or Product between or among Project Developers, Buyers or any other parties;
+
+* Regen Registry will not have any liability or obligation in connection with any Project (regardless of its status in the Regen Registry project cycle) or Product at any time;
+
+* Regen Registry will not have any liability for any acts or omissions by any Project Developers, Project Participant or Buyer;
+
+* Regen Registry has not control over any Project Developer, Project Participant or Buyer;
+
+* Regen Registry disclaims any liability related to the reliability, capability, or qualifications of any Project Developer, Project Participant or Buyer.
 
 ## 5. Reputation of Regen Network
 We need You to help us maintain Regen Network’s international prestige and goodwill. To do that, you agree that:
+
 Regen Network is well recognized in the industry and with the public;
+
 In conducting any activity in connection with or related to Regen Network, You will ensure that You maintain our high standards and reputation;
+
 You will not commit any act or omission that causes or threatens to cause harm to our high standards and reputation;
+
 You must properly supervise your employees, agents, and representatives to ensure that they do not cause or threaten to cause harm to our high standards and reputation;
-You will comply with these guidelines at all times; and
+
+You will comply with these guidelines at all times;
+
 You will cooperate reasonably and in good faith with us to maintain our high standards and reputation.
 
 ## 6. Regen Network Registry
@@ -184,16 +195,20 @@ We may use third-party Service Providers to monitor and analyze the use of our S
 #### Google Analytics
 Google Analytics is a web analytics service offered by Google that tracks and reports website traffic. Google uses the data collected to track and monitor the use of our Service. This data is shared with other Google services. Google may use the collected data to contextualize and personalize the ads of its own advertising network.
  
-For more information on the privacy practices of Google, please visit the Google Privacy Terms web page: https://policies.google.com/privacy?hl=en
+For more information on the privacy practices of Google, please visit the Google Privacy Terms web page:  
+https://policies.google.com/privacy?hl=en
  
-We also encourage you to review the Google's policy for safeguarding your data: https://support.google.com/analytics/answer/6004245.
+We also encourage you to review the Google's policy for safeguarding your data:  
+https://support.google.com/analytics/answer/6004245.
  
 #### Mixpanel
 Mixpanel is provided by Mixpanel Inc.
  
-You can prevent Mixpanel from using your information for analytics purposes by opting-out. To opt-out of Mixpanel service, please visit this page: https://mixpanel.com/optout/
+You can prevent Mixpanel from using your information for analytics purposes by opting-out. To opt-out of Mixpanel service, please visit this page:  
+https://mixpanel.com/optout/
  
-For more information on what type of information Mixpanel collects, please visit the Terms of Use page of Mixpanel: https://mixpanel.com/terms/
+For more information on what type of information Mixpanel collects, please visit the Terms of Use page of Mixpanel:  
+https://mixpanel.com/terms/
  
  
 ## 16. No Use By Minors
@@ -265,11 +280,11 @@ To the extent allowable by the applicable law, we disclaim all warranties whethe
 ## 23. Dispute Resolution
 If, at any time, You are upset with Regen Network, please let us know so we can try to resolve your issue. But if we can’t, then these are the rules that govern any dispute:
 
-- 1. Good Faith Negotiation. We should first try to resolve the conflict through good faith negotiations. Send use a notice of the issue, and we will work with You for 60 days to try to resolve it.
+1. __Good Faith Negotiation__. We should first try to resolve the conflict through good faith negotiations. Send use a notice of the issue, and we will work with You for 60 days to try to resolve it.
 
-- 2. Legal Proceedings. If no resolution is reached after good faith negotiations, either party may choose to commence legal proceedings. You agree that the courts at the registered seat of Regen Network in Delaware are exclusively competent for these proceedings.
+2. __Legal Proceedings__. If no resolution is reached after good faith negotiations, either party may choose to commence legal proceedings. You agree that the courts at the registered seat of Regen Network in Delaware are exclusively competent for these proceedings.
 
-- 3. Certification During Legal Proceedings. Regen Network may choose to suspend certification of your Project during legal proceedings to protect our independence and your Project.
+3. __Certification During Legal Proceedings__. Regen Network may choose to suspend certification of your Project during legal proceedings to protect our independence and your Project.
 
 ## 24. Limitation Of Liability
 EXCEPT AS PROHIBITED BY LAW, YOU WILL HOLD US AND OUR OFFICERS, DIRECTORS, EMPLOYEES, AND AGENTS HARMLESS FOR ANY INDIRECT, PUNITIVE, SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGE, HOWEVER IT ARISES (INCLUDING ATTORNEYS' FEES AND ALL RELATED COSTS AND EXPENSES OF LITIGATION AND ARBITRATION, OR AT TRIAL OR ON APPEAL, IF ANY, WHETHER OR NOT LITIGATION OR ARBITRATION IS INSTITUTED), WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE, OR OTHER TORTIOUS ACTION, OR ARISING OUT OF OR IN CONNECTION WITH THIS AGREEMENT, INCLUDING WITHOUT LIMITATION ANY CLAIM FOR PERSONAL INJURY OR PROPERTY DAMAGE, ARISING FROM THIS AGREEMENT AND ANY VIOLATION BY YOU OF ANY FEDERAL, STATE, OR LOCAL LAWS, STATUTES, RULES, OR REGULATIONS, EVEN IF COMPANY HAS BEEN PREVIOUSLY ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. EXCEPT AS PROHIBITED BY LAW, IF THERE IS LIABILITY FOUND ON THE PART OF COMPANY, IT WILL BE LIMITED TO THE AMOUNT PAID FOR THE PRODUCTS AND/OR SERVICES, AND UNDER NO CIRCUMSTANCES WILL THERE BE CONSEQUENTIAL OR PUNITIVE DAMAGES. SOME STATES DO NOT ALLOW THE EXCLUSION OR LIMITATION OF PUNITIVE, INCIDENTAL OR CONSEQUENTIAL DAMAGES, SO THE PRIOR LIMITATION OR EXCLUSION MAY NOT APPLY TO YOU.

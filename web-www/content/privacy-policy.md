@@ -227,7 +227,8 @@ Your personal information including your name and address is encrypted so that i
 
 ## 10. Your Data Protection Rights Under General Data Protection Regulation (GDPR)
 
-If you are a resident of the European Union (EU) and European Economic Area (EEA), you have certain data protection rights, covered by GDPR. See more at https://eur-lex.europa.eu/eli/reg/2016/679/oj
+If you are a resident of the European Union (EU) and European Economic Area (EEA), you have certain data protection rights, covered by GDPR. See more at  
+https://eur-lex.europa.eu/eli/reg/2016/679/oj
 
 We aim to take reasonable steps to allow you to correct, amend, delete, or limit the use of your User Data. If you wish to be informed what User Data we hold about you and if you want it to be removed from our systems, please email us at office@regen.network. 
  
@@ -251,7 +252,8 @@ You have the right to complain to a Data Protection Authority about our collecti
  
 ## 11. Your Data Protection Rights under the California Privacy Protection Act (CalOPPA)
 
-CalOPPA is the first state law in the nation to require commercial websites and online services to post a privacy policy. The law's reach stretches well beyond California to require a person or company in the United States (and conceivable the world) that operates websites collecting personally identifiable information from California consumers to post a conspicuous privacy policy on its website stating exactly the information being collected and those individuals with whom it is being shared, and to comply with this policy. See more at: https://consumercal.org/about-cfc/cfc-education-foundation/california-online-privacy-protection-act-caloppa-3/ 
+CalOPPA is the first state law in the nation to require commercial websites and online services to post a privacy policy. The law's reach stretches well beyond California to require a person or company in the United States (and conceivable the world) that operates websites collecting personally identifiable information from California consumers to post a conspicuous privacy policy on its website stating exactly the information being collected and those individuals with whom it is being shared, and to comply with this policy. See more at:  
+https://consumercal.org/about-cfc/cfc-education-foundation/california-online-privacy-protection-act-caloppa-3/ 
 
 According to CalOPPA we agree to the following:
  
@@ -276,14 +278,17 @@ We may employ third party companies and individuals to facilitate our Service (_
 These third parties have access to your User Data only to perform these tasks on our behalf and are obligated not to disclose or use it for any other purpose.
 
 #### Amazon Web Services
-Amazon Web Services (AWS) is a hosting service. Read more about their legal policies here: https://aws.amazon.com/legal/?nc1=f_cc 
+Amazon Web Services (AWS) is a hosting service. Read more about their legal policies here:  
+https://aws.amazon.com/legal/?nc1=f_cc 
 
 #### Auth0
-Auth0 is an authentication service. Read more about their Privacy Policy here: https://auth0.com/privacy/ 
+Auth0 is an authentication service. Read more about their Privacy Policy here:  
+https://auth0.com/privacy/ 
 
 
 #### Airtable
-Airtable is a survey management tool. Read more about their Privacy Policy here: https://airtable.com/privacy 
+Airtable is a survey management tool. Read more about their Privacy Policy here:  
+https://airtable.com/privacy 
  
 ## 13. Analytics
 
@@ -292,25 +297,31 @@ We may use third-party Service Providers to monitor and analyze the use of our S
 #### Google Analytics
 Google Analytics is a web analytics service offered by Google that tracks and reports website traffic. Google uses the data collected to track and monitor the use of our Service. This data is shared with other Google services. Google may use the collected data to contextualize and personalize the ads of its own advertising network.
  
-For more information on the privacy practices of Google, please visit the Google Privacy Terms web page: https://policies.google.com/privacy?hl=en
+For more information on the privacy practices of Google, please visit the Google Privacy Terms web page:  
+https://policies.google.com/privacy?hl=en
 
-We also encourage you to review Google's policy for safeguarding your data: https://support.google.com/analytics/answer/6004245.
+We also encourage you to review Google's policy for safeguarding your data:  
+https://support.google.com/analytics/answer/6004245.
 
 #### Mixpanel
-Mixpanel is a web analytics service. Read more about their privacy policy here: https://mixpanel.com/legal/privacy-policy/
+Mixpanel is a web analytics service. Read more about their privacy policy here:  
+https://mixpanel.com/legal/privacy-policy/
  
 ## 14. Code Repositories
  
 We may use third-party Service Providers to automate the development process of our Service.
 
 #### GitHub
-GitHub is provided by GitHub, Inc. GitHub is a development platform to host and review code, manage projects, and build software. For more information on what data GitHub collects for what purpose and how the protection of the data is ensured, please visit GitHub Privacy Policy page: https://help.github.com/en/articles/github-privacy-statement.
+GitHub is provided by GitHub, Inc. GitHub is a development platform to host and review code, manage projects, and build software. For more information on what data GitHub collects for what purpose and how the protection of the data is ensured, please visit GitHub Privacy Policy page:  
+https://help.github.com/en/articles/github-privacy-statement.
 
 #### Netlify CMS
-Netlify CMS is an open-source content management system for Git workflow. Read their Code of Conduct here: https://github.com/netlify/netlify-cms/blob/master/CODE_OF_CONDUCT.md 
+Netlify CMS is an open-source content management system for Git workflow. Read their Code of Conduct here:  
+https://github.com/netlify/netlify-cms/blob/master/CODE_OF_CONDUCT.md 
 
 #### Heroku
-Hekoku is a Platform-as-a-Service for running applications in the cloud. Read more about their Privacy Policy here: https://www.salesforce.com/company/privacy/
+Hekoku is a Platform-as-a-Service for running applications in the cloud. Read more about their Privacy Policy here:  
+https://www.salesforce.com/company/privacy/
 
 
 ## 15. Payments
@@ -322,7 +333,8 @@ We will not store or collect your payment card details. That information is prov
 The payment processors we work with are:
  
 #### Stripe
-Their Privacy Policy can be viewed at: https://stripe.com/us/privacy
+Their Privacy Policy can be viewed at:  
+https://stripe.com/us/privacy
  
 ## 16. Links to Other Sites
 

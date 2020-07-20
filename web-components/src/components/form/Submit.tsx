@@ -28,9 +28,20 @@ const useStyles = makeStyles((theme: Theme) => ({
     textAlign: 'right',
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.spacing(3.5),
+      paddingRight: theme.spacing(6),
     },
     [theme.breakpoints.down('xs')]: {
       fontSize: theme.spacing(3),
+      paddingRight: theme.spacing(4.5),
+    },
+  },
+  button: {
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      maxWidth: theme.spacing(58.5),
+    },
+    [theme.breakpoints.down('xs')]: {
+      maxWidth: theme.spacing(53.25),
     },
   },
   error: {
@@ -72,7 +83,11 @@ export default function Cancel({
       </Grid>
       <Grid xs={7} item container direction="column" justify="flex-end" className={classes.submitButton}>
         <Grid item>
-          <ContainedButton disabled={(submitCount > 0 && !isValid) || isSubmitting} onClick={submitForm}>
+          <ContainedButton
+            className={classes.button}
+            disabled={(submitCount > 0 && !isValid) || isSubmitting}
+            onClick={submitForm}
+          >
             {label}
           </ContainedButton>
         </Grid>

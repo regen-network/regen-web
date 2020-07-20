@@ -88,7 +88,6 @@ export default function VideoPopup() {
   };
 
   const handleClose = () => {
-    console.log('CLOSE');
     setOpen(false);
   };
 

@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
+import Snackbar from '@material-ui/core/Snackbar';
 
 interface BannerProps {
   text: string;
+  duration?: number;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    position: 'fixed',
+    justifyContent: 'center',
     top: '0px',
     left: '0px',
     zIndex: 1000,
@@ -46,8 +48,19 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function Banner({ text }: BannerProps): JSX.Element {
+export default function Banner({ text, duration = 10000 }: BannerProps): JSX.Element {
   const classes = useStyles({});
+  const [open, setOpen] = useState(true);
 
-  return <div className={classes.root}>{text}</div>;
+  return (
+    <Snackbar
+      anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
+      className={classes.root}
+      open={open}
+      onClose={() => setOpen(false)}
+      autoHideDuration={duration}
+    >
+      <div>{text}</div>
+    </Snackbar>
+  );
 }

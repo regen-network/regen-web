@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import { Router, Switch, Route, Link, useParams, useLocation } from 'react-router-dom';
+import { useTheme } from '@material-ui/core/styles';
+
 import NavBar from './components/NavBar';
 import { useAuth0 } from './react-auth0-spa';
 import isAdmin from './lib/admin';
@@ -96,6 +98,14 @@ function VerifyEmail(): JSX.Element {
   );
 }
 
+function PostPurchase(): JSX.Element {
+  return (
+    <div style={{ padding: '1rem', display: 'flex', justifyContent: 'center' }}>
+      <Title variant="h1">Thank you for your purchase</Title>
+    </div>
+  );
+}
+
 // function Admin(): JSX.Element {
 //   return (
 //     <div style={{ paddingLeft: '1rem' }}>
@@ -108,6 +118,7 @@ function VerifyEmail(): JSX.Element {
 
 const App: React.FC = (): JSX.Element => {
   const { user, loading } = useAuth0();
+  const theme = useTheme();
 
   if (loading) {
     return <div>Loading...</div>;
@@ -117,7 +128,7 @@ const App: React.FC = (): JSX.Element => {
     <Router history={history}>
       <ScrollToTop />
       <div>
-        <Header transparent={false}>
+        <Header color={theme.palette.primary.light} transparent={false}>
           <NavBar />
         </Header>
         <Switch>
@@ -137,10 +148,18 @@ const App: React.FC = (): JSX.Element => {
             )}
           />
           <Route
+            path="/post-purchase"
+            render={({ match: { path } }) => (
+              <>
+                <Route path={`${path}/:projectId`} component={PostPurchase} />
+              </>
+            )}
+          />
+          <Route
             path="/credits"
             render={({ match: { path } }) => (
               <>
-                <Route path={`${path}/:userId`} component={CreditsContainer} />
+                <Route path={`${path}/:projectId`} component={CreditsContainer} />
               </>
             )}
           />

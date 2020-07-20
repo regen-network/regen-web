@@ -1,0 +1,11 @@
+mutation ReallyCreateUserIfNeeded($input: ReallyCreateUserIfNeededInput!) {
+  reallyCreateUserIfNeeded(input: $input) {
+    user {
+      id
+      partyByPartyId {
+        walletId
+        addressId
+      }
+    }
+  }
+}

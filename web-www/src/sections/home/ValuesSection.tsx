@@ -1,24 +1,30 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import Grid from '@material-ui/core/Grid';
 import BackgroundImage from 'gatsby-background-image';
-import Title from 'web-components/lib/components/title';
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles, useTheme, Theme } from '@material-ui/core';
 import clsx from 'clsx';
 import Img from 'gatsby-image';
+
+import { ImageItemProps } from 'web-components/lib/components/image-item';
+import ImageItems from 'web-components/lib/components/sliders/ImageItems';
+import Section from '../../components/Section';
 
 interface Props {
   className?: string;
 }
 
 let useStyles = makeStyles((theme: Theme) => ({
+  root: {
+    [theme.breakpoints.down('xs')]: {
+      paddingBottom: theme.spacing(14),
+    },
+    [theme.breakpoints.up('sm')]: {
+      paddingBottom: theme.spacing(25),
+    },
+  },
   section: {
     '& .MuiGrid-item': {
       'max-width': theme.spacing(70),
-    },
-    '& h3': {
-      'margin-bottom': theme.spacing(15),
-      'line-height': '130%',
     },
     ' & p': {
       'font-family': 'Lato',
@@ -34,20 +40,11 @@ let useStyles = makeStyles((theme: Theme) => ({
     'padding-bottom': theme.spacing(15),
     'padding-top': theme.spacing(15),
   },
-  ellipse: {},
-  icon: {
-    position: 'absolute',
-    width: '80%',
-    height: '80%',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-  },
-  title: {
-    [theme.breakpoints.down('xs')]: {
-      fontSize: '1.3125rem',
+  sliderContainer: {
+    [theme.breakpoints.up('sm')]: {
+      paddingTop: theme.spacing(7.75),
     },
-  }
+  },
 }));
 
 const HomeValues = ({ className }: Props) => {
@@ -60,45 +57,46 @@ const HomeValues = ({ className }: Props) => {
           }
         }
       }
-      shield: file(relativePath: { eq: "shield-icon.png" }) {
-        childImageSharp {
-          fixed(quality: 90, width: 80) {
-            ...GatsbyImageSharpFixed_withWebp
-          }
-        }
-      }
-      eye: file(relativePath: { eq: "eye.png" }) {
-        childImageSharp {
-          fixed(quality: 90, width: 80) {
-            ...GatsbyImageSharpFixed_withWebp
-          }
-        }
-      }
-      handshake: file(relativePath: { eq: "handshake.png" }) {
-        childImageSharp {
-          fixed(quality: 90, width: 80) {
-            ...GatsbyImageSharpFixed_withWebp
-          }
-        }
-      }
-      boxes: file(relativePath: { eq: "boxes.png" }) {
-        childImageSharp {
-          fixed(quality: 90, width: 80) {
-            ...GatsbyImageSharpFixed_withWebp
-          }
-        }
-      }
       ellipse: file(relativePath: { eq: "green-ellipse.png" }) {
         childImageSharp {
           fixed(quality: 90, width: 120) {
             ...GatsbyImageSharpFixed_withWebp
           }
         }
-      }
-    }
+	  }
+	  text: contentYaml {
+        valuesSection {
+          header
+          imageItems {
+            image {
+              childImageSharp {
+                fixed(quality: 90, width: 120) {
+                  ...GatsbyImageSharpFixed_withWebp
+                }
+              }
+              extension
+              publicURL
+            }
+            header
+            description
+          }
+		}
+	  }
+	}
   `);
-
+  const content = data.text.valuesSection;
   const classes = useStyles();
+  const theme = useTheme();
+
+  const imageItems: ImageItemProps[] = content.imageItems.map(({ image, header: title, description }) => ({
+    img: !image.childImageSharp && image.extension === 'svg' ? (
+      <img src={image.publicURL} alt={image.publicURL} />
+    ) : (
+      <Img fixed={image.childImageSharp.fixed} />
+    ),
+    title,
+    description,
+  }));
 
   return (
     <BackgroundImage
@@ -106,91 +104,17 @@ const HomeValues = ({ className }: Props) => {
       className={clsx(className, classes.section)}
       fluid={data.bg.childImageSharp.fluid}
     >
-      <Title align="center" variant="h3">
-        The values grounding our work
-      </Title>
-      <Grid container justify="center" spacing={3}>
-        <Grid item>
-          <BackgroundImage
-            Tag="div"
-            className={clsx(classes.ellipse)}
-            fixed={data.ellipse.childImageSharp.fixed}
-          >
-            <Img
-              fixed={data.eye.childImageSharp.fixed}
-              style={{ position: 'absolute' }}
-              className={classes.icon}
-            ></Img>
-          </BackgroundImage>
-          <Title align="center" variant="h3" className={classes.title}>
-            Transparency
-          </Title>
-          <p>
-            We not only monitor ecological impact, we share our data and insights for the betterment of the
-            whole system.
-          </p>
-        </Grid>
-        <Grid item>
-          <BackgroundImage
-            Tag="div"
-            className={clsx(classes.ellipse)}
-            fixed={data.ellipse.childImageSharp.fixed}
-          >
-            <Img
-              fixed={data.handshake.childImageSharp.fixed}
-              style={{ position: 'absolute' }}
-              className={classes.icon}
-            ></Img>
-          </BackgroundImage>
-          <Title align="center" variant="h3" className={classes.title}>
-            Trust
-          </Title>
-          <p>
-            By tracking and verifying outcomes, we enable stakeholders to know that credits represent real
-            impact.
-          </p>
-        </Grid>
-        <Grid item>
-          <BackgroundImage
-            Tag="div"
-            className={clsx(classes.ellipse)}
-            fixed={data.ellipse.childImageSharp.fixed}
-          >
-            <Img
-              fixed={data.shield.childImageSharp.fixed}
-              style={{ position: 'absolute' }}
-              className={classes.icon}
-            ></Img>
-          </BackgroundImage>
-          <Title align="center" variant="h3" className={classes.title}>
-            Accountability
-          </Title>
-          <p>
-            Our fully auditable ecosystem services contracts ensure integrity and mutual responsibility
-            between parties.
-          </p>
-        </Grid>
-        <Grid item>
-          <BackgroundImage
-            Tag="div"
-            className={clsx(classes.ellipse)}
-            fixed={data.ellipse.childImageSharp.fixed}
-          >
-            <Img
-              fixed={data.boxes.childImageSharp.fixed}
-              style={{ position: 'absolute' }}
-              className={classes.icon}
-            ></Img>
-          </BackgroundImage>
-          <Title align="center" variant="h3" className={classes.title}>
-            Decentralization
-          </Title>
-          <p>
-            Our platform builds an empowered collective of actors, forgoing the expenses and inefficiencies of
-            third parties
-          </p>
-        </Grid>
-      </Grid>
+      <Section
+        withSlider
+        className={classes.root}
+        titleVariant="h1"
+        titleLineHeight="130%"
+        title={content.header}
+      >
+        <div className={classes.sliderContainer}>
+          <ImageItems imageHeight={theme.spacing(39)} titleVariant="h3" items={imageItems} />
+        </div>
+      </Section>
     </BackgroundImage>
   );
 };

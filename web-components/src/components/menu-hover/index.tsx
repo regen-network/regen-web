@@ -1,14 +1,15 @@
 import React, { useState, useRef } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Popover, MenuList, Paper, Theme } from '@material-ui/core';
+import DropdownIcon from '../icons/DropdownIcon';
 
-//replacing #000 on line 15, color property, with theme.palette.primary.contrastText doesn't yield black text in the dropdown. Not sure why
 const useStyles = makeStyles((theme: Theme) => ({
   popover: {
     pointerEvents: 'none',
   },
   popoverContent: {
     pointerEvents: 'auto',
+    marginTop: theme.spacing(4.75),
   },
   text: {
     '& li > a': {
@@ -22,26 +23,23 @@ const useStyles = makeStyles((theme: Theme) => ({
     backgroundColor: 'rgba(0, 0, 0, 0)',
   },
   paper: {
-    'border-radius': '0px',
-    border: `1px solid ${theme.palette.info.light}`,
+    'border-radius': '2px',
+    border: `1px solid ${theme.palette.grey[400]}`,
   },
 }));
-
-interface styleProps {
-  textColor: string;
-}
 
 interface Props {
   children: React.ReactNode;
   text: string;
   textColor?: string;
+  dropdownColor?: string;
 }
 
 /**
  *
  * @param object contains text, color, children. Where text is the anchor text. Color is a string for link text color, and children are MenuItems typically with Links.
  */
-const MenuHover = ({ text, textColor, children }: Props): JSX.Element => {
+const MenuHover = ({ text, textColor, dropdownColor, children }: Props): JSX.Element => {
   const [openedPopover, setOpenedPopover] = useState(false);
   const popoverAnchor = useRef(null);
 
@@ -66,7 +64,8 @@ const MenuHover = ({ text, textColor, children }: Props): JSX.Element => {
         onMouseLeave={popoverLeave}
       >
         {text}
-      </span>
+      </span>{' '}
+      <DropdownIcon color={dropdownColor} />
       <Popover
         id="mouse-over-popover"
         className={classes.popover}
@@ -83,10 +82,11 @@ const MenuHover = ({ text, textColor, children }: Props): JSX.Element => {
           vertical: 'top',
           horizontal: 'left',
         }}
+        disableScrollLock
         PaperProps={{ onMouseEnter: popoverEnter, onMouseLeave: popoverLeave }}
       >
-        <Paper className={`${classes.paper}`}>
-          <MenuList className={`${classes.text}`}>{children}</MenuList>
+        <Paper className={classes.paper} elevation={5}>
+          <MenuList className={classes.text}>{children}</MenuList>
         </Paper>
       </Popover>
     </div>

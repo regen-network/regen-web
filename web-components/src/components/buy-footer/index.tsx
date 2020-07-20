@@ -91,6 +91,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     [theme.breakpoints.down('xs')]: {
       paddingLeft: theme.spacing(1.5),
+      lineHeight: theme.spacing(6),
     },
   },
 }));
@@ -112,13 +113,17 @@ export default function BuyFooter({ creditPrice, href, onClick }: BuyFooterProps
         {creditPrice && (
           <Grid item className={classes.creditPrice}>
             <Typography>
-              <span className={classes.number}>${creditPrice.unitPrice}</span>
+              <span className={classes.number}>
+                $
+                {new Intl.NumberFormat('en-US', {
+                  minimumFractionDigits: 2,
+                }).format(creditPrice.unitPrice)}
+              </span>
               <span className={classes.creditsText}>/credit {creditPrice.currency}</span>
             </Typography>
           </Grid>
         )}
         <Grid item>
-          {/*<a href={href} target="_blank" rel="noopener noreferrer">*/}
           <ContainedButton onClick={onClick}>
             <CurrentCreditsIcon
               height={matches ? '1.625rem' : '1.375rem'}
@@ -127,7 +132,6 @@ export default function BuyFooter({ creditPrice, href, onClick }: BuyFooterProps
             />
             <span className={classes.buyText}>buy credits</span>
           </ContainedButton>
-          {/*</a>*/}
         </Grid>
       </Grid>
     </div>

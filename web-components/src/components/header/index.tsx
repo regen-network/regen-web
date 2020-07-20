@@ -18,12 +18,18 @@ export interface node {
   [key: number]: React.ReactNode;
 }
 
+interface StyleProps {
+  color: string;
+  borderBottom?: boolean;
+}
+
 interface HeaderProps {
   absolute?: boolean;
   children?: any;
   transparent?: boolean;
-  color?: string;
+  color: string;
   menuItems?: HeaderMenuItem[];
+  borderBottom?: boolean;
 }
 
 interface HeaderMenuItem {
@@ -32,7 +38,7 @@ interface HeaderMenuItem {
   dropdownItems?: { title: string; href: string }[];
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   mobile: {
     [theme.breakpoints.down('xs')]: {
       display: 'inline-block',
@@ -40,22 +46,25 @@ const useStyles = makeStyles((theme: Theme) => ({
       'align-items': 'unset',
     },
   },
-  menuItem: {
-    // [theme.breakpoints.down('xs')]: {
-    //   'margin-right': '2em',
-    // },
-  },
   logoItem: {
     [theme.breakpoints.down('xs')]: {},
   },
-  menuList: {
+  menuList: props => ({
     [theme.breakpoints.up('sm')]: {
       display: 'flex',
+      paddingTop: theme.spacing(6.5),
+    },
+    '& li.MuiListItem-button, li.MuiListItem-button > div': {
+      '& span:hover, svg:hover, path:hover': {
+        borderBottom: 'none',
+      },
+      'background-color': 'inherit',
+      'text-decoration': 'none',
     },
     position: 'unset',
     width: 'unset',
     zIndex: 0,
-  },
+  }),
   background: {
     backgroundColor: theme.palette.primary.main,
   },
@@ -66,10 +75,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   transparent: {
     backgroundColor: `rgba(0,0,0,0)`,
   },
-  color: (props: any) => ({
-    color: props.textColor || theme.palette.primary.contrastText,
+  color: props => ({
+    color: props.color,
     '& ul > li > a': {
-      color: props.textColor || theme.palette.primary.contrastText,
+      color: props.color,
       textDecoration: 'none',
       fontFamily: 'Muli',
       textTransform: 'uppercase',
@@ -78,7 +87,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       },
     },
     '& ul > li > div > span': {
-      color: props.textColor || theme.palette.primary.contrastText,
+      color: props.color,
       textDecoration: 'none',
       fontFamily: 'Muli',
       textTransform: 'uppercase',
@@ -87,17 +96,17 @@ const useStyles = makeStyles((theme: Theme) => ({
       },
     },
   }),
-  root: {
+  root: props => ({
     '& .MuiMenuItem-root > a, .MuiMenuItem-root > div > span': {
-      'font-size': '.8125rem',
+      fontSize: theme.spacing(3.25),
+      letterSpacing: '1px',
     },
     [theme.breakpoints.up('md')]: {
-      padding: `${theme.spacing(2.5)} ${theme.spacing(12)}`,
-      'padding-right': `0px`,
+      padding: `${theme.spacing(2.5)} 0 ${theme.spacing(2.5)} ${theme.spacing(12)}`,
     },
     [theme.breakpoints.up('sm')]: {
       height: theme.spacing(27.5),
-      '& svg': {
+      '& a > svg': {
         fontSize: '12rem',
         height: theme.spacing(20.75),
       },
@@ -113,11 +122,12 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingRight: theme.spacing(5),
       paddingLeft: theme.spacing(5),
     },
+    borderBottom: props.borderBottom ? `1px ${theme.palette.grey[100]} solid` : 'none',
     maxWidth: theme.breakpoints.values.lg,
     margin: '0 auto',
     position: 'relative',
     zIndex: 10,
-  },
+  }),
   searchIcon: {
     color: theme.palette.grey[100],
     marginRight: theme.spacing(6.25),
@@ -132,6 +142,28 @@ const useStyles = makeStyles((theme: Theme) => ({
       width: theme.spacing(23),
     },
   },
+  menuItem: {
+    boxSizing: 'border-box',
+    height: '100%',
+    lineHeight: theme.spacing(6),
+    paddingRight: theme.spacing(7.375),
+    paddingLeft: theme.spacing(7.375),
+    'background-color': 'inherit',
+    '&:not(:last-child) > a:hover': {
+      borderBottom: `2px solid ${theme.palette.secondary.main}`,
+    },
+    '&:last-child': {
+      paddingTop: theme.spacing(1.25),
+    },
+    [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
+      paddingRight: theme.spacing(1.25),
+      paddingLeft: theme.spacing(1.25),
+    },
+  },
+  menu: {
+    height: '100%',
+    lineHeight: theme.spacing(6),
+  },
 }));
 
 export default function Header({
@@ -140,8 +172,9 @@ export default function Header({
   transparent,
   color,
   menuItems,
+  borderBottom,
 }: HeaderProps): JSX.Element {
-  const classes = useStyles({ textColor: color });
+  const classes = useStyles({ color, borderBottom });
   const headerClass = [];
   const rootClass = [];
   rootClass.push(transparent ? classes.transparent : classes.background);
@@ -155,21 +188,32 @@ export default function Header({
   if (desktop) {
     menu = (
       <MenuList className={classes.menuList}>
-        {menuItems?.map((item, index) => (
-          <MenuItem key={index}>
-            {item.dropdownItems ? (
-              <MenuHover text={item.title}>
-                {item.dropdownItems.map((dropdownItem, index) => (
-                  <MenuItem key={index}>
-                    <Link href={dropdownItem.href}>{dropdownItem.title}</Link>
-                  </MenuItem>
-                ))}
-              </MenuHover>
-            ) : (
-              <Link href={item.href}>{item.title}</Link>
-            )}
-          </MenuItem>
-        ))}
+        {menuItems?.map((item, index) => {
+          return (
+            <MenuItem key={index} className={classes.menuItem}>
+              {item.dropdownItems ? (
+                <MenuHover
+                  dropdownColor={
+                    color === theme.palette.primary.light
+                      ? theme.palette.secondary.main
+                      : theme.palette.secondary.contrastText
+                  }
+                  text={item.title}
+                >
+                  {item.dropdownItems.map((dropdownItem, index) => {
+                    return (
+                      <MenuItem key={index}>
+                        <Link href={dropdownItem.href}>{dropdownItem.title}</Link>
+                      </MenuItem>
+                    );
+                  })}
+                </MenuHover>
+              ) : (
+                <Link href={item.href}>{item.title}</Link>
+              )}
+            </MenuItem>
+          );
+        })}
       </MenuList>
     );
   } else {
@@ -190,7 +234,7 @@ export default function Header({
             <RegenIcon className={classes.regenIcon} color={color} />
           </a>
         </Grid>
-        <Grid className={classes.menuItem} item>
+        <Grid className={classes.menu} item>
           {menu}
         </Grid>
         {children}

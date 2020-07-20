@@ -5,9 +5,11 @@ import { makeStyles, useTheme, Theme } from '@material-ui/core';
 import SEO from '../components/seo';
 import Title from 'web-components/lib/components/title';
 import Typography from '@material-ui/core/Typography';
+import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 
 const useStyles = makeStyles((theme: Theme) => ({
 	root: {
+		textAlign: 'center',
 		height: '100%',
 		width: theme.spacing(132.75),
 		margin: '0 auto',
@@ -17,6 +19,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 		width: theme.spacing(77),
 		margin: '0 auto',
 		marginBottom: theme.spacing(6.25),
+		left: `-${theme.spacing(1.5)}`,
 	},
 	fourOFour: {
 		'font-family': 'Muli',
@@ -30,7 +33,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 		width: '80%',
 		margin: '0 auto',
 		color: theme.palette.secondary.dark,
-		marginBottom: theme.spacing(15),
+		marginBottom: theme.spacing(8),
 	},
 	h2: {
 		'font-weight': 900,
@@ -44,6 +47,20 @@ const useStyles = makeStyles((theme: Theme) => ({
 		lineHeight: '150%',
 		fontSize: theme.spacing(4.5),
 		margin: '0 auto',
+		marginBottom: theme.spacing(6.5),
+	},
+	button: {
+		textTransform: 'uppercase',
+		height: theme.spacing(15),
+		lineHeight: theme.spacing(5.75),
+		[theme.breakpoints.down('xs')]: {
+			padding: `${theme.spacing(1)} ${theme.spacing(2)}`,
+			fontSize: theme.spacing(4.5),
+		  },
+		  [theme.breakpoints.up('sm')]: {
+			padding: `${theme.spacing(2)} ${theme.spacing(6)}`,
+			fontSize: theme.spacing(4.5),
+		  },
 	}
 }))
 
@@ -69,6 +86,7 @@ const NotFoundPage = (): JSX.Element => {
 			<div className={classes.fourOFour}>404</div>
 			<Title className={classes.h2} align="center" variant="h2">Oops! Page not found.</Title>
 			<Typography align="center" className={classes.text}>The page you are looking for might have been temporarily removed or had its name changed.</Typography>
+			<ContainedButton className={classes.button}>Visit Our Homepage Instead</ContainedButton>
 		</div>
 		</>
 	)

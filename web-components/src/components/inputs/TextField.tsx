@@ -89,6 +89,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       pointerEvents: 'none',
     },
     '& .MuiInputBase-root': {
+      backgroundColor: theme.palette.primary.main,
       border: `1px solid ${theme.palette.grey[100]}`,
       borderRadius: '2px',
       [theme.breakpoints.up('sm')]: {

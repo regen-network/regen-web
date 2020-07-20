@@ -62,7 +62,6 @@ const BuyersPage = ({ location }): JSX.Element => {
       <Modal open={open} onClose={handleClose}>
         <MoreInfoForm onClose={handleClose} />
       </Modal>
-      <Banner text="Thanks for submitting your information!" />
       {location && location.state && location.state.submitted && (
         <Banner text="Thanks for submitting your information!" />
       )}

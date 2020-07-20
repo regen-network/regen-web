@@ -17,7 +17,7 @@ interface StyleProps {
   titleLineHeight?: string;
 }
 
-const useStyles = makeStyles((theme:Theme) => ({
+const useStyles = makeStyles<Theme, StyleProps>((theme:Theme) => ({
 	sectionPadding: {
 		[theme.breakpoints.up('sm')]:{
 			paddingLeft: theme.spacing(37.5),
@@ -28,7 +28,8 @@ const useStyles = makeStyles((theme:Theme) => ({
 			paddingRight: theme.spacing(2.8),
 		},
 	},
-	title: {
+	title: props => ({
+		lineHeight: props.titleLineHeight || '130%',
 		maxWidth: theme.spacing(350),
 		margin: '0px auto',
 		[theme.breakpoints.up('sm')]: {
@@ -39,7 +40,7 @@ const useStyles = makeStyles((theme:Theme) => ({
 			paddingTop: theme.spacing(18.25),
 		},
 		
-	},
+	}),
 	text: {
 		fontSize: theme.spacing(4.5),
 		[theme.breakpoints.down('sm')]: {

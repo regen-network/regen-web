@@ -93,7 +93,7 @@ const PrivacyPolicy = (): JSX.Element => {
 	return (
 		<>
 		<SEO title="Privacy Policy"/>
-		<MarkdownSection title="Privacy Policy" mdContent={data.markdownRemark.html}></MarkdownSection>
+		<MarkdownSection title="Privacy Policy" mdContent={data.markdownRemark.html} />
 		</>
 )};
 

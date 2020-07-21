@@ -1,11 +1,10 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import { makeStyles, useTheme, Theme } from '@material-ui/core';
+import { makeStyles, Theme } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Img from 'gatsby-image';
 import ReactHtmlParser from 'react-html-parser'; 
-import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 import Title from 'web-components/lib/components/title';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
@@ -80,6 +79,14 @@ const useStyles = makeStyles((theme: Theme) => ({
       width: '50%',
     },
   },
+  grid: {
+    [theme.breakpoints.up(theme.breakpoints.values.tablet)]: {
+      alignItems: 'center',
+    },
+    [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
+      flexDirection: 'column-reverse',
+    },
+  },
 }));
 
 const CarbonplusSection = () => {
@@ -107,23 +114,32 @@ const CarbonplusSection = () => {
     }
   `);
   const classes = useStyles({});
-  const theme = useTheme();
   const content = data.text.carbonPlusSection;
-  const desktop = useMediaQuery(theme.breakpoints.up('tablet'));
 
   return (
     <div className={classes.root}>
-      <Grid container wrap="nowrap" alignItems={desktop ? 'center' : undefined} direction={desktop ? 'row' : 'column-reverse'}>
+      <Grid
+        className={classes.grid}
+        container
+        wrap="nowrap"
+      >
         <Grid item xs={12} className={classes.text}>
           <Title variant="h6" className={classes.smallHeader}>
             <span className={classes.featured}>{content.smallHeader.featured} </span>
             <span className={classes.creditName}>{ReactHtmlParser(content.smallHeader.creditName)}</span>
           </Title>
-          <Title className={classes.header} variant="h3">{ReactHtmlParser(content.header)}</Title>
+          <Title className={classes.header} variant="h3">
+            {ReactHtmlParser(content.header)}
+          </Title>
           <Typography className={classes.description} variant="body2">
             {ReactHtmlParser(content.description)}
           </Typography>
-          <ContainedButton className={classes.button} rel="noopener noreferrer" target="_blank" href={content.linkUrl}>
+          <ContainedButton
+            className={classes.button}
+            rel="noopener noreferrer"
+            target="_blank"
+            href={content.linkUrl}
+          >
             {content.linkText}
           </ContainedButton>
         </Grid>

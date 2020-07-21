@@ -427,7 +427,7 @@ export default function CreditsPurchaseForm({
                 isValid={isValid}
                 submitCount={submitCount}
                 submitForm={submitForm}
-                label={`buy for ${formattedTotal}`}
+                label={`buy for $${formattedTotal}`}
               />
             </div>
           );

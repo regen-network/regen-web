@@ -38,7 +38,8 @@ const useStyles = makeStyles((theme: Theme) => ({
   button: {
     width: '100%',
     [theme.breakpoints.up('sm')]: {
-      maxWidth: theme.spacing(58.5),
+      paddingLeft: theme.spacing(8),
+      paddingRight: theme.spacing(8),
     },
     [theme.breakpoints.down('xs')]: {
       maxWidth: theme.spacing(53.25),

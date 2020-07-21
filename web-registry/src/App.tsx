@@ -128,7 +128,7 @@ const App: React.FC = (): JSX.Element => {
     <Router history={history}>
       <ScrollToTop />
       <div>
-        <Header color={theme.palette.primary.light} transparent={false}>
+        <Header color={theme.palette.primary.light} transparent={false} absolute={false}>
           <NavBar />
         </Header>
         <Switch>

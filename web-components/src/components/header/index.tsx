@@ -26,6 +26,7 @@ interface StyleProps {
 interface HeaderProps {
   children?: any;
   transparent?: boolean;
+  absolute?: boolean;
   color: string;
   menuItems?: HeaderMenuItem[];
 }
@@ -37,7 +38,7 @@ interface HeaderMenuItem {
 }
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
-  root: {
+  absolute: {
     [theme.breakpoints.up('sm')]: {
       position: 'absolute',
       width: '100%',
@@ -162,11 +163,17 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   },
 }));
 
-export default function Header({ children, transparent, color, menuItems }: HeaderProps): JSX.Element {
+export default function Header({
+  children,
+  transparent,
+  color,
+  menuItems,
+  absolute = true,
+}: HeaderProps): JSX.Element {
   const classes = useStyles({ color });
   const rootClass = [];
   rootClass.push(transparent ? classes.transparent : classes.background);
-  rootClass.push(classes.root);
+  rootClass.push(absolute ? classes.absolute : '');
 
   const theme = useTheme();
 

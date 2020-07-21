@@ -112,6 +112,14 @@ const theme = createMuiTheme({
         fontSize: '2rem',
       },
     },
+    body1: {
+      [defaultTheme.breakpoints.up('sm')]: {
+        fontSize: '1rem',
+      },
+      [defaultTheme.breakpoints.down('xs')]: {
+        fontSize: '0.875rem',
+      },
+    },
     body2: {
       fontSize: '0.875rem',
     },
@@ -124,7 +132,7 @@ const theme = createMuiTheme({
     '0px 0px 20px rgba(0, 0, 0, 0.25)',
     '0px 4px 10px rgba(0, 0, 0, 0.1)',
     '0px 0px 4px rgba(0, 0, 0, 0.05)',
-    defaultTheme.shadows[6],
+    '0px 4px 10px rgba(0, 0, 0, 0.1)',
     defaultTheme.shadows[7],
     defaultTheme.shadows[8],
     defaultTheme.shadows[9],

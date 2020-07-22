@@ -23,9 +23,6 @@ const CustomButton = withStyles((theme: Theme) => ({
       backgroundColor: theme.palette.secondary.light,
     },
   },
-  startIcon: {
-    marginRight: 0,
-  },
 }))(Button);
 
 export default function OutlinedButton(props: OutlinedButtonProps): JSX.Element {

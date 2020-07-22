@@ -17,25 +17,25 @@ const useStyles = makeStyles((theme: Theme) => ({
     overflow: 'auto',
     '-webkit-overflow-scrolling': 'touch',
     [theme.breakpoints.up('sm')]: {
-      '&::-webkit-scrollbar': {
-        width: '0.5em',
-      },
-      '&::-webkit-scrollbar-track': {
-        boxShadow: 'inset 0 0 6px rgba(0,0,0,0.00)',
-        webkitBoxShadow: 'inset 0 0 6px rgba(0,0,0,0.00)',
-        marginTop: '20px',
-        marginBottom: '20px',
-        borderRadius: '6px',
-      },
-      '&::-webkit-scrollbar-thumb': {
-        backgroundColor: 'rgba(0,0,0,.2)',
-        borderRadius: '6px',
-      },
-      borderRadius: '20px',
+      // '&::-webkit-scrollbar': {
+      //   width: '0.5em',
+      // },
+      // '&::-webkit-scrollbar-track': {
+      //   boxShadow: 'inset 0 0 6px rgba(0,0,0,0.00)',
+      //   webkitBoxShadow: 'inset 0 0 6px rgba(0,0,0,0.00)',
+      //   marginTop: '20px',
+      //   marginBottom: '20px',
+      //   borderRadius: '6px',
+      // },
+      // '&::-webkit-scrollbar-thumb': {
+      //   backgroundColor: 'rgba(0,0,0,.2)',
+      //   borderRadius: '6px',
+      // },
+      borderRadius: '5px',
       transform: 'translate(-50%, -50%)',
       top: '50%',
       left: '50%',
-      padding: `${theme.spacing(10.75)} ${theme.spacing(7.5)} ${theme.spacing(15)}`,
+      padding: `${theme.spacing(10.75)} ${theme.spacing(16.5)} ${theme.spacing(15)}`,
     },
     maxWidth: theme.spacing(150),
     [theme.breakpoints.up('md')]: {
@@ -54,8 +54,9 @@ const useStyles = makeStyles((theme: Theme) => ({
       transform: 'none',
       padding: `${theme.spacing(13.25)} ${theme.spacing(4)} ${theme.spacing(20)}`,
     },
-    backgroundColor: theme.palette.primary.main,
-    boxShadow: theme.shadows[3],
+    backgroundColor: theme.palette.grey[50],
+    border: `1px solid ${theme.palette.grey[50]}`,
+    boxShadow: theme.shadows[6],
     '& iframe': {
       width: '100%',
       height: '100%',
@@ -64,24 +65,20 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   closeIcon: {
     position: 'absolute',
-    [theme.breakpoints.up('sm')]: {
-      top: theme.spacing(5.75),
-      right: theme.spacing(4.75),
-    },
-    [theme.breakpoints.down('xs')]: {
-      top: theme.spacing(4),
-      right: theme.spacing(3.75),
-    },
+    top: theme.spacing(2.5),
+    right: theme.spacing(2.5),
+    // [theme.breakpoints.up('sm')]: {
+    //   top: theme.spacing(5.75),
+    //   right: theme.spacing(4.75),
+    // },
+    // [theme.breakpoints.down('xs')]: {
+    //   top: theme.spacing(4),
+    //   right: theme.spacing(3.75),
+    // },
     height: '26px',
     width: '26px',
-    // backgroundColor: theme.palette.primary.main,
-    // borderRadius: '50%',
-    // display: 'flex',
-    // alignItems: 'center',
-    // justifyContent: 'center',
     cursor: 'pointer',
     fontWeight: 'bold',
-    // boxShadow: theme.shadows[5],
   },
 }));
 

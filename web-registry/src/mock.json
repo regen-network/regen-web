@@ -530,8 +530,7 @@
         "purchased": 0,
         "issued": 0
       },
-      "hideCreditDetails": true,
-      "presaleUrl": "https://airtable.com/embed/shrd5xPzFPiyQSSMX?backgroundColor=gray"
+      "hideCreditDetails": true
     }
   ]
 }

@@ -124,7 +124,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 const MarketplaceSection = () => {
   const data = useStaticQuery(graphql`
     query {
-      text: contentYaml {
+      text: homeYaml {
         marketplaceSection {
           header
 		      tooltip

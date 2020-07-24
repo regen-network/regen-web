@@ -1,0 +1,52 @@
+blogSection:
+  header: Regen Network Blog
+  posts:
+    - header: 'Planetary Regeneration Podcast | Episode 19: Tom Newmark'
+      description: This blog is a transcription of the 19th episode of the Planetary Regeneration Podcast, hosted by Regen Network’s Chief Regeneration…
+      image: ../../static/media/blog1.jpeg
+      url: https://medium.com/regen-network/planetary-regeneration-podcast-episode-19-tom-newmark-c3d37980a7eb
+    - header: 'Planetary Regeneration Podcast | Episode 18: Lary Kopald'
+      description: This blog is a transcription of the 18th episode of the Planetary Regeneration Podcast, hosted by Regen Network’s Chief Regeneration…
+      image: ../../static/media/blog2.jpeg
+      url: https://medium.com/regen-network/planetary-regeneration-podcast-episode-18-lary-kopald-211f61ac253d
+    - header: Mobilizing Community Co-Creation for Soil Health
+      description: OpenTEAM & Regen Network
+      image: ../../static/media/blog3.jpeg
+      url: https://medium.com/regen-network/mobilizing-community-co-creation-for-soil-health-61090e27c6ba
+newsletterSection:
+  header: Join the movement. Invest in regenerating ecosystems.
+  description: sign up for our newsletter
+featuredSection:
+  header: 'Featured Credit'
+  title: 'Carbon<i>Plus</i> Credit'
+  link: 'https://regen-registry.netlify.app/projects/impactag'
+  image: '../../static/media/featured-cow.png'
+  description: 'Shifting to managed grazing can potentially sequester 16.4 - 26 CO2e (Gt) by 2050. Wilmot Cattle Co. has increased soil organic carbon to 4.5% and removed over 30,000 tons of CO2e in two years.<br><br>Co-benefits include ecosystem health, animal welfare and soil health.'
+comingSoonSection:
+  header: 'Coming Soon'
+  projects:
+    - name: 'Woodburn'
+      image: '../../static/media/woodburn.png'
+      location: 'Walcha, New South Wales, Australia'
+      area: 6313
+      areaUnit: 'acres'
+    - name: 'Cavan Station'
+      image: '../../static/media/cavan-station.png'
+      location: 'Bookham, New South Wales, Australia'
+      area: 25000
+      areaUnit: 'acres'
+    - name: 'Wongelia'
+      image: '../../static/media/wongelia.png'
+      location: 'Kilkivan, Queensland, Australia'
+      area: 10000
+      areaUnit: 'acres'
+    - name: 'Andover Farm'
+      image: '../../static/media/andover-farm.png'
+      location: 'Western Australia, Australia'
+      area: 1787
+      areaUnit: 'hectares'
+    - name: 'Mt. Sandy'
+      image: '../../static/media/mt-sandy.png'
+      location: 'South Australia, Australia'
+      area: 200
+      areaUnit: "hectares"

@@ -102,7 +102,7 @@ const HomeLedger = () => {
           }
         }
       }
-      text: contentYaml {
+      text: homeYaml {
         ledgerSection {
           description
         }

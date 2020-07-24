@@ -23,6 +23,7 @@
     "gatsby-source-filesystem": "^2.3.0",
     "gatsby-transformer-sharp": "^2.5.0",
     "gatsby-transformer-yaml": "^2.4.4",
+    "gatsby-transformer-yaml-full": "^0.3.4",
     "intersection-observer": "^0.10.0",
     "netlify-cms-app": "^2.12.15",
     "prop-types": "^15.7.2",

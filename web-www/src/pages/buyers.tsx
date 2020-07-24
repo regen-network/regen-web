@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 
 import SEO from '../components/seo';
 import TopSection from '../sections/buyers/TopSection';
-import ApproachSection from '../sections/buyers/ApproachSection';
-import InvestingSection from '../sections/buyers/InvestingSection';
+import ImageGridSection from '../sections/buyers/ImageGridSection';
+// import ApproachSection from '../sections/buyers/ApproachSection';
+// import InvestingSection from '../sections/buyers/InvestingSection';
 import MoreInfoForm from '../sections/buyers/MoreInfoForm';
 import FeaturedSection from '../sections/shared/FeaturedSection';
 import ComingSoonSection from '../sections/shared/ComingSoonSection';
@@ -47,8 +48,9 @@ const BuyersPage = ({ location }): JSX.Element => {
     <>
       <SEO title="For Buyers" />
       <TopSection />
-      <ApproachSection />
-      <InvestingSection />
+      <ImageGridSection />
+      {/* <ApproachSection />
+      <InvestingSection /> */}
       <FeaturedSection />
       <ComingSoonSection />
       <FixedFooter justify="flex-end">

@@ -64,7 +64,7 @@ const HomeValues = ({ className }: Props) => {
           }
         }
 	  }
-	  text: contentYaml {
+	  text: homeYaml {
         valuesSection {
           header
           imageItems {

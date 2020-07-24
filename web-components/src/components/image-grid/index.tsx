@@ -12,17 +12,17 @@ export interface ImageGridProps {
   img: JSX.Element; // using pure img tag or gatsby-image
   title: string;
   description: string;
-  odd: boolean;
+  even: boolean;
 }
 
 export interface StyleProps {
-  odd: boolean;
+  even: boolean;
 }
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   root: props => ({
     [theme.breakpoints.up('sm')]: {
-      flexDirection: props.odd ? 'row-reverse' : 'row',
+      flexDirection: props.even ? 'row-reverse' : 'row',
     },
     [theme.breakpoints.down('xs')]: {
       flexDirection: 'column',
@@ -30,8 +30,8 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   }),
   text: props => ({
     [theme.breakpoints.up('sm')]: {
-      paddingLeft: props.odd ? theme.spacing(37.5) : theme.spacing(10),
-      paddingRight: props.odd ? theme.spacing(10) : theme.spacing(37.5),
+      paddingLeft: props.even ? theme.spacing(37.5) : theme.spacing(10),
+      paddingRight: props.even ? theme.spacing(10) : theme.spacing(37.5),
       paddingTop: theme.spacing(40),
     },
     [theme.breakpoints.down('xs')]: {
@@ -62,8 +62,8 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   },
 }));
 
-export default function ImageGrid({ img, title, description, odd }: ImageGridProps): JSX.Element {
-  const classes = useStyles({ odd });
+export default function ImageGrid({ img, title, description, even }: ImageGridProps): JSX.Element {
+  const classes = useStyles({ even });
 
   return (
     <Grid container className={classes.root}>

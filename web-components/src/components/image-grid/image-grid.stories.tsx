@@ -13,7 +13,7 @@ const descriptionText: string =
 
 export const imageGrid = (): JSX.Element => (
   <ImageGrid
-    odd={boolean('odd', true)}
+    even={boolean('even', true)}
     img={<img src="./andover.jpg" alt="andover" />}
     title={text('title', titleText)}
     description={text('description', descriptionText)}

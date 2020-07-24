@@ -141,3 +141,20 @@ ledgerSection:
 newsletterSection:
   header: Join the movement. Invest in regenerating ecosystems.
   description: sign up for our newsletter
+imageGridSection:
+  items: 
+    - header: Buy nature based carbon credits now
+      description: Meets your demand for portfolio of land use based carbon credits and other nature based solutions for carbon sequestration.
+      image: ../static/media/buyer-carbon-credits.png
+    - header: Maximize investment impact
+      description: Significantly lower overall costs of running ecological projects for land stewards means more money in their pockets and more investment in environmental impact.
+      image: ../static/media/maximize-impact.png
+    - header: Promote trust and transparency
+      description: 'Ecological data is collected based on open source, scientifically rigorous methodologies, and independently verified and stored on Regen Ledger - our decentralized, immutable database.'
+      image: ../static/media/promote-trust.png
+    - header: Improve ecological health
+      description: In addition to carbon sequestration, Regen Registry credits focus on a broad set of ecological co-benefits such as soil health, water quality, and biodiversity.
+      image: ../static/media/improve-eco-health.png
+    - header: Share your impact
+      description: Through periodic impact reports, buyers can communicate authentic and rich stories of environmental impact to their customers and supporters.
+      image: ../static/media/share-impact.png

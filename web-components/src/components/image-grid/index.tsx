@@ -19,29 +19,36 @@ export interface StyleProps {
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   root: props => ({
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up(theme.breakpoints.values.tablet)]: {
       flexDirection: props.even ? 'row-reverse' : 'row',
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
       flexDirection: 'column',
     },
   }),
   text: props => ({
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up(theme.breakpoints.values.tablet)]: {
       paddingLeft: props.even ? theme.spacing(37.5) : theme.spacing(10),
       paddingRight: props.even ? theme.spacing(10) : theme.spacing(37.5),
+      flexGrow: 0,
+      flexBasis: '50%',
+      maxWidth: '50%',
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
       paddingRight: theme.spacing(3.75),
       paddingLeft: theme.spacing(3.75),
       paddingTop: theme.spacing(10),
       paddingBottom: theme.spacing(18.25),
+      flexGrow: 0,
+      flexBasis: '100%',
+      maxWidth: '100%',
     },
   }),
   title: {
     [theme.breakpoints.up('sm')]: {
       lineHeight: '130%',
       marginBottom: theme.spacing(3),
+      marginTop: theme.spacing(4),
     },
     [theme.breakpoints.down('xs')]: {
       lineHeight: '145%',
@@ -51,6 +58,16 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   image: {
     height: '100%',
     width: '100%',
+    [theme.breakpoints.up(theme.breakpoints.values.tablet)]: {
+      flexGrow: 0,
+      flexBasis: '50%',
+      maxWidth: '50%',
+    },
+    [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
+      flexGrow: 0,
+      flexBasis: '100%',
+      maxWidth: '100%',
+    },
   },
   description: {
     [theme.breakpoints.up('sm')]: {
@@ -64,10 +81,10 @@ export default function ImageGrid({ img, title, description, even }: ImageGridPr
 
   return (
     <Grid container alignItems="center" className={classes.root}>
-      <Grid item xs={12} sm={6} className={classes.image}>
+      <Grid item className={classes.image}>
         {img}
       </Grid>
-      <Grid item xs={12} sm={6} className={classes.text}>
+      <Grid item className={classes.text}>
         <Title variant="h2" className={classes.title}>
           {title}
         </Title>

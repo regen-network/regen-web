@@ -2534,7 +2534,7 @@ exports[`Storyshots Components|Image Grid Image Grid 1`] = `
     className="MuiGrid-root makeStyles-root-337 makeStyles-root-342 MuiGrid-container MuiGrid-align-items-xs-center"
   >
     <div
-      className="MuiGrid-root makeStyles-image-340 MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6"
+      className="MuiGrid-root makeStyles-image-340 MuiGrid-item"
     >
       <img
         alt="andover"
@@ -2542,7 +2542,7 @@ exports[`Storyshots Components|Image Grid Image Grid 1`] = `
       />
     </div>
     <div
-      className="MuiGrid-root makeStyles-text-338 makeStyles-text-343 MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6"
+      className="MuiGrid-root makeStyles-text-338 makeStyles-text-343 MuiGrid-item"
     >
       <h2
         className="MuiTypography-root makeStyles-root-344 makeStyles-title-339 MuiTypography-h2 MuiTypography-colorTextPrimary MuiTypography-alignLeft"

@@ -1,21 +1,9 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
 import Img from "gatsby-image";
 import { useStaticQuery, graphql } from 'gatsby';
 import BackgroundImage from 'gatsby-background-image';
 
 import ImageGrid from 'web-components/lib/components/image-grid';
-
-const useStyles = makeStyles((theme: Theme) => ({
-  root: {
-    [theme.breakpoints.down('xs')]: {
-      paddingBottom: theme.spacing(14),
-    },
-    [theme.breakpoints.up('sm')]: {
-      paddingBottom: theme.spacing(25),
-    },
-  },
-}));
 
 const ImageGridSection = () => {
   const data = useStaticQuery(graphql`
@@ -45,13 +33,13 @@ const ImageGridSection = () => {
     }
   `);
   const content = data.text.imageGridSection;
-  const classes = useStyles({});
   return (
     <div>
       {content.items.map(({ image, header, description }, index) => (
         <BackgroundImage
           Tag="div"
           fluid={data.bg.childImageSharp.fluid}
+          key={index}
         >
           <ImageGrid
             img={<Img fluid={image.childImageSharp.fluid} />}

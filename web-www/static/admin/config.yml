@@ -19,6 +19,11 @@ collections:
         name: "homepage"
         file: "web-www/content/homepage.yaml"
         fields:
+          - label: "Top Section"
+            name: "foldSection"
+            fields:
+              - {label: Header, name: header, widget: string}
+              - {label: Description, name: description, widget: string}
           - label: "Marketplace Section"
             name: "marketplaceSection"
             widget: "object"
@@ -35,6 +40,9 @@ collections:
                   - {label: "Header", name: "header", widget: string}
                   - {label: "Description", name: "description", widget: text}
                   - {label: "Link Text", name: "linkText", widget: string}
+      - label: "For Buyers page"
+        name: "buyers"
+        file: "web-www/content/homepage.yaml"
           - label: "Top Section"
             name: "topSection"
             widget: "object"
@@ -47,32 +55,15 @@ collections:
                   - {label: Start, name: start, widget: string}
                   - {label: Underlined, name: underlined, widget: string}
                   - {label: End, name: end, widget: string}
-          - label: "Approach Section"
-            name: "approachSection"
+          - label: "Image Grids Section"
+            name: "imageGridSection"
             widget: "object"
             fields:
-              - {label: Header, name: header, widget: string}
-              - label: "Image Items"
-                name: imageItems
-                widget: list
-                collapsed: false
-                fields:
-                  - {label: "Header", name: header, widget: string}
-                  - {label: "Image", name: image, widget: image}
-                  - {label: "Description", name: description, widget: text}
-          - label: "Investing Section"
-            name: "investingSection"
-            widget: "object"
-            fields:
-              - {label: Header, name: header, widget: string}
-              - {label: Note, name: note, widget: string}
-              - {label: "Note Link", name: noteLink, widget: string}
-              - label: "Items"
+              - label: "Image Grid Items"
                 name: items
                 widget: list
                 collapsed: false
                 fields:
                   - {label: "Header", name: header, widget: string}
                   - {label: "Image", name: image, widget: image}
-                  - {label: "Caption", name: caption, widget: string}
-                  - {label: "Description", name: description, widget: string}
+                  - {label: "Description", name: description, widget: text}

@@ -56,7 +56,8 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
       <Header
         menuItems={menuItems}
         transparent
-        color={desktopColor}
+		color={desktopColor}
+		borderBottom={headerBorderBottomPages.includes(location.pathname)}
       />
       <div>
         <main>{children}</main>

@@ -17,7 +17,7 @@ collections:
     files:
       - label: "Homepage"
         name: "homepage"
-        file: "web-www/content/home/home.yaml"
+        file: "web-www/content/home/index.yaml"
         fields:
           - label: "Top Section"
             name: "foldSection"
@@ -43,7 +43,7 @@ collections:
                   - {label: "Link Text", name: "linkText", widget: string}
       - label: "For Buyers page"
         name: "buyers"
-        file: "web-www/content/buyers/buyers.yaml"
+        file: "web-www/content/buyers/index.yaml"
         fields:
           - label: "Top Section"
             name: "topSection"

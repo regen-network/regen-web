@@ -2531,7 +2531,7 @@ exports[`Storyshots Components|Icons Verified Icon 1`] = `
 exports[`Storyshots Components|Image Grid Image Grid 1`] = `
 <div>
   <div
-    className="MuiGrid-root makeStyles-root-337 makeStyles-root-342 MuiGrid-container"
+    className="MuiGrid-root makeStyles-root-337 makeStyles-root-342 MuiGrid-container MuiGrid-align-items-xs-center"
   >
     <div
       className="MuiGrid-root makeStyles-image-340 MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6"

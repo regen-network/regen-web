@@ -1,7 +1,5 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
-import { Variant } from '@material-ui/core/styles/createTypography';
-import clsx from 'clsx';
 import Grid from '@material-ui/core/Grid';
 
 import Title from '../title';
@@ -32,7 +30,6 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingLeft: props.even ? theme.spacing(37.5) : theme.spacing(10),
       paddingRight: props.even ? theme.spacing(10) : theme.spacing(37.5),
-      paddingTop: theme.spacing(40),
     },
     [theme.breakpoints.down('xs')]: {
       paddingRight: theme.spacing(3.75),
@@ -66,7 +63,7 @@ export default function ImageGrid({ img, title, description, even }: ImageGridPr
   const classes = useStyles({ even });
 
   return (
-    <Grid container className={classes.root}>
+    <Grid container alignItems="center" className={classes.root}>
       <Grid item xs={12} sm={6} className={classes.image}>
         {img}
       </Grid>

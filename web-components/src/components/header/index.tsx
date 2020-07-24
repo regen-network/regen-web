@@ -47,6 +47,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     },
   },
   header: props => ({
+    borderBottom: props.borderBottom ? `1px ${theme.palette.grey[100]} solid` : 'none',
     color: props.color,
     maxWidth: theme.breakpoints.values.lg,
     margin: '0 auto',
@@ -144,38 +145,6 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       },
     },
   }),
-  root: props => ({
-    '& .MuiMenuItem-root > a, .MuiMenuItem-root > div > span': {
-      fontSize: theme.spacing(3.25),
-      letterSpacing: '1px',
-    },
-    [theme.breakpoints.up('md')]: {
-      padding: `${theme.spacing(2.5)} 0 ${theme.spacing(2.5)} ${theme.spacing(12)}`,
-    },
-    [theme.breakpoints.up('sm')]: {
-      height: theme.spacing(27.5),
-      '& a > svg': {
-        fontSize: '12rem',
-        height: theme.spacing(20.75),
-      },
-    },
-    [theme.breakpoints.down('sm')]: {
-      padding: `${theme.spacing(2.5)} ${theme.spacing(10)}`,
-    },
-    [theme.breakpoints.down('xs')]: {
-      padding: `${theme.spacing(2.5)} ${theme.spacing(3.75)}`,
-      height: theme.spacing(15),
-    },
-    [theme.breakpoints.up('xl')]: {
-      paddingRight: theme.spacing(5),
-      paddingLeft: theme.spacing(5),
-    },
-    borderBottom: props.borderBottom ? `1px ${theme.palette.grey[100]} solid` : 'none',
-    maxWidth: theme.breakpoints.values.lg,
-    margin: '0 auto',
-    position: 'relative',
-    zIndex: 10,
-  }),
   searchIcon: {
     color: theme.palette.grey[100],
     marginRight: theme.spacing(6.25),
@@ -236,7 +205,7 @@ export default function Header({
   return (
     <div className={clsx(rootClass)}>
       <Grid
-        className={clsx(classes.header, classes.root)}
+        className={clsx(classes.header)}
         container
         direction="row"
         alignItems="center"

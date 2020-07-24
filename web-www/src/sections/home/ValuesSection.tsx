@@ -50,7 +50,7 @@ let useStyles = makeStyles((theme: Theme) => ({
 const HomeValues = ({ className }: Props) => {
   const data = useStaticQuery(graphql`
     query {
-      bg: file(relativePath: { eq: "topography.jpg" }) {
+      bg: file(relativePath: { eq: "home-values-bg.jpg" }) {
         childImageSharp {
           fluid(quality: 90, maxWidth: 1920) {
             ...GatsbyImageSharpFluid_withWebp

@@ -15,9 +15,14 @@ import Description from 'web-components/lib/components/description';
 import CheckboxLabel from 'web-components/lib/components/inputs/CheckboxLabel';
 import TextField from 'web-components/lib/components/inputs/TextField';
 import NumberTextField from 'web-components/lib/components/inputs/NumberTextField';
-import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import SelectTextField, { Option } from 'web-components/lib/components/inputs/SelectTextField';
 import { CreditPrice } from 'web-components/lib/components/buy-footer';
+import {
+  requiredMessage,
+  validateEmail,
+  invalidEmailMessage,
+} from 'web-components/lib/components/inputs/validation';
+import Submit from 'web-components/lib/components/form/Submit';
 
 import { countries } from '../lib/countries';
 
@@ -33,9 +38,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: '2rem',
     },
-  },
-  submitButton: {
-    textAlign: 'right',
   },
   subtitle: {
     [theme.breakpoints.up('sm')]: {
@@ -126,30 +128,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       width: '70%',
     },
   },
-  error: {
-    color: theme.palette.error.main,
-    fontWeight: 'bold',
-    marginTop: theme.spacing(2),
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(3.5),
-    },
-    [theme.breakpoints.down('xs')]: {
-      fontSize: theme.spacing(3),
-    },
-  },
-  cancel: {
-    fontSize: theme.spacing(3),
-    fontFamily: theme.typography.h1.fontFamily,
-    textTransform: 'uppercase',
-    color: theme.palette.info.main,
-    cursor: 'pointer',
-    [theme.breakpoints.up('sm')]: {
-      paddingLeft: theme.spacing(32.5),
-    },
-    // [theme.breakpoints.down('xs')]: {
-    //   paddingRight: theme.spacing(4.25),
-    // },
-  },
 }));
 
 interface CreditsPurchaseFormProps {
@@ -214,8 +192,6 @@ export default function CreditsPurchaseForm({
     }
   });
 
-  const requiredMessage: string = 'This field is required';
-
   return (
     <div>
       <Title variant="h3" className={classes.title}>
@@ -237,8 +213,8 @@ export default function CreditsPurchaseForm({
           const errors: Partial<Values> = {};
           if (!values.email) {
             errors.email = requiredMessage;
-          } else if (!/^([a-zA-Z0-9_\-.]+)@([a-zA-Z0-9_\-.]+)\.([a-zA-Z]{2,10})$/i.test(values.email)) {
-            errors.email = 'Please enter a valid email address';
+          } else if (!validateEmail(values.email)) {
+            errors.email = invalidEmailMessage;
           }
           if (!values.name) {
             errors.name = requiredMessage;
@@ -444,39 +420,15 @@ export default function CreditsPurchaseForm({
                   />
                 </div>
               </Form>
-              <Grid container wrap="nowrap" alignItems="center" justify="flex-end">
-                <Grid
-                  item
-                  className={classes.cancel}
-                  onClick={() => {
-                    if (!isSubmitting) {
-                      onClose();
-                    }
-                  }}
-                >
-                  cancel
-                </Grid>
-                <Grid item container direction="column" justify="flex-end" className={classes.submitButton}>
-                  <Grid item>
-                    <ContainedButton
-                      disabled={(submitCount > 0 && !isValid) || isSubmitting}
-                      onClick={submitForm}
-                    >
-                      buy for ${formattedTotal}
-                    </ContainedButton>
-                  </Grid>
-                  {submitCount > 0 && !isValid && (
-                    <Grid item className={classes.error}>
-                      Please correct the errors above
-                    </Grid>
-                  )}
-                  {status && status.serverError && (
-                    <Grid item className={classes.error}>
-                      {status.serverError}
-                    </Grid>
-                  )}
-                </Grid>
-              </Grid>
+              <Submit
+                isSubmitting={isSubmitting}
+                onClose={onClose}
+                status={status}
+                isValid={isValid}
+                submitCount={submitCount}
+                submitForm={submitForm}
+                label={`buy for $${formattedTotal}`}
+              />
             </div>
           );
         }}

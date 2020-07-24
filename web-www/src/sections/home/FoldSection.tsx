@@ -101,7 +101,7 @@ const HomeFoldSection = ({ className }: Props) => {
               }
             }
           }
-          text: contentYaml {
+          text: homeYaml {
             foldSection {
               tagline
               description
@@ -121,7 +121,7 @@ const HomeFoldSection = ({ className }: Props) => {
             backgroundColor={`#040e18`}
           >
             <div className={classes.backgroundGradient}></div>
-            <VideoPopup></VideoPopup>
+            <VideoPopup />
             <Title align="center" color="primary" variant="h1" className={classes.title}>
               {content.tagline}
             </Title>

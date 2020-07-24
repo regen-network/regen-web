@@ -2,7 +2,7 @@ import React from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 import { useTheme } from '@material-ui/core';
 import BackgroundImage from 'gatsby-background-image';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+import Box from '@material-ui/core/Box';
 
 import SEO from '../components/seo';
 import HomeFoldSection from '../sections/home/FoldSection';
@@ -35,39 +35,35 @@ const IndexPage = (): JSX.Element => {
     }
   `);
 
-  const mobile = useMediaQuery(theme.breakpoints.down('xs'));
-  const climateChangeCarbonSection = mobile ? (
-    <>
-      <BackgroundImage
-        Tag="div"
-        fluid={data.backgroundMobile.childImageSharp.fluid}
-        backgroundColor={theme.palette.grey['50']}
-        style={{
-          backgroundPosition: 'left 70%',
-        }}
-      >
-        <ClimateSection />
-      </BackgroundImage>
-      <CarbonPlusSection />
-    </>
-  ) : (
-    <BackgroundImage
-      Tag="div"
-      fluid={data.background.childImageSharp.fluid}
-      backgroundColor={theme.palette.grey['50']}
-    >
-      <ClimateSection />
-      <CarbonPlusSection />
-    </BackgroundImage>
-  );
-
   return (
     <>
       <SEO title="Home" mailerlite />
       <HomeFoldSection />
       <MarketplaceSection />
       <EmailSubmitSection />
-      {climateChangeCarbonSection}
+      <Box display={{ xs: 'block', sm: 'none'}}>
+        <BackgroundImage
+          Tag="div"
+          fluid={data.backgroundMobile.childImageSharp.fluid}
+          backgroundColor={theme.palette.grey['50']}
+          style={{
+            backgroundPosition: 'left 70%',
+          }}
+        >
+          <ClimateSection />
+        </BackgroundImage>
+        <CarbonPlusSection />
+      </Box>
+      <Box display={{ xs: 'none', sm: 'block'}}>
+        <BackgroundImage
+          Tag="div"
+          fluid={data.background.childImageSharp.fluid}
+          backgroundColor={theme.palette.grey['50']}
+        >
+          <ClimateSection />
+          <CarbonPlusSection />
+        </BackgroundImage>
+      </Box>
       <HomeLedger />
       <HomeValuesSection />
       <BlogSection />

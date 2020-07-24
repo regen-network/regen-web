@@ -45,7 +45,7 @@ const EmailSubmitSection = () => {
     <StaticQuery
       query={graphql`
         query {
-          text: contentYaml {
+          text: sharedYaml {
             newsletterSection {
               header
               description

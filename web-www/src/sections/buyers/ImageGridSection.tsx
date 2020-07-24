@@ -15,7 +15,7 @@ const ImageGridSection = () => {
           }
         }
       }
-      text: contentYaml {
+      text: buyersYaml {
         imageGridSection {
           items {
             image {

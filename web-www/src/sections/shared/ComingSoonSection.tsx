@@ -27,7 +27,7 @@ const ComingSoonSection = () => {
           }
         }
       }
-      text: contentYaml {
+      text: sharedYaml {
         comingSoonSection {
           header
           projects {

@@ -99,7 +99,7 @@ const CarbonplusSection = () => {
           }
         }
       }
-      text: contentYaml {
+      text: homeYaml {
         carbonPlusSection {
           smallHeader {
             featured

@@ -17,10 +17,11 @@ collections:
     files:
       - label: "Homepage"
         name: "homepage"
-        file: "web-www/content/homepage.yaml"
+        file: "web-www/content/home/home.yaml"
         fields:
           - label: "Top Section"
             name: "foldSection"
+            widget: "object"
             fields:
               - {label: Header, name: header, widget: string}
               - {label: Description, name: description, widget: string}
@@ -42,7 +43,7 @@ collections:
                   - {label: "Link Text", name: "linkText", widget: string}
       - label: "For Buyers page"
         name: "buyers"
-        file: "web-www/content/homepage.yaml"
+        file: "web-www/content/buyers/buyers.yaml"
         fields:
           - label: "Top Section"
             name: "topSection"

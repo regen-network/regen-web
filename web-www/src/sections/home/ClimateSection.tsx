@@ -173,7 +173,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 const ClimateSection = () => {
   const data = useStaticQuery(graphql`
     query {
-      text: contentYaml {
+      text: homeYaml {
         climateSection {
           header
           description

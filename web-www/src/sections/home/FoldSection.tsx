@@ -101,7 +101,7 @@ const HomeFoldSection = ({ className }: Props) => {
               }
             }
           }
-          text: contentYaml {
+          text: homeYaml {
             foldSection {
               tagline
               description

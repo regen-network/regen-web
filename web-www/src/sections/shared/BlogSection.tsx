@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 const BlogSection = () => {
   const data = useStaticQuery(graphql`
     query {
-      text: contentYaml {
+      text: sharedYaml {
         blogSection {
           header
           posts {

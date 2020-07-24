@@ -90,7 +90,7 @@ const TopSection = () => {
               }
             }
           }
-          text: contentYaml {
+          text: buyersYaml {
             topSection {
               header
               body {

@@ -104,7 +104,7 @@ const ApproachSection = () => {
           }
         }
       }
-      text: contentYaml {
+      text: buyersYaml {
         investingSection {
           header
           note

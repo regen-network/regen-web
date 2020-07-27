@@ -23,3 +23,32 @@ joinFarmersSection:
     amount: 16.4M
     label: acres of land
     image: ../../static/media/acres-of-land.png
+practicesOutcomesSection:
+  header: Get paid for these practices, outcomes, and more:*
+  practices:
+    header: land management practices
+    items:
+      - image: ../../static/media/no-till.svg
+        header: No-Till
+        description: Growing crops without disturbing the soil through tillage decreases soil erosion.
+      - image: ../../static/media/cover-cropping.svg
+        header: Cover cropping
+        description: Cover crops are planted to cover the soil rather than for the purpose of being harvested.
+      - image: ../../static/media/crop-rotation.svg
+        header: Crop rotation
+        description: Growing a series of different types of crops in the same area increases soil fertility, reduces erosion, and more.
+      - image: ../../static/media/rotational-grazing.svg
+        header: Rotational grazing
+        description: Moving grazing livestock between pastures on a regular basis increases soil health.
+      - image: ../../static/media/agroforestry.svg
+        header: Agroforestry
+        description: A land use management system in which trees or shrubs are grown around or among crops or pastureland.
+      - image: ../../static/media/riparian-zones.svg
+        header: Riparian protection
+        description: Protecting the area between land and a river or stream stabilizes soil and encourages biodiversity.
+      - image: ../../static/media/perennials.svg
+        header: Perennials
+        description: Perennial plants can hold soil to prevent erosion, capture dissolved nitrogen, and reduce the need for herbicides.
+      - image: ../../static/media/buffer-strips.svg
+        header: Buffers strips
+        description: A buffer strip is an area of land maintained in permanent vegetation that helps to control air, soil, and water quality.

@@ -4,6 +4,7 @@ import SEO from '../components/seo';
 import TopSection from '../sections/land-stewards/TopSection';
 import ImageItemsSection from '../sections/land-stewards/ImageItemsSection';
 import JoinFarmersSection from '../sections/land-stewards/JoinFarmersSection';
+import PracticesOutcomesSection from '../sections/land-stewards/PracticesOutcomesSection';
 
 
 const LandStewardsPage = (): JSX.Element => {
@@ -14,6 +15,7 @@ const LandStewardsPage = (): JSX.Element => {
       <TopSection />
       <ImageItemsSection />
       <JoinFarmersSection />
+      <PracticesOutcomesSection />
     </>
   );
 };

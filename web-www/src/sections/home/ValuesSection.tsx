@@ -63,8 +63,8 @@ const HomeValues = ({ className }: Props) => {
             ...GatsbyImageSharpFixed_withWebp
           }
         }
-	  }
-	  text: homeYaml {
+	    }
+      text: homeYaml {
         valuesSection {
           header
           imageItems {
@@ -80,9 +80,9 @@ const HomeValues = ({ className }: Props) => {
             header
             description
           }
-		}
+        }
+      }
 	  }
-	}
   `);
   const content = data.text.valuesSection;
   const classes = useStyles();

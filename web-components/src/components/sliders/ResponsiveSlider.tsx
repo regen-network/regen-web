@@ -4,6 +4,7 @@ import { Variant } from '@material-ui/core/styles/createTypography';
 import Grid from '@material-ui/core/Grid';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Slider from 'react-slick';
+import clsx from 'clsx';
 
 import PrevNextButton from '../buttons/PrevNextButton';
 import Title from '../title';
@@ -15,20 +16,35 @@ export interface ResponsiveSliderProps {
   arrows?: boolean;
   slidesToShow?: number;
   title?: string;
+  className?: string;
+  padding?: string;
+  itemWidth?: string;
 }
 
 interface StyleProps {
   gridView: boolean;
+  padding?: string;
+  title?: string;
+  itemWidth?: string;
 }
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
-  root: props => ({
+  root: {
     [theme.breakpoints.down('xs')]: {
       paddingTop: theme.spacing(11.75),
-      width: '70%',
     },
     [theme.breakpoints.up('sm')]: {
       paddingTop: theme.spacing(8),
+    },
+  },
+  slider: props => ({
+    [theme.breakpoints.down('xs')]: {
+      width: props.itemWidth || '70%',
+      paddingTop: props.title ? theme.spacing(4) : 0,
+    },
+    [theme.breakpoints.up('sm')]: {
+      marginLeft: props.padding ? `-${props.padding}` : 0,
+      paddingTop: props.title ? theme.spacing(8) : 0,
     },
     '& .slick-list': {
       [theme.breakpoints.up(theme.breakpoints.values.tablet)]: {
@@ -66,8 +82,8 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     height: '100%',
     paddingBottom: props.gridView ? theme.spacing(5) : 0,
     [theme.breakpoints.up('sm')]: {
-      paddingRight: theme.spacing(4),
-      paddingLeft: theme.spacing(4),
+      paddingLeft: props.padding || theme.spacing(4),
+      paddingRight: props.padding || theme.spacing(4),
     },
   }),
 }));
@@ -79,6 +95,9 @@ export default function ResponsiveSlider({
   slidesToShow,
   arrows = false,
   title,
+  className,
+  padding,
+  itemWidth,
 }: ResponsiveSliderProps): JSX.Element {
   const theme = useTheme();
 
@@ -90,7 +109,8 @@ export default function ResponsiveSlider({
   const rows: number = gridView ? 2 : 1;
   const slides: number = gridView ? 2 : desktop ? slidesToShow || items.length : mobile ? 1 : 2;
 
-  const classes = useStyles({ gridView });
+  const classes = useStyles({ gridView, padding, title, itemWidth });
+
   let slider: any = null;
 
   function slickPrev(): void {
@@ -114,7 +134,7 @@ export default function ResponsiveSlider({
     rows,
   };
   return (
-    <div>
+    <div className={clsx(classes.root, className)}>
       <Grid container wrap="nowrap" alignItems="center">
         {title && (
           <Grid xs={12} sm={8} item>
@@ -136,7 +156,7 @@ export default function ResponsiveSlider({
         ref={e => {
           slider = e;
         }}
-        className={classes.root}
+        className={classes.slider}
       >
         {items.map((item, index) => (
           <div className={classes.item} key={index}>

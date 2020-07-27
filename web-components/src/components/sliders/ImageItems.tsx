@@ -11,6 +11,7 @@ export interface ImageItemsProps {
   arrows?: boolean;
   slidesToShow?: number;
   title?: string;
+  className?: string;
 }
 
 export default function ImageItems({
@@ -20,9 +21,11 @@ export default function ImageItems({
   slidesToShow,
   arrows = false,
   title,
+  className,
 }: ImageItemsProps): JSX.Element {
   return (
     <ResponsiveSlider
+      className={className}
       imageHeight={imageHeight}
       titleVariant={titleVariant}
       title={title}

@@ -26,7 +26,8 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
 
   const headerColors: HeaderColors = {
     '/': theme.palette.primary.main,
-    '/buyers/': theme.palette.primary.light,
+	'/buyers/': theme.palette.primary.light,
+	'/resources/': theme.palette.primary.main,
   };
 
   const menuItems = [

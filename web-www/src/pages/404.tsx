@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 		left: `-${theme.spacing(1.5)}`,
 	},
 	fourOFour: {
-		'font-family': 'Muli',
+		fontFamily: theme.typography.h1.fontFamily,
 		'font-style': 'normal',
 		'font-weight': 900,
 		'font-size': theme.spacing(50),
@@ -35,9 +35,8 @@ const useStyles = makeStyles((theme: Theme) => ({
 		color: theme.palette.secondary.dark,
 		marginBottom: theme.spacing(8),
 	},
-	h2: {
+	h1: {
 		'font-weight': 900,
-		'font-size': theme.spacing(12),
 		'line-height': '130%',
 		color: theme.palette.primary.contrastText,
 		marginBottom: theme.spacing(4.25),
@@ -84,7 +83,7 @@ const NotFoundPage = (): JSX.Element => {
 
 			<Img fluid={data.grazing.childImageSharp.fluid} className={classes.image} />
 			<div className={classes.fourOFour}>404</div>
-			<Title className={classes.h2} align="center" variant="h2">Oops! Page not found.</Title>
+			<Title className={classes.h1} align="center" variant="h1">Oops! Page not found.</Title>
 			<Typography align="center" className={classes.text}>The page you are looking for might have been temporarily removed or had its name changed.</Typography>
 			<ContainedButton className={classes.button}>Visit Our Homepage Instead</ContainedButton>
 		</div>

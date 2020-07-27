@@ -31,11 +31,11 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
 
   const menuItems = [
     { title: 'Buyers', href: '/buyers' },
-    { title: 'Land Stewards', href: '/landstewards' },
+    { title: 'Land Stewards', href: '/land-stewards' },
     {
       title: 'Learn More',
       dropdownItems: [
-        { title: 'Case Studies', href: '/casestudies' },
+        { title: 'Case Studies', href: '/case-studies' },
         { title: 'FAQ', href: '/faq' },
         { title: 'Team', href: '/team' },
       ],

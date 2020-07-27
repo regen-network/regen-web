@@ -4,7 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import { Variant } from '@material-ui/core/styles/createTypography';
 
 interface TitleProps {
-  variant: Variant;
+  variant?: Variant;
   children?: any;
   color?: any;
   className?: string;

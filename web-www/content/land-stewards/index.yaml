@@ -13,3 +13,13 @@ imageItemsSection:
     - header: Keep more money in your pocket
       image: ../../static/media/buying-through-regen.svg
       description: More money stays in your pocket through automation and cutting edge technology.
+joinFarmersSection:
+  header: Join the farmers who’ve signed up
+  farmers:
+    amount: 216
+    label: farmers and ranchers
+    image: ../../static/media/farmers.png
+  land: 
+    amount: 16.4M
+    label: acres of land
+    image: ../../static/media/acres-of-land.png

@@ -31,7 +31,7 @@ interface Values {
 const useStyles = makeStyles((theme: Theme) => ({
   title: {
     [theme.breakpoints.up('sm')]: {
-      marginBottom: theme.spacing(10),
+      marginBottom: theme.spacing(5),
     },
     [theme.breakpoints.down('xs')]: {
       marginBottom: theme.spacing(4.75),
@@ -65,9 +65,9 @@ export default function MoreInfoForm({
       <Title align="center" variant="h4" className={classes.title}>
         Yes, I’m interested in buying credits for myself or my organization!
       </Title>
-      <Description align="center">
+      {/* <Description align="center">
         Fill out the form below, and someone from our team will get back to you soon.
-      </Description>
+      </Description> */}
       <Formik
         initialValues={{
           budget: undefined,

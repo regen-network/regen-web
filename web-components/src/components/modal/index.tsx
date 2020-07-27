@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
+import clsx from 'clsx';
 import CloseIcon from '../icons/CloseIcon';
 import { RemoveScroll } from 'react-remove-scroll';
 
@@ -8,6 +9,7 @@ interface RegenModalProps {
   open: boolean;
   onClose: () => void;
   children: any;
+  className?: string;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -40,11 +42,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     maxWidth: theme.spacing(150),
     [theme.breakpoints.up('md')]: {
       width: '50%',
-      height: '80%',
+      height: '90%',
     },
     [theme.breakpoints.between('sm', 'sm')]: {
       width: '70%',
-      height: '80%',
+      height: '90%',
     },
     [theme.breakpoints.down('xs')]: {
       left: '0px',
@@ -67,14 +69,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     position: 'absolute',
     top: theme.spacing(2.5),
     right: theme.spacing(2.5),
-    // [theme.breakpoints.up('sm')]: {
-    //   top: theme.spacing(5.75),
-    //   right: theme.spacing(4.75),
-    // },
-    // [theme.breakpoints.down('xs')]: {
-    //   top: theme.spacing(4),
-    //   right: theme.spacing(3.75),
-    // },
     height: '26px',
     width: '26px',
     cursor: 'pointer',
@@ -82,12 +76,12 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function RegenModal({ open, onClose, children }: RegenModalProps): JSX.Element {
+export default function RegenModal({ open, onClose, children, className }: RegenModalProps): JSX.Element {
   const classes = useStyles({});
   return (
     <Modal open={open} onClose={onClose}>
       <RemoveScroll>
-        <div className={classes.content}>
+        <div className={clsx(classes.content, className)}>
           {children}
           <div className={classes.closeIcon} onClick={onClose}>
             <CloseIcon />

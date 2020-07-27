@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Modal from '@material-ui/core/Modal';
 import PlayIcon from 'web-components/lib/components/icons/PlayIcon';
+import Modal from '@material-ui/core/Modal';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -49,30 +49,13 @@ const useStyles = makeStyles(theme => ({
     },
   },
   vid: {
-    display: 'inline-block',
-    width: 'min-content',
-    [theme.breakpoints.up('xs')]: {
-      position: 'relative',
-      top: '15vh',
-      width: '100vw',
-      height: '50vh',
-    },
-  },
-  close: {
-    cursor: 'pointer',
-    'font-size': '4rem',
-    'z-index': 150,
-    position: 'fixed',
-    color: '#fff',
-    'font-family': 'sans-serif',
-    [theme.breakpoints.down('sm')]: {
-      left: '89vw',
-      top: '10vh',
-    },
-    [theme.breakpoints.up('sm')]: {
-      top: '5vh',
-      left: '94.5vw',
-    },
+    outline: 'none',
+    position: 'absolute',
+    transform: 'translate(-50%, -50%)',
+    top: '50%',
+    left: '50%',
+    height: '70%',
+    width: '85%',
   },
 }));
 
@@ -99,9 +82,6 @@ export default function VideoPopup() {
             title="Kiss the Ground Video"
             src="https://player.vimeo.com/video/299326236?autoplay=1"
             style={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
               width: '100%',
               height: '100%',
             }}
@@ -109,9 +89,6 @@ export default function VideoPopup() {
             allow="autoplay; fullscreen"
             allowFullScreen
           />
-          <div className={classes.close} onClick={handleClose}>
-            x
-          </div>
         </div>
       </Modal>
     </div>

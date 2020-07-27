@@ -74,3 +74,5 @@ practicesOutcomesSection:
       - image: ../../static/media/enhance-biodiversity.png
         header: Enhance biodiversity
         description: The diversity of plants and animals is of vital importance to our well-being.
+moreQuestionsSection:
+  header: More questions? Dig into our FAQ.

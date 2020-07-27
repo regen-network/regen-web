@@ -9,6 +9,7 @@ export interface NumberTextFieldProps extends TextFieldProps {
   increment?: number;
   min?: number;
   max?: number;
+  arrows?: boolean;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -41,6 +42,7 @@ export default function NumberTextField({
   min,
   max,
   increment = 1,
+  arrows = true,
   ...props
 }: NumberTextFieldProps): JSX.Element {
   const classes = useStyles();
@@ -51,26 +53,28 @@ export default function NumberTextField({
   return (
     <div className={classes.root}>
       <TextField {...props} type="number" />
-      <Grid container className={classes.arrows}>
-        <Grid
-          item
-          className={classes.arrow}
-          onClick={(): void =>
-            setFieldValue(name, max ? Math.min(max, value + increment) : value + increment)
-          }
-        >
-          <SpinIcon />
+      {arrows && (
+        <Grid container className={classes.arrows}>
+          <Grid
+            item
+            className={classes.arrow}
+            onClick={(): void =>
+              setFieldValue(name, max ? Math.min(max, value + increment) : value + increment)
+            }
+          >
+            <SpinIcon />
+          </Grid>
+          <Grid
+            item
+            className={classes.arrow}
+            onClick={(): void =>
+              setFieldValue(name, min ? Math.max(min, value - increment) : value - increment)
+            }
+          >
+            <SpinIcon direction="down" />
+          </Grid>
         </Grid>
-        <Grid
-          item
-          className={classes.arrow}
-          onClick={(): void =>
-            setFieldValue(name, min ? Math.max(min, value - increment) : value - increment)
-          }
-        >
-          <SpinIcon direction="down" />
-        </Grid>
-      </Grid>
+      )}
     </div>
   );
 }

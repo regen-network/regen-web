@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 const ApproachSection = () => {
   const data = useStaticQuery(graphql`
     query {
-      text: contentYaml {
+      text: buyersYaml {
         approachSection {
           header
           imageItems {

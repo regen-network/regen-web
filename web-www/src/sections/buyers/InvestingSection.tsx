@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import { useStaticQuery, graphql } from 'gatsby';
 import BackgroundImage from 'gatsby-background-image';
 import clsx from 'clsx';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+import Box from '@material-ui/core/Box';
 
 import Title from 'web-components/lib/components/title';
 import Section from '../../components/Section';
@@ -104,7 +104,7 @@ const ApproachSection = () => {
           }
         }
       }
-      text: contentYaml {
+      text: buyersYaml {
         investingSection {
           header
           note
@@ -124,7 +124,6 @@ const ApproachSection = () => {
   `);
   const classes = useStyles();
   const theme = useTheme();
-  const desktop = useMediaQuery(theme.breakpoints.up('sm'));
   
   const content = data.text.investingSection;
   const imageData = data.background.childImageSharp.fluid;
@@ -139,7 +138,12 @@ const ApproachSection = () => {
   );
 
   return (
-    <BackgroundImage Tag="section" className={classes.image} fluid={imageData} backgroundColor={theme.palette.grey['50']}>
+    <BackgroundImage
+      Tag="section"
+      className={classes.image}
+      fluid={imageData}
+      backgroundColor={theme.palette.grey['50']}
+    >
       <Section className={classes.section} title={content.header} titleVariant="subtitle1">
         <Grid container justify="space-evenly" className={classes.grid}>
           {content.items.map((item: any, index: number) => (
@@ -158,11 +162,11 @@ const ApproachSection = () => {
               <Title align="center" variant="h6" className={clsx(classes.description, classes.uppercase)}>
                 {item.description}
               </Title>
-              {index === 0 && desktop && note}
+              <Box display={{ xs: 'none', sm: 'block' }}>{index === 0 && note}</Box>
             </Grid>
           ))}
         </Grid>
-        {!desktop && note}
+        <Box display={{ xs: 'block', sm: 'none' }}>{note}</Box>
       </Section>
     </BackgroundImage>
   );

@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import { fieldToTextField, TextFieldProps } from 'formik-material-ui';
 import MuiTextField from '@material-ui/core/TextField';
+import InputAdornment from '@material-ui/core/InputAdornment';
 
 interface TriggerTextFieldProps extends TextFieldProps {
   triggerOnChange?: (v: any) => Promise<void>;
@@ -11,12 +12,15 @@ interface TriggerTextFieldProps extends TextFieldProps {
 interface RegenTextFieldProps extends TextFieldProps {
   children?: any;
   errors?: boolean;
+  optional?: boolean;
+  adornment?: string;
   triggerOnChange?: (v: any) => Promise<void>;
   transformValue?: (v: any) => void;
 }
 
 interface StyleProps extends TextFieldProps {
   errors: boolean;
+  optional: boolean;
 }
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
@@ -45,6 +49,17 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       },
     },
     '& .MuiFormLabel-root': {
+      '&::after': {
+        content: props.optional ? '" (optional)"' : '',
+        fontWeight: 'normal',
+        color: theme.palette.info.main,
+        [theme.breakpoints.up('sm')]: {
+          fontSize: theme.spacing(4),
+        },
+        [theme.breakpoints.down('xs')]: {
+          fontSize: theme.spacing(3.5),
+        },
+      },
       '&.Mui-error': {
         color: theme.palette.primary.contrastText,
       },
@@ -74,28 +89,31 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       pointerEvents: 'none',
     },
     '& .MuiInputBase-root': {
-      '&.Mui-error': {
-        '& input, & .MuiSelect-select': {
-          borderColor: theme.palette.error.main,
-        },
-      },
-    },
-    '& input, & select.MuiSelect-select': {
+      backgroundColor: theme.palette.primary.main,
       border: `1px solid ${theme.palette.grey[100]}`,
       borderRadius: '2px',
       [theme.breakpoints.up('sm')]: {
         paddingLeft: theme.spacing(3.75),
         paddingRight: theme.spacing(3.75),
         fontSize: theme.spacing(4.5),
-        height: theme.spacing(11.25),
+        height: theme.spacing(15), // 11.25
       },
       [theme.breakpoints.down('xs')]: {
         paddingLeft: theme.spacing(3.25),
         paddingRight: theme.spacing(3.25),
         fontSize: theme.spacing(4),
-        height: theme.spacing(8.75),
+        height: theme.spacing(12.5), // 8.75
+      },
+      '& .MuiInputAdornment-root p': {
+        color: theme.palette.info.main,
+      },
+      '&.Mui-error': {
+        '& input, & .MuiSelect-select': {
+          borderColor: theme.palette.error.main,
+        },
       },
     },
+    // '& input, & select.MuiSelect-select': {},
     '& input[type=number]': {
       '&::-webkit-inner-spin-button, &::-webkit-outer-spin-button': {
         '-webkit-appearance': 'none',
@@ -124,18 +142,23 @@ export default function RegenTextField({
   transformValue,
   triggerOnChange,
   errors = false,
+  optional = false,
   children,
+  adornment,
   ...props
 }: RegenTextFieldProps): JSX.Element {
-  const classes = useStyles({ ...props, errors });
+  const classes = useStyles({ ...props, optional, errors });
   return (
     <TriggerTextField
       {...props}
       transformValue={transformValue}
       triggerOnChange={triggerOnChange}
       className={`${classes.root} ${props.className}`}
-      InputProps={{ disableUnderline: true }}
-      InputLabelProps={{ focused: false }}
+      InputProps={{
+        disableUnderline: true,
+        startAdornment: adornment ? <InputAdornment position="start">{adornment}</InputAdornment> : null,
+      }}
+      InputLabelProps={{ focused: false, required: false }}
       fullWidth
     >
       {children}

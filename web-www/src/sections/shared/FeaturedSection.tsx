@@ -1,9 +1,8 @@
 import React from 'react';
-import { makeStyles, Theme, useTheme } from '@material-ui/core';
+import { makeStyles, Theme } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { useStaticQuery, graphql } from 'gatsby';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
 import ReactHtmlParser from 'react-html-parser'; 
 import Img from 'gatsby-image';
 
@@ -59,12 +58,17 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingRight: theme.spacing(10),
     },
   },
+  grid: {
+    [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
+      flexDirection: 'column-reverse',
+    },
+  },
 }));
 
 const ApproachSection = () => {
   const data = useStaticQuery(graphql`
     query {
-      text: contentYaml {
+      text: sharedYaml {
         featuredSection {
           header
           title
@@ -82,15 +86,17 @@ const ApproachSection = () => {
     }
   `);
   const classes = useStyles();
-  const theme = useTheme();
-  const desktop = useMediaQuery(theme.breakpoints.up('tablet'));
   
   const content = data.text.featuredSection;
   return (
     <Section className={classes.root} title={content.header} titleVariant="subtitle1">
       <div className={classes.card}>
         <FeaturedCard>
-          <Grid container wrap="nowrap" direction={desktop ? 'row' : 'column-reverse'}>
+          <Grid
+            className={classes.grid}
+            container
+            wrap="nowrap"
+          >
             <Grid item xs={12} className={classes.text}>
               <Title className={classes.title} variant="h3">
                 {ReactHtmlParser(content.title)}

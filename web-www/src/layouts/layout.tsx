@@ -7,7 +7,6 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 import Header from 'web-components/lib/components/header';
 import { useTheme } from '@material-ui/core/styles';
@@ -49,8 +48,6 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
       ],
     },
   ];
-  // TODO Header absolute prop will also needs to be set based on location
-  const matches = useMediaQuery(theme.breakpoints.up('sm'));
   const desktopColor: string = headerColors[location.pathname]
     ? headerColors[location.pathname]
     : theme.palette.primary.light;
@@ -59,9 +56,8 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
     <>
       <Header
         menuItems={menuItems}
-        absolute={matches}
         transparent
-		color={matches ? desktopColor : theme.palette.primary.light}
+		color={desktopColor}
 		borderBottom={headerBorderBottomPages.includes(location.pathname)}
       />
       <div>

@@ -11620,6 +11620,20 @@ formik@^2.1.4:
     tiny-warning "^1.0.2"
     tslib "^1.10.0"
 
+formik@^2.1.5:
+  version "2.1.5"
+  resolved "https://registry.yarnpkg.com/formik/-/formik-2.1.5.tgz#de5bbbe35543fa6d049fe96b8ee329d6cd6892b8"
+  integrity sha512-bWpo3PiqVDYslvrRjTq0Isrm0mFXHiO33D8MS6t6dWcqSFGeYF52nlpCM2xwOJ6tRVRznDkL+zz/iHPL4LDuvQ==
+  dependencies:
+    deepmerge "^2.1.1"
+    hoist-non-react-statics "^3.3.0"
+    lodash "^4.17.14"
+    lodash-es "^4.17.14"
+    react-fast-compare "^2.0.1"
+    scheduler "^0.18.0"
+    tiny-warning "^1.0.2"
+    tslib "^1.10.0"
+
 forwarded@~0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/forwarded/-/forwarded-0.1.2.tgz#98c23dab1175657b8c0573e8ceccd91b0ff18c84"
@@ -12169,6 +12183,14 @@ gatsby-transformer-sharp@^2.5.0:
     probe-image-size "^4.1.1"
     semver "^5.7.1"
     sharp "^0.25.1"
+
+gatsby-transformer-yaml-full@^0.3.4:
+  version "0.3.4"
+  resolved "https://registry.yarnpkg.com/gatsby-transformer-yaml-full/-/gatsby-transformer-yaml-full-0.3.4.tgz#c332807dfb47f0d12521faf9c6c573c33e0b9fe3"
+  integrity sha512-7nLRg1+EMCw1irOpg/XN4REN81qQNgezmqJc0o4hYV46Knly+qWkrT84bl9gQ+a2h6XT8Zlm1Eky2nzk4caTaA==
+  dependencies:
+    is-plain-object "^3.0.1"
+    js-yaml "^3.14.0"
 
 gatsby-transformer-yaml@^2.4.4:
   version "2.4.4"
@@ -14466,6 +14488,11 @@ is-plain-object@^3.0.0:
   resolved "https://registry.yarnpkg.com/is-plain-object/-/is-plain-object-3.0.0.tgz#47bfc5da1b5d50d64110806c199359482e75a928"
   dependencies:
     isobject "^4.0.0"
+
+is-plain-object@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/is-plain-object/-/is-plain-object-3.0.1.tgz#662d92d24c0aa4302407b0d45d21f2251c85f85b"
+  integrity sha512-Xnpx182SBMrr/aBik8y+GuR4U1L9FqMSojwDQwPMmxyC6bvEqly9UBCxhauBF5vNh2gwWJNX6oDV7O+OM4z34g==
 
 is-png@^1.0.0:
   version "1.1.0"

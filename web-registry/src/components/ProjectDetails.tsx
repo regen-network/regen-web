@@ -25,7 +25,7 @@ import ProjectMedia, { Media } from 'web-components/lib/components/sliders/Proje
 import Map from 'web-components/lib/components/map';
 import { ItemProps as ProtectedSpeciesItem } from 'web-components/lib/components/sliders/Item';
 import { User } from 'web-components/lib/components/user/UserInfo';
-import BuyFooter from 'web-components/lib/components/buy-footer';
+import BuyFooter from 'web-components/lib/components/fixed-footer/BuyFooter';
 import MrvTabs from 'web-components/lib/components/tabs';
 import Table from 'web-components/lib/components/table';
 import Modal from 'web-components/lib/components/modal';
@@ -224,13 +224,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   projectTimeline: {
     paddingBottom: theme.spacing(30.5),
-  },
-  buyFooter: {
-    position: 'fixed',
-    bottom: '0px',
-    left: '0px',
-    width: '100%',
-    zIndex: 1000,
   },
   map: {
     maxHeight: '50rem',
@@ -570,11 +563,7 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
         </div>
       )}
 
-      {project.presaleUrl && (
-        <div className={classes.buyFooter}>
-          <BuyFooter onClick={handleOpen} creditPrice={project.creditPrice} />
-        </div>
-      )}
+      {project.presaleUrl && <BuyFooter onClick={handleOpen} creditPrice={project.creditPrice} />}
 
       {project.creditPrice && project.stripePrice && (
         <Modal open={open} onClose={handleClose}>

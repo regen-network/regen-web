@@ -1,20 +1,19 @@
 import React from 'react';
 import BackgroundImage from 'gatsby-background-image';
-import clsx from 'clsx';
 import { graphql, useStaticQuery } from 'gatsby';
 import Grid from '@material-ui/core/Grid';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import { makeStyles, Theme, useTheme } from '@material-ui/core';
+import { makeStyles, Theme } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import Title from 'web-components/lib/components/title';
 import Img from 'gatsby-image';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 let useStyles = makeStyles((theme: Theme) => ({
   grid: {
     [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
       paddingTop: theme.spacing(20),
       paddingBottom: theme.spacing(51.25),
+      flexDirection: 'column',
     },
     [theme.breakpoints.up(theme.breakpoints.values.tablet)]: {
       paddingTop: theme.spacing(24.25),
@@ -103,7 +102,7 @@ const HomeLedger = () => {
           }
         }
       }
-      text: contentYaml {
+      text: homeYaml {
         ledgerSection {
           description
         }
@@ -111,8 +110,6 @@ const HomeLedger = () => {
     }
   `);
   const classes = useStyles();
-  const theme = useTheme();
-  const desktop = useMediaQuery(theme.breakpoints.up('tablet'));
   const content = data.text.ledgerSection; // TODO add title content to yaml once structure for styling set
   
   return (
@@ -122,7 +119,6 @@ const HomeLedger = () => {
         container
         alignItems="center"
         wrap="nowrap"
-        direction={desktop ? 'row' : 'column'}
       >
         <Grid className={classes.imgContainer} item xs={12}>
           <Img className={classes.img} fluid={data.ledger.childImageSharp.fluid} />

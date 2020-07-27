@@ -1,3 +1,15 @@
 topSection:
   header: Get paid for your ecological impact. Regenerate the planet.
   body: Farmers and ranchers positively impact our planet in numerous ways. Regen Network rewards ecological stewardship.
+imageItemsSection:
+  header: Designed with the farmer in mind
+  imageItems:
+    - header: Create a new revenue stream
+      image: ../../static/media/revenue.svg
+      description: Get paid for existing or new ecological stewardship practices on farm and ranch lands.
+    - header: Streamlined process
+      image: ../../static/media/verified-outcomes.svg
+      description: Registration, monitoring, reporting, verification and payment are streamlined to save you precious time.
+    - header: Keep more money in your pocket
+      image: ../../static/media/buying-through-regen.svg
+      description: More money stays in your pocket through automation and cutting edge technology.

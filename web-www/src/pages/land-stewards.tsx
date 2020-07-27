@@ -2,6 +2,7 @@ import React from 'react';
 
 import SEO from '../components/seo';
 import TopSection from '../sections/land-stewards/TopSection';
+import ImageItemsSection from '../sections/land-stewards/ImageItemsSection';
 
 
 const LandStewardsPage = (): JSX.Element => {
@@ -10,6 +11,7 @@ const LandStewardsPage = (): JSX.Element => {
     <>
       <SEO title="For Land Stewards" />
       <TopSection />
+      <ImageItemsSection />
     </>
   );
 };

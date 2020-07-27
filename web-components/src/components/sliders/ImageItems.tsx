@@ -8,7 +8,7 @@ import ImageItem, { ImageItemProps } from '../image-item';
 export interface ImageItemsProps {
   items: ImageItemProps[];
   titleVariant?: Variant;
-  imageHeight: string;
+  imageHeight?: string;
 }
 
 interface StyleProps {

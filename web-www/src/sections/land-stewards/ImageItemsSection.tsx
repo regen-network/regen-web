@@ -6,7 +6,6 @@ import { ImageItemProps } from 'web-components/lib/components/image-item';
 import ImageItems from 'web-components/lib/components/sliders/ImageItems';
 import Section from '../../components/Section';
 
-// Component not used anymore
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     [theme.breakpoints.down('xs')]: {
@@ -18,11 +17,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const ApproachSection = () => {
+const ImageItemsSection = () => {
   const data = useStaticQuery(graphql`
     query {
-      text: buyersYaml {
-        approachSection {
+      text: landStewardsYaml {
+        imageItemsSection {
           header
           imageItems {
             image {
@@ -36,7 +35,7 @@ const ApproachSection = () => {
       }
     }
   `);
-  const content = data.text.approachSection;
+  const content = data.text.imageItemsSection;
   const classes = useStyles({});
   const imageItems: ImageItemProps[] = content.imageItems.map(({ image, header: title, description }) => ({
     img:  <img src={image.publicURL} alt={image.publicURL} />,
@@ -51,4 +50,4 @@ const ApproachSection = () => {
   );
 };
 
-export default ApproachSection;
+export default ImageItemsSection;

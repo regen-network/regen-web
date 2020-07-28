@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { makeStyles, Theme } from '@material-ui/core/styles';
 
 import SEO from '../components/seo';
 import TopSection from '../sections/land-stewards/TopSection';
@@ -11,7 +12,16 @@ import FixedFooter from 'web-components/lib/components/fixed-footer';
 import Modal from 'web-components/lib/components/modal';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 
+const useStyles = makeStyles((theme: Theme) => ({
+  modal: {
+    padding: 0,
+    overflow: 'hidden',
+  },
+}));
+
 const LandStewardsPage = (): JSX.Element => {
+  const classes = useStyles();
+
   const [open, setOpen] = useState(false);
   const handleOpen = (): void => {
     setOpen(true);
@@ -36,10 +46,10 @@ const LandStewardsPage = (): JSX.Element => {
           <ContainedButton onClick={handleOpen}>sign up now</ContainedButton>
         </>
       </FixedFooter>
-      <Modal open={open} onClose={handleClose}>
+      <Modal open={open} onClose={handleClose} className={classes.modal}>
         <iframe
           title="airtable-signup-form"
-          src="https://airtable.com/embed/shr1dXKQ3vszCKs6Z?backgroundColor=#FAFAFA"
+          src="https://airtable.com/embed/shrs5XjNI8ugXEDS0"
         />
       </Modal>
     </>

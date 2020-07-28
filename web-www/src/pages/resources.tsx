@@ -23,7 +23,7 @@ const ResourcesPage = (): JSX.Element => {
   return (
     <>
       <SEO title="Resources" />
-	  <TopSection />
+	    <TopSection />
     </>
   );
 };

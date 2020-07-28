@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingTop: theme.spacing(8),
     },
     [theme.breakpoints.up('sm')]: {
-      paddingTop: theme.spacing(5),
+      paddingTop: theme.spacing(10),
     },
   },
   text: {

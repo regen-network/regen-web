@@ -1,0 +1,6 @@
+foldSection:
+  header: foo
+  description: bar
+marketplaceSection:
+  header: foo
+  body: bar

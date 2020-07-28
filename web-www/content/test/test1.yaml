@@ -1,0 +1,18 @@
+marketplaceSection:
+  header: 'The marketplace for climate solutions'
+  tooltip: 'Ecosystem services are the benefits people receive from healthy ecosystems, including clean air and water, resilient food systems, and mitigation of extreme climate events.'
+  body: 'foobar'
+  callToActions:
+    - caption: 'Land Stewards'
+      image: '../../static/media/land-stewards.png'
+      header: 'Register a project'
+      description: 'Get paid for your ecological practices, such as cover cropping, crop rotation, agroforestry, rotational grazing, and more.'
+      linkText: 'List Your Project'
+    - caption: 'Buyers'
+      image: '../../static/media/buyers.png'
+      header: 'Purchase credits'
+      description: 'Whether you are an individual or a business looking to take climate action, we make it easy to sponsor ecological practices.'
+      linkText: 'Browse Projects'
+foldSection:
+  tagline: Platform for a Thriving Planet
+  description: Regen Network aligns economics with ecology to drive regenerative land management.

@@ -1,0 +1,25 @@
+marketplaceSection:
+  header: 'The marketplace for climate solutions'
+  body: 'foobar'
+  callToActions:
+    - caption: 'Land Stewards'
+      image: '../../static/media/land-stewards.png'
+      header: 'Register a project'
+      description: 'Get paid for your ecological practices, such as cover cropping, crop rotation, agroforestry, rotational grazing, and more.'
+      linkText: 'List Your Project'
+    - caption: 'Buyers'
+      image: '../../static/media/buyers.png'
+      header: 'Purchase credits'
+      description: 'Whether you are an individual or a business looking to take climate action, we make it easy to sponsor ecological practices.'
+      linkText: 'Browse Projects'
+foldSection:
+  tagline: Platform for a Thriving Planet
+  description: Regen Network aligns economics with ecology to drive regenerative land management.
+carbonPlusSection:
+  smallHeader:
+    featured: 'Featured Credits:'
+    creditName: 'Carbon<i>Plus</i>'
+  header: 'Carbon<i>Plus</i> Credits remove carbon and restore natural grassland ecosystems'
+  description: 'Shifting to managed grazing can potentially sequester 16.4 - 26 CO2e (Gt) by 2050. Wilmot Cattle Co. has increased soil organic carbon to 4.5% and removed over 30,000 tons of CO2e in two years.<br><br>Co-benefits include ecosystem health, animal welfare and soil health.'
+  linkText: 'Buy'
+  linkUrl: 'https://regen-registry.netlify.app/projects/impactag'

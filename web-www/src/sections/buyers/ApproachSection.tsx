@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
-import Img from "gatsby-image";
+import Img from 'gatsby-image';
 import { useStaticQuery, graphql } from 'gatsby';
 
 import { ImageItemProps } from 'web-components/lib/components/image-item';
@@ -39,7 +39,7 @@ const ApproachSection = () => {
   const content = data.text.approachSection;
   const classes = useStyles({});
   const imageItems: ImageItemProps[] = content.imageItems.map(({ image, header: title, description }) => ({
-    img:  <img src={image.publicURL} alt={image.publicURL} />,
+    img: <img src={image.publicURL} alt={image.publicURL} />,
     title,
     description,
   }));

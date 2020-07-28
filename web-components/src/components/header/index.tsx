@@ -46,6 +46,9 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       width: '100%',
     },
   },
+  borderBottom: props => ({
+    borderBottom: props.borderBottom ? `1px ${theme.palette.grey[100]} solid` : 'none',
+  }),
   header: props => ({
     borderBottom: props.borderBottom ? `1px ${theme.palette.grey[100]} solid` : 'none',
     color: props.color,
@@ -194,9 +197,11 @@ export default function Header({
   menuItems,
   borderBottom = true,
   absolute = true,
+  borderBottom,
 }: HeaderProps): JSX.Element {
   const classes = useStyles({ color, borderBottom });
-  const rootClass = [];
+
+  const rootClass = [classes.borderBottom];
   rootClass.push(transparent ? classes.transparent : classes.background);
   rootClass.push(absolute ? classes.absolute : '');
 

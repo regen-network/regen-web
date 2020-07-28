@@ -111,15 +111,10 @@ const HomeLedger = () => {
   `);
   const classes = useStyles();
   const content = data.text.ledgerSection; // TODO add title content to yaml once structure for styling set
-  
+
   return (
     <BackgroundImage Tag="section" fluid={data.bg.childImageSharp.fluid}>
-      <Grid
-        className={classes.grid}
-        container
-        alignItems="center"
-        wrap="nowrap"
-      >
+      <Grid className={classes.grid} container alignItems="center" wrap="nowrap">
         <Grid className={classes.imgContainer} item xs={12}>
           <Img className={classes.img} fluid={data.ledger.childImageSharp.fluid} />
         </Grid>
@@ -128,9 +123,7 @@ const HomeLedger = () => {
             <span className={classes.green}>Regen Ledger</span> powers{' '}
             <span className={classes.green}>Regen Registry</span>
           </Title>
-          <Typography className={classes.description}>
-            {content.description}
-          </Typography>
+          <Typography className={classes.description}>{content.description}</Typography>
           <ContainedButton href="/developers" className={classes.button}>
             Learn More
           </ContainedButton>

@@ -39,7 +39,7 @@ const LandStewardsPage = (): JSX.Element => {
       <Modal open={open} onClose={handleClose}>
         <iframe
           title="airtable-signup-form"
-          src="https://airtable.com/embed/shr1dXKQ3vszCKs6Z?backgroundColor=gray"
+          src="https://airtable.com/embed/shr1dXKQ3vszCKs6Z?backgroundColor=#FAFAFA"
         />
       </Modal>
     </>

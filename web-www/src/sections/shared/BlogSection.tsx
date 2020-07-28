@@ -35,7 +35,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-
 const BlogSection = () => {
   const data = useStaticQuery(graphql`
     query {
@@ -50,7 +49,7 @@ const BlogSection = () => {
                 }
               }
             }
-            header 
+            header
             url
             description
           }

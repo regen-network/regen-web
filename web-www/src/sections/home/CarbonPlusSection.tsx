@@ -4,7 +4,7 @@ import { makeStyles, Theme } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Img from 'gatsby-image';
-import ReactHtmlParser from 'react-html-parser'; 
+import ReactHtmlParser from 'react-html-parser';
 
 import Title from 'web-components/lib/components/title';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
@@ -118,11 +118,7 @@ const CarbonplusSection = () => {
 
   return (
     <div className={classes.root}>
-      <Grid
-        className={classes.grid}
-        container
-        wrap="nowrap"
-      >
+      <Grid className={classes.grid} container wrap="nowrap">
         <Grid item xs={12} className={classes.text}>
           <Title variant="h6" className={classes.smallHeader}>
             <span className={classes.featured}>{content.smallHeader.featured} </span>

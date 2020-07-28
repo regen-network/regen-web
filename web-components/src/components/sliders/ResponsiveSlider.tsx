@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useCallback } from 'react';
 import { makeStyles, Theme, useTheme } from '@material-ui/core';
 import { Variant } from '@material-ui/core/styles/createTypography';
 import Grid from '@material-ui/core/Grid';
@@ -109,21 +109,22 @@ export default function ResponsiveSlider({
 
   const classes = useStyles({ gridView, padding, title, itemWidth });
 
-  let slider: any = null;
+  let slider: any = useRef(null);
 
-  function slickPrev(): void {
-    if (slider) {
-      slider.slickPrev();
+  const slickPrev = useCallback(() => {
+    if (slider && slider.current) {
+      slider.current.slickPrev();
     }
-  }
+  }, [slider]);
 
-  function slickNext(): void {
-    if (slider) {
-      slider.slickNext();
+  const slickNext = useCallback(() => {
+    if (slider && slider.current) {
+      slider.current.slickNext();
     }
-  }
+  }, [slider]);
+
   const settings = {
-    infinite: false,
+    infinite: true,
     speed: 500,
     slidesToShow: slides,
     slidesToScroll: slides,
@@ -149,13 +150,7 @@ export default function ResponsiveSlider({
         )}
       </Grid>
 
-      <Slider
-        {...settings}
-        ref={e => {
-          slider = e;
-        }}
-        className={classes.slider}
-      >
+      <Slider {...settings} ref={slider} className={classes.slider}>
         {items.map((item, index) => (
           <div className={classes.item} key={index}>
             {item}

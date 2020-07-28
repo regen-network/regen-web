@@ -1,5 +1,5 @@
 import React from 'react';
-import Img from "gatsby-image";
+import Img from 'gatsby-image';
 import { useStaticQuery, graphql } from 'gatsby';
 import BackgroundImage from 'gatsby-background-image';
 
@@ -36,11 +36,7 @@ const ImageGridSection = () => {
   return (
     <div>
       {content.items.map(({ image, header, description }, index) => (
-        <BackgroundImage
-          Tag="div"
-          fluid={data.bg.childImageSharp.fluid}
-          key={index}
-        >
+        <BackgroundImage Tag="div" fluid={data.bg.childImageSharp.fluid} key={index}>
           <ImageGrid
             img={<Img fluid={image.childImageSharp.fluid} />}
             title={header}

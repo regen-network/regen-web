@@ -41,7 +41,7 @@ const IndexPage = (): JSX.Element => {
       <HomeFoldSection />
       <MarketplaceSection />
       <EmailSubmitSection />
-      <Box display={{ xs: 'block', sm: 'none'}}>
+      <Box display={{ xs: 'block', sm: 'none' }}>
         <BackgroundImage
           Tag="div"
           fluid={data.backgroundMobile.childImageSharp.fluid}
@@ -54,7 +54,7 @@ const IndexPage = (): JSX.Element => {
         </BackgroundImage>
         <CarbonPlusSection />
       </Box>
-      <Box display={{ xs: 'none', sm: 'block'}}>
+      <Box display={{ xs: 'none', sm: 'block' }}>
         <BackgroundImage
           Tag="div"
           fluid={data.background.childImageSharp.fluid}

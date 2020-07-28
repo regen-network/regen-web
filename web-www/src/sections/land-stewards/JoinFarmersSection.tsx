@@ -94,13 +94,6 @@ const JoinFarmersSection = () => {
 
   const data = useStaticQuery(graphql`
     query {
-      background: file(relativePath: { eq: "land-stewards-top.png" }) {
-        childImageSharp {
-          fluid(quality: 90) {
-            ...GatsbyImageSharpFluid_withWebp
-          }
-        }
-      }
       text: landStewardsYaml {
         joinFarmersSection {
           header

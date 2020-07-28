@@ -1,6 +1,11 @@
 marketplaceSection:
   header: 'The marketplace for climate solutions'
-  body: 'foobar'
+  tooltip: 'Ecosystem services are the benefits people receive from healthy ecosystems, including clean air and water, resilient food systems, and mitigation of extreme climate events.'
+  body: 
+    green: 'Regen Registry'
+    middle: 'allows land stewards to sell their'
+    popover: 'ecosystem services'
+    end: 'directly to buyers around the world.'
   callToActions:
     - caption: 'Land Stewards'
       image: '../../static/media/land-stewards.png'
@@ -12,6 +17,39 @@ marketplaceSection:
       header: 'Purchase credits'
       description: 'Whether you are an individual or a business looking to take climate action, we make it easy to sponsor ecological practices.'
       linkText: 'Browse Projects'
+climateSection:
+  header: 'Reverse climate change through carbon removal that regenerates ecosystems'
+  description: 'Introducing Carbon<i>Plus</i> - a suite of carbon credits with ecological co-benefits'
+  image: '../../static/media/map.png'
+  solution:
+    header: 'Solution:'
+    description: 'Regen Network incentivizes regenerative land use practices, restores ecosystems and reverses climate change.'
+  problem:
+    header: 'Problem:'
+    description: 'Broken economic models incentivize the degradation of land, destroy ecosystems and fuel climate change.'
 foldSection:
   tagline: Platform for a Thriving Planet
   description: Regen Network aligns economics with ecology to drive regenerative land management.
+carbonPlusSection:
+  smallHeader:
+    featured: 'Featured Credits:'
+    creditName: 'Carbon<i>Plus</i>'
+  header: 'Carbon<i>Plus</i> Credits remove carbon and restore natural grassland ecosystems'
+  description: 'Shifting to managed grazing can potentially sequester 16.4 - 26 CO2e (Gt) by 2050. Wilmot Cattle Co. has increased soil organic carbon to 4.5% and removed over 30,000 tons of CO2e in two years.<br><br>Co-benefits include ecosystem health, animal welfare and soil health.'
+  linkText: 'Buy'
+  linkUrl: 'https://regen-registry.netlify.app/projects/impactag'
+valuesSection:
+  header: 'Why Regen Network?'
+  imageItems:
+    - header: 'Transparency'
+      image: '../../static/media/transparency.svg'
+      description: 'We not only monitor ecological impact, we share our data and insights for the betterment of the whole system.'
+    - header: 'Trust'
+      image: '../../static/media/trust.svg'
+      description: 'By tracking and verifying outcomes, we enable stakeholders to know that credits represent real impact.'
+    - header: 'Accountability'
+      image: '../../static/media/accountability.svg'
+      description: 'Our fully auditable ecosystem services contracts ensure integrity and mutual responsibility between parties.'
+    - header: 'Decentralization'
+      image: '../../static/media/decentralization.svg'
+      description: 'Our platform builds an empowered collective of actors, forgoing the expenses and inefficiencies of third parties'

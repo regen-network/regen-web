@@ -17,16 +17,6 @@ marketplaceSection:
       header: 'Purchase credits'
       description: 'Whether you are an individual or a business looking to take climate action, we make it easy to sponsor ecological practices.'
       linkText: 'Browse Projects'
-climateSection:
-  header: 'Reverse climate change through carbon removal that regenerates ecosystems'
-  description: 'Introducing Carbon<i>Plus</i> - a suite of carbon credits with ecological co-benefits'
-  image: '../../static/media/map.png'
-  solution:
-    header: 'Solution:'
-    description: 'Regen Network incentivizes regenerative land use practices, restores ecosystems and reverses climate change.'
-  problem:
-    header: 'Problem:'
-    description: 'Broken economic models incentivize the degradation of land, destroy ecosystems and fuel climate change.'
 foldSection:
   tagline: Platform for a Thriving Planet
   description: Regen Network aligns economics with ecology to drive regenerative land management.

@@ -3,7 +3,7 @@ import { makeStyles, Theme, useTheme } from '@material-ui/core';
 import { useStaticQuery, graphql } from 'gatsby';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Img from 'gatsby-image';
-import ReactHtmlParser from 'react-html-parser'; 
+import ReactHtmlParser from 'react-html-parser';
 import clsx from 'clsx';
 
 import Title from 'web-components/lib/components/title';
@@ -168,7 +168,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
 }));
-
 
 const ClimateSection = () => {
   const data = useStaticQuery(graphql`

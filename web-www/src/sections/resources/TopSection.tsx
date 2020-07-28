@@ -55,7 +55,7 @@ const TopSection = (): JSX.Element => {
 	  <StaticQuery
 	  query={graphql`
 	  query {
-		background: file(relativePath: { eq: "resources-top-image.png" }) {
+		background: file(relativePath: { eq: "resources-top-image.jpg" }) {
 		  childImageSharp {
 			fluid(quality: 90) {
 			  ...GatsbyImageSharpFluid_withWebp

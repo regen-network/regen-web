@@ -28,7 +28,15 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
     '/': theme.palette.primary.main,
     '/land-stewards': theme.palette.primary.main,
     '/buyers': theme.palette.primary.light,
+    '/privacy-policy': theme.palette.primary.light,
+    '/terms-service': theme.palette.primary.light,
   };
+  
+  // Links in rest of the site must use the trailing '/' in order for these to work appropriately
+  const headerBorderBottomPages: Array<string> = [
+    '/privacy-policy/',
+    '/terms-service/'
+  ];
 
   const menuItems = [
     { title: 'Buyers', href: '/buyers' },
@@ -52,6 +60,7 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
         menuItems={menuItems}
         transparent
         color={desktopColor}
+        borderBottom={headerBorderBottomPages.includes(location.pathname)}
       />
       <div>
         <main>{children}</main>

@@ -10,8 +10,8 @@ publish_mode: editorial_workflow
 collections:
   - name: 'pages'
     label: 'Pages'
-    media_folder: '../static/media'
-    public_folder: '../static/media'
+    media_folder: '../../static/media'
+    public_folder: '../../static/media'
     editor:
       preview: false
     files:

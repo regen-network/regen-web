@@ -125,15 +125,11 @@ const ApproachSection = () => {
   `);
   const classes = useStyles();
   const theme = useTheme();
-  
+
   const content = data.text.investingSection;
   const imageData = data.background.childImageSharp.fluid;
   const note: JSX.Element = (
-    <a
-      target="_blank"
-      rel="noopener noreferrer"
-      href={content.noteLink}
-    >
+    <a target="_blank" rel="noopener noreferrer" href={content.noteLink}>
       <Typography className={classes.note}>{content.note}</Typography>
     </a>
   );

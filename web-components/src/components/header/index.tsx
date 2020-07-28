@@ -21,6 +21,7 @@ export interface node {
 
 interface StyleProps {
   color: string;
+  borderBottom?: boolean;
 }
 
 interface HeaderProps {
@@ -29,6 +30,7 @@ interface HeaderProps {
   absolute?: boolean;
   color: string;
   menuItems?: HeaderMenuItem[];
+  borderBottom?: boolean;
 }
 
 interface HeaderMenuItem {
@@ -44,6 +46,9 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       width: '100%',
     },
   },
+  borderBottom: props => ({
+    borderBottom: props.borderBottom ? `1px ${theme.palette.grey[100]} solid` : 'none',
+  }),
   header: props => ({
     color: props.color,
     maxWidth: theme.breakpoints.values.lg,
@@ -169,9 +174,10 @@ export default function Header({
   color,
   menuItems,
   absolute = true,
+  borderBottom,
 }: HeaderProps): JSX.Element {
-  const classes = useStyles({ color });
-  const rootClass = [];
+  const classes = useStyles({ color, borderBottom });
+  const rootClass = [classes.borderBottom];
   rootClass.push(transparent ? classes.transparent : classes.background);
   rootClass.push(absolute ? classes.absolute : '');
 

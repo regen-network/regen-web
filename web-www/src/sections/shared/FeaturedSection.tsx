@@ -3,7 +3,7 @@ import { makeStyles, Theme } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { useStaticQuery, graphql } from 'gatsby';
-import ReactHtmlParser from 'react-html-parser'; 
+import ReactHtmlParser from 'react-html-parser';
 import Img from 'gatsby-image';
 
 import FeaturedCard from 'web-components/lib/components/cards/FeaturedCard';
@@ -86,17 +86,13 @@ const ApproachSection = () => {
     }
   `);
   const classes = useStyles();
-  
+
   const content = data.text.featuredSection;
   return (
     <Section className={classes.root} title={content.header} titleVariant="subtitle1">
       <div className={classes.card}>
         <FeaturedCard>
-          <Grid
-            className={classes.grid}
-            container
-            wrap="nowrap"
-          >
+          <Grid className={classes.grid} container wrap="nowrap">
             <Grid item xs={12} className={classes.text}>
               <Title className={classes.title} variant="h3">
                 {ReactHtmlParser(content.title)}

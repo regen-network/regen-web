@@ -61,7 +61,16 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   }),
 }));
 
-const Section = ({ children, className, titleClassName, titleLineHeight, titleColor, titleVariant = 'h2', title, withSlider = false }: SectionProps) => {
+const Section = ({
+  children,
+  className,
+  titleClassName,
+  titleLineHeight,
+  titleColor,
+  titleVariant = 'h2',
+  title,
+  withSlider = false
+}: SectionProps) => {
   const classes = useStyles({ withSlider, titleLineHeight, titleColor });
   return (
     <section className={clsx(classes.root, className)}>

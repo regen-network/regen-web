@@ -72,7 +72,7 @@ const HomeValues = ({ className }: Props) => {
             ...GatsbyImageSharpFixed_withWebp
           }
         }
-	    }
+      }
       text: homeYaml {
         valuesSection {
           header
@@ -91,17 +91,18 @@ const HomeValues = ({ className }: Props) => {
           }
         }
       }
-	  }
+    }
   `);
   const content = data.text.valuesSection;
   const classes = useStyles();
 
   const imageItems: ImageItemProps[] = content.imageItems.map(({ image, header: title, description }) => ({
-    img: !image.childImageSharp && image.extension === 'svg' ? (
-      <img src={image.publicURL} alt={image.publicURL} />
-    ) : (
-      <Img fixed={image.childImageSharp.fixed} />
-    ),
+    img:
+      !image.childImageSharp && image.extension === 'svg' ? (
+        <img src={image.publicURL} alt={image.publicURL} />
+      ) : (
+        <Img fixed={image.childImageSharp.fixed} />
+      ),
     title,
     description,
   }));

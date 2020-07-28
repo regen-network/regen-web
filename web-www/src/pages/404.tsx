@@ -5,6 +5,7 @@ import { makeStyles, useTheme, Theme } from '@material-ui/core';
 import SEO from '../components/seo';
 import Title from 'web-components/lib/components/title';
 import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -52,7 +53,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 			marginBottom: theme.spacing(8),
 		},
 		[theme.breakpoints.down('xs')]:{
-			fontSize: theme.spacing(36),
+			fontSize: theme.spacing(28),
 			lineHeight: theme.spacing(30.75),
 			marginBottom: theme.spacing(2),
 		},
@@ -79,11 +80,12 @@ const useStyles = makeStyles((theme: Theme) => ({
 		height: theme.spacing(15),
 		lineHeight: theme.spacing(5.75),
 		[theme.breakpoints.down('xs')]: {
-			padding: `${theme.spacing(1)} ${theme.spacing(2)}`,
+			padding: `${theme.spacing(3)} ${theme.spacing(7.5)}`,
 			fontSize: theme.spacing(4.5),
+			height: 'unset',
 		  },
 		  [theme.breakpoints.up('sm')]: {
-			padding: `${theme.spacing(2)} ${theme.spacing(6)}`,
+			padding: `${theme.spacing(4.5)} ${theme.spacing(12.5)}`,
 			fontSize: theme.spacing(4.5),
 		  },
 	}
@@ -111,7 +113,7 @@ const NotFoundPage = (): JSX.Element => {
 			<div className={classes.fourOFour}>404</div>
 			<Title className={classes.h1} align="center" variant="h1">Oops! Page not found.</Title>
 			<Typography align="center" className={classes.text}>The page you are looking for might have been temporarily removed or had its name changed.</Typography>
-			<ContainedButton href="/" className={classes.button}>Visit Our Homepage Instead</ContainedButton>
+			<ContainedButton style={{whiteSpace: 'nowrap'}} href="/" className={classes.button}>Visit Our Homepage <Box display={{xs: 'none', sm: 'inline'}}>{'\u00A0'}Instead</Box></ContainedButton>
 		</div>
 		</>
 	)

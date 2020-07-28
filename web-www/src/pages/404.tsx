@@ -15,11 +15,13 @@ const useStyles = makeStyles((theme: Theme) => ({
 			paddingTop: theme.spacing(44.5),
 			paddingLeft: theme.spacing(30),
 			paddingRight: theme.spacing(30),
+			paddingBottom: theme.spacing(30),
 		},
 		[theme.breakpoints.up(theme.breakpoints.values['tablet'])]: {
 			paddingTop: theme.spacing(44.5),
 			paddingLeft: 'unset',
 			paddingRight: 'unset',
+			paddingBottom: theme.spacing(30),
 			width: theme.spacing(132.75),
 			margin: '0 auto',
 		},

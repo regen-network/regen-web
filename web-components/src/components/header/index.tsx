@@ -124,27 +124,6 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   transparent: {
     backgroundColor: `rgba(0,0,0,0)`,
   },
-  color: props => ({
-    color: props.color,
-    '& ul > li > a': {
-      color: props.color,
-      textDecoration: 'none',
-      fontFamily: 'Muli',
-      textTransform: 'uppercase',
-      '&:link, &:visited, &:hover, &:active': {
-        textDecoration: 'none',
-      },
-    },
-    '& ul > li > div > span': {
-      color: props.color,
-      textDecoration: 'none',
-      fontFamily: 'Muli',
-      textTransform: 'uppercase',
-      '&:link, &:visited, &:hover, &:active': {
-        textDecoration: 'none',
-      },
-    },
-  }),
   searchIcon: {
     color: theme.palette.grey[100],
     marginRight: theme.spacing(6.25),

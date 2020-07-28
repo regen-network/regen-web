@@ -111,7 +111,7 @@ const NotFoundPage = (): JSX.Element => {
 			<div className={classes.fourOFour}>404</div>
 			<Title className={classes.h1} align="center" variant="h1">Oops! Page not found.</Title>
 			<Typography align="center" className={classes.text}>The page you are looking for might have been temporarily removed or had its name changed.</Typography>
-			<ContainedButton className={classes.button}>Visit Our Homepage Instead</ContainedButton>
+			<ContainedButton href="/" className={classes.button}>Visit Our Homepage Instead</ContainedButton>
 		</div>
 		</>
 	)

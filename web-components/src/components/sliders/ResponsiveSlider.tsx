@@ -12,18 +12,17 @@ import Title from '../title';
 export interface ResponsiveSliderProps {
   items: JSX.Element[];
   titleVariant?: Variant;
-  imageHeight?: string;
   arrows?: boolean;
   slidesToShow?: number;
   title?: string;
   className?: string;
-  padding?: string;
+  padding?: number;
   itemWidth?: string;
 }
 
 interface StyleProps {
   gridView: boolean;
-  padding?: string;
+  padding?: number;
   title?: string;
   itemWidth?: string;
 }
@@ -90,7 +89,6 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
 
 export default function ResponsiveSlider({
   items,
-  imageHeight,
   titleVariant,
   slidesToShow,
   arrows = false,

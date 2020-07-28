@@ -12,12 +12,11 @@ export interface ImageItemProps {
   img: JSX.Element; // using pure img tag or gatsby-image
   title: string;
   description: string;
-  imageHeight?: string;
+  imageClassName?: string;
   titleVariant?: Variant;
 }
 
 export interface StyleProps {
-  imageHeight?: string;
   titleVariant: string;
 }
 
@@ -29,15 +28,9 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     lineHeight: '150%',
     paddingBottom: theme.spacing(2.5),
   },
-  image: props => ({
-    height: props.imageHeight || theme.spacing(32.5),
-    [theme.breakpoints.up('xs')]: {
-      marginBottom: theme.spacing(9),
-    },
-    [theme.breakpoints.down('xs')]: {
-      marginBottom: theme.spacing(6.25),
-    },
-  }),
+  image: {
+    height: theme.spacing(32.5),
+  },
   h3title: {
     [theme.breakpoints.down('xs')]: {
       fontSize: theme.spacing(5.25),
@@ -48,15 +41,15 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
 export default function ImageItem({
   img,
   title,
-  imageHeight,
+  imageClassName,
   description,
   titleVariant = 'h4',
 }: ImageItemProps): JSX.Element {
-  const classes = useStyles({ titleVariant, imageHeight });
+  const classes = useStyles({ titleVariant });
 
   return (
     <div className={classes.root}>
-      <Grid container justify="center" className={classes.image}>
+      <Grid container justify="center" className={clsx(imageClassName, classes.image)}>
         {img}
       </Grid>
       <Title

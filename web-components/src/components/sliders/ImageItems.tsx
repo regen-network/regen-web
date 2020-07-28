@@ -7,7 +7,7 @@ import ResponsiveSlider from './ResponsiveSlider';
 export interface ImageItemsProps {
   items: ImageItemProps[];
   titleVariant?: Variant;
-  imageHeight?: string;
+  imageClassName?: string;
   arrows?: boolean;
   slidesToShow?: number;
   title?: string;
@@ -16,7 +16,7 @@ export interface ImageItemsProps {
 
 export default function ImageItems({
   items,
-  imageHeight,
+  imageClassName,
   titleVariant,
   slidesToShow,
   arrows = false,
@@ -26,14 +26,13 @@ export default function ImageItems({
   return (
     <ResponsiveSlider
       className={className}
-      imageHeight={imageHeight}
       titleVariant={titleVariant}
       title={title}
       slidesToShow={slidesToShow}
       arrows={arrows}
       items={items.map(item => (
         <ImageItem
-          imageHeight={imageHeight}
+          imageClassName={imageClassName}
           img={item.img}
           title={item.title}
           titleVariant={titleVariant}

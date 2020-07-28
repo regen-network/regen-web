@@ -10,11 +10,13 @@ export interface ImpactCardProps {
   description: string;
   imgSrc: string;
   monitored?: boolean;
+  largeFontSize?: boolean;
 }
 
 interface StyleProps {
   imgSrc: string;
   monitored: boolean;
+  largeFontSize: boolean;
 }
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
@@ -50,20 +52,20 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   }),
   name: props => ({
     [theme.breakpoints.up('sm')]: {
-      fontSize: props.monitored ? '1.5rem' : '1.125rem',
+      fontSize: props.largeFontSize || props.monitored ? '1.5rem' : '1.125rem',
     },
     [theme.breakpoints.down('xs')]: {
-      fontSize: props.monitored ? '1.375rem' : '1rem',
+      fontSize: props.largeFontSize || props.monitored ? '1.375rem' : '1rem',
     },
     fontWeight: 'bold',
   }),
   description: props => ({
     [theme.breakpoints.up('sm')]: {
-      fontSize: props.monitored ? '1.125rem' : '0.875rem',
+      fontSize: props.largeFontSize || props.monitored ? '1.125rem' : '0.875rem',
       paddingBottom: props.monitored ? theme.spacing(10) : theme.spacing(0),
     },
     [theme.breakpoints.down('xs')]: {
-      fontSize: props.monitored ? '1rem' : '0.875rem',
+      fontSize: props.largeFontSize || props.monitored ? '1rem' : '0.875rem',
       paddingBottom: props.monitored ? theme.spacing(6.75) : theme.spacing(6),
     },
     paddingTop: props.monitored ? theme.spacing(3) : theme.spacing(2.25),
@@ -112,8 +114,9 @@ export default function ImpactCard({
   description,
   imgSrc,
   monitored = false,
+  largeFontSize = false,
 }: ImpactCardProps): JSX.Element {
-  const classes = useStyles({ imgSrc, monitored });
+  const classes = useStyles({ imgSrc, monitored, largeFontSize });
   // const theme = useTheme();
   return (
     <Card>

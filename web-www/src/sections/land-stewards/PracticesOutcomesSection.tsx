@@ -38,6 +38,12 @@ const useStyles = makeStyles((theme: Theme) => ({
     float: 'right',
     paddingTop: theme.spacing(7.25),
   },
+  title: {
+    [theme.breakpoints.up('lg')]: {
+      paddingLeft: theme.spacing(40),
+      paddingRight: theme.spacing(40),
+    },
+  },
 }));
 
 const PracticesOutcomesSection = () => {
@@ -81,18 +87,12 @@ const PracticesOutcomesSection = () => {
     title,
     description,
   }));
-  const outcomesElement: JSX.Element[] = content.outcomes.items.map(
-    ({ image, header, description }) => (
-      <ImpactCard
-        name={header}
-        imgSrc={image.publicURL}
-        description={description}
-      />
-    ),
-  );
+  const outcomesElement: JSX.Element[] = content.outcomes.items.map(({ image, header, description }) => (
+    <ImpactCard name={header} imgSrc={image.publicURL} description={description} largeFontSize />
+  ));
 
   return (
-    <Section withSlider className={classes.root} title={content.header}>
+    <Section withSlider titleClassName={classes.title} className={classes.root} title={content.header}>
       <ImageItems className={classes.slider} title={content.practices.header} arrows slidesToShow={4} items={practicesItems} />
       <ResponsiveSlider
         itemWidth="90%"

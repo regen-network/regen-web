@@ -24,13 +24,13 @@ let useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       'padding-top': '29vh',
       'padding-bottom': '40vh',
-	},
-	[theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
-		paddingTop: '12vh',
-	 },
+    },
+    [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
+      paddingTop: '12vh',
+    },
     [theme.breakpoints.down('xs')]: {
-	  'padding-top': '15vh',
-	  height: '80vh',
+      'padding-top': '15vh',
+      height: '80vh',
     },
   },
   tag: {

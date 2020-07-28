@@ -26,14 +26,12 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
 
   const headerColors: HeaderColors = {
     '/': theme.palette.primary.main,
-	'/buyers/': theme.palette.primary.light,
-	'/privacy-policy/': theme.palette.primary.light,
+    '/buyers/': theme.palette.primary.light,
+    '/privacy-policy/': theme.palette.primary.light,
   };
-   // Links in rest of the site must use the trailing '/' in order for these to work appropriately
+  // Links in rest of the site must use the trailing '/' in order for these to work appropriately
 
-   const headerBorderBottomPages: Array<string> = [
-	   '/privacy-policy/',
-   ];
+  const headerBorderBottomPages: Array<string> = ['/privacy-policy/'];
 
   const menuItems = [
     { title: 'Buyers', href: '/buyers' },
@@ -56,8 +54,8 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
       <Header
         menuItems={menuItems}
         transparent
-		color={desktopColor}
-		borderBottom={headerBorderBottomPages.includes(location.pathname)}
+        color={desktopColor}
+        borderBottom={headerBorderBottomPages.includes(location.pathname)}
       />
       <div>
         <main>{children}</main>

@@ -56,9 +56,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function MoreInfoForm({
-  onClose,
-}: MoreInfoFormProps): JSX.Element {
+export default function MoreInfoForm({ onClose }: MoreInfoFormProps): JSX.Element {
   const classes = useStyles();
   return (
     <div>
@@ -80,17 +78,14 @@ export default function MoreInfoForm({
           if (!values.email) {
             errors.email = requiredMessage;
           } else if (!validateEmail(values.email)) {
-            errors.email = invalidEmailMessage;;
+            errors.email = invalidEmailMessage;
           }
           if (!values.name) {
             errors.name = requiredMessage;
           }
           return errors;
         }}
-        onSubmit={(
-          { budget, email, name, orgName },
-          { setSubmitting, setStatus },
-        ) => {
+        onSubmit={({ budget, email, name, orgName }, { setSubmitting, setStatus }) => {
           setSubmitting(true);
           const apiUri: string = process.env.GATSBY_API_URI || 'http://localhost:5000';
           axios

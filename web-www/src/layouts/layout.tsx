@@ -26,21 +26,22 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
 
   const headerColors: HeaderColors = {
     '/': theme.palette.primary.main,
-    '/buyers/': theme.palette.primary.light,
-    '/privacy-policy/': theme.palette.primary.light,
-    '/404/': theme.palette.primary.light,
+    '/land-stewards': theme.palette.primary.main,
+    '/buyers': theme.palette.primary.light,
+    '/privacy-policy': theme.palette.primary.light,
+    '/terms-service': theme.palette.primary.light,
   };
-  
+
   // Links in rest of the site must use the trailing '/' in order for these to work appropriately
-  const headerNoBorderBottomPages: Array<string> = ['/', '/buyers/'];
+  const headerNoBorderBottomPages: Array<string> = ['/', '/buyers/', '/land-stewards/'];
 
   const menuItems = [
     { title: 'Buyers', href: '/buyers' },
-    { title: 'Land Stewards', href: '/landstewards' },
+    { title: 'Land Stewards', href: '/land-stewards' },
     {
       title: 'Learn More',
       dropdownItems: [
-        { title: 'Case Studies', href: '/casestudies' },
+        { title: 'Case Studies', href: '/case-studies' },
         { title: 'FAQ', href: '/faq' },
         { title: 'Team', href: '/team' },
       ],

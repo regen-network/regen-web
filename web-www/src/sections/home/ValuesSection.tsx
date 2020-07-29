@@ -1,7 +1,7 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import BackgroundImage from 'gatsby-background-image';
-import { makeStyles, useTheme, Theme } from '@material-ui/core';
+import { makeStyles, Theme } from '@material-ui/core';
 import clsx from 'clsx';
 import Img from 'gatsby-image';
 
@@ -45,6 +45,15 @@ let useStyles = makeStyles((theme: Theme) => ({
       paddingTop: theme.spacing(7.75),
     },
   },
+  image: {
+    height: theme.spacing(39),
+    [theme.breakpoints.up('sm')]: {
+      marginBottom: theme.spacing(9),
+    },
+    [theme.breakpoints.down('xs')]: {
+      marginBottom: theme.spacing(6.25),
+    },
+  },
 }));
 
 const HomeValues = ({ className }: Props) => {
@@ -86,7 +95,6 @@ const HomeValues = ({ className }: Props) => {
   `);
   const content = data.text.valuesSection;
   const classes = useStyles();
-  const theme = useTheme();
 
   const imageItems: ImageItemProps[] = content.imageItems.map(({ image, header: title, description }) => ({
     img:
@@ -113,7 +121,7 @@ const HomeValues = ({ className }: Props) => {
         title={content.header}
       >
         <div className={classes.sliderContainer}>
-          <ImageItems imageHeight={theme.spacing(39)} titleVariant="h3" items={imageItems} />
+          <ImageItems imageClassName={classes.image} titleVariant="h3" items={imageItems} />
         </div>
       </Section>
     </BackgroundImage>

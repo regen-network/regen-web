@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useCallback } from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import ProtectedSpeciesItem, { ItemProps } from './Item';
@@ -41,29 +41,24 @@ export default function ProtectedSpecies({ species }: ProtectedSpeciesProps): JS
     arrows: false,
   };
 
-  let slider: any = null;
+  // TODO build reusable HOC slider component
+  let slider: any = useRef(null);
 
-  function slickPrev(): void {
-    if (slider) {
-      slider.slickPrev();
+  const slickPrev = useCallback(() => {
+    if (slider && slider.current) {
+      slider.current.slickPrev();
     }
-  }
+  }, [slider]);
 
-  function slickNext(): void {
-    if (slider) {
-      slider.slickNext();
+  const slickNext = useCallback(() => {
+    if (slider && slider.current) {
+      slider.current.slickNext();
     }
-  }
+  }, [slider]);
 
   return (
     <div>
-      <Slider
-        {...settings}
-        ref={e => {
-          slider = e;
-        }}
-        className={classes.root}
-      >
+      <Slider {...settings} ref={slider} className={classes.root}>
         {species.map((item, index) => (
           <div className={classes.item} key={index}>
             <ProtectedSpeciesItem name={item.name} imgSrc={item.imgSrc} />

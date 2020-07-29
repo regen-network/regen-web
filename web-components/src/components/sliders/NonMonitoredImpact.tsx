@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useCallback } from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Slider from 'react-slick';
@@ -34,38 +34,30 @@ const useStyles = makeStyles((theme: Theme) => ({
 export default function NonMonitoredImpact({ impact }: NonMonitoredImpactProps): JSX.Element {
   const classes = useStyles({});
   const settings = {
-    // className: 'center',
-    // centerMode: true,
-    // infinite: false,
     speed: 500,
     rows: 1,
     slidesPerRow: 1,
     arrows: false,
   };
 
-  let slider: any = null;
+  // TODO build reusable HOC slider component
+  let slider: any = useRef(null);
 
-  function slickPrev(): void {
-    if (slider) {
-      slider.slickPrev();
+  const slickPrev = useCallback(() => {
+    if (slider && slider.current) {
+      slider.current.slickPrev();
     }
-  }
+  }, [slider]);
 
-  function slickNext(): void {
-    if (slider) {
-      slider.slickNext();
+  const slickNext = useCallback(() => {
+    if (slider && slider.current) {
+      slider.current.slickNext();
     }
-  }
+  }, [slider]);
 
   return (
     <div>
-      <Slider
-        {...settings}
-        ref={e => {
-          slider = e;
-        }}
-        className={classes.root}
-      >
+      <Slider {...settings} ref={slider} className={classes.root}>
         {impact.map((item, index) => (
           <div className={classes.item} key={index}>
             <ImpactCard

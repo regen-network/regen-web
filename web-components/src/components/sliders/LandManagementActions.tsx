@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useCallback } from 'react';
 import { makeStyles, useTheme, Theme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Grid from '@material-ui/core/Grid';
@@ -46,30 +46,24 @@ export default function LandManagementActions({ actions }: LandManagementActions
     arrows: false,
   };
 
-  let slider: any = null;
-
-  function slickPrev(): void {
-    if (slider) {
-      slider.slickPrev();
-    }
-  }
-
-  function slickNext(): void {
-    if (slider) {
-      slider.slickNext();
-    }
-  }
-
   // TODO build reusable HOC slider component
+  let slider: any = useRef(null);
+
+  const slickPrev = useCallback(() => {
+    if (slider && slider.current) {
+      slider.current.slickPrev();
+    }
+  }, [slider]);
+
+  const slickNext = useCallback(() => {
+    if (slider && slider.current) {
+      slider.current.slickNext();
+    }
+  }, [slider]);
+
   return (
     <div>
-      <Slider
-        {...settings}
-        ref={e => {
-          slider = e;
-        }}
-        className={classes.root}
-      >
+      <Slider {...settings} ref={slider} className={classes.root}>
         {actions.map((action, index) => (
           <div className={classes.item} key={index}>
             <Action name={action.name} description={action.description} imgSrc={action.imgSrc} />

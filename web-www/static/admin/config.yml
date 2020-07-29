@@ -30,9 +30,9 @@ collections:
             widget: "object"
             fields:
               - {label: Header, name: header, widget: string}
-              - label: Body,
-                name: body,
-                widget: text
+              - label: Body
+                name: body
+                widget: object
                 fields:
                   - {label: Green, name: green, widget: string}
                   - {label: MIddle, name: middle, widget: string}

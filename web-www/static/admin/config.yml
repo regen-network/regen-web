@@ -23,14 +23,21 @@ collections:
             name: "foldSection"
             widget: "object"
             fields:
-              - {label: Header, name: header, widget: string}
+              - {label: Header, name: tagline, widget: string}
               - {label: Description, name: description, widget: string}
           - label: "Marketplace Section"
             name: "marketplaceSection"
             widget: "object"
             fields:
               - {label: Header, name: header, widget: string}
-              - {label: Body, name: body, widget: text}
+              - label: Body,
+                name: body,
+                widget: text
+                fields:
+                  - {label: Green, name: green, widget: string}
+                  - {label: MIddle, name: middle, widget: string}
+                  - {label: Popover, name: poppover, widget: string}
+                  - {label: End, name: end, widget: string}
               - label: "Call To Actions"
                 name: "callToActions"
                 widget: list
@@ -41,6 +48,57 @@ collections:
                   - {label: "Header", name: "header", widget: string}
                   - {label: "Description", name: "description", widget: text}
                   - {label: "Link Text", name: "linkText", widget: string}
+          - label: Reverse climate change Section
+            name: climateSection
+            widget: object
+            fields:
+              - {label: Header, name: header, widget: string}
+              - {label: Description, name: description, widget: string}
+              - {label: "Map Image", name: "image", widget: image}
+              - label: Solution
+                name: solution
+                widget: object
+                fields:
+                  - {label: Header, name: header, widget: string}
+                  - {label: Description, name: description, widget: string}
+              - label: Problem
+                name: problem
+                widget: object
+                fields:
+                  - {label: Header, name: header, widget: string}
+                  - {label: Description, name: description, widget: string}
+          - label: CarbonPlus Section
+            name: climateSection
+            widget: object
+            fields:
+              - label: Caption
+                name: smallHeader
+                widget: object
+                fields:
+                  - {label: Featured, name: featured, widget: string}
+                  - {label: Credit name, name: creditName, widget: string}
+              - {label: Header, name: header, widget: string}
+              - {label: Description, name: description, widget: string}
+              - {label: Link text, name: linkText, widget: string}
+              - {label: Link URL, name: linkUrl, widget: string}
+          - label: Regen Ledger Section
+            name: ledgerSection
+            widget: object
+            fields:
+              - {label: Description, name: description, widget: string}
+          - label: Why Regen Network Section
+            name: valuesSection
+            widget: object
+            fields:
+              - {label: Header, name: header, widget: string}
+              - label: "Image Items"
+                name: "imageItems"
+                widget: list
+                collapsed: false
+                fields:
+                  - {label: "Image", name: "image", widget: image}
+                  - {label: "Header", name: "header", widget: string}
+                  - {label: "Description", name: "description", widget: text}
       - label: "For Buyers page"
         name: "buyers"
         file: "web-www/content/buyers/index.yaml"

@@ -26,10 +26,10 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
 
   const headerColors: HeaderColors = {
     '/': theme.palette.primary.main,
-    '/land-stewards': theme.palette.primary.main,
-    '/buyers': theme.palette.primary.light,
-    '/privacy-policy': theme.palette.primary.light,
-    '/terms-service': theme.palette.primary.light,
+    '/land-stewards/': theme.palette.primary.main,
+    '/buyers/': theme.palette.primary.light,
+    '/privacy-policy/': theme.palette.primary.light,
+    '/terms-service/': theme.palette.primary.light,
   };
 
   // Links in rest of the site must use the trailing '/' in order for these to work appropriately

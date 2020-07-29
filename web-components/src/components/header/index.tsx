@@ -173,10 +173,11 @@ export default function Header({
   transparent,
   color,
   menuItems,
+  borderBottom = true,
   absolute = true,
-  borderBottom,
 }: HeaderProps): JSX.Element {
   const classes = useStyles({ color, borderBottom });
+
   const rootClass = [classes.borderBottom];
   rootClass.push(transparent ? classes.transparent : classes.background);
   rootClass.push(absolute ? classes.absolute : '');
@@ -185,7 +186,13 @@ export default function Header({
 
   return (
     <div className={clsx(rootClass)}>
-      <Grid className={classes.header} container direction="row" alignItems="center" justify="space-between">
+      <Grid
+        className={clsx(classes.header)}
+        container
+        direction="row"
+        alignItems="center"
+        justify="space-between"
+      >
         <Grid className={classes.logoItem} item>
           <a href="/">
             <Box display={{ xs: 'none', sm: 'block' }}>

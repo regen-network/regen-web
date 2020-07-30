@@ -38,7 +38,7 @@ const ImageItemsSection = () => {
   const content = data.text.imageItemsSection;
   const classes = useStyles({});
   const imageItems: ImageItemProps[] = content.imageItems.map(({ image, header: title, description }) => ({
-    img:  <img src={image.publicURL} alt={image.publicURL} />,
+    img: <img src={image.publicURL} alt={image.publicURL} />,
     title,
     description,
   }));

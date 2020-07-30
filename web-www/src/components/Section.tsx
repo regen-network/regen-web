@@ -8,15 +8,18 @@ import Title from 'web-components/lib/components/title';
 interface SectionProps {
   children?: any;
   className?: string;
+  titleClassName?: string;
   title?: string;
   titleVariant?: Variant;
   withSlider?: boolean;
   titleLineHeight?: string;
+  titleColor?: string;
 }
 
 interface StyleProps {
   withSlider: boolean;
   titleLineHeight?: string;
+  titleColor?: string;
 }
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
@@ -46,6 +49,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     },
   }),
   title: props => ({
+    color: props.titleColor || 'inherit',
     lineHeight: props.titleLineHeight || '140%',
     [theme.breakpoints.up('sm')]: {
       paddingRight: '8%',
@@ -60,16 +64,18 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
 const Section = ({
   children,
   className,
+  titleClassName,
   titleLineHeight,
+  titleColor,
   titleVariant = 'h2',
   title,
-  withSlider = false,
+  withSlider = false
 }: SectionProps) => {
-  const classes = useStyles({ withSlider, titleLineHeight });
+  const classes = useStyles({ withSlider, titleLineHeight, titleColor });
   return (
     <section className={clsx(classes.root, className)}>
       {title && (
-        <Title className={classes.title} variant={titleVariant} align="center">
+        <Title className={clsx(classes.title, titleClassName)} variant={titleVariant} align="center">
           {title}
         </Title>
       )}

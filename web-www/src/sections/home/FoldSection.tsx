@@ -1,5 +1,5 @@
 import React from 'react';
-import { graphql, StaticQuery, useStaticQuery } from 'gatsby';
+import { graphql, useStaticQuery } from 'gatsby';
 import { makeStyles, Theme } from '@material-ui/core';
 import clsx from 'clsx';
 import BackgroundImage from 'gatsby-background-image';
@@ -90,49 +90,43 @@ let useStyles = makeStyles((theme: Theme) => ({
 
 const HomeFoldSection = ({ className }: Props) => {
   const classes = useStyles({});
-  return (
-    <StaticQuery
-      query={graphql`
-        query {
-          desktop: file(relativePath: { eq: "image43.jpg" }) {
-            childImageSharp {
-              fluid(quality: 90, maxWidth: 1920) {
-                ...GatsbyImageSharpFluid_withWebp
-              }
-            }
-          }
-          text: homeYaml {
-            foldSection {
-              tagline
-              description
-            }
+  const data = useStaticQuery(graphql`
+    query {
+      desktop: file(relativePath: { eq: "image43.jpg" }) {
+        childImageSharp {
+          fluid(quality: 90, maxWidth: 1920) {
+            ...GatsbyImageSharpFluid_withWebp
           }
         }
-      `}
-      render={data => {
-        // Set ImageData.
-        const imageData = data.desktop.childImageSharp.fluid;
-        const content = data.text.foldSection;
-        return (
-          <BackgroundImage
-            Tag="section"
-            className={clsx(classes.root, className)}
-            fluid={imageData}
-            backgroundColor={`#040e18`}
-          >
-            <div className={classes.backgroundGradient}></div>
-            <VideoPopup />
-            <Title align="center" color="primary" variant="h1" className={classes.title}>
-              {content.tagline}
-            </Title>
-            <div className={classes.tag}>
-              <Typography variant="body1">{content.description}</Typography>
-            </div>
-          </BackgroundImage>
-        );
-      }}
-    />
+      }
+      text: homeYaml {
+        foldSection {
+          tagline
+          description
+        }
+      }
+    }
+  `);
+  const imageData = data.desktop.childImageSharp.fluid;
+  const content = data.text.foldSection;
+  return (
+    <BackgroundImage
+      Tag="section"
+      className={clsx(classes.root, className)}
+      fluid={imageData}
+      backgroundColor={`#040e18`}
+    >
+      <div className={classes.backgroundGradient}></div>
+      <VideoPopup />
+      <Title align="center" color="primary" variant="h1" className={classes.title}>
+        {content.tagline}
+      </Title>
+      <div className={classes.tag}>
+        <Typography variant="body1">{content.description}</Typography>
+      </div>
+    </BackgroundImage>
   );
+
 };
 
 export default HomeFoldSection;

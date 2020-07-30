@@ -26,25 +26,23 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
 
   const headerColors: HeaderColors = {
     '/': theme.palette.primary.main,
+    '/land-stewards/': theme.palette.primary.main,
     '/buyers/': theme.palette.primary.light,
     '/resources/': theme.palette.primary.main,
     '/privacy-policy/': theme.palette.primary.light,
     '/terms-service/': theme.palette.primary.light,
   };
-  
+
   // Links in rest of the site must use the trailing '/' in order for these to work appropriately
-  const headerBorderBottomPages: Array<string> = [
-    '/privacy-policy/',
-    '/terms-service/'
-  ];
+  const headerNoBorderBottomPages: Array<string> = ['/', '/buyers/', '/land-stewards/'];
 
   const menuItems = [
     { title: 'Buyers', href: '/buyers' },
-    { title: 'Land Stewards', href: '/landstewards' },
+    { title: 'Land Stewards', href: '/land-stewards' },
     {
       title: 'Learn More',
       dropdownItems: [
-        { title: 'Case Studies', href: '/casestudies' },
+        { title: 'Case Studies', href: '/case-studies' },
         { title: 'FAQ', href: '/faq' },
         { title: 'Team', href: '/team' },
       ],
@@ -60,7 +58,7 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
         menuItems={menuItems}
         transparent
         color={desktopColor}
-        borderBottom={headerBorderBottomPages.includes(location.pathname)}
+        borderBottom={!headerNoBorderBottomPages.includes(location.pathname)}
       />
       <div>
         <main>{children}</main>

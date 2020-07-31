@@ -28,6 +28,7 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
     '/': theme.palette.primary.main,
     '/land-stewards/': theme.palette.primary.main,
     '/buyers/': theme.palette.primary.light,
+    '/resources/': theme.palette.primary.main,
     '/privacy-policy/': theme.palette.primary.light,
     '/terms-service/': theme.palette.primary.light,
   };

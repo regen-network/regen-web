@@ -69,3 +69,13 @@ collections:
                   - {label: "Header", name: header, widget: string}
                   - {label: "Image", name: image, widget: image}
                   - {label: "Description", name: description, widget: text}
+      - label: "Resources page"
+        name: "resources"
+        file: "web-www/content/resources/index.yaml"
+        fields:
+          - label: "Top Section"
+          name: "topSection"
+          widget: "object"
+          fields:
+            - {label: Header, name: header, widget: string}
+            - {label: Body, name: body, widget: string}

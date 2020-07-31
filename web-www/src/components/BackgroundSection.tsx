@@ -8,8 +8,8 @@ import Title from 'web-components/lib/components/title';
 
 interface Props {
   className?: string;
-  body: React.ReactNode;
-  header: React.ReactNode;
+  body?: React.ReactNode;
+  header?: React.ReactNode;
   linearGradient?: string;
   imageData: any;
 }
@@ -85,8 +85,23 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   },
 }));
 
-const BackgroundSection = ({ className, imageData, linearGradient, body, header }: Props) => {
+const BackgroundSection = ({ className, imageData, linearGradient, body, header }: Props): JSX.Element => {
   const classes = useStyles({ linearGradient });
+  let headerJSX, bodyJSX;
+  if (header) {
+    headerJSX = (
+      <Title color="primary" variant="h1" className={classes.title}>
+        {header}
+      </Title>
+    );
+  }
+  if (body) {
+    bodyJSX = (
+      <Typography component="div" className={classes.subtitle}>
+        {body}
+      </Typography>
+    );
+  }
   return (
     <BackgroundImage
       Tag="section"
@@ -96,12 +111,8 @@ const BackgroundSection = ({ className, imageData, linearGradient, body, header 
     >
       <div className={classes.backgroundGradient} />
       <div className={classes.text}>
-        <Title color="primary" variant="h1" className={classes.title}>
-          {header}
-        </Title>
-        <Typography component="div" className={classes.subtitle}>
-          {body}
-        </Typography>
+        {headerJSX}
+        {bodyJSX}
       </div>
     </BackgroundImage>
   );

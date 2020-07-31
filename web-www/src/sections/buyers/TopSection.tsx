@@ -40,17 +40,21 @@ const TopSection = () => {
   return (
     <BackgroundSection
       header={content.header}
-      body={<span>{content.body.start}{' '}
-        <Tooltip
-          arrow
-          placement="top"
-          title="Ecosystem services are the benefits people receive from healthy ecosystems, including clean air and water, resilient food systems, and mitigation of extreme climate events."
-        >
-          <span className={classes.tooltip}>{content.body.underlined}</span>
-        </Tooltip>{' '}
-        {content.body.end}</span>}
-        imageData={imageData}
-      />
+      body={
+        <span>
+          {content.body.start}{' '}
+          <Tooltip
+            arrow
+            placement="top"
+            title="Ecosystem services are the benefits people receive from healthy ecosystems, including clean air and water, resilient food systems, and mitigation of extreme climate events."
+          >
+            <span className={classes.tooltip}>{content.body.underlined}</span>
+          </Tooltip>{' '}
+          {content.body.end}
+        </span>
+      }
+      imageData={imageData}
+    />
   );
 };
 

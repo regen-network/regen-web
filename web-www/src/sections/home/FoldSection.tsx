@@ -126,7 +126,6 @@ const HomeFoldSection = ({ className }: Props) => {
       </div>
     </BackgroundImage>
   );
-
 };
 
 export default HomeFoldSection;

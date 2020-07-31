@@ -47,10 +47,7 @@ const LandStewardsPage = (): JSX.Element => {
         </>
       </FixedFooter>
       <Modal open={open} onClose={handleClose} className={classes.modal}>
-        <iframe
-          title="airtable-signup-form"
-          src="https://airtable.com/embed/shrs5XjNI8ugXEDS0"
-        />
+        <iframe title="airtable-signup-form" src="https://airtable.com/embed/shrs5XjNI8ugXEDS0" />
       </Modal>
     </>
   );

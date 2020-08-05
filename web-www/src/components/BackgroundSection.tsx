@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles, Theme, useTheme } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import clsx from 'clsx';
 import BackgroundImage from 'gatsby-background-image';
@@ -11,25 +11,42 @@ interface Props {
   body?: React.ReactNode;
   header?: React.ReactNode;
   linearGradient?: string;
+  children?: React.ReactNode;
+  padding?: string;
+  paddingMobile?: string;
   imageData: any;
 }
 
 interface StyleProps {
   linearGradient?: string;
+  padding?: string;
+  paddingMobile?: string;
 }
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
-  root: {
-    backgroundSize: 'cover',
+  root: props => ({
+    [theme.breakpoints.up('sm')]: {
+      padding:
+        props.padding ||
+        `${theme.spacing(80)} ${theme.spacing(37.5)} ${theme.spacing(27.5)} ${theme.spacing(37.5)}`,
+    },
     [theme.breakpoints.down('xs')]: {
       backgroundPositionX: '-700px',
+      padding:
+        props.paddingMobile ||
+        `${theme.spacing(38)} ${theme.spacing(4)} ${theme.spacing(10.5)} ${theme.spacing(4)}`,
     },
-  },
+    [theme.breakpoints.up('xl')]: {
+      padding: props.padding || `${theme.spacing(80)} 25% ${theme.spacing(27.5)} ${theme.spacing(37.5)}`,
+    },
+    backgroundSize: 'cover',
+  }),
   backgroundGradient: props => ({
     height: '100%',
     zIndex: 0,
     position: 'absolute',
     bottom: 0,
+    left: 0,
     width: '100%',
     background:
       props.linearGradient ||
@@ -38,26 +55,14 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   }),
   text: {
     [theme.breakpoints.down('xs')]: {
-      paddingTop: theme.spacing(38),
-      paddingBottom: theme.spacing(10.5),
-      paddingLeft: theme.spacing(4),
-      paddingRight: theme.spacing(4),
       '& h1': {
         lineHeight: '130%',
       },
     },
     [theme.breakpoints.up('sm')]: {
-      paddingTop: theme.spacing(80),
-      paddingBottom: theme.spacing(27.5),
-      paddingLeft: theme.spacing(37.5),
-      paddingRight: theme.spacing(37.5),
       '& h1': {
         lineHeight: '140%',
       },
-    },
-    [theme.breakpoints.up('xl')]: {
-      paddingRight: '25%',
-      paddingLeft: theme.spacing(5),
     },
     maxWidth: theme.breakpoints.values.lg,
     margin: '0 auto',
@@ -85,9 +90,19 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   },
 }));
 
-const BackgroundSection = ({ className, imageData, linearGradient, body, header }: Props): JSX.Element => {
-  const classes = useStyles({ linearGradient });
-  let headerJSX, bodyJSX;
+const BackgroundSection = ({
+  className,
+  imageData,
+  linearGradient,
+  body,
+  header,
+  padding,
+  paddingMobile,
+  children,
+}: Props): JSX.Element => {
+  const classes = useStyles({ padding, paddingMobile, linearGradient });
+  let headerJSX, bodyJSX, textJSX;
+  //Tried to use && operator, but it doesn't seem to play nicely with passing in dynamic props to the object
   if (header) {
     headerJSX = (
       <Title color="primary" variant="h1" className={classes.title}>
@@ -102,6 +117,14 @@ const BackgroundSection = ({ className, imageData, linearGradient, body, header 
       </Typography>
     );
   }
+  if (body || header) {
+    textJSX = (
+      <div className={classes.text}>
+        {headerJSX}
+        {bodyJSX}
+      </div>
+    );
+  }
   return (
     <BackgroundImage
       Tag="section"
@@ -110,10 +133,8 @@ const BackgroundSection = ({ className, imageData, linearGradient, body, header 
       backgroundColor={`#040e18`}
     >
       <div className={classes.backgroundGradient} />
-      <div className={classes.text}>
-        {headerJSX}
-        {bodyJSX}
-      </div>
+      {textJSX}
+      {children}
     </BackgroundImage>
   );
 };

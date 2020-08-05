@@ -3,6 +3,7 @@ import { withStyles, Theme } from '@material-ui/core/styles';
 import Button, { ButtonProps } from '@material-ui/core/Button';
 
 interface OutlinedButtonProps extends ButtonProps {
+  border?: string;
   target?: string;
   rel?: string;
 }
@@ -27,7 +28,7 @@ const CustomButton = withStyles((theme: Theme) => ({
 
 export default function OutlinedButton(props: OutlinedButtonProps): JSX.Element {
   return (
-    <CustomButton color="secondary" {...props}>
+    <CustomButton style={props.border ? { border: props.border } : {}} color="secondary" {...props}>
       {props.children}
     </CustomButton>
   );

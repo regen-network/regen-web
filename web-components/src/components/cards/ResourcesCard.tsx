@@ -4,6 +4,7 @@ import Card from './Card';
 import Img from 'gatsby-image';
 import Title from '../title';
 import Typography from '@material-ui/core/Typography';
+import OutlinedButton from '../buttons/OutlinedButton';
 
 export interface ResourcesCardProps {
   image: any;
@@ -71,10 +72,11 @@ export default function ResourcesCard({
           {title}
         </Title>
         <Typography className={classes.lastUpdated}>
-          <span className={classes.lastUpdatedLabel}>LAST UPDATED: </span>
+          <span className={classes.lastUpdatedLabel}>Last Updated: </span>
           {updated}
         </Typography>
         <Typography className={classes.description}>{description}</Typography>
+        <OutlinedButton border="2px solid #4FB573">{buttonText}</OutlinedButton>
       </div>
     </Card>
   );

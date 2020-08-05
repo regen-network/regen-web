@@ -1,3 +1,21 @@
 topSection:
-  header: Dig into our documentation.
-  body: We strive to be a transparent and open system for creating ecological credits that reward regenerative practices. Learn more about the ins and outs of how the Regen Ledger and Regen Registry function.
+  header: 'Dig into our documentation.'
+  body: 'We strive to be a transparent and open system for creating ecological credits that reward regenerative practices. Learn more about the ins and outs of how the Regen Ledger and Regen Registry function.'
+registrySection:
+  header: 'Regen Registry'
+  resourceCards:
+    - image: '../../static/media/resources-grasslands-methodology.jpg'
+      title: 'Grasslands Methodology'
+      updated: 'June 30, 2020'
+      description: 'Learn how we calculate baselines and monitor progress for projects utilizing the Grasslands Health credit class.'
+      buttonText: 'View Methodology'
+    - image: '../../static/media/resources-grasslands-credit-class.jpg'
+      title: 'Grasslands Credit Class'
+      updated: 'June 30, 2020'
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+      buttonText: 'View Credit Class'
+    - image: '../../static/media/resources-registry-guide.jpg'
+      title: 'Registry Guide'
+      updated: 'June 30, 2020'
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+      buttonText: 'View Guide'

@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 import { useTheme } from '@material-ui/core';
 import BackgroundImage from 'gatsby-background-image';
-import TopSection from '../sections/resources/TopSection'
+import TopSection from '../sections/resources/TopSection';
+import RegistrySection from '../sections/resources/RegistrySection';
 import SEO from '../components/seo';
 
 // const useStyles = makeStyles((theme: Theme) => ({
@@ -23,7 +24,8 @@ const ResourcesPage = (): JSX.Element => {
   return (
     <>
       <SEO title="Resources" />
-	    <TopSection />
+      <TopSection />
+      <RegistrySection />
     </>
   );
 };

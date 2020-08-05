@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, useTheme, Theme } from '@material-ui/core';
+import { makeStyles, Theme } from '@material-ui/core';
 import Card from './Card';
 import Img from 'gatsby-image';
 import Title from '../title';
@@ -24,13 +24,33 @@ const useStyles = makeStyles((theme: Theme) => ({
       padding: `${theme.spacing(6)} ${theme.spacing(5)} ${theme.spacing(10)}`,
     },
     [theme.breakpoints.up('sm')]: {
-      padding: `${theme.spacing(10.75)} ${theme.spacing(10)} ${theme.spacing(16.25)}`,
+      padding: theme.spacing(4),
+      paddingBottom: theme.spacing(6),
+      '& h4': {
+        lineHeight: '145%',
+        marginBottom: theme.spacing(1.75),
+      },
     },
   },
   img: {
     width: '100%',
     height: '45%',
     display: 'block',
+  },
+  lastUpdatedLabel: {
+    textTransform: 'capitalize',
+    fontWeight: 800,
+  },
+  lastUpdated: {
+    lineHeight: theme.spacing(3.75),
+    color: theme.palette.info.main,
+    fontSize: theme.spacing(3),
+    letterSpacing: theme.spacing(0.25),
+    marginBottom: theme.spacing(2),
+  },
+  description: {
+    color: theme.palette.info.dark,
+    lineHeight: '150%',
   },
 }));
 
@@ -47,9 +67,14 @@ export default function ResourcesCard({
     <Card width="350px" className={classes.root} borderRadius="10px" elevation={1}>
       <Img style={{ width: '100%', height: '45%', display: 'block' }} fixed={image} />
       <div className={classes.text}>
-        <Title align="center">{title}</Title>
-        {updated}
-        <Typography>{description}</Typography>
+        <Title variant="h4" align="left">
+          {title}
+        </Title>
+        <Typography className={classes.lastUpdated}>
+          <span className={classes.lastUpdatedLabel}>LAST UPDATED: </span>
+          {updated}
+        </Typography>
+        <Typography className={classes.description}>{description}</Typography>
       </div>
     </Card>
   );

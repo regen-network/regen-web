@@ -28,6 +28,9 @@ const CustomButton = withStyles((theme: Theme) => ({
 
 export default function OutlinedButton(props: OutlinedButtonProps): JSX.Element {
   return (
+    /**
+     * Tried doing this with props in withStyles hook, but it turned out to be a mess, material-ui either doesn't support it, or the documentation hasn't been updated, not sure exactly which. See https://github.com/mui-org/material-ui/issues/8726
+     */
     <CustomButton style={props.border ? { border: props.border } : {}} color="secondary" {...props}>
       {props.children}
     </CustomButton>

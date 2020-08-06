@@ -5,6 +5,7 @@ import Img from 'gatsby-image';
 import Title from '../title';
 import Typography from '@material-ui/core/Typography';
 import OutlinedButton from '../buttons/OutlinedButton';
+import EyeIcon from '../icons/EyeIcon';
 
 export interface ResourcesCardProps {
   image: any;
@@ -59,6 +60,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   button: {
     marginBottom: theme.spacing(7.5),
   },
+  eyeIcon: {
+    height: theme.spacing(3.455),
+    marginRight: theme.spacing(1.25),
+  },
 }));
 
 export default function ResourcesCard({
@@ -83,6 +88,7 @@ export default function ResourcesCard({
         </Typography>
         <Typography className={classes.description}>{description}</Typography>
         <OutlinedButton className={classes.button} border="2px solid #4FB573">
+          <EyeIcon className={classes.eyeIcon} />
           {buttonText}
         </OutlinedButton>
       </div>

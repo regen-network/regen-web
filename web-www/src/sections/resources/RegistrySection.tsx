@@ -67,7 +67,7 @@ const RegistrySection = (): JSX.Element => {
               <Grid container direction="row" spacing={5}>
                 {content.resourceCards.map(card => {
                   return (
-                    <Grid item key={card.id}>
+                    <Grid item key={card.title}>
                       <ResourcesCard
                         image={card.image.childImageSharp.fixed}
                         title={card.title}

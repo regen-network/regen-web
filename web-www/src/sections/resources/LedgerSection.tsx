@@ -50,7 +50,7 @@ const LedgerSection = (): JSX.Element => {
       <Grid container direction="row" spacing={5}>
         {content.resourceCards.map(card => {
           return (
-            <Grid item>
+            <Grid item key={card.id}>
               <ResourcesCard
                 image={card.image.childImageSharp.fixed}
                 title={card.title}

@@ -53,11 +53,11 @@ const RegistrySection = (): JSX.Element => {
             <BackgroundSection
               /* prettier-ignore */
               padding={`
-				${theme.spacing(21.5)} 
-				${theme.spacing(33.75)} 
-				${theme.spacing(21.75)} 
-				${theme.spacing(33.75)}
-			  `}
+                ${theme.spacing(21.5)} 
+                ${theme.spacing(33.75)} 
+                ${theme.spacing(21.75)} 
+                ${theme.spacing(33.75)}
+              `}
               linearGradient="unset"
               imageData={data.background.childImageSharp.fluid}
             >
@@ -67,7 +67,7 @@ const RegistrySection = (): JSX.Element => {
               <Grid container direction="row" spacing={5}>
                 {content.resourceCards.map(card => {
                   return (
-                    <Grid item>
+                    <Grid item key={card.id}>
                       <ResourcesCard
                         image={card.image.childImageSharp.fixed}
                         title={card.title}

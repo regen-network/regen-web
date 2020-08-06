@@ -16,9 +16,11 @@ export interface ResourcesCardProps {
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    height: theme.spacing(112.5),
+    height: theme.spacing(114.25),
+    width: theme.spacing(91.75),
     backgroundColor: theme.palette.primary.main,
     color: theme.palette.primary.contrastText,
+    border: `1px solid ${theme.palette.grey[100]}`,
   },
   text: {
     [theme.breakpoints.down('xs')]: {
@@ -52,6 +54,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   description: {
     color: theme.palette.info.dark,
     lineHeight: '150%',
+    marginBottom: theme.spacing(6),
+  },
+  button: {
+    marginBottom: theme.spacing(7.5),
   },
 }));
 
@@ -76,7 +82,9 @@ export default function ResourcesCard({
           {updated}
         </Typography>
         <Typography className={classes.description}>{description}</Typography>
-        <OutlinedButton border="2px solid #4FB573">{buttonText}</OutlinedButton>
+        <OutlinedButton className={classes.button} border="2px solid #4FB573">
+          {buttonText}
+        </OutlinedButton>
       </div>
     </Card>
   );

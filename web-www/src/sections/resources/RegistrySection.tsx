@@ -62,7 +62,7 @@ const RegistrySection = (): JSX.Element => {
               imageData={data.background.childImageSharp.fluid}
             >
               <Title className={classes.title} variant="h3" align="left">
-                Regen Registry
+                {content.header}
               </Title>
               <Grid container direction="row" spacing={5}>
                 {content.resourceCards.map(card => {

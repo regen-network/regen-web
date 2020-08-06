@@ -12,13 +12,16 @@ const useStyles = makeStyles((theme: Theme) => ({
     margin: 'inherit',
     maxWidth: 'inherit',
   },
+  title: {
+    marginBottom: theme.spacing(8.5),
+  },
 }));
 
 const LedgerSection = (): JSX.Element => {
   const data = useStaticQuery(graphql`
     query {
       text: resourcesYaml {
-        registrySection {
+        ledgerSection {
           header
           resourceCards {
             image {
@@ -37,11 +40,11 @@ const LedgerSection = (): JSX.Element => {
       }
     }
   `);
-  const content = data.text.registrySection;
+  const content = data.text.ledgerSection;
   const classes = useStyles();
   return (
     <Section className={classes.root}>
-      <Title variant="h3" align="left">
+      <Title className={classes.title} variant="h3" align="left">
         {content.header}
       </Title>
       <Grid container direction="row" spacing={5}>

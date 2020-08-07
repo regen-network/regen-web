@@ -76,7 +76,7 @@ export default function ResourcesCard({
   const classes = useStyles();
 
   return (
-    <Card width="350px" className={classes.root} borderRadius="10px" elevation={1}>
+    <Card className={classes.root} borderRadius="10px" elevation={1}>
       <Img style={{ width: '100%', height: '45%', display: 'block' }} fixed={image} />
       <div className={classes.text}>
         <Title variant="h4" align="left">

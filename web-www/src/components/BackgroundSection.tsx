@@ -3,6 +3,7 @@ import { makeStyles, Theme, useTheme } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import clsx from 'clsx';
 import BackgroundImage from 'gatsby-background-image';
+import Box from '@material-ui/core/Box';
 
 import Title from 'web-components/lib/components/title';
 
@@ -15,6 +16,7 @@ interface Props {
   padding?: string;
   paddingMobile?: string;
   imageData: any;
+  imageDataMobile?: any;
 }
 
 interface StyleProps {
@@ -31,7 +33,6 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
         `${theme.spacing(80)} ${theme.spacing(37.5)} ${theme.spacing(27.5)} ${theme.spacing(37.5)}`,
     },
     [theme.breakpoints.down('xs')]: {
-      backgroundPositionX: '-700px',
       padding:
         props.paddingMobile ||
         `${theme.spacing(38)} ${theme.spacing(4)} ${theme.spacing(10.5)} ${theme.spacing(4)}`,
@@ -93,6 +94,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
 const BackgroundSection = ({
   className,
   imageData,
+  imageDataMobile,
   linearGradient,
   body,
   header,
@@ -125,17 +127,34 @@ const BackgroundSection = ({
       </div>
     );
   }
+
   return (
-    <BackgroundImage
-      Tag="section"
-      className={clsx(classes.root, className)}
-      fluid={imageData}
-      backgroundColor={`#040e18`}
-    >
-      <div className={classes.backgroundGradient} />
-      {textJSX}
-      {children}
-    </BackgroundImage>
+    <>
+      <Box display={{ xs: 'block', sm: 'none' }}>
+        <BackgroundImage
+          Tag="section"
+          className={clsx(classes.root, className)}
+          fluid={imageDataMobile ? imageDataMobile : imageData}
+          backgroundColor={`#040e18`}
+        >
+          <div className={classes.backgroundGradient} />
+          {textJSX}
+          {children}
+        </BackgroundImage>
+      </Box>
+      <Box display={{ xs: 'none', sm: 'block' }}>
+        <BackgroundImage
+          Tag="section"
+          className={clsx(classes.root, className)}
+          fluid={imageData}
+          backgroundColor={`#040e18`}
+        >
+          <div className={classes.backgroundGradient} />
+          {textJSX}
+          {children}
+        </BackgroundImage>
+      </Box>
+    </>
   );
 };
 

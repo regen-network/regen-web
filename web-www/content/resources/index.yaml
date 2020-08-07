@@ -5,35 +5,47 @@ registrySection:
   header: 'Regen Registry'
   resourceCards:
     - image: '../../static/media/resources-grasslands-methodology.jpg'
-      title: 'Grasslands Methodology'
+      title: 'Methodology: GHG & Co-Benefits in Grazing Systems Credit Class v1.0'
       updated: 'June 30, 2020'
-      description: 'Learn how we calculate baselines and monitor progress for projects utilizing the Grasslands Health credit class.'
+      description: 
       buttonText: 'View Methodology'
+      link:
     - image: '../../static/media/resources-grasslands-credit-class.jpg'
-      title: 'Grasslands Credit Class'
+      title: 'GHG & Co-Benefits in Grazing Systems Credit Class v1.0'
       updated: 'June 30, 2020'
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+      description: ''
       buttonText: 'View Credit Class'
+      link:
     - image: '../../static/media/resources-registry-guide.jpg'
       title: 'Registry Guide'
       updated: 'June 30, 2020'
       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
       buttonText: 'View Guide'
+      link:
 ledgerSection:
   header: 'Ledger Registry'
   resourceCards:
+    - image: '../../static/media/resources-ledger-whitepaper-image.jpg'
+      title: 'Whitepaper'
+      updated: 'February 5th, 2020'
+      description: 'Dive into our master document of strategy and design for the Regen Registry and Regen Ledger.'
+      buttonText: 'View Architecture Paper'
+      link:
     - image: '../../static/media/resources-ledger-architecture-image.jpg'
       title: 'Architecture Paper'
       updated: 'June 20, 2019'
       description: 'Discover the key architectural decisions of our system and our approaches to solving the problems of ecological accounting.'
       buttonText: 'View Architecture Paper'
+      link:
     - image: '../../static/media/resources-ledger-economics-image.jpg'
       title: 'Economics'
       updated: 'November 314, 2019'
       description: 'Explore the use cases of our token in the context of ecological markets and learn why blockchain is an appropriate solution.'
       buttonText: 'View Economics Paper'
+      link:
     - image: '../../static/media/resources-ledger-science-image.jpg'
       title: 'Science Paper'
       updated: 'May 13th, 2018'
       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
       buttonText: 'View Science Paper'
+      link:

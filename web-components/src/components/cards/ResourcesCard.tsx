@@ -13,6 +13,7 @@ export interface ResourcesCardProps {
   updated: string;
   description: string;
   buttonText: string;
+  link: string;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({

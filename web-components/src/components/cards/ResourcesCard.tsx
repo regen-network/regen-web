@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: 'block',
   },
   lastUpdatedLabel: {
-    textTransform: 'capitalize',
+    textTransform: 'uppercase',
     fontWeight: 800,
   },
   lastUpdated: {

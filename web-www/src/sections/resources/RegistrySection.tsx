@@ -1,11 +1,12 @@
 import React from 'react';
 import { graphql, StaticQuery } from 'gatsby';
-import BackgroundSection from '../../components/BackgroundSection';
 import ResourcesCard from 'web-components/lib/components/cards/ResourcesCard';
 import Grid from '@material-ui/core/Grid';
 import { useTheme, Theme, makeStyles } from '@material-ui/core';
 import Title from 'web-components/lib/components/title';
 import ResourceCardsSlider from 'web-components/lib/components/sliders/ResourceCards';
+
+import BackgroundSection from '../../components/BackgroundSection';
 
 const useStyles = makeStyles((theme: Theme) => ({
   title: {
@@ -65,13 +66,7 @@ const RegistrySection = (): JSX.Element => {
               <Title className={classes.title} variant="h3" align="left">
                 {content.header}
               </Title>
-              <ResourceCardsSlider
-                items={content.resourceCards}
-                title={content.header}
-                titleVariant="h3"
-                arrows={false}
-                slidesToShow={1}
-              />
+              <ResourceCardsSlider items={content.resourceCards} arrows={false} slidesToShow={3} />
             </BackgroundSection>
           </>
         );

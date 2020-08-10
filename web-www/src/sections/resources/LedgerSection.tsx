@@ -1,10 +1,11 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import Section from '../../components/Section';
 import ResourcesCard from 'web-components/lib/components/cards/ResourcesCard';
 import Grid from '@material-ui/core/Grid';
 import { useTheme, Theme, makeStyles } from '@material-ui/core';
 import Title from 'web-components/lib/components/title';
+
+import Section from '../../components/Section';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {

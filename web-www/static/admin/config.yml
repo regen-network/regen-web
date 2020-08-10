@@ -156,3 +156,82 @@ collections:
                   - {label: "Header", name: header, widget: string}
                   - {label: "Image", name: image, widget: image}
                   - {label: "Description", name: description, widget: text}
+      - label: "For Land Stewards page"
+        name: "land-stewards"
+        file: "web-www/content/land-stewards/index.yaml"
+        fields:
+          - label: "Top Section"
+            name: "topSection"
+            widget: "object"
+            fields:
+              - {label: Header, name: header, widget: string}
+              - {label: Body, name: body, widget: text}
+          - label: "Image Items Section"
+            name: "imageItemsSection"
+            widget: "object"
+            fields:
+              - {label: Header, name: header, widget: string}
+              - label: "Image Items"
+                name: imageItems
+                widget: list
+                collapsed: false
+                fields:
+                  - {label: "Header", name: header, widget: string}
+                  - {label: "Image", name: image, widget: image}
+                  - {label: "Description", name: description, widget: text}
+          - label: "Join Farmers Section"
+            name: "joinFarmersSection"
+            widget: "object"
+            fields:
+              - {label: Header, name: header, widget: string}
+              - label: "Farmers"
+                name: farmers
+                widget: object
+                fields:
+                  - {label: "Amount", name: amount, widget: string}
+                  - {label: "Label", name: label, widget: string}
+                  - {label: "Image", name: image, widget: image}
+              - label: "Land"
+                name: land
+                widget: object
+                fields:
+                  - {label: "Amount", name: amount, widget: string}
+                  - {label: "Label", name: label, widget: string}
+                  - {label: "Image", name: image, widget: image}
+          - label: "Practices and Outcomes Section"
+            name: "practicesOutcomesSection"
+            widget: "object"
+            fields:
+              - {label: Header, name: header, widget: string}
+              - {label: Note, name: note, widget: string}
+              - label: "Practices"
+                name: practices
+                widget: object
+                fields:
+                  - {label: Header, name: header, widget: string}
+                  - label: "Items"
+                    name: items
+                    widget: list
+                    collapsed: false
+                    fields:
+                      - {label: "Header", name: header, widget: string}
+                      - {label: "Image", name: image, widget: image}
+                      - {label: "Description", name: description, widget: text}
+              - label: "Outcomes"
+                name: outcomes
+                widget: object
+                fields:
+                  - {label: Header, name: header, widget: string}
+                  - label: "Items"
+                    name: items
+                    widget: list
+                    collapsed: false
+                    fields:
+                      - {label: "Header", name: header, widget: string}
+                      - {label: "Image", name: image, widget: image}
+                      - {label: "Description", name: description, widget: text}
+          - label: "More Questions Section"
+            name: "moreQuestionsSection"
+            widget: "object"
+            fields:
+              - {label: Header, name: header, widget: string}

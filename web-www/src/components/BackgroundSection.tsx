@@ -13,32 +13,25 @@ interface Props {
   header?: React.ReactNode;
   linearGradient?: string;
   children?: React.ReactNode;
-  padding?: string;
-  paddingMobile?: string;
   imageData: any;
   imageDataMobile?: any;
 }
 
 interface StyleProps {
   linearGradient?: string;
-  padding?: string;
-  paddingMobile?: string;
 }
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   root: props => ({
+    overflow: 'hidden',
     [theme.breakpoints.up('sm')]: {
-      padding:
-        props.padding ||
-        `${theme.spacing(80)} ${theme.spacing(37.5)} ${theme.spacing(27.5)} ${theme.spacing(37.5)}`,
+      padding: `${theme.spacing(80)} ${theme.spacing(37.5)} ${theme.spacing(27.5)} ${theme.spacing(37.5)}`,
     },
     [theme.breakpoints.down('xs')]: {
-      padding:
-        props.paddingMobile ||
-        `${theme.spacing(38)} ${theme.spacing(4)} ${theme.spacing(10.5)} ${theme.spacing(4)}`,
+      padding: `${theme.spacing(38)} ${theme.spacing(4)} ${theme.spacing(10.5)} ${theme.spacing(4)}`,
     },
     [theme.breakpoints.up('xl')]: {
-      padding: props.padding || `${theme.spacing(80)} 25% ${theme.spacing(27.5)} ${theme.spacing(37.5)}`,
+      padding: `${theme.spacing(80)} 25% ${theme.spacing(27.5)} ${theme.spacing(37.5)}`,
     },
     backgroundSize: 'cover',
   }),
@@ -98,11 +91,9 @@ const BackgroundSection = ({
   linearGradient,
   body,
   header,
-  padding,
-  paddingMobile,
   children,
 }: Props): JSX.Element => {
-  const classes = useStyles({ padding, paddingMobile, linearGradient });
+  const classes = useStyles({ linearGradient });
   let headerJSX, bodyJSX, textJSX;
   //Tried to use && operator, but it doesn't seem to play nicely with passing in dynamic props to the object
   if (header) {
@@ -133,7 +124,7 @@ const BackgroundSection = ({
       <Box display={{ xs: 'block', sm: 'none' }}>
         <BackgroundImage
           Tag="section"
-          className={clsx(classes.root, className)}
+          className={clsx(className, classes.root)}
           fluid={imageDataMobile ? imageDataMobile : imageData}
           backgroundColor={`#040e18`}
         >
@@ -145,7 +136,7 @@ const BackgroundSection = ({
       <Box display={{ xs: 'none', sm: 'block' }}>
         <BackgroundImage
           Tag="section"
-          className={clsx(classes.root, className)}
+          className={clsx(className, classes.root)}
           fluid={imageData}
           backgroundColor={`#040e18`}
         >

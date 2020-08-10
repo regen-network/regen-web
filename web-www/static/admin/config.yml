@@ -235,3 +235,51 @@ collections:
             widget: "object"
             fields:
               - {label: Header, name: header, widget: string}
+      - label: "Shared sections"
+        name: "shared"
+        file: "web-www/content/shared/index.yaml"
+        fields:
+          - label: "Newsletter Section"
+            name: "newsletterSection"
+            widget: "object"
+            fields:
+              - {label: Header, name: header, widget: string}
+              - {label: Description, name: description, widget: text}
+          - label: "Featured Section"
+            name: "featuredSection"
+            widget: "object"
+            fields:
+              - {label: Header, name: header, widget: string}
+              - {label: Title, name: title, widget: string}
+              - {label: Link, name: link, widget: string}
+              - {label: Image, name: image, widget: image}
+              - {label: Description, name: description, widget: text}
+          - label: "Blog Section"
+            name: "blogSection"
+            widget: "object"
+            fields:
+              - {label: Header, name: header, widget: string}
+              - label: "Latest Blog Posts"
+                name: posts
+                widget: list
+                collapsed: false
+                fields:
+                  - {label: "Header", name: header, widget: string}
+                  - {label: "Url", name: url, widget: string}
+                  - {label: "Image", name: image, widget: image}
+                  - {label: "Description", name: description, widget: text}
+          - label: "Coming Soon Section"
+            name: "comingSoonSection"
+            widget: "object"
+            fields:
+              - {label: Header, name: header, widget: string}
+              - label: "Projects"
+                name: projects
+                widget: list
+                collapsed: false
+                fields:
+                  - {label: "Name", name: name, widget: string}
+                  - {label: "Location", name: location, widget: string}
+                  - {label: "Area", name: area, widget: number}
+                  - {label: "Area unit (acres or hectares)", name: areaUnit, widget: string}
+                  - {label: "Image", name: image, widget: image}

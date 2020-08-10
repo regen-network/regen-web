@@ -1,7 +1,5 @@
 import React from 'react';
 import { graphql, StaticQuery } from 'gatsby';
-import ResourcesCard from 'web-components/lib/components/cards/ResourcesCard';
-import Grid from '@material-ui/core/Grid';
 import { useTheme, Theme, makeStyles } from '@material-ui/core';
 import Title from 'web-components/lib/components/title';
 import ResourceCardsSlider from 'web-components/lib/components/sliders/ResourceCards';

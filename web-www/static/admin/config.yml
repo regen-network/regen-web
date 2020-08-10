@@ -35,8 +35,8 @@ collections:
                 widget: object
                 fields:
                   - {label: Green, name: green, widget: string}
-                  - {label: MIddle, name: middle, widget: string}
-                  - {label: Popover, name: poppover, widget: string}
+                  - {label: Middle, name: middle, widget: string}
+                  - {label: Popover, name: popover, widget: string}
                   - {label: End, name: end, widget: string}
               - label: "Call To Actions"
                 name: "callToActions"
@@ -115,6 +115,35 @@ collections:
                   - {label: Start, name: start, widget: string}
                   - {label: Underlined, name: underlined, widget: string}
                   - {label: End, name: end, widget: string}
+          - label: "Approach Section"
+            name: "approachSection"
+            widget: "object"
+            fields:
+              - {label: Header, name: header, widget: string}
+              - label: "Image Items"
+                name: imageItems
+                widget: list
+                collapsed: false
+                fields:
+                  - {label: "Header", name: header, widget: string}
+                  - {label: "Image", name: image, widget: image}
+                  - {label: "Description", name: description, widget: text}
+          - label: "Investing Section"
+            name: "investingSection"
+            widget: "object"
+            fields:
+              - {label: Header, name: header, widget: string}
+              - {label: Note, name: note, widget: string}
+              - {label: "Note Link", name: noteLink, widget: string}
+              - label: "Items"
+                name: items
+                widget: list
+                collapsed: false
+                fields:
+                  - {label: "Header", name: header, widget: string}
+                  - {label: "Caption", name: caption, widget: string}
+                  - {label: "Image", name: image, widget: image}
+                  - {label: "Description", name: description, widget: text}
           - label: "Image Grids Section"
             name: "imageGridSection"
             widget: "object"

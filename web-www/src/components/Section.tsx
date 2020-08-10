@@ -69,7 +69,7 @@ const Section = ({
   titleColor,
   titleVariant = 'h2',
   title,
-  withSlider = false
+  withSlider = false,
 }: SectionProps) => {
   const classes = useStyles({ withSlider, titleLineHeight, titleColor });
   return (

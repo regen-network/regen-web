@@ -82,18 +82,26 @@ const PracticesOutcomesSection = () => {
   const content = data.text.practicesOutcomesSection;
   const classes = useStyles();
   const theme = useTheme();
-  const practicesItems: ImageItemProps[] = content.practices.items.map(({ image, header: title, description }) => ({
-    img: <img src={image.publicURL} alt={image.publicURL} />,
-    title,
-    description,
-  }));
+  const practicesItems: ImageItemProps[] = content.practices.items.map(
+    ({ image, header: title, description }) => ({
+      img: <img src={image.publicURL} alt={image.publicURL} />,
+      title,
+      description,
+    }),
+  );
   const outcomesElement: JSX.Element[] = content.outcomes.items.map(({ image, header, description }) => (
     <ImpactCard name={header} imgSrc={image.publicURL} description={description} largeFontSize />
   ));
 
   return (
     <Section withSlider titleClassName={classes.title} className={classes.root} title={content.header}>
-      <ImageItems className={classes.slider} title={content.practices.header} arrows slidesToShow={4} items={practicesItems} />
+      <ImageItems
+        className={classes.slider}
+        title={content.practices.header}
+        arrows
+        slidesToShow={4}
+        items={practicesItems}
+      />
       <ResponsiveSlider
         itemWidth="90%"
         padding={theme.spacing(2.5)}

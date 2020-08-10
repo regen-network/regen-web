@@ -24,11 +24,11 @@ interface StyleProps {
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   root: props => ({
     overflow: 'hidden',
-    [theme.breakpoints.up('sm')]: {
-      padding: `${theme.spacing(80)} ${theme.spacing(37.5)} ${theme.spacing(27.5)} ${theme.spacing(37.5)}`,
-    },
     [theme.breakpoints.down('xs')]: {
       padding: `${theme.spacing(38)} ${theme.spacing(4)} ${theme.spacing(10.5)} ${theme.spacing(4)}`,
+    },
+    [theme.breakpoints.up('sm')]: {
+      padding: `${theme.spacing(80)} ${theme.spacing(37.5)} ${theme.spacing(27.5)} ${theme.spacing(37.5)}`,
     },
     [theme.breakpoints.up('xl')]: {
       padding: `${theme.spacing(80)} 25% ${theme.spacing(27.5)} ${theme.spacing(37.5)}`,

@@ -56,10 +56,11 @@ module.exports = {
         icon: `static/media/gatsby-icon.png`, // This path is relative to the root of the site.
       },
     },
-    `gatsby-transformer-yaml-full`,
     {
-      resolve: `gatsby-source-filesystem`,
+      resolve: `gatsby-transformer-yaml-plus`,
       options: {
+        enableRemark: true,
+        markdownPreface: 'md//',
         name: `content`,
         path: `${__dirname}/content/`,
       },

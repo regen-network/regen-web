@@ -1,0 +1,36 @@
+header: FAQ
+categories:
+  - name: concept
+    questions:
+      - question: What does Regen Network do?
+        answer: Regen Network realigns the agricultural economy with ecological health by creating the global market for planetary stewardship. Using a distributed ledger and modern remote sensing technology, our team is creating new tools for how humanity relates to its
+      - question: How does your technology improve the ability to monitor ecological change?
+        answer: We are creating the peer to peer infrastructure that allows anyone to propose a protocol for the accurate measurement of specific environmental outcomes. We then invite existing academic and
+      - question: How does your technology improve the ability to monitor ecological change?
+        answer: |
+          md//**The World’s Farmers** - 37% of the total land area of this planet is engaged in agriculture
+          
+          **Researchers and Academics** - access to a global incentivized peer to peer ecological data market.
+          
+          **Companies** - to invest in their supply system resiliency, mitigate environmental degradation, or as an approach to corporate social responsibility.
+          
+          **Government Agencies** - to verify and support their land management programs and achieve their climate accord commitments.
+          
+          **NGOs** - Nonprofits have committed to specific aims to which they are legally and morally obligated to. Every year billions of dollars are spent on ecological projects.
+  - name: regen registry
+    questions:
+      - question: Placeholder
+        answer: Placeholder
+  - name: regen ledger
+    questions:
+      - question: Placeholder
+        answer: Placeholder
+  - name: tech
+    questions:
+      - question: Why do you need a blockchain?
+        answer: The Regen Ledger provides the project three key elements, without which Regen Network’s promise to create a network dedicated to monitoring, verifying and contracting or paying for ecological
+      - question: Why are you building your own blockchain?
+        answer: Security, Governance, Scalability, Speed, and above all Usability. We are building as a domain specific blockchain using the Cosmos SDK. Our network consensus is run on Tendermint Core and we have a
+      - question: Why do you need a token?
+        answer: md//The XRN token serves two key functions; to program the rules that make an ecological data commons and marketplace possible and to bring together a community of shared interest in service to strengthening and regenerating the living systems that we need to support life on earth. ![test](media/faq-tech.png) Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+  

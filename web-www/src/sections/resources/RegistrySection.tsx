@@ -11,6 +11,35 @@ import BackgroundSection from '../../components/BackgroundSection';
 const useStyles = makeStyles((theme: Theme) => ({
   title: {
     marginBottom: theme.spacing(8.5),
+    [theme.breakpoints.up('sm')]: {
+      marginBottom: theme.spacing(6.75),
+    },
+  },
+  section: {
+    [theme.breakpoints.down('xs')]: {
+      padding: `
+       ${theme.spacing(17.75)}
+       ${theme.spacing(6.5)}
+       ${theme.spacing(28.25)}
+       ${theme.spacing(6)}
+     `,
+    },
+    [theme.breakpoints.up('sm')]: {
+      padding: `
+       ${theme.spacing(21.5)}
+       ${theme.spacing(10)}
+       ${theme.spacing(10)}
+       ${theme.spacing(19.75)}
+     `,
+    },
+    [theme.breakpoints.up('md')]: {
+      padding: `
+       ${theme.spacing(21.5)}
+       ${theme.spacing(33.75)}
+       ${theme.spacing(21.75)}
+       ${theme.spacing(33.75)}
+     `,
+    },
   },
 }));
 
@@ -53,20 +82,14 @@ const RegistrySection = (): JSX.Element => {
         return (
           <>
             <BackgroundSection
-              /* prettier-ignore */
-              padding={`
-                ${theme.spacing(21.5)} 
-                ${theme.spacing(33.75)} 
-                ${theme.spacing(21.75)} 
-                ${theme.spacing(33.75)}
-              `}
+              className={classes.section}
               linearGradient="unset"
               imageData={data.background.childImageSharp.fluid}
             >
               <Title className={classes.title} variant="h3" align="left">
                 {content.header}
               </Title>
-              <ResourceCardsSlider items={content.resourceCards} arrows={false} slidesToShow={3} />
+              <ResourceCardsSlider items={content.resourceCards} />
             </BackgroundSection>
           </>
         );

@@ -1,9 +1,8 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import ResourcesCard from 'web-components/lib/components/cards/ResourcesCard';
-import Grid from '@material-ui/core/Grid';
 import { useTheme, Theme, makeStyles } from '@material-ui/core';
 import Title from 'web-components/lib/components/title';
+import ResourceCardsSlider from 'web-components/lib/components/sliders/ResourceCards';
 
 import Section from '../../components/Section';
 
@@ -12,6 +11,32 @@ const useStyles = makeStyles((theme: Theme) => ({
     padding: `${theme.spacing(21.5)} ${theme.spacing(33.75)} ${theme.spacing(21.75)} ${theme.spacing(33.75)}`,
     margin: 'inherit',
     maxWidth: 'inherit',
+  },
+  section: {
+    [theme.breakpoints.down('xs')]: {
+      padding: `
+       ${theme.spacing(17.75)}
+       ${theme.spacing(6.5)}
+       ${theme.spacing(28.25)}
+       ${theme.spacing(6)}
+     `,
+    },
+    [theme.breakpoints.up('sm')]: {
+      padding: `
+       ${theme.spacing(21.5)}
+       ${theme.spacing(10)}
+       ${theme.spacing(10)}
+       ${theme.spacing(19.75)}
+     `,
+    },
+    [theme.breakpoints.up('md')]: {
+      padding: `
+       ${theme.spacing(21.5)}
+       ${theme.spacing(33.75)}
+       ${theme.spacing(21.75)}
+       ${theme.spacing(33.75)}
+     `,
+    },
   },
   title: {
     marginBottom: theme.spacing(8.5),
@@ -48,21 +73,7 @@ const LedgerSection = (): JSX.Element => {
       <Title className={classes.title} variant="h3" align="left">
         {content.header}
       </Title>
-      <Grid container direction="row" spacing={5}>
-        {content.resourceCards.map(card => {
-          return (
-            <Grid item key={card.title}>
-              <ResourcesCard
-                image={card.image.childImageSharp.fixed}
-                title={card.title}
-                updated={card.updated}
-                description={card.description}
-                buttonText={card.buttonText}
-              ></ResourcesCard>
-            </Grid>
-          );
-        })}
-      </Grid>
+      <ResourceCardsSlider items={content.resourceCards} />
     </Section>
   );
 };

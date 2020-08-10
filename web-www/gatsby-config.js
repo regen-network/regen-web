@@ -31,7 +31,11 @@ module.exports = {
         pedantic: true,
         gfm: true,
         // Plugins configs
-        plugins: [],
+        plugins: [
+          {
+            resolve: `gatsby-remark-images`,
+          },
+        ],
       },
     },
     {

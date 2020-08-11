@@ -3,7 +3,6 @@ import { withStyles, Theme } from '@material-ui/core/styles';
 import Button, { ButtonProps } from '@material-ui/core/Button';
 
 interface OutlinedButtonProps extends ButtonProps {
-  border?: string;
   target?: string;
   rel?: string;
 }
@@ -31,7 +30,7 @@ export default function OutlinedButton(props: OutlinedButtonProps): JSX.Element 
     /**
      * Tried doing this with props in withStyles hook, but it turned out to be a mess, material-ui either doesn't support it, or the documentation hasn't been updated, not sure exactly which. See https://github.com/mui-org/material-ui/issues/8726
      */
-    <CustomButton style={props.border ? { border: props.border } : {}} color="secondary" {...props}>
+    <CustomButton color="secondary" {...props}>
       {props.children}
     </CustomButton>
   );

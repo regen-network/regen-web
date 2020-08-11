@@ -14,6 +14,15 @@ collections:
     public_folder: '../../static/media'
     editor:
       preview: false
+    - label: "FAQ page"
+      name: "faq"
+      create: true
+      folder: "web-www/content/faq"
+      path: '{{category}}/{{slug}}'
+      fields:
+        - { label: 'Category', name: 'category', widget: 'string' }
+        - { label: 'Question', name: 'description', widget: 'string' }
+        - { label: 'Answer', name: 'body', widget: 'markdown' }
     files:
       - label: "Homepage"
         name: "homepage"
@@ -264,3 +273,4 @@ collections:
             fields:
               - {label: Header, name: header, widget: string}
               - {label: Body, name: body, widget: string}
+    

@@ -51,8 +51,6 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   }),
   header: props => ({
     color: props.color,
-    maxWidth: theme.breakpoints.values.lg,
-    margin: '0 auto',
     position: 'relative',
     zIndex: 10,
     [theme.breakpoints.up('md')]: {
@@ -73,10 +71,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       height: theme.spacing(15),
       color: theme.palette.primary.light,
     },
-    [theme.breakpoints.up('xl')]: {
-      paddingRight: theme.spacing(5),
-      paddingLeft: theme.spacing(5),
-    },
+    [theme.breakpoints.up('xl')]: {},
     '& .MuiMenuItem-root > a, .MuiMenuItem-root > div > span': {
       fontSize: theme.spacing(3.25),
       letterSpacing: '1px',

@@ -22,11 +22,11 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   root: props => ({
     borderBottom: !props.last ? `1px solid ${theme.palette.grey[100]}` : 'none',
     [theme.breakpoints.up('sm')]: {
-      paddingTop: props.first ? theme.spacing(8) : theme.spacing(12.5),
+      paddingTop: props.first ? theme.spacing(7) : theme.spacing(12.5),
       paddingBottom: theme.spacing(5),
     },
     [theme.breakpoints.down('xs')]: {
-      paddingTop: props.first ? theme.spacing(8) : theme.spacing(10.75),
+      paddingTop: props.first ? theme.spacing(7) : theme.spacing(10.75),
       paddingBottom: theme.spacing(3.75),
     },
   }),
@@ -103,7 +103,11 @@ const Question = ({ question, answer, first = false, last = false }: QuestionPro
     <div className={classes.root}>
       <Title variant="h5" className={classes.question} onClick={handleClick}>
         {question}
-        {open ? <BreadcrumbIcon className={classes.icon} up /> : <BreadcrumbIcon className={classes.icon} />}
+        {open ? (
+          <BreadcrumbIcon className={classes.icon} direction="up" />
+        ) : (
+          <BreadcrumbIcon className={classes.icon} />
+        )}
       </Title>
       <div className={clsx(answerClassName)}>
         {ReactHtmlParser(answer)}

@@ -19,7 +19,7 @@ interface DirectionRotate {
   next: string;
 }
 
-const directionRotate: DirectionRotate = {
+export const directionRotate: DirectionRotate = {
   up: '180deg',
   down: '0deg',
   prev: '90deg',

@@ -2,6 +2,7 @@ import * as React from 'react';
 import { withKnobs, text, boolean, object } from '@storybook/addon-knobs';
 import Question, { QuestionProps } from 'web-components/lib/components/faq/Question';
 import Category from 'web-components/lib/components/faq/Category';
+import Navigation from 'web-components/lib/components/faq/Navigation';
 
 export default {
   title: 'Components|FAQ',
@@ -33,4 +34,11 @@ export const question = (): JSX.Element => (
 
 export const category = (): JSX.Element => (
   <Category name={text('name', 'tech')} questions={object('questions', questions)} />
+);
+
+export const navigation = (): JSX.Elemtn => (
+  <Navigation
+    onClick={(name: string) => {}}
+    categories={['concept', 'regen registry', 'regen ledger', 'tech']}
+  />
 );

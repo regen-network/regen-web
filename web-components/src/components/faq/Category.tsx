@@ -40,7 +40,13 @@ const Category = ({ questions, name }: CategoryProps): JSX.Element => {
         {name}
       </Title>
       {questions.map((q, i) => (
-        <Question first={i === 0} last={i === questions.length - 1} question={q.question} answer={q.answer} />
+        <Question
+          key={i}
+          first={i === 0}
+          last={i === questions.length - 1}
+          question={q.question}
+          answer={q.answer}
+        />
       ))}
     </GreenCard>
   );

@@ -126,7 +126,7 @@ const BackgroundSection = ({
           Tag="section"
           className={clsx(className, classes.root)}
           fluid={imageDataMobile ? imageDataMobile : imageData}
-          backgroundColor={`#040e18`}
+          backgroundColor="transparent"
         >
           <div className={classes.backgroundGradient} />
           {textJSX}

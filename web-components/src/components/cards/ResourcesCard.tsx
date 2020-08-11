@@ -60,6 +60,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   button: {
     marginBottom: theme.spacing(7.5),
+    border: '2px solid #4FB573',
   },
   eyeIcon: {
     height: theme.spacing(3.455),
@@ -88,7 +89,7 @@ export default function ResourcesCard({
           {updated}
         </Typography>
         <Typography className={classes.description}>{description}</Typography>
-        <OutlinedButton className={classes.button} border="2px solid #4FB573">
+        <OutlinedButton className={classes.button}>
           <EyeIcon className={classes.eyeIcon} />
           {buttonText}
         </OutlinedButton>

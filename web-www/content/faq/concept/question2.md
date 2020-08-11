@@ -1,3 +1,10 @@
+---
+title: concept
+description: How does your technology improve the ability to monitor ecological change?
+---
+
+We are creating the peer to peer infrastructure that allows anyone to propose a protocol for the accurate measurement of specific environmental outcomes. We then invite existing academic and
+
 The XRN token serves two key functions; to program the rules that make an ecological data commons and marketplace possible and to bring together a community of shared interest in service to strengthening and regenerating the living systems that we need to support life on earth.
 
 ![test](../../static/media/faq-tech.png)

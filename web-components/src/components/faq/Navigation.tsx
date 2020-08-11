@@ -9,7 +9,8 @@ import BreadcrumbIcon from '../icons/BreadcrumbIcon';
 
 interface NavigationProps {
   categories: string[];
-  onClick: (name: string) => void;
+  onClick: (c: number) => void;
+  category: number;
 }
 
 const StyledList = withStyles(theme => ({
@@ -40,7 +41,7 @@ const StyledListItem = withStyles(theme => ({
       paddingLeft: theme.spacing(4.75),
       paddingRight: theme.spacing(4.75),
       lineHeight: theme.spacing(13.75),
-      '&:focus': {
+      '&.Mui-selected': {
         borderRadius: '3px',
         borderLeft: `6px solid ${theme.palette.secondary.dark}`,
         backgroundColor: theme.palette.info.light,
@@ -67,13 +68,20 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const Navigation = ({ categories, onClick }: NavigationProps): JSX.Element => {
+const Navigation = ({ categories, onClick, category }: NavigationProps): JSX.Element => {
   const classes = useStyles();
 
   return (
     <StyledList>
       {categories.map((name, i) => (
-        <StyledListItem key={i} button autoFocus={i === 0}>
+        <StyledListItem
+          key={i}
+          button
+          selected={category === i}
+          onClick={() => {
+            onClick(i);
+          }}
+        >
           {name}
           <Box display={{ xs: 'block', sm: 'none' }}>
             <ListItemSecondaryAction>

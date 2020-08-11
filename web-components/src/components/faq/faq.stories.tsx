@@ -36,9 +36,10 @@ export const category = (): JSX.Element => (
   <Category name={text('name', 'tech')} questions={object('questions', questions)} />
 );
 
-export const navigation = (): JSX.Elemtn => (
+export const navigation = (): JSX.Element => (
   <Navigation
-    onClick={(name: string) => {}}
+    selected={0}
+    onClick={(c: number) => {}}
     categories={['concept', 'regen registry', 'regen ledger', 'tech']}
   />
 );

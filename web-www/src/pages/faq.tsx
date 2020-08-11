@@ -1,45 +1,66 @@
 import React from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
-import ReactHtmlParser from 'react-html-parser';
+import { makeStyles, Theme } from '@material-ui/core';
 
+import SEO from '../components/seo';
 import Section from '../components/Section';
+import FAQ, { Group } from 'web-components/lib/components/faq';
 
-const FAQ = (): JSX.Element => {
+const useStyles = makeStyles((theme: Theme) => ({
+  root: {
+    backgroundColor: theme.palette.grey[200],
+  },
+  section: {
+    [theme.breakpoints.up('sm')]: {
+      paddingTop: theme.spacing(13.75),
+      paddingBottom: theme.spacing(30),
+    },
+    [theme.breakpoints.down('xs')]: {},
+  },
+  title: {
+    [theme.breakpoints.up('sm')]: {
+      paddingBottom: theme.spacing(12),
+    },
+    [theme.breakpoints.down('xs')]: {
+      paddingBottom: theme.spacing(5),
+    },
+  },
+}));
+
+const FAQPage = (): JSX.Element => {
+  const classes = useStyles();
+
   const data = useStaticQuery(graphql`
     query {
-      md: markdownRemark(fileAbsolutePath: { regex: "/^.*/test.md$/" }) {
-        html
-      }
-      text: faqYaml {
-        header
-        categories {
-          name
-          questions {
-            question
-            answer
+      md: allMarkdownRemark(filter: {fileAbsolutePath: {regex: "/(faq)/.*\\.md$/"}}) {
+        group(field: frontmatter___title) {
+          nodes {
+            html
+            frontmatter {
+              description
+            }
           }
+          fieldValue
         }
       }
     }
   `);
-  const categories = data.text.categories;
+
+  const categories: Group[] = data.md.group.map(g => ({
+    name: g.fieldValue,
+    questions: g.nodes.map(n => ({ question: n.frontmatter.description, answer: n.html })),
+  }));
 
   return (
-    <Section title={data.text.header}>
-      {ReactHtmlParser(data.md.html)}
-      {/* {categories.map((c, i) => (
-        <div key={`${c.name}-${i}`}>
-          {c.name}
-          {c.questions.map((q, j) => (
-            <div key={`${i}-${j}`}>
-              <p>{q.question}</p>
-              {ReactHtmlParser(q.answer)}
-            </div>
-          ))}
-        </div>
-      ))} */}
-    </Section>
+    <>
+      <SEO title="FAQ" />
+      <div className={classes.root}>
+        <Section title="FAQ" titleVariant="h1" titleClassName={classes.title} className={classes.section}>
+          <FAQ categories={categories} />
+        </Section>
+      </div>
+    </>
   );
 };
 
-export default FAQ;
+export default FAQPage;

@@ -41,12 +41,12 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       height: theme.spacing(5),
       width: theme.spacing(8.25),
-      paddingLeft: theme.spacing(5),
+      marginLeft: theme.spacing(5),
     },
     [theme.breakpoints.down('xs')]: {
       height: theme.spacing(3.5),
       width: theme.spacing(5.75),
-      paddingLeft: theme.spacing(3.125),
+      marginLeft: theme.spacing(3.125),
     },
   },
   gradient: {

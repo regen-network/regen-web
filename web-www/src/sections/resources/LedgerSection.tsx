@@ -23,16 +23,24 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     [theme.breakpoints.up('sm')]: {
       padding: `
-       ${theme.spacing(21.5)}
-       ${theme.spacing(10)}
-       ${theme.spacing(10)}
+      ${theme.spacing(17.75)}
+       ${theme.spacing(6.5)}
        ${theme.spacing(19.75)}
+       ${theme.spacing(6)}
+     `,
+    },
+    [theme.breakpoints.up(theme.breakpoints.values.tablet)]: {
+      padding: `
+       ${theme.spacing(21.5)}
+       ${theme.spacing(6.5)}
+       ${theme.spacing(19.75)}
+       ${theme.spacing(33.75)}
      `,
     },
     [theme.breakpoints.up('md')]: {
       padding: `
        ${theme.spacing(21.5)}
-       ${theme.spacing(33.75)}
+       ${theme.spacing(6.5)}
        ${theme.spacing(21.75)}
        ${theme.spacing(33.75)}
      `,
@@ -69,7 +77,7 @@ const LedgerSection = (): JSX.Element => {
   const content = data.text.ledgerSection;
   const classes = useStyles();
   return (
-    <Section className={classes.root}>
+    <Section className={classes.section}>
       <Title className={classes.title} variant="h3" align="left">
         {content.header}
       </Title>

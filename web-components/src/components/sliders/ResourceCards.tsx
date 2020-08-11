@@ -18,7 +18,7 @@ export interface ResourceCardsProps {
 const useStyles = makeStyles((theme: Theme) => ({
   slider: {
     [theme.breakpoints.down('xs')]: {
-      width: '85%',
+      width: '100%',
     },
     '& .slick-track': {
       display: 'flex',
@@ -35,7 +35,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   item: {
     height: '100%',
+    [theme.breakpoints.down('xs')]: {
+      width: '100%',
+    },
     [theme.breakpoints.up('sm')]: {
+      width: '50%',
       paddingRight: theme.spacing(5.25),
       paddingBottom: theme.spacing(5.25),
     },
@@ -51,8 +55,8 @@ export default function ResourceCards({
   const theme = useTheme();
   const classes = useStyles();
   const desktop = useMediaQuery(theme.breakpoints.up('md'));
-  const mobile = useMediaQuery(theme.breakpoints.down(theme.breakpoints.values.tablet));
-  const tablet = useMediaQuery(theme.breakpoints.up(theme.breakpoints.values.tablet));
+  const mobile = useMediaQuery(theme.breakpoints.down('xs'));
+  const tablet = useMediaQuery(theme.breakpoints.up('sm'));
   let slides;
   if (desktop) slides = 2;
   if (mobile) slides = 1;

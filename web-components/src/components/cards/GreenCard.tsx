@@ -1,9 +1,11 @@
 import React from 'react';
 import { makeStyles, useTheme, Theme } from '@material-ui/core';
 import Card from './Card';
+import clsx from 'clsx';
 
-export interface FeaturedCardProps {
+export interface GreenCardProps {
   children?: any;
+  className?: string;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -19,12 +21,17 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function CreditCard({ children }: FeaturedCardProps): JSX.Element {
+export default function GreenCard({ children, className }: GreenCardProps): JSX.Element {
   const classes = useStyles();
   const theme = useTheme();
 
   return (
-    <Card className={classes.root} borderColor={theme.palette.grey[100]} borderRadius="10px" elevation={1}>
+    <Card
+      className={clsx(className, classes.root)}
+      borderColor={theme.palette.grey[100]}
+      borderRadius="10px"
+      elevation={1}
+    >
       {children}
     </Card>
   );

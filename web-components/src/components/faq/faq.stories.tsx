@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { withKnobs, text } from '@storybook/addon-knobs';
-import Question from 'web-components/lib/components/faq/Question';
+import { withKnobs, text, boolean, object } from '@storybook/addon-knobs';
+import Question, { QuestionProps } from 'web-components/lib/components/faq/Question';
+import Category from 'web-components/lib/components/faq/Category';
 
 export default {
   title: 'Components|FAQ',
@@ -8,9 +9,28 @@ export default {
   decorators: [withKnobs],
 };
 
+const questions: QuestionProps[] = [
+  {
+    question: 'Why do you need a blockchain?',
+    answer:
+      'The Regen Ledger provides the project three key elements, without which Regen Network’s promise to create a network dedicated to monitoring, verifying and contracting or paying for ecological',
+  },
+  {
+    question: 'Why do you need a token?',
+    answer:
+      'The XRN token serves two key functions; to program the rules that make an ecological data commons and marketplace possible and to bring together a community of shared interest in service to strengthening and regenerating the living systems that we need to support life on earth.',
+  },
+];
+
 export const question = (): JSX.Element => (
   <Question
-    question={text('question', 'Am I a test question?')}
-    answer={text('answer', '<b>Yes</b>, I am.')}
+    first={boolean('first', false)}
+    last={boolean('last', false)}
+    question={text('question', questions[0].question)}
+    answer={text('answer', questions[0].answer)}
   />
+);
+
+export const category = (): JSX.Element => (
+  <Category name={text('name', 'tech')} questions={object('questions', questions)} />
 );

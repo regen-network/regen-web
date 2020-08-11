@@ -14,10 +14,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   root: {
     backgroundColor: theme.palette.primary.main,
     [theme.breakpoints.down('xs')]: {
-      padding: `${theme.spacing(6)} ${theme.spacing(5.25)} ${theme.spacing(12.5)}`,
+      padding: `${theme.spacing(6)} 0 ${theme.spacing(12.5)}`,
     },
     [theme.breakpoints.up('sm')]: {
-      padding: `${theme.spacing(10)} ${theme.spacing(7.75)} ${theme.spacing(8.27)}`,
+      padding: `${theme.spacing(10)} 0 ${theme.spacing(8.27)}`,
     },
   },
   title: {
@@ -27,6 +27,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     textTransform: 'uppercase',
     [theme.breakpoints.down('xs')]: {
       fontSize: theme.spacing(3.5),
+      padding: `0 ${theme.spacing(5.25)}`,
+    },
+    [theme.breakpoints.up('sm')]: {
+      padding: `0 ${theme.spacing(7.75)}`,
     },
   },
 }));

@@ -30,12 +30,23 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       paddingBottom: theme.spacing(3.75),
     },
   }),
+  container: {
+    [theme.breakpoints.down('xs')]: {
+      padding: `0 ${theme.spacing(5.25)}`,
+    },
+    [theme.breakpoints.up('sm')]: {
+      padding: `0 ${theme.spacing(7.75)}`,
+    },
+  },
   question: {
     cursor: 'pointer',
     lineHeight: '150%',
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
+    [theme.breakpoints.up('sm')]: {
+      paddingBottom: theme.spacing(2.5),
+    },
   },
   icon: {
     [theme.breakpoints.up('sm')]: {
@@ -51,7 +62,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   },
   gradient: {
     position: 'absolute',
-    top: 0,
+    top: theme.spacing(4),
     width: '100%',
     background: 'linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #FFFFFF 61.46%)',
     [theme.breakpoints.up('sm')]: {
@@ -75,12 +86,10 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     position: 'relative',
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.spacing(4.5),
-      marginTop: theme.spacing(7),
       marginRight: theme.spacing(14.25),
     },
     [theme.breakpoints.down('xs')]: {
       fontSize: theme.spacing(4),
-      marginTop: theme.spacing(4),
       marginRight: theme.spacing(5.75),
     },
   },
@@ -101,17 +110,19 @@ const Question = ({ question, answer, first = false, last = false }: QuestionPro
 
   return (
     <div className={classes.root}>
-      <Title variant="h5" className={classes.question} onClick={handleClick}>
-        {question}
-        {open ? (
-          <BreadcrumbIcon className={classes.icon} direction="up" />
-        ) : (
-          <BreadcrumbIcon className={classes.icon} />
-        )}
-      </Title>
-      <div className={clsx(answerClassName)}>
-        {ReactHtmlParser(answer)}
-        {open ? null : <div className={classes.gradient} />}
+      <div className={classes.container}>
+        <Title variant="h5" className={classes.question} onClick={handleClick}>
+          {question}
+          {open ? (
+            <BreadcrumbIcon className={classes.icon} direction="up" />
+          ) : (
+            <BreadcrumbIcon className={classes.icon} />
+          )}
+        </Title>
+        <div className={clsx(answerClassName)}>
+          {ReactHtmlParser(answer)}
+          {open ? null : <div className={classes.gradient} />}
+        </div>
       </div>
     </div>
   );

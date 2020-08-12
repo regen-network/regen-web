@@ -14,23 +14,22 @@ interface Props {
   children?: React.ReactNode;
   imageData: any;
   imageDataMobile?: any;
+  withSlider?: boolean;
 }
 
 interface StyleProps {
   linearGradient?: string;
+  withSlider?: boolean;
 }
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   root: props => ({
     overflow: 'hidden',
     [theme.breakpoints.down('xs')]: {
-      padding: `${theme.spacing(38)} ${theme.spacing(4)} ${theme.spacing(10.5)} ${theme.spacing(4)}`,
+      paddingTop: theme.spacing(17.75),
     },
     [theme.breakpoints.up('sm')]: {
-      padding: `${theme.spacing(80)} ${theme.spacing(37.5)} ${theme.spacing(27.5)} ${theme.spacing(37.5)}`,
-    },
-    [theme.breakpoints.up('xl')]: {
-      padding: `${theme.spacing(80)} ${theme.spacing(37.5)} ${theme.spacing(27.5)} ${theme.spacing(37.5)}`,
+      padding: `${theme.spacing(80)} ${0} ${theme.spacing(27.5)} ${0}`,
     },
     backgroundSize: 'cover',
   }),
@@ -47,12 +46,16 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     opacity: 0.8,
   }),
   text: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
+      paddingLeft: theme.spacing(10),
+      paddingRight: theme.spacing(10),
       '& h1': {
         lineHeight: '130%',
       },
     },
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up(theme.breakpoints.values.tablet)]: {
+      paddingLeft: theme.spacing(37.5),
+      paddingRight: theme.spacing(37.5),
       '& h1': {
         lineHeight: '140%',
       },
@@ -61,6 +64,22 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     margin: '0 auto',
     position: 'relative',
   },
+  children: props => ({
+    [theme.breakpoints.up('md')]: {
+      paddingLeft: theme.spacing(37.5),
+      paddingRight: theme.spacing(37.5),
+    },
+    [theme.breakpoints.down('sm')]: {
+      paddingLeft: theme.spacing(10),
+      paddingRight: theme.spacing(10),
+    },
+    [theme.breakpoints.down('xs')]: {
+      paddingRight: props.withSlider ? 0 : theme.spacing(4),
+      paddingLeft: theme.spacing(4),
+    },
+    maxWidth: theme.breakpoints.values.lg,
+    margin: '0 auto',
+  }),
   subtitle: {
     [theme.breakpoints.down('xs')]: {
       paddingTop: theme.spacing(3),
@@ -91,6 +110,7 @@ const BackgroundSection = ({
   body,
   header,
   children,
+  withSlider,
 }: Props): JSX.Element => {
   const classes = useStyles({ linearGradient });
   let headerJSX, bodyJSX, textJSX;
@@ -141,7 +161,7 @@ const BackgroundSection = ({
         >
           <div className={classes.backgroundGradient} />
           {textJSX}
-          {children}
+          <div className={classes.children}>{children}</div>
         </BackgroundImage>
       </Box>
     </>

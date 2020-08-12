@@ -7,11 +7,7 @@ import ResourceCardsSlider from 'web-components/lib/components/sliders/ResourceC
 import Section from '../../components/Section';
 
 const useStyles = makeStyles((theme: Theme) => ({
-  root: {
-    padding: `${theme.spacing(21.5)} ${theme.spacing(33.75)} ${theme.spacing(21.75)} ${theme.spacing(33.75)}`,
-    margin: 'inherit',
-    maxWidth: 'inherit',
-  },
+  root: {},
   section: {
     [theme.breakpoints.down('xs')]: {
       padding: `
@@ -22,28 +18,7 @@ const useStyles = makeStyles((theme: Theme) => ({
      `,
     },
     [theme.breakpoints.up('sm')]: {
-      padding: `
-      ${theme.spacing(17.75)}
-       ${theme.spacing(6.5)}
-       ${theme.spacing(19.75)}
-       ${theme.spacing(6)}
-     `,
-    },
-    [theme.breakpoints.up(theme.breakpoints.values.tablet)]: {
-      padding: `
-       ${theme.spacing(21.5)}
-       ${theme.spacing(6.5)}
-       ${theme.spacing(19.75)}
-       ${theme.spacing(33.75)}
-     `,
-    },
-    [theme.breakpoints.up('md')]: {
-      padding: `
-       ${theme.spacing(21.5)}
-       ${theme.spacing(6.5)}
-       ${theme.spacing(21.75)}
-       ${theme.spacing(33.75)}
-     `,
+      paddingTop: theme.spacing(21.5),
     },
   },
   title: {

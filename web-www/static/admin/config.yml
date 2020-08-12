@@ -10,9 +10,11 @@ publish_mode: editorial_workflow
 collections:
   - label: "FAQ page"
     name: "faq"
+    editor:
+     preview: false
     create: true
     folder: "web-www/content/faq"
-    path: '{{category}}/{{slug}}'
+    path: '{{category}}/question{{slug}}'
     fields:
       - { label: 'Category', name: 'category', widget: 'string' }
       - { label: 'Question number', name: 'title', widget: 'string' }

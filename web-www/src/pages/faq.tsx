@@ -34,8 +34,8 @@ const FAQPage = (): JSX.Element => {
 
   const data = useStaticQuery(graphql`
     query {
-      md: allMarkdownRemark(filter: {fileAbsolutePath: {regex: "/(faq)/.*\\.md$/"}}) {
-        group(field: frontmatter___title) {
+      md: allMarkdownRemark(sort: { order: ASC, fields: frontmatter___title }, filter: {fileAbsolutePath: {regex: "/(faq)/.*\\.md$/"}}) {
+        group(field: frontmatter___category) {
           nodes {
             html
             frontmatter {

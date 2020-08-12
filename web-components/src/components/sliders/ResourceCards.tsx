@@ -3,9 +3,9 @@ import { Variant } from '@material-ui/core/styles/createTypography';
 import { useTheme, Theme, makeStyles, useMediaQuery } from '@material-ui/core';
 import clsx from 'clsx';
 import Grid from '@material-ui/core/Grid';
+import Slider from 'react-slick';
 
 import ResourcesCard, { ResourcesCardProps } from '../cards/ResourcesCard';
-import Slider from 'react-slick';
 
 export interface ResourceCardsProps {
   items: ResourcesCardProps[];

@@ -1,6 +1,7 @@
 import React from 'react';
 import { graphql, StaticQuery } from 'gatsby';
 import { useTheme } from '@material-ui/core/';
+
 import BackgroundSection from '../../components/BackgroundSection';
 
 const TopSection = (): JSX.Element => {

@@ -4,7 +4,6 @@ import Typography from '@material-ui/core/Typography';
 import clsx from 'clsx';
 import BackgroundImage from 'gatsby-background-image';
 import Box from '@material-ui/core/Box';
-
 import Title from 'web-components/lib/components/title';
 
 interface Props {

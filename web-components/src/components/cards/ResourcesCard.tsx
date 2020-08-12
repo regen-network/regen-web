@@ -1,11 +1,12 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
-import Card from './Card';
 import Img from 'gatsby-image';
-import Title from '../title';
 import Typography from '@material-ui/core/Typography';
+
 import OutlinedButton from '../buttons/OutlinedButton';
 import EyeIcon from '../icons/EyeIcon';
+import Card from './Card';
+import Title from '../title';
 
 export interface ResourcesCardProps {
   image: any;

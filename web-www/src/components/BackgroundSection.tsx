@@ -94,7 +94,7 @@ const BackgroundSection = ({
 }: Props): JSX.Element => {
   const classes = useStyles({ linearGradient });
   let headerJSX, bodyJSX, textJSX;
-  //Tried to use && operator, but it doesn't seem to play nicely with passing in dynamic props to the object
+  // Tried to use && operator, but it doesn't seem to play nicely with passing in dynamic props to the object
   if (header) {
     headerJSX = (
       <Title color="primary" variant="h1" className={classes.title}>

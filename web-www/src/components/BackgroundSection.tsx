@@ -60,6 +60,10 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
         lineHeight: '140%',
       },
     },
+    [theme.breakpoints.up('xl')]: {
+      paddingLeft: theme.spacing(5),
+      paddingRight: theme.spacing(5),
+    },
     maxWidth: theme.breakpoints.values.lg,
     margin: '0 auto',
     position: 'relative',
@@ -76,6 +80,10 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     [theme.breakpoints.down('xs')]: {
       paddingRight: props.withSlider ? 0 : theme.spacing(4),
       paddingLeft: theme.spacing(4),
+    },
+    [theme.breakpoints.up('xl')]: {
+      paddingLeft: theme.spacing(5),
+      paddingRight: theme.spacing(5),
     },
     maxWidth: theme.breakpoints.values.lg,
     margin: '0 auto',

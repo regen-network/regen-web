@@ -18,6 +18,7 @@ import EmailIcon from 'web-components/lib/components/icons/EmailIcon';
 import PhoneIcon from 'web-components/lib/components/icons/PhoneIcon';
 import DropdownIcon from 'web-components/lib/components/icons/DropdownIcon';
 import CheckedIcon from 'web-components/lib/components/icons/CheckedIcon';
+import BreadcrumbIcon from 'web-components/lib/components/icons/BreadcrumbIcon';
 import { withKnobs, text } from '@storybook/addon-knobs';
 
 export default {
@@ -31,6 +32,8 @@ export const arrowIcon = (): JSX.Element => (
 );
 
 export const availableCreditsIcon = (): JSX.Element => <AvailableCreditsIcon />;
+
+export const breadcrumbIcon = (): JSX.Element => <BreadcrumbIcon direction={text('direction', 'down')} />;
 
 export const closeIcon = (): JSX.Element => <CloseIcon />;
 

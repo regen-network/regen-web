@@ -8,6 +8,7 @@ interface TitleProps {
   children?: any;
   color?: any;
   className?: string;
+  onClick?: () => void;
   align?: 'left' | 'right' | 'inherit' | 'center' | 'justify' | undefined;
 }
 
@@ -18,7 +19,14 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function Title({ variant, children, color, className, align }: TitleProps): JSX.Element {
+export default function Title({
+  variant,
+  children,
+  color,
+  className,
+  align,
+  onClick,
+}: TitleProps): JSX.Element {
   const classes = useStyles({});
   return (
     <Typography
@@ -26,6 +34,7 @@ export default function Title({ variant, children, color, className, align }: Ti
       color={color || 'textPrimary'}
       align={align || 'left'}
       variant={variant}
+      onClick={onClick}
     >
       {children}
     </Typography>

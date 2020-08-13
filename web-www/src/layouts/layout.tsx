@@ -21,6 +21,10 @@ interface HeaderColors {
   [key: string]: string;
 }
 
+interface HeaderProps {
+  [key: string]: boolean;
+}
+
 const Layout = ({ children, location }: propTypes): JSX.Element => {
   const theme = useTheme();
 
@@ -31,6 +35,14 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
     '/resources/': theme.palette.primary.main,
     '/privacy-policy/': theme.palette.primary.light,
     '/terms-service/': theme.palette.primary.light,
+  };
+
+  const headerAbsolute: HeaderProps = {
+    '/faq/': false,
+  };
+
+  const headerTransparent: HeaderProps = {
+    '/faq/': false,
   };
 
   // Links in rest of the site must use the trailing '/' in order for these to work appropriately
@@ -52,11 +64,17 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
     ? headerColors[location.pathname]
     : theme.palette.primary.light;
 
+  const absolute: boolean =
+    headerAbsolute[location.pathname] !== undefined ? headerAbsolute[location.pathname] : true;
+  const transparent: boolean =
+    headerTransparent[location.pathname] !== undefined ? headerTransparent[location.pathname] : true;
+
   return (
     <>
       <Header
         menuItems={menuItems}
-        transparent
+        transparent={transparent}
+        absolute={absolute}
         color={desktopColor}
         borderBottom={!headerNoBorderBottomPages.includes(location.pathname)}
       />

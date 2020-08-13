@@ -8,8 +8,20 @@ public_folder: "/media"
 publish_mode: editorial_workflow
 
 collections:
+  - label: "FAQ"
+    name: "faq"
+    editor:
+     preview: false
+    create: true
+    folder: "web-www/content/faq"
+    path: '{{category}}/question{{slug}}'
+    fields:
+      - { label: 'Category', name: 'category', widget: 'string' }
+      - { label: 'Question number', name: 'title', widget: 'string' }
+      - { label: 'Question', name: 'description', widget: 'string' }
+      - { label: 'Answer', name: 'body', widget: 'markdown' }
   - name: 'pages'
-    label: 'Pages'
+    label: 'Other Pages'
     media_folder: '../../static/media'
     public_folder: '../../static/media'
     editor:
@@ -264,3 +276,4 @@ collections:
             fields:
               - {label: Header, name: header, widget: string}
               - {label: Body, name: body, widget: string}
+    

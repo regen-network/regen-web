@@ -15,6 +15,7 @@ collections:
     create: true
     folder: "web-www/content/faq"
     path: '{{category}}/question{{slug}}'
+    summary: '{{category}} - question {{slug}}'
     fields:
       - { label: 'Category', name: 'category', widget: 'string' }
       - { label: 'Question number', name: 'title', widget: 'string' }

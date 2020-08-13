@@ -43,14 +43,14 @@ collections:
         file: "web-www/content/privacy-policy.md"
         fields:
           - label: "Privacy Policy"
-            name: "pptext"
+            name: "body"
             widget: "markdown"
       - label: "Terms of Service"
         name: "terms-service"
         file: "web-www/content/terms-service.md"
         fields:
           - label: "Terms of Service"
-            name: "tostext"
+            name: "body"
             widget: "markdown"
       - label: "Homepage"
         name: "homepage"

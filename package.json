@@ -34,7 +34,6 @@
     "watch": "lerna run watch --stream",
     "build-www": "yarn build-components && lerna run --scope web-www build --stream",
     "test-update-snapshot": "lerna run --scope web-registry test-update-snapshot --stream"
-
   },
   "devDependencies": {
     "@storybook/addon-actions": "^5.2.8",

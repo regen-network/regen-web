@@ -49,6 +49,7 @@ const theme = createMuiTheme({
       200: '#F9F9F9',
       300: '#cccfd4',
       400: '#C0C5C4',
+      500: '#848484',
     },
     error: {
       main: '#DE4526',

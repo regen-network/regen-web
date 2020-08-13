@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontWeight: 800,
     lineHeight: theme.spacing(4.5),
     position: 'absolute',
-    top: theme.spacing(21),
+    top: theme.spacing(12),
     cursor: 'pointer',
   },
   icon: {

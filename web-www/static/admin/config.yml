@@ -8,7 +8,7 @@ public_folder: "/media"
 publish_mode: editorial_workflow
 
 collections:
-  - label: "FAQ page"
+  - label: "FAQ"
     name: "faq"
     editor:
      preview: false

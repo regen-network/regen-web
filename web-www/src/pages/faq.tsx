@@ -16,6 +16,8 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingBottom: theme.spacing(30),
     },
     [theme.breakpoints.down('xs')]: {
+      paddingTop: theme.spacing(8),
+      paddingBottom: theme.spacing(20),
       position: 'relative',
     },
   },

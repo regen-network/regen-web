@@ -40,14 +40,14 @@ collections:
               - {label: Body, name: body, widget: string}
       - label: "Privacy Policy"
         name: "privacy-policy"
-        file: "web-www/content/privacy-policy.md"
+        file: "web-www/content/privacy-policy/privacy-policy.md"
         fields:
           - label: "Privacy Policy"
             name: "body"
             widget: "markdown"
       - label: "Terms of Service"
         name: "terms-service"
-        file: "web-www/content/terms-service.md"
+        file: "web-www/content/terms-service/terms-service.md"
         fields:
           - label: "Terms of Service"
             name: "body"

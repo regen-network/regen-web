@@ -28,6 +28,23 @@ collections:
     editor:
       preview: false
     files:
+      - label: "Resources page"
+        name: "resources"
+        file: "web-www/content/resources/index.yaml"
+        fields:
+          - label: "Top Section"
+            name: "topSection"
+            widget: "object"
+            fields:
+              - {label: Header, name: header, widget: string}
+              - {label: Body, name: body, widget: string}
+      - label: "Privacy Policy"
+        name: "privacy-policy"
+        file: "web-www/content/privacy-policy/privacy-policy.md"
+        fields:
+          - label: "Body"
+            name: "body"
+            widget: "markdown"
       - label: "Homepage"
         name: "homepage"
         file: "web-www/content/home/index.yaml"
@@ -267,14 +284,3 @@ collections:
                   - {label: "Area", name: area, widget: number}
                   - {label: "Area unit (acres or hectares)", name: areaUnit, widget: string}
                   - {label: "Image", name: image, widget: image}
-      - label: "Resources page"
-        name: "resources"
-        file: "web-www/content/resources/index.yaml"
-        fields:
-          - label: "Top Section"
-            name: "topSection"
-            widget: "object"
-            fields:
-              - {label: Header, name: header, widget: string}
-              - {label: Body, name: body, widget: string}
-    

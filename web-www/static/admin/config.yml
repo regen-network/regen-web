@@ -45,6 +45,13 @@ collections:
           - label: "Body"
             name: "body"
             widget: "markdown"
+      - label: "Terms of Service"
+        name: "terms-service"
+        file: "web-www/content/terms-service/terms-service.md"
+        fields:
+          - label: "Body"
+            name: "body"
+            widget: "markdown"
       - label: "Homepage"
         name: "homepage"
         file: "web-www/content/home/index.yaml"

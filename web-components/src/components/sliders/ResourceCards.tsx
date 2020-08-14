@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   item: {
-    height: '100%',
+    height: 'inherit',
     [theme.breakpoints.down('xs')]: {
       width: '100%',
     },

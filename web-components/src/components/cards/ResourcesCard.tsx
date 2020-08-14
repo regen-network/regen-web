@@ -18,6 +18,7 @@ export interface ResourcesCardProps {
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     width: theme.spacing(91.75),
+    height: '100%',
     backgroundColor: theme.palette.primary.main,
     color: theme.palette.primary.contrastText,
     border: `1px solid ${theme.palette.grey[100]}`,
@@ -54,8 +55,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   button: {
     display: 'inherit',
-    marginBottom: theme.spacing(7.5),
     border: '2px solid #4FB573',
+    marginLeft: theme.spacing(5),
+    marginBottom: theme.spacing(7.5),
   },
   eyeIcon: {
     height: theme.spacing(3.455),

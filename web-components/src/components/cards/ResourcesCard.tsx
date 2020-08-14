@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, Theme, useTheme } from '@material-ui/core';
+import { makeStyles, Theme } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 
 import OutlinedButton from '../buttons/OutlinedButton';

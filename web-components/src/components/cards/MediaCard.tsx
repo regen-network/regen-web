@@ -18,6 +18,7 @@ export interface MediaCardProps {
   elevation?: number;
   borderColor?: string;
   borderRadius?: string;
+  className?: string;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -80,12 +81,14 @@ export default function MediaCard({
   elevation = 0,
   borderColor,
   borderRadius,
+  className,
   tag,
 }: MediaCardProps): JSX.Element {
   const classes = useStyles({});
 
   return (
     <Card
+      className={className}
       onClick={onClick}
       width={width}
       elevation={elevation}

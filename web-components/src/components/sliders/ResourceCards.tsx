@@ -79,7 +79,7 @@ export default function ResourceCards({
           {items.map((item, index) => (
             <div key={index} className={classes.item}>
               <ResourcesCard
-                image={item.image.childImageSharp.fixed}
+                image={item.image}
                 title={item.title}
                 updated={item.updated}
                 description={item.description}
@@ -94,7 +94,7 @@ export default function ResourceCards({
           {items.map((item, index) => (
             <Grid item xs={4} md={5} lg={4} key={index} className={classes.item}>
               <ResourcesCard
-                image={item.image.childImageSharp.fixed}
+                image={item.image}
                 title={item.title}
                 updated={item.updated}
                 description={item.description}

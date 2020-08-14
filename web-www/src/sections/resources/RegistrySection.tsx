@@ -39,11 +39,8 @@ const RegistrySection = (): JSX.Element => {
               header
               resourceCards {
                 image {
-                  childImageSharp {
-                    fixed(quality: 90, width: 500) {
-                      ...GatsbyImageSharpFixed_withWebp
-                    }
-                  }
+                  extension
+                  publicURL
                 }
                 title
                 updated

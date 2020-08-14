@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography';
 
 import OutlinedButton from '../buttons/OutlinedButton';
 import EyeIcon from '../icons/EyeIcon';
-import Card from './Card';
+import MediaCard from './MediaCard';
 import Title from '../title';
 
 export interface ResourcesCardProps {
@@ -19,15 +19,13 @@ export interface ResourcesCardProps {
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    display: 'flex',
-    flexDirection: 'column',
-    height: theme.spacing(114.25),
     width: theme.spacing(91.75),
     backgroundColor: theme.palette.primary.main,
     color: theme.palette.primary.contrastText,
     border: `1px solid ${theme.palette.grey[100]}`,
   },
   text: {
+    flex: '1 0 auto',
     [theme.breakpoints.down('xs')]: {
       padding: `${theme.spacing(6)} ${theme.spacing(5)} ${theme.spacing(10)}`,
     },
@@ -39,9 +37,6 @@ const useStyles = makeStyles((theme: Theme) => ({
         marginBottom: theme.spacing(1.75),
       },
     },
-  },
-  img: {
-    flex: '1 0 auto',
   },
   lastUpdatedLabel: {
     textTransform: 'uppercase',
@@ -60,6 +55,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginBottom: theme.spacing(6),
   },
   button: {
+    display: 'inherit',
     marginBottom: theme.spacing(7.5),
     border: '2px solid #4FB573',
   },
@@ -67,9 +63,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     height: theme.spacing(3.455),
     marginRight: theme.spacing(1.25),
   },
-  buttonWrapper: {
-    flex: '1 0 auto',
-  },
+  buttonWrapper: {},
 }));
 
 export default function ResourcesCard({
@@ -82,28 +76,26 @@ export default function ResourcesCard({
   const classes = useStyles();
   const theme = useTheme();
   return (
-    <Card className={classes.root} borderRadius="10px" elevation={1}>
-      <Img
-        className={classes.img}
-        style={{ width: '100%', height: theme.spacing(48.75), display: 'block' }}
-        fixed={image}
-      />
+    <MediaCard
+      className={classes.root}
+      name={title}
+      imgSrc={image.publicURL}
+      borderRadius="10px"
+      elevation={1}
+    >
       <div className={classes.text}>
-        <Title variant="h4" align="left">
-          {title}
-        </Title>
         <Typography className={classes.lastUpdated}>
           <span className={classes.lastUpdatedLabel}>Last Updated: </span>
           {updated}
         </Typography>
         {description && <Typography className={classes.description}>{description}</Typography>}
-        <div className={classes.buttonWrapper}>
-          <OutlinedButton className={classes.button}>
-            <EyeIcon className={classes.eyeIcon} />
-            {buttonText}
-          </OutlinedButton>
-        </div>
       </div>
-    </Card>
+      <div className={classes.buttonWrapper}>
+        <OutlinedButton className={classes.button}>
+          <EyeIcon className={classes.eyeIcon} />
+          {buttonText}
+        </OutlinedButton>
+      </div>
+    </MediaCard>
   );
 }

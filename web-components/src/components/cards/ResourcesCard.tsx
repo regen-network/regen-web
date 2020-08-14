@@ -1,12 +1,10 @@
 import React from 'react';
 import { makeStyles, Theme, useTheme } from '@material-ui/core';
-import Img from 'gatsby-image';
 import Typography from '@material-ui/core/Typography';
 
 import OutlinedButton from '../buttons/OutlinedButton';
 import EyeIcon from '../icons/EyeIcon';
 import MediaCard from './MediaCard';
-import Title from '../title';
 
 export interface ResourcesCardProps {
   image: any;
@@ -74,7 +72,6 @@ export default function ResourcesCard({
   buttonText,
 }: ResourcesCardProps): JSX.Element {
   const classes = useStyles();
-  const theme = useTheme();
   return (
     <MediaCard
       className={classes.root}

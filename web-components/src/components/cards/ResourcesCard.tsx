@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles, Theme, useTheme } from '@material-ui/core';
 import Img from 'gatsby-image';
 import Typography from '@material-ui/core/Typography';
 
@@ -19,6 +19,8 @@ export interface ResourcesCardProps {
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
+    display: 'flex',
+    flexDirection: 'column',
     height: theme.spacing(114.25),
     width: theme.spacing(91.75),
     backgroundColor: theme.palette.primary.main,
@@ -39,9 +41,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   img: {
-    width: '100%',
-    height: '45%',
-    display: 'block',
+    flex: '1 0 auto',
   },
   lastUpdatedLabel: {
     textTransform: 'uppercase',
@@ -67,6 +67,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     height: theme.spacing(3.455),
     marginRight: theme.spacing(1.25),
   },
+  buttonWrapper: {
+    flex: '1 0 auto',
+  },
 }));
 
 export default function ResourcesCard({
@@ -77,10 +80,14 @@ export default function ResourcesCard({
   buttonText,
 }: ResourcesCardProps): JSX.Element {
   const classes = useStyles();
-
+  const theme = useTheme();
   return (
     <Card className={classes.root} borderRadius="10px" elevation={1}>
-      <Img style={{ width: '100%', height: '45%', display: 'block' }} fixed={image} />
+      <Img
+        className={classes.img}
+        style={{ width: '100%', height: theme.spacing(48.75), display: 'block' }}
+        fixed={image}
+      />
       <div className={classes.text}>
         <Title variant="h4" align="left">
           {title}
@@ -89,11 +96,13 @@ export default function ResourcesCard({
           <span className={classes.lastUpdatedLabel}>Last Updated: </span>
           {updated}
         </Typography>
-        <Typography className={classes.description}>{description}</Typography>
-        <OutlinedButton className={classes.button}>
-          <EyeIcon className={classes.eyeIcon} />
-          {buttonText}
-        </OutlinedButton>
+        {description && <Typography className={classes.description}>{description}</Typography>}
+        <div className={classes.buttonWrapper}>
+          <OutlinedButton className={classes.button}>
+            <EyeIcon className={classes.eyeIcon} />
+            {buttonText}
+          </OutlinedButton>
+        </div>
       </div>
     </Card>
   );

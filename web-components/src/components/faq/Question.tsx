@@ -92,6 +92,12 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       fontSize: theme.spacing(4),
       marginRight: theme.spacing(5.75),
     },
+    '& span.gatsby-resp-image-background-image': {
+      position: 'absolute !important',
+    },
+    '& img.gatsby-resp-image-image': {
+      position: 'relative !important',
+    },
   },
 }));
 

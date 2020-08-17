@@ -121,7 +121,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const MarketplaceSection = () => {
+const MarketplaceSection = (): JSX.Element => {
   const data = useStaticQuery(graphql`
     query {
       text: homeYaml {
@@ -146,6 +146,7 @@ const MarketplaceSection = () => {
             header
             description
             linkText
+            linkUrl
           }
         }
       }
@@ -177,7 +178,9 @@ const MarketplaceSection = () => {
                   {cta.header}
                 </Title>
                 <p>{cta.description}</p>
-                <ContainedButton className={classes.button}>{cta.linkText}</ContainedButton>
+                <ContainedButton href={cta.linkUrl} className={classes.button}>
+                  {cta.linkText}
+                </ContainedButton>
               </Grid>
             );
           })}

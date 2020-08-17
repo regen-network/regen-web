@@ -9,20 +9,19 @@ import Section from '../../components/Section';
 const useStyles = makeStyles((theme: Theme) => ({
   root: {},
   section: {
-    [theme.breakpoints.down('xs')]: {
-      padding: `
-       ${theme.spacing(17.75)}
-       ${theme.spacing(6.5)}
-       ${theme.spacing(28.25)}
-       ${theme.spacing(6)}
-     `,
-    },
     [theme.breakpoints.up('sm')]: {
       paddingTop: theme.spacing(21.5),
+    },
+    [theme.breakpoints.down('xs')]: {
+      paddingLeft: theme.spacing(3),
+      paddingTop: theme.spacing(17),
     },
   },
   title: {
     marginBottom: theme.spacing(8.5),
+    [theme.breakpoints.up('sm')]: {
+      marginBottom: theme.spacing(6.75),
+    },
   },
 }));
 
@@ -34,11 +33,8 @@ const LedgerSection = (): JSX.Element => {
           header
           resourceCards {
             image {
-              childImageSharp {
-                fixed(quality: 90, width: 500) {
-                  ...GatsbyImageSharpFixed_withWebp
-                }
-              }
+              extension
+              publicURL
             }
             title
             updated

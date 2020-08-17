@@ -76,7 +76,7 @@ interface Props extends React.HTMLProps<HTMLDivElement> {
 const MobileMenu = ({ menuItems, className }: Props): JSX.Element => {
   const classes = useStyles();
   const theme = useTheme();
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
   const handleOpen = (): void => {
     setOpen(true);

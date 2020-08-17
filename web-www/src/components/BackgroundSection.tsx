@@ -27,6 +27,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     overflow: 'hidden',
     [theme.breakpoints.down('xs')]: {
       paddingTop: theme.spacing(17.75),
+      paddingBottom: theme.spacing(13),
     },
     [theme.breakpoints.up('sm')]: {
       padding: `${theme.spacing(80)} ${0} ${theme.spacing(27.5)} ${0}`,
@@ -52,6 +53,10 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       '& h1': {
         lineHeight: '130%',
       },
+    },
+    [theme.breakpoints.down('xs')]: {
+      paddingLeft: theme.spacing(4),
+      paddingRight: theme.spacing(10),
     },
     [theme.breakpoints.up(theme.breakpoints.values.tablet)]: {
       paddingLeft: theme.spacing(37.5),

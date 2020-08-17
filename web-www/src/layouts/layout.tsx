@@ -55,6 +55,7 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
       title: 'Learn More',
       dropdownItems: [
         { title: 'Case Studies', href: '/case-studies' },
+        { title: 'Resources', href: '/resources' },
         { title: 'FAQ', href: '/faq' },
         { title: 'Team', href: '/team' },
       ],

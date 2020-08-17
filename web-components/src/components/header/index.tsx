@@ -33,7 +33,7 @@ interface HeaderProps {
   borderBottom?: boolean;
 }
 
-interface HeaderMenuItem {
+export interface HeaderMenuItem {
   title: string;
   href?: string;
   dropdownItems?: { title: string; href: string }[];
@@ -235,7 +235,7 @@ export default function Header({
             </MenuList>
           </Box>
           <Box display={{ xs: 'block', sm: 'none' }}>
-            <MobileMenu className={classes.mobile}></MobileMenu>
+            <MobileMenu menuItems={menuItems} className={classes.mobile} />
           </Box>
         </Grid>
         {children}

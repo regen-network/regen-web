@@ -18,7 +18,7 @@ export interface ResourceCardsProps {
 const useStyles = makeStyles((theme: Theme) => ({
   slider: {
     [theme.breakpoints.down('xs')]: {
-      width: '100%',
+      width: '95%',
     },
     '& .slick-track': {
       display: 'flex',
@@ -26,6 +26,9 @@ const useStyles = makeStyles((theme: Theme) => ({
         height: 'inherit',
         [theme.breakpoints.down('xs')]: {
           paddingRight: theme.spacing(4.125),
+          '&:last-child': {
+            paddingRight: 0,
+          },
         },
         '& > div:first-child': {
           height: '100%',

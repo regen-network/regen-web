@@ -70,7 +70,7 @@ const Section = ({
   titleVariant = 'h2',
   title,
   withSlider = false,
-}: SectionProps) => {
+}: SectionProps): JSX.Element => {
   const classes = useStyles({ withSlider, titleLineHeight, titleColor });
   return (
     <section className={clsx(classes.root, className)}>

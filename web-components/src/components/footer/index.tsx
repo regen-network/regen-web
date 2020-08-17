@@ -25,8 +25,8 @@ export interface FooterItemProps {
 
 interface FooterProps {
   footerItems: [FooterItemProps, FooterItemProps, FooterItemProps];
-  mailerLiteDataAccount: string;
-  mailerLiteDataForm: string;
+  mailerLiteDataAccount?: string;
+  mailerLiteDataForm?: string;
   termsUrl: string;
   privacyUrl: string;
   paddingBottom?: string;
@@ -37,8 +37,10 @@ interface StyleProps {
 }
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
-  root: props => ({
+  root: {
     backgroundColor: theme.palette.info.dark,
+  },
+  section: props => ({
     [theme.breakpoints.up('sm')]: {
       paddingBottom: props.paddingBottom ? theme.spacing(30) : 0,
     },
@@ -54,6 +56,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   title: {
     textTransform: 'uppercase',
     color: theme.palette.primary.main,
+    fontWeight: 800,
     letterSpacing: '1px',
     [theme.breakpoints.up('sm')]: {
       lineHeight: theme.spacing(6.5),
@@ -177,75 +180,77 @@ export default function Footer({
   const classes = useStyles({ paddingBottom });
 
   return (
-    <Section className={classes.root}>
-      <Grid container>
-        <Grid item xs={12} sm={3}>
-          <FooterItem title={footerItems[0].title} items={footerItems[0].items}></FooterItem>
+    <div className={classes.root}>
+      <Section className={classes.section}>
+        <Grid container>
+          <Grid item xs={12} sm={3}>
+            <FooterItem title={footerItems[0].title} items={footerItems[0].items} />
+          </Grid>
+          <Grid item xs={12} sm={3}>
+            <FooterItem title={footerItems[1].title} items={footerItems[1].items} />
+          </Grid>
+          <Grid item xs={12} sm={2}>
+            <FooterItem title={footerItems[2].title} items={footerItems[2].items} />
+          </Grid>
+          <Grid item xs={12} sm={4}>
+            <Title className={classes.title} variant="h5">
+              community
+            </Title>
+            <Typography className={classes.subTitle}>
+              Stay up to date! Subscribe to our monthly newsletter or join the community.
+            </Typography>
+            <div
+              className={clsx('ml-form-embed', classes.mail)}
+              data-account={mailerLiteDataAccount}
+              data-form={mailerLiteDataForm}
+            />
+            <Link className={classes.newsletter}>See archive of past newsletters»</Link>
+            <div className={classes.social}>
+              <Link href="https://www.instagram.com/regennetwork/" rel="noopener noreferrer" target="_blank">
+                <InstagramIcon />
+              </Link>
+              <Link href="http://t.me/regennetwork_public" rel="noopener noreferrer" target="_blank">
+                <TelegramIcon />
+              </Link>
+              <Link href="https://facebook.com/weareregennetwork" rel="noopener noreferrer" target="_blank">
+                <FacebookIcon />
+              </Link>
+              <Link href="http://twitter.com/regen_network" rel="noopener noreferrer" target="_blank">
+                <TwitterIcon />
+              </Link>
+              <Link
+                href="https://www.linkedin.com/company/regen-network/"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <LinkedInIcon />
+              </Link>
+              <Link href="https://medium.com/regen-network" rel="noopener noreferrer" target="_blank">
+                <MediumIcon />
+              </Link>
+              <Link
+                href="https://www.youtube.com/channel/UCICD2WukTY0MbQdQ9Quew3g"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <YoutubeIcon />
+              </Link>
+              <Link href="https://github.com/regen-network/" rel="noopener noreferrer" target="_blank">
+                <GithubIcon />
+              </Link>
+            </div>
+          </Grid>
         </Grid>
-        <Grid item xs={12} sm={3}>
-          <FooterItem title={footerItems[1].title} items={footerItems[1].items}></FooterItem>
+        <hr className={classes.separator} />
+        <Grid className={classes.bottomGrid} container justify="space-between">
+          <Grid item className={classes.bottom}>
+            <Link href={termsUrl}>Terms</Link> | <Link href={privacyUrl}>Privacy</Link>
+          </Grid>
+          <Grid item className={classes.bottom}>
+            © 2020 Regen Network
+          </Grid>
         </Grid>
-        <Grid item xs={12} sm={2}>
-          <FooterItem title={footerItems[2].title} items={footerItems[2].items}></FooterItem>
-        </Grid>
-        <Grid item xs={12} sm={4}>
-          <Title className={classes.title} variant="h5">
-            community
-          </Title>
-          <Typography className={classes.subTitle}>
-            Stay up to date! Subscribe to our monthly newsletter or join the community.
-          </Typography>
-          <div
-            className={clsx('ml-form-embed', classes.mail)}
-            data-account={mailerLiteDataAccount}
-            data-form={mailerLiteDataForm}
-          />
-          <Link className={classes.newsletter}>See archive of past newsletters»</Link>
-          <div className={classes.social}>
-            <Link href="https://www.instagram.com/regennetwork/" rel="noopener noreferrer" target="_blank">
-              <InstagramIcon />
-            </Link>
-            <Link href="http://t.me/regennetwork_public" rel="noopener noreferrer" target="_blank">
-              <TelegramIcon />
-            </Link>
-            <Link href="https://facebook.com/weareregennetwork" rel="noopener noreferrer" target="_blank">
-              <FacebookIcon />
-            </Link>
-            <Link href="http://twitter.com/regen_network" rel="noopener noreferrer" target="_blank">
-              <TwitterIcon />
-            </Link>
-            <Link
-              href="https://www.linkedin.com/company/regen-network/"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              <LinkedInIcon />
-            </Link>
-            <Link href="https://medium.com/regen-network" rel="noopener noreferrer" target="_blank">
-              <MediumIcon />
-            </Link>
-            <Link
-              href="https://www.youtube.com/channel/UCICD2WukTY0MbQdQ9Quew3g"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              <YoutubeIcon />
-            </Link>
-            <Link href="https://github.com/regen-network/" rel="noopener noreferrer" target="_blank">
-              <GithubIcon />
-            </Link>
-          </div>
-        </Grid>
-      </Grid>
-      <hr className={classes.separator} />
-      <Grid className={classes.bottomGrid} container justify="space-between">
-        <Grid item className={classes.bottom}>
-          <Link href={termsUrl}>Terms</Link> | <Link href={privacyUrl}>Privacy</Link>
-        </Grid>
-        <Grid item className={classes.bottom}>
-          © 2020 Regen Network
-        </Grid>
-      </Grid>
-    </Section>
+      </Section>
+    </div>
   );
 }

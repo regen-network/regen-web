@@ -9,13 +9,13 @@ import isAdmin from './lib/admin';
 import './App.css';
 import {
   projects,
-  creditsIssuer,
+  // creditsIssuer,
   purchasedCredits,
   projectDefault,
   Project,
   PurchasedCredits,
 } from './mocks';
-import Footer from 'web-components/lib/components/footer';
+import Footer, { FooterItemProps as FooterItem } from 'web-components/lib/components/footer';
 import Header from 'web-components/lib/components/header';
 import Title from 'web-components/lib/components/title';
 import ProjectDetails from './components/ProjectDetails';
@@ -26,6 +26,10 @@ import CreditsTransfer from './components/CreditsTransfer';
 import BuyerCreate from './components/BuyerCreate';
 import history from './lib/history';
 
+interface BoolProps {
+  [key: string]: boolean;
+}
+
 function ScrollToTop(): null {
   const { pathname } = useLocation();
 
@@ -34,6 +38,102 @@ function ScrollToTop(): null {
   }, [pathname]);
 
   return null;
+}
+
+function AppFooter(): JSX.Element {
+  // const { pathname } = useLocation();
+  // const footerPaddingBottom: BoolProps = {
+  //   '/projects/impactag': true,
+  // };
+
+  const footerItems: [FooterItem, FooterItem, FooterItem] = [
+    {
+      title: 'get involved',
+      items: [
+        {
+          title: 'Buyers',
+          href: 'https://www.regen.network/buyers/',
+        },
+        {
+          title: 'Land Stewards',
+          href: 'https://www.regen.network/land-stewards/',
+        },
+        {
+          title: 'Developers & Validators',
+          href: 'https://www.regen.network/developers/',
+        },
+        {
+          title: 'Scientists & Verifiers',
+          href: 'https://www.regen.network/scientists/',
+        },
+        {
+          title: 'Invest',
+          href: 'https://www.regen.network/invest/',
+        },
+      ],
+    },
+    {
+      title: 'learn more',
+      items: [
+        {
+          title: 'Case Studies',
+          href: 'https://www.regen.network/case-studies/',
+        },
+        {
+          title: 'Resources',
+          href: 'https://www.regen.network/resources/',
+        },
+        {
+          title: 'FAQ',
+          href: 'https://www.regen.network/faq/',
+        },
+        {
+          title: 'Team',
+          href: 'https://www.regen.network/team/',
+        },
+        {
+          title: 'Contact',
+          href: 'https://www.regen.network/contact/',
+        },
+      ],
+    },
+    {
+      title: 'regen',
+      items: [
+        {
+          title: 'Partners',
+          href: 'https://www.regen.network/partners/',
+        },
+        {
+          title: 'Media',
+          href: 'https://www.regen.network/media/',
+        },
+        {
+          title: 'Careers',
+          href: 'https://www.regen.network/careers/',
+        },
+        {
+          title: 'Forum',
+          href: 'https://www.regen.network/forum/',
+        },
+        {
+          title: 'Press Kit',
+          href: 'https://www.regen.network/press-kit/',
+        },
+      ],
+    },
+  ];
+
+  return (
+    <Footer
+      footerItems={footerItems}
+      mailerLiteDataAccount={process.env.REACT_APP_MAILERLITE_DATA_ACCOUNT}
+      mailerLiteDataForm={process.env.REACT_APP_MAILERLITE_DATA_FORM_FOOTER}
+      privacyUrl="https://www.regen.network/privacy-policy"
+      termsUrl="https://www.regen.network/terms-service"
+      // paddingBottom={footerPaddingBottom[pathname]}
+    />
+  );
 }
 
 function Home(): JSX.Element {
@@ -177,7 +277,7 @@ const App: React.FC = (): JSX.Element => {
           )}
         </Switch>
         <footer>
-          <Footer user={creditsIssuer} />
+          <AppFooter />
         </footer>
       </div>
     </Router>

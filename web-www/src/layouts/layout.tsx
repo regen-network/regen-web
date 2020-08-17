@@ -165,14 +165,16 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
       <div>
         <main>{children}</main>
       </div>
-      <Footer
-        footerItems={footerItems}
-        mailerLiteDataAccount={process.env.GATSBY_MAILERLITE_DATA_ACCOUNT}
-        mailerLiteDataForm={process.env.GATSBY_MAILERLITE_DATA_FORM_FOOTER}
-        privacyUrl="/privacy-policy"
-        termsUrl="/terms-service"
-        paddingBottom={footerPaddingBottom[location.pathname]}
-      />
+      <footer>
+        <Footer
+          footerItems={footerItems}
+          mailerLiteDataAccount={process.env.GATSBY_MAILERLITE_DATA_ACCOUNT}
+          mailerLiteDataForm={process.env.GATSBY_MAILERLITE_DATA_FORM_FOOTER}
+          privacyUrl="/privacy-policy"
+          termsUrl="/terms-service"
+          paddingBottom={footerPaddingBottom[location.pathname]}
+        />
+      </footer>
     </>
   );
 };

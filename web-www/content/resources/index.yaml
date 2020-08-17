@@ -29,7 +29,7 @@ ledgerSection:
       title: 'Whitepaper'
       updated: 'February 5th, 2020'
       description: 'Dive into our master document of strategy and design for the Regen Registry and Regen Ledger.'
-      buttonText: 'View Architecture Paper'
+      buttonText: 'View Whitepaper'
       link:
     - image: '../../static/media/resources-ledger-architecture-image.jpg'
       title: 'Architecture Paper'

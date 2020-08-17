@@ -22,7 +22,7 @@ interface HeaderColors {
   [key: string]: string;
 }
 
-interface HeaderProps {
+interface BoolProps {
   [key: string]: boolean;
 }
 
@@ -38,12 +38,17 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
     '/terms-service/': theme.palette.primary.light,
   };
 
-  const headerAbsolute: HeaderProps = {
+  const headerAbsolute: BoolProps = {
     '/faq/': false,
   };
 
-  const headerTransparent: HeaderProps = {
+  const headerTransparent: BoolProps = {
     '/faq/': false,
+  };
+
+  const footerPaddingBottom: BoolProps = {
+    '/buyers/': true,
+    '/land-stewards/': true,
   };
 
   // Links in rest of the site must use the trailing '/' in order for these to work appropriately
@@ -164,6 +169,9 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
         footerItems={footerItems}
         mailerLiteDataAccount={process.env.GATSBY_MAILERLITE_DATA_ACCOUNT}
         mailerLiteDataForm={process.env.GATSBY_MAILERLITE_DATA_FORM_FOOTER}
+        privacyUrl="/privacy-policy"
+        termsUrl="/terms-service"
+        paddingBottom={footerPaddingBottom[location.pathname]}
       />
     </>
   );

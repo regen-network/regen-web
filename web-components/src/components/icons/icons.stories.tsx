@@ -26,6 +26,7 @@ import TwitterIcon from 'web-components/lib/components/icons/social/TwitterIcon'
 import LinkedInIcon from 'web-components/lib/components/icons/social/LinkedInIcon';
 import MediumIcon from 'web-components/lib/components/icons/social/MediumIcon';
 import YoutubeIcon from 'web-components/lib/components/icons/social/YoutubeIcon';
+import GithubIcon from 'web-components/lib/components/icons/social/GithubIcon';
 
 import { withKnobs, text } from '@storybook/addon-knobs';
 
@@ -90,3 +91,5 @@ export const telegramIcon = (): JSX.Element => <TelegramIcon />;
 export const twitterIcon = (): JSX.Element => <TwitterIcon />;
 
 export const youtubeIcon = (): JSX.Element => <YoutubeIcon />;
+
+export const githubIcon = (): JSX.Element => <GithubIcon />;

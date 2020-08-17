@@ -4,7 +4,7 @@ import { useStaticQuery, graphql } from 'gatsby';
 
 import { ImageItemProps } from 'web-components/lib/components/image-item';
 import ImageItems from 'web-components/lib/components/sliders/ImageItems';
-import Section from '../../components/Section';
+import Section from 'web-components/src/components/section';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {

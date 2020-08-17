@@ -9,6 +9,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Header from 'web-components/lib/components/header';
+import Footer, { FooterItemProps as FooterItem } from 'web-components/lib/components/footer';
 import { useTheme } from '@material-ui/core/styles';
 import './layout.css';
 
@@ -69,6 +70,84 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
   const transparent: boolean =
     headerTransparent[location.pathname] !== undefined ? headerTransparent[location.pathname] : true;
 
+  const footerItems: [FooterItem, FooterItem, FooterItem] = [
+    {
+      title: 'get involved',
+      items: [
+        {
+          title: 'Buyers',
+          href: '/buyers/',
+        },
+        {
+          title: 'Land Stewards',
+          href: '/land-stewards/',
+        },
+        {
+          title: 'Developers & Validators',
+          href: '/developers/',
+        },
+        {
+          title: 'Scientists & Verifiers',
+          href: '/scientists/',
+        },
+        {
+          title: 'Invest',
+          href: '/invest/',
+        },
+      ],
+    },
+    {
+      title: 'learn more',
+      items: [
+        {
+          title: 'Case Studies',
+          href: '/case-studies/',
+        },
+        {
+          title: 'Resources',
+          href: '/resources/',
+        },
+        {
+          title: 'FAQ',
+          href: '/faq/',
+        },
+        {
+          title: 'Team',
+          href: '/team/',
+        },
+        {
+          title: 'Contact',
+          href: '/contact/',
+        },
+      ],
+    },
+    {
+      title: 'regen',
+      items: [
+        {
+          title: 'Partners',
+          href: '/partners/',
+        },
+        {
+          title: 'Media',
+          href: '/media/',
+        },
+        {
+          title: 'Careers',
+          href: '/careers/',
+        },
+        {
+          title: 'Forum',
+          href: '/forum/',
+        },
+        {
+          title: 'Press Kit',
+          href: '/press-kit/',
+        },
+      ],
+    },
+  ];
+
   return (
     <>
       <Header
@@ -80,8 +159,12 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
       />
       <div>
         <main>{children}</main>
-        <footer></footer>
       </div>
+      <Footer
+        footerItems={footerItems}
+        mailerLiteDataAccount={process.env.GATSBY_MAILERLITE_DATA_ACCOUNT}
+        mailerLiteDataForm={process.env.GATSBY_MAILERLITE_DATA_FORM_FOOTER}
+      />
     </>
   );
 };

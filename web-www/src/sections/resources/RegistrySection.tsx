@@ -17,11 +17,14 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingTop: theme.spacing(21.5),
     },
+    [theme.breakpoints.down('xs')]: {
+      paddingLeft: theme.spacing(3),
+      paddingTop: theme.spacing(17),
+    },
   },
 }));
 
 const RegistrySection = (): JSX.Element => {
-  const theme = useTheme();
   const classes = useStyles();
   return (
     <StaticQuery

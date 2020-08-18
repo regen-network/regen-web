@@ -1,3 +1,18 @@
 topSection:
   header: Meet our team.
   body: We are developers, ecologists, scientists, and designers from all over the world, bound by our common purpose of planetary regeneration. Feel free to connect with us.
+coreMembers: 
+  - name: Christian Shearer
+    title: Chief Executive Officer
+    description: Christian has worked in ecological agriculture for 15 years, primarily with farmers in Southeast Asia. As a co-founder of Terra Genesis International, he worked with natural products brands, helping them to invest into creating regenerative supply systems. Christian is passionate about accelerating the adoption of regenerative agriculture. He is a member of the Board of Directors.
+    image: '../../static/media/team/christian.jpg'
+    linkedUrl: https://www.linkedin.com/in/christian-shearer-b8877312/
+    twitterUrl: '#'
+    githubUrl: '#'
+  - name: Sara Johnstone
+    title: Chief Operations Officer
+    description: Sara is strategic operator and executor who has over a decade of experience in tech startups. She runs marketing, operations, community management, strategy and business development. She is thrilled to have recently found her way into regenerative agriculture and committed to expanding her knowledge around regenerative business practices.
+    image: '../../static/media/team/saraj.jpg'
+    linkedUrl: https://www.linkedin.com/in/sara-johnstone-b3677254/
+    twitterUrl: '#'
+    githubUrl: '#'

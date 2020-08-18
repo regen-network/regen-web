@@ -17,10 +17,9 @@ interface propTypes {
   lang: string;
   meta: Array<string>;
   title: string;
-  mailerlite?: boolean;
 }
 
-function SEO({ description, lang, meta, title, mailerlite = false }: propTypes) {
+function SEO({ description, lang, meta, title }: propTypes) {
   const { site } = useStaticQuery(
     graphql`
       query {
@@ -81,7 +80,7 @@ function SEO({ description, lang, meta, title, mailerlite = false }: propTypes) 
         },
       ]}
     >
-      {mailerlite && <script src="mailerlite.js" type="text/javascript"></script>}
+      <script src="mailerlite.js" type="text/javascript"></script>
     </Helmet>
   );
 }

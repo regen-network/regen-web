@@ -5,7 +5,7 @@ import Img from 'gatsby-image';
 import BackgroundImage from 'gatsby-background-image';
 
 import BlogPosts from 'web-components/lib/components/sliders/BlogPosts';
-import Section from '../../components/Section';
+import Section from 'web-components/src/components/section';
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {

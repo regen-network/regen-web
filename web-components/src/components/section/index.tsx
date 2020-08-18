@@ -3,7 +3,7 @@ import { makeStyles, Theme } from '@material-ui/core';
 import clsx from 'clsx';
 import { Variant } from '@material-ui/core/styles/createTypography';
 
-import Title from 'web-components/lib/components/title';
+import Title from '../title';
 
 interface SectionProps {
   children?: any;
@@ -70,7 +70,7 @@ const Section = ({
   titleVariant = 'h2',
   title,
   withSlider = false,
-}: SectionProps) => {
+}: SectionProps): JSX.Element => {
   const classes = useStyles({ withSlider, titleLineHeight, titleColor });
   return (
     <section className={clsx(classes.root, className)}>

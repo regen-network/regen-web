@@ -3,7 +3,7 @@ import { useStaticQuery, graphql } from 'gatsby';
 import { makeStyles, Theme } from '@material-ui/core';
 
 import SEO from '../components/seo';
-import Section from '../components/Section';
+import Section from 'web-components/src/components/section';
 import FAQ, { Group } from 'web-components/lib/components/faq';
 
 const useStyles = makeStyles((theme: Theme) => ({

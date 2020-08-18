@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import { useStaticQuery, graphql } from 'gatsby';
 import Title from 'web-components/lib/components/title';
-import Section from '../../components/Section';
+import Section from 'web-components/src/components/section';
 import Img from 'gatsby-image';
 import Tooltip from 'web-components/lib/components/tooltip';
 

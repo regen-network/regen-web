@@ -48,22 +48,26 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   }),
   text: {
     [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
-      paddingLeft: theme.spacing(10),
-      paddingRight: theme.spacing(10),
       '& h1': {
         lineHeight: '130%',
       },
     },
-    [theme.breakpoints.down('xs')]: {
-      paddingLeft: theme.spacing(4),
+    [theme.breakpoints.down('sm')]: {
+      paddingLeft: theme.spacing(10),
       paddingRight: theme.spacing(10),
     },
+    [theme.breakpoints.down('xs')]: {
+      paddingLeft: theme.spacing(4),
+      paddingRight: theme.spacing(4),
+    },
     [theme.breakpoints.up(theme.breakpoints.values.tablet)]: {
-      paddingLeft: theme.spacing(37.5),
-      paddingRight: theme.spacing(37.5),
       '& h1': {
         lineHeight: '140%',
       },
+    },
+    [theme.breakpoints.up('md')]: {
+      paddingLeft: theme.spacing(37.5),
+      paddingRight: theme.spacing(37.5),
     },
     [theme.breakpoints.up('xl')]: {
       paddingLeft: theme.spacing(5),
@@ -170,7 +174,7 @@ const BackgroundSection = ({
           Tag="section"
           className={clsx(className, classes.root)}
           fluid={imageData}
-          backgroundColor={`#040e18`}
+          backgroundColor="transparent"
         >
           <div className={classes.backgroundGradient} />
           {textJSX}

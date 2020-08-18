@@ -1,7 +1,8 @@
 import React from 'react';
-import { makeStyles, Theme, useTheme } from '@material-ui/core';
-import Title from 'web-components/lib/components/title';
+import { makeStyles, Theme } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
+
+import Title from '../title';
 
 export interface teamItemProps {
   name: string;
@@ -13,8 +14,12 @@ export interface teamItemProps {
   twitterUrl: string;
 }
 
-const useStyles = makeStyles((theme: Theme) => {});
-const teamItem = ({
+const useStyles = makeStyles((theme: Theme) => ({
+  root: {
+    height: 'inherit',
+  },
+}));
+export default function TeamItem({
   name,
   title,
   desc,
@@ -22,9 +27,10 @@ const teamItem = ({
   linkedUrl,
   githubUrl,
   twitterUrl,
-}: teamItemProps): JSX.Element => {
+}: teamItemProps): JSX.Element {
+  const classes = useStyles();
   return (
-    <div>
+    <div className={classes.root}>
       <img src={imgUrl} alt={name} />
       <Title variant="h4" align="center">
         {name}
@@ -33,6 +39,4 @@ const teamItem = ({
       <Typography>{desc}</Typography>
     </div>
   );
-};
-
-export default teamItem;
+}

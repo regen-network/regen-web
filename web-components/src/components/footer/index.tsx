@@ -20,7 +20,7 @@ import GithubIcon from '../icons/social/GithubIcon';
 
 export interface FooterItemProps {
   title: string;
-  items: { title: string; href: string }[];
+  items: { title: string; href: string; target?: string }[];
 }
 
 interface FooterProps {
@@ -50,6 +50,9 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     '& a': {
       '&:link, &:visited, &:hover, &:active': {
         textDecoration: 'none',
+      },
+      '&:hover': {
+        color: theme.palette.info.contrastText,
       },
     },
   }),
@@ -106,9 +109,11 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   },
   bottomGrid: {
     [theme.breakpoints.up('sm')]: {
+      marginTop: theme.spacing(8.25),
       marginBottom: theme.spacing(8.25),
     },
     [theme.breakpoints.down('xs')]: {
+      marginTop: theme.spacing(6),
       marginBottom: theme.spacing(9),
     },
   },
@@ -127,20 +132,40 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     display: 'block',
   },
   social: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    marginLeft: theme.spacing(-2),
+    [theme.breakpoints.up('sm')]: {
+      justifyContent: 'center',
+    },
+    [theme.breakpoints.down('xs')]: {
+      marginLeft: theme.spacing(-2),
+      justifyContent: 'space-between',
+    },
   },
   separator: {
     borderTop: 0,
     borderColor: theme.palette.grey[50],
     [theme.breakpoints.up('sm')]: {
-      marginTop: theme.spacing(20.5),
-      marginBottom: theme.spacing(8.25),
+      marginTop: theme.spacing(19.75),
     },
     [theme.breakpoints.down('xs')]: {
-      marginTop: theme.spacing(12.75),
-      marginBottom: theme.spacing(9),
+      marginTop: theme.spacing(18.75),
+    },
+  },
+  icon: {
+    [theme.breakpoints.up('sm')]: {
+      width: theme.spacing(12.75),
+      height: theme.spacing(12.75),
+      marginLeft: theme.spacing(2.5),
+      marginRight: theme.spacing(2.5),
+    },
+    [theme.breakpoints.down('xs')]: {
+      width: theme.spacing(7.75),
+      height: theme.spacing(7.75),
+    },
+  },
+  community: {
+    [theme.breakpoints.up('sm')]: {
+      textAlign: 'center',
+      marginTop: theme.spacing(16.25),
     },
   },
   footerItem: {
@@ -161,7 +186,9 @@ const FooterItem = ({ title, items }: FooterItemProps): JSX.Element => {
       <List className={classes.list}>
         {items.map((item, index) => (
           <ListItem className={classes.subTitle} key={index}>
-            <Link href={item.href}>{item.title}</Link>
+            <Link href={item.href} rel="noopener noreferrer" target={item.target}>
+              {item.title}
+            </Link>
           </ListItem>
         ))}
       </List>
@@ -192,9 +219,9 @@ export default function Footer({
           <Grid item xs={12} sm={2}>
             <FooterItem title={footerItems[2].title} items={footerItems[2].items} />
           </Grid>
-          <Grid item xs={12} sm={4}>
+          <Grid item xs={12} sm={4} className={classes.footerItem}>
             <Title className={classes.title} variant="h5">
-              community
+              subscribe
             </Title>
             <Typography className={classes.subTitle}>
               Stay up to date! Subscribe to our monthly newsletter or join the community.
@@ -204,43 +231,48 @@ export default function Footer({
               data-account={mailerLiteDataAccount}
               data-form={mailerLiteDataForm}
             />
-            <Link className={classes.newsletter}>See archive of past newsletters»</Link>
-            <div className={classes.social}>
-              <Link href="https://www.instagram.com/regennetwork/" rel="noopener noreferrer" target="_blank">
-                <InstagramIcon />
-              </Link>
-              <Link href="http://t.me/regennetwork_public" rel="noopener noreferrer" target="_blank">
-                <TelegramIcon />
-              </Link>
-              <Link href="https://facebook.com/weareregennetwork" rel="noopener noreferrer" target="_blank">
-                <FacebookIcon />
-              </Link>
-              <Link href="http://twitter.com/regen_network" rel="noopener noreferrer" target="_blank">
-                <TwitterIcon />
-              </Link>
-              <Link
-                href="https://www.linkedin.com/company/regen-network/"
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                <LinkedInIcon />
-              </Link>
-              <Link href="https://medium.com/regen-network" rel="noopener noreferrer" target="_blank">
-                <MediumIcon />
-              </Link>
-              <Link
-                href="https://www.youtube.com/channel/UCICD2WukTY0MbQdQ9Quew3g"
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                <YoutubeIcon />
-              </Link>
-              <Link href="https://github.com/regen-network/" rel="noopener noreferrer" target="_blank">
-                <GithubIcon />
-              </Link>
-            </div>
+            {/* <Link className={classes.newsletter}>See archive of past newsletters»</Link> */}
           </Grid>
         </Grid>
+        <div>
+          <Title className={clsx(classes.community, classes.title)} variant="h5">
+            join the community
+          </Title>
+          <Grid container wrap="nowrap" className={classes.social}>
+            <Link href="https://www.instagram.com/regennetwork/" rel="noopener noreferrer" target="_blank">
+              <InstagramIcon className={classes.icon} />
+            </Link>
+            <Link href="http://t.me/regennetwork_public" rel="noopener noreferrer" target="_blank">
+              <TelegramIcon className={classes.icon} />
+            </Link>
+            <Link href="https://facebook.com/weareregennetwork" rel="noopener noreferrer" target="_blank">
+              <FacebookIcon className={classes.icon} />
+            </Link>
+            <Link href="http://twitter.com/regen_network" rel="noopener noreferrer" target="_blank">
+              <TwitterIcon className={classes.icon} />
+            </Link>
+            <Link
+              href="https://www.linkedin.com/company/regen-network/"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <LinkedInIcon className={classes.icon} />
+            </Link>
+            <Link href="https://medium.com/regen-network" rel="noopener noreferrer" target="_blank">
+              <MediumIcon className={classes.icon} />
+            </Link>
+            <Link
+              href="https://www.youtube.com/channel/UCICD2WukTY0MbQdQ9Quew3g"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <YoutubeIcon className={classes.icon} />
+            </Link>
+            <Link href="https://github.com/regen-network/" rel="noopener noreferrer" target="_blank">
+              <GithubIcon className={classes.icon} />
+            </Link>
+          </Grid>
+        </div>
         <hr className={classes.separator} />
         <Grid className={classes.bottomGrid} container justify="space-between">
           <Grid item className={classes.bottom}>

@@ -110,11 +110,13 @@ function AppFooter(): JSX.Element {
         },
         {
           title: 'Careers',
-          href: 'https://www.regen.network/careers/',
+          href: 'https://apply.workable.com/regen-network/',
+          target: '_blank',
         },
         {
           title: 'Forum',
-          href: 'https://www.regen.network/forum/',
+          href: 'http://forum.goatech.org/c/regen-network/19',
+          target: '_blank',
         },
         {
           title: 'Press Kit',

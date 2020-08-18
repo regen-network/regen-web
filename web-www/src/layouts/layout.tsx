@@ -139,11 +139,13 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
         },
         {
           title: 'Careers',
-          href: '/careers/',
+          href: 'https://apply.workable.com/regen-network/',
+          target: '_blank',
         },
         {
           title: 'Forum',
-          href: '/forum/',
+          href: 'http://forum.goatech.org/c/regen-network/19',
+          target: '_blank',
         },
         {
           title: 'Press Kit',

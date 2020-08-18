@@ -7,10 +7,10 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useTheme } from '@material-ui/core/styles';
 
 import Header from 'web-components/lib/components/header';
 import CookiesFooter from 'web-components/lib/components/fixed-footer/CookiesFooter';
-import { useTheme } from '@material-ui/core/styles';
 import './layout.css';
 
 interface propTypes {

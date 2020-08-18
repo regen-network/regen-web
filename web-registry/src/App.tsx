@@ -25,6 +25,7 @@ import CreditsIssue from './components/CreditsIssue';
 import CreditsTransfer from './components/CreditsTransfer';
 import BuyerCreate from './components/BuyerCreate';
 import history from './lib/history';
+import CookiesFooter from 'web-components/lib/components/fixed-footer/CookiesFooter';
 
 function ScrollToTop(): null {
   const { pathname } = useLocation();
@@ -176,6 +177,7 @@ const App: React.FC = (): JSX.Element => {
             />
           )}
         </Switch>
+        <CookiesFooter privacyUrl="https://www.regen.network/privacy-policy/" />
         <footer>
           <Footer user={creditsIssuer} />
         </footer>

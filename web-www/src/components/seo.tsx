@@ -81,7 +81,7 @@ function SEO({ description, lang, meta, title, mailerlite = false }: propTypes) 
         },
       ]}
     >
-      {mailerlite && <script src="mailerlite.js" type="text/javascript"></script>}
+      {/* {mailerlite && <script src="mailerlite.js" type="text/javascript"></script>} */}
     </Helmet>
   );
 }

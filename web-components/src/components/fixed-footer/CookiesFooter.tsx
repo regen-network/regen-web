@@ -1,9 +1,10 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { makeStyles, useTheme, Theme } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
+import Cookies, { CookieAttributes } from 'js-cookie';
 
 // TODO use Section component
 // import Section from '../section';
@@ -11,6 +12,34 @@ import OutlinedButton from '../buttons/OutlinedButton';
 
 interface CookiesFooterProps {
   privacyUrl: string;
+}
+
+const cookieName = 'cookies-consent';
+
+function getCookieValue(): string | undefined {
+  let cookieValue = Cookies.get(cookieName);
+
+  if (cookieValue === undefined) {
+    cookieValue = Cookies.get(getLegacyCookieName(cookieName));
+  }
+  return cookieValue;
+}
+
+function getLegacyCookieName(name: string): string {
+  return `${name}-legacy`;
+}
+
+function setCookie(cookieValue: string): void {
+  const secure: boolean = window.location ? window.location.protocol === 'https:' : true;
+
+  const cookieOptions: CookieAttributes = { expires: 365, sameSite: 'None', secure };
+
+  // Fallback for older browsers that can not set SameSite=None
+  // https://web.dev/samesite-cookie-recipes/#handling-incompatible-clients
+  Cookies.set(getLegacyCookieName(cookieName), cookieValue, cookieOptions);
+
+  // set the regular cookie
+  Cookies.set(cookieName, cookieValue, cookieOptions);
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -34,6 +63,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   //   height: '100%',
   // },
   root: {
+    height: '100%',
     [theme.breakpoints.up('md')]: {
       paddingRight: theme.spacing(37.5),
       paddingLeft: theme.spacing(37.5),
@@ -66,6 +96,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   text: {
     color: theme.palette.info.dark,
     lineHeight: '150%',
+    paddingRight: theme.spacing(5),
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.spacing(4),
     },
@@ -73,29 +104,50 @@ const useStyles = makeStyles((theme: Theme) => ({
       fontSize: theme.spacing(3),
     },
   },
+  button: {
+    [theme.breakpoints.up('sm')]: {
+      minWidth: theme.spacing(33.25),
+    },
+    [theme.breakpoints.down('xs')]: {
+      minWidth: theme.spacing(22),
+    },
+  },
 }));
 
-export default function CookiesFooter({ privacyUrl }: CookiesFooterProps): JSX.Element {
+export default function CookiesFooter({ privacyUrl }: CookiesFooterProps): JSX.Element | null {
   const classes = useStyles({});
   const theme = useTheme();
+  const [visible, setVisible] = useState(false);
 
-  const accept = useCallback(() => {}, []);
+  useEffect(() => {
+    if (getCookieValue() === undefined) {
+      setVisible(true);
+    }
+  }, [setVisible]);
 
-  return (
-    <div className={classes.background}>
-      {/* <Section className={classes.section}> */}
-      <Grid container wrap="nowrap" alignItems="center" justify="space-between" className={classes.root}>
-        <Typography className={classes.text}>
-          We use cookies to provide you with a great user experience. By using this site, you accept our use
-          of{' '}
-          <Link className={classes.link} href={privacyUrl}>
-            cookies policy
-          </Link>
-          .
-        </Typography>
-        <OutlinedButton onClick={accept}>accept</OutlinedButton>
-      </Grid>
-      {/* </Section> */}
-    </div>
-  );
+  const accept = useCallback(() => {
+    setCookie('true');
+    setVisible(false);
+  }, []);
+
+  if (visible) {
+    return (
+      <div className={classes.background}>
+        <Grid container wrap="nowrap" alignItems="center" justify="space-between" className={classes.root}>
+          <Typography className={classes.text}>
+            We use cookies to provide you with a great user experience. By using this site, you accept our use
+            of{' '}
+            <Link className={classes.link} href={privacyUrl}>
+              cookies policy
+            </Link>
+            .
+          </Typography>
+          <OutlinedButton className={classes.button} onClick={accept}>
+            accept
+          </OutlinedButton>
+        </Grid>
+      </div>
+    );
+  }
+  return null;
 }

@@ -1,11 +1,12 @@
 import React from 'react';
 import { makeStyles, Theme, MenuItem, MenuList, Link, useTheme } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
-import RegenIcon from '../icons/RegenIcon';
 import clsx from 'clsx';
+import Box from '@material-ui/core/Box';
+
+import RegenIcon from '../icons/RegenIcon';
 import MenuHover from '../menu-hover';
 import MobileMenu from '../mobile-menu';
-import Box from '@material-ui/core/Box';
 
 // import {
 //   Link,

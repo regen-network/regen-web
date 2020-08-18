@@ -224,7 +224,7 @@ export default function Footer({
               subscribe
             </Title>
             <Typography className={classes.subTitle}>
-              Stay up to date! Subscribe to our monthly newsletter or join the community.
+              Stay up to date! Sign up for our monthly newsletter.
             </Typography>
             <div
               className={clsx('ml-form-embed', classes.mail)}

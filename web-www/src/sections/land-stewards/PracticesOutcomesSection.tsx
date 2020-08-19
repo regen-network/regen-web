@@ -8,7 +8,7 @@ import ImageItems from 'web-components/lib/components/sliders/ImageItems';
 import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';
 import ImpactCard from 'web-components/lib/components/cards/ImpactCard';
 import Description from 'web-components/lib/components/description';
-import Section from '../../components/Section';
+import Section from 'web-components/src/components/section';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {

@@ -38,6 +38,13 @@ interface ContentProps {
 }
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
+  item: {
+    '&.MuiTimelineItem-missingOppositeContent': {
+      '&::before': {
+        content: 'unset',
+      },
+    },
+  },
   content: props => ({
     backgroundColor: theme.palette.primary.main,
     // maxWidth: '75%',
@@ -61,15 +68,14 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
         borderTop: props.even ? 'none' : `1px solid ${theme.palette.info.light}`,
         borderLeft: props.even ? `1px solid ${theme.palette.info.light}` : 'none',
         borderBottom: props.even ? `1px solid ${theme.palette.info.light}` : 'none',
-        top: `calc(50% - ${theme.spacing(2.825)})`,
         // bottom: props.last ? theme.spacing(2) : 'auto',
       },
       [theme.breakpoints.down('xs')]: {
         left: theme.spacing(-2),
         borderLeft: `1px solid ${theme.palette.info.light}`,
         borderBottom: `1px solid ${theme.palette.info.light}`,
-        top: theme.spacing(2),
       },
+      top: `calc(50% - ${theme.spacing(2.825)})`,
       transform: 'rotate(45deg)',
       width: theme.spacing(4),
       height: theme.spacing(4),
@@ -94,6 +100,14 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     boxShadow: theme.shadows[0],
     borderWidth: '4px',
     margin: 0,
+    position: 'absolute',
+    left: 0,
+    top: `calc(50% - ${theme.spacing(2.825)})`,
+  },
+  separator: {
+    position: 'relative',
+    paddingLeft: theme.spacing(2.375),
+    paddingRight: theme.spacing(2.375),
   },
 }));
 
@@ -131,7 +145,7 @@ export default function NewTimeline({ items }: Props): JSX.Element {
               <TimelineOppositeContent>
                 <img src={item.imgSrc} alt={item.title} />
               </TimelineOppositeContent>
-              <TimelineSeparator>
+              <TimelineSeparator className={classes.separator}>
                 <TimelineDot className={classes.dot} />
                 <TimelineConnector className={classes.connector} />
               </TimelineSeparator>
@@ -145,8 +159,8 @@ export default function NewTimeline({ items }: Props): JSX.Element {
       <Box display={{ xs: 'block', sm: 'none' }}>
         <Timeline>
           {items.map((item, index) => (
-            <TimelineItem key={index}>
-              <TimelineSeparator>
+            <TimelineItem key={index} className={classes.item}>
+              <TimelineSeparator className={classes.separator}>
                 <TimelineDot className={classes.dot} />
                 <TimelineConnector className={classes.connector} />
               </TimelineSeparator>

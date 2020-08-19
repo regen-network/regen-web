@@ -84,6 +84,30 @@ const items: Item[] = [
     ],
     imgSrc: 'verified.png',
   },
+  {
+    title: 'Lorem ipsum 1',
+    tags: [
+      {
+        name: 'monitor',
+        color: '#6D9BDB',
+      },
+      {
+        name: 'farmer',
+        color: '#7BC796',
+      },
+    ],
+    imgSrc: 'verified.png',
+  },
+  {
+    title: 'Lorem ipsum 2',
+    tags: [
+      {
+        name: 'monitor',
+        color: '#6D9BDB',
+      },
+    ],
+    imgSrc: 'verified.png',
+  },
 ];
 
 export const newTimeline = (): JSX.Element => <NewTimeline items={items} />;

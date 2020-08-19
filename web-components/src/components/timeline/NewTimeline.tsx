@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
+import { makeStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Timeline from '@material-ui/lab/Timeline';
@@ -9,6 +9,7 @@ import TimelineConnector from '@material-ui/lab/TimelineConnector';
 import TimelineContent from '@material-ui/lab/TimelineContent';
 import TimelineDot from '@material-ui/lab/TimelineDot';
 import TimelineOppositeContent from '@material-ui/lab/TimelineOppositeContent';
+import clsx from 'clsx';
 
 import Title from '../title';
 
@@ -22,7 +23,7 @@ interface Tag {
   color: string;
 }
 
-interface Item {
+export interface Item {
   title: string;
   tags: Tag[];
   imgSrc?: string;
@@ -38,6 +39,9 @@ interface ContentProps {
 }
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
+  timeline: {
+    padding: 0,
+  },
   item: {
     '&.MuiTimelineItem-missingOppositeContent': {
       '&::before': {
@@ -54,7 +58,6 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   },
   content: props => ({
     backgroundColor: theme.palette.primary.main,
-    // maxWidth: '75%',
     position: 'relative',
     border: `1px solid ${theme.palette.info.light}`,
     borderRadius: '10px',
@@ -64,18 +67,21 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingTop: theme.spacing(7.5),
       paddingBottom: theme.spacing(9.5),
+    },
+    [theme.breakpoints.up('md')]: {
       marginLeft: props.even ? theme.spacing(3) : theme.spacing(-3),
     },
     [theme.breakpoints.down('xs')]: {
       paddingTop: theme.spacing(5.75),
       paddingBottom: theme.spacing(8),
+      paddingRight: 0,
     },
     '&:after': {
       content: '""',
       borderRadius: '2px',
       backgroundColor: theme.palette.primary.main,
       position: 'absolute',
-      [theme.breakpoints.up('sm')]: {
+      [theme.breakpoints.up('md')]: {
         right: props.even ? 'auto' : theme.spacing(-2),
         left: props.even ? theme.spacing(-2) : 'auto',
         borderRight: props.even ? 'none' : `1px solid ${theme.palette.info.light}`,
@@ -83,7 +89,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
         borderLeft: props.even ? `1px solid ${theme.palette.info.light}` : 'none',
         borderBottom: props.even ? `1px solid ${theme.palette.info.light}` : 'none',
       },
-      [theme.breakpoints.down('xs')]: {
+      [theme.breakpoints.down('sm')]: {
         left: theme.spacing(-2),
         borderLeft: `1px solid ${theme.palette.info.light}`,
         borderBottom: `1px solid ${theme.palette.info.light}`,
@@ -114,6 +120,14 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   connector: {
     backgroundColor: theme.palette.grey[100],
     width: '4px',
+  },
+  firstConnector: {
+    borderTopRightRadius: '4px',
+    borderTopLeftRadius: '4px',
+  },
+  lastConnector: {
+    borderBottomRightRadius: '4px',
+    borderBottomLeftRadius: '4px',
   },
   dot: {
     backgroundColor: theme.palette.primary.main,
@@ -158,6 +172,11 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       fontSize: theme.spacing(5.25),
     },
   },
+  text: {
+    [theme.breakpoints.down('xs')]: {
+      paddingRight: theme.spacing(5.75),
+    },
+  },
 }));
 
 function Tag({ name, color }: Tag): JSX.Element {
@@ -172,7 +191,7 @@ function Content({ item, index }: ContentProps): JSX.Element {
       <Grid className={classes.number} item>
         {index + 1}
       </Grid>
-      <Grid item>
+      <Grid item className={classes.text}>
         <Title className={classes.title} variant="h3">
           {item.title}
         </Title>
@@ -188,40 +207,57 @@ function Content({ item, index }: ContentProps): JSX.Element {
 
 export default function NewTimeline({ items }: Props): JSX.Element {
   const classes = useStyles({});
-
   return (
     <>
-      <Box display={{ xs: 'none', sm: 'block' }}>
-        <Timeline align="alternate">
-          {items.map((item, index) => (
-            <TimelineItem key={index}>
-              <TimelineOppositeContent className={classes.oppositeContent}>
-                <img src={item.imgSrc} alt={item.title} />
-              </TimelineOppositeContent>
-              <TimelineSeparator className={classes.separator}>
-                <TimelineDot className={classes.dot} />
-                <TimelineConnector className={classes.connector} />
-              </TimelineSeparator>
-              <TimelineContent>
-                <Content item={item} index={index} />
-              </TimelineContent>
-            </TimelineItem>
-          ))}
+      <Box display={{ xs: 'none', md: 'block' }}>
+        <Timeline align="alternate" className={classes.timeline}>
+          {items.map((item, index) => {
+            const connectorClassName = [classes.connector];
+            if (index === 0) {
+              connectorClassName.push(classes.firstConnector);
+            }
+            if (index === items.length - 1) {
+              connectorClassName.push(classes.lastConnector);
+            }
+            return (
+              <TimelineItem key={index}>
+                <TimelineOppositeContent className={classes.oppositeContent}>
+                  <img src={item.imgSrc} alt={item.title} />
+                </TimelineOppositeContent>
+                <TimelineSeparator className={classes.separator}>
+                  <TimelineDot className={classes.dot} />
+                  <TimelineConnector className={clsx(connectorClassName)} />
+                </TimelineSeparator>
+                <TimelineContent>
+                  <Content item={item} index={index} />
+                </TimelineContent>
+              </TimelineItem>
+            );
+          })}
         </Timeline>
       </Box>
-      <Box display={{ xs: 'block', sm: 'none' }}>
-        <Timeline>
-          {items.map((item, index) => (
-            <TimelineItem key={index} className={classes.item}>
-              <TimelineSeparator className={classes.separator}>
-                <TimelineDot className={classes.dot} />
-                <TimelineConnector className={classes.connector} />
-              </TimelineSeparator>
-              <TimelineContent>
-                <Content item={item} index={index} />
-              </TimelineContent>
-            </TimelineItem>
-          ))}
+      <Box display={{ xs: 'block', md: 'none' }}>
+        <Timeline className={classes.timeline}>
+          {items.map((item, index) => {
+            const connectorClassName = [classes.connector];
+            if (index === 0) {
+              connectorClassName.push(classes.firstConnector);
+            }
+            if (index === items.length - 1) {
+              connectorClassName.push(classes.lastConnector);
+            }
+            return (
+              <TimelineItem key={index} className={classes.item}>
+                <TimelineSeparator className={classes.separator}>
+                  <TimelineDot className={classes.dot} />
+                  <TimelineConnector className={clsx(connectorClassName)} />
+                </TimelineSeparator>
+                <TimelineContent>
+                  <Content item={item} index={index} />
+                </TimelineContent>
+              </TimelineItem>
+            );
+          })}
         </Timeline>
       </Box>
     </>

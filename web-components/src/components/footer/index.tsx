@@ -279,7 +279,7 @@ export default function Footer({
             <Link href={termsUrl}>Terms</Link> | <Link href={privacyUrl}>Privacy</Link>
           </Grid>
           <Grid item className={classes.bottom}>
-            © 2020 Regen Network
+            © 2020 Regen Network Development, Inc
           </Grid>
         </Grid>
       </Section>

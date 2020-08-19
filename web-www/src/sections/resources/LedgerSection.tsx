@@ -4,7 +4,7 @@ import { useTheme, Theme, makeStyles } from '@material-ui/core';
 import Title from 'web-components/lib/components/title';
 import ResourceCardsSlider from 'web-components/lib/components/sliders/ResourceCards';
 
-import Section from 'web-components/lib/components/Section';
+import Section from 'web-components/lib/components/section';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {},

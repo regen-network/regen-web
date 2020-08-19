@@ -74,5 +74,47 @@ practicesOutcomesSection:
       - image: ../../static/media/enhance-biodiversity.png
         header: Enhance biodiversity
         description: The diversity of plants and animals is of vital importance to our well-being.
+howItWorksSection:
+  header: How it works
+  items:
+    - title: Register project
+      imgSrc: ../../static/media/Registration.svg
+      tags:
+        - name: farmer
+          color: '#7BC796'
+    - title: Establish baseline
+      imgSrc: ../../static/media/Accountability-timeline.svg
+      tags:
+        - name: monitor
+          color: '#6D9BDB'
+        - name: farmer
+          color: '#7BC796'
+    - title: Implement land management
+      imgSrc: ../../static/media/Farmer.svg
+      tags:
+        - name: farmer
+          color: '#7BC796'
+    - title: Monitor change
+      imgSrc: ../../static/media/Trust-timeline.svg
+      tags:
+        - name: monitor
+          color: '#6D9BDB'
+        - name: farmer
+          color: '#7BC796'
+    - title: Issue credits
+      imgSrc: ../../static/media/Credit-Icon.svg
+      tags:
+        - name: regen registry
+          color: '#E6735C'
+    - title: Sell credits
+      imgSrc: ../../static/media/Credits-Available.svg
+      tags:
+        - name: regen registry
+          color: '#E6735C'
+    - title: Get paid
+      imgSrc: ../../static/media/Money.svg
+      tags:
+        - name: farmer
+          color: '#7BC796'
 moreQuestionsSection:
   header: More questions? Dig into our FAQ.

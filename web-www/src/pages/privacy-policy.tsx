@@ -1,6 +1,7 @@
 import React from 'react';
-import SEO from '../components/seo';
 import { useStaticQuery, graphql } from 'gatsby';
+
+import SEO from '../components/seo';
 import MarkdownSection from '../components/MarkdownSection';
 
 const PrivacyPolicy = (): JSX.Element => {

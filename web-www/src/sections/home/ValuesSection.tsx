@@ -7,7 +7,7 @@ import Img from 'gatsby-image';
 
 import { ImageItemProps } from 'web-components/lib/components/image-item';
 import ImageItems from 'web-components/lib/components/sliders/ImageItems';
-import Section from '../../components/Section';
+import Section from 'web-components/src/components/section';
 
 interface Props {
   className?: string;

@@ -4,7 +4,7 @@ import { useStaticQuery, graphql } from 'gatsby';
 import BackgroundImage from 'gatsby-background-image';
 
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import Section from '../../components/Section';
+import Section from 'web-components/src/components/section';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {

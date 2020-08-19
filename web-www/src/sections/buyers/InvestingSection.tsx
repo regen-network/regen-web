@@ -8,7 +8,7 @@ import clsx from 'clsx';
 import Box from '@material-ui/core/Box';
 
 import Title from 'web-components/lib/components/title';
-import Section from '../../components/Section';
+import Section from 'web-components/src/components/section';
 
 // Component not used anymore
 const useStyles = makeStyles((theme: Theme) => ({

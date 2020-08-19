@@ -11,7 +11,7 @@ import { withKnobs, boolean, text, object, number, array } from '@storybook/addo
 import PurchasedCreditsCard from 'web-components/lib/components/cards/PurchasedCreditsCard';
 import CurrentCreditsIcon from 'web-components/lib/components/icons/CurrentCreditsIcon';
 import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
-import FeaturedCard from 'web-components/lib/components/cards/FeaturedCard';
+import GreenCard from 'web-components/lib/components/cards/GreenCard';
 
 export default {
   title: 'Components|Cards',
@@ -140,8 +140,8 @@ export const glanceCard = (): JSX.Element => (
   />
 );
 
-export const featuredCard = (): JSX.Element => (
-  <FeaturedCard>
-    <p>Featured card content</p>
-  </FeaturedCard>
+export const greenCard = (): JSX.Element => (
+  <GreenCard>
+    <p>Green card content</p>
+  </GreenCard>
 );

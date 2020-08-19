@@ -8,13 +8,50 @@ public_folder: "/media"
 publish_mode: editorial_workflow
 
 collections:
+  - label: "FAQ"
+    name: "faq"
+    editor:
+     preview: false
+    create: true
+    folder: "web-www/content/faq"
+    path: '{{category}}/question{{slug}}'
+    summary: '{{category}} - question {{slug}}'
+    fields:
+      - { label: 'Category', name: 'category', widget: 'string' }
+      - { label: 'Question number', name: 'title', widget: 'string' }
+      - { label: 'Question', name: 'description', widget: 'string' }
+      - { label: 'Answer', name: 'body', widget: 'markdown' }
   - name: 'pages'
-    label: 'Pages'
+    label: 'Other Pages'
     media_folder: '../../static/media'
     public_folder: '../../static/media'
     editor:
       preview: false
     files:
+      - label: "Resources page"
+        name: "resources"
+        file: "web-www/content/resources/index.yaml"
+        fields:
+          - label: "Top Section"
+            name: "topSection"
+            widget: "object"
+            fields:
+              - {label: Header, name: header, widget: string}
+              - {label: Body, name: body, widget: string}
+      - label: "Privacy Policy"
+        name: "privacy-policy"
+        file: "web-www/content/privacy-policy/privacy-policy.md"
+        fields:
+          - label: "Privacy Policy"
+            name: "body"
+            widget: "markdown"
+      - label: "Terms of Service"
+        name: "terms-service"
+        file: "web-www/content/terms-service/terms-service.md"
+        fields:
+          - label: "Terms of Service"
+            name: "body"
+            widget: "markdown"
       - label: "Homepage"
         name: "homepage"
         file: "web-www/content/home/index.yaml"
@@ -23,14 +60,21 @@ collections:
             name: "foldSection"
             widget: "object"
             fields:
-              - {label: Header, name: header, widget: string}
+              - {label: Header, name: tagline, widget: string}
               - {label: Description, name: description, widget: string}
           - label: "Marketplace Section"
             name: "marketplaceSection"
             widget: "object"
             fields:
               - {label: Header, name: header, widget: string}
-              - {label: Body, name: body, widget: text}
+              - label: Body
+                name: body
+                widget: object
+                fields:
+                  - {label: Green, name: green, widget: string}
+                  - {label: Middle, name: middle, widget: string}
+                  - {label: Popover, name: popover, widget: string}
+                  - {label: End, name: end, widget: string}
               - label: "Call To Actions"
                 name: "callToActions"
                 widget: list
@@ -41,6 +85,57 @@ collections:
                   - {label: "Header", name: "header", widget: string}
                   - {label: "Description", name: "description", widget: text}
                   - {label: "Link Text", name: "linkText", widget: string}
+          - label: Reverse climate change Section
+            name: climateSection
+            widget: object
+            fields:
+              - {label: Header, name: header, widget: string}
+              - {label: Description, name: description, widget: string}
+              - {label: "Map Image", name: "image", widget: image}
+              - label: Solution
+                name: solution
+                widget: object
+                fields:
+                  - {label: Header, name: header, widget: string}
+                  - {label: Description, name: description, widget: string}
+              - label: Problem
+                name: problem
+                widget: object
+                fields:
+                  - {label: Header, name: header, widget: string}
+                  - {label: Description, name: description, widget: string}
+          - label: CarbonPlus Section
+            name: carbonPlusSection
+            widget: object
+            fields:
+              - label: Caption
+                name: smallHeader
+                widget: object
+                fields:
+                  - {label: Featured, name: featured, widget: string}
+                  - {label: Credit name, name: creditName, widget: string}
+              - {label: Header, name: header, widget: string}
+              - {label: Description, name: description, widget: string}
+              - {label: Link text, name: linkText, widget: string}
+              - {label: Link URL, name: linkUrl, widget: string}
+          - label: Regen Ledger Section
+            name: ledgerSection
+            widget: object
+            fields:
+              - {label: Description, name: description, widget: string}
+          - label: Why Regen Network Section
+            name: valuesSection
+            widget: object
+            fields:
+              - {label: Header, name: header, widget: string}
+              - label: "Image Items"
+                name: "imageItems"
+                widget: list
+                collapsed: false
+                fields:
+                  - {label: "Image", name: "image", widget: image}
+                  - {label: "Header", name: "header", widget: string}
+                  - {label: "Description", name: "description", widget: text}
       - label: "For Buyers page"
         name: "buyers"
         file: "web-www/content/buyers/index.yaml"
@@ -69,13 +164,130 @@ collections:
                   - {label: "Header", name: header, widget: string}
                   - {label: "Image", name: image, widget: image}
                   - {label: "Description", name: description, widget: text}
-      - label: "Resources page"
-        name: "resources"
-        file: "web-www/content/resources/index.yaml"
+      - label: "For Land Stewards page"
+        name: "land-stewards"
+        file: "web-www/content/land-stewards/index.yaml"
         fields:
           - label: "Top Section"
-          name: "topSection"
-          widget: "object"
-          fields:
-            - {label: Header, name: header, widget: string}
-            - {label: Body, name: body, widget: string}
+            name: "topSection"
+            widget: "object"
+            fields:
+              - {label: Header, name: header, widget: string}
+              - {label: Body, name: body, widget: text}
+          - label: "Image Items Section"
+            name: "imageItemsSection"
+            widget: "object"
+            fields:
+              - {label: Header, name: header, widget: string}
+              - label: "Image Items"
+                name: imageItems
+                widget: list
+                collapsed: false
+                fields:
+                  - {label: "Header", name: header, widget: string}
+                  - {label: "Image", name: image, widget: image}
+                  - {label: "Description", name: description, widget: text}
+          - label: "Join Farmers Section"
+            name: "joinFarmersSection"
+            widget: "object"
+            fields:
+              - {label: Header, name: header, widget: string}
+              - label: "Farmers"
+                name: farmers
+                widget: object
+                fields:
+                  - {label: "Amount", name: amount, widget: string}
+                  - {label: "Label", name: label, widget: string}
+                  - {label: "Image", name: image, widget: image}
+              - label: "Land"
+                name: land
+                widget: object
+                fields:
+                  - {label: "Amount", name: amount, widget: string}
+                  - {label: "Label", name: label, widget: string}
+                  - {label: "Image", name: image, widget: image}
+          - label: "Practices and Outcomes Section"
+            name: "practicesOutcomesSection"
+            widget: "object"
+            fields:
+              - {label: Header, name: header, widget: string}
+              - {label: Note, name: note, widget: string}
+              - label: "Practices"
+                name: practices
+                widget: object
+                fields:
+                  - {label: Header, name: header, widget: string}
+                  - label: "Items"
+                    name: items
+                    widget: list
+                    collapsed: false
+                    fields:
+                      - {label: "Header", name: header, widget: string}
+                      - {label: "Image", name: image, widget: image}
+                      - {label: "Description", name: description, widget: text}
+              - label: "Outcomes"
+                name: outcomes
+                widget: object
+                fields:
+                  - {label: Header, name: header, widget: string}
+                  - label: "Items"
+                    name: items
+                    widget: list
+                    collapsed: false
+                    fields:
+                      - {label: "Header", name: header, widget: string}
+                      - {label: "Image", name: image, widget: image}
+                      - {label: "Description", name: description, widget: text}
+          - label: "More Questions Section"
+            name: "moreQuestionsSection"
+            widget: "object"
+            fields:
+              - {label: Header, name: header, widget: string}
+      - label: "Shared sections"
+        name: "shared"
+        file: "web-www/content/shared/index.yaml"
+        fields:
+          - label: "Newsletter Section"
+            name: "newsletterSection"
+            widget: "object"
+            fields:
+              - {label: Header, name: header, widget: string}
+              - {label: Description, name: description, widget: text}
+          - label: "Featured Section"
+            name: "featuredSection"
+            widget: "object"
+            fields:
+              - {label: Header, name: header, widget: string}
+              - {label: Title, name: title, widget: string}
+              - {label: Link, name: link, widget: string}
+              - {label: Image, name: image, widget: image}
+              - {label: Description, name: description, widget: text}
+          - label: "Blog Section"
+            name: "blogSection"
+            widget: "object"
+            fields:
+              - {label: Header, name: header, widget: string}
+              - label: "Latest Blog Posts"
+                name: posts
+                widget: list
+                collapsed: false
+                fields:
+                  - {label: "Header", name: header, widget: string}
+                  - {label: "Url", name: url, widget: string}
+                  - {label: "Image", name: image, widget: image}
+                  - {label: "Description", name: description, widget: text}
+          - label: "Coming Soon Section"
+            name: "comingSoonSection"
+            widget: "object"
+            fields:
+              - {label: Header, name: header, widget: string}
+              - label: "Projects"
+                name: projects
+                widget: list
+                collapsed: false
+                fields:
+                  - {label: "Name", name: name, widget: string}
+                  - {label: "Location", name: location, widget: string}
+                  - {label: "Area", name: area, widget: number}
+                  - {label: "Area unit (acres or hectares)", name: areaUnit, widget: string}
+                  - {label: "Image", name: image, widget: image}

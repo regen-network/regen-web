@@ -6,10 +6,10 @@ import { useStaticQuery, graphql } from 'gatsby';
 import ReactHtmlParser from 'react-html-parser';
 import Img from 'gatsby-image';
 
-import FeaturedCard from 'web-components/lib/components/cards/FeaturedCard';
+import GreenCard from 'web-components/lib/components/cards/GreenCard';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import Title from 'web-components/lib/components/title';
-import Section from '../../components/Section';
+import Section from 'web-components/src/components/section';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -91,7 +91,7 @@ const ApproachSection = () => {
   return (
     <Section className={classes.root} title={content.header} titleVariant="subtitle1">
       <div className={classes.card}>
-        <FeaturedCard>
+        <GreenCard>
           <Grid className={classes.grid} container wrap="nowrap">
             <Grid item xs={12} className={classes.text}>
               <Title className={classes.title} variant="h3">
@@ -111,7 +111,7 @@ const ApproachSection = () => {
               <Img fluid={content.image.childImageSharp.fluid} />
             </Grid>
           </Grid>
-        </FeaturedCard>
+        </GreenCard>
       </div>
     </Section>
   );

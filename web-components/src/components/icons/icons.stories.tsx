@@ -18,6 +18,16 @@ import EmailIcon from 'web-components/lib/components/icons/EmailIcon';
 import PhoneIcon from 'web-components/lib/components/icons/PhoneIcon';
 import DropdownIcon from 'web-components/lib/components/icons/DropdownIcon';
 import CheckedIcon from 'web-components/lib/components/icons/CheckedIcon';
+import BreadcrumbIcon from 'web-components/lib/components/icons/BreadcrumbIcon';
+import FacebookIcon from 'web-components/lib/components/icons/social/FacebookIcon';
+import InstagramIcon from 'web-components/lib/components/icons/social/InstagramIcon';
+import TelegramIcon from 'web-components/lib/components/icons/social/TelegramIcon';
+import TwitterIcon from 'web-components/lib/components/icons/social/TwitterIcon';
+import LinkedInIcon from 'web-components/lib/components/icons/social/LinkedInIcon';
+import MediumIcon from 'web-components/lib/components/icons/social/MediumIcon';
+import YoutubeIcon from 'web-components/lib/components/icons/social/YoutubeIcon';
+import GithubIcon from 'web-components/lib/components/icons/social/GithubIcon';
+
 import { withKnobs, text } from '@storybook/addon-knobs';
 
 export default {
@@ -31,6 +41,8 @@ export const arrowIcon = (): JSX.Element => (
 );
 
 export const availableCreditsIcon = (): JSX.Element => <AvailableCreditsIcon />;
+
+export const breadcrumbIcon = (): JSX.Element => <BreadcrumbIcon direction={text('direction', 'down')} />;
 
 export const closeIcon = (): JSX.Element => <CloseIcon />;
 
@@ -65,3 +77,19 @@ export const verifiedIcon = (): JSX.Element => <VerifiedIcon color={text('color'
 export const dropdownIcon = (): JSX.Element => <DropdownIcon />;
 
 export const checkedIcon = (): JSX.Element => <CheckedIcon />;
+
+export const facebookIcon = (): JSX.Element => <FacebookIcon />;
+
+export const instagramIcon = (): JSX.Element => <InstagramIcon />;
+
+export const linkedInIcon = (): JSX.Element => <LinkedInIcon />;
+
+export const mediumIcon = (): JSX.Element => <MediumIcon />;
+
+export const telegramIcon = (): JSX.Element => <TelegramIcon />;
+
+export const twitterIcon = (): JSX.Element => <TwitterIcon />;
+
+export const youtubeIcon = (): JSX.Element => <YoutubeIcon />;
+
+export const githubIcon = (): JSX.Element => <GithubIcon />;

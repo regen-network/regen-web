@@ -238,6 +238,25 @@ collections:
                       - {label: "Header", name: header, widget: string}
                       - {label: "Image", name: image, widget: image}
                       - {label: "Description", name: description, widget: text}
+          - label: "How it works Section"
+            name: timelineSection
+            widget: "object"
+            fields:
+              - {label: Header, name: header, widget: string}
+              - label: "Items"
+                name: items
+                widget: list
+                collapsed: false
+                fields:
+                  - {label: "Header", name: title, widget: string}
+                  - {label: "Image", name: image, widget: image}
+                  - label: Tags
+                    name: tags
+                    widget: list
+                    collapsed: false
+                    fields:
+                      - {label: "Name", name: name, widget: string}
+                      - {label: "Background color", name: color, widget: string}
           - label: "More Questions Section"
             name: "moreQuestionsSection"
             widget: "object"

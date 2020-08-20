@@ -11,10 +11,12 @@ const useStyles = makeStyles((theme: Theme) => ({
   section: {
     [theme.breakpoints.up('sm')]: {
       paddingTop: theme.spacing(21.5),
+      paddingBottom: theme.spacing(23.25),
     },
     [theme.breakpoints.down('xs')]: {
       paddingLeft: theme.spacing(3),
       paddingTop: theme.spacing(17),
+      paddingBottom: theme.spacing(25),
     },
   },
   title: {

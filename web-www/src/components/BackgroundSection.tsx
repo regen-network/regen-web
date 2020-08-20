@@ -64,6 +64,11 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       '& h1': {
         lineHeight: '140%',
       },
+      '& div': {
+        [theme.breakpoints.up('sm')]: {
+          maxWidth: theme.spacing(167.5),
+        },
+      },
     },
     [theme.breakpoints.up('md')]: {
       paddingLeft: theme.spacing(37.5),

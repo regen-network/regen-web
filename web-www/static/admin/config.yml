@@ -41,7 +41,7 @@ collections:
           - label: "Registry Section"
             name: "registrySection"
             widget: "list"
-            collapsed: "false"
+            collapsed: false
             fields:
               - {label: Image, name: image, widget: image}
               - {label: Title, name: title, widget: string}
@@ -51,7 +51,7 @@ collections:
           - label: "Ledger Section"
             name: "ledgerSection"
             widget: "list"
-            collapsed: "false"
+            collapsed: false
             fields:
               - {label: Image, name: image, widget: image}
               - {label: Title, name: title, widget: string}

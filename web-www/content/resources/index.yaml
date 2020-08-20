@@ -35,7 +35,7 @@ ledgerSection:
       title: 'Architecture Paper'
       updated: 'June 20, 2019'
       description: 'Discover the key architectural decisions of our system and our approaches to solving the problems of ecological accounting.'
-      buttonText: 'View Architecture Paper'
+      buttonText: 'View Paper'
       link:
     - image: '../../static/media/resources-ledger-economics-image.jpg'
       title: 'Economics'

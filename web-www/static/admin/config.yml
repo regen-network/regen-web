@@ -54,16 +54,24 @@ collections:
                   - {label: Updated, name: updated, widget: string}
                   - {label: Description, name: description, widget: text}
                   - {label: ButtonText, name: buttonText, widget: string}
+                  - {label: Link, name: link, widget: string}
           - label: "Ledger Section"
             name: "ledgerSection"
             widget: "list"
             collapsed: false
             fields:
-              - {label: Image, name: image, widget: image}
-              - {label: Title, name: title, widget: string}
-              - {label: Updated, name: updated, widget: string}
-              - {label: Description, name: description, widget: text}
-              - {label: ButtonText, name: buttonText, widget: string}
+              - {label: Header, name: header, widget: string}
+              - label: "Cards"
+                name: cards
+                widget: list
+                collapsed: false
+                fields:
+                  - {label: Image, name: image, widget: image}
+                  - {label: Title, name: title, widget: string}
+                  - {label: Updated, name: updated, widget: string}
+                  - {label: Description, name: description, widget: text}
+                  - {label: ButtonText, name: buttonText, widget: string}
+                  - {label: Link, name: link, widget: string}
       - label: "Privacy Policy"
         name: "privacy-policy"
         file: "web-www/content/privacy-policy/privacy-policy.md"

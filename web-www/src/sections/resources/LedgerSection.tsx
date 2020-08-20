@@ -56,7 +56,7 @@ const LedgerSection = (): JSX.Element => {
       <Title className={classes.title} variant="h3" align="left">
         {content.header}
       </Title>
-      <ResourceCardsSlider items={content.resourceCards} />
+      <ResourceCardsSlider items={content.cards} />
     </Section>
   );
 };

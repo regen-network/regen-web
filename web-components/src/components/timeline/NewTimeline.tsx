@@ -151,17 +151,16 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   },
   number: {
     color: theme.palette.grey[100],
-    lineHeight: '130%',
     fontWeight: 900,
     fontFamily: theme.typography.h1.fontFamily,
     paddingRight: theme.spacing(5),
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.spacing(22.5),
-      marginTop: theme.spacing(-3.5),
+      marginTop: theme.spacing(10),
     },
     [theme.breakpoints.down('xs')]: {
       fontSize: theme.spacing(15),
-      marginTop: theme.spacing(-3),
+      marginTop: theme.spacing(9),
     },
   },
   title: {

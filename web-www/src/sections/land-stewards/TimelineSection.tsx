@@ -62,7 +62,7 @@ const TimelineSection = (): JSX.Element => {
 
   return (
     <div className={classes.root}>
-      <Section title={content.header} titleClassName={classes.title}>
+      <Section title={content.header} titleClassName={classes.title} titleVariant="subtitle1">
         <div className={classes.timeline}>
           <Timeline items={items} />
         </div>

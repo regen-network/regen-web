@@ -43,6 +43,7 @@ const LedgerSection = (): JSX.Element => {
             updated
             description
             buttonText
+            link
           }
         }
       }

@@ -59,6 +59,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: 'inherit',
     border: '2px solid #4FB573',
     [theme.breakpoints.up('sm')]: {
+      width: 'fit-content',
       marginBottom: theme.spacing(7.5),
       marginTop: theme.spacing(5),
     },
@@ -91,6 +92,7 @@ export default function ResourcesCard({
   updated,
   description,
   buttonText,
+  link,
 }: ResourcesCardProps): JSX.Element {
   const classes = useStyles();
   return (
@@ -109,7 +111,7 @@ export default function ResourcesCard({
         {description && <Typography className={classes.description}>{description}</Typography>}
       </div>
       <div className={classes.buttonWrapper}>
-        <OutlinedButton className={classes.button}>
+        <OutlinedButton target="_blank" href={link} className={classes.button}>
           <EyeIcon className={classes.eyeIcon} />
           {buttonText}
         </OutlinedButton>

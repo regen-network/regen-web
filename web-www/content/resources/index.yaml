@@ -3,7 +3,7 @@ topSection:
   body: 'We strive to be a transparent and open system for creating ecological credits that reward regenerative practices. Learn more about the ins and outs of how the Regen Ledger and Regen Registry function.'
 registrySection:
   header: 'Regen Registry'
-  resourceCards:
+  cards:
     - image: '../../static/media/resources-grasslands-methodology.jpg'
       title: 'Methodology: GHG & Co-Benefits in Grazing Systems Credit Class v1.0'
       updated: 'June 30, 2020'
@@ -24,7 +24,7 @@ registrySection:
       link:
 ledgerSection:
   header: 'Ledger Registry'
-  resourceCards:
+  cards:
     - image: '../../static/media/resources-ledger-whitepaper-image.jpg'
       title: 'Whitepaper'
       updated: 'February 5th, 2020'

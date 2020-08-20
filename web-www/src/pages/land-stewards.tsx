@@ -7,7 +7,9 @@ import ImageItemsSection from '../sections/land-stewards/ImageItemsSection';
 import JoinFarmersSection from '../sections/land-stewards/JoinFarmersSection';
 import PracticesOutcomesSection from '../sections/land-stewards/PracticesOutcomesSection';
 import MoreQuestionsSection from '../sections/land-stewards/MoreQuestionsSection';
+import TimelineSection from '../sections/land-stewards/TimelineSection';
 import FeaturedSection from '../sections/shared/FeaturedSection';
+
 import FixedFooter from 'web-components/lib/components/fixed-footer';
 import Modal from 'web-components/lib/components/modal';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
@@ -38,7 +40,7 @@ const LandStewardsPage = (): JSX.Element => {
       <ImageItemsSection />
       <JoinFarmersSection />
       <PracticesOutcomesSection />
-      {/* TODO: add "How it works" section here */}
+      <TimelineSection />
       <FeaturedSection />
       <MoreQuestionsSection />
       <FixedFooter justify="flex-end">

@@ -40,7 +40,7 @@ const RegistrySection = (): JSX.Element => {
           text: resourcesYaml {
             registrySection {
               header
-              resourceCards {
+              cards {
                 image {
                   extension
                   publicURL

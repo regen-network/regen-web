@@ -34,7 +34,7 @@ const LedgerSection = (): JSX.Element => {
       text: resourcesYaml {
         ledgerSection {
           header
-          resourceCards {
+          cards {
             image {
               extension
               publicURL

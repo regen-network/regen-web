@@ -1,6 +1,7 @@
 import * as React from 'react';
 import TimelineItem from 'web-components/lib/components/timeline/TimelineItem';
 import Timeline, { Event } from 'web-components/lib/components/timeline';
+import NewTimeline, { Item } from 'web-components/lib/components/timeline/NewTimeline';
 import theme from '../../theme/muiTheme';
 import { withKnobs, object, date, boolean, text, number } from '@storybook/addon-knobs';
 
@@ -57,3 +58,56 @@ export const timelineItem = (): JSX.Element => (
     last={boolean('Last element', false)}
   />
 );
+
+const items: Item[] = [
+  {
+    title: 'Register project',
+    tags: [
+      {
+        name: 'farmer',
+        color: '#7BC796',
+      },
+    ],
+    imgSrc: 'verified.png',
+  },
+  {
+    title: 'Establish timeline',
+    tags: [
+      {
+        name: 'monitor',
+        color: '#6D9BDB',
+      },
+      {
+        name: 'farmer',
+        color: '#7BC796',
+      },
+    ],
+    imgSrc: 'verified.png',
+  },
+  {
+    title: 'Lorem ipsum 1',
+    tags: [
+      {
+        name: 'monitor',
+        color: '#6D9BDB',
+      },
+      {
+        name: 'farmer',
+        color: '#7BC796',
+      },
+    ],
+    imgSrc: 'verified.png',
+  },
+  {
+    title: 'Lorem ipsum 2',
+    tags: [
+      {
+        name: 'monitor',
+        color: '#6D9BDB',
+      },
+    ],
+    imgSrc: 'verified.png',
+  },
+];
+
+export const newTimeline = (): JSX.Element => <NewTimeline items={items} />;

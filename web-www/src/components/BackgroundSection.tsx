@@ -63,6 +63,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     [theme.breakpoints.up(theme.breakpoints.values.tablet)]: {
       '& h1': {
         lineHeight: '140%',
+        maxWidth: theme.spacing(220),
       },
       '& div': {
         [theme.breakpoints.up('sm')]: {

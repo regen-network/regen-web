@@ -7,8 +7,8 @@ import BackgroundSection from '../../components/BackgroundSection';
 
 const useStyles = makeStyles((theme: Theme) => ({
   tooltip: {
-    color: '#b0ddc0',
-    borderBottom: '3px dashed #b0ddc0',
+    color: theme.palette.info.contrastText,
+    borderBottom: `3px dashed ${theme.palette.info.contrastText}`,
   },
 }));
 

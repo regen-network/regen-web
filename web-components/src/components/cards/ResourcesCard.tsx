@@ -25,11 +25,15 @@ const useStyles = makeStyles((theme: Theme) => ({
   text: {
     flex: '1 0 auto',
     [theme.breakpoints.down('xs')]: {
-      padding: `${theme.spacing(6)} ${theme.spacing(5)} ${theme.spacing(10)}`,
+      paddingLeft: theme.spacing(5),
+      paddingRight: theme.spacing(5),
+      paddingTop: 'unset',
+      paddingBottom: 'unset',
     },
     [theme.breakpoints.up('sm')]: {
-      padding: theme.spacing(4),
-      paddingBottom: theme.spacing(6),
+      paddingRight: theme.spacing(5.25),
+      paddingLeft: theme.spacing(5.25),
+      paddingBottom: 'unset',
       '& h4': {
         lineHeight: '145%',
         marginBottom: theme.spacing(1.75),
@@ -45,30 +49,44 @@ const useStyles = makeStyles((theme: Theme) => ({
     color: theme.palette.info.main,
     fontSize: theme.spacing(3),
     letterSpacing: theme.spacing(0.25),
-    marginBottom: theme.spacing(2),
   },
   description: {
+    marginTop: theme.spacing(2),
     color: theme.palette.info.dark,
     lineHeight: '150%',
-    marginBottom: theme.spacing(6),
   },
   button: {
     display: 'inherit',
     border: '2px solid #4FB573',
+    '& .MuiButton-label': {
+      textAlign: 'center',
+    },
     [theme.breakpoints.up('sm')]: {
-      marginLeft: theme.spacing(5),
+      width: 'fit-content',
       marginBottom: theme.spacing(7.5),
+      marginTop: theme.spacing(5),
     },
     [theme.breakpoints.down('xs')]: {
       margin: '0 auto',
+      width: '100%',
       marginBottom: theme.spacing(3.5),
+      marginTop: theme.spacing(3.5),
     },
   },
   eyeIcon: {
     height: theme.spacing(3.455),
     marginRight: theme.spacing(1.25),
   },
-  buttonWrapper: {},
+  buttonWrapper: {
+    [theme.breakpoints.down('xs')]: {
+      paddingRight: theme.spacing(4),
+      paddingLeft: theme.spacing(4),
+    },
+    [theme.breakpoints.up('sm')]: {
+      paddingRight: theme.spacing(5),
+      paddingLeft: theme.spacing(5),
+    },
+  },
 }));
 
 export default function ResourcesCard({
@@ -77,6 +95,7 @@ export default function ResourcesCard({
   updated,
   description,
   buttonText,
+  link,
 }: ResourcesCardProps): JSX.Element {
   const classes = useStyles();
   return (
@@ -95,7 +114,7 @@ export default function ResourcesCard({
         {description && <Typography className={classes.description}>{description}</Typography>}
       </div>
       <div className={classes.buttonWrapper}>
-        <OutlinedButton className={classes.button}>
+        <OutlinedButton target="_blank" href={link} className={classes.button}>
           <EyeIcon className={classes.eyeIcon} />
           {buttonText}
         </OutlinedButton>

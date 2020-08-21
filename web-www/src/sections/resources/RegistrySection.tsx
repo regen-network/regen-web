@@ -1,6 +1,6 @@
 import React from 'react';
 import { graphql, StaticQuery } from 'gatsby';
-import { useTheme, Theme, makeStyles } from '@material-ui/core';
+import { Theme, makeStyles } from '@material-ui/core';
 import Title from 'web-components/lib/components/title';
 import ResourceCardsSlider from 'web-components/lib/components/sliders/ResourceCards';
 
@@ -14,6 +14,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   section: {
+    borderBottom: `1px solid ${theme.palette.grey[300]}`,
     [theme.breakpoints.up('sm')]: {
       paddingTop: theme.spacing(21.5),
     },
@@ -40,7 +41,7 @@ const RegistrySection = (): JSX.Element => {
           text: resourcesYaml {
             registrySection {
               header
-              resourceCards {
+              cards {
                 image {
                   extension
                   publicURL
@@ -66,7 +67,7 @@ const RegistrySection = (): JSX.Element => {
               <Title className={classes.title} variant="h3" align="left">
                 {content.header}
               </Title>
-              <ResourceCardsSlider items={content.resourceCards} />
+              <ResourceCardsSlider items={content.cards} />
             </BackgroundSection>
           </>
         );

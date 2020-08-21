@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import React from 'react';
 import clsx from 'clsx';
 import { makeStyles, Theme } from '@material-ui/core';
@@ -97,14 +96,6 @@ const MailSubmit = (): JSX.Element => {
       data-form={process.env.GATSBY_MAILERLITE_DATA_FORM}
     ></div>
   );
-};
-
-MailSubmit.propTypes = {
-  siteTitle: PropTypes.string,
-};
-
-MailSubmit.defaultProps = {
-  siteTitle: ``,
 };
 
 export default MailSubmit;

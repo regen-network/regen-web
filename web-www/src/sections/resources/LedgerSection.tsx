@@ -1,20 +1,21 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import { useTheme, Theme, makeStyles } from '@material-ui/core';
+import { Theme, makeStyles } from '@material-ui/core';
 import Title from 'web-components/lib/components/title';
 import ResourceCardsSlider from 'web-components/lib/components/sliders/ResourceCards';
 
-import Section from '../../components/Section';
+import Section from 'web-components/lib/components/section';
 
 const useStyles = makeStyles((theme: Theme) => ({
-  root: {},
   section: {
     [theme.breakpoints.up('sm')]: {
       paddingTop: theme.spacing(21.5),
+      paddingBottom: theme.spacing(23.25),
     },
     [theme.breakpoints.down('xs')]: {
       paddingLeft: theme.spacing(3),
       paddingTop: theme.spacing(17),
+      paddingBottom: theme.spacing(25),
     },
   },
   title: {
@@ -31,7 +32,7 @@ const LedgerSection = (): JSX.Element => {
       text: resourcesYaml {
         ledgerSection {
           header
-          resourceCards {
+          cards {
             image {
               extension
               publicURL
@@ -40,6 +41,7 @@ const LedgerSection = (): JSX.Element => {
             updated
             description
             buttonText
+            link
           }
         }
       }
@@ -52,7 +54,7 @@ const LedgerSection = (): JSX.Element => {
       <Title className={classes.title} variant="h3" align="left">
         {content.header}
       </Title>
-      <ResourceCardsSlider items={content.resourceCards} />
+      <ResourceCardsSlider items={content.cards} />
     </Section>
   );
 };

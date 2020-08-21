@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, useTheme, Theme } from '@material-ui/core';
+import { makeStyles, Theme } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import GithubIcon from '../icons/social/GithubIcon';
 import TwitterIcon from '../icons/social/TwitterIcon';
@@ -10,11 +10,11 @@ import Title from '../title';
 export interface teamItemProps {
   name: string;
   title: string;
-  desc: string;
+  desc?: string;
   imgUrl: string;
-  linkedUrl: string;
-  githubUrl: string;
-  twitterUrl: string;
+  linkedUrl?: string;
+  githubUrl?: string;
+  twitterUrl?: string;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -60,7 +60,6 @@ export default function TeamItem({
   twitterUrl,
 }: teamItemProps): JSX.Element {
   const classes = useStyles();
-  const theme = useTheme();
   return (
     <div className={classes.root}>
       <img className={classes.img} src={imgUrl} alt={name} />
@@ -70,7 +69,7 @@ export default function TeamItem({
       <Typography className={classes.title}>{title}</Typography>
       <Typography className={classes.desc}>{desc}</Typography>
       <div className={classes.socials}></div>
-      {githubUrl && <GithubIcon color={theme.palette.secondary.main} />}
+      {githubUrl && <GithubIcon />}
       {twitterUrl && <TwitterIcon />}
       {linkedUrl && <LinkedInIcon />}
     </div>

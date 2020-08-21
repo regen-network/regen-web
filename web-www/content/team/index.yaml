@@ -95,11 +95,91 @@ coreSection:
       linkedUrl: https://www.linkedin.com/in/erika-logie-3a15647/
       twitterUrl: https://twitter.com/erikalogie
       githubUrl: https://github.com/erikalogie
-contributors:
-  - name: Jake
-    title: 
-    description: 
-    image: '../../static/media/team/'
-    linkedUrl: 
-    twitterUrl: 
-    githubUrl: 
+contributorSection:
+  title: Contributors
+  contributors:
+    - name: Daniel Swid
+      title: Consultant
+      description: Daniel has contributed to the foundational success of 5 technology startups and has worked in Silicon Valley, Israel, and Asia Pacific. At VMware R&D he founded the prototyping practice and has a gift for scaling and accelerating early stage teams.
+      image: '../../static/media/team/daniel.jpg'
+      linkedUrl: https://www.linkedin.com/in/danielswid
+      twitterUrl: ''
+      githubUrl: ''
+    - name: Sophia Leiker
+      title: Data Scientist and GIS Assistant
+      description: I have an extensive interdisciplinary background to draw from when approaching environmental issues including the technical aspects of environmental engineering, remote sensing and data science, to policy-based solutions such as political ecology and environmental economics.
+      image: '../../static/media/team/sophia.jpg'
+      linkedUrl: https://www.linkedin.com/in/sophia-leiker
+      twitterUrl: ''
+      githubUrl: ''
+    - name: Sam Bennetts
+      title: Data Scient and GIS Assistant
+      description: I am a geographic information scientist and remote sensing specialist passionate about the outdoors in all forms. A graduate from the University of Colorado at Boulder, my work focuses on bridging between the social, environmental and computer sciences to advance our knowledge of human-environment interactions.
+      image: '../../static/media/team/sam.jpg'
+      linkedUrl: https://www.linkedin.com/in/sam-bennetts-a044681a1/
+      twitterUrl: ''
+      githubUrl: ''
+    - name: Jim Pittman
+      title: Consultant
+      description: For over 2 decades, I have helped clients to effectively use collective intelligence, systems thinking, collaborative process, assessment and valuation tools, to guide investment in programs and enterprises with a commitment to sustainability and regeneration at local to global scales.
+      image: '../../static/media/team/jim.jpg'
+      linkedUrl: ''
+      twitterUrl: ''
+      githubUrl: ''
+advisorSection: 
+  title: Advisors
+  advisors:
+    - name: Jae Kwon
+      title: CEO & Founder - Tendermint + All in Bits, Inc
+      image: '../../static/media/team/jae.jpg'
+      linkedUrl: 'https://www.linkedin.com/in/yjkwon/'
+      twitterUrl: ''
+      githubUrl: ''
+    - name: Brian Fox
+      title: Open Source and Technology Architecture
+      image: '../../static/media/team/brian.jpg'
+      linkedUrl: 'https://www.linkedin.com/in/brianjhanfox/'
+      twitterUrl: ''
+      githubUrl: ''
+    - name: Alex Kehaya
+      title: Market Fit and Business Development
+      image: '../../static/media/team/alex.jpg'
+      linkedUrl: 'https://www.linkedin.com/in/afkehaya/'
+      twitterUrl: ''
+      githubUrl: ''
+    - name: Gustav Simonsson
+      title: Blockchain & Security
+      image: '../../static/media/team/gustav.jpg'
+      linkedUrl: ''
+      twitterUrl: ''
+      githubUrl: ''
+    - name: Ben Best
+      title: Environmental Data Scientist
+      image: '../../static/media/team/ben.jpg'
+      linkedUrl: 'https://www.linkedin.com/in/ben-best/'
+      twitterUrl: ''
+      githubUrl: ''
+    - name: Greg Austic
+      title: Open Hardware
+      image: '../../static/media/team/greg.jpg'
+      linkedUrl: 'https://www.linkedin.com/in/greg-austic-45a4a9a/'
+      twitterUrl: ''
+      githubUrl: ''
+    - name: Rick Dudley
+      title: Blockchain Architecture
+      image: '../../static/media/team/rick.jpg'
+      linkedUrl: 'https://www.linkedin.com/in/afdudley/'
+      twitterUrl: ''
+      githubUrl: ''
+    - name: Andrew Nannini
+      title: Investment Adviser and Business Development
+      image: '../../static/media/team/andrew.jpg'
+      linkedUrl: 'https://www.linkedin.com/in/andrew-nannini-19418846/'
+      twitterUrl: ''
+      githubUrl: ''
+    - name: Garette Furo
+      title: Business Development and Blockchain Economics
+      image: '../../static/media/team/garette.jpg'
+      linkedUrl: ''
+      twitterUrl: ''
+      githubUrl: ''

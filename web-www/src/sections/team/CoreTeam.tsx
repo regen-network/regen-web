@@ -3,13 +3,14 @@ import { Theme, makeStyles } from '@material-ui/core';
 import { graphql, useStaticQuery } from 'gatsby';
 import Grid from '@material-ui/core/Grid';
 import TeamItem from 'web-components/lib/components/teamItem';
-
-import Section from '../../components/Section';
+import Section from 'web-components/lib/components/section';
+import Title from 'web-components/lib/components/title';
 
 const useStyles = makeStyles((theme: Theme) => ({
   section: {
     paddingLeft: theme.spacing(27),
     paddingRight: theme.spacing(27),
+    textAlign: 'center',
   },
   item: {
     display: 'flex',
@@ -18,31 +19,41 @@ const useStyles = makeStyles((theme: Theme) => ({
   itemWrapper: {
     display: 'flex',
   },
+  title: {
+    display: 'inline-block',
+    marginBottom: theme.spacing(10.5),
+  },
 }));
 
 const CoreTeamSection = (): JSX.Element => {
   const data = useStaticQuery(graphql`
     query {
       text: teamYaml {
-        coreMembers {
-          name
+        coreSection {
           title
-          description
-          image {
-            extension
-            publicURL
+          coreMembers {
+            name
+            title
+            description
+            image {
+              extension
+              publicURL
+            }
+            linkedUrl
+            twitterUrl
+            githubUrl
           }
-          linkedUrl
-          twitterUrl
-          githubUrl
         }
       }
     }
   `);
   const classes = useStyles();
-  const members = data.text.coreMembers;
+  const members = data.text.coreSection.coreMembers;
   return (
     <Section className={classes.section}>
+      <Title className={classes.title} variant="h2">
+        {data.text.coreSection.title}
+      </Title>
       <Grid className={classes.itemWrapper} container direction="row">
         {members.map((m: any, index: any) => {
           return (

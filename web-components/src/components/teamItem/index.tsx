@@ -1,6 +1,9 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles, useTheme, Theme } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
+import GithubIcon from '../icons/social/GithubIcon';
+import TwitterIcon from '../icons/social/TwitterIcon';
+import LinkedInIcon from '../icons/social/LinkedInIcon';
 
 import Title from '../title';
 
@@ -23,6 +26,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: theme.spacing(38.5),
     height: theme.spacing(37.75),
     marginBottom: theme.spacing(6),
+    boxShadow: `${theme.spacing(2.5)} ${theme.spacing(2.5)} ${theme.palette.info.light}`,
   },
   name: {
     lineHeight: '145%',
@@ -42,8 +46,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontSize: theme.spacing(3.5),
     lineHeight: '150%',
     color: theme.palette.info.dark,
-    marginBottom: theme.spacing(12.5),
+    marginBottom: theme.spacing(10),
   },
+  socials: {},
 }));
 export default function TeamItem({
   name,
@@ -55,6 +60,7 @@ export default function TeamItem({
   twitterUrl,
 }: teamItemProps): JSX.Element {
   const classes = useStyles();
+  const theme = useTheme();
   return (
     <div className={classes.root}>
       <img className={classes.img} src={imgUrl} alt={name} />
@@ -63,6 +69,10 @@ export default function TeamItem({
       </Title>
       <Typography className={classes.title}>{title}</Typography>
       <Typography className={classes.desc}>{desc}</Typography>
+      <div className={classes.socials}></div>
+      {githubUrl && <GithubIcon color={theme.palette.secondary.main} />}
+      {twitterUrl && <TwitterIcon />}
+      {linkedUrl && <LinkedInIcon />}
     </div>
   );
 }

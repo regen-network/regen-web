@@ -3,7 +3,6 @@ import { useTheme } from '@material-ui/core';
 
 export interface Props {
   color: string;
-  hoverColor: string;
   className?: string;
   onMouseEnter: () => void;
   onMouseLeave: () => void;
@@ -28,7 +27,6 @@ function withHoverColor(BaseComponent: ComponentType<Props>) {
       <BaseComponent
         {...props}
         color={color}
-        hoverColor={hoverColor}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       />

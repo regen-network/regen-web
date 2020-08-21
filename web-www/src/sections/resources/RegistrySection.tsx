@@ -1,6 +1,6 @@
 import React from 'react';
 import { graphql, StaticQuery } from 'gatsby';
-import { useTheme, Theme, makeStyles } from '@material-ui/core';
+import { Theme, makeStyles } from '@material-ui/core';
 import Title from 'web-components/lib/components/title';
 import ResourceCardsSlider from 'web-components/lib/components/sliders/ResourceCards';
 
@@ -14,6 +14,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   section: {
+    borderBottom: `1px solid ${theme.palette.grey[300]}`,
     [theme.breakpoints.up('sm')]: {
       paddingTop: theme.spacing(21.5),
     },

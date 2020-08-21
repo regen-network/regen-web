@@ -58,6 +58,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   button: {
     display: 'inherit',
     border: '2px solid #4FB573',
+    '& .MuiButton-label': {
+      textAlign: 'center',
+    },
     [theme.breakpoints.up('sm')]: {
       width: 'fit-content',
       marginBottom: theme.spacing(7.5),

@@ -50,10 +50,12 @@ const CoreTeamSection = (): JSX.Element => {
   const classes = useStyles();
   const members = data.text.coreSection.coreMembers;
   return (
-    <Section className={classes.section}>
-      <Title className={classes.title} variant="h2">
-        {data.text.coreSection.title}
-      </Title>
+    <Section
+      title={data.text.coreSection.title}
+      titleVariant="h2"
+      titleClassName={classes.title}
+      className={classes.section}
+    >
       <Grid className={classes.itemWrapper} container direction="row">
         {members.map((m: any, index: any) => {
           return (

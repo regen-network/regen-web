@@ -50,10 +50,12 @@ const ContributorSection = (): JSX.Element => {
   const classes = useStyles();
   const members = data.text.contributorSection.contributors;
   return (
-    <Section className={classes.section}>
-      <Title className={classes.title} variant="h2">
-        {data.text.contributorSection.title}
-      </Title>
+    <Section
+      title={data.text.contributorSection.title}
+      titleClassName={classes.title}
+      titleVariant="h2"
+      className={classes.section}
+    >
       <Grid className={classes.itemWrapper} container direction="row">
         {members.map((m: any, index: any) => {
           return (

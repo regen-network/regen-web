@@ -16,9 +16,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     textAlign: 'center',
   },
-  itemWrapper: {
-    display: 'flex',
-  },
+  itemWrapper: {},
   title: {
     display: 'inline-block',
     marginBottom: theme.spacing(10.5),
@@ -56,7 +54,7 @@ const CoreTeamSection = (): JSX.Element => {
       titleClassName={classes.title}
       className={classes.section}
     >
-      <Grid className={classes.itemWrapper} container direction="row">
+      <Grid className={classes.itemWrapper} justify="center" container direction="row">
         {members.map((m: any, index: any) => {
           return (
             <Grid className={classes.item} sm={4} item key={index}>

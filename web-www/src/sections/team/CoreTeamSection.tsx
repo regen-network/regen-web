@@ -2,7 +2,7 @@ import React from 'react';
 import { Theme, makeStyles } from '@material-ui/core';
 import { graphql, useStaticQuery } from 'gatsby';
 import Grid from '@material-ui/core/Grid';
-import TeamItem from 'web-components/lib/components/teamItem';
+import TeamItem from 'web-components/lib/components/team-Item';
 import Section from 'web-components/lib/components/section';
 import Title from 'web-components/lib/components/title';
 

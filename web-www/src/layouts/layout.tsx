@@ -55,15 +55,15 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
   const headerNoBorderBottomPages: Array<string> = ['/', '/buyers/', '/land-stewards/'];
 
   const menuItems = [
-    { title: 'Buyers', href: '/buyers' },
-    { title: 'Land Stewards', href: '/land-stewards' },
+    { title: 'Buyers', href: '/buyers/' },
+    { title: 'Land Stewards', href: '/land-stewards/' },
     {
       title: 'Learn More',
       dropdownItems: [
-        { title: 'Case Studies', href: '/case-studies' },
-        { title: 'Resources', href: '/resources' },
-        { title: 'FAQ', href: '/faq' },
-        { title: 'Team', href: '/team' },
+        { title: 'Case Studies', href: '/case-studies/' },
+        { title: 'Resources', href: '/resources/' },
+        { title: 'FAQ', href: '/faq/' },
+        { title: 'Team', href: '/team/' },
       ],
     },
   ];
@@ -164,6 +164,7 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
         absolute={absolute}
         color={desktopColor}
         borderBottom={!headerNoBorderBottomPages.includes(location.pathname)}
+        pathname={location.pathname}
       />
       <div>
         <main>{children}</main>

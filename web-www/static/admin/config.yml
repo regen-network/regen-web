@@ -311,10 +311,10 @@ collections:
             widget: "object"
             fields:
               - {label: Header, name: header, widget: string}
-              - {label: Title, name: title, widget: string}
+              - {label: Title, name: title, widget: markdown}
               - {label: Link, name: link, widget: string}
               - {label: Image, name: image, widget: image}
-              - {label: Description, name: description, widget: text}
+              - {label: Description, name: description, widget: markdown}
           - label: "Blog Section"
             name: "blogSection"
             widget: "object"

@@ -42,7 +42,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   projectTop: {
     backgroundSize: 'cover',
-    borderTop: `1px solid ${theme.palette.grey[100]}`,
     borderBottom: `1px solid ${theme.palette.grey[100]}`,
   },
   projectContent: {

@@ -38,10 +38,6 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
     '/terms-service/': theme.palette.primary.light,
   };
 
-  const headerAbsolute: BoolProps = {
-    '/faq/': false,
-  };
-
   const headerTransparent: BoolProps = {
     '/faq/': false,
   };
@@ -52,7 +48,7 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
   };
 
   // Links in rest of the site must use the trailing '/' in order for these to work appropriately
-  const headerNoBorderBottomPages: Array<string> = ['/', '/buyers/', '/land-stewards/'];
+  const headerNoBorderBottomPages: Array<string> = ['/', '/buyers/', '/land-stewards/', '/resources/'];
 
   const menuItems = [
     { title: 'Buyers', href: '/buyers/' },
@@ -71,8 +67,6 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
     ? headerColors[location.pathname]
     : theme.palette.primary.light;
 
-  const absolute: boolean =
-    headerAbsolute[location.pathname] !== undefined ? headerAbsolute[location.pathname] : true;
   const transparent: boolean =
     headerTransparent[location.pathname] !== undefined ? headerTransparent[location.pathname] : true;
 
@@ -161,7 +155,7 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
       <Header
         menuItems={menuItems}
         transparent={transparent}
-        absolute={absolute}
+        absolute={headerNoBorderBottomPages.includes(location.pathname)}
         color={desktopColor}
         borderBottom={!headerNoBorderBottomPages.includes(location.pathname)}
         pathname={location.pathname}

@@ -23,6 +23,7 @@ import ProjectList from './components/ProjectList';
 import UserCredits from './components/UserCredits';
 import CreditsIssue from './components/CreditsIssue';
 import CreditsTransfer from './components/CreditsTransfer';
+import CreditsRetire from './components/CreditsRetire';
 import BuyerCreate from './components/BuyerCreate';
 import NotFound from './components/NotFound';
 import history from './lib/history';
@@ -300,6 +301,7 @@ const App: React.FC = (): JSX.Element => {
                   <>
                     <Route path={`${path}/credits/issue`} component={CreditsIssue} />
                     <Route path={`${path}/credits/transfer`} component={CreditsTransfer} />
+                    <Route path={`${path}/credits/retire`} component={CreditsRetire} />
                     <Route path={`${path}/buyer/create`} component={BuyerCreate} />
                   </>
                 )}

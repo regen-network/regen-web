@@ -1,0 +1,11 @@
+{
+  allParties {
+    nodes {
+      id
+      type
+      name
+      walletId
+      addressId
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  allCreditVintages {
+    nodes {
+      id
+      createdAt
+      projectByProjectId {
+        name
+        developerId
+        stewardId
+        landOwnerId
+        partyByLandOwnerId {
+          name
+        }
+        partyByStewardId {
+          name
+        }
+        partyByDeveloperId {
+          name
+        }
+      }
+      initialDistribution
+      accountBalancesByCreditVintageId {
+        nodes {
+          id
+          walletId
+          liquidBalance
+        }
+      }
+    }
+  }
+}

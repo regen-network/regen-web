@@ -166,9 +166,8 @@ function AppHeader(): JSX.Element {
   );
 }
 
+// TODO put following components in separate files
 function Home(): JSX.Element {
-  const { user } = useAuth0();
-
   return (
     <div style={{ paddingLeft: '1rem' }}>
       <p>
@@ -177,20 +176,6 @@ function Home(): JSX.Element {
       <p>
         <Link to="/credits/userId">Credits page</Link>
       </p>
-      {isAdmin(user) && (
-        <div>
-          Admin:
-          <p>
-            <Link to="/admin/credits/issue">Issue credits</Link>
-          </p>
-          <p>
-            <Link to="/admin/credits/transfer">Transfer credits</Link>
-          </p>
-          <p>
-            <Link to="/admin/buyer/create">Create Buyer</Link>
-          </p>
-        </div>
-      )}
     </div>
   );
 }
@@ -236,15 +221,30 @@ function PostPurchase(): JSX.Element {
   );
 }
 
-// function Admin(): JSX.Element {
-//   return (
-//     <div style={{ paddingLeft: '1rem' }}>
-//       <p>
-//         <Link to="/admin/credits/issue">Issue Credits</Link>
-//       </p>
-//     </div>
-//   );
-// }
+function Admin(): JSX.Element {
+  const { user } = useAuth0();
+
+  return (
+    <div style={{ padding: '1rem' }}>
+      <div style={{ textAlign: 'right' }}>
+        <NavBar />
+      </div>
+      {isAdmin(user) && (
+        <div>
+          <p>
+            <Link to="/admin/credits/issue">Issue credits</Link>
+          </p>
+          <p>
+            <Link to="/admin/credits/transfer">Transfer credits</Link>
+          </p>
+          <p>
+            <Link to="/admin/buyer/create">Create Buyer</Link>
+          </p>
+        </div>
+      )}
+    </div>
+  );
+}
 
 const App: React.FC = (): JSX.Element => {
   const { user, loading } = useAuth0();
@@ -258,7 +258,6 @@ const App: React.FC = (): JSX.Element => {
       <ScrollToTop />
       <div>
         <AppHeader />
-        {/* <NavBar /> */}
         <Switch>
           <Route exact path="/">
             <Home />
@@ -270,7 +269,7 @@ const App: React.FC = (): JSX.Element => {
             path="/projects"
             render={({ match: { path } }) => (
               <>
-                <Route path={`${path}`} component={Projects} exact />
+                <Route path={path} component={Projects} exact />
                 <Route path={`${path}/:projectId`} component={ProjectContainer} />
               </>
             )}
@@ -291,18 +290,21 @@ const App: React.FC = (): JSX.Element => {
               </>
             )}
           />
-          {isAdmin(user) && (
-            <Route
-              path="/admin"
-              render={({ match: { path } }) => (
-                <>
-                  <Route path={`${path}/credits/issue`} component={CreditsIssue} />
-                  <Route path={`${path}/credits/transfer`} component={CreditsTransfer} />
-                  <Route path={`${path}/buyer/create`} component={BuyerCreate} />
-                </>
-              )}
-            />
-          )}
+          <Route
+            path="/admin"
+            render={({ match: { path } }) => (
+              <>
+                <Route path={path} component={Admin} exact />
+                {isAdmin(user) && (
+                  <>
+                    <Route path={`${path}/credits/issue`} component={CreditsIssue} />
+                    <Route path={`${path}/credits/transfer`} component={CreditsTransfer} />
+                    <Route path={`${path}/buyer/create`} component={BuyerCreate} />
+                  </>
+                )}
+              </>
+            )}
+          />
         </Switch>
         <footer>
           <AppFooter />

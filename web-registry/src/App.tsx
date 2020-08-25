@@ -226,7 +226,7 @@ function Admin(): JSX.Element {
 
   return (
     <div style={{ padding: '1rem' }}>
-      <div style={{ textAlign: 'right' }}>
+      <div style={{ textAlign: 'center' }}>
         <NavBar />
       </div>
       {isAdmin(user) && (

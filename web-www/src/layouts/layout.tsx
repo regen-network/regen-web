@@ -8,7 +8,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Header from 'web-components/lib/components/header';
+import Header, { HeaderMenuItem } from 'web-components/lib/components/header';
 import Footer, { FooterItemProps as FooterItem } from 'web-components/lib/components/footer';
 import { useTheme } from '@material-ui/core/styles';
 import './layout.css';
@@ -54,7 +54,7 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
   // Links in rest of the site must use the trailing '/' in order for these to work appropriately
   const headerNoBorderBottomPages: Array<string> = ['/', '/buyers/', '/land-stewards/'];
 
-  const menuItems = [
+  const menuItems: HeaderMenuItem[] = [
     { title: 'Buyers', href: '/buyers/' },
     { title: 'Land Stewards', href: '/land-stewards/' },
     {

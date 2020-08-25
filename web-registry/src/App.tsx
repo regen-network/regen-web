@@ -24,6 +24,7 @@ import UserCredits from './components/UserCredits';
 import CreditsIssue from './components/CreditsIssue';
 import CreditsTransfer from './components/CreditsTransfer';
 import BuyerCreate from './components/BuyerCreate';
+import NotFound from './components/NotFound';
 import history from './lib/history';
 
 interface BoolProps {
@@ -305,6 +306,7 @@ const App: React.FC = (): JSX.Element => {
               </>
             )}
           />
+          <Route path="*" component={NotFound} />
         </Switch>
         <footer>
           <AppFooter />

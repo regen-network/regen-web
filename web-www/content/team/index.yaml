@@ -9,15 +9,15 @@ coreSection:
       description: Christian has worked in ecological agriculture for 15 years, primarily with farmers in Southeast Asia. As a co-founder of Terra Genesis International, he worked with natural products brands, helping them to invest into creating regenerative supply systems. Christian is passionate about accelerating the adoption of regenerative agriculture. He is a member of the Board of Directors.
       image: '../../static/media/team/christian.jpg'
       linkedUrl: https://www.linkedin.com/in/christian-shearer-b8877312/
-      twitterUrl: '#'
-      githubUrl: '#'
+      twitterUrl: ''
+      githubUrl: ''
     - name: Sara Johnstone
       title: Chief Operations Officer
       description: Sara is strategic operator and executor who has over a decade of experience in tech startups. She runs marketing, operations, community management, strategy and business development. She is thrilled to have recently found her way into regenerative agriculture and committed to expanding her knowledge around regenerative business practices.
       image: '../../static/media/team/saraj.jpg'
       linkedUrl: https://www.linkedin.com/in/sara-johnstone-b3677254/
-      twitterUrl: '#'
-      githubUrl: '#'
+      twitterUrl: ''
+      githubUrl: ''
     - name: Aaron Craelius
       title: Chief Technical Officer
       description: Aaron brings a depth of software development experience, including desktop programming in C++ and C#, back-end and front-end web development, and embedded and FPGA work. As an avid environmentalist, harnessing technology to benefit the planet and its inhabitants has been a long-time dream.
@@ -180,6 +180,6 @@ advisorSection:
     - name: Garette Furo
       title: Business Development and Blockchain Economics
       image: '../../static/media/team/garette.jpg'
-      linkedUrl: ''
+      linkedUrl: https://www.linkedin.com/in/garrettefuro/
       twitterUrl: ''
       githubUrl: ''

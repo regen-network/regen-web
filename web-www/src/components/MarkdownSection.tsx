@@ -33,7 +33,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     maxWidth: theme.spacing(350),
     margin: '0px auto',
     [theme.breakpoints.up('sm')]: {
-      paddingTop: theme.spacing(48.75),
+      paddingTop: theme.spacing(21.25),
     },
     [theme.breakpoints.down('xs')]: {
       fontSize: theme.spacing(9.5),

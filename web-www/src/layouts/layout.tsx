@@ -8,7 +8,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Header from 'web-components/lib/components/header';
+import Header, { HeaderMenuItem } from 'web-components/lib/components/header';
 import Footer, { FooterItemProps as FooterItem } from 'web-components/lib/components/footer';
 import { useTheme } from '@material-ui/core/styles';
 import './layout.css';
@@ -38,10 +38,6 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
     '/terms-service/': theme.palette.primary.light,
   };
 
-  const headerAbsolute: BoolProps = {
-    '/faq/': false,
-  };
-
   const headerTransparent: BoolProps = {
     '/faq/': false,
   };
@@ -52,18 +48,18 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
   };
 
   // Links in rest of the site must use the trailing '/' in order for these to work appropriately
-  const headerNoBorderBottomPages: Array<string> = ['/', '/buyers/', '/land-stewards/'];
+  const headerNoBorderBottomPages: Array<string> = ['/', '/buyers/', '/land-stewards/', '/resources/'];
 
-  const menuItems = [
-    { title: 'Buyers', href: '/buyers' },
-    { title: 'Land Stewards', href: '/land-stewards' },
+  const menuItems: HeaderMenuItem[] = [
+    { title: 'Buyers', href: '/buyers/' },
+    { title: 'Land Stewards', href: '/land-stewards/' },
     {
       title: 'Learn More',
       dropdownItems: [
-        { title: 'Case Studies', href: '/case-studies' },
-        { title: 'Resources', href: '/resources' },
-        { title: 'FAQ', href: '/faq' },
-        { title: 'Team', href: '/team' },
+        { title: 'Case Studies', href: '/case-studies/' },
+        { title: 'Resources', href: '/resources/' },
+        { title: 'FAQ', href: '/faq/' },
+        { title: 'Team', href: '/team/' },
       ],
     },
   ];
@@ -71,8 +67,6 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
     ? headerColors[location.pathname]
     : theme.palette.primary.light;
 
-  const absolute: boolean =
-    headerAbsolute[location.pathname] !== undefined ? headerAbsolute[location.pathname] : true;
   const transparent: boolean =
     headerTransparent[location.pathname] !== undefined ? headerTransparent[location.pathname] : true;
 
@@ -161,9 +155,10 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
       <Header
         menuItems={menuItems}
         transparent={transparent}
-        absolute={absolute}
+        absolute={headerNoBorderBottomPages.includes(location.pathname)}
         color={desktopColor}
         borderBottom={!headerNoBorderBottomPages.includes(location.pathname)}
+        pathname={location.pathname}
       />
       <div>
         <main>{children}</main>

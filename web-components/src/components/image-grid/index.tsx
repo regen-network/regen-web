@@ -27,16 +27,28 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     },
   }),
   text: props => ({
-    [theme.breakpoints.up(theme.breakpoints.values.tablet)]: {
+    [theme.breakpoints.up('md')]: {
       paddingLeft: props.even ? theme.spacing(37.5) : theme.spacing(10),
       paddingRight: props.even ? theme.spacing(10) : theme.spacing(37.5),
+    },
+    [theme.breakpoints.down('sm')]: {
+      paddingLeft: theme.spacing(10),
+      paddingRight: theme.spacing(10),
+    },
+    [theme.breakpoints.up(theme.breakpoints.values.tablet)]: {
       flexGrow: 0,
       flexBasis: '50%',
       maxWidth: '50%',
     },
+    [theme.breakpoints.down('xs')]: {
+      paddingRight: theme.spacing(4),
+      paddingLeft: theme.spacing(4),
+    },
+    [theme.breakpoints.up('xl')]: {
+      paddingLeft: props.even ? theme.spacing(5) : theme.spacing(10),
+      paddingRight: props.even ? theme.spacing(10) : theme.spacing(5),
+    },
     [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
-      paddingRight: theme.spacing(3.75),
-      paddingLeft: theme.spacing(3.75),
       paddingTop: theme.spacing(10),
       paddingBottom: theme.spacing(18.25),
       flexGrow: 0,
@@ -44,7 +56,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       maxWidth: '100%',
     },
   }),
-  title: {
+  title: props => ({
     [theme.breakpoints.up('sm')]: {
       lineHeight: '130%',
       marginBottom: theme.spacing(3),
@@ -54,7 +66,15 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       lineHeight: '145%',
       marginBottom: theme.spacing(3.5),
     },
-  },
+    [theme.breakpoints.between('md', 'xl')]: {
+      maxWidth: theme.spacing(115.5),
+    },
+    [theme.breakpoints.up('xl')]: {
+      maxWidth: theme.spacing(145),
+    },
+    marginLeft: props.even ? 'auto' : 0,
+    marginRight: props.even ? 0 : 'auto',
+  }),
   image: {
     height: '100%',
     width: '100%',
@@ -69,11 +89,19 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       maxWidth: '100%',
     },
   },
-  description: {
+  description: props => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.spacing(5.5),
     },
-  },
+    [theme.breakpoints.between('md', 'xl')]: {
+      maxWidth: theme.spacing(115.5),
+    },
+    [theme.breakpoints.up('xl')]: {
+      maxWidth: theme.spacing(145),
+    },
+    marginLeft: props.even ? 'auto' : 0,
+    marginRight: props.even ? 0 : 'auto',
+  }),
 }));
 
 export default function ImageGrid({ img, title, description, even }: ImageGridProps): JSX.Element {

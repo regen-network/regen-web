@@ -18,10 +18,15 @@ newsletterSection:
   description: sign up for our newsletter
 featuredSection:
   header: 'Featured Credit'
-  title: 'Carbon<i>Plus</i> Credit'
+  title: md//
+    Carbon*Plus* Grasslands
   link: 'https://regen-registry.netlify.app/projects/impactag'
   image: '../../static/media/featured-cow.png'
-  description: 'Shifting to managed grazing can potentially sequester 16.4 - 26 CO2e (Gt) by 2050. Wilmot Cattle Co. has increased soil organic carbon to 4.5% and removed over 30,000 tons of CO2e in two years.<br><br>Co-benefits include ecosystem health, animal welfare and soil health.'
+  description: md//
+    This credit measures carbon sequestration and a suite of co-benefits, including ecosystem health, animal welfare, and soil health.
+
+
+    Our first vintage of this credit is issued to [Wilmot Farm](https://regen-registry.netlify.app/projects/impactag) which has increased soil organic carbon through rotational grazing to 4.5% and removed 30K tons of CO2e in just two years. This vintage is one of the largest issuances to agricultural projects to-date in Australia!
 comingSoonSection:
   header: 'Coming Soon'
   projects:

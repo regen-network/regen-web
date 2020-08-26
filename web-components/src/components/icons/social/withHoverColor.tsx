@@ -9,10 +9,10 @@ export interface Props {
 }
 
 function withHoverColor(BaseComponent: ComponentType<Props>) {
-  return (props: { className?: string }) => {
+  return (props: { hoverColor?: string; color?: string; className?: string }) => {
     const theme = useTheme();
-    const initialColor = theme.palette.grey[50];
-    const hoverColor = theme.palette.secondary.contrastText;
+    const initialColor = props.color || theme.palette.grey[50];
+    const hoverColor = props.hoverColor || props.color || theme.palette.secondary.contrastText;
     const [color, setColor] = useState(initialColor);
 
     const handleMouseEnter = (): void => {

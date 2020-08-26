@@ -16,7 +16,7 @@ import {
   PurchasedCredits,
 } from './mocks';
 import Footer, { FooterItemProps as FooterItem } from 'web-components/lib/components/footer';
-import Header from 'web-components/lib/components/header';
+import Header, { HeaderMenuItem } from 'web-components/lib/components/header';
 import Title from 'web-components/lib/components/title';
 import ProjectDetails from './components/ProjectDetails';
 import ProjectList from './components/ProjectList';
@@ -24,6 +24,7 @@ import UserCredits from './components/UserCredits';
 import CreditsIssue from './components/CreditsIssue';
 import CreditsTransfer from './components/CreditsTransfer';
 import BuyerCreate from './components/BuyerCreate';
+import NotFound from './components/NotFound';
 import history from './lib/history';
 
 interface BoolProps {
@@ -52,23 +53,23 @@ function AppFooter(): JSX.Element {
       items: [
         {
           title: 'Buyers',
-          href: 'https://www.regen.network/buyers/',
+          href: `${process.env.REACT_APP_WEBSITE_URL}/buyers/`,
         },
         {
           title: 'Land Stewards',
-          href: 'https://www.regen.network/land-stewards/',
+          href: `${process.env.REACT_APP_WEBSITE_URL}/land-stewards/`,
         },
         {
           title: 'Developers & Validators',
-          href: 'https://www.regen.network/developers/',
+          href: `${process.env.REACT_APP_WEBSITE_URL}/developers/`,
         },
         {
           title: 'Scientists & Verifiers',
-          href: 'https://www.regen.network/scientists/',
+          href: `${process.env.REACT_APP_WEBSITE_URL}/scientists/`,
         },
         {
           title: 'Invest',
-          href: 'https://www.regen.network/invest/',
+          href: `${process.env.REACT_APP_WEBSITE_URL}/invest/`,
         },
       ],
     },
@@ -77,23 +78,23 @@ function AppFooter(): JSX.Element {
       items: [
         {
           title: 'Case Studies',
-          href: 'https://www.regen.network/case-studies/',
+          href: `${process.env.REACT_APP_WEBSITE_URL}/case-studies/`,
         },
         {
           title: 'Resources',
-          href: 'https://www.regen.network/resources/',
+          href: `${process.env.REACT_APP_WEBSITE_URL}/resources/`,
         },
         {
           title: 'FAQ',
-          href: 'https://www.regen.network/faq/',
+          href: `${process.env.REACT_APP_WEBSITE_URL}/faq/`,
         },
         {
           title: 'Team',
-          href: 'https://www.regen.network/team/',
+          href: `${process.env.REACT_APP_WEBSITE_URL}/team/`,
         },
         {
           title: 'Contact',
-          href: 'https://www.regen.network/contact/',
+          href: `${process.env.REACT_APP_WEBSITE_URL}/contact/`,
         },
       ],
     },
@@ -102,11 +103,11 @@ function AppFooter(): JSX.Element {
       items: [
         {
           title: 'Partners',
-          href: 'https://www.regen.network/partners/',
+          href: `${process.env.REACT_APP_WEBSITE_URL}/partners/`,
         },
         {
           title: 'Media',
-          href: 'https://www.regen.network/media/',
+          href: `${process.env.REACT_APP_WEBSITE_URL}/media/`,
         },
         {
           title: 'Careers',
@@ -120,7 +121,7 @@ function AppFooter(): JSX.Element {
         },
         {
           title: 'Press Kit',
-          href: 'https://www.regen.network/press-kit/',
+          href: `${process.env.REACT_APP_WEBSITE_URL}/press-kit/`,
         },
       ],
     },
@@ -138,9 +139,36 @@ function AppFooter(): JSX.Element {
   );
 }
 
-function Home(): JSX.Element {
-  const { user } = useAuth0();
+function AppHeader(): JSX.Element {
+  const { pathname } = useLocation();
+  const theme = useTheme();
 
+  const menuItems: HeaderMenuItem[] = [
+    { title: 'Buyers', href: `${process.env.REACT_APP_WEBSITE_URL}/buyers/` },
+    { title: 'Land Stewards', href: `${process.env.REACT_APP_WEBSITE_URL}/land-stewards/` },
+    {
+      title: 'Learn More',
+      dropdownItems: [
+        { title: 'Case Studies', href: `${process.env.REACT_APP_WEBSITE_URL}/case-studies/` },
+        { title: 'Resources', href: `${process.env.REACT_APP_WEBSITE_URL}/resources/` },
+        { title: 'FAQ', href: `${process.env.REACT_APP_WEBSITE_URL}/faq/` },
+        { title: 'Team', href: `${process.env.REACT_APP_WEBSITE_URL}/team/` },
+      ],
+    },
+  ];
+  return (
+    <Header
+      menuItems={menuItems}
+      color={theme.palette.primary.light}
+      transparent={false}
+      absolute={false}
+      pathname={pathname}
+    />
+  );
+}
+
+// TODO put following components in separate files
+function Home(): JSX.Element {
   return (
     <div style={{ paddingLeft: '1rem' }}>
       <p>
@@ -149,20 +177,6 @@ function Home(): JSX.Element {
       <p>
         <Link to="/credits/userId">Credits page</Link>
       </p>
-      {isAdmin(user) && (
-        <div>
-          Admin:
-          <p>
-            <Link to="/admin/credits/issue">Issue credits</Link>
-          </p>
-          <p>
-            <Link to="/admin/credits/transfer">Transfer credits</Link>
-          </p>
-          <p>
-            <Link to="/admin/buyer/create">Create Buyer</Link>
-          </p>
-        </div>
-      )}
     </div>
   );
 }
@@ -208,19 +222,33 @@ function PostPurchase(): JSX.Element {
   );
 }
 
-// function Admin(): JSX.Element {
-//   return (
-//     <div style={{ paddingLeft: '1rem' }}>
-//       <p>
-//         <Link to="/admin/credits/issue">Issue Credits</Link>
-//       </p>
-//     </div>
-//   );
-// }
+function Admin(): JSX.Element {
+  const { user } = useAuth0();
+
+  return (
+    <div style={{ padding: '1rem' }}>
+      <div style={{ textAlign: 'center' }}>
+        <NavBar />
+      </div>
+      {isAdmin(user) && (
+        <div>
+          <p>
+            <Link to="/admin/credits/issue">Issue credits</Link>
+          </p>
+          <p>
+            <Link to="/admin/credits/transfer">Transfer credits</Link>
+          </p>
+          <p>
+            <Link to="/admin/buyer/create">Create Buyer</Link>
+          </p>
+        </div>
+      )}
+    </div>
+  );
+}
 
 const App: React.FC = (): JSX.Element => {
   const { user, loading } = useAuth0();
-  const theme = useTheme();
 
   if (loading) {
     return <div>Loading...</div>;
@@ -230,9 +258,7 @@ const App: React.FC = (): JSX.Element => {
     <Router history={history}>
       <ScrollToTop />
       <div>
-        <Header color={theme.palette.primary.light} transparent={false} absolute={false}>
-          <NavBar />
-        </Header>
+        <AppHeader />
         <Switch>
           <Route exact path="/">
             <Home />
@@ -244,7 +270,7 @@ const App: React.FC = (): JSX.Element => {
             path="/projects"
             render={({ match: { path } }) => (
               <>
-                <Route path={`${path}`} component={Projects} exact />
+                <Route path={path} component={Projects} exact />
                 <Route path={`${path}/:projectId`} component={ProjectContainer} />
               </>
             )}
@@ -265,18 +291,22 @@ const App: React.FC = (): JSX.Element => {
               </>
             )}
           />
-          {isAdmin(user) && (
-            <Route
-              path="/admin"
-              render={({ match: { path } }) => (
-                <>
-                  <Route path={`${path}/credits/issue`} component={CreditsIssue} />
-                  <Route path={`${path}/credits/transfer`} component={CreditsTransfer} />
-                  <Route path={`${path}/buyer/create`} component={BuyerCreate} />
-                </>
-              )}
-            />
-          )}
+          <Route
+            path="/admin"
+            render={({ match: { path } }) => (
+              <>
+                <Route path={path} component={Admin} exact />
+                {isAdmin(user) && (
+                  <>
+                    <Route path={`${path}/credits/issue`} component={CreditsIssue} />
+                    <Route path={`${path}/credits/transfer`} component={CreditsTransfer} />
+                    <Route path={`${path}/buyer/create`} component={BuyerCreate} />
+                  </>
+                )}
+              </>
+            )}
+          />
+          <Route path="*" component={NotFound} />
         </Switch>
         <footer>
           <AppFooter />

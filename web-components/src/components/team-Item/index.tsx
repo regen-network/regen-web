@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles, Theme, useTheme } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import GithubIcon from '../icons/social/GithubIcon';
 import TwitterIcon from '../icons/social/TwitterIcon';
@@ -20,7 +20,10 @@ export interface teamItemProps {
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     height: 'inherit',
-    padding: theme.spacing(8),
+    paddingRight: theme.spacing(8),
+    paddingLeft: theme.spacing(8),
+    paddingTop: theme.spacing(7),
+    paddingBottom: theme.spacing(7),
   },
   img: {
     width: theme.spacing(38.5),
@@ -46,7 +49,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontSize: theme.spacing(3.5),
     lineHeight: '150%',
     color: theme.palette.info.dark,
-    marginBottom: theme.spacing(10),
+    marginBottom: theme.spacing(4.5),
   },
   socials: {},
 }));
@@ -60,6 +63,7 @@ export default function TeamItem({
   twitterUrl,
 }: teamItemProps): JSX.Element {
   const classes = useStyles();
+  const theme = useTheme();
   return (
     <div className={classes.root}>
       <img className={classes.img} src={imgUrl} alt={name} />
@@ -69,9 +73,21 @@ export default function TeamItem({
       <Typography className={classes.title}>{title}</Typography>
       <Typography className={classes.desc}>{desc}</Typography>
       <div className={classes.socials}></div>
-      {githubUrl && <GithubIcon />}
-      {twitterUrl && <TwitterIcon />}
-      {linkedUrl && <LinkedInIcon />}
+      {githubUrl && (
+        <a href={githubUrl} target="_blank" rel="noopener noreferrer">
+          <GithubIcon color={theme.palette.secondary.main} />
+        </a>
+      )}
+      {twitterUrl && (
+        <a href={twitterUrl} target="_blank" rel="noopener noreferrer">
+          <TwitterIcon color={theme.palette.secondary.main} />
+        </a>
+      )}
+      {linkedUrl && (
+        <a href={linkedUrl} target="_blank" rel="noopener noreferrer">
+          <LinkedInIcon color={theme.palette.secondary.main} />
+        </a>
+      )}
     </div>
   );
 }

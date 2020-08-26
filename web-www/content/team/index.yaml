@@ -68,7 +68,7 @@ coreSection:
       twitterUrl: 
       githubUrl: 
     - name: Marie Gauthier
-      title: Blockchain Engineer
+      title: Software Engineer
       description: Marie is an ecologically committed full-stack developer with a great interest in permaculture. She has been developing web and mobile applications for more than 5 years. She values transparency, fairness and sustainability through the projects she works on. She truly believes in Regen’s mission to promote regenerative agriculture.
       image: '../../static/media/team/marie.jpg'
       linkedUrl: https://www.linkedin.com/in/mariegauthier/
@@ -113,7 +113,7 @@ contributorSection:
       twitterUrl: ''
       githubUrl: ''
     - name: Sam Bennetts
-      title: Data Scient and GIS Assistant
+      title: Data Scientist and GIS Assistant
       description: I am a geographic information scientist and remote sensing specialist passionate about the outdoors in all forms. A graduate from the University of Colorado at Boulder, my work focuses on bridging between the social, environmental and computer sciences to advance our knowledge of human-environment interactions.
       image: '../../static/media/team/sam.jpg'
       linkedUrl: https://www.linkedin.com/in/sam-bennetts-a044681a1/

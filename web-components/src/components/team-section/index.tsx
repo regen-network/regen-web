@@ -1,12 +1,15 @@
 import React from 'react';
 import { Theme, makeStyles } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
+import clsx from 'clsx';
+
 import TeamItem from '../team-Item';
 import Section from '../section';
 
 export interface TeamSectionProps {
   members: object[];
   title: string;
+  className: string;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -25,10 +28,15 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const TeamSection = ({ members, title }: TeamSectionProps): JSX.Element => {
+const TeamSection = ({ members, title, className }: TeamSectionProps): JSX.Element => {
   const classes = useStyles();
   return (
-    <Section title={title} titleVariant="h2" titleClassName={classes.title} className={classes.section}>
+    <Section
+      title={title}
+      titleVariant="h2"
+      titleClassName={classes.title}
+      className={clsx(className, classes.section)}
+    >
       <Grid className={classes.itemWrapper} justify="center" container direction="row">
         {members.map((m: any, index: any) => {
           return (

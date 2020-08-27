@@ -82,6 +82,9 @@ export default function CreditsRetire(): JSX.Element {
 
   const [vintageId, setVintageId] = useState('');
   const [buyerWalletId, setBuyerWalletId] = useState('');
+  const [buyerName, setBuyerName] = useState('');
+  const [creditName, setCreditName] = useState('');
+  const [buyerAddress, setBuyerAddress] = useState('');
   const [addressId, setAddressId] = useState('');
   const [units, setUnits] = useState(0);
   const [showResult, setShowResult] = useState(false);
@@ -92,6 +95,15 @@ export default function CreditsRetire(): JSX.Element {
     }
     setVintageId(event.target.value as string);
     setUnits(getUnits(vintagesData, buyerWalletId, event.target.value as string));
+    if (vintagesData && vintagesData.allCreditVintages) {
+      const selectedVintage = vintagesData.allCreditVintages.nodes.find(
+        (vintage: any) => vintage.id === event.target.value,
+      );
+      if (selectedVintage) {
+        const selectedCredit = selectedVintage.creditClassByCreditClassId.creditClassVersionsById.nodes[0];
+        setCreditName(selectedCredit.name);
+      }
+    }
   };
 
   const handleBuyerWalletChange = (event: React.ChangeEvent<{ value: unknown }>): void => {
@@ -105,6 +117,8 @@ export default function CreditsRetire(): JSX.Element {
         (party: any) => party.walletId === event.target.value,
       );
       setAddressId(selectedParty.addressId);
+      setBuyerName(selectedParty.name);
+      setBuyerAddress(selectedParty.addressByAddressId.feature.place_name);
     }
   };
 
@@ -209,6 +223,9 @@ export default function CreditsRetire(): JSX.Element {
           <p>
             {units} {pluralize(units, 'credit')} successfully retired.
           </p>
+          <p>Buyer: {buyerName}</p>
+          <p>Location: {buyerAddress}</p>
+          <p>Credit: {creditName}</p>
         </div>
       )}
       {error && (

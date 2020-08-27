@@ -3,6 +3,14 @@
     nodes {
       id
       createdAt
+      creditClassByCreditClassId {
+        creditClassVersionsById(last: 1) {
+          nodes {
+            name
+            createdAt
+          }
+        }
+      }
       projectByProjectId {
         name
         developerId

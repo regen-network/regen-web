@@ -6,6 +6,9 @@
       name
       walletId
       addressId
+      addressByAddressId {
+        feature
+      }
     }
   }
 }

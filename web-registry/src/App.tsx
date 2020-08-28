@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { Router, Switch, Route, Link, useParams, useLocation } from 'react-router-dom';
 import { useTheme } from '@material-ui/core/styles';
 
-import NavBar from './components/NavBar';
 import { useAuth0 } from './react-auth0-spa';
 import isAdmin from './lib/admin';
 
@@ -25,6 +24,7 @@ import CreditsIssue from './components/CreditsIssue';
 import CreditsTransfer from './components/CreditsTransfer';
 import BuyerCreate from './components/BuyerCreate';
 import NotFound from './components/NotFound';
+import Admin from './components/Admin';
 import history from './lib/history';
 
 interface BoolProps {
@@ -218,31 +218,6 @@ function PostPurchase(): JSX.Element {
   return (
     <div style={{ padding: '1rem', display: 'flex', justifyContent: 'center' }}>
       <Title variant="h1">Thank you for your purchase</Title>
-    </div>
-  );
-}
-
-function Admin(): JSX.Element {
-  const { user } = useAuth0();
-
-  return (
-    <div style={{ padding: '1rem' }}>
-      <div style={{ textAlign: 'center' }}>
-        <NavBar />
-      </div>
-      {isAdmin(user) && (
-        <div>
-          <p>
-            <Link to="/admin/credits/issue">Issue credits</Link>
-          </p>
-          <p>
-            <Link to="/admin/credits/transfer">Transfer credits</Link>
-          </p>
-          <p>
-            <Link to="/admin/buyer/create">Create Buyer</Link>
-          </p>
-        </div>
-      )}
     </div>
   );
 }

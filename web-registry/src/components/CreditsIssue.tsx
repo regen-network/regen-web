@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
-import Title from 'web-components/lib/components/title';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
+import { loader } from 'graphql.macro';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
+
+import Title from 'web-components/lib/components/title';
 
 const ISSUE_CREDITS = gql`
   mutation IssueCredits($input: IssueCreditsInput!) {
@@ -22,18 +24,7 @@ const ISSUE_CREDITS = gql`
   }
 `;
 
-const ALL_PROJECTS = gql`
-  {
-    allProjects {
-      edges {
-        node {
-          id
-          name
-        }
-      }
-    }
-  }
-`;
+const ALL_PROJECTS = loader('../graphql/AllProjects.graphql');
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -117,7 +108,7 @@ export default function CreditsIssue(): JSX.Element {
           >
             {projectsData &&
               projectsData.allProjects &&
-              projectsData.allProjects.edges.map(({ node }: any) => (
+              projectsData.allProjects.nodes.map((node: any) => (
                 <MenuItem key={node.id} value={node.id}>
                   {node.name}
                 </MenuItem>

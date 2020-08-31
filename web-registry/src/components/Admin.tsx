@@ -29,6 +29,9 @@ export default function Admin(): JSX.Element {
             <Link to="/admin/credits/transfer">Transfer credits</Link>
           </p>
           <p>
+            <Link to="/admin/credits/retire">Retire credits</Link>
+          </p>
+          <p>
             <Link to="/admin/buyer/create">Create Buyer</Link>
           </p>
           {data && data.allProjects && data.allProjects.nodes && data.allProjects.nodes.length && (

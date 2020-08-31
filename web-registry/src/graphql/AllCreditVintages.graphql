@@ -1,0 +1,39 @@
+{
+  allCreditVintages {
+    nodes {
+      id
+      createdAt
+      creditClassByCreditClassId {
+        creditClassVersionsById(last: 1) {
+          nodes {
+            name
+            createdAt
+          }
+        }
+      }
+      projectByProjectId {
+        name
+        developerId
+        stewardId
+        landOwnerId
+        partyByLandOwnerId {
+          name
+        }
+        partyByStewardId {
+          name
+        }
+        partyByDeveloperId {
+          name
+        }
+      }
+      initialDistribution
+      accountBalancesByCreditVintageId {
+        nodes {
+          id
+          walletId
+          liquidBalance
+        }
+      }
+    }
+  }
+}

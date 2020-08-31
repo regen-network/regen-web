@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
-import Title from 'web-components/lib/components/title';
-import { pluralize } from 'web-components/lib/components/credits/pluralize';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
 import TextField from '@material-ui/core/TextField';
@@ -16,6 +14,10 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import { loader } from 'graphql.macro';
+
+import Title from 'web-components/lib/components/title';
+import { pluralize } from 'web-components/lib/components/credits/pluralize';
 
 const TRANSFER_CREDITS = gql`
   mutation TransferCredits($input: TransferCreditsInput!) {
@@ -31,53 +33,8 @@ const AVAILABLE_CREDITS = gql`
   }
 `;
 
-const ALL_CREDIT_VINTAGES = gql`
-  {
-    allCreditVintages {
-      nodes {
-        id
-        createdAt
-        projectByProjectId {
-          name
-          developerId
-          stewardId
-          landOwnerId
-          partyByLandOwnerId {
-            name
-          }
-          partyByStewardId {
-            name
-          }
-          partyByDeveloperId {
-            name
-          }
-        }
-        initialDistribution
-        accountBalancesByCreditVintageId {
-          nodes {
-            id
-            walletId
-            liquidBalance
-          }
-        }
-      }
-    }
-  }
-`;
-
-const ALL_PARTIES = gql`
-  {
-    allParties {
-      nodes {
-        id
-        type
-        name
-        walletId
-        addressId
-      }
-    }
-  }
-`;
+const ALL_CREDIT_VINTAGES = loader('../graphql/AllCreditVintages.graphql');
+const ALL_PARTIES = loader('../graphql/AllParties.graphql');
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {

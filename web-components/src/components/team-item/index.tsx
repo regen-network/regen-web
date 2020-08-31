@@ -29,8 +29,12 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   img: {
+    position: 'absolute',
     width: theme.spacing(38.5),
     height: theme.spacing(37.75),
+    top: 0,
+    left: 0,
+    zIndex: 1,
   },
   name: {
     lineHeight: '145%',
@@ -64,7 +68,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     height: theme.spacing(37.75),
     top: theme.spacing(2.5),
     left: theme.spacing(2.5),
-    zIndex: -1,
+    zIndex: 0,
   },
 }));
 

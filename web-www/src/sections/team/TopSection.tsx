@@ -36,7 +36,7 @@ const TopSection = (): JSX.Element => {
               }
             }
           }
-          text: resourcesYaml {
+          text: teamYaml {
             topSection {
               header
               body

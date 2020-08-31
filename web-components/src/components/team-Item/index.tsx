@@ -1,17 +1,18 @@
 import React from 'react';
 import { makeStyles, Theme, useTheme } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
+
 import GithubIcon from '../icons/social/GithubIcon';
 import TwitterIcon from '../icons/social/TwitterIcon';
 import LinkedInIcon from '../icons/social/LinkedInIcon';
-
 import Title from '../title';
 
-export interface teamItemProps {
+export interface TeamItemProps {
   name: string;
   title: string;
-  desc?: string;
+  description?: string;
   imgUrl: string;
+  bgUrl: string;
   linkedUrl?: string;
   githubUrl?: string;
   twitterUrl?: string;
@@ -20,16 +21,16 @@ export interface teamItemProps {
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     height: 'inherit',
-    paddingRight: theme.spacing(8),
-    paddingLeft: theme.spacing(8),
     paddingTop: theme.spacing(7),
     paddingBottom: theme.spacing(7),
+    [theme.breakpoints.up('sm')]: {
+      paddingRight: theme.spacing(8),
+      paddingLeft: theme.spacing(8),
+    },
   },
   img: {
     width: theme.spacing(38.5),
     height: theme.spacing(37.75),
-    marginBottom: theme.spacing(6),
-    boxShadow: `${theme.spacing(2.5)} ${theme.spacing(2.5)} ${theme.palette.info.light}`,
   },
   name: {
     lineHeight: '145%',
@@ -45,34 +46,52 @@ const useStyles = makeStyles((theme: Theme) => ({
     color: theme.palette.info.main,
     marginBottom: theme.spacing(2.5),
   },
-  desc: {
+  description: {
     fontSize: theme.spacing(3.5),
     lineHeight: '150%',
     color: theme.palette.info.dark,
     marginBottom: theme.spacing(4.5),
   },
-  socials: {},
+  imgContainer: {
+    position: 'relative',
+    width: theme.spacing(38.5),
+    height: theme.spacing(37.75),
+    margin: `0 auto ${theme.spacing(6)}`,
+  },
+  bg: {
+    position: 'absolute',
+    width: theme.spacing(38.5),
+    height: theme.spacing(37.75),
+    top: theme.spacing(2.5),
+    left: theme.spacing(2.5),
+    zIndex: -1,
+  },
 }));
+
 export default function TeamItem({
   name,
   title,
-  desc,
+  description,
   imgUrl,
+  bgUrl,
   linkedUrl,
   githubUrl,
   twitterUrl,
-}: teamItemProps): JSX.Element {
+}: TeamItemProps): JSX.Element {
   const classes = useStyles();
   const theme = useTheme();
   return (
     <div className={classes.root}>
-      <img className={classes.img} src={imgUrl} alt={name} />
+      <div className={classes.imgContainer}>
+        <img className={classes.bg} src={bgUrl} alt="background" />
+        <img className={classes.img} src={imgUrl} alt={name} />
+      </div>
+
       <Title className={classes.name} variant="h4" align="center">
         {name}
       </Title>
       <Typography className={classes.title}>{title}</Typography>
-      <Typography className={classes.desc}>{desc}</Typography>
-      <div className={classes.socials}></div>
+      <Typography className={classes.description}>{description}</Typography>
       {githubUrl && (
         <a href={githubUrl} target="_blank" rel="noopener noreferrer">
           <GithubIcon color={theme.palette.secondary.main} />

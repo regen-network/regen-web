@@ -3,33 +3,38 @@ import { Theme, makeStyles } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import clsx from 'clsx';
 
-import TeamItem from '../team-Item';
+import TeamItem, { TeamItemProps } from '../team-item';
 import Section from '../section';
 
 export interface TeamSectionProps {
-  members: object[];
+  members: TeamItemProps[];
   title: string;
-  className: string;
+  bgUrl: string;
+  className?: string;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
   section: {
-    paddingLeft: theme.spacing(27),
-    paddingRight: theme.spacing(27),
     textAlign: 'center',
+    [theme.breakpoints.up('sm')]: {
+      paddingBottom: theme.spacing(25),
+    },
+    [theme.breakpoints.down('xs')]: {
+      paddingBottom: theme.spacing(21.5),
+    },
   },
   item: {
     textAlign: 'center',
   },
-  itemWrapper: {},
   title: {
     display: 'inline-block',
     marginBottom: theme.spacing(10.5),
   },
 }));
 
-const TeamSection = ({ members, title, className }: TeamSectionProps): JSX.Element => {
+const TeamSection = ({ members, title, className, bgUrl }: TeamSectionProps): JSX.Element => {
   const classes = useStyles();
+
   return (
     <Section
       title={title}
@@ -37,15 +42,16 @@ const TeamSection = ({ members, title, className }: TeamSectionProps): JSX.Eleme
       titleClassName={classes.title}
       className={clsx(className, classes.section)}
     >
-      <Grid className={classes.itemWrapper} justify="center" container direction="row">
+      <Grid justify="center" container direction="row">
         {members.map((m: any, index: any) => {
           return (
             <Grid className={classes.item} xs={12} sm={6} md={4} item key={index}>
               <TeamItem
                 name={m.name}
                 title={m.title}
-                desc={m.description}
-                imgUrl={m.image.publicURL}
+                description={m.description}
+                imgUrl={m.imgUrl}
+                bgUrl={bgUrl}
                 linkedUrl={m.linkedUrl}
                 twitterUrl={m.twitterUrl}
                 githubUrl={m.githubUrl}

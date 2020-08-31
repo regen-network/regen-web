@@ -4,15 +4,19 @@ import TeamSection from 'web-components/lib/components/team-section';
 import { makeStyles, Theme } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) => ({
-  section: {
+  root: {
     backgroundColor: `${theme.palette.grey[50]}`,
-    border: `1px solid ${theme.palette.info.light}`,
+    borderTop: `1px solid ${theme.palette.info.light}`,
+    borderBottom: `1px solid ${theme.palette.info.light}`,
   },
 }));
 
 const ContributorSection = (): JSX.Element => {
   const data = useStaticQuery(graphql`
     query {
+      background: file(relativePath: { eq: "team-bg.png" }) {
+        publicURL
+      }
       text: teamYaml {
         contributorSection {
           title
@@ -35,7 +39,15 @@ const ContributorSection = (): JSX.Element => {
   const classes = useStyles();
   const members = data.text.contributorSection.contributors;
   const title = data.text.contributorSection.title;
-  return <TeamSection className={classes.section} members={members} title={title} />;
+  return (
+    <div className={classes.root}>
+      <TeamSection
+        bgUrl={data.background.publicURL}
+        members={members.map(m => ({ imgUrl: m.image.publicURL, ...m }))}
+        title={title}
+      />
+    </div>
+  );
 };
 
 export default ContributorSection;

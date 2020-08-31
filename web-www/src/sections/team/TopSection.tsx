@@ -8,6 +8,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   section: {
     [theme.breakpoints.down('xs')]: {
       paddingTop: theme.spacing(42.75),
+      paddingBottom: theme.spacing(13),
     },
   },
 }));
@@ -48,8 +49,8 @@ const TopSection = (): JSX.Element => {
           <>
             <BackgroundSection
               linearGradient={gradient}
-              header="Meet our team."
-              body="We are developers, ecologists, scientists, and designers from all over the world, bound by our common purpose of planetary regeneration. Feel free to connect with us."
+              header={data.text.topSection.header}
+              body={data.text.topSection.body}
               className={classes.section}
               imageData={data.background.childImageSharp.fluid}
               imageDataMobile={data.backgroundMobile.childImageSharp.fluid}

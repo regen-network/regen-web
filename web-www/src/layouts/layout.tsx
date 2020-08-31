@@ -36,10 +36,12 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
     '/resources/': theme.palette.primary.main,
     '/privacy-policy/': theme.palette.primary.light,
     '/terms-service/': theme.palette.primary.light,
+    '/team/': theme.palette.primary.light,
   };
 
   const headerTransparent: BoolProps = {
     '/faq/': false,
+    '/team/': true,
   };
 
   const footerPaddingBottom: BoolProps = {
@@ -48,7 +50,13 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
   };
 
   // Links in rest of the site must use the trailing '/' in order for these to work appropriately
-  const headerNoBorderBottomPages: Array<string> = ['/', '/buyers/', '/land-stewards/', '/resources/'];
+  const headerNoBorderBottomPages: Array<string> = [
+    '/',
+    '/buyers/',
+    '/land-stewards/',
+    '/resources/',
+    '/team/',
+  ];
 
   const menuItems: HeaderMenuItem[] = [
     { title: 'Buyers', href: '/buyers/' },

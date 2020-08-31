@@ -8,36 +8,35 @@ const useStyles = makeStyles((theme: Theme) => ({
   section: {
     [theme.breakpoints.down('xs')]: {
       paddingTop: theme.spacing(42.75),
+      paddingBottom: theme.spacing(13),
     },
   },
 }));
 
 const TopSection = (): JSX.Element => {
   const gradient =
-    'linear-gradient(211.73deg, #FAEBD1 12.63%, #7DC9BF 44.03%, #515D89 75.43%), linear-gradient(180deg, #000000 0%, rgba(0, 0, 0, 0) 25.06%)';
+    'linear-gradient(209.83deg, rgba(250, 235, 209, 0.9) 11.05%, rgba(125, 201, 191, 0.9) 43.17%, rgba(81, 93, 137, 0.9) 75.29%)';
   const classes = useStyles();
-  /**
-   * Tried using background position to make the mobile background-image correct, but it's actually a totally different image in the mockup, not just a different position. Wired up BackgroundSection to take an imageDataMobile prop.
-   */
+
   return (
     <StaticQuery
       query={graphql`
         query {
-          background: file(relativePath: { eq: "resources-top-image.jpg" }) {
+          background: file(relativePath: { eq: "gulls.jpg" }) {
             childImageSharp {
               fluid(quality: 90) {
                 ...GatsbyImageSharpFluid_withWebp
               }
             }
           }
-          backgroundMobile: file(relativePath: { eq: "resources-top-image-mobile.jpg" }) {
+          backgroundMobile: file(relativePath: { eq: "gulls.jpg" }) {
             childImageSharp {
               fluid(quality: 90) {
                 ...GatsbyImageSharpFluid_withWebp
               }
             }
           }
-          text: resourcesYaml {
+          text: teamYaml {
             topSection {
               header
               body

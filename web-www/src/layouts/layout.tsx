@@ -39,11 +39,13 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
     '/privacy-policy/': theme.palette.primary.light,
     '/terms-service/': theme.palette.primary.light,
     '/team/': theme.palette.primary.light,
+    '/investors/': theme.palette.primary.light,
   };
 
   const headerTransparent: BoolProps = {
     '/faq/': false,
     '/team/': true,
+    '/investors/': true,
   };
 
   const footerPaddingBottom: BoolProps = {
@@ -58,6 +60,7 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
     '/land-stewards/',
     '/resources/',
     '/team/',
+    '/investors/',
   ];
 
   const menuItems: HeaderMenuItem[] = [

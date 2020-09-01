@@ -9,14 +9,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useTheme } from '@material-ui/core/styles';
 
-<<<<<<< HEAD
-import Header from 'web-components/lib/components/header';
-import CookiesFooter from 'web-components/lib/components/fixed-footer/CookiesFooter';
-=======
 import Header, { HeaderMenuItem } from 'web-components/lib/components/header';
 import Footer, { FooterItemProps as FooterItem } from 'web-components/lib/components/footer';
-import { useTheme } from '@material-ui/core/styles';
->>>>>>> master
+import CookiesFooter from 'web-components/lib/components/fixed-footer/CookiesFooter';
+
 import './layout.css';
 
 interface propTypes {

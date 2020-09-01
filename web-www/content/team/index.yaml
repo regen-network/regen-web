@@ -1,0 +1,185 @@
+topSection:
+  header: Meet our team.
+  body: We are developers, ecologists, scientists, and designers from all over the world, bound by our common purpose of planetary regeneration. Feel free to connect with us.
+coreSection:
+  title: Core Team
+  coreMembers: 
+    - name: Christian Shearer
+      title: Chief Executive Officer
+      description: Christian has worked in ecological agriculture for 15 years, primarily with farmers in Southeast Asia. As a co-founder of Terra Genesis International, he worked with natural products brands, helping them to invest into creating regenerative supply systems. Christian is passionate about accelerating the adoption of regenerative agriculture. He is a member of the Board of Directors.
+      image: '../../static/media/team/christian.jpg'
+      linkedUrl: https://www.linkedin.com/in/christian-shearer-b8877312/
+      twitterUrl: ''
+      githubUrl: ''
+    - name: Sara Johnstone
+      title: Chief Operations Officer
+      description: Sara is strategic operator and executor who has over a decade of experience in tech startups. She runs marketing, operations, community management, strategy and business development. She is thrilled to have recently found her way into regenerative agriculture and committed to expanding her knowledge around regenerative business practices.
+      image: '../../static/media/team/saraj.jpg'
+      linkedUrl: https://www.linkedin.com/in/sara-johnstone-b3677254/
+      twitterUrl: ''
+      githubUrl: ''
+    - name: Aaron Craelius
+      title: Chief Technical Officer
+      description: Aaron brings a depth of software development experience, including desktop programming in C++ and C#, back-end and front-end web development, and embedded and FPGA work. As an avid environmentalist, harnessing technology to benefit the planet and its inhabitants has been a long-time dream.
+      image: '../../static/media/team/aaron.jpg'
+      linkedUrl: https://www.linkedin.com/in/aaroncraelius/
+      twitterUrl: https://twitter.com/aaroncraelius
+      githubUrl: https://github.com/aaronc
+    - name: Gregory Landua
+      title: Chief Regeneration Officer
+      description: Gregory is co-author of Regenerative Enterprise and co-creator of the 8-forms of capital framework. Gregory is a Regenerative Agriculture Practitioner and farmer. As co-founder and CEO of Terra Genesis International, he helped to grow an ecosystem of organizations dedicated to regenerative agriculture. Gregory is a member of the Board of Directors.
+      image: '../../static/media/team/gregory.jpg'
+      linkedUrl: 'https://www.linkedin.com/in/gregory-landua-4953b29/'
+      twitterUrl: 'https://twitter.com/gregory_landua'
+      githubUrl: 
+    - name: Ron Steinherz
+      title: Vice President of Product
+      description: Ron brings deep expertise in Product Management and Operations from 10+ years in Silicon Valley and Israel, working to develop product innovations such as Web Conferencing, Telecommunications, Internet Connectivity and FinTech. He is passionate about leveraging technology for social and environmental impact.
+      image: '../../static/media/team/ron.jpg'
+      linkedUrl: https://www.linkedin.com/in/steinherz/
+      twitterUrl: 
+      githubUrl: 
+    - name: Sarah Baxendell
+      title: Director of Finance
+      description: Sarah specializes in future casting, living systems design, ecological design, product development, go-to-market strategy, and green finance. For the past decade, she has worked at the intersection of start-ups, corporations, and community-based nonprofits to develop impact-centric ecological projects and organizations. She was most recently the Executive Director of Hilltop Urban Farm, the largest urban farming project in the United States.
+      image: '../../static/media/team/sarahb.jpg'
+      linkedUrl: https://www.linkedin.com/in/sarahashleybaxendell/
+      twitterUrl: 
+      githubUrl: 
+    - name: Cory Levinson
+      title: Project Manager - Software
+      description: Cory is a software engineer and technical product manager who gained experience in data infrastructure at SoundCloud before moving into blockchain in 2017. He is an alumni of Strelka Institute in Moscow, and was recently in residence at Recurse Center working on a Rust client for the off-grid solarpunk social network, Secure Scuttlebutt, before joining the Regen team.
+      image: '../../static/media/team/cory.jpg'
+      linkedUrl: 
+      twitterUrl: https://twitter.com/kohwi
+      githubUrl: https://github.com/clevinson
+    - name: Dr Gisel Booman
+      title: Science Lead
+      description: Dr. Booman, PhD Biological Sciences, Landscape Ecology, leads the integration process between the Ecological Protocol development and the current state of remote sensing, including methodology development and use-case change-of-state monitoring. Dr. Booman is experienced with QGis, ArcGIS, remote sensing, ecosystem services, and nonpoint pollution/runoff assessment. Dr. Booman lives with her family in Argentina.
+      image: '../../static/media/team/gisel.jpg'
+      linkedUrl: https://www.linkedin.com/in/gisel-booman-8812536b
+      twitterUrl: 
+      githubUrl: 
+    - name: David Fortson
+      title: Head of Marketing
+      description: David is the co-founder and CEO of LoaCom, a movement and marketing firm working with better world companies. David and the LoaCom team joined the Regen Network team to support marketing, movement-building capacity, events, fund development, and strategy.
+      image: '../../static/media/team/david.jpg'
+      linkedUrl: https://www.linkedin.com/in/david-fortson-19692715
+      twitterUrl: 
+      githubUrl: 
+    - name: Marie Gauthier
+      title: Software Engineer
+      description: Marie is an ecologically committed full-stack developer with a great interest in permaculture. She has been developing web and mobile applications for more than 5 years. She values transparency, fairness and sustainability through the projects she works on. She truly believes in Regen’s mission to promote regenerative agriculture.
+      image: '../../static/media/team/marie.jpg'
+      linkedUrl: https://www.linkedin.com/in/mariegauthier/
+      twitterUrl: https://twitter.com/mariegauthier5
+      githubUrl: https://github.com/blushi
+    - name: Will Szal
+      title: President of the Board
+      description: Massachusetts, Will’s background in gift economics and local food systems helped him to start PVGrows, a network in Western MA funding local food system infrastructure, and develop a license for definancializing physical infrastructure, the Gift License. Will works across Regen supporting human resources, legal, and Regen Foundation. Will is a member of the Board of Directors.
+      image: '../../static/media/team/will.jpg'
+      linkedUrl: https://www.linkedin.com/in/willszal/
+      twitterUrl: https://twitter.com/willszal
+      githubUrl: 
+    - name: Amaury Martiny
+      title: Software Engineer
+      description: Currently working on the Cosmos SDK, Amaury’s MSc degree in Computer Science informs his full-stack work in blockchain and web development. Previously at Parity Technologies, Amaury values decentralization, privacy and open-source, and is very passionate about tackling the climate emergency. In his free time you’ll catch him cycling through the European countryside or reading some history book.
+      image: '../../static/media/team/amaury.jpg'
+      linkedUrl: https://www.linkedin.com/in/amaurymartiny/
+      twitterUrl: https://twitter.com/amaurymartiny
+      githubUrl: https://github.com/amaurymartiny
+    - name: Erika Logie
+      title: UI/UX Designer
+      description: Erika has 13+ years of experience as a UX and UI Designer, and focuses on projects that create positive change for people and planet. Over the last 7 years she has been involved in the decentralized startup scene as a designer for Yellow Seed, a conscious trade platform for cacao, NuMundo, a conscious travel platform, and Producers Market, a marketplace for empowering farmers.
+      image: '../../static/media/team/erika.jpg'
+      linkedUrl: https://www.linkedin.com/in/erika-logie-3a15647/
+      twitterUrl: https://twitter.com/erikalogie
+      githubUrl: https://github.com/erikalogie
+contributorSection:
+  title: Contributors
+  contributors:
+    - name: Daniel Swid
+      title: Consultant
+      description: Daniel has contributed to the foundational success of 5 technology startups and has worked in Silicon Valley, Israel, and Asia Pacific. At VMware R&D he founded the prototyping practice and has a gift for scaling and accelerating early stage teams.
+      image: '../../static/media/team/daniel.jpg'
+      linkedUrl: https://www.linkedin.com/in/danielswid
+      twitterUrl: ''
+      githubUrl: ''
+    - name: Sophia Leiker
+      title: Data Scientist and GIS Assistant
+      description: I have an extensive interdisciplinary background to draw from when approaching environmental issues including the technical aspects of environmental engineering, remote sensing and data science, to policy-based solutions such as political ecology and environmental economics.
+      image: '../../static/media/team/sophia.jpg'
+      linkedUrl: https://www.linkedin.com/in/sophia-leiker
+      twitterUrl: ''
+      githubUrl: ''
+    - name: Sam Bennetts
+      title: Data Scientist and GIS Assistant
+      description: I am a geographic information scientist and remote sensing specialist passionate about the outdoors in all forms. A graduate from the University of Colorado at Boulder, my work focuses on bridging between the social, environmental and computer sciences to advance our knowledge of human-environment interactions.
+      image: '../../static/media/team/sam.jpg'
+      linkedUrl: https://www.linkedin.com/in/sam-bennetts-a044681a1/
+      twitterUrl: ''
+      githubUrl: ''
+    - name: Jim Pittman
+      title: Consultant
+      description: For over 2 decades, I have helped clients to effectively use collective intelligence, systems thinking, collaborative process, assessment and valuation tools, to guide investment in programs and enterprises with a commitment to sustainability and regeneration at local to global scales.
+      image: '../../static/media/team/jim.jpg'
+      linkedUrl: ''
+      twitterUrl: ''
+      githubUrl: ''
+advisorSection: 
+  title: Advisors
+  advisors:
+    - name: Jae Kwon
+      title: CEO & Founder - Tendermint + All in Bits, Inc
+      image: '../../static/media/team/jae.jpg'
+      linkedUrl: 'https://www.linkedin.com/in/yjkwon/'
+      twitterUrl: ''
+      githubUrl: ''
+    - name: Brian Fox
+      title: Open Source and Technology Architecture
+      image: '../../static/media/team/brian.jpg'
+      linkedUrl: 'https://www.linkedin.com/in/brianjhanfox/'
+      twitterUrl: ''
+      githubUrl: ''
+    - name: Alex Kehaya
+      title: Market Fit and Business Development
+      image: '../../static/media/team/alex.jpg'
+      linkedUrl: 'https://www.linkedin.com/in/afkehaya/'
+      twitterUrl: ''
+      githubUrl: ''
+    - name: Gustav Simonsson
+      title: Blockchain & Security
+      image: '../../static/media/team/gustav.jpg'
+      linkedUrl: ''
+      twitterUrl: ''
+      githubUrl: ''
+    - name: Ben Best
+      title: Environmental Data Scientist
+      image: '../../static/media/team/ben.jpg'
+      linkedUrl: 'https://www.linkedin.com/in/ben-best/'
+      twitterUrl: ''
+      githubUrl: ''
+    - name: Greg Austic
+      title: Open Hardware
+      image: '../../static/media/team/greg.jpg'
+      linkedUrl: 'https://www.linkedin.com/in/greg-austic-45a4a9a/'
+      twitterUrl: ''
+      githubUrl: ''
+    - name: Rick Dudley
+      title: Blockchain Architecture
+      image: '../../static/media/team/rick.jpg'
+      linkedUrl: 'https://www.linkedin.com/in/afdudley/'
+      twitterUrl: ''
+      githubUrl: ''
+    - name: Andrew Nannini
+      title: Investment Adviser and Business Development
+      image: '../../static/media/team/andrew.jpg'
+      linkedUrl: 'https://www.linkedin.com/in/andrew-nannini-19418846/'
+      twitterUrl: ''
+      githubUrl: ''
+    - name: Garette Furo
+      title: Business Development and Blockchain Economics
+      image: '../../static/media/team/garette.jpg'
+      linkedUrl: https://www.linkedin.com/in/garrettefuro/
+      twitterUrl: ''
+      githubUrl: ''

@@ -1,19 +1,12 @@
 import React from 'react';
 import { makeStyles, Theme, MenuItem, MenuList, Link, useTheme } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
-import RegenIcon from '../icons/RegenIcon';
 import clsx from 'clsx';
-import MenuHover from '../menu-hover';
-import MobileMenu from '../mobile-menu';
 import Box from '@material-ui/core/Box';
 
-// import {
-//   Link,
-//   useParams,
-//   useRouteMatch
-// } from 'react-router-dom';
-// import SearchIcon from '@material-ui/icons/Search';
-// import MenuIcon from '@material-ui/icons/Menu';
+import RegenIcon from '../icons/RegenIcon';
+import MenuHover from '../menu-hover';
+import MobileMenu from '../mobile-menu';
 
 export interface node {
   [key: number]: React.ReactNode;
@@ -31,6 +24,7 @@ interface HeaderProps {
   color: string;
   menuItems?: HeaderMenuItem[];
   borderBottom?: boolean;
+  pathname?: string;
 }
 
 export interface HeaderMenuItem {
@@ -162,6 +156,11 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       paddingLeft: theme.spacing(1.25),
     },
   },
+  currentMenuItem: {
+    '& > a': {
+      borderBottom: `2px solid ${theme.palette.secondary.main}`,
+    },
+  },
   menu: {
     height: '100%',
     lineHeight: theme.spacing(6),
@@ -175,6 +174,7 @@ export default function Header({
   menuItems,
   borderBottom = true,
   absolute = true,
+  pathname = '/',
 }: HeaderProps): JSX.Element {
   const classes = useStyles({ color, borderBottom });
 
@@ -208,7 +208,14 @@ export default function Header({
             <MenuList className={classes.menuList}>
               {menuItems?.map((item, index) => {
                 return (
-                  <MenuItem key={index} className={classes.menuItem}>
+                  <MenuItem
+                    key={index}
+                    className={
+                      pathname === item.href
+                        ? clsx(classes.menuItem, classes.currentMenuItem)
+                        : classes.menuItem
+                    }
+                  >
                     {item.dropdownItems ? (
                       <MenuHover
                         dropdownColor={

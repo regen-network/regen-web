@@ -37,7 +37,7 @@ const IndexPage = (): JSX.Element => {
 
   return (
     <>
-      <SEO title="Home" mailerlite />
+      <SEO title="Home" />
       <HomeFoldSection />
       <MarketplaceSection />
       <EmailSubmitSection />

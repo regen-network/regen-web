@@ -9,7 +9,7 @@ import Img from 'gatsby-image';
 import GreenCard from 'web-components/lib/components/cards/GreenCard';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import Title from 'web-components/lib/components/title';
-import Section from '../../components/Section';
+import Section from 'web-components/src/components/section';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -22,19 +22,27 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
       paddingTop: theme.spacing(5),
     },
+    '& p': {
+      margin: 0,
+    },
   },
   description: {
     color: theme.palette.info.dark,
     lineHeight: '150%',
     [theme.breakpoints.down('xs')]: {
       fontSize: theme.spacing(3.5),
-      paddingTop: theme.spacing(2.5),
       paddingBottom: theme.spacing(4.5),
     },
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.spacing(4.5),
-      paddingTop: theme.spacing(5),
       paddingBottom: theme.spacing(7),
+    },
+    '& a': {
+      color: theme.palette.secondary.main,
+      fontWeight: 'bold',
+      '&:link, &:visited, &:hover, &:active': {
+        textDecoration: 'none',
+      },
     },
   },
   button: {
@@ -88,6 +96,7 @@ const ApproachSection = () => {
   const classes = useStyles();
 
   const content = data.text.featuredSection;
+
   return (
     <Section className={classes.root} title={content.header} titleVariant="subtitle1">
       <div className={classes.card}>
@@ -97,7 +106,9 @@ const ApproachSection = () => {
               <Title className={classes.title} variant="h3">
                 {ReactHtmlParser(content.title)}
               </Title>
-              <Typography className={classes.description}>{ReactHtmlParser(content.description)}</Typography>
+              <Typography component="div" className={classes.description}>
+                {ReactHtmlParser(content.description)}
+              </Typography>
               <ContainedButton
                 rel="noopener noreferrer"
                 target="_blank"

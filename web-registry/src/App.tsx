@@ -2,30 +2,36 @@ import React, { useEffect } from 'react';
 import { Router, Switch, Route, Link, useParams, useLocation } from 'react-router-dom';
 import { useTheme } from '@material-ui/core/styles';
 
-import NavBar from './components/NavBar';
 import { useAuth0 } from './react-auth0-spa';
 import isAdmin from './lib/admin';
 
 import './App.css';
 import {
   projects,
-  creditsIssuer,
+  // creditsIssuer,
   purchasedCredits,
   projectDefault,
   Project,
   PurchasedCredits,
 } from './mocks';
-import Footer from 'web-components/lib/components/footer';
-import Header from 'web-components/lib/components/header';
+import Footer, { FooterItemProps as FooterItem } from 'web-components/lib/components/footer';
+import Header, { HeaderMenuItem } from 'web-components/lib/components/header';
 import Title from 'web-components/lib/components/title';
 import ProjectDetails from './components/ProjectDetails';
 import ProjectList from './components/ProjectList';
 import UserCredits from './components/UserCredits';
 import CreditsIssue from './components/CreditsIssue';
 import CreditsTransfer from './components/CreditsTransfer';
+import CreditsRetire from './components/CreditsRetire';
 import BuyerCreate from './components/BuyerCreate';
+import NotFound from './components/NotFound';
+import Admin from './components/Admin';
 import history from './lib/history';
 import CookiesFooter from 'web-components/lib/components/fixed-footer/CookiesFooter';
+
+interface BoolProps {
+  [key: string]: boolean;
+}
 
 function ScrollToTop(): null {
   const { pathname } = useLocation();
@@ -37,9 +43,133 @@ function ScrollToTop(): null {
   return null;
 }
 
-function Home(): JSX.Element {
-  const { user } = useAuth0();
+function AppFooter(): JSX.Element {
+  // const { pathname } = useLocation();
+  // const footerPaddingBottom: BoolProps = {
+  //   '/projects/impactag': true,
+  // };
 
+  const footerItems: [FooterItem, FooterItem, FooterItem] = [
+    {
+      title: 'get involved',
+      items: [
+        {
+          title: 'Buyers',
+          href: `${process.env.REACT_APP_WEBSITE_URL}/buyers/`,
+        },
+        {
+          title: 'Land Stewards',
+          href: `${process.env.REACT_APP_WEBSITE_URL}/land-stewards/`,
+        },
+        {
+          title: 'Developers & Validators',
+          href: `${process.env.REACT_APP_WEBSITE_URL}/developers/`,
+        },
+        {
+          title: 'Scientists & Verifiers',
+          href: `${process.env.REACT_APP_WEBSITE_URL}/scientists/`,
+        },
+        {
+          title: 'Invest',
+          href: `${process.env.REACT_APP_WEBSITE_URL}/invest/`,
+        },
+      ],
+    },
+    {
+      title: 'learn more',
+      items: [
+        {
+          title: 'Case Studies',
+          href: `${process.env.REACT_APP_WEBSITE_URL}/case-studies/`,
+        },
+        {
+          title: 'Resources',
+          href: `${process.env.REACT_APP_WEBSITE_URL}/resources/`,
+        },
+        {
+          title: 'FAQ',
+          href: `${process.env.REACT_APP_WEBSITE_URL}/faq/`,
+        },
+        {
+          title: 'Team',
+          href: `${process.env.REACT_APP_WEBSITE_URL}/team/`,
+        },
+        {
+          title: 'Contact',
+          href: `${process.env.REACT_APP_WEBSITE_URL}/contact/`,
+        },
+      ],
+    },
+    {
+      title: 'regen',
+      items: [
+        {
+          title: 'Partners',
+          href: `${process.env.REACT_APP_WEBSITE_URL}/partners/`,
+        },
+        {
+          title: 'Media',
+          href: `${process.env.REACT_APP_WEBSITE_URL}/media/`,
+        },
+        {
+          title: 'Careers',
+          href: 'https://apply.workable.com/regen-network/',
+          target: '_blank',
+        },
+        {
+          title: 'Forum',
+          href: 'http://forum.goatech.org/c/regen-network/19',
+          target: '_blank',
+        },
+        {
+          title: 'Press Kit',
+          href: `${process.env.REACT_APP_WEBSITE_URL}/press-kit/`,
+        },
+      ],
+    },
+  ];
+
+  return (
+    <Footer
+      footerItems={footerItems}
+      apiUri={process.env.REACT_APP_API_URI}
+      privacyUrl="https://www.regen.network/privacy-policy"
+      termsUrl="https://www.regen.network/terms-service"
+      // paddingBottom={footerPaddingBottom[pathname]}
+    />
+  );
+}
+
+function AppHeader(): JSX.Element {
+  const { pathname } = useLocation();
+  const theme = useTheme();
+
+  const menuItems: HeaderMenuItem[] = [
+    { title: 'Buyers', href: `${process.env.REACT_APP_WEBSITE_URL}/buyers/` },
+    { title: 'Land Stewards', href: `${process.env.REACT_APP_WEBSITE_URL}/land-stewards/` },
+    {
+      title: 'Learn More',
+      dropdownItems: [
+        { title: 'Case Studies', href: `${process.env.REACT_APP_WEBSITE_URL}/case-studies/` },
+        { title: 'Resources', href: `${process.env.REACT_APP_WEBSITE_URL}/resources/` },
+        { title: 'FAQ', href: `${process.env.REACT_APP_WEBSITE_URL}/faq/` },
+        { title: 'Team', href: `${process.env.REACT_APP_WEBSITE_URL}/team/` },
+      ],
+    },
+  ];
+  return (
+    <Header
+      menuItems={menuItems}
+      color={theme.palette.primary.light}
+      transparent={false}
+      absolute={false}
+      pathname={pathname}
+    />
+  );
+}
+
+// TODO put following components in separate files
+function Home(): JSX.Element {
   return (
     <div style={{ paddingLeft: '1rem' }}>
       <p>
@@ -48,20 +178,6 @@ function Home(): JSX.Element {
       <p>
         <Link to="/credits/userId">Credits page</Link>
       </p>
-      {isAdmin(user) && (
-        <div>
-          Admin:
-          <p>
-            <Link to="/admin/credits/issue">Issue credits</Link>
-          </p>
-          <p>
-            <Link to="/admin/credits/transfer">Transfer credits</Link>
-          </p>
-          <p>
-            <Link to="/admin/buyer/create">Create Buyer</Link>
-          </p>
-        </div>
-      )}
     </div>
   );
 }
@@ -107,19 +223,8 @@ function PostPurchase(): JSX.Element {
   );
 }
 
-// function Admin(): JSX.Element {
-//   return (
-//     <div style={{ paddingLeft: '1rem' }}>
-//       <p>
-//         <Link to="/admin/credits/issue">Issue Credits</Link>
-//       </p>
-//     </div>
-//   );
-// }
-
 const App: React.FC = (): JSX.Element => {
   const { user, loading } = useAuth0();
-  const theme = useTheme();
 
   if (loading) {
     return <div>Loading...</div>;
@@ -129,9 +234,7 @@ const App: React.FC = (): JSX.Element => {
     <Router history={history}>
       <ScrollToTop />
       <div>
-        <Header color={theme.palette.primary.light} transparent={false} absolute={false}>
-          <NavBar />
-        </Header>
+        <AppHeader />
         <Switch>
           <Route exact path="/">
             <Home />
@@ -143,7 +246,7 @@ const App: React.FC = (): JSX.Element => {
             path="/projects"
             render={({ match: { path } }) => (
               <>
-                <Route path={`${path}`} component={Projects} exact />
+                <Route path={path} component={Projects} exact />
                 <Route path={`${path}/:projectId`} component={ProjectContainer} />
               </>
             )}
@@ -164,22 +267,27 @@ const App: React.FC = (): JSX.Element => {
               </>
             )}
           />
-          {isAdmin(user) && (
-            <Route
-              path="/admin"
-              render={({ match: { path } }) => (
-                <>
-                  <Route path={`${path}/credits/issue`} component={CreditsIssue} />
-                  <Route path={`${path}/credits/transfer`} component={CreditsTransfer} />
-                  <Route path={`${path}/buyer/create`} component={BuyerCreate} />
-                </>
-              )}
-            />
-          )}
+          <Route
+            path="/admin"
+            render={({ match: { path } }) => (
+              <>
+                <Route path={path} component={Admin} exact />
+                {isAdmin(user) && (
+                  <>
+                    <Route path={`${path}/credits/issue`} component={CreditsIssue} />
+                    <Route path={`${path}/credits/transfer`} component={CreditsTransfer} />
+                    <Route path={`${path}/credits/retire`} component={CreditsRetire} />
+                    <Route path={`${path}/buyer/create`} component={BuyerCreate} />
+                  </>
+                )}
+              </>
+            )}
+          />
+          <Route path="*" component={NotFound} />
         </Switch>
         <CookiesFooter privacyUrl="https://www.regen.network/privacy-policy/" />
         <footer>
-          <Footer user={creditsIssuer} />
+          <AppFooter />
         </footer>
       </div>
     </Router>

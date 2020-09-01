@@ -3,7 +3,7 @@ import { makeStyles, Theme, useTheme } from '@material-ui/core';
 import { useStaticQuery, graphql } from 'gatsby';
 import BackgroundImage from 'gatsby-background-image';
 
-import Section from '../../components/Section';
+import Section from 'web-components/src/components/section';
 import ProjectCards from 'web-components/lib/components/sliders/ProjectCards';
 
 const useStyles = makeStyles((theme: Theme) => ({

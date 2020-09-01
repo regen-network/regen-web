@@ -8,19 +8,6 @@ public_folder: "/media"
 publish_mode: editorial_workflow
 
 collections:
-  - label: "FAQ"
-    name: "faq"
-    editor:
-     preview: false
-    create: true
-    folder: "web-www/content/faq"
-    path: '{{category}}/question{{slug}}'
-    summary: '{{category}} - question {{slug}}'
-    fields:
-      - { label: 'Category', name: 'category', widget: 'string' }
-      - { label: 'Question number', name: 'title', widget: 'string' }
-      - { label: 'Question', name: 'description', widget: 'string' }
-      - { label: 'Answer', name: 'body', widget: 'markdown' }
   - name: 'pages'
     label: 'Other Pages'
     media_folder: '../../static/media'
@@ -28,6 +15,64 @@ collections:
     editor:
       preview: false
     files:
+      - label: "Team"
+        name: "team"
+        file: "web-www/content/team/index.yaml"
+        fields:
+          - label: "Top Section"
+            name: "topSection"
+            widget: "object"
+            fields:
+              - {label: Header, name: header, widget: string}
+              - {label: Body, name: body, widget: string}
+          - label: "Core Team"
+            name: "coreSection"
+            widget: "object"
+            fields:
+              - {label: Header, name: title, widget: string}
+              - label: Members
+                name: coreMembers
+                widget: list
+                fields:
+                  - {label: Image, name: image, widget: image}
+                  - {label: Name, name: name, widget: string}
+                  - {label: Title, name: title, widget: string}
+                  - {label: Description, name: description, widget: text}
+                  - {label: LinkedIn URL, name: linkedUrl, widget: string}
+                  - {label: Twitter URL, name: twitterUrl, widget: string}
+                  - {label: Github URL, name: githubUrl, widget: string}
+          - label: "Contributors"
+            name: "contributorSection"
+            widget: "object"
+            fields:
+              - {label: Header, name: title, widget: string}
+              - label: Members
+                name: coreMembers
+                widget: list
+                fields:
+                  - {label: Image, name: image, widget: image}
+                  - {label: Name, name: name, widget: string}
+                  - {label: Title, name: title, widget: string}
+                  - {label: Description, name: description, widget: text}
+                  - {label: LinkedIn URL, name: linkedUrl, widget: string}
+                  - {label: Twitter URL, name: twitterUrl, widget: string}
+                  - {label: Github URL, name: githubUrl, widget: string}
+          - label: "Advisors"
+            name: "advisorSection"
+            widget: "object"
+            fields:
+              - {label: Header, name: title, widget: string}
+              - label: Members
+                name: coreMembers
+                widget: list
+                fields:
+                  - {label: Image, name: image, widget: image}
+                  - {label: Name, name: name, widget: string}
+                  - {label: Title, name: title, widget: string}
+                  - {label: Description, name: description, widget: text}
+                  - {label: LinkedIn URL, name: linkedUrl, widget: string}
+                  - {label: Twitter URL, name: twitterUrl, widget: string}
+                  - {label: Github URL, name: githubUrl, widget: string}
       - label: "Resources page"
         name: "resources"
         file: "web-www/content/resources/index.yaml"
@@ -38,6 +83,40 @@ collections:
             fields:
               - {label: Header, name: header, widget: string}
               - {label: Body, name: body, widget: string}
+          - label: "Registry Section"
+            name: "registrySection"
+            widget: "object"
+            collapsed: false
+            fields:
+              - {label: Header, name: header, widget: string}
+              - label: "Cards"
+                name: cards
+                widget: list
+                collapsed: false
+                fields:
+                  - {label: Image, name: image, widget: image}
+                  - {label: Title, name: title, widget: string}
+                  - {label: Updated, name: updated, widget: string}
+                  - {label: Description, name: description, widget: text}
+                  - {label: ButtonText, name: buttonText, widget: string}
+                  - {label: Link, name: link, widget: string}
+          - label: "Ledger Section"
+            name: "ledgerSection"
+            widget: "list"
+            collapsed: false
+            fields:
+              - {label: Header, name: header, widget: string}
+              - label: "Cards"
+                name: cards
+                widget: list
+                collapsed: false
+                fields:
+                  - {label: Image, name: image, widget: image}
+                  - {label: Title, name: title, widget: string}
+                  - {label: Updated, name: updated, widget: string}
+                  - {label: Description, name: description, widget: text}
+                  - {label: ButtonText, name: buttonText, widget: string}
+                  - {label: Link, name: link, widget: string}
       - label: "Privacy Policy"
         name: "privacy-policy"
         file: "web-www/content/privacy-policy/privacy-policy.md"
@@ -238,6 +317,25 @@ collections:
                       - {label: "Header", name: header, widget: string}
                       - {label: "Image", name: image, widget: image}
                       - {label: "Description", name: description, widget: text}
+          - label: "How it works Section"
+            name: timelineSection
+            widget: "object"
+            fields:
+              - {label: Header, name: header, widget: string}
+              - label: "Items"
+                name: items
+                widget: list
+                collapsed: false
+                fields:
+                  - {label: "Header", name: title, widget: string}
+                  - {label: "Image", name: image, widget: image}
+                  - label: Tags
+                    name: tags
+                    widget: list
+                    collapsed: false
+                    fields:
+                      - {label: "Name", name: name, widget: string}
+                      - {label: "Background color", name: color, widget: string}
           - label: "More Questions Section"
             name: "moreQuestionsSection"
             widget: "object"
@@ -258,10 +356,10 @@ collections:
             widget: "object"
             fields:
               - {label: Header, name: header, widget: string}
-              - {label: Title, name: title, widget: string}
+              - {label: Title, name: title, widget: markdown}
               - {label: Link, name: link, widget: string}
               - {label: Image, name: image, widget: image}
-              - {label: Description, name: description, widget: text}
+              - {label: Description, name: description, widget: markdown}
           - label: "Blog Section"
             name: "blogSection"
             widget: "object"
@@ -291,3 +389,16 @@ collections:
                   - {label: "Area", name: area, widget: number}
                   - {label: "Area unit (acres or hectares)", name: areaUnit, widget: string}
                   - {label: "Image", name: image, widget: image}
+  - label: "FAQ"
+    name: "faq"
+    editor:
+      preview: false
+    create: true
+    folder: "web-www/content/faq"
+    path: '{{category}}/question{{slug}}'
+    summary: '{{category}} - question {{slug}}'
+    fields:
+      - { label: 'Category', name: 'category', widget: 'string' }
+      - { label: 'Question number', name: 'title', widget: 'string' }
+      - { label: 'Question', name: 'description', widget: 'string' }
+      - { label: 'Answer', name: 'body', widget: 'markdown' }

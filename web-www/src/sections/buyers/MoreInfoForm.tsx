@@ -7,7 +7,6 @@ import axios from 'axios';
 import { navigate } from 'gatsby';
 
 import Title from 'web-components/lib/components/title';
-import Description from 'web-components/lib/components/description';
 import TextField from 'web-components/lib/components/inputs/TextField';
 import {
   requiredMessage,

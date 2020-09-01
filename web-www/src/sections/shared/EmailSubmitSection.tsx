@@ -2,8 +2,8 @@ import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 import { graphql, StaticQuery } from 'gatsby';
 import BackgroundImage from 'gatsby-background-image';
-import MailSubmit from '../../components/mailSubmit';
 import Title from 'web-components/lib/components/title';
+import NewsletterForm from 'web-components/lib/components/form/NewsletterForm';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -72,7 +72,7 @@ const EmailSubmitSection = () => {
               <Title variant="h6" className={classes.description}>
                 {content.description}
               </Title>
-              <MailSubmit />
+              <NewsletterForm apiUri={process.env.GATSBY_API_URI} />
             </div>
           </BackgroundImage>
         );

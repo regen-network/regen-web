@@ -109,12 +109,7 @@ const ApproachSection = () => {
               <Typography component="div" className={classes.description}>
                 {ReactHtmlParser(content.description)}
               </Typography>
-              <ContainedButton
-                rel="noopener noreferrer"
-                target="_blank"
-                href={content.link}
-                className={classes.button}
-              >
+              <ContainedButton href={content.link} className={classes.button}>
                 buy
               </ContainedButton>
             </Grid>

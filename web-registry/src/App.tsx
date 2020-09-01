@@ -27,6 +27,7 @@ import BuyerCreate from './components/BuyerCreate';
 import NotFound from './components/NotFound';
 import Admin from './components/Admin';
 import history from './lib/history';
+import CookiesFooter from 'web-components/lib/components/fixed-footer/CookiesFooter';
 
 interface BoolProps {
   [key: string]: boolean;
@@ -131,8 +132,7 @@ function AppFooter(): JSX.Element {
   return (
     <Footer
       footerItems={footerItems}
-      mailerLiteDataAccount={process.env.REACT_APP_MAILERLITE_DATA_ACCOUNT}
-      mailerLiteDataForm={process.env.REACT_APP_MAILERLITE_DATA_FORM_FOOTER}
+      apiUri={process.env.REACT_APP_API_URI}
       privacyUrl="https://www.regen.network/privacy-policy"
       termsUrl="https://www.regen.network/terms-service"
       // paddingBottom={footerPaddingBottom[pathname]}
@@ -285,6 +285,7 @@ const App: React.FC = (): JSX.Element => {
           />
           <Route path="*" component={NotFound} />
         </Switch>
+        <CookiesFooter privacyUrl="https://www.regen.network/privacy-policy/" />
         <footer>
           <AppFooter />
         </footer>

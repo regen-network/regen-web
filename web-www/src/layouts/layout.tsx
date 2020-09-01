@@ -7,10 +7,12 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useTheme } from '@material-ui/core/styles';
 
 import Header, { HeaderMenuItem } from 'web-components/lib/components/header';
 import Footer, { FooterItemProps as FooterItem } from 'web-components/lib/components/footer';
-import { useTheme } from '@material-ui/core/styles';
+import CookiesFooter from 'web-components/lib/components/fixed-footer/CookiesFooter';
+
 import './layout.css';
 
 interface propTypes {
@@ -171,13 +173,13 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
       <div>
         <main>{children}</main>
       </div>
+      <CookiesFooter privacyUrl="/privacy-policy/" />
       <footer>
         <Footer
           footerItems={footerItems}
-          mailerLiteDataAccount={process.env.GATSBY_MAILERLITE_DATA_ACCOUNT}
-          mailerLiteDataForm={process.env.GATSBY_MAILERLITE_DATA_FORM_FOOTER}
           privacyUrl="/privacy-policy"
           termsUrl="/terms-service"
+          apiUri={process.env.GATSBY_API_URI}
           paddingBottom={footerPaddingBottom[location.pathname]}
         />
       </footer>

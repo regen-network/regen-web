@@ -60,14 +60,14 @@ function AppFooter(): JSX.Element {
           title: 'Land Stewards',
           href: `${process.env.REACT_APP_WEBSITE_URL}/land-stewards/`,
         },
-        {
-          title: 'Developers & Validators',
-          href: `${process.env.REACT_APP_WEBSITE_URL}/developers/`,
-        },
-        {
-          title: 'Scientists & Verifiers',
-          href: `${process.env.REACT_APP_WEBSITE_URL}/scientists/`,
-        },
+        // {
+        //   title: 'Developers & Validators',
+        //   href: `${process.env.REACT_APP_WEBSITE_URL}/developers/`,
+        // },
+        // {
+        //   title: 'Scientists & Verifiers',
+        //   href: `${process.env.REACT_APP_WEBSITE_URL}/scientists/`,
+        // },
         {
           title: 'Invest',
           href: `${process.env.REACT_APP_WEBSITE_URL}/invest/`,
@@ -77,10 +77,10 @@ function AppFooter(): JSX.Element {
     {
       title: 'learn more',
       items: [
-        {
-          title: 'Case Studies',
-          href: `${process.env.REACT_APP_WEBSITE_URL}/case-studies/`,
-        },
+        // {
+        //   title: 'Case Studies',
+        //   href: `${process.env.REACT_APP_WEBSITE_URL}/case-studies/`,
+        // },
         {
           title: 'Resources',
           href: `${process.env.REACT_APP_WEBSITE_URL}/resources/`,
@@ -93,23 +93,23 @@ function AppFooter(): JSX.Element {
           title: 'Team',
           href: `${process.env.REACT_APP_WEBSITE_URL}/team/`,
         },
-        {
-          title: 'Contact',
-          href: `${process.env.REACT_APP_WEBSITE_URL}/contact/`,
-        },
+        // {
+        //   title: 'Contact',
+        //   href: `${process.env.REACT_APP_WEBSITE_URL}/contact/`,
+        // },
       ],
     },
     {
       title: 'regen',
       items: [
-        {
-          title: 'Partners',
-          href: `${process.env.REACT_APP_WEBSITE_URL}/partners/`,
-        },
-        {
-          title: 'Media',
-          href: `${process.env.REACT_APP_WEBSITE_URL}/media/`,
-        },
+        // {
+        //   title: 'Partners',
+        //   href: `${process.env.REACT_APP_WEBSITE_URL}/partners/`,
+        // },
+        // {
+        //   title: 'Media',
+        //   href: `${process.env.REACT_APP_WEBSITE_URL}/media/`,
+        // },
         {
           title: 'Careers',
           href: 'https://apply.workable.com/regen-network/',
@@ -120,10 +120,10 @@ function AppFooter(): JSX.Element {
           href: 'http://forum.goatech.org/c/regen-network/19',
           target: '_blank',
         },
-        {
-          title: 'Press Kit',
-          href: `${process.env.REACT_APP_WEBSITE_URL}/press-kit/`,
-        },
+        // {
+        //   title: 'Press Kit',
+        //   href: `${process.env.REACT_APP_WEBSITE_URL}/press-kit/`,
+        // },
       ],
     },
   ];
@@ -150,7 +150,7 @@ function AppHeader(): JSX.Element {
     {
       title: 'Learn More',
       dropdownItems: [
-        { title: 'Case Studies', href: `${process.env.REACT_APP_WEBSITE_URL}/case-studies/` },
+        // { title: 'Case Studies', href: `${process.env.REACT_APP_WEBSITE_URL}/case-studies/` },
         { title: 'Resources', href: `${process.env.REACT_APP_WEBSITE_URL}/resources/` },
         { title: 'FAQ', href: `${process.env.REACT_APP_WEBSITE_URL}/faq/` },
         { title: 'Team', href: `${process.env.REACT_APP_WEBSITE_URL}/team/` },

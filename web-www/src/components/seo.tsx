@@ -5,12 +5,10 @@
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import { useStaticQuery, graphql } from 'gatsby';
-// @ts-ignore
-//import mailer from '../js/mailerlite.js';
 
 interface propTypes {
   description: string;
@@ -19,7 +17,7 @@ interface propTypes {
   title: string;
 }
 
-function SEO({ description, lang, meta, title }: propTypes) {
+function SEO({ description, lang, meta, title }: propTypes): JSX.Element {
   const { site } = useStaticQuery(
     graphql`
       query {
@@ -33,8 +31,6 @@ function SEO({ description, lang, meta, title }: propTypes) {
       }
     `,
   );
-
-  //console.log(`mailer: ${JSON.stringify(mailer)}`);
 
   const metaDescription = description || site.siteMetadata.description;
 
@@ -79,9 +75,7 @@ function SEO({ description, lang, meta, title }: propTypes) {
           content: metaDescription,
         },
       ]}
-    >
-      <script src="mailerlite.js" type="text/javascript"></script>
-    </Helmet>
+    />
   );
 }
 

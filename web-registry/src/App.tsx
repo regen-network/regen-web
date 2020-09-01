@@ -131,8 +131,7 @@ function AppFooter(): JSX.Element {
   return (
     <Footer
       footerItems={footerItems}
-      mailerLiteDataAccount={process.env.REACT_APP_MAILERLITE_DATA_ACCOUNT}
-      mailerLiteDataForm={process.env.REACT_APP_MAILERLITE_DATA_FORM_FOOTER}
+      apiUri={process.env.REACT_APP_API_URI}
       privacyUrl="https://www.regen.network/privacy-policy"
       termsUrl="https://www.regen.network/terms-service"
       // paddingBottom={footerPaddingBottom[pathname]}

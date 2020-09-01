@@ -227,7 +227,7 @@ const App: React.FC = (): JSX.Element => {
   const { user, loading } = useAuth0();
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div></div>;
   }
 
   return (

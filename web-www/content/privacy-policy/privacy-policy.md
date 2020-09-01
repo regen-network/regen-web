@@ -1,7 +1,7 @@
 Effective date: 04/01/2020
 Version 2, May 4, 2020
 
-## 1. Introduction
+## 1. Introduction test
 
 Welcome to **Regen Network Development, Inc**.
 
@@ -46,15 +46,10 @@ We collect several different types of information for various purposes to provid
 While using our Service, we may ask you to provide us with certain personally identifiable information that can be used to contact or identify you (**User Profile Data**). Personally identifiable information may include, but is not limited to:
 
 1. Email address
-
 2. First name, last name, entity/company name
-
 3. Phone number
-
 4. Address, State, Province, ZIP/Postal code, City, Country
-
 5. Farm data to enable the creation of ecosystem service credits, which could include, but is not limited to GIS data, land management history (including photos), soil samples, lab results etc.
-
 6. Financial information (bank account or credit card) to distribute proceeds from purchase or sale of ecosystem services
 
 We may use your User Profile Data to contact you with newsletters, marketing or promotional materials and other information that may be of interest to you. You may opt out of receiving any, or all, of these communications from us by following the unsubscribe link.
@@ -64,7 +59,6 @@ We may use your User Profile Data to contact you with newsletters, marketing or 
 While using our Service, we may ask you to provide us with certain information that can be used in the development of ecosystem service credits (**Project Data**). Information may include, but is not limited to:
 
 1. Farm data to enable the creation of ecosystem service credits, which could include, but is not limited to GIS data, land management history (including photos), soil samples, lab results etc.
-
 2. Land tenure
 
 #### Usage Data
@@ -114,47 +108,28 @@ While using our Service, we may also collect the following information: sex, age
 We do not sell or rent information about our users and all information provided to CONSENT remains absolutely confidential, except that we may use information that we receive to:
 
 1. Help you efficiently access your information after you sign in;
-
 2. Remember information so you will not have to re-enter it during your visit or the next time you visit the Site;
-
 3. Provide personalized content and information to you and others, which could include online ads or other forms of marketing;
-
 4. Provide, improve, test and monitor the effectiveness of our Site;
-
 5. Develop and test new products and features;
-
 6. Monitor metrics such as total number of visitors, traffic and demographic patterns; and diagnose or fix technology problems.
 
 Regen Network Development, Inc. uses the collected data for various purposes:
 
 1. to develop methodologies and serve in the generation of ecosystem service credits
-
 2. to create project pages including farm data and available ecosystem service credits
-
 3. to provide and maintain our Service;
-
 4. to notify you about changes to our Service;
-
 5. to allow you to participate in interactive features of our Service when you choose to do so;
-
 6. to provide customer support;
-
 7. to gather analysis or valuable information so that we can improve our Service;
-
 8. to monitor the usage of our Service;
-
 9. to detect, prevent and address technical issues;
-
 10. to fulfill any other purpose for which you provide it;
-
 11. to carry out our obligations and enforce our rights arising from any contracts entered into between you and us, including for billing and collection;
-
 12. to provide you with notices about your account and/or subscription, including expiration and renewal notices, email-instructions, etc.;
-
 13. to provide you with news, special offers and general information about other goods, services and events which we offer that are similar to those that you have already purchased or enquired about unless you have opted not to receive such information;
-
 14. in any other way we may describe when you provide the information;
-
 15. for any other purpose with your consent.
 
 ## 6. Retention of Data
@@ -210,21 +185,14 @@ Regen Network Development, Inc. will take all the steps reasonably necessary to 
 We may disclose personal information that we collect, or you provide:
 
 1. **Disclosure for Ecosystem Service Credit Registry listings**. In order to list your project on the Regen Registry, we may need to disclose various aspects of farm data through our Registry marketplace.
-
 2. **Disclose for the Creation of Ecosystem Service Credits on Regen Ledger**. We will disclose a subset of Project Data for the creation of credits on Regen Ledger
-
 3. **Disclosure for Law Enforcement**. Under certain circumstances, we may be required to disclose your User Data or Project Data if required to do so by law or in response to valid requests by public authorities.
-
 4. **Business Transaction**. If we or our subsidiaries are involved in a merger, acquisition or asset sale, your User Data and Project Data may be transferred.
-
 5. **Other cases**. We may disclose your information:
 
    1. To our subsidiaries and affiliates;
-
    2. To fulfill the purpose for which you provide it;
-
    3. For the purpose of including your company’s logo on our website;
-
    4. For any other purpose disclosed by us when you provide the information;
 
 ## 9. Security of Data
@@ -237,7 +205,7 @@ Your personal information including your name and address is encrypted so that i
 
 ## 10. Your Data Protection Rights Under General Data Protection Regulation (GDPR)
 
-If you are a resident of the European Union (EU) and European Economic Area (EEA), you have certain data protection rights, covered by GDPR. See more at  
+If you are a resident of the European Union (EU) and European Economic Area (EEA), you have certain data protection rights, covered by GDPR. See more at\
 https://eur-lex.europa.eu/eli/reg/2016/679/oj
 
 We aim to take reasonable steps to allow you to correct, amend, delete, or limit the use of your User Data. If you wish to be informed what User Data we hold about you and if you want it to be removed from our systems, please email us at office@regen.network.
@@ -245,15 +213,10 @@ We aim to take reasonable steps to allow you to correct, amend, delete, or limit
 In certain circumstances, you have the following data protection rights:
 
 1. the right to access, update or to delete the information we have on you;
-
 2. the right of rectification. You have the right to have your information rectified if that information is inaccurate or incomplete;
-
 3. the right to object. You have the right to object to our processing of your User Data;
-
 4. the right of restriction. You have the right to request that we restrict the processing of your personal information;
-
 5. the right to data portability. You have the right to be provided with a copy of your User Data in a structured, machine-readable and commonly used format;
-
 6. the right to withdraw consent.Â You also have the right to withdraw your consent at any time where we rely on your consent to process your personal information;
 
 Please note that we may ask you to verify your identity before responding to such requests. Please note, we may not be able to provide Service without some necessary data.
@@ -262,17 +225,14 @@ You have the right to complain to a Data Protection Authority about our collecti
 
 ## 11. Your Data Protection Rights under the California Privacy Protection Act (CalOPPA)
 
-CalOPPA is the first state law in the nation to require commercial websites and online services to post a privacy policy. The law's reach stretches well beyond California to require a person or company in the United States (and conceivable the world) that operates websites collecting personally identifiable information from California consumers to post a conspicuous privacy policy on its website stating exactly the information being collected and those individuals with whom it is being shared, and to comply with this policy. See more at  
+CalOPPA is the first state law in the nation to require commercial websites and online services to post a privacy policy. The law's reach stretches well beyond California to require a person or company in the United States (and conceivable the world) that operates websites collecting personally identifiable information from California consumers to post a conspicuous privacy policy on its website stating exactly the information being collected and those individuals with whom it is being shared, and to comply with this policy. See more at\
 https://consumercal.org/about-cfc/cfc-education-foundation/california-online-privacy-protection-act-caloppa-3/
 
 According to CalOPPA we agree to the following:
 
 1. users can visit our site anonymously;
-
 2. our Privacy Policy link includes the word Privacy, and can easily be found on the page specified above on the home page of our website;
-
 3. users will be notified of any privacy policy changes on our Privacy Policy Page;
-
 4. users are able to change their personal information by emailing us at office@regen.network.
 
 Our Policy on Do Not Track Signals:
@@ -289,17 +249,17 @@ These third parties have access to your User Data only to perform these tasks on
 
 #### Amazon Web Services
 
-Amazon Web Services (AWS) is a hosting service. Read more about their legal policies here:  
+Amazon Web Services (AWS) is a hosting service. Read more about their legal policies here:\
 https://aws.amazon.com/legal/?nc1=f_cc
 
 #### Auth0
 
-Auth0 is an authentication service. Read more about their Privacy Policy here:  
+Auth0 is an authentication service. Read more about their Privacy Policy here:\
 https://auth0.com/privacy/
 
 #### Airtable
 
-Airtable is a survey management tool. Read more about their Privacy Policy here:  
+Airtable is a survey management tool. Read more about their Privacy Policy here:\
 https://airtable.com/privacy
 
 ## 13. Analytics
@@ -310,15 +270,15 @@ We may use third-party Service Providers to monitor and analyze the use of our S
 
 Google Analytics is a web analytics service offered by Google that tracks and reports website traffic. Google uses the data collected to track and monitor the use of our Service. This data is shared with other Google services. Google may use the collected data to contextualize and personalize the ads of its own advertising network.
 
-For more information on the privacy practices of Google, please visit the Google Privacy Terms web page:  
+For more information on the privacy practices of Google, please visit the Google Privacy Terms web page:\
 https://policies.google.com/privacy?hl=en
 
-We also encourage you to review Google's policy for safeguarding your data:  
+We also encourage you to review Google's policy for safeguarding your data:\
 https://support.google.com/analytics/answer/6004245.
 
 #### Mixpanel
 
-Mixpanel is a web analytics service. Read more about their privacy policy here:  
+Mixpanel is a web analytics service. Read more about their privacy policy here:\
 https://mixpanel.com/legal/privacy-policy/
 
 ## 14. Code Repositories
@@ -327,17 +287,17 @@ We may use third-party Service Providers to automate the development process of 
 
 #### GitHub
 
-GitHub is provided by GitHub, Inc. GitHub is a development platform to host and review code, manage projects, and build software. For more information on what data GitHub collects for what purpose and how the protection of the data is ensured, please visit GitHub Privacy Policy page:  
+GitHub is provided by GitHub, Inc. GitHub is a development platform to host and review code, manage projects, and build software. For more information on what data GitHub collects for what purpose and how the protection of the data is ensured, please visit GitHub Privacy Policy page:\
 https://help.github.com/en/articles/github-privacy-statement.
 
 #### Netlify CMS
 
-Netlify CMS is an open-source content management system for Git workflow. Read their Code of Conduct here:  
+Netlify CMS is an open-source content management system for Git workflow. Read their Code of Conduct here:\
 https://github.com/netlify/netlify-cms/blob/master/CODE_OF_CONDUCT.md
 
 #### Heroku
 
-Hekoku is a Platform-as-a-Service for running applications in the cloud. Read more about their Privacy Policy here:  
+Hekoku is a Platform-as-a-Service for running applications in the cloud. Read more about their Privacy Policy here:\
 https://www.salesforce.com/company/privacy/
 
 ## 15. Payments
@@ -350,7 +310,7 @@ The payment processors we work with are:
 
 #### Stripe
 
-Their Privacy Policy can be viewed at:  
+Their Privacy Policy can be viewed at:\
 https://stripe.com/us/privacy
 
 ## 16. Links to Other Sites

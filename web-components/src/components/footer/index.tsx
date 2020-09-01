@@ -17,6 +17,7 @@ import LinkedInIcon from '../icons/social/LinkedInIcon';
 import MediumIcon from '../icons/social/MediumIcon';
 import YoutubeIcon from '../icons/social/YoutubeIcon';
 import GithubIcon from '../icons/social/GithubIcon';
+import NewsletterForm from '../form/NewsletterForm';
 
 export interface FooterItemProps {
   title: string;
@@ -25,11 +26,10 @@ export interface FooterItemProps {
 
 interface FooterProps {
   footerItems: [FooterItemProps, FooterItemProps, FooterItemProps];
-  mailerLiteDataAccount?: string;
-  mailerLiteDataForm?: string;
   termsUrl: string;
   privacyUrl: string;
   paddingBottom?: string;
+  apiUri?: string;
 }
 
 interface StyleProps {
@@ -89,23 +89,18 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   },
   mail: {
     paddingTop: theme.spacing(4),
-    '& .ml-form-formContent.horozintalForm .ml-form-horizontalRow .ml-input-horizontal': {
-      width: '60%',
+  },
+  textField: {
+    paddingRight: theme.spacing(2.5),
+    '& .MuiInputBase-root': {
+      fontSize: theme.spacing(3.5),
+      height: theme.spacing(12.5),
     },
-    '& .ml-form-formContent.horozintalForm .ml-form-horizontalRow .ml-button-horizontal': {
-      width: '40%',
-    },
-    '& .ml-form-embedContainer.ml-subscribe-form .ml-form-embedWrapper': {
-      '& .ml-form-successBody, .ml-form-embedBody': {
-        padding: '0 !important',
-        '& .ml-form-formContent': {
-          padding: '0 !important',
-        },
-      },
-      '& input, & button': {
-        height: `${theme.spacing(12.5)} !important`,
-      },
-    },
+  },
+  button: {
+    fontSize: theme.spacing(3.5),
+    height: theme.spacing(12.5),
+    padding: theme.spacing(2.5),
   },
   bottomGrid: {
     [theme.breakpoints.up('sm')]: {
@@ -198,11 +193,10 @@ const FooterItem = ({ title, items }: FooterItemProps): JSX.Element => {
 
 export default function Footer({
   footerItems,
-  mailerLiteDataAccount,
-  mailerLiteDataForm,
   termsUrl,
   privacyUrl,
   paddingBottom,
+  apiUri = 'http://localhost:5000',
 }: FooterProps): JSX.Element {
   const classes = useStyles({ paddingBottom });
 
@@ -226,11 +220,15 @@ export default function Footer({
             <Typography className={classes.subTitle}>
               Stay up to date! Sign up for our monthly newsletter.
             </Typography>
-            <div
-              className={clsx('ml-form-embed', classes.mail)}
-              data-account={mailerLiteDataAccount}
-              data-form={mailerLiteDataForm}
-            />
+            <div className={classes.mail}>
+              <NewsletterForm
+                submitLabel="subscribe"
+                buttonClassName={classes.button}
+                textFieldClassName={classes.textField}
+                apiUri={apiUri}
+                gridXs={{ textField: 7, button: 5 }}
+              />
+            </div>
             {/* <Link className={classes.newsletter}>See archive of past newsletters»</Link> */}
           </Grid>
         </Grid>

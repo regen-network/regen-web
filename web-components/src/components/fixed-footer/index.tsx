@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.down('xs')]: {
       height: theme.spacing(19),
     },
-    boxShadow: '0px -4px 10px rgba(0, 0, 0, 0.1)',
+    boxShadow: theme.shadows[7],
   },
   root: {
     height: '100%',

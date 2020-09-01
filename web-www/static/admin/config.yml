@@ -37,10 +37,10 @@ collections:
                   - {label: Image, name: image, widget: image}
                   - {label: Name, name: name, widget: string}
                   - {label: Title, name: title, widget: string}
-                  - {label: Description, name: description, widget: text}
-                  - {label: LinkedIn URL, name: linkedUrl, widget: string}
-                  - {label: Twitter URL, name: twitterUrl, widget: string}
-                  - {label: Github URL, name: githubUrl, widget: string}
+                  - {label: Description, name: description, widget: text, required: false}
+                  - {label: LinkedIn URL, name: linkedUrl, widget: string, required: false}
+                  - {label: Twitter URL, name: twitterUrl, widget: string, required: false}
+                  - {label: Github URL, name: githubUrl, widget: string, required: false}
           - label: "Contributors"
             name: "contributorSection"
             widget: "object"
@@ -53,10 +53,10 @@ collections:
                   - {label: Image, name: image, widget: image}
                   - {label: Name, name: name, widget: string}
                   - {label: Title, name: title, widget: string}
-                  - {label: Description, name: description, widget: text}
-                  - {label: LinkedIn URL, name: linkedUrl, widget: string}
-                  - {label: Twitter URL, name: twitterUrl, widget: string}
-                  - {label: Github URL, name: githubUrl, widget: string}
+                  - {label: Description, name: description, widget: text, required: false}
+                  - {label: LinkedIn URL, name: linkedUrl, widget: string, required: false}
+                  - {label: Twitter URL, name: twitterUrl, widget: string, required: false}
+                  - {label: Github URL, name: githubUrl, widget: string, required: false}
           - label: "Advisors"
             name: "advisorSection"
             widget: "object"
@@ -69,10 +69,10 @@ collections:
                   - {label: Image, name: image, widget: image}
                   - {label: Name, name: name, widget: string}
                   - {label: Title, name: title, widget: string}
-                  - {label: Description, name: description, widget: text}
-                  - {label: LinkedIn URL, name: linkedUrl, widget: string}
-                  - {label: Twitter URL, name: twitterUrl, widget: string}
-                  - {label: Github URL, name: githubUrl, widget: string}
+                  - {label: Description, name: description, widget: text, required: false}
+                  - {label: LinkedIn URL, name: linkedUrl, widget: string, required: false}
+                  - {label: Twitter URL, name: twitterUrl, widget: string, required: false}
+                  - {label: Github URL, name: githubUrl, widget: string, required: false}
       - label: "Resources page"
         name: "resources"
         file: "web-www/content/resources/index.yaml"
@@ -97,7 +97,7 @@ collections:
                   - {label: Image, name: image, widget: image}
                   - {label: Title, name: title, widget: string}
                   - {label: Updated, name: updated, widget: string}
-                  - {label: Description, name: description, widget: text}
+                  - {label: Description, name: description, widget: text, required: false}
                   - {label: ButtonText, name: buttonText, widget: string}
                   - {label: Link, name: link, widget: string}
           - label: "Ledger Section"
@@ -114,7 +114,7 @@ collections:
                   - {label: Image, name: image, widget: image}
                   - {label: Title, name: title, widget: string}
                   - {label: Updated, name: updated, widget: string}
-                  - {label: Description, name: description, widget: text}
+                  - {label: Description, name: description, widget: text, required: false}
                   - {label: ButtonText, name: buttonText, widget: string}
                   - {label: Link, name: link, widget: string}
       - label: "Privacy Policy"

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Router, Switch, Route, Link, useParams, useLocation } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, Link, useParams, useLocation } from 'react-router-dom';
 import { useTheme } from '@material-ui/core/styles';
 
 import { useAuth0 } from './react-auth0-spa';
@@ -26,7 +26,7 @@ import CreditsRetire from './components/CreditsRetire';
 import BuyerCreate from './components/BuyerCreate';
 import NotFound from './components/NotFound';
 import Admin from './components/Admin';
-import history from './lib/history';
+// import history from './lib/history';
 
 interface BoolProps {
   [key: string]: boolean;
@@ -231,7 +231,7 @@ const App: React.FC = (): JSX.Element => {
   }
 
   return (
-    <Router history={history}>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
       <ScrollToTop />
       <div>
         <AppHeader />
@@ -289,7 +289,7 @@ const App: React.FC = (): JSX.Element => {
           <AppFooter />
         </footer>
       </div>
-    </Router>
+    </BrowserRouter>
   );
 };
 

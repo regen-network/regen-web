@@ -3,7 +3,6 @@ import { makeStyles, useTheme, Theme } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Cookies, { CookieAttributes } from 'js-cookie';
 
 // TODO use Section component
@@ -116,7 +115,6 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 export default function CookiesFooter({ privacyUrl }: CookiesFooterProps): JSX.Element | null {
   const classes = useStyles({});
-  const theme = useTheme();
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {

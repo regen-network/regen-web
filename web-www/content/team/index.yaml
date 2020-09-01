@@ -65,19 +65,18 @@ coreSection:
       githubUrl: null
     - name: Sarah Baxendell
       title: Director of Finance
-      description: Sarah specializes in future casting, living systems design,
-        ecological design, product development, go-to-market strategy, and green
-        finance. For the past decade, she has worked at the intersection of
-        start-ups, corporations, and community-based nonprofits to develop
-        impact-centric ecological projects and organizations. She was most
-        recently the Executive Director of Hilltop Urban Farm, the largest urban
-        farming project in the United States.
+      description: Sarah specializes in ecological design, product development, and
+        green finance. For the past decade, she has worked at the intersection
+        of start-ups and community-based nonprofits to develop impact-centric
+        ecological projects. She was most recently the Executive Director of
+        Hilltop Urban Farm, the largest urban farming project in the United
+        States.
       image: ../../static/media/team/sarahb.jpg
       linkedUrl: https://www.linkedin.com/in/sarahashleybaxendell/
       twitterUrl: null
       githubUrl: null
     - name: Cory Levinson
-      title: Project Manager - Software
+      title: "Senior Technical Project Manager "
       description: Cory is a software engineer and technical product manager who
         gained experience in data infrastructure at SoundCloud before moving
         into blockchain in 2017. He is an alumni of Strelka Institute in Moscow,
@@ -89,30 +88,30 @@ coreSection:
       twitterUrl: https://twitter.com/kohwi
       githubUrl: https://github.com/clevinson
     - name: Dr Gisel Booman
-      title: Science Lead
+      title: "Lead Scientist "
       description: Dr. Booman, PhD Biological Sciences, Landscape Ecology, leads the
-        integration process between the Ecological Protocol development and the
-        current state of remote sensing, including methodology development and
-        use-case change-of-state monitoring. Dr. Booman is experienced with
-        QGis, ArcGIS, remote sensing, ecosystem services, and nonpoint
-        pollution/runoff assessment. Dr. Booman lives with her family in
-        Argentina.
+        integration process between the Ecological State Protocols development
+        and the current state of remote sensing. Dr. Booman is experienced with
+        GIS, ecosystem services, and nonpoint pollution/runoff assessments. Dr.
+        Booman lives with her family in Argentina.
       image: ../../static/media/team/gisel.jpg
       linkedUrl: https://www.linkedin.com/in/gisel-booman-8812536b
       twitterUrl: null
       githubUrl: null
     - name: David Fortson
-      title: Head of Marketing
-      description: David is the co-founder and CEO of LoaCom, a movement and marketing
-        firm working with better world companies. David and the LoaCom team
-        joined the Regen Network team to support marketing, movement-building
-        capacity, events, fund development, and strategy.
+      title: " Director of Marketing "
+      description: "David is the co-founder and CEO of LOACOM, a marketing and
+        movement building agency working with better world companies. Joining
+        Regen Network at its inception, David and the LOACOM team support
+        marketing, movement-building, events, sales, fund development, and
+        strategy. David has worked for over a decade in the regenerative
+        agricultural movement.  "
       image: ../../static/media/team/david.jpg
       linkedUrl: https://www.linkedin.com/in/david-fortson-19692715
       twitterUrl: null
       githubUrl: null
     - name: Marie Gauthier
-      title: Software Engineer
+      title: Senior Software Engineer
       description: Marie is an ecologically committed full-stack developer with a
         great interest in permaculture. She has been developing web and mobile
         applications for more than 5 years. She values transparency, fairness
@@ -123,13 +122,12 @@ coreSection:
       twitterUrl: https://twitter.com/mariegauthier5
       githubUrl: https://github.com/blushi
     - name: Amaury Martiny
-      title: Software Engineer
+      title: Senior Software Engineer
       description: Currently working on the Cosmos SDK, Amaury’s MSc degree in
         Computer Science informs his full-stack work in blockchain and web
         development. Previously at Parity Technologies, Amaury values
         decentralization, privacy and open-source, and is very passionate about
-        tackling the climate emergency. In his free time you’ll catch him
-        cycling through the European countryside or reading some history book.
+        tackling the climate emergency.
       image: ../../static/media/team/amaury.jpg
       linkedUrl: https://www.linkedin.com/in/amaurymartiny/
       twitterUrl: https://twitter.com/amaurymartiny

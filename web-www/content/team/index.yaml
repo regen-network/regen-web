@@ -158,9 +158,11 @@ coreSection:
         world. Jared has been involved with blockchain since 2011. He built one
         of the ETH RPG games. As both a farmer  and developer, he feels
         extremely lucky to serve ecological regeneration with Regen Network.
-      name: Jared
+      name: "Jared Smith "
       title: "Front End Developer "
       image: ../../static/media/98fiylntthoaudcmrxjd0w.jpg
+      linkedUrl: https://www.linkedin.com/in/jaredmsmith/
+      githubUrl: https://github.com/ratacat
     - name: "Sophia Leiker "
       title: Data Scientist and GIS Assistant
       description: >

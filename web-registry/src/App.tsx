@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter, Switch, Route, Link, useParams, useLocation } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, Link, useParams, useLocation, Redirect } from 'react-router-dom';
 import { useTheme } from '@material-ui/core/styles';
 
 import { useAuth0 } from './react-auth0-spa';
@@ -236,7 +236,8 @@ const App: React.FC = (): JSX.Element => {
         <AppHeader />
         <Switch>
           <Route exact path="/">
-            <Home />
+            <Redirect to="/projects/impactag" />
+            {/* <Home /> */}
           </Route>
           <Route exact path="/verify-email">
             <VerifyEmail />
@@ -245,7 +246,9 @@ const App: React.FC = (): JSX.Element => {
             path="/projects"
             render={({ match: { path } }) => (
               <>
-                <Route path={path} component={Projects} exact />
+                <Route path={path} component={Projects} exact>
+                  <Redirect to="/projects/impactag" />
+                </Route>
                 <Route path={`${path}/:projectId`} component={ProjectContainer} />
               </>
             )}
@@ -262,7 +265,9 @@ const App: React.FC = (): JSX.Element => {
             path="/credits"
             render={({ match: { path } }) => (
               <>
-                <Route path={`${path}/:projectId`} component={CreditsContainer} />
+                <Route path={`${path}/:projectId`} component={CreditsContainer}>
+                  <Redirect to="/projects/impactag" />
+                </Route>
               </>
             )}
           />

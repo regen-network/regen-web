@@ -1,8 +1,5 @@
 /registry/*  https://deploy-preview-172--regen-registry.netlify.app/:splat  200
 
-/registry/  /registry/projects/impactag  200
-/registry/projects/  /registry/projects/impactag  200
-
 /investor.html  /invest/  200
 /us_investors  /invest/  200
 /nonus_investors  /invest/  200

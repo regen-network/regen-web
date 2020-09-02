@@ -378,15 +378,34 @@
     },
     {
       "id": "impactag",
-      "documents": [{
-        "name": "Example name",
-        "type": "Example type",
-        "date": "March 15, 2020",
-        "url": "test"
-      }],
+      "timeline": {
+        "completedItemIndex": 0,
+        "events": [
+          {
+            "title": "Just a title"
+          },
+          {
+            "title": "Just a title",
+            "description": "and a description"
+          },
+          {
+            "title": "Title",
+            "description": "Description",
+            "date": "Dec 15, 2020"
+          }
+        ]
+      },
+      "documents": [
+        {
+          "name": "Example name",
+          "type": "Example type",
+          "date": "March 15, 2020",
+          "url": "test"
+        }
+      ],
       "stripePrice": "sku_HAqf7cJtNFynOf",
       "creditPrice": {
-        "unitPrice": 27.50,
+        "unitPrice": 27.5,
         "currency": "USD"
       },
       "name": "Wilmot Farm",
@@ -396,7 +415,10 @@
         }
       },
       "glanceImgSrc": "impactag-smallmap-top-v3.jpg",
-      "glanceText": ["Shifting to Managed Grazing can potentially sequester 16.4- 26 CO2e (Gt) by 2050.", "Wilmot Cattle Co has increased Soil Organic Carbon to 4.5% and removed 22,500 tons of CO2e in two years."],
+      "glanceText": [
+        "Shifting to Managed Grazing can potentially sequester 16.4- 26 CO2e (Gt) by 2050.",
+        "Wilmot Cattle Co has increased Soil Organic Carbon to 4.5% and removed 22,500 tons of CO2e in two years."
+      ],
       "place": {
         "city": "Hernani",
         "region": "New England",

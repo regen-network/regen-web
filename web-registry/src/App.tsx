@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter, Switch, Route, Link, useParams, useLocation, Redirect } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, useParams, useLocation, Redirect } from 'react-router-dom';
 import { useTheme } from '@material-ui/core/styles';
 
 import { useAuth0 } from './react-auth0-spa';
@@ -168,18 +168,18 @@ function AppHeader(): JSX.Element {
 }
 
 // TODO put following components in separate files
-function Home(): JSX.Element {
-  return (
-    <div style={{ paddingLeft: '1rem' }}>
-      <p>
-        <Link to="/projects">Project list</Link>
-      </p>
-      <p>
-        <Link to="/credits/userId">Credits page</Link>
-      </p>
-    </div>
-  );
-}
+// function Home(): JSX.Element {
+//   return (
+//     <div style={{ paddingLeft: '1rem' }}>
+//       <p>
+//         <Link to="/projects">Project list</Link>
+//       </p>
+//       <p>
+//         <Link to="/credits/userId">Credits page</Link>
+//       </p>
+//     </div>
+//   );
+// }
 
 function CreditsContainer(): JSX.Element {
   let { userId } = useParams();

@@ -66,7 +66,7 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
     {
       title: 'Learn More',
       dropdownItems: [
-        { title: 'Case Studies', href: '/case-studies/' },
+        // { title: 'Case Studies', href: '/case-studies/' },
         { title: 'Resources', href: '/resources/' },
         { title: 'FAQ', href: '/faq/' },
         { title: 'Team', href: '/team/' },
@@ -92,14 +92,14 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
           title: 'Land Stewards',
           href: '/land-stewards/',
         },
-        {
-          title: 'Developers & Validators',
-          href: '/developers/',
-        },
-        {
-          title: 'Scientists & Verifiers',
-          href: '/scientists/',
-        },
+        // {
+        //   title: 'Developers & Validators',
+        //   href: '/developers/',
+        // },
+        // {
+        //   title: 'Scientists & Verifiers',
+        //   href: '/scientists/',
+        // },
         {
           title: 'Invest',
           href: '/invest/',
@@ -109,10 +109,10 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
     {
       title: 'learn more',
       items: [
-        {
-          title: 'Case Studies',
-          href: '/case-studies/',
-        },
+        // {
+        //   title: 'Case Studies',
+        //   href: '/case-studies/',
+        // },
         {
           title: 'Resources',
           href: '/resources/',
@@ -125,23 +125,23 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
           title: 'Team',
           href: '/team/',
         },
-        {
-          title: 'Contact',
-          href: '/contact/',
-        },
+        // {
+        //   title: 'Contact',
+        //   href: '/contact/',
+        // },
       ],
     },
     {
       title: 'regen',
       items: [
-        {
-          title: 'Partners',
-          href: '/partners/',
-        },
-        {
-          title: 'Media',
-          href: '/media/',
-        },
+        // {
+        //   title: 'Partners',
+        //   href: '/partners/',
+        // },
+        // {
+        //   title: 'Media',
+        //   href: '/media/',
+        // },
         {
           title: 'Careers',
           href: 'https://apply.workable.com/regen-network/',
@@ -152,10 +152,10 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
           href: 'http://forum.goatech.org/c/regen-network/19',
           target: '_blank',
         },
-        {
-          title: 'Press Kit',
-          href: '/press-kit/',
-        },
+        // {
+        //   title: 'Press Kit',
+        //   href: '/press-kit/',
+        // },
       ],
     },
   ];

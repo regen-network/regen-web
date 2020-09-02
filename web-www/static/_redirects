@@ -1,0 +1,14 @@
+/registry/*  https://deploy-preview-172--regen-registry.netlify.app/:splat  200
+
+/investor.html  /invest/  200
+/us_investors  /invest/  200
+/nonus_investors  /invest/  200
+/rainforestfoundation.html  /  200
+/faq.html  /faq/  200
+/farmers_signup.html  /land-stewards/  200
+/team.html#partners  /  200
+/openteam.html  /  200
+/media.html  /  200
+/newsletters.html  /  200
+/team.html  /team/  200
+/press-kit.html  /  200

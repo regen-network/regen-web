@@ -1,3 +1,5 @@
+/registry/*  https://regen-registry.netlify.app/:splat  200
+
 /investor.html  /invest/  200
 /us_investors  /invest/  200
 /nonus_investors  /invest/  200

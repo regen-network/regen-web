@@ -1,0 +1,5 @@
+[[redirects]]
+  from = "/registry/*"
+  to = "https://regen-registry.netlify.app/:splat"
+  status = 200
+  force = true

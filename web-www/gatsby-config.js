@@ -6,6 +6,7 @@ module.exports = {
   },
   plugins: [
     'gatsby-plugin-layout',
+    `gatsby-plugin-netlify`,
     {
       resolve: `gatsby-plugin-material-ui`,
       options: {

@@ -20,13 +20,13 @@ featuredSection:
   header: 'Featured Credit'
   title: md//
     Carbon*Plus* Grasslands
-  link: 'https://regen-registry.netlify.app/projects/impactag'
+  link: '/registry/projects/impactag'
   image: '../../static/media/featured-cow.png'
   description: md//
     This credit measures carbon sequestration and a suite of co-benefits, including ecosystem health, animal welfare, and soil health.
 
 
-    Our first vintage of this credit is issued to [Wilmot Farm](https://regen-registry.netlify.app/projects/impactag) which has increased soil organic carbon through rotational grazing to 4.5% and removed 30K tons of CO2e in just two years. This vintage is one of the largest issuances to agricultural projects to-date in Australia!
+    Our first vintage of this credit is issued to [Wilmot Farm](/registry/projects/impactag) which has increased soil organic carbon through rotational grazing to 4.5% and removed 30K tons of CO2e in just two years. This vintage is one of the largest issuances to agricultural projects to-date in Australia!
 comingSoonSection:
   header: 'Coming Soon'
   projects:

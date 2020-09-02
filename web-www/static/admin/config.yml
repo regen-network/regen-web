@@ -46,8 +46,8 @@ collections:
             widget: "object"
             fields:
               - {label: Header, name: title, widget: string}
-              - label: Members
-                name: coreMembers
+              - label: Contributors
+                name: contributors
                 widget: list
                 fields:
                   - {label: Image, name: image, widget: image}
@@ -62,8 +62,8 @@ collections:
             widget: "object"
             fields:
               - {label: Header, name: title, widget: string}
-              - label: Members
-                name: coreMembers
+              - label: Advisors
+                name: advisors
                 widget: list
                 fields:
                   - {label: Image, name: image, widget: image}

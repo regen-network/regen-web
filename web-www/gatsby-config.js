@@ -7,6 +7,7 @@ module.exports = {
   plugins: [
     'gatsby-plugin-layout',
     `gatsby-plugin-netlify`,
+    `gatsby-plugin-advanced-sitemap`,
     {
       resolve: `gatsby-plugin-material-ui`,
       options: {

@@ -3,7 +3,7 @@ import { graphql, useStaticQuery } from 'gatsby';
 
 import BackgroundSection from '../../components/BackgroundSection';
 
-const TopSection = () => {
+const TopSection = (): JSX.Element => {
   const data = useStaticQuery(graphql`
     query {
       background: file(relativePath: { eq: "land-stewards-top.jpg" }) {
@@ -25,7 +25,7 @@ const TopSection = () => {
   const imageData = data.background.childImageSharp.fluid;
   return (
     <BackgroundSection
-      linearGradient="linear-gradient(180deg, rgba(255, 249, 238, 0.74) 0%, rgba(255, 249, 238, 0) 27.6%), linear-gradient(194.2deg, #FAEBD1 12.63%, #7DC9BF 44.03%, #515D89 75.43%)"
+      linearGradient="linear-gradient(209.83deg, rgba(250, 235, 209, 0.8) 11.05%, rgba(125, 201, 191, 0.8) 43.17%, rgba(81, 93, 137, 0.8) 75.29%)"
       header={content.header}
       body={content.body}
       imageData={imageData}

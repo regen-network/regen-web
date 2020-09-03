@@ -130,12 +130,7 @@ const CarbonplusSection = () => {
           <Typography className={classes.description} variant="body2">
             {ReactHtmlParser(content.description)}
           </Typography>
-          <ContainedButton
-            className={classes.button}
-            rel="noopener noreferrer"
-            target="_blank"
-            href={content.linkUrl}
-          >
+          <ContainedButton className={classes.button} href={content.linkUrl}>
             {content.linkText}
           </ContainedButton>
         </Grid>

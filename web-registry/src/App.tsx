@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Router, Switch, Route, Link, useParams, useLocation } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, useParams, useLocation, Redirect } from 'react-router-dom';
 import { useTheme } from '@material-ui/core/styles';
 
 import { useAuth0 } from './react-auth0-spa';
@@ -26,7 +26,6 @@ import CreditsRetire from './components/CreditsRetire';
 import BuyerCreate from './components/BuyerCreate';
 import NotFound from './components/NotFound';
 import Admin from './components/Admin';
-import history from './lib/history';
 import CookiesFooter from 'web-components/lib/components/fixed-footer/CookiesFooter';
 
 interface BoolProps {
@@ -61,14 +60,14 @@ function AppFooter(): JSX.Element {
           title: 'Land Stewards',
           href: `${process.env.REACT_APP_WEBSITE_URL}/land-stewards/`,
         },
-        {
-          title: 'Developers & Validators',
-          href: `${process.env.REACT_APP_WEBSITE_URL}/developers/`,
-        },
-        {
-          title: 'Scientists & Verifiers',
-          href: `${process.env.REACT_APP_WEBSITE_URL}/scientists/`,
-        },
+        // {
+        //   title: 'Developers & Validators',
+        //   href: `${process.env.REACT_APP_WEBSITE_URL}/developers/`,
+        // },
+        // {
+        //   title: 'Scientists & Verifiers',
+        //   href: `${process.env.REACT_APP_WEBSITE_URL}/scientists/`,
+        // },
         {
           title: 'Invest',
           href: `${process.env.REACT_APP_WEBSITE_URL}/invest/`,
@@ -78,10 +77,10 @@ function AppFooter(): JSX.Element {
     {
       title: 'learn more',
       items: [
-        {
-          title: 'Case Studies',
-          href: `${process.env.REACT_APP_WEBSITE_URL}/case-studies/`,
-        },
+        // {
+        //   title: 'Case Studies',
+        //   href: `${process.env.REACT_APP_WEBSITE_URL}/case-studies/`,
+        // },
         {
           title: 'Resources',
           href: `${process.env.REACT_APP_WEBSITE_URL}/resources/`,
@@ -94,23 +93,23 @@ function AppFooter(): JSX.Element {
           title: 'Team',
           href: `${process.env.REACT_APP_WEBSITE_URL}/team/`,
         },
-        {
-          title: 'Contact',
-          href: `${process.env.REACT_APP_WEBSITE_URL}/contact/`,
-        },
+        // {
+        //   title: 'Contact',
+        //   href: `${process.env.REACT_APP_WEBSITE_URL}/contact/`,
+        // },
       ],
     },
     {
       title: 'regen',
       items: [
-        {
-          title: 'Partners',
-          href: `${process.env.REACT_APP_WEBSITE_URL}/partners/`,
-        },
-        {
-          title: 'Media',
-          href: `${process.env.REACT_APP_WEBSITE_URL}/media/`,
-        },
+        // {
+        //   title: 'Partners',
+        //   href: `${process.env.REACT_APP_WEBSITE_URL}/partners/`,
+        // },
+        // {
+        //   title: 'Media',
+        //   href: `${process.env.REACT_APP_WEBSITE_URL}/media/`,
+        // },
         {
           title: 'Careers',
           href: 'https://apply.workable.com/regen-network/',
@@ -121,10 +120,10 @@ function AppFooter(): JSX.Element {
           href: 'http://forum.goatech.org/c/regen-network/19',
           target: '_blank',
         },
-        {
-          title: 'Press Kit',
-          href: `${process.env.REACT_APP_WEBSITE_URL}/press-kit/`,
-        },
+        // {
+        //   title: 'Press Kit',
+        //   href: `${process.env.REACT_APP_WEBSITE_URL}/press-kit/`,
+        // },
       ],
     },
   ];
@@ -150,7 +149,7 @@ function AppHeader(): JSX.Element {
     {
       title: 'Learn More',
       dropdownItems: [
-        { title: 'Case Studies', href: `${process.env.REACT_APP_WEBSITE_URL}/case-studies/` },
+        // { title: 'Case Studies', href: `${process.env.REACT_APP_WEBSITE_URL}/case-studies/` },
         { title: 'Resources', href: `${process.env.REACT_APP_WEBSITE_URL}/resources/` },
         { title: 'FAQ', href: `${process.env.REACT_APP_WEBSITE_URL}/faq/` },
         { title: 'Team', href: `${process.env.REACT_APP_WEBSITE_URL}/team/` },
@@ -169,18 +168,18 @@ function AppHeader(): JSX.Element {
 }
 
 // TODO put following components in separate files
-function Home(): JSX.Element {
-  return (
-    <div style={{ paddingLeft: '1rem' }}>
-      <p>
-        <Link to="/projects">Project list</Link>
-      </p>
-      <p>
-        <Link to="/credits/userId">Credits page</Link>
-      </p>
-    </div>
-  );
-}
+// function Home(): JSX.Element {
+//   return (
+//     <div style={{ paddingLeft: '1rem' }}>
+//       <p>
+//         <Link to="/projects">Project list</Link>
+//       </p>
+//       <p>
+//         <Link to="/credits/userId">Credits page</Link>
+//       </p>
+//     </div>
+//   );
+// }
 
 function CreditsContainer(): JSX.Element {
   let { userId } = useParams();
@@ -227,17 +226,18 @@ const App: React.FC = (): JSX.Element => {
   const { user, loading } = useAuth0();
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div></div>;
   }
 
   return (
-    <Router history={history}>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
       <ScrollToTop />
       <div>
         <AppHeader />
         <Switch>
           <Route exact path="/">
-            <Home />
+            <Redirect to="/projects/impactag" />
+            {/* <Home /> */}
           </Route>
           <Route exact path="/verify-email">
             <VerifyEmail />
@@ -246,7 +246,9 @@ const App: React.FC = (): JSX.Element => {
             path="/projects"
             render={({ match: { path } }) => (
               <>
-                <Route path={path} component={Projects} exact />
+                <Route path={path} component={Projects} exact>
+                  <Redirect to="/projects/impactag" />
+                </Route>
                 <Route path={`${path}/:projectId`} component={ProjectContainer} />
               </>
             )}
@@ -263,7 +265,9 @@ const App: React.FC = (): JSX.Element => {
             path="/credits"
             render={({ match: { path } }) => (
               <>
-                <Route path={`${path}/:projectId`} component={CreditsContainer} />
+                <Route path={`${path}/:projectId`} component={CreditsContainer}>
+                  <Redirect to="/projects/impactag" />
+                </Route>
               </>
             )}
           />
@@ -290,7 +294,7 @@ const App: React.FC = (): JSX.Element => {
           <AppFooter />
         </footer>
       </div>
-    </Router>
+    </BrowserRouter>
   );
 };
 

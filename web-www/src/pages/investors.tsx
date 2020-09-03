@@ -1,6 +1,7 @@
 import React from 'react';
 
 import TopSection from '../sections/investors/TopSection';
+import FormSection from '../sections/investors/FormSection';
 import SEO from '../components/seo';
 
 const InvestorsPage = (): JSX.Element => {
@@ -8,6 +9,7 @@ const InvestorsPage = (): JSX.Element => {
     <>
       <SEO title="Team" />
       <TopSection />
+      <FormSection />
     </>
   );
 };

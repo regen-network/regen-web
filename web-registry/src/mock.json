@@ -25,7 +25,7 @@
       "subtitle": "This is how the project developers are planning to achieve the primary impact."
     },
     "keyOutcomesActivities": {
-      "title": "Key activities and outcomes"
+      "title": "Carbon credits best practices:"
     },
     "timeline": {
       "title": "Timeline"
@@ -481,11 +481,12 @@
       "image": "wilmotcattlecompany.jpg",
       "map": "Wilmot_boundary.kml",
       "keyOutcomesActivities": [
-        "We will limit mechanical, chemical and physical disturbance of soil wherever possible.",
-        "We will aim for 100% groundcover 100% of the time.",
-        "We will encourage all plant diversity - let all plants grow.",
-        "We will endeavour to keep a living plant in the soil as much as possible, in order to sustain biological life in the soil.",
-        "We will use animals to assist in improving soil health."
+        "Independently verified",
+        "Unique - avoiding double issuance through GIS tracking",
+        "Real - GHG impact is quantifiable and verifiable",
+        "Permanent - 25 year period through reversal buffer or covenant",
+        "Additional - a new practice adopted from pre-approved list",
+        "Leakage - de minimis in agricultural land management"
       ],
       "landManagementActions": [
         {

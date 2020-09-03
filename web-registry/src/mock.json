@@ -546,7 +546,7 @@
       ],
       "creditClass": {
         "name": "Soil Carbon Credit",
-        "description": "Measured increases in SOC have been used to calculate the carbon sequestration rate in the top 15cm of topsoil across the Wilmot property. Using Wilmot’s soil monitoring database and remote sensing technology, the Regen Network has been able to calculate and verify a Soil Carbon Credit for the Wilmot property.",
+        "description": "Livestock grazing covers over 3.3 billion hectares, or 25 percent of the world’s land area. Managed grazing practices can reverse land degredation, enhance net carbon sequestration, and improve soil and vegetation quality. Under managed grazing, carbon sequestration potential is estimated between 16.4 and 26 Gt CO2e sequestered in the period between 2020-2050. This credit is designed to significantly increase the amount of hectares under managed grazing worldwide. To that end, the methodology relies on remote sensing to significantly reduce the cost of monitoring carbon sequestration while maintaining scientific rigor.",
         "tag": "soil organic carbon"
       },
       "credits": {

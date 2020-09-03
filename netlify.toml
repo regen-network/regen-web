@@ -1,5 +1,11 @@
 [context.production]
-  environment = { REACT_APP_API_URI = "https://regen-registry-server.herokuapp.com" }
+  environment = { REACT_APP_API_URI = "https://regen-registry-server.herokuapp.com", GATSBY_API_URI = "https://regen-registry-server.herokuapp.com" }
 
 [context.deploy-preview]
-  environment = { REACT_APP_API_URI = "https://regen-registry-server-staging.herokuapp.com" }
+  environment = { REACT_APP_API_URI = "https://regen-registry-server-staging.herokuapp.com", GATSBY_API_URI = "https://regen-registry-server-staging.herokuapp.com" }
+
+[[redirects]]
+  from = "/registry/*"
+  to = "https://regen-registry.netlify.app/:splat"
+  status = 200
+  force = true

@@ -3,3 +3,9 @@
   to = "https://regen-registry.netlify.app/:splat"
   status = 200
   force = true
+
+[context.production]
+  environment = { GATSBY_API_URI = "https://regen-registry-server.herokuapp.com" }
+
+[context.deploy-preview]
+  environment = { GATSBY_API_URI = "https://regen-registry-server-staging.herokuapp.com" }

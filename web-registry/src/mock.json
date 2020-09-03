@@ -554,7 +554,7 @@
         "purchased": 0,
         "issued": 0
       },
-      "hideCreditDetails": true
+      "hideCreditDetails": false
     }
   ]
 }

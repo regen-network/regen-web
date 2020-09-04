@@ -550,8 +550,7 @@
       "creditClass": {
         "name": "Carbon Plus Grasslands",
         "description": "Measured increases in SOC have been used to calculate the carbon sequestration rate in the top 15cm of topsoil across the Wilmot property. Using Wilmot’s soil monitoring database and remote sensing technology, the Regen Network has been able to calculate and verify a Soil Carbon Credit for the Wilmot property.",
-        "tag": "soil organic carbon",
-        "keyOutcomesActivitiesDesc": "To ensure grazing activities align with soil health goals, the Wilmot Cattle Co. has committed to the following soil health protocols:"
+        "tag": "soil organic carbon"
       },
       "credits": {
         "purchased": 0,

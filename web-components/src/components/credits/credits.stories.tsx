@@ -1,6 +1,6 @@
 import * as React from 'react';
-import CreditDetails, { CreditDetailsProps } from 'web-components/lib/components/credits/CreditDetails';
-import { withKnobs, text, array, number } from '@storybook/addon-knobs';
+import CreditDetails, { CreditInfoProps } from 'web-components/lib/components/credits/CreditDetails';
+import { withKnobs, text, array, number, object } from '@storybook/addon-knobs';
 
 // import Credits from 'web-components/lib/components/credits/';
 // import Gauge from 'web-components/lib/components/credits/Gauge';
@@ -20,10 +20,13 @@ export default {
   decorators: [withKnobs],
 };
 
-const details: CreditDetailsProps = {
-  name: 'Australian Biodiversity Units (ABU’s)',
-  description:
-    'ABU’s are an Australian Government endorsed biodiversity credit. An individual ABU represents a 1.5m square area of land of significant environmental value that has been placed under a conservation covenant and agreed management plan. The covenant and management plan secure the long term preservation of the site and ensure the biodiversity value is protected in perpetuity. Vegetation types may include forests, grasslands, mallees, saltmarshes, scrubs, shrublands, wetlands, and woodlands. ABU’s are an innovative and unique way for organisations to preserve a tangible section of Australia’s unique natural habitat.',
+const details: CreditInfoProps = {
+  creditClass: {
+    name: 'Australian Biodiversity Units (ABU’s)',
+    tag: 'soil',
+    description:
+      'ABU’s are an Australian Government endorsed biodiversity credit. An individual ABU represents a 1.5m square area of land of significant environmental value that has been placed under a conservation covenant and agreed management plan. The covenant and management plan secure the long term preservation of the site and ensure the biodiversity value is protected in perpetuity. Vegetation types may include forests, grasslands, mallees, saltmarshes, scrubs, shrublands, wetlands, and woodlands. ABU’s are an innovative and unique way for organisations to preserve a tangible section of Australia’s unique natural habitat.',
+  },
   activities: [
     'Site accredited as a Specific Environmental Benefit (SEB) site and credits created by the South Australian Department of Environment and Water.',
     'A land management services agreement will be established with a local indigenous group, employing people from the local community.',
@@ -34,8 +37,7 @@ const details: CreditDetailsProps = {
 
 export const creditDetails = (): JSX.Element => (
   <CreditDetails
-    name={text('name', details.name)}
-    description={text('description', details.description)}
+    creditClass={object('creditClass', details.creditClass)}
     activities={array('activities', details.activities, ':')}
     background="./background.jpg"
     title="Key activities and outcomes"

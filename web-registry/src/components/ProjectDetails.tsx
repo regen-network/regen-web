@@ -338,8 +338,7 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
   // Credits Details and MRV table
   const creditDetails: JSX.Element = (
     <CreditDetails
-      name={project.creditClass.name}
-      description={project.creditClass.description}
+      creditClass={project.creditClass}
       activities={project.keyOutcomesActivities}
       title={
         project.fieldsOverride && project.fieldsOverride.keyOutcomesActivities

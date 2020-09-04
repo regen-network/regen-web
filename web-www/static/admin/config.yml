@@ -15,7 +15,7 @@ collections:
     editor:
       preview: false
     files:
-      - label: "Investors"
+      - label: "Invest"
         name: "investors"
         file: "web-www/content/investors/index.yaml"
         fields:

@@ -255,6 +255,9 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingRight: theme.spacing(7.5),
     },
   },
+  timelineContainer: {
+    backgroundColor: theme.palette.grey[50],
+  },
 }));
 
 interface ProjectProps {
@@ -543,7 +546,7 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
       )}
 
       {project.timeline && (
-        <div>
+        <div className={classes.timelineContainer}>
           {/*<div className={classes.projectDetails}>
           <Title variant="h3">Monitoring, Verification, and Reporting</Title>
         </div>*/}

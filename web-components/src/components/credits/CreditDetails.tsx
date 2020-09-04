@@ -70,7 +70,12 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     marginTop: theme.spacing(4.5),
   },
   activity: {
-    fontSize: '0.875rem',
+    [theme.breakpoints.up('sm')]: {
+      fontSize: theme.spacing(4.5),
+    },
+    [theme.breakpoints.down('xs')]: {
+      fontSize: theme.spacing(3.5),
+    },
     paddingBottom: theme.spacing(1.5),
     '& li::before': {
       content: "'\\2022'",
@@ -142,7 +147,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     marginLeft: theme.spacing(-2.5),
     fontSize: theme.spacing(3.5),
     marginBottom: theme.spacing(1.25),
-  }
+  },
 }));
 
 export default function CreditInfo({

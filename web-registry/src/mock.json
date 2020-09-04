@@ -413,9 +413,6 @@
       "fieldsOverride": {
         "nonMonitoredImpact": {
           "title": "Co-benefits"
-        },
-        "keyOutcomesActivities": {
-          "title": "Soil Health Protocols"
         }
       },
       "glanceImgSrc": "impactag-smallmap-top-v3.jpg",
@@ -484,11 +481,13 @@
       "image": "wilmotcattlecompany.jpg",
       "map": "Wilmot_boundary.kml",
       "keyOutcomesActivities": [
-        "We will limit mechanical, chemical and physical disturbance of soil wherever possible",
-        "We will aim for 100% groundcover 100% of the time",
-        "We will encourage all plant diversity - let all plants grow",
-        "We will endeavour to keep a living plant in the soil as much as possible, in order to sustain biological life in the soil",
-        "We will use animals to assist in improving soil health"
+        "Independently verified",
+        "Unique - avoiding double issuance through GIS tracking",
+        "Real - GHG impact is quantifiable and verifiable",
+        "Measurable - each credit represents one ton CO2e",
+        "Permanent - 25 year period through reversal buffer or covenant",
+        "Additional - a new practice adopted from pre-approved list",
+        "Leakage - de minimis in agricultural land management"
       ],
       "landManagementActions": [
         {
@@ -549,7 +548,7 @@
       ],
       "creditClass": {
         "name": "Carbon Plus Grasslands",
-        "description": "Measured increases in SOC have been used to calculate the carbon sequestration rate in the top 15cm of topsoil across the Wilmot property. Using Wilmot’s soil monitoring database and remote sensing technology, the Regen Network has been able to calculate and verify a Soil Carbon Credit for the Wilmot property.",
+        "description": "Livestock grazing covers over 3.3 billion hectares, or 25 percent of the world’s land area. Managed grazing practices can reverse land degredation, enhance net carbon sequestration, and improve soil and vegetation quality.<br><br>Under managed grazing, carbon sequestration potential is estimated between 16.4 and 26 Gt CO2e sequestered in the period between 2020-2050.<br><br>This credit is designed to significantly increase the amount of hectares under managed grazing worldwide. To that end, the methodology relies on remote sensing to significantly reduce the cost of monitoring carbon sequestration while maintaining scientific rigor.",
         "tag": "soil organic carbon"
       },
       "credits": {

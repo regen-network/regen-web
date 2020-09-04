@@ -6,7 +6,7 @@ import { Event } from 'web-components/lib/components/timeline';
 import { ActionProps } from 'web-components/lib/components/action';
 import { CreditPrice } from 'web-components/lib/components/fixed-footer/BuyFooter';
 import { Data } from 'web-components/lib/components/table';
-import { CreditClass, Methodology } from 'web-components/lib/components/credits/CreditDetails';
+import { CreditClass } from 'web-components/lib/components/credits/CreditDetails';
 import mock from './mock.json';
 
 // imgSrc should be either web url or static image filenames within web/src/assets/

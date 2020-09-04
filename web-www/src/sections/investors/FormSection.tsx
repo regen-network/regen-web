@@ -6,16 +6,19 @@ import Section from 'web-components/lib/components/section';
 const useStyles = makeStyles((theme: Theme) => ({
   form: {
     [theme.breakpoints.up('sm')]: {
+      display: 'inline-block',
       border: '1px solid #ccc',
       background: 'transparent',
+      width: '40rem',
     },
-    height: theme.spacing(450),
+    height: '110.5rem',
     '& .formHeader': {
       paddingLeft: 0,
       paddingRight: 0,
     },
   },
   section: {
+    textAlign: 'center',
     [theme.breakpoints.up('md')]: {
       paddingTop: theme.spacing(22.75),
       paddingBottom: theme.spacing(22.75),
@@ -30,6 +33,8 @@ const useStyles = makeStyles((theme: Theme) => ({
       height: '110rem',
       paddingRight: theme.spacing(0),
       paddingLeft: theme.spacing(0),
+      marginLeft: '-1rem',
+      width: 'calc(100% + 2rem)',
     },
   },
 }));

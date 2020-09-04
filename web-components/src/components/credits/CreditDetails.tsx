@@ -76,14 +76,20 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     [theme.breakpoints.down('xs')]: {
       fontSize: theme.spacing(3.5),
     },
+    display: 'flex',
     paddingBottom: theme.spacing(1.5),
-    '& li::before': {
-      content: "'\\2022'",
-      color: theme.palette.secondary.main,
-      display: 'inline-block',
-      width: '0.6rem',
-      marginLeft: '-0.6rem',
-      fontSize: theme.spacing(2),
+  },
+  bullet: {
+    color: theme.palette.secondary.main,
+    display: 'inline-block',
+    marginLeft: '-0.6rem',
+    fontSize: theme.spacing(2),
+    paddingRight: theme.spacing(1.25),
+    [theme.breakpoints.up('sm')]: {
+      paddingTop: theme.spacing(1.75),
+    },
+    [theme.breakpoints.down('xs')]: {
+      paddingTop: theme.spacing(1.25),
     },
   },
   icon: {
@@ -181,10 +187,13 @@ export default function CreditInfo({
         <div className={classes.activitiesItem}>
           <ul className={classes.activities}>
             {creditClass.keyOutcomesActivitiesDesc && (
-              <Typography className={classes.activitiesDesc}>{creditClass.keyOutcomesActivitiesDesc}</Typography>
+              <Typography className={classes.activitiesDesc}>
+                {creditClass.keyOutcomesActivitiesDesc}
+              </Typography>
             )}
             {activities.map((activity, index) => (
               <Typography key={index} className={classes.activity}>
+                <div className={classes.bullet}>•</div>
                 <li>{activity}</li>
               </Typography>
             ))}

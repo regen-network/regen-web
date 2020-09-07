@@ -36,7 +36,7 @@ export default function Admin(): JSX.Element {
           </p>
           {data && data.allProjects && data.allProjects.nodes && data.allProjects.nodes.length && (
             <p>
-              <b>Wilmot Project id:</b> {data.allProjects.nodes[0].id}
+              <b>Wilmot Project id:</b> {data.allProjects.nodes[0].id.substring(0, 8)}
             </p>
           )}
         </div>

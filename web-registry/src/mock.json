@@ -469,7 +469,7 @@
         "imgSrc": "wilmot.jpg",
         "description": "Wilmot Cattle Company is an innovative, regenerative, grass-fed beef business."
       },
-      "shortDescription": "Currently operating three properties in northeastern NSW, including Wilmot in the high rainfall basalt zone on the Ebor Plateau, Woodburn on the eastern fall north of Walcha and Morocco, north of Gunnedah.",
+      "shortDescription": "Wilmot Cattle Co currently operates two properties, Wilmot and Woodburn. The two properties operate cooperatively with a mix of breeding, trading, and 100% natural grass finishing enterprises.",
       "longDescription": "Wilmot is an extraordinary property high in the New England Tablelands at Ebor. Set on 1,854ha and at approximately 1,200m above sea level, average annual rainfall of 1,200mm, highly fertile volcanic basalt soils, and complimented by a series of pristine spring fed, year-round natural waterways including five waterfalls, it is quite simply a unique environment for growing cattle.\n\nPrior to the commencement of Wilmot Cattle Company operations in 2008 the property had been conventionally managed. In 2013, a transformation of the property began, moving to more regenerative and holistic management practices, resulting in significant gains in the overall ecological health of the farm.\n\nToday the property is managed in an intensive rotationally grazed system with small numbers of large mobs moving across the landscape, mimicking nature, to create ecological change and improve landscape health and biological function. At shovel depth, our soil organic carbon (SOC) has improved from ~2.5% to >4.5%, with a goal of getting it to >6% by 2023.",
       "media": [
         {
@@ -539,25 +539,25 @@
       "impact": [
         {
           "name": "Soil organic carbon",
-          "description": "Sequestering carbon in SOC is one way to mitigate climate change.",
+          "description": "Each credit represents one ton CO2e (1t CO2e) that has been sequestered to the soil.",
           "monitored": true,
           "imgSrc": "impactag-soc.jpg"
         },
         {
           "name": "Ecosystem health",
-          "description": "In the ecological realm, ‘health’ is characterized by system integrity and the exhibition of certain fundamental properties of self-organizing complex systems.",
+          "description": "We rank the ecosystem health based on the Costanza Framework, measuring its ability to maintain  structure (organization) and function (vigor) over time in the face of external stress (resilience).",
           "monitored": false,
           "imgSrc": "ecological-health.png"
         },
         {
           "name": "Animal welfare",
-          "description": "Animal welfare is an important component in a well managed grazing enterprise. Low stress stock handling techniques have been adopted to ensure animals have higher quality life.",
+          "description": "We rank Animal Welfare based on adherence to national animal welfare standards that track nutrition level, access to water, social contact and more.",
           "monitored": false,
           "imgSrc": "animal-welfare.png"
         },
         {
           "name": "Soil health",
-          "description": "We will limit mechanical, chemical and physical disturbance of soil wherever possible, and aim for 100% groundcover 100% of the time.",
+          "description": "We rank the soil health based on Cornell University’s Soil Health Assessment looking at both micronutrients and macronutrients.",
           "monitored": false,
           "imgSrc": "soil.png"
         }

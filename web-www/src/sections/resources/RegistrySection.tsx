@@ -63,6 +63,7 @@ const RegistrySection = (): JSX.Element => {
               className={classes.section}
               linearGradient="unset"
               imageData={data.background.childImageSharp.fluid}
+              topSection={false}
             >
               <Title className={classes.title} variant="h3" align="left">
                 {content.header}

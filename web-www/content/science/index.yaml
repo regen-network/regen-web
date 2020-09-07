@@ -9,7 +9,19 @@ titleDescriptionSection:
 
     Earth observation science, landscape ecology, and our ability to understand complex ecological systems is undergoing a technological revolution. Regen Network in the vanguard of this movement to make climate science available to the people and markets who need it most.
     
-    
+
     Join us in service of better decision-making, better markets, and collective action on climate.
   imageMobile: ../../static/media/eco-health.png
   imageDesktop: ../../static/media/eco-health.png
+openScienceSection:
+  caption: Regen Network
+  header:
+    start: Movement for
+    green: '#OpenScience'
+  phases:
+    - title: Phase I
+      description: Develop cutting edge earth observation and remote sensing methodologies to verify ecological state.
+    - title: Phase II
+      description: Methodology registry where different methodologies, both mature and nascent, are registered on the Regen Ledger for scientific comparison, peer review and rating.
+    - title: Phase III
+      description: Develop robust, peer to peer methodology and scientific data market place and tailored user experience for scientists.

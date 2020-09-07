@@ -31,7 +31,8 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       paddingBottom: theme.spacing(13),
     },
     [theme.breakpoints.up('sm')]: {
-      padding: `${theme.spacing(80)} 0 ${theme.spacing(27.5)} 0`,
+      paddingTop: props.topSection ? theme.spacing(80) : theme.spacing(21.5),
+      paddingBottom: theme.spacing(27.5),
     },
     backgroundSize: 'cover',
   }),
@@ -174,7 +175,7 @@ const BackgroundSection = ({
         >
           <div className={classes.backgroundGradient} />
           {textJSX}
-          {children}
+          <div className={classes.children}>{children}</div>
         </BackgroundImage>
       </Box>
       <Box display={{ xs: 'none', sm: 'block' }}>

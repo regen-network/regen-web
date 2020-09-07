@@ -15,13 +15,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   section: {
     borderBottom: `1px solid ${theme.palette.grey[300]}`,
-    [theme.breakpoints.up('sm')]: {
-      paddingTop: theme.spacing(21.5),
-    },
-    [theme.breakpoints.down('xs')]: {
-      paddingLeft: theme.spacing(3),
-      paddingTop: theme.spacing(17),
-    },
   },
 }));
 

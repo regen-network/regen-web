@@ -551,7 +551,7 @@
         },
         {
           "name": "Animal welfare",
-          "description": "We rank Animal Welfare based on adherence to national animal welfare standards that track nutrition level, access to water, social contact and more.",
+          "description": "We rank animal welfare based on adherence to national animal welfare standards that track nutrition level, access to water, social contact and more.",
           "monitored": false,
           "imgSrc": "animal-welfare.png"
         },

@@ -3,10 +3,22 @@ module.exports = {
     title: `Regen Network`,
     description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
     author: `@gatsbyjs`,
+    siteUrl: 'https://www.regen.network/',
   },
   plugins: [
     'gatsby-plugin-layout',
     `gatsby-plugin-netlify`,
+    {
+      resolve: `gatsby-plugin-advanced-sitemap`,
+      options: {
+        additionalSitemaps: [
+          {
+            name: `registry`,
+            url: `/registry/sitemap.xml`,
+          },
+        ],
+      },
+    },
     {
       resolve: `gatsby-plugin-material-ui`,
       options: {

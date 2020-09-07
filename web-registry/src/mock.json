@@ -414,10 +414,22 @@
       },
       "documents": [
         {
-          "name": "Example name",
-          "type": "Example type",
-          "date": "March 15, 2020",
-          "url": "test"
+          "name": "Wilmot Cattle 2017 Baseline Report",
+          "type": "Monitoring",
+          "date": "September 2, 2020",
+          "url": "https://regen-registry.s3.amazonaws.com/Wilmot+Baseline+Report+(2017).pdf"
+        },
+        {
+          "name": "Wilmot Cattle 2019 Baseline Report",
+          "type": "Monitoring",
+          "date": "September 2, 2020",
+          "url": "https://regen-registry.s3.amazonaws.com/_Wilmot+Report+(2019)_+Grassland+credits.pdf"
+        },
+        {
+          "name": "Regen Registry Project Plan",
+          "type": "Planning",
+          "date": "August 20, 2020",
+          "url": "https://regen-registry.s3.amazonaws.com/Regen+Registry+Project+Plan.pdf"
         }
       ],
       "stripePrice": "sku_HAqf7cJtNFynOf",

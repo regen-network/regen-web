@@ -489,11 +489,6 @@
           "thumbnail": "Wilmot5-thumbnail.jpg"
         },
         {
-          "src": "99D630701C84FDBD8CD9A96E7E989489.mov",
-          "thumbnail": "Wilmot2-thumbnail.jpg",
-          "preview": "Wilmot2.jpg"
-        },
-        {
           "src": "Wilmot3.jpg",
           "thumbnail": "Wilmot3-thumbnail.jpg"
         },
@@ -504,6 +499,11 @@
         {
           "src": "Wilmot6.jpg",
           "thumbnail": "Wilmot6-thumbnail.jpg"
+        },
+        {
+          "src": "99D630701C84FDBD8CD9A96E7E989489.mov",
+          "thumbnail": "Wilmot2-thumbnail.jpg",
+          "preview": "Wilmot2.jpg"
         }
       ],
       "image": "wilmotcattlecompany.jpg",

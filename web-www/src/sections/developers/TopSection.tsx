@@ -6,7 +6,7 @@ import BackgroundSection from '../../components/BackgroundSection';
 const TopSection = (): JSX.Element => {
   const data = useStaticQuery(graphql`
     query {
-      background: file(relativePath: { eq: "developers-top.jpg" }) {
+      background: file(relativePath: { eq: "developers-top-image.jpg" }) {
         childImageSharp {
           fluid(quality: 90) {
             ...GatsbyImageSharpFluid_withWebp

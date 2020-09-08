@@ -299,7 +299,7 @@
             },
             {
               "name": "Perennial pasture",
-              "description": "Establishing perennial pasture on salt effected, low lying or marginally productive land increases the agricultural production of the land as well as supporting a more stable year round climate for soil biology.",
+              "description": "Establishing perennial pasture on salt effected, low lying, or marginally productive land increases the agricultural production of the land as well as supporting a more stable year round climate for soil biology.",
               "imgSrc": "perennial-pasture.png"
             }
           ]
@@ -445,8 +445,8 @@
       },
       "glanceImgSrc": "impactag-smallmap-top-v3.jpg",
       "glanceText": [
-        "Increased Soil Organic Carbon to 4.5% and removed 21,306 tons of CO2e in two years.",
-        "Improved Co-benefits significantly with Soil Health ranking as excellent, Ecosystem Health as good and Animal Welfare as excellent."
+        "Increased soil organic carbon to 4.5% and removed 21,306 tons of CO2e in two years.",
+        "Improved co-benefits significantly with Soil Health ranking as excellent, Ecosystem Health as good, and Animal Welfare as excellent."
       ],
       "place": {
         "city": "Hernani",
@@ -482,7 +482,7 @@
         "description": "Wilmot Cattle Company is an innovative, regenerative, grass-fed beef business."
       },
       "shortDescription": "Wilmot Cattle Co currently operates two properties, Wilmot and Woodburn. The two properties operate cooperatively with a mix of breeding, trading, and 100% natural grass finishing enterprises.",
-      "longDescription": "Wilmot is an extraordinary property high in the New England Tablelands at Ebor. Set on 1,854ha and at approximately 1,200m above sea level, average annual rainfall of 1,200mm, highly fertile volcanic basalt soils, and complimented by a series of pristine spring fed, year-round natural waterways including five waterfalls, it is quite simply a unique environment for growing cattle.\n\nPrior to the commencement of Wilmot Cattle Company operations in 2008 the property had been conventionally managed. In 2013, a transformation of the property began, moving to more regenerative and holistic management practices, resulting in significant gains in the overall ecological health of the farm.\n\nToday the property is managed in an intensive rotationally grazed system with small numbers of large mobs moving across the landscape, mimicking nature, to create ecological change and improve landscape health and biological function. At shovel depth, our soil organic carbon (SOC) has improved from ~2.5% to >4.5%, with a goal of getting it to >6% by 2023.",
+      "longDescription": "Wilmot is an extraordinary property high in the New England Tablelands at Ebor. Set on 1,854 hectares and at approximately 1,200 meters above sea level, average annual rainfall of 1,200 mm, highly fertile volcanic basalt soils, and complimented by a series of pristine spring fed, year-round natural waterways including five waterfalls, it is quite simply a unique environment for growing cattle.\n\nPrior to the commencement of Wilmot Cattle Company operations in 2008 the property had been conventionally managed. In 2013, a transformation of the property began, moving to more regenerative and holistic management practices, resulting in significant gains in the overall ecological health of the farm.\n\nToday the property is managed in an intensive rotationally-grazed system with small numbers of large mobs moving across the landscape, mimicking nature, to create ecological change and improve landscape health and biological function. At shovel depth, our soil organic carbon (SOC) has improved from ~2.5% to >4.5%, with a goal of getting it to >6% by 2023.",
       "media": [
         {
           "src": "Wilmot5.jpg",
@@ -512,7 +512,7 @@
         "Independently verified",
         "Unique - avoiding double issuance through GIS tracking",
         "Real - GHG impact is quantifiable and verifiable",
-        "Measurable - each credit represents one ton CO2e",
+        "Measurable - each credit represents one ton of CO2e",
         "Permanent - 25 year period through reversal buffer or covenant",
         "Additional - a new practice adopted from pre-approved list",
         "Leakage - de minimis in agricultural land management"
@@ -551,7 +551,7 @@
       "impact": [
         {
           "name": "Soil organic carbon",
-          "description": "Each credit represents one ton of CO2e (1t CO2e) that has been sequestered to the soil.",
+          "description": "Each credit represents one ton of CO2e (1t CO2e) that has been sequestered in the soil.",
           "monitored": true,
           "imgSrc": "impactag-soc.jpg"
         },
@@ -576,7 +576,7 @@
       ],
       "creditClass": {
         "name": "Carbon Plus Grasslands",
-        "description": "Livestock grazing covers over 3.3 billion hectares, or 25 percent of the world’s land area. Managed grazing practices can reverse land degredation, enhance net carbon sequestration, and improve soil and vegetation quality.<br><br>Under managed grazing, carbon sequestration potential is estimated between 16.4 and 26 Gt CO2e sequestered in the period between 2020-2050.<br><br>This credit is designed to significantly increase the amount of hectares under managed grazing worldwide. To that end, the methodology relies on remote sensing to significantly reduce the cost of monitoring carbon sequestration while maintaining scientific rigor.",
+        "description": "Livestock grazing covers over 3.3 billion hectares, or 25 percent of the world’s land area. Managed grazing practices can reverse land degradation, enhance net carbon sequestration, and improve soil and vegetation quality.<br><br>Under managed grazing, carbon sequestration potential is estimated between 16.4 and 26 Gt CO2e sequestered in the period between 2020-2050.<br><br>This credit is designed to significantly increase the amount of hectares under managed grazing worldwide. To that end, the methodology relies on remote sensing to significantly reduce the cost of monitoring carbon sequestration while maintaining scientific rigor.",
         "tag": "soil organic carbon"
       },
       "credits": {

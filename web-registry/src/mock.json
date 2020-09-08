@@ -382,7 +382,7 @@
         "completedItemIndex": 4,
         "events": [
           {
-            "title": "Crediting term",
+            "title": "Credit term begins",
             "description": "Crediting Term starts at the initial monitoring date.",
             "date": " July 1st, 2017"
           },
@@ -551,7 +551,7 @@
       "impact": [
         {
           "name": "Soil organic carbon",
-          "description": "Each credit represents one ton CO2e (1t CO2e) that has been sequestered to the soil.",
+          "description": "Each credit represents one ton of CO2e (1t CO2e) that has been sequestered to the soil.",
           "monitored": true,
           "imgSrc": "impactag-soc.jpg"
         },

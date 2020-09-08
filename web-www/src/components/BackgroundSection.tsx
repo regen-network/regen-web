@@ -173,7 +173,7 @@ const BackgroundSection = ({
           fluid={imageDataMobile ? imageDataMobile : imageData}
           backgroundColor="transparent"
         >
-          <div className={classes.backgroundGradient} />
+          {linearGradient !== 'unset' && <div className={classes.backgroundGradient} />}
           {textJSX}
           <div className={classes.children}>{children}</div>
         </BackgroundImage>
@@ -185,7 +185,7 @@ const BackgroundSection = ({
           fluid={imageData}
           backgroundColor="transparent"
         >
-          <div className={classes.backgroundGradient} />
+          {linearGradient !== 'unset' && <div className={classes.backgroundGradient} />}
           {textJSX}
           <div className={classes.children}>{children}</div>
         </BackgroundImage>

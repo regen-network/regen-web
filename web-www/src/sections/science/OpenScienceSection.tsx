@@ -4,7 +4,6 @@ import { makeStyles, Theme } from '@material-ui/core';
 
 import Title from 'web-components/lib/components/title';
 import Description from 'web-components/lib/components/description';
-import Section from 'web-components/lib/components/section';
 import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';
 import { getFontSize } from 'web-components/lib/theme/sizing';
 import BackgroundSection from '../../components/BackgroundSection';

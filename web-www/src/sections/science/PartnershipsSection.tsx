@@ -7,7 +7,6 @@ import ReactHtmlParser from 'react-html-parser';
 
 import Title from 'web-components/lib/components/title';
 import Description from 'web-components/lib/components/description';
-import { getFontSize } from 'web-components/lib/theme/sizing';
 import BackgroundSection from '../../components/BackgroundSection';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -41,6 +40,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   description: {
     [theme.breakpoints.up('sm')]: {
       paddingTop: theme.spacing(2.25),
+      fontSize: theme.spacing(4.5),
+    },
+    [theme.breakpoints.down('xs')]: {
+      fontSize: theme.spacing(3.5),
     },
   },
   image: {

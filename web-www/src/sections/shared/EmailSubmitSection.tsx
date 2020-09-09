@@ -66,7 +66,6 @@ const EmailSubmitSection = ({ image }: Props): JSX.Element => {
       `}
       render={data => {
         const imageData = image || data.desktop.childImageSharp.fluid;
-        console.log(imageData);
         const content = data.text.newsletterSection;
         return (
           <BackgroundImage Tag="section" fluid={imageData} backgroundColor={`#040e18`}>

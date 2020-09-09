@@ -1,6 +1,6 @@
 topSection:
   header: Science
-  body: Regen Network is building an open, peer to peer scientific data and methodology commons in service to cutting edge earth observation science for climate action.
+  body: Regen Network is building an open, peer-to-peer scientific data and methodology commons in service to cutting edge earth observation science for climate action.
 titleDescriptionSection:
   header: Measuring Ecological Health
   description: md//
@@ -24,7 +24,7 @@ openScienceSection:
     - title: Phase II
       description: Methodology registry where different methodologies, both mature and nascent, are registered on the Regen Ledger for scientific comparison, peer review and rating.
     - title: Phase III
-      description: Develop robust, peer to peer methodology and scientific data market place and tailored user experience for scientists.
+      description: Develop robust, peer-to-peer methodology and scientific data market place and tailored user experience for scientists.
 partnershipsSection:
   header: Partnerships
   partners:
@@ -32,5 +32,31 @@ partnershipsSection:
       description: md//The <a href="https://openteam.community/" target="_blank">Open Technology Ecosystem for Agricultural Management</a> brings together almost two dozen entities—including government agencies, research institutions, nonprofits, and corporations—to build open source tools that improve the ability of farmers and ranchers to make informed management decisions about their land in ways that result in increased landscape health. As a partner in this endeavor, we at Regen are contributing our expertise and technology regarding remote sensing of ecological indicators, durable and interoperable storage of ecological data, and governance of decentralized networks.
     - image: ../../static/media/yale-openlab.png
       description: md//<a href="https://openlab.yale.edu/" target="_blank">Yale OpenLab</a> develops and incubate open source and disruptive projects that seek to address the most pressing big picture challenges. Regen Network has been partnering with their Open Climate project to explore the application of blockchain and other emerging technologies to the challenge of helping the world keep a transparent accounting system as we strive to achieve the climate targets set in the 2015 Paris Agreement (PA).
-    
-    
+communitySection:
+  caption: Connect
+  header: Science Community
+  members:
+    - name: Dr. Gisel Booman
+      image: ../../static/media/science-community.png
+      role: regen team
+      description: Experienced Geographic Information Systems Consultant with a demonstrated history of working in the environmental services industry. Skilled in ArcGIS, Remote Sensing Applications, Ecosystem services and non-point pollution assessments.
+    - name: Placeholder name 2
+      image: ../../static/media/science-community.png
+      role: Placeholder role 2
+      description: Placeholder description 2
+    - name: Placeholder name 3
+      image: ../../static/media/science-community.png
+      role: Placeholder role 3
+      description: Placeholder description 3
+    - name: Placeholder name 4
+      image: ../../static/media/science-community.png
+      role: Placeholder role 4
+      description: Placeholder description 4
+    - name: Placeholder name 5
+      image: ../../static/media/science-community.png
+      role: Placeholder role 5
+      description: Placeholder description 5
+    - name: Placeholder name 6
+      image: ../../static/media/science-community.png
+      role: Placeholder role 6
+      description: Placeholder description 6

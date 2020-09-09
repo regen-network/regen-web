@@ -15,6 +15,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     [theme.breakpoints.down('xs')]: {
       paddingBottom: theme.spacing(37.5),
+      '&::before': {
+        backgroundPosition: `right ${theme.spacing(27.5)} !important`,
+      },
     },
   },
   title: {
@@ -24,7 +27,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     [theme.breakpoints.down('xs')]: {
       fontSize: theme.spacing(5.5),
-      paddingBottom: theme.spacing(10),
     },
   },
   caption: {
@@ -66,7 +68,7 @@ const OpenScienceSection = (): JSX.Element => {
     <StaticQuery
       query={graphql`
         query {
-          background: file(relativePath: { eq: "open-science.png" }) {
+          background: file(relativePath: { eq: "open-science.jpg" }) {
             childImageSharp {
               fluid(quality: 90) {
                 ...GatsbyImageSharpFluid_withWebp

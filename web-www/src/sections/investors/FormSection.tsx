@@ -10,9 +10,9 @@ const useStyles = makeStyles((theme: Theme) => ({
       border: '1px solid #ccc',
       background: 'transparent',
       width: '40rem',
-      height: '110.5rem',
+      height: '111.1rem',
     },
-    height: '120rem',
+    height: '125rem',
     '& .formHeader': {
       paddingLeft: 0,
       paddingRight: 0,
@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingLeft: theme.spacing(25),
     },
     [theme.breakpoints.down('xs')]: {
-      height: '120rem',
+      height: '125rem',
       paddingRight: theme.spacing(0),
       paddingLeft: theme.spacing(0),
       marginLeft: '-1rem',

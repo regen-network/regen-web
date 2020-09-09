@@ -15,6 +15,22 @@ collections:
     editor:
       preview: false
     files:
+      - label: "Developers"
+        name: "developers"
+        file: "web-www/content/developers/index.yaml"
+        fields:
+          - label: "Top Section"
+            name: "topSection"
+            widget: "object"
+            fields:
+              - {label: Header, name: header, widget: string}
+              - {label: Body, name: body, widget: string}
+          - label: "Ledger Section"
+            name: "ledgerSection"
+            widget: "object"
+            fields:
+              - {label: Header, name: header, widget: string}
+              - {label: Body, name: body, widget: string}
       - label: "Team"
         name: "team"
         file: "web-www/content/team/index.yaml"

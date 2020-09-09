@@ -1,3 +1,10 @@
 topSection:
   header: developers_validators
   body: The Regen Ledger blockchain enables our community to develop a suite of platforms and applications in service of regenerating human relationships with land.
+ledgerSection:
+  header: The Regen Ledger
+  body: md//
+    The Regen Ledger blockchain (currently in testnet) is powered by our global validator set. Regen Ledger is a public Proof-of-Stake blockchain built on the Cosmos SDK with smart contracting enabled through CosmWasm (currently in testnet). 
+    
+    
+    Built on the Regen Ledger, the [Regen Registry](/registry/projects/impactag/) is our open marketplace for carbon and ecosystem credit sales. We envision more applications living on top of the Regen Ledger, automated payments to land stewards based on real-world land regeneration, contracts that enable municipalities to lower climate risk by paying farmers to build regional landscape-scale resilience, and more.

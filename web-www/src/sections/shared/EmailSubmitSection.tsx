@@ -5,6 +5,10 @@ import BackgroundImage from 'gatsby-background-image';
 import Title from 'web-components/lib/components/title';
 import NewsletterForm from 'web-components/lib/components/form/NewsletterForm';
 
+interface Props {
+  image?: object;
+}
+
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     [theme.breakpoints.up('sm')]: {
@@ -39,7 +43,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const EmailSubmitSection = () => {
+const EmailSubmitSection = ({ image }: Props): JSX.Element => {
   const classes = useStyles({});
   return (
     <StaticQuery
@@ -61,7 +65,7 @@ const EmailSubmitSection = () => {
         }
       `}
       render={data => {
-        const imageData = data.desktop.childImageSharp.fluid;
+        const imageData = image || data.desktop.childImageSharp.fluid;
         const content = data.text.newsletterSection;
         return (
           <BackgroundImage Tag="section" fluid={imageData} backgroundColor={`#040e18`}>

@@ -25,6 +25,14 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     [theme.breakpoints.down('xs')]: {
       fontSize: props.fontSize.xs,
     },
+    '& a': {
+      color: theme.palette.secondary.main,
+      fontWeight: 'bold',
+      textDecoration: 'none',
+      '&:link, &:visited, &:hover, &:active': {
+        textDecoration: 'none',
+      },
+    },
   }),
 }));
 

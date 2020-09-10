@@ -430,6 +430,12 @@
           "type": "Registration",
           "date": "August 20, 2020",
           "url": "https://regen-registry.s3.amazonaws.com/Regen+Registry+Project+Plan.pdf"
+        },
+        {
+          "name": "Sales Certificate",
+          "type": "Sales",
+          "date": "September 10, 2020",
+          "url": "https://regen-registry.s3.amazonaws.com/Sales_Certificate.pdf"
         }
       ],
       "stripePrice": "sku_HAqf7cJtNFynOf",
@@ -501,7 +507,7 @@
           "thumbnail": "Wilmot6-thumbnail.jpg"
         },
         {
-          "src": "99D630701C84FDBD8CD9A96E7E989489.mov",
+          "src": "https://regen-registry.s3.amazonaws.com/Wilmot+Video.mp4",
           "thumbnail": "Wilmot2-thumbnail.jpg",
           "preview": "Wilmot2.jpg"
         }

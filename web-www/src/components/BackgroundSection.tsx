@@ -16,6 +16,7 @@ interface Props {
   imageDataMobile?: any;
   withSlider?: boolean;
   topSection?: boolean;
+  headerFlair?: JSX.Element;
 }
 
 interface StyleProps {
@@ -137,6 +138,7 @@ const BackgroundSection = ({
   children,
   withSlider,
   topSection = true,
+  headerFlair,
 }: Props): JSX.Element => {
   const classes = useStyles({ linearGradient, topSection });
   let headerJSX, bodyJSX, textJSX;
@@ -145,6 +147,7 @@ const BackgroundSection = ({
     headerJSX = (
       <Title color="primary" variant="h1" className={classes.title}>
         {header}
+        {headerFlair ? headerFlair : null}
       </Title>
     );
   }

@@ -6965,6 +6965,16 @@ exports[`Storyshots Components|Title Title 1`] = `
 </div>
 `;
 
+exports[`Storyshots Components|TitleDescription Description 1`] = `
+<div>
+  <div
+    className="MuiTypography-root makeStyles-root-923 makeStyles-root-924 MuiTypography-body1"
+    description="Regen Network is empowering an open community of scientists to build and deploy cutting edge methodologies to measure ecological health and make scientifically robust claims.&lt;br&gt;Earth observation science, landscape ecology, and our ability to understand complex ecological systems is undergoing a technological revolution. Regen Network in the vanguard of this movement to make climate science available to the people and markets who need it most. Join us in service of better decision-making, better markets, and collective action on climate."
+    title="Measuring Ecological Health"
+  />
+</div>
+`;
+
 exports[`Storyshots Components|Tooltip Main Title 1`] = `
 <div>
   <div
@@ -6992,7 +7002,7 @@ exports[`Storyshots Components|Tooltip Main Title 1`] = `
 exports[`Storyshots Components|User Big User Avatar 1`] = `
 <div>
   <div
-    className="MuiAvatar-root MuiAvatar-circle makeStyles-root-935 makeStyles-root-936"
+    className="MuiAvatar-root MuiAvatar-circle makeStyles-root-939 makeStyles-root-940"
   >
     <img
       alt="Odonata"
@@ -7012,7 +7022,7 @@ exports[`Storyshots Components|User Big User Info 1`] = `
       className="MuiGrid-root MuiGrid-item"
     >
       <div
-        className="MuiAvatar-root MuiAvatar-circle makeStyles-root-983 makeStyles-root-984"
+        className="MuiAvatar-root MuiAvatar-circle makeStyles-root-987 makeStyles-root-988"
       >
         <img
           alt="Odonata"
@@ -7022,20 +7032,20 @@ exports[`Storyshots Components|User Big User Info 1`] = `
       </div>
     </div>
     <div
-      className="MuiGrid-root makeStyles-text-975 makeStyles-text-980 MuiGrid-item"
+      className="MuiGrid-root makeStyles-text-979 makeStyles-text-984 MuiGrid-item"
     >
       <p
-        className="MuiTypography-root makeStyles-name-976 makeStyles-name-981 MuiTypography-body1"
+        className="MuiTypography-root makeStyles-name-980 makeStyles-name-985 MuiTypography-body1"
       >
         Odonata
       </p>
       <p
-        className="MuiTypography-root makeStyles-place-979 makeStyles-place-982 MuiTypography-body1"
+        className="MuiTypography-root makeStyles-place-983 makeStyles-place-986 MuiTypography-body1"
       >
         South Melbourne, Victoria, Australia
       </p>
       <p
-        className="MuiTypography-root makeStyles-description-978 MuiTypography-body1"
+        className="MuiTypography-root makeStyles-description-982 MuiTypography-body1"
       >
         Odonata is a not-for-profit entity supporting biodiversity impact solutions.
       </p>
@@ -7053,7 +7063,7 @@ exports[`Storyshots Components|User Column User Info 1`] = `
       className="MuiGrid-root MuiGrid-item"
     >
       <div
-        className="MuiAvatar-root MuiAvatar-circle makeStyles-root-1003 makeStyles-root-1004"
+        className="MuiAvatar-root MuiAvatar-circle makeStyles-root-1007 makeStyles-root-1008"
       >
         <img
           alt="Odonata"
@@ -7063,20 +7073,20 @@ exports[`Storyshots Components|User Column User Info 1`] = `
       </div>
     </div>
     <div
-      className="MuiGrid-root makeStyles-text-995 makeStyles-text-1000 MuiGrid-item"
+      className="MuiGrid-root makeStyles-text-999 makeStyles-text-1004 MuiGrid-item"
     >
       <p
-        className="MuiTypography-root makeStyles-name-996 makeStyles-name-1001 MuiTypography-body1"
+        className="MuiTypography-root makeStyles-name-1000 makeStyles-name-1005 MuiTypography-body1"
       >
         Odonata
       </p>
       <p
-        className="MuiTypography-root makeStyles-place-999 makeStyles-place-1002 MuiTypography-body1"
+        className="MuiTypography-root makeStyles-place-1003 makeStyles-place-1006 MuiTypography-body1"
       >
         South Melbourne, Victoria, Australia
       </p>
       <p
-        className="MuiTypography-root makeStyles-description-998 MuiTypography-body1"
+        className="MuiTypography-root makeStyles-description-1002 MuiTypography-body1"
       >
         Odonata is a not-for-profit entity supporting biodiversity impact solutions.
       </p>
@@ -7088,7 +7098,7 @@ exports[`Storyshots Components|User Column User Info 1`] = `
 exports[`Storyshots Components|User Fallback User Avatar 1`] = `
 <div>
   <div
-    className="MuiAvatar-root MuiAvatar-circle makeStyles-root-943 makeStyles-root-944 MuiAvatar-colorDefault"
+    className="MuiAvatar-root MuiAvatar-circle makeStyles-root-947 makeStyles-root-948 MuiAvatar-colorDefault"
   >
     <svg
       aria-hidden={true}
@@ -7107,7 +7117,7 @@ exports[`Storyshots Components|User Fallback User Avatar 1`] = `
 exports[`Storyshots Components|User Medium User Avatar 1`] = `
 <div>
   <div
-    className="MuiAvatar-root MuiAvatar-circle makeStyles-root-931 makeStyles-root-932"
+    className="MuiAvatar-root MuiAvatar-circle makeStyles-root-935 makeStyles-root-936"
   >
     <img
       alt="Odonata"
@@ -7127,7 +7137,7 @@ exports[`Storyshots Components|User Medium User Info 1`] = `
       className="MuiGrid-root MuiGrid-item"
     >
       <div
-        className="MuiAvatar-root MuiAvatar-circle makeStyles-root-963 makeStyles-root-964"
+        className="MuiAvatar-root MuiAvatar-circle makeStyles-root-967 makeStyles-root-968"
       >
         <img
           alt="Odonata"
@@ -7137,20 +7147,20 @@ exports[`Storyshots Components|User Medium User Info 1`] = `
       </div>
     </div>
     <div
-      className="MuiGrid-root makeStyles-text-955 makeStyles-text-960 MuiGrid-item"
+      className="MuiGrid-root makeStyles-text-959 makeStyles-text-964 MuiGrid-item"
     >
       <p
-        className="MuiTypography-root makeStyles-name-956 makeStyles-name-961 MuiTypography-body1"
+        className="MuiTypography-root makeStyles-name-960 makeStyles-name-965 MuiTypography-body1"
       >
         Odonata
       </p>
       <p
-        className="MuiTypography-root makeStyles-place-959 makeStyles-place-962 MuiTypography-body1"
+        className="MuiTypography-root makeStyles-place-963 makeStyles-place-966 MuiTypography-body1"
       >
         South Melbourne, Victoria, Australia
       </p>
       <p
-        className="MuiTypography-root makeStyles-description-958 MuiTypography-body1"
+        className="MuiTypography-root makeStyles-description-962 MuiTypography-body1"
       >
         Odonata is a not-for-profit entity supporting biodiversity impact solutions.
       </p>
@@ -7167,7 +7177,7 @@ exports[`Storyshots Components|User User Avatar With Link 1`] = `
     target="_blank"
   >
     <div
-      className="MuiAvatar-root MuiAvatar-circle makeStyles-root-939 makeStyles-root-940"
+      className="MuiAvatar-root MuiAvatar-circle makeStyles-root-943 makeStyles-root-944"
     >
       <img
         alt="Odonata"
@@ -7183,7 +7193,7 @@ exports[`Storyshots Components|User With Title 1`] = `
 <div>
   <div>
     <p
-      className="MuiTypography-root makeStyles-title-1016 MuiTypography-body1"
+      className="MuiTypography-root makeStyles-title-1020 MuiTypography-body1"
     >
       project developer
     </p>
@@ -7194,7 +7204,7 @@ exports[`Storyshots Components|User With Title 1`] = `
         className="MuiGrid-root MuiGrid-item"
       >
         <div
-          className="MuiAvatar-root MuiAvatar-circle makeStyles-root-1025 makeStyles-root-1026"
+          className="MuiAvatar-root MuiAvatar-circle makeStyles-root-1029 makeStyles-root-1030"
         >
           <img
             alt="Odonata"
@@ -7204,20 +7214,20 @@ exports[`Storyshots Components|User With Title 1`] = `
         </div>
       </div>
       <div
-        className="MuiGrid-root makeStyles-text-1017 makeStyles-text-1022 MuiGrid-item"
+        className="MuiGrid-root makeStyles-text-1021 makeStyles-text-1026 MuiGrid-item"
       >
         <p
-          className="MuiTypography-root makeStyles-name-1018 makeStyles-name-1023 MuiTypography-body1"
+          className="MuiTypography-root makeStyles-name-1022 makeStyles-name-1027 MuiTypography-body1"
         >
           Odonata
         </p>
         <p
-          className="MuiTypography-root makeStyles-place-1021 makeStyles-place-1024 MuiTypography-body1"
+          className="MuiTypography-root makeStyles-place-1025 makeStyles-place-1028 MuiTypography-body1"
         >
           South Melbourne, Victoria, Australia
         </p>
         <p
-          className="MuiTypography-root makeStyles-description-1020 MuiTypography-body1"
+          className="MuiTypography-root makeStyles-description-1024 MuiTypography-body1"
         >
           Odonata is a not-for-profit entity supporting biodiversity impact solutions.
         </p>

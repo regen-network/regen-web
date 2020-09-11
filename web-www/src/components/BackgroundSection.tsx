@@ -15,6 +15,7 @@ interface Props {
   imageData: any;
   imageDataMobile?: any;
   withSlider?: boolean;
+  topSection?: boolean;
 }
 
 interface StyleProps {
@@ -26,11 +27,12 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   root: props => ({
     overflow: 'hidden',
     [theme.breakpoints.down('xs')]: {
-      paddingTop: theme.spacing(17.75),
+      paddingTop: props.topSection ? theme.spacing(70) : theme.spacing(17.75),
       paddingBottom: theme.spacing(13),
     },
     [theme.breakpoints.up('sm')]: {
-      padding: `${theme.spacing(80)} ${0} ${theme.spacing(27.5)} ${0}`,
+      paddingTop: props.topSection ? theme.spacing(80) : theme.spacing(21.5),
+      paddingBottom: theme.spacing(27.5),
     },
     backgroundSize: 'cover',
   }),
@@ -134,8 +136,9 @@ const BackgroundSection = ({
   header,
   children,
   withSlider,
+  topSection = true,
 }: Props): JSX.Element => {
-  const classes = useStyles({ linearGradient });
+  const classes = useStyles({ linearGradient, topSection });
   let headerJSX, bodyJSX, textJSX;
   // Tried to use && operator, but it doesn't seem to play nicely with passing in dynamic props to the object
   if (header) {
@@ -170,9 +173,9 @@ const BackgroundSection = ({
           fluid={imageDataMobile ? imageDataMobile : imageData}
           backgroundColor="transparent"
         >
-          <div className={classes.backgroundGradient} />
+          {linearGradient !== 'unset' && <div className={classes.backgroundGradient} />}
           {textJSX}
-          {children}
+          <div className={classes.children}>{children}</div>
         </BackgroundImage>
       </Box>
       <Box display={{ xs: 'none', sm: 'block' }}>
@@ -182,7 +185,7 @@ const BackgroundSection = ({
           fluid={imageData}
           backgroundColor="transparent"
         >
-          <div className={classes.backgroundGradient} />
+          {linearGradient !== 'unset' && <div className={classes.backgroundGradient} />}
           {textJSX}
           <div className={classes.children}>{children}</div>
         </BackgroundImage>

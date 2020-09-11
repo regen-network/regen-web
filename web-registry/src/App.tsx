@@ -64,10 +64,10 @@ function AppFooter(): JSX.Element {
         //   title: 'Developers & Validators',
         //   href: `${process.env.REACT_APP_WEBSITE_URL}/developers/`,
         // },
-        // {
-        //   title: 'Scientists & Verifiers',
-        //   href: `${process.env.REACT_APP_WEBSITE_URL}/scientists/`,
-        // },
+        {
+          title: 'Scientists & Verifiers',
+          href: `${process.env.REACT_APP_WEBSITE_URL}/science/`,
+        },
         {
           title: 'Invest',
           href: `${process.env.REACT_APP_WEBSITE_URL}/invest/`,

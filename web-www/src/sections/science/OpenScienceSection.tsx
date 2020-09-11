@@ -13,6 +13,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingBottom: theme.spacing(64.5),
       paddingTop: theme.spacing(34.5),
+      '&::before': {
+        backgroundPosition: `center ${theme.spacing(22)} !important`,
+      },
     },
     [theme.breakpoints.down('xs')]: {
       paddingBottom: theme.spacing(37.5),

@@ -63,9 +63,12 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   iconContainer: {
-    backgroundColor: theme.palette.secondary.light,
+    backgroundColor: theme.palette.secondary.main,
     borderRadius: '50%',
     display: 'block',
+    '&:hover': {
+      backgroundColor: theme.palette.secondary.light,
+    },
     [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
       width: theme.spacing(13),
       height: theme.spacing(13),
@@ -174,7 +177,11 @@ const CommunitySection = (): JSX.Element => {
                   target="_blank"
                   className={classes.iconContainer}
                 >
-                  <TelegramIcon className={classes.icon} color={theme.palette.secondary.main} />
+                  <TelegramIcon
+                    className={classes.icon}
+                    color={theme.palette.primary.main}
+                    hoverColor={theme.palette.secondary.main}
+                  />
                 </a>
                 <a
                   href="https://medium.com/regen-network"
@@ -182,7 +189,11 @@ const CommunitySection = (): JSX.Element => {
                   target="_blank"
                   className={classes.iconContainer}
                 >
-                  <MediumIcon className={classes.icon} color={theme.palette.secondary.main} />
+                  <MediumIcon
+                    className={classes.icon}
+                    color={theme.palette.primary.main}
+                    hoverColor={theme.palette.secondary.main}
+                  />
                 </a>
                 <a
                   href="http://twitter.com/regen_network"
@@ -190,7 +201,11 @@ const CommunitySection = (): JSX.Element => {
                   target="_blank"
                   className={classes.iconContainer}
                 >
-                  <TwitterIcon className={classes.icon} color={theme.palette.secondary.main} />
+                  <TwitterIcon
+                    className={classes.icon}
+                    color={theme.palette.primary.main}
+                    hoverColor={theme.palette.secondary.main}
+                  />
                 </a>
               </Grid>
             </Grid>

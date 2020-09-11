@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const PracticesOutcomesSection = () => {
+const PracticesOutcomesSection = (): JSX.Element => {
   const data = useStaticQuery(graphql`
     query {
       text: landStewardsYaml {

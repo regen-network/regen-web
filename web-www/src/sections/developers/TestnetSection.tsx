@@ -1,17 +1,95 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import { Theme, makeStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
 import Img from 'gatsby-image';
-import Section from 'web-components/lib/components/section';
-import TitleDescription from 'web-components/lib/components/title-description';
+import ReactHtmlParser from 'react-html-parser';
+
+import Description from 'web-components/lib/components/description';
+import Title from 'web-components/lib/components/title';
+import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
+import BackgroundSection from '../../components/BackgroundSection';
 
 const useStyles = makeStyles((theme: Theme) => ({
-  img: {},
+  root: {
+    [theme.breakpoints.down('xs')]: {
+      paddingBottom: theme.spacing(20),
+    },
+    [theme.breakpoints.up('sm')]: {
+      paddingBottom: theme.spacing(22.5),
+    },
+  },
+  title: {
+    fontWeight: 'normal',
+    fontFamily: theme.typography.overline.fontFamily,
+    color: theme.palette.secondary.main,
+    lineHeight: '140%',
+    textAlign: 'center',
+    [theme.breakpoints.down('xs')]: {
+      fontSize: theme.spacing(5),
+    },
+  },
+  label: {
+    fontFamily: theme.typography.overline.fontFamily,
+    color: theme.palette.secondary.main,
+    [theme.breakpoints.down('xs')]: {
+      fontSize: theme.spacing(4.5),
+      paddingBottom: theme.spacing(1.5),
+    },
+    [theme.breakpoints.up('sm')]: {
+      fontSize: theme.spacing(8),
+      paddingBottom: theme.spacing(5),
+    },
+  },
+  description: {
+    lineHeight: '150%',
+    [theme.breakpoints.down('xs')]: {
+      paddingTop: theme.spacing(2),
+      paddingBottom: theme.spacing(3.25),
+    },
+    [theme.breakpoints.up('sm')]: {
+      fontSize: theme.spacing(4.5),
+      paddingTop: theme.spacing(4.5),
+      paddingBottom: theme.spacing(7.25),
+    },
+    '& p': {
+      marginTop: 0,
+    },
+  },
+  address: {
+    lineHeight: '150%',
+    [theme.breakpoints.up('sm')]: {
+      fontSize: theme.spacing(8.25),
+      paddingBottom: theme.spacing(20),
+    },
+    [theme.breakpoints.down('xs')]: {
+      paddingBottom: theme.spacing(6),
+    },
+  },
+  buttonContainer: {
+    [theme.breakpoints.down('md')]: {
+      textAlign: 'center',
+    },
+  },
+  button: {
+    [theme.breakpoints.up('md')]: {
+      width: '100%',
+      paddingRight: theme.spacing(2.5),
+      paddingLeft: theme.spacing(2.5),
+    },
+  },
 }));
 
 const TestnetSection = (): JSX.Element => {
   const data = useStaticQuery(graphql`
     query {
+      background: file(relativePath: { eq: "testnet-bg.jpg" }) {
+        childImageSharp {
+          fluid(quality: 90) {
+            ...GatsbyImageSharpFluid_withWebp
+          }
+        }
+      }
       text: developersYaml {
         testnetSection {
           header
@@ -28,7 +106,42 @@ const TestnetSection = (): JSX.Element => {
   `);
   const content = data.text.testnetSection;
   const classes = useStyles();
-  return <Section></Section>;
+  return (
+    <BackgroundSection
+      withSlider
+      className={classes.root}
+      linearGradient="unset"
+      topSection={false}
+      imageData={data.background.childImageSharp.fluid}
+      header={content.header}
+      titleClassName={classes.title}
+      titleVariant="h2"
+    >
+      <Description className={classes.description} align="center">
+        {content.description}
+      </Description>
+      <Title align="center" variant="h4" className={classes.address}>
+        {content.address}
+      </Title>
+      <Grid container spacing={4}>
+        <Grid item xs={12} sm={6} md={4}>
+          <div className={classes.label}>{content.leftColumnLabel}</div>
+          <Description className={classes.description}>
+            {ReactHtmlParser(content.leftColumnContent)}
+          </Description>
+        </Grid>
+        <Grid item xs={12} sm={6} md={4}>
+          <div className={classes.label}>{content.rightColumnLabel}</div>
+          <Description className={classes.description}>
+            {ReactHtmlParser(content.rightColumnContent)}
+          </Description>
+        </Grid>
+        <Grid item xs={12} md={4} className={classes.buttonContainer}>
+          <ContainedButton className={classes.button}>{content.buttonText}</ContainedButton>
+        </Grid>
+      </Grid>
+    </BackgroundSection>
+  );
 };
 
 export default TestnetSection;

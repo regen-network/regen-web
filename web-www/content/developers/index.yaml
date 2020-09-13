@@ -1,5 +1,5 @@
 topSection:
-  header: developers_validators
+  header: developers_validators █
   body: The Regen Ledger blockchain enables our community to develop a suite of platforms and applications in service of regenerating human relationships with land.
 ledgerSection:
   header: The Regen Ledger
@@ -14,6 +14,21 @@ testnetSection:
   address: 'Regen Network Testnet 3000: COSMWASM Kontraŭa Testnet'
   leftColumnLabel: 'focus:'
   leftColumnContent: Adversarial testnet and network load testing with Regen Ledger running CosmWASM. This testnet may also morph into a Game of Zones testnet, as we are sensitive to the larger community opportunity.
-  rightColumnLabel: 'Schedule:'
-  rightColumnContent: ''
+  rightColumnLabel: 'schedule:'
+  rightColumnContent: 'md//13th March - 17th Apr, 2020 (5 weeks) Total points to be allocated: 1100+
+    
+
+    **Gentx submissions:**
+
+    9th March 1500UTC (start date) - 12th March 0900 UTC (end date)
+    
+
+    **Genesis release time:**
+
+    12th March, 1600UTC (23 hours before genesis time)
+    
+
+    **Network start time:**
+      
+    13th March, 1500UTC'
   buttonText: join the testnet

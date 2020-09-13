@@ -4,11 +4,12 @@ import { Theme, makeStyles } from '@material-ui/core/styles';
 import BackgroundSection from '../../components/BackgroundSection';
 
 const useStyles = makeStyles<Theme>((theme: Theme) => ({
-  bSection: {
-    '& h1.MuiTypography-h1.MuiTypography-root': {
-      fontFamily: 'PT Mono',
-      lineHeight: '160%',
-      fontSize: '38px',
+  title: {
+    fontWeight: 'normal',
+    fontFamily: theme.typography.overline.fontFamily,
+    lineHeight: '160%',
+    [theme.breakpoints.down('xs')]: {
+      fontSize: theme.spacing(4.5),
     },
   },
 }));
@@ -40,18 +41,8 @@ const TopSection = (): JSX.Element => {
       header={content.header}
       body={content.body}
       imageData={imageData}
-      className={classes.bSection}
-      headerFlair={
-        <div
-          style={{
-            display: 'inline-block',
-            width: '20px',
-            height: '31px',
-            backgroundColor: '#EEEEEE',
-            marginLeft: '20px',
-          }}
-        />
-      }
+      titleClassName={classes.title}
+      titleVariant="h2"
     />
   );
 };

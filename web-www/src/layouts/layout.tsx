@@ -98,10 +98,10 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
           title: 'Land Stewards',
           href: '/land-stewards/',
         },
-        // {
-        //   title: 'Developers & Validators',
-        //   href: '/developers/',
-        // },
+        {
+          title: 'Developers & Validators',
+          href: '/developers/',
+        },
         {
           title: 'Scientists & Verifiers',
           href: '/science/',

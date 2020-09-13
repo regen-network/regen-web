@@ -3,7 +3,7 @@ import { graphql, StaticQuery } from 'gatsby';
 import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Img from 'gatsby-image';
-import ReactHtmlParser from 'react-html-parser';
+
 import Title from 'web-components/lib/components/title';
 import TwitterIcon from 'web-components/lib/components/icons/social/TwitterIcon';
 import TelegramIcon from 'web-components/lib/components/icons/social/TelegramIcon';
@@ -63,9 +63,20 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   iconContainer: {
-    backgroundColor: theme.palette.secondary.light,
+    backgroundColor: theme.palette.secondary.main,
     borderRadius: '50%',
     display: 'block',
+    '&:hover': {
+      backgroundColor: theme.palette.secondary.light,
+    },
+    [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
+      width: theme.spacing(13),
+      height: theme.spacing(13),
+    },
+    [theme.breakpoints.up(theme.breakpoints.values.tablet)]: {
+      width: theme.spacing(18.5),
+      height: theme.spacing(18.5),
+    },
     [theme.breakpoints.down('xs')]: {
       width: theme.spacing(13),
       height: theme.spacing(13),
@@ -73,8 +84,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       marginLeft: theme.spacing(2.5),
     },
     [theme.breakpoints.up('sm')]: {
-      width: theme.spacing(18.5),
-      height: theme.spacing(18.5),
       '&:not(:last-child)': {
         marginRight: theme.spacing(7.5),
       },
@@ -89,6 +98,22 @@ const useStyles = makeStyles((theme: Theme) => ({
       justifyContent: 'center',
     },
   },
+  arrow: {
+    [theme.breakpoints.up(theme.breakpoints.values.tablet)]: {
+      marginLeft: theme.spacing(9.5),
+      width: '100%',
+      height: '100%',
+    },
+    [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
+      display: 'none',
+    },
+  },
+  connect: {
+    alignItems: 'center',
+    [theme.breakpoints.down('xs')]: {
+      justifyContent: 'center',
+    },
+  },
 }));
 
 const CommunitySection = (): JSX.Element => {
@@ -99,6 +124,13 @@ const CommunitySection = (): JSX.Element => {
     <StaticQuery
       query={graphql`
         query {
+          arrow: file(relativePath: { eq: "Arrow.png" }) {
+            childImageSharp {
+              fluid(quality: 90) {
+                ...GatsbyImageSharpFluid_withWebp
+              }
+            }
+          }
           background: file(relativePath: { eq: "science-community-bg.jpg" }) {
             childImageSharp {
               fluid(quality: 90) {
@@ -132,27 +164,24 @@ const CommunitySection = (): JSX.Element => {
             imageData={data.background.childImageSharp.fluid}
           >
             <Grid container alignItems="center">
-              <Grid xs={12} sm={3} md={5} item>
+              <Grid xs={12} sm={6} item container wrap="nowrap" className={classes.connect}>
                 <Title className={classes.caption} variant="h3">
                   {content.caption}
                 </Title>
+                <Img className={classes.arrow} fluid={data.arrow.childImageSharp.fluid} />
               </Grid>
-              <Grid xs={12} sm={9} md={7} item container justify="flex-end" className={classes.icons}>
+              <Grid xs={12} sm={6} item container justify="flex-end" className={classes.icons}>
                 <a
-                  href="http://t.me/regennetwork_public"
+                  href="https://t.me/regennetwork_science"
                   rel="noopener noreferrer"
                   target="_blank"
                   className={classes.iconContainer}
                 >
-                  <TelegramIcon className={classes.icon} color={theme.palette.secondary.main} />
-                </a>
-                <a
-                  href="http://t.me/regennetwork_public"
-                  rel="noopener noreferrer"
-                  target="_blank"
-                  className={classes.iconContainer}
-                >
-                  <TelegramIcon className={classes.icon} color={theme.palette.secondary.main} />
+                  <TelegramIcon
+                    className={classes.icon}
+                    color={theme.palette.primary.main}
+                    hoverColor={theme.palette.secondary.main}
+                  />
                 </a>
                 <a
                   href="https://medium.com/regen-network"
@@ -160,7 +189,11 @@ const CommunitySection = (): JSX.Element => {
                   target="_blank"
                   className={classes.iconContainer}
                 >
-                  <MediumIcon className={classes.icon} color={theme.palette.secondary.main} />
+                  <MediumIcon
+                    className={classes.icon}
+                    color={theme.palette.primary.main}
+                    hoverColor={theme.palette.secondary.main}
+                  />
                 </a>
                 <a
                   href="http://twitter.com/regen_network"
@@ -168,7 +201,11 @@ const CommunitySection = (): JSX.Element => {
                   target="_blank"
                   className={classes.iconContainer}
                 >
-                  <TwitterIcon className={classes.icon} color={theme.palette.secondary.main} />
+                  <TwitterIcon
+                    className={classes.icon}
+                    color={theme.palette.primary.main}
+                    hoverColor={theme.palette.secondary.main}
+                  />
                 </a>
               </Grid>
             </Grid>

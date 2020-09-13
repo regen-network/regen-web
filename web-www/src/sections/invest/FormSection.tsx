@@ -6,44 +6,30 @@ import Section from 'web-components/lib/components/section';
 const useStyles = makeStyles((theme: Theme) => ({
   form: {
     [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
-      width: '25rem',
+      width: theme.spacing(150),
+    },
+    [theme.breakpoints.up(theme.breakpoints.values.tablet)]: {
+      width: theme.spacing(160),
     },
     [theme.breakpoints.up('sm')]: {
-      display: 'inline-block',
       border: '1px solid #ccc',
       background: 'transparent',
-      width: '40rem',
-      height: '111.1rem',
+      height: theme.spacing(444.4),
     },
-    height: '125rem',
-    '& .formHeader': {
-      paddingLeft: 0,
-      paddingRight: 0,
+    [theme.breakpoints.down('xs')]: {
+      height: theme.spacing(504),
+      marginLeft: '-1rem',
+      width: 'calc(100% + 2rem)',
     },
   },
   section: {
     textAlign: 'center',
-    [theme.breakpoints.up('md')]: {
-      paddingTop: theme.spacing(22.75),
-      paddingBottom: theme.spacing(22.75),
-    },
-    [theme.breakpoints.down('md')]: {
-      paddingRight: theme.spacing(25),
-      paddingLeft: theme.spacing(25),
+    [theme.breakpoints.up('sm')]: {
+      paddingBottom: theme.spacing(22.25),
     },
     [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
-      height: '125rem',
-      paddingRight: theme.spacing(0),
-      paddingLeft: theme.spacing(0),
-      marginLeft: '-1rem',
-      width: 'calc(100% + 2rem)',
-    },
-    [theme.breakpoints.down('xs')]: {
-      height: '125rem',
-      paddingRight: theme.spacing(0),
-      paddingLeft: theme.spacing(0),
-      marginLeft: '-1rem',
-      width: 'calc(100% + 2rem)',
+      paddingRight: 0,
+      paddingLeft: 0,
     },
   },
 }));

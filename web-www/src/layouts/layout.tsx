@@ -40,6 +40,7 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
     '/terms-service/': theme.palette.primary.light,
     '/team/': theme.palette.primary.light,
     '/invest/': theme.palette.primary.light,
+    '/science/': theme.palette.primary.main,
   };
 
   const headerTransparent: BoolProps = {
@@ -53,7 +54,8 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
     '/land-stewards/': true,
   };
 
-  // Links in rest of the site must use the trailing '/' in order for these to work appropriately
+  // Links in rest of the site must use the trailing '/'
+  // in order for these to work appropriately
   const headerNoBorderBottomPages: Array<string> = [
     '/',
     '/buyers/',
@@ -61,6 +63,7 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
     '/resources/',
     '/team/',
     '/invest/',
+    '/science/',
   ];
 
   const menuItems: HeaderMenuItem[] = [
@@ -99,10 +102,10 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
         //   title: 'Developers & Validators',
         //   href: '/developers/',
         // },
-        // {
-        //   title: 'Scientists & Verifiers',
-        //   href: '/scientists/',
-        // },
+        {
+          title: 'Scientists & Verifiers',
+          href: '/science/',
+        },
         {
           title: 'Invest',
           href: '/invest/',

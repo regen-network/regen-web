@@ -1,48 +1,41 @@
 import React from 'react';
 import { graphql, StaticQuery } from 'gatsby';
 import { Theme, makeStyles } from '@material-ui/core/';
-import clsx from 'clsx';
 
 import BackgroundSection from '../../components/BackgroundSection';
 
-interface Props {
-  paddingLR?: number;
-}
-
-const useStyles = makeStyles<Theme, Props>((theme: Theme) => ({
-  section: props => ({
+const useStyles = makeStyles((theme: Theme) => ({
+  section: {
     [theme.breakpoints.down('xs')]: {
-      paddingTop: theme.spacing(42.75),
-      paddingLeft: props.paddingLR || 'none',
-      paddingRight: props.paddingLR || 'none',
+      filter: 'drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.05))',
     },
-  }),
+  },
 }));
 
-const TopSection = ({ paddingLR }: Props): JSX.Element => {
+const TopSection = (): JSX.Element => {
   const gradient =
-    'linear-gradient(180deg, #FFF9EE 2.02%, rgba(255, 249, 238, 0) 37.98%), linear-gradient(209.83deg, rgba(250, 235, 209, 0.9) 11.05%, rgba(125, 201, 191, 0.9) 43.17%, rgba(81, 93, 137, 0.9) 75.29%);';
-  const classes = useStyles({ paddingLR });
+    'linear-gradient(180deg, rgba(0, 0, 0, 0.684) 0%, rgba(0, 0, 0, 0) 97.78%), linear-gradient(235.95deg, rgba(250, 235, 209, 0.7) 22.17%, rgba(125, 201, 191, 0.7) 46.11%, rgba(81, 93, 137, 0.7) 70.05%)';
+  const classes = useStyles();
 
   return (
     <StaticQuery
       query={graphql`
         query {
-          background: file(relativePath: { eq: "investors-top.jpg" }) {
+          background: file(relativePath: { eq: "science.png" }) {
             childImageSharp {
               fluid(quality: 90) {
                 ...GatsbyImageSharpFluid_withWebp
               }
             }
           }
-          backgroundMobile: file(relativePath: { eq: "investors-top-mobile.jpg" }) {
+          backgroundMobile: file(relativePath: { eq: "science-mobile.png" }) {
             childImageSharp {
               fluid(quality: 90) {
                 ...GatsbyImageSharpFluid_withWebp
               }
             }
           }
-          text: investorsYaml {
+          text: scienceYaml {
             topSection {
               header
               body

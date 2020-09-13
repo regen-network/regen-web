@@ -16,15 +16,15 @@ collections:
       preview: false
     files:
       - label: "Invest"
-        name: "investors"
-        file: "web-www/content/investors/index.yaml"
+        name: "invest"
+        file: "web-www/content/invest/index.yaml"
         fields:
           - label: "Top Section"
             name: "topSection"
             widget: "object"
             fields:
               - {label: Header, name: header, widget: string}
-              - {label: Body, name: body, widget: string}
+              - {label: Body, name: body, widget: text}
       - label: "Team"
         name: "team"
         file: "web-www/content/team/index.yaml"
@@ -34,7 +34,7 @@ collections:
             widget: "object"
             fields:
               - {label: Header, name: header, widget: string}
-              - {label: Body, name: body, widget: string}
+              - {label: Body, name: body, widget: text}
           - label: "Core Team"
             name: "coreSection"
             widget: "object"
@@ -351,6 +351,69 @@ collections:
             widget: "object"
             fields:
               - {label: Header, name: header, widget: string}
+      - label: Science page
+        name: science
+        file: "web-www/content/science/index.yaml"
+        fields:
+          - label: Top Section
+            name: topSection
+            widget: "object"
+            fields:
+              - {label: Header, name: header, widget: string}
+              - {label: Description, name: body, widget: text}
+          - label: Measuring Ecological Health Section
+            name: titleDescriptionSection
+            widget: "object"
+            fields:
+              - {label: Header, name: header, widget: string}
+              - {label: Description, name: description, widget: markdown}
+              - {label: Image Mobile, name: imageMobile, widget: image}
+              - {label: Image Desktop, name: imageDesktop, widget: image}
+          - label: Open Science Section
+            name: openScienceSection
+            widget: "object"
+            fields:
+              - {label: Caption, name: caption, widget: string}
+              - label: Header
+                name: header
+                widget: "object"
+                fields:
+                  - {label: Start, name: start, widget: string}
+                  - {label: Green, name: green, widget: string}
+              - label: Phases
+                name: phases
+                widget: list
+                collapsed: false
+                fields:
+                  - {label: "Title", name: title, widget: string}
+                  - {label: "Description", name: description, widget: text}
+          - label: Partnerships Section
+            name: partnershipsSection
+            widget: "object"
+            fields:
+              - {label: Header, name: header, widget: string}
+              - label: Partners
+                name: partners
+                widget: list
+                collapsed: false
+                fields:
+                  - {label: "Image", name: image, widget: image}
+                  - {label: "Description", name: description, widget: markdown}
+          - label: Community Section
+            name: communitySection
+            widget: "object"
+            fields:
+              - {label: Caption, name: caption, widget: string}
+              - {label: Header, name: header, widget: string}
+              - label: Members
+                name: members
+                widget: list
+                collapsed: false
+                fields:
+                  - {label: "Image", name: image, widget: image}
+                  - {label: "Name", name: name, widget: string}
+                  - {label: "role", name: role, widget: string}
+                  - {label: "Description", name: description, widget: text}
       - label: "Shared sections"
         name: "shared"
         file: "web-www/content/shared/index.yaml"

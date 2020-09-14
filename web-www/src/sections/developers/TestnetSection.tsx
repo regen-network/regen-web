@@ -2,7 +2,6 @@ import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import { Theme, makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import Img from 'gatsby-image';
 import ReactHtmlParser from 'react-html-parser';
 
 import Description from 'web-components/lib/components/description';
@@ -108,7 +107,6 @@ const TestnetSection = (): JSX.Element => {
   const classes = useStyles();
   return (
     <BackgroundSection
-      withSlider
       className={classes.root}
       linearGradient="unset"
       topSection={false}

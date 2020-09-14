@@ -60,7 +60,6 @@
   },
   "husky": {
     "hooks": {
-      "pre-push": "yarn build && yarn lint"
     }
   }
 }

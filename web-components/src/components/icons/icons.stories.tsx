@@ -27,6 +27,8 @@ import LinkedInIcon from 'web-components/lib/components/icons/social/LinkedInIco
 import MediumIcon from 'web-components/lib/components/icons/social/MediumIcon';
 import YoutubeIcon from 'web-components/lib/components/icons/social/YoutubeIcon';
 import GithubIcon from 'web-components/lib/components/icons/social/GithubIcon';
+import WhitepaperIcon from 'web-components/lib/components/icons/WhitepaperIcon';
+import BlockIcon from 'web-components/lib/components/icons/BlockIcon';
 
 import { withKnobs, text } from '@storybook/addon-knobs';
 
@@ -93,3 +95,7 @@ export const twitterIcon = (): JSX.Element => <TwitterIcon />;
 export const youtubeIcon = (): JSX.Element => <YoutubeIcon />;
 
 export const githubIcon = (): JSX.Element => <GithubIcon />;
+
+export const whitepaperIcon = (): JSX.Element => <WhitepaperIcon />;
+
+export const blockIcon = (): JSX.Element => <BlockIcon />;

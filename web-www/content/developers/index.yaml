@@ -32,3 +32,5 @@ testnetSection:
       
     13th March, 1500UTC'
   buttonText: join the testnet
+connectSection:
+  header: connect \ learn

@@ -66,15 +66,14 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   buttonContainer: {
-    [theme.breakpoints.down('md')]: {
-      textAlign: 'center',
-    },
+    textAlign: 'center',
   },
   button: {
     [theme.breakpoints.up('md')]: {
       width: '100%',
       paddingRight: theme.spacing(2.5),
       paddingLeft: theme.spacing(2.5),
+      maxWidth: theme.spacing(67.5),
     },
   },
 }));

@@ -99,6 +99,7 @@ const TestnetSection = (): JSX.Element => {
           rightColumnLabel
           rightColumnContent
           buttonText
+          buttonLink
         }
       }
     }
@@ -135,7 +136,14 @@ const TestnetSection = (): JSX.Element => {
           </Description>
         </Grid>
         <Grid item xs={12} md={4} className={classes.buttonContainer}>
-          <ContainedButton className={classes.button}>{content.buttonText}</ContainedButton>
+          <ContainedButton
+            href={content.buttonLink}
+            rel="noopener noreferrer"
+            target="_blank"
+            className={classes.button}
+          >
+            {content.buttonText}
+          </ContainedButton>
         </Grid>
       </Grid>
     </BackgroundSection>

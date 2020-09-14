@@ -7,12 +7,14 @@ import EyeIcon from '../icons/EyeIcon';
 import MediaCard from './MediaCard';
 
 export interface ResourcesCardProps {
-  image: any;
+  image: { publicURL: string };
   title: string;
-  updated: string;
+  updated?: string;
   description: string;
   buttonText: string;
   link: string;
+  target?: string;
+  backgroundGradient?: boolean;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -96,6 +98,8 @@ export default function ResourcesCard({
   description,
   buttonText,
   link,
+  target = '_blank',
+  backgroundGradient = true,
 }: ResourcesCardProps): JSX.Element {
   const classes = useStyles();
   return (
@@ -105,16 +109,19 @@ export default function ResourcesCard({
       imgSrc={image.publicURL}
       borderRadius="10px"
       elevation={1}
+      backgroundGradient={backgroundGradient}
     >
       <div className={classes.text}>
-        <Typography className={classes.lastUpdated}>
-          <span className={classes.lastUpdatedLabel}>Last Updated: </span>
-          {updated}
-        </Typography>
+        {updated && (
+          <Typography className={classes.lastUpdated}>
+            <span className={classes.lastUpdatedLabel}>Last Updated: </span>
+            {updated}
+          </Typography>
+        )}
         {description && <Typography className={classes.description}>{description}</Typography>}
       </div>
       <div className={classes.buttonWrapper}>
-        <OutlinedButton target="_blank" href={link} className={classes.button}>
+        <OutlinedButton target={target} href={link} className={classes.button}>
           <EyeIcon className={classes.eyeIcon} />
           {buttonText}
         </OutlinedButton>

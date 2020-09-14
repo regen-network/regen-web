@@ -61,6 +61,7 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
     '/resources/',
     '/team/',
     '/science/',
+    '/case-studies/',
   ];
 
   const menuItems: HeaderMenuItem[] = [

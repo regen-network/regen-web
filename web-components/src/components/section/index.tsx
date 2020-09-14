@@ -14,6 +14,7 @@ interface SectionProps {
   withSlider?: boolean;
   titleLineHeight?: string;
   titleColor?: string;
+  titleAlign?: 'left' | 'right' | 'inherit' | 'center' | 'justify' | undefined;
 }
 
 interface StyleProps {
@@ -51,10 +52,6 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   title: props => ({
     color: props.titleColor || 'inherit',
     lineHeight: props.titleLineHeight || '140%',
-    [theme.breakpoints.up('sm')]: {
-      paddingRight: '8%',
-      paddingLeft: '8%',
-    },
     [theme.breakpoints.down('xs')]: {
       paddingRight: props.withSlider ? theme.spacing(4) : 0,
     },
@@ -68,6 +65,7 @@ const Section = ({
   titleLineHeight,
   titleColor,
   titleVariant = 'h2',
+  titleAlign = 'center',
   title,
   withSlider = false,
 }: SectionProps): JSX.Element => {
@@ -75,7 +73,7 @@ const Section = ({
   return (
     <section className={clsx(classes.root, className)}>
       {title && (
-        <Title className={clsx(classes.title, titleClassName)} variant={titleVariant} align="center">
+        <Title className={clsx(classes.title, titleClassName)} variant={titleVariant} align={titleAlign}>
           {title}
         </Title>
       )}

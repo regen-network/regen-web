@@ -1,3 +1,87 @@
 topSection:
   header: Learn more about our work.
   body: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.
+caseStudies:
+  header: Case Studies
+  view: view case studies
+  items:
+    - name: Fibershed
+      slug: fibershed
+      cardImage: ../../static/media/fibershed-card.png
+      description: Fibershed is a nonprofit organization that develops fiber and textile systems through a focus on carbon farming, regional production and fiber processing, and public education.
+      # about:
+      # mapImage:
+      # practice:
+      # biome:
+      # region:
+      # ecoContext:
+      # challenges:
+      #   -
+      # approach:
+      # verification:
+      #   details:
+      #   results:
+      #   next:
+      #   figureImage:
+      #   figureTitle:
+      # figures:
+      #   - image:
+      #     title:
+      # funding:
+      #   details:
+      #   results:
+      #   next:
+      # conclusion:
+      #   text:
+      #   images:
+      #     - url:
+      #       text:
+      # bottom:
+      #   background:
+      #   quote:
+      #   person:
+      #     name:
+      #     image:
+      #     role:
+    - name: Eco Cacao
+      slug: eco-cacao
+      cardImage: ../../static/media/eco-cacao-card.png
+      description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+      # about:
+      # mapImage:
+      # practice:
+      # biome:
+      # region:
+      # ecoContext:
+      # challenges:
+      #   -
+      # approach:
+      # verification:
+      #   details:
+      #   results:
+      #   next:
+      #   figureImage:
+      #   figureTitle:
+      # figures:
+      #   - image:
+      #     title:
+      # funding:
+      #   details:
+      #   results:
+      #   next:
+      # conclusion:
+      #   text:
+      #   images:
+      #     - url:
+      #       text:
+      # bottom:
+      #   background:
+      #   quote:
+      #   person:
+      #     name:
+      #     image:
+      #     role:
+    - name: Walkers Institute
+      slug: walkers-institute
+      cardImage: ../../static/media/walkers-card.png
+      description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.

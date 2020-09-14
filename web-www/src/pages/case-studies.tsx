@@ -1,6 +1,7 @@
 import React from 'react';
 
 import TopSection from '../sections/case-studies/TopSection';
+import ListSection from '../sections/case-studies/ListSection';
 import SEO from '../components/seo';
 
 const CaseStudiesPage = (): JSX.Element => {
@@ -8,6 +9,7 @@ const CaseStudiesPage = (): JSX.Element => {
     <>
       <SEO title="Case Studies" />
       <TopSection />
+      <ListSection />
     </>
   );
 };

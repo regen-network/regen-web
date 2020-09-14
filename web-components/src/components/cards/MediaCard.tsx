@@ -19,6 +19,7 @@ export interface MediaCardProps {
   borderColor?: string;
   borderRadius?: string;
   className?: string;
+  backgroundGradient?: boolean;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -83,6 +84,7 @@ export default function MediaCard({
   borderRadius,
   className,
   tag,
+  backgroundGradient = true,
 }: MediaCardProps): JSX.Element {
   const classes = useStyles({});
 
@@ -97,7 +99,7 @@ export default function MediaCard({
     >
       <div className={classes.root}>
         <CardMedia className={classes.image} image={imgSrc}>
-          <div className={classes.backgroundGradient} />
+          {backgroundGradient && <div className={classes.backgroundGradient} />}
           {tag && <div className={classes.tag}>{tag}</div>}
         </CardMedia>
         <Title

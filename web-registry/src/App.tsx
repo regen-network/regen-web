@@ -77,10 +77,10 @@ function AppFooter(): JSX.Element {
     {
       title: 'learn more',
       items: [
-        // {
-        //   title: 'Case Studies',
-        //   href: `${process.env.REACT_APP_WEBSITE_URL}/case-studies/`,
-        // },
+        {
+          title: 'Case Studies',
+          href: `${process.env.REACT_APP_WEBSITE_URL}/case-studies/`,
+        },
         {
           title: 'Resources',
           href: `${process.env.REACT_APP_WEBSITE_URL}/resources/`,
@@ -149,7 +149,7 @@ function AppHeader(): JSX.Element {
     {
       title: 'Learn More',
       dropdownItems: [
-        // { title: 'Case Studies', href: `${process.env.REACT_APP_WEBSITE_URL}/case-studies/` },
+        { title: 'Case Studies', href: `${process.env.REACT_APP_WEBSITE_URL}/case-studies/` },
         { title: 'Resources', href: `${process.env.REACT_APP_WEBSITE_URL}/resources/` },
         { title: 'FAQ', href: `${process.env.REACT_APP_WEBSITE_URL}/faq/` },
         { title: 'Team', href: `${process.env.REACT_APP_WEBSITE_URL}/team/` },

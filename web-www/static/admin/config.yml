@@ -357,8 +357,6 @@ collections:
             fields:
               - {label: Header, name: header, widget: string}
               - {label: Description, name: description, widget: markdown}
-              - {label: Image Mobile, name: imageMobile, widget: image}
-              - {label: Image Desktop, name: imageDesktop, widget: image}
           - label: Open Science Section
             name: openScienceSection
             widget: "object"

@@ -14,3 +14,10 @@ aboutSection:
   region: Ecuador
   lineRotate: rotate(-25deg)
   lineWidth: '53%'
+contextSection:
+  image: ../../static/media/eco-cacao-context.png
+  description: md//Abundant monoculture crops to supply high global demand, severely degraded land and ecosystem.
+  challenges:
+    - text: High global demand for chocolate has led to highly-degrading monocrop cacao production that creates deforestation, runoff, and soil erosion.
+    - text: Regenerative growing methods, for example cover crops, agroforestry, and crop diversification, can combat the problems of unsustainable production, but is often too expensive for local farmers to implement, and furthermore, their impact often goes unrecognized and uncompensated.
+    - text: Unlike Organic and Fair Trade standards, there are no well-established regenerative agriculture standards nor verification methods necessary to get buyers on board for paying premiums that compensate and motivate farmers to adopt regenerative practices.

@@ -13,9 +13,12 @@ aboutSection:
   practice: Rotational Grazing and Prescribed Grazing
   biome: Transition Zone - Temperate / Mediterranean / Subtropical Climate, Predominantly Oak Woodland
   region: Northern California
-  # ecoContext:
-  # challenges:
-  #   -
+contextSection:
+  image: ../../static/media/fibershed-context.png
+  description: md//Integrated sheep and vineyard systems, with perennial cropping system.
+  challenges:
+    - text: Regenerative grazing and monitoring is expensive to implement.
+    - text: Farmers need external funding to launch regenerative land management.
   # approach:
   # verification:
   #   details:

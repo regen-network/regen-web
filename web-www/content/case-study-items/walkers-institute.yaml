@@ -12,3 +12,11 @@ aboutSection:
   region: Barbados, Caribbean
   lineRotate: rotate(17deg)
   lineWidth: '62%'
+contextSection:
+  image: ../../static/media/walkers-context.png
+  description: 'md//For the last 50 years, Walkers Quarry provided sand to the island of Barbados. Sand quarries create air and water pollution, extensive land degradation, loss of natural habitats, and natural resource depletion. In 2011, quarry management decided to transform extraction areas into <a href="http://walkersreserve.com/" target="_blank">Walkers Reserve</a>: an ecologically-thriving, forested ecosystem.
+  
+  Following permaculture design and management principles like rotational grazing and soil stabilization (<a href="http://walkersreserve.com/regeneration-manual/" target="_blank">among many others</a>), the quarry now provides habitat to threatened and endangered migratory birds, aids leatherback turtle conservation, sequesters carbon, helps fight climate change, grows perennial food systems, and strengthens the local economy to ensure a brighter future for the community.'
+  challenges:
+    - text: The reserve has made steady progress since 2015, but WIRRED still requires a steady stream of conservation funding to complete the restoration of this sand quarry.
+    - text: There is interest in showcasing WIRRED’s work and evangelizing the potential for ecological conservation and restoration across the entire Carribean region, but they lack monitoring and verification tools.

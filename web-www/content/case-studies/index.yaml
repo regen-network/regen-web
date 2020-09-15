@@ -9,3 +9,6 @@ caseStudies:
     practice: practice
     biome: biome
     region: geographic region
+  contextSection:
+    header: Ecological context
+    challenges: Challenges

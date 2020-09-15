@@ -1,10 +1,10 @@
 import React from 'react';
-import { graphql, useStaticQuery } from 'gatsby';
+import { graphql } from 'gatsby';
 import { Theme, makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
 
 import TopSection from '../sections/case-studies/case-study/TopSection';
 import AboutSection from '../sections/case-studies/case-study/AboutSection';
+import ContextSection from '../sections/case-studies/case-study/ContextSection';
 
 const useStyles = makeStyles((theme: Theme) => ({}));
 
@@ -23,6 +23,7 @@ const CaseStudy = ({ data }: Props): JSX.Element => {
     <>
       <TopSection background={item.background} name={item.name} />
       <AboutSection {...item.aboutSection} />
+      <ContextSection {...item.contextSection} />
     </>
   );
 };
@@ -58,6 +59,19 @@ export const query = graphql`
                 ...GatsbyImageSharpFluid_withWebp
               }
             }
+          }
+        }
+        contextSection {
+          description
+          image {
+            childImageSharp {
+              fluid(quality: 90) {
+                ...GatsbyImageSharpFluid_withWebp
+              }
+            }
+          }
+          challenges {
+            text
           }
         }
       }

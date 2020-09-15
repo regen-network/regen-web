@@ -18,12 +18,7 @@ exports.createPages = async ({ graphql, actions }) => {
     query {
       allCaseStudyItemsYaml {
         nodes {
-          name
-          description
           slug
-          cardImage {
-            publicURL
-          }
         }
       }
     }

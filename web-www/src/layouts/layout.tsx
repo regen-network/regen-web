@@ -40,6 +40,7 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
     '/terms-service/': theme.palette.primary.light,
     '/team/': theme.palette.primary.light,
     '/developers/': theme.palette.primary.main,
+    '/invest/': theme.palette.primary.light,
     '/science/': theme.palette.primary.main,
   };
 
@@ -47,6 +48,7 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
     '/faq/': false,
     '/team/': true,
     '/developers/': true,
+    '/invest/': true,
   };
 
   const footerPaddingBottom: BoolProps = {
@@ -63,6 +65,7 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
     '/resources/',
     '/team/',
     '/developers/',
+    '/invest/',
     '/science/',
   ];
 

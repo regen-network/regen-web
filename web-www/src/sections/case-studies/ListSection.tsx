@@ -79,6 +79,7 @@ const ListSection = (): JSX.Element => {
                     buttonText={text.view}
                     link={`/case-studies/${item.slug}`}
                     backgroundGradient={false}
+                    titleOverwrite={false}
                   />
                 </Grid>
               ))}

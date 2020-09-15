@@ -3,7 +3,7 @@ topSection:
   body: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.
 caseStudies:
   header: Case Studies
-  view: view case studies
+  view: view case study
   aboutSection:
     header: About the client
     practice: practice

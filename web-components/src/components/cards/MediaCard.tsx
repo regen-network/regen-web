@@ -21,6 +21,7 @@ export interface MediaCardProps {
   className?: string;
   backgroundGradient?: boolean;
   imageClassName?: string;
+  titleOverwrite?: boolean;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -63,7 +64,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       padding: `${theme.spacing(4.5)} ${theme.spacing(5.25)} ${theme.spacing(3)}`,
     },
     [theme.breakpoints.down('xs')]: {
-      padding: `${theme.spacing(4)} ${theme.spacing(4.5)} ${theme.spacing(3)}`,
+      padding: `${theme.spacing(4)} ${theme.spacing(4.5)} ${theme.spacing(0.8)}`,
     },
   },
   h4title: {
@@ -87,6 +88,7 @@ export default function MediaCard({
   tag,
   backgroundGradient = true,
   imageClassName,
+  titleOverwrite = true,
 }: MediaCardProps): JSX.Element {
   const classes = useStyles({});
 
@@ -106,7 +108,9 @@ export default function MediaCard({
         </CardMedia>
         {name && (
           <Title
-            className={titleVariant === 'h4' ? clsx(classes.h4title, classes.title) : classes.title}
+            className={
+              titleVariant === 'h4' && titleOverwrite ? clsx(classes.h4title, classes.title) : classes.title
+            }
             variant={titleVariant}
           >
             {name}

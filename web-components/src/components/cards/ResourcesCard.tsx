@@ -15,6 +15,7 @@ export interface ResourcesCardProps {
   link: string;
   target?: string;
   backgroundGradient?: boolean;
+  titleOverwrite?: boolean;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -62,6 +63,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     border: '2px solid #4FB573',
     '& .MuiButton-label': {
       textAlign: 'center',
+      display: 'flex',
     },
     [theme.breakpoints.up('sm')]: {
       width: 'fit-content',
@@ -71,7 +73,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.down('xs')]: {
       margin: '0 auto',
       width: '100%',
-      marginBottom: theme.spacing(3.5),
+      marginBottom: theme.spacing(7.5),
       marginTop: theme.spacing(3.5),
     },
   },
@@ -100,6 +102,7 @@ export default function ResourcesCard({
   link,
   target = '_blank',
   backgroundGradient = true,
+  titleOverwrite = true,
 }: ResourcesCardProps): JSX.Element {
   const classes = useStyles();
   return (
@@ -110,6 +113,7 @@ export default function ResourcesCard({
       borderRadius="10px"
       elevation={1}
       backgroundGradient={backgroundGradient}
+      titleOverwrite={titleOverwrite}
     >
       <div className={classes.text}>
         {updated && (

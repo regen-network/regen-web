@@ -20,3 +20,19 @@ contextSection:
   challenges:
     - text: The reserve has made steady progress since 2015, but WIRRED still requires a steady stream of conservation funding to complete the restoration of this sand quarry.
     - text: There is interest in showcasing WIRRED’s work and evangelizing the potential for ecological conservation and restoration across the entire Carribean region, but they lack monitoring and verification tools.
+approachSection:
+  description: With amplified data collection and storage through Regen Network’s tools, Fibershed can obtain funding that furthers and compensates their regenerative practices.
+  details: md//Using a combination of satellite imagery from Sentinel-2 and Planet Scope, Regen Network measured several ecosystem health indicators on Walkers Reserve, including land conversion, landscape diversity, carbon sequestration, and land regeneration index.
+  results: 'md//**Qualitative:**
+
+    - Ability to classify and track changes in land cover types including water, forest, agroforestry, herbaceous, vegetated dunes and bare soil.
+    
+    - Ability to quantify the changes in carbon (tons/ha/year) for each land management unit.
+    
+    - Used NDVI to create a trendline and conceptual framework for analyzing and measuring the land regeneration.
+  
+    
+    **Quantitative:** >90% accuracy in classification and tracking, 7% YoY improvement.'
+  next: md//Improving the verification methodology accuracy, incorporating more ground truth data from 2020.
+  figureImage: ../../static/media/walkers-figure1.png
+  figureTitle: 'Carbon sequestration'

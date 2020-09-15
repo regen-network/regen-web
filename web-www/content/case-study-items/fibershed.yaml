@@ -19,13 +19,15 @@ contextSection:
   challenges:
     - text: Regenerative grazing and monitoring is expensive to implement.
     - text: Farmers need external funding to launch regenerative land management.
-  # approach:
-  # verification:
-  #   details:
-  #   results:
-  #   next:
-  #   figureImage:
-  #   figureTitle:
+approachSection:
+  description: With amplified data collection and storage through Regen Network’s tools, Fibershed can obtain funding that furthers and compensates their regenerative practices.
+  details: md//Using remote sensing tools and direct measurement algorithms provided by Regen Network, Fibershed can verify the positive ecological impact of prescribed grazing practices at the farm level.
+  results: 'md//**Qualitative:** Detection of grazing in vineyards using NDVI
+  
+    **Quantitative:** 87% accuracy'
+  next: md//What’s Next Improving verification methodology using machine learning and more field data. To that end, we recently applied for NRCS Conservation Innovation Grant (CID) in the hope of scaling this throughout California.
+  figureImage: ../../static/media/fibershed-figure1.png
+  figureTitle: 'Figure 1: Ground data collected using Esri’s Collector app during the 2019-2020 winter grazing season by Kaos Sheep Outfit Shepherds.'
   # figures:
   #   - image:
   #     title:

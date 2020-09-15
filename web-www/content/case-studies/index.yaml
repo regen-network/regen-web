@@ -12,3 +12,9 @@ caseStudies:
   contextSection:
     header: Ecological context
     challenges: Challenges
+  approachSection:
+    header: Regen Network approach
+    subHeader: Remote sensing verification
+    details: details
+    results: results
+    next: what's next

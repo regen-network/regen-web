@@ -25,6 +25,7 @@ interface ContextSectionProps {
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     borderTop: `1px solid ${theme.palette.grey[100]}`,
+    borderBottom: `1px solid ${theme.palette.grey[100]}`,
     [theme.breakpoints.up(theme.breakpoints.values.tablet)]: {
       paddingTop: theme.spacing(22.5),
       paddingBottom: theme.spacing(22.5),
@@ -77,8 +78,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up(theme.breakpoints.values.tablet)]: {
       paddingRight: theme.spacing(15),
       flexGrow: 0,
-      flexBasis: '65%',
-      maxWidth: '65%',
+      flexBasis: '60%',
+      maxWidth: '60%',
     },
     [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
       paddingTop: theme.spacing(10),
@@ -86,10 +87,10 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingLeft: theme.spacing(4),
     },
     [theme.breakpoints.between('md', 'xl')]: {
-      maxWidth: theme.spacing(178),
+      maxWidth: theme.spacing(170),
     },
     [theme.breakpoints.up('xl')]: {
-      maxWidth: theme.spacing(214.5),
+      maxWidth: theme.spacing(196),
     },
     marginLeft: 'auto',
   },
@@ -125,8 +126,8 @@ const useStyles = makeStyles((theme: Theme) => ({
   imageContainer: {
     [theme.breakpoints.up(theme.breakpoints.values.tablet)]: {
       flexGrow: 0,
-      flexBasis: '35%',
-      maxWidth: '35%',
+      flexBasis: '40%',
+      maxWidth: '40%',
     },
   },
 }));

@@ -9,8 +9,8 @@ import Title from '../title';
 
 export interface MediaCardProps {
   children?: any;
-  name: string;
   imgSrc: string;
+  name?: string;
   tag?: string;
   onClick?: () => void;
   width?: string;
@@ -20,6 +20,7 @@ export interface MediaCardProps {
   borderRadius?: string;
   className?: string;
   backgroundGradient?: boolean;
+  imageClassName?: string;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -85,6 +86,7 @@ export default function MediaCard({
   className,
   tag,
   backgroundGradient = true,
+  imageClassName,
 }: MediaCardProps): JSX.Element {
   const classes = useStyles({});
 
@@ -98,16 +100,18 @@ export default function MediaCard({
       borderRadius={borderRadius}
     >
       <div className={classes.root}>
-        <CardMedia className={classes.image} image={imgSrc}>
+        <CardMedia className={clsx(imageClassName, classes.image)} image={imgSrc}>
           {backgroundGradient && <div className={classes.backgroundGradient} />}
           {tag && <div className={classes.tag}>{tag}</div>}
         </CardMedia>
-        <Title
-          className={titleVariant === 'h4' ? clsx(classes.h4title, classes.title) : classes.title}
-          variant={titleVariant}
-        >
-          {name}
-        </Title>
+        {name && (
+          <Title
+            className={titleVariant === 'h4' ? clsx(classes.h4title, classes.title) : classes.title}
+            variant={titleVariant}
+          >
+            {name}
+          </Title>
+        )}
         {children}
       </div>
     </Card>

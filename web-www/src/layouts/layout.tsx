@@ -54,15 +54,20 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
 
   // Links in rest of the site must use the trailing '/'
   // in order for these to work appropriately
-  const headerNoBorderBottomPages: Array<string> = [
-    '/',
-    '/buyers/',
-    '/land-stewards/',
-    '/resources/',
-    '/team/',
-    '/science/',
-    '/case-studies/',
-  ];
+  // const headerNoBorderBottomPages: Array<RegExp> = [
+  //   new RegExp('//|/buyers/|'),
+  //   new RegExp('/buyers/'),
+  //   new RegExp('/land-stewards/'),
+  //   new RegExp('/resources/'),
+  //   new RegExp('/team/'),
+  //   new RegExp('/science/'),
+  //   new RegExp('/case-studies/'),
+  //   new RegExp('case-studies/[a-z-]+'),
+  // ];
+
+  const headerNoBorderBottomPages: RegExp = new RegExp(
+    '//|/buyers/|/land-stewards/|/resources/|/team/|/science/|/case-studies/|/case-studies/[a-z-]+//',
+  );
 
   const menuItems: HeaderMenuItem[] = [
     { title: 'Buyers', href: '/buyers/' },
@@ -169,9 +174,9 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
       <Header
         menuItems={menuItems}
         transparent={transparent}
-        absolute={headerNoBorderBottomPages.includes(location.pathname)}
+        absolute={headerNoBorderBottomPages.test(location.pathname)}
         color={desktopColor}
-        borderBottom={!headerNoBorderBottomPages.includes(location.pathname)}
+        borderBottom={!headerNoBorderBottomPages.test(location.pathname)}
         pathname={location.pathname}
       />
       <div>

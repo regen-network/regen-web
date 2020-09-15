@@ -24,6 +24,15 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
+// items {
+//   name
+//   description
+//   slug
+//   cardImage {
+//     publicURL
+//   }
+// }
+
 const ListSection = (): JSX.Element => {
   const classes = useStyles();
   return (
@@ -34,37 +43,40 @@ const ListSection = (): JSX.Element => {
             caseStudies {
               header
               view
-              items {
-                name
-                description
-                slug
-                cardImage {
-                  publicURL
-                }
+            }
+          }
+          list: allCaseStudyItemsYaml {
+            nodes {
+              name
+              description
+              slug
+              cardImage {
+                publicURL
               }
             }
           }
         }
       `}
       render={data => {
-        const content = data.text.caseStudies;
+        const text = data.text.caseStudies;
+        const nodes = data.list.nodes;
         return (
           <Section
             className={classes.section}
             titleClassName={classes.title}
-            title={content.header}
+            title={text.header}
             titleAlign="left"
             titleVariant="h3"
           >
             <Grid container spacing={5}>
-              {content.items.map((item, i) => (
+              {nodes.map((item, i) => (
                 <Grid item xs={12} sm={6} md={4}>
                   <ResourcesCard
                     target="_self"
                     title={item.name}
                     description={item.description}
                     image={item.cardImage}
-                    buttonText={content.view}
+                    buttonText={text.view}
                     link={`/case-studies/${item.slug}`}
                     backgroundGradient={false}
                   />

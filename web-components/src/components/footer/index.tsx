@@ -28,12 +28,12 @@ interface FooterProps {
   footerItems: [FooterItemProps, FooterItemProps, FooterItemProps];
   termsUrl: string;
   privacyUrl: string;
-  paddingBottom?: string;
+  paddingBottom?: boolean;
   apiUri?: string;
 }
 
 interface StyleProps {
-  paddingBottom?: string;
+  paddingBottom?: boolean;
 }
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({

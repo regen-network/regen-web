@@ -11,6 +11,7 @@ interface Props {
   body?: React.ReactNode;
   header?: React.ReactNode;
   linearGradient?: string;
+  linearGradientMobile?: string;
   children?: React.ReactNode;
   imageData: any;
   imageDataMobile?: any;
@@ -20,7 +21,9 @@ interface Props {
 
 interface StyleProps {
   linearGradient?: string;
+  linearGradientMobile?: string;
   withSlider?: boolean;
+  topSection?: boolean;
 }
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
@@ -43,9 +46,17 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     bottom: 0,
     left: 0,
     width: '100%',
-    background:
-      props.linearGradient ||
-      'linear-gradient(180deg, rgba(255, 249, 238, 0.74) 0%, rgba(255, 249, 238, 0) 27.6%), linear-gradient(194.2deg, #FAEBD1 12.63%, #7DC9BF 44.03%, #515D89 75.43%)',
+    [theme.breakpoints.up('sm')]: {
+      background:
+        props.linearGradient ||
+        'linear-gradient(180deg, rgba(255, 249, 238, 0.74) 0%, rgba(255, 249, 238, 0) 27.6%), linear-gradient(194.2deg, #FAEBD1 12.63%, #7DC9BF 44.03%, #515D89 75.43%)',
+    },
+    [theme.breakpoints.down('xs')]: {
+      background:
+        props.linearGradientMobile ||
+        props.linearGradient ||
+        'linear-gradient(180deg, rgba(255, 249, 238, 0.74) 0%, rgba(255, 249, 238, 0) 27.6%), linear-gradient(194.2deg, #FAEBD1 12.63%, #7DC9BF 44.03%, #515D89 75.43%)',
+    },
     opacity: 0.8,
   }),
   text: {
@@ -132,13 +143,14 @@ const BackgroundSection = ({
   imageData,
   imageDataMobile,
   linearGradient,
+  linearGradientMobile,
   body,
   header,
   children,
   withSlider,
   topSection = true,
 }: Props): JSX.Element => {
-  const classes = useStyles({ linearGradient, topSection });
+  const classes = useStyles({ linearGradientMobile, linearGradient, topSection });
   let headerJSX, bodyJSX, textJSX;
   // Tried to use && operator, but it doesn't seem to play nicely with passing in dynamic props to the object
   if (header) {

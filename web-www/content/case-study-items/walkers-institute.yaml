@@ -1,0 +1,14 @@
+name: Walkers Institute
+slug: walkers-institute
+cardImage: ../../static/media/walkers-card.png
+background: ../../static/media/walkers-top-bg.png
+description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+aboutSection:
+  about: md//WIRRED is a Barbados-based nonprofit research hub, land reserve, consultancy, and community program center dedicated to the study and implementation of climate smart regenerative agroforestry practices. WIRRED works locally and globally to build resilient economies, ecosystems, and communities by creating disruptive design systems that increase biodiversity, enhance ecosystem services, and improve the well-being of individuals and communities.
+  mapImage: ../../static/media/walkers-map.png
+  aboutImage: ../../static/media/walkers-about.png
+  practice: Conservation and Restoration
+  biome: Xeric shrublands biome
+  region: Barbados, Caribbean
+  lineRotate: rotate(17deg)
+  lineWidth: '62%'

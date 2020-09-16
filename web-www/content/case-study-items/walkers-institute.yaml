@@ -54,3 +54,10 @@ conclusionSection:
   description: md//With promising results thus far, our pilot project with WIRRED is showing the potential Regen Network partnerships have to monitor, track, verify, and usefully store data.
   images:
     - image: ../../static/media/walkers-conclusion.png
+bottomSection:
+  background: ../../static/media/walkers-bottom-bg.png
+  quote: By fusing satellite monitoring with improvements in on the ground field collection, Regen helped put Walkers Reserve and Walkers Institute for Regenerative Research Education and Design on a pathway to quantify the regeneration outcomes.
+  person:
+    name: Ian McNeel
+    image: ../../static/media/walkers-ian.png
+    role: Founder-Director, WIRRED

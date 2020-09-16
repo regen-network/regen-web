@@ -43,8 +43,15 @@ fundingSection:
 conclusionSection:
   description: md//Remote sensing is a cost-effective way to verify regenerative practices within tropical agroforestry systems on a large scale. Further, using project-based funding with bespoke verification can provide an alternative route to funding this important regenerative work. This work supports the financial well-being of farmers and producers, and the viability of communities in Ecuador where cacao producers often struggle with low margins, pressure from development, and increasing climate-related risks and costs. This project incentivizes a shift towards ecologically sound practices, resulting in healthy land, cleaner water, cleaner air, and the mitigation of climate change.
   
-  
+
     Future program development will focus on streamlining the verification process, growing market demand for regenerative cacao and creating incentives for landscape-scale regeneration based on a broader suite of land management practices inclusive of conservation and restoration priorities as well as diverse forms of regenerative agricultural production.
   images:
     - image: ../../static/media/eco-cacaco-conlusion1.png
     - image: ../../static/media/eco-cacaco-conlusion2.png
+bottomSection:
+  background: ../../static/media/eco-cacao-bottom-bg.png
+  quote: We see Regen Network as an operational partner not just for our current shared projects, but for the work to plan, establish, manage, and monitor regenerative land management systems around the world.
+  person:
+    name: luke smith
+    image: ../../static/media/eco-cacao-luke.png
+    role: Director of Regenerative Agriculture & Supply, Terra Genesis International

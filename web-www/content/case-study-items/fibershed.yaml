@@ -42,16 +42,16 @@ fundingSection:
 conclusionSection:
   description: md//Remote sensing is a cost-effective way to verify grazing on a large scale, and using project-based funding with bespoke verification can provide an alternative route to funding.
   
-  
+
     This work supports the financial well-being of farmers and grazers and the viability of modern rural communities in California where many farmers are struggling with low margins, pressure from development, and increasing climate-related risks and costs; explores the financial viability of implementing grazing in vineyards systems; and incentivizes a shift towards ecologically sound practices, resulting in cleaner water, cleaner air, and the mitigation of climate change.
   images:
     - image: ../../static/media/fibershed-conclusion.png
       title: Robert and Jaime of Kaos Sheep Outfit, Mendecino, California
-  # bottom:
-  #   background:
-  #   quote:
-  #   person:
-  #     name:
-  #     image:
-  #     role:
+bottomSection:
+  background: ../../static/media/fibershed-bottom-bg.png
+  quote: We experience our collaboration with Regen Network as a critical joint venture to explore how to properly value the work of those who commit their lives to regenerating landscapes at the watershed scale.
+  person:
+    name: Rebecca Burgess
+    image: ../../static/media/fibershed-rebecca.png
+    role: Executive Director of Fibershed
 

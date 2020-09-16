@@ -99,7 +99,7 @@ const ConclusionSection = ({ description, images }: ConclusionSectionProps): JSX
             imageData={data.bg.childImageSharp.fluid}
             className={classes.root}
           >
-            <Grid container spacing={8}>
+            <Grid container spacing={8} alignItems="center">
               <Grid item xs={12} sm={5}>
                 {images.map((img: Image, i: number) => (
                   <div key={i}>

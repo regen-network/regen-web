@@ -115,6 +115,8 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     },
     maxWidth: theme.breakpoints.values.lg,
     margin: '0 auto',
+    zIndex: 1,
+    position: 'relative',
   }),
   subtitle: {
     [theme.breakpoints.down('xs')]: {

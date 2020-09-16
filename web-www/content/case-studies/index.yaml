@@ -22,3 +22,5 @@ caseStudies:
     details: details
     results: results
     next: what's next
+  conclusionSection:
+    header: Conclusion

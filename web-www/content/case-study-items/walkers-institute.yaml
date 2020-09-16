@@ -50,3 +50,7 @@ fundingSection:
   details: md//Creating a project on Regen Registry and storing monitoring data as immutable records on Regen Ledger which provides an important layer of transparency and accountability to funders.
   results: md//Project page on Regen Registry targeted to go live in Q4. Regen Ledger integration to be added in subsequent phase.
   next: md//Creating a dedicated carbon offset methodology for the quarry restoration. Launching the Project Page on Regen Registry and getting conservation funds to WIRRED.
+conclusionSection:
+  description: md//With promising results thus far, our pilot project with WIRRED is showing the potential Regen Network partnerships have to monitor, track, verify, and usefully store data.
+  images:
+    - image: ../../static/media/walkers-conclusion.png

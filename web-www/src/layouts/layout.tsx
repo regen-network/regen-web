@@ -174,9 +174,9 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
       <Header
         menuItems={menuItems}
         transparent={transparent}
-        absolute={headerNoBorderBottomPages.test(location.pathname)}
+        absolute={location.pathname === '/' || headerNoBorderBottomPages.test(location.pathname)}
         color={desktopColor}
-        borderBottom={!headerNoBorderBottomPages.test(location.pathname)}
+        borderBottom={location.pathname !== '/' || !headerNoBorderBottomPages.test(location.pathname)}
         pathname={location.pathname}
       />
       <div>

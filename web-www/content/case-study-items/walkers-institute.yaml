@@ -45,3 +45,8 @@ figureSection:
     - image: ../../static/media/walkers-figure3.png
       title: 'Figure 3: Land degradation / regeneration Index (2016-2018)'
       spacing: 60%
+fundingSection:
+  image: ../../static/media/walkers-funding.png
+  details: md//Creating a project on Regen Registry and storing monitoring data as immutable records on Regen Ledger which provides an important layer of transparency and accountability to funders.
+  results: md//Project page on Regen Registry targeted to go live in Q4. Regen Ledger integration to be added in subsequent phase.
+  next: md//Creating a dedicated carbon offset methodology for the quarry restoration. Launching the Project Page on Regen Registry and getting conservation funds to WIRRED.

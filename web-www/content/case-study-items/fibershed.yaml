@@ -34,10 +34,11 @@ figureSection:
   figures: 
     - image: ../../static/media/fibershed-figure2.png
     - image: ../../static/media/fibershed-figure3.png
-  # funding:
-  #   details:
-  #   results:
-  #   next:
+fundingSection:
+  image: ../../static/media/fibershed-funding.png
+  details: md//Creating a project on Regen Registry and storing monitoring data as immutable records on Regen Ledger which provides an important layer of transparency and accountability to funders.
+  results: md//Project page on Regen Registry targeted to go live in Q4; Regen Ledger integration to be added in subsequent phase.
+  next: md//To that end, we recently applied and awarded the NRCS Conservation Innovation Grant (CID) in the hope of scaling this throughout California.
   # conclusion:
   #   text:
   #   images:

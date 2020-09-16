@@ -1,5 +1,5 @@
 import React from 'react';
-import { Theme, makeStyles, useTheme } from '@material-ui/core/styles';
+import { Theme, makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import { graphql, StaticQuery } from 'gatsby';
 import ReactHtmlParser from 'react-html-parser';
@@ -8,6 +8,16 @@ import Img, { FluidObject } from 'gatsby-image';
 import Title from 'web-components/lib/components/title';
 import Section from 'web-components/lib/components/section';
 import Description from 'web-components/lib/components/description';
+
+interface Paragraph {
+  title: string | Element;
+  content: string;
+}
+
+interface TitleWithParagraphsProps {
+  title: string;
+  paragraphs: Paragraph[];
+}
 
 interface ApproachSectionProps {
   description?: string;
@@ -93,6 +103,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   subHeader: {
+    lineHeight: '140%',
     [theme.breakpoints.down('xs')]: {
       paddingBottom: theme.spacing(7),
     },
@@ -105,6 +116,26 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
+export const TitleWithParagraphs = ({ title, paragraphs }: TitleWithParagraphsProps): JSX.Element => {
+  const classes = useStyles();
+
+  return (
+    <>
+      <Title className={classes.subHeader} variant="h3">
+        {title}
+      </Title>
+      <div>
+        {paragraphs.map((p: Paragraph, i: number) => (
+          <div key={i}>
+            <div className={classes.cardTitle}>{p.title}</div>
+            <Description className={classes.cardDescription}>{ReactHtmlParser(p.content)}</Description>
+          </div>
+        ))}
+      </div>
+    </>
+  );
+};
+
 const ApproachSection = ({
   description,
   details,
@@ -114,7 +145,6 @@ const ApproachSection = ({
   figureImage,
 }: ApproachSectionProps): JSX.Element => {
   const classes = useStyles();
-  const theme = useTheme();
   return (
     <StaticQuery
       query={graphql`
@@ -143,23 +173,14 @@ const ApproachSection = ({
                 <Description className={classes.figureTitle}>{figureTitle}</Description>
               </Grid>
               <Grid item xs={12} md={6}>
-                <Title className={classes.subHeader} variant="h3">
-                  {content.subHeader}
-                </Title>
-                <div>
-                  <div>
-                    <div className={classes.cardTitle}>{content.details}</div>
-                    <Description className={classes.cardDescription}>{ReactHtmlParser(details)}</Description>
-                  </div>
-                  <div>
-                    <div className={classes.cardTitle}>{content.results}</div>
-                    <Description className={classes.cardDescription}>{ReactHtmlParser(results)}</Description>
-                  </div>
-                  <div>
-                    <div className={classes.cardTitle}>{content.next}</div>
-                    <Description className={classes.cardDescription}>{ReactHtmlParser(next)}</Description>
-                  </div>
-                </div>
+                <TitleWithParagraphs
+                  title={content.subHeader}
+                  paragraphs={[
+                    { title: content.details, content: details },
+                    { title: content.results, content: results },
+                    { title: content.next, content: next },
+                  ]}
+                />
               </Grid>
             </Grid>
           </Section>

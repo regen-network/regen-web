@@ -1,14 +1,11 @@
 import React from 'react';
 import { Theme, makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import { graphql, StaticQuery } from 'gatsby';
-import ReactHtmlParser from 'react-html-parser';
 import Img, { FluidObject } from 'gatsby-image';
 import clsx from 'clsx';
 
 import BackgroundSection from '../../../components/BackgroundSection';
 import Title from 'web-components/lib/components/title';
-import Description from 'web-components/lib/components/description';
 
 interface BottomSectionProps {
   quote: string;

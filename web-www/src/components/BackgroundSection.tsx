@@ -1,13 +1,16 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles, Theme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import clsx from 'clsx';
 import BackgroundImage from 'gatsby-background-image';
 import Box from '@material-ui/core/Box';
+
 import Title from 'web-components/lib/components/title';
 
 interface Props {
   className?: string;
+  titleClassName?: string;
+  titleVariant?: Variant;
   body?: React.ReactNode;
   header?: React.ReactNode;
   linearGradient?: string;
@@ -21,6 +24,7 @@ interface Props {
 interface StyleProps {
   linearGradient?: string;
   withSlider?: boolean;
+  topSection?: boolean;
 }
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
@@ -129,6 +133,8 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
 
 const BackgroundSection = ({
   className,
+  titleClassName,
+  titleVariant = 'h1',
   imageData,
   imageDataMobile,
   linearGradient,
@@ -143,7 +149,7 @@ const BackgroundSection = ({
   // Tried to use && operator, but it doesn't seem to play nicely with passing in dynamic props to the object
   if (header) {
     headerJSX = (
-      <Title color="primary" variant="h1" className={classes.title}>
+      <Title color="primary" variant={titleVariant} className={clsx(titleClassName, classes.title)}>
         {header}
       </Title>
     );

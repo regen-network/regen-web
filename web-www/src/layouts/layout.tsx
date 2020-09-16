@@ -39,6 +39,7 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
     '/privacy-policy/': theme.palette.primary.light,
     '/terms-service/': theme.palette.primary.light,
     '/team/': theme.palette.primary.light,
+    '/developers/': theme.palette.primary.main,
     '/invest/': theme.palette.primary.light,
     '/science/': theme.palette.primary.main,
   };
@@ -46,6 +47,7 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
   const headerTransparent: BoolProps = {
     '/faq/': false,
     '/team/': true,
+    '/developers/': true,
     '/invest/': true,
   };
 
@@ -62,6 +64,7 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
     '/land-stewards/',
     '/resources/',
     '/team/',
+    '/developers/',
     '/invest/',
     '/science/',
   ];
@@ -98,10 +101,10 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
           title: 'Land Stewards',
           href: '/land-stewards/',
         },
-        // {
-        //   title: 'Developers & Validators',
-        //   href: '/developers/',
-        // },
+        {
+          title: 'Developers & Validators',
+          href: '/developers/',
+        },
         {
           title: 'Scientists & Verifiers',
           href: '/science/',

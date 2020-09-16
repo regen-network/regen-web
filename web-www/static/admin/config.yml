@@ -25,6 +25,40 @@ collections:
             fields:
               - {label: Header, name: header, widget: string}
               - {label: Body, name: body, widget: text}
+      - label: "Developers"
+        name: "developers"
+        file: "web-www/content/developers/index.yaml"
+        fields:
+          - label: "Top Section"
+            name: "topSection"
+            widget: "object"
+            fields:
+              - {label: Header, name: header, widget: string}
+              - {label: Body, name: body, widget: text}
+          - label: "Ledger Section"
+            name: "ledgerSection"
+            widget: "object"
+            fields:
+              - {label: Header, name: header, widget: string}
+              - {label: Body, name: body, widget: text}
+          - label: "Testnet Section"
+            name: "testnetSection"
+            widget: "object"
+            fields:
+              - {label: Header, name: header, widget: string}
+              - {label: Description, name: description, widget: text}
+              - {label: Testnet name, name: address, widget: string}
+              - {label: Left Column Label, name: leftColumnLabel, widget: string}
+              - {label: Left Column Content, name: leftColumnContent, widget: text}
+              - {label: Right Column Label, name: rightColumnLabel, widget: string}
+              - {label: Right Column Content, name: rightColumnContent, widget: markdown}
+              - {label: Button text, name: buttonText, widget: string}
+              - {label: Button link, name: buttonLink, widget: string}
+          - label: "Connect Section"
+            name: "connectSection"
+            widget: "object"
+            fields:
+              - {label: Header, name: header, widget: string}
       - label: "Team"
         name: "team"
         file: "web-www/content/team/index.yaml"

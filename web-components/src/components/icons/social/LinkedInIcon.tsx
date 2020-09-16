@@ -3,7 +3,7 @@ import SvgIcon from '@material-ui/core/SvgIcon';
 import { makeStyles, Theme } from '@material-ui/core';
 import clsx from 'clsx';
 
-import withHoverColor, { Props } from './withHoverColor';
+import withHoverColor, { Props } from '../withHoverColor';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {

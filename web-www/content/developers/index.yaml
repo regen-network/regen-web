@@ -1,0 +1,37 @@
+topSection:
+  header: developers_validators █
+  body: The Regen Ledger blockchain enables our community to develop a suite of platforms and applications in service of regenerating human relationships with land.
+ledgerSection:
+  header: The Regen Ledger
+  body: md//
+    The Regen Ledger blockchain (currently in testnet) is powered by our global validator set. Regen Ledger is a public Proof-of-Stake blockchain built on the Cosmos SDK with smart contracting enabled through CosmWasm (currently in testnet). 
+    
+    
+    Built on the Regen Ledger, the [Regen Registry](/registry/projects/impactag/) is our open marketplace for carbon and ecosystem credit sales. We envision more applications living on top of the Regen Ledger, automated payments to land stewards based on real-world land regeneration, contracts that enable municipalities to lower climate risk by paying farmers to build regional landscape-scale resilience, and more.
+testnetSection:
+  header: join testnet_
+  description: What can you envision? How can we together develop a world where technologists and land stewards unite to usher in a renaissance in our relationship with the planet? Come build with us!
+  address: 'Regen Network Testnet 3000: COSMWASM Kontraŭa Testnet'
+  leftColumnLabel: 'focus:'
+  leftColumnContent: Adversarial testnet and network load testing with Regen Ledger running CosmWASM. This testnet may also morph into a Game of Zones testnet, as we are sensitive to the larger community opportunity.
+  rightColumnLabel: 'schedule:'
+  rightColumnContent: 'md//13th March - 17th Apr, 2020 (5 weeks) Total points to be allocated: 1100+
+    
+
+    **Gentx submissions:**
+
+    9th March 1500UTC (start date) - 12th March 0900 UTC (end date)
+    
+
+    **Genesis release time:**
+
+    12th March, 1600UTC (23 hours before genesis time)
+    
+
+    **Network start time:**
+      
+    13th March, 1500UTC'
+  buttonText: join the testnet
+  buttonLink: '/'
+connectSection:
+  header: connect \ learn

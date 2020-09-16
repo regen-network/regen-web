@@ -39,12 +39,16 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
     '/privacy-policy/': theme.palette.primary.light,
     '/terms-service/': theme.palette.primary.light,
     '/team/': theme.palette.primary.light,
+    '/developers/': theme.palette.primary.main,
+    '/invest/': theme.palette.primary.light,
     '/science/': theme.palette.primary.main,
   };
 
   const headerTransparent: BoolProps = {
     '/faq/': false,
     '/team/': true,
+    '/developers/': true,
+    '/invest/': true,
   };
 
   const footerPaddingBottom: BoolProps = {
@@ -54,19 +58,8 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
 
   // Links in rest of the site must use the trailing '/'
   // in order for these to work appropriately
-  // const headerNoBorderBottomPages: Array<RegExp> = [
-  //   new RegExp('//|/buyers/|'),
-  //   new RegExp('/buyers/'),
-  //   new RegExp('/land-stewards/'),
-  //   new RegExp('/resources/'),
-  //   new RegExp('/team/'),
-  //   new RegExp('/science/'),
-  //   new RegExp('/case-studies/'),
-  //   new RegExp('case-studies/[a-z-]+'),
-  // ];
-
   const headerNoBorderBottomPages: RegExp = new RegExp(
-    '//|/buyers/|/land-stewards/|/resources/|/team/|/science/|/case-studies/|/case-studies/[a-z-]+//',
+    '//|/buyers/|/land-stewards/|/resources/|/team/|/developers/|/science/|/invest/|/case-studies/|/case-studies/[a-z-]+//',
   );
 
   const menuItems: HeaderMenuItem[] = [
@@ -82,6 +75,7 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
       ],
     },
   ];
+  
   const desktopColor: string = headerColors[location.pathname]
     ? headerColors[location.pathname]
     : theme.palette.primary.light;
@@ -101,10 +95,10 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
           title: 'Land Stewards',
           href: '/land-stewards/',
         },
-        // {
-        //   title: 'Developers & Validators',
-        //   href: '/developers/',
-        // },
+        {
+          title: 'Developers & Validators',
+          href: '/developers/',
+        },
         {
           title: 'Scientists & Verifiers',
           href: '/science/',

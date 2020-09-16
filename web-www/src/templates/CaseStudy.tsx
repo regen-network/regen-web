@@ -6,6 +6,7 @@ import TopSection from '../sections/case-studies/case-study/TopSection';
 import AboutSection from '../sections/case-studies/case-study/AboutSection';
 import ContextSection from '../sections/case-studies/case-study/ContextSection';
 import ApproachSection from '../sections/case-studies/case-study/ApproachSection';
+import FigureSection from '../sections/case-studies/case-study/FigureSection';
 
 const useStyles = makeStyles((theme: Theme) => ({}));
 
@@ -26,6 +27,7 @@ const CaseStudy = ({ data }: Props): JSX.Element => {
       <AboutSection {...item.aboutSection} />
       <ContextSection {...item.contextSection} />
       <ApproachSection {...item.approachSection} />
+      <FigureSection {...item.figureSection} />
     </>
   );
 };
@@ -86,6 +88,27 @@ export const query = graphql`
             childImageSharp {
               fluid(quality: 90) {
                 ...GatsbyImageSharpFluid_withWebp
+              }
+            }
+          }
+        }
+        figureSection {
+          title
+          background {
+            childImageSharp {
+              fluid(quality: 90) {
+                ...GatsbyImageSharpFluid_withWebp
+              }
+            }
+          }
+          figures {
+            title
+            spacing
+            image {
+              childImageSharp {
+                fluid(quality: 90) {
+                  ...GatsbyImageSharpFluid_withWebp
+                }
               }
             }
           }

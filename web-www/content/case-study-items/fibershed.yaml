@@ -28,9 +28,12 @@ approachSection:
   next: md//What’s Next Improving verification methodology using machine learning and more field data. To that end, we recently applied for NRCS Conservation Innovation Grant (CID) in the hope of scaling this throughout California.
   figureImage: ../../static/media/fibershed-figure1.png
   figureTitle: 'Figure 1: Ground data collected using Esri’s Collector app during the 2019-2020 winter grazing season by Kaos Sheep Outfit Shepherds.'
-  # figures:
-  #   - image:
-  #     title:
+figureSection:
+  background: ../../static/media/fibershed-figure-bg.png
+  title: 'Figure 2 and 3: The mapped areas show a set of 21 distinct polygons that were evaluated for changes in NDVI in the 2019 pilot. NDVI changes were then utilized to map grazing operations with 87% accuracy.'
+  figures: 
+    - image: ../../static/media/fibershed-figure2.png
+    - image: ../../static/media/fibershed-figure3.png
   # funding:
   #   details:
   #   results:

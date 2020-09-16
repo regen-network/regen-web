@@ -1,12 +1,10 @@
 import React from 'react';
 import { Theme, makeStyles, useTheme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
 import { graphql, StaticQuery } from 'gatsby';
 import ReactHtmlParser from 'react-html-parser';
 import Img, { FluidObject } from 'gatsby-image';
 
-import MediaCard from 'web-components/lib/components/cards/MediaCard';
 import Title from 'web-components/lib/components/title';
 import Section from 'web-components/lib/components/section';
 import Description from 'web-components/lib/components/description';
@@ -102,8 +100,8 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingBottom: theme.spacing(8),
     },
   },
-  cardItem: {
-    // paddingTop: theme.spacing(5),
+  image: {
+    borderRadius: '10px',
   },
 }));
 
@@ -141,23 +139,23 @@ const ApproachSection = ({
             {description && <Description className={classes.description}>{description}</Description>}
             <Grid container spacing={10}>
               <Grid item xs={12} md={6}>
-                <Img fluid={figureImage.childImageSharp.fluid} />
+                <Img className={classes.image} fluid={figureImage.childImageSharp.fluid} />
                 <Description className={classes.figureTitle}>{figureTitle}</Description>
               </Grid>
               <Grid item xs={12} md={6}>
                 <Title className={classes.subHeader} variant="h3">
                   {content.subHeader}
                 </Title>
-                <div className={classes.cardContent}>
-                  <div className={classes.cardItem}>
+                <div>
+                  <div>
                     <div className={classes.cardTitle}>{content.details}</div>
                     <Description className={classes.cardDescription}>{ReactHtmlParser(details)}</Description>
                   </div>
-                  <div className={classes.cardItem}>
+                  <div>
                     <div className={classes.cardTitle}>{content.results}</div>
                     <Description className={classes.cardDescription}>{ReactHtmlParser(results)}</Description>
                   </div>
-                  <div className={classes.cardItem}>
+                  <div>
                     <div className={classes.cardTitle}>{content.next}</div>
                     <Description className={classes.cardDescription}>{ReactHtmlParser(next)}</Description>
                   </div>

@@ -31,8 +31,17 @@ approachSection:
     
     - Used NDVI to create a trendline and conceptual framework for analyzing and measuring the land regeneration.
   
-    
+
     **Quantitative:** >90% accuracy in classification and tracking, 7% YoY improvement.'
   next: md//Improving the verification methodology accuracy, incorporating more ground truth data from 2020.
   figureImage: ../../static/media/walkers-figure1.png
   figureTitle: 'Carbon sequestration'
+figureSection:
+  background: ../../static/media/walkers-figure-bg.png
+  figures: 
+    - image: ../../static/media/walkers-figure2.png
+      title: 'Figure 2: Sentinel 2 versus Planet Scope land classification'
+      spacing: 40%
+    - image: ../../static/media/walkers-figure3.png
+      title: 'Figure 3: Land degradation / regeneration Index (2016-2018)'
+      spacing: 60%

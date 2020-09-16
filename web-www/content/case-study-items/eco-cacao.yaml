@@ -30,3 +30,8 @@ approachSection:
   next: md//Project-based funding and premium payment for high quality regeneratively grown cacao.
   figureImage: ../../static/media/eco-cacao-figure1.png
   figureTitle: 'Verification of claims. Example: “The xx parcel is polyculture cacao”'
+figureSection:
+  background: ../../static/media/eco-cacao-figure-bg.png
+  figures: 
+    - image: ../../static/media/eco-cacao-figure2.png
+      title: 'Mono vs. Polyculture Cacao: Machine learning coupled with sentinel 2 time series allows for distinguishing polyculture from monocultures, primary forest, secondary forest, and other land uses.'

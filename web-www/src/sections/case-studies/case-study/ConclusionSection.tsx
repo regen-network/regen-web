@@ -102,7 +102,7 @@ const ConclusionSection = ({ description, images }: ConclusionSectionProps): JSX
             <Grid container spacing={8}>
               <Grid item xs={12} sm={5}>
                 {images.map((img: Image, i: number) => (
-                  <>
+                  <div key={i}>
                     <Img
                       fluid={img.image.childImageSharp.fluid}
                       className={
@@ -110,7 +110,7 @@ const ConclusionSection = ({ description, images }: ConclusionSectionProps): JSX
                       }
                     />
                     {img.title && <Description className={classes.imageTitle}>{img.title}</Description>}
-                  </>
+                  </div>
                 ))}
               </Grid>
               <Grid item xs={12} sm={7}>

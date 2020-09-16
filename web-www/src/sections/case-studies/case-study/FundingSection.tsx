@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import { graphql, StaticQuery } from 'gatsby';
 import Img, { FluidObject } from 'gatsby-image';
+import ReactHtmlParser from 'react-html-parser';
 
 import Section from 'web-components/lib/components/section';
 import { TitleWithParagraphs } from './ApproachSection';
@@ -28,8 +29,14 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingBottom: theme.spacing(25),
     },
   },
-  green: {
-    color: theme.palette.secondary.main,
+  title: {
+    '& a': {
+      color: theme.palette.secondary.main,
+      textDecoration: 'none',
+      '&:link, &:visited, &:hover, &:active': {
+        textDecoration: 'none',
+      },
+    },
   },
   image: {
     width: '100%',
@@ -48,6 +55,7 @@ const FundingSection = ({ details, results, next, image }: FundingSectionProps):
           text: caseStudiesYaml {
             caseStudies {
               fundingSection {
+                header
                 details
                 results
                 next
@@ -66,12 +74,7 @@ const FundingSection = ({ details, results, next, image }: FundingSectionProps):
             <Grid container spacing={10}>
               <Grid item xs={12} md={6}>
                 <TitleWithParagraphs
-                  title={
-                    <div>
-                      Project-based funding via <span className={classes.green}>Regen Registry</span> +{' '}
-                      <span className={classes.green}>Regen Ledger</span>
-                    </div>
-                  }
+                  title={<div className={classes.title}>{ReactHtmlParser(content.header)}</div>}
                   paragraphs={[
                     { title: content.details, content: details },
                     { title: content.results, content: results },

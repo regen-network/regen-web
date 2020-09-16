@@ -179,7 +179,7 @@ const ContextSection = ({ description, image, challenges }: ContextSectionProps)
                   </Title>
                   <ol className={classes.list}>
                     {challenges.map(({ text }, i) => (
-                      <Description component="li" className={clsx(classes.description, classes.item)}>
+                      <Description key={i} component="li" className={clsx(classes.description, classes.item)}>
                         {text}
                       </Description>
                     ))}

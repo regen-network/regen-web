@@ -67,7 +67,7 @@ const FigureSection = ({ background, title, figures }: FigureSectionProps): JSX.
     <BackgroundSection topSection={false} linearGradient="unset" imageData={background.childImageSharp.fluid}>
       <Grid container spacing={4}>
         {figures.map((figure: Figure, i: number) => (
-          <Grid item xs={12} className={classes.item}>
+          <Grid key={i} item xs={12} className={classes.item}>
             <Img fluid={figure.image.childImageSharp.fluid} className={classes.image} />
             {figure.title && <Description className={classes.figureTitle}>{figure.title}</Description>}
           </Grid>

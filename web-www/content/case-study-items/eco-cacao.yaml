@@ -6,6 +6,7 @@ description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiu
 aboutSection:
   about: md//In the initial phase of this pilot, we are partnering with high-end chocolate brands in California such as <a target="_blank" href="https://imlakeshorganics.com/">Imlak’esh Organics</a> and <a target="_blank" href="https://endorfinfoods.com/">Endorfin Foods</a>, as well as <a target="_blank" href="http://yellow-seed.org/products/eco-cacao">Eco Cacao</a> and its parent organization <a target="_blank" href="https://www.conexionchocolate.com/esmeraldas/">UOPRACAE</a>, a co-operative of approximately 120 farmers from the Esmeraldas region in Ecuador. We hold the intention of scaling this effort to thousands of cacao farmers worldwide.
     
+  
     Our partner in running this pilot is <a target="_blank" href="http://www.terra-genesis.com/">Terra Genesis International</a>, who has been helping Eco Cacao train their farmers on regenerative practices and establish the first regenerative cacao certification.
   mapImage: ../../static/media/eco-cacao-map.png
   aboutImage: ../../static/media/eco-cacao-about.png
@@ -22,7 +23,6 @@ contextSection:
     - text: Regenerative growing methods, for example cover crops, agroforestry, and crop diversification, can combat the problems of unsustainable production, but is often too expensive for local farmers to implement, and furthermore, their impact often goes unrecognized and uncompensated.
     - text: Unlike Organic and Fair Trade standards, there are no well-established regenerative agriculture standards nor verification methods necessary to get buyers on board for paying premiums that compensate and motivate farmers to adopt regenerative practices.
 approachSection:
-  description: With amplified data collection and storage through Regen Network’s tools, Fibershed can obtain funding that furthers and compensates their regenerative practices.
   details: md//Using remote sensing based algorithms provided by Regen Network, Eco Cacao can verify their implementation of polyculture vs. monoculture practices within cacao farms. Additionally, other land cover classes related to land use management and ecosystems health can now be identified with high accuracy, and provide additional insights into each farm’s vegetation cover.
   results: 'md//**Qualitative:** Detection of cacao monoculture vs. polyculture, primary and secondary tropical forests, mangroves, monoculture of African palm, Balsa and Teak, open water, constructions and other land uses.
   

@@ -402,16 +402,6 @@ collections:
                   - {label: "Name", name: name, widget: string}
                   - {label: "role", name: role, widget: string}
                   - {label: "Description", name: description, widget: text}
-      - label: Case Studies
-        name: case-studies
-        file: "web-www/content/case-studies/index.yaml"
-        fields:
-          - label: Top Section
-            name: topSection
-            widget: "object"
-            fields:
-              - {label: Header, name: header, widget: string}
-              - {label: Description, name: body, widget: text}
       - label: "Shared sections"
         name: "shared"
         file: "web-www/content/shared/index.yaml"
@@ -565,7 +555,7 @@ collections:
         name: approachSection
         widget: object
         fields:
-          - {label: description, name: description, widget: string}
+          - {label: description, name: description, widget: string, required: false}
           - {label: details, name: details, widget: markdown}
           - {label: results, name: results, widget: markdown}
           - {label: next, name: next, widget: markdown}

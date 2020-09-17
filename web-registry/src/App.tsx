@@ -60,10 +60,10 @@ function AppFooter(): JSX.Element {
           title: 'Land Stewards',
           href: `${process.env.REACT_APP_WEBSITE_URL}/land-stewards/`,
         },
-        // {
-        //   title: 'Developers & Validators',
-        //   href: `${process.env.REACT_APP_WEBSITE_URL}/developers/`,
-        // },
+        {
+          title: 'Developers & Validators',
+          href: `${process.env.REACT_APP_WEBSITE_URL}/developers/`,
+        },
         {
           title: 'Scientists & Verifiers',
           href: `${process.env.REACT_APP_WEBSITE_URL}/science/`,

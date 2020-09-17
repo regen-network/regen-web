@@ -47,6 +47,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       lineHeight: '140%',
     },
+    [theme.breakpoints.up(theme.breakpoints.values.tablet)]: {
+      width: '69%',
+    },
   },
   image: {
     borderRadius: '50%',
@@ -54,7 +57,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.down('xs')]: {
       height: theme.spacing(15.5),
       width: theme.spacing(15),
-      // paddingTop: theme.spacing(3),
     },
     [theme.breakpoints.up('sm')]: {
       height: theme.spacing(19.75),

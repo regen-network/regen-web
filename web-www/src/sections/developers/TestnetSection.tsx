@@ -3,6 +3,7 @@ import { graphql, useStaticQuery } from 'gatsby';
 import { Theme, makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import ReactHtmlParser from 'react-html-parser';
+import clsx from 'clsx';
 
 import Description from 'web-components/lib/components/description';
 import Title from 'web-components/lib/components/title';
@@ -38,6 +39,12 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.spacing(8),
       paddingBottom: theme.spacing(5),
+    },
+  },
+  titleDescription: {
+    [theme.breakpoints.up('sm')]: {
+      width: '65%',
+      margin: '0 auto',
     },
   },
   description: {
@@ -115,7 +122,7 @@ const TestnetSection = (): JSX.Element => {
       titleClassName={classes.title}
       titleVariant="h2"
     >
-      <Description className={classes.description} align="center">
+      <Description className={clsx(classes.titleDescription, classes.description)} align="center">
         {content.description}
       </Description>
       <Title align="center" variant="h4" className={classes.address}>

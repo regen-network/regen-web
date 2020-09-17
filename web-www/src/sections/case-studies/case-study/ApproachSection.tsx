@@ -41,6 +41,22 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingBottom: theme.spacing(25),
     },
   },
+  title: {
+    [theme.breakpoints.down('xs')]: {
+      paddingBottom: theme.spacing(12),
+    },
+    [theme.breakpoints.up('sm')]: {
+      paddingBottom: theme.spacing(17),
+    },
+  },
+  titleWithDescription: {
+    [theme.breakpoints.down('xs')]: {
+      paddingBottom: theme.spacing(3),
+    },
+    [theme.breakpoints.up('sm')]: {
+      paddingBottom: theme.spacing(4.5),
+    },
+  },
   cardTitle: {
     fontFamily: theme.typography.h1.fontFamily,
     textTransform: 'uppercase',
@@ -93,12 +109,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     margin: '0 auto',
     [theme.breakpoints.down('xs')]: {
       fontSize: theme.spacing(4.5),
-      paddingTop: theme.spacing(3),
       paddingBottom: theme.spacing(11),
     },
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.spacing(5.5),
-      paddingTop: theme.spacing(4.5),
       paddingBottom: theme.spacing(13.5),
     },
   },
@@ -110,9 +124,20 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingBottom: theme.spacing(8),
     },
+    '& p': {
+      margin: 0,
+    },
   },
   image: {
     borderRadius: '10px',
+  },
+  paragraph: {
+    [theme.breakpoints.down('xs')]: {
+      paddingTop: theme.spacing(3.5),
+    },
+    [theme.breakpoints.up('sm')]: {
+      paddingTop: theme.spacing(4.5),
+    },
   },
 }));
 
@@ -126,7 +151,7 @@ export const TitleWithParagraphs = ({ title, paragraphs }: TitleWithParagraphsPr
       </Title>
       <div>
         {paragraphs.map((p: Paragraph, i: number) => (
-          <div key={i}>
+          <div key={i} className={i > 0 ? classes.paragraph : undefined}>
             <div className={classes.cardTitle}>{p.title}</div>
             <Description className={classes.cardDescription}>{ReactHtmlParser(p.content)}</Description>
           </div>
@@ -165,7 +190,11 @@ const ApproachSection = ({
       render={data => {
         const content = data.text.caseStudies.approachSection;
         return (
-          <Section className={classes.root} title={content.header}>
+          <Section
+            titleClassName={description ? classes.titleWithDescription : classes.title}
+            className={classes.root}
+            title={content.header}
+          >
             {description && <Description className={classes.description}>{description}</Description>}
             <Grid container spacing={10}>
               <Grid item xs={12} md={6}>

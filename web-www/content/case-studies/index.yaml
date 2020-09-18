@@ -1,0 +1,27 @@
+topSection:
+  header: Learn more about our work.
+  body: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.
+caseStudies:
+  header: Case Studies
+  view: view case study
+  aboutSection:
+    header: About the client
+    practice: practice
+    biome: biome
+    region: geographic region
+  contextSection:
+    header: Ecological context
+    challenges: Challenges
+  approachSection:
+    header: Regen Network approach
+    subHeader: Remote sensing verification
+    details: details
+    results: results
+    next: what's next
+  fundingSection:
+    header: md//Project-based funding via [Regen Registry](https://regen-website.netlify.com/registry/projects/impactag) + [Regen Ledger](https://regen-website.netlify.com/developers)
+    details: details
+    results: results
+    next: what's next
+  conclusionSection:
+    header: Conclusion

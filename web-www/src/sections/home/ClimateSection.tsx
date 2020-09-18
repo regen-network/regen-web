@@ -169,7 +169,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const ClimateSection = () => {
+const ClimateSection = (): JSX.Element => {
   const data = useStaticQuery(graphql`
     query {
       text: homeYaml {

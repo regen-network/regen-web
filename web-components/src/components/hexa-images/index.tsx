@@ -204,6 +204,7 @@ export default function HexaImages({ items }: HexaImagesProps): JSX.Element {
       <Grid container className={classes.images}>
         {items.map((item, i) => (
           <Grid
+            key={i}
             item
             className={classes.item}
             onMouseEnter={() => {

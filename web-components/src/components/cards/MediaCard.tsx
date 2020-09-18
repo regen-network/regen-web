@@ -9,8 +9,8 @@ import Title from '../title';
 
 export interface MediaCardProps {
   children?: any;
-  name: string;
   imgSrc: string;
+  name?: string;
   tag?: string;
   onClick?: () => void;
   width?: string;
@@ -19,6 +19,9 @@ export interface MediaCardProps {
   borderColor?: string;
   borderRadius?: string;
   className?: string;
+  backgroundGradient?: boolean;
+  imageClassName?: string;
+  titleOverwrite?: boolean;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -58,10 +61,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   title: {
     [theme.breakpoints.up('sm')]: {
-      padding: `${theme.spacing(4.5)} ${theme.spacing(5.25)} ${theme.spacing(3)}`,
+      padding: `${theme.spacing(4.5)} ${theme.spacing(5.25)} ${theme.spacing(0.8)}`,
     },
     [theme.breakpoints.down('xs')]: {
-      padding: `${theme.spacing(4)} ${theme.spacing(4.5)} ${theme.spacing(3)}`,
+      padding: `${theme.spacing(4)} ${theme.spacing(4.5)} ${theme.spacing(0.8)}`,
     },
   },
   h4title: {
@@ -83,6 +86,9 @@ export default function MediaCard({
   borderRadius,
   className,
   tag,
+  backgroundGradient = true,
+  imageClassName,
+  titleOverwrite = true,
 }: MediaCardProps): JSX.Element {
   const classes = useStyles({});
 
@@ -96,16 +102,20 @@ export default function MediaCard({
       borderRadius={borderRadius}
     >
       <div className={classes.root}>
-        <CardMedia className={classes.image} image={imgSrc}>
-          <div className={classes.backgroundGradient} />
+        <CardMedia className={clsx(imageClassName, classes.image)} image={imgSrc}>
+          {backgroundGradient && <div className={classes.backgroundGradient} />}
           {tag && <div className={classes.tag}>{tag}</div>}
         </CardMedia>
-        <Title
-          className={titleVariant === 'h4' ? clsx(classes.h4title, classes.title) : classes.title}
-          variant={titleVariant}
-        >
-          {name}
-        </Title>
+        {name && (
+          <Title
+            className={
+              titleVariant === 'h4' && titleOverwrite ? clsx(classes.h4title, classes.title) : classes.title
+            }
+            variant={titleVariant}
+          >
+            {name}
+          </Title>
+        )}
         {children}
       </div>
     </Card>

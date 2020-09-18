@@ -1,0 +1,63 @@
+name: Walkers Institute
+slug: walkers-institute
+cardImage: ../../static/media/walkers-card.png
+background: ../../static/media/walkers-top-bg.png
+description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+aboutSection:
+  about: md//WIRRED is a Barbados-based nonprofit research hub, land reserve, consultancy, and community program center dedicated to the study and implementation of climate smart regenerative agroforestry practices. WIRRED works locally and globally to build resilient economies, ecosystems, and communities by creating disruptive design systems that increase biodiversity, enhance ecosystem services, and improve the well-being of individuals and communities.
+  mapImage: ../../static/media/walkers-map.png
+  aboutImage: ../../static/media/walkers-about.png
+  practice: Conservation and Restoration
+  biome: Xeric shrublands biome
+  region: Barbados, Caribbean
+  lineRotate: rotate(17deg)
+  lineWidth: '62%'
+contextSection:
+  image: ../../static/media/walkers-context.png
+  description: 'md//For the last 50 years, Walkers Quarry provided sand to the island of Barbados. Sand quarries create air and water pollution, extensive land degradation, loss of natural habitats, and natural resource depletion. In 2011, quarry management decided to transform extraction areas into <a href="http://walkersreserve.com/" target="_blank">Walkers Reserve</a>: an ecologically-thriving, forested ecosystem.
+  
+  
+  Following permaculture design and management principles like rotational grazing and soil stabilization (<a href="http://walkersreserve.com/regeneration-manual/" target="_blank">among many others</a>), the quarry now provides habitat to threatened and endangered migratory birds, aids leatherback turtle conservation, sequesters carbon, helps fight climate change, grows perennial food systems, and strengthens the local economy to ensure a brighter future for the community.'
+  challenges:
+    - text: The reserve has made steady progress since 2015, but WIRRED still requires a steady stream of conservation funding to complete the restoration of this sand quarry.
+    - text: There is interest in showcasing WIRRED’s work and evangelizing the potential for ecological conservation and restoration across the entire Carribean region, but they lack monitoring and verification tools.
+approachSection:
+  details: md//Using a combination of satellite imagery from Sentinel-2 and Planet Scope, Regen Network measured several ecosystem health indicators on Walkers Reserve, including land conversion, landscape diversity, carbon sequestration, and land regeneration index.
+  results: 'md//**Qualitative:**
+
+    - Ability to classify and track changes in land cover types including water, forest, agroforestry, herbaceous, vegetated dunes and bare soil.
+    
+    - Ability to quantify the changes in carbon (tons/ha/year) for each land management unit.
+    
+    - Used NDVI to create a trendline and conceptual framework for analyzing and measuring the land regeneration.
+  
+
+    **Quantitative:** >90% accuracy in classification and tracking, 7% YoY improvement.'
+  next: md//Improving the verification methodology accuracy, incorporating more ground truth data from 2020.
+  figureImage: ../../static/media/walkers-figure1.png
+  figureTitle: 'Carbon sequestration'
+figureSection:
+  background: ../../static/media/walkers-figure-bg.png
+  figures: 
+    - image: ../../static/media/walkers-figure2.png
+      title: 'Figure 2: Sentinel 2 versus Planet Scope land classification'
+      spacing: 40%
+    - image: ../../static/media/walkers-figure3.png
+      title: 'Figure 3: Land degradation / regeneration Index (2016-2018)'
+      spacing: 60%
+fundingSection:
+  image: ../../static/media/walkers-funding.png
+  details: md//Creating a project on Regen Registry and storing monitoring data as immutable records on Regen Ledger which provides an important layer of transparency and accountability to funders.
+  results: md//Project page on Regen Registry targeted to go live in Q4. Regen Ledger integration to be added in subsequent phase.
+  next: md//Creating a dedicated carbon offset methodology for the quarry restoration. Launching the Project Page on Regen Registry and getting conservation funds to WIRRED.
+conclusionSection:
+  description: md//With promising results thus far, our pilot project with WIRRED is showing the potential Regen Network partnerships have to monitor, track, verify, and usefully store data.
+  images:
+    - image: ../../static/media/walkers-conclusion.png
+bottomSection:
+  background: ../../static/media/walkers-bottom-bg.png
+  quote: By fusing satellite monitoring with improvements in on the ground field collection, Regen helped put Walkers Reserve and Walkers Institute for Regenerative Research Education and Design on a pathway to quantify the regeneration outcomes.
+  person:
+    name: Ian McNeel
+    image: ../../static/media/walkers-ian.png
+    role: Founder-Director, WIRRED

@@ -1,9 +1,9 @@
 import React from 'react';
 import { graphql, StaticQuery } from 'gatsby';
 import { Theme, makeStyles } from '@material-ui/core';
+
 import Title from 'web-components/lib/components/title';
 import ResourceCardsSlider from 'web-components/lib/components/sliders/ResourceCards';
-
 import BackgroundSection from '../../components/BackgroundSection';
 
 const useStyles = makeStyles((theme: Theme) => ({

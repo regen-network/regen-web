@@ -58,16 +58,9 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
 
   // Links in rest of the site must use the trailing '/'
   // in order for these to work appropriately
-  const headerNoBorderBottomPages: Array<string> = [
-    '/',
-    '/buyers/',
-    '/land-stewards/',
-    '/resources/',
-    '/team/',
-    '/developers/',
-    '/invest/',
-    '/science/',
-  ];
+  const headerNoBorderBottomPages: RegExp = new RegExp(
+    '//|/buyers/|/land-stewards/|/resources/|/team/|/developers/|/science/|/invest/|/case-studies/|/case-studies/[a-z-]+//',
+  );
 
   const menuItems: HeaderMenuItem[] = [
     { title: 'Buyers', href: '/buyers/' },
@@ -75,13 +68,14 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
     {
       title: 'Learn More',
       dropdownItems: [
-        // { title: 'Case Studies', href: '/case-studies/' },
+        { title: 'Case Studies', href: '/case-studies/' },
         { title: 'Resources', href: '/resources/' },
         { title: 'FAQ', href: '/faq/' },
         { title: 'Team', href: '/team/' },
       ],
     },
   ];
+  
   const desktopColor: string = headerColors[location.pathname]
     ? headerColors[location.pathname]
     : theme.palette.primary.light;
@@ -118,10 +112,10 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
     {
       title: 'learn more',
       items: [
-        // {
-        //   title: 'Case Studies',
-        //   href: '/case-studies/',
-        // },
+        {
+          title: 'Case Studies',
+          href: '/case-studies/',
+        },
         {
           title: 'Resources',
           href: '/resources/',
@@ -174,9 +168,9 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
       <Header
         menuItems={menuItems}
         transparent={transparent}
-        absolute={headerNoBorderBottomPages.includes(location.pathname)}
+        absolute={location.pathname === '/' || headerNoBorderBottomPages.test(location.pathname)}
         color={desktopColor}
-        borderBottom={!headerNoBorderBottomPages.includes(location.pathname)}
+        borderBottom={location.pathname !== '/' || !headerNoBorderBottomPages.test(location.pathname)}
         pathname={location.pathname}
       />
       <div>

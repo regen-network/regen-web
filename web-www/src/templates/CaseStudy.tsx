@@ -1,7 +1,7 @@
 import React from 'react';
 import { graphql } from 'gatsby';
-import { Theme, makeStyles } from '@material-ui/core/styles';
 
+import SEO from '../components/seo';
 import TopSection from '../sections/case-studies/case-study/TopSection';
 import AboutSection from '../sections/case-studies/case-study/AboutSection';
 import ContextSection from '../sections/case-studies/case-study/ContextSection';
@@ -10,8 +10,6 @@ import FigureSection from '../sections/case-studies/case-study/FigureSection';
 import FundingSection from '../sections/case-studies/case-study/FundingSection';
 import ConclusionSection from '../sections/case-studies/case-study/ConclusionSection';
 import BottomSection from '../sections/case-studies/case-study/BottomSection';
-
-const useStyles = makeStyles((theme: Theme) => ({}));
 
 interface Props {
   allCaseStudyItemsYaml: {
@@ -26,6 +24,7 @@ const CaseStudy = ({ data }: Props): JSX.Element => {
   const item = data.allCaseStudyItemsYaml.nodes[0];
   return (
     <>
+      <SEO title={item.name} />
       <TopSection background={item.background} name={item.name} />
       <AboutSection {...item.aboutSection} />
       <ContextSection {...item.contextSection} />

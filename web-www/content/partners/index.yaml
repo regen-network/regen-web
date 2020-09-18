@@ -1,0 +1,44 @@
+partnerLogos:
+  - image: '../../static/media/team/rainforest-foundation.jpg'
+    sortOrder: 1
+  - image: '../../static/media/team/kiss-the-ground.jpg'
+    sortOrder: 2
+  - image: '../../static/media/team/farm-os.jpg'
+    sortOrder: 3
+  - image: '../../static/media/team/terra-genesis.jpg'
+    sortOrder: 4
+  - image: '../../static/media/team/fibershed.jpg'
+    sortOrder: 5
+  - image: '../../static/media/team/carbon-sync.jpg'
+    sortOrder: 6
+  - image: '../../static/media/team/eco-quants.jpg'
+    sortOrder: 7
+  - image: '../../static/media/team/cornell.jpg'
+    sortOrder: 8
+  - image: '../../static/media/team/4per.jpg'
+    sortOrder: 9
+  - image: '../../static/media/team/techstars.jpg'
+    sortOrder: 10
+  - image: '../../static/media/team/nature-conservancy.jpg'
+    sortOrder: 11
+  - image: '../../static/media/team/ffar.jpg'
+    sortOrder: 12
+  - image: '../../static/media/team/open-team.jpg'
+    sortOrder: 13
+  - image: '../../static/media/team/repliculture.jpg'
+    sortOrder: 14
+  - image: '../../static/media/team/ecosystem-services.jpg'
+    sortOrder: 15
+  - image: '../../static/media/team/cosmos.jpg'
+    sortOrder: 16
+  - image: '../../static/media/team/interchain.jpg'
+    sortOrder: 17
+  - image: '../../static/media/team/open-lab.jpg'
+    sortOrder: 18
+  - image: '../../static/media/team/our-sci.jpg'
+    sortOrder: 19
+  - image: '../../static/media/team/mwd-southern-cali.jpg'
+    sortOrder: 20
+  - image: '../../static/media/team/chorus-one.jpg'
+    sortOrder: 21
+  

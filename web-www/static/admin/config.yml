@@ -15,6 +15,16 @@ collections:
     editor:
       preview: false
     files:
+      - label: "Partners"
+        name: "partners"
+        file: "web-www/content/invest/index.yaml"
+        fields:
+          - label: "Partner Logos"
+            name: "partnerLogos"
+            widget: "object"
+            fields: 
+              - {label: image, name: image, widget: image}
+              - {label: sort order, name: sortOrder, widget: number, default: 1, value_type: int, min: 0, step: 1, hint: "sorts ascending"}
       - label: "Invest"
         name: "invest"
         file: "web-www/content/invest/index.yaml"

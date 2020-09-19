@@ -5,6 +5,7 @@ import Card from './Card';
 
 export interface PartnerCardProps {
   imageUrl?: string;
+  sortOrder?: number;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -22,7 +23,7 @@ export default function PartnerCard({ imageUrl }: PartnerCardProps): JSX.Element
   const classes = useStyles({});
 
   return (
-    <Card className={classes.card}>
+    <Card key={sortOrder} className={classes.card}>
       <img className={classes.img} src={imageUrl} alt={imageUrl}></img>
     </Card>
   );

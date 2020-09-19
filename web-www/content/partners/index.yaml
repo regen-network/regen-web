@@ -1,44 +1,44 @@
 partnerLogos:
-  - image: '../../static/media/team/rainforest-foundation.jpg'
+  - image: '../../media/partners/rainforest-foundation.jpg'
     sortOrder: 1
-  - image: '../../static/media/team/kiss-the-ground.jpg'
+  - image: '../../media/partners/kiss-the-ground.jpg'
     sortOrder: 2
-  - image: '../../static/media/team/farm-os.jpg'
+  - image: '../../media/partners/farm-os.jpg'
     sortOrder: 3
-  - image: '../../static/media/team/terra-genesis.jpg'
+  - image: '../../media/partners/terra-genesis.jpg'
     sortOrder: 4
-  - image: '../../static/media/team/fibershed.jpg'
+  - image: '../../media/partners/fibershed.jpg'
     sortOrder: 5
-  - image: '../../static/media/team/carbon-sync.jpg'
+  - image: '../../media/partners/carbon-sync.jpg'
     sortOrder: 6
-  - image: '../../static/media/team/eco-quants.jpg'
+  - image: '../../media/partners/eco-quants.jpg'
     sortOrder: 7
-  - image: '../../static/media/team/cornell.jpg'
+  - image: '../../media/partners/cornell.jpg'
     sortOrder: 8
-  - image: '../../static/media/team/4per.jpg'
+  - image: '../../media/partners/4per.jpg'
     sortOrder: 9
-  - image: '../../static/media/team/techstars.jpg'
+  - image: '../../media/partners/techstars.jpg'
     sortOrder: 10
-  - image: '../../static/media/team/nature-conservancy.jpg'
+  - image: '../../media/partners/nature-conservancy.jpg'
     sortOrder: 11
-  - image: '../../static/media/team/ffar.jpg'
+  - image: '../../media/partners/ffar.jpg'
     sortOrder: 12
-  - image: '../../static/media/team/open-team.jpg'
+  - image: '../../media/partners/open-partners.jpg'
     sortOrder: 13
-  - image: '../../static/media/team/repliculture.jpg'
+  - image: '../../media/partners/repliculture.jpg'
     sortOrder: 14
-  - image: '../../static/media/team/ecosystem-services.jpg'
+  - image: '../../media/partners/ecosystem-services.jpg'
     sortOrder: 15
-  - image: '../../static/media/team/cosmos.jpg'
+  - image: '../../media/partners/cosmos.jpg'
     sortOrder: 16
-  - image: '../../static/media/team/interchain.jpg'
+  - image: '../../media/partners/interchain.jpg'
     sortOrder: 17
-  - image: '../../static/media/team/open-lab.jpg'
+  - image: '../../media/partners/open-lab.jpg'
     sortOrder: 18
-  - image: '../../static/media/team/our-sci.jpg'
+  - image: '../../media/partners/our-sci.jpg'
     sortOrder: 19
-  - image: '../../static/media/team/mwd-southern-cali.jpg'
+  - image: '../../media/partners/mwd-southern-cali.jpg'
     sortOrder: 20
-  - image: '../../static/media/team/chorus-one.jpg'
+  - image: '../../media/partners/chorus-one.jpg'
     sortOrder: 21
   

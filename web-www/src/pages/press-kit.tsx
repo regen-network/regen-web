@@ -11,6 +11,7 @@ import TeamSection from '../sections/press-kit/TeamSection';
 import FeaturedSection from '../sections/press-kit/FeaturedSection';
 import AwardsSection from '../sections/press-kit/AwardsSection';
 import LogosSection from '../sections/press-kit/LogosSection';
+import ConnectSection from '../sections/press-kit/ConnectSection';
 
 const PressKitPage = (): JSX.Element => {
   const data = useStaticQuery(graphql`
@@ -37,7 +38,7 @@ const PressKitPage = (): JSX.Element => {
         <AwardsSection />
         <LogosSection />
       </BackgroundImage>
-      {/* <ConnectSection /> */}
+      <ConnectSection />
     </>
   );
 };

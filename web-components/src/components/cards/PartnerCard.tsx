@@ -1,29 +1,33 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
+import clsx from 'clsx';
 
 import Card from './Card';
 
 export interface PartnerCardProps {
   imageUrl?: string;
   sortOrder?: number;
+  className?: string;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
   card: {
-    height: '100%',
-    width: '100%',
     display: 'flex',
     flexDirection: 'column',
-    position: 'relative',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  img: {},
+  img: {
+    maxHeight: '90%',
+    maxWidth: '80%',
+  },
 }));
 
-export default function PartnerCard({ imageUrl }: PartnerCardProps): JSX.Element {
+export default function PartnerCard({ imageUrl, sortOrder, className }: PartnerCardProps): JSX.Element {
   const classes = useStyles({});
 
   return (
-    <Card key={sortOrder} className={classes.card}>
+    <Card elevation={1} className={clsx(classes.card, className)} key={sortOrder}>
       <img className={classes.img} src={imageUrl} alt={imageUrl}></img>
     </Card>
   );

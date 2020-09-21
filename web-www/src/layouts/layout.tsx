@@ -59,7 +59,7 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
   // Links in rest of the site must use the trailing '/'
   // in order for these to work appropriately
   const headerNoBorderBottomPages: RegExp = new RegExp(
-    '//|/buyers/|/land-stewards/|/resources/|/team/|/developers/|/science/|/invest/|/case-studies/|/case-studies/[a-z-]+//',
+    '//|/buyers/|/partners/|/land-stewards/|/resources/|/team/|/developers/|/science/|/invest/|/case-studies/|/case-studies/[a-z-]+//',
   );
 
   const menuItems: HeaderMenuItem[] = [
@@ -75,7 +75,7 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
       ],
     },
   ];
-  
+
   const desktopColor: string = headerColors[location.pathname]
     ? headerColors[location.pathname]
     : theme.palette.primary.light;

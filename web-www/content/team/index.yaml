@@ -232,6 +232,14 @@ contributorSection:
       name: Ethan Frey
       image: ../../static/media/ethan-frey.jpg
       linkedUrl: https://www.linkedin.com/in/ethanfrey/
+    - name: Clare Politano
+      title: "Developer "
+      description: Clare is a software engineer dedicated to a regenerative future.
+        She is the co-founder of PayCheck, a transparency and pay equity
+        platform. Clare previously worked in refugee resettlement, sustainable
+        manufacturing, and nutrition and food advocacy.
+      linkedUrl: https://www.linkedin.com/in/clarepolitano/
+      image: ../../static/media/clare.jpg
 advisorSection:
   title: Advisors
   advisors:

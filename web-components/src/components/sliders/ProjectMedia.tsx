@@ -26,6 +26,8 @@ const useStyles = makeStyles((theme: Theme) => ({
       [theme.breakpoints.up('sm')]: {
         textAlign: 'left',
         '& ul': {
+          whiteSpace: 'nowrap',
+          overflow: 'hidden',
           marginLeft: '-8px',
           '& li': {
             width: 60,
@@ -58,6 +60,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   thumbnail: {
     position: 'relative',
+    display: 'inline-block',
     '& img': {
       width: 60,
       height: 60,
@@ -111,6 +114,8 @@ export default function ProjectMedia({ assets }: ProjectMediaProps): JSX.Element
     })
     .filter(item => item.type === 'image' || item.type === 'video');
 
+  const onThumbnailClick = (i: number) => {};
+
   const settings = {
     speed: 500,
     rows: 1,
@@ -125,7 +130,7 @@ export default function ProjectMedia({ assets }: ProjectMediaProps): JSX.Element
     ),
     customPaging: (i: number) => {
       return matches ? (
-        <div className={classes.thumbnail}>
+        <div className={classes.thumbnail} onClick={i => onThumbnailClick(i)}>
           <img width={60} height={60} src={filteredAssets[i].thumbnail} alt={filteredAssets[i].thumbnail} />
           {filteredAssets[i].type === 'video' && (
             <div className={classes.play}>

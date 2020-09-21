@@ -249,6 +249,25 @@ contributorSection:
       title: Ecological Economist
       linkedUrl: https://www.linkedin.com/in/kyle-birchard-0379408/
       image: ../../static/media/kyle-birchard.jpeg
+    - description: >
+        Will’s background in gift economics and local food systems helped him to
+        start PVGrows, a network in Western MA funding local food system
+        infrastructure, and develop a license for definancializing physical
+        infrastructure, the Gift License. Will is a member of the Board of
+        Directors.
+      title: HR & Legal
+      name: Will Szal
+      image: ../../static/media/will-szal.jpeg
+    - description: >
+        After nearly thirty years of software development, mostly in finance and
+        insurance, the telco sector, and several tech startups, Pete finds that
+        plying his craft in the service of planetary regeneration to be
+        refreshingly worthwhile. He supports front and back-end development
+        activities.
+      githubUrl: https://github.com/petefarmer
+      title: Developer
+      name: Pete Farmer
+      image: ../../static/media/peter-farmer.jpg
 advisorSection:
   title: Advisors
   advisors:

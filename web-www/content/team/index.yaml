@@ -173,6 +173,17 @@ coreSection:
         supports the science team in methodology development and project
         management.
       image: ../../static/media/sophia-headshot.png
+    - name: "Sam Bennetts "
+      title: Data Scientist and GIS Assistant
+      description: Sam is a GIS and remote sensing specialist focused on bridging the
+        social, environmental, and computer sciences. During his academic
+        career, Sam's work ranged from urbanization and land cover change
+        studies to those focused on applying machine learning techniques to
+        better understand glacier dynamics and sea level rise. Most recently,
+        Sam worked with residents in Shrewsbury, Vermont to develop methods for
+        carbon sequestration in hardwood forests as a means of addressing
+        climate change.
+      image: ../../static/media/img-5833.jpg
 contributorSection:
   title: Contributors
   contributors:

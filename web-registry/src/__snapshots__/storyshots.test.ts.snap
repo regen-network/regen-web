@@ -6452,16 +6452,16 @@ exports[`Storyshots Components|Tabs Mrv Tabs 1`] = `
 exports[`Storyshots Components|Timeline New Timeline 1`] = `
 <div>
   <div
-    className="MuiBox-root MuiBox-root-876"
+    className="MuiBox-root MuiBox-root-880"
   >
     <ul
-      className="MuiTimeline-root MuiTimeline-alignAlternate makeStyles-timeline-860"
+      className="MuiTimeline-root MuiTimeline-alignAlternate makeStyles-timeline-864"
     >
       <li
         className="MuiTimelineItem-root MuiTimelineItem-alignAlternate"
       >
         <div
-          className="MuiTimelineOppositeContent-root MuiTimelineItem-oppositeContent makeStyles-oppositeContent-862"
+          className="MuiTimelineOppositeContent-root MuiTimelineItem-oppositeContent makeStyles-oppositeContent-866"
         >
           <img
             alt="Register project"
@@ -6469,39 +6469,39 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
           />
         </div>
         <div
-          className="MuiTimelineSeparator-root makeStyles-separator-870"
+          className="MuiTimelineSeparator-root makeStyles-separator-874"
         >
           <span
-            className="MuiTimelineDot-root makeStyles-dot-869 MuiTimelineDot-defaultGrey"
+            className="MuiTimelineDot-root makeStyles-dot-873 MuiTimelineDot-defaultGrey"
           />
           <span
-            className="MuiTimelineConnector-root makeStyles-connector-866 makeStyles-firstConnector-867"
+            className="MuiTimelineConnector-root makeStyles-connector-870 makeStyles-firstConnector-871"
           />
         </div>
         <div
           className="MuiTimelineContent-root MuiTimelineItem-content"
         >
           <div
-            className="MuiGrid-root makeStyles-content-863 makeStyles-content-877 MuiGrid-container MuiGrid-wrap-xs-nowrap"
+            className="MuiGrid-root makeStyles-content-867 makeStyles-content-881 MuiGrid-container MuiGrid-wrap-xs-nowrap"
           >
             <div
-              className="MuiGrid-root makeStyles-number-871 MuiGrid-item"
+              className="MuiGrid-root makeStyles-number-875 MuiGrid-item"
             >
               1
             </div>
             <div
-              className="MuiGrid-root makeStyles-text-873 MuiGrid-item"
+              className="MuiGrid-root makeStyles-text-877 MuiGrid-item"
             >
               <h3
-                className="MuiTypography-root makeStyles-root-879 makeStyles-title-872 MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+                className="MuiTypography-root makeStyles-root-883 makeStyles-title-876 MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
               >
                 Register project
               </h3>
               <div
-                className="makeStyles-tags-864"
+                className="makeStyles-tags-868"
               >
                 <span
-                  className="makeStyles-tag-865 makeStyles-tag-881"
+                  className="makeStyles-tag-869 makeStyles-tag-885"
                 >
                   farmer
                 </span>
@@ -6514,7 +6514,7 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
         className="MuiTimelineItem-root MuiTimelineItem-alignAlternate"
       >
         <div
-          className="MuiTimelineOppositeContent-root MuiTimelineItem-oppositeContent makeStyles-oppositeContent-862"
+          className="MuiTimelineOppositeContent-root MuiTimelineItem-oppositeContent makeStyles-oppositeContent-866"
         >
           <img
             alt="Establish timeline"
@@ -6522,44 +6522,44 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
           />
         </div>
         <div
-          className="MuiTimelineSeparator-root makeStyles-separator-870"
+          className="MuiTimelineSeparator-root makeStyles-separator-874"
         >
           <span
-            className="MuiTimelineDot-root makeStyles-dot-869 MuiTimelineDot-defaultGrey"
+            className="MuiTimelineDot-root makeStyles-dot-873 MuiTimelineDot-defaultGrey"
           />
           <span
-            className="MuiTimelineConnector-root makeStyles-connector-866"
+            className="MuiTimelineConnector-root makeStyles-connector-870"
           />
         </div>
         <div
           className="MuiTimelineContent-root MuiTimelineItem-content"
         >
           <div
-            className="MuiGrid-root makeStyles-content-863 makeStyles-content-882 MuiGrid-container MuiGrid-wrap-xs-nowrap"
+            className="MuiGrid-root makeStyles-content-867 makeStyles-content-886 MuiGrid-container MuiGrid-wrap-xs-nowrap"
           >
             <div
-              className="MuiGrid-root makeStyles-number-871 MuiGrid-item"
+              className="MuiGrid-root makeStyles-number-875 MuiGrid-item"
             >
               2
             </div>
             <div
-              className="MuiGrid-root makeStyles-text-873 MuiGrid-item"
+              className="MuiGrid-root makeStyles-text-877 MuiGrid-item"
             >
               <h3
-                className="MuiTypography-root makeStyles-root-879 makeStyles-title-872 MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+                className="MuiTypography-root makeStyles-root-883 makeStyles-title-876 MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
               >
                 Establish timeline
               </h3>
               <div
-                className="makeStyles-tags-864"
+                className="makeStyles-tags-868"
               >
                 <span
-                  className="makeStyles-tag-865 makeStyles-tag-885"
+                  className="makeStyles-tag-869 makeStyles-tag-889"
                 >
                   monitor
                 </span>
                 <span
-                  className="makeStyles-tag-865 makeStyles-tag-887"
+                  className="makeStyles-tag-869 makeStyles-tag-891"
                 >
                   farmer
                 </span>
@@ -6572,7 +6572,7 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
         className="MuiTimelineItem-root MuiTimelineItem-alignAlternate"
       >
         <div
-          className="MuiTimelineOppositeContent-root MuiTimelineItem-oppositeContent makeStyles-oppositeContent-862"
+          className="MuiTimelineOppositeContent-root MuiTimelineItem-oppositeContent makeStyles-oppositeContent-866"
         >
           <img
             alt="Lorem ipsum 1"
@@ -6580,44 +6580,44 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
           />
         </div>
         <div
-          className="MuiTimelineSeparator-root makeStyles-separator-870"
+          className="MuiTimelineSeparator-root makeStyles-separator-874"
         >
           <span
-            className="MuiTimelineDot-root makeStyles-dot-869 MuiTimelineDot-defaultGrey"
+            className="MuiTimelineDot-root makeStyles-dot-873 MuiTimelineDot-defaultGrey"
           />
           <span
-            className="MuiTimelineConnector-root makeStyles-connector-866"
+            className="MuiTimelineConnector-root makeStyles-connector-870"
           />
         </div>
         <div
           className="MuiTimelineContent-root MuiTimelineItem-content"
         >
           <div
-            className="MuiGrid-root makeStyles-content-863 makeStyles-content-888 MuiGrid-container MuiGrid-wrap-xs-nowrap"
+            className="MuiGrid-root makeStyles-content-867 makeStyles-content-892 MuiGrid-container MuiGrid-wrap-xs-nowrap"
           >
             <div
-              className="MuiGrid-root makeStyles-number-871 MuiGrid-item"
+              className="MuiGrid-root makeStyles-number-875 MuiGrid-item"
             >
               3
             </div>
             <div
-              className="MuiGrid-root makeStyles-text-873 MuiGrid-item"
+              className="MuiGrid-root makeStyles-text-877 MuiGrid-item"
             >
               <h3
-                className="MuiTypography-root makeStyles-root-879 makeStyles-title-872 MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+                className="MuiTypography-root makeStyles-root-883 makeStyles-title-876 MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
               >
                 Lorem ipsum 1
               </h3>
               <div
-                className="makeStyles-tags-864"
+                className="makeStyles-tags-868"
               >
                 <span
-                  className="makeStyles-tag-865 makeStyles-tag-891"
+                  className="makeStyles-tag-869 makeStyles-tag-895"
                 >
                   monitor
                 </span>
                 <span
-                  className="makeStyles-tag-865 makeStyles-tag-893"
+                  className="makeStyles-tag-869 makeStyles-tag-897"
                 >
                   farmer
                 </span>
@@ -6630,7 +6630,7 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
         className="MuiTimelineItem-root MuiTimelineItem-alignAlternate"
       >
         <div
-          className="MuiTimelineOppositeContent-root MuiTimelineItem-oppositeContent makeStyles-oppositeContent-862"
+          className="MuiTimelineOppositeContent-root MuiTimelineItem-oppositeContent makeStyles-oppositeContent-866"
         >
           <img
             alt="Lorem ipsum 2"
@@ -6638,39 +6638,39 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
           />
         </div>
         <div
-          className="MuiTimelineSeparator-root makeStyles-separator-870"
+          className="MuiTimelineSeparator-root makeStyles-separator-874"
         >
           <span
-            className="MuiTimelineDot-root makeStyles-dot-869 MuiTimelineDot-defaultGrey"
+            className="MuiTimelineDot-root makeStyles-dot-873 MuiTimelineDot-defaultGrey"
           />
           <span
-            className="MuiTimelineConnector-root makeStyles-connector-866 makeStyles-lastConnector-868"
+            className="MuiTimelineConnector-root makeStyles-connector-870 makeStyles-lastConnector-872"
           />
         </div>
         <div
           className="MuiTimelineContent-root MuiTimelineItem-content"
         >
           <div
-            className="MuiGrid-root makeStyles-content-863 makeStyles-content-894 MuiGrid-container MuiGrid-wrap-xs-nowrap"
+            className="MuiGrid-root makeStyles-content-867 makeStyles-content-898 MuiGrid-container MuiGrid-wrap-xs-nowrap"
           >
             <div
-              className="MuiGrid-root makeStyles-number-871 MuiGrid-item"
+              className="MuiGrid-root makeStyles-number-875 MuiGrid-item"
             >
               4
             </div>
             <div
-              className="MuiGrid-root makeStyles-text-873 MuiGrid-item"
+              className="MuiGrid-root makeStyles-text-877 MuiGrid-item"
             >
               <h3
-                className="MuiTypography-root makeStyles-root-879 makeStyles-title-872 MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+                className="MuiTypography-root makeStyles-root-883 makeStyles-title-876 MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
               >
                 Lorem ipsum 2
               </h3>
               <div
-                className="makeStyles-tags-864"
+                className="makeStyles-tags-868"
               >
                 <span
-                  className="makeStyles-tag-865 makeStyles-tag-897"
+                  className="makeStyles-tag-869 makeStyles-tag-901"
                 >
                   monitor
                 </span>
@@ -6682,48 +6682,48 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
     </ul>
   </div>
   <div
-    className="MuiBox-root MuiBox-root-898"
+    className="MuiBox-root MuiBox-root-902"
   >
     <ul
-      className="MuiTimeline-root MuiTimeline-alignLeft makeStyles-timeline-860"
+      className="MuiTimeline-root MuiTimeline-alignLeft makeStyles-timeline-864"
     >
       <li
-        className="MuiTimelineItem-root MuiTimelineItem-alignLeft makeStyles-item-861 MuiTimelineItem-missingOppositeContent"
+        className="MuiTimelineItem-root MuiTimelineItem-alignLeft makeStyles-item-865 MuiTimelineItem-missingOppositeContent"
       >
         <div
-          className="MuiTimelineSeparator-root makeStyles-separator-870"
+          className="MuiTimelineSeparator-root makeStyles-separator-874"
         >
           <span
-            className="MuiTimelineDot-root makeStyles-dot-869 MuiTimelineDot-defaultGrey"
+            className="MuiTimelineDot-root makeStyles-dot-873 MuiTimelineDot-defaultGrey"
           />
           <span
-            className="MuiTimelineConnector-root makeStyles-connector-866 makeStyles-firstConnector-867"
+            className="MuiTimelineConnector-root makeStyles-connector-870 makeStyles-firstConnector-871"
           />
         </div>
         <div
           className="MuiTimelineContent-root MuiTimelineItem-content"
         >
           <div
-            className="MuiGrid-root makeStyles-content-863 makeStyles-content-899 MuiGrid-container MuiGrid-wrap-xs-nowrap"
+            className="MuiGrid-root makeStyles-content-867 makeStyles-content-903 MuiGrid-container MuiGrid-wrap-xs-nowrap"
           >
             <div
-              className="MuiGrid-root makeStyles-number-871 MuiGrid-item"
+              className="MuiGrid-root makeStyles-number-875 MuiGrid-item"
             >
               1
             </div>
             <div
-              className="MuiGrid-root makeStyles-text-873 MuiGrid-item"
+              className="MuiGrid-root makeStyles-text-877 MuiGrid-item"
             >
               <h3
-                className="MuiTypography-root makeStyles-root-879 makeStyles-title-872 MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+                className="MuiTypography-root makeStyles-root-883 makeStyles-title-876 MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
               >
                 Register project
               </h3>
               <div
-                className="makeStyles-tags-864"
+                className="makeStyles-tags-868"
               >
                 <span
-                  className="makeStyles-tag-865 makeStyles-tag-902"
+                  className="makeStyles-tag-869 makeStyles-tag-906"
                 >
                   farmer
                 </span>
@@ -6733,47 +6733,47 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
         </div>
       </li>
       <li
-        className="MuiTimelineItem-root MuiTimelineItem-alignLeft makeStyles-item-861 MuiTimelineItem-missingOppositeContent"
+        className="MuiTimelineItem-root MuiTimelineItem-alignLeft makeStyles-item-865 MuiTimelineItem-missingOppositeContent"
       >
         <div
-          className="MuiTimelineSeparator-root makeStyles-separator-870"
+          className="MuiTimelineSeparator-root makeStyles-separator-874"
         >
           <span
-            className="MuiTimelineDot-root makeStyles-dot-869 MuiTimelineDot-defaultGrey"
+            className="MuiTimelineDot-root makeStyles-dot-873 MuiTimelineDot-defaultGrey"
           />
           <span
-            className="MuiTimelineConnector-root makeStyles-connector-866"
+            className="MuiTimelineConnector-root makeStyles-connector-870"
           />
         </div>
         <div
           className="MuiTimelineContent-root MuiTimelineItem-content"
         >
           <div
-            className="MuiGrid-root makeStyles-content-863 makeStyles-content-903 MuiGrid-container MuiGrid-wrap-xs-nowrap"
+            className="MuiGrid-root makeStyles-content-867 makeStyles-content-907 MuiGrid-container MuiGrid-wrap-xs-nowrap"
           >
             <div
-              className="MuiGrid-root makeStyles-number-871 MuiGrid-item"
+              className="MuiGrid-root makeStyles-number-875 MuiGrid-item"
             >
               2
             </div>
             <div
-              className="MuiGrid-root makeStyles-text-873 MuiGrid-item"
+              className="MuiGrid-root makeStyles-text-877 MuiGrid-item"
             >
               <h3
-                className="MuiTypography-root makeStyles-root-879 makeStyles-title-872 MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+                className="MuiTypography-root makeStyles-root-883 makeStyles-title-876 MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
               >
                 Establish timeline
               </h3>
               <div
-                className="makeStyles-tags-864"
+                className="makeStyles-tags-868"
               >
                 <span
-                  className="makeStyles-tag-865 makeStyles-tag-906"
+                  className="makeStyles-tag-869 makeStyles-tag-910"
                 >
                   monitor
                 </span>
                 <span
-                  className="makeStyles-tag-865 makeStyles-tag-908"
+                  className="makeStyles-tag-869 makeStyles-tag-912"
                 >
                   farmer
                 </span>
@@ -6783,47 +6783,47 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
         </div>
       </li>
       <li
-        className="MuiTimelineItem-root MuiTimelineItem-alignLeft makeStyles-item-861 MuiTimelineItem-missingOppositeContent"
+        className="MuiTimelineItem-root MuiTimelineItem-alignLeft makeStyles-item-865 MuiTimelineItem-missingOppositeContent"
       >
         <div
-          className="MuiTimelineSeparator-root makeStyles-separator-870"
+          className="MuiTimelineSeparator-root makeStyles-separator-874"
         >
           <span
-            className="MuiTimelineDot-root makeStyles-dot-869 MuiTimelineDot-defaultGrey"
+            className="MuiTimelineDot-root makeStyles-dot-873 MuiTimelineDot-defaultGrey"
           />
           <span
-            className="MuiTimelineConnector-root makeStyles-connector-866"
+            className="MuiTimelineConnector-root makeStyles-connector-870"
           />
         </div>
         <div
           className="MuiTimelineContent-root MuiTimelineItem-content"
         >
           <div
-            className="MuiGrid-root makeStyles-content-863 makeStyles-content-909 MuiGrid-container MuiGrid-wrap-xs-nowrap"
+            className="MuiGrid-root makeStyles-content-867 makeStyles-content-913 MuiGrid-container MuiGrid-wrap-xs-nowrap"
           >
             <div
-              className="MuiGrid-root makeStyles-number-871 MuiGrid-item"
+              className="MuiGrid-root makeStyles-number-875 MuiGrid-item"
             >
               3
             </div>
             <div
-              className="MuiGrid-root makeStyles-text-873 MuiGrid-item"
+              className="MuiGrid-root makeStyles-text-877 MuiGrid-item"
             >
               <h3
-                className="MuiTypography-root makeStyles-root-879 makeStyles-title-872 MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+                className="MuiTypography-root makeStyles-root-883 makeStyles-title-876 MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
               >
                 Lorem ipsum 1
               </h3>
               <div
-                className="makeStyles-tags-864"
+                className="makeStyles-tags-868"
               >
                 <span
-                  className="makeStyles-tag-865 makeStyles-tag-912"
+                  className="makeStyles-tag-869 makeStyles-tag-916"
                 >
                   monitor
                 </span>
                 <span
-                  className="makeStyles-tag-865 makeStyles-tag-914"
+                  className="makeStyles-tag-869 makeStyles-tag-918"
                 >
                   farmer
                 </span>
@@ -6833,42 +6833,42 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
         </div>
       </li>
       <li
-        className="MuiTimelineItem-root MuiTimelineItem-alignLeft makeStyles-item-861 MuiTimelineItem-missingOppositeContent"
+        className="MuiTimelineItem-root MuiTimelineItem-alignLeft makeStyles-item-865 MuiTimelineItem-missingOppositeContent"
       >
         <div
-          className="MuiTimelineSeparator-root makeStyles-separator-870"
+          className="MuiTimelineSeparator-root makeStyles-separator-874"
         >
           <span
-            className="MuiTimelineDot-root makeStyles-dot-869 MuiTimelineDot-defaultGrey"
+            className="MuiTimelineDot-root makeStyles-dot-873 MuiTimelineDot-defaultGrey"
           />
           <span
-            className="MuiTimelineConnector-root makeStyles-connector-866 makeStyles-lastConnector-868"
+            className="MuiTimelineConnector-root makeStyles-connector-870 makeStyles-lastConnector-872"
           />
         </div>
         <div
           className="MuiTimelineContent-root MuiTimelineItem-content"
         >
           <div
-            className="MuiGrid-root makeStyles-content-863 makeStyles-content-915 MuiGrid-container MuiGrid-wrap-xs-nowrap"
+            className="MuiGrid-root makeStyles-content-867 makeStyles-content-919 MuiGrid-container MuiGrid-wrap-xs-nowrap"
           >
             <div
-              className="MuiGrid-root makeStyles-number-871 MuiGrid-item"
+              className="MuiGrid-root makeStyles-number-875 MuiGrid-item"
             >
               4
             </div>
             <div
-              className="MuiGrid-root makeStyles-text-873 MuiGrid-item"
+              className="MuiGrid-root makeStyles-text-877 MuiGrid-item"
             >
               <h3
-                className="MuiTypography-root makeStyles-root-879 makeStyles-title-872 MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+                className="MuiTypography-root makeStyles-root-883 makeStyles-title-876 MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
               >
                 Lorem ipsum 2
               </h3>
               <div
-                className="makeStyles-tags-864"
+                className="makeStyles-tags-868"
               >
                 <span
-                  className="makeStyles-tag-865 makeStyles-tag-918"
+                  className="makeStyles-tag-869 makeStyles-tag-922"
                 >
                   monitor
                 </span>
@@ -6885,150 +6885,150 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
 exports[`Storyshots Components|Timeline Timeline 1`] = `
 <div>
   <div
-    className="makeStyles-root-760"
+    className="makeStyles-root-761"
   >
     <div
-      className="makeStyles-item-761"
+      className="makeStyles-item-762"
     >
       <div
-        className="makeStyles-content-762 makeStyles-content-767"
+        className="makeStyles-content-763 makeStyles-content-769"
       >
         <div
-          className="makeStyles-date-763"
+          className="makeStyles-date-764"
         >
           September 2, 2019
         </div>
-        <h6
-          className="MuiTypography-root makeStyles-root-770 undefined MuiTypography-h6 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+        <h5
+          className="MuiTypography-root makeStyles-root-772 makeStyles-title-768 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
         >
           Project starts
-        </h6>
+        </h5>
         <div
-          className="makeStyles-description-764"
+          className="makeStyles-description-765"
         >
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
         </div>
         <span
-          className="makeStyles-circle-766 makeStyles-circle-769"
+          className="makeStyles-circle-767 makeStyles-circle-771"
         />
         <div
-          className="makeStyles-bar-765 makeStyles-bar-768"
+          className="makeStyles-bar-766 makeStyles-bar-770"
         />
       </div>
     </div>
     <div
-      className="makeStyles-item-761"
+      className="makeStyles-item-762"
     >
       <div
-        className="makeStyles-content-762 makeStyles-content-771"
+        className="makeStyles-content-763 makeStyles-content-773"
       >
         <div
-          className="makeStyles-date-763"
+          className="makeStyles-date-764"
         >
           October 21, 2019
         </div>
-        <h6
-          className="MuiTypography-root makeStyles-root-770 undefined MuiTypography-h6 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+        <h5
+          className="MuiTypography-root makeStyles-root-772 makeStyles-title-768 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
         >
           Approval complete
-        </h6>
+        </h5>
         <div
-          className="makeStyles-description-764"
+          className="makeStyles-description-765"
         >
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
         </div>
         <span
-          className="makeStyles-circle-766 makeStyles-circle-773"
+          className="makeStyles-circle-767 makeStyles-circle-775"
         />
         <div
-          className="makeStyles-bar-765 makeStyles-bar-772"
+          className="makeStyles-bar-766 makeStyles-bar-774"
         />
       </div>
     </div>
     <div
-      className="makeStyles-item-761"
+      className="makeStyles-item-762"
     >
       <div
-        className="makeStyles-content-762 makeStyles-content-774"
+        className="makeStyles-content-763 makeStyles-content-776"
       >
         <div
-          className="makeStyles-date-763"
+          className="makeStyles-date-764"
         >
           February 20, 2020
         </div>
-        <h6
-          className="MuiTypography-root makeStyles-root-770 undefined MuiTypography-h6 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+        <h5
+          className="MuiTypography-root makeStyles-root-772 makeStyles-title-768 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
         >
           Credits issued
-        </h6>
+        </h5>
         <div
-          className="makeStyles-description-764"
+          className="makeStyles-description-765"
         >
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
         </div>
         <span
-          className="makeStyles-circle-766 makeStyles-circle-776"
+          className="makeStyles-circle-767 makeStyles-circle-778"
         />
         <div
-          className="makeStyles-bar-765 makeStyles-bar-775"
+          className="makeStyles-bar-766 makeStyles-bar-777"
         />
       </div>
     </div>
     <div
-      className="makeStyles-item-761"
+      className="makeStyles-item-762"
     >
       <div
-        className="makeStyles-content-762 makeStyles-content-777"
+        className="makeStyles-content-763 makeStyles-content-779"
       >
         <div
-          className="makeStyles-date-763"
+          className="makeStyles-date-764"
         >
           September 2022
         </div>
-        <h6
-          className="MuiTypography-root makeStyles-root-770 undefined MuiTypography-h6 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+        <h5
+          className="MuiTypography-root makeStyles-root-772 makeStyles-title-768 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
         >
           Site visit
-        </h6>
+        </h5>
         <div
-          className="makeStyles-description-764"
+          className="makeStyles-description-765"
         >
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
         </div>
         <span
-          className="makeStyles-circle-766 makeStyles-circle-779"
+          className="makeStyles-circle-767 makeStyles-circle-781"
         />
         <div
-          className="makeStyles-bar-765 makeStyles-bar-778"
+          className="makeStyles-bar-766 makeStyles-bar-780"
         />
       </div>
     </div>
     <div
-      className="makeStyles-item-761"
+      className="makeStyles-item-762"
     >
       <div
-        className="makeStyles-content-762 makeStyles-content-780"
+        className="makeStyles-content-763 makeStyles-content-782"
       >
         <div
-          className="makeStyles-date-763"
+          className="makeStyles-date-764"
         >
           February 2029
         </div>
-        <h6
-          className="MuiTypography-root makeStyles-root-770 undefined MuiTypography-h6 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+        <h5
+          className="MuiTypography-root makeStyles-root-772 makeStyles-title-768 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
         >
           Project completion
-        </h6>
+        </h5>
         <div
-          className="makeStyles-description-764"
+          className="makeStyles-description-765"
         >
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
         </div>
         <span
-          className="makeStyles-circle-766 makeStyles-circle-782"
+          className="makeStyles-circle-767 makeStyles-circle-784"
         />
         <div
-          className="makeStyles-bar-765 makeStyles-bar-781"
+          className="makeStyles-bar-766 makeStyles-bar-783"
         />
       </div>
     </div>
@@ -7039,28 +7039,28 @@ exports[`Storyshots Components|Timeline Timeline 1`] = `
 exports[`Storyshots Components|Timeline Timeline Item 1`] = `
 <div>
   <div
-    className="makeStyles-content-792 makeStyles-content-797"
+    className="makeStyles-content-795 makeStyles-content-801"
   >
     <div
-      className="makeStyles-date-793"
+      className="makeStyles-date-796"
     >
       September 2, 2019
     </div>
-    <h6
-      className="MuiTypography-root makeStyles-root-800 undefined MuiTypography-h6 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+    <h5
+      className="MuiTypography-root makeStyles-root-804 makeStyles-title-800 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
     >
       Project starts
-    </h6>
+    </h5>
     <div
-      className="makeStyles-description-794"
+      className="makeStyles-description-797"
     >
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
     </div>
     <span
-      className="makeStyles-circle-796 makeStyles-circle-799"
+      className="makeStyles-circle-799 makeStyles-circle-803"
     />
     <div
-      className="makeStyles-bar-795 makeStyles-bar-798"
+      className="makeStyles-bar-798 makeStyles-bar-802"
     />
   </div>
 </div>
@@ -7069,7 +7069,7 @@ exports[`Storyshots Components|Timeline Timeline Item 1`] = `
 exports[`Storyshots Components|Title Main Title 1`] = `
 <div>
   <h1
-    className="MuiTypography-root makeStyles-root-920 undefined MuiTypography-h1 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+    className="MuiTypography-root makeStyles-root-924 undefined MuiTypography-h1 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
   >
     Sheok Hill
   </h1>
@@ -7079,7 +7079,7 @@ exports[`Storyshots Components|Title Main Title 1`] = `
 exports[`Storyshots Components|Title Subtitle 1`] = `
 <div>
   <h2
-    className="MuiTypography-root makeStyles-root-922 undefined MuiTypography-h2 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+    className="MuiTypography-root makeStyles-root-926 undefined MuiTypography-h2 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
   >
     Ecological Practices
   </h2>
@@ -7089,7 +7089,7 @@ exports[`Storyshots Components|Title Subtitle 1`] = `
 exports[`Storyshots Components|Title Title 1`] = `
 <div>
   <h1
-    className="MuiTypography-root makeStyles-root-924 undefined MuiTypography-h1 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+    className="MuiTypography-root makeStyles-root-928 undefined MuiTypography-h1 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
   >
     Ecological Practices
   </h1>
@@ -7099,7 +7099,7 @@ exports[`Storyshots Components|Title Title 1`] = `
 exports[`Storyshots Components|TitleDescription Description 1`] = `
 <div>
   <div
-    className="MuiTypography-root makeStyles-root-927 makeStyles-root-928 MuiTypography-body1"
+    className="MuiTypography-root makeStyles-root-931 makeStyles-root-932 MuiTypography-body1"
     description="Regen Network is empowering an open community of scientists to build and deploy cutting edge methodologies to measure ecological health and make scientifically robust claims.&lt;br&gt;Earth observation science, landscape ecology, and our ability to understand complex ecological systems is undergoing a technological revolution. Regen Network in the vanguard of this movement to make climate science available to the people and markets who need it most. Join us in service of better decision-making, better markets, and collective action on climate."
     title="Measuring Ecological Health"
   />
@@ -7133,7 +7133,7 @@ exports[`Storyshots Components|Tooltip Main Title 1`] = `
 exports[`Storyshots Components|User Big User Avatar 1`] = `
 <div>
   <div
-    className="MuiAvatar-root MuiAvatar-circle makeStyles-root-943 makeStyles-root-944"
+    className="MuiAvatar-root MuiAvatar-circle makeStyles-root-947 makeStyles-root-948"
   >
     <img
       alt="Odonata"
@@ -7153,7 +7153,7 @@ exports[`Storyshots Components|User Big User Info 1`] = `
       className="MuiGrid-root MuiGrid-item"
     >
       <div
-        className="MuiAvatar-root MuiAvatar-circle makeStyles-root-991 makeStyles-root-992"
+        className="MuiAvatar-root MuiAvatar-circle makeStyles-root-995 makeStyles-root-996"
       >
         <img
           alt="Odonata"
@@ -7163,20 +7163,20 @@ exports[`Storyshots Components|User Big User Info 1`] = `
       </div>
     </div>
     <div
-      className="MuiGrid-root makeStyles-text-983 makeStyles-text-988 MuiGrid-item"
+      className="MuiGrid-root makeStyles-text-987 makeStyles-text-992 MuiGrid-item"
     >
       <p
-        className="MuiTypography-root makeStyles-name-984 makeStyles-name-989 MuiTypography-body1"
+        className="MuiTypography-root makeStyles-name-988 makeStyles-name-993 MuiTypography-body1"
       >
         Odonata
       </p>
       <p
-        className="MuiTypography-root makeStyles-place-987 makeStyles-place-990 MuiTypography-body1"
+        className="MuiTypography-root makeStyles-place-991 makeStyles-place-994 MuiTypography-body1"
       >
         South Melbourne, Victoria, Australia
       </p>
       <p
-        className="MuiTypography-root makeStyles-description-986 MuiTypography-body1"
+        className="MuiTypography-root makeStyles-description-990 MuiTypography-body1"
       >
         Odonata is a not-for-profit entity supporting biodiversity impact solutions.
       </p>
@@ -7194,7 +7194,7 @@ exports[`Storyshots Components|User Column User Info 1`] = `
       className="MuiGrid-root MuiGrid-item"
     >
       <div
-        className="MuiAvatar-root MuiAvatar-circle makeStyles-root-1011 makeStyles-root-1012"
+        className="MuiAvatar-root MuiAvatar-circle makeStyles-root-1015 makeStyles-root-1016"
       >
         <img
           alt="Odonata"
@@ -7204,20 +7204,20 @@ exports[`Storyshots Components|User Column User Info 1`] = `
       </div>
     </div>
     <div
-      className="MuiGrid-root makeStyles-text-1003 makeStyles-text-1008 MuiGrid-item"
+      className="MuiGrid-root makeStyles-text-1007 makeStyles-text-1012 MuiGrid-item"
     >
       <p
-        className="MuiTypography-root makeStyles-name-1004 makeStyles-name-1009 MuiTypography-body1"
+        className="MuiTypography-root makeStyles-name-1008 makeStyles-name-1013 MuiTypography-body1"
       >
         Odonata
       </p>
       <p
-        className="MuiTypography-root makeStyles-place-1007 makeStyles-place-1010 MuiTypography-body1"
+        className="MuiTypography-root makeStyles-place-1011 makeStyles-place-1014 MuiTypography-body1"
       >
         South Melbourne, Victoria, Australia
       </p>
       <p
-        className="MuiTypography-root makeStyles-description-1006 MuiTypography-body1"
+        className="MuiTypography-root makeStyles-description-1010 MuiTypography-body1"
       >
         Odonata is a not-for-profit entity supporting biodiversity impact solutions.
       </p>
@@ -7229,7 +7229,7 @@ exports[`Storyshots Components|User Column User Info 1`] = `
 exports[`Storyshots Components|User Fallback User Avatar 1`] = `
 <div>
   <div
-    className="MuiAvatar-root MuiAvatar-circle makeStyles-root-951 makeStyles-root-952 MuiAvatar-colorDefault"
+    className="MuiAvatar-root MuiAvatar-circle makeStyles-root-955 makeStyles-root-956 MuiAvatar-colorDefault"
   >
     <svg
       aria-hidden={true}
@@ -7248,7 +7248,7 @@ exports[`Storyshots Components|User Fallback User Avatar 1`] = `
 exports[`Storyshots Components|User Medium User Avatar 1`] = `
 <div>
   <div
-    className="MuiAvatar-root MuiAvatar-circle makeStyles-root-939 makeStyles-root-940"
+    className="MuiAvatar-root MuiAvatar-circle makeStyles-root-943 makeStyles-root-944"
   >
     <img
       alt="Odonata"
@@ -7268,7 +7268,7 @@ exports[`Storyshots Components|User Medium User Info 1`] = `
       className="MuiGrid-root MuiGrid-item"
     >
       <div
-        className="MuiAvatar-root MuiAvatar-circle makeStyles-root-971 makeStyles-root-972"
+        className="MuiAvatar-root MuiAvatar-circle makeStyles-root-975 makeStyles-root-976"
       >
         <img
           alt="Odonata"
@@ -7278,20 +7278,20 @@ exports[`Storyshots Components|User Medium User Info 1`] = `
       </div>
     </div>
     <div
-      className="MuiGrid-root makeStyles-text-963 makeStyles-text-968 MuiGrid-item"
+      className="MuiGrid-root makeStyles-text-967 makeStyles-text-972 MuiGrid-item"
     >
       <p
-        className="MuiTypography-root makeStyles-name-964 makeStyles-name-969 MuiTypography-body1"
+        className="MuiTypography-root makeStyles-name-968 makeStyles-name-973 MuiTypography-body1"
       >
         Odonata
       </p>
       <p
-        className="MuiTypography-root makeStyles-place-967 makeStyles-place-970 MuiTypography-body1"
+        className="MuiTypography-root makeStyles-place-971 makeStyles-place-974 MuiTypography-body1"
       >
         South Melbourne, Victoria, Australia
       </p>
       <p
-        className="MuiTypography-root makeStyles-description-966 MuiTypography-body1"
+        className="MuiTypography-root makeStyles-description-970 MuiTypography-body1"
       >
         Odonata is a not-for-profit entity supporting biodiversity impact solutions.
       </p>
@@ -7308,7 +7308,7 @@ exports[`Storyshots Components|User User Avatar With Link 1`] = `
     target="_blank"
   >
     <div
-      className="MuiAvatar-root MuiAvatar-circle makeStyles-root-947 makeStyles-root-948"
+      className="MuiAvatar-root MuiAvatar-circle makeStyles-root-951 makeStyles-root-952"
     >
       <img
         alt="Odonata"
@@ -7324,7 +7324,7 @@ exports[`Storyshots Components|User With Title 1`] = `
 <div>
   <div>
     <p
-      className="MuiTypography-root makeStyles-title-1024 MuiTypography-body1"
+      className="MuiTypography-root makeStyles-title-1028 MuiTypography-body1"
     >
       project developer
     </p>
@@ -7335,7 +7335,7 @@ exports[`Storyshots Components|User With Title 1`] = `
         className="MuiGrid-root MuiGrid-item"
       >
         <div
-          className="MuiAvatar-root MuiAvatar-circle makeStyles-root-1033 makeStyles-root-1034"
+          className="MuiAvatar-root MuiAvatar-circle makeStyles-root-1037 makeStyles-root-1038"
         >
           <img
             alt="Odonata"
@@ -7345,20 +7345,20 @@ exports[`Storyshots Components|User With Title 1`] = `
         </div>
       </div>
       <div
-        className="MuiGrid-root makeStyles-text-1025 makeStyles-text-1030 MuiGrid-item"
+        className="MuiGrid-root makeStyles-text-1029 makeStyles-text-1034 MuiGrid-item"
       >
         <p
-          className="MuiTypography-root makeStyles-name-1026 makeStyles-name-1031 MuiTypography-body1"
+          className="MuiTypography-root makeStyles-name-1030 makeStyles-name-1035 MuiTypography-body1"
         >
           Odonata
         </p>
         <p
-          className="MuiTypography-root makeStyles-place-1029 makeStyles-place-1032 MuiTypography-body1"
+          className="MuiTypography-root makeStyles-place-1033 makeStyles-place-1036 MuiTypography-body1"
         >
           South Melbourne, Victoria, Australia
         </p>
         <p
-          className="MuiTypography-root makeStyles-description-1028 MuiTypography-body1"
+          className="MuiTypography-root makeStyles-description-1032 MuiTypography-body1"
         >
           Odonata is a not-for-profit entity supporting biodiversity impact solutions.
         </p>

@@ -220,7 +220,7 @@ contributorSection:
         startups and has worked in Silicon Valley, Israel, and Asia Pacific. At
         VMware R&D he founded the prototyping practice and has a gift for
         scaling and accelerating early stage teams.
-      image: ../../static/media/team/daniel.jpg
+      image: ../../static/media/daniel-swid.jpg
       linkedUrl: https://www.linkedin.com/in/danielswid
       twitterUrl: ""
       githubUrl: ""
@@ -240,6 +240,15 @@ contributorSection:
         manufacturing, and nutrition and food advocacy.
       linkedUrl: https://www.linkedin.com/in/clarepolitano/
       image: ../../static/media/clare.jpg
+    - description: Kyle works at the intersection of economics and natural resource
+        management. In recent years, he has helped estimate the benefits of
+        watershed restoration in the San Francisco Bay, measured the impacts of
+        drought on agriculture in arid lands, and provided support for an
+        environmental finance initiative in Washington state.
+      name: Kyle Birchard
+      title: Ecological Economist
+      linkedUrl: https://www.linkedin.com/in/kyle-birchard-0379408/
+      image: ../../static/media/kyle-birchard.jpeg
 advisorSection:
   title: Advisors
   advisors:

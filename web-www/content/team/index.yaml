@@ -132,18 +132,6 @@ coreSection:
       linkedUrl: https://www.linkedin.com/in/amaurymartiny/
       twitterUrl: https://twitter.com/amaurymartiny
       githubUrl: https://github.com/amaurymartiny
-    - name: Erika Logie
-      title: UI/UX Designer
-      description: Erika has 13+ years of experience as a UX and UI Designer, and
-        focuses on projects that create positive change for people and planet.
-        Over the last 7 years she has been involved in the decentralized startup
-        scene as a designer for Yellow Seed, a conscious trade platform for
-        cacao, NuMundo, a conscious travel platform, and Producers Market, a
-        marketplace for empowering farmers.
-      image: ../../static/media/team/erika.jpg
-      linkedUrl: https://www.linkedin.com/in/erika-logie-3a15647/
-      twitterUrl: https://twitter.com/erikalogie
-      githubUrl: https://github.com/erikalogie
     - description: Emily is a digital marketing maven and visual storyteller
         passionate about utilizing her skills to help build a better world. With
         a background in environmental stewardship, digital marketing, and
@@ -163,6 +151,18 @@ coreSection:
       image: ../../static/media/98fiylntthoaudcmrxjd0w.jpg
       linkedUrl: https://www.linkedin.com/in/jaredmsmith/
       githubUrl: https://github.com/ratacat
+    - name: Erika Logie
+      title: UI/UX Designer
+      description: Erika has 13+ years of experience as a UX and UI Designer, and
+        focuses on projects that create positive change for people and planet.
+        Over the last 7 years she has been involved in the decentralized startup
+        scene as a designer for Yellow Seed, a conscious trade platform for
+        cacao, NuMundo, a conscious travel platform, and Producers Market, a
+        marketplace for empowering farmers.
+      image: ../../static/media/team/erika.jpg
+      linkedUrl: https://www.linkedin.com/in/erika-logie-3a15647/
+      twitterUrl: https://twitter.com/erikalogie
+      githubUrl: https://github.com/erikalogie
     - name: "Sophia Leiker "
       title: Data Scientist and GIS Assistant
       description: >
@@ -201,6 +201,16 @@ coreSection:
         point and Regen’s project on ecological regeneration acts as a beacon of
         light by adding value to the worldwide efforts in saving the world.
       image: ../../static/media/adriana-mihai.jpg
+    - image: ../../static/media/robert-z.jpeg
+      name: Robert Zaremba
+      description: MSC in CS, seasoned in solution architecture, data intelligence,
+        smart contracts and applied cryptography. His professional interest
+        covers FinTech, ESG factors and Consumer Sovereignty. Being a CTO of
+        startups, and working for international companies, he is well disposed
+        towards Lean Workflows. Robert is leading a blockchain community in
+        Geneva.
+      title: "Senior Software Engineer "
+      linkedUrl: https://www.linkedin.com/in/zarembarobert/
 contributorSection:
   title: Contributors
   contributors:

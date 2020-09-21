@@ -3,15 +3,23 @@ import { Theme, makeStyles } from '@material-ui/core/styles';
 import Section from 'web-components/lib/components/section';
 import PartnerCard from 'web-components/lib/components/cards/PartnerCard';
 import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
 import Title from 'web-components/lib/components/title';
 import { useStaticQuery, graphql } from 'gatsby';
 
 import SEO from '../components/seo';
+import clsx from 'clsx';
 
 const useStyles = makeStyles((theme: Theme) => ({
   section: {
-    paddingTop: theme.spacing(42.25),
-    paddingBottom: theme.spacing(23),
+    [theme.breakpoints.up('sm')]: {
+      paddingTop: theme.spacing(42.25),
+      paddingBottom: theme.spacing(23),
+    },
+    [theme.breakpoints.down('sm')]: {
+      paddingTop: theme.spacing(24.5),
+      paddingBottom: theme.spacing(15),
+    },
     overflow: 'hidden',
   },
   item: {
@@ -27,8 +35,29 @@ const useStyles = makeStyles((theme: Theme) => ({
     height: '100%',
     border: `0.5px ${theme.palette.grey[100]} solid`,
   },
+  contactCard: {
+    '& h4.MuiTypography-root, p.MuiTypography-root': {
+      color: theme.palette.info.dark,
+    },
+    backgroundColor: theme.palette.info.light,
+    padding: theme.spacing(4.5),
+    borderTop: `10px ${theme.palette.secondary.contrastText} solid`,
+    '& a': {
+      color: '#4FB573',
+      textDecoration: 'none',
+    },
+  },
+  contactText: {
+    fontSize: theme.spacing(4.5),
+    paddingTop: theme.spacing(3.25),
+  },
   title: {
-    paddingBottom: theme.spacing(21.75),
+    [theme.breakpoints.up('sm')]: {
+      paddingBottom: theme.spacing(21.75),
+    },
+    [theme.breakpoints.down('sm')]: {
+      paddingBottom: theme.spacing(10.25),
+    },
   },
 }));
 
@@ -68,6 +97,15 @@ const PartnersPage = (): JSX.Element => {
               />
             </Grid>
           ))}
+          <Grid className={classes.item} xs={12} sm={6} md={4} item key={'contact'}>
+            <PartnerCard className={clsx(classes.card, classes.contactCard)} sortOrder={150}>
+              <Title variant="h4">Your Organization?</Title>
+              <Typography className={classes.contactText}>
+                Contact us at <a href="mailto:office@regen.network">office@regen.network</a> about partnership
+                opportunities.
+              </Typography>
+            </PartnerCard>
+          </Grid>
         </Grid>
       </Section>
     </>

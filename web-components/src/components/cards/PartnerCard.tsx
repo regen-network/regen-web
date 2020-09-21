@@ -9,6 +9,7 @@ export interface PartnerCardProps {
   sortOrder?: number;
   className?: string;
   link?: string;
+  children?: React.ReactNode;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -24,13 +25,20 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function PartnerCard({ imageUrl, sortOrder, className, link }: PartnerCardProps): JSX.Element {
+export default function PartnerCard({
+  imageUrl,
+  sortOrder,
+  className,
+  link,
+  children,
+}: PartnerCardProps): JSX.Element {
   const classes = useStyles({});
 
   return (
     <a href={link} target="_blank" rel="noopener noreferrer">
       <Card elevation={1} className={clsx(classes.card, className)} key={sortOrder}>
-        <img className={classes.img} src={imageUrl} alt={imageUrl}></img>
+        {imageUrl ? <img className={classes.img} src={imageUrl} alt={imageUrl} /> : ''}
+        {children ? children : ''}
       </Card>
     </a>
   );

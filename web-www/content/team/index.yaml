@@ -4,7 +4,7 @@ topSection:
     world, bound by our common purpose of planetary regeneration. Feel free to
     connect with us.
 coreSection:
-  title: Core Team
+  title: Our Team
   coreMembers:
     - name: Christian Shearer
       title: Chief Executive Officer
@@ -193,6 +193,14 @@ coreSection:
         management, ecosystem service payments, and regenerative natural capital
         investment finance. "
       image: ../../static/media/james-pittman.jpeg
+    - name: Adriana Mihai
+      title: Blockchain Community Liason
+      description: Adriana is a long term community contributor of the @cosmos
+        ecosystem, helping Regen with community awareness through “Last/This
+        week in Regen”. She believes that humanity is at a critical breaking
+        point and Regen’s project on ecological regeneration acts as a beacon of
+        light by adding value to the worldwide efforts in saving the world.
+      image: ../../static/media/adriana-mihai.jpg
 contributorSection:
   title: Contributors
   contributors:
@@ -206,6 +214,14 @@ contributorSection:
       linkedUrl: https://www.linkedin.com/in/danielswid
       twitterUrl: ""
       githubUrl: ""
+    - description: Ethan Frey has years of experience in distributed systems,
+        cryptography, customer-oriented web design, and blockchain. And a strong
+        desire to build something meaningful to humankind. He is delighted to
+        combine these passions at Regen Network.
+      title: Lead Developer
+      name: Ethan Frey
+      image: ../../static/media/ethan-frey.jpg
+      linkedUrl: https://www.linkedin.com/in/ethanfrey/
 advisorSection:
   title: Advisors
   advisors:

@@ -9,8 +9,10 @@ import Section from '../section';
 export interface TeamSectionProps {
   members: TeamItemProps[];
   title: string;
+  children?: React.ReactNode;
   bgUrl: string;
   className?: string;
+  gridMd?: boolean | 'auto' | 4 | 1 | 2 | 3 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | undefined;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -32,7 +34,14 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const TeamSection = ({ members, title, className, bgUrl }: TeamSectionProps): JSX.Element => {
+const TeamSection = ({
+  members,
+  title,
+  className,
+  bgUrl,
+  gridMd = 4,
+  children,
+}: TeamSectionProps): JSX.Element => {
   const classes = useStyles();
 
   return (
@@ -45,7 +54,7 @@ const TeamSection = ({ members, title, className, bgUrl }: TeamSectionProps): JS
       <Grid justify="center" container direction="row">
         {members.map((m: any, index: any) => {
           return (
-            <Grid className={classes.item} xs={12} sm={6} md={4} item key={index}>
+            <Grid className={classes.item} xs={12} sm={6} md={gridMd} item key={index}>
               <TeamItem
                 name={m.name}
                 title={m.title}
@@ -60,6 +69,7 @@ const TeamSection = ({ members, title, className, bgUrl }: TeamSectionProps): JS
           );
         })}
       </Grid>
+      {children}
     </Section>
   );
 };

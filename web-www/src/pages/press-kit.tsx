@@ -5,6 +5,7 @@ import TopSection from '../sections/press-kit//TopSection';
 import TitleDescriptionSection from '../sections/press-kit/TitleDescriptionSection';
 import EnableSection from '../sections/press-kit/EnableSection';
 import TimelineSection from '../sections/press-kit/TimelineSection';
+import TeamSection from '../sections/press-kit/TeamSection';
 
 const PressKitPage = (): JSX.Element => {
   return (
@@ -14,6 +15,7 @@ const PressKitPage = (): JSX.Element => {
       <TitleDescriptionSection />
       <EnableSection />
       <TimelineSection />
+      <TeamSection />
       {/* <ConnectSection /> */}
     </>
   );

@@ -40,6 +40,7 @@ const PartnersPage = (): JSX.Element => {
           node {
             partnerLogos {
               image
+              link
               sortOrder
             }
           }
@@ -59,7 +60,12 @@ const PartnersPage = (): JSX.Element => {
         <Grid spacing={7} justify="center" direction="row" alignItems="center" container>
           {partners.map((partner: any) => (
             <Grid className={classes.item} xs={12} sm={6} md={4} item key={partner.sortOrder}>
-              <PartnerCard className={classes.card} sortOrder={partner.sortOrder} imageUrl={partner.image} />
+              <PartnerCard
+                link={partner.link}
+                className={classes.card}
+                sortOrder={partner.sortOrder}
+                imageUrl={partner.image}
+              />
             </Grid>
           ))}
         </Grid>

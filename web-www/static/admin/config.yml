@@ -24,6 +24,7 @@ collections:
             widget: "object"
             fields: 
               - {label: image, name: image, widget: image}
+              - {label: link, name: link, widget: string}
               - {label: sort order, name: sortOrder, widget: number, default: 1, value_type: int, min: 0, step: 1, hint: "sorts ascending"}
       - label: "Invest"
         name: "invest"

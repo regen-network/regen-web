@@ -68,7 +68,7 @@ communitySection:
     - name: Placeholder name 2
       image: ../../static/media/science-community.png
       role: Placeholder role 2
-      description: Placeholder description 2
+      description: Placeholder description 2 test
     - name: Placeholder name 3
       image: ../../static/media/science-community.png
       role: Placeholder role 3

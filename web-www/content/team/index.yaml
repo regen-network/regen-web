@@ -184,6 +184,15 @@ coreSection:
         carbon sequestration in hardwood forests as a means of addressing
         climate change.
       image: ../../static/media/img-5833.jpg
+    - title: Senior Ecological Economist
+      name: "James Pittman "
+      description: "James has over 20 years of experience in whole systems design,
+        triple bottom line accounting, and sustainability strategy with a focus
+        on land management and agriculture.  He specializes in the development
+        of innovative strategies and incentive mechanisms for carbon asset
+        management, ecosystem service payments, and regenerative natural capital
+        investment finance. "
+      image: ../../static/media/james-pittman.jpeg
 contributorSection:
   title: Contributors
   contributors:
@@ -195,39 +204,6 @@ contributorSection:
         scaling and accelerating early stage teams.
       image: ../../static/media/team/daniel.jpg
       linkedUrl: https://www.linkedin.com/in/danielswid
-      twitterUrl: ""
-      githubUrl: ""
-    - name: Sophia Leiker
-      title: Data Scientist and GIS Assistant
-      description: I have an extensive interdisciplinary background to draw from when
-        approaching environmental issues including the technical aspects of
-        environmental engineering, remote sensing and data science, to
-        policy-based solutions such as political ecology and environmental
-        economics.
-      image: ../../static/media/team/sophia.jpg
-      linkedUrl: https://www.linkedin.com/in/sophia-leiker
-      twitterUrl: ""
-      githubUrl: ""
-    - name: Sam Bennetts
-      title: Data Scientist and GIS Assistant
-      description: I am a geographic information scientist and remote sensing
-        specialist passionate about the outdoors in all forms. A graduate from
-        the University of Colorado at Boulder, my work focuses on bridging
-        between the social, environmental and computer sciences to advance our
-        knowledge of human-environment interactions.
-      image: ../../static/media/team/sam.jpg
-      linkedUrl: https://www.linkedin.com/in/sam-bennetts-a044681a1/
-      twitterUrl: ""
-      githubUrl: ""
-    - name: Jim Pittman
-      title: Consultant
-      description: For over 2 decades, I have helped clients to effectively use
-        collective intelligence, systems thinking, collaborative process,
-        assessment and valuation tools, to guide investment in programs and
-        enterprises with a commitment to sustainability and regeneration at
-        local to global scales.
-      image: ../../static/media/team/jim.jpg
-      linkedUrl: ""
       twitterUrl: ""
       githubUrl: ""
 advisorSection:

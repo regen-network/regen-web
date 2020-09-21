@@ -1,7 +1,7 @@
 import React from 'react';
 import { Theme, makeStyles } from '@material-ui/core/styles';
 import Section from 'web-components/lib/components/section';
-import PartnerCard from 'web-components/lib/components/cards/PartnerCard';
+import GreenCard from 'web-components/lib/components/cards/GreenCard';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Title from 'web-components/lib/components/title';
@@ -30,10 +30,20 @@ const useStyles = makeStyles((theme: Theme) => ({
     paddingBottom: theme.spacing(5.25),
   },
   card: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: theme.palette.primary.main,
     borderTop: '10px #7BC796 solid',
     width: '100%',
     height: '100%',
+    padding: 'inherit',
     border: `0.5px ${theme.palette.grey[100]} solid`,
+  },
+  img: {
+    maxHeight: '90%',
+    maxWidth: '80%',
   },
   contactCard: {
     '& h4.MuiTypography-root, p.MuiTypography-root': {
@@ -88,23 +98,28 @@ const PartnersPage = (): JSX.Element => {
         </Title>
         <Grid spacing={7} justify="center" direction="row" alignItems="center" container>
           {partners.map((partner: any) => (
-            <Grid className={classes.item} xs={12} sm={6} md={4} item key={partner.sortOrder}>
-              <PartnerCard
-                link={partner.link}
-                className={classes.card}
-                sortOrder={partner.sortOrder}
-                imageUrl={partner.image}
-              />
+            <Grid className={classes.item} xs={12} sm={4} item key={partner.sortOrder}>
+              <a href={partner.link} target="_blank" rel="noopener noreferrer">
+                <GreenCard className={classes.card}>
+                  {partner.image ? (
+                    <img className={classes.img} src={partner.image} alt={partner.image} />
+                  ) : (
+                    ''
+                  )}
+                </GreenCard>
+              </a>
             </Grid>
           ))}
           <Grid className={classes.item} xs={12} sm={6} md={4} item key={'contact'}>
-            <PartnerCard className={clsx(classes.card, classes.contactCard)} sortOrder={150}>
-              <Title variant="h4">Your Organization?</Title>
+            <GreenCard className={clsx(classes.card, classes.contactCard)}>
+              <Title align="center" variant="h4">
+                Your Organization?
+              </Title>
               <Typography className={classes.contactText}>
                 Contact us at <a href="mailto:office@regen.network">office@regen.network</a> about partnership
                 opportunities.
               </Typography>
-            </PartnerCard>
+            </GreenCard>
           </Grid>
         </Grid>
       </Section>

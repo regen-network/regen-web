@@ -68,7 +68,6 @@ teamSection:
       image: ../../static/media/team/gisel.jpg
 featuredSection:
   header: Featured Press
-  buttonText: read article
   articles:
     - header: 'Regen Network: How to Change the World'
       author: Chorus One

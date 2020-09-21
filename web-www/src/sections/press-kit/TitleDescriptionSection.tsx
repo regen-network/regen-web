@@ -5,7 +5,16 @@ import { makeStyles, Theme } from '@material-ui/core';
 import TitleDescription from 'web-components/lib/components/title-description';
 import Section from 'web-components/lib/components/section';
 
-const useStyles = makeStyles((theme: Theme) => ({}));
+const useStyles = makeStyles((theme: Theme) => ({
+  root: {
+    [theme.breakpoints.up('sm')]: {
+      paddingBottom: theme.spacing(8),
+    },
+    [theme.breakpoints.down('xs')]: {
+      paddingBottom: theme.spacing(15),
+    },
+  },
+}));
 
 const TitleDescriptionSection = (): JSX.Element => {
   const classes = useStyles();
@@ -25,7 +34,7 @@ const TitleDescriptionSection = (): JSX.Element => {
       render={data => {
         const content = data.content.titleDescriptionSection;
         return (
-          <Section>
+          <Section className={classes.root}>
             <TitleDescription title={content.header} description={content.description} />
           </Section>
         );

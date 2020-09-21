@@ -12,6 +12,7 @@ export interface TeamSectionProps {
   children?: React.ReactNode;
   bgUrl: string;
   className?: string;
+  titleClassName?: string;
   gridMd?: boolean | 'auto' | 4 | 1 | 2 | 3 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | undefined;
 }
 
@@ -37,6 +38,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 const TeamSection = ({
   members,
   title,
+  titleClassName,
   className,
   bgUrl,
   gridMd = 4,
@@ -48,7 +50,7 @@ const TeamSection = ({
     <Section
       title={title}
       titleVariant="h2"
-      titleClassName={classes.title}
+      titleClassName={clsx(titleClassName, classes.title)}
       className={clsx(className, classes.section)}
     >
       <Grid justify="center" container direction="row">

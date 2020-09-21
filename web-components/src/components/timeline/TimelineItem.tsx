@@ -23,7 +23,7 @@ interface StyleProps {
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   content: props => ({
     backgroundColor: theme.palette.primary.main,
-    maxWidth: '75%',
+    maxWidth: '80%',
     position: 'relative',
     border: `1px solid ${theme.palette.info.light}`,
     borderRadius: '10px',

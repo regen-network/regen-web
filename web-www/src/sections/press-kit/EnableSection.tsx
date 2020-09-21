@@ -5,7 +5,6 @@ import Grid from '@material-ui/core/Grid';
 import Img from 'gatsby-image';
 import ReactHtmlParser from 'react-html-parser';
 
-import Section from 'web-components/lib/components/section';
 import Title from 'web-components/lib/components/title';
 import Description from 'web-components/lib/components/description';
 
@@ -120,13 +119,13 @@ const EnableSection = (): JSX.Element => {
         return (
           <div className={classes.root}>
             <Grid container alignItems="center">
-              <Grid xs={12} className={classes.imageContainer}>
+              <Grid xs={12} item className={classes.imageContainer}>
                 <Img className={classes.image} fluid={content.image.childImageSharp.fluid} />
                 <div className={classes.imageBackground}>
                   <Img fluid={data.background.childImageSharp.fluid} />
                 </div>
               </Grid>
-              <Grid xs={12} className={classes.text}>
+              <Grid xs={12} item className={classes.text}>
                 <Title variant="h2">{content.header}</Title>
                 <Description className={classes.description}>
                   {ReactHtmlParser(content.description)}

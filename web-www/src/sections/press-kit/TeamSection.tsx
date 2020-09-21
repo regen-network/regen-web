@@ -1,11 +1,22 @@
 import React from 'react';
 import { graphql, StaticQuery } from 'gatsby';
 import BackgroundImage from 'gatsby-background-image';
+import { Theme, makeStyles } from '@material-ui/core/styles';
 
 import TeamSection from 'web-components/lib/components/team-section';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 
+const useStyles = makeStyles((theme: Theme) => ({
+  title: {
+    [theme.breakpoints.down('xs')]: {
+      fontSize: theme.spacing(8),
+    },
+  },
+}));
+
 const PressKitTeamSection = (): JSX.Element => {
+  const classes = useStyles();
+
   return (
     <StaticQuery
       query={graphql`
@@ -41,6 +52,7 @@ const PressKitTeamSection = (): JSX.Element => {
           <BackgroundImage fluid={data.background.childImageSharp.fluid}>
             <TeamSection
               gridMd={3}
+              titleClassName={classes.title}
               bgUrl={data.teamBackground.publicURL}
               members={content.members.map(m => ({ imgUrl: m.image.publicURL, ...m }))}
               title={content.header}

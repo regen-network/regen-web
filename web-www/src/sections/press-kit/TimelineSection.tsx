@@ -15,6 +15,12 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingBottom: theme.spacing(25),
     },
   },
+  title: {
+    [theme.breakpoints.down('xs')]: {
+      textAlign: 'left',
+      fontSize: theme.spacing(8),
+    },
+  },
   description: {
     [theme.breakpoints.up('sm')]: {
       maxWidth: theme.spacing(188.5),
@@ -55,7 +61,7 @@ const TimelineSection = (): JSX.Element => {
       render={data => {
         const content = data.content.timelineSection;
         return (
-          <Section className={classes.root} title={content.header}>
+          <Section className={classes.root} title={content.header} titleClassName={classes.title}>
             <Description className={classes.description}>{content.description}</Description>
             <Timeline events={content.items} completedItemIndex={content.completedItemIndex} />
           </Section>

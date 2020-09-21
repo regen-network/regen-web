@@ -268,6 +268,14 @@ contributorSection:
       title: Developer
       name: Pete Farmer
       image: ../../static/media/peter-farmer.jpg
+    - description: Brecht is a seasoned field engineer with a love for appropriate
+        technology, previously with The Blueprint Alliance. Strong focus on
+        systems design and rapid iterative testing. MS Electromechanical
+        Engineering, MS Industrial & Product Design.
+      name: Brecht Deriemaeker
+      title: Co-founder, Engineer
+      linkedUrl: https://www.linkedin.com/in/brecht-deriemaeker-505ba217/
+      image: ../../static/media/brecht.jpeg
 advisorSection:
   title: Advisors
   advisors:

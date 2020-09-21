@@ -245,34 +245,29 @@ advisorSection:
       linkedUrl: https://www.linkedin.com/in/brianjhanfox/
       twitterUrl: ""
       githubUrl: ""
+      description: >
+        Kano.ONE Founder, Orchid Labs Co-Founder, is a serial entrepreneur,
+        technologist, investor, and musician. Brian was the first employee of
+        the Free Software Foundation and the creator of Bash, a key component of
+        every modern operating system, and used by millions of developers world
+        wide.  Brian is active in the open source election system community.
     - name: Alex Kehaya
       title: Market Fit and Business Development
       image: ../../static/media/team/alex.jpg
       linkedUrl: https://www.linkedin.com/in/afkehaya/
       twitterUrl: ""
       githubUrl: ""
+      description: >
+        Alex is an accomplished entrepreneur, investor, and educator with deep
+        experience in startup investment, acceleration, and growth as a partner,
+        angel investor, and advisor to diverse businesses. He is passionate
+        about social impact businesses capable of driving change at the
+        intersection of privacy, democracy, education, human rights, and
+        technology. 
     - name: Gustav Simonsson
       title: Blockchain & Security
       image: ../../static/media/team/gustav.jpg
       linkedUrl: ""
-      twitterUrl: ""
-      githubUrl: ""
-    - name: Ben Best
-      title: Environmental Data Scientist
-      image: ../../static/media/team/ben.jpg
-      linkedUrl: https://www.linkedin.com/in/ben-best/
-      twitterUrl: ""
-      githubUrl: ""
-    - name: Greg Austic
-      title: Open Hardware
-      image: ../../static/media/team/greg.jpg
-      linkedUrl: https://www.linkedin.com/in/greg-austic-45a4a9a/
-      twitterUrl: ""
-      githubUrl: ""
-    - name: Rick Dudley
-      title: Blockchain Architecture
-      image: ../../static/media/team/rick.jpg
-      linkedUrl: https://www.linkedin.com/in/afdudley/
       twitterUrl: ""
       githubUrl: ""
     - name: Andrew Nannini
@@ -281,9 +276,16 @@ advisorSection:
       linkedUrl: https://www.linkedin.com/in/andrew-nannini-19418846/
       twitterUrl: ""
       githubUrl: ""
+      description: Andrew Nannini is the CIO of a family office specializing in
+        investments across all asset classes and regions. Prior to this, Andrew
+        worked for an equity hedge fund in Brazil focusing on  emerging market
+        companies. He started his career in Credit Suisse’s Asset Management
+        divisions and holds a BA from Wesleyan University and a MBA from New
+        York University.
     - name: Garette Furo
       title: Business Development and Blockchain Economics
       image: ../../static/media/team/garette.jpg
       linkedUrl: https://www.linkedin.com/in/garrettefuro/
       twitterUrl: ""
       githubUrl: ""
+      description: ""

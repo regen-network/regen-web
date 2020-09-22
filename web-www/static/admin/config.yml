@@ -546,6 +546,108 @@ collections:
                 widget: object
                 fields:
                   - {label: Header, name: header, widget: string}
+      - label: "Press Kit"
+        name: "press-kit"
+        file: "web-www/content/press-kit/index.yaml"
+        fields:
+          - label: Top Section
+            name: topSection
+            widget: "object"
+            fields:
+              - {label: Header, name: header, widget: string}
+              - {label: Description, name: body, widget: text}
+          - label: Title Description Section
+            name: titleDescriptionSection
+            widget: "object"
+            fields:
+              - {label: Header, name: header, widget: string}
+              - {label: Description, name: body, widget: markdown}
+          - label: Regen Network enables Section
+            name: enableSection
+            widget: "object"
+            fields:
+              - {label: Header, name: header, widget: string}
+              - {label: image, name: image, widget: image}
+              - {label: Description, name: body, widget: markdown}
+          - label: Timeline Section
+            name: timelineSection
+            widget: "object"
+            fields:
+              - {label: Header, name: header, widget: string}
+              - {label: Description, name: description, widget: text}
+              - {label: Completed timeline item index (starts at 0), name: completedItemIndex, widget: text}
+              - label: Items
+                name: items
+                widget: list
+                collapsed: false
+                fields:
+                  - {label: "title", name: title, widget: string}
+                  - {label: "date", name: date, widget: string}
+                  - {label: "description", name: description, widget: text}
+          - label: Team Section
+            name: teamSection
+            widget: "object"
+            fields:
+              - {label: Header, name: header, widget: string}
+              - {label: button text, name: buttonText, widget: string}
+              - label: Members
+                name: members
+                widget: list
+                collapsed: false
+                fields:
+                  - {label: "name", name: name, widget: string}
+                  - {label: "title", name: title, widget: string}
+                  - {label: "image", name: image, widget: image}
+          - label: Featured Section
+            name: featuredSection
+            widget: "object"
+            fields:
+              - {label: Header, name: header, widget: string}
+              - label: articles
+                name: articles
+                widget: list
+                collapsed: false
+                fields:
+                  - {label: "header", name: header, widget: string}
+                  - {label: "author", name: author, widget: string}
+                  - {label: "date", name: date, widget: string}
+                  - {label: "url", name: url, widget: string}
+                  - {label: "image", name: image, widget: image}
+          - label: Awards Section
+            name: awardsSection
+            widget: "object"
+            fields:
+              - {label: Header, name: header, widget: string}
+              - label: items
+                name: items
+                widget: list
+                collapsed: false
+                fields:
+                  - {label: "title", name: title, widget: string}
+                  - {label: "image", name: image, widget: image}
+          - label: Logos Section
+            name: logosSection
+            widget: "object"
+            fields:
+              - {label: Header, name: header, widget: string}
+              - {label: button text, name: buttonText, widget: string}
+              - {label: button link, name: buttonLink, widget: string}
+          - label: Connect Section
+            name: connectSection
+            widget: "object"
+            fields:
+              - {label: Header, name: header, widget: string}
+          - label: Photos Section
+            name: photosSection
+            widget: "object"
+            fields:
+              - {label: Header, name: header, widget: string}
+              - label: photos
+                name: photos
+                widget: list
+                collapsed: false
+                fields:
+                  - {label: "image", name: image, widget: image}
   - label: "FAQ"
     name: "faq"
     editor:

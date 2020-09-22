@@ -97,7 +97,7 @@ awardsSection:
       image: ../../static/media/award4.png
 logosSection:
   header: Regen Network Logos
-  buttonText: dowload logos
+  buttonText: download logos
   buttonLink: https://regen-registry.s3.amazonaws.com/Regen_Logos.zip
 connectSection:
   header: Connect with us

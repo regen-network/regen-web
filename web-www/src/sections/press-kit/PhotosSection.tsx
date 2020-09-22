@@ -11,10 +11,10 @@ import ProjectMedia from 'web-components/lib/components/sliders/ProjectMedia';
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     [theme.breakpoints.up('sm')]: {
-      paddingBottom: theme.spacing(28.5),
+      paddingBottom: theme.spacing(27.5),
     },
     [theme.breakpoints.down('xs')]: {
-      paddingBottom: theme.spacing(25),
+      paddingBottom: theme.spacing(20),
     },
   },
   slider: {
@@ -25,8 +25,12 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   title: {
+    [theme.breakpoints.up('sm')]: {
+      paddingBottom: theme.spacing(12.5),
+    },
     [theme.breakpoints.down('xs')]: {
       fontSize: theme.spacing(8),
+      paddingBottom: theme.spacing(9.75),
     },
   },
 }));
@@ -53,9 +57,10 @@ const PhotosSection = (): JSX.Element => {
       render={data => {
         const content = data.content.photosSection;
         return (
-          <Section title={content.header} titleClassName={classes.title}>
+          <Section title={content.header} titleClassName={classes.title} className={classes.root}>
             <div className={classes.slider}>
               <ProjectMedia
+                xsBorderRadius
                 assets={content.photos.map(({ image }: { image: { publicURL: string } }) => ({
                   src: image.publicURL,
                   thumbnail: image.publicURL,

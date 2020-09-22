@@ -105,14 +105,25 @@ photosSection:
   header: Photos
   photos:
     - image: ../../static/media/press-kit1.jpg
-    - image: ../../static/media/press-kit1.jpg
-    - image: ../../static/media/press-kit1.jpg
-    - image: ../../static/media/press-kit1.jpg
-    - image: ../../static/media/press-kit1.jpg
-    - image: ../../static/media/press-kit1.jpg
-    - image: ../../static/media/press-kit1.jpg
-    - image: ../../static/media/press-kit1.jpg
-    - image: ../../static/media/press-kit1.jpg
-    - image: ../../static/media/press-kit1.jpg
-    - image: ../../static/media/press-kit1.jpg
-    - image: ../../static/media/press-kit1.jpg
+    - image: ../../static/media/press-kit2.jpg
+    - image: ../../static/media/press-kit3.jpeg
+    - image: ../../static/media/press-kit4.jpg
+    - image: ../../static/media/press-kit5.jpg
+    - image: ../../static/media/press-kit6.jpeg
+    - image: ../../static/media/press-kit7.jpg
+    - image: ../../static/media/press-kit8.jpeg
+    - image: ../../static/media/press-kit9.jpg
+    - image: ../../static/media/press-kit10.jpg
+    - image: ../../static/media/press-kit11.jpg
+    - image: ../../static/media/press-kit12.jpg
+    - image: ../../static/media/press-kit13.jpg
+    - image: ../../static/media/press-kit14.jpg
+    - image: ../../static/media/press-kit15.jpg
+    - image: ../../static/media/press-kit16.jpg
+    - image: ../../static/media/press-kit18.jpg
+    - image: ../../static/media/press-kit19.jpg
+    - image: ../../static/media/press-kit20.jpeg
+    - image: ../../static/media/press-kit21.jpeg
+    - image: ../../static/media/press-kit22.jpg
+    - image: ../../static/media/press-kit23.jpg
+    - image: ../../static/media/press-kit24.jpg

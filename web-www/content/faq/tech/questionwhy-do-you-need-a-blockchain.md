@@ -1,7 +1,7 @@
 ---
 category: Tech
-title: Why do you need a blockchain?
-description: "1"
+title: "1"
+description: Why do you need a blockchain?
 ---
 The Regen Ledger provides the project three key elements, without which Regen Network’s promise to create a network dedicated to monitoring, verifying and contracting or paying for ecological health outcomes would be impossible.
 

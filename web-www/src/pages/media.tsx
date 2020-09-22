@@ -33,6 +33,29 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingBottom: theme.spacing(7.25),
     },
   },
+  show: {
+    fontFamily: theme.typography.h1.fontFamily,
+    textTransform: 'uppercase',
+    letterSpacing: '1px',
+    fontWeight: 800,
+    fontSize: theme.spacing(3),
+    whiteSpace: 'no-wrap',
+    [theme.breakpoints.up('sm')]: {
+      paddingRight: theme.spacing(5.75),
+    },
+    [theme.breakpoints.down('xs')]: {
+      paddingRight: theme.spacing(3),
+    },
+  },
+  select: {
+    '& .MuiInputBase-root': {
+      fontSize: theme.spacing(3.5),
+      height: theme.spacing(12.5),
+    },
+    [theme.breakpoints.up('sm')]: {
+      width: theme.spacing(67.5),
+    },
+  },
 }));
 
 interface Item {
@@ -44,10 +67,20 @@ interface Item {
     publicURL: string;
   };
 }
+
+interface ItemWithCategory extends Item {
+  category: string;
+}
+
 interface Category {
   name: string;
   items: Item[];
 }
+
+const buttonTexts: { [key: string]: string } = {
+  podcasts: 'listen to podcast',
+  videos: 'watch video',
+};
 
 const MediaPage = (): JSX.Element => {
   const classes = useStyles();
@@ -96,7 +129,15 @@ const MediaPage = (): JSX.Element => {
               return (
                 <>
                   <Form>
-                    <Field options={categories} component={SelectTextField} name="category" />
+                    <Grid container wrap="nowrap" alignItems="center">
+                      <span className={classes.show}>show me:</span>
+                      <Field
+                        className={classes.select}
+                        options={categories}
+                        component={SelectTextField}
+                        name="category"
+                      />
+                    </Grid>
                   </Form>
                   <Grid container spacing={6}>
                     {values.category !== 'all'
@@ -106,6 +147,8 @@ const MediaPage = (): JSX.Element => {
                             <Grid item xs={12} sm={6} md={4} key={index}>
                               <ArticleCard
                                 className={classes.card}
+                                buttonText={buttonTexts[values.category]}
+                                play={values.category === 'podcasts' || values.category === 'videos'}
                                 name={item.title}
                                 author={item.author}
                                 date={item.date}
@@ -115,13 +158,15 @@ const MediaPage = (): JSX.Element => {
                             </Grid>
                           ))
                       : content.categories
-                          .map((c: Category) => c.items)
+                          .map((c: Category) => c.items.map((i: Item) => ({ category: c.name, ...i })))
                           .flat()
                           .sort((a: Item, b: Item) => new Date(b.date) - new Date(a.date))
-                          .map((item: Item, index: number) => (
+                          .map((item: ItemWithCategory, index: number) => (
                             <Grid item xs={12} sm={6} md={4} key={index}>
                               <ArticleCard
                                 className={classes.card}
+                                buttonText={buttonTexts[item.category]}
+                                play={item.category === 'podcasts' || item.category === 'videos'}
                                 name={item.title}
                                 author={item.author}
                                 date={item.date}

@@ -14,7 +14,7 @@ coreSection:
         them to invest into creating regenerative supply systems. Christian is
         passionate about accelerating the adoption of regenerative agriculture.
         He is a member of the Board of Directors.
-      image: ../../static/media/christian.jpeg
+      image: ../../static/media/christian-shearer.png
       linkedUrl: https://www.linkedin.com/in/christian-shearer-b8877312/
       twitterUrl: ""
       githubUrl: ""
@@ -117,7 +117,7 @@ coreSection:
         applications for more than 5 years. She values transparency, fairness
         and sustainability through the projects she works on. She truly believes
         in Regen’s mission to promote regenerative agriculture.
-      image: ../../static/media/team/marie.jpg
+      image: ../../static/media/marie.png
       linkedUrl: https://www.linkedin.com/in/mariegauthier/
       twitterUrl: https://twitter.com/mariegauthier5
       githubUrl: https://github.com/blushi
@@ -132,7 +132,7 @@ coreSection:
       linkedUrl: https://www.linkedin.com/in/amaurymartiny/
       twitterUrl: https://twitter.com/amaurymartiny
       githubUrl: https://github.com/amaurymartiny
-    - image: ../../static/media/robert-z.jpeg
+    - image: ../../static/media/robert-zaremba.png
       name: Robert Zaremba
       description: MSC in CS, seasoned in solution architecture, data intelligence,
         smart contracts and applied cryptography. His professional interest
@@ -160,7 +160,7 @@ coreSection:
       name: Emily Rogers
       title: "Marketing Coordinator "
       linkedUrl: https://www.linkedin.com/in/emily-rogers-5011706b/
-      image: ../../static/media/emily_rogers_headshot.jpeg
+      image: ../../static/media/emily-rogers.png
     - title: Senior Ecological Economist
       name: "James Pittman "
       description: "James has over 20 years of experience in whole systems design,
@@ -169,7 +169,7 @@ coreSection:
         of innovative strategies and incentive mechanisms for carbon asset
         management, ecosystem service payments, and regenerative natural capital
         investment finance. "
-      image: ../../static/media/james-pittman.jpeg
+      image: ../../static/media/james-pittman.png
     - name: Erika Logie
       title: UI/UX Designer
       description: Erika has 13+ years of experience as a UX and UI Designer, and
@@ -210,7 +210,7 @@ coreSection:
         week in Regen”. She believes that humanity is at a critical breaking
         point and Regen’s project on ecological regeneration acts as a beacon of
         light by adding value to the worldwide efforts in saving the world.
-      image: ../../static/media/adriana-mihai.jpg
+      image: ../../static/media/adriana-mihai.png
 contributorSection:
   title: Contributors
   contributors:
@@ -220,7 +220,7 @@ contributorSection:
         startups and has worked in Silicon Valley, Israel, and Asia Pacific. At
         VMware R&D he founded the prototyping practice and has a gift for
         scaling and accelerating early stage teams.
-      image: ../../static/media/daniel-swid.jpg
+      image: ../../static/media/daniel-swid.png
       linkedUrl: https://www.linkedin.com/in/danielswid
       twitterUrl: ""
       githubUrl: ""
@@ -239,7 +239,7 @@ contributorSection:
         platform. Clare previously worked in refugee resettlement, sustainable
         manufacturing, and nutrition and food advocacy.
       linkedUrl: https://www.linkedin.com/in/clarepolitano/
-      image: ../../static/media/clare.jpg
+      image: ../../static/media/clare-politano.png
     - description: Kyle works at the intersection of economics and natural resource
         management. In recent years, he has helped estimate the benefits of
         watershed restoration in the San Francisco Bay, measured the impacts of
@@ -248,7 +248,7 @@ contributorSection:
       name: Kyle Birchard
       title: Ecological Economist
       linkedUrl: https://www.linkedin.com/in/kyle-birchard-0379408/
-      image: ../../static/media/kyle-birchard.jpeg
+      image: ../../static/media/kyle-birchard.png
     - description: >
         Will’s background in gift economics and local food systems helped him to
         start PVGrows, a network in Western MA funding local food system
@@ -257,7 +257,7 @@ contributorSection:
         Directors.
       title: HR & Legal
       name: Will Szal
-      image: ../../static/media/will-szal.jpeg
+      image: ../../static/media/will-szal.png
     - description: >
         After nearly thirty years of software development, mostly in finance and
         insurance, the telco sector, and several tech startups, Pete finds that
@@ -267,7 +267,7 @@ contributorSection:
       githubUrl: https://github.com/petefarmer
       title: Developer
       name: Pete Farmer
-      image: ../../static/media/peter-farmer.jpg
+      image: ../../static/media/pete-farmer.png
     - description: Brecht is a seasoned field engineer with a love for appropriate
         technology, previously with The Blueprint Alliance. Strong focus on
         systems design and rapid iterative testing. MS Electromechanical

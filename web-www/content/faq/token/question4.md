@@ -1,5 +1,5 @@
 ---
-category: "token "
+category: "token"
 title: "4"
 description: How many tokens will be created when?
 ---

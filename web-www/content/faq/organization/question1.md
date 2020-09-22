@@ -1,5 +1,5 @@
 ---
-category: Organization
+category: organization
 title: "1"
 description: Who is the team developing Regen Network?
 ---

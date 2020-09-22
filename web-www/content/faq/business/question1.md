@@ -1,5 +1,5 @@
 ---
-category: "Business "
+category: "Business"
 title: "1"
 description: Is data public or private?
 ---

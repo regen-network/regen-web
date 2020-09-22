@@ -1,5 +1,5 @@
 ---
-category: Organization
+category: organization
 title: "3"
 description: How would you describe the constellation of entities referred to as
   Regen Network?

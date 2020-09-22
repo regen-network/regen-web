@@ -1,5 +1,5 @@
 ---
-category: "token "
+category: "token"
 title: "3"
 description: Are you listed on exchanges?
 ---

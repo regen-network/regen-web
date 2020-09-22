@@ -1,5 +1,5 @@
 ---
-category: "Business "
+category: "Business"
 title: "2"
 description: Who owns the data on the system?
 ---

@@ -1,5 +1,5 @@
 ---
-category: "organization "
+category: "organization"
 title: "5"
 description: How can I get involved?
 ---

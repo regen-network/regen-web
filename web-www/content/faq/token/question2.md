@@ -1,5 +1,5 @@
 ---
-category: "token "
+category: "token"
 title: "2"
 description: What type of tokens are XRN?
 ---

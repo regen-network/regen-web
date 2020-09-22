@@ -1,5 +1,5 @@
 ---
-category: Regeneration
+category: regeneration
 title: "1"
 description: What is Regeneration?
 ---

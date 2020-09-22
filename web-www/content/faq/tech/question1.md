@@ -1,5 +1,5 @@
 ---
-category: Tech
+category: tech
 title: Why do you need a blockchain?
 description: "1"
 ---

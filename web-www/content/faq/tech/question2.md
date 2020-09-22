@@ -1,5 +1,5 @@
 ---
-category: Tech
+category: tech
 title: "2"
 description: Why are you building your own blockchain?
 ---

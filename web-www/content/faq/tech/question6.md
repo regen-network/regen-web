@@ -1,5 +1,5 @@
 ---
-category: Tech
+category: tech
 title: "6"
 description: Which protocols are you developing and why?
 ---

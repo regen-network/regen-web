@@ -3,4 +3,4 @@ category: CarbonPlus Credits
 title: "13"
 description: Who are the Verifiers?
 ---
-Regen Network accepts Verifiers from existing registries, such as American Carbon Registry, Verra, and Gold Stanrdad. Regen Network allows new Verifiers to apply for approval. See the Program Guide for more details.
+Regen Network accepts Verifiers who are already approved as Verifiers on American Carbon Registry, Verra, and Gold Stanrdad. New Verifiers may apply to Regen Network for approval. See the Program Guide for more details.

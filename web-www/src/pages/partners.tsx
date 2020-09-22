@@ -39,7 +39,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: '100%',
     height: '100%',
     padding: 'inherit',
-    border: `0.5px ${theme.palette.grey[100]} solid`,
+    borderLeft: `0.5px ${theme.palette.grey[100]} solid`,
+    borderRight: `0.5px ${theme.palette.grey[100]} solid`,
+    borderBottom: `0.5px ${theme.palette.grey[100]} solid`,
   },
   img: {
     maxHeight: '90%',
@@ -53,7 +55,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     padding: theme.spacing(4.5),
     borderTop: `10px ${theme.palette.secondary.contrastText} solid`,
     '& a': {
-      color: '#4FB573',
+      color: theme.palette.secondary.main,
       textDecoration: 'none',
     },
   },

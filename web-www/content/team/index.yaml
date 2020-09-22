@@ -14,7 +14,7 @@ coreSection:
         them to invest into creating regenerative supply systems. Christian is
         passionate about accelerating the adoption of regenerative agriculture.
         He is a member of the Board of Directors.
-      image: ../../static/media/team/christian.jpg
+      image: ../../static/media/christian.jpeg
       linkedUrl: https://www.linkedin.com/in/christian-shearer-b8877312/
       twitterUrl: ""
       githubUrl: ""
@@ -279,12 +279,6 @@ contributorSection:
 advisorSection:
   title: Advisors
   advisors:
-    - name: Jae Kwon
-      title: CEO & Founder - Tendermint + All in Bits, Inc
-      image: ../../static/media/team/jae.jpg
-      linkedUrl: https://www.linkedin.com/in/yjkwon/
-      twitterUrl: ""
-      githubUrl: ""
     - name: Brian Fox
       title: Open Source and Technology Architecture
       image: ../../static/media/team/brian.jpg

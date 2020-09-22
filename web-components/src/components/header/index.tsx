@@ -177,7 +177,7 @@ export default function Header({
   pathname = '/',
 }: HeaderProps): JSX.Element {
   const classes = useStyles({ color, borderBottom });
-
+  console.log(borderBottom);
   const rootClass = [classes.borderBottom];
   rootClass.push(transparent ? classes.transparent : classes.background);
   rootClass.push(absolute ? classes.absolute : '');

@@ -132,6 +132,25 @@ coreSection:
       linkedUrl: https://www.linkedin.com/in/amaurymartiny/
       twitterUrl: https://twitter.com/amaurymartiny
       githubUrl: https://github.com/amaurymartiny
+    - image: ../../static/media/robert-z.jpeg
+      name: Robert Zaremba
+      description: MSC in CS, seasoned in solution architecture, data intelligence,
+        smart contracts and applied cryptography. His professional interest
+        covers FinTech, ESG factors and Consumer Sovereignty. Being a CTO of
+        startups, and working for international companies, he is well disposed
+        towards Lean Workflows. Robert is leading a blockchain community in
+        Geneva.
+      title: "Senior Software Engineer "
+      linkedUrl: https://www.linkedin.com/in/zarembarobert/
+    - description: Jared is a frontend developer who loves computers and the wild
+        world. Jared has been involved with blockchain since 2011. He built one
+        of the ETH RPG games. As both a farmer  and developer, he feels
+        extremely lucky to serve ecological regeneration with Regen Network.
+      name: "Jared Smith "
+      title: "Front End Developer "
+      image: ../../static/media/98fiylntthoaudcmrxjd0w.jpg
+      linkedUrl: https://www.linkedin.com/in/jaredmsmith/
+      githubUrl: https://github.com/ratacat
     - description: Emily is a digital marketing maven and visual storyteller
         passionate about utilizing her skills to help build a better world. With
         a background in environmental stewardship, digital marketing, and
@@ -142,15 +161,15 @@ coreSection:
       title: "Marketing Coordinator "
       linkedUrl: https://www.linkedin.com/in/emily-rogers-5011706b/
       image: ../../static/media/emily_rogers_headshot.jpeg
-    - description: Jared is a frontend developer who loves computers and the wild
-        world. Jared has been involved with blockchain since 2011. He built one
-        of the ETH RPG games. As both a farmer  and developer, he feels
-        extremely lucky to serve ecological regeneration with Regen Network.
-      name: "Jared Smith "
-      title: "Front End Developer "
-      image: ../../static/media/98fiylntthoaudcmrxjd0w.jpg
-      linkedUrl: https://www.linkedin.com/in/jaredmsmith/
-      githubUrl: https://github.com/ratacat
+    - title: Senior Ecological Economist
+      name: "James Pittman "
+      description: "James has over 20 years of experience in whole systems design,
+        triple bottom line accounting, and sustainability strategy with a focus
+        on land management and agriculture.  He specializes in the development
+        of innovative strategies and incentive mechanisms for carbon asset
+        management, ecosystem service payments, and regenerative natural capital
+        investment finance. "
+      image: ../../static/media/james-pittman.jpeg
     - name: Erika Logie
       title: UI/UX Designer
       description: Erika has 13+ years of experience as a UX and UI Designer, and
@@ -184,15 +203,6 @@ coreSection:
         carbon sequestration in hardwood forests as a means of addressing
         climate change.
       image: ../../static/media/img-5833.jpg
-    - title: Senior Ecological Economist
-      name: "James Pittman "
-      description: "James has over 20 years of experience in whole systems design,
-        triple bottom line accounting, and sustainability strategy with a focus
-        on land management and agriculture.  He specializes in the development
-        of innovative strategies and incentive mechanisms for carbon asset
-        management, ecosystem service payments, and regenerative natural capital
-        investment finance. "
-      image: ../../static/media/james-pittman.jpeg
     - name: Adriana Mihai
       title: Blockchain Community Liason
       description: Adriana is a long term community contributor of the @cosmos
@@ -201,16 +211,6 @@ coreSection:
         point and Regen’s project on ecological regeneration acts as a beacon of
         light by adding value to the worldwide efforts in saving the world.
       image: ../../static/media/adriana-mihai.jpg
-    - image: ../../static/media/robert-z.jpeg
-      name: Robert Zaremba
-      description: MSC in CS, seasoned in solution architecture, data intelligence,
-        smart contracts and applied cryptography. His professional interest
-        covers FinTech, ESG factors and Consumer Sovereignty. Being a CTO of
-        startups, and working for international companies, he is well disposed
-        towards Lean Workflows. Robert is leading a blockchain community in
-        Geneva.
-      title: "Senior Software Engineer "
-      linkedUrl: https://www.linkedin.com/in/zarembarobert/
 contributorSection:
   title: Contributors
   contributors:
@@ -304,6 +304,18 @@ advisorSection:
         about social impact businesses capable of driving change at the
         intersection of privacy, democracy, education, human rights, and
         technology. 
+    - name: Garette Furo
+      title: Business Development and Blockchain Economics
+      image: ../../static/media/team/garette.jpg
+      linkedUrl: https://www.linkedin.com/in/garrettefuro/
+      twitterUrl: ""
+      githubUrl: ""
+      description: Garrette knows that ecological auditing and distributed networks
+        are paramount to capitalism in the twenty-first century. Garrette has
+        worked with family offices and private equity funds on ESG
+        classification and blockchain tech. Garrette has held positions as a
+        neuroscientist at Columbia University (CUMC), a U.S. Bitcoin ETF
+        applicant, miner, and investor in emerging industries.
     - name: Andrew Nannini
       title: Investment Adviser and Business Development
       image: ../../static/media/team/andrew.jpg
@@ -316,10 +328,3 @@ advisorSection:
         companies. He started his career in Credit Suisse’s Asset Management
         divisions and holds a BA from Wesleyan University and a MBA from New
         York University.
-    - name: Garette Furo
-      title: Business Development and Blockchain Economics
-      image: ../../static/media/team/garette.jpg
-      linkedUrl: https://www.linkedin.com/in/garrettefuro/
-      twitterUrl: ""
-      githubUrl: ""
-      description: ""

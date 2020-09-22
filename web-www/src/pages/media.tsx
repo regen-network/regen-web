@@ -70,17 +70,16 @@ interface Item {
 
 interface ItemWithCategory extends Item {
   category: string;
+  buttonText: string;
+  showPlay: boolean;
 }
 
 interface Category {
   name: string;
+  buttonText: string;
+  showPlay: boolean;
   items: Item[];
 }
-
-const buttonTexts: { [key: string]: string } = {
-  podcasts: 'listen to podcast',
-  videos: 'watch video',
-};
 
 const MediaPage = (): JSX.Element => {
   const classes = useStyles();
@@ -91,6 +90,8 @@ const MediaPage = (): JSX.Element => {
         header
         categories {
           name
+          buttonText
+          showPlay
           items {
             title
             date
@@ -126,6 +127,9 @@ const MediaPage = (): JSX.Element => {
             onSubmit={() => {}}
           >
             {({ values }) => {
+              const category: Category | undefined = content.categories.find(
+                (c: Category) => c.name === values.category,
+              );
               return (
                 <>
                   <Form>
@@ -147,8 +151,8 @@ const MediaPage = (): JSX.Element => {
                             <Grid item xs={12} sm={6} md={4} key={index}>
                               <ArticleCard
                                 className={classes.card}
-                                buttonText={buttonTexts[values.category]}
-                                play={values.category === 'podcasts' || values.category === 'videos'}
+                                buttonText={category && category.buttonText}
+                                play={category && category.showPlay}
                                 name={item.title}
                                 author={item.author}
                                 date={item.date}
@@ -158,15 +162,22 @@ const MediaPage = (): JSX.Element => {
                             </Grid>
                           ))
                       : content.categories
-                          .map((c: Category) => c.items.map((i: Item) => ({ category: c.name, ...i })))
+                          .map((c: Category) =>
+                            c.items.map((i: Item) => ({
+                              buttonText: c.buttonText,
+                              showPlay: c.showPlay,
+                              category: c.name,
+                              ...i,
+                            })),
+                          )
                           .flat()
                           .sort((a: Item, b: Item) => new Date(b.date) - new Date(a.date))
                           .map((item: ItemWithCategory, index: number) => (
                             <Grid item xs={12} sm={6} md={4} key={index}>
                               <ArticleCard
                                 className={classes.card}
-                                buttonText={buttonTexts[item.category]}
-                                play={item.category === 'podcasts' || item.category === 'videos'}
+                                buttonText={item.buttonText}
+                                play={item.showPlay}
                                 name={item.title}
                                 author={item.author}
                                 date={item.date}

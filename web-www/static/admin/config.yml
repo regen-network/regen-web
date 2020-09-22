@@ -546,6 +546,30 @@ collections:
                 widget: object
                 fields:
                   - {label: Header, name: header, widget: string}
+      - label: "Media"
+        name: media
+        file: "web-www/content/media/index.yaml"
+        fields:
+          - {label: Header, name: header, widget: string}
+          - label: Categories content
+            name: categories
+            widget: list
+            collapsed: false
+            fields:
+              - {label: "name", name: name, widget: string}
+              - {label: "Button text", name: buttonText, widget: string}
+              - {label: "Show play icon", name: showPlay, widget: boolean}
+              - label: Items
+                name: items
+                widget: list
+                collapsed: false
+                fields:
+                  - {label: "image", name: image, widget: image}
+                  - {label: "title", name: title, widget: string}
+                  - {label: "author / source name", name: author, widget: string}
+                  - {label: "url", name: url, widget: string}
+                  - {label: "date", name: date, widget: string}
+
       - label: "Press Kit"
         name: "press-kit"
         file: "web-www/content/press-kit/index.yaml"

@@ -1,6 +1,8 @@
 header: Media
 categories:
   - name: articles
+    buttonText: read article
+    showPlay: false
     items:
       - image: ../../static/media/media-article1.png
         title: Regen Network Crosses $1MM Raise Led by Interchain Foundation and Announces Chorus One Partnership and Completion of Techstars Sustainability Accelerator Program
@@ -33,6 +35,8 @@ categories:
         author: Impact Alpha
         url: https://impactalpha.com/techstars-sustainability-startups-tackle-clean-water-regenerative-farming-and-supply-chains/
   - name: videos
+    buttonText: watch video
+    showPlay: true
     items:
       - image: ../../static/media/media-video1.png
         title: '[LIVE] Devcon3 Day 4 Stream - Morning'
@@ -65,6 +69,8 @@ categories:
         author: Lark Davis
         url: https://www.youtube.com/watch?v=4QD8LsqmxEo
   - name: podcasts
+    buttonText: listen to podcast
+    showPlay: true
     items:
       - image: ../../static/media/media-podcast-chen.png
         title: 'Planetary Regeneration Podcast | Episode 6: Delton Chen'

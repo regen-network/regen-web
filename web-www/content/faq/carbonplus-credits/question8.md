@@ -1,6 +1,6 @@
 ---
 category: Carbonplus Credits
-title: "8"
+title: "12"
 description: What standards are followed for Carbonplus Credits?
 ---
 Regen Registry standards can be found in the Program Guide and the respective Credit Class for each CarbonPlus Credit.

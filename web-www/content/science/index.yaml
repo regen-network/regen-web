@@ -82,6 +82,6 @@ communitySection:
       role: Placeholder role 5
       description: Placeholder description 5
     - name: Placeholder name 6
-      image: ../../static/media/you_.png
+      image: ../../static/media/you.png
       role: Placeholder role 6
       description: Placeholder description 6

@@ -304,18 +304,6 @@ advisorSection:
         about social impact businesses capable of driving change at the
         intersection of privacy, democracy, education, human rights, and
         technology. 
-    - name: Andrew Nannini
-      title: Investment Adviser and Business Development
-      image: ../../static/media/team/andrew.jpg
-      linkedUrl: https://www.linkedin.com/in/andrew-nannini-19418846/
-      twitterUrl: ""
-      githubUrl: ""
-      description: Andrew Nannini is the CIO of a family office specializing in
-        investments across all asset classes and regions. Prior to this, Andrew
-        worked for an equity hedge fund in Brazil focusing on  emerging market
-        companies. He started his career in Credit Suisse’s Asset Management
-        divisions and holds a BA from Wesleyan University and a MBA from New
-        York University.
     - name: Garette Furo
       title: Business Development and Blockchain Economics
       image: ../../static/media/team/garette.jpg
@@ -328,3 +316,15 @@ advisorSection:
         classification and blockchain tech. Garrette has held positions as a
         neuroscientist at Columbia University (CUMC), a U.S. Bitcoin ETF
         applicant, miner, and investor in emerging industries.
+    - name: Andrew Nannini
+      title: Investment Adviser and Business Development
+      image: ../../static/media/team/andrew.jpg
+      linkedUrl: https://www.linkedin.com/in/andrew-nannini-19418846/
+      twitterUrl: ""
+      githubUrl: ""
+      description: Andrew Nannini is the CIO of a family office specializing in
+        investments across all asset classes and regions. Prior to this, Andrew
+        worked for an equity hedge fund in Brazil focusing on  emerging market
+        companies. He started his career in Credit Suisse’s Asset Management
+        divisions and holds a BA from Wesleyan University and a MBA from New
+        York University.

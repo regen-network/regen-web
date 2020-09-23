@@ -15,6 +15,7 @@ const CustomButton = withStyles((theme: Theme) => ({
     color: theme.palette.primary.main,
     letterSpacing: '1px',
     boxShadow: 'none',
+    whiteSpace: 'nowrap',
     [theme.breakpoints.down('xs')]: {
       padding: `${theme.spacing(3)} ${theme.spacing(6)}`,
       fontSize: '1.125rem',

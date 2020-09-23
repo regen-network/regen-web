@@ -25,6 +25,12 @@ const useStyles = makeStyles((theme: Theme) => ({
         paddingRight: `${theme.spacing(4.125)} !important`,
       },
     },
+    '& a': {
+      textDecoration: 'none',
+      '&:link, &:visited, &:hover, &:active': {
+        textDecoration: 'none',
+      },
+    },
   },
   itemTitle: {
     [theme.breakpoints.down('xs')]: {
@@ -51,6 +57,7 @@ const AwardsSection = (): JSX.Element => {
               header
               items {
                 title
+                url
                 image {
                   childImageSharp {
                     fluid(quality: 90) {
@@ -65,13 +72,13 @@ const AwardsSection = (): JSX.Element => {
       `}
       render={data => {
         const content = data.content.awardsSection;
-        const items: JSX.Element[] = content.items.map(({ image, title }) => (
-          <div>
+        const items: JSX.Element[] = content.items.map(({ image, url, title }) => (
+          <a href={url} target="_blank" rel="noopener noreferrer">
             <Img className={classes.image} fluid={image.childImageSharp.fluid}></Img>
             <Title className={classes.itemTitle} variant="h5">
               {title}
             </Title>
-          </div>
+          </a>
         ));
         return (
           <Section withSlider title={content.header} titleClassName={classes.title}>

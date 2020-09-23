@@ -648,6 +648,7 @@ collections:
                 collapsed: false
                 fields:
                   - {label: "title", name: title, widget: string}
+                  - {label: "url", name: url, widget: string}
                   - {label: "image", name: image, widget: image}
           - label: Logos Section
             name: logosSection
@@ -690,9 +691,10 @@ collections:
     editor:
       preview: false
     create: true
+    extension: yaml
     folder: "web-www/content/case-study-items"
-    path: '{{slug}}'
     summary: '{{name}}'
+    identifier_field: slug
     fields:
       - { label: 'name', name: 'name', widget: 'string' }
       - { label: 'slug', name: 'slug', widget: 'string' }
@@ -714,7 +716,7 @@ collections:
         widget: object
         fields:
           - {label: description, name: description, widget: markdown}
-          - {label: Image, name: aboutImage, widget: image}
+          - {label: Image, name: image, widget: image}
           - label: challenges
             name: challenges
             widget: list
@@ -735,7 +737,7 @@ collections:
         name: figureSection
         widget: object
         fields:
-          - {label: Single title, name: title, widget: text}
+          - {label: Single title, name: title, widget: text, required: false}
           - {label: background Image, name: background, widget: image}
           - label: figures
             name: figures

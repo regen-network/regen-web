@@ -624,6 +624,7 @@ collections:
                 collapsed: false
                 fields:
                   - {label: "title", name: title, widget: string}
+                  - {label: "url", name: url, widget: string}
                   - {label: "image", name: image, widget: image}
           - label: Logos Section
             name: logosSection

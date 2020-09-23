@@ -73,7 +73,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       width: 60,
       height: 60,
       borderRadius: '5px',
-      border: `1px solid ${theme.palette.info.light}`,
+      // border: `1px solid ${theme.palette.info.light}`,
       boxSizing: 'border-box',
       objectFit: 'cover',
     },
@@ -156,10 +156,11 @@ export default function ProjectMedia({ assets, xsBorderRadius = false }: Project
   const thumbnailStyle: object = getThumbnailStyle(thumbnailsTranslate);
   const settings = {
     speed: 500,
-    rows: 1,
-    slidesPerRow: 1,
+    slidesToShow: 1,
+    slidesToScroll: 1,
     arrows: false,
     dots: true,
+    easing: 'ease',
     adaptiveHeight: true,
     infinite: false,
     appendDots: (dots: any) => (

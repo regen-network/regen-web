@@ -73,6 +73,7 @@ const PressKitConnectSection = (): JSX.Element => {
       icon: <YoutubeIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />,
       href: 'https://www.youtube.com/channel/UCICD2WukTY0MbQdQ9Quew3g',
       label: 'Youtube',
+      small: true,
     },
     {
       icon: <LinkedInIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />,

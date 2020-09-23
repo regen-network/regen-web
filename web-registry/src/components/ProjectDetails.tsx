@@ -255,6 +255,17 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingRight: theme.spacing(7.5),
     },
   },
+  timelineContainer: {
+    backgroundColor: theme.palette.grey[50],
+  },
+  timelineTitle: {
+    [theme.breakpoints.up('sm')]: {
+      marginBottom: `${theme.spacing(12)} !important`,
+    },
+    [theme.breakpoints.down('xs')]: {
+      marginBottom: `${theme.spacing(10)} !important`,
+    },
+  },
 }));
 
 interface ProjectProps {
@@ -338,8 +349,7 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
   // Credits Details and MRV table
   const creditDetails: JSX.Element = (
     <CreditDetails
-      name={project.creditClass.name}
-      description={project.creditClass.description}
+      creditClass={project.creditClass}
       activities={project.keyOutcomesActivities}
       title={
         project.fieldsOverride && project.fieldsOverride.keyOutcomesActivities
@@ -544,12 +554,12 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
       )}
 
       {project.timeline && (
-        <div>
+        <div className={classes.timelineContainer}>
           {/*<div className={classes.projectDetails}>
           <Title variant="h3">Monitoring, Verification, and Reporting</Title>
         </div>*/}
           <div className={`${classes.projectDetails} ${classes.projectTimeline} ${classes.projectContent}`}>
-            <Title variant="h3">
+            <Title className={classes.timelineTitle} variant="h3">
               {project.fieldsOverride && project.fieldsOverride.timeline
                 ? project.fieldsOverride.timeline.title
                 : projectDefault.timeline.title}

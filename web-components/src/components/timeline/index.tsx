@@ -30,7 +30,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     [theme.breakpoints.down('xs')]: {
       justifyContent: 'flex-end',
-      alignSelf: 'flex-start',
     },
     '&:nth-child(odd)': {
       [theme.breakpoints.up('sm')]: {

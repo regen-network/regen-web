@@ -589,7 +589,7 @@ collections:
         widget: object
         fields:
           - {label: description, name: description, widget: markdown}
-          - {label: Image, name: aboutImage, widget: image}
+          - {label: Image, name: image, widget: image}
           - label: challenges
             name: challenges
             widget: list
@@ -610,7 +610,7 @@ collections:
         name: figureSection
         widget: object
         fields:
-          - {label: Single title, name: title, widget: text}
+          - {label: Single title, name: title, widget: text, required: false}
           - {label: background Image, name: background, widget: image}
           - label: figures
             name: figures

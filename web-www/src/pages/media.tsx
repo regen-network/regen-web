@@ -20,10 +20,12 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     [theme.breakpoints.down('xs')]: {
       paddingBottom: theme.spacing(22.5),
+      paddingTop: theme.spacing(5),
     },
   },
   card: {
     height: '100%',
+    border: `1px solid ${theme.palette.grey[100]}`,
   },
   title: {
     [theme.breakpoints.up('sm')]: {
@@ -31,6 +33,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     [theme.breakpoints.down('xs')]: {
       paddingBottom: theme.spacing(7.25),
+      fontSize: theme.spacing(8),
     },
   },
   show: {
@@ -39,7 +42,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     letterSpacing: '1px',
     fontWeight: 800,
     fontSize: theme.spacing(3),
-    whiteSpace: 'no-wrap',
+    whiteSpace: 'nowrap',
     [theme.breakpoints.up('sm')]: {
       paddingRight: theme.spacing(5.75),
     },

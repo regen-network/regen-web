@@ -59,29 +59,29 @@ communitySection:
   header: Science Community
   members:
     - name: Luke Smith
-      image: ../../static/media/luke1.png
+      image: ../../static/media/patrick-lawrence.png
       role: regen team
       description: Luke works at the intersection of culture, ecology and economy to
         regenerate living systems and evolve the role of human beings as a
         keystone species. He convenes farmers, brands, investors & nonprofits to
         curate processes for regenerative agriculture and supply development.
     - name: Placeholder name 2
-      image: ../../static/media/science-community.png
+      image: ../../static/media/dan-kane.png
       role: Placeholder role 2
       description: Placeholder description 2
     - name: Placeholder name 3
-      image: ../../static/media/science-community.png
+      image: ../../static/media/luke-smith.png
       role: Placeholder role 3
       description: Placeholder description 3
     - name: Placeholder name 4
-      image: ../../static/media/science-community.png
+      image: ../../static/media/dorn-cox.png
       role: Placeholder role 4
       description: Placeholder description 4
     - name: Placeholder name 5
-      image: ../../static/media/science-community.png
+      image: ../../static/media/greg-austic.png
       role: Placeholder role 5
       description: Placeholder description 5
     - name: Placeholder name 6
-      image: ../../static/media/science-community.png
+      image: ../../static/media/you.png
       role: Placeholder role 6
       description: Placeholder description 6

@@ -59,7 +59,7 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
   // Links in rest of the site must use the trailing '/'
   // in order for these to work appropriately
   const headerNoBorderBottomPages: RegExp = new RegExp(
-    '//|/buyers/|/land-stewards/|/resources/|/team/|/developers/|/science/|/invest/|/case-studies/|/case-studies/[a-z-]+//',
+    '//|/buyers/|/land-stewards/|/resources/|/team/|/developers/|/science/|/invest/|/case-studies/|/press-kit/|/case-studies/[a-z-]+//',
   );
 
   const menuItems: HeaderMenuItem[] = [
@@ -75,7 +75,7 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
       ],
     },
   ];
-  
+
   const desktopColor: string = headerColors[location.pathname]
     ? headerColors[location.pathname]
     : theme.palette.primary.light;
@@ -155,10 +155,10 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
           href: 'http://forum.goatech.org/c/regen-network/19',
           target: '_blank',
         },
-        // {
-        //   title: 'Press Kit',
-        //   href: '/press-kit/',
-        // },
+        {
+          title: 'Press Kit',
+          href: '/press-kit/',
+        },
       ],
     },
   ];

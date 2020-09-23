@@ -110,7 +110,7 @@ const ApproachSection = () => {
                 {ReactHtmlParser(content.description)}
               </Typography>
               <ContainedButton href={content.link} className={classes.button}>
-                buy
+                see more
               </ContainedButton>
             </Grid>
             <Grid item xs={12}>

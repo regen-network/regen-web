@@ -49,65 +49,7 @@
   "projects": [
     {
       "id": "impactag",
-      "timeline": {
-        "completedItemIndex": 4,
-        "events": [
-          {
-            "title": "Credit term begins",
-            "description": "Crediting Term starts at the initial monitoring date.",
-            "date": " July 1st, 2017"
-          },
-          {
-            "title": "Project registration",
-            "date": "September 4, 2020"
-          },
-          {
-            "title": "Baseline measurement",
-            "description": "Based on historical sampling data from 2017.",
-            "date": "September 8, 2020"
-          },
-          {
-            "title": "Monitoring",
-            "description": "Two rounds based on historical sampling data from 2018 & 2019.",
-            "date": "September 8, 2020"
-          },
-          {
-            "title": "Credit issuance",
-            "description": "2017-2019 Vintage issued.",
-            "date": "September 8, 2020"
-          },
-          {
-            "title": "Verification",
-            "description": "Project registration 2017-19 Vintage.",
-            "date": "September 2020"
-          }
-        ]
-      },
       "documents": [
-        {
-          "name": "Wilmot Cattle 2017 Baseline Report",
-          "type": "Monitoring",
-          "date": "September 2, 2020",
-          "url": "https://regen-registry.s3.amazonaws.com/Wilmot+Baseline+Report+(2017).pdf"
-        },
-        {
-          "name": "Wilmot Cattle 2019 Report",
-          "type": "Monitoring",
-          "date": "September 2, 2020",
-          "url": "https://regen-registry.s3.amazonaws.com/_Wilmot+Report+(2019)_+Grassland+credits.pdf"
-        },
-        {
-          "name": "Regen Registry Project Plan",
-          "type": "Registration",
-          "date": "August 20, 2020",
-          "url": "https://regen-registry.s3.amazonaws.com/Regen+Registry+Project+Plan.pdf"
-        },
-        {
-          "name": "Sales Certificate",
-          "type": "Sales",
-          "date": "September 10, 2020",
-          "url": "https://regen-registry.s3.amazonaws.com/Sales_Certificate.pdf"
-        }
       ],
       "stripePrice": "sku_HAqf7cJtNFynOf",
       "creditPrice": {
@@ -122,7 +64,7 @@
       },
       "glanceImgSrc": "impactag-smallmap-top-v3.jpg",
       "glanceText": [
-        "Increased soil organic carbon to 4.5% and removed 21,306 tons of CO2e in two years.",
+        "Increased soil organic carbon to 4.5%.",
         "Improved co-benefits significantly with Soil Health ranking as excellent, Ecosystem Health as good, and Animal Welfare as excellent."
       ],
       "place": {

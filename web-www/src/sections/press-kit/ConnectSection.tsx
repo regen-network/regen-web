@@ -7,27 +7,32 @@ import TwitterIcon from 'web-components/lib/components/icons/social/TwitterIcon'
 import TelegramIcon from 'web-components/lib/components/icons/social/TelegramIcon';
 import MediumIcon from 'web-components/lib/components/icons/social/MediumIcon';
 import GithubIcon from 'web-components/lib/components/icons/social/GithubIcon';
-import BlockIcon from 'web-components/lib/components/icons/BlockIcon';
-import WhitepaperIcon from 'web-components/lib/components/icons/WhitepaperIcon';
+import YoutubeIcon from 'web-components/lib/components/icons/social/YoutubeIcon';
+import FacebookIcon from 'web-components/lib/components/icons/social/FacebookIcon';
+import LinkedInIcon from 'web-components/lib/components/icons/social/LinkedInIcon';
+import RegenLogoIcon from 'web-components/lib/components/icons/RegenLogoIcon';
+import EmailIcon from 'web-components/lib/components/icons/EmailIcon';
 
 const useStyles = makeStyles((theme: Theme) => ({
-  title: {
-    fontWeight: 'normal',
-    fontFamily: theme.typography.overline.fontFamily,
+  item: {
+    [theme.breakpoints.up('sm')]: {
+      maxWidth: '20%',
+      flexGrow: '20%',
+    },
   },
 }));
 
-const DevelopersConnectSection = (): JSX.Element => {
+const PressKitConnectSection = (): JSX.Element => {
   const data = useStaticQuery(graphql`
     query {
-      background: file(relativePath: { eq: "developers-connect-bg.png" }) {
+      background: file(relativePath: { eq: "press-kit-connect-bg.png" }) {
         childImageSharp {
           fluid(quality: 90) {
             ...GatsbyImageSharpFluid_withWebp
           }
         }
       }
-      text: developersYaml {
+      text: pressKitYaml {
         connectSection {
           header
         }
@@ -35,23 +40,24 @@ const DevelopersConnectSection = (): JSX.Element => {
     }
   `);
   const content = data.text.connectSection;
-  const classes = useStyles();
   const theme = useTheme();
+  const classes = useStyles();
   const icons: IconLabelProps[] = [
     {
-      icon: <TelegramIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />,
-      href: 'https://t.me/regennetwork_public',
-      label: 'Regen Network: Public',
+      icon: <RegenLogoIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />,
+      href: '/',
+      label: 'Website',
+      small: true,
     },
     {
       icon: <TelegramIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />,
-      href: 'https://t.me/joinchat/FJGNSxOpjJcgrUGwAAOKUg',
-      label: 'Regen Network: DVD',
+      href: 'https://t.me/regennetwork_public',
+      label: 'Telegram for General Updates',
     },
     {
       icon: <TelegramIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />,
       href: 'https://t.me/regennetworkdevannounce',
-      label: 'Development Updates',
+      label: 'Telegram for Developers',
     },
     {
       icon: <MediumIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />,
@@ -64,10 +70,20 @@ const DevelopersConnectSection = (): JSX.Element => {
       label: 'Twitter',
     },
     {
-      icon: <WhitepaperIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />,
-      href: 'https://regen-network.gitlab.io/whitepaper/WhitePaper.pdf',
-      label: 'Whitepaper',
+      icon: <YoutubeIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />,
+      href: 'https://www.youtube.com/channel/UCICD2WukTY0MbQdQ9Quew3g',
+      label: 'Youtube',
       small: true,
+    },
+    {
+      icon: <LinkedInIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />,
+      href: 'https://www.linkedin.com/company/regen-network',
+      label: 'LinkedIn',
+    },
+    {
+      icon: <FacebookIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />,
+      href: 'https://facebook.com/weareregennetwork',
+      label: 'Facebook',
     },
     {
       icon: <GithubIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />,
@@ -75,20 +91,20 @@ const DevelopersConnectSection = (): JSX.Element => {
       label: 'Github',
     },
     {
-      icon: <BlockIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />,
-      href: 'https://regen-network.gitlab.io/lunie/',
-      label: 'Block Explorer',
+      icon: <EmailIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />,
+      href: 'http://newsletter.regen.network/',
+      label: 'Sign up for our newsletter',
       small: true,
     },
   ];
   return (
     <ConnectSection
+      itemClassName={classes.item}
       header={content.header}
       background={data.background}
       icons={icons}
-      titleClassName={classes.title}
     />
   );
 };
 
-export default DevelopersConnectSection;
+export default PressKitConnectSection;

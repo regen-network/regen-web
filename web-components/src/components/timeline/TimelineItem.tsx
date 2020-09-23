@@ -23,7 +23,7 @@ interface StyleProps {
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   content: props => ({
     backgroundColor: theme.palette.primary.main,
-    width: '75%',
+    maxWidth: '80%',
     position: 'relative',
     border: `1px solid ${theme.palette.info.light}`,
     borderRadius: '10px',
@@ -67,6 +67,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     },
   }),
   date: {
+    lineHeight: '150%',
     color: theme.palette.info.main,
     paddingBottom: theme.spacing(0.75),
     [theme.breakpoints.down('xs')]: {
@@ -77,9 +78,11 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     color: theme.palette.info.main,
     [theme.breakpoints.up('sm')]: {
       fontSize: '0.875rem',
+      lineHeight: '150%',
     },
     [theme.breakpoints.down('xs')]: {
       fontSize: '0.75rem',
+      lineHeight: '145%',
     },
     paddingTop: theme.spacing(1.5),
   },
@@ -127,6 +130,9 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     },
     zIndex: 100,
   }),
+  title: {
+    lineHeight: '150%',
+  },
 }));
 
 const options = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -149,7 +155,9 @@ export default function TimelineItem({
           {typeof date === 'string' ? date : new Date(date).toLocaleDateString('en-US', options)}
         </div>
       )}
-      <Title variant="h6">{title}</Title>
+      <Title className={classes.title} variant="h5">
+        {title}
+      </Title>
       <div className={classes.description}>{description}</div>
       <span className={classes.circle} />
       <div className={classes.bar} />

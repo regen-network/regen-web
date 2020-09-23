@@ -15,6 +15,50 @@ collections:
     editor:
       preview: false
     files:
+      - label: "Invest"
+        name: "invest"
+        file: "web-www/content/invest/index.yaml"
+        fields:
+          - label: "Top Section"
+            name: "topSection"
+            widget: "object"
+            fields:
+              - {label: Header, name: header, widget: string}
+              - {label: Body, name: body, widget: text}
+      - label: "Developers"
+        name: "developers"
+        file: "web-www/content/developers/index.yaml"
+        fields:
+          - label: "Top Section"
+            name: "topSection"
+            widget: "object"
+            fields:
+              - {label: Header, name: header, widget: string}
+              - {label: Body, name: body, widget: text}
+          - label: "Ledger Section"
+            name: "ledgerSection"
+            widget: "object"
+            fields:
+              - {label: Header, name: header, widget: string}
+              - {label: Body, name: body, widget: text}
+          - label: "Testnet Section"
+            name: "testnetSection"
+            widget: "object"
+            fields:
+              - {label: Header, name: header, widget: string}
+              - {label: Description, name: description, widget: text}
+              - {label: Testnet name, name: address, widget: string}
+              - {label: Left Column Label, name: leftColumnLabel, widget: string}
+              - {label: Left Column Content, name: leftColumnContent, widget: text}
+              - {label: Right Column Label, name: rightColumnLabel, widget: string}
+              - {label: Right Column Content, name: rightColumnContent, widget: markdown}
+              - {label: Button text, name: buttonText, widget: string}
+              - {label: Button link, name: buttonLink, widget: string}
+          - label: "Connect Section"
+            name: "connectSection"
+            widget: "object"
+            fields:
+              - {label: Header, name: header, widget: string}
       - label: "Team"
         name: "team"
         file: "web-www/content/team/index.yaml"
@@ -24,7 +68,7 @@ collections:
             widget: "object"
             fields:
               - {label: Header, name: header, widget: string}
-              - {label: Body, name: body, widget: string}
+              - {label: Body, name: body, widget: text}
           - label: "Core Team"
             name: "coreSection"
             widget: "object"
@@ -46,8 +90,8 @@ collections:
             widget: "object"
             fields:
               - {label: Header, name: title, widget: string}
-              - label: Members
-                name: coreMembers
+              - label: Contributors
+                name: contributors
                 widget: list
                 fields:
                   - {label: Image, name: image, widget: image}
@@ -62,8 +106,8 @@ collections:
             widget: "object"
             fields:
               - {label: Header, name: title, widget: string}
-              - label: Members
-                name: coreMembers
+              - label: Advisors
+                name: advisors
                 widget: list
                 fields:
                   - {label: Image, name: image, widget: image}
@@ -341,6 +385,67 @@ collections:
             widget: "object"
             fields:
               - {label: Header, name: header, widget: string}
+      - label: Science page
+        name: science
+        file: "web-www/content/science/index.yaml"
+        fields:
+          - label: Top Section
+            name: topSection
+            widget: "object"
+            fields:
+              - {label: Header, name: header, widget: string}
+              - {label: Description, name: body, widget: text}
+          - label: Measuring Ecological Health Section
+            name: titleDescriptionSection
+            widget: "object"
+            fields:
+              - {label: Header, name: header, widget: string}
+              - {label: Description, name: description, widget: markdown}
+          - label: Open Science Section
+            name: openScienceSection
+            widget: "object"
+            fields:
+              - {label: Caption, name: caption, widget: string}
+              - label: Header
+                name: header
+                widget: "object"
+                fields:
+                  - {label: Start, name: start, widget: string}
+                  - {label: Green, name: green, widget: string}
+              - label: Phases
+                name: phases
+                widget: list
+                collapsed: false
+                fields:
+                  - {label: "Title", name: title, widget: string}
+                  - {label: "Description", name: description, widget: text}
+          - label: Partnerships Section
+            name: partnershipsSection
+            widget: "object"
+            fields:
+              - {label: Header, name: header, widget: string}
+              - label: Partners
+                name: partners
+                widget: list
+                collapsed: false
+                fields:
+                  - {label: "Image", name: image, widget: image}
+                  - {label: "Description", name: description, widget: markdown}
+          - label: Community Section
+            name: communitySection
+            widget: "object"
+            fields:
+              - {label: Caption, name: caption, widget: string}
+              - {label: Header, name: header, widget: string}
+              - label: Members
+                name: members
+                widget: list
+                collapsed: false
+                fields:
+                  - {label: "Image", name: image, widget: image}
+                  - {label: "Name", name: name, widget: string}
+                  - {label: "role", name: role, widget: string}
+                  - {label: "Description", name: description, widget: text}
       - label: "Shared sections"
         name: "shared"
         file: "web-www/content/shared/index.yaml"
@@ -389,6 +494,58 @@ collections:
                   - {label: "Area", name: area, widget: number}
                   - {label: "Area unit (acres or hectares)", name: areaUnit, widget: string}
                   - {label: "Image", name: image, widget: image}
+      - label: "Case studies"
+        name: "case-studies"
+        file: "web-www/content/case-studies/index.yaml"
+        fields:
+          - label: Top Section landing page
+            name: topSection
+            widget: "object"
+            fields:
+              - {label: Header, name: header, widget: string}
+              - {label: Description, name: body, widget: text}
+          - label: Case Studies copy
+            name: caseStudies
+            widget: object
+            fields:
+              - {label: View button text, name: view, widget: string}
+              - {label: Page Header, name: header, widget: string}
+              - label: About Section
+                name: aboutSection
+                widget: object
+                fields:
+                  - {label: Header, name: header, widget: string}
+                  - {label: practice, name: practice, widget: string}
+                  - {label: biome, name: biome, widget: string}
+                  - {label: region, name: region, widget: string}
+              - label: Context Section
+                name: contextSection
+                widget: object
+                fields:
+                  - {label: Header, name: header, widget: string}
+                  - {label: challenges, name: challenges, widget: string}
+              - label: Approach Section
+                name: approachSection
+                widget: object
+                fields:
+                  - {label: Header, name: header, widget: string}
+                  - {label: SubHeader, name: subHeader, widget: string}
+                  - {label: details, name: details, widget: string}
+                  - {label: results, name: results, widget: string}
+                  - {label: next, name: next, widget: string}
+              - label: Funding Section
+                name: fundingSection
+                widget: object
+                fields:
+                  - {label: Header, name: header, widget: markdown}
+                  - {label: details, name: details, widget: string}
+                  - {label: results, name: results, widget: string}
+                  - {label: next, name: next, widget: string}
+              - label: Conclusion Section
+                name: conclusionSection
+                widget: object
+                fields:
+                  - {label: Header, name: header, widget: string}
   - label: "FAQ"
     name: "faq"
     editor:
@@ -402,3 +559,96 @@ collections:
       - { label: 'Question number', name: 'title', widget: 'string' }
       - { label: 'Question', name: 'description', widget: 'string' }
       - { label: 'Answer', name: 'body', widget: 'markdown' }
+  - label: "Case Studies content"
+    name: "case-study-items"
+    editor:
+      preview: false
+    create: true
+    extension: yaml
+    folder: "web-www/content/case-study-items"
+    summary: '{{name}}'
+    identifier_field: slug
+    fields:
+      - { label: 'name', name: 'name', widget: 'string' }
+      - { label: 'slug', name: 'slug', widget: 'string' }
+      - { label: 'Card image on landing page', name: 'cardImage', widget: 'image' }
+      - { label: 'Background image in top section', name: 'background', widget: 'image' }
+      - { label: 'description', name: 'description', widget: 'text' }
+      - label: About Section
+        name: aboutSection
+        widget: object
+        fields:
+          - {label: about, name: about, widget: markdown}
+          - {label: Map image, name: mapImage, widget: image}
+          - {label: Image, name: aboutImage, widget: image}
+          - {label: practice, name: practice, widget: string}
+          - {label: biome, name: biome, widget: string}
+          - {label: region, name: region, widget: string}
+      - label: Context Section
+        name: contextSection
+        widget: object
+        fields:
+          - {label: description, name: description, widget: markdown}
+          - {label: Image, name: aboutImage, widget: image}
+          - label: challenges
+            name: challenges
+            widget: list
+            collapsed: false
+            fields:
+              - {label: "text", name: text, widget: string}
+      - label: Approach Section
+        name: approachSection
+        widget: object
+        fields:
+          - {label: description, name: description, widget: string, required: false}
+          - {label: details, name: details, widget: markdown}
+          - {label: results, name: results, widget: markdown}
+          - {label: next, name: next, widget: markdown}
+          - {label: Figure image, name: figureImage, widget: image}
+          - {label: Figure title, name: figureTitle, widget: string}
+      - label: Figure Section
+        name: figureSection
+        widget: object
+        fields:
+          - {label: Single title, name: title, widget: text}
+          - {label: background Image, name: background, widget: image}
+          - label: figures
+            name: figures
+            widget: list
+            collapsed: false
+            fields:
+              - {label: "image", name: image, widget: image}
+              - {label: "Figure title", name: title, widget: text, required: false}
+      - label: Funding Section
+        name: fundingSection
+        widget: object
+        fields:
+          - {label: details, name: details, widget: markdown}
+          - {label: results, name: results, widget: markdown}
+          - {label: next, name: next, widget: markdown}
+          - {label: image, name: image, widget: image}
+      - label: Conclusion Section
+        name: conclusionSection
+        widget: object
+        fields:
+          - {label: description, name: description, widget: markdown}
+          - label: images
+            name: images
+            widget: list
+            collapsed: false
+            fields:
+              - {label: "image", name: image, widget: image}
+              - {label: "title", name: title, widget: text, required: false}
+      - label: Bottom Section
+        name: bottomSection
+        widget: object
+        fields:
+          - {label: Quoted text, name: quote, widget: text}
+          - {label: "background image", name: background, widget: image}
+          - label: person info
+            name: person
+            widget: object
+            fields:
+              - {label: "image", name: image, widget: image}
+              - {label: "name", name: name, widget: string}
+              - {label: "role", name: role, widget: string}

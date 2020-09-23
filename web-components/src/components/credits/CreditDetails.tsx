@@ -177,7 +177,9 @@ export default function CreditInfo({
           </Title>
         </div>
         <div className={classes.descriptionItem}>
-          <Typography className={classes.description}>{ReactHtmlParser(creditClass.description)}</Typography>
+          <Typography component="div" className={classes.description}>
+            {ReactHtmlParser(creditClass.description)}
+          </Typography>
         </div>
         <div className={classes.activitiesTitleContainer}>
           <Title className={classes.activitiesTitle} variant="h4">
@@ -192,7 +194,7 @@ export default function CreditInfo({
               </Typography>
             )}
             {activities.map((activity, index) => (
-              <Typography key={index} className={classes.activity}>
+              <Typography component="div" key={index} className={classes.activity}>
                 <div className={classes.bullet}>•</div>
                 <li>{activity}</li>
               </Typography>

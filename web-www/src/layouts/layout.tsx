@@ -39,11 +39,16 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
     '/privacy-policy/': theme.palette.primary.light,
     '/terms-service/': theme.palette.primary.light,
     '/team/': theme.palette.primary.light,
+    '/developers/': theme.palette.primary.main,
+    '/invest/': theme.palette.primary.light,
+    '/science/': theme.palette.primary.main,
   };
 
   const headerTransparent: BoolProps = {
     '/faq/': false,
     '/team/': true,
+    '/developers/': true,
+    '/invest/': true,
   };
 
   const footerPaddingBottom: BoolProps = {
@@ -51,14 +56,11 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
     '/land-stewards/': true,
   };
 
-  // Links in rest of the site must use the trailing '/' in order for these to work appropriately
-  const headerNoBorderBottomPages: Array<string> = [
-    '/',
-    '/buyers/',
-    '/land-stewards/',
-    '/resources/',
-    '/team/',
-  ];
+  // Links in rest of the site must use the trailing '/'
+  // in order for these to work appropriately
+  const headerNoBorderBottomPages: RegExp = new RegExp(
+    '//|/buyers/|/land-stewards/|/resources/|/team/|/developers/|/science/|/invest/|/case-studies/|/case-studies/[a-z-]+//',
+  );
 
   const menuItems: HeaderMenuItem[] = [
     { title: 'Buyers', href: '/buyers/' },
@@ -73,6 +75,7 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
       ],
     },
   ];
+  
   const desktopColor: string = headerColors[location.pathname]
     ? headerColors[location.pathname]
     : theme.palette.primary.light;
@@ -98,7 +101,7 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
         },
         {
           title: 'Scientists & Verifiers',
-          href: '/scientists/',
+          href: '/science/',
         },
         {
           title: 'Invest',
@@ -125,23 +128,23 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
           title: 'Team',
           href: '/team/',
         },
-        {
-          title: 'Contact',
-          href: '/contact/',
-        },
+        // {
+        //   title: 'Contact',
+        //   href: '/contact/',
+        // },
       ],
     },
     {
       title: 'regen',
       items: [
-        {
-          title: 'Partners',
-          href: '/partners/',
-        },
-        {
-          title: 'Media',
-          href: '/media/',
-        },
+        // {
+        //   title: 'Partners',
+        //   href: '/partners/',
+        // },
+        // {
+        //   title: 'Media',
+        //   href: '/media/',
+        // },
         {
           title: 'Careers',
           href: 'https://apply.workable.com/regen-network/',
@@ -152,10 +155,10 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
           href: 'http://forum.goatech.org/c/regen-network/19',
           target: '_blank',
         },
-        {
-          title: 'Press Kit',
-          href: '/press-kit/',
-        },
+        // {
+        //   title: 'Press Kit',
+        //   href: '/press-kit/',
+        // },
       ],
     },
   ];
@@ -165,9 +168,9 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
       <Header
         menuItems={menuItems}
         transparent={transparent}
-        absolute={headerNoBorderBottomPages.includes(location.pathname)}
+        absolute={location.pathname === '/' || headerNoBorderBottomPages.test(location.pathname)}
         color={desktopColor}
-        borderBottom={!headerNoBorderBottomPages.includes(location.pathname)}
+        borderBottom={location.pathname !== '/' || !headerNoBorderBottomPages.test(location.pathname)}
         pathname={location.pathname}
       />
       <div>

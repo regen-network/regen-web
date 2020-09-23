@@ -18,6 +18,7 @@ export interface ResponsiveSliderProps {
   className?: string;
   padding?: number;
   itemWidth?: string;
+  infinite?: boolean;
 }
 
 interface StyleProps {
@@ -96,6 +97,7 @@ export default function ResponsiveSlider({
   className,
   padding,
   itemWidth,
+  infinite = true,
 }: ResponsiveSliderProps): JSX.Element {
   const theme = useTheme();
 
@@ -124,7 +126,7 @@ export default function ResponsiveSlider({
   }, [slider]);
 
   const settings = {
-    infinite: true,
+    infinite,
     speed: 500,
     slidesToShow: slides,
     slidesToScroll: slides,

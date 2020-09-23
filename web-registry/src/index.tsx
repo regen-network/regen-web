@@ -22,7 +22,7 @@ const onRedirectCallback = (appState: any, verifyEmail: string): void => {
 const config = {
   domain: process.env.REACT_APP_AUTH0_DOMAIN || 'regen-network-registry.auth0.com',
   clientId: process.env.REACT_APP_AUTH0_CLIENT_ID || 'rEuc1WLPAQVXZ7gJrWg4AL9EhWMHmLu8',
-  returnTo: window.location.origin || 'http://localhost:3000/',
+  returnTo: window.location.href || 'http://localhost:3000/',
   audience: 'https://regen-registry-server.herokuapp.com/',
 };
 
@@ -30,7 +30,7 @@ ReactDOM.render(
   <Auth0Provider
     domain={config.domain}
     client_id={config.clientId}
-    redirect_uri={`${window.location.origin}/admin`}
+    redirect_uri={window.location.href}
     onRedirectCallback={onRedirectCallback}
     returnTo={config.returnTo}
     audience={config.audience}

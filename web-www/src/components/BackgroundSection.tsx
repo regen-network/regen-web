@@ -1,36 +1,44 @@
 import React from 'react';
-import { makeStyles, Theme, useTheme } from '@material-ui/core';
+import { makeStyles, Theme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import clsx from 'clsx';
 import BackgroundImage from 'gatsby-background-image';
 import Box from '@material-ui/core/Box';
+
 import Title from 'web-components/lib/components/title';
 
 interface Props {
   className?: string;
+  titleClassName?: string;
+  titleVariant?: Variant;
   body?: React.ReactNode;
   header?: React.ReactNode;
   linearGradient?: string;
+  linearGradientMobile?: string;
   children?: React.ReactNode;
   imageData: any;
   imageDataMobile?: any;
   withSlider?: boolean;
+  topSection?: boolean;
 }
 
 interface StyleProps {
   linearGradient?: string;
+  linearGradientMobile?: string;
   withSlider?: boolean;
+  topSection?: boolean;
 }
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   root: props => ({
     overflow: 'hidden',
     [theme.breakpoints.down('xs')]: {
-      paddingTop: theme.spacing(17.75),
+      paddingTop: props.topSection ? theme.spacing(70) : theme.spacing(17.75),
       paddingBottom: theme.spacing(13),
     },
     [theme.breakpoints.up('sm')]: {
-      padding: `${theme.spacing(80)} ${0} ${theme.spacing(27.5)} ${0}`,
+      paddingTop: props.topSection ? theme.spacing(80) : theme.spacing(21.5),
+      paddingBottom: theme.spacing(27.5),
     },
     backgroundSize: 'cover',
   }),
@@ -41,9 +49,17 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     bottom: 0,
     left: 0,
     width: '100%',
-    background:
-      props.linearGradient ||
-      'linear-gradient(180deg, rgba(255, 249, 238, 0.74) 0%, rgba(255, 249, 238, 0) 27.6%), linear-gradient(194.2deg, #FAEBD1 12.63%, #7DC9BF 44.03%, #515D89 75.43%)',
+    [theme.breakpoints.up('sm')]: {
+      background:
+        props.linearGradient ||
+        'linear-gradient(180deg, rgba(255, 249, 238, 0.74) 0%, rgba(255, 249, 238, 0) 27.6%), linear-gradient(194.2deg, #FAEBD1 12.63%, #7DC9BF 44.03%, #515D89 75.43%)',
+    },
+    [theme.breakpoints.down('xs')]: {
+      background:
+        props.linearGradientMobile ||
+        props.linearGradient ||
+        'linear-gradient(180deg, rgba(255, 249, 238, 0.74) 0%, rgba(255, 249, 238, 0) 27.6%), linear-gradient(194.2deg, #FAEBD1 12.63%, #7DC9BF 44.03%, #515D89 75.43%)',
+    },
     opacity: 0.8,
   }),
   text: {
@@ -102,6 +118,8 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     },
     maxWidth: theme.breakpoints.values.lg,
     margin: '0 auto',
+    zIndex: 1,
+    position: 'relative',
   }),
   subtitle: {
     [theme.breakpoints.down('xs')]: {
@@ -127,20 +145,24 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
 
 const BackgroundSection = ({
   className,
+  titleClassName,
+  titleVariant = 'h1',
   imageData,
   imageDataMobile,
   linearGradient,
+  linearGradientMobile,
   body,
   header,
   children,
   withSlider,
+  topSection = true,
 }: Props): JSX.Element => {
-  const classes = useStyles({ linearGradient });
+  const classes = useStyles({ linearGradientMobile, linearGradient, topSection });
   let headerJSX, bodyJSX, textJSX;
   // Tried to use && operator, but it doesn't seem to play nicely with passing in dynamic props to the object
   if (header) {
     headerJSX = (
-      <Title color="primary" variant="h1" className={classes.title}>
+      <Title color="primary" variant={titleVariant} className={clsx(titleClassName, classes.title)}>
         {header}
       </Title>
     );
@@ -170,9 +192,9 @@ const BackgroundSection = ({
           fluid={imageDataMobile ? imageDataMobile : imageData}
           backgroundColor="transparent"
         >
-          <div className={classes.backgroundGradient} />
+          {linearGradient !== 'unset' && <div className={classes.backgroundGradient} />}
           {textJSX}
-          {children}
+          <div className={classes.children}>{children}</div>
         </BackgroundImage>
       </Box>
       <Box display={{ xs: 'none', sm: 'block' }}>
@@ -182,7 +204,7 @@ const BackgroundSection = ({
           fluid={imageData}
           backgroundColor="transparent"
         >
-          <div className={classes.backgroundGradient} />
+          {linearGradient !== 'unset' && <div className={classes.backgroundGradient} />}
           {textJSX}
           <div className={classes.children}>{children}</div>
         </BackgroundImage>

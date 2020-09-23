@@ -1,9 +1,9 @@
 import React from 'react';
 import { graphql, StaticQuery } from 'gatsby';
 import { Theme, makeStyles } from '@material-ui/core';
+
 import Title from 'web-components/lib/components/title';
 import ResourceCardsSlider from 'web-components/lib/components/sliders/ResourceCards';
-
 import BackgroundSection from '../../components/BackgroundSection';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -15,13 +15,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   section: {
     borderBottom: `1px solid ${theme.palette.grey[300]}`,
-    [theme.breakpoints.up('sm')]: {
-      paddingTop: theme.spacing(21.5),
-    },
-    [theme.breakpoints.down('xs')]: {
-      paddingLeft: theme.spacing(3),
-      paddingTop: theme.spacing(17),
-    },
   },
 }));
 
@@ -63,6 +56,7 @@ const RegistrySection = (): JSX.Element => {
               className={classes.section}
               linearGradient="unset"
               imageData={data.background.childImageSharp.fluid}
+              topSection={false}
             >
               <Title className={classes.title} variant="h3" align="left">
                 {content.header}

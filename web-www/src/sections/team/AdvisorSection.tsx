@@ -14,6 +14,7 @@ const AdvisorSection = (): JSX.Element => {
           advisors {
             name
             title
+            description
             image {
               publicURL
             }

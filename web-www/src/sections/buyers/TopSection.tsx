@@ -40,6 +40,7 @@ const TopSection = () => {
   return (
     <BackgroundSection
       header={content.header}
+      linearGradient="linear-gradient(180deg, rgba(255, 249, 238, 0.74) 0%, rgba(255, 249, 238, 0) 27.6%), linear-gradient(209.5deg, #FAEBD1 12.63%, #7DC9BF 44.03%, #515D89 75.43%)"
       body={
         <span>
           {content.body.start}{' '}

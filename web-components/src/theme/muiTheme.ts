@@ -17,7 +17,7 @@ const defaultTheme = createMuiTheme({
     values: {
       xs: 0,
       sm: 600,
-      tablet: 800,
+      tablet: 834,
       md: 1064,
       lg: 1280,
       xl: 1400,
@@ -124,6 +124,9 @@ const theme = createMuiTheme({
     },
     body2: {
       fontSize: '0.875rem',
+    },
+    overline: {
+      fontFamily: ['PT Mono', '"Lato"', '-apple-system', 'sans-serif'].join(','),
     },
   },
   breakpoints: defaultTheme.breakpoints,

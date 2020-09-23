@@ -7,12 +7,15 @@ import EyeIcon from '../icons/EyeIcon';
 import MediaCard from './MediaCard';
 
 export interface ResourcesCardProps {
-  image: any;
+  image: { publicURL: string };
   title: string;
-  updated: string;
+  updated?: string;
   description: string;
   buttonText: string;
   link: string;
+  target?: string;
+  backgroundGradient?: boolean;
+  titleOverwrite?: boolean;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -60,6 +63,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     border: '2px solid #4FB573',
     '& .MuiButton-label': {
       textAlign: 'center',
+      display: 'flex',
     },
     [theme.breakpoints.up('sm')]: {
       width: 'fit-content',
@@ -69,7 +73,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.down('xs')]: {
       margin: '0 auto',
       width: '100%',
-      marginBottom: theme.spacing(3.5),
+      marginBottom: theme.spacing(7.5),
       marginTop: theme.spacing(3.5),
     },
   },
@@ -96,6 +100,9 @@ export default function ResourcesCard({
   description,
   buttonText,
   link,
+  target = '_blank',
+  backgroundGradient = true,
+  titleOverwrite = true,
 }: ResourcesCardProps): JSX.Element {
   const classes = useStyles();
   return (
@@ -105,16 +112,20 @@ export default function ResourcesCard({
       imgSrc={image.publicURL}
       borderRadius="10px"
       elevation={1}
+      backgroundGradient={backgroundGradient}
+      titleOverwrite={titleOverwrite}
     >
       <div className={classes.text}>
-        <Typography className={classes.lastUpdated}>
-          <span className={classes.lastUpdatedLabel}>Last Updated: </span>
-          {updated}
-        </Typography>
+        {updated && (
+          <Typography className={classes.lastUpdated}>
+            <span className={classes.lastUpdatedLabel}>Last Updated: </span>
+            {updated}
+          </Typography>
+        )}
         {description && <Typography className={classes.description}>{description}</Typography>}
       </div>
       <div className={classes.buttonWrapper}>
-        <OutlinedButton target="_blank" href={link} className={classes.button}>
+        <OutlinedButton target={target} href={link} className={classes.button}>
           <EyeIcon className={classes.eyeIcon} />
           {buttonText}
         </OutlinedButton>

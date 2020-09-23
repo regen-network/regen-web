@@ -564,9 +564,10 @@ collections:
     editor:
       preview: false
     create: true
+    extension: yaml
     folder: "web-www/content/case-study-items"
-    path: '{{slug}}'
     summary: '{{name}}'
+    identifier_field: slug
     fields:
       - { label: 'name', name: 'name', widget: 'string' }
       - { label: 'slug', name: 'slug', widget: 'string' }

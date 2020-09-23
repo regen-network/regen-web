@@ -46,9 +46,6 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
 
   const headerTransparent: BoolProps = {
     '/faq/': false,
-    '/team/': true,
-    '/developers/': true,
-    '/invest/': true,
   };
 
   const footerPaddingBottom: BoolProps = {
@@ -59,7 +56,7 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
   // Links in rest of the site must use the trailing '/'
   // in order for these to work appropriately
   const headerNoBorderBottomPages: RegExp = new RegExp(
-    '//|/buyers/|/partners/|/land-stewards/|/resources/|/team/|/developers/|/science/|/invest/|/case-studies/|/case-studies/[a-z-]+//',
+    '//|/buyers/|/partners/|/land-stewards/|/resources/|/media/|/team/|/developers/|/science/|/invest/|/case-studies/|/press-kit/|/case-studies/[a-z-]+//',
   );
 
   const menuItems: HeaderMenuItem[] = [
@@ -141,10 +138,10 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
         //   title: 'Partners',
         //   href: '/partners/',
         // },
-        // {
-        //   title: 'Media',
-        //   href: '/media/',
-        // },
+        {
+          title: 'Media',
+          href: '/media/',
+        },
         {
           title: 'Careers',
           href: 'https://apply.workable.com/regen-network/',
@@ -155,14 +152,13 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
           href: 'http://forum.goatech.org/c/regen-network/19',
           target: '_blank',
         },
-        // {
-        //   title: 'Press Kit',
-        //   href: '/press-kit/',
-        // },
+        {
+          title: 'Press Kit',
+          href: '/press-kit/',
+        },
       ],
     },
   ];
-
   return (
     <>
       <Header
@@ -170,7 +166,7 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
         transparent={transparent}
         absolute={location.pathname === '/' || headerNoBorderBottomPages.test(location.pathname)}
         color={desktopColor}
-        borderBottom={location.pathname !== '/' || !headerNoBorderBottomPages.test(location.pathname)}
+        borderBottom={location.pathname !== '/' && !headerNoBorderBottomPages.test(location.pathname)}
         pathname={location.pathname}
       />
       <div>

@@ -25,7 +25,7 @@
       "subtitle": "This is how the project developers are planning to achieve the primary impact."
     },
     "keyOutcomesActivities": {
-      "title": "Key activities and outcomes"
+      "title": "Carbon credits best practices:"
     },
     "timeline": {
       "title": "Timeline"
@@ -299,7 +299,7 @@
             },
             {
               "name": "Perennial pasture",
-              "description": "Establishing perennial pasture on salt effected, low lying or marginally productive land increases the agricultural production of the land as well as supporting a more stable year round climate for soil biology.",
+              "description": "Establishing perennial pasture on salt effected, low lying, or marginally productive land increases the agricultural production of the land as well as supporting a more stable year round climate for soil biology.",
               "imgSrc": "perennial-pasture.png"
             }
           ]
@@ -378,15 +378,69 @@
     },
     {
       "id": "impactag",
-      "documents": [{
-        "name": "Example name",
-        "type": "Example type",
-        "date": "March 15, 2020",
-        "url": "test"
-      }],
+      "timeline": {
+        "completedItemIndex": 4,
+        "events": [
+          {
+            "title": "Credit term begins",
+            "description": "Crediting Term starts at the initial monitoring date.",
+            "date": " July 1st, 2017"
+          },
+          {
+            "title": "Project registration",
+            "date": "September 4, 2020"
+          },
+          {
+            "title": "Baseline measurement",
+            "description": "Based on historical sampling data from 2017.",
+            "date": "September 8, 2020"
+          },
+          {
+            "title": "Monitoring",
+            "description": "Two rounds based on historical sampling data from 2018 & 2019.",
+            "date": "September 8, 2020"
+          },
+          {
+            "title": "Credit issuance",
+            "description": "2017-2019 Vintage issued.",
+            "date": "September 8, 2020"
+          },
+          {
+            "title": "Verification",
+            "description": "Project registration 2017-19 Vintage.",
+            "date": "September 2020"
+          }
+        ]
+      },
+      "documents": [
+        {
+          "name": "Wilmot Cattle 2017 Baseline Report",
+          "type": "Monitoring",
+          "date": "September 2, 2020",
+          "url": "https://regen-registry.s3.amazonaws.com/Wilmot+Baseline+Report+(2017).pdf"
+        },
+        {
+          "name": "Wilmot Cattle 2019 Report",
+          "type": "Monitoring",
+          "date": "September 2, 2020",
+          "url": "https://regen-registry.s3.amazonaws.com/_Wilmot+Report+(2019)_+Grassland+credits.pdf"
+        },
+        {
+          "name": "Regen Registry Project Plan",
+          "type": "Registration",
+          "date": "August 20, 2020",
+          "url": "https://regen-registry.s3.amazonaws.com/Regen+Registry+Project+Plan.pdf"
+        },
+        {
+          "name": "Sales Certificate",
+          "type": "Sales",
+          "date": "September 10, 2020",
+          "url": "https://regen-registry.s3.amazonaws.com/Sales_Certificate.pdf"
+        }
+      ],
       "stripePrice": "sku_HAqf7cJtNFynOf",
       "creditPrice": {
-        "unitPrice": 27.50,
+        "unitPrice": 27.5,
         "currency": "USD"
       },
       "name": "Wilmot Farm",
@@ -396,7 +450,10 @@
         }
       },
       "glanceImgSrc": "impactag-smallmap-top-v3.jpg",
-      "glanceText": ["Shifting to Managed Grazing can potentially sequester 16.4- 26 CO2e (Gt) by 2050.", "Wilmot Cattle Co has increased Soil Organic Carbon to 4.5% and removed 22,500 tons of CO2e in two years."],
+      "glanceText": [
+        "Increased soil organic carbon to 4.5% and removed 21,306 tons of CO2e in two years.",
+        "Improved co-benefits significantly with Soil Health ranking as excellent, Ecosystem Health as good, and Animal Welfare as excellent."
+      ],
       "place": {
         "city": "Hernani",
         "region": "New England",
@@ -430,17 +487,12 @@
         "imgSrc": "wilmot.jpg",
         "description": "Wilmot Cattle Company is an innovative, regenerative, grass-fed beef business."
       },
-      "shortDescription": "Currently operating three properties in northeastern NSW, including Wilmot in the high rainfall basalt zone on the Ebor Plateau, Woodburn on the eastern fall north of Walcha and Morocco, north of Gunnedah.",
-      "longDescription": "Wilmot is an extraordinary property high in the New England Tablelands at Ebor. Set on 1,854ha and at approximately 1,200m above sea level, average annual rainfall of 1,200mm, highly fertile volcanic basalt soils, and complimented by a series of pristine spring fed, year-round natural waterways including five waterfalls, it is quite simply a unique environment for growing cattle.\n\nPrior to the commencement of Wilmot Cattle Company operations in 2008 the property had been conventionally managed. In 2013, a transformation of the property began, moving to more regenerative and holistic management practices, resulting in significant gains in the overall ecological health of the farm.\n\nToday the property is managed in an intensive rotationally grazed system with small numbers of large mobs moving across the landscape, mimicking nature, to create ecological change and improve landscape health and biological function. At shovel depth, our soil organic carbon (SOC) has improved from ~2.5% to >4.5%, with a goal of getting it to >6% by 2023.",
+      "shortDescription": "Wilmot Cattle Co currently operates two properties, Wilmot Farm and Woodburn Farm. The two properties operate cooperatively with a mix of breeding, trading, and 100% natural grass finishing enterprises.",
+      "longDescription": "Wilmot Farm is located high in the New England Tablelands in Ebor, Australia. At approximately 1,200 meters above sea level, the 1,854 hectare property has an average annual rainfall of 1,200 mm, highly fertile volcanic basalt soils, pristine spring fed, year-round natural waterways, including five waterfalls. It is a unique environment for growing cattle.\n\nPrior to the commencement of Wilmot Cattle Company operations in 2008, the property had been conventionally managed. In 2013, a property transformation began, adopting regenerative and holistic management practices and resulting in significant gains in the overall ecological health of the farm.\n\nToday the property is managed in an intensive rotationally-grazed system with small numbers of large mobs moving across the landscape, mimicking nature, to create ecological change and improve landscape health and biological function. At shovel depth, our soil organic carbon (SOC) has improved from ~2.5% to >4.5%, with a goal of getting it to >6% by 2023.",
       "media": [
         {
           "src": "Wilmot5.jpg",
           "thumbnail": "Wilmot5-thumbnail.jpg"
-        },
-        {
-          "src": "99D630701C84FDBD8CD9A96E7E989489.mov",
-          "thumbnail": "Wilmot2-thumbnail.jpg",
-          "preview": "Wilmot2.jpg"
         },
         {
           "src": "Wilmot3.jpg",
@@ -453,43 +505,50 @@
         {
           "src": "Wilmot6.jpg",
           "thumbnail": "Wilmot6-thumbnail.jpg"
+        },
+        {
+          "src": "https://regen-registry.s3.amazonaws.com/Wilmot+Video.mp4",
+          "thumbnail": "Wilmot2-thumbnail.jpg",
+          "preview": "Wilmot2.jpg"
         }
       ],
       "image": "wilmotcattlecompany.jpg",
       "map": "Wilmot_boundary.kml",
       "keyOutcomesActivities": [
-        "We will limit mechanical, chemical and physical disturbance of soil wherever possible.",
-        "We will aim for 100% groundcover 100% of the time.",
-        "We will encourage all plant diversity - let all plants grow.",
-        "We will endeavour to keep a living plant in the soil as much as possible, in order to sustain biological life in the soil.",
-        "We will use animals to assist in improving soil health."
+        "Independently verified",
+        "Unique - avoiding double issuance through GIS tracking",
+        "Real - GHG impact is quantifiable and verifiable",
+        "Measurable - each credit represents one ton of CO2e",
+        "Permanent - 25 year period through reversal buffer or covenant",
+        "Additional - a new practice adopted from pre-approved list",
+        "Leakage - de minimis in agricultural land management"
       ],
       "landManagementActions": [
         {
           "actions": [
             {
               "name": "Time Controlled Rotational Grazing",
-              "description": "Since 2013 the Wilmot Cattle Co. has implemented time controlled rotational grazing at the Wilmot property. Simply, time controlled rotational grazing optimises the number of stock in a paddock and matches grazing period with available pasture. The aim is to mirror natural herding behaviours by having short graze periods at high density followed by long rest periods allowing the pasture to recover. When managed well, this grazing system increases groundcover, biomass, plant diversity, animal and plant nutrition, soil health, water infiltration and soil organic carbon. A more complete explanation of the science, monitoring tools and management practices is provided below.",
+              "description": "Since 2013, Wilmot Cattle Co. has implemented time controlled rotational grazing at Wilmot Farm. In order to mirror natural herding behaviors, time controlled rotational grazing optimizes the number of stock in a paddock, matches the grazing period with available pasture, shortens grazing periods in each paddock, and follows these activities by long resting periods to allow the pasture to recover. When managed well, this grazing system increases groundcover, biomass, plant diversity, animal and plant nutrition, soil health, water infiltration and soil organic carbon. A more complete explanation of the science, monitoring tools and management practices is provided below.",
               "imgSrc": "time-controlled-rotational-grazing.jpg"
             },
             {
               "name": "Decrease Paddock Size",
-              "description": "Paddock sizes need to decrease to enable effective grazing of the whole paddock at a controllable density. A significant subdivision program has been completed resulting in an average paddock size at Wilmot of 25 hectares.",
+              "description": "Decreased paddock sizes enable effective grazing at a controllable density. Wilmot Farm has adopted a paddock subdivision program with an average paddock size of 25 hectares.",
               "imgSrc": "decrease-paddock-size.jpg"
             },
             {
               "name": "Increase Stock Density",
-              "description": "Carefully managed, high stock densities will lead to evenly grazed pastures and nutrient recycling. At high stock densities animals will increase pasture health and performance by trampling (or recycling) a higher proportion of biomass and evenly distributing dung and urine (nutrients).",
+              "description": "Carefully managed, high stock densities lead to evenly grazed pastures, nutrient recycling, increases in pasture health and performance by trampling (or recycling) a higher proportion of biomass, and evenly distributing dung and urine (nutrients).",
               "imgSrc": "increase-stock-density.jpg"
             },
             {
               "name": "Monitor Pasture Growth",
-              "description": "Accurate and timely measurement of pasture growth, and therefore available feed, is required to determine how many animals should be in a paddock and for how long.",
+              "description": "Accurate measurement of pasture growth (available feed) determines the density of animals and length of time in a paddock.",
               "imgSrc": "monitor-pasture-growth.jpg"
             },
             {
               "name": "Manage Grazing Periods",
-              "description": "To ensure grazing practices are implemented effectively, and that there is a record of management practices, Wilmot utilises the online tool <a href=\"https://www.maiagrazing.com/\" rel=\"noopener noreferrer\" target=\"_blank\">Maia Grazing</a>. Maia Grazing uses climatic data and field observations to determine pasture growth and optimal stocking rates. It then tracks all stock movements and ensures the stocking rate does not exceed the carrying capacity of each paddock.",
+              "description": "To ensure effectively implemented grazing practices and management practices records, Wilmot Farm utilizes the online tool <a href=\"https://www.maiagrazing.com/\" rel=\"noopener noreferrer\" target=\"_blank\">Maia Grazing</a>. Maia Grazing uses climatic data and field observations to determine pasture growth and optimal stocking rates, tracks stock movements, and ensures the stocking rate does not exceed the carrying capacity of each paddock.",
               "imgSrc": "manage-grazing-periods.jpg"
             }
           ]
@@ -498,39 +557,39 @@
       "impact": [
         {
           "name": "Soil organic carbon",
-          "description": "Sequestering carbon in SOC is one way to mitigate climate change.",
+          "description": "Each credit represents one ton of CO2e (1t CO2e) that has been sequestered in the soil.",
           "monitored": true,
           "imgSrc": "impactag-soc.jpg"
         },
         {
           "name": "Ecosystem health",
-          "description": "In the ecological realm, ‘health’ is characterized by system integrity and the exhibition of certain fundamental properties of self-organizing complex systems.",
+          "description": "We rank the ecosystem health based on the Costanza Framework, measuring its ability to maintain  structure (organization) and function (vigor) over time in the face of external stress (resilience).",
           "monitored": false,
           "imgSrc": "ecological-health.png"
         },
         {
           "name": "Animal welfare",
-          "description": "Animal welfare is an important component in a well managed grazing enterprise. Low stress stock handling techniques have been adopted to ensure animals have higher quality life.",
+          "description": "We rank animal welfare based on adherence to national animal welfare standards that track nutrition level, access to water, social contact and more.",
           "monitored": false,
           "imgSrc": "animal-welfare.png"
         },
         {
           "name": "Soil health",
-          "description": "We will limit mechanical, chemical and physical disturbance of soil wherever possible, and aim for 100% groundcover 100% of the time.",
+          "description": "We rank the soil health based on Cornell University’s Soil Health Assessment looking at both micronutrients and macronutrients.",
           "monitored": false,
           "imgSrc": "soil.png"
         }
       ],
       "creditClass": {
-        "name": "Soil Carbon Credit",
-        "description": "Measured increases in SOC have been used to calculate the carbon sequestration rate in the top 15cm of topsoil across the Wilmot property. Using Wilmot’s soil monitoring database and remote sensing technology, the Regen Network has been able to calculate and verify a Soil Carbon Credit for the Wilmot property.",
+        "name": "Carbon Plus Grasslands (beta)",
+        "description": "Livestock grazing covers over 3.3 billion hectares, or 25 percent of the world’s land area. Managed grazing practices can reverse land degradation, enhance net carbon sequestration, and improve soil and vegetation quality.<br><br>Under managed grazing, carbon sequestration potential is estimated between 16.4 and 26 Gt CO2e sequestered in the period between 2020-2050.<br><br>This credit is designed to significantly increase the amount of hectares under managed grazing worldwide. To that end, the methodology relies on remote sensing to substantially reduce the cost of monitoring carbon sequestration while maintaining scientific rigor.",
         "tag": "soil organic carbon"
       },
       "credits": {
         "purchased": 0,
         "issued": 0
       },
-      "hideCreditDetails": true
+      "hideCreditDetails": false
     }
   ]
 }

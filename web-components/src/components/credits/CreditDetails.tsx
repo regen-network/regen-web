@@ -1,14 +1,26 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
-import { useTheme } from '@material-ui/core/styles';
-
+import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
+import ReactHtmlParser from 'react-html-parser';
 import Typography from '@material-ui/core/Typography';
+
 import Title from '../title';
 import CreditsIcon from '../icons/CreditsIcon';
 
-interface CreditInfoProps {
+export interface Methodology {
+  name: string;
+}
+
+export interface CreditClass {
   name: string;
   description: string;
+  methodology?: Methodology;
+  tag: string;
+  imgSrc?: string;
+  keyOutcomesActivitiesDesc?: string;
+}
+
+interface CreditInfoProps {
+  creditClass: CreditClass;
   activities: string[];
   background?: string;
   title: string;
@@ -53,19 +65,31 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   activities: {
     color: theme.palette.info.dark,
     margin: 0,
-    paddingInlineStart: theme.spacing(4),
+    paddingInlineStart: theme.spacing(2.5),
     listStyle: 'none',
     marginTop: theme.spacing(4.5),
   },
   activity: {
-    fontSize: '0.875rem',
+    [theme.breakpoints.up('sm')]: {
+      fontSize: theme.spacing(4.5),
+    },
+    [theme.breakpoints.down('xs')]: {
+      fontSize: theme.spacing(3.5),
+    },
+    display: 'flex',
     paddingBottom: theme.spacing(1.5),
-    '& li::before': {
-      content: "'\\2022'",
-      color: theme.palette.secondary.main,
-      display: 'inline-block',
-      width: '1em',
-      marginLeft: '-1em',
+  },
+  bullet: {
+    color: theme.palette.secondary.main,
+    display: 'inline-block',
+    marginLeft: '-0.6rem',
+    fontSize: theme.spacing(2),
+    paddingRight: theme.spacing(1.25),
+    [theme.breakpoints.up('sm')]: {
+      paddingTop: theme.spacing(1.75),
+    },
+    [theme.breakpoints.down('xs')]: {
+      paddingTop: theme.spacing(1.25),
     },
   },
   icon: {
@@ -125,11 +149,15 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       fontSize: '1.125rem',
     },
   },
+  activitiesDesc: {
+    marginLeft: theme.spacing(-2.5),
+    fontSize: theme.spacing(3.5),
+    marginBottom: theme.spacing(1.25),
+  },
 }));
 
 export default function CreditInfo({
-  name,
-  description,
+  creditClass,
   activities,
   background,
   title,
@@ -145,11 +173,13 @@ export default function CreditInfo({
             <span className={classes.icon}>
               <CreditsIcon color={theme.palette.secondary.main} />
             </span>
-            {name}
+            {creditClass.name}
           </Title>
         </div>
         <div className={classes.descriptionItem}>
-          <Typography className={classes.description}>{description}</Typography>
+          <Typography component="div" className={classes.description}>
+            {ReactHtmlParser(creditClass.description)}
+          </Typography>
         </div>
         <div className={classes.activitiesTitleContainer}>
           <Title className={classes.activitiesTitle} variant="h4">
@@ -158,8 +188,14 @@ export default function CreditInfo({
         </div>
         <div className={classes.activitiesItem}>
           <ul className={classes.activities}>
+            {creditClass.keyOutcomesActivitiesDesc && (
+              <Typography className={classes.activitiesDesc}>
+                {creditClass.keyOutcomesActivitiesDesc}
+              </Typography>
+            )}
             {activities.map((activity, index) => (
-              <Typography key={index} className={classes.activity}>
+              <Typography component="div" key={index} className={classes.activity}>
+                <div className={classes.bullet}>•</div>
                 <li>{activity}</li>
               </Typography>
             ))}

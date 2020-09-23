@@ -29,6 +29,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   img: {
+    objectFit: 'cover',
     position: 'absolute',
     width: theme.spacing(38.5),
     height: theme.spacing(37.75),

@@ -106,10 +106,10 @@ function AppFooter(): JSX.Element {
         //   title: 'Partners',
         //   href: `${process.env.REACT_APP_WEBSITE_URL}/partners/`,
         // },
-        // {
-        //   title: 'Media',
-        //   href: `${process.env.REACT_APP_WEBSITE_URL}/media/`,
-        // },
+        {
+          title: 'Media',
+          href: `${process.env.REACT_APP_WEBSITE_URL}/media/`,
+        },
         {
           title: 'Careers',
           href: 'https://apply.workable.com/regen-network/',
@@ -120,10 +120,10 @@ function AppFooter(): JSX.Element {
           href: 'http://forum.goatech.org/c/regen-network/19',
           target: '_blank',
         },
-        // {
-        //   title: 'Press Kit',
-        //   href: `${process.env.REACT_APP_WEBSITE_URL}/press-kit/`,
-        // },
+        {
+          title: 'Press Kit',
+          href: `${process.env.REACT_APP_WEBSITE_URL}/press-kit/`,
+        },
       ],
     },
   ];

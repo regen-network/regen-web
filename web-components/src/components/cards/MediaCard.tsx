@@ -61,6 +61,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   title: {
     lineHeight: '150%',
+    borderTop: `1px solid ${theme.palette.grey[100]}`,
     [theme.breakpoints.up('sm')]: {
       padding: `${theme.spacing(4.5)} ${theme.spacing(5.25)} ${theme.spacing(0.8)}`,
     },

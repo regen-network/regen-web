@@ -1,5 +1,5 @@
 ---
-category: Development
+category: Developers
 title: "1"
 description: When will you launch the first version of Regen Ledger?
 ---

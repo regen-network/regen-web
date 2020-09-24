@@ -1,6 +1,6 @@
 import * as React from 'react';
 import CreditDetails, { CreditInfoProps } from 'web-components/lib/components/credits/CreditDetails';
-import { withKnobs, text, array, number, object } from '@storybook/addon-knobs';
+import { withKnobs, array, number, object } from '@storybook/addon-knobs';
 
 // import Credits from 'web-components/lib/components/credits/';
 // import Gauge from 'web-components/lib/components/credits/Gauge';

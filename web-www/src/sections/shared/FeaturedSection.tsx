@@ -50,7 +50,8 @@ const useStyles = makeStyles((theme: Theme) => ({
       width: '60%',
     },
     [theme.breakpoints.up('sm')]: {
-      width: '50%',
+      paddingRight: theme.spacing(7),
+      paddingLeft: theme.spacing(7),
     },
   },
   card: {
@@ -110,7 +111,7 @@ const ApproachSection = () => {
                 {ReactHtmlParser(content.description)}
               </Typography>
               <ContainedButton href={content.link} className={classes.button}>
-                buy
+                more details
               </ContainedButton>
             </Grid>
             <Grid item xs={12}>

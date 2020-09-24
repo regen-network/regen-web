@@ -351,6 +351,7 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
     <CreditDetails
       creditClass={project.creditClass}
       activities={project.keyOutcomesActivities}
+      background={background}
       title={
         project.fieldsOverride && project.fieldsOverride.keyOutcomesActivities
           ? project.fieldsOverride.keyOutcomesActivities.title

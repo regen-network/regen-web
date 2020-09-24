@@ -1,5 +1,5 @@
 ---
-category: Development
+category: Developers
 title: "2"
 description: When can I try the system out?
 ---

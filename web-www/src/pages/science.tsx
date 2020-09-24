@@ -29,9 +29,9 @@ const SciencePage = (): JSX.Element => {
       <TitleDescriptionSection />
       <OpenScienceSection />
       <PartnershipsSection />
-      <BlogSection />
-      <EmailSubmitSection image={data.image.childImageSharp.fluid} />
       <CommunitySection />
+      <EmailSubmitSection image={data.image.childImageSharp.fluid} />
+      <BlogSection />
     </>
   );
 };

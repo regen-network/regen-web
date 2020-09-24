@@ -102,10 +102,10 @@ function AppFooter(): JSX.Element {
     {
       title: 'regen',
       items: [
-        // {
-        //   title: 'Partners',
-        //   href: `${process.env.REACT_APP_WEBSITE_URL}/partners/`,
-        // },
+        {
+          title: 'Partners',
+          href: `${process.env.REACT_APP_WEBSITE_URL}/partners/`,
+        },
         // {
         //   title: 'Media',
         //   href: `${process.env.REACT_APP_WEBSITE_URL}/media/`,

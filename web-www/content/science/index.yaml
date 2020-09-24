@@ -58,26 +58,28 @@ communitySection:
   caption: Connect
   header: Science Community
   members:
-    - name: Luke Smith
+    - name: Patrick Lawrence
       image: ../../static/media/patrick-lawrence.png
       role: regen team
+      description: xx
+    - name: Dan Kane
+      image: ../../static/media/dan-kane.png
+      role: Placeholder role 2
+      description: Dan is a Ph.D. candidate at Yale School of the Environment and lead
+        researcher on Quick Carbon. He is also a contributing member of the
+        OpenTEAM field methods and technology working groups.
+    - name: Luke Smith
+      image: ../../static/media/luke-smith.png
+      role: Placeholder role 3
       description: Luke works at the intersection of culture, ecology and economy to
         regenerate living systems and evolve the role of human beings as a
         keystone species. He convenes farmers, brands, investors & nonprofits to
         curate processes for regenerative agriculture and supply development.
-    - name: Placeholder name 2
-      image: ../../static/media/dan-kane.png
-      role: Placeholder role 2
-      description: Placeholder description 2
-    - name: Placeholder name 3
-      image: ../../static/media/luke-smith.png
-      role: Placeholder role 3
-      description: Placeholder description 3
-    - name: Placeholder name 4
+    - name: Dorn Cox
       image: ../../static/media/dorn-cox.png
       role: Placeholder role 4
       description: Placeholder description 4
-    - name: Placeholder name 5
+    - name: Greg Austic
       image: ../../static/media/greg-austic.png
       role: Placeholder role 5
       description: Placeholder description 5

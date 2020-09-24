@@ -23,6 +23,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     backgroundColor: theme.palette.grey[50],
     overflow: 'hidden',
   },
+  sectionWrapper: {
+    width: '100%',
+    backgroundColor: theme.palette.grey[50],
+  },
   item: {
     width: theme.spacing(90.25),
     height: theme.spacing(62.5),
@@ -95,37 +99,39 @@ const PartnersPage = (): JSX.Element => {
   return (
     <>
       <SEO title="Partners" />
-      <Section className={classes.section}>
-        <Title className={classes.title} align="center" variant="h1">
-          Our Partners
-        </Title>
-        <Grid spacing={7} justify="center" direction="row" alignItems="center" container>
-          {partners.map((partner: any) => (
-            <Grid className={classes.item} xs={12} sm={4} item key={partner.sortOrder}>
-              <a href={partner.link} target="_blank" rel="noopener noreferrer">
-                <GreenCard className={classes.card}>
-                  {partner.image ? (
-                    <img className={classes.img} src={partner.image} alt={partner.image} />
-                  ) : (
-                    ''
-                  )}
-                </GreenCard>
-              </a>
+      <div className={classes.sectionWrapper}>
+        <Section className={classes.section}>
+          <Title className={classes.title} align="center" variant="h1">
+            Our Partners
+          </Title>
+          <Grid spacing={7} justify="center" direction="row" alignItems="center" container>
+            {partners.map((partner: any) => (
+              <Grid className={classes.item} xs={12} sm={4} item key={partner.sortOrder}>
+                <a href={partner.link} target="_blank" rel="noopener noreferrer">
+                  <GreenCard className={classes.card}>
+                    {partner.image ? (
+                      <img className={classes.img} src={partner.image} alt={partner.image} />
+                    ) : (
+                      ''
+                    )}
+                  </GreenCard>
+                </a>
+              </Grid>
+            ))}
+            <Grid className={classes.item} xs={12} sm={6} md={4} item key={'contact'}>
+              <GreenCard className={clsx(classes.card, classes.contactCard)}>
+                <Title align="center" variant="h4">
+                  Your Organization?
+                </Title>
+                <Typography className={classes.contactText}>
+                  Contact us at <a href="mailto:office@regen.network">office@regen.network</a> about
+                  partnership opportunities.
+                </Typography>
+              </GreenCard>
             </Grid>
-          ))}
-          <Grid className={classes.item} xs={12} sm={6} md={4} item key={'contact'}>
-            <GreenCard className={clsx(classes.card, classes.contactCard)}>
-              <Title align="center" variant="h4">
-                Your Organization?
-              </Title>
-              <Typography className={classes.contactText}>
-                Contact us at <a href="mailto:office@regen.network">office@regen.network</a> about partnership
-                opportunities.
-              </Typography>
-            </GreenCard>
           </Grid>
-        </Grid>
-      </Section>
+        </Section>
+      </div>
     </>
   );
 };

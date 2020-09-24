@@ -46,7 +46,10 @@ const BuyersPage = ({ location }): JSX.Element => {
 
   return (
     <>
-      <SEO title="For Buyers" />
+      <SEO
+        description="Buy carbon credits and other ecosystem system service credits to meet your climate commitments and sustainability goals."
+        title="For Buyers"
+      />
       <TopSection />
       <ImageGridSection />
       {/* <ApproachSection />

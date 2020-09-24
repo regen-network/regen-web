@@ -37,7 +37,10 @@ const IndexPage = (): JSX.Element => {
 
   return (
     <>
-      <SEO title="Home" />
+      <SEO
+        description="Buy and sell ecosystem service credits at the open marketplace for climate solutions."
+        title="Regen Network"
+      />
       <HomeFoldSection />
       <MarketplaceSection />
       <EmailSubmitSection />

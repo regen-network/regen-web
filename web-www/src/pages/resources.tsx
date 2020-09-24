@@ -8,7 +8,10 @@ import SEO from '../components/seo';
 const ResourcesPage = (): JSX.Element => {
   return (
     <>
-      <SEO title="Resources" />
+      <SEO
+        description="Learn more about the ins and outs of how the Regen Ledger and Regen Registry function."
+        title="Resources"
+      />
       <TopSection />
       <RegistrySection />
       <LedgerSection />

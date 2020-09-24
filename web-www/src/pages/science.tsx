@@ -24,7 +24,10 @@ const SciencePage = (): JSX.Element => {
   `);
   return (
     <>
-      <SEO title="Science" />
+      <SEO
+        description="Regen Network is building an open, peer to peer scientific data and methodology commons in service to cutting edge earth observation science for climate action."
+        title="Science"
+      />
       <TopSection />
       <TitleDescriptionSection />
       <OpenScienceSection />

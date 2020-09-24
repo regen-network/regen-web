@@ -10,7 +10,10 @@ import BlogSection from '../sections/shared/BlogSection';
 const DevelopersPage = (): JSX.Element => {
   return (
     <>
-      <SEO title="For Developers" />
+      <SEO
+        description="The Regen Ledger blockchain enables our community to develop a suite of platforms and applications in service of regenerating human relationships with land - join us."
+        title="For Developers"
+      />
       <TopSection />
       <LedgerSection />
       <TestnetSection />

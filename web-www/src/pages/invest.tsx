@@ -7,7 +7,7 @@ import SEO from '../components/seo';
 const InvestorsPage = (): JSX.Element => {
   return (
     <>
-      <SEO title="Invest" />
+      <SEO description="Learn about investment opportunities at Regen Network." title="Invest" />
       <TopSection />
       <FormSection />
     </>

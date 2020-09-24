@@ -12,13 +12,13 @@ import clsx from 'clsx';
 
 const useStyles = makeStyles((theme: Theme) => ({
   section: {
-    [theme.breakpoints.up('sm')]: {
-      paddingTop: theme.spacing(42.25),
-      paddingBottom: theme.spacing(23),
-    },
     [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(24.5),
       paddingBottom: theme.spacing(15),
+    },
+    [theme.breakpoints.up('sm')]: {
+      paddingTop: theme.spacing(42.25),
+      paddingBottom: theme.spacing(23),
     },
     backgroundColor: theme.palette.grey[50],
     overflow: 'hidden',
@@ -69,11 +69,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     paddingTop: theme.spacing(3.25),
   },
   title: {
-    [theme.breakpoints.up('sm')]: {
-      paddingBottom: theme.spacing(21.75),
-    },
     [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(10.25),
+    },
+    [theme.breakpoints.up('sm')]: {
+      paddingBottom: theme.spacing(21.75),
     },
   },
 }));
@@ -84,10 +84,15 @@ const PartnersPage = (): JSX.Element => {
       allPartnersYaml(sort: { order: ASC }) {
         edges {
           node {
+            header
             partnerLogos {
               image
               link
               sortOrder
+            }
+            contactCard {
+              header
+              body
             }
           }
         }
@@ -95,6 +100,8 @@ const PartnersPage = (): JSX.Element => {
     }
   `);
   const partners = data.allPartnersYaml.edges[0].node.partnerLogos;
+  const header = data.allPartnersYaml.edges[0].node.header;
+  const contactCard = data.allPartnersYaml.edges[0].node.contactCard;
   const classes = useStyles();
   return (
     <>
@@ -102,7 +109,7 @@ const PartnersPage = (): JSX.Element => {
       <div className={classes.sectionWrapper}>
         <Section className={classes.section}>
           <Title className={classes.title} align="center" variant="h1">
-            Our Partners
+            {header}
           </Title>
           <Grid spacing={7} justify="center" direction="row" alignItems="center" container>
             {partners.map((partner: any) => (
@@ -121,12 +128,12 @@ const PartnersPage = (): JSX.Element => {
             <Grid className={classes.item} xs={12} sm={6} md={4} item key={'contact'}>
               <GreenCard className={clsx(classes.card, classes.contactCard)}>
                 <Title align="center" variant="h4">
-                  Your Organization?
+                  {contactCard.header}
                 </Title>
-                <Typography className={classes.contactText}>
-                  Contact us at <a href="mailto:office@regen.network">office@regen.network</a> about
-                  partnership opportunities.
-                </Typography>
+                <Typography
+                  className={classes.contactText}
+                  dangerouslySetInnerHTML={{ __html: contactCard.body }}
+                ></Typography>
               </GreenCard>
             </Grid>
           </Grid>

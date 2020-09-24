@@ -1,3 +1,4 @@
+header: Our Partners
 partnerLogos:
   - image: '../../media/partners/rainforest-foundation.jpg'
     link: http://www.rainforestfoundation.org/
@@ -62,4 +63,6 @@ partnerLogos:
   - image: '../../media/partners/chorus-one.jpg'
     link: https://chorus.one/
     sortOrder: 21
-  
+contactCard:
+  header: Your Organization?
+  body: md//Contact us at [office@regen.network](mailto:office@regen.network) about partnership opportunities.

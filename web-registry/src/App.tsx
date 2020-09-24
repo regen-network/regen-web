@@ -120,10 +120,10 @@ function AppFooter(): JSX.Element {
           href: 'http://forum.goatech.org/c/regen-network/19',
           target: '_blank',
         },
-        // {
-        //   title: 'Press Kit',
-        //   href: `${process.env.REACT_APP_WEBSITE_URL}/press-kit/`,
-        // },
+        {
+          title: 'Press Kit',
+          href: `${process.env.REACT_APP_WEBSITE_URL}/press-kit/`,
+        },
       ],
     },
   ];

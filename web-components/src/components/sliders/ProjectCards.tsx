@@ -23,6 +23,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.down('xs')]: {
       width: '85%',
     },
+    '& .slick-list': {
+      [theme.breakpoints.down('md')]: {
+        overflow: 'visible',
+      },
+    },
     '& .slick-track': {
       display: 'flex',
       '& .slick-slide': {

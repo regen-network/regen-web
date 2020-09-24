@@ -60,6 +60,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     background: 'linear-gradient(180.28deg, rgba(0, 0, 0, 0) 65.91%, rgba(0, 0, 0, 0.6) 99.59%)',
   },
   title: {
+    lineHeight: '150%',
+    borderTop: `1px solid ${theme.palette.grey[100]}`,
     [theme.breakpoints.up('sm')]: {
       padding: `${theme.spacing(4.5)} ${theme.spacing(5.25)} ${theme.spacing(0.8)}`,
     },

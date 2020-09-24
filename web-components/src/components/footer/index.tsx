@@ -168,6 +168,9 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       marginBottom: theme.spacing(11.25),
     },
   },
+  smallIcon: {
+    padding: theme.spacing(1.25),
+  },
 }));
 
 const FooterItem = ({ title, items }: FooterItemProps): JSX.Element => {
@@ -264,7 +267,7 @@ export default function Footer({
               rel="noopener noreferrer"
               target="_blank"
             >
-              <YoutubeIcon className={classes.icon} />
+              <YoutubeIcon className={clsx(classes.smallIcon, classes.icon)} />
             </Link>
             <Link href="https://github.com/regen-network/" rel="noopener noreferrer" target="_blank">
               <GithubIcon className={classes.icon} />

@@ -47,8 +47,8 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       paddingTop: props.title ? theme.spacing(8) : 0,
     },
     '& .slick-list': {
-      [theme.breakpoints.up(theme.breakpoints.values.tablet)]: {
-        overflow: 'hidden',
+      [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
+        overflow: 'visible',
       },
     },
     '& .slick-track': {

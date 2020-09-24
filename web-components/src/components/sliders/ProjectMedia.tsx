@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useRef, useCallback, useLayoutEffect } from 'react';
 import { makeStyles, Theme, useMediaQuery, useTheme } from '@material-ui/core';
 import Slider from 'react-slick';
 import PlayIcon from '../icons/PlayIcon';
@@ -9,22 +9,31 @@ export interface Media {
   type?: string;
   preview?: string;
 }
+
 interface ProjectMediaProps {
   assets: Media[];
+  xsBorderRadius?: boolean;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+interface StyleProps {
+  xsBorderRadius: boolean;
+}
+
+const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   root: {
     [theme.breakpoints.down('xs')]: {
       marginBottom: theme.spacing(8.75),
     },
     '& .slick-dots': {
       bottom: 'auto',
+      overflow: 'hidden',
       '& ul': {
         padding: 0,
+        whiteSpace: 'nowrap',
       },
       [theme.breakpoints.up('sm')]: {
         textAlign: 'left',
+        paddingTop: theme.spacing(3.5),
         '& ul': {
           marginLeft: '-8px',
           '& li': {
@@ -40,6 +49,7 @@ const useStyles = makeStyles((theme: Theme) => ({
         },
       },
       [theme.breakpoints.down('xs')]: {
+        height: theme.spacing(6),
         '& ul': {
           margin: '8px 0 -6.5px',
           '& li': {
@@ -58,12 +68,14 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   thumbnail: {
     position: 'relative',
+    display: 'inline-block',
     '& img': {
       width: 60,
       height: 60,
       borderRadius: '5px',
-      border: `1px solid ${theme.palette.info.light}`,
+      // border: `1px solid ${theme.palette.info.light}`,
       boxSizing: 'border-box',
+      objectFit: 'cover',
     },
   },
   play: {
@@ -78,12 +90,15 @@ const useStyles = makeStyles((theme: Theme) => ({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  item: {
+  item: props => ({
     width: '100%',
     [theme.breakpoints.up('sm')]: {
       borderRadius: '5px',
     },
-  },
+    [theme.breakpoints.down('xs')]: {
+      borderRadius: props.xsBorderRadius ? '5px' : 'none',
+    },
+  }),
   dot: {
     height: theme.spacing(2.5),
     width: theme.spacing(2.5),
@@ -92,10 +107,37 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function ProjectMedia({ assets }: ProjectMediaProps): JSX.Element {
-  const classes = useStyles({});
+function getThumbnailStyle(thumbsTranslate: number): object {
+  const translate: string = `translate(${thumbsTranslate}px, 0)`;
+  return {
+    WebkitTransform: translate,
+    MozTransform: translate,
+    msTransform: translate,
+    OTransform: translate,
+    transform: translate,
+  };
+}
+
+export default function ProjectMedia({ assets, xsBorderRadius = false }: ProjectMediaProps): JSX.Element {
+  const classes = useStyles({ xsBorderRadius });
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up('sm'));
+
+  let thumbnailsWrapper: any = useRef(null);
+  const [thumbnailsWrapperWidth, setThumbnailsWrapperWidth] = useState(0);
+  const [thumbnailsTranslate, setThumbnailsTranslate] = useState(0);
+
+  const handleResize = useCallback(() => {
+    if (thumbnailsWrapper && thumbnailsWrapper.current) {
+      setThumbnailsWrapperWidth(thumbnailsWrapper.current.offsetWidth);
+    }
+  }, [thumbnailsWrapper]);
+
+  useLayoutEffect(() => {
+    window.addEventListener('resize', handleResize);
+    handleResize();
+    return () => window.removeEventListener('resize', handleResize);
+  }, [handleResize]);
 
   const filteredAssets: Media[] = assets
     .map(item => {
@@ -111,16 +153,22 @@ export default function ProjectMedia({ assets }: ProjectMediaProps): JSX.Element
     })
     .filter(item => item.type === 'image' || item.type === 'video');
 
+  const thumbnailStyle: object = getThumbnailStyle(thumbnailsTranslate);
   const settings = {
     speed: 500,
-    rows: 1,
-    slidesPerRow: 1,
+    slidesToShow: 1,
+    slidesToScroll: 1,
     arrows: false,
     dots: true,
+    easing: 'ease',
     adaptiveHeight: true,
+    infinite: false,
     appendDots: (dots: any) => (
       <div>
-        <ul> {dots} </ul>
+        <ul style={thumbnailStyle} ref={thumbnailsWrapper}>
+          {' '}
+          {dots}{' '}
+        </ul>
       </div>
     ),
     customPaging: (i: number) => {
@@ -141,7 +189,28 @@ export default function ProjectMedia({ assets }: ProjectMediaProps): JSX.Element
 
   return (
     <div>
-      <Slider {...settings} className={classes.root}>
+      <Slider
+        {...settings}
+        className={classes.root}
+        beforeChange={(oldIndex: number, newIndex: number) => {
+          const indexDifference: number = Math.abs(oldIndex - newIndex);
+          const thumbnailsElement = thumbnailsWrapper && thumbnailsWrapper.current;
+          if (thumbnailsElement) {
+            if (thumbnailsElement.scrollWidth > thumbnailsWrapperWidth && thumbnailsWrapperWidth > 0) {
+              const perIndexScroll =
+                (thumbnailsElement.scrollWidth - thumbnailsWrapperWidth) / (filteredAssets.length - 1);
+              const scroll = indexDifference * perIndexScroll;
+              if (scroll > 0) {
+                if (oldIndex < newIndex) {
+                  setThumbnailsTranslate(thumbnailsTranslate - scroll);
+                } else if (oldIndex > newIndex) {
+                  setThumbnailsTranslate(thumbnailsTranslate + scroll);
+                }
+              }
+            }
+          }
+        }}
+      >
         {filteredAssets.map((item, index) => {
           if (item.type === 'image') {
             return <img key={index} src={item.src} className={classes.item} alt={item.src} />;

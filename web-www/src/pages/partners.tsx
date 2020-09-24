@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: theme.palette.primary.main,
-    borderTop: '10px #7BC796 solid',
+    borderTop: `10px ${theme.palette.secondary.dark} solid`,
     width: '100%',
     height: '100%',
     padding: 'inherit',

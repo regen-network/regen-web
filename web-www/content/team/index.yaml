@@ -76,7 +76,7 @@ coreSection:
       twitterUrl: null
       githubUrl: null
     - name: Cory Levinson
-      title: "Senior Technical Project Manager"
+      title: Senior Technical Project Manager
       description: Cory is a software engineer and technical product manager who
         gained experience in data infrastructure at SoundCloud before moving
         into blockchain in 2017. He is an alumni of Strelka Institute in Moscow,
@@ -88,7 +88,7 @@ coreSection:
       twitterUrl: https://twitter.com/kohwi
       githubUrl: https://github.com/clevinson
     - name: Dr Gisel Booman
-      title: "Lead Scientist"
+      title: Lead Scientist
       description: Dr. Booman, PhD Biological Sciences, Landscape Ecology, leads the
         integration process between the Ecological State Protocols development
         and the current state of remote sensing. Dr. Booman is experienced with
@@ -183,7 +183,7 @@ coreSection:
       twitterUrl: https://twitter.com/erikalogie
       githubUrl: https://github.com/erikalogie
     - name: "Sophia Leiker "
-      title: Data Scientist and GIS Assistant
+      title: Data Scientist and GIS Analyst
       description: >
         Sophia is a geospatial researcher with experience employing remote
         sensing techniques and GIS analysis to address environmental inquiries.
@@ -193,7 +193,7 @@ coreSection:
         management.
       image: ../../static/media/sophia.png
     - name: "Sam Bennetts "
-      title: Data Scientist and GIS Assistant
+      title: Data Scientist and GIS Analyst
       description: Sam is a GIS and remote sensing specialist focused on bridging the
         social, environmental, and computer sciences. During his academic
         career, Sam's work ranged from urbanization and land cover change

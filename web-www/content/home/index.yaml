@@ -56,7 +56,7 @@ valuesSection:
       image: '../../static/media/decentralization.svg'
       description: 'Our platform builds an empowered collective of actors, forgoing the expenses and inefficiencies of third parties'
 ledgerSection:
-  description: 'Regen Ledger is a public, proof of stake (POS) blockchain developed with the Cosmos Software
+  description: 'Regen Ledger is a public, proof of stake (PoS) blockchain developed with the Cosmos Software
     Development Kit (SDK) built for verification of claims, agreements & data related to ecological
     state. Regen Ledger enables multiple registries to communicate and transact with each other
     producing a public ecological accounting system. Get involved with our community of developers.'

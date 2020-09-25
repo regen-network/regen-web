@@ -1,7 +1,7 @@
 ---
 category: concept
 title: "3"
-description: How does your technology improve the ability to monitor ecological change?
+description: Who will use Regen Network?
 ---
 
 **The World’s Farmers** - 37% of the total land area of this planet is engaged in agriculture

@@ -1,5 +1,5 @@
 ---
-category: CarbonPlus Credits
+category: Carbonplus Credits
 title: "1"
 description: What is a CarbonPlus credit?
 ---

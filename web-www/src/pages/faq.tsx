@@ -68,7 +68,7 @@ const FAQPage = (): JSX.Element => {
       <div className={classes.root}>
         <Section title="FAQ" titleVariant="h1" titleClassName={classes.title} className={classes.section}>
           <FAQ
-            orderedCategories={data.content.categories.map((c: { name: string }) => c.name)}
+            categories={data.content.categories.map((c: { name: string }) => c.name)}
             questions={questions}
           />
         </Section>

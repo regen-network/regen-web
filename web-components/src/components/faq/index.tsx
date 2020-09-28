@@ -20,7 +20,7 @@ interface FAQProps {
   questions: {
     [key: string]: Question[];
   };
-  orderedCategories: string[];
+  categories: string[];
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -50,9 +50,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const FAQ = ({ questions, orderedCategories }: FAQProps): JSX.Element => {
+const FAQ = ({ questions, categories }: FAQProps): JSX.Element => {
   const classes = useStyles();
-  const [category, setCategory] = useState(orderedCategories[0]);
+  const [category, setCategory] = useState(categories[0]);
   const [selected, setSelected] = useState(false); // for mobile
 
   const handleClick = (c: string): void => {
@@ -68,7 +68,7 @@ const FAQ = ({ questions, orderedCategories }: FAQProps): JSX.Element => {
     <>
       <Box display={{ xs: 'none', sm: 'block' }}>
         <div className={classes.navigation}>
-          <Navigation category={category} categories={orderedCategories} onClick={handleClick} />
+          <Navigation category={category} categories={categories} onClick={handleClick} />
         </div>
         <div>
           <Category name={category} questions={questions[category]} />
@@ -86,7 +86,7 @@ const FAQ = ({ questions, orderedCategories }: FAQProps): JSX.Element => {
           </div>
         ) : (
           <div className={classes.navigation}>
-            <Navigation category={category} categories={orderedCategories} onClick={handleClick} />
+            <Navigation category={category} categories={categories} onClick={handleClick} />
           </div>
         )}
       </Box>

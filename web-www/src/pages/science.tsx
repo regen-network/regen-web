@@ -10,7 +10,11 @@ import BlogSection from '../sections/shared/BlogSection';
 import EmailSubmitSection from '../sections/shared/EmailSubmitSection';
 import SEO from '../components/seo';
 
-const SciencePage = (): JSX.Element => {
+interface props {
+  location: object;
+}
+
+const SciencePage = ({ location }: props): JSX.Element => {
   const data = useStaticQuery(graphql`
     query {
       image: file(relativePath: { eq: "science-newsletter-bg.jpg" }) {
@@ -27,6 +31,7 @@ const SciencePage = (): JSX.Element => {
       <SEO
         description="Regen Network is building an open, peer to peer scientific data and methodology commons in service to cutting edge earth observation science for climate action."
         title="Science"
+        location={location}
       />
       <TopSection />
       <TitleDescriptionSection />

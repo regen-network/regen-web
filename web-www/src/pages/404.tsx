@@ -4,7 +4,11 @@ import Img from 'gatsby-image';
 import SEO from '../components/seo';
 import NotFound from 'web-components/lib/components/not-found';
 
-const NotFoundPage = (): JSX.Element => {
+interface props {
+  location: object;
+}
+
+const NotFoundPage = ({ location }: props): JSX.Element => {
   const data = useStaticQuery(graphql`
     query {
       grazing: file(relativePath: { eq: "rotational-grazing.png" }) {
@@ -19,7 +23,7 @@ const NotFoundPage = (): JSX.Element => {
 
   return (
     <>
-      <SEO title="404: Not found" />
+      <SEO location={location} title="404: Not found" />
       <NotFound img={<Img fluid={data.grazing.childImageSharp.fluid} />} />
     </>
   );

@@ -15,9 +15,11 @@ interface propTypes {
   lang: string;
   meta: Array<string>;
   title: string;
+  imageUrl?: string;
+  location: object;
 }
 
-function SEO({ description, lang, meta, title }: propTypes): JSX.Element {
+function SEO({ location, description, lang, imageUrl, meta, title }: propTypes): JSX.Element {
   const { site } = useStaticQuery(
     graphql`
       query {
@@ -26,12 +28,13 @@ function SEO({ description, lang, meta, title }: propTypes): JSX.Element {
             title
             description
             author
+            siteUrl
           }
         }
       }
     `,
   );
-
+  const path = location ? location.pathname : '';
   const metaDescription = description || site.siteMetadata.description;
 
   return (
@@ -53,6 +56,14 @@ function SEO({ description, lang, meta, title }: propTypes): JSX.Element {
         {
           property: `og:description`,
           content: metaDescription,
+        },
+        {
+          property: `og:image`,
+          content: imageUrl,
+        },
+        {
+          property: `og:url`,
+          content: `${site.siteMetadata.siteUrl}${path}`,
         },
         {
           property: `og:type`,

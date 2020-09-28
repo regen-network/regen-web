@@ -14,7 +14,11 @@ import LogosSection from '../sections/press-kit/LogosSection';
 import ConnectSection from '../sections/press-kit/ConnectSection';
 import PhotosSection from '../sections/press-kit/PhotosSection';
 
-const PressKitPage = (): JSX.Element => {
+interface props {
+  location: object;
+}
+
+const PressKitPage = ({ location }: props): JSX.Element => {
   const data = useStaticQuery(graphql`
     query {
       background: file(relativePath: { eq: "press-kit-topo-bg.jpg" }) {
@@ -28,7 +32,7 @@ const PressKitPage = (): JSX.Element => {
   `);
   return (
     <>
-      <SEO title="Press Kit" />
+      <SEO title="Press Kit" location={location} />
       <TopSection />
       <TitleDescriptionSection />
       <EnableSection />

@@ -14,7 +14,10 @@ import CarbonPlusSection from '../sections/home/CarbonPlusSection';
 import EmailSubmitSection from '../sections/shared/EmailSubmitSection';
 import BlogSection from '../sections/shared/BlogSection';
 
-const IndexPage = (): JSX.Element => {
+interface props {
+  location: object;
+}
+const IndexPage = ({ location }: props): JSX.Element => {
   const theme = useTheme();
   const data = useStaticQuery(graphql`
     query {
@@ -38,6 +41,7 @@ const IndexPage = (): JSX.Element => {
   return (
     <>
       <SEO
+        location={location}
         description="Buy and sell ecosystem service credits at the open marketplace for climate solutions."
         title="Regen Network"
       />

@@ -28,7 +28,11 @@ import Banner from 'web-components/lib/components/banner';
 //   },
 // }));
 
-const BuyersPage = ({ location }): JSX.Element => {
+interface props {
+  location: object;
+}
+
+const BuyersPage = ({ location }: props): JSX.Element => {
   const [open, setOpen] = useState(false);
   const handleOpen = (): void => {
     setOpen(true);
@@ -47,6 +51,7 @@ const BuyersPage = ({ location }): JSX.Element => {
   return (
     <>
       <SEO
+        location={location}
         description="Buy carbon credits and other ecosystem system service credits to meet your climate commitments and sustainability goals."
         title="For Buyers"
       />

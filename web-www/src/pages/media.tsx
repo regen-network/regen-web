@@ -9,6 +9,10 @@ import ArticleCard from 'web-components/lib/components/cards/ArticleCard';
 import Section from 'web-components/lib/components/section';
 import SelectTextField, { Option } from 'web-components/lib/components/inputs/SelectTextField';
 
+interface props {
+  location: object;
+}
+
 const useStyles = makeStyles((theme: Theme) => ({
   background: {
     backgroundColor: theme.palette.grey[50],
@@ -84,7 +88,7 @@ interface Category {
   items: Item[];
 }
 
-const MediaPage = (): JSX.Element => {
+const MediaPage = ({ location }: props): JSX.Element => {
   const classes = useStyles();
 
   const data = useStaticQuery(graphql`
@@ -120,7 +124,7 @@ const MediaPage = (): JSX.Element => {
 
   return (
     <>
-      <SEO title="Media" />
+      <SEO title="Media" location={location} />
       <div className={classes.background}>
         <Section title={content.header} className={classes.section} titleClassName={classes.title}>
           <Formik

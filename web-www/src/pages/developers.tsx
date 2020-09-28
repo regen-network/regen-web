@@ -7,6 +7,7 @@ import ApproachSection from '../sections/developers/ApproachSection';
 import LedgerSection from '../sections/developers/LedgerSection';
 import OpenAgSection from '../sections/developers/OpenAgSection';
 import ConnectSection from '../sections/developers/ConnectSection';
+import CareersSection from '../sections/developers/CareersSection';
 
 const DevelopersPage = (): JSX.Element => {
   return (
@@ -18,6 +19,7 @@ const DevelopersPage = (): JSX.Element => {
       <LedgerSection />
       <OpenAgSection />
       <ConnectSection />
+      <CareersSection />
     </>
   );
 };

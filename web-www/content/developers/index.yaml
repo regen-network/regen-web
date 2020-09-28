@@ -30,6 +30,12 @@ openAgSection:
     
     
     Follow along the OpenTEAM projects that Regen Network is involved in on the OpenTEAM community Gitlab <a href="https://gitlab.com/OpenTEAM1/OpenTEAM-Technology/-/boards/1670749?scope=all&utf8=%E2%9C%93&label_name[]=Regen%20Network" target="_blank">here</a>. 
+careersSection:
+  caption: careers_
+  header: Join our team!
+  body: We’re always looking for new talent to join our decentralized team. Literally- we’re spread across 4 continents! If you’re interested in joining us at Regen Network, take a look at our job postings.
+  buttonLink: https://apply.workable.com/regen-network/
+  buttonText: view jobs
 connectSection:
   header: connect \ learn
 

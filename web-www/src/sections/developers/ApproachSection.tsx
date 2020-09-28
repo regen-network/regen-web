@@ -10,14 +10,21 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontWeight: 'normal',
     fontFamily: theme.typography.overline.fontFamily,
     color: theme.palette.secondary.main,
-    lineHeight: '140%',
     textAlign: 'center',
-    paddingBottom: theme.spacing(3.75),
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.spacing(7),
+      lineHeight: '130%',
+      paddingBottom: theme.spacing(6),
     },
     [theme.breakpoints.down('xs')]: {
       fontSize: theme.spacing(5),
+      lineHeight: '160%',
+      paddingBottom: theme.spacing(3.75),
+    },
+  },
+  section: {
+    [theme.breakpoints.down('xs')]: {
+      paddingBottom: theme.spacing(16),
     },
   },
 }));
@@ -41,7 +48,7 @@ const ApproachSection = (): JSX.Element => {
       render={data => {
         const content = data.content.approachSection;
         return (
-          <Section>
+          <Section className={classes.section}>
             <div className={classes.caption}>{content.caption}</div>
             <TitleDescription title={content.header} description={content.body} />
           </Section>

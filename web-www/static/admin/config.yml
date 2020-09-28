@@ -54,11 +54,27 @@ collections:
               - {label: Header, name: header, widget: string}
               - {label: Body, name: body, widget: markdown}
               - {label: cosmos image, name: cosmosImage, widget: image}
+          - label: "Open Agriculture Section"
+            name: "openAgSection"
+            widget: "object"
+            fields:
+              - {label: Header, name: header, widget: string}
+              - {label: Body, name: body, widget: markdown}
+              - {label: image, name: image, widget: image}
           - label: "Connect Section"
             name: "connectSection"
             widget: "object"
             fields:
               - {label: Header, name: header, widget: string}
+          - label: "Careers Section"
+            name: "careersSection"
+            widget: "object"
+            fields:
+              - {label: caption, name: caption, widget: string}
+              - {label: Header, name: header, widget: string}
+              - {label: body, name: body, widget: markdown}
+              - {label: button link, name: buttonLink, widget: string}
+              - {label: button text, name: buttonText, widget: string}
       - label: "Team"
         name: "team"
         file: "web-www/content/team/index.yaml"

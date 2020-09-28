@@ -93,11 +93,11 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
           href: '/land-stewards/',
         },
         {
-          title: 'Developers & Validators',
+          title: 'Developers',
           href: '/developers/',
         },
         {
-          title: 'Scientists & Verifiers',
+          title: 'Scientists',
           href: '/science/',
         },
         {

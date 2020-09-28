@@ -61,11 +61,11 @@ function AppFooter(): JSX.Element {
           href: `${process.env.REACT_APP_WEBSITE_URL}/land-stewards/`,
         },
         {
-          title: 'Developers & Validators',
+          title: 'Developers',
           href: `${process.env.REACT_APP_WEBSITE_URL}/developers/`,
         },
         {
-          title: 'Scientists & Verifiers',
+          title: 'Scientists',
           href: `${process.env.REACT_APP_WEBSITE_URL}/science/`,
         },
         {

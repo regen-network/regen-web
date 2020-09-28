@@ -9,6 +9,11 @@ import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton
 import BackgroundSection from '../../components/BackgroundSection';
 
 const useStyles = makeStyles((theme: Theme) => ({
+  section: {
+    [theme.breakpoints.down('xs')]: {
+      paddingBottom: theme.spacing(17.75),
+    },
+  },
   title: {
     lineHeight: '145%',
     [theme.breakpoints.up('sm')]: {
@@ -89,6 +94,7 @@ const CareersSection = (): JSX.Element => {
           <BackgroundSection
             linearGradient="unset"
             topSection={false}
+            className={classes.section}
             imageData={data.background.childImageSharp.fluid}
           >
             <div className={classes.caption}>{content.caption}</div>

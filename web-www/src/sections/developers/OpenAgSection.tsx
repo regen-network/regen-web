@@ -10,6 +10,11 @@ import Description from 'web-components/lib/components/description';
 import BackgroundSection from '../../components/BackgroundSection';
 
 const useStyles = makeStyles((theme: Theme) => ({
+  section: {
+    [theme.breakpoints.up('sm')]: {
+      paddingTop: theme.spacing(27.5),
+    },
+  },
   title: {
     lineHeight: '140%',
     [theme.breakpoints.up('sm')]: {
@@ -68,6 +73,7 @@ const OpenAgSection = (): JSX.Element => {
             linearGradient="unset"
             topSection={false}
             imageData={data.background.childImageSharp.fluid}
+            className={classes.section}
           >
             <Grid container alignItems="center" spacing={8}>
               <Grid item xs={12} sm={6}>

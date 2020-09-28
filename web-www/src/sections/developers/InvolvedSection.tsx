@@ -13,6 +13,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontWeight: 'normal',
     fontFamily: theme.typography.overline.fontFamily,
   },
+  section: {
+    [theme.breakpoints.up('sm')]: {
+      paddingBottom: theme.spacing(24),
+    },
+  },
 }));
 
 const InvolvedSection = (): JSX.Element => {
@@ -66,6 +71,7 @@ const InvolvedSection = (): JSX.Element => {
       background={data.background}
       icons={icons}
       titleClassName={classes.title}
+      className={classes.section}
     />
   );
 };

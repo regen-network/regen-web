@@ -23,6 +23,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   section: {
+    [theme.breakpoints.up('sm')]: {
+      paddingBottom: theme.spacing(14),
+    },
     [theme.breakpoints.down('xs')]: {
       paddingBottom: theme.spacing(16),
     },

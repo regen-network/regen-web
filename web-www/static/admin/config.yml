@@ -569,7 +569,6 @@ collections:
                   - {label: "author / source name", name: author, widget: string}
                   - {label: "url", name: url, widget: string}
                   - {label: "date", name: date, widget: string}
-
       - label: "Press Kit"
         name: "press-kit"
         file: "web-www/content/press-kit/index.yaml"
@@ -673,7 +672,17 @@ collections:
                 collapsed: false
                 fields:
                   - {label: "image", name: image, widget: image}
-  - label: "FAQ"
+      - label: FAQ Categories
+        name: "faq-categories"
+        file: "web-www/content/faq/index.yaml"
+        fields:
+          - label: categories
+            name: categories
+            widget: list
+            collapsed: false
+            fields:
+              - {label: "name", name: name, widget: string}
+    - label: "FAQ"
     name: "faq"
     editor:
       preview: false
@@ -682,7 +691,7 @@ collections:
     path: '{{category}}/question{{slug}}'
     summary: '{{category}} - question {{slug}}'
     fields:
-      - { label: 'Category', name: 'category', widget: 'string' }
+      - { label: 'Category (Make sure to add a new category from "Other Pages" -> "FAQ Categories" first)', name: 'category', widget: 'string' }
       - { label: 'Question number', name: 'title', widget: 'string' }
       - { label: 'Question', name: 'description', widget: 'string' }
       - { label: 'Answer', name: 'body', widget: 'markdown' }

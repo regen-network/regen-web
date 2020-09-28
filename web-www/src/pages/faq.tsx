@@ -5,6 +5,7 @@ import { makeStyles, Theme } from '@material-ui/core';
 import SEO from '../components/seo';
 import Section from 'web-components/src/components/section';
 import FAQ, { Group } from 'web-components/lib/components/faq';
+import { DiagnosticCategory } from 'typescript';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -36,31 +37,40 @@ const FAQPage = (): JSX.Element => {
 
   const data = useStaticQuery(graphql`
     query {
+      content: faqYaml {
+        categories {
+          name
+        }
+      }
       md: allMarkdownRemark(sort: { order: ASC, fields: frontmatter___title }, filter: {fileAbsolutePath: {regex: "/(faq)/.*\\.md$/"}}) {
-        group(field: frontmatter___category) {
-          nodes {
-            html
-            frontmatter {
-              description
-            }
+        nodes {
+          html
+          frontmatter {
+            description
+            category
           }
-          fieldValue
         }
       }
     }
   `);
 
-  const categories: Group[] = data.md.group.map(g => ({
-    name: g.fieldValue,
-    questions: g.nodes.map(n => ({ question: n.frontmatter.description, answer: n.html })),
-  }));
+  const questions = data.md.nodes.reduce((r, a) => {
+    r[a.frontmatter.category.toLowerCase().trim()] = [
+      ...(r[a.frontmatter.category.toLowerCase().trim()] || []),
+      { question: a.frontmatter.description, answer: a.html },
+    ];
+    return r;
+  }, {});
 
   return (
     <>
       <SEO title="FAQ" />
       <div className={classes.root}>
         <Section title="FAQ" titleVariant="h1" titleClassName={classes.title} className={classes.section}>
-          <FAQ categories={categories} />
+          <FAQ
+            orderedCategories={data.content.categories.map((c: { name: string }) => c.name)}
+            questions={questions}
+          />
         </Section>
       </div>
     </>

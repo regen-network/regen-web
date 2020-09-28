@@ -17,7 +17,10 @@ export interface Group {
 }
 
 interface FAQProps {
-  categories: Group[];
+  questions: {
+    [key: string]: Question[];
+  };
+  orderedCategories: string[];
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -47,12 +50,12 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const FAQ = ({ categories }: FAQProps): JSX.Element => {
+const FAQ = ({ questions, orderedCategories }: FAQProps): JSX.Element => {
   const classes = useStyles();
-  const [category, setCategory] = useState(0);
+  const [category, setCategory] = useState(orderedCategories[0]);
   const [selected, setSelected] = useState(false); // for mobile
 
-  const handleClick = (c: number): void => {
+  const handleClick = (c: string): void => {
     setSelected(true);
     setCategory(c);
   };
@@ -65,10 +68,10 @@ const FAQ = ({ categories }: FAQProps): JSX.Element => {
     <>
       <Box display={{ xs: 'none', sm: 'block' }}>
         <div className={classes.navigation}>
-          <Navigation category={category} categories={categories.map(c => c.name)} onClick={handleClick} />
+          <Navigation category={category} categories={orderedCategories} onClick={handleClick} />
         </div>
         <div>
-          <Category name={categories[category].name} questions={categories[category].questions} />
+          <Category name={category} questions={questions[category]} />
         </div>
       </Box>
 
@@ -79,11 +82,11 @@ const FAQ = ({ categories }: FAQProps): JSX.Element => {
               <BreadcrumbIcon className={classes.icon} direction="prev" />
               back
             </div>
-            <Category name={categories[category].name} questions={categories[category].questions} />
+            <Category name={category} questions={questions[category]} />
           </div>
         ) : (
           <div className={classes.navigation}>
-            <Navigation category={category} categories={categories.map(c => c.name)} onClick={handleClick} />
+            <Navigation category={category} categories={orderedCategories} onClick={handleClick} />
           </div>
         )}
       </Box>

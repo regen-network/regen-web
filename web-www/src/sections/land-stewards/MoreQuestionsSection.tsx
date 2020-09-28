@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles, Theme, useTheme } from '@material-ui/core';
-import { useStaticQuery, graphql } from 'gatsby';
+import { useStaticQuery, graphql, Link } from 'gatsby';
 import BackgroundImage from 'gatsby-background-image';
 
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
@@ -16,6 +16,12 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingTop: theme.spacing(56.25),
       paddingBottom: theme.spacing(56.25),
+    },
+    '& a': {
+      textDecoration: 'none',
+      '&:link, &:visited, &:hover, &:active': {
+        textDecoration: 'none',
+      },
     },
   },
   button: {
@@ -63,7 +69,9 @@ const MoreQuestionsSection = () => {
         title={content.header}
       >
         <div className={classes.button}>
-          <ContainedButton href="/faq">view faq</ContainedButton>
+          <Link to={`/faq`} state={{ category: 'carbonplus credits' }}>
+            <ContainedButton>view faq</ContainedButton>
+          </Link>
         </div>
       </Section>
     </BackgroundImage>

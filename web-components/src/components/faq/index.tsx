@@ -21,6 +21,7 @@ interface FAQProps {
     [key: string]: Question[];
   };
   categories: string[];
+  defaultCategory?: string;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -50,9 +51,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const FAQ = ({ questions, categories }: FAQProps): JSX.Element => {
+const FAQ = ({ questions, categories, defaultCategory }: FAQProps): JSX.Element => {
   const classes = useStyles();
-  const [category, setCategory] = useState(categories[0]);
+  const [category, setCategory] = useState(defaultCategory || categories[0]);
   const [selected, setSelected] = useState(false); // for mobile
 
   const handleClick = (c: string): void => {

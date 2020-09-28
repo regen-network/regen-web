@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const FAQPage = (): JSX.Element => {
+const FAQPage = ({ location }): JSX.Element => {
   const classes = useStyles();
 
   const data = useStaticQuery(graphql`
@@ -70,6 +70,7 @@ const FAQPage = (): JSX.Element => {
           <FAQ
             categories={data.content.categories.map((c: { name: string }) => c.name)}
             questions={questions}
+            defaultCategory={location && location.state && location.state.category}
           />
         </Section>
       </div>

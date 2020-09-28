@@ -682,7 +682,7 @@ collections:
             collapsed: false
             fields:
               - {label: "name", name: name, widget: string}
-    - label: "FAQ"
+  - label: "FAQ"
     name: "faq"
     editor:
       preview: false

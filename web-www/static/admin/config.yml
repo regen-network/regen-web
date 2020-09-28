@@ -42,6 +42,11 @@ collections:
               - {label: caption, name: caption, widget: string}
               - {label: Header, name: header, widget: string}
               - {label: Body, name: body, widget: markdown}
+          - label: "Involved Section"
+            name: "involvedSection"
+            widget: "object"
+            fields:
+              - {label: Header, name: header, widget: string}
           - label: "Ledger Section"
             name: "ledgerSection"
             widget: "object"

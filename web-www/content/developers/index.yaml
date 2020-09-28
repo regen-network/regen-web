@@ -11,7 +11,9 @@ approachSection:
     If this is your first time learning about Regen Network, our <a href="https://www.notion.so/Regen-Network-Roadmap-b804e0d0af7b485ea89c9a723328fd65" target="_blank">public Notion roadmap</a> and <a href="https://regen-network.gitlab.io/whitepaper/WhitePaper.pdf" target="_blank">whitepaper</a> are good places to start learning about our vision and what we are currently working on.
     
     
-    For the more technical savvy– head straight over to our <a href="https://github.com/regen-network/regen-ledger" target="_blank">Github</a>! There, you can clone and spin up a node, or read through some of our <a href="https://docs.google.com/document/d/1-CRfpZgPxiaZB4nhMwKKkeWbLDI5dYc0hmGwnGkCHP4/edit" target="_blank">RFCs</a> to get an overview of the larger feature set and architectural components of our stack.
+    For the more technical savvy– head straight over to our <a href="https://github.com/regen-network/regen-ledger" target="_blank">Github</a>! There, you can clone and spin up a node, or read through some of our <a href="https://docs.google.com/document/d/1-CRfpZgPxiaZB4nhMwKKkeWbLDI5dYc0hmGwnGkCHP4" target="_blank">RFCs</a> to get an overview of the larger feature set and architectural components of our stack.
+involvedSection:
+  header: get involved
 ledgerSection:
   cosmosImage: ../../static/media/cosmos.png
   header: A Key Player in the Cosmos Ecosystem

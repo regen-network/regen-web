@@ -39,17 +39,18 @@ export const category = (): JSX.Element => (
 
 export const navigation = (): JSX.Element => (
   <Navigation
-    selected={0}
-    onClick={(c: number) => {}}
+    selected="concept"
+    onClick={(c: string) => {}}
     categories={['concept', 'regen registry', 'regen ledger', 'tech']}
   />
 );
 
 export const faq = (): JSX.Element => (
   <FAQ
-    categories={[
-      { name: 'concept', questions },
-      { name: 'tech', questions: [] },
-    ]}
+    categories={['concept', 'tech']}
+    questions={{
+      tech: questions,
+      concept: questions,
+    }}
   />
 );

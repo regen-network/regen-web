@@ -89,7 +89,6 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     display: 'flex',
     justifyContent: 'center',
   },
-  smallIcon: {},
 }));
 
 interface IconLabelProps {
@@ -104,6 +103,7 @@ interface ConnectSectionProps {
   icons: IconLabelProps[];
   itemClassName?: string;
   titleClassName?: string;
+  className?: string;
   background: {
     childImageSharp: {
       fluid: FluidObject;
@@ -126,6 +126,7 @@ const IconLabel = ({ icon, label, href, small = false }: IconLabelProps): JSX.El
 const ConnectSection = ({
   header,
   titleClassName,
+  className,
   background,
   icons,
   itemClassName,
@@ -133,7 +134,7 @@ const ConnectSection = ({
   const classes = useStyles({});
   return (
     <BackgroundSection
-      className={classes.root}
+      className={clsx(className, classes.root)}
       linearGradient="unset"
       topSection={false}
       imageData={background.childImageSharp.fluid}

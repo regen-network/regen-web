@@ -1,13 +1,29 @@
 topSection:
-  header: developers_validators █
-  body: The Regen Ledger blockchain enables our community to develop a suite of platforms and applications in service of regenerating human relationships with land.
-ledgerSection:
-  header: The Regen Ledger
+  header: developers █
+  body: The Regen Ledger (currently in testnet) is a public Proof-of-Stake blockchain built on the Cosmos SDK. It’s primary goal is twofold — indexing claims and assertions pertaining to ecological health, and securely tracking a new class of financial assets, called Ecosystem Service Credits, which are tied to measurable changes in ecological health.
+approachSection:
+  caption: our approach_
+  header: Open Source First
   body: md//
-    The Regen Ledger blockchain (currently in testnet) is powered by our global validator set. Regen Ledger is a public Proof-of-Stake blockchain built on the Cosmos SDK with smart contracting enabled through CosmWasm (currently in testnet). 
+    Regen Network welcomes active engagement from software developers working in blockchain, climate solutions or agricultural technology to get involved in our community driven, open-source approach to protocol design.    
+    
+
+    If this is your first time learning about Regen Network, our <a href="https://www.notion.so/Regen-Network-Roadmap-b804e0d0af7b485ea89c9a723328fd65" target="_blank">public Notion roadmap</a> and <a href="https://regen-network.gitlab.io/whitepaper/WhitePaper.pdf" target="_blank">whitepaper</a> are good places to start learning about our vision and what we are currently working on.
     
     
-    Built on the Regen Ledger, the [Regen Registry](/registry/projects/impactag/) is our open marketplace for carbon and ecosystem credit sales. We envision more applications living on top of the Regen Ledger, automated payments to land stewards based on real-world land regeneration, contracts that enable municipalities to lower climate risk by paying farmers to build regional landscape-scale resilience, and more.
+    For the more technical savvy– head straight over to our <a href="https://github.com/regen-network/regen-ledger" target="_blank">Github</a>! There, you can clone and spin up a node, or read through some of our <a href="https://docs.google.com/document/d/1-CRfpZgPxiaZB4nhMwKKkeWbLDI5dYc0hmGwnGkCHP4/edit" target="_blank">RFCs</a> to get an overview of the larger feature set and architectural components of our stack.
+ledgerSection:
+  cosmosImage: ../../static/media/cosmos.png
+  header: A Key Player in the Cosmos Ecosystem
+  body: md//
+    The Cosmos SDK is the most widely used proof-of-stake based blockchain development framework in the world. It is the go-to development tool kit for creating a sovereign, energy efficient, highly secure blockchain based application.  Regen Network has always had an ethos of contribution and co-creation.  We now contract directly with the Interchain Foundation as the lead maintainer of the Cosmos SDK, working side by side with the rest of the cosmos ecosystem.
+
+    
+    With the advent of IBC, any Cosmos SDK blockchain connected to the Cosmos Hub will be able to interact with the assets and ecological data on Regen Ledger. If you want to learn more about building on top of the Cosmos SDK, check out the <a href="https://docs.cosmos.network/" target="_blank">docs</a>, or say hello to us on the <a href="https://discord.gg/HbvhWZw" target="_blank">Cosmos Community Discord</a>!
+connectSection:
+  header: connect \ learn
+
+# old
 testnetSection:
   header: join testnet_
   description: What can you envision? How can we together develop a world where technologists and land stewards unite to usher in a renaissance in our relationship with the planet? Come build with us!
@@ -33,5 +49,3 @@ testnetSection:
     13th March, 1500UTC'
   buttonText: join the testnet
   buttonLink: '/'
-connectSection:
-  header: connect \ learn

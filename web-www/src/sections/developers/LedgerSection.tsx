@@ -25,6 +25,18 @@ const useStyles = makeStyles((theme: Theme) => ({
   titleDesc: {
     zIndex: 1,
   },
+  cosmosImg: {
+    [theme.breakpoints.up('sm')]: {
+      width: theme.spacing(65.5),
+      height: theme.spacing(12),
+      margin: `0 auto ${theme.spacing(10.5)}`,
+    },
+    [theme.breakpoints.down('xs')]: {
+      width: theme.spacing(50),
+      height: theme.spacing(12),
+      margin: `0 auto ${theme.spacing(6.5)}`,
+    },
+  },
 }));
 
 const LedgerSection = (): JSX.Element => {
@@ -41,6 +53,13 @@ const LedgerSection = (): JSX.Element => {
         ledgerSection {
           header
           body
+          cosmosImage {
+            childImageSharp {
+              fluid(quality: 90) {
+                ...GatsbyImageSharpFluid_withWebp
+              }
+            }
+          }
         }
       }
     }
@@ -51,6 +70,7 @@ const LedgerSection = (): JSX.Element => {
   return (
     <div className={classes.sectionWrapper}>
       <Section>
+        <Img className={classes.cosmosImg} fluid={content.cosmosImage.childImageSharp.fluid} />
         <TitleDescription
           className={classes.titleDesc}
           title={content.header}

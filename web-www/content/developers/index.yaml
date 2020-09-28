@@ -4,8 +4,7 @@ topSection:
 approachSection:
   caption: our approach_
   header: Open Source First
-  body: md//
-    Regen Network welcomes active engagement from software developers working in blockchain, climate solutions or agricultural technology to get involved in our community driven, open-source approach to protocol design.    
+  body: md//Regen Network welcomes active engagement from software developers working in blockchain, climate solutions or agricultural technology to get involved in our community driven, open-source approach to protocol design.    
     
 
     If this is your first time learning about Regen Network, our <a href="https://www.notion.so/Regen-Network-Roadmap-b804e0d0af7b485ea89c9a723328fd65" target="_blank">public Notion roadmap</a> and <a href="https://regen-network.gitlab.io/whitepaper/WhitePaper.pdf" target="_blank">whitepaper</a> are good places to start learning about our vision and what we are currently working on.
@@ -17,11 +16,20 @@ involvedSection:
 ledgerSection:
   cosmosImage: ../../static/media/cosmos.png
   header: A Key Player in the Cosmos Ecosystem
-  body: md//
-    The Cosmos SDK is the most widely used proof-of-stake based blockchain development framework in the world. It is the go-to development tool kit for creating a sovereign, energy efficient, highly secure blockchain based application.  Regen Network has always had an ethos of contribution and co-creation.  We now contract directly with the Interchain Foundation as the lead maintainer of the Cosmos SDK, working side by side with the rest of the cosmos ecosystem.
+  body: md//The Cosmos SDK is the most widely used proof-of-stake based blockchain development framework in the world. It is the go-to development tool kit for creating a sovereign, energy efficient, highly secure blockchain based application.  Regen Network has always had an ethos of contribution and co-creation.  We now contract directly with the Interchain Foundation as the lead maintainer of the Cosmos SDK, working side by side with the rest of the cosmos ecosystem.
 
     
     With the advent of IBC, any Cosmos SDK blockchain connected to the Cosmos Hub will be able to interact with the assets and ecological data on Regen Ledger. If you want to learn more about building on top of the Cosmos SDK, check out the <a href="https://docs.cosmos.network/" target="_blank">docs</a>, or say hello to us on the <a href="https://discord.gg/HbvhWZw" target="_blank">Cosmos Community Discord</a>!
+openAgSection:
+  image: ../../static/media/open-team.png
+  header: Our Involvement in Open Agriculture
+  body: md//Since 2019, Regen Network has been an active member of the OpenTEAM community, a multi-year federally funded initiative for the development of an open source, interoperable, and farmer first approach to agriculture technology.
+    
+    
+    The many technology projects in OpenTEAM (ranging from <a href="https://farmos.org/" target="_blank">FarmOS</a>, to <a href="http://comet-farm.com/" target="_blank">CometFARM</a>, to <a href="https://coolfarmtool.org/" target="_blank">Cool Farm Tool</a>) meet on a weekly basis to track progress on new integrations, interoperability standards, and other collaborations.
+    
+    
+    Follow along the OpenTEAM projects that Regen Network is involved in on the OpenTEAM community Gitlab <a href="https://gitlab.com/OpenTEAM1/OpenTEAM-Technology/-/boards/1670749?scope=all&utf8=%E2%9C%93&label_name[]=Regen%20Network" target="_blank">here</a>. 
 connectSection:
   header: connect \ learn
 

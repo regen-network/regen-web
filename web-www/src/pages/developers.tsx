@@ -5,6 +5,7 @@ import TopSection from '../sections/developers/TopSection';
 import InvolvedSection from '../sections/developers/InvolvedSection';
 import ApproachSection from '../sections/developers/ApproachSection';
 import LedgerSection from '../sections/developers/LedgerSection';
+import OpenAgSection from '../sections/developers/OpenAgSection';
 import ConnectSection from '../sections/developers/ConnectSection';
 
 const DevelopersPage = (): JSX.Element => {
@@ -15,6 +16,7 @@ const DevelopersPage = (): JSX.Element => {
       <ApproachSection />
       <InvolvedSection />
       <LedgerSection />
+      <OpenAgSection />
       <ConnectSection />
     </>
   );

@@ -2,18 +2,16 @@ name: Eco Cacao
 slug: eco-cacao
 cardImage: ../../static/media/eco-cacao-card.png
 background: ../../static/media/eco-cacao-top-bg.png
-description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-  eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-  veniam.
+description: Eco Cacao is a Fairtrade and Organic Certified association, and is
+  one of six associations that comprise the UOPROCAE cooperative, located in the
+  coastal Esmeraldas region of Ecuador.
 aboutSection:
   about: >-
     md//In the initial phase of this pilot, we are partnering with high-end
     chocolate brands in California such as <a target="_blank"
     href="https://imlakeshorganics.com/">Imlak’esh Organics</a> and <a
     target="_blank" href="https://endorfinfoods.com/">Endorfin Foods</a>, as
-    well as <a target="_blank"
-    href="http://yellow-seed.org/products/eco-cacao">Eco Cacao</a> and its
-    parent organization <a target="_blank"
+    well as Eco Cacao and its parent organization <a target="_blank"
     href="https://www.conexionchocolate.com/esmeraldas/">UOPRACAE</a>, a
     co-operative of approximately 120 farmers from the Esmeraldas region in
     Ecuador. We hold the intention of scaling this effort to thousands of cacao
@@ -62,7 +60,7 @@ approachSection:
 figureSection:
   background: ../../static/media/eco-cacao-figure-bg.png
   figures:
-    - image: /media/ecocacao-figure2.webp
+    - image: ../../static/media/ecocacao-figure2.webp
       title: "Mono vs. Polyculture Cacao: Machine learning coupled with sentinel 2
         time series allows for distinguishing polyculture from monocultures,
         primary forest, secondary forest, and other land uses."

@@ -13,7 +13,7 @@ interface CookiesFooterProps {
   privacyUrl: string;
 }
 
-const cookieName = 'cookies-consent';
+const cookieName = 'gatsby-plugin-google-analytics-gdpr_cookies-enabled';
 
 function getCookieValue(): string | undefined {
   let cookieValue = Cookies.get(cookieName);
@@ -29,16 +29,16 @@ function getLegacyCookieName(name: string): string {
 }
 
 function setCookie(cookieValue: string): void {
-  const secure: boolean = window.location ? window.location.protocol === 'https:' : true;
+  // const secure: boolean = window.location ? window.location.protocol === 'https:' : true;
 
-  const cookieOptions: CookieAttributes = { expires: 365, sameSite: 'None', secure };
+  // const cookieOptions: CookieAttributes = { expires: 365, sameSite: 'None', secure };
 
   // Fallback for older browsers that can not set SameSite=None
   // https://web.dev/samesite-cookie-recipes/#handling-incompatible-clients
-  Cookies.set(getLegacyCookieName(cookieName), cookieValue, cookieOptions);
+  // Cookies.set(getLegacyCookieName(cookieName), cookieValue, cookieOptions);
 
   // set the regular cookie
-  Cookies.set(cookieName, cookieValue, cookieOptions);
+  Cookies.set(cookieName, cookieValue);
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -118,7 +118,7 @@ export default function CookiesFooter({ privacyUrl }: CookiesFooterProps): JSX.E
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    if (getCookieValue() === undefined) {
+    if (getCookieValue() === undefined || getCookieValue() === 'false') {
       setVisible(true);
     }
   }, [setVisible]);

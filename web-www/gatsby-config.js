@@ -9,6 +9,22 @@ module.exports = {
     'gatsby-plugin-layout',
     `gatsby-plugin-netlify`,
     {
+      resolve: `gatsby-plugin-google-analytics-gdpr`,
+      options: {
+        trackingId: 'UA-119338253-2',
+        enableDevelopment: true, // default false
+        anonymizeIP: true,
+        autoStartWithCookiesEnabled: false,
+        // Optional parameter - Configuration for react-ga and google analytics
+        reactGaOptions: {
+          debug: true,
+          gaOptions: {
+            sampleRate: 10,
+          },
+        },
+      },
+    },
+    {
       resolve: `gatsby-plugin-advanced-sitemap`,
       options: {
         additionalSitemaps: [

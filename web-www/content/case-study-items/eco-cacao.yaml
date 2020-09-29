@@ -62,7 +62,7 @@ approachSection:
 figureSection:
   background: ../../static/media/eco-cacao-figure-bg.png
   figures:
-    - image: /media/ecocacao-figure2.webp
+    - image: ../../static/media/ecocacao-figure2.webp
       title: "Mono vs. Polyculture Cacao: Machine learning coupled with sentinel 2
         time series allows for distinguishing polyculture from monocultures,
         primary forest, secondary forest, and other land uses."

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
+import { useStaticQuery, graphql } from 'gatsby';
 
 import SEO from '../components/seo';
 import TopSection from '../sections/land-stewards/TopSection';
@@ -37,12 +38,21 @@ const LandStewardsPage = ({ location }: props): JSX.Element => {
     setOpen(false);
   };
 
+  const data = useStaticQuery(graphql`
+    query {
+      seoImage: file(relativePath: { eq: "land-stewards-top.png" }) {
+        publicURL
+      }
+    }
+  `);
+
   return (
     <>
       <SEO
         description="Issue and sell ecosystem service credits to buyers around the world - get paid for your ecological stewardship."
         title="For Land Stewards"
         location={location}
+        imageUrl={data.seoImage.publicURL}
       />
       <TopSection />
       <ImageItemsSection />

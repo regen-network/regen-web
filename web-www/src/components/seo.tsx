@@ -85,6 +85,10 @@ function SEO({ location, description, lang, imageUrl, meta, title }: propTypes):
           name: `twitter:description`,
           content: metaDescription,
         },
+        {
+          property: `twitter:image`,
+          content: imageUrl,
+        },
       ]}
     />
   );

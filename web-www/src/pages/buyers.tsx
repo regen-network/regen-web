@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useStaticQuery, graphql } from 'gatsby';
 
 import SEO from '../components/seo';
 import TopSection from '../sections/buyers/TopSection';
@@ -48,12 +49,21 @@ const BuyersPage = ({ location }: props): JSX.Element => {
     }
   }, [location]);
 
+  const data = useStaticQuery(graphql`
+    query {
+      seoImage: file(relativePath: { eq: "maximize-impact.png" }) {
+        publicURL
+      }
+    }
+  `);
+
   return (
     <>
       <SEO
         location={location}
         description="Buy carbon credits and other ecosystem system service credits to meet your climate commitments and sustainability goals."
         title="For Buyers"
+        imageUrl={data.seoImage.publicURL}
       />
       <TopSection />
       <ImageGridSection />

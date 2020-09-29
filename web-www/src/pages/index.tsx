@@ -17,10 +17,14 @@ import BlogSection from '../sections/shared/BlogSection';
 interface props {
   location: object;
 }
+
 const IndexPage = ({ location }: props): JSX.Element => {
   const theme = useTheme();
   const data = useStaticQuery(graphql`
     query {
+      seoImage: file(relativePath: { eq: "science.png" }) {
+        publicURL
+      }
       background: file(relativePath: { eq: "home-climate-bg.jpg" }) {
         childImageSharp {
           fluid(quality: 90) {
@@ -44,6 +48,7 @@ const IndexPage = ({ location }: props): JSX.Element => {
         location={location}
         description="Buy and sell ecosystem service credits at the open marketplace for climate solutions."
         title="Regen Network"
+        imageUrl={data.seoImage.publicURL}
       />
       <HomeFoldSection />
       <MarketplaceSection />

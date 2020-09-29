@@ -17,6 +17,9 @@ interface props {
 const SciencePage = ({ location }: props): JSX.Element => {
   const data = useStaticQuery(graphql`
     query {
+      seoImage: file(relativePath: { eq: "science.png" }) {
+        publicURL
+      }
       image: file(relativePath: { eq: "science-newsletter-bg.jpg" }) {
         childImageSharp {
           fluid(quality: 90) {
@@ -32,6 +35,7 @@ const SciencePage = ({ location }: props): JSX.Element => {
         description="Regen Network is building an open, peer to peer scientific data and methodology commons in service to cutting edge earth observation science for climate action."
         title="Science"
         location={location}
+        imageUrl={data.seoImage.publicURL}
       />
       <TopSection />
       <TitleDescriptionSection />

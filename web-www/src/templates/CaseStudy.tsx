@@ -15,16 +15,21 @@ interface Props {
   allCaseStudyItemsYaml: {
     nodes: object[];
   };
+  location: object;
 }
 
-const CaseStudy = ({ data }: Props): JSX.Element => {
+const CaseStudy = ({ data, location }: Props): JSX.Element => {
   if (data.allCaseStudyItemsYaml.nodes.length !== 1) {
     return <></>;
   }
   const item = data.allCaseStudyItemsYaml.nodes[0];
   return (
     <>
-      <SEO title={item.name} />
+      <SEO
+        title={item.name}
+        location={location}
+        description="Explore Regen Network case studies where technology, science and regenerative land use practices intersect."
+      />
       <TopSection background={item.background} name={item.name} />
       <AboutSection {...item.aboutSection} />
       <ContextSection {...item.contextSection} />

@@ -32,7 +32,11 @@ const PressKitPage = ({ location }: props): JSX.Element => {
   `);
   return (
     <>
-      <SEO title="Press Kit" location={location} />
+      <SEO
+        title="Press Kit"
+        location={location}
+        description="Regen Network aligns economics with ecology to drive regenerative land management."
+      />
       <TopSection />
       <TitleDescriptionSection />
       <EnableSection />

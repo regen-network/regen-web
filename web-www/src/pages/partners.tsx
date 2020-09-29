@@ -6,6 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Title from 'web-components/lib/components/title';
 import { useStaticQuery, graphql } from 'gatsby';
+import ReactHtmlParser from 'react-html-parser';
 
 import SEO from '../components/seo';
 import clsx from 'clsx';
@@ -133,8 +134,7 @@ const PartnersPage = (): JSX.Element => {
                 </Title>
                 <Typography
                   className={classes.contactText}
-                  dangerouslySetInnerHTML={{ __html: contactCard.body }}
-                ></Typography>
+                >{ReactHtmlParser(contactCard.body)}</Typography>
               </GreenCard>
             </Grid>
           </Grid>

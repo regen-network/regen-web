@@ -4,7 +4,7 @@ import { useTheme } from '@material-ui/core';
 import BackgroundImage from 'gatsby-background-image';
 import Box from '@material-ui/core/Box';
 
-import SEO, { defaultDescription } from '../components/seo';
+import SEO from '../components/seo';
 import HomeFoldSection from '../sections/home/FoldSection';
 import MarketplaceSection from '../sections/home/MarketplaceSection';
 import HomeLedger from '../sections/home/LedgerSection';
@@ -44,12 +44,7 @@ const IndexPage = ({ location }: props): JSX.Element => {
 
   return (
     <>
-      <SEO
-        location={location}
-        description={defaultDescription}
-        title="Regen Network"
-        imageUrl={data.seoImage.publicURL}
-      />
+      <SEO location={location} title="Regen Network" imageUrl={data.seoImage.publicURL} />
       <HomeFoldSection />
       <MarketplaceSection />
       <EmailSubmitSection />

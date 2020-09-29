@@ -19,17 +19,7 @@ interface propTypes {
   location: object;
 }
 
-export const defaultDescription: string =
-  'Buy and sell ecosystem service credits at the open marketplace for climate solutions.';
-
-function SEO({
-  location,
-  description = defaultDescription,
-  lang,
-  imageUrl,
-  meta,
-  title,
-}: propTypes): JSX.Element {
+function SEO({ location, description, lang, imageUrl, meta, title }: propTypes): JSX.Element {
   const { seoImage, site } = useStaticQuery(
     graphql`
       query {

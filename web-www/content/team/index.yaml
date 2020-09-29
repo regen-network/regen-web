@@ -220,7 +220,7 @@ contributorSection:
         startups and has worked in Silicon Valley, Israel, and Asia Pacific. At
         VMware R&D he founded the prototyping practice and has a gift for
         scaling and accelerating early stage teams.
-      image: ../../static/media/daniel-swid.png
+      image: ../../static/media/98fiylntthoaudcmrxjd0w.jpg
       linkedUrl: https://www.linkedin.com/in/danielswid
       twitterUrl: ""
       githubUrl: ""
@@ -276,6 +276,9 @@ contributorSection:
       title: Co-founder, Engineer
       linkedUrl: https://www.linkedin.com/in/brecht-deriemaeker-505ba217/
       image: ../../static/media/brecht.jpeg
+    - image: ../../static/media/98fiylntthoaudcmrxjd0w.jpg
+      name: test
+      title: test
 advisorSection:
   title: Advisors
   advisors:

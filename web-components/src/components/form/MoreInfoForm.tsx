@@ -14,7 +14,7 @@ import Submit from './Submit';
 interface MoreInfoFormProps {
   onClose: () => void;
   onSubmit?: () => void;
-  apiUrl: string;
+  apiUrl?: string;
 }
 
 interface Values {

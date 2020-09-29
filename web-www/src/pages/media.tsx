@@ -122,7 +122,12 @@ const MediaPage = (): JSX.Element => {
     <>
       <SEO title="Media" />
       <div className={classes.background}>
-        <Section title={content.header} className={classes.section} titleClassName={classes.title}>
+        <Section
+          title={content.header}
+          titleVariant="h1"
+          className={classes.section}
+          titleClassName={classes.title}
+        >
           <Formik
             initialValues={{
               category: 'all',

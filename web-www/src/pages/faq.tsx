@@ -32,7 +32,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const FAQPage = ({ location }): JSX.Element => {
+interface props {
+  location: object;
+}
+
+const FAQPage = ({ location }: props): JSX.Element => {
   const classes = useStyles();
 
   const data = useStaticQuery(graphql`
@@ -64,7 +68,7 @@ const FAQPage = ({ location }): JSX.Element => {
 
   return (
     <>
-      <SEO title="FAQ" />
+      <SEO location={location} title="FAQ" description="Explore Regen Network’s frequently asked questions" />
       <div className={classes.root}>
         <Section title="FAQ" titleVariant="h1" titleClassName={classes.title} className={classes.section}>
           <FAQ

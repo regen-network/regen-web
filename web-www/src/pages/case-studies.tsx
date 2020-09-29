@@ -4,10 +4,18 @@ import TopSection from '../sections/case-studies/TopSection';
 import ListSection from '../sections/case-studies/ListSection';
 import SEO from '../components/seo';
 
-const CaseStudiesPage = (): JSX.Element => {
+interface props {
+  location: object;
+}
+
+const CaseStudiesPage = ({ location }: props): JSX.Element => {
   return (
     <>
-      <SEO title="Case Studies" />
+      <SEO
+        location={location}
+        title="Case Studies"
+        description="Explore Regen Network case studies where technology, science and regenerative land use practices intersect."
+      />
       <TopSection />
       <ListSection />
     </>

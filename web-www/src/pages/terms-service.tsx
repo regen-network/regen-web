@@ -3,7 +3,11 @@ import SEO from '../components/seo';
 import { useStaticQuery, graphql } from 'gatsby';
 import MarkdownSection from '../components/MarkdownSection';
 
-const TermsService = (): JSX.Element => {
+interface props {
+  location: object;
+}
+
+const TermsService = ({ location }: props): JSX.Element => {
   const data = useStaticQuery(graphql`
     query {
       markdownRemark(fileAbsolutePath: { regex: "/^.*/terms-service.md$/" }) {
@@ -13,7 +17,11 @@ const TermsService = (): JSX.Element => {
   `);
   return (
     <>
-      <SEO title="Terms of Service" />
+      <SEO
+        title="Terms of Service"
+        location={location}
+        description="Regen Network aligns economics with ecology to drive regenerative land management."
+      />
       <MarkdownSection title="Terms of Service" mdContent={data.markdownRemark.html} />
     </>
   );

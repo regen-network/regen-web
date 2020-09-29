@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
+import { useStaticQuery, graphql } from 'gatsby';
 
 import TopSection from '../sections/invest/TopSection';
 import FormSection from '../sections/invest/FormSection';
@@ -80,7 +81,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const InvestorsPage = (): JSX.Element => {
+interface props {
+  location: object;
+}
+
+const InvestPage = ({ location }: props): JSX.Element => {
   const classes = useStyles();
   const [open, setOpen] = useState(true);
   const [interested, setInterested] = useState(true);
@@ -94,9 +99,22 @@ const InvestorsPage = (): JSX.Element => {
     handleClose();
   };
 
+  const data = useStaticQuery(graphql`
+    query {
+      seoImage: file(relativePath: { eq: "investors-top.jpg" }) {
+        publicURL
+      }
+    }
+  `);
+
   return (
     <>
-      <SEO title="Invest" />
+      <SEO
+        description="Learn about investment opportunities at Regen Network."
+        title="Invest"
+        location={location}
+        imageUrl={data.seoImage.publicURL}
+      />
       {interested ? (
         <>
           <TopSection />
@@ -128,4 +146,4 @@ const InvestorsPage = (): JSX.Element => {
   );
 };
 
-export default InvestorsPage;
+export default InvestPage;

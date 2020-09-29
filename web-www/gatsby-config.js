@@ -1,8 +1,8 @@
 module.exports = {
   siteMetadata: {
     title: `Regen Network`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    description: `Buy and sell ecosystem service credits at the open marketplace for climate solutions.`,
+    author: `Regen Network`,
     siteUrl: 'https://www.regen.network/',
   },
   plugins: [

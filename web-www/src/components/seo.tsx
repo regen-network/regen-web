@@ -11,27 +11,35 @@ import { Helmet } from 'react-helmet';
 import { useStaticQuery, graphql } from 'gatsby';
 
 interface propTypes {
-  description: string;
+  description?: string;
   lang: string;
   meta: Array<string>;
   title: string;
+  imageUrl?: string;
+  location: object;
 }
 
-function SEO({ description, lang, meta, title }: propTypes): JSX.Element {
-  const { site } = useStaticQuery(
+function SEO({ location, description, lang, imageUrl, meta, title }: propTypes): JSX.Element {
+  const { seoImage, site } = useStaticQuery(
     graphql`
       query {
+        seoImage: file(relativePath: { eq: "science.png" }) {
+          publicURL
+        }
         site {
           siteMetadata {
             title
             description
             author
+            siteUrl
           }
         }
       }
     `,
   );
 
+  const seoImageUrl = imageUrl || seoImage.publicURL;
+  const path = location ? location.pathname : '';
   const metaDescription = description || site.siteMetadata.description;
 
   return (
@@ -55,6 +63,14 @@ function SEO({ description, lang, meta, title }: propTypes): JSX.Element {
           content: metaDescription,
         },
         {
+          property: `og:image`,
+          content: seoImageUrl,
+        },
+        {
+          property: `og:url`,
+          content: `${site.siteMetadata.siteUrl}${path}`,
+        },
+        {
           property: `og:type`,
           content: `website`,
         },
@@ -73,6 +89,10 @@ function SEO({ description, lang, meta, title }: propTypes): JSX.Element {
         {
           name: `twitter:description`,
           content: metaDescription,
+        },
+        {
+          property: `twitter:image`,
+          content: seoImageUrl,
         },
       ]}
     />

@@ -14,10 +14,17 @@ import CarbonPlusSection from '../sections/home/CarbonPlusSection';
 import EmailSubmitSection from '../sections/shared/EmailSubmitSection';
 import BlogSection from '../sections/shared/BlogSection';
 
-const IndexPage = (): JSX.Element => {
+interface props {
+  location: object;
+}
+
+const IndexPage = ({ location }: props): JSX.Element => {
   const theme = useTheme();
   const data = useStaticQuery(graphql`
     query {
+      seoImage: file(relativePath: { eq: "science.png" }) {
+        publicURL
+      }
       background: file(relativePath: { eq: "home-climate-bg.jpg" }) {
         childImageSharp {
           fluid(quality: 90) {
@@ -37,7 +44,7 @@ const IndexPage = (): JSX.Element => {
 
   return (
     <>
-      <SEO title="Home" />
+      <SEO location={location} title="Regen Network" imageUrl={data.seoImage.publicURL} />
       <HomeFoldSection />
       <MarketplaceSection />
       <EmailSubmitSection />

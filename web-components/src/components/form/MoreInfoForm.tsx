@@ -4,20 +4,16 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { Formik, Form, Field } from 'formik';
 import axios from 'axios';
-import { navigate } from 'gatsby';
 
-import Title from 'web-components/lib/components/title';
-import TextField from 'web-components/lib/components/inputs/TextField';
-import {
-  requiredMessage,
-  validateEmail,
-  invalidEmailMessage,
-} from 'web-components/lib/components/inputs/validation';
-import NumberTextField from 'web-components/lib/components/inputs/NumberTextField';
-import Submit from 'web-components/lib/components/form/Submit';
+import Title from '../title';
+import TextField from '../inputs/TextField';
+import { requiredMessage, validateEmail, invalidEmailMessage } from '../inputs/validation';
+import NumberTextField from '../inputs/NumberTextField';
+import Submit from './Submit';
 
 interface MoreInfoFormProps {
   onClose: () => void;
+  onSubmit?: () => void;
 }
 
 interface Values {
@@ -55,7 +51,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function MoreInfoForm({ onClose }: MoreInfoFormProps): JSX.Element {
+export default function MoreInfoForm({ onClose, onSubmit }: MoreInfoFormProps): JSX.Element {
   const classes = useStyles();
   return (
     <div>
@@ -96,10 +92,9 @@ export default function MoreInfoForm({ onClose }: MoreInfoFormProps): JSX.Elemen
             })
             .then(resp => {
               setSubmitting(false);
-              navigate('/buyers', {
-                state: { submitted: true },
-                replace: true,
-              });
+              if (onSubmit) {
+                onSubmit();
+              }
             })
             .catch(e => {
               console.log(e);

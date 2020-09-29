@@ -697,6 +697,8 @@ collections:
       - { label: 'Answer', name: 'body', widget: 'markdown' }
   - label: "Case Studies content"
     name: "case-study-items"
+    media_folder: '../../static/media'
+    public_folder: '../../static/media'
     editor:
       preview: false
     create: true

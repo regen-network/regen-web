@@ -4,7 +4,7 @@ import { useTheme } from '@material-ui/core';
 import BackgroundImage from 'gatsby-background-image';
 import Box from '@material-ui/core/Box';
 
-import SEO from '../components/seo';
+import SEO, { defaultDescription } from '../components/seo';
 import HomeFoldSection from '../sections/home/FoldSection';
 import MarketplaceSection from '../sections/home/MarketplaceSection';
 import HomeLedger from '../sections/home/LedgerSection';
@@ -46,7 +46,7 @@ const IndexPage = ({ location }: props): JSX.Element => {
     <>
       <SEO
         location={location}
-        description="Buy and sell ecosystem service credits at the open marketplace for climate solutions."
+        description={defaultDescription}
         title="Regen Network"
         imageUrl={data.seoImage.publicURL}
       />

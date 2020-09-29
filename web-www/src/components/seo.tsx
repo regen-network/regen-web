@@ -11,7 +11,7 @@ import { Helmet } from 'react-helmet';
 import { useStaticQuery, graphql } from 'gatsby';
 
 interface propTypes {
-  description: string;
+  description?: string;
   lang: string;
   meta: Array<string>;
   title: string;
@@ -19,10 +19,23 @@ interface propTypes {
   location: object;
 }
 
-function SEO({ location, description, lang, imageUrl, meta, title }: propTypes): JSX.Element {
-  const { site } = useStaticQuery(
+export const defaultDescription: string =
+  'Buy and sell ecosystem service credits at the open marketplace for climate solutions.';
+
+function SEO({
+  location,
+  description = defaultDescription,
+  lang,
+  imageUrl,
+  meta,
+  title,
+}: propTypes): JSX.Element {
+  const { seoImage, site } = useStaticQuery(
     graphql`
       query {
+        seoImage: file(relativePath: { eq: "science.png" }) {
+          publicURL
+        }
         site {
           siteMetadata {
             title
@@ -34,6 +47,8 @@ function SEO({ location, description, lang, imageUrl, meta, title }: propTypes):
       }
     `,
   );
+
+  const seoImageUrl = imageUrl || seoImage.publicURL;
   const path = location ? location.pathname : '';
   const metaDescription = description || site.siteMetadata.description;
 
@@ -59,7 +74,7 @@ function SEO({ location, description, lang, imageUrl, meta, title }: propTypes):
         },
         {
           property: `og:image`,
-          content: imageUrl,
+          content: seoImageUrl,
         },
         {
           property: `og:url`,
@@ -87,7 +102,7 @@ function SEO({ location, description, lang, imageUrl, meta, title }: propTypes):
         },
         {
           property: `twitter:image`,
-          content: imageUrl,
+          content: seoImageUrl,
         },
       ]}
     />

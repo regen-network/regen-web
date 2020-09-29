@@ -2,11 +2,24 @@ name: Eco Cacao
 slug: eco-cacao
 cardImage: ../../static/media/eco-cacao-card.png
 background: ../../static/media/eco-cacao-top-bg.png
-description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+  eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+  veniam.
 aboutSection:
-  about: md//In the initial phase of this pilot, we are partnering with high-end chocolate brands in California such as <a target="_blank" href="https://imlakeshorganics.com/">Imlak’esh Organics</a> and <a target="_blank" href="https://endorfinfoods.com/">Endorfin Foods</a>, as well as <a target="_blank" href="http://yellow-seed.org/products/eco-cacao">Eco Cacao</a> and its parent organization <a target="_blank" href="https://www.conexionchocolate.com/esmeraldas/">UOPRACAE</a>, a co-operative of approximately 120 farmers from the Esmeraldas region in Ecuador. We hold the intention of scaling this effort to thousands of cacao farmers worldwide.
-    
-  
+  about: >-
+    md//In the initial phase of this pilot, we are partnering with high-end
+    chocolate brands in California such as <a target="_blank"
+    href="https://imlakeshorganics.com/">Imlak’esh Organics</a> and <a
+    target="_blank" href="https://endorfinfoods.com/">Endorfin Foods</a>, as
+    well as <a target="_blank"
+    href="http://yellow-seed.org/products/eco-cacao">Eco Cacao</a> and its
+    parent organization <a target="_blank"
+    href="https://www.conexionchocolate.com/esmeraldas/">UOPRACAE</a>, a
+    co-operative of approximately 120 farmers from the Esmeraldas region in
+    Ecuador. We hold the intention of scaling this effort to thousands of cacao
+    farmers worldwide.
+
+
     Our partner in running this pilot is <a target="_blank" href="http://www.terra-genesis.com/">Terra Genesis International</a>, who has been helping Eco Cacao train their farmers on regenerative practices and establish the first regenerative cacao certification.
   mapImage: ../../static/media/eco-cacao-map.png
   aboutImage: ../../static/media/eco-cacao-about.png
@@ -14,35 +27,69 @@ aboutSection:
   biome: Tropical forests
   region: Ecuador
   lineRotate: rotate(-25deg)
-  lineWidth: '53%'
+  lineWidth: 53%
 contextSection:
   image: ../../static/media/eco-cacao-context.png
-  description: md//Abundant monoculture crops to supply high global demand, severely degraded land and ecosystem.
+  description: md//Abundant monoculture crops to supply high global demand,
+    severely degraded land and ecosystem.
   challenges:
-    - text: High global demand for chocolate has led to highly-degrading monocrop cacao production that creates deforestation, runoff, and soil erosion.
-    - text: Regenerative growing methods, for example cover crops, agroforestry, and crop diversification, can combat the problems of unsustainable production, but is often too expensive for local farmers to implement, and furthermore, their impact often goes unrecognized and uncompensated.
-    - text: Unlike Organic and Fair Trade standards, there are no well-established regenerative agriculture standards nor verification methods necessary to get buyers on board for paying premiums that compensate and motivate farmers to adopt regenerative practices.
+    - text: High global demand for chocolate has led to highly-degrading monocrop
+        cacao production that creates deforestation, runoff, and soil erosion.
+    - text: Regenerative growing methods, for example cover crops, agroforestry, and
+        crop diversification, can combat the problems of unsustainable
+        production, but is often too expensive for local farmers to implement,
+        and furthermore, their impact often goes unrecognized and uncompensated.
+    - text: Unlike Organic and Fair Trade standards, there are no well-established
+        regenerative agriculture standards nor verification methods necessary to
+        get buyers on board for paying premiums that compensate and motivate
+        farmers to adopt regenerative practices.
 approachSection:
-  details: md//Using remote sensing based algorithms provided by Regen Network, Eco Cacao can verify their implementation of polyculture vs. monoculture practices within cacao farms. Additionally, other land cover classes related to land use management and ecosystems health can now be identified with high accuracy, and provide additional insights into each farm’s vegetation cover.
-  results: 'md//**Qualitative:** Detection of cacao monoculture vs. polyculture, primary and secondary tropical forests, mangroves, monoculture of African palm, Balsa and Teak, open water, constructions and other land uses.
-  
-    **Quantitative:** The area (i.e. number of hectares) per land cover class within each farm is identified with a 93% overall accuracy.'
-  next: md//Project-based funding and premium payment for high quality regeneratively grown cacao.
+  details: md//Using remote sensing based algorithms provided by Regen Network,
+    Eco Cacao can verify their implementation of polyculture vs. monoculture
+    practices within cacao farms. Additionally, other land cover classes related
+    to land use management and ecosystems health can now be identified with high
+    accuracy, and provide additional insights into each farm’s vegetation cover.
+  results: >-
+    md//**Qualitative:** Detection of cacao monoculture vs. polyculture, primary
+    and secondary tropical forests, mangroves, monoculture of African palm,
+    Balsa and Teak, open water, constructions and other land uses.
+
+    **Quantitative:** The area (i.e. number of hectares) per land cover class within each farm is identified with a 93% overall accuracy.
+  next: md//Project-based funding and premium payment for high quality
+    regeneratively grown cacao.
   figureImage: ../../static/media/eco-cacao-figure1.png
-  figureTitle: 'Verification of claims. Example: “The xx parcel is polyculture cacao”'
+  figureTitle: "Verification of claims. Example: “The xx parcel is polyculture cacao”"
 figureSection:
   background: ../../static/media/eco-cacao-figure-bg.png
-  figures: 
-    - image: ../../static/media/eco-cacao-figure2.png
-      title: 'Mono vs. Polyculture Cacao: Machine learning coupled with sentinel 2 time series allows for distinguishing polyculture from monocultures, primary forest, secondary forest, and other land uses.'
+  figures:
+    - image: /media/ecocacao-figure2.jpg
+      title: "Mono vs. Polyculture Cacao: Machine learning coupled with sentinel 2
+        time series allows for distinguishing polyculture from monocultures,
+        primary forest, secondary forest, and other land uses."
 fundingSection:
   image: ../../static/media/eco-cacao-funding.png
-  details: md//Creating a project on Regen Registry and storing monitoring data as immutable records on Regen Ledger which provides an important layer of transparency and accountability to funders.
-  results: md//Project page on Regen Registry targeted to go live in Q4. Regen Ledger integration to be added in subsequent phase.
-  next: md//Creating a dedicated carbon offset methodology for tropical agroforestry systems and offering carbon offsets as additional revenue stream to premiums; Launching the Project Page on Regen Registry and getting much needed funds to these cacao growers!
+  details: md//Creating a project on Regen Registry and storing monitoring data as
+    immutable records on Regen Ledger which provides an important layer of
+    transparency and accountability to funders.
+  results: md//Project page on Regen Registry targeted to go live in Q4. Regen
+    Ledger integration to be added in subsequent phase.
+  next: md//Creating a dedicated carbon offset methodology for tropical
+    agroforestry systems and offering carbon offsets as additional revenue
+    stream to premiums; Launching the Project Page on Regen Registry and getting
+    much needed funds to these cacao growers!
 conclusionSection:
-  description: md//Remote sensing is a cost-effective way to verify regenerative practices within tropical agroforestry systems on a large scale. Further, using project-based funding with bespoke verification can provide an alternative route to funding this important regenerative work. This work supports the financial well-being of farmers and producers, and the viability of communities in Ecuador where cacao producers often struggle with low margins, pressure from development, and increasing climate-related risks and costs. This project incentivizes a shift towards ecologically sound practices, resulting in healthy land, cleaner water, cleaner air, and the mitigation of climate change.
-  
+  description: >-
+    md//Remote sensing is a cost-effective way to verify regenerative practices
+    within tropical agroforestry systems on a large scale. Further, using
+    project-based funding with bespoke verification can provide an alternative
+    route to funding this important regenerative work. This work supports the
+    financial well-being of farmers and producers, and the viability of
+    communities in Ecuador where cacao producers often struggle with low
+    margins, pressure from development, and increasing climate-related risks and
+    costs. This project incentivizes a shift towards ecologically sound
+    practices, resulting in healthy land, cleaner water, cleaner air, and the
+    mitigation of climate change.
+
 
     Future program development will focus on streamlining the verification process, growing market demand for regenerative cacao and creating incentives for landscape-scale regeneration based on a broader suite of land management practices inclusive of conservation and restoration priorities as well as diverse forms of regenerative agricultural production.
   images:
@@ -50,7 +97,9 @@ conclusionSection:
     - image: ../../static/media/eco-cacaco-conlusion2.png
 bottomSection:
   background: ../../static/media/eco-cacao-bottom-bg.png
-  quote: We see Regen Network as an operational partner not just for our current shared projects, but for the work to plan, establish, manage, and monitor regenerative land management systems around the world.
+  quote: We see Regen Network as an operational partner not just for our current
+    shared projects, but for the work to plan, establish, manage, and monitor
+    regenerative land management systems around the world.
   person:
     name: luke smith
     image: ../../static/media/eco-cacao-luke.png

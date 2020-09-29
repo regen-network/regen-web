@@ -138,10 +138,10 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
           title: 'Partners',
           href: '/partners/',
         },
-        // {
-        //   title: 'Media',
-        //   href: '/media/',
-        // },
+        {
+          title: 'Media',
+          href: '/media/',
+        },
         {
           title: 'Careers',
           href: 'https://apply.workable.com/regen-network/',

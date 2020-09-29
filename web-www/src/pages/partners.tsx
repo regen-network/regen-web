@@ -12,13 +12,13 @@ import clsx from 'clsx';
 
 const useStyles = makeStyles((theme: Theme) => ({
   section: {
-    [theme.breakpoints.down('sm')]: {
-      paddingTop: theme.spacing(24.5),
-      paddingBottom: theme.spacing(15),
-    },
     [theme.breakpoints.up('sm')]: {
       paddingTop: theme.spacing(42.25),
-      paddingBottom: theme.spacing(23),
+      paddingBottom: theme.spacing(40.5),
+    },
+    [theme.breakpoints.down('xs')]: {
+      paddingBottom: theme.spacing(22.5),
+      paddingTop: theme.spacing(9.5),
     },
     backgroundColor: theme.palette.grey[50],
     overflow: 'hidden',
@@ -51,6 +51,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   img: {
     maxHeight: '90%',
     maxWidth: '80%',
+    padding: theme.spacing(7.5),
   },
   contactCard: {
     '& h4.MuiTypography-root, p.MuiTypography-root': {
@@ -125,7 +126,7 @@ const PartnersPage = (): JSX.Element => {
                 </a>
               </Grid>
             ))}
-            <Grid className={classes.item} xs={12} sm={6} md={4} item key={'contact'}>
+            <Grid className={classes.item} xs={12} sm={6} md={4} item key="contact">
               <GreenCard className={clsx(classes.card, classes.contactCard)}>
                 <Title align="center" variant="h4">
                   {contactCard.header}

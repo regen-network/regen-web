@@ -106,10 +106,10 @@ function AppFooter(): JSX.Element {
           title: 'Partners',
           href: `${process.env.REACT_APP_WEBSITE_URL}/partners/`,
         },
-        // {
-        //   title: 'Media',
-        //   href: `${process.env.REACT_APP_WEBSITE_URL}/media/`,
-        // },
+        {
+          title: 'Media',
+          href: `${process.env.REACT_APP_WEBSITE_URL}/media/`,
+        },
         {
           title: 'Careers',
           href: 'https://apply.workable.com/regen-network/',

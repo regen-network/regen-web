@@ -147,6 +147,13 @@ function AppHeader(): JSX.Element {
     { title: 'Buyers', href: `${process.env.REACT_APP_WEBSITE_URL}/buyers/` },
     { title: 'Land Stewards', href: `${process.env.REACT_APP_WEBSITE_URL}/land-stewards/` },
     {
+      title: 'Community',
+      dropdownItems: [
+        { title: 'Developers', href: `${process.env.REACT_APP_WEBSITE_URL}/developers/` },
+        { title: 'Scientists', href: `${process.env.REACT_APP_WEBSITE_URL}/science/` },
+      ],
+    },
+    {
       title: 'Learn More',
       dropdownItems: [
         { title: 'Case Studies', href: `${process.env.REACT_APP_WEBSITE_URL}/case-studies/` },

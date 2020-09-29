@@ -80,7 +80,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const PartnersPage = (): JSX.Element => {
+interface props {
+  location: object;
+}
+
+const PartnersPage = ({ location }: props): JSX.Element => {
   const data = useStaticQuery(graphql`
     query {
       allPartnersYaml(sort: { order: ASC }) {
@@ -107,7 +111,7 @@ const PartnersPage = (): JSX.Element => {
   const classes = useStyles();
   return (
     <>
-      <SEO title="Partners" />
+      <SEO title="Partners" location={location} />
       <div className={classes.sectionWrapper}>
         <Section className={classes.section}>
           <Title className={classes.title} align="center" variant="h1">
@@ -132,9 +136,7 @@ const PartnersPage = (): JSX.Element => {
                 <Title align="center" variant="h4">
                   {contactCard.header}
                 </Title>
-                <Typography
-                  className={classes.contactText}
-                >{ReactHtmlParser(contactCard.body)}</Typography>
+                <Typography className={classes.contactText}>{ReactHtmlParser(contactCard.body)}</Typography>
               </GreenCard>
             </Grid>
           </Grid>

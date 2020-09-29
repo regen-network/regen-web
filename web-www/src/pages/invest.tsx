@@ -85,7 +85,7 @@ interface props {
   location: object;
 }
 
-const InvestorsPage = ({ location }: props): JSX.Element => {
+const InvestPage = ({ location }: props): JSX.Element => {
   const classes = useStyles();
   const [open, setOpen] = useState(true);
   const [interested, setInterested] = useState(true);
@@ -98,7 +98,7 @@ const InvestorsPage = ({ location }: props): JSX.Element => {
     setInterested(false);
     handleClose();
   };
-        
+
   const data = useStaticQuery(graphql`
     query {
       seoImage: file(relativePath: { eq: "investors-top.jpg" }) {
@@ -146,4 +146,4 @@ const InvestorsPage = ({ location }: props): JSX.Element => {
   );
 };
 
-export default InvestorsPage;
+export default InvestPage;

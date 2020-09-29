@@ -1,6 +1,8 @@
 topSection:
   header: Learn more about our work.
-  body: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.
+  body: Growing regenerative cacao, sand quarry restoration, and sheep grazing in
+    vineyards - these are just a few examples of how our solution can be used to
+    regenerate our ecology and planet!
 caseStudies:
   header: Case Studies
   view: view case study
@@ -19,7 +21,9 @@ caseStudies:
     results: results
     next: what's next
   fundingSection:
-    header: md//Project-based funding via [Regen Registry](https://regen-website.netlify.com/registry/projects/impactag) + [Regen Ledger](https://regen-website.netlify.com/developers)
+    header: md//Project-based funding via [Regen
+      Registry](https://regen-website.netlify.com/registry/projects/impactag) +
+      [Regen Ledger](https://regen-website.netlify.com/developers)
     details: details
     results: results
     next: what's next

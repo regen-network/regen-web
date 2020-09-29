@@ -40,7 +40,7 @@ const LandStewardsPage = ({ location }: props): JSX.Element => {
 
   const data = useStaticQuery(graphql`
     query {
-      seoImage: file(relativePath: { eq: "land-stewards-top.png" }) {
+      seoImage: file(relativePath: { eq: "land-stewards-top.jpg" }) {
         publicURL
       }
     }

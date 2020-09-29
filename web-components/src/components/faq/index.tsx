@@ -72,7 +72,7 @@ const FAQ = ({ questions, categories, defaultCategory }: FAQProps): JSX.Element 
           <Navigation category={category} categories={categories} onClick={handleClick} />
         </div>
         <div>
-          <Category name={category} questions={questions[category]} />
+          <Category name={category} questions={questions[category] || []} />
         </div>
       </Box>
 
@@ -83,7 +83,7 @@ const FAQ = ({ questions, categories, defaultCategory }: FAQProps): JSX.Element 
               <BreadcrumbIcon className={classes.icon} direction="prev" />
               back
             </div>
-            <Category name={category} questions={questions[category]} />
+            <Category name={category} questions={questions[category] || []} />
           </div>
         ) : (
           <div className={classes.navigation}>

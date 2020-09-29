@@ -4,6 +4,7 @@ import { useTheme } from '@material-ui/core/styles';
 
 import { useAuth0 } from './react-auth0-spa';
 import isAdmin from './lib/admin';
+import { init as initGA } from './lib/ga';
 
 import './App.css';
 import {
@@ -224,6 +225,10 @@ function PostPurchase(): JSX.Element {
 
 const App: React.FC = (): JSX.Element => {
   const { user, loading } = useAuth0();
+
+  useEffect(() => {
+    initGA();
+  });
 
   if (loading) {
     return <div></div>;

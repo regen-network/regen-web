@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import * as togeojson from '@mapbox/togeojson';
 import Grid from '@material-ui/core/Grid';
+import { useLocation } from 'react-router-dom';
+import { setPageView } from '../lib/ga';
 
 import background from '../assets/background.jpg';
 import { Project, Impact, ProjectDefault, ActionGroup } from '../mocks';
@@ -287,6 +289,11 @@ function getProjectUser(projectUser: User): User {
 }
 
 export default function ProjectDetails({ project, projectDefault }: ProjectProps): JSX.Element {
+  const location = useLocation();
+  useEffect(() => {
+    setPageView(location);
+  }, [location]);
+
   const classes = useStyles({});
   const impact: Impact[] = project.impact.map(item => ({ ...item, imgSrc: getImgSrc(item.imgSrc) }));
   const landManagementActions: ActionGroup[] = project.landManagementActions.map(group => ({

@@ -4,6 +4,14 @@ import { Theme, makeStyles } from '@material-ui/core/styles';
 import BackgroundSection from '../../components/BackgroundSection';
 
 const useStyles = makeStyles<Theme>((theme: Theme) => ({
+  topSection: {
+    [theme.breakpoints.up('sm')]: {
+      paddingTop: theme.spacing(64),
+    },
+    [theme.breakpoints.down('xs')]: {
+      paddingTop: theme.spacing(60),
+    },
+  },
   title: {
     fontWeight: 'normal',
     fontFamily: theme.typography.overline.fontFamily,
@@ -43,6 +51,7 @@ const TopSection = (): JSX.Element => {
       imageData={imageData}
       titleClassName={classes.title}
       titleVariant="h2"
+      className={classes.topSection}
     />
   );
 };

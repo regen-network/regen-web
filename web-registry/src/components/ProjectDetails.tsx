@@ -31,7 +31,12 @@ import BuyFooter from 'web-components/lib/components/fixed-footer/BuyFooter';
 import MrvTabs from 'web-components/lib/components/tabs';
 import Table from 'web-components/lib/components/table';
 import Modal from 'web-components/lib/components/modal';
+import MoreInfoForm from 'web-components/lib/components/form/MoreInfoForm';
 import CreditsPurchaseForm from './CreditsPurchaseForm';
+import Banner from 'web-components/lib/components/banner';
+import FixedFooter from 'web-components/lib/components/fixed-footer';
+import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
+import EmailIcon from 'web-components/lib/components/icons/EmailIcon';
 
 import { getImgSrc } from '../lib/imgSrc';
 
@@ -289,6 +294,7 @@ function getProjectUser(projectUser: User): User {
 }
 
 export default function ProjectDetails({ project, projectDefault }: ProjectProps): JSX.Element {
+  const [submitted, setSubmitted] = useState(false);
   const location = useLocation();
   useEffect(() => {
     setPageView(location);
@@ -592,6 +598,25 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
           {/*<iframe title="airtable-presale-form" src={project.presaleUrl} />*/}
         </Modal>
       )}
+
+      <FixedFooter justify="flex-end">
+        <>
+          <ContainedButton onClick={handleOpen} startIcon={<EmailIcon />}>
+            send me more info
+          </ContainedButton>
+          {/* {<OutlinedButton className={classes.callButton} startIcon={<PhoneIcon />}>schedule a call</OutlinedButton>} */}
+        </>
+      </FixedFooter>
+      <Modal open={open} onClose={handleClose}>
+        <MoreInfoForm
+          onClose={handleClose}
+          onSubmit={() => {
+            handleClose();
+            setSubmitted(true);
+          }}
+        />
+      </Modal>
+      {submitted && <Banner text="Thanks for submitting your information!" />}
     </div>
   );
 }

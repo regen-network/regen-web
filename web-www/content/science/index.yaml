@@ -61,7 +61,11 @@ communitySection:
     - name: Patrick Lawrence
       image: ../../static/media/patrick-lawrence.png
       role: regen team
-      description: xx
+      description: Patrick is an interdisciplinary scientist focused on the
+        intersection between agriculture, ecology, and human decision-making. He
+        assists the the Food Lab with project management, data analysis, and
+        scientific support for the Cool Farm Tool and Organic Grains
+        initiatives.
     - name: Dan Kane
       image: ../../static/media/dan-kane.png
       role: Placeholder role 2
@@ -78,11 +82,20 @@ communitySection:
     - name: Dorn Cox
       image: ../../static/media/dorn-cox.png
       role: Placeholder role 4
-      description: Placeholder description 4
+      description: Dr. Dorn Cox serves as project lead for OpenTEAM (Open Technology
+        Ecosystem for Agricultural Management) and research director for Wolfe’s
+        Neck Center for Agriculture & the Environment, a nonprofit research and
+        education center, and a working organic farm on 600 acres of conserved
+        land on the coast of Maine.
     - name: Greg Austic
       image: ../../static/media/greg-austic.png
       role: Placeholder role 5
-      description: Placeholder description 5
+      description: Greg is an open technology advocate, co-organizer of the Gathering
+        of Open Science Hardware GOSH and the Gathering for Open Ag Tech (GOAT).
+        He’s a jack of all trades capable of getting an idea off the ground
+        quickly and inexpensively.  Prior to Our Sci, he helped create the
+        MultispeQ, a low-cost photosynthesis meter, and PhotosynQ, a platform
+        for collecting and sharing plant health data.
     - name: Placeholder name 6
       image: ../../static/media/you.png
       role: Placeholder role 6

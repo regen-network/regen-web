@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { navigate } from 'gatsby';
 
 import SEO from '../components/seo';
 import TopSection from '../sections/buyers/TopSection';
 import ImageGridSection from '../sections/buyers/ImageGridSection';
 // import ApproachSection from '../sections/buyers/ApproachSection';
 // import InvestingSection from '../sections/buyers/InvestingSection';
-import MoreInfoForm from '../sections/buyers/MoreInfoForm';
+import MoreInfoForm from 'web-components/src/components/form/MoreInfoForm';
 import FeaturedSection from '../sections/shared/FeaturedSection';
 import ComingSoonSection from '../sections/shared/ComingSoonSection';
 import FixedFooter from 'web-components/lib/components/fixed-footer';
@@ -62,7 +63,15 @@ const BuyersPage = ({ location }): JSX.Element => {
         </>
       </FixedFooter>
       <Modal open={open} onClose={handleClose}>
-        <MoreInfoForm onClose={handleClose} />
+        <MoreInfoForm
+          onClose={handleClose}
+          onSubmit={() => {
+            navigate('/buyers', {
+              state: { submitted: true },
+              replace: true,
+            });
+          }}
+        />
       </Modal>
       {location && location.state && location.state.submitted && (
         <Banner text="Thanks for submitting your information!" />

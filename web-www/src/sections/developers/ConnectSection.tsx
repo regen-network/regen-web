@@ -7,13 +7,18 @@ import TwitterIcon from 'web-components/lib/components/icons/social/TwitterIcon'
 import TelegramIcon from 'web-components/lib/components/icons/social/TelegramIcon';
 import MediumIcon from 'web-components/lib/components/icons/social/MediumIcon';
 import GithubIcon from 'web-components/lib/components/icons/social/GithubIcon';
-import BlockIcon from 'web-components/lib/components/icons/BlockIcon';
 import WhitepaperIcon from 'web-components/lib/components/icons/WhitepaperIcon';
 
 const useStyles = makeStyles((theme: Theme) => ({
   title: {
     fontWeight: 'normal',
     fontFamily: theme.typography.overline.fontFamily,
+  },
+  item: {
+    [theme.breakpoints.up('sm')]: {
+      maxWidth: '20%',
+      flexBasis: '20%',
+    },
   },
 }));
 
@@ -40,16 +45,6 @@ const DevelopersConnectSection = (): JSX.Element => {
   const icons: IconLabelProps[] = [
     {
       icon: <TelegramIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />,
-      href: 'https://t.me/regennetwork_public',
-      label: 'Regen Network: Public',
-    },
-    {
-      icon: <TelegramIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />,
-      href: 'https://t.me/joinchat/FJGNSxOpjJcgrUGwAAOKUg',
-      label: 'Regen Network: DVD',
-    },
-    {
-      icon: <TelegramIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />,
       href: 'https://t.me/regennetworkdevannounce',
       label: 'Development Updates',
     },
@@ -74,15 +69,10 @@ const DevelopersConnectSection = (): JSX.Element => {
       href: 'https://github.com/regen-network/',
       label: 'Github',
     },
-    {
-      icon: <BlockIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />,
-      href: 'https://regen-network.gitlab.io/lunie/',
-      label: 'Block Explorer',
-      small: true,
-    },
   ];
   return (
     <ConnectSection
+      itemClassName={classes.item}
       header={content.header}
       background={data.background}
       icons={icons}

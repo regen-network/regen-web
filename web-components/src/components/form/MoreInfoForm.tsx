@@ -14,6 +14,7 @@ import Submit from './Submit';
 interface MoreInfoFormProps {
   onClose: () => void;
   onSubmit?: () => void;
+  apiUrl: string;
 }
 
 interface Values {
@@ -51,7 +52,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function MoreInfoForm({ onClose, onSubmit }: MoreInfoFormProps): JSX.Element {
+export default function MoreInfoForm({ onClose, onSubmit, apiUrl }: MoreInfoFormProps): JSX.Element {
   const classes = useStyles();
   return (
     <div>
@@ -82,7 +83,7 @@ export default function MoreInfoForm({ onClose, onSubmit }: MoreInfoFormProps): 
         }}
         onSubmit={({ budget, email, name, orgName }, { setSubmitting, setStatus }) => {
           setSubmitting(true);
-          const apiUri: string = process.env.GATSBY_API_URI || 'http://localhost:5000';
+          const apiUri: string = apiUrl || 'http://localhost:5000';
           axios
             .post(`${apiUri}/buyers-info`, {
               budget,

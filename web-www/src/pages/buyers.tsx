@@ -82,6 +82,7 @@ const BuyersPage = ({ location }: props): JSX.Element => {
       </FixedFooter>
       <Modal open={open} onClose={handleClose}>
         <MoreInfoForm
+          apiUrl={process.env.GATSBY_API_URI}
           onClose={handleClose}
           onSubmit={() => {
             navigate('/buyers', {

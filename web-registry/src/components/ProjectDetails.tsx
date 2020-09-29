@@ -609,6 +609,7 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
       </FixedFooter>
       <Modal open={open} onClose={handleClose}>
         <MoreInfoForm
+          apiUrl={process.env.REACT_APP_API_URI}
           onClose={handleClose}
           onSubmit={() => {
             handleClose();

@@ -63,9 +63,8 @@ const MenuHover = ({ text, textColor, dropdownColor, children }: Props): JSX.Ele
         onMouseEnter={popoverEnter}
         onMouseLeave={popoverLeave}
       >
-        {text}
-      </span>{' '}
-      <DropdownIcon color={dropdownColor} />
+        {text} <DropdownIcon color={dropdownColor} />
+      </span>
       <Popover
         id="mouse-over-popover"
         className={classes.popover}

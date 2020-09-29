@@ -9,8 +9,8 @@ import BreadcrumbIcon from '../icons/BreadcrumbIcon';
 
 interface NavigationProps {
   categories: string[];
-  onClick: (c: number) => void;
-  category: number;
+  onClick: (c: string) => void;
+  category: string;
 }
 
 const StyledList = withStyles(theme => ({
@@ -77,9 +77,9 @@ const Navigation = ({ categories, onClick, category }: NavigationProps): JSX.Ele
         <StyledListItem
           key={i}
           button
-          selected={category === i}
+          selected={category === name}
           onClick={() => {
-            onClick(i);
+            onClick(name);
           }}
         >
           {name}

@@ -1,5 +1,5 @@
 ---
-category: CarbonPlus Credits
+category: Carbonplus Credits
 title: "13"
 description: Who are the Verifiers?
 ---

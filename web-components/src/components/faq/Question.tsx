@@ -84,6 +84,26 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   answer: {
     lineHeight: '150%',
     position: 'relative',
+    '& ul, ol': {
+      listStyle: 'none',
+      marginLeft: theme.spacing(3),
+    },
+    '& li::before': {
+      content: "'\\2022'",
+      color: theme.palette.secondary.main,
+      display: 'inline-block',
+      width: '1em',
+      marginLeft: '-1em',
+      fontSize: theme.spacing(3),
+    },
+    '& a': {
+      color: theme.palette.secondary.main,
+      fontWeight: 'bold',
+      textDecoration: 'none',
+      '&:link, &:visited, &:hover, &:active': {
+        textDecoration: 'none',
+      },
+    },
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.spacing(4.5),
       marginRight: theme.spacing(14.25),

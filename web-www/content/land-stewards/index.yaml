@@ -1,58 +1,71 @@
 topSection:
   header: Get paid for your ecological impact. Regenerate the planet.
-  body: Farmers and ranchers positively impact our planet in numerous ways. Regen Network rewards ecological stewardship.
+  body: Farmers and ranchers positively impact our planet in numerous ways. Regen
+    Network rewards ecological stewardship.
 imageItemsSection:
-  header: Designed with the farmer in mind
+  header: Designed for farmers
   imageItems:
     - header: Create a new revenue stream
       image: ../../static/media/revenue.svg
-      description: Get paid for existing or new ecological stewardship practices on farm and ranch lands.
+      description: Get paid for existing or new ecological stewardship practices on
+        farm and ranch lands.
     - header: Streamlined process
       image: ../../static/media/verified-outcomes.svg
-      description: Registration, monitoring, reporting, verification and payment are streamlined to save you precious time.
+      description: Registration, monitoring, reporting, verification and payment are
+        streamlined to save you precious time.
     - header: Keep more money in your pocket
       image: ../../static/media/buying-through-regen.svg
-      description: More money stays in your pocket through automation and cutting edge technology.
+      description: More money stays in your pocket through automation and cutting edge
+        technology.
 joinFarmersSection:
   header: Join the farmers who’ve signed up
   farmers:
     amount: 216
     label: farmers and ranchers
     image: ../../static/media/farmers.png
-  land: 
+  land:
     amount: 16.4M
     label: acres of land
     image: ../../static/media/acres-of-land.png
 practicesOutcomesSection:
   header: Get paid for these practices, outcomes, and more:*
-  note: '*These credits are not yet ready. Sign up now to get notified when available!'
+  note: "*These credits are not yet ready. Sign up now to get notified when
+    available!"
   practices:
     header: land management practices
     items:
       - image: ../../static/media/no-till.svg
         header: No-Till
-        description: Growing crops without disturbing the soil through tillage decreases soil erosion.
+        description: Growing crops without disturbing the soil through tillage decreases
+          soil erosion.
       - image: ../../static/media/cover-cropping.svg
         header: Cover cropping
-        description: Cover crops are planted to cover the soil rather than for the purpose of being harvested.
+        description: Cover crops are planted to cover the soil rather than for the
+          purpose of being harvested.
       - image: ../../static/media/crop-rotation.svg
         header: Crop rotation
-        description: Growing a series of different types of crops in the same area increases soil fertility, reduces erosion, and more.
+        description: Growing a series of different types of crops in the same area
+          increases soil fertility, reduces erosion, and more.
       - image: ../../static/media/rotational-grazing.svg
         header: Rotational grazing
-        description: Moving grazing livestock between pastures on a regular basis increases soil health.
+        description: Moving grazing livestock between pastures on a regular basis
+          increases soil health.
       - image: ../../static/media/agroforestry.svg
         header: Agroforestry
-        description: A land use management system in which trees or shrubs are grown around or among crops or pastureland.
+        description: A land use management system in which trees or shrubs are grown
+          around or among crops or pastureland.
       - image: ../../static/media/riparian-zones.svg
         header: Riparian protection
-        description: Protecting the area between land and a river or stream stabilizes soil and encourages biodiversity.
+        description: Protecting the area between land and a river or stream stabilizes
+          soil and encourages biodiversity.
       - image: ../../static/media/perennials.svg
         header: Perennials
-        description: Perennial plants can hold soil to prevent erosion, capture dissolved nitrogen, and reduce the need for herbicides.
+        description: Perennial plants can hold soil to prevent erosion, capture
+          dissolved nitrogen, and reduce the need for herbicides.
       - image: ../../static/media/buffer-strips.svg
         header: Buffers strips
-        description: A buffer strip is an area of land maintained in permanent vegetation that helps to control air, soil, and water quality.
+        description: A buffer strip is an area of land maintained in permanent
+          vegetation that helps to control air, soil, and water quality.
   outcomes:
     header: ecological outcomes
     items:
@@ -64,16 +77,20 @@ practicesOutcomesSection:
         description: Increasing all living biomass which is located above the ground.
       - image: ../../static/media/soil-health.png
         header: Soil health
-        description: Healthy soil acts as a vital living ecosystem that sustains plants, animals, and humans.
+        description: Healthy soil acts as a vital living ecosystem that sustains plants,
+          animals, and humans.
       - image: ../../static/media/animal-welfare.png
         header: Animal welfare
-        description: Animals play an important role in the maintenance of balance in an ecosystem.
+        description: Animals play an important role in the maintenance of balance in an
+          ecosystem.
       - image: ../../static/media/ecosystem-health.png
         header: Ecosystem health
-        description: Robust ecosystems provide a home for humans, plants, and animals to flourish.
+        description: Robust ecosystems provide a home for humans, plants, and animals to
+          flourish.
       - image: ../../static/media/enhance-biodiversity.png
         header: Enhance biodiversity
-        description: The diversity of plants and animals is of vital importance to our well-being.
+        description: The diversity of plants and animals is of vital importance to our
+          well-being.
 timelineSection:
   header: How it works
   items:
@@ -81,40 +98,40 @@ timelineSection:
       image: ../../static/media/Registration.svg
       tags:
         - name: farmer
-          color: '#7BC796'
+          color: "#7BC796"
     - title: Establish baseline
       image: ../../static/media/Accountability-timeline.svg
       tags:
         - name: monitor
-          color: '#6D9BDB'
+          color: "#6D9BDB"
         - name: farmer
-          color: '#7BC796'
+          color: "#7BC796"
     - title: Implement land management
       image: ../../static/media/Farmer.svg
       tags:
         - name: farmer
-          color: '#7BC796'
+          color: "#7BC796"
     - title: Monitor change
       image: ../../static/media/Trust-timeline.svg
       tags:
         - name: monitor
-          color: '#6D9BDB'
+          color: "#6D9BDB"
         - name: farmer
-          color: '#7BC796'
+          color: "#7BC796"
     - title: Issue credits
       image: ../../static/media/Credits-Icon.svg
       tags:
         - name: regen registry
-          color: '#E6735C'
+          color: "#E6735C"
     - title: Sell credits
       image: ../../static/media/Credits-Available.svg
       tags:
         - name: regen registry
-          color: '#E6735C'
+          color: "#E6735C"
     - title: Get paid
       image: ../../static/media/Money.svg
       tags:
         - name: farmer
-          color: '#7BC796'
+          color: "#7BC796"
 moreQuestionsSection:
   header: More questions? Dig into our FAQ.

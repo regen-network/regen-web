@@ -124,9 +124,9 @@ const HomeLedger = () => {
             <span className={classes.green}>Regen Registry</span>
           </Title>
           <Typography className={classes.description}>{content.description}</Typography>
-          {/* <ContainedButton href="/developers" className={classes.button}>
+          <ContainedButton href="/developers" className={classes.button}>
             Learn More
-          </ContainedButton> */}
+          </ContainedButton>
         </Grid>
       </Grid>
     </BackgroundImage>

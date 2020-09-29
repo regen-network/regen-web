@@ -63,6 +63,13 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
     { title: 'Buyers', href: '/buyers/' },
     { title: 'Land Stewards', href: '/land-stewards/' },
     {
+      title: 'Community',
+      dropdownItems: [
+        { title: 'Developers', href: '/developers/' },
+        { title: 'Scientists', href: '/science/' },
+      ],
+    },
+    {
       title: 'Learn More',
       dropdownItems: [
         { title: 'Case Studies', href: '/case-studies/' },
@@ -93,11 +100,11 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
           href: '/land-stewards/',
         },
         {
-          title: 'Developers & Validators',
+          title: 'Developers',
           href: '/developers/',
         },
         {
-          title: 'Scientists & Verifiers',
+          title: 'Scientists',
           href: '/science/',
         },
         {

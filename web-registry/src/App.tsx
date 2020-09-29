@@ -4,6 +4,7 @@ import { useTheme } from '@material-ui/core/styles';
 
 import { useAuth0 } from './react-auth0-spa';
 import isAdmin from './lib/admin';
+import { init as initGA } from './lib/ga';
 
 import './App.css';
 import {
@@ -61,11 +62,11 @@ function AppFooter(): JSX.Element {
           href: `${process.env.REACT_APP_WEBSITE_URL}/land-stewards/`,
         },
         {
-          title: 'Developers & Validators',
+          title: 'Developers',
           href: `${process.env.REACT_APP_WEBSITE_URL}/developers/`,
         },
         {
-          title: 'Scientists & Verifiers',
+          title: 'Scientists',
           href: `${process.env.REACT_APP_WEBSITE_URL}/science/`,
         },
         {
@@ -147,6 +148,13 @@ function AppHeader(): JSX.Element {
     { title: 'Buyers', href: `${process.env.REACT_APP_WEBSITE_URL}/buyers/` },
     { title: 'Land Stewards', href: `${process.env.REACT_APP_WEBSITE_URL}/land-stewards/` },
     {
+      title: 'Community',
+      dropdownItems: [
+        { title: 'Developers', href: `${process.env.REACT_APP_WEBSITE_URL}/developers/` },
+        { title: 'Scientists', href: `${process.env.REACT_APP_WEBSITE_URL}/science/` },
+      ],
+    },
+    {
       title: 'Learn More',
       dropdownItems: [
         { title: 'Case Studies', href: `${process.env.REACT_APP_WEBSITE_URL}/case-studies/` },
@@ -224,6 +232,10 @@ function PostPurchase(): JSX.Element {
 
 const App: React.FC = (): JSX.Element => {
   const { user, loading } = useAuth0();
+
+  useEffect(() => {
+    initGA();
+  });
 
   if (loading) {
     return <div></div>;

@@ -179,10 +179,10 @@ collections:
                   - {label: Updated, name: updated, widget: string}
                   - {label: Description, name: description, widget: text, required: false}
                   - {label: ButtonText, name: buttonText, widget: string}
-                  - {label: Link, name: link, widget: string}
+                  - {label: Link, name: link, widget: string, required: false}
           - label: "Ledger Section"
             name: "ledgerSection"
-            widget: "list"
+            widget: "object"
             collapsed: false
             fields:
               - {label: Header, name: header, widget: string}
@@ -196,7 +196,7 @@ collections:
                   - {label: Updated, name: updated, widget: string}
                   - {label: Description, name: description, widget: text, required: false}
                   - {label: ButtonText, name: buttonText, widget: string}
-                  - {label: Link, name: link, widget: string}
+                  - {label: Link, name: link, widget: string, required: false}
       - label: "Privacy Policy"
         name: "privacy-policy"
         file: "web-www/content/privacy-policy/privacy-policy.md"

@@ -41,18 +41,8 @@ comingSoonSection:
       location: Bookham, New South Wales, Australia
       area: 25000
       areaUnit: acres
-    - name: Wongelia
+    - name: Wongella
       image: ../../static/media/wongelia.png
       location: Kilkivan, Queensland, Australia
       area: 10000
       areaUnit: acres
-    - name: Andover Farm
-      image: ../../static/media/andover-farm.png
-      location: Western Australia, Australia
-      area: 1787
-      areaUnit: hectares
-    - name: Mt. Sandy
-      image: ../../static/media/mt-sandy.png
-      location: South Australia, Australia
-      area: 200
-      areaUnit: hectares

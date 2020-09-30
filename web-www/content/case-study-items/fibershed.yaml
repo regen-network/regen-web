@@ -2,9 +2,9 @@ name: Fibershed
 slug: fibershed
 cardImage: ../../static/media/fibershed-card.png
 background: ../../static/media/fibershed-top-bg.png
-description: Fibershed is a nonprofit organization that develops fiber and
-  textile systems through a focus on carbon farming, regional production and
-  fiber processing, and public education.
+description: Fibershed is a California-based nonprofit organization that
+  develops fiber and textile systems through a focus on carbon farming, regional
+  production and fiber processing, and public education.
 aboutSection:
   about: >-
     md//<a href="https://fibershed.org/" target="_blank">Fibershed</a> is a
@@ -50,7 +50,7 @@ figureSection:
     utilized to map grazing operations with 87% accuracy."
   figures:
     - image: ../../static/media/fibershed-figure2.png
-    - image: ../../static/media/fibershed-figure3.png
+    - image: ../../static/media/fibershed-figure3.webp
 fundingSection:
   image: ../../static/media/fibershed-funding.png
   details: md//Creating a project on Regen Registry and storing monitoring data as

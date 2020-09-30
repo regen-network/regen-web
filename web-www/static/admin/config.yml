@@ -619,14 +619,14 @@ collections:
             widget: "object"
             fields:
               - {label: Header, name: header, widget: string}
-              - {label: Description, name: body, widget: markdown}
+              - {label: Description, name: description, widget: markdown}
           - label: Regen Network enables Section
             name: enableSection
             widget: "object"
             fields:
               - {label: Header, name: header, widget: string}
               - {label: image, name: image, widget: image}
-              - {label: Description, name: body, widget: markdown}
+              - {label: Description, name: description, widget: markdown}
           - label: Timeline Section
             name: timelineSection
             widget: "object"

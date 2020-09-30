@@ -5,66 +5,80 @@ categories:
     showPlay: false
     items:
       - image: ../../static/media/media-article1.png
-        title: Regen Network Crosses $1MM Raise Led by Interchain Foundation and Announces Chorus One Partnership and Completion of Techstars Sustainability Accelerator Program
+        title: Regen Network Crosses $1MM Raise Led by Interchain Foundation and
+          Announces Chorus One Partnership and Completion of Techstars
+          Sustainability Accelerator Program
         date: October 16, 2019
         author: Accesswire
         url: https://www.accesswire.com/563243/Regen-Network-Crosses-1MM-Raise-Led-by-Interchain-Foundation-and-Announces-Chorus-One-Partnership-and-Completion-of-Techstars-Sustainability-Accelerator-Program
       - image: ../../static/media/media-article2.png
-        title: Regen Network's global marketplace and technology platform seeks to disrupt a $35Bn market
+        title: Regen Network's global marketplace and technology platform seeks to
+          disrupt a $35Bn market
         date: Yahoo Finance
         author: October 16, 2019
         url: https://sports.yahoo.com/regen-network-crosses-1mm-raise-194500581.html
       - image: ../../static/media/media-article3.png
-        title: 'Crypto Market Update: Focus on Bitcoin (BTC), XRP, Chainlink (LINK), Cosmos (ATOM)'
+        title: "Crypto Market Update: Focus on Bitcoin (BTC), XRP, Chainlink (LINK),
+          Cosmos (ATOM)"
         date: October 3, 2019
         author: Cryptoglobe
         url: https://www.cryptoglobe.com/latest/2019/10/crypto-market-update-focus-on-bitcoin-btc-xrp-chainlink-link-cosmos-atom/
       - image: ../../static/media/media-article4.png
-        title: Can blockchain and cryptocurrency community save Amazon rainforest from certain doom?
+        title: Can blockchain and cryptocurrency community save Amazon rainforest from
+          certain doom?
         date: September 5, 2019
         author: Cryptopolitan
-        url: 
+        url: https://www.cryptopolitan.com/blockchain-and-cryptocurrency-community-for-amazon/
       - image: ../../static/media/media-article5.png
-        title: Global Collaborative Launches OpenTEAM to Address Soil Health and Mitigate Climate Change
+        title: Global Collaborative Launches OpenTEAM to Address Soil Health and
+          Mitigate Climate Change
         date: August 1, 2019
         author: No-Till Farmer
         url: https://www.no-tillfarmer.com/articles/9009-global-collaborative-launches-openteam-to-address-soil-health-and-mitigate-climate-change
       - image: ../../static/media/media-article6.png
-        title: Techstars Sustainability startups tackle clean water, regenerative farming and supply chains
+        title: Techstars Sustainability startups tackle clean water, regenerative
+          farming and supply chains
         date: August 1, 2019
         author: Impact Alpha
         url: https://impactalpha.com/techstars-sustainability-startups-tackle-clean-water-regenerative-farming-and-supply-chains/
+      - image: ../../static/media/tesla.png
+        title: Climate Change And The Circular Economy
+        author: Frank Van Gansbeke
+        url: https://www.forbes.com/sites/frankvangansbeke/2020/09/03/climate-change-and-the-circular-economy/#4f37f42422f5
+        date: September 3, 2020
   - name: videos
     buttonText: watch video
     showPlay: true
     items:
       - image: ../../static/media/media-video1.png
-        title: '[LIVE] Devcon3 Day 4 Stream - Morning'
+        title: "[LIVE] Devcon3 Day 4 Stream - Morning"
         date: November 4, 2017
-        author: Ethereum Foundation 
+        author: Ethereum Foundation
         url: https://www.youtube.com/watch?v=vXVcuWvR5Z0
       - image: ../../static/media/media-video2.png
-        title: 'Regenerative Solutions to Climate Change - Greg Landua - Plenary I - Soil Not OIl 2017'
+        title: Regenerative Solutions to Climate Change - Greg Landua - Plenary I - Soil
+          Not OIl 2017
         date: January 7, 2019
         author: Soil Not Oil Coalition
         url: https://www.youtube.com/watch?v=TNbOZUR3zj4
       - image: ../../static/media/media-video3.png
-        title: 'Gregory Landua: Improving Ecosystem Health through the Blockchain. Blockchain for Impact March 2018'
+        title: "Gregory Landua: Improving Ecosystem Health through the Blockchain.
+          Blockchain for Impact March 2018"
         date: April 9, 2018
         author: HelpedHope
         url: https://www.youtube.com/watch?v=0n8LW0cuUSo
       - image: ../../static/media/media-video4.png
-        title: 'Regen Network Ecological Blockchain'
+        title: Regen Network Ecological Blockchain
         date: June 14, 2018
         author: Crypto Disrupted
         url: https://www.youtube.com/watch?v=vMBVupBnOEg&feature=emb_title
       - image: ../../static/media/media-video5.png
-        title: 'Gregory Landua, CEO of Regen Network: Reversing Climate Change #26'
+        title: "Gregory Landua, CEO of Regen Network: Reversing Climate Change #26"
         date: May 29, 2018
         author: Nori
         url: https://www.youtube.com/watch?v=3vGJEpczNlQ
       - image: ../../static/media/media-video6.png
-        title: 'Environmental Crisis Heats Up, Can We Use Blockchain to Reverse the Tide?'
+        title: Environmental Crisis Heats Up, Can We Use Blockchain to Reverse the Tide?
         date: May 14, 2019
         author: Lark Davis
         url: https://www.youtube.com/watch?v=4QD8LsqmxEo
@@ -73,33 +87,32 @@ categories:
     showPlay: true
     items:
       - image: ../../static/media/media-podcast-chen.png
-        title: 'Planetary Regeneration Podcast | Episode 6: Delton Chen'
+        title: "Planetary Regeneration Podcast | Episode 6: Delton Chen"
         date: May 14, 2019
         author: Soundcloud
         url: https://soundcloud.com/planetaryregeneration/planetary-regeneration-podcast-epsiode-6-delton-chen-1
       - image: ../../static/media/media-podcast-zampolin.png
-        title: 'Planetary Regeneration Podcast | Episode 5: Jack Zampolin'
+        title: "Planetary Regeneration Podcast | Episode 5: Jack Zampolin"
         date: May 14, 2019
         author: Soundcloud
         url: https://soundcloud.com/planetaryregeneration/planetary-regeneration-podcast-episode-5-jack-zampolin
       - image: ../../static/media/media-podcast-wahl.png
-        title: 'Planetary Regeneration Podcast | Episode 4: Daniel Christian Wahl'
+        title: "Planetary Regeneration Podcast | Episode 4: Daniel Christian Wahl"
         date: May 14, 2019
         author: Soundcloud
         url: https://soundcloud.com/planetaryregeneration/planetary-regeneration-podcast-epsiode-4-daniel-christian-wahl
       - image: ../../static/media/media-podcast-goes.png
-        title: 'Planetary Regeneration Podcast | Episode 3: Chris Goes'
+        title: "Planetary Regeneration Podcast | Episode 3: Chris Goes"
         date: May 14, 2019
         author: Soundcloud
         url: https://soundcloud.com/planetaryregeneration/planetary-regeneration-podcast-episode-3-chris-goes
       - image: ../../static/media/media-podcast-clippenger.png
-        title: 'Planetary Regeneration Podcast | Episode 2: John Henry Clippenger'
+        title: "Planetary Regeneration Podcast | Episode 2: John Henry Clippenger"
         date: May 14, 2019
         author: Soundcloud
         url: https://soundcloud.com/planetaryregeneration/planetary-regeneration-podcast-episode-2-john-henry-clippenger
       - image: ../../static/media/media-podcast-buchman.png
-        title: 'Planetary Regeneration Podcast | Episode 1: Ethan Buchman'
+        title: "Planetary Regeneration Podcast | Episode 1: Ethan Buchman"
         date: May 14, 2019
         author: Soundcloud
         url: https://soundcloud.com/planetaryregeneration/planetary-regeneration-podcast-episode-1-ethan-buchman
-      

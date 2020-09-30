@@ -632,7 +632,7 @@ collections:
             widget: "object"
             fields:
               - {label: Header, name: header, widget: string}
-              - {label: Description, name: description, widget: text}
+              - {label: Description, name: description, widget: text, required: false}
               - {label: Completed timeline item index (starts at 0), name: completedItemIndex, widget: text}
               - label: Items
                 name: items

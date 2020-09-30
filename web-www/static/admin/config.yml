@@ -17,18 +17,17 @@ collections:
     files:
       - label: "Partners"
         name: "partners"
-        file: "web-www/content/invest/index.yaml"
+        file: "web-www/content/partners/index.yaml"
         fields:
           - label: "Header"
             name: "header"
             widget: "string"
-          - label: "Partner Logos"
+          - label: "Partners"
             name: "partnerLogos"
-            widget: "object"
+            widget: "list"
             fields: 
               - {label: image, name: image, widget: image}
               - {label: link, name: link, widget: string}
-              - {label: sort order, name: sortOrder, widget: number, default: 1, value_type: int, min: 0, step: 1, hint: "sorts ascending"}
           - label: "Contact Card"
             name: "contactCard"
             widget: "object"

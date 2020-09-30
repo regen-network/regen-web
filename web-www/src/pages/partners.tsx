@@ -96,7 +96,6 @@ const PartnersPage = ({ location }: props): JSX.Element => {
                 publicURL
               }
               link
-              sortOrder
             }
             contactCard {
               header
@@ -120,8 +119,8 @@ const PartnersPage = ({ location }: props): JSX.Element => {
             {header}
           </Title>
           <Grid spacing={7} justify="center" direction="row" alignItems="center" container>
-            {partners.map((partner: any) => (
-              <Grid className={classes.item} xs={12} sm={4} item key={partner.sortOrder}>
+            {partners.map((partner: any, i: number) => (
+              <Grid className={classes.item} xs={12} sm={4} item key={i}>
                 <a href={partner.link} target="_blank" rel="noopener noreferrer">
                   <GreenCard className={classes.card}>
                     <img

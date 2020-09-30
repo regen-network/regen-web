@@ -54,8 +54,8 @@ careersSection:
   caption: careers_
   header: Join our team!
   body: We’re always looking for new talent to join our decentralized team.
-    Literally- we’re spread across 4 continents! If you’re interested in joining
-    us at Regen Network, take a look at our job postings.
+    Literally, we’re spread across four continents! If you’re interested in
+    joining us at Regen Network, take a look at our job postings.
   buttonLink: https://apply.workable.com/regen-network/
   buttonText: view jobs
 testnetSection:

@@ -7,5 +7,4 @@ CarbonPlus credits are voluntary carbon credits. Each credit represents one tonn
 
 Both the carbon sequestration and the co-benefits are measured. The number of credits are issued solely based on the tons of CO2e sequestered, measured based on remote sensing analysis in combination with a limited set of soil samples.
 
-**\
-In the case of the CarbonPlus Grasslands Credit, Livestock emissions (N2O and CH4) quantification is based on the number of livestock and number of days they spent in the project area.**
+In the case of the CarbonPlus Grasslands Credit, Livestock emissions (N2O and CH4) quantification is based on the number of livestock and number of days they spent in the project area.

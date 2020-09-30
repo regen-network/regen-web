@@ -1,66 +1,66 @@
 header: Our Partners
 partnerLogos:
-  - image: '../../media/partners/rainforest-foundation.jpg'
+  - image: '../../static/media/partners/rainforest-foundation.jpg'
     link: http://www.rainforestfoundation.org/
     sortOrder: 1
-  - image: '../../media/partners/kiss-the-ground.jpg'
+  - image: '../../static/media/partners/kiss-the-ground.jpg'
     link: https://kisstheground.com/
     sortOrder: 2
-  - image: '../../media/partners/farm-os.jpg'
+  - image: '../../static/media/partners/farm-os.jpg'
     link: https://farmos.org/
     sortOrder: 3
-  - image: '../../media/partners/terra-genesis.jpg'
+  - image: '../../static/media/partners/terra-genesis.jpg'
     link: http://www.terra-genesis.com/
     sortOrder: 4
-  - image: '../../media/partners/fibershed.jpg'
+  - image: '../../static/media/partners/fibershed.jpg'
     link: https://fibershed.org/
     sortOrder: 5
-  - image: '../../media/partners/carbon-sync.jpg'
+  - image: '../../static/media/partners/carbon-sync.jpg'
     link: http://carbonsync.com/
     sortOrder: 6
-  - image: '../../media/partners/eco-quants.jpg'
+  - image: '../../static/media/partners/eco-quants.jpg'
     link: http://ecoquants.com/
     sortOrder: 7
-  - image: '../../media/partners/cornell.jpg'
+  - image: '../../static/media/partners/cornell.jpg'
     link: https://www.cornell.edu/
     sortOrder: 8
-  - image: '../../media/partners/4per.jpg'
+  - image: '../../static/media/partners/4per.jpg'
     link: https://4p1000.org/
     sortOrder: 9
-  - image: '../../media/partners/techstars.jpg'
+  - image: '../../static/media/partners/techstars.jpg'
     link: https://www.techstars.com/
     sortOrder: 10
-  - image: '../../media/partners/nature-conservancy.jpg'
+  - image: '../../static/media/partners/nature-conservancy.jpg'
     link: https://www.nature.org/en-us/
     sortOrder: 11
-  - image: '../../media/partners/ffar.jpg'
+  - image: '../../static/media/partners/ffar.jpg'
     link: https://foundationfar.org/
     sortOrder: 12
-  - image: '../../media/partners/open-team.jpg'
+  - image: '../../static/media/partners/open-team.jpg'
     link: https://openteam.community/
     sortOrder: 13
-  - image: '../../media/partners/repliculture.jpg'
+  - image: '../../static/media/partners/repliculture.jpg'
     link: http://www.repliculture.com/
     sortOrder: 14
-  - image: '../../media/partners/ecosystem-services.jpg'
+  - image: '../../static/media/partners/ecosystem-services.jpg'
     link: https://ecosystemservicesmarket.org/
     sortOrder: 15
-  - image: '../../media/partners/cosmos.jpg'
+  - image: '../../static/media/partners/cosmos.jpg'
     link: https://cosmos.network/
     sortOrder: 16
-  - image: '../../media/partners/interchain.jpg'
+  - image: '../../static/media/partners/interchain.jpg'
     link: https://interchain.io/
     sortOrder: 17
-  - image: '../../media/partners/open-lab.jpg'
+  - image: '../../static/media/partners/open-lab.jpg'
     link: https://openlab.yale.edu/
     sortOrder: 18
-  - image: '../../media/partners/our-sci.jpg'
+  - image: '../../static/media/partners/our-sci.jpg'
     link: https://www.our-sci.net/
     sortOrder: 19
-  - image: '../../media/partners/mwd-southern-cali.jpg'
+  - image: '../../static/media/partners/mwd-southern-cali.jpg'
     link: http://www.mwdh2o.com/
     sortOrder: 20
-  - image: '../../media/partners/chorus-one.jpg'
+  - image: '../../static/media/partners/chorus-one.jpg'
     link: https://chorus.one/
     sortOrder: 21
 contactCard:

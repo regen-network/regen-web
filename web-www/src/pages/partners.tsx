@@ -92,7 +92,9 @@ const PartnersPage = ({ location }: props): JSX.Element => {
           node {
             header
             partnerLogos {
-              image
+              image {
+                publicURL
+              }
               link
               sortOrder
             }
@@ -122,11 +124,11 @@ const PartnersPage = ({ location }: props): JSX.Element => {
               <Grid className={classes.item} xs={12} sm={4} item key={partner.sortOrder}>
                 <a href={partner.link} target="_blank" rel="noopener noreferrer">
                   <GreenCard className={classes.card}>
-                    {partner.image ? (
-                      <img className={classes.img} src={partner.image} alt={partner.image} />
-                    ) : (
-                      ''
-                    )}
+                    <img
+                      className={classes.img}
+                      src={partner.image.publicURL}
+                      alt={partner.image.publicURL}
+                    />
                   </GreenCard>
                 </a>
               </Grid>

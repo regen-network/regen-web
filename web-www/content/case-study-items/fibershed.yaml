@@ -50,7 +50,7 @@ figureSection:
     utilized to map grazing operations with 87% accuracy."
   figures:
     - image: ../../static/media/fibershed-figure2.png
-    - image: ../../static/media/fibershed-figure3.png
+    - image: ../../static/media/fibershed-figure3.webp
 fundingSection:
   image: ../../static/media/fibershed-funding.png
   details: md//Creating a project on Regen Registry and storing monitoring data as

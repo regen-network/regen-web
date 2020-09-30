@@ -4,6 +4,17 @@ categories:
     buttonText: read article
     showPlay: false
     items:
+      - image: ../../static/media/tesla.png
+        title: Climate Change And The Circular Economy
+        author: Frank Van Gansbeke
+        url: https://www.forbes.com/sites/frankvangansbeke/2020/09/03/climate-change-and-the-circular-economy/#4f37f42422f5
+        date: September 3, 2020
+      - image: ../../static/media/screen-shot-2020-09-30-at-8.07.53-am.png
+        title: "Christian Shearer: Regen Network's Platform That Pays Farmers to Farm
+          Regeneratively"
+        author: Lift Economy Podcast with Andrew Baskin
+        url: https://www.lifteconomy.com/next-economy-now-show-notes/2019/12/3/next-economy-now
+        date: December 1, 2019
       - image: ../../static/media/media-article1.png
         title: Regen Network Crosses $1MM Raise Led by Interchain Foundation and
           Announces Chorus One Partnership and Completion of Techstars
@@ -41,11 +52,6 @@ categories:
         date: August 1, 2019
         author: Impact Alpha
         url: https://impactalpha.com/techstars-sustainability-startups-tackle-clean-water-regenerative-farming-and-supply-chains/
-      - image: ../../static/media/tesla.png
-        title: Climate Change And The Circular Economy
-        author: Frank Van Gansbeke
-        url: https://www.forbes.com/sites/frankvangansbeke/2020/09/03/climate-change-and-the-circular-economy/#4f37f42422f5
-        date: September 3, 2020
   - name: videos
     buttonText: watch video
     showPlay: true

@@ -96,7 +96,10 @@ communitySection:
         quickly and inexpensively.  Prior to Our Sci, he helped create the
         MultispeQ, a low-cost photosynthesis meter, and PhotosynQ, a platform
         for collecting and sharing plant health data.
-    - name: Placeholder name 6
+    - name: You?
       image: ../../static/media/you.png
-      role: Placeholder role 6
-      description: Placeholder description 6
+      role: "Scientist "
+      description: "Are you a Scientist who wants to contribute to the Open Science
+        movement to accelerate innovative ways for monitoring, verifying and
+        reporting of Ecosystem Services? Get in touch with us at
+        science@regen.network "

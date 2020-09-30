@@ -25,7 +25,7 @@ coreSection:
         management, strategy and business development. She is thrilled to have
         recently found her way into regenerative agriculture and committed to
         expanding her knowledge around regenerative business practices.
-      image: ../../static/media/team/saraj.jpg
+      image: ../../static/media/screen-shot-2020-09-21-at-7.55.14-pm.png
       linkedUrl: https://www.linkedin.com/in/sara-johnstone-b3677254/
       twitterUrl: ""
       githubUrl: ""
@@ -194,14 +194,12 @@ coreSection:
       image: ../../static/media/sophia.png
     - name: "Sam Bennetts "
       title: Data Scientist and GIS Analyst
-      description: Sam is a GIS and remote sensing specialist focused on bridging the
-        social, environmental, and computer sciences. During his academic
-        career, Sam's work ranged from urbanization and land cover change
-        studies to those focused on applying machine learning techniques to
-        better understand glacier dynamics and sea level rise. Most recently,
-        Sam worked with residents in Shrewsbury, Vermont to develop methods for
-        carbon sequestration in hardwood forests as a means of addressing
-        climate change.
+      description: Sam is a GIS and remote sensing specialist focused on designing
+        programmatic solutions to geospatial problems. Sam's work includes
+        urbanization, land cover change studies, glacier dynamics, and sea level
+        rise. Recently, Sam worked with residents in Vermont to develop methods
+        for carbon sequestration in hardwood forests that address climate
+        change.
       image: ../../static/media/sam-bennetts.png
     - name: Adriana Mihai
       title: Blockchain Community Liason
@@ -228,7 +226,7 @@ contributorSection:
         cryptography, customer-oriented web design, and blockchain. And a strong
         desire to build something meaningful to humankind. He is delighted to
         combine these passions at Regen Network.
-      title: Lead Developer
+      title: Developer
       name: Ethan Frey
       image: ../../static/media/ethan-frey.jpg
       linkedUrl: https://www.linkedin.com/in/ethanfrey/
@@ -255,7 +253,7 @@ contributorSection:
         infrastructure, and develop a license for definancializing physical
         infrastructure, the Gift License. Will is a member of the Board of
         Directors.
-      title: HR & Legal
+      title: Co-founder
       name: Will Szal
       image: ../../static/media/will-szal.png
     - description: >

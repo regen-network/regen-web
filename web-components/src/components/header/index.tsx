@@ -239,7 +239,14 @@ export default function Header({
                       >
                         {item.dropdownItems.map((dropdownItem, index) => {
                           return (
-                            <MenuItem className={classes.subMenuHover} key={index}>
+                            <MenuItem
+                              className={
+                                pathname === dropdownItem.href
+                                  ? clsx(classes.subMenuHover, classes.currentMenuItem)
+                                  : classes.subMenuHover
+                              }
+                              key={index}
+                            >
                               <Link href={dropdownItem.href}>{dropdownItem.title}</Link>
                             </MenuItem>
                           );

@@ -3,7 +3,7 @@ import { makeStyles, Theme } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
-import Cookies, { CookieAttributes } from 'js-cookie';
+import Cookies from 'js-cookie';
 
 // TODO use Section component
 // import Section from '../section';

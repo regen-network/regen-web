@@ -98,6 +98,7 @@ export default function MoreInfoForm({ onClose, onSubmit, apiUrl }: MoreInfoForm
               }
             })
             .catch(e => {
+              /* eslint-disable no-console */
               console.log(e);
               setSubmitting(false);
             });

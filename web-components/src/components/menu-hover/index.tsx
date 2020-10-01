@@ -74,7 +74,7 @@ const MenuHover = ({ text, textColor, dropdownColor, children }: Props): JSX.Ele
         classes={{
           paper: classes.popoverContent,
         }}
-        open={true}
+        open={openedPopover}
         anchorEl={popoverAnchor.current}
         anchorOrigin={{
           vertical: 'bottom',

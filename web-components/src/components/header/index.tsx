@@ -143,6 +143,14 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       width: theme.spacing(23),
     },
   },
+  subMenuHover: {
+    '& a:hover': {
+      borderBottom: `2px solid ${theme.palette.secondary.main}`,
+    },
+    '& a': {
+      borderBottom: `2px solid transparent`,
+    },
+  },
   menuItem: {
     boxSizing: 'border-box',
     height: '100%',
@@ -150,7 +158,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     paddingRight: theme.spacing(7.375),
     paddingLeft: theme.spacing(7.375),
     'background-color': 'inherit',
-    '&:not(:last-child) > a:hover': {
+    '& a:hover': {
       borderBottom: `2px solid ${theme.palette.secondary.main}`,
     },
     '&:last-child': {
@@ -231,7 +239,7 @@ export default function Header({
                       >
                         {item.dropdownItems.map((dropdownItem, index) => {
                           return (
-                            <MenuItem key={index}>
+                            <MenuItem className={classes.subMenuHover} key={index}>
                               <Link href={dropdownItem.href}>{dropdownItem.title}</Link>
                             </MenuItem>
                           );

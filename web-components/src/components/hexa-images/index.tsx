@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
+import ReactHtmlParser from 'react-html-parser';
 
 import Title from '../title';
 import Description from '../description';
@@ -162,6 +163,17 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontWeight: 800,
     letterSpacing: '1px',
     color: theme.palette.info.main,
+    '& p': {
+      margin: 0,
+    },
+    '& a': {
+      textDecoration: 'none',
+      color: theme.palette.info.main,
+      '&:link, &:visited, &:hover, &:active': {
+        textDecoration: 'none',
+        color: theme.palette.info.main,
+      },
+    },
     [theme.breakpoints.up('sm')]: {
       lineHeight: theme.spacing(5.75),
       paddingBottom: theme.spacing(4.5),
@@ -175,6 +187,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   description: {
     fontSize: theme.spacing(4.5),
     lineHeight: '150%',
+    '& p': {
+      margin: 0,
+    },
   },
   text: {
     [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
@@ -197,9 +212,11 @@ export default function HexaImages({ items }: HexaImagesProps): JSX.Element {
           {items[selected].name}
         </Title>
         <Title variant="h6" className={classes.role}>
-          {items[selected].role}
+          {ReactHtmlParser(items[selected].role)}
         </Title>
-        <Description className={classes.description}>{items[selected].description}</Description>
+        <Description className={classes.description}>
+          {ReactHtmlParser(items[selected].description)}
+        </Description>
       </Grid>
       <Grid container className={classes.images}>
         {items.map((item, i) => (

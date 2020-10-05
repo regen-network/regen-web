@@ -322,6 +322,12 @@ collections:
                   - {label: "Header", name: header, widget: string}
                   - {label: "Image", name: image, widget: image}
                   - {label: "Description", name: description, widget: text}
+          - label: "FAQ Section"
+            name: "faqSection"
+            widget: "object"
+            fields:
+              - {label: Header, name: header, widget: string}
+              - {label: image, name: image, widget: image}
       - label: "For Land Stewards page"
         name: "land-stewards"
         file: "web-www/content/land-stewards/index.yaml"
@@ -479,8 +485,8 @@ collections:
                 fields:
                   - {label: "Image", name: image, widget: image}
                   - {label: "Name", name: name, widget: string}
-                  - {label: "role", name: role, widget: string}
-                  - {label: "Description", name: description, widget: text}
+                  - {label: "role", name: role, widget: markdown}
+                  - {label: "Description", name: description, widget: markdown}
       - label: "Shared sections"
         name: "shared"
         file: "web-www/content/shared/index.yaml"

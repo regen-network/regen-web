@@ -9,6 +9,7 @@ import clsx from 'clsx';
 import { Formik, Form, Field } from 'formik';
 
 import SEO from '../components/seo';
+import FAQSection from '../sections/shared/FAQSection';
 import Section from 'web-components/lib/components/section';
 import Description from 'web-components/lib/components/description';
 import Title from 'web-components/lib/components/title';
@@ -185,6 +186,13 @@ const ContactPage = ({ location }: { location: object }): JSX.Element => {
         }
         faq {
           header
+          image {
+            childImageSharp {
+              fluid(quality: 90) {
+                ...GatsbyImageSharpFluid_withWebp
+              }
+            }
+          }
         }
       }
     }
@@ -348,6 +356,7 @@ const ContactPage = ({ location }: { location: object }): JSX.Element => {
             </Grid>
           </div>
         </Section>
+        <FAQSection header={content.faq.header} imageData={content.faq.image.childImageSharp.fluid} />
       </div>
     </>
   );

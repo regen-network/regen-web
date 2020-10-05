@@ -4,8 +4,7 @@ import { makeStyles, Theme } from '@material-ui/core';
 
 import SEO from '../components/seo';
 import Section from 'web-components/src/components/section';
-import FAQ, { Group } from 'web-components/lib/components/faq';
-import { DiagnosticCategory } from 'typescript';
+import FAQ from 'web-components/lib/components/faq';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {

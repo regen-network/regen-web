@@ -1,0 +1,20 @@
+header: Contact
+body: md//Whether you need help with sales, technical support, partnerships, or anything else, we are all ears.
+location:
+  header: Location
+  image: ../../static/media/team-location.png
+  body: md//Our distributed team works across North America, South America, and Europe.
+headquarters:
+  header: Headquarters
+  body: md//Great Barrington
+
+    Massachusetts, USA
+email:
+  header: Email
+  body: 'md//Sales: [sales@regen.network](mailto:sales@regen.network)
+  
+    Support: [support@regen.network](mailto:support@regen.network)
+    
+    Partnerships: [office@regen.network](mailto:office@regen.network)'
+faq:
+  header: Learn more by reading our FAQ.

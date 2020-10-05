@@ -10,6 +10,7 @@ import ImageGridSection from '../sections/buyers/ImageGridSection';
 import MoreInfoForm from 'web-components/src/components/form/MoreInfoForm';
 import FeaturedSection from '../sections/shared/FeaturedSection';
 import ComingSoonSection from '../sections/shared/ComingSoonSection';
+import FAQSection from '../sections/buyers/FAQSection';
 import FixedFooter from 'web-components/lib/components/fixed-footer';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import EmailIcon from 'web-components/lib/components/icons/EmailIcon';
@@ -72,6 +73,7 @@ const BuyersPage = ({ location }: props): JSX.Element => {
       <InvestingSection /> */}
       <FeaturedSection />
       <ComingSoonSection />
+      <FAQSection />
       <FixedFooter justify="flex-end">
         <>
           <ContainedButton onClick={handleOpen} startIcon={<EmailIcon />}>

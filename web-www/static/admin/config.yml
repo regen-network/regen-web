@@ -322,6 +322,12 @@ collections:
                   - {label: "Header", name: header, widget: string}
                   - {label: "Image", name: image, widget: image}
                   - {label: "Description", name: description, widget: text}
+          - label: "FAQ Section"
+            name: "faqSection"
+            widget: "object"
+            fields:
+              - {label: Header, name: header, widget: string}
+              - {label: image, name: image, widget: image}
       - label: "For Land Stewards page"
         name: "land-stewards"
         file: "web-www/content/land-stewards/index.yaml"

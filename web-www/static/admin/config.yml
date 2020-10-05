@@ -479,8 +479,8 @@ collections:
                 fields:
                   - {label: "Image", name: image, widget: image}
                   - {label: "Name", name: name, widget: string}
-                  - {label: "role", name: role, widget: string}
-                  - {label: "Description", name: description, widget: text}
+                  - {label: "role", name: role, widget: markdown}
+                  - {label: "Description", name: description, widget: markdown}
       - label: "Shared sections"
         name: "shared"
         file: "web-www/content/shared/index.yaml"

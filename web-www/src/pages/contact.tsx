@@ -1,15 +1,34 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Grid from '@material-ui/core/Grid';
 import { useStaticQuery, graphql } from 'gatsby';
 import ReactHtmlParser from 'react-html-parser';
 import Img from 'gatsby-image';
 import clsx from 'clsx';
+import { Formik, Form, Field } from 'formik';
 
 import SEO from '../components/seo';
 import Section from 'web-components/lib/components/section';
 import Description from 'web-components/lib/components/description';
 import Title from 'web-components/lib/components/title';
+import Card from 'web-components/lib/components/cards/Card';
+import {
+  requiredMessage,
+  validateEmail,
+  invalidEmailMessage,
+} from 'web-components/lib/components/inputs/validation';
+import TextField from 'web-components/lib/components/inputs/TextField';
+import SelectTextField from 'web-components/lib/components/inputs/SelectTextField';
+import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
+
+interface Values {
+  name: string;
+  email: string;
+  orgName?: string;
+  requestType: string;
+  message: string;
+}
 
 const useStyles = makeStyles((theme: Theme) => ({
   background: {
@@ -18,10 +37,8 @@ const useStyles = makeStyles((theme: Theme) => ({
   section: {
     [theme.breakpoints.up('sm')]: {
       paddingTop: theme.spacing(42.25),
-      // paddingBottom: theme.spacing(40.5),
     },
     [theme.breakpoints.down('xs')]: {
-      // paddingBottom: theme.spacing(22.5),
       paddingTop: theme.spacing(5),
     },
   },
@@ -85,10 +102,62 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingBottom: theme.spacing(5.75),
     },
   },
+  card: {
+    [theme.breakpoints.up('sm')]: {
+      padding: `${theme.spacing(13.75)} ${theme.spacing(7.5)} ${theme.spacing(12.75)}`,
+      marginBottom: theme.spacing(25),
+    },
+    [theme.breakpoints.down('xs')]: {
+      padding: `${theme.spacing(9.5)} ${theme.spacing(5)} ${theme.spacing(11.25)}`,
+      marginBottom: theme.spacing(16.25),
+    },
+  },
+  textField: {
+    [theme.breakpoints.up('sm')]: {
+      marginBottom: theme.spacing(10.75),
+    },
+    [theme.breakpoints.down('xs')]: {
+      marginBottom: theme.spacing(8.25),
+    },
+  },
+  textAreaField: {
+    '& .MuiInputBase-root': {
+      overflow: 'hidden',
+      [theme.breakpoints.up('sm')]: {
+        height: theme.spacing(43.75),
+      },
+      [theme.breakpoints.down('xs')]: {
+        height: theme.spacing(25),
+      },
+    },
+  },
+  button: {
+    float: 'right',
+    [theme.breakpoints.up('sm')]: {
+      height: theme.spacing(15),
+      width: theme.spacing(65.5),
+    },
+    [theme.breakpoints.down('xs')]: {
+      height: theme.spacing(12.5),
+      width: theme.spacing(38.75),
+    },
+  },
+  gridLeft: {
+    [theme.breakpoints.up('sm')]: {
+      paddingRight: theme.spacing(3.75),
+    },
+  },
+  gridRight: {
+    [theme.breakpoints.up('sm')]: {
+      paddingLeft: theme.spacing(3.75),
+    },
+  },
 }));
 
 const ContactPage = ({ location }: { location: object }): JSX.Element => {
   const classes = useStyles();
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.up('sm'));
 
   const data = useStaticQuery(graphql`
     query {
@@ -136,6 +205,128 @@ const ContactPage = ({ location }: { location: object }): JSX.Element => {
             {ReactHtmlParser(content.body)}
           </Description>
           <div className={classes.container}>
+            <Card elevation={1} className={classes.card}>
+              <Formik
+                initialValues={{
+                  name: '',
+                  orgName: '',
+                  email: '',
+                  requestType: '',
+                  message: '',
+                }}
+                validate={(values: Values) => {
+                  const errors: Partial<Values> = {};
+                  if (!values.email) {
+                    errors.email = requiredMessage;
+                  } else if (!validateEmail(values.email)) {
+                    errors.email = invalidEmailMessage;
+                  }
+                  if (!values.name) {
+                    errors.name = requiredMessage;
+                  }
+                  if (!values.requestType) {
+                    errors.requestType = requiredMessage;
+                  }
+                  if (!values.message) {
+                    errors.message = requiredMessage;
+                  }
+                  return errors;
+                }}
+                onSubmit={({ requestType, email, name, orgName, message }, { setSubmitting }) => {
+                  setSubmitting(true);
+                  // const apiUri: string = apiUrl || 'http://localhost:5000';
+                  // axios
+                  //   .post(`${apiUri}/buyers-info`, {
+                  //     email,
+                  //     name,
+                  //     orgName,
+                  //   })
+                  //   .then(resp => {
+                  //     setSubmitting(false);
+                  //     if (onSubmit) {
+                  //       onSubmit();
+                  //     }
+                  //   })
+                  //   .catch(e => {
+                  //     setSubmitting(false);
+                  //   });
+                }}
+              >
+                {({ values, errors, submitForm, isSubmitting, isValid, submitCount, status }) => {
+                  return (
+                    <div>
+                      <Form translate="yes">
+                        <div>
+                          <Grid container>
+                            <Grid item xs={12} sm={6} className={classes.gridLeft}>
+                              <Field
+                                className={classes.textField}
+                                component={TextField}
+                                label="Your full name"
+                                name="name"
+                              />
+                            </Grid>
+                            <Grid item xs={12} sm={6} className={classes.gridRight}>
+                              <Field
+                                component={TextField}
+                                className={classes.textField}
+                                type="email"
+                                label="Your email address"
+                                name="email"
+                              />
+                            </Grid>
+                          </Grid>
+                          <Grid container>
+                            <Grid item xs={12} sm={6} className={classes.gridLeft}>
+                              <Field
+                                component={TextField}
+                                className={classes.textField}
+                                label="Your organization's name"
+                                name="orgName"
+                                optional
+                              />
+                            </Grid>
+                            <Grid item xs={12} sm={6} className={classes.gridRight}>
+                              <Field
+                                options={[
+                                  {
+                                    label: 'Sales request',
+                                    value: 'sales',
+                                  },
+                                  {
+                                    label: 'Support request',
+                                    value: 'support',
+                                  },
+                                  {
+                                    label: 'Partnership request',
+                                    value: 'partnership',
+                                  },
+                                ]}
+                                component={SelectTextField}
+                                label="Type of request"
+                                name="requestType"
+                                className={classes.textField}
+                              />
+                            </Grid>
+                          </Grid>
+                        </div>
+                        <Field
+                          component={TextField}
+                          name="message"
+                          className={clsx(classes.textAreaField, classes.textField)}
+                          label="Message"
+                          multiline
+                          rows={matches ? 6 : 4}
+                        />
+                        <ContainedButton className={classes.button} onClick={submitForm}>
+                          send
+                        </ContainedButton>
+                      </Form>
+                    </div>
+                  );
+                }}
+              </Formik>
+            </Card>
             <Grid container>
               <Grid item xs={12} sm={6}>
                 <Title variant="h4">{content.location.header}</Title>

@@ -77,9 +77,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingBottom: theme.spacing(32),
       margin: '0 auto',
     },
-    [theme.breakpoints.down('xs')]: {
-      paddingBottom: theme.spacing(25),
-    },
   },
   headquarters: {
     fontWeight: 'bold',

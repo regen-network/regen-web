@@ -1,5 +1,5 @@
 header: Contact
-body: md//Whether you need general help, with sales, or anything else, we are all ears.
+body: md//Whether you need general help, support with sales, or anything else, we are all ears.
 form:
   requestTypes:
     - label: Sales request

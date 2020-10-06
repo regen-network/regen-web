@@ -152,6 +152,7 @@ function AppHeader(): JSX.Element {
       dropdownItems: [
         { title: 'Developers', href: `${process.env.REACT_APP_WEBSITE_URL}/developers/` },
         { title: 'Scientists', href: `${process.env.REACT_APP_WEBSITE_URL}/science/` },
+        { title: 'Validators', href: `${process.env.REACT_APP_WEBSITE_URL}/validators/` },
       ],
     },
     {

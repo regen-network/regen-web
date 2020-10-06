@@ -1,0 +1,44 @@
+topSection:
+  header: Validators
+  body: 'Regen Network is powered by our global validator set: a constellation of companies, individuals, and community members that run the nodes securing our public blockchain.'
+whatSection:
+  header: What are validators?
+  body: md//Validators play a similar role in a proof of stake network as miners do in a proof of work network. The differences is validators are enormously energy efficient, and the validator community tends to be much more open, cooperative and actively engage to build value and utility on the networks they chose to validate for.
+  
+  
+    Validators are the unsung heroes of proof of stake networks, and form the foundation of security, governance and uptime of Regen Ledger.
+whoSection:
+  header: Who are our validators?
+  body: We are proud to already have an amazing group of over 80 of the most competent and highly regarded validators competing for the 50 seats available for mainnet launch.  
+  validators:
+    - header: Our lead validator team
+      description: These organizations are committed to supporting our incentivized testnets.
+      members:
+        - image: ../../static/media/
+          link:
+        - image: ../../static/media/
+          link:
+        - image: ../../static/media/
+          link:
+        - image: ../../static/media/
+          link:
+    - header: Prominent validators
+      description: These organizations and more are participating in our incentivized testnets and supporting our launch.
+      members:
+        - image: ../../static/media/
+          link:
+        - image: ../../static/media/
+          link:
+        - image: ../../static/media/
+          link:
+        - image: ../../static/media/
+          link:
+connectSection:
+  header: Connect
+whySection:
+  header: Why we need validators
+  body: md//Validators are the foundation of any Proof of Stake Network.  They secure the network by running high uptime, highly secure servers. Validators are like virtualized mining operations on the bitcoin network.  A Proof of Stake system uses a tiny fraction of the energy of a proof of work chain, with all the security, uptime and attributes of a fully decentralized blockchain.  
+
+
+    Validators run businesses securing proof of stake based networks.  Leading validators also develop wallet integrations, block explorers and applications on top of the protocols they choose to invest time and money to run.  They are incentivized with the token economics underpinning Regen Ledger which incentivizes uptime and punishes downtime.  For more details about Regen Ledgers token economics check our our token economics paper.
+

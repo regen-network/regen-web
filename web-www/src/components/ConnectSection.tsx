@@ -39,7 +39,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     color: theme.palette.primary.main,
     fontWeight: 900,
     textAlign: 'center',
-    lineHeight: '120%',
+    lineHeight: '145%',
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.spacing(6),
       paddingTop: theme.spacing(5.25),

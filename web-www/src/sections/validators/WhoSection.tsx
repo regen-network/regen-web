@@ -96,6 +96,7 @@ const WhoSection = (): JSX.Element => {
             linearGradient="unset"
             className={classes.section}
             imageData={data.background.childImageSharp.fluid}
+            topSection={false}
           >
             <TitleDescription title={content.header} description={content.body} />
             {content.validators.map((v, i: number) => {

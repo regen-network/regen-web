@@ -44,5 +44,5 @@ whySection:
   body: md//Validators are the foundation of any Proof of Stake Network.  They secure the network by running high uptime, highly secure servers. Validators are like virtualized mining operations on the bitcoin network.  A Proof of Stake system uses a tiny fraction of the energy of a proof of work chain, with all the security, uptime and attributes of a fully decentralized blockchain.  
 
 
-    Validators run businesses securing proof of stake based networks.  Leading validators also develop wallet integrations, block explorers and applications on top of the protocols they choose to invest time and money to run.  They are incentivized with the token economics underpinning Regen Ledger which incentivizes uptime and punishes downtime.  For more details about Regen Ledgers token economics check our our token economics paper.
+    Validators run businesses securing proof of stake based networks.  Leading validators also develop wallet integrations, block explorers and applications on top of the protocols they choose to invest time and money to run.  They are incentivized with the token economics underpinning Regen Ledger which incentivizes uptime and punishes downtime.  For more details about Regen Ledgers token economics check our our <a href="https://regen-network.gitlab.io/whitepaper/Economics.pdf" target="_blank">token economics paper</a>.
 

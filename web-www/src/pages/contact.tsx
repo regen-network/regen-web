@@ -7,6 +7,7 @@ import ReactHtmlParser from 'react-html-parser';
 import Img from 'gatsby-image';
 import clsx from 'clsx';
 import { Formik, Form, Field } from 'formik';
+import axios from 'axios';
 
 import SEO from '../components/seo';
 import FAQSection from '../sections/shared/FAQSection';
@@ -264,24 +265,22 @@ const ContactPage = ({ location }: { location: object }): JSX.Element => {
                 }}
                 onSubmit={({ requestType, email, name, orgName, message }, { setSubmitting, resetForm }) => {
                   setSubmitting(true);
-                  // const apiUri: string = apiUrl || 'http://localhost:5000';
-                  // axios
-                  //   .post(`${apiUri}/buyers-info`, {
-                  //     email,
-                  //     name,
-                  //     orgName,
-                  //   })
-                  //   .then(resp => {
-                  //     setSubmitting(false);
-                  //     if (onSubmit) {
-                  //       onSubmit();
-                  //     }
-                  //   })
-                  //   .catch(e => {
-                  //     setSubmitting(false);
-                  //   });
-                  setTimeout(() => setSubmitting(false), 1);
-                  setTimeout(resetForm, bannerDuration);
+                  const apiUri: string = process.env.GATSBY_API_URI || 'http://localhost:5000';
+                  axios
+                    .post(`${apiUri}/contact`, {
+                      email,
+                      name,
+                      orgName,
+                      requestType,
+                      message,
+                    })
+                    .then(resp => {
+                      setSubmitting(false);
+                      setTimeout(resetForm, bannerDuration);
+                    })
+                    .catch(e => {
+                      setSubmitting(false);
+                    });
                 }}
               >
                 {({ values, isValid, submitForm, isSubmitting, submitCount }) => {

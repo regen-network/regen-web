@@ -181,7 +181,7 @@ collections:
                   - {label: Link, name: link, widget: string}
           - label: "Ledger Section"
             name: "ledgerSection"
-            widget: "list"
+            widget: "object"
             collapsed: false
             fields:
               - {label: Header, name: header, widget: string}

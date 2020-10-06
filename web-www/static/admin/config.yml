@@ -723,6 +723,53 @@ collections:
             collapsed: false
             fields:
               - {label: "name", name: name, widget: string}
+      - label: Validators
+        name: validators
+        file: "web-www/content/validators/index.yaml"
+        fields:
+          - label: Top section
+            name: topSection
+            widget: object
+            fields:
+              - {label: "header", name: header, widget: string}
+              - {label: "body", name: body, widget: string}
+          - label: What section
+            name: whatSection
+            widget: object
+            fields:
+              - {label: "header", name: header, widget: string}
+              - {label: "body", name: body, widget: markdown}
+          - label: What section
+            name: whoSection
+            widget: object
+            fields:
+              - {label: "header", name: header, widget: string}
+              - {label: "body", name: body, widget: markdown}
+              - label: "validators"
+                name: validators
+                widget: list
+                collapsed: false
+                fields:
+                  - {label: "header", name: header, widget: string}
+                  - {label: "description", name: description, widget: text}
+                  - label: "members"
+                    name: members
+                    widget: list
+                    collapsed: false
+                    fields:
+                      - {label: "link", name: link, widget: string}
+                      - {label: "image", name: image, widget: image}
+          - label: Connect section
+            name: connectSection
+            widget: object
+            fields:
+              - {label: "header", name: header, widget: string}
+          - label: Why section
+            name: whySection
+            widget: object
+            fields:
+              - {label: "header", name: header, widget: string}
+              - {label: "body", name: body, widget: markdown}
   - label: "FAQ"
     name: "faq"
     editor:

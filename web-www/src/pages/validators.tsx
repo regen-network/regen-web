@@ -4,6 +4,7 @@ import { useStaticQuery, graphql } from 'gatsby';
 import TopSection from '../sections/validators/TopSection';
 import WhatSection from '../sections/validators/WhatSection';
 import WhoSection from '../sections/validators/WhoSection';
+import ConnectSection from '../sections/validators/ConnectSection';
 import SEO from '../components/seo';
 
 interface props {
@@ -24,6 +25,7 @@ const ValidatorsPage = ({ location }: props): JSX.Element => {
       <TopSection />
       <WhatSection />
       <WhoSection />
+      <ConnectSection />
     </>
   );
 };

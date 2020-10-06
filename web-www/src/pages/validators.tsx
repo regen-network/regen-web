@@ -3,6 +3,7 @@ import { useStaticQuery, graphql } from 'gatsby';
 
 import TopSection from '../sections/validators/TopSection';
 import WhatSection from '../sections/validators/WhatSection';
+import WhoSection from '../sections/validators/WhoSection';
 import SEO from '../components/seo';
 
 interface props {
@@ -22,6 +23,7 @@ const ValidatorsPage = ({ location }: props): JSX.Element => {
       <SEO title="Validators" location={location} imageUrl={data.seoImage.publicURL} />
       <TopSection />
       <WhatSection />
+      <WhoSection />
     </>
   );
 };

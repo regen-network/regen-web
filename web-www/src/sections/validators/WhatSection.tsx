@@ -19,14 +19,13 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const WhatSection = (): JSX.Element => {
-  const gradient = 'linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%)';
   const classes = useStyles();
 
   return (
     <StaticQuery
       query={graphql`
         query {
-          background: file(relativePath: { eq: "what-validators-bg.png" }) {
+          background: file(relativePath: { eq: "what-validators-bg.jpg" }) {
             childImageSharp {
               fluid(quality: 90) {
                 ...GatsbyImageSharpFluid_withWebp

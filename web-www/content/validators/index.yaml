@@ -14,25 +14,29 @@ whoSection:
     - header: Our lead validator team
       description: These organizations are committed to supporting our incentivized testnets.
       members:
-        - image: ../../static/media/
-          link:
-        - image: ../../static/media/
-          link:
-        - image: ../../static/media/
-          link:
-        - image: ../../static/media/
-          link:
+        - image: ../../static/media/chorus.png
+          link: https://www.chorus.one/
+        - image: ../../static/media/chainflow.png
+          link: https://chainflow.io/
+        - image: ../../static/media/vitwit.png
+          link: https://www.vitwit.com/
+        - image: ../../static/media/kalpatech.png
+          link: https://kalpatech.co/
     - header: Prominent validators
       description: These organizations and more are participating in our incentivized testnets and supporting our launch.
       members:
-        - image: ../../static/media/
-          link:
-        - image: ../../static/media/
-          link:
-        - image: ../../static/media/
-          link:
-        - image: ../../static/media/
-          link:
+        - image: ../../static/media/dokia-capital.png
+          link: https://dokia.capital/
+        - image: ../../static/media/cryptium-labs.png
+          link: https://cryptium.ch/
+        - image: ../../static/media/forbole.png
+          link: https://www.forbole.com/
+        - image: ../../static/media/chainlayer.png
+          link: https://www.chainlayer.io/
+        - image: ../../static/media/stakin.png
+          link: https://stakin.com/
+        - image: ../../static/media/easy2stake.png
+          link: https://www.easy2stake.com/
 connectSection:
   header: Connect
 whySection:

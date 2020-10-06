@@ -1,15 +1,16 @@
 import React from 'react';
 import { Theme, makeStyles } from '@material-ui/core/styles';
-import Section from 'web-components/lib/components/section';
-import GreenCard from 'web-components/lib/components/cards/GreenCard';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import Title from 'web-components/lib/components/title';
 import { useStaticQuery, graphql } from 'gatsby';
 import ReactHtmlParser from 'react-html-parser';
-
-import SEO from '../components/seo';
 import clsx from 'clsx';
+
+import Title from 'web-components/lib/components/title';
+import GreenMediaCard from 'web-components/lib/components/cards/GreenMediaCard';
+import GreenCard from 'web-components/lib/components/cards/GreenCard';
+import Section from 'web-components/lib/components/section';
+import SEO from '../components/seo';
 
 const useStyles = makeStyles((theme: Theme) => ({
   section: {
@@ -36,23 +37,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     paddingBottom: theme.spacing(5.25),
   },
   card: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: theme.palette.primary.main,
-    borderTop: `10px ${theme.palette.secondary.dark} solid`,
-    width: '100%',
-    height: '100%',
-    padding: 'inherit',
-    borderLeft: `0.5px ${theme.palette.grey[100]} solid`,
-    borderRight: `0.5px ${theme.palette.grey[100]} solid`,
-    borderBottom: `0.5px ${theme.palette.grey[100]} solid`,
-  },
-  img: {
-    maxHeight: '90%',
-    maxWidth: '80%',
-    padding: theme.spacing(7.5),
+    '& img': {
+      padding: theme.spacing(7.5),
+    },
   },
   contactCard: {
     '& h4.MuiTypography-root, p.MuiTypography-root': {
@@ -61,6 +48,15 @@ const useStyles = makeStyles((theme: Theme) => ({
     backgroundColor: theme.palette.info.light,
     padding: theme.spacing(4.5),
     borderTop: `10px ${theme.palette.secondary.contrastText} solid`,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+    height: '100%',
+    borderLeft: `0.5px ${theme.palette.grey[100]} solid`,
+    borderRight: `0.5px ${theme.palette.grey[100]} solid`,
+    borderBottom: `0.5px ${theme.palette.grey[100]} solid`,
     '& a': {
       color: theme.palette.secondary.main,
       textDecoration: 'none',
@@ -121,15 +117,11 @@ const PartnersPage = ({ location }: props): JSX.Element => {
           <Grid spacing={7} justify="center" direction="row" alignItems="center" container>
             {partners.map((partner: any, i: number) => (
               <Grid className={classes.item} xs={12} sm={4} item key={i}>
-                <a href={partner.link} target="_blank" rel="noopener noreferrer">
-                  <GreenCard className={classes.card}>
-                    <img
-                      className={classes.img}
-                      src={partner.image.publicURL}
-                      alt={partner.image.publicURL}
-                    />
-                  </GreenCard>
-                </a>
+                <GreenMediaCard
+                  className={classes.card}
+                  imageUrl={partner.image.publicURL}
+                  link={partner.link}
+                />
               </Grid>
             ))}
             <Grid className={classes.item} xs={12} sm={6} md={4} item key="contact">

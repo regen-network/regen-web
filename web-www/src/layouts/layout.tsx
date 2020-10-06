@@ -110,8 +110,8 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
           href: '/science/',
         },
         {
-          title: 'Invest',
-          href: '/invest/',
+          title: 'Validators',
+          href: '/validators/',
         },
       ],
     },
@@ -164,6 +164,10 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
         {
           title: 'Press Kit',
           href: '/press-kit/',
+        },
+        {
+          title: 'Invest',
+          href: '/invest/',
         },
       ],
     },

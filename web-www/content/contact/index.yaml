@@ -1,5 +1,11 @@
 header: Contact
-body: md//Whether you need help with sales, technical support, partnerships, or anything else, we are all ears.
+body: md//Whether you need general help, with sales, or anything else, we are all ears.
+form:
+  requestTypes:
+    - label: Sales request
+      value: sales@regen.network
+    - label: General request
+      value: office@regen.network
 location:
   header: Location
   image: ../../static/media/team-location.png
@@ -12,10 +18,8 @@ headquarters:
 email:
   header: Email
   body: 'md//Sales: [sales@regen.network](mailto:sales@regen.network)
-  
-    Support: [support@regen.network](mailto:support@regen.network)
-    
-    Partnerships: [office@regen.network](mailto:office@regen.network)'
+      
+    General: [office@regen.network](mailto:office@regen.network)'
 faq:
   header: Learn more by reading our FAQ.
   image: ../../static/media/contact-faq-bg.png

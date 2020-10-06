@@ -22,6 +22,7 @@ import {
 import TextField from 'web-components/lib/components/inputs/TextField';
 import SelectTextField from 'web-components/lib/components/inputs/SelectTextField';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
+import Banner from 'web-components/lib/components/banner';
 
 interface Values {
   name: string;
@@ -30,6 +31,8 @@ interface Values {
   requestType: string;
   message: string;
 }
+
+const bannerDuration: number = 5000;
 
 const useStyles = makeStyles((theme: Theme) => ({
   background: {
@@ -120,6 +123,14 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.down('xs')]: {
       marginBottom: theme.spacing(8.25),
     },
+    '& .MuiInputBase-root': {
+      [theme.breakpoints.up('sm')]: {
+        fontSize: theme.spacing(4),
+      },
+      [theme.breakpoints.down('xs')]: {
+        fontSize: theme.spacing(3.5),
+      },
+    },
   },
   textAreaField: {
     '& .MuiInputBase-root': {
@@ -153,6 +164,11 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingLeft: theme.spacing(3.75),
     },
   },
+  defaultSelect: {
+    '& .MuiInputBase-root': {
+      color: theme.palette.info.main,
+    },
+  },
 }));
 
 const ContactPage = ({ location }: { location: object }): JSX.Element => {
@@ -165,6 +181,12 @@ const ContactPage = ({ location }: { location: object }): JSX.Element => {
       text: contactYaml {
         header
         body
+        form {
+          requestTypes {
+            label
+            value
+          }
+        }
         location {
           header
           body
@@ -240,7 +262,7 @@ const ContactPage = ({ location }: { location: object }): JSX.Element => {
                   }
                   return errors;
                 }}
-                onSubmit={({ requestType, email, name, orgName, message }, { setSubmitting }) => {
+                onSubmit={({ requestType, email, name, orgName, message }, { setSubmitting, resetForm }) => {
                   setSubmitting(true);
                   // const apiUri: string = apiUrl || 'http://localhost:5000';
                   // axios
@@ -258,9 +280,11 @@ const ContactPage = ({ location }: { location: object }): JSX.Element => {
                   //   .catch(e => {
                   //     setSubmitting(false);
                   //   });
+                  setTimeout(() => setSubmitting(false), 1);
+                  setTimeout(resetForm, bannerDuration);
                 }}
               >
-                {({ values, errors, submitForm, isSubmitting, isValid, submitCount, status }) => {
+                {({ values, isValid, submitForm, isSubmitting, submitCount }) => {
                   return (
                     <div>
                       <Form translate="yes">
@@ -296,24 +320,15 @@ const ContactPage = ({ location }: { location: object }): JSX.Element => {
                             </Grid>
                             <Grid item xs={12} sm={6} className={classes.gridRight}>
                               <Field
-                                options={[
-                                  {
-                                    label: 'Sales request',
-                                    value: 'sales',
-                                  },
-                                  {
-                                    label: 'Support request',
-                                    value: 'support',
-                                  },
-                                  {
-                                    label: 'Partnership request',
-                                    value: 'partnership',
-                                  },
-                                ]}
+                                options={[{ value: '', label: 'Select one' }, ...content.form.requestTypes]}
                                 component={SelectTextField}
                                 label="Type of request"
                                 name="requestType"
-                                className={classes.textField}
+                                className={
+                                  values.requestType === ''
+                                    ? clsx(classes.defaultSelect, classes.textField)
+                                    : classes.textField
+                                }
                               />
                             </Grid>
                           </Grid>
@@ -326,10 +341,17 @@ const ContactPage = ({ location }: { location: object }): JSX.Element => {
                           multiline
                           rows={matches ? 6 : 4}
                         />
-                        <ContainedButton className={classes.button} onClick={submitForm}>
+                        <ContainedButton
+                          disabled={(submitCount > 0 && !isValid) || isSubmitting}
+                          className={classes.button}
+                          onClick={submitForm}
+                        >
                           send
                         </ContainedButton>
                       </Form>
+                      {submitCount > 0 && !isSubmitting && (
+                        <Banner duration={bannerDuration} text="Your message was sent to the Regen team!" />
+                      )}
                     </div>
                   );
                 }}

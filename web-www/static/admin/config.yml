@@ -729,6 +729,17 @@ collections:
         fields:
           - {label: "header", name: header, widget: string}
           - {label: "body", name: body, widget: markdown}
+          - label: form
+            name: form
+            widget: object
+            fields:
+              - label: Types of request
+                name: requestTypes
+                widget: list
+                collapsed: false
+                fields:
+                  - {label: "label", name: label, widget: string}
+                  - {label: "Email", name: value, widget: string}
           - label: location
             name: location
             widget: object

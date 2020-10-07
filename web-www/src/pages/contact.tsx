@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingTop: theme.spacing(42.25),
     },
     [theme.breakpoints.down('xs')]: {
-      paddingTop: theme.spacing(5),
+      paddingTop: theme.spacing(7.5),
     },
   },
   title: {
@@ -67,7 +67,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       margin: '0 auto',
     },
     [theme.breakpoints.down('xs')]: {
-      paddingBottom: theme.spacing(11),
+      paddingBottom: theme.spacing(7.5),
       fontSize: theme.spacing(4.5),
     },
   },

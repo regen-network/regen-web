@@ -42,6 +42,7 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
     '/developers/': theme.palette.primary.main,
     '/invest/': theme.palette.primary.light,
     '/science/': theme.palette.primary.main,
+    '/validators/': theme.palette.primary.main,
   };
 
   const headerTransparent: BoolProps = {
@@ -56,7 +57,7 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
   // Links in rest of the site must use the trailing '/'
   // in order for these to work appropriately
   const headerNoBorderBottomPages: RegExp = new RegExp(
-    '//|/buyers/|/partners/|/land-stewards/|/resources/|/media/|/team/|/developers/|/science/|/invest/|/case-studies/|/press-kit/|/case-studies/[a-z-]+//',
+    '//|/buyers/|/partners/|/validators/|/land-stewards/|/resources/|/media/|/team/|/developers/|/science/|/invest/|/case-studies/|/press-kit/|/case-studies/[a-z-]+//',
   );
 
   const menuItems: HeaderMenuItem[] = [
@@ -67,6 +68,7 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
       dropdownItems: [
         { title: 'Developers', href: '/developers/' },
         { title: 'Scientists', href: '/science/' },
+        { title: 'Validators', href: '/validators/' },
       ],
     },
     {
@@ -108,8 +110,8 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
           href: '/science/',
         },
         {
-          title: 'Invest',
-          href: '/invest/',
+          title: 'Validators',
+          href: '/validators/',
         },
       ],
     },
@@ -162,6 +164,10 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
         {
           title: 'Press Kit',
           href: '/press-kit/',
+        },
+        {
+          title: 'Invest',
+          href: '/invest/',
         },
       ],
     },

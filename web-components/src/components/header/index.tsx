@@ -24,7 +24,7 @@ interface HeaderProps {
   color: string;
   menuItems?: HeaderMenuItem[];
   borderBottom?: boolean;
-  pathname?: string;
+  pathName?: string;
 }
 
 export interface HeaderMenuItem {
@@ -187,7 +187,7 @@ export default function Header({
   menuItems,
   borderBottom = true,
   absolute = true,
-  pathname = '/',
+  pathName = '/',
 }: HeaderProps): JSX.Element {
   const classes = useStyles({ color, borderBottom });
   const rootClass = [classes.borderBottom];
@@ -223,7 +223,7 @@ export default function Header({
                   <MenuItem
                     key={index}
                     className={
-                      pathname === item.href
+                      pathName === item.href
                         ? clsx(classes.menuItem, classes.currentMenuItem)
                         : classes.menuItem
                     }
@@ -241,7 +241,7 @@ export default function Header({
                           return (
                             <MenuItem
                               className={
-                                pathname === dropdownItem.href
+                                pathName === dropdownItem.href
                                   ? clsx(classes.subMenuHover, classes.currentMenuItem)
                                   : classes.subMenuHover
                               }
@@ -261,7 +261,7 @@ export default function Header({
             </MenuList>
           </Box>
           <Box display={{ xs: 'block', sm: 'none' }}>
-            <MobileMenu menuItems={menuItems} className={classes.mobile} />
+            <MobileMenu pathName={pathName} menuItems={menuItems} className={classes.mobile} />
           </Box>
         </Grid>
         {children}

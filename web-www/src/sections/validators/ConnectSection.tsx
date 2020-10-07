@@ -40,11 +40,6 @@ const ValidatorsConnectSection = (): JSX.Element => {
   const icons: IconLabelProps[] = [
     {
       icon: <TelegramIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />,
-      href: 'https://t.me/regennetworkdevannounce', // TODO: update
-      label: '100% validator Telegram',
-    },
-    {
-      icon: <TelegramIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />,
       href: 'https://t.me/regennetworkdevannounce',
       label: 'Developer / validator Telegram',
     },
@@ -55,15 +50,21 @@ const ValidatorsConnectSection = (): JSX.Element => {
       small: true,
     },
     {
-      icon: <RegenLogoIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />,
-      href: '/', // TODO: update
+      icon: <WhitepaperIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />,
+      href: 'https://github.com/regen-network/testnets#regen-ledger-testnets',
       label: 'Past testnets',
       small: true,
     },
     {
-      icon: <WhitepaperIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />,
-      href: '/', // TODO: update
-      label: 'Sign up for future testnets',
+      icon: <RegenLogoIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />,
+      href: 'https://forms.gle/U2qCRizswUvLG4M19',
+      label: 'Sign up for future testnets, US only',
+      small: true,
+    },
+    {
+      icon: <RegenLogoIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />,
+      href: 'https://forms.gle/CZRfbXjdp6gctF5m9',
+      label: 'Sign up for future testnets, non-US',
       small: true,
     },
   ];

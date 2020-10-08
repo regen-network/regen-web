@@ -68,6 +68,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.down('xs')]: {
       padding: `${theme.spacing(4)} ${theme.spacing(4.5)} ${theme.spacing(0.8)}`,
     },
+    overflow: 'hidden',
+    display: '-webkit-box',
+    '-webkit-line-clamp': 3,
+    '-webkit-box-orient': 'vertical',
   },
   h4title: {
     [theme.breakpoints.down('xs')]: {

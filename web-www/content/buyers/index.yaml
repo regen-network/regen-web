@@ -60,3 +60,6 @@ imageGridSection:
         and rich stories of environmental impact to their customers and
         supporters.
       image: ../../static/media/share-impact.png
+faqSection:
+  header: More questions? Dig into our FAQ.
+  image: ../../static/media/buyers-faq-bg.png

@@ -70,8 +70,8 @@ function AppFooter(): JSX.Element {
           href: `${process.env.REACT_APP_WEBSITE_URL}/science/`,
         },
         {
-          title: 'Invest',
-          href: `${process.env.REACT_APP_WEBSITE_URL}/invest/`,
+          title: 'Validators',
+          href: `${process.env.REACT_APP_WEBSITE_URL}/validators/`,
         },
       ],
     },
@@ -125,6 +125,10 @@ function AppFooter(): JSX.Element {
           title: 'Press Kit',
           href: `${process.env.REACT_APP_WEBSITE_URL}/press-kit/`,
         },
+        {
+          title: 'Invest',
+          href: `${process.env.REACT_APP_WEBSITE_URL}/invest/`,
+        },
       ],
     },
   ];
@@ -152,6 +156,7 @@ function AppHeader(): JSX.Element {
       dropdownItems: [
         { title: 'Developers', href: `${process.env.REACT_APP_WEBSITE_URL}/developers/` },
         { title: 'Scientists', href: `${process.env.REACT_APP_WEBSITE_URL}/science/` },
+        { title: 'Validators', href: `${process.env.REACT_APP_WEBSITE_URL}/validators/` },
       ],
     },
     {

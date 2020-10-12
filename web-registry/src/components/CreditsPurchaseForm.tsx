@@ -177,7 +177,7 @@ export default function CreditsPurchaseForm({
       url: 'https://geodata.solutions/api/api.php?type=getStates&countryId=' + countryId,
       method: 'POST',
     });
-    const respOK = resp && resp.status === 200 && resp.statusText === 'OK';
+    const respOK = resp && resp.status === 200;
     if (respOK) {
       const data = await resp.data;
       const options = Object.keys(data.result).map(key => ({ value: key, label: data.result[key] }));

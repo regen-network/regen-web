@@ -294,7 +294,8 @@ function getProjectUser(projectUser: User): User {
 }
 
 export default function ProjectDetails({ project, projectDefault }: ProjectProps): JSX.Element {
-  const [submitted, setSubmitted] = useState(false);
+  // const [submitted, setSubmitted] = useState(false);
+  const [submitted] = useState(false);
   const location = useLocation();
   useEffect(() => {
     setPageView(location);

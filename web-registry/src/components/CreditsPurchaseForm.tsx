@@ -298,7 +298,10 @@ export default function CreditsPurchaseForm({
             if (stripe) {
               const { error } = await stripe.redirectToCheckout({
                 items: [{ sku: stripePrice, quantity: units }],
-                successUrl: `${window.location.origin}/post-purchase/${projectId}`,
+                successUrl:
+                  process.env.NODE_ENV === 'production'
+                    ? `${window.location.origin}/registry/post-purchase/${projectId}`
+                    : `${window.location.origin}/post-purchase/${projectId}`,
                 cancelUrl: window.location.href,
                 customerEmail: email,
                 clientReferenceId: JSON.stringify({ walletId, addressId }),

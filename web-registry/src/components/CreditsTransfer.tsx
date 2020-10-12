@@ -189,6 +189,7 @@ export default function CreditsTransfer(): JSX.Element {
                     creditPrice,
                     txState: 'SUCCEEDED',
                     addressId,
+                    autoRetire: false,
                   },
                 },
               });

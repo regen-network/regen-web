@@ -31,12 +31,12 @@ import BuyFooter from 'web-components/lib/components/fixed-footer/BuyFooter';
 import MrvTabs from 'web-components/lib/components/tabs';
 import Table from 'web-components/lib/components/table';
 import Modal from 'web-components/lib/components/modal';
-import MoreInfoForm from 'web-components/lib/components/form/MoreInfoForm';
+// import MoreInfoForm from 'web-components/lib/components/form/MoreInfoForm';
 import CreditsPurchaseForm from './CreditsPurchaseForm';
 import Banner from 'web-components/lib/components/banner';
-import FixedFooter from 'web-components/lib/components/fixed-footer';
-import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import EmailIcon from 'web-components/lib/components/icons/EmailIcon';
+// import FixedFooter from 'web-components/lib/components/fixed-footer';
+// import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
+// import EmailIcon from 'web-components/lib/components/icons/EmailIcon';
 
 import { getImgSrc } from '../lib/imgSrc';
 
@@ -586,7 +586,7 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
         </div>
       )}
 
-      {project.presaleUrl && <BuyFooter onClick={handleOpen} creditPrice={project.creditPrice} />}
+      {project.creditPrice && <BuyFooter onClick={handleOpen} creditPrice={project.creditPrice} />}
 
       {project.creditPrice && project.stripePrice && (
         <Modal open={open} onClose={handleClose}>
@@ -599,15 +599,15 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
         </Modal>
       )}
 
-      <FixedFooter justify="flex-end">
+      {/* <FixedFooter justify="flex-end">
         <>
           <ContainedButton onClick={handleOpen} startIcon={<EmailIcon />}>
             send me more info
-          </ContainedButton>
-          {/* {<OutlinedButton className={classes.callButton} startIcon={<PhoneIcon />}>schedule a call</OutlinedButton>} */}
-        </>
-      </FixedFooter>
-      <Modal open={open} onClose={handleClose}>
+          </ContainedButton> */}
+      {/* {<OutlinedButton className={classes.callButton} startIcon={<PhoneIcon />}>schedule a call</OutlinedButton>} */}
+      {/* </>
+      </FixedFooter> */}
+      {/* <Modal open={open} onClose={handleClose}>
         <MoreInfoForm
           apiUrl={process.env.REACT_APP_API_URI}
           onClose={handleClose}
@@ -616,7 +616,7 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
             setSubmitted(true);
           }}
         />
-      </Modal>
+      </Modal> */}
       {submitted && <Banner text="Thanks for submitting your information!" />}
     </div>
   );

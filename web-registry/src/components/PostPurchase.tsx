@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
 import { useParams } from 'react-router-dom';
+import ReactHtmlParser from 'react-html-parser';
 
 import Section from 'web-components/lib/components/section';
 import GreenCard from 'web-components/lib/components/cards/GreenCard';
@@ -184,7 +185,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-function GridItem({ label, value }: { label: string; value: string | number | JSX.Element }): JSX.Element {
+function GridItem({ label, value }: { label: string; value: any }): JSX.Element {
   const classes = useStyles();
   return (
     <Grid container alignItems="center">
@@ -247,10 +248,10 @@ export default function PostPurchase(): JSX.Element {
                 </Title>
                 <GridItem
                   label="credit"
-                  value={
+                  value={ReactHtmlParser(
                     projectData.projectByHandle.creditClassByCreditClassId.creditClassVersionsById.nodes[0]
-                      .name
-                  }
+                      .name,
+                  )}
                 />
                 <GridItem label="project" value={<a href={url}>{projectData.projectByHandle.name}</a>} />
                 <GridItem

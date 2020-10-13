@@ -1,4 +1,4 @@
-function fallbackCopyTextToClipboard(text: string): void {
+function fallbackCopyTextToClipboard(text: string): Promise<any> {
   const textArea = document.createElement('textarea');
   textArea.value = text;
 
@@ -11,24 +11,26 @@ function fallbackCopyTextToClipboard(text: string): void {
   textArea.focus();
   textArea.select();
 
-  try {
-    document.execCommand('copy');
-  } catch (err) {}
-
-  document.body.removeChild(textArea);
+  return new Promise((resolve, reject) => {
+    try {
+      document.execCommand('copy');
+      document.body.removeChild(textArea);
+      resolve();
+    } catch (err) {
+      document.body.removeChild(textArea);
+      reject(err);
+    }
+  });
 }
 
-export default function copyTextToClipboard(text: string): void {
+export default function copyTextToClipboard(text: string): Promise<any> {
   if (!navigator.clipboard) {
-    fallbackCopyTextToClipboard(text);
-    return;
+    return fallbackCopyTextToClipboard(text);
   }
-  navigator.clipboard.writeText(text).then(
-    function() {
-      console.log('Async: Copying to clipboard was successful!');
-    },
-    function(err) {
-      console.error('Async: Could not copy text: ', err);
-    },
+  return new Promise((resolve, reject) =>
+    navigator.clipboard.writeText(text).then(
+      () => resolve(),
+      err => reject(err),
+    ),
   );
 }

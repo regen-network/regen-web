@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import { gql } from 'apollo-boost';
@@ -14,6 +14,7 @@ import FacebookIcon from 'web-components/lib/components/icons/social/FacebookIco
 import LinkedInIcon from 'web-components/lib/components/icons/social/LinkedInIcon';
 import TelegramIcon from 'web-components/lib/components/icons/social/TelegramIcon';
 import LinkIcon from 'web-components/lib/components/icons/LinkIcon';
+import Banner from 'web-components/lib/components/banner';
 import sum from '../lib/sum';
 import copyTextToClipboard from '../lib/copy';
 
@@ -200,6 +201,7 @@ function GridItem({ label, value }: { label: string; value: string | JSX.Element
 export default function PostPurchase(): JSX.Element {
   const classes = useStyles();
   const theme = useTheme();
+  const [copied, setCopied] = useState(false);
   let { walletId, projectId } = useParams<{ walletId: string; projectId: string }>();
   const options = { year: 'numeric', month: 'short', day: 'numeric' };
   const shareText: string = 'Share placeholder';
@@ -220,136 +222,152 @@ export default function PostPurchase(): JSX.Element {
       : `${window.location.origin}/${projectId}`;
 
   return (
-    <Section className={classes.section}>
-      <div className={classes.center}>
-        <img
-          src={require('../assets/cow-illustration.png')}
-          alt={require('../assets/cow-illustration.png')}
-        />
-        <Title className={classes.title} align="center" variant="h2">
-          Thank you for your purchase!
-        </Title>
-        {projectData && projectData.projectByHandle && (
-          <Description className={classes.description}>
-            {projectData.projectByHandle.metadata.thanksTagline}
-          </Description>
-        )}
-      </div>
-      {projectData && projectData.projectByHandle && walletData && walletData.walletById && (
-        <GreenCard className={classes.card}>
-          <Grid container className={classes.grid}>
-            <Grid item xs={12} sm={6}>
-              <Title className={classes.cardTitle} variant="h3">
-                Order summary
-              </Title>
-              <GridItem
-                label="credit"
-                value={
-                  projectData.projectByHandle.creditClassByCreditClassId.creditClassVersionsById.nodes[0].name
-                }
-              />
-              <GridItem label="project" value={<a href={url}>{projectData.projectByHandle.name}</a>} />
-              <GridItem
-                label="# of credits"
-                value={`$${new Intl.NumberFormat('en-US', {
-                  minimumFractionDigits: 2,
-                }).format(
-                  sum(
-                    walletData.walletById.purchasesByBuyerWalletId.nodes[0].transactionsByPurchaseId.nodes,
-                    'units',
-                  ),
-                )} USD`}
-              />
-              <GridItem
-                label="price"
-                value={
-                  walletData.walletById.purchasesByBuyerWalletId.nodes[0].transactionsByPurchaseId.nodes[0]
-                    .creditPrice
-                }
-              />
-              <GridItem
-                label="date"
-                value={new Date(
-                  walletData.walletById.purchasesByBuyerWalletId.nodes[0].createdAt,
-                ).toLocaleDateString('en-US', options)}
-              />
-              <GridItem label="owner" value={walletData.walletById.partiesByWalletId.nodes[0].name} />
-              <GridItem
-                label="transaction id"
-                value={walletData.walletById.purchasesByBuyerWalletId.nodes[0].id.slice(0, 18)}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <img
-                className={classes.image}
-                alt={projectData.projectByHandle.image}
-                src={projectData.projectByHandle.image}
-              />
-            </Grid>
-          </Grid>
-        </GreenCard>
-      )}
-      {projectData && projectData.projectByHandle && (
-        <div className={classes.share}>
-          <Title variant="h4" align="center">
-            Share this project
+    <>
+      <Section className={classes.section}>
+        <div className={classes.center}>
+          <img
+            src={require('../assets/cow-illustration.png')}
+            alt={require('../assets/cow-illustration.png')}
+          />
+          <Title className={classes.title} align="center" variant="h2">
+            Thank you for your purchase!
           </Title>
-          <Description className={classes.shareDescription}>
-            {projectData.projectByHandle.metadata.shareTagline}
-          </Description>
-          <Grid container justify="center" spacing={4}>
-            <Grid item>
-              <a
-                href={`https://twitter.com/intent/tweet?url=${url}&text=${shareText}`}
-                rel="noopener noreferrer"
-                target="_blank"
-                className={classes.iconContainer}
-              >
-                <TwitterIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />
-              </a>
-            </Grid>
-            <Grid item>
-              <a
-                href={`https://www.facebook.com/sharer/sharer.php?u=${url}`}
-                rel="noopener noreferrer"
-                target="_blank"
-                className={classes.iconContainer}
-              >
-                <FacebookIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />
-              </a>
-            </Grid>
-            <Grid item>
-              <a
-                href={`https://www.linkedin.com/sharing/share-offsite/?url=${url}`}
-                rel="noopener noreferrer"
-                target="_blank"
-                className={classes.iconContainer}
-              >
-                <LinkedInIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />
-              </a>
-            </Grid>
-            <Grid item>
-              <a
-                href={`https://t.me/share/url?url=${url}&text=${shareText}`}
-                rel="noopener noreferrer"
-                target="_blank"
-                className={classes.iconContainer}
-              >
-                <TelegramIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />
-              </a>
-            </Grid>
-            <Grid item>
-              <div onClick={() => copyTextToClipboard(url)} className={classes.iconContainer}>
-                <LinkIcon
-                  className={classes.small}
-                  color={theme.palette.primary.main}
-                  hoverColor={theme.palette.secondary.main}
-                />
-              </div>
-            </Grid>
-          </Grid>
+          {projectData && projectData.projectByHandle && (
+            <Description className={classes.description}>
+              {projectData.projectByHandle.metadata.thanksTagline}
+            </Description>
+          )}
         </div>
-      )}
-    </Section>
+        {projectData && projectData.projectByHandle && walletData && walletData.walletById && (
+          <GreenCard className={classes.card}>
+            <Grid container className={classes.grid}>
+              <Grid item xs={12} sm={6}>
+                <Title className={classes.cardTitle} variant="h3">
+                  Order summary
+                </Title>
+                <GridItem
+                  label="credit"
+                  value={
+                    projectData.projectByHandle.creditClassByCreditClassId.creditClassVersionsById.nodes[0]
+                      .name
+                  }
+                />
+                <GridItem label="project" value={<a href={url}>{projectData.projectByHandle.name}</a>} />
+                <GridItem
+                  label="# of credits"
+                  value={`$${new Intl.NumberFormat('en-US', {
+                    minimumFractionDigits: 2,
+                  }).format(
+                    sum(
+                      walletData.walletById.purchasesByBuyerWalletId.nodes[0].transactionsByPurchaseId.nodes,
+                      'units',
+                    ),
+                  )} USD`}
+                />
+                <GridItem
+                  label="price"
+                  value={
+                    walletData.walletById.purchasesByBuyerWalletId.nodes[0].transactionsByPurchaseId.nodes[0]
+                      .creditPrice
+                  }
+                />
+                <GridItem
+                  label="date"
+                  value={new Date(
+                    walletData.walletById.purchasesByBuyerWalletId.nodes[0].createdAt,
+                  ).toLocaleDateString('en-US', options)}
+                />
+                <GridItem label="owner" value={walletData.walletById.partiesByWalletId.nodes[0].name} />
+                <GridItem
+                  label="transaction id"
+                  value={walletData.walletById.purchasesByBuyerWalletId.nodes[0].id.slice(0, 18)}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <img
+                  className={classes.image}
+                  alt={projectData.projectByHandle.image}
+                  src={projectData.projectByHandle.image}
+                />
+              </Grid>
+            </Grid>
+          </GreenCard>
+        )}
+        {projectData && projectData.projectByHandle && (
+          <div className={classes.share}>
+            <Title variant="h4" align="center">
+              Share this project
+            </Title>
+            <Description className={classes.shareDescription}>
+              {projectData.projectByHandle.metadata.shareTagline}
+            </Description>
+            <Grid container justify="center" spacing={4}>
+              <Grid item>
+                <a
+                  href={`https://twitter.com/intent/tweet?url=${url}&text=${shareText}`}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  className={classes.iconContainer}
+                >
+                  <TwitterIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />
+                </a>
+              </Grid>
+              <Grid item>
+                <a
+                  href={`https://www.facebook.com/sharer/sharer.php?u=${url}`}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  className={classes.iconContainer}
+                >
+                  <FacebookIcon
+                    color={theme.palette.primary.main}
+                    hoverColor={theme.palette.secondary.main}
+                  />
+                </a>
+              </Grid>
+              <Grid item>
+                <a
+                  href={`https://www.linkedin.com/sharing/share-offsite/?url=${url}`}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  className={classes.iconContainer}
+                >
+                  <LinkedInIcon
+                    color={theme.palette.primary.main}
+                    hoverColor={theme.palette.secondary.main}
+                  />
+                </a>
+              </Grid>
+              <Grid item>
+                <a
+                  href={`https://t.me/share/url?url=${url}&text=${shareText}`}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  className={classes.iconContainer}
+                >
+                  <TelegramIcon
+                    color={theme.palette.primary.main}
+                    hoverColor={theme.palette.secondary.main}
+                  />
+                </a>
+              </Grid>
+              <Grid item>
+                <div
+                  onClick={() => copyTextToClipboard(url).then(() => setCopied(true))}
+                  className={classes.iconContainer}
+                >
+                  <LinkIcon
+                    className={classes.small}
+                    color={theme.palette.primary.main}
+                    hoverColor={theme.palette.secondary.main}
+                  />
+                </div>
+              </Grid>
+            </Grid>
+          </div>
+        )}
+      </Section>
+      {copied && <Banner text="Link copied to your clipboard" />}
+    </>
   );
 }

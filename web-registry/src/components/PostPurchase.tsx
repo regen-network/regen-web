@@ -278,7 +278,7 @@ export default function PostPurchase(): JSX.Element {
                 <GridItem label="owner" value={walletData.walletById.partiesByWalletId.nodes[0].name} />
                 <GridItem
                   label="transaction id"
-                  value={walletData.walletById.purchasesByBuyerWalletId.nodes[0].id.slice(0, 18)}
+                  value={walletData.walletById.purchasesByBuyerWalletId.nodes[0].id.slice(0, 8)}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>

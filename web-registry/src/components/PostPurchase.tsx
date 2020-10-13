@@ -184,7 +184,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-function GridItem({ label, value }: { label: string; value: string | JSX.Element }): JSX.Element {
+function GridItem({ label, value }: { label: string; value: string | number | JSX.Element }): JSX.Element {
   const classes = useStyles();
   return (
     <Grid container alignItems="center">
@@ -218,8 +218,8 @@ export default function PostPurchase(): JSX.Element {
 
   const url: string =
     process.env.NODE_ENV === 'production'
-      ? `${window.location.origin}/registry/${projectId}`
-      : `${window.location.origin}/${projectId}`;
+      ? `${window.location.origin}/registry/projects/${projectId}`
+      : `${window.location.origin}/projects/${projectId}`;
 
   return (
     <>
@@ -255,21 +255,19 @@ export default function PostPurchase(): JSX.Element {
                 <GridItem label="project" value={<a href={url}>{projectData.projectByHandle.name}</a>} />
                 <GridItem
                   label="# of credits"
-                  value={`$${new Intl.NumberFormat('en-US', {
-                    minimumFractionDigits: 2,
-                  }).format(
-                    sum(
-                      walletData.walletById.purchasesByBuyerWalletId.nodes[0].transactionsByPurchaseId.nodes,
-                      'units',
-                    ),
-                  )} USD`}
+                  value={sum(
+                    walletData.walletById.purchasesByBuyerWalletId.nodes[0].transactionsByPurchaseId.nodes,
+                    'units',
+                  )}
                 />
                 <GridItem
                   label="price"
-                  value={
+                  value={`$${new Intl.NumberFormat('en-US', {
+                    minimumFractionDigits: 2,
+                  }).format(
                     walletData.walletById.purchasesByBuyerWalletId.nodes[0].transactionsByPurchaseId.nodes[0]
-                      .creditPrice
-                  }
+                      .creditPrice,
+                  )} USD`}
                 />
                 <GridItem
                   label="date"

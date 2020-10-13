@@ -27,6 +27,7 @@ import CreditsRetire from './components/CreditsRetire';
 import BuyerCreate from './components/BuyerCreate';
 import NotFound from './components/NotFound';
 import Admin from './components/Admin';
+import PostPurchase from './components/PostPurchase';
 import CookiesFooter from 'web-components/lib/components/fixed-footer/CookiesFooter';
 
 interface BoolProps {
@@ -227,13 +228,13 @@ function VerifyEmail(): JSX.Element {
   );
 }
 
-function PostPurchase(): JSX.Element {
-  return (
-    <div style={{ padding: '1rem', display: 'flex', justifyContent: 'center' }}>
-      <Title variant="h1">Thank you for your purchase</Title>
-    </div>
-  );
-}
+// function PostPurchase(): JSX.Element {
+//   return (
+//     <div style={{ padding: '1rem', display: 'flex', justifyContent: 'center' }}>
+//       <Title variant="h1">Thank you for your purchase</Title>
+//     </div>
+//   );
+// }
 
 const App: React.FC = (): JSX.Element => {
   const { user, loading } = useAuth0();
@@ -274,7 +275,7 @@ const App: React.FC = (): JSX.Element => {
             path="/post-purchase"
             render={({ match: { path } }) => (
               <>
-                <Route path={`${path}/:projectId`} component={PostPurchase} />
+                <Route path={`${path}/:projectId/:walletId`} component={PostPurchase} />
               </>
             )}
           />

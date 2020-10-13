@@ -6,20 +6,21 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
-import { Helmet } from 'react-helmet';
 import { useStaticQuery, graphql } from 'gatsby';
+
+import SEO from 'web-components/lib/components/seo';
 
 interface propTypes {
   description?: string;
-  lang: string;
-  meta: Array<string>;
+  lang?: string;
   title: string;
   imageUrl?: string;
-  location: object;
+  location?: {
+    pathname: string;
+  };
 }
 
-function SEO({ location, description, lang, imageUrl, meta, title }: propTypes): JSX.Element {
+function SEOWebsite({ location, description = '', lang = 'en', imageUrl, title }: propTypes): JSX.Element {
   const { seoImage, site } = useStaticQuery(
     graphql`
       query {
@@ -39,77 +40,17 @@ function SEO({ location, description, lang, imageUrl, meta, title }: propTypes):
   );
 
   const seoImageUrl = imageUrl || seoImage.publicURL;
-  const path = location ? location.pathname : '';
-  const metaDescription = description || site.siteMetadata.description;
 
   return (
-    <Helmet
-      htmlAttributes={{
-        lang,
-      }}
+    <SEO
       title={title}
-      titleTemplate={`%s | ${site.siteMetadata.title}`}
-      meta={[
-        {
-          name: `description`,
-          content: metaDescription,
-        },
-        {
-          property: `og:title`,
-          content: title,
-        },
-        {
-          property: `og:description`,
-          content: metaDescription,
-        },
-        {
-          property: `og:image`,
-          content: seoImageUrl,
-        },
-        {
-          property: `og:url`,
-          content: `${site.siteMetadata.siteUrl}${path}`,
-        },
-        {
-          property: `og:type`,
-          content: `website`,
-        },
-        {
-          name: `twitter:card`,
-          content: `summary`,
-        },
-        {
-          name: `twitter:creator`,
-          content: site.siteMetadata.author,
-        },
-        {
-          name: `twitter:title`,
-          content: title,
-        },
-        {
-          name: `twitter:description`,
-          content: metaDescription,
-        },
-        {
-          property: `twitter:image`,
-          content: seoImageUrl,
-        },
-      ]}
+      location={location}
+      lang={lang}
+      imageUrl={seoImageUrl}
+      description={description}
+      siteMetadata={site.siteMetadata}
     />
   );
 }
 
-SEO.defaultProps = {
-  lang: `en`,
-  meta: [],
-  description: ``,
-};
-
-SEO.propTypes = {
-  description: PropTypes.string,
-  lang: PropTypes.string,
-  meta: PropTypes.arrayOf(PropTypes.object),
-  title: PropTypes.string.isRequired,
-};
-
-export default SEO;
+export default SEOWebsite;

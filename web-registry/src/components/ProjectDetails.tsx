@@ -34,11 +34,13 @@ import Modal from 'web-components/lib/components/modal';
 // import MoreInfoForm from 'web-components/lib/components/form/MoreInfoForm';
 import CreditsPurchaseForm from './CreditsPurchaseForm';
 import Banner from 'web-components/lib/components/banner';
+import SEO from 'web-components/lib/components/seo';
 // import FixedFooter from 'web-components/lib/components/fixed-footer';
 // import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 // import EmailIcon from 'web-components/lib/components/icons/EmailIcon';
 
 import { getImgSrc } from '../lib/imgSrc';
+import siteMetadata from '../siteMetadata';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -375,178 +377,185 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
   );
 
   return (
-    <div className={classes.root}>
-      <div className={`${classes.projectTop} project-top`}>
-        <Grid container className={`${classes.projectContent} ${classes.projectTopContent}`}>
-          <Grid item xs={12} sm={7} className={classes.projectMedia}>
-            {/*<img
+    <>
+      <SEO location={location} siteMetadata={siteMetadata} title={project.name} imageUrl={assets[0].src} />
+      <div className={classes.root}>
+        <div className={`${classes.projectTop} project-top`}>
+          <Grid container className={`${classes.projectContent} ${classes.projectTopContent}`}>
+            <Grid item xs={12} sm={7} className={classes.projectMedia}>
+              {/*<img
               className={classes.projectTopImage}
               alt={project.name}
               src={require(`../assets/${project.photos[0]}`)}
             />*/}
-            <ProjectMedia assets={assets} />
-          </Grid>
-          <Grid item xs={12} sm={5} className={classes.projectTopText}>
-            <Title variant="h1">{project.name}</Title>
-            <div className={classes.projectPlace}>
-              <ProjectPlaceInfo place={project.place} area={project.area} areaUnit={project.areaUnit} />
-            </div>
-            <Description fontSize={getFontSize('big')}>{project.shortDescription}</Description>
-            {project.credits && project.credits.issued > 0 && (
-              <div className={classes.creditsGauge}>
-                <CreditsGauge purchased={project.credits.purchased} issued={project.credits.issued} />
+              <ProjectMedia assets={assets} />
+            </Grid>
+            <Grid item xs={12} sm={5} className={classes.projectTopText}>
+              <Title variant="h1">{project.name}</Title>
+              <div className={classes.projectPlace}>
+                <ProjectPlaceInfo place={project.place} area={project.area} areaUnit={project.areaUnit} />
               </div>
-            )}
-            {project.glanceImgSrc && project.glanceText && (
-              <div className={classes.glanceCard}>
-                <GlanceCard imgSrc={require(`../assets/${project.glanceImgSrc}`)} text={project.glanceText} />
-              </div>
-            )}
+              <Description fontSize={getFontSize('big')}>{project.shortDescription}</Description>
+              {project.credits && project.credits.issued > 0 && (
+                <div className={classes.creditsGauge}>
+                  <CreditsGauge purchased={project.credits.purchased} issued={project.credits.issued} />
+                </div>
+              )}
+              {project.glanceImgSrc && project.glanceText && (
+                <div className={classes.glanceCard}>
+                  <GlanceCard
+                    imgSrc={require(`../assets/${project.glanceImgSrc}`)}
+                    text={project.glanceText}
+                  />
+                </div>
+              )}
+            </Grid>
           </Grid>
-        </Grid>
-      </div>
+        </div>
 
-      <div className={`${classes.projectDetails} ${classes.projectContent}`}>
-        <Grid container>
-          <Grid item xs={12} sm={7} className={classes.projectStory}>
-            <Title variant="h3">
-              {project.fieldsOverride && project.fieldsOverride.story
-                ? project.fieldsOverride.story.title
-                : projectDefault.story.title}
-            </Title>
-            <ReadMore>{project.longDescription}</ReadMore>
+        <div className={`${classes.projectDetails} ${classes.projectContent}`}>
+          <Grid container>
+            <Grid item xs={12} sm={7} className={classes.projectStory}>
+              <Title variant="h3">
+                {project.fieldsOverride && project.fieldsOverride.story
+                  ? project.fieldsOverride.story.title
+                  : projectDefault.story.title}
+              </Title>
+              <ReadMore>{project.longDescription}</ReadMore>
+            </Grid>
+            <Grid item xs={12} sm={5}>
+              <div className={classes.projectDeveloper}>
+                <ProjectDeveloperCard
+                  projectDeveloper={projectDeveloper}
+                  landSteward={landSteward}
+                  landOwner={landOwner}
+                />
+              </div>
+            </Grid>
           </Grid>
-          <Grid item xs={12} sm={5}>
-            <div className={classes.projectDeveloper}>
-              <ProjectDeveloperCard
-                projectDeveloper={projectDeveloper}
-                landSteward={landSteward}
-                landOwner={landOwner}
+        </div>
+
+        <Grid container className={`${classes.projectDetails} ${classes.projectContent}`}>
+          {monitoredImpact && (
+            <Grid item xs={12} sm={7} className={classes.monitoredImpact}>
+              <Title variant="h3">
+                {project.fieldsOverride && project.fieldsOverride.monitoredImpact
+                  ? project.fieldsOverride.monitoredImpact.title
+                  : projectDefault.monitoredImpact.title}
+              </Title>
+              <ImpactCard
+                name={monitoredImpact.name}
+                description={monitoredImpact.description}
+                imgSrc={monitoredImpact.imgSrc}
+                monitored
               />
-            </div>
-          </Grid>
-        </Grid>
-      </div>
-
-      <Grid container className={`${classes.projectDetails} ${classes.projectContent}`}>
-        {monitoredImpact && (
-          <Grid item xs={12} sm={7} className={classes.monitoredImpact}>
-            <Title variant="h3">
-              {project.fieldsOverride && project.fieldsOverride.monitoredImpact
-                ? project.fieldsOverride.monitoredImpact.title
-                : projectDefault.monitoredImpact.title}
-            </Title>
-            <ImpactCard
-              name={monitoredImpact.name}
-              description={monitoredImpact.description}
-              imgSrc={monitoredImpact.imgSrc}
-              monitored
-            />
-          </Grid>
-        )}
-        {protectedSpecies.length > 0 ? (
-          <Grid item xs={12} sm={5} className={classes.protectedSpecies}>
-            <Title variant="h3">
-              {project.fieldsOverride && project.fieldsOverride.protectedSpecies
-                ? project.fieldsOverride.protectedSpecies.title
-                : projectDefault.protectedSpecies.title}
-            </Title>
-            <ProtectedSpecies species={protectedSpecies} />
-          </Grid>
-        ) : (
-          <Grid item xs={12} sm={5} className={classes.protectedSpecies}>
-            <Title variant="h3">
-              {project.fieldsOverride && project.fieldsOverride.nonMonitoredImpact
-                ? project.fieldsOverride.nonMonitoredImpact.title
-                : projectDefault.nonMonitoredImpact.title}
-            </Title>
-            {/*<Description fontSize={getFontSize('project')}>
+            </Grid>
+          )}
+          {protectedSpecies.length > 0 ? (
+            <Grid item xs={12} sm={5} className={classes.protectedSpecies}>
+              <Title variant="h3">
+                {project.fieldsOverride && project.fieldsOverride.protectedSpecies
+                  ? project.fieldsOverride.protectedSpecies.title
+                  : projectDefault.protectedSpecies.title}
+              </Title>
+              <ProtectedSpecies species={protectedSpecies} />
+            </Grid>
+          ) : (
+            <Grid item xs={12} sm={5} className={classes.protectedSpecies}>
+              <Title variant="h3">
+                {project.fieldsOverride && project.fieldsOverride.nonMonitoredImpact
+                  ? project.fieldsOverride.nonMonitoredImpact.title
+                  : projectDefault.nonMonitoredImpact.title}
+              </Title>
+              {/*<Description fontSize={getFontSize('project')}>
               {project.fieldsOverride &&
               project.fieldsOverride.nonMonitoredImpact &&
               project.fieldsOverride.nonMonitoredImpact.subtitle
                 ? project.fieldsOverride.nonMonitoredImpact.subtitle
                 : projectDefault.nonMonitoredImpact.subtitle}
             </Description>*/}
-            <NonMonitoredImpact impact={impact} />
-          </Grid>
-        )}
-      </Grid>
-
-      {protectedSpecies.length > 0 && (
-        <div
-          className={`${classes.projectDetails} ${classes.projectContent} ${classes.projectImpactContainer}`}
-        >
-          <Title variant="h3">
-            {project.fieldsOverride && project.fieldsOverride.nonMonitoredImpact
-              ? project.fieldsOverride.nonMonitoredImpact.title
-              : projectDefault.nonMonitoredImpact.title}
-          </Title>
-          <Description>
-            {project.fieldsOverride &&
-            project.fieldsOverride.nonMonitoredImpact &&
-            project.fieldsOverride.nonMonitoredImpact.subtitle
-              ? project.fieldsOverride.nonMonitoredImpact.subtitle
-              : projectDefault.nonMonitoredImpact.subtitle}
-          </Description>
-          <Grid container className={`${classes.projectGrid} ${classes.projectImpactGrid}`}>
-            {impact.map((item, index) => (
-              <Grid
-                item
-                xs={12}
-                sm={4}
-                className={`${classes.projectGridItem} ${classes.projectImpact}`}
-                key={`${index}-${item.name}`}
-              >
-                <ImpactCard name={item.name} description={item.description} imgSrc={item.imgSrc} />
-              </Grid>
-            ))}
-          </Grid>
-        </div>
-      )}
-
-      {!project.hideCreditDetails && (
-        <div className={`${classes.projectDetails} ${classes.projectContent}`}>
-          {project.documents.length > 0 ? (
-            <MrvTabs
-              tabs={[
-                {
-                  label: 'Overview',
-                  children: creditDetails,
-                },
-                {
-                  label: 'Documentation',
-                  children: <Table rows={project.documents} />,
-                },
-              ]}
-              background={background}
-            />
-          ) : (
-            creditDetails
+              <NonMonitoredImpact impact={impact} />
+            </Grid>
           )}
-        </div>
-      )}
+        </Grid>
 
-      <div className={`project-background`}>
-        <div
-          className={`${classes.projectTopContent} ${classes.projectDetails} ${classes.projectActions} ${classes.projectContent}`}
-        >
-          <Title variant="h3">
-            {project.fieldsOverride && project.fieldsOverride.landManagementActions
-              ? project.fieldsOverride.landManagementActions.title
-              : projectDefault.landManagementActions.title}
-          </Title>
-          {landManagementActions.map((actionsType, i) => (
-            <div key={i} className={i > 0 ? classes.projectActionsGroup : ''}>
-              <Description
-                fontSize={
-                  landManagementActions.length > 1 ? { xs: '0.95rem', sm: '1.125rem' } : getFontSize('medium')
-                }
-              >
-                {actionsType.title || projectDefault.landManagementActions.subtitle}
-              </Description>
-              <LandManagementActions actions={actionsType.actions} />
+        {protectedSpecies.length > 0 && (
+          <div
+            className={`${classes.projectDetails} ${classes.projectContent} ${classes.projectImpactContainer}`}
+          >
+            <Title variant="h3">
+              {project.fieldsOverride && project.fieldsOverride.nonMonitoredImpact
+                ? project.fieldsOverride.nonMonitoredImpact.title
+                : projectDefault.nonMonitoredImpact.title}
+            </Title>
+            <Description>
+              {project.fieldsOverride &&
+              project.fieldsOverride.nonMonitoredImpact &&
+              project.fieldsOverride.nonMonitoredImpact.subtitle
+                ? project.fieldsOverride.nonMonitoredImpact.subtitle
+                : projectDefault.nonMonitoredImpact.subtitle}
+            </Description>
+            <Grid container className={`${classes.projectGrid} ${classes.projectImpactGrid}`}>
+              {impact.map((item, index) => (
+                <Grid
+                  item
+                  xs={12}
+                  sm={4}
+                  className={`${classes.projectGridItem} ${classes.projectImpact}`}
+                  key={`${index}-${item.name}`}
+                >
+                  <ImpactCard name={item.name} description={item.description} imgSrc={item.imgSrc} />
+                </Grid>
+              ))}
+            </Grid>
+          </div>
+        )}
 
-              {/*<div className={`${classes.projectGrid} ${classes.projectActionsGrid}`}>
+        {!project.hideCreditDetails && (
+          <div className={`${classes.projectDetails} ${classes.projectContent}`}>
+            {project.documents.length > 0 ? (
+              <MrvTabs
+                tabs={[
+                  {
+                    label: 'Overview',
+                    children: creditDetails,
+                  },
+                  {
+                    label: 'Documentation',
+                    children: <Table rows={project.documents} />,
+                  },
+                ]}
+                background={background}
+              />
+            ) : (
+              creditDetails
+            )}
+          </div>
+        )}
+
+        <div className={`project-background`}>
+          <div
+            className={`${classes.projectTopContent} ${classes.projectDetails} ${classes.projectActions} ${classes.projectContent}`}
+          >
+            <Title variant="h3">
+              {project.fieldsOverride && project.fieldsOverride.landManagementActions
+                ? project.fieldsOverride.landManagementActions.title
+                : projectDefault.landManagementActions.title}
+            </Title>
+            {landManagementActions.map((actionsType, i) => (
+              <div key={i} className={i > 0 ? classes.projectActionsGroup : ''}>
+                <Description
+                  fontSize={
+                    landManagementActions.length > 1
+                      ? { xs: '0.95rem', sm: '1.125rem' }
+                      : getFontSize('medium')
+                  }
+                >
+                  {actionsType.title || projectDefault.landManagementActions.subtitle}
+                </Description>
+                <LandManagementActions actions={actionsType.actions} />
+
+                {/*<div className={`${classes.projectGrid} ${classes.projectActionsGrid}`}>
                 {actionsType.actions.map((action, j) => (
                   <Grid item xs={12} sm={4} className={classes.projectGridItem} key={`${j}-${action.name}`}>
                     <Action
@@ -557,58 +566,58 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
                   </Grid>
                 ))
               </div>*/}
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {geojson && isGISFile ? (
-        <Map geojson={geojson} token={process.env.REACT_APP_MAPBOX_TOKEN} />
-      ) : (
-        <img className={classes.map} alt={project.name} src={mapFile} />
-      )}
-
-      {project.timeline && (
-        <div className={classes.timelineContainer}>
-          {/*<div className={classes.projectDetails}>
-          <Title variant="h3">Monitoring, Verification, and Reporting</Title>
-        </div>*/}
-          <div className={`${classes.projectDetails} ${classes.projectTimeline} ${classes.projectContent}`}>
-            <Title className={classes.timelineTitle} variant="h3">
-              {project.fieldsOverride && project.fieldsOverride.timeline
-                ? project.fieldsOverride.timeline.title
-                : projectDefault.timeline.title}
-            </Title>
-            <Timeline
-              events={project.timeline.events}
-              completedItemIndex={project.timeline.completedItemIndex}
-            />
+              </div>
+            ))}
           </div>
         </div>
-      )}
 
-      {project.creditPrice && <BuyFooter onClick={handleOpen} creditPrice={project.creditPrice} />}
+        {geojson && isGISFile ? (
+          <Map geojson={geojson} token={process.env.REACT_APP_MAPBOX_TOKEN} />
+        ) : (
+          <img className={classes.map} alt={project.name} src={mapFile} />
+        )}
 
-      {project.creditPrice && project.stripePrice && (
-        <Modal open={open} onClose={handleClose}>
-          <CreditsPurchaseForm
-            onClose={handleClose}
-            creditPrice={project.creditPrice}
-            stripePrice={project.stripePrice}
-          />
-          {/*<iframe title="airtable-presale-form" src={project.presaleUrl} />*/}
-        </Modal>
-      )}
+        {project.timeline && (
+          <div className={classes.timelineContainer}>
+            {/*<div className={classes.projectDetails}>
+          <Title variant="h3">Monitoring, Verification, and Reporting</Title>
+        </div>*/}
+            <div className={`${classes.projectDetails} ${classes.projectTimeline} ${classes.projectContent}`}>
+              <Title className={classes.timelineTitle} variant="h3">
+                {project.fieldsOverride && project.fieldsOverride.timeline
+                  ? project.fieldsOverride.timeline.title
+                  : projectDefault.timeline.title}
+              </Title>
+              <Timeline
+                events={project.timeline.events}
+                completedItemIndex={project.timeline.completedItemIndex}
+              />
+            </div>
+          </div>
+        )}
 
-      {/* <FixedFooter justify="flex-end">
+        {project.creditPrice && <BuyFooter onClick={handleOpen} creditPrice={project.creditPrice} />}
+
+        {project.creditPrice && project.stripePrice && (
+          <Modal open={open} onClose={handleClose}>
+            <CreditsPurchaseForm
+              onClose={handleClose}
+              creditPrice={project.creditPrice}
+              stripePrice={project.stripePrice}
+            />
+            {/*<iframe title="airtable-presale-form" src={project.presaleUrl} />*/}
+          </Modal>
+        )}
+
+        {/* <FixedFooter justify="flex-end">
         <>
           <ContainedButton onClick={handleOpen} startIcon={<EmailIcon />}>
             send me more info
           </ContainedButton> */}
-      {/* {<OutlinedButton className={classes.callButton} startIcon={<PhoneIcon />}>schedule a call</OutlinedButton>} */}
-      {/* </>
+        {/* {<OutlinedButton className={classes.callButton} startIcon={<PhoneIcon />}>schedule a call</OutlinedButton>} */}
+        {/* </>
       </FixedFooter> */}
-      {/* <Modal open={open} onClose={handleClose}>
+        {/* <Modal open={open} onClose={handleClose}>
         <MoreInfoForm
           apiUrl={process.env.REACT_APP_API_URI}
           onClose={handleClose}
@@ -618,7 +627,8 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
           }}
         />
       </Modal> */}
-      {submitted && <Banner text="Thanks for submitting your information!" />}
-    </div>
+        {submitted && <Banner text="Thanks for submitting your information!" />}
+      </div>
+    </>
   );
 }

@@ -13,7 +13,9 @@ import TwitterIcon from 'web-components/lib/components/icons/social/TwitterIcon'
 import FacebookIcon from 'web-components/lib/components/icons/social/FacebookIcon';
 import LinkedInIcon from 'web-components/lib/components/icons/social/LinkedInIcon';
 import TelegramIcon from 'web-components/lib/components/icons/social/TelegramIcon';
+import LinkIcon from 'web-components/lib/components/icons/LinkIcon';
 import sum from '../lib/sum';
+import copyTextToClipboard from '../lib/copy';
 
 const PROJECT = gql`
   query ProjectByHandle($handle: String!) {
@@ -140,6 +142,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   shareDescription: {
     lineHeight: '150%',
     paddingTop: theme.spacing(3),
+    paddingBottom: theme.spacing(5),
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.spacing(4.5),
     },
@@ -160,15 +163,23 @@ const useStyles = makeStyles((theme: Theme) => ({
     backgroundColor: theme.palette.primary.main,
   },
   iconContainer: {
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: theme.palette.secondary.dark,
     borderRadius: '50%',
+    display: 'block',
     width: theme.spacing(12.5),
     height: theme.spacing(12.5),
+    cursor: 'pointer',
+    '&:hover': {
+      backgroundColor: theme.palette.secondary.light,
+    },
     '& svg': {
       color: 'transparent',
       width: '100%',
       height: '100%',
     },
+  },
+  small: {
+    padding: theme.spacing(2),
   },
 }));
 
@@ -191,6 +202,7 @@ export default function PostPurchase(): JSX.Element {
   const theme = useTheme();
   let { walletId, projectId } = useParams<{ walletId: string; projectId: string }>();
   const options = { year: 'numeric', month: 'short', day: 'numeric' };
+  const shareText: string = 'Share placeholder';
 
   const { data: projectData } = useQuery(PROJECT, {
     errorPolicy: 'ignore',
@@ -201,6 +213,11 @@ export default function PostPurchase(): JSX.Element {
     errorPolicy: 'ignore',
     variables: { id: walletId },
   });
+
+  const url: string =
+    process.env.NODE_ENV === 'production'
+      ? `${window.location.origin}/registry/${projectId}`
+      : `${window.location.origin}/${projectId}`;
 
   return (
     <Section className={classes.section}>
@@ -231,12 +248,7 @@ export default function PostPurchase(): JSX.Element {
                   projectData.projectByHandle.creditClassByCreditClassId.creditClassVersionsById.nodes[0].name
                 }
               />
-              <GridItem
-                label="project"
-                value={
-                  <a href={projectData.projectByHandle.metadata.url}>{projectData.projectByHandle.name}</a>
-                }
-              />
+              <GridItem label="project" value={<a href={url}>{projectData.projectByHandle.name}</a>} />
               <GridItem
                 label="# of credits"
                 value={`$${new Intl.NumberFormat('en-US', {
@@ -285,11 +297,57 @@ export default function PostPurchase(): JSX.Element {
           <Description className={classes.shareDescription}>
             {projectData.projectByHandle.metadata.shareTagline}
           </Description>
-          <div className={classes.center}>
-            <div className={classes.iconContainer}>
-              <TelegramIcon color={theme.palette.primary.main} />
-            </div>
-          </div>
+          <Grid container justify="center" spacing={4}>
+            <Grid item>
+              <a
+                href={`https://twitter.com/intent/tweet?url=${url}&text=${shareText}`}
+                rel="noopener noreferrer"
+                target="_blank"
+                className={classes.iconContainer}
+              >
+                <TwitterIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />
+              </a>
+            </Grid>
+            <Grid item>
+              <a
+                href={`https://www.facebook.com/sharer/sharer.php?u=${url}`}
+                rel="noopener noreferrer"
+                target="_blank"
+                className={classes.iconContainer}
+              >
+                <FacebookIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />
+              </a>
+            </Grid>
+            <Grid item>
+              <a
+                href={`https://www.linkedin.com/sharing/share-offsite/?url=${url}`}
+                rel="noopener noreferrer"
+                target="_blank"
+                className={classes.iconContainer}
+              >
+                <LinkedInIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />
+              </a>
+            </Grid>
+            <Grid item>
+              <a
+                href={`https://t.me/share/url?url=${url}&text=${shareText}`}
+                rel="noopener noreferrer"
+                target="_blank"
+                className={classes.iconContainer}
+              >
+                <TelegramIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />
+              </a>
+            </Grid>
+            <Grid item>
+              <div onClick={() => copyTextToClipboard(url)} className={classes.iconContainer}>
+                <LinkIcon
+                  className={classes.small}
+                  color={theme.palette.primary.main}
+                  hoverColor={theme.palette.secondary.main}
+                />
+              </div>
+            </Grid>
+          </Grid>
         </div>
       )}
     </Section>

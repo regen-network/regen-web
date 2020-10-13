@@ -29,6 +29,7 @@ import YoutubeIcon from 'web-components/lib/components/icons/social/YoutubeIcon'
 import GithubIcon from 'web-components/lib/components/icons/social/GithubIcon';
 import WhitepaperIcon from 'web-components/lib/components/icons/WhitepaperIcon';
 import BlockIcon from 'web-components/lib/components/icons/BlockIcon';
+import LinkIcon from 'web-components/lib/components/icons/LinkIcon';
 
 import { withKnobs, text } from '@storybook/addon-knobs';
 
@@ -96,6 +97,8 @@ export const youtubeIcon = (): JSX.Element => <YoutubeIcon />;
 
 export const githubIcon = (): JSX.Element => <GithubIcon />;
 
-export const whitepaperIcon = (): JSX.Element => <WhitepaperIcon />;
+export const whitepaperIcon = (): JSX.Element => <WhitepaperIcon color="black" />;
 
-export const blockIcon = (): JSX.Element => <BlockIcon />;
+export const blockIcon = (): JSX.Element => <BlockIcon color="black" />;
+
+export const linkIcon = (): JSX.Element => <LinkIcon color="black" />;

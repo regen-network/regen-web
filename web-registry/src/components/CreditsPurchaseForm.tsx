@@ -387,9 +387,8 @@ export default function CreditsPurchaseForm({
                   Location of purchase
                 </Title>
                 <Description>
-                  Please enter a location for the retirement of these credits. This prevents{' '}
-                  <span className={classes.green}>double counting</span> of credits in different locations.
-                  These credits will auto-retire.
+                  Please enter a location for the retirement of these credits. This prevents double counting
+                  of credits in different locations. These credits will auto-retire.
                 </Description>
                 <Field component={TextField} className={classes.cityTextField} label="City" name="city" />
                 <Grid container alignItems="center" className={classes.stateCountryGrid}>

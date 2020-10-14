@@ -3,6 +3,7 @@ import { graphql, useStaticQuery } from 'gatsby';
 import { makeStyles, Theme } from '@material-ui/core';
 
 import TopSection from '../sections/community/TopSection';
+import CommunitySection from '../sections/community/CollaborateSection';
 import SEO from '../components/seo';
 
 interface props {
@@ -29,7 +30,8 @@ const CommunityPage = ({ location }: props): JSX.Element => {
         location={location}
         imageUrl={data.seoImage.publicURL}
       />
-      <TopSection />
+      <TopSection location={location} />
+      <CommunitySection />
     </>
   );
 };

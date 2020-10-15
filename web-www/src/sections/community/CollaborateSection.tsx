@@ -25,6 +25,10 @@ const useStyles = makeStyles((theme: Theme) => ({
       marginBottom: theme.spacing(6.75),
     },
   },
+  body: {
+    textAlign: 'center',
+    marginBottom: theme.spacing(25),
+  },
 }));
 
 const CollaborateSection = (): JSX.Element => {
@@ -55,7 +59,7 @@ const CollaborateSection = (): JSX.Element => {
       <Title className={classes.title} variant="h3" align="center">
         {content.header}
       </Title>
-      <Typography>{content.body}</Typography>
+      <Typography className={classes.body} dangerouslySetInnerHTML={{ __html: content.body }}></Typography>
       <ResourceCardsSlider items={content.cards} />
     </Section>
   );

@@ -1,51 +1,58 @@
 topSection:
-  header: 'Dig into our documentation.'
-  body: 'We strive to be a transparent and open system for creating ecological credits that reward regenerative practices. Learn more about the ins and outs of how the Regen Ledger and Regen Registry function.'
+  header: Dig into our documentation.
+  body: We strive to be a transparent and open system for creating ecological
+    credits that reward regenerative practices. Learn more about the ins and
+    outs of how the Regen Ledger and Regen Registry function.
 registrySection:
-  header: 'Regen Registry'
+  header: Regen Registry
   cards:
-    - image: '../../static/media/resources-grasslands-methodology.jpg'
-      title: 'Methodology: GHG & Co-Benefits in Grazing Systems Credit Class v1.0'
-      updated: 'June 30, 2020'
-      description: ''
-      buttonText: 'View Methodology'
-      link: '/'
-    - image: '../../static/media/resources-grasslands-credit-class.jpg'
-      title: 'GHG & Co-Benefits in Grazing Systems Credit Class v1.0'
-      updated: 'June 30, 2020'
-      description: ''
-      buttonText: 'View Credit Class'
-      link: '/'
-    - image: '../../static/media/resources-registry-guide.jpg'
-      title: 'Registry Guide'
-      updated: 'June 30, 2020'
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
-      buttonText: 'View Guide'
-      link: '/'
+    - image: ../../static/media/methodology-ghg.jpg
+      title: "Methodology: GHG & Co-Benefits in Grazing Systems Credit Class v1.0"
+      updated: June 30, 2020
+      description: ""
+      buttonText: View Methodology
+      link: /
+    - image: ../../static/media/resources-grasslands-credit-class.jpg
+      title: GHG & Co-Benefits in Grazing Systems Credit Class v1.0
+      updated: June 30, 2020
+      description: ""
+      buttonText: View Credit Class
+      link: /
+    - image: ../../static/media/resources-registry-guide.jpg
+      title: Registry Guide
+      updated: June 30, 2020
+      description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+        eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      buttonText: View Guide
+      link: /
 ledgerSection:
-  header: 'Regen Ledger and more'
+  header: Regen Ledger and more
   cards:
-    - image: '../../static/media/resources-ledger-whitepaper-image.jpg'
-      title: 'Whitepaper'
-      updated: 'February 5th, 2020'
-      description: 'Dive into our master document of strategy and design for the Regen Registry and Regen Ledger.'
-      buttonText: 'View Whitepaper'
+    - image: ../../static/media/resources-ledger-whitepaper-image.jpg
+      title: Whitepaper
+      updated: February 5th, 2020
+      description: Dive into our master document of strategy and design for the Regen
+        Registry and Regen Ledger.
+      buttonText: View Whitepaper
       link: https://regen-network.gitlab.io/whitepaper/WhitePaper.pdf
-    - image: '../../static/media/resources-ledger-architecture-image.jpg'
-      title: 'Architecture Paper'
-      updated: 'June 20, 2019'
-      description: 'Discover the key architectural decisions of our system and our approaches to solving the problems of ecological accounting.'
-      buttonText: 'View Paper'
+    - image: ../../static/media/resources-ledger-architecture-image.jpg
+      title: Architecture Paper
+      updated: June 20, 2019
+      description: Discover the key architectural decisions of our system and our
+        approaches to solving the problems of ecological accounting.
+      buttonText: View Paper
       link: https://regen-network.gitlab.io/whitepaper/Architecture.pdf
-    - image: '../../static/media/resources-ledger-economics-image.jpg'
-      title: 'Economics'
-      updated: 'November 31, 2019'
-      description: 'Explore the use cases of our token in the context of ecological markets and learn why blockchain is an appropriate solution.'
-      buttonText: 'View Economics Paper'
-      link: 'https://regen-network.gitlab.io/whitepaper/Economics.pdf'
-    - image: '../../static/media/resources-ledger-science-image.jpg'
-      title: 'Science Paper'
-      updated: 'May 13, 2018'
-      description: 'See how state of the art spectral imaging can provide us with an unprecedented view of our ecology.'
-      buttonText: 'View Science Paper'
-      link: 'https://regen-network.gitlab.io/whitepaper/Protocols.pdf'
+    - image: ../../static/media/resources-ledger-economics-image.jpg
+      title: Economics
+      updated: November 31, 2019
+      description: Explore the use cases of our token in the context of ecological
+        markets and learn why blockchain is an appropriate solution.
+      buttonText: View Economics Paper
+      link: https://regen-network.gitlab.io/whitepaper/Economics.pdf
+    - image: ../../static/media/resources-ledger-science-image.jpg
+      title: Science Paper
+      updated: May 13, 2018
+      description: See how state of the art spectral imaging can provide us with an
+        unprecedented view of our ecology.
+      buttonText: View Science Paper
+      link: https://regen-network.gitlab.io/whitepaper/Protocols.pdf

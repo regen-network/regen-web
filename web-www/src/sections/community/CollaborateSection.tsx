@@ -56,7 +56,7 @@ const CollaborateSection = (): JSX.Element => {
         {content.header}
       </Title>
       <Typography>{content.body}</Typography>
-      <ResourceCardsSlider linkTargets="string" items={content.cards} />
+      <ResourceCardsSlider items={content.cards} />
     </Section>
   );
 };

@@ -41,12 +41,6 @@ const WALLET = gql`
   query WalletById($id: UUID!) {
     walletById(id: $id) {
       id
-      partiesByWalletId {
-        nodes {
-          id
-          name
-        }
-      }
       purchasesByBuyerWalletId(orderBy: CREATED_AT_DESC, first: 1) {
         nodes {
           id
@@ -126,8 +120,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingBottom: theme.spacing(7),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(5),
+    },
+    [theme.breakpoints.down('xs')]: {
       paddingBottom: theme.spacing(4),
     },
   },
@@ -203,9 +199,12 @@ export default function PostPurchase(): JSX.Element {
   const classes = useStyles();
   const theme = useTheme();
   const [copied, setCopied] = useState(false);
-  let { walletId, projectId } = useParams<{ walletId: string; projectId: string }>();
+  let { walletId, projectId, name } = useParams<{ walletId: string; projectId: string; name: string }>();
   const options = { year: 'numeric', month: 'short', day: 'numeric' };
-  const shareText: string = 'Share placeholder';
+  const shareTwitterText: string =
+    'Just purchased credits on Regen Registry! CarbonPlus credits help to meet %23climatechange goals, support %23farmers and restore %23ecosystems. Join us and take %23climateaction @regen_network - open marketplace for climate solutions. Learn more:';
+  const shareTelegramText: string =
+    'Just purchased credits on Regen Registry! CarbonPlus credits help to meet climate change goals, support farmers and restore ecosystems. Join us and take climateaction https://t.me/regennetwork_public - open marketplace for climate solutions.';
 
   const { data: projectData } = useQuery(PROJECT, {
     errorPolicy: 'ignore',
@@ -242,7 +241,7 @@ export default function PostPurchase(): JSX.Element {
         {projectData && projectData.projectByHandle && walletData && walletData.walletById && (
           <GreenCard className={classes.card}>
             <Grid container className={classes.grid}>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12} md={6}>
                 <Title className={classes.cardTitle} variant="h3">
                   Order summary
                 </Title>
@@ -276,13 +275,13 @@ export default function PostPurchase(): JSX.Element {
                     walletData.walletById.purchasesByBuyerWalletId.nodes[0].createdAt,
                   ).toLocaleDateString('en-US', options)}
                 />
-                <GridItem label="owner" value={walletData.walletById.partiesByWalletId.nodes[0].name} />
+                <GridItem label="owner" value={name} />
                 <GridItem
                   label="transaction id"
                   value={walletData.walletById.purchasesByBuyerWalletId.nodes[0].id.slice(0, 8)}
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12} md={6}>
                 <img
                   className={classes.image}
                   alt={projectData.projectByHandle.image}
@@ -303,7 +302,7 @@ export default function PostPurchase(): JSX.Element {
             <Grid container justify="center" spacing={4}>
               <Grid item>
                 <a
-                  href={`https://twitter.com/intent/tweet?url=${url}&text=${shareText}`}
+                  href={`https://twitter.com/intent/tweet?url=${url}&text=${shareTwitterText}`}
                   rel="noopener noreferrer"
                   target="_blank"
                   className={classes.iconContainer}
@@ -339,7 +338,7 @@ export default function PostPurchase(): JSX.Element {
               </Grid>
               <Grid item>
                 <a
-                  href={`https://t.me/share/url?url=${url}&text=${shareText}`}
+                  href={`https://t.me/share/url?url=${url}&text=${shareTelegramText}`}
                   rel="noopener noreferrer"
                   target="_blank"
                   className={classes.iconContainer}

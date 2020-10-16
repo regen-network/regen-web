@@ -275,7 +275,7 @@ const App: React.FC = (): JSX.Element => {
             path="/post-purchase"
             render={({ match: { path } }) => (
               <>
-                <Route path={`${path}/:projectId/:walletId`} component={PostPurchase} />
+                <Route path={`${path}/:projectId/:walletId/:name`} component={PostPurchase} />
               </>
             )}
           />

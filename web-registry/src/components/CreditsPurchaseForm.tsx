@@ -300,8 +300,10 @@ export default function CreditsPurchaseForm({
                 items: [{ sku: stripePrice, quantity: units }],
                 successUrl:
                   process.env.NODE_ENV === 'production'
-                    ? `${window.location.origin}/registry/post-purchase/${projectId}/${walletId}/${name}`
-                    : `${window.location.origin}/post-purchase/${projectId}/${walletId}/${name}`,
+                    ? `${window.location.origin}/registry/post-purchase/${projectId}/${walletId}/${encodeURI(
+                        name,
+                      )}`
+                    : `${window.location.origin}/post-purchase/${projectId}/${walletId}/${encodeURI(name)}`,
                 cancelUrl: window.location.href,
                 customerEmail: email,
                 clientReferenceId: JSON.stringify({ walletId, addressId }),

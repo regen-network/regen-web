@@ -1,6 +1,5 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import { makeStyles, Theme } from '@material-ui/core';
 
 import TopSection from '../sections/community/TopSection';
 import CommunitySection from '../sections/community/CollaborateSection';
@@ -9,10 +8,6 @@ import SEO from '../components/seo';
 interface props {
   location: object;
 }
-
-const useStyles = makeStyles((theme: Theme) => ({
-  tooltip: {},
-}));
 
 const CommunityPage = ({ location }: props): JSX.Element => {
   const data = useStaticQuery(graphql`

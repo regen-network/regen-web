@@ -21,7 +21,7 @@ const CommunityPage = ({ location }: props): JSX.Element => {
     <>
       <SEO
         description="The Regen Ledger blockchain enables our community to develop a suite of platforms and applications in service of regenerating human relationships with land - join us."
-        title="For Developers"
+        title="Community"
         location={location}
         imageUrl={data.seoImage.publicURL}
       />

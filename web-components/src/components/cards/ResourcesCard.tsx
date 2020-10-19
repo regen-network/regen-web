@@ -52,6 +52,12 @@ const useStyles = makeStyles((theme: Theme) => ({
     color: theme.palette.info.main,
     fontSize: theme.spacing(3),
     letterSpacing: theme.spacing(0.25),
+    [theme.breakpoints.down('xs')]: {
+      paddingTop: theme.spacing(1.25),
+    },
+    [theme.breakpoints.up('sm')]: {
+      paddingTop: theme.spacing(2.75),
+    }
   },
   description: {
     marginTop: theme.spacing(2),

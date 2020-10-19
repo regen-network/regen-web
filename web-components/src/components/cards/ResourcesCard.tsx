@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
+import ReactHtmlParser from 'react-html-parser';
 
 import OutlinedButton from '../buttons/OutlinedButton';
 import EyeIcon from '../icons/EyeIcon';
@@ -63,6 +64,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginTop: theme.spacing(2),
     color: theme.palette.info.dark,
     lineHeight: '150%',
+    '& p': {
+      margin: 0,
+    },
   },
   button: {
     display: 'inherit',
@@ -128,7 +132,7 @@ export default function ResourcesCard({
             {updated}
           </Typography>
         )}
-        {description && <Typography className={classes.description}>{description}</Typography>}
+        {description && <Typography className={classes.description}>{ReactHtmlParser(description)}</Typography>}
       </div>
       <div className={classes.buttonWrapper}>
         <OutlinedButton target={target} href={link} className={classes.button}>

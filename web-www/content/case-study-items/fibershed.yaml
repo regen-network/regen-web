@@ -39,7 +39,7 @@ approachSection:
     **Quantitative:** 87% accuracy
   next: md//Improving verification methodology using machine learning and more
     field data. To that end, we recently applied for NRCS Conservation
-    Innovation Grant (CID) in the hope of scaling this throughout California.
+    Innovation Grant (CIG) in the hope of scaling this throughout California.
   figureImage: ../../static/media/fibershed-figure1.png
   figureTitle: "Figure 1: Ground data collected using Esri’s Collector app during
     the 2019-2020 winter grazing season by Kaos Sheep Outfit Shepherds."
@@ -59,7 +59,7 @@ fundingSection:
   results: md//Project page on Regen Registry targeted to go live in Q4; Regen
     Ledger integration to be added in subsequent phase.
   next: md//To that end, we recently applied and awarded the NRCS Conservation
-    Innovation Grant (CID) in the hope of scaling this throughout California.
+    Innovation Grant (CIG) in the hope of scaling this throughout California.
 conclusionSection:
   description: >-
     md//Remote sensing is a cost-effective way to verify grazing on a large

@@ -12,7 +12,7 @@ interface props {
 const CommunityPage = ({ location }: props): JSX.Element => {
   const data = useStaticQuery(graphql`
     query {
-      seoImage: file(relativePath: { eq: "developers-top-image.jpg" }) {
+      seoImage: file(relativePath: { eq: "community-header-sm.jpg" }) {
         publicURL
       }
     }

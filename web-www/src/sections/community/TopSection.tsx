@@ -16,7 +16,7 @@ const TopSection = ({ location }: props): JSX.Element => {
   const classes = useStyles({});
   const data = useStaticQuery(graphql`
     query {
-      desktop: file(relativePath: { eq: "community-header.jpg" }) {
+      desktop: file(relativePath: { eq: "community-header-sm.jpg" }) {
         childImageSharp {
           fluid(quality: 90) {
             ...GatsbyImageSharpFluid_withWebp

@@ -179,12 +179,17 @@ const useStyles = makeStyles((theme: Theme) => ({
   small: {
     padding: theme.spacing(2),
   },
+  gridItem: {
+    [theme.breakpoints.down('xs')]: {
+      paddingTop: theme.spacing(2.5),
+    },
+  }
 }));
 
 function GridItem({ label, value }: { label: string; value: any }): JSX.Element {
   const classes = useStyles();
   return (
-    <Grid container alignItems="center">
+    <Grid container alignItems="center" className={classes.gridItem}>
       <Grid className={classes.label} item xs={12} md={6}>
         {label}
       </Grid>
@@ -221,6 +226,11 @@ export default function PostPurchase(): JSX.Element {
       ? `${window.location.origin}/registry/projects/${projectId}`
       : `${window.location.origin}/projects/${projectId}`;
 
+  const units: number | undefined = walletData && walletData.walletById && sum(
+    walletData.walletById.purchasesByBuyerWalletId.nodes[0].transactionsByPurchaseId.nodes,
+    'units',
+  );
+
   return (
     <>
       <Section className={classes.section}>
@@ -255,18 +265,15 @@ export default function PostPurchase(): JSX.Element {
                 <GridItem label="project" value={<a href={url}>{projectData.projectByHandle.name}</a>} />
                 <GridItem
                   label="# of credits"
-                  value={sum(
-                    walletData.walletById.purchasesByBuyerWalletId.nodes[0].transactionsByPurchaseId.nodes,
-                    'units',
-                  )}
+                  value={units}
                 />
                 <GridItem
-                  label="price"
+                  label="total price"
                   value={`$${new Intl.NumberFormat('en-US', {
                     minimumFractionDigits: 2,
                   }).format(
                     walletData.walletById.purchasesByBuyerWalletId.nodes[0].transactionsByPurchaseId.nodes[0]
-                      .creditPrice,
+                      .creditPrice * units,
                   )} USD`}
                 />
                 <GridItem
@@ -365,6 +372,16 @@ export default function PostPurchase(): JSX.Element {
           </div>
         )}
       </Section>
+      <div
+        onClick={() => copyTextToClipboard(url).then(() => setCopied(true))}
+        className={classes.iconContainer}
+      >
+        <LinkIcon
+          className={classes.small}
+          color={theme.palette.primary.main}
+          hoverColor={theme.palette.secondary.main}
+        />
+      </div>
       {copied && <Banner text="Link copied to your clipboard" />}
     </>
   );

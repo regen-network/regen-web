@@ -1,5 +1,7 @@
 function fallbackCopyTextToClipboard(text: string): Promise<any> {
   const textArea = document.createElement('textarea');
+  textArea.setAttribute('readonly', 'true');
+  textArea.setAttribute('contenteditable', 'true');
   textArea.value = text;
 
   // Avoid scrolling to bottom

@@ -180,8 +180,8 @@ export default function CreditsPurchaseForm({
     const respOK = resp && resp.status === 200;
     if (respOK) {
       const data = await resp.data;
-      const options = Object.keys(data.result).map(key => ({ value: key, label: data.result[key] }));
-      options.push({ value: '', label: 'Please choose a state' });
+      const options = Object.keys(data.result).map(key => ({ value: data.result[key], label: data.result[key] }));
+      options.unshift({ value: '', label: 'Please choose a state' });
       setStateOptions(options);
     }
   };

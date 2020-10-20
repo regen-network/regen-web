@@ -372,16 +372,6 @@ export default function PostPurchase(): JSX.Element {
           </div>
         )}
       </Section>
-      <div
-        onClick={() => copyTextToClipboard(url).then(() => setCopied(true))}
-        className={classes.iconContainer}
-      >
-        <LinkIcon
-          className={classes.small}
-          color={theme.palette.primary.main}
-          hoverColor={theme.palette.secondary.main}
-        />
-      </div>
       {copied && <Banner text="Link copied to your clipboard" />}
     </>
   );

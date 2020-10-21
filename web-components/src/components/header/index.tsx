@@ -241,7 +241,7 @@ export default function Header({
                           return (
                             <MenuItem
                               className={
-                                pathName === dropdownItem.href
+                                pathName.includes(dropdownItem.href)
                                   ? clsx(classes.subMenuHover, classes.currentMenuItem)
                                   : classes.subMenuHover
                               }

@@ -67,6 +67,7 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
     {
       title: 'Community',
       dropdownItems: [
+        { title: 'Community Overview', href: '/community/' },
         { title: 'Developers', href: '/developers/' },
         { title: 'Scientists', href: '/science/' },
         { title: 'Validators', href: '/validators/' },
@@ -103,6 +104,10 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
           href: '/land-stewards/',
         },
         {
+          title: 'Community',
+          href: '/community/',
+        },
+        {
           title: 'Developers',
           href: '/developers/',
         },
@@ -135,10 +140,6 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
           title: 'Team',
           href: '/team/',
         },
-        // {
-        //   title: 'Contact',
-        //   href: '/contact/',
-        // },
       ],
     },
     {

@@ -471,7 +471,7 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
         )}
       </Grid>
 
-      {protectedSpecies.length > 0 && (
+      {/* {protectedSpecies.length > 0 && (
         <div
           className={`${classes.projectDetails} ${classes.projectContent} ${classes.projectImpactContainer}`}
         >
@@ -501,7 +501,7 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
             ))}
           </Grid>
         </div>
-      )}
+      )} */}
 
       {!project.hideCreditDetails && (
         <div className={`${classes.projectDetails} ${classes.projectContent}`}>

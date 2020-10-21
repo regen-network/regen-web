@@ -306,7 +306,7 @@ export default function CreditsPurchaseForm({
                     : `${window.location.origin}/post-purchase/${projectId}/${walletId}/${encodeURI(name)}`,
                 cancelUrl: window.location.href,
                 customerEmail: email,
-                clientReferenceId: JSON.stringify({ walletId, addressId }),
+                clientReferenceId: JSON.stringify({ walletId, addressId, name }),
               });
               if (error) {
                 setStatus({ serverError: error.message });

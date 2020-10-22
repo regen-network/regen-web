@@ -8,26 +8,30 @@ registrySection:
   cards:
     - image: ../../static/media/resources-registry-guide.jpg
       title: Program Guide
-      updated: October 16, 2020
-      description: The standard that defines the requirements for project registration, credit issuance and MRV processes.
+      updated: October 21, 2020
+      description: The standard that defines the requirements for project
+        registration, credit issuance and MRV processes.
       buttonText: View Guide
       link: https://regen-registry.s3.amazonaws.com/Regen+Registry+Program+Guide.pdf
     - image: ../../static/media/resources-grasslands-credit-class.jpg
       title: md//Carbon<i>Plus</i> Grasslands Credit Class
       updated: October 16, 2020
-      description: md//The standard that defines the specific requirements for the Carbon<i>Plus</i> Grasslands credit.
+      description: md//The standard that defines the specific requirements for the
+        Carbon<i>Plus</i> Grasslands credit.
       buttonText: View Credit Class
       link: https://regen-registry.s3.amazonaws.com/GHG+and+Co-Benefits+in+Grazing+Systems+Credit+Class.pdf
     - image: ../../static/media/methodology-ghg.jpg
       title: md//Carbon<i>Plus</i> Grasslands Methodology
       updated: October 16, 2020
-      description: md//The methodology that defines how GHG and co-benefits are monitored for the Carbon<i>Plus</i> Grasslands credit.
+      description: md//The methodology that defines how GHG and co-benefits are
+        monitored for the Carbon<i>Plus</i> Grasslands credit.
       buttonText: View Methodology
       link: https://regen-registry.s3.amazonaws.com/Methodology+for+GHG+and+Co-Benefits+in+Grazing+Systems.pdf
     - image: ../../static/media/resources-project-developers.png
       title: Project Developers 101
       updated: October 16, 2020
-      description: A brief guide to how project developers can list projects on Regen Registry.
+      description: A brief guide to how project developers can list projects on Regen
+        Registry.
       buttonText: View Guide
       link: https://regen-registry.s3.amazonaws.com/Regen+Registry+Project+Developers+101.pdf
 ledgerSection:

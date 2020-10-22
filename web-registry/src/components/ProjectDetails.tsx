@@ -37,9 +37,9 @@ import { getImgSrc } from '../lib/imgSrc';
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     backgroundColor: theme.palette.primary.main,
-    '& img': {
-      width: '100%',
-    },
+    // '& img': {
+    //   width: '100%',
+    // },
   },
   projectContent: {
     maxWidth: theme.breakpoints.values.lg,

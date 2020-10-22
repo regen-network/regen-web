@@ -138,6 +138,20 @@
           "type": "video"
         }
       ],
+      "sdgs": [
+        {
+          "imageUrl": "https://regen-registry.s3.amazonaws.com/sdgs/1-zero-hunger.png",
+          "title": "200k kg protein production"
+        },
+        {
+          "imageUrl": "https://regen-registry.s3.amazonaws.com/sdgs/13-climate-action.png",
+          "title": "6.07 tons CO2e"
+        },
+        {
+          "imageUrl": "https://regen-registry.s3.amazonaws.com/sdgs/15-life-of-land.png",
+          "title": "28% increase in NDVI (vegetation health) "
+        }
+      ],
       "image": "wilmotcattlecompany.jpg",
       "map": "Wilmot_boundary.kml",
       "keyOutcomesActivities": [

@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
+import { makeStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import ReactHtmlParser from 'react-html-parser';
 import clsx from 'clsx';
@@ -197,6 +197,7 @@ export default function ProjectTop({ project, projectDefault }: ProjectTopProps)
             projectDeveloper={project.developer}
             landSteward={project.steward}
             landOwner={project.owner}
+            sdgs={project.sdgs}
           />
         </Grid>
       </Grid>

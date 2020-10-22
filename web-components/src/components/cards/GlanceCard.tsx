@@ -68,6 +68,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     border: `1px solid ${theme.palette.info.light}`,
     borderRadius: '5px',
     objectFit: 'cover',
+    width: '100%',
     [theme.breakpoints.up('sm')]: {
       height: '100%',
     },

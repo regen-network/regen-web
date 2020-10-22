@@ -7,6 +7,7 @@ import { ActionProps } from 'web-components/lib/components/action';
 import { CreditPrice } from 'web-components/lib/components/fixed-footer/BuyFooter';
 import { Data } from 'web-components/lib/components/table';
 import { CreditClass } from 'web-components/lib/components/credits/CreditDetails';
+import { SDG } from 'web-components/lib/components/cards/ProjectTopCard';
 import mock from './mock.json';
 
 // imgSrc should be either web url or static image filenames within web/src/assets/
@@ -70,8 +71,9 @@ export interface Project {
     person: {
       name: string;
       role: string;
-    }
-  }
+    };
+  };
+  sdgs?: SDG[];
 }
 
 interface BasicProject {

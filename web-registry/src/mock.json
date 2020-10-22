@@ -112,29 +112,24 @@
       "longDescription": "<p>Stu & Trish are the management team behind Wilmot Cattle Co and are driven by the exciting ecological opportunities they can foresee for the business. They have a wholehearted belief in regenerative agriculture and the benefits it will bring to the industry globally, as we collectively work to heal what has largely become a degraded landscape. They having a burning desire to succeed in agriculture and are very ambitious in the growth and development plans they have for Wilmot Cattle Co.</p><p>While Stu has managed the day to day operations of Wilmot since 2016, and now presides over the portfolio of all three properties in a General Manager capacity, Trish works tirelessly behind the scenes ensuring a high level of rigour around the data collection, management, and analysis of every aspect of the business. They firmly believe that you cannot manage what you don’t measure and as such, the integrity of the data is paramount.</p><p>In their spare time they enjoy exploring the natural wonders of Wilmot, including its five waterfalls and large areas of virtually native bushland, with their two kids Harry and Poppy. They all gain great satisfaction from discovering new species of plants and learning about their role in the ecosystem.</p>",
       "media": [
         {
-          "src": "Wilmot5.jpg",
-          "thumbnail": "Wilmot5-thumbnail.jpg",
+          "src": "https://regen-registry.s3.amazonaws.com/projects/wilmot/image1.png",
           "type": "image"
         },
         {
-          "src": "Wilmot3.jpg",
-          "thumbnail": "Wilmot3-thumbnail.jpg",
+          "src": "https://regen-registry.s3.amazonaws.com/projects/wilmot/image2.png",
           "type": "image"
         },
         {
-          "src": "Wilmot4.jpg",
-          "thumbnail": "Wilmot4-thumbnail.jpg",
+          "src": "https://regen-registry.s3.amazonaws.com/projects/wilmot/image3.png",
           "type": "image"
         },
         {
-          "src": "Wilmot6.jpg",
-          "thumbnail": "Wilmot6-thumbnail.jpg",
+          "src": "https://regen-registry.s3.amazonaws.com/projects/wilmot/image4.png",
           "type": "image"
         },
         {
           "src": "https://regen-registry.s3.amazonaws.com/Wilmot+Video.mp4",
-          "thumbnail": "Wilmot2-thumbnail.jpg",
-          "preview": "https://regen-registry.s3.amazonaws.com/projects/wilmot/video-preview.png",
+          "preview": "https://regen-registry.s3.amazonaws.com/projects/wilmot/video-preview.jpg",
           "type": "video"
         }
       ],

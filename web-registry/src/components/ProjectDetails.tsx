@@ -18,7 +18,7 @@ import CreditDetails from 'web-components/lib/components/credits/CreditDetails';
 import ProtectedSpecies from 'web-components/lib/components/sliders/ProtectedSpecies';
 import NonMonitoredImpact from 'web-components/lib/components/sliders/NonMonitoredImpact';
 import LandManagementActions from 'web-components/lib/components/sliders/LandManagementActions';
-// import ProjectMedia, { Media } from 'web-components/lib/components/sliders/ProjectMedia';
+import ProjectMedia from 'web-components/lib/components/sliders/ProjectMedia';
 import Map from 'web-components/lib/components/map';
 import { ItemProps as ProtectedSpeciesItem } from 'web-components/lib/components/sliders/Item';
 import BuyFooter from 'web-components/lib/components/fixed-footer/BuyFooter';
@@ -37,9 +37,6 @@ import { getImgSrc } from '../lib/imgSrc';
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     backgroundColor: theme.palette.primary.main,
-    // '& img': {
-    //   width: '100%',
-    // },
   },
   projectContent: {
     maxWidth: theme.breakpoints.values.lg,
@@ -291,6 +288,7 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
 
   return (
     <div className={classes.root}>
+      <ProjectMedia assets={project.media.filter(item => item.type === 'image')} gridView />
       <ProjectTop project={project} projectDefault={projectDefault} />
       <Grid container className={`${classes.projectDetails} ${classes.projectContent}`}>
         {monitoredImpact && (

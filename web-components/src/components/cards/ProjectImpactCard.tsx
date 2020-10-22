@@ -20,6 +20,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   background: props => ({
     backgroundImage: `url(${props.imgSrc})`,
     backgroundRepeat: 'no-repeat',
+    backgroundSize: '100%',
     backgroundPosition: 'center',
     textAlign: 'center',
     position: 'relative',

@@ -22,9 +22,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   section: {
     [theme.breakpoints.up('sm')]: {
       paddingTop: theme.spacing(21.5),
+      paddingBottom: theme.spacing(27.5),
     },
     [theme.breakpoints.down('xs')]: {
       paddingTop: theme.spacing(6.5),
+      paddingBottom: theme.spacing(20.5),
     },
   },
   tagline: {
@@ -143,6 +145,16 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     marginLeft: theme.spacing(-2.5),
   },
+  rightGrid: {
+    [theme.breakpoints.up('sm')]: {
+      paddingRight: theme.spacing(19),
+    },
+  },
+  leftGrid: {
+    [theme.breakpoints.down('xs')]: {
+      paddingTop: theme.spacing(6.25),
+    },
+  },
 }));
 
 export default function ProjectTop({ project, projectDefault }: ProjectTopProps): JSX.Element {
@@ -155,9 +167,9 @@ export default function ProjectTop({ project, projectDefault }: ProjectTopProps)
   }
 
   return (
-    <Section>
-      <Grid container spacing={8}>
-        <Grid item xs={12} md={7}>
+    <Section className={classes.section}>
+      <Grid container>
+        <Grid item xs={12} md={7} className={classes.rightGrid}>
           <Title variant="h1">{project.name}</Title>
           <div className={classes.projectPlace}>
             <ProjectPlaceInfo place={project.place} area={project.area} areaUnit={project.areaUnit} />
@@ -200,7 +212,7 @@ export default function ProjectTop({ project, projectDefault }: ProjectTopProps)
             </div>
           )}
         </Grid>
-        <Grid item xs={12} md={5}>
+        <Grid item xs={12} md={5} className={classes.leftGrid}>
           <ProjectTopCard
             projectDeveloper={project.developer}
             landSteward={project.steward}

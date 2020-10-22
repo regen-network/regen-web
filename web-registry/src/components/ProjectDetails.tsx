@@ -1,26 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import * as togeojson from '@mapbox/togeojson';
-import Grid from '@material-ui/core/Grid';
 import { useLocation } from 'react-router-dom';
 import { setPageView } from '../lib/ga';
 
 import background from '../assets/background.jpg';
-import { Project, Impact, ProjectDefault, ActionGroup } from '../mocks';
+import { Project, ProjectDefault, ActionGroup } from '../mocks';
 import ProjectTop from './sections/ProjectTop';
+import ProjectImpact from './sections/ProjectImpact';
 
 import { getFontSize } from 'web-components/lib/theme/sizing';
 import Title from 'web-components/lib/components/title';
-import ImpactCard from 'web-components/lib/components/cards/ImpactCard';
 import Description from 'web-components/lib/components/description';
 import Timeline from 'web-components/lib/components/timeline';
 import CreditDetails from 'web-components/lib/components/credits/CreditDetails';
-import ProtectedSpecies from 'web-components/lib/components/sliders/ProtectedSpecies';
-import NonMonitoredImpact from 'web-components/lib/components/sliders/NonMonitoredImpact';
 import LandManagementActions from 'web-components/lib/components/sliders/LandManagementActions';
 import ProjectMedia from 'web-components/lib/components/sliders/ProjectMedia';
 import Map from 'web-components/lib/components/map';
-import { ItemProps as ProtectedSpeciesItem } from 'web-components/lib/components/sliders/Item';
 import BuyFooter from 'web-components/lib/components/fixed-footer/BuyFooter';
 import MrvTabs from 'web-components/lib/components/tabs';
 import Table from 'web-components/lib/components/table';
@@ -227,25 +223,10 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
   }, [location]);
 
   const classes = useStyles({});
-  const impact: Impact[] = project.impact.map(item => ({ ...item, imgSrc: getImgSrc(item.imgSrc) }));
   const landManagementActions: ActionGroup[] = project.landManagementActions.map(group => ({
     ...group,
     actions: group.actions.map(action => ({ ...action, imgSrc: getImgSrc(action.imgSrc) })),
   }));
-  const monitoredImpact: Impact | undefined = impact.find(({ monitored }) => monitored === true);
-
-  if (monitoredImpact) {
-    const monitoredIndex = impact.indexOf(monitoredImpact);
-    impact.splice(monitoredIndex, 1);
-  }
-
-  let protectedSpecies: ProtectedSpeciesItem[] = [];
-  if (project.protectedSpecies) {
-    protectedSpecies = project.protectedSpecies.map(item => ({
-      name: item.name,
-      imgSrc: getImgSrc(item.imgSrc),
-    }));
-  }
 
   const [geojson, setGeojson] = useState<any | null>(null);
 
@@ -290,49 +271,7 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
     <div className={classes.root}>
       <ProjectMedia assets={project.media.filter(item => item.type === 'image')} gridView />
       <ProjectTop project={project} projectDefault={projectDefault} />
-      <Grid container className={`${classes.projectDetails} ${classes.projectContent}`}>
-        {monitoredImpact && (
-          <Grid item xs={12} sm={7} className={classes.monitoredImpact}>
-            <Title variant="h3">
-              {project.fieldsOverride && project.fieldsOverride.monitoredImpact
-                ? project.fieldsOverride.monitoredImpact.title
-                : projectDefault.monitoredImpact.title}
-            </Title>
-            <ImpactCard
-              name={monitoredImpact.name}
-              description={monitoredImpact.description}
-              imgSrc={monitoredImpact.imgSrc}
-              monitored
-            />
-          </Grid>
-        )}
-        {protectedSpecies.length > 0 ? (
-          <Grid item xs={12} sm={5} className={classes.protectedSpecies}>
-            <Title variant="h3">
-              {project.fieldsOverride && project.fieldsOverride.protectedSpecies
-                ? project.fieldsOverride.protectedSpecies.title
-                : projectDefault.protectedSpecies.title}
-            </Title>
-            <ProtectedSpecies species={protectedSpecies} />
-          </Grid>
-        ) : (
-          <Grid item xs={12} sm={5} className={classes.protectedSpecies}>
-            <Title variant="h3">
-              {project.fieldsOverride && project.fieldsOverride.nonMonitoredImpact
-                ? project.fieldsOverride.nonMonitoredImpact.title
-                : projectDefault.nonMonitoredImpact.title}
-            </Title>
-            {/*<Description fontSize={getFontSize('project')}>
-              {project.fieldsOverride &&
-              project.fieldsOverride.nonMonitoredImpact &&
-              project.fieldsOverride.nonMonitoredImpact.subtitle
-                ? project.fieldsOverride.nonMonitoredImpact.subtitle
-                : projectDefault.nonMonitoredImpact.subtitle}
-            </Description>*/}
-            <NonMonitoredImpact impact={impact} />
-          </Grid>
-        )}
-      </Grid>
+      <ProjectImpact impact={project.impact} />
 
       {/* {protectedSpecies.length > 0 && (
         <div

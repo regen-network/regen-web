@@ -65,10 +65,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   userInfo: {
     [theme.breakpoints.down('xs')]: {
-      // paddingTop: theme.spacing(14.25),
+      marginTop: theme.spacing(12),
     },
     [theme.breakpoints.up('sm')]: {
-      // paddingTop: theme.spacing(21.25),
+      marginTop: theme.spacing(15),
     },
   },
   sdgGrid: {

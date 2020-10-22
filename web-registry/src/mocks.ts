@@ -8,6 +8,7 @@ import { CreditPrice } from 'web-components/lib/components/fixed-footer/BuyFoote
 import { Data } from 'web-components/lib/components/table';
 import { CreditClass } from 'web-components/lib/components/credits/CreditDetails';
 import { SDG } from 'web-components/lib/components/cards/ProjectTopCard';
+import { ProjectImpactCardProps as Impact } from 'web-components/lib/components/cards/ProjectImpactCard';
 import mock from './mock.json';
 
 // imgSrc should be either web url or static image filenames within web/src/assets/
@@ -16,13 +17,6 @@ import mock from './mock.json';
 export interface ActionGroup {
   title?: string;
   actions: ActionProps[];
-}
-
-export interface Impact {
-  name: string;
-  description: string;
-  imgSrc: string;
-  monitored: boolean;
 }
 
 interface Timeline {

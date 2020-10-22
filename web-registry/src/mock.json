@@ -191,28 +191,28 @@
       ],
       "impact": [
         {
-          "name": "Soil organic carbon",
-          "description": "Each credit represents one ton of CO2e (1t CO2e) that has been sequestered in the soil.",
+          "name": "Soil Organic Carbon",
+          "description": "Organic matter contributes to nutrient retention and turnover, soil structure, moisture retention and availability, degradation of pollutants, carbon sequestration and soil resilience.",
           "monitored": true,
-          "imgSrc": "impactag-soc.jpg"
+          "imgSrc": "https://regen-registry.s3.amazonaws.com/projects/wilmot/impact1.png"
         },
         {
-          "name": "Ecosystem health",
-          "description": "We rank the ecosystem health based on the Costanza Framework, measuring its ability to maintain  structure (organization) and function (vigor) over time in the face of external stress (resilience).",
+          "name": "Animal Welfare",
+          "description": "Animal welfare is an important component in a well managed grazing enterprise. Low stress stock handling techniques have been adopted to ensure animals have higher quality life.",
           "monitored": false,
-          "imgSrc": "ecological-health.png"
+          "imgSrc": "https://regen-registry.s3.amazonaws.com/projects/wilmot/impact2.png"
         },
         {
-          "name": "Animal welfare",
-          "description": "We rank animal welfare based on adherence to national animal welfare standards that track nutrition level, access to water, social contact and more.",
+          "name": "Ecosystem Health",
+          "description": "In the ecological realm, ‘health’ is characterized by system integrity and the exhibition of certain fundamental properties of self-organizing complex systems.",
           "monitored": false,
-          "imgSrc": "animal-welfare.png"
+          "imgSrc": "https://regen-registry.s3.amazonaws.com/projects/wilmot/impact3.png"
         },
         {
-          "name": "Soil health",
-          "description": "We rank the soil health based on Cornell University’s Soil Health Assessment looking at both micronutrients and macronutrients.",
+          "name": "Soil Health",
+          "description": "The capacity of soil to function as a vital living ecosystem that sustains plants, animals, and humans. An annual soil monitoring program has been in place since 2013.",
           "monitored": false,
-          "imgSrc": "soil.png"
+          "imgSrc": "https://regen-registry.s3.amazonaws.com/projects/wilmot/impact4.png"
         }
       ],
       "creditClass": {

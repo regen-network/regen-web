@@ -203,40 +203,40 @@ exports[`Storyshots Components|Buttons Prev Button 1`] = `
 exports[`Storyshots Components|Cards Glance Card 1`] = `
 <div>
   <div
-    className="MuiPaper-root MuiCard-root makeStyles-root-244 makeStyles-root-245 makeStyles-root-243 MuiPaper-elevation0 MuiPaper-rounded"
+    className="MuiPaper-root MuiCard-root makeStyles-root-254 makeStyles-root-255 makeStyles-root-253 MuiPaper-elevation0 MuiPaper-rounded"
   >
     <div
-      className="MuiGrid-root makeStyles-container-238 MuiGrid-container"
+      className="MuiGrid-root makeStyles-container-248 MuiGrid-container"
     >
       <div
         className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-5"
       >
         <img
           alt="./impactag-smallmap-top-v2.jpg"
-          className="makeStyles-image-242"
+          className="makeStyles-image-252"
           src="./impactag-smallmap-top-v2.jpg"
         />
       </div>
       <div
-        className="MuiGrid-root makeStyles-textContainer-241 MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-7"
+        className="MuiGrid-root makeStyles-textContainer-251 MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-7"
       >
         <h6
-          className="MuiTypography-root makeStyles-root-246 makeStyles-title-237 MuiTypography-h6 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+          className="MuiTypography-root makeStyles-root-256 makeStyles-title-247 MuiTypography-h6 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
         >
           At a glance
         </h6>
         <ul
-          className="makeStyles-texts-239"
+          className="makeStyles-texts-249"
         >
           <p
-            className="MuiTypography-root makeStyles-text-240 MuiTypography-body1"
+            className="MuiTypography-root makeStyles-text-250 MuiTypography-body1"
           >
             <li>
               Shifting to Managed Grazing can potentially sequester 16.4- 26 CO2e (Gt) by 2050.
             </li>
           </p>
           <p
-            className="MuiTypography-root makeStyles-text-240 MuiTypography-body1"
+            className="MuiTypography-root makeStyles-text-250 MuiTypography-body1"
           >
             <li>
               Wilmot Cattle Co has increased Soil Organic Carbon to 4.5% and removed 22,500 tons of CO2e in two years.
@@ -252,7 +252,7 @@ exports[`Storyshots Components|Cards Glance Card 1`] = `
 exports[`Storyshots Components|Cards Green Card 1`] = `
 <div>
   <div
-    className="MuiPaper-root MuiCard-root makeStyles-root-251 makeStyles-root-252 makeStyles-root-250 MuiPaper-elevation1 MuiPaper-rounded"
+    className="MuiPaper-root MuiCard-root makeStyles-root-261 makeStyles-root-262 makeStyles-root-260 MuiPaper-elevation1 MuiPaper-rounded"
   >
     <p>
       Green card content
@@ -264,22 +264,22 @@ exports[`Storyshots Components|Cards Green Card 1`] = `
 exports[`Storyshots Components|Cards Impact Card 1`] = `
 <div>
   <div
-    className="MuiPaper-root MuiCard-root makeStyles-root-97 makeStyles-root-98 undefined MuiPaper-elevation0 MuiPaper-rounded"
+    className="MuiPaper-root MuiCard-root makeStyles-root-107 makeStyles-root-108 undefined MuiPaper-elevation0 MuiPaper-rounded"
   >
     <div
-      className="makeStyles-background-85 makeStyles-background-92"
+      className="makeStyles-background-95 makeStyles-background-102"
     >
       <div
-        className="makeStyles-backgroundGradient-90 makeStyles-backgroundGradient-96"
+        className="makeStyles-backgroundGradient-100 makeStyles-backgroundGradient-106"
       />
       <div
-        className="makeStyles-text-86 makeStyles-text-93"
+        className="makeStyles-text-96 makeStyles-text-103"
       >
         <p
-          className="MuiTypography-root makeStyles-name-87 makeStyles-name-94 MuiTypography-body1"
+          className="MuiTypography-root makeStyles-name-97 makeStyles-name-104 MuiTypography-body1"
         />
         <p
-          className="MuiTypography-root makeStyles-description-88 makeStyles-description-95 MuiTypography-body1"
+          className="MuiTypography-root makeStyles-description-98 makeStyles-description-105 MuiTypography-body1"
         >
           Increasing all living biomass which is located above the ground.
         </p>
@@ -292,17 +292,17 @@ exports[`Storyshots Components|Cards Impact Card 1`] = `
 exports[`Storyshots Components|Cards Map Card 1`] = `
 <div>
   <div
-    className="MuiPaper-root MuiCard-root makeStyles-root-224 makeStyles-root-225 undefined MuiPaper-elevation2 MuiPaper-rounded"
+    className="MuiPaper-root MuiCard-root makeStyles-root-234 makeStyles-root-235 undefined MuiPaper-elevation2 MuiPaper-rounded"
   >
     <div
-      className="makeStyles-container-217 makeStyles-container-223"
+      className="makeStyles-container-227 makeStyles-container-233"
     >
       <div
-        className="makeStyles-closeIcon-220"
+        className="makeStyles-closeIcon-230"
       >
         <svg
           aria-hidden={true}
-          className="MuiSvgIcon-root makeStyles-root-226"
+          className="MuiSvgIcon-root makeStyles-root-236"
           focusable="false"
           viewBox="0 0 26 26"
         >
@@ -325,14 +325,14 @@ exports[`Storyshots Components|Cards Map Card 1`] = `
         </svg>
       </div>
       <div
-        className="MuiGrid-root makeStyles-grid-221 MuiGrid-container"
+        className="MuiGrid-root makeStyles-grid-231 MuiGrid-container"
       >
         <div
           className="MuiGrid-root MuiGrid-item"
         >
           <img
             alt="Euc diversifola mallee"
-            className="makeStyles-image-216"
+            className="makeStyles-image-226"
             src="diversifola.png"
           />
         </div>
@@ -340,12 +340,12 @@ exports[`Storyshots Components|Cards Map Card 1`] = `
           className="MuiGrid-root MuiGrid-item"
         >
           <div
-            className="makeStyles-name-218"
+            className="makeStyles-name-228"
           >
             Euc diversifola mallee
           </div>
           <div
-            className="makeStyles-description-219"
+            className="makeStyles-description-229"
           >
             This species from the Hawkesbury region of New South Wales may grow into a multi-trunked mallee, or as a single trunked small tree.
           </div>
@@ -359,22 +359,22 @@ exports[`Storyshots Components|Cards Map Card 1`] = `
 exports[`Storyshots Components|Cards Monitored Impact Card 1`] = `
 <div>
   <div
-    className="MuiPaper-root MuiCard-root makeStyles-root-125 makeStyles-root-126 undefined MuiPaper-elevation0 MuiPaper-rounded"
+    className="MuiPaper-root MuiCard-root makeStyles-root-135 makeStyles-root-136 undefined MuiPaper-elevation0 MuiPaper-rounded"
   >
     <div
-      className="makeStyles-background-113 makeStyles-background-120"
+      className="makeStyles-background-123 makeStyles-background-130"
     >
       <div
-        className="makeStyles-backgroundGradient-118 makeStyles-backgroundGradient-124"
+        className="makeStyles-backgroundGradient-128 makeStyles-backgroundGradient-134"
       />
       <div
-        className="makeStyles-text-114 makeStyles-text-121"
+        className="makeStyles-text-124 makeStyles-text-131"
       >
         <p
-          className="MuiTypography-root makeStyles-name-115 makeStyles-name-122 MuiTypography-body1"
+          className="MuiTypography-root makeStyles-name-125 makeStyles-name-132 MuiTypography-body1"
         />
         <p
-          className="MuiTypography-root makeStyles-description-116 makeStyles-description-123 MuiTypography-body1"
+          className="MuiTypography-root makeStyles-description-126 makeStyles-description-133 MuiTypography-body1"
         >
           Healthy ecosystems and rich biodiversity are fundamental to life on our planet.
         </p>
@@ -387,14 +387,14 @@ exports[`Storyshots Components|Cards Monitored Impact Card 1`] = `
 exports[`Storyshots Components|Cards Project Card 1`] = `
 <div>
   <div
-    className="MuiPaper-root MuiCard-root makeStyles-root-167 makeStyles-root-168 undefined MuiPaper-elevation1 MuiPaper-rounded"
+    className="MuiPaper-root MuiCard-root makeStyles-root-177 makeStyles-root-178 undefined MuiPaper-elevation1 MuiPaper-rounded"
     onClick={[Function]}
   >
     <div
-      className="makeStyles-root-161"
+      className="makeStyles-root-171"
     >
       <div
-        className="MuiCardMedia-root makeStyles-image-162"
+        className="MuiCardMedia-root makeStyles-image-172"
         style={
           Object {
             "backgroundImage": "url(\\"/coorong.png\\")",
@@ -402,27 +402,27 @@ exports[`Storyshots Components|Cards Project Card 1`] = `
         }
       >
         <div
-          className="makeStyles-backgroundGradient-164"
+          className="makeStyles-backgroundGradient-174"
         />
         <div
-          className="makeStyles-tag-163"
+          className="makeStyles-tag-173"
         >
           biodiversity
         </div>
       </div>
       <h4
-        className="MuiTypography-root makeStyles-root-169 makeStyles-h4title-166 makeStyles-title-165 MuiTypography-h4 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+        className="MuiTypography-root makeStyles-root-179 makeStyles-h4title-176 makeStyles-title-175 MuiTypography-h4 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
       >
         Coorong Project
       </h4>
       <div
-        className="makeStyles-placeInfo-157"
+        className="makeStyles-placeInfo-167"
       >
         <div
-          className="makeStyles-root-171"
+          className="makeStyles-root-181"
         >
           <span
-            className="makeStyles-icon-172"
+            className="makeStyles-icon-182"
           >
             <svg
               aria-hidden={true}
@@ -458,11 +458,11 @@ exports[`Storyshots Components|Cards Project Card 1`] = `
             </svg>
           </span>
           <p
-            className="MuiTypography-root makeStyles-content-173 makeStyles-content-174 MuiTypography-body1"
+            className="MuiTypography-root makeStyles-content-183 makeStyles-content-184 MuiTypography-body1"
           >
             Adelaide, South Australia, Australia
             <span
-              className="makeStyles-separator-170"
+              className="makeStyles-separator-180"
             >
                 |  
             </span>
@@ -473,10 +473,10 @@ exports[`Storyshots Components|Cards Project Card 1`] = `
         </div>
       </div>
       <div
-        className="makeStyles-separator-156"
+        className="makeStyles-separator-166"
       />
       <div
-        className="makeStyles-userInfo-158"
+        className="makeStyles-userInfo-168"
       >
         <div
           className="MuiGrid-root MuiGrid-container MuiGrid-wrap-xs-nowrap"
@@ -485,7 +485,7 @@ exports[`Storyshots Components|Cards Project Card 1`] = `
             className="MuiGrid-root MuiGrid-item"
           >
             <div
-              className="MuiAvatar-root MuiAvatar-circle makeStyles-root-183 makeStyles-root-184"
+              className="MuiAvatar-root MuiAvatar-circle makeStyles-root-193 makeStyles-root-194"
             >
               <img
                 alt="Odonata"
@@ -495,10 +495,10 @@ exports[`Storyshots Components|Cards Project Card 1`] = `
             </div>
           </div>
           <div
-            className="MuiGrid-root makeStyles-text-175 makeStyles-text-180 MuiGrid-item"
+            className="MuiGrid-root makeStyles-text-185 makeStyles-text-190 MuiGrid-item"
           >
             <p
-              className="MuiTypography-root makeStyles-name-176 makeStyles-name-181 MuiTypography-body1"
+              className="MuiTypography-root makeStyles-name-186 makeStyles-name-191 MuiTypography-body1"
             >
               Odonata
             </p>
@@ -513,14 +513,14 @@ exports[`Storyshots Components|Cards Project Card 1`] = `
 exports[`Storyshots Components|Cards Project Top Card 1`] = `
 <div>
   <div
-    className="MuiPaper-root MuiCard-root makeStyles-root-54 makeStyles-root-55 undefined MuiPaper-elevation0 MuiPaper-rounded"
+    className="MuiPaper-root MuiCard-root makeStyles-root-64 makeStyles-root-65 undefined MuiPaper-elevation0 MuiPaper-rounded"
   >
     <div
-      className="makeStyles-container-52"
+      className="makeStyles-container-57"
     >
       <div>
         <p
-          className="MuiTypography-root makeStyles-title-56 MuiTypography-body1"
+          className="MuiTypography-root makeStyles-title-66 MuiTypography-body1"
         >
           project developer
         </p>
@@ -531,7 +531,7 @@ exports[`Storyshots Components|Cards Project Top Card 1`] = `
             className="MuiGrid-root MuiGrid-item"
           >
             <div
-              className="MuiAvatar-root MuiAvatar-circle makeStyles-root-65 makeStyles-root-66"
+              className="MuiAvatar-root MuiAvatar-circle makeStyles-root-75 makeStyles-root-76"
             >
               <img
                 alt="Odonata"
@@ -541,33 +541,32 @@ exports[`Storyshots Components|Cards Project Top Card 1`] = `
             </div>
           </div>
           <div
-            className="MuiGrid-root makeStyles-text-57 makeStyles-text-62 MuiGrid-item"
+            className="MuiGrid-root makeStyles-text-67 makeStyles-text-72 MuiGrid-item"
           >
             <p
-              className="MuiTypography-root makeStyles-name-58 makeStyles-name-63 MuiTypography-body1"
+              className="MuiTypography-root makeStyles-name-68 makeStyles-name-73 MuiTypography-body1"
             >
               Odonata
             </p>
             <p
-              className="MuiTypography-root makeStyles-place-61 makeStyles-place-64 MuiTypography-body1"
+              className="MuiTypography-root makeStyles-place-71 makeStyles-place-74 MuiTypography-body1"
             >
               South Melbourne, Victoria, Australia
             </p>
             <p
-              className="MuiTypography-root makeStyles-description-60 MuiTypography-body1"
+              className="MuiTypography-root makeStyles-description-70 MuiTypography-body1"
             >
               Odonata is a not-for-profit entity supporting biodiversity impact solutions.
             </p>
           </div>
         </div>
       </div>
-      <div>
-        <hr
-          className="makeStyles-separator-53"
-        />
+      <div
+        className="makeStyles-userInfo-62"
+      >
         <div>
           <p
-            className="MuiTypography-root makeStyles-title-56 MuiTypography-body1"
+            className="MuiTypography-root makeStyles-title-66 MuiTypography-body1"
           >
             land steward
           </p>
@@ -578,7 +577,7 @@ exports[`Storyshots Components|Cards Project Top Card 1`] = `
               className="MuiGrid-root MuiGrid-item"
             >
               <div
-                className="MuiAvatar-root MuiAvatar-circle makeStyles-root-65 makeStyles-root-70"
+                className="MuiAvatar-root MuiAvatar-circle makeStyles-root-75 makeStyles-root-80"
               >
                 <img
                   alt="Ngarrindjeri Tribe"
@@ -588,20 +587,20 @@ exports[`Storyshots Components|Cards Project Top Card 1`] = `
               </div>
             </div>
             <div
-              className="MuiGrid-root makeStyles-text-57 makeStyles-text-67 MuiGrid-item"
+              className="MuiGrid-root makeStyles-text-67 makeStyles-text-77 MuiGrid-item"
             >
               <p
-                className="MuiTypography-root makeStyles-name-58 makeStyles-name-68 MuiTypography-body1"
+                className="MuiTypography-root makeStyles-name-68 makeStyles-name-78 MuiTypography-body1"
               >
                 Ngarrindjeri Tribe
               </p>
               <p
-                className="MuiTypography-root makeStyles-place-61 makeStyles-place-69 MuiTypography-body1"
+                className="MuiTypography-root makeStyles-place-71 makeStyles-place-79 MuiTypography-body1"
               >
                 Southern Australia, Australia
               </p>
               <p
-                className="MuiTypography-root makeStyles-description-60 MuiTypography-body1"
+                className="MuiTypography-root makeStyles-description-70 MuiTypography-body1"
               >
                 The Ngarrindjeri culture is centered around the lower lakes of the Murray River.
               </p>
@@ -617,20 +616,20 @@ exports[`Storyshots Components|Cards Project Top Card 1`] = `
 exports[`Storyshots Components|Cards Purchased Credits Card 1`] = `
 <div>
   <div
-    className="MuiPaper-root MuiCard-root makeStyles-root-201 makeStyles-root-202 undefined MuiPaper-elevation1 MuiPaper-rounded"
+    className="MuiPaper-root MuiCard-root makeStyles-root-211 makeStyles-root-212 undefined MuiPaper-elevation1 MuiPaper-rounded"
   >
     <div
-      className="makeStyles-container-195"
+      className="makeStyles-container-205"
     >
       <div
-        className="makeStyles-iconContainer-196"
+        className="makeStyles-iconContainer-206"
       >
         <div
-          className="MuiGrid-root makeStyles-icon-197 MuiGrid-container MuiGrid-align-items-xs-center MuiGrid-justify-xs-center"
+          className="MuiGrid-root makeStyles-icon-207 MuiGrid-container MuiGrid-align-items-xs-center MuiGrid-justify-xs-center"
         >
           <svg
             aria-hidden={true}
-            className="MuiSvgIcon-root makeStyles-root-203 makeStyles-root-204"
+            className="MuiSvgIcon-root makeStyles-root-213 makeStyles-root-214"
             focusable="false"
             viewBox="0 0 59 54"
           >
@@ -740,17 +739,17 @@ exports[`Storyshots Components|Cards Purchased Credits Card 1`] = `
         </div>
       </div>
       <div
-        className="makeStyles-number-198"
+        className="makeStyles-number-208"
       >
         3,000
       </div>
       <div
-        className="makeStyles-description-199"
+        className="makeStyles-description-209"
       >
         Credits you purchased
       </div>
       <div
-        className="makeStyles-date-200"
+        className="makeStyles-date-210"
       >
         Feb 15, 2020
       </div>
@@ -762,19 +761,19 @@ exports[`Storyshots Components|Cards Purchased Credits Card 1`] = `
 exports[`Storyshots Components|Credits Credit Details 1`] = `
 <div>
   <div
-    className="makeStyles-root-270 makeStyles-root-284"
+    className="makeStyles-root-280 makeStyles-root-294"
   >
     <div
-      className="makeStyles-container-277"
+      className="makeStyles-container-287"
     >
       <div
-        className="makeStyles-descriptionTitle-278"
+        className="makeStyles-descriptionTitle-288"
       >
         <h3
-          className="MuiTypography-root makeStyles-root-286 makeStyles-title-279 MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+          className="MuiTypography-root makeStyles-root-296 makeStyles-title-289 MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
         >
           <span
-            className="makeStyles-icon-276"
+            className="makeStyles-icon-286"
           >
             <svg
               aria-hidden={true}
@@ -828,32 +827,32 @@ exports[`Storyshots Components|Credits Credit Details 1`] = `
         </h3>
       </div>
       <div
-        className="makeStyles-descriptionItem-280"
+        className="makeStyles-descriptionItem-290"
       >
         <div
-          className="MuiTypography-root makeStyles-description-272 makeStyles-description-285 MuiTypography-body1"
+          className="MuiTypography-root makeStyles-description-282 makeStyles-description-295 MuiTypography-body1"
         >
           ABU’s are an Australian Government endorsed biodiversity credit. An individual ABU represents a 1.5m square area of land of significant environmental value that has been placed under a conservation covenant and agreed management plan. The covenant and management plan secure the long term preservation of the site and ensure the biodiversity value is protected in perpetuity. Vegetation types may include forests, grasslands, mallees, saltmarshes, scrubs, shrublands, wetlands, and woodlands. ABU’s are an innovative and unique way for organisations to preserve a tangible section of Australia’s unique natural habitat.
         </div>
       </div>
       <div
-        className="makeStyles-activitiesTitleContainer-281"
+        className="makeStyles-activitiesTitleContainer-291"
       >
         <h4
-          className="MuiTypography-root makeStyles-root-286 makeStyles-activitiesTitle-282 MuiTypography-h4 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+          className="MuiTypography-root makeStyles-root-296 makeStyles-activitiesTitle-292 MuiTypography-h4 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
         >
           Key activities and outcomes
         </h4>
       </div>
       <div>
         <ul
-          className="makeStyles-activities-273"
+          className="makeStyles-activities-283"
         >
           <div
-            className="MuiTypography-root makeStyles-activity-274 MuiTypography-body1"
+            className="MuiTypography-root makeStyles-activity-284 MuiTypography-body1"
           >
             <div
-              className="makeStyles-bullet-275"
+              className="makeStyles-bullet-285"
             >
               •
             </div>
@@ -862,10 +861,10 @@ exports[`Storyshots Components|Credits Credit Details 1`] = `
             </li>
           </div>
           <div
-            className="MuiTypography-root makeStyles-activity-274 MuiTypography-body1"
+            className="MuiTypography-root makeStyles-activity-284 MuiTypography-body1"
           >
             <div
-              className="makeStyles-bullet-275"
+              className="makeStyles-bullet-285"
             >
               •
             </div>
@@ -874,10 +873,10 @@ exports[`Storyshots Components|Credits Credit Details 1`] = `
             </li>
           </div>
           <div
-            className="MuiTypography-root makeStyles-activity-274 MuiTypography-body1"
+            className="MuiTypography-root makeStyles-activity-284 MuiTypography-body1"
           >
             <div
-              className="makeStyles-bullet-275"
+              className="makeStyles-bullet-285"
             >
               •
             </div>
@@ -886,10 +885,10 @@ exports[`Storyshots Components|Credits Credit Details 1`] = `
             </li>
           </div>
           <div
-            className="MuiTypography-root makeStyles-activity-274 MuiTypography-body1"
+            className="MuiTypography-root makeStyles-activity-284 MuiTypography-body1"
           >
             <div
-              className="makeStyles-bullet-275"
+              className="makeStyles-bullet-285"
             >
               •
             </div>
@@ -916,13 +915,13 @@ exports[`Storyshots Components|Credits Credits Gauge 1`] = `
         className="MuiTypography-root MuiTypography-body2"
       >
         <span
-          className="makeStyles-number-295"
+          className="makeStyles-number-305"
         >
           1,527
            
         </span>
         <span
-          className="makeStyles-text-296"
+          className="makeStyles-text-306"
         >
           credits purchased
         </span>
@@ -931,26 +930,26 @@ exports[`Storyshots Components|Credits Credits Gauge 1`] = `
         className="MuiTypography-root MuiTypography-body2"
       >
         <span
-          className="makeStyles-number-295"
+          className="makeStyles-number-305"
         >
           710
            
         </span>
         <span
-          className="makeStyles-text-296"
+          className="makeStyles-text-306"
         >
           credits available
         </span>
       </p>
     </div>
     <div
-      className="MuiGrid-root makeStyles-gauge-294 MuiGrid-item"
+      className="MuiGrid-root makeStyles-gauge-304 MuiGrid-item"
     >
       <div
-        className="makeStyles-root-297 makeStyles-root-299"
+        className="makeStyles-root-307 makeStyles-root-309"
       >
         <div
-          className="makeStyles-gauge-298 makeStyles-gauge-300"
+          className="makeStyles-gauge-308 makeStyles-gauge-310"
         />
       </div>
     </div>
@@ -961,7 +960,7 @@ exports[`Storyshots Components|Credits Credits Gauge 1`] = `
 exports[`Storyshots Components|Description Description 1`] = `
 <div>
   <div
-    className="MuiTypography-root makeStyles-root-303 makeStyles-root-304 MuiTypography-body1"
+    className="MuiTypography-root makeStyles-root-313 makeStyles-root-314 MuiTypography-body1"
   >
     Sheoak Hill, 60km west of Melbourne, has the potential to revolutionise how our natural areas are funded to be restored and maintained in perpetuity. The concept is underpinned by the power of values-aligned landholders working collaboratively to purchase and lovingly maintain manageable areas (40ha) of covented bushland and work toward a common goal.
   </div>
@@ -971,27 +970,27 @@ exports[`Storyshots Components|Description Description 1`] = `
 exports[`Storyshots Components|FAQ Category 1`] = `
 <div>
   <div
-    className="MuiPaper-root MuiCard-root makeStyles-root-348 makeStyles-root-349 makeStyles-root-345 makeStyles-root-347 MuiPaper-elevation1 MuiPaper-rounded"
+    className="MuiPaper-root MuiCard-root makeStyles-root-358 makeStyles-root-359 makeStyles-root-355 makeStyles-root-357 MuiPaper-elevation1 MuiPaper-rounded"
   >
     <h6
-      className="MuiTypography-root makeStyles-root-350 makeStyles-title-346 MuiTypography-h6 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+      className="MuiTypography-root makeStyles-root-360 makeStyles-title-356 MuiTypography-h6 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
     >
       tech
     </h6>
     <div
-      className="makeStyles-root-351 makeStyles-root-358"
+      className="makeStyles-root-361 makeStyles-root-368"
     >
       <div
-        className="makeStyles-container-352"
+        className="makeStyles-container-362"
       >
         <h5
-          className="MuiTypography-root makeStyles-root-350 makeStyles-question-353 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+          className="MuiTypography-root makeStyles-root-360 makeStyles-question-363 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
           onClick={[Function]}
         >
           Why do you need a blockchain?
           <svg
             aria-hidden={true}
-            className="MuiSvgIcon-root makeStyles-icon-354 makeStyles-root-359 makeStyles-root-360"
+            className="MuiSvgIcon-root makeStyles-icon-364 makeStyles-root-369 makeStyles-root-370"
             focusable="false"
             viewBox="0 0 33 20"
           >
@@ -1012,29 +1011,29 @@ exports[`Storyshots Components|FAQ Category 1`] = `
           </svg>
         </h5>
         <div
-          className="makeStyles-answer-357 makeStyles-collapsed-356"
+          className="makeStyles-answer-367 makeStyles-collapsed-366"
         >
           The Regen Ledger provides the project three key elements, without which Regen Network’s promise to create a network dedicated to monitoring, verifying and contracting or paying for ecological
           <div
-            className="makeStyles-gradient-355"
+            className="makeStyles-gradient-365"
           />
         </div>
       </div>
     </div>
     <div
-      className="makeStyles-root-351 makeStyles-root-361"
+      className="makeStyles-root-361 makeStyles-root-371"
     >
       <div
-        className="makeStyles-container-352"
+        className="makeStyles-container-362"
       >
         <h5
-          className="MuiTypography-root makeStyles-root-350 makeStyles-question-353 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+          className="MuiTypography-root makeStyles-root-360 makeStyles-question-363 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
           onClick={[Function]}
         >
           Why do you need a token?
           <svg
             aria-hidden={true}
-            className="MuiSvgIcon-root makeStyles-icon-354 makeStyles-root-359 makeStyles-root-362"
+            className="MuiSvgIcon-root makeStyles-icon-364 makeStyles-root-369 makeStyles-root-372"
             focusable="false"
             viewBox="0 0 33 20"
           >
@@ -1055,11 +1054,11 @@ exports[`Storyshots Components|FAQ Category 1`] = `
           </svg>
         </h5>
         <div
-          className="makeStyles-answer-357 makeStyles-collapsed-356"
+          className="makeStyles-answer-367 makeStyles-collapsed-366"
         >
           The XRN token serves two key functions; to program the rules that make an ecological data commons and marketplace possible and to bring together a community of shared interest in service to strengthening and regenerating the living systems that we need to support life on earth.
           <div
-            className="makeStyles-gradient-355"
+            className="makeStyles-gradient-365"
           />
         </div>
       </div>
@@ -1071,17 +1070,17 @@ exports[`Storyshots Components|FAQ Category 1`] = `
 exports[`Storyshots Components|FAQ Faq 1`] = `
 <div>
   <div
-    className="MuiBox-root MuiBox-root-424"
+    className="MuiBox-root MuiBox-root-434"
   >
     <div
-      className="makeStyles-navigation-421"
+      className="makeStyles-navigation-431"
     >
       <ul
-        className="MuiList-root WithStyles(ForwardRef(List))-root-426 MuiList-padding"
+        className="MuiList-root WithStyles(ForwardRef(List))-root-436 MuiList-padding"
       >
         <div
           aria-disabled={false}
-          className="MuiButtonBase-root MuiListItem-root WithStyles(ForwardRef(ListItem))-root-427 MuiListItem-gutters MuiListItem-button Mui-selected"
+          className="MuiButtonBase-root MuiListItem-root WithStyles(ForwardRef(ListItem))-root-437 MuiListItem-gutters MuiListItem-button Mui-selected"
           onBlur={[Function]}
           onClick={[Function]}
           onDragLeave={[Function]}
@@ -1099,14 +1098,14 @@ exports[`Storyshots Components|FAQ Faq 1`] = `
         >
           concept
           <div
-            className="MuiBox-root MuiBox-root-428"
+            className="MuiBox-root MuiBox-root-438"
           >
             <div
               className="MuiListItemSecondaryAction-root"
             >
               <svg
                 aria-hidden={true}
-                className="MuiSvgIcon-root makeStyles-icon-425 makeStyles-root-429 makeStyles-root-430"
+                className="MuiSvgIcon-root makeStyles-icon-435 makeStyles-root-439 makeStyles-root-440"
                 focusable="false"
                 viewBox="0 0 33 20"
               >
@@ -1133,7 +1132,7 @@ exports[`Storyshots Components|FAQ Faq 1`] = `
         </div>
         <div
           aria-disabled={false}
-          className="MuiButtonBase-root MuiListItem-root WithStyles(ForwardRef(ListItem))-root-427 MuiListItem-gutters MuiListItem-button"
+          className="MuiButtonBase-root MuiListItem-root WithStyles(ForwardRef(ListItem))-root-437 MuiListItem-gutters MuiListItem-button"
           onBlur={[Function]}
           onClick={[Function]}
           onDragLeave={[Function]}
@@ -1151,14 +1150,14 @@ exports[`Storyshots Components|FAQ Faq 1`] = `
         >
           tech
           <div
-            className="MuiBox-root MuiBox-root-431"
+            className="MuiBox-root MuiBox-root-441"
           >
             <div
               className="MuiListItemSecondaryAction-root"
             >
               <svg
                 aria-hidden={true}
-                className="MuiSvgIcon-root makeStyles-icon-425 makeStyles-root-429 makeStyles-root-432"
+                className="MuiSvgIcon-root makeStyles-icon-435 makeStyles-root-439 makeStyles-root-442"
                 focusable="false"
                 viewBox="0 0 33 20"
               >
@@ -1187,27 +1186,27 @@ exports[`Storyshots Components|FAQ Faq 1`] = `
     </div>
     <div>
       <div
-        className="MuiPaper-root MuiCard-root makeStyles-root-436 makeStyles-root-437 makeStyles-root-433 makeStyles-root-435 MuiPaper-elevation1 MuiPaper-rounded"
+        className="MuiPaper-root MuiCard-root makeStyles-root-446 makeStyles-root-447 makeStyles-root-443 makeStyles-root-445 MuiPaper-elevation1 MuiPaper-rounded"
       >
         <h6
-          className="MuiTypography-root makeStyles-root-438 makeStyles-title-434 MuiTypography-h6 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+          className="MuiTypography-root makeStyles-root-448 makeStyles-title-444 MuiTypography-h6 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
         >
           concept
         </h6>
         <div
-          className="makeStyles-root-439 makeStyles-root-446"
+          className="makeStyles-root-449 makeStyles-root-456"
         >
           <div
-            className="makeStyles-container-440"
+            className="makeStyles-container-450"
           >
             <h5
-              className="MuiTypography-root makeStyles-root-438 makeStyles-question-441 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+              className="MuiTypography-root makeStyles-root-448 makeStyles-question-451 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
               onClick={[Function]}
             >
               Why do you need a blockchain?
               <svg
                 aria-hidden={true}
-                className="MuiSvgIcon-root makeStyles-icon-442 makeStyles-root-429 makeStyles-root-447"
+                className="MuiSvgIcon-root makeStyles-icon-452 makeStyles-root-439 makeStyles-root-457"
                 focusable="false"
                 viewBox="0 0 33 20"
               >
@@ -1228,29 +1227,29 @@ exports[`Storyshots Components|FAQ Faq 1`] = `
               </svg>
             </h5>
             <div
-              className="makeStyles-answer-445 makeStyles-collapsed-444"
+              className="makeStyles-answer-455 makeStyles-collapsed-454"
             >
               The Regen Ledger provides the project three key elements, without which Regen Network’s promise to create a network dedicated to monitoring, verifying and contracting or paying for ecological
               <div
-                className="makeStyles-gradient-443"
+                className="makeStyles-gradient-453"
               />
             </div>
           </div>
         </div>
         <div
-          className="makeStyles-root-439 makeStyles-root-448"
+          className="makeStyles-root-449 makeStyles-root-458"
         >
           <div
-            className="makeStyles-container-440"
+            className="makeStyles-container-450"
           >
             <h5
-              className="MuiTypography-root makeStyles-root-438 makeStyles-question-441 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+              className="MuiTypography-root makeStyles-root-448 makeStyles-question-451 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
               onClick={[Function]}
             >
               Why do you need a token?
               <svg
                 aria-hidden={true}
-                className="MuiSvgIcon-root makeStyles-icon-442 makeStyles-root-429 makeStyles-root-449"
+                className="MuiSvgIcon-root makeStyles-icon-452 makeStyles-root-439 makeStyles-root-459"
                 focusable="false"
                 viewBox="0 0 33 20"
               >
@@ -1271,11 +1270,11 @@ exports[`Storyshots Components|FAQ Faq 1`] = `
               </svg>
             </h5>
             <div
-              className="makeStyles-answer-445 makeStyles-collapsed-444"
+              className="makeStyles-answer-455 makeStyles-collapsed-454"
             >
               The XRN token serves two key functions; to program the rules that make an ecological data commons and marketplace possible and to bring together a community of shared interest in service to strengthening and regenerating the living systems that we need to support life on earth.
               <div
-                className="makeStyles-gradient-443"
+                className="makeStyles-gradient-453"
               />
             </div>
           </div>
@@ -1284,17 +1283,17 @@ exports[`Storyshots Components|FAQ Faq 1`] = `
     </div>
   </div>
   <div
-    className="MuiBox-root MuiBox-root-450"
+    className="MuiBox-root MuiBox-root-460"
   >
     <div
-      className="makeStyles-navigation-421"
+      className="makeStyles-navigation-431"
     >
       <ul
-        className="MuiList-root WithStyles(ForwardRef(List))-root-426 MuiList-padding"
+        className="MuiList-root WithStyles(ForwardRef(List))-root-436 MuiList-padding"
       >
         <div
           aria-disabled={false}
-          className="MuiButtonBase-root MuiListItem-root WithStyles(ForwardRef(ListItem))-root-427 MuiListItem-gutters MuiListItem-button Mui-selected"
+          className="MuiButtonBase-root MuiListItem-root WithStyles(ForwardRef(ListItem))-root-437 MuiListItem-gutters MuiListItem-button Mui-selected"
           onBlur={[Function]}
           onClick={[Function]}
           onDragLeave={[Function]}
@@ -1312,14 +1311,14 @@ exports[`Storyshots Components|FAQ Faq 1`] = `
         >
           concept
           <div
-            className="MuiBox-root MuiBox-root-451"
+            className="MuiBox-root MuiBox-root-461"
           >
             <div
               className="MuiListItemSecondaryAction-root"
             >
               <svg
                 aria-hidden={true}
-                className="MuiSvgIcon-root makeStyles-icon-425 makeStyles-root-429 makeStyles-root-452"
+                className="MuiSvgIcon-root makeStyles-icon-435 makeStyles-root-439 makeStyles-root-462"
                 focusable="false"
                 viewBox="0 0 33 20"
               >
@@ -1346,7 +1345,7 @@ exports[`Storyshots Components|FAQ Faq 1`] = `
         </div>
         <div
           aria-disabled={false}
-          className="MuiButtonBase-root MuiListItem-root WithStyles(ForwardRef(ListItem))-root-427 MuiListItem-gutters MuiListItem-button"
+          className="MuiButtonBase-root MuiListItem-root WithStyles(ForwardRef(ListItem))-root-437 MuiListItem-gutters MuiListItem-button"
           onBlur={[Function]}
           onClick={[Function]}
           onDragLeave={[Function]}
@@ -1364,14 +1363,14 @@ exports[`Storyshots Components|FAQ Faq 1`] = `
         >
           tech
           <div
-            className="MuiBox-root MuiBox-root-453"
+            className="MuiBox-root MuiBox-root-463"
           >
             <div
               className="MuiListItemSecondaryAction-root"
             >
               <svg
                 aria-hidden={true}
-                className="MuiSvgIcon-root makeStyles-icon-425 makeStyles-root-429 makeStyles-root-454"
+                className="MuiSvgIcon-root makeStyles-icon-435 makeStyles-root-439 makeStyles-root-464"
                 focusable="false"
                 viewBox="0 0 33 20"
               >
@@ -1405,11 +1404,11 @@ exports[`Storyshots Components|FAQ Faq 1`] = `
 exports[`Storyshots Components|FAQ Navigation 1`] = `
 <div>
   <ul
-    className="MuiList-root WithStyles(ForwardRef(List))-root-376 MuiList-padding"
+    className="MuiList-root WithStyles(ForwardRef(List))-root-386 MuiList-padding"
   >
     <div
       aria-disabled={false}
-      className="MuiButtonBase-root MuiListItem-root WithStyles(ForwardRef(ListItem))-root-377 MuiListItem-gutters MuiListItem-button"
+      className="MuiButtonBase-root MuiListItem-root WithStyles(ForwardRef(ListItem))-root-387 MuiListItem-gutters MuiListItem-button"
       onBlur={[Function]}
       onClick={[Function]}
       onDragLeave={[Function]}
@@ -1427,14 +1426,14 @@ exports[`Storyshots Components|FAQ Navigation 1`] = `
     >
       concept
       <div
-        className="MuiBox-root MuiBox-root-378"
+        className="MuiBox-root MuiBox-root-388"
       >
         <div
           className="MuiListItemSecondaryAction-root"
         >
           <svg
             aria-hidden={true}
-            className="MuiSvgIcon-root makeStyles-icon-375 makeStyles-root-379 makeStyles-root-380"
+            className="MuiSvgIcon-root makeStyles-icon-385 makeStyles-root-389 makeStyles-root-390"
             focusable="false"
             viewBox="0 0 33 20"
           >
@@ -1461,7 +1460,7 @@ exports[`Storyshots Components|FAQ Navigation 1`] = `
     </div>
     <div
       aria-disabled={false}
-      className="MuiButtonBase-root MuiListItem-root WithStyles(ForwardRef(ListItem))-root-377 MuiListItem-gutters MuiListItem-button"
+      className="MuiButtonBase-root MuiListItem-root WithStyles(ForwardRef(ListItem))-root-387 MuiListItem-gutters MuiListItem-button"
       onBlur={[Function]}
       onClick={[Function]}
       onDragLeave={[Function]}
@@ -1479,14 +1478,14 @@ exports[`Storyshots Components|FAQ Navigation 1`] = `
     >
       regen registry
       <div
-        className="MuiBox-root MuiBox-root-381"
+        className="MuiBox-root MuiBox-root-391"
       >
         <div
           className="MuiListItemSecondaryAction-root"
         >
           <svg
             aria-hidden={true}
-            className="MuiSvgIcon-root makeStyles-icon-375 makeStyles-root-379 makeStyles-root-382"
+            className="MuiSvgIcon-root makeStyles-icon-385 makeStyles-root-389 makeStyles-root-392"
             focusable="false"
             viewBox="0 0 33 20"
           >
@@ -1513,7 +1512,7 @@ exports[`Storyshots Components|FAQ Navigation 1`] = `
     </div>
     <div
       aria-disabled={false}
-      className="MuiButtonBase-root MuiListItem-root WithStyles(ForwardRef(ListItem))-root-377 MuiListItem-gutters MuiListItem-button"
+      className="MuiButtonBase-root MuiListItem-root WithStyles(ForwardRef(ListItem))-root-387 MuiListItem-gutters MuiListItem-button"
       onBlur={[Function]}
       onClick={[Function]}
       onDragLeave={[Function]}
@@ -1531,14 +1530,14 @@ exports[`Storyshots Components|FAQ Navigation 1`] = `
     >
       regen ledger
       <div
-        className="MuiBox-root MuiBox-root-383"
+        className="MuiBox-root MuiBox-root-393"
       >
         <div
           className="MuiListItemSecondaryAction-root"
         >
           <svg
             aria-hidden={true}
-            className="MuiSvgIcon-root makeStyles-icon-375 makeStyles-root-379 makeStyles-root-384"
+            className="MuiSvgIcon-root makeStyles-icon-385 makeStyles-root-389 makeStyles-root-394"
             focusable="false"
             viewBox="0 0 33 20"
           >
@@ -1565,7 +1564,7 @@ exports[`Storyshots Components|FAQ Navigation 1`] = `
     </div>
     <div
       aria-disabled={false}
-      className="MuiButtonBase-root MuiListItem-root WithStyles(ForwardRef(ListItem))-root-377 MuiListItem-gutters MuiListItem-button"
+      className="MuiButtonBase-root MuiListItem-root WithStyles(ForwardRef(ListItem))-root-387 MuiListItem-gutters MuiListItem-button"
       onBlur={[Function]}
       onClick={[Function]}
       onDragLeave={[Function]}
@@ -1583,14 +1582,14 @@ exports[`Storyshots Components|FAQ Navigation 1`] = `
     >
       tech
       <div
-        className="MuiBox-root MuiBox-root-385"
+        className="MuiBox-root MuiBox-root-395"
       >
         <div
           className="MuiListItemSecondaryAction-root"
         >
           <svg
             aria-hidden={true}
-            className="MuiSvgIcon-root makeStyles-icon-375 makeStyles-root-379 makeStyles-root-386"
+            className="MuiSvgIcon-root makeStyles-icon-385 makeStyles-root-389 makeStyles-root-396"
             focusable="false"
             viewBox="0 0 33 20"
           >
@@ -1622,19 +1621,19 @@ exports[`Storyshots Components|FAQ Navigation 1`] = `
 exports[`Storyshots Components|FAQ Question 1`] = `
 <div>
   <div
-    className="makeStyles-root-316 makeStyles-root-323"
+    className="makeStyles-root-326 makeStyles-root-333"
   >
     <div
-      className="makeStyles-container-317"
+      className="makeStyles-container-327"
     >
       <h5
-        className="MuiTypography-root makeStyles-root-324 makeStyles-question-318 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+        className="MuiTypography-root makeStyles-root-334 makeStyles-question-328 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
         onClick={[Function]}
       >
         Why do you need a blockchain?
         <svg
           aria-hidden={true}
-          className="MuiSvgIcon-root makeStyles-icon-319 makeStyles-root-325 makeStyles-root-326"
+          className="MuiSvgIcon-root makeStyles-icon-329 makeStyles-root-335 makeStyles-root-336"
           focusable="false"
           viewBox="0 0 33 20"
         >
@@ -1655,11 +1654,11 @@ exports[`Storyshots Components|FAQ Question 1`] = `
         </svg>
       </h5>
       <div
-        className="makeStyles-answer-322 makeStyles-collapsed-321"
+        className="makeStyles-answer-332 makeStyles-collapsed-331"
       >
         The Regen Ledger provides the project three key elements, without which Regen Network’s promise to create a network dedicated to monitoring, verifying and contracting or paying for ecological
         <div
-          className="makeStyles-gradient-320"
+          className="makeStyles-gradient-330"
         />
       </div>
     </div>
@@ -1671,7 +1670,7 @@ exports[`Storyshots Components|Icons Arrow Icon 1`] = `
 <div>
   <svg
     aria-hidden={true}
-    className="MuiSvgIcon-root makeStyles-icon-457 makeStyles-icon-458"
+    className="MuiSvgIcon-root makeStyles-icon-467 makeStyles-icon-468"
     focusable="false"
     viewBox="0 0 24 24"
   >
@@ -1702,7 +1701,7 @@ exports[`Storyshots Components|Icons Available Credits Icon 1`] = `
 <div>
   <svg
     aria-hidden={true}
-    className="MuiSvgIcon-root makeStyles-root-460"
+    className="MuiSvgIcon-root makeStyles-root-470"
     focusable="false"
     viewBox="0 0 57 69"
   >
@@ -1752,7 +1751,7 @@ exports[`Storyshots Components|Icons Block Icon 1`] = `
 <div>
   <svg
     aria-hidden={true}
-    className="MuiSvgIcon-root makeStyles-root-506"
+    className="MuiSvgIcon-root makeStyles-root-516"
     fill="none"
     focusable="false"
     onMouseEnter={[Function]}
@@ -1774,7 +1773,7 @@ exports[`Storyshots Components|Icons Breadcrumb Icon 1`] = `
 <div>
   <svg
     aria-hidden={true}
-    className="MuiSvgIcon-root makeStyles-root-463 makeStyles-root-464"
+    className="MuiSvgIcon-root makeStyles-root-473 makeStyles-root-474"
     focusable="false"
     viewBox="0 0 33 20"
   >
@@ -1823,7 +1822,7 @@ exports[`Storyshots Components|Icons Close Icon 1`] = `
 <div>
   <svg
     aria-hidden={true}
-    className="MuiSvgIcon-root makeStyles-root-466"
+    className="MuiSvgIcon-root makeStyles-root-476"
     focusable="false"
     viewBox="0 0 26 26"
   >
@@ -1903,7 +1902,7 @@ exports[`Storyshots Components|Icons Current Credits Icon 1`] = `
 <div>
   <svg
     aria-hidden={true}
-    className="MuiSvgIcon-root makeStyles-root-477 makeStyles-root-478"
+    className="MuiSvgIcon-root makeStyles-root-487 makeStyles-root-488"
     focusable="false"
     viewBox="0 0 59 54"
   >
@@ -2017,7 +2016,7 @@ exports[`Storyshots Components|Icons Document Icon 1`] = `
 <div>
   <svg
     aria-hidden={true}
-    className="MuiSvgIcon-root makeStyles-root-474"
+    className="MuiSvgIcon-root makeStyles-root-484"
     focusable="false"
     viewBox="0 0 18 22"
   >
@@ -2119,7 +2118,7 @@ exports[`Storyshots Components|Icons Document Icon 1`] = `
 exports[`Storyshots Components|Icons Dropdown Icon 1`] = `
 <div>
   <span
-    className="makeStyles-root-486"
+    className="makeStyles-root-496"
   >
     <svg
       aria-hidden={true}
@@ -2182,7 +2181,7 @@ exports[`Storyshots Components|Icons Eye Icon 1`] = `
 <div>
   <svg
     aria-hidden={true}
-    className="MuiSvgIcon-root makeStyles-root-472"
+    className="MuiSvgIcon-root makeStyles-root-482"
     focusable="false"
     viewBox="0 0 19 14"
   >
@@ -2216,7 +2215,7 @@ exports[`Storyshots Components|Icons Facebook Icon 1`] = `
 <div>
   <svg
     aria-hidden={true}
-    className="MuiSvgIcon-root makeStyles-root-488"
+    className="MuiSvgIcon-root makeStyles-root-498"
     fill="none"
     focusable="false"
     onMouseEnter={[Function]}
@@ -2238,7 +2237,7 @@ exports[`Storyshots Components|Icons Github Icon 1`] = `
 <div>
   <svg
     aria-hidden={true}
-    className="MuiSvgIcon-root makeStyles-root-502"
+    className="MuiSvgIcon-root makeStyles-root-512"
     fill="none"
     focusable="false"
     onMouseEnter={[Function]}
@@ -2260,7 +2259,7 @@ exports[`Storyshots Components|Icons Instagram Icon 1`] = `
 <div>
   <svg
     aria-hidden={true}
-    className="MuiSvgIcon-root makeStyles-root-490"
+    className="MuiSvgIcon-root makeStyles-root-500"
     fill="none"
     focusable="false"
     onMouseEnter={[Function]}
@@ -2288,7 +2287,7 @@ exports[`Storyshots Components|Icons Linked In Icon 1`] = `
 <div>
   <svg
     aria-hidden={true}
-    className="MuiSvgIcon-root makeStyles-root-492"
+    className="MuiSvgIcon-root makeStyles-root-502"
     fill="none"
     focusable="false"
     onMouseEnter={[Function]}
@@ -2312,7 +2311,7 @@ exports[`Storyshots Components|Icons Medium Icon 1`] = `
 <div>
   <svg
     aria-hidden={true}
-    className="MuiSvgIcon-root makeStyles-root-494"
+    className="MuiSvgIcon-root makeStyles-root-504"
     fill="none"
     focusable="false"
     onMouseEnter={[Function]}
@@ -2332,7 +2331,7 @@ exports[`Storyshots Components|Icons Organization Icon 1`] = `
 <div>
   <svg
     aria-hidden={true}
-    className="MuiSvgIcon-root makeStyles-root-480"
+    className="MuiSvgIcon-root makeStyles-root-490"
     focusable="false"
     viewBox="0 0 23 22"
   >
@@ -2677,7 +2676,7 @@ exports[`Storyshots Components|Icons Play Icon 1`] = `
 <div>
   <svg
     aria-hidden={true}
-    className="MuiSvgIcon-root makeStyles-root-469 makeStyles-root-470"
+    className="MuiSvgIcon-root makeStyles-root-479 makeStyles-root-480"
     focusable="false"
     viewBox="0 0 9 9"
   >
@@ -3119,7 +3118,7 @@ exports[`Storyshots Components|Icons Regen Logo Icon 1`] = `
 <div>
   <svg
     aria-hidden={true}
-    className="MuiSvgIcon-root makeStyles-root-482"
+    className="MuiSvgIcon-root makeStyles-root-492"
     focusable="false"
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
@@ -3361,7 +3360,7 @@ exports[`Storyshots Components|Icons Telegram Icon 1`] = `
 <div>
   <svg
     aria-hidden={true}
-    className="MuiSvgIcon-root makeStyles-root-496"
+    className="MuiSvgIcon-root makeStyles-root-506"
     fill="none"
     focusable="false"
     onMouseEnter={[Function]}
@@ -3381,7 +3380,7 @@ exports[`Storyshots Components|Icons Total Credits Icon 1`] = `
 <div>
   <svg
     aria-hidden={true}
-    className="MuiSvgIcon-root makeStyles-root-484"
+    className="MuiSvgIcon-root makeStyles-root-494"
     focusable="false"
     viewBox="0 0 54 58"
   >
@@ -3399,7 +3398,7 @@ exports[`Storyshots Components|Icons Twitter Icon 1`] = `
 <div>
   <svg
     aria-hidden={true}
-    className="MuiSvgIcon-root makeStyles-root-498"
+    className="MuiSvgIcon-root makeStyles-root-508"
     fill="none"
     focusable="false"
     onMouseEnter={[Function]}
@@ -3461,7 +3460,7 @@ exports[`Storyshots Components|Icons Whitepaper Icon 1`] = `
 <div>
   <svg
     aria-hidden={true}
-    className="MuiSvgIcon-root makeStyles-root-504"
+    className="MuiSvgIcon-root makeStyles-root-514"
     fill="none"
     focusable="false"
     onMouseEnter={[Function]}
@@ -3483,7 +3482,7 @@ exports[`Storyshots Components|Icons Youtube Icon 1`] = `
 <div>
   <svg
     aria-hidden={true}
-    className="MuiSvgIcon-root makeStyles-root-500"
+    className="MuiSvgIcon-root makeStyles-root-510"
     fill="none"
     focusable="false"
     onMouseEnter={[Function]}
@@ -3504,10 +3503,10 @@ exports[`Storyshots Components|Icons Youtube Icon 1`] = `
 exports[`Storyshots Components|Image Grid Image Grid 1`] = `
 <div>
   <div
-    className="MuiGrid-root makeStyles-root-519 makeStyles-root-524 MuiGrid-container MuiGrid-align-items-xs-center"
+    className="MuiGrid-root makeStyles-root-529 makeStyles-root-534 MuiGrid-container MuiGrid-align-items-xs-center"
   >
     <div
-      className="MuiGrid-root makeStyles-image-522 MuiGrid-item"
+      className="MuiGrid-root makeStyles-image-532 MuiGrid-item"
     >
       <img
         alt="andover"
@@ -3515,15 +3514,15 @@ exports[`Storyshots Components|Image Grid Image Grid 1`] = `
       />
     </div>
     <div
-      className="MuiGrid-root makeStyles-text-520 makeStyles-text-525 MuiGrid-item"
+      className="MuiGrid-root makeStyles-text-530 makeStyles-text-535 MuiGrid-item"
     >
       <h2
-        className="MuiTypography-root makeStyles-root-528 makeStyles-title-521 makeStyles-title-526 MuiTypography-h2 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+        className="MuiTypography-root makeStyles-root-538 makeStyles-title-531 makeStyles-title-536 MuiTypography-h2 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
       >
         Verified outcomes
       </h2>
       <div
-        className="MuiTypography-root makeStyles-root-529 makeStyles-root-530 makeStyles-description-523 makeStyles-description-527 MuiTypography-body1"
+        className="MuiTypography-root makeStyles-root-539 makeStyles-root-540 makeStyles-description-533 makeStyles-description-537 MuiTypography-body1"
       >
         Software-based and remote-sensing monitoring keeps costs low and transparency high.
       </div>
@@ -3535,10 +3534,10 @@ exports[`Storyshots Components|Image Grid Image Grid 1`] = `
 exports[`Storyshots Components|Image Item Image Item 1`] = `
 <div>
   <div
-    className="makeStyles-root-538"
+    className="makeStyles-root-548"
   >
     <div
-      className="MuiGrid-root makeStyles-image-540 MuiGrid-container MuiGrid-justify-xs-center"
+      className="MuiGrid-root makeStyles-image-550 MuiGrid-container MuiGrid-justify-xs-center"
     >
       <img
         alt="verified"
@@ -3546,12 +3545,12 @@ exports[`Storyshots Components|Image Item Image Item 1`] = `
       />
     </div>
     <h4
-      className="MuiTypography-root makeStyles-root-542 makeStyles-title-539 MuiTypography-h4 MuiTypography-colorTextPrimary MuiTypography-alignCenter"
+      className="MuiTypography-root makeStyles-root-552 makeStyles-title-549 MuiTypography-h4 MuiTypography-colorTextPrimary MuiTypography-alignCenter"
     >
       Verified outcomes
     </h4>
     <div
-      className="MuiTypography-root makeStyles-root-543 makeStyles-root-544 MuiTypography-body1"
+      className="MuiTypography-root makeStyles-root-553 makeStyles-root-554 MuiTypography-body1"
     >
       Software-based and remote-sensing monitoring keeps costs low and transparency high.
     </div>
@@ -3562,7 +3561,7 @@ exports[`Storyshots Components|Image Item Image Item 1`] = `
 exports[`Storyshots Components|Map Map 1`] = `
 <div>
   <div
-    className="makeStyles-root-579"
+    className="makeStyles-root-589"
   >
     <div
       style={
@@ -3607,10 +3606,10 @@ exports[`Storyshots Components|Map Map 1`] = `
       </div>
     </div>
     <div
-      className="makeStyles-zoomButton-584"
+      className="makeStyles-zoomButton-594"
     >
       <button
-        className="MuiButtonBase-root MuiButton-root WithStyles(ForwardRef(Button))-root-585 MuiButton-text MuiButton-textSecondary"
+        className="MuiButtonBase-root MuiButton-root WithStyles(ForwardRef(Button))-root-595 MuiButton-text MuiButton-textSecondary"
         disabled={false}
         onBlur={[Function]}
         onClick={[Function]}
@@ -3635,7 +3634,7 @@ exports[`Storyshots Components|Map Map 1`] = `
           >
             <svg
               aria-hidden={true}
-              className="MuiSvgIcon-root makeStyles-root-586"
+              className="MuiSvgIcon-root makeStyles-root-596"
               focusable="false"
               viewBox="0 0 13 14"
             >
@@ -3657,11 +3656,11 @@ exports[`Storyshots Components|Map Map 1`] = `
       </button>
     </div>
     <div
-      className="makeStyles-slider-582"
+      className="makeStyles-slider-592"
     >
       <div>
         <div
-          className="slick-slider makeStyles-root-587 slick-initialized"
+          className="slick-slider makeStyles-root-597 slick-initialized"
           dir="ltr"
         >
           <div
@@ -3713,7 +3712,7 @@ exports[`Storyshots Components|Map Map 1`] = `
               >
                 <div>
                   <div
-                    className="makeStyles-item-588"
+                    className="makeStyles-item-598"
                     style={
                       Object {
                         "display": "inline-block",
@@ -3723,20 +3722,20 @@ exports[`Storyshots Components|Map Map 1`] = `
                     tabIndex={-1}
                   >
                     <div
-                      className="MuiPaper-root MuiCard-root makeStyles-root-597 makeStyles-root-598 undefined MuiPaper-elevation2 MuiPaper-rounded"
+                      className="MuiPaper-root MuiCard-root makeStyles-root-607 makeStyles-root-608 undefined MuiPaper-elevation2 MuiPaper-rounded"
                     >
                       <div
-                        className="makeStyles-container-590 makeStyles-container-596"
+                        className="makeStyles-container-600 makeStyles-container-606"
                       >
                         <div
-                          className="MuiGrid-root makeStyles-grid-594 MuiGrid-container"
+                          className="MuiGrid-root makeStyles-grid-604 MuiGrid-container"
                         >
                           <div
                             className="MuiGrid-root MuiGrid-item"
                           >
                             <img
                               alt="Marker"
-                              className="makeStyles-image-589"
+                              className="makeStyles-image-599"
                               src="./diversifola.png"
                             />
                           </div>
@@ -3744,12 +3743,12 @@ exports[`Storyshots Components|Map Map 1`] = `
                             className="MuiGrid-root MuiGrid-item"
                           >
                             <div
-                              className="makeStyles-name-591"
+                              className="makeStyles-name-601"
                             >
                               Marker
                             </div>
                             <div
-                              className="makeStyles-description-592"
+                              className="makeStyles-description-602"
                             >
                               This species from the Hawkesbury region of New South Wales may grow into a multi-trunked mallee, or as a single trunked small tree.
                             </div>
@@ -3774,7 +3773,7 @@ exports[`Storyshots Components|Map Map 1`] = `
               >
                 <div>
                   <div
-                    className="makeStyles-item-588"
+                    className="makeStyles-item-598"
                     style={
                       Object {
                         "display": "inline-block",
@@ -3784,20 +3783,20 @@ exports[`Storyshots Components|Map Map 1`] = `
                     tabIndex={-1}
                   >
                     <div
-                      className="MuiPaper-root MuiCard-root makeStyles-root-597 makeStyles-root-600 undefined MuiPaper-elevation2 MuiPaper-rounded"
+                      className="MuiPaper-root MuiCard-root makeStyles-root-607 makeStyles-root-610 undefined MuiPaper-elevation2 MuiPaper-rounded"
                     >
                       <div
-                        className="makeStyles-container-590 makeStyles-container-599"
+                        className="makeStyles-container-600 makeStyles-container-609"
                       >
                         <div
-                          className="MuiGrid-root makeStyles-grid-594 MuiGrid-container"
+                          className="MuiGrid-root makeStyles-grid-604 MuiGrid-container"
                         >
                           <div
                             className="MuiGrid-root MuiGrid-item"
                           >
                             <img
                               alt="Euc diversifola mallee 2"
-                              className="makeStyles-image-589"
+                              className="makeStyles-image-599"
                               src="./diversifola.png"
                             />
                           </div>
@@ -3805,12 +3804,12 @@ exports[`Storyshots Components|Map Map 1`] = `
                             className="MuiGrid-root MuiGrid-item"
                           >
                             <div
-                              className="makeStyles-name-591"
+                              className="makeStyles-name-601"
                             >
                               Euc diversifola mallee 2
                             </div>
                             <div
-                              className="makeStyles-description-592"
+                              className="makeStyles-description-602"
                             >
                               This species from the Hawkesbury region of New South Wales may grow into a multi-trunked mallee, or as a single trunked small tree.
                             </div>
@@ -3836,7 +3835,7 @@ exports[`Storyshots Components|Map Map 1`] = `
               >
                 <div>
                   <div
-                    className="makeStyles-item-588"
+                    className="makeStyles-item-598"
                     style={
                       Object {
                         "display": "inline-block",
@@ -3846,20 +3845,20 @@ exports[`Storyshots Components|Map Map 1`] = `
                     tabIndex={-1}
                   >
                     <div
-                      className="MuiPaper-root MuiCard-root makeStyles-root-597 makeStyles-root-602 undefined MuiPaper-elevation2 MuiPaper-rounded"
+                      className="MuiPaper-root MuiCard-root makeStyles-root-607 makeStyles-root-612 undefined MuiPaper-elevation2 MuiPaper-rounded"
                     >
                       <div
-                        className="makeStyles-container-590 makeStyles-container-601"
+                        className="makeStyles-container-600 makeStyles-container-611"
                       >
                         <div
-                          className="MuiGrid-root makeStyles-grid-594 MuiGrid-container"
+                          className="MuiGrid-root makeStyles-grid-604 MuiGrid-container"
                         >
                           <div
                             className="MuiGrid-root MuiGrid-item"
                           >
                             <img
                               alt="Euc diversifola mallee 1"
-                              className="makeStyles-image-589"
+                              className="makeStyles-image-599"
                               src="./diversifola.png"
                             />
                           </div>
@@ -3867,12 +3866,12 @@ exports[`Storyshots Components|Map Map 1`] = `
                             className="MuiGrid-root MuiGrid-item"
                           >
                             <div
-                              className="makeStyles-name-591"
+                              className="makeStyles-name-601"
                             >
                               Euc diversifola mallee 1
                             </div>
                             <div
-                              className="makeStyles-description-592"
+                              className="makeStyles-description-602"
                             >
                               This species from the Hawkesbury region of New South Wales may grow into a multi-trunked mallee, or as a single trunked small tree.
                             </div>
@@ -3898,7 +3897,7 @@ exports[`Storyshots Components|Map Map 1`] = `
               >
                 <div>
                   <div
-                    className="makeStyles-item-588"
+                    className="makeStyles-item-598"
                     style={
                       Object {
                         "display": "inline-block",
@@ -3908,20 +3907,20 @@ exports[`Storyshots Components|Map Map 1`] = `
                     tabIndex={-1}
                   >
                     <div
-                      className="MuiPaper-root MuiCard-root makeStyles-root-597 makeStyles-root-604 undefined MuiPaper-elevation2 MuiPaper-rounded"
+                      className="MuiPaper-root MuiCard-root makeStyles-root-607 makeStyles-root-614 undefined MuiPaper-elevation2 MuiPaper-rounded"
                     >
                       <div
-                        className="makeStyles-container-590 makeStyles-container-603"
+                        className="makeStyles-container-600 makeStyles-container-613"
                       >
                         <div
-                          className="MuiGrid-root makeStyles-grid-594 MuiGrid-container"
+                          className="MuiGrid-root makeStyles-grid-604 MuiGrid-container"
                         >
                           <div
                             className="MuiGrid-root MuiGrid-item"
                           >
                             <img
                               alt="Marker"
-                              className="makeStyles-image-589"
+                              className="makeStyles-image-599"
                               src="./diversifola.png"
                             />
                           </div>
@@ -3929,12 +3928,12 @@ exports[`Storyshots Components|Map Map 1`] = `
                             className="MuiGrid-root MuiGrid-item"
                           >
                             <div
-                              className="makeStyles-name-591"
+                              className="makeStyles-name-601"
                             >
                               Marker
                             </div>
                             <div
-                              className="makeStyles-description-592"
+                              className="makeStyles-description-602"
                             >
                               This species from the Hawkesbury region of New South Wales may grow into a multi-trunked mallee, or as a single trunked small tree.
                             </div>
@@ -3960,7 +3959,7 @@ exports[`Storyshots Components|Map Map 1`] = `
               >
                 <div>
                   <div
-                    className="makeStyles-item-588"
+                    className="makeStyles-item-598"
                     style={
                       Object {
                         "display": "inline-block",
@@ -3970,20 +3969,20 @@ exports[`Storyshots Components|Map Map 1`] = `
                     tabIndex={-1}
                   >
                     <div
-                      className="MuiPaper-root MuiCard-root makeStyles-root-597 makeStyles-root-606 undefined MuiPaper-elevation2 MuiPaper-rounded"
+                      className="MuiPaper-root MuiCard-root makeStyles-root-607 makeStyles-root-616 undefined MuiPaper-elevation2 MuiPaper-rounded"
                     >
                       <div
-                        className="makeStyles-container-590 makeStyles-container-605"
+                        className="makeStyles-container-600 makeStyles-container-615"
                       >
                         <div
-                          className="MuiGrid-root makeStyles-grid-594 MuiGrid-container"
+                          className="MuiGrid-root makeStyles-grid-604 MuiGrid-container"
                         >
                           <div
                             className="MuiGrid-root MuiGrid-item"
                           >
                             <img
                               alt="Euc diversifola mallee 2"
-                              className="makeStyles-image-589"
+                              className="makeStyles-image-599"
                               src="./diversifola.png"
                             />
                           </div>
@@ -3991,12 +3990,12 @@ exports[`Storyshots Components|Map Map 1`] = `
                             className="MuiGrid-root MuiGrid-item"
                           >
                             <div
-                              className="makeStyles-name-591"
+                              className="makeStyles-name-601"
                             >
                               Euc diversifola mallee 2
                             </div>
                             <div
-                              className="makeStyles-description-592"
+                              className="makeStyles-description-602"
                             >
                               This species from the Hawkesbury region of New South Wales may grow into a multi-trunked mallee, or as a single trunked small tree.
                             </div>
@@ -4021,7 +4020,7 @@ exports[`Storyshots Components|Map Map 1`] = `
               >
                 <div>
                   <div
-                    className="makeStyles-item-588"
+                    className="makeStyles-item-598"
                     style={
                       Object {
                         "display": "inline-block",
@@ -4031,20 +4030,20 @@ exports[`Storyshots Components|Map Map 1`] = `
                     tabIndex={-1}
                   >
                     <div
-                      className="MuiPaper-root MuiCard-root makeStyles-root-597 makeStyles-root-608 undefined MuiPaper-elevation2 MuiPaper-rounded"
+                      className="MuiPaper-root MuiCard-root makeStyles-root-607 makeStyles-root-618 undefined MuiPaper-elevation2 MuiPaper-rounded"
                     >
                       <div
-                        className="makeStyles-container-590 makeStyles-container-607"
+                        className="makeStyles-container-600 makeStyles-container-617"
                       >
                         <div
-                          className="MuiGrid-root makeStyles-grid-594 MuiGrid-container"
+                          className="MuiGrid-root makeStyles-grid-604 MuiGrid-container"
                         >
                           <div
                             className="MuiGrid-root MuiGrid-item"
                           >
                             <img
                               alt="Euc diversifola mallee 1"
-                              className="makeStyles-image-589"
+                              className="makeStyles-image-599"
                               src="./diversifola.png"
                             />
                           </div>
@@ -4052,12 +4051,12 @@ exports[`Storyshots Components|Map Map 1`] = `
                             className="MuiGrid-root MuiGrid-item"
                           >
                             <div
-                              className="makeStyles-name-591"
+                              className="makeStyles-name-601"
                             >
                               Euc diversifola mallee 1
                             </div>
                             <div
-                              className="makeStyles-description-592"
+                              className="makeStyles-description-602"
                             >
                               This species from the Hawkesbury region of New South Wales may grow into a multi-trunked mallee, or as a single trunked small tree.
                             </div>
@@ -4082,7 +4081,7 @@ exports[`Storyshots Components|Map Map 1`] = `
               >
                 <div>
                   <div
-                    className="makeStyles-item-588"
+                    className="makeStyles-item-598"
                     style={
                       Object {
                         "display": "inline-block",
@@ -4092,20 +4091,20 @@ exports[`Storyshots Components|Map Map 1`] = `
                     tabIndex={-1}
                   >
                     <div
-                      className="MuiPaper-root MuiCard-root makeStyles-root-597 makeStyles-root-610 undefined MuiPaper-elevation2 MuiPaper-rounded"
+                      className="MuiPaper-root MuiCard-root makeStyles-root-607 makeStyles-root-620 undefined MuiPaper-elevation2 MuiPaper-rounded"
                     >
                       <div
-                        className="makeStyles-container-590 makeStyles-container-609"
+                        className="makeStyles-container-600 makeStyles-container-619"
                       >
                         <div
-                          className="MuiGrid-root makeStyles-grid-594 MuiGrid-container"
+                          className="MuiGrid-root makeStyles-grid-604 MuiGrid-container"
                         >
                           <div
                             className="MuiGrid-root MuiGrid-item"
                           >
                             <img
                               alt="Marker"
-                              className="makeStyles-image-589"
+                              className="makeStyles-image-599"
                               src="./diversifola.png"
                             />
                           </div>
@@ -4113,12 +4112,12 @@ exports[`Storyshots Components|Map Map 1`] = `
                             className="MuiGrid-root MuiGrid-item"
                           >
                             <div
-                              className="makeStyles-name-591"
+                              className="makeStyles-name-601"
                             >
                               Marker
                             </div>
                             <div
-                              className="makeStyles-description-592"
+                              className="makeStyles-description-602"
                             >
                               This species from the Hawkesbury region of New South Wales may grow into a multi-trunked mallee, or as a single trunked small tree.
                             </div>
@@ -4143,7 +4142,7 @@ exports[`Storyshots Components|Map Map 1`] = `
               >
                 <div>
                   <div
-                    className="makeStyles-item-588"
+                    className="makeStyles-item-598"
                     style={
                       Object {
                         "display": "inline-block",
@@ -4153,20 +4152,20 @@ exports[`Storyshots Components|Map Map 1`] = `
                     tabIndex={-1}
                   >
                     <div
-                      className="MuiPaper-root MuiCard-root makeStyles-root-597 makeStyles-root-612 undefined MuiPaper-elevation2 MuiPaper-rounded"
+                      className="MuiPaper-root MuiCard-root makeStyles-root-607 makeStyles-root-622 undefined MuiPaper-elevation2 MuiPaper-rounded"
                     >
                       <div
-                        className="makeStyles-container-590 makeStyles-container-611"
+                        className="makeStyles-container-600 makeStyles-container-621"
                       >
                         <div
-                          className="MuiGrid-root makeStyles-grid-594 MuiGrid-container"
+                          className="MuiGrid-root makeStyles-grid-604 MuiGrid-container"
                         >
                           <div
                             className="MuiGrid-root MuiGrid-item"
                           >
                             <img
                               alt="Euc diversifola mallee 2"
-                              className="makeStyles-image-589"
+                              className="makeStyles-image-599"
                               src="./diversifola.png"
                             />
                           </div>
@@ -4174,12 +4173,12 @@ exports[`Storyshots Components|Map Map 1`] = `
                             className="MuiGrid-root MuiGrid-item"
                           >
                             <div
-                              className="makeStyles-name-591"
+                              className="makeStyles-name-601"
                             >
                               Euc diversifola mallee 2
                             </div>
                             <div
-                              className="makeStyles-description-592"
+                              className="makeStyles-description-602"
                             >
                               This species from the Hawkesbury region of New South Wales may grow into a multi-trunked mallee, or as a single trunked small tree.
                             </div>
@@ -4236,10 +4235,10 @@ exports[`Storyshots Components|Modal Modal 1`] = `
 exports[`Storyshots Components|Place Project Place Info 1`] = `
 <div>
   <div
-    className="makeStyles-root-623"
+    className="makeStyles-root-633"
   >
     <span
-      className="makeStyles-icon-624"
+      className="makeStyles-icon-634"
     >
       <svg
         aria-hidden={true}
@@ -4275,11 +4274,11 @@ exports[`Storyshots Components|Place Project Place Info 1`] = `
       </svg>
     </span>
     <p
-      className="MuiTypography-root makeStyles-content-625 makeStyles-content-626 MuiTypography-body1"
+      className="MuiTypography-root makeStyles-content-635 makeStyles-content-636 MuiTypography-body1"
     >
       Melbourne, Victoria, Australia
       <span
-        className="makeStyles-separator-622"
+        className="makeStyles-separator-632"
       >
           |  
       </span>
@@ -4295,10 +4294,10 @@ exports[`Storyshots Components|ReadMore Read More 1`] = `
 <div>
   <div>
     <div
-      className="makeStyles-textContainer-633"
+      className="makeStyles-textContainer-643"
     >
       <div
-        className="MuiTypography-root makeStyles-root-634 makeStyles-root-635 MuiTypography-body1"
+        className="MuiTypography-root makeStyles-root-644 makeStyles-root-645 MuiTypography-body1"
       >
         This property is a rare pocket of wetlands and woodlands located near the township of Menindee South Australia, nestled in between the Coorong national park and Lake Albert.
 
@@ -4308,7 +4307,7 @@ This vital habitat comprises a unique mix of both freshwater and saltwater wetla
       </div>
     </div>
     <button
-      className="MuiButtonBase-root MuiButton-root WithStyles(ForwardRef(Button))-root-636 MuiButton-text MuiButton-textSecondary"
+      className="MuiButtonBase-root MuiButton-root WithStyles(ForwardRef(Button))-root-646 MuiButton-text MuiButton-textSecondary"
       disabled={false}
       onBlur={[Function]}
       onClick={[Function]}
@@ -4333,7 +4332,7 @@ This vital habitat comprises a unique mix of both freshwater and saltwater wetla
         >
           <svg
             aria-hidden={true}
-            className="MuiSvgIcon-root makeStyles-icon-637 makeStyles-icon-638"
+            className="MuiSvgIcon-root makeStyles-icon-647 makeStyles-icon-648"
             focusable="false"
             viewBox="0 0 24 24"
           >
@@ -4381,22 +4380,11 @@ exports[`Storyshots Components|Sliders Project Media 1`] = `
   >
     <div>
       <div
-        className="slick-slider makeStyles-root-665 slick-initialized"
-        dir="ltr"
+        className="slick-slider makeStyles-root-680 slick-initialized"
       >
+        
         <div
           className="slick-list"
-          onClick={[Function]}
-          onKeyDown={[Function]}
-          onMouseDown={[Function]}
-          onMouseLeave={null}
-          onMouseMove={null}
-          onMouseUp={[Function]}
-          onTouchCancel={null}
-          onTouchEnd={[Function]}
-          onTouchMove={null}
-          onTouchStart={[Function]}
-          style={Object {}}
         >
           <div
             className="slick-track"
@@ -4406,112 +4394,17 @@ exports[`Storyshots Components|Sliders Project Media 1`] = `
             style={
               Object {
                 "WebkitTransform": "translate3d(0px, 0px, 0px)",
-                "WebkitTransition": "",
+                "WebkitTransition": "-webkit-transform 500ms ease",
                 "msTransform": "translateX(0px)",
                 "opacity": 1,
                 "transform": "translate3d(0px, 0px, 0px)",
-                "transition": "",
+                "transition": "transform 500ms ease",
               }
             }
-          >
-            <div
-              aria-hidden={false}
-              className="slick-slide slick-active slick-current"
-              data-index={0}
-              onClick={[Function]}
-              style={
-                Object {
-                  "outline": "none",
-                  "width": 0,
-                }
-              }
-              tabIndex="-1"
-            >
-              <div>
-                <img
-                  alt="./andover.jpg"
-                  className="makeStyles-item-668 makeStyles-item-670"
-                  src="./andover.jpg"
-                  style={
-                    Object {
-                      "display": "inline-block",
-                      "width": "100%",
-                    }
-                  }
-                  tabIndex={-1}
-                />
-              </div>
-            </div>
-            <div
-              aria-hidden={true}
-              className="slick-slide"
-              data-index={1}
-              onClick={[Function]}
-              style={
-                Object {
-                  "outline": "none",
-                  "width": 0,
-                }
-              }
-              tabIndex="-1"
-            >
-              <div>
-                <video
-                  className="makeStyles-item-668 makeStyles-item-670"
-                  controls={true}
-                  style={
-                    Object {
-                      "display": "inline-block",
-                      "width": "100%",
-                    }
-                  }
-                  tabIndex={-1}
-                >
-                  <source
-                    src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-                  />
-                </video>
-              </div>
-            </div>
-          </div>
+          />
         </div>
-        <div
-          className="slick-dots"
-          onMouseEnter={null}
-          onMouseLeave={null}
-          onMouseOver={null}
-        >
-          <ul
-            style={
-              Object {
-                "MozTransform": "translate(0px, 0)",
-                "OTransform": "translate(0px, 0)",
-                "WebkitTransform": "translate(0px, 0)",
-                "msTransform": "translate(0px, 0)",
-                "transform": "translate(0px, 0)",
-              }
-            }
-          >
-             
-            <li
-              className="slick-active"
-            >
-              <div
-                className="makeStyles-dot-669"
-                onClick={[Function]}
-              />
-            </li>
-            <li
-              className=""
-            >
-              <div
-                className="makeStyles-dot-669"
-                onClick={[Function]}
-              />
-            </li>
-             
-          </ul>
-        </div>
+        
+        
       </div>
     </div>
   </div>
@@ -4528,7 +4421,7 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
     >
       <div>
         <div
-          className="slick-slider makeStyles-root-649 slick-initialized"
+          className="slick-slider makeStyles-root-659 slick-initialized"
           dir="ltr"
         >
           <div
@@ -4575,7 +4468,7 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
               >
                 <div>
                   <div
-                    className="makeStyles-item-650"
+                    className="makeStyles-item-660"
                     style={
                       Object {
                         "display": "inline-block",
@@ -4585,22 +4478,22 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                     tabIndex={-1}
                   >
                     <div
-                      className="makeStyles-root-652"
+                      className="makeStyles-root-662"
                     >
                       <img
                         alt="Melaleuca brevifolia"
-                        className="makeStyles-img-653"
+                        className="makeStyles-img-663"
                         src="./melaleuca-b.png"
                       />
                       <p
-                        className="MuiTypography-root makeStyles-name-654 MuiTypography-body1"
+                        className="MuiTypography-root makeStyles-name-664 MuiTypography-body1"
                       >
                         Melaleuca brevifolia
                       </p>
                     </div>
                   </div>
                   <div
-                    className="makeStyles-item-650"
+                    className="makeStyles-item-660"
                     style={
                       Object {
                         "display": "inline-block",
@@ -4610,15 +4503,15 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                     tabIndex={-1}
                   >
                     <div
-                      className="makeStyles-root-652"
+                      className="makeStyles-root-662"
                     >
                       <img
                         alt="Melaleuca brevifolia"
-                        className="makeStyles-img-653"
+                        className="makeStyles-img-663"
                         src="./melaleuca-b.png"
                       />
                       <p
-                        className="MuiTypography-root makeStyles-name-654 MuiTypography-body1"
+                        className="MuiTypography-root makeStyles-name-664 MuiTypography-body1"
                       >
                         Melaleuca brevifolia
                       </p>
@@ -4642,7 +4535,7 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
               >
                 <div>
                   <div
-                    className="makeStyles-item-650"
+                    className="makeStyles-item-660"
                     style={
                       Object {
                         "display": "inline-block",
@@ -4652,22 +4545,22 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                     tabIndex={-1}
                   >
                     <div
-                      className="makeStyles-root-652"
+                      className="makeStyles-root-662"
                     >
                       <img
                         alt="Melaleuca brevifolia"
-                        className="makeStyles-img-653"
+                        className="makeStyles-img-663"
                         src="./melaleuca-b.png"
                       />
                       <p
-                        className="MuiTypography-root makeStyles-name-654 MuiTypography-body1"
+                        className="MuiTypography-root makeStyles-name-664 MuiTypography-body1"
                       >
                         Melaleuca brevifolia
                       </p>
                     </div>
                   </div>
                   <div
-                    className="makeStyles-item-650"
+                    className="makeStyles-item-660"
                     style={
                       Object {
                         "display": "inline-block",
@@ -4677,15 +4570,15 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                     tabIndex={-1}
                   >
                     <div
-                      className="makeStyles-root-652"
+                      className="makeStyles-root-662"
                     >
                       <img
                         alt="Melaleuca brevifolia"
-                        className="makeStyles-img-653"
+                        className="makeStyles-img-663"
                         src="./melaleuca-b.png"
                       />
                       <p
-                        className="MuiTypography-root makeStyles-name-654 MuiTypography-body1"
+                        className="MuiTypography-root makeStyles-name-664 MuiTypography-body1"
                       >
                         Melaleuca brevifolia
                       </p>
@@ -4694,7 +4587,7 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                 </div>
                 <div>
                   <div
-                    className="makeStyles-item-650"
+                    className="makeStyles-item-660"
                     style={
                       Object {
                         "display": "inline-block",
@@ -4704,22 +4597,22 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                     tabIndex={-1}
                   >
                     <div
-                      className="makeStyles-root-652"
+                      className="makeStyles-root-662"
                     >
                       <img
                         alt="Melaleuca brevifolia"
-                        className="makeStyles-img-653"
+                        className="makeStyles-img-663"
                         src="./melaleuca-b.png"
                       />
                       <p
-                        className="MuiTypography-root makeStyles-name-654 MuiTypography-body1"
+                        className="MuiTypography-root makeStyles-name-664 MuiTypography-body1"
                       >
                         Melaleuca brevifolia
                       </p>
                     </div>
                   </div>
                   <div
-                    className="makeStyles-item-650"
+                    className="makeStyles-item-660"
                     style={
                       Object {
                         "display": "inline-block",
@@ -4729,15 +4622,15 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                     tabIndex={-1}
                   >
                     <div
-                      className="makeStyles-root-652"
+                      className="makeStyles-root-662"
                     >
                       <img
                         alt="Melaleuca brevifolia"
-                        className="makeStyles-img-653"
+                        className="makeStyles-img-663"
                         src="./melaleuca-b.png"
                       />
                       <p
-                        className="MuiTypography-root makeStyles-name-654 MuiTypography-body1"
+                        className="MuiTypography-root makeStyles-name-664 MuiTypography-body1"
                       >
                         Melaleuca brevifolia
                       </p>
@@ -4760,7 +4653,7 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
               >
                 <div>
                   <div
-                    className="makeStyles-item-650"
+                    className="makeStyles-item-660"
                     style={
                       Object {
                         "display": "inline-block",
@@ -4770,22 +4663,22 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                     tabIndex={-1}
                   >
                     <div
-                      className="makeStyles-root-652"
+                      className="makeStyles-root-662"
                     >
                       <img
                         alt="Melaleuca brevifolia"
-                        className="makeStyles-img-653"
+                        className="makeStyles-img-663"
                         src="./melaleuca-b.png"
                       />
                       <p
-                        className="MuiTypography-root makeStyles-name-654 MuiTypography-body1"
+                        className="MuiTypography-root makeStyles-name-664 MuiTypography-body1"
                       >
                         Melaleuca brevifolia
                       </p>
                     </div>
                   </div>
                   <div
-                    className="makeStyles-item-650"
+                    className="makeStyles-item-660"
                     style={
                       Object {
                         "display": "inline-block",
@@ -4795,15 +4688,15 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                     tabIndex={-1}
                   >
                     <div
-                      className="makeStyles-root-652"
+                      className="makeStyles-root-662"
                     >
                       <img
                         alt="Melaleuca brevifolia"
-                        className="makeStyles-img-653"
+                        className="makeStyles-img-663"
                         src="./melaleuca-b.png"
                       />
                       <p
-                        className="MuiTypography-root makeStyles-name-654 MuiTypography-body1"
+                        className="MuiTypography-root makeStyles-name-664 MuiTypography-body1"
                       >
                         Melaleuca brevifolia
                       </p>
@@ -4812,7 +4705,7 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                 </div>
                 <div>
                   <div
-                    className="makeStyles-item-650"
+                    className="makeStyles-item-660"
                     style={
                       Object {
                         "display": "inline-block",
@@ -4822,22 +4715,22 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                     tabIndex={-1}
                   >
                     <div
-                      className="makeStyles-root-652"
+                      className="makeStyles-root-662"
                     >
                       <img
                         alt="Melaleuca brevifolia"
-                        className="makeStyles-img-653"
+                        className="makeStyles-img-663"
                         src="./melaleuca-b.png"
                       />
                       <p
-                        className="MuiTypography-root makeStyles-name-654 MuiTypography-body1"
+                        className="MuiTypography-root makeStyles-name-664 MuiTypography-body1"
                       >
                         Melaleuca brevifolia
                       </p>
                     </div>
                   </div>
                   <div
-                    className="makeStyles-item-650"
+                    className="makeStyles-item-660"
                     style={
                       Object {
                         "display": "inline-block",
@@ -4847,15 +4740,15 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                     tabIndex={-1}
                   >
                     <div
-                      className="makeStyles-root-652"
+                      className="makeStyles-root-662"
                     >
                       <img
                         alt="Melaleuca brevifolia"
-                        className="makeStyles-img-653"
+                        className="makeStyles-img-663"
                         src="./melaleuca-b.png"
                       />
                       <p
-                        className="MuiTypography-root makeStyles-name-654 MuiTypography-body1"
+                        className="MuiTypography-root makeStyles-name-664 MuiTypography-body1"
                       >
                         Melaleuca brevifolia
                       </p>
@@ -4878,7 +4771,7 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
               >
                 <div>
                   <div
-                    className="makeStyles-item-650"
+                    className="makeStyles-item-660"
                     style={
                       Object {
                         "display": "inline-block",
@@ -4888,22 +4781,22 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                     tabIndex={-1}
                   >
                     <div
-                      className="makeStyles-root-652"
+                      className="makeStyles-root-662"
                     >
                       <img
                         alt="Melaleuca brevifolia"
-                        className="makeStyles-img-653"
+                        className="makeStyles-img-663"
                         src="./melaleuca-b.png"
                       />
                       <p
-                        className="MuiTypography-root makeStyles-name-654 MuiTypography-body1"
+                        className="MuiTypography-root makeStyles-name-664 MuiTypography-body1"
                       >
                         Melaleuca brevifolia
                       </p>
                     </div>
                   </div>
                   <div
-                    className="makeStyles-item-650"
+                    className="makeStyles-item-660"
                     style={
                       Object {
                         "display": "inline-block",
@@ -4913,15 +4806,15 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                     tabIndex={-1}
                   >
                     <div
-                      className="makeStyles-root-652"
+                      className="makeStyles-root-662"
                     >
                       <img
                         alt="Melaleuca brevifolia"
-                        className="makeStyles-img-653"
+                        className="makeStyles-img-663"
                         src="./melaleuca-b.png"
                       />
                       <p
-                        className="MuiTypography-root makeStyles-name-654 MuiTypography-body1"
+                        className="MuiTypography-root makeStyles-name-664 MuiTypography-body1"
                       >
                         Melaleuca brevifolia
                       </p>
@@ -4944,7 +4837,7 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
               >
                 <div>
                   <div
-                    className="makeStyles-item-650"
+                    className="makeStyles-item-660"
                     style={
                       Object {
                         "display": "inline-block",
@@ -4954,22 +4847,22 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                     tabIndex={-1}
                   >
                     <div
-                      className="makeStyles-root-652"
+                      className="makeStyles-root-662"
                     >
                       <img
                         alt="Melaleuca brevifolia"
-                        className="makeStyles-img-653"
+                        className="makeStyles-img-663"
                         src="./melaleuca-b.png"
                       />
                       <p
-                        className="MuiTypography-root makeStyles-name-654 MuiTypography-body1"
+                        className="MuiTypography-root makeStyles-name-664 MuiTypography-body1"
                       >
                         Melaleuca brevifolia
                       </p>
                     </div>
                   </div>
                   <div
-                    className="makeStyles-item-650"
+                    className="makeStyles-item-660"
                     style={
                       Object {
                         "display": "inline-block",
@@ -4979,15 +4872,15 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                     tabIndex={-1}
                   >
                     <div
-                      className="makeStyles-root-652"
+                      className="makeStyles-root-662"
                     >
                       <img
                         alt="Melaleuca brevifolia"
-                        className="makeStyles-img-653"
+                        className="makeStyles-img-663"
                         src="./melaleuca-b.png"
                       />
                       <p
-                        className="MuiTypography-root makeStyles-name-654 MuiTypography-body1"
+                        className="MuiTypography-root makeStyles-name-664 MuiTypography-body1"
                       >
                         Melaleuca brevifolia
                       </p>
@@ -4996,7 +4889,7 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                 </div>
                 <div>
                   <div
-                    className="makeStyles-item-650"
+                    className="makeStyles-item-660"
                     style={
                       Object {
                         "display": "inline-block",
@@ -5006,22 +4899,22 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                     tabIndex={-1}
                   >
                     <div
-                      className="makeStyles-root-652"
+                      className="makeStyles-root-662"
                     >
                       <img
                         alt="Melaleuca brevifolia"
-                        className="makeStyles-img-653"
+                        className="makeStyles-img-663"
                         src="./melaleuca-b.png"
                       />
                       <p
-                        className="MuiTypography-root makeStyles-name-654 MuiTypography-body1"
+                        className="MuiTypography-root makeStyles-name-664 MuiTypography-body1"
                       >
                         Melaleuca brevifolia
                       </p>
                     </div>
                   </div>
                   <div
-                    className="makeStyles-item-650"
+                    className="makeStyles-item-660"
                     style={
                       Object {
                         "display": "inline-block",
@@ -5031,15 +4924,15 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                     tabIndex={-1}
                   >
                     <div
-                      className="makeStyles-root-652"
+                      className="makeStyles-root-662"
                     >
                       <img
                         alt="Melaleuca brevifolia"
-                        className="makeStyles-img-653"
+                        className="makeStyles-img-663"
                         src="./melaleuca-b.png"
                       />
                       <p
-                        className="MuiTypography-root makeStyles-name-654 MuiTypography-body1"
+                        className="MuiTypography-root makeStyles-name-664 MuiTypography-body1"
                       >
                         Melaleuca brevifolia
                       </p>
@@ -5061,7 +4954,7 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
               >
                 <div>
                   <div
-                    className="makeStyles-item-650"
+                    className="makeStyles-item-660"
                     style={
                       Object {
                         "display": "inline-block",
@@ -5071,22 +4964,22 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                     tabIndex={-1}
                   >
                     <div
-                      className="makeStyles-root-652"
+                      className="makeStyles-root-662"
                     >
                       <img
                         alt="Melaleuca brevifolia"
-                        className="makeStyles-img-653"
+                        className="makeStyles-img-663"
                         src="./melaleuca-b.png"
                       />
                       <p
-                        className="MuiTypography-root makeStyles-name-654 MuiTypography-body1"
+                        className="MuiTypography-root makeStyles-name-664 MuiTypography-body1"
                       >
                         Melaleuca brevifolia
                       </p>
                     </div>
                   </div>
                   <div
-                    className="makeStyles-item-650"
+                    className="makeStyles-item-660"
                     style={
                       Object {
                         "display": "inline-block",
@@ -5096,15 +4989,15 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                     tabIndex={-1}
                   >
                     <div
-                      className="makeStyles-root-652"
+                      className="makeStyles-root-662"
                     >
                       <img
                         alt="Melaleuca brevifolia"
-                        className="makeStyles-img-653"
+                        className="makeStyles-img-663"
                         src="./melaleuca-b.png"
                       />
                       <p
-                        className="MuiTypography-root makeStyles-name-654 MuiTypography-body1"
+                        className="MuiTypography-root makeStyles-name-664 MuiTypography-body1"
                       >
                         Melaleuca brevifolia
                       </p>
@@ -5113,7 +5006,7 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                 </div>
                 <div>
                   <div
-                    className="makeStyles-item-650"
+                    className="makeStyles-item-660"
                     style={
                       Object {
                         "display": "inline-block",
@@ -5123,22 +5016,22 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                     tabIndex={-1}
                   >
                     <div
-                      className="makeStyles-root-652"
+                      className="makeStyles-root-662"
                     >
                       <img
                         alt="Melaleuca brevifolia"
-                        className="makeStyles-img-653"
+                        className="makeStyles-img-663"
                         src="./melaleuca-b.png"
                       />
                       <p
-                        className="MuiTypography-root makeStyles-name-654 MuiTypography-body1"
+                        className="MuiTypography-root makeStyles-name-664 MuiTypography-body1"
                       >
                         Melaleuca brevifolia
                       </p>
                     </div>
                   </div>
                   <div
-                    className="makeStyles-item-650"
+                    className="makeStyles-item-660"
                     style={
                       Object {
                         "display": "inline-block",
@@ -5148,15 +5041,15 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                     tabIndex={-1}
                   >
                     <div
-                      className="makeStyles-root-652"
+                      className="makeStyles-root-662"
                     >
                       <img
                         alt="Melaleuca brevifolia"
-                        className="makeStyles-img-653"
+                        className="makeStyles-img-663"
                         src="./melaleuca-b.png"
                       />
                       <p
-                        className="MuiTypography-root makeStyles-name-654 MuiTypography-body1"
+                        className="MuiTypography-root makeStyles-name-664 MuiTypography-body1"
                       >
                         Melaleuca brevifolia
                       </p>
@@ -5178,7 +5071,7 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
               >
                 <div>
                   <div
-                    className="makeStyles-item-650"
+                    className="makeStyles-item-660"
                     style={
                       Object {
                         "display": "inline-block",
@@ -5188,22 +5081,22 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                     tabIndex={-1}
                   >
                     <div
-                      className="makeStyles-root-652"
+                      className="makeStyles-root-662"
                     >
                       <img
                         alt="Melaleuca brevifolia"
-                        className="makeStyles-img-653"
+                        className="makeStyles-img-663"
                         src="./melaleuca-b.png"
                       />
                       <p
-                        className="MuiTypography-root makeStyles-name-654 MuiTypography-body1"
+                        className="MuiTypography-root makeStyles-name-664 MuiTypography-body1"
                       >
                         Melaleuca brevifolia
                       </p>
                     </div>
                   </div>
                   <div
-                    className="makeStyles-item-650"
+                    className="makeStyles-item-660"
                     style={
                       Object {
                         "display": "inline-block",
@@ -5213,15 +5106,15 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                     tabIndex={-1}
                   >
                     <div
-                      className="makeStyles-root-652"
+                      className="makeStyles-root-662"
                     >
                       <img
                         alt="Melaleuca brevifolia"
-                        className="makeStyles-img-653"
+                        className="makeStyles-img-663"
                         src="./melaleuca-b.png"
                       />
                       <p
-                        className="MuiTypography-root makeStyles-name-654 MuiTypography-body1"
+                        className="MuiTypography-root makeStyles-name-664 MuiTypography-body1"
                       >
                         Melaleuca brevifolia
                       </p>
@@ -5234,15 +5127,15 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
           </div>
         </div>
         <div
-          className="MuiGrid-root makeStyles-buttons-651 MuiGrid-container MuiGrid-justify-xs-flex-end"
+          className="MuiGrid-root makeStyles-buttons-661 MuiGrid-container MuiGrid-justify-xs-flex-end"
         >
           <div
-            className="makeStyles-root-655"
+            className="makeStyles-root-665"
             onClick={[Function]}
           >
             <svg
               aria-hidden={true}
-              className="MuiSvgIcon-root makeStyles-icon-656 makeStyles-icon-657"
+              className="MuiSvgIcon-root makeStyles-icon-666 makeStyles-icon-667"
               focusable="false"
               viewBox="0 0 24 24"
             >
@@ -5268,12 +5161,12 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
             </svg>
           </div>
           <div
-            className="makeStyles-root-655"
+            className="makeStyles-root-665"
             onClick={[Function]}
           >
             <svg
               aria-hidden={true}
-              className="MuiSvgIcon-root makeStyles-icon-656 makeStyles-icon-658"
+              className="MuiSvgIcon-root makeStyles-icon-666 makeStyles-icon-668"
               focusable="false"
               viewBox="0 0 24 24"
             >
@@ -5308,7 +5201,7 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
 exports[`Storyshots Components|Table Mrv Table 1`] = `
 <div>
   <div
-    className="MuiTableContainer-root makeStyles-tableContainer-683"
+    className="MuiTableContainer-root makeStyles-tableContainer-703"
   >
     <table
       aria-label="documentation table"
@@ -5325,7 +5218,7 @@ exports[`Storyshots Components|Table Mrv Table 1`] = `
         >
           <th
             aria-sort="ascending"
-            className="MuiTableCell-root MuiTableCell-head makeStyles-headerCell-684 MuiTableCell-alignLeft"
+            className="MuiTableCell-root MuiTableCell-head makeStyles-headerCell-704 MuiTableCell-alignLeft"
             scope="col"
           >
             <span
@@ -5361,7 +5254,7 @@ exports[`Storyshots Components|Table Mrv Table 1`] = `
           </th>
           <th
             aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-head makeStyles-headerCell-684 MuiTableCell-alignLeft"
+            className="MuiTableCell-root MuiTableCell-head makeStyles-headerCell-704 MuiTableCell-alignLeft"
             scope="col"
           >
             <span
@@ -5397,7 +5290,7 @@ exports[`Storyshots Components|Table Mrv Table 1`] = `
           </th>
           <th
             aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-head makeStyles-headerCell-684 MuiTableCell-alignLeft"
+            className="MuiTableCell-root MuiTableCell-head makeStyles-headerCell-704 MuiTableCell-alignLeft"
             scope="col"
           >
             <span
@@ -5433,7 +5326,7 @@ exports[`Storyshots Components|Table Mrv Table 1`] = `
           </th>
           <th
             aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-head makeStyles-headerCell-684 MuiTableCell-alignLeft"
+            className="MuiTableCell-root MuiTableCell-head makeStyles-headerCell-704 MuiTableCell-alignLeft"
             scope="col"
           >
             <span
@@ -5474,22 +5367,22 @@ exports[`Storyshots Components|Table Mrv Table 1`] = `
         role={null}
       >
         <tr
-          className="MuiTableRow-root makeStyles-row-685"
+          className="MuiTableRow-root makeStyles-row-705"
           role={null}
           tabIndex={-1}
         >
           <td
             aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body makeStyles-cell-686 makeStyles-nameCell-687"
+            className="MuiTableCell-root MuiTableCell-body makeStyles-cell-706 makeStyles-nameCell-707"
             id="enhanced-table-checkbox-0"
             scope="row"
           >
             <div
-              className="makeStyles-name-688"
+              className="makeStyles-name-708"
             >
               <svg
                 aria-hidden={true}
-                className="MuiSvgIcon-root makeStyles-icon-689"
+                className="MuiSvgIcon-root makeStyles-icon-709"
                 focusable="false"
                 viewBox="0 0 18 22"
               >
@@ -5591,28 +5484,28 @@ exports[`Storyshots Components|Table Mrv Table 1`] = `
           </td>
           <td
             aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body makeStyles-cell-686 MuiTableCell-alignLeft"
+            className="MuiTableCell-root MuiTableCell-body makeStyles-cell-706 MuiTableCell-alignLeft"
           >
             Issuance
           </td>
           <td
             aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body makeStyles-cell-686 MuiTableCell-alignLeft"
+            className="MuiTableCell-root MuiTableCell-body makeStyles-cell-706 MuiTableCell-alignLeft"
           >
             February 10, 2020
           </td>
           <td
             aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body makeStyles-cell-686 makeStyles-documentCell-691 MuiTableCell-alignLeft"
+            className="MuiTableCell-root MuiTableCell-body makeStyles-cell-706 makeStyles-documentCell-711 MuiTableCell-alignLeft"
           >
             <a
-              className="makeStyles-link-690"
+              className="makeStyles-link-710"
               href="test"
               rel="noopener noreferrer"
               target="_blank"
             >
               <button
-                className="MuiButtonBase-root MuiButton-root WithStyles(ForwardRef(Button))-root-693 MuiButton-text MuiButton-textSecondary"
+                className="MuiButtonBase-root MuiButton-root WithStyles(ForwardRef(Button))-root-713 MuiButton-text MuiButton-textSecondary"
                 disabled={false}
                 onBlur={[Function]}
                 onDragLeave={[Function]}
@@ -5636,7 +5529,7 @@ exports[`Storyshots Components|Table Mrv Table 1`] = `
                   >
                     <svg
                       aria-hidden={true}
-                      className="MuiSvgIcon-root makeStyles-root-694"
+                      className="MuiSvgIcon-root makeStyles-root-714"
                       focusable="false"
                       viewBox="0 0 19 14"
                     >
@@ -5674,22 +5567,22 @@ exports[`Storyshots Components|Table Mrv Table 1`] = `
           </td>
         </tr>
         <tr
-          className="MuiTableRow-root makeStyles-row-685"
+          className="MuiTableRow-root makeStyles-row-705"
           role={null}
           tabIndex={-1}
         >
           <td
             aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body makeStyles-cell-686 makeStyles-nameCell-687"
+            className="MuiTableCell-root MuiTableCell-body makeStyles-cell-706 makeStyles-nameCell-707"
             id="enhanced-table-checkbox-1"
             scope="row"
           >
             <div
-              className="makeStyles-name-688"
+              className="makeStyles-name-708"
             >
               <svg
                 aria-hidden={true}
-                className="MuiSvgIcon-root makeStyles-icon-689"
+                className="MuiSvgIcon-root makeStyles-icon-709"
                 focusable="false"
                 viewBox="0 0 18 22"
               >
@@ -5791,28 +5684,28 @@ exports[`Storyshots Components|Table Mrv Table 1`] = `
           </td>
           <td
             aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body makeStyles-cell-686 MuiTableCell-alignLeft"
+            className="MuiTableCell-root MuiTableCell-body makeStyles-cell-706 MuiTableCell-alignLeft"
           >
             Monitoring
           </td>
           <td
             aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body makeStyles-cell-686 MuiTableCell-alignLeft"
+            className="MuiTableCell-root MuiTableCell-body makeStyles-cell-706 MuiTableCell-alignLeft"
           >
             March 15, 2020
           </td>
           <td
             aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body makeStyles-cell-686 makeStyles-documentCell-691 MuiTableCell-alignLeft"
+            className="MuiTableCell-root MuiTableCell-body makeStyles-cell-706 makeStyles-documentCell-711 MuiTableCell-alignLeft"
           >
             <a
-              className="makeStyles-link-690"
+              className="makeStyles-link-710"
               href="test"
               rel="noopener noreferrer"
               target="_blank"
             >
               <button
-                className="MuiButtonBase-root MuiButton-root WithStyles(ForwardRef(Button))-root-693 MuiButton-text MuiButton-textSecondary"
+                className="MuiButtonBase-root MuiButton-root WithStyles(ForwardRef(Button))-root-713 MuiButton-text MuiButton-textSecondary"
                 disabled={false}
                 onBlur={[Function]}
                 onDragLeave={[Function]}
@@ -5836,7 +5729,7 @@ exports[`Storyshots Components|Table Mrv Table 1`] = `
                   >
                     <svg
                       aria-hidden={true}
-                      className="MuiSvgIcon-root makeStyles-root-694"
+                      className="MuiSvgIcon-root makeStyles-root-714"
                       focusable="false"
                       viewBox="0 0 19 14"
                     >
@@ -5874,22 +5767,22 @@ exports[`Storyshots Components|Table Mrv Table 1`] = `
           </td>
         </tr>
         <tr
-          className="MuiTableRow-root makeStyles-row-685"
+          className="MuiTableRow-root makeStyles-row-705"
           role={null}
           tabIndex={-1}
         >
           <td
             aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body makeStyles-cell-686 makeStyles-nameCell-687"
+            className="MuiTableCell-root MuiTableCell-body makeStyles-cell-706 makeStyles-nameCell-707"
             id="enhanced-table-checkbox-2"
             scope="row"
           >
             <div
-              className="makeStyles-name-688"
+              className="makeStyles-name-708"
             >
               <svg
                 aria-hidden={true}
-                className="MuiSvgIcon-root makeStyles-icon-689"
+                className="MuiSvgIcon-root makeStyles-icon-709"
                 focusable="false"
                 viewBox="0 0 18 22"
               >
@@ -5991,28 +5884,28 @@ exports[`Storyshots Components|Table Mrv Table 1`] = `
           </td>
           <td
             aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body makeStyles-cell-686 MuiTableCell-alignLeft"
+            className="MuiTableCell-root MuiTableCell-body makeStyles-cell-706 MuiTableCell-alignLeft"
           >
             Project Review
           </td>
           <td
             aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body makeStyles-cell-686 MuiTableCell-alignLeft"
+            className="MuiTableCell-root MuiTableCell-body makeStyles-cell-706 MuiTableCell-alignLeft"
           >
             November 1, 2019
           </td>
           <td
             aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body makeStyles-cell-686 makeStyles-documentCell-691 MuiTableCell-alignLeft"
+            className="MuiTableCell-root MuiTableCell-body makeStyles-cell-706 makeStyles-documentCell-711 MuiTableCell-alignLeft"
           >
             <a
-              className="makeStyles-link-690"
+              className="makeStyles-link-710"
               href="test"
               rel="noopener noreferrer"
               target="_blank"
             >
               <button
-                className="MuiButtonBase-root MuiButton-root WithStyles(ForwardRef(Button))-root-693 MuiButton-text MuiButton-textSecondary"
+                className="MuiButtonBase-root MuiButton-root WithStyles(ForwardRef(Button))-root-713 MuiButton-text MuiButton-textSecondary"
                 disabled={false}
                 onBlur={[Function]}
                 onDragLeave={[Function]}
@@ -6036,7 +5929,7 @@ exports[`Storyshots Components|Table Mrv Table 1`] = `
                   >
                     <svg
                       aria-hidden={true}
-                      className="MuiSvgIcon-root makeStyles-root-694"
+                      className="MuiSvgIcon-root makeStyles-root-714"
                       focusable="false"
                       viewBox="0 0 19 14"
                     >
@@ -6082,7 +5975,7 @@ exports[`Storyshots Components|Table Mrv Table 1`] = `
 exports[`Storyshots Components|Tabs Mrv Tabs 1`] = `
 <div>
   <div
-    className="makeStyles-root-722 makeStyles-root-724"
+    className="makeStyles-root-742 makeStyles-root-744"
   >
     <div>
       <div
@@ -6107,7 +6000,7 @@ exports[`Storyshots Components|Tabs Mrv Tabs 1`] = `
             <button
               aria-controls="simple-tabpanel-0"
               aria-selected={true}
-              className="MuiButtonBase-root MuiTab-root WithStyles(ForwardRef(Tab))-root-726 MuiTab-textColorInherit Mui-selected WithStyles(ForwardRef(Tab))-selected-727 MuiTab-fullWidth"
+              className="MuiButtonBase-root MuiTab-root WithStyles(ForwardRef(Tab))-root-746 MuiTab-textColorInherit Mui-selected WithStyles(ForwardRef(Tab))-selected-747 MuiTab-fullWidth"
               disabled={false}
               id="simple-tab-0"
               onBlur={[Function]}
@@ -6138,7 +6031,7 @@ exports[`Storyshots Components|Tabs Mrv Tabs 1`] = `
             <button
               aria-controls="simple-tabpanel-1"
               aria-selected={false}
-              className="MuiButtonBase-root MuiTab-root WithStyles(ForwardRef(Tab))-root-726 MuiTab-textColorInherit MuiTab-fullWidth"
+              className="MuiButtonBase-root MuiTab-root WithStyles(ForwardRef(Tab))-root-746 MuiTab-textColorInherit MuiTab-fullWidth"
               disabled={false}
               id="simple-tab-1"
               onBlur={[Function]}
@@ -6168,7 +6061,7 @@ exports[`Storyshots Components|Tabs Mrv Tabs 1`] = `
             </button>
           </div>
           <span
-            className="PrivateTabIndicator-root-728 PrivateTabIndicator-colorSecondary-730 MuiTabs-indicator WithStyles(ForwardRef(Tabs))-indicator-725"
+            className="PrivateTabIndicator-root-748 PrivateTabIndicator-colorSecondary-750 MuiTabs-indicator WithStyles(ForwardRef(Tabs))-indicator-745"
             style={
               Object {
                 "left": 0,
@@ -6180,22 +6073,22 @@ exports[`Storyshots Components|Tabs Mrv Tabs 1`] = `
       </div>
     </div>
     <div
-      className="makeStyles-content-723"
+      className="makeStyles-content-743"
     >
       <div
-        className="makeStyles-root-732 makeStyles-root-746"
+        className="makeStyles-root-752 makeStyles-root-766"
       >
         <div
-          className="makeStyles-container-739"
+          className="makeStyles-container-759"
         >
           <div
-            className="makeStyles-descriptionTitle-740"
+            className="makeStyles-descriptionTitle-760"
           >
             <h3
-              className="MuiTypography-root makeStyles-root-748 makeStyles-title-741 MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+              className="MuiTypography-root makeStyles-root-768 makeStyles-title-761 MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
             >
               <span
-                className="makeStyles-icon-738"
+                className="makeStyles-icon-758"
               >
                 <svg
                   aria-hidden={true}
@@ -6249,32 +6142,32 @@ exports[`Storyshots Components|Tabs Mrv Tabs 1`] = `
             </h3>
           </div>
           <div
-            className="makeStyles-descriptionItem-742"
+            className="makeStyles-descriptionItem-762"
           >
             <div
-              className="MuiTypography-root makeStyles-description-734 makeStyles-description-747 MuiTypography-body1"
+              className="MuiTypography-root makeStyles-description-754 makeStyles-description-767 MuiTypography-body1"
             >
               ABU’s are an Australian Government endorsed biodiversity credit. An individual ABU represents a 1.5m square area of land of significant environmental value that has been placed under a conservation covenant and agreed management plan. The covenant and management plan secure the long term preservation of the site and ensure the biodiversity value is protected in perpetuity. Vegetation types may include forests, grasslands, mallees, saltmarshes, scrubs, shrublands, wetlands, and woodlands. ABU’s are an innovative and unique way for organisations to preserve a tangible section of Australia’s unique natural habitat.
             </div>
           </div>
           <div
-            className="makeStyles-activitiesTitleContainer-743"
+            className="makeStyles-activitiesTitleContainer-763"
           >
             <h4
-              className="MuiTypography-root makeStyles-root-748 makeStyles-activitiesTitle-744 MuiTypography-h4 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+              className="MuiTypography-root makeStyles-root-768 makeStyles-activitiesTitle-764 MuiTypography-h4 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
             >
               Key activities and outcomes
             </h4>
           </div>
           <div>
             <ul
-              className="makeStyles-activities-735"
+              className="makeStyles-activities-755"
             >
               <div
-                className="MuiTypography-root makeStyles-activity-736 MuiTypography-body1"
+                className="MuiTypography-root makeStyles-activity-756 MuiTypography-body1"
               >
                 <div
-                  className="makeStyles-bullet-737"
+                  className="makeStyles-bullet-757"
                 >
                   •
                 </div>
@@ -6283,10 +6176,10 @@ exports[`Storyshots Components|Tabs Mrv Tabs 1`] = `
                 </li>
               </div>
               <div
-                className="MuiTypography-root makeStyles-activity-736 MuiTypography-body1"
+                className="MuiTypography-root makeStyles-activity-756 MuiTypography-body1"
               >
                 <div
-                  className="makeStyles-bullet-737"
+                  className="makeStyles-bullet-757"
                 >
                   •
                 </div>
@@ -6295,10 +6188,10 @@ exports[`Storyshots Components|Tabs Mrv Tabs 1`] = `
                 </li>
               </div>
               <div
-                className="MuiTypography-root makeStyles-activity-736 MuiTypography-body1"
+                className="MuiTypography-root makeStyles-activity-756 MuiTypography-body1"
               >
                 <div
-                  className="makeStyles-bullet-737"
+                  className="makeStyles-bullet-757"
                 >
                   •
                 </div>
@@ -6307,10 +6200,10 @@ exports[`Storyshots Components|Tabs Mrv Tabs 1`] = `
                 </li>
               </div>
               <div
-                className="MuiTypography-root makeStyles-activity-736 MuiTypography-body1"
+                className="MuiTypography-root makeStyles-activity-756 MuiTypography-body1"
               >
                 <div
-                  className="makeStyles-bullet-737"
+                  className="makeStyles-bullet-757"
                 >
                   •
                 </div>
@@ -6330,16 +6223,16 @@ exports[`Storyshots Components|Tabs Mrv Tabs 1`] = `
 exports[`Storyshots Components|Timeline New Timeline 1`] = `
 <div>
   <div
-    className="MuiBox-root MuiBox-root-892"
+    className="MuiBox-root MuiBox-root-912"
   >
     <ul
-      className="MuiTimeline-root MuiTimeline-alignAlternate makeStyles-timeline-876"
+      className="MuiTimeline-root MuiTimeline-alignAlternate makeStyles-timeline-896"
     >
       <li
         className="MuiTimelineItem-root MuiTimelineItem-alignAlternate"
       >
         <div
-          className="MuiTimelineOppositeContent-root MuiTimelineItem-oppositeContent makeStyles-oppositeContent-878"
+          className="MuiTimelineOppositeContent-root MuiTimelineItem-oppositeContent makeStyles-oppositeContent-898"
         >
           <img
             alt="Register project"
@@ -6347,39 +6240,39 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
           />
         </div>
         <div
-          className="MuiTimelineSeparator-root makeStyles-separator-886"
+          className="MuiTimelineSeparator-root makeStyles-separator-906"
         >
           <span
-            className="MuiTimelineDot-root makeStyles-dot-885 MuiTimelineDot-defaultGrey"
+            className="MuiTimelineDot-root makeStyles-dot-905 MuiTimelineDot-defaultGrey"
           />
           <span
-            className="MuiTimelineConnector-root makeStyles-connector-882 makeStyles-firstConnector-883"
+            className="MuiTimelineConnector-root makeStyles-connector-902 makeStyles-firstConnector-903"
           />
         </div>
         <div
           className="MuiTimelineContent-root MuiTimelineItem-content"
         >
           <div
-            className="MuiGrid-root makeStyles-content-879 makeStyles-content-893 MuiGrid-container MuiGrid-wrap-xs-nowrap"
+            className="MuiGrid-root makeStyles-content-899 makeStyles-content-913 MuiGrid-container MuiGrid-wrap-xs-nowrap"
           >
             <div
-              className="MuiGrid-root makeStyles-number-887 MuiGrid-item"
+              className="MuiGrid-root makeStyles-number-907 MuiGrid-item"
             >
               1
             </div>
             <div
-              className="MuiGrid-root makeStyles-text-889 MuiGrid-item"
+              className="MuiGrid-root makeStyles-text-909 MuiGrid-item"
             >
               <h3
-                className="MuiTypography-root makeStyles-root-895 makeStyles-title-888 MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+                className="MuiTypography-root makeStyles-root-915 makeStyles-title-908 MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
               >
                 Register project
               </h3>
               <div
-                className="makeStyles-tags-880"
+                className="makeStyles-tags-900"
               >
                 <span
-                  className="makeStyles-tag-881 makeStyles-tag-897"
+                  className="makeStyles-tag-901 makeStyles-tag-917"
                 >
                   farmer
                 </span>
@@ -6392,7 +6285,7 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
         className="MuiTimelineItem-root MuiTimelineItem-alignAlternate"
       >
         <div
-          className="MuiTimelineOppositeContent-root MuiTimelineItem-oppositeContent makeStyles-oppositeContent-878"
+          className="MuiTimelineOppositeContent-root MuiTimelineItem-oppositeContent makeStyles-oppositeContent-898"
         >
           <img
             alt="Establish timeline"
@@ -6400,44 +6293,44 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
           />
         </div>
         <div
-          className="MuiTimelineSeparator-root makeStyles-separator-886"
+          className="MuiTimelineSeparator-root makeStyles-separator-906"
         >
           <span
-            className="MuiTimelineDot-root makeStyles-dot-885 MuiTimelineDot-defaultGrey"
+            className="MuiTimelineDot-root makeStyles-dot-905 MuiTimelineDot-defaultGrey"
           />
           <span
-            className="MuiTimelineConnector-root makeStyles-connector-882"
+            className="MuiTimelineConnector-root makeStyles-connector-902"
           />
         </div>
         <div
           className="MuiTimelineContent-root MuiTimelineItem-content"
         >
           <div
-            className="MuiGrid-root makeStyles-content-879 makeStyles-content-898 MuiGrid-container MuiGrid-wrap-xs-nowrap"
+            className="MuiGrid-root makeStyles-content-899 makeStyles-content-918 MuiGrid-container MuiGrid-wrap-xs-nowrap"
           >
             <div
-              className="MuiGrid-root makeStyles-number-887 MuiGrid-item"
+              className="MuiGrid-root makeStyles-number-907 MuiGrid-item"
             >
               2
             </div>
             <div
-              className="MuiGrid-root makeStyles-text-889 MuiGrid-item"
+              className="MuiGrid-root makeStyles-text-909 MuiGrid-item"
             >
               <h3
-                className="MuiTypography-root makeStyles-root-895 makeStyles-title-888 MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+                className="MuiTypography-root makeStyles-root-915 makeStyles-title-908 MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
               >
                 Establish timeline
               </h3>
               <div
-                className="makeStyles-tags-880"
+                className="makeStyles-tags-900"
               >
                 <span
-                  className="makeStyles-tag-881 makeStyles-tag-901"
+                  className="makeStyles-tag-901 makeStyles-tag-921"
                 >
                   monitor
                 </span>
                 <span
-                  className="makeStyles-tag-881 makeStyles-tag-903"
+                  className="makeStyles-tag-901 makeStyles-tag-923"
                 >
                   farmer
                 </span>
@@ -6450,7 +6343,7 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
         className="MuiTimelineItem-root MuiTimelineItem-alignAlternate"
       >
         <div
-          className="MuiTimelineOppositeContent-root MuiTimelineItem-oppositeContent makeStyles-oppositeContent-878"
+          className="MuiTimelineOppositeContent-root MuiTimelineItem-oppositeContent makeStyles-oppositeContent-898"
         >
           <img
             alt="Lorem ipsum 1"
@@ -6458,44 +6351,44 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
           />
         </div>
         <div
-          className="MuiTimelineSeparator-root makeStyles-separator-886"
+          className="MuiTimelineSeparator-root makeStyles-separator-906"
         >
           <span
-            className="MuiTimelineDot-root makeStyles-dot-885 MuiTimelineDot-defaultGrey"
+            className="MuiTimelineDot-root makeStyles-dot-905 MuiTimelineDot-defaultGrey"
           />
           <span
-            className="MuiTimelineConnector-root makeStyles-connector-882"
+            className="MuiTimelineConnector-root makeStyles-connector-902"
           />
         </div>
         <div
           className="MuiTimelineContent-root MuiTimelineItem-content"
         >
           <div
-            className="MuiGrid-root makeStyles-content-879 makeStyles-content-904 MuiGrid-container MuiGrid-wrap-xs-nowrap"
+            className="MuiGrid-root makeStyles-content-899 makeStyles-content-924 MuiGrid-container MuiGrid-wrap-xs-nowrap"
           >
             <div
-              className="MuiGrid-root makeStyles-number-887 MuiGrid-item"
+              className="MuiGrid-root makeStyles-number-907 MuiGrid-item"
             >
               3
             </div>
             <div
-              className="MuiGrid-root makeStyles-text-889 MuiGrid-item"
+              className="MuiGrid-root makeStyles-text-909 MuiGrid-item"
             >
               <h3
-                className="MuiTypography-root makeStyles-root-895 makeStyles-title-888 MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+                className="MuiTypography-root makeStyles-root-915 makeStyles-title-908 MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
               >
                 Lorem ipsum 1
               </h3>
               <div
-                className="makeStyles-tags-880"
+                className="makeStyles-tags-900"
               >
                 <span
-                  className="makeStyles-tag-881 makeStyles-tag-907"
+                  className="makeStyles-tag-901 makeStyles-tag-927"
                 >
                   monitor
                 </span>
                 <span
-                  className="makeStyles-tag-881 makeStyles-tag-909"
+                  className="makeStyles-tag-901 makeStyles-tag-929"
                 >
                   farmer
                 </span>
@@ -6508,7 +6401,7 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
         className="MuiTimelineItem-root MuiTimelineItem-alignAlternate"
       >
         <div
-          className="MuiTimelineOppositeContent-root MuiTimelineItem-oppositeContent makeStyles-oppositeContent-878"
+          className="MuiTimelineOppositeContent-root MuiTimelineItem-oppositeContent makeStyles-oppositeContent-898"
         >
           <img
             alt="Lorem ipsum 2"
@@ -6516,39 +6409,39 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
           />
         </div>
         <div
-          className="MuiTimelineSeparator-root makeStyles-separator-886"
+          className="MuiTimelineSeparator-root makeStyles-separator-906"
         >
           <span
-            className="MuiTimelineDot-root makeStyles-dot-885 MuiTimelineDot-defaultGrey"
+            className="MuiTimelineDot-root makeStyles-dot-905 MuiTimelineDot-defaultGrey"
           />
           <span
-            className="MuiTimelineConnector-root makeStyles-connector-882 makeStyles-lastConnector-884"
+            className="MuiTimelineConnector-root makeStyles-connector-902 makeStyles-lastConnector-904"
           />
         </div>
         <div
           className="MuiTimelineContent-root MuiTimelineItem-content"
         >
           <div
-            className="MuiGrid-root makeStyles-content-879 makeStyles-content-910 MuiGrid-container MuiGrid-wrap-xs-nowrap"
+            className="MuiGrid-root makeStyles-content-899 makeStyles-content-930 MuiGrid-container MuiGrid-wrap-xs-nowrap"
           >
             <div
-              className="MuiGrid-root makeStyles-number-887 MuiGrid-item"
+              className="MuiGrid-root makeStyles-number-907 MuiGrid-item"
             >
               4
             </div>
             <div
-              className="MuiGrid-root makeStyles-text-889 MuiGrid-item"
+              className="MuiGrid-root makeStyles-text-909 MuiGrid-item"
             >
               <h3
-                className="MuiTypography-root makeStyles-root-895 makeStyles-title-888 MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+                className="MuiTypography-root makeStyles-root-915 makeStyles-title-908 MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
               >
                 Lorem ipsum 2
               </h3>
               <div
-                className="makeStyles-tags-880"
+                className="makeStyles-tags-900"
               >
                 <span
-                  className="makeStyles-tag-881 makeStyles-tag-913"
+                  className="makeStyles-tag-901 makeStyles-tag-933"
                 >
                   monitor
                 </span>
@@ -6560,48 +6453,48 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
     </ul>
   </div>
   <div
-    className="MuiBox-root MuiBox-root-914"
+    className="MuiBox-root MuiBox-root-934"
   >
     <ul
-      className="MuiTimeline-root MuiTimeline-alignLeft makeStyles-timeline-876"
+      className="MuiTimeline-root MuiTimeline-alignLeft makeStyles-timeline-896"
     >
       <li
-        className="MuiTimelineItem-root MuiTimelineItem-alignLeft makeStyles-item-877 MuiTimelineItem-missingOppositeContent"
+        className="MuiTimelineItem-root MuiTimelineItem-alignLeft makeStyles-item-897 MuiTimelineItem-missingOppositeContent"
       >
         <div
-          className="MuiTimelineSeparator-root makeStyles-separator-886"
+          className="MuiTimelineSeparator-root makeStyles-separator-906"
         >
           <span
-            className="MuiTimelineDot-root makeStyles-dot-885 MuiTimelineDot-defaultGrey"
+            className="MuiTimelineDot-root makeStyles-dot-905 MuiTimelineDot-defaultGrey"
           />
           <span
-            className="MuiTimelineConnector-root makeStyles-connector-882 makeStyles-firstConnector-883"
+            className="MuiTimelineConnector-root makeStyles-connector-902 makeStyles-firstConnector-903"
           />
         </div>
         <div
           className="MuiTimelineContent-root MuiTimelineItem-content"
         >
           <div
-            className="MuiGrid-root makeStyles-content-879 makeStyles-content-915 MuiGrid-container MuiGrid-wrap-xs-nowrap"
+            className="MuiGrid-root makeStyles-content-899 makeStyles-content-935 MuiGrid-container MuiGrid-wrap-xs-nowrap"
           >
             <div
-              className="MuiGrid-root makeStyles-number-887 MuiGrid-item"
+              className="MuiGrid-root makeStyles-number-907 MuiGrid-item"
             >
               1
             </div>
             <div
-              className="MuiGrid-root makeStyles-text-889 MuiGrid-item"
+              className="MuiGrid-root makeStyles-text-909 MuiGrid-item"
             >
               <h3
-                className="MuiTypography-root makeStyles-root-895 makeStyles-title-888 MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+                className="MuiTypography-root makeStyles-root-915 makeStyles-title-908 MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
               >
                 Register project
               </h3>
               <div
-                className="makeStyles-tags-880"
+                className="makeStyles-tags-900"
               >
                 <span
-                  className="makeStyles-tag-881 makeStyles-tag-918"
+                  className="makeStyles-tag-901 makeStyles-tag-938"
                 >
                   farmer
                 </span>
@@ -6611,47 +6504,47 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
         </div>
       </li>
       <li
-        className="MuiTimelineItem-root MuiTimelineItem-alignLeft makeStyles-item-877 MuiTimelineItem-missingOppositeContent"
+        className="MuiTimelineItem-root MuiTimelineItem-alignLeft makeStyles-item-897 MuiTimelineItem-missingOppositeContent"
       >
         <div
-          className="MuiTimelineSeparator-root makeStyles-separator-886"
+          className="MuiTimelineSeparator-root makeStyles-separator-906"
         >
           <span
-            className="MuiTimelineDot-root makeStyles-dot-885 MuiTimelineDot-defaultGrey"
+            className="MuiTimelineDot-root makeStyles-dot-905 MuiTimelineDot-defaultGrey"
           />
           <span
-            className="MuiTimelineConnector-root makeStyles-connector-882"
+            className="MuiTimelineConnector-root makeStyles-connector-902"
           />
         </div>
         <div
           className="MuiTimelineContent-root MuiTimelineItem-content"
         >
           <div
-            className="MuiGrid-root makeStyles-content-879 makeStyles-content-919 MuiGrid-container MuiGrid-wrap-xs-nowrap"
+            className="MuiGrid-root makeStyles-content-899 makeStyles-content-939 MuiGrid-container MuiGrid-wrap-xs-nowrap"
           >
             <div
-              className="MuiGrid-root makeStyles-number-887 MuiGrid-item"
+              className="MuiGrid-root makeStyles-number-907 MuiGrid-item"
             >
               2
             </div>
             <div
-              className="MuiGrid-root makeStyles-text-889 MuiGrid-item"
+              className="MuiGrid-root makeStyles-text-909 MuiGrid-item"
             >
               <h3
-                className="MuiTypography-root makeStyles-root-895 makeStyles-title-888 MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+                className="MuiTypography-root makeStyles-root-915 makeStyles-title-908 MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
               >
                 Establish timeline
               </h3>
               <div
-                className="makeStyles-tags-880"
+                className="makeStyles-tags-900"
               >
                 <span
-                  className="makeStyles-tag-881 makeStyles-tag-922"
+                  className="makeStyles-tag-901 makeStyles-tag-942"
                 >
                   monitor
                 </span>
                 <span
-                  className="makeStyles-tag-881 makeStyles-tag-924"
+                  className="makeStyles-tag-901 makeStyles-tag-944"
                 >
                   farmer
                 </span>
@@ -6661,47 +6554,47 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
         </div>
       </li>
       <li
-        className="MuiTimelineItem-root MuiTimelineItem-alignLeft makeStyles-item-877 MuiTimelineItem-missingOppositeContent"
+        className="MuiTimelineItem-root MuiTimelineItem-alignLeft makeStyles-item-897 MuiTimelineItem-missingOppositeContent"
       >
         <div
-          className="MuiTimelineSeparator-root makeStyles-separator-886"
+          className="MuiTimelineSeparator-root makeStyles-separator-906"
         >
           <span
-            className="MuiTimelineDot-root makeStyles-dot-885 MuiTimelineDot-defaultGrey"
+            className="MuiTimelineDot-root makeStyles-dot-905 MuiTimelineDot-defaultGrey"
           />
           <span
-            className="MuiTimelineConnector-root makeStyles-connector-882"
+            className="MuiTimelineConnector-root makeStyles-connector-902"
           />
         </div>
         <div
           className="MuiTimelineContent-root MuiTimelineItem-content"
         >
           <div
-            className="MuiGrid-root makeStyles-content-879 makeStyles-content-925 MuiGrid-container MuiGrid-wrap-xs-nowrap"
+            className="MuiGrid-root makeStyles-content-899 makeStyles-content-945 MuiGrid-container MuiGrid-wrap-xs-nowrap"
           >
             <div
-              className="MuiGrid-root makeStyles-number-887 MuiGrid-item"
+              className="MuiGrid-root makeStyles-number-907 MuiGrid-item"
             >
               3
             </div>
             <div
-              className="MuiGrid-root makeStyles-text-889 MuiGrid-item"
+              className="MuiGrid-root makeStyles-text-909 MuiGrid-item"
             >
               <h3
-                className="MuiTypography-root makeStyles-root-895 makeStyles-title-888 MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+                className="MuiTypography-root makeStyles-root-915 makeStyles-title-908 MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
               >
                 Lorem ipsum 1
               </h3>
               <div
-                className="makeStyles-tags-880"
+                className="makeStyles-tags-900"
               >
                 <span
-                  className="makeStyles-tag-881 makeStyles-tag-928"
+                  className="makeStyles-tag-901 makeStyles-tag-948"
                 >
                   monitor
                 </span>
                 <span
-                  className="makeStyles-tag-881 makeStyles-tag-930"
+                  className="makeStyles-tag-901 makeStyles-tag-950"
                 >
                   farmer
                 </span>
@@ -6711,42 +6604,42 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
         </div>
       </li>
       <li
-        className="MuiTimelineItem-root MuiTimelineItem-alignLeft makeStyles-item-877 MuiTimelineItem-missingOppositeContent"
+        className="MuiTimelineItem-root MuiTimelineItem-alignLeft makeStyles-item-897 MuiTimelineItem-missingOppositeContent"
       >
         <div
-          className="MuiTimelineSeparator-root makeStyles-separator-886"
+          className="MuiTimelineSeparator-root makeStyles-separator-906"
         >
           <span
-            className="MuiTimelineDot-root makeStyles-dot-885 MuiTimelineDot-defaultGrey"
+            className="MuiTimelineDot-root makeStyles-dot-905 MuiTimelineDot-defaultGrey"
           />
           <span
-            className="MuiTimelineConnector-root makeStyles-connector-882 makeStyles-lastConnector-884"
+            className="MuiTimelineConnector-root makeStyles-connector-902 makeStyles-lastConnector-904"
           />
         </div>
         <div
           className="MuiTimelineContent-root MuiTimelineItem-content"
         >
           <div
-            className="MuiGrid-root makeStyles-content-879 makeStyles-content-931 MuiGrid-container MuiGrid-wrap-xs-nowrap"
+            className="MuiGrid-root makeStyles-content-899 makeStyles-content-951 MuiGrid-container MuiGrid-wrap-xs-nowrap"
           >
             <div
-              className="MuiGrid-root makeStyles-number-887 MuiGrid-item"
+              className="MuiGrid-root makeStyles-number-907 MuiGrid-item"
             >
               4
             </div>
             <div
-              className="MuiGrid-root makeStyles-text-889 MuiGrid-item"
+              className="MuiGrid-root makeStyles-text-909 MuiGrid-item"
             >
               <h3
-                className="MuiTypography-root makeStyles-root-895 makeStyles-title-888 MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+                className="MuiTypography-root makeStyles-root-915 makeStyles-title-908 MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
               >
                 Lorem ipsum 2
               </h3>
               <div
-                className="makeStyles-tags-880"
+                className="makeStyles-tags-900"
               >
                 <span
-                  className="makeStyles-tag-881 makeStyles-tag-934"
+                  className="makeStyles-tag-901 makeStyles-tag-954"
                 >
                   monitor
                 </span>
@@ -6763,150 +6656,150 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
 exports[`Storyshots Components|Timeline Timeline 1`] = `
 <div>
   <div
-    className="makeStyles-root-773"
+    className="makeStyles-root-793"
   >
     <div
-      className="makeStyles-item-774"
+      className="makeStyles-item-794"
     >
       <div
-        className="makeStyles-content-775 makeStyles-content-781"
+        className="makeStyles-content-795 makeStyles-content-801"
       >
         <div
-          className="makeStyles-date-776"
+          className="makeStyles-date-796"
         >
           September 2, 2019
         </div>
         <h5
-          className="MuiTypography-root makeStyles-root-784 makeStyles-title-780 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+          className="MuiTypography-root makeStyles-root-804 makeStyles-title-800 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
         >
           Project starts
         </h5>
         <div
-          className="makeStyles-description-777"
+          className="makeStyles-description-797"
         >
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
         </div>
         <span
-          className="makeStyles-circle-779 makeStyles-circle-783"
+          className="makeStyles-circle-799 makeStyles-circle-803"
         />
         <div
-          className="makeStyles-bar-778 makeStyles-bar-782"
+          className="makeStyles-bar-798 makeStyles-bar-802"
         />
       </div>
     </div>
     <div
-      className="makeStyles-item-774"
+      className="makeStyles-item-794"
     >
       <div
-        className="makeStyles-content-775 makeStyles-content-785"
+        className="makeStyles-content-795 makeStyles-content-805"
       >
         <div
-          className="makeStyles-date-776"
+          className="makeStyles-date-796"
         >
           October 21, 2019
         </div>
         <h5
-          className="MuiTypography-root makeStyles-root-784 makeStyles-title-780 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+          className="MuiTypography-root makeStyles-root-804 makeStyles-title-800 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
         >
           Approval complete
         </h5>
         <div
-          className="makeStyles-description-777"
+          className="makeStyles-description-797"
         >
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
         </div>
         <span
-          className="makeStyles-circle-779 makeStyles-circle-787"
+          className="makeStyles-circle-799 makeStyles-circle-807"
         />
         <div
-          className="makeStyles-bar-778 makeStyles-bar-786"
+          className="makeStyles-bar-798 makeStyles-bar-806"
         />
       </div>
     </div>
     <div
-      className="makeStyles-item-774"
+      className="makeStyles-item-794"
     >
       <div
-        className="makeStyles-content-775 makeStyles-content-788"
+        className="makeStyles-content-795 makeStyles-content-808"
       >
         <div
-          className="makeStyles-date-776"
+          className="makeStyles-date-796"
         >
           February 20, 2020
         </div>
         <h5
-          className="MuiTypography-root makeStyles-root-784 makeStyles-title-780 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+          className="MuiTypography-root makeStyles-root-804 makeStyles-title-800 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
         >
           Credits issued
         </h5>
         <div
-          className="makeStyles-description-777"
+          className="makeStyles-description-797"
         >
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
         </div>
         <span
-          className="makeStyles-circle-779 makeStyles-circle-790"
+          className="makeStyles-circle-799 makeStyles-circle-810"
         />
         <div
-          className="makeStyles-bar-778 makeStyles-bar-789"
+          className="makeStyles-bar-798 makeStyles-bar-809"
         />
       </div>
     </div>
     <div
-      className="makeStyles-item-774"
+      className="makeStyles-item-794"
     >
       <div
-        className="makeStyles-content-775 makeStyles-content-791"
+        className="makeStyles-content-795 makeStyles-content-811"
       >
         <div
-          className="makeStyles-date-776"
+          className="makeStyles-date-796"
         >
           September 2022
         </div>
         <h5
-          className="MuiTypography-root makeStyles-root-784 makeStyles-title-780 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+          className="MuiTypography-root makeStyles-root-804 makeStyles-title-800 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
         >
           Site visit
         </h5>
         <div
-          className="makeStyles-description-777"
+          className="makeStyles-description-797"
         >
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
         </div>
         <span
-          className="makeStyles-circle-779 makeStyles-circle-793"
+          className="makeStyles-circle-799 makeStyles-circle-813"
         />
         <div
-          className="makeStyles-bar-778 makeStyles-bar-792"
+          className="makeStyles-bar-798 makeStyles-bar-812"
         />
       </div>
     </div>
     <div
-      className="makeStyles-item-774"
+      className="makeStyles-item-794"
     >
       <div
-        className="makeStyles-content-775 makeStyles-content-794"
+        className="makeStyles-content-795 makeStyles-content-814"
       >
         <div
-          className="makeStyles-date-776"
+          className="makeStyles-date-796"
         >
           February 2029
         </div>
         <h5
-          className="MuiTypography-root makeStyles-root-784 makeStyles-title-780 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+          className="MuiTypography-root makeStyles-root-804 makeStyles-title-800 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
         >
           Project completion
         </h5>
         <div
-          className="makeStyles-description-777"
+          className="makeStyles-description-797"
         >
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
         </div>
         <span
-          className="makeStyles-circle-779 makeStyles-circle-796"
+          className="makeStyles-circle-799 makeStyles-circle-816"
         />
         <div
-          className="makeStyles-bar-778 makeStyles-bar-795"
+          className="makeStyles-bar-798 makeStyles-bar-815"
         />
       </div>
     </div>
@@ -6917,28 +6810,28 @@ exports[`Storyshots Components|Timeline Timeline 1`] = `
 exports[`Storyshots Components|Timeline Timeline Item 1`] = `
 <div>
   <div
-    className="makeStyles-content-807 makeStyles-content-813"
+    className="makeStyles-content-827 makeStyles-content-833"
   >
     <div
-      className="makeStyles-date-808"
+      className="makeStyles-date-828"
     >
       September 2, 2019
     </div>
     <h5
-      className="MuiTypography-root makeStyles-root-816 makeStyles-title-812 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+      className="MuiTypography-root makeStyles-root-836 makeStyles-title-832 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
     >
       Project starts
     </h5>
     <div
-      className="makeStyles-description-809"
+      className="makeStyles-description-829"
     >
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
     </div>
     <span
-      className="makeStyles-circle-811 makeStyles-circle-815"
+      className="makeStyles-circle-831 makeStyles-circle-835"
     />
     <div
-      className="makeStyles-bar-810 makeStyles-bar-814"
+      className="makeStyles-bar-830 makeStyles-bar-834"
     />
   </div>
 </div>
@@ -6947,7 +6840,7 @@ exports[`Storyshots Components|Timeline Timeline Item 1`] = `
 exports[`Storyshots Components|Title Main Title 1`] = `
 <div>
   <h1
-    className="MuiTypography-root makeStyles-root-936 undefined MuiTypography-h1 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+    className="MuiTypography-root makeStyles-root-956 undefined MuiTypography-h1 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
   >
     Sheok Hill
   </h1>
@@ -6957,7 +6850,7 @@ exports[`Storyshots Components|Title Main Title 1`] = `
 exports[`Storyshots Components|Title Subtitle 1`] = `
 <div>
   <h2
-    className="MuiTypography-root makeStyles-root-938 undefined MuiTypography-h2 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+    className="MuiTypography-root makeStyles-root-958 undefined MuiTypography-h2 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
   >
     Ecological Practices
   </h2>
@@ -6967,7 +6860,7 @@ exports[`Storyshots Components|Title Subtitle 1`] = `
 exports[`Storyshots Components|Title Title 1`] = `
 <div>
   <h1
-    className="MuiTypography-root makeStyles-root-940 undefined MuiTypography-h1 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+    className="MuiTypography-root makeStyles-root-960 undefined MuiTypography-h1 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
   >
     Ecological Practices
   </h1>
@@ -6977,7 +6870,7 @@ exports[`Storyshots Components|Title Title 1`] = `
 exports[`Storyshots Components|TitleDescription Description 1`] = `
 <div>
   <div
-    className="MuiTypography-root makeStyles-root-943 makeStyles-root-944 MuiTypography-body1"
+    className="MuiTypography-root makeStyles-root-963 makeStyles-root-964 MuiTypography-body1"
     description="Regen Network is empowering an open community of scientists to build and deploy cutting edge methodologies to measure ecological health and make scientifically robust claims.&lt;br&gt;Earth observation science, landscape ecology, and our ability to understand complex ecological systems is undergoing a technological revolution. Regen Network in the vanguard of this movement to make climate science available to the people and markets who need it most. Join us in service of better decision-making, better markets, and collective action on climate."
     title="Measuring Ecological Health"
   />
@@ -7011,7 +6904,7 @@ exports[`Storyshots Components|Tooltip Main Title 1`] = `
 exports[`Storyshots Components|User Big User Avatar 1`] = `
 <div>
   <div
-    className="MuiAvatar-root MuiAvatar-circle makeStyles-root-959 makeStyles-root-960"
+    className="MuiAvatar-root MuiAvatar-circle makeStyles-root-979 makeStyles-root-980"
   >
     <img
       alt="Odonata"
@@ -7023,6 +6916,121 @@ exports[`Storyshots Components|User Big User Avatar 1`] = `
 `;
 
 exports[`Storyshots Components|User Big User Info 1`] = `
+<div>
+  <div
+    className="MuiGrid-root MuiGrid-container MuiGrid-wrap-xs-nowrap"
+  >
+    <div
+      className="MuiGrid-root MuiGrid-item"
+    >
+      <div
+        className="MuiAvatar-root MuiAvatar-circle makeStyles-root-1027 makeStyles-root-1028"
+      >
+        <img
+          alt="Odonata"
+          className="MuiAvatar-img"
+          src="http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png"
+        />
+      </div>
+    </div>
+    <div
+      className="MuiGrid-root makeStyles-text-1019 makeStyles-text-1024 MuiGrid-item"
+    >
+      <p
+        className="MuiTypography-root makeStyles-name-1020 makeStyles-name-1025 MuiTypography-body1"
+      >
+        Odonata
+      </p>
+      <p
+        className="MuiTypography-root makeStyles-place-1023 makeStyles-place-1026 MuiTypography-body1"
+      >
+        South Melbourne, Victoria, Australia
+      </p>
+      <p
+        className="MuiTypography-root makeStyles-description-1022 MuiTypography-body1"
+      >
+        Odonata is a not-for-profit entity supporting biodiversity impact solutions.
+      </p>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components|User Column User Info 1`] = `
+<div>
+  <div
+    className="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-column MuiGrid-wrap-xs-nowrap"
+  >
+    <div
+      className="MuiGrid-root MuiGrid-item"
+    >
+      <div
+        className="MuiAvatar-root MuiAvatar-circle makeStyles-root-1047 makeStyles-root-1048"
+      >
+        <img
+          alt="Odonata"
+          className="MuiAvatar-img"
+          src="http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png"
+        />
+      </div>
+    </div>
+    <div
+      className="MuiGrid-root makeStyles-text-1039 makeStyles-text-1044 MuiGrid-item"
+    >
+      <p
+        className="MuiTypography-root makeStyles-name-1040 makeStyles-name-1045 MuiTypography-body1"
+      >
+        Odonata
+      </p>
+      <p
+        className="MuiTypography-root makeStyles-place-1043 makeStyles-place-1046 MuiTypography-body1"
+      >
+        South Melbourne, Victoria, Australia
+      </p>
+      <p
+        className="MuiTypography-root makeStyles-description-1042 MuiTypography-body1"
+      >
+        Odonata is a not-for-profit entity supporting biodiversity impact solutions.
+      </p>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components|User Fallback User Avatar 1`] = `
+<div>
+  <div
+    className="MuiAvatar-root MuiAvatar-circle makeStyles-root-987 makeStyles-root-988 MuiAvatar-colorDefault"
+  >
+    <svg
+      aria-hidden={true}
+      className="MuiSvgIcon-root MuiAvatar-fallback"
+      focusable="false"
+      viewBox="0 0 24 24"
+    >
+      <path
+        d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
+      />
+    </svg>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components|User Medium User Avatar 1`] = `
+<div>
+  <div
+    className="MuiAvatar-root MuiAvatar-circle makeStyles-root-975 makeStyles-root-976"
+  >
+    <img
+      alt="Odonata"
+      className="MuiAvatar-img"
+      src="http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png"
+    />
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components|User Medium User Info 1`] = `
 <div>
   <div
     className="MuiGrid-root MuiGrid-container MuiGrid-wrap-xs-nowrap"
@@ -7063,121 +7071,6 @@ exports[`Storyshots Components|User Big User Info 1`] = `
 </div>
 `;
 
-exports[`Storyshots Components|User Column User Info 1`] = `
-<div>
-  <div
-    className="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-column MuiGrid-wrap-xs-nowrap"
-  >
-    <div
-      className="MuiGrid-root MuiGrid-item"
-    >
-      <div
-        className="MuiAvatar-root MuiAvatar-circle makeStyles-root-1027 makeStyles-root-1028"
-      >
-        <img
-          alt="Odonata"
-          className="MuiAvatar-img"
-          src="http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png"
-        />
-      </div>
-    </div>
-    <div
-      className="MuiGrid-root makeStyles-text-1019 makeStyles-text-1024 MuiGrid-item"
-    >
-      <p
-        className="MuiTypography-root makeStyles-name-1020 makeStyles-name-1025 MuiTypography-body1"
-      >
-        Odonata
-      </p>
-      <p
-        className="MuiTypography-root makeStyles-place-1023 makeStyles-place-1026 MuiTypography-body1"
-      >
-        South Melbourne, Victoria, Australia
-      </p>
-      <p
-        className="MuiTypography-root makeStyles-description-1022 MuiTypography-body1"
-      >
-        Odonata is a not-for-profit entity supporting biodiversity impact solutions.
-      </p>
-    </div>
-  </div>
-</div>
-`;
-
-exports[`Storyshots Components|User Fallback User Avatar 1`] = `
-<div>
-  <div
-    className="MuiAvatar-root MuiAvatar-circle makeStyles-root-967 makeStyles-root-968 MuiAvatar-colorDefault"
-  >
-    <svg
-      aria-hidden={true}
-      className="MuiSvgIcon-root MuiAvatar-fallback"
-      focusable="false"
-      viewBox="0 0 24 24"
-    >
-      <path
-        d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
-      />
-    </svg>
-  </div>
-</div>
-`;
-
-exports[`Storyshots Components|User Medium User Avatar 1`] = `
-<div>
-  <div
-    className="MuiAvatar-root MuiAvatar-circle makeStyles-root-955 makeStyles-root-956"
-  >
-    <img
-      alt="Odonata"
-      className="MuiAvatar-img"
-      src="http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png"
-    />
-  </div>
-</div>
-`;
-
-exports[`Storyshots Components|User Medium User Info 1`] = `
-<div>
-  <div
-    className="MuiGrid-root MuiGrid-container MuiGrid-wrap-xs-nowrap"
-  >
-    <div
-      className="MuiGrid-root MuiGrid-item"
-    >
-      <div
-        className="MuiAvatar-root MuiAvatar-circle makeStyles-root-987 makeStyles-root-988"
-      >
-        <img
-          alt="Odonata"
-          className="MuiAvatar-img"
-          src="http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png"
-        />
-      </div>
-    </div>
-    <div
-      className="MuiGrid-root makeStyles-text-979 makeStyles-text-984 MuiGrid-item"
-    >
-      <p
-        className="MuiTypography-root makeStyles-name-980 makeStyles-name-985 MuiTypography-body1"
-      >
-        Odonata
-      </p>
-      <p
-        className="MuiTypography-root makeStyles-place-983 makeStyles-place-986 MuiTypography-body1"
-      >
-        South Melbourne, Victoria, Australia
-      </p>
-      <p
-        className="MuiTypography-root makeStyles-description-982 MuiTypography-body1"
-      >
-        Odonata is a not-for-profit entity supporting biodiversity impact solutions.
-      </p>
-    </div>
-  </div>
-</div>
-`;
-
 exports[`Storyshots Components|User User Avatar With Link 1`] = `
 <div>
   <a
@@ -7186,7 +7079,7 @@ exports[`Storyshots Components|User User Avatar With Link 1`] = `
     target="_blank"
   >
     <div
-      className="MuiAvatar-root MuiAvatar-circle makeStyles-root-963 makeStyles-root-964"
+      className="MuiAvatar-root MuiAvatar-circle makeStyles-root-983 makeStyles-root-984"
     >
       <img
         alt="Odonata"
@@ -7202,7 +7095,7 @@ exports[`Storyshots Components|User With Title 1`] = `
 <div>
   <div>
     <p
-      className="MuiTypography-root makeStyles-title-1040 MuiTypography-body1"
+      className="MuiTypography-root makeStyles-title-1060 MuiTypography-body1"
     >
       project developer
     </p>
@@ -7213,7 +7106,7 @@ exports[`Storyshots Components|User With Title 1`] = `
         className="MuiGrid-root MuiGrid-item"
       >
         <div
-          className="MuiAvatar-root MuiAvatar-circle makeStyles-root-1049 makeStyles-root-1050"
+          className="MuiAvatar-root MuiAvatar-circle makeStyles-root-1069 makeStyles-root-1070"
         >
           <img
             alt="Odonata"
@@ -7223,20 +7116,20 @@ exports[`Storyshots Components|User With Title 1`] = `
         </div>
       </div>
       <div
-        className="MuiGrid-root makeStyles-text-1041 makeStyles-text-1046 MuiGrid-item"
+        className="MuiGrid-root makeStyles-text-1061 makeStyles-text-1066 MuiGrid-item"
       >
         <p
-          className="MuiTypography-root makeStyles-name-1042 makeStyles-name-1047 MuiTypography-body1"
+          className="MuiTypography-root makeStyles-name-1062 makeStyles-name-1067 MuiTypography-body1"
         >
           Odonata
         </p>
         <p
-          className="MuiTypography-root makeStyles-place-1045 makeStyles-place-1048 MuiTypography-body1"
+          className="MuiTypography-root makeStyles-place-1065 makeStyles-place-1068 MuiTypography-body1"
         >
           South Melbourne, Victoria, Australia
         </p>
         <p
-          className="MuiTypography-root makeStyles-description-1044 MuiTypography-body1"
+          className="MuiTypography-root makeStyles-description-1064 MuiTypography-body1"
         >
           Odonata is a not-for-profit entity supporting biodiversity impact solutions.
         </p>

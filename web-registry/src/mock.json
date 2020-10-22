@@ -62,7 +62,7 @@
           "title": "Co-benefits"
         }
       },
-      "glanceImgSrc": "impactag-smallmap-top-v3.jpg",
+      "glanceImgSrc": "https://regen-registry.s3.amazonaws.com/projects/wilmot/impactag-smallmap-top-v3.jpg",
       "glanceText": [
         "Increased soil organic carbon to 4.5%.",
         "Improved co-benefits significantly with Soil Health ranking as excellent, Ecosystem Health as good, and Animal Welfare as excellent."
@@ -87,7 +87,7 @@
           "state": "New South Wales",
           "country": "Australia"
         },
-        "imgSrc": "impactag.jpg",
+        "imgSrc": "https://regen-registry.s3.amazonaws.com/projects/wilmot/impactag.jpg",
         "description": "Impact Ag utilises a variety of pathways and partners to measure and monitise natural capital on assets under management or advisory."
       },
       "steward": {
@@ -97,32 +97,45 @@
           "state": "New South Wales",
           "country": "Australia"
         },
-        "imgSrc": "wilmot.jpg",
+        "imgSrc": "https://regen-registry.s3.amazonaws.com/projects/wilmot/wilmot.jpg",
         "description": "Wilmot Cattle Company is an innovative, regenerative, grass-fed beef business."
       },
-      "shortDescription": "Wilmot Cattle Co currently operates two properties, Wilmot and Woodburn. The two properties operate cooperatively with a mix of breeding, trading, and 100% natural grass finishing enterprises.",
-      "longDescription": "Wilmot is located high in the New England Tablelands in Ebor, Australia. At approximately 1,200 meters above sea level, the 1,854 hectare property has an average annual rainfall of 1,200 mm, highly fertile volcanic basalt soils, pristine spring fed, year-round natural waterways, including five waterfalls. It is a unique environment for growing cattle.\n\nPrior to the commencement of Wilmot Cattle Company operations in 2008, the property had been conventionally managed. In 2013, a property transformation began, adopting regenerative and holistic management practices and resulting in significant gains in the overall ecological health of the farm.\n\nToday the property is managed in an intensive rotationally-grazed system with small numbers of large mobs moving across the landscape, mimicking nature, to create ecological change and improve landscape health and biological function. At shovel depth, our soil organic carbon (SOC) has improved from ~2.5% to >4.5%, with a goal of getting it to >6% by 2023.",
+      "tagline": "Stuart Austin & Trisha Cowley have managed the Wilmot Farmot since 2016",
+      "quote": {
+        "text": "We love getting the opportunity to manage cattle in a truly holistic and regenerative way.",
+        "person": {
+          "name": "stuart austin",
+          "role": "Wilmot General Manager"
+        }
+      },
+      "shortDescription": "Wilmot is an extraordinary property high in the New England Tablelands at Ebor. Set on 1,854ha and at approximately 1,200m above sea level, average annual rainfall of 1,200mm, highly fertile volcanic basalt soils, and complimented by a series of pristine spring fed, year-round natural waterways including five waterfalls, it is quite simply a unique environment for growing cattle.",
+      "longDescription": "<p>Stu & Trish are the management team behind Wilmot Cattle Co and are driven by the exciting ecological opportunities they can foresee for the business. They have a wholehearted belief in regenerative agriculture and the benefits it will bring to the industry globally, as we collectively work to heal what has largely become a degraded landscape. They having a burning desire to succeed in agriculture and are very ambitious in the growth and development plans they have for Wilmot Cattle Co.</p><p>While Stu has managed the day to day operations of Wilmot since 2016, and now presides over the portfolio of all three properties in a General Manager capacity, Trish works tirelessly behind the scenes ensuring a high level of rigour around the data collection, management, and analysis of every aspect of the business. They firmly believe that you cannot manage what you don’t measure and as such, the integrity of the data is paramount.</p><p>In their spare time they enjoy exploring the natural wonders of Wilmot, including its five waterfalls and large areas of virtually native bushland, with their two kids Harry and Poppy. They all gain great satisfaction from discovering new species of plants and learning about their role in the ecosystem.</p>",
       "media": [
         {
           "src": "Wilmot5.jpg",
-          "thumbnail": "Wilmot5-thumbnail.jpg"
+          "thumbnail": "Wilmot5-thumbnail.jpg",
+          "type": "image"
         },
         {
           "src": "Wilmot3.jpg",
-          "thumbnail": "Wilmot3-thumbnail.jpg"
+          "thumbnail": "Wilmot3-thumbnail.jpg",
+          "type": "image"
         },
         {
           "src": "Wilmot4.jpg",
-          "thumbnail": "Wilmot4-thumbnail.jpg"
+          "thumbnail": "Wilmot4-thumbnail.jpg",
+          "type": "image"
         },
         {
           "src": "Wilmot6.jpg",
-          "thumbnail": "Wilmot6-thumbnail.jpg"
+          "thumbnail": "Wilmot6-thumbnail.jpg",
+          "type": "image"
         },
         {
           "src": "https://regen-registry.s3.amazonaws.com/Wilmot+Video.mp4",
           "thumbnail": "Wilmot2-thumbnail.jpg",
-          "preview": "Wilmot2.jpg"
+          "preview": "https://regen-registry.s3.amazonaws.com/projects/wilmot/video-preview.png",
+          "type": "video"
         }
       ],
       "image": "wilmotcattlecompany.jpg",
@@ -201,8 +214,7 @@
       "credits": {
         "purchased": 0,
         "issued": 0
-      },
-      "hideCreditDetails": false
+      }
     }
   ]
 }

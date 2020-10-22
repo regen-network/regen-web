@@ -7,26 +7,20 @@ import { setPageView } from '../lib/ga';
 
 import background from '../assets/background.jpg';
 import { Project, Impact, ProjectDefault, ActionGroup } from '../mocks';
+import ProjectTop from './sections/ProjectTop';
 
 import { getFontSize } from 'web-components/lib/theme/sizing';
 import Title from 'web-components/lib/components/title';
-import ProjectPlaceInfo from 'web-components/lib/components/place/ProjectPlaceInfo';
-import ProjectDeveloperCard from 'web-components/lib/components/cards/ProjectDeveloperCard';
 import ImpactCard from 'web-components/lib/components/cards/ImpactCard';
-import GlanceCard from 'web-components/lib/components/cards/GlanceCard';
 import Description from 'web-components/lib/components/description';
-// import Action from 'web-components/lib/components/action';
 import Timeline from 'web-components/lib/components/timeline';
-import ReadMore from 'web-components/lib/components/read-more';
 import CreditDetails from 'web-components/lib/components/credits/CreditDetails';
-import CreditsGauge from 'web-components/lib/components/credits/CreditsGauge';
 import ProtectedSpecies from 'web-components/lib/components/sliders/ProtectedSpecies';
 import NonMonitoredImpact from 'web-components/lib/components/sliders/NonMonitoredImpact';
 import LandManagementActions from 'web-components/lib/components/sliders/LandManagementActions';
-import ProjectMedia, { Media } from 'web-components/lib/components/sliders/ProjectMedia';
+// import ProjectMedia, { Media } from 'web-components/lib/components/sliders/ProjectMedia';
 import Map from 'web-components/lib/components/map';
 import { ItemProps as ProtectedSpeciesItem } from 'web-components/lib/components/sliders/Item';
-import { User } from 'web-components/lib/components/user/UserInfo';
 import BuyFooter from 'web-components/lib/components/fixed-footer/BuyFooter';
 import MrvTabs from 'web-components/lib/components/tabs';
 import Table from 'web-components/lib/components/table';
@@ -47,18 +41,9 @@ const useStyles = makeStyles((theme: Theme) => ({
       width: '100%',
     },
   },
-  projectTop: {
-    backgroundSize: 'cover',
-    borderBottom: `1px solid ${theme.palette.grey[100]}`,
-  },
   projectContent: {
     maxWidth: theme.breakpoints.values.lg,
     margin: '0 auto',
-  },
-  projectTopImage: {
-    [theme.breakpoints.up('sm')]: {
-      borderRadius: '5px',
-    },
   },
   projectTopContent: {
     [theme.breakpoints.up('md')]: {
@@ -74,49 +59,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingRight: theme.spacing(5),
       paddingLeft: theme.spacing(5),
     },
-  },
-  projectTopText: {
-    [theme.breakpoints.up('sm')]: {
-      paddingLeft: theme.spacing(7.5),
-    },
-    [theme.breakpoints.down('xs')]: {
-      padding: `${theme.spacing(4.5)} ${theme.spacing(3.75)} ${theme.spacing(13)}`,
-    },
-  },
-  projectPlace: {
-    marginTop: theme.spacing(2.75),
-    marginBottom: theme.spacing(2.75),
-  },
-  projectDeveloper: {
-    [theme.breakpoints.up('sm')]: {
-      marginTop: theme.spacing(6.5),
-      paddingLeft: theme.spacing(7.5),
-    },
-    [theme.breakpoints.down('xs')]: {
-      marginTop: theme.spacing(4),
-    },
-  },
-  projectStory: {
-    '& h3': {
-      [theme.breakpoints.up('sm')]: {
-        marginBottom: theme.spacing(5),
-      },
-      [theme.breakpoints.down('xs')]: {
-        marginBottom: theme.spacing(3.75),
-      },
-    },
-    [theme.breakpoints.up('sm')]: {
-      paddingRight: theme.spacing(7.5),
-    },
-    // [theme.breakpoints.up('md')]: {
-    //   padding: `${theme.spacing(17.25)} ${theme.spacing(60)}`,
-    // },
-    // [theme.breakpoints.down('sm')]: {
-    //   padding: `${theme.spacing(17.25)} ${theme.spacing(22)}`,
-    // },
-    // [theme.breakpoints.down('xs')]: {
-    //   padding: `${theme.spacing(11)} ${theme.spacing(3.75)}`,
-    // },
   },
   projectDetails: {
     [theme.breakpoints.up('xl')]: {
@@ -280,19 +222,6 @@ interface ProjectProps {
   projectDefault: ProjectDefault;
 }
 
-function getProjectUser(projectUser: User): User {
-  const user: User = {
-    name: projectUser.name,
-    description: projectUser.description,
-    place: projectUser.place,
-    type: projectUser.type,
-  };
-  if (projectUser.imgSrc) {
-    user.imgSrc = getImgSrc(projectUser.imgSrc);
-  }
-  return user;
-}
-
 export default function ProjectDetails({ project, projectDefault }: ProjectProps): JSX.Element {
   const [submitted, setSubmitted] = useState(false);
   const location = useLocation();
@@ -319,19 +248,6 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
       name: item.name,
       imgSrc: getImgSrc(item.imgSrc),
     }));
-  }
-
-  const assets: Media[] = project.media.map(item => ({
-    src: getImgSrc(item.src),
-    thumbnail: getImgSrc(item.thumbnail),
-    preview: getImgSrc(item.preview),
-  }));
-
-  const projectDeveloper: User = getProjectUser(project.developer);
-  const landSteward: User = getProjectUser(project.steward);
-  let landOwner: any;
-  if (project.owner) {
-    landOwner = getProjectUser(project.owner);
   }
 
   const [geojson, setGeojson] = useState<any | null>(null);
@@ -375,58 +291,7 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
 
   return (
     <div className={classes.root}>
-      <div className={`${classes.projectTop} project-top`}>
-        <Grid container className={`${classes.projectContent} ${classes.projectTopContent}`}>
-          <Grid item xs={12} sm={7} className={classes.projectMedia}>
-            {/*<img
-              className={classes.projectTopImage}
-              alt={project.name}
-              src={require(`../assets/${project.photos[0]}`)}
-            />*/}
-            <ProjectMedia assets={assets} />
-          </Grid>
-          <Grid item xs={12} sm={5} className={classes.projectTopText}>
-            <Title variant="h1">{project.name}</Title>
-            <div className={classes.projectPlace}>
-              <ProjectPlaceInfo place={project.place} area={project.area} areaUnit={project.areaUnit} />
-            </div>
-            <Description fontSize={getFontSize('big')}>{project.shortDescription}</Description>
-            {project.credits && project.credits.issued > 0 && (
-              <div className={classes.creditsGauge}>
-                <CreditsGauge purchased={project.credits.purchased} issued={project.credits.issued} />
-              </div>
-            )}
-            {project.glanceImgSrc && project.glanceText && (
-              <div className={classes.glanceCard}>
-                <GlanceCard imgSrc={require(`../assets/${project.glanceImgSrc}`)} text={project.glanceText} />
-              </div>
-            )}
-          </Grid>
-        </Grid>
-      </div>
-
-      <div className={`${classes.projectDetails} ${classes.projectContent}`}>
-        <Grid container>
-          <Grid item xs={12} sm={7} className={classes.projectStory}>
-            <Title variant="h3">
-              {project.fieldsOverride && project.fieldsOverride.story
-                ? project.fieldsOverride.story.title
-                : projectDefault.story.title}
-            </Title>
-            <ReadMore>{project.longDescription}</ReadMore>
-          </Grid>
-          <Grid item xs={12} sm={5}>
-            <div className={classes.projectDeveloper}>
-              <ProjectDeveloperCard
-                projectDeveloper={projectDeveloper}
-                landSteward={landSteward}
-                landOwner={landOwner}
-              />
-            </div>
-          </Grid>
-        </Grid>
-      </div>
-
+      <ProjectTop project={project} projectDefault={projectDefault} />
       <Grid container className={`${classes.projectDetails} ${classes.projectContent}`}>
         {monitoredImpact && (
           <Grid item xs={12} sm={7} className={classes.monitoredImpact}>

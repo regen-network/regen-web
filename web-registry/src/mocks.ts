@@ -64,6 +64,14 @@ export interface Project {
   hideCreditDetails?: boolean;
   documents: Data[];
   stripePrice?: string;
+  tagline?: string;
+  quote?: {
+    text: string;
+    person: {
+      name: string;
+      role: string;
+    }
+  }
 }
 
 interface BasicProject {

@@ -6,7 +6,7 @@ import PlayIcon from '../icons/PlayIcon';
 export interface Media {
   src: string;
   thumbnail?: string;
-  type?: string;
+  type: string;
   preview?: string;
 }
 

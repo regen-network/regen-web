@@ -4,7 +4,7 @@ import Card from './Card';
 import UserInfoWithTitle from '../user/UserInfoWithTitle';
 import { User } from '../user/UserInfo';
 
-interface ProjectDeveloperCardProps {
+interface ProjectTopCardProps {
   projectDeveloper: User;
   landSteward?: User;
   landOwner?: User;
@@ -22,11 +22,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function ProjectDeveloperCard({
+export default function ProjectTopCard({
   projectDeveloper,
   landSteward,
   landOwner,
-}: ProjectDeveloperCardProps): JSX.Element {
+}: ProjectTopCardProps): JSX.Element {
   const classes = useStyles({});
   return (
     <Card>

@@ -180,7 +180,10 @@ export default function CreditsPurchaseForm({
     const respOK = resp && resp.status === 200;
     if (respOK) {
       const data = await resp.data;
-      const options = Object.keys(data.result).map(key => ({ value: data.result[key], label: data.result[key] }));
+      const options = Object.keys(data.result).map(key => ({
+        value: data.result[key],
+        label: data.result[key],
+      }));
       options.unshift({ value: '', label: 'Please choose a state' });
       setStateOptions(options);
     }
@@ -390,7 +393,7 @@ export default function CreditsPurchaseForm({
                 </Title>
                 <Description>
                   Please enter a location for the retirement of these credits. This prevents double counting
-                  of credits in different locations. These credits will auto-retire.
+                  of credits in different locations. Note, these credits will be retired upon purchase.
                 </Description>
                 <Field component={TextField} className={classes.cityTextField} label="City" name="city" />
                 <Grid container alignItems="center" className={classes.stateCountryGrid}>

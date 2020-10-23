@@ -40,7 +40,6 @@ import SEO from 'web-components/lib/components/seo';
 // import EmailIcon from 'web-components/lib/components/icons/EmailIcon';
 
 import { getImgSrc } from '../lib/imgSrc';
-import siteMetadata from '../siteMetadata';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -375,6 +374,13 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
       }
     />
   );
+
+  const siteMetadata = {
+    title: `${project.name} | Regen Network Registry`,
+    description: `Learn about Regen Network's ${project.creditClass.name} credits sourced from ${project.steward.name} in ${project.place.state}, ${project.place.country}.`,
+    author: `Regen Network`,
+    siteUrl: `https://www.regen.network/registry/`,
+  };
 
   return (
     <>

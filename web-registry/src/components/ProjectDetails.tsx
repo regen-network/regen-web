@@ -379,7 +379,7 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
     title: `${project.name} | Regen Network Registry`,
     description: `Learn about Regen Network's ${project.creditClass.name} credits sourced from ${project.steward.name} in ${project.place.state}, ${project.place.country}.`,
     author: `Regen Network`,
-    siteUrl: `https://www.regen.network/registry/`,
+    siteUrl: `${window.location.origin}/registry`,
   };
 
   return (

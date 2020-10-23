@@ -54,7 +54,8 @@ const useStyles = makeStyles((theme: Theme) => ({
       height: theme.spacing(19),
     },
     [theme.breakpoints.down('xs')]: {
-      height: theme.spacing(19),
+      paddingTop: theme.spacing(5),
+      paddingBottom: theme.spacing(5),
     },
     boxShadow: theme.shadows[7],
   },
@@ -111,19 +112,21 @@ const useStyles = makeStyles((theme: Theme) => ({
       minWidth: theme.spacing(33.25),
     },
     [theme.breakpoints.down('xs')]: {
-      height: theme.spacing(6),
+      height: theme.spacing(8.75),
       minWidth: theme.spacing(22),
     },
   },
   reject: {
     cursor: 'pointer',
     color: theme.palette.info.main,
-    fontSize: theme.spacing(3.5),
     [theme.breakpoints.up('sm')]: {
       paddingLeft: theme.spacing(8.5),
+      fontSize: theme.spacing(3.5),
+      display: 'inline',
     },
     [theme.breakpoints.down('xs')]: {
       paddingTop: theme.spacing(2.5),
+      fontSize: theme.spacing(3),
       textAlign: 'center',
     },
   },

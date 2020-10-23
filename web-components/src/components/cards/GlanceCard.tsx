@@ -47,6 +47,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.down('xs')]: {
       fontSize: theme.spacing(3.5),
     },
+    '& li': {
+      position: 'relative',
+    },
     '& li::before': {
       content: "'\\2022'",
       fontSize: '0.5rem',
@@ -54,6 +57,13 @@ const useStyles = makeStyles((theme: Theme) => ({
       display: 'inline-block',
       width: '1em',
       marginLeft: '-1em',
+      position: 'absolute',
+      [theme.breakpoints.up('sm')]: {
+        top: theme.spacing(2),
+      },
+      [theme.breakpoints.down('xs')]: {
+        top: theme.spacing(1.25),
+      },
     },
   },
   textContainer: {

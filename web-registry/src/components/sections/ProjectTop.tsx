@@ -85,12 +85,21 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: '100%',
     borderRadius: '5px',
     [theme.breakpoints.up('sm')]: {
-      paddingTop: theme.spacing(12.5),
-      paddingBottom: theme.spacing(12.5),
+      marginTop: theme.spacing(12.5),
+      marginBottom: theme.spacing(12.5),
     },
     [theme.breakpoints.down('xs')]: {
-      paddingTop: theme.spacing(8.5),
-      paddingBottom: theme.spacing(8.5),
+      marginTop: theme.spacing(8.5),
+      marginBottom: theme.spacing(8.5),
+    },
+  },
+  iframe: {
+    border: 'none',
+    [theme.breakpoints.up('sm')]: {
+      height: theme.spacing(109.5),
+    },
+    [theme.breakpoints.down('xs')]: {
+      height: theme.spacing(55.25),
     },
   },
   story: {
@@ -161,15 +170,11 @@ export default function ProjectTop({ project, projectDefault }: ProjectTopProps)
   const classes = useStyles();
 
   const videos: Media | Media[] | undefined = project.media.filter(item => item.type === 'video');
-  let video: Media | undefined;
-  if (videos.length > 0) {
-    video = videos[0];
-  }
 
   return (
     <Section className={classes.section}>
       <Grid container>
-        <Grid item xs={12} md={7} className={classes.rightGrid}>
+        <Grid item xs={12} md={8} className={classes.rightGrid}>
           <Title variant="h1">{project.name}</Title>
           <div className={classes.projectPlace}>
             <ProjectPlaceInfo place={project.place} area={project.area} areaUnit={project.areaUnit} />
@@ -187,11 +192,19 @@ export default function ProjectTop({ project, projectDefault }: ProjectTopProps)
           <Description className={classes.description}>
             {ReactHtmlParser(project.shortDescription)}
           </Description>
-          {videos.length > 0 && (
-            <video className={classes.video} controls poster={videos[0].preview}>
-              <source src={videos[0].src} />
-            </video>
-          )}
+          {videos.length > 0 &&
+            (/https:\/\/www.youtube.com\/embed\/[a-zA-Z0-9_.-]+/.test(videos[0].src) ? (
+              <iframe
+                className={clsx(classes.iframe, classes.video)}
+                title={project.name}
+                src={videos[0].src}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              ></iframe>
+            ) : (
+              <video className={classes.video} controls poster={videos[0].preview}>
+                <source src={videos[0].src} />
+              </video>
+            ))}
           <Title variant="h4" className={classes.tagline}>
             {project.tagline}
           </Title>
@@ -212,7 +225,7 @@ export default function ProjectTop({ project, projectDefault }: ProjectTopProps)
             </div>
           )}
         </Grid>
-        <Grid item xs={12} md={5} className={classes.leftGrid}>
+        <Grid item xs={12} md={4} className={classes.leftGrid}>
           <ProjectTopCard
             projectDeveloper={project.developer}
             landSteward={project.steward}

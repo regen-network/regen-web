@@ -13,7 +13,6 @@ interface ProjectImpactProps {
 
 const useStyles = makeStyles((theme: Theme) => ({
   section: {
-    borderBottom: `1px solid ${theme.palette.grey[100]}`,
     [theme.breakpoints.up('sm')]: {
       paddingTop: theme.spacing(21.5),
       paddingBottom: theme.spacing(27.5),
@@ -48,6 +47,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   background: {
     backgroundImage: `url(${require('../../assets/project-impact-bg.png')})`,
+    backgroundSize: 'cover',
   },
 }));
 

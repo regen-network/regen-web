@@ -36,11 +36,12 @@ interface StyleProps {
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   text: props => ({
-    marginLeft: theme.spacing(2.4),
+    marginLeft: theme.spacing(4.8),
     textAlign: props.direction === 'column' ? 'center' : 'left',
     alignSelf: 'center',
   }),
   name: props => ({
+    paddingBottom: theme.spacing(1.6),
     [theme.breakpoints.up('sm')]: {
       fontSize: getFontSize(props.size).sm,
     },
@@ -73,7 +74,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     [theme.breakpoints.down('xs')]: {
       fontSize: getFontSize('small').xs,
     },
-    paddingBottom: theme.spacing(2),
+    paddingBottom: theme.spacing(2.8),
   }),
 }));
 

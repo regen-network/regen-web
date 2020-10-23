@@ -147,7 +147,7 @@ function AppFooter(): JSX.Element {
 function AppHeader(): JSX.Element {
   const { pathname } = useLocation();
   const theme = useTheme();
-
+  const fullWidthRegExp: RegExp = /projects\/[a-z-]+/;
   const menuItems: HeaderMenuItem[] = [
     { title: 'Buyers', href: `${process.env.REACT_APP_WEBSITE_URL}/buyers/` },
     { title: 'Land Stewards', href: `${process.env.REACT_APP_WEBSITE_URL}/land-stewards/` },
@@ -169,6 +169,7 @@ function AppHeader(): JSX.Element {
       ],
     },
   ];
+
   return (
     <Header
       menuItems={menuItems}
@@ -176,6 +177,7 @@ function AppHeader(): JSX.Element {
       transparent={false}
       absolute={false}
       pathname={pathname}
+      fullWidth={fullWidthRegExp.test(pathname)}
     />
   );
 }

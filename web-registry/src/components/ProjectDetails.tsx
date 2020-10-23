@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import * as togeojson from '@mapbox/togeojson';
 import { useLocation } from 'react-router-dom';
 import { setPageView } from '../lib/ga';
@@ -222,7 +222,8 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
     setPageView(location);
   }, [location]);
 
-  const classes = useStyles({});
+  const classes = useStyles();
+  const theme = useTheme();
   const landManagementActions: ActionGroup[] = project.landManagementActions.map(group => ({
     ...group,
     actions: group.actions.map(action => ({ ...action, imgSrc: getImgSrc(action.imgSrc) })),
@@ -269,7 +270,11 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
 
   return (
     <div className={classes.root}>
-      <ProjectMedia assets={project.media.filter(item => item.type === 'image')} gridView />
+      <ProjectMedia
+        assets={project.media.filter(item => item.type === 'image')}
+        gridView
+        mobileHeight={theme.spacing(78.75)}
+      />
       <ProjectTop project={project} projectDefault={projectDefault} />
       <ProjectImpact impact={project.impact} />
 

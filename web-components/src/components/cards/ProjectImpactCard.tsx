@@ -20,7 +20,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   background: props => ({
     backgroundImage: `url(${props.imgSrc})`,
     backgroundRepeat: 'no-repeat',
-    backgroundSize: '100%',
+    backgroundSize: 'cover',
     backgroundPosition: 'center',
     textAlign: 'center',
     position: 'relative',
@@ -48,13 +48,13 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       paddingTop: theme.spacing(7),
       paddingLeft: theme.spacing(7),
       paddingRight: theme.spacing(7),
-      paddingBottom: theme.spacing(15),
+      paddingBottom: theme.spacing(9),
     },
     [theme.breakpoints.down('xs')]: {
       paddingTop: theme.spacing(5),
       paddingLeft: theme.spacing(5),
       paddingRight: theme.spacing(5),
-      paddingBottom: theme.spacing(10),
+      paddingBottom: theme.spacing(6),
     },
   },
   tag: {

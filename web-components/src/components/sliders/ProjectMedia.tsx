@@ -15,16 +15,24 @@ interface ProjectMediaProps {
   gridView: boolean;
   assets: Media[];
   xsBorderRadius?: boolean;
+  mobileHeight?: string | number;
 }
 
 interface StyleProps {
   xsBorderRadius: boolean;
+  mobileHeight?: string | number;
 }
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
-  root: {
+  root: props => ({
     [theme.breakpoints.down('xs')]: {
       marginBottom: theme.spacing(8.75),
+    },
+    '& .slick-slide img': {
+      [theme.breakpoints.down('xs')]: {
+        height: props.mobileHeight ? props.mobileHeight : 'inherit',
+        objectFit: props.mobileHeight ? 'cover' : 'inherit',
+      },
     },
     '& .slick-dots': {
       bottom: 'auto',
@@ -67,7 +75,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
         },
       },
     },
-  },
+  }),
   thumbnail: {
     position: 'relative',
     display: 'inline-block',
@@ -111,11 +119,13 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     flexGrow: 0,
     maxWidth: '37%',
     flexBasis: '37%',
+    maxHeight: theme.spacing(125),
   },
   centreGrid: {
     flexGrow: 0,
     maxWidth: '26%',
     flexBasis: '26%',
+    maxHeight: theme.spacing(125),
   },
   imageContainer: {
     paddingLeft: theme.spacing(2.5),
@@ -154,8 +164,9 @@ export default function ProjectMedia({
   assets,
   xsBorderRadius = false,
   gridView = false,
+  mobileHeight,
 }: ProjectMediaProps): JSX.Element {
-  const classes = useStyles({ xsBorderRadius });
+  const classes = useStyles({ mobileHeight, xsBorderRadius });
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up('sm'));
 

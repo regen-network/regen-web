@@ -100,15 +100,15 @@
         "imgSrc": "https://regen-registry.s3.amazonaws.com/projects/wilmot/wilmot.jpg",
         "description": "Wilmot Cattle Company is an innovative, regenerative, grass-fed beef business."
       },
-      "tagline": "Stuart Austin & Trisha Cowley have managed the Wilmot Farmot since 2016",
+      "tagline": "Stuart Austin & Trisha Cowley have managed Wilmot since 2016.",
       "quote": {
-        "text": "We love getting the opportunity to manage cattle in a truly holistic and regenerative way.",
+        "text": "We feel privileged to have the opportunity to manage cattle in a truly holistic and regenerative way on such a remarkable property.",
         "person": {
           "name": "stuart austin",
           "role": "Wilmot General Manager"
         }
       },
-      "shortDescription": "Wilmot is an extraordinary property high in the New England Tablelands at Ebor. Set on 1,854ha and at approximately 1,200m above sea level, average annual rainfall of 1,200mm, highly fertile volcanic basalt soils, and complimented by a series of pristine spring fed, year-round natural waterways including five waterfalls, it is quite simply a unique environment for growing cattle.",
+      "shortDescription": "Wilmot is an extraordinary property high in the New England Tablelands at Ebor, New South Wales, Australia. Set on 1,854ha and at approximately 1,200m above sea level, average annual rainfall of 1,200mm, highly fertile volcanic basalt soils, and complimented by a series of pristine spring fed, year-round natural waterways including five waterfalls, it is quite simply a unique environment for growing cattle.",
       "longDescription": "<p>Stu & Trish are the management team behind Wilmot Cattle Co and are driven by the exciting ecological opportunities they can foresee for the business. They have a wholehearted belief in regenerative agriculture and the benefits it will bring to the industry globally, as we collectively work to heal what has largely become a degraded landscape. They having a burning desire to succeed in agriculture and are very ambitious in the growth and development plans they have for Wilmot Cattle Co.</p><p>While Stu has managed the day to day operations of Wilmot since 2016, and now presides over the portfolio of all three properties in a General Manager capacity, Trish works tirelessly behind the scenes ensuring a high level of rigour around the data collection, management, and analysis of every aspect of the business. They firmly believe that you cannot manage what you don’t measure and as such, the integrity of the data is paramount.</p><p>In their spare time they enjoy exploring the natural wonders of Wilmot, including its five waterfalls and large areas of virtually native bushland, with their two kids Harry and Poppy. They all gain great satisfaction from discovering new species of plants and learning about their role in the ecosystem.</p>",
       "media": [
         {
@@ -128,7 +128,7 @@
           "type": "image"
         },
         {
-          "src": "https://regen-registry.s3.amazonaws.com/Wilmot+Video.mp4",
+          "src": "https://www.youtube.com/embed/PAVSJlj-i00",
           "preview": "https://regen-registry.s3.amazonaws.com/projects/wilmot/video-preview.jpg",
           "type": "video"
         }
@@ -163,12 +163,12 @@
           "actions": [
             {
               "name": "Time Controlled Rotational Grazing",
-              "description": "Since 2013, Wilmot Cattle Co. has implemented time controlled rotational grazing at Wilmot Farm. In order to mirror natural herding behaviors, time controlled rotational grazing optimizes the number of stock in a paddock, matches the grazing period with available pasture, shortens grazing periods in each paddock, and follows these activities by long resting periods to allow the pasture to recover. When managed well, this grazing system increases groundcover, biomass, plant diversity, animal and plant nutrition, soil health, water infiltration and soil organic carbon. A more complete explanation of the science, monitoring tools and management practices is provided below.",
+              "description": "Since 2013, Wilmot Cattle Co has implemented time controlled rotational grazing at the Wilmot property. Effectively mimicking natural herding behaviours, time controlled rotational grazing is the practice of moving large herds of animals across the landscape, grazing pastures for very short periods of time, allowing long rest periods, enabling adequate plant recovery. Stocking rate is adjusted frequently to match the feed available and growth rate of the plant. When managed well, this grazing system increases groundcover, biomass, plant diversity, animal and plant nutrition, soil health, water infiltration and soil organic carbon. A more complete explanation of the science, monitoring tools and management practices is provided below.",
               "imgSrc": "time-controlled-rotational-grazing.jpg"
             },
             {
               "name": "Decrease Paddock Size",
-              "description": "Decreased paddock sizes enable effective grazing at a controllable density. Wilmot Farm has adopted a paddock subdivision program with an average paddock size of 25 hectares.",
+              "description": "Decreased paddock sizes enable effective grazing at a controllable density. Wilmot Farm has adopted a paddock subdivision program with an average paddock size of 22 hectares.",
               "imgSrc": "decrease-paddock-size.jpg"
             },
             {

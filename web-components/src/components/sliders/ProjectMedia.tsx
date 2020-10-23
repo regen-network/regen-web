@@ -119,13 +119,13 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     flexGrow: 0,
     maxWidth: '37%',
     flexBasis: '37%',
-    maxHeight: theme.spacing(125),
+    maxHeight: theme.spacing(113),
   },
   centreGrid: {
     flexGrow: 0,
     maxWidth: '26%',
     flexBasis: '26%',
-    maxHeight: theme.spacing(125),
+    maxHeight: theme.spacing(113),
   },
   imageContainer: {
     paddingLeft: theme.spacing(2.5),

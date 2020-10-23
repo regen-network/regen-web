@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     backgroundColor: theme.palette.primary.main,
     width: '100%',
     [theme.breakpoints.up('sm')]: {
-      height: theme.spacing(30),
+      height: theme.spacing(24),
     },
     [theme.breakpoints.down('xs')]: {
       height: theme.spacing(19),

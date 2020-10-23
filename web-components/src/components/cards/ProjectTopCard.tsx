@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       padding: `${theme.spacing(8)} ${theme.spacing(7.5)} ${theme.spacing(9)}`,
     },
     [theme.breakpoints.up('sm')]: {
-      padding: `${theme.spacing(17)} ${theme.spacing(5)} ${theme.spacing(12.5)}`,
+      padding: `${theme.spacing(10.9)} ${theme.spacing(5)} ${theme.spacing(12.5)}`,
     },
   },
   separator: {

@@ -21,7 +21,7 @@ interface ProjectTopProps {
 const useStyles = makeStyles((theme: Theme) => ({
   section: {
     [theme.breakpoints.up('sm')]: {
-      paddingTop: theme.spacing(21.5),
+      paddingTop: theme.spacing(16),
       paddingBottom: theme.spacing(27.5),
     },
     [theme.breakpoints.down('xs')]: {

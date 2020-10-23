@@ -122,12 +122,23 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingLeft: theme.spacing(8.5),
       fontSize: theme.spacing(3.5),
-      display: 'inline',
     },
     [theme.breakpoints.down('xs')]: {
       paddingTop: theme.spacing(2.5),
       fontSize: theme.spacing(3),
       textAlign: 'center',
+    },
+  },
+  grid: {
+    display: 'flex',
+    wrap: 'nowrap',
+    justifyContent: 'center',
+    alignItems: 'center',
+    [theme.breakpoints.up('sm')]: {
+      flexDirection: 'row',
+    },
+    [theme.breakpoints.down('xs')]: {
+      flexDirection: 'column',
     },
   },
 }));
@@ -167,7 +178,7 @@ export default function CookiesBanner({ privacyUrl }: CookiesBannerProps): JSX.E
             </Link>
             .
           </Typography>
-          <div>
+          <div className={classes.grid}>
             <ContainedButton className={classes.button} onClick={accept}>
               accept
             </ContainedButton>

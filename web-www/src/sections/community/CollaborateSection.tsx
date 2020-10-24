@@ -60,7 +60,7 @@ const CollaborateSection = (): JSX.Element => {
         {content.header}
       </Title>
       <Typography className={classes.body} dangerouslySetInnerHTML={{ __html: content.body }}></Typography>
-      <ResourceCardsSlider items={content.cards} />
+      <ResourceCardsSlider target="_self" items={content.cards} />
     </Section>
   );
 };

@@ -13,6 +13,7 @@ export interface ResourceCardsProps {
   imageClassName?: string;
   title?: string;
   className?: string;
+  target?: string;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -59,6 +60,7 @@ export default function ResourceCards({
   titleVariant,
   title,
   className,
+  target = '_blank',
 }: ResourceCardsProps): JSX.Element {
   const theme = useTheme();
   const classes = useStyles();
@@ -93,6 +95,7 @@ export default function ResourceCards({
                 description={item.description}
                 buttonText={item.buttonText}
                 link={item.link}
+                target={target}
               />
             </div>
           ))}
@@ -108,6 +111,7 @@ export default function ResourceCards({
                 description={item.description}
                 buttonText={item.buttonText}
                 link={item.link}
+                target={target}
               />
             </Grid>
           ))}

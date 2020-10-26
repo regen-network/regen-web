@@ -91,7 +91,7 @@ export default function ResourceCards({
               <ResourcesCard
                 image={item.image}
                 title={item.title}
-                updated={item.updated ? item.updated : undefined}
+                updated={item.updated}
                 description={item.description}
                 buttonText={item.buttonText}
                 link={item.link}
@@ -107,7 +107,7 @@ export default function ResourceCards({
               <ResourcesCard
                 image={item.image}
                 title={item.title}
-                updated={item.updated ? item.updated : undefined}
+                updated={item.updated}
                 description={item.description}
                 buttonText={item.buttonText}
                 link={item.link}

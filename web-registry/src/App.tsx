@@ -27,7 +27,7 @@ import CreditsRetire from './components/CreditsRetire';
 import BuyerCreate from './components/BuyerCreate';
 import NotFound from './components/NotFound';
 import Admin from './components/Admin';
-import CookiesFooter from 'web-components/lib/components/fixed-footer/CookiesFooter';
+import CookiesFooter from 'web-components/lib/components/banner/CookiesBanner';
 
 interface BoolProps {
   [key: string]: boolean;

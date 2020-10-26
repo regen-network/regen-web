@@ -1,11 +1,12 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import { Theme, makeStyles } from '@material-ui/core';
-import Typography from '@material-ui/core/Typography';
+import ReactHtmlParser from 'react-html-parser';
 
 import Title from 'web-components/lib/components/title';
 import ResourceCardsSlider from 'web-components/lib/components/sliders/ResourceCards';
 import Section from 'web-components/lib/components/section';
+import Description from 'web-components/lib/components/description';
 
 const useStyles = makeStyles((theme: Theme) => ({
   section: {
@@ -59,7 +60,7 @@ const CollaborateSection = (): JSX.Element => {
       <Title className={classes.title} variant="h3" align="center">
         {content.header}
       </Title>
-      <Typography className={classes.body} dangerouslySetInnerHTML={{ __html: content.body }}></Typography>
+      <Description className={classes.body}>{ReactHtmlParser(content.body)}</Description>
       <ResourceCardsSlider target="_self" items={content.cards} />
     </Section>
   );

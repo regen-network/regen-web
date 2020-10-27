@@ -7,19 +7,20 @@ import Cookies from 'js-cookie';
 
 // TODO use Section component
 // import Section from '../section';
-import OutlinedButton from '../buttons/OutlinedButton';
+import ContainedButton from '../buttons/ContainedButton';
 
-interface CookiesFooterProps {
+interface CookiesBannerProps {
   privacyUrl: string;
 }
 
-const cookieName = 'gatsby-plugin-google-analytics-gdpr_cookies-enabled';
+const rejectCookieName: string = 'cookies-rejected';
+const cookieName: string = 'gatsby-plugin-google-analytics-gdpr_cookies-enabled';
 
-function getCookieValue(): string | undefined {
-  let cookieValue = Cookies.get(cookieName);
+function getCookieValue(name: string): string | undefined {
+  let cookieValue = Cookies.get(name);
 
   if (cookieValue === undefined) {
-    cookieValue = Cookies.get(getLegacyCookieName(cookieName));
+    cookieValue = Cookies.get(getLegacyCookieName(name));
   }
   return cookieValue;
 }
@@ -44,7 +45,7 @@ function setCookie(cookieValue: string): void {
 const useStyles = makeStyles((theme: Theme) => ({
   background: {
     position: 'fixed',
-    bottom: '0px',
+    top: '0px',
     left: '0px',
     zIndex: 1000,
     backgroundColor: theme.palette.info.light,
@@ -53,7 +54,8 @@ const useStyles = makeStyles((theme: Theme) => ({
       height: theme.spacing(19),
     },
     [theme.breakpoints.down('xs')]: {
-      height: theme.spacing(19),
+      paddingTop: theme.spacing(5),
+      paddingBottom: theme.spacing(5),
     },
     boxShadow: theme.shadows[7],
   },
@@ -104,27 +106,63 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   button: {
+    fontSize: theme.spacing(3.5),
     [theme.breakpoints.up('sm')]: {
+      height: theme.spacing(8.75),
       minWidth: theme.spacing(33.25),
     },
     [theme.breakpoints.down('xs')]: {
+      height: theme.spacing(8.75),
       minWidth: theme.spacing(22),
+    },
+  },
+  reject: {
+    cursor: 'pointer',
+    color: theme.palette.info.main,
+    [theme.breakpoints.up('sm')]: {
+      paddingLeft: theme.spacing(8.5),
+      fontSize: theme.spacing(3.5),
+    },
+    [theme.breakpoints.down('xs')]: {
+      paddingTop: theme.spacing(2.5),
+      fontSize: theme.spacing(3),
+      textAlign: 'center',
+    },
+  },
+  grid: {
+    display: 'flex',
+    wrap: 'nowrap',
+    justifyContent: 'center',
+    alignItems: 'center',
+    [theme.breakpoints.up('sm')]: {
+      flexDirection: 'row',
+    },
+    [theme.breakpoints.down('xs')]: {
+      flexDirection: 'column',
     },
   },
 }));
 
-export default function CookiesFooter({ privacyUrl }: CookiesFooterProps): JSX.Element | null {
+export default function CookiesBanner({ privacyUrl }: CookiesBannerProps): JSX.Element | null {
   const classes = useStyles({});
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    if (getCookieValue() === undefined || getCookieValue() === 'false') {
+    if (
+      getCookieValue(rejectCookieName) !== 'true' &&
+      (getCookieValue(cookieName) === undefined || getCookieValue(cookieName) === 'false')
+    ) {
       setVisible(true);
     }
   }, [setVisible]);
 
   const accept = useCallback(() => {
     setCookie('true');
+    setVisible(false);
+  }, []);
+
+  const reject = useCallback(() => {
+    Cookies.set(rejectCookieName, 'true');
     setVisible(false);
   }, []);
 
@@ -140,9 +178,14 @@ export default function CookiesFooter({ privacyUrl }: CookiesFooterProps): JSX.E
             </Link>
             .
           </Typography>
-          <OutlinedButton className={classes.button} onClick={accept}>
-            accept
-          </OutlinedButton>
+          <div className={classes.grid}>
+            <ContainedButton className={classes.button} onClick={accept}>
+              accept
+            </ContainedButton>
+            <div className={classes.reject} onClick={reject}>
+              Reject
+            </div>
+          </div>
         </Grid>
       </div>
     );

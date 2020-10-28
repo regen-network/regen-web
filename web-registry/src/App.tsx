@@ -62,7 +62,7 @@ function AppFooter(): JSX.Element {
           href: `${process.env.REACT_APP_WEBSITE_URL}/land-stewards/`,
         },
         {
-          title: 'Community Overview',
+          title: 'Community',
           href: `${process.env.REACT_APP_WEBSITE_URL}/community/`,
         },
         {

@@ -297,26 +297,29 @@ export default function CreditsPurchaseForm({
             }
 
             // Redirect to Stripe Checkout page
-            const response = axios.post(`${process.env.REACT_APP_API_URI}/create-checkout-session`, {
-              price: stripePrice,
-              units,
-              cancelUrl: window.location.href,
-              successUrl:
-                process.env.NODE_ENV === 'production'
-                  ? `${window.location.origin}/registry/post-purchase/${projectId}/${walletId}/${encodeURI(
-                      name,
-                    )}`
-                  : `${window.location.origin}/post-purchase/${projectId}/${walletId}/${encodeURI(name)}`,
-              customerEmail: email,
-              clientReferenceId: JSON.stringify({ walletId, addressId, name }),
-            });
+            const response = axios.post(
+              `${process.env.REACT_APP_API_URI || 'http://localhost:5000'}/create-checkout-session`,
+              {
+                price: stripePrice,
+                units,
+                cancelUrl: window.location.href,
+                successUrl:
+                  process.env.NODE_ENV === 'production'
+                    ? `${window.location.origin}/registry/post-purchase/${projectId}/${walletId}/${encodeURI(
+                        name,
+                      )}`
+                    : `${window.location.origin}/post-purchase/${projectId}/${walletId}/${encodeURI(name)}`,
+                customerEmail: email,
+                clientReferenceId: JSON.stringify({ walletId, addressId, name }),
+              },
+            );
 
-            const session = await response.data;
+            const { data } = await response;
 
             const stripe = await stripePromise;
             if (stripe) {
               const { error } = await stripe.redirectToCheckout({
-                sessionId: session.id,
+                sessionId: data.id,
               });
               if (error) {
                 setStatus({ serverError: error.message });

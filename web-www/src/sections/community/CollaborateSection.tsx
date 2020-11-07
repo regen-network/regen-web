@@ -31,7 +31,12 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginBottom: theme.spacing(15),
     maxWidth: theme.spacing(225),
     margin: '0 auto',
-    fontSize: theme.spacing(5.5),
+    [theme.breakpoints.down('sm')]: {
+      fontSize: theme.spacing(4),
+    },
+    [theme.breakpoints.up('sm')]: {
+      fontSize: theme.spacing(5.5),
+    },
   },
 }));
 

@@ -140,10 +140,6 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
           title: 'Team',
           href: '/team/',
         },
-        // {
-        //   title: 'Contact',
-        //   href: '/contact/',
-        // },
       ],
     },
     {
@@ -186,7 +182,7 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
         absolute={location.pathname === '/' || headerNoBorderBottomPages.test(location.pathname)}
         color={desktopColor}
         borderBottom={location.pathname !== '/' && !headerNoBorderBottomPages.test(location.pathname)}
-        pathname={location.pathname}
+        pathName={location.pathname}
       />
       <div>
         <main>{children}</main>

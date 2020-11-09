@@ -24,7 +24,7 @@ interface HeaderProps {
   color: string;
   menuItems?: HeaderMenuItem[];
   borderBottom?: boolean;
-  pathname?: string;
+  pathName?: string;
 }
 
 export interface HeaderMenuItem {
@@ -143,6 +143,14 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       width: theme.spacing(23),
     },
   },
+  subMenuHover: {
+    '& a:hover': {
+      borderBottom: `2px solid ${theme.palette.secondary.main}`,
+    },
+    '& a': {
+      borderBottom: `2px solid transparent`,
+    },
+  },
   menuItem: {
     boxSizing: 'border-box',
     height: '100%',
@@ -150,7 +158,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     paddingRight: theme.spacing(7.375),
     paddingLeft: theme.spacing(7.375),
     'background-color': 'inherit',
-    '&:not(:last-child) > a:hover': {
+    '& a:hover': {
       borderBottom: `2px solid ${theme.palette.secondary.main}`,
     },
     '&:last-child': {
@@ -179,7 +187,7 @@ export default function Header({
   menuItems,
   borderBottom = true,
   absolute = true,
-  pathname = '/',
+  pathName = '/',
 }: HeaderProps): JSX.Element {
   const classes = useStyles({ color, borderBottom });
   const rootClass = [classes.borderBottom];
@@ -215,7 +223,7 @@ export default function Header({
                   <MenuItem
                     key={index}
                     className={
-                      pathname === item.href
+                      pathName === item.href
                         ? clsx(classes.menuItem, classes.currentMenuItem)
                         : classes.menuItem
                     }
@@ -231,7 +239,14 @@ export default function Header({
                       >
                         {item.dropdownItems.map((dropdownItem, index) => {
                           return (
-                            <MenuItem key={index}>
+                            <MenuItem
+                              className={
+                                pathName.includes(dropdownItem.href)
+                                  ? clsx(classes.subMenuHover, classes.currentMenuItem)
+                                  : classes.subMenuHover
+                              }
+                              key={index}
+                            >
                               <Link href={dropdownItem.href}>{dropdownItem.title}</Link>
                             </MenuItem>
                           );
@@ -246,7 +261,7 @@ export default function Header({
             </MenuList>
           </Box>
           <Box display={{ xs: 'block', sm: 'none' }}>
-            <MobileMenu menuItems={menuItems} className={classes.mobile} />
+            <MobileMenu pathName={pathName} menuItems={menuItems} className={classes.mobile} />
           </Box>
         </Grid>
         {children}

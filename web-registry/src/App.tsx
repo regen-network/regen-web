@@ -180,7 +180,7 @@ function AppHeader(): JSX.Element {
       color={theme.palette.primary.light}
       transparent={false}
       absolute={false}
-      pathname={pathname}
+      pathName={pathname}
     />
   );
 }

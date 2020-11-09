@@ -2,7 +2,7 @@ import React from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 
 import TopSection from '../sections/resources/TopSection';
-// import RegistrySection from '../sections/resources/RegistrySection';
+import RegistrySection from '../sections/resources/RegistrySection';
 import LedgerSection from '../sections/resources/LedgerSection';
 import SEO from '../components/seo';
 
@@ -27,7 +27,7 @@ const ResourcesPage = ({ location }: props): JSX.Element => {
         imageUrl={data.seoImage.publicURL}
       />
       <TopSection />
-      {/* <RegistrySection /> */}
+      <RegistrySection />
       <LedgerSection />
     </>
   );

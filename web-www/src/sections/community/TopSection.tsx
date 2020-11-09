@@ -9,7 +9,9 @@ interface props {
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
-  tooltip: {},
+  section: {
+    filter: `drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.05))`,
+  },
 }));
 
 const TopSection = ({ location }: props): JSX.Element => {
@@ -36,7 +38,9 @@ const TopSection = ({ location }: props): JSX.Element => {
   return (
     <>
       <BackgroundSection
-        linearGradient="linear-gradient(180deg, rgba(0, 0, 0, 0.684) 0%, rgba(0, 0, 0, 0) 97.78%), linear-gradient(235.95deg, rgba(250, 235, 209, 0.7) 22.17%, rgba(125, 201, 191, 0.7) 46.11%, rgba(81, 93, 137, 0.7) 70.05%)"
+        className={classes.section}
+        linearGradient="linear-gradient(180deg, rgba(0, 0, 0, 0.684) 0%, rgba(0, 0, 0, 0) 97.78%);"
+        linearGradientMobile="linear-gradient(220.67deg, rgba(250, 235, 209, 0.6) 21.4%, rgba(125, 201, 191, 0.6) 46.63%, rgba(81, 93, 137, 0.6) 71.86%), linear-gradient(180deg, rgba(0, 0, 0, 0.684) 0%, rgba(0, 0, 0, 0) 97.78%)"
         header={content.header}
         body={content.body}
         imageData={imageData}

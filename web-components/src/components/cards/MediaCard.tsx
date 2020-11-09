@@ -3,6 +3,7 @@ import { makeStyles, Theme } from '@material-ui/core';
 import CardMedia from '@material-ui/core/CardMedia';
 import { Variant } from '@material-ui/core/styles/createTypography';
 import clsx from 'clsx';
+import ReactHtmlParser from 'react-html-parser';
 
 import Card from './Card';
 import Title from '../title';
@@ -72,6 +73,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: '-webkit-box',
     '-webkit-line-clamp': 3,
     '-webkit-box-orient': 'vertical',
+    '& p': {
+      margin: 0,
+    },
   },
   h4title: {
     [theme.breakpoints.down('xs')]: {
@@ -119,7 +123,7 @@ export default function MediaCard({
             }
             variant={titleVariant}
           >
-            {name}
+            {ReactHtmlParser(name)}
           </Title>
         )}
         {children}

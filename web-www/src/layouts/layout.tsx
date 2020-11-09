@@ -11,7 +11,7 @@ import { useTheme } from '@material-ui/core/styles';
 
 import Header, { HeaderMenuItem } from 'web-components/lib/components/header';
 import Footer, { FooterItemProps as FooterItem } from 'web-components/lib/components/footer';
-import CookiesFooter from 'web-components/lib/components/fixed-footer/CookiesFooter';
+import CookiesFooter from 'web-components/lib/components/banner/CookiesBanner';
 
 import './layout.css';
 

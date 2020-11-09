@@ -62,6 +62,10 @@ function AppFooter(): JSX.Element {
           href: `${process.env.REACT_APP_WEBSITE_URL}/land-stewards/`,
         },
         {
+          title: 'Community',
+          href: `${process.env.REACT_APP_WEBSITE_URL}/community/`,
+        },
+        {
           title: 'Developers',
           href: `${process.env.REACT_APP_WEBSITE_URL}/developers/`,
         },
@@ -154,6 +158,7 @@ function AppHeader(): JSX.Element {
     {
       title: 'Community',
       dropdownItems: [
+        { title: 'Community Overview', href: `${process.env.REACT_APP_WEBSITE_URL}/community/` },
         { title: 'Developers', href: `${process.env.REACT_APP_WEBSITE_URL}/developers/` },
         { title: 'Scientists', href: `${process.env.REACT_APP_WEBSITE_URL}/science/` },
         { title: 'Validators', href: `${process.env.REACT_APP_WEBSITE_URL}/validators/` },

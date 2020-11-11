@@ -62,6 +62,16 @@ categories:
     buttonText: watch video
     showPlay: true
     items:
+      - image: ../../static/media/screen-shot-2020-11-10-at-9.41.45-pm.png
+        title: "CarbonPlus Grasslands Credits for Regenerative Ranch Management "
+        author: Regen Network for the Regenerate Conference
+        url: https://www.youtube.com/watch?v=Eh19aQ1dd7c&t=1s
+        date: October 30, 2020
+      - image: ../../static/media/screen-shot-2020-11-10-at-9.37.29-pm.png
+        title: "CarbonPlus Credit: Methodology, Monitoring, and Blockchain"
+        author: Regen Network
+        url: https://www.youtube.com/watch?v=b9PvwegUCqk&t=2486s
+        date: October 8, 2020
       - image: ../../static/media/media-video1.png
         title: "[LIVE] Devcon3 Day 4 Stream - Morning"
         date: November 4, 2017

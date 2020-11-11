@@ -18,7 +18,7 @@ marketplaceSection:
       header: Register a project
       description: Get paid for your ecological practices, such as cover cropping,
         crop rotation, agroforestry, rotational grazing, and more.
-      linkText: List Your Project
+      linkText: Learn more
       linkUrl: /land-stewards/
     - caption: Buyers
       image: ../../static/media/buyers.png

@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './jest.mock';
 import App from './App';
-import { useAuth0 } from './react-auth0-spa';
+import { useAuth0 } from '@auth0/auth0-react';
 
 // create a dummy user profile
 const user = {
@@ -10,7 +10,7 @@ const user = {
   email_verified: true,
   sub: 'google-oauth2|2147627834623744883746',
 };
-jest.mock('./react-auth0-spa');
+jest.mock('@auth0/auth0-react');
 const mockedAuth0 = useAuth0 as jest.Mock;
 
 describe('App - logged in', () => {

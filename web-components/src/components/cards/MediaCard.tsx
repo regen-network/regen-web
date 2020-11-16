@@ -73,7 +73,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: '-webkit-box',
     '-webkit-line-clamp': 3,
     '-webkit-box-orient': 'vertical',
-        '& p': {
+    '& p': {
       margin: 0,
     },
   },

@@ -7,17 +7,10 @@ import ThemeProvider from 'web-components/lib/theme/RegenThemeProvider';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import 'url-search-params-polyfill';
 import './url-search-params-polyfill.d';
-// import { ApolloProvider } from '@apollo/react-hooks';
-// import ApolloClient from 'apollo-boost';
 
-import { Auth0Provider } from './react-auth0-spa';
+import { Auth0Provider } from '@auth0/auth0-react';
 import { AuthApolloProvider } from './apollo';
-import history from './lib/history';
-
-const onRedirectCallback = (appState: any, verifyEmail: string): void => {
-  const path: string = verifyEmail ? `/verify-email?email=${verifyEmail}` : window.location.pathname;
-  history.push(appState && appState.targetUrl ? appState.targetUrl : path);
-};
+// import history from './lib/history';
 
 const config = {
   domain: process.env.REACT_APP_AUTH0_DOMAIN || 'regen-network-registry.auth0.com',
@@ -29,10 +22,12 @@ const config = {
 ReactDOM.render(
   <Auth0Provider
     domain={config.domain}
-    client_id={config.clientId}
-    redirect_uri={window.location.href}
-    onRedirectCallback={onRedirectCallback}
-    returnTo={config.returnTo}
+    clientId={config.clientId}
+    redirectUri={window.location.origin}
+    // client_id={config.clientId}
+    // redirect_uri={window.location.href}
+    // onRedirectCallback={onRedirectCallback}
+    // returnTo={config.returnTo}
     audience={config.audience}
   >
     <AuthApolloProvider>

@@ -2,9 +2,9 @@ import React from 'react';
 import { loader } from 'graphql.macro';
 import { useQuery } from '@apollo/react-hooks';
 import { Link } from 'react-router-dom';
+import { useAuth0 } from '@auth0/auth0-react';
 
 import NavBar from './NavBar';
-import { useAuth0 } from '../react-auth0-spa';
 import isAdmin from '../lib/admin';
 
 const ALL_PROJECTS = loader('../graphql/AllProjects.graphql');

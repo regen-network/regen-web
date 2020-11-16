@@ -3,8 +3,11 @@ import { useAuth0 } from '@auth0/auth0-react';
 import axios from 'axios';
 
 import NavBar from './NavBar';
+import getOrigin from '../lib/origin';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import Title from 'web-components/lib/components/title';
+
+const origin: string = getOrigin();
 
 const Seller = (): JSX.Element => {
   const { getAccessTokenSilently, isAuthenticated, user } = useAuth0();
@@ -19,14 +22,8 @@ const Seller = (): JSX.Element => {
           url: `${apiUri}/create-account-link`,
           data: {
             email: user?.email,
-            refreshUrl:
-              process.env.NODE_ENV === 'production'
-                ? `${window.location.origin}/registry/projects/impactag/admin`
-                : `${window.location.origin}/projects/impactag/admin`,
-            returnUrl:
-              process.env.NODE_ENV === 'production'
-                ? `${window.location.origin}/registry/projects/impactag/admin?setup=true`
-                : `${window.location.origin}/projects/impactag/admin?setup=true`,
+            refreshUrl: `${origin}/projects/impactag/admin`,
+            returnUrl: `${origin}/projects/impactag/admin?setup=true`,
           },
           headers: { authorization: `Bearer ${accessToken}` },
         });
@@ -54,7 +51,7 @@ const Seller = (): JSX.Element => {
           ))}
       </div>
       <div style={{ textAlign: 'center' }}>
-        <NavBar />
+        <NavBar redirectUri={`${origin}/projects/impactag/admin`} />
       </div>
     </div>
   );

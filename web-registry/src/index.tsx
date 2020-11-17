@@ -26,6 +26,7 @@ ReactDOM.render(
     redirectUri={window.location.origin}
     // onRedirectCallback={onRedirectCallback}
     // returnTo={config.returnTo}
+    useRefreshTokens={true}
     audience={config.audience}
   >
     <AuthApolloProvider>

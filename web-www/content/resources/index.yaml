@@ -34,6 +34,12 @@ registrySection:
         Registry.
       buttonText: View Guide
       link: https://regen-registry.s3.amazonaws.com/Regen+Registry+Project+Developers+101.pdf
+    - image: ../../static/media/resources-developer-templates-image.jpg
+      title: Project Developer Templates
+      updated: September 15, 2020
+      description: Get started here with CarbonPlus Grasslands.
+      buttonText: View Templates
+      link: https://drive.google.com/drive/folders/12FLwfhT50WkYv6CymXiwZpCW1HtoMq9A?usp=sharing
 ledgerSection:
   header: Regen Ledger and more
   cards:

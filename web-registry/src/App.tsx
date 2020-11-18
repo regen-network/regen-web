@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Router, BrowserRouter, Switch, Route, useParams, useLocation, Redirect } from 'react-router-dom';
+import { Router, Switch, Route, useParams, useLocation, Redirect } from 'react-router-dom';
 import { useTheme } from '@material-ui/core/styles';
 import { useAuth0, OAuthError } from '@auth0/auth0-react';
 import { createBrowserHistory } from 'history';

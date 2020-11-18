@@ -39,7 +39,7 @@ function setCookie(cookieValue: string): void {
   // Cookies.set(getLegacyCookieName(cookieName), cookieValue, cookieOptions);
 
   // set the regular cookie
-  Cookies.set(cookieName, cookieValue);
+  Cookies.set(cookieName, cookieValue, { expires: 365 });
 }
 
 const useStyles = makeStyles((theme: Theme) => ({

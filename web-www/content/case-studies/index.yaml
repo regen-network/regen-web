@@ -22,8 +22,7 @@ caseStudies:
     next: what's next
   fundingSection:
     header: md//Project-based funding via [Regen
-      Registry](https://regen-website.netlify.com/registry/projects/impactag) +
-      [Regen Ledger](https://regen-website.netlify.com/developers)
+      Registry](/registry/projects/impactag) + [Regen Ledger](/developers)
     details: details
     results: results
     next: what's next

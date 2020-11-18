@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Router, Switch, Route, useParams, useLocation, Redirect } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, useParams, useLocation, Redirect } from 'react-router-dom';
 import { useTheme } from '@material-ui/core/styles';
 import { useAuth0, OAuthError } from '@auth0/auth0-react';
 import { createBrowserHistory } from 'history';
@@ -263,8 +263,7 @@ const App: React.FC = (): JSX.Element => {
   }
 
   return (
-    <Router history={history}>
-      {/* <BrowserRouter basename={process.env.PUBLIC_URL}> */}
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
       <ScrollToTop />
       <div>
         <AppHeader />
@@ -329,7 +328,7 @@ const App: React.FC = (): JSX.Element => {
           <AppFooter />
         </footer>
       </div>
-    </Router>
+    </BrowserRouter>
   );
 };
 

@@ -1,14 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App, { history } from './App';
+import App from './App';
 import * as serviceWorker from './serviceWorker';
 import ThemeProvider from 'web-components/lib/theme/RegenThemeProvider';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import 'url-search-params-polyfill';
 import './url-search-params-polyfill.d';
 
-import { Auth0Provider, AppState } from '@auth0/auth0-react';
+import { Auth0Provider } from '@auth0/auth0-react';
 import { AuthApolloProvider } from './apollo';
 // import history from './lib/history';
 
@@ -19,19 +19,19 @@ const config = {
   audience: 'https://regen-registry-server.herokuapp.com/',
 };
 
-const onRedirectCallback = (appState: AppState) => {
-  // If using a Hash Router, you need to use window.history.replaceState to
-  // remove the `code` and `state` query parameters from the callback url.
-  // window.history.replaceState({}, document.title, window.location.pathname);
-  history.replace((appState && appState.returnTo) || window.location.pathname);
-};
+// const onRedirectCallback = (appState: AppState) => {
+//   // If using a Hash Router, you need to use window.history.replaceState to
+//   // remove the `code` and `state` query parameters from the callback url.
+//   // window.history.replaceState({}, document.title, window.location.pathname);
+//   history.replace((appState && appState.returnTo) || window.location.pathname);
+// };
 
 ReactDOM.render(
   <Auth0Provider
     domain={config.domain}
     clientId={config.clientId}
     redirectUri={window.location.origin}
-    onRedirectCallback={onRedirectCallback}
+    // onRedirectCallback={onRedirectCallback}
     // returnTo={config.returnTo}
     useRefreshTokens={true}
     audience={config.audience}

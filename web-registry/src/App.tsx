@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter, Switch, Route, useParams, useLocation, Redirect } from 'react-router-dom';
+import { Router, BrowserRouter, Switch, Route, useParams, useLocation, Redirect } from 'react-router-dom';
 import { useTheme } from '@material-ui/core/styles';
 import { useAuth0, OAuthError } from '@auth0/auth0-react';
-import history from './lib/history';
+import { createBrowserHistory } from 'history';
 
 import isAdmin from './lib/admin';
 import { init as initGA } from './lib/ga';
@@ -30,6 +30,8 @@ import NotFound from './components/NotFound';
 import Admin from './components/Admin';
 import Seller from './components/Seller';
 import CookiesFooter from 'web-components/lib/components/banner/CookiesBanner';
+
+export const history = createBrowserHistory();
 
 interface BoolProps {
   [key: string]: boolean;
@@ -261,7 +263,8 @@ const App: React.FC = (): JSX.Element => {
   }
 
   return (
-    <BrowserRouter basename={process.env.PUBLIC_URL}>
+    <Router history={history}>
+      {/* <BrowserRouter basename={process.env.PUBLIC_URL}> */}
       <ScrollToTop />
       <div>
         <AppHeader />
@@ -326,7 +329,7 @@ const App: React.FC = (): JSX.Element => {
           <AppFooter />
         </footer>
       </div>
-    </BrowserRouter>
+    </Router>
   );
 };
 

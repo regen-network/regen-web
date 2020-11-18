@@ -15,7 +15,7 @@ module.exports = {
         enableDevelopment: true, // default false
         anonymizeIP: true,
         autoStartWithCookiesEnabled: false,
-        cookieExpires: 365,
+        cookieExpires: 63072000, // two years
         // Optional parameter - Configuration for react-ga and google analytics
         reactGaOptions: {
           debug: true,

@@ -3,4 +3,4 @@ category: organization
 title: "1"
 description: Who is the team developing Regen Network?
 ---
-To learn more about our team and partners, please view [the team page.](https://regen-website.netlify.app/team/)
+To learn more about our team and partners, please view [the team page.](/team/)

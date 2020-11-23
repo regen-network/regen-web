@@ -35,6 +35,7 @@ ReactDOM.render(
     // returnTo={config.returnTo}
     useRefreshTokens={true}
     audience={config.audience}
+    cacheLocation="localstorage"
   >
     <AuthApolloProvider>
       <ThemeProvider injectFonts>

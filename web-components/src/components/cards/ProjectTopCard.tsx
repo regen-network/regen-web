@@ -36,16 +36,17 @@ const useStyles = makeStyles((theme: Theme) => ({
   image: {
     borderRadius: '2px',
     boxShadow: `3px 3px ${theme.palette.grey[100]}`,
-    [theme.breakpoints.down('xs')]: {
-      height: theme.spacing(25),
-      width: theme.spacing(25),
-      marginRight: theme.spacing(4),
-    },
-    [theme.breakpoints.up('sm')]: {
-      height: theme.spacing(35),
-      width: theme.spacing(35),
-      marginRight: theme.spacing(4.5),
-    },
+    width: '100%',
+    // [theme.breakpoints.down('xs')]: {
+    //   height: theme.spacing(25),
+    //   width: theme.spacing(25),
+    //   marginRight: theme.spacing(4),
+    // },
+    // [theme.breakpoints.up('sm')]: {
+    //   height: theme.spacing(35),
+    //   width: theme.spacing(35),
+    //   marginRight: theme.spacing(4.5),
+    // },
   },
   sdg: {
     [theme.breakpoints.down('xs')]: {
@@ -69,6 +70,32 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     [theme.breakpoints.up('sm')]: {
       marginTop: theme.spacing(15),
+    },
+  },
+  sdgGridItem: {
+    '&:nth-child(odd)': {
+      [theme.breakpoints.down('sm')]: {
+        paddingRight: theme.spacing(6.75 / 2),
+      },
+      [theme.breakpoints.up('xs')]: {
+        paddingRight: theme.spacing(5.5 / 2),
+      },
+    },
+    '&:nth-child(even)': {
+      [theme.breakpoints.down('sm')]: {
+        paddingLeft: theme.spacing(6.75 / 2),
+      },
+      [theme.breakpoints.up('xs')]: {
+        paddingLeft: theme.spacing(5.5 / 2),
+      },
+    },
+    '&:not(:first-child), &:not(:nth-child(2))': {
+      [theme.breakpoints.down('sm')]: {
+        paddingTop: theme.spacing(6.75),
+      },
+      [theme.breakpoints.up('xs')]: {
+        paddingTop: theme.spacing(5.5),
+      },
     },
   },
   sdgGrid: {
@@ -98,16 +125,22 @@ export default function ProjectTopCard({
             <Title className={classes.sdg} variant="h3">
               SDGs
             </Title>
-            {sdgs.map((sdg: SDG, index: number) => (
-              <Grid key={index} className={classes.sdgGrid} container wrap="nowrap" alignItems="center">
-                <Grid item>
+            <Grid container>
+              {sdgs.map((sdg: SDG, index: number) => (
+                <Grid className={classes.sdgGridItem} key={index} item xs={6}>
                   <img className={classes.image} alt={sdg.imageUrl} src={sdg.imageUrl} />
                 </Grid>
-                <Grid item>
-                  <Title variant="h5">{sdg.title}</Title>
-                </Grid>
-              </Grid>
-            ))}
+                // Previous layout version, keep it here in case we wanna use it in the future
+                // <Grid key={index} className={classes.sdgGrid} container wrap="nowrap" alignItems="center">
+                //   <Grid item>
+                //     <img className={classes.image} alt={sdg.imageUrl} src={sdg.imageUrl} />
+                //   </Grid>
+                //   <Grid item>
+                //     <Title variant="h5">{sdg.title}</Title>
+                //   </Grid>
+                // </Grid>
+              ))}
+            </Grid>
           </div>
         )}
         <UserInfoWithTitle size="xl" user={projectDeveloper} title="project developer" />

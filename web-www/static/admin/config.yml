@@ -15,6 +15,32 @@ collections:
     editor:
       preview: false
     files:
+      - label: "Community"
+        name: "community"
+        file: "web-www/content/community/index.yaml"
+        fields:
+          - label: "Top Section"
+            name: "topSection"
+            widget: "object"
+            fields:
+              - {label: Header, name: header, widget: string}
+              - {label: Body, name: body, widget: text}
+          - label: "Collaborate Section"
+            name: "collaborateSection"
+            widget: "object"
+            fields:
+              - {label: Header, name: header, widget: string}
+              - {label: Body, name: body, widget: text}
+              - label: "Cards"
+                name: cards
+                widget: list
+                collapsed: false
+                fields:
+                  - {label: Image, name: image, widget: image}
+                  - {label: Title, name: title, widget: string}
+                  - {label: Description, name: description, widget: text, required: false}
+                  - {label: ButtonText, name: buttonText, widget: string}
+                  - {label: Link, name: link, widget: string}
       - label: "Partners"
         name: "partners"
         file: "web-www/content/partners/index.yaml"

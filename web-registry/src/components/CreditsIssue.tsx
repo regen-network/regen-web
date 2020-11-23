@@ -9,17 +9,19 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
 
 import Title from 'web-components/lib/components/title';
 
 const ISSUE_CREDITS = gql`
   mutation IssueCredits($input: IssueCreditsInput!) {
     issueCredits(input: $input) {
-      creditVintage {
-        id
-        projectId
-        units
-      }
+      json
     }
   }
 `;
@@ -61,7 +63,7 @@ export default function CreditsIssue(): JSX.Element {
 
   const [projectId, setProjectId] = useState('');
   const [units, setUnits] = useState(10);
-  const [projectDeveloper, setProjectDeveloper] = useState(60);
+  const [projectDeveloper, setProjectDeveloper] = useState(100);
   const [landSteward, setLandSteward] = useState(0);
   const [landOwner, setLandOwner] = useState(0);
 
@@ -159,7 +161,37 @@ export default function CreditsIssue(): JSX.Element {
         </Button>
       </form>
       {loading && <div>Loading...</div>}
-      {data && <pre>{JSON.stringify(data, null, 2)}</pre>}
+      {data && data.issueCredits && data.issueCredits.json && (
+        <div>
+          <p>Credit vintage id: {data.issueCredits.json.creditVintageId}</p>
+          <TableContainer>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Name</TableCell>
+                  <TableCell align="right">Percentage</TableCell>
+                  <TableCell align="right">Amount</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {data.issueCredits.json.accountBalances.map(
+                  (row: { name: string; percentage: number; amount: number }) => (
+                    <TableRow key={row.name}>
+                      <TableCell scope="row">
+                        {row.name
+                          .replace(/([A-Z])/g, ' $1')
+                          .replace(/^./, (str: string) => str.toUpperCase())}
+                      </TableCell>
+                      <TableCell align="right">{row.percentage}</TableCell>
+                      <TableCell align="right">{row.amount}</TableCell>
+                    </TableRow>
+                  ),
+                )}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </div>
+      )}
       {error && (
         <div>
           Error:

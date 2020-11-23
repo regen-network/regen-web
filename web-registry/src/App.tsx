@@ -27,7 +27,7 @@ import CreditsRetire from './components/CreditsRetire';
 import BuyerCreate from './components/BuyerCreate';
 import NotFound from './components/NotFound';
 import Admin from './components/Admin';
-import CookiesFooter from 'web-components/lib/components/fixed-footer/CookiesFooter';
+import CookiesFooter from 'web-components/lib/components/banner/CookiesBanner';
 
 interface BoolProps {
   [key: string]: boolean;
@@ -60,6 +60,10 @@ function AppFooter(): JSX.Element {
         {
           title: 'Land Stewards',
           href: `${process.env.REACT_APP_WEBSITE_URL}/land-stewards/`,
+        },
+        {
+          title: 'Community',
+          href: `${process.env.REACT_APP_WEBSITE_URL}/community/`,
         },
         {
           title: 'Developers',
@@ -154,6 +158,7 @@ function AppHeader(): JSX.Element {
     {
       title: 'Community',
       dropdownItems: [
+        { title: 'Community Overview', href: `${process.env.REACT_APP_WEBSITE_URL}/community/` },
         { title: 'Developers', href: `${process.env.REACT_APP_WEBSITE_URL}/developers/` },
         { title: 'Scientists', href: `${process.env.REACT_APP_WEBSITE_URL}/science/` },
         { title: 'Validators', href: `${process.env.REACT_APP_WEBSITE_URL}/validators/` },
@@ -176,8 +181,8 @@ function AppHeader(): JSX.Element {
       color={theme.palette.primary.light}
       transparent={false}
       absolute={false}
-      pathname={pathname}
       fullWidth={fullWidthRegExp.test(pathname)}
+      pathName={pathname}
     />
   );
 }

@@ -135,15 +135,15 @@
       ],
       "sdgs": [
         {
-          "imageUrl": "https://regen-registry.s3.amazonaws.com/sdgs/1-zero-hunger.png",
+          "imageUrl": "https://regen-registry.s3.amazonaws.com/sdgs/sdg2.svg",
           "title": "200k kg protein production"
         },
         {
-          "imageUrl": "https://regen-registry.s3.amazonaws.com/sdgs/13-climate-action.png",
+          "imageUrl": "https://regen-registry.s3.amazonaws.com/sdgs/sdg13.svg",
           "title": "6.07 tons CO2e"
         },
         {
-          "imageUrl": "https://regen-registry.s3.amazonaws.com/sdgs/15-life-of-land.png",
+          "imageUrl": "https://regen-registry.s3.amazonaws.com/sdgs/sdg15.svg",
           "title": "28% increase in NDVI (vegetation health) "
         }
       ],

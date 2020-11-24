@@ -228,14 +228,6 @@ function VerifyEmail(): JSX.Element {
   );
 }
 
-// function PostPurchase(): JSX.Element {
-//   return (
-//     <div style={{ padding: '1rem', display: 'flex', justifyContent: 'center' }}>
-//       <Title variant="h1">Thank you for your purchase</Title>
-//     </div>
-//   );
-// }
-
 const App: React.FC = (): JSX.Element => {
   const { user, loading } = useAuth0();
 

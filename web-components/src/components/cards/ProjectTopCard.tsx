@@ -64,26 +64,26 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   sdgGridItem: {
     '&:nth-child(odd)': {
-      [theme.breakpoints.down('sm')]: {
-        paddingRight: theme.spacing(6.8 / 2),
-      },
-      [theme.breakpoints.up('xs')]: {
+      [theme.breakpoints.down('xs')]: {
         paddingRight: theme.spacing(5.5 / 2),
+      },
+      [theme.breakpoints.up('sm')]: {
+        paddingLeft: theme.spacing(6.8 / 2),
       },
     },
     '&:nth-child(even)': {
-      [theme.breakpoints.down('sm')]: {
-        paddingLeft: theme.spacing(6.8 / 2),
-      },
-      [theme.breakpoints.up('xs')]: {
+      [theme.breakpoints.down('xs')]: {
         paddingLeft: theme.spacing(5.5 / 2),
       },
+      [theme.breakpoints.up('sm')]: {
+        paddingLeft: theme.spacing(6.8 / 2),
+      },
     },
-    [theme.breakpoints.down('sm')]: {
-      paddingTop: theme.spacing(6.8),
-    },
-    [theme.breakpoints.up('xs')]: {
+    [theme.breakpoints.down('xs')]: {
       paddingTop: theme.spacing(5.5),
+    },
+    [theme.breakpoints.up('sm')]: {
+      paddingTop: theme.spacing(6.8),
     },
   },
   sdgGrid: {

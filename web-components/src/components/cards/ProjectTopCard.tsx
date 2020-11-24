@@ -68,7 +68,7 @@ const useStyles = makeStyles((theme: Theme) => ({
         paddingRight: theme.spacing(5.5 / 2),
       },
       [theme.breakpoints.up('sm')]: {
-        paddingLeft: theme.spacing(6.8 / 2),
+        paddingRight: theme.spacing(6.8 / 2),
       },
     },
     '&:nth-child(even)': {

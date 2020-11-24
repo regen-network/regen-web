@@ -35,25 +35,15 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   image: {
     borderRadius: '2px',
-    boxShadow: `3px 3px ${theme.palette.grey[100]}`,
+    // boxShadow: `3px 3px ${theme.palette.grey[100]}`,
     width: '100%',
-    // [theme.breakpoints.down('xs')]: {
-    //   height: theme.spacing(25),
-    //   width: theme.spacing(25),
-    //   marginRight: theme.spacing(4),
-    // },
-    // [theme.breakpoints.up('sm')]: {
-    //   height: theme.spacing(35),
-    //   width: theme.spacing(35),
-    //   marginRight: theme.spacing(4.5),
-    // },
   },
   sdg: {
     [theme.breakpoints.down('xs')]: {
-      paddingBottom: theme.spacing(5),
+      paddingBottom: theme.spacing(3),
     },
     [theme.breakpoints.up('sm')]: {
-      paddingBottom: theme.spacing(10),
+      paddingBottom: theme.spacing(4),
     },
   },
   sdgs: {
@@ -75,7 +65,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   sdgGridItem: {
     '&:nth-child(odd)': {
       [theme.breakpoints.down('sm')]: {
-        paddingRight: theme.spacing(6.75 / 2),
+        paddingRight: theme.spacing(6.8 / 2),
       },
       [theme.breakpoints.up('xs')]: {
         paddingRight: theme.spacing(5.5 / 2),
@@ -83,19 +73,17 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     '&:nth-child(even)': {
       [theme.breakpoints.down('sm')]: {
-        paddingLeft: theme.spacing(6.75 / 2),
+        paddingLeft: theme.spacing(6.8 / 2),
       },
       [theme.breakpoints.up('xs')]: {
         paddingLeft: theme.spacing(5.5 / 2),
       },
     },
-    '&:not(:first-child), &:not(:nth-child(2))': {
-      [theme.breakpoints.down('sm')]: {
-        paddingTop: theme.spacing(6.75),
-      },
-      [theme.breakpoints.up('xs')]: {
-        paddingTop: theme.spacing(5.5),
-      },
+    [theme.breakpoints.down('sm')]: {
+      paddingTop: theme.spacing(6.8),
+    },
+    [theme.breakpoints.up('xs')]: {
+      paddingTop: theme.spacing(5.5),
     },
   },
   sdgGrid: {

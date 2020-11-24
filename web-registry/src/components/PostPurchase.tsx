@@ -30,6 +30,7 @@ const PROJECT = gql`
         creditClassVersionsById(last: 1) {
           nodes {
             name
+            metadata
           }
         }
       }
@@ -183,7 +184,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.down('xs')]: {
       paddingTop: theme.spacing(2.5),
     },
-  }
+  },
 }));
 
 function GridItem({ label, value }: { label: string; value: any }): JSX.Element {
@@ -206,10 +207,6 @@ export default function PostPurchase(): JSX.Element {
   const [copied, setCopied] = useState(false);
   let { walletId, projectId, name } = useParams<{ walletId: string; projectId: string; name: string }>();
   const options = { year: 'numeric', month: 'short', day: 'numeric' };
-  const shareTwitterText: string =
-    'Just purchased credits on Regen Registry! CarbonPlus credits help to meet %23climatechange goals, support %23farmers and restore %23ecosystems. Join us and take %23climateaction @regen_network - open marketplace for climate solutions. Learn more:';
-  const shareTelegramText: string =
-    'Just purchased credits on Regen Registry! CarbonPlus credits help to meet climate change goals, support farmers and restore ecosystems. Join us and take climateaction https://t.me/regennetwork_public - open marketplace for climate solutions.';
 
   const { data: projectData } = useQuery(PROJECT, {
     errorPolicy: 'ignore',
@@ -226,10 +223,10 @@ export default function PostPurchase(): JSX.Element {
       ? `${window.location.origin}/registry/projects/${projectId}`
       : `${window.location.origin}/projects/${projectId}`;
 
-  const units: number | undefined = walletData && walletData.walletById && sum(
-    walletData.walletById.purchasesByBuyerWalletId.nodes[0].transactionsByPurchaseId.nodes,
-    'units',
-  );
+  const units: number | undefined =
+    walletData &&
+    walletData.walletById &&
+    sum(walletData.walletById.purchasesByBuyerWalletId.nodes[0].transactionsByPurchaseId.nodes, 'units');
 
   return (
     <>
@@ -263,10 +260,7 @@ export default function PostPurchase(): JSX.Element {
                   )}
                 />
                 <GridItem label="project" value={<a href={url}>{projectData.projectByHandle.name}</a>} />
-                <GridItem
-                  label="# of credits"
-                  value={units}
-                />
+                <GridItem label="# of credits" value={units} />
                 <GridItem
                   label="total price"
                   value={`$${new Intl.NumberFormat('en-US', {
@@ -309,7 +303,7 @@ export default function PostPurchase(): JSX.Element {
             <Grid container justify="center" spacing={4}>
               <Grid item>
                 <a
-                  href={`https://twitter.com/intent/tweet?url=${url}&text=${shareTwitterText}`}
+                  href={`https://twitter.com/intent/tweet?url=${url}&text=${projectData.projectByHandle.creditClassByCreditClassId.creditClassVersionsById.nodes[0].metadata.twitterShare}`}
                   rel="noopener noreferrer"
                   target="_blank"
                   className={classes.iconContainer}
@@ -345,7 +339,7 @@ export default function PostPurchase(): JSX.Element {
               </Grid>
               <Grid item>
                 <a
-                  href={`https://t.me/share/url?url=${url}&text=${shareTelegramText}`}
+                  href={`https://t.me/share/url?url=${url}&text=${projectData.projectByHandle.creditClassByCreditClassId.creditClassVersionsById.nodes[0].metadata.telegramShare}`}
                   rel="noopener noreferrer"
                   target="_blank"
                   className={classes.iconContainer}

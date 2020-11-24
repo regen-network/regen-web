@@ -43,9 +43,18 @@ const Seller = (): JSX.Element => {
       <div style={{ textAlign: 'center', paddingBottom: '1rem' }}>
         {isAuthenticated &&
           (search.get('setup') === 'true' ? (
-            <Title variant="h3" align="center">
-              Thank you!
-            </Title>
+            <div>
+              <Title variant="h3" align="center">
+                Thank you!
+              </Title>
+              <ContainedButton
+                style={{ marginTop: '1rem' }}
+                href="https://dashboard.stripe.com/"
+                target="_blank"
+              >
+                View stripe dashboard
+              </ContainedButton>
+            </div>
           ) : (
             <ContainedButton onClick={accountSetup}>Account Setup</ContainedButton>
           ))}

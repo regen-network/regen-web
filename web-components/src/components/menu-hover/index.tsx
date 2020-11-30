@@ -12,6 +12,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginTop: theme.spacing(4.75),
   },
   text: {
+    '& li.MuiListItem-button:hover': {
+      backgroundColor: 'transparent',
+    },
     '& li > a': {
       'font-family': 'lato',
       color: '#000',
@@ -25,6 +28,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   paper: {
     'border-radius': '2px',
     border: `1px solid ${theme.palette.grey[400]}`,
+    paddingRight: '1.25rem',
   },
 }));
 

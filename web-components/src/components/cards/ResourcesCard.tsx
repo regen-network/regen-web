@@ -58,7 +58,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     [theme.breakpoints.up('sm')]: {
       paddingTop: theme.spacing(2.75),
-    }
+    },
   },
   description: {
     marginTop: theme.spacing(2),
@@ -132,7 +132,9 @@ export default function ResourcesCard({
             {updated}
           </Typography>
         )}
-        {description && <Typography className={classes.description}>{ReactHtmlParser(description)}</Typography>}
+        {description && (
+          <Typography className={classes.description}>{ReactHtmlParser(description)}</Typography>
+        )}
       </div>
       <div className={classes.buttonWrapper}>
         <OutlinedButton target={target} href={link} className={classes.button}>

@@ -82,20 +82,21 @@ interface props {
 
 const PartnersPage = ({ location }: props): JSX.Element => {
   const data = useStaticQuery(graphql`
-    query {
-      allPartnersYaml(sort: { order: ASC }) {
+    {
+      allPartnersYaml {
         edges {
           node {
+            id
             header
+            contactCard {
+              body
+              header
+            }
             partnerLogos {
+              link
               image {
                 publicURL
               }
-              link
-            }
-            contactCard {
-              header
-              body
             }
           }
         }

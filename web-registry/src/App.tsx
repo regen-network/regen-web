@@ -63,6 +63,10 @@ function AppFooter(): JSX.Element {
           href: `${process.env.REACT_APP_WEBSITE_URL}/land-stewards/`,
         },
         {
+          title: 'Community',
+          href: `${process.env.REACT_APP_WEBSITE_URL}/community/`,
+        },
+        {
           title: 'Developers',
           href: `${process.env.REACT_APP_WEBSITE_URL}/developers/`,
         },
@@ -148,13 +152,14 @@ function AppFooter(): JSX.Element {
 function AppHeader(): JSX.Element {
   const { pathname } = useLocation();
   const theme = useTheme();
-
+  const fullWidthRegExp: RegExp = /projects\/[a-z-]+/;
   const menuItems: HeaderMenuItem[] = [
     { title: 'Buyers', href: `${process.env.REACT_APP_WEBSITE_URL}/buyers/` },
     { title: 'Land Stewards', href: `${process.env.REACT_APP_WEBSITE_URL}/land-stewards/` },
     {
       title: 'Community',
       dropdownItems: [
+        { title: 'Community Overview', href: `${process.env.REACT_APP_WEBSITE_URL}/community/` },
         { title: 'Developers', href: `${process.env.REACT_APP_WEBSITE_URL}/developers/` },
         { title: 'Scientists', href: `${process.env.REACT_APP_WEBSITE_URL}/science/` },
         { title: 'Validators', href: `${process.env.REACT_APP_WEBSITE_URL}/validators/` },
@@ -170,13 +175,15 @@ function AppHeader(): JSX.Element {
       ],
     },
   ];
+
   return (
     <Header
       menuItems={menuItems}
       color={theme.palette.primary.light}
       transparent={false}
       absolute={false}
-      pathname={pathname}
+      fullWidth={fullWidthRegExp.test(pathname)}
+      pathName={pathname}
     />
   );
 }

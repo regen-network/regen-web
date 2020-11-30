@@ -36,36 +36,39 @@ practicesOutcomesSection:
     items:
       - image: ../../static/media/no-till.svg
         header: No-Till
-        description: Growing crops without disturbing the soil through tillage decreases
-          soil erosion.
+        description: The practice of limiting soil disturbance by refraining from
+          tilling reduces soil erosion and increases soil health.
       - image: ../../static/media/cover-cropping.svg
         header: Cover cropping
-        description: Cover crops are planted to cover the soil rather than for the
-          purpose of being harvested.
+        description: Cover crops maintain soil coverage during non-crop periods rather
+          than for the purpose of being harvested reducing erosion and
+          increasing soil health.
       - image: ../../static/media/crop-rotation.svg
         header: Crop rotation
-        description: Growing a series of different types of crops in the same area
-          increases soil fertility, reduces erosion, and more.
+        description: Growing a series of different types of crops in a rotational
+          sequence over the same area increases soil fertility, reduces erosion,
+          and more.
       - image: ../../static/media/rotational-grazing.svg
         header: Rotational grazing
-        description: Moving grazing livestock between pastures on a regular basis
-          increases soil health.
+        description: A management plan moving grazing livestock between pastures on a
+          regular basis increases soil health and improves forage quality.
       - image: ../../static/media/agroforestry.svg
         header: Agroforestry
-        description: A land use management system in which trees or shrubs are grown
+        description: A land-use management system in which trees or shrubs are grown
           around or among crops or pastureland.
       - image: ../../static/media/riparian-zones.svg
         header: Riparian protection
         description: Protecting the area between land and a river or stream stabilizes
-          soil and encourages biodiversity.
+          soil, encourages biodiversity, and protects water quality.
       - image: ../../static/media/perennials.svg
         header: Perennials
         description: Perennial plants can hold soil to prevent erosion, capture
           dissolved nitrogen, and reduce the need for herbicides.
       - image: ../../static/media/buffer-strips.svg
         header: Buffers strips
-        description: A buffer strip is an area of land maintained in permanent
-          vegetation that helps to control air, soil, and water quality.
+        description: An area of land maintained in permanent vegetation designed to
+          intercept pollutants that help to improve air, soil, and water
+          quality.
   outcomes:
     header: ecological outcomes
     items:

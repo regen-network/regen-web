@@ -18,7 +18,7 @@ marketplaceSection:
       header: Register a project
       description: Get paid for your ecological practices, such as cover cropping,
         crop rotation, agroforestry, rotational grazing, and more.
-      linkText: List Your Project
+      linkText: Learn more
       linkUrl: /land-stewards/
     - caption: Buyers
       image: ../../static/media/buyers.png
@@ -28,9 +28,9 @@ marketplaceSection:
       linkText: Browse Projects
       linkUrl: /buyers/
 climateSection:
-  header: Reverse climate change through carbon removal that regenerates ecosystems
+  header: Reverse climate change through carbon removal that regenerates ecosystems.
   description: Introducing Carbon<i>Plus</i> - a suite of carbon credits with
-    ecological co-benefits
+    ecological co-benefits.
   image: ../../static/media/map.png
   solution:
     header: "Solution:"
@@ -45,7 +45,7 @@ carbonPlusSection:
     featured: "Featured Credits:"
     creditName: Carbon<i>Plus</i>
   header: Carbon<i>Plus</i> Credits remove carbon and restore natural grassland
-    ecosystems
+    ecosystems.
   description: Shifting to managed grazing can potentially sequester 16.4 - 26
     CO2e (Gt) by 2050. Wilmot Cattle Co. has increased soil organic carbon to
     4.5% and removed over 30,000 tons of CO2e in two years.<br><br>Co-benefits

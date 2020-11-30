@@ -1,0 +1,16 @@
+query ProjectByHandle($stripeId: String!) {
+  projectByHandle(stripeId: $stripeId) {
+    id
+    name
+    metadata
+    image
+    creditClassByCreditClassId {
+      creditClassVersionsById(last: 1) {
+        nodes {
+          name
+          metadata
+        }
+      }
+    }
+  }
+}

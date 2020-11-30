@@ -62,7 +62,7 @@
           "title": "Co-benefits"
         }
       },
-      "glanceImgSrc": "impactag-smallmap-top-v3.jpg",
+      "glanceImgSrc": "https://regen-registry.s3.amazonaws.com/projects/wilmot/impactag-smallmap-top-v3.jpg",
       "glanceText": [
         "Increased soil organic carbon to 4.5%.",
         "Improved co-benefits significantly with Soil Health ranking as excellent, Ecosystem Health as good, and Animal Welfare as excellent."
@@ -87,7 +87,7 @@
           "state": "New South Wales",
           "country": "Australia"
         },
-        "imgSrc": "impactag.jpg",
+        "imgSrc": "https://regen-registry.s3.amazonaws.com/projects/wilmot/impactag.jpg",
         "description": "Impact Ag utilises a variety of pathways and partners to measure and monitise natural capital on assets under management or advisory."
       },
       "steward": {
@@ -97,35 +97,57 @@
           "state": "New South Wales",
           "country": "Australia"
         },
-        "imgSrc": "wilmot.jpg",
+        "imgSrc": "https://regen-registry.s3.amazonaws.com/projects/wilmot/wilmot.jpg",
         "description": "Wilmot Cattle Company is an innovative, regenerative, grass-fed beef business."
       },
-      "shortDescription": "Wilmot Cattle Co currently operates two properties, Wilmot and Woodburn. The two properties operate cooperatively with a mix of breeding, trading, and 100% natural grass finishing enterprises.",
-      "longDescription": "Wilmot is located high in the New England Tablelands in Ebor, Australia. At approximately 1,200 meters above sea level, the 1,854 hectare property has an average annual rainfall of 1,200 mm, highly fertile volcanic basalt soils, pristine spring fed, year-round natural waterways, including five waterfalls. It is a unique environment for growing cattle.\n\nPrior to the commencement of Wilmot Cattle Company operations in 2008, the property had been conventionally managed. In 2013, a property transformation began, adopting regenerative and holistic management practices and resulting in significant gains in the overall ecological health of the farm.\n\nToday the property is managed in an intensive rotationally-grazed system with small numbers of large mobs moving across the landscape, mimicking nature, to create ecological change and improve landscape health and biological function. At shovel depth, our soil organic carbon (SOC) has improved from ~2.5% to >4.5%, with a goal of getting it to >6% by 2023.",
+      "tagline": "Stuart Austin & Trisha Cowley have managed Wilmot since 2016",
+      "quote": {
+        "text": "We feel privileged to have the opportunity to manage cattle in a truly holistic and regenerative way on such a remarkable property.",
+        "person": {
+          "name": "stuart austin",
+          "role": "Wilmot General Manager"
+        }
+      },
+      "shortDescription": "Wilmot is an extraordinary property high in the New England Tablelands at Ebor, New South Wales, Australia. Set on 1,854ha and at approximately 1,200m above sea level, average annual rainfall of 1,200mm, highly fertile volcanic basalt soils, and complimented by a series of pristine spring fed, year-round natural waterways including five waterfalls, it is quite simply a unique environment for growing cattle.",
+      "longDescription": "<p>Stu & Trish are the management team behind Wilmot Cattle Co and are driven by the exciting ecological opportunities they can foresee for the business. They have a wholehearted belief in regenerative agriculture and the benefits it will bring to the industry globally, as we collectively work to heal what has largely become a degraded landscape. They having a burning desire to succeed in agriculture and are very ambitious in the growth and development plans they have for Wilmot Cattle Co.</p><p>While Stu has managed the day to day operations of Wilmot since 2016, and now presides over the portfolio of all three properties in a General Manager capacity, Trish works tirelessly behind the scenes ensuring a high level of rigour around the data collection, management, and analysis of every aspect of the business. They firmly believe that you cannot manage what you don’t measure and as such, the integrity of the data is paramount.</p><p>In their spare time they enjoy exploring the natural wonders of Wilmot, including its five waterfalls and large areas of virtually native bushland, with their two kids Harry and Poppy. They all gain great satisfaction from discovering new species of plants and learning about their role in the ecosystem.</p>",
       "media": [
         {
-          "src": "Wilmot5.jpg",
-          "thumbnail": "Wilmot5-thumbnail.jpg"
+          "src": "https://regen-registry.s3.amazonaws.com/projects/wilmot/image1.png",
+          "type": "image"
         },
         {
-          "src": "Wilmot3.jpg",
-          "thumbnail": "Wilmot3-thumbnail.jpg"
+          "src": "https://regen-registry.s3.amazonaws.com/projects/wilmot/image2.png",
+          "type": "image"
         },
         {
-          "src": "Wilmot4.jpg",
-          "thumbnail": "Wilmot4-thumbnail.jpg"
+          "src": "https://regen-registry.s3.amazonaws.com/projects/wilmot/image3.png",
+          "type": "image"
         },
         {
-          "src": "Wilmot6.jpg",
-          "thumbnail": "Wilmot6-thumbnail.jpg"
+          "src": "https://regen-registry.s3.amazonaws.com/projects/wilmot/image4.png",
+          "type": "image"
         },
         {
-          "src": "https://regen-registry.s3.amazonaws.com/Wilmot+Video.mp4",
-          "thumbnail": "Wilmot2-thumbnail.jpg",
-          "preview": "Wilmot2.jpg"
+          "src": "https://www.youtube.com/embed/PAVSJlj-i00",
+          "preview": "https://regen-registry.s3.amazonaws.com/projects/wilmot/video-preview.jpg",
+          "type": "video"
         }
       ],
-      "image": "wilmotcattlecompany.jpg",
+      "sdgs": [
+        {
+          "imageUrl": "https://regen-registry.s3.amazonaws.com/sdgs/sdg2.svg",
+          "title": "200k kg protein production"
+        },
+        {
+          "imageUrl": "https://regen-registry.s3.amazonaws.com/sdgs/sdg13.svg",
+          "title": "6.07 tons CO2e"
+        },
+        {
+          "imageUrl": "https://regen-registry.s3.amazonaws.com/sdgs/sdg15.svg",
+          "title": "28% increase in NDVI (vegetation health) "
+        }
+      ],
+      "image": "https://regen-registry.s3.amazonaws.com/Wilmot5.jpg",
       "map": "Wilmot_boundary.kml",
       "keyOutcomesActivities": [
         "Independently verified",
@@ -141,12 +163,12 @@
           "actions": [
             {
               "name": "Time Controlled Rotational Grazing",
-              "description": "Since 2013, Wilmot Cattle Co. has implemented time controlled rotational grazing at Wilmot Farm. In order to mirror natural herding behaviors, time controlled rotational grazing optimizes the number of stock in a paddock, matches the grazing period with available pasture, shortens grazing periods in each paddock, and follows these activities by long resting periods to allow the pasture to recover. When managed well, this grazing system increases groundcover, biomass, plant diversity, animal and plant nutrition, soil health, water infiltration and soil organic carbon. A more complete explanation of the science, monitoring tools and management practices is provided below.",
+              "description": "Since 2013, Wilmot Cattle Co has implemented time controlled rotational grazing at the Wilmot property. Effectively mimicking natural herding behaviours, time controlled rotational grazing is the practice of moving large herds of animals across the landscape, grazing pastures for very short periods of time, allowing long rest periods, enabling adequate plant recovery. Stocking rate is adjusted frequently to match the feed available and growth rate of the plant. When managed well, this grazing system increases groundcover, biomass, plant diversity, animal and plant nutrition, soil health, water infiltration and soil organic carbon. A more complete explanation of the science, monitoring tools and management practices is provided below.",
               "imgSrc": "time-controlled-rotational-grazing.jpg"
             },
             {
               "name": "Decrease Paddock Size",
-              "description": "Decreased paddock sizes enable effective grazing at a controllable density. Wilmot Farm has adopted a paddock subdivision program with an average paddock size of 25 hectares.",
+              "description": "Decreased paddock sizes enable effective grazing at a controllable density. Wilmot Farm has adopted a paddock subdivision program with an average paddock size of 22 hectares.",
               "imgSrc": "decrease-paddock-size.jpg"
             },
             {
@@ -169,28 +191,28 @@
       ],
       "impact": [
         {
-          "name": "Soil organic carbon",
-          "description": "Each credit represents one ton of CO2e (1t CO2e) that has been sequestered in the soil.",
+          "name": "Soil Organic Carbon",
+          "description": "Organic matter contributes to nutrient retention and turnover, soil structure, moisture retention and availability, degradation of pollutants, carbon sequestration and soil resilience.",
           "monitored": true,
-          "imgSrc": "impactag-soc.jpg"
+          "imgSrc": "https://regen-registry.s3.amazonaws.com/projects/wilmot/impact1.png"
         },
         {
-          "name": "Ecosystem health",
-          "description": "We rank the ecosystem health based on the Costanza Framework, measuring its ability to maintain  structure (organization) and function (vigor) over time in the face of external stress (resilience).",
+          "name": "Animal Welfare",
+          "description": "Animal welfare is an important component in a well managed grazing enterprise. Low stress stock handling techniques have been adopted to ensure animals have higher quality life.",
           "monitored": false,
-          "imgSrc": "ecological-health.png"
+          "imgSrc": "https://regen-registry.s3.amazonaws.com/projects/wilmot/impact2.png"
         },
         {
-          "name": "Animal welfare",
-          "description": "We rank animal welfare based on adherence to national animal welfare standards that track nutrition level, access to water, social contact and more.",
+          "name": "Ecosystem Health",
+          "description": "In the ecological realm, ‘health’ is characterized by system integrity and the exhibition of certain fundamental properties of self-organizing complex systems.",
           "monitored": false,
-          "imgSrc": "animal-welfare.png"
+          "imgSrc": "https://regen-registry.s3.amazonaws.com/projects/wilmot/impact3.png"
         },
         {
-          "name": "Soil health",
-          "description": "We rank the soil health based on Cornell University’s Soil Health Assessment looking at both micronutrients and macronutrients.",
+          "name": "Soil Health",
+          "description": "The capacity of soil to function as a vital living ecosystem that sustains plants, animals, and humans. An annual soil monitoring program has been in place since 2013.",
           "monitored": false,
-          "imgSrc": "soil.png"
+          "imgSrc": "https://regen-registry.s3.amazonaws.com/projects/wilmot/impact4.png"
         }
       ],
       "creditClass": {
@@ -201,8 +223,7 @@
       "credits": {
         "purchased": 0,
         "issued": 0
-      },
-      "hideCreditDetails": false
+      }
     }
   ]
 }

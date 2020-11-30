@@ -64,6 +64,7 @@ const PhotosSection = (): JSX.Element => {
                 assets={content.photos.map(({ image }: { image: { publicURL: string } }) => ({
                   src: image.publicURL,
                   thumbnail: image.publicURL,
+                  type: 'image',
                 }))}
               />
             </div>

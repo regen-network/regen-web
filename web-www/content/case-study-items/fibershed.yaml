@@ -14,7 +14,7 @@ aboutSection:
     fiber producers in 51 counties in Northern and Central California.
 
 
-    Fibershed cultivates textile cultures designed to build soil carbon stocks on the working landscapes on which they depend, while directly enhancing the strength of regional economies. Through strategic grazing, conservation tillage, and a host of scientifically vetted soil carbon enhancing practices, their supply chains create ‘climate beneficial’ textiles and clothing that will become the new standard in a world looking to rapidly mitigate the effects of climate change.
+    Fibershed cultivates textile cultures designed to build soil carbon stocks on the working landscapes on which they depend, while directly enhancing the strength of regional economies. Through strategic grazing, conservation tillage, and a host of scientifically vetted soil carbon enhancing practices, their supply chains create ‘climate beneficial’ textiles and clothing that will become the new standard in a world looking to rapidly mitigate the effects of climate change. Read our Fibershed [blog here](https://medium.com/regen-network/modern-day-pastoralism-re-defining-the-economics-of-rotational-sheep-grazing-on-california-94d02c652234).
   mapImage: ../../static/media/fibershed-map.png
   aboutImage: ../../static/media/fibershed-about.png
   practice: Rotational Grazing and Prescribed Grazing
@@ -58,8 +58,9 @@ fundingSection:
     transparency and accountability to funders.
   results: md//Project page on Regen Registry targeted to go live in Q4; Regen
     Ledger integration to be added in subsequent phase.
-  next: md//To that end, we recently applied and awarded the NRCS Conservation
-    Innovation Grant (CIG) in the hope of scaling this throughout California.
+  next: md//To that end, we recently applied and were awarded the NRCS
+    Conservation Innovation Grant (CIG) which may lead to scaling the program
+    scaling throughout California.
 conclusionSection:
   description: >-
     md//Remote sensing is a cost-effective way to verify grazing on a large

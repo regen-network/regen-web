@@ -23,11 +23,11 @@ blogSection:
       description: How Regen Network became the lead maintainer of the Cosmos SDK
       image: ../../static/media/screen-shot-2020-09-29-at-6.50.26-am.png
       url: https://medium.com/regen-network/cosmos-regen-network-synergy-edf8f5dd12ec
-    - header: Regen Network Retrospective
-      description: |
-        Looking back on three years of building a regenerative future
-      image: ../../static/media/gregory-christian.jpeg
-      url: https://medium.com/regen-network/regen-network-retrospective-3b18e06c1192
+    - header: Modern Day Pastoralism
+      description: Re-Defining the Economics of Rotational Sheep Grazing on California
+        Vineyards
+      image: ../../static/media/paige_green_photo.jpeg
+      url: https://medium.com/regen-network/modern-day-pastoralism-re-defining-the-economics-of-rotational-sheep-grazing-on-california-94d02c652234
 comingSoonSection:
   header: Coming Soon
   projects:

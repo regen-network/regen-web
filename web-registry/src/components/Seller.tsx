@@ -6,6 +6,8 @@ import { useQuery } from '@apollo/react-hooks';
 
 import NavBar from './NavBar';
 import getOrigin from '../lib/origin';
+import getApiUri from '../lib/apiUri';
+
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import Title from 'web-components/lib/components/title';
@@ -32,7 +34,7 @@ const Seller = (): JSX.Element => {
     const getAccountLink = async (): Promise<void> => {
       try {
         const accessToken = await getAccessTokenSilently();
-        const apiUri = process.env.REACT_APP_API_URI || 'http://localhost:5000';
+        const apiUri = getApiUri();
         const res = await axios({
           method: 'POST',
           url: `${apiUri}/create-account-link`,
@@ -45,10 +47,10 @@ const Seller = (): JSX.Element => {
         });
         window.location.assign(res.data.url);
       } catch (e) {
+        // TODO handle error, no design yet
         // console.log(e.message);
       }
     };
-
     getAccountLink();
   }, [getAccessTokenSilently, user]);
 
@@ -57,7 +59,7 @@ const Seller = (): JSX.Element => {
       const getLoginLink = async (): Promise<void> => {
         try {
           const accessToken = await getAccessTokenSilently();
-          const apiUri = process.env.REACT_APP_API_URI || 'http://localhost:5000';
+          const apiUri = getApiUri();
           const res = await axios({
             method: 'POST',
             url: `${apiUri}/create-login-link`,
@@ -71,8 +73,9 @@ const Seller = (): JSX.Element => {
             // Directly link to the account tab
             url = url + '#/account';
           }
-          window.location.assign(url);
+          window.open(url, '_blank') || window.location.assign(url);
         } catch (e) {
+          // TODO handle error, no design yet
           // console.log(e.message);
         }
       };

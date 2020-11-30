@@ -3,6 +3,8 @@ import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from '@apollo/react-hooks';
 import { useAuth0 } from '@auth0/auth0-react';
 
+import getApiUri from './lib/apiUri';
+
 interface AuthApolloProviderProps {
   children?: any;
 }
@@ -12,7 +14,7 @@ export const AuthApolloProvider = ({ children }: AuthApolloProviderProps): any =
   if (isLoading) {
     return <div></div>;
   }
-  const apiUri = process.env.REACT_APP_API_URI || 'http://localhost:5000';
+  const apiUri = getApiUri();
   const client = new ApolloClient({
     uri: `${apiUri}/graphql`,
     request: async operation => {

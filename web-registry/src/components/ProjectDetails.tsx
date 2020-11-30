@@ -39,6 +39,7 @@ import ContainedButton from 'web-components/lib/components/buttons/ContainedButt
 import EmailIcon from 'web-components/lib/components/icons/EmailIcon';
 
 import { getImgSrc } from '../lib/imgSrc';
+import getApiUri from '../lib/apiUri';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -609,7 +610,7 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
       </FixedFooter>
       <Modal open={open} onClose={handleClose}>
         <MoreInfoForm
-          apiUrl={process.env.REACT_APP_API_URI}
+          apiUrl={getApiUri()}
           onClose={handleClose}
           onSubmit={() => {
             handleClose();

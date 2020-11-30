@@ -14,7 +14,7 @@ import Submit from './Submit';
 interface MoreInfoFormProps {
   onClose: () => void;
   onSubmit?: () => void;
-  apiUrl?: string;
+  apiUrl: string;
 }
 
 interface Values {
@@ -83,7 +83,7 @@ export default function MoreInfoForm({ onClose, onSubmit, apiUrl }: MoreInfoForm
         }}
         onSubmit={({ budget, email, name, orgName }, { setSubmitting, setStatus }) => {
           setSubmitting(true);
-          const apiUri: string = apiUrl || 'http://localhost:5000';
+          const apiUri: string = apiUrl;
           axios
             .post(`${apiUri}/buyers-info`, {
               budget,

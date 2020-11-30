@@ -15,6 +15,7 @@ export interface node {
 interface StyleProps {
   color: string;
   borderBottom?: boolean;
+  fullWidth: boolean;
 }
 
 interface HeaderProps {
@@ -24,6 +25,7 @@ interface HeaderProps {
   color: string;
   menuItems?: HeaderMenuItem[];
   borderBottom?: boolean;
+  fullWidth?: boolean;
   pathName?: string;
 }
 
@@ -50,7 +52,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   }),
   header: props => ({
     color: props.color,
-    maxWidth: theme.breakpoints.values.lg,
+    maxWidth: props.fullWidth ? '100%' : theme.breakpoints.values.lg,
     margin: '0 auto',
     position: 'relative',
     zIndex: 10,
@@ -73,8 +75,8 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       color: theme.palette.primary.light,
     },
     [theme.breakpoints.up('xl')]: {
-      paddingRight: theme.spacing(5),
-      paddingLeft: theme.spacing(5),
+      paddingRight: props.fullWidth ? theme.spacing(12.5) : theme.spacing(5),
+      paddingLeft: props.fullWidth ? theme.spacing(12.5) : theme.spacing(5),
     },
     '& .MuiMenuItem-root > a, .MuiMenuItem-root > div > span': {
       fontSize: theme.spacing(3.25),
@@ -187,9 +189,10 @@ export default function Header({
   menuItems,
   borderBottom = true,
   absolute = true,
+  fullWidth = false,
   pathName = '/',
 }: HeaderProps): JSX.Element {
-  const classes = useStyles({ color, borderBottom });
+  const classes = useStyles({ fullWidth, color, borderBottom });
   const rootClass = [classes.borderBottom];
   rootClass.push(transparent ? classes.transparent : classes.background);
   rootClass.push(absolute ? classes.absolute : '');
@@ -198,13 +201,7 @@ export default function Header({
 
   return (
     <div className={clsx(rootClass)}>
-      <Grid
-        className={clsx(classes.header)}
-        container
-        direction="row"
-        alignItems="center"
-        justify="space-between"
-      >
+      <Grid className={classes.header} container direction="row" alignItems="center" justify="space-between">
         <Grid className={classes.logoItem} item>
           <a href="/">
             <Box display={{ xs: 'none', sm: 'block' }}>

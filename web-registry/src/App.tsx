@@ -28,6 +28,7 @@ import BuyerCreate from './components/BuyerCreate';
 import NotFound from './components/NotFound';
 import Admin from './components/Admin';
 import PostPurchase from './components/PostPurchase';
+import Certificate from './components/Certificate';
 import CookiesFooter from 'web-components/lib/components/banner/CookiesBanner';
 
 interface BoolProps {
@@ -258,6 +259,9 @@ const App: React.FC = (): JSX.Element => {
           </Route>
           <Route exact path="/verify-email">
             <VerifyEmail />
+          </Route>
+          <Route exact path="/certificate">
+            <Certificate />
           </Route>
           <Route
             path="/projects"

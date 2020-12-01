@@ -1,14 +1,56 @@
-query ProjectByHandle($stripeId: String!) {
-  projectByHandle(stripeId: $stripeId) {
-    id
-    name
-    metadata
-    image
-    creditClassByCreditClassId {
-      creditClassVersionsById(last: 1) {
+query AllPurchases($stripeId: String) {
+  allPurchases(condition: { stripeId: $stripeId }) {
+    nodes {
+      id
+      createdAt
+      walletByBuyerWalletId {
+        partiesByWalletId(first: 1) {
+          nodes {
+            name
+          }
+        }
+      }
+      transactionsByPurchaseId {
         nodes {
+          units
+        }
+      }
+      creditVintageByCreditVintageId {
+        id
+        walletByIssuerId {
+          partiesByWalletId(first: 1) {
+            nodes {
+              name
+            }
+          }
+        }
+        projectByProjectId {
           name
-          metadata
+          area
+          areaUnit
+          image
+          addressByAddressId {
+            feature
+          }
+          partyByDeveloperId {
+            id
+            name
+            organizationsByPartyId(first: 1) {
+              nodes {
+                id
+                organizationMembersByOrganizationId(condition: { isOwner: true }) {
+                  nodes {
+                    userByMemberId {
+                      partyByPartyId {
+                        name
+                        roles
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
       }
     }

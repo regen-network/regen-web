@@ -231,7 +231,7 @@ function Projects(): JSX.Element {
 function VerifyEmail(): JSX.Element {
   const search = new URLSearchParams(window.location.search);
   return (
-    <div style={{ padding: '1rem' }}>
+    <div style={{ textAlign: 'center', padding: '1rem' }}>
       <Title variant="h3" align="center">
         Please confirm your email address
       </Title>

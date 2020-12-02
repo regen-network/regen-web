@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter, Switch, Route, useParams, useLocation, Redirect } from 'react-router-dom';
 import { useTheme } from '@material-ui/core/styles';
+import { useAuth0, OAuthError } from '@auth0/auth0-react';
+import { createBrowserHistory } from 'history';
 
-import { useAuth0 } from './react-auth0-spa';
 import isAdmin from './lib/admin';
 import { init as initGA } from './lib/ga';
 
@@ -27,7 +28,10 @@ import CreditsRetire from './components/CreditsRetire';
 import BuyerCreate from './components/BuyerCreate';
 import NotFound from './components/NotFound';
 import Admin from './components/Admin';
+import Seller from './components/Seller';
 import CookiesFooter from 'web-components/lib/components/banner/CookiesBanner';
+
+export const history = createBrowserHistory();
 
 interface BoolProps {
   [key: string]: boolean;
@@ -202,7 +206,7 @@ function AppHeader(): JSX.Element {
 // }
 
 function CreditsContainer(): JSX.Element {
-  let { userId } = useParams();
+  let { userId } = useParams<{ userId: string }>();
   const userCredits: PurchasedCredits | undefined = purchasedCredits.find(p => p.userId === userId);
   if (userCredits) {
     return <UserCredits credits={userCredits} />;
@@ -211,7 +215,7 @@ function CreditsContainer(): JSX.Element {
 }
 
 function ProjectContainer(): JSX.Element {
-  let { projectId } = useParams();
+  let { projectId } = useParams<{ projectId: string }>();
   const project: Project | undefined = projects.find(p => p.id === projectId);
 
   if (project) {
@@ -228,7 +232,9 @@ function VerifyEmail(): JSX.Element {
   const search = new URLSearchParams(window.location.search);
   return (
     <div style={{ padding: '1rem' }}>
-      <Title variant="h3">Please confirm your email address</Title>
+      <Title variant="h3" align="center">
+        Please confirm your email address
+      </Title>
       We’ve just sent a confirmation email to: {search.get('email')}
     </div>
   );
@@ -243,14 +249,24 @@ function PostPurchase(): JSX.Element {
 }
 
 const App: React.FC = (): JSX.Element => {
-  const { user, loading } = useAuth0();
+  const { user, isLoading, error } = useAuth0();
 
   useEffect(() => {
     initGA();
   });
 
-  if (loading) {
+  if (isLoading) {
     return <div></div>;
+  }
+
+  const authError = error as OAuthError;
+  if (
+    authError &&
+    authError.error_description &&
+    authError.error_description.indexOf('email_not_verified:') > -1
+  ) {
+    const email: string = authError.error_description.split(':')[1];
+    history.push(`/verify-email?email=${email}`);
   }
 
   return (
@@ -266,6 +282,7 @@ const App: React.FC = (): JSX.Element => {
           <Route exact path="/verify-email">
             <VerifyEmail />
           </Route>
+          <Route exact path={`/projects/impactag/admin`} component={Seller} />
           <Route
             path="/projects"
             render={({ match: { path } }) => (

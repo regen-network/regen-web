@@ -29,7 +29,7 @@ function getLegacyCookieName(name: string): string {
   return `${name}-legacy`;
 }
 
-function setCookie(cookieValue: string): void {
+function setCookie(name: string, cookieValue: string): void {
   // const secure: boolean = window.location ? window.location.protocol === 'https:' : true;
 
   // const cookieOptions: CookieAttributes = { expires: 365, sameSite: 'None', secure };
@@ -39,7 +39,7 @@ function setCookie(cookieValue: string): void {
   // Cookies.set(getLegacyCookieName(cookieName), cookieValue, cookieOptions);
 
   // set the regular cookie
-  Cookies.set(cookieName, cookieValue);
+  Cookies.set(name, cookieValue, { expires: 730 });
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -157,12 +157,12 @@ export default function CookiesBanner({ privacyUrl }: CookiesBannerProps): JSX.E
   }, [setVisible]);
 
   const accept = useCallback(() => {
-    setCookie('true');
+    setCookie(cookieName, 'true');
     setVisible(false);
   }, []);
 
   const reject = useCallback(() => {
-    Cookies.set(rejectCookieName, 'true');
+    setCookie(rejectCookieName, 'true');
     setVisible(false);
   }, []);
 

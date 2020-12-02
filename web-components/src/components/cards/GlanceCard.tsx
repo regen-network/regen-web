@@ -19,17 +19,17 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     [theme.breakpoints.down('xs')]: {
       marginTop: theme.spacing(2),
-      fontSize: theme.spacing(2.75),
+      fontSize: theme.spacing(3.5),
     },
     marginBottom: theme.spacing(2.75),
   },
   container: {
-    paddingTop: theme.spacing(4.5),
-    paddingBottom: theme.spacing(4.5),
-    paddingRight: theme.spacing(4.5),
-    paddingLeft: theme.spacing(4.5),
-    [theme.breakpoints.up('md')]: {
+    [theme.breakpoints.down('xs')]: {
+      padding: theme.spacing(4.5),
+    },
+    [theme.breakpoints.up('sm')]: {
       flexWrap: 'nowrap',
+      padding: 0,
     },
   },
   texts: {
@@ -40,8 +40,16 @@ const useStyles = makeStyles((theme: Theme) => ({
     // marginTop: theme.spacing(4.5),
   },
   text: {
-    fontSize: '0.875rem',
     paddingBottom: theme.spacing(1.5),
+    [theme.breakpoints.up('sm')]: {
+      fontSize: theme.spacing(4.5),
+    },
+    [theme.breakpoints.down('xs')]: {
+      fontSize: theme.spacing(3.5),
+    },
+    '& li': {
+      position: 'relative',
+    },
     '& li::before': {
       content: "'\\2022'",
       fontSize: '0.5rem',
@@ -49,11 +57,20 @@ const useStyles = makeStyles((theme: Theme) => ({
       display: 'inline-block',
       width: '1em',
       marginLeft: '-1em',
+      position: 'absolute',
+      [theme.breakpoints.up('sm')]: {
+        top: theme.spacing(2),
+      },
+      [theme.breakpoints.down('xs')]: {
+        top: theme.spacing(1.25),
+      },
     },
   },
   textContainer: {
-    paddingRight: theme.spacing(5),
-    [theme.breakpoints.down('md')]: {
+    [theme.breakpoints.up('sm')]: {
+      paddingLeft: theme.spacing(8.25),
+    },
+    [theme.breakpoints.down('xs')]: {
       paddingBottom: theme.spacing(4.5),
     },
   },
@@ -61,8 +78,15 @@ const useStyles = makeStyles((theme: Theme) => ({
     border: `1px solid ${theme.palette.info.light}`,
     borderRadius: '5px',
     objectFit: 'cover',
-    [theme.breakpoints.up('md')]: {
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
       height: '100%',
+    },
+  },
+  root: {
+    backgroundColor: theme.palette.primary.main,
+    [theme.breakpoints.up('sm')]: {
+      border: 'none',
     },
   },
 }));
@@ -71,10 +95,13 @@ export default function GlanceCard({ title = 'At a glance', text, imgSrc }: Glan
   const classes = useStyles({});
 
   return (
-    <Card>
+    <Card className={classes.root}>
       <Grid className={classes.container} container>
-        <Grid xs={12} md={7} item className={classes.textContainer}>
-          <Title variant="body2" className={classes.title}>
+        <Grid xs={12} sm={5} item>
+          <img className={classes.image} src={imgSrc} alt={imgSrc} />
+        </Grid>
+        <Grid xs={12} sm={7} item className={classes.textContainer}>
+          <Title variant="h6" className={classes.title}>
             {title}
           </Title>
           <ul className={classes.texts}>
@@ -84,9 +111,6 @@ export default function GlanceCard({ title = 'At a glance', text, imgSrc }: Glan
               </Typography>
             ))}
           </ul>
-        </Grid>
-        <Grid xs={12} md={5} item>
-          <img className={classes.image} src={imgSrc} alt={imgSrc} />
         </Grid>
       </Grid>
     </Card>

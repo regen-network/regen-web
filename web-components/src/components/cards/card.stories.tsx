@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Card from 'web-components/lib/components/cards/Card';
-import ProjectDeveloperCard from 'web-components/lib/components/cards/ProjectDeveloperCard';
+import ProjectTopCard from 'web-components/lib/components/cards/ProjectTopCard';
 import ImpactCard from 'web-components/lib/components/cards/ImpactCard';
 import MapCard from 'web-components/lib/components/cards/MapCard';
 import GlanceCard from 'web-components/lib/components/cards/GlanceCard';
@@ -40,8 +40,8 @@ const landSteward: User = {
   description: 'The Ngarrindjeri culture is centered around the lower lakes of the Murray River.',
 };
 
-export const projectDeveloperCard = (): JSX.Element => (
-  <ProjectDeveloperCard
+export const projectTopCard = (): JSX.Element => (
+  <ProjectTopCard
     projectDeveloper={object('project developer', projectDeveloper)}
     landSteward={object('land steward', landSteward)}
   />

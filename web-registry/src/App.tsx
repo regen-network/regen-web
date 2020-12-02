@@ -16,7 +16,7 @@ import {
   PurchasedCredits,
 } from './mocks';
 import Footer, { FooterItemProps as FooterItem } from 'web-components/lib/components/footer';
-import Header, { HeaderMenuItem } from 'web-components/lib/components/header';
+import Header, { HeaderMenuItem, HeaderColors } from 'web-components/lib/components/header';
 import Title from 'web-components/lib/components/title';
 import ProjectDetails from './components/ProjectDetails';
 import ProjectList from './components/ProjectList';
@@ -30,10 +30,6 @@ import Admin from './components/Admin';
 import PostPurchase from './components/PostPurchase';
 import Certificate from './components/Certificate';
 import CookiesFooter from 'web-components/lib/components/banner/CookiesBanner';
-
-interface BoolProps {
-  [key: string]: boolean;
-}
 
 function ScrollToTop(): null {
   const { pathname } = useLocation();
@@ -177,12 +173,17 @@ function AppHeader(): JSX.Element {
     },
   ];
 
+  const headerColors: HeaderColors = {
+    '/certificate': theme.palette.primary.main,
+  };
+
   return (
     <Header
       menuItems={menuItems}
-      color={theme.palette.primary.light}
-      transparent={false}
-      absolute={false}
+      color={headerColors[pathname] ? headerColors[pathname] : theme.palette.primary.light}
+      transparent={pathname === '/certificate'}
+      absolute={pathname === '/certificate'}
+      borderBottom={pathname !== '/certificate'}
       fullWidth={fullWidthRegExp.test(pathname)}
       pathName={pathname}
     />

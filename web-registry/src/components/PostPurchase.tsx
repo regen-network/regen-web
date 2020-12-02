@@ -10,14 +10,10 @@ import Section from 'web-components/lib/components/section';
 import GreenCard from 'web-components/lib/components/cards/GreenCard';
 import Description from 'web-components/lib/components/description';
 import Title from 'web-components/lib/components/title';
-import TwitterIcon from 'web-components/lib/components/icons/social/TwitterIcon';
-import FacebookIcon from 'web-components/lib/components/icons/social/FacebookIcon';
-import LinkedInIcon from 'web-components/lib/components/icons/social/LinkedInIcon';
-import TelegramIcon from 'web-components/lib/components/icons/social/TelegramIcon';
-import LinkIcon from 'web-components/lib/components/icons/LinkIcon';
-import Banner from 'web-components/lib/components/banner';
+import ShareIcons from 'web-components/lib/components/icons/ShareIcons';
+
 import sum from '../lib/sum';
-import copyTextToClipboard from '../lib/copy';
+import getRegistryUrl from '../lib/registryUrl';
 
 const PROJECT = gql`
   query ProjectByHandle($handle: String!) {
@@ -57,14 +53,6 @@ const WALLET = gql`
     }
   }
 `;
-
-interface PostPurchaseProps {
-  creditUnits: number;
-  price: number;
-  date: string | Date;
-  owner: string;
-  transactionId: string;
-}
 
 const useStyles = makeStyles((theme: Theme) => ({
   image: {
@@ -203,8 +191,6 @@ function GridItem({ label, value }: { label: string; value: any }): JSX.Element 
 
 export default function PostPurchase(): JSX.Element {
   const classes = useStyles();
-  const theme = useTheme();
-  const [copied, setCopied] = useState(false);
   let { walletId, projectId, name } = useParams<{ walletId: string; projectId: string; name: string }>();
   const options = { year: 'numeric', month: 'short', day: 'numeric' };
 
@@ -218,10 +204,7 @@ export default function PostPurchase(): JSX.Element {
     variables: { id: walletId },
   });
 
-  const url: string =
-    process.env.NODE_ENV === 'production'
-      ? `${window.location.origin}/registry/projects/${projectId}`
-      : `${window.location.origin}/projects/${projectId}`;
+  const url: string = getRegistryUrl(`projects/${projectId}`);
 
   const units: number | undefined =
     walletData &&
@@ -300,73 +283,20 @@ export default function PostPurchase(): JSX.Element {
             <Description className={classes.shareDescription}>
               {projectData.projectByHandle.metadata.shareTagline}
             </Description>
-            <Grid container justify="center" spacing={4}>
-              <Grid item>
-                <a
-                  href={`https://twitter.com/intent/tweet?url=${url}&text=${projectData.projectByHandle.creditClassByCreditClassId.creditClassVersionsById.nodes[0].metadata.twitterShare}`}
-                  rel="noopener noreferrer"
-                  target="_blank"
-                  className={classes.iconContainer}
-                >
-                  <TwitterIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />
-                </a>
-              </Grid>
-              <Grid item>
-                <a
-                  href={`https://www.facebook.com/sharer/sharer.php?u=${url}`}
-                  rel="noopener noreferrer"
-                  target="_blank"
-                  className={classes.iconContainer}
-                >
-                  <FacebookIcon
-                    color={theme.palette.primary.main}
-                    hoverColor={theme.palette.secondary.main}
-                  />
-                </a>
-              </Grid>
-              <Grid item>
-                <a
-                  href={`https://www.linkedin.com/sharing/share-offsite/?url=${url}`}
-                  rel="noopener noreferrer"
-                  target="_blank"
-                  className={classes.iconContainer}
-                >
-                  <LinkedInIcon
-                    color={theme.palette.primary.main}
-                    hoverColor={theme.palette.secondary.main}
-                  />
-                </a>
-              </Grid>
-              <Grid item>
-                <a
-                  href={`https://t.me/share/url?url=${url}&text=${projectData.projectByHandle.creditClassByCreditClassId.creditClassVersionsById.nodes[0].metadata.telegramShare}`}
-                  rel="noopener noreferrer"
-                  target="_blank"
-                  className={classes.iconContainer}
-                >
-                  <TelegramIcon
-                    color={theme.palette.primary.main}
-                    hoverColor={theme.palette.secondary.main}
-                  />
-                </a>
-              </Grid>
-              <Grid item>
-                <div
-                  onClick={() => copyTextToClipboard(url).then(() => setCopied(true))}
-                  className={classes.iconContainer}
-                >
-                  <LinkIcon
-                    className={classes.small}
-                    color={theme.palette.primary.main}
-                    hoverColor={theme.palette.secondary.main}
-                  />
-                </div>
-              </Grid>
-            </Grid>
+            <ShareIcons
+              url={url}
+              telegramShare={
+                projectData.projectByHandle.creditClassByCreditClassId.creditClassVersionsById.nodes[0]
+                  .metadata.telegramShare
+              }
+              twitterShare={
+                projectData.projectByHandle.creditClassByCreditClassId.creditClassVersionsById.nodes[0]
+                  .metadata.twitterShare
+              }
+            />
           </div>
         )}
       </Section>
-      {copied && <Banner text="Link copied to your clipboard" />}
     </>
   );
 }

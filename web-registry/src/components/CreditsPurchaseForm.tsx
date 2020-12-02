@@ -25,6 +25,7 @@ import {
 import Submit from 'web-components/lib/components/form/Submit';
 
 import { countries } from '../lib/countries';
+import getRegistryUrl from '../lib/registryUrl';
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_API_KEY || '');
 
@@ -301,12 +302,7 @@ export default function CreditsPurchaseForm({
             if (stripe) {
               const { error } = await stripe.redirectToCheckout({
                 items: [{ sku: stripePrice, quantity: units }],
-                successUrl:
-                  process.env.NODE_ENV === 'production'
-                    ? `${window.location.origin}/registry/post-purchase/${projectId}/${walletId}/${encodeURI(
-                        name,
-                      )}`
-                    : `${window.location.origin}/post-purchase/${projectId}/${walletId}/${encodeURI(name)}`,
+                successUrl: getRegistryUrl(`/post-purchase/${projectId}/${walletId}/${encodeURI(name)}`),
                 cancelUrl: window.location.href,
                 customerEmail: email,
                 clientReferenceId: JSON.stringify({ walletId, addressId, name }),

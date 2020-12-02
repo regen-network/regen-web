@@ -17,10 +17,33 @@ query AllPurchases($stripeId: String) {
       }
       creditVintageByCreditVintageId {
         id
+        creditClassByCreditClassId {
+          creditClassVersionsById(orderBy: CREATED_AT_DESC, first: 1) {
+            nodes {
+              name
+              metadata
+            }
+          }
+        }
         walletByIssuerId {
           partiesByWalletId(first: 1) {
             nodes {
               name
+              organizationsByPartyId(first: 1) {
+                nodes {
+                  id
+                  organizationMembersByOrganizationId(condition: { isOwner: true }) {
+                    nodes {
+                      userByMemberId {
+                        partyByPartyId {
+                          name
+                          roles
+                        }
+                      }
+                    }
+                  }
+                }
+              }
             }
           }
         }

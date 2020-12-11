@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTheme, makeStyles, Theme } from '@material-ui/core/styles';
+import clsx from 'clsx';
+import ReactHtmlParser from 'react-html-parser';
+
 import MediaCard from './MediaCard';
+import BreadcrumbIcon from '../icons/BreadcrumbIcon';
 import ProjectPlaceInfo, { Place } from '../place/ProjectPlaceInfo';
 import UserInfo, { User } from '../user/UserInfo';
 
@@ -11,6 +15,22 @@ export interface ProjectInfo {
   area: number;
   areaUnit: string;
   developer: User;
+}
+
+interface Info {
+  id: string;
+  name?: string;
+  version: string;
+}
+
+interface PurchaseInfo {
+  units: number;
+  vintageId: string;
+  vintagePeriod: string;
+  creditClass: Info;
+  methodology: Info;
+  programGuide: Info;
+  projectType: string;
 }
 
 export interface ProjectCardProps {
@@ -26,6 +46,7 @@ export interface ProjectCardProps {
   displayRegion?: boolean;
   displayCountry?: boolean;
   comingSoon?: boolean;
+  purchaseInfo?: PurchaseInfo;
 }
 
 interface AreaUnits {
@@ -48,12 +69,12 @@ const useStyles = makeStyles((theme: Theme) => ({
   separator: {
     border: `0.5px solid ${theme.palette.grey[100]}`,
     [theme.breakpoints.up('sm')]: {
-      marginTop: theme.spacing(6.25),
+      // marginTop: theme.spacing(6.25),
       marginRight: theme.spacing(5.25),
       marginLeft: theme.spacing(5.25),
     },
     [theme.breakpoints.down('xs')]: {
-      marginTop: theme.spacing(4.5),
+      // marginTop: theme.spacing(4.5),
       marginRight: theme.spacing(4.5),
       marginLeft: theme.spacing(4.5),
     },
@@ -99,7 +120,66 @@ const useStyles = makeStyles((theme: Theme) => ({
   comingSoonText: {
     marginLeft: theme.spacing(-1),
   },
+  units: {
+    fontSize: theme.spacing(3.5),
+    fontWeight: 'bold',
+    color: theme.palette.primary.light,
+    lineHeight: '145%',
+  },
+  details: {
+    fontWeight: 800,
+    fontFamily: theme.typography.h1.fontFamily,
+    fontSize: theme.spacing(2.5),
+    letterSpacing: '1px',
+    textTransform: 'uppercase',
+  },
+  viewDetails: {
+    color: theme.palette.secondary.main,
+    lineHeight: theme.spacing(5),
+    cursor: 'pointer',
+    paddingLeft: theme.spacing(2.5),
+  },
+  detailsContent: {
+    lineHeight: theme.spacing(4),
+    color: theme.palette.info.main,
+    fontSize: theme.spacing(2.5),
+  },
+  purchaseInfo: {
+    paddingTop: theme.spacing(3.5),
+    [theme.breakpoints.up('sm')]: {
+      marginRight: theme.spacing(5.25),
+      marginLeft: theme.spacing(5.25),
+      paddingBottom: theme.spacing(5.75),
+    },
+    [theme.breakpoints.down('xs')]: {
+      marginRight: theme.spacing(4.5),
+      marginLeft: theme.spacing(4.5),
+      paddingBottom: theme.spacing(4),
+    },
+  },
+  icon: {
+    width: theme.spacing(2),
+    height: theme.spacing(1.25),
+  },
+  purchaseDetails: {
+    paddingTop: theme.spacing(1),
+  },
 }));
+
+function PurchaseDetails({ title, info }: { title: string; info: string }): JSX.Element {
+  const classes = useStyles();
+
+  return (
+    <div>
+      <span className={clsx(classes.details, classes.detailsContent)}>{title}: </span>
+      <span className={clsx(classes.detailsContent)}>{ReactHtmlParser(info)}</span>
+    </div>
+  );
+}
+
+function formatInfo(info: Info): string {
+  return `${info.name ? `${info.name}, ` : ''}${info.id}, ${info.version}`;
+}
 
 export default function ProjectCard({
   name,
@@ -114,9 +194,12 @@ export default function ProjectCard({
   displayRegion = true,
   displayCountry = true,
   comingSoon = false,
+  purchaseInfo,
 }: ProjectCardProps): JSX.Element {
   const theme = useTheme();
   const classes = useStyles();
+
+  const [open, setOpen] = useState<boolean>(false);
 
   return (
     <MediaCard
@@ -150,6 +233,25 @@ export default function ProjectCard({
       {developer && (
         <div className={classes.userInfo}>
           <UserInfo user={developer} size="project" />
+        </div>
+      )}
+      {purchaseInfo && <div className={classes.separator} />}
+      {purchaseInfo && (
+        <div className={classes.purchaseInfo}>
+          <span className={classes.units}>{purchaseInfo.units} credits purchased</span>
+          <span onClick={() => setOpen(!open)} className={clsx(classes.viewDetails, classes.details)}>
+            <BreadcrumbIcon direction={open ? 'up' : 'down'} className={classes.icon} /> view details
+          </span>
+          {open && (
+            <div className={classes.purchaseDetails}>
+              <PurchaseDetails title="vintage id" info={purchaseInfo.vintageId} />
+              <PurchaseDetails title="vintage period" info={purchaseInfo.vintagePeriod} />
+              <PurchaseDetails title="credit class" info={formatInfo(purchaseInfo.creditClass)} />
+              <PurchaseDetails title="methodology" info={formatInfo(purchaseInfo.methodology)} />
+              <PurchaseDetails title="program guide" info={formatInfo(purchaseInfo.programGuide)} />
+              <PurchaseDetails title="project type" info={purchaseInfo.projectType} />
+            </div>
+          )}
         </div>
       )}
     </MediaCard>

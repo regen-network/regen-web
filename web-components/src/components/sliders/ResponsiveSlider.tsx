@@ -20,6 +20,7 @@ export interface ResponsiveSliderProps {
   itemWidth?: string;
   infinite?: boolean;
   dots?: boolean;
+  onChange?: (i: number) => void;
 }
 
 interface StyleProps {
@@ -126,6 +127,7 @@ export default function ResponsiveSlider({
   itemWidth,
   infinite = true,
   dots = false,
+  onChange,
 }: ResponsiveSliderProps): JSX.Element {
   const theme = useTheme();
 
@@ -169,6 +171,7 @@ export default function ResponsiveSlider({
     ),
     customPaging: (i: number) => <div className={classes.dot} />,
   };
+
   return (
     <div className={clsx(classes.root, className)}>
       <Grid container wrap="nowrap" alignItems="center">
@@ -187,7 +190,14 @@ export default function ResponsiveSlider({
         )}
       </Grid>
 
-      <Slider {...settings} ref={slider} className={classes.slider}>
+      <Slider
+        {...settings}
+        ref={slider}
+        className={classes.slider}
+        afterChange={i => {
+          if (onChange) onChange(i);
+        }}
+      >
         {items.map((item, index) => (
           <div className={classes.item} key={index}>
             {item}

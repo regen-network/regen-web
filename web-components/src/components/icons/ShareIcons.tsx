@@ -14,15 +14,24 @@ interface ShareIconsProps {
   url: string;
   twitterShare?: string;
   telegramShare?: string;
+  xsSize?: number;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
-  iconContainer: {
+interface StyleProps {
+  xsSize?: number;
+}
+
+const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
+  iconContainer: props => ({
     backgroundColor: theme.palette.secondary.dark,
     borderRadius: '50%',
     display: 'block',
     width: theme.spacing(12.5),
     height: theme.spacing(12.5),
+    [theme.breakpoints.down('xs')]: {
+      width: props.xsSize || theme.spacing(12.5),
+      height: props.xsSize || theme.spacing(12.5),
+    },
     cursor: 'pointer',
     '&:hover': {
       backgroundColor: theme.palette.secondary.light,
@@ -32,9 +41,17 @@ const useStyles = makeStyles((theme: Theme) => ({
       width: '100%',
       height: '100%',
     },
-  },
+  }),
   small: {
     padding: theme.spacing(2),
+  },
+  root: {
+    [theme.breakpoints.up('sm')]: {
+      justifyContent: 'left',
+    },
+    [theme.breakpoints.down('xs')]: {
+      justifyContent: 'center',
+    },
   },
 }));
 
@@ -42,14 +59,15 @@ export default function ShareIcons({
   url,
   twitterShare = '',
   telegramShare = '',
+  xsSize,
 }: ShareIconsProps): JSX.Element {
   const theme = useTheme();
-  const classes = useStyles();
+  const classes = useStyles({ xsSize });
   const [copied, setCopied] = useState(false);
 
   return (
     <>
-      <Grid container justify="center" spacing={4}>
+      <Grid container className={classes.root} spacing={4}>
         <Grid item>
           <a
             href={`https://twitter.com/intent/tweet?url=${url}&text=${twitterShare}`}

@@ -26,7 +26,7 @@ interface CertificateProps {
   date: string | Date;
   retired?: boolean;
   issuer: StakeholderInfo;
-  verifier: StakeholderInfo;
+  verifier?: StakeholderInfo;
   projectDeveloper: StakeholderInfo;
 }
 
@@ -101,7 +101,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     color: theme.palette.primary.main,
     lineHeight: '130%',
     [theme.breakpoints.up('sm')]: {
-      padding: `${theme.spacing(4.5)} ${theme.spacing(10)}`,
+      padding: `${theme.spacing(4.5)} ${theme.spacing(7)}`,
       marginLeft: theme.spacing(9.5),
       marginRight: theme.spacing(9.5),
     },
@@ -210,11 +210,19 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
 const formater = new Intl.NumberFormat('en-US');
 const options = { year: 'numeric', month: 'long', day: 'numeric' };
 
-function Stakeholder({ info, label }: { info: StakeholderInfo; label: string }): JSX.Element {
+function Stakeholder({
+  info,
+  label,
+  withVerifier,
+}: {
+  info: StakeholderInfo;
+  label: string;
+  withVerifier: boolean;
+}): JSX.Element {
   const classes = useStyles({});
 
   return (
-    <Grid item xs={4}>
+    <Grid item xs={withVerifier ? 4 : 6}>
       <div className={classes.personName}>{info.personName}</div>
       <hr className={classes.hr} />
       <div className={classes.companyInfo}>
@@ -240,6 +248,7 @@ export default function Certificate({
   projectDeveloper,
 }: CertificateProps): JSX.Element {
   const classes = useStyles({ background });
+  const withVerifier: boolean = verifier ? true : false;
   return (
     <div className={classes.root}>
       <div className={classes.content}>
@@ -262,18 +271,23 @@ export default function Certificate({
           <b>
             {formater.format(creditsUnits)} {ReactHtmlParser(creditName)} Credits
           </b>
-          , {retired && <i>auto-retired</i>}
           <br />
           Equivalent to: <b>{formater.format(equivalentTonsCO2)} tons of CO2e</b>
           <br />
-          Transferred to: <b>{buyerName}</b>
+          Beneficiary: <b>{buyerName}</b>
           <br />
+          {retired && (
+            <>
+              Retirement: <b>Voluntary</b>
+              <br />
+            </>
+          )}
           Date: <b>{new Date(date).toLocaleDateString('en-US', options)}</b>
         </div>
         <Grid container>
-          <Stakeholder label="Issuer" info={issuer} />
-          <Stakeholder label="Verifier" info={verifier} />
-          <Stakeholder label="Project Developer" info={projectDeveloper} />
+          <Stakeholder label="Issuer" info={issuer} withVerifier={withVerifier} />
+          {verifier && <Stakeholder label="Verifier" info={verifier} withVerifier={withVerifier} />}
+          <Stakeholder label="Project Developer" info={projectDeveloper} withVerifier={withVerifier} />
         </Grid>
       </div>
     </div>

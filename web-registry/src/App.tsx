@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter, Switch, Route, useParams, useLocation, Redirect } from 'react-router-dom';
 import { useTheme } from '@material-ui/core/styles';
+import { useAuth0, OAuthError } from '@auth0/auth0-react';
+import { createBrowserHistory } from 'history';
 
-import { useAuth0 } from './react-auth0-spa';
 import isAdmin from './lib/admin';
 import { init as initGA } from './lib/ga';
 
@@ -18,6 +19,7 @@ import {
 import Footer, { FooterItemProps as FooterItem } from 'web-components/lib/components/footer';
 import Header, { HeaderMenuItem, HeaderColors } from 'web-components/lib/components/header';
 import Title from 'web-components/lib/components/title';
+import CookiesBanner from 'web-components/lib/components/banner/CookiesBanner';
 import ProjectDetails from './components/ProjectDetails';
 import ProjectList from './components/ProjectList';
 import UserCredits from './components/UserCredits';
@@ -29,7 +31,13 @@ import NotFound from './components/NotFound';
 import Admin from './components/Admin';
 import PostPurchase from './components/PostPurchase';
 import Certificate from './components/Certificate';
-import CookiesFooter from 'web-components/lib/components/banner/CookiesBanner';
+import Seller from './components/Seller';
+
+export const history = createBrowserHistory();
+
+interface BoolProps {
+  [key: string]: boolean;
+}
 
 function ScrollToTop(): null {
   const { pathname } = useLocation();
@@ -205,7 +213,7 @@ function AppHeader(): JSX.Element {
 // }
 
 function CreditsContainer(): JSX.Element {
-  let { userId } = useParams();
+  let { userId } = useParams<{ userId: string }>();
   const userCredits: PurchasedCredits | undefined = purchasedCredits.find(p => p.userId === userId);
   if (userCredits) {
     return <UserCredits credits={userCredits} />;
@@ -214,7 +222,7 @@ function CreditsContainer(): JSX.Element {
 }
 
 function ProjectContainer(): JSX.Element {
-  let { projectId } = useParams();
+  let { projectId } = useParams<{ projectId: string }>();
   const project: Project | undefined = projects.find(p => p.id === projectId);
 
   if (project) {
@@ -230,22 +238,34 @@ function Projects(): JSX.Element {
 function VerifyEmail(): JSX.Element {
   const search = new URLSearchParams(window.location.search);
   return (
-    <div style={{ padding: '1rem' }}>
-      <Title variant="h3">Please confirm your email address</Title>
+    <div style={{ textAlign: 'center', padding: '1rem' }}>
+      <Title variant="h3" align="center">
+        Please confirm your email address
+      </Title>
       We’ve just sent a confirmation email to: {search.get('email')}
     </div>
   );
 }
 
 const App: React.FC = (): JSX.Element => {
-  const { user, loading } = useAuth0();
+  const { user, isLoading, error } = useAuth0();
 
   useEffect(() => {
     initGA();
   });
 
-  if (loading) {
+  if (isLoading) {
     return <div></div>;
+  }
+
+  const authError = error as OAuthError;
+  if (
+    authError &&
+    authError.error_description &&
+    authError.error_description.indexOf('email_not_verified:') > -1
+  ) {
+    const email: string = authError.error_description.split(':')[1];
+    history.push(`/verify-email?email=${email}`);
   }
 
   return (
@@ -264,6 +284,7 @@ const App: React.FC = (): JSX.Element => {
           <Route exact path="/certificate">
             <Certificate />
           </Route>
+          <Route exact path={`/projects/impactag/admin`} component={Seller} />
           <Route
             path="/projects"
             render={({ match: { path } }) => (
@@ -311,7 +332,7 @@ const App: React.FC = (): JSX.Element => {
           />
           <Route path="*" component={NotFound} />
         </Switch>
-        <CookiesFooter privacyUrl="https://www.regen.network/privacy-policy/" />
+        <CookiesBanner privacyUrl="https://www.regen.network/privacy-policy/" />
         <footer>
           <AppFooter />
         </footer>

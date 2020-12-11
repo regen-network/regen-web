@@ -3,5 +3,5 @@
 
 @font-face {
   font-family: 'FoxesInLove';
-  src: local('FoxesInLove'), url(./assets/fonts/foxes-in-love.ttf) format('ttf');
+  src: url(./assets/fonts/foxes-in-love.ttf) format('truetype');
 }

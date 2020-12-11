@@ -1,0 +1,7 @@
+#import "./PurchasesConnectionFragment.graphql"
+
+query AllPurchases($stripeId: String) {
+  allPurchases(condition: { stripeId: $stripeId}) {
+    ...purchasesFields
+  }
+}

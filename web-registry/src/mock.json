@@ -57,7 +57,7 @@
           "title": "Co-benefits"
         }
       },
-      "glanceImgSrc": "https://regen-registry.s3.amazonaws.com/projects/wilmot/impactag-smallmap-top-v3.jpg",
+      "glanceImgSrc": "https://regen-registry.s3.amazonaws.com/projects/woodburn/Map+Thumbnail+Top.png",
       "glanceText": [
         "Increased soil organic carbon to 2.8%.",
         "Improved co-benefits significantly with Soil Health ranking as excellent, Ecosystem Health as good, and Animal Welfare as excellent."
@@ -91,6 +91,16 @@
         },
         "imgSrc": "https://regen-registry.s3.amazonaws.com/projects/wilmot/wilmot.jpg",
         "description": "Wilmot Cattle Company is an innovative, regenerative, grass-fed beef business."
+      },
+      "broker": {
+        "name": "Regen Network Development, Inc.",
+        "type": "organization",
+        "place": {
+          "state": "Massachussetts",
+          "country": "United States"
+        },
+        "imgSrc": "https://regen-registry.s3.amazonaws.com/regen-logo-green.svg",
+        "description": "Regen Network realigns the agricultural economy with ecological health by creating the global marketplace for planetary stewardship."
       },
       "tagline": "Grant and Tanya Wickham have managed Woodburn since 2011",
       "quote": {
@@ -263,6 +273,16 @@
         },
         "imgSrc": "https://regen-registry.s3.amazonaws.com/projects/wilmot/wilmot.jpg",
         "description": "Wilmot Cattle Company is an innovative, regenerative, grass-fed beef business."
+      },
+      "broker": {
+        "name": "Regen Network Development, Inc.",
+        "type": "organization",
+        "place": {
+          "state": "Massachussetts",
+          "country": "United States"
+        },
+        "imgSrc": "https://regen-registry.s3.amazonaws.com/regen-logo-green.svg",
+        "description": "Regen Network realigns the agricultural economy with ecological health by creating the global marketplace for planetary stewardship."
       },
       "tagline": "Stuart Austin & Trisha Cowley have managed Wilmot since 2016",
       "quote": {

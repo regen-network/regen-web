@@ -1,6 +1,8 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
+import clsx from 'clsx';
+
 import Card from './Card';
 import Title from '../title';
 import UserInfoWithTitle from '../user/UserInfoWithTitle';
@@ -15,6 +17,7 @@ interface ProjectTopCardProps {
   projectDeveloper: User;
   landSteward?: User;
   landOwner?: User;
+  broker?: User;
   sdgs?: SDG[];
 }
 
@@ -96,12 +99,19 @@ const useStyles = makeStyles((theme: Theme) => ({
       },
     },
   },
+  broker: {
+    '& img': {
+      width: '70%',
+      height: '70%',
+    },
+  },
 }));
 
 export default function ProjectTopCard({
   projectDeveloper,
   landSteward,
   landOwner,
+  broker,
   sdgs,
 }: ProjectTopCardProps): JSX.Element {
   const classes = useStyles({});
@@ -142,6 +152,11 @@ export default function ProjectTopCard({
           <div className={classes.userInfo}>
             {/* <hr className={classes.separator} /> */}
             <UserInfoWithTitle size="xl" user={landOwner} title="land owner" />
+          </div>
+        )}
+        {broker && (
+          <div className={clsx(classes.broker, classes.userInfo)}>
+            <UserInfoWithTitle size="xl" user={broker} title="broker" />
           </div>
         )}
       </div>

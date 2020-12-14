@@ -31,7 +31,7 @@ const MoreProjects = ({ projects }: MoreProjectsProps): JSX.Element => {
       <Section title="More Projects">
         <Grid container className={classes.grid} spacing={5}>
           {projects.map((project, i) => (
-            <Grid item xs={12} sm={4}>
+            <Grid item xs={12} sm={4} key={project.id}>
               <Link href={getRegistryUrl(`/projects/${project.id}`)}>
                 <ProjectCard
                   name={project.name}

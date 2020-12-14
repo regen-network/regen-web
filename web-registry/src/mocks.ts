@@ -34,6 +34,7 @@ export interface Project {
   developer: User;
   steward: User;
   owner?: User;
+  broker?: User;
   shortDescription: string;
   glanceText?: string[];
   glanceImgSrc?: string;

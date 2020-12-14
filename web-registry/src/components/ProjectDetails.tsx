@@ -233,8 +233,8 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
   const [geojson, setGeojson] = useState<any | null>(null);
 
   // Convert kml to geojson
-  const mapFile: string = require(`../assets/${project.map}`);
-  const isGISFile: boolean = /\.(json|kml)$/i.test(project.map);
+  const mapFile: string = project.map;
+  const isGISFile: boolean = /\.(json|kml)$/i.test(mapFile);
 
   if (!geojson && isGISFile) {
     fetch(mapFile)

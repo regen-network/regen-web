@@ -48,12 +48,12 @@ const useStyles = makeStyles((theme: Theme) => ({
   separator: {
     border: `0.5px solid ${theme.palette.grey[100]}`,
     [theme.breakpoints.up('sm')]: {
-      marginTop: theme.spacing(6.25),
+      // marginTop: theme.spacing(6.25),
       marginRight: theme.spacing(5.25),
       marginLeft: theme.spacing(5.25),
     },
     [theme.breakpoints.down('xs')]: {
-      marginTop: theme.spacing(4.5),
+      // marginTop: theme.spacing(4.5),
       marginRight: theme.spacing(4.5),
       marginLeft: theme.spacing(4.5),
     },
@@ -69,10 +69,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   userInfo: {
     [theme.breakpoints.up('sm')]: {
-      padding: `0 ${theme.spacing(5.25)} ${theme.spacing(5.25)}`,
+      padding: `${theme.spacing(5.25)} ${theme.spacing(5.25)}`,
     },
     [theme.breakpoints.down('xs')]: {
-      padding: `0 ${theme.spacing(4.5)} ${theme.spacing(5.25)}`,
+      padding: `${theme.spacing(5.25)} ${theme.spacing(4.5)}`,
     },
   },
   comingSoon: {

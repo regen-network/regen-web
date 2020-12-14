@@ -311,7 +311,7 @@
           "title": "28% increase in NDVI (vegetation health) "
         }
       ],
-      "image": "wilmotcattlecompany.jpg",
+      "image": "https://regen-registry.s3.amazonaws.com/projects/wilmot/Image.png",
       "map": "https://regen-registry.s3.amazonaws.com/projects/wilmot/Wilmot_boundary.kml",
       "keyOutcomesActivities": [
         "Independently verified",

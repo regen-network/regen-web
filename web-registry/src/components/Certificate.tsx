@@ -5,10 +5,12 @@ import { loader } from 'graphql.macro';
 import { useQuery } from '@apollo/react-hooks';
 import ReactToPrint from 'react-to-print';
 
+import getRegistryUrl from '../lib/registryUrl';
 import Certificate from 'web-components/lib/components/certificate';
 import Title from 'web-components/lib/components/title';
 import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';
 import ShareIcons from 'web-components/lib/components/icons/ShareIcons';
+import PrintIcon from 'web-components/lib/components/icons/PrintIcon';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 import Section from 'web-components/lib/components/section';
 import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
@@ -86,6 +88,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   shareTitle: {
     paddingBottom: theme.spacing(3.75),
+    [theme.breakpoints.down('xs')]: {
+      textAlign: 'center',
+    },
   },
   printButton: {
     [theme.breakpoints.up('sm')]: {
@@ -118,6 +123,9 @@ const useStyles = makeStyles((theme: Theme) => ({
       fontSize: theme.spacing(5.25),
       paddingBottom: theme.spacing(8),
     },
+  },
+  icon: {
+    marginRight: theme.spacing(1.5),
   },
 }));
 
@@ -165,7 +173,8 @@ export default function CertificatePage(): JSX.Element {
   let items: JSX.Element[] = [];
   let projects: JSX.Element[] = [];
   if (data && data.allPurchases && data.allPurchases.nodes) {
-    for (let i = 0; i < data.allPurchases.nodes.length; i++) {
+    const nodes = data.allPurchases.nodes;
+    for (let i = 0; i < nodes.length; i++) {
       const node = data.allPurchases.nodes[i];
 
       const units: number = node.transactionsByPurchaseId.nodes
@@ -199,7 +208,13 @@ export default function CertificatePage(): JSX.Element {
         project.methodologyVersionByMethodologyVersionIdAndMethodologyVersionCreatedAt;
 
       items.push(
-        <div ref={element => ref.current.push(element)}>
+        <div
+          ref={element => {
+            if (element && ref && ref.current && ref.current.length < nodes.length) {
+              ref.current.push(element);
+            }
+          }}
+        >
           <Certificate
             background={background}
             creditName={getName(creditClassVersion)}
@@ -221,6 +236,8 @@ export default function CertificatePage(): JSX.Element {
               personName: getName(projectDeveloperPerson),
               personRole: getRole(projectDeveloperPerson),
             }}
+            // TODO add retirement info
+            // retired={}
             // TODO replace with db data once we have verifier data
             // verifier={{
             //   companyName: 'RSM Australia Pty Ltd',
@@ -233,6 +250,7 @@ export default function CertificatePage(): JSX.Element {
 
       projects.push(
         <ProjectCard
+          href={getRegistryUrl(`/projects/${project.handle}`)}
           name={project.name}
           imgSrc={project.image}
           place={project.addressByAddressId.feature ? project.addressByAddressId.feature.place_name : ''}
@@ -291,24 +309,32 @@ export default function CertificatePage(): JSX.Element {
           </Title>
           <ShareIcons xsSize={theme.spacing(10)} url={`${window.location.origin}/buyers`} />
         </Grid>
-        <Grid item xs={12} sm={6}>
-          <ReactToPrint
-            trigger={() => <OutlinedButton className={classes.printButton}>print certificate</OutlinedButton>}
-            content={() => ref.current[current]}
-          />
-        </Grid>
-      </Grid>
-      <div className={classes.projects}>
-        <Section titleClassName={classes.projectsTitle} title="Project Supported">
-          <Grid container spacing={5}>
-            {projects.map(project => (
-              <Grid item xs={12} sm={4}>
-                {project}
-              </Grid>
-            ))}
+        {data && data.allPurchases && data.allPurchases.nodes && (
+          <Grid item xs={12} sm={6}>
+            <ReactToPrint
+              trigger={() => (
+                <OutlinedButton className={classes.printButton}>
+                  <PrintIcon className={classes.icon} /> print certificate
+                </OutlinedButton>
+              )}
+              content={() => ref.current[current]}
+            />
           </Grid>
-        </Section>
-      </div>
+        )}
+      </Grid>
+      {data && data.allPurchases && data.allPurchases.nodes && (
+        <div className={classes.projects}>
+          <Section titleClassName={classes.projectsTitle} title="Project Supported">
+            <Grid container spacing={5}>
+              {projects.map((project, i) => (
+                <Grid item xs={12} sm={4} key={i}>
+                  {project}
+                </Grid>
+              ))}
+            </Grid>
+          </Section>
+        </div>
+      )}
     </div>
   );
 }

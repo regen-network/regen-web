@@ -13,7 +13,7 @@ export const certificate = (): JSX.Element => (
     creditsUnits={1000}
     equivalentTonsCO2={1000}
     buyerName="John Doe"
-    date={new Date()}
+    date={'2020-10-10'}
     issuer={{ companyName: 'Regen Network', personName: 'Christian Shearer', personRole: 'CEO' }}
     projectDeveloper={{
       companyName: 'Impact Ag Partners',

@@ -47,6 +47,8 @@ export interface ProjectCardProps {
   displayCountry?: boolean;
   comingSoon?: boolean;
   purchaseInfo?: PurchaseInfo;
+  href?: string;
+  target?: string;
 }
 
 interface AreaUnits {
@@ -195,6 +197,8 @@ export default function ProjectCard({
   displayCountry = true,
   comingSoon = false,
   purchaseInfo,
+  href,
+  target,
 }: ProjectCardProps): JSX.Element {
   const theme = useTheme();
   const classes = useStyles();
@@ -210,6 +214,8 @@ export default function ProjectCard({
       borderRadius="10px"
       borderColor={theme.palette.grey[100]}
       tag={tag}
+      href={href}
+      target={target}
     >
       <div className={classes.placeInfo}>
         <ProjectPlaceInfo

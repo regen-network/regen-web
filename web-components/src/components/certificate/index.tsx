@@ -152,7 +152,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     },
     [theme.breakpoints.down('xs')]: {
       maxWidth: theme.spacing(54.75),
-      fontSize: theme.spacing(2.25),
+      fontSize: theme.spacing(2.9),
       paddingBottom: theme.spacing(6),
       lineHeight: '155%',
     },
@@ -160,6 +160,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   personName: {
     color: theme.palette.info.dark,
     fontFamily: '"FoxesInLove",-apple-system,sans-serif',
+    letterSpacing: '2px',
     [theme.breakpoints.up('sm')]: {
       lineHeight: '150%',
       fontSize: theme.spacing(4),

@@ -46,6 +46,7 @@ fragment purchasesFields on PurchasesConnection {
         areaUnit
         image
         type
+        handle
         creditClassVersionByCreditClassVersionIdAndCreditClassVersionCreatedAt {
           name
           version

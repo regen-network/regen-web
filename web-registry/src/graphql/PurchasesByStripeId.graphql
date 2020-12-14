@@ -1,7 +1,7 @@
 #import "./PurchasesConnectionFragment.graphql"
 
 query AllPurchases($stripeId: String) {
-  allPurchases(condition: { stripeId: $stripeId}) {
+  allPurchases(first: 5, condition: { stripeId: $stripeId }) {
     ...purchasesFields
   }
 }

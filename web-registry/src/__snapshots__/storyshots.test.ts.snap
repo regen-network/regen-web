@@ -1156,7 +1156,7 @@ exports[`Storyshots Components|Certificate Certificate 1`] = `
         <br />
         Date: 
         <b>
-          December 11, 2020
+          October 10, 2020
         </b>
       </div>
       <div
@@ -3302,6 +3302,47 @@ exports[`Storyshots Components|Icons Pointer Icon 1`] = `
         </filter>
       </defs>
     </svg>
+  </svg>
+</div>
+`;
+
+exports[`Storyshots Components|Icons Print Icon 1`] = `
+<div>
+  <svg
+    aria-hidden={true}
+    className="MuiSvgIcon-root"
+    focusable="false"
+    viewBox="0 0 20 23"
+  >
+    <path
+      d="M5 10V1H7H11.5858L15 4.41421V10H5Z"
+      fill="white"
+      stroke="#4FB573"
+      strokeWidth="2"
+    />
+    <path
+      d="M11 1V4.75C11 4.88807 11.1119 5 11.25 5H15"
+      stroke="#4FB573"
+    />
+    <rect
+      fill="white"
+      height="10"
+      rx="2"
+      stroke="#4FB573"
+      strokeWidth="2"
+      width="18"
+      x="1"
+      y="9"
+    />
+    <rect
+      fill="white"
+      height="7"
+      stroke="#4FB573"
+      strokeWidth="2"
+      width="10"
+      x="5"
+      y="15"
+    />
   </svg>
 </div>
 `;

@@ -131,7 +131,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   details: {
     fontWeight: 800,
     fontFamily: theme.typography.h1.fontFamily,
-    fontSize: theme.spacing(2.5),
     letterSpacing: '1px',
     textTransform: 'uppercase',
   },
@@ -142,9 +141,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     paddingLeft: theme.spacing(2.5),
   },
   detailsContent: {
-    lineHeight: theme.spacing(4),
-    color: theme.palette.info.main,
-    fontSize: theme.spacing(2.5),
+    lineHeight: '150%',
+    color: theme.palette.info.dark,
+    fontSize: theme.spacing(3.5),
   },
   purchaseInfo: {
     paddingTop: theme.spacing(3.5),
@@ -164,7 +163,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     height: theme.spacing(1.25),
   },
   purchaseDetails: {
-    paddingTop: theme.spacing(1),
+    paddingTop: theme.spacing(2),
   },
 }));
 
@@ -203,7 +202,7 @@ export default function ProjectCard({
   const theme = useTheme();
   const classes = useStyles();
 
-  const [open, setOpen] = useState<boolean>(false);
+  const [open, setOpen] = useState<boolean>(true);
 
   return (
     <MediaCard
@@ -250,7 +249,7 @@ export default function ProjectCard({
           </span>
           {open && (
             <div className={classes.purchaseDetails}>
-              <PurchaseDetails title="vintage id" info={purchaseInfo.vintageId} />
+              <PurchaseDetails title="vintage id" info={purchaseInfo.vintageId.substring(0, 8)} />
               <PurchaseDetails title="vintage period" info={purchaseInfo.vintagePeriod} />
               <PurchaseDetails title="credit class" info={formatInfo(purchaseInfo.creditClass)} />
               <PurchaseDetails title="methodology" info={formatInfo(purchaseInfo.methodology)} />

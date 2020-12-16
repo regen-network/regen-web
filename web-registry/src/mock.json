@@ -60,7 +60,7 @@
       "glanceImgSrc": "https://regen-registry.s3.amazonaws.com/projects/woodburn/Map+Thumbnail+Top.png",
       "glanceText": [
         "Increased soil organic carbon to 2.8%.",
-        "Improved co-benefits significantly with Soil Health ranking as excellent, Ecosystem Health as good, and Animal Welfare as excellent."
+        "Improved co-benefits with Soil Health ranking as good, Ecosystem Health as good, and Animal Welfare as excellent."
       ],
       "place": {
         "city": "Walcha",
@@ -104,17 +104,17 @@
       },
       "tagline": "Grant and Tanya Wickham have managed Woodburn since 2011",
       "quote": {
-        "text": "We like to run our cattle at high density rate, then let the grass come back, usually giving each paddock 60 days rest before the cattle come back.",
+        "text": "We like to run our cattle at a high-density rate, then let the grass come back, usually giving each paddock 60 days rest before the cattle come back.",
         "person": {
           "name": "Grant Wickham",
           "role": "Woodburn General Manager"
         }
       },
-      "shortDescription": "Woodburn is a 2,555 ha beef breeding enterprise situated north of Walcha on the New England tablelands. Woodburn was purchased in 2011 with the goal of breeding our own home grown grass fed beef. The annual average rainfall of 730mm and 1,120m above sea level with lightly timbered country comprising of basalt and sandy loam soils.",
-      "longDescription": "<p>Grant has been managing Woodburn since it was purchased by the Wilmot Cattle Co in 2011 and has overseen the transition from convention management systems to regenerative agricultural practices. Grant and Tanya both have an innate connection to the land having come from rural NSW Mid North Coast. Grant has worked in the North West Slopes and Plains region in a managerial role bringing over 25 years experience to the team.</p><p>Grant has overseen the conversion of Woodburn's management strategies towards regenerative agricultural practices. This process excellerated from 2016 and has led to a general improvement in the farms producitivty and ecosystem health.  </p>",
+      "shortDescription": "Woodburn a 2,555 ha beef breeding enterprise situated north of Walcha on the New England tablelands. Woodburn was purchased in 2011 with the goal of breeding our own homegrown grass-fed beef. Set at approximately 1,120m above sea level, the average annual rainfall is 730mm, the soils are basalt and sandy loam, and the land is lightly timbered.",
+      "longDescription": "<p>Grant has been managing Woodburn since it was purchased by the Wilmot Cattle Co in 2011 and has overseen the transition from conventional management systems to regenerative agricultural practices. Grant and Tanya both have an innate connection to the land having come from rural NSW Mid North Coast. Grant has worked in the North West Slopes and Plains region in a managerial role bringing over 25 years experience to the team.</p><p>Grant has overseen the conversion of Woodburn's management strategies towards regenerative agricultural practices. This process accelerated from 2016 and has led to a general improvement in the farm's productivity and ecosystem health.</p>",
       "media": [
         {
-          "src": "https://regen-registry.s3.amazonaws.com/projects/wilmot/image1.png",
+          "src": "https://regen-registry.s3.amazonaws.com/projects/woodburn/image1.jpg",
           "type": "image"
         },
         {
@@ -165,7 +165,7 @@
           "actions": [
             {
               "name": "Time Controlled Rotational Grazing",
-              "description": "Since 2013, Wilmot Cattle Co has implemented time controlled rotational grazing at the Wilmot property. Effectively mimicking natural herding behaviours, time controlled rotational grazing is the practice of moving large herds of animals across the landscape, grazing pastures for very short periods of time, allowing long rest periods, enabling adequate plant recovery. Stocking rate is adjusted frequently to match the feed available and growth rate of the plant. When managed well, this grazing system increases groundcover, biomass, plant diversity, animal and plant nutrition, soil health, water infiltration and soil organic carbon. A more complete explanation of the science, monitoring tools and management practices is provided below.",
+              "description": "Since 2013, Wilmot Cattle Co has implemented time controlled rotational grazing at the Wilmot property. Effectively mimicking natural herding behaviours, time controlled rotational grazing is the practice of moving large herds of animals across the landscape, grazing pastures for very short periods of time, allowing long rest periods, enabling adequate plant recovery. Stocking rate is adjusted frequently to match the feed available and growth rate of the plant. When managed well, this grazing system increases groundcover, biomass, plant diversity, animal and plant nutrition, soil health, water infiltration and soil organic carbon.",
               "imgSrc": "time-controlled-rotational-grazing.jpg"
             },
             {
@@ -293,7 +293,7 @@
         }
       },
       "shortDescription": "Wilmot is an extraordinary property high in the New England Tablelands at Ebor, New South Wales, Australia. Set on 1,854ha and at approximately 1,200m above sea level, average annual rainfall of 1,200mm, highly fertile volcanic basalt soils, and complimented by a series of pristine spring fed, year-round natural waterways including five waterfalls, it is quite simply a unique environment for growing cattle.",
-      "longDescription": "<p>Stu & Trish are the management team behind Wilmot Cattle Co and are driven by the exciting ecological opportunities they can foresee for the business. They have a wholehearted belief in regenerative agriculture and the benefits it will bring to the industry globally, as we collectively work to heal what has largely become a degraded landscape. They having a burning desire to succeed in agriculture and are very ambitious in the growth and development plans they have for Wilmot Cattle Co.</p><p>While Stu has managed the day to day operations of Wilmot since 2016, and now presides over the portfolio of all three properties in a General Manager capacity, Trish works tirelessly behind the scenes ensuring a high level of rigour around the data collection, management, and analysis of every aspect of the business. They firmly believe that you cannot manage what you don’t measure and as such, the integrity of the data is paramount.</p><p>In their spare time they enjoy exploring the natural wonders of Wilmot, including its five waterfalls and large areas of virtually native bushland, with their two kids Harry and Poppy. They all gain great satisfaction from discovering new species of plants and learning about their role in the ecosystem.</p>",
+      "longDescription": "<p>Stu & Trish are the management team behind Wilmot Cattle Co and are driven by the exciting ecological opportunities they can foresee for the business. They have a wholehearted belief in regenerative agriculture and the benefits it will bring to the industry globally, as we collectively work to heal what has largely become a degraded landscape. They have a burning desire to succeed in agriculture and are very ambitious in the growth and development plans they have for Wilmot Cattle Co.</p><p>While Stu has managed the day to day operations of Wilmot since 2016, and now presides over the portfolio of all three properties in a General Manager capacity, Trish works tirelessly behind the scenes ensuring a high level of rigor around the data collection, management, and analysis of every aspect of the business. They firmly believe that you cannot manage what you do not measure and as such, the integrity of the data is paramount.</p><p>In their spare time, they enjoy exploring the natural wonders of Wilmot, including its five waterfalls and large areas of virtually native bushland, with their two kids Harry and Poppy. They all gain great satisfaction from discovering new species of plants and learning about their role in the ecosystem.</p>",
       "media": [
         {
           "src": "https://regen-registry.s3.amazonaws.com/projects/wilmot/image1.png",
@@ -347,7 +347,7 @@
           "actions": [
             {
               "name": "Time Controlled Rotational Grazing",
-              "description": "Since 2013, Wilmot Cattle Co has implemented time controlled rotational grazing at the Wilmot property. Effectively mimicking natural herding behaviours, time controlled rotational grazing is the practice of moving large herds of animals across the landscape, grazing pastures for very short periods of time, allowing long rest periods, enabling adequate plant recovery. Stocking rate is adjusted frequently to match the feed available and growth rate of the plant. When managed well, this grazing system increases groundcover, biomass, plant diversity, animal and plant nutrition, soil health, water infiltration and soil organic carbon. A more complete explanation of the science, monitoring tools and management practices is provided below.",
+              "description": "Since 2013, Wilmot Cattle Co. has implemented time controlled rotational grazing at Wilmot Farm. In order to mirror natural herding behaviors, time controlled rotational grazing optimizes the number of stock in a paddock, matches the grazing period with available pasture, shortens grazing periods in each paddock, and follows these activities by long resting periods to allow the pasture to recover. When managed well, this grazing system increases groundcover, biomass, plant diversity, animal and plant nutrition, soil health, water infiltration and soil organic carbon.",
               "imgSrc": "time-controlled-rotational-grazing.jpg"
             },
             {

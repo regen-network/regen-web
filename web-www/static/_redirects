@@ -1,4 +1,4 @@
-/registry/*  https://regen-registry.netlify.app/:splat  200
+/registry/*  https://deploy-preview-408--regen-registry.netlify.app/:splat  200
 
 /investor.html  /invest/  200
 /us_investors  /invest/  200

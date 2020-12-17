@@ -48,37 +48,29 @@
   ],
   "projects": [
     {
-      "id": "impactag",
+      "id": "woodburn",
       "documents": [
       ],
-      "stripePrice": "sku_HAqf7cJtNFynOf",
-      "creditPrice": {
-        "unitPrice": 27.5,
-        "currency": "USD"
-      },
-      "name": "Wilmot",
+      "name": "Woodburn",
       "fieldsOverride": {
         "nonMonitoredImpact": {
           "title": "Co-benefits"
         }
       },
-      "glanceImgSrc": "https://regen-registry.s3.amazonaws.com/projects/wilmot/impactag-smallmap-top-v3.jpg",
+      "glanceImgSrc": "https://regen-registry.s3.amazonaws.com/projects/woodburn/Map+Thumbnail+Top.png",
       "glanceText": [
-        "Increased soil organic carbon to 4.5%.",
-        "Improved co-benefits significantly with Soil Health ranking as excellent, Ecosystem Health as good, and Animal Welfare as excellent."
+        "Increased soil organic carbon to 2.8%.",
+        "Improved co-benefits with Soil Health ranking as good, Ecosystem Health as good, and Animal Welfare as excellent."
       ],
       "place": {
-        "city": "Hernani",
-        "region": "New England",
+        "city": "Walcha",
         "state": "New South Wales",
         "country": "Australia"
       },
       "hideCreditDetails": false,
       "type": "Farm",
-      "area": 1854,
+      "area": 2555,
       "areaUnit": "hectares",
-      "startDate": "September 2, 2019",
-      "endDate": "February 2029",
       "developer": {
         "name": "Impact Ag",
         "type": "organization",
@@ -100,31 +92,41 @@
         "imgSrc": "https://regen-registry.s3.amazonaws.com/projects/wilmot/wilmot.jpg",
         "description": "Wilmot Cattle Company is an innovative, regenerative, grass-fed beef business."
       },
-      "tagline": "Stuart Austin & Trisha Cowley have managed Wilmot since 2016",
+      "broker": {
+        "name": "Regen Network Development, Inc.",
+        "type": "organization",
+        "place": {
+          "state": "Massachussetts",
+          "country": "United States"
+        },
+        "imgSrc": "https://regen-registry.s3.amazonaws.com/regen-logo-green.svg",
+        "description": "Regen Network realigns the agricultural economy with ecological health by creating the global marketplace for planetary stewardship."
+      },
+      "tagline": "Grant and Tanya Wickham have managed Woodburn since 2011",
       "quote": {
-        "text": "We feel privileged to have the opportunity to manage cattle in a truly holistic and regenerative way on such a remarkable property.",
+        "text": "We like to run our cattle at a high-density rate, then let the grass come back, usually giving each paddock 60 days rest before the cattle come back.",
         "person": {
-          "name": "stuart austin",
-          "role": "Wilmot General Manager"
+          "name": "Grant Wickham",
+          "role": "Woodburn General Manager"
         }
       },
-      "shortDescription": "Wilmot is an extraordinary property high in the New England Tablelands at Ebor, New South Wales, Australia. Set on 1,854ha and at approximately 1,200m above sea level, average annual rainfall of 1,200mm, highly fertile volcanic basalt soils, and complimented by a series of pristine spring fed, year-round natural waterways including five waterfalls, it is quite simply a unique environment for growing cattle.",
-      "longDescription": "<p>Stu & Trish are the management team behind Wilmot Cattle Co and are driven by the exciting ecological opportunities they can foresee for the business. They have a wholehearted belief in regenerative agriculture and the benefits it will bring to the industry globally, as we collectively work to heal what has largely become a degraded landscape. They having a burning desire to succeed in agriculture and are very ambitious in the growth and development plans they have for Wilmot Cattle Co.</p><p>While Stu has managed the day to day operations of Wilmot since 2016, and now presides over the portfolio of all three properties in a General Manager capacity, Trish works tirelessly behind the scenes ensuring a high level of rigour around the data collection, management, and analysis of every aspect of the business. They firmly believe that you cannot manage what you don’t measure and as such, the integrity of the data is paramount.</p><p>In their spare time they enjoy exploring the natural wonders of Wilmot, including its five waterfalls and large areas of virtually native bushland, with their two kids Harry and Poppy. They all gain great satisfaction from discovering new species of plants and learning about their role in the ecosystem.</p>",
+      "shortDescription": "Woodburn a 2,555 ha beef breeding enterprise situated north of Walcha on the New England tablelands. Woodburn was purchased in 2011 with the goal of breeding our own homegrown grass-fed beef. Set at approximately 1,120m above sea level, the average annual rainfall is 730mm, the soils are basalt and sandy loam, and the land is lightly timbered.",
+      "longDescription": "<p>Grant has been managing Woodburn since it was purchased by the Wilmot Cattle Co in 2011 and has overseen the transition from conventional management systems to regenerative agricultural practices. Grant and Tanya both have an innate connection to the land having come from rural NSW Mid North Coast. Grant has worked in the North West Slopes and Plains region in a managerial role bringing over 25 years experience to the team.</p><p>Grant has overseen the conversion of Woodburn's management strategies towards regenerative agricultural practices. This process accelerated from 2016 and has led to a general improvement in the farm's productivity and ecosystem health.</p>",
       "media": [
         {
-          "src": "https://regen-registry.s3.amazonaws.com/projects/wilmot/image1.png",
+          "src": "https://regen-registry.s3.amazonaws.com/projects/woodburn/image1.jpg",
           "type": "image"
         },
         {
-          "src": "https://regen-registry.s3.amazonaws.com/projects/wilmot/image2.png",
+          "src": "https://regen-registry.s3.amazonaws.com/projects/woodburn/image2.png",
           "type": "image"
         },
         {
-          "src": "https://regen-registry.s3.amazonaws.com/projects/wilmot/image3.png",
+          "src": "https://regen-registry.s3.amazonaws.com/projects/woodburn/image3.png",
           "type": "image"
         },
         {
-          "src": "https://regen-registry.s3.amazonaws.com/projects/wilmot/image4.png",
+          "src": "https://regen-registry.s3.amazonaws.com/projects/woodburn/image4.png",
           "type": "image"
         },
         {
@@ -147,8 +149,8 @@
           "title": "28% increase in NDVI (vegetation health) "
         }
       ],
-      "image": "wilmotcattlecompany.jpg",
-      "map": "Wilmot_boundary.kml",
+      "image": "https://regen-registry.s3.amazonaws.com/projects/woodburn/Woodburn.png",
+      "map": "https://regen-registry.s3.amazonaws.com/projects/woodburn/GIS+-+Woodburn+(1).kml",
       "keyOutcomesActivities": [
         "Independently verified",
         "Unique - avoiding double issuance through GIS tracking",
@@ -163,7 +165,7 @@
           "actions": [
             {
               "name": "Time Controlled Rotational Grazing",
-              "description": "Since 2013, Wilmot Cattle Co has implemented time controlled rotational grazing at the Wilmot property. Effectively mimicking natural herding behaviours, time controlled rotational grazing is the practice of moving large herds of animals across the landscape, grazing pastures for very short periods of time, allowing long rest periods, enabling adequate plant recovery. Stocking rate is adjusted frequently to match the feed available and growth rate of the plant. When managed well, this grazing system increases groundcover, biomass, plant diversity, animal and plant nutrition, soil health, water infiltration and soil organic carbon. A more complete explanation of the science, monitoring tools and management practices is provided below.",
+              "description": "Since 2013, Wilmot Cattle Co has implemented time controlled rotational grazing at the Wilmot property. Effectively mimicking natural herding behaviours, time controlled rotational grazing is the practice of moving large herds of animals across the landscape, grazing pastures for very short periods of time, allowing long rest periods, enabling adequate plant recovery. Stocking rate is adjusted frequently to match the feed available and growth rate of the plant. When managed well, this grazing system increases groundcover, biomass, plant diversity, animal and plant nutrition, soil health, water infiltration and soil organic carbon.",
               "imgSrc": "time-controlled-rotational-grazing.jpg"
             },
             {
@@ -216,13 +218,191 @@
         }
       ],
       "creditClass": {
-        "name": "Carbon Plus Grasslands (beta)",
+        "name": "CarbonPlus Grasslands",
         "description": "Livestock grazing covers over 3.3 billion hectares, or 25 percent of the world’s land area. Managed grazing practices can reverse land degradation, enhance net carbon sequestration, and improve soil and vegetation quality.<br><br>Under managed grazing, carbon sequestration potential is estimated between 16.4 and 26 Gt CO2e sequestered in the period between 2020-2050.<br><br>This credit is designed to significantly increase the amount of hectares under managed grazing worldwide. To that end, the methodology relies on remote sensing to substantially reduce the cost of monitoring carbon sequestration while maintaining scientific rigor.",
         "tag": "soil organic carbon"
+      }
+    },
+    {
+      "id": "impactag",
+      "documents": [
+      ],
+      "stripePrice": "sku_HAqf7cJtNFynOf",
+      "creditPrice": {
+        "unitPrice": 27.5,
+        "currency": "USD"
       },
-      "credits": {
-        "purchased": 0,
-        "issued": 0
+      "name": "Wilmot",
+      "fieldsOverride": {
+        "nonMonitoredImpact": {
+          "title": "Co-benefits"
+        }
+      },
+      "glanceImgSrc": "https://regen-registry.s3.amazonaws.com/projects/wilmot/impactag-smallmap-top-v3.jpg",
+      "glanceText": [
+        "Increased soil organic carbon to 4.5%.",
+        "Improved co-benefits significantly with Soil Health ranking as excellent, Ecosystem Health as good, and Animal Welfare as excellent."
+      ],
+      "place": {
+        "city": "Hernani",
+        "region": "New England",
+        "state": "New South Wales",
+        "country": "Australia"
+      },
+      "hideCreditDetails": false,
+      "type": "Farm",
+      "area": 1854,
+      "areaUnit": "hectares",
+      "developer": {
+        "name": "Impact Ag",
+        "type": "organization",
+        "place": {
+          "city": "Armidale",
+          "state": "New South Wales",
+          "country": "Australia"
+        },
+        "imgSrc": "https://regen-registry.s3.amazonaws.com/projects/wilmot/impactag.jpg",
+        "description": "Impact Ag utilises a variety of pathways and partners to measure and monitise natural capital on assets under management or advisory."
+      },
+      "steward": {
+        "name": "Wilmot Cattle Co.",
+        "type": "organization",
+        "place": {
+          "state": "New South Wales",
+          "country": "Australia"
+        },
+        "imgSrc": "https://regen-registry.s3.amazonaws.com/projects/wilmot/wilmot.jpg",
+        "description": "Wilmot Cattle Company is an innovative, regenerative, grass-fed beef business."
+      },
+      "broker": {
+        "name": "Regen Network Development, Inc.",
+        "type": "organization",
+        "place": {
+          "state": "Massachussetts",
+          "country": "United States"
+        },
+        "imgSrc": "https://regen-registry.s3.amazonaws.com/regen-logo-green.svg",
+        "description": "Regen Network realigns the agricultural economy with ecological health by creating the global marketplace for planetary stewardship."
+      },
+      "tagline": "Stuart Austin & Trisha Cowley have managed Wilmot since 2016",
+      "quote": {
+        "text": "We feel privileged to have the opportunity to manage cattle in a truly holistic and regenerative way on such a remarkable property.",
+        "person": {
+          "name": "stuart austin",
+          "role": "Wilmot General Manager"
+        }
+      },
+      "shortDescription": "Wilmot is an extraordinary property high in the New England Tablelands at Ebor, New South Wales, Australia. Set on 1,854ha and at approximately 1,200m above sea level, average annual rainfall of 1,200mm, highly fertile volcanic basalt soils, and complimented by a series of pristine spring fed, year-round natural waterways including five waterfalls, it is quite simply a unique environment for growing cattle.",
+      "longDescription": "<p>Stu & Trish are the management team behind Wilmot Cattle Co and are driven by the exciting ecological opportunities they can foresee for the business. They have a wholehearted belief in regenerative agriculture and the benefits it will bring to the industry globally, as we collectively work to heal what has largely become a degraded landscape. They have a burning desire to succeed in agriculture and are very ambitious in the growth and development plans they have for Wilmot Cattle Co.</p><p>While Stu has managed the day to day operations of Wilmot since 2016, and now presides over the portfolio of all three properties in a General Manager capacity, Trish works tirelessly behind the scenes ensuring a high level of rigor around the data collection, management, and analysis of every aspect of the business. They firmly believe that you cannot manage what you do not measure and as such, the integrity of the data is paramount.</p><p>In their spare time, they enjoy exploring the natural wonders of Wilmot, including its five waterfalls and large areas of virtually native bushland, with their two kids Harry and Poppy. They all gain great satisfaction from discovering new species of plants and learning about their role in the ecosystem.</p>",
+      "media": [
+        {
+          "src": "https://regen-registry.s3.amazonaws.com/projects/wilmot/image1.png",
+          "type": "image"
+        },
+        {
+          "src": "https://regen-registry.s3.amazonaws.com/projects/wilmot/image2.png",
+          "type": "image"
+        },
+        {
+          "src": "https://regen-registry.s3.amazonaws.com/projects/wilmot/image3.png",
+          "type": "image"
+        },
+        {
+          "src": "https://regen-registry.s3.amazonaws.com/projects/wilmot/image4.png",
+          "type": "image"
+        },
+        {
+          "src": "https://www.youtube.com/embed/PAVSJlj-i00",
+          "preview": "https://regen-registry.s3.amazonaws.com/projects/wilmot/video-preview.jpg",
+          "type": "video"
+        }
+      ],
+      "sdgs": [
+        {
+          "imageUrl": "https://regen-registry.s3.amazonaws.com/sdgs/sdg2.svg",
+          "title": "200k kg protein production"
+        },
+        {
+          "imageUrl": "https://regen-registry.s3.amazonaws.com/sdgs/sdg13.svg",
+          "title": "6.07 tons CO2e"
+        },
+        {
+          "imageUrl": "https://regen-registry.s3.amazonaws.com/sdgs/sdg15.svg",
+          "title": "28% increase in NDVI (vegetation health) "
+        }
+      ],
+      "image": "https://regen-registry.s3.amazonaws.com/projects/wilmot/Image.png",
+      "map": "https://regen-registry.s3.amazonaws.com/projects/wilmot/Wilmot_boundary.kml",
+      "keyOutcomesActivities": [
+        "Independently verified",
+        "Unique - avoiding double issuance through GIS tracking",
+        "Real - GHG impact is quantifiable and verifiable",
+        "Measurable - each credit represents one ton of CO2e",
+        "Permanent - 25 year period through reversal buffer or covenant",
+        "Additional - a new practice adopted from pre-approved list",
+        "Leakage - de minimis in agricultural land management"
+      ],
+      "landManagementActions": [
+        {
+          "actions": [
+            {
+              "name": "Time Controlled Rotational Grazing",
+              "description": "Since 2013, Wilmot Cattle Co. has implemented time controlled rotational grazing at Wilmot Farm. In order to mirror natural herding behaviors, time controlled rotational grazing optimizes the number of stock in a paddock, matches the grazing period with available pasture, shortens grazing periods in each paddock, and follows these activities by long resting periods to allow the pasture to recover. When managed well, this grazing system increases groundcover, biomass, plant diversity, animal and plant nutrition, soil health, water infiltration and soil organic carbon.",
+              "imgSrc": "time-controlled-rotational-grazing.jpg"
+            },
+            {
+              "name": "Decrease Paddock Size",
+              "description": "Decreased paddock sizes enable effective grazing at a controllable density. Wilmot Farm has adopted a paddock subdivision program with an average paddock size of 22 hectares.",
+              "imgSrc": "decrease-paddock-size.jpg"
+            },
+            {
+              "name": "Increase Stock Density",
+              "description": "Carefully managed, high stock densities lead to evenly grazed pastures, nutrient recycling, increases in pasture health and performance by trampling (or recycling) a higher proportion of biomass, and evenly distributing dung and urine (nutrients).",
+              "imgSrc": "increase-stock-density.jpg"
+            },
+            {
+              "name": "Monitor Pasture Growth",
+              "description": "Accurate measurement of pasture growth (available feed) determines the density of animals and length of time in a paddock.",
+              "imgSrc": "monitor-pasture-growth.jpg"
+            },
+            {
+              "name": "Manage Grazing Periods",
+              "description": "To ensure effectively implemented grazing practices and management practices records, Wilmot Farm utilizes the online tool <a href=\"https://www.maiagrazing.com/\" rel=\"noopener noreferrer\" target=\"_blank\">Maia Grazing</a>. Maia Grazing uses climatic data and field observations to determine pasture growth and optimal stocking rates, tracks stock movements, and ensures the stocking rate does not exceed the carrying capacity of each paddock.",
+              "imgSrc": "manage-grazing-periods.jpg"
+            }
+          ]
+        }
+      ],
+      "impact": [
+        {
+          "name": "Soil Organic Carbon",
+          "description": "Organic matter contributes to nutrient retention and turnover, soil structure, moisture retention and availability, degradation of pollutants, carbon sequestration and soil resilience.",
+          "monitored": true,
+          "imgSrc": "https://regen-registry.s3.amazonaws.com/projects/wilmot/impact1.png"
+        },
+        {
+          "name": "Animal Welfare",
+          "description": "Animal welfare is an important component in a well managed grazing enterprise. Low stress stock handling techniques have been adopted to ensure animals have higher quality life.",
+          "monitored": false,
+          "imgSrc": "https://regen-registry.s3.amazonaws.com/projects/wilmot/impact2.png"
+        },
+        {
+          "name": "Ecosystem Health",
+          "description": "In the ecological realm, ‘health’ is characterized by system integrity and the exhibition of certain fundamental properties of self-organizing complex systems.",
+          "monitored": false,
+          "imgSrc": "https://regen-registry.s3.amazonaws.com/projects/wilmot/impact3.png"
+        },
+        {
+          "name": "Soil Health",
+          "description": "The capacity of soil to function as a vital living ecosystem that sustains plants, animals, and humans. An annual soil monitoring program has been in place since 2013.",
+          "monitored": false,
+          "imgSrc": "https://regen-registry.s3.amazonaws.com/projects/wilmot/impact4.png"
+        }
+      ],
+      "creditClass": {
+        "name": "CarbonPlus Grasslands",
+        "description": "Livestock grazing covers over 3.3 billion hectares, or 25 percent of the world’s land area. Managed grazing practices can reverse land degradation, enhance net carbon sequestration, and improve soil and vegetation quality.<br><br>Under managed grazing, carbon sequestration potential is estimated between 16.4 and 26 Gt CO2e sequestered in the period between 2020-2050.<br><br>This credit is designed to significantly increase the amount of hectares under managed grazing worldwide. To that end, the methodology relies on remote sensing to substantially reduce the cost of monitoring carbon sequestration while maintaining scientific rigor.",
+        "tag": "soil organic carbon"
       }
     }
   ]

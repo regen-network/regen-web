@@ -31,11 +31,6 @@ blogSection:
 comingSoonSection:
   header: Coming Soon
   projects:
-    - name: Woodburn
-      image: ../../static/media/woodburn.png
-      location: Walcha, New South Wales, Australia
-      area: 6313
-      areaUnit: acres
     - name: Cavan Station
       image: ../../static/media/cavan-station.png
       location: Bookham, New South Wales, Australia

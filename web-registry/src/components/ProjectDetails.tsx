@@ -8,6 +8,7 @@ import background from '../assets/background.jpg';
 import { Project, ProjectDefault, ActionGroup } from '../mocks';
 import ProjectTop from './sections/ProjectTop';
 import ProjectImpact from './sections/ProjectImpact';
+import MoreProjects from './sections/MoreProjects';
 
 import { getFontSize } from 'web-components/lib/theme/sizing';
 import Title from 'web-components/lib/components/title';
@@ -213,10 +214,11 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 interface ProjectProps {
   project: Project;
+  projects: Project[];
   projectDefault: ProjectDefault;
 }
 
-export default function ProjectDetails({ project, projectDefault }: ProjectProps): JSX.Element {
+export default function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JSX.Element {
   const [submitted, setSubmitted] = useState(false);
   const location = useLocation();
   useEffect(() => {
@@ -230,11 +232,13 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
     actions: group.actions.map(action => ({ ...action, imgSrc: getImgSrc(action.imgSrc) })),
   }));
 
+  const otherProjects: Project[] = projects.filter(p => p.id !== project.id);
+
   const [geojson, setGeojson] = useState<any | null>(null);
 
   // Convert kml to geojson
-  const mapFile: string = require(`../assets/${project.map}`);
-  const isGISFile: boolean = /\.(json|kml)$/i.test(project.map);
+  const mapFile: string = project.map;
+  const isGISFile: boolean = /\.(json|kml)$/i.test(mapFile);
 
   if (!geojson && isGISFile) {
     fetch(mapFile)
@@ -393,6 +397,8 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
           </div>
         </div>
       )}
+
+      {otherProjects.length > 0 && <MoreProjects projects={otherProjects} />}
 
       {project.presaleUrl && <BuyFooter onClick={handleOpen} creditPrice={project.creditPrice} />}
 

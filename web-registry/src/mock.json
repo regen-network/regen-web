@@ -49,7 +49,19 @@
   "projects": [
     {
       "id": "woodburn",
-      "documents": [
+       "documents": [
+        {
+          "name": "Project Plan",
+          "type": "Project Plan",
+          "date": "December 15, 2020",
+          "url": "https://regen-registry.s3.amazonaws.com/projects/woodburn/WOODBURN+Project+Plan.pdf"
+        },
+        {
+          "name": "Issuance Document",
+          "type": "Issuance",
+          "date": "December 16, 2020",
+          "url": "https://regen-registry.s3.amazonaws.com/projects/woodburn/woodburn-certificate-121620.pdf"
+        }
       ],
       "name": "Woodburn",
       "fieldsOverride": {
@@ -226,6 +238,18 @@
     {
       "id": "impactag",
       "documents": [
+        {
+          "name": "Project Plan",
+          "type": "Project Plan",
+          "date": "December 15, 2020",
+          "url": "https://regen-registry.s3.amazonaws.com/projects/wilmot/WILMOT+Project+Plan.pdf"
+        },
+        {
+          "name": "Issuance Document",
+          "type": "Issuance",
+          "date": "December 16, 2020",
+          "url": "https://regen-registry.s3.amazonaws.com/projects/wilmot/wilmot-certificate-121620.pdf"
+        }
       ],
       "stripePrice": "sku_HAqf7cJtNFynOf",
       "creditPrice": {

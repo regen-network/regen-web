@@ -298,14 +298,24 @@ export default function CreditsPurchaseForm({
             }
 
             // Redirect to Stripe Checkout page
+            const response = axios.post(
+              `${process.env.REACT_APP_API_URI || 'http://localhost:5000'}/create-checkout-session`,
+              {
+                price: stripePrice,
+                units,
+                cancelUrl: window.location.href,
+                successUrl: getRegistryUrl(`/post-purchase/${projectId}/${walletId}/${encodeURI(name)}`),
+                customerEmail: email,
+                clientReferenceId: JSON.stringify({ walletId, addressId, name }),
+              },
+            );
+
+            const { data } = await response;
+
             const stripe = await stripePromise;
             if (stripe) {
               const { error } = await stripe.redirectToCheckout({
-                items: [{ sku: stripePrice, quantity: units }],
-                successUrl: getRegistryUrl(`/post-purchase/${projectId}/${walletId}/${encodeURI(name)}`),
-                cancelUrl: window.location.href,
-                customerEmail: email,
-                clientReferenceId: JSON.stringify({ walletId, addressId, name }),
+                sessionId: data.id,
               });
               if (error) {
                 setStatus({ serverError: error.message });

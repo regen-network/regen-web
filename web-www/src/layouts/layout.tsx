@@ -9,7 +9,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useTheme } from '@material-ui/core/styles';
 
-import Header, { HeaderMenuItem } from 'web-components/lib/components/header';
+import Header, { HeaderColors, HeaderMenuItem } from 'web-components/lib/components/header';
 import Footer, { FooterItemProps as FooterItem } from 'web-components/lib/components/footer';
 import CookiesFooter from 'web-components/lib/components/banner/CookiesBanner';
 
@@ -18,10 +18,6 @@ import './layout.css';
 interface propTypes {
   children: Array<React.ReactElement>;
   location: Location;
-}
-
-interface HeaderColors {
-  [key: string]: string;
 }
 
 interface BoolProps {

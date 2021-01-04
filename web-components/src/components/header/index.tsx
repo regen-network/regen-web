@@ -12,6 +12,10 @@ export interface node {
   [key: number]: React.ReactNode;
 }
 
+export interface HeaderColors {
+  [key: string]: string;
+}
+
 interface StyleProps {
   color: string;
   borderBottom?: boolean;

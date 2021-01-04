@@ -25,6 +25,7 @@ import Modal from 'web-components/lib/components/modal';
 import MoreInfoForm from 'web-components/lib/components/form/MoreInfoForm';
 import CreditsPurchaseForm from './CreditsPurchaseForm';
 import Banner from 'web-components/lib/components/banner';
+import SEO from 'web-components/lib/components/seo';
 import FixedFooter from 'web-components/lib/components/fixed-footer';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import EmailIcon from 'web-components/lib/components/icons/EmailIcon';
@@ -273,8 +274,17 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
     />
   );
 
+  const siteMetadata = {
+    title: `${project.name} | Regen Network Registry`,
+    description: `Learn about Regen Network's ${project.creditClass.name} credits sourced from ${project.steward.name} in ${project.place.state}, ${project.place.country}.`,
+    author: `Regen Network`,
+    siteUrl: `${window.location.origin}/registry`,
+  };
+
   return (
     <div className={classes.root}>
+      <SEO location={location} siteMetadata={siteMetadata} title={project.name} imageUrl={project.image} />
+
       <ProjectMedia
         assets={project.media.filter(item => item.type === 'image')}
         gridView
@@ -381,9 +391,6 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
 
       {project.timeline && (
         <div className={classes.timelineContainer}>
-          {/*<div className={classes.projectDetails}>
-          <Title variant="h3">Monitoring, Verification, and Reporting</Title>
-        </div>*/}
           <div className={`${classes.projectDetails} ${classes.projectTimeline} ${classes.projectContent}`}>
             <Title className={classes.timelineTitle} variant="h3">
               {project.fieldsOverride && project.fieldsOverride.timeline
@@ -400,8 +407,7 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
 
       {otherProjects.length > 0 && <MoreProjects projects={otherProjects} />}
 
-      {project.presaleUrl && <BuyFooter onClick={handleOpen} creditPrice={project.creditPrice} />}
-
+      {project.creditPrice && <BuyFooter onClick={handleOpen} creditPrice={project.creditPrice} />}
       {project.creditPrice && project.stripePrice && (
         <Modal open={open} onClose={handleClose}>
           <CreditsPurchaseForm

@@ -293,11 +293,6 @@
           "url": "https://regen-registry.s3.amazonaws.com/projects/wilmot/wilmot-certificate-121620.pdf"
         }
       ],
-      "stripePrice": "sku_HAqf7cJtNFynOf",
-      "creditPrice": {
-        "unitPrice": 27.5,
-        "currency": "USD"
-      },
       "name": "Wilmot",
       "fieldsOverride": {
         "nonMonitoredImpact": {

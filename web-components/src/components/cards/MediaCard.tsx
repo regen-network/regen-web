@@ -12,6 +12,8 @@ export interface MediaCardProps {
   children?: any;
   imgSrc: string;
   name?: string;
+  href?: string;
+  target?: string;
   tag?: string;
   onClick?: () => void;
   width?: string;
@@ -88,6 +90,8 @@ export default function MediaCard({
   children,
   name,
   imgSrc,
+  href,
+  target = '_blank',
   onClick,
   width,
   titleVariant = 'h4',
@@ -102,6 +106,12 @@ export default function MediaCard({
 }: MediaCardProps): JSX.Element {
   const classes = useStyles({});
 
+  const media = (
+    <CardMedia className={clsx(imageClassName, classes.image)} image={imgSrc}>
+      {backgroundGradient && <div className={classes.backgroundGradient} />}
+      {tag && <div className={classes.tag}>{tag}</div>}
+    </CardMedia>
+  );
   return (
     <Card
       className={className}
@@ -112,10 +122,13 @@ export default function MediaCard({
       borderRadius={borderRadius}
     >
       <div className={classes.root}>
-        <CardMedia className={clsx(imageClassName, classes.image)} image={imgSrc}>
-          {backgroundGradient && <div className={classes.backgroundGradient} />}
-          {tag && <div className={classes.tag}>{tag}</div>}
-        </CardMedia>
+        {href ? (
+          <a href={href} target={target}>
+            {media}
+          </a>
+        ) : (
+          media
+        )}
         {name && (
           <Title
             className={

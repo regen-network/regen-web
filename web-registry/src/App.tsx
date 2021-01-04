@@ -17,8 +17,9 @@ import {
   PurchasedCredits,
 } from './mocks';
 import Footer, { FooterItemProps as FooterItem } from 'web-components/lib/components/footer';
-import Header, { HeaderMenuItem } from 'web-components/lib/components/header';
+import Header, { HeaderMenuItem, HeaderColors } from 'web-components/lib/components/header';
 import Title from 'web-components/lib/components/title';
+import CookiesBanner from 'web-components/lib/components/banner/CookiesBanner';
 import ProjectDetails from './components/ProjectDetails';
 import ProjectList from './components/ProjectList';
 import UserCredits from './components/UserCredits';
@@ -28,8 +29,9 @@ import CreditsRetire from './components/CreditsRetire';
 import BuyerCreate from './components/BuyerCreate';
 import NotFound from './components/NotFound';
 import Admin from './components/Admin';
+import PostPurchase from './components/PostPurchase';
+import Certificate from './components/Certificate';
 import Seller from './components/Seller';
-import CookiesFooter from 'web-components/lib/components/banner/CookiesBanner';
 
 export const history = createBrowserHistory();
 
@@ -179,12 +181,17 @@ function AppHeader(): JSX.Element {
     },
   ];
 
+  const headerColors: HeaderColors = {
+    '/certificate': theme.palette.primary.main,
+  };
+
   return (
     <Header
       menuItems={menuItems}
-      color={theme.palette.primary.light}
-      transparent={false}
-      absolute={false}
+      color={headerColors[pathname] ? headerColors[pathname] : theme.palette.primary.light}
+      transparent={pathname === '/certificate'}
+      absolute={pathname === '/certificate'}
+      borderBottom={pathname !== '/certificate'}
       fullWidth={fullWidthRegExp.test(pathname)}
       pathName={pathname}
     />
@@ -240,14 +247,6 @@ function VerifyEmail(): JSX.Element {
   );
 }
 
-function PostPurchase(): JSX.Element {
-  return (
-    <div style={{ padding: '1rem', display: 'flex', justifyContent: 'center' }}>
-      <Title variant="h1">Thank you for your purchase</Title>
-    </div>
-  );
-}
-
 const App: React.FC = (): JSX.Element => {
   const { user, isLoading, error } = useAuth0();
 
@@ -282,6 +281,9 @@ const App: React.FC = (): JSX.Element => {
           <Route exact path="/verify-email">
             <VerifyEmail />
           </Route>
+          <Route exact path="/certificate">
+            <Certificate />
+          </Route>
           <Route exact path={`/projects/impactag/admin`} component={Seller} />
           <Route
             path="/projects"
@@ -298,7 +300,7 @@ const App: React.FC = (): JSX.Element => {
             path="/post-purchase"
             render={({ match: { path } }) => (
               <>
-                <Route path={`${path}/:projectId`} component={PostPurchase} />
+                <Route path={`${path}/:projectId/:walletId/:name`} component={PostPurchase} />
               </>
             )}
           />
@@ -330,7 +332,7 @@ const App: React.FC = (): JSX.Element => {
           />
           <Route path="*" component={NotFound} />
         </Switch>
-        <CookiesFooter privacyUrl="https://www.regen.network/privacy-policy/" />
+        <CookiesBanner privacyUrl="https://www.regen.network/privacy-policy/" />
         <footer>
           <AppFooter />
         </footer>

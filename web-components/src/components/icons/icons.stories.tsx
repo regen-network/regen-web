@@ -30,6 +30,7 @@ import GithubIcon from 'web-components/lib/components/icons/social/GithubIcon';
 import WhitepaperIcon from 'web-components/lib/components/icons/WhitepaperIcon';
 import BlockIcon from 'web-components/lib/components/icons/BlockIcon';
 import LinkIcon from 'web-components/lib/components/icons/LinkIcon';
+import PrintIcon from 'web-components/lib/components/icons/PrintIcon';
 
 import { withKnobs, text } from '@storybook/addon-knobs';
 
@@ -102,3 +103,5 @@ export const whitepaperIcon = (): JSX.Element => <WhitepaperIcon color="black" /
 export const blockIcon = (): JSX.Element => <BlockIcon color="black" />;
 
 export const linkIcon = (): JSX.Element => <LinkIcon color="black" />;
+
+export const printIcon = (): JSX.Element => <PrintIcon />;

@@ -37,7 +37,7 @@ export function getFontSize(size?: string): FontSizes {
   let fontSize: FontSizes;
   switch (size) {
     case 'xl':
-      fontSize = { xs: '1.125rem', sm: '1.3125em' };
+      fontSize = { xs: '1.125rem', sm: '1.3125rem' };
       break;
     case 'big':
       fontSize = { xs: '1rem', sm: '1.125rem' };

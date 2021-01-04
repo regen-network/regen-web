@@ -136,9 +136,8 @@ export default function Map({ geojson, token }: MapProps): JSX.Element {
   const [viewPort, setViewPort] = useState({ zoom: 11, latitude: 0.0, longitude: 0.0 });
   const [boundary, setBoundary] = useState({ zoom: 11, latitude: 0.0, longitude: 0.0 });
   const [popupInfo, setPopupInfo] = useState<PopupInfo | null>(null);
-  const [shownLayer, setShownLayer] = useState<string | null>(
-    filteredFeatures.length ? filteredFeatures[0].id : null,
-  );
+  // const [shownLayer, setShownLayer] = useState<string | null>(
+  const [shownLayer] = useState<string | null>(filteredFeatures.length ? filteredFeatures[0].id : null);
 
   const interactiveLayerIds: string[] = geojson.features
     ? geojson.features
@@ -210,13 +209,13 @@ export default function Map({ geojson, token }: MapProps): JSX.Element {
     );
   };
 
-  const renderSlider = (): JSX.Element => {
-    return (
-      <div className={classes.slider}>
-        <MapCards features={filteredFeatures} afterChange={setShownLayer} />
-      </div>
-    );
-  };
+  // const renderSlider = (): JSX.Element => {
+  //   return (
+  //     <div className={classes.slider}>
+  //       <MapCards features={filteredFeatures} afterChange={setShownLayer} />
+  //     </div>
+  //   );
+  // };
 
   return (
     <div className={classes.root}>
@@ -230,16 +229,22 @@ export default function Map({ geojson, token }: MapProps): JSX.Element {
         onViewportChange={v => setViewPort(v)}
         mapboxApiAccessToken={token}
         onClick={onMapClick}
-        interactiveLayerIds={interactiveLayerIds}
+        // interactiveLayerIds={interactiveLayerIds} unused for now
         attributionControl={false}
       >
+        {viewPort.zoom < boundary.zoom - 1 && (
+          <Marker latitude={boundary.latitude} longitude={boundary.longitude}>
+            <PinIcon fontSize="large" size={35} />
+          </Marker>
+        )}
         {geojson.features &&
           geojson.features.map((feature, index) => {
             return (
               <div key={index}>
                 {feature.geometry.type === 'Polygon' &&
                   !feature.properties.boundary &&
-                  (matches || (!matches && feature.id === shownLayer)) && (
+                  viewPort.zoom >= boundary.zoom - 1 && (
+                    // (matches || (!matches && feature.id === shownLayer)) && (
                     <Source type="geojson" data={feature}>
                       <Layer
                         id={feature.id || index.toString()}
@@ -252,7 +257,8 @@ export default function Map({ geojson, token }: MapProps): JSX.Element {
                       <Layer
                         type="line"
                         paint={{
-                          'line-color': feature.properties['stroke'] || '#000000',
+                          // 'line-color': feature.properties['stroke'] || '#000000',
+                          'line-color': theme.palette.primary.main,
                           'line-width': 2,
                         }}
                       />
@@ -272,13 +278,6 @@ export default function Map({ geojson, token }: MapProps): JSX.Element {
                         }}
                       />
                     </Source>
-                  )}
-                {feature.geometry.type === 'Polygon' &&
-                  feature.properties.boundary &&
-                  viewPort.zoom < boundary.zoom - 1 && (
-                    <Marker latitude={boundary.latitude} longitude={boundary.longitude}>
-                      <PinIcon fontSize="large" size={35} />
-                    </Marker>
                   )}
                 {feature.geometry.type === 'Point' && (matches || (!matches && feature.id === shownLayer)) && (
                   <Marker
@@ -310,7 +309,7 @@ export default function Map({ geojson, token }: MapProps): JSX.Element {
           zoom to project area
         </OutlinedButton>
       </div>
-      {!matches && renderSlider()}
+      {/* {!matches && renderSlider()} */}
     </div>
   );
 }

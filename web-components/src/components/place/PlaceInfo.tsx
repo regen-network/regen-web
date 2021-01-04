@@ -23,18 +23,20 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   },
   icon: {
     [theme.breakpoints.up('sm')]: {
-      paddingTop: '2px',
+      paddingTop: theme.spacing(1),
     },
     [theme.breakpoints.down('xs')]: {
-      paddingTop: '1px',
+      paddingTop: theme.spacing(0.25),
     },
   },
   content: props => ({
     [theme.breakpoints.up('sm')]: {
-      fontSize: props.smFontSize || props.fontSize || '1rem',
+      fontSize: props.smFontSize || props.fontSize || theme.spacing(4.5),
+    },
+    [theme.breakpoints.down('xs')]: {
+      fontSize: props.fontSize || theme.spacing(3.5),
     },
     marginLeft: theme.spacing(1.6),
-    fontSize: props.fontSize || '0.875rem',
     color: props.color || theme.palette.primary.contrastText,
   }),
 }));

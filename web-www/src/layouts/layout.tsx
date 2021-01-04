@@ -9,7 +9,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useTheme } from '@material-ui/core/styles';
 
-import Header, { HeaderMenuItem } from 'web-components/lib/components/header';
+import Header, { HeaderColors, HeaderMenuItem } from 'web-components/lib/components/header';
 import Footer, { FooterItemProps as FooterItem } from 'web-components/lib/components/footer';
 import CookiesFooter from 'web-components/lib/components/banner/CookiesBanner';
 
@@ -18,10 +18,6 @@ import './layout.css';
 interface propTypes {
   children: Array<React.ReactElement>;
   location: Location;
-}
-
-interface HeaderColors {
-  [key: string]: string;
 }
 
 interface BoolProps {
@@ -43,6 +39,7 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
     '/invest/': theme.palette.primary.light,
     '/science/': theme.palette.primary.main,
     '/validators/': theme.palette.primary.main,
+    '/community/': theme.palette.primary.main,
   };
 
   const headerTransparent: BoolProps = {
@@ -57,7 +54,7 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
   // Links in rest of the site must use the trailing '/'
   // in order for these to work appropriately
   const headerNoBorderBottomPages: RegExp = new RegExp(
-    '//|/buyers/|/partners/|/validators/|/land-stewards/|/resources/|/media/|/team/|/developers/|/science/|/invest/|/case-studies/|/press-kit/|/case-studies/[a-z-]+//',
+    '//|/buyers/|/partners/|/validators/|/land-stewards/|/resources/|/media/|/team/|/developers/|/science/|/invest/|/case-studies/|/press-kit/|/community/|/case-studies/[a-z-]+//',
   );
 
   const menuItems: HeaderMenuItem[] = [
@@ -66,6 +63,7 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
     {
       title: 'Community',
       dropdownItems: [
+        { title: 'Community Overview', href: '/community/' },
         { title: 'Developers', href: '/developers/' },
         { title: 'Scientists', href: '/science/' },
         { title: 'Validators', href: '/validators/' },
@@ -102,6 +100,10 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
           href: '/land-stewards/',
         },
         {
+          title: 'Community',
+          href: '/community/',
+        },
+        {
           title: 'Developers',
           href: '/developers/',
         },
@@ -134,10 +136,6 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
           title: 'Team',
           href: '/team/',
         },
-        // {
-        //   title: 'Contact',
-        //   href: '/contact/',
-        // },
       ],
     },
     {
@@ -180,7 +178,7 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
         absolute={location.pathname === '/' || headerNoBorderBottomPages.test(location.pathname)}
         color={desktopColor}
         borderBottom={location.pathname !== '/' && !headerNoBorderBottomPages.test(location.pathname)}
-        pathname={location.pathname}
+        pathName={location.pathname}
       />
       <div>
         <main>{children}</main>

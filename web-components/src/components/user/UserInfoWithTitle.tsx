@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   title: {
     [theme.breakpoints.up('sm')]: {
       fontSize: '0.75rem',
-      marginBottom: theme.spacing(4.25),
+      marginBottom: theme.spacing(5.2),
     },
     [theme.breakpoints.down('xs')]: {
       fontSize: '0.6875rem',
@@ -25,6 +25,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     letterSpacing: theme.spacing(0.125),
     textTransform: 'uppercase',
     fontWeight: 'bold',
+    color: theme.palette.info.main,
   },
 }));
 

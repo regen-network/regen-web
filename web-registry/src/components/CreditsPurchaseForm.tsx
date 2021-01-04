@@ -25,6 +25,7 @@ import {
 import Submit from 'web-components/lib/components/form/Submit';
 
 import { countries } from '../lib/countries';
+import getRegistryUrl from '../lib/registryUrl';
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_API_KEY || '');
 
@@ -155,7 +156,7 @@ export default function CreditsPurchaseForm({
 }: CreditsPurchaseFormProps): JSX.Element {
   const classes = useStyles();
   const initialCountry = 'US';
-  const { projectId } = useParams();
+  const { projectId } = useParams<{ projectId: string }>();
   const [stateOptions, setStateOptions] = useState<Option[]>([]);
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up('sm'));
@@ -303,12 +304,7 @@ export default function CreditsPurchaseForm({
                 price: stripePrice,
                 units,
                 cancelUrl: window.location.href,
-                successUrl:
-                  process.env.NODE_ENV === 'production'
-                    ? `${window.location.origin}/registry/post-purchase/${projectId}/${walletId}/${encodeURI(
-                        name,
-                      )}`
-                    : `${window.location.origin}/post-purchase/${projectId}/${walletId}/${encodeURI(name)}`,
+                successUrl: getRegistryUrl(`/post-purchase/${projectId}/${walletId}/${encodeURI(name)}`),
                 customerEmail: email,
                 clientReferenceId: JSON.stringify({ walletId, addressId, name }),
               },

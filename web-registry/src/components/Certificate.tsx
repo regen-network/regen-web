@@ -183,12 +183,12 @@ export default function CertificatePage(): JSX.Element {
 
       const vintage = node.creditVintageByCreditVintageId;
       const project = vintage.projectByProjectId;
-      const projectDeveloper = project.partyByDeveloperId;
-      const projectDeveloperPerson =
-        projectDeveloper.organizationsByPartyId.nodes.length &&
-        projectDeveloper.organizationsByPartyId.nodes[0].organizationMembersByOrganizationId.nodes.length &&
-        projectDeveloper.organizationsByPartyId.nodes[0].organizationMembersByOrganizationId.nodes[0]
-          .userByMemberId.partyByPartyId;
+      const landOwner = project.partyByLandOwnerId;
+      const landOwnerPerson =
+        landOwner.organizationsByPartyId.nodes.length &&
+        landOwner.organizationsByPartyId.nodes[0].organizationMembersByOrganizationId.nodes.length &&
+        landOwner.organizationsByPartyId.nodes[0].organizationMembersByOrganizationId.nodes[0].userByMemberId
+          .partyByPartyId;
 
       const issuer =
         vintage.walletByIssuerId.partiesByWalletId.nodes.length &&
@@ -219,7 +219,7 @@ export default function CertificatePage(): JSX.Element {
             background={background}
             creditName={getName(creditClassVersion)}
             creditsUnits={units}
-            equivalentTonsCO2={units} // TODO: replace with db data (1 credit <=> 1 ton CO2e for now)
+            equivalentTonsCO2={units} // TODO replace with db data (1 credit <=> 1 ton CO2e for now)
             buyerName={
               node.walletByBuyerWalletId.partiesByWalletId.nodes.length
                 ? node.walletByBuyerWalletId.partiesByWalletId.nodes[0].name
@@ -231,10 +231,10 @@ export default function CertificatePage(): JSX.Element {
               personName: 'Christian Shearer',
               personRole: 'CEO',
             }}
-            projectDeveloper={{
-              companyName: projectDeveloper.name,
-              personName: getName(projectDeveloperPerson),
-              personRole: getRole(projectDeveloperPerson),
+            issuee={{
+              companyName: landOwner.name,
+              personName: getName(landOwnerPerson),
+              personRole: getRole(landOwnerPerson),
             }}
             // TODO add retirement info
             // retired={}

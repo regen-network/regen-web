@@ -226,7 +226,7 @@ function ProjectContainer(): JSX.Element {
   const project: Project | undefined = projects.find(p => p.id === projectId);
 
   if (project) {
-    return <ProjectDetails project={project} projectDefault={projectDefault} />;
+    return <ProjectDetails projects={projects} project={project} projectDefault={projectDefault} />;
   }
   return <div>No project found</div>;
 }

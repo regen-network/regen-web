@@ -12,13 +12,13 @@ export const certificate = (): JSX.Element => (
     creditName="Carbon<i>Plus</i> Grasslands"
     creditsUnits={1000}
     equivalentTonsCO2={1000}
-    buyerName="John Doe"
+    buyerName="Marie Gauthier"
     date={'2020-10-10'}
     issuer={{ companyName: 'Regen Network', personName: 'Christian Shearer', personRole: 'CEO' }}
-    projectDeveloper={{
-      companyName: 'Impact Ag Partners',
-      personName: 'Toby Grogan',
-      personRole: 'Natural Capital Specialist',
+    issuee={{
+      companyName: 'John Doe Ltd',
+      personName: 'John Doe',
+      personRole: 'Director',
     }}
     verifier={{ companyName: 'RSM Australia Pty Ltd', personName: 'Tim Pittaway', personRole: 'Partner' }}
   />

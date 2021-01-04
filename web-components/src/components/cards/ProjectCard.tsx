@@ -92,10 +92,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   userInfo: {
     [theme.breakpoints.up('sm')]: {
-      padding: `0 ${theme.spacing(5.25)} ${theme.spacing(5.25)}`,
+      padding: `${theme.spacing(5.25)} ${theme.spacing(5.25)}`,
     },
     [theme.breakpoints.down('xs')]: {
-      padding: `0 ${theme.spacing(4.5)} ${theme.spacing(5.25)}`,
+      padding: `${theme.spacing(5.25)} ${theme.spacing(4.5)}`,
     },
   },
   comingSoon: {

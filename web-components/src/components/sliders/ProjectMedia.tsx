@@ -32,6 +32,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       [theme.breakpoints.down('xs')]: {
         height: props.mobileHeight ? props.mobileHeight : 'inherit',
         objectFit: props.mobileHeight ? 'cover' : 'inherit',
+        objectPosition: '0% 0%',
       },
     },
     '& .slick-dots': {
@@ -143,6 +144,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     height: '100%',
     objectFit: 'cover',
     borderRadius: '5px',
+    objectPosition: '0% 0%',
   },
   grid: {
     padding: theme.spacing(2.5),

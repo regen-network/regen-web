@@ -75,7 +75,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   image: {
-    border: `1px solid ${theme.palette.info.light}`,
+    border: `1px solid ${theme.palette.grey[100]}`,
     borderRadius: '5px',
     objectFit: 'cover',
     width: '100%',

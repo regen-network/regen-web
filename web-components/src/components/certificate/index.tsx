@@ -27,7 +27,8 @@ interface CertificateProps {
   retired?: boolean;
   issuer: StakeholderInfo;
   verifier?: StakeholderInfo;
-  projectDeveloper: StakeholderInfo;
+  issuee: StakeholderInfo;
+  issueeLabel?: string;
 }
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
@@ -246,7 +247,8 @@ export default function Certificate({
   retired = true,
   issuer,
   verifier,
-  projectDeveloper,
+  issuee,
+  issueeLabel = 'Land Owner',
 }: CertificateProps): JSX.Element {
   const classes = useStyles({ background });
   const withVerifier: boolean = verifier ? true : false;
@@ -288,7 +290,7 @@ export default function Certificate({
         <Grid container>
           <Stakeholder label="Issuer" info={issuer} withVerifier={withVerifier} />
           {verifier && <Stakeholder label="Verifier" info={verifier} withVerifier={withVerifier} />}
-          <Stakeholder label="Project Developer" info={projectDeveloper} withVerifier={withVerifier} />
+          <Stakeholder label={issueeLabel} info={issuee} withVerifier={withVerifier} />
         </Grid>
       </div>
     </div>

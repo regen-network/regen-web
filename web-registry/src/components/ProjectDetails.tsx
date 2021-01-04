@@ -8,6 +8,7 @@ import background from '../assets/background.jpg';
 import { Project, ProjectDefault, ActionGroup } from '../mocks';
 import ProjectTop from './sections/ProjectTop';
 import ProjectImpact from './sections/ProjectImpact';
+import MoreProjects from './sections/MoreProjects';
 
 import { getFontSize } from 'web-components/lib/theme/sizing';
 import Title from 'web-components/lib/components/title';
@@ -17,7 +18,7 @@ import CreditDetails from 'web-components/lib/components/credits/CreditDetails';
 import LandManagementActions from 'web-components/lib/components/sliders/LandManagementActions';
 import ProjectMedia from 'web-components/lib/components/sliders/ProjectMedia';
 import Map from 'web-components/lib/components/map';
-// import BuyFooter from 'web-components/lib/components/fixed-footer/BuyFooter';
+import BuyFooter from 'web-components/lib/components/fixed-footer/BuyFooter';
 import MrvTabs from 'web-components/lib/components/tabs';
 import Table from 'web-components/lib/components/table';
 import Modal from 'web-components/lib/components/modal';
@@ -214,10 +215,11 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 interface ProjectProps {
   project: Project;
+  projects: Project[];
   projectDefault: ProjectDefault;
 }
 
-export default function ProjectDetails({ project, projectDefault }: ProjectProps): JSX.Element {
+export default function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JSX.Element {
   const [submitted, setSubmitted] = useState(false);
   const location = useLocation();
   useEffect(() => {
@@ -231,11 +233,13 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
     actions: group.actions.map(action => ({ ...action, imgSrc: getImgSrc(action.imgSrc) })),
   }));
 
+  const otherProjects: Project[] = projects.filter(p => p.id !== project.id);
+
   const [geojson, setGeojson] = useState<any | null>(null);
 
   // Convert kml to geojson
-  const mapFile: string = require(`../assets/${project.map}`);
-  const isGISFile: boolean = /\.(json|kml)$/i.test(project.map);
+  const mapFile: string = project.map;
+  const isGISFile: boolean = /\.(json|kml)$/i.test(mapFile);
 
   if (!geojson && isGISFile) {
     fetch(mapFile)
@@ -387,9 +391,6 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
 
       {project.timeline && (
         <div className={classes.timelineContainer}>
-          {/*<div className={classes.projectDetails}>
-          <Title variant="h3">Monitoring, Verification, and Reporting</Title>
-        </div>*/}
           <div className={`${classes.projectDetails} ${classes.projectTimeline} ${classes.projectContent}`}>
             <Title className={classes.timelineTitle} variant="h3">
               {project.fieldsOverride && project.fieldsOverride.timeline
@@ -404,8 +405,9 @@ export default function ProjectDetails({ project, projectDefault }: ProjectProps
         </div>
       )}
 
-      {/* {project.creditPrice && <BuyFooter onClick={handleOpen} creditPrice={project.creditPrice} />} */}
+      {otherProjects.length > 0 && <MoreProjects projects={otherProjects} />}
 
+      {project.creditPrice && <BuyFooter onClick={handleOpen} creditPrice={project.creditPrice} />}
       {project.creditPrice && project.stripePrice && (
         <Modal open={open} onClose={handleClose}>
           <CreditsPurchaseForm

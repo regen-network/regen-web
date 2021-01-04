@@ -31,11 +31,10 @@ export interface Project {
   type: string;
   area: number;
   areaUnit: string;
-  startDate: Date | string;
-  endDate: Date | string;
   developer: User;
   steward: User;
   owner?: User;
+  broker?: User;
   shortDescription: string;
   glanceText?: string[];
   glanceImgSrc?: string;

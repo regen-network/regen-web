@@ -230,6 +230,7 @@ export default function ProjectTop({ project, projectDefault }: ProjectTopProps)
             projectDeveloper={project.developer}
             landSteward={project.steward}
             landOwner={project.owner}
+            broker={project.broker}
             sdgs={project.sdgs}
           />
         </Grid>

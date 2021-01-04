@@ -65,7 +65,7 @@ fragment purchasesFields on PurchasesConnection {
         addressByAddressId {
           feature
         }
-        partyByDeveloperId {
+        partyByLandOwnerId {
           id
           name
           organizationsByPartyId(first: 1) {

@@ -185,6 +185,7 @@ export default function CertificatePage(): JSX.Element {
       const project = vintage.projectByProjectId;
       const landOwner = project.partyByLandOwnerId;
       const landOwnerPerson =
+        landOwner &&
         landOwner.organizationsByPartyId.nodes.length &&
         landOwner.organizationsByPartyId.nodes[0].organizationMembersByOrganizationId.nodes.length &&
         landOwner.organizationsByPartyId.nodes[0].organizationMembersByOrganizationId.nodes[0].userByMemberId
@@ -232,7 +233,7 @@ export default function CertificatePage(): JSX.Element {
               personRole: 'CEO',
             }}
             issuee={{
-              companyName: landOwner.name,
+              companyName: landOwner?.name,
               personName: getName(landOwnerPerson),
               personRole: getRole(landOwnerPerson),
             }}

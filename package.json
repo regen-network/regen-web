@@ -26,7 +26,6 @@
     "build-storybook": "yarn build-components && lerna run build-storybook --stream",
     "format": "lerna run format",
     "lint": "lerna run lint",
-    "serve": "serve web-old/build -l ${PORT:-5000}",
     "storybook": "lerna run storybook --stream",
     "test": "lerna run --scope web-registry test --stream",
     "start": "lerna run --scope web-registry start --stream",

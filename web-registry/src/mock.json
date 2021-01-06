@@ -261,6 +261,11 @@
     },
     {
       "id": "impactag",
+      "stripePrice": "sku_HAqf7cJtNFynOf",
+      "creditPrice": {
+        "unitPrice": 27.5,
+        "currency": "USD"
+      },
       "documents": [
         {
           "name": "Project Plan",

@@ -82,6 +82,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       height: '100%',
     },
+    [theme.breakpoints.down('xs')]: {
+      height: theme.spacing(51),
+    },
   },
   root: {
     backgroundColor: theme.palette.primary.main,

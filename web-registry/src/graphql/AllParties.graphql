@@ -9,6 +9,9 @@
       addressByAddressId {
         feature
       }
+      userByPartyId {
+        id
+      }
     }
   }
 }

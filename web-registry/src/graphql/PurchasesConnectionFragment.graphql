@@ -22,16 +22,14 @@ fragment purchasesFields on PurchasesConnection {
         partiesByWalletId(first: 1) {
           nodes {
             name
-            organizationsByPartyId(first: 1) {
-              nodes {
-                id
-                organizationMembersByOrganizationId(condition: { isOwner: true }) {
-                  nodes {
-                    userByMemberId {
-                      partyByPartyId {
-                        name
-                        roles
-                      }
+            organizationByPartyId {
+              id
+              organizationMembersByOrganizationId(condition: { isOwner: true }) {
+                nodes {
+                  userByMemberId {
+                    partyByPartyId {
+                      name
+                      roles
                     }
                   }
                 }
@@ -68,16 +66,14 @@ fragment purchasesFields on PurchasesConnection {
         partyByLandOwnerId {
           id
           name
-          organizationsByPartyId(first: 1) {
-            nodes {
-              id
-              organizationMembersByOrganizationId(condition: { isOwner: true }) {
-                nodes {
-                  userByMemberId {
-                    partyByPartyId {
-                      name
-                      roles
-                    }
+          organizationByPartyId {
+            id
+            organizationMembersByOrganizationId(condition: { isOwner: true }) {
+              nodes {
+                userByMemberId {
+                  partyByPartyId {
+                    name
+                    roles
                   }
                 }
               }

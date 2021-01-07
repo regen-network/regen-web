@@ -186,22 +186,14 @@ export default function CertificatePage(): JSX.Element {
       const landOwner = project.partyByLandOwnerId;
       const landOwnerPerson =
         landOwner &&
-        landOwner.organizationsByPartyId.nodes.length &&
-        landOwner.organizationsByPartyId.nodes[0].organizationMembersByOrganizationId.nodes.length &&
-        landOwner.organizationsByPartyId.nodes[0].organizationMembersByOrganizationId.nodes[0].userByMemberId
+        landOwner.organizationByPartyId &&
+        landOwner.organizationByPartyId.organizationMembersByOrganizationId.nodes.length &&
+        landOwner.organizationByPartyId.organizationMembersByOrganizationId.nodes[0].userByMemberId
           .partyByPartyId;
 
       const issuer =
         vintage.walletByIssuerId.partiesByWalletId.nodes.length &&
         vintage.walletByIssuerId.partiesByWalletId.nodes[0];
-      // const issuerPerson =
-      //   issuer &&
-      //   issuer.organizationsByPartyId &&
-      //   issuer.organizationsByPartyId.nodes.length &&
-      //   issuer.organizationsByPartyId.nodes[0].organizationMembersByOrganizationId &&
-      //   issuer.organizationsByPartyId.nodes[0].organizationMembersByOrganizationId.nodes.length &&
-      //   issuer.organizationsByPartyId.nodes[0].organizationMembersByOrganizationId.nodes[0].userByMemberId
-      //     .partyByPartyId;
 
       const creditClassVersion =
         project.creditClassVersionByCreditClassVersionIdAndCreditClassVersionCreatedAt;

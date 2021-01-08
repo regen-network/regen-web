@@ -272,7 +272,7 @@ export default function Certificate({
         <div className={classes.text}>
           Credits:{' '}
           <b>
-            {formater.format(creditsUnits)} {ReactHtmlParser(creditName)} Credits
+            {formater.format(creditsUnits)} {ReactHtmlParser(creditName)}
           </b>
           <br />
           Equivalent to: <b>{formater.format(equivalentTonsCO2)} tons of CO2e</b>

@@ -177,9 +177,11 @@ export default function CertificatePage(): JSX.Element {
     for (let i = 0; i < nodes.length; i++) {
       const node = data.allPurchases.nodes[i];
 
-      const units: number = node.transactionsByPurchaseId.nodes
-        .map((n: { units: string }) => parseFloat(n.units))
-        .reduce((accumulator: number, currentValue: number) => accumulator + currentValue);
+      const units: number = Math.round(
+        node.transactionsByPurchaseId.nodes
+          .map((n: { units: string }) => parseFloat(n.units))
+          .reduce((accumulator: number, currentValue: number) => accumulator + currentValue),
+      );
 
       const vintage = node.creditVintageByCreditVintageId;
       const project = vintage.projectByProjectId;

@@ -53,6 +53,13 @@ const useStyles = makeStyles((theme: Theme) => ({
   formControl: {
     margin: theme.spacing(1),
     minWidth: 200,
+    display: 'flex',
+    [theme.breakpoints.up('sm')]: {
+      width: theme.spacing(87),
+    },
+    [theme.breakpoints.down('xs')]: {
+      width: '100%',
+    },
   },
 }));
 
@@ -94,6 +101,8 @@ export default function CreditsTransfer(): JSX.Element {
   const [oldBalances, setOldBalances] = useState<Balance[]>([]);
   const [buyerWalletId, setBuyerWalletId] = useState('');
   const [addressId, setAddressId] = useState('');
+  const [partyId, setPartyId] = useState('');
+  const [userId, setUserId] = useState('');
   const [units, setUnits] = useState(1);
   const [creditPrice, setCreditPrice] = useState(1);
   const [showResult, setShowResult] = useState(false);
@@ -125,6 +134,20 @@ export default function CreditsTransfer(): JSX.Element {
       );
       setAddressId(selectedParty.addressId);
     }
+  };
+
+  const handlePartyIdChange = (event: React.ChangeEvent<{ value: any }>): void => {
+    if (showResult) {
+      setShowResult(false);
+    }
+    setPartyId(event.target.value as string);
+  };
+
+  const handleUserIdChange = (event: React.ChangeEvent<{ value: any }>): void => {
+    if (showResult) {
+      setShowResult(false);
+    }
+    setUserId(event.target.value as string);
   };
 
   if (vintagesLoading || partiesLoading) return <div>Loading...</div>;
@@ -190,6 +213,8 @@ export default function CreditsTransfer(): JSX.Element {
                     txState: 'SUCCEEDED',
                     addressId,
                     autoRetire: false,
+                    partyId,
+                    userId,
                   },
                 },
               });
@@ -250,6 +275,63 @@ export default function CreditsTransfer(): JSX.Element {
                       vintage.projectByProjectId.landOwnerId !== node.id)) && (
                     <MenuItem key={node.id} value={node.walletId}>
                       {node.name} ({node.type.toLowerCase()}){' '}
+                    </MenuItem>
+                  ),
+              )}
+          </Select>
+        </FormControl>
+        <FormControl className={classes.formControl}>
+          <InputLabel required id="party-id-select-label">
+            Entity doing this transfer
+          </InputLabel>
+          <Select
+            required
+            labelId="party-id-select-label"
+            id="party-id-select"
+            value={partyId}
+            onChange={handlePartyIdChange}
+          >
+            {partiesData &&
+              partiesData.allParties &&
+              partiesData.allParties.nodes.map(
+                (node: any) =>
+                  node.type === 'ORGANIZATION' && // only show organization for now
+                  (!vintage ||
+                    (vintage &&
+                      vintage.projectByProjectId.developerId !== node.id &&
+                      vintage.projectByProjectId.stewardId !== node.id &&
+                      vintage.projectByProjectId.landOwnerId !== node.id)) && (
+                    <MenuItem key={node.id} value={node.id}>
+                      {node.name}
+                    </MenuItem>
+                  ),
+              )}
+          </Select>
+        </FormControl>
+        <FormControl className={classes.formControl}>
+          <InputLabel required id="user-id-select-label">
+            User doing this transfer on behalf of the entity
+          </InputLabel>
+          <Select
+            required
+            labelId="user-id-select-label"
+            id="user-id-select"
+            value={userId}
+            onChange={handleUserIdChange}
+          >
+            {partiesData &&
+              partiesData.allParties &&
+              partiesData.allParties.nodes.map(
+                (node: any) =>
+                  node.type === 'USER' &&
+                  node.userByPartyId &&
+                  (!vintage ||
+                    (vintage &&
+                      vintage.projectByProjectId.developerId !== node.id &&
+                      vintage.projectByProjectId.stewardId !== node.id &&
+                      vintage.projectByProjectId.landOwnerId !== node.id)) && (
+                    <MenuItem key={node.id} value={node.userByPartyId.id}>
+                      {node.name}
                     </MenuItem>
                   ),
               )}

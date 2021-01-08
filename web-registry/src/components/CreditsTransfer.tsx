@@ -264,7 +264,7 @@ export default function CreditsTransfer(): JSX.Element {
             if (showResult) {
               setShowResult(false);
             }
-            setUnits(Math.max(0.01, parseInt(e.target.value)));
+            setUnits(Math.max(0.01, parseFloat(e.target.value)));
           }}
           label="Units"
         />
@@ -277,7 +277,7 @@ export default function CreditsTransfer(): JSX.Element {
             if (showResult) {
               setShowResult(false);
             }
-            setCreditPrice(Math.max(0.01, parseInt(e.target.value)));
+            setCreditPrice(Math.max(0.01, parseFloat(e.target.value)));
           }}
           label="Credit price"
         />

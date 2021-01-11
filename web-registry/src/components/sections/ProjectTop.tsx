@@ -205,6 +205,10 @@ export default function ProjectTop({ project, projectDefault }: ProjectTopProps)
                 <source src={videos[0].src} />
               </video>
             ))}
+          {/* Show latest image for now */}
+          {project.media.length > 4 && project.media[4].type === 'image' && (
+            <img alt={project.media[4].src} src={project.media[4].src} />
+          )}
           <Title variant="h4" className={classes.tagline}>
             {project.tagline}
           </Title>

@@ -241,7 +241,7 @@ export default function Map({ geojson, token }: MapProps): JSX.Element {
           geojson.features.map((feature, index) => {
             return (
               <div key={index}>
-                {feature.geometry.type === 'Polygon' &&
+                {feature.geometry.type !== 'Point' &&
                   !feature.properties.boundary &&
                   viewPort.zoom >= boundary.zoom - 1 && (
                     // (matches || (!matches && feature.id === shownLayer)) && (

@@ -81,7 +81,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingTop: theme.spacing(7.5),
     },
   },
-  video: {
+  media: {
     width: '100%',
     borderRadius: '5px',
     [theme.breakpoints.up('sm')]: {
@@ -195,19 +195,19 @@ export default function ProjectTop({ project, projectDefault }: ProjectTopProps)
           {videos.length > 0 &&
             (/https:\/\/www.youtube.com\/embed\/[a-zA-Z0-9_.-]+/.test(videos[0].src) ? (
               <iframe
-                className={clsx(classes.iframe, classes.video)}
+                className={clsx(classes.iframe, classes.media)}
                 title={project.name}
                 src={videos[0].src}
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               ></iframe>
             ) : (
-              <video className={classes.video} controls poster={videos[0].preview}>
+              <video className={classes.media} controls poster={videos[0].preview}>
                 <source src={videos[0].src} />
               </video>
             ))}
           {/* Show latest image for now */}
           {project.media.length > 4 && project.media[4].type === 'image' && (
-            <img alt={project.media[4].src} src={project.media[4].src} />
+            <img className={classes.media} alt={project.media[4].src} src={project.media[4].src} />
           )}
           <Title variant="h4" className={classes.tagline}>
             {project.tagline}

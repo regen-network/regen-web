@@ -61,7 +61,7 @@ const ComingSoonSection = () => {
             name,
             area,
             areaUnit,
-            comingSoon: true,
+            // comingSoon: true,
             imgSrc: image.publicURL,
             place: location,
           }))}

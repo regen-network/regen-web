@@ -49,6 +49,31 @@
   "projects": [
     {
       "id": "woodburn",
+      "timeline": {
+        "events": [
+          {
+            "date": "?",
+            "title": "Project starts"
+          },
+          {
+            "date": "?",
+            "title": "Approval complete"
+          },
+          {
+            "date": "December 16, 2020",
+            "title": "Credits issued"
+          },
+          {
+            "date": "?",
+            "title": "Monitoring event"
+          },
+          {
+            "date": "?",
+            "title": "Project completion"
+          }
+        ],
+        "completedItemIndex": 2
+      },
        "documents": [
         {
           "name": "Project Plan",
@@ -261,6 +286,31 @@
     },
     {
       "id": "impactag",
+      "timeline": {
+        "events": [
+          {
+            "date": "?",
+            "title": "Project starts"
+          },
+          {
+            "date": "?",
+            "title": "Approval complete"
+          },
+          {
+            "date": "December 16, 2020",
+            "title": "Credits issued"
+          },
+          {
+            "date": "?",
+            "title": "Monitoring event"
+          },
+          {
+            "date": "?",
+            "title": "Project completion"
+          }
+        ],
+        "completedItemIndex": 2
+      },
       "documents": [
         {
           "name": "Project Plan",

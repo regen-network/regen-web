@@ -32,7 +32,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     paddingBottom: theme.spacing(6.25),
     paddingLeft: theme.spacing(5),
     [theme.breakpoints.up('sm')]: {
-      maxWidth: '80%',
+      width: '75%',
       marginRight: props.odd ? '0' : theme.spacing(7.75),
       marginLeft: props.odd ? theme.spacing(7.75) : '0',
     },

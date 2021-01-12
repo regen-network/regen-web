@@ -52,24 +52,20 @@
       "timeline": {
         "events": [
           {
-            "date": "?",
-            "title": "Project starts"
-          },
-          {
-            "date": "?",
-            "title": "Approval complete"
+            "date": "June 6, 2017",
+            "title": "Project registration"
           },
           {
             "date": "December 16, 2020",
             "title": "Credits issued"
           },
           {
-            "date": "?",
-            "title": "Monitoring event"
+            "date": "2017, 2018, 2019, 2020",
+            "title": "Monitoring events"
           },
           {
-            "date": "?",
-            "title": "Project completion"
+            "date": "June 5, 2027",
+            "title": "Crediting term ending"
           }
         ],
         "completedItemIndex": 2
@@ -289,24 +285,20 @@
       "timeline": {
         "events": [
           {
-            "date": "?",
-            "title": "Project starts"
-          },
-          {
-            "date": "?",
-            "title": "Approval complete"
+            "date": "June 1st, 2017",
+            "title": "Project registration"
           },
           {
             "date": "December 16, 2020",
             "title": "Credits issued"
           },
           {
-            "date": "?",
-            "title": "Monitoring event"
+            "date": "2017, 2018, 2019",
+            "title": "Monitoring events"
           },
           {
-            "date": "?",
-            "title": "Project completion"
+            "date": "May 31st, 2027",
+            "title": "Crediting term ending"
           }
         ],
         "completedItemIndex": 2

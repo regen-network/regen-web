@@ -7,6 +7,7 @@
     "@apollo/react-hooks": "^3.1.4",
     "@auth0/auth0-react": "^1.2.0",
     "@mapbox/togeojson": "^0.16.0",
+    "@regen-network/api": "^0.1.0",
     "@stripe/stripe-js": "^1.5.0",
     "@types/clientjs": "^0.1.0",
     "@types/react-router-dom": "^5.1.3",

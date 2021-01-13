@@ -164,6 +164,14 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingTop: theme.spacing(6.25),
     },
   },
+  icon: {
+    [theme.breakpoints.up('sm')]: {
+      paddingTop: theme.spacing(1),
+    },
+    [theme.breakpoints.down('xs')]: {
+      paddingTop: theme.spacing(0.25),
+    },
+  },
 }));
 
 export default function ProjectTop({ project, projectDefault }: ProjectTopProps): JSX.Element {
@@ -177,7 +185,12 @@ export default function ProjectTop({ project, projectDefault }: ProjectTopProps)
         <Grid item xs={12} md={8} className={classes.rightGrid}>
           <Title variant="h1">{project.name}</Title>
           <div className={classes.projectPlace}>
-            <ProjectPlaceInfo place={project.place} area={project.area} areaUnit={project.areaUnit} />
+            <ProjectPlaceInfo
+              iconClassName={classes.icon}
+              place={project.place}
+              area={project.area}
+              areaUnit={project.areaUnit}
+            />
           </div>
           {project.glanceImgSrc && project.glanceText && (
             <div className={classes.glanceCard}>

@@ -9,6 +9,7 @@ interface PlaceInfoProps {
   smFontSize?: string;
   color?: string;
   className?: string;
+  iconClassName?: string;
 }
 
 interface StyleProps {
@@ -20,14 +21,6 @@ interface StyleProps {
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   root: {
     display: 'flex',
-  },
-  icon: {
-    [theme.breakpoints.up('sm')]: {
-      paddingTop: theme.spacing(1),
-    },
-    [theme.breakpoints.down('xs')]: {
-      paddingTop: theme.spacing(0.25),
-    },
   },
   content: props => ({
     [theme.breakpoints.up('sm')]: {
@@ -41,11 +34,17 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   }),
 }));
 
-export default function PlaceInfo({ children, fontSize, color, smFontSize }: PlaceInfoProps): JSX.Element {
+export default function PlaceInfo({
+  children,
+  fontSize,
+  color,
+  smFontSize,
+  iconClassName,
+}: PlaceInfoProps): JSX.Element {
   const classes = useStyles({ smFontSize, fontSize, color });
   return (
     <div className={classes.root}>
-      <span className={classes.icon}>
+      <span className={iconClassName}>
         <PinIcon />
       </span>
       <Typography className={classes.content}>{children}</Typography>

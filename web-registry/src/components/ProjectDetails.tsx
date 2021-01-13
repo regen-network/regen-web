@@ -2,8 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import * as togeojson from '@mapbox/togeojson';
 import { useLocation } from 'react-router-dom';
-import { setPageView } from '../lib/ga';
+import { QueryClientImpl } from '@regen-network/api/lib/generated/regen/ecocredit/v1alpha1/query';
+import type { QueryAllBalancesResponse } from '@regen-network/api/lib/generated/cosmos/bank/v1beta1/query';
+import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 
+import { setPageView } from '../lib/ga';
+import { useLedger, ContextType } from '../ledger';
 import background from '../assets/background.jpg';
 import { Project, ProjectDefault, ActionGroup } from '../mocks';
 import ProjectTop from './sections/ProjectTop';
@@ -220,6 +224,27 @@ interface ProjectProps {
 }
 
 export default function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JSX.Element {
+  const { error, loading, api }: ContextType = useLedger();
+
+  useEffect(() => {
+    if (api) {
+      const txClient = new ServiceClientImpl(api.connection.queryConnection);
+      // const txClient = new QueryClientImpl(api.connection.queryConnection);
+
+      txClient
+        // .ClassInfo({
+          // .GetTxsEvent({
+          .GetTx({
+          // classId: '18AV53K', //'1Lb4WV1'
+          // event: 'message.action=vote',
+          hash: '0xAC1AF86D347B3FEBCEECE21EB252E9D164E20D31F783B75AD64FAC10C2D5ED5E'
+          // hash: '0x48E5D96E7C174A2AC9CA2D6621959150DF5CD2BA0FD52F11A8DC1A3C81158D24',
+        })
+        .then((res) => console.log('res', res))
+        .catch(console.error);
+    }
+  }, [api]);
+
   const [submitted, setSubmitted] = useState(false);
   const location = useLocation();
   useEffect(() => {

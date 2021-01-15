@@ -52,7 +52,7 @@ function ScrollToTop(): null {
 function AppFooter(): JSX.Element {
   // const { pathname } = useLocation();
   // const footerPaddingBottom: BoolProps = {
-  //   '/projects/impactag': true,
+  //   '/projects/wilmot': true,
   // };
 
   const footerItems: [FooterItem, FooterItem, FooterItem] = [
@@ -275,7 +275,7 @@ const App: React.FC = (): JSX.Element => {
         <AppHeader />
         <Switch>
           <Route exact path="/">
-            <Redirect to="/projects/impactag" />
+            <Redirect to="/projects/wilmot" />
             {/* <Home /> */}
           </Route>
           <Route exact path="/verify-email">
@@ -284,13 +284,13 @@ const App: React.FC = (): JSX.Element => {
           <Route exact path="/certificate">
             <Certificate />
           </Route>
-          <Route exact path={`/projects/impactag/admin`} component={Seller} />
+          <Route exact path={`/projects/wilmot/admin`} component={Seller} />
           <Route
             path="/projects"
             render={({ match: { path } }) => (
               <>
                 <Route path={path} component={Projects} exact>
-                  <Redirect to="/projects/impactag" />
+                  <Redirect to="/projects/wilmot" />
                 </Route>
                 <Route path={`${path}/:projectId`} component={ProjectContainer} />
               </>
@@ -309,7 +309,7 @@ const App: React.FC = (): JSX.Element => {
             render={({ match: { path } }) => (
               <>
                 <Route path={`${path}/:projectId`} component={CreditsContainer}>
-                  <Redirect to="/projects/impactag" />
+                  <Redirect to="/projects/wilmot" />
                 </Route>
               </>
             )}

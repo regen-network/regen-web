@@ -1,4 +1,4 @@
-/registry/*  https://regen-registry.netlify.app/:splat  200
+/registry/*  https://deploy-preview-414--regen-registry.netlify.app/:splat  200
 
 /investor.html  /invest/  200
 /us_investors  /invest/  200
@@ -13,3 +13,5 @@
 /team.html  /team/  200
 /press-kit.html  /press-kit/  200
 /whitepaper.pdf  /resources/ 200
+/registry/projects/impactag  /registry/projects/wilmot 200
+/registry/projects/impactag/admin  /registry/projects/wilmot/admin 200

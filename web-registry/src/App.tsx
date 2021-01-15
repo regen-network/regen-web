@@ -285,6 +285,12 @@ const App: React.FC = (): JSX.Element => {
             <Certificate />
           </Route>
           <Route exact path={`/projects/wilmot/admin`} component={Seller} />
+          <Route exact path="/projects/impactag">
+            <Redirect to="/projects/wilmot" />
+          </Route>
+          <Route exact path="/projects/impactag/admin">
+            <Redirect to="/projects/wilmot/admin" />
+          </Route>
           <Route
             path="/projects"
             render={({ match: { path } }) => (

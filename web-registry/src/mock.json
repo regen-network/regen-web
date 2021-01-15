@@ -54,7 +54,7 @@
           "name": "Project Plan",
           "type": "Project Plan",
           "date": "December 11, 2020",
-          "url": "https://regen-registry.s3.amazonaws.com/projects/woodburn/WOODBURN+Project+Plan.pdf"
+          "url": "https://regen-registry.s3.amazonaws.com/projects/a/WOODBURN+Project+Plan.pdf"
         },
                 {
           "name": "Monitoring Report 2017 (Baseline)",
@@ -81,6 +81,12 @@
           "url": "https://regen-registry.s3.amazonaws.com/projects/woodburn/Woodburn+Monitoring+Report+2020.pdf"
         },
         {
+          "name": "Soil Sample Report",
+          "type": "Monitoring",
+          "date": "December 14, 2020",
+          "url": "https://regen-registry.s3.amazonaws.com/projects/woodburn/Woodburn+soil+data.xlsx"
+        },
+        {
           "name": "Issuance Document",
           "type": "Issuance",
           "date": "December 16, 2020",
@@ -95,7 +101,7 @@
       },
       "glanceImgSrc": "https://regen-registry.s3.amazonaws.com/projects/woodburn/woodburn-map.png",
       "glanceText": [
-        "Increased soil organic carbon to 2.8%.",
+        "Increased soil organic carbon concentration to 3.4%.",
         "Improved co-benefits with Soil Health ranking as good, Ecosystem Health as good, and Animal Welfare as excellent."
       ],
       "place": {
@@ -287,6 +293,12 @@
           "url": "https://regen-registry.s3.amazonaws.com/projects/wilmot/Wilmot+Monitoring+Report+2019.pdf"
         },
         {
+          "name": "Soil Sample Report",
+          "type": "Monitoring",
+          "date": "December 14, 2020",
+          "url": "https://regen-registry.s3.amazonaws.com/projects/wilmot/Wilmot+soil+data.xlsx"
+        },
+        {
           "name": "Issuance Document",
           "type": "Issuance",
           "date": "December 16, 2020",
@@ -301,7 +313,7 @@
       },
       "glanceImgSrc": "https://regen-registry.s3.amazonaws.com/projects/wilmot/impactag-smallmap-top-v3.jpg",
       "glanceText": [
-        "Increased soil organic carbon to 4.5%.",
+        "Increased soil organic carbon concentration to 4.5%.",
         "Improved co-benefits significantly with Soil Health ranking as excellent, Ecosystem Health as good, and Animal Welfare as excellent."
       ],
       "place": {

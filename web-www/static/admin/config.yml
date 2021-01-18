@@ -796,48 +796,48 @@ collections:
             fields:
               - {label: "header", name: header, widget: string}
               - {label: "body", name: body, widget: markdown}
-  - label: Contact
-    name: "contact"
-    file: "web-www/content/contact/index.yaml"
-    fields:
-      - {label: "header", name: header, widget: string}
-      - {label: "body", name: body, widget: markdown}
-      - label: form
-        name: form
-        widget: object
+      - label: Contact
+        name: "contact"
+        file: "web-www/content/contact/index.yaml"
         fields:
-          - label: Types of request
-            name: requestTypes
-            widget: list
-            collapsed: false
+          - {label: "header", name: header, widget: string}
+          - {label: "body", name: body, widget: markdown}
+          - label: form
+            name: form
+            widget: object
             fields:
-              - {label: "label", name: label, widget: string}
-              - {label: "Email", name: value, widget: string}
-      - label: location
-        name: location
-        widget: object
-        fields:
-          - {label: "header", name: header, widget: string}
-          - {label: "body", name: body, widget: markdown}
-          - {label: "image", name: image, widget: image}
-      - label: headquarters
-        name: headquarters
-        widget: object
-        fields:
-          - {label: "header", name: header, widget: string}
-          - {label: "body", name: body, widget: markdown}
-      - label: email
-        name: email
-        widget: object
-        fields:
-          - {label: "header", name: header, widget: string}
-          - {label: "body", name: body, widget: markdown}
-      - label: faq
-        name: faq
-        widget: object
-        fields:
-          - {label: "header", name: header, widget: string}
-          - {label: "image", name: image, widget: image}
+              - label: Types of request
+                name: requestTypes
+                widget: list
+                collapsed: false
+                fields:
+                  - {label: "label", name: label, widget: string}
+                  - {label: "Email", name: value, widget: string}
+          - label: location
+            name: location
+            widget: object
+            fields:
+              - {label: "header", name: header, widget: string}
+              - {label: "body", name: body, widget: markdown}
+              - {label: "image", name: image, widget: image}
+          - label: headquarters
+            name: headquarters
+            widget: object
+            fields:
+              - {label: "header", name: header, widget: string}
+              - {label: "body", name: body, widget: markdown}
+          - label: email
+            name: email
+            widget: object
+            fields:
+              - {label: "header", name: header, widget: string}
+              - {label: "body", name: body, widget: markdown}
+          - label: faq
+            name: faq
+            widget: object
+            fields:
+              - {label: "header", name: header, widget: string}
+              - {label: "image", name: image, widget: image}
   - label: "FAQ"
     name: "faq"
     editor:

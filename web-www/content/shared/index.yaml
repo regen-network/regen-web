@@ -41,3 +41,8 @@ comingSoonSection:
       location: Kilkivan, Queensland, Australia
       area: 10000
       areaUnit: acres
+    - name: Pillango
+      location: Wallace County, Kansas, United States
+      area: 1101
+      areaUnit: acres
+      image: ../../static/media/pillango.png

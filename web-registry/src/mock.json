@@ -81,9 +81,9 @@
           "url": "https://regen-registry.s3.amazonaws.com/projects/woodburn/Woodburn+Monitoring+Report+2020.pdf"
         },
         {
-          "name": "Soil Sample Report",
+          "name": "Soil Sampling Data",
           "type": "Monitoring",
-          "date": "December 14, 2020",
+          "date": "December 11, 2020",
           "url": "https://regen-registry.s3.amazonaws.com/projects/woodburn/Woodburn+soil+data.xlsx"
         },
         {
@@ -293,9 +293,9 @@
           "url": "https://regen-registry.s3.amazonaws.com/projects/wilmot/Wilmot+Monitoring+Report+2019.pdf"
         },
         {
-          "name": "Soil Sample Report",
+          "name": "Soil Sampling Data",
           "type": "Monitoring",
-          "date": "December 14, 2020",
+          "date": "December 11, 2020",
           "url": "https://regen-registry.s3.amazonaws.com/projects/wilmot/Wilmot+soil+data.xlsx"
         },
         {

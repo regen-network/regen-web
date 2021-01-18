@@ -104,10 +104,10 @@ function AppFooter(): JSX.Element {
           title: 'Team',
           href: `${process.env.REACT_APP_WEBSITE_URL}/team/`,
         },
-        // {
-        //   title: 'Contact',
-        //   href: `${process.env.REACT_APP_WEBSITE_URL}/contact/`,
-        // },
+        {
+          title: 'Contact',
+          href: `${process.env.REACT_APP_WEBSITE_URL}/contact/`,
+        },
       ],
     },
     {

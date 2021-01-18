@@ -54,7 +54,7 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
   // Links in rest of the site must use the trailing '/'
   // in order for these to work appropriately
   const headerNoBorderBottomPages: RegExp = new RegExp(
-    '//|/buyers/|/partners/|/validators/|/land-stewards/|/resources/|/media/|/team/|/developers/|/science/|/invest/|/case-studies/|/press-kit/|/community/|/case-studies/[a-z-]+//',
+    '//|/buyers/|/partners/|/contact/|/validators/|/land-stewards/|/resources/|/media/|/team/|/developers/|/science/|/invest/|/case-studies/|/press-kit/|/community/|/case-studies/[a-z-]+//',
   );
 
   const menuItems: HeaderMenuItem[] = [
@@ -136,6 +136,10 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
           title: 'Team',
           href: '/team/',
         },
+        {
+          title: 'Contact',
+          href: '/contact/',
+        },
       ],
     },
     {
@@ -169,6 +173,7 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
         },
       ],
     },
+    
   ];
   return (
     <>

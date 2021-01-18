@@ -11,7 +11,7 @@ titleDescriptionSection:
     scientifically robust claims.
 
 
-    Earth observation science, landscape ecology, and our ability to understand complex ecological systems is undergoing a technological revolution. Regen Network in the vanguard of this movement to make climate science available to the people and markets who need it most.
+    Earth observation science, landscape ecology, and our ability to understand complex ecological systems are undergoing a technological revolution. Regen Network is in the vanguard of this movement to make climate science available to the people and markets who need it most.
 
 
     Join us in service of better decision-making, better markets, and collective action on climate.
@@ -61,45 +61,44 @@ communitySection:
     - name: Patrick Lawrence
       image: ../../static/media/patrick-lawrence.png
       role: md//Cool Farm Tool
-      description: md//Patrick is an interdisciplinary scientist focused on the
-        intersection between agriculture, ecology, and human decision-making. He
-        assists the the Food Lab with project management, data analysis, and
-        scientific support for the Cool Farm Tool and Organic Grains
-        initiatives.
+      description: md//Dr. Patrick Lawrence is an agroecologist with broad experience
+        in research, technology, and applied science. He is the Owner and Lead
+        Scientist at Repliculture LLC. Patrick works closely with the Cool Farm
+        Alliance, OpenTEAM, and Ecosystem Services Market Consortium.
     - name: Dan Kane
       image: ../../static/media/dan-kane.png
       role: md//Quick Carbon
-      description: md//Dan is a Ph.D. candidate at Yale School of the Environment and lead
-        researcher on Quick Carbon. He is also a contributing member of the
+      description: md//Dan is a Ph.D. candidate at Yale School of the Environment and
+        lead researcher on Quick Carbon. He is also a contributing member of the
         OpenTEAM field methods and technology working groups.
     - name: Luke Smith
       image: ../../static/media/luke-smith.png
-      role: "md//Terra Genesis International"
-      description: md//Luke works at the intersection of culture, ecology and economy to
-        regenerate living systems and evolve the role of human beings as a
+      role: md//Terra Genesis International
+      description: md//Luke works at the intersection of culture, ecology and economy
+        to regenerate living systems and evolve the role of human beings as a
         keystone species. He convenes farmers, brands, investors & nonprofits to
         curate processes for regenerative agriculture and supply development.
     - name: Dorn Cox
       image: ../../static/media/dorn-cox.png
       role: md//OpenTEAM
-      description: md//Dr. Dorn Cox serves as project lead for OpenTEAM (Open Technology
-        Ecosystem for Agricultural Management) and research director for Wolfe’s
-        Neck Center for Agriculture & the Environment, a nonprofit research and
-        education center, and a working organic farm on 600 acres of conserved
-        land on the coast of Maine.
+      description: md//Dr. Dorn Cox serves as project lead for OpenTEAM (Open
+        Technology Ecosystem for Agricultural Management) and research director
+        for Wolfe’s Neck Center for Agriculture & the Environment, a nonprofit
+        research and education center, and a working organic farm on 600 acres
+        of conserved land on the coast of Maine.
     - name: Greg Austic
       image: ../../static/media/greg-austic.png
-      role: "md//Our Sci"
-      description: md//Greg is an open technology advocate, co-organizer of the Gathering
-        of Open Science Hardware GOSH and the Gathering for Open Ag Tech (GOAT).
-        He’s a jack of all trades capable of getting an idea off the ground
-        quickly and inexpensively.  Prior to Our Sci, he helped create the
-        MultispeQ, a low-cost photosynthesis meter, and PhotosynQ, a platform
-        for collecting and sharing plant health data.
+      role: md//Our Sci
+      description: md//Greg is an open technology advocate, co-organizer of the
+        Gathering of Open Science Hardware GOSH and the Gathering for Open Ag
+        Tech (GOAT). He’s a jack of all trades capable of getting an idea off
+        the ground quickly and inexpensively.  Prior to Our Sci, he helped
+        create the MultispeQ, a low-cost photosynthesis meter, and PhotosynQ, a
+        platform for collecting and sharing plant health data.
     - name: You?
       image: ../../static/media/you.png
-      role: "md//Scientist"
-      description: "md//Are you a Scientist who wants to contribute to the Open Science
+      role: md//Scientist
+      description: md//Are you a Scientist who wants to contribute to the Open Science
         movement to accelerate innovative ways for monitoring, verifying and
         reporting of Ecosystem Services? Get in touch with us at
-        [science@regen.network](mailto:science@regen.network)"
+        [science@regen.network](mailto:science@regen.network)

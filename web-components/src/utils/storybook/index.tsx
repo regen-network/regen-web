@@ -31,7 +31,7 @@ const globalStyles = makeStyles((theme: Theme) => ({
       left: '0',
       right: '0',
       overflowX: 'hidden',
-      fontFamily: 'sans-serif',
+      fontFamily: '"Lato",-apple-system,sans-serif',
       boxSizing: 'border-box',
       backgroundColor: theme.palette.background.default,
       textRendering: 'geometricPrecision',

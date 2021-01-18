@@ -3,6 +3,7 @@ import { makeStyles, Theme } from '@material-ui/core';
 import CardMedia from '@material-ui/core/CardMedia';
 import { Variant } from '@material-ui/core/styles/createTypography';
 import clsx from 'clsx';
+import ReactHtmlParser from 'react-html-parser';
 
 import Card from './Card';
 import Title from '../title';
@@ -11,6 +12,8 @@ export interface MediaCardProps {
   children?: any;
   imgSrc: string;
   name?: string;
+  href?: string;
+  target?: string;
   tag?: string;
   onClick?: () => void;
   width?: string;
@@ -68,6 +71,13 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.down('xs')]: {
       padding: `${theme.spacing(4)} ${theme.spacing(4.5)} ${theme.spacing(0.8)}`,
     },
+    overflow: 'hidden',
+    display: '-webkit-box',
+    '-webkit-line-clamp': 3,
+    '-webkit-box-orient': 'vertical',
+    '& p': {
+      margin: 0,
+    },
   },
   h4title: {
     [theme.breakpoints.down('xs')]: {
@@ -80,6 +90,8 @@ export default function MediaCard({
   children,
   name,
   imgSrc,
+  href,
+  target = '_blank',
   onClick,
   width,
   titleVariant = 'h4',
@@ -94,6 +106,12 @@ export default function MediaCard({
 }: MediaCardProps): JSX.Element {
   const classes = useStyles({});
 
+  const media = (
+    <CardMedia className={clsx(imageClassName, classes.image)} image={imgSrc}>
+      {backgroundGradient && <div className={classes.backgroundGradient} />}
+      {tag && <div className={classes.tag}>{tag}</div>}
+    </CardMedia>
+  );
   return (
     <Card
       className={className}
@@ -104,10 +122,13 @@ export default function MediaCard({
       borderRadius={borderRadius}
     >
       <div className={classes.root}>
-        <CardMedia className={clsx(imageClassName, classes.image)} image={imgSrc}>
-          {backgroundGradient && <div className={classes.backgroundGradient} />}
-          {tag && <div className={classes.tag}>{tag}</div>}
-        </CardMedia>
+        {href ? (
+          <a href={href} target={target}>
+            {media}
+          </a>
+        ) : (
+          media
+        )}
         {name && (
           <Title
             className={
@@ -115,7 +136,7 @@ export default function MediaCard({
             }
             variant={titleVariant}
           >
-            {name}
+            {ReactHtmlParser(name)}
           </Title>
         )}
         {children}

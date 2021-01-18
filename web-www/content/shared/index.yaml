@@ -4,14 +4,14 @@ newsletterSection:
 featuredSection:
   header: Featured Credit
   title: md// Carbon*Plus* Grasslands
-  link: /registry/projects/impactag
+  link: /registry/projects/wilmot
   image: ../../static/media/featured-cow.png
   description: >-
     md// This credit measures carbon sequestration and a suite of co-benefits,
     including ecosystem health, animal welfare, and soil health.
 
 
-    Our first vintage of this credit is issued to [Wilmot Farm](/registry/projects/impactag) which has increased soil organic carbon through rotational grazing to 4.5%. This vintage is one of the largest issuances to agricultural projects to-date in Australia!
+    Our first vintage of this credit is issued to the [Wilmot property](/registry/projects/wilmot) which has increased soil organic carbon through rotational grazing to 4.5%. This vintage is one of the largest issuances to agricultural projects to-date in Australia!
 blogSection:
   header: Regen Network Blog
   posts:
@@ -23,19 +23,14 @@ blogSection:
       description: How Regen Network became the lead maintainer of the Cosmos SDK
       image: ../../static/media/screen-shot-2020-09-29-at-6.50.26-am.png
       url: https://medium.com/regen-network/cosmos-regen-network-synergy-edf8f5dd12ec
-    - header: Regen Network Retrospective
-      description: |
-        Looking back on three years of building a regenerative future
-      image: ../../static/media/gregory-christian.jpeg
-      url: https://medium.com/regen-network/regen-network-retrospective-3b18e06c1192
+    - header: Modern Day Pastoralism
+      description: Re-Defining the Economics of Rotational Sheep Grazing on California
+        Vineyards
+      image: ../../static/media/paige_green_photo.jpeg
+      url: https://medium.com/regen-network/modern-day-pastoralism-re-defining-the-economics-of-rotational-sheep-grazing-on-california-94d02c652234
 comingSoonSection:
   header: Coming Soon
   projects:
-    - name: Woodburn
-      image: ../../static/media/woodburn.png
-      location: Walcha, New South Wales, Australia
-      area: 6313
-      areaUnit: acres
     - name: Cavan Station
       image: ../../static/media/cavan-station.png
       location: Bookham, New South Wales, Australia

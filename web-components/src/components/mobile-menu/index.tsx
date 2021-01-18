@@ -67,13 +67,19 @@ const useStyles = makeStyles((theme: Theme) => ({
     right: theme.spacing(4),
     zIndex: 1,
   },
+  currentMenuItem: {
+    '& > a': {
+      borderBottom: `2px solid ${theme.palette.secondary.main}`,
+    },
+  },
 }));
 
 interface Props extends React.HTMLProps<HTMLDivElement> {
   menuItems?: HeaderMenuItem[];
+  pathName?: string;
 }
 
-const MobileMenu = ({ menuItems, className }: Props): JSX.Element => {
+const MobileMenu = ({ menuItems, className, pathName }: Props): JSX.Element => {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = useState(false);
@@ -102,13 +108,25 @@ const MobileMenu = ({ menuItems, className }: Props): JSX.Element => {
         />
         <MenuList className={classes.menuList}>
           {menuItems?.map((item, i) => (
-            <MenuItem key={i} className={classes.menuItem}>
+            <MenuItem
+              key={i}
+              className={
+                pathName === item.href ? clsx(classes.menuItem, classes.currentMenuItem) : classes.menuItem
+              }
+            >
               {item.dropdownItems ? (
                 <>
                   <span className={classes.subMenuTitle}>{item.title}</span>
                   <MenuList>
                     {item.dropdownItems.map((dropdownItem, j) => (
-                      <MenuItem className={classes.subMenuItem} key={`${i}-${j}`}>
+                      <MenuItem
+                        className={
+                          pathName === dropdownItem.href
+                            ? clsx(classes.subMenuItem, classes.currentMenuItem)
+                            : classes.subMenuItem
+                        }
+                        key={`${i}-${j}`}
+                      >
                         <Link href={dropdownItem.href}>{dropdownItem.title}</Link>
                       </MenuItem>
                     ))}

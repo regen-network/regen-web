@@ -1,28 +1,39 @@
 import React, { useState, useRef, useCallback, useLayoutEffect } from 'react';
 import { makeStyles, Theme, useMediaQuery, useTheme } from '@material-ui/core';
+import Grid from '@material-ui/core/Grid';
 import Slider from 'react-slick';
 import PlayIcon from '../icons/PlayIcon';
 
 export interface Media {
   src: string;
   thumbnail?: string;
-  type?: string;
+  type: string;
   preview?: string;
 }
 
 interface ProjectMediaProps {
+  gridView: boolean;
   assets: Media[];
   xsBorderRadius?: boolean;
+  mobileHeight?: string | number;
 }
 
 interface StyleProps {
   xsBorderRadius: boolean;
+  mobileHeight?: string | number;
 }
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
-  root: {
+  root: props => ({
     [theme.breakpoints.down('xs')]: {
       marginBottom: theme.spacing(8.75),
+    },
+    '& .slick-slide img': {
+      [theme.breakpoints.down('xs')]: {
+        height: props.mobileHeight ? props.mobileHeight : 'inherit',
+        objectFit: props.mobileHeight ? 'cover' : 'inherit',
+        objectPosition: '0% 0%',
+      },
     },
     '& .slick-dots': {
       bottom: 'auto',
@@ -65,7 +76,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
         },
       },
     },
-  },
+  }),
   thumbnail: {
     position: 'relative',
     display: 'inline-block',
@@ -105,6 +116,39 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     backgroundColor: theme.palette.grey[100],
     borderRadius: '50%',
   },
+  sideGrid: {
+    flexGrow: 0,
+    maxWidth: '37%',
+    flexBasis: '37%',
+    maxHeight: theme.spacing(113),
+  },
+  centreGrid: {
+    flexGrow: 0,
+    maxWidth: '26%',
+    flexBasis: '26%',
+    maxHeight: theme.spacing(113),
+  },
+  imageContainer: {
+    paddingLeft: theme.spacing(2.5),
+    paddingRight: theme.spacing(2.5),
+    height: '50%',
+    '&:first-child': {
+      paddingBottom: theme.spacing(1.25),
+    },
+    '&:last-child': {
+      paddingTop: theme.spacing(1.25),
+    },
+  },
+  image: {
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+    borderRadius: '5px',
+    objectPosition: '0% 0%',
+  },
+  grid: {
+    padding: theme.spacing(2.5),
+  },
 }));
 
 function getThumbnailStyle(thumbsTranslate: number): object {
@@ -118,8 +162,13 @@ function getThumbnailStyle(thumbsTranslate: number): object {
   };
 }
 
-export default function ProjectMedia({ assets, xsBorderRadius = false }: ProjectMediaProps): JSX.Element {
-  const classes = useStyles({ xsBorderRadius });
+export default function ProjectMedia({
+  assets,
+  xsBorderRadius = false,
+  gridView = false,
+  mobileHeight,
+}: ProjectMediaProps): JSX.Element {
+  const classes = useStyles({ mobileHeight, xsBorderRadius });
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up('sm'));
 
@@ -138,20 +187,6 @@ export default function ProjectMedia({ assets, xsBorderRadius = false }: Project
     handleResize();
     return () => window.removeEventListener('resize', handleResize);
   }, [handleResize]);
-
-  const filteredAssets: Media[] = assets
-    .map(item => {
-      const imageReg = /[\.](gif|jpg|jpeg|tiff|png)/g;
-      const videoReg = /[\.](m4v|avi|mpg|mp4|mov)/g;
-
-      if (imageReg.test(item.src.toLowerCase())) {
-        return { ...item, type: 'image' };
-      } else if (videoReg.test(item.src.toLowerCase())) {
-        return { ...item, type: 'video' };
-      }
-      return item;
-    })
-    .filter(item => item.type === 'image' || item.type === 'video');
 
   const thumbnailStyle: object = getThumbnailStyle(thumbnailsTranslate);
   const settings = {
@@ -174,8 +209,8 @@ export default function ProjectMedia({ assets, xsBorderRadius = false }: Project
     customPaging: (i: number) => {
       return matches ? (
         <div className={classes.thumbnail}>
-          <img width={60} height={60} src={filteredAssets[i].thumbnail} alt={filteredAssets[i].thumbnail} />
-          {filteredAssets[i].type === 'video' && (
+          <img width={60} height={60} src={assets[i].thumbnail} alt={assets[i].thumbnail} />
+          {assets[i].type === 'video' && (
             <div className={classes.play}>
               <PlayIcon width="10.85px" height="10.85px" />
             </div>
@@ -189,42 +224,61 @@ export default function ProjectMedia({ assets, xsBorderRadius = false }: Project
 
   return (
     <div>
-      <Slider
-        {...settings}
-        className={classes.root}
-        beforeChange={(oldIndex: number, newIndex: number) => {
-          const indexDifference: number = Math.abs(oldIndex - newIndex);
-          const thumbnailsElement = thumbnailsWrapper && thumbnailsWrapper.current;
-          if (thumbnailsElement) {
-            if (thumbnailsElement.scrollWidth > thumbnailsWrapperWidth && thumbnailsWrapperWidth > 0) {
-              const perIndexScroll =
-                (thumbnailsElement.scrollWidth - thumbnailsWrapperWidth) / (filteredAssets.length - 1);
-              const scroll = indexDifference * perIndexScroll;
-              if (scroll > 0) {
-                if (oldIndex < newIndex) {
-                  setThumbnailsTranslate(thumbnailsTranslate - scroll);
-                } else if (oldIndex > newIndex) {
-                  setThumbnailsTranslate(thumbnailsTranslate + scroll);
+      {matches && gridView && assets.length >= 4 ? (
+        <Grid container className={classes.grid}>
+          <Grid item className={classes.sideGrid}>
+            <img className={classes.image} src={assets[0].src} alt={assets[0].src} />
+          </Grid>
+          <Grid item className={classes.centreGrid}>
+            <div className={classes.imageContainer}>
+              <img className={classes.image} src={assets[1].src} alt={assets[1].src} />
+            </div>
+            <div className={classes.imageContainer}>
+              <img className={classes.image} src={assets[2].src} alt={assets[2].src} />
+            </div>
+          </Grid>
+          <Grid item className={classes.sideGrid}>
+            <img className={classes.image} src={assets[3].src} alt={assets[3].src} />
+          </Grid>
+        </Grid>
+      ) : (
+        <Slider
+          {...settings}
+          className={classes.root}
+          beforeChange={(oldIndex: number, newIndex: number) => {
+            const indexDifference: number = Math.abs(oldIndex - newIndex);
+            const thumbnailsElement = thumbnailsWrapper && thumbnailsWrapper.current;
+            if (thumbnailsElement) {
+              if (thumbnailsElement.scrollWidth > thumbnailsWrapperWidth && thumbnailsWrapperWidth > 0) {
+                const perIndexScroll =
+                  (thumbnailsElement.scrollWidth - thumbnailsWrapperWidth) / (assets.length - 1);
+                const scroll = indexDifference * perIndexScroll;
+                if (scroll > 0) {
+                  if (oldIndex < newIndex) {
+                    setThumbnailsTranslate(thumbnailsTranslate - scroll);
+                  } else if (oldIndex > newIndex) {
+                    setThumbnailsTranslate(thumbnailsTranslate + scroll);
+                  }
                 }
               }
             }
-          }
-        }}
-      >
-        {filteredAssets.map((item, index) => {
-          if (item.type === 'image') {
-            return <img key={index} src={item.src} className={classes.item} alt={item.src} />;
-          } else if (item.type === 'video') {
-            return (
-              <video key={index} className={classes.item} controls poster={item.preview}>
-                <source src={item.src} />
-              </video>
-            );
-          } else {
-            return null;
-          }
-        })}
-      </Slider>
+          }}
+        >
+          {assets.map((item, index) => {
+            if (item.type === 'image') {
+              return <img key={index} src={item.src} className={classes.item} alt={item.src} />;
+            } else if (item.type === 'video') {
+              return (
+                <video key={index} className={classes.item} controls poster={item.preview}>
+                  <source src={item.src} />
+                </video>
+              );
+            } else {
+              return null;
+            }
+          })}
+        </Slider>
+      )}
     </div>
   );
 }

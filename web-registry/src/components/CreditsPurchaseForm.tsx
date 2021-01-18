@@ -25,6 +25,7 @@ import {
 import Submit from 'web-components/lib/components/form/Submit';
 
 import { countries } from '../lib/countries';
+import getRegistryUrl from '../lib/registryUrl';
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_API_KEY || '');
 
@@ -155,7 +156,7 @@ export default function CreditsPurchaseForm({
 }: CreditsPurchaseFormProps): JSX.Element {
   const classes = useStyles();
   const initialCountry = 'US';
-  const { projectId } = useParams();
+  const { projectId } = useParams<{ projectId: string }>();
   const [stateOptions, setStateOptions] = useState<Option[]>([]);
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up('sm'));
@@ -177,11 +178,14 @@ export default function CreditsPurchaseForm({
       url: 'https://geodata.solutions/api/api.php?type=getStates&countryId=' + countryId,
       method: 'POST',
     });
-    const respOK = resp && resp.status === 200 && resp.statusText === 'OK';
+    const respOK = resp && resp.status === 200;
     if (respOK) {
       const data = await resp.data;
-      const options = Object.keys(data.result).map(key => ({ value: key, label: data.result[key] }));
-      options.push({ value: '', label: 'Please choose a state' });
+      const options = Object.keys(data.result).map(key => ({
+        value: data.result[key],
+        label: data.result[key],
+      }));
+      options.unshift({ value: '', label: 'Please choose a state' });
       setStateOptions(options);
     }
   };
@@ -294,14 +298,24 @@ export default function CreditsPurchaseForm({
             }
 
             // Redirect to Stripe Checkout page
+            const response = axios.post(
+              `${process.env.REACT_APP_API_URI || 'http://localhost:5000'}/create-checkout-session`,
+              {
+                price: stripePrice,
+                units,
+                cancelUrl: window.location.href,
+                successUrl: getRegistryUrl(`/post-purchase/${projectId}/${walletId}/${encodeURI(name)}`),
+                customerEmail: email,
+                clientReferenceId: JSON.stringify({ walletId, addressId, name }),
+              },
+            );
+
+            const { data } = await response;
+
             const stripe = await stripePromise;
             if (stripe) {
               const { error } = await stripe.redirectToCheckout({
-                items: [{ sku: stripePrice, quantity: units }],
-                successUrl: `${window.location.origin}/post-purchase/${projectId}`,
-                cancelUrl: window.location.href,
-                customerEmail: email,
-                clientReferenceId: JSON.stringify({ walletId, addressId }),
+                sessionId: data.id,
               });
               if (error) {
                 setStatus({ serverError: error.message });
@@ -384,9 +398,8 @@ export default function CreditsPurchaseForm({
                   Location of purchase
                 </Title>
                 <Description>
-                  Please enter a location for the retirement of these credits. This prevents{' '}
-                  <span className={classes.green}>double counting</span> of credits in different locations.
-                  These credits will auto-retire.
+                  Please enter a location for the retirement of these credits. This prevents double counting
+                  of credits in different locations. Note, these credits will be retired upon purchase.
                 </Description>
                 <Field component={TextField} className={classes.cityTextField} label="City" name="city" />
                 <Grid container alignItems="center" className={classes.stateCountryGrid}>

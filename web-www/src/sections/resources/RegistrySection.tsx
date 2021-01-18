@@ -43,6 +43,7 @@ const RegistrySection = (): JSX.Element => {
                 updated
                 description
                 buttonText
+                link
               }
             }
           }

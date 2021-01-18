@@ -19,6 +19,8 @@ export interface ResponsiveSliderProps {
   padding?: number;
   itemWidth?: string;
   infinite?: boolean;
+  dots?: boolean;
+  onChange?: (i: number) => void;
 }
 
 interface StyleProps {
@@ -45,6 +47,26 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       marginLeft: props.padding ? `-${props.padding}` : 0,
       paddingTop: props.title ? theme.spacing(8) : 0,
+    },
+    '& .slick-dots': {
+      bottom: 'auto',
+      overflow: 'hidden',
+      height: theme.spacing(6),
+      '& ul': {
+        padding: 0,
+        whiteSpace: 'nowrap',
+        margin: '8px 0 -6.5px',
+        '& li': {
+          height: theme.spacing(3.75),
+          width: theme.spacing(3.75),
+          margin: '0 6.5px',
+          '&.slick-active': {
+            '& div': {
+              backgroundColor: theme.palette.secondary.dark,
+            },
+          },
+        },
+      },
     },
     '& .slick-list': {
       [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
@@ -78,6 +100,12 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       fontSize: theme.spacing(3.5),
     },
   },
+  dot: {
+    height: theme.spacing(3.75),
+    width: theme.spacing(3.75),
+    backgroundColor: theme.palette.grey[100],
+    borderRadius: '50%',
+  },
   item: props => ({
     height: '100%',
     paddingBottom: props.gridView ? theme.spacing(5) : 0,
@@ -98,6 +126,8 @@ export default function ResponsiveSlider({
   padding,
   itemWidth,
   infinite = true,
+  dots = false,
+  onChange,
 }: ResponsiveSliderProps): JSX.Element {
   const theme = useTheme();
 
@@ -133,7 +163,15 @@ export default function ResponsiveSlider({
     initialSlide: 0,
     arrows: false,
     rows,
+    dots,
+    appendDots: (dots: any) => (
+      <div>
+        <ul> {dots} </ul>
+      </div>
+    ),
+    customPaging: (i: number) => <div className={classes.dot} />,
   };
+
   return (
     <div className={clsx(classes.root, className)}>
       <Grid container wrap="nowrap" alignItems="center">
@@ -152,7 +190,14 @@ export default function ResponsiveSlider({
         )}
       </Grid>
 
-      <Slider {...settings} ref={slider} className={classes.slider}>
+      <Slider
+        {...settings}
+        ref={slider}
+        className={classes.slider}
+        afterChange={i => {
+          if (onChange) onChange(i);
+        }}
+      >
         {items.map((item, index) => (
           <div className={classes.item} key={index}>
             {item}

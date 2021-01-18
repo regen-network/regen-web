@@ -7,33 +7,35 @@ import ThemeProvider from 'web-components/lib/theme/RegenThemeProvider';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import 'url-search-params-polyfill';
 import './url-search-params-polyfill.d';
-// import { ApolloProvider } from '@apollo/react-hooks';
-// import ApolloClient from 'apollo-boost';
 
-import { Auth0Provider } from './react-auth0-spa';
+import { Auth0Provider } from '@auth0/auth0-react';
 import { AuthApolloProvider } from './apollo';
-import history from './lib/history';
-
-const onRedirectCallback = (appState: any, verifyEmail: string): void => {
-  const path: string = verifyEmail ? `/verify-email?email=${verifyEmail}` : window.location.pathname;
-  history.push(appState && appState.targetUrl ? appState.targetUrl : path);
-};
+// import history from './lib/history';
 
 const config = {
   domain: process.env.REACT_APP_AUTH0_DOMAIN || 'regen-network-registry.auth0.com',
   clientId: process.env.REACT_APP_AUTH0_CLIENT_ID || 'rEuc1WLPAQVXZ7gJrWg4AL9EhWMHmLu8',
-  returnTo: window.location.href || 'http://localhost:3000/',
+  returnTo: window.location.origin || 'http://localhost:3000/',
   audience: 'https://regen-registry-server.herokuapp.com/',
 };
+
+// const onRedirectCallback = (appState: AppState) => {
+//   // If using a Hash Router, you need to use window.history.replaceState to
+//   // remove the `code` and `state` query parameters from the callback url.
+//   // window.history.replaceState({}, document.title, window.location.pathname);
+//   history.replace((appState && appState.returnTo) || window.location.pathname);
+// };
 
 ReactDOM.render(
   <Auth0Provider
     domain={config.domain}
-    client_id={config.clientId}
-    redirect_uri={window.location.href}
-    onRedirectCallback={onRedirectCallback}
-    returnTo={config.returnTo}
+    clientId={config.clientId}
+    redirectUri={window.location.origin}
+    // onRedirectCallback={onRedirectCallback}
+    // returnTo={config.returnTo}
+    useRefreshTokens={true}
     audience={config.audience}
+    cacheLocation="localstorage"
   >
     <AuthApolloProvider>
       <ThemeProvider injectFonts>

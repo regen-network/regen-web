@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-  <loc>https://www.regen.network/registry/projects/impactag</loc>
+    <loc>https://www.regen.network/registry/projects/wilmot</loc>
+  </url>
+  <url>
+    <loc>https://www.regen.network/registry/projects/woodburn</loc>
   </url>
 </urlset>

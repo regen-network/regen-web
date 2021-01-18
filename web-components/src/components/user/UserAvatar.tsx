@@ -28,7 +28,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       width: theme.spacing(props.spacing.xs),
       height: theme.spacing(props.spacing.xs),
     },
-    backgroundColor: 'transparent',
+    backgroundColor: theme.palette.primary.main,
   }),
 }));
 

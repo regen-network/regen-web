@@ -1,0 +1,86 @@
+fragment purchasesFields on PurchasesConnection {
+  nodes {
+    id
+    createdAt
+    walletByBuyerWalletId {
+      partiesByWalletId(first: 1) {
+        nodes {
+          name
+        }
+      }
+    }
+    transactionsByPurchaseId {
+      nodes {
+        units
+      }
+    }
+    creditVintageByCreditVintageId {
+      id
+      startDate
+      endDate
+      walletByIssuerId {
+        partiesByWalletId(first: 1) {
+          nodes {
+            name
+            organizationByPartyId {
+              id
+              organizationMembersByOrganizationId(condition: { isOwner: true }) {
+                nodes {
+                  userByMemberId {
+                    partyByPartyId {
+                      name
+                      roles
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      projectByProjectId {
+        name
+        area
+        areaUnit
+        image
+        type
+        handle
+        creditClassVersionByCreditClassVersionIdAndCreditClassVersionCreatedAt {
+          name
+          version
+          metadata
+          creditClassById {
+            handle
+          }
+        }
+        methodologyVersionByMethodologyVersionIdAndMethodologyVersionCreatedAt {
+          name
+          version
+          methodologyById {
+            handle
+          }
+        }
+        addressByAddressId {
+          feature
+        }
+        partyByLandOwnerId {
+          id
+          name
+          organizationByPartyId {
+            id
+            organizationMembersByOrganizationId(condition: { isOwner: true }) {
+              nodes {
+                userByMemberId {
+                  partyByPartyId {
+                    name
+                    roles
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

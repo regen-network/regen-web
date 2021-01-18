@@ -819,7 +819,7 @@ collections:
         fields:
           - {label: "header", name: header, widget: string}
           - {label: "body", name: body, widget: markdown}
-          - {label: "image", name: body, widget: image}
+          - {label: "image", name: image, widget: image}
       - label: headquarters
         name: headquarters
         widget: object

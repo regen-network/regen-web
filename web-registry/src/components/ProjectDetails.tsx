@@ -223,7 +223,7 @@ interface ProjectProps {
 }
 
 export default function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JSX.Element {
-  const { error, loading, api }: ContextType = useLedger();
+  const { api }: ContextType = useLedger();
 
   useEffect(() => {
     if (api) {

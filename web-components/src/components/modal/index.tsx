@@ -5,7 +5,7 @@ import clsx from 'clsx';
 import CloseIcon from '../icons/CloseIcon';
 import { RemoveScroll } from 'react-remove-scroll';
 
-interface RegenModalProps {
+export interface RegenModalProps {
   open: boolean;
   onClose: () => void;
   children: any;

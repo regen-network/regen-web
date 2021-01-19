@@ -8,7 +8,7 @@ interface ArrowDownIconProps {
   direction?: 'next' | 'prev' | 'down' | 'up';
 }
 
-interface StyleProps {
+export interface StyleProps {
   rotate: string;
 }
 

@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import * as togeojson from '@mapbox/togeojson';
 import { useLocation } from 'react-router-dom';
-import { QueryClientImpl } from '@regen-network/api/lib/generated/regen/ecocredit/v1alpha1/query';
-import type { QueryAllBalancesResponse } from '@regen-network/api/lib/generated/cosmos/bank/v1beta1/query';
+// import { QueryClientImpl } from '@regen-network/api/lib/generated/regen/ecocredit/v1alpha1/query';
 import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 
 import { setPageView } from '../lib/ga';
@@ -233,14 +232,14 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
 
       txClient
         // .ClassInfo({
-          // .GetTxsEvent({
-          .GetTx({
+        // .GetTxsEvent({
+        .GetTx({
           // classId: '18AV53K', //'1Lb4WV1'
-          // event: 'message.action=vote',
-          hash: '0xAC1AF86D347B3FEBCEECE21EB252E9D164E20D31F783B75AD64FAC10C2D5ED5E'
+          // events: ['message.action=send'],
+          hash: 'C7F4DDC696BB64605D2ACB45D5999CF3E36F2F73783E6DB5066CFB282A6E7C42',
           // hash: '0x48E5D96E7C174A2AC9CA2D6621959150DF5CD2BA0FD52F11A8DC1A3C81158D24',
         })
-        .then((res) => console.log('res', res))
+        .then(res => console.log('res', res))
         .catch(console.error);
     }
   }, [api]);

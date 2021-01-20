@@ -1,6 +1,8 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
+
 import Title from '../title';
+import { getFormattedDate } from '../../utils/format';
 
 interface TimelineItemProps {
   date?: Date | string;
@@ -150,11 +152,7 @@ export default function TimelineItem({
 
   return (
     <div className={classes.content}>
-      {date && (
-        <div className={classes.date}>
-          {typeof date === 'string' ? date : new Date(date).toLocaleDateString('en-US', options)}
-        </div>
-      )}
+      {date && <div className={classes.date}>{getFormattedDate(date, options)}</div>}
       <Title className={classes.title} variant="h5">
         {title}
       </Title>

@@ -3,10 +3,21 @@ import { makeStyles, Theme } from '@material-ui/core';
 
 import DropdownIcon from '../icons/DropdownIcon';
 
-interface UserAddressProps {
-  onClick: () => void;
+export interface PartyNameAddress {
   name: string;
   address: string;
+}
+
+export interface Party extends PartyNameAddress {
+  role: string;
+  individual: string;
+  address: string;
+  location: string;
+  description: string;
+}
+
+interface PartyAddressProps extends PartyNameAddress {
+  onClick: () => void;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -33,7 +44,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function UserAddress({ onClick, name, address }: UserAddressProps): JSX.Element {
+export default function PartyAddress({ onClick, name, address }: PartyAddressProps): JSX.Element {
   const classes = useStyles();
   const [showAddress, setShowAddress] = useState<boolean>(false);
 

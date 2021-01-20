@@ -2,7 +2,6 @@ import * as React from 'react';
 import UserAvatar from 'web-components/lib/components/user/UserAvatar';
 import UserInfo, { User } from 'web-components/lib/components/user/UserInfo';
 import UserInfoWithTitle from 'web-components/lib/components/user/UserInfoWithTitle';
-import UserAddress from 'web-components/lib/components/user/UserAddress';
 import { withKnobs, text, object } from '@storybook/addon-knobs';
 
 export default {
@@ -18,6 +17,7 @@ const user: User = {
     state: 'Victoria',
     country: 'Australia',
   },
+  type: 'organization',
   imgSrc: 'http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png',
   description: 'Odonata is a not-for-profit entity supporting biodiversity impact solutions.',
 };
@@ -49,12 +49,4 @@ export const columnUserInfo = (): JSX.Element => <UserInfo user={object('User', 
 
 export const withTitle = (): JSX.Element => (
   <UserInfoWithTitle user={object('User', user)} title={text('Title', 'project developer')} />
-);
-
-export const userAddress = (): JSX.Element => (
-  <UserAddress
-    onClick={() => {}}
-    name="Regen Network Development, Inc."
-    address="regen:1p6syuqk3e5a8hwp8e20jyjwr8p7nj270x4spqm"
-  />
 );

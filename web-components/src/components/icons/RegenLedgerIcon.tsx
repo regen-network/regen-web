@@ -9,7 +9,7 @@ interface Props {
 export default function RegenLedgerIcon({ color, className }: Props): JSX.Element {
   return (
     <SvgIcon viewBox="0 0 136 61" className={className}>
-      <g clip-path="url(#clip0)">
+      <g clipPath="url(#clip0)">
         <path
           d="M28.7372 19.7057L28.7485 19.7246V19.7208V19.7246V19.7208L25.2072 0.947205L22.2461 0L20.4189 2.49304L20.4227 2.49683L28.7372 19.7057Z"
           fill="black"

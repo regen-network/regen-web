@@ -452,6 +452,12 @@ collections:
             widget: "object"
             fields:
               - {label: Header, name: header, widget: string}
+          - label: "Top Section"
+            name: "topSection"
+            widget: "object"
+            fields:
+              - {label: button text, name: buttonText, widget: string}
+              - {label: airtable link, name: airtableLink, widget: string}
       - label: Science page
         name: science
         file: "web-www/content/science/index.yaml"

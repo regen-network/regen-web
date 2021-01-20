@@ -452,8 +452,8 @@ collections:
             widget: "object"
             fields:
               - {label: Header, name: header, widget: string}
-          - label: "Top Section"
-            name: "topSection"
+          - label: "Popup"
+            name: "popup"
             widget: "object"
             fields:
               - {label: button text, name: buttonText, widget: string}

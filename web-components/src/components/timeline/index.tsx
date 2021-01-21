@@ -2,7 +2,6 @@ import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 import { useTheme } from '@material-ui/core/styles';
 
-// import Grid from '@material-ui/core/Grid';
 import TimelineItem from './TimelineItem';
 
 export interface Event {
@@ -20,16 +19,16 @@ const useStyles = makeStyles((theme: Theme) => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
+    [theme.breakpoints.down('xs')]: {
+      paddingLeft: theme.spacing(7.5),
+    },
   },
   item: {
     display: 'flex',
+    justifyContent: 'flex-start',
     [theme.breakpoints.up('sm')]: {
       width: '50%',
-      justifyContent: 'flex-start',
       alignSelf: 'flex-end',
-    },
-    [theme.breakpoints.down('xs')]: {
-      justifyContent: 'flex-end',
     },
     '&:nth-child(odd)': {
       [theme.breakpoints.up('sm')]: {

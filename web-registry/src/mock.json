@@ -49,6 +49,28 @@
   "projects": [
     {
       "id": "woodburn",
+      "timeline": {
+        "events": [
+          {
+            "date": "June 6, 2017",
+            "title": "Project registration"
+          },
+          {
+            "date": "December 14, 2020",
+            "title": "Monitoring event",
+            "description": "Baseline: 2017\nMonitoring period: 2017-2018\nMonitoring period: 2018-2019\nMonitoring period: 2019-2020"
+          },
+          {
+            "date": "December 16, 2020",
+            "title": "Credits issued"
+          },
+          {
+            "date": "June 5, 2027",
+            "title": "Crediting term ending"
+          }
+        ],
+        "completedItemIndex": 2
+      },
        "documents": [
         {
           "name": "Project Plan",
@@ -267,6 +289,28 @@
     },
     {
       "id": "wilmot",
+      "timeline": {
+        "events": [
+          {
+            "date": "June 1, 2017",
+            "title": "Project registration"
+          },
+          {
+            "date": "December 14, 2020",
+            "title": "Monitoring event",
+            "description": "Baseline: 2017\nMonitoring period: 2017-2018\nMonitoring period: 2018-2019"
+          },
+          {
+            "date": "December 16, 2020",
+            "title": "Credits issued"
+          },
+          {
+            "date": "May 31, 2027",
+            "title": "Crediting term ending"
+          }
+        ],
+        "completedItemIndex": 2
+      },
       "documents": [
         {
           "name": "Project Plan",

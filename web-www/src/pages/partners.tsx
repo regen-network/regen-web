@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     [theme.breakpoints.down('xs')]: {
       paddingBottom: theme.spacing(22.5),
-      paddingTop: theme.spacing(9.5),
+      paddingTop: theme.spacing(7.5),
     },
     backgroundColor: theme.palette.grey[50],
     overflow: 'hidden',
@@ -67,8 +67,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     paddingTop: theme.spacing(3.25),
   },
   title: {
-    [theme.breakpoints.down('sm')]: {
-      paddingBottom: theme.spacing(10.25),
+    [theme.breakpoints.down('xs')]: {
+      paddingBottom: theme.spacing(7.5),
     },
     [theme.breakpoints.up('sm')]: {
       paddingBottom: theme.spacing(21.75),

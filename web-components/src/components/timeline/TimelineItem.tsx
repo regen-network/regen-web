@@ -1,5 +1,6 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
+import ReactHtmlParser from 'react-html-parser';
 import Title from '../title';
 
 interface TimelineItemProps {
@@ -86,6 +87,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       fontSize: '0.75rem',
       lineHeight: '145%',
     },
+    whiteSpace: 'pre-line',
     paddingTop: theme.spacing(1.5),
   },
   bar: props => ({
@@ -160,7 +162,7 @@ export default function TimelineItem({
       <Title className={classes.title} variant="h5">
         {title}
       </Title>
-      <div className={classes.description}>{description}</div>
+      {description && <div className={classes.description}>{ReactHtmlParser(description)}</div>}
       <span className={classes.circle} />
       <div className={classes.bar} />
     </div>

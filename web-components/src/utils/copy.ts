@@ -1,4 +1,4 @@
-function fallbackCopyTextToClipboard(text: string): Promise<any> {
+function fallbackCopyTextToClipboard(text: string): Promise<void> {
   const textArea = document.createElement('textarea');
   textArea.setAttribute('readonly', 'true');
   textArea.setAttribute('contenteditable', 'true');
@@ -25,7 +25,7 @@ function fallbackCopyTextToClipboard(text: string): Promise<any> {
   });
 }
 
-export default function copyTextToClipboard(text: string): Promise<any> {
+export default function copyTextToClipboard(text: string): Promise<void> {
   if (!navigator.clipboard) {
     return fallbackCopyTextToClipboard(text);
   }

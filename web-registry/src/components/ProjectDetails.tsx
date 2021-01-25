@@ -204,7 +204,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   timelineContainer: {
-    backgroundColor: theme.palette.grey[50],
+    backgroundColor: theme.palette.primary.main,
   },
   timelineTitle: {
     [theme.breakpoints.up('sm')]: {

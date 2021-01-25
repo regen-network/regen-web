@@ -40,6 +40,9 @@ const CustomTooltip: any = withStyles((theme: Theme) => ({
 }))(Tooltip);
 
 const useStyles = makeStyles((theme: Theme) => ({
+  root: {
+    maxWidth: theme.spacing(175),
+  },
   label: {
     fontFamily: theme.typography.h1.fontFamily,
     textTransform: 'uppercase',
@@ -157,9 +160,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     lineHeight: '150%',
     [theme.breakpoints.up('sm')]: {
       marginTop: theme.spacing(-1.5),
+      paddingLeft: theme.spacing(7.5),
     },
     [theme.breakpoints.down('xs')]: {
       marginTop: theme.spacing(-1),
+      paddingLeft: theme.spacing(3.75),
     },
   },
   back: {
@@ -211,6 +216,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     [theme.breakpoints.down('xs')]: {
       marginTop: theme.spacing(7.5),
+      fontSize: theme.spacing(3.5),
     },
   },
   success: {
@@ -235,7 +241,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     padding: theme.spacing(4),
     marginTop: theme.spacing(3.5),
     border: `1px solid ${theme.palette.grey[600]}`,
-    overflow: 'scroll',
+    overflowY: 'scroll',
   },
 }));
 
@@ -270,7 +276,7 @@ export default function LedgerModal({
   };
 
   return (
-    <Modal {...props}>
+    <Modal {...props} className={classes.root}>
       <div className={classes.ledgerIconContainer}>
         <RegenLedgerIcon className={classes.ledgerIcon} />
       </div>

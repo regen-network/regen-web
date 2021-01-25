@@ -12,7 +12,7 @@ interface DocumentVersion {
   version: string;
 }
 
-interface IssuanceModalProps extends RegenModalProps {
+export interface IssuanceModalData {
   txRes: GetTxResponse;
   link: string;
   issuer: Party;
@@ -30,6 +30,8 @@ interface IssuanceModalProps extends RegenModalProps {
   methodology: DocumentVersion;
   methodologyHandle: string;
 }
+
+interface IssuanceModalProps extends RegenModalProps, IssuanceModalData {}
 
 const options = {
   month: 'short',

@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 import ReactHtmlParser from 'react-html-parser';
 
 import Title from '../title';
+import ShieldIcon from '../icons/ShieldIcon';
+import IssuanceModal, { IssuanceModalData } from '../modal/IssuanceModal';
 import { getFormattedDate } from '../../utils/format';
 
 interface TimelineItemProps {
   date?: Date | string;
   title: string;
   description?: string;
+  modalData?: IssuanceModalData; // | MonitoringModalProps use type guard to check modalData type;
   circleColor: string;
   barColor: string;
   odd: boolean;
@@ -138,6 +141,15 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   }),
   title: {
     lineHeight: '150%',
+    position: 'relative',
+  },
+  icon: {
+    cursor: 'pointer',
+    position: 'absolute',
+    marginLeft: theme.spacing(1.5),
+    [theme.breakpoints.up('sm')]: {
+      top: theme.spacing(0.5),
+    },
   },
 }));
 
@@ -147,22 +159,24 @@ export default function TimelineItem({
   date,
   title,
   description,
+  modalData,
   circleColor,
   barColor,
   odd,
   last,
 }: TimelineItemProps): JSX.Element {
   const classes = useStyles({ circleColor, barColor, odd, last });
-
+  const [open, setOpen] = useState<boolean>(false);
   return (
     <div className={classes.content}>
       {date && <div className={classes.date}>{getFormattedDate(date, options)}</div>}
       <Title className={classes.title} variant="h5">
-        {title}
+        {title} {modalData && <ShieldIcon className={classes.icon} onClick={() => setOpen(true)} />}
       </Title>
       {description && <div className={classes.description}>{ReactHtmlParser(description)}</div>}
       <span className={classes.circle} />
       <div className={classes.bar} />
+      {modalData && <IssuanceModal open={open} onClose={() => setOpen(false)} {...modalData} />}
     </div>
   );
 }

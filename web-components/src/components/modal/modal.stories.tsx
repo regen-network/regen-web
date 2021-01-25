@@ -28,6 +28,7 @@ function OpenLedgerModal(): JSX.Element {
       <Button onClick={() => setOpen(true)}>Open Modal</Button>
       <IssuanceModal
         open={open}
+        onClose={() => setOpen(false)}
         link="https://devnet.regen.aneka.io/txs/C7F4DDC696BB64605D2ACB45D5999CF3E36F2F73783E6DB5066CFB282A6E7C42"
         issuer={{
           name: 'Regen Network Development, Inc.',

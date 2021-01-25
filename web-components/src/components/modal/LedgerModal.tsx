@@ -23,7 +23,7 @@ interface Item {
 interface LedgerModalProps extends RegenModalProps {
   summary: Item[];
   txRes: GetTxResponse;
-  link: string;
+  link?: string;
   party: Party | null;
   handleBack: () => void;
 }
@@ -233,6 +233,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     maxHeight: theme.spacing(88),
     fontSize: theme.spacing(3.5),
     padding: theme.spacing(4),
+    marginTop: theme.spacing(3.5),
     border: `1px solid ${theme.palette.grey[600]}`,
     overflow: 'scroll',
   },
@@ -391,10 +392,15 @@ export default function LedgerModal({
                   </Grid>
                 </Grid>
                 <Grid container className={classes.blockchainItem}>
-                  <Grid className={clsx(classes.label, classes.blockchainLabel)} xs={4} item>
+                  <Grid className={clsx(classes.label, classes.blockchainLabel)} xs={12} sm={4} item>
                     transaction data
                   </Grid>
-                  <Grid xs={8} item className={clsx(classes.logs, classes.value, classes.blockchainValue)}>
+                  <Grid
+                    xs={12}
+                    sm={8}
+                    item
+                    className={clsx(classes.logs, classes.value, classes.blockchainValue)}
+                  >
                     {ReactHtmlParser(
                       JSON.stringify(txRes.txResponse.logs, null, 2)
                         .replace(/\n/g, '<br>')
@@ -404,9 +410,11 @@ export default function LedgerModal({
                 </Grid>
                 {open ? null : <div className={classes.gradient} />}
               </div>
-              <ContainedButton href={link} target="_blank" className={classes.button}>
-                review on regen ledger
-              </ContainedButton>
+              {link && (
+                <ContainedButton href={link} target="_blank" className={classes.button}>
+                  review on regen ledger
+                </ContainedButton>
+              )}
             </>
           )}
         </>

@@ -11,9 +11,8 @@ export interface PartyNameAddress {
 export interface Party extends PartyNameAddress {
   role: string;
   individual: string;
-  address: string;
   location: string;
-  description: string;
+  description?: string;
 }
 
 interface PartyAddressProps extends PartyNameAddress {

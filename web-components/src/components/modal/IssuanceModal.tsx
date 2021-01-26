@@ -13,8 +13,8 @@ interface DocumentVersion {
 }
 
 export interface IssuanceModalData {
-  txRes: GetTxResponse;
-  link: string;
+  txRes?: GetTxResponse;
+  link?: string;
   issuer: Party;
   issuees: Party[];
   timestamp: string | Date;

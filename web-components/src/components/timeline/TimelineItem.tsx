@@ -9,7 +9,7 @@ import { getFormattedDate } from '../../utils/format';
 
 interface TimelineItemProps {
   date?: Date | string;
-  title: string;
+  summary: string;
   description?: string;
   modalData?: IssuanceModalData; // | MonitoringModalProps use type guard to check modalData type;
   circleColor: string;
@@ -139,7 +139,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     },
     zIndex: 100,
   }),
-  title: {
+  summary: {
     lineHeight: '150%',
     position: 'relative',
   },
@@ -157,7 +157,7 @@ const options = { year: 'numeric', month: 'long', day: 'numeric' };
 
 export default function TimelineItem({
   date,
-  title,
+  summary,
   description,
   modalData,
   circleColor,
@@ -170,8 +170,8 @@ export default function TimelineItem({
   return (
     <div className={classes.content}>
       {date && <div className={classes.date}>{getFormattedDate(date, options)}</div>}
-      <Title className={classes.title} variant="h5">
-        {title} {modalData && <ShieldIcon className={classes.icon} onClick={() => setOpen(true)} />}
+      <Title className={classes.summary} variant="h5">
+        {summary} {modalData && <ShieldIcon className={classes.icon} onClick={() => setOpen(true)} />}
       </Title>
       {description && <div className={classes.description}>{ReactHtmlParser(description)}</div>}
       <span className={classes.circle} />

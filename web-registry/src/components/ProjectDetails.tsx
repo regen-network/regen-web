@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import * as togeojson from '@mapbox/togeojson';
 import { useLocation } from 'react-router-dom';
+import { loader } from 'graphql.macro';
+import { useQuery } from '@apollo/react-hooks';
 // import { QueryClientImpl } from '@regen-network/api/lib/generated/regen/ecocredit/v1alpha1/query';
 import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 
@@ -222,28 +224,34 @@ interface ProjectProps {
   projectDefault: ProjectDefault;
 }
 
+const PROJECT_BY_HANDLE = loader('../graphql/ProjectByHandle.graphql');
+
 export default function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JSX.Element {
-  const { api }: ContextType = useLedger();
+  // const { api }: ContextType = useLedger();
 
-  useEffect(() => {
-    if (api) {
-      const txClient = new ServiceClientImpl(api.connection.queryConnection);
-      // const txClient = new QueryClientImpl(api.connection.queryConnection);
+  // useEffect(() => {
+  //   if (api) {
+  //     const txClient = new ServiceClientImpl(api.connection.queryConnection);
+  //     // const txClient = new QueryClientImpl(api.connection.queryConnection);
 
-      txClient
-        // .ClassInfo({
-        // .GetTxsEvent({
-        .GetTx({
-          // classId: '18AV53K', //'1Lb4WV1'
-          // events: ['message.action=send'],
-          hash: 'C7F4DDC696BB64605D2ACB45D5999CF3E36F2F73783E6DB5066CFB282A6E7C42',
-          // hash: '0x48E5D96E7C174A2AC9CA2D6621959150DF5CD2BA0FD52F11A8DC1A3C81158D24',
-        })
-        .then(res => console.log('res', res))
-        .catch(console.error);
-    }
-  }, [api]);
+  //     txClient
+  //       // .ClassInfo({
+  //       // .GetTxsEvent({
+  //       .GetTx({
+  //         // classId: '18AV53K', //'1Lb4WV1'
+  //         // events: ['message.action=send'],
+  //         hash: 'C7F4DDC696BB64605D2ACB45D5999CF3E36F2F73783E6DB5066CFB282A6E7C42',
+  //         // hash: '0x48E5D96E7C174A2AC9CA2D6621959150DF5CD2BA0FD52F11A8DC1A3C81158D24',
+  //       })
+  //       .then(res => console.log('res', res))
+  //       .catch(console.error);
+  //   }
+  // }, [api]);
 
+  const { data } = useQuery(PROJECT_BY_HANDLE, {
+    variables: { handle: project.id },
+  });
+  console.log(data);
   const [submitted, setSubmitted] = useState(false);
   const location = useLocation();
   useEffect(() => {
@@ -413,7 +421,7 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
         <img className={classes.map} alt={project.name} src={mapFile} />
       )}
 
-      {project.timeline && (
+      {data && data.projectByHandle.eventsByProjectId.nodes.length > 0 && (
         <div className={classes.timelineContainer}>
           <div className={`${classes.projectDetails} ${classes.projectTimeline} ${classes.projectContent}`}>
             <Title className={classes.timelineTitle} variant="h3">
@@ -421,10 +429,7 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
                 ? project.fieldsOverride.timeline.title
                 : projectDefault.timeline.title}
             </Title>
-            <Timeline
-              events={project.timeline.events}
-              completedItemIndex={project.timeline.completedItemIndex}
-            />
+            <Timeline events={data.projectByHandle.eventsByProjectId.nodes} />
           </div>
         </div>
       )}

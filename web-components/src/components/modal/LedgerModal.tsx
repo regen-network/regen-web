@@ -22,7 +22,7 @@ interface Item {
 
 interface LedgerModalProps extends RegenModalProps {
   summary: Item[];
-  txRes: GetTxResponse;
+  txRes?: GetTxResponse;
   link?: string;
   party: Party | null;
   handleBack: () => void;
@@ -292,9 +292,9 @@ export default function LedgerModal({
           <SummaryItem item={{ label: 'organization', value: party.name }} />
           <SummaryItem item={{ label: 'role', value: party.role }} />
           <SummaryItem item={{ label: 'individual', value: party.individual }} />
-          <SummaryItem item={{ label: 'address', value: party.address }} />
+          <SummaryItem item={{ label: 'account address', value: party.address }} />
           <SummaryItem item={{ label: 'location', value: party.location }} />
-          <SummaryItem item={{ label: 'description', value: party.description }} />
+          {party.description && <SummaryItem item={{ label: 'description', value: party.description }} />}
         </>
       ) : (
         <>
@@ -316,7 +316,7 @@ export default function LedgerModal({
             <SummaryItem key={index} item={item} />
           ))}
           <hr className={classes.hr} />
-          {txRes.tx && txRes.txResponse && (
+          {txRes && txRes.tx && txRes.txResponse && (
             <>
               <Grid container wrap="nowrap" className={classes.blockchainTitle}>
                 <Grid item container alignItems="center">

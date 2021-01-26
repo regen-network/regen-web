@@ -53,20 +53,20 @@
         "events": [
           {
             "date": "June 6, 2017",
-            "title": "Project registration"
+            "summary": "Project registration"
           },
           {
             "date": "December 14, 2020",
-            "title": "Monitoring event",
+            "summary": "Monitoring event",
             "description": "Baseline: 2017\nMonitoring period: 2017-2018\nMonitoring period: 2018-2019\nMonitoring period: 2019-2020"
           },
           {
             "date": "December 16, 2020",
-            "title": "Credits issued"
+            "summary": "Credits issued"
           },
           {
             "date": "June 5, 2027",
-            "title": "Crediting term ending"
+            "summary": "Crediting term ending"
           }
         ],
         "completedItemIndex": 2
@@ -293,20 +293,20 @@
         "events": [
           {
             "date": "June 1, 2017",
-            "title": "Project registration"
+            "summary": "Project registration"
           },
           {
             "date": "December 14, 2020",
-            "title": "Monitoring event",
+            "summary": "Monitoring event",
             "description": "Baseline: 2017\nMonitoring period: 2017-2018\nMonitoring period: 2018-2019"
           },
           {
             "date": "December 16, 2020",
-            "title": "Credits issued"
+            "summary": "Credits issued"
           },
           {
             "date": "May 31, 2027",
-            "title": "Crediting term ending"
+            "summary": "Crediting term ending"
           }
         ],
         "completedItemIndex": 2

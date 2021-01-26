@@ -9,6 +9,8 @@ import Title from '../title';
 import TextField from '../inputs/TextField';
 import { requiredMessage, validateEmail, invalidEmailMessage } from '../inputs/validation';
 import NumberTextField from '../inputs/NumberTextField';
+import CheckboxGroup from '../inputs/CheckboxGroup';
+import SelectTextField, { Option } from '../inputs/SelectTextField';
 import Submit from './Submit';
 
 interface MoreInfoFormProps {
@@ -22,6 +24,8 @@ interface Values {
   email: string;
   name: string;
   orgName: string;
+  projectTypes: string[];
+  onBehalfOf: string[];
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -68,6 +72,8 @@ export default function MoreInfoForm({ onClose, onSubmit, apiUrl }: MoreInfoForm
           name: '',
           orgName: '',
           email: '',
+          projectTypes: [],
+          onBehalfOf: [],
         }}
         validate={(values: Values) => {
           const errors: Partial<Values> = {};
@@ -81,7 +87,10 @@ export default function MoreInfoForm({ onClose, onSubmit, apiUrl }: MoreInfoForm
           }
           return errors;
         }}
-        onSubmit={({ budget, email, name, orgName }, { setSubmitting, setStatus }) => {
+        onSubmit={(
+          { budget, email, name, orgName, onBehalfOf, projectTypes },
+          { setSubmitting, setStatus },
+        ) => {
           setSubmitting(true);
           const apiUri: string = apiUrl;
           axios
@@ -89,7 +98,8 @@ export default function MoreInfoForm({ onClose, onSubmit, apiUrl }: MoreInfoForm
               budget,
               email,
               name,
-              orgName,
+              projectTypes,
+              onBehalfOf,
             })
             .then(resp => {
               setSubmitting(false);
@@ -105,6 +115,7 @@ export default function MoreInfoForm({ onClose, onSubmit, apiUrl }: MoreInfoForm
         }}
       >
         {({ values, errors, submitForm, isSubmitting, isValid, submitCount, status }) => {
+          console.log(values);
           return (
             <div>
               <Form className={classes.form} translate="yes">
@@ -130,20 +141,85 @@ export default function MoreInfoForm({ onClose, onSubmit, apiUrl }: MoreInfoForm
                 <Grid container alignItems="center" className={classes.textField}>
                   <Grid item xs={6}>
                     <Field
-                      component={NumberTextField}
-                      name="budget"
-                      adornment="$"
-                      min={1}
-                      arrows={false}
+                      options={[
+                        { value: '<$500', label: '<$500' },
+                        { value: '$501 - $1,000', label: '$501 - $1,000' },
+                        { value: '$1,001 - $5,000', label: '$1,001 - $5,000' },
+                        { value: '$5,001 - $10,000', label: '$5,001 - $10,000' },
+                        { value: '$10,001 - $50,000', label: '$10,001 - $50,000' },
+                        { value: '$50,001 - $100,000', label: '$50,001 - $100,000' },
+                        { value: '$100,001 - $500,000', label: '$100,001 - $500,000' },
+                        { value: '$500,001+', label: '$500,001+' },
+                      ]}
+                      component={SelectTextField}
                       label="Budget"
-                      transformValue={(v: number): number => Math.max(1, v)}
-                      optional
+                      name="budget"
                     />
                   </Grid>
                   <Grid item xs={6}>
                     <Typography className={classes.usd}>USD</Typography>
                   </Grid>
                 </Grid>
+                <div>
+                  <Field
+                    component={CheckboxGroup}
+                    name="projectTypes"
+                    className={classes.textField}
+                    label="Which types of carbon credits projects are you interested in?"
+                    options={[
+                      {
+                        label: 'I am interested in all nature based carbon credits.',
+                        value: 'I am interested in all nature based carbon credits.',
+                      },
+                      {
+                        label: 'I am only interested in forestry-based credits.',
+                        value: 'I am only interested in forestry-based credits.',
+                      },
+                      {
+                        label: 'I am only interested in grasslands-based credits.',
+                        value: 'I am only interested in grasslands-based credits.',
+                      },
+                      {
+                        label: 'I am only interested in cropland-based credits.',
+                        value: 'I am only interested in cropland-based credits.',
+                      },
+                      {
+                        label: 'I do not have a preference.',
+                        value: 'I do not have a preference.',
+                      },
+                    ]}
+                  />
+                </div>
+                <div>
+                  <Field
+                    component={CheckboxGroup}
+                    name="onBehalfOf"
+                    className={classes.textField}
+                    label="I am interested in buying carbon credits on behalf of:"
+                    options={[
+                      {
+                        label: 'Consumer/Individual/myself',
+                        value: 'Consumer/Individual/myself',
+                      },
+                      {
+                        label: 'Small or Medium Sized Business',
+                        value: 'Small or Medium Sized Business',
+                      },
+                      {
+                        label: 'Nonprofit',
+                        value: 'Nonprofit',
+                      },
+                      {
+                        label: 'Large Corporation',
+                        value: 'Large Corporation',
+                      },
+                      {
+                        label: 'Crypto Organization',
+                        value: 'Crypto Organization',
+                      },
+                    ]}
+                  />
+                </div>
               </Form>
               <Submit
                 isSubmitting={isSubmitting}

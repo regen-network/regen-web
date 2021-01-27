@@ -31,11 +31,16 @@ import Banner from 'web-components/lib/components/banner';
 //   },
 // }));
 
-interface props {
-  location: object;
+interface LocationProps extends Location {
+  state?: {
+    submitted: boolean;
+  };
+}
+interface Props {
+  location: LocationProps;
 }
 
-const BuyersPage = ({ location }: props): JSX.Element => {
+const BuyersPage = ({ location }: Props): JSX.Element => {
   const [open, setOpen] = useState(false);
   const handleOpen = (): void => {
     setOpen(true);

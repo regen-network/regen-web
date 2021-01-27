@@ -8,9 +8,8 @@ import axios from 'axios';
 import Title from '../title';
 import TextField from '../inputs/TextField';
 import { requiredMessage, validateEmail, invalidEmailMessage } from '../inputs/validation';
-import NumberTextField from '../inputs/NumberTextField';
 import CheckboxGroup from '../inputs/CheckboxGroup';
-import SelectTextField, { Option } from '../inputs/SelectTextField';
+import SelectTextField from '../inputs/SelectTextField';
 import Submit from './Submit';
 
 interface MoreInfoFormProps {
@@ -25,7 +24,7 @@ interface Values {
   name: string;
   orgName: string;
   projectTypes: string[];
-  onBehalfOf: string[];
+  onBehalfOf: string;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -73,7 +72,7 @@ export default function MoreInfoForm({ onClose, onSubmit, apiUrl }: MoreInfoForm
           orgName: '',
           email: '',
           projectTypes: [],
-          onBehalfOf: [],
+          onBehalfOf: 'Consumer/Individual/myself',
         }}
         validate={(values: Values) => {
           const errors: Partial<Values> = {};
@@ -188,10 +187,7 @@ export default function MoreInfoForm({ onClose, onSubmit, apiUrl }: MoreInfoForm
                 </div>
                 <div>
                   <Field
-                    component={CheckboxGroup}
-                    name="onBehalfOf"
                     className={classes.textField}
-                    label="I am interested in buying carbon credits on behalf of:"
                     options={[
                       {
                         label: 'Consumer/Individual/myself',
@@ -214,6 +210,9 @@ export default function MoreInfoForm({ onClose, onSubmit, apiUrl }: MoreInfoForm
                         value: 'Crypto Organization',
                       },
                     ]}
+                    component={SelectTextField}
+                    label="I am interested in buying carbon credits on behalf of:"
+                    name="onBehalfOf"
                   />
                 </div>
               </Form>

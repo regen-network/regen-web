@@ -35,6 +35,7 @@ const ComingSoonSection = () => {
             location
             area
             areaUnit
+            handle
             image {
               childImageSharp {
                 fixed(quality: 90) {

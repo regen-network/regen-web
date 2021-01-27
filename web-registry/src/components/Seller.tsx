@@ -40,8 +40,8 @@ const Seller = (): JSX.Element => {
           url: `${apiUri}/create-account-link`,
           data: {
             email: user?.email,
-            refreshUrl: `${origin}/projects/impactag/admin`,
-            returnUrl: `${origin}/projects/impactag/admin?setup=true`,
+            refreshUrl: `${origin}/projects/wilmot/admin`,
+            returnUrl: `${origin}/projects/wilmot/admin?setup=true`,
           },
           headers: { authorization: `Bearer ${accessToken}` },
         });
@@ -121,7 +121,7 @@ const Seller = (): JSX.Element => {
           ))}
       </div>
       <div style={{ textAlign: 'center' }}>
-        <NavBar redirectUri={`${origin}/projects/impactag/admin`} />
+        <NavBar redirectUri={`${origin}/projects/wilmot/admin`} />
       </div>
     </div>
   );

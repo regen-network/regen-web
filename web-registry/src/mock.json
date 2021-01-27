@@ -49,6 +49,28 @@
   "projects": [
     {
       "id": "woodburn",
+      "timeline": {
+        "events": [
+          {
+            "date": "June 6, 2017",
+            "title": "Project registration"
+          },
+          {
+            "date": "December 14, 2020",
+            "title": "Monitoring event",
+            "description": "Baseline: 2017\nMonitoring period: 2017-2018\nMonitoring period: 2018-2019\nMonitoring period: 2019-2020"
+          },
+          {
+            "date": "December 16, 2020",
+            "title": "Credits issued"
+          },
+          {
+            "date": "June 5, 2027",
+            "title": "Crediting term ending"
+          }
+        ],
+        "completedItemIndex": 2
+      },
        "documents": [
         {
           "name": "Project Plan",
@@ -81,6 +103,12 @@
           "url": "https://regen-registry.s3.amazonaws.com/projects/woodburn/Woodburn+Monitoring+Report+2020.pdf"
         },
         {
+          "name": "Soil Sampling Data",
+          "type": "Monitoring",
+          "date": "December 11, 2020",
+          "url": "https://regen-registry.s3.amazonaws.com/projects/woodburn/Woodburn+soil+data.xlsx"
+        },
+        {
           "name": "Issuance Document",
           "type": "Issuance",
           "date": "December 16, 2020",
@@ -95,7 +123,7 @@
       },
       "glanceImgSrc": "https://regen-registry.s3.amazonaws.com/projects/woodburn/woodburn-map.png",
       "glanceText": [
-        "Increased soil organic carbon to 2.8%.",
+        "Increased soil organic carbon concentration to 3.4%.",
         "Improved co-benefits with Soil Health ranking as good, Ecosystem Health as good, and Animal Welfare as excellent."
       ],
       "place": {
@@ -592,7 +620,29 @@
       }
     },
     {
-      "id": "impactag",
+      "id": "wilmot",
+      "timeline": {
+        "events": [
+          {
+            "date": "June 1, 2017",
+            "title": "Project registration"
+          },
+          {
+            "date": "December 14, 2020",
+            "title": "Monitoring event",
+            "description": "Baseline: 2017\nMonitoring period: 2017-2018\nMonitoring period: 2018-2019"
+          },
+          {
+            "date": "December 16, 2020",
+            "title": "Credits issued"
+          },
+          {
+            "date": "May 31, 2027",
+            "title": "Crediting term ending"
+          }
+        ],
+        "completedItemIndex": 2
+      },
       "documents": [
         {
           "name": "Project Plan",
@@ -619,6 +669,12 @@
           "url": "https://regen-registry.s3.amazonaws.com/projects/wilmot/Wilmot+Monitoring+Report+2019.pdf"
         },
         {
+          "name": "Soil Sampling Data",
+          "type": "Monitoring",
+          "date": "December 11, 2020",
+          "url": "https://regen-registry.s3.amazonaws.com/projects/wilmot/Wilmot+soil+data.xlsx"
+        },
+        {
           "name": "Issuance Document",
           "type": "Issuance",
           "date": "December 16, 2020",
@@ -633,7 +689,7 @@
       },
       "glanceImgSrc": "https://regen-registry.s3.amazonaws.com/projects/wilmot/impactag-smallmap-top-v3.jpg",
       "glanceText": [
-        "Increased soil organic carbon to 4.5%.",
+        "Increased soil organic carbon concentration to 4.5%.",
         "Improved co-benefits significantly with Soil Health ranking as excellent, Ecosystem Health as good, and Animal Welfare as excellent."
       ],
       "place": {

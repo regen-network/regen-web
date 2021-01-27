@@ -138,3 +138,6 @@ timelineSection:
           color: "#7BC796"
 moreQuestionsSection:
   header: More questions? Dig into our FAQ.
+popup:
+  buttonText: sign up now
+  airtableLink: https://airtable.com/embed/shrnnbymyofPB75WQ

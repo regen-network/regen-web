@@ -3,6 +3,7 @@ import { makeStyles, Theme } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
+import Backdrop from '@material-ui/core/Backdrop';
 import Cookies from 'js-cookie';
 
 // TODO use Section component
@@ -141,6 +142,9 @@ const useStyles = makeStyles((theme: Theme) => ({
       flexDirection: 'column',
     },
   },
+  backdrop: {
+    zIndex: 100,
+  },
 }));
 
 export default function CookiesBanner({ privacyUrl }: CookiesBannerProps): JSX.Element | null {
@@ -168,26 +172,28 @@ export default function CookiesBanner({ privacyUrl }: CookiesBannerProps): JSX.E
 
   if (visible) {
     return (
-      <div className={classes.background}>
-        <Grid container wrap="nowrap" alignItems="center" justify="space-between" className={classes.root}>
-          <Typography className={classes.text}>
-            We use cookies to provide you with a great user experience. By using this site, you accept our use
-            of{' '}
-            <Link className={classes.link} href={privacyUrl}>
-              cookies policy
-            </Link>
-            .
-          </Typography>
-          <div className={classes.grid}>
-            <ContainedButton className={classes.button} onClick={accept}>
-              accept
-            </ContainedButton>
-            <div className={classes.reject} onClick={reject}>
-              Reject
+      <Backdrop className={classes.backdrop} open>
+        <div className={classes.background}>
+          <Grid container wrap="nowrap" alignItems="center" justify="space-between" className={classes.root}>
+            <Typography className={classes.text}>
+              We use cookies to provide you with a great user experience. By using this site, you accept our
+              use of{' '}
+              <Link className={classes.link} href={privacyUrl}>
+                cookies policy
+              </Link>
+              .
+            </Typography>
+            <div className={classes.grid}>
+              <ContainedButton className={classes.button} onClick={accept}>
+                accept
+              </ContainedButton>
+              <div className={classes.reject} onClick={reject}>
+                Reject
+              </div>
             </div>
-          </div>
-        </Grid>
-      </div>
+          </Grid>
+        </div>
+      </Backdrop>
     );
   }
   return null;

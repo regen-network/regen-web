@@ -4,14 +4,14 @@ newsletterSection:
 featuredSection:
   header: Featured Credit
   title: md// Carbon*Plus* Grasslands
-  link: /registry/projects/impactag
+  link: /registry/projects/wilmot
   image: ../../static/media/featured-cow.png
   description: >-
     md// This credit measures carbon sequestration and a suite of co-benefits,
     including ecosystem health, animal welfare, and soil health.
 
 
-    Our first vintage of this credit is issued to the [Wilmot property](/registry/projects/impactag) which has increased soil organic carbon through rotational grazing to 4.5%. This vintage is one of the largest issuances to agricultural projects to-date in Australia!
+    Our first vintages of this credit were issued to [Wilmot](/registry/projects/wilmot) and [Woodburn](https://www.regen.network/registry/projects/woodburn) which have increased soil organic carbon concentration through rotational grazing to 4.5% and 3.4% respectively. These vintages represent one of the largest issuances to agricultural projects to-date in Australia! The credits have already been sold to a major tech corporation to help meet their climate goals.
 blogSection:
   header: Regen Network Blog
   posts:

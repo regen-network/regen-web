@@ -142,15 +142,6 @@ coreSection:
         Geneva.
       title: "Senior Software Engineer "
       linkedUrl: https://www.linkedin.com/in/zarembarobert/
-    - description: Jared is a frontend developer who loves computers and the wild
-        world. Jared has been involved with blockchain since 2011. He built one
-        of the ETH RPG games. As both a farmer  and developer, he feels
-        extremely lucky to serve ecological regeneration with Regen Network.
-      name: "Jared Smith "
-      title: "Front End Developer "
-      image: ../../static/media/jared.png
-      linkedUrl: https://www.linkedin.com/in/jaredmsmith/
-      githubUrl: https://github.com/ratacat
     - description: Emily is a digital marketing maven and visual storyteller
         passionate about utilizing her skills to help build a better world. With
         a background in environmental stewardship, digital marketing, and
@@ -274,6 +265,15 @@ contributorSection:
       title: Co-founder, Engineer
       linkedUrl: https://www.linkedin.com/in/brecht-deriemaeker-505ba217/
       image: ../../static/media/brecht.jpeg
+    - image: ../../static/media/98fiylntthoaudcmrxjd0w.jpg
+      name: Jared Smith
+      title: Front End Developer
+      githubUrl: https://github.com/ratacat
+      description: Jared is a frontend developer who loves computers and the wild
+        world. Jared has been involved with blockchain since 2011. He built one
+        of the ETH RPG games. As both a farmer and developer, he feels extremely
+        lucky to serve ecological regeneration with Regen Network.
+      linkedUrl: https://www.linkedin.com/in/jaredmsmith/
 advisorSection:
   title: Advisors
   advisors:

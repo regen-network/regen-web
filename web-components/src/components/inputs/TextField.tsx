@@ -26,9 +26,11 @@ interface StyleProps extends TextFieldProps {
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   root: props => ({
     '& label': {
+      lineHeight: '140%',
       transform: 'scale(1)',
       color: theme.palette.primary.contrastText,
       fontWeight: 'bold',
+      position: 'relative',
       [theme.breakpoints.up('sm')]: {
         fontSize: theme.spacing(4.5),
       },
@@ -40,7 +42,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       },
     },
     '& .MuiInput-formControl': {
-      marginTop: props.label ? theme.spacing(7) : 0,
+      marginTop: props.label ? theme.spacing(4) : 0,
       [theme.breakpoints.up('sm')]: {
         marginBottom: props.errors ? theme.spacing(5.25) : 0,
       },

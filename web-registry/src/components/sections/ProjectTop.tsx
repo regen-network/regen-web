@@ -81,7 +81,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingTop: theme.spacing(7.5),
     },
   },
-  video: {
+  media: {
     width: '100%',
     borderRadius: '5px',
     [theme.breakpoints.up('sm')]: {
@@ -164,6 +164,14 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingTop: theme.spacing(6.25),
     },
   },
+  icon: {
+    [theme.breakpoints.up('sm')]: {
+      paddingTop: theme.spacing(1),
+    },
+    [theme.breakpoints.down('xs')]: {
+      paddingTop: theme.spacing(0.25),
+    },
+  },
 }));
 
 export default function ProjectTop({ project, projectDefault }: ProjectTopProps): JSX.Element {
@@ -177,7 +185,12 @@ export default function ProjectTop({ project, projectDefault }: ProjectTopProps)
         <Grid item xs={12} md={8} className={classes.rightGrid}>
           <Title variant="h1">{project.name}</Title>
           <div className={classes.projectPlace}>
-            <ProjectPlaceInfo place={project.place} area={project.area} areaUnit={project.areaUnit} />
+            <ProjectPlaceInfo
+              iconClassName={classes.icon}
+              place={project.place}
+              area={project.area}
+              areaUnit={project.areaUnit}
+            />
           </div>
           {project.glanceImgSrc && project.glanceText && (
             <div className={classes.glanceCard}>
@@ -195,16 +208,20 @@ export default function ProjectTop({ project, projectDefault }: ProjectTopProps)
           {videos.length > 0 &&
             (/https:\/\/www.youtube.com\/embed\/[a-zA-Z0-9_.-]+/.test(videos[0].src) ? (
               <iframe
-                className={clsx(classes.iframe, classes.video)}
+                className={clsx(classes.iframe, classes.media)}
                 title={project.name}
                 src={videos[0].src}
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               ></iframe>
             ) : (
-              <video className={classes.video} controls poster={videos[0].preview}>
+              <video className={classes.media} controls poster={videos[0].preview}>
                 <source src={videos[0].src} />
               </video>
             ))}
+          {/* Show latest image for now */}
+          {project.media.length > 4 && project.media[4].type === 'image' && (
+            <img className={classes.media} alt={project.media[4].src} src={project.media[4].src} />
+          )}
           <Title variant="h4" className={classes.tagline}>
             {project.tagline}
           </Title>

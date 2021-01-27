@@ -10,7 +10,7 @@ import { User } from '../user/UserInfo';
 
 export interface SDG {
   imageUrl: string;
-  title: string;
+  title?: string;
 }
 
 interface ProjectTopCardProps {

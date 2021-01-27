@@ -23,6 +23,9 @@ const useStyles = makeStyles((theme: typeof Theme) => ({
   grid: {
     paddingTop: theme.spacing(8.75),
   },
+  projectCard: {
+    height: '100%',
+  },
   item: {
     [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
       flexGrow: 0,
@@ -40,7 +43,7 @@ const MoreProjects = ({ projects }: MoreProjectsProps): JSX.Element => {
         <Grid container className={classes.grid} spacing={5}>
           {projects.map((project, i) => (
             <Grid item xs={12} sm={6} md={4} key={project.id} className={classes.item}>
-              <Link href={getRegistryUrl(`/projects/${project.id}`)}>
+              <Link className={classes.projectCard} href={getRegistryUrl(`/projects/${project.id}`)}>
                 <ProjectCard
                   name={project.name}
                   imgSrc={project.image}

@@ -49,6 +49,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingRight: theme.spacing(5.25),
       paddingBottom: theme.spacing(5.25),
+      height: 'inherit',
+      '& > div:first-child': {
+        height: '100%',
+      },
       '&:nth-child(3n)': {
         paddingRight: 0,
       },

@@ -29,20 +29,23 @@ blogSection:
       image: ../../static/media/paige_green_photo.jpeg
       url: https://medium.com/regen-network/modern-day-pastoralism-re-defining-the-economics-of-rotational-sheep-grazing-on-california-94d02c652234
 comingSoonSection:
-  header: Coming Soon
+  header: More Projects
   projects:
+    - name: Woodburn
+      handle: woodburn
+      image: ../../static/media/woodburn.png
+      location: Walcha, New South Wales, Australia
+      area: 2555
+      areaUnit: hectares
     - name: Cavan Station
+      handle: cavan-station
       image: ../../static/media/cavan-station.png
-      location: Bookham, New South Wales, Australia
-      area: 25000
-      areaUnit: acres
+      location: Yass, New South Wales, Australia
+      area: 9900
+      areaUnit: hectares
     - name: Wongella
+      handle: wongella
       image: ../../static/media/wongelia.png
       location: Kilkivan, Queensland, Australia
-      area: 10000
-      areaUnit: acres
-    - name: Pillango
-      location: Wallace County, Kansas, United States
-      area: 1101
-      areaUnit: acres
-      image: ../../static/media/pillango.png
+      area: 3916
+      areaUnit: hectares

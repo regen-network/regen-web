@@ -4,6 +4,11 @@ categories:
     buttonText: read article
     showPlay: false
     items:
+      - title: 40 Social Entrepreneurs to Watch For in 2021
+        author: CauseArtist
+        url: https://www.causeartist.com/social-entrepreneurs-to-watch-for-in-2021/
+        date: January 26, 2021
+        image: ../../static/media/screen-shot-2021-01-27-at-10.33.34-am.png
       - image: ../../static/media/tesla.png
         title: Climate Change And The Circular Economy
         author: Frank Van Gansbeke, Forbes
@@ -108,6 +113,12 @@ categories:
     buttonText: listen to podcast
     showPlay: true
     items:
+      - image: ../../static/media/screen-shot-2021-01-27-at-10.40.11-am.png
+        title: Regen Network's Sarah Baxendell and Gisel Booman featured in Apogeo
+          Spatial's Exec Interview
+        author: Apogeo Spatial
+        url: http://apogeospatial.com/apogeo-spatial-executive-interview-with-regen-networks-sarah-baxendell-and-gisel-booman/
+        date: January 21, 2021
       - image: ../../static/media/media-podcast-chen.png
         title: "Planetary Regeneration Podcast | Episode 6: Delton Chen"
         date: May 14, 2019

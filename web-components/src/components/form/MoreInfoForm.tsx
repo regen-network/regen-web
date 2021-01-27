@@ -168,24 +168,20 @@ export default function MoreInfoForm({ onClose, onSubmit, apiUrl }: MoreInfoForm
                     label="Which types of carbon credits projects are you interested in?"
                     options={[
                       {
-                        label: 'I am interested in all nature based carbon credits.',
-                        value: 'I am interested in all nature based carbon credits.',
+                        label: 'All nature based carbon credits',
+                        value: 'All nature based carbon credits',
                       },
                       {
-                        label: 'I am only interested in forestry-based credits.',
-                        value: 'I am only interested in forestry-based credits.',
+                        label: 'Forestry-based credits',
+                        value: 'Forestry-based credits',
                       },
                       {
-                        label: 'I am only interested in grasslands-based credits.',
-                        value: 'I am only interested in grasslands-based credits.',
+                        label: 'Grasslands-based credits',
+                        value: 'Grasslands-based credits',
                       },
                       {
-                        label: 'I am only interested in cropland-based credits.',
-                        value: 'I am only interested in cropland-based credits.',
-                      },
-                      {
-                        label: 'I do not have a preference.',
-                        value: 'I do not have a preference.',
+                        label: 'Cropland-based credits',
+                        value: 'Cropland-based credits',
                       },
                     ]}
                   />

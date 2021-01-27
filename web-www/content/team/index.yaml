@@ -200,6 +200,17 @@ coreSection:
         point and Regen’s project on ecological regeneration acts as a beacon of
         light by adding value to the worldwide efforts in saving the world.
       image: ../../static/media/adriana-mihai.png
+    - image: ../../static/media/daniel-pittman.jpg
+      name: Daniel Pittman
+      description: Daniel is a highly motivated software engineer experienced with
+        multiple programming languages, Blockchain technology, and working in
+        start-up project environments. His love for community, exceptional
+        communication, interpersonal negotiation, presentation, and
+        problem-solving skills have helped him become a community leader in all
+        of his endeavors.
+      title: Community Manager and User Advocate
+      githubUrl: https://github.com/dpdanpittman
+      linkedUrl: https://www.linkedin.com/in/mrpittman1/
 contributorSection:
   title: Contributors
   contributors:

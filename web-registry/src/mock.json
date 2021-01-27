@@ -289,10 +289,10 @@
         "description": "Impact Ag Partners is a specialist agricultural asset management firm and advisory service which utilises a variety of pathways and partners to measure and monitise natural capital."
       },
       "steward": {
-        "name": "Wongella Pastoral Pty Ltd",
+        "name": "Wongella",
         "type": "organization",
         "place": {
-          "state": "New South Wales",
+          "state": "Queensland",
           "country": "Australia"
         },
         "imgSrc": "https://regen-registry.s3.amazonaws.com/projects/wongella/wongella.png",
@@ -308,16 +308,16 @@
         "imgSrc": "https://regen-registry.s3.amazonaws.com/regen-logo-green.svg",
         "description": "Regen Network realigns the agricultural economy with ecological health by creating the global marketplace for planetary stewardship."
       },
-      "tagline": "Dan Carney has managed Wongella, with his operations team since 2017",
+      "tagline": "Dan Carney has managed Wongella with his operations team since 2017",
       "quote": {
-        "text": "   A holistic focus and ensuring our Land comes first has paid dividends through two very dry years. We have been able to turn what is traditionally ecologically and economically a negative into a positive. Through strategic grazing and stock management we’ve more than doubled our carrying capacity while improving pasture composition and soil health.",
+        "text": "   A holistic focus and ensuring our Land comes first has paid dividends through two very dry years. We have been able to turn what traditionally would have been an ecological and economic negative into a positive. Through strategic grazing and stock management we’ve more than doubled our carrying capacity while improving pasture composition and soil health.",
         "person": {
           "name": "Dan Carney",
-          "role": "Wongella General Manager"
+          "role": "Wongella Manager"
         }
       },
       "shortDescription": "Wongella is a 3,916 hectare property located in the South Burnett region of Queensland, Australia. At the time of purchase in 2017, the property was heavily degraded and the current management team set out to restore and regenerate the landscape while producing climate friendly grass fed beef.",
-      "longDescription": "<p>The previous land use was plantation forestry that the prior land managers cleared and burnt when the plantation failed. When the property was purchased in 2017, the landscape was heavily degraded with little to no working infrastructure. The current management team has to set about regenerating the the natural assets and turn the property into an ecologically functioning, climate positive beef enterprise.</p><p>Understanding the needs of a landscape starts with a custodial approach, one that embraces the whole system and speaks of the interactive relationship of soil, water, plants and animals. At Wongella the journey to restoration began with embracing this approach and applying practices and principles of regenerative agriculture to realise the potential for a sustainable eco-agricultural production enterprise. </p><p>These keystone practices centre on enhancing on-farm soil and plant biodiversity, minimising the use of synthetic chemical and fertiliser use, minimising soil disturbance, maximising year-round ground cover and the introduction of time-controlled (regenerative) livestock grazing.</p>",
+      "longDescription": "<p>The previous land use was plantation forestry that the prior land managers cleared and burnt when the plantation failed. When the property was purchased in 2017, the landscape was heavily degraded with little to no working infrastructure. The current management team has set about regenerating the natural assets and turn the property into an ecologically functioning, climate positive beef enterprise.</p><p>Understanding the needs of a landscape starts with a custodial approach, one that embraces the whole system and speaks of the interactive relationship of soil, water, plants and animals. At Wongella the journey to restoration began with embracing this approach and applying practices and principles of regenerative agriculture to realise the potential for a sustainable eco-agricultural production enterprise. </p><p>These keystone practices centre on enhancing on-farm soil health and plant biodiversity, minimising the use of synthetic chemical and fertiliser use, minimising soil disturbance, maximising year-round ground cover and the introduction of time-controlled (regenerative) livestock grazing.</p>",
       "media": [
         {
           "src": "https://regen-registry.s3.amazonaws.com/projects/wongella/image1.jpg",

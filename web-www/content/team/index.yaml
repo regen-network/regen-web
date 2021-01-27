@@ -212,16 +212,15 @@ coreSection:
 contributorSection:
   title: Contributors
   contributors:
-    - name: Daniel Swid
-      title: Consultant
-      description: Daniel has contributed to the foundational success of 5 technology
-        startups and has worked in Silicon Valley, Israel, and Asia Pacific. At
-        VMware R&D he founded the prototyping practice and has a gift for
-        scaling and accelerating early stage teams.
-      image: ../../static/media/daniel-swid.png
-      linkedUrl: https://www.linkedin.com/in/danielswid
-      twitterUrl: ""
-      githubUrl: ""
+    - description: >
+        Will’s background in gift economics and local food systems helped him to
+        start PVGrows, a network in Western MA funding local food system
+        infrastructure, and develop a license for definancializing physical
+        infrastructure, the Gift License. Will is a member of the Board of
+        Directors.
+      title: Co-founder
+      name: Will Szal
+      image: ../../static/media/will-szal.png
     - description: Ethan Frey has years of experience in distributed systems,
         cryptography, customer-oriented web design, and blockchain. And a strong
         desire to build something meaningful to humankind. He is delighted to
@@ -238,6 +237,16 @@ contributorSection:
         manufacturing, and nutrition and food advocacy.
       linkedUrl: https://www.linkedin.com/in/clarepolitano/
       image: ../../static/media/clare-politano.png
+    - name: Daniel Swid
+      title: Consultant
+      description: Daniel has contributed to the foundational success of 5 technology
+        startups and has worked in Silicon Valley, Israel, and Asia Pacific. At
+        VMware R&D he founded the prototyping practice and has a gift for
+        scaling and accelerating early stage teams.
+      image: ../../static/media/daniel-swid.png
+      linkedUrl: https://www.linkedin.com/in/danielswid
+      twitterUrl: ""
+      githubUrl: ""
     - description: Kyle works at the intersection of economics and natural resource
         management. In recent years, he has helped estimate the benefits of
         watershed restoration in the San Francisco Bay, measured the impacts of
@@ -247,15 +256,6 @@ contributorSection:
       title: Ecological Economist
       linkedUrl: https://www.linkedin.com/in/kyle-birchard-0379408/
       image: ../../static/media/kyle-birchard.png
-    - description: >
-        Will’s background in gift economics and local food systems helped him to
-        start PVGrows, a network in Western MA funding local food system
-        infrastructure, and develop a license for definancializing physical
-        infrastructure, the Gift License. Will is a member of the Board of
-        Directors.
-      title: Co-founder
-      name: Will Szal
-      image: ../../static/media/will-szal.png
     - description: >
         After nearly thirty years of software development, mostly in finance and
         insurance, the telco sector, and several tech startups, Pete finds that

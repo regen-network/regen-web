@@ -49,31 +49,6 @@ export default function Timeline({ events }: TimelineProps): JSX.Element {
         const eventDate: Date = new Date(event.date);
         const past: boolean = eventDate <= new Date();
 
-        let modalData = {};
-        if (event.creditVintageByEventId) {
-          const issuerWallet = event.creditVintageByEventId.walletByIssuerId;
-          const issuerParty = issuerWallet.partiesByWalletId.nodes[0]; // have party-wallet 1-1 relation?
-          const issuerOrg = issuerParty.organizationByPartyId;
-          const issuerUser =
-            issuerOrg.organizationMembersByOrganizationId &&
-            issuerOrg.organizationMembersByOrganizationId.nodes &&
-            issuerOrg.organizationMembersByOrganizationId.nodes.length &&
-            issuerOrg.organizationMembersByOrganizationId.nodes[0] &&
-            issuerOrg.organizationMembersByOrganizationId.nodes[0].userByMemberId;
-          modalData = {
-            issuer: {
-              name: issuerParty.name,
-              address: issuerWallet.addr,
-              role:
-                issuerUser.partyByPartyId.roles &&
-                issuerUser.partyByPartyId.roles.length &&
-                issuerUser.partyByPartyId.roles[0],
-              individual: issuerUser.partyByPartyId.name,
-              location: issuerParty.addressByAddressId && issuerParty.addressByAddressId.feature,
-              description: issuerOrg && issuerOrg.description,
-            },
-          };
-        }
         return (
           <div className={classes.item} key={`${index}-${event.summary}`}>
             <TimelineItem

@@ -59,3 +59,9 @@ comingSoonSection:
       area: 3916
       areaUnit: hectares
       comingSoon: false
+    - name: "Pillango "
+      location: Wallace County, Kansas, United States
+      area: 1101
+      areaUnit: acres
+      image: ../../static/media/pillango.png
+      comingSoon: true

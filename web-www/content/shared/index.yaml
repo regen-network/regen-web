@@ -29,8 +29,13 @@ blogSection:
       image: ../../static/media/paige_green_photo.jpeg
       url: https://medium.com/regen-network/modern-day-pastoralism-re-defining-the-economics-of-rotational-sheep-grazing-on-california-94d02c652234
 comingSoonSection:
-  header: More Projects
+  header: Project Portfolio
   projects:
+    - name: Wilmot
+      location: Hernani, New England, New South Wales, Australia
+      area: 1854
+      areaUnit: ha.
+      image: ../../static/media/wilmot.png
     - name: Woodburn
       handle: woodburn
       image: ../../static/media/woodburn.png

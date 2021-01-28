@@ -91,7 +91,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   },
 }));
 
-interface IconLabelProps {
+export interface IconLabelProps {
   icon: JSX.Element;
   label: string;
   href: string;

@@ -10,7 +10,7 @@ import GithubIcon from 'web-components/lib/components/icons/social/GithubIcon';
 import YoutubeIcon from 'web-components/lib/components/icons/social/YoutubeIcon';
 import FacebookIcon from 'web-components/lib/components/icons/social/FacebookIcon';
 import LinkedInIcon from 'web-components/lib/components/icons/social/LinkedInIcon';
-import RegenLogoIcon from 'web-components/lib/components/icons/RegenLogoIcon';
+import DiscordIcon from 'web-components/lib/components/icons/social/DiscordIcon';
 import EmailIcon from 'web-components/lib/components/icons/EmailIcon';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -44,12 +44,6 @@ const PressKitConnectSection = (): JSX.Element => {
   const classes = useStyles();
   const icons: IconLabelProps[] = [
     {
-      icon: <RegenLogoIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />,
-      href: '/',
-      label: 'Website',
-      small: true,
-    },
-    {
       icon: <TelegramIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />,
       href: 'https://t.me/regennetwork_public',
       label: 'Telegram for General Updates',
@@ -68,6 +62,12 @@ const PressKitConnectSection = (): JSX.Element => {
       icon: <TwitterIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />,
       href: 'https://twitter.com/regen_network',
       label: 'Twitter',
+    },
+    {
+      icon: <DiscordIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />,
+      href: 'https://discord.gg/BDcBJu3',
+      label: 'Discord community',
+      small: true,
     },
     {
       icon: <YoutubeIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />,

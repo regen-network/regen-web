@@ -32,25 +32,30 @@ comingSoonSection:
   header: Project Portfolio
   projects:
     - name: Wilmot
+      handle: wilmot
       location: Hernani, New England, New South Wales, Australia
       area: 1854
       areaUnit: ha.
       image: ../../static/media/wilmot.png
+      comingSoon: false
     - name: Woodburn
       handle: woodburn
       image: ../../static/media/woodburn.png
       location: Walcha, New South Wales, Australia
       area: 2555
       areaUnit: hectares
+      comingSoon: false
     - name: Cavan Station
       handle: cavan-station
       image: ../../static/media/cavan-station.png
       location: Yass, New South Wales, Australia
       area: 9900
       areaUnit: hectares
+      comingSoon: false
     - name: Wongella
       handle: wongella
       image: ../../static/media/wongelia.png
       location: Kilkivan, Queensland, Australia
       area: 3916
       areaUnit: hectares
+      comingSoon: false

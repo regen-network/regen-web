@@ -1,11 +1,17 @@
 import { IssuanceModalData } from 'web-components/lib/components/modal/IssuanceModal';
 import { Party } from 'web-components/lib/components/party/PartyAddress';
+import { DocumentInfo } from 'web-components/lib/components/document';
+import { getFormattedPeriod } from 'web-components/lib/utils/format';
+import { Data } from 'web-components/lib/components/table';
 
 // buildModalData builds some IssuanceModalData to provide
 // to a Timeline Event based on some optional credit vintage data.
 // TODO get generated type for creditVintage and project from graphql schema.
-export function buildModalData(project: any, creditVintage?: any): IssuanceModalData | null {
-  let modalData = {};
+export function buildModalData(
+  project: any,
+  documents: Data[], // TODO use db data once MRV designed (for monitoring docs)
+  creditVintage?: any,
+): IssuanceModalData | null {
   if (creditVintage) {
     const issuerWallet = creditVintage.walletByIssuerId;
     const issuerParty = issuerWallet.partiesByWalletId.nodes[0]; // have party-wallet 1-1 relation?
@@ -26,12 +32,49 @@ export function buildModalData(project: any, creditVintage?: any): IssuanceModal
         issuees.push(landOwner);
       }
     }
-    modalData = {
+
+    const creditClassVersion = project.creditClassVersionByCreditClassVersionIdAndCreditClassVersionCreatedAt;
+    const methodologyVersion = project.methodologyVersionByMethodologyVersionIdAndMethodologyVersionCreatedAt;
+
+    const monitoringPeriods: DocumentInfo[] = documents
+      .filter(doc => doc.type === 'monitoring')
+      .map(doc => {
+        return {
+          name: doc.name,
+          info: 'monitoring report',
+          link: doc.url,
+        };
+      });
+
+    return {
       issuer: getParty(issuerParty),
       issuees,
+      timestamp: creditVintage.createdAt,
+      numberOfCredits: creditVintage.units,
+      creditUnit: '1 ton of CO2e', // TODO replace with db data
+      vintageId: {
+        name: creditVintage.id,
+        info: 'certificate',
+        link: creditVintage.certificateLink,
+      },
+      vintagePeriod: getFormattedPeriod(creditVintage.startDate, creditVintage.endDate),
+      monitoringPeriods,
+      projectName: project.name,
+      standardId: {
+        name: creditClassVersion?.metadata?.programGuide?.handle,
+        version: creditClassVersion?.metadata?.programGuide?.version,
+      },
+      creditClass: {
+        name: creditClassVersion?.name,
+        version: creditClassVersion?.version,
+      },
+      creditClassHandle: creditClassVersion?.creditClassById.handle,
+      methodology: {
+        name: methodologyVersion?.name,
+        version: methodologyVersion?.version,
+      },
+      methodologyHandle: methodologyVersion?.methodologyById.handle,
     };
-
-    return modalData as IssuanceModalData;
   }
   return null;
 }

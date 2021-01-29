@@ -3,12 +3,13 @@ import { makeStyles, Theme } from '@material-ui/core';
 import { useTheme } from '@material-ui/core/styles';
 
 import TimelineItem from './TimelineItem';
+import { IssuanceModalData } from '../modal/IssuanceModal';
 
 export interface Event {
   date: Date | string;
   summary: string;
   description?: string;
-  creditVintageByEventId?: any; // TODO get generated types from graphql schema
+  modalData?: IssuanceModalData; // | MonitoringModalProps use type guard to check modalData type;
 }
 
 interface TimelineProps {
@@ -55,6 +56,7 @@ export default function Timeline({ events }: TimelineProps): JSX.Element {
               date={eventDate}
               summary={event.summary}
               description={event.description}
+              modalData={event.modalData}
               circleColor={past ? theme.palette.secondary.main : theme.palette.info.main}
               barColor={past ? theme.palette.secondary.main : theme.palette.info.main}
               odd={index % 2 !== 0}

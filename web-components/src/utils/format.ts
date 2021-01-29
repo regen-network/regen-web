@@ -8,3 +8,7 @@ export function getFormattedDate(
 export function getFormattedNumber(number: number, options?: Intl.NumberFormatOptions | undefined): string {
   return new Intl.NumberFormat('en-US', options).format(number);
 }
+
+export function getFormattedPeriod(start: string, end: string | Date): string {
+  return `${new Date(start).getFullYear()}-${new Date(end).getFullYear()}`;
+}

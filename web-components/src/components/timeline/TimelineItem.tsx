@@ -4,14 +4,11 @@ import ReactHtmlParser from 'react-html-parser';
 
 import Title from '../title';
 import ShieldIcon from '../icons/ShieldIcon';
-import IssuanceModal, { IssuanceModalData } from '../modal/IssuanceModal';
+import IssuanceModal from '../modal/IssuanceModal';
 import { getFormattedDate } from '../../utils/format';
+import { Event } from './';
 
-interface TimelineItemProps {
-  date?: Date | string;
-  summary: string;
-  description?: string;
-  modalData?: IssuanceModalData; // | MonitoringModalProps use type guard to check modalData type;
+interface TimelineItemProps extends Event {
   circleColor: string;
   barColor: string;
   odd: boolean;

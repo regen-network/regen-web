@@ -37,6 +37,7 @@ import EmailIcon from 'web-components/lib/components/icons/EmailIcon';
 
 import { getImgSrc } from '../lib/imgSrc';
 import getApiUri from '../lib/apiUri';
+import { buildModalData } from '../lib/transform';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -429,7 +430,24 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
                 ? project.fieldsOverride.timeline.title
                 : projectDefault.timeline.title}
             </Title>
-            <Timeline events={data.projectByHandle.eventsByProjectId.nodes} />
+            <Timeline
+              events={data.projectByHandle.eventsByProjectId.nodes.map(
+                (node: {
+                  // TODO  use generated types from graphql schema
+                  date: string;
+                  summary: string;
+                  description?: string;
+                  creditVintageByEventId?: any;
+                }) => ({
+                  modalData: buildModalData(
+                    data.projectByHandle,
+                    project.documents,
+                    node.creditVintageByEventId,
+                  ),
+                  ...node,
+                }),
+              )}
+            />
           </div>
         </div>
       )}

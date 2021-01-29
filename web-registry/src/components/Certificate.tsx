@@ -14,6 +14,7 @@ import PrintIcon from 'web-components/lib/components/icons/PrintIcon';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 import Section from 'web-components/lib/components/section';
 import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
+import { getFormattedPeriod } from 'web-components/lib/utils/format';
 
 import background from '../assets/certificate-bg.png';
 import pageBackground from '../assets/certificate-page-bg.jpg';
@@ -254,9 +255,7 @@ export default function CertificatePage(): JSX.Element {
           purchaseInfo={{
             units,
             vintageId: vintage.id,
-            vintagePeriod: `${new Date(vintage.startDate).getFullYear()}-${new Date(
-              vintage.endDate,
-            ).getFullYear()}`,
+            vintagePeriod: getFormattedPeriod(vintage.startDate, vintage.endDate),
             creditClass: {
               id: creditClassVersion?.creditClassById.handle,
               name: creditClassVersion?.name,

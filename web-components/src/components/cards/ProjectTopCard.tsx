@@ -14,7 +14,7 @@ export interface SDG {
 }
 
 interface ProjectTopCardProps {
-  projectDeveloper: User;
+  projectDeveloper?: User;
   landSteward?: User;
   landOwner?: User;
   broker?: User;
@@ -141,7 +141,9 @@ export default function ProjectTopCard({
             </Grid>
           </div>
         )}
-        <UserInfoWithTitle size="xl" user={projectDeveloper} title="project developer" />
+        {projectDeveloper && (
+          <UserInfoWithTitle size="xl" user={projectDeveloper} title="project developer" />
+        )}
         {landSteward && (
           <div className={classes.userInfo}>
             {/* <hr className={classes.separator} /> */}

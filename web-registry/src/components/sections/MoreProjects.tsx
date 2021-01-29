@@ -50,11 +50,13 @@ const MoreProjects = ({ projects }: MoreProjectsProps): JSX.Element => {
                   place={project.place}
                   area={project.area}
                   areaUnit={project.areaUnit}
-                  developer={{
-                    name: project.developer.name,
-                    type: project.developer.type,
-                    imgSrc: project.developer.imgSrc,
-                  }}
+                  developer={
+                    project.developer && {
+                      name: project.developer.name,
+                      type: project.developer.type,
+                      imgSrc: project.developer.imgSrc,
+                    }
+                  }
                 />
               </Link>
             </Grid>

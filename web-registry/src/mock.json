@@ -888,6 +888,16 @@
         "imgSrc": "https://regen-registry.s3.amazonaws.com/projects/pillango/provenance-logo.png",
         "description": "The Provenance Co. partners with impact investors to deliver climate resilience with investor worthy returns by unleashing the awesome carbon sequestering power of America’s Great Plains."
       },
+      "broker": {
+        "name": "Regen Network Development, Inc.",
+        "type": "organization",
+        "place": {
+          "state": "Massachussetts",
+          "country": "United States"
+        },
+        "imgSrc": "https://regen-registry.s3.amazonaws.com/regen-logo-green.svg",
+        "description": "Regen Network realigns the agricultural economy with ecological health by creating the global marketplace for planetary stewardship."
+      },
       "tagline": "The Provenance Co. is leading the Pillango Project to restore its carbon sequestering capacity",
       "quote": {
         "text": "     Restoring health to agricultural land and economies goes hand-in-hand with restoring local and indigenous rural communities.  This is the story of the Pillango Project.  Restoring Pillango will be a journey filled with hard work, high emotions, and dusty days, and I am thrilled to have the opportunity to learn what the potential of this awesome landscape can be.",

@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 import { useTheme } from '@material-ui/core/styles';
+import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 
 import TimelineItem from './TimelineItem';
 import { IssuanceModalData } from '../modal/IssuanceModal';
@@ -14,6 +15,7 @@ export interface Event {
 
 interface TimelineProps {
   events: Event[];
+  txClient?: ServiceClientImpl;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -40,7 +42,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function Timeline({ events }: TimelineProps): JSX.Element {
+export default function Timeline({ events, txClient }: TimelineProps): JSX.Element {
   const classes = useStyles({});
   const theme = useTheme();
 
@@ -48,8 +50,11 @@ export default function Timeline({ events }: TimelineProps): JSX.Element {
     <div className={classes.root}>
       {events.map((event, index) => {
         const eventDate: Date = new Date(event.date);
-        const past: boolean = eventDate <= new Date();
-
+        const color = eventDate <= new Date() ? theme.palette.secondary.main : theme.palette.info.main;
+        let barColor = color;
+        if (index + 1 < events.length && new Date() < new Date(events[index + 1].date)) {
+          barColor = theme.palette.info.main;
+        }
         return (
           <div className={classes.item} key={`${index}-${event.summary}`}>
             <TimelineItem
@@ -57,10 +62,11 @@ export default function Timeline({ events }: TimelineProps): JSX.Element {
               summary={event.summary}
               description={event.description}
               modalData={event.modalData}
-              circleColor={past ? theme.palette.secondary.main : theme.palette.info.main}
-              barColor={past ? theme.palette.secondary.main : theme.palette.info.main}
+              circleColor={color}
+              barColor={barColor}
               odd={index % 2 !== 0}
               last={index === events.length - 1}
+              txClient={txClient}
             />
           </div>
         );

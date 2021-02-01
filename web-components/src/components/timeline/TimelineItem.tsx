@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 import ReactHtmlParser from 'react-html-parser';
+import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 
 import Title from '../title';
 import ShieldIcon from '../icons/ShieldIcon';
@@ -13,6 +14,7 @@ interface TimelineItemProps extends Event {
   barColor: string;
   odd: boolean;
   last: boolean;
+  txClient?: ServiceClientImpl;
 }
 
 interface StyleProps {
@@ -91,6 +93,9 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     },
     whiteSpace: 'pre-line',
     paddingTop: theme.spacing(1.5),
+    '& p': {
+      margin: 0,
+    },
   },
   bar: props => ({
     backgroundColor: props.barColor,
@@ -161,6 +166,7 @@ export default function TimelineItem({
   barColor,
   odd,
   last,
+  txClient,
 }: TimelineItemProps): JSX.Element {
   const classes = useStyles({ circleColor, barColor, odd, last });
   const [open, setOpen] = useState<boolean>(false);
@@ -173,7 +179,9 @@ export default function TimelineItem({
       {description && <div className={classes.description}>{ReactHtmlParser(description)}</div>}
       <span className={classes.circle} />
       <div className={classes.bar} />
-      {modalData && <IssuanceModal open={open} onClose={() => setOpen(false)} {...modalData} />}
+      {modalData && (
+        <IssuanceModal txClient={txClient} open={open} onClose={() => setOpen(false)} {...modalData} />
+      )}
     </div>
   );
 }

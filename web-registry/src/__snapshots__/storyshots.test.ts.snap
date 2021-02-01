@@ -1460,7 +1460,7 @@ exports[`Storyshots Components|Document Document 1`] = `
     className="makeStyles-root-373"
   >
     <span>
-      476d7a44
+      certificate
        
     </span>
     <a
@@ -1470,7 +1470,7 @@ exports[`Storyshots Components|Document Document 1`] = `
       target="_blank"
     >
       View 
-      certificate
+      476d7a44
        »
     </a>
   </div>
@@ -6952,9 +6952,8 @@ exports[`Storyshots Components|Timeline Timeline 1`] = `
           September 2, 2019
         </div>
         <h5
-          className="MuiTypography-root makeStyles-root-886 makeStyles-title-881 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+          className="MuiTypography-root makeStyles-root-886 makeStyles-summary-881 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
         >
-          Project starts
            
         </h5>
         <div
@@ -6982,9 +6981,8 @@ exports[`Storyshots Components|Timeline Timeline 1`] = `
           October 21, 2019
         </div>
         <h5
-          className="MuiTypography-root makeStyles-root-886 makeStyles-title-881 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+          className="MuiTypography-root makeStyles-root-886 makeStyles-summary-881 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
         >
-          Approval complete
            
         </h5>
         <div
@@ -7012,9 +7010,8 @@ exports[`Storyshots Components|Timeline Timeline 1`] = `
           February 20, 2020
         </div>
         <h5
-          className="MuiTypography-root makeStyles-root-886 makeStyles-title-881 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+          className="MuiTypography-root makeStyles-root-886 makeStyles-summary-881 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
         >
-          Credits issued
            
         </h5>
         <div
@@ -7039,12 +7036,11 @@ exports[`Storyshots Components|Timeline Timeline 1`] = `
         <div
           className="makeStyles-date-877"
         >
-          September 2022
+          September 1, 2022
         </div>
         <h5
-          className="MuiTypography-root makeStyles-root-886 makeStyles-title-881 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+          className="MuiTypography-root makeStyles-root-886 makeStyles-summary-881 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
         >
-          Site visit
            
         </h5>
         <div
@@ -7069,12 +7065,11 @@ exports[`Storyshots Components|Timeline Timeline 1`] = `
         <div
           className="makeStyles-date-877"
         >
-          February 2029
+          February 1, 2029
         </div>
         <h5
-          className="MuiTypography-root makeStyles-root-886 makeStyles-title-881 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+          className="MuiTypography-root makeStyles-root-886 makeStyles-summary-881 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
         >
-          Project completion
            
         </h5>
         <div
@@ -7105,9 +7100,8 @@ exports[`Storyshots Components|Timeline Timeline Item 1`] = `
       September 2, 2019
     </div>
     <h5
-      className="MuiTypography-root makeStyles-root-920 makeStyles-title-915 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+      className="MuiTypography-root makeStyles-root-920 makeStyles-summary-915 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
     >
-      Project starts
        
     </h5>
     <div

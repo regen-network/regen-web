@@ -35,9 +35,9 @@ export default function Document({ name, info, link }: DocumentInfo): JSX.Elemen
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <span>{info} </span>
+      <span>{name} </span>
       <a className={classes.link} href={link} target="_blank" rel="noopener noreferrer">
-        View {name} »
+        View {info} »
       </a>
     </div>
   );

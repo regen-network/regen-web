@@ -41,6 +41,7 @@ query ProjectByHandle($handle: String!) {
           initialDistribution
           units
           certificateLink
+          txHash
           walletByIssuerId {
             addr
             partiesByWalletId(first: 1) {

@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import { loader } from 'graphql.macro';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 import ReactToPrint from 'react-to-print';
 
 import getRegistryUrl from '../lib/registryUrl';

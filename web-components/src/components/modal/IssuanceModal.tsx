@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { GetTxResponse } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
+import { ServiceClientImpl, GetTxResponse } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 
 import LedgerModal from './LedgerModal';
 import { RegenModalProps } from './';
@@ -13,7 +13,6 @@ interface DocumentVersion {
 }
 
 export interface IssuanceModalData {
-  txRes?: GetTxResponse;
   link?: string;
   issuer: Party;
   issuees: Party[];
@@ -29,9 +28,13 @@ export interface IssuanceModalData {
   creditClassHandle: string;
   methodology: DocumentVersion;
   methodologyHandle: string;
+  txHash?: string;
 }
 
-interface IssuanceModalProps extends RegenModalProps, IssuanceModalData {}
+interface IssuanceModalProps extends RegenModalProps, IssuanceModalData {
+  txClient?: ServiceClientImpl;
+  txHash?: string;
+}
 
 const options = {
   month: 'short',
@@ -46,7 +49,6 @@ function getDocumentVersion(doc: DocumentVersion): string {
 }
 
 export default function IssuanceModal({
-  txRes,
   link,
   issuer,
   issuees,
@@ -62,13 +64,16 @@ export default function IssuanceModal({
   creditClassHandle,
   methodology,
   methodologyHandle,
+  txClient,
+  txHash,
   ...props
 }: IssuanceModalProps): JSX.Element {
   const [party, setParty] = useState<Party | null>(null);
 
   return (
     <LedgerModal
-      txRes={txRes}
+      txClient={txClient}
+      txHash={txHash}
       link={link}
       party={party}
       handleBack={() => setParty(null)}

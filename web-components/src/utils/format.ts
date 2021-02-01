@@ -2,7 +2,7 @@ export function getFormattedDate(
   date: string | Date,
   options?: Intl.DateTimeFormatOptions | undefined,
 ): string {
-  return typeof date === 'string' ? date : new Intl.DateTimeFormat('en-US', options).format(new Date(date));
+  return new Intl.DateTimeFormat('en-US', options).format(new Date(date));
 }
 
 export function getFormattedNumber(number: number, options?: Intl.NumberFormatOptions | undefined): string {

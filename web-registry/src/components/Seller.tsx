@@ -1,8 +1,7 @@
 import React, { useCallback } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import axios from 'axios';
-import { gql } from 'apollo-boost';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery, gql } from '@apollo/client';
 
 import NavBar from './NavBar';
 import getOrigin from '../lib/origin';

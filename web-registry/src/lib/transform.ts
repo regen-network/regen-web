@@ -37,7 +37,7 @@ export function buildModalData(
     const methodologyVersion = project.methodologyVersionByMethodologyVersionIdAndMethodologyVersionCreatedAt;
 
     const monitoringPeriods: DocumentInfo[] = documents
-      .filter(doc => doc.type === 'monitoring')
+      .filter(doc => doc.type === 'Monitoring')
       .map(doc => {
         return {
           name: doc.name,
@@ -53,10 +53,11 @@ export function buildModalData(
       numberOfCredits: creditVintage.units,
       creditUnit: '1 ton of CO2e', // TODO replace with db data
       vintageId: {
-        name: creditVintage.id,
+        name: creditVintage.id.substring(0, 8),
         info: 'certificate',
         link: creditVintage.certificateLink,
       },
+      txHash: creditVintage.txHash,
       vintagePeriod: getFormattedPeriod(creditVintage.startDate, creditVintage.endDate),
       monitoringPeriods,
       projectName: project.name,

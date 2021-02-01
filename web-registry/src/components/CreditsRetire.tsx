@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
-import { useMutation, useQuery } from '@apollo/react-hooks';
-import { gql } from 'apollo-boost';
+import { useMutation, useQuery, gql } from '@apollo/client';
 import Button from '@material-ui/core/Button';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';

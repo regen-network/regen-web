@@ -101,7 +101,7 @@ export default function IssuanceModal({
         },
         {
           label: 'timestamp',
-          value: getFormattedDate(timestamp, options),
+          value: getFormattedDate(new Date(timestamp), options),
         },
         {
           label: '# of credits',

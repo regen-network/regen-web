@@ -279,7 +279,8 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
 
   const siteMetadata = {
     title: `Regen Network Registry`,
-    description: `Learn about Regen Network's ${project.creditClass.name} credits sourced from ${project.steward.name} in ${project.place.state}, ${project.place.country}.`,
+    description: `Learn about Regen Network's ${project.creditClass.name} credits sourced from ${project
+      .steward?.name || project.developer?.name} in ${project.place.state}, ${project.place.country}.`,
     author: `Regen Network`,
     siteUrl: `${window.location.origin}/registry`,
   };

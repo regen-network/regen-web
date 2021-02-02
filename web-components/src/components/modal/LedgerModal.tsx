@@ -17,7 +17,7 @@ import BreadcrumbIcon from '../icons/BreadcrumbIcon';
 
 interface Item {
   label: string;
-  value: JSX.Element | string;
+  value?: JSX.Element | string;
 }
 
 interface LedgerModalProps extends RegenModalProps {
@@ -252,14 +252,18 @@ function SummaryItem({ item }: { item: Item }): JSX.Element {
   const classes = useStyles();
 
   return (
-    <Grid container className={classes.summaryItem}>
-      <Grid className={clsx(classes.label, classes.summaryLabel)} xs={4} item>
-        {item.label}
-      </Grid>
-      <Grid xs={8} className={clsx(classes.value, classes.summaryValue)} item>
-        {typeof item.value === 'string' ? ReactHtmlParser(item.value) : item.value}
-      </Grid>
-    </Grid>
+    <>
+      {item.value ? (
+        <Grid container className={classes.summaryItem}>
+          <Grid className={clsx(classes.label, classes.summaryLabel)} xs={4} item>
+            {item.label}
+          </Grid>
+          <Grid xs={8} className={clsx(classes.value, classes.summaryValue)} item>
+            {typeof item.value === 'string' ? ReactHtmlParser(item.value) : item.value}
+          </Grid>
+        </Grid>
+      ) : null}
+    </>
   );
 }
 export default function LedgerModal({
@@ -336,7 +340,7 @@ export default function LedgerModal({
             <>
               <Grid container wrap="nowrap" className={classes.blockchainTitle}>
                 <Grid item container alignItems="center">
-                  <div className={clsx(classes.label, classes.blockchain)}>blockchain data</div>
+                  <div className={clsx(classes.label, classes.blockchain)}>blockchain data (devnet)</div>
                   <CustomTooltip
                     arrow
                     placement="top"

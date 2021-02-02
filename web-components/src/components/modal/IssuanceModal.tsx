@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ServiceClientImpl, GetTxResponse } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
+import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 
 import LedgerModal from './LedgerModal';
 import { RegenModalProps } from './';
@@ -17,7 +17,9 @@ export interface IssuanceModalData {
   issuer: Party;
   issuees: Party[];
   timestamp: string | Date;
-  numberOfCredits: number;
+  numberOfCredits: number; // net (ie total minus bufferPool + permanenceReversalBuffer)
+  bufferPool?: number;
+  permanenceReversalBuffer?: number;
   creditUnit: string;
   vintageId: DocumentInfo;
   vintagePeriod: string;
@@ -66,6 +68,8 @@ export default function IssuanceModal({
   methodologyHandle,
   txClient,
   txHash,
+  bufferPool,
+  permanenceReversalBuffer,
   ...props
 }: IssuanceModalProps): JSX.Element {
   const [party, setParty] = useState<Party | null>(null);
@@ -106,6 +110,14 @@ export default function IssuanceModal({
         {
           label: '# of credits',
           value: getFormattedNumber(numberOfCredits),
+        },
+        {
+          label: 'buffer pool',
+          value: bufferPool ? getFormattedNumber(bufferPool) : undefined,
+        },
+        {
+          label: 'permanence reversal buffer',
+          value: permanenceReversalBuffer ? getFormattedNumber(permanenceReversalBuffer) : undefined,
         },
         {
           label: 'credit unit',

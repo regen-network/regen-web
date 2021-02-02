@@ -6,7 +6,6 @@ import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1
 import Title from '../title';
 import ShieldIcon from '../icons/ShieldIcon';
 import IssuanceModal from '../modal/IssuanceModal';
-import { getFormattedDate } from '../../utils/format';
 import { Event } from './';
 
 interface TimelineItemProps extends Event {
@@ -155,8 +154,6 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   },
 }));
 
-const options = { year: 'numeric', month: 'long', day: 'numeric' };
-
 export default function TimelineItem({
   date,
   summary,
@@ -172,7 +169,7 @@ export default function TimelineItem({
   const [open, setOpen] = useState<boolean>(false);
   return (
     <div className={classes.content}>
-      {date && <div className={classes.date}>{getFormattedDate(date, options)}</div>}
+      {date && <div className={classes.date}>{date}</div>}
       <Title className={classes.summary} variant="h5">
         {summary} {modalData && <ShieldIcon className={classes.icon} onClick={() => setOpen(true)} />}
       </Title>

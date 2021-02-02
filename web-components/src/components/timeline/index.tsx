@@ -16,6 +16,7 @@ export interface Event {
 interface TimelineProps {
   events: Event[];
   txClient?: ServiceClientImpl;
+  completedItemIndex?: number;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -42,27 +43,38 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function Timeline({ events, txClient }: TimelineProps): JSX.Element {
+export default function Timeline({ events, completedItemIndex, txClient }: TimelineProps): JSX.Element {
   const classes = useStyles({});
   const theme = useTheme();
 
   return (
     <div className={classes.root}>
       {events.map((event, index) => {
-        const eventDate: Date = new Date(event.date);
-        const color = eventDate <= new Date() ? theme.palette.secondary.main : theme.palette.info.main;
-        let barColor = color;
-        if (index + 1 < events.length && new Date() < new Date(events[index + 1].date)) {
-          barColor = theme.palette.info.main;
+        let circleColor: string;
+        let barColor: string;
+        // Use completedItemIndex if available to color past timeline items
+        if (completedItemIndex || completedItemIndex === 0) {
+          circleColor = index <= completedItemIndex ? theme.palette.secondary.main : theme.palette.info.main;
+          barColor = index < completedItemIndex ? theme.palette.secondary.main : theme.palette.info.main;
+        } else {
+          // else we should provide valid dates for events so we can compare them with present date
+          const eventDate = new Date(event.date);
+          circleColor = eventDate <= new Date() ? theme.palette.secondary.main : theme.palette.info.main;
+          if (index + 1 < events.length && new Date() < new Date(events[index + 1].date)) {
+            barColor = theme.palette.info.main;
+          } else {
+            barColor = circleColor;
+          }
         }
+
         return (
           <div className={classes.item} key={`${index}-${event.summary}`}>
             <TimelineItem
-              date={eventDate}
+              date={event.date}
               summary={event.summary}
               description={event.description}
               modalData={event.modalData}
-              circleColor={color}
+              circleColor={circleColor}
               barColor={barColor}
               odd={index % 2 !== 0}
               last={index === events.length - 1}

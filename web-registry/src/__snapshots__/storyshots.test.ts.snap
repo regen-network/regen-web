@@ -7036,7 +7036,7 @@ exports[`Storyshots Components|Timeline Timeline 1`] = `
         <div
           className="makeStyles-date-877"
         >
-          September 1, 2022
+          September 2022
         </div>
         <h5
           className="MuiTypography-root makeStyles-root-886 makeStyles-summary-881 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
@@ -7065,7 +7065,7 @@ exports[`Storyshots Components|Timeline Timeline 1`] = `
         <div
           className="makeStyles-date-877"
         >
-          February 1, 2029
+          February 2029
         </div>
         <h5
           className="MuiTypography-root makeStyles-root-886 makeStyles-summary-881 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-alignLeft"

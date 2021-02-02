@@ -677,7 +677,7 @@ collections:
                 widget: list
                 collapsed: false
                 fields:
-                  - {label: "title", name: title, widget: string}
+                  - {label: "title", name: summary, widget: string}
                   - {label: "date", name: date, widget: string}
                   - {label: "description", name: description, widget: text}
           - label: Team Section

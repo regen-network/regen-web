@@ -15,6 +15,7 @@ import ProjectImpact from './sections/ProjectImpact';
 import MoreProjects from './sections/MoreProjects';
 
 import { getFontSize } from 'web-components/lib/theme/sizing';
+import { getFormattedDate } from 'web-components/lib/utils/format';
 import Title from 'web-components/lib/components/title';
 import Description from 'web-components/lib/components/description';
 import Timeline from 'web-components/lib/components/timeline';
@@ -429,7 +430,9 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
                     project.documents,
                     node.creditVintageByEventId,
                   ),
-                  ...node,
+                  date: getFormattedDate(node.date, { year: 'numeric', month: 'long', day: 'numeric' }),
+                  summary: node.summary,
+                  description: node.description,
                 }),
               )}
             />

@@ -36,6 +36,21 @@ export function buildModalData(
     const creditClassVersion = project.creditClassVersionByCreditClassVersionIdAndCreditClassVersionCreatedAt;
     const methodologyVersion = project.methodologyVersionByMethodologyVersionIdAndMethodologyVersionCreatedAt;
 
+    const bufferPoolDist = creditClassVersion?.metadata?.distribution?.bufferPool;
+    const permanenceReversalBufferDist = creditClassVersion?.metadata?.distribution?.permanenceReversalBuffer;
+
+    let numberOfCredits: number = creditVintage.units;
+    let bufferPool: number | undefined;
+    let permanenceReversalBuffer: number | undefined;
+    if (bufferPoolDist) {
+      bufferPool = bufferPoolDist * creditVintage.units;
+      numberOfCredits = numberOfCredits - bufferPool;
+    }
+    if (permanenceReversalBufferDist) {
+      permanenceReversalBuffer = permanenceReversalBufferDist * creditVintage.units;
+      numberOfCredits = numberOfCredits - permanenceReversalBuffer;
+    }
+
     const monitoringPeriods: DocumentInfo[] = documents
       .filter(doc => doc.type === 'Monitoring')
       .map(doc => {
@@ -50,7 +65,9 @@ export function buildModalData(
       issuer: getParty(issuerParty),
       issuees,
       timestamp: creditVintage.createdAt,
-      numberOfCredits: creditVintage.units,
+      numberOfCredits,
+      bufferPool,
+      permanenceReversalBuffer,
       creditUnit: '1 ton of CO2e', // TODO replace with db data
       vintageId: {
         name: creditVintage.id.substring(0, 8),

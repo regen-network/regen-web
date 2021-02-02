@@ -153,6 +153,7 @@ export default function MoreInfoForm({ onClose, onSubmit, apiUrl }: MoreInfoForm
                       component={SelectTextField}
                       label="Budget"
                       name="budget"
+                      optional
                     />
                   </Grid>
                   <Grid item xs={6}>

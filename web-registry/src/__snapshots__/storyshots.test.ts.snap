@@ -516,46 +516,50 @@ exports[`Storyshots Components|Cards Project Top Card 1`] = `
     <div
       className="makeStyles-container-63"
     >
-      <div>
-        <p
-          className="MuiTypography-root makeStyles-title-74 MuiTypography-body1"
-        >
-          project developer
-        </p>
-        <div
-          className="MuiGrid-root MuiGrid-container MuiGrid-wrap-xs-nowrap"
-        >
+      <div
+        className="makeStyles-userInfo-68"
+      >
+        <div>
+          <p
+            className="MuiTypography-root makeStyles-title-74 MuiTypography-body1"
+          >
+            project developer
+          </p>
           <div
-            className="MuiGrid-root MuiGrid-item"
+            className="MuiGrid-root MuiGrid-container MuiGrid-wrap-xs-nowrap"
           >
             <div
-              className="MuiAvatar-root MuiAvatar-circle makeStyles-root-83 makeStyles-root-84"
+              className="MuiGrid-root MuiGrid-item"
             >
-              <img
-                alt="Odonata"
-                className="MuiAvatar-img"
-                src="http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png"
-              />
+              <div
+                className="MuiAvatar-root MuiAvatar-circle makeStyles-root-83 makeStyles-root-84"
+              >
+                <img
+                  alt="Odonata"
+                  className="MuiAvatar-img"
+                  src="http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png"
+                />
+              </div>
             </div>
-          </div>
-          <div
-            className="MuiGrid-root makeStyles-text-75 makeStyles-text-80 MuiGrid-item"
-          >
-            <p
-              className="MuiTypography-root makeStyles-name-76 makeStyles-name-81 MuiTypography-body1"
+            <div
+              className="MuiGrid-root makeStyles-text-75 makeStyles-text-80 MuiGrid-item"
             >
-              Odonata
-            </p>
-            <p
-              className="MuiTypography-root makeStyles-place-79 makeStyles-place-82 MuiTypography-body1"
-            >
-              South Melbourne, Victoria, Australia
-            </p>
-            <p
-              className="MuiTypography-root makeStyles-description-78 MuiTypography-body1"
-            >
-              Odonata is a not-for-profit entity supporting biodiversity impact solutions.
-            </p>
+              <p
+                className="MuiTypography-root makeStyles-name-76 makeStyles-name-81 MuiTypography-body1"
+              >
+                Odonata
+              </p>
+              <p
+                className="MuiTypography-root makeStyles-place-79 makeStyles-place-82 MuiTypography-body1"
+              >
+                South Melbourne, Victoria, Australia
+              </p>
+              <p
+                className="MuiTypography-root makeStyles-description-78 MuiTypography-body1"
+              >
+                Odonata is a not-for-profit entity supporting biodiversity impact solutions.
+              </p>
+            </div>
           </div>
         </div>
       </div>

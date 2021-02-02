@@ -32,7 +32,7 @@ export interface Project {
   area: number;
   areaUnit: string;
   developer?: User;
-  steward: User;
+  steward?: User;
   owner?: User;
   broker?: User;
   shortDescription: string;

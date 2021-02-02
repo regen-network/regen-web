@@ -877,7 +877,7 @@
       "type": "Farm",
       "area": 1101,
       "areaUnit": "acres",
-      "steward": {
+      "developer": {
         "name": "The Provenance Co.",
         "type": "organization",
         "place": {

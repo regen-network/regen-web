@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { RegenApi } from '@regen-network/api';
 
+import getApiUri from './lib/apiUri';
+
 export type ContextType = {
   loading: boolean;
   api: RegenApi | undefined;
@@ -18,7 +20,7 @@ async function connect(): Promise<RegenApi | undefined> {
     connection: {
       // Here, we are using the Tendermint RPC client connection.
       type: 'tendermint',
-      url: 'http://13.59.81.92:26657',
+      url: `${getApiUri()}/ledger`,
     },
   });
   return api;

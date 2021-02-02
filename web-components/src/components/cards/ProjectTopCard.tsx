@@ -1,7 +1,6 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import clsx from 'clsx';
 
 import Card from './Card';
 import Title from '../title';
@@ -59,10 +58,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   userInfo: {
     [theme.breakpoints.down('xs')]: {
-      marginTop: theme.spacing(12),
+      marginBottom: theme.spacing(12),
     },
     [theme.breakpoints.up('sm')]: {
-      marginTop: theme.spacing(15),
+      marginBottom: theme.spacing(15),
     },
   },
   sdgGridItem: {
@@ -142,7 +141,9 @@ export default function ProjectTopCard({
           </div>
         )}
         {projectDeveloper && (
-          <UserInfoWithTitle size="xl" user={projectDeveloper} title="project developer" />
+          <div className={classes.userInfo}>
+            <UserInfoWithTitle size="xl" user={projectDeveloper} title="project developer" />
+          </div>
         )}
         {landSteward && (
           <div className={classes.userInfo}>
@@ -157,7 +158,7 @@ export default function ProjectTopCard({
           </div>
         )}
         {broker && (
-          <div className={clsx(classes.broker, classes.userInfo)}>
+          <div className={classes.broker}>
             <UserInfoWithTitle size="xl" user={broker} title="broker" />
           </div>
         )}

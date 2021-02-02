@@ -1,7 +1,6 @@
 {
   "name": "web-registry",
   "version": "0.0.0",
-  "homepage": "/registry/",
   "private": true,
   "dependencies": {
     "@apollo/react-hooks": "^3.1.4",

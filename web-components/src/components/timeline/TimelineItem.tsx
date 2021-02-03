@@ -142,15 +142,30 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   }),
   summary: {
     lineHeight: '150%',
-    position: 'relative',
+    // position: 'relative',
+    display: 'flex',
   },
   icon: {
-    cursor: 'pointer',
     position: 'absolute',
     marginLeft: theme.spacing(1.5),
     [theme.breakpoints.up('sm')]: {
       top: theme.spacing(0.5),
     },
+  },
+  viewContainer: {
+    position: 'relative',
+    display: 'flex',
+    maxWidth: theme.spacing(35.5),
+    cursor: 'pointer',
+  },
+  view: {
+    color: theme.palette.secondary.main,
+    letterSpacing: '1px',
+    textTransform: 'uppercase',
+    fontWeight: 800,
+    fontSize: theme.spacing(3),
+    lineHeight: theme.spacing(3.75),
+    paddingLeft: theme.spacing(9),
   },
 }));
 
@@ -171,7 +186,13 @@ export default function TimelineItem({
     <div className={classes.content}>
       {date && <div className={classes.date}>{date}</div>}
       <Title className={classes.summary} variant="h5">
-        {summary} {modalData && <ShieldIcon className={classes.icon} onClick={() => setOpen(true)} />}
+        {summary}{' '}
+        {modalData && (
+          <div className={classes.viewContainer} onClick={() => setOpen(true)}>
+            <ShieldIcon className={classes.icon} />
+            <span className={classes.view}>view on regen ledger</span>
+          </div>
+        )}
       </Title>
       {description && <div className={classes.description}>{ReactHtmlParser(description)}</div>}
       <span className={classes.circle} />

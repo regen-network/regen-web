@@ -6,6 +6,7 @@ import { RegenModalProps } from './';
 import PartyAddress, { Party } from '../party/PartyAddress';
 import Document, { DocumentInfo } from '../document';
 import { getFormattedDate, getFormattedNumber } from '../../utils/format';
+import { pluralize } from '../../utils/pluralize';
 
 interface DocumentVersion {
   name: string;
@@ -17,7 +18,7 @@ export interface IssuanceModalData {
   issuer: Party;
   issuees: Party[];
   timestamp: string | Date;
-  numberOfCredits: number; // net (ie total minus bufferPool + permanenceReversalBuffer)
+  numberOfCredits: number; // net amount, ie total minus (bufferPool + permanenceReversalBuffer)
   bufferPool?: number;
   permanenceReversalBuffer?: number;
   creditUnit: string;
@@ -109,15 +110,22 @@ export default function IssuanceModal({
         },
         {
           label: '# of credits',
-          value: getFormattedNumber(numberOfCredits),
+          value: getFormattedNumber(Math.floor(numberOfCredits)),
         },
         {
           label: 'buffer pool',
-          value: bufferPool ? getFormattedNumber(bufferPool) : undefined,
+          value: bufferPool
+            ? `${getFormattedNumber(Math.floor(bufferPool))} ${pluralize(bufferPool, 'credit')}`
+            : undefined,
         },
         {
           label: 'permanence reversal buffer',
-          value: permanenceReversalBuffer ? getFormattedNumber(permanenceReversalBuffer) : undefined,
+          value: permanenceReversalBuffer
+            ? `${getFormattedNumber(Math.floor(permanenceReversalBuffer))} ${pluralize(
+                permanenceReversalBuffer,
+                'credit',
+              )}`
+            : undefined,
         },
         {
           label: 'credit unit',

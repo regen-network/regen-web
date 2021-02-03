@@ -268,7 +268,6 @@ function SummaryItem({ item }: { item: Item }): JSX.Element {
 }
 export default function LedgerModal({
   summary,
-  // txRes,
   link,
   party,
   handleBack,
@@ -310,8 +309,8 @@ export default function LedgerModal({
             Entity Information
           </Title>
           <SummaryItem item={{ label: 'organization', value: party.name }} />
-          <SummaryItem item={{ label: 'role', value: party.role }} />
           <SummaryItem item={{ label: 'individual', value: party.individual }} />
+          <SummaryItem item={{ label: 'role', value: party.role }} />
           <SummaryItem item={{ label: 'account address', value: party.address }} />
           <SummaryItem item={{ label: 'location', value: party.location }} />
           {party.description && <SummaryItem item={{ label: 'description', value: party.description }} />}

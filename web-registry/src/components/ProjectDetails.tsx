@@ -37,7 +37,7 @@ import EmailIcon from 'web-components/lib/components/icons/EmailIcon';
 
 import { getImgSrc } from '../lib/imgSrc';
 import getApiUri from '../lib/apiUri';
-import { buildModalData } from '../lib/transform';
+import { buildIssuanceModalData } from '../lib/transform';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -430,7 +430,7 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
                   description?: string;
                   creditVintageByEventId?: any;
                 }) => ({
-                  modalData: buildModalData(
+                  modalData: buildIssuanceModalData(
                     data.projectByHandle,
                     project.documents,
                     node.creditVintageByEventId,

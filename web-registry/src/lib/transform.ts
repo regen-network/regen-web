@@ -4,10 +4,10 @@ import { DocumentInfo } from 'web-components/lib/components/document';
 import { getFormattedPeriod } from 'web-components/lib/utils/format';
 import { Data } from 'web-components/lib/components/table';
 
-// buildModalData builds some IssuanceModalData to provide
+// buildIssuanceModalData builds some IssuanceModalData to provide
 // to a Timeline Event based on some optional credit vintage data.
 // TODO get generated type for creditVintage and project from graphql schema.
-export function buildModalData(
+export function buildIssuanceModalData(
   project: any,
   documents: Data[], // TODO use db data once MRV designed (for monitoring docs)
   creditVintage?: any,
@@ -56,7 +56,7 @@ export function buildModalData(
       .map(doc => {
         return {
           name: doc.name,
-          info: 'monitoring report',
+          info: doc.name.toLowerCase().indexOf('monitoring') > -1 ? 'monitoring report' : 'data',
           link: doc.url,
         };
       });

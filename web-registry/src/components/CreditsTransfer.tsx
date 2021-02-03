@@ -16,7 +16,7 @@ import TableRow from '@material-ui/core/TableRow';
 import { loader } from 'graphql.macro';
 
 import Title from 'web-components/lib/components/title';
-import { pluralize } from 'web-components/lib/components/credits/pluralize';
+import { pluralize } from 'web-components/lib/utils/pluralize';
 
 const TRANSFER_CREDITS = gql`
   mutation TransferCredits($input: TransferCreditsInput!) {

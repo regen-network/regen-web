@@ -62,13 +62,6 @@ export const AuthApolloProvider = ({ children }: AuthApolloProviderProps): any =
 
   const link = ApolloLink.from([withToken, authMiddleware.concat(httpLink)]);
 
-  // const asyncAuthLink = setContext(
-  //   request =>
-  //     new Promise((success, fail) => {
-
-  //     }),
-  // );
-
   const client = new ApolloClient({
     cache: new InMemoryCache(),
     link,

@@ -9,7 +9,7 @@ import FormControl from '@material-ui/core/FormControl';
 import { loader } from 'graphql.macro';
 
 import Title from 'web-components/lib/components/title';
-import { pluralize } from 'web-components/lib/components/credits/pluralize';
+import { pluralize } from 'web-components/lib/utils/pluralize';
 
 const ALL_CREDIT_VINTAGES = loader('../graphql/AllCreditVintages.graphql');
 const ALL_PARTIES = loader('../graphql/AllParties.graphql');

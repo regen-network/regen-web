@@ -15,10 +15,12 @@ featuredSection:
 blogSection:
   header: Regen Network Blog
   posts:
-    - header: Mobilizing Community Co-Creation for Soil Health
-      description: Exploring the partnership between OpenTEAM and Regen Network
-      image: ../../static/media/blog3.jpeg
-      url: https://medium.com/regen-network/mobilizing-community-co-creation-for-soil-health-61090e27c6ba
+    - header: Regen Network Announces Historic Carbon Credit Sale in Australia
+      description: Agtech start-up Regen Network announces the historic sale of soil
+        carbon credits to Microsoft, one of the largest soil carbon credit
+        issuances ever in Australia.
+      image: ../../static/media/cattle_wilmott.png
+      url: http://bit.ly/regensale
     - header: Cosmos + Regen Network = Synergy
       description: How Regen Network became the lead maintainer of the Cosmos SDK
       image: ../../static/media/screen-shot-2020-09-29-at-6.50.26-am.png
@@ -29,20 +31,39 @@ blogSection:
       image: ../../static/media/paige_green_photo.jpeg
       url: https://medium.com/regen-network/modern-day-pastoralism-re-defining-the-economics-of-rotational-sheep-grazing-on-california-94d02c652234
 comingSoonSection:
-  header: Coming Soon
+  header: Project Portfolio
   projects:
+    - name: Wilmot
+      handle: wilmot
+      location: Hernani, New England, New South Wales, Australia
+      area: 1854
+      areaUnit: ha.
+      image: ../../static/media/wilmot.png
+      comingSoon: false
+    - name: Woodburn
+      handle: woodburn
+      image: ../../static/media/woodburn.png
+      location: Walcha, New South Wales, Australia
+      area: 2555
+      areaUnit: hectares
+      comingSoon: false
     - name: Cavan Station
+      handle: cavan-station
       image: ../../static/media/cavan-station.png
-      location: Bookham, New South Wales, Australia
-      area: 25000
-      areaUnit: acres
+      location: Yass, New South Wales, Australia
+      area: 9900
+      areaUnit: hectares
+      comingSoon: false
     - name: Wongella
+      handle: wongella
       image: ../../static/media/wongelia.png
       location: Kilkivan, Queensland, Australia
-      area: 10000
-      areaUnit: acres
-    - name: Pillango
+      area: 3916
+      areaUnit: hectares
+      comingSoon: false
+    - name: "Pillango "
       location: Wallace County, Kansas, United States
       area: 1101
       areaUnit: acres
       image: ../../static/media/pillango.png
+      comingSoon: true

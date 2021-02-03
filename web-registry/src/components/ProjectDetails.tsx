@@ -217,6 +217,9 @@ const useStyles = makeStyles((theme: Theme) => ({
       marginBottom: `${theme.spacing(10)} !important`,
     },
   },
+  creditDetails: {
+    borderTop: `1px solid ${theme.palette.grey[100]}`,
+  },
 }));
 
 interface ProjectProps {
@@ -344,24 +347,26 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
       )} */}
 
       {!project.hideCreditDetails && (
-        <div className={`${classes.projectDetails} ${classes.projectContent}`}>
-          {project.documents.length > 0 ? (
-            <MrvTabs
-              tabs={[
-                {
-                  label: 'Overview',
-                  children: creditDetails,
-                },
-                {
-                  label: 'Documentation',
-                  children: <Table rows={project.documents} />,
-                },
-              ]}
-              background={background}
-            />
-          ) : (
-            creditDetails
-          )}
+        <div className={classes.creditDetails}>
+          <div className={`${classes.projectDetails} ${classes.projectContent}`}>
+            {project.documents.length > 0 ? (
+              <MrvTabs
+                tabs={[
+                  {
+                    label: 'Overview',
+                    children: creditDetails,
+                  },
+                  {
+                    label: 'Documentation',
+                    children: <Table rows={project.documents} />,
+                  },
+                ]}
+                background={background}
+              />
+            ) : (
+              creditDetails
+            )}
+          </div>
         </div>
       )}
 

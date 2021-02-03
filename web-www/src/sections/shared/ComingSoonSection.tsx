@@ -35,6 +35,8 @@ const ComingSoonSection = () => {
             location
             area
             areaUnit
+            handle
+            comingSoon
             image {
               childImageSharp {
                 fixed(quality: 90) {
@@ -57,14 +59,35 @@ const ComingSoonSection = () => {
     <BackgroundImage Tag="section" fluid={imageData} backgroundColor={theme.palette.grey['50']}>
       <Section withSlider className={classes.root} title={content.header} titleVariant="subtitle1">
         <ProjectCards
-          projects={content.projects.map(({ name, image, location, area, areaUnit }) => ({
-            name,
-            area,
-            areaUnit,
-            comingSoon: true,
-            imgSrc: image.publicURL,
-            place: location,
-          }))}
+          projects={content.projects.map(
+            ({
+              handle,
+              name,
+              image,
+              location,
+              area,
+              areaUnit,
+              comingSoon,
+            }: {
+              handle?: string;
+              name: string;
+              area: string;
+              areaUnit: string;
+              location: string;
+              comingSoon: boolean;
+              image: {
+                publicURL: string;
+              };
+            }) => ({
+              name,
+              area,
+              areaUnit,
+              href: handle && `/registry/projects/${handle}`,
+              comingSoon,
+              imgSrc: image.publicURL,
+              place: location,
+            }),
+          )}
         />
       </Section>
     </BackgroundImage>

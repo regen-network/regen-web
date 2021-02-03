@@ -17,6 +17,9 @@ interface StyleProps {
 }
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
+  root: {
+    height: '100%',
+  },
   background: props => ({
     backgroundImage: `url(${props.imgSrc})`,
     backgroundRepeat: 'no-repeat',
@@ -92,7 +95,7 @@ export default function ProjectImpactCard({
   const classes = useStyles({ imgSrc });
 
   return (
-    <Card>
+    <Card className={classes.root}>
       <div className={classes.background}>
         <div className={classes.tag}>{monitored ? 'primary impact' : 'co-benefit'}</div>
         <Title variant="h3" className={classes.title}>

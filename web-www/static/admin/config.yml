@@ -552,7 +552,7 @@ collections:
                   - {label: "Url", name: url, widget: string}
                   - {label: "Image", name: image, widget: image}
                   - {label: "Description", name: description, widget: text}
-          - label: "Coming Soon Section"
+          - label: "Projects"
             name: "comingSoonSection"
             widget: "object"
             fields:
@@ -563,10 +563,12 @@ collections:
                 collapsed: false
                 fields:
                   - {label: "Name", name: name, widget: string}
+                  - {required: false, label: "id (e.g. \"wilmot\", this is the last part of the project page URL)", name: handle, widget: string}
                   - {label: "Location", name: location, widget: string}
                   - {label: "Area", name: area, widget: number}
                   - {label: "Area unit (acres or hectares)", name: areaUnit, widget: string}
                   - {label: "Image", name: image, widget: image}
+                  - {label: "Coming soon", name: comingSoon, widget: boolean}
       - label: "Case studies"
         name: "case-studies"
         file: "web-www/content/case-studies/index.yaml"

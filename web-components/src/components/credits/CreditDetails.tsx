@@ -34,7 +34,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   root: props => ({
     backgroundImage: props.background ? `url("${props.background}")` : 'transparent',
     backgroundSize: 'cover',
-    border: props.background ? `1px solid ${theme.palette.info.light}` : 'none',
+    border: props.background ? `1px solid ${theme.palette.secondary.contrastText}` : 'none',
     borderRadius: props.background ? '5px' : 'none',
     position: 'relative',
     [theme.breakpoints.up('sm')]: {

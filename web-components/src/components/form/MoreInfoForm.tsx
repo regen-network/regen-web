@@ -8,7 +8,8 @@ import axios from 'axios';
 import Title from '../title';
 import TextField from '../inputs/TextField';
 import { requiredMessage, validateEmail, invalidEmailMessage } from '../inputs/validation';
-import NumberTextField from '../inputs/NumberTextField';
+import CheckboxGroup from '../inputs/CheckboxGroup';
+import SelectTextField from '../inputs/SelectTextField';
 import Submit from './Submit';
 
 interface MoreInfoFormProps {
@@ -22,6 +23,8 @@ interface Values {
   email: string;
   name: string;
   orgName: string;
+  projectTypes: string[];
+  onBehalfOf: string;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -68,6 +71,8 @@ export default function MoreInfoForm({ onClose, onSubmit, apiUrl }: MoreInfoForm
           name: '',
           orgName: '',
           email: '',
+          projectTypes: [],
+          onBehalfOf: 'Consumer/Individual/myself',
         }}
         validate={(values: Values) => {
           const errors: Partial<Values> = {};
@@ -81,7 +86,10 @@ export default function MoreInfoForm({ onClose, onSubmit, apiUrl }: MoreInfoForm
           }
           return errors;
         }}
-        onSubmit={({ budget, email, name, orgName }, { setSubmitting, setStatus }) => {
+        onSubmit={(
+          { budget, email, name, orgName, onBehalfOf, projectTypes },
+          { setSubmitting, setStatus },
+        ) => {
           setSubmitting(true);
           const apiUri: string = apiUrl;
           axios
@@ -89,7 +97,8 @@ export default function MoreInfoForm({ onClose, onSubmit, apiUrl }: MoreInfoForm
               budget,
               email,
               name,
-              orgName,
+              projectTypes,
+              onBehalfOf,
             })
             .then(resp => {
               setSubmitting(false);
@@ -105,6 +114,7 @@ export default function MoreInfoForm({ onClose, onSubmit, apiUrl }: MoreInfoForm
         }}
       >
         {({ values, errors, submitForm, isSubmitting, isValid, submitCount, status }) => {
+          console.log(values);
           return (
             <div>
               <Form className={classes.form} translate="yes">
@@ -130,13 +140,19 @@ export default function MoreInfoForm({ onClose, onSubmit, apiUrl }: MoreInfoForm
                 <Grid container alignItems="center" className={classes.textField}>
                   <Grid item xs={6}>
                     <Field
-                      component={NumberTextField}
-                      name="budget"
-                      adornment="$"
-                      min={1}
-                      arrows={false}
+                      options={[
+                        { value: '<$500', label: '<$500' },
+                        { value: '$501 - $1,000', label: '$501 - $1,000' },
+                        { value: '$1,001 - $5,000', label: '$1,001 - $5,000' },
+                        { value: '$5,001 - $10,000', label: '$5,001 - $10,000' },
+                        { value: '$10,001 - $50,000', label: '$10,001 - $50,000' },
+                        { value: '$50,001 - $100,000', label: '$50,001 - $100,000' },
+                        { value: '$100,001 - $500,000', label: '$100,001 - $500,000' },
+                        { value: '$500,001+', label: '$500,001+' },
+                      ]}
+                      component={SelectTextField}
                       label="Budget"
-                      transformValue={(v: number): number => Math.max(1, v)}
+                      name="budget"
                       optional
                     />
                   </Grid>
@@ -144,6 +160,62 @@ export default function MoreInfoForm({ onClose, onSubmit, apiUrl }: MoreInfoForm
                     <Typography className={classes.usd}>USD</Typography>
                   </Grid>
                 </Grid>
+                <div>
+                  <Field
+                    component={CheckboxGroup}
+                    name="projectTypes"
+                    className={classes.textField}
+                    label="Which types of carbon credits projects are you interested in?"
+                    options={[
+                      {
+                        label: 'All nature based carbon credits',
+                        value: 'All nature based carbon credits',
+                      },
+                      {
+                        label: 'Forestry-based credits',
+                        value: 'Forestry-based credits',
+                      },
+                      {
+                        label: 'Grasslands-based credits',
+                        value: 'Grasslands-based credits',
+                      },
+                      {
+                        label: 'Cropland-based credits',
+                        value: 'Cropland-based credits',
+                      },
+                    ]}
+                  />
+                </div>
+                <div>
+                  <Field
+                    className={classes.textField}
+                    options={[
+                      {
+                        label: 'Consumer/Individual/myself',
+                        value: 'Consumer/Individual/myself',
+                      },
+                      {
+                        label: 'Small or Medium Sized Business',
+                        value: 'Small or Medium Sized Business',
+                      },
+                      {
+                        label: 'Nonprofit',
+                        value: 'Nonprofit',
+                      },
+                      {
+                        label: 'Large Corporation',
+                        value: 'Large Corporation',
+                      },
+                      {
+                        label: 'Crypto Organization',
+                        value: 'Crypto Organization',
+                      },
+                    ]}
+                    component={SelectTextField}
+                    label="I am interested in buying carbon credits on behalf of:"
+                    name="onBehalfOf"
+                  />
+                </div>
               </Form>
               <Submit
                 isSubmitting={isSubmitting}

@@ -345,7 +345,7 @@
         }
       },
       "shortDescription": "Wongella is a 3,916 hectare property located in the South Burnett region of Queensland, Australia. At the time of purchase in 2017, the property was heavily degraded and the current management team set out to restore and regenerate the landscape while producing climate friendly grass fed beef.",
-      "longDescription": "<p>The previous land use was plantation forestry that the prior land managers cleared and burnt when the plantation failed. When the property was purchased in 2017, the landscape was heavily degraded with little to no working infrastructure. The current management team has set about regenerating the natural assets and turn the property into an ecologically functioning, climate positive beef enterprise.</p><p>Understanding the needs of a landscape starts with a custodial approach, one that embraces the whole system and speaks of the interactive relationship of soil, water, plants and animals. At Wongella the journey to restoration began with embracing this approach and applying practices and principles of regenerative agriculture to realise the potential for a sustainable eco-agricultural production enterprise. </p><p>These keystone practices centre on enhancing on-farm soil health and plant biodiversity, minimising the use of synthetic chemical and fertiliser use, minimising soil disturbance, maximising year-round ground cover and the introduction of time-controlled (regenerative) livestock grazing.</p>",
+      "longDescription": "<p>Dan Carney and the Wongella team understand the needs of a landscape starts with a custodial approach, one that embraces the whole system and speaks of the interactive relationship of soil, water, plants and animals. At Wongella the journey to restoration began with embracing this approach and applying practices and principles of regenerative agriculture to realise the potential for a sustainable eco-agricultural production enterprise. </p><p>These keystone practices centre on enhancing on-farm soil health and plant biodiversity, minimising the use of synthetic chemical and fertiliser use, minimising soil disturbance, maximising year-round ground cover and the introduction of time-controlled (regenerative) livestock grazing.</p>",
       "media": [
         {
           "src": "https://regen-registry.s3.amazonaws.com/projects/wongella/image1.jpg",
@@ -853,6 +853,161 @@
         "description": "Livestock grazing covers over 3.3 billion hectares, or 25 percent of the world’s land area. Managed grazing practices can reverse land degradation, enhance net carbon sequestration, and improve soil and vegetation quality.<br><br>Under managed grazing, carbon sequestration potential is estimated between 16.4 and 26 Gt CO2e sequestered in the period between 2020-2050.<br><br>This credit is designed to significantly increase the amount of hectares under managed grazing worldwide. To that end, the methodology relies on remote sensing to substantially reduce the cost of monitoring carbon sequestration while maintaining scientific rigor.",
         "tag": "soil organic carbon"
       }
-    }
+    },
+     {
+      "id": "pillango",
+      "name": "Pillango",
+      "documents": [],
+      "fieldsOverride": {
+        "nonMonitoredImpact": {
+          "title": "Co-benefits"
+        }
+      },
+      "glanceImgSrc": "https://regen-registry.s3.amazonaws.com/projects/pillango/pillango-map.png",
+      "glanceText": [
+        "Removed from commodity crop production.",
+        "Implementing regenerative agriculture and rewilding land to restore grasslands and rebuild carbon stocks."
+      ],
+      "place": {
+        "region": "Wallace County",
+        "state": "Kansas",
+        "country": "United States"
+      },
+      "hideCreditDetails": false,
+      "type": "Farm",
+      "area": 1101,
+      "areaUnit": "acres",
+      "developer": {
+        "name": "The Provenance Co.",
+        "type": "organization",
+        "place": {
+          "city": "Lawrence",
+          "state": "Kansas",
+          "country": "United States"
+        },
+        "imgSrc": "https://regen-registry.s3.amazonaws.com/projects/pillango/provenance-logo.png",
+        "description": "The Provenance Co. partners with impact investors to deliver climate resilience with investor worthy returns by unleashing the awesome carbon sequestering power of America’s Great Plains."
+      },
+      "broker": {
+        "name": "Regen Network Development, Inc.",
+        "type": "organization",
+        "place": {
+          "state": "Massachussetts",
+          "country": "United States"
+        },
+        "imgSrc": "https://regen-registry.s3.amazonaws.com/regen-logo-green.svg",
+        "description": "Regen Network realigns the agricultural economy with ecological health by creating the global marketplace for planetary stewardship."
+      },
+      "tagline": "The Provenance Co. is leading the Pillango Project to restore its carbon sequestering capacity",
+      "quote": {
+        "text": "     Restoring health to agricultural land and economies goes hand-in-hand with restoring local and indigenous rural communities. This is the story of the Pillango Project.  Restoring Pillango will be a journey filled with hard work, high emotions, and dusty days, and I am thrilled to have the opportunity to learn what the potential of this awesome landscape can be.",
+        "person": {
+          "name": "Julie Mettenburg",
+          "role": "The Provenance Co., Head of Land Regeneration"
+        }
+      },
+      "shortDescription": "The Pillango Project is a 1,101 hectare landscape rooted in an area that was once the world's second largest temperate indigenous grassland, the Great Plains of the U.S. Located in Wallace County, Kansas, Pillango resides at an altitude of 1,059m above sea level and receives an average annual rainfall of approximately 508mm. Pillango is situated in an area of the U.S. that has geographic significance due to its location above the Ogallala Aquifer, a vital water source that is rapidly depleting. In its original prairie form, the landscape was a herbaceous grassland rooted with native shortgrass prairie perennials. Over the last ten to fifteen years, the land has been cultivated as dryland corn and wheat. This has led to soil degradation, characterized by diminished carbon and water storage capacity. Despite this, the landscape has produced cropland-worthy yields under low rainfall conditions for multiple years, illustrating the underlying potential of its native soil bed.",
+      "longDescription": "<p>When Pillango’s owner Will sought to transition his Kansas cropland into climate beneficial production in 2019, he partnered with The Provenance Co (TPC). TPC is led by founders Julie and Leslie, siblings who grew up raising livestock on Kansas land. Julie and Leslie bring their institutional knowledge of regenerative agriculture and on-the-ground management experience to bear on the two biggest challenges properties like Pillango face when transitioning: degraded soil and lack of infrastructure to sustain animal, human and microbial life. Together, Will, Julie, and Leslie have been united in the philosophy that in order to restore life underground, one must simultaneously restore life above ground. TPC began implementing their proprietary land stewardship protocol, Regenerative Rewilding ®, in January of 2021.</p><p>In June of 2020, TPC began to work towards returning both human and animal life to Pillango. Jodi, an experienced farming practitioner raised on the fierce Western Kansas landscape, is the onsite crew leader. Dan, trained as an organic soil specialist, and Roberto, an expert herdsman with 20+ years of ranching experience, oversee livestock movement across Pillango land. Together, Jodi, Dan, and Roberto marry animal impact with soil restoration to rebuild the land's carbon sequestration stores. The onsite TPC team also includes Dan's wife, Cole, and their two children.</p>",
+      "media": [
+        {
+          "src": "https://regen-registry.s3.amazonaws.com/projects/pillango/image1.png",
+          "type": "image"
+        },
+        {
+          "src": "https://regen-registry.s3.amazonaws.com/projects/pillango/image2.png",
+          "type": "image"
+        },
+        {
+          "src": "https://regen-registry.s3.amazonaws.com/projects/pillango/image3.png",
+          "type": "image"
+        },
+        {
+          "src": "https://regen-registry.s3.amazonaws.com/projects/pillango/image4.png",
+          "type": "image"
+        },
+        {
+          "src": "https://regen-registry.s3.amazonaws.com/projects/pillango/Pillango+Promotional+Video.mp4",
+          "preview": "https://regen-registry.s3.amazonaws.com/projects/pillango/video-preview.png",
+          "type": "video"
+        }
+      ],
+      "sdgs": [
+        {
+          "imageUrl": "https://regen-registry.s3.amazonaws.com/sdgs/sdg2.svg",
+          "title": "200k kg protein production"
+        },
+        {
+          "imageUrl": "https://regen-registry.s3.amazonaws.com/sdgs/sdg13.svg",
+          "title": "6.07 tons CO2e"
+        },
+        {
+          "imageUrl": "https://regen-registry.s3.amazonaws.com/sdgs/sdg15.svg",
+          "title": "28% increase in NDVI (vegetation health) "
+        }
+      ],
+      "image": "https://regen-registry.s3.amazonaws.com/projects/wilmot/Image.png",
+      "map": "https://regen-registry.s3.amazonaws.com/projects/pillango/Pillango_1.kml",
+      "keyOutcomesActivities": [
+        "Independently verified",
+        "Unique - avoiding double issuance through GIS tracking",
+        "Real - GHG impact is quantifiable and verifiable",
+        "Measurable - each credit represents one ton of CO2e",
+        "Permanent - 25 year period through reversal buffer or covenant",
+        "Additional - a new practice adopted from pre-approved list",
+        "Leakage - de minimis in agricultural land management"
+      ],
+      "landManagementActions": [
+        {
+          "actions": [
+            {
+              "name": "Regenerative agriculture",
+              "description": "The Provenance Co’s proprietary Regenerative Rewilding® protocol implements the five principles of Regenerative Agriculture: Minimize soil disturbance, maximize crop diversity, keep the soil covered, maintain living roots year-round, and integrate livestock.",
+              "imgSrc": "https://regen-registry.s3.amazonaws.com/projects/pillango/regenerative-agriculture.png"
+            },
+            {
+              "name": "Rewilding",
+              "description": "The Provenance Co’s proprietary Regenerative Rewilding® protocl uses wild herd behaviour and dynamics as a model for agricultural production. The protocol aims to mimic key elements of wild herd activity to physically work the soil, as required for regeneration. Doing so allows TPC to achieve the animal concentration required to jumpstart sequestering mechanisms in the soil, in a manner that honors the animal's instinctive nature.",
+              "imgSrc": "https://regen-registry.s3.amazonaws.com/projects/pillango/rewilding.png"
+            },
+            {
+              "name": "Risk Management",
+              "description": "The Provenance Co’s proprietary Regenerative Rewilding® protocol aims to reduce the financial risk farming poses while optimizing carbon sequestration. When captured and measured, carbon stores can be monetized, offsetting some financial risk for farmers. Marrying carbon sequestration outcomes to land productivity and financial health allows TPC to better align systemic farming risk with real climate impact.",
+              "imgSrc": "https://regen-registry.s3.amazonaws.com/projects/pillango/risk-management.png"
+            }
+          ]
+        }
+      ],
+      "impact": [
+        {
+          "name": "Soil Organic Carbon",
+          "description": "Organic matter contributes to nutrient retention and turnover, soil structure, moisture retention and availability, degradation of pollutants, carbon sequestration and soil resilience.",
+          "monitored": true,
+          "imgSrc": "https://regen-registry.s3.amazonaws.com/projects/wilmot/impact1.png"
+        },
+        {
+          "name": "Animal Welfare",
+          "description": "Animal welfare is an important component in a well managed grazing enterprise. Low stress stock handling techniques have been adopted to ensure animals have higher quality life.",
+          "monitored": false,
+          "imgSrc": "https://regen-registry.s3.amazonaws.com/projects/wilmot/impact2.png"
+        },
+        {
+          "name": "Ecosystem Health",
+          "description": "In the ecological realm, ‘health’ is characterized by system integrity and the exhibition of certain fundamental properties of self-organizing complex systems.",
+          "monitored": false,
+          "imgSrc": "https://regen-registry.s3.amazonaws.com/projects/wilmot/impact3.png"
+        },
+        {
+          "name": "Soil Health",
+          "description": "The capacity of soil to function as a vital living ecosystem that sustains plants, animals, and humans.",
+          "monitored": false,
+          "imgSrc": "https://regen-registry.s3.amazonaws.com/projects/wilmot/impact4.png"
+        }
+      ],
+      "creditClass": {
+        "name": "CarbonPlus Grasslands",
+        "description": "Livestock grazing covers over 3.3 billion hectares, or 25 percent of the world’s land area. Managed grazing practices can reverse land degradation, enhance net carbon sequestration, and improve soil and vegetation quality.<br><br>Under managed grazing, carbon sequestration potential is estimated between 16.4 and 26 Gt CO2e sequestered in the period between 2020-2050.<br><br>This credit is designed to significantly increase the amount of hectares under managed grazing worldwide. To that end, the methodology relies on remote sensing to substantially reduce the cost of monitoring carbon sequestration while maintaining scientific rigor.",
+        "tag": "soil organic carbon"
+      }
+    } 
   ]
 }

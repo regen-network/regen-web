@@ -31,8 +31,8 @@ export interface Project {
   type: string;
   area: number;
   areaUnit: string;
-  developer: User;
-  steward: User;
+  developer?: User;
+  steward?: User;
   owner?: User;
   broker?: User;
   shortDescription: string;

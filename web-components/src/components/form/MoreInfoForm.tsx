@@ -20,7 +20,7 @@ interface MoreInfoFormProps {
 }
 
 interface Values {
-  budget: number | undefined;
+  budget: string;
   email: string;
   name: string;
   orgName: string;
@@ -68,15 +68,21 @@ export default function MoreInfoForm({ onClose, onSubmit, apiUrl }: MoreInfoForm
       </Description> */}
       <Formik
         initialValues={{
-          budget: undefined,
+          budget: '',
           name: '',
           orgName: '',
           email: '',
           projectTypes: [],
-          onBehalfOf: 'Consumer/Individual/myself',
+          onBehalfOf: '',
         }}
         validate={(values: Values) => {
-          const errors: Partial<Values> = {};
+          const errors: {
+            email?: string;
+            name?: string;
+            budget?: string;
+            onBehalfOf?: string;
+            projectTypes?: string;
+          } = {};
           if (!values.email) {
             errors.email = requiredMessage;
           } else if (!validateEmail(values.email)) {
@@ -84,6 +90,15 @@ export default function MoreInfoForm({ onClose, onSubmit, apiUrl }: MoreInfoForm
           }
           if (!values.name) {
             errors.name = requiredMessage;
+          }
+          if (!values.budget) {
+            errors.budget = requiredMessage;
+          }
+          if (!values.onBehalfOf) {
+            errors.onBehalfOf = requiredMessage;
+          }
+          if (!values.projectTypes.length) {
+            errors.projectTypes = requiredMessage;
           }
           return errors;
         }}
@@ -115,7 +130,6 @@ export default function MoreInfoForm({ onClose, onSubmit, apiUrl }: MoreInfoForm
         }}
       >
         {({ values, errors, submitForm, isSubmitting, isValid, submitCount, status }) => {
-          console.log(values);
           return (
             <div>
               <Form className={classes.form} translate="yes">
@@ -142,6 +156,7 @@ export default function MoreInfoForm({ onClose, onSubmit, apiUrl }: MoreInfoForm
                   <Grid item xs={6}>
                     <Field
                       options={[
+                        { value: '', label: '' },
                         { value: '<$500', label: '<$500' },
                         { value: '$501 - $1,000', label: '$501 - $1,000' },
                         { value: '$1,001 - $5,000', label: '$1,001 - $5,000' },
@@ -154,7 +169,6 @@ export default function MoreInfoForm({ onClose, onSubmit, apiUrl }: MoreInfoForm
                       component={SelectTextField}
                       label="Budget"
                       name="budget"
-                      optional
                     />
                   </Grid>
                   <Grid item xs={6}>
@@ -191,6 +205,10 @@ export default function MoreInfoForm({ onClose, onSubmit, apiUrl }: MoreInfoForm
                   <Field
                     className={classes.textField}
                     options={[
+                      {
+                        label: '',
+                        value: '',
+                      },
                       {
                         label: 'Consumer/Individual/myself',
                         value: 'Consumer/Individual/myself',

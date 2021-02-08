@@ -32,6 +32,18 @@ const useStyles = makeStyles((theme: Theme) => ({
         fontSize: theme.spacing(3.5),
       },
     },
+    '& .MuiFormHelperText-root': {
+      fontWeight: 'bold',
+      [theme.breakpoints.up('sm')]: {
+        fontSize: theme.spacing(3.5),
+      },
+      [theme.breakpoints.down('xs')]: {
+        fontSize: theme.spacing(3),
+      },
+    },
+    '&.Mui-error': {
+      color: theme.palette.primary.contrastText,
+    },
   },
 }));
 
@@ -47,7 +59,7 @@ interface CheckboxGroupProps extends FieldProps {
 export default function CheckboxGroup({ label, options, ...props }: CheckboxGroupProps): JSX.Element {
   const classes = useStyles();
   const {
-    form: { setFieldValue },
+    form: { setFieldValue, errors },
     field: { name, value },
   } = props;
 
@@ -55,9 +67,9 @@ export default function CheckboxGroup({ label, options, ...props }: CheckboxGrou
     <FormControl className={`${classes.root} ${props.className}`}>
       <FormLabel>{label}</FormLabel>
       <FormGroup>
-        {options.map((opt, i) => (
+        {options.map((opt, index) => (
           <FormControlLabel
-            key={i}
+            key={index}
             control={
               <Checkbox
                 color="secondary"
@@ -81,6 +93,7 @@ export default function CheckboxGroup({ label, options, ...props }: CheckboxGrou
           />
         ))}
       </FormGroup>
+      {errors && errors[name] && <span className="MuiFormHelperText-root Mui-error">{errors[name]}</span>}
     </FormControl>
   );
 }

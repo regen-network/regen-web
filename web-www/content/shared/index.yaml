@@ -66,4 +66,5 @@ comingSoonSection:
       area: 1101
       areaUnit: acres
       image: ../../static/media/pillango.png
-      comingSoon: true
+      comingSoon: false
+      handle: pillango

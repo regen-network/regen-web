@@ -55,8 +55,9 @@ export default function CheckboxGroup({ label, options, ...props }: CheckboxGrou
     <FormControl className={`${classes.root} ${props.className}`}>
       <FormLabel>{label}</FormLabel>
       <FormGroup>
-        {options.map(opt => (
+        {options.map((opt, i) => (
           <FormControlLabel
+            key={i}
             control={
               <Checkbox
                 color="secondary"

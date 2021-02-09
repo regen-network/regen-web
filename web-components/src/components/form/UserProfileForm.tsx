@@ -1,9 +1,11 @@
 import React from 'react';
-import { Grid, makeStyles, Theme } from '@material-ui/core';
+import { Avatar, Box, Grid, makeStyles, Theme, Typography } from '@material-ui/core';
 import { Formik, Form, Field } from 'formik';
 import TextField from '../inputs/TextField';
+import PhoneInputField from '../inputs/PhoneInputField';
 import Title from '../title';
 import Submit from './Submit';
+import OutlinedButton from '../buttons/OutlinedButton';
 
 interface UserProfileFormProps {
   onClose: () => void;
@@ -22,6 +24,8 @@ const useStyles = makeStyles((theme: Theme) => ({
   root: {
     maxWidth: 560,
     margin: '0 auto',
+    display: 'flex',
+    alignItems: 'stretch',
   },
   title: {
     [theme.breakpoints.up('sm')]: {
@@ -29,6 +33,18 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     [theme.breakpoints.down('xs')]: {
       marginBottom: theme.spacing(4.75),
+    },
+  },
+  avatar: {
+    [theme.breakpoints.up('sm')]: {
+      height: theme.spacing(20),
+      width: theme.spacing(20),
+      marginRight: theme.spacing(5),
+    },
+    [theme.breakpoints.down('xs')]: {
+      height: theme.spacing(15),
+      width: theme.spacing(15),
+      marginRight: theme.spacing(3),
     },
   },
   formWrap: {
@@ -81,22 +97,35 @@ export default function UserProfileForm({ onClose, onSubmit, apiUrl }: UserProfi
           console.log('TODO: handle submit'); // eslint-disable-line
         }}
       >
-        {({ values, errors, submitForm, isSubmitting, isValid, submitCount, status }) => {
+        {({ values, errors, submitForm, isSubmitting, isValid, submitCount, setFieldValue, status }) => {
           console.log(values); //eslint-disable-line
           return (
             <>
               <div className={classes.formWrap}>
                 <Form className={classes.form} translate="yes">
                   <Field component={TextField} className={classes.textField} label="Full name" name="name" />
+
                   <Field
                     component={TextField}
+                    name="role"
                     className={classes.textField}
-                    label="Bio photo"
-                    name="photo"
-                    optional
+                    label="Role"
+                    // optional
                   />
+                  {/* TODO: the following will likely be replaced once the photo upload component is done and we can integrate with formik */}
+                  <>
+                    <h4>Bio Photo (optional)</h4>
+                    <Box display="flex" alignItems="center">
+                      <Avatar className={classes.avatar} />
+                      <div>
+                        <OutlinedButton>Upload Photo</OutlinedButton>
+                      </div>
+                    </Box>
+                  </>
+
                   <Field
-                    component={TextField}
+                    // component={TextField}
+                    component={PhoneInputField}
                     className={classes.textField}
                     label="Phone number"
                     name="phone"

@@ -32,6 +32,7 @@ import Admin from './components/Admin';
 import PostPurchase from './components/PostPurchase';
 import Certificate from './components/Certificate';
 import Seller from './components/Seller';
+import Signup from './components/Signup';
 
 export const history = createBrowserHistory();
 
@@ -280,6 +281,9 @@ const App: React.FC = (): JSX.Element => {
           </Route>
           <Route exact path="/verify-email">
             <VerifyEmail />
+          </Route>
+          <Route exact path="/signup">
+            <Signup />
           </Route>
           <Route exact path="/certificate">
             <Certificate />

@@ -42,15 +42,15 @@ const EyeIcon: React.FC<{ color?: string; visible?: boolean; className?: string 
             d="M0 7.91021C1.29537 3.90035 5.05898 1 9.5 1C13.941 1 17.7046 3.90035 19 7.91021C17.7046 11.9201 13.941 14.8204 9.5 14.8204C5.05898 14.8204 1.29537 11.9201 0 7.91021Z"
             fill={color}
           />
-          <circle cx="9.81979" cy="7.91025" r="3.29587" fill={color} stroke="white" stroke-width="1.5" />
+          <circle cx="9.81979" cy="7.91025" r="3.29587" fill={color} stroke="white" strokeWidth="1.5" />
           <line
             x1="3"
             y1="14.9393"
             x2="16.9393"
             y2="1"
             stroke={color}
-            stroke-width="1.5"
-            stroke-linecap="round"
+            strokeWidth="1.5"
+            strokeLinecap="round"
           />
         </SvgIcon>
       )}

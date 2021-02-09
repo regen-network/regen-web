@@ -2,7 +2,9 @@ import React from 'react';
 import { useTheme, makeStyles, Theme } from '@material-ui/core/styles';
 import { Formik, Form, Field } from 'formik';
 import Link from '@material-ui/core/Link';
+import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 import Title from '../title';
 import Description from '../description';
@@ -11,7 +13,13 @@ import ContainedButton from '../buttons/ContainedButton';
 import EyeIcon from '../icons/EyeIcon';
 import Card from '../cards/Card';
 import CheckboxLabel from '../inputs/CheckboxLabel';
-import { requiredMessage, validateEmail, invalidEmailMessage } from '../inputs/validation';
+import {
+  invalidPassword,
+  validatePassword,
+  requiredMessage,
+  validateEmail,
+  invalidEmailMessage,
+} from '../inputs/validation';
 
 interface LoginFormProps {
   link: string;
@@ -19,6 +27,8 @@ interface LoginFormProps {
   termsLink?: string;
   forgotPassword?: string;
   signup?: boolean;
+  recaptchaSiteKey?: string;
+  submit: (values: Partial<Values>) => Promise<void>;
 }
 
 interface Values {
@@ -26,6 +36,7 @@ interface Values {
   password: string;
   updates?: boolean;
   privacy?: boolean;
+  recaptcha?: string;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -50,7 +61,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: `${theme.spacing(4.75)} !important`,
     height: `${theme.spacing(4)} !important`,
     left: '2px',
-    top: 'calc(50% - 7px)',
+    top: 'calc(50% - 7px) !important',
   },
   checkboxLabel: {
     [theme.breakpoints.up('sm')]: {
@@ -80,8 +91,15 @@ const useStyles = makeStyles((theme: Theme) => ({
   forgotPassword: {
     fontSize: theme.spacing(3.5),
     fontWeight: 700,
+    cursor: 'pointer',
     color: theme.palette.secondary.main,
     float: 'right',
+    [theme.breakpoints.up('sm')]: {
+      paddingTop: theme.spacing(3.75),
+    },
+    [theme.breakpoints.down('xs')]: {
+      paddingTop: theme.spacing(1.25),
+    },
   },
   card: {
     [theme.breakpoints.up('sm')]: {
@@ -93,9 +111,32 @@ const useStyles = makeStyles((theme: Theme) => ({
       padding: `${theme.spacing(8.5)} ${theme.spacing(2.5)} ${theme.spacing(10)}`,
     },
   },
+  button: {
+    [theme.breakpoints.up('sm')]: {
+      marginTop: theme.spacing(8),
+    },
+    [theme.breakpoints.down('xs')]: {
+      marginTop: theme.spacing(6.25),
+    },
+  },
+  recaptcha: {
+    [theme.breakpoints.up('sm')]: {
+      marginTop: theme.spacing(7.75),
+    },
+    [theme.breakpoints.down('xs')]: {
+      marginTop: theme.spacing(4.75),
+    },
+  },
 }));
 
-const LoginForm: React.FC<LoginFormProps> = ({ signup = false, link, privacyLink, termsLink }) => {
+const LoginForm: React.FC<LoginFormProps> = ({
+  recaptchaSiteKey,
+  signup = false,
+  link,
+  privacyLink,
+  termsLink,
+  submit,
+}) => {
   const classes = useStyles();
   const theme = useTheme();
   const label: string = signup ? 'Sign up' : 'Log in';
@@ -116,13 +157,15 @@ const LoginForm: React.FC<LoginFormProps> = ({ signup = false, link, privacyLink
           updates: false,
           privacy: false,
           showPassword: false,
-          stay: false,
+          staySigned: false,
+          recaptcha: undefined,
         }}
         validate={(values: Values) => {
           const errors: {
             email?: string;
             password?: string;
             privacy?: string;
+            recaptcha?: string;
           } = {};
           if (!values.email) {
             errors.email = requiredMessage;
@@ -135,10 +178,22 @@ const LoginForm: React.FC<LoginFormProps> = ({ signup = false, link, privacyLink
           if (signup && !values.privacy) {
             errors.privacy = requiredMessage;
           }
+          if (signup && !validatePassword(values.password)) {
+            errors.password = invalidPassword;
+          }
+          if (!signup && !values.recaptcha) {
+            errors.recaptcha = requiredMessage;
+          }
           return errors;
         }}
-        onSubmit={({ email, password, updates, privacy }, { setSubmitting, setStatus }) => {
-          // setSubmitting(true);
+        onSubmit={async (values, { setSubmitting, setStatus }) => {
+          setSubmitting(true);
+          try {
+            await submit(values);
+            setSubmitting(false);
+          } catch (e) {
+            setSubmitting(false);
+          }
         }}
       >
         {({ values, errors, submitForm, isSubmitting, isValid, submitCount, setFieldValue, status }) => {
@@ -161,6 +216,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ signup = false, link, privacyLink
                   type={values.showPassword ? 'text' : 'password'}
                   label="Password"
                   name="password"
+                  helperText={errors.password}
                   endAdornment={
                     <IconButton
                       aria-label="toggle password visibility"
@@ -175,7 +231,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ signup = false, link, privacyLink
                     </IconButton>
                   }
                 />
-                {!signup && <div className={classes.forgotPassword}>Forgot password</div>}
+                {!signup && <Description className={classes.forgotPassword}>Forgot password</Description>}
               </Card>
               {signup ? (
                 <>
@@ -205,13 +261,27 @@ const LoginForm: React.FC<LoginFormProps> = ({ signup = false, link, privacyLink
                 <Field
                   component={CheckboxLabel}
                   type="checkbox"
-                  name="stay"
+                  name="staySigned"
                   label={<Description className={classes.checkboxLabel}>Stay signed in</Description>}
                 />
               )}
-              <ContainedButton disabled={(submitCount > 0 && !isValid) || isSubmitting}>
-                {label}
-              </ContainedButton>
+              {!signup && recaptchaSiteKey && (
+                <div className={classes.recaptcha}>
+                  <ReCAPTCHA
+                    onChange={value => setFieldValue('recaptcha', value)}
+                    sitekey={recaptchaSiteKey}
+                  />
+                </div>
+              )}
+              <Grid container justify="flex-end">
+                <ContainedButton
+                  onClick={submitForm}
+                  className={classes.button}
+                  disabled={(submitCount > 0 && !isValid) || isSubmitting}
+                >
+                  {label}
+                </ContainedButton>
+              </Grid>
             </Form>
           );
         }}

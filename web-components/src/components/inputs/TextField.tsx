@@ -13,7 +13,8 @@ interface RegenTextFieldProps extends TextFieldProps {
   children?: any;
   errors?: boolean;
   optional?: boolean;
-  adornment?: string;
+  startAdornment?: string;
+  endAdornment?: string;
   triggerOnChange?: (v: any) => Promise<void>;
   transformValue?: (v: any) => void;
 }
@@ -146,7 +147,8 @@ export default function RegenTextField({
   errors = false,
   optional = false,
   children,
-  adornment,
+  startAdornment,
+  endAdornment,
   ...props
 }: RegenTextFieldProps): JSX.Element {
   const classes = useStyles({ ...props, optional, errors });
@@ -158,7 +160,10 @@ export default function RegenTextField({
       className={`${classes.root} ${props.className}`}
       InputProps={{
         disableUnderline: true,
-        startAdornment: adornment ? <InputAdornment position="start">{adornment}</InputAdornment> : null,
+        startAdornment: startAdornment ? (
+          <InputAdornment position="start">{startAdornment}</InputAdornment>
+        ) : null,
+        endAdornment: endAdornment ? <InputAdornment position="end">{endAdornment}</InputAdornment> : null,
       }}
       InputLabelProps={{ focused: false, required: false }}
       fullWidth

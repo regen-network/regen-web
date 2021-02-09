@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 interface CheckboxLabelProps extends CheckboxProps {
-  label: string;
+  label: React.ReactNode;
 }
 
 export default function CheckboxLabel({ label, ...props }: CheckboxLabelProps): JSX.Element {

@@ -2377,11 +2377,6 @@ exports[`Storyshots Components|Form Login Form 1`] = `
         </span>
       </label>
       <div
-        className="makeStyles-recaptcha-613"
-      >
-        <div />
-      </div>
-      <div
         className="MuiGrid-root MuiGrid-container MuiGrid-justify-xs-flex-end"
       >
         <button

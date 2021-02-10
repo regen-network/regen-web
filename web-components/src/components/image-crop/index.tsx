@@ -84,10 +84,10 @@ export default function ImageCrop({
 
   const showCroppedImage = useCallback(async () => {
     try {
-      const croppedImg = await getCroppedImg(image, croppedAreaPixels);
+      const croppedImg = await getCroppedImg(image, croppedAreaPixels, rotation);
       onCropSubmit(croppedImg);
     } catch (e) {}
-  }, [croppedAreaPixels, image, onCropSubmit]);
+  }, [croppedAreaPixels, image, rotation, onCropSubmit]);
 
   return (
     <div className={classes.root}>

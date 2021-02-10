@@ -876,7 +876,7 @@
       "hideCreditDetails": false,
       "type": "Farm",
       "area": 1101,
-      "areaUnit": "acres",
+      "areaUnit": "hectares",
       "developer": {
         "name": "The Provenance Co.",
         "type": "organization",

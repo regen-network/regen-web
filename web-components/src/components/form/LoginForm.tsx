@@ -17,6 +17,7 @@ import {
   invalidPassword,
   validatePassword,
   requiredMessage,
+  requirementAgreement,
   validateEmail,
   invalidEmailMessage,
 } from '../inputs/validation';
@@ -127,6 +128,14 @@ const useStyles = makeStyles((theme: Theme) => ({
       marginTop: theme.spacing(4.75),
     },
   },
+  checkboxes: {
+    [theme.breakpoints.up('sm')]: {
+      paddingLeft: theme.spacing(11),
+    },
+    [theme.breakpoints.down('xs')]: {
+      paddingLeft: theme.spacing(6),
+    },
+  },
 }));
 
 const LoginForm: React.FC<LoginFormProps> = ({
@@ -176,7 +185,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
             errors.password = requiredMessage;
           }
           if (signup && !values.privacy) {
-            errors.privacy = requiredMessage;
+            errors.privacy = requirementAgreement;
           }
           if (signup && !validatePassword(values.password)) {
             errors.password = invalidPassword;
@@ -233,46 +242,48 @@ const LoginForm: React.FC<LoginFormProps> = ({
                 />
                 {!signup && <Description className={classes.forgotPassword}>Forgot password</Description>}
               </Card>
-              {signup ? (
-                <>
+              <div className={classes.checkboxes}>
+                {signup ? (
+                  <>
+                    <Field
+                      component={CheckboxLabel}
+                      type="checkbox"
+                      name="updates"
+                      label={
+                        <Description className={classes.checkboxLabel}>
+                          Please sign me up for the Regen news and updates (unsubscribe anytime)
+                        </Description>
+                      }
+                    />
+                    <Field
+                      component={CheckboxLabel}
+                      type="checkbox"
+                      name="privacy"
+                      label={
+                        <Description className={classes.checkboxLabel}>
+                          I agree to the Regen Network <Link href={privacyLink}>Privacy Policy</Link> and{' '}
+                          <Link href={termsLink}>Terms of Service</Link>
+                        </Description>
+                      }
+                    />
+                  </>
+                ) : (
                   <Field
                     component={CheckboxLabel}
                     type="checkbox"
-                    name="updates"
-                    label={
-                      <Description className={classes.checkboxLabel}>
-                        Please sign me up for the Regen news and updates (unsubscribe anytime)
-                      </Description>
-                    }
+                    name="staySigned"
+                    label={<Description className={classes.checkboxLabel}>Stay signed in</Description>}
                   />
-                  <Field
-                    component={CheckboxLabel}
-                    type="checkbox"
-                    name="privacy"
-                    label={
-                      <Description className={classes.checkboxLabel}>
-                        I agree to the Regen Network <Link href={privacyLink}>Privacy Policy</Link> and{' '}
-                        <Link href={termsLink}>Terms of Service</Link>
-                      </Description>
-                    }
-                  />
-                </>
-              ) : (
-                <Field
-                  component={CheckboxLabel}
-                  type="checkbox"
-                  name="staySigned"
-                  label={<Description className={classes.checkboxLabel}>Stay signed in</Description>}
-                />
-              )}
-              {!signup && recaptchaSiteKey && (
-                <div className={classes.recaptcha}>
-                  <ReCAPTCHA
-                    onChange={value => setFieldValue('recaptcha', value)}
-                    sitekey={recaptchaSiteKey}
-                  />
-                </div>
-              )}
+                )}
+                {!signup && recaptchaSiteKey && (
+                  <div className={classes.recaptcha}>
+                    <ReCAPTCHA
+                      onChange={value => setFieldValue('recaptcha', value)}
+                      sitekey={recaptchaSiteKey}
+                    />
+                  </div>
+                )}
+              </div>
               <Grid container justify="flex-end">
                 <ContainedButton
                   onClick={submitForm}

@@ -6775,6 +6775,11 @@
   resolved "https://registry.yarnpkg.com/@turist/time/-/time-0.0.1.tgz#57637d2a7d1860adb9f9cecbdcc966ce4f551d63"
   integrity sha512-M2BiThcbxMxSKX8W4z5u9jKZn6datnM3+FpEU+eYw0//l31E2xhqi7vTAuJ/Sf0P3yhp66SDJgPu3bRRpvrdQQ==
 
+"@types/auth0-js@^9.14.2":
+  version "9.14.2"
+  resolved "https://registry.yarnpkg.com/@types/auth0-js/-/auth0-js-9.14.2.tgz#63394e5c21c032e5f23b4037c18a6c05bd7136bb"
+  integrity sha512-ypGWMctsVMZrteTU6fnvl/jXUhN36I+DsEDfrpzldSRPdmtMqvuqMyY/MzmtvmN+cp0WzYptdvzKMOGheC5dfA==
+
 "@types/babel__core@^7.1.0":
   version "7.1.2"
   resolved "https://registry.yarnpkg.com/@types/babel__core/-/babel__core-7.1.2.tgz#608c74f55928033fce18b99b213c16be4b3d114f"

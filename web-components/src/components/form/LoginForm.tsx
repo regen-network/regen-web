@@ -29,10 +29,10 @@ interface LoginFormProps {
   forgotPassword?: string;
   signup?: boolean;
   recaptchaSiteKey?: string;
-  submit: (values: Partial<Values>) => Promise<void>;
+  submit: (values: Values) => Promise<void>;
 }
 
-interface Values {
+export interface Values {
   email: string;
   password: string;
   updates?: boolean;

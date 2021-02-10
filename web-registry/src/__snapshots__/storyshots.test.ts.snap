@@ -1157,7 +1157,7 @@ exports[`Storyshots Components|Certificate Certificate 1`] = `
         <br />
         Date: 
         <b>
-          October 9, 2020
+          October 10, 2020
         </b>
       </div>
       <div
@@ -1446,112 +1446,10 @@ exports[`Storyshots Components|Credits Credits Gauge 1`] = `
 </div>
 `;
 
-exports[`Storyshots Components|Crop Image Modal Add Round Image 1`] = `
-<div>
-  <div>
-    <label
-      aria-disabled={false}
-      className="MuiButtonBase-root MuiButton-root MuiButton-contained"
-      onBlur={[Function]}
-      onDragLeave={[Function]}
-      onFocus={[Function]}
-      onKeyDown={[Function]}
-      onKeyUp={[Function]}
-      onMouseDown={[Function]}
-      onMouseLeave={[Function]}
-      onMouseUp={[Function]}
-      onTouchEnd={[Function]}
-      onTouchMove={[Function]}
-      onTouchStart={[Function]}
-      role="button"
-      tabIndex={0}
-    >
-      <span
-        className="MuiButton-label"
-      >
-        Add Image
-        <input
-          accept="image/*"
-          hidden={true}
-          onChange={[Function]}
-          type="file"
-        />
-      </span>
-      <span
-        className="MuiTouchRipple-root"
-      />
-    </label>
-    <div
-      className="MuiPaper-root MuiCard-root MuiPaper-elevation1 MuiPaper-rounded"
-      style={
-        Object {
-          "height": 200,
-          "marginTop": 32,
-          "width": 200,
-        }
-      }
-    >
-      
-    </div>
-  </div>
-</div>
-`;
-
-exports[`Storyshots Components|Crop Image Modal Add Square Image 1`] = `
-<div>
-  <div>
-    <label
-      aria-disabled={false}
-      className="MuiButtonBase-root MuiButton-root MuiButton-contained"
-      onBlur={[Function]}
-      onDragLeave={[Function]}
-      onFocus={[Function]}
-      onKeyDown={[Function]}
-      onKeyUp={[Function]}
-      onMouseDown={[Function]}
-      onMouseLeave={[Function]}
-      onMouseUp={[Function]}
-      onTouchEnd={[Function]}
-      onTouchMove={[Function]}
-      onTouchStart={[Function]}
-      role="button"
-      tabIndex={0}
-    >
-      <span
-        className="MuiButton-label"
-      >
-        Add Image
-        <input
-          accept="image/*"
-          hidden={true}
-          onChange={[Function]}
-          type="file"
-        />
-      </span>
-      <span
-        className="MuiTouchRipple-root"
-      />
-    </label>
-    <div
-      className="MuiPaper-root MuiCard-root MuiPaper-elevation1 MuiPaper-rounded"
-      style={
-        Object {
-          "height": 200,
-          "marginTop": 32,
-          "width": 200,
-        }
-      }
-    >
-      
-    </div>
-  </div>
-</div>
-`;
-
 exports[`Storyshots Components|Description Description 1`] = `
 <div>
   <div
-    className="MuiTypography-root makeStyles-root-383 makeStyles-root-384 MuiTypography-body1"
+    className="MuiTypography-root makeStyles-root-371 makeStyles-root-372 MuiTypography-body1"
   >
     Sheoak Hill, 60km west of Melbourne, has the potential to revolutionise how our natural areas are funded to be restored and maintained in perpetuity. The concept is underpinned by the power of values-aligned landholders working collaboratively to purchase and lovingly maintain manageable areas (40ha) of covented bushland and work toward a common goal.
   </div>
@@ -1561,27 +1459,27 @@ exports[`Storyshots Components|Description Description 1`] = `
 exports[`Storyshots Components|FAQ Category 1`] = `
 <div>
   <div
-    className="MuiPaper-root MuiCard-root makeStyles-root-428 makeStyles-root-429 makeStyles-root-425 makeStyles-root-427 MuiPaper-elevation1 MuiPaper-rounded"
+    className="MuiPaper-root MuiCard-root makeStyles-root-416 makeStyles-root-417 makeStyles-root-413 makeStyles-root-415 MuiPaper-elevation1 MuiPaper-rounded"
   >
     <h6
-      className="MuiTypography-root makeStyles-root-430 makeStyles-title-426 MuiTypography-h6 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+      className="MuiTypography-root makeStyles-root-418 makeStyles-title-414 MuiTypography-h6 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
     >
       tech
     </h6>
     <div
-      className="makeStyles-root-431 makeStyles-root-438"
+      className="makeStyles-root-419 makeStyles-root-426"
     >
       <div
-        className="makeStyles-container-432"
+        className="makeStyles-container-420"
       >
         <h5
-          className="MuiTypography-root makeStyles-root-430 makeStyles-question-433 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+          className="MuiTypography-root makeStyles-root-418 makeStyles-question-421 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
           onClick={[Function]}
         >
           Why do you need a blockchain?
           <svg
             aria-hidden={true}
-            className="MuiSvgIcon-root makeStyles-icon-434 makeStyles-root-439 makeStyles-root-440"
+            className="MuiSvgIcon-root makeStyles-icon-422 makeStyles-root-427 makeStyles-root-428"
             focusable="false"
             viewBox="0 0 33 20"
           >
@@ -1602,29 +1500,29 @@ exports[`Storyshots Components|FAQ Category 1`] = `
           </svg>
         </h5>
         <div
-          className="makeStyles-answer-437 makeStyles-collapsed-436"
+          className="makeStyles-answer-425 makeStyles-collapsed-424"
         >
           The Regen Ledger provides the project three key elements, without which Regen Network’s promise to create a network dedicated to monitoring, verifying and contracting or paying for ecological
           <div
-            className="makeStyles-gradient-435"
+            className="makeStyles-gradient-423"
           />
         </div>
       </div>
     </div>
     <div
-      className="makeStyles-root-431 makeStyles-root-441"
+      className="makeStyles-root-419 makeStyles-root-429"
     >
       <div
-        className="makeStyles-container-432"
+        className="makeStyles-container-420"
       >
         <h5
-          className="MuiTypography-root makeStyles-root-430 makeStyles-question-433 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+          className="MuiTypography-root makeStyles-root-418 makeStyles-question-421 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
           onClick={[Function]}
         >
           Why do you need a token?
           <svg
             aria-hidden={true}
-            className="MuiSvgIcon-root makeStyles-icon-434 makeStyles-root-439 makeStyles-root-442"
+            className="MuiSvgIcon-root makeStyles-icon-422 makeStyles-root-427 makeStyles-root-430"
             focusable="false"
             viewBox="0 0 33 20"
           >
@@ -1645,11 +1543,11 @@ exports[`Storyshots Components|FAQ Category 1`] = `
           </svg>
         </h5>
         <div
-          className="makeStyles-answer-437 makeStyles-collapsed-436"
+          className="makeStyles-answer-425 makeStyles-collapsed-424"
         >
           The XRN token serves two key functions; to program the rules that make an ecological data commons and marketplace possible and to bring together a community of shared interest in service to strengthening and regenerating the living systems that we need to support life on earth.
           <div
-            className="makeStyles-gradient-435"
+            className="makeStyles-gradient-423"
           />
         </div>
       </div>
@@ -1661,17 +1559,17 @@ exports[`Storyshots Components|FAQ Category 1`] = `
 exports[`Storyshots Components|FAQ Faq 1`] = `
 <div>
   <div
-    className="MuiBox-root MuiBox-root-504"
+    className="MuiBox-root MuiBox-root-492"
   >
     <div
-      className="makeStyles-navigation-501"
+      className="makeStyles-navigation-489"
     >
       <ul
-        className="MuiList-root WithStyles(ForwardRef(List))-root-506 MuiList-padding"
+        className="MuiList-root WithStyles(ForwardRef(List))-root-494 MuiList-padding"
       >
         <div
           aria-disabled={false}
-          className="MuiButtonBase-root MuiListItem-root WithStyles(ForwardRef(ListItem))-root-507 MuiListItem-gutters MuiListItem-button Mui-selected"
+          className="MuiButtonBase-root MuiListItem-root WithStyles(ForwardRef(ListItem))-root-495 MuiListItem-gutters MuiListItem-button Mui-selected"
           onBlur={[Function]}
           onClick={[Function]}
           onDragLeave={[Function]}
@@ -1689,14 +1587,14 @@ exports[`Storyshots Components|FAQ Faq 1`] = `
         >
           concept
           <div
-            className="MuiBox-root MuiBox-root-508"
+            className="MuiBox-root MuiBox-root-496"
           >
             <div
               className="MuiListItemSecondaryAction-root"
             >
               <svg
                 aria-hidden={true}
-                className="MuiSvgIcon-root makeStyles-icon-505 makeStyles-root-509 makeStyles-root-510"
+                className="MuiSvgIcon-root makeStyles-icon-493 makeStyles-root-497 makeStyles-root-498"
                 focusable="false"
                 viewBox="0 0 33 20"
               >
@@ -1723,7 +1621,7 @@ exports[`Storyshots Components|FAQ Faq 1`] = `
         </div>
         <div
           aria-disabled={false}
-          className="MuiButtonBase-root MuiListItem-root WithStyles(ForwardRef(ListItem))-root-507 MuiListItem-gutters MuiListItem-button"
+          className="MuiButtonBase-root MuiListItem-root WithStyles(ForwardRef(ListItem))-root-495 MuiListItem-gutters MuiListItem-button"
           onBlur={[Function]}
           onClick={[Function]}
           onDragLeave={[Function]}
@@ -1741,14 +1639,14 @@ exports[`Storyshots Components|FAQ Faq 1`] = `
         >
           tech
           <div
-            className="MuiBox-root MuiBox-root-511"
+            className="MuiBox-root MuiBox-root-499"
           >
             <div
               className="MuiListItemSecondaryAction-root"
             >
               <svg
                 aria-hidden={true}
-                className="MuiSvgIcon-root makeStyles-icon-505 makeStyles-root-509 makeStyles-root-512"
+                className="MuiSvgIcon-root makeStyles-icon-493 makeStyles-root-497 makeStyles-root-500"
                 focusable="false"
                 viewBox="0 0 33 20"
               >
@@ -1777,27 +1675,27 @@ exports[`Storyshots Components|FAQ Faq 1`] = `
     </div>
     <div>
       <div
-        className="MuiPaper-root MuiCard-root makeStyles-root-516 makeStyles-root-517 makeStyles-root-513 makeStyles-root-515 MuiPaper-elevation1 MuiPaper-rounded"
+        className="MuiPaper-root MuiCard-root makeStyles-root-504 makeStyles-root-505 makeStyles-root-501 makeStyles-root-503 MuiPaper-elevation1 MuiPaper-rounded"
       >
         <h6
-          className="MuiTypography-root makeStyles-root-518 makeStyles-title-514 MuiTypography-h6 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+          className="MuiTypography-root makeStyles-root-506 makeStyles-title-502 MuiTypography-h6 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
         >
           concept
         </h6>
         <div
-          className="makeStyles-root-519 makeStyles-root-526"
+          className="makeStyles-root-507 makeStyles-root-514"
         >
           <div
-            className="makeStyles-container-520"
+            className="makeStyles-container-508"
           >
             <h5
-              className="MuiTypography-root makeStyles-root-518 makeStyles-question-521 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+              className="MuiTypography-root makeStyles-root-506 makeStyles-question-509 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
               onClick={[Function]}
             >
               Why do you need a blockchain?
               <svg
                 aria-hidden={true}
-                className="MuiSvgIcon-root makeStyles-icon-522 makeStyles-root-509 makeStyles-root-527"
+                className="MuiSvgIcon-root makeStyles-icon-510 makeStyles-root-497 makeStyles-root-515"
                 focusable="false"
                 viewBox="0 0 33 20"
               >
@@ -1818,29 +1716,29 @@ exports[`Storyshots Components|FAQ Faq 1`] = `
               </svg>
             </h5>
             <div
-              className="makeStyles-answer-525 makeStyles-collapsed-524"
+              className="makeStyles-answer-513 makeStyles-collapsed-512"
             >
               The Regen Ledger provides the project three key elements, without which Regen Network’s promise to create a network dedicated to monitoring, verifying and contracting or paying for ecological
               <div
-                className="makeStyles-gradient-523"
+                className="makeStyles-gradient-511"
               />
             </div>
           </div>
         </div>
         <div
-          className="makeStyles-root-519 makeStyles-root-528"
+          className="makeStyles-root-507 makeStyles-root-516"
         >
           <div
-            className="makeStyles-container-520"
+            className="makeStyles-container-508"
           >
             <h5
-              className="MuiTypography-root makeStyles-root-518 makeStyles-question-521 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+              className="MuiTypography-root makeStyles-root-506 makeStyles-question-509 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
               onClick={[Function]}
             >
               Why do you need a token?
               <svg
                 aria-hidden={true}
-                className="MuiSvgIcon-root makeStyles-icon-522 makeStyles-root-509 makeStyles-root-529"
+                className="MuiSvgIcon-root makeStyles-icon-510 makeStyles-root-497 makeStyles-root-517"
                 focusable="false"
                 viewBox="0 0 33 20"
               >
@@ -1861,11 +1759,11 @@ exports[`Storyshots Components|FAQ Faq 1`] = `
               </svg>
             </h5>
             <div
-              className="makeStyles-answer-525 makeStyles-collapsed-524"
+              className="makeStyles-answer-513 makeStyles-collapsed-512"
             >
               The XRN token serves two key functions; to program the rules that make an ecological data commons and marketplace possible and to bring together a community of shared interest in service to strengthening and regenerating the living systems that we need to support life on earth.
               <div
-                className="makeStyles-gradient-523"
+                className="makeStyles-gradient-511"
               />
             </div>
           </div>
@@ -1874,17 +1772,17 @@ exports[`Storyshots Components|FAQ Faq 1`] = `
     </div>
   </div>
   <div
-    className="MuiBox-root MuiBox-root-530"
+    className="MuiBox-root MuiBox-root-518"
   >
     <div
-      className="makeStyles-navigation-501"
+      className="makeStyles-navigation-489"
     >
       <ul
-        className="MuiList-root WithStyles(ForwardRef(List))-root-506 MuiList-padding"
+        className="MuiList-root WithStyles(ForwardRef(List))-root-494 MuiList-padding"
       >
         <div
           aria-disabled={false}
-          className="MuiButtonBase-root MuiListItem-root WithStyles(ForwardRef(ListItem))-root-507 MuiListItem-gutters MuiListItem-button Mui-selected"
+          className="MuiButtonBase-root MuiListItem-root WithStyles(ForwardRef(ListItem))-root-495 MuiListItem-gutters MuiListItem-button Mui-selected"
           onBlur={[Function]}
           onClick={[Function]}
           onDragLeave={[Function]}
@@ -1902,14 +1800,14 @@ exports[`Storyshots Components|FAQ Faq 1`] = `
         >
           concept
           <div
-            className="MuiBox-root MuiBox-root-531"
+            className="MuiBox-root MuiBox-root-519"
           >
             <div
               className="MuiListItemSecondaryAction-root"
             >
               <svg
                 aria-hidden={true}
-                className="MuiSvgIcon-root makeStyles-icon-505 makeStyles-root-509 makeStyles-root-532"
+                className="MuiSvgIcon-root makeStyles-icon-493 makeStyles-root-497 makeStyles-root-520"
                 focusable="false"
                 viewBox="0 0 33 20"
               >
@@ -1936,7 +1834,7 @@ exports[`Storyshots Components|FAQ Faq 1`] = `
         </div>
         <div
           aria-disabled={false}
-          className="MuiButtonBase-root MuiListItem-root WithStyles(ForwardRef(ListItem))-root-507 MuiListItem-gutters MuiListItem-button"
+          className="MuiButtonBase-root MuiListItem-root WithStyles(ForwardRef(ListItem))-root-495 MuiListItem-gutters MuiListItem-button"
           onBlur={[Function]}
           onClick={[Function]}
           onDragLeave={[Function]}
@@ -1954,14 +1852,14 @@ exports[`Storyshots Components|FAQ Faq 1`] = `
         >
           tech
           <div
-            className="MuiBox-root MuiBox-root-533"
+            className="MuiBox-root MuiBox-root-521"
           >
             <div
               className="MuiListItemSecondaryAction-root"
             >
               <svg
                 aria-hidden={true}
-                className="MuiSvgIcon-root makeStyles-icon-505 makeStyles-root-509 makeStyles-root-534"
+                className="MuiSvgIcon-root makeStyles-icon-493 makeStyles-root-497 makeStyles-root-522"
                 focusable="false"
                 viewBox="0 0 33 20"
               >
@@ -1995,11 +1893,11 @@ exports[`Storyshots Components|FAQ Faq 1`] = `
 exports[`Storyshots Components|FAQ Navigation 1`] = `
 <div>
   <ul
-    className="MuiList-root WithStyles(ForwardRef(List))-root-456 MuiList-padding"
+    className="MuiList-root WithStyles(ForwardRef(List))-root-444 MuiList-padding"
   >
     <div
       aria-disabled={false}
-      className="MuiButtonBase-root MuiListItem-root WithStyles(ForwardRef(ListItem))-root-457 MuiListItem-gutters MuiListItem-button"
+      className="MuiButtonBase-root MuiListItem-root WithStyles(ForwardRef(ListItem))-root-445 MuiListItem-gutters MuiListItem-button"
       onBlur={[Function]}
       onClick={[Function]}
       onDragLeave={[Function]}
@@ -2017,14 +1915,14 @@ exports[`Storyshots Components|FAQ Navigation 1`] = `
     >
       concept
       <div
-        className="MuiBox-root MuiBox-root-458"
+        className="MuiBox-root MuiBox-root-446"
       >
         <div
           className="MuiListItemSecondaryAction-root"
         >
           <svg
             aria-hidden={true}
-            className="MuiSvgIcon-root makeStyles-icon-455 makeStyles-root-459 makeStyles-root-460"
+            className="MuiSvgIcon-root makeStyles-icon-443 makeStyles-root-447 makeStyles-root-448"
             focusable="false"
             viewBox="0 0 33 20"
           >
@@ -2051,7 +1949,7 @@ exports[`Storyshots Components|FAQ Navigation 1`] = `
     </div>
     <div
       aria-disabled={false}
-      className="MuiButtonBase-root MuiListItem-root WithStyles(ForwardRef(ListItem))-root-457 MuiListItem-gutters MuiListItem-button"
+      className="MuiButtonBase-root MuiListItem-root WithStyles(ForwardRef(ListItem))-root-445 MuiListItem-gutters MuiListItem-button"
       onBlur={[Function]}
       onClick={[Function]}
       onDragLeave={[Function]}
@@ -2069,14 +1967,14 @@ exports[`Storyshots Components|FAQ Navigation 1`] = `
     >
       regen registry
       <div
-        className="MuiBox-root MuiBox-root-461"
+        className="MuiBox-root MuiBox-root-449"
       >
         <div
           className="MuiListItemSecondaryAction-root"
         >
           <svg
             aria-hidden={true}
-            className="MuiSvgIcon-root makeStyles-icon-455 makeStyles-root-459 makeStyles-root-462"
+            className="MuiSvgIcon-root makeStyles-icon-443 makeStyles-root-447 makeStyles-root-450"
             focusable="false"
             viewBox="0 0 33 20"
           >
@@ -2103,7 +2001,7 @@ exports[`Storyshots Components|FAQ Navigation 1`] = `
     </div>
     <div
       aria-disabled={false}
-      className="MuiButtonBase-root MuiListItem-root WithStyles(ForwardRef(ListItem))-root-457 MuiListItem-gutters MuiListItem-button"
+      className="MuiButtonBase-root MuiListItem-root WithStyles(ForwardRef(ListItem))-root-445 MuiListItem-gutters MuiListItem-button"
       onBlur={[Function]}
       onClick={[Function]}
       onDragLeave={[Function]}
@@ -2121,14 +2019,14 @@ exports[`Storyshots Components|FAQ Navigation 1`] = `
     >
       regen ledger
       <div
-        className="MuiBox-root MuiBox-root-463"
+        className="MuiBox-root MuiBox-root-451"
       >
         <div
           className="MuiListItemSecondaryAction-root"
         >
           <svg
             aria-hidden={true}
-            className="MuiSvgIcon-root makeStyles-icon-455 makeStyles-root-459 makeStyles-root-464"
+            className="MuiSvgIcon-root makeStyles-icon-443 makeStyles-root-447 makeStyles-root-452"
             focusable="false"
             viewBox="0 0 33 20"
           >
@@ -2155,7 +2053,7 @@ exports[`Storyshots Components|FAQ Navigation 1`] = `
     </div>
     <div
       aria-disabled={false}
-      className="MuiButtonBase-root MuiListItem-root WithStyles(ForwardRef(ListItem))-root-457 MuiListItem-gutters MuiListItem-button"
+      className="MuiButtonBase-root MuiListItem-root WithStyles(ForwardRef(ListItem))-root-445 MuiListItem-gutters MuiListItem-button"
       onBlur={[Function]}
       onClick={[Function]}
       onDragLeave={[Function]}
@@ -2173,14 +2071,14 @@ exports[`Storyshots Components|FAQ Navigation 1`] = `
     >
       tech
       <div
-        className="MuiBox-root MuiBox-root-465"
+        className="MuiBox-root MuiBox-root-453"
       >
         <div
           className="MuiListItemSecondaryAction-root"
         >
           <svg
             aria-hidden={true}
-            className="MuiSvgIcon-root makeStyles-icon-455 makeStyles-root-459 makeStyles-root-466"
+            className="MuiSvgIcon-root makeStyles-icon-443 makeStyles-root-447 makeStyles-root-454"
             focusable="false"
             viewBox="0 0 33 20"
           >
@@ -2212,19 +2110,19 @@ exports[`Storyshots Components|FAQ Navigation 1`] = `
 exports[`Storyshots Components|FAQ Question 1`] = `
 <div>
   <div
-    className="makeStyles-root-396 makeStyles-root-403"
+    className="makeStyles-root-384 makeStyles-root-391"
   >
     <div
-      className="makeStyles-container-397"
+      className="makeStyles-container-385"
     >
       <h5
-        className="MuiTypography-root makeStyles-root-404 makeStyles-question-398 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+        className="MuiTypography-root makeStyles-root-392 makeStyles-question-386 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
         onClick={[Function]}
       >
         Why do you need a blockchain?
         <svg
           aria-hidden={true}
-          className="MuiSvgIcon-root makeStyles-icon-399 makeStyles-root-405 makeStyles-root-406"
+          className="MuiSvgIcon-root makeStyles-icon-387 makeStyles-root-393 makeStyles-root-394"
           focusable="false"
           viewBox="0 0 33 20"
         >
@@ -2245,11 +2143,11 @@ exports[`Storyshots Components|FAQ Question 1`] = `
         </svg>
       </h5>
       <div
-        className="makeStyles-answer-402 makeStyles-collapsed-401"
+        className="makeStyles-answer-390 makeStyles-collapsed-389"
       >
         The Regen Ledger provides the project three key elements, without which Regen Network’s promise to create a network dedicated to monitoring, verifying and contracting or paying for ecological
         <div
-          className="makeStyles-gradient-400"
+          className="makeStyles-gradient-388"
         />
       </div>
     </div>
@@ -2261,7 +2159,7 @@ exports[`Storyshots Components|Icons Arrow Icon 1`] = `
 <div>
   <svg
     aria-hidden={true}
-    className="MuiSvgIcon-root makeStyles-icon-537 makeStyles-icon-538"
+    className="MuiSvgIcon-root makeStyles-icon-525 makeStyles-icon-526"
     focusable="false"
     viewBox="0 0 24 24"
   >
@@ -2292,7 +2190,7 @@ exports[`Storyshots Components|Icons Available Credits Icon 1`] = `
 <div>
   <svg
     aria-hidden={true}
-    className="MuiSvgIcon-root makeStyles-root-540"
+    className="MuiSvgIcon-root makeStyles-root-528"
     focusable="false"
     viewBox="0 0 57 69"
   >
@@ -2342,7 +2240,7 @@ exports[`Storyshots Components|Icons Block Icon 1`] = `
 <div>
   <svg
     aria-hidden={true}
-    className="MuiSvgIcon-root makeStyles-root-586"
+    className="MuiSvgIcon-root makeStyles-root-574"
     fill="none"
     focusable="false"
     onMouseEnter={[Function]}
@@ -2364,7 +2262,7 @@ exports[`Storyshots Components|Icons Breadcrumb Icon 1`] = `
 <div>
   <svg
     aria-hidden={true}
-    className="MuiSvgIcon-root makeStyles-root-543 makeStyles-root-544"
+    className="MuiSvgIcon-root makeStyles-root-531 makeStyles-root-532"
     focusable="false"
     viewBox="0 0 33 20"
   >
@@ -2413,7 +2311,7 @@ exports[`Storyshots Components|Icons Close Icon 1`] = `
 <div>
   <svg
     aria-hidden={true}
-    className="MuiSvgIcon-root makeStyles-root-546"
+    className="MuiSvgIcon-root makeStyles-root-534"
     focusable="false"
     viewBox="0 0 26 26"
   >
@@ -2493,7 +2391,7 @@ exports[`Storyshots Components|Icons Current Credits Icon 1`] = `
 <div>
   <svg
     aria-hidden={true}
-    className="MuiSvgIcon-root makeStyles-root-557 makeStyles-root-558"
+    className="MuiSvgIcon-root makeStyles-root-545 makeStyles-root-546"
     focusable="false"
     viewBox="0 0 59 54"
   >
@@ -2607,7 +2505,7 @@ exports[`Storyshots Components|Icons Document Icon 1`] = `
 <div>
   <svg
     aria-hidden={true}
-    className="MuiSvgIcon-root makeStyles-root-554"
+    className="MuiSvgIcon-root makeStyles-root-542"
     focusable="false"
     viewBox="0 0 18 22"
   >
@@ -2709,7 +2607,7 @@ exports[`Storyshots Components|Icons Document Icon 1`] = `
 exports[`Storyshots Components|Icons Dropdown Icon 1`] = `
 <div>
   <span
-    className="makeStyles-root-566"
+    className="makeStyles-root-554"
   >
     <svg
       aria-hidden={true}
@@ -2772,7 +2670,7 @@ exports[`Storyshots Components|Icons Eye Icon 1`] = `
 <div>
   <svg
     aria-hidden={true}
-    className="MuiSvgIcon-root makeStyles-root-552"
+    className="MuiSvgIcon-root makeStyles-root-540"
     focusable="false"
     viewBox="0 0 19 14"
   >
@@ -2806,7 +2704,7 @@ exports[`Storyshots Components|Icons Facebook Icon 1`] = `
 <div>
   <svg
     aria-hidden={true}
-    className="MuiSvgIcon-root makeStyles-root-568"
+    className="MuiSvgIcon-root makeStyles-root-556"
     fill="none"
     focusable="false"
     onMouseEnter={[Function]}
@@ -2828,7 +2726,7 @@ exports[`Storyshots Components|Icons Github Icon 1`] = `
 <div>
   <svg
     aria-hidden={true}
-    className="MuiSvgIcon-root makeStyles-root-582"
+    className="MuiSvgIcon-root makeStyles-root-570"
     fill="none"
     focusable="false"
     onMouseEnter={[Function]}
@@ -2850,7 +2748,7 @@ exports[`Storyshots Components|Icons Instagram Icon 1`] = `
 <div>
   <svg
     aria-hidden={true}
-    className="MuiSvgIcon-root makeStyles-root-570"
+    className="MuiSvgIcon-root makeStyles-root-558"
     fill="none"
     focusable="false"
     onMouseEnter={[Function]}
@@ -2878,7 +2776,7 @@ exports[`Storyshots Components|Icons Link Icon 1`] = `
 <div>
   <svg
     aria-hidden={true}
-    className="MuiSvgIcon-root makeStyles-root-588"
+    className="MuiSvgIcon-root makeStyles-root-576"
     fill="none"
     focusable="false"
     onMouseEnter={[Function]}
@@ -2914,7 +2812,7 @@ exports[`Storyshots Components|Icons Linked In Icon 1`] = `
 <div>
   <svg
     aria-hidden={true}
-    className="MuiSvgIcon-root makeStyles-root-572"
+    className="MuiSvgIcon-root makeStyles-root-560"
     fill="none"
     focusable="false"
     onMouseEnter={[Function]}
@@ -2938,7 +2836,7 @@ exports[`Storyshots Components|Icons Medium Icon 1`] = `
 <div>
   <svg
     aria-hidden={true}
-    className="MuiSvgIcon-root makeStyles-root-574"
+    className="MuiSvgIcon-root makeStyles-root-562"
     fill="none"
     focusable="false"
     onMouseEnter={[Function]}
@@ -2958,7 +2856,7 @@ exports[`Storyshots Components|Icons Organization Icon 1`] = `
 <div>
   <svg
     aria-hidden={true}
-    className="MuiSvgIcon-root makeStyles-root-560"
+    className="MuiSvgIcon-root makeStyles-root-548"
     focusable="false"
     viewBox="0 0 23 22"
   >
@@ -3303,7 +3201,7 @@ exports[`Storyshots Components|Icons Play Icon 1`] = `
 <div>
   <svg
     aria-hidden={true}
-    className="MuiSvgIcon-root makeStyles-root-549 makeStyles-root-550"
+    className="MuiSvgIcon-root makeStyles-root-537 makeStyles-root-538"
     focusable="false"
     viewBox="0 0 9 9"
   >
@@ -3786,7 +3684,7 @@ exports[`Storyshots Components|Icons Regen Logo Icon 1`] = `
 <div>
   <svg
     aria-hidden={true}
-    className="MuiSvgIcon-root makeStyles-root-562"
+    className="MuiSvgIcon-root makeStyles-root-550"
     focusable="false"
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
@@ -4028,7 +3926,7 @@ exports[`Storyshots Components|Icons Telegram Icon 1`] = `
 <div>
   <svg
     aria-hidden={true}
-    className="MuiSvgIcon-root makeStyles-root-576"
+    className="MuiSvgIcon-root makeStyles-root-564"
     fill="none"
     focusable="false"
     onMouseEnter={[Function]}
@@ -4048,7 +3946,7 @@ exports[`Storyshots Components|Icons Total Credits Icon 1`] = `
 <div>
   <svg
     aria-hidden={true}
-    className="MuiSvgIcon-root makeStyles-root-564"
+    className="MuiSvgIcon-root makeStyles-root-552"
     focusable="false"
     viewBox="0 0 54 58"
   >
@@ -4066,7 +3964,7 @@ exports[`Storyshots Components|Icons Twitter Icon 1`] = `
 <div>
   <svg
     aria-hidden={true}
-    className="MuiSvgIcon-root makeStyles-root-578"
+    className="MuiSvgIcon-root makeStyles-root-566"
     fill="none"
     focusable="false"
     onMouseEnter={[Function]}
@@ -4128,7 +4026,7 @@ exports[`Storyshots Components|Icons Whitepaper Icon 1`] = `
 <div>
   <svg
     aria-hidden={true}
-    className="MuiSvgIcon-root makeStyles-root-584"
+    className="MuiSvgIcon-root makeStyles-root-572"
     fill="none"
     focusable="false"
     onMouseEnter={[Function]}
@@ -4150,7 +4048,7 @@ exports[`Storyshots Components|Icons Youtube Icon 1`] = `
 <div>
   <svg
     aria-hidden={true}
-    className="MuiSvgIcon-root makeStyles-root-580"
+    className="MuiSvgIcon-root makeStyles-root-568"
     fill="none"
     focusable="false"
     onMouseEnter={[Function]}
@@ -4171,13 +4069,13 @@ exports[`Storyshots Components|Icons Youtube Icon 1`] = `
 exports[`Storyshots Components|Image Crop Image Crop 1`] = `
 <div>
   <div
-    className="makeStyles-root-600"
+    className="makeStyles-root-588"
   >
     <div
-      className="makeStyles-root-604"
+      className="makeStyles-root-592"
     >
       <div
-        className="makeStyles-cropContainer-605"
+        className="makeStyles-cropContainer-593"
       >
         <div
           className="reactEasyCrop_Container"
@@ -4199,11 +4097,11 @@ exports[`Storyshots Components|Image Crop Image Crop 1`] = `
         </div>
       </div>
       <div
-        className="makeStyles-controls-606"
+        className="makeStyles-controls-594"
         id="controls"
       >
         <button
-          className="MuiButtonBase-root MuiButton-root MuiButton-text makeStyles-cancelButton-609"
+          className="MuiButtonBase-root MuiButton-root MuiButton-text makeStyles-cancelButton-597"
           disabled={false}
           onBlur={[Function]}
           onClick={[Function]}
@@ -4230,7 +4128,7 @@ exports[`Storyshots Components|Image Crop Image Crop 1`] = `
           />
         </button>
         <button
-          className="MuiButtonBase-root MuiButton-root WithStyles(ForwardRef(Button))-root-610 MuiButton-contained makeStyles-button-608 MuiButton-containedSecondary"
+          className="MuiButtonBase-root MuiButton-root WithStyles(ForwardRef(Button))-root-598 MuiButton-contained makeStyles-button-596 MuiButton-containedSecondary"
           disabled={false}
           onBlur={[Function]}
           onClick={[Function]}
@@ -4265,13 +4163,13 @@ exports[`Storyshots Components|Image Crop Image Crop 1`] = `
 exports[`Storyshots Components|Image Crop Image Crop Unrestricted 1`] = `
 <div>
   <div
-    className="makeStyles-root-622"
+    className="makeStyles-root-610"
   >
     <div
-      className="makeStyles-root-626"
+      className="makeStyles-root-614"
     >
       <div
-        className="makeStyles-cropContainer-627"
+        className="makeStyles-cropContainer-615"
       >
         <div
           className="reactEasyCrop_Container"
@@ -4293,11 +4191,11 @@ exports[`Storyshots Components|Image Crop Image Crop Unrestricted 1`] = `
         </div>
       </div>
       <div
-        className="makeStyles-controls-628"
+        className="makeStyles-controls-616"
         id="controls"
       >
         <button
-          className="MuiButtonBase-root MuiButton-root MuiButton-text makeStyles-cancelButton-631"
+          className="MuiButtonBase-root MuiButton-root MuiButton-text makeStyles-cancelButton-619"
           disabled={false}
           onBlur={[Function]}
           onClick={[Function]}
@@ -4324,7 +4222,7 @@ exports[`Storyshots Components|Image Crop Image Crop Unrestricted 1`] = `
           />
         </button>
         <button
-          className="MuiButtonBase-root MuiButton-root WithStyles(ForwardRef(Button))-root-632 MuiButton-contained makeStyles-button-630 MuiButton-containedSecondary"
+          className="MuiButtonBase-root MuiButton-root WithStyles(ForwardRef(Button))-root-620 MuiButton-contained makeStyles-button-618 MuiButton-containedSecondary"
           disabled={false}
           onBlur={[Function]}
           onClick={[Function]}
@@ -4359,10 +4257,10 @@ exports[`Storyshots Components|Image Crop Image Crop Unrestricted 1`] = `
 exports[`Storyshots Components|Image Grid Image Grid 1`] = `
 <div>
   <div
-    className="MuiGrid-root makeStyles-root-645 makeStyles-root-650 MuiGrid-container MuiGrid-align-items-xs-center"
+    className="MuiGrid-root makeStyles-root-633 makeStyles-root-638 MuiGrid-container MuiGrid-align-items-xs-center"
   >
     <div
-      className="MuiGrid-root makeStyles-image-648 MuiGrid-item"
+      className="MuiGrid-root makeStyles-image-636 MuiGrid-item"
     >
       <img
         alt="andover"
@@ -4370,15 +4268,15 @@ exports[`Storyshots Components|Image Grid Image Grid 1`] = `
       />
     </div>
     <div
-      className="MuiGrid-root makeStyles-text-646 makeStyles-text-651 MuiGrid-item"
+      className="MuiGrid-root makeStyles-text-634 makeStyles-text-639 MuiGrid-item"
     >
       <h2
-        className="MuiTypography-root makeStyles-root-654 makeStyles-title-647 makeStyles-title-652 MuiTypography-h2 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+        className="MuiTypography-root makeStyles-root-642 makeStyles-title-635 makeStyles-title-640 MuiTypography-h2 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
       >
         Verified outcomes
       </h2>
       <div
-        className="MuiTypography-root makeStyles-root-655 makeStyles-root-656 makeStyles-description-649 makeStyles-description-653 MuiTypography-body1"
+        className="MuiTypography-root makeStyles-root-643 makeStyles-root-644 makeStyles-description-637 makeStyles-description-641 MuiTypography-body1"
       >
         Software-based and remote-sensing monitoring keeps costs low and transparency high.
       </div>
@@ -4390,10 +4288,10 @@ exports[`Storyshots Components|Image Grid Image Grid 1`] = `
 exports[`Storyshots Components|Image Item Image Item 1`] = `
 <div>
   <div
-    className="makeStyles-root-664"
+    className="makeStyles-root-652"
   >
     <div
-      className="MuiGrid-root makeStyles-image-666 MuiGrid-container MuiGrid-justify-xs-center"
+      className="MuiGrid-root makeStyles-image-654 MuiGrid-container MuiGrid-justify-xs-center"
     >
       <img
         alt="verified"
@@ -4401,12 +4299,12 @@ exports[`Storyshots Components|Image Item Image Item 1`] = `
       />
     </div>
     <h4
-      className="MuiTypography-root makeStyles-root-668 makeStyles-title-665 MuiTypography-h4 MuiTypography-colorTextPrimary MuiTypography-alignCenter"
+      className="MuiTypography-root makeStyles-root-656 makeStyles-title-653 MuiTypography-h4 MuiTypography-colorTextPrimary MuiTypography-alignCenter"
     >
       Verified outcomes
     </h4>
     <div
-      className="MuiTypography-root makeStyles-root-669 makeStyles-root-670 MuiTypography-body1"
+      className="MuiTypography-root makeStyles-root-657 makeStyles-root-658 MuiTypography-body1"
     >
       Software-based and remote-sensing monitoring keeps costs low and transparency high.
     </div>
@@ -4417,7 +4315,7 @@ exports[`Storyshots Components|Image Item Image Item 1`] = `
 exports[`Storyshots Components|Map Map 1`] = `
 <div>
   <div
-    className="makeStyles-root-679"
+    className="makeStyles-root-667"
   >
     <div
       style={
@@ -4462,10 +4360,10 @@ exports[`Storyshots Components|Map Map 1`] = `
       </div>
     </div>
     <div
-      className="makeStyles-zoomButton-684"
+      className="makeStyles-zoomButton-672"
     >
       <button
-        className="MuiButtonBase-root MuiButton-root WithStyles(ForwardRef(Button))-root-685 MuiButton-text MuiButton-textSecondary"
+        className="MuiButtonBase-root MuiButton-root WithStyles(ForwardRef(Button))-root-673 MuiButton-text MuiButton-textSecondary"
         disabled={false}
         onBlur={[Function]}
         onClick={[Function]}
@@ -4490,7 +4388,7 @@ exports[`Storyshots Components|Map Map 1`] = `
           >
             <svg
               aria-hidden={true}
-              className="MuiSvgIcon-root makeStyles-root-686"
+              className="MuiSvgIcon-root makeStyles-root-674"
               focusable="false"
               viewBox="0 0 13 14"
             >
@@ -4510,6 +4408,108 @@ exports[`Storyshots Components|Map Map 1`] = `
           className="MuiTouchRipple-root"
         />
       </button>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components|Modal Add Round Image 1`] = `
+<div>
+  <div>
+    <label
+      aria-disabled={false}
+      className="MuiButtonBase-root MuiButton-root MuiButton-contained"
+      onBlur={[Function]}
+      onDragLeave={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onKeyUp={[Function]}
+      onMouseDown={[Function]}
+      onMouseLeave={[Function]}
+      onMouseUp={[Function]}
+      onTouchEnd={[Function]}
+      onTouchMove={[Function]}
+      onTouchStart={[Function]}
+      role="button"
+      tabIndex={0}
+    >
+      <span
+        className="MuiButton-label"
+      >
+        Add Image
+        <input
+          accept="image/*"
+          hidden={true}
+          onChange={[Function]}
+          type="file"
+        />
+      </span>
+      <span
+        className="MuiTouchRipple-root"
+      />
+    </label>
+    <div
+      className="MuiPaper-root MuiCard-root MuiPaper-elevation1 MuiPaper-rounded"
+      style={
+        Object {
+          "height": 200,
+          "marginTop": 32,
+          "width": 200,
+        }
+      }
+    >
+      
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components|Modal Add Square Image 1`] = `
+<div>
+  <div>
+    <label
+      aria-disabled={false}
+      className="MuiButtonBase-root MuiButton-root MuiButton-contained"
+      onBlur={[Function]}
+      onDragLeave={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onKeyUp={[Function]}
+      onMouseDown={[Function]}
+      onMouseLeave={[Function]}
+      onMouseUp={[Function]}
+      onTouchEnd={[Function]}
+      onTouchMove={[Function]}
+      onTouchStart={[Function]}
+      role="button"
+      tabIndex={0}
+    >
+      <span
+        className="MuiButton-label"
+      >
+        Add Image
+        <input
+          accept="image/*"
+          hidden={true}
+          onChange={[Function]}
+          type="file"
+        />
+      </span>
+      <span
+        className="MuiTouchRipple-root"
+      />
+    </label>
+    <div
+      className="MuiPaper-root MuiCard-root MuiPaper-elevation1 MuiPaper-rounded"
+      style={
+        Object {
+          "height": 200,
+          "marginTop": 32,
+          "width": 200,
+        }
+      }
+    >
+      
     </div>
   </div>
 </div>

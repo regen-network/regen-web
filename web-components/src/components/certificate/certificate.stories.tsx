@@ -13,7 +13,7 @@ export const certificate = (): JSX.Element => (
     creditsUnits={1000}
     equivalentTonsCO2={1000}
     buyerName="Marie Gauthier"
-    date={'2020-10-10'}
+    date={'10-10-2020'}
     issuer={{ companyName: 'Regen Network', personName: 'Christian Shearer', personRole: 'CEO' }}
     issuee={{
       companyName: 'John Doe Ltd',

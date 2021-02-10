@@ -75,6 +75,7 @@ export default function ImageCrop({
   const classes = useStyles();
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
+  const [rotation, setRotation] = useState(0);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState<Area | null>(null);
 
   const onCropComplete = useCallback((croppedArea: Area, croppedAreaPxls: Area) => {
@@ -95,10 +96,12 @@ export default function ImageCrop({
           image={image}
           crop={crop}
           zoom={zoom}
+          rotation={rotation}
           aspect={3 / 3}
           onCropChange={setCrop}
           onCropComplete={onCropComplete}
           onZoomChange={setZoom}
+          onRotationChange={setRotation}
           cropShape={cropShape}
           restrictPosition={restrictPosition}
         />

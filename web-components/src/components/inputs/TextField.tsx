@@ -99,12 +99,14 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
         paddingRight: theme.spacing(3.75),
         fontSize: theme.spacing(4.5),
         height: theme.spacing(15), // 11.25
+        // height: props.multiline ? theme.spacing(20) : theme.spacing(15), // 11.25
       },
       [theme.breakpoints.down('xs')]: {
         paddingLeft: theme.spacing(3.25),
         paddingRight: theme.spacing(3.25),
         fontSize: theme.spacing(4),
         height: theme.spacing(12.5), // 8.75
+        // height: props.multiline ? theme.spacing(16) : theme.spacing(12.5), // 11.25
       },
       '& .MuiInputAdornment-root p': {
         color: theme.palette.info.main,

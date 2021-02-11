@@ -111,7 +111,7 @@ export default function BuyerCreate(): JSX.Element {
             aria-label="buyer-type"
             name="type"
             value={buyerType}
-            onChange={e => setBuyerType(e.target.value)}
+            onChange={(e: any) => setBuyerType(e.target.value)}
           >
             <FormControlLabel value="organization" control={<Radio />} label="Organization" />
             <FormControlLabel value="user" control={<Radio />} label="Individual person" />

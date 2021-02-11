@@ -2,10 +2,13 @@ import React from 'react';
 import { Avatar, Box, Grid, makeStyles, Theme, Typography } from '@material-ui/core';
 import { Formik, Form, Field } from 'formik';
 import TextField from '../inputs/TextField';
-import PhoneInputField from '../inputs/PhoneInputField';
+import TextareaField from '../inputs/TextareaField';
+// import PhoneField from '../inputs/PhoneField';
+import PhoneFieldNew from '../inputs/PhoneFieldNew';
 import Title from '../title';
 import Submit from './Submit';
 import OutlinedButton from '../buttons/OutlinedButton';
+import { requiredMessage } from '../inputs/validation';
 
 interface UserProfileFormProps {
   onClose: () => void;
@@ -15,8 +18,9 @@ interface UserProfileFormProps {
 
 interface Values {
   name: string;
+  role: string;
   photo: string | undefined;
-  phone: number | undefined;
+  phone: string | undefined;
   description: string | undefined;
 }
 
@@ -85,33 +89,35 @@ export default function UserProfileForm({ onClose, onSubmit, apiUrl }: UserProfi
       <Formik
         initialValues={{
           name: '',
-          phone: undefined,
+          role: '',
           photo: undefined,
-          description: '',
+          phone: undefined,
+          description: undefined,
         }}
         validate={(values: Values) => {
-          return {};
+          const errors: Partial<Values> = {};
+          if (!values.name) {
+            errors.name = requiredMessage;
+          }
+          if (!values.role) {
+            errors.role = requiredMessage;
+          }
+          return errors;
         }}
         onSubmit={({ name, phone, description }, { setSubmitting, setStatus }) => {
           setSubmitting(true);
           console.log('TODO: handle submit'); // eslint-disable-line
         }}
       >
-        {({ values, errors, submitForm, isSubmitting, isValid, submitCount, setFieldValue, status }) => {
+        {({ values, submitForm, isSubmitting, isValid, submitCount, setFieldValue, status }) => {
           console.log(values); //eslint-disable-line
           return (
             <>
               <div className={classes.formWrap}>
                 <Form className={classes.form} translate="yes">
                   <Field component={TextField} className={classes.textField} label="Full name" name="name" />
+                  <Field component={TextField} name="role" className={classes.textField} label="Role" />
 
-                  <Field
-                    component={TextField}
-                    name="role"
-                    className={classes.textField}
-                    label="Role"
-                    // optional
-                  />
                   {/* TODO: the following will likely be replaced once the photo upload component is done and we can integrate with formik */}
                   <>
                     <h4>Bio Photo (optional)</h4>
@@ -124,15 +130,14 @@ export default function UserProfileForm({ onClose, onSubmit, apiUrl }: UserProfi
                   </>
 
                   <Field
-                    // component={TextField}
-                    component={PhoneInputField}
+                    component={PhoneFieldNew}
                     className={classes.textField}
                     label="Phone number"
                     name="phone"
                     optional
                   />
                   <Field
-                    component={TextField}
+                    component={TextareaField}
                     name="description"
                     className={classes.textField}
                     label="Short personal description"

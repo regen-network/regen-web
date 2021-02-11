@@ -1,26 +1,25 @@
 import React from 'react';
 import { Grid, makeStyles, Theme } from '@material-ui/core';
 import { Formik, Form, Field } from 'formik';
-import TextField from '../inputs/TextField';
 import ControlledTextField from '../inputs/ControlledTextField';
 import PhoneField from '../inputs/PhoneField';
 import ImageField from '../inputs/ImageField';
+import { requiredMessage } from '../inputs/validation';
 import Title from '../title';
 import Submit from './Submit';
-import { requiredMessage } from '../inputs/validation';
 
-interface UserProfileFormProps {
+interface OrganizationProfileFormProps {
   onClose: () => void;
   onSubmit?: () => void;
   apiUrl: string;
 }
 
 interface Values {
-  name: string;
-  role: string;
-  photo: string | undefined;
-  phone: string | undefined;
   description: string | undefined;
+  displayName: string;
+  legalName: string;
+  location: string;
+  logo: string;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -50,6 +49,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   form: {
     paddingTop: theme.spacing(7.5),
     paddingBottom: theme.spacing(10),
+    'div:nth-of-type(1)': {
+      marginTop: 0,
+    },
   },
   usd: {
     fontSize: theme.spacing(4),
@@ -66,31 +68,40 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function UserProfileForm({ onClose, onSubmit, apiUrl }: UserProfileFormProps): JSX.Element {
+export default function OrganizationProfileForm({
+  onClose,
+  onSubmit,
+  apiUrl,
+}: OrganizationProfileFormProps): JSX.Element {
   const classes = useStyles();
+  const initialValues: Values = {
+    description: undefined,
+    displayName: '',
+    legalName: '',
+    location: '',
+    logo: '',
+  };
+
   return (
     <Grid container alignItems="center" direction="column" className={classes.root}>
       <Title align="center" variant="h4">
-        User Profile
+        Organization Profile
       </Title>
       <Formik
-        initialValues={{
-          name: '',
-          role: '',
-          photo: undefined,
-          phone: undefined,
-          description: undefined,
-        }}
+        initialValues={initialValues}
         validate={(values: Values) => {
           const errors: Partial<Values> = {};
-          if (!values.name) {
-            errors.name = requiredMessage;
+          if (!values.displayName) {
+            errors.displayName = requiredMessage;
           }
-          if (!values.role) {
-            errors.role = requiredMessage;
+          if (!values.legalName) {
+            errors.legalName = requiredMessage;
           }
-          if (!values.description) {
-            errors.description = requiredMessage;
+          if (!values.location) {
+            errors.location = requiredMessage;
+          }
+          if (!values.logo) {
+            errors.logo = requiredMessage;
           }
           return errors;
         }}
@@ -108,17 +119,29 @@ export default function UserProfileForm({ onClose, onSubmit, apiUrl }: UserProfi
                   <Field
                     className={classes.textField}
                     component={ControlledTextField}
-                    label="Full name"
-                    name="name"
+                    description="This is the name of your farm, ranch, cooperative, non-profit, or other organization."
+                    label="Organization legal name"
+                    name="legalName"
                   />
-                  {/* TODO: I'm leaving this as a `TextField` to demo styles are the same, but they should probably use the same component */}
-                  <Field component={TextField} name="role" className={classes.textField} label="Role" />
+                  <Field
+                    className={classes.textField}
+                    component={ControlledTextField}
+                    description="This is the display name on your project page, if you choose to make this entity publically viewable."
+                    label="Display name for organization"
+                    name="displayName"
+                  />
+                  <Field
+                    className={classes.textField}
+                    component={ControlledTextField}
+                    description="This address is used for issuing credits.  If you choose to show this entity on the project page, only city, state/province, and country will be displayed. "
+                    label="Organization Location"
+                    name="location"
+                  />
                   <Field
                     className={classes.textField}
                     component={ImageField}
-                    label="Bio Photo"
-                    name="bioPhoto"
-                    optional
+                    label="Organization Logo"
+                    name="logo"
                   />
                   <Field
                     className={classes.textField}
@@ -132,7 +155,7 @@ export default function UserProfileForm({ onClose, onSubmit, apiUrl }: UserProfi
                     className={classes.textField}
                     component={ControlledTextField}
                     description="Describe any relevant background and experience. This info may be shown on the project page."
-                    label="Short personal description"
+                    label="Short organization description"
                     name="description"
                     rows={3}
                     multiline

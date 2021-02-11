@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
-import Typography from '@material-ui/core/Typography';
+import Typography, { TypographyProps } from '@material-ui/core/Typography';
 import { getFontSize, FontSizes } from '../../theme/sizing';
 import clsx from 'clsx';
 
@@ -8,6 +8,7 @@ interface DescriptionProps {
   children?: any;
   fontSize?: FontSizes;
   className?: string;
+  align?: TypographyProps['align'];
 }
 
 interface StyleProps {

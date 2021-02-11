@@ -7,6 +7,7 @@ import axios from 'axios';
 
 import Title from '../title';
 import TextField from '../inputs/TextField';
+import ControlledTextField from '../inputs/ControlledTextField';
 import { requiredMessage, validateEmail, invalidEmailMessage } from '../inputs/validation';
 import CheckboxGroup from '../inputs/CheckboxGroup';
 import SelectTextField from '../inputs/SelectTextField';
@@ -121,7 +122,7 @@ export default function MoreInfoForm({ onClose, onSubmit, apiUrl }: MoreInfoForm
                 <div>
                   <Field component={TextField} label="Your full name" name="name" />
                   <Field
-                    component={TextField}
+                    component={ControlledTextField}
                     className={classes.textField}
                     type="email"
                     label="Your email address"

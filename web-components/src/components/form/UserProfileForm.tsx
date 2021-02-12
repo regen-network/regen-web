@@ -89,9 +89,6 @@ export default function UserProfileForm({ onClose, onSubmit, apiUrl }: UserProfi
           if (!values.role) {
             errors.role = requiredMessage;
           }
-          if (!values.description) {
-            errors.description = requiredMessage;
-          }
           return errors;
         }}
         onSubmit={(values, { setSubmitting, setStatus }) => {

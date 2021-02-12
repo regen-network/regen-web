@@ -1,12 +1,11 @@
 import React from 'react';
 import { makeStyles, Theme, Input, InputAdornment, Typography } from '@material-ui/core';
-import { FieldProps, getIn } from 'formik';
+import { FieldProps } from 'formik';
 import FieldFormControl from './FieldFormControl';
 
 interface ControlledTextFieldProps extends FieldProps {
   adornment?: string;
   charLimit?: number;
-  children?: any;
   className?: string;
   description?: string;
   label?: string;
@@ -17,12 +16,7 @@ interface ControlledTextFieldProps extends FieldProps {
   triggerOnChange?: (v: any) => Promise<void>;
 }
 
-interface StyleProps {
-  errors: boolean;
-  label: boolean;
-}
-
-const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
+const useStyles = makeStyles((theme: Theme) => ({
   input: {
     backgroundColor: theme.palette.primary.main,
     border: `1px solid ${theme.palette.grey[100]}`,
@@ -62,6 +56,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
 export default function ControlledTextField({
   adornment,
   charLimit,
+  className,
   description,
   label,
   multiline,
@@ -69,59 +64,50 @@ export default function ControlledTextField({
   rows = 1,
   transformValue,
   triggerOnChange,
-  ...props
+  ...fieldProps
 }: ControlledTextFieldProps): JSX.Element {
-  const { form, field } = props; // passed from Formik <Field />
-  const errorMessage = getIn(form.errors, field.name);
-  const touched = getIn(form.touched, field.name);
+  const { form, field } = fieldProps; // passed from Formik <Field />
   const charsLeft = (charLimit || Infinity) - (field.value?.length || 0);
 
-  async function handleChange({
-    target: { value },
-  }: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>): Promise<void> {
-    const text = charLimit && charsLeft > charLimit ? value.slice(0, charLimit) : value;
-    if (triggerOnChange) {
-      await triggerOnChange(text);
-    }
-    form.setFieldValue(field.name, transformValue ? transformValue(text) : text);
+  function handleFieldChange(
+    { target: { value } }: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>,
+    handleFn: (val: string) => void,
+  ): void {
+    const text = charLimit && charsLeft <= charLimit ? value.slice(0, charLimit) : value;
+    handleFn(text);
   }
 
-  function handleBlur({ target: { value } }: React.FocusEvent<HTMLTextAreaElement | HTMLInputElement>): void {
-    form.setFieldTouched(field.name);
-    form.handleBlur(value);
-  }
-
-  const classes = useStyles({ errors: !!errorMessage, label: !!label });
-  const formId = `formfield-${field.name}`;
+  const classes = useStyles();
 
   return (
-    // <FormControl className={props.className} fullWidth>
     <FieldFormControl
-      className={props.className}
-      errorMessage={touched && errorMessage}
+      className={className}
       label={label}
       description={description}
       disabled={form.isSubmitting}
       optional={optional}
+      {...fieldProps}
     >
-      <Input
-        id={formId}
-        value={field.value}
-        onChange={handleChange}
-        disabled={form.isSubmitting}
-        multiline={multiline}
-        onBlur={handleBlur}
-        className={classes.input}
-        rows={rows}
-        startAdornment={adornment ? <InputAdornment position="start">{adornment}</InputAdornment> : null}
-        disableUnderline
-      />
-      {charLimit && (
-        <Typography variant="body1" className={classes.charCount}>{`${charsLeft} character${
-          charsLeft === 1 ? '' : 's'
-        } remaining`}</Typography>
+      {({ handleChange, handleBlur }) => (
+        <>
+          <Input
+            value={field.value}
+            onChange={e => handleFieldChange(e, handleChange)}
+            disabled={form.isSubmitting}
+            multiline={multiline}
+            onBlur={({ target: { value } }) => handleBlur(value)}
+            className={classes.input}
+            rows={rows}
+            startAdornment={adornment ? <InputAdornment position="start">{adornment}</InputAdornment> : null}
+            disableUnderline
+          />
+          {charLimit && (
+            <Typography variant="body1" className={classes.charCount}>{`${charsLeft} character${
+              charsLeft === 1 ? '' : 's'
+            } remaining`}</Typography>
+          )}
+        </>
       )}
     </FieldFormControl>
-    // </FormControl>
   );
 }

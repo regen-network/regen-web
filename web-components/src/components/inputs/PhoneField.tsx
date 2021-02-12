@@ -2,11 +2,10 @@ import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import { FieldProps, getIn } from 'formik';
 import PhoneInput from 'react-phone-input-2';
-import 'react-phone-input-2/lib/style.css';
 import FieldFormControl from './FieldFormControl';
+import 'react-phone-input-2/lib/style.css';
 
 interface RegenPhoneFieldProps extends FieldProps {
-  errors?: boolean;
   label: string;
   optional?: boolean;
   className?: string;
@@ -41,35 +40,31 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
 export default function RegenPhoneField({
   label,
   optional = false,
-  ...props
+  className,
+  ...fieldProps
 }: RegenPhoneFieldProps): JSX.Element {
-  const { form, field } = props; // passed from Formik <Field />
-  const errorMessage = getIn(form.errors, field.name);
-  const touched = getIn(form.touched, field.name);
-
-  function handleBlur({ target: { value } }: React.FocusEvent<HTMLTextAreaElement | HTMLInputElement>): void {
-    form.setFieldTouched(field.name);
-    form.handleBlur(value);
-  }
-
+  const { form, field } = fieldProps; // passed from Formik <Field />
   const classes = useStyles({ disabled: form.isSubmitting });
+
   return (
     <FieldFormControl
-      className={props.className}
+      className={className}
       label={label}
       optional={optional}
       disabled={form.isSubmitting}
-      errorMessage={touched && errorMessage}
+      {...fieldProps}
     >
-      <PhoneInput
-        containerClass={classes.inputWrap}
-        inputClass={classes.input}
-        country="us"
-        value={field.value}
-        onChange={number => form.setFieldValue(field.name, number)}
-        onBlur={handleBlur}
-        enableSearch
-      />
+      {({ handleBlur, handleChange }) => (
+        <PhoneInput
+          containerClass={classes.inputWrap}
+          inputClass={classes.input}
+          country="us"
+          value={field.value}
+          onChange={handleChange}
+          onBlur={({ target: { value } }) => handleBlur(value)}
+          enableSearch
+        />
+      )}
     </FieldFormControl>
   );
 }

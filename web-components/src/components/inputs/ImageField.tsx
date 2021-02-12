@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles, Theme, Box, Avatar } from '@material-ui/core';
-import { FieldProps, getIn } from 'formik';
+import { FieldProps } from 'formik';
 import OutlinedButton from '../buttons/OutlinedButton';
 import FieldFormControl from './FieldFormControl';
 
@@ -46,42 +46,28 @@ interface ControlledTextFieldProps extends FieldProps {
 
 export default function ControlledTextField({
   description,
+  className,
   label,
   optional,
   transformValue,
   triggerOnChange,
-  ...props
+  ...fieldProps
 }: ControlledTextFieldProps): JSX.Element {
-  const { form, field } = props; // passed from Formik <Field />
-  const errorMessage = getIn(form.errors, field.name);
-  const touched = getIn(form.touched, field.name);
-
-  async function handleChange({
-    target: { value },
-  }: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>): Promise<void> {
-    if (triggerOnChange) {
-      await triggerOnChange(value);
-    }
-    form.setFieldValue(field.name, transformValue ? transformValue(value) : value);
-  }
-
+  const { form } = fieldProps; // passed from Formik <Field />
   const classes = useStyles();
 
   return (
-    <FieldFormControl
-      className={props.className}
-      errorMessage={touched && errorMessage}
-      label={label}
-      disabled={form.isSubmitting}
-    >
-      <Box className={classes.imageBox} display="flex" alignItems="center">
-        <Avatar className={classes.avatar} />
-        <div>
-          <OutlinedButton className={classes.button} disabled={form.isSubmitting}>
-            Upload Photo
-          </OutlinedButton>
-        </div>
-      </Box>
+    <FieldFormControl className={className} label={label} disabled={form.isSubmitting} {...fieldProps}>
+      {({ handleBlur, handleChange }) => (
+        <Box className={classes.imageBox} display="flex" alignItems="center">
+          <Avatar className={classes.avatar} />
+          <div>
+            <OutlinedButton className={classes.button} disabled={form.isSubmitting}>
+              Upload Photo
+            </OutlinedButton>
+          </div>
+        </Box>
+      )}
     </FieldFormControl>
   );
 }

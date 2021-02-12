@@ -1,12 +1,17 @@
 import React from 'react';
+import { FieldProps, getIn } from 'formik';
 import { Theme, makeStyles, FormHelperText, Typography, FormControl } from '@material-ui/core';
 
-interface Props {
-  children: React.ReactNode;
+interface RenderProps {
+  handleChange: (value: string) => void;
+  handleBlur: (value: string) => void;
+}
+
+interface Props extends FieldProps {
+  children: (childProps: RenderProps) => React.ReactNode;
   className?: string;
   description?: string;
   disabled?: boolean;
-  errorMessage?: string;
   optional?: boolean;
   label?: string;
 }
@@ -14,6 +19,7 @@ interface Props {
 interface StyleProps {
   optional?: boolean;
   disabled?: boolean;
+  error: boolean;
 }
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
@@ -42,21 +48,21 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       },
     },
   }),
-  error: {
+  error: props => ({
     color: theme.palette.error.main,
     borderColor: theme.palette.error.main,
     marginTop: theme.spacing(1),
     marginBottom: 0,
-    fontSize: theme.spacing(3.5),
     fontFamily: '"Lato",-apple-system,sans-serif',
     fontWeight: 'bold',
+    visibility: props.error ? 'visible' : 'hidden',
     [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(3.5),
-    },
-    [theme.breakpoints.down('xs')]: {
       fontSize: theme.spacing(3),
     },
-  },
+    [theme.breakpoints.down('xs')]: {
+      fontSize: theme.spacing(2.5),
+    },
+  }),
   txtGray: {
     color: theme.palette.info.main,
     [theme.breakpoints.up('sm')]: {
@@ -70,22 +76,44 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       fontSize: theme.spacing(3),
     },
   },
+  filler: {
+    [theme.breakpoints.up('sm')]: {
+      height: theme.spacing(3.5),
+    },
+    [theme.breakpoints.down('xs')]: {
+      height: theme.spacing(3),
+    },
+  },
 }));
 
 /**
  *  This component replaces MUI's `FormControl` component, and provides
- *  decorations for label, description, and error message with our custom styles
+ *  styled decorations for label, description, and error message with our custom styles
+ *  returns a render prop pattern with handlers for `onChange` and `onBlur` that will update the formik field
  */
 export default function FieldDecorations({
   children,
   label,
   description,
   disabled,
-  errorMessage,
   className,
   optional,
+  ...fieldProps
 }: Props): JSX.Element {
-  const classes = useStyles({ optional, disabled });
+  const { form, field } = fieldProps; // passed from Formik <Field />
+  const errorMessage = getIn(form.errors, field.name);
+  const fieldTouched = getIn(form.touched, field.name);
+
+  async function handleChange(value: any): Promise<void> {
+    form.setFieldValue(field.name, value);
+  }
+
+  function handleBlur(value: string): void {
+    form.setFieldTouched(field.name);
+    form.handleBlur(value);
+  }
+
+  const classes = useStyles({ optional, disabled, error: fieldTouched && errorMessage });
   return (
     <FormControl className={className} fullWidth>
       {label && <label className={classes.label}>{label}</label>}
@@ -95,9 +123,9 @@ export default function FieldDecorations({
         </Typography>
       )}
 
-      {children}
+      {children({ handleChange, handleBlur })}
 
-      {errorMessage && <FormHelperText className={classes.error}>{errorMessage}</FormHelperText>}
+      <FormHelperText className={classes.error}>{errorMessage || 'text to maintain height'}</FormHelperText>
     </FormControl>
   );
 }

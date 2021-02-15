@@ -84,16 +84,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingTop: theme.spacing(1.25),
     },
   },
-  card: {
-    [theme.breakpoints.up('sm')]: {
-      margin: `${theme.spacing(9)} 0 ${theme.spacing(12)}`,
-      padding: `${theme.spacing(13.5)} ${theme.spacing(10)} ${theme.spacing(12.5)}`,
-    },
-    [theme.breakpoints.down('xs')]: {
-      margin: `${theme.spacing(6.5)} 0 ${theme.spacing(10)}`,
-      padding: `${theme.spacing(8.5)} ${theme.spacing(2.5)} ${theme.spacing(10)}`,
-    },
-  },
   button: {
     [theme.breakpoints.up('sm')]: {
       marginTop: theme.spacing(8),

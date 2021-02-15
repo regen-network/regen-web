@@ -11,7 +11,7 @@ featuredSection:
     including ecosystem health, animal welfare, and soil health.
 
 
-    Our first vintages of this credit were issued to [Wilmot](/registry/projects/wilmot) and [Woodburn](https://www.regen.network/registry/projects/woodburn) which have increased soil organic carbon concentration through rotational grazing to 4.5% and 3.4% respectively. These vintages represent one of the largest issuances to agricultural projects to-date in Australia! The credits have already been sold to a major tech corporation to help meet their climate goals.
+    Our first vintages of this credit were issued to [Wilmot](/registry/projects/wilmot) and [Woodburn](https://www.regen.network/registry/projects/woodburn) which have increased soil organic carbon concentration through rotational grazing to 4.5% and 3.4% respectively. These vintages represent one of the largest issuances to agricultural projects to-date in Australia! The credits have already been sold to Microsoft to help meet their climate goals.
 blogSection:
   header: Regen Network Blog
   posts:
@@ -64,6 +64,7 @@ comingSoonSection:
     - name: "Pillango "
       location: Wallace County, Kansas, United States
       area: 1101
-      areaUnit: acres
+      areaUnit: hectares
       image: ../../static/media/pillango.png
-      comingSoon: true
+      comingSoon: false
+      handle: pillango

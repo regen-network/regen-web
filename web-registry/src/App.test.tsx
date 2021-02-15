@@ -1,8 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { useAuth0 } from '@auth0/auth0-react';
+import { MockedProvider } from '@apollo/client/testing';
+
 import './jest.mock';
 import App from './App';
-import { useAuth0 } from '@auth0/auth0-react';
 
 // create a dummy user profile
 const user = {
@@ -24,7 +26,12 @@ describe('App - logged in', () => {
 
   it('renders without crashing', () => {
     const div = document.createElement('div');
-    ReactDOM.render(<App />, div);
+    ReactDOM.render(
+      <MockedProvider mocks={[]}>
+        <App />
+      </MockedProvider>,
+      div,
+    );
     ReactDOM.unmountComponentAtNode(div);
   });
 });
@@ -38,7 +45,12 @@ describe('App - not logged in', () => {
 
   it('renders without crashing', () => {
     const div = document.createElement('div');
-    ReactDOM.render(<App />, div);
+    ReactDOM.render(
+      <MockedProvider mocks={[]}>
+        <App />
+      </MockedProvider>,
+      div,
+    );
     ReactDOM.unmountComponentAtNode(div);
   });
 });

@@ -1,0 +1,82 @@
+fragment partyFields on Party {
+  name
+  organizationByPartyId {
+    ...organizationFields
+  }
+  addressByAddressId {
+    feature
+  }
+  walletByWalletId {
+    addr
+  }
+}
+
+fragment organizationFields on Organization {
+  id
+  description
+  organizationMembersByOrganizationId(condition: { isOwner: true }) {
+    nodes {
+      userByMemberId {
+        partyByPartyId {
+          name
+          roles
+        }
+      }
+    }
+  }
+}
+
+query ProjectByHandle($handle: String!) {
+  projectByHandle(handle: $handle) {
+    eventsByProjectId {
+      nodes {
+        date
+        summary
+        description
+        creditVintageByEventId {
+          id
+          createdAt
+          startDate
+          endDate
+          initialDistribution
+          units
+          certificateLink
+          txHash
+          walletByIssuerId {
+            addr
+            partiesByWalletId(first: 1) {
+              nodes {
+                ...partyFields
+              }
+            }
+          }
+        }
+      }
+    }
+    name
+    creditClassVersionByCreditClassVersionIdAndCreditClassVersionCreatedAt {
+      name
+      version
+      metadata
+      creditClassById {
+        handle
+      }
+    }
+    methodologyVersionByMethodologyVersionIdAndMethodologyVersionCreatedAt {
+      name
+      version
+      methodologyById {
+        handle
+      }
+    }
+    partyByDeveloperId {
+      ...partyFields
+    }
+    partyByStewardId {
+      ...partyFields
+    }
+    partyByLandOwnerId {
+      ...partyFields
+    }
+  }
+}

@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 /**
  *
  * Wraps content with a formik `<Form>` and MUI `Card` with a contained
- * maxWidth, prives margin for any child `FormControl` elements, and provides
+ * maxWidth, provides margin for any child `FormControl` elements, and provides
  * buttons for submit / cancel
  */
 export default function FormWrapCard({

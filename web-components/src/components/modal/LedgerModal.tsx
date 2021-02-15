@@ -323,7 +323,7 @@ export default function LedgerModal({
               arrow
               placement="top"
               title={ReactHtmlParser(
-                'This summary section includes <b>off-chain data</b> (data residing in a centralized database) and <b>blockchain data</b> stored on the Regen Ledger.',
+                'This summary section includes <b>off-chain data</b> (data residing in a centralized database) and <b>blockchain data</b> stored on the Regen Ledger. Blockchain data is only on devnet, see more details on devnet below.',
               )}
             >
               <span>
@@ -343,7 +343,9 @@ export default function LedgerModal({
                   <CustomTooltip
                     arrow
                     placement="top"
-                    title={ReactHtmlParser('<b>Blockchain data:</b> data stored on the Regen Ledger.')}
+                    title={ReactHtmlParser(
+                      '<b>Blockchain data:</b> data stored on the Regen Ledger. These credits exist only on our devnet and should not be treated as actual legal title to the credits. Credits subject to change until deployed on our Mainnet.',
+                    )}
                   >
                     <span>
                       <InfoIcon className={classes.infoIcon} />

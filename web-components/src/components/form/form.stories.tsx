@@ -10,20 +10,15 @@ export default {
 };
 // TODO: The following crashes the tests. I'm pretty sure we need to stub a method, but i'm not sure what
 
-// export const moreInfo = (): JSX.Element => (
-//   <Modal open onClose={() => null}>
-//     <MoreInfoForm onClose={() => null} apiUrl="" />
-//   </Modal>
-// );
-
+const wrapStyles = { backgroundColor: '#FAFAFA', width: '100%', height: '100%' };
 export const userProfile = (): JSX.Element => (
-  <div style={{ backgroundColor: '#FAFAFA' }}>
+  <div style={wrapStyles}>
     <UserProfileForm onClose={() => null} apiUrl="" />
   </div>
 );
 
 export const organizationProfile = (): JSX.Element => (
-  <div style={{ backgroundColor: '#FAFAFA' }}>
+  <div style={wrapStyles}>
     <OrganizationProfileForm onClose={() => null} apiUrl="" />
   </div>
 );

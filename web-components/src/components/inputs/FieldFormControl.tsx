@@ -1,6 +1,7 @@
 import React from 'react';
 import { FieldProps, getIn } from 'formik';
 import { Theme, makeStyles, FormHelperText, Typography, FormControl } from '@material-ui/core';
+import FormLabel from '../form/ControlledFormLabel';
 
 interface RenderProps {
   handleChange: (value: string) => void;
@@ -23,31 +24,6 @@ interface StyleProps {
 }
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
-  label: props => ({
-    lineHeight: '140%',
-    transform: 'scale(1)',
-    color: props.disabled ? theme.palette.info.main : theme.palette.primary.contrastText,
-    fontFamily: theme.typography.fontFamily,
-    fontWeight: 'bold',
-    position: 'relative',
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(4.5),
-    },
-    [theme.breakpoints.down('xs')]: {
-      fontSize: theme.spacing(4),
-    },
-    '&::after': {
-      content: props.optional ? '" (optional)"' : '',
-      fontWeight: 'normal',
-      color: theme.palette.info.main,
-      [theme.breakpoints.up('sm')]: {
-        fontSize: theme.spacing(4),
-      },
-      [theme.breakpoints.down('xs')]: {
-        fontSize: theme.spacing(3.5),
-      },
-    },
-  }),
   error: props => ({
     color: theme.palette.error.main,
     borderColor: theme.palette.error.main,
@@ -116,7 +92,12 @@ export default function FieldDecorations({
   const classes = useStyles({ optional, disabled, error: fieldTouched && errorMessage });
   return (
     <FormControl className={className} fullWidth>
-      {label && <label className={classes.label}>{label}</label>}
+      {label && (
+        <FormLabel optional={optional} disabled={disabled}>
+          {label}
+        </FormLabel>
+      )}
+
       {description && (
         <Typography variant="body1" className={classes.txtGray}>
           {description}

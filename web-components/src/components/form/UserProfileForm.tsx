@@ -60,7 +60,7 @@ export default function UserProfileForm({ onClose, onSubmit, apiUrl }: UserProfi
               <Field component={ImageField} label="Bio Photo" name="bioPhoto" optional />
               <Field component={PhoneField} label="Phone number" name="phone" optional />
               <Field
-                charLimit={10}
+                charLimit={160}
                 component={ControlledTextField}
                 description="Describe any relevant background and experience. This info may be shown on the project page."
                 label="Short personal description"

@@ -15,6 +15,7 @@ interface Props {
 
 const useStyles = makeStyles((theme: Theme) => ({
   card: {
+    maxWidth: theme.spacing(140),
     [theme.breakpoints.up('sm')]: {
       margin: `${theme.spacing(9)} 0 ${theme.spacing(12)}`,
       padding: `${theme.spacing(13.5)} ${theme.spacing(10)} ${theme.spacing(12.5)}`,
@@ -23,17 +24,16 @@ const useStyles = makeStyles((theme: Theme) => ({
       margin: `${theme.spacing(6.5)} ${theme.spacing(2.5)} ${theme.spacing(10)}`,
       padding: `${theme.spacing(8.5)} ${theme.spacing(2.5)} ${theme.spacing(10)}`,
     },
-    '& .MuiFormControl-root': {
-      marginTop: theme.spacing(4.5),
-    },
-    '& .MuiFormControl-root:first-of-type': {
-      marginTop: 0,
-    },
   },
   form: {
     [theme.breakpoints.up('sm')]: {
-      maxWidth: theme.spacing(140),
       margin: '0 auto',
+      '& .MuiFormControl-root': {
+        marginTop: theme.spacing(4.5),
+      },
+      '& .MuiFormControl-root:first-of-type': {
+        marginTop: 0,
+      },
     },
   },
   button: {

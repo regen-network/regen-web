@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
-import { useMutation, useQuery } from '@apollo/react-hooks';
-import { gql } from 'apollo-boost';
+import { useMutation, useQuery } from '@apollo/client';
+import { gql } from '@apollo/client';
 import { loader } from 'graphql.macro';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';

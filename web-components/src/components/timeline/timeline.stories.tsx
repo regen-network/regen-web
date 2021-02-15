@@ -3,7 +3,7 @@ import TimelineItem from 'web-components/lib/components/timeline/TimelineItem';
 import Timeline, { Event } from 'web-components/lib/components/timeline';
 import NewTimeline, { Item } from 'web-components/lib/components/timeline/NewTimeline';
 import theme from '../../theme/muiTheme';
-import { withKnobs, object, date, boolean, text, number } from '@storybook/addon-knobs';
+import { withKnobs, object, boolean, text, number } from '@storybook/addon-knobs';
 
 export default {
   title: 'Components|Timeline',
@@ -49,7 +49,7 @@ export const timeline = (): JSX.Element => (
 );
 export const timelineItem = (): JSX.Element => (
   <TimelineItem
-    date={date('Date', new Date(events[0].date))}
+    date={text('Date', events[0].date)}
     title={text('Title', events[0].title)}
     description={text('Description', events[0].description)}
     circleColor={theme.palette.secondary.main}

@@ -51,7 +51,7 @@ const TimelineSection = (): JSX.Element => {
               completedItemIndex
               items {
                 date
-                title
+                summary
                 description
               }
             }

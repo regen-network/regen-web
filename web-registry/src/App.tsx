@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 import { BrowserRouter, Switch, Route, useParams, useLocation, Redirect } from 'react-router-dom';
 import { useTheme } from '@material-ui/core/styles';
 import { useAuth0, OAuthError } from '@auth0/auth0-react';
-import { createBrowserHistory } from 'history';
 
+import { createBrowserHistory } from 'history';
 import isAdmin from './lib/admin';
 import { init as initGA } from './lib/ga';
 
@@ -247,7 +247,7 @@ function VerifyEmail(): JSX.Element {
   );
 }
 
-const App: React.FC = (): JSX.Element => {
+const App: React.FC = (props): JSX.Element => {
   const { user, isLoading, error } = useAuth0();
 
   useEffect(() => {

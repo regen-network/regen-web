@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
-import { useMutation, useQuery } from '@apollo/react-hooks';
-import { gql } from 'apollo-boost';
+import { useMutation, useQuery, gql } from '@apollo/client';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Select from '@material-ui/core/Select';
@@ -17,7 +16,7 @@ import TableRow from '@material-ui/core/TableRow';
 import { loader } from 'graphql.macro';
 
 import Title from 'web-components/lib/components/title';
-import { pluralize } from 'web-components/lib/components/credits/pluralize';
+import { pluralize } from 'web-components/lib/utils/pluralize';
 
 const TRANSFER_CREDITS = gql`
   mutation TransferCredits($input: TransferCreditsInput!) {

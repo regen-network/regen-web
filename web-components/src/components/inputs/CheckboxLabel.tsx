@@ -58,7 +58,7 @@ export default function CheckboxLabel({ label, ...props }: CheckboxLabelProps): 
         }
         label={label}
       />
-      <FormHelperText error={showError}>{fieldError}</FormHelperText>
+      {showError && <FormHelperText error={showError}>{fieldError}</FormHelperText>}
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import Link from '@material-ui/core/Link';
 import axios from 'axios';
@@ -6,6 +6,8 @@ import axios from 'axios';
 import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import Description from 'web-components/lib/components/description';
+import Banner from 'web-components/lib/components/banner';
+import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 import getApiUri from '../lib/apiUri';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -34,17 +36,25 @@ export default function VerifyEmail(): JSX.Element {
   const classes = useStyles();
   const search = new URLSearchParams(window.location.search);
   const email = search.get('email');
+  const [error, setError] = useState<Error | null>(null);
+  const [status, setStatus] = useState<string | null>(null);
+  const [isSubmitting, setSubmitting] = useState<boolean>(false);
 
   const resendEmail = useCallback(() => {
+    setSubmitting(true);
     axios
       .post(`${getApiUri()}/auth/verification-email`, {
         email,
       })
       .then(resp => {
-        console.log(resp);
+        setSubmitting(false);
+        setStatus('Email resent! Please check your inbox.');
+        setError(null);
       })
       .catch(err => {
-        console.log(err);
+        setSubmitting(false);
+        setError(err);
+        setStatus(null);
       });
   }, [email]);
 
@@ -62,6 +72,8 @@ export default function VerifyEmail(): JSX.Element {
       <Description className={classes.resend}>
         Don’t see anything? <Link onClick={resendEmail}>Resend email</Link>.
       </Description>
+      {!isSubmitting && error && <ErrorBanner text={error.toString()} />}
+      {!isSubmitting && status && <Banner text={status} />}
     </OnBoardingSection>
   );
 }

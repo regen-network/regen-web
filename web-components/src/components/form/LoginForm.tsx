@@ -8,6 +8,7 @@ import ReCAPTCHA from 'react-google-recaptcha';
 
 import Description from '../description';
 import TextField from '../inputs/TextField';
+import ErrorBanner from '../banner/ErrorBanner';
 import ContainedButton from '../buttons/ContainedButton';
 import EyeIcon from '../icons/EyeIcon';
 import OnBoardingCard from '../cards/OnBoardingCard';
@@ -20,6 +21,7 @@ import {
   validateEmail,
   invalidEmailMessage,
 } from '../inputs/validation';
+import { errors, SignupCode } from './errors';
 
 interface LoginFormProps {
   link: string;
@@ -169,99 +171,105 @@ const LoginForm: React.FC<LoginFormProps> = ({
           await submit(values);
           setSubmitting(false);
         } catch (e) {
+          const code: SignupCode | undefined = e.code;
+          const errorMessage: string = code && code in errors ? errors[code] : e.toString();
+          setStatus(errorMessage);
           setSubmitting(false);
         }
       }}
     >
       {({ values, errors, submitForm, isSubmitting, isValid, submitCount, setFieldValue, status }) => {
         return (
-          <Form>
-            <OnBoardingCard>
-              {signup ? (
-                <Description className={classes.description}>
-                  If you've already signed up, <Link href={link}>log in here</Link>.
-                </Description>
-              ) : (
-                <Description className={classes.description}>
-                  Don't have an account? <Link href={link}>Sign up</Link>.
-                </Description>
-              )}
-              <Field component={TextField} type="email" label="Email address" name="email" />
-              <Field
-                component={TextField}
-                className={classes.textField}
-                type={values.showPassword ? 'text' : 'password'}
-                label="Password"
-                name="password"
-                helperText={errors.password}
-                endAdornment={
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={() => setFieldValue('showPassword', !values.showPassword)}
-                    onMouseDown={handleMouseDownPassword}
-                  >
-                    <EyeIcon
-                      className={classes.eyeIcon}
-                      color={theme.palette.secondary.dark}
-                      visible={values.showPassword}
-                    />
-                  </IconButton>
-                }
-              />
-              {!signup && <Description className={classes.forgotPassword}>Forgot password</Description>}
-            </OnBoardingCard>
-            <div className={classes.checkboxes}>
-              {signup ? (
-                <>
-                  <Field
-                    component={CheckboxLabel}
-                    type="checkbox"
-                    name="updates"
-                    label={
-                      <Description className={classes.checkboxLabel}>
-                        Please sign me up for the Regen news and updates (unsubscribe anytime)
-                      </Description>
-                    }
-                  />
-                  <Field
-                    component={CheckboxLabel}
-                    type="checkbox"
-                    name="privacy"
-                    label={
-                      <Description className={classes.checkboxLabel}>
-                        I agree to the Regen Network <Link href={privacyLink}>Privacy Policy</Link> and{' '}
-                        <Link href={termsLink}>Terms of Service</Link>
-                      </Description>
-                    }
-                  />
-                </>
-              ) : (
+          <div>
+            <Form>
+              <OnBoardingCard>
+                {signup ? (
+                  <Description className={classes.description}>
+                    If you've already signed up, <Link href={link}>log in here</Link>.
+                  </Description>
+                ) : (
+                  <Description className={classes.description}>
+                    Don't have an account? <Link href={link}>Sign up</Link>.
+                  </Description>
+                )}
+                <Field component={TextField} type="email" label="Email address" name="email" />
                 <Field
-                  component={CheckboxLabel}
-                  type="checkbox"
-                  name="staySigned"
-                  label={<Description className={classes.checkboxLabel}>Stay signed in</Description>}
+                  component={TextField}
+                  className={classes.textField}
+                  type={values.showPassword ? 'text' : 'password'}
+                  label="Password"
+                  name="password"
+                  helperText={errors.password}
+                  endAdornment={
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={() => setFieldValue('showPassword', !values.showPassword)}
+                      onMouseDown={handleMouseDownPassword}
+                    >
+                      <EyeIcon
+                        className={classes.eyeIcon}
+                        color={theme.palette.secondary.dark}
+                        visible={values.showPassword}
+                      />
+                    </IconButton>
+                  }
                 />
-              )}
-              {!signup && recaptchaSiteKey && (
-                <div className={classes.recaptcha}>
-                  <ReCAPTCHA
-                    onChange={value => setFieldValue('recaptcha', value)}
-                    sitekey={recaptchaSiteKey}
+                {!signup && <Description className={classes.forgotPassword}>Forgot password</Description>}
+              </OnBoardingCard>
+              <div className={classes.checkboxes}>
+                {signup ? (
+                  <>
+                    <Field
+                      component={CheckboxLabel}
+                      type="checkbox"
+                      name="updates"
+                      label={
+                        <Description className={classes.checkboxLabel}>
+                          Please sign me up for the Regen news and updates (unsubscribe anytime)
+                        </Description>
+                      }
+                    />
+                    <Field
+                      component={CheckboxLabel}
+                      type="checkbox"
+                      name="privacy"
+                      label={
+                        <Description className={classes.checkboxLabel}>
+                          I agree to the Regen Network <Link href={privacyLink}>Privacy Policy</Link> and{' '}
+                          <Link href={termsLink}>Terms of Service</Link>
+                        </Description>
+                      }
+                    />
+                  </>
+                ) : (
+                  <Field
+                    component={CheckboxLabel}
+                    type="checkbox"
+                    name="staySigned"
+                    label={<Description className={classes.checkboxLabel}>Stay signed in</Description>}
                   />
-                </div>
-              )}
-            </div>
-            <Grid container justify="flex-end">
-              <ContainedButton
-                onClick={submitForm}
-                className={classes.button}
-                disabled={(submitCount > 0 && !isValid) || isSubmitting}
-              >
-                {label}
-              </ContainedButton>
-            </Grid>
-          </Form>
+                )}
+                {!signup && recaptchaSiteKey && (
+                  <div className={classes.recaptcha}>
+                    <ReCAPTCHA
+                      onChange={value => setFieldValue('recaptcha', value)}
+                      sitekey={recaptchaSiteKey}
+                    />
+                  </div>
+                )}
+              </div>
+              <Grid container justify="flex-end">
+                <ContainedButton
+                  onClick={submitForm}
+                  className={classes.button}
+                  disabled={(submitCount > 0 && !isValid) || isSubmitting}
+                >
+                  {label}
+                </ContainedButton>
+              </Grid>
+            </Form>
+            {submitCount > 0 && !isSubmitting && status && <ErrorBanner text={status} />}
+          </div>
         );
       }}
     </Formik>

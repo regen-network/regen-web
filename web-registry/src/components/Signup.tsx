@@ -25,7 +25,6 @@ export default function Signup(): JSX.Element {
             connection: 'Username-Password-Authentication',
             email,
             password,
-            // user_metadata: { plan: 'silver', team_id: 'a111' },
           },
           function(err) {
             if (err) {

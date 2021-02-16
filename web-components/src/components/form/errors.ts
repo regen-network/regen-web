@@ -1,7 +1,7 @@
 export const errors = {
   invalid_password:
     'Your password must contain 1 letter, 1 number, 1 special character, and at least 8 characters total',
-  invalid_signup: 'This user is invalid',
+  invalid_signup: 'This email address is invalid',
   password_dictionary_error: 'This password is too common',
   password_no_user_info_error: 'This password is invalid',
   password_strength_error: 'Password strength: too weak',

@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 
-import Section from '.';
+import Section from './index';
 
 interface OnBoardingContainerProps {
   title: string;

@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   radioActive: {
     backgroundColor: theme.palette.grey[50],
-    transform: 'scale(1.015)',
+    transform: 'scale(1.01)',
     boxShadow: theme.shadows[1],
     border: `1px solid ${theme.palette.secondary.light}`,
     '& .MuiTypography-body1': {

@@ -17,9 +17,9 @@ interface UserProfileFormProps {
 interface Values {
   name: string;
   role: string;
-  photo: string | undefined;
-  phone: string | undefined;
-  description: string | undefined;
+  photo?: string;
+  phone?: string;
+  description?: string;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({

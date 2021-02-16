@@ -34,10 +34,10 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     fontWeight: 'bold',
     visibility: props.error ? 'visible' : 'hidden',
     [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(3),
+      fontSize: theme.spacing(3.5),
     },
     [theme.breakpoints.down('xs')]: {
-      fontSize: theme.spacing(2.5),
+      fontSize: theme.spacing(3),
     },
   }),
   txtGray: {

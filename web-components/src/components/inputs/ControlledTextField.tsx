@@ -4,10 +4,11 @@ import { FieldProps } from 'formik';
 import FieldFormControl from './FieldFormControl';
 
 interface ControlledTextFieldProps extends FieldProps {
-  adornment?: string;
+  startAdornment?: React.ReactNode;
   charLimit?: number;
   className?: string;
   description?: string;
+  endAdornment?: React.ReactNode;
   label?: string;
   multiline?: boolean;
   optional?: boolean;
@@ -54,10 +55,11 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 export default function ControlledTextField({
-  adornment,
+  startAdornment,
   charLimit,
   className,
   description,
+  endAdornment,
   label,
   multiline,
   optional,
@@ -98,7 +100,12 @@ export default function ControlledTextField({
             onBlur={({ target: { value } }) => handleBlur(value)}
             className={classes.input}
             rows={rows}
-            startAdornment={adornment ? <InputAdornment position="start">{adornment}</InputAdornment> : null}
+            startAdornment={
+              startAdornment ? <InputAdornment position="start">{startAdornment}</InputAdornment> : null
+            }
+            endAdornment={
+              endAdornment ? <InputAdornment position="end">{endAdornment}</InputAdornment> : null
+            }
             disableUnderline
           />
           {charLimit && (

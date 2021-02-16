@@ -160,7 +160,12 @@ const LoginForm: React.FC<LoginFormProps> = ({
           setSubmitting(false);
         } catch (e) {
           const code: SignupCode | undefined = e.code;
-          const errorMessage: string = code && code in errors ? errors[code] : e.toString();
+          const errorMessage: string =
+            code && code in errors
+              ? errors[code]
+              : e.message === `duplicate key value violates unique constraint "user_email_key"`
+              ? errors.invalid_signup
+              : e.toString();
           setStatus(errorMessage);
           setSubmitting(false);
         }

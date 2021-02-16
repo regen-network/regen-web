@@ -1,6 +1,7 @@
 import React from 'react';
 import { FieldProps, getIn } from 'formik';
 import { Theme, makeStyles, FormHelperText, Typography, FormControl } from '@material-ui/core';
+
 import FormLabel from '../form/ControlledFormLabel';
 
 interface RenderProps {
@@ -44,12 +45,12 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       marginTop: theme.spacing(1),
       marginBottom: theme.spacing(4),
-      fontSize: theme.spacing(3.3),
+      // fontSize: theme.spacing(3.3),
     },
     [theme.breakpoints.down('xs')]: {
       marginTop: theme.spacing(1),
       marginBottom: theme.spacing(3),
-      fontSize: theme.spacing(3),
+      // fontSize: theme.spacing(3),
     },
   },
   filler: {
@@ -63,7 +64,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
 }));
 
 /**
- *  This component replaces MUI's `FormControl` component, and provides
+ *  This component uses MUI's `FormControl` component as a wrapper, and provides
  *  styled decorations for label, description, and error message with our custom styles
  *  returns a render prop pattern with handlers for `onChange` and `onBlur` that will update the formik field
  */
@@ -106,7 +107,7 @@ export default function FieldDecorations({
 
       {children({ handleChange, handleBlur })}
 
-      <FormHelperText className={classes.error}>{errorMessage || 'text to maintain height'}</FormHelperText>
+      <FormHelperText className={classes.error}>{errorMessage || 'this text is hidden'}</FormHelperText>
     </FormControl>
   );
 }

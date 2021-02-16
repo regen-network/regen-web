@@ -1,16 +1,16 @@
 import React from 'react';
-import { Grid } from '@material-ui/core';
-import { Formik, Field } from 'formik';
+import { Grid, makeStyles, Theme } from '@material-ui/core';
+import { Formik, Form, Field } from 'formik';
+
+import ContainedButton from '../buttons/ContainedButton';
+import OnBoardingCard from '../cards/OnBoardingCard';
 import ControlledTextField from '../inputs/ControlledTextField';
 import PhoneField from '../inputs/PhoneField';
 import ImageField from '../inputs/ImageField';
-import Title from '../title';
 import { requiredMessage } from '../inputs/validation';
-import FormWrapCard from '../cards/FormWrapCard';
 
 interface UserProfileFormProps {
-  onClose: () => void;
-  onSubmit?: () => void;
+  submit: (values: Values) => Promise<void>;
   apiUrl: string;
 }
 
@@ -22,44 +22,86 @@ interface Values {
   description: string | undefined;
 }
 
-export default function UserProfileForm({ onClose, onSubmit, apiUrl }: UserProfileFormProps): JSX.Element {
+const useStyles = makeStyles((theme: Theme) => ({
+  button: {
+    [theme.breakpoints.up('sm')]: {
+      marginTop: theme.spacing(8),
+    },
+    [theme.breakpoints.down('xs')]: {
+      marginTop: theme.spacing(6.25),
+    },
+  },
+  textField: {
+    '&:first-of-type': {
+      marginTop: 0,
+    },
+    [theme.breakpoints.up('sm')]: {
+      marginTop: theme.spacing(4.5),
+    },
+    [theme.breakpoints.down('xs')]: {
+      marginTop: theme.spacing(4),
+    },
+  },
+}));
+
+const UserProfileForm: React.FC<UserProfileFormProps> = ({ submit, apiUrl }) => {
+  const classes = useStyles();
   return (
-    <Grid container alignItems="center" direction="column">
-      <Title align="center" variant="h4">
-        User Profile
-      </Title>
-      <Formik
-        initialValues={{
-          name: '',
-          role: '',
-          photo: undefined,
-          phone: undefined,
-          description: undefined,
-        }}
-        validate={(values: Values) => {
-          const errors: Partial<Values> = {};
-          if (!values.name) {
-            errors.name = requiredMessage;
-          }
-          if (!values.role) {
-            errors.role = requiredMessage;
-          }
-          return errors;
-        }}
-        onSubmit={(values, { setSubmitting, setStatus }) => {
-          // setSubmitting(true);
-          console.log('TODO: handle submit'); // eslint-disable-line
-          console.log('form values: ', values); //eslint-disable-line
-        }}
-      >
-        {({ values, submitForm, isSubmitting, isValid, submitCount, setFieldValue, status }) => {
-          return (
-            <FormWrapCard onSubmit={submitForm} submitDisabled={isSubmitting}>
-              <Field component={ControlledTextField} label="Full name" name="name" />
-              <Field component={ControlledTextField} name="role" label="Role" />
-              <Field component={ImageField} label="Bio Photo" name="bioPhoto" optional />
-              <Field component={PhoneField} label="Phone number" name="phone" optional />
+    <Formik
+      initialValues={{
+        name: '',
+        role: '',
+        photo: undefined,
+        phone: undefined,
+        description: undefined,
+      }}
+      validate={(values: Values) => {
+        const errors: Partial<Values> = {};
+        if (!values.name) {
+          errors.name = requiredMessage;
+        }
+        if (!values.role) {
+          errors.role = requiredMessage;
+        }
+        return errors;
+      }}
+      onSubmit={async (values, { setSubmitting }) => {
+        setSubmitting(true);
+        try {
+          await submit(values);
+          setSubmitting(false);
+        } catch (e) {
+          setSubmitting(false);
+        }
+      }}
+    >
+      {({ submitForm, isSubmitting, isValid, submitCount }) => {
+        return (
+          <Form>
+            <OnBoardingCard>
               <Field
+                className={classes.textField}
+                component={ControlledTextField}
+                label="Full name"
+                name="name"
+              />
+              <Field className={classes.textField} component={ControlledTextField} name="role" label="Role" />
+              <Field
+                className={classes.textField}
+                component={ImageField}
+                label="Bio Photo"
+                name="bioPhoto"
+                optional
+              />
+              <Field
+                className={classes.textField}
+                component={PhoneField}
+                label="Phone number"
+                name="phone"
+                optional
+              />
+              <Field
+                className={classes.textField}
                 charLimit={160}
                 component={ControlledTextField}
                 description="Describe any relevant background and experience. This info may be shown on the project page."
@@ -69,10 +111,22 @@ export default function UserProfileForm({ onClose, onSubmit, apiUrl }: UserProfi
                 multiline
                 optional
               />
-            </FormWrapCard>
-          );
-        }}
-      </Formik>
-    </Grid>
+
+              <Grid container justify="flex-end">
+                <ContainedButton
+                  onClick={submitForm}
+                  className={classes.button}
+                  disabled={(submitCount > 0 && !isValid) || isSubmitting}
+                >
+                  Next
+                </ContainedButton>
+              </Grid>
+            </OnBoardingCard>
+          </Form>
+        );
+      }}
+    </Formik>
   );
-}
+};
+
+export default UserProfileForm;

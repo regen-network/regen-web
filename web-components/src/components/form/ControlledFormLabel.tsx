@@ -22,6 +22,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     fontFamily: theme.typography.fontFamily,
     fontWeight: 'bold',
     position: 'relative',
+    display: 'block',
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.spacing(4.5),
     },
@@ -45,7 +46,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
 /**
  *  manually re-implements MUI's FormLabel component to allow more control over positioning etc
  */
-export default function FormLabel({ children, className, optional, disabled }: Props): JSX.Element {
+export default function ControlledFormLabel({ children, className, optional, disabled }: Props): JSX.Element {
   const classes = useStyles({ optional, disabled });
   return <label className={clsx(classes.label, className)}>{children}</label>;
 }

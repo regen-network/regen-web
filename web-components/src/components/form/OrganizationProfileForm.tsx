@@ -1,28 +1,21 @@
 import React, { useState } from 'react';
 import clsx from 'clsx';
-import {
-  Grid,
-  Card,
-  Theme,
-  makeStyles,
-  FormControl,
-  RadioGroup,
-  FormControlLabel,
-  Radio,
-} from '@material-ui/core';
-import { Formik, Field } from 'formik';
+import { Theme, makeStyles, FormControl, RadioGroup, FormControlLabel, Radio, Grid } from '@material-ui/core';
+import { Form, Formik, Field } from 'formik';
 import { motion, AnimatePresence } from 'framer-motion';
+
 import ControlledTextField from '../inputs/ControlledTextField';
 import PhoneField from '../inputs/PhoneField';
 import ImageField from '../inputs/ImageField';
 import { requiredMessage } from '../inputs/validation';
-import Title from '../title';
-import FormWrapCard from '../cards/FormWrapCard';
+import OnBoardingCard from '../cards/OnBoardingCard';
 import FormLabel from './ControlledFormLabel';
+import ContainedButton from '../buttons/ContainedButton';
 
 interface FormProps {
-  onClose: () => void;
-  onSubmit?: () => void;
+  submit: (values: Values) => Promise<void>;
+  goBack: () => void;
+  skip: () => void;
   apiUrl: string;
 }
 
@@ -37,121 +30,164 @@ interface Values {
 type AcctType = 'personal' | 'organization';
 
 const useStyles = makeStyles((theme: Theme) => ({
-  orgType: {
+  topCard: {
     marginBottom: 0,
-    maxWidth: theme.spacing(140),
-    [theme.breakpoints.up('sm')]: {
-      marginTop: theme.spacing(9),
-      padding: `${theme.spacing(13.5)} ${theme.spacing(10)} ${theme.spacing(12.5)}`,
-    },
-    [theme.breakpoints.down('xs')]: {
-      margin: `${theme.spacing(6.5)} ${theme.spacing(2.5)} 0`,
-      padding: `${theme.spacing(8.5)} ${theme.spacing(2.5)} ${theme.spacing(10)}`,
-    },
   },
   radio: {
     border: `1px solid ${theme.palette.grey[100]}`,
     borderRadius: '5px',
     padding: `${theme.spacing(4)} ${theme.spacing(4)}`,
     margin: `${theme.spacing(4)} 0 0`,
-    transition: '300ms ease-in-out',
   },
   radioActive: {
     backgroundColor: theme.palette.grey[50],
+    transform: 'scale(1.015)',
+    boxShadow: theme.shadows[1],
     border: `1px solid ${theme.palette.secondary.light}`,
     '& .MuiTypography-body1': {
       fontWeight: 'bold',
     },
   },
+  button: {
+    [theme.breakpoints.up('sm')]: {
+      marginTop: theme.spacing(8),
+    },
+    [theme.breakpoints.down('xs')]: {
+      marginTop: theme.spacing(6.25),
+    },
+  },
+  textField: {
+    '&:first-of-type': {
+      marginTop: 0,
+    },
+    [theme.breakpoints.up('sm')]: {
+      marginTop: theme.spacing(4.5),
+    },
+    [theme.breakpoints.down('xs')]: {
+      marginTop: theme.spacing(4),
+    },
+  },
+  cancelBtn: {
+    color: theme.palette.grey[400],
+    '&:hover': {
+      backgroundColor: 'transparent',
+      color: theme.palette.grey[500],
+    },
+    [theme.breakpoints.up('sm')]: {
+      fontSize: theme.spacing(4),
+    },
+    [theme.breakpoints.down('xs')]: {
+      fontSize: theme.spacing(4),
+    },
+  },
 }));
 
-export default function OrganizationProfileForm({ onClose, onSubmit, apiUrl }: FormProps): JSX.Element {
+const OrganizationProfileForm: React.FC<FormProps> = ({ submit, apiUrl, goBack, skip }) => {
   const [acctType, setAcctType] = useState<AcctType>('personal');
   const classes = useStyles();
+  const isPersonal = acctType === 'personal';
+  const isOrg = acctType === 'organization';
+
   return (
-    <Grid container alignItems="center" direction="column">
-      <Title align="center" variant="h4">
-        Organization Profile
-      </Title>
-      <Card className={classes.orgType}>
-        <FormControl component="fieldset" fullWidth>
-          <FormLabel>Are you part of an organization?</FormLabel>
-          <RadioGroup
-            aria-label="isOrganization"
-            name="isOrganization"
-            value={acctType}
-            onChange={({ target: { value } }) => setAcctType(value as AcctType)}
-          >
-            <FormControlLabel
-              className={clsx(classes.radio, acctType === 'personal' && classes.radioActive)}
-              value="personal"
-              control={<Radio />}
-              label="No, I will register projects only as an individual"
-            />
-            <FormControlLabel
-              className={clsx(classes.radio, acctType === 'organization' && classes.radioActive)}
-              value="organization"
-              control={<Radio />}
-              label="Yes, I am part of an organization which will be associated with my project(s)"
-            />
-          </RadioGroup>
-        </FormControl>
-      </Card>
-      <Formik
-        initialValues={{
-          description: '',
-          displayName: '',
-          legalName: '',
-          location: '',
-          logo: '',
-        }}
-        validate={(values: Values) => {
-          const errors: Partial<Values> = {};
-          if (!values.displayName) {
-            errors.displayName = requiredMessage;
-          }
-          if (!values.legalName) {
-            errors.legalName = requiredMessage;
-          }
-          if (!values.location) {
-            errors.location = requiredMessage;
-          }
-          if (!values.logo) {
-            errors.logo = requiredMessage;
-          }
-          return errors;
-        }}
-        onSubmit={(values, { setSubmitting, setStatus }) => {
-          // setSubmitting(true);
-          console.log('TODO: handle submit'); // eslint-disable-line
-          console.log('form values: ', values); //eslint-disable-line
-        }}
-      >
-        {({ submitForm, isSubmitting }) => {
-          return (
+    <Formik
+      initialValues={{
+        description: '',
+        displayName: '',
+        legalName: '',
+        location: '',
+        logo: '',
+      }}
+      validate={(values: Values) => {
+        const errors: Partial<Values> = {};
+        if (!values.displayName) {
+          errors.displayName = requiredMessage;
+        }
+        if (!values.legalName) {
+          errors.legalName = requiredMessage;
+        }
+        if (!values.location) {
+          errors.location = requiredMessage;
+        }
+        if (!values.logo) {
+          errors.logo = requiredMessage;
+        }
+        return errors;
+      }}
+      onSubmit={async (values, { setSubmitting }) => {
+        setSubmitting(true);
+        try {
+          await submit(values);
+          setSubmitting(false);
+        } catch (e) {
+          setSubmitting(false);
+        }
+      }}
+    >
+      {({ submitForm, isSubmitting, isValid, submitCount }) => {
+        return (
+          <Form>
+            <OnBoardingCard className={classes.topCard}>
+              <FormControl component="fieldset" fullWidth>
+                <FormLabel>Are you part of an organization?</FormLabel>
+                <RadioGroup
+                  aria-label="isOrganization"
+                  name="isOrganization"
+                  value={acctType}
+                  onChange={({ target: { value } }) => setAcctType(value as AcctType)}
+                >
+                  <FormControlLabel
+                    className={clsx(classes.radio, isPersonal && classes.radioActive)}
+                    value="personal"
+                    control={<Radio />}
+                    label="No, I will register projects only as an individual"
+                  />
+                  <FormControlLabel
+                    className={clsx(classes.radio, isOrg && classes.radioActive)}
+                    value="organization"
+                    control={<Radio />}
+                    label="Yes, I am part of an organization which will be associated with my project(s)"
+                  />
+                </RadioGroup>
+              </FormControl>
+            </OnBoardingCard>
             <Accordion isOpen={acctType === 'organization'}>
-              <FormWrapCard onSubmit={submitForm} onCancel={() => null} submitDisabled={isSubmitting}>
+              <OnBoardingCard>
                 <Field
+                  className={classes.textField}
                   component={ControlledTextField}
                   description="This is the name of your farm, ranch, cooperative, non-profit, or other organization."
                   label="Organization legal name"
                   name="legalName"
                 />
                 <Field
+                  className={classes.textField}
                   component={ControlledTextField}
                   description="This is the display name on your project page, if you choose to make this entity publically viewable."
                   label="Display name for organization"
                   name="displayName"
                 />
                 <Field
+                  className={classes.textField}
                   component={ControlledTextField}
                   description="This address is used for issuing credits.  If you choose to show this entity on the project page, only city, state/province, and country will be displayed. "
                   label="Organization Location"
                   name="location"
                 />
-                <Field component={ImageField} label="Organization Logo" name="logo" />
-                <Field component={PhoneField} label="Phone number" name="phone" optional />
                 <Field
+                  className={classes.textField}
+                  component={ImageField}
+                  label="Organization Logo"
+                  name="logo"
+                />
+                <Field
+                  className={classes.textField}
+                  component={PhoneField}
+                  label="Phone number"
+                  name="phone"
+                  optional
+                />
+                <Field
+                  className={classes.textField}
                   charLimit={160}
                   component={ControlledTextField}
                   description="Describe any relevant background and experience. This info may be shown on the project page."
@@ -161,14 +197,30 @@ export default function OrganizationProfileForm({ onClose, onSubmit, apiUrl }: F
                   multiline
                   optional
                 />
-              </FormWrapCard>
+              </OnBoardingCard>
             </Accordion>
-          );
-        }}
-      </Formik>
-    </Grid>
+            <Grid container justify="space-between">
+              <ContainedButton
+                variant="text"
+                onClick={goBack}
+                className={clsx(classes.cancelBtn, classes.button)}
+              >
+                Back
+              </ContainedButton>
+              <ContainedButton
+                onClick={isPersonal ? skip : submitForm}
+                className={classes.button}
+                disabled={(submitCount > 0 && !isValid) || isSubmitting}
+              >
+                Next
+              </ContainedButton>
+            </Grid>
+          </Form>
+        );
+      }}
+    </Formik>
   );
-}
+};
 
 interface AccordionProps {
   children: React.ReactNode;
@@ -195,3 +247,5 @@ const Accordion = ({ children, isOpen }: AccordionProps): JSX.Element => {
     </AnimatePresence>
   );
 };
+
+export default OrganizationProfileForm;

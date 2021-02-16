@@ -1,7 +1,8 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
-import { FieldProps, getIn } from 'formik';
+import { FieldProps } from 'formik';
 import PhoneInput from 'react-phone-input-2';
+
 import FieldFormControl from './FieldFormControl';
 import 'react-phone-input-2/lib/style.css';
 
@@ -39,8 +40,8 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
 
 export default function RegenPhoneField({
   label,
-  optional = false,
   className,
+  optional = false,
   ...fieldProps
 }: RegenPhoneFieldProps): JSX.Element {
   const { form, field } = fieldProps; // passed from Formik <Field />

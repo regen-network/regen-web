@@ -12,7 +12,6 @@ interface PasswordFieldProps extends RegenTextFieldProps {
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
-  root: {},
   eyeIcon: {
     width: `${theme.spacing(4.75)} !important`,
     height: `${theme.spacing(4)} !important`,
@@ -48,7 +47,6 @@ export default function PasswordField({ signup = false, ...props }: PasswordFiel
 
   return (
     <TextField
-      className={classes.root}
       label="Password"
       type={showPassword ? 'text' : 'password'}
       helperText={score !== undefined ? getScoreLabel(score) : errors[name]}

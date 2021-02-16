@@ -47,12 +47,12 @@ export default function Geocoder({
         required={required}
         fullWidth={fullWidth}
         value={address}
-        onChange={async (e: any) => {
-          setAddress(e.target.value);
+        onChange={async ({ target: { value } }) => {
+          setAddress(value);
           const res = await geocoderService
             .forwardGeocode({
               types,
-              query: e.target.value,
+              query: value,
             })
             .send();
           setShowResults(true);

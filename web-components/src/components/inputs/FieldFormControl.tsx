@@ -68,7 +68,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
  *  styled decorations for label, description, and error message with our custom styles
  *  returns a render prop pattern with handlers for `onChange` and `onBlur` that will update the formik field
  */
-export default function FieldDecorations({
+export default function FieldFormControl({
   children,
   label,
   description,

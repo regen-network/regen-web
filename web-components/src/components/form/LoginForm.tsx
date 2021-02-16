@@ -1,16 +1,15 @@
 import React from 'react';
-import { useTheme, makeStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles, Theme } from '@material-ui/core/styles';
 import { Formik, Form, Field } from 'formik';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
-import IconButton from '@material-ui/core/IconButton';
 import ReCAPTCHA from 'react-google-recaptcha';
 
 import Description from '../description';
 import TextField from '../inputs/TextField';
+import PasswordField from '../inputs/PasswordField';
 import ErrorBanner from '../banner/ErrorBanner';
 import ContainedButton from '../buttons/ContainedButton';
-import EyeIcon from '../icons/EyeIcon';
 import OnBoardingCard from '../cards/OnBoardingCard';
 import CheckboxLabel from '../inputs/CheckboxLabel';
 import {
@@ -58,12 +57,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.down('xs')]: {
       fontSize: theme.spacing(4),
     },
-  },
-  eyeIcon: {
-    width: `${theme.spacing(4.75)} !important`,
-    height: `${theme.spacing(4)} !important`,
-    left: '2px',
-    top: 'calc(50% - 7px) !important',
   },
   checkboxLabel: {
     [theme.breakpoints.up('sm')]: {
@@ -121,12 +114,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
   submit,
 }) => {
   const classes = useStyles();
-  const theme = useTheme();
   const label: string = signup ? 'Sign up' : 'Log in';
-
-  const handleMouseDownPassword = (event: React.MouseEvent<HTMLElement>): void => {
-    event.preventDefault();
-  };
 
   return (
     <Formik
@@ -135,7 +123,6 @@ const LoginForm: React.FC<LoginFormProps> = ({
         password: '',
         updates: false,
         privacy: false,
-        showPassword: false,
         staySigned: false,
         recaptcha: undefined,
       }}
@@ -160,6 +147,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
         if (signup && !validatePassword(values.password)) {
           errors.password = invalidPassword;
         }
+        // TODO validate recaptcha as part of #350
         if (!signup && !values.recaptcha) {
           errors.recaptcha = requiredMessage;
         }
@@ -194,25 +182,10 @@ const LoginForm: React.FC<LoginFormProps> = ({
                 )}
                 <Field component={TextField} type="email" label="Email address" name="email" />
                 <Field
-                  component={TextField}
+                  component={PasswordField}
                   className={classes.textField}
-                  type={values.showPassword ? 'text' : 'password'}
-                  label="Password"
                   name="password"
-                  helperText={errors.password}
-                  endAdornment={
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={() => setFieldValue('showPassword', !values.showPassword)}
-                      onMouseDown={handleMouseDownPassword}
-                    >
-                      <EyeIcon
-                        className={classes.eyeIcon}
-                        color={theme.palette.secondary.dark}
-                        visible={values.showPassword}
-                      />
-                    </IconButton>
-                  }
+                  signup={signup}
                 />
                 {!signup && <Description className={classes.forgotPassword}>Forgot password</Description>}
               </OnBoardingCard>

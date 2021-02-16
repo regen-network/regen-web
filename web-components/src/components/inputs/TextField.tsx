@@ -10,14 +10,12 @@ interface TriggerTextFieldProps extends TextFieldProps {
   transformValue?: (v: any) => any;
 }
 
-interface RegenTextFieldProps extends TextFieldProps {
+export interface RegenTextFieldProps extends TriggerTextFieldProps {
   children?: any;
   errors?: boolean;
   optional?: boolean;
-  startAdornment?: string;
-  endAdornment?: string;
-  triggerOnChange?: (v: any) => Promise<void>;
-  transformValue?: (v: any) => void;
+  startAdornment?: React.ReactNode;
+  endAdornment?: React.ReactNode;
 }
 
 interface StyleProps extends TextFieldProps {
@@ -78,6 +76,9 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       },
       [theme.breakpoints.down('xs')]: {
         fontSize: theme.spacing(3),
+      },
+      '&.MuiFormHelperText-filled': {
+        color: theme.palette.info.main,
       },
       '&.Mui-error': {
         color: theme.palette.error.main,

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTheme, makeStyles, Theme } from '@material-ui/core/styles';
 import zxcvbn, { ZXCVBNScore } from 'zxcvbn';
 import IconButton from '@material-ui/core/IconButton';
@@ -31,7 +31,11 @@ export default function PasswordField({ signup = false, ...props }: PasswordFiel
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up('sm'));
   const classes = useStyles();
-  const [showPassword, setShowPassword] = useState<boolean>(matches ? false : true);
+  const [showPassword, setShowPassword] = useState<boolean>(!matches);
+
+  useEffect(() => {
+    setShowPassword(!matches);
+  }, [matches, setShowPassword]);
 
   const {
     form: { errors },

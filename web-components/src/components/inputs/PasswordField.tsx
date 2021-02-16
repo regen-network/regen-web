@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useTheme, makeStyles, Theme } from '@material-ui/core/styles';
 import zxcvbn, { ZXCVBNScore } from 'zxcvbn';
 import IconButton from '@material-ui/core/IconButton';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 import EyeIcon from '../icons/EyeIcon';
 import TextField, { RegenTextFieldProps } from './TextField';
@@ -27,9 +28,11 @@ function getScoreLabel(score: ZXCVBNScore): string {
 }
 
 export default function PasswordField({ signup = false, ...props }: PasswordFieldProps): JSX.Element {
-  const [showPassword, setShowPassword] = useState<boolean>(false);
   const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.up('sm'));
   const classes = useStyles();
+  const [showPassword, setShowPassword] = useState<boolean>(matches ? false : true);
+
   const {
     form: { errors },
     field: { name, value },

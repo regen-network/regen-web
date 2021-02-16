@@ -1,7 +1,8 @@
 import * as React from 'react';
-import PlaceInfo from './PlaceInfo';
 import { makeStyles, Theme } from '@material-ui/core';
+
 import { getFormattedPlace } from './place';
+import PlaceInfo from './PlaceInfo';
 
 export interface Place {
   city?: string;

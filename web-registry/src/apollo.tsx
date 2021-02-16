@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect } from 'react';
-import ApolloClient from 'apollo-boost';
-import { ApolloProvider } from '@apollo/react-hooks';
+import { ApolloClient, InMemoryCache, ApolloProvider, ApolloLink, HttpLink } from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
 import { useAuth0 } from '@auth0/auth0-react';
 
 import getApiUri from './lib/apiUri';
@@ -38,24 +38,33 @@ export const AuthApolloProvider = ({ children }: AuthApolloProviderProps): any =
   if (isLoading) {
     return <div></div>;
   }
+
+  const httpLink = new HttpLink({ uri: `${apiUri}/graphql` });
+
+  const withToken = setContext(async () => {
+    // needed on first login
+    // TODO find more efficient solution at Auth0Provider level
+    await login();
+    // Get token or get refreshed token
+    const token = isAuthenticated ? await getAccessTokenSilently() : null;
+    return { token };
+  });
+
+  const authMiddleware = new ApolloLink((operation, forward) => {
+    const { token } = operation.getContext();
+    operation.setContext(() => ({
+      headers: {
+        Authorization: token ? `Bearer ${token}` : '',
+      },
+    }));
+    return forward(operation);
+  });
+
+  const link = ApolloLink.from([withToken, authMiddleware.concat(httpLink)]);
+
   const client = new ApolloClient({
-    uri: `${apiUri}/graphql`,
-    request: async operation => {
-      try {
-        // needed on first login
-        // TODO find more efficient solution at Auth0Provider level
-        await login();
-        // Get token or get refreshed token
-        const token = isAuthenticated ? await getAccessTokenSilently() : null;
-        if (token) {
-          operation.setContext({
-            headers: {
-              authorization: `Bearer ${token}`,
-            },
-          });
-        }
-      } catch (e) {}
-    },
+    cache: new InMemoryCache(),
+    link,
   });
 
   return <ApolloProvider client={client}>{children}</ApolloProvider>;

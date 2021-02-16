@@ -1,16 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 import ReactHtmlParser from 'react-html-parser';
-import Title from '../title';
+import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 
-interface TimelineItemProps {
-  date?: Date | string;
-  title: string;
-  description?: string;
+import Title from '../title';
+import ShieldIcon from '../icons/ShieldIcon';
+import IssuanceModal from '../modal/IssuanceModal';
+import { Event } from './';
+
+interface TimelineItemProps extends Event {
   circleColor: string;
   barColor: string;
   odd: boolean;
   last: boolean;
+  txClient?: ServiceClientImpl;
 }
 
 interface StyleProps {
@@ -89,6 +92,9 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     },
     whiteSpace: 'pre-line',
     paddingTop: theme.spacing(1.5),
+    '& p': {
+      margin: 0,
+    },
   },
   bar: props => ({
     backgroundColor: props.barColor,
@@ -134,37 +140,66 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     },
     zIndex: 100,
   }),
-  title: {
+  summary: {
     lineHeight: '150%',
+    // position: 'relative',
+    display: 'flex',
+  },
+  icon: {
+    position: 'absolute',
+    marginLeft: theme.spacing(1.5),
+    [theme.breakpoints.up('sm')]: {
+      top: theme.spacing(0.5),
+    },
+  },
+  viewContainer: {
+    position: 'relative',
+    display: 'flex',
+    maxWidth: theme.spacing(35.5),
+    cursor: 'pointer',
+  },
+  view: {
+    color: theme.palette.secondary.main,
+    letterSpacing: '1px',
+    textTransform: 'uppercase',
+    fontWeight: 800,
+    fontSize: theme.spacing(3),
+    lineHeight: theme.spacing(3.75),
+    paddingLeft: theme.spacing(9),
   },
 }));
 
-const options = { year: 'numeric', month: 'long', day: 'numeric' };
-
 export default function TimelineItem({
   date,
-  title,
+  summary,
   description,
+  modalData,
   circleColor,
   barColor,
   odd,
   last,
+  txClient,
 }: TimelineItemProps): JSX.Element {
   const classes = useStyles({ circleColor, barColor, odd, last });
-
+  const [open, setOpen] = useState<boolean>(false);
   return (
     <div className={classes.content}>
-      {date && (
-        <div className={classes.date}>
-          {typeof date === 'string' ? date : new Date(date).toLocaleDateString('en-US', options)}
-        </div>
-      )}
-      <Title className={classes.title} variant="h5">
-        {title}
+      {date && <div className={classes.date}>{date}</div>}
+      <Title className={classes.summary} variant="h5">
+        {summary}{' '}
+        {modalData && (
+          <div className={classes.viewContainer} onClick={() => setOpen(true)}>
+            <ShieldIcon className={classes.icon} />
+            <span className={classes.view}>view on regen ledger</span>
+          </div>
+        )}
       </Title>
       {description && <div className={classes.description}>{ReactHtmlParser(description)}</div>}
       <span className={classes.circle} />
       <div className={classes.bar} />
+      {modalData && (
+        <IssuanceModal txClient={txClient} open={open} onClose={() => setOpen(false)} {...modalData} />
+      )}
     </div>
   );
 }

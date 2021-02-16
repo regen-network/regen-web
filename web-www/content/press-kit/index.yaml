@@ -27,19 +27,19 @@ timelineSection:
   completedItemIndex: 3
   items:
     - date: Q4 2018
-      title: Regen Network project initiated
+      summary: Regen Network project initiated
       description: ''
     - date: July - September, 2019
-      title: Regen Network participates in Techstars Sustainability Accelerator
+      summary: Regen Network participates in Techstars Sustainability Accelerator
       description: ''
     - date: October 2019
-      title: Regen Network Public Testnet 2000
+      summary: Regen Network Public Testnet 2000
       description: ''
     - date: September 2020
-      title: Launch of Regen Registry
+      summary: Launch of Regen Registry
       description: ''
     - date: March 2021
-      title: Launch of Regen Ledger
+      summary: Launch of Regen Ledger
       description: ''
 teamSection:
   header: Core Team

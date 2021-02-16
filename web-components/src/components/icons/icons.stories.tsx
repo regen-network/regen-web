@@ -31,6 +31,9 @@ import WhitepaperIcon from 'web-components/lib/components/icons/WhitepaperIcon';
 import BlockIcon from 'web-components/lib/components/icons/BlockIcon';
 import LinkIcon from 'web-components/lib/components/icons/LinkIcon';
 import PrintIcon from 'web-components/lib/components/icons/PrintIcon';
+import RegenLedgerIcon from 'web-components/lib/components/icons/RegenLedgerIcon';
+import InfoIcon from 'web-components/lib/components/icons/InfoIcon';
+import ShieldIcon from 'web-components/lib/components/icons/ShieldIcon';
 
 import { withKnobs, text } from '@storybook/addon-knobs';
 
@@ -105,3 +108,9 @@ export const blockIcon = (): JSX.Element => <BlockIcon color="black" />;
 export const linkIcon = (): JSX.Element => <LinkIcon color="black" />;
 
 export const printIcon = (): JSX.Element => <PrintIcon />;
+
+export const regenLedgerIcon = (): JSX.Element => <RegenLedgerIcon />;
+
+export const infoIcon = (): JSX.Element => <InfoIcon />;
+
+export const shieldIcon = (): JSX.Element => <ShieldIcon />;

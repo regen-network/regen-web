@@ -45,12 +45,10 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       marginTop: theme.spacing(1),
       marginBottom: theme.spacing(4),
-      // fontSize: theme.spacing(3.3),
     },
     [theme.breakpoints.down('xs')]: {
       marginTop: theme.spacing(1),
       marginBottom: theme.spacing(3),
-      // fontSize: theme.spacing(3),
     },
   },
   filler: {

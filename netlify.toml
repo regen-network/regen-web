@@ -2,7 +2,7 @@
   environment = { REACT_APP_API_URI = "https://regen-registry-server.herokuapp.com", GATSBY_API_URI = "https://regen-registry-server.herokuapp.com" }
 
 [context.deploy-preview]
-  environment = { REACT_APP_API_URI = "https://regen-registry-server-staging.herokuapp.com", GATSBY_API_URI = "https://regen-registry-server-staging.herokuapp.com" }
+  environment = { REACT_APP_RECAPTCHA_SITE_KEY = "6LchxlAaAAAAANjtO3w4b5ihVCL87tYfbe0ltzp9", REACT_APP_API_URI = "https://regen-registry-server-staging.herokuapp.com", GATSBY_API_URI = "https://regen-registry-server-staging.herokuapp.com" }
 
 [[redirects]]
   from = "/registry/*"

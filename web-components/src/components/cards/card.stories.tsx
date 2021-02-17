@@ -4,6 +4,7 @@ import ProjectTopCard from 'web-components/lib/components/cards/ProjectTopCard';
 import ImpactCard from 'web-components/lib/components/cards/ImpactCard';
 import MapCard from 'web-components/lib/components/cards/MapCard';
 import GlanceCard from 'web-components/lib/components/cards/GlanceCard';
+import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import { User } from 'web-components/lib/components/user/UserInfo';
 import { withKnobs, boolean, text, object, number, array } from '@storybook/addon-knobs';
 
@@ -145,3 +146,5 @@ export const greenCard = (): JSX.Element => (
     <p>Green card content</p>
   </GreenCard>
 );
+
+export const onBoardingCard = (): JSX.Element => <OnBoardingCard>some content</OnBoardingCard>;

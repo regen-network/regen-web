@@ -3,19 +3,19 @@ import { makeStyles, Theme } from '@material-ui/core/styles';
 import { fieldToTextField, TextFieldProps } from 'formik-material-ui';
 import MuiTextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
+import clsx from 'clsx';
 
 interface TriggerTextFieldProps extends TextFieldProps {
   triggerOnChange?: (v: any) => Promise<void>;
   transformValue?: (v: any) => any;
 }
 
-interface RegenTextFieldProps extends TextFieldProps {
+export interface RegenTextFieldProps extends TriggerTextFieldProps {
   children?: any;
   errors?: boolean;
   optional?: boolean;
-  adornment?: string;
-  triggerOnChange?: (v: any) => Promise<void>;
-  transformValue?: (v: any) => void;
+  startAdornment?: React.ReactNode;
+  endAdornment?: React.ReactNode;
 }
 
 interface StyleProps extends TextFieldProps {
@@ -51,6 +51,9 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       },
     },
     '& .MuiFormLabel-root': {
+      '&.Mui-error': {
+        color: theme.palette.primary.contrastText,
+      },
       '&::after': {
         content: props.optional ? '" (optional)"' : '',
         fontWeight: 'normal',
@@ -62,12 +65,10 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
           fontSize: theme.spacing(3.5),
         },
       },
-      '&.Mui-error': {
-        color: theme.palette.primary.contrastText,
-      },
     },
     '& .MuiFormHelperText-root': {
       fontWeight: 'bold',
+      color: theme.palette.primary.light,
       position: props.errors ? 'absolute' : 'inherit',
       bottom: 0,
       [theme.breakpoints.up('sm')]: {
@@ -75,6 +76,12 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       },
       [theme.breakpoints.down('xs')]: {
         fontSize: theme.spacing(3),
+      },
+      '&.MuiFormHelperText-filled': {
+        color: theme.palette.info.main,
+      },
+      '&.Mui-error': {
+        color: theme.palette.error.main,
       },
     },
     '& .MuiSvgIcon-root': {
@@ -146,7 +153,8 @@ export default function RegenTextField({
   errors = false,
   optional = false,
   children,
-  adornment,
+  startAdornment,
+  endAdornment,
   ...props
 }: RegenTextFieldProps): JSX.Element {
   const classes = useStyles({ ...props, optional, errors });
@@ -155,10 +163,13 @@ export default function RegenTextField({
       {...props}
       transformValue={transformValue}
       triggerOnChange={triggerOnChange}
-      className={`${classes.root} ${props.className}`}
+      className={clsx(classes.root, props.className)}
       InputProps={{
         disableUnderline: true,
-        startAdornment: adornment ? <InputAdornment position="start">{adornment}</InputAdornment> : null,
+        startAdornment: startAdornment ? (
+          <InputAdornment position="start">{startAdornment}</InputAdornment>
+        ) : null,
+        endAdornment: endAdornment ? <InputAdornment position="end">{endAdornment}</InputAdornment> : null,
       }}
       InputLabelProps={{ focused: false, required: false }}
       fullWidth

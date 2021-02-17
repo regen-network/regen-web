@@ -12,6 +12,7 @@ interface ControlledTextFieldProps extends FieldProps {
   label?: string;
   multiline?: boolean;
   optional?: boolean;
+  placeholder?: string;
   rows?: number;
   transformValue?: (v: any) => any;
   triggerOnChange?: (v: any) => Promise<void>;
@@ -63,6 +64,7 @@ export default function ControlledTextField({
   label,
   multiline,
   optional,
+  placeholder,
   rows = 1,
   transformValue,
   triggerOnChange,
@@ -93,20 +95,21 @@ export default function ControlledTextField({
       {({ handleChange, handleBlur }) => (
         <>
           <Input
-            value={field.value}
-            onChange={e => handleFieldChange(e, handleChange)}
+            disableUnderline
+            className={classes.input}
             disabled={form.isSubmitting}
             multiline={multiline}
             onBlur={({ target: { value } }) => handleBlur(value)}
-            className={classes.input}
+            onChange={e => handleFieldChange(e, handleChange)}
+            placeholder={placeholder}
             rows={rows}
+            value={field.value}
             startAdornment={
               startAdornment ? <InputAdornment position="start">{startAdornment}</InputAdornment> : null
             }
             endAdornment={
               endAdornment ? <InputAdornment position="end">{endAdornment}</InputAdornment> : null
             }
-            disableUnderline
           />
           {charLimit && (
             <Typography variant="body1" className={classes.charCount}>{`${charsLeft} character${

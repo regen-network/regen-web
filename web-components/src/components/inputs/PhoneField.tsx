@@ -7,9 +7,10 @@ import FieldFormControl from './FieldFormControl';
 import 'react-phone-input-2/lib/style.css';
 
 interface RegenPhoneFieldProps extends FieldProps {
+  className?: string;
   label: string;
   optional?: boolean;
-  className?: string;
+  placeholder?: string;
 }
 
 interface StyleProps {
@@ -42,6 +43,7 @@ export default function RegenPhoneField({
   label,
   className,
   optional = false,
+  placeholder,
   ...fieldProps
 }: RegenPhoneFieldProps): JSX.Element {
   const { form, field } = fieldProps; // passed from Formik <Field />
@@ -63,6 +65,7 @@ export default function RegenPhoneField({
           value={field.value}
           onChange={handleChange}
           onBlur={({ target: { value } }) => handleBlur(value)}
+          placeholder={placeholder} // TODO: this should work - might be an issue with the phone select library
           enableSearch
         />
       )}

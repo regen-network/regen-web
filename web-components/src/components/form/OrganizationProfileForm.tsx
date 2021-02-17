@@ -158,6 +158,7 @@ const OrganizationProfileForm: React.FC<FormProps> = ({ submit, apiUrl, goBack, 
                   description="This is the name of your farm, ranch, cooperative, non-profit, or other organization."
                   label="Organization legal name"
                   name="legalName"
+                  placeholder="i.e. Cherrybrook Farms LLC"
                 />
                 <Field
                   className={classes.textField}
@@ -165,6 +166,7 @@ const OrganizationProfileForm: React.FC<FormProps> = ({ submit, apiUrl, goBack, 
                   description="This is the display name on your project page, if you choose to make this entity publically viewable."
                   label="Display name for organization"
                   name="displayName"
+                  placeholder="i.e. Cherrybrook Farms"
                 />
                 <Field
                   className={classes.textField}
@@ -172,19 +174,13 @@ const OrganizationProfileForm: React.FC<FormProps> = ({ submit, apiUrl, goBack, 
                   description="This address is used for issuing credits.  If you choose to show this entity on the project page, only city, state/province, and country will be displayed. "
                   label="Organization Location"
                   name="location"
+                  placeholder="Start typing the location"
                 />
                 <Field
                   className={classes.textField}
                   component={ImageField}
                   label="Organization Logo"
                   name="logo"
-                />
-                <Field
-                  className={classes.textField}
-                  component={PhoneField}
-                  label="Phone number"
-                  name="phone"
-                  optional
                 />
                 <Field
                   className={classes.textField}

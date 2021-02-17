@@ -85,7 +85,13 @@ const UserProfileForm: React.FC<UserProfileFormProps> = ({ submit, apiUrl }) => 
                 label="Full name"
                 name="name"
               />
-              <Field className={classes.textField} component={ControlledTextField} name="role" label="Role" />
+              <Field
+                className={classes.textField}
+                component={ControlledTextField}
+                name="role"
+                label="Role"
+                placeholder="i.e. CEO, General Manager, Soil Scientist"
+              />
               <Field
                 className={classes.textField}
                 component={ImageField}
@@ -96,6 +102,7 @@ const UserProfileForm: React.FC<UserProfileFormProps> = ({ submit, apiUrl }) => 
               <Field
                 className={classes.textField}
                 component={PhoneField}
+                placeholder="+1 719 200 3488"
                 label="Phone number"
                 name="phone"
                 optional

@@ -1157,7 +1157,7 @@ exports[`Storyshots Components|Certificate Certificate 1`] = `
         <br />
         Date: 
         <b>
-          October 10, 2020
+          October 9, 2020
         </b>
       </div>
       <div
@@ -2484,6 +2484,7 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
                 onBlur={[Function]}
                 onChange={[Function]}
                 onFocus={[Function]}
+                placeholder="i.e. CEO, General Manager, Soil Scientist"
                 required={false}
                 rows={1}
                 type="text"
@@ -2584,7 +2585,7 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
                 onDoubleClick={[Function]}
                 onFocus={[Function]}
                 onKeyDown={[Function]}
-                placeholder="1 (702) 123-4567"
+                placeholder="+1 719 200 3488"
                 style={Object {}}
                 type="tel"
                 value="+1"

@@ -1157,7 +1157,7 @@ exports[`Storyshots Components|Certificate Certificate 1`] = `
         <br />
         Date: 
         <b>
-          October 10, 2020
+          October 9, 2020
         </b>
       </div>
       <div
@@ -2503,7 +2503,7 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
             <label
               className="makeStyles-label-582 makeStyles-label-590"
             >
-              Bio Photo
+              Bio photo
             </label>
             <div
               className="MuiBox-root MuiBox-root-591 makeStyles-imageBox-587"

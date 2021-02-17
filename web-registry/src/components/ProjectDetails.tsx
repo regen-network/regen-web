@@ -413,7 +413,7 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
         <img className={classes.map} alt={project.name} src={mapFile} />
       )}
 
-      {data && data?.projectByHandle?.eventsByProjectId?.nodes?.length > 0 && (
+      {data && data.projectByHandle?.eventsByProjectId?.nodes?.length > 0 && (
         <div className={classes.timelineContainer}>
           <div className={`${classes.projectDetails} ${classes.projectTimeline} ${classes.projectContent}`}>
             <Title className={classes.timelineTitle} variant="h3">

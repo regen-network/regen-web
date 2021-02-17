@@ -7,13 +7,13 @@ import FieldFormControl from './FieldFormControl';
 const useStyles = makeStyles((theme: Theme) => ({
   avatar: {
     [theme.breakpoints.up('sm')]: {
-      height: theme.spacing(20),
-      width: theme.spacing(20),
+      height: theme.spacing(22),
+      width: theme.spacing(22),
       marginRight: theme.spacing(5),
     },
     [theme.breakpoints.down('xs')]: {
-      height: theme.spacing(15),
-      width: theme.spacing(15),
+      height: theme.spacing(20),
+      width: theme.spacing(20),
       marginRight: theme.spacing(3),
     },
   },
@@ -28,9 +28,13 @@ const useStyles = makeStyles((theme: Theme) => ({
   button: {
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.spacing(3),
+      paddingRight: theme.spacing(10),
+      paddingLeft: theme.spacing(10),
     },
     [theme.breakpoints.down('xs')]: {
       fontSize: theme.spacing(3),
+      paddingRight: theme.spacing(10),
+      paddingLeft: theme.spacing(10),
     },
   },
 }));
@@ -44,7 +48,7 @@ interface ControlledTextFieldProps extends FieldProps {
   triggerOnChange?: (v: any) => Promise<void>;
 }
 
-export default function ControlledTextField({
+export default function ImageField({
   description,
   className,
   label,
@@ -57,7 +61,13 @@ export default function ControlledTextField({
   const classes = useStyles();
 
   return (
-    <FieldFormControl className={className} label={label} disabled={form.isSubmitting} {...fieldProps}>
+    <FieldFormControl
+      className={className}
+      label={label}
+      disabled={form.isSubmitting}
+      optional={optional}
+      {...fieldProps}
+    >
       {({ handleBlur, handleChange }) => (
         <Box className={classes.imageBox} display="flex" alignItems="center">
           <Avatar className={classes.avatar} />

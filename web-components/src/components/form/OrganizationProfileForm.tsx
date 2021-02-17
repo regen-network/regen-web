@@ -5,7 +5,6 @@ import { Form, Formik, Field } from 'formik';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import ControlledTextField from '../inputs/ControlledTextField';
-import PhoneField from '../inputs/PhoneField';
 import ImageField from '../inputs/ImageField';
 import { requiredMessage } from '../inputs/validation';
 import OnBoardingCard from '../cards/OnBoardingCard';
@@ -172,14 +171,14 @@ const OrganizationProfileForm: React.FC<FormProps> = ({ submit, apiUrl, goBack, 
                   className={classes.textField}
                   component={ControlledTextField}
                   description="This address is used for issuing credits.  If you choose to show this entity on the project page, only city, state/province, and country will be displayed. "
-                  label="Organization Location"
+                  label="Organization location"
                   name="location"
                   placeholder="Start typing the location"
                 />
                 <Field
                   className={classes.textField}
                   component={ImageField}
-                  label="Organization Logo"
+                  label="Organization logo"
                   name="logo"
                 />
                 <Field

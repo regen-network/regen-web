@@ -58,10 +58,10 @@ const UserProfileForm: React.FC<UserProfileFormProps> = ({ submit, apiUrl }) => 
       validate={(values: Values) => {
         const errors: Partial<Values> = {};
         if (!values.name) {
-          errors.name = requiredMessage;
+          errors.name = 'Please fill in your full name';
         }
         if (!values.role) {
-          errors.role = requiredMessage;
+          errors.name = 'Please fill in your role';
         }
         return errors;
       }}
@@ -95,7 +95,7 @@ const UserProfileForm: React.FC<UserProfileFormProps> = ({ submit, apiUrl }) => 
               <Field
                 className={classes.textField}
                 component={ImageField}
-                label="Bio Photo"
+                label="Bio photo"
                 name="bioPhoto"
                 optional
               />

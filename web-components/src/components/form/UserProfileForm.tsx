@@ -62,7 +62,7 @@ const UserProfileForm: React.FC<UserProfileFormProps> = ({ submit, apiUrl }) => 
           errors.name = 'Please fill in your full name';
         }
         if (!values.role) {
-          errors.name = 'Please fill in your role';
+          errors.role = 'Please fill in your role';
         }
         return errors;
       }}
@@ -97,7 +97,7 @@ const UserProfileForm: React.FC<UserProfileFormProps> = ({ submit, apiUrl }) => 
                 className={classes.textField}
                 component={ImageField}
                 label="Bio photo"
-                name="bioPhoto"
+                name="photo"
                 optional
               />
               <Field

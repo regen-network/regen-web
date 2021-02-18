@@ -35,8 +35,16 @@ const useStyles = makeStyles((theme: Theme) => ({
   radio: {
     border: `1px solid ${theme.palette.grey[100]}`,
     borderRadius: '5px',
-    padding: `${theme.spacing(4)} ${theme.spacing(4)}`,
     margin: `${theme.spacing(4)} 0 0`,
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    [theme.breakpoints.up('sm')]: {
+      padding: `${theme.spacing(4)} ${theme.spacing(4)}`,
+    },
+    [theme.breakpoints.down('xs')]: {
+      padding: theme.spacing(2),
+    },
   },
   radioActive: {
     backgroundColor: theme.palette.grey[50],
@@ -47,12 +55,17 @@ const useStyles = makeStyles((theme: Theme) => ({
       fontWeight: 'bold',
     },
   },
+  radioBtn: {
+    padding: `0 ${theme.spacing(2)} ${theme.spacing(2)} 0`,
+  },
   button: {
     [theme.breakpoints.up('sm')]: {
       marginTop: theme.spacing(8),
+      marginRight: theme.spacing(8.75),
     },
     [theme.breakpoints.down('xs')]: {
       marginTop: theme.spacing(6.25),
+      marginRight: theme.spacing(2.5),
     },
   },
   textField: {
@@ -76,7 +89,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       fontSize: theme.spacing(4),
     },
     [theme.breakpoints.down('xs')]: {
-      fontSize: theme.spacing(4),
+      fontSize: theme.spacing(3.5),
     },
   },
 }));
@@ -137,13 +150,13 @@ const OrganizationProfileForm: React.FC<FormProps> = ({ submit, apiUrl, goBack, 
                   <FormControlLabel
                     className={clsx(classes.radio, isPersonal && classes.radioActive)}
                     value="personal"
-                    control={<Radio />}
+                    control={<Radio className={classes.radioBtn} />}
                     label="No, I will register projects only as an individual"
                   />
                   <FormControlLabel
                     className={clsx(classes.radio, isOrg && classes.radioActive)}
                     value="organization"
-                    control={<Radio />}
+                    control={<Radio className={classes.radioBtn} />}
                     label="Yes, I am part of an organization which will be associated with my project(s)"
                   />
                 </RadioGroup>

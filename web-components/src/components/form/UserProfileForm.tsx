@@ -7,7 +7,6 @@ import OnBoardingCard from '../cards/OnBoardingCard';
 import ControlledTextField from '../inputs/ControlledTextField';
 import PhoneField from '../inputs/PhoneField';
 import ImageField from '../inputs/ImageField';
-import { requiredMessage } from '../inputs/validation';
 
 interface UserProfileFormProps {
   submit: (values: Values) => Promise<void>;
@@ -26,9 +25,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   button: {
     [theme.breakpoints.up('sm')]: {
       marginTop: theme.spacing(8),
+      marginRight: theme.spacing(8.75),
     },
     [theme.breakpoints.down('xs')]: {
       marginTop: theme.spacing(6.25),
+      marginRight: theme.spacing(2.5),
     },
   },
   textField: {
@@ -118,17 +119,16 @@ const UserProfileForm: React.FC<UserProfileFormProps> = ({ submit, apiUrl }) => 
                 multiline
                 optional
               />
-
-              <Grid container justify="flex-end">
-                <ContainedButton
-                  onClick={submitForm}
-                  className={classes.button}
-                  disabled={(submitCount > 0 && !isValid) || isSubmitting}
-                >
-                  Next
-                </ContainedButton>
-              </Grid>
             </OnBoardingCard>
+            <Grid container justify="flex-end">
+              <ContainedButton
+                onClick={submitForm}
+                className={classes.button}
+                disabled={(submitCount > 0 && !isValid) || isSubmitting}
+              >
+                Next
+              </ContainedButton>
+            </Grid>
           </Form>
         );
       }}

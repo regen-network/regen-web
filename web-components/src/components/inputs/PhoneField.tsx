@@ -26,15 +26,19 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     border: `1px solid ${theme.palette.grey[100]} !important`,
     borderRadius: '2px !important',
     color: props.disabled ? theme.palette.info.main : theme.palette.primary.contrastText,
+    fontFamily: theme.typography.fontFamily,
     [theme.breakpoints.up('sm')]: {
       padding: theme.spacing(7.4),
-      fontSize: theme.spacing(4.5),
-      height: theme.spacing(15),
+      fontSize: `${theme.spacing(4.5)} !important`,
+      height: `${theme.spacing(15)} !important`,
     },
     [theme.breakpoints.down('xs')]: {
       padding: theme.spacing(6),
-      fontSize: theme.spacing(3.5),
-      height: theme.spacing(12.5),
+      fontSize: `${theme.spacing(3.5)} !important`,
+      height: `${theme.spacing(12.5)} !important`,
+    },
+    '&::placeholder': {
+      color: theme.palette.grey[400],
     },
   }),
 }));
@@ -59,13 +63,14 @@ export default function RegenPhoneField({
     >
       {({ handleBlur, handleChange }) => (
         <PhoneInput
+          autoFormat={false}
           containerClass={classes.inputWrap}
           inputClass={classes.input}
           country="us"
           value={field.value}
           onChange={handleChange}
           onBlur={({ target: { value } }) => handleBlur(value)}
-          placeholder={placeholder} // TODO: this should work - might be an issue with the phone select library
+          placeholder={placeholder}
           enableSearch
         />
       )}

@@ -220,17 +220,6 @@ coreSection:
       name: Mark Hagelberg
       title: Software Engineer
       linkedUrl: https://www.linkedin.com/in/mark-hagelberg
-    - image: ../../static/media/20210216_093909.jpg
-      name: Tyler Goodman
-      description: Tyler is a senior Computer Science student at California State
-        University, Fullerton, where he founded and currently leads a blockchain
-        campus club. He has experience working alongside ethereum researchers to
-        contribute to the go-ethereum client, as well as developing an award
-        winning DeFi hackathon project at ETHOnline.
-      title: Blockchain Developer Intern
-      githubUrl: https://github.com/technicallyty
-      twitterUrl: https://twitter.com/technicallyty
-      linkedUrl: https://www.linkedin.com/in/tygoodman/
     - name: "David Daniel "
       title: Software Engineer
       image: ../../static/media/david-daniel.jpg
@@ -242,6 +231,17 @@ coreSection:
       linkedUrl: https://www.linkedin.com/in/davidjdaniel/
       githubUrl: https://github.com/haveanicedavid
       twitterUrl: https://twitter.com/haveanicedavid
+    - image: ../../static/media/20210216_093909.jpg
+      name: Tyler Goodman
+      description: Tyler is a senior Computer Science student at California State
+        University, Fullerton, where he founded and currently leads a blockchain
+        campus club. He has experience working alongside ethereum researchers to
+        contribute to the go-ethereum client, as well as developing an award
+        winning DeFi hackathon project at ETHOnline.
+      title: Blockchain Developer Intern
+      githubUrl: https://github.com/technicallyty
+      twitterUrl: https://twitter.com/technicallyty
+      linkedUrl: https://www.linkedin.com/in/tygoodman/
 contributorSection:
   title: Contributors
   contributors:

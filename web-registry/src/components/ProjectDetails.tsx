@@ -443,8 +443,7 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
               )}
             />
           </div>
-        </div>
-      )}
+        )}
 
       {otherProjects.length > 0 && <MoreProjects projects={otherProjects} />}
 

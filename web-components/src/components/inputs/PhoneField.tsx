@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import { FieldProps } from 'formik';
 import PhoneInput from 'react-phone-input-2';
@@ -50,6 +50,7 @@ export default function RegenPhoneField({
   placeholder,
   ...fieldProps
 }: RegenPhoneFieldProps): JSX.Element {
+  const [countryCode, setCountryCode] = useState('us');
   const { form, field } = fieldProps; // passed from Formik <Field />
   const classes = useStyles({ disabled: form.isSubmitting });
 
@@ -63,12 +64,15 @@ export default function RegenPhoneField({
     >
       {({ handleBlur, handleChange }) => (
         <PhoneInput
-          autoFormat={false}
+          autoFormat={countryCode === 'us'}
           containerClass={classes.inputWrap}
           inputClass={classes.input}
-          country="us"
+          country={countryCode}
           value={field.value}
-          onChange={handleChange}
+          onChange={(value: string, data: any) => {
+            setCountryCode(data.countryCode);
+            handleChange(value);
+          }}
           onBlur={({ target: { value } }) => handleBlur(value)}
           placeholder={placeholder}
           enableSearch

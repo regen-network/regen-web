@@ -413,38 +413,41 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
         <img className={classes.map} alt={project.name} src={mapFile} />
       )}
 
-      {data && data.projectByHandle.eventsByProjectId.nodes.length > 0 && (
-        <div className={classes.timelineContainer}>
-          <div className={`${classes.projectDetails} ${classes.projectTimeline} ${classes.projectContent}`}>
-            <Title className={classes.timelineTitle} variant="h3">
-              {project.fieldsOverride && project.fieldsOverride.timeline
-                ? project.fieldsOverride.timeline.title
-                : projectDefault.timeline.title}
-            </Title>
-            <Timeline
-              txClient={txClient}
-              events={data.projectByHandle.eventsByProjectId.nodes.map(
-                (node: {
-                  // TODO use generated types from graphql schema
-                  date: string;
-                  summary: string;
-                  description?: string;
-                  creditVintageByEventId?: any;
-                }) => ({
-                  modalData: buildIssuanceModalData(
-                    data.projectByHandle,
-                    project.documents,
-                    node.creditVintageByEventId,
-                  ),
-                  date: getFormattedDate(node.date, { year: 'numeric', month: 'long', day: 'numeric' }),
-                  summary: node.summary,
-                  description: node.description,
-                }),
-              )}
-            />
+      {data &&
+        data.projectByHandle &&
+        data.projectByHandle.eventsByProjectId &&
+        data.projectByHandle.eventsByProjectId.nodes.length > 0 && (
+          <div className={classes.timelineContainer}>
+            <div className={`${classes.projectDetails} ${classes.projectTimeline} ${classes.projectContent}`}>
+              <Title className={classes.timelineTitle} variant="h3">
+                {project.fieldsOverride && project.fieldsOverride.timeline
+                  ? project.fieldsOverride.timeline.title
+                  : projectDefault.timeline.title}
+              </Title>
+              <Timeline
+                txClient={txClient}
+                events={data.projectByHandle.eventsByProjectId.nodes.map(
+                  (node: {
+                    // TODO use generated types from graphql schema
+                    date: string;
+                    summary: string;
+                    description?: string;
+                    creditVintageByEventId?: any;
+                  }) => ({
+                    modalData: buildIssuanceModalData(
+                      data.projectByHandle,
+                      project.documents,
+                      node.creditVintageByEventId,
+                    ),
+                    date: getFormattedDate(node.date, { year: 'numeric', month: 'long', day: 'numeric' }),
+                    summary: node.summary,
+                    description: node.description,
+                  }),
+                )}
+              />
+            </div>
           </div>
-        </div>
-      )}
+        )}
 
       {otherProjects.length > 0 && <MoreProjects projects={otherProjects} />}
 

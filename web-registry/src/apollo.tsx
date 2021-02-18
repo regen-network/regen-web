@@ -18,7 +18,7 @@ export const AuthApolloProvider = ({ children }: AuthApolloProviderProps): any =
       if (isAuthenticated && user) {
         const token = await getAccessTokenSilently();
         try {
-          await fetch(`${apiUri}/api/login`, {
+          await fetch(`${apiUri}/auth/login`, {
             headers: {
               Authorization: `Bearer ${token}`,
               'Content-Type': 'application/json',

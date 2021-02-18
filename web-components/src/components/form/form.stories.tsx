@@ -1,12 +1,18 @@
 import * as React from 'react';
-import MoreInfoForm from 'web-components/lib/components/form/MoreInfoForm';
 import UserProfileForm from 'web-components/lib/components/form/UserProfileForm';
 import OrganizationProfileForm from 'web-components/lib/components/form/OrganizationProfileForm';
 import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
+import LoginForm from 'web-components/lib/components/form/LoginForm';
 
 export default {
   title: 'Components|Forms',
-  component: MoreInfoForm,
+  component: LoginForm,
+};
+
+const submit = async (): Promise<void> => {
+  return new Promise((resolve, reject) => {
+    setTimeout(resolve, 1000);
+  });
 };
 
 export const userProfile = (): JSX.Element => (
@@ -19,4 +25,24 @@ export const organizationProfile = (): JSX.Element => (
   <OnBoardingSection title="Organization Profile">
     <OrganizationProfileForm apiUrl="" submit={() => null} goBack={() => null} skip={() => null} />
   </OnBoardingSection>
+);
+
+export const signUpForm = (): JSX.Element => (
+  <LoginForm
+    signup
+    submit={submit}
+    termsLink="https://www.regen.network/terms-service/"
+    link="/"
+    privacyLink="https://www.regen.network/privacy-policy/"
+  />
+);
+
+export const loginForm = (): JSX.Element => (
+  <LoginForm
+    submit={submit}
+    recaptchaSiteKey={process.env.STORYBOOK_RECAPTCHA_SITE_KEY}
+    termsLink="https://www.regen.network/terms-service/"
+    link="/"
+    privacyLink="https://www.regen.network/privacy-policy/"
+  />
 );

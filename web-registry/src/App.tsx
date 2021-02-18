@@ -18,7 +18,6 @@ import {
 } from './mocks';
 import Footer, { FooterItemProps as FooterItem } from 'web-components/lib/components/footer';
 import Header, { HeaderMenuItem, HeaderColors } from 'web-components/lib/components/header';
-import Title from 'web-components/lib/components/title';
 import CookiesBanner from 'web-components/lib/components/banner/CookiesBanner';
 import ProjectDetails from './components/ProjectDetails';
 import ProjectList from './components/ProjectList';
@@ -32,6 +31,8 @@ import Admin from './components/Admin';
 import PostPurchase from './components/PostPurchase';
 import Certificate from './components/Certificate';
 import Seller from './components/Seller';
+import Signup from './components/Signup';
+import VerifyEmail from './components/VerifyEmail';
 
 export const history = createBrowserHistory();
 
@@ -235,18 +236,6 @@ function Projects(): JSX.Element {
   return <ProjectList projects={projects} />;
 }
 
-function VerifyEmail(): JSX.Element {
-  const search = new URLSearchParams(window.location.search);
-  return (
-    <div style={{ textAlign: 'center', padding: '1rem' }}>
-      <Title variant="h3" align="center">
-        Please confirm your email address
-      </Title>
-      We’ve just sent a confirmation email to: {search.get('email')}
-    </div>
-  );
-}
-
 const App: React.FC = (props): JSX.Element => {
   const { user, isLoading, error } = useAuth0();
 
@@ -280,6 +269,9 @@ const App: React.FC = (props): JSX.Element => {
           </Route>
           <Route exact path="/verify-email">
             <VerifyEmail />
+          </Route>
+          <Route exact path="/signup">
+            <Signup />
           </Route>
           <Route exact path="/certificate">
             <Certificate />

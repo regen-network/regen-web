@@ -231,6 +231,17 @@ coreSection:
       githubUrl: https://github.com/technicallyty
       twitterUrl: https://twitter.com/technicallyty
       linkedUrl: https://www.linkedin.com/in/tygoodman/
+    - name: "David Daniel "
+      title: Software Engineer
+      image: ../../static/media/david-daniel.jpg
+      description: David is a seasoned software engineer with a passion for holistic
+        thought and the potential of decentralization to affect positive
+        societal change. Having worked in the blockchain sphere on projects
+        including SALT Lending, Shapeshift, and Bitcoin.com, he is thrilled to
+        combine these passions to help fight the growing climate emergency.
+      linkedUrl: https://www.linkedin.com/in/davidjdaniel/
+      githubUrl: https://github.com/haveanicedavid
+      twitterUrl: https://twitter.com/haveanicedavid
 contributorSection:
   title: Contributors
   contributors:

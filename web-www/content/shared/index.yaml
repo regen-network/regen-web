@@ -11,14 +11,16 @@ featuredSection:
     including ecosystem health, animal welfare, and soil health.
 
 
-    Our first vintages of this credit were issued to [Wilmot](/registry/projects/wilmot) and [Woodburn](https://www.regen.network/registry/projects/woodburn) which have increased soil organic carbon concentration through rotational grazing to 4.5% and 3.4% respectively. These vintages represent one of the largest issuances to agricultural projects to-date in Australia! The credits have already been sold to a major tech corporation to help meet their climate goals.
+    Our first vintages of this credit were issued to [Wilmot](/registry/projects/wilmot) and [Woodburn](https://www.regen.network/registry/projects/woodburn) which have increased soil organic carbon concentration through rotational grazing to 4.5% and 3.4% respectively. These vintages represent one of the largest issuances to agricultural projects to-date in Australia! The credits have already been sold to Microsoft to help meet their climate goals.
 blogSection:
   header: Regen Network Blog
   posts:
-    - header: Mobilizing Community Co-Creation for Soil Health
-      description: Exploring the partnership between OpenTEAM and Regen Network
-      image: ../../static/media/blog3.jpeg
-      url: https://medium.com/regen-network/mobilizing-community-co-creation-for-soil-health-61090e27c6ba
+    - header: Regen Network Announces Historic Carbon Credit Sale in Australia
+      description: Agtech start-up Regen Network announces the historic sale of soil
+        carbon credits to Microsoft, one of the largest soil carbon credit
+        issuances ever in Australia.
+      image: ../../static/media/cattle_wilmott.png
+      url: http://bit.ly/regensale
     - header: Cosmos + Regen Network = Synergy
       description: How Regen Network became the lead maintainer of the Cosmos SDK
       image: ../../static/media/screen-shot-2020-09-29-at-6.50.26-am.png
@@ -62,6 +64,7 @@ comingSoonSection:
     - name: "Pillango "
       location: Wallace County, Kansas, United States
       area: 1101
-      areaUnit: acres
+      areaUnit: hectares
       image: ../../static/media/pillango.png
-      comingSoon: true
+      comingSoon: false
+      handle: pillango

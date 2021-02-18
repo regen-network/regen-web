@@ -3,7 +3,7 @@ import { makeStyles, Theme } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import Gauge from './Gauge';
 import GaugeText from './GaugeText';
-import { pluralize } from './pluralize';
+import { pluralize } from '../../utils/pluralize';
 
 export interface CreditsProps {
   numberOfHolders: number;

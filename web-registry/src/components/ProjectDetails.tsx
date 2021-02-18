@@ -2,8 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import * as togeojson from '@mapbox/togeojson';
 import { useLocation } from 'react-router-dom';
-import { setPageView } from '../lib/ga';
+import { loader } from 'graphql.macro';
+import { useQuery } from '@apollo/client';
+import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 
+import { setPageView } from '../lib/ga';
+import { useLedger, ContextType } from '../ledger';
 import background from '../assets/background.jpg';
 import { Project, ProjectDefault, ActionGroup } from '../mocks';
 import ProjectTop from './sections/ProjectTop';
@@ -11,6 +15,7 @@ import ProjectImpact from './sections/ProjectImpact';
 import MoreProjects from './sections/MoreProjects';
 
 import { getFontSize } from 'web-components/lib/theme/sizing';
+import { getFormattedDate } from 'web-components/lib/utils/format';
 import Title from 'web-components/lib/components/title';
 import Description from 'web-components/lib/components/description';
 import Timeline from 'web-components/lib/components/timeline';
@@ -32,6 +37,7 @@ import EmailIcon from 'web-components/lib/components/icons/EmailIcon';
 
 import { getImgSrc } from '../lib/imgSrc';
 import getApiUri from '../lib/apiUri';
+import { buildIssuanceModalData } from '../lib/transform';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -222,7 +228,19 @@ interface ProjectProps {
   projectDefault: ProjectDefault;
 }
 
+const PROJECT_BY_HANDLE = loader('../graphql/ProjectByHandle.graphql');
+
 export default function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JSX.Element {
+  const { api }: ContextType = useLedger();
+  let txClient: ServiceClientImpl | undefined;
+  if (api) {
+    txClient = new ServiceClientImpl(api.connection.queryConnection);
+  }
+
+  const { data } = useQuery(PROJECT_BY_HANDLE, {
+    variables: { handle: project.id },
+  });
+
   const [submitted, setSubmitted] = useState(false);
   const location = useLocation();
   useEffect(() => {
@@ -279,7 +297,8 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
 
   const siteMetadata = {
     title: `Regen Network Registry`,
-    description: `Learn about Regen Network's ${project.creditClass.name} credits sourced from ${project.steward.name} in ${project.place.state}, ${project.place.country}.`,
+    description: `Learn about Regen Network's ${project.creditClass.name} credits sourced from ${project
+      .steward?.name || project.developer?.name} in ${project.place.state}, ${project.place.country}.`,
     author: `Regen Network`,
     siteUrl: `${window.location.origin}/registry`,
   };
@@ -394,21 +413,41 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
         <img className={classes.map} alt={project.name} src={mapFile} />
       )}
 
-      {project.timeline && (
-        <div className={classes.timelineContainer}>
-          <div className={`${classes.projectDetails} ${classes.projectTimeline} ${classes.projectContent}`}>
-            <Title className={classes.timelineTitle} variant="h3">
-              {project.fieldsOverride && project.fieldsOverride.timeline
-                ? project.fieldsOverride.timeline.title
-                : projectDefault.timeline.title}
-            </Title>
-            <Timeline
-              events={project.timeline.events}
-              completedItemIndex={project.timeline.completedItemIndex}
-            />
+      {data &&
+        data.projectByHandle &&
+        data.projectByHandle.eventsByProjectId &&
+        data.projectByHandle.eventsByProjectId.nodes.length > 0 && (
+          <div className={classes.timelineContainer}>
+            <div className={`${classes.projectDetails} ${classes.projectTimeline} ${classes.projectContent}`}>
+              <Title className={classes.timelineTitle} variant="h3">
+                {project.fieldsOverride && project.fieldsOverride.timeline
+                  ? project.fieldsOverride.timeline.title
+                  : projectDefault.timeline.title}
+              </Title>
+              <Timeline
+                txClient={txClient}
+                events={data.projectByHandle.eventsByProjectId.nodes.map(
+                  (node: {
+                    // TODO use generated types from graphql schema
+                    date: string;
+                    summary: string;
+                    description?: string;
+                    creditVintageByEventId?: any;
+                  }) => ({
+                    modalData: buildIssuanceModalData(
+                      data.projectByHandle,
+                      project.documents,
+                      node.creditVintageByEventId,
+                    ),
+                    date: getFormattedDate(node.date, { year: 'numeric', month: 'long', day: 'numeric' }),
+                    summary: node.summary,
+                    description: node.description,
+                  }),
+                )}
+              />
+            </div>
           </div>
-        </div>
-      )}
+        )}
 
       {otherProjects.length > 0 && <MoreProjects projects={otherProjects} />}
 

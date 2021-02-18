@@ -17,6 +17,7 @@ const user: User = {
     state: 'Victoria',
     country: 'Australia',
   },
+  type: 'organization',
   imgSrc: 'http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png',
   description: 'Odonata is a not-for-profit entity supporting biodiversity impact solutions.',
 };

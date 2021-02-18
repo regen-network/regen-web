@@ -6,7 +6,7 @@ import axios from 'axios';
 import { loadStripe } from '@stripe/stripe-js';
 import { useParams } from 'react-router-dom';
 import { loader } from 'graphql.macro';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/client';
 import { Formik, Form, Field } from 'formik';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 

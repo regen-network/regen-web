@@ -5,3 +5,8 @@
   font-family: 'FoxesInLove';
   src: url(./assets/fonts/foxes-in-love.ttf) format('truetype');
 }
+
+@font-face {
+  font-family: 'Nilland';
+  src: url(./assets/fonts/Nilland.ttf) format('truetype');
+}

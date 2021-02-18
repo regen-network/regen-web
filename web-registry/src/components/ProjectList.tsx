@@ -146,13 +146,17 @@ export default function ProjectList({ projects }: ProjectsProps): JSX.Element {
         {/**<div className={classes.australia}>australia</div>**/}
         <Grid container className={classes.projectList}>
           {projects.map((p, i) => {
-            const developer: User = {
-              name: p.developer.name,
-              type: p.developer.type,
-            };
-            if (p.developer.imgSrc) {
-              developer.imgSrc = getImgSrc(p.developer.imgSrc);
+            let developer: User | undefined;
+            if (p.developer) {
+              developer = {
+                name: p.developer.name,
+                type: p.developer.type,
+              };
+              if (p.developer.imgSrc) {
+                developer.imgSrc = getImgSrc(p.developer.imgSrc);
+              }
             }
+
             return (
               <Grid className={classes.project} item xs={12} sm={6} md={4} key={p.id}>
                 <Link className={classes.projectLink} to={`/projects/${p.id}`}>

@@ -4,6 +4,11 @@ categories:
     buttonText: read article
     showPlay: false
     items:
+      - title: Regen Network Announces Historic Carbon Credit Sale
+        author: Regen Network
+        url: https://medium.com/regen-network/regen-network-announces-historic-carbon-credit-sale-in-australia-b76dfadcc095
+        date: January 29, 2021
+        image: ../../static/media/cattle_wilmott.png
       - title: 40 Social Entrepreneurs to Watch For in 2021
         author: CauseArtist
         url: https://www.causeartist.com/social-entrepreneurs-to-watch-for-in-2021/

@@ -5,10 +5,9 @@ import clsx from 'clsx';
 import CloseIcon from '../icons/CloseIcon';
 import { RemoveScroll } from 'react-remove-scroll';
 
-interface RegenModalProps {
+export interface RegenModalProps {
   open: boolean;
   onClose: () => void;
-  children: any;
   className?: string;
 }
 
@@ -76,7 +75,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function RegenModal({ open, onClose, children, className }: RegenModalProps): JSX.Element {
+const RegenModal: React.FC<RegenModalProps> = ({ open, onClose, children, className }) => {
   const classes = useStyles({});
   return (
     <Modal open={open} onClose={onClose}>
@@ -90,4 +89,6 @@ export default function RegenModal({ open, onClose, children, className }: Regen
       </RemoveScroll>
     </Modal>
   );
-}
+};
+
+export default RegenModal;

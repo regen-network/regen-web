@@ -29,39 +29,40 @@ export default function Signup(): JSX.Element {
           function(err) {
             if (err) {
               reject(err);
-            }
-            // create user in our db
-            createUser({
-              variables: {
-                input: {
-                  email,
-                  name: email.split('@')[0],
-                  updates,
+            } else {
+              // create user in our db
+              createUser({
+                variables: {
+                  input: {
+                    email,
+                    name: email.split('@')[0],
+                    updates,
+                  },
                 },
-              },
-            })
-              .then(resp => {
-                // Subscribe to mailing list
-                if (updates === true) {
-                  axios
-                    .post(`${getApiUri()}/mailerlite`, {
-                      email,
-                    })
-                    .then(resp => {
-                      resolve();
-                      history.push(`/verify-email?email=${email}`);
-                    })
-                    .catch(err => {
-                      reject(err);
-                    });
-                } else {
-                  resolve();
-                  history.push(`/verify-email?email=${email}`);
-                }
               })
-              .catch(err => {
-                reject(err);
-              });
+                .then(resp => {
+                  // Subscribe to mailing list
+                  if (updates === true) {
+                    axios
+                      .post(`${getApiUri()}/mailerlite`, {
+                        email,
+                      })
+                      .then(resp => {
+                        resolve();
+                        history.push(`/verify-email?email=${email}`);
+                      })
+                      .catch(err => {
+                        reject(err);
+                      });
+                  } else {
+                    resolve();
+                    history.push(`/verify-email?email=${email}`);
+                  }
+                })
+                .catch(err => {
+                  reject(err);
+                });
+            }
           },
         );
       });

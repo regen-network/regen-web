@@ -276,7 +276,7 @@ export default function LedgerModal({
   ...props
 }: LedgerModalProps): JSX.Element {
   const classes = useStyles();
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   const [txRes, setTxRes] = useState<GetTxResponse | undefined>();
 
   useEffect(() => {
@@ -344,7 +344,7 @@ export default function LedgerModal({
                     arrow
                     placement="top"
                     title={ReactHtmlParser(
-                      '<b>Blockchain data:</b> data stored on the Regen Ledger. These credits exist only on our devnet and should not be treated as actual legal title to the credits. Credits subject to change until deployed on our Mainnet.',
+                      '<b>Blockchain (Regen Ledger):</b> These credits exist only on our devnet and should not be treated as actual legal title to the credits. Credits subject to change until deployed on our Mainnet.',
                     )}
                   >
                     <span>

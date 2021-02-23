@@ -687,7 +687,7 @@
           "title": "Co-benefits"
         }
       },
-      "glanceImgSrc": "https://regen-registry.s3.amazonaws.com/projects/wilmot/image1.webp",
+      "glanceImgSrc": "https://regen-registry.s3.amazonaws.com/projects/wilmot/impactag-smallmap-top-v3.jpg",
       "glanceText": [
         "Increased soil organic carbon concentration to 4.5%.",
         "Improved co-benefits significantly with Soil Health ranking as excellent, Ecosystem Health as good, and Animal Welfare as excellent."
@@ -710,7 +710,7 @@
           "state": "New South Wales",
           "country": "Australia"
         },
-        "imgSrc": "https://regen-registry.s3.amazonaws.com/projects/wilmot/image1.webp",
+        "imgSrc": "https://regen-registry.s3.amazonaws.com/projects/wilmot/impactag.jpg",
         "description": "Impact Ag Partners is a specialist agricultural asset management firm and advisory service which utilises a variety of pathways and partners to measure and monitise natural capital."
       },
       "steward": {
@@ -720,7 +720,7 @@
           "state": "New South Wales",
           "country": "Australia"
         },
-        "imgSrc": "https://regen-registry.s3.amazonaws.com/projects/wilmot/image1.webp",
+        "imgSrc": "https://regen-registry.s3.amazonaws.com/projects/wilmot/wilmot.jpg",
         "description": "Wilmot Cattle Company is an innovative, regenerative, grass-fed beef business."
       },
       "broker": {
@@ -745,19 +745,19 @@
       "longDescription": "<p>Stu & Trish are the management team behind Wilmot Cattle Co and are driven by the exciting ecological opportunities they can foresee for the business. They have a wholehearted belief in regenerative agriculture and the benefits it will bring to the industry globally, as we collectively work to heal what has largely become a degraded landscape. They have a burning desire to succeed in agriculture and are very ambitious in the growth and development plans they have for Wilmot Cattle Co.</p><p>While Stu has managed the day to day operations of Wilmot since 2016, and now presides over the portfolio of all three properties in a General Manager capacity, Trish works tirelessly behind the scenes ensuring a high level of rigor around the data collection, management, and analysis of every aspect of the business. They firmly believe that you cannot manage what you do not measure and as such, the integrity of the data is paramount.</p><p>In their spare time, they enjoy exploring the natural wonders of Wilmot, including its five waterfalls and large areas of virtually native bushland, with their two kids Harry and Poppy. They all gain great satisfaction from discovering new species of plants and learning about their role in the ecosystem.</p>",
       "media": [
         {
-          "src": "https://regen-registry.s3.amazonaws.com/projects/wilmot/image1.webp",
+          "src": "https://regen-registry.s3.amazonaws.com/projects/wilmot/image1.png",
           "type": "image"
         },
         {
-          "src": "https://regen-registry.s3.amazonaws.com/projects/wilmot/image1.webp",
+          "src": "https://regen-registry.s3.amazonaws.com/projects/wilmot/image2.png",
           "type": "image"
         },
         {
-          "src": "https://regen-registry.s3.amazonaws.com/projects/wilmot/image1.webp",
+          "src": "https://regen-registry.s3.amazonaws.com/projects/wilmot/image3.png",
           "type": "image"
         },
         {
-          "src": "https://regen-registry.s3.amazonaws.com/projects/wilmot/image1.webp",
+          "src": "https://regen-registry.s3.amazonaws.com/projects/wilmot/image4.png",
           "type": "image"
         },
         {
@@ -768,19 +768,19 @@
       ],
       "sdgs": [
         {
-          "imageUrl": "https://regen-registry.s3.amazonaws.com/projects/wilmot/image1.webp",
+          "imageUrl": "https://regen-registry.s3.amazonaws.com/sdgs/sdg2.svg",
           "title": "200k kg protein production"
         },
         {
-          "imageUrl": "https://regen-registry.s3.amazonaws.com/projects/wilmot/image1.webp",
+          "imageUrl": "https://regen-registry.s3.amazonaws.com/sdgs/sdg13.svg",
           "title": "6.07 tons CO2e"
         },
         {
-          "imageUrl": "https://regen-registry.s3.amazonaws.com/projects/wilmot/image1.webp",
+          "imageUrl": "https://regen-registry.s3.amazonaws.com/sdgs/sdg15.svg",
           "title": "28% increase in NDVI (vegetation health) "
         }
       ],
-      "image": "https://regen-registry.s3.amazonaws.com/projects/wilmot/image1.webp",
+      "image": "https://regen-registry.s3.amazonaws.com/projects/wilmot/Image.png",
       "map": "https://regen-registry.s3.amazonaws.com/projects/wilmot/Wilmot_boundary.kml",
       "keyOutcomesActivities": [
         "Independently verified",
@@ -827,25 +827,25 @@
           "name": "Soil Organic Carbon",
           "description": "Organic matter contributes to nutrient retention and turnover, soil structure, moisture retention and availability, degradation of pollutants, carbon sequestration and soil resilience.",
           "monitored": true,
-          "imgSrc": "https://regen-registry.s3.amazonaws.com/projects/wilmot/image1.webp"
+          "imgSrc": "https://regen-registry.s3.amazonaws.com/projects/wilmot/impact1.png"
         },
         {
           "name": "Animal Welfare",
           "description": "Animal welfare is an important component in a well managed grazing enterprise. Low stress stock handling techniques have been adopted to ensure animals have higher quality life.",
           "monitored": false,
-          "imgSrc": "https://regen-registry.s3.amazonaws.com/projects/wilmot/image1.webp"
+          "imgSrc": "https://regen-registry.s3.amazonaws.com/projects/wilmot/impact2.png"
         },
         {
           "name": "Ecosystem Health",
           "description": "In the ecological realm, ‘health’ is characterized by system integrity and the exhibition of certain fundamental properties of self-organizing complex systems.",
           "monitored": false,
-          "imgSrc": "https://regen-registry.s3.amazonaws.com/projects/wilmot/image1.webp"
+          "imgSrc": "https://regen-registry.s3.amazonaws.com/projects/wilmot/impact3.png"
         },
         {
           "name": "Soil Health",
           "description": "The capacity of soil to function as a vital living ecosystem that sustains plants, animals, and humans.",
           "monitored": false,
-          "imgSrc": "https://regen-registry.s3.amazonaws.com/projects/wilmot/image1.webp"
+          "imgSrc": "https://regen-registry.s3.amazonaws.com/projects/wilmot/impact4.png"
         }
       ],
       "creditClass": {

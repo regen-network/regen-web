@@ -5,7 +5,7 @@ import { useAuth0, OAuthError } from '@auth0/auth0-react';
 
 import { createBrowserHistory } from 'history';
 import isAdmin from './lib/admin';
-import { init as initGA } from './lib/ga';
+// import { init as initGA } from './lib/ga';
 
 import './App.css';
 import {
@@ -239,9 +239,9 @@ function Projects(): JSX.Element {
 const App: React.FC = (props): JSX.Element => {
   const { user, isLoading, error } = useAuth0();
 
-  useEffect(() => {
-    initGA();
-  });
+  // useEffect(() => {
+  //   initGA();
+  // });
 
   if (isLoading) {
     return <div></div>;

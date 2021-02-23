@@ -116,9 +116,8 @@ export default function ImageField({
         open={!!initialImage}
         onClose={() => setInitialImage('')}
         onSubmit={croppedImage => {
-          const imageUrl = croppedImage.src;
           setInitialImage('');
-          form.setFieldValue(field.name, imageUrl);
+          form.setFieldValue(field.name, croppedImage.src);
         }}
       />
     </>

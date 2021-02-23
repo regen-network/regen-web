@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
+import React, { useState, useEffect } from 'react';
+import { makeStyles, Theme } from '@material-ui/core/styles';
 import * as togeojson from '@mapbox/togeojson';
 import { useLocation } from 'react-router-dom';
 import { loader } from 'graphql.macro';
 import { useQuery } from '@apollo/client';
 import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 
-// import { setPageView } from '../lib/ga';
+import { setPageView } from '../lib/ga';
 import { useLedger, ContextType } from '../ledger';
 import background from '../assets/background.jpg';
 import { Project, ProjectDefault, ActionGroup } from '../mocks';
@@ -21,7 +21,7 @@ import Description from 'web-components/lib/components/description';
 import Timeline from 'web-components/lib/components/timeline';
 import CreditDetails from 'web-components/lib/components/credits/CreditDetails';
 import LandManagementActions from 'web-components/lib/components/sliders/LandManagementActions';
-import ProjectMedia from 'web-components/lib/components/sliders/ProjectMedia';
+// import ProjectMedia from 'web-components/lib/components/sliders/ProjectMedia';
 import Map from 'web-components/lib/components/map';
 import BuyFooter from 'web-components/lib/components/fixed-footer/BuyFooter';
 import MrvTabs from 'web-components/lib/components/tabs';
@@ -243,12 +243,12 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
 
   const [submitted, setSubmitted] = useState(false);
   const location = useLocation();
-  // useEffect(() => {
-  //   setPageView(location);
-  // }, [location]);
+  useEffect(() => {
+    setPageView(location);
+  }, [location]);
 
   const classes = useStyles();
-  const theme = useTheme();
+  // const theme = useTheme();
   const landManagementActions: ActionGroup[] = project.landManagementActions.map(group => ({
     ...group,
     actions: group.actions.map(action => ({ ...action, imgSrc: getImgSrc(action.imgSrc) })),
@@ -307,13 +307,13 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
     <div className={classes.root}>
       <SEO location={location} siteMetadata={siteMetadata} title={project.name} imageUrl={project.image} />
 
-      <ProjectMedia
+      {/* <ProjectMedia
         assets={project.media.filter(item => item.type === 'image')}
         gridView
         mobileHeight={theme.spacing(78.75)}
-      />
+      /> */}
       <ProjectTop project={project} projectDefault={projectDefault} />
-      {/* <ProjectImpact impact={project.impact} /> */}
+      <ProjectImpact impact={project.impact} />
 
       {/* {protectedSpecies.length > 0 && (
         <div
@@ -370,7 +370,7 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
           </div>
         </div>
       )}
-{/* 
+
       <div className={`project-background`}>
         <div
           className={`${classes.projectTopContent} ${classes.projectDetails} ${classes.projectActions} ${classes.projectContent}`}
@@ -405,7 +405,7 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
             </div>
           ))}
         </div>
-      </div> */}
+      </div>
 
       {geojson && isGISFile ? (
         <Map geojson={geojson} token={process.env.REACT_APP_MAPBOX_TOKEN} />
@@ -449,7 +449,7 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
           </div>
         )}
 
-      {/* {otherProjects.length > 0 && <MoreProjects projects={otherProjects} />} */}
+      {otherProjects.length > 0 && <MoreProjects projects={otherProjects} />}
 
       {project.creditPrice && <BuyFooter onClick={handleOpen} creditPrice={project.creditPrice} />}
       {project.creditPrice && project.stripePrice && (

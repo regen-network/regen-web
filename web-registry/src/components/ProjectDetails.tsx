@@ -313,7 +313,7 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
         mobileHeight={theme.spacing(78.75)}
       />
       <ProjectTop project={project} projectDefault={projectDefault} />
-      <ProjectImpact impact={project.impact} />
+      {/* <ProjectImpact impact={project.impact} /> */}
 
       {/* {protectedSpecies.length > 0 && (
         <div
@@ -370,7 +370,7 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
           </div>
         </div>
       )}
-
+{/* 
       <div className={`project-background`}>
         <div
           className={`${classes.projectTopContent} ${classes.projectDetails} ${classes.projectActions} ${classes.projectContent}`}
@@ -405,7 +405,7 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
 
       {geojson && isGISFile ? (
         <Map geojson={geojson} token={process.env.REACT_APP_MAPBOX_TOKEN} />
@@ -449,7 +449,7 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
           </div>
         )}
 
-      {otherProjects.length > 0 && <MoreProjects projects={otherProjects} />}
+      {/* {otherProjects.length > 0 && <MoreProjects projects={otherProjects} />} */}
 
       {project.creditPrice && <BuyFooter onClick={handleOpen} creditPrice={project.creditPrice} />}
       {project.creditPrice && project.stripePrice && (

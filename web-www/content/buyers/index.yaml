@@ -59,7 +59,7 @@ imageGridSection:
       description: Through periodic impact reports, buyers can communicate authentic
         and rich stories of environmental impact to their customers and
         supporters.
-      image: ../../static/media/share-impact.png
+      image: ../../static/media/share-impact-small.jpg
 faqSection:
   header: More questions? Dig into our FAQ.
   image: ../../static/media/buyers-faq-bg.png

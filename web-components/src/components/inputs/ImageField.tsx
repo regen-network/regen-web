@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-interface ControlledTextFieldProps extends FieldProps {
+interface Props extends FieldProps {
   className?: string;
   description?: string;
   label?: string;
@@ -57,20 +57,20 @@ export default function ImageField({
   transformValue,
   triggerOnChange,
   ...fieldProps
-}: ControlledTextFieldProps): JSX.Element {
+}: Props): JSX.Element {
   const [image, setImage] = useState('');
-  const [open, setOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
   const [uploadedImage, setUploadedImage] = useState('');
   const { form, field } = fieldProps; // passed from Formik <Field />
 
   // On file select (from the pop up)
-  const onFileChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    if (event && event.target && event.target.files && event.target.files.length) {
-      const file = event.target.files[0];
+  const onFileChange = ({ target: { files } }: React.ChangeEvent<HTMLInputElement>): void => {
+    if (files && files.length) {
+      const [file] = files;
       toBase64(file).then(image => {
         if (typeof image === 'string') {
           setUploadedImage(image);
-          setOpen(true);
+          // setModalOpen(true);
         }
       });
     }
@@ -79,14 +79,14 @@ export default function ImageField({
   const handleClose = (): void => {
     setUploadedImage('');
     setImage('');
-    setOpen(false);
+    setModalOpen(false);
   };
 
   const handleSelectImage = (croppedImage: HTMLImageElement): void => {
     const imageUrl = croppedImage.src;
     setImage(imageUrl);
-    form.setFieldValue(field.name, image);
-    setOpen(false);
+    form.setFieldValue(field.name, imageUrl);
+    setModalOpen(false);
   };
 
   // Convert file to base64 string
@@ -110,7 +110,7 @@ export default function ImageField({
         {...fieldProps}
       >
         {() => (
-          // TODO: typescript takes issue if you just pass children diretgly so the empty render prop is a hack
+          // TODO: typescript takes issue if you just pass children  so the empty render prop is a hack
           <Box className={classes.imageBox} display="flex" alignItems="center">
             <Avatar className={classes.avatar} src={image} />
 
@@ -126,7 +126,7 @@ export default function ImageField({
       <CropImageModal
         circularCrop
         image={uploadedImage}
-        open={open}
+        open={!!uploadedImage.length}
         onClose={handleClose}
         onSubmit={handleSelectImage}
       />

@@ -9,13 +9,15 @@ import ImageField from '../inputs/ImageField';
 import { requiredMessage } from '../inputs/validation';
 import OnBoardingCard from '../cards/OnBoardingCard';
 import FormLabel from './ControlledFormLabel';
-import ContainedButton from '../buttons/ContainedButton';
+import LocationField from '../inputs/LocationField';
+import { OnboardingSubmit } from '../form/OnboardingSubmit';
 
 interface FormProps {
   submit: (values: Values) => Promise<void>;
   goBack: () => void;
   skip: () => void;
   apiUrl: string;
+  mapToken: string;
 }
 
 interface Values {
@@ -58,16 +60,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   radioBtn: {
     padding: `0 ${theme.spacing(2)} ${theme.spacing(2)} 0`,
   },
-  button: {
-    [theme.breakpoints.up('sm')]: {
-      marginTop: theme.spacing(8),
-      marginRight: theme.spacing(8.75),
-    },
-    [theme.breakpoints.down('xs')]: {
-      marginTop: theme.spacing(6.25),
-      marginRight: theme.spacing(2.5),
-    },
-  },
   textField: {
     '&:first-of-type': {
       marginTop: 0,
@@ -79,22 +71,9 @@ const useStyles = makeStyles((theme: Theme) => ({
       marginTop: theme.spacing(4),
     },
   },
-  cancelBtn: {
-    color: theme.palette.grey[400],
-    '&:hover': {
-      backgroundColor: 'transparent',
-      color: theme.palette.grey[500],
-    },
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(4),
-    },
-    [theme.breakpoints.down('xs')]: {
-      fontSize: theme.spacing(3.5),
-    },
-  },
 }));
 
-const OrganizationProfileForm: React.FC<FormProps> = ({ submit, apiUrl, goBack, skip }) => {
+const OrganizationProfileForm: React.FC<FormProps> = ({ submit, apiUrl, goBack, skip, mapToken }) => {
   const [acctType, setAcctType] = useState<AcctType>('personal');
   const classes = useStyles();
   const isPersonal = acctType === 'personal';
@@ -111,18 +90,12 @@ const OrganizationProfileForm: React.FC<FormProps> = ({ submit, apiUrl, goBack, 
       }}
       validate={(values: Values) => {
         const errors: Partial<Values> = {};
-        if (!values.displayName) {
-          errors.displayName = requiredMessage;
-        }
-        if (!values.legalName) {
-          errors.legalName = requiredMessage;
-        }
-        if (!values.location) {
-          errors.location = requiredMessage;
-        }
-        if (!values.logo) {
-          errors.logo = requiredMessage;
-        }
+        const errorFields: Array<keyof Values> = ['displayName', 'legalName', 'location', 'logo'];
+        errorFields.forEach(value => {
+          if (!values[value]) {
+            errors[value] = requiredMessage;
+          }
+        });
         return errors;
       }}
       onSubmit={async (values, { setSubmitting }) => {
@@ -182,11 +155,12 @@ const OrganizationProfileForm: React.FC<FormProps> = ({ submit, apiUrl, goBack, 
                 />
                 <Field
                   className={classes.textField}
-                  component={ControlledTextField}
+                  component={LocationField}
                   description="This address is used for issuing credits.  If you choose to show this entity on the project page, only city, state/province, and country will be displayed. "
                   label="Organization location"
                   name="location"
                   placeholder="Start typing the location"
+                  token={mapToken}
                 />
                 <Field
                   className={classes.textField}
@@ -207,22 +181,12 @@ const OrganizationProfileForm: React.FC<FormProps> = ({ submit, apiUrl, goBack, 
                 />
               </OnBoardingCard>
             </Accordion>
-            <Grid container justify="space-between">
-              <ContainedButton
-                variant="text"
-                onClick={goBack}
-                className={clsx(classes.cancelBtn, classes.button)}
-              >
-                Back
-              </ContainedButton>
-              <ContainedButton
-                onClick={isPersonal ? skip : submitForm}
-                className={classes.button}
-                disabled={(submitCount > 0 && !isValid) || isSubmitting}
-              >
-                Next
-              </ContainedButton>
-            </Grid>
+
+            <OnboardingSubmit
+              onSubmit={isPersonal ? skip : submitForm}
+              onCancel={goBack}
+              disabled={(submitCount > 0 && !isValid) || isSubmitting}
+            />
           </Form>
         );
       }}

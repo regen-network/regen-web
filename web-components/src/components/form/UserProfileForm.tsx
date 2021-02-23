@@ -1,12 +1,13 @@
 import React from 'react';
-import { Grid, makeStyles, Theme } from '@material-ui/core';
+import { makeStyles, Theme } from '@material-ui/core';
 import { Formik, Form, Field } from 'formik';
 
-import ContainedButton from '../buttons/ContainedButton';
 import OnBoardingCard from '../cards/OnBoardingCard';
 import ControlledTextField from '../inputs/ControlledTextField';
 import PhoneField from '../inputs/PhoneField';
 import ImageField from '../inputs/ImageField';
+import { requiredMessage } from '../inputs/validation';
+import { OnboardingSubmit } from './OnboardingSubmit';
 
 interface UserProfileFormProps {
   submit: (values: Values) => Promise<void>;
@@ -22,16 +23,6 @@ interface Values {
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
-  button: {
-    [theme.breakpoints.up('sm')]: {
-      marginTop: theme.spacing(8),
-      marginRight: theme.spacing(8.75),
-    },
-    [theme.breakpoints.down('xs')]: {
-      marginTop: theme.spacing(6.25),
-      marginRight: theme.spacing(2.5),
-    },
-  },
   textField: {
     '&:first-of-type': {
       marginTop: 0,
@@ -58,12 +49,12 @@ const UserProfileForm: React.FC<UserProfileFormProps> = ({ submit, apiUrl }) => 
       }}
       validate={(values: Values) => {
         const errors: Partial<Values> = {};
-        if (!values.name) {
-          errors.name = 'Please fill in your full name';
-        }
-        if (!values.role) {
-          errors.role = 'Please fill in your role';
-        }
+        const errorFields: Array<keyof Values> = ['name', 'role'];
+        errorFields.forEach(value => {
+          if (!values[value]) {
+            errors[value] = requiredMessage;
+          }
+        });
         return errors;
       }}
       onSubmit={async (values, { setSubmitting }) => {
@@ -91,7 +82,7 @@ const UserProfileForm: React.FC<UserProfileFormProps> = ({ submit, apiUrl }) => 
                 component={ControlledTextField}
                 name="role"
                 label="Role"
-                placeholder="i.e. CEO, General Manager, Soil Scientist"
+                placeholder="i.e. Farmer, Conservationist, Manager, etc."
               />
               <Field
                 className={classes.textField}
@@ -120,15 +111,10 @@ const UserProfileForm: React.FC<UserProfileFormProps> = ({ submit, apiUrl }) => 
                 optional
               />
             </OnBoardingCard>
-            <Grid container justify="flex-end">
-              <ContainedButton
-                onClick={submitForm}
-                className={classes.button}
-                disabled={(submitCount > 0 && !isValid) || isSubmitting}
-              >
-                Next
-              </ContainedButton>
-            </Grid>
+            <OnboardingSubmit
+              onSubmit={submitForm}
+              disabled={(submitCount > 0 && !isValid) || isSubmitting}
+            />
           </Form>
         );
       }}

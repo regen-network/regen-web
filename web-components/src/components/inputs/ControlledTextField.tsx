@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles, Theme, Input, InputAdornment, Typography } from '@material-ui/core';
 import { FieldProps } from 'formik';
 import FieldFormControl from './FieldFormControl';
+import OnboardingInput from './OnboardingInput';
 
 interface ControlledTextFieldProps extends FieldProps {
   startAdornment?: React.ReactNode;
@@ -19,27 +20,6 @@ interface ControlledTextFieldProps extends FieldProps {
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
-  input: {
-    backgroundColor: theme.palette.primary.main,
-    border: `1px solid ${theme.palette.grey[100]}`,
-    borderRadius: '2px',
-    [theme.breakpoints.up('sm')]: {
-      padding: theme.spacing(3),
-      fontSize: theme.spacing(4.5),
-    },
-    [theme.breakpoints.down('xs')]: {
-      padding: theme.spacing(2),
-      fontSize: theme.spacing(3.5),
-    },
-    '& .MuiInputAdornment-root p': {
-      color: theme.palette.info.main,
-    },
-    '&.Mui-error': {
-      '& input, & .MuiSelect-select': {
-        borderColor: theme.palette.error.main,
-      },
-    },
-  },
   charCount: {
     color: theme.palette.info.main,
     [theme.breakpoints.up('sm')]: {
@@ -94,16 +74,13 @@ export default function ControlledTextField({
     >
       {({ handleChange, handleBlur }) => (
         <>
-          <Input
-            disableUnderline
-            className={classes.input}
-            disabled={form.isSubmitting}
-            multiline={multiline}
+          <OnboardingInput
+            {...fieldProps}
+            placeholder={placeholder}
             onBlur={({ target: { value } }) => handleBlur(value)}
             onChange={e => handleFieldChange(e, handleChange)}
-            placeholder={placeholder}
+            multiline={multiline}
             rows={rows}
-            value={field.value}
             startAdornment={
               startAdornment ? <InputAdornment position="start">{startAdornment}</InputAdornment> : null
             }

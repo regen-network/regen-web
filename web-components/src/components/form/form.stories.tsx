@@ -23,7 +23,13 @@ export const userProfile = (): JSX.Element => (
 
 export const organizationProfile = (): JSX.Element => (
   <OnBoardingSection title="Organization Profile">
-    <OrganizationProfileForm apiUrl="" submit={() => null} goBack={() => null} skip={() => null} />
+    <OrganizationProfileForm
+      apiUrl=""
+      mapToken={process.env.STORYBOOK_MAPBOX_TOKEN}
+      submit={() => null}
+      goBack={() => null}
+      skip={() => null}
+    />
   </OnBoardingSection>
 );
 

@@ -51,7 +51,7 @@ export default function RegenPhoneField({
   ...fieldProps
 }: RegenPhoneFieldProps): JSX.Element {
   const [countryCode, setCountryCode] = useState('us');
-  const { form, field } = fieldProps; // passed from Formik <Field />
+  const { form, field } = fieldProps;
   const classes = useStyles({ disabled: form.isSubmitting });
 
   return (

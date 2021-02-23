@@ -36,7 +36,10 @@ export default function ConfirmEmail(): JSX.Element {
   const email = search.get('email');
 
   let title: string = 'User Profile';
-  const showForm: boolean = success === null || success === 'true';
+  const showForm: boolean =
+    success === null ||
+    success === 'true' ||
+    (success === 'false' && message === 'This URL can be used only once');
   if (!showForm) {
     if (message === messageExpired) {
       title = 'This email confirmation link has expired.';

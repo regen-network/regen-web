@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import * as togeojson from '@mapbox/togeojson';
 import { useLocation } from 'react-router-dom';
-// import { loader } from 'graphql.macro';
-// import { useQuery } from '@apollo/client';
+import { loader } from 'graphql.macro';
+import { useQuery } from '@apollo/client';
 import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 
 import { setPageView } from '../lib/ga';
@@ -228,7 +228,7 @@ interface ProjectProps {
   projectDefault: ProjectDefault;
 }
 
-// const PROJECT_BY_HANDLE = loader('../graphql/ProjectByHandle.graphql');
+const PROJECT_BY_HANDLE = loader('../graphql/ProjectByHandle.graphql');
 
 export default function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JSX.Element {
   const { api }: ContextType = useLedger();
@@ -237,10 +237,9 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
     txClient = new ServiceClientImpl(api.connection.queryConnection);
   }
 
-  let data: any;
-  // const { data } = useQuery(PROJECT_BY_HANDLE, {
-  //   variables: { handle: project.id },
-  // });
+  const { data } = useQuery(PROJECT_BY_HANDLE, {
+    variables: { handle: project.id },
+  });
 
   const [submitted, setSubmitted] = useState(false);
   const location = useLocation();

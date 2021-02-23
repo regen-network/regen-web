@@ -22,7 +22,7 @@ import Timeline from 'web-components/lib/components/timeline';
 import CreditDetails from 'web-components/lib/components/credits/CreditDetails';
 import LandManagementActions from 'web-components/lib/components/sliders/LandManagementActions';
 import ProjectMedia from 'web-components/lib/components/sliders/ProjectMedia';
-// import Map from 'web-components/lib/components/map';
+import Map from 'web-components/lib/components/map';
 import BuyFooter from 'web-components/lib/components/fixed-footer/BuyFooter';
 import MrvTabs from 'web-components/lib/components/tabs';
 import Table from 'web-components/lib/components/table';

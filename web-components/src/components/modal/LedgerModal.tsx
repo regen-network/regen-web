@@ -3,7 +3,7 @@ import { makeStyles, Theme, withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import clsx from 'clsx';
 import ReactHtmlParser from 'react-html-parser';
-// import { ServiceClientImpl, GetTxResponse } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
+import { ServiceClientImpl, GetTxResponse } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 
 import Modal, { RegenModalProps } from './index';
 import RegenLedgerIcon from '../icons/RegenLedgerIcon';
@@ -22,8 +22,7 @@ interface Item {
 
 interface LedgerModalProps extends RegenModalProps {
   summary: Item[];
-  // txClient?: ServiceClientImpl;
-  txClient?: any;
+  txClient?: ServiceClientImpl;
   txHash?: string;
   link?: string;
   party: Party | null;
@@ -278,8 +277,7 @@ export default function LedgerModal({
 }: LedgerModalProps): JSX.Element {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
-  // const [txRes, setTxRes] = useState<GetTxResponse | undefined>();
-  const [txRes, setTxRes] = useState<any | undefined>();
+  const [txRes, setTxRes] = useState<GetTxResponse | undefined>();
 
   useEffect(() => {
     if (txClient && txHash) {

@@ -4,10 +4,10 @@ import * as togeojson from '@mapbox/togeojson';
 import { useLocation } from 'react-router-dom';
 import { loader } from 'graphql.macro';
 import { useQuery } from '@apollo/client';
-// import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
+import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 
 import { setPageView } from '../lib/ga';
-// import { useLedger, ContextType } from '../ledger';
+import { useLedger, ContextType } from '../ledger';
 import background from '../assets/background.jpg';
 import { Project, ProjectDefault, ActionGroup } from '../mocks';
 import ProjectTop from './sections/ProjectTop';
@@ -231,11 +231,11 @@ interface ProjectProps {
 const PROJECT_BY_HANDLE = loader('../graphql/ProjectByHandle.graphql');
 
 export default function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JSX.Element {
-  // const { api }: ContextType = useLedger();
-  // let txClient: ServiceClientImpl | undefined;
-  // if (api) {
-  //   txClient = new ServiceClientImpl(api.connection.queryConnection);
-  // }
+  const { api }: ContextType = useLedger();
+  let txClient: ServiceClientImpl | undefined;
+  if (api) {
+    txClient = new ServiceClientImpl(api.connection.queryConnection);
+  }
 
   const { data } = useQuery(PROJECT_BY_HANDLE, {
     variables: { handle: project.id },
@@ -425,7 +425,7 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
                   : projectDefault.timeline.title}
               </Title>
               <Timeline
-                // txClient={txClient}
+                txClient={txClient}
                 events={data.projectByHandle.eventsByProjectId.nodes.map(
                   (node: {
                     // TODO use generated types from graphql schema

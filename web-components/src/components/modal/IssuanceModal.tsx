@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-// import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
+import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 
 import LedgerModal from './LedgerModal';
 import { RegenModalProps } from './';
@@ -35,8 +35,7 @@ export interface IssuanceModalData {
 }
 
 interface IssuanceModalProps extends RegenModalProps, IssuanceModalData {
-  // txClient?: ServiceClientImpl;
-  txClient?: any;
+  txClient?: ServiceClientImpl;
   txHash?: string;
 }
 

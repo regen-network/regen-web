@@ -9,18 +9,18 @@ import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1
 import { setPageView } from '../lib/ga';
 import { useLedger, ContextType } from '../ledger';
 import background from '../assets/background.jpg';
-import { Project, ProjectDefault } from '../mocks';
+import { Project, ProjectDefault, ActionGroup } from '../mocks';
 import ProjectTop from './sections/ProjectTop';
-// import ProjectImpact from './sections/ProjectImpact';
-// import MoreProjects from './sections/MoreProjects';
+import ProjectImpact from './sections/ProjectImpact';
+import MoreProjects from './sections/MoreProjects';
 
-// import { getFontSize } from 'web-components/lib/theme/sizing';
+import { getFontSize } from 'web-components/lib/theme/sizing';
 import { getFormattedDate } from 'web-components/lib/utils/format';
 import Title from 'web-components/lib/components/title';
-// import Description from 'web-components/lib/components/description';
+import Description from 'web-components/lib/components/description';
 import Timeline from 'web-components/lib/components/timeline';
 import CreditDetails from 'web-components/lib/components/credits/CreditDetails';
-// import LandManagementActions from 'web-components/lib/components/sliders/LandManagementActions';
+import LandManagementActions from 'web-components/lib/components/sliders/LandManagementActions';
 import ProjectMedia from 'web-components/lib/components/sliders/ProjectMedia';
 import Map from 'web-components/lib/components/map';
 import BuyFooter from 'web-components/lib/components/fixed-footer/BuyFooter';
@@ -35,7 +35,7 @@ import FixedFooter from 'web-components/lib/components/fixed-footer';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import EmailIcon from 'web-components/lib/components/icons/EmailIcon';
 
-// import { getImgSrc } from '../lib/imgSrc';
+import { getImgSrc } from '../lib/imgSrc';
 import getApiUri from '../lib/apiUri';
 import { buildIssuanceModalData } from '../lib/transform';
 
@@ -249,12 +249,12 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
 
   const classes = useStyles();
   const theme = useTheme();
-  // const landManagementActions: ActionGroup[] = project.landManagementActions.map(group => ({
-  //   ...group,
-  //   actions: group.actions.map(action => ({ ...action, imgSrc: getImgSrc(action.imgSrc) })),
-  // }));
+  const landManagementActions: ActionGroup[] = project.landManagementActions.map(group => ({
+    ...group,
+    actions: group.actions.map(action => ({ ...action, imgSrc: getImgSrc(action.imgSrc) })),
+  }));
 
-  // const otherProjects: Project[] = projects.filter(p => p.id !== project.id);
+  const otherProjects: Project[] = projects.filter(p => p.id !== project.id);
 
   const [geojson, setGeojson] = useState<any | null>(null);
 

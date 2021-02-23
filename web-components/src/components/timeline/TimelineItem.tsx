@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 import ReactHtmlParser from 'react-html-parser';
-import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
+// import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 
 import Title from '../title';
 import ShieldIcon from '../icons/ShieldIcon';
@@ -13,7 +13,8 @@ interface TimelineItemProps extends Event {
   barColor: string;
   odd: boolean;
   last: boolean;
-  txClient?: ServiceClientImpl;
+  // txClient?: ServiceClientImpl;
+  txClient?: any;
 }
 
 interface StyleProps {

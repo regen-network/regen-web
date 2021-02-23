@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 import { useTheme } from '@material-ui/core/styles';
-import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
+// import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 
 import TimelineItem from './TimelineItem';
 import { IssuanceModalData } from '../modal/IssuanceModal';
@@ -15,7 +15,8 @@ export interface Event {
 
 interface TimelineProps {
   events: Event[];
-  txClient?: ServiceClientImpl;
+  // txClient?: ServiceClientImpl;
+  txClient?: any;
   completedItemIndex?: number;
 }
 

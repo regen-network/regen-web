@@ -75,7 +75,7 @@ export default function FieldFormControl({
   optional,
   ...fieldProps
 }: Props): JSX.Element {
-  const { form, field } = fieldProps; // passed from Formik <Field />
+  const { form, field } = fieldProps;
   const errorMessage = getIn(form.errors, field.name);
   const fieldTouched = getIn(form.touched, field.name);
 

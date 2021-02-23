@@ -61,7 +61,7 @@ const LocationField: React.FC<Props> = ({
             placeholder={placeholder}
             onBlur={({ target: { value } }) => {
               handleBlur(value);
-              setTimeout(() => setShowResults(false), 200); // without the timeout, `onBlur` fires before the click even ton the results list, so the value doesn't properly update. There's probably a better solution to this, but it works fo rnow
+              setTimeout(() => setShowResults(false), 200); // without the timeout, `onBlur` fires before the click event on the results list, so the value doesn't properly update. There's probably a better solution to this, but it works fo rnow
             }}
             onChange={({ target: { value } }) => {
               handleChange(value);

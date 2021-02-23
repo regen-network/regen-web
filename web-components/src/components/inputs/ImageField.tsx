@@ -58,45 +58,17 @@ export default function ImageField({
   triggerOnChange,
   ...fieldProps
 }: Props): JSX.Element {
-  const [image, setImage] = useState('');
-  const [modalOpen, setModalOpen] = useState(false);
-  const [uploadedImage, setUploadedImage] = useState('');
-  const { form, field } = fieldProps; // passed from Formik <Field />
+  const [initialImage, setInitialImage] = useState('');
+  const { form, field } = fieldProps;
 
-  // On file select (from the pop up)
-  const onFileChange = ({ target: { files } }: React.ChangeEvent<HTMLInputElement>): void => {
-    if (files && files.length) {
-      const [file] = files;
-      toBase64(file).then(image => {
-        if (typeof image === 'string') {
-          setUploadedImage(image);
-          // setModalOpen(true);
-        }
-      });
-    }
-  };
-
-  const handleClose = (): void => {
-    setUploadedImage('');
-    setImage('');
-    setModalOpen(false);
-  };
-
-  const handleSelectImage = (croppedImage: HTMLImageElement): void => {
-    const imageUrl = croppedImage.src;
-    setImage(imageUrl);
-    form.setFieldValue(field.name, imageUrl);
-    setModalOpen(false);
-  };
-
-  // Convert file to base64 string
-  const toBase64 = (file: File): Promise<string | ArrayBuffer | null> =>
-    new Promise((resolve, reject) => {
+  function toBase64(file: File): Promise<string | ArrayBuffer | null> {
+    return new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onload = () => resolve(reader.result);
       reader.onerror = error => reject(error);
     });
+  }
 
   const classes = useStyles();
 
@@ -112,9 +84,24 @@ export default function ImageField({
         {() => (
           // TODO: typescript takes issue if you just pass children  so the empty render prop is a hack
           <Box className={classes.imageBox} display="flex" alignItems="center">
-            <Avatar className={classes.avatar} src={image} />
+            <Avatar className={classes.avatar} src={field.value} />
 
-            <input type="file" hidden onChange={onFileChange} accept="image/*" id="image-upload-input" />
+            <input
+              type="file"
+              hidden
+              onChange={({ target: { files } }) => {
+                if (files && files.length) {
+                  const [file] = files;
+                  toBase64(file).then(image => {
+                    if (typeof image === 'string') {
+                      setInitialImage(image);
+                    }
+                  });
+                }
+              }}
+              accept="image/*"
+              id="image-upload-input"
+            />
             <label htmlFor="image-upload-input">
               <OutlinedButton isImageBtn className={classes.button}>
                 Add Image
@@ -125,10 +112,14 @@ export default function ImageField({
       </FieldFormControl>
       <CropImageModal
         circularCrop
-        image={uploadedImage}
-        open={!!uploadedImage.length}
-        onClose={handleClose}
-        onSubmit={handleSelectImage}
+        initialImage={initialImage}
+        open={!!initialImage}
+        onClose={() => setInitialImage('')}
+        onSubmit={croppedImage => {
+          const imageUrl = croppedImage.src;
+          setInitialImage('');
+          form.setFieldValue(field.name, imageUrl);
+        }}
       />
     </>
   );

@@ -50,7 +50,7 @@ export default function ControlledTextField({
   triggerOnChange,
   ...fieldProps
 }: ControlledTextFieldProps): JSX.Element {
-  const { form, field } = fieldProps; // passed from Formik <Field />
+  const { form, field } = fieldProps;
   const charsLeft = (charLimit || Infinity) - (field.value?.length || 0);
 
   function handleFieldChange(

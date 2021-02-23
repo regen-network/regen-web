@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import * as togeojson from '@mapbox/togeojson';
 import { useLocation } from 'react-router-dom';
@@ -6,7 +6,7 @@ import { loader } from 'graphql.macro';
 import { useQuery } from '@apollo/client';
 import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 
-// import { setPageView } from '../lib/ga';
+import { setPageView } from '../lib/ga';
 import { useLedger, ContextType } from '../ledger';
 import background from '../assets/background.jpg';
 import { Project, ProjectDefault, ActionGroup } from '../mocks';
@@ -243,9 +243,9 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
 
   const [submitted, setSubmitted] = useState(false);
   const location = useLocation();
-  // useEffect(() => {
-  //   setPageView(location);
-  // }, [location]);
+  useEffect(() => {
+    setPageView(location);
+  }, [location]);
 
   const classes = useStyles();
   const theme = useTheme();

@@ -219,6 +219,18 @@ coreSection:
         living in Denver.
       name: Mark Hagelberg
       title: Software Engineer
+      linkedUrl: https://www.linkedin.com/in/mark-hagelberg
+    - name: "David Daniel "
+      title: Software Engineer
+      image: ../../static/media/david-daniel.jpg
+      description: David is a seasoned software engineer with a passion for holistic
+        thought and the potential of decentralization to affect positive
+        societal change. Having worked in the blockchain sphere on projects
+        including SALT Lending, Shapeshift, and Bitcoin.com, he is thrilled to
+        combine these passions to help fight the growing climate emergency.
+      linkedUrl: https://www.linkedin.com/in/davidjdaniel/
+      githubUrl: https://github.com/haveanicedavid
+      twitterUrl: https://twitter.com/haveanicedavid
     - image: ../../static/media/20210216_093909.jpg
       name: Tyler Goodman
       description: Tyler is a senior Computer Science student at California State

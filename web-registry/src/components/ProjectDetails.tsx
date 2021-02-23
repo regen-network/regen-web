@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
-import * as togeojson from '@mapbox/togeojson';
+// import * as togeojson from '@mapbox/togeojson';
 import { useLocation } from 'react-router-dom';
 import { loader } from 'graphql.macro';
 import { useQuery } from '@apollo/client';
@@ -256,20 +256,20 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
 
   const otherProjects: Project[] = projects.filter(p => p.id !== project.id);
 
-  const [geojson, setGeojson] = useState<any | null>(null);
+  // const [geojson, setGeojson] = useState<any | null>(null);
 
   // Convert kml to geojson
-  const mapFile: string = project.map;
-  const isGISFile: boolean = /\.(json|kml)$/i.test(mapFile);
+  // const mapFile: string = project.map;
+  // const isGISFile: boolean = /\.(json|kml)$/i.test(mapFile);
 
-  if (!geojson && isGISFile) {
-    fetch(mapFile)
-      .then(r => r.text())
-      .then(kml => {
-        const dom = new DOMParser().parseFromString(kml, 'text/xml');
-        setGeojson(togeojson.kml(dom));
-      });
-  }
+  // if (!geojson && isGISFile) {
+  //   fetch(mapFile)
+  //     .then(r => r.text())
+  //     .then(kml => {
+  //       const dom = new DOMParser().parseFromString(kml, 'text/xml');
+  //       setGeojson(togeojson.kml(dom));
+  //     });
+  // }
 
   // Modal
   const [open, setOpen] = useState(false);
@@ -407,11 +407,11 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
         </div>
       </div>
 
-      {geojson && isGISFile ? (
+      {/* {geojson && isGISFile ? (
         <Map geojson={geojson} token={process.env.REACT_APP_MAPBOX_TOKEN} />
       ) : (
         <img className={classes.map} alt={project.name} src={mapFile} />
-      )}
+      )} */}
 
       {data &&
         data.projectByHandle &&

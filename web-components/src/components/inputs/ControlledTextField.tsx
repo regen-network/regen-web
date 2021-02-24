@@ -1,22 +1,14 @@
 import React from 'react';
-import { makeStyles, Theme, Input, InputAdornment, Typography } from '@material-ui/core';
+import { makeStyles, Theme, Typography, InputProps } from '@material-ui/core';
 import { FieldProps } from 'formik';
 import FieldFormControl from './FieldFormControl';
 import OnboardingInput from './OnboardingInput';
 
-interface ControlledTextFieldProps extends FieldProps {
-  startAdornment?: React.ReactNode;
+interface ControlledTextFieldProps extends FieldProps, InputProps {
   charLimit?: number;
-  className?: string;
   description?: string;
-  endAdornment?: React.ReactNode;
   label?: string;
-  multiline?: boolean;
   optional?: boolean;
-  placeholder?: string;
-  rows?: number;
-  transformValue?: (v: any) => any;
-  triggerOnChange?: (v: any) => Promise<void>;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -36,21 +28,17 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 export default function ControlledTextField({
-  startAdornment,
   charLimit,
-  className,
   description,
-  endAdornment,
   label,
-  multiline,
   optional,
-  placeholder,
-  rows = 1,
-  transformValue,
-  triggerOnChange,
-  ...fieldProps
+  field,
+  form,
+  meta,
+  className,
+  ...inputProps
 }: ControlledTextFieldProps): JSX.Element {
-  const { form, field } = fieldProps;
+  const fieldProps = { field, form, meta };
   const charsLeft = (charLimit || Infinity) - (field.value?.length || 0);
 
   function handleFieldChange(
@@ -65,28 +53,20 @@ export default function ControlledTextField({
 
   return (
     <FieldFormControl
-      className={className}
       label={label}
       description={description}
       disabled={form.isSubmitting}
       optional={optional}
+      className={className}
       {...fieldProps}
     >
       {({ handleChange, handleBlur }) => (
         <>
           <OnboardingInput
+            {...inputProps}
             {...fieldProps}
-            placeholder={placeholder}
             onBlur={({ target: { value } }) => handleBlur(value)}
             onChange={e => handleFieldChange(e, handleChange)}
-            multiline={multiline}
-            rows={rows}
-            startAdornment={
-              startAdornment ? <InputAdornment position="start">{startAdornment}</InputAdornment> : null
-            }
-            endAdornment={
-              endAdornment ? <InputAdornment position="end">{endAdornment}</InputAdornment> : null
-            }
           />
           {charLimit && (
             <Typography variant="body1" className={classes.charCount}>{`${charsLeft} character${

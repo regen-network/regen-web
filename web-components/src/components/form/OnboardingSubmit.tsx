@@ -1,8 +1,9 @@
-import { Grid, Theme } from '@material-ui/core';
-import clsx from 'clsx';
 import React from 'react';
-import ContainedButton from '../buttons/ContainedButton';
+import clsx from 'clsx';
 import { makeStyles } from '@material-ui/styles';
+import { Grid, Theme } from '@material-ui/core';
+
+import ContainedButton from '../buttons/ContainedButton';
 
 const useStyles = makeStyles((theme: Theme) => ({
   button: {

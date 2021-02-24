@@ -84,7 +84,7 @@ export default function ImageField({
         {() => (
           // TODO: typescript takes issue if you just pass children  so the empty render prop is a hack
           <Box className={classes.imageBox} display="flex" alignItems="center">
-            <Avatar className={classes.avatar} src={field.value.src} />
+            <Avatar className={classes.avatar} src={field.value} />
 
             <input
               type="file"
@@ -117,7 +117,7 @@ export default function ImageField({
         onClose={() => setInitialImage('')}
         onSubmit={croppedImage => {
           setInitialImage('');
-          form.setFieldValue(field.name, croppedImage);
+          form.setFieldValue(field.name, croppedImage.src);
         }}
       />
     </>

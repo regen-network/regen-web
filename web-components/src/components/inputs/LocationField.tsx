@@ -43,7 +43,7 @@ const LocationField: React.FC<Props> = ({
   const geocoderService = mbxGeocoder(baseClient);
   const [results, setResults] = useState<any[]>([]);
   const [showResults, setShowResults] = useState(true);
-  const { form } = fieldProps;
+  const { form, field } = fieldProps;
 
   const classes = useStyles();
   return (
@@ -59,6 +59,7 @@ const LocationField: React.FC<Props> = ({
           <Input
             {...fieldProps}
             placeholder={placeholder}
+            value={field.value.place_name}
             onBlur={({ target: { value } }) => {
               handleBlur(value);
               setTimeout(() => setShowResults(false), 200); // without the timeout, `onBlur` fires before the click event on the results list, so the value doesn't properly update. There's probably a better solution to this, but it works fo rnow
@@ -85,7 +86,7 @@ const LocationField: React.FC<Props> = ({
                 key={index}
                 className={classes.result}
                 onClick={() => {
-                  handleChange(item.place_name);
+                  handleChange(item);
                   setShowResults(false);
                 }}
               >

@@ -1,8 +1,8 @@
 import React from 'react';
-import { makeStyles, Theme, Typography, InputProps } from '@material-ui/core';
+import { makeStyles, Theme, Typography, InputProps, InputAdornment } from '@material-ui/core';
 import { FieldProps } from 'formik';
 import FieldFormControl from './FieldFormControl';
-import OnboardingInput from './OnboardingInput';
+import Input from './Input';
 
 interface ControlledTextFieldProps extends FieldProps, InputProps {
   charLimit?: number;
@@ -29,16 +29,17 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 export default function ControlledTextField({
   charLimit,
+  className,
   description,
-  label,
-  optional,
+  endAdornment,
   field,
   form,
+  label,
   meta,
-  className,
+  optional,
+  startAdornment,
   ...inputProps
 }: ControlledTextFieldProps): JSX.Element {
-  const fieldProps = { field, form, meta };
   const charsLeft = (charLimit || Infinity) - (field.value?.length || 0);
 
   function handleFieldChange(
@@ -58,15 +59,24 @@ export default function ControlledTextField({
       disabled={form.isSubmitting}
       optional={optional}
       className={className}
-      {...fieldProps}
+      field={field}
+      form={form}
+      meta={meta}
     >
       {({ handleChange, handleBlur }) => (
         <>
-          <OnboardingInput
+          <Input
             {...inputProps}
-            {...fieldProps}
             onBlur={({ target: { value } }) => handleBlur(value)}
             onChange={e => handleFieldChange(e, handleChange)}
+            value={field.value}
+            disabled={form.isSubmitting}
+            startAdornment={
+              startAdornment ? <InputAdornment position="start">{startAdornment}</InputAdornment> : null
+            }
+            endAdornment={
+              endAdornment ? <InputAdornment position="end">{endAdornment}</InputAdornment> : null
+            }
           />
           {charLimit && (
             <Typography variant="body1" className={classes.charCount}>{`${charsLeft} character${

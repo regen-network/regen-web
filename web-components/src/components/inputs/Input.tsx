@@ -1,8 +1,5 @@
 import React from 'react';
-import { makeStyles, Theme, Input, InputProps } from '@material-ui/core';
-import { FieldProps } from 'formik';
-
-interface Props extends FieldProps, InputProps {}
+import { makeStyles, Theme, Input as MuiInput, InputProps } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) => ({
   input: {
@@ -28,17 +25,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const OnboardingInput: React.FC<Props> = ({ form, field, meta, startAdornment, endAdornment, ...props }) => {
+/** Custom styles on top of MUI's `Input` component */
+const Input: React.FC<InputProps> = props => {
   const classes = useStyles();
-  return (
-    <Input
-      {...props}
-      disableUnderline
-      className={classes.input}
-      disabled={form.isSubmitting}
-      value={field.value}
-    />
-  );
+  return <MuiInput {...props} disableUnderline className={classes.input} />;
 };
 
-export default OnboardingInput;
+export default Input;

@@ -1,8 +1,16 @@
 import React, { useState } from 'react';
 import clsx from 'clsx';
-import { Theme, makeStyles, FormControl, RadioGroup, FormControlLabel, Radio, Grid } from '@material-ui/core';
+import {
+  Theme,
+  makeStyles,
+  FormControl,
+  RadioGroup,
+  FormControlLabel,
+  Radio,
+  Collapse,
+  Zoom,
+} from '@material-ui/core';
 import { Form, Formik, Field } from 'formik';
-import { motion, AnimatePresence } from 'framer-motion';
 
 import ControlledTextField from '../inputs/ControlledTextField';
 import ImageField from '../inputs/ImageField';
@@ -135,7 +143,8 @@ const OrganizationProfileForm: React.FC<FormProps> = ({ submit, apiUrl, goBack, 
                 </RadioGroup>
               </FormControl>
             </OnBoardingCard>
-            <Accordion isOpen={acctType === 'organization'}>
+
+            <PopIn isOpen={acctType === 'organization'}>
               <OnBoardingCard>
                 <Field
                   className={classes.textField}
@@ -180,7 +189,7 @@ const OrganizationProfileForm: React.FC<FormProps> = ({ submit, apiUrl, goBack, 
                   optional
                 />
               </OnBoardingCard>
-            </Accordion>
+            </PopIn>
 
             <OnboardingSubmit
               onSubmit={isPersonal ? skip : submitForm}
@@ -194,29 +203,17 @@ const OrganizationProfileForm: React.FC<FormProps> = ({ submit, apiUrl, goBack, 
   );
 };
 
-interface AccordionProps {
-  children: React.ReactNode;
-  isOpen: boolean;
-}
-const Accordion = ({ children, isOpen }: AccordionProps): JSX.Element => {
+const PopIn: React.FC<{ isOpen: boolean }> = ({ children, isOpen }) => {
   return (
-    <AnimatePresence>
-      {isOpen && (
-        <motion.section
-          key="content"
-          initial="collapsed"
-          animate="open"
-          exit="collapsed"
-          variants={{
-            open: { opacity: 1, height: 'auto', scale: 1 },
-            collapsed: { opacity: 0, height: 0, scale: 0.95 },
-          }}
-          transition={{ duration: 0.4, ease: [0.04, 0.62, 0.23, 0.98] }}
-        >
-          {children}
-        </motion.section>
-      )}
-    </AnimatePresence>
+    <div style={{ display: 'flex' }}>
+      <Zoom in={isOpen}>
+        <div>
+          <Collapse in={isOpen} collapsedHeight={0}>
+            <div>{children}</div>
+          </Collapse>
+        </div>
+      </Zoom>
+    </div>
   );
 };
 

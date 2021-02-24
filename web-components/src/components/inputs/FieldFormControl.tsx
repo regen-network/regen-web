@@ -2,7 +2,7 @@ import React from 'react';
 import { FieldProps, getIn } from 'formik';
 import { Theme, makeStyles, FormHelperText, Typography, FormControl } from '@material-ui/core';
 
-import FormLabel from '../form/ControlledFormLabel';
+import ControlledFormLabel from '../form/ControlledFormLabel';
 
 interface RenderProps {
   handleChange: (value: string) => void;
@@ -92,9 +92,9 @@ export default function FieldFormControl({
   return (
     <FormControl className={className} fullWidth>
       {label && (
-        <FormLabel optional={optional} disabled={disabled}>
+        <ControlledFormLabel optional={optional} disabled={disabled}>
           {label}
-        </FormLabel>
+        </ControlledFormLabel>
       )}
 
       {description && (

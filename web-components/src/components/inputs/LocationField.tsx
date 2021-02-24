@@ -4,7 +4,7 @@ import { FieldProps } from 'formik';
 import MapboxClient from '@mapbox/mapbox-sdk';
 import mbxGeocoder from '@mapbox/mapbox-sdk/services/geocoding';
 import FieldFormControl from './FieldFormControl';
-import OnboardingInput from './OnboardingInput';
+import Input from './Input';
 
 const useStyles = makeStyles((theme: Theme) => ({
   result: {
@@ -56,7 +56,7 @@ const LocationField: React.FC<Props> = ({
     >
       {({ handleChange, handleBlur }) => (
         <>
-          <OnboardingInput
+          <Input
             {...fieldProps}
             placeholder={placeholder}
             onBlur={({ target: { value } }) => {

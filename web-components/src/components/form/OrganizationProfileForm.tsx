@@ -36,7 +36,7 @@ interface Values {
   logo: string;
 }
 
-type AcctType = 'personal' | 'organization';
+type AcctType = 'individual' | 'organization';
 
 const useStyles = makeStyles((theme: Theme) => ({
   topCard: {
@@ -82,9 +82,9 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const OrganizationProfileForm: React.FC<FormProps> = ({ submit, apiUrl, goBack, skip, mapToken }) => {
-  const [acctType, setAcctType] = useState<AcctType>('personal');
+  const [acctType, setAcctType] = useState<AcctType>('individual');
   const classes = useStyles();
-  const isPersonal = acctType === 'personal';
+  const isIndividual = acctType === 'individual';
   const isOrg = acctType === 'organization';
 
   return (
@@ -98,12 +98,14 @@ const OrganizationProfileForm: React.FC<FormProps> = ({ submit, apiUrl, goBack, 
       }}
       validate={(values: Values) => {
         const errors: Partial<Values> = {};
-        const errorFields: Array<keyof Values> = ['displayName', 'legalName', 'location', 'logo'];
-        errorFields.forEach(value => {
-          if (!values[value]) {
-            errors[value] = requiredMessage;
-          }
-        });
+        if (isOrg) {
+          const errorFields: Array<keyof Values> = ['displayName', 'legalName', 'location', 'logo'];
+          errorFields.forEach(value => {
+            if (!values[value]) {
+              errors[value] = requiredMessage;
+            }
+          });
+        }
         return errors;
       }}
       onSubmit={async (values, { setSubmitting }) => {
@@ -129,7 +131,7 @@ const OrganizationProfileForm: React.FC<FormProps> = ({ submit, apiUrl, goBack, 
                   onChange={({ target: { value } }) => setAcctType(value as AcctType)}
                 >
                   <FormControlLabel
-                    className={clsx(classes.radio, isPersonal && classes.radioActive)}
+                    className={clsx(classes.radio, isIndividual && classes.radioActive)}
                     value="personal"
                     control={<Radio className={classes.radioBtn} />}
                     label="No, I will register projects only as an individual"
@@ -192,7 +194,7 @@ const OrganizationProfileForm: React.FC<FormProps> = ({ submit, apiUrl, goBack, 
             </PopIn>
 
             <OnboardingSubmit
-              onSubmit={isPersonal ? skip : submitForm}
+              onSubmit={isIndividual ? skip : submitForm}
               onCancel={goBack}
               disabled={(submitCount > 0 && !isValid) || isSubmitting}
             />

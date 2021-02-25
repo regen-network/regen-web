@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 
-import Section from '.';
+import Section from './index';
 
 interface OnBoardingContainerProps {
   title: string;
@@ -15,8 +15,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingBottom: theme.spacing(30),
     },
     [theme.breakpoints.down('xs')]: {
-      paddingTop: theme.spacing(8.75),
-      paddingBottom: theme.spacing(20),
+      padding: `${theme.spacing(8.75)} ${theme.spacing(2)} ${theme.spacing(20)}`,
     },
   },
   content: {

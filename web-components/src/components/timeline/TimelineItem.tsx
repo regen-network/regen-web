@@ -187,7 +187,7 @@ export default function TimelineItem({
       {date && <div className={classes.date}>{date}</div>}
       <Title className={classes.summary} variant="h5">
         {summary}{' '}
-        {modalData && (
+        {modalData && txClient && (
           <div className={classes.viewContainer} onClick={() => setOpen(true)}>
             <ShieldIcon className={classes.icon} />
             <span className={classes.view}>view on regen ledger</span>

@@ -108,7 +108,7 @@ coreSection:
         agricultural movement.  "
       image: ../../static/media/team/david.jpg
       linkedUrl: https://www.linkedin.com/in/david-fortson-19692715
-      twitterUrl: null
+      twitterUrl: https://twitter.com/dave_fortson
       githubUrl: null
     - name: Marie Gauthier
       title: Senior Software Engineer

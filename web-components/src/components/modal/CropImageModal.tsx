@@ -8,7 +8,7 @@ export interface CropImageModalProps {
   onClose: () => void;
   onSubmit: (image: HTMLImageElement) => void;
   circularCrop?: boolean;
-  image: string;
+  initialImage: string;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -45,7 +45,7 @@ export default function CropImageModal({
   onClose,
   onSubmit,
   circularCrop,
-  image,
+  initialImage,
 }: CropImageModalProps): JSX.Element {
   const classes = useStyles();
 
@@ -55,7 +55,12 @@ export default function CropImageModal({
         <Title variant="h4" align="center" className={classes.title}>
           Position and size your image
         </Title>
-        <ImageCrop image={image} onCropSubmit={onSubmit} onCancel={onClose} circularCrop={circularCrop} />
+        <ImageCrop
+          image={initialImage}
+          onCropSubmit={onSubmit}
+          onCancel={onClose}
+          circularCrop={circularCrop}
+        />
       </div>
     </Modal>
   );

@@ -139,5 +139,5 @@ timelineSection:
 moreQuestionsSection:
   header: More questions? Dig into our FAQ.
 popup:
-  buttonText: sign up now
+  buttonText: Start the process
   airtableLink: https://airtable.com/embed/shrnnbymyofPB75WQ

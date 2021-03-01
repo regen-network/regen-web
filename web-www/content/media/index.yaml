@@ -4,6 +4,11 @@ categories:
     buttonText: read article
     showPlay: false
     items:
+      - image: ../../static/media/bbc.png
+        title: Carbon credits for farming beef, rural services under the pandemic
+        author: BBC
+        url: " https://www.bbc.co.uk/sounds/play/m000s866"
+        date: February 15, 2021
       - title: Regen Network Announces Historic Carbon Credit Sale
         author: Regen Network
         url: https://medium.com/regen-network/regen-network-announces-historic-carbon-credit-sale-in-australia-b76dfadcc095
@@ -118,6 +123,11 @@ categories:
     buttonText: listen to podcast
     showPlay: true
     items:
+      - title: Regenerative Agriculture To Stop Climate Change
+        author: Evolve
+        url: https://www.evolvethe.world/episodes/christian-shearer
+        date: February 15, 2021
+        image: ../../static/media/screen-shot-2021-02-24-at-1.51.30-pm.png
       - image: ../../static/media/screen-shot-2021-01-27-at-10.40.11-am.png
         title: Regen Network's Sarah Baxendell and Gisel Booman featured in Apogeo
           Spatial's Exec Interview

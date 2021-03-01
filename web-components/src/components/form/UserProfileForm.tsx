@@ -10,11 +10,10 @@ import { requiredMessage } from '../inputs/validation';
 import { OnboardingSubmit } from './OnboardingSubmit';
 
 interface UserProfileFormProps {
-  submit: (values: Values) => Promise<void>;
-  apiUrl: string;
+  submit: (values: UserProfileValues) => Promise<void>;
 }
 
-interface Values {
+export interface UserProfileValues {
   name: string;
   role: string;
   photo?: string;
@@ -36,7 +35,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const UserProfileForm: React.FC<UserProfileFormProps> = ({ submit, apiUrl }) => {
+const UserProfileForm: React.FC<UserProfileFormProps> = ({ submit }) => {
   const classes = useStyles();
   return (
     <Formik
@@ -47,9 +46,9 @@ const UserProfileForm: React.FC<UserProfileFormProps> = ({ submit, apiUrl }) => 
         phone: undefined,
         description: undefined,
       }}
-      validate={(values: Values) => {
-        const errors: Partial<Values> = {};
-        const errorFields: Array<keyof Values> = ['name', 'role'];
+      validate={(values: UserProfileValues) => {
+        const errors: Partial<UserProfileValues> = {};
+        const errorFields: Array<keyof UserProfileValues> = ['name', 'role'];
         errorFields.forEach(value => {
           if (!values[value]) {
             errors[value] = requiredMessage;

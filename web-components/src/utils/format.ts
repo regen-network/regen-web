@@ -2,7 +2,7 @@ export function getFormattedDate(
   date: string | Date,
   options?: Intl.DateTimeFormatOptions | undefined,
 ): string {
-  return new Intl.DateTimeFormat('en-US', options).format(new Date(date));
+  return new Intl.DateTimeFormat('en-US', { timeZone: 'UTC', ...options }).format(new Date(date));
 }
 
 export function getFormattedNumber(number: number, options?: Intl.NumberFormatOptions | undefined): string {
@@ -10,5 +10,5 @@ export function getFormattedNumber(number: number, options?: Intl.NumberFormatOp
 }
 
 export function getFormattedPeriod(start: string, end: string | Date): string {
-  return `${new Date(start).getFullYear()}-${new Date(end).getFullYear()}`;
+  return `${new Date(start).getUTCFullYear()}-${new Date(end).getUTCFullYear()}`;
 }

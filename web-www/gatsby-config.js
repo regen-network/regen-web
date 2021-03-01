@@ -7,7 +7,14 @@ module.exports = {
   },
   plugins: [
     'gatsby-plugin-layout',
-    `gatsby-plugin-netlify`,
+    {
+      resolve: `gatsby-plugin-netlify`,
+      options: {
+        headers: {
+          '/wallet-address-registration': ['Basic-Auth: regen:carboncanopy'],
+        },
+      },
+    },
     {
       resolve: `gatsby-plugin-google-analytics-gdpr`,
       options: {

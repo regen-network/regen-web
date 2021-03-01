@@ -28,7 +28,7 @@ export interface Item {
   title: string;
   tags: Tag[];
   imgSrc?: string;
-  link?: string;
+  url?: string;
 }
 
 interface Props {
@@ -194,8 +194,8 @@ function Content({ item, index }: ContentProps): JSX.Element {
       </Grid>
       <Grid item className={classes.text}>
         <Title className={classes.title} variant="h3">
-          {item.link ? (
-            <Link href={item.link} color="inherit">
+          {item.url ? (
+            <Link href={item.url} color="inherit">
               {item.title}
             </Link>
           ) : (

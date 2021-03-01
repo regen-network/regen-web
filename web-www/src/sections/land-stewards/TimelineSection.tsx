@@ -43,7 +43,7 @@ const TimelineSection = (): JSX.Element => {
               publicURL
             }
             title
-            link
+            url
             tags {
               name
               color
@@ -55,10 +55,10 @@ const TimelineSection = (): JSX.Element => {
   `);
   const content = data.text.timelineSection;
   const classes = useStyles();
-  const items: Item[] = content.items.map(({ image, title, link, tags }) => ({
+  const items: Item[] = content.items.map(({ image, title, url, tags }) => ({
     imgSrc: image.publicURL,
     title,
-    link,
+    url,
     tags,
   }));
 

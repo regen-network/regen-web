@@ -99,7 +99,7 @@ timelineSection:
   items:
     - title: Register project
       image: ../../static/media/Registration.svg
-      link: https://airtable.com/embed/shrnnbymyofPB75WQ
+      url: https://airtable.com/embed/shrnnbymyofPB75WQ
       tags:
         - name: farmer
           color: "#7BC796"

@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
+import Link from '@material-ui/core/Link';
 import Timeline from '@material-ui/lab/Timeline';
 import TimelineItem from '@material-ui/lab/TimelineItem';
 import TimelineSeparator from '@material-ui/lab/TimelineSeparator';
@@ -27,6 +28,7 @@ export interface Item {
   title: string;
   tags: Tag[];
   imgSrc?: string;
+  link?: string;
 }
 
 interface Props {
@@ -192,7 +194,13 @@ function Content({ item, index }: ContentProps): JSX.Element {
       </Grid>
       <Grid item className={classes.text}>
         <Title className={classes.title} variant="h3">
-          {item.title}
+          {item.link ? (
+            <Link href={item.link} color="inherit">
+              {item.title}
+            </Link>
+          ) : (
+            item.title
+          )}
         </Title>
         <div className={classes.tags}>
           {item.tags.map((t, i) => (

@@ -62,6 +62,7 @@ export const timelineItem = (): JSX.Element => (
 const items: Item[] = [
   {
     title: 'Register project',
+    link: 'https://airtable.com/embed/shrnnbymyofPB75WQ'
     tags: [
       {
         name: 'farmer',

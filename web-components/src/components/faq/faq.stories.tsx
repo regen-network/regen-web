@@ -1,6 +1,6 @@
-import * as React from 'react';
+import React from 'react';
 import { withKnobs, text, boolean, object } from '@storybook/addon-knobs';
-import Question, { QuestionProps } from 'web-components/lib/components/faq/Question';
+import Question, { QuestionItem } from 'web-components/lib/components/faq/Question';
 import Category from 'web-components/lib/components/faq/Category';
 import Navigation from 'web-components/lib/components/faq/Navigation';
 import FAQ from 'web-components/lib/components/faq';
@@ -11,9 +11,9 @@ export default {
   decorators: [withKnobs],
 };
 
-const questions: QuestionProps[] = [
+const questions: QuestionItem[] = [
   {
-    question: 'Why do you need a blockchain?',
+    question: 'Why do you need a OK blockchain?',
     answer:
       'The Regen Ledger provides the project three key elements, without which Regen Network’s promise to create a network dedicated to monitoring, verifying and contracting or paying for ecological',
   },
@@ -39,7 +39,6 @@ export const category = (): JSX.Element => (
 
 export const navigation = (): JSX.Element => (
   <Navigation
-    selected="concept"
     onClick={(c: string) => {}}
     categories={['concept', 'regen registry', 'regen ledger', 'tech']}
   />
@@ -47,10 +46,11 @@ export const navigation = (): JSX.Element => (
 
 export const faq = (): JSX.Element => (
   <FAQ
-    categories={['concept', 'tech']}
-    questions={{
-      tech: questions,
-      concept: questions,
-    }}
+    categories={[
+      {
+        header: 'concept',
+        questions,
+      },
+    ]}
   />
 );

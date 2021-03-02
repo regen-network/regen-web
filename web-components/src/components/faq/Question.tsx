@@ -6,11 +6,15 @@ import clsx from 'clsx';
 import BreadcrumbIcon from '../icons/BreadcrumbIcon';
 import Title from '../title';
 
-export interface QuestionProps {
+export interface QuestionItem {
   question: string;
   answer: string;
+}
+
+interface QuestionProps extends QuestionItem {
   first?: boolean;
   last?: boolean;
+  initOpen?: boolean;
 }
 
 interface StyleProps {
@@ -88,6 +92,9 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       listStyle: 'none',
       marginLeft: theme.spacing(3),
     },
+    '& li p:first-child': {
+      display: 'inline',
+    },
     '& li::before': {
       content: "'\\2022'",
       color: theme.palette.secondary.main,
@@ -121,8 +128,14 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   },
 }));
 
-const Question = ({ question, answer, first = false, last = false }: QuestionProps): JSX.Element => {
-  const [open, setOpen] = React.useState(false);
+const Question = ({
+  question,
+  answer,
+  first = false,
+  last = false,
+  initOpen = false,
+}: QuestionProps): JSX.Element => {
+  const [open, setOpen] = React.useState(initOpen);
   const classes = useStyles({ first, last });
 
   const handleClick = (): void => {

@@ -1,27 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 
 import Navigation from './Navigation';
 import Category from './Category';
+import { QuestionItem } from './Question';
 import BreadcrumbIcon from '../icons/BreadcrumbIcon';
 
-interface Question {
-  question: string;
-  answer: string;
-}
-
-export interface Group {
-  name: string;
-  questions: Question[];
-}
-
 interface FAQProps {
-  questions: {
-    [key: string]: Question[];
-  };
-  categories: string[];
-  defaultCategory?: string;
+  navigate: (c: string) => void;
+  categories: {
+    header: string;
+    questions: QuestionItem[];
+  }[];
+  header?: string; // current category header
+  question?: number; // current question to show from url query param, starting at 1
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -51,43 +44,50 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const FAQ = ({ questions, categories, defaultCategory }: FAQProps): JSX.Element => {
+const FAQ = ({ navigate, header, categories, question }: FAQProps): JSX.Element => {
   const classes = useStyles();
-  const [category, setCategory] = useState(defaultCategory || categories[0]);
-  const [selected, setSelected] = useState(false); // for mobile
+  if (!categories.length) {
+    return <></>;
+  }
+
+  const categoriesHeader: string[] = categories.map(c => c.header);
+
+  let category = categories[0];
+  if (header) {
+    category = categories.filter(c => c.header === header)[0];
+  }
 
   const handleClick = (c: string): void => {
-    setSelected(true);
-    setCategory(c);
+    navigate(`/faq/${c}`);
   };
 
   const handleBack = (): void => {
-    setSelected(false);
+    navigate(`/faq`);
   };
 
   return (
     <>
       <Box display={{ xs: 'none', sm: 'block' }}>
         <div className={classes.navigation}>
-          <Navigation category={category} categories={categories} onClick={handleClick} />
+          <Navigation category={category.header} categories={categoriesHeader} onClick={handleClick} />
         </div>
         <div>
-          <Category name={category} questions={questions[category] || []} />
+          <Category question={question} name={category.header} questions={category.questions} />
         </div>
       </Box>
 
       <Box display={{ xs: 'block', sm: 'none' }}>
-        {selected ? (
+        {header ? (
           <div>
             <div className={classes.back} onClick={handleBack}>
               <BreadcrumbIcon className={classes.icon} direction="prev" />
               back
             </div>
-            <Category name={category} questions={questions[category] || []} />
+            <Category question={question} name={category.header} questions={category.questions} />
           </div>
         ) : (
           <div className={classes.navigation}>
-            <Navigation category={category} categories={categories} onClick={handleClick} />
+            <Navigation categories={categoriesHeader} onClick={handleClick} />
           </div>
         )}
       </Box>

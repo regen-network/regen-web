@@ -18,8 +18,7 @@ Regen Registry was designed from the ground-up with a team of farmers, ranchers,
 * Simplified Payments - integrated payment platform provides direct real-time payments, including credit card, bank, and mobile. 
 * Affordable Brokerage Services - Regen Registry offers affordable, optional brokerage services. 
 
-**\
-Regen Registry Offers Time Savings**
+**Regen Registry Offers Time Savings**
 
 * Simple Project Registration - Regen Registry's simple registration involves a short intake form and project plan that can be completed in one sitting.
 * Monitoring Services - Regen Registry provides automated monitoring services that require only a minimal set of soil samples.

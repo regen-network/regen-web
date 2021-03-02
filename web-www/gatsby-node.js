@@ -14,6 +14,30 @@ exports.onCreateWebpackConfig = ({ actions }) => {
 
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
+
+  const faqResult = await graphql(`
+    query {
+      faqCategoriesYaml {
+        categories {
+          header
+        }
+      }
+    }
+  `);
+  faqResult.data.faqCategoriesYaml.categories.forEach(item => {
+    createPage({
+      path: `faq/${item.header}`,
+      component: path.resolve(`./src/templates/Faq.tsx`),
+      context: {
+        // Data passed to context is available
+        // in page queries as GraphQL variables
+        // and in this.props.pageContext.
+        header: item.header,
+      },
+    });
+  });
+
+  // Case studies
   const result = await graphql(`
     query {
       allCaseStudyItemsYaml {
@@ -28,8 +52,6 @@ exports.createPages = async ({ graphql, actions }) => {
       path: `case-studies/${item.slug}`,
       component: path.resolve(`./src/templates/CaseStudy.tsx`),
       context: {
-        // Data passed to context is available
-        // in page queries as GraphQL variables.
         slug: item.slug,
       },
     });

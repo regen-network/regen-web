@@ -1,5 +1,5 @@
 import React from 'react';
-import { useStaticQuery, graphql } from 'gatsby';
+import { useStaticQuery, graphql, PageProps, navigate } from 'gatsby';
 import { makeStyles, Theme } from '@material-ui/core';
 
 import SEO from '../components/seo';
@@ -31,50 +31,29 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-interface props {
-  location: object;
-}
-
-const FAQPage = ({ location }: props): JSX.Element => {
+const FAQPage = ({ location }: PageProps): JSX.Element => {
   const classes = useStyles();
 
   const data = useStaticQuery(graphql`
     query {
-      content: faqYaml {
+      faqCategoriesYaml {
         categories {
-          name
-        }
-      }
-      md: allMarkdownRemark(sort: { order: ASC, fields: frontmatter___title }, filter: {fileAbsolutePath: {regex: "/(faq)/.*\\.md$/"}}) {
-        nodes {
-          html
-          frontmatter {
-            description
-            category
+          header
+          questions {
+            question
+            answer
           }
         }
       }
     }
   `);
 
-  const questions = data.md.nodes.reduce((r, a) => {
-    r[a.frontmatter.category.toLowerCase().trim()] = [
-      ...(r[a.frontmatter.category.toLowerCase().trim()] || []),
-      { question: a.frontmatter.description, answer: a.html },
-    ];
-    return r;
-  }, {});
-
   return (
     <>
       <SEO location={location} title="FAQ" description="Explore Regen Network’s frequently asked questions" />
       <div className={classes.root}>
         <Section title="FAQ" titleVariant="h1" titleClassName={classes.title} className={classes.section}>
-          <FAQ
-            categories={data.content.categories.map((c: { name: string }) => c.name)}
-            questions={questions}
-            defaultCategory={location && location.state && location.state.category}
-          />
+          <FAQ categories={data.faqCategoriesYaml.categories} navigate={navigate} />
         </Section>
       </div>
     </>

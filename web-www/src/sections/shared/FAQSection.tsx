@@ -57,7 +57,7 @@ const FAQSection = ({ header, imageData, category }: FAQSectionProps): JSX.Eleme
         title={header}
       >
         <div className={classes.button}>
-          <Link to={`/faq`} state={{ category }}>
+          <Link to={`/faq/${category}`}>
             <ContainedButton>view faq</ContainedButton>
           </Link>
         </div>

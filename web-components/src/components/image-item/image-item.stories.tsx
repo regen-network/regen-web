@@ -6,7 +6,11 @@ export default {
   title: 'Components|Image Item',
   component: ImageItem,
   decorators: [withKnobs],
+  parameters: {
+    fileName: __filename,
+  },
 };
+
 const titleText: string = 'Verified outcomes';
 const descriptionText: string =
   'Software-based and remote-sensing monitoring keeps costs low and transparency high.';

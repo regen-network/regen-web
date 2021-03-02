@@ -9,6 +9,9 @@ export default {
   title: 'Components|FAQ',
   component: Question,
   decorators: [withKnobs],
+  parameters: {
+    fileName: __filename,
+  },
 };
 
 const questions: QuestionProps[] = [

@@ -7,6 +7,9 @@ import CreditDetails, { CreditInfoProps } from 'web-components/lib/components/cr
 export default {
   title: 'Components|Tabs',
   component: Tabs,
+  parameters: {
+    fileName: __filename,
+  },
 };
 
 const details: CreditInfoProps = {

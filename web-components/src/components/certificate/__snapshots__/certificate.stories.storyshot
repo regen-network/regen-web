@@ -1,0 +1,2646 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Components|Certificate Certificate 1`] = `
+<WithChannel(MuiDecorator)
+  initData={
+    Object {
+      "themeInd": 0,
+      "themes": Array [
+        Object {
+          "breakpoints": Object {
+            "between": [Function],
+            "down": [Function],
+            "keys": Array [
+              "xs",
+              "sm",
+              "md",
+              "lg",
+              "xl",
+            ],
+            "only": [Function],
+            "up": [Function],
+            "values": Object {
+              "lg": 1280,
+              "md": 1064,
+              "sm": 600,
+              "tablet": 834,
+              "xl": 1400,
+              "xs": 0,
+            },
+            "width": [Function],
+          },
+          "direction": "ltr",
+          "mixins": Object {
+            "gutters": [Function],
+            "toolbar": Object {
+              "@media (min-width:0px) and (orientation: landscape)": Object {
+                "minHeight": 48,
+              },
+              "@media (min-width:600px)": Object {
+                "minHeight": 64,
+              },
+              "minHeight": 56,
+            },
+          },
+          "overrides": Object {},
+          "palette": Object {
+            "action": Object {
+              "activatedOpacity": 0.12,
+              "active": "rgba(0, 0, 0, 0.54)",
+              "disabled": "rgba(0, 0, 0, 0.26)",
+              "disabledBackground": "rgba(0, 0, 0, 0.12)",
+              "disabledOpacity": 0.38,
+              "focus": "rgba(0, 0, 0, 0.12)",
+              "focusOpacity": 0.12,
+              "hover": "rgba(0, 0, 0, 0.04)",
+              "hoverOpacity": 0.04,
+              "selected": "rgba(0, 0, 0, 0.08)",
+              "selectedOpacity": 0.08,
+            },
+            "augmentColor": [Function],
+            "background": Object {
+              "default": "#fafafa",
+              "paper": "#fff",
+            },
+            "common": Object {
+              "black": "#000",
+              "white": "#fff",
+            },
+            "contrastThreshold": 3,
+            "divider": "rgba(0, 0, 0, 0.12)",
+            "error": Object {
+              "contrastText": "#fff",
+              "dark": "rgb(155, 48, 26)",
+              "light": "#E6735C",
+              "main": "#DE4526",
+            },
+            "getContrastText": [Function],
+            "grey": Object {
+              "100": "#D2D5D9",
+              "200": "#F9F9F9",
+              "300": "#cccfd4",
+              "400": "#C0C5C4",
+              "50": "#FAFAFA",
+              "500": "#848484",
+              "600": "#C4C4C4",
+              "700": "#616161",
+              "800": "#424242",
+              "900": "#212121",
+              "A100": "#d5d5d5",
+              "A200": "#aaaaaa",
+              "A400": "#303030",
+              "A700": "#616161",
+            },
+            "info": Object {
+              "contrastText": "#b0ddc0",
+              "dark": "#545555",
+              "light": "#EFEFEF",
+              "main": "#8f8f8f",
+            },
+            "primary": Object {
+              "contrastText": "#000",
+              "dark": "rgb(178, 178, 178)",
+              "light": "#202020",
+              "main": "#fff",
+            },
+            "secondary": Object {
+              "contrastText": "#B9E1C7",
+              "dark": "#7BC796",
+              "light": "#DCF0E3",
+              "main": "#4FB573",
+            },
+            "success": Object {
+              "contrastText": "rgba(0, 0, 0, 0.87)",
+              "dark": "#388e3c",
+              "light": "#81c784",
+              "main": "#4caf50",
+            },
+            "text": Object {
+              "disabled": "rgba(0, 0, 0, 0.38)",
+              "hint": "rgba(0, 0, 0, 0.38)",
+              "primary": "rgba(0, 0, 0, 0.87)",
+              "secondary": "rgba(0, 0, 0, 0.54)",
+            },
+            "tonalOffset": 0.2,
+            "type": "light",
+            "warning": Object {
+              "contrastText": "rgba(0, 0, 0, 0.87)",
+              "dark": "#f57c00",
+              "light": "#ffb74d",
+              "main": "#ff9800",
+            },
+          },
+          "props": Object {
+            "MuiTypography": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
+          "shadows": Array [
+            "none",
+            "0px 4px 10px rgba(0, 0, 0, 0.05)",
+            "-4px 0px 10px rgba(0, 0, 0, 0.25)",
+            "0px 0px 20px rgba(0, 0, 0, 0.25)",
+            "0px 4px 10px rgba(0, 0, 0, 0.1)",
+            "0px 0px 4px rgba(0, 0, 0, 0.05)",
+            "0px 4px 10px rgba(0, 0, 0, 0.1)",
+            "0px -4px 10px rgba(0, 0, 0, 0.1)",
+            "0px 5px 5px -3px rgba(0,0,0,0.2),0px 8px 10px 1px rgba(0,0,0,0.14),0px 3px 14px 2px rgba(0,0,0,0.12)",
+            "0px 5px 6px -3px rgba(0,0,0,0.2),0px 9px 12px 1px rgba(0,0,0,0.14),0px 3px 16px 2px rgba(0,0,0,0.12)",
+            "0px 6px 6px -3px rgba(0,0,0,0.2),0px 10px 14px 1px rgba(0,0,0,0.14),0px 4px 18px 3px rgba(0,0,0,0.12)",
+            "0px 6px 7px -4px rgba(0,0,0,0.2),0px 11px 15px 1px rgba(0,0,0,0.14),0px 4px 20px 3px rgba(0,0,0,0.12)",
+            "0px 7px 8px -4px rgba(0,0,0,0.2),0px 12px 17px 2px rgba(0,0,0,0.14),0px 5px 22px 4px rgba(0,0,0,0.12)",
+            "0px 7px 8px -4px rgba(0,0,0,0.2),0px 13px 19px 2px rgba(0,0,0,0.14),0px 5px 24px 4px rgba(0,0,0,0.12)",
+            "0px 7px 9px -4px rgba(0,0,0,0.2),0px 14px 21px 2px rgba(0,0,0,0.14),0px 5px 26px 4px rgba(0,0,0,0.12)",
+            "0px 8px 9px -5px rgba(0,0,0,0.2),0px 15px 22px 2px rgba(0,0,0,0.14),0px 6px 28px 5px rgba(0,0,0,0.12)",
+            "0px 8px 10px -5px rgba(0,0,0,0.2),0px 16px 24px 2px rgba(0,0,0,0.14),0px 6px 30px 5px rgba(0,0,0,0.12)",
+            "0px 8px 11px -5px rgba(0,0,0,0.2),0px 17px 26px 2px rgba(0,0,0,0.14),0px 6px 32px 5px rgba(0,0,0,0.12)",
+            "0px 9px 11px -5px rgba(0,0,0,0.2),0px 18px 28px 2px rgba(0,0,0,0.14),0px 7px 34px 6px rgba(0,0,0,0.12)",
+            "0px 9px 12px -6px rgba(0,0,0,0.2),0px 19px 29px 2px rgba(0,0,0,0.14),0px 7px 36px 6px rgba(0,0,0,0.12)",
+            "0px 10px 13px -6px rgba(0,0,0,0.2),0px 20px 31px 3px rgba(0,0,0,0.14),0px 8px 38px 7px rgba(0,0,0,0.12)",
+            "0px 10px 13px -6px rgba(0,0,0,0.2),0px 21px 33px 3px rgba(0,0,0,0.14),0px 8px 40px 7px rgba(0,0,0,0.12)",
+            "0px 10px 14px -6px rgba(0,0,0,0.2),0px 22px 35px 3px rgba(0,0,0,0.14),0px 8px 42px 7px rgba(0,0,0,0.12)",
+            "0px 11px 14px -7px rgba(0,0,0,0.2),0px 23px 36px 3px rgba(0,0,0,0.14),0px 9px 44px 8px rgba(0,0,0,0.12)",
+            "0px 11px 15px -7px rgba(0,0,0,0.2),0px 24px 38px 3px rgba(0,0,0,0.14),0px 9px 46px 8px rgba(0,0,0,0.12)",
+          ],
+          "shape": Object {
+            "borderRadius": 4,
+          },
+          "spacing": [Function],
+          "transitions": Object {
+            "create": [Function],
+            "duration": Object {
+              "complex": 375,
+              "enteringScreen": 225,
+              "leavingScreen": 195,
+              "short": 250,
+              "shorter": 200,
+              "shortest": 150,
+              "standard": 300,
+            },
+            "easing": Object {
+              "easeIn": "cubic-bezier(0.4, 0, 1, 1)",
+              "easeInOut": "cubic-bezier(0.4, 0, 0.2, 1)",
+              "easeOut": "cubic-bezier(0.0, 0, 0.2, 1)",
+              "sharp": "cubic-bezier(0.4, 0, 0.6, 1)",
+            },
+            "getAutoHeightDuration": [Function],
+          },
+          "typography": Object {
+            "body1": Object {
+              "@media (max-width:599.95px)": Object {
+                "fontSize": "0.875rem",
+              },
+              "@media (min-width:600px)": Object {
+                "fontSize": "1rem",
+              },
+              "fontFamily": "\\"Lato\\",-apple-system,sans-serif",
+              "fontSize": "1rem",
+              "fontWeight": 400,
+              "lineHeight": 1.5,
+            },
+            "body2": Object {
+              "fontFamily": "\\"Lato\\",-apple-system,sans-serif",
+              "fontSize": "0.875rem",
+              "fontWeight": 400,
+              "lineHeight": 1.43,
+            },
+            "button": Object {
+              "fontFamily": "\\"Lato\\",-apple-system,sans-serif",
+              "fontSize": "0.875rem",
+              "fontWeight": 500,
+              "lineHeight": 1.75,
+              "textTransform": "uppercase",
+            },
+            "caption": Object {
+              "fontFamily": "\\"Lato\\",-apple-system,sans-serif",
+              "fontSize": "0.75rem",
+              "fontWeight": 400,
+              "lineHeight": 1.66,
+            },
+            "fontFamily": "\\"Lato\\",-apple-system,sans-serif",
+            "fontSize": 14,
+            "fontWeightBold": 700,
+            "fontWeightLight": 300,
+            "fontWeightMedium": 500,
+            "fontWeightRegular": 400,
+            "h1": Object {
+              "@media (max-width:599.95px)": Object {
+                "fontSize": "2rem",
+              },
+              "@media (min-width:600px)": Object {
+                "fontSize": "3rem",
+              },
+              "fontFamily": "\\"Muli\\",-apple-system,sans-serif",
+              "fontSize": "6rem",
+              "fontWeight": 300,
+              "lineHeight": 1.167,
+            },
+            "h2": Object {
+              "@media (max-width:599.95px)": Object {
+                "fontSize": "1.5rem",
+              },
+              "@media (min-width:600px)": Object {
+                "fontSize": "2.375rem",
+              },
+              "fontFamily": "\\"Lato\\",-apple-system,sans-serif",
+              "fontSize": "3.75rem",
+              "fontWeight": 300,
+              "lineHeight": 1.2,
+            },
+            "h3": Object {
+              "@media (max-width:599.95px)": Object {
+                "fontSize": "1.5rem",
+              },
+              "@media (min-width:600px)": Object {
+                "fontSize": "2rem",
+              },
+              "fontFamily": "\\"Lato\\",-apple-system,sans-serif",
+              "fontSize": "3rem",
+              "fontWeight": 400,
+              "lineHeight": 1.167,
+            },
+            "h4": Object {
+              "@media (max-width:599.95px)": Object {
+                "fontSize": "1.3125rem",
+              },
+              "@media (min-width:600px)": Object {
+                "fontSize": "1.5rem",
+              },
+              "fontFamily": "\\"Lato\\",-apple-system,sans-serif",
+              "fontSize": "2.125rem",
+              "fontWeight": 400,
+              "lineHeight": 1.235,
+            },
+            "h5": Object {
+              "@media (max-width:599.95px)": Object {
+                "fontSize": "1.125rem",
+              },
+              "@media (min-width:600px)": Object {
+                "fontSize": "1.3125rem",
+              },
+              "fontFamily": "\\"Lato\\",-apple-system,sans-serif",
+              "fontSize": "1.5rem",
+              "fontWeight": 400,
+              "lineHeight": 1.334,
+            },
+            "h6": Object {
+              "fontFamily": "\\"Lato\\",-apple-system,sans-serif",
+              "fontSize": "1.125rem",
+              "fontWeight": 500,
+              "lineHeight": 1.6,
+            },
+            "htmlFontSize": 16,
+            "overline": Object {
+              "fontFamily": "PT Mono,\\"Lato\\",-apple-system,sans-serif",
+              "fontSize": "0.75rem",
+              "fontWeight": 400,
+              "lineHeight": 2.66,
+              "textTransform": "uppercase",
+            },
+            "pxToRem": [Function],
+            "round": [Function],
+            "subtitle1": Object {
+              "@media (max-width:599.95px)": Object {
+                "fontSize": "2rem",
+              },
+              "@media (min-width:600px)": Object {
+                "fontSize": "2.375rem",
+              },
+              "fontFamily": "\\"Lato\\",-apple-system,sans-serif",
+              "fontSize": "1rem",
+              "fontWeight": 400,
+              "lineHeight": 1.75,
+            },
+            "subtitle2": Object {
+              "fontFamily": "\\"Lato\\",-apple-system,sans-serif",
+              "fontSize": "0.875rem",
+              "fontWeight": 500,
+              "lineHeight": 1.57,
+            },
+          },
+          "zIndex": Object {
+            "appBar": 1100,
+            "drawer": 1200,
+            "mobileStepper": 1000,
+            "modal": 1300,
+            "snackbar": 1400,
+            "speedDial": 1050,
+            "tooltip": 1500,
+          },
+        },
+      ],
+    }
+  }
+  story={
+    <Certificate
+      background="./certificate-bg.png"
+      buyerName="Marie Gauthier"
+      creditName="Carbon<i>Plus</i> Grasslands"
+      creditsUnits={1000}
+      date="10-10-2020"
+      equivalentTonsCO2={1000}
+      issuee={
+        Object {
+          "companyName": "John Doe Ltd",
+          "personName": "John Doe",
+          "personRole": "Director",
+        }
+      }
+      issuer={
+        Object {
+          "companyName": "Regen Network",
+          "personName": "Christian Shearer",
+          "personRole": "CEO",
+        }
+      }
+      verifier={
+        Object {
+          "companyName": "RSM Australia Pty Ltd",
+          "personName": "Tim Pittaway",
+          "personRole": "Partner",
+        }
+      }
+    />
+  }
+>
+  <MuiDecorator
+    data={
+      Object {
+        "themeInd": 0,
+        "themes": Array [
+          Object {
+            "breakpoints": Object {
+              "between": [Function],
+              "down": [Function],
+              "keys": Array [
+                "xs",
+                "sm",
+                "md",
+                "lg",
+                "xl",
+              ],
+              "only": [Function],
+              "up": [Function],
+              "values": Object {
+                "lg": 1280,
+                "md": 1064,
+                "sm": 600,
+                "tablet": 834,
+                "xl": 1400,
+                "xs": 0,
+              },
+              "width": [Function],
+            },
+            "direction": "ltr",
+            "mixins": Object {
+              "gutters": [Function],
+              "toolbar": Object {
+                "@media (min-width:0px) and (orientation: landscape)": Object {
+                  "minHeight": 48,
+                },
+                "@media (min-width:600px)": Object {
+                  "minHeight": 64,
+                },
+                "minHeight": 56,
+              },
+            },
+            "overrides": Object {},
+            "palette": Object {
+              "action": Object {
+                "activatedOpacity": 0.12,
+                "active": "rgba(0, 0, 0, 0.54)",
+                "disabled": "rgba(0, 0, 0, 0.26)",
+                "disabledBackground": "rgba(0, 0, 0, 0.12)",
+                "disabledOpacity": 0.38,
+                "focus": "rgba(0, 0, 0, 0.12)",
+                "focusOpacity": 0.12,
+                "hover": "rgba(0, 0, 0, 0.04)",
+                "hoverOpacity": 0.04,
+                "selected": "rgba(0, 0, 0, 0.08)",
+                "selectedOpacity": 0.08,
+              },
+              "augmentColor": [Function],
+              "background": Object {
+                "default": "#fafafa",
+                "paper": "#fff",
+              },
+              "common": Object {
+                "black": "#000",
+                "white": "#fff",
+              },
+              "contrastThreshold": 3,
+              "divider": "rgba(0, 0, 0, 0.12)",
+              "error": Object {
+                "contrastText": "#fff",
+                "dark": "rgb(155, 48, 26)",
+                "light": "#E6735C",
+                "main": "#DE4526",
+              },
+              "getContrastText": [Function],
+              "grey": Object {
+                "100": "#D2D5D9",
+                "200": "#F9F9F9",
+                "300": "#cccfd4",
+                "400": "#C0C5C4",
+                "50": "#FAFAFA",
+                "500": "#848484",
+                "600": "#C4C4C4",
+                "700": "#616161",
+                "800": "#424242",
+                "900": "#212121",
+                "A100": "#d5d5d5",
+                "A200": "#aaaaaa",
+                "A400": "#303030",
+                "A700": "#616161",
+              },
+              "info": Object {
+                "contrastText": "#b0ddc0",
+                "dark": "#545555",
+                "light": "#EFEFEF",
+                "main": "#8f8f8f",
+              },
+              "primary": Object {
+                "contrastText": "#000",
+                "dark": "rgb(178, 178, 178)",
+                "light": "#202020",
+                "main": "#fff",
+              },
+              "secondary": Object {
+                "contrastText": "#B9E1C7",
+                "dark": "#7BC796",
+                "light": "#DCF0E3",
+                "main": "#4FB573",
+              },
+              "success": Object {
+                "contrastText": "rgba(0, 0, 0, 0.87)",
+                "dark": "#388e3c",
+                "light": "#81c784",
+                "main": "#4caf50",
+              },
+              "text": Object {
+                "disabled": "rgba(0, 0, 0, 0.38)",
+                "hint": "rgba(0, 0, 0, 0.38)",
+                "primary": "rgba(0, 0, 0, 0.87)",
+                "secondary": "rgba(0, 0, 0, 0.54)",
+              },
+              "tonalOffset": 0.2,
+              "type": "light",
+              "warning": Object {
+                "contrastText": "rgba(0, 0, 0, 0.87)",
+                "dark": "#f57c00",
+                "light": "#ffb74d",
+                "main": "#ff9800",
+              },
+            },
+            "props": Object {
+              "MuiTypography": Object {
+                "variantMapping": Object {
+                  "body1": "p",
+                  "body2": "p",
+                  "h1": "h1",
+                  "h2": "h2",
+                  "h3": "h3",
+                  "h4": "h4",
+                  "h5": "h5",
+                  "h6": "h6",
+                  "subtitle1": "h2",
+                  "subtitle2": "h2",
+                },
+              },
+            },
+            "shadows": Array [
+              "none",
+              "0px 4px 10px rgba(0, 0, 0, 0.05)",
+              "-4px 0px 10px rgba(0, 0, 0, 0.25)",
+              "0px 0px 20px rgba(0, 0, 0, 0.25)",
+              "0px 4px 10px rgba(0, 0, 0, 0.1)",
+              "0px 0px 4px rgba(0, 0, 0, 0.05)",
+              "0px 4px 10px rgba(0, 0, 0, 0.1)",
+              "0px -4px 10px rgba(0, 0, 0, 0.1)",
+              "0px 5px 5px -3px rgba(0,0,0,0.2),0px 8px 10px 1px rgba(0,0,0,0.14),0px 3px 14px 2px rgba(0,0,0,0.12)",
+              "0px 5px 6px -3px rgba(0,0,0,0.2),0px 9px 12px 1px rgba(0,0,0,0.14),0px 3px 16px 2px rgba(0,0,0,0.12)",
+              "0px 6px 6px -3px rgba(0,0,0,0.2),0px 10px 14px 1px rgba(0,0,0,0.14),0px 4px 18px 3px rgba(0,0,0,0.12)",
+              "0px 6px 7px -4px rgba(0,0,0,0.2),0px 11px 15px 1px rgba(0,0,0,0.14),0px 4px 20px 3px rgba(0,0,0,0.12)",
+              "0px 7px 8px -4px rgba(0,0,0,0.2),0px 12px 17px 2px rgba(0,0,0,0.14),0px 5px 22px 4px rgba(0,0,0,0.12)",
+              "0px 7px 8px -4px rgba(0,0,0,0.2),0px 13px 19px 2px rgba(0,0,0,0.14),0px 5px 24px 4px rgba(0,0,0,0.12)",
+              "0px 7px 9px -4px rgba(0,0,0,0.2),0px 14px 21px 2px rgba(0,0,0,0.14),0px 5px 26px 4px rgba(0,0,0,0.12)",
+              "0px 8px 9px -5px rgba(0,0,0,0.2),0px 15px 22px 2px rgba(0,0,0,0.14),0px 6px 28px 5px rgba(0,0,0,0.12)",
+              "0px 8px 10px -5px rgba(0,0,0,0.2),0px 16px 24px 2px rgba(0,0,0,0.14),0px 6px 30px 5px rgba(0,0,0,0.12)",
+              "0px 8px 11px -5px rgba(0,0,0,0.2),0px 17px 26px 2px rgba(0,0,0,0.14),0px 6px 32px 5px rgba(0,0,0,0.12)",
+              "0px 9px 11px -5px rgba(0,0,0,0.2),0px 18px 28px 2px rgba(0,0,0,0.14),0px 7px 34px 6px rgba(0,0,0,0.12)",
+              "0px 9px 12px -6px rgba(0,0,0,0.2),0px 19px 29px 2px rgba(0,0,0,0.14),0px 7px 36px 6px rgba(0,0,0,0.12)",
+              "0px 10px 13px -6px rgba(0,0,0,0.2),0px 20px 31px 3px rgba(0,0,0,0.14),0px 8px 38px 7px rgba(0,0,0,0.12)",
+              "0px 10px 13px -6px rgba(0,0,0,0.2),0px 21px 33px 3px rgba(0,0,0,0.14),0px 8px 40px 7px rgba(0,0,0,0.12)",
+              "0px 10px 14px -6px rgba(0,0,0,0.2),0px 22px 35px 3px rgba(0,0,0,0.14),0px 8px 42px 7px rgba(0,0,0,0.12)",
+              "0px 11px 14px -7px rgba(0,0,0,0.2),0px 23px 36px 3px rgba(0,0,0,0.14),0px 9px 44px 8px rgba(0,0,0,0.12)",
+              "0px 11px 15px -7px rgba(0,0,0,0.2),0px 24px 38px 3px rgba(0,0,0,0.14),0px 9px 46px 8px rgba(0,0,0,0.12)",
+            ],
+            "shape": Object {
+              "borderRadius": 4,
+            },
+            "spacing": [Function],
+            "transitions": Object {
+              "create": [Function],
+              "duration": Object {
+                "complex": 375,
+                "enteringScreen": 225,
+                "leavingScreen": 195,
+                "short": 250,
+                "shorter": 200,
+                "shortest": 150,
+                "standard": 300,
+              },
+              "easing": Object {
+                "easeIn": "cubic-bezier(0.4, 0, 1, 1)",
+                "easeInOut": "cubic-bezier(0.4, 0, 0.2, 1)",
+                "easeOut": "cubic-bezier(0.0, 0, 0.2, 1)",
+                "sharp": "cubic-bezier(0.4, 0, 0.6, 1)",
+              },
+              "getAutoHeightDuration": [Function],
+            },
+            "typography": Object {
+              "body1": Object {
+                "@media (max-width:599.95px)": Object {
+                  "fontSize": "0.875rem",
+                },
+                "@media (min-width:600px)": Object {
+                  "fontSize": "1rem",
+                },
+                "fontFamily": "\\"Lato\\",-apple-system,sans-serif",
+                "fontSize": "1rem",
+                "fontWeight": 400,
+                "lineHeight": 1.5,
+              },
+              "body2": Object {
+                "fontFamily": "\\"Lato\\",-apple-system,sans-serif",
+                "fontSize": "0.875rem",
+                "fontWeight": 400,
+                "lineHeight": 1.43,
+              },
+              "button": Object {
+                "fontFamily": "\\"Lato\\",-apple-system,sans-serif",
+                "fontSize": "0.875rem",
+                "fontWeight": 500,
+                "lineHeight": 1.75,
+                "textTransform": "uppercase",
+              },
+              "caption": Object {
+                "fontFamily": "\\"Lato\\",-apple-system,sans-serif",
+                "fontSize": "0.75rem",
+                "fontWeight": 400,
+                "lineHeight": 1.66,
+              },
+              "fontFamily": "\\"Lato\\",-apple-system,sans-serif",
+              "fontSize": 14,
+              "fontWeightBold": 700,
+              "fontWeightLight": 300,
+              "fontWeightMedium": 500,
+              "fontWeightRegular": 400,
+              "h1": Object {
+                "@media (max-width:599.95px)": Object {
+                  "fontSize": "2rem",
+                },
+                "@media (min-width:600px)": Object {
+                  "fontSize": "3rem",
+                },
+                "fontFamily": "\\"Muli\\",-apple-system,sans-serif",
+                "fontSize": "6rem",
+                "fontWeight": 300,
+                "lineHeight": 1.167,
+              },
+              "h2": Object {
+                "@media (max-width:599.95px)": Object {
+                  "fontSize": "1.5rem",
+                },
+                "@media (min-width:600px)": Object {
+                  "fontSize": "2.375rem",
+                },
+                "fontFamily": "\\"Lato\\",-apple-system,sans-serif",
+                "fontSize": "3.75rem",
+                "fontWeight": 300,
+                "lineHeight": 1.2,
+              },
+              "h3": Object {
+                "@media (max-width:599.95px)": Object {
+                  "fontSize": "1.5rem",
+                },
+                "@media (min-width:600px)": Object {
+                  "fontSize": "2rem",
+                },
+                "fontFamily": "\\"Lato\\",-apple-system,sans-serif",
+                "fontSize": "3rem",
+                "fontWeight": 400,
+                "lineHeight": 1.167,
+              },
+              "h4": Object {
+                "@media (max-width:599.95px)": Object {
+                  "fontSize": "1.3125rem",
+                },
+                "@media (min-width:600px)": Object {
+                  "fontSize": "1.5rem",
+                },
+                "fontFamily": "\\"Lato\\",-apple-system,sans-serif",
+                "fontSize": "2.125rem",
+                "fontWeight": 400,
+                "lineHeight": 1.235,
+              },
+              "h5": Object {
+                "@media (max-width:599.95px)": Object {
+                  "fontSize": "1.125rem",
+                },
+                "@media (min-width:600px)": Object {
+                  "fontSize": "1.3125rem",
+                },
+                "fontFamily": "\\"Lato\\",-apple-system,sans-serif",
+                "fontSize": "1.5rem",
+                "fontWeight": 400,
+                "lineHeight": 1.334,
+              },
+              "h6": Object {
+                "fontFamily": "\\"Lato\\",-apple-system,sans-serif",
+                "fontSize": "1.125rem",
+                "fontWeight": 500,
+                "lineHeight": 1.6,
+              },
+              "htmlFontSize": 16,
+              "overline": Object {
+                "fontFamily": "PT Mono,\\"Lato\\",-apple-system,sans-serif",
+                "fontSize": "0.75rem",
+                "fontWeight": 400,
+                "lineHeight": 2.66,
+                "textTransform": "uppercase",
+              },
+              "pxToRem": [Function],
+              "round": [Function],
+              "subtitle1": Object {
+                "@media (max-width:599.95px)": Object {
+                  "fontSize": "2rem",
+                },
+                "@media (min-width:600px)": Object {
+                  "fontSize": "2.375rem",
+                },
+                "fontFamily": "\\"Lato\\",-apple-system,sans-serif",
+                "fontSize": "1rem",
+                "fontWeight": 400,
+                "lineHeight": 1.75,
+              },
+              "subtitle2": Object {
+                "fontFamily": "\\"Lato\\",-apple-system,sans-serif",
+                "fontSize": "0.875rem",
+                "fontWeight": 500,
+                "lineHeight": 1.57,
+              },
+            },
+            "zIndex": Object {
+              "appBar": 1100,
+              "drawer": 1200,
+              "mobileStepper": 1000,
+              "modal": 1300,
+              "snackbar": 1400,
+              "speedDial": 1050,
+              "tooltip": 1500,
+            },
+          },
+        ],
+      }
+    }
+    sendData={[Function]}
+    store={
+      ChannelStore {
+        "channel": Channel {
+          "events": Object {
+            "docsRendered": Array [
+              [Function],
+              [Function],
+              [Function],
+              [Function],
+              [Function],
+              [Function],
+              [Function],
+              [Function],
+              [Function],
+              [Function],
+              [Function],
+              [Function],
+              [Function],
+              [Function],
+              [Function],
+            ],
+            "registerSubscription": Array [
+              [Function],
+            ],
+            "sm/storybook-addon-material-ui/material-event/back": Array [
+              [Function],
+              [Function],
+              [Function],
+              [Function],
+              [Function],
+              [Function],
+              [Function],
+              [Function],
+              [Function],
+              [Function],
+              [Function],
+              [Function],
+              [Function],
+              [Function],
+              [Function],
+            ],
+            "sm/storybook-addon-material-ui/material-event/init": Array [
+              [Function],
+              [Function],
+              [Function],
+              [Function],
+              [Function],
+              [Function],
+              [Function],
+              [Function],
+              [Function],
+              [Function],
+              [Function],
+              [Function],
+              [Function],
+              [Function],
+              [Function],
+            ],
+            "storyRendered": Array [
+              [Function],
+              [Function],
+              [Function],
+              [Function],
+              [Function],
+              [Function],
+              [Function],
+              [Function],
+              [Function],
+              [Function],
+              [Function],
+              [Function],
+              [Function],
+              [Function],
+              [Function],
+            ],
+          },
+          "isAsync": false,
+          "sender": "70237b54bce3b",
+          "transport": Object {
+            "send": [Function],
+            "setHandler": [Function],
+          },
+        },
+        "connect": [Function],
+        "disconnect": [Function],
+        "emit": [Function],
+        "init": [Function],
+        "name": "store",
+        "onConnected": [Function],
+        "onConnectedFn": [Function],
+        "onData": [Function],
+        "onDataChannel": [Function],
+        "onInitChannel": [Function],
+        "removeData": [Function],
+        "removeInit": [Function],
+        "send": [Function],
+        "sendInit": [Function],
+        "store": Object {
+          "themeInd": 0,
+          "themes": Array [
+            Object {
+              "breakpoints": Object {
+                "between": [Function],
+                "down": [Function],
+                "keys": Array [
+                  "xs",
+                  "sm",
+                  "md",
+                  "lg",
+                  "xl",
+                ],
+                "only": [Function],
+                "up": [Function],
+                "values": Object {
+                  "lg": 1280,
+                  "md": 1064,
+                  "sm": 600,
+                  "tablet": 834,
+                  "xl": 1400,
+                  "xs": 0,
+                },
+                "width": [Function],
+              },
+              "direction": "ltr",
+              "mixins": Object {
+                "gutters": [Function],
+                "toolbar": Object {
+                  "@media (min-width:0px) and (orientation: landscape)": Object {
+                    "minHeight": 48,
+                  },
+                  "@media (min-width:600px)": Object {
+                    "minHeight": 64,
+                  },
+                  "minHeight": 56,
+                },
+              },
+              "overrides": Object {},
+              "palette": Object {
+                "action": Object {
+                  "activatedOpacity": 0.12,
+                  "active": "rgba(0, 0, 0, 0.54)",
+                  "disabled": "rgba(0, 0, 0, 0.26)",
+                  "disabledBackground": "rgba(0, 0, 0, 0.12)",
+                  "disabledOpacity": 0.38,
+                  "focus": "rgba(0, 0, 0, 0.12)",
+                  "focusOpacity": 0.12,
+                  "hover": "rgba(0, 0, 0, 0.04)",
+                  "hoverOpacity": 0.04,
+                  "selected": "rgba(0, 0, 0, 0.08)",
+                  "selectedOpacity": 0.08,
+                },
+                "augmentColor": [Function],
+                "background": Object {
+                  "default": "#fafafa",
+                  "paper": "#fff",
+                },
+                "common": Object {
+                  "black": "#000",
+                  "white": "#fff",
+                },
+                "contrastThreshold": 3,
+                "divider": "rgba(0, 0, 0, 0.12)",
+                "error": Object {
+                  "contrastText": "#fff",
+                  "dark": "rgb(155, 48, 26)",
+                  "light": "#E6735C",
+                  "main": "#DE4526",
+                },
+                "getContrastText": [Function],
+                "grey": Object {
+                  "100": "#D2D5D9",
+                  "200": "#F9F9F9",
+                  "300": "#cccfd4",
+                  "400": "#C0C5C4",
+                  "50": "#FAFAFA",
+                  "500": "#848484",
+                  "600": "#C4C4C4",
+                  "700": "#616161",
+                  "800": "#424242",
+                  "900": "#212121",
+                  "A100": "#d5d5d5",
+                  "A200": "#aaaaaa",
+                  "A400": "#303030",
+                  "A700": "#616161",
+                },
+                "info": Object {
+                  "contrastText": "#b0ddc0",
+                  "dark": "#545555",
+                  "light": "#EFEFEF",
+                  "main": "#8f8f8f",
+                },
+                "primary": Object {
+                  "contrastText": "#000",
+                  "dark": "rgb(178, 178, 178)",
+                  "light": "#202020",
+                  "main": "#fff",
+                },
+                "secondary": Object {
+                  "contrastText": "#B9E1C7",
+                  "dark": "#7BC796",
+                  "light": "#DCF0E3",
+                  "main": "#4FB573",
+                },
+                "success": Object {
+                  "contrastText": "rgba(0, 0, 0, 0.87)",
+                  "dark": "#388e3c",
+                  "light": "#81c784",
+                  "main": "#4caf50",
+                },
+                "text": Object {
+                  "disabled": "rgba(0, 0, 0, 0.38)",
+                  "hint": "rgba(0, 0, 0, 0.38)",
+                  "primary": "rgba(0, 0, 0, 0.87)",
+                  "secondary": "rgba(0, 0, 0, 0.54)",
+                },
+                "tonalOffset": 0.2,
+                "type": "light",
+                "warning": Object {
+                  "contrastText": "rgba(0, 0, 0, 0.87)",
+                  "dark": "#f57c00",
+                  "light": "#ffb74d",
+                  "main": "#ff9800",
+                },
+              },
+              "props": Object {
+                "MuiTypography": Object {
+                  "variantMapping": Object {
+                    "body1": "p",
+                    "body2": "p",
+                    "h1": "h1",
+                    "h2": "h2",
+                    "h3": "h3",
+                    "h4": "h4",
+                    "h5": "h5",
+                    "h6": "h6",
+                    "subtitle1": "h2",
+                    "subtitle2": "h2",
+                  },
+                },
+              },
+              "shadows": Array [
+                "none",
+                "0px 4px 10px rgba(0, 0, 0, 0.05)",
+                "-4px 0px 10px rgba(0, 0, 0, 0.25)",
+                "0px 0px 20px rgba(0, 0, 0, 0.25)",
+                "0px 4px 10px rgba(0, 0, 0, 0.1)",
+                "0px 0px 4px rgba(0, 0, 0, 0.05)",
+                "0px 4px 10px rgba(0, 0, 0, 0.1)",
+                "0px -4px 10px rgba(0, 0, 0, 0.1)",
+                "0px 5px 5px -3px rgba(0,0,0,0.2),0px 8px 10px 1px rgba(0,0,0,0.14),0px 3px 14px 2px rgba(0,0,0,0.12)",
+                "0px 5px 6px -3px rgba(0,0,0,0.2),0px 9px 12px 1px rgba(0,0,0,0.14),0px 3px 16px 2px rgba(0,0,0,0.12)",
+                "0px 6px 6px -3px rgba(0,0,0,0.2),0px 10px 14px 1px rgba(0,0,0,0.14),0px 4px 18px 3px rgba(0,0,0,0.12)",
+                "0px 6px 7px -4px rgba(0,0,0,0.2),0px 11px 15px 1px rgba(0,0,0,0.14),0px 4px 20px 3px rgba(0,0,0,0.12)",
+                "0px 7px 8px -4px rgba(0,0,0,0.2),0px 12px 17px 2px rgba(0,0,0,0.14),0px 5px 22px 4px rgba(0,0,0,0.12)",
+                "0px 7px 8px -4px rgba(0,0,0,0.2),0px 13px 19px 2px rgba(0,0,0,0.14),0px 5px 24px 4px rgba(0,0,0,0.12)",
+                "0px 7px 9px -4px rgba(0,0,0,0.2),0px 14px 21px 2px rgba(0,0,0,0.14),0px 5px 26px 4px rgba(0,0,0,0.12)",
+                "0px 8px 9px -5px rgba(0,0,0,0.2),0px 15px 22px 2px rgba(0,0,0,0.14),0px 6px 28px 5px rgba(0,0,0,0.12)",
+                "0px 8px 10px -5px rgba(0,0,0,0.2),0px 16px 24px 2px rgba(0,0,0,0.14),0px 6px 30px 5px rgba(0,0,0,0.12)",
+                "0px 8px 11px -5px rgba(0,0,0,0.2),0px 17px 26px 2px rgba(0,0,0,0.14),0px 6px 32px 5px rgba(0,0,0,0.12)",
+                "0px 9px 11px -5px rgba(0,0,0,0.2),0px 18px 28px 2px rgba(0,0,0,0.14),0px 7px 34px 6px rgba(0,0,0,0.12)",
+                "0px 9px 12px -6px rgba(0,0,0,0.2),0px 19px 29px 2px rgba(0,0,0,0.14),0px 7px 36px 6px rgba(0,0,0,0.12)",
+                "0px 10px 13px -6px rgba(0,0,0,0.2),0px 20px 31px 3px rgba(0,0,0,0.14),0px 8px 38px 7px rgba(0,0,0,0.12)",
+                "0px 10px 13px -6px rgba(0,0,0,0.2),0px 21px 33px 3px rgba(0,0,0,0.14),0px 8px 40px 7px rgba(0,0,0,0.12)",
+                "0px 10px 14px -6px rgba(0,0,0,0.2),0px 22px 35px 3px rgba(0,0,0,0.14),0px 8px 42px 7px rgba(0,0,0,0.12)",
+                "0px 11px 14px -7px rgba(0,0,0,0.2),0px 23px 36px 3px rgba(0,0,0,0.14),0px 9px 44px 8px rgba(0,0,0,0.12)",
+                "0px 11px 15px -7px rgba(0,0,0,0.2),0px 24px 38px 3px rgba(0,0,0,0.14),0px 9px 46px 8px rgba(0,0,0,0.12)",
+              ],
+              "shape": Object {
+                "borderRadius": 4,
+              },
+              "spacing": [Function],
+              "transitions": Object {
+                "create": [Function],
+                "duration": Object {
+                  "complex": 375,
+                  "enteringScreen": 225,
+                  "leavingScreen": 195,
+                  "short": 250,
+                  "shorter": 200,
+                  "shortest": 150,
+                  "standard": 300,
+                },
+                "easing": Object {
+                  "easeIn": "cubic-bezier(0.4, 0, 1, 1)",
+                  "easeInOut": "cubic-bezier(0.4, 0, 0.2, 1)",
+                  "easeOut": "cubic-bezier(0.0, 0, 0.2, 1)",
+                  "sharp": "cubic-bezier(0.4, 0, 0.6, 1)",
+                },
+                "getAutoHeightDuration": [Function],
+              },
+              "typography": Object {
+                "body1": Object {
+                  "@media (max-width:599.95px)": Object {
+                    "fontSize": "0.875rem",
+                  },
+                  "@media (min-width:600px)": Object {
+                    "fontSize": "1rem",
+                  },
+                  "fontFamily": "\\"Lato\\",-apple-system,sans-serif",
+                  "fontSize": "1rem",
+                  "fontWeight": 400,
+                  "lineHeight": 1.5,
+                },
+                "body2": Object {
+                  "fontFamily": "\\"Lato\\",-apple-system,sans-serif",
+                  "fontSize": "0.875rem",
+                  "fontWeight": 400,
+                  "lineHeight": 1.43,
+                },
+                "button": Object {
+                  "fontFamily": "\\"Lato\\",-apple-system,sans-serif",
+                  "fontSize": "0.875rem",
+                  "fontWeight": 500,
+                  "lineHeight": 1.75,
+                  "textTransform": "uppercase",
+                },
+                "caption": Object {
+                  "fontFamily": "\\"Lato\\",-apple-system,sans-serif",
+                  "fontSize": "0.75rem",
+                  "fontWeight": 400,
+                  "lineHeight": 1.66,
+                },
+                "fontFamily": "\\"Lato\\",-apple-system,sans-serif",
+                "fontSize": 14,
+                "fontWeightBold": 700,
+                "fontWeightLight": 300,
+                "fontWeightMedium": 500,
+                "fontWeightRegular": 400,
+                "h1": Object {
+                  "@media (max-width:599.95px)": Object {
+                    "fontSize": "2rem",
+                  },
+                  "@media (min-width:600px)": Object {
+                    "fontSize": "3rem",
+                  },
+                  "fontFamily": "\\"Muli\\",-apple-system,sans-serif",
+                  "fontSize": "6rem",
+                  "fontWeight": 300,
+                  "lineHeight": 1.167,
+                },
+                "h2": Object {
+                  "@media (max-width:599.95px)": Object {
+                    "fontSize": "1.5rem",
+                  },
+                  "@media (min-width:600px)": Object {
+                    "fontSize": "2.375rem",
+                  },
+                  "fontFamily": "\\"Lato\\",-apple-system,sans-serif",
+                  "fontSize": "3.75rem",
+                  "fontWeight": 300,
+                  "lineHeight": 1.2,
+                },
+                "h3": Object {
+                  "@media (max-width:599.95px)": Object {
+                    "fontSize": "1.5rem",
+                  },
+                  "@media (min-width:600px)": Object {
+                    "fontSize": "2rem",
+                  },
+                  "fontFamily": "\\"Lato\\",-apple-system,sans-serif",
+                  "fontSize": "3rem",
+                  "fontWeight": 400,
+                  "lineHeight": 1.167,
+                },
+                "h4": Object {
+                  "@media (max-width:599.95px)": Object {
+                    "fontSize": "1.3125rem",
+                  },
+                  "@media (min-width:600px)": Object {
+                    "fontSize": "1.5rem",
+                  },
+                  "fontFamily": "\\"Lato\\",-apple-system,sans-serif",
+                  "fontSize": "2.125rem",
+                  "fontWeight": 400,
+                  "lineHeight": 1.235,
+                },
+                "h5": Object {
+                  "@media (max-width:599.95px)": Object {
+                    "fontSize": "1.125rem",
+                  },
+                  "@media (min-width:600px)": Object {
+                    "fontSize": "1.3125rem",
+                  },
+                  "fontFamily": "\\"Lato\\",-apple-system,sans-serif",
+                  "fontSize": "1.5rem",
+                  "fontWeight": 400,
+                  "lineHeight": 1.334,
+                },
+                "h6": Object {
+                  "fontFamily": "\\"Lato\\",-apple-system,sans-serif",
+                  "fontSize": "1.125rem",
+                  "fontWeight": 500,
+                  "lineHeight": 1.6,
+                },
+                "htmlFontSize": 16,
+                "overline": Object {
+                  "fontFamily": "PT Mono,\\"Lato\\",-apple-system,sans-serif",
+                  "fontSize": "0.75rem",
+                  "fontWeight": 400,
+                  "lineHeight": 2.66,
+                  "textTransform": "uppercase",
+                },
+                "pxToRem": [Function],
+                "round": [Function],
+                "subtitle1": Object {
+                  "@media (max-width:599.95px)": Object {
+                    "fontSize": "2rem",
+                  },
+                  "@media (min-width:600px)": Object {
+                    "fontSize": "2.375rem",
+                  },
+                  "fontFamily": "\\"Lato\\",-apple-system,sans-serif",
+                  "fontSize": "1rem",
+                  "fontWeight": 400,
+                  "lineHeight": 1.75,
+                },
+                "subtitle2": Object {
+                  "fontFamily": "\\"Lato\\",-apple-system,sans-serif",
+                  "fontSize": "0.875rem",
+                  "fontWeight": 500,
+                  "lineHeight": 1.57,
+                },
+              },
+              "zIndex": Object {
+                "appBar": 1100,
+                "drawer": 1200,
+                "mobileStepper": 1000,
+                "modal": 1300,
+                "snackbar": 1400,
+                "speedDial": 1050,
+                "tooltip": 1500,
+              },
+            },
+          ],
+        },
+        "subscriber": [Function],
+      }
+    }
+    story={
+      <Certificate
+        background="./certificate-bg.png"
+        buyerName="Marie Gauthier"
+        creditName="Carbon<i>Plus</i> Grasslands"
+        creditsUnits={1000}
+        date="10-10-2020"
+        equivalentTonsCO2={1000}
+        issuee={
+          Object {
+            "companyName": "John Doe Ltd",
+            "personName": "John Doe",
+            "personRole": "Director",
+          }
+        }
+        issuer={
+          Object {
+            "companyName": "Regen Network",
+            "personName": "Christian Shearer",
+            "personRole": "CEO",
+          }
+        }
+        verifier={
+          Object {
+            "companyName": "RSM Australia Pty Ltd",
+            "personName": "Tim Pittaway",
+            "personRole": "Partner",
+          }
+        }
+      />
+    }
+  >
+    <ThemeProvider
+      theme={
+        Object {
+          "breakpoints": Object {
+            "between": [Function],
+            "down": [Function],
+            "keys": Array [
+              "xs",
+              "sm",
+              "md",
+              "lg",
+              "xl",
+            ],
+            "only": [Function],
+            "up": [Function],
+            "values": Object {
+              "lg": 1280,
+              "md": 1064,
+              "sm": 600,
+              "tablet": 834,
+              "xl": 1400,
+              "xs": 0,
+            },
+            "width": [Function],
+          },
+          "direction": "ltr",
+          "mixins": Object {
+            "gutters": [Function],
+            "toolbar": Object {
+              "@media (min-width:0px) and (orientation: landscape)": Object {
+                "minHeight": 48,
+              },
+              "@media (min-width:600px)": Object {
+                "minHeight": 64,
+              },
+              "minHeight": 56,
+            },
+          },
+          "overrides": Object {},
+          "palette": Object {
+            "action": Object {
+              "activatedOpacity": 0.12,
+              "active": "rgba(0, 0, 0, 0.54)",
+              "disabled": "rgba(0, 0, 0, 0.26)",
+              "disabledBackground": "rgba(0, 0, 0, 0.12)",
+              "disabledOpacity": 0.38,
+              "focus": "rgba(0, 0, 0, 0.12)",
+              "focusOpacity": 0.12,
+              "hover": "rgba(0, 0, 0, 0.04)",
+              "hoverOpacity": 0.04,
+              "selected": "rgba(0, 0, 0, 0.08)",
+              "selectedOpacity": 0.08,
+            },
+            "augmentColor": [Function],
+            "background": Object {
+              "default": "#fafafa",
+              "paper": "#fff",
+            },
+            "common": Object {
+              "black": "#000",
+              "white": "#fff",
+            },
+            "contrastThreshold": 3,
+            "divider": "rgba(0, 0, 0, 0.12)",
+            "error": Object {
+              "contrastText": "#fff",
+              "dark": "rgb(155, 48, 26)",
+              "light": "#E6735C",
+              "main": "#DE4526",
+            },
+            "getContrastText": [Function],
+            "grey": Object {
+              "100": "#D2D5D9",
+              "200": "#F9F9F9",
+              "300": "#cccfd4",
+              "400": "#C0C5C4",
+              "50": "#FAFAFA",
+              "500": "#848484",
+              "600": "#C4C4C4",
+              "700": "#616161",
+              "800": "#424242",
+              "900": "#212121",
+              "A100": "#d5d5d5",
+              "A200": "#aaaaaa",
+              "A400": "#303030",
+              "A700": "#616161",
+            },
+            "info": Object {
+              "contrastText": "#b0ddc0",
+              "dark": "#545555",
+              "light": "#EFEFEF",
+              "main": "#8f8f8f",
+            },
+            "primary": Object {
+              "contrastText": "#000",
+              "dark": "rgb(178, 178, 178)",
+              "light": "#202020",
+              "main": "#fff",
+            },
+            "secondary": Object {
+              "contrastText": "#B9E1C7",
+              "dark": "#7BC796",
+              "light": "#DCF0E3",
+              "main": "#4FB573",
+            },
+            "success": Object {
+              "contrastText": "rgba(0, 0, 0, 0.87)",
+              "dark": "#388e3c",
+              "light": "#81c784",
+              "main": "#4caf50",
+            },
+            "text": Object {
+              "disabled": "rgba(0, 0, 0, 0.38)",
+              "hint": "rgba(0, 0, 0, 0.38)",
+              "primary": "rgba(0, 0, 0, 0.87)",
+              "secondary": "rgba(0, 0, 0, 0.54)",
+            },
+            "tonalOffset": 0.2,
+            "type": "light",
+            "warning": Object {
+              "contrastText": "rgba(0, 0, 0, 0.87)",
+              "dark": "#f57c00",
+              "light": "#ffb74d",
+              "main": "#ff9800",
+            },
+          },
+          "props": Object {
+            "MuiTypography": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
+          "shadows": Array [
+            "none",
+            "0px 4px 10px rgba(0, 0, 0, 0.05)",
+            "-4px 0px 10px rgba(0, 0, 0, 0.25)",
+            "0px 0px 20px rgba(0, 0, 0, 0.25)",
+            "0px 4px 10px rgba(0, 0, 0, 0.1)",
+            "0px 0px 4px rgba(0, 0, 0, 0.05)",
+            "0px 4px 10px rgba(0, 0, 0, 0.1)",
+            "0px -4px 10px rgba(0, 0, 0, 0.1)",
+            "0px 5px 5px -3px rgba(0,0,0,0.2),0px 8px 10px 1px rgba(0,0,0,0.14),0px 3px 14px 2px rgba(0,0,0,0.12)",
+            "0px 5px 6px -3px rgba(0,0,0,0.2),0px 9px 12px 1px rgba(0,0,0,0.14),0px 3px 16px 2px rgba(0,0,0,0.12)",
+            "0px 6px 6px -3px rgba(0,0,0,0.2),0px 10px 14px 1px rgba(0,0,0,0.14),0px 4px 18px 3px rgba(0,0,0,0.12)",
+            "0px 6px 7px -4px rgba(0,0,0,0.2),0px 11px 15px 1px rgba(0,0,0,0.14),0px 4px 20px 3px rgba(0,0,0,0.12)",
+            "0px 7px 8px -4px rgba(0,0,0,0.2),0px 12px 17px 2px rgba(0,0,0,0.14),0px 5px 22px 4px rgba(0,0,0,0.12)",
+            "0px 7px 8px -4px rgba(0,0,0,0.2),0px 13px 19px 2px rgba(0,0,0,0.14),0px 5px 24px 4px rgba(0,0,0,0.12)",
+            "0px 7px 9px -4px rgba(0,0,0,0.2),0px 14px 21px 2px rgba(0,0,0,0.14),0px 5px 26px 4px rgba(0,0,0,0.12)",
+            "0px 8px 9px -5px rgba(0,0,0,0.2),0px 15px 22px 2px rgba(0,0,0,0.14),0px 6px 28px 5px rgba(0,0,0,0.12)",
+            "0px 8px 10px -5px rgba(0,0,0,0.2),0px 16px 24px 2px rgba(0,0,0,0.14),0px 6px 30px 5px rgba(0,0,0,0.12)",
+            "0px 8px 11px -5px rgba(0,0,0,0.2),0px 17px 26px 2px rgba(0,0,0,0.14),0px 6px 32px 5px rgba(0,0,0,0.12)",
+            "0px 9px 11px -5px rgba(0,0,0,0.2),0px 18px 28px 2px rgba(0,0,0,0.14),0px 7px 34px 6px rgba(0,0,0,0.12)",
+            "0px 9px 12px -6px rgba(0,0,0,0.2),0px 19px 29px 2px rgba(0,0,0,0.14),0px 7px 36px 6px rgba(0,0,0,0.12)",
+            "0px 10px 13px -6px rgba(0,0,0,0.2),0px 20px 31px 3px rgba(0,0,0,0.14),0px 8px 38px 7px rgba(0,0,0,0.12)",
+            "0px 10px 13px -6px rgba(0,0,0,0.2),0px 21px 33px 3px rgba(0,0,0,0.14),0px 8px 40px 7px rgba(0,0,0,0.12)",
+            "0px 10px 14px -6px rgba(0,0,0,0.2),0px 22px 35px 3px rgba(0,0,0,0.14),0px 8px 42px 7px rgba(0,0,0,0.12)",
+            "0px 11px 14px -7px rgba(0,0,0,0.2),0px 23px 36px 3px rgba(0,0,0,0.14),0px 9px 44px 8px rgba(0,0,0,0.12)",
+            "0px 11px 15px -7px rgba(0,0,0,0.2),0px 24px 38px 3px rgba(0,0,0,0.14),0px 9px 46px 8px rgba(0,0,0,0.12)",
+          ],
+          "shape": Object {
+            "borderRadius": 4,
+          },
+          "spacing": [Function],
+          "transitions": Object {
+            "create": [Function],
+            "duration": Object {
+              "complex": 375,
+              "enteringScreen": 225,
+              "leavingScreen": 195,
+              "short": 250,
+              "shorter": 200,
+              "shortest": 150,
+              "standard": 300,
+            },
+            "easing": Object {
+              "easeIn": "cubic-bezier(0.4, 0, 1, 1)",
+              "easeInOut": "cubic-bezier(0.4, 0, 0.2, 1)",
+              "easeOut": "cubic-bezier(0.0, 0, 0.2, 1)",
+              "sharp": "cubic-bezier(0.4, 0, 0.6, 1)",
+            },
+            "getAutoHeightDuration": [Function],
+          },
+          "typography": Object {
+            "body1": Object {
+              "@media (max-width:599.95px)": Object {
+                "fontSize": "0.875rem",
+              },
+              "@media (min-width:600px)": Object {
+                "fontSize": "1rem",
+              },
+              "fontFamily": "\\"Lato\\",-apple-system,sans-serif",
+              "fontSize": "1rem",
+              "fontWeight": 400,
+              "lineHeight": 1.5,
+            },
+            "body2": Object {
+              "fontFamily": "\\"Lato\\",-apple-system,sans-serif",
+              "fontSize": "0.875rem",
+              "fontWeight": 400,
+              "lineHeight": 1.43,
+            },
+            "button": Object {
+              "fontFamily": "\\"Lato\\",-apple-system,sans-serif",
+              "fontSize": "0.875rem",
+              "fontWeight": 500,
+              "lineHeight": 1.75,
+              "textTransform": "uppercase",
+            },
+            "caption": Object {
+              "fontFamily": "\\"Lato\\",-apple-system,sans-serif",
+              "fontSize": "0.75rem",
+              "fontWeight": 400,
+              "lineHeight": 1.66,
+            },
+            "fontFamily": "\\"Lato\\",-apple-system,sans-serif",
+            "fontSize": 14,
+            "fontWeightBold": 700,
+            "fontWeightLight": 300,
+            "fontWeightMedium": 500,
+            "fontWeightRegular": 400,
+            "h1": Object {
+              "@media (max-width:599.95px)": Object {
+                "fontSize": "2rem",
+              },
+              "@media (min-width:600px)": Object {
+                "fontSize": "3rem",
+              },
+              "fontFamily": "\\"Muli\\",-apple-system,sans-serif",
+              "fontSize": "6rem",
+              "fontWeight": 300,
+              "lineHeight": 1.167,
+            },
+            "h2": Object {
+              "@media (max-width:599.95px)": Object {
+                "fontSize": "1.5rem",
+              },
+              "@media (min-width:600px)": Object {
+                "fontSize": "2.375rem",
+              },
+              "fontFamily": "\\"Lato\\",-apple-system,sans-serif",
+              "fontSize": "3.75rem",
+              "fontWeight": 300,
+              "lineHeight": 1.2,
+            },
+            "h3": Object {
+              "@media (max-width:599.95px)": Object {
+                "fontSize": "1.5rem",
+              },
+              "@media (min-width:600px)": Object {
+                "fontSize": "2rem",
+              },
+              "fontFamily": "\\"Lato\\",-apple-system,sans-serif",
+              "fontSize": "3rem",
+              "fontWeight": 400,
+              "lineHeight": 1.167,
+            },
+            "h4": Object {
+              "@media (max-width:599.95px)": Object {
+                "fontSize": "1.3125rem",
+              },
+              "@media (min-width:600px)": Object {
+                "fontSize": "1.5rem",
+              },
+              "fontFamily": "\\"Lato\\",-apple-system,sans-serif",
+              "fontSize": "2.125rem",
+              "fontWeight": 400,
+              "lineHeight": 1.235,
+            },
+            "h5": Object {
+              "@media (max-width:599.95px)": Object {
+                "fontSize": "1.125rem",
+              },
+              "@media (min-width:600px)": Object {
+                "fontSize": "1.3125rem",
+              },
+              "fontFamily": "\\"Lato\\",-apple-system,sans-serif",
+              "fontSize": "1.5rem",
+              "fontWeight": 400,
+              "lineHeight": 1.334,
+            },
+            "h6": Object {
+              "fontFamily": "\\"Lato\\",-apple-system,sans-serif",
+              "fontSize": "1.125rem",
+              "fontWeight": 500,
+              "lineHeight": 1.6,
+            },
+            "htmlFontSize": 16,
+            "overline": Object {
+              "fontFamily": "PT Mono,\\"Lato\\",-apple-system,sans-serif",
+              "fontSize": "0.75rem",
+              "fontWeight": 400,
+              "lineHeight": 2.66,
+              "textTransform": "uppercase",
+            },
+            "pxToRem": [Function],
+            "round": [Function],
+            "subtitle1": Object {
+              "@media (max-width:599.95px)": Object {
+                "fontSize": "2rem",
+              },
+              "@media (min-width:600px)": Object {
+                "fontSize": "2.375rem",
+              },
+              "fontFamily": "\\"Lato\\",-apple-system,sans-serif",
+              "fontSize": "1rem",
+              "fontWeight": 400,
+              "lineHeight": 1.75,
+            },
+            "subtitle2": Object {
+              "fontFamily": "\\"Lato\\",-apple-system,sans-serif",
+              "fontSize": "0.875rem",
+              "fontWeight": 500,
+              "lineHeight": 1.57,
+            },
+          },
+          "zIndex": Object {
+            "appBar": 1100,
+            "drawer": 1200,
+            "mobileStepper": 1000,
+            "modal": 1300,
+            "snackbar": 1400,
+            "speedDial": 1050,
+            "tooltip": 1500,
+          },
+          Symbol(mui.nested): false,
+        }
+      }
+    >
+      <div>
+        <Certificate
+          background="./certificate-bg.png"
+          buyerName="Marie Gauthier"
+          creditName="Carbon<i>Plus</i> Grasslands"
+          creditsUnits={1000}
+          date="10-10-2020"
+          equivalentTonsCO2={1000}
+          issuee={
+            Object {
+              "companyName": "John Doe Ltd",
+              "personName": "John Doe",
+              "personRole": "Director",
+            }
+          }
+          issuer={
+            Object {
+              "companyName": "Regen Network",
+              "personName": "Christian Shearer",
+              "personRole": "CEO",
+            }
+          }
+          verifier={
+            Object {
+              "companyName": "RSM Australia Pty Ltd",
+              "personName": "Tim Pittaway",
+              "personRole": "Partner",
+            }
+          }
+        >
+          <div
+            className="makeStyles-root-308 makeStyles-root-322"
+          >
+            <div
+              className="makeStyles-content-309"
+            >
+              <RegenIcon
+                className="makeStyles-icon-316"
+              >
+                <WithStyles(ForwardRef(SvgIcon))
+                  className="makeStyles-icon-316"
+                  viewBox="0 0 361 161"
+                >
+                  <ForwardRef(SvgIcon)
+                    className="makeStyles-icon-316"
+                    classes={
+                      Object {
+                        "colorAction": "MuiSvgIcon-colorAction",
+                        "colorDisabled": "MuiSvgIcon-colorDisabled",
+                        "colorError": "MuiSvgIcon-colorError",
+                        "colorPrimary": "MuiSvgIcon-colorPrimary",
+                        "colorSecondary": "MuiSvgIcon-colorSecondary",
+                        "fontSizeInherit": "MuiSvgIcon-fontSizeInherit",
+                        "fontSizeLarge": "MuiSvgIcon-fontSizeLarge",
+                        "fontSizeSmall": "MuiSvgIcon-fontSizeSmall",
+                        "root": "MuiSvgIcon-root",
+                      }
+                    }
+                    viewBox="0 0 361 161"
+                  >
+                    <svg
+                      aria-hidden={true}
+                      className="MuiSvgIcon-root makeStyles-icon-316"
+                      focusable="false"
+                      viewBox="0 0 361 161"
+                    >
+                      <path
+                        clipRule="evenodd"
+                        d="M208.41 59.3979H214.229C216.057 59.3979 217.377 59.0764 218.21 58.4282C219.037 57.7852 219.459 56.7523 219.459 55.3294C219.459 53.9381 219.037 52.921 218.21 52.2727C217.377 51.6245 216.057 51.303 214.229 51.303H208.41V59.3979ZM213.532 65.3162H208.41V77H200V45H215.679C219.654 45 222.715 45.8748 224.857 47.6192C226.993 49.3636 228.064 51.8827 228.064 55.1818C228.064 57.5112 227.518 59.4453 226.42 61C225.327 62.5494 223.737 63.6983 221.644 64.4414L230 77H220.546L213.532 65.3162Z"
+                        fill="#000"
+                        fillRule="evenodd"
+                      />
+                      <path
+                        clipRule="evenodd"
+                        d="M260 70.5494V77H234V45H259.357V51.4453H242.486V57.9433H255.904V64.004H242.486V70.5494H260Z"
+                        fill="#000"
+                        fillRule="evenodd"
+                      />
+                      <path
+                        clipRule="evenodd"
+                        d="M293 59.6522V77.5H287.203L286.961 73.5978C285.123 76.5326 282.078 78 277.829 78C274.931 78 272.363 77.3424 270.126 76.0272C267.884 74.712 266.14 72.7772 264.885 70.2283C263.625 67.6793 263 64.6196 263 61.0489C263 57.5163 263.641 54.4728 264.927 51.9293C266.219 49.375 268.057 47.4185 270.436 46.0543C272.82 44.6848 275.634 44 278.89 44C282.529 44 285.459 44.6685 287.686 46C289.907 47.3315 291.661 49.4837 292.947 52.4511L285.265 55.5978C284.882 53.9674 284.157 52.75 283.091 51.9511C282.036 51.1522 280.712 50.75 279.132 50.75C276.685 50.75 274.81 51.6196 273.502 53.3533C272.2 55.087 271.549 57.6359 271.549 61C271.549 67.9348 274.159 71.4022 279.373 71.4022C281.337 71.4022 282.928 70.9348 284.136 70C285.339 69.0652 285.942 67.7174 285.942 65.9511V65.4511H278.024V59.6522H293Z"
+                        fill="#000"
+                        fillRule="evenodd"
+                      />
+                      <path
+                        clipRule="evenodd"
+                        d="M325 70.5494V77H299V45H324.362V51.4453H307.484V57.9433H320.903V64.004H307.484V70.5494H325Z"
+                        fill="#000"
+                        fillRule="evenodd"
+                      />
+                      <path
+                        clipRule="evenodd"
+                        d="M360 77H350.688L340.698 59.693L338.262 54.8393H338.214L338.41 60.8577V77H331V45H340.312L350.302 62.307L352.738 67.1555H352.791L352.595 61.1476V45H360V77Z"
+                        fill="#000"
+                        fillRule="evenodd"
+                      />
+                      <path
+                        clipRule="evenodd"
+                        d="M218 116H214.561L204.963 101.267L202.529 96.9333H202.503L202.636 100.467V116H200V94H203.439L212.995 108.667L215.465 113.067H215.503L215.364 109.533V94H218V116Z"
+                        fill="#000"
+                        fillRule="evenodd"
+                      />
+                      <path
+                        clipRule="evenodd"
+                        d="M240 113.503V116H223V94H239.464V96.5026H225.846V103.6H236.448V106.103H225.846V113.503H240Z"
+                        fill="#000"
+                        fillRule="evenodd"
+                      />
+                      <path
+                        clipRule="evenodd"
+                        d="M260 96.4974H252.338V116H249.667V96.4974H242V94H260V96.4974Z"
+                        fill="#000"
+                        fillRule="evenodd"
+                      />
+                      <path
+                        clipRule="evenodd"
+                        d="M271.926 116H268.577L262 94H264.902L270.275 113.897L275.533 94H278.607L283.871 113.969L289.264 94H292L285.449 116H282.116L278.165 101.733L277.013 96.7692H276.987L275.84 101.733L271.926 116Z"
+                        fill="#000"
+                        fillRule="evenodd"
+                      />
+                      <path
+                        clipRule="evenodd"
+                        d="M299.154 98.1367C297.728 99.7982 297.014 102.084 297.014 105C297.014 107.921 297.728 110.207 299.154 111.863C300.581 113.525 302.533 114.356 305 114.356C307.472 114.356 309.413 113.525 310.84 111.863C312.267 110.207 312.98 107.921 312.98 105C312.98 102.084 312.267 99.7982 310.84 98.1367C309.413 96.4751 307.472 95.6498 305 95.6498C302.533 95.6498 300.581 96.4751 299.154 98.1367ZM310.818 94.4661C312.477 95.4434 313.755 96.8281 314.656 98.6308C315.552 100.428 316 102.551 316 105C316 107.449 315.552 109.572 314.656 111.375C313.755 113.172 312.477 114.562 310.818 115.539C309.17 116.511 307.229 117 305 117C302.771 117 300.83 116.511 299.176 115.539C297.523 114.562 296.251 113.172 295.349 111.375C294.448 109.572 294 107.449 294 105C294 102.551 294.448 100.428 295.349 98.6308C296.251 96.8281 297.523 95.4434 299.176 94.4661C300.83 93.4887 302.771 93 305 93C307.229 93 309.17 93.4887 310.818 94.4661Z"
+                        fill="#000"
+                        fillRule="evenodd"
+                      />
+                      <path
+                        clipRule="evenodd"
+                        d="M322.812 104.364H328.738C332.014 104.364 333.65 103.056 333.65 100.431C333.65 97.8103 332.014 96.4974 328.738 96.4974H322.812V104.364ZM328.35 106.867H322.812V116H320V94H328.776C331.135 94 333.029 94.5744 334.454 95.7282C335.884 96.8872 336.597 98.4564 336.597 100.431C336.597 101.99 336.138 103.297 335.231 104.364C334.314 105.431 333.061 106.164 331.475 106.564L338 116H334.664L328.35 106.867Z"
+                        fill="#000"
+                        fillRule="evenodd"
+                      />
+                      <mask
+                        height="24"
+                        id="mask0"
+                        mask-type="alpha"
+                        maskUnits="userSpaceOnUse"
+                        width="18"
+                        x="343"
+                        y="93"
+                      >
+                        <path
+                          clipRule="evenodd"
+                          d="M343.033 93.1647H360.601V116.205H343.033V93.1647Z"
+                          fill="white"
+                          fillRule="evenodd"
+                        />
+                      </mask>
+                      <g
+                        mask="url(#mask0)"
+                      >
+                        <path
+                          clipRule="evenodd"
+                          d="M349.72 104.615L345.732 108.804V116.205H343.033V93.1647H345.732V105.034L356.959 93.1647H360.5L351.613 102.558L360.604 116.205H357.364L349.72 104.615Z"
+                          fill="#000"
+                          fillRule="evenodd"
+                        />
+                      </g>
+                      <path
+                        clipRule="evenodd"
+                        d="M59.1526 0.676737L67.0116 3.1776L67.0225 11.3135L59.1744 13.8358L54.302 7.26164L59.1526 0.676737Z"
+                        fill="#000"
+                        fillRule="evenodd"
+                      />
+                      <path
+                        clipRule="evenodd"
+                        d="M67.0138 3.17653L76.4097 52.7377L67.0247 11.3124L67.0138 3.17653Z"
+                        fill="#000"
+                        fillRule="evenodd"
+                      />
+                      <path
+                        clipRule="evenodd"
+                        d="M54.3042 7.26164L59.1765 13.8358L76.4097 52.7388L54.3042 7.26164Z"
+                        fill="#000"
+                        fillRule="evenodd"
+                      />
+                      <path
+                        clipRule="evenodd"
+                        d="M59.1744 13.8363L67.0225 11.314L76.4075 52.7393L59.1744 13.8363Z"
+                        fill="#000"
+                        fillRule="evenodd"
+                      />
+                      <path
+                        clipRule="evenodd"
+                        d="M109.875 63.3916L146.919 28.7122L142.069 35.2971L109.875 63.3916Z"
+                        fill="#000"
+                        fillRule="evenodd"
+                      />
+                      <path
+                        clipRule="evenodd"
+                        d="M146.919 28.7101L154.778 31.2109L154.789 39.3468L146.935 41.8745L142.068 35.3003L146.919 28.7101Z"
+                        fill="#000"
+                        fillRule="evenodd"
+                      />
+                      <path
+                        clipRule="evenodd"
+                        d="M81.5225 31.9698L85.5174 28.8517L89.763 31.637L88.395 36.467L83.2937 36.6763L81.5225 31.9698Z"
+                        fill="#000"
+                        fillRule="evenodd"
+                      />
+                      <path
+                        clipRule="evenodd"
+                        d="M89.7619 31.6344L85.5217 51.1637L81.5214 31.9671L83.2927 36.6737L88.3939 36.4697L89.7619 31.6344Z"
+                        fill="#000"
+                        fillRule="evenodd"
+                      />
+                      <path
+                        clipRule="evenodd"
+                        d="M109.875 63.3916L142.069 35.2971L146.936 41.8713L109.875 63.3916Z"
+                        fill="#000"
+                        fillRule="evenodd"
+                      />
+                      <path
+                        clipRule="evenodd"
+                        d="M106.117 35.9239L111.191 35.3658L113.284 39.9382L109.523 43.3192L105.098 40.8398L106.117 35.9239Z"
+                        fill="#000"
+                        fillRule="evenodd"
+                      />
+                      <path
+                        clipRule="evenodd"
+                        d="M106.117 35.9239L105.098 40.8398L109.523 43.3192L113.284 39.9382L100.122 54.8736L106.117 35.9239Z"
+                        fill="#000"
+                        fillRule="evenodd"
+                      />
+                      <path
+                        clipRule="evenodd"
+                        d="M146.934 41.8723L154.788 39.35L109.874 63.3927L146.934 41.8723Z"
+                        fill="#000"
+                        fillRule="evenodd"
+                      />
+                      <path
+                        clipRule="evenodd"
+                        d="M48.3167 44.0818L53.3526 43.2875L55.6743 47.7526L52.0718 51.3107L47.5264 49.0406L48.3167 44.0818Z"
+                        fill="#000"
+                        fillRule="evenodd"
+                      />
+                      <path
+                        clipRule="evenodd"
+                        d="M53.3515 43.2849L64.3607 59.8303L47.5308 49.0379L52.0762 51.308L55.6732 47.7553L53.3515 43.2849Z"
+                        fill="#000"
+                        fillRule="evenodd"
+                      />
+                      <path
+                        clipRule="evenodd"
+                        d="M4.94978 74.2875L55.6193 80.69L12.8088 76.7884L4.94978 74.2875Z"
+                        fill="#000"
+                        fillRule="evenodd"
+                      />
+                      <path
+                        clipRule="evenodd"
+                        d="M4.94978 74.2875L12.8088 76.7884L12.8197 84.9243L4.96613 87.4466L0.0991974 80.8724L4.94978 74.2875Z"
+                        fill="#000"
+                        fillRule="evenodd"
+                      />
+                      <path
+                        clipRule="evenodd"
+                        d="M12.811 76.7873L55.616 80.6889L12.8219 84.9232L12.811 76.7873Z"
+                        fill="#000"
+                        fillRule="evenodd"
+                      />
+                      <path
+                        clipRule="evenodd"
+                        d="M115.511 80.5998L135.159 76.7144L130.319 78.2707L130.325 83.2939L135.175 84.8341L115.511 80.5998Z"
+                        fill="#000"
+                        fillRule="evenodd"
+                      />
+                      <path
+                        clipRule="evenodd"
+                        d="M130.318 78.2734L135.163 76.717L138.161 80.7689L135.18 84.8368L130.324 83.2966L130.318 78.2734Z"
+                        fill="#000"
+                        fillRule="evenodd"
+                      />
+                      <path
+                        clipRule="evenodd"
+                        d="M12.8219 84.9237L55.6215 80.6894L4.96831 87.4461L12.8219 84.9237Z"
+                        fill="#000"
+                        fillRule="evenodd"
+                      />
+                      <path
+                        clipRule="evenodd"
+                        d="M36.9265 91.6294L56.9829 89.6008L39.4881 99.352L43.6084 96.395L42.0224 91.624L36.9265 91.6294Z"
+                        fill="#000"
+                        fillRule="evenodd"
+                      />
+                      <path
+                        clipRule="evenodd"
+                        d="M36.9266 91.6294L42.0224 91.624L43.6084 96.395L39.4881 99.352L35.3624 96.4057L36.9266 91.6294Z"
+                        fill="#000"
+                        fillRule="evenodd"
+                      />
+                      <path
+                        clipRule="evenodd"
+                        d="M42.659 105.562L61.331 97.5445L47.297 112.281L50.4199 108.315L47.5531 104.167L42.659 105.562Z"
+                        fill="#000"
+                        fillRule="evenodd"
+                      />
+                      <path
+                        clipRule="evenodd"
+                        d="M109.928 98.0313L154.919 121.961L147.054 119.455L109.928 98.0313Z"
+                        fill="#000"
+                        fillRule="evenodd"
+                      />
+                      <path
+                        clipRule="evenodd"
+                        d="M109.928 98.0313L147.054 119.455L142.209 126.045L109.928 98.0313Z"
+                        fill="#000"
+                        fillRule="evenodd"
+                      />
+                      <path
+                        clipRule="evenodd"
+                        d="M109.928 98.0313L142.209 126.045L147.071 132.625L109.928 98.0313Z"
+                        fill="#000"
+                        fillRule="evenodd"
+                      />
+                      <path
+                        clipRule="evenodd"
+                        d="M42.659 105.562L47.5531 104.167L50.4199 108.315L47.297 112.281L42.5009 110.58L42.659 105.562Z"
+                        fill="#000"
+                        fillRule="evenodd"
+                      />
+                      <path
+                        clipRule="evenodd"
+                        d="M52.9575 117.436L67.8962 104.341L59.4267 122.475L61.198 117.768L57.1976 114.65L52.9575 117.436Z"
+                        fill="#000"
+                        fillRule="evenodd"
+                      />
+                      <path
+                        clipRule="evenodd"
+                        d="M76.4931 108.783L67.3261 158.371L67.3152 150.235L76.4931 108.783Z"
+                        fill="#000"
+                        fillRule="evenodd"
+                      />
+                      <path
+                        clipRule="evenodd"
+                        d="M76.4931 108.783L67.3152 150.235L59.4561 147.734L76.4931 108.783Z"
+                        fill="#000"
+                        fillRule="evenodd"
+                      />
+                      <path
+                        clipRule="evenodd"
+                        d="M76.4931 108.783L59.4561 147.734L54.6056 154.319L76.4931 108.783Z"
+                        fill="#000"
+                        fillRule="evenodd"
+                      />
+                      <path
+                        clipRule="evenodd"
+                        d="M95.2011 108.754L105.327 125.659L102.335 121.602L97.4792 123.163L97.4901 128.181L95.2011 108.754Z"
+                        fill="#000"
+                        fillRule="evenodd"
+                      />
+                      <path
+                        clipRule="evenodd"
+                        d="M85.61 110.13L89.8666 129.482L88.2806 124.711L83.1902 124.722L81.6206 129.493L85.61 110.13Z"
+                        fill="#000"
+                        fillRule="evenodd"
+                      />
+                      <path
+                        clipRule="evenodd"
+                        d="M52.9575 117.436L57.1976 114.65L61.198 117.768L59.4267 122.475L54.3309 122.271L52.9575 117.436Z"
+                        fill="#000"
+                        fillRule="evenodd"
+                      />
+                      <path
+                        clipRule="evenodd"
+                        d="M147.057 119.456L154.916 121.962L154.927 130.093L147.073 132.626L142.206 126.046L147.057 119.456Z"
+                        fill="#000"
+                        fillRule="evenodd"
+                      />
+                      <path
+                        clipRule="evenodd"
+                        d="M97.4792 123.161L102.335 121.6L105.327 125.657L102.346 129.725L97.4901 128.179L97.4792 123.161Z"
+                        fill="#000"
+                        fillRule="evenodd"
+                      />
+                      <path
+                        clipRule="evenodd"
+                        d="M83.1886 124.72L88.2844 124.715L89.8704 129.48L85.7501 132.438L81.6189 129.497L83.1886 124.72Z"
+                        fill="#000"
+                        fillRule="evenodd"
+                      />
+                      <path
+                        clipRule="evenodd"
+                        d="M59.4561 147.736L67.3152 150.237L67.3261 158.372L59.4779 160.9L54.6056 154.321L59.4561 147.736Z"
+                        fill="#000"
+                        fillRule="evenodd"
+                      />
+                    </svg>
+                  </ForwardRef(SvgIcon)>
+                </WithStyles(ForwardRef(SvgIcon))>
+              </RegenIcon>
+              <div
+                className="makeStyles-banner-315"
+              >
+                <div
+                  className="makeStyles-bannerSide-310"
+                >
+                  <div
+                    className="makeStyles-whiteTriangle-311"
+                  />
+                  <div
+                    className="makeStyles-greenTriangle-312"
+                  />
+                </div>
+                <Title
+                  className="makeStyles-bannerContent-314"
+                  variant="h2"
+                >
+                  <WithStyles(ForwardRef(Typography))
+                    align="left"
+                    className="makeStyles-root-323 makeStyles-bannerContent-314"
+                    color="textPrimary"
+                    variant="h2"
+                  >
+                    <ForwardRef(Typography)
+                      align="left"
+                      className="makeStyles-root-323 makeStyles-bannerContent-314"
+                      classes={
+                        Object {
+                          "alignCenter": "MuiTypography-alignCenter",
+                          "alignJustify": "MuiTypography-alignJustify",
+                          "alignLeft": "MuiTypography-alignLeft",
+                          "alignRight": "MuiTypography-alignRight",
+                          "body1": "MuiTypography-body1",
+                          "body2": "MuiTypography-body2",
+                          "button": "MuiTypography-button",
+                          "caption": "MuiTypography-caption",
+                          "colorError": "MuiTypography-colorError",
+                          "colorInherit": "MuiTypography-colorInherit",
+                          "colorPrimary": "MuiTypography-colorPrimary",
+                          "colorSecondary": "MuiTypography-colorSecondary",
+                          "colorTextPrimary": "MuiTypography-colorTextPrimary",
+                          "colorTextSecondary": "MuiTypography-colorTextSecondary",
+                          "displayBlock": "MuiTypography-displayBlock",
+                          "displayInline": "MuiTypography-displayInline",
+                          "gutterBottom": "MuiTypography-gutterBottom",
+                          "h1": "MuiTypography-h1",
+                          "h2": "MuiTypography-h2",
+                          "h3": "MuiTypography-h3",
+                          "h4": "MuiTypography-h4",
+                          "h5": "MuiTypography-h5",
+                          "h6": "MuiTypography-h6",
+                          "noWrap": "MuiTypography-noWrap",
+                          "overline": "MuiTypography-overline",
+                          "paragraph": "MuiTypography-paragraph",
+                          "root": "MuiTypography-root",
+                          "srOnly": "MuiTypography-srOnly",
+                          "subtitle1": "MuiTypography-subtitle1",
+                          "subtitle2": "MuiTypography-subtitle2",
+                        }
+                      }
+                      color="textPrimary"
+                      variant="h2"
+                      variantMapping={
+                        Object {
+                          "body1": "p",
+                          "body2": "p",
+                          "h1": "h1",
+                          "h2": "h2",
+                          "h3": "h3",
+                          "h4": "h4",
+                          "h5": "h5",
+                          "h6": "h6",
+                          "subtitle1": "h2",
+                          "subtitle2": "h2",
+                        }
+                      }
+                    >
+                      <h2
+                        className="MuiTypography-root makeStyles-root-323 makeStyles-bannerContent-314 MuiTypography-h2 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+                      >
+                        Certificate of Carbon Removal
+                      </h2>
+                    </ForwardRef(Typography)>
+                  </WithStyles(ForwardRef(Typography))>
+                </Title>
+                <div
+                  className="makeStyles-bannerSideRight-313 makeStyles-bannerSide-310"
+                >
+                  <div
+                    className="makeStyles-whiteTriangle-311"
+                  />
+                  <div
+                    className="makeStyles-greenTriangle-312"
+                  />
+                </div>
+              </div>
+              <div
+                className="makeStyles-text-317"
+              >
+                Credits:
+                 
+                <b>
+                  1,000
+                   
+                  Carbon
+                  <i
+                    key="1"
+                  >
+                    Plus
+                  </i>
+                   Grasslands
+                </b>
+                <br />
+                Equivalent to: 
+                <b>
+                  1,000
+                   tons of CO2e
+                </b>
+                <br />
+                Beneficiary: 
+                <b>
+                  Marie Gauthier
+                </b>
+                <br />
+                Retirement: 
+                <b>
+                  Voluntary
+                </b>
+                <br />
+                Date: 
+                <b>
+                  October 10, 2020
+                </b>
+              </div>
+              <WithStyles(ForwardRef(Grid))
+                container={true}
+              >
+                <ForwardRef(Grid)
+                  classes={
+                    Object {
+                      "align-content-xs-center": "MuiGrid-align-content-xs-center",
+                      "align-content-xs-flex-end": "MuiGrid-align-content-xs-flex-end",
+                      "align-content-xs-flex-start": "MuiGrid-align-content-xs-flex-start",
+                      "align-content-xs-space-around": "MuiGrid-align-content-xs-space-around",
+                      "align-content-xs-space-between": "MuiGrid-align-content-xs-space-between",
+                      "align-items-xs-baseline": "MuiGrid-align-items-xs-baseline",
+                      "align-items-xs-center": "MuiGrid-align-items-xs-center",
+                      "align-items-xs-flex-end": "MuiGrid-align-items-xs-flex-end",
+                      "align-items-xs-flex-start": "MuiGrid-align-items-xs-flex-start",
+                      "container": "MuiGrid-container",
+                      "direction-xs-column": "MuiGrid-direction-xs-column",
+                      "direction-xs-column-reverse": "MuiGrid-direction-xs-column-reverse",
+                      "direction-xs-row-reverse": "MuiGrid-direction-xs-row-reverse",
+                      "grid-lg-1": "MuiGrid-grid-lg-1",
+                      "grid-lg-10": "MuiGrid-grid-lg-10",
+                      "grid-lg-11": "MuiGrid-grid-lg-11",
+                      "grid-lg-12": "MuiGrid-grid-lg-12",
+                      "grid-lg-2": "MuiGrid-grid-lg-2",
+                      "grid-lg-3": "MuiGrid-grid-lg-3",
+                      "grid-lg-4": "MuiGrid-grid-lg-4",
+                      "grid-lg-5": "MuiGrid-grid-lg-5",
+                      "grid-lg-6": "MuiGrid-grid-lg-6",
+                      "grid-lg-7": "MuiGrid-grid-lg-7",
+                      "grid-lg-8": "MuiGrid-grid-lg-8",
+                      "grid-lg-9": "MuiGrid-grid-lg-9",
+                      "grid-lg-auto": "MuiGrid-grid-lg-auto",
+                      "grid-lg-true": "MuiGrid-grid-lg-true",
+                      "grid-md-1": "MuiGrid-grid-md-1",
+                      "grid-md-10": "MuiGrid-grid-md-10",
+                      "grid-md-11": "MuiGrid-grid-md-11",
+                      "grid-md-12": "MuiGrid-grid-md-12",
+                      "grid-md-2": "MuiGrid-grid-md-2",
+                      "grid-md-3": "MuiGrid-grid-md-3",
+                      "grid-md-4": "MuiGrid-grid-md-4",
+                      "grid-md-5": "MuiGrid-grid-md-5",
+                      "grid-md-6": "MuiGrid-grid-md-6",
+                      "grid-md-7": "MuiGrid-grid-md-7",
+                      "grid-md-8": "MuiGrid-grid-md-8",
+                      "grid-md-9": "MuiGrid-grid-md-9",
+                      "grid-md-auto": "MuiGrid-grid-md-auto",
+                      "grid-md-true": "MuiGrid-grid-md-true",
+                      "grid-sm-1": "MuiGrid-grid-sm-1",
+                      "grid-sm-10": "MuiGrid-grid-sm-10",
+                      "grid-sm-11": "MuiGrid-grid-sm-11",
+                      "grid-sm-12": "MuiGrid-grid-sm-12",
+                      "grid-sm-2": "MuiGrid-grid-sm-2",
+                      "grid-sm-3": "MuiGrid-grid-sm-3",
+                      "grid-sm-4": "MuiGrid-grid-sm-4",
+                      "grid-sm-5": "MuiGrid-grid-sm-5",
+                      "grid-sm-6": "MuiGrid-grid-sm-6",
+                      "grid-sm-7": "MuiGrid-grid-sm-7",
+                      "grid-sm-8": "MuiGrid-grid-sm-8",
+                      "grid-sm-9": "MuiGrid-grid-sm-9",
+                      "grid-sm-auto": "MuiGrid-grid-sm-auto",
+                      "grid-sm-true": "MuiGrid-grid-sm-true",
+                      "grid-xl-1": "MuiGrid-grid-xl-1",
+                      "grid-xl-10": "MuiGrid-grid-xl-10",
+                      "grid-xl-11": "MuiGrid-grid-xl-11",
+                      "grid-xl-12": "MuiGrid-grid-xl-12",
+                      "grid-xl-2": "MuiGrid-grid-xl-2",
+                      "grid-xl-3": "MuiGrid-grid-xl-3",
+                      "grid-xl-4": "MuiGrid-grid-xl-4",
+                      "grid-xl-5": "MuiGrid-grid-xl-5",
+                      "grid-xl-6": "MuiGrid-grid-xl-6",
+                      "grid-xl-7": "MuiGrid-grid-xl-7",
+                      "grid-xl-8": "MuiGrid-grid-xl-8",
+                      "grid-xl-9": "MuiGrid-grid-xl-9",
+                      "grid-xl-auto": "MuiGrid-grid-xl-auto",
+                      "grid-xl-true": "MuiGrid-grid-xl-true",
+                      "grid-xs-1": "MuiGrid-grid-xs-1",
+                      "grid-xs-10": "MuiGrid-grid-xs-10",
+                      "grid-xs-11": "MuiGrid-grid-xs-11",
+                      "grid-xs-12": "MuiGrid-grid-xs-12",
+                      "grid-xs-2": "MuiGrid-grid-xs-2",
+                      "grid-xs-3": "MuiGrid-grid-xs-3",
+                      "grid-xs-4": "MuiGrid-grid-xs-4",
+                      "grid-xs-5": "MuiGrid-grid-xs-5",
+                      "grid-xs-6": "MuiGrid-grid-xs-6",
+                      "grid-xs-7": "MuiGrid-grid-xs-7",
+                      "grid-xs-8": "MuiGrid-grid-xs-8",
+                      "grid-xs-9": "MuiGrid-grid-xs-9",
+                      "grid-xs-auto": "MuiGrid-grid-xs-auto",
+                      "grid-xs-true": "MuiGrid-grid-xs-true",
+                      "item": "MuiGrid-item",
+                      "justify-xs-center": "MuiGrid-justify-xs-center",
+                      "justify-xs-flex-end": "MuiGrid-justify-xs-flex-end",
+                      "justify-xs-space-around": "MuiGrid-justify-xs-space-around",
+                      "justify-xs-space-between": "MuiGrid-justify-xs-space-between",
+                      "justify-xs-space-evenly": "MuiGrid-justify-xs-space-evenly",
+                      "root": "MuiGrid-root",
+                      "spacing-xs-0": "MuiGrid-spacing-xs-0",
+                      "spacing-xs-1": "MuiGrid-spacing-xs-1",
+                      "spacing-xs-10": "MuiGrid-spacing-xs-10",
+                      "spacing-xs-2": "MuiGrid-spacing-xs-2",
+                      "spacing-xs-3": "MuiGrid-spacing-xs-3",
+                      "spacing-xs-4": "MuiGrid-spacing-xs-4",
+                      "spacing-xs-5": "MuiGrid-spacing-xs-5",
+                      "spacing-xs-6": "MuiGrid-spacing-xs-6",
+                      "spacing-xs-7": "MuiGrid-spacing-xs-7",
+                      "spacing-xs-8": "MuiGrid-spacing-xs-8",
+                      "spacing-xs-9": "MuiGrid-spacing-xs-9",
+                      "wrap-xs-nowrap": "MuiGrid-wrap-xs-nowrap",
+                      "wrap-xs-wrap-reverse": "MuiGrid-wrap-xs-wrap-reverse",
+                      "zeroMinWidth": "MuiGrid-zeroMinWidth",
+                    }
+                  }
+                  container={true}
+                >
+                  <div
+                    className="MuiGrid-root MuiGrid-container"
+                  >
+                    <Stakeholder
+                      info={
+                        Object {
+                          "companyName": "Regen Network",
+                          "personName": "Christian Shearer",
+                          "personRole": "CEO",
+                        }
+                      }
+                      label="Issuer"
+                      withVerifier={true}
+                    >
+                      <WithStyles(ForwardRef(Grid))
+                        item={true}
+                        xs={4}
+                      >
+                        <ForwardRef(Grid)
+                          classes={
+                            Object {
+                              "align-content-xs-center": "MuiGrid-align-content-xs-center",
+                              "align-content-xs-flex-end": "MuiGrid-align-content-xs-flex-end",
+                              "align-content-xs-flex-start": "MuiGrid-align-content-xs-flex-start",
+                              "align-content-xs-space-around": "MuiGrid-align-content-xs-space-around",
+                              "align-content-xs-space-between": "MuiGrid-align-content-xs-space-between",
+                              "align-items-xs-baseline": "MuiGrid-align-items-xs-baseline",
+                              "align-items-xs-center": "MuiGrid-align-items-xs-center",
+                              "align-items-xs-flex-end": "MuiGrid-align-items-xs-flex-end",
+                              "align-items-xs-flex-start": "MuiGrid-align-items-xs-flex-start",
+                              "container": "MuiGrid-container",
+                              "direction-xs-column": "MuiGrid-direction-xs-column",
+                              "direction-xs-column-reverse": "MuiGrid-direction-xs-column-reverse",
+                              "direction-xs-row-reverse": "MuiGrid-direction-xs-row-reverse",
+                              "grid-lg-1": "MuiGrid-grid-lg-1",
+                              "grid-lg-10": "MuiGrid-grid-lg-10",
+                              "grid-lg-11": "MuiGrid-grid-lg-11",
+                              "grid-lg-12": "MuiGrid-grid-lg-12",
+                              "grid-lg-2": "MuiGrid-grid-lg-2",
+                              "grid-lg-3": "MuiGrid-grid-lg-3",
+                              "grid-lg-4": "MuiGrid-grid-lg-4",
+                              "grid-lg-5": "MuiGrid-grid-lg-5",
+                              "grid-lg-6": "MuiGrid-grid-lg-6",
+                              "grid-lg-7": "MuiGrid-grid-lg-7",
+                              "grid-lg-8": "MuiGrid-grid-lg-8",
+                              "grid-lg-9": "MuiGrid-grid-lg-9",
+                              "grid-lg-auto": "MuiGrid-grid-lg-auto",
+                              "grid-lg-true": "MuiGrid-grid-lg-true",
+                              "grid-md-1": "MuiGrid-grid-md-1",
+                              "grid-md-10": "MuiGrid-grid-md-10",
+                              "grid-md-11": "MuiGrid-grid-md-11",
+                              "grid-md-12": "MuiGrid-grid-md-12",
+                              "grid-md-2": "MuiGrid-grid-md-2",
+                              "grid-md-3": "MuiGrid-grid-md-3",
+                              "grid-md-4": "MuiGrid-grid-md-4",
+                              "grid-md-5": "MuiGrid-grid-md-5",
+                              "grid-md-6": "MuiGrid-grid-md-6",
+                              "grid-md-7": "MuiGrid-grid-md-7",
+                              "grid-md-8": "MuiGrid-grid-md-8",
+                              "grid-md-9": "MuiGrid-grid-md-9",
+                              "grid-md-auto": "MuiGrid-grid-md-auto",
+                              "grid-md-true": "MuiGrid-grid-md-true",
+                              "grid-sm-1": "MuiGrid-grid-sm-1",
+                              "grid-sm-10": "MuiGrid-grid-sm-10",
+                              "grid-sm-11": "MuiGrid-grid-sm-11",
+                              "grid-sm-12": "MuiGrid-grid-sm-12",
+                              "grid-sm-2": "MuiGrid-grid-sm-2",
+                              "grid-sm-3": "MuiGrid-grid-sm-3",
+                              "grid-sm-4": "MuiGrid-grid-sm-4",
+                              "grid-sm-5": "MuiGrid-grid-sm-5",
+                              "grid-sm-6": "MuiGrid-grid-sm-6",
+                              "grid-sm-7": "MuiGrid-grid-sm-7",
+                              "grid-sm-8": "MuiGrid-grid-sm-8",
+                              "grid-sm-9": "MuiGrid-grid-sm-9",
+                              "grid-sm-auto": "MuiGrid-grid-sm-auto",
+                              "grid-sm-true": "MuiGrid-grid-sm-true",
+                              "grid-xl-1": "MuiGrid-grid-xl-1",
+                              "grid-xl-10": "MuiGrid-grid-xl-10",
+                              "grid-xl-11": "MuiGrid-grid-xl-11",
+                              "grid-xl-12": "MuiGrid-grid-xl-12",
+                              "grid-xl-2": "MuiGrid-grid-xl-2",
+                              "grid-xl-3": "MuiGrid-grid-xl-3",
+                              "grid-xl-4": "MuiGrid-grid-xl-4",
+                              "grid-xl-5": "MuiGrid-grid-xl-5",
+                              "grid-xl-6": "MuiGrid-grid-xl-6",
+                              "grid-xl-7": "MuiGrid-grid-xl-7",
+                              "grid-xl-8": "MuiGrid-grid-xl-8",
+                              "grid-xl-9": "MuiGrid-grid-xl-9",
+                              "grid-xl-auto": "MuiGrid-grid-xl-auto",
+                              "grid-xl-true": "MuiGrid-grid-xl-true",
+                              "grid-xs-1": "MuiGrid-grid-xs-1",
+                              "grid-xs-10": "MuiGrid-grid-xs-10",
+                              "grid-xs-11": "MuiGrid-grid-xs-11",
+                              "grid-xs-12": "MuiGrid-grid-xs-12",
+                              "grid-xs-2": "MuiGrid-grid-xs-2",
+                              "grid-xs-3": "MuiGrid-grid-xs-3",
+                              "grid-xs-4": "MuiGrid-grid-xs-4",
+                              "grid-xs-5": "MuiGrid-grid-xs-5",
+                              "grid-xs-6": "MuiGrid-grid-xs-6",
+                              "grid-xs-7": "MuiGrid-grid-xs-7",
+                              "grid-xs-8": "MuiGrid-grid-xs-8",
+                              "grid-xs-9": "MuiGrid-grid-xs-9",
+                              "grid-xs-auto": "MuiGrid-grid-xs-auto",
+                              "grid-xs-true": "MuiGrid-grid-xs-true",
+                              "item": "MuiGrid-item",
+                              "justify-xs-center": "MuiGrid-justify-xs-center",
+                              "justify-xs-flex-end": "MuiGrid-justify-xs-flex-end",
+                              "justify-xs-space-around": "MuiGrid-justify-xs-space-around",
+                              "justify-xs-space-between": "MuiGrid-justify-xs-space-between",
+                              "justify-xs-space-evenly": "MuiGrid-justify-xs-space-evenly",
+                              "root": "MuiGrid-root",
+                              "spacing-xs-0": "MuiGrid-spacing-xs-0",
+                              "spacing-xs-1": "MuiGrid-spacing-xs-1",
+                              "spacing-xs-10": "MuiGrid-spacing-xs-10",
+                              "spacing-xs-2": "MuiGrid-spacing-xs-2",
+                              "spacing-xs-3": "MuiGrid-spacing-xs-3",
+                              "spacing-xs-4": "MuiGrid-spacing-xs-4",
+                              "spacing-xs-5": "MuiGrid-spacing-xs-5",
+                              "spacing-xs-6": "MuiGrid-spacing-xs-6",
+                              "spacing-xs-7": "MuiGrid-spacing-xs-7",
+                              "spacing-xs-8": "MuiGrid-spacing-xs-8",
+                              "spacing-xs-9": "MuiGrid-spacing-xs-9",
+                              "wrap-xs-nowrap": "MuiGrid-wrap-xs-nowrap",
+                              "wrap-xs-wrap-reverse": "MuiGrid-wrap-xs-wrap-reverse",
+                              "zeroMinWidth": "MuiGrid-zeroMinWidth",
+                            }
+                          }
+                          item={true}
+                          xs={4}
+                        >
+                          <div
+                            className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-4"
+                          >
+                            <div
+                              className="makeStyles-personName-318"
+                            >
+                              Christian Shearer
+                            </div>
+                            <hr
+                              className="makeStyles-hr-321"
+                            />
+                            <div
+                              className="makeStyles-companyInfo-319"
+                            >
+                              Issuer
+                              : 
+                              Regen Network
+                            </div>
+                            <div
+                              className="makeStyles-personInfo-320"
+                            >
+                              Christian Shearer
+                              , 
+                              CEO
+                            </div>
+                          </div>
+                        </ForwardRef(Grid)>
+                      </WithStyles(ForwardRef(Grid))>
+                    </Stakeholder>
+                    <Stakeholder
+                      info={
+                        Object {
+                          "companyName": "RSM Australia Pty Ltd",
+                          "personName": "Tim Pittaway",
+                          "personRole": "Partner",
+                        }
+                      }
+                      label="Verifier"
+                      withVerifier={true}
+                    >
+                      <WithStyles(ForwardRef(Grid))
+                        item={true}
+                        xs={4}
+                      >
+                        <ForwardRef(Grid)
+                          classes={
+                            Object {
+                              "align-content-xs-center": "MuiGrid-align-content-xs-center",
+                              "align-content-xs-flex-end": "MuiGrid-align-content-xs-flex-end",
+                              "align-content-xs-flex-start": "MuiGrid-align-content-xs-flex-start",
+                              "align-content-xs-space-around": "MuiGrid-align-content-xs-space-around",
+                              "align-content-xs-space-between": "MuiGrid-align-content-xs-space-between",
+                              "align-items-xs-baseline": "MuiGrid-align-items-xs-baseline",
+                              "align-items-xs-center": "MuiGrid-align-items-xs-center",
+                              "align-items-xs-flex-end": "MuiGrid-align-items-xs-flex-end",
+                              "align-items-xs-flex-start": "MuiGrid-align-items-xs-flex-start",
+                              "container": "MuiGrid-container",
+                              "direction-xs-column": "MuiGrid-direction-xs-column",
+                              "direction-xs-column-reverse": "MuiGrid-direction-xs-column-reverse",
+                              "direction-xs-row-reverse": "MuiGrid-direction-xs-row-reverse",
+                              "grid-lg-1": "MuiGrid-grid-lg-1",
+                              "grid-lg-10": "MuiGrid-grid-lg-10",
+                              "grid-lg-11": "MuiGrid-grid-lg-11",
+                              "grid-lg-12": "MuiGrid-grid-lg-12",
+                              "grid-lg-2": "MuiGrid-grid-lg-2",
+                              "grid-lg-3": "MuiGrid-grid-lg-3",
+                              "grid-lg-4": "MuiGrid-grid-lg-4",
+                              "grid-lg-5": "MuiGrid-grid-lg-5",
+                              "grid-lg-6": "MuiGrid-grid-lg-6",
+                              "grid-lg-7": "MuiGrid-grid-lg-7",
+                              "grid-lg-8": "MuiGrid-grid-lg-8",
+                              "grid-lg-9": "MuiGrid-grid-lg-9",
+                              "grid-lg-auto": "MuiGrid-grid-lg-auto",
+                              "grid-lg-true": "MuiGrid-grid-lg-true",
+                              "grid-md-1": "MuiGrid-grid-md-1",
+                              "grid-md-10": "MuiGrid-grid-md-10",
+                              "grid-md-11": "MuiGrid-grid-md-11",
+                              "grid-md-12": "MuiGrid-grid-md-12",
+                              "grid-md-2": "MuiGrid-grid-md-2",
+                              "grid-md-3": "MuiGrid-grid-md-3",
+                              "grid-md-4": "MuiGrid-grid-md-4",
+                              "grid-md-5": "MuiGrid-grid-md-5",
+                              "grid-md-6": "MuiGrid-grid-md-6",
+                              "grid-md-7": "MuiGrid-grid-md-7",
+                              "grid-md-8": "MuiGrid-grid-md-8",
+                              "grid-md-9": "MuiGrid-grid-md-9",
+                              "grid-md-auto": "MuiGrid-grid-md-auto",
+                              "grid-md-true": "MuiGrid-grid-md-true",
+                              "grid-sm-1": "MuiGrid-grid-sm-1",
+                              "grid-sm-10": "MuiGrid-grid-sm-10",
+                              "grid-sm-11": "MuiGrid-grid-sm-11",
+                              "grid-sm-12": "MuiGrid-grid-sm-12",
+                              "grid-sm-2": "MuiGrid-grid-sm-2",
+                              "grid-sm-3": "MuiGrid-grid-sm-3",
+                              "grid-sm-4": "MuiGrid-grid-sm-4",
+                              "grid-sm-5": "MuiGrid-grid-sm-5",
+                              "grid-sm-6": "MuiGrid-grid-sm-6",
+                              "grid-sm-7": "MuiGrid-grid-sm-7",
+                              "grid-sm-8": "MuiGrid-grid-sm-8",
+                              "grid-sm-9": "MuiGrid-grid-sm-9",
+                              "grid-sm-auto": "MuiGrid-grid-sm-auto",
+                              "grid-sm-true": "MuiGrid-grid-sm-true",
+                              "grid-xl-1": "MuiGrid-grid-xl-1",
+                              "grid-xl-10": "MuiGrid-grid-xl-10",
+                              "grid-xl-11": "MuiGrid-grid-xl-11",
+                              "grid-xl-12": "MuiGrid-grid-xl-12",
+                              "grid-xl-2": "MuiGrid-grid-xl-2",
+                              "grid-xl-3": "MuiGrid-grid-xl-3",
+                              "grid-xl-4": "MuiGrid-grid-xl-4",
+                              "grid-xl-5": "MuiGrid-grid-xl-5",
+                              "grid-xl-6": "MuiGrid-grid-xl-6",
+                              "grid-xl-7": "MuiGrid-grid-xl-7",
+                              "grid-xl-8": "MuiGrid-grid-xl-8",
+                              "grid-xl-9": "MuiGrid-grid-xl-9",
+                              "grid-xl-auto": "MuiGrid-grid-xl-auto",
+                              "grid-xl-true": "MuiGrid-grid-xl-true",
+                              "grid-xs-1": "MuiGrid-grid-xs-1",
+                              "grid-xs-10": "MuiGrid-grid-xs-10",
+                              "grid-xs-11": "MuiGrid-grid-xs-11",
+                              "grid-xs-12": "MuiGrid-grid-xs-12",
+                              "grid-xs-2": "MuiGrid-grid-xs-2",
+                              "grid-xs-3": "MuiGrid-grid-xs-3",
+                              "grid-xs-4": "MuiGrid-grid-xs-4",
+                              "grid-xs-5": "MuiGrid-grid-xs-5",
+                              "grid-xs-6": "MuiGrid-grid-xs-6",
+                              "grid-xs-7": "MuiGrid-grid-xs-7",
+                              "grid-xs-8": "MuiGrid-grid-xs-8",
+                              "grid-xs-9": "MuiGrid-grid-xs-9",
+                              "grid-xs-auto": "MuiGrid-grid-xs-auto",
+                              "grid-xs-true": "MuiGrid-grid-xs-true",
+                              "item": "MuiGrid-item",
+                              "justify-xs-center": "MuiGrid-justify-xs-center",
+                              "justify-xs-flex-end": "MuiGrid-justify-xs-flex-end",
+                              "justify-xs-space-around": "MuiGrid-justify-xs-space-around",
+                              "justify-xs-space-between": "MuiGrid-justify-xs-space-between",
+                              "justify-xs-space-evenly": "MuiGrid-justify-xs-space-evenly",
+                              "root": "MuiGrid-root",
+                              "spacing-xs-0": "MuiGrid-spacing-xs-0",
+                              "spacing-xs-1": "MuiGrid-spacing-xs-1",
+                              "spacing-xs-10": "MuiGrid-spacing-xs-10",
+                              "spacing-xs-2": "MuiGrid-spacing-xs-2",
+                              "spacing-xs-3": "MuiGrid-spacing-xs-3",
+                              "spacing-xs-4": "MuiGrid-spacing-xs-4",
+                              "spacing-xs-5": "MuiGrid-spacing-xs-5",
+                              "spacing-xs-6": "MuiGrid-spacing-xs-6",
+                              "spacing-xs-7": "MuiGrid-spacing-xs-7",
+                              "spacing-xs-8": "MuiGrid-spacing-xs-8",
+                              "spacing-xs-9": "MuiGrid-spacing-xs-9",
+                              "wrap-xs-nowrap": "MuiGrid-wrap-xs-nowrap",
+                              "wrap-xs-wrap-reverse": "MuiGrid-wrap-xs-wrap-reverse",
+                              "zeroMinWidth": "MuiGrid-zeroMinWidth",
+                            }
+                          }
+                          item={true}
+                          xs={4}
+                        >
+                          <div
+                            className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-4"
+                          >
+                            <div
+                              className="makeStyles-personName-318"
+                            >
+                              Tim Pittaway
+                            </div>
+                            <hr
+                              className="makeStyles-hr-321"
+                            />
+                            <div
+                              className="makeStyles-companyInfo-319"
+                            >
+                              Verifier
+                              : 
+                              RSM Australia Pty Ltd
+                            </div>
+                            <div
+                              className="makeStyles-personInfo-320"
+                            >
+                              Tim Pittaway
+                              , 
+                              Partner
+                            </div>
+                          </div>
+                        </ForwardRef(Grid)>
+                      </WithStyles(ForwardRef(Grid))>
+                    </Stakeholder>
+                    <Stakeholder
+                      info={
+                        Object {
+                          "companyName": "John Doe Ltd",
+                          "personName": "John Doe",
+                          "personRole": "Director",
+                        }
+                      }
+                      label="Land Owner"
+                      withVerifier={true}
+                    >
+                      <WithStyles(ForwardRef(Grid))
+                        item={true}
+                        xs={4}
+                      >
+                        <ForwardRef(Grid)
+                          classes={
+                            Object {
+                              "align-content-xs-center": "MuiGrid-align-content-xs-center",
+                              "align-content-xs-flex-end": "MuiGrid-align-content-xs-flex-end",
+                              "align-content-xs-flex-start": "MuiGrid-align-content-xs-flex-start",
+                              "align-content-xs-space-around": "MuiGrid-align-content-xs-space-around",
+                              "align-content-xs-space-between": "MuiGrid-align-content-xs-space-between",
+                              "align-items-xs-baseline": "MuiGrid-align-items-xs-baseline",
+                              "align-items-xs-center": "MuiGrid-align-items-xs-center",
+                              "align-items-xs-flex-end": "MuiGrid-align-items-xs-flex-end",
+                              "align-items-xs-flex-start": "MuiGrid-align-items-xs-flex-start",
+                              "container": "MuiGrid-container",
+                              "direction-xs-column": "MuiGrid-direction-xs-column",
+                              "direction-xs-column-reverse": "MuiGrid-direction-xs-column-reverse",
+                              "direction-xs-row-reverse": "MuiGrid-direction-xs-row-reverse",
+                              "grid-lg-1": "MuiGrid-grid-lg-1",
+                              "grid-lg-10": "MuiGrid-grid-lg-10",
+                              "grid-lg-11": "MuiGrid-grid-lg-11",
+                              "grid-lg-12": "MuiGrid-grid-lg-12",
+                              "grid-lg-2": "MuiGrid-grid-lg-2",
+                              "grid-lg-3": "MuiGrid-grid-lg-3",
+                              "grid-lg-4": "MuiGrid-grid-lg-4",
+                              "grid-lg-5": "MuiGrid-grid-lg-5",
+                              "grid-lg-6": "MuiGrid-grid-lg-6",
+                              "grid-lg-7": "MuiGrid-grid-lg-7",
+                              "grid-lg-8": "MuiGrid-grid-lg-8",
+                              "grid-lg-9": "MuiGrid-grid-lg-9",
+                              "grid-lg-auto": "MuiGrid-grid-lg-auto",
+                              "grid-lg-true": "MuiGrid-grid-lg-true",
+                              "grid-md-1": "MuiGrid-grid-md-1",
+                              "grid-md-10": "MuiGrid-grid-md-10",
+                              "grid-md-11": "MuiGrid-grid-md-11",
+                              "grid-md-12": "MuiGrid-grid-md-12",
+                              "grid-md-2": "MuiGrid-grid-md-2",
+                              "grid-md-3": "MuiGrid-grid-md-3",
+                              "grid-md-4": "MuiGrid-grid-md-4",
+                              "grid-md-5": "MuiGrid-grid-md-5",
+                              "grid-md-6": "MuiGrid-grid-md-6",
+                              "grid-md-7": "MuiGrid-grid-md-7",
+                              "grid-md-8": "MuiGrid-grid-md-8",
+                              "grid-md-9": "MuiGrid-grid-md-9",
+                              "grid-md-auto": "MuiGrid-grid-md-auto",
+                              "grid-md-true": "MuiGrid-grid-md-true",
+                              "grid-sm-1": "MuiGrid-grid-sm-1",
+                              "grid-sm-10": "MuiGrid-grid-sm-10",
+                              "grid-sm-11": "MuiGrid-grid-sm-11",
+                              "grid-sm-12": "MuiGrid-grid-sm-12",
+                              "grid-sm-2": "MuiGrid-grid-sm-2",
+                              "grid-sm-3": "MuiGrid-grid-sm-3",
+                              "grid-sm-4": "MuiGrid-grid-sm-4",
+                              "grid-sm-5": "MuiGrid-grid-sm-5",
+                              "grid-sm-6": "MuiGrid-grid-sm-6",
+                              "grid-sm-7": "MuiGrid-grid-sm-7",
+                              "grid-sm-8": "MuiGrid-grid-sm-8",
+                              "grid-sm-9": "MuiGrid-grid-sm-9",
+                              "grid-sm-auto": "MuiGrid-grid-sm-auto",
+                              "grid-sm-true": "MuiGrid-grid-sm-true",
+                              "grid-xl-1": "MuiGrid-grid-xl-1",
+                              "grid-xl-10": "MuiGrid-grid-xl-10",
+                              "grid-xl-11": "MuiGrid-grid-xl-11",
+                              "grid-xl-12": "MuiGrid-grid-xl-12",
+                              "grid-xl-2": "MuiGrid-grid-xl-2",
+                              "grid-xl-3": "MuiGrid-grid-xl-3",
+                              "grid-xl-4": "MuiGrid-grid-xl-4",
+                              "grid-xl-5": "MuiGrid-grid-xl-5",
+                              "grid-xl-6": "MuiGrid-grid-xl-6",
+                              "grid-xl-7": "MuiGrid-grid-xl-7",
+                              "grid-xl-8": "MuiGrid-grid-xl-8",
+                              "grid-xl-9": "MuiGrid-grid-xl-9",
+                              "grid-xl-auto": "MuiGrid-grid-xl-auto",
+                              "grid-xl-true": "MuiGrid-grid-xl-true",
+                              "grid-xs-1": "MuiGrid-grid-xs-1",
+                              "grid-xs-10": "MuiGrid-grid-xs-10",
+                              "grid-xs-11": "MuiGrid-grid-xs-11",
+                              "grid-xs-12": "MuiGrid-grid-xs-12",
+                              "grid-xs-2": "MuiGrid-grid-xs-2",
+                              "grid-xs-3": "MuiGrid-grid-xs-3",
+                              "grid-xs-4": "MuiGrid-grid-xs-4",
+                              "grid-xs-5": "MuiGrid-grid-xs-5",
+                              "grid-xs-6": "MuiGrid-grid-xs-6",
+                              "grid-xs-7": "MuiGrid-grid-xs-7",
+                              "grid-xs-8": "MuiGrid-grid-xs-8",
+                              "grid-xs-9": "MuiGrid-grid-xs-9",
+                              "grid-xs-auto": "MuiGrid-grid-xs-auto",
+                              "grid-xs-true": "MuiGrid-grid-xs-true",
+                              "item": "MuiGrid-item",
+                              "justify-xs-center": "MuiGrid-justify-xs-center",
+                              "justify-xs-flex-end": "MuiGrid-justify-xs-flex-end",
+                              "justify-xs-space-around": "MuiGrid-justify-xs-space-around",
+                              "justify-xs-space-between": "MuiGrid-justify-xs-space-between",
+                              "justify-xs-space-evenly": "MuiGrid-justify-xs-space-evenly",
+                              "root": "MuiGrid-root",
+                              "spacing-xs-0": "MuiGrid-spacing-xs-0",
+                              "spacing-xs-1": "MuiGrid-spacing-xs-1",
+                              "spacing-xs-10": "MuiGrid-spacing-xs-10",
+                              "spacing-xs-2": "MuiGrid-spacing-xs-2",
+                              "spacing-xs-3": "MuiGrid-spacing-xs-3",
+                              "spacing-xs-4": "MuiGrid-spacing-xs-4",
+                              "spacing-xs-5": "MuiGrid-spacing-xs-5",
+                              "spacing-xs-6": "MuiGrid-spacing-xs-6",
+                              "spacing-xs-7": "MuiGrid-spacing-xs-7",
+                              "spacing-xs-8": "MuiGrid-spacing-xs-8",
+                              "spacing-xs-9": "MuiGrid-spacing-xs-9",
+                              "wrap-xs-nowrap": "MuiGrid-wrap-xs-nowrap",
+                              "wrap-xs-wrap-reverse": "MuiGrid-wrap-xs-wrap-reverse",
+                              "zeroMinWidth": "MuiGrid-zeroMinWidth",
+                            }
+                          }
+                          item={true}
+                          xs={4}
+                        >
+                          <div
+                            className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-4"
+                          >
+                            <div
+                              className="makeStyles-personName-318"
+                            >
+                              John Doe
+                            </div>
+                            <hr
+                              className="makeStyles-hr-321"
+                            />
+                            <div
+                              className="makeStyles-companyInfo-319"
+                            >
+                              Land Owner
+                              : 
+                              John Doe Ltd
+                            </div>
+                            <div
+                              className="makeStyles-personInfo-320"
+                            >
+                              John Doe
+                              , 
+                              Director
+                            </div>
+                          </div>
+                        </ForwardRef(Grid)>
+                      </WithStyles(ForwardRef(Grid))>
+                    </Stakeholder>
+                  </div>
+                </ForwardRef(Grid)>
+              </WithStyles(ForwardRef(Grid))>
+            </div>
+          </div>
+        </Certificate>
+      </div>
+    </ThemeProvider>
+  </MuiDecorator>
+</WithChannel(MuiDecorator)>
+`;

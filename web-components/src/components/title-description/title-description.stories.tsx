@@ -6,6 +6,9 @@ export default {
   title: 'Components|TitleDescription',
   component: TitleDescription,
   decorators: [withKnobs],
+  parameters: {
+    fileName: __filename,
+  },
 };
 
 const titleText: string = 'Measuring Ecological Health';

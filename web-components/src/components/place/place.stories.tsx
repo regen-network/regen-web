@@ -7,6 +7,9 @@ export default {
   title: 'Components|Place',
   component: PlaceInfo,
   decorators: [withKnobs],
+  parameters: {
+    fileName: __filename,
+  },
 };
 
 const place: Place = {

@@ -1,12 +1,15 @@
 import * as React from 'react';
 import UserProfileForm from 'web-components/lib/components/form/UserProfileForm';
-import OrganizationProfileForm from 'web-components/lib/components/form/OrganizationProfileForm';
+// import OrganizationProfileForm from 'web-components/lib/components/form/OrganizationProfileForm';
 import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
 import LoginForm from 'web-components/lib/components/form/LoginForm';
 
 export default {
   title: 'Components|Forms',
   component: LoginForm,
+  parameters: {
+    fileName: __filename,
+  },
 };
 
 const submit = async (): Promise<void> => {

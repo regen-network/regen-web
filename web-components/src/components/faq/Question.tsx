@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 import ReactHtmlParser from 'react-html-parser';
 import clsx from 'clsx';
@@ -137,6 +137,10 @@ const Question = ({
 }: QuestionProps): JSX.Element => {
   const [open, setOpen] = React.useState(initOpen);
   const classes = useStyles({ first, last });
+
+  useEffect(() => {
+    setOpen(initOpen);
+  }, [initOpen]);
 
   const handleClick = (): void => {
     setOpen(prevOpen => !prevOpen);

@@ -17,14 +17,14 @@ exports.createPages = async ({ graphql, actions }) => {
 
   const faqResult = await graphql(`
     query {
-      faqCategoriesYaml {
+      faqYaml {
         categories {
           header
         }
       }
     }
   `);
-  faqResult.data.faqCategoriesYaml.categories.forEach(item => {
+  faqResult.data.faqYaml.categories.forEach(item => {
     createPage({
       path: `faq/${item.header}`,
       component: path.resolve(`./src/templates/Faq.tsx`),

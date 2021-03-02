@@ -31,12 +31,17 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const FAQPage = ({ location }: PageProps): JSX.Element => {
-  const classes = useStyles();
+interface Props extends PageProps {
+  pageContext: {
+    header: string;
+  };
+}
 
+const FAQPage = ({ pageContext, location }: Props): JSX.Element => {
+  const classes = useStyles();
   const data = useStaticQuery(graphql`
     query {
-      faqYaml {
+      faqYaml: faqYaml {
         categories {
           header
           questions {
@@ -47,13 +52,20 @@ const FAQPage = ({ location }: PageProps): JSX.Element => {
       }
     }
   `);
+  const search = new URLSearchParams(window.location.search);
+  const question = search.get('question');
 
   return (
     <>
       <SEO location={location} title="FAQ" description="Explore Regen Network’s frequently asked questions" />
       <div className={classes.root}>
         <Section title="FAQ" titleVariant="h1" titleClassName={classes.title} className={classes.section}>
-          <FAQ categories={data.faqYaml.categories} navigate={navigate} />
+          <FAQ
+            categories={data.faqYaml.categories}
+            navigate={navigate}
+            header={pageContext.header}
+            question={question}
+          />
         </Section>
       </div>
     </>

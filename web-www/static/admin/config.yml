@@ -852,6 +852,35 @@ collections:
             fields:
               - {label: "header", name: header, widget: string}
               - {label: "image", name: image, widget: image}
+      - label: Wallet Address Registration
+        name: "walletAddressRegistration"
+        file: "web-www/content/wallet-address-registration/index.yaml"
+        fields:
+          - label: "Top Section"
+            name: topSection
+            widget: object
+            fields:
+              - {label: Header, name: header, widget: string}
+              - {label: Body, name: body, widget: string}
+          - label: "Instructions Section"
+            name: instructionsSection
+            widget: object
+            fields:
+              - {label: "Header", name: header, widget: string}
+              - {label: "Body", name: body, widget: 'markdown'}
+          - label: "Wallet Button"
+            name: wallet
+            widget: object
+            fields:
+              - {label: "Button Text", name: buttonText, widget: string}
+              - {label: "Check Your Wallet Button Text", name: walletFoundButtonText, widget: string}
+              - {label: "No Wallet Found Button Text", name: noWalletFoundMessage, widget: 'markdown'}
+          - label: "Airtable Form"
+            name: form
+            widget: object
+            fields:
+              - {label: "Airtable Link", name: airtableLink, widget: string}
+              - {label: "Recaptcha Prompt Message", name: recaptchaMessage, widget: string}
   - label: "Case Studies content"
     name: "case-study-items"
     media_folder: '../../static/media'

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
@@ -13,6 +13,7 @@ import TimelineOppositeContent from '@material-ui/lab/TimelineOppositeContent';
 import clsx from 'clsx';
 
 import Title from '../title';
+import Modal from '../modal';
 
 interface StyleProps {
   color?: string;
@@ -38,6 +39,7 @@ interface Props {
 interface ContentProps {
   item: Item;
   index: number;
+  onTitleClick?: (url: string) => void;
 }
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
@@ -57,6 +59,10 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       marginRight: theme.spacing(4),
       marginLeft: theme.spacing(4),
     },
+  },
+  modal: {
+    padding: 0,
+    overflow: 'hidden',
   },
   content: props => ({
     backgroundColor: theme.palette.primary.main,
@@ -172,6 +178,9 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     [theme.breakpoints.down('xs')]: {
       fontSize: theme.spacing(5.25),
     },
+    '& a': {
+      cursor: 'pointer',
+    },
   },
   text: {
     [theme.breakpoints.down('xs')]: {
@@ -185,7 +194,7 @@ function Tag({ name, color }: Tag): JSX.Element {
   return <span className={classes.tag}>{name}</span>;
 }
 
-function Content({ item, index }: ContentProps): JSX.Element {
+function Content({ item, index, onTitleClick }: ContentProps): JSX.Element {
   const classes = useStyles({ even: index % 2 === 0 });
   return (
     <Grid container wrap="nowrap" className={classes.content}>
@@ -194,8 +203,8 @@ function Content({ item, index }: ContentProps): JSX.Element {
       </Grid>
       <Grid item className={classes.text}>
         <Title className={classes.title} variant="h3">
-          {item.url ? (
-            <Link href={item.url} color="inherit">
+          {item.url && onTitleClick ? (
+            <Link color="inherit" onClick={() => onTitleClick(item.url || '')}>
               {item.title}
             </Link>
           ) : (
@@ -214,6 +223,7 @@ function Content({ item, index }: ContentProps): JSX.Element {
 
 export default function NewTimeline({ items }: Props): JSX.Element {
   const classes = useStyles({});
+  const [iframeSrc, setIframeSrc] = useState('');
   return (
     <>
       <Box display={{ xs: 'none', md: 'block' }}>
@@ -236,7 +246,7 @@ export default function NewTimeline({ items }: Props): JSX.Element {
                   <TimelineConnector className={clsx(connectorClassName)} />
                 </TimelineSeparator>
                 <TimelineContent>
-                  <Content item={item} index={index} />
+                  <Content item={item} index={index} onTitleClick={setIframeSrc} />
                 </TimelineContent>
               </TimelineItem>
             );
@@ -267,6 +277,9 @@ export default function NewTimeline({ items }: Props): JSX.Element {
           })}
         </Timeline>
       </Box>
+      <Modal open={!!iframeSrc} onClose={() => setIframeSrc('')} className={classes.modal}>
+        <iframe title="airtable-signup-form" src={iframeSrc} />
+      </Modal>
     </>
   );
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useStaticQuery, graphql, PageProps, navigate } from 'gatsby';
 import { makeStyles, Theme } from '@material-ui/core';
 
@@ -52,8 +52,16 @@ const FAQPage = ({ pageContext, location }: Props): JSX.Element => {
       }
     }
   `);
-  const search = new URLSearchParams(window.location.search);
-  const question = search.get('question');
+  const [question, setQuestion] = useState<string | null>();
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      if (urlParams) {
+        setQuestion(urlParams.get('question'));
+      }
+    }
+  }, []);
 
   return (
     <>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { graphql } from 'gatsby';
+import { graphql, PageProps } from 'gatsby';
 
 import SEO from '../components/seo';
 import TopSection from '../sections/case-studies/case-study/TopSection';
@@ -11,11 +11,12 @@ import FundingSection from '../sections/case-studies/case-study/FundingSection';
 import ConclusionSection from '../sections/case-studies/case-study/ConclusionSection';
 import BottomSection from '../sections/case-studies/case-study/BottomSection';
 
-interface Props {
-  allCaseStudyItemsYaml: {
-    nodes: object[];
+interface Props extends PageProps {
+  data: {
+    allCaseStudyItemsYaml: {
+      nodes: any[];
+    };
   };
-  location: object;
 }
 
 const CaseStudy = ({ data, location }: Props): JSX.Element => {

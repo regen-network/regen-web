@@ -11,6 +11,7 @@ interface FAQSectionProps {
   category?: string;
   imageData: FluidObject;
   header: string;
+  children?: React.ReactChild;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -43,9 +44,20 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingBottom: theme.spacing(9.5),
     },
   },
+  children: {
+    color: theme.palette.primary.main,
+    '& a': {
+      color: theme.palette.secondary.main, //todo  lighten
+      fontWeight: 'bold',
+      textDecoration: 'none',
+      '&:link, &:visited, &:hover, &:active': {
+        textDecoration: 'none',
+      },
+    },
+  },
 }));
 
-const FAQSection = ({ header, imageData, category }: FAQSectionProps): JSX.Element => {
+const FAQSection = ({ header, imageData, category, children }: FAQSectionProps): JSX.Element => {
   const classes = useStyles();
   const theme = useTheme();
   return (
@@ -56,11 +68,15 @@ const FAQSection = ({ header, imageData, category }: FAQSectionProps): JSX.Eleme
         className={classes.root}
         title={header}
       >
-        <div className={classes.button}>
-          <Link to={`/faq/${category || ''}`}>
-            <ContainedButton>view faq</ContainedButton>
-          </Link>
-        </div>
+        {children ? (
+          <div className={classes.children}>{children}</div>
+        ) : (
+          <div className={classes.button}>
+            <Link to={`/faq/${category || ''}`}>
+              <ContainedButton>view faq</ContainedButton>
+            </Link>
+          </div>
+        )}
       </Section>
     </BackgroundImage>
   );

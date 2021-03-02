@@ -138,7 +138,8 @@ timelineSection:
         - name: farmer
           color: "#7BC796"
 moreQuestionsSection:
-  header: More questions? Dig into our FAQ.
+  header: Are you a interested in getting paid for your ecological practices?
+  description: md// Get started by reading our Regen Registry documentation on our <a href="/resources">Resources page</a>, and check out our <a href="/faq">FAQ</a>.
 popup:
   buttonText: Start the process
   airtableLink: https://airtable.com/embed/shrnnbymyofPB75WQ

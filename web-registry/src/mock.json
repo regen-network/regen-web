@@ -78,7 +78,7 @@
           "date": "December 11, 2020",
           "url": "https://regen-registry.s3.amazonaws.com/projects/woodburn/WOODBURN+Project+Plan.pdf"
         },
-                {
+        {
           "name": "Monitoring Report 2017 (Baseline)",
           "type": "Monitoring",
           "date": "December 14, 2020",
@@ -455,7 +455,32 @@
     },
     {
       "id": "cavan-station",
-      "documents": [],
+      "documents": [
+        {
+          "name": "Monitoring Report 2017 (Baseline)",
+          "type": "Monitoring",
+          "date": "February 18, 2021",
+          "url": "https://regen-registry.s3.amazonaws.com/projects/cavan-station/TheCavanStationProject_2017_CombinedBaseline.pdf"
+        },
+        {
+          "name": "Monitoring Report 2018",
+          "type": "Monitoring",
+          "date": "February 18, 2021",
+          "url": "https://regen-registry.s3.amazonaws.com/projects/cavan-station/TheCavanStation_2018_CombinedReport.pdf"
+        },
+        {
+          "name": "Monitoring Report 2019",
+          "type": "Monitoring",
+          "date": "February 18, 2021",
+          "url": "https://regen-registry.s3.amazonaws.com/projects/cavan-station/TheCavanStation_2019_CombinedReport.pdf"
+        },
+        {
+          "name": "Monitoring Report 2020",
+          "type": "Monitoring",
+          "date": "February 18, 2021",
+          "url": "https://regen-registry.s3.amazonaws.com/projects/cavan-station/TheCavanStation_2020_CombinedReport.pdf"
+        }
+      ],
       "name": "Cavan Station",
       "fieldsOverride": {
         "nonMonitoredImpact": {

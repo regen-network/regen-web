@@ -1,18 +1,29 @@
 topSection:
   header: Regen Network wallet address registration
-  body: As we approach the mainnet launch of Regen Network, all REGEN (formerly XRN) token holders will need to register a valid Regen Network wallet address in order for your tokens to be allocated. YOU MUST register a Regen Network wallet address via this page by Feb 10, 2021. This is the only way to receive your token allocation.
+  body: As we approach the mainnet launch of Regen Network, all REGEN (formerly
+    XRN) token holders will need to register a valid Regen Network wallet
+    address in order for your tokens to be allocated. YOU MUST register a Regen
+    Network wallet address via this page by Feb 10, 2021. This is the only way
+    to receive your token allocation.
 instructionsSection:
   header: Instructions
   body: >-
-    md//For security purposes, we require a photo of yourself (laptop or phone camera is fine) holding a piece of paper with the last 4 digits of your wallet address in writing in one hand, and one form of identification (drivers license / passport) in the other hand.
-    
+    md//For security purposes, we require a photo of yourself (laptop or phone
+    camera is fine) holding a piece of paper with the last 4 digits of your
+    wallet address in writing in one hand, and one form of identification
+    (drivers license / passport) in the other hand.
+
 
     Please follow the <a href="#" target="_blank">Regen Ledger wallet tutorial</a> to generate your wallet address, and make sure you adhere to the relevant security guidelines. This is the wallet that we will be sending your REGEN tokens to, and there is no way to recover those tokens should you lose access to the wallet.
+
+
+    Once you have generated your Regen Wallet address in Keplr and clicked the "connect to keplr wallet" button below please click the recaptcha and fill out the form to register that address.
 wallet:
   buttonText: Connect to keplr wallet
   walletFoundButtonText: Check Keplr for your Regen address
-  noWalletFoundMessage: >-
-    md//No wallet found. Please download the Keplr Wallet Extension <a href="https://keplr.app/" target="_blank">here</a> (desktop only). 
+  noWalletFoundMessage: 'md//No wallet found. Please download the Keplr Wallet
+    Extension <a href="https://keplr.app/" target="_blank">here</a> (desktop
+    only). '
 form:
   airtableLink: https://airtable.com/embed/shr6WvFH9ix5Uy33A
-  recaptchaMessage: Confirm below to see the form.
+  recaptchaMessage: Confirm below to see the registration form.

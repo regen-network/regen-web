@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactChild } from 'react';
 import { Theme, makeStyles, useTheme } from '@material-ui/core/styles';
 import BackgroundImage from 'gatsby-background-image';
 import { Link } from 'gatsby';
@@ -11,7 +11,7 @@ interface FAQSectionProps {
   category?: string;
   imageData: FluidObject;
   header: string;
-  children?: React.ReactChild;
+  children?: ReactChild;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({

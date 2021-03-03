@@ -12,11 +12,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   content: {
     display: 'flex',
     flexDirection: 'column',
+    maxWidth: theme.spacing(200),
   },
   description: {
     color: theme.palette.primary.main,
-    fontSize: theme.spacing(7),
-    fontWeight: 600,
+    fontSize: theme.spacing(6),
     textAlign: 'center',
     '& a': {
       color: theme.palette.secondary.light,
@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   buttons: {
     display: 'flex',
-    justifyContent: 'space-evenly',
+    justifyContent: 'center',
     marginTop: theme.spacing(5),
     paddingTop: theme.spacing(5),
     paddingBottom: theme.spacing(5),
@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   button: {
-    width: 290,
+    width: theme.spacing(72),
     [theme.breakpoints.down('xs')]: {
       padding: `${theme.spacing(3)} ${theme.spacing(4)}`,
       fontSize: '1.125rem',
@@ -53,8 +53,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     [theme.breakpoints.up('sm')]: {
       fontSize: '1.3125rem',
-      marginRight: theme.spacing(3),
-      marginLeft: theme.spacing(3),
+      marginRight: theme.spacing(4),
+      marginLeft: theme.spacing(4),
     },
   },
 }));

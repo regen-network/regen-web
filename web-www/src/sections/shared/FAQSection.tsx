@@ -16,6 +16,9 @@ interface FAQSectionProps {
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
     [theme.breakpoints.down('xs')]: {
       marginTop: theme.spacing(20),
       paddingTop: theme.spacing(52.5),
@@ -36,6 +39,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     textAlign: 'center',
   },
   title: {
+    maxWidth: theme.spacing(172),
     [theme.breakpoints.down('xs')]: {
       fontSize: theme.spacing(8),
       paddingBottom: theme.spacing(7.5),
@@ -46,6 +50,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   children: {
     display: 'flex',
+    justifyContent: 'center',
   },
 }));
 

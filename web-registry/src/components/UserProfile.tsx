@@ -8,6 +8,7 @@ import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import Description from 'web-components/lib/components/description';
 import Banner from 'web-components/lib/components/banner';
 import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
+import UserProfileForm, { UserProfileValues } from 'web-components/lib/components/form/UserProfileForm';
 import getApiUri from '../lib/apiUri';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -72,6 +73,10 @@ export default function ConfirmEmail(): JSX.Element {
       });
   }, [email]);
 
+  async function submitUserProfile(values: UserProfileValues): Promise<void> {
+    console.log('values :>> ', values);
+  }
+
   return (
     <OnBoardingSection title={title}>
       {success === 'true' && <Banner text="Email address confirmed!" />}
@@ -87,7 +92,7 @@ export default function ConfirmEmail(): JSX.Element {
         </>
       )}
       {/* TODO: add user profile form here https://github.com/regen-network/regen-registry/issues/351 */}
-      {showForm && <div>form</div>}
+      {showForm && <UserProfileForm submit={submitUserProfile} />}
     </OnBoardingSection>
   );
 }

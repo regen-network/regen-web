@@ -76,6 +76,7 @@ const MoreQuestionsSection = ({ startSellerFlow }: MoreQuestionsSectionProps): J
           header
           description
           firstButtonText
+          firstButtonUrl
           secondButtonText
         }
       }
@@ -89,7 +90,7 @@ const MoreQuestionsSection = ({ startSellerFlow }: MoreQuestionsSectionProps): J
       <div className={classes.content}>
         <Description className={classes.description}>{ReactHtmlParser(content.description)}</Description>
         <div className={classes.buttons}>
-          <ContainedButton className={classes.button} href="/resources">
+          <ContainedButton className={classes.button} href={content.firstButtonUrl}>
             {content.firstButtonText}
           </ContainedButton>
           <OutlinedButton className={classes.button} onClick={startSellerFlow}>

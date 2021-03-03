@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   buttons: {
     display: 'flex',
     justifyContent: 'center',
-    marginTop: theme.spacing(5),
+    marginTop: theme.spacing(7),
     paddingTop: theme.spacing(5),
     paddingBottom: theme.spacing(5),
     [theme.breakpoints.down('xs')]: {

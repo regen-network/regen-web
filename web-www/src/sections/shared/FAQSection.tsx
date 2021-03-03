@@ -45,15 +45,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   children: {
-    color: theme.palette.primary.main,
-    '& a': {
-      color: theme.palette.secondary.main, //todo  lighten
-      fontWeight: 'bold',
-      textDecoration: 'none',
-      '&:link, &:visited, &:hover, &:active': {
-        textDecoration: 'none',
-      },
-    },
+    display: 'flex',
   },
 }));
 

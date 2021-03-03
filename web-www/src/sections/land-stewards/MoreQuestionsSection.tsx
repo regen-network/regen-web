@@ -20,6 +20,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     textAlign: 'center',
     '& a': {
       color: theme.palette.secondary.light,
+      '&:link': {
+        textDecoration: 'underline',
+      },
     },
     [theme.breakpoints.down('xs')]: {
       fontSize: theme.spacing(5),

@@ -1,84 +1,24 @@
 import React from 'react';
-import { useStaticQuery, graphql } from 'gatsby';
-import { makeStyles, Theme } from '@material-ui/core';
+import { useStaticQuery, graphql, PageProps } from 'gatsby';
 
-import SEO from '../components/seo';
-import Section from 'web-components/src/components/section';
-import FAQ from 'web-components/lib/components/faq';
+import Faq from '../components/Faq';
 
-const useStyles = makeStyles((theme: Theme) => ({
-  root: {
-    backgroundColor: theme.palette.grey[200],
-  },
-  section: {
-    [theme.breakpoints.up('sm')]: {
-      paddingTop: theme.spacing(13.75),
-      paddingBottom: theme.spacing(30),
-    },
-    [theme.breakpoints.down('xs')]: {
-      paddingTop: theme.spacing(7.5),
-      paddingBottom: theme.spacing(20),
-      position: 'relative',
-    },
-  },
-  title: {
-    [theme.breakpoints.up('sm')]: {
-      paddingBottom: theme.spacing(12),
-    },
-    [theme.breakpoints.down('xs')]: {
-      paddingBottom: theme.spacing(7.5),
-    },
-  },
-}));
-
-interface props {
-  location: object;
-}
-
-const FAQPage = ({ location }: props): JSX.Element => {
-  const classes = useStyles();
-
+const FAQPage = (props: PageProps): JSX.Element => {
   const data = useStaticQuery(graphql`
     query {
-      content: faqYaml {
+      faqYaml {
         categories {
-          name
-        }
-      }
-      md: allMarkdownRemark(sort: { order: ASC, fields: frontmatter___title }, filter: {fileAbsolutePath: {regex: "/(faq)/.*\\.md$/"}}) {
-        nodes {
-          html
-          frontmatter {
-            description
-            category
+          header
+          questions {
+            question
+            answer
           }
         }
       }
     }
   `);
 
-  const questions = data.md.nodes.reduce((r, a) => {
-    r[a.frontmatter.category.toLowerCase().trim()] = [
-      ...(r[a.frontmatter.category.toLowerCase().trim()] || []),
-      { question: a.frontmatter.description, answer: a.html },
-    ];
-    return r;
-  }, {});
-
-  return (
-    <>
-      <SEO location={location} title="FAQ" description="Explore Regen Network’s frequently asked questions" />
-      <div className={classes.root}>
-        <Section title="FAQ" titleVariant="h1" titleClassName={classes.title} className={classes.section}>
-          <FAQ
-            categories={data.content.categories.map((c: { name: string }) => c.name)}
-            questions={questions}
-            defaultCategory={location && location.state && location.state.category}
-          />
-        </Section>
-      </div>
-    </>
-  );
+  return <Faq categories={data.faqYaml.categories} {...props} />;
 };
 
 export default FAQPage;

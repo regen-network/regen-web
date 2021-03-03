@@ -439,6 +439,7 @@ collections:
                 collapsed: false
                 fields:
                   - {label: "Header", name: title, widget: string}
+                  - {label: "Url", name: url, widget: string}
                   - {label: "Image", name: image, widget: image}
                   - label: Tags
                     name: tags
@@ -747,8 +748,8 @@ collections:
                 collapsed: false
                 fields:
                   - {label: "image", name: image, widget: image}
-      - label: FAQ Categories
-        name: "faq-categories"
+      - label: FAQ
+        name: "faq"
         file: "web-www/content/faq/index.yaml"
         fields:
           - label: categories
@@ -756,7 +757,13 @@ collections:
             widget: list
             collapsed: false
             fields:
-              - {label: "name", name: name, widget: string}
+              - {label: "Category name", name: header, widget: string}
+              - label: Questions
+                name: questions
+                widget: list
+                fields:
+                  - {label: "Question", name: question, widget: string}
+                  - {label: "Answer", name: answer, widget: markdown}
       - label: Validators
         name: validators
         file: "web-www/content/validators/index.yaml"
@@ -846,19 +853,35 @@ collections:
             fields:
               - {label: "header", name: header, widget: string}
               - {label: "image", name: image, widget: image}
-  - label: "FAQ"
-    name: "faq"
-    editor:
-      preview: false
-    create: true
-    folder: "web-www/content/faq"
-    path: '{{category}}/question{{slug}}'
-    summary: '{{category}} - question {{slug}}'
-    fields:
-      - { label: 'Category (Make sure to add a new category from "Other Pages" -> "FAQ Categories" first)', name: 'category', widget: 'string' }
-      - { label: 'Question number', name: 'title', widget: 'string' }
-      - { label: 'Question', name: 'description', widget: 'string' }
-      - { label: 'Answer', name: 'body', widget: 'markdown' }
+      - label: Wallet Address Registration
+        name: "walletAddressRegistration"
+        file: "web-www/content/wallet-address-registration/index.yaml"
+        fields:
+          - label: "Top Section"
+            name: topSection
+            widget: object
+            fields:
+              - {label: Header, name: header, widget: string}
+              - {label: Body, name: body, widget: string}
+          - label: "Instructions Section"
+            name: instructionsSection
+            widget: object
+            fields:
+              - {label: "Header", name: header, widget: string}
+              - {label: "Body", name: body, widget: 'markdown'}
+          - label: "Wallet Button"
+            name: wallet
+            widget: object
+            fields:
+              - {label: "Button Text", name: buttonText, widget: string}
+              - {label: "Check Your Wallet Button Text", name: walletFoundButtonText, widget: string}
+              - {label: "No Wallet Found Button Text", name: noWalletFoundMessage, widget: 'markdown'}
+          - label: "Airtable Form"
+            name: form
+            widget: object
+            fields:
+              - {label: "Airtable Link", name: airtableLink, widget: string}
+              - {label: "Recaptcha Prompt Message", name: recaptchaMessage, widget: string}
   - label: "Case Studies content"
     name: "case-study-items"
     media_folder: '../../static/media'

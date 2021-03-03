@@ -174,7 +174,7 @@ coreSection:
       twitterUrl: https://twitter.com/erikalogie
       githubUrl: https://github.com/erikalogie
     - name: "Sophia Leiker "
-      title: Data Scientist and GIS Analyst
+      title: Geospatial Environmental Researcher and Project Analyst
       description: >
         Sophia is a geospatial researcher with experience employing remote
         sensing techniques and GIS analysis to address environmental inquiries.
@@ -184,7 +184,7 @@ coreSection:
         management.
       image: ../../static/media/sophia.png
     - name: "Sam Bennetts "
-      title: Data Scientist and GIS Analyst
+      title: Applied Scientist and GIS Developer
       description: Sam is a GIS and remote sensing specialist focused on designing
         programmatic solutions to geospatial problems. Sam's work includes
         urbanization, land cover change studies, glacier dynamics, and sea level

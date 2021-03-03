@@ -18,17 +18,12 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontSize: theme.spacing(7),
     fontWeight: 600,
     textAlign: 'center',
-
-    // [theme.breakpoints.down('xs')]: {
-    //   fontSize: theme.spacing(3),
-    //   padding: `${theme.spacing(2.5)} ${theme.spacing(4)}`,
-    // },
-    // [theme.breakpoints.up('sm')]: {
-    //   fontSize: theme.spacing(3.5),
-    //   padding: `${theme.spacing(2)} ${theme.spacing(5)}`,
-    // },
     '& a': {
       color: theme.palette.secondary.light,
+    },
+    [theme.breakpoints.down('xs')]: {
+      fontSize: theme.spacing(5),
+      padding: `${theme.spacing(2.5)} ${theme.spacing(4)}`,
     },
   },
   buttons: {
@@ -37,22 +32,35 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginTop: theme.spacing(5),
     paddingTop: theme.spacing(5),
     paddingBottom: theme.spacing(5),
+    [theme.breakpoints.down('xs')]: {
+      flexDirection: 'column',
+      alignItems: 'center',
+      paddingTop: 0,
+      paddingBottom: 0,
+    },
   },
   button: {
-    width: 300, //todo
-
+    width: 290,
     [theme.breakpoints.down('xs')]: {
       padding: `${theme.spacing(3)} ${theme.spacing(4)}`,
       fontSize: '1.125rem',
-      width: 250, //todo
+      '&:first-child': {
+        marginBottom: theme.spacing(6),
+      },
     },
     [theme.breakpoints.up('sm')]: {
       fontSize: '1.3125rem',
+      marginRight: theme.spacing(3),
+      marginLeft: theme.spacing(3),
     },
   },
 }));
 
-const MoreQuestionsSection = (): JSX.Element => {
+interface MoreQuestionsSectionProps {
+  startSellerFlow: () => void;
+}
+
+const MoreQuestionsSection = ({ startSellerFlow }: MoreQuestionsSectionProps): JSX.Element => {
   const classes = useStyles({});
   const data = useStaticQuery(graphql`
     query {
@@ -67,6 +75,8 @@ const MoreQuestionsSection = (): JSX.Element => {
         moreQuestionsSection {
           header
           description
+          firstButtonText
+          secondButtonText
         }
       }
     }
@@ -79,8 +89,12 @@ const MoreQuestionsSection = (): JSX.Element => {
       <div className={classes.content}>
         <Description className={classes.description}>{ReactHtmlParser(content.description)}</Description>
         <div className={classes.buttons}>
-          <ContainedButton className={classes.button}>view resources</ContainedButton>
-          <OutlinedButton className={classes.button}>start the process</OutlinedButton>
+          <ContainedButton className={classes.button} href="/resources">
+            {content.firstButtonText}
+          </ContainedButton>
+          <OutlinedButton className={classes.button} onClick={startSellerFlow}>
+            {content.secondButtonText}
+          </OutlinedButton>
         </div>
       </div>
     </FAQSection>

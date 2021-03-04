@@ -9,6 +9,11 @@ import ContainedButton from 'web-components/src/components/buttons/ContainedButt
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 
 const useStyles = makeStyles((theme: Theme) => ({
+  faqSection: {
+    '& h2': {
+      paddingBottom: 0,
+    },
+  },
   content: {
     display: 'flex',
     flexDirection: 'column',
@@ -16,7 +21,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   description: {
     color: theme.palette.primary.main,
-    fontSize: theme.spacing(6),
+    fontSize: theme.spacing(5.75),
     textAlign: 'center',
     '& a': {
       color: theme.palette.secondary.light,
@@ -32,7 +37,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   buttons: {
     display: 'flex',
     justifyContent: 'center',
-    marginTop: theme.spacing(7),
     paddingTop: theme.spacing(5),
     paddingBottom: theme.spacing(5),
     [theme.breakpoints.down('xs')]: {
@@ -46,13 +50,13 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: theme.spacing(72),
     [theme.breakpoints.down('xs')]: {
       padding: `${theme.spacing(3)} ${theme.spacing(4)}`,
-      fontSize: '1.125rem',
+      fontSize: theme.spacing(4.5),
       '&:first-child': {
         marginBottom: theme.spacing(6),
       },
     },
     [theme.breakpoints.up('sm')]: {
-      fontSize: '1.3125rem',
+      fontSize: theme.spacing(5.25),
       marginRight: theme.spacing(4),
       marginLeft: theme.spacing(4),
     },
@@ -89,19 +93,21 @@ const MoreQuestionsSection = ({ startSellerFlow }: MoreQuestionsSectionProps): J
   const imageData = data.background.childImageSharp.fluid;
 
   return (
-    <FAQSection header={content.header} category="carbonplus credits" imageData={imageData}>
-      <div className={classes.content}>
-        <Description className={classes.description}>{ReactHtmlParser(content.description)}</Description>
-        <div className={classes.buttons}>
-          <ContainedButton className={classes.button} href={content.firstButtonUrl}>
-            {content.firstButtonText}
-          </ContainedButton>
-          <OutlinedButton className={classes.button} onClick={startSellerFlow}>
-            {content.secondButtonText}
-          </OutlinedButton>
+    <div className={classes.faqSection}>
+      <FAQSection header={content.header} category="carbonplus credits" imageData={imageData}>
+        <div className={classes.content}>
+          <Description className={classes.description}>{ReactHtmlParser(content.description)}</Description>
+          <div className={classes.buttons}>
+            <ContainedButton className={classes.button} href={content.firstButtonUrl}>
+              {content.firstButtonText}
+            </ContainedButton>
+            <OutlinedButton className={classes.button} onClick={startSellerFlow}>
+              {content.secondButtonText}
+            </OutlinedButton>
+          </div>
         </div>
-      </div>
-    </FAQSection>
+      </FAQSection>
+    </div>
   );
 };
 

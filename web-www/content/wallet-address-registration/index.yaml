@@ -25,5 +25,5 @@ wallet:
     Extension <a href="https://keplr.app/" target="_blank">here</a> (desktop
     only). '
 form:
-  airtableLink: https://airtable.com/embed/shr6WvFH9ix5Uy33A
+  airtableLink: https://airtable.com/embed/shr0tkaMm4b2IMgna
   recaptchaMessage: Confirm below to see the registration form.

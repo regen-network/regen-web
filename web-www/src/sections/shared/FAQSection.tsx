@@ -3,6 +3,7 @@ import { Theme, makeStyles, useTheme } from '@material-ui/core/styles';
 import BackgroundImage from 'gatsby-background-image';
 import { Link } from 'gatsby';
 import { FluidObject } from 'gatsby-image';
+import clsx from 'clsx';
 
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import Section from 'web-components/src/components/section';
@@ -48,6 +49,11 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingBottom: theme.spacing(9.5),
     },
   },
+  withChildren: {
+    '& $title': {
+      paddingBottom: 0,
+    },
+  },
   children: {
     display: 'flex',
     justifyContent: 'center',
@@ -62,7 +68,7 @@ const FAQSection = ({ header, imageData, category, children }: FAQSectionProps):
       <Section
         titleColor={theme.palette.primary.main}
         titleClassName={classes.title}
-        className={classes.root}
+        className={clsx(classes.root, children && classes.withChildren)}
         title={header}
       >
         {children ? (

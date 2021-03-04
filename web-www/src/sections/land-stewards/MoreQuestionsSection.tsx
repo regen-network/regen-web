@@ -9,11 +9,6 @@ import ContainedButton from 'web-components/src/components/buttons/ContainedButt
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 
 const useStyles = makeStyles((theme: Theme) => ({
-  faqSection: {
-    '& h2': {
-      paddingBottom: 0,
-    },
-  },
   content: {
     display: 'flex',
     flexDirection: 'column',
@@ -93,21 +88,19 @@ const MoreQuestionsSection = ({ startSellerFlow }: MoreQuestionsSectionProps): J
   const imageData = data.background.childImageSharp.fluid;
 
   return (
-    <div className={classes.faqSection}>
-      <FAQSection header={content.header} category="carbonplus credits" imageData={imageData}>
-        <div className={classes.content}>
-          <Description className={classes.description}>{ReactHtmlParser(content.description)}</Description>
-          <div className={classes.buttons}>
-            <ContainedButton className={classes.button} href={content.firstButtonUrl}>
-              {content.firstButtonText}
-            </ContainedButton>
-            <OutlinedButton className={classes.button} onClick={startSellerFlow}>
-              {content.secondButtonText}
-            </OutlinedButton>
-          </div>
+    <FAQSection header={content.header} category="carbonplus credits" imageData={imageData}>
+      <div className={classes.content}>
+        <Description className={classes.description}>{ReactHtmlParser(content.description)}</Description>
+        <div className={classes.buttons}>
+          <ContainedButton className={classes.button} href={content.firstButtonUrl}>
+            {content.firstButtonText}
+          </ContainedButton>
+          <OutlinedButton className={classes.button} onClick={startSellerFlow}>
+            {content.secondButtonText}
+          </OutlinedButton>
         </div>
-      </FAQSection>
-    </div>
+      </div>
+    </FAQSection>
   );
 };
 

@@ -57,7 +57,7 @@ const WalletConnectionButton = ({ isKeplrDetected }: WalletConnectionButtonProps
     }
   `);
   const content = data?.text?.wallet;
-  const chainId = 'regen-devnet-4';
+  const chainId = 'regen-devnet-5';
 
   const connectToKeplr = async (): Promise<any> => {
     if (window.keplr) {
@@ -103,12 +103,12 @@ const WalletConnectionButton = ({ isKeplrDetected }: WalletConnectionButtonProps
           //   bech32PrefixConsPub: string;
           // }
           bech32Config: {
-            bech32PrefixAccAddr: 'regen:',
-            bech32PrefixAccPub: 'regen:pub',
-            bech32PrefixValAddr: 'regen:valoper',
-            bech32PrefixValPub: 'regen:valoperpub',
-            bech32PrefixConsAddr: 'regen:valcons',
-            bech32PrefixConsPub: 'regen:valconspub',
+            bech32PrefixAccAddr: 'regen',
+            bech32PrefixAccPub: 'regenpub',
+            bech32PrefixValAddr: 'regenvaloper',
+            bech32PrefixValPub: 'regenvaloperpub',
+            bech32PrefixConsAddr: 'regenvalcons',
+            bech32PrefixConsPub: 'regenvalconspub',
           },
           // List of all coin/tokens used in this chain.
           currencies: [

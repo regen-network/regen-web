@@ -3,6 +3,7 @@ import { makeStyles, Theme, useMediaQuery, useTheme } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import Slider from 'react-slick';
 import PlayIcon from '../icons/PlayIcon';
+import Image from '../image';
 
 export interface Media {
   src: string;
@@ -209,7 +210,7 @@ export default function ProjectMedia({
     customPaging: (i: number) => {
       return matches ? (
         <div className={classes.thumbnail}>
-          <img width={60} height={60} src={assets[i].thumbnail} alt={assets[i].thumbnail} />
+          <Image width={60} height={60} src={assets[i].thumbnail || ''} alt={assets[i].thumbnail} />
           {assets[i].type === 'video' && (
             <div className={classes.play}>
               <PlayIcon width="10.85px" height="10.85px" />
@@ -227,18 +228,18 @@ export default function ProjectMedia({
       {matches && gridView && assets.length >= 4 ? (
         <Grid container className={classes.grid}>
           <Grid item className={classes.sideGrid}>
-            <img className={classes.image} src={assets[0].src} alt={assets[0].src} />
+            <Image className={classes.image} src={assets[0].src} alt={assets[0].src} />
           </Grid>
           <Grid item className={classes.centreGrid}>
             <div className={classes.imageContainer}>
-              <img className={classes.image} src={assets[1].src} alt={assets[1].src} />
+              <Image className={classes.image} src={assets[1].src} alt={assets[1].src} />
             </div>
             <div className={classes.imageContainer}>
-              <img className={classes.image} src={assets[2].src} alt={assets[2].src} />
+              <Image className={classes.image} src={assets[2].src} alt={assets[2].src} />
             </div>
           </Grid>
           <Grid item className={classes.sideGrid}>
-            <img className={classes.image} src={assets[3].src} alt={assets[3].src} />
+            <Image className={classes.image} src={assets[3].src} alt={assets[3].src} />
           </Grid>
         </Grid>
       ) : (
@@ -266,7 +267,7 @@ export default function ProjectMedia({
         >
           {assets.map((item, index) => {
             if (item.type === 'image') {
-              return <img key={index} src={item.src} className={classes.item} alt={item.src} />;
+              return <Image key={index} src={item.src} className={classes.item} alt={item.src} />;
             } else if (item.type === 'video') {
               return (
                 <video key={index} className={classes.item} controls poster={item.preview}>

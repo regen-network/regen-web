@@ -7,6 +7,9 @@ export interface ImageProps {
   ext?: string; //todo maybe not
 }
 
+/**
+ * Use this component if image is stored in S3 (or app's main image store)
+ */
 export default function Image({ src, alt = '', options = {}, ext = 'jpg' }: ImageProps): JSX.Element {
   const imgRef = useRef<HTMLElement | null>(null);
   const [width, setWidth] = useState(0);
@@ -25,7 +28,7 @@ export default function Image({ src, alt = '', options = {}, ext = 'jpg' }: Imag
     // https://regen-registry.s3.amazonaws.com/projects/wilmot/image1.png
 
     const split = src.split('.com/');
-    console.log('split', split);
+    // console.log('split', split);
     setPath(split[1]);
   }, [src]);
 

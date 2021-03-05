@@ -4,13 +4,12 @@ export interface ImageProps {
   src: string; // image storage url
   alt: string;
   options?: any; //todo
-  ext?: string; //todo maybe not
 }
 
 /**
  * Use this component if image is stored in S3 (or app's main image store)
  */
-export default function Image({ src, alt = '', options = {}, ext = 'jpg' }: ImageProps): JSX.Element {
+export default function Image({ src, alt = '', options = {} }: ImageProps): JSX.Element {
   const imgRef = useRef<HTMLElement | null>(null);
   const [width, setWidth] = useState(0);
   const [queryString, setQueryString] = useState('');

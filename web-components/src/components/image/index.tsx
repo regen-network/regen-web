@@ -12,6 +12,7 @@ export default function Image({ src, alt = '', options = {}, ext = 'jpg' }: Imag
   const [width, setWidth] = useState(0);
   const [queryString, setQueryString] = useState('');
   const [path, setPath] = useState('');
+  const imageServer = `${process.env.REACT_APP_API_URI}/image/`;
 
   // Destructure props and state
   useEffect(() => {
@@ -49,9 +50,7 @@ export default function Image({ src, alt = '', options = {}, ext = 'jpg' }: Imag
   return (
     <figure ref={imgRef}>
       {// If the container width has been set, display the image else null
-      width > 0 && queryString ? (
-        <img src={`http://localhost:5000/image/${path}${queryString}`} alt={alt} />
-      ) : null}
+      width > 0 && queryString ? <img src={`${imageServer}${path}${queryString}`} alt={alt} /> : null}
     </figure>
   );
 }

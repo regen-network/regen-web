@@ -453,6 +453,10 @@ collections:
             widget: "object"
             fields:
               - {label: Header, name: header, widget: string}
+              - {label: Description, name: description, widget: markdown}
+              - {label: First Button Text, name: firstButtonText, widget: string}
+              - {label: First Button Url, name: firstButtonUrl, widget: string}
+              - {label: Second Button Text, name: secondButtonText, widget: string}
           - label: "Popup"
             name: "popup"
             widget: "object"

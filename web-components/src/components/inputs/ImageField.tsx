@@ -84,7 +84,7 @@ export default function ImageField({
         {() => (
           // TODO: typescript takes issue if you just pass children  so the empty render prop is a hack
           <Box className={classes.imageBox} display="flex" alignItems="center">
-            <Avatar className={classes.avatar} src={field.value} />
+            <Avatar className={classes.avatar} src={field.value?.src} />
 
             <input
               type="file"

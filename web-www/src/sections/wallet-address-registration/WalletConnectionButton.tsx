@@ -57,7 +57,7 @@ const WalletConnectionButton = ({ isKeplrDetected }: WalletConnectionButtonProps
     }
   `);
   const content = data?.text?.wallet;
-  const chainId = 'regen-devnet-4';
+  const chainId = 'regen-devnet-5';
 
   const connectToKeplr = async (): Promise<any> => {
     if (window.keplr) {

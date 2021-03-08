@@ -479,6 +479,18 @@
           "type": "Monitoring",
           "date": "February 18, 2021",
           "url": "https://regen-registry.s3.amazonaws.com/projects/cavan-station/TheCavanStation_2020_CombinedReport.pdf"
+        },
+        {
+          "name": "Issuance Document 2018",
+          "type": "Issuance",
+          "date": "March 8, 2021",
+          "url": "https://regen-registry.s3.amazonaws.com/projects/cavan-station/cavan-station-certificate-2018-030821.pdf"
+        }
+        {
+          "name": "Issuance Document 2020",
+          "type": "Issuance",
+          "date": "March 8, 2021",
+          "url": "https://regen-registry.s3.amazonaws.com/projects/cavan-station/cavan-station-certificate-2020-030821.pdf"
         }
       ],
       "name": "Cavan Station",

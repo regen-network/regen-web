@@ -82,7 +82,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 interface props {
-  location: object;
+  location: Location;
 }
 
 const InvestPage = ({ location }: props): JSX.Element => {

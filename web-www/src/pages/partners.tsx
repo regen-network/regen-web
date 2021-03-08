@@ -77,7 +77,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 interface props {
-  location: object;
+  location: Location;
 }
 
 const PartnersPage = ({ location }: props): JSX.Element => {

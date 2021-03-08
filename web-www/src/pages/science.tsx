@@ -11,7 +11,7 @@ import EmailSubmitSection from '../sections/shared/EmailSubmitSection';
 import SEO from '../components/seo';
 
 interface props {
-  location: object;
+  location: Location;
 }
 
 const SciencePage = ({ location }: props): JSX.Element => {

@@ -5,7 +5,7 @@ import ListSection from '../sections/case-studies/ListSection';
 import SEO from '../components/seo';
 
 interface props {
-  location: object;
+  location: Location;
 }
 
 const CaseStudiesPage = ({ location }: props): JSX.Element => {

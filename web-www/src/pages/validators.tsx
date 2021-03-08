@@ -9,7 +9,7 @@ import ConnectSection from '../sections/validators/ConnectSection';
 import SEO from '../components/seo';
 
 interface props {
-  location: object;
+  location: Location;
 }
 
 const ValidatorsPage = ({ location }: props): JSX.Element => {

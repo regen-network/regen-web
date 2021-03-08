@@ -15,7 +15,7 @@ import ConnectSection from '../sections/press-kit/ConnectSection';
 import PhotosSection from '../sections/press-kit/PhotosSection';
 
 interface props {
-  location: object;
+  location: Location;
 }
 
 const PressKitPage = ({ location }: props): JSX.Element => {

@@ -5,7 +5,7 @@ import SEO from '../components/seo';
 import NotFound from 'web-components/lib/components/not-found';
 
 interface props {
-  location: object;
+  location: Location;
 }
 
 const NotFoundPage = ({ location }: props): JSX.Element => {

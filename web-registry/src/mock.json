@@ -68,7 +68,6 @@
             "date": "June 5, 2027",
             "summary": "Crediting term ending"
           }
-        ],
         "completedItemIndex": 2
       },
        "documents": [
@@ -485,7 +484,7 @@
           "type": "Issuance",
           "date": "March 8, 2021",
           "url": "https://regen-registry.s3.amazonaws.com/projects/cavan-station/cavan-station-certificate-2018-030821.pdf"
-        }
+        },
         {
           "name": "Issuance Document 2020",
           "type": "Issuance",

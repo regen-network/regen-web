@@ -355,6 +355,7 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
               },
             ],
             "title": "Register project",
+            "url": "https://airtable.com",
           },
           Object {
             "imgSrc": "verified.png",
@@ -1070,7 +1071,7 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -1444,6 +1445,7 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                 },
               ],
               "title": "Register project",
+              "url": "https://airtable.com",
             },
             Object {
               "imgSrc": "verified.png",
@@ -1839,6 +1841,7 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                   },
                 ],
                 "title": "Register project",
+                "url": "https://airtable.com",
               },
               Object {
                 "imgSrc": "verified.png",
@@ -1890,15 +1893,15 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
             }
           >
             <div
-              className="MuiBox-root MuiBox-root-1216"
+              className="MuiBox-root MuiBox-root-1212"
             >
               <WithStyles(ForwardRef(Timeline))
                 align="alternate"
-                className="makeStyles-timeline-1200"
+                className="makeStyles-timeline-1195"
               >
                 <ForwardRef(Timeline)
                   align="alternate"
-                  className="makeStyles-timeline-1200"
+                  className="makeStyles-timeline-1195"
                   classes={
                     Object {
                       "alignAlternate": "MuiTimeline-alignAlternate",
@@ -1909,7 +1912,7 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                   }
                 >
                   <ul
-                    className="MuiTimeline-root MuiTimeline-alignAlternate makeStyles-timeline-1200"
+                    className="MuiTimeline-root MuiTimeline-alignAlternate makeStyles-timeline-1195"
                   >
                     <WithStyles(ForwardRef(TimelineItem))
                       key="0"
@@ -1931,10 +1934,10 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                           className="MuiTimelineItem-root MuiTimelineItem-alignAlternate"
                         >
                           <WithStyles(ForwardRef(TimelineOppositeContent))
-                            className="makeStyles-oppositeContent-1202"
+                            className="makeStyles-oppositeContent-1197"
                           >
                             <ForwardRef(TimelineOppositeContent)
-                              className="makeStyles-oppositeContent-1202"
+                              className="makeStyles-oppositeContent-1197"
                               classes={
                                 Object {
                                   "alignRight": "MuiTimelineOppositeContent-alignRight",
@@ -1943,7 +1946,7 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                               }
                             >
                               <div
-                                className="MuiTimelineOppositeContent-root MuiTimelineItem-oppositeContent makeStyles-oppositeContent-1202"
+                                className="MuiTimelineOppositeContent-root MuiTimelineItem-oppositeContent makeStyles-oppositeContent-1197"
                               >
                                 <img
                                   alt="Register project"
@@ -1953,10 +1956,10 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                             </ForwardRef(TimelineOppositeContent)>
                           </WithStyles(ForwardRef(TimelineOppositeContent))>
                           <WithStyles(ForwardRef(TimelineSeparator))
-                            className="makeStyles-separator-1210"
+                            className="makeStyles-separator-1206"
                           >
                             <ForwardRef(TimelineSeparator)
-                              className="makeStyles-separator-1210"
+                              className="makeStyles-separator-1206"
                               classes={
                                 Object {
                                   "root": "MuiTimelineSeparator-root",
@@ -1964,13 +1967,13 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                               }
                             >
                               <div
-                                className="MuiTimelineSeparator-root makeStyles-separator-1210"
+                                className="MuiTimelineSeparator-root makeStyles-separator-1206"
                               >
                                 <WithStyles(ForwardRef(TimelineDot))
-                                  className="makeStyles-dot-1209"
+                                  className="makeStyles-dot-1205"
                                 >
                                   <ForwardRef(TimelineDot)
-                                    className="makeStyles-dot-1209"
+                                    className="makeStyles-dot-1205"
                                     classes={
                                       Object {
                                         "defaultGrey": "MuiTimelineDot-defaultGrey",
@@ -1984,15 +1987,15 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                     }
                                   >
                                     <span
-                                      className="MuiTimelineDot-root makeStyles-dot-1209 MuiTimelineDot-defaultGrey"
+                                      className="MuiTimelineDot-root makeStyles-dot-1205 MuiTimelineDot-defaultGrey"
                                     />
                                   </ForwardRef(TimelineDot)>
                                 </WithStyles(ForwardRef(TimelineDot))>
                                 <WithStyles(ForwardRef(TimelineConnector))
-                                  className="makeStyles-connector-1206 makeStyles-firstConnector-1207"
+                                  className="makeStyles-connector-1202 makeStyles-firstConnector-1203"
                                 >
                                   <ForwardRef(TimelineConnector)
-                                    className="makeStyles-connector-1206 makeStyles-firstConnector-1207"
+                                    className="makeStyles-connector-1202 makeStyles-firstConnector-1203"
                                     classes={
                                       Object {
                                         "root": "MuiTimelineConnector-root",
@@ -2000,7 +2003,7 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                     }
                                   >
                                     <span
-                                      className="MuiTimelineConnector-root makeStyles-connector-1206 makeStyles-firstConnector-1207"
+                                      className="MuiTimelineConnector-root makeStyles-connector-1202 makeStyles-firstConnector-1203"
                                     />
                                   </ForwardRef(TimelineConnector)>
                                 </WithStyles(ForwardRef(TimelineConnector))>
@@ -2031,16 +2034,18 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                         },
                                       ],
                                       "title": "Register project",
+                                      "url": "https://airtable.com",
                                     }
                                   }
+                                  onTitleClick={[Function]}
                                 >
                                   <WithStyles(ForwardRef(Grid))
-                                    className="makeStyles-content-1203 makeStyles-content-1217"
+                                    className="makeStyles-content-1199 makeStyles-content-1213"
                                     container={true}
                                     wrap="nowrap"
                                   >
                                     <ForwardRef(Grid)
-                                      className="makeStyles-content-1203 makeStyles-content-1217"
+                                      className="makeStyles-content-1199 makeStyles-content-1213"
                                       classes={
                                         Object {
                                           "align-content-xs-center": "MuiGrid-align-content-xs-center",
@@ -2153,14 +2158,14 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                       wrap="nowrap"
                                     >
                                       <div
-                                        className="MuiGrid-root makeStyles-content-1203 makeStyles-content-1217 MuiGrid-container MuiGrid-wrap-xs-nowrap"
+                                        className="MuiGrid-root makeStyles-content-1199 makeStyles-content-1213 MuiGrid-container MuiGrid-wrap-xs-nowrap"
                                       >
                                         <WithStyles(ForwardRef(Grid))
-                                          className="makeStyles-number-1211"
+                                          className="makeStyles-number-1207"
                                           item={true}
                                         >
                                           <ForwardRef(Grid)
-                                            className="makeStyles-number-1211"
+                                            className="makeStyles-number-1207"
                                             classes={
                                               Object {
                                                 "align-content-xs-center": "MuiGrid-align-content-xs-center",
@@ -2272,18 +2277,18 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                             item={true}
                                           >
                                             <div
-                                              className="MuiGrid-root makeStyles-number-1211 MuiGrid-item"
+                                              className="MuiGrid-root makeStyles-number-1207 MuiGrid-item"
                                             >
                                               1
                                             </div>
                                           </ForwardRef(Grid)>
                                         </WithStyles(ForwardRef(Grid))>
                                         <WithStyles(ForwardRef(Grid))
-                                          className="makeStyles-text-1213"
+                                          className="makeStyles-text-1209"
                                           item={true}
                                         >
                                           <ForwardRef(Grid)
-                                            className="makeStyles-text-1213"
+                                            className="makeStyles-text-1209"
                                             classes={
                                               Object {
                                                 "align-content-xs-center": "MuiGrid-align-content-xs-center",
@@ -2395,21 +2400,21 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                             item={true}
                                           >
                                             <div
-                                              className="MuiGrid-root makeStyles-text-1213 MuiGrid-item"
+                                              className="MuiGrid-root makeStyles-text-1209 MuiGrid-item"
                                             >
                                               <Title
-                                                className="makeStyles-title-1212"
+                                                className="makeStyles-title-1208"
                                                 variant="h3"
                                               >
                                                 <WithStyles(ForwardRef(Typography))
                                                   align="left"
-                                                  className="makeStyles-root-1219 makeStyles-title-1212"
+                                                  className="makeStyles-root-1215 makeStyles-title-1208"
                                                   color="textPrimary"
                                                   variant="h3"
                                                 >
                                                   <ForwardRef(Typography)
                                                     align="left"
-                                                    className="makeStyles-root-1219 makeStyles-title-1212"
+                                                    className="makeStyles-root-1215 makeStyles-title-1208"
                                                     classes={
                                                       Object {
                                                         "alignCenter": "MuiTypography-alignCenter",
@@ -2462,15 +2467,110 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                                     }
                                                   >
                                                     <h3
-                                                      className="MuiTypography-root makeStyles-root-1219 makeStyles-title-1212 MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+                                                      className="MuiTypography-root makeStyles-root-1215 makeStyles-title-1208 MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
                                                     >
-                                                      Register project
+                                                      <WithStyles(ForwardRef(Link))
+                                                        color="inherit"
+                                                        onClick={[Function]}
+                                                      >
+                                                        <ForwardRef(Link)
+                                                          classes={
+                                                            Object {
+                                                              "button": "MuiLink-button",
+                                                              "focusVisible": "Mui-focusVisible",
+                                                              "root": "MuiLink-root",
+                                                              "underlineAlways": "MuiLink-underlineAlways",
+                                                              "underlineHover": "MuiLink-underlineHover",
+                                                              "underlineNone": "MuiLink-underlineNone",
+                                                            }
+                                                          }
+                                                          color="inherit"
+                                                          onClick={[Function]}
+                                                        >
+                                                          <WithStyles(ForwardRef(Typography))
+                                                            className="MuiLink-root MuiLink-underlineHover"
+                                                            color="inherit"
+                                                            component="a"
+                                                            onBlur={[Function]}
+                                                            onClick={[Function]}
+                                                            onFocus={[Function]}
+                                                            variant="inherit"
+                                                          >
+                                                            <ForwardRef(Typography)
+                                                              className="MuiLink-root MuiLink-underlineHover"
+                                                              classes={
+                                                                Object {
+                                                                  "alignCenter": "MuiTypography-alignCenter",
+                                                                  "alignJustify": "MuiTypography-alignJustify",
+                                                                  "alignLeft": "MuiTypography-alignLeft",
+                                                                  "alignRight": "MuiTypography-alignRight",
+                                                                  "body1": "MuiTypography-body1",
+                                                                  "body2": "MuiTypography-body2",
+                                                                  "button": "MuiTypography-button",
+                                                                  "caption": "MuiTypography-caption",
+                                                                  "colorError": "MuiTypography-colorError",
+                                                                  "colorInherit": "MuiTypography-colorInherit",
+                                                                  "colorPrimary": "MuiTypography-colorPrimary",
+                                                                  "colorSecondary": "MuiTypography-colorSecondary",
+                                                                  "colorTextPrimary": "MuiTypography-colorTextPrimary",
+                                                                  "colorTextSecondary": "MuiTypography-colorTextSecondary",
+                                                                  "displayBlock": "MuiTypography-displayBlock",
+                                                                  "displayInline": "MuiTypography-displayInline",
+                                                                  "gutterBottom": "MuiTypography-gutterBottom",
+                                                                  "h1": "MuiTypography-h1",
+                                                                  "h2": "MuiTypography-h2",
+                                                                  "h3": "MuiTypography-h3",
+                                                                  "h4": "MuiTypography-h4",
+                                                                  "h5": "MuiTypography-h5",
+                                                                  "h6": "MuiTypography-h6",
+                                                                  "noWrap": "MuiTypography-noWrap",
+                                                                  "overline": "MuiTypography-overline",
+                                                                  "paragraph": "MuiTypography-paragraph",
+                                                                  "root": "MuiTypography-root",
+                                                                  "srOnly": "MuiTypography-srOnly",
+                                                                  "subtitle1": "MuiTypography-subtitle1",
+                                                                  "subtitle2": "MuiTypography-subtitle2",
+                                                                }
+                                                              }
+                                                              color="inherit"
+                                                              component="a"
+                                                              onBlur={[Function]}
+                                                              onClick={[Function]}
+                                                              onFocus={[Function]}
+                                                              variant="inherit"
+                                                              variantMapping={
+                                                                Object {
+                                                                  "body1": "p",
+                                                                  "body2": "p",
+                                                                  "h1": "h1",
+                                                                  "h2": "h2",
+                                                                  "h3": "h3",
+                                                                  "h4": "h4",
+                                                                  "h5": "h5",
+                                                                  "h6": "h6",
+                                                                  "subtitle1": "h2",
+                                                                  "subtitle2": "h2",
+                                                                }
+                                                              }
+                                                            >
+                                                              <a
+                                                                className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorInherit"
+                                                                onBlur={[Function]}
+                                                                onClick={[Function]}
+                                                                onFocus={[Function]}
+                                                              >
+                                                                Register project
+                                                              </a>
+                                                            </ForwardRef(Typography)>
+                                                          </WithStyles(ForwardRef(Typography))>
+                                                        </ForwardRef(Link)>
+                                                      </WithStyles(ForwardRef(Link))>
                                                     </h3>
                                                   </ForwardRef(Typography)>
                                                 </WithStyles(ForwardRef(Typography))>
                                               </Title>
                                               <div
-                                                className="makeStyles-tags-1204"
+                                                className="makeStyles-tags-1200"
                                               >
                                                 <Tag
                                                   color="#7BC796"
@@ -2478,7 +2578,7 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                                   name="farmer"
                                                 >
                                                   <span
-                                                    className="makeStyles-tag-1205 makeStyles-tag-1221"
+                                                    className="makeStyles-tag-1201 makeStyles-tag-1217"
                                                   >
                                                     farmer
                                                   </span>
@@ -2517,10 +2617,10 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                           className="MuiTimelineItem-root MuiTimelineItem-alignAlternate"
                         >
                           <WithStyles(ForwardRef(TimelineOppositeContent))
-                            className="makeStyles-oppositeContent-1202"
+                            className="makeStyles-oppositeContent-1197"
                           >
                             <ForwardRef(TimelineOppositeContent)
-                              className="makeStyles-oppositeContent-1202"
+                              className="makeStyles-oppositeContent-1197"
                               classes={
                                 Object {
                                   "alignRight": "MuiTimelineOppositeContent-alignRight",
@@ -2529,7 +2629,7 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                               }
                             >
                               <div
-                                className="MuiTimelineOppositeContent-root MuiTimelineItem-oppositeContent makeStyles-oppositeContent-1202"
+                                className="MuiTimelineOppositeContent-root MuiTimelineItem-oppositeContent makeStyles-oppositeContent-1197"
                               >
                                 <img
                                   alt="Establish timeline"
@@ -2539,10 +2639,10 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                             </ForwardRef(TimelineOppositeContent)>
                           </WithStyles(ForwardRef(TimelineOppositeContent))>
                           <WithStyles(ForwardRef(TimelineSeparator))
-                            className="makeStyles-separator-1210"
+                            className="makeStyles-separator-1206"
                           >
                             <ForwardRef(TimelineSeparator)
-                              className="makeStyles-separator-1210"
+                              className="makeStyles-separator-1206"
                               classes={
                                 Object {
                                   "root": "MuiTimelineSeparator-root",
@@ -2550,13 +2650,13 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                               }
                             >
                               <div
-                                className="MuiTimelineSeparator-root makeStyles-separator-1210"
+                                className="MuiTimelineSeparator-root makeStyles-separator-1206"
                               >
                                 <WithStyles(ForwardRef(TimelineDot))
-                                  className="makeStyles-dot-1209"
+                                  className="makeStyles-dot-1205"
                                 >
                                   <ForwardRef(TimelineDot)
-                                    className="makeStyles-dot-1209"
+                                    className="makeStyles-dot-1205"
                                     classes={
                                       Object {
                                         "defaultGrey": "MuiTimelineDot-defaultGrey",
@@ -2570,15 +2670,15 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                     }
                                   >
                                     <span
-                                      className="MuiTimelineDot-root makeStyles-dot-1209 MuiTimelineDot-defaultGrey"
+                                      className="MuiTimelineDot-root makeStyles-dot-1205 MuiTimelineDot-defaultGrey"
                                     />
                                   </ForwardRef(TimelineDot)>
                                 </WithStyles(ForwardRef(TimelineDot))>
                                 <WithStyles(ForwardRef(TimelineConnector))
-                                  className="makeStyles-connector-1206"
+                                  className="makeStyles-connector-1202"
                                 >
                                   <ForwardRef(TimelineConnector)
-                                    className="makeStyles-connector-1206"
+                                    className="makeStyles-connector-1202"
                                     classes={
                                       Object {
                                         "root": "MuiTimelineConnector-root",
@@ -2586,7 +2686,7 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                     }
                                   >
                                     <span
-                                      className="MuiTimelineConnector-root makeStyles-connector-1206"
+                                      className="MuiTimelineConnector-root makeStyles-connector-1202"
                                     />
                                   </ForwardRef(TimelineConnector)>
                                 </WithStyles(ForwardRef(TimelineConnector))>
@@ -2623,14 +2723,15 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                       "title": "Establish timeline",
                                     }
                                   }
+                                  onTitleClick={[Function]}
                                 >
                                   <WithStyles(ForwardRef(Grid))
-                                    className="makeStyles-content-1203 makeStyles-content-1222"
+                                    className="makeStyles-content-1199 makeStyles-content-1218"
                                     container={true}
                                     wrap="nowrap"
                                   >
                                     <ForwardRef(Grid)
-                                      className="makeStyles-content-1203 makeStyles-content-1222"
+                                      className="makeStyles-content-1199 makeStyles-content-1218"
                                       classes={
                                         Object {
                                           "align-content-xs-center": "MuiGrid-align-content-xs-center",
@@ -2743,14 +2844,14 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                       wrap="nowrap"
                                     >
                                       <div
-                                        className="MuiGrid-root makeStyles-content-1203 makeStyles-content-1222 MuiGrid-container MuiGrid-wrap-xs-nowrap"
+                                        className="MuiGrid-root makeStyles-content-1199 makeStyles-content-1218 MuiGrid-container MuiGrid-wrap-xs-nowrap"
                                       >
                                         <WithStyles(ForwardRef(Grid))
-                                          className="makeStyles-number-1211"
+                                          className="makeStyles-number-1207"
                                           item={true}
                                         >
                                           <ForwardRef(Grid)
-                                            className="makeStyles-number-1211"
+                                            className="makeStyles-number-1207"
                                             classes={
                                               Object {
                                                 "align-content-xs-center": "MuiGrid-align-content-xs-center",
@@ -2862,18 +2963,18 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                             item={true}
                                           >
                                             <div
-                                              className="MuiGrid-root makeStyles-number-1211 MuiGrid-item"
+                                              className="MuiGrid-root makeStyles-number-1207 MuiGrid-item"
                                             >
                                               2
                                             </div>
                                           </ForwardRef(Grid)>
                                         </WithStyles(ForwardRef(Grid))>
                                         <WithStyles(ForwardRef(Grid))
-                                          className="makeStyles-text-1213"
+                                          className="makeStyles-text-1209"
                                           item={true}
                                         >
                                           <ForwardRef(Grid)
-                                            className="makeStyles-text-1213"
+                                            className="makeStyles-text-1209"
                                             classes={
                                               Object {
                                                 "align-content-xs-center": "MuiGrid-align-content-xs-center",
@@ -2985,21 +3086,21 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                             item={true}
                                           >
                                             <div
-                                              className="MuiGrid-root makeStyles-text-1213 MuiGrid-item"
+                                              className="MuiGrid-root makeStyles-text-1209 MuiGrid-item"
                                             >
                                               <Title
-                                                className="makeStyles-title-1212"
+                                                className="makeStyles-title-1208"
                                                 variant="h3"
                                               >
                                                 <WithStyles(ForwardRef(Typography))
                                                   align="left"
-                                                  className="makeStyles-root-1219 makeStyles-title-1212"
+                                                  className="makeStyles-root-1215 makeStyles-title-1208"
                                                   color="textPrimary"
                                                   variant="h3"
                                                 >
                                                   <ForwardRef(Typography)
                                                     align="left"
-                                                    className="makeStyles-root-1219 makeStyles-title-1212"
+                                                    className="makeStyles-root-1215 makeStyles-title-1208"
                                                     classes={
                                                       Object {
                                                         "alignCenter": "MuiTypography-alignCenter",
@@ -3052,7 +3153,7 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                                     }
                                                   >
                                                     <h3
-                                                      className="MuiTypography-root makeStyles-root-1219 makeStyles-title-1212 MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+                                                      className="MuiTypography-root makeStyles-root-1215 makeStyles-title-1208 MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
                                                     >
                                                       Establish timeline
                                                     </h3>
@@ -3060,7 +3161,7 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                                 </WithStyles(ForwardRef(Typography))>
                                               </Title>
                                               <div
-                                                className="makeStyles-tags-1204"
+                                                className="makeStyles-tags-1200"
                                               >
                                                 <Tag
                                                   color="#6D9BDB"
@@ -3068,7 +3169,7 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                                   name="monitor"
                                                 >
                                                   <span
-                                                    className="makeStyles-tag-1205 makeStyles-tag-1225"
+                                                    className="makeStyles-tag-1201 makeStyles-tag-1221"
                                                   >
                                                     monitor
                                                   </span>
@@ -3079,7 +3180,7 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                                   name="farmer"
                                                 >
                                                   <span
-                                                    className="makeStyles-tag-1205 makeStyles-tag-1227"
+                                                    className="makeStyles-tag-1201 makeStyles-tag-1223"
                                                   >
                                                     farmer
                                                   </span>
@@ -3118,10 +3219,10 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                           className="MuiTimelineItem-root MuiTimelineItem-alignAlternate"
                         >
                           <WithStyles(ForwardRef(TimelineOppositeContent))
-                            className="makeStyles-oppositeContent-1202"
+                            className="makeStyles-oppositeContent-1197"
                           >
                             <ForwardRef(TimelineOppositeContent)
-                              className="makeStyles-oppositeContent-1202"
+                              className="makeStyles-oppositeContent-1197"
                               classes={
                                 Object {
                                   "alignRight": "MuiTimelineOppositeContent-alignRight",
@@ -3130,7 +3231,7 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                               }
                             >
                               <div
-                                className="MuiTimelineOppositeContent-root MuiTimelineItem-oppositeContent makeStyles-oppositeContent-1202"
+                                className="MuiTimelineOppositeContent-root MuiTimelineItem-oppositeContent makeStyles-oppositeContent-1197"
                               >
                                 <img
                                   alt="Lorem ipsum 1"
@@ -3140,10 +3241,10 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                             </ForwardRef(TimelineOppositeContent)>
                           </WithStyles(ForwardRef(TimelineOppositeContent))>
                           <WithStyles(ForwardRef(TimelineSeparator))
-                            className="makeStyles-separator-1210"
+                            className="makeStyles-separator-1206"
                           >
                             <ForwardRef(TimelineSeparator)
-                              className="makeStyles-separator-1210"
+                              className="makeStyles-separator-1206"
                               classes={
                                 Object {
                                   "root": "MuiTimelineSeparator-root",
@@ -3151,13 +3252,13 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                               }
                             >
                               <div
-                                className="MuiTimelineSeparator-root makeStyles-separator-1210"
+                                className="MuiTimelineSeparator-root makeStyles-separator-1206"
                               >
                                 <WithStyles(ForwardRef(TimelineDot))
-                                  className="makeStyles-dot-1209"
+                                  className="makeStyles-dot-1205"
                                 >
                                   <ForwardRef(TimelineDot)
-                                    className="makeStyles-dot-1209"
+                                    className="makeStyles-dot-1205"
                                     classes={
                                       Object {
                                         "defaultGrey": "MuiTimelineDot-defaultGrey",
@@ -3171,15 +3272,15 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                     }
                                   >
                                     <span
-                                      className="MuiTimelineDot-root makeStyles-dot-1209 MuiTimelineDot-defaultGrey"
+                                      className="MuiTimelineDot-root makeStyles-dot-1205 MuiTimelineDot-defaultGrey"
                                     />
                                   </ForwardRef(TimelineDot)>
                                 </WithStyles(ForwardRef(TimelineDot))>
                                 <WithStyles(ForwardRef(TimelineConnector))
-                                  className="makeStyles-connector-1206"
+                                  className="makeStyles-connector-1202"
                                 >
                                   <ForwardRef(TimelineConnector)
-                                    className="makeStyles-connector-1206"
+                                    className="makeStyles-connector-1202"
                                     classes={
                                       Object {
                                         "root": "MuiTimelineConnector-root",
@@ -3187,7 +3288,7 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                     }
                                   >
                                     <span
-                                      className="MuiTimelineConnector-root makeStyles-connector-1206"
+                                      className="MuiTimelineConnector-root makeStyles-connector-1202"
                                     />
                                   </ForwardRef(TimelineConnector)>
                                 </WithStyles(ForwardRef(TimelineConnector))>
@@ -3224,14 +3325,15 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                       "title": "Lorem ipsum 1",
                                     }
                                   }
+                                  onTitleClick={[Function]}
                                 >
                                   <WithStyles(ForwardRef(Grid))
-                                    className="makeStyles-content-1203 makeStyles-content-1228"
+                                    className="makeStyles-content-1199 makeStyles-content-1224"
                                     container={true}
                                     wrap="nowrap"
                                   >
                                     <ForwardRef(Grid)
-                                      className="makeStyles-content-1203 makeStyles-content-1228"
+                                      className="makeStyles-content-1199 makeStyles-content-1224"
                                       classes={
                                         Object {
                                           "align-content-xs-center": "MuiGrid-align-content-xs-center",
@@ -3344,14 +3446,14 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                       wrap="nowrap"
                                     >
                                       <div
-                                        className="MuiGrid-root makeStyles-content-1203 makeStyles-content-1228 MuiGrid-container MuiGrid-wrap-xs-nowrap"
+                                        className="MuiGrid-root makeStyles-content-1199 makeStyles-content-1224 MuiGrid-container MuiGrid-wrap-xs-nowrap"
                                       >
                                         <WithStyles(ForwardRef(Grid))
-                                          className="makeStyles-number-1211"
+                                          className="makeStyles-number-1207"
                                           item={true}
                                         >
                                           <ForwardRef(Grid)
-                                            className="makeStyles-number-1211"
+                                            className="makeStyles-number-1207"
                                             classes={
                                               Object {
                                                 "align-content-xs-center": "MuiGrid-align-content-xs-center",
@@ -3463,18 +3565,18 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                             item={true}
                                           >
                                             <div
-                                              className="MuiGrid-root makeStyles-number-1211 MuiGrid-item"
+                                              className="MuiGrid-root makeStyles-number-1207 MuiGrid-item"
                                             >
                                               3
                                             </div>
                                           </ForwardRef(Grid)>
                                         </WithStyles(ForwardRef(Grid))>
                                         <WithStyles(ForwardRef(Grid))
-                                          className="makeStyles-text-1213"
+                                          className="makeStyles-text-1209"
                                           item={true}
                                         >
                                           <ForwardRef(Grid)
-                                            className="makeStyles-text-1213"
+                                            className="makeStyles-text-1209"
                                             classes={
                                               Object {
                                                 "align-content-xs-center": "MuiGrid-align-content-xs-center",
@@ -3586,21 +3688,21 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                             item={true}
                                           >
                                             <div
-                                              className="MuiGrid-root makeStyles-text-1213 MuiGrid-item"
+                                              className="MuiGrid-root makeStyles-text-1209 MuiGrid-item"
                                             >
                                               <Title
-                                                className="makeStyles-title-1212"
+                                                className="makeStyles-title-1208"
                                                 variant="h3"
                                               >
                                                 <WithStyles(ForwardRef(Typography))
                                                   align="left"
-                                                  className="makeStyles-root-1219 makeStyles-title-1212"
+                                                  className="makeStyles-root-1215 makeStyles-title-1208"
                                                   color="textPrimary"
                                                   variant="h3"
                                                 >
                                                   <ForwardRef(Typography)
                                                     align="left"
-                                                    className="makeStyles-root-1219 makeStyles-title-1212"
+                                                    className="makeStyles-root-1215 makeStyles-title-1208"
                                                     classes={
                                                       Object {
                                                         "alignCenter": "MuiTypography-alignCenter",
@@ -3653,7 +3755,7 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                                     }
                                                   >
                                                     <h3
-                                                      className="MuiTypography-root makeStyles-root-1219 makeStyles-title-1212 MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+                                                      className="MuiTypography-root makeStyles-root-1215 makeStyles-title-1208 MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
                                                     >
                                                       Lorem ipsum 1
                                                     </h3>
@@ -3661,7 +3763,7 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                                 </WithStyles(ForwardRef(Typography))>
                                               </Title>
                                               <div
-                                                className="makeStyles-tags-1204"
+                                                className="makeStyles-tags-1200"
                                               >
                                                 <Tag
                                                   color="#6D9BDB"
@@ -3669,7 +3771,7 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                                   name="monitor"
                                                 >
                                                   <span
-                                                    className="makeStyles-tag-1205 makeStyles-tag-1231"
+                                                    className="makeStyles-tag-1201 makeStyles-tag-1227"
                                                   >
                                                     monitor
                                                   </span>
@@ -3680,7 +3782,7 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                                   name="farmer"
                                                 >
                                                   <span
-                                                    className="makeStyles-tag-1205 makeStyles-tag-1233"
+                                                    className="makeStyles-tag-1201 makeStyles-tag-1229"
                                                   >
                                                     farmer
                                                   </span>
@@ -3719,10 +3821,10 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                           className="MuiTimelineItem-root MuiTimelineItem-alignAlternate"
                         >
                           <WithStyles(ForwardRef(TimelineOppositeContent))
-                            className="makeStyles-oppositeContent-1202"
+                            className="makeStyles-oppositeContent-1197"
                           >
                             <ForwardRef(TimelineOppositeContent)
-                              className="makeStyles-oppositeContent-1202"
+                              className="makeStyles-oppositeContent-1197"
                               classes={
                                 Object {
                                   "alignRight": "MuiTimelineOppositeContent-alignRight",
@@ -3731,7 +3833,7 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                               }
                             >
                               <div
-                                className="MuiTimelineOppositeContent-root MuiTimelineItem-oppositeContent makeStyles-oppositeContent-1202"
+                                className="MuiTimelineOppositeContent-root MuiTimelineItem-oppositeContent makeStyles-oppositeContent-1197"
                               >
                                 <img
                                   alt="Lorem ipsum 2"
@@ -3741,10 +3843,10 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                             </ForwardRef(TimelineOppositeContent)>
                           </WithStyles(ForwardRef(TimelineOppositeContent))>
                           <WithStyles(ForwardRef(TimelineSeparator))
-                            className="makeStyles-separator-1210"
+                            className="makeStyles-separator-1206"
                           >
                             <ForwardRef(TimelineSeparator)
-                              className="makeStyles-separator-1210"
+                              className="makeStyles-separator-1206"
                               classes={
                                 Object {
                                   "root": "MuiTimelineSeparator-root",
@@ -3752,13 +3854,13 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                               }
                             >
                               <div
-                                className="MuiTimelineSeparator-root makeStyles-separator-1210"
+                                className="MuiTimelineSeparator-root makeStyles-separator-1206"
                               >
                                 <WithStyles(ForwardRef(TimelineDot))
-                                  className="makeStyles-dot-1209"
+                                  className="makeStyles-dot-1205"
                                 >
                                   <ForwardRef(TimelineDot)
-                                    className="makeStyles-dot-1209"
+                                    className="makeStyles-dot-1205"
                                     classes={
                                       Object {
                                         "defaultGrey": "MuiTimelineDot-defaultGrey",
@@ -3772,15 +3874,15 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                     }
                                   >
                                     <span
-                                      className="MuiTimelineDot-root makeStyles-dot-1209 MuiTimelineDot-defaultGrey"
+                                      className="MuiTimelineDot-root makeStyles-dot-1205 MuiTimelineDot-defaultGrey"
                                     />
                                   </ForwardRef(TimelineDot)>
                                 </WithStyles(ForwardRef(TimelineDot))>
                                 <WithStyles(ForwardRef(TimelineConnector))
-                                  className="makeStyles-connector-1206 makeStyles-lastConnector-1208"
+                                  className="makeStyles-connector-1202 makeStyles-lastConnector-1204"
                                 >
                                   <ForwardRef(TimelineConnector)
-                                    className="makeStyles-connector-1206 makeStyles-lastConnector-1208"
+                                    className="makeStyles-connector-1202 makeStyles-lastConnector-1204"
                                     classes={
                                       Object {
                                         "root": "MuiTimelineConnector-root",
@@ -3788,7 +3890,7 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                     }
                                   >
                                     <span
-                                      className="MuiTimelineConnector-root makeStyles-connector-1206 makeStyles-lastConnector-1208"
+                                      className="MuiTimelineConnector-root makeStyles-connector-1202 makeStyles-lastConnector-1204"
                                     />
                                   </ForwardRef(TimelineConnector)>
                                 </WithStyles(ForwardRef(TimelineConnector))>
@@ -3821,14 +3923,15 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                       "title": "Lorem ipsum 2",
                                     }
                                   }
+                                  onTitleClick={[Function]}
                                 >
                                   <WithStyles(ForwardRef(Grid))
-                                    className="makeStyles-content-1203 makeStyles-content-1234"
+                                    className="makeStyles-content-1199 makeStyles-content-1230"
                                     container={true}
                                     wrap="nowrap"
                                   >
                                     <ForwardRef(Grid)
-                                      className="makeStyles-content-1203 makeStyles-content-1234"
+                                      className="makeStyles-content-1199 makeStyles-content-1230"
                                       classes={
                                         Object {
                                           "align-content-xs-center": "MuiGrid-align-content-xs-center",
@@ -3941,14 +4044,14 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                       wrap="nowrap"
                                     >
                                       <div
-                                        className="MuiGrid-root makeStyles-content-1203 makeStyles-content-1234 MuiGrid-container MuiGrid-wrap-xs-nowrap"
+                                        className="MuiGrid-root makeStyles-content-1199 makeStyles-content-1230 MuiGrid-container MuiGrid-wrap-xs-nowrap"
                                       >
                                         <WithStyles(ForwardRef(Grid))
-                                          className="makeStyles-number-1211"
+                                          className="makeStyles-number-1207"
                                           item={true}
                                         >
                                           <ForwardRef(Grid)
-                                            className="makeStyles-number-1211"
+                                            className="makeStyles-number-1207"
                                             classes={
                                               Object {
                                                 "align-content-xs-center": "MuiGrid-align-content-xs-center",
@@ -4060,18 +4163,18 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                             item={true}
                                           >
                                             <div
-                                              className="MuiGrid-root makeStyles-number-1211 MuiGrid-item"
+                                              className="MuiGrid-root makeStyles-number-1207 MuiGrid-item"
                                             >
                                               4
                                             </div>
                                           </ForwardRef(Grid)>
                                         </WithStyles(ForwardRef(Grid))>
                                         <WithStyles(ForwardRef(Grid))
-                                          className="makeStyles-text-1213"
+                                          className="makeStyles-text-1209"
                                           item={true}
                                         >
                                           <ForwardRef(Grid)
-                                            className="makeStyles-text-1213"
+                                            className="makeStyles-text-1209"
                                             classes={
                                               Object {
                                                 "align-content-xs-center": "MuiGrid-align-content-xs-center",
@@ -4183,21 +4286,21 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                             item={true}
                                           >
                                             <div
-                                              className="MuiGrid-root makeStyles-text-1213 MuiGrid-item"
+                                              className="MuiGrid-root makeStyles-text-1209 MuiGrid-item"
                                             >
                                               <Title
-                                                className="makeStyles-title-1212"
+                                                className="makeStyles-title-1208"
                                                 variant="h3"
                                               >
                                                 <WithStyles(ForwardRef(Typography))
                                                   align="left"
-                                                  className="makeStyles-root-1219 makeStyles-title-1212"
+                                                  className="makeStyles-root-1215 makeStyles-title-1208"
                                                   color="textPrimary"
                                                   variant="h3"
                                                 >
                                                   <ForwardRef(Typography)
                                                     align="left"
-                                                    className="makeStyles-root-1219 makeStyles-title-1212"
+                                                    className="makeStyles-root-1215 makeStyles-title-1208"
                                                     classes={
                                                       Object {
                                                         "alignCenter": "MuiTypography-alignCenter",
@@ -4250,7 +4353,7 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                                     }
                                                   >
                                                     <h3
-                                                      className="MuiTypography-root makeStyles-root-1219 makeStyles-title-1212 MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+                                                      className="MuiTypography-root makeStyles-root-1215 makeStyles-title-1208 MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
                                                     >
                                                       Lorem ipsum 2
                                                     </h3>
@@ -4258,7 +4361,7 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                                 </WithStyles(ForwardRef(Typography))>
                                               </Title>
                                               <div
-                                                className="makeStyles-tags-1204"
+                                                className="makeStyles-tags-1200"
                                               >
                                                 <Tag
                                                   color="#6D9BDB"
@@ -4266,7 +4369,7 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                                   name="monitor"
                                                 >
                                                   <span
-                                                    className="makeStyles-tag-1205 makeStyles-tag-1237"
+                                                    className="makeStyles-tag-1201 makeStyles-tag-1233"
                                                   >
                                                     monitor
                                                   </span>
@@ -4299,13 +4402,13 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
             }
           >
             <div
-              className="MuiBox-root MuiBox-root-1238"
+              className="MuiBox-root MuiBox-root-1234"
             >
               <WithStyles(ForwardRef(Timeline))
-                className="makeStyles-timeline-1200"
+                className="makeStyles-timeline-1195"
               >
                 <ForwardRef(Timeline)
-                  className="makeStyles-timeline-1200"
+                  className="makeStyles-timeline-1195"
                   classes={
                     Object {
                       "alignAlternate": "MuiTimeline-alignAlternate",
@@ -4316,14 +4419,14 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                   }
                 >
                   <ul
-                    className="MuiTimeline-root MuiTimeline-alignLeft makeStyles-timeline-1200"
+                    className="MuiTimeline-root MuiTimeline-alignLeft makeStyles-timeline-1195"
                   >
                     <WithStyles(ForwardRef(TimelineItem))
-                      className="makeStyles-item-1201"
+                      className="makeStyles-item-1196"
                       key="0"
                     >
                       <ForwardRef(TimelineItem)
-                        className="makeStyles-item-1201"
+                        className="makeStyles-item-1196"
                         classes={
                           Object {
                             "alignAlternate": "MuiTimelineItem-alignAlternate",
@@ -4337,13 +4440,13 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                         }
                       >
                         <li
-                          className="MuiTimelineItem-root MuiTimelineItem-alignLeft makeStyles-item-1201 MuiTimelineItem-missingOppositeContent"
+                          className="MuiTimelineItem-root MuiTimelineItem-alignLeft makeStyles-item-1196 MuiTimelineItem-missingOppositeContent"
                         >
                           <WithStyles(ForwardRef(TimelineSeparator))
-                            className="makeStyles-separator-1210"
+                            className="makeStyles-separator-1206"
                           >
                             <ForwardRef(TimelineSeparator)
-                              className="makeStyles-separator-1210"
+                              className="makeStyles-separator-1206"
                               classes={
                                 Object {
                                   "root": "MuiTimelineSeparator-root",
@@ -4351,13 +4454,13 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                               }
                             >
                               <div
-                                className="MuiTimelineSeparator-root makeStyles-separator-1210"
+                                className="MuiTimelineSeparator-root makeStyles-separator-1206"
                               >
                                 <WithStyles(ForwardRef(TimelineDot))
-                                  className="makeStyles-dot-1209"
+                                  className="makeStyles-dot-1205"
                                 >
                                   <ForwardRef(TimelineDot)
-                                    className="makeStyles-dot-1209"
+                                    className="makeStyles-dot-1205"
                                     classes={
                                       Object {
                                         "defaultGrey": "MuiTimelineDot-defaultGrey",
@@ -4371,15 +4474,15 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                     }
                                   >
                                     <span
-                                      className="MuiTimelineDot-root makeStyles-dot-1209 MuiTimelineDot-defaultGrey"
+                                      className="MuiTimelineDot-root makeStyles-dot-1205 MuiTimelineDot-defaultGrey"
                                     />
                                   </ForwardRef(TimelineDot)>
                                 </WithStyles(ForwardRef(TimelineDot))>
                                 <WithStyles(ForwardRef(TimelineConnector))
-                                  className="makeStyles-connector-1206 makeStyles-firstConnector-1207"
+                                  className="makeStyles-connector-1202 makeStyles-firstConnector-1203"
                                 >
                                   <ForwardRef(TimelineConnector)
-                                    className="makeStyles-connector-1206 makeStyles-firstConnector-1207"
+                                    className="makeStyles-connector-1202 makeStyles-firstConnector-1203"
                                     classes={
                                       Object {
                                         "root": "MuiTimelineConnector-root",
@@ -4387,7 +4490,7 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                     }
                                   >
                                     <span
-                                      className="MuiTimelineConnector-root makeStyles-connector-1206 makeStyles-firstConnector-1207"
+                                      className="MuiTimelineConnector-root makeStyles-connector-1202 makeStyles-firstConnector-1203"
                                     />
                                   </ForwardRef(TimelineConnector)>
                                 </WithStyles(ForwardRef(TimelineConnector))>
@@ -4418,16 +4521,17 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                         },
                                       ],
                                       "title": "Register project",
+                                      "url": "https://airtable.com",
                                     }
                                   }
                                 >
                                   <WithStyles(ForwardRef(Grid))
-                                    className="makeStyles-content-1203 makeStyles-content-1239"
+                                    className="makeStyles-content-1199 makeStyles-content-1235"
                                     container={true}
                                     wrap="nowrap"
                                   >
                                     <ForwardRef(Grid)
-                                      className="makeStyles-content-1203 makeStyles-content-1239"
+                                      className="makeStyles-content-1199 makeStyles-content-1235"
                                       classes={
                                         Object {
                                           "align-content-xs-center": "MuiGrid-align-content-xs-center",
@@ -4540,14 +4644,14 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                       wrap="nowrap"
                                     >
                                       <div
-                                        className="MuiGrid-root makeStyles-content-1203 makeStyles-content-1239 MuiGrid-container MuiGrid-wrap-xs-nowrap"
+                                        className="MuiGrid-root makeStyles-content-1199 makeStyles-content-1235 MuiGrid-container MuiGrid-wrap-xs-nowrap"
                                       >
                                         <WithStyles(ForwardRef(Grid))
-                                          className="makeStyles-number-1211"
+                                          className="makeStyles-number-1207"
                                           item={true}
                                         >
                                           <ForwardRef(Grid)
-                                            className="makeStyles-number-1211"
+                                            className="makeStyles-number-1207"
                                             classes={
                                               Object {
                                                 "align-content-xs-center": "MuiGrid-align-content-xs-center",
@@ -4659,18 +4763,18 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                             item={true}
                                           >
                                             <div
-                                              className="MuiGrid-root makeStyles-number-1211 MuiGrid-item"
+                                              className="MuiGrid-root makeStyles-number-1207 MuiGrid-item"
                                             >
                                               1
                                             </div>
                                           </ForwardRef(Grid)>
                                         </WithStyles(ForwardRef(Grid))>
                                         <WithStyles(ForwardRef(Grid))
-                                          className="makeStyles-text-1213"
+                                          className="makeStyles-text-1209"
                                           item={true}
                                         >
                                           <ForwardRef(Grid)
-                                            className="makeStyles-text-1213"
+                                            className="makeStyles-text-1209"
                                             classes={
                                               Object {
                                                 "align-content-xs-center": "MuiGrid-align-content-xs-center",
@@ -4782,21 +4886,21 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                             item={true}
                                           >
                                             <div
-                                              className="MuiGrid-root makeStyles-text-1213 MuiGrid-item"
+                                              className="MuiGrid-root makeStyles-text-1209 MuiGrid-item"
                                             >
                                               <Title
-                                                className="makeStyles-title-1212"
+                                                className="makeStyles-title-1208"
                                                 variant="h3"
                                               >
                                                 <WithStyles(ForwardRef(Typography))
                                                   align="left"
-                                                  className="makeStyles-root-1219 makeStyles-title-1212"
+                                                  className="makeStyles-root-1215 makeStyles-title-1208"
                                                   color="textPrimary"
                                                   variant="h3"
                                                 >
                                                   <ForwardRef(Typography)
                                                     align="left"
-                                                    className="makeStyles-root-1219 makeStyles-title-1212"
+                                                    className="makeStyles-root-1215 makeStyles-title-1208"
                                                     classes={
                                                       Object {
                                                         "alignCenter": "MuiTypography-alignCenter",
@@ -4849,7 +4953,7 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                                     }
                                                   >
                                                     <h3
-                                                      className="MuiTypography-root makeStyles-root-1219 makeStyles-title-1212 MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+                                                      className="MuiTypography-root makeStyles-root-1215 makeStyles-title-1208 MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
                                                     >
                                                       Register project
                                                     </h3>
@@ -4857,7 +4961,7 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                                 </WithStyles(ForwardRef(Typography))>
                                               </Title>
                                               <div
-                                                className="makeStyles-tags-1204"
+                                                className="makeStyles-tags-1200"
                                               >
                                                 <Tag
                                                   color="#7BC796"
@@ -4865,7 +4969,7 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                                   name="farmer"
                                                 >
                                                   <span
-                                                    className="makeStyles-tag-1205 makeStyles-tag-1242"
+                                                    className="makeStyles-tag-1201 makeStyles-tag-1238"
                                                   >
                                                     farmer
                                                   </span>
@@ -4885,11 +4989,11 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                       </ForwardRef(TimelineItem)>
                     </WithStyles(ForwardRef(TimelineItem))>
                     <WithStyles(ForwardRef(TimelineItem))
-                      className="makeStyles-item-1201"
+                      className="makeStyles-item-1196"
                       key="1"
                     >
                       <ForwardRef(TimelineItem)
-                        className="makeStyles-item-1201"
+                        className="makeStyles-item-1196"
                         classes={
                           Object {
                             "alignAlternate": "MuiTimelineItem-alignAlternate",
@@ -4903,13 +5007,13 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                         }
                       >
                         <li
-                          className="MuiTimelineItem-root MuiTimelineItem-alignLeft makeStyles-item-1201 MuiTimelineItem-missingOppositeContent"
+                          className="MuiTimelineItem-root MuiTimelineItem-alignLeft makeStyles-item-1196 MuiTimelineItem-missingOppositeContent"
                         >
                           <WithStyles(ForwardRef(TimelineSeparator))
-                            className="makeStyles-separator-1210"
+                            className="makeStyles-separator-1206"
                           >
                             <ForwardRef(TimelineSeparator)
-                              className="makeStyles-separator-1210"
+                              className="makeStyles-separator-1206"
                               classes={
                                 Object {
                                   "root": "MuiTimelineSeparator-root",
@@ -4917,13 +5021,13 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                               }
                             >
                               <div
-                                className="MuiTimelineSeparator-root makeStyles-separator-1210"
+                                className="MuiTimelineSeparator-root makeStyles-separator-1206"
                               >
                                 <WithStyles(ForwardRef(TimelineDot))
-                                  className="makeStyles-dot-1209"
+                                  className="makeStyles-dot-1205"
                                 >
                                   <ForwardRef(TimelineDot)
-                                    className="makeStyles-dot-1209"
+                                    className="makeStyles-dot-1205"
                                     classes={
                                       Object {
                                         "defaultGrey": "MuiTimelineDot-defaultGrey",
@@ -4937,15 +5041,15 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                     }
                                   >
                                     <span
-                                      className="MuiTimelineDot-root makeStyles-dot-1209 MuiTimelineDot-defaultGrey"
+                                      className="MuiTimelineDot-root makeStyles-dot-1205 MuiTimelineDot-defaultGrey"
                                     />
                                   </ForwardRef(TimelineDot)>
                                 </WithStyles(ForwardRef(TimelineDot))>
                                 <WithStyles(ForwardRef(TimelineConnector))
-                                  className="makeStyles-connector-1206"
+                                  className="makeStyles-connector-1202"
                                 >
                                   <ForwardRef(TimelineConnector)
-                                    className="makeStyles-connector-1206"
+                                    className="makeStyles-connector-1202"
                                     classes={
                                       Object {
                                         "root": "MuiTimelineConnector-root",
@@ -4953,7 +5057,7 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                     }
                                   >
                                     <span
-                                      className="MuiTimelineConnector-root makeStyles-connector-1206"
+                                      className="MuiTimelineConnector-root makeStyles-connector-1202"
                                     />
                                   </ForwardRef(TimelineConnector)>
                                 </WithStyles(ForwardRef(TimelineConnector))>
@@ -4992,12 +5096,12 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                   }
                                 >
                                   <WithStyles(ForwardRef(Grid))
-                                    className="makeStyles-content-1203 makeStyles-content-1243"
+                                    className="makeStyles-content-1199 makeStyles-content-1239"
                                     container={true}
                                     wrap="nowrap"
                                   >
                                     <ForwardRef(Grid)
-                                      className="makeStyles-content-1203 makeStyles-content-1243"
+                                      className="makeStyles-content-1199 makeStyles-content-1239"
                                       classes={
                                         Object {
                                           "align-content-xs-center": "MuiGrid-align-content-xs-center",
@@ -5110,14 +5214,14 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                       wrap="nowrap"
                                     >
                                       <div
-                                        className="MuiGrid-root makeStyles-content-1203 makeStyles-content-1243 MuiGrid-container MuiGrid-wrap-xs-nowrap"
+                                        className="MuiGrid-root makeStyles-content-1199 makeStyles-content-1239 MuiGrid-container MuiGrid-wrap-xs-nowrap"
                                       >
                                         <WithStyles(ForwardRef(Grid))
-                                          className="makeStyles-number-1211"
+                                          className="makeStyles-number-1207"
                                           item={true}
                                         >
                                           <ForwardRef(Grid)
-                                            className="makeStyles-number-1211"
+                                            className="makeStyles-number-1207"
                                             classes={
                                               Object {
                                                 "align-content-xs-center": "MuiGrid-align-content-xs-center",
@@ -5229,18 +5333,18 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                             item={true}
                                           >
                                             <div
-                                              className="MuiGrid-root makeStyles-number-1211 MuiGrid-item"
+                                              className="MuiGrid-root makeStyles-number-1207 MuiGrid-item"
                                             >
                                               2
                                             </div>
                                           </ForwardRef(Grid)>
                                         </WithStyles(ForwardRef(Grid))>
                                         <WithStyles(ForwardRef(Grid))
-                                          className="makeStyles-text-1213"
+                                          className="makeStyles-text-1209"
                                           item={true}
                                         >
                                           <ForwardRef(Grid)
-                                            className="makeStyles-text-1213"
+                                            className="makeStyles-text-1209"
                                             classes={
                                               Object {
                                                 "align-content-xs-center": "MuiGrid-align-content-xs-center",
@@ -5352,21 +5456,21 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                             item={true}
                                           >
                                             <div
-                                              className="MuiGrid-root makeStyles-text-1213 MuiGrid-item"
+                                              className="MuiGrid-root makeStyles-text-1209 MuiGrid-item"
                                             >
                                               <Title
-                                                className="makeStyles-title-1212"
+                                                className="makeStyles-title-1208"
                                                 variant="h3"
                                               >
                                                 <WithStyles(ForwardRef(Typography))
                                                   align="left"
-                                                  className="makeStyles-root-1219 makeStyles-title-1212"
+                                                  className="makeStyles-root-1215 makeStyles-title-1208"
                                                   color="textPrimary"
                                                   variant="h3"
                                                 >
                                                   <ForwardRef(Typography)
                                                     align="left"
-                                                    className="makeStyles-root-1219 makeStyles-title-1212"
+                                                    className="makeStyles-root-1215 makeStyles-title-1208"
                                                     classes={
                                                       Object {
                                                         "alignCenter": "MuiTypography-alignCenter",
@@ -5419,7 +5523,7 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                                     }
                                                   >
                                                     <h3
-                                                      className="MuiTypography-root makeStyles-root-1219 makeStyles-title-1212 MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+                                                      className="MuiTypography-root makeStyles-root-1215 makeStyles-title-1208 MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
                                                     >
                                                       Establish timeline
                                                     </h3>
@@ -5427,7 +5531,7 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                                 </WithStyles(ForwardRef(Typography))>
                                               </Title>
                                               <div
-                                                className="makeStyles-tags-1204"
+                                                className="makeStyles-tags-1200"
                                               >
                                                 <Tag
                                                   color="#6D9BDB"
@@ -5435,7 +5539,7 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                                   name="monitor"
                                                 >
                                                   <span
-                                                    className="makeStyles-tag-1205 makeStyles-tag-1246"
+                                                    className="makeStyles-tag-1201 makeStyles-tag-1242"
                                                   >
                                                     monitor
                                                   </span>
@@ -5446,7 +5550,7 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                                   name="farmer"
                                                 >
                                                   <span
-                                                    className="makeStyles-tag-1205 makeStyles-tag-1248"
+                                                    className="makeStyles-tag-1201 makeStyles-tag-1244"
                                                   >
                                                     farmer
                                                   </span>
@@ -5466,11 +5570,11 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                       </ForwardRef(TimelineItem)>
                     </WithStyles(ForwardRef(TimelineItem))>
                     <WithStyles(ForwardRef(TimelineItem))
-                      className="makeStyles-item-1201"
+                      className="makeStyles-item-1196"
                       key="2"
                     >
                       <ForwardRef(TimelineItem)
-                        className="makeStyles-item-1201"
+                        className="makeStyles-item-1196"
                         classes={
                           Object {
                             "alignAlternate": "MuiTimelineItem-alignAlternate",
@@ -5484,13 +5588,13 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                         }
                       >
                         <li
-                          className="MuiTimelineItem-root MuiTimelineItem-alignLeft makeStyles-item-1201 MuiTimelineItem-missingOppositeContent"
+                          className="MuiTimelineItem-root MuiTimelineItem-alignLeft makeStyles-item-1196 MuiTimelineItem-missingOppositeContent"
                         >
                           <WithStyles(ForwardRef(TimelineSeparator))
-                            className="makeStyles-separator-1210"
+                            className="makeStyles-separator-1206"
                           >
                             <ForwardRef(TimelineSeparator)
-                              className="makeStyles-separator-1210"
+                              className="makeStyles-separator-1206"
                               classes={
                                 Object {
                                   "root": "MuiTimelineSeparator-root",
@@ -5498,13 +5602,13 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                               }
                             >
                               <div
-                                className="MuiTimelineSeparator-root makeStyles-separator-1210"
+                                className="MuiTimelineSeparator-root makeStyles-separator-1206"
                               >
                                 <WithStyles(ForwardRef(TimelineDot))
-                                  className="makeStyles-dot-1209"
+                                  className="makeStyles-dot-1205"
                                 >
                                   <ForwardRef(TimelineDot)
-                                    className="makeStyles-dot-1209"
+                                    className="makeStyles-dot-1205"
                                     classes={
                                       Object {
                                         "defaultGrey": "MuiTimelineDot-defaultGrey",
@@ -5518,15 +5622,15 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                     }
                                   >
                                     <span
-                                      className="MuiTimelineDot-root makeStyles-dot-1209 MuiTimelineDot-defaultGrey"
+                                      className="MuiTimelineDot-root makeStyles-dot-1205 MuiTimelineDot-defaultGrey"
                                     />
                                   </ForwardRef(TimelineDot)>
                                 </WithStyles(ForwardRef(TimelineDot))>
                                 <WithStyles(ForwardRef(TimelineConnector))
-                                  className="makeStyles-connector-1206"
+                                  className="makeStyles-connector-1202"
                                 >
                                   <ForwardRef(TimelineConnector)
-                                    className="makeStyles-connector-1206"
+                                    className="makeStyles-connector-1202"
                                     classes={
                                       Object {
                                         "root": "MuiTimelineConnector-root",
@@ -5534,7 +5638,7 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                     }
                                   >
                                     <span
-                                      className="MuiTimelineConnector-root makeStyles-connector-1206"
+                                      className="MuiTimelineConnector-root makeStyles-connector-1202"
                                     />
                                   </ForwardRef(TimelineConnector)>
                                 </WithStyles(ForwardRef(TimelineConnector))>
@@ -5573,12 +5677,12 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                   }
                                 >
                                   <WithStyles(ForwardRef(Grid))
-                                    className="makeStyles-content-1203 makeStyles-content-1249"
+                                    className="makeStyles-content-1199 makeStyles-content-1245"
                                     container={true}
                                     wrap="nowrap"
                                   >
                                     <ForwardRef(Grid)
-                                      className="makeStyles-content-1203 makeStyles-content-1249"
+                                      className="makeStyles-content-1199 makeStyles-content-1245"
                                       classes={
                                         Object {
                                           "align-content-xs-center": "MuiGrid-align-content-xs-center",
@@ -5691,14 +5795,14 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                       wrap="nowrap"
                                     >
                                       <div
-                                        className="MuiGrid-root makeStyles-content-1203 makeStyles-content-1249 MuiGrid-container MuiGrid-wrap-xs-nowrap"
+                                        className="MuiGrid-root makeStyles-content-1199 makeStyles-content-1245 MuiGrid-container MuiGrid-wrap-xs-nowrap"
                                       >
                                         <WithStyles(ForwardRef(Grid))
-                                          className="makeStyles-number-1211"
+                                          className="makeStyles-number-1207"
                                           item={true}
                                         >
                                           <ForwardRef(Grid)
-                                            className="makeStyles-number-1211"
+                                            className="makeStyles-number-1207"
                                             classes={
                                               Object {
                                                 "align-content-xs-center": "MuiGrid-align-content-xs-center",
@@ -5810,18 +5914,18 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                             item={true}
                                           >
                                             <div
-                                              className="MuiGrid-root makeStyles-number-1211 MuiGrid-item"
+                                              className="MuiGrid-root makeStyles-number-1207 MuiGrid-item"
                                             >
                                               3
                                             </div>
                                           </ForwardRef(Grid)>
                                         </WithStyles(ForwardRef(Grid))>
                                         <WithStyles(ForwardRef(Grid))
-                                          className="makeStyles-text-1213"
+                                          className="makeStyles-text-1209"
                                           item={true}
                                         >
                                           <ForwardRef(Grid)
-                                            className="makeStyles-text-1213"
+                                            className="makeStyles-text-1209"
                                             classes={
                                               Object {
                                                 "align-content-xs-center": "MuiGrid-align-content-xs-center",
@@ -5933,21 +6037,21 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                             item={true}
                                           >
                                             <div
-                                              className="MuiGrid-root makeStyles-text-1213 MuiGrid-item"
+                                              className="MuiGrid-root makeStyles-text-1209 MuiGrid-item"
                                             >
                                               <Title
-                                                className="makeStyles-title-1212"
+                                                className="makeStyles-title-1208"
                                                 variant="h3"
                                               >
                                                 <WithStyles(ForwardRef(Typography))
                                                   align="left"
-                                                  className="makeStyles-root-1219 makeStyles-title-1212"
+                                                  className="makeStyles-root-1215 makeStyles-title-1208"
                                                   color="textPrimary"
                                                   variant="h3"
                                                 >
                                                   <ForwardRef(Typography)
                                                     align="left"
-                                                    className="makeStyles-root-1219 makeStyles-title-1212"
+                                                    className="makeStyles-root-1215 makeStyles-title-1208"
                                                     classes={
                                                       Object {
                                                         "alignCenter": "MuiTypography-alignCenter",
@@ -6000,7 +6104,7 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                                     }
                                                   >
                                                     <h3
-                                                      className="MuiTypography-root makeStyles-root-1219 makeStyles-title-1212 MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+                                                      className="MuiTypography-root makeStyles-root-1215 makeStyles-title-1208 MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
                                                     >
                                                       Lorem ipsum 1
                                                     </h3>
@@ -6008,7 +6112,7 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                                 </WithStyles(ForwardRef(Typography))>
                                               </Title>
                                               <div
-                                                className="makeStyles-tags-1204"
+                                                className="makeStyles-tags-1200"
                                               >
                                                 <Tag
                                                   color="#6D9BDB"
@@ -6016,7 +6120,7 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                                   name="monitor"
                                                 >
                                                   <span
-                                                    className="makeStyles-tag-1205 makeStyles-tag-1252"
+                                                    className="makeStyles-tag-1201 makeStyles-tag-1248"
                                                   >
                                                     monitor
                                                   </span>
@@ -6027,7 +6131,7 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                                   name="farmer"
                                                 >
                                                   <span
-                                                    className="makeStyles-tag-1205 makeStyles-tag-1254"
+                                                    className="makeStyles-tag-1201 makeStyles-tag-1250"
                                                   >
                                                     farmer
                                                   </span>
@@ -6047,11 +6151,11 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                       </ForwardRef(TimelineItem)>
                     </WithStyles(ForwardRef(TimelineItem))>
                     <WithStyles(ForwardRef(TimelineItem))
-                      className="makeStyles-item-1201"
+                      className="makeStyles-item-1196"
                       key="3"
                     >
                       <ForwardRef(TimelineItem)
-                        className="makeStyles-item-1201"
+                        className="makeStyles-item-1196"
                         classes={
                           Object {
                             "alignAlternate": "MuiTimelineItem-alignAlternate",
@@ -6065,13 +6169,13 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                         }
                       >
                         <li
-                          className="MuiTimelineItem-root MuiTimelineItem-alignLeft makeStyles-item-1201 MuiTimelineItem-missingOppositeContent"
+                          className="MuiTimelineItem-root MuiTimelineItem-alignLeft makeStyles-item-1196 MuiTimelineItem-missingOppositeContent"
                         >
                           <WithStyles(ForwardRef(TimelineSeparator))
-                            className="makeStyles-separator-1210"
+                            className="makeStyles-separator-1206"
                           >
                             <ForwardRef(TimelineSeparator)
-                              className="makeStyles-separator-1210"
+                              className="makeStyles-separator-1206"
                               classes={
                                 Object {
                                   "root": "MuiTimelineSeparator-root",
@@ -6079,13 +6183,13 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                               }
                             >
                               <div
-                                className="MuiTimelineSeparator-root makeStyles-separator-1210"
+                                className="MuiTimelineSeparator-root makeStyles-separator-1206"
                               >
                                 <WithStyles(ForwardRef(TimelineDot))
-                                  className="makeStyles-dot-1209"
+                                  className="makeStyles-dot-1205"
                                 >
                                   <ForwardRef(TimelineDot)
-                                    className="makeStyles-dot-1209"
+                                    className="makeStyles-dot-1205"
                                     classes={
                                       Object {
                                         "defaultGrey": "MuiTimelineDot-defaultGrey",
@@ -6099,15 +6203,15 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                     }
                                   >
                                     <span
-                                      className="MuiTimelineDot-root makeStyles-dot-1209 MuiTimelineDot-defaultGrey"
+                                      className="MuiTimelineDot-root makeStyles-dot-1205 MuiTimelineDot-defaultGrey"
                                     />
                                   </ForwardRef(TimelineDot)>
                                 </WithStyles(ForwardRef(TimelineDot))>
                                 <WithStyles(ForwardRef(TimelineConnector))
-                                  className="makeStyles-connector-1206 makeStyles-lastConnector-1208"
+                                  className="makeStyles-connector-1202 makeStyles-lastConnector-1204"
                                 >
                                   <ForwardRef(TimelineConnector)
-                                    className="makeStyles-connector-1206 makeStyles-lastConnector-1208"
+                                    className="makeStyles-connector-1202 makeStyles-lastConnector-1204"
                                     classes={
                                       Object {
                                         "root": "MuiTimelineConnector-root",
@@ -6115,7 +6219,7 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                     }
                                   >
                                     <span
-                                      className="MuiTimelineConnector-root makeStyles-connector-1206 makeStyles-lastConnector-1208"
+                                      className="MuiTimelineConnector-root makeStyles-connector-1202 makeStyles-lastConnector-1204"
                                     />
                                   </ForwardRef(TimelineConnector)>
                                 </WithStyles(ForwardRef(TimelineConnector))>
@@ -6150,12 +6254,12 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                   }
                                 >
                                   <WithStyles(ForwardRef(Grid))
-                                    className="makeStyles-content-1203 makeStyles-content-1255"
+                                    className="makeStyles-content-1199 makeStyles-content-1251"
                                     container={true}
                                     wrap="nowrap"
                                   >
                                     <ForwardRef(Grid)
-                                      className="makeStyles-content-1203 makeStyles-content-1255"
+                                      className="makeStyles-content-1199 makeStyles-content-1251"
                                       classes={
                                         Object {
                                           "align-content-xs-center": "MuiGrid-align-content-xs-center",
@@ -6268,14 +6372,14 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                       wrap="nowrap"
                                     >
                                       <div
-                                        className="MuiGrid-root makeStyles-content-1203 makeStyles-content-1255 MuiGrid-container MuiGrid-wrap-xs-nowrap"
+                                        className="MuiGrid-root makeStyles-content-1199 makeStyles-content-1251 MuiGrid-container MuiGrid-wrap-xs-nowrap"
                                       >
                                         <WithStyles(ForwardRef(Grid))
-                                          className="makeStyles-number-1211"
+                                          className="makeStyles-number-1207"
                                           item={true}
                                         >
                                           <ForwardRef(Grid)
-                                            className="makeStyles-number-1211"
+                                            className="makeStyles-number-1207"
                                             classes={
                                               Object {
                                                 "align-content-xs-center": "MuiGrid-align-content-xs-center",
@@ -6387,18 +6491,18 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                             item={true}
                                           >
                                             <div
-                                              className="MuiGrid-root makeStyles-number-1211 MuiGrid-item"
+                                              className="MuiGrid-root makeStyles-number-1207 MuiGrid-item"
                                             >
                                               4
                                             </div>
                                           </ForwardRef(Grid)>
                                         </WithStyles(ForwardRef(Grid))>
                                         <WithStyles(ForwardRef(Grid))
-                                          className="makeStyles-text-1213"
+                                          className="makeStyles-text-1209"
                                           item={true}
                                         >
                                           <ForwardRef(Grid)
-                                            className="makeStyles-text-1213"
+                                            className="makeStyles-text-1209"
                                             classes={
                                               Object {
                                                 "align-content-xs-center": "MuiGrid-align-content-xs-center",
@@ -6510,21 +6614,21 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                             item={true}
                                           >
                                             <div
-                                              className="MuiGrid-root makeStyles-text-1213 MuiGrid-item"
+                                              className="MuiGrid-root makeStyles-text-1209 MuiGrid-item"
                                             >
                                               <Title
-                                                className="makeStyles-title-1212"
+                                                className="makeStyles-title-1208"
                                                 variant="h3"
                                               >
                                                 <WithStyles(ForwardRef(Typography))
                                                   align="left"
-                                                  className="makeStyles-root-1219 makeStyles-title-1212"
+                                                  className="makeStyles-root-1215 makeStyles-title-1208"
                                                   color="textPrimary"
                                                   variant="h3"
                                                 >
                                                   <ForwardRef(Typography)
                                                     align="left"
-                                                    className="makeStyles-root-1219 makeStyles-title-1212"
+                                                    className="makeStyles-root-1215 makeStyles-title-1208"
                                                     classes={
                                                       Object {
                                                         "alignCenter": "MuiTypography-alignCenter",
@@ -6577,7 +6681,7 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                                     }
                                                   >
                                                     <h3
-                                                      className="MuiTypography-root makeStyles-root-1219 makeStyles-title-1212 MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+                                                      className="MuiTypography-root makeStyles-root-1215 makeStyles-title-1208 MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
                                                     >
                                                       Lorem ipsum 2
                                                     </h3>
@@ -6585,7 +6689,7 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                                 </WithStyles(ForwardRef(Typography))>
                                               </Title>
                                               <div
-                                                className="makeStyles-tags-1204"
+                                                className="makeStyles-tags-1200"
                                               >
                                                 <Tag
                                                   color="#6D9BDB"
@@ -6593,7 +6697,7 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
                                                   name="monitor"
                                                 >
                                                   <span
-                                                    className="makeStyles-tag-1205 makeStyles-tag-1258"
+                                                    className="makeStyles-tag-1201 makeStyles-tag-1254"
                                                   >
                                                     monitor
                                                   </span>
@@ -6617,6 +6721,16 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
               </WithStyles(ForwardRef(Timeline))>
             </div>
           </Styled(MuiBox)>
+          <RegenModal
+            className="makeStyles-modal-1198"
+            onClose={[Function]}
+            open={false}
+          >
+            <ForwardRef(Modal)
+              onClose={[Function]}
+              open={false}
+            />
+          </RegenModal>
         </NewTimeline>
       </div>
     </ThemeProvider>
@@ -7664,7 +7778,7 @@ exports[`Storyshots Components|Timeline Timeline 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -8432,10 +8546,10 @@ exports[`Storyshots Components|Timeline Timeline 1`] = `
           }
         >
           <div
-            className="makeStyles-root-1088"
+            className="makeStyles-root-1080"
           >
             <div
-              className="makeStyles-item-1089"
+              className="makeStyles-item-1081"
               key="0-undefined"
             >
               <TimelineItem
@@ -8447,26 +8561,26 @@ exports[`Storyshots Components|Timeline Timeline 1`] = `
                 odd={false}
               >
                 <div
-                  className="makeStyles-content-1090 makeStyles-content-1099"
+                  className="makeStyles-content-1082 makeStyles-content-1091"
                 >
                   <div
-                    className="makeStyles-date-1091"
+                    className="makeStyles-date-1083"
                   >
                     September 2, 2019
                   </div>
                   <Title
-                    className="makeStyles-summary-1095"
+                    className="makeStyles-summary-1087"
                     variant="h5"
                   >
                     <WithStyles(ForwardRef(Typography))
                       align="left"
-                      className="makeStyles-root-1102 makeStyles-summary-1095"
+                      className="makeStyles-root-1094 makeStyles-summary-1087"
                       color="textPrimary"
                       variant="h5"
                     >
                       <ForwardRef(Typography)
                         align="left"
-                        className="makeStyles-root-1102 makeStyles-summary-1095"
+                        className="makeStyles-root-1094 makeStyles-summary-1087"
                         classes={
                           Object {
                             "alignCenter": "MuiTypography-alignCenter",
@@ -8519,7 +8633,7 @@ exports[`Storyshots Components|Timeline Timeline 1`] = `
                         }
                       >
                         <h5
-                          className="MuiTypography-root makeStyles-root-1102 makeStyles-summary-1095 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+                          className="MuiTypography-root makeStyles-root-1094 makeStyles-summary-1087 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
                         >
                            
                         </h5>
@@ -8527,21 +8641,21 @@ exports[`Storyshots Components|Timeline Timeline 1`] = `
                     </WithStyles(ForwardRef(Typography))>
                   </Title>
                   <div
-                    className="makeStyles-description-1092"
+                    className="makeStyles-description-1084"
                   >
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                   </div>
                   <span
-                    className="makeStyles-circle-1094 makeStyles-circle-1101"
+                    className="makeStyles-circle-1086 makeStyles-circle-1093"
                   />
                   <div
-                    className="makeStyles-bar-1093 makeStyles-bar-1100"
+                    className="makeStyles-bar-1085 makeStyles-bar-1092"
                   />
                 </div>
               </TimelineItem>
             </div>
             <div
-              className="makeStyles-item-1089"
+              className="makeStyles-item-1081"
               key="1-undefined"
             >
               <TimelineItem
@@ -8553,26 +8667,26 @@ exports[`Storyshots Components|Timeline Timeline 1`] = `
                 odd={true}
               >
                 <div
-                  className="makeStyles-content-1090 makeStyles-content-1103"
+                  className="makeStyles-content-1082 makeStyles-content-1095"
                 >
                   <div
-                    className="makeStyles-date-1091"
+                    className="makeStyles-date-1083"
                   >
                     October 21, 2019
                   </div>
                   <Title
-                    className="makeStyles-summary-1095"
+                    className="makeStyles-summary-1087"
                     variant="h5"
                   >
                     <WithStyles(ForwardRef(Typography))
                       align="left"
-                      className="makeStyles-root-1102 makeStyles-summary-1095"
+                      className="makeStyles-root-1094 makeStyles-summary-1087"
                       color="textPrimary"
                       variant="h5"
                     >
                       <ForwardRef(Typography)
                         align="left"
-                        className="makeStyles-root-1102 makeStyles-summary-1095"
+                        className="makeStyles-root-1094 makeStyles-summary-1087"
                         classes={
                           Object {
                             "alignCenter": "MuiTypography-alignCenter",
@@ -8625,7 +8739,7 @@ exports[`Storyshots Components|Timeline Timeline 1`] = `
                         }
                       >
                         <h5
-                          className="MuiTypography-root makeStyles-root-1102 makeStyles-summary-1095 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+                          className="MuiTypography-root makeStyles-root-1094 makeStyles-summary-1087 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
                         >
                            
                         </h5>
@@ -8633,21 +8747,21 @@ exports[`Storyshots Components|Timeline Timeline 1`] = `
                     </WithStyles(ForwardRef(Typography))>
                   </Title>
                   <div
-                    className="makeStyles-description-1092"
+                    className="makeStyles-description-1084"
                   >
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                   </div>
                   <span
-                    className="makeStyles-circle-1094 makeStyles-circle-1105"
+                    className="makeStyles-circle-1086 makeStyles-circle-1097"
                   />
                   <div
-                    className="makeStyles-bar-1093 makeStyles-bar-1104"
+                    className="makeStyles-bar-1085 makeStyles-bar-1096"
                   />
                 </div>
               </TimelineItem>
             </div>
             <div
-              className="makeStyles-item-1089"
+              className="makeStyles-item-1081"
               key="2-undefined"
             >
               <TimelineItem
@@ -8659,26 +8773,26 @@ exports[`Storyshots Components|Timeline Timeline 1`] = `
                 odd={false}
               >
                 <div
-                  className="makeStyles-content-1090 makeStyles-content-1106"
+                  className="makeStyles-content-1082 makeStyles-content-1098"
                 >
                   <div
-                    className="makeStyles-date-1091"
+                    className="makeStyles-date-1083"
                   >
                     February 20, 2020
                   </div>
                   <Title
-                    className="makeStyles-summary-1095"
+                    className="makeStyles-summary-1087"
                     variant="h5"
                   >
                     <WithStyles(ForwardRef(Typography))
                       align="left"
-                      className="makeStyles-root-1102 makeStyles-summary-1095"
+                      className="makeStyles-root-1094 makeStyles-summary-1087"
                       color="textPrimary"
                       variant="h5"
                     >
                       <ForwardRef(Typography)
                         align="left"
-                        className="makeStyles-root-1102 makeStyles-summary-1095"
+                        className="makeStyles-root-1094 makeStyles-summary-1087"
                         classes={
                           Object {
                             "alignCenter": "MuiTypography-alignCenter",
@@ -8731,7 +8845,7 @@ exports[`Storyshots Components|Timeline Timeline 1`] = `
                         }
                       >
                         <h5
-                          className="MuiTypography-root makeStyles-root-1102 makeStyles-summary-1095 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+                          className="MuiTypography-root makeStyles-root-1094 makeStyles-summary-1087 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
                         >
                            
                         </h5>
@@ -8739,21 +8853,21 @@ exports[`Storyshots Components|Timeline Timeline 1`] = `
                     </WithStyles(ForwardRef(Typography))>
                   </Title>
                   <div
-                    className="makeStyles-description-1092"
+                    className="makeStyles-description-1084"
                   >
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                   </div>
                   <span
-                    className="makeStyles-circle-1094 makeStyles-circle-1108"
+                    className="makeStyles-circle-1086 makeStyles-circle-1100"
                   />
                   <div
-                    className="makeStyles-bar-1093 makeStyles-bar-1107"
+                    className="makeStyles-bar-1085 makeStyles-bar-1099"
                   />
                 </div>
               </TimelineItem>
             </div>
             <div
-              className="makeStyles-item-1089"
+              className="makeStyles-item-1081"
               key="3-undefined"
             >
               <TimelineItem
@@ -8765,26 +8879,26 @@ exports[`Storyshots Components|Timeline Timeline 1`] = `
                 odd={true}
               >
                 <div
-                  className="makeStyles-content-1090 makeStyles-content-1109"
+                  className="makeStyles-content-1082 makeStyles-content-1101"
                 >
                   <div
-                    className="makeStyles-date-1091"
+                    className="makeStyles-date-1083"
                   >
                     September 2022
                   </div>
                   <Title
-                    className="makeStyles-summary-1095"
+                    className="makeStyles-summary-1087"
                     variant="h5"
                   >
                     <WithStyles(ForwardRef(Typography))
                       align="left"
-                      className="makeStyles-root-1102 makeStyles-summary-1095"
+                      className="makeStyles-root-1094 makeStyles-summary-1087"
                       color="textPrimary"
                       variant="h5"
                     >
                       <ForwardRef(Typography)
                         align="left"
-                        className="makeStyles-root-1102 makeStyles-summary-1095"
+                        className="makeStyles-root-1094 makeStyles-summary-1087"
                         classes={
                           Object {
                             "alignCenter": "MuiTypography-alignCenter",
@@ -8837,7 +8951,7 @@ exports[`Storyshots Components|Timeline Timeline 1`] = `
                         }
                       >
                         <h5
-                          className="MuiTypography-root makeStyles-root-1102 makeStyles-summary-1095 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+                          className="MuiTypography-root makeStyles-root-1094 makeStyles-summary-1087 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
                         >
                            
                         </h5>
@@ -8845,21 +8959,21 @@ exports[`Storyshots Components|Timeline Timeline 1`] = `
                     </WithStyles(ForwardRef(Typography))>
                   </Title>
                   <div
-                    className="makeStyles-description-1092"
+                    className="makeStyles-description-1084"
                   >
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                   </div>
                   <span
-                    className="makeStyles-circle-1094 makeStyles-circle-1111"
+                    className="makeStyles-circle-1086 makeStyles-circle-1103"
                   />
                   <div
-                    className="makeStyles-bar-1093 makeStyles-bar-1110"
+                    className="makeStyles-bar-1085 makeStyles-bar-1102"
                   />
                 </div>
               </TimelineItem>
             </div>
             <div
-              className="makeStyles-item-1089"
+              className="makeStyles-item-1081"
               key="4-undefined"
             >
               <TimelineItem
@@ -8871,26 +8985,26 @@ exports[`Storyshots Components|Timeline Timeline 1`] = `
                 odd={false}
               >
                 <div
-                  className="makeStyles-content-1090 makeStyles-content-1112"
+                  className="makeStyles-content-1082 makeStyles-content-1104"
                 >
                   <div
-                    className="makeStyles-date-1091"
+                    className="makeStyles-date-1083"
                   >
                     February 2029
                   </div>
                   <Title
-                    className="makeStyles-summary-1095"
+                    className="makeStyles-summary-1087"
                     variant="h5"
                   >
                     <WithStyles(ForwardRef(Typography))
                       align="left"
-                      className="makeStyles-root-1102 makeStyles-summary-1095"
+                      className="makeStyles-root-1094 makeStyles-summary-1087"
                       color="textPrimary"
                       variant="h5"
                     >
                       <ForwardRef(Typography)
                         align="left"
-                        className="makeStyles-root-1102 makeStyles-summary-1095"
+                        className="makeStyles-root-1094 makeStyles-summary-1087"
                         classes={
                           Object {
                             "alignCenter": "MuiTypography-alignCenter",
@@ -8943,7 +9057,7 @@ exports[`Storyshots Components|Timeline Timeline 1`] = `
                         }
                       >
                         <h5
-                          className="MuiTypography-root makeStyles-root-1102 makeStyles-summary-1095 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+                          className="MuiTypography-root makeStyles-root-1094 makeStyles-summary-1087 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
                         >
                            
                         </h5>
@@ -8951,15 +9065,15 @@ exports[`Storyshots Components|Timeline Timeline 1`] = `
                     </WithStyles(ForwardRef(Typography))>
                   </Title>
                   <div
-                    className="makeStyles-description-1092"
+                    className="makeStyles-description-1084"
                   >
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                   </div>
                   <span
-                    className="makeStyles-circle-1094 makeStyles-circle-1114"
+                    className="makeStyles-circle-1086 makeStyles-circle-1106"
                   />
                   <div
-                    className="makeStyles-bar-1093 makeStyles-bar-1113"
+                    className="makeStyles-bar-1085 makeStyles-bar-1105"
                   />
                 </div>
               </TimelineItem>
@@ -9993,7 +10107,7 @@ exports[`Storyshots Components|Timeline Timeline Item 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -10715,26 +10829,26 @@ exports[`Storyshots Components|Timeline Timeline Item 1`] = `
           title="Project starts"
         >
           <div
-            className="makeStyles-content-1128 makeStyles-content-1137"
+            className="makeStyles-content-1120 makeStyles-content-1129"
           >
             <div
-              className="makeStyles-date-1129"
+              className="makeStyles-date-1121"
             >
               September 2, 2019
             </div>
             <Title
-              className="makeStyles-summary-1133"
+              className="makeStyles-summary-1125"
               variant="h5"
             >
               <WithStyles(ForwardRef(Typography))
                 align="left"
-                className="makeStyles-root-1140 makeStyles-summary-1133"
+                className="makeStyles-root-1132 makeStyles-summary-1125"
                 color="textPrimary"
                 variant="h5"
               >
                 <ForwardRef(Typography)
                   align="left"
-                  className="makeStyles-root-1140 makeStyles-summary-1133"
+                  className="makeStyles-root-1132 makeStyles-summary-1125"
                   classes={
                     Object {
                       "alignCenter": "MuiTypography-alignCenter",
@@ -10787,7 +10901,7 @@ exports[`Storyshots Components|Timeline Timeline Item 1`] = `
                   }
                 >
                   <h5
-                    className="MuiTypography-root makeStyles-root-1140 makeStyles-summary-1133 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+                    className="MuiTypography-root makeStyles-root-1132 makeStyles-summary-1125 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
                   >
                      
                   </h5>
@@ -10795,15 +10909,15 @@ exports[`Storyshots Components|Timeline Timeline Item 1`] = `
               </WithStyles(ForwardRef(Typography))>
             </Title>
             <div
-              className="makeStyles-description-1130"
+              className="makeStyles-description-1122"
             >
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
             </div>
             <span
-              className="makeStyles-circle-1132 makeStyles-circle-1139"
+              className="makeStyles-circle-1124 makeStyles-circle-1131"
             />
             <div
-              className="makeStyles-bar-1131 makeStyles-bar-1138"
+              className="makeStyles-bar-1123 makeStyles-bar-1130"
             />
           </div>
         </TimelineItem>

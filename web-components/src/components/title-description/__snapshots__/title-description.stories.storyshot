@@ -1036,7 +1036,7 @@ exports[`Storyshots Components|TitleDescription Description 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -1748,13 +1748,13 @@ exports[`Storyshots Components|TitleDescription Description 1`] = `
           title="Measuring Ecological Health"
         >
           <WithStyles(ForwardRef(Typography))
-            className="makeStyles-root-1267 makeStyles-root-1268"
+            className="makeStyles-root-1265 makeStyles-root-1266"
             component="div"
             description="Regen Network is empowering an open community of scientists to build and deploy cutting edge methodologies to measure ecological health and make scientifically robust claims.&lt;br&gt;Earth observation science, landscape ecology, and our ability to understand complex ecological systems is undergoing a technological revolution. Regen Network in the vanguard of this movement to make climate science available to the people and markets who need it most. Join us in service of better decision-making, better markets, and collective action on climate."
             title="Measuring Ecological Health"
           >
             <ForwardRef(Typography)
-              className="makeStyles-root-1267 makeStyles-root-1268"
+              className="makeStyles-root-1265 makeStyles-root-1266"
               classes={
                 Object {
                   "alignCenter": "MuiTypography-alignCenter",
@@ -1808,7 +1808,7 @@ exports[`Storyshots Components|TitleDescription Description 1`] = `
               }
             >
               <div
-                className="MuiTypography-root makeStyles-root-1267 makeStyles-root-1268 MuiTypography-body1"
+                className="MuiTypography-root makeStyles-root-1265 makeStyles-root-1266 MuiTypography-body1"
                 description="Regen Network is empowering an open community of scientists to build and deploy cutting edge methodologies to measure ecological health and make scientifically robust claims.&lt;br&gt;Earth observation science, landscape ecology, and our ability to understand complex ecological systems is undergoing a technological revolution. Regen Network in the vanguard of this movement to make climate science available to the people and markets who need it most. Join us in service of better decision-making, better markets, and collective action on climate."
                 title="Measuring Ecological Health"
               />

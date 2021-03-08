@@ -963,7 +963,7 @@ exports[`Storyshots Components|Image Grid Image Grid 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -1690,12 +1690,12 @@ exports[`Storyshots Components|Image Grid Image Grid 1`] = `
         >
           <WithStyles(ForwardRef(Grid))
             alignItems="center"
-            className="makeStyles-root-789 makeStyles-root-794"
+            className="makeStyles-root-781 makeStyles-root-786"
             container={true}
           >
             <ForwardRef(Grid)
               alignItems="center"
-              className="makeStyles-root-789 makeStyles-root-794"
+              className="makeStyles-root-781 makeStyles-root-786"
               classes={
                 Object {
                   "align-content-xs-center": "MuiGrid-align-content-xs-center",
@@ -1807,14 +1807,14 @@ exports[`Storyshots Components|Image Grid Image Grid 1`] = `
               container={true}
             >
               <div
-                className="MuiGrid-root makeStyles-root-789 makeStyles-root-794 MuiGrid-container MuiGrid-align-items-xs-center"
+                className="MuiGrid-root makeStyles-root-781 makeStyles-root-786 MuiGrid-container MuiGrid-align-items-xs-center"
               >
                 <WithStyles(ForwardRef(Grid))
-                  className="makeStyles-image-792"
+                  className="makeStyles-image-784"
                   item={true}
                 >
                   <ForwardRef(Grid)
-                    className="makeStyles-image-792"
+                    className="makeStyles-image-784"
                     classes={
                       Object {
                         "align-content-xs-center": "MuiGrid-align-content-xs-center",
@@ -1926,7 +1926,7 @@ exports[`Storyshots Components|Image Grid Image Grid 1`] = `
                     item={true}
                   >
                     <div
-                      className="MuiGrid-root makeStyles-image-792 MuiGrid-item"
+                      className="MuiGrid-root makeStyles-image-784 MuiGrid-item"
                     >
                       <img
                         alt="andover"
@@ -1936,11 +1936,11 @@ exports[`Storyshots Components|Image Grid Image Grid 1`] = `
                   </ForwardRef(Grid)>
                 </WithStyles(ForwardRef(Grid))>
                 <WithStyles(ForwardRef(Grid))
-                  className="makeStyles-text-790 makeStyles-text-795"
+                  className="makeStyles-text-782 makeStyles-text-787"
                   item={true}
                 >
                   <ForwardRef(Grid)
-                    className="makeStyles-text-790 makeStyles-text-795"
+                    className="makeStyles-text-782 makeStyles-text-787"
                     classes={
                       Object {
                         "align-content-xs-center": "MuiGrid-align-content-xs-center",
@@ -2052,21 +2052,21 @@ exports[`Storyshots Components|Image Grid Image Grid 1`] = `
                     item={true}
                   >
                     <div
-                      className="MuiGrid-root makeStyles-text-790 makeStyles-text-795 MuiGrid-item"
+                      className="MuiGrid-root makeStyles-text-782 makeStyles-text-787 MuiGrid-item"
                     >
                       <Title
-                        className="makeStyles-title-791 makeStyles-title-796"
+                        className="makeStyles-title-783 makeStyles-title-788"
                         variant="h2"
                       >
                         <WithStyles(ForwardRef(Typography))
                           align="left"
-                          className="makeStyles-root-798 makeStyles-title-791 makeStyles-title-796"
+                          className="makeStyles-root-790 makeStyles-title-783 makeStyles-title-788"
                           color="textPrimary"
                           variant="h2"
                         >
                           <ForwardRef(Typography)
                             align="left"
-                            className="makeStyles-root-798 makeStyles-title-791 makeStyles-title-796"
+                            className="makeStyles-root-790 makeStyles-title-783 makeStyles-title-788"
                             classes={
                               Object {
                                 "alignCenter": "MuiTypography-alignCenter",
@@ -2119,7 +2119,7 @@ exports[`Storyshots Components|Image Grid Image Grid 1`] = `
                             }
                           >
                             <h2
-                              className="MuiTypography-root makeStyles-root-798 makeStyles-title-791 makeStyles-title-796 MuiTypography-h2 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+                              className="MuiTypography-root makeStyles-root-790 makeStyles-title-783 makeStyles-title-788 MuiTypography-h2 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
                             >
                               Verified outcomes
                             </h2>
@@ -2127,7 +2127,7 @@ exports[`Storyshots Components|Image Grid Image Grid 1`] = `
                         </WithStyles(ForwardRef(Typography))>
                       </Title>
                       <Description
-                        className="makeStyles-description-793 makeStyles-description-797"
+                        className="makeStyles-description-785 makeStyles-description-789"
                         fontSize={
                           Object {
                             "sm": "1.3125rem",
@@ -2136,11 +2136,11 @@ exports[`Storyshots Components|Image Grid Image Grid 1`] = `
                         }
                       >
                         <WithStyles(ForwardRef(Typography))
-                          className="makeStyles-root-799 makeStyles-root-800 makeStyles-description-793 makeStyles-description-797"
+                          className="makeStyles-root-791 makeStyles-root-792 makeStyles-description-785 makeStyles-description-789"
                           component="div"
                         >
                           <ForwardRef(Typography)
-                            className="makeStyles-root-799 makeStyles-root-800 makeStyles-description-793 makeStyles-description-797"
+                            className="makeStyles-root-791 makeStyles-root-792 makeStyles-description-785 makeStyles-description-789"
                             classes={
                               Object {
                                 "alignCenter": "MuiTypography-alignCenter",
@@ -2192,7 +2192,7 @@ exports[`Storyshots Components|Image Grid Image Grid 1`] = `
                             }
                           >
                             <div
-                              className="MuiTypography-root makeStyles-root-799 makeStyles-root-800 makeStyles-description-793 makeStyles-description-797 MuiTypography-body1"
+                              className="MuiTypography-root makeStyles-root-791 makeStyles-root-792 makeStyles-description-785 makeStyles-description-789 MuiTypography-body1"
                             >
                               Software-based and remote-sensing monitoring keeps costs low and transparency high.
                             </div>

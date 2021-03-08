@@ -1108,7 +1108,7 @@ exports[`Storyshots Components|Map Map 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -2108,7 +2108,7 @@ exports[`Storyshots Components|Map Map 1`] = `
           }
         >
           <div
-            className="makeStyles-root-823"
+            className="makeStyles-root-815"
           >
             <InteractiveMap
               altitude={1.5}
@@ -2314,7 +2314,7 @@ exports[`Storyshots Components|Map Map 1`] = `
               </div>
             </InteractiveMap>
             <div
-              className="makeStyles-zoomButton-828"
+              className="makeStyles-zoomButton-820"
             >
               <OutlinedButton
                 onClick={[Function]}
@@ -2328,7 +2328,7 @@ exports[`Storyshots Components|Map Map 1`] = `
                   <WithStyles(ForwardRef(Button))
                     classes={
                       Object {
-                        "root": "WithStyles(ForwardRef(Button))-root-829",
+                        "root": "WithStyles(ForwardRef(Button))-root-821",
                       }
                     }
                     color="secondary"
@@ -2358,7 +2358,7 @@ exports[`Storyshots Components|Map Map 1`] = `
                           "outlinedSecondary": "MuiButton-outlinedSecondary",
                           "outlinedSizeLarge": "MuiButton-outlinedSizeLarge",
                           "outlinedSizeSmall": "MuiButton-outlinedSizeSmall",
-                          "root": "MuiButton-root WithStyles(ForwardRef(Button))-root-829",
+                          "root": "MuiButton-root WithStyles(ForwardRef(Button))-root-821",
                           "sizeLarge": "MuiButton-sizeLarge",
                           "sizeSmall": "MuiButton-sizeSmall",
                           "startIcon": "MuiButton-startIcon",
@@ -2374,7 +2374,7 @@ exports[`Storyshots Components|Map Map 1`] = `
                       startIcon={<ZoomIcon />}
                     >
                       <WithStyles(ForwardRef(ButtonBase))
-                        className="MuiButton-root WithStyles(ForwardRef(Button))-root-829 MuiButton-text MuiButton-textSecondary"
+                        className="MuiButton-root WithStyles(ForwardRef(Button))-root-821 MuiButton-text MuiButton-textSecondary"
                         component="button"
                         disabled={false}
                         focusRipple={true}
@@ -2383,7 +2383,7 @@ exports[`Storyshots Components|Map Map 1`] = `
                         type="button"
                       >
                         <ForwardRef(ButtonBase)
-                          className="MuiButton-root WithStyles(ForwardRef(Button))-root-829 MuiButton-text MuiButton-textSecondary"
+                          className="MuiButton-root WithStyles(ForwardRef(Button))-root-821 MuiButton-text MuiButton-textSecondary"
                           classes={
                             Object {
                               "disabled": "Mui-disabled",
@@ -2399,7 +2399,7 @@ exports[`Storyshots Components|Map Map 1`] = `
                           type="button"
                         >
                           <button
-                            className="MuiButtonBase-root MuiButton-root WithStyles(ForwardRef(Button))-root-829 MuiButton-text MuiButton-textSecondary"
+                            className="MuiButtonBase-root MuiButton-root WithStyles(ForwardRef(Button))-root-821 MuiButton-text MuiButton-textSecondary"
                             disabled={false}
                             onBlur={[Function]}
                             onClick={[Function]}
@@ -2424,11 +2424,11 @@ exports[`Storyshots Components|Map Map 1`] = `
                               >
                                 <ZoomIcon>
                                   <WithStyles(ForwardRef(SvgIcon))
-                                    className="makeStyles-root-830"
+                                    className="makeStyles-root-822"
                                     viewBox="0 0 13 14"
                                   >
                                     <ForwardRef(SvgIcon)
-                                      className="makeStyles-root-830"
+                                      className="makeStyles-root-822"
                                       classes={
                                         Object {
                                           "colorAction": "MuiSvgIcon-colorAction",
@@ -2446,7 +2446,7 @@ exports[`Storyshots Components|Map Map 1`] = `
                                     >
                                       <svg
                                         aria-hidden={true}
-                                        className="MuiSvgIcon-root makeStyles-root-830"
+                                        className="MuiSvgIcon-root makeStyles-root-822"
                                         focusable="false"
                                         viewBox="0 0 13 14"
                                       >

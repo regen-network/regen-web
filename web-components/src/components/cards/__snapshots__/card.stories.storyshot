@@ -761,7 +761,7 @@ exports[`Storyshots Components|Cards Glance Card 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -2896,7 +2896,7 @@ exports[`Storyshots Components|Cards Green Card 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -4420,7 +4420,7 @@ exports[`Storyshots Components|Cards Impact Card 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -6089,7 +6089,7 @@ exports[`Storyshots Components|Cards Map Card 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -8055,7 +8055,7 @@ exports[`Storyshots Components|Cards Monitored Impact Card 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -9734,7 +9734,7 @@ exports[`Storyshots Components|Cards On Boarding Card 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -11276,7 +11276,7 @@ exports[`Storyshots Components|Cards Project Card 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -13627,7 +13627,7 @@ exports[`Storyshots Components|Cards Project Top Card 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -16576,7 +16576,7 @@ exports[`Storyshots Components|Cards Purchased Credits Card 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],

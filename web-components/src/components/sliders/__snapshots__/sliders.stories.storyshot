@@ -1019,7 +1019,7 @@ exports[`Storyshots Components|Sliders Project Media 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -1773,7 +1773,7 @@ exports[`Storyshots Components|Sliders Project Media 1`] = `
                 appendDots={[Function]}
                 arrows={false}
                 beforeChange={[Function]}
-                className="makeStyles-root-971 makeStyles-root-981"
+                className="makeStyles-root-963 makeStyles-root-973"
                 customPaging={[Function]}
                 dots={true}
                 easing="ease"
@@ -1793,7 +1793,7 @@ exports[`Storyshots Components|Sliders Project Media 1`] = `
                   beforeChange={[Function]}
                   centerMode={false}
                   centerPadding="50px"
-                  className="makeStyles-root-971 makeStyles-root-981"
+                  className="makeStyles-root-963 makeStyles-root-973"
                   cssEase="ease"
                   customPaging={[Function]}
                   dots={true}
@@ -1836,7 +1836,7 @@ exports[`Storyshots Components|Sliders Project Media 1`] = `
                   waitForAnimate={true}
                 >
                   <div
-                    className="slick-slider makeStyles-root-971 makeStyles-root-981 slick-initialized"
+                    className="slick-slider makeStyles-root-963 makeStyles-root-973 slick-initialized"
                   >
                     <div
                       className="slick-list"
@@ -2954,7 +2954,7 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -4000,7 +4000,7 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                       <div>
                         <Slider
                           arrows={false}
-                          className="makeStyles-root-949"
+                          className="makeStyles-root-941"
                           rows={2}
                           slidesPerRow={2}
                           speed={500}
@@ -4016,7 +4016,7 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                             beforeChange={null}
                             centerMode={false}
                             centerPadding="50px"
-                            className="makeStyles-root-949"
+                            className="makeStyles-root-941"
                             cssEase="ease"
                             customPaging={[Function]}
                             dots={false}
@@ -4058,7 +4058,7 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                             waitForAnimate={true}
                           >
                             <div
-                              className="slick-slider makeStyles-root-949 slick-initialized"
+                              className="slick-slider makeStyles-root-941 slick-initialized"
                               dir="ltr"
                             >
                               <div
@@ -4142,7 +4142,7 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                                         key="88"
                                       >
                                         <div
-                                          className="makeStyles-item-950"
+                                          className="makeStyles-item-942"
                                           key="888"
                                           style={
                                             Object {
@@ -4157,18 +4157,18 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                                             name="Melaleuca brevifolia"
                                           >
                                             <div
-                                              className="makeStyles-root-952"
+                                              className="makeStyles-root-944"
                                             >
                                               <img
                                                 alt="Melaleuca brevifolia"
-                                                className="makeStyles-img-953"
+                                                className="makeStyles-img-945"
                                                 src="./melaleuca-b.png"
                                               />
                                               <WithStyles(ForwardRef(Typography))
-                                                className="makeStyles-name-954"
+                                                className="makeStyles-name-946"
                                               >
                                                 <ForwardRef(Typography)
-                                                  className="makeStyles-name-954"
+                                                  className="makeStyles-name-946"
                                                   classes={
                                                     Object {
                                                       "alignCenter": "MuiTypography-alignCenter",
@@ -4219,7 +4219,7 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                                                   }
                                                 >
                                                   <p
-                                                    className="MuiTypography-root makeStyles-name-954 MuiTypography-body1"
+                                                    className="MuiTypography-root makeStyles-name-946 MuiTypography-body1"
                                                   >
                                                     Melaleuca brevifolia
                                                   </p>
@@ -4229,7 +4229,7 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                                           </Item>
                                         </div>
                                         <div
-                                          className="makeStyles-item-950"
+                                          className="makeStyles-item-942"
                                           key="889"
                                           style={
                                             Object {
@@ -4244,18 +4244,18 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                                             name="Melaleuca brevifolia"
                                           >
                                             <div
-                                              className="makeStyles-root-952"
+                                              className="makeStyles-root-944"
                                             >
                                               <img
                                                 alt="Melaleuca brevifolia"
-                                                className="makeStyles-img-953"
+                                                className="makeStyles-img-945"
                                                 src="./melaleuca-b.png"
                                               />
                                               <WithStyles(ForwardRef(Typography))
-                                                className="makeStyles-name-954"
+                                                className="makeStyles-name-946"
                                               >
                                                 <ForwardRef(Typography)
-                                                  className="makeStyles-name-954"
+                                                  className="makeStyles-name-946"
                                                   classes={
                                                     Object {
                                                       "alignCenter": "MuiTypography-alignCenter",
@@ -4306,7 +4306,7 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                                                   }
                                                 >
                                                   <p
-                                                    className="MuiTypography-root makeStyles-name-954 MuiTypography-body1"
+                                                    className="MuiTypography-root makeStyles-name-946 MuiTypography-body1"
                                                   >
                                                     Melaleuca brevifolia
                                                   </p>
@@ -4338,7 +4338,7 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                                         key="0"
                                       >
                                         <div
-                                          className="makeStyles-item-950"
+                                          className="makeStyles-item-942"
                                           key="0"
                                           style={
                                             Object {
@@ -4353,18 +4353,18 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                                             name="Melaleuca brevifolia"
                                           >
                                             <div
-                                              className="makeStyles-root-952"
+                                              className="makeStyles-root-944"
                                             >
                                               <img
                                                 alt="Melaleuca brevifolia"
-                                                className="makeStyles-img-953"
+                                                className="makeStyles-img-945"
                                                 src="./melaleuca-b.png"
                                               />
                                               <WithStyles(ForwardRef(Typography))
-                                                className="makeStyles-name-954"
+                                                className="makeStyles-name-946"
                                               >
                                                 <ForwardRef(Typography)
-                                                  className="makeStyles-name-954"
+                                                  className="makeStyles-name-946"
                                                   classes={
                                                     Object {
                                                       "alignCenter": "MuiTypography-alignCenter",
@@ -4415,7 +4415,7 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                                                   }
                                                 >
                                                   <p
-                                                    className="MuiTypography-root makeStyles-name-954 MuiTypography-body1"
+                                                    className="MuiTypography-root makeStyles-name-946 MuiTypography-body1"
                                                   >
                                                     Melaleuca brevifolia
                                                   </p>
@@ -4425,7 +4425,7 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                                           </Item>
                                         </div>
                                         <div
-                                          className="makeStyles-item-950"
+                                          className="makeStyles-item-942"
                                           key="1"
                                           style={
                                             Object {
@@ -4440,18 +4440,18 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                                             name="Melaleuca brevifolia"
                                           >
                                             <div
-                                              className="makeStyles-root-952"
+                                              className="makeStyles-root-944"
                                             >
                                               <img
                                                 alt="Melaleuca brevifolia"
-                                                className="makeStyles-img-953"
+                                                className="makeStyles-img-945"
                                                 src="./melaleuca-b.png"
                                               />
                                               <WithStyles(ForwardRef(Typography))
-                                                className="makeStyles-name-954"
+                                                className="makeStyles-name-946"
                                               >
                                                 <ForwardRef(Typography)
-                                                  className="makeStyles-name-954"
+                                                  className="makeStyles-name-946"
                                                   classes={
                                                     Object {
                                                       "alignCenter": "MuiTypography-alignCenter",
@@ -4502,7 +4502,7 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                                                   }
                                                 >
                                                   <p
-                                                    className="MuiTypography-root makeStyles-name-954 MuiTypography-body1"
+                                                    className="MuiTypography-root makeStyles-name-946 MuiTypography-body1"
                                                   >
                                                     Melaleuca brevifolia
                                                   </p>
@@ -4516,7 +4516,7 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                                         key="2"
                                       >
                                         <div
-                                          className="makeStyles-item-950"
+                                          className="makeStyles-item-942"
                                           key="22"
                                           style={
                                             Object {
@@ -4531,18 +4531,18 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                                             name="Melaleuca brevifolia"
                                           >
                                             <div
-                                              className="makeStyles-root-952"
+                                              className="makeStyles-root-944"
                                             >
                                               <img
                                                 alt="Melaleuca brevifolia"
-                                                className="makeStyles-img-953"
+                                                className="makeStyles-img-945"
                                                 src="./melaleuca-b.png"
                                               />
                                               <WithStyles(ForwardRef(Typography))
-                                                className="makeStyles-name-954"
+                                                className="makeStyles-name-946"
                                               >
                                                 <ForwardRef(Typography)
-                                                  className="makeStyles-name-954"
+                                                  className="makeStyles-name-946"
                                                   classes={
                                                     Object {
                                                       "alignCenter": "MuiTypography-alignCenter",
@@ -4593,7 +4593,7 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                                                   }
                                                 >
                                                   <p
-                                                    className="MuiTypography-root makeStyles-name-954 MuiTypography-body1"
+                                                    className="MuiTypography-root makeStyles-name-946 MuiTypography-body1"
                                                   >
                                                     Melaleuca brevifolia
                                                   </p>
@@ -4603,7 +4603,7 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                                           </Item>
                                         </div>
                                         <div
-                                          className="makeStyles-item-950"
+                                          className="makeStyles-item-942"
                                           key="23"
                                           style={
                                             Object {
@@ -4618,18 +4618,18 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                                             name="Melaleuca brevifolia"
                                           >
                                             <div
-                                              className="makeStyles-root-952"
+                                              className="makeStyles-root-944"
                                             >
                                               <img
                                                 alt="Melaleuca brevifolia"
-                                                className="makeStyles-img-953"
+                                                className="makeStyles-img-945"
                                                 src="./melaleuca-b.png"
                                               />
                                               <WithStyles(ForwardRef(Typography))
-                                                className="makeStyles-name-954"
+                                                className="makeStyles-name-946"
                                               >
                                                 <ForwardRef(Typography)
-                                                  className="makeStyles-name-954"
+                                                  className="makeStyles-name-946"
                                                   classes={
                                                     Object {
                                                       "alignCenter": "MuiTypography-alignCenter",
@@ -4680,7 +4680,7 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                                                   }
                                                 >
                                                   <p
-                                                    className="MuiTypography-root makeStyles-name-954 MuiTypography-body1"
+                                                    className="MuiTypography-root makeStyles-name-946 MuiTypography-body1"
                                                   >
                                                     Melaleuca brevifolia
                                                   </p>
@@ -4709,7 +4709,7 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                                         key="44"
                                       >
                                         <div
-                                          className="makeStyles-item-950"
+                                          className="makeStyles-item-942"
                                           key="444"
                                           style={
                                             Object {
@@ -4724,18 +4724,18 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                                             name="Melaleuca brevifolia"
                                           >
                                             <div
-                                              className="makeStyles-root-952"
+                                              className="makeStyles-root-944"
                                             >
                                               <img
                                                 alt="Melaleuca brevifolia"
-                                                className="makeStyles-img-953"
+                                                className="makeStyles-img-945"
                                                 src="./melaleuca-b.png"
                                               />
                                               <WithStyles(ForwardRef(Typography))
-                                                className="makeStyles-name-954"
+                                                className="makeStyles-name-946"
                                               >
                                                 <ForwardRef(Typography)
-                                                  className="makeStyles-name-954"
+                                                  className="makeStyles-name-946"
                                                   classes={
                                                     Object {
                                                       "alignCenter": "MuiTypography-alignCenter",
@@ -4786,7 +4786,7 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                                                   }
                                                 >
                                                   <p
-                                                    className="MuiTypography-root makeStyles-name-954 MuiTypography-body1"
+                                                    className="MuiTypography-root makeStyles-name-946 MuiTypography-body1"
                                                   >
                                                     Melaleuca brevifolia
                                                   </p>
@@ -4796,7 +4796,7 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                                           </Item>
                                         </div>
                                         <div
-                                          className="makeStyles-item-950"
+                                          className="makeStyles-item-942"
                                           key="445"
                                           style={
                                             Object {
@@ -4811,18 +4811,18 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                                             name="Melaleuca brevifolia"
                                           >
                                             <div
-                                              className="makeStyles-root-952"
+                                              className="makeStyles-root-944"
                                             >
                                               <img
                                                 alt="Melaleuca brevifolia"
-                                                className="makeStyles-img-953"
+                                                className="makeStyles-img-945"
                                                 src="./melaleuca-b.png"
                                               />
                                               <WithStyles(ForwardRef(Typography))
-                                                className="makeStyles-name-954"
+                                                className="makeStyles-name-946"
                                               >
                                                 <ForwardRef(Typography)
-                                                  className="makeStyles-name-954"
+                                                  className="makeStyles-name-946"
                                                   classes={
                                                     Object {
                                                       "alignCenter": "MuiTypography-alignCenter",
@@ -4873,7 +4873,7 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                                                   }
                                                 >
                                                   <p
-                                                    className="MuiTypography-root makeStyles-name-954 MuiTypography-body1"
+                                                    className="MuiTypography-root makeStyles-name-946 MuiTypography-body1"
                                                   >
                                                     Melaleuca brevifolia
                                                   </p>
@@ -4887,7 +4887,7 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                                         key="46"
                                       >
                                         <div
-                                          className="makeStyles-item-950"
+                                          className="makeStyles-item-942"
                                           key="466"
                                           style={
                                             Object {
@@ -4902,18 +4902,18 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                                             name="Melaleuca brevifolia"
                                           >
                                             <div
-                                              className="makeStyles-root-952"
+                                              className="makeStyles-root-944"
                                             >
                                               <img
                                                 alt="Melaleuca brevifolia"
-                                                className="makeStyles-img-953"
+                                                className="makeStyles-img-945"
                                                 src="./melaleuca-b.png"
                                               />
                                               <WithStyles(ForwardRef(Typography))
-                                                className="makeStyles-name-954"
+                                                className="makeStyles-name-946"
                                               >
                                                 <ForwardRef(Typography)
-                                                  className="makeStyles-name-954"
+                                                  className="makeStyles-name-946"
                                                   classes={
                                                     Object {
                                                       "alignCenter": "MuiTypography-alignCenter",
@@ -4964,7 +4964,7 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                                                   }
                                                 >
                                                   <p
-                                                    className="MuiTypography-root makeStyles-name-954 MuiTypography-body1"
+                                                    className="MuiTypography-root makeStyles-name-946 MuiTypography-body1"
                                                   >
                                                     Melaleuca brevifolia
                                                   </p>
@@ -4974,7 +4974,7 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                                           </Item>
                                         </div>
                                         <div
-                                          className="makeStyles-item-950"
+                                          className="makeStyles-item-942"
                                           key="467"
                                           style={
                                             Object {
@@ -4989,18 +4989,18 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                                             name="Melaleuca brevifolia"
                                           >
                                             <div
-                                              className="makeStyles-root-952"
+                                              className="makeStyles-root-944"
                                             >
                                               <img
                                                 alt="Melaleuca brevifolia"
-                                                className="makeStyles-img-953"
+                                                className="makeStyles-img-945"
                                                 src="./melaleuca-b.png"
                                               />
                                               <WithStyles(ForwardRef(Typography))
-                                                className="makeStyles-name-954"
+                                                className="makeStyles-name-946"
                                               >
                                                 <ForwardRef(Typography)
-                                                  className="makeStyles-name-954"
+                                                  className="makeStyles-name-946"
                                                   classes={
                                                     Object {
                                                       "alignCenter": "MuiTypography-alignCenter",
@@ -5051,7 +5051,7 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                                                   }
                                                 >
                                                   <p
-                                                    className="MuiTypography-root makeStyles-name-954 MuiTypography-body1"
+                                                    className="MuiTypography-root makeStyles-name-946 MuiTypography-body1"
                                                   >
                                                     Melaleuca brevifolia
                                                   </p>
@@ -5080,7 +5080,7 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                                         key="88"
                                       >
                                         <div
-                                          className="makeStyles-item-950"
+                                          className="makeStyles-item-942"
                                           key="888"
                                           style={
                                             Object {
@@ -5095,18 +5095,18 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                                             name="Melaleuca brevifolia"
                                           >
                                             <div
-                                              className="makeStyles-root-952"
+                                              className="makeStyles-root-944"
                                             >
                                               <img
                                                 alt="Melaleuca brevifolia"
-                                                className="makeStyles-img-953"
+                                                className="makeStyles-img-945"
                                                 src="./melaleuca-b.png"
                                               />
                                               <WithStyles(ForwardRef(Typography))
-                                                className="makeStyles-name-954"
+                                                className="makeStyles-name-946"
                                               >
                                                 <ForwardRef(Typography)
-                                                  className="makeStyles-name-954"
+                                                  className="makeStyles-name-946"
                                                   classes={
                                                     Object {
                                                       "alignCenter": "MuiTypography-alignCenter",
@@ -5157,7 +5157,7 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                                                   }
                                                 >
                                                   <p
-                                                    className="MuiTypography-root makeStyles-name-954 MuiTypography-body1"
+                                                    className="MuiTypography-root makeStyles-name-946 MuiTypography-body1"
                                                   >
                                                     Melaleuca brevifolia
                                                   </p>
@@ -5167,7 +5167,7 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                                           </Item>
                                         </div>
                                         <div
-                                          className="makeStyles-item-950"
+                                          className="makeStyles-item-942"
                                           key="889"
                                           style={
                                             Object {
@@ -5182,18 +5182,18 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                                             name="Melaleuca brevifolia"
                                           >
                                             <div
-                                              className="makeStyles-root-952"
+                                              className="makeStyles-root-944"
                                             >
                                               <img
                                                 alt="Melaleuca brevifolia"
-                                                className="makeStyles-img-953"
+                                                className="makeStyles-img-945"
                                                 src="./melaleuca-b.png"
                                               />
                                               <WithStyles(ForwardRef(Typography))
-                                                className="makeStyles-name-954"
+                                                className="makeStyles-name-946"
                                               >
                                                 <ForwardRef(Typography)
-                                                  className="makeStyles-name-954"
+                                                  className="makeStyles-name-946"
                                                   classes={
                                                     Object {
                                                       "alignCenter": "MuiTypography-alignCenter",
@@ -5244,7 +5244,7 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                                                   }
                                                 >
                                                   <p
-                                                    className="MuiTypography-root makeStyles-name-954 MuiTypography-body1"
+                                                    className="MuiTypography-root makeStyles-name-946 MuiTypography-body1"
                                                   >
                                                     Melaleuca brevifolia
                                                   </p>
@@ -5275,7 +5275,7 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                                         key="0"
                                       >
                                         <div
-                                          className="makeStyles-item-950"
+                                          className="makeStyles-item-942"
                                           key="0"
                                           style={
                                             Object {
@@ -5290,18 +5290,18 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                                             name="Melaleuca brevifolia"
                                           >
                                             <div
-                                              className="makeStyles-root-952"
+                                              className="makeStyles-root-944"
                                             >
                                               <img
                                                 alt="Melaleuca brevifolia"
-                                                className="makeStyles-img-953"
+                                                className="makeStyles-img-945"
                                                 src="./melaleuca-b.png"
                                               />
                                               <WithStyles(ForwardRef(Typography))
-                                                className="makeStyles-name-954"
+                                                className="makeStyles-name-946"
                                               >
                                                 <ForwardRef(Typography)
-                                                  className="makeStyles-name-954"
+                                                  className="makeStyles-name-946"
                                                   classes={
                                                     Object {
                                                       "alignCenter": "MuiTypography-alignCenter",
@@ -5352,7 +5352,7 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                                                   }
                                                 >
                                                   <p
-                                                    className="MuiTypography-root makeStyles-name-954 MuiTypography-body1"
+                                                    className="MuiTypography-root makeStyles-name-946 MuiTypography-body1"
                                                   >
                                                     Melaleuca brevifolia
                                                   </p>
@@ -5362,7 +5362,7 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                                           </Item>
                                         </div>
                                         <div
-                                          className="makeStyles-item-950"
+                                          className="makeStyles-item-942"
                                           key="1"
                                           style={
                                             Object {
@@ -5377,18 +5377,18 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                                             name="Melaleuca brevifolia"
                                           >
                                             <div
-                                              className="makeStyles-root-952"
+                                              className="makeStyles-root-944"
                                             >
                                               <img
                                                 alt="Melaleuca brevifolia"
-                                                className="makeStyles-img-953"
+                                                className="makeStyles-img-945"
                                                 src="./melaleuca-b.png"
                                               />
                                               <WithStyles(ForwardRef(Typography))
-                                                className="makeStyles-name-954"
+                                                className="makeStyles-name-946"
                                               >
                                                 <ForwardRef(Typography)
-                                                  className="makeStyles-name-954"
+                                                  className="makeStyles-name-946"
                                                   classes={
                                                     Object {
                                                       "alignCenter": "MuiTypography-alignCenter",
@@ -5439,7 +5439,7 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                                                   }
                                                 >
                                                   <p
-                                                    className="MuiTypography-root makeStyles-name-954 MuiTypography-body1"
+                                                    className="MuiTypography-root makeStyles-name-946 MuiTypography-body1"
                                                   >
                                                     Melaleuca brevifolia
                                                   </p>
@@ -5453,7 +5453,7 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                                         key="2"
                                       >
                                         <div
-                                          className="makeStyles-item-950"
+                                          className="makeStyles-item-942"
                                           key="22"
                                           style={
                                             Object {
@@ -5468,18 +5468,18 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                                             name="Melaleuca brevifolia"
                                           >
                                             <div
-                                              className="makeStyles-root-952"
+                                              className="makeStyles-root-944"
                                             >
                                               <img
                                                 alt="Melaleuca brevifolia"
-                                                className="makeStyles-img-953"
+                                                className="makeStyles-img-945"
                                                 src="./melaleuca-b.png"
                                               />
                                               <WithStyles(ForwardRef(Typography))
-                                                className="makeStyles-name-954"
+                                                className="makeStyles-name-946"
                                               >
                                                 <ForwardRef(Typography)
-                                                  className="makeStyles-name-954"
+                                                  className="makeStyles-name-946"
                                                   classes={
                                                     Object {
                                                       "alignCenter": "MuiTypography-alignCenter",
@@ -5530,7 +5530,7 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                                                   }
                                                 >
                                                   <p
-                                                    className="MuiTypography-root makeStyles-name-954 MuiTypography-body1"
+                                                    className="MuiTypography-root makeStyles-name-946 MuiTypography-body1"
                                                   >
                                                     Melaleuca brevifolia
                                                   </p>
@@ -5540,7 +5540,7 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                                           </Item>
                                         </div>
                                         <div
-                                          className="makeStyles-item-950"
+                                          className="makeStyles-item-942"
                                           key="23"
                                           style={
                                             Object {
@@ -5555,18 +5555,18 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                                             name="Melaleuca brevifolia"
                                           >
                                             <div
-                                              className="makeStyles-root-952"
+                                              className="makeStyles-root-944"
                                             >
                                               <img
                                                 alt="Melaleuca brevifolia"
-                                                className="makeStyles-img-953"
+                                                className="makeStyles-img-945"
                                                 src="./melaleuca-b.png"
                                               />
                                               <WithStyles(ForwardRef(Typography))
-                                                className="makeStyles-name-954"
+                                                className="makeStyles-name-946"
                                               >
                                                 <ForwardRef(Typography)
-                                                  className="makeStyles-name-954"
+                                                  className="makeStyles-name-946"
                                                   classes={
                                                     Object {
                                                       "alignCenter": "MuiTypography-alignCenter",
@@ -5617,7 +5617,7 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                                                   }
                                                 >
                                                   <p
-                                                    className="MuiTypography-root makeStyles-name-954 MuiTypography-body1"
+                                                    className="MuiTypography-root makeStyles-name-946 MuiTypography-body1"
                                                   >
                                                     Melaleuca brevifolia
                                                   </p>
@@ -5645,7 +5645,7 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                                         key="44"
                                       >
                                         <div
-                                          className="makeStyles-item-950"
+                                          className="makeStyles-item-942"
                                           key="444"
                                           style={
                                             Object {
@@ -5660,18 +5660,18 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                                             name="Melaleuca brevifolia"
                                           >
                                             <div
-                                              className="makeStyles-root-952"
+                                              className="makeStyles-root-944"
                                             >
                                               <img
                                                 alt="Melaleuca brevifolia"
-                                                className="makeStyles-img-953"
+                                                className="makeStyles-img-945"
                                                 src="./melaleuca-b.png"
                                               />
                                               <WithStyles(ForwardRef(Typography))
-                                                className="makeStyles-name-954"
+                                                className="makeStyles-name-946"
                                               >
                                                 <ForwardRef(Typography)
-                                                  className="makeStyles-name-954"
+                                                  className="makeStyles-name-946"
                                                   classes={
                                                     Object {
                                                       "alignCenter": "MuiTypography-alignCenter",
@@ -5722,7 +5722,7 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                                                   }
                                                 >
                                                   <p
-                                                    className="MuiTypography-root makeStyles-name-954 MuiTypography-body1"
+                                                    className="MuiTypography-root makeStyles-name-946 MuiTypography-body1"
                                                   >
                                                     Melaleuca brevifolia
                                                   </p>
@@ -5732,7 +5732,7 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                                           </Item>
                                         </div>
                                         <div
-                                          className="makeStyles-item-950"
+                                          className="makeStyles-item-942"
                                           key="445"
                                           style={
                                             Object {
@@ -5747,18 +5747,18 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                                             name="Melaleuca brevifolia"
                                           >
                                             <div
-                                              className="makeStyles-root-952"
+                                              className="makeStyles-root-944"
                                             >
                                               <img
                                                 alt="Melaleuca brevifolia"
-                                                className="makeStyles-img-953"
+                                                className="makeStyles-img-945"
                                                 src="./melaleuca-b.png"
                                               />
                                               <WithStyles(ForwardRef(Typography))
-                                                className="makeStyles-name-954"
+                                                className="makeStyles-name-946"
                                               >
                                                 <ForwardRef(Typography)
-                                                  className="makeStyles-name-954"
+                                                  className="makeStyles-name-946"
                                                   classes={
                                                     Object {
                                                       "alignCenter": "MuiTypography-alignCenter",
@@ -5809,7 +5809,7 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                                                   }
                                                 >
                                                   <p
-                                                    className="MuiTypography-root makeStyles-name-954 MuiTypography-body1"
+                                                    className="MuiTypography-root makeStyles-name-946 MuiTypography-body1"
                                                   >
                                                     Melaleuca brevifolia
                                                   </p>
@@ -5823,7 +5823,7 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                                         key="46"
                                       >
                                         <div
-                                          className="makeStyles-item-950"
+                                          className="makeStyles-item-942"
                                           key="466"
                                           style={
                                             Object {
@@ -5838,18 +5838,18 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                                             name="Melaleuca brevifolia"
                                           >
                                             <div
-                                              className="makeStyles-root-952"
+                                              className="makeStyles-root-944"
                                             >
                                               <img
                                                 alt="Melaleuca brevifolia"
-                                                className="makeStyles-img-953"
+                                                className="makeStyles-img-945"
                                                 src="./melaleuca-b.png"
                                               />
                                               <WithStyles(ForwardRef(Typography))
-                                                className="makeStyles-name-954"
+                                                className="makeStyles-name-946"
                                               >
                                                 <ForwardRef(Typography)
-                                                  className="makeStyles-name-954"
+                                                  className="makeStyles-name-946"
                                                   classes={
                                                     Object {
                                                       "alignCenter": "MuiTypography-alignCenter",
@@ -5900,7 +5900,7 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                                                   }
                                                 >
                                                   <p
-                                                    className="MuiTypography-root makeStyles-name-954 MuiTypography-body1"
+                                                    className="MuiTypography-root makeStyles-name-946 MuiTypography-body1"
                                                   >
                                                     Melaleuca brevifolia
                                                   </p>
@@ -5910,7 +5910,7 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                                           </Item>
                                         </div>
                                         <div
-                                          className="makeStyles-item-950"
+                                          className="makeStyles-item-942"
                                           key="467"
                                           style={
                                             Object {
@@ -5925,18 +5925,18 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                                             name="Melaleuca brevifolia"
                                           >
                                             <div
-                                              className="makeStyles-root-952"
+                                              className="makeStyles-root-944"
                                             >
                                               <img
                                                 alt="Melaleuca brevifolia"
-                                                className="makeStyles-img-953"
+                                                className="makeStyles-img-945"
                                                 src="./melaleuca-b.png"
                                               />
                                               <WithStyles(ForwardRef(Typography))
-                                                className="makeStyles-name-954"
+                                                className="makeStyles-name-946"
                                               >
                                                 <ForwardRef(Typography)
-                                                  className="makeStyles-name-954"
+                                                  className="makeStyles-name-946"
                                                   classes={
                                                     Object {
                                                       "alignCenter": "MuiTypography-alignCenter",
@@ -5987,7 +5987,7 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                                                   }
                                                 >
                                                   <p
-                                                    className="MuiTypography-root makeStyles-name-954 MuiTypography-body1"
+                                                    className="MuiTypography-root makeStyles-name-946 MuiTypography-body1"
                                                   >
                                                     Melaleuca brevifolia
                                                   </p>
@@ -6015,7 +6015,7 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                                         key="88"
                                       >
                                         <div
-                                          className="makeStyles-item-950"
+                                          className="makeStyles-item-942"
                                           key="888"
                                           style={
                                             Object {
@@ -6030,18 +6030,18 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                                             name="Melaleuca brevifolia"
                                           >
                                             <div
-                                              className="makeStyles-root-952"
+                                              className="makeStyles-root-944"
                                             >
                                               <img
                                                 alt="Melaleuca brevifolia"
-                                                className="makeStyles-img-953"
+                                                className="makeStyles-img-945"
                                                 src="./melaleuca-b.png"
                                               />
                                               <WithStyles(ForwardRef(Typography))
-                                                className="makeStyles-name-954"
+                                                className="makeStyles-name-946"
                                               >
                                                 <ForwardRef(Typography)
-                                                  className="makeStyles-name-954"
+                                                  className="makeStyles-name-946"
                                                   classes={
                                                     Object {
                                                       "alignCenter": "MuiTypography-alignCenter",
@@ -6092,7 +6092,7 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                                                   }
                                                 >
                                                   <p
-                                                    className="MuiTypography-root makeStyles-name-954 MuiTypography-body1"
+                                                    className="MuiTypography-root makeStyles-name-946 MuiTypography-body1"
                                                   >
                                                     Melaleuca brevifolia
                                                   </p>
@@ -6102,7 +6102,7 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                                           </Item>
                                         </div>
                                         <div
-                                          className="makeStyles-item-950"
+                                          className="makeStyles-item-942"
                                           key="889"
                                           style={
                                             Object {
@@ -6117,18 +6117,18 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                                             name="Melaleuca brevifolia"
                                           >
                                             <div
-                                              className="makeStyles-root-952"
+                                              className="makeStyles-root-944"
                                             >
                                               <img
                                                 alt="Melaleuca brevifolia"
-                                                className="makeStyles-img-953"
+                                                className="makeStyles-img-945"
                                                 src="./melaleuca-b.png"
                                               />
                                               <WithStyles(ForwardRef(Typography))
-                                                className="makeStyles-name-954"
+                                                className="makeStyles-name-946"
                                               >
                                                 <ForwardRef(Typography)
-                                                  className="makeStyles-name-954"
+                                                  className="makeStyles-name-946"
                                                   classes={
                                                     Object {
                                                       "alignCenter": "MuiTypography-alignCenter",
@@ -6179,7 +6179,7 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                                                   }
                                                 >
                                                   <p
-                                                    className="MuiTypography-root makeStyles-name-954 MuiTypography-body1"
+                                                    className="MuiTypography-root makeStyles-name-946 MuiTypography-body1"
                                                   >
                                                     Melaleuca brevifolia
                                                   </p>
@@ -6200,12 +6200,12 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                           </InnerSlider>
                         </Slider>
                         <WithStyles(ForwardRef(Grid))
-                          className="makeStyles-buttons-951"
+                          className="makeStyles-buttons-943"
                           container={true}
                           justify="flex-end"
                         >
                           <ForwardRef(Grid)
-                            className="makeStyles-buttons-951"
+                            className="makeStyles-buttons-943"
                             classes={
                               Object {
                                 "align-content-xs-center": "MuiGrid-align-content-xs-center",
@@ -6318,14 +6318,14 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                             justify="flex-end"
                           >
                             <div
-                              className="MuiGrid-root makeStyles-buttons-951 MuiGrid-container MuiGrid-justify-xs-flex-end"
+                              className="MuiGrid-root makeStyles-buttons-943 MuiGrid-container MuiGrid-justify-xs-flex-end"
                             >
                               <PrevNextButton
                                 direction="prev"
                                 onClick={[Function]}
                               >
                                 <div
-                                  className="makeStyles-root-955"
+                                  className="makeStyles-root-947"
                                   onClick={[Function]}
                                 >
                                   <ArrowDownIcon
@@ -6333,11 +6333,11 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                                     direction="prev"
                                   >
                                     <WithStyles(ForwardRef(SvgIcon))
-                                      className="makeStyles-icon-956 makeStyles-icon-957"
+                                      className="makeStyles-icon-948 makeStyles-icon-949"
                                       fontSize="default"
                                     >
                                       <ForwardRef(SvgIcon)
-                                        className="makeStyles-icon-956 makeStyles-icon-957"
+                                        className="makeStyles-icon-948 makeStyles-icon-949"
                                         classes={
                                           Object {
                                             "colorAction": "MuiSvgIcon-colorAction",
@@ -6355,7 +6355,7 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                                       >
                                         <svg
                                           aria-hidden={true}
-                                          className="MuiSvgIcon-root makeStyles-icon-956 makeStyles-icon-957"
+                                          className="MuiSvgIcon-root makeStyles-icon-948 makeStyles-icon-949"
                                           focusable="false"
                                           viewBox="0 0 24 24"
                                         >
@@ -6389,7 +6389,7 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                                 onClick={[Function]}
                               >
                                 <div
-                                  className="makeStyles-root-955"
+                                  className="makeStyles-root-947"
                                   onClick={[Function]}
                                 >
                                   <ArrowDownIcon
@@ -6397,11 +6397,11 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                                     direction="next"
                                   >
                                     <WithStyles(ForwardRef(SvgIcon))
-                                      className="makeStyles-icon-956 makeStyles-icon-958"
+                                      className="makeStyles-icon-948 makeStyles-icon-950"
                                       fontSize="default"
                                     >
                                       <ForwardRef(SvgIcon)
-                                        className="makeStyles-icon-956 makeStyles-icon-958"
+                                        className="makeStyles-icon-948 makeStyles-icon-950"
                                         classes={
                                           Object {
                                             "colorAction": "MuiSvgIcon-colorAction",
@@ -6419,7 +6419,7 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
                                       >
                                         <svg
                                           aria-hidden={true}
-                                          className="MuiSvgIcon-root makeStyles-icon-956 makeStyles-icon-958"
+                                          className="MuiSvgIcon-root makeStyles-icon-948 makeStyles-icon-950"
                                           focusable="false"
                                           viewBox="0 0 24 24"
                                         >

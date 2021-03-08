@@ -995,7 +995,7 @@ exports[`Storyshots Components|Place Project Place Info 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -1722,7 +1722,7 @@ exports[`Storyshots Components|Place Project Place Info 1`] = `
         >
           <PlaceInfo>
             <div
-              className="makeStyles-root-924"
+              className="makeStyles-root-916"
             >
               <span>
                 <PinIcon>
@@ -1794,10 +1794,10 @@ exports[`Storyshots Components|Place Project Place Info 1`] = `
                 </PinIcon>
               </span>
               <WithStyles(ForwardRef(Typography))
-                className="makeStyles-content-925 makeStyles-content-926"
+                className="makeStyles-content-917 makeStyles-content-918"
               >
                 <ForwardRef(Typography)
-                  className="makeStyles-content-925 makeStyles-content-926"
+                  className="makeStyles-content-917 makeStyles-content-918"
                   classes={
                     Object {
                       "alignCenter": "MuiTypography-alignCenter",
@@ -1848,11 +1848,11 @@ exports[`Storyshots Components|Place Project Place Info 1`] = `
                   }
                 >
                   <p
-                    className="MuiTypography-root makeStyles-content-925 makeStyles-content-926 MuiTypography-body1"
+                    className="MuiTypography-root makeStyles-content-917 makeStyles-content-918 MuiTypography-body1"
                   >
                     Melbourne, Victoria, Australia
                     <span
-                      className="makeStyles-separator-923"
+                      className="makeStyles-separator-915"
                     >
                         |  
                     </span>

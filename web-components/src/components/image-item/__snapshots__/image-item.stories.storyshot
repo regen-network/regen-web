@@ -966,7 +966,7 @@ exports[`Storyshots Components|Image Item Image Item 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -1690,15 +1690,15 @@ exports[`Storyshots Components|Image Item Image Item 1`] = `
           title="Verified outcomes"
         >
           <div
-            className="makeStyles-root-808"
+            className="makeStyles-root-800"
           >
             <WithStyles(ForwardRef(Grid))
-              className="makeStyles-image-810"
+              className="makeStyles-image-802"
               container={true}
               justify="center"
             >
               <ForwardRef(Grid)
-                className="makeStyles-image-810"
+                className="makeStyles-image-802"
                 classes={
                   Object {
                     "align-content-xs-center": "MuiGrid-align-content-xs-center",
@@ -1811,7 +1811,7 @@ exports[`Storyshots Components|Image Item Image Item 1`] = `
                 justify="center"
               >
                 <div
-                  className="MuiGrid-root makeStyles-image-810 MuiGrid-container MuiGrid-justify-xs-center"
+                  className="MuiGrid-root makeStyles-image-802 MuiGrid-container MuiGrid-justify-xs-center"
                 >
                   <img
                     alt="verified"
@@ -1822,18 +1822,18 @@ exports[`Storyshots Components|Image Item Image Item 1`] = `
             </WithStyles(ForwardRef(Grid))>
             <Title
               align="center"
-              className="makeStyles-title-809"
+              className="makeStyles-title-801"
               variant="h4"
             >
               <WithStyles(ForwardRef(Typography))
                 align="center"
-                className="makeStyles-root-812 makeStyles-title-809"
+                className="makeStyles-root-804 makeStyles-title-801"
                 color="textPrimary"
                 variant="h4"
               >
                 <ForwardRef(Typography)
                   align="center"
-                  className="makeStyles-root-812 makeStyles-title-809"
+                  className="makeStyles-root-804 makeStyles-title-801"
                   classes={
                     Object {
                       "alignCenter": "MuiTypography-alignCenter",
@@ -1886,7 +1886,7 @@ exports[`Storyshots Components|Image Item Image Item 1`] = `
                   }
                 >
                   <h4
-                    className="MuiTypography-root makeStyles-root-812 makeStyles-title-809 MuiTypography-h4 MuiTypography-colorTextPrimary MuiTypography-alignCenter"
+                    className="MuiTypography-root makeStyles-root-804 makeStyles-title-801 MuiTypography-h4 MuiTypography-colorTextPrimary MuiTypography-alignCenter"
                   >
                     Verified outcomes
                   </h4>
@@ -1902,11 +1902,11 @@ exports[`Storyshots Components|Image Item Image Item 1`] = `
               }
             >
               <WithStyles(ForwardRef(Typography))
-                className="makeStyles-root-813 makeStyles-root-814"
+                className="makeStyles-root-805 makeStyles-root-806"
                 component="div"
               >
                 <ForwardRef(Typography)
-                  className="makeStyles-root-813 makeStyles-root-814"
+                  className="makeStyles-root-805 makeStyles-root-806"
                   classes={
                     Object {
                       "alignCenter": "MuiTypography-alignCenter",
@@ -1958,7 +1958,7 @@ exports[`Storyshots Components|Image Item Image Item 1`] = `
                   }
                 >
                   <div
-                    className="MuiTypography-root makeStyles-root-813 makeStyles-root-814 MuiTypography-body1"
+                    className="MuiTypography-root makeStyles-root-805 makeStyles-root-806 MuiTypography-body1"
                   >
                     Software-based and remote-sensing monitoring keeps costs low and transparency high.
                   </div>

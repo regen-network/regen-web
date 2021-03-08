@@ -814,7 +814,7 @@ exports[`Storyshots Components|Forms Login Form 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -1552,14 +1552,14 @@ exports[`Storyshots Components|Forms Login Form 1`] = `
                 >
                   <OnBoardingCard>
                     <RegenCard
-                      className="makeStyles-root-701"
+                      className="makeStyles-root-693"
                     >
                       <WithStyles(ForwardRef(Card))
-                        className="makeStyles-root-702 makeStyles-root-703 makeStyles-root-701"
+                        className="makeStyles-root-694 makeStyles-root-695 makeStyles-root-693"
                         elevation={0}
                       >
                         <ForwardRef(Card)
-                          className="makeStyles-root-702 makeStyles-root-703 makeStyles-root-701"
+                          className="makeStyles-root-694 makeStyles-root-695 makeStyles-root-693"
                           classes={
                             Object {
                               "root": "MuiCard-root",
@@ -1568,11 +1568,11 @@ exports[`Storyshots Components|Forms Login Form 1`] = `
                           elevation={0}
                         >
                           <WithStyles(ForwardRef(Paper))
-                            className="MuiCard-root makeStyles-root-702 makeStyles-root-703 makeStyles-root-701"
+                            className="MuiCard-root makeStyles-root-694 makeStyles-root-695 makeStyles-root-693"
                             elevation={0}
                           >
                             <ForwardRef(Paper)
-                              className="MuiCard-root makeStyles-root-702 makeStyles-root-703 makeStyles-root-701"
+                              className="MuiCard-root makeStyles-root-694 makeStyles-root-695 makeStyles-root-693"
                               classes={
                                 Object {
                                   "elevation0": "MuiPaper-elevation0",
@@ -1608,17 +1608,17 @@ exports[`Storyshots Components|Forms Login Form 1`] = `
                               elevation={0}
                             >
                               <div
-                                className="MuiPaper-root MuiCard-root makeStyles-root-702 makeStyles-root-703 makeStyles-root-701 MuiPaper-elevation0 MuiPaper-rounded"
+                                className="MuiPaper-root MuiCard-root makeStyles-root-694 makeStyles-root-695 makeStyles-root-693 MuiPaper-elevation0 MuiPaper-rounded"
                               >
                                 <Description
-                                  className="makeStyles-description-695"
+                                  className="makeStyles-description-687"
                                 >
                                   <WithStyles(ForwardRef(Typography))
-                                    className="makeStyles-root-704 makeStyles-root-705 makeStyles-description-695"
+                                    className="makeStyles-root-696 makeStyles-root-697 makeStyles-description-687"
                                     component="div"
                                   >
                                     <ForwardRef(Typography)
-                                      className="makeStyles-root-704 makeStyles-root-705 makeStyles-description-695"
+                                      className="makeStyles-root-696 makeStyles-root-697 makeStyles-description-687"
                                       classes={
                                         Object {
                                           "alignCenter": "MuiTypography-alignCenter",
@@ -1670,7 +1670,7 @@ exports[`Storyshots Components|Forms Login Form 1`] = `
                                       }
                                     >
                                       <div
-                                        className="MuiTypography-root makeStyles-root-704 makeStyles-root-705 makeStyles-description-695 MuiTypography-body1"
+                                        className="MuiTypography-root makeStyles-root-696 makeStyles-root-697 makeStyles-description-687 MuiTypography-body1"
                                       >
                                         Don't have an account? 
                                         <WithStyles(ForwardRef(Link))
@@ -1860,7 +1860,7 @@ exports[`Storyshots Components|Forms Login Form 1`] = `
                                           "startAdornment": null,
                                         }
                                       }
-                                      className="makeStyles-root-706 makeStyles-root-707"
+                                      className="makeStyles-root-698 makeStyles-root-699"
                                       field={
                                         Object {
                                           "name": "email",
@@ -1943,7 +1943,7 @@ exports[`Storyshots Components|Forms Login Form 1`] = `
                                             "startAdornment": null,
                                           }
                                         }
-                                        className="makeStyles-root-706 makeStyles-root-707"
+                                        className="makeStyles-root-698 makeStyles-root-699"
                                         disabled={false}
                                         fullWidth={true}
                                         label="Email address"
@@ -1967,7 +1967,7 @@ exports[`Storyshots Components|Forms Login Form 1`] = `
                                               "startAdornment": null,
                                             }
                                           }
-                                          className="makeStyles-root-706 makeStyles-root-707"
+                                          className="makeStyles-root-698 makeStyles-root-699"
                                           classes={
                                             Object {
                                               "root": "MuiTextField-root",
@@ -1983,7 +1983,7 @@ exports[`Storyshots Components|Forms Login Form 1`] = `
                                           value=""
                                         >
                                           <WithStyles(ForwardRef(FormControl))
-                                            className="MuiTextField-root makeStyles-root-706 makeStyles-root-707"
+                                            className="MuiTextField-root makeStyles-root-698 makeStyles-root-699"
                                             color="primary"
                                             disabled={false}
                                             error={false}
@@ -1992,7 +1992,7 @@ exports[`Storyshots Components|Forms Login Form 1`] = `
                                             variant="standard"
                                           >
                                             <ForwardRef(FormControl)
-                                              className="MuiTextField-root makeStyles-root-706 makeStyles-root-707"
+                                              className="MuiTextField-root makeStyles-root-698 makeStyles-root-699"
                                               classes={
                                                 Object {
                                                   "fullWidth": "MuiFormControl-fullWidth",
@@ -2009,7 +2009,7 @@ exports[`Storyshots Components|Forms Login Form 1`] = `
                                               variant="standard"
                                             >
                                               <div
-                                                className="MuiFormControl-root MuiTextField-root makeStyles-root-706 makeStyles-root-707 MuiFormControl-fullWidth"
+                                                className="MuiFormControl-root MuiTextField-root makeStyles-root-698 makeStyles-root-699 MuiFormControl-fullWidth"
                                               >
                                                 <WithStyles(ForwardRef(InputLabel))
                                                   focused={false}
@@ -2220,13 +2220,13 @@ exports[`Storyshots Components|Forms Login Form 1`] = `
                                   </RegenTextField>
                                 </Field>
                                 <Field
-                                  className="makeStyles-textField-694"
+                                  className="makeStyles-textField-686"
                                   component={[Function]}
                                   name="password"
                                   signup={false}
                                 >
                                   <PasswordField
-                                    className="makeStyles-textField-694"
+                                    className="makeStyles-textField-686"
                                     field={
                                       Object {
                                         "name": "password",
@@ -2299,7 +2299,7 @@ exports[`Storyshots Components|Forms Login Form 1`] = `
                                           "filled": false,
                                         }
                                       }
-                                      className="makeStyles-textField-694"
+                                      className="makeStyles-textField-686"
                                       endAdornment={
                                         <ForwardRef(WithStyles)
                                           aria-label="toggle password visibility"
@@ -2307,7 +2307,7 @@ exports[`Storyshots Components|Forms Login Form 1`] = `
                                           onMouseDown={[Function]}
                                         >
                                           <EyeIcon
-                                            className="makeStyles-eyeIcon-708"
+                                            className="makeStyles-eyeIcon-700"
                                             color="#7BC796"
                                             visible={true}
                                           />
@@ -2404,7 +2404,7 @@ exports[`Storyshots Components|Forms Login Form 1`] = `
                                                 onMouseDown={[Function]}
                                               >
                                                 <EyeIcon
-                                                  className="makeStyles-eyeIcon-708"
+                                                  className="makeStyles-eyeIcon-700"
                                                   color="#7BC796"
                                                   visible={true}
                                                 />
@@ -2413,7 +2413,7 @@ exports[`Storyshots Components|Forms Login Form 1`] = `
                                             "startAdornment": null,
                                           }
                                         }
-                                        className="makeStyles-root-706 makeStyles-root-709 makeStyles-textField-694"
+                                        className="makeStyles-root-698 makeStyles-root-701 makeStyles-textField-686"
                                         field={
                                           Object {
                                             "name": "password",
@@ -2506,7 +2506,7 @@ exports[`Storyshots Components|Forms Login Form 1`] = `
                                                   onMouseDown={[Function]}
                                                 >
                                                   <EyeIcon
-                                                    className="makeStyles-eyeIcon-708"
+                                                    className="makeStyles-eyeIcon-700"
                                                     color="#7BC796"
                                                     visible={true}
                                                   />
@@ -2515,7 +2515,7 @@ exports[`Storyshots Components|Forms Login Form 1`] = `
                                               "startAdornment": null,
                                             }
                                           }
-                                          className="makeStyles-root-706 makeStyles-root-709 makeStyles-textField-694"
+                                          className="makeStyles-root-698 makeStyles-root-701 makeStyles-textField-686"
                                           disabled={false}
                                           fullWidth={true}
                                           label="Password"
@@ -2549,7 +2549,7 @@ exports[`Storyshots Components|Forms Login Form 1`] = `
                                                     onMouseDown={[Function]}
                                                   >
                                                     <EyeIcon
-                                                      className="makeStyles-eyeIcon-708"
+                                                      className="makeStyles-eyeIcon-700"
                                                       color="#7BC796"
                                                       visible={true}
                                                     />
@@ -2558,7 +2558,7 @@ exports[`Storyshots Components|Forms Login Form 1`] = `
                                                 "startAdornment": null,
                                               }
                                             }
-                                            className="makeStyles-root-706 makeStyles-root-709 makeStyles-textField-694"
+                                            className="makeStyles-root-698 makeStyles-root-701 makeStyles-textField-686"
                                             classes={
                                               Object {
                                                 "root": "MuiTextField-root",
@@ -2574,7 +2574,7 @@ exports[`Storyshots Components|Forms Login Form 1`] = `
                                             value=""
                                           >
                                             <WithStyles(ForwardRef(FormControl))
-                                              className="MuiTextField-root makeStyles-root-706 makeStyles-root-709 makeStyles-textField-694"
+                                              className="MuiTextField-root makeStyles-root-698 makeStyles-root-701 makeStyles-textField-686"
                                               color="primary"
                                               disabled={false}
                                               error={false}
@@ -2583,7 +2583,7 @@ exports[`Storyshots Components|Forms Login Form 1`] = `
                                               variant="standard"
                                             >
                                               <ForwardRef(FormControl)
-                                                className="MuiTextField-root makeStyles-root-706 makeStyles-root-709 makeStyles-textField-694"
+                                                className="MuiTextField-root makeStyles-root-698 makeStyles-root-701 makeStyles-textField-686"
                                                 classes={
                                                   Object {
                                                     "fullWidth": "MuiFormControl-fullWidth",
@@ -2600,7 +2600,7 @@ exports[`Storyshots Components|Forms Login Form 1`] = `
                                                 variant="standard"
                                               >
                                                 <div
-                                                  className="MuiFormControl-root MuiTextField-root makeStyles-root-706 makeStyles-root-709 makeStyles-textField-694 MuiFormControl-fullWidth"
+                                                  className="MuiFormControl-root MuiTextField-root makeStyles-root-698 makeStyles-root-701 makeStyles-textField-686 MuiFormControl-fullWidth"
                                                 >
                                                   <WithStyles(ForwardRef(InputLabel))
                                                     focused={false}
@@ -2682,7 +2682,7 @@ exports[`Storyshots Components|Forms Login Form 1`] = `
                                                           onMouseDown={[Function]}
                                                         >
                                                           <EyeIcon
-                                                            className="makeStyles-eyeIcon-708"
+                                                            className="makeStyles-eyeIcon-700"
                                                             color="#7BC796"
                                                             visible={true}
                                                           />
@@ -2729,7 +2729,7 @@ exports[`Storyshots Components|Forms Login Form 1`] = `
                                                             onMouseDown={[Function]}
                                                           >
                                                             <EyeIcon
-                                                              className="makeStyles-eyeIcon-708"
+                                                              className="makeStyles-eyeIcon-700"
                                                               color="#7BC796"
                                                               visible={true}
                                                             />
@@ -2775,7 +2775,7 @@ exports[`Storyshots Components|Forms Login Form 1`] = `
                                                               onMouseDown={[Function]}
                                                             >
                                                               <EyeIcon
-                                                                className="makeStyles-eyeIcon-708"
+                                                                className="makeStyles-eyeIcon-700"
                                                                 color="#7BC796"
                                                                 visible={true}
                                                               />
@@ -2826,7 +2826,7 @@ exports[`Storyshots Components|Forms Login Form 1`] = `
                                                                 onMouseDown={[Function]}
                                                               >
                                                                 <EyeIcon
-                                                                  className="makeStyles-eyeIcon-708"
+                                                                  className="makeStyles-eyeIcon-700"
                                                                   color="#7BC796"
                                                                   visible={true}
                                                                 />
@@ -2952,16 +2952,16 @@ exports[`Storyshots Components|Forms Login Form 1`] = `
                                                                               className="MuiIconButton-label"
                                                                             >
                                                                               <EyeIcon
-                                                                                className="makeStyles-eyeIcon-708"
+                                                                                className="makeStyles-eyeIcon-700"
                                                                                 color="#7BC796"
                                                                                 visible={true}
                                                                               >
                                                                                 <WithStyles(ForwardRef(SvgIcon))
-                                                                                  className="makeStyles-eyeIcon-708 makeStyles-root-710"
+                                                                                  className="makeStyles-eyeIcon-700 makeStyles-root-702"
                                                                                   viewBox="0 0 19 14"
                                                                                 >
                                                                                   <ForwardRef(SvgIcon)
-                                                                                    className="makeStyles-eyeIcon-708 makeStyles-root-710"
+                                                                                    className="makeStyles-eyeIcon-700 makeStyles-root-702"
                                                                                     classes={
                                                                                       Object {
                                                                                         "colorAction": "MuiSvgIcon-colorAction",
@@ -2979,7 +2979,7 @@ exports[`Storyshots Components|Forms Login Form 1`] = `
                                                                                   >
                                                                                     <svg
                                                                                       aria-hidden={true}
-                                                                                      className="MuiSvgIcon-root makeStyles-eyeIcon-708 makeStyles-root-710"
+                                                                                      className="MuiSvgIcon-root makeStyles-eyeIcon-700 makeStyles-root-702"
                                                                                       focusable="false"
                                                                                       viewBox="0 0 19 14"
                                                                                     >
@@ -3061,14 +3061,14 @@ exports[`Storyshots Components|Forms Login Form 1`] = `
                                   </PasswordField>
                                 </Field>
                                 <Description
-                                  className="makeStyles-forgotPassword-697"
+                                  className="makeStyles-forgotPassword-689"
                                 >
                                   <WithStyles(ForwardRef(Typography))
-                                    className="makeStyles-root-704 makeStyles-root-711 makeStyles-forgotPassword-697"
+                                    className="makeStyles-root-696 makeStyles-root-703 makeStyles-forgotPassword-689"
                                     component="div"
                                   >
                                     <ForwardRef(Typography)
-                                      className="makeStyles-root-704 makeStyles-root-711 makeStyles-forgotPassword-697"
+                                      className="makeStyles-root-696 makeStyles-root-703 makeStyles-forgotPassword-689"
                                       classes={
                                         Object {
                                           "alignCenter": "MuiTypography-alignCenter",
@@ -3120,7 +3120,7 @@ exports[`Storyshots Components|Forms Login Form 1`] = `
                                       }
                                     >
                                       <div
-                                        className="MuiTypography-root makeStyles-root-704 makeStyles-root-711 makeStyles-forgotPassword-697 MuiTypography-body1"
+                                        className="MuiTypography-root makeStyles-root-696 makeStyles-root-703 makeStyles-forgotPassword-689 MuiTypography-body1"
                                       >
                                         Forgot password
                                       </div>
@@ -3135,13 +3135,13 @@ exports[`Storyshots Components|Forms Login Form 1`] = `
                     </RegenCard>
                   </OnBoardingCard>
                   <div
-                    className="makeStyles-checkboxes-700"
+                    className="makeStyles-checkboxes-692"
                   >
                     <Field
                       component={[Function]}
                       label={
                         <Description
-                          className="makeStyles-checkboxLabel-696"
+                          className="makeStyles-checkboxLabel-688"
                         >
                           Stay signed in
                         </Description>
@@ -3217,7 +3217,7 @@ exports[`Storyshots Components|Forms Login Form 1`] = `
                         }
                         label={
                           <Description
-                            className="makeStyles-checkboxLabel-696"
+                            className="makeStyles-checkboxLabel-688"
                           >
                             Stay signed in
                           </Description>
@@ -3225,7 +3225,7 @@ exports[`Storyshots Components|Forms Login Form 1`] = `
                         type="checkbox"
                       >
                         <div
-                          className="makeStyles-root-712"
+                          className="makeStyles-root-704"
                         >
                           <WithStyles(ForwardRef(FormControlLabel))
                             control={
@@ -3244,7 +3244,7 @@ exports[`Storyshots Components|Forms Login Form 1`] = `
                             }
                             label={
                               <Description
-                                className="makeStyles-checkboxLabel-696"
+                                className="makeStyles-checkboxLabel-688"
                               >
                                 Stay signed in
                               </Description>
@@ -3277,7 +3277,7 @@ exports[`Storyshots Components|Forms Login Form 1`] = `
                               }
                               label={
                                 <Description
-                                  className="makeStyles-checkboxLabel-696"
+                                  className="makeStyles-checkboxLabel-688"
                                 >
                                   Stay signed in
                                 </Description>
@@ -3349,10 +3349,10 @@ exports[`Storyshots Components|Forms Login Form 1`] = `
                                         checkedIcon={<CheckedIcon />}
                                         classes={
                                           Object {
-                                            "checked": "PrivateSwitchBase-checked-714 Mui-checked",
-                                            "disabled": "PrivateSwitchBase-disabled-715 Mui-disabled",
-                                            "input": "PrivateSwitchBase-input-716",
-                                            "root": "PrivateSwitchBase-root-713 MuiCheckbox-root MuiCheckbox-colorSecondary",
+                                            "checked": "PrivateSwitchBase-checked-706 Mui-checked",
+                                            "disabled": "PrivateSwitchBase-disabled-707 Mui-disabled",
+                                            "input": "PrivateSwitchBase-input-708",
+                                            "root": "PrivateSwitchBase-root-705 MuiCheckbox-root MuiCheckbox-colorSecondary",
                                           }
                                         }
                                         color="secondary"
@@ -3370,7 +3370,7 @@ exports[`Storyshots Components|Forms Login Form 1`] = `
                                         value={false}
                                       >
                                         <WithStyles(ForwardRef(IconButton))
-                                          className="PrivateSwitchBase-root-713 MuiCheckbox-root MuiCheckbox-colorSecondary"
+                                          className="PrivateSwitchBase-root-705 MuiCheckbox-root MuiCheckbox-colorSecondary"
                                           color="secondary"
                                           component="span"
                                           disabled={false}
@@ -3379,7 +3379,7 @@ exports[`Storyshots Components|Forms Login Form 1`] = `
                                           tabIndex={null}
                                         >
                                           <ForwardRef(IconButton)
-                                            className="PrivateSwitchBase-root-713 MuiCheckbox-root MuiCheckbox-colorSecondary"
+                                            className="PrivateSwitchBase-root-705 MuiCheckbox-root MuiCheckbox-colorSecondary"
                                             classes={
                                               Object {
                                                 "colorInherit": "MuiIconButton-colorInherit",
@@ -3402,7 +3402,7 @@ exports[`Storyshots Components|Forms Login Form 1`] = `
                                           >
                                             <WithStyles(ForwardRef(ButtonBase))
                                               centerRipple={true}
-                                              className="MuiIconButton-root PrivateSwitchBase-root-713 MuiCheckbox-root MuiCheckbox-colorSecondary MuiIconButton-colorSecondary"
+                                              className="MuiIconButton-root PrivateSwitchBase-root-705 MuiCheckbox-root MuiCheckbox-colorSecondary MuiIconButton-colorSecondary"
                                               component="span"
                                               disabled={false}
                                               focusRipple={true}
@@ -3412,7 +3412,7 @@ exports[`Storyshots Components|Forms Login Form 1`] = `
                                             >
                                               <ForwardRef(ButtonBase)
                                                 centerRipple={true}
-                                                className="MuiIconButton-root PrivateSwitchBase-root-713 MuiCheckbox-root MuiCheckbox-colorSecondary MuiIconButton-colorSecondary"
+                                                className="MuiIconButton-root PrivateSwitchBase-root-705 MuiCheckbox-root MuiCheckbox-colorSecondary MuiIconButton-colorSecondary"
                                                 classes={
                                                   Object {
                                                     "disabled": "Mui-disabled",
@@ -3429,7 +3429,7 @@ exports[`Storyshots Components|Forms Login Form 1`] = `
                                               >
                                                 <span
                                                   aria-disabled={false}
-                                                  className="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-713 MuiCheckbox-root MuiCheckbox-colorSecondary MuiIconButton-colorSecondary"
+                                                  className="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-705 MuiCheckbox-root MuiCheckbox-colorSecondary MuiIconButton-colorSecondary"
                                                   onBlur={[Function]}
                                                   onDragLeave={[Function]}
                                                   onFocus={[Function]}
@@ -3448,7 +3448,7 @@ exports[`Storyshots Components|Forms Login Form 1`] = `
                                                   >
                                                     <input
                                                       checked={false}
-                                                      className="PrivateSwitchBase-input-716"
+                                                      className="PrivateSwitchBase-input-708"
                                                       data-indeterminate={false}
                                                       disabled={false}
                                                       name="staySigned"
@@ -3593,14 +3593,14 @@ exports[`Storyshots Components|Forms Login Form 1`] = `
                                       className="MuiTypography-root MuiFormControlLabel-label MuiTypography-body1"
                                     >
                                       <Description
-                                        className="makeStyles-checkboxLabel-696"
+                                        className="makeStyles-checkboxLabel-688"
                                       >
                                         <WithStyles(ForwardRef(Typography))
-                                          className="makeStyles-root-704 makeStyles-root-717 makeStyles-checkboxLabel-696"
+                                          className="makeStyles-root-696 makeStyles-root-709 makeStyles-checkboxLabel-688"
                                           component="div"
                                         >
                                           <ForwardRef(Typography)
-                                            className="makeStyles-root-704 makeStyles-root-717 makeStyles-checkboxLabel-696"
+                                            className="makeStyles-root-696 makeStyles-root-709 makeStyles-checkboxLabel-688"
                                             classes={
                                               Object {
                                                 "alignCenter": "MuiTypography-alignCenter",
@@ -3652,7 +3652,7 @@ exports[`Storyshots Components|Forms Login Form 1`] = `
                                             }
                                           >
                                             <div
-                                              className="MuiTypography-root makeStyles-root-704 makeStyles-root-717 makeStyles-checkboxLabel-696 MuiTypography-body1"
+                                              className="MuiTypography-root makeStyles-root-696 makeStyles-root-709 makeStyles-checkboxLabel-688 MuiTypography-body1"
                                             >
                                               Stay signed in
                                             </div>
@@ -3789,22 +3789,22 @@ exports[`Storyshots Components|Forms Login Form 1`] = `
                         className="MuiGrid-root MuiGrid-container MuiGrid-justify-xs-flex-end"
                       >
                         <ContainedButton
-                          className="makeStyles-button-698"
+                          className="makeStyles-button-690"
                           disabled={false}
                           onClick={[Function]}
                         >
                           <WithStyles(WithStyles(ForwardRef(Button)))
-                            className="makeStyles-button-698"
+                            className="makeStyles-button-690"
                             color="secondary"
                             disabled={false}
                             onClick={[Function]}
                             variant="contained"
                           >
                             <WithStyles(ForwardRef(Button))
-                              className="makeStyles-button-698"
+                              className="makeStyles-button-690"
                               classes={
                                 Object {
-                                  "root": "WithStyles(ForwardRef(Button))-root-718",
+                                  "root": "WithStyles(ForwardRef(Button))-root-710",
                                 }
                               }
                               color="secondary"
@@ -3813,7 +3813,7 @@ exports[`Storyshots Components|Forms Login Form 1`] = `
                               variant="contained"
                             >
                               <ForwardRef(Button)
-                                className="makeStyles-button-698"
+                                className="makeStyles-button-690"
                                 classes={
                                   Object {
                                     "colorInherit": "MuiButton-colorInherit",
@@ -3836,7 +3836,7 @@ exports[`Storyshots Components|Forms Login Form 1`] = `
                                     "outlinedSecondary": "MuiButton-outlinedSecondary",
                                     "outlinedSizeLarge": "MuiButton-outlinedSizeLarge",
                                     "outlinedSizeSmall": "MuiButton-outlinedSizeSmall",
-                                    "root": "MuiButton-root WithStyles(ForwardRef(Button))-root-718",
+                                    "root": "MuiButton-root WithStyles(ForwardRef(Button))-root-710",
                                     "sizeLarge": "MuiButton-sizeLarge",
                                     "sizeSmall": "MuiButton-sizeSmall",
                                     "startIcon": "MuiButton-startIcon",
@@ -3853,7 +3853,7 @@ exports[`Storyshots Components|Forms Login Form 1`] = `
                                 variant="contained"
                               >
                                 <WithStyles(ForwardRef(ButtonBase))
-                                  className="MuiButton-root WithStyles(ForwardRef(Button))-root-718 MuiButton-contained makeStyles-button-698 MuiButton-containedSecondary"
+                                  className="MuiButton-root WithStyles(ForwardRef(Button))-root-710 MuiButton-contained makeStyles-button-690 MuiButton-containedSecondary"
                                   component="button"
                                   disabled={false}
                                   focusRipple={true}
@@ -3862,7 +3862,7 @@ exports[`Storyshots Components|Forms Login Form 1`] = `
                                   type="button"
                                 >
                                   <ForwardRef(ButtonBase)
-                                    className="MuiButton-root WithStyles(ForwardRef(Button))-root-718 MuiButton-contained makeStyles-button-698 MuiButton-containedSecondary"
+                                    className="MuiButton-root WithStyles(ForwardRef(Button))-root-710 MuiButton-contained makeStyles-button-690 MuiButton-containedSecondary"
                                     classes={
                                       Object {
                                         "disabled": "Mui-disabled",
@@ -3878,7 +3878,7 @@ exports[`Storyshots Components|Forms Login Form 1`] = `
                                     type="button"
                                   >
                                     <button
-                                      className="MuiButtonBase-root MuiButton-root WithStyles(ForwardRef(Button))-root-718 MuiButton-contained makeStyles-button-698 MuiButton-containedSecondary"
+                                      className="MuiButtonBase-root MuiButton-root WithStyles(ForwardRef(Button))-root-710 MuiButton-contained makeStyles-button-690 MuiButton-containedSecondary"
                                       disabled={false}
                                       onBlur={[Function]}
                                       onClick={[Function]}
@@ -4760,7 +4760,7 @@ exports[`Storyshots Components|Forms Sign Up Form 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -5500,14 +5500,14 @@ exports[`Storyshots Components|Forms Sign Up Form 1`] = `
                 >
                   <OnBoardingCard>
                     <RegenCard
-                      className="makeStyles-root-651"
+                      className="makeStyles-root-643"
                     >
                       <WithStyles(ForwardRef(Card))
-                        className="makeStyles-root-652 makeStyles-root-653 makeStyles-root-651"
+                        className="makeStyles-root-644 makeStyles-root-645 makeStyles-root-643"
                         elevation={0}
                       >
                         <ForwardRef(Card)
-                          className="makeStyles-root-652 makeStyles-root-653 makeStyles-root-651"
+                          className="makeStyles-root-644 makeStyles-root-645 makeStyles-root-643"
                           classes={
                             Object {
                               "root": "MuiCard-root",
@@ -5516,11 +5516,11 @@ exports[`Storyshots Components|Forms Sign Up Form 1`] = `
                           elevation={0}
                         >
                           <WithStyles(ForwardRef(Paper))
-                            className="MuiCard-root makeStyles-root-652 makeStyles-root-653 makeStyles-root-651"
+                            className="MuiCard-root makeStyles-root-644 makeStyles-root-645 makeStyles-root-643"
                             elevation={0}
                           >
                             <ForwardRef(Paper)
-                              className="MuiCard-root makeStyles-root-652 makeStyles-root-653 makeStyles-root-651"
+                              className="MuiCard-root makeStyles-root-644 makeStyles-root-645 makeStyles-root-643"
                               classes={
                                 Object {
                                   "elevation0": "MuiPaper-elevation0",
@@ -5556,17 +5556,17 @@ exports[`Storyshots Components|Forms Sign Up Form 1`] = `
                               elevation={0}
                             >
                               <div
-                                className="MuiPaper-root MuiCard-root makeStyles-root-652 makeStyles-root-653 makeStyles-root-651 MuiPaper-elevation0 MuiPaper-rounded"
+                                className="MuiPaper-root MuiCard-root makeStyles-root-644 makeStyles-root-645 makeStyles-root-643 MuiPaper-elevation0 MuiPaper-rounded"
                               >
                                 <Description
-                                  className="makeStyles-description-645"
+                                  className="makeStyles-description-637"
                                 >
                                   <WithStyles(ForwardRef(Typography))
-                                    className="makeStyles-root-654 makeStyles-root-655 makeStyles-description-645"
+                                    className="makeStyles-root-646 makeStyles-root-647 makeStyles-description-637"
                                     component="div"
                                   >
                                     <ForwardRef(Typography)
-                                      className="makeStyles-root-654 makeStyles-root-655 makeStyles-description-645"
+                                      className="makeStyles-root-646 makeStyles-root-647 makeStyles-description-637"
                                       classes={
                                         Object {
                                           "alignCenter": "MuiTypography-alignCenter",
@@ -5618,7 +5618,7 @@ exports[`Storyshots Components|Forms Sign Up Form 1`] = `
                                       }
                                     >
                                       <div
-                                        className="MuiTypography-root makeStyles-root-654 makeStyles-root-655 makeStyles-description-645 MuiTypography-body1"
+                                        className="MuiTypography-root makeStyles-root-646 makeStyles-root-647 makeStyles-description-637 MuiTypography-body1"
                                       >
                                         If you've already signed up, 
                                         <WithStyles(ForwardRef(Link))
@@ -5808,7 +5808,7 @@ exports[`Storyshots Components|Forms Sign Up Form 1`] = `
                                           "startAdornment": null,
                                         }
                                       }
-                                      className="makeStyles-root-656 makeStyles-root-657"
+                                      className="makeStyles-root-648 makeStyles-root-649"
                                       field={
                                         Object {
                                           "name": "email",
@@ -5891,7 +5891,7 @@ exports[`Storyshots Components|Forms Sign Up Form 1`] = `
                                             "startAdornment": null,
                                           }
                                         }
-                                        className="makeStyles-root-656 makeStyles-root-657"
+                                        className="makeStyles-root-648 makeStyles-root-649"
                                         disabled={false}
                                         fullWidth={true}
                                         label="Email address"
@@ -5915,7 +5915,7 @@ exports[`Storyshots Components|Forms Sign Up Form 1`] = `
                                               "startAdornment": null,
                                             }
                                           }
-                                          className="makeStyles-root-656 makeStyles-root-657"
+                                          className="makeStyles-root-648 makeStyles-root-649"
                                           classes={
                                             Object {
                                               "root": "MuiTextField-root",
@@ -5931,7 +5931,7 @@ exports[`Storyshots Components|Forms Sign Up Form 1`] = `
                                           value=""
                                         >
                                           <WithStyles(ForwardRef(FormControl))
-                                            className="MuiTextField-root makeStyles-root-656 makeStyles-root-657"
+                                            className="MuiTextField-root makeStyles-root-648 makeStyles-root-649"
                                             color="primary"
                                             disabled={false}
                                             error={false}
@@ -5940,7 +5940,7 @@ exports[`Storyshots Components|Forms Sign Up Form 1`] = `
                                             variant="standard"
                                           >
                                             <ForwardRef(FormControl)
-                                              className="MuiTextField-root makeStyles-root-656 makeStyles-root-657"
+                                              className="MuiTextField-root makeStyles-root-648 makeStyles-root-649"
                                               classes={
                                                 Object {
                                                   "fullWidth": "MuiFormControl-fullWidth",
@@ -5957,7 +5957,7 @@ exports[`Storyshots Components|Forms Sign Up Form 1`] = `
                                               variant="standard"
                                             >
                                               <div
-                                                className="MuiFormControl-root MuiTextField-root makeStyles-root-656 makeStyles-root-657 MuiFormControl-fullWidth"
+                                                className="MuiFormControl-root MuiTextField-root makeStyles-root-648 makeStyles-root-649 MuiFormControl-fullWidth"
                                               >
                                                 <WithStyles(ForwardRef(InputLabel))
                                                   focused={false}
@@ -6168,13 +6168,13 @@ exports[`Storyshots Components|Forms Sign Up Form 1`] = `
                                   </RegenTextField>
                                 </Field>
                                 <Field
-                                  className="makeStyles-textField-644"
+                                  className="makeStyles-textField-636"
                                   component={[Function]}
                                   name="password"
                                   signup={true}
                                 >
                                   <PasswordField
-                                    className="makeStyles-textField-644"
+                                    className="makeStyles-textField-636"
                                     field={
                                       Object {
                                         "name": "password",
@@ -6247,7 +6247,7 @@ exports[`Storyshots Components|Forms Sign Up Form 1`] = `
                                           "filled": false,
                                         }
                                       }
-                                      className="makeStyles-textField-644"
+                                      className="makeStyles-textField-636"
                                       endAdornment={
                                         <ForwardRef(WithStyles)
                                           aria-label="toggle password visibility"
@@ -6255,7 +6255,7 @@ exports[`Storyshots Components|Forms Sign Up Form 1`] = `
                                           onMouseDown={[Function]}
                                         >
                                           <EyeIcon
-                                            className="makeStyles-eyeIcon-658"
+                                            className="makeStyles-eyeIcon-650"
                                             color="#7BC796"
                                             visible={true}
                                           />
@@ -6352,7 +6352,7 @@ exports[`Storyshots Components|Forms Sign Up Form 1`] = `
                                                 onMouseDown={[Function]}
                                               >
                                                 <EyeIcon
-                                                  className="makeStyles-eyeIcon-658"
+                                                  className="makeStyles-eyeIcon-650"
                                                   color="#7BC796"
                                                   visible={true}
                                                 />
@@ -6361,7 +6361,7 @@ exports[`Storyshots Components|Forms Sign Up Form 1`] = `
                                             "startAdornment": null,
                                           }
                                         }
-                                        className="makeStyles-root-656 makeStyles-root-659 makeStyles-textField-644"
+                                        className="makeStyles-root-648 makeStyles-root-651 makeStyles-textField-636"
                                         field={
                                           Object {
                                             "name": "password",
@@ -6454,7 +6454,7 @@ exports[`Storyshots Components|Forms Sign Up Form 1`] = `
                                                   onMouseDown={[Function]}
                                                 >
                                                   <EyeIcon
-                                                    className="makeStyles-eyeIcon-658"
+                                                    className="makeStyles-eyeIcon-650"
                                                     color="#7BC796"
                                                     visible={true}
                                                   />
@@ -6463,7 +6463,7 @@ exports[`Storyshots Components|Forms Sign Up Form 1`] = `
                                               "startAdornment": null,
                                             }
                                           }
-                                          className="makeStyles-root-656 makeStyles-root-659 makeStyles-textField-644"
+                                          className="makeStyles-root-648 makeStyles-root-651 makeStyles-textField-636"
                                           disabled={false}
                                           fullWidth={true}
                                           label="Password"
@@ -6497,7 +6497,7 @@ exports[`Storyshots Components|Forms Sign Up Form 1`] = `
                                                     onMouseDown={[Function]}
                                                   >
                                                     <EyeIcon
-                                                      className="makeStyles-eyeIcon-658"
+                                                      className="makeStyles-eyeIcon-650"
                                                       color="#7BC796"
                                                       visible={true}
                                                     />
@@ -6506,7 +6506,7 @@ exports[`Storyshots Components|Forms Sign Up Form 1`] = `
                                                 "startAdornment": null,
                                               }
                                             }
-                                            className="makeStyles-root-656 makeStyles-root-659 makeStyles-textField-644"
+                                            className="makeStyles-root-648 makeStyles-root-651 makeStyles-textField-636"
                                             classes={
                                               Object {
                                                 "root": "MuiTextField-root",
@@ -6522,7 +6522,7 @@ exports[`Storyshots Components|Forms Sign Up Form 1`] = `
                                             value=""
                                           >
                                             <WithStyles(ForwardRef(FormControl))
-                                              className="MuiTextField-root makeStyles-root-656 makeStyles-root-659 makeStyles-textField-644"
+                                              className="MuiTextField-root makeStyles-root-648 makeStyles-root-651 makeStyles-textField-636"
                                               color="primary"
                                               disabled={false}
                                               error={false}
@@ -6531,7 +6531,7 @@ exports[`Storyshots Components|Forms Sign Up Form 1`] = `
                                               variant="standard"
                                             >
                                               <ForwardRef(FormControl)
-                                                className="MuiTextField-root makeStyles-root-656 makeStyles-root-659 makeStyles-textField-644"
+                                                className="MuiTextField-root makeStyles-root-648 makeStyles-root-651 makeStyles-textField-636"
                                                 classes={
                                                   Object {
                                                     "fullWidth": "MuiFormControl-fullWidth",
@@ -6548,7 +6548,7 @@ exports[`Storyshots Components|Forms Sign Up Form 1`] = `
                                                 variant="standard"
                                               >
                                                 <div
-                                                  className="MuiFormControl-root MuiTextField-root makeStyles-root-656 makeStyles-root-659 makeStyles-textField-644 MuiFormControl-fullWidth"
+                                                  className="MuiFormControl-root MuiTextField-root makeStyles-root-648 makeStyles-root-651 makeStyles-textField-636 MuiFormControl-fullWidth"
                                                 >
                                                   <WithStyles(ForwardRef(InputLabel))
                                                     focused={false}
@@ -6630,7 +6630,7 @@ exports[`Storyshots Components|Forms Sign Up Form 1`] = `
                                                           onMouseDown={[Function]}
                                                         >
                                                           <EyeIcon
-                                                            className="makeStyles-eyeIcon-658"
+                                                            className="makeStyles-eyeIcon-650"
                                                             color="#7BC796"
                                                             visible={true}
                                                           />
@@ -6677,7 +6677,7 @@ exports[`Storyshots Components|Forms Sign Up Form 1`] = `
                                                             onMouseDown={[Function]}
                                                           >
                                                             <EyeIcon
-                                                              className="makeStyles-eyeIcon-658"
+                                                              className="makeStyles-eyeIcon-650"
                                                               color="#7BC796"
                                                               visible={true}
                                                             />
@@ -6723,7 +6723,7 @@ exports[`Storyshots Components|Forms Sign Up Form 1`] = `
                                                               onMouseDown={[Function]}
                                                             >
                                                               <EyeIcon
-                                                                className="makeStyles-eyeIcon-658"
+                                                                className="makeStyles-eyeIcon-650"
                                                                 color="#7BC796"
                                                                 visible={true}
                                                               />
@@ -6774,7 +6774,7 @@ exports[`Storyshots Components|Forms Sign Up Form 1`] = `
                                                                 onMouseDown={[Function]}
                                                               >
                                                                 <EyeIcon
-                                                                  className="makeStyles-eyeIcon-658"
+                                                                  className="makeStyles-eyeIcon-650"
                                                                   color="#7BC796"
                                                                   visible={true}
                                                                 />
@@ -6900,16 +6900,16 @@ exports[`Storyshots Components|Forms Sign Up Form 1`] = `
                                                                               className="MuiIconButton-label"
                                                                             >
                                                                               <EyeIcon
-                                                                                className="makeStyles-eyeIcon-658"
+                                                                                className="makeStyles-eyeIcon-650"
                                                                                 color="#7BC796"
                                                                                 visible={true}
                                                                               >
                                                                                 <WithStyles(ForwardRef(SvgIcon))
-                                                                                  className="makeStyles-eyeIcon-658 makeStyles-root-660"
+                                                                                  className="makeStyles-eyeIcon-650 makeStyles-root-652"
                                                                                   viewBox="0 0 19 14"
                                                                                 >
                                                                                   <ForwardRef(SvgIcon)
-                                                                                    className="makeStyles-eyeIcon-658 makeStyles-root-660"
+                                                                                    className="makeStyles-eyeIcon-650 makeStyles-root-652"
                                                                                     classes={
                                                                                       Object {
                                                                                         "colorAction": "MuiSvgIcon-colorAction",
@@ -6927,7 +6927,7 @@ exports[`Storyshots Components|Forms Sign Up Form 1`] = `
                                                                                   >
                                                                                     <svg
                                                                                       aria-hidden={true}
-                                                                                      className="MuiSvgIcon-root makeStyles-eyeIcon-658 makeStyles-root-660"
+                                                                                      className="MuiSvgIcon-root makeStyles-eyeIcon-650 makeStyles-root-652"
                                                                                       focusable="false"
                                                                                       viewBox="0 0 19 14"
                                                                                     >
@@ -7016,13 +7016,13 @@ exports[`Storyshots Components|Forms Sign Up Form 1`] = `
                     </RegenCard>
                   </OnBoardingCard>
                   <div
-                    className="makeStyles-checkboxes-650"
+                    className="makeStyles-checkboxes-642"
                   >
                     <Field
                       component={[Function]}
                       label={
                         <Description
-                          className="makeStyles-checkboxLabel-646"
+                          className="makeStyles-checkboxLabel-638"
                         >
                           Please sign me up for the Regen news and updates (unsubscribe anytime)
                         </Description>
@@ -7098,7 +7098,7 @@ exports[`Storyshots Components|Forms Sign Up Form 1`] = `
                         }
                         label={
                           <Description
-                            className="makeStyles-checkboxLabel-646"
+                            className="makeStyles-checkboxLabel-638"
                           >
                             Please sign me up for the Regen news and updates (unsubscribe anytime)
                           </Description>
@@ -7106,7 +7106,7 @@ exports[`Storyshots Components|Forms Sign Up Form 1`] = `
                         type="checkbox"
                       >
                         <div
-                          className="makeStyles-root-661"
+                          className="makeStyles-root-653"
                         >
                           <WithStyles(ForwardRef(FormControlLabel))
                             control={
@@ -7125,7 +7125,7 @@ exports[`Storyshots Components|Forms Sign Up Form 1`] = `
                             }
                             label={
                               <Description
-                                className="makeStyles-checkboxLabel-646"
+                                className="makeStyles-checkboxLabel-638"
                               >
                                 Please sign me up for the Regen news and updates (unsubscribe anytime)
                               </Description>
@@ -7158,7 +7158,7 @@ exports[`Storyshots Components|Forms Sign Up Form 1`] = `
                               }
                               label={
                                 <Description
-                                  className="makeStyles-checkboxLabel-646"
+                                  className="makeStyles-checkboxLabel-638"
                                 >
                                   Please sign me up for the Regen news and updates (unsubscribe anytime)
                                 </Description>
@@ -7230,10 +7230,10 @@ exports[`Storyshots Components|Forms Sign Up Form 1`] = `
                                         checkedIcon={<CheckedIcon />}
                                         classes={
                                           Object {
-                                            "checked": "PrivateSwitchBase-checked-663 Mui-checked",
-                                            "disabled": "PrivateSwitchBase-disabled-664 Mui-disabled",
-                                            "input": "PrivateSwitchBase-input-665",
-                                            "root": "PrivateSwitchBase-root-662 MuiCheckbox-root MuiCheckbox-colorSecondary",
+                                            "checked": "PrivateSwitchBase-checked-655 Mui-checked",
+                                            "disabled": "PrivateSwitchBase-disabled-656 Mui-disabled",
+                                            "input": "PrivateSwitchBase-input-657",
+                                            "root": "PrivateSwitchBase-root-654 MuiCheckbox-root MuiCheckbox-colorSecondary",
                                           }
                                         }
                                         color="secondary"
@@ -7251,7 +7251,7 @@ exports[`Storyshots Components|Forms Sign Up Form 1`] = `
                                         value={false}
                                       >
                                         <WithStyles(ForwardRef(IconButton))
-                                          className="PrivateSwitchBase-root-662 MuiCheckbox-root MuiCheckbox-colorSecondary"
+                                          className="PrivateSwitchBase-root-654 MuiCheckbox-root MuiCheckbox-colorSecondary"
                                           color="secondary"
                                           component="span"
                                           disabled={false}
@@ -7260,7 +7260,7 @@ exports[`Storyshots Components|Forms Sign Up Form 1`] = `
                                           tabIndex={null}
                                         >
                                           <ForwardRef(IconButton)
-                                            className="PrivateSwitchBase-root-662 MuiCheckbox-root MuiCheckbox-colorSecondary"
+                                            className="PrivateSwitchBase-root-654 MuiCheckbox-root MuiCheckbox-colorSecondary"
                                             classes={
                                               Object {
                                                 "colorInherit": "MuiIconButton-colorInherit",
@@ -7283,7 +7283,7 @@ exports[`Storyshots Components|Forms Sign Up Form 1`] = `
                                           >
                                             <WithStyles(ForwardRef(ButtonBase))
                                               centerRipple={true}
-                                              className="MuiIconButton-root PrivateSwitchBase-root-662 MuiCheckbox-root MuiCheckbox-colorSecondary MuiIconButton-colorSecondary"
+                                              className="MuiIconButton-root PrivateSwitchBase-root-654 MuiCheckbox-root MuiCheckbox-colorSecondary MuiIconButton-colorSecondary"
                                               component="span"
                                               disabled={false}
                                               focusRipple={true}
@@ -7293,7 +7293,7 @@ exports[`Storyshots Components|Forms Sign Up Form 1`] = `
                                             >
                                               <ForwardRef(ButtonBase)
                                                 centerRipple={true}
-                                                className="MuiIconButton-root PrivateSwitchBase-root-662 MuiCheckbox-root MuiCheckbox-colorSecondary MuiIconButton-colorSecondary"
+                                                className="MuiIconButton-root PrivateSwitchBase-root-654 MuiCheckbox-root MuiCheckbox-colorSecondary MuiIconButton-colorSecondary"
                                                 classes={
                                                   Object {
                                                     "disabled": "Mui-disabled",
@@ -7310,7 +7310,7 @@ exports[`Storyshots Components|Forms Sign Up Form 1`] = `
                                               >
                                                 <span
                                                   aria-disabled={false}
-                                                  className="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-662 MuiCheckbox-root MuiCheckbox-colorSecondary MuiIconButton-colorSecondary"
+                                                  className="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-654 MuiCheckbox-root MuiCheckbox-colorSecondary MuiIconButton-colorSecondary"
                                                   onBlur={[Function]}
                                                   onDragLeave={[Function]}
                                                   onFocus={[Function]}
@@ -7329,7 +7329,7 @@ exports[`Storyshots Components|Forms Sign Up Form 1`] = `
                                                   >
                                                     <input
                                                       checked={false}
-                                                      className="PrivateSwitchBase-input-665"
+                                                      className="PrivateSwitchBase-input-657"
                                                       data-indeterminate={false}
                                                       disabled={false}
                                                       name="updates"
@@ -7474,14 +7474,14 @@ exports[`Storyshots Components|Forms Sign Up Form 1`] = `
                                       className="MuiTypography-root MuiFormControlLabel-label MuiTypography-body1"
                                     >
                                       <Description
-                                        className="makeStyles-checkboxLabel-646"
+                                        className="makeStyles-checkboxLabel-638"
                                       >
                                         <WithStyles(ForwardRef(Typography))
-                                          className="makeStyles-root-654 makeStyles-root-666 makeStyles-checkboxLabel-646"
+                                          className="makeStyles-root-646 makeStyles-root-658 makeStyles-checkboxLabel-638"
                                           component="div"
                                         >
                                           <ForwardRef(Typography)
-                                            className="makeStyles-root-654 makeStyles-root-666 makeStyles-checkboxLabel-646"
+                                            className="makeStyles-root-646 makeStyles-root-658 makeStyles-checkboxLabel-638"
                                             classes={
                                               Object {
                                                 "alignCenter": "MuiTypography-alignCenter",
@@ -7533,7 +7533,7 @@ exports[`Storyshots Components|Forms Sign Up Form 1`] = `
                                             }
                                           >
                                             <div
-                                              className="MuiTypography-root makeStyles-root-654 makeStyles-root-666 makeStyles-checkboxLabel-646 MuiTypography-body1"
+                                              className="MuiTypography-root makeStyles-root-646 makeStyles-root-658 makeStyles-checkboxLabel-638 MuiTypography-body1"
                                             >
                                               Please sign me up for the Regen news and updates (unsubscribe anytime)
                                             </div>
@@ -7553,7 +7553,7 @@ exports[`Storyshots Components|Forms Sign Up Form 1`] = `
                       component={[Function]}
                       label={
                         <Description
-                          className="makeStyles-checkboxLabel-646"
+                          className="makeStyles-checkboxLabel-638"
                         >
                           I agree to the Regen Network 
                           <ForwardRef(WithStyles)
@@ -7641,7 +7641,7 @@ exports[`Storyshots Components|Forms Sign Up Form 1`] = `
                         }
                         label={
                           <Description
-                            className="makeStyles-checkboxLabel-646"
+                            className="makeStyles-checkboxLabel-638"
                           >
                             I agree to the Regen Network 
                             <ForwardRef(WithStyles)
@@ -7661,7 +7661,7 @@ exports[`Storyshots Components|Forms Sign Up Form 1`] = `
                         type="checkbox"
                       >
                         <div
-                          className="makeStyles-root-661"
+                          className="makeStyles-root-653"
                         >
                           <WithStyles(ForwardRef(FormControlLabel))
                             control={
@@ -7680,7 +7680,7 @@ exports[`Storyshots Components|Forms Sign Up Form 1`] = `
                             }
                             label={
                               <Description
-                                className="makeStyles-checkboxLabel-646"
+                                className="makeStyles-checkboxLabel-638"
                               >
                                 I agree to the Regen Network 
                                 <ForwardRef(WithStyles)
@@ -7725,7 +7725,7 @@ exports[`Storyshots Components|Forms Sign Up Form 1`] = `
                               }
                               label={
                                 <Description
-                                  className="makeStyles-checkboxLabel-646"
+                                  className="makeStyles-checkboxLabel-638"
                                 >
                                   I agree to the Regen Network 
                                   <ForwardRef(WithStyles)
@@ -7809,10 +7809,10 @@ exports[`Storyshots Components|Forms Sign Up Form 1`] = `
                                         checkedIcon={<CheckedIcon />}
                                         classes={
                                           Object {
-                                            "checked": "PrivateSwitchBase-checked-663 Mui-checked",
-                                            "disabled": "PrivateSwitchBase-disabled-664 Mui-disabled",
-                                            "input": "PrivateSwitchBase-input-665",
-                                            "root": "PrivateSwitchBase-root-662 MuiCheckbox-root MuiCheckbox-colorSecondary",
+                                            "checked": "PrivateSwitchBase-checked-655 Mui-checked",
+                                            "disabled": "PrivateSwitchBase-disabled-656 Mui-disabled",
+                                            "input": "PrivateSwitchBase-input-657",
+                                            "root": "PrivateSwitchBase-root-654 MuiCheckbox-root MuiCheckbox-colorSecondary",
                                           }
                                         }
                                         color="secondary"
@@ -7830,7 +7830,7 @@ exports[`Storyshots Components|Forms Sign Up Form 1`] = `
                                         value={false}
                                       >
                                         <WithStyles(ForwardRef(IconButton))
-                                          className="PrivateSwitchBase-root-662 MuiCheckbox-root MuiCheckbox-colorSecondary"
+                                          className="PrivateSwitchBase-root-654 MuiCheckbox-root MuiCheckbox-colorSecondary"
                                           color="secondary"
                                           component="span"
                                           disabled={false}
@@ -7839,7 +7839,7 @@ exports[`Storyshots Components|Forms Sign Up Form 1`] = `
                                           tabIndex={null}
                                         >
                                           <ForwardRef(IconButton)
-                                            className="PrivateSwitchBase-root-662 MuiCheckbox-root MuiCheckbox-colorSecondary"
+                                            className="PrivateSwitchBase-root-654 MuiCheckbox-root MuiCheckbox-colorSecondary"
                                             classes={
                                               Object {
                                                 "colorInherit": "MuiIconButton-colorInherit",
@@ -7862,7 +7862,7 @@ exports[`Storyshots Components|Forms Sign Up Form 1`] = `
                                           >
                                             <WithStyles(ForwardRef(ButtonBase))
                                               centerRipple={true}
-                                              className="MuiIconButton-root PrivateSwitchBase-root-662 MuiCheckbox-root MuiCheckbox-colorSecondary MuiIconButton-colorSecondary"
+                                              className="MuiIconButton-root PrivateSwitchBase-root-654 MuiCheckbox-root MuiCheckbox-colorSecondary MuiIconButton-colorSecondary"
                                               component="span"
                                               disabled={false}
                                               focusRipple={true}
@@ -7872,7 +7872,7 @@ exports[`Storyshots Components|Forms Sign Up Form 1`] = `
                                             >
                                               <ForwardRef(ButtonBase)
                                                 centerRipple={true}
-                                                className="MuiIconButton-root PrivateSwitchBase-root-662 MuiCheckbox-root MuiCheckbox-colorSecondary MuiIconButton-colorSecondary"
+                                                className="MuiIconButton-root PrivateSwitchBase-root-654 MuiCheckbox-root MuiCheckbox-colorSecondary MuiIconButton-colorSecondary"
                                                 classes={
                                                   Object {
                                                     "disabled": "Mui-disabled",
@@ -7889,7 +7889,7 @@ exports[`Storyshots Components|Forms Sign Up Form 1`] = `
                                               >
                                                 <span
                                                   aria-disabled={false}
-                                                  className="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-662 MuiCheckbox-root MuiCheckbox-colorSecondary MuiIconButton-colorSecondary"
+                                                  className="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-654 MuiCheckbox-root MuiCheckbox-colorSecondary MuiIconButton-colorSecondary"
                                                   onBlur={[Function]}
                                                   onDragLeave={[Function]}
                                                   onFocus={[Function]}
@@ -7908,7 +7908,7 @@ exports[`Storyshots Components|Forms Sign Up Form 1`] = `
                                                   >
                                                     <input
                                                       checked={false}
-                                                      className="PrivateSwitchBase-input-665"
+                                                      className="PrivateSwitchBase-input-657"
                                                       data-indeterminate={false}
                                                       disabled={false}
                                                       name="privacy"
@@ -8053,14 +8053,14 @@ exports[`Storyshots Components|Forms Sign Up Form 1`] = `
                                       className="MuiTypography-root MuiFormControlLabel-label MuiTypography-body1"
                                     >
                                       <Description
-                                        className="makeStyles-checkboxLabel-646"
+                                        className="makeStyles-checkboxLabel-638"
                                       >
                                         <WithStyles(ForwardRef(Typography))
-                                          className="makeStyles-root-654 makeStyles-root-667 makeStyles-checkboxLabel-646"
+                                          className="makeStyles-root-646 makeStyles-root-659 makeStyles-checkboxLabel-638"
                                           component="div"
                                         >
                                           <ForwardRef(Typography)
-                                            className="makeStyles-root-654 makeStyles-root-667 makeStyles-checkboxLabel-646"
+                                            className="makeStyles-root-646 makeStyles-root-659 makeStyles-checkboxLabel-638"
                                             classes={
                                               Object {
                                                 "alignCenter": "MuiTypography-alignCenter",
@@ -8112,7 +8112,7 @@ exports[`Storyshots Components|Forms Sign Up Form 1`] = `
                                             }
                                           >
                                             <div
-                                              className="MuiTypography-root makeStyles-root-654 makeStyles-root-667 makeStyles-checkboxLabel-646 MuiTypography-body1"
+                                              className="MuiTypography-root makeStyles-root-646 makeStyles-root-659 makeStyles-checkboxLabel-638 MuiTypography-body1"
                                             >
                                               I agree to the Regen Network 
                                               <WithStyles(ForwardRef(Link))
@@ -8439,22 +8439,22 @@ exports[`Storyshots Components|Forms Sign Up Form 1`] = `
                         className="MuiGrid-root MuiGrid-container MuiGrid-justify-xs-flex-end"
                       >
                         <ContainedButton
-                          className="makeStyles-button-648"
+                          className="makeStyles-button-640"
                           disabled={false}
                           onClick={[Function]}
                         >
                           <WithStyles(WithStyles(ForwardRef(Button)))
-                            className="makeStyles-button-648"
+                            className="makeStyles-button-640"
                             color="secondary"
                             disabled={false}
                             onClick={[Function]}
                             variant="contained"
                           >
                             <WithStyles(ForwardRef(Button))
-                              className="makeStyles-button-648"
+                              className="makeStyles-button-640"
                               classes={
                                 Object {
-                                  "root": "WithStyles(ForwardRef(Button))-root-668",
+                                  "root": "WithStyles(ForwardRef(Button))-root-660",
                                 }
                               }
                               color="secondary"
@@ -8463,7 +8463,7 @@ exports[`Storyshots Components|Forms Sign Up Form 1`] = `
                               variant="contained"
                             >
                               <ForwardRef(Button)
-                                className="makeStyles-button-648"
+                                className="makeStyles-button-640"
                                 classes={
                                   Object {
                                     "colorInherit": "MuiButton-colorInherit",
@@ -8486,7 +8486,7 @@ exports[`Storyshots Components|Forms Sign Up Form 1`] = `
                                     "outlinedSecondary": "MuiButton-outlinedSecondary",
                                     "outlinedSizeLarge": "MuiButton-outlinedSizeLarge",
                                     "outlinedSizeSmall": "MuiButton-outlinedSizeSmall",
-                                    "root": "MuiButton-root WithStyles(ForwardRef(Button))-root-668",
+                                    "root": "MuiButton-root WithStyles(ForwardRef(Button))-root-660",
                                     "sizeLarge": "MuiButton-sizeLarge",
                                     "sizeSmall": "MuiButton-sizeSmall",
                                     "startIcon": "MuiButton-startIcon",
@@ -8503,7 +8503,7 @@ exports[`Storyshots Components|Forms Sign Up Form 1`] = `
                                 variant="contained"
                               >
                                 <WithStyles(ForwardRef(ButtonBase))
-                                  className="MuiButton-root WithStyles(ForwardRef(Button))-root-668 MuiButton-contained makeStyles-button-648 MuiButton-containedSecondary"
+                                  className="MuiButton-root WithStyles(ForwardRef(Button))-root-660 MuiButton-contained makeStyles-button-640 MuiButton-containedSecondary"
                                   component="button"
                                   disabled={false}
                                   focusRipple={true}
@@ -8512,7 +8512,7 @@ exports[`Storyshots Components|Forms Sign Up Form 1`] = `
                                   type="button"
                                 >
                                   <ForwardRef(ButtonBase)
-                                    className="MuiButton-root WithStyles(ForwardRef(Button))-root-668 MuiButton-contained makeStyles-button-648 MuiButton-containedSecondary"
+                                    className="MuiButton-root WithStyles(ForwardRef(Button))-root-660 MuiButton-contained makeStyles-button-640 MuiButton-containedSecondary"
                                     classes={
                                       Object {
                                         "disabled": "Mui-disabled",
@@ -8528,7 +8528,7 @@ exports[`Storyshots Components|Forms Sign Up Form 1`] = `
                                     type="button"
                                   >
                                     <button
-                                      className="MuiButtonBase-root MuiButton-root WithStyles(ForwardRef(Button))-root-668 MuiButton-contained makeStyles-button-648 MuiButton-containedSecondary"
+                                      className="MuiButtonBase-root MuiButton-root WithStyles(ForwardRef(Button))-root-660 MuiButton-contained makeStyles-button-640 MuiButton-containedSecondary"
                                       disabled={false}
                                       onBlur={[Function]}
                                       onClick={[Function]}
@@ -9407,7 +9407,7 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -10122,28 +10122,28 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
           title="User Profile"
         >
           <Section
-            className="makeStyles-root-576"
+            className="makeStyles-root-568"
             title="User Profile"
-            titleClassName="makeStyles-content-577"
+            titleClassName="makeStyles-content-569"
             titleVariant="h3"
           >
             <section
-              className="makeStyles-root-578 makeStyles-root-580 makeStyles-root-576"
+              className="makeStyles-root-570 makeStyles-root-572 makeStyles-root-568"
             >
               <Title
                 align="center"
-                className="makeStyles-title-579 makeStyles-title-581 makeStyles-content-577"
+                className="makeStyles-title-571 makeStyles-title-573 makeStyles-content-569"
                 variant="h3"
               >
                 <WithStyles(ForwardRef(Typography))
                   align="center"
-                  className="makeStyles-root-582 makeStyles-title-579 makeStyles-title-581 makeStyles-content-577"
+                  className="makeStyles-root-574 makeStyles-title-571 makeStyles-title-573 makeStyles-content-569"
                   color="textPrimary"
                   variant="h3"
                 >
                   <ForwardRef(Typography)
                     align="center"
-                    className="makeStyles-root-582 makeStyles-title-579 makeStyles-title-581 makeStyles-content-577"
+                    className="makeStyles-root-574 makeStyles-title-571 makeStyles-title-573 makeStyles-content-569"
                     classes={
                       Object {
                         "alignCenter": "MuiTypography-alignCenter",
@@ -10196,7 +10196,7 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
                     }
                   >
                     <h3
-                      className="MuiTypography-root makeStyles-root-582 makeStyles-title-579 makeStyles-title-581 makeStyles-content-577 MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignCenter"
+                      className="MuiTypography-root makeStyles-root-574 makeStyles-title-571 makeStyles-title-573 makeStyles-content-569 MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-alignCenter"
                     >
                       User Profile
                     </h3>
@@ -10204,7 +10204,7 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
                 </WithStyles(ForwardRef(Typography))>
               </Title>
               <div
-                className="makeStyles-content-577"
+                className="makeStyles-content-569"
               >
                 <UserProfileForm
                   apiUrl=""
@@ -10231,14 +10231,14 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
                       >
                         <OnBoardingCard>
                           <RegenCard
-                            className="makeStyles-root-584"
+                            className="makeStyles-root-576"
                           >
                             <WithStyles(ForwardRef(Card))
-                              className="makeStyles-root-585 makeStyles-root-586 makeStyles-root-584"
+                              className="makeStyles-root-577 makeStyles-root-578 makeStyles-root-576"
                               elevation={0}
                             >
                               <ForwardRef(Card)
-                                className="makeStyles-root-585 makeStyles-root-586 makeStyles-root-584"
+                                className="makeStyles-root-577 makeStyles-root-578 makeStyles-root-576"
                                 classes={
                                   Object {
                                     "root": "MuiCard-root",
@@ -10247,11 +10247,11 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
                                 elevation={0}
                               >
                                 <WithStyles(ForwardRef(Paper))
-                                  className="MuiCard-root makeStyles-root-585 makeStyles-root-586 makeStyles-root-584"
+                                  className="MuiCard-root makeStyles-root-577 makeStyles-root-578 makeStyles-root-576"
                                   elevation={0}
                                 >
                                   <ForwardRef(Paper)
-                                    className="MuiCard-root makeStyles-root-585 makeStyles-root-586 makeStyles-root-584"
+                                    className="MuiCard-root makeStyles-root-577 makeStyles-root-578 makeStyles-root-576"
                                     classes={
                                       Object {
                                         "elevation0": "MuiPaper-elevation0",
@@ -10287,16 +10287,16 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
                                     elevation={0}
                                   >
                                     <div
-                                      className="MuiPaper-root MuiCard-root makeStyles-root-585 makeStyles-root-586 makeStyles-root-584 MuiPaper-elevation0 MuiPaper-rounded"
+                                      className="MuiPaper-root MuiCard-root makeStyles-root-577 makeStyles-root-578 makeStyles-root-576 MuiPaper-elevation0 MuiPaper-rounded"
                                     >
                                       <Field
-                                        className="makeStyles-textField-583"
+                                        className="makeStyles-textField-575"
                                         component={[Function]}
                                         label="Full name"
                                         name="name"
                                       >
                                         <ControlledTextField
-                                          className="makeStyles-textField-583"
+                                          className="makeStyles-textField-575"
                                           field={
                                             Object {
                                               "name": "name",
@@ -10362,7 +10362,7 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
                                           label="Full name"
                                         >
                                           <FieldFormControl
-                                            className="makeStyles-textField-583"
+                                            className="makeStyles-textField-575"
                                             disabled={false}
                                             field={
                                               Object {
@@ -10429,11 +10429,11 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
                                             label="Full name"
                                           >
                                             <WithStyles(ForwardRef(FormControl))
-                                              className="makeStyles-textField-583"
+                                              className="makeStyles-textField-575"
                                               fullWidth={true}
                                             >
                                               <ForwardRef(FormControl)
-                                                className="makeStyles-textField-583"
+                                                className="makeStyles-textField-575"
                                                 classes={
                                                   Object {
                                                     "fullWidth": "MuiFormControl-fullWidth",
@@ -10445,13 +10445,13 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
                                                 fullWidth={true}
                                               >
                                                 <div
-                                                  className="MuiFormControl-root makeStyles-textField-583 MuiFormControl-fullWidth"
+                                                  className="MuiFormControl-root makeStyles-textField-575 MuiFormControl-fullWidth"
                                                 >
                                                   <ControlledFormLabel
                                                     disabled={false}
                                                   >
                                                     <label
-                                                      className="makeStyles-label-592 makeStyles-label-593"
+                                                      className="makeStyles-label-584 makeStyles-label-585"
                                                     >
                                                       Full name
                                                     </label>
@@ -10465,7 +10465,7 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
                                                     value=""
                                                   >
                                                     <WithStyles(ForwardRef(Input))
-                                                      className="makeStyles-input-594"
+                                                      className="makeStyles-input-586"
                                                       disableUnderline={true}
                                                       disabled={false}
                                                       endAdornment={null}
@@ -10475,7 +10475,7 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
                                                       value=""
                                                     >
                                                       <ForwardRef(Input)
-                                                        className="makeStyles-input-594"
+                                                        className="makeStyles-input-586"
                                                         classes={
                                                           Object {
                                                             "colorSecondary": "MuiInput-colorSecondary",
@@ -10503,7 +10503,7 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
                                                         value=""
                                                       >
                                                         <WithStyles(ForwardRef(InputBase))
-                                                          className="makeStyles-input-594"
+                                                          className="makeStyles-input-586"
                                                           classes={
                                                             Object {
                                                               "colorSecondary": "MuiInput-colorSecondary",
@@ -10534,7 +10534,7 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
                                                           value=""
                                                         >
                                                           <ForwardRef(InputBase)
-                                                            className="makeStyles-input-594"
+                                                            className="makeStyles-input-586"
                                                             classes={
                                                               Object {
                                                                 "adornedEnd": "MuiInputBase-adornedEnd",
@@ -10569,7 +10569,7 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
                                                             value=""
                                                           >
                                                             <div
-                                                              className="MuiInputBase-root MuiInput-root makeStyles-input-594 MuiInputBase-formControl MuiInput-formControl"
+                                                              className="MuiInputBase-root MuiInput-root makeStyles-input-586 MuiInputBase-formControl MuiInput-formControl"
                                                               onClick={[Function]}
                                                             >
                                                               <input
@@ -10591,10 +10591,10 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
                                                     </WithStyles(ForwardRef(Input))>
                                                   </Input>
                                                   <WithStyles(ForwardRef(FormHelperText))
-                                                    className="makeStyles-error-588 makeStyles-error-591"
+                                                    className="makeStyles-error-580 makeStyles-error-583"
                                                   >
                                                     <ForwardRef(FormHelperText)
-                                                      className="makeStyles-error-588 makeStyles-error-591"
+                                                      className="makeStyles-error-580 makeStyles-error-583"
                                                       classes={
                                                         Object {
                                                           "contained": "MuiFormHelperText-contained",
@@ -10609,7 +10609,7 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
                                                       }
                                                     >
                                                       <p
-                                                        className="MuiFormHelperText-root makeStyles-error-588 makeStyles-error-591"
+                                                        className="MuiFormHelperText-root makeStyles-error-580 makeStyles-error-583"
                                                       >
                                                         this text is hidden
                                                       </p>
@@ -10622,14 +10622,14 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
                                         </ControlledTextField>
                                       </Field>
                                       <Field
-                                        className="makeStyles-textField-583"
+                                        className="makeStyles-textField-575"
                                         component={[Function]}
                                         label="Role"
                                         name="role"
                                         placeholder="i.e. Farmer, Conservationist, Manager, etc."
                                       >
                                         <ControlledTextField
-                                          className="makeStyles-textField-583"
+                                          className="makeStyles-textField-575"
                                           field={
                                             Object {
                                               "name": "role",
@@ -10696,7 +10696,7 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
                                           placeholder="i.e. Farmer, Conservationist, Manager, etc."
                                         >
                                           <FieldFormControl
-                                            className="makeStyles-textField-583"
+                                            className="makeStyles-textField-575"
                                             disabled={false}
                                             field={
                                               Object {
@@ -10763,11 +10763,11 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
                                             label="Role"
                                           >
                                             <WithStyles(ForwardRef(FormControl))
-                                              className="makeStyles-textField-583"
+                                              className="makeStyles-textField-575"
                                               fullWidth={true}
                                             >
                                               <ForwardRef(FormControl)
-                                                className="makeStyles-textField-583"
+                                                className="makeStyles-textField-575"
                                                 classes={
                                                   Object {
                                                     "fullWidth": "MuiFormControl-fullWidth",
@@ -10779,13 +10779,13 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
                                                 fullWidth={true}
                                               >
                                                 <div
-                                                  className="MuiFormControl-root makeStyles-textField-583 MuiFormControl-fullWidth"
+                                                  className="MuiFormControl-root makeStyles-textField-575 MuiFormControl-fullWidth"
                                                 >
                                                   <ControlledFormLabel
                                                     disabled={false}
                                                   >
                                                     <label
-                                                      className="makeStyles-label-592 makeStyles-label-596"
+                                                      className="makeStyles-label-584 makeStyles-label-588"
                                                     >
                                                       Role
                                                     </label>
@@ -10800,7 +10800,7 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
                                                     value=""
                                                   >
                                                     <WithStyles(ForwardRef(Input))
-                                                      className="makeStyles-input-594"
+                                                      className="makeStyles-input-586"
                                                       disableUnderline={true}
                                                       disabled={false}
                                                       endAdornment={null}
@@ -10811,7 +10811,7 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
                                                       value=""
                                                     >
                                                       <ForwardRef(Input)
-                                                        className="makeStyles-input-594"
+                                                        className="makeStyles-input-586"
                                                         classes={
                                                           Object {
                                                             "colorSecondary": "MuiInput-colorSecondary",
@@ -10840,7 +10840,7 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
                                                         value=""
                                                       >
                                                         <WithStyles(ForwardRef(InputBase))
-                                                          className="makeStyles-input-594"
+                                                          className="makeStyles-input-586"
                                                           classes={
                                                             Object {
                                                               "colorSecondary": "MuiInput-colorSecondary",
@@ -10872,7 +10872,7 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
                                                           value=""
                                                         >
                                                           <ForwardRef(InputBase)
-                                                            className="makeStyles-input-594"
+                                                            className="makeStyles-input-586"
                                                             classes={
                                                               Object {
                                                                 "adornedEnd": "MuiInputBase-adornedEnd",
@@ -10908,7 +10908,7 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
                                                             value=""
                                                           >
                                                             <div
-                                                              className="MuiInputBase-root MuiInput-root makeStyles-input-594 MuiInputBase-formControl MuiInput-formControl"
+                                                              className="MuiInputBase-root MuiInput-root makeStyles-input-586 MuiInputBase-formControl MuiInput-formControl"
                                                               onClick={[Function]}
                                                             >
                                                               <input
@@ -10931,10 +10931,10 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
                                                     </WithStyles(ForwardRef(Input))>
                                                   </Input>
                                                   <WithStyles(ForwardRef(FormHelperText))
-                                                    className="makeStyles-error-588 makeStyles-error-595"
+                                                    className="makeStyles-error-580 makeStyles-error-587"
                                                   >
                                                     <ForwardRef(FormHelperText)
-                                                      className="makeStyles-error-588 makeStyles-error-595"
+                                                      className="makeStyles-error-580 makeStyles-error-587"
                                                       classes={
                                                         Object {
                                                           "contained": "MuiFormHelperText-contained",
@@ -10949,7 +10949,7 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
                                                       }
                                                     >
                                                       <p
-                                                        className="MuiFormHelperText-root makeStyles-error-588 makeStyles-error-595"
+                                                        className="MuiFormHelperText-root makeStyles-error-580 makeStyles-error-587"
                                                       >
                                                         this text is hidden
                                                       </p>
@@ -10962,14 +10962,14 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
                                         </ControlledTextField>
                                       </Field>
                                       <Field
-                                        className="makeStyles-textField-583"
+                                        className="makeStyles-textField-575"
                                         component={[Function]}
                                         label="Bio photo"
                                         name="photo"
                                         optional={true}
                                       >
                                         <ImageField
-                                          className="makeStyles-textField-583"
+                                          className="makeStyles-textField-575"
                                           field={
                                             Object {
                                               "name": "photo",
@@ -11036,7 +11036,7 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
                                           optional={true}
                                         >
                                           <FieldFormControl
-                                            className="makeStyles-textField-583"
+                                            className="makeStyles-textField-575"
                                             disabled={false}
                                             field={
                                               Object {
@@ -11104,11 +11104,11 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
                                             optional={true}
                                           >
                                             <WithStyles(ForwardRef(FormControl))
-                                              className="makeStyles-textField-583"
+                                              className="makeStyles-textField-575"
                                               fullWidth={true}
                                             >
                                               <ForwardRef(FormControl)
-                                                className="makeStyles-textField-583"
+                                                className="makeStyles-textField-575"
                                                 classes={
                                                   Object {
                                                     "fullWidth": "MuiFormControl-fullWidth",
@@ -11120,31 +11120,31 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
                                                 fullWidth={true}
                                               >
                                                 <div
-                                                  className="MuiFormControl-root makeStyles-textField-583 MuiFormControl-fullWidth"
+                                                  className="MuiFormControl-root makeStyles-textField-575 MuiFormControl-fullWidth"
                                                 >
                                                   <ControlledFormLabel
                                                     disabled={false}
                                                     optional={true}
                                                   >
                                                     <label
-                                                      className="makeStyles-label-592 makeStyles-label-601"
+                                                      className="makeStyles-label-584 makeStyles-label-593"
                                                     >
                                                       Bio photo
                                                     </label>
                                                   </ControlledFormLabel>
                                                   <Styled(MuiBox)
                                                     alignItems="center"
-                                                    className="makeStyles-imageBox-598"
+                                                    className="makeStyles-imageBox-590"
                                                     display="flex"
                                                   >
                                                     <div
-                                                      className="MuiBox-root MuiBox-root-602 makeStyles-imageBox-598"
+                                                      className="MuiBox-root MuiBox-root-594 makeStyles-imageBox-590"
                                                     >
                                                       <WithStyles(ForwardRef(Avatar))
-                                                        className="makeStyles-avatar-597"
+                                                        className="makeStyles-avatar-589"
                                                       >
                                                         <ForwardRef(Avatar)
-                                                          className="makeStyles-avatar-597"
+                                                          className="makeStyles-avatar-589"
                                                           classes={
                                                             Object {
                                                               "circle": "MuiAvatar-circle",
@@ -11158,7 +11158,7 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
                                                           }
                                                         >
                                                           <div
-                                                            className="MuiAvatar-root MuiAvatar-circle makeStyles-avatar-597 MuiAvatar-colorDefault"
+                                                            className="MuiAvatar-root MuiAvatar-circle makeStyles-avatar-589 MuiAvatar-colorDefault"
                                                           >
                                                             <ForwardRef(PersonIcon)
                                                               className="MuiAvatar-fallback"
@@ -11209,27 +11209,27 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
                                                         htmlFor="image-upload-input"
                                                       >
                                                         <OutlinedButton
-                                                          className="makeStyles-button-599"
+                                                          className="makeStyles-button-591"
                                                           isImageBtn={true}
                                                         >
                                                           <WithStyles(SpanButton)
-                                                            className="makeStyles-button-599"
+                                                            className="makeStyles-button-591"
                                                             color="secondary"
                                                           >
                                                             <SpanButton
-                                                              className="makeStyles-button-599"
+                                                              className="makeStyles-button-591"
                                                               classes={
                                                                 Object {
-                                                                  "root": "SpanButton-root-603",
+                                                                  "root": "SpanButton-root-595",
                                                                 }
                                                               }
                                                               color="secondary"
                                                             >
                                                               <WithStyles(ForwardRef(Button))
-                                                                className="makeStyles-button-599"
+                                                                className="makeStyles-button-591"
                                                                 classes={
                                                                   Object {
-                                                                    "root": "SpanButton-root-603",
+                                                                    "root": "SpanButton-root-595",
                                                                   }
                                                                 }
                                                                 color="secondary"
@@ -11237,7 +11237,7 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
                                                                 variant="contained"
                                                               >
                                                                 <ForwardRef(Button)
-                                                                  className="makeStyles-button-599"
+                                                                  className="makeStyles-button-591"
                                                                   classes={
                                                                     Object {
                                                                       "colorInherit": "MuiButton-colorInherit",
@@ -11260,7 +11260,7 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
                                                                       "outlinedSecondary": "MuiButton-outlinedSecondary",
                                                                       "outlinedSizeLarge": "MuiButton-outlinedSizeLarge",
                                                                       "outlinedSizeSmall": "MuiButton-outlinedSizeSmall",
-                                                                      "root": "MuiButton-root SpanButton-root-603",
+                                                                      "root": "MuiButton-root SpanButton-root-595",
                                                                       "sizeLarge": "MuiButton-sizeLarge",
                                                                       "sizeSmall": "MuiButton-sizeSmall",
                                                                       "startIcon": "MuiButton-startIcon",
@@ -11276,7 +11276,7 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
                                                                   variant="contained"
                                                                 >
                                                                   <WithStyles(ForwardRef(ButtonBase))
-                                                                    className="MuiButton-root SpanButton-root-603 MuiButton-contained makeStyles-button-599 MuiButton-containedSecondary"
+                                                                    className="MuiButton-root SpanButton-root-595 MuiButton-contained makeStyles-button-591 MuiButton-containedSecondary"
                                                                     component="span"
                                                                     disabled={false}
                                                                     focusRipple={true}
@@ -11284,7 +11284,7 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
                                                                     type="button"
                                                                   >
                                                                     <ForwardRef(ButtonBase)
-                                                                      className="MuiButton-root SpanButton-root-603 MuiButton-contained makeStyles-button-599 MuiButton-containedSecondary"
+                                                                      className="MuiButton-root SpanButton-root-595 MuiButton-contained makeStyles-button-591 MuiButton-containedSecondary"
                                                                       classes={
                                                                         Object {
                                                                           "disabled": "Mui-disabled",
@@ -11300,7 +11300,7 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
                                                                     >
                                                                       <span
                                                                         aria-disabled={false}
-                                                                        className="MuiButtonBase-root MuiButton-root SpanButton-root-603 MuiButton-contained makeStyles-button-599 MuiButton-containedSecondary"
+                                                                        className="MuiButtonBase-root MuiButton-root SpanButton-root-595 MuiButton-contained makeStyles-button-591 MuiButton-containedSecondary"
                                                                         onBlur={[Function]}
                                                                         onDragLeave={[Function]}
                                                                         onFocus={[Function]}
@@ -11360,10 +11360,10 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
                                                     </div>
                                                   </Styled(MuiBox)>
                                                   <WithStyles(ForwardRef(FormHelperText))
-                                                    className="makeStyles-error-588 makeStyles-error-600"
+                                                    className="makeStyles-error-580 makeStyles-error-592"
                                                   >
                                                     <ForwardRef(FormHelperText)
-                                                      className="makeStyles-error-588 makeStyles-error-600"
+                                                      className="makeStyles-error-580 makeStyles-error-592"
                                                       classes={
                                                         Object {
                                                           "contained": "MuiFormHelperText-contained",
@@ -11378,7 +11378,7 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
                                                       }
                                                     >
                                                       <p
-                                                        className="MuiFormHelperText-root makeStyles-error-588 makeStyles-error-600"
+                                                        className="MuiFormHelperText-root makeStyles-error-580 makeStyles-error-592"
                                                       >
                                                         this text is hidden
                                                       </p>
@@ -11396,7 +11396,7 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
                                             open={false}
                                           >
                                             <RegenModal
-                                              className="makeStyles-modal-604"
+                                              className="makeStyles-modal-596"
                                               onClose={[Function]}
                                               open={false}
                                             >
@@ -11409,7 +11409,7 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
                                         </ImageField>
                                       </Field>
                                       <Field
-                                        className="makeStyles-textField-583"
+                                        className="makeStyles-textField-575"
                                         component={[Function]}
                                         label="Phone number"
                                         name="phone"
@@ -11417,7 +11417,7 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
                                         placeholder="+1 719 200 3488"
                                       >
                                         <RegenPhoneField
-                                          className="makeStyles-textField-583"
+                                          className="makeStyles-textField-575"
                                           field={
                                             Object {
                                               "name": "phone",
@@ -11485,7 +11485,7 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
                                           placeholder="+1 719 200 3488"
                                         >
                                           <FieldFormControl
-                                            className="makeStyles-textField-583"
+                                            className="makeStyles-textField-575"
                                             disabled={false}
                                             field={
                                               Object {
@@ -11553,11 +11553,11 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
                                             optional={true}
                                           >
                                             <WithStyles(ForwardRef(FormControl))
-                                              className="makeStyles-textField-583"
+                                              className="makeStyles-textField-575"
                                               fullWidth={true}
                                             >
                                               <ForwardRef(FormControl)
-                                                className="makeStyles-textField-583"
+                                                className="makeStyles-textField-575"
                                                 classes={
                                                   Object {
                                                     "fullWidth": "MuiFormControl-fullWidth",
@@ -11569,14 +11569,14 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
                                                 fullWidth={true}
                                               >
                                                 <div
-                                                  className="MuiFormControl-root makeStyles-textField-583 MuiFormControl-fullWidth"
+                                                  className="MuiFormControl-root makeStyles-textField-575 MuiFormControl-fullWidth"
                                                 >
                                                   <ControlledFormLabel
                                                     disabled={false}
                                                     optional={true}
                                                   >
                                                     <label
-                                                      className="makeStyles-label-592 makeStyles-label-613"
+                                                      className="makeStyles-label-584 makeStyles-label-605"
                                                     >
                                                       Phone number
                                                     </label>
@@ -11588,7 +11588,7 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
                                                     autocompleteSearch={false}
                                                     buttonClass=""
                                                     buttonStyle={Object {}}
-                                                    containerClass="makeStyles-inputWrap-609"
+                                                    containerClass="makeStyles-inputWrap-601"
                                                     containerStyle={Object {}}
                                                     copyNumbersOnly={true}
                                                     country="us"
@@ -11611,7 +11611,7 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
                                                     enableTerritories={false}
                                                     excludeCountries={Array []}
                                                     flagsImagePath="./flags.png"
-                                                    inputClass="makeStyles-input-610 makeStyles-input-611"
+                                                    inputClass="makeStyles-input-602 makeStyles-input-603"
                                                     inputProps={Object {}}
                                                     inputStyle={Object {}}
                                                     isValid={true}
@@ -11653,7 +11653,7 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
                                                     value=""
                                                   >
                                                     <div
-                                                      className="makeStyles-inputWrap-609 react-tel-input"
+                                                      className="makeStyles-inputWrap-601 react-tel-input"
                                                       onKeyDown={[Function]}
                                                       style={Object {}}
                                                     >
@@ -11663,7 +11663,7 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
                                                         Phone
                                                       </div>
                                                       <input
-                                                        className="makeStyles-input-610 makeStyles-input-611 form-control"
+                                                        className="makeStyles-input-602 makeStyles-input-603 form-control"
                                                         disabled={false}
                                                         onBlur={[Function]}
                                                         onChange={[Function]}
@@ -11701,10 +11701,10 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
                                                     </div>
                                                   </t>
                                                   <WithStyles(ForwardRef(FormHelperText))
-                                                    className="makeStyles-error-588 makeStyles-error-612"
+                                                    className="makeStyles-error-580 makeStyles-error-604"
                                                   >
                                                     <ForwardRef(FormHelperText)
-                                                      className="makeStyles-error-588 makeStyles-error-612"
+                                                      className="makeStyles-error-580 makeStyles-error-604"
                                                       classes={
                                                         Object {
                                                           "contained": "MuiFormHelperText-contained",
@@ -11719,7 +11719,7 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
                                                       }
                                                     >
                                                       <p
-                                                        className="MuiFormHelperText-root makeStyles-error-588 makeStyles-error-612"
+                                                        className="MuiFormHelperText-root makeStyles-error-580 makeStyles-error-604"
                                                       >
                                                         this text is hidden
                                                       </p>
@@ -11733,7 +11733,7 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
                                       </Field>
                                       <Field
                                         charLimit={160}
-                                        className="makeStyles-textField-583"
+                                        className="makeStyles-textField-575"
                                         component={[Function]}
                                         description="Describe any relevant background and experience. This info may be shown on the project page."
                                         label="Short personal description"
@@ -11744,7 +11744,7 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
                                       >
                                         <ControlledTextField
                                           charLimit={160}
-                                          className="makeStyles-textField-583"
+                                          className="makeStyles-textField-575"
                                           description="Describe any relevant background and experience. This info may be shown on the project page."
                                           field={
                                             Object {
@@ -11814,7 +11814,7 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
                                           rows={3}
                                         >
                                           <FieldFormControl
-                                            className="makeStyles-textField-583"
+                                            className="makeStyles-textField-575"
                                             description="Describe any relevant background and experience. This info may be shown on the project page."
                                             disabled={false}
                                             field={
@@ -11883,11 +11883,11 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
                                             optional={true}
                                           >
                                             <WithStyles(ForwardRef(FormControl))
-                                              className="makeStyles-textField-583"
+                                              className="makeStyles-textField-575"
                                               fullWidth={true}
                                             >
                                               <ForwardRef(FormControl)
-                                                className="makeStyles-textField-583"
+                                                className="makeStyles-textField-575"
                                                 classes={
                                                   Object {
                                                     "fullWidth": "MuiFormControl-fullWidth",
@@ -11899,24 +11899,24 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
                                                 fullWidth={true}
                                               >
                                                 <div
-                                                  className="MuiFormControl-root makeStyles-textField-583 MuiFormControl-fullWidth"
+                                                  className="MuiFormControl-root makeStyles-textField-575 MuiFormControl-fullWidth"
                                                 >
                                                   <ControlledFormLabel
                                                     disabled={false}
                                                     optional={true}
                                                   >
                                                     <label
-                                                      className="makeStyles-label-592 makeStyles-label-615"
+                                                      className="makeStyles-label-584 makeStyles-label-607"
                                                     >
                                                       Short personal description
                                                     </label>
                                                   </ControlledFormLabel>
                                                   <WithStyles(ForwardRef(Typography))
-                                                    className="makeStyles-txtGray-589"
+                                                    className="makeStyles-txtGray-581"
                                                     variant="body1"
                                                   >
                                                     <ForwardRef(Typography)
-                                                      className="makeStyles-txtGray-589"
+                                                      className="makeStyles-txtGray-581"
                                                       classes={
                                                         Object {
                                                           "alignCenter": "MuiTypography-alignCenter",
@@ -11968,7 +11968,7 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
                                                       }
                                                     >
                                                       <p
-                                                        className="MuiTypography-root makeStyles-txtGray-589 MuiTypography-body1"
+                                                        className="MuiTypography-root makeStyles-txtGray-581 MuiTypography-body1"
                                                       >
                                                         Describe any relevant background and experience. This info may be shown on the project page.
                                                       </p>
@@ -11984,7 +11984,7 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
                                                     startAdornment={null}
                                                   >
                                                     <WithStyles(ForwardRef(Input))
-                                                      className="makeStyles-input-594"
+                                                      className="makeStyles-input-586"
                                                       disableUnderline={true}
                                                       disabled={false}
                                                       endAdornment={null}
@@ -11995,7 +11995,7 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
                                                       startAdornment={null}
                                                     >
                                                       <ForwardRef(Input)
-                                                        className="makeStyles-input-594"
+                                                        className="makeStyles-input-586"
                                                         classes={
                                                           Object {
                                                             "colorSecondary": "MuiInput-colorSecondary",
@@ -12024,7 +12024,7 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
                                                         startAdornment={null}
                                                       >
                                                         <WithStyles(ForwardRef(InputBase))
-                                                          className="makeStyles-input-594"
+                                                          className="makeStyles-input-586"
                                                           classes={
                                                             Object {
                                                               "colorSecondary": "MuiInput-colorSecondary",
@@ -12055,7 +12055,7 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
                                                           type="text"
                                                         >
                                                           <ForwardRef(InputBase)
-                                                            className="makeStyles-input-594"
+                                                            className="makeStyles-input-586"
                                                             classes={
                                                               Object {
                                                                 "adornedEnd": "MuiInputBase-adornedEnd",
@@ -12090,7 +12090,7 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
                                                             type="text"
                                                           >
                                                             <div
-                                                              className="MuiInputBase-root MuiInput-root makeStyles-input-594 MuiInputBase-formControl MuiInput-formControl MuiInputBase-multiline MuiInput-multiline"
+                                                              className="MuiInputBase-root MuiInput-root makeStyles-input-586 MuiInputBase-formControl MuiInput-formControl MuiInputBase-multiline MuiInput-multiline"
                                                               onClick={[Function]}
                                                             >
                                                               <textarea
@@ -12111,11 +12111,11 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
                                                     </WithStyles(ForwardRef(Input))>
                                                   </Input>
                                                   <WithStyles(ForwardRef(Typography))
-                                                    className="makeStyles-charCount-587"
+                                                    className="makeStyles-charCount-579"
                                                     variant="body1"
                                                   >
                                                     <ForwardRef(Typography)
-                                                      className="makeStyles-charCount-587"
+                                                      className="makeStyles-charCount-579"
                                                       classes={
                                                         Object {
                                                           "alignCenter": "MuiTypography-alignCenter",
@@ -12167,17 +12167,17 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
                                                       }
                                                     >
                                                       <p
-                                                        className="MuiTypography-root makeStyles-charCount-587 MuiTypography-body1"
+                                                        className="MuiTypography-root makeStyles-charCount-579 MuiTypography-body1"
                                                       >
                                                         160 characters remaining
                                                       </p>
                                                     </ForwardRef(Typography)>
                                                   </WithStyles(ForwardRef(Typography))>
                                                   <WithStyles(ForwardRef(FormHelperText))
-                                                    className="makeStyles-error-588 makeStyles-error-614"
+                                                    className="makeStyles-error-580 makeStyles-error-606"
                                                   >
                                                     <ForwardRef(FormHelperText)
-                                                      className="makeStyles-error-588 makeStyles-error-614"
+                                                      className="makeStyles-error-580 makeStyles-error-606"
                                                       classes={
                                                         Object {
                                                           "contained": "MuiFormHelperText-contained",
@@ -12192,7 +12192,7 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
                                                       }
                                                     >
                                                       <p
-                                                        className="MuiFormHelperText-root makeStyles-error-588 makeStyles-error-614"
+                                                        className="MuiFormHelperText-root makeStyles-error-580 makeStyles-error-606"
                                                       >
                                                         this text is hidden
                                                       </p>
@@ -12335,22 +12335,22 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
                                 className="MuiGrid-root MuiGrid-container MuiGrid-justify-xs-flex-end"
                               >
                                 <ContainedButton
-                                  className="makeStyles-button-616"
+                                  className="makeStyles-button-608"
                                   disabled={false}
                                   onClick={[Function]}
                                 >
                                   <WithStyles(WithStyles(ForwardRef(Button)))
-                                    className="makeStyles-button-616"
+                                    className="makeStyles-button-608"
                                     color="secondary"
                                     disabled={false}
                                     onClick={[Function]}
                                     variant="contained"
                                   >
                                     <WithStyles(ForwardRef(Button))
-                                      className="makeStyles-button-616"
+                                      className="makeStyles-button-608"
                                       classes={
                                         Object {
-                                          "root": "WithStyles(ForwardRef(Button))-root-618",
+                                          "root": "WithStyles(ForwardRef(Button))-root-610",
                                         }
                                       }
                                       color="secondary"
@@ -12359,7 +12359,7 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
                                       variant="contained"
                                     >
                                       <ForwardRef(Button)
-                                        className="makeStyles-button-616"
+                                        className="makeStyles-button-608"
                                         classes={
                                           Object {
                                             "colorInherit": "MuiButton-colorInherit",
@@ -12382,7 +12382,7 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
                                             "outlinedSecondary": "MuiButton-outlinedSecondary",
                                             "outlinedSizeLarge": "MuiButton-outlinedSizeLarge",
                                             "outlinedSizeSmall": "MuiButton-outlinedSizeSmall",
-                                            "root": "MuiButton-root WithStyles(ForwardRef(Button))-root-618",
+                                            "root": "MuiButton-root WithStyles(ForwardRef(Button))-root-610",
                                             "sizeLarge": "MuiButton-sizeLarge",
                                             "sizeSmall": "MuiButton-sizeSmall",
                                             "startIcon": "MuiButton-startIcon",
@@ -12399,7 +12399,7 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
                                         variant="contained"
                                       >
                                         <WithStyles(ForwardRef(ButtonBase))
-                                          className="MuiButton-root WithStyles(ForwardRef(Button))-root-618 MuiButton-contained makeStyles-button-616 MuiButton-containedSecondary"
+                                          className="MuiButton-root WithStyles(ForwardRef(Button))-root-610 MuiButton-contained makeStyles-button-608 MuiButton-containedSecondary"
                                           component="button"
                                           disabled={false}
                                           focusRipple={true}
@@ -12408,7 +12408,7 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
                                           type="button"
                                         >
                                           <ForwardRef(ButtonBase)
-                                            className="MuiButton-root WithStyles(ForwardRef(Button))-root-618 MuiButton-contained makeStyles-button-616 MuiButton-containedSecondary"
+                                            className="MuiButton-root WithStyles(ForwardRef(Button))-root-610 MuiButton-contained makeStyles-button-608 MuiButton-containedSecondary"
                                             classes={
                                               Object {
                                                 "disabled": "Mui-disabled",
@@ -12424,7 +12424,7 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
                                             type="button"
                                           >
                                             <button
-                                              className="MuiButtonBase-root MuiButton-root WithStyles(ForwardRef(Button))-root-618 MuiButton-contained makeStyles-button-616 MuiButton-containedSecondary"
+                                              className="MuiButtonBase-root MuiButton-root WithStyles(ForwardRef(Button))-root-610 MuiButton-contained makeStyles-button-608 MuiButton-containedSecondary"
                                               disabled={false}
                                               onBlur={[Function]}
                                               onClick={[Function]}

@@ -349,7 +349,7 @@ exports[`Storyshots Components|FAQ Category 1`] = `
         Array [
           Object {
             "answer": "The Regen Ledger provides the project three key elements, without which Regen Network’s promise to create a network dedicated to monitoring, verifying and contracting or paying for ecological",
-            "question": "Why do you need a blockchain?",
+            "question": "Why do you need a OK blockchain?",
           },
           Object {
             "answer": "The XRN token serves two key functions; to program the rules that make an ecological data commons and marketplace possible and to bring together a community of shared interest in service to strengthening and regenerating the living systems that we need to support life on earth.",
@@ -803,7 +803,7 @@ exports[`Storyshots Components|FAQ Category 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -1171,7 +1171,7 @@ exports[`Storyshots Components|FAQ Category 1`] = `
           Array [
             Object {
               "answer": "The Regen Ledger provides the project three key elements, without which Regen Network’s promise to create a network dedicated to monitoring, verifying and contracting or paying for ecological",
-              "question": "Why do you need a blockchain?",
+              "question": "Why do you need a OK blockchain?",
             },
             Object {
               "answer": "The XRN token serves two key functions; to program the rules that make an ecological data commons and marketplace possible and to bring together a community of shared interest in service to strengthening and regenerating the living systems that we need to support life on earth.",
@@ -1527,7 +1527,7 @@ exports[`Storyshots Components|FAQ Category 1`] = `
             Array [
               Object {
                 "answer": "The Regen Ledger provides the project three key elements, without which Regen Network’s promise to create a network dedicated to monitoring, verifying and contracting or paying for ecological",
-                "question": "Why do you need a blockchain?",
+                "question": "Why do you need a OK blockchain?",
               },
               Object {
                 "answer": "The XRN token serves two key functions; to program the rules that make an ecological data commons and marketplace possible and to bring together a community of shared interest in service to strengthening and regenerating the living systems that we need to support life on earth.",
@@ -1673,302 +1673,310 @@ exports[`Storyshots Components|FAQ Category 1`] = `
                             </ForwardRef(Typography)>
                           </WithStyles(ForwardRef(Typography))>
                         </Title>
-                        <Question
-                          answer="The Regen Ledger provides the project three key elements, without which Regen Network’s promise to create a network dedicated to monitoring, verifying and contracting or paying for ecological"
-                          first={true}
+                        <div
                           key="0"
-                          last={false}
-                          question="Why do you need a blockchain?"
                         >
-                          <div
-                            className="makeStyles-root-429 makeStyles-root-436"
+                          <Question
+                            answer="The Regen Ledger provides the project three key elements, without which Regen Network’s promise to create a network dedicated to monitoring, verifying and contracting or paying for ecological"
+                            first={true}
+                            initOpen={false}
+                            last={false}
+                            question="Why do you need a OK blockchain?"
                           >
                             <div
-                              className="makeStyles-container-430"
+                              className="makeStyles-root-429 makeStyles-root-436"
                             >
-                              <Title
-                                className="makeStyles-question-431"
-                                onClick={[Function]}
-                                variant="h5"
+                              <div
+                                className="makeStyles-container-430"
                               >
-                                <WithStyles(ForwardRef(Typography))
-                                  align="left"
-                                  className="makeStyles-root-428 makeStyles-question-431"
-                                  color="textPrimary"
+                                <Title
+                                  className="makeStyles-question-431"
                                   onClick={[Function]}
                                   variant="h5"
                                 >
-                                  <ForwardRef(Typography)
+                                  <WithStyles(ForwardRef(Typography))
                                     align="left"
                                     className="makeStyles-root-428 makeStyles-question-431"
-                                    classes={
-                                      Object {
-                                        "alignCenter": "MuiTypography-alignCenter",
-                                        "alignJustify": "MuiTypography-alignJustify",
-                                        "alignLeft": "MuiTypography-alignLeft",
-                                        "alignRight": "MuiTypography-alignRight",
-                                        "body1": "MuiTypography-body1",
-                                        "body2": "MuiTypography-body2",
-                                        "button": "MuiTypography-button",
-                                        "caption": "MuiTypography-caption",
-                                        "colorError": "MuiTypography-colorError",
-                                        "colorInherit": "MuiTypography-colorInherit",
-                                        "colorPrimary": "MuiTypography-colorPrimary",
-                                        "colorSecondary": "MuiTypography-colorSecondary",
-                                        "colorTextPrimary": "MuiTypography-colorTextPrimary",
-                                        "colorTextSecondary": "MuiTypography-colorTextSecondary",
-                                        "displayBlock": "MuiTypography-displayBlock",
-                                        "displayInline": "MuiTypography-displayInline",
-                                        "gutterBottom": "MuiTypography-gutterBottom",
-                                        "h1": "MuiTypography-h1",
-                                        "h2": "MuiTypography-h2",
-                                        "h3": "MuiTypography-h3",
-                                        "h4": "MuiTypography-h4",
-                                        "h5": "MuiTypography-h5",
-                                        "h6": "MuiTypography-h6",
-                                        "noWrap": "MuiTypography-noWrap",
-                                        "overline": "MuiTypography-overline",
-                                        "paragraph": "MuiTypography-paragraph",
-                                        "root": "MuiTypography-root",
-                                        "srOnly": "MuiTypography-srOnly",
-                                        "subtitle1": "MuiTypography-subtitle1",
-                                        "subtitle2": "MuiTypography-subtitle2",
-                                      }
-                                    }
                                     color="textPrimary"
                                     onClick={[Function]}
                                     variant="h5"
-                                    variantMapping={
-                                      Object {
-                                        "body1": "p",
-                                        "body2": "p",
-                                        "h1": "h1",
-                                        "h2": "h2",
-                                        "h3": "h3",
-                                        "h4": "h4",
-                                        "h5": "h5",
-                                        "h6": "h6",
-                                        "subtitle1": "h2",
-                                        "subtitle2": "h2",
-                                      }
-                                    }
                                   >
-                                    <h5
-                                      className="MuiTypography-root makeStyles-root-428 makeStyles-question-431 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+                                    <ForwardRef(Typography)
+                                      align="left"
+                                      className="makeStyles-root-428 makeStyles-question-431"
+                                      classes={
+                                        Object {
+                                          "alignCenter": "MuiTypography-alignCenter",
+                                          "alignJustify": "MuiTypography-alignJustify",
+                                          "alignLeft": "MuiTypography-alignLeft",
+                                          "alignRight": "MuiTypography-alignRight",
+                                          "body1": "MuiTypography-body1",
+                                          "body2": "MuiTypography-body2",
+                                          "button": "MuiTypography-button",
+                                          "caption": "MuiTypography-caption",
+                                          "colorError": "MuiTypography-colorError",
+                                          "colorInherit": "MuiTypography-colorInherit",
+                                          "colorPrimary": "MuiTypography-colorPrimary",
+                                          "colorSecondary": "MuiTypography-colorSecondary",
+                                          "colorTextPrimary": "MuiTypography-colorTextPrimary",
+                                          "colorTextSecondary": "MuiTypography-colorTextSecondary",
+                                          "displayBlock": "MuiTypography-displayBlock",
+                                          "displayInline": "MuiTypography-displayInline",
+                                          "gutterBottom": "MuiTypography-gutterBottom",
+                                          "h1": "MuiTypography-h1",
+                                          "h2": "MuiTypography-h2",
+                                          "h3": "MuiTypography-h3",
+                                          "h4": "MuiTypography-h4",
+                                          "h5": "MuiTypography-h5",
+                                          "h6": "MuiTypography-h6",
+                                          "noWrap": "MuiTypography-noWrap",
+                                          "overline": "MuiTypography-overline",
+                                          "paragraph": "MuiTypography-paragraph",
+                                          "root": "MuiTypography-root",
+                                          "srOnly": "MuiTypography-srOnly",
+                                          "subtitle1": "MuiTypography-subtitle1",
+                                          "subtitle2": "MuiTypography-subtitle2",
+                                        }
+                                      }
+                                      color="textPrimary"
                                       onClick={[Function]}
+                                      variant="h5"
+                                      variantMapping={
+                                        Object {
+                                          "body1": "p",
+                                          "body2": "p",
+                                          "h1": "h1",
+                                          "h2": "h2",
+                                          "h3": "h3",
+                                          "h4": "h4",
+                                          "h5": "h5",
+                                          "h6": "h6",
+                                          "subtitle1": "h2",
+                                          "subtitle2": "h2",
+                                        }
+                                      }
                                     >
-                                      Why do you need a blockchain?
-                                      <BreadcrumbIcon
-                                        className="makeStyles-icon-432"
+                                      <h5
+                                        className="MuiTypography-root makeStyles-root-428 makeStyles-question-431 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+                                        onClick={[Function]}
                                       >
-                                        <WithStyles(ForwardRef(SvgIcon))
-                                          className="makeStyles-icon-432 makeStyles-root-437 makeStyles-root-438"
-                                          viewBox="0 0 33 20"
+                                        Why do you need a OK blockchain?
+                                        <BreadcrumbIcon
+                                          className="makeStyles-icon-432"
                                         >
-                                          <ForwardRef(SvgIcon)
+                                          <WithStyles(ForwardRef(SvgIcon))
                                             className="makeStyles-icon-432 makeStyles-root-437 makeStyles-root-438"
-                                            classes={
-                                              Object {
-                                                "colorAction": "MuiSvgIcon-colorAction",
-                                                "colorDisabled": "MuiSvgIcon-colorDisabled",
-                                                "colorError": "MuiSvgIcon-colorError",
-                                                "colorPrimary": "MuiSvgIcon-colorPrimary",
-                                                "colorSecondary": "MuiSvgIcon-colorSecondary",
-                                                "fontSizeInherit": "MuiSvgIcon-fontSizeInherit",
-                                                "fontSizeLarge": "MuiSvgIcon-fontSizeLarge",
-                                                "fontSizeSmall": "MuiSvgIcon-fontSizeSmall",
-                                                "root": "MuiSvgIcon-root",
-                                              }
-                                            }
                                             viewBox="0 0 33 20"
                                           >
-                                            <svg
-                                              aria-hidden={true}
-                                              className="MuiSvgIcon-root makeStyles-icon-432 makeStyles-root-437 makeStyles-root-438"
-                                              focusable="false"
+                                            <ForwardRef(SvgIcon)
+                                              className="makeStyles-icon-432 makeStyles-root-437 makeStyles-root-438"
+                                              classes={
+                                                Object {
+                                                  "colorAction": "MuiSvgIcon-colorAction",
+                                                  "colorDisabled": "MuiSvgIcon-colorDisabled",
+                                                  "colorError": "MuiSvgIcon-colorError",
+                                                  "colorPrimary": "MuiSvgIcon-colorPrimary",
+                                                  "colorSecondary": "MuiSvgIcon-colorSecondary",
+                                                  "fontSizeInherit": "MuiSvgIcon-fontSizeInherit",
+                                                  "fontSizeLarge": "MuiSvgIcon-fontSizeLarge",
+                                                  "fontSizeSmall": "MuiSvgIcon-fontSizeSmall",
+                                                  "root": "MuiSvgIcon-root",
+                                                }
+                                              }
                                               viewBox="0 0 33 20"
                                             >
-                                              <rect
-                                                fill="#4FB573"
-                                                height="23.6375"
-                                                rx="0.25"
-                                                transform="matrix(0.697571 0.716516 -0.697571 0.716516 30.0176 0)"
-                                                width="4.27533"
-                                              />
-                                              <rect
-                                                fill="#4FB573"
-                                                height="23.6375"
-                                                rx="0.25"
-                                                transform="matrix(-0.697571 0.716516 0.697571 0.716516 2.98236 0)"
-                                                width="4.27533"
-                                              />
-                                            </svg>
-                                          </ForwardRef(SvgIcon)>
-                                        </WithStyles(ForwardRef(SvgIcon))>
-                                      </BreadcrumbIcon>
-                                    </h5>
-                                  </ForwardRef(Typography)>
-                                </WithStyles(ForwardRef(Typography))>
-                              </Title>
-                              <div
-                                className="makeStyles-answer-435 makeStyles-collapsed-434"
-                              >
-                                The Regen Ledger provides the project three key elements, without which Regen Network’s promise to create a network dedicated to monitoring, verifying and contracting or paying for ecological
+                                              <svg
+                                                aria-hidden={true}
+                                                className="MuiSvgIcon-root makeStyles-icon-432 makeStyles-root-437 makeStyles-root-438"
+                                                focusable="false"
+                                                viewBox="0 0 33 20"
+                                              >
+                                                <rect
+                                                  fill="#4FB573"
+                                                  height="23.6375"
+                                                  rx="0.25"
+                                                  transform="matrix(0.697571 0.716516 -0.697571 0.716516 30.0176 0)"
+                                                  width="4.27533"
+                                                />
+                                                <rect
+                                                  fill="#4FB573"
+                                                  height="23.6375"
+                                                  rx="0.25"
+                                                  transform="matrix(-0.697571 0.716516 0.697571 0.716516 2.98236 0)"
+                                                  width="4.27533"
+                                                />
+                                              </svg>
+                                            </ForwardRef(SvgIcon)>
+                                          </WithStyles(ForwardRef(SvgIcon))>
+                                        </BreadcrumbIcon>
+                                      </h5>
+                                    </ForwardRef(Typography)>
+                                  </WithStyles(ForwardRef(Typography))>
+                                </Title>
                                 <div
-                                  className="makeStyles-gradient-433"
-                                />
+                                  className="makeStyles-answer-435 makeStyles-collapsed-434"
+                                >
+                                  The Regen Ledger provides the project three key elements, without which Regen Network’s promise to create a network dedicated to monitoring, verifying and contracting or paying for ecological
+                                  <div
+                                    className="makeStyles-gradient-433"
+                                  />
+                                </div>
                               </div>
                             </div>
-                          </div>
-                        </Question>
-                        <Question
-                          answer="The XRN token serves two key functions; to program the rules that make an ecological data commons and marketplace possible and to bring together a community of shared interest in service to strengthening and regenerating the living systems that we need to support life on earth."
-                          first={false}
+                          </Question>
+                        </div>
+                        <div
                           key="1"
-                          last={true}
-                          question="Why do you need a token?"
                         >
-                          <div
-                            className="makeStyles-root-429 makeStyles-root-439"
+                          <Question
+                            answer="The XRN token serves two key functions; to program the rules that make an ecological data commons and marketplace possible and to bring together a community of shared interest in service to strengthening and regenerating the living systems that we need to support life on earth."
+                            first={false}
+                            initOpen={false}
+                            last={true}
+                            question="Why do you need a token?"
                           >
                             <div
-                              className="makeStyles-container-430"
+                              className="makeStyles-root-429 makeStyles-root-439"
                             >
-                              <Title
-                                className="makeStyles-question-431"
-                                onClick={[Function]}
-                                variant="h5"
+                              <div
+                                className="makeStyles-container-430"
                               >
-                                <WithStyles(ForwardRef(Typography))
-                                  align="left"
-                                  className="makeStyles-root-428 makeStyles-question-431"
-                                  color="textPrimary"
+                                <Title
+                                  className="makeStyles-question-431"
                                   onClick={[Function]}
                                   variant="h5"
                                 >
-                                  <ForwardRef(Typography)
+                                  <WithStyles(ForwardRef(Typography))
                                     align="left"
                                     className="makeStyles-root-428 makeStyles-question-431"
-                                    classes={
-                                      Object {
-                                        "alignCenter": "MuiTypography-alignCenter",
-                                        "alignJustify": "MuiTypography-alignJustify",
-                                        "alignLeft": "MuiTypography-alignLeft",
-                                        "alignRight": "MuiTypography-alignRight",
-                                        "body1": "MuiTypography-body1",
-                                        "body2": "MuiTypography-body2",
-                                        "button": "MuiTypography-button",
-                                        "caption": "MuiTypography-caption",
-                                        "colorError": "MuiTypography-colorError",
-                                        "colorInherit": "MuiTypography-colorInherit",
-                                        "colorPrimary": "MuiTypography-colorPrimary",
-                                        "colorSecondary": "MuiTypography-colorSecondary",
-                                        "colorTextPrimary": "MuiTypography-colorTextPrimary",
-                                        "colorTextSecondary": "MuiTypography-colorTextSecondary",
-                                        "displayBlock": "MuiTypography-displayBlock",
-                                        "displayInline": "MuiTypography-displayInline",
-                                        "gutterBottom": "MuiTypography-gutterBottom",
-                                        "h1": "MuiTypography-h1",
-                                        "h2": "MuiTypography-h2",
-                                        "h3": "MuiTypography-h3",
-                                        "h4": "MuiTypography-h4",
-                                        "h5": "MuiTypography-h5",
-                                        "h6": "MuiTypography-h6",
-                                        "noWrap": "MuiTypography-noWrap",
-                                        "overline": "MuiTypography-overline",
-                                        "paragraph": "MuiTypography-paragraph",
-                                        "root": "MuiTypography-root",
-                                        "srOnly": "MuiTypography-srOnly",
-                                        "subtitle1": "MuiTypography-subtitle1",
-                                        "subtitle2": "MuiTypography-subtitle2",
-                                      }
-                                    }
                                     color="textPrimary"
                                     onClick={[Function]}
                                     variant="h5"
-                                    variantMapping={
-                                      Object {
-                                        "body1": "p",
-                                        "body2": "p",
-                                        "h1": "h1",
-                                        "h2": "h2",
-                                        "h3": "h3",
-                                        "h4": "h4",
-                                        "h5": "h5",
-                                        "h6": "h6",
-                                        "subtitle1": "h2",
-                                        "subtitle2": "h2",
-                                      }
-                                    }
                                   >
-                                    <h5
-                                      className="MuiTypography-root makeStyles-root-428 makeStyles-question-431 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+                                    <ForwardRef(Typography)
+                                      align="left"
+                                      className="makeStyles-root-428 makeStyles-question-431"
+                                      classes={
+                                        Object {
+                                          "alignCenter": "MuiTypography-alignCenter",
+                                          "alignJustify": "MuiTypography-alignJustify",
+                                          "alignLeft": "MuiTypography-alignLeft",
+                                          "alignRight": "MuiTypography-alignRight",
+                                          "body1": "MuiTypography-body1",
+                                          "body2": "MuiTypography-body2",
+                                          "button": "MuiTypography-button",
+                                          "caption": "MuiTypography-caption",
+                                          "colorError": "MuiTypography-colorError",
+                                          "colorInherit": "MuiTypography-colorInherit",
+                                          "colorPrimary": "MuiTypography-colorPrimary",
+                                          "colorSecondary": "MuiTypography-colorSecondary",
+                                          "colorTextPrimary": "MuiTypography-colorTextPrimary",
+                                          "colorTextSecondary": "MuiTypography-colorTextSecondary",
+                                          "displayBlock": "MuiTypography-displayBlock",
+                                          "displayInline": "MuiTypography-displayInline",
+                                          "gutterBottom": "MuiTypography-gutterBottom",
+                                          "h1": "MuiTypography-h1",
+                                          "h2": "MuiTypography-h2",
+                                          "h3": "MuiTypography-h3",
+                                          "h4": "MuiTypography-h4",
+                                          "h5": "MuiTypography-h5",
+                                          "h6": "MuiTypography-h6",
+                                          "noWrap": "MuiTypography-noWrap",
+                                          "overline": "MuiTypography-overline",
+                                          "paragraph": "MuiTypography-paragraph",
+                                          "root": "MuiTypography-root",
+                                          "srOnly": "MuiTypography-srOnly",
+                                          "subtitle1": "MuiTypography-subtitle1",
+                                          "subtitle2": "MuiTypography-subtitle2",
+                                        }
+                                      }
+                                      color="textPrimary"
                                       onClick={[Function]}
+                                      variant="h5"
+                                      variantMapping={
+                                        Object {
+                                          "body1": "p",
+                                          "body2": "p",
+                                          "h1": "h1",
+                                          "h2": "h2",
+                                          "h3": "h3",
+                                          "h4": "h4",
+                                          "h5": "h5",
+                                          "h6": "h6",
+                                          "subtitle1": "h2",
+                                          "subtitle2": "h2",
+                                        }
+                                      }
                                     >
-                                      Why do you need a token?
-                                      <BreadcrumbIcon
-                                        className="makeStyles-icon-432"
+                                      <h5
+                                        className="MuiTypography-root makeStyles-root-428 makeStyles-question-431 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+                                        onClick={[Function]}
                                       >
-                                        <WithStyles(ForwardRef(SvgIcon))
-                                          className="makeStyles-icon-432 makeStyles-root-437 makeStyles-root-440"
-                                          viewBox="0 0 33 20"
+                                        Why do you need a token?
+                                        <BreadcrumbIcon
+                                          className="makeStyles-icon-432"
                                         >
-                                          <ForwardRef(SvgIcon)
+                                          <WithStyles(ForwardRef(SvgIcon))
                                             className="makeStyles-icon-432 makeStyles-root-437 makeStyles-root-440"
-                                            classes={
-                                              Object {
-                                                "colorAction": "MuiSvgIcon-colorAction",
-                                                "colorDisabled": "MuiSvgIcon-colorDisabled",
-                                                "colorError": "MuiSvgIcon-colorError",
-                                                "colorPrimary": "MuiSvgIcon-colorPrimary",
-                                                "colorSecondary": "MuiSvgIcon-colorSecondary",
-                                                "fontSizeInherit": "MuiSvgIcon-fontSizeInherit",
-                                                "fontSizeLarge": "MuiSvgIcon-fontSizeLarge",
-                                                "fontSizeSmall": "MuiSvgIcon-fontSizeSmall",
-                                                "root": "MuiSvgIcon-root",
-                                              }
-                                            }
                                             viewBox="0 0 33 20"
                                           >
-                                            <svg
-                                              aria-hidden={true}
-                                              className="MuiSvgIcon-root makeStyles-icon-432 makeStyles-root-437 makeStyles-root-440"
-                                              focusable="false"
+                                            <ForwardRef(SvgIcon)
+                                              className="makeStyles-icon-432 makeStyles-root-437 makeStyles-root-440"
+                                              classes={
+                                                Object {
+                                                  "colorAction": "MuiSvgIcon-colorAction",
+                                                  "colorDisabled": "MuiSvgIcon-colorDisabled",
+                                                  "colorError": "MuiSvgIcon-colorError",
+                                                  "colorPrimary": "MuiSvgIcon-colorPrimary",
+                                                  "colorSecondary": "MuiSvgIcon-colorSecondary",
+                                                  "fontSizeInherit": "MuiSvgIcon-fontSizeInherit",
+                                                  "fontSizeLarge": "MuiSvgIcon-fontSizeLarge",
+                                                  "fontSizeSmall": "MuiSvgIcon-fontSizeSmall",
+                                                  "root": "MuiSvgIcon-root",
+                                                }
+                                              }
                                               viewBox="0 0 33 20"
                                             >
-                                              <rect
-                                                fill="#4FB573"
-                                                height="23.6375"
-                                                rx="0.25"
-                                                transform="matrix(0.697571 0.716516 -0.697571 0.716516 30.0176 0)"
-                                                width="4.27533"
-                                              />
-                                              <rect
-                                                fill="#4FB573"
-                                                height="23.6375"
-                                                rx="0.25"
-                                                transform="matrix(-0.697571 0.716516 0.697571 0.716516 2.98236 0)"
-                                                width="4.27533"
-                                              />
-                                            </svg>
-                                          </ForwardRef(SvgIcon)>
-                                        </WithStyles(ForwardRef(SvgIcon))>
-                                      </BreadcrumbIcon>
-                                    </h5>
-                                  </ForwardRef(Typography)>
-                                </WithStyles(ForwardRef(Typography))>
-                              </Title>
-                              <div
-                                className="makeStyles-answer-435 makeStyles-collapsed-434"
-                              >
-                                The XRN token serves two key functions; to program the rules that make an ecological data commons and marketplace possible and to bring together a community of shared interest in service to strengthening and regenerating the living systems that we need to support life on earth.
+                                              <svg
+                                                aria-hidden={true}
+                                                className="MuiSvgIcon-root makeStyles-icon-432 makeStyles-root-437 makeStyles-root-440"
+                                                focusable="false"
+                                                viewBox="0 0 33 20"
+                                              >
+                                                <rect
+                                                  fill="#4FB573"
+                                                  height="23.6375"
+                                                  rx="0.25"
+                                                  transform="matrix(0.697571 0.716516 -0.697571 0.716516 30.0176 0)"
+                                                  width="4.27533"
+                                                />
+                                                <rect
+                                                  fill="#4FB573"
+                                                  height="23.6375"
+                                                  rx="0.25"
+                                                  transform="matrix(-0.697571 0.716516 0.697571 0.716516 2.98236 0)"
+                                                  width="4.27533"
+                                                />
+                                              </svg>
+                                            </ForwardRef(SvgIcon)>
+                                          </WithStyles(ForwardRef(SvgIcon))>
+                                        </BreadcrumbIcon>
+                                      </h5>
+                                    </ForwardRef(Typography)>
+                                  </WithStyles(ForwardRef(Typography))>
+                                </Title>
                                 <div
-                                  className="makeStyles-gradient-433"
-                                />
+                                  className="makeStyles-answer-435 makeStyles-collapsed-434"
+                                >
+                                  The XRN token serves two key functions; to program the rules that make an ecological data commons and marketplace possible and to bring together a community of shared interest in service to strengthening and regenerating the living systems that we need to support life on earth.
+                                  <div
+                                    className="makeStyles-gradient-433"
+                                  />
+                                </div>
                               </div>
                             </div>
-                          </div>
-                        </Question>
+                          </Question>
+                        </div>
                       </div>
                     </ForwardRef(Paper)>
                   </WithStyles(ForwardRef(Paper))>
@@ -2329,33 +2337,20 @@ exports[`Storyshots Components|FAQ Faq 1`] = `
     <FAQ
       categories={
         Array [
-          "concept",
-          "tech",
+          Object {
+            "header": "concept",
+            "questions": Array [
+              Object {
+                "answer": "The Regen Ledger provides the project three key elements, without which Regen Network’s promise to create a network dedicated to monitoring, verifying and contracting or paying for ecological",
+                "question": "Why do you need a OK blockchain?",
+              },
+              Object {
+                "answer": "The XRN token serves two key functions; to program the rules that make an ecological data commons and marketplace possible and to bring together a community of shared interest in service to strengthening and regenerating the living systems that we need to support life on earth.",
+                "question": "Why do you need a token?",
+              },
+            ],
+          },
         ]
-      }
-      questions={
-        Object {
-          "concept": Array [
-            Object {
-              "answer": "The Regen Ledger provides the project three key elements, without which Regen Network’s promise to create a network dedicated to monitoring, verifying and contracting or paying for ecological",
-              "question": "Why do you need a blockchain?",
-            },
-            Object {
-              "answer": "The XRN token serves two key functions; to program the rules that make an ecological data commons and marketplace possible and to bring together a community of shared interest in service to strengthening and regenerating the living systems that we need to support life on earth.",
-              "question": "Why do you need a token?",
-            },
-          ],
-          "tech": Array [
-            Object {
-              "answer": "The Regen Ledger provides the project three key elements, without which Regen Network’s promise to create a network dedicated to monitoring, verifying and contracting or paying for ecological",
-              "question": "Why do you need a blockchain?",
-            },
-            Object {
-              "answer": "The XRN token serves two key functions; to program the rules that make an ecological data commons and marketplace possible and to bring together a community of shared interest in service to strengthening and regenerating the living systems that we need to support life on earth.",
-              "question": "Why do you need a token?",
-            },
-          ],
-        }
       }
     />
   }
@@ -2811,7 +2806,7 @@ exports[`Storyshots Components|FAQ Faq 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -3176,33 +3171,20 @@ exports[`Storyshots Components|FAQ Faq 1`] = `
       <FAQ
         categories={
           Array [
-            "concept",
-            "tech",
+            Object {
+              "header": "concept",
+              "questions": Array [
+                Object {
+                  "answer": "The Regen Ledger provides the project three key elements, without which Regen Network’s promise to create a network dedicated to monitoring, verifying and contracting or paying for ecological",
+                  "question": "Why do you need a OK blockchain?",
+                },
+                Object {
+                  "answer": "The XRN token serves two key functions; to program the rules that make an ecological data commons and marketplace possible and to bring together a community of shared interest in service to strengthening and regenerating the living systems that we need to support life on earth.",
+                  "question": "Why do you need a token?",
+                },
+              ],
+            },
           ]
-        }
-        questions={
-          Object {
-            "concept": Array [
-              Object {
-                "answer": "The Regen Ledger provides the project three key elements, without which Regen Network’s promise to create a network dedicated to monitoring, verifying and contracting or paying for ecological",
-                "question": "Why do you need a blockchain?",
-              },
-              Object {
-                "answer": "The XRN token serves two key functions; to program the rules that make an ecological data commons and marketplace possible and to bring together a community of shared interest in service to strengthening and regenerating the living systems that we need to support life on earth.",
-                "question": "Why do you need a token?",
-              },
-            ],
-            "tech": Array [
-              Object {
-                "answer": "The Regen Ledger provides the project three key elements, without which Regen Network’s promise to create a network dedicated to monitoring, verifying and contracting or paying for ecological",
-                "question": "Why do you need a blockchain?",
-              },
-              Object {
-                "answer": "The XRN token serves two key functions; to program the rules that make an ecological data commons and marketplace possible and to bring together a community of shared interest in service to strengthening and regenerating the living systems that we need to support life on earth.",
-                "question": "Why do you need a token?",
-              },
-            ],
-          }
         }
       />
     }
@@ -3549,33 +3531,20 @@ exports[`Storyshots Components|FAQ Faq 1`] = `
         <FAQ
           categories={
             Array [
-              "concept",
-              "tech",
+              Object {
+                "header": "concept",
+                "questions": Array [
+                  Object {
+                    "answer": "The Regen Ledger provides the project three key elements, without which Regen Network’s promise to create a network dedicated to monitoring, verifying and contracting or paying for ecological",
+                    "question": "Why do you need a OK blockchain?",
+                  },
+                  Object {
+                    "answer": "The XRN token serves two key functions; to program the rules that make an ecological data commons and marketplace possible and to bring together a community of shared interest in service to strengthening and regenerating the living systems that we need to support life on earth.",
+                    "question": "Why do you need a token?",
+                  },
+                ],
+              },
             ]
-          }
-          questions={
-            Object {
-              "concept": Array [
-                Object {
-                  "answer": "The Regen Ledger provides the project three key elements, without which Regen Network’s promise to create a network dedicated to monitoring, verifying and contracting or paying for ecological",
-                  "question": "Why do you need a blockchain?",
-                },
-                Object {
-                  "answer": "The XRN token serves two key functions; to program the rules that make an ecological data commons and marketplace possible and to bring together a community of shared interest in service to strengthening and regenerating the living systems that we need to support life on earth.",
-                  "question": "Why do you need a token?",
-                },
-              ],
-              "tech": Array [
-                Object {
-                  "answer": "The Regen Ledger provides the project three key elements, without which Regen Network’s promise to create a network dedicated to monitoring, verifying and contracting or paying for ecological",
-                  "question": "Why do you need a blockchain?",
-                },
-                Object {
-                  "answer": "The XRN token serves two key functions; to program the rules that make an ecological data commons and marketplace possible and to bring together a community of shared interest in service to strengthening and regenerating the living systems that we need to support life on earth.",
-                  "question": "Why do you need a token?",
-                },
-              ],
-            }
           }
         >
           <Styled(MuiBox)
@@ -3587,16 +3556,15 @@ exports[`Storyshots Components|FAQ Faq 1`] = `
             }
           >
             <div
-              className="MuiBox-root MuiBox-root-502"
+              className="MuiBox-root MuiBox-root-498"
             >
               <div
-                className="makeStyles-navigation-499"
+                className="makeStyles-navigation-495"
               >
                 <Navigation
                   categories={
                     Array [
                       "concept",
-                      "tech",
                     ]
                   }
                   category="concept"
@@ -3606,7 +3574,7 @@ exports[`Storyshots Components|FAQ Faq 1`] = `
                     <WithStyles(ForwardRef(List))
                       classes={
                         Object {
-                          "root": "WithStyles(ForwardRef(List))-root-504",
+                          "root": "WithStyles(ForwardRef(List))-root-500",
                         }
                       }
                     >
@@ -3615,13 +3583,13 @@ exports[`Storyshots Components|FAQ Faq 1`] = `
                           Object {
                             "dense": "MuiList-dense",
                             "padding": "MuiList-padding",
-                            "root": "MuiList-root WithStyles(ForwardRef(List))-root-504",
+                            "root": "MuiList-root WithStyles(ForwardRef(List))-root-500",
                             "subheader": "MuiList-subheader",
                           }
                         }
                       >
                         <ul
-                          className="MuiList-root WithStyles(ForwardRef(List))-root-504 MuiList-padding"
+                          className="MuiList-root WithStyles(ForwardRef(List))-root-500 MuiList-padding"
                         >
                           <WithStyles(WithStyles(ForwardRef(ListItem)))
                             button={true}
@@ -3633,7 +3601,7 @@ exports[`Storyshots Components|FAQ Faq 1`] = `
                               button={true}
                               classes={
                                 Object {
-                                  "root": "WithStyles(ForwardRef(ListItem))-root-505",
+                                  "root": "WithStyles(ForwardRef(ListItem))-root-501",
                                 }
                               }
                               onClick={[Function]}
@@ -3651,7 +3619,7 @@ exports[`Storyshots Components|FAQ Faq 1`] = `
                                     "divider": "MuiListItem-divider",
                                     "focusVisible": "Mui-focusVisible",
                                     "gutters": "MuiListItem-gutters",
-                                    "root": "MuiListItem-root WithStyles(ForwardRef(ListItem))-root-505",
+                                    "root": "MuiListItem-root WithStyles(ForwardRef(ListItem))-root-501",
                                     "secondaryAction": "MuiListItem-secondaryAction",
                                     "selected": "Mui-selected",
                                   }
@@ -3660,14 +3628,14 @@ exports[`Storyshots Components|FAQ Faq 1`] = `
                                 selected={true}
                               >
                                 <WithStyles(ForwardRef(ButtonBase))
-                                  className="MuiListItem-root WithStyles(ForwardRef(ListItem))-root-505 MuiListItem-gutters MuiListItem-button Mui-selected"
+                                  className="MuiListItem-root WithStyles(ForwardRef(ListItem))-root-501 MuiListItem-gutters MuiListItem-button Mui-selected"
                                   component="div"
                                   disabled={false}
                                   focusVisibleClassName="Mui-focusVisible"
                                   onClick={[Function]}
                                 >
                                   <ForwardRef(ButtonBase)
-                                    className="MuiListItem-root WithStyles(ForwardRef(ListItem))-root-505 MuiListItem-gutters MuiListItem-button Mui-selected"
+                                    className="MuiListItem-root WithStyles(ForwardRef(ListItem))-root-501 MuiListItem-gutters MuiListItem-button Mui-selected"
                                     classes={
                                       Object {
                                         "disabled": "Mui-disabled",
@@ -3682,7 +3650,7 @@ exports[`Storyshots Components|FAQ Faq 1`] = `
                                   >
                                     <div
                                       aria-disabled={false}
-                                      className="MuiButtonBase-root MuiListItem-root WithStyles(ForwardRef(ListItem))-root-505 MuiListItem-gutters MuiListItem-button Mui-selected"
+                                      className="MuiButtonBase-root MuiListItem-root WithStyles(ForwardRef(ListItem))-root-501 MuiListItem-gutters MuiListItem-button Mui-selected"
                                       onBlur={[Function]}
                                       onClick={[Function]}
                                       onDragLeave={[Function]}
@@ -3709,7 +3677,7 @@ exports[`Storyshots Components|FAQ Faq 1`] = `
                                         key=".1"
                                       >
                                         <div
-                                          className="MuiBox-root MuiBox-root-506"
+                                          className="MuiBox-root MuiBox-root-502"
                                         >
                                           <WithStyles(ForwardRef(ListItemSecondaryAction))>
                                             <ForwardRef(ListItemSecondaryAction)
@@ -3723,15 +3691,15 @@ exports[`Storyshots Components|FAQ Faq 1`] = `
                                                 className="MuiListItemSecondaryAction-root"
                                               >
                                                 <BreadcrumbIcon
-                                                  className="makeStyles-icon-503"
+                                                  className="makeStyles-icon-499"
                                                   direction="next"
                                                 >
                                                   <WithStyles(ForwardRef(SvgIcon))
-                                                    className="makeStyles-icon-503 makeStyles-root-507 makeStyles-root-508"
+                                                    className="makeStyles-icon-499 makeStyles-root-503 makeStyles-root-504"
                                                     viewBox="0 0 33 20"
                                                   >
                                                     <ForwardRef(SvgIcon)
-                                                      className="makeStyles-icon-503 makeStyles-root-507 makeStyles-root-508"
+                                                      className="makeStyles-icon-499 makeStyles-root-503 makeStyles-root-504"
                                                       classes={
                                                         Object {
                                                           "colorAction": "MuiSvgIcon-colorAction",
@@ -3749,194 +3717,7 @@ exports[`Storyshots Components|FAQ Faq 1`] = `
                                                     >
                                                       <svg
                                                         aria-hidden={true}
-                                                        className="MuiSvgIcon-root makeStyles-icon-503 makeStyles-root-507 makeStyles-root-508"
-                                                        focusable="false"
-                                                        viewBox="0 0 33 20"
-                                                      >
-                                                        <rect
-                                                          fill="#4FB573"
-                                                          height="23.6375"
-                                                          rx="0.25"
-                                                          transform="matrix(0.697571 0.716516 -0.697571 0.716516 30.0176 0)"
-                                                          width="4.27533"
-                                                        />
-                                                        <rect
-                                                          fill="#4FB573"
-                                                          height="23.6375"
-                                                          rx="0.25"
-                                                          transform="matrix(-0.697571 0.716516 0.697571 0.716516 2.98236 0)"
-                                                          width="4.27533"
-                                                        />
-                                                      </svg>
-                                                    </ForwardRef(SvgIcon)>
-                                                  </WithStyles(ForwardRef(SvgIcon))>
-                                                </BreadcrumbIcon>
-                                              </div>
-                                            </ForwardRef(ListItemSecondaryAction)>
-                                          </WithStyles(ForwardRef(ListItemSecondaryAction))>
-                                        </div>
-                                      </Styled(MuiBox)>
-                                      <WithStyles(memo)
-                                        center={false}
-                                      >
-                                        <ForwardRef(TouchRipple)
-                                          center={false}
-                                          classes={
-                                            Object {
-                                              "child": "MuiTouchRipple-child",
-                                              "childLeaving": "MuiTouchRipple-childLeaving",
-                                              "childPulsate": "MuiTouchRipple-childPulsate",
-                                              "ripple": "MuiTouchRipple-ripple",
-                                              "ripplePulsate": "MuiTouchRipple-ripplePulsate",
-                                              "rippleVisible": "MuiTouchRipple-rippleVisible",
-                                              "root": "MuiTouchRipple-root",
-                                            }
-                                          }
-                                        >
-                                          <span
-                                            className="MuiTouchRipple-root"
-                                          >
-                                            <TransitionGroup
-                                              childFactory={[Function]}
-                                              component={null}
-                                              exit={true}
-                                            />
-                                          </span>
-                                        </ForwardRef(TouchRipple)>
-                                      </WithStyles(memo)>
-                                    </div>
-                                  </ForwardRef(ButtonBase)>
-                                </WithStyles(ForwardRef(ButtonBase))>
-                              </ForwardRef(ListItem)>
-                            </WithStyles(ForwardRef(ListItem))>
-                          </WithStyles(WithStyles(ForwardRef(ListItem)))>
-                          <WithStyles(WithStyles(ForwardRef(ListItem)))
-                            button={true}
-                            key="1"
-                            onClick={[Function]}
-                            selected={false}
-                          >
-                            <WithStyles(ForwardRef(ListItem))
-                              button={true}
-                              classes={
-                                Object {
-                                  "root": "WithStyles(ForwardRef(ListItem))-root-505",
-                                }
-                              }
-                              onClick={[Function]}
-                              selected={false}
-                            >
-                              <ForwardRef(ListItem)
-                                button={true}
-                                classes={
-                                  Object {
-                                    "alignItemsFlexStart": "MuiListItem-alignItemsFlexStart",
-                                    "button": "MuiListItem-button",
-                                    "container": "MuiListItem-container",
-                                    "dense": "MuiListItem-dense",
-                                    "disabled": "Mui-disabled",
-                                    "divider": "MuiListItem-divider",
-                                    "focusVisible": "Mui-focusVisible",
-                                    "gutters": "MuiListItem-gutters",
-                                    "root": "MuiListItem-root WithStyles(ForwardRef(ListItem))-root-505",
-                                    "secondaryAction": "MuiListItem-secondaryAction",
-                                    "selected": "Mui-selected",
-                                  }
-                                }
-                                onClick={[Function]}
-                                selected={false}
-                              >
-                                <WithStyles(ForwardRef(ButtonBase))
-                                  className="MuiListItem-root WithStyles(ForwardRef(ListItem))-root-505 MuiListItem-gutters MuiListItem-button"
-                                  component="div"
-                                  disabled={false}
-                                  focusVisibleClassName="Mui-focusVisible"
-                                  onClick={[Function]}
-                                >
-                                  <ForwardRef(ButtonBase)
-                                    className="MuiListItem-root WithStyles(ForwardRef(ListItem))-root-505 MuiListItem-gutters MuiListItem-button"
-                                    classes={
-                                      Object {
-                                        "disabled": "Mui-disabled",
-                                        "focusVisible": "Mui-focusVisible",
-                                        "root": "MuiButtonBase-root",
-                                      }
-                                    }
-                                    component="div"
-                                    disabled={false}
-                                    focusVisibleClassName="Mui-focusVisible"
-                                    onClick={[Function]}
-                                  >
-                                    <div
-                                      aria-disabled={false}
-                                      className="MuiButtonBase-root MuiListItem-root WithStyles(ForwardRef(ListItem))-root-505 MuiListItem-gutters MuiListItem-button"
-                                      onBlur={[Function]}
-                                      onClick={[Function]}
-                                      onDragLeave={[Function]}
-                                      onFocus={[Function]}
-                                      onKeyDown={[Function]}
-                                      onKeyUp={[Function]}
-                                      onMouseDown={[Function]}
-                                      onMouseLeave={[Function]}
-                                      onMouseUp={[Function]}
-                                      onTouchEnd={[Function]}
-                                      onTouchMove={[Function]}
-                                      onTouchStart={[Function]}
-                                      role="button"
-                                      tabIndex={0}
-                                    >
-                                      tech
-                                      <Styled(MuiBox)
-                                        display={
-                                          Object {
-                                            "sm": "none",
-                                            "xs": "block",
-                                          }
-                                        }
-                                        key=".1"
-                                      >
-                                        <div
-                                          className="MuiBox-root MuiBox-root-509"
-                                        >
-                                          <WithStyles(ForwardRef(ListItemSecondaryAction))>
-                                            <ForwardRef(ListItemSecondaryAction)
-                                              classes={
-                                                Object {
-                                                  "root": "MuiListItemSecondaryAction-root",
-                                                }
-                                              }
-                                            >
-                                              <div
-                                                className="MuiListItemSecondaryAction-root"
-                                              >
-                                                <BreadcrumbIcon
-                                                  className="makeStyles-icon-503"
-                                                  direction="next"
-                                                >
-                                                  <WithStyles(ForwardRef(SvgIcon))
-                                                    className="makeStyles-icon-503 makeStyles-root-507 makeStyles-root-510"
-                                                    viewBox="0 0 33 20"
-                                                  >
-                                                    <ForwardRef(SvgIcon)
-                                                      className="makeStyles-icon-503 makeStyles-root-507 makeStyles-root-510"
-                                                      classes={
-                                                        Object {
-                                                          "colorAction": "MuiSvgIcon-colorAction",
-                                                          "colorDisabled": "MuiSvgIcon-colorDisabled",
-                                                          "colorError": "MuiSvgIcon-colorError",
-                                                          "colorPrimary": "MuiSvgIcon-colorPrimary",
-                                                          "colorSecondary": "MuiSvgIcon-colorSecondary",
-                                                          "fontSizeInherit": "MuiSvgIcon-fontSizeInherit",
-                                                          "fontSizeLarge": "MuiSvgIcon-fontSizeLarge",
-                                                          "fontSizeSmall": "MuiSvgIcon-fontSizeSmall",
-                                                          "root": "MuiSvgIcon-root",
-                                                        }
-                                                      }
-                                                      viewBox="0 0 33 20"
-                                                    >
-                                                      <svg
-                                                        aria-hidden={true}
-                                                        className="MuiSvgIcon-root makeStyles-icon-503 makeStyles-root-507 makeStyles-root-510"
+                                                        className="MuiSvgIcon-root makeStyles-icon-499 makeStyles-root-503 makeStyles-root-504"
                                                         focusable="false"
                                                         viewBox="0 0 33 20"
                                                       >
@@ -4010,7 +3791,7 @@ exports[`Storyshots Components|FAQ Faq 1`] = `
                     Array [
                       Object {
                         "answer": "The Regen Ledger provides the project three key elements, without which Regen Network’s promise to create a network dedicated to monitoring, verifying and contracting or paying for ecological",
-                        "question": "Why do you need a blockchain?",
+                        "question": "Why do you need a OK blockchain?",
                       },
                       Object {
                         "answer": "The XRN token serves two key functions; to program the rules that make an ecological data commons and marketplace possible and to bring together a community of shared interest in service to strengthening and regenerating the living systems that we need to support life on earth.",
@@ -4020,20 +3801,20 @@ exports[`Storyshots Components|FAQ Faq 1`] = `
                   }
                 >
                   <GreenCard
-                    className="makeStyles-root-511"
+                    className="makeStyles-root-505"
                   >
                     <RegenCard
                       borderColor="#D2D5D9"
                       borderRadius="10px"
-                      className="makeStyles-root-511 makeStyles-root-513"
+                      className="makeStyles-root-505 makeStyles-root-507"
                       elevation={1}
                     >
                       <WithStyles(ForwardRef(Card))
-                        className="makeStyles-root-514 makeStyles-root-515 makeStyles-root-511 makeStyles-root-513"
+                        className="makeStyles-root-508 makeStyles-root-509 makeStyles-root-505 makeStyles-root-507"
                         elevation={1}
                       >
                         <ForwardRef(Card)
-                          className="makeStyles-root-514 makeStyles-root-515 makeStyles-root-511 makeStyles-root-513"
+                          className="makeStyles-root-508 makeStyles-root-509 makeStyles-root-505 makeStyles-root-507"
                           classes={
                             Object {
                               "root": "MuiCard-root",
@@ -4042,11 +3823,11 @@ exports[`Storyshots Components|FAQ Faq 1`] = `
                           elevation={1}
                         >
                           <WithStyles(ForwardRef(Paper))
-                            className="MuiCard-root makeStyles-root-514 makeStyles-root-515 makeStyles-root-511 makeStyles-root-513"
+                            className="MuiCard-root makeStyles-root-508 makeStyles-root-509 makeStyles-root-505 makeStyles-root-507"
                             elevation={1}
                           >
                             <ForwardRef(Paper)
-                              className="MuiCard-root makeStyles-root-514 makeStyles-root-515 makeStyles-root-511 makeStyles-root-513"
+                              className="MuiCard-root makeStyles-root-508 makeStyles-root-509 makeStyles-root-505 makeStyles-root-507"
                               classes={
                                 Object {
                                   "elevation0": "MuiPaper-elevation0",
@@ -4082,21 +3863,21 @@ exports[`Storyshots Components|FAQ Faq 1`] = `
                               elevation={1}
                             >
                               <div
-                                className="MuiPaper-root MuiCard-root makeStyles-root-514 makeStyles-root-515 makeStyles-root-511 makeStyles-root-513 MuiPaper-elevation1 MuiPaper-rounded"
+                                className="MuiPaper-root MuiCard-root makeStyles-root-508 makeStyles-root-509 makeStyles-root-505 makeStyles-root-507 MuiPaper-elevation1 MuiPaper-rounded"
                               >
                                 <Title
-                                  className="makeStyles-title-512"
+                                  className="makeStyles-title-506"
                                   variant="h6"
                                 >
                                   <WithStyles(ForwardRef(Typography))
                                     align="left"
-                                    className="makeStyles-root-516 makeStyles-title-512"
+                                    className="makeStyles-root-510 makeStyles-title-506"
                                     color="textPrimary"
                                     variant="h6"
                                   >
                                     <ForwardRef(Typography)
                                       align="left"
-                                      className="makeStyles-root-516 makeStyles-title-512"
+                                      className="makeStyles-root-510 makeStyles-title-506"
                                       classes={
                                         Object {
                                           "alignCenter": "MuiTypography-alignCenter",
@@ -4149,309 +3930,317 @@ exports[`Storyshots Components|FAQ Faq 1`] = `
                                       }
                                     >
                                       <h6
-                                        className="MuiTypography-root makeStyles-root-516 makeStyles-title-512 MuiTypography-h6 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+                                        className="MuiTypography-root makeStyles-root-510 makeStyles-title-506 MuiTypography-h6 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
                                       >
                                         concept
                                       </h6>
                                     </ForwardRef(Typography)>
                                   </WithStyles(ForwardRef(Typography))>
                                 </Title>
-                                <Question
-                                  answer="The Regen Ledger provides the project three key elements, without which Regen Network’s promise to create a network dedicated to monitoring, verifying and contracting or paying for ecological"
-                                  first={true}
+                                <div
                                   key="0"
-                                  last={false}
-                                  question="Why do you need a blockchain?"
                                 >
-                                  <div
-                                    className="makeStyles-root-517 makeStyles-root-524"
+                                  <Question
+                                    answer="The Regen Ledger provides the project three key elements, without which Regen Network’s promise to create a network dedicated to monitoring, verifying and contracting or paying for ecological"
+                                    first={true}
+                                    initOpen={false}
+                                    last={false}
+                                    question="Why do you need a OK blockchain?"
                                   >
                                     <div
-                                      className="makeStyles-container-518"
+                                      className="makeStyles-root-511 makeStyles-root-518"
                                     >
-                                      <Title
-                                        className="makeStyles-question-519"
-                                        onClick={[Function]}
-                                        variant="h5"
+                                      <div
+                                        className="makeStyles-container-512"
                                       >
-                                        <WithStyles(ForwardRef(Typography))
-                                          align="left"
-                                          className="makeStyles-root-516 makeStyles-question-519"
-                                          color="textPrimary"
+                                        <Title
+                                          className="makeStyles-question-513"
                                           onClick={[Function]}
                                           variant="h5"
                                         >
-                                          <ForwardRef(Typography)
+                                          <WithStyles(ForwardRef(Typography))
                                             align="left"
-                                            className="makeStyles-root-516 makeStyles-question-519"
-                                            classes={
-                                              Object {
-                                                "alignCenter": "MuiTypography-alignCenter",
-                                                "alignJustify": "MuiTypography-alignJustify",
-                                                "alignLeft": "MuiTypography-alignLeft",
-                                                "alignRight": "MuiTypography-alignRight",
-                                                "body1": "MuiTypography-body1",
-                                                "body2": "MuiTypography-body2",
-                                                "button": "MuiTypography-button",
-                                                "caption": "MuiTypography-caption",
-                                                "colorError": "MuiTypography-colorError",
-                                                "colorInherit": "MuiTypography-colorInherit",
-                                                "colorPrimary": "MuiTypography-colorPrimary",
-                                                "colorSecondary": "MuiTypography-colorSecondary",
-                                                "colorTextPrimary": "MuiTypography-colorTextPrimary",
-                                                "colorTextSecondary": "MuiTypography-colorTextSecondary",
-                                                "displayBlock": "MuiTypography-displayBlock",
-                                                "displayInline": "MuiTypography-displayInline",
-                                                "gutterBottom": "MuiTypography-gutterBottom",
-                                                "h1": "MuiTypography-h1",
-                                                "h2": "MuiTypography-h2",
-                                                "h3": "MuiTypography-h3",
-                                                "h4": "MuiTypography-h4",
-                                                "h5": "MuiTypography-h5",
-                                                "h6": "MuiTypography-h6",
-                                                "noWrap": "MuiTypography-noWrap",
-                                                "overline": "MuiTypography-overline",
-                                                "paragraph": "MuiTypography-paragraph",
-                                                "root": "MuiTypography-root",
-                                                "srOnly": "MuiTypography-srOnly",
-                                                "subtitle1": "MuiTypography-subtitle1",
-                                                "subtitle2": "MuiTypography-subtitle2",
-                                              }
-                                            }
+                                            className="makeStyles-root-510 makeStyles-question-513"
                                             color="textPrimary"
                                             onClick={[Function]}
                                             variant="h5"
-                                            variantMapping={
-                                              Object {
-                                                "body1": "p",
-                                                "body2": "p",
-                                                "h1": "h1",
-                                                "h2": "h2",
-                                                "h3": "h3",
-                                                "h4": "h4",
-                                                "h5": "h5",
-                                                "h6": "h6",
-                                                "subtitle1": "h2",
-                                                "subtitle2": "h2",
-                                              }
-                                            }
                                           >
-                                            <h5
-                                              className="MuiTypography-root makeStyles-root-516 makeStyles-question-519 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+                                            <ForwardRef(Typography)
+                                              align="left"
+                                              className="makeStyles-root-510 makeStyles-question-513"
+                                              classes={
+                                                Object {
+                                                  "alignCenter": "MuiTypography-alignCenter",
+                                                  "alignJustify": "MuiTypography-alignJustify",
+                                                  "alignLeft": "MuiTypography-alignLeft",
+                                                  "alignRight": "MuiTypography-alignRight",
+                                                  "body1": "MuiTypography-body1",
+                                                  "body2": "MuiTypography-body2",
+                                                  "button": "MuiTypography-button",
+                                                  "caption": "MuiTypography-caption",
+                                                  "colorError": "MuiTypography-colorError",
+                                                  "colorInherit": "MuiTypography-colorInherit",
+                                                  "colorPrimary": "MuiTypography-colorPrimary",
+                                                  "colorSecondary": "MuiTypography-colorSecondary",
+                                                  "colorTextPrimary": "MuiTypography-colorTextPrimary",
+                                                  "colorTextSecondary": "MuiTypography-colorTextSecondary",
+                                                  "displayBlock": "MuiTypography-displayBlock",
+                                                  "displayInline": "MuiTypography-displayInline",
+                                                  "gutterBottom": "MuiTypography-gutterBottom",
+                                                  "h1": "MuiTypography-h1",
+                                                  "h2": "MuiTypography-h2",
+                                                  "h3": "MuiTypography-h3",
+                                                  "h4": "MuiTypography-h4",
+                                                  "h5": "MuiTypography-h5",
+                                                  "h6": "MuiTypography-h6",
+                                                  "noWrap": "MuiTypography-noWrap",
+                                                  "overline": "MuiTypography-overline",
+                                                  "paragraph": "MuiTypography-paragraph",
+                                                  "root": "MuiTypography-root",
+                                                  "srOnly": "MuiTypography-srOnly",
+                                                  "subtitle1": "MuiTypography-subtitle1",
+                                                  "subtitle2": "MuiTypography-subtitle2",
+                                                }
+                                              }
+                                              color="textPrimary"
                                               onClick={[Function]}
+                                              variant="h5"
+                                              variantMapping={
+                                                Object {
+                                                  "body1": "p",
+                                                  "body2": "p",
+                                                  "h1": "h1",
+                                                  "h2": "h2",
+                                                  "h3": "h3",
+                                                  "h4": "h4",
+                                                  "h5": "h5",
+                                                  "h6": "h6",
+                                                  "subtitle1": "h2",
+                                                  "subtitle2": "h2",
+                                                }
+                                              }
                                             >
-                                              Why do you need a blockchain?
-                                              <BreadcrumbIcon
-                                                className="makeStyles-icon-520"
+                                              <h5
+                                                className="MuiTypography-root makeStyles-root-510 makeStyles-question-513 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+                                                onClick={[Function]}
                                               >
-                                                <WithStyles(ForwardRef(SvgIcon))
-                                                  className="makeStyles-icon-520 makeStyles-root-507 makeStyles-root-525"
-                                                  viewBox="0 0 33 20"
+                                                Why do you need a OK blockchain?
+                                                <BreadcrumbIcon
+                                                  className="makeStyles-icon-514"
                                                 >
-                                                  <ForwardRef(SvgIcon)
-                                                    className="makeStyles-icon-520 makeStyles-root-507 makeStyles-root-525"
-                                                    classes={
-                                                      Object {
-                                                        "colorAction": "MuiSvgIcon-colorAction",
-                                                        "colorDisabled": "MuiSvgIcon-colorDisabled",
-                                                        "colorError": "MuiSvgIcon-colorError",
-                                                        "colorPrimary": "MuiSvgIcon-colorPrimary",
-                                                        "colorSecondary": "MuiSvgIcon-colorSecondary",
-                                                        "fontSizeInherit": "MuiSvgIcon-fontSizeInherit",
-                                                        "fontSizeLarge": "MuiSvgIcon-fontSizeLarge",
-                                                        "fontSizeSmall": "MuiSvgIcon-fontSizeSmall",
-                                                        "root": "MuiSvgIcon-root",
-                                                      }
-                                                    }
+                                                  <WithStyles(ForwardRef(SvgIcon))
+                                                    className="makeStyles-icon-514 makeStyles-root-503 makeStyles-root-519"
                                                     viewBox="0 0 33 20"
                                                   >
-                                                    <svg
-                                                      aria-hidden={true}
-                                                      className="MuiSvgIcon-root makeStyles-icon-520 makeStyles-root-507 makeStyles-root-525"
-                                                      focusable="false"
+                                                    <ForwardRef(SvgIcon)
+                                                      className="makeStyles-icon-514 makeStyles-root-503 makeStyles-root-519"
+                                                      classes={
+                                                        Object {
+                                                          "colorAction": "MuiSvgIcon-colorAction",
+                                                          "colorDisabled": "MuiSvgIcon-colorDisabled",
+                                                          "colorError": "MuiSvgIcon-colorError",
+                                                          "colorPrimary": "MuiSvgIcon-colorPrimary",
+                                                          "colorSecondary": "MuiSvgIcon-colorSecondary",
+                                                          "fontSizeInherit": "MuiSvgIcon-fontSizeInherit",
+                                                          "fontSizeLarge": "MuiSvgIcon-fontSizeLarge",
+                                                          "fontSizeSmall": "MuiSvgIcon-fontSizeSmall",
+                                                          "root": "MuiSvgIcon-root",
+                                                        }
+                                                      }
                                                       viewBox="0 0 33 20"
                                                     >
-                                                      <rect
-                                                        fill="#4FB573"
-                                                        height="23.6375"
-                                                        rx="0.25"
-                                                        transform="matrix(0.697571 0.716516 -0.697571 0.716516 30.0176 0)"
-                                                        width="4.27533"
-                                                      />
-                                                      <rect
-                                                        fill="#4FB573"
-                                                        height="23.6375"
-                                                        rx="0.25"
-                                                        transform="matrix(-0.697571 0.716516 0.697571 0.716516 2.98236 0)"
-                                                        width="4.27533"
-                                                      />
-                                                    </svg>
-                                                  </ForwardRef(SvgIcon)>
-                                                </WithStyles(ForwardRef(SvgIcon))>
-                                              </BreadcrumbIcon>
-                                            </h5>
-                                          </ForwardRef(Typography)>
-                                        </WithStyles(ForwardRef(Typography))>
-                                      </Title>
-                                      <div
-                                        className="makeStyles-answer-523 makeStyles-collapsed-522"
-                                      >
-                                        The Regen Ledger provides the project three key elements, without which Regen Network’s promise to create a network dedicated to monitoring, verifying and contracting or paying for ecological
+                                                      <svg
+                                                        aria-hidden={true}
+                                                        className="MuiSvgIcon-root makeStyles-icon-514 makeStyles-root-503 makeStyles-root-519"
+                                                        focusable="false"
+                                                        viewBox="0 0 33 20"
+                                                      >
+                                                        <rect
+                                                          fill="#4FB573"
+                                                          height="23.6375"
+                                                          rx="0.25"
+                                                          transform="matrix(0.697571 0.716516 -0.697571 0.716516 30.0176 0)"
+                                                          width="4.27533"
+                                                        />
+                                                        <rect
+                                                          fill="#4FB573"
+                                                          height="23.6375"
+                                                          rx="0.25"
+                                                          transform="matrix(-0.697571 0.716516 0.697571 0.716516 2.98236 0)"
+                                                          width="4.27533"
+                                                        />
+                                                      </svg>
+                                                    </ForwardRef(SvgIcon)>
+                                                  </WithStyles(ForwardRef(SvgIcon))>
+                                                </BreadcrumbIcon>
+                                              </h5>
+                                            </ForwardRef(Typography)>
+                                          </WithStyles(ForwardRef(Typography))>
+                                        </Title>
                                         <div
-                                          className="makeStyles-gradient-521"
-                                        />
+                                          className="makeStyles-answer-517 makeStyles-collapsed-516"
+                                        >
+                                          The Regen Ledger provides the project three key elements, without which Regen Network’s promise to create a network dedicated to monitoring, verifying and contracting or paying for ecological
+                                          <div
+                                            className="makeStyles-gradient-515"
+                                          />
+                                        </div>
                                       </div>
                                     </div>
-                                  </div>
-                                </Question>
-                                <Question
-                                  answer="The XRN token serves two key functions; to program the rules that make an ecological data commons and marketplace possible and to bring together a community of shared interest in service to strengthening and regenerating the living systems that we need to support life on earth."
-                                  first={false}
+                                  </Question>
+                                </div>
+                                <div
                                   key="1"
-                                  last={true}
-                                  question="Why do you need a token?"
                                 >
-                                  <div
-                                    className="makeStyles-root-517 makeStyles-root-526"
+                                  <Question
+                                    answer="The XRN token serves two key functions; to program the rules that make an ecological data commons and marketplace possible and to bring together a community of shared interest in service to strengthening and regenerating the living systems that we need to support life on earth."
+                                    first={false}
+                                    initOpen={false}
+                                    last={true}
+                                    question="Why do you need a token?"
                                   >
                                     <div
-                                      className="makeStyles-container-518"
+                                      className="makeStyles-root-511 makeStyles-root-520"
                                     >
-                                      <Title
-                                        className="makeStyles-question-519"
-                                        onClick={[Function]}
-                                        variant="h5"
+                                      <div
+                                        className="makeStyles-container-512"
                                       >
-                                        <WithStyles(ForwardRef(Typography))
-                                          align="left"
-                                          className="makeStyles-root-516 makeStyles-question-519"
-                                          color="textPrimary"
+                                        <Title
+                                          className="makeStyles-question-513"
                                           onClick={[Function]}
                                           variant="h5"
                                         >
-                                          <ForwardRef(Typography)
+                                          <WithStyles(ForwardRef(Typography))
                                             align="left"
-                                            className="makeStyles-root-516 makeStyles-question-519"
-                                            classes={
-                                              Object {
-                                                "alignCenter": "MuiTypography-alignCenter",
-                                                "alignJustify": "MuiTypography-alignJustify",
-                                                "alignLeft": "MuiTypography-alignLeft",
-                                                "alignRight": "MuiTypography-alignRight",
-                                                "body1": "MuiTypography-body1",
-                                                "body2": "MuiTypography-body2",
-                                                "button": "MuiTypography-button",
-                                                "caption": "MuiTypography-caption",
-                                                "colorError": "MuiTypography-colorError",
-                                                "colorInherit": "MuiTypography-colorInherit",
-                                                "colorPrimary": "MuiTypography-colorPrimary",
-                                                "colorSecondary": "MuiTypography-colorSecondary",
-                                                "colorTextPrimary": "MuiTypography-colorTextPrimary",
-                                                "colorTextSecondary": "MuiTypography-colorTextSecondary",
-                                                "displayBlock": "MuiTypography-displayBlock",
-                                                "displayInline": "MuiTypography-displayInline",
-                                                "gutterBottom": "MuiTypography-gutterBottom",
-                                                "h1": "MuiTypography-h1",
-                                                "h2": "MuiTypography-h2",
-                                                "h3": "MuiTypography-h3",
-                                                "h4": "MuiTypography-h4",
-                                                "h5": "MuiTypography-h5",
-                                                "h6": "MuiTypography-h6",
-                                                "noWrap": "MuiTypography-noWrap",
-                                                "overline": "MuiTypography-overline",
-                                                "paragraph": "MuiTypography-paragraph",
-                                                "root": "MuiTypography-root",
-                                                "srOnly": "MuiTypography-srOnly",
-                                                "subtitle1": "MuiTypography-subtitle1",
-                                                "subtitle2": "MuiTypography-subtitle2",
-                                              }
-                                            }
+                                            className="makeStyles-root-510 makeStyles-question-513"
                                             color="textPrimary"
                                             onClick={[Function]}
                                             variant="h5"
-                                            variantMapping={
-                                              Object {
-                                                "body1": "p",
-                                                "body2": "p",
-                                                "h1": "h1",
-                                                "h2": "h2",
-                                                "h3": "h3",
-                                                "h4": "h4",
-                                                "h5": "h5",
-                                                "h6": "h6",
-                                                "subtitle1": "h2",
-                                                "subtitle2": "h2",
-                                              }
-                                            }
                                           >
-                                            <h5
-                                              className="MuiTypography-root makeStyles-root-516 makeStyles-question-519 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+                                            <ForwardRef(Typography)
+                                              align="left"
+                                              className="makeStyles-root-510 makeStyles-question-513"
+                                              classes={
+                                                Object {
+                                                  "alignCenter": "MuiTypography-alignCenter",
+                                                  "alignJustify": "MuiTypography-alignJustify",
+                                                  "alignLeft": "MuiTypography-alignLeft",
+                                                  "alignRight": "MuiTypography-alignRight",
+                                                  "body1": "MuiTypography-body1",
+                                                  "body2": "MuiTypography-body2",
+                                                  "button": "MuiTypography-button",
+                                                  "caption": "MuiTypography-caption",
+                                                  "colorError": "MuiTypography-colorError",
+                                                  "colorInherit": "MuiTypography-colorInherit",
+                                                  "colorPrimary": "MuiTypography-colorPrimary",
+                                                  "colorSecondary": "MuiTypography-colorSecondary",
+                                                  "colorTextPrimary": "MuiTypography-colorTextPrimary",
+                                                  "colorTextSecondary": "MuiTypography-colorTextSecondary",
+                                                  "displayBlock": "MuiTypography-displayBlock",
+                                                  "displayInline": "MuiTypography-displayInline",
+                                                  "gutterBottom": "MuiTypography-gutterBottom",
+                                                  "h1": "MuiTypography-h1",
+                                                  "h2": "MuiTypography-h2",
+                                                  "h3": "MuiTypography-h3",
+                                                  "h4": "MuiTypography-h4",
+                                                  "h5": "MuiTypography-h5",
+                                                  "h6": "MuiTypography-h6",
+                                                  "noWrap": "MuiTypography-noWrap",
+                                                  "overline": "MuiTypography-overline",
+                                                  "paragraph": "MuiTypography-paragraph",
+                                                  "root": "MuiTypography-root",
+                                                  "srOnly": "MuiTypography-srOnly",
+                                                  "subtitle1": "MuiTypography-subtitle1",
+                                                  "subtitle2": "MuiTypography-subtitle2",
+                                                }
+                                              }
+                                              color="textPrimary"
                                               onClick={[Function]}
+                                              variant="h5"
+                                              variantMapping={
+                                                Object {
+                                                  "body1": "p",
+                                                  "body2": "p",
+                                                  "h1": "h1",
+                                                  "h2": "h2",
+                                                  "h3": "h3",
+                                                  "h4": "h4",
+                                                  "h5": "h5",
+                                                  "h6": "h6",
+                                                  "subtitle1": "h2",
+                                                  "subtitle2": "h2",
+                                                }
+                                              }
                                             >
-                                              Why do you need a token?
-                                              <BreadcrumbIcon
-                                                className="makeStyles-icon-520"
+                                              <h5
+                                                className="MuiTypography-root makeStyles-root-510 makeStyles-question-513 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+                                                onClick={[Function]}
                                               >
-                                                <WithStyles(ForwardRef(SvgIcon))
-                                                  className="makeStyles-icon-520 makeStyles-root-507 makeStyles-root-527"
-                                                  viewBox="0 0 33 20"
+                                                Why do you need a token?
+                                                <BreadcrumbIcon
+                                                  className="makeStyles-icon-514"
                                                 >
-                                                  <ForwardRef(SvgIcon)
-                                                    className="makeStyles-icon-520 makeStyles-root-507 makeStyles-root-527"
-                                                    classes={
-                                                      Object {
-                                                        "colorAction": "MuiSvgIcon-colorAction",
-                                                        "colorDisabled": "MuiSvgIcon-colorDisabled",
-                                                        "colorError": "MuiSvgIcon-colorError",
-                                                        "colorPrimary": "MuiSvgIcon-colorPrimary",
-                                                        "colorSecondary": "MuiSvgIcon-colorSecondary",
-                                                        "fontSizeInherit": "MuiSvgIcon-fontSizeInherit",
-                                                        "fontSizeLarge": "MuiSvgIcon-fontSizeLarge",
-                                                        "fontSizeSmall": "MuiSvgIcon-fontSizeSmall",
-                                                        "root": "MuiSvgIcon-root",
-                                                      }
-                                                    }
+                                                  <WithStyles(ForwardRef(SvgIcon))
+                                                    className="makeStyles-icon-514 makeStyles-root-503 makeStyles-root-521"
                                                     viewBox="0 0 33 20"
                                                   >
-                                                    <svg
-                                                      aria-hidden={true}
-                                                      className="MuiSvgIcon-root makeStyles-icon-520 makeStyles-root-507 makeStyles-root-527"
-                                                      focusable="false"
+                                                    <ForwardRef(SvgIcon)
+                                                      className="makeStyles-icon-514 makeStyles-root-503 makeStyles-root-521"
+                                                      classes={
+                                                        Object {
+                                                          "colorAction": "MuiSvgIcon-colorAction",
+                                                          "colorDisabled": "MuiSvgIcon-colorDisabled",
+                                                          "colorError": "MuiSvgIcon-colorError",
+                                                          "colorPrimary": "MuiSvgIcon-colorPrimary",
+                                                          "colorSecondary": "MuiSvgIcon-colorSecondary",
+                                                          "fontSizeInherit": "MuiSvgIcon-fontSizeInherit",
+                                                          "fontSizeLarge": "MuiSvgIcon-fontSizeLarge",
+                                                          "fontSizeSmall": "MuiSvgIcon-fontSizeSmall",
+                                                          "root": "MuiSvgIcon-root",
+                                                        }
+                                                      }
                                                       viewBox="0 0 33 20"
                                                     >
-                                                      <rect
-                                                        fill="#4FB573"
-                                                        height="23.6375"
-                                                        rx="0.25"
-                                                        transform="matrix(0.697571 0.716516 -0.697571 0.716516 30.0176 0)"
-                                                        width="4.27533"
-                                                      />
-                                                      <rect
-                                                        fill="#4FB573"
-                                                        height="23.6375"
-                                                        rx="0.25"
-                                                        transform="matrix(-0.697571 0.716516 0.697571 0.716516 2.98236 0)"
-                                                        width="4.27533"
-                                                      />
-                                                    </svg>
-                                                  </ForwardRef(SvgIcon)>
-                                                </WithStyles(ForwardRef(SvgIcon))>
-                                              </BreadcrumbIcon>
-                                            </h5>
-                                          </ForwardRef(Typography)>
-                                        </WithStyles(ForwardRef(Typography))>
-                                      </Title>
-                                      <div
-                                        className="makeStyles-answer-523 makeStyles-collapsed-522"
-                                      >
-                                        The XRN token serves two key functions; to program the rules that make an ecological data commons and marketplace possible and to bring together a community of shared interest in service to strengthening and regenerating the living systems that we need to support life on earth.
+                                                      <svg
+                                                        aria-hidden={true}
+                                                        className="MuiSvgIcon-root makeStyles-icon-514 makeStyles-root-503 makeStyles-root-521"
+                                                        focusable="false"
+                                                        viewBox="0 0 33 20"
+                                                      >
+                                                        <rect
+                                                          fill="#4FB573"
+                                                          height="23.6375"
+                                                          rx="0.25"
+                                                          transform="matrix(0.697571 0.716516 -0.697571 0.716516 30.0176 0)"
+                                                          width="4.27533"
+                                                        />
+                                                        <rect
+                                                          fill="#4FB573"
+                                                          height="23.6375"
+                                                          rx="0.25"
+                                                          transform="matrix(-0.697571 0.716516 0.697571 0.716516 2.98236 0)"
+                                                          width="4.27533"
+                                                        />
+                                                      </svg>
+                                                    </ForwardRef(SvgIcon)>
+                                                  </WithStyles(ForwardRef(SvgIcon))>
+                                                </BreadcrumbIcon>
+                                              </h5>
+                                            </ForwardRef(Typography)>
+                                          </WithStyles(ForwardRef(Typography))>
+                                        </Title>
                                         <div
-                                          className="makeStyles-gradient-521"
-                                        />
+                                          className="makeStyles-answer-517 makeStyles-collapsed-516"
+                                        >
+                                          The XRN token serves two key functions; to program the rules that make an ecological data commons and marketplace possible and to bring together a community of shared interest in service to strengthening and regenerating the living systems that we need to support life on earth.
+                                          <div
+                                            className="makeStyles-gradient-515"
+                                          />
+                                        </div>
                                       </div>
                                     </div>
-                                  </div>
-                                </Question>
+                                  </Question>
+                                </div>
                               </div>
                             </ForwardRef(Paper)>
                           </WithStyles(ForwardRef(Paper))>
@@ -4472,26 +4261,24 @@ exports[`Storyshots Components|FAQ Faq 1`] = `
             }
           >
             <div
-              className="MuiBox-root MuiBox-root-528"
+              className="MuiBox-root MuiBox-root-522"
             >
               <div
-                className="makeStyles-navigation-499"
+                className="makeStyles-navigation-495"
               >
                 <Navigation
                   categories={
                     Array [
                       "concept",
-                      "tech",
                     ]
                   }
-                  category="concept"
                   onClick={[Function]}
                 >
                   <WithStyles(WithStyles(ForwardRef(List)))>
                     <WithStyles(ForwardRef(List))
                       classes={
                         Object {
-                          "root": "WithStyles(ForwardRef(List))-root-504",
+                          "root": "WithStyles(ForwardRef(List))-root-500",
                         }
                       }
                     >
@@ -4500,29 +4287,29 @@ exports[`Storyshots Components|FAQ Faq 1`] = `
                           Object {
                             "dense": "MuiList-dense",
                             "padding": "MuiList-padding",
-                            "root": "MuiList-root WithStyles(ForwardRef(List))-root-504",
+                            "root": "MuiList-root WithStyles(ForwardRef(List))-root-500",
                             "subheader": "MuiList-subheader",
                           }
                         }
                       >
                         <ul
-                          className="MuiList-root WithStyles(ForwardRef(List))-root-504 MuiList-padding"
+                          className="MuiList-root WithStyles(ForwardRef(List))-root-500 MuiList-padding"
                         >
                           <WithStyles(WithStyles(ForwardRef(ListItem)))
                             button={true}
                             key="0"
                             onClick={[Function]}
-                            selected={true}
+                            selected={false}
                           >
                             <WithStyles(ForwardRef(ListItem))
                               button={true}
                               classes={
                                 Object {
-                                  "root": "WithStyles(ForwardRef(ListItem))-root-505",
+                                  "root": "WithStyles(ForwardRef(ListItem))-root-501",
                                 }
                               }
                               onClick={[Function]}
-                              selected={true}
+                              selected={false}
                             >
                               <ForwardRef(ListItem)
                                 button={true}
@@ -4536,23 +4323,23 @@ exports[`Storyshots Components|FAQ Faq 1`] = `
                                     "divider": "MuiListItem-divider",
                                     "focusVisible": "Mui-focusVisible",
                                     "gutters": "MuiListItem-gutters",
-                                    "root": "MuiListItem-root WithStyles(ForwardRef(ListItem))-root-505",
+                                    "root": "MuiListItem-root WithStyles(ForwardRef(ListItem))-root-501",
                                     "secondaryAction": "MuiListItem-secondaryAction",
                                     "selected": "Mui-selected",
                                   }
                                 }
                                 onClick={[Function]}
-                                selected={true}
+                                selected={false}
                               >
                                 <WithStyles(ForwardRef(ButtonBase))
-                                  className="MuiListItem-root WithStyles(ForwardRef(ListItem))-root-505 MuiListItem-gutters MuiListItem-button Mui-selected"
+                                  className="MuiListItem-root WithStyles(ForwardRef(ListItem))-root-501 MuiListItem-gutters MuiListItem-button"
                                   component="div"
                                   disabled={false}
                                   focusVisibleClassName="Mui-focusVisible"
                                   onClick={[Function]}
                                 >
                                   <ForwardRef(ButtonBase)
-                                    className="MuiListItem-root WithStyles(ForwardRef(ListItem))-root-505 MuiListItem-gutters MuiListItem-button Mui-selected"
+                                    className="MuiListItem-root WithStyles(ForwardRef(ListItem))-root-501 MuiListItem-gutters MuiListItem-button"
                                     classes={
                                       Object {
                                         "disabled": "Mui-disabled",
@@ -4567,7 +4354,7 @@ exports[`Storyshots Components|FAQ Faq 1`] = `
                                   >
                                     <div
                                       aria-disabled={false}
-                                      className="MuiButtonBase-root MuiListItem-root WithStyles(ForwardRef(ListItem))-root-505 MuiListItem-gutters MuiListItem-button Mui-selected"
+                                      className="MuiButtonBase-root MuiListItem-root WithStyles(ForwardRef(ListItem))-root-501 MuiListItem-gutters MuiListItem-button"
                                       onBlur={[Function]}
                                       onClick={[Function]}
                                       onDragLeave={[Function]}
@@ -4594,7 +4381,7 @@ exports[`Storyshots Components|FAQ Faq 1`] = `
                                         key=".1"
                                       >
                                         <div
-                                          className="MuiBox-root MuiBox-root-529"
+                                          className="MuiBox-root MuiBox-root-523"
                                         >
                                           <WithStyles(ForwardRef(ListItemSecondaryAction))>
                                             <ForwardRef(ListItemSecondaryAction)
@@ -4608,15 +4395,15 @@ exports[`Storyshots Components|FAQ Faq 1`] = `
                                                 className="MuiListItemSecondaryAction-root"
                                               >
                                                 <BreadcrumbIcon
-                                                  className="makeStyles-icon-503"
+                                                  className="makeStyles-icon-499"
                                                   direction="next"
                                                 >
                                                   <WithStyles(ForwardRef(SvgIcon))
-                                                    className="makeStyles-icon-503 makeStyles-root-507 makeStyles-root-530"
+                                                    className="makeStyles-icon-499 makeStyles-root-503 makeStyles-root-524"
                                                     viewBox="0 0 33 20"
                                                   >
                                                     <ForwardRef(SvgIcon)
-                                                      className="makeStyles-icon-503 makeStyles-root-507 makeStyles-root-530"
+                                                      className="makeStyles-icon-499 makeStyles-root-503 makeStyles-root-524"
                                                       classes={
                                                         Object {
                                                           "colorAction": "MuiSvgIcon-colorAction",
@@ -4634,194 +4421,7 @@ exports[`Storyshots Components|FAQ Faq 1`] = `
                                                     >
                                                       <svg
                                                         aria-hidden={true}
-                                                        className="MuiSvgIcon-root makeStyles-icon-503 makeStyles-root-507 makeStyles-root-530"
-                                                        focusable="false"
-                                                        viewBox="0 0 33 20"
-                                                      >
-                                                        <rect
-                                                          fill="#4FB573"
-                                                          height="23.6375"
-                                                          rx="0.25"
-                                                          transform="matrix(0.697571 0.716516 -0.697571 0.716516 30.0176 0)"
-                                                          width="4.27533"
-                                                        />
-                                                        <rect
-                                                          fill="#4FB573"
-                                                          height="23.6375"
-                                                          rx="0.25"
-                                                          transform="matrix(-0.697571 0.716516 0.697571 0.716516 2.98236 0)"
-                                                          width="4.27533"
-                                                        />
-                                                      </svg>
-                                                    </ForwardRef(SvgIcon)>
-                                                  </WithStyles(ForwardRef(SvgIcon))>
-                                                </BreadcrumbIcon>
-                                              </div>
-                                            </ForwardRef(ListItemSecondaryAction)>
-                                          </WithStyles(ForwardRef(ListItemSecondaryAction))>
-                                        </div>
-                                      </Styled(MuiBox)>
-                                      <WithStyles(memo)
-                                        center={false}
-                                      >
-                                        <ForwardRef(TouchRipple)
-                                          center={false}
-                                          classes={
-                                            Object {
-                                              "child": "MuiTouchRipple-child",
-                                              "childLeaving": "MuiTouchRipple-childLeaving",
-                                              "childPulsate": "MuiTouchRipple-childPulsate",
-                                              "ripple": "MuiTouchRipple-ripple",
-                                              "ripplePulsate": "MuiTouchRipple-ripplePulsate",
-                                              "rippleVisible": "MuiTouchRipple-rippleVisible",
-                                              "root": "MuiTouchRipple-root",
-                                            }
-                                          }
-                                        >
-                                          <span
-                                            className="MuiTouchRipple-root"
-                                          >
-                                            <TransitionGroup
-                                              childFactory={[Function]}
-                                              component={null}
-                                              exit={true}
-                                            />
-                                          </span>
-                                        </ForwardRef(TouchRipple)>
-                                      </WithStyles(memo)>
-                                    </div>
-                                  </ForwardRef(ButtonBase)>
-                                </WithStyles(ForwardRef(ButtonBase))>
-                              </ForwardRef(ListItem)>
-                            </WithStyles(ForwardRef(ListItem))>
-                          </WithStyles(WithStyles(ForwardRef(ListItem)))>
-                          <WithStyles(WithStyles(ForwardRef(ListItem)))
-                            button={true}
-                            key="1"
-                            onClick={[Function]}
-                            selected={false}
-                          >
-                            <WithStyles(ForwardRef(ListItem))
-                              button={true}
-                              classes={
-                                Object {
-                                  "root": "WithStyles(ForwardRef(ListItem))-root-505",
-                                }
-                              }
-                              onClick={[Function]}
-                              selected={false}
-                            >
-                              <ForwardRef(ListItem)
-                                button={true}
-                                classes={
-                                  Object {
-                                    "alignItemsFlexStart": "MuiListItem-alignItemsFlexStart",
-                                    "button": "MuiListItem-button",
-                                    "container": "MuiListItem-container",
-                                    "dense": "MuiListItem-dense",
-                                    "disabled": "Mui-disabled",
-                                    "divider": "MuiListItem-divider",
-                                    "focusVisible": "Mui-focusVisible",
-                                    "gutters": "MuiListItem-gutters",
-                                    "root": "MuiListItem-root WithStyles(ForwardRef(ListItem))-root-505",
-                                    "secondaryAction": "MuiListItem-secondaryAction",
-                                    "selected": "Mui-selected",
-                                  }
-                                }
-                                onClick={[Function]}
-                                selected={false}
-                              >
-                                <WithStyles(ForwardRef(ButtonBase))
-                                  className="MuiListItem-root WithStyles(ForwardRef(ListItem))-root-505 MuiListItem-gutters MuiListItem-button"
-                                  component="div"
-                                  disabled={false}
-                                  focusVisibleClassName="Mui-focusVisible"
-                                  onClick={[Function]}
-                                >
-                                  <ForwardRef(ButtonBase)
-                                    className="MuiListItem-root WithStyles(ForwardRef(ListItem))-root-505 MuiListItem-gutters MuiListItem-button"
-                                    classes={
-                                      Object {
-                                        "disabled": "Mui-disabled",
-                                        "focusVisible": "Mui-focusVisible",
-                                        "root": "MuiButtonBase-root",
-                                      }
-                                    }
-                                    component="div"
-                                    disabled={false}
-                                    focusVisibleClassName="Mui-focusVisible"
-                                    onClick={[Function]}
-                                  >
-                                    <div
-                                      aria-disabled={false}
-                                      className="MuiButtonBase-root MuiListItem-root WithStyles(ForwardRef(ListItem))-root-505 MuiListItem-gutters MuiListItem-button"
-                                      onBlur={[Function]}
-                                      onClick={[Function]}
-                                      onDragLeave={[Function]}
-                                      onFocus={[Function]}
-                                      onKeyDown={[Function]}
-                                      onKeyUp={[Function]}
-                                      onMouseDown={[Function]}
-                                      onMouseLeave={[Function]}
-                                      onMouseUp={[Function]}
-                                      onTouchEnd={[Function]}
-                                      onTouchMove={[Function]}
-                                      onTouchStart={[Function]}
-                                      role="button"
-                                      tabIndex={0}
-                                    >
-                                      tech
-                                      <Styled(MuiBox)
-                                        display={
-                                          Object {
-                                            "sm": "none",
-                                            "xs": "block",
-                                          }
-                                        }
-                                        key=".1"
-                                      >
-                                        <div
-                                          className="MuiBox-root MuiBox-root-531"
-                                        >
-                                          <WithStyles(ForwardRef(ListItemSecondaryAction))>
-                                            <ForwardRef(ListItemSecondaryAction)
-                                              classes={
-                                                Object {
-                                                  "root": "MuiListItemSecondaryAction-root",
-                                                }
-                                              }
-                                            >
-                                              <div
-                                                className="MuiListItemSecondaryAction-root"
-                                              >
-                                                <BreadcrumbIcon
-                                                  className="makeStyles-icon-503"
-                                                  direction="next"
-                                                >
-                                                  <WithStyles(ForwardRef(SvgIcon))
-                                                    className="makeStyles-icon-503 makeStyles-root-507 makeStyles-root-532"
-                                                    viewBox="0 0 33 20"
-                                                  >
-                                                    <ForwardRef(SvgIcon)
-                                                      className="makeStyles-icon-503 makeStyles-root-507 makeStyles-root-532"
-                                                      classes={
-                                                        Object {
-                                                          "colorAction": "MuiSvgIcon-colorAction",
-                                                          "colorDisabled": "MuiSvgIcon-colorDisabled",
-                                                          "colorError": "MuiSvgIcon-colorError",
-                                                          "colorPrimary": "MuiSvgIcon-colorPrimary",
-                                                          "colorSecondary": "MuiSvgIcon-colorSecondary",
-                                                          "fontSizeInherit": "MuiSvgIcon-fontSizeInherit",
-                                                          "fontSizeLarge": "MuiSvgIcon-fontSizeLarge",
-                                                          "fontSizeSmall": "MuiSvgIcon-fontSizeSmall",
-                                                          "root": "MuiSvgIcon-root",
-                                                        }
-                                                      }
-                                                      viewBox="0 0 33 20"
-                                                    >
-                                                      <svg
-                                                        aria-hidden={true}
-                                                        className="MuiSvgIcon-root makeStyles-icon-503 makeStyles-root-507 makeStyles-root-532"
+                                                        className="MuiSvgIcon-root makeStyles-icon-499 makeStyles-root-503 makeStyles-root-524"
                                                         focusable="false"
                                                         viewBox="0 0 33 20"
                                                       >
@@ -5250,7 +4850,6 @@ exports[`Storyshots Components|FAQ Navigation 1`] = `
         ]
       }
       onClick={[Function]}
-      selected="concept"
     />
   }
 >
@@ -5701,7 +5300,7 @@ exports[`Storyshots Components|FAQ Navigation 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -6073,7 +5672,6 @@ exports[`Storyshots Components|FAQ Navigation 1`] = `
           ]
         }
         onClick={[Function]}
-        selected="concept"
       />
     }
   >
@@ -6426,7 +6024,6 @@ exports[`Storyshots Components|FAQ Navigation 1`] = `
             ]
           }
           onClick={[Function]}
-          selected="concept"
         >
           <WithStyles(WithStyles(ForwardRef(List)))>
             <WithStyles(ForwardRef(List))
@@ -7555,7 +7152,7 @@ exports[`Storyshots Components|FAQ Question 1`] = `
       answer="The Regen Ledger provides the project three key elements, without which Regen Network’s promise to create a network dedicated to monitoring, verifying and contracting or paying for ecological"
       first={false}
       last={false}
-      question="Why do you need a blockchain?"
+      question="Why do you need a OK blockchain?"
     />
   }
 >
@@ -7998,7 +7595,7 @@ exports[`Storyshots Components|FAQ Question 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -8364,7 +7961,7 @@ exports[`Storyshots Components|FAQ Question 1`] = `
         answer="The Regen Ledger provides the project three key elements, without which Regen Network’s promise to create a network dedicated to monitoring, verifying and contracting or paying for ecological"
         first={false}
         last={false}
-        question="Why do you need a blockchain?"
+        question="Why do you need a OK blockchain?"
       />
     }
   >
@@ -8711,7 +8308,7 @@ exports[`Storyshots Components|FAQ Question 1`] = `
           answer="The Regen Ledger provides the project three key elements, without which Regen Network’s promise to create a network dedicated to monitoring, verifying and contracting or paying for ecological"
           first={false}
           last={false}
-          question="Why do you need a blockchain?"
+          question="Why do you need a OK blockchain?"
         >
           <div
             className="makeStyles-root-394 makeStyles-root-401"
@@ -8790,7 +8387,7 @@ exports[`Storyshots Components|FAQ Question 1`] = `
                       className="MuiTypography-root makeStyles-root-402 makeStyles-question-396 MuiTypography-h5 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
                       onClick={[Function]}
                     >
-                      Why do you need a blockchain?
+                      Why do you need a OK blockchain?
                       <BreadcrumbIcon
                         className="makeStyles-icon-397"
                       >

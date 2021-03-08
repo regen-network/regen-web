@@ -1052,7 +1052,7 @@ exports[`Storyshots Components|Tooltip Main Title 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -1780,10 +1780,10 @@ exports[`Storyshots Components|Tooltip Main Title 1`] = `
             arrow={true}
             classes={
               Object {
-                "arrow": "WithStyles(ForwardRef(Tooltip))-arrow-1275",
-                "popper": "WithStyles(ForwardRef(Tooltip))-popper-1273",
-                "popperArrow": "WithStyles(ForwardRef(Tooltip))-popperArrow-1276",
-                "tooltip": "WithStyles(ForwardRef(Tooltip))-tooltip-1274",
+                "arrow": "WithStyles(ForwardRef(Tooltip))-arrow-1273",
+                "popper": "WithStyles(ForwardRef(Tooltip))-popper-1271",
+                "popperArrow": "WithStyles(ForwardRef(Tooltip))-popperArrow-1274",
+                "tooltip": "WithStyles(ForwardRef(Tooltip))-tooltip-1272",
               }
             }
             placement="bottom"
@@ -1793,11 +1793,11 @@ exports[`Storyshots Components|Tooltip Main Title 1`] = `
               arrow={true}
               classes={
                 Object {
-                  "arrow": "MuiTooltip-arrow WithStyles(ForwardRef(Tooltip))-arrow-1275",
-                  "popper": "MuiTooltip-popper WithStyles(ForwardRef(Tooltip))-popper-1273",
-                  "popperArrow": "MuiTooltip-popperArrow WithStyles(ForwardRef(Tooltip))-popperArrow-1276",
+                  "arrow": "MuiTooltip-arrow WithStyles(ForwardRef(Tooltip))-arrow-1273",
+                  "popper": "MuiTooltip-popper WithStyles(ForwardRef(Tooltip))-popper-1271",
+                  "popperArrow": "MuiTooltip-popperArrow WithStyles(ForwardRef(Tooltip))-popperArrow-1274",
                   "popperInteractive": "MuiTooltip-popperInteractive",
-                  "tooltip": "MuiTooltip-tooltip WithStyles(ForwardRef(Tooltip))-tooltip-1274",
+                  "tooltip": "MuiTooltip-tooltip WithStyles(ForwardRef(Tooltip))-tooltip-1272",
                   "tooltipArrow": "MuiTooltip-tooltipArrow",
                   "tooltipPlacementBottom": "MuiTooltip-tooltipPlacementBottom",
                   "tooltipPlacementLeft": "MuiTooltip-tooltipPlacementLeft",
@@ -1838,7 +1838,7 @@ exports[`Storyshots Components|Tooltip Main Title 1`] = `
                     hover or touch me
                   </div>
                 }
-                className="MuiTooltip-popper WithStyles(ForwardRef(Tooltip))-popper-1273 MuiTooltip-popperArrow WithStyles(ForwardRef(Tooltip))-popperArrow-1276"
+                className="MuiTooltip-popper WithStyles(ForwardRef(Tooltip))-popper-1271 MuiTooltip-popperArrow WithStyles(ForwardRef(Tooltip))-popperArrow-1274"
                 id={null}
                 open={false}
                 placement="bottom"

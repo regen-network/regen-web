@@ -1049,7 +1049,7 @@ exports[`Storyshots Components|User Big User Avatar 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -1764,12 +1764,12 @@ exports[`Storyshots Components|User Big User Avatar 1`] = `
         >
           <WithStyles(ForwardRef(Avatar))
             alt="Odonata"
-            className="makeStyles-root-1283 makeStyles-root-1284"
+            className="makeStyles-root-1281 makeStyles-root-1282"
             src="http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png"
           >
             <ForwardRef(Avatar)
               alt="Odonata"
-              className="makeStyles-root-1283 makeStyles-root-1284"
+              className="makeStyles-root-1281 makeStyles-root-1282"
               classes={
                 Object {
                   "circle": "MuiAvatar-circle",
@@ -1784,7 +1784,7 @@ exports[`Storyshots Components|User Big User Avatar 1`] = `
               src="http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png"
             >
               <div
-                className="MuiAvatar-root MuiAvatar-circle makeStyles-root-1283 makeStyles-root-1284"
+                className="MuiAvatar-root MuiAvatar-circle makeStyles-root-1281 makeStyles-root-1282"
               >
                 <img
                   alt="Odonata"
@@ -2877,7 +2877,7 @@ exports[`Storyshots Components|User Big User Info 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -3856,12 +3856,12 @@ exports[`Storyshots Components|User Big User Info 1`] = `
                       >
                         <WithStyles(ForwardRef(Avatar))
                           alt="Odonata"
-                          className="makeStyles-root-1331 makeStyles-root-1332"
+                          className="makeStyles-root-1329 makeStyles-root-1330"
                           src="http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png"
                         >
                           <ForwardRef(Avatar)
                             alt="Odonata"
-                            className="makeStyles-root-1331 makeStyles-root-1332"
+                            className="makeStyles-root-1329 makeStyles-root-1330"
                             classes={
                               Object {
                                 "circle": "MuiAvatar-circle",
@@ -3876,7 +3876,7 @@ exports[`Storyshots Components|User Big User Info 1`] = `
                             src="http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png"
                           >
                             <div
-                              className="MuiAvatar-root MuiAvatar-circle makeStyles-root-1331 makeStyles-root-1332"
+                              className="MuiAvatar-root MuiAvatar-circle makeStyles-root-1329 makeStyles-root-1330"
                             >
                               <img
                                 alt="Odonata"
@@ -3891,11 +3891,11 @@ exports[`Storyshots Components|User Big User Info 1`] = `
                   </ForwardRef(Grid)>
                 </WithStyles(ForwardRef(Grid))>
                 <WithStyles(ForwardRef(Grid))
-                  className="makeStyles-text-1323 makeStyles-text-1328"
+                  className="makeStyles-text-1321 makeStyles-text-1326"
                   item={true}
                 >
                   <ForwardRef(Grid)
-                    className="makeStyles-text-1323 makeStyles-text-1328"
+                    className="makeStyles-text-1321 makeStyles-text-1326"
                     classes={
                       Object {
                         "align-content-xs-center": "MuiGrid-align-content-xs-center",
@@ -4007,13 +4007,13 @@ exports[`Storyshots Components|User Big User Info 1`] = `
                     item={true}
                   >
                     <div
-                      className="MuiGrid-root makeStyles-text-1323 makeStyles-text-1328 MuiGrid-item"
+                      className="MuiGrid-root makeStyles-text-1321 makeStyles-text-1326 MuiGrid-item"
                     >
                       <WithStyles(ForwardRef(Typography))
-                        className="makeStyles-name-1324 makeStyles-name-1329"
+                        className="makeStyles-name-1322 makeStyles-name-1327"
                       >
                         <ForwardRef(Typography)
-                          className="makeStyles-name-1324 makeStyles-name-1329"
+                          className="makeStyles-name-1322 makeStyles-name-1327"
                           classes={
                             Object {
                               "alignCenter": "MuiTypography-alignCenter",
@@ -4064,17 +4064,17 @@ exports[`Storyshots Components|User Big User Info 1`] = `
                           }
                         >
                           <p
-                            className="MuiTypography-root makeStyles-name-1324 makeStyles-name-1329 MuiTypography-body1"
+                            className="MuiTypography-root makeStyles-name-1322 makeStyles-name-1327 MuiTypography-body1"
                           >
                             Odonata
                           </p>
                         </ForwardRef(Typography)>
                       </WithStyles(ForwardRef(Typography))>
                       <WithStyles(ForwardRef(Typography))
-                        className="makeStyles-place-1327 makeStyles-place-1330"
+                        className="makeStyles-place-1325 makeStyles-place-1328"
                       >
                         <ForwardRef(Typography)
-                          className="makeStyles-place-1327 makeStyles-place-1330"
+                          className="makeStyles-place-1325 makeStyles-place-1328"
                           classes={
                             Object {
                               "alignCenter": "MuiTypography-alignCenter",
@@ -4125,17 +4125,17 @@ exports[`Storyshots Components|User Big User Info 1`] = `
                           }
                         >
                           <p
-                            className="MuiTypography-root makeStyles-place-1327 makeStyles-place-1330 MuiTypography-body1"
+                            className="MuiTypography-root makeStyles-place-1325 makeStyles-place-1328 MuiTypography-body1"
                           >
                             South Melbourne, Victoria, Australia
                           </p>
                         </ForwardRef(Typography)>
                       </WithStyles(ForwardRef(Typography))>
                       <WithStyles(ForwardRef(Typography))
-                        className="makeStyles-description-1326"
+                        className="makeStyles-description-1324"
                       >
                         <ForwardRef(Typography)
-                          className="makeStyles-description-1326"
+                          className="makeStyles-description-1324"
                           classes={
                             Object {
                               "alignCenter": "MuiTypography-alignCenter",
@@ -4186,7 +4186,7 @@ exports[`Storyshots Components|User Big User Info 1`] = `
                           }
                         >
                           <p
-                            className="MuiTypography-root makeStyles-description-1326 MuiTypography-body1"
+                            className="MuiTypography-root makeStyles-description-1324 MuiTypography-body1"
                           >
                             Odonata is a not-for-profit entity supporting biodiversity impact solutions.
                           </p>
@@ -5285,7 +5285,7 @@ exports[`Storyshots Components|User Column User Info 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -6266,12 +6266,12 @@ exports[`Storyshots Components|User Column User Info 1`] = `
                       >
                         <WithStyles(ForwardRef(Avatar))
                           alt="Odonata"
-                          className="makeStyles-root-1351 makeStyles-root-1352"
+                          className="makeStyles-root-1349 makeStyles-root-1350"
                           src="http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png"
                         >
                           <ForwardRef(Avatar)
                             alt="Odonata"
-                            className="makeStyles-root-1351 makeStyles-root-1352"
+                            className="makeStyles-root-1349 makeStyles-root-1350"
                             classes={
                               Object {
                                 "circle": "MuiAvatar-circle",
@@ -6286,7 +6286,7 @@ exports[`Storyshots Components|User Column User Info 1`] = `
                             src="http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png"
                           >
                             <div
-                              className="MuiAvatar-root MuiAvatar-circle makeStyles-root-1351 makeStyles-root-1352"
+                              className="MuiAvatar-root MuiAvatar-circle makeStyles-root-1349 makeStyles-root-1350"
                             >
                               <img
                                 alt="Odonata"
@@ -6301,11 +6301,11 @@ exports[`Storyshots Components|User Column User Info 1`] = `
                   </ForwardRef(Grid)>
                 </WithStyles(ForwardRef(Grid))>
                 <WithStyles(ForwardRef(Grid))
-                  className="makeStyles-text-1343 makeStyles-text-1348"
+                  className="makeStyles-text-1341 makeStyles-text-1346"
                   item={true}
                 >
                   <ForwardRef(Grid)
-                    className="makeStyles-text-1343 makeStyles-text-1348"
+                    className="makeStyles-text-1341 makeStyles-text-1346"
                     classes={
                       Object {
                         "align-content-xs-center": "MuiGrid-align-content-xs-center",
@@ -6417,13 +6417,13 @@ exports[`Storyshots Components|User Column User Info 1`] = `
                     item={true}
                   >
                     <div
-                      className="MuiGrid-root makeStyles-text-1343 makeStyles-text-1348 MuiGrid-item"
+                      className="MuiGrid-root makeStyles-text-1341 makeStyles-text-1346 MuiGrid-item"
                     >
                       <WithStyles(ForwardRef(Typography))
-                        className="makeStyles-name-1344 makeStyles-name-1349"
+                        className="makeStyles-name-1342 makeStyles-name-1347"
                       >
                         <ForwardRef(Typography)
-                          className="makeStyles-name-1344 makeStyles-name-1349"
+                          className="makeStyles-name-1342 makeStyles-name-1347"
                           classes={
                             Object {
                               "alignCenter": "MuiTypography-alignCenter",
@@ -6474,17 +6474,17 @@ exports[`Storyshots Components|User Column User Info 1`] = `
                           }
                         >
                           <p
-                            className="MuiTypography-root makeStyles-name-1344 makeStyles-name-1349 MuiTypography-body1"
+                            className="MuiTypography-root makeStyles-name-1342 makeStyles-name-1347 MuiTypography-body1"
                           >
                             Odonata
                           </p>
                         </ForwardRef(Typography)>
                       </WithStyles(ForwardRef(Typography))>
                       <WithStyles(ForwardRef(Typography))
-                        className="makeStyles-place-1347 makeStyles-place-1350"
+                        className="makeStyles-place-1345 makeStyles-place-1348"
                       >
                         <ForwardRef(Typography)
-                          className="makeStyles-place-1347 makeStyles-place-1350"
+                          className="makeStyles-place-1345 makeStyles-place-1348"
                           classes={
                             Object {
                               "alignCenter": "MuiTypography-alignCenter",
@@ -6535,17 +6535,17 @@ exports[`Storyshots Components|User Column User Info 1`] = `
                           }
                         >
                           <p
-                            className="MuiTypography-root makeStyles-place-1347 makeStyles-place-1350 MuiTypography-body1"
+                            className="MuiTypography-root makeStyles-place-1345 makeStyles-place-1348 MuiTypography-body1"
                           >
                             South Melbourne, Victoria, Australia
                           </p>
                         </ForwardRef(Typography)>
                       </WithStyles(ForwardRef(Typography))>
                       <WithStyles(ForwardRef(Typography))
-                        className="makeStyles-description-1346"
+                        className="makeStyles-description-1344"
                       >
                         <ForwardRef(Typography)
-                          className="makeStyles-description-1346"
+                          className="makeStyles-description-1344"
                           classes={
                             Object {
                               "alignCenter": "MuiTypography-alignCenter",
@@ -6596,7 +6596,7 @@ exports[`Storyshots Components|User Column User Info 1`] = `
                           }
                         >
                           <p
-                            className="MuiTypography-root makeStyles-description-1346 MuiTypography-body1"
+                            className="MuiTypography-root makeStyles-description-1344 MuiTypography-body1"
                           >
                             Odonata is a not-for-profit entity supporting biodiversity impact solutions.
                           </p>
@@ -7666,7 +7666,7 @@ exports[`Storyshots Components|User Fallback User Avatar 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -8370,10 +8370,10 @@ exports[`Storyshots Components|User Fallback User Avatar 1`] = `
       <div>
         <UserAvatar>
           <WithStyles(ForwardRef(Avatar))
-            className="makeStyles-root-1291 makeStyles-root-1292"
+            className="makeStyles-root-1289 makeStyles-root-1290"
           >
             <ForwardRef(Avatar)
-              className="makeStyles-root-1291 makeStyles-root-1292"
+              className="makeStyles-root-1289 makeStyles-root-1290"
               classes={
                 Object {
                   "circle": "MuiAvatar-circle",
@@ -8387,7 +8387,7 @@ exports[`Storyshots Components|User Fallback User Avatar 1`] = `
               }
             >
               <div
-                className="MuiAvatar-root MuiAvatar-circle makeStyles-root-1291 makeStyles-root-1292 MuiAvatar-colorDefault"
+                className="MuiAvatar-root MuiAvatar-circle makeStyles-root-1289 makeStyles-root-1290 MuiAvatar-colorDefault"
               >
                 <ForwardRef(PersonIcon)
                   className="MuiAvatar-fallback"
@@ -9478,7 +9478,7 @@ exports[`Storyshots Components|User Medium User Avatar 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -10191,12 +10191,12 @@ exports[`Storyshots Components|User Medium User Avatar 1`] = `
         >
           <WithStyles(ForwardRef(Avatar))
             alt="Odonata"
-            className="makeStyles-root-1279 makeStyles-root-1280"
+            className="makeStyles-root-1277 makeStyles-root-1278"
             src="http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png"
           >
             <ForwardRef(Avatar)
               alt="Odonata"
-              className="makeStyles-root-1279 makeStyles-root-1280"
+              className="makeStyles-root-1277 makeStyles-root-1278"
               classes={
                 Object {
                   "circle": "MuiAvatar-circle",
@@ -10211,7 +10211,7 @@ exports[`Storyshots Components|User Medium User Avatar 1`] = `
               src="http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png"
             >
               <div
-                className="MuiAvatar-root MuiAvatar-circle makeStyles-root-1279 makeStyles-root-1280"
+                className="MuiAvatar-root MuiAvatar-circle makeStyles-root-1277 makeStyles-root-1278"
               >
                 <img
                   alt="Odonata"
@@ -11299,7 +11299,7 @@ exports[`Storyshots Components|User Medium User Info 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -12276,12 +12276,12 @@ exports[`Storyshots Components|User Medium User Info 1`] = `
                       >
                         <WithStyles(ForwardRef(Avatar))
                           alt="Odonata"
-                          className="makeStyles-root-1311 makeStyles-root-1312"
+                          className="makeStyles-root-1309 makeStyles-root-1310"
                           src="http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png"
                         >
                           <ForwardRef(Avatar)
                             alt="Odonata"
-                            className="makeStyles-root-1311 makeStyles-root-1312"
+                            className="makeStyles-root-1309 makeStyles-root-1310"
                             classes={
                               Object {
                                 "circle": "MuiAvatar-circle",
@@ -12296,7 +12296,7 @@ exports[`Storyshots Components|User Medium User Info 1`] = `
                             src="http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png"
                           >
                             <div
-                              className="MuiAvatar-root MuiAvatar-circle makeStyles-root-1311 makeStyles-root-1312"
+                              className="MuiAvatar-root MuiAvatar-circle makeStyles-root-1309 makeStyles-root-1310"
                             >
                               <img
                                 alt="Odonata"
@@ -12311,11 +12311,11 @@ exports[`Storyshots Components|User Medium User Info 1`] = `
                   </ForwardRef(Grid)>
                 </WithStyles(ForwardRef(Grid))>
                 <WithStyles(ForwardRef(Grid))
-                  className="makeStyles-text-1303 makeStyles-text-1308"
+                  className="makeStyles-text-1301 makeStyles-text-1306"
                   item={true}
                 >
                   <ForwardRef(Grid)
-                    className="makeStyles-text-1303 makeStyles-text-1308"
+                    className="makeStyles-text-1301 makeStyles-text-1306"
                     classes={
                       Object {
                         "align-content-xs-center": "MuiGrid-align-content-xs-center",
@@ -12427,13 +12427,13 @@ exports[`Storyshots Components|User Medium User Info 1`] = `
                     item={true}
                   >
                     <div
-                      className="MuiGrid-root makeStyles-text-1303 makeStyles-text-1308 MuiGrid-item"
+                      className="MuiGrid-root makeStyles-text-1301 makeStyles-text-1306 MuiGrid-item"
                     >
                       <WithStyles(ForwardRef(Typography))
-                        className="makeStyles-name-1304 makeStyles-name-1309"
+                        className="makeStyles-name-1302 makeStyles-name-1307"
                       >
                         <ForwardRef(Typography)
-                          className="makeStyles-name-1304 makeStyles-name-1309"
+                          className="makeStyles-name-1302 makeStyles-name-1307"
                           classes={
                             Object {
                               "alignCenter": "MuiTypography-alignCenter",
@@ -12484,17 +12484,17 @@ exports[`Storyshots Components|User Medium User Info 1`] = `
                           }
                         >
                           <p
-                            className="MuiTypography-root makeStyles-name-1304 makeStyles-name-1309 MuiTypography-body1"
+                            className="MuiTypography-root makeStyles-name-1302 makeStyles-name-1307 MuiTypography-body1"
                           >
                             Odonata
                           </p>
                         </ForwardRef(Typography)>
                       </WithStyles(ForwardRef(Typography))>
                       <WithStyles(ForwardRef(Typography))
-                        className="makeStyles-place-1307 makeStyles-place-1310"
+                        className="makeStyles-place-1305 makeStyles-place-1308"
                       >
                         <ForwardRef(Typography)
-                          className="makeStyles-place-1307 makeStyles-place-1310"
+                          className="makeStyles-place-1305 makeStyles-place-1308"
                           classes={
                             Object {
                               "alignCenter": "MuiTypography-alignCenter",
@@ -12545,17 +12545,17 @@ exports[`Storyshots Components|User Medium User Info 1`] = `
                           }
                         >
                           <p
-                            className="MuiTypography-root makeStyles-place-1307 makeStyles-place-1310 MuiTypography-body1"
+                            className="MuiTypography-root makeStyles-place-1305 makeStyles-place-1308 MuiTypography-body1"
                           >
                             South Melbourne, Victoria, Australia
                           </p>
                         </ForwardRef(Typography)>
                       </WithStyles(ForwardRef(Typography))>
                       <WithStyles(ForwardRef(Typography))
-                        className="makeStyles-description-1306"
+                        className="makeStyles-description-1304"
                       >
                         <ForwardRef(Typography)
-                          className="makeStyles-description-1306"
+                          className="makeStyles-description-1304"
                           classes={
                             Object {
                               "alignCenter": "MuiTypography-alignCenter",
@@ -12606,7 +12606,7 @@ exports[`Storyshots Components|User Medium User Info 1`] = `
                           }
                         >
                           <p
-                            className="MuiTypography-root makeStyles-description-1306 MuiTypography-body1"
+                            className="MuiTypography-root makeStyles-description-1304 MuiTypography-body1"
                           >
                             Odonata is a not-for-profit entity supporting biodiversity impact solutions.
                           </p>
@@ -13679,7 +13679,7 @@ exports[`Storyshots Components|User User Avatar With Link 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -14401,12 +14401,12 @@ exports[`Storyshots Components|User User Avatar With Link 1`] = `
           >
             <WithStyles(ForwardRef(Avatar))
               alt="Odonata"
-              className="makeStyles-root-1287 makeStyles-root-1288"
+              className="makeStyles-root-1285 makeStyles-root-1286"
               src="http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png"
             >
               <ForwardRef(Avatar)
                 alt="Odonata"
-                className="makeStyles-root-1287 makeStyles-root-1288"
+                className="makeStyles-root-1285 makeStyles-root-1286"
                 classes={
                   Object {
                     "circle": "MuiAvatar-circle",
@@ -14421,7 +14421,7 @@ exports[`Storyshots Components|User User Avatar With Link 1`] = `
                 src="http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png"
               >
                 <div
-                  className="MuiAvatar-root MuiAvatar-circle makeStyles-root-1287 makeStyles-root-1288"
+                  className="MuiAvatar-root MuiAvatar-circle makeStyles-root-1285 makeStyles-root-1286"
                 >
                   <img
                     alt="Odonata"
@@ -15523,7 +15523,7 @@ exports[`Storyshots Components|User With Title 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -16260,10 +16260,10 @@ exports[`Storyshots Components|User With Title 1`] = `
         >
           <div>
             <WithStyles(ForwardRef(Typography))
-              className="makeStyles-title-1364"
+              className="makeStyles-title-1362"
             >
               <ForwardRef(Typography)
-                className="makeStyles-title-1364"
+                className="makeStyles-title-1362"
                 classes={
                   Object {
                     "alignCenter": "MuiTypography-alignCenter",
@@ -16314,7 +16314,7 @@ exports[`Storyshots Components|User With Title 1`] = `
                 }
               >
                 <p
-                  className="MuiTypography-root makeStyles-title-1364 MuiTypography-body1"
+                  className="MuiTypography-root makeStyles-title-1362 MuiTypography-body1"
                 >
                   project developer
                 </p>
@@ -16581,12 +16581,12 @@ exports[`Storyshots Components|User With Title 1`] = `
                           >
                             <WithStyles(ForwardRef(Avatar))
                               alt="Odonata"
-                              className="makeStyles-root-1373 makeStyles-root-1374"
+                              className="makeStyles-root-1371 makeStyles-root-1372"
                               src="http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png"
                             >
                               <ForwardRef(Avatar)
                                 alt="Odonata"
-                                className="makeStyles-root-1373 makeStyles-root-1374"
+                                className="makeStyles-root-1371 makeStyles-root-1372"
                                 classes={
                                   Object {
                                     "circle": "MuiAvatar-circle",
@@ -16601,7 +16601,7 @@ exports[`Storyshots Components|User With Title 1`] = `
                                 src="http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png"
                               >
                                 <div
-                                  className="MuiAvatar-root MuiAvatar-circle makeStyles-root-1373 makeStyles-root-1374"
+                                  className="MuiAvatar-root MuiAvatar-circle makeStyles-root-1371 makeStyles-root-1372"
                                 >
                                   <img
                                     alt="Odonata"
@@ -16616,11 +16616,11 @@ exports[`Storyshots Components|User With Title 1`] = `
                       </ForwardRef(Grid)>
                     </WithStyles(ForwardRef(Grid))>
                     <WithStyles(ForwardRef(Grid))
-                      className="makeStyles-text-1365 makeStyles-text-1370"
+                      className="makeStyles-text-1363 makeStyles-text-1368"
                       item={true}
                     >
                       <ForwardRef(Grid)
-                        className="makeStyles-text-1365 makeStyles-text-1370"
+                        className="makeStyles-text-1363 makeStyles-text-1368"
                         classes={
                           Object {
                             "align-content-xs-center": "MuiGrid-align-content-xs-center",
@@ -16732,13 +16732,13 @@ exports[`Storyshots Components|User With Title 1`] = `
                         item={true}
                       >
                         <div
-                          className="MuiGrid-root makeStyles-text-1365 makeStyles-text-1370 MuiGrid-item"
+                          className="MuiGrid-root makeStyles-text-1363 makeStyles-text-1368 MuiGrid-item"
                         >
                           <WithStyles(ForwardRef(Typography))
-                            className="makeStyles-name-1366 makeStyles-name-1371"
+                            className="makeStyles-name-1364 makeStyles-name-1369"
                           >
                             <ForwardRef(Typography)
-                              className="makeStyles-name-1366 makeStyles-name-1371"
+                              className="makeStyles-name-1364 makeStyles-name-1369"
                               classes={
                                 Object {
                                   "alignCenter": "MuiTypography-alignCenter",
@@ -16789,17 +16789,17 @@ exports[`Storyshots Components|User With Title 1`] = `
                               }
                             >
                               <p
-                                className="MuiTypography-root makeStyles-name-1366 makeStyles-name-1371 MuiTypography-body1"
+                                className="MuiTypography-root makeStyles-name-1364 makeStyles-name-1369 MuiTypography-body1"
                               >
                                 Odonata
                               </p>
                             </ForwardRef(Typography)>
                           </WithStyles(ForwardRef(Typography))>
                           <WithStyles(ForwardRef(Typography))
-                            className="makeStyles-place-1369 makeStyles-place-1372"
+                            className="makeStyles-place-1367 makeStyles-place-1370"
                           >
                             <ForwardRef(Typography)
-                              className="makeStyles-place-1369 makeStyles-place-1372"
+                              className="makeStyles-place-1367 makeStyles-place-1370"
                               classes={
                                 Object {
                                   "alignCenter": "MuiTypography-alignCenter",
@@ -16850,17 +16850,17 @@ exports[`Storyshots Components|User With Title 1`] = `
                               }
                             >
                               <p
-                                className="MuiTypography-root makeStyles-place-1369 makeStyles-place-1372 MuiTypography-body1"
+                                className="MuiTypography-root makeStyles-place-1367 makeStyles-place-1370 MuiTypography-body1"
                               >
                                 South Melbourne, Victoria, Australia
                               </p>
                             </ForwardRef(Typography)>
                           </WithStyles(ForwardRef(Typography))>
                           <WithStyles(ForwardRef(Typography))
-                            className="makeStyles-description-1368"
+                            className="makeStyles-description-1366"
                           >
                             <ForwardRef(Typography)
-                              className="makeStyles-description-1368"
+                              className="makeStyles-description-1366"
                               classes={
                                 Object {
                                   "alignCenter": "MuiTypography-alignCenter",
@@ -16911,7 +16911,7 @@ exports[`Storyshots Components|User With Title 1`] = `
                               }
                             >
                               <p
-                                className="MuiTypography-root makeStyles-description-1368 MuiTypography-body1"
+                                className="MuiTypography-root makeStyles-description-1366 MuiTypography-body1"
                               >
                                 Odonata is a not-for-profit entity supporting biodiversity impact solutions.
                               </p>

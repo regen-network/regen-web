@@ -985,7 +985,7 @@ exports[`Storyshots Components|Party Party Address 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -1699,10 +1699,10 @@ exports[`Storyshots Components|Party Party Address 1`] = `
           onClick={[Function]}
         >
           <div
-            className="makeStyles-root-914"
+            className="makeStyles-root-906"
           >
             <div
-              className="makeStyles-name-915"
+              className="makeStyles-name-907"
               onClick={[Function]}
             >
               Regen Network Development, Inc.
@@ -1711,19 +1711,19 @@ exports[`Storyshots Components|Party Party Address 1`] = `
             <div>
               regen:1p6syu
               <DropdownIcon
-                className="makeStyles-icon-916"
+                className="makeStyles-icon-908"
                 direction="next"
                 onClick={[Function]}
               >
                 <WithStyles(ForwardRef(SvgIcon))
-                  className="makeStyles-icon-916 makeStyles-icon-917 makeStyles-icon-918"
+                  className="makeStyles-icon-908 makeStyles-icon-909 makeStyles-icon-910"
                   height="8"
                   onClick={[Function]}
                   viewBox="0 0 11 8"
                   width="11"
                 >
                   <ForwardRef(SvgIcon)
-                    className="makeStyles-icon-916 makeStyles-icon-917 makeStyles-icon-918"
+                    className="makeStyles-icon-908 makeStyles-icon-909 makeStyles-icon-910"
                     classes={
                       Object {
                         "colorAction": "MuiSvgIcon-colorAction",
@@ -1744,7 +1744,7 @@ exports[`Storyshots Components|Party Party Address 1`] = `
                   >
                     <svg
                       aria-hidden={true}
-                      className="MuiSvgIcon-root makeStyles-icon-916 makeStyles-icon-917 makeStyles-icon-918"
+                      className="MuiSvgIcon-root makeStyles-icon-908 makeStyles-icon-909 makeStyles-icon-910"
                       focusable="false"
                       height="8"
                       onClick={[Function]}

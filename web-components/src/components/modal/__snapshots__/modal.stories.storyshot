@@ -979,7 +979,7 @@ exports[`Storyshots Components|Modal Crop Round Image Modal 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -1822,7 +1822,7 @@ exports[`Storyshots Components|Modal Crop Round Image Modal 1`] = `
               open={false}
             >
               <RegenModal
-                className="makeStyles-modal-904"
+                className="makeStyles-modal-896"
                 onClose={[Function]}
                 open={false}
               >
@@ -2982,7 +2982,7 @@ exports[`Storyshots Components|Modal Crop Square Image Modal 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -3818,7 +3818,7 @@ exports[`Storyshots Components|Modal Crop Square Image Modal 1`] = `
               open={false}
             >
               <RegenModal
-                className="makeStyles-modal-894"
+                className="makeStyles-modal-886"
                 onClose={[Function]}
                 open={false}
               >
@@ -4894,7 +4894,7 @@ exports[`Storyshots Components|Modal Ledger Modal 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -5892,7 +5892,7 @@ exports[`Storyshots Components|Modal Ledger Modal 1`] = `
                 }
               >
                 <RegenModal
-                  className="makeStyles-root-862"
+                  className="makeStyles-root-854"
                   onClose={[Function]}
                   open={false}
                 >
@@ -6874,7 +6874,7 @@ exports[`Storyshots Components|Modal Modal 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],

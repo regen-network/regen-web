@@ -1025,7 +1025,7 @@ exports[`Storyshots Components|Title Main Title 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -1738,13 +1738,13 @@ exports[`Storyshots Components|Title Main Title 1`] = `
         >
           <WithStyles(ForwardRef(Typography))
             align="left"
-            className="makeStyles-root-1260 undefined"
+            className="makeStyles-root-1258 undefined"
             color="textPrimary"
             variant="h1"
           >
             <ForwardRef(Typography)
               align="left"
-              className="makeStyles-root-1260 undefined"
+              className="makeStyles-root-1258 undefined"
               classes={
                 Object {
                   "alignCenter": "MuiTypography-alignCenter",
@@ -1797,7 +1797,7 @@ exports[`Storyshots Components|Title Main Title 1`] = `
               }
             >
               <h1
-                className="MuiTypography-root makeStyles-root-1260 undefined MuiTypography-h1 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+                className="MuiTypography-root makeStyles-root-1258 undefined MuiTypography-h1 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
               >
                 Sheok Hill
               </h1>
@@ -2839,7 +2839,7 @@ exports[`Storyshots Components|Title Subtitle 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -3552,13 +3552,13 @@ exports[`Storyshots Components|Title Subtitle 1`] = `
         >
           <WithStyles(ForwardRef(Typography))
             align="left"
-            className="makeStyles-root-1262 undefined"
+            className="makeStyles-root-1260 undefined"
             color="textPrimary"
             variant="h2"
           >
             <ForwardRef(Typography)
               align="left"
-              className="makeStyles-root-1262 undefined"
+              className="makeStyles-root-1260 undefined"
               classes={
                 Object {
                   "alignCenter": "MuiTypography-alignCenter",
@@ -3611,7 +3611,7 @@ exports[`Storyshots Components|Title Subtitle 1`] = `
               }
             >
               <h2
-                className="MuiTypography-root makeStyles-root-1262 undefined MuiTypography-h2 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+                className="MuiTypography-root makeStyles-root-1260 undefined MuiTypography-h2 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
               >
                 Ecological Practices
               </h2>
@@ -4657,7 +4657,7 @@ exports[`Storyshots Components|Title Title 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -5370,13 +5370,13 @@ exports[`Storyshots Components|Title Title 1`] = `
         >
           <WithStyles(ForwardRef(Typography))
             align="left"
-            className="makeStyles-root-1264 undefined"
+            className="makeStyles-root-1262 undefined"
             color="textPrimary"
             variant="h1"
           >
             <ForwardRef(Typography)
               align="left"
-              className="makeStyles-root-1264 undefined"
+              className="makeStyles-root-1262 undefined"
               classes={
                 Object {
                   "alignCenter": "MuiTypography-alignCenter",
@@ -5429,7 +5429,7 @@ exports[`Storyshots Components|Title Title 1`] = `
               }
             >
               <h1
-                className="MuiTypography-root makeStyles-root-1264 undefined MuiTypography-h1 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
+                className="MuiTypography-root makeStyles-root-1262 undefined MuiTypography-h1 MuiTypography-colorTextPrimary MuiTypography-alignLeft"
               >
                 Ecological Practices
               </h1>

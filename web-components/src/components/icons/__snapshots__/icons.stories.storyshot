@@ -816,7 +816,7 @@ exports[`Storyshots Components|Icons Arrow Icon 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -1528,11 +1528,11 @@ exports[`Storyshots Components|Icons Arrow Icon 1`] = `
           direction="down"
         >
           <WithStyles(ForwardRef(SvgIcon))
-            className="makeStyles-icon-721 makeStyles-icon-722"
+            className="makeStyles-icon-713 makeStyles-icon-714"
             fontSize="default"
           >
             <ForwardRef(SvgIcon)
-              className="makeStyles-icon-721 makeStyles-icon-722"
+              className="makeStyles-icon-713 makeStyles-icon-714"
               classes={
                 Object {
                   "colorAction": "MuiSvgIcon-colorAction",
@@ -1550,7 +1550,7 @@ exports[`Storyshots Components|Icons Arrow Icon 1`] = `
             >
               <svg
                 aria-hidden={true}
-                className="MuiSvgIcon-root makeStyles-icon-721 makeStyles-icon-722"
+                className="MuiSvgIcon-root makeStyles-icon-713 makeStyles-icon-714"
                 focusable="false"
                 viewBox="0 0 24 24"
               >
@@ -2398,7 +2398,7 @@ exports[`Storyshots Components|Icons Available Credits Icon 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -3102,11 +3102,11 @@ exports[`Storyshots Components|Icons Available Credits Icon 1`] = `
       <div>
         <AvailableCreditsIcon>
           <WithStyles(ForwardRef(SvgIcon))
-            className="makeStyles-root-724"
+            className="makeStyles-root-716"
             viewBox="0 0 57 69"
           >
             <ForwardRef(SvgIcon)
-              className="makeStyles-root-724"
+              className="makeStyles-root-716"
               classes={
                 Object {
                   "colorAction": "MuiSvgIcon-colorAction",
@@ -3124,7 +3124,7 @@ exports[`Storyshots Components|Icons Available Credits Icon 1`] = `
             >
               <svg
                 aria-hidden={true}
-                className="MuiSvgIcon-root makeStyles-root-724"
+                className="MuiSvgIcon-root makeStyles-root-716"
                 focusable="false"
                 viewBox="0 0 57 69"
               >
@@ -4107,7 +4107,7 @@ exports[`Storyshots Components|Icons Block Icon 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -4822,7 +4822,7 @@ exports[`Storyshots Components|Icons Block Icon 1`] = `
             onMouseLeave={[Function]}
           >
             <WithStyles(ForwardRef(SvgIcon))
-              className="makeStyles-root-772"
+              className="makeStyles-root-764"
               fill="none"
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
@@ -4830,7 +4830,7 @@ exports[`Storyshots Components|Icons Block Icon 1`] = `
               xmlns="http://www.w3.org/2000/svg"
             >
               <ForwardRef(SvgIcon)
-                className="makeStyles-root-772"
+                className="makeStyles-root-764"
                 classes={
                   Object {
                     "colorAction": "MuiSvgIcon-colorAction",
@@ -4852,7 +4852,7 @@ exports[`Storyshots Components|Icons Block Icon 1`] = `
               >
                 <svg
                   aria-hidden={true}
-                  className="MuiSvgIcon-root makeStyles-root-772"
+                  className="MuiSvgIcon-root makeStyles-root-764"
                   fill="none"
                   focusable="false"
                   onMouseEnter={[Function]}
@@ -5700,7 +5700,7 @@ exports[`Storyshots Components|Icons Breadcrumb Icon 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -6410,11 +6410,11 @@ exports[`Storyshots Components|Icons Breadcrumb Icon 1`] = `
           direction="down"
         >
           <WithStyles(ForwardRef(SvgIcon))
-            className="makeStyles-root-727 makeStyles-root-728"
+            className="makeStyles-root-719 makeStyles-root-720"
             viewBox="0 0 33 20"
           >
             <ForwardRef(SvgIcon)
-              className="makeStyles-root-727 makeStyles-root-728"
+              className="makeStyles-root-719 makeStyles-root-720"
               classes={
                 Object {
                   "colorAction": "MuiSvgIcon-colorAction",
@@ -6432,7 +6432,7 @@ exports[`Storyshots Components|Icons Breadcrumb Icon 1`] = `
             >
               <svg
                 aria-hidden={true}
-                className="MuiSvgIcon-root makeStyles-root-727 makeStyles-root-728"
+                className="MuiSvgIcon-root makeStyles-root-719 makeStyles-root-720"
                 focusable="false"
                 viewBox="0 0 33 20"
               >
@@ -7347,7 +7347,7 @@ exports[`Storyshots Components|Icons Checked Icon 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -8919,7 +8919,7 @@ exports[`Storyshots Components|Icons Close Icon 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -9623,11 +9623,11 @@ exports[`Storyshots Components|Icons Close Icon 1`] = `
       <div>
         <CloseIcon>
           <WithStyles(ForwardRef(SvgIcon))
-            className="makeStyles-root-730"
+            className="makeStyles-root-722"
             viewBox="0 0 26 26"
           >
             <ForwardRef(SvgIcon)
-              className="makeStyles-root-730"
+              className="makeStyles-root-722"
               classes={
                 Object {
                   "colorAction": "MuiSvgIcon-colorAction",
@@ -9645,7 +9645,7 @@ exports[`Storyshots Components|Icons Close Icon 1`] = `
             >
               <svg
                 aria-hidden={true}
-                className="MuiSvgIcon-root makeStyles-root-730"
+                className="MuiSvgIcon-root makeStyles-root-722"
                 focusable="false"
                 viewBox="0 0 26 26"
               >
@@ -10518,7 +10518,7 @@ exports[`Storyshots Components|Icons Credits Icon 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -12151,7 +12151,7 @@ exports[`Storyshots Components|Icons Current Credits Icon 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -12861,11 +12861,11 @@ exports[`Storyshots Components|Icons Current Credits Icon 1`] = `
           color="#4FB573"
         >
           <WithStyles(ForwardRef(SvgIcon))
-            className="makeStyles-root-741 makeStyles-root-742"
+            className="makeStyles-root-733 makeStyles-root-734"
             viewBox="0 0 59 54"
           >
             <ForwardRef(SvgIcon)
-              className="makeStyles-root-741 makeStyles-root-742"
+              className="makeStyles-root-733 makeStyles-root-734"
               classes={
                 Object {
                   "colorAction": "MuiSvgIcon-colorAction",
@@ -12883,7 +12883,7 @@ exports[`Storyshots Components|Icons Current Credits Icon 1`] = `
             >
               <svg
                 aria-hidden={true}
-                className="MuiSvgIcon-root makeStyles-root-741 makeStyles-root-742"
+                className="MuiSvgIcon-root makeStyles-root-733 makeStyles-root-734"
                 focusable="false"
                 viewBox="0 0 59 54"
               >
@@ -13834,7 +13834,7 @@ exports[`Storyshots Components|Icons Document Icon 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -14538,11 +14538,11 @@ exports[`Storyshots Components|Icons Document Icon 1`] = `
       <div>
         <DocumentIcon>
           <WithStyles(ForwardRef(SvgIcon))
-            className="makeStyles-root-738"
+            className="makeStyles-root-730"
             viewBox="0 0 18 22"
           >
             <ForwardRef(SvgIcon)
-              className="makeStyles-root-738"
+              className="makeStyles-root-730"
               classes={
                 Object {
                   "colorAction": "MuiSvgIcon-colorAction",
@@ -14560,7 +14560,7 @@ exports[`Storyshots Components|Icons Document Icon 1`] = `
             >
               <svg
                 aria-hidden={true}
-                className="MuiSvgIcon-root makeStyles-root-738"
+                className="MuiSvgIcon-root makeStyles-root-730"
                 focusable="false"
                 viewBox="0 0 18 22"
               >
@@ -15548,7 +15548,7 @@ exports[`Storyshots Components|Icons Dropdown Icon 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -16252,13 +16252,13 @@ exports[`Storyshots Components|Icons Dropdown Icon 1`] = `
       <div>
         <DropdownIcon>
           <WithStyles(ForwardRef(SvgIcon))
-            className="makeStyles-icon-751 makeStyles-icon-752"
+            className="makeStyles-icon-743 makeStyles-icon-744"
             height="8"
             viewBox="0 0 11 8"
             width="11"
           >
             <ForwardRef(SvgIcon)
-              className="makeStyles-icon-751 makeStyles-icon-752"
+              className="makeStyles-icon-743 makeStyles-icon-744"
               classes={
                 Object {
                   "colorAction": "MuiSvgIcon-colorAction",
@@ -16278,7 +16278,7 @@ exports[`Storyshots Components|Icons Dropdown Icon 1`] = `
             >
               <svg
                 aria-hidden={true}
-                className="MuiSvgIcon-root makeStyles-icon-751 makeStyles-icon-752"
+                className="MuiSvgIcon-root makeStyles-icon-743 makeStyles-icon-744"
                 focusable="false"
                 height="8"
                 viewBox="0 0 11 8"
@@ -17161,7 +17161,7 @@ exports[`Storyshots Components|Icons Email Icon 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -18768,7 +18768,7 @@ exports[`Storyshots Components|Icons Eye Icon 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -19472,11 +19472,11 @@ exports[`Storyshots Components|Icons Eye Icon 1`] = `
       <div>
         <EyeIcon>
           <WithStyles(ForwardRef(SvgIcon))
-            className="makeStyles-root-736"
+            className="makeStyles-root-728"
             viewBox="0 0 19 14"
           >
             <ForwardRef(SvgIcon)
-              className="makeStyles-root-736"
+              className="makeStyles-root-728"
               classes={
                 Object {
                   "colorAction": "MuiSvgIcon-colorAction",
@@ -19494,7 +19494,7 @@ exports[`Storyshots Components|Icons Eye Icon 1`] = `
             >
               <svg
                 aria-hidden={true}
-                className="MuiSvgIcon-root makeStyles-root-736"
+                className="MuiSvgIcon-root makeStyles-root-728"
                 focusable="false"
                 viewBox="0 0 19 14"
               >
@@ -20421,7 +20421,7 @@ exports[`Storyshots Components|Icons Facebook Icon 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -21130,7 +21130,7 @@ exports[`Storyshots Components|Icons Facebook Icon 1`] = `
             onMouseLeave={[Function]}
           >
             <WithStyles(ForwardRef(SvgIcon))
-              className="makeStyles-root-754"
+              className="makeStyles-root-746"
               fill="none"
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
@@ -21138,7 +21138,7 @@ exports[`Storyshots Components|Icons Facebook Icon 1`] = `
               xmlns="http://www.w3.org/2000/svg"
             >
               <ForwardRef(SvgIcon)
-                className="makeStyles-root-754"
+                className="makeStyles-root-746"
                 classes={
                   Object {
                     "colorAction": "MuiSvgIcon-colorAction",
@@ -21160,7 +21160,7 @@ exports[`Storyshots Components|Icons Facebook Icon 1`] = `
               >
                 <svg
                   aria-hidden={true}
-                  className="MuiSvgIcon-root makeStyles-root-754"
+                  className="MuiSvgIcon-root makeStyles-root-746"
                   fill="none"
                   focusable="false"
                   onMouseEnter={[Function]}
@@ -22104,7 +22104,7 @@ exports[`Storyshots Components|Icons Github Icon 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -22813,7 +22813,7 @@ exports[`Storyshots Components|Icons Github Icon 1`] = `
             onMouseLeave={[Function]}
           >
             <WithStyles(ForwardRef(SvgIcon))
-              className="makeStyles-root-768"
+              className="makeStyles-root-760"
               fill="none"
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
@@ -22821,7 +22821,7 @@ exports[`Storyshots Components|Icons Github Icon 1`] = `
               xmlns="http://www.w3.org/2000/svg"
             >
               <ForwardRef(SvgIcon)
-                className="makeStyles-root-768"
+                className="makeStyles-root-760"
                 classes={
                   Object {
                     "colorAction": "MuiSvgIcon-colorAction",
@@ -22843,7 +22843,7 @@ exports[`Storyshots Components|Icons Github Icon 1`] = `
               >
                 <svg
                   aria-hidden={true}
-                  className="MuiSvgIcon-root makeStyles-root-768"
+                  className="MuiSvgIcon-root makeStyles-root-760"
                   fill="none"
                   focusable="false"
                   onMouseEnter={[Function]}
@@ -23811,7 +23811,7 @@ exports[`Storyshots Components|Icons Info Icon 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -24515,7 +24515,7 @@ exports[`Storyshots Components|Icons Info Icon 1`] = `
       <div>
         <IconIcon>
           <div
-            className="makeStyles-root-776"
+            className="makeStyles-root-768"
           >
             i
           </div>
@@ -25421,7 +25421,7 @@ exports[`Storyshots Components|Icons Instagram Icon 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -26130,7 +26130,7 @@ exports[`Storyshots Components|Icons Instagram Icon 1`] = `
             onMouseLeave={[Function]}
           >
             <WithStyles(ForwardRef(SvgIcon))
-              className="makeStyles-root-756"
+              className="makeStyles-root-748"
               fill="none"
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
@@ -26138,7 +26138,7 @@ exports[`Storyshots Components|Icons Instagram Icon 1`] = `
               xmlns="http://www.w3.org/2000/svg"
             >
               <ForwardRef(SvgIcon)
-                className="makeStyles-root-756"
+                className="makeStyles-root-748"
                 classes={
                   Object {
                     "colorAction": "MuiSvgIcon-colorAction",
@@ -26160,7 +26160,7 @@ exports[`Storyshots Components|Icons Instagram Icon 1`] = `
               >
                 <svg
                   aria-hidden={true}
-                  className="MuiSvgIcon-root makeStyles-root-756"
+                  className="MuiSvgIcon-root makeStyles-root-748"
                   fill="none"
                   focusable="false"
                   onMouseEnter={[Function]}
@@ -27126,7 +27126,7 @@ exports[`Storyshots Components|Icons Link Icon 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -27841,7 +27841,7 @@ exports[`Storyshots Components|Icons Link Icon 1`] = `
             onMouseLeave={[Function]}
           >
             <WithStyles(ForwardRef(SvgIcon))
-              className="makeStyles-root-774"
+              className="makeStyles-root-766"
               fill="none"
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
@@ -27849,7 +27849,7 @@ exports[`Storyshots Components|Icons Link Icon 1`] = `
               xmlns="http://www.w3.org/2000/svg"
             >
               <ForwardRef(SvgIcon)
-                className="makeStyles-root-774"
+                className="makeStyles-root-766"
                 classes={
                   Object {
                     "colorAction": "MuiSvgIcon-colorAction",
@@ -27871,7 +27871,7 @@ exports[`Storyshots Components|Icons Link Icon 1`] = `
               >
                 <svg
                   aria-hidden={true}
-                  className="MuiSvgIcon-root makeStyles-root-774"
+                  className="MuiSvgIcon-root makeStyles-root-766"
                   fill="none"
                   focusable="false"
                   onMouseEnter={[Function]}
@@ -28809,7 +28809,7 @@ exports[`Storyshots Components|Icons Linked In Icon 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -29518,7 +29518,7 @@ exports[`Storyshots Components|Icons Linked In Icon 1`] = `
             onMouseLeave={[Function]}
           >
             <WithStyles(ForwardRef(SvgIcon))
-              className="makeStyles-root-758"
+              className="makeStyles-root-750"
               fill="none"
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
@@ -29526,7 +29526,7 @@ exports[`Storyshots Components|Icons Linked In Icon 1`] = `
               xmlns="http://www.w3.org/2000/svg"
             >
               <ForwardRef(SvgIcon)
-                className="makeStyles-root-758"
+                className="makeStyles-root-750"
                 classes={
                   Object {
                     "colorAction": "MuiSvgIcon-colorAction",
@@ -29548,7 +29548,7 @@ exports[`Storyshots Components|Icons Linked In Icon 1`] = `
               >
                 <svg
                   aria-hidden={true}
-                  className="MuiSvgIcon-root makeStyles-root-758"
+                  className="MuiSvgIcon-root makeStyles-root-750"
                   fill="none"
                   focusable="false"
                   onMouseEnter={[Function]}
@@ -30478,7 +30478,7 @@ exports[`Storyshots Components|Icons Medium Icon 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -31187,7 +31187,7 @@ exports[`Storyshots Components|Icons Medium Icon 1`] = `
             onMouseLeave={[Function]}
           >
             <WithStyles(ForwardRef(SvgIcon))
-              className="makeStyles-root-760"
+              className="makeStyles-root-752"
               fill="none"
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
@@ -31195,7 +31195,7 @@ exports[`Storyshots Components|Icons Medium Icon 1`] = `
               xmlns="http://www.w3.org/2000/svg"
             >
               <ForwardRef(SvgIcon)
-                className="makeStyles-root-760"
+                className="makeStyles-root-752"
                 classes={
                   Object {
                     "colorAction": "MuiSvgIcon-colorAction",
@@ -31217,7 +31217,7 @@ exports[`Storyshots Components|Icons Medium Icon 1`] = `
               >
                 <svg
                   aria-hidden={true}
-                  className="MuiSvgIcon-root makeStyles-root-760"
+                  className="MuiSvgIcon-root makeStyles-root-752"
                   fill="none"
                   focusable="false"
                   onMouseEnter={[Function]}
@@ -32087,7 +32087,7 @@ exports[`Storyshots Components|Icons Organization Icon 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -32791,11 +32791,11 @@ exports[`Storyshots Components|Icons Organization Icon 1`] = `
       <div>
         <OrganizationIcon>
           <WithStyles(ForwardRef(SvgIcon))
-            className="makeStyles-root-744"
+            className="makeStyles-root-736"
             viewBox="0 0 23 22"
           >
             <ForwardRef(SvgIcon)
-              className="makeStyles-root-744"
+              className="makeStyles-root-736"
               classes={
                 Object {
                   "colorAction": "MuiSvgIcon-colorAction",
@@ -32813,7 +32813,7 @@ exports[`Storyshots Components|Icons Organization Icon 1`] = `
             >
               <svg
                 aria-hidden={true}
-                className="MuiSvgIcon-root makeStyles-root-744"
+                className="MuiSvgIcon-root makeStyles-root-736"
                 focusable="false"
                 viewBox="0 0 23 22"
               >
@@ -33964,7 +33964,7 @@ exports[`Storyshots Components|Icons Phone Icon 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -35571,7 +35571,7 @@ exports[`Storyshots Components|Icons Pin Icon 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -37179,7 +37179,7 @@ exports[`Storyshots Components|Icons Play Icon 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -37883,11 +37883,11 @@ exports[`Storyshots Components|Icons Play Icon 1`] = `
       <div>
         <PlayIcon>
           <WithStyles(ForwardRef(SvgIcon))
-            className="makeStyles-root-733 makeStyles-root-734"
+            className="makeStyles-root-725 makeStyles-root-726"
             viewBox="0 0 9 9"
           >
             <ForwardRef(SvgIcon)
-              className="makeStyles-root-733 makeStyles-root-734"
+              className="makeStyles-root-725 makeStyles-root-726"
               classes={
                 Object {
                   "colorAction": "MuiSvgIcon-colorAction",
@@ -37905,7 +37905,7 @@ exports[`Storyshots Components|Icons Play Icon 1`] = `
             >
               <svg
                 aria-hidden={true}
-                className="MuiSvgIcon-root makeStyles-root-733 makeStyles-root-734"
+                className="MuiSvgIcon-root makeStyles-root-725 makeStyles-root-726"
                 focusable="false"
                 viewBox="0 0 9 9"
               >
@@ -38778,7 +38778,7 @@ exports[`Storyshots Components|Icons Pointer Icon 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -40535,7 +40535,7 @@ exports[`Storyshots Components|Icons Print Icon 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -42161,7 +42161,7 @@ exports[`Storyshots Components|Icons Regen Icon 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -44158,7 +44158,7 @@ exports[`Storyshots Components|Icons Regen Ledger Icon 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -45882,7 +45882,7 @@ exports[`Storyshots Components|Icons Regen Logo Icon 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -46591,13 +46591,13 @@ exports[`Storyshots Components|Icons Regen Logo Icon 1`] = `
             onMouseLeave={[Function]}
           >
             <WithStyles(ForwardRef(SvgIcon))
-              className="makeStyles-root-746"
+              className="makeStyles-root-738"
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
               viewBox="0 0 64 65"
             >
               <ForwardRef(SvgIcon)
-                className="makeStyles-root-746"
+                className="makeStyles-root-738"
                 classes={
                   Object {
                     "colorAction": "MuiSvgIcon-colorAction",
@@ -46617,7 +46617,7 @@ exports[`Storyshots Components|Icons Regen Logo Icon 1`] = `
               >
                 <svg
                   aria-hidden={true}
-                  className="MuiSvgIcon-root makeStyles-root-746"
+                  className="MuiSvgIcon-root makeStyles-root-738"
                   focusable="false"
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
@@ -47809,7 +47809,7 @@ exports[`Storyshots Components|Icons Shield Icon 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -49476,7 +49476,7 @@ exports[`Storyshots Components|Icons Telegram Icon 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -50185,7 +50185,7 @@ exports[`Storyshots Components|Icons Telegram Icon 1`] = `
             onMouseLeave={[Function]}
           >
             <WithStyles(ForwardRef(SvgIcon))
-              className="makeStyles-root-762"
+              className="makeStyles-root-754"
               fill="none"
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
@@ -50193,7 +50193,7 @@ exports[`Storyshots Components|Icons Telegram Icon 1`] = `
               xmlns="http://www.w3.org/2000/svg"
             >
               <ForwardRef(SvgIcon)
-                className="makeStyles-root-762"
+                className="makeStyles-root-754"
                 classes={
                   Object {
                     "colorAction": "MuiSvgIcon-colorAction",
@@ -50215,7 +50215,7 @@ exports[`Storyshots Components|Icons Telegram Icon 1`] = `
               >
                 <svg
                   aria-hidden={true}
-                  className="MuiSvgIcon-root makeStyles-root-762"
+                  className="MuiSvgIcon-root makeStyles-root-754"
                   fill="none"
                   focusable="false"
                   onMouseEnter={[Function]}
@@ -51113,7 +51113,7 @@ exports[`Storyshots Components|Icons Total Credits Icon 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -51817,11 +51817,11 @@ exports[`Storyshots Components|Icons Total Credits Icon 1`] = `
       <div>
         <TotalCreditsIcon>
           <WithStyles(ForwardRef(SvgIcon))
-            className="makeStyles-root-748"
+            className="makeStyles-root-740"
             viewBox="0 0 54 58"
           >
             <ForwardRef(SvgIcon)
-              className="makeStyles-root-748"
+              className="makeStyles-root-740"
               classes={
                 Object {
                   "colorAction": "MuiSvgIcon-colorAction",
@@ -51839,7 +51839,7 @@ exports[`Storyshots Components|Icons Total Credits Icon 1`] = `
             >
               <svg
                 aria-hidden={true}
-                className="MuiSvgIcon-root makeStyles-root-748"
+                className="MuiSvgIcon-root makeStyles-root-740"
                 focusable="false"
                 viewBox="0 0 54 58"
               >
@@ -52770,7 +52770,7 @@ exports[`Storyshots Components|Icons Twitter Icon 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -53479,7 +53479,7 @@ exports[`Storyshots Components|Icons Twitter Icon 1`] = `
             onMouseLeave={[Function]}
           >
             <WithStyles(ForwardRef(SvgIcon))
-              className="makeStyles-root-764"
+              className="makeStyles-root-756"
               fill="none"
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
@@ -53487,7 +53487,7 @@ exports[`Storyshots Components|Icons Twitter Icon 1`] = `
               xmlns="http://www.w3.org/2000/svg"
             >
               <ForwardRef(SvgIcon)
-                className="makeStyles-root-764"
+                className="makeStyles-root-756"
                 classes={
                   Object {
                     "colorAction": "MuiSvgIcon-colorAction",
@@ -53509,7 +53509,7 @@ exports[`Storyshots Components|Icons Twitter Icon 1`] = `
               >
                 <svg
                   aria-hidden={true}
-                  className="MuiSvgIcon-root makeStyles-root-764"
+                  className="MuiSvgIcon-root makeStyles-root-756"
                   fill="none"
                   focusable="false"
                   onMouseEnter={[Function]}
@@ -54417,7 +54417,7 @@ exports[`Storyshots Components|Icons Verified Icon 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -56116,7 +56116,7 @@ exports[`Storyshots Components|Icons Whitepaper Icon 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -56831,7 +56831,7 @@ exports[`Storyshots Components|Icons Whitepaper Icon 1`] = `
             onMouseLeave={[Function]}
           >
             <WithStyles(ForwardRef(SvgIcon))
-              className="makeStyles-root-770"
+              className="makeStyles-root-762"
               fill="none"
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
@@ -56839,7 +56839,7 @@ exports[`Storyshots Components|Icons Whitepaper Icon 1`] = `
               xmlns="http://www.w3.org/2000/svg"
             >
               <ForwardRef(SvgIcon)
-                className="makeStyles-root-770"
+                className="makeStyles-root-762"
                 classes={
                   Object {
                     "colorAction": "MuiSvgIcon-colorAction",
@@ -56861,7 +56861,7 @@ exports[`Storyshots Components|Icons Whitepaper Icon 1`] = `
               >
                 <svg
                   aria-hidden={true}
-                  className="MuiSvgIcon-root makeStyles-root-770"
+                  className="MuiSvgIcon-root makeStyles-root-762"
                   fill="none"
                   focusable="false"
                   onMouseEnter={[Function]}
@@ -57801,7 +57801,7 @@ exports[`Storyshots Components|Icons Youtube Icon 1`] = `
             ],
           },
           "isAsync": false,
-          "sender": "70237b54bce3b",
+          "sender": "2795b43315214",
           "transport": Object {
             "send": [Function],
             "setHandler": [Function],
@@ -58510,7 +58510,7 @@ exports[`Storyshots Components|Icons Youtube Icon 1`] = `
             onMouseLeave={[Function]}
           >
             <WithStyles(ForwardRef(SvgIcon))
-              className="makeStyles-root-766"
+              className="makeStyles-root-758"
               fill="none"
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
@@ -58518,7 +58518,7 @@ exports[`Storyshots Components|Icons Youtube Icon 1`] = `
               xmlns="http://www.w3.org/2000/svg"
             >
               <ForwardRef(SvgIcon)
-                className="makeStyles-root-766"
+                className="makeStyles-root-758"
                 classes={
                   Object {
                     "colorAction": "MuiSvgIcon-colorAction",
@@ -58540,7 +58540,7 @@ exports[`Storyshots Components|Icons Youtube Icon 1`] = `
               >
                 <svg
                   aria-hidden={true}
-                  className="MuiSvgIcon-root makeStyles-root-766"
+                  className="MuiSvgIcon-root makeStyles-root-758"
                   fill="none"
                   focusable="false"
                   onMouseEnter={[Function]}

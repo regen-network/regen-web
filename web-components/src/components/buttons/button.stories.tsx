@@ -6,6 +6,9 @@ import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 export default {
   title: 'Components|Buttons',
   component: OutlinedButton,
+  parameters: {
+    fileName: __filename,
+  },
 };
 
 export const outlinedButton = (): JSX.Element => (

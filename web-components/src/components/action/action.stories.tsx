@@ -6,6 +6,9 @@ export default {
   title: 'Components|Action',
   component: Action,
   decorators: [withKnobs],
+  parameters: {
+    fileName: __filename,
+  },
 };
 
 const actionName: string = 'Reduce pest populations';

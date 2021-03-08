@@ -11,6 +11,9 @@ export default {
   title: 'Components|Inputs',
   component: TextField,
   decorators: [withKnobs],
+  parameters: {
+    fileName: __filename,
+  },
 };
 
 // function EditableTextField(): JSX.Element {

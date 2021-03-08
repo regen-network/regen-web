@@ -6,6 +6,9 @@ export default {
   title: 'Components|Tooltip',
   component: Tooltip,
   decorators: [withKnobs],
+  parameters: {
+    fileName: __filename,
+  },
 };
 
 export const mainTitle = (): JSX.Element => (

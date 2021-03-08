@@ -9,6 +9,9 @@ export default {
   title: 'Components|Timeline',
   component: Timeline,
   decorators: [withKnobs],
+  parameters: {
+    fileName: __filename,
+  },
 };
 
 const events: Event[] = [

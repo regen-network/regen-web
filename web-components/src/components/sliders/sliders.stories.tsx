@@ -12,6 +12,9 @@ export default {
   title: 'Components|Sliders',
   component: ProtectedSpecies,
   decorators: [withKnobs],
+  parameters: {
+    fileName: __filename,
+  },
 };
 
 const item: ItemProps = {

@@ -6,6 +6,9 @@ export default {
   title: 'Components|ReadMore',
   component: ReadMore,
   decorators: [withKnobs],
+  parameters: {
+    fileName: __filename,
+  },
 };
 
 const readMoreText: string =

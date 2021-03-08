@@ -18,6 +18,9 @@ export default {
   title: 'Components|Cards',
   component: Card,
   decorators: [withKnobs],
+  parameters: {
+    fileName: __filename,
+  },
 };
 
 const projectDeveloper: User = {

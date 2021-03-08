@@ -4,6 +4,9 @@ import Table, { Data } from 'web-components/lib/components/table';
 export default {
   title: 'Components|Table',
   component: Table,
+  parameters: {
+    fileName: __filename,
+  },
 };
 
 const data: Data[] = [

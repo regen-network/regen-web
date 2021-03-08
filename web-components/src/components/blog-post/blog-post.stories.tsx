@@ -6,6 +6,9 @@ export default {
   title: 'Components|Blog Post',
   component: BlogPost,
   decorators: [withKnobs],
+  parameters: {
+    fileName: __filename,
+  },
 };
 
 export const blogPost = (): JSX.Element => (

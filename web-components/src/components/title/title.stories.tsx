@@ -23,6 +23,9 @@ export default {
   title: 'Components|Title',
   component: Title,
   decorators: [withKnobs],
+  parameters: {
+    fileName: __filename,
+  },
 };
 
 export const mainTitle = (): JSX.Element => <Title variant="h1">{text('title', 'Sheok Hill')}</Title>;

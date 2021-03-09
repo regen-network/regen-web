@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 import clsx from 'clsx';
+import { url } from 'inspector';
 
 // interface ImageProps extends React.HTMLProps<HTMLImageElement> { TODO - errors with this
 interface ImageProps {
@@ -10,6 +11,7 @@ interface ImageProps {
   className?: string;
   width?: number;
   height?: number;
+  backgroundImage?: boolean;
 }
 
 const useStyles = makeStyles<Theme>((theme: Theme) => ({
@@ -25,7 +27,14 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
  * Use this component if image is stored in S3 (or app's main image store)
  * TODO: fallback to original if server fails
  */
-const Image: React.FC<ImageProps> = ({ src = '', alt = '', options = {}, className, ...rest }) => {
+const Image: React.FC<ImageProps> = ({
+  src = '',
+  alt = '',
+  options = {},
+  className,
+  backgroundImage,
+  ...rest
+}) => {
   const classes = useStyles({});
   const imgRef = useRef<HTMLDivElement | null>(null);
   const [width, setWidth] = useState(0);
@@ -68,7 +77,21 @@ const Image: React.FC<ImageProps> = ({ src = '', alt = '', options = {}, classNa
     <figure ref={imgRef} className={clsx(className, classes.figure)}>
       {// If the container width has been set, display the image else null
       width > 0 && queryString ? (
-        <img {...rest} className={className} src={`${imageServer}${path}${queryString}`} alt={alt} />
+        backgroundImage ? (
+          <div
+            className={className}
+            style={{
+              backgroundImage: `url(${imageServer}${path}${queryString})`,
+              height: '12.1875rem',
+              display: 'block',
+              backgroundSize: 'cover',
+              backgroundRepeat: 'no-repeat',
+              backgroundPosition: 'center',
+            }}
+          ></div>
+        ) : (
+          <img {...rest} className={className} src={`${imageServer}${path}${queryString}`} alt={alt} />
+        )
       ) : null}
     </figure>
   );

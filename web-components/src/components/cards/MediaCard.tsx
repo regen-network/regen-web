@@ -107,7 +107,7 @@ export default function MediaCard({
 }: MediaCardProps): JSX.Element {
   const classes = useStyles({});
 
-  const optimizedImage = (): JSX.Element => <Image src={imgSrc} />;
+  const optimizedImage = (): JSX.Element => <Image src={imgSrc} backgroundImage />;
 
   const media = (
     <CardMedia className={clsx(imageClassName, classes.image)} component={optimizedImage}>

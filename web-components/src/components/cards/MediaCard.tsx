@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { JSXElementConstructor } from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 import CardMedia from '@material-ui/core/CardMedia';
 import { Variant } from '@material-ui/core/styles/createTypography';
@@ -6,6 +6,7 @@ import clsx from 'clsx';
 import ReactHtmlParser from 'react-html-parser';
 
 import Card from './Card';
+import Image from '../image';
 import Title from '../title';
 
 export interface MediaCardProps {
@@ -106,12 +107,15 @@ export default function MediaCard({
 }: MediaCardProps): JSX.Element {
   const classes = useStyles({});
 
+  const optimizedImage = (): JSX.Element => <Image src={imgSrc} />;
+
   const media = (
-    <CardMedia className={clsx(imageClassName, classes.image)} image={imgSrc}>
+    <CardMedia className={clsx(imageClassName, classes.image)} component={optimizedImage}>
       {backgroundGradient && <div className={classes.backgroundGradient} />}
       {tag && <div className={classes.tag}>{tag}</div>}
     </CardMedia>
   );
+
   return (
     <Card
       className={className}

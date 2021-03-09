@@ -44,7 +44,7 @@ const Image: React.FC<ImageProps> = ({ src = '', alt = '', options = {}, classNa
     // https://regen-registry.s3.amazonaws.com/projects/wilmot/image1.png
 
     const split = src.split('.com/');
-    // console.log('split', split);
+    console.log('split', split);
     setPath(split[1]);
   }, [src]);
 

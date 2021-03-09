@@ -18,9 +18,6 @@ export default {
   title: 'Components|Credits',
   component: CreditDetails,
   decorators: [withKnobs],
-  parameters: {
-    fileName: __filename,
-  },
 };
 
 const details: CreditInfoProps = {

@@ -8,9 +8,6 @@ export default {
   title: 'Components|User',
   component: UserInfo,
   decorators: [withKnobs],
-  parameters: {
-    fileName: __filename,
-  },
 };
 
 const user: User = {

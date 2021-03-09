@@ -6,9 +6,6 @@ export default {
   title: 'Components|Image Grid',
   component: ImageGrid,
   decorators: [withKnobs],
-  parameters: {
-    fileName: __filename,
-  },
 };
 const titleText: string = 'Verified outcomes';
 const descriptionText: string =

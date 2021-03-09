@@ -41,9 +41,6 @@ export default {
   title: 'Components|Icons',
   component: ArrowDownIcon,
   decorators: [withKnobs],
-  parameters: {
-    fileName: __filename,
-  },
 };
 
 export const arrowIcon = (): JSX.Element => (

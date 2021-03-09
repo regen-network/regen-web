@@ -7,7 +7,6 @@ import CreditDetails, { CreditInfoProps } from 'web-components/lib/components/cr
 export default {
   title: 'Components|Tabs',
   component: Tabs,
-  
 };
 
 const details: CreditInfoProps = {
@@ -29,19 +28,19 @@ const data: Data[] = [
   {
     name: 'Monitoring',
     type: 'Monitoring',
-    date: new Date('March 15, 2020'),
+    date: '2020-03-15T00:00:00.000Z',
     url: 'test',
   },
   {
     name: 'Issuance Documents',
     type: 'Issuance',
-    date: new Date('February 10, 2020'),
+    date: '2020-03-15T00:00:00.000Z',
     url: 'test',
   },
   {
     name: 'Project Review',
     type: 'Project Review',
-    date: new Date('November 1, 2019'),
+    date: '2020-03-15T00:00:00.000Z',
     url: 'test',
   },
 ];

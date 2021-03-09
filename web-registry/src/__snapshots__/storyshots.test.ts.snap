@@ -25974,19 +25974,19 @@ exports[`Storyshots Components|Table Mrv Table 1`] = `
     rows={
       Array [
         Object {
-          "date": 2020-03-14T23:00:00.000Z,
+          "date": "March 15, 2020",
           "name": "Monitoring",
           "type": "Monitoring",
           "url": "test",
         },
         Object {
-          "date": 2020-02-09T23:00:00.000Z,
+          "date": "February 10, 2020",
           "name": "Issuance Documents",
           "type": "Issuance",
           "url": "test",
         },
         Object {
-          "date": 2019-10-31T23:00:00.000Z,
+          "date": "November 1, 2019",
           "name": "Project Review",
           "type": "Project Review",
           "url": "test",

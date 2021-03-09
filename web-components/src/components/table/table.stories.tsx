@@ -10,19 +10,19 @@ const data: Data[] = [
   {
     name: 'Monitoring',
     type: 'Monitoring',
-    date: new Date('March 15, 2020'),
+    date: 'March 15, 2020',
     url: 'test',
   },
   {
     name: 'Issuance Documents',
     type: 'Issuance',
-    date: new Date('February 10, 2020'),
+    date: 'February 10, 2020',
     url: 'test',
   },
   {
     name: 'Project Review',
     type: 'Project Review',
-    date: new Date('November 1, 2019'),
+    date: 'November 1, 2019',
     url: 'test',
   },
 ];

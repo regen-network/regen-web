@@ -64,9 +64,11 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingBottom: theme.spacing(10.5),
       maxWidth: theme.spacing(139),
       margin: '0 auto',
+      fontSize: theme.spacing(5.5),
     },
     [theme.breakpoints.down('xs')]: {
       paddingBottom: theme.spacing(7.5),
+      fontSize: theme.spacing(4.5),
     },
   },
   container: {
@@ -165,21 +167,15 @@ const useStyles = makeStyles((theme: Theme) => ({
       color: theme.palette.info.main,
     },
   },
-  description: {
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(5.5),
-    },
-    [theme.breakpoints.down('xs')]: {
-      fontSize: theme.spacing(4.5),
-    },
-  },
   messageForPartners: {
     color: theme.palette.primary.contrastText,
     [theme.breakpoints.up('sm')]: {
       marginTop: theme.spacing(-8.5),
+      fontSize: theme.spacing(5),
     },
     [theme.breakpoints.down('xs')]: {
       marginTop: theme.spacing(-7),
+      fontSize: theme.spacing(4),
     },
   },
 }));
@@ -245,7 +241,7 @@ const ContactPage = ({ location }: { location: object }): JSX.Element => {
           className={classes.section}
           titleClassName={classes.title}
         >
-          <Description align="center" className={clsx(classes.subtitle, classes.description)}>
+          <Description align="center" className={classes.subtitle}>
             {ReactHtmlParser(content.body)}
           </Description>
           <div className={classes.container}>
@@ -346,7 +342,7 @@ const ContactPage = ({ location }: { location: object }): JSX.Element => {
                           </Grid>
                         </div>
                         {values.requestType === 'partnerships@regen.network' && (
-                          <Description className={clsx(classes.messageForPartners, classes.description)}>
+                          <Description className={classes.messageForPartners}>
                             {ReactHtmlParser(content.form.messageForPartners)}
                           </Description>
                         )}

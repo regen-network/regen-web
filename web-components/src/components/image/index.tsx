@@ -39,7 +39,7 @@ const Image: React.FC<ImageProps> = ({ src = '', alt = '', options = {}, classNa
     setWidth(clientWidth);
   }, [imgRef]);
 
-  // split domain from path
+  // split domain from path TODO: clean this logic up
   useEffect(() => {
     // https://regen-registry.s3.amazonaws.com/projects/wilmot/image1.png
 

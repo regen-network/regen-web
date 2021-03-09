@@ -41,6 +41,7 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
     '/validators/': theme.palette.primary.main,
     '/community/': theme.palette.primary.main,
     '/wallet-address-registration/': theme.palette.primary.light,
+    '/mainnet/': theme.palette.primary.light,
   };
 
   const headerTransparent: BoolProps = {
@@ -59,6 +60,7 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
   );
 
   const menuItems: HeaderMenuItem[] = [
+    { title: 'Mainnet', href: '/mainnet/' },
     { title: 'Buyers', href: '/buyers/' },
     { title: 'Land Stewards', href: '/land-stewards/' },
     {

@@ -1,7 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 import clsx from 'clsx';
-import { url } from 'inspector';
 
 // interface ImageProps extends React.HTMLProps<HTMLImageElement> { TODO - errors with this
 interface ImageProps {
@@ -11,7 +10,6 @@ interface ImageProps {
   className?: string;
   width?: number;
   height?: number;
-  backgroundImage?: boolean;
 }
 
 const useStyles = makeStyles<Theme>((theme: Theme) => ({
@@ -27,26 +25,22 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
  * Use this component if image is stored in S3 (or app's main image store)
  * TODO: fallback to original if server fails
  */
-const Image: React.FC<ImageProps> = ({
-  src = '',
-  alt = '',
-  options = {},
-  className,
-  backgroundImage,
-  ...rest
-}) => {
+const Image: React.FC<ImageProps> = ({ src = '', alt = '', options = {}, className, ...rest }) => {
   const classes = useStyles({});
   const imgRef = useRef<HTMLDivElement | null>(null);
   const [width, setWidth] = useState(0);
-  const [queryString, setQueryString] = useState('');
+  const [optimizedSrc, setOptimizedSrc] = useState('');
   const [path, setPath] = useState('');
+  const [serverFailed, setServerFailed] = useState(false);
   const imageServer = `${process.env.REACT_APP_API_URI}/image/`;
 
   // Destructure props and state
   useEffect(() => {
-    const clientWidth = imgRef?.current?.clientWidth || 0;
-    setWidth(clientWidth);
-  }, [imgRef]);
+    if (!serverFailed) {
+      const clientWidth = imgRef?.current?.clientWidth || 0;
+      setWidth(clientWidth);
+    }
+  }, [imgRef, serverFailed]);
 
   // split domain from path TODO: clean this logic up
   useEffect(() => {
@@ -58,7 +52,7 @@ const Image: React.FC<ImageProps> = ({
   }, [src]);
 
   useEffect(() => {
-    if (width > 0) {
+    if (width > 0 && !serverFailed) {
       // Create an empty query string
       let queryParams = '';
 
@@ -69,29 +63,21 @@ const Image: React.FC<ImageProps> = ({
       Object.keys(options).map((option, i) => {
         return (queryParams += `${i < 1 ? '?' : '&'}${option}=${options[option]}`);
       });
-      setQueryString(queryParams);
+      setOptimizedSrc(`${imageServer}${path}${queryParams}`);
     }
-  }, [width, imgRef, options]);
+  }, [width, imgRef, options, imageServer, path, serverFailed]);
+
+  const handleError = (): void => {
+    // TODO: this works, but feels clunky to do on every image
+    setServerFailed(true);
+    setOptimizedSrc(src);
+  };
 
   return (
     <figure ref={imgRef} className={clsx(className, classes.figure)}>
       {// If the container width has been set, display the image else null
-      width > 0 && queryString ? (
-        backgroundImage ? (
-          <div
-            className={className}
-            style={{
-              backgroundImage: `url(${imageServer}${path}${queryString})`,
-              height: '12.1875rem',
-              display: 'block',
-              backgroundSize: 'cover',
-              backgroundRepeat: 'no-repeat',
-              backgroundPosition: 'center',
-            }}
-          ></div>
-        ) : (
-          <img {...rest} className={className} src={`${imageServer}${path}${queryString}`} alt={alt} />
-        )
+      width > 0 && optimizedSrc ? (
+        <img {...rest} className={className} src={optimizedSrc} onError={handleError} alt={alt} />
       ) : null}
     </figure>
   );

@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 import CardMedia from '@material-ui/core/CardMedia';
 import { Variant } from '@material-ui/core/styles/createTypography';
@@ -106,7 +106,6 @@ export default function MediaCard({
   titleOverwrite = true,
 }: MediaCardProps): JSX.Element {
   const classes = useStyles({});
-  const imgRef = useRef<Element | null>(null);
 
   const optimizedImage = (): JSX.Element => (
     <Image backgroundImage src={imgSrc} className={clsx(imageClassName, classes.image)}>
@@ -117,9 +116,7 @@ export default function MediaCard({
     </Image>
   );
 
-  const media = (
-    <CardMedia innerRef={imgRef} className={clsx(imageClassName, classes.image)} component={optimizedImage} />
-  );
+  const media = <CardMedia className={clsx(imageClassName, classes.image)} component={optimizedImage} />;
 
   return (
     <Card

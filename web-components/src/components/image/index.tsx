@@ -2,16 +2,35 @@ import React, { useRef, useState, useEffect } from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 import clsx from 'clsx';
 
-// interface ImageProps extends React.HTMLProps<HTMLImageElement> { TODO - errors with this
 interface ImageProps {
   src: string; // image storage url
   alt?: string;
-  options?: any; //todo
+  options?: SharpOptionQueryParams;
   className?: string;
   width?: number;
   height?: number;
   backgroundImage?: boolean;
   children?: any;
+}
+
+interface SharpOptionQueryParams {
+  q?: number; // quality, default 80
+  w?: number; // width, px
+  h?: number; // height, px
+  f?: 'jpeg' | 'gif' | 'webp' | 'raw' | 'png'; // output image format, default webp
+  p?: boolean; // progressive, default true
+  c?: boolean; // crop, default false
+  g?:
+    | 'north'
+    | 'northeast'
+    | 'east'
+    | 'southeast'
+    | 'south'
+    | 'southwest'
+    | 'west'
+    | 'northwest'
+    | 'center'
+    | 'centre'; // gravity. When the crop option is activated you can specify the gravity of the cropping. Default is center.
 }
 
 const useStyles = makeStyles<Theme>((theme: Theme) => ({
@@ -36,7 +55,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
 const Image: React.FC<ImageProps> = ({
   src = '',
   alt = '',
-  options = {},
+  options = {} as const,
   className,
   backgroundImage,
   children,
@@ -46,9 +65,10 @@ const Image: React.FC<ImageProps> = ({
   const imgRef = useRef<HTMLDivElement | null>(null);
   const [width, setWidth] = useState(0);
   const [optimizedSrc, setOptimizedSrc] = useState('');
-  const [path, setPath] = useState('');
   const [serverFailed, setServerFailed] = useState(false);
   const imageServer = `${process.env.REACT_APP_API_URI}/image/`;
+  const imageStorageBaseUrl =
+    process.env.REACT_APP_IMAGE_STORAGE_BASE_URL || 'https://regen-registry.s3.amazonaws.com/';
 
   // Destructure props and state
   useEffect(() => {
@@ -58,17 +78,10 @@ const Image: React.FC<ImageProps> = ({
     }
   }, [imgRef, serverFailed]);
 
-  // split domain from path TODO: clean this logic up
-  useEffect(() => {
-    // https://regen-registry.s3.amazonaws.com/projects/wilmot/image1.png
-
-    const split = src.split('.com/');
-    console.log('split', split);
-    setPath(split[1]);
-  }, [src]);
-
   useEffect(() => {
     if (width > 0 && !serverFailed) {
+      const serverUrl = src.replace(imageStorageBaseUrl, imageServer);
+
       // Create an empty query string
       let queryParams = '';
 
@@ -79,12 +92,11 @@ const Image: React.FC<ImageProps> = ({
       Object.keys(options).map((option, i) => {
         return (queryParams += `${i < 1 ? '?' : '&'}${option}=${options[option]}`);
       });
-      setOptimizedSrc(`${imageServer}${path}${queryParams}`);
+      setOptimizedSrc(`${serverUrl}${queryParams}`);
     }
-  }, [width, imgRef, options, imageServer, path, serverFailed]);
+  }, [width, imgRef, imageServer, serverFailed, src, imageStorageBaseUrl, options]);
 
   const handleError = (): void => {
-    // TODO: this works, but feels clunky to do on every image
     setServerFailed(true);
     setOptimizedSrc(src);
   };
@@ -96,9 +108,7 @@ const Image: React.FC<ImageProps> = ({
         backgroundImage ? (
           <div
             className={clsx(className, classes.background)}
-            style={{
-              backgroundImage: `url(${optimizedSrc}), url(${src})`,
-            }}
+            style={{ backgroundImage: `url(${optimizedSrc}), url(${src})` }}
           >
             {children}
           </div>

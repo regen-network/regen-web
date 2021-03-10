@@ -108,18 +108,18 @@ export default function MediaCard({
   const classes = useStyles({});
   const imgRef = useRef<Element | null>(null);
 
-  // const optimizedImage = (): JSX.Element => (
-  //   <Image innerRef={imgRef} src={imgSrc} className={clsx(imageClassName, classes.image)} />
-  // );
-
-  const media = (
-    <CardMedia innerRef={imgRef} className={clsx(imageClassName, classes.image)} image={imgSrc}>
-      {backgroundGradient && <div className={classes.backgroundGradient} />}
-      {tag && <div className={classes.tag}>{tag}</div>}
-    </CardMedia>
+  const optimizedImage = (): JSX.Element => (
+    <Image backgroundImage src={imgSrc} className={clsx(imageClassName, classes.image)}>
+      <>
+        {backgroundGradient && <div className={classes.backgroundGradient} />}
+        {tag && <div className={classes.tag}>{tag}</div>}
+      </>
+    </Image>
   );
 
-  console.log('imgRef', imgRef?.current?.clientWidth);
+  const media = (
+    <CardMedia innerRef={imgRef} className={clsx(imageClassName, classes.image)} component={optimizedImage} />
+  );
 
   return (
     <Card

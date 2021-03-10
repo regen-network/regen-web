@@ -10,6 +10,8 @@ interface ImageProps {
   className?: string;
   width?: number;
   height?: number;
+  backgroundImage?: boolean;
+  children?: any;
 }
 
 const useStyles = makeStyles<Theme>((theme: Theme) => ({
@@ -25,7 +27,15 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
  * Use this component if image is stored in S3 (or app's main image store)
  * TODO: fallback to original if server fails
  */
-const Image: React.FC<ImageProps> = ({ src = '', alt = '', options = {}, className, ...rest }) => {
+const Image: React.FC<ImageProps> = ({
+  src = '',
+  alt = '',
+  options = {},
+  className,
+  backgroundImage,
+  children,
+  ...rest
+}) => {
   const classes = useStyles({});
   const imgRef = useRef<HTMLDivElement | null>(null);
   const [width, setWidth] = useState(0);
@@ -77,7 +87,23 @@ const Image: React.FC<ImageProps> = ({ src = '', alt = '', options = {}, classNa
     <figure ref={imgRef} className={clsx(className, classes.figure)}>
       {// If the container width has been set, display the image else null
       width > 0 && optimizedSrc ? (
-        <img {...rest} className={className} src={optimizedSrc} onError={handleError} alt={alt} />
+        backgroundImage ? (
+          <div
+            className={className}
+            style={{
+              backgroundImage: `url(${optimizedSrc}), url(${src})`,
+              height: '12.1875rem', //TODO
+              display: 'block',
+              backgroundSize: 'cover',
+              backgroundRepeat: 'no-repeat',
+              backgroundPosition: 'center',
+            }}
+          >
+            {children}
+          </div>
+        ) : (
+          <img {...rest} className={className} src={optimizedSrc} alt={alt} onError={handleError} />
+        )
       ) : null}
     </figure>
   );

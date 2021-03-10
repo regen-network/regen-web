@@ -5,32 +5,12 @@ import clsx from 'clsx';
 interface ImageProps {
   src: string; // image storage url
   alt?: string;
-  options?: SharpOptionQueryParams;
+  options?: any;
   className?: string;
   width?: number;
   height?: number;
   backgroundImage?: boolean;
   children?: any;
-}
-
-interface SharpOptionQueryParams {
-  q?: number; // quality, default 80
-  w?: number; // width, px
-  h?: number; // height, px
-  f?: 'jpeg' | 'gif' | 'webp' | 'raw' | 'png'; // output image format, default webp
-  p?: boolean; // progressive, default true
-  c?: boolean; // crop, default false
-  g?:
-    | 'north'
-    | 'northeast'
-    | 'east'
-    | 'southeast'
-    | 'south'
-    | 'southwest'
-    | 'west'
-    | 'northwest'
-    | 'center'
-    | 'centre'; // gravity. When the crop option is activated you can specify the gravity of the cropping. Default is center.
 }
 
 const useStyles = makeStyles<Theme>((theme: Theme) => ({
@@ -55,7 +35,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
 const Image: React.FC<ImageProps> = ({
   src = '',
   alt = '',
-  options = {} as const,
+  options = {},
   className,
   backgroundImage,
   children,

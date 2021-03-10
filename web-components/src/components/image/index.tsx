@@ -29,7 +29,8 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
 }));
 
 /**
- * Use this component if image is stored in S3 (or app's main image store)
+ * Use this component if image is stored in S3 (or app's main image store).
+ * registry-server will send back an optimized version of the original.
  */
 const Image: React.FC<ImageProps> = ({
   src = '',

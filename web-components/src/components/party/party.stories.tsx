@@ -7,9 +7,6 @@ export default {
   title: 'Components|Party',
   component: PartyAddress,
   decorators: [withKnobs],
-  parameters: {
-    fileName: __filename,
-  },
 };
 
 export const partyAddress = (): JSX.Element => (

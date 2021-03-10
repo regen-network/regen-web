@@ -7,9 +7,6 @@ import LoginForm from 'web-components/lib/components/form/LoginForm';
 export default {
   title: 'Components|Forms',
   component: LoginForm,
-  parameters: {
-    fileName: __filename,
-  },
 };
 
 const submit = async (): Promise<void> => {

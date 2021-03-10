@@ -47,7 +47,6 @@
     "react-remove-scroll": "^2.3.0",
     "react-slick": "^0.25.2",
     "slick-carousel": "^1.8.1",
-    "storybook-addon-material-ui": "^0.9.0-alpha.20",
     "zxcvbn": "^4.4.2"
   },
   "devDependencies": {

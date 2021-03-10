@@ -4,9 +4,6 @@ import Document from 'web-components/lib/components/document';
 export default {
   title: 'Components|Document',
   component: Document,
-  parameters: {
-    fileName: __filename,
-  },
 };
 
 export const document = (): JSX.Element => <Document name="certificate" link="/" info="476d7a44" />;

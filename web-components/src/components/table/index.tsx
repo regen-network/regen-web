@@ -12,6 +12,7 @@ import { getComparator, stableSort, Order } from './sort';
 import DocumentIcon from '../icons/DocumentIcon';
 import EyeIcon from '../icons/EyeIcon';
 import OutlinedButton from '../buttons/OutlinedButton';
+import { getFormattedDate } from '../../utils/format';
 
 export interface Data {
   name: string;
@@ -187,7 +188,7 @@ export default function RegenTable({ rows }: RegenTableProps): JSX.Element {
                     {row.type}
                   </TableCell>
                   <TableCell className={classes.cell} align="left">
-                    {new Date(row.date).toLocaleDateString('en-US', options)}
+                    {getFormattedDate(row.date, options)}
                   </TableCell>
                   <TableCell className={`${classes.cell} ${classes.documentCell}`} align="left">
                     <a href={row.url} target="_blank" rel="noopener noreferrer" className={classes.link}>

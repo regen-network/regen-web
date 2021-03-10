@@ -4,9 +4,6 @@ import Certificate from 'web-components/lib/components/certificate';
 export default {
   title: 'Components|Certificate',
   component: Certificate,
-  parameters: {
-    fileName: __filename,
-  },
 };
 
 export const certificate = (): JSX.Element => (

@@ -6,9 +6,6 @@ export default {
   title: 'Components|Description',
   component: Description,
   decorators: [withKnobs],
-  parameters: {
-    fileName: __filename,
-  },
 };
 
 const descriptionText: string =

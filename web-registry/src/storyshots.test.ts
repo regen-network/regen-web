@@ -1,8 +1,7 @@
 import initStoryshots from '@storybook/addon-storyshots';
-import { Stories2SnapsConverter } from '@storybook/addon-storyshots/dist';
 import path from 'path';
 import './jest.mock';
-import { configure, mount } from 'enzyme';
+import { configure, shallow } from 'enzyme';
 import toJson from 'enzyme-to-json';
 import Adapter from 'enzyme-adapter-react-16';
 
@@ -11,29 +10,10 @@ configure({ adapter: new Adapter() });
 initStoryshots({
   configPath: path.resolve(__dirname, '../../web-storybook/.storybook'),
   framework: 'react',
-  asyncJest: true, // this is the option that activates the async behaviour
-  test: ({
-    story,
-    context,
-    done, // --> callback passed to test method when asyncJest option is true
-  }) => {
-    const converter = new Stories2SnapsConverter();
-    const snapshotFilename = converter.getSnapshotFileName(context);
+  test: ({ story, context }) => {
     const storyElement = story.render();
+    const shallowTree = shallow(storyElement);
 
-    // mount the story
-    const tree = mount(storyElement);
-
-    // wait until the mount is updated, in our app mostly by Material-UI
-    // but maybe something else updating the state of the component
-    // somewhere
-    const waitTime = 1;
-    setTimeout(() => {
-      if (snapshotFilename) {
-        expect(toJson(tree.update())).toMatchSpecificSnapshot(snapshotFilename);
-      }
-
-      done();
-    }, waitTime);
+    expect(toJson(shallowTree)).toMatchSnapshot();
   },
 });

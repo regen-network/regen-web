@@ -7,9 +7,6 @@ import { Button, Card, Avatar, CardMedia } from '@material-ui/core';
 export default {
   title: 'Components|Modal',
   component: Modal,
-  parameters: {
-    fileName: __filename,
-  },
 };
 
 function OpenModal(): JSX.Element {

@@ -30,7 +30,6 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
 
 /**
  * Use this component if image is stored in S3 (or app's main image store)
- * TODO: fallback to original if server fails
  */
 const Image: React.FC<ImageProps> = ({
   src = '',

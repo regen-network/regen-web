@@ -21,6 +21,12 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
     marginInlineStart: 0,
     marginInlineEnd: 0,
   },
+  background: {
+    display: 'block',
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center',
+  },
 }));
 
 /**
@@ -89,14 +95,9 @@ const Image: React.FC<ImageProps> = ({
       width > 0 && optimizedSrc ? (
         backgroundImage ? (
           <div
-            className={className}
+            className={clsx(className, classes.background)}
             style={{
               backgroundImage: `url(${optimizedSrc}), url(${src})`,
-              height: '12.1875rem', //TODO
-              display: 'block',
-              backgroundSize: 'cover',
-              backgroundRepeat: 'no-repeat',
-              backgroundPosition: 'center',
             }}
           >
             {children}

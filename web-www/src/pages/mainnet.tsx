@@ -1,14 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import { useStaticQuery, graphql, PageProps } from 'gatsby';
-import { navigate } from 'gatsby';
+import React from 'react';
+import { useStaticQuery, graphql, PageProps, StaticQuery } from 'gatsby';
 
 import SEO from '../components/seo';
 import TopSection from '../sections/mainnet/TopSection';
 
 interface Props extends PageProps {}
 
+type QueryData = {
+  background: {
+    publicURL: string;
+  };
+};
+
 const Mainnet = ({ location }: Props): JSX.Element => {
-  const data = useStaticQuery(graphql`
+  const data = useStaticQuery<QueryData>(graphql`
     query {
       background: file(relativePath: { eq: "mainnet-globe.png" }) {
         childImageSharp {

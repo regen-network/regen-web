@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 import clsx from 'clsx';
+import LazyLoad from 'react-lazyload';
 
 interface ImageProps {
   src: string; // image storage url
@@ -88,27 +89,29 @@ const Image: React.FC<ImageProps> = ({
 
   return (
     <figure ref={imgRef} className={clsx(className, classes.figure)}>
-      {// If the container width has been set, display the image else null
-      dimensions.width && dimensions.width > 0 && optimizedSrc ? (
-        backgroundImage ? (
-          <div
-            className={clsx(className, classes.background)}
-            style={{ backgroundImage: `url(${optimizedSrc}), url(${src})` }}
-          >
-            {children}
-          </div>
-        ) : (
-          <img
-            {...rest}
-            className={className}
-            src={optimizedSrc}
-            alt={alt}
-            onError={handleError}
-            width={dimensions.width}
-            // height={dimensions.height} //todo
-          />
-        )
-      ) : null}
+      <LazyLoad offset={300}>
+        {// If the container width has been set, display the image else null
+        dimensions.width && dimensions.width > 0 && optimizedSrc ? (
+          backgroundImage ? (
+            <div
+              className={clsx(className, classes.background)}
+              style={{ backgroundImage: `url(${optimizedSrc}), url(${src})` }}
+            >
+              {children}
+            </div>
+          ) : (
+            <img
+              {...rest}
+              className={className}
+              src={optimizedSrc}
+              alt={alt}
+              onError={handleError}
+              width={dimensions.width}
+              // height={dimensions.height} //todo
+            />
+          )
+        ) : null}
+      </LazyLoad>
     </figure>
   );
 };

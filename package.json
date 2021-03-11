@@ -11,6 +11,8 @@
     "url": "https://github.com/regen-network/regen-web"
   },
   "dependencies": {
+    "@types/react-lazyload": "^3.1.0",
+    "react-lazyload": "^3.2.0",
     "serve": "^11.2.0"
   },
   "workspaces": [

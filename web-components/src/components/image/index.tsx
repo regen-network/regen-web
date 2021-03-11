@@ -35,7 +35,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
 const Image: React.FC<ImageProps> = ({
   src = '',
   alt = '',
-  options = {},
+  options = {q: 100},
   className,
   backgroundImage,
   children,

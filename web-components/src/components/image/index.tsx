@@ -1,8 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 import clsx from 'clsx';
-import { getOptimizedImgSrc } from '../../utils/imgSrc';
-
 interface ImageProps {
   src: string; // image storage url
   alt?: string;
@@ -48,6 +46,8 @@ const Image: React.FC<ImageProps> = ({
   const [width, setWidth] = useState(0);
   const [optimizedSrc, setOptimizedSrc] = useState('');
   const [serverFailed, setServerFailed] = useState(false);
+  const imageServer = `${process.env.REACT_APP_API_URI}/image/`;
+  const imageStorageBaseUrl = process.env.REACT_APP_IMAGE_STORAGE_BASE_URL;
 
   // Destructure props and state
   useEffect(() => {
@@ -58,8 +58,8 @@ const Image: React.FC<ImageProps> = ({
   }, [imgRef, serverFailed]);
 
   useEffect(() => {
-    if (width > 0 && !serverFailed) {
-      const serverUrl = getOptimizedImgSrc(src)
+    if (width > 0 && !serverFailed && imageStorageBaseUrl) {
+      const serverUrl = src.replace(imageStorageBaseUrl, imageServer);
 
       // Create an empty query string
       let queryParams = '';
@@ -73,7 +73,7 @@ const Image: React.FC<ImageProps> = ({
       });
       setOptimizedSrc(`${serverUrl}${queryParams}`);
     }
-  }, [imgRef, serverFailed, src, options, width]);
+  }, [imgRef, imageServer, serverFailed, src, imageStorageBaseUrl, options, width]);
 
   const handleError = (): void => {
     setServerFailed(true);

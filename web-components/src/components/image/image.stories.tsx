@@ -10,7 +10,7 @@ export default {
 
 const imageSrc = 'https://regen-registry.s3.amazonaws.com/projects/wilmot/image1.png';
 
-const label = 'quality';
+const label = 'Image Quality';
 const defaultValue = 80;
 const options = {
   range: true,

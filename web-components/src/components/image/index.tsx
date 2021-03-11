@@ -2,8 +2,6 @@ import React, { useRef, useState, useEffect } from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 import clsx from 'clsx';
 
-import { getOptimizedImgSrc } from '../../utils/imgSrc';
-
 interface ImageProps {
   src: string; // image storage url
   alt?: string;
@@ -37,7 +35,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
 /**
  * Use this component if image is stored in S3 (or app's main image store).
  * registry-server will send back an optimized version of the original.
- * Note: will not optimize SVGs
+ * Note: not compatible with SVGs
  */
 const Image: React.FC<ImageProps> = ({
   src = '',
@@ -53,6 +51,8 @@ const Image: React.FC<ImageProps> = ({
   const [dimensions, setDimensions] = useState<Dimensions>({ width: 0 });
   const [optimizedSrc, setOptimizedSrc] = useState('');
   const [serverFailed, setServerFailed] = useState(false);
+  const imageServer = `${process.env.REACT_APP_API_URI}/image/`;
+  const imageStorageBaseUrl = process.env.REACT_APP_IMAGE_STORAGE_BASE_URL;
 
   // Destructure props and state
   useEffect(() => {
@@ -64,8 +64,8 @@ const Image: React.FC<ImageProps> = ({
   }, [imgRef, serverFailed]);
 
   useEffect(() => {
-    if (dimensions.width && dimensions.width > 0 && !serverFailed) {
-      const serverUrl = getOptimizedImgSrc(src);
+    if (dimensions.width && dimensions.width > 0 && !serverFailed && imageStorageBaseUrl) {
+      const serverUrl = src.replace(imageStorageBaseUrl, imageServer);
 
       // Create an empty query string
       let queryParams = '';
@@ -79,7 +79,7 @@ const Image: React.FC<ImageProps> = ({
       });
       setOptimizedSrc(`${serverUrl}${queryParams}`);
     }
-  }, [imgRef, serverFailed, src, options, dimensions.width, dimensions]);
+  }, [imgRef, imageServer, serverFailed, src, imageStorageBaseUrl, options, dimensions.width, dimensions]);
 
   const handleError = (): void => {
     setServerFailed(true);
@@ -105,7 +105,7 @@ const Image: React.FC<ImageProps> = ({
             alt={alt}
             onError={handleError}
             width={dimensions.width}
-            height={dimensions.height} //todo
+            // height={dimensions.height} //todo
           />
         )
       ) : null}

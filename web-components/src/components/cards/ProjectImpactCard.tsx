@@ -1,5 +1,6 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
+import LazyLoad from 'react-lazyload';
 
 import Card from './Card';
 import Title from '../title';
@@ -96,15 +97,17 @@ export default function ProjectImpactCard({
 
   return (
     <Card className={classes.root}>
-      <div className={classes.background}>
-        <div className={classes.tag}>{monitored ? 'primary impact' : 'co-benefit'}</div>
-        <Title variant="h3" className={classes.title}>
-          {name}
-        </Title>
-      </div>
-      <div className={classes.text}>
-        <Description className={classes.description}>{description}</Description>
-      </div>
+      <LazyLoad offset={300} once={true}>
+        <div className={classes.background}>
+          <div className={classes.tag}>{monitored ? 'primary impact' : 'co-benefit'}</div>
+          <Title variant="h3" className={classes.title}>
+            {name}
+          </Title>
+        </div>
+        <div className={classes.text}>
+          <Description className={classes.description}>{description}</Description>
+        </div>
+      </LazyLoad>
     </Card>
   );
 }

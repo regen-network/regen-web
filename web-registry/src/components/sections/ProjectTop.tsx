@@ -3,6 +3,7 @@ import { makeStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import ReactHtmlParser from 'react-html-parser';
 import clsx from 'clsx';
+import LazyLoad from 'react-lazyload';
 
 import { Project, ProjectDefault } from '../../mocks';
 import { getOptimizedImgSrc } from 'web-components/lib/utils/imgSrc';
@@ -206,23 +207,25 @@ export default function ProjectTop({ project, projectDefault }: ProjectTopProps)
           <Description className={classes.description}>
             {ReactHtmlParser(project.shortDescription)}
           </Description>
-          {videos.length > 0 &&
-            (/https:\/\/www.youtube.com\/embed\/[a-zA-Z0-9_.-]+/.test(videos[0].src) ? (
-              <iframe
-                className={clsx(classes.iframe, classes.media)}
-                title={project.name}
-                src={videos[0].src}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              ></iframe>
-            ) : (
-              <video className={classes.media} controls poster={videos[0].preview}>
-                <source src={videos[0].src} />
-              </video>
-            ))}
-          {/* Show latest image for now */}
-          {project.media.length > 4 && project.media[4].type === 'image' && (
-            <img className={classes.media} alt={project.media[4].src} src={project.media[4].src} />
-          )}
+          <LazyLoad offset={50} once={true}>
+            {videos.length > 0 &&
+              (/https:\/\/www.youtube.com\/embed\/[a-zA-Z0-9_.-]+/.test(videos[0].src) ? (
+                <iframe
+                  className={clsx(classes.iframe, classes.media)}
+                  title={project.name}
+                  src={videos[0].src}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                ></iframe>
+              ) : (
+                <video className={classes.media} controls poster={videos[0].preview}>
+                  <source src={videos[0].src} />
+                </video>
+              ))}
+            {/* Show latest image for now */}
+            {project.media.length > 4 && project.media[4].type === 'image' && (
+              <img className={classes.media} alt={project.media[4].src} src={project.media[4].src} />
+            )}
+          </LazyLoad>
           <Title variant="h4" className={classes.tagline}>
             {project.tagline}
           </Title>

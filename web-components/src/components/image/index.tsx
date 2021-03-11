@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 import clsx from 'clsx';
-import LazyLoad from 'react-lazyload';
+import { getOptimizedImgSrc } from '../../utils/imgSrc';
 
 interface ImageProps {
   src: string; // image storage url
@@ -12,10 +12,6 @@ interface ImageProps {
   height?: number;
   backgroundImage?: boolean;
   children?: any;
-}
-interface Dimensions {
-  height?: number;
-  width?: number;
 }
 
 const useStyles = makeStyles<Theme>((theme: Theme) => ({
@@ -49,30 +45,27 @@ const Image: React.FC<ImageProps> = ({
 }) => {
   const classes = useStyles({});
   const imgRef = useRef<HTMLDivElement | null>(null);
-  const [dimensions, setDimensions] = useState<Dimensions>({ width: 0 });
+  const [width, setWidth] = useState(0);
   const [optimizedSrc, setOptimizedSrc] = useState('');
   const [serverFailed, setServerFailed] = useState(false);
-  const imageServer = `${process.env.REACT_APP_API_URI}/image/`;
-  const imageStorageBaseUrl = process.env.REACT_APP_IMAGE_STORAGE_BASE_URL;
 
   // Destructure props and state
   useEffect(() => {
     if (!serverFailed) {
       const clientWidth = imgRef?.current?.clientWidth || 0;
-      const clientHeight = imgRef?.current?.clientHeight || 0; //TODO: this is not working
-      setDimensions({ width: clientWidth, height: clientHeight });
+      setWidth(clientWidth);
     }
   }, [imgRef, serverFailed]);
 
   useEffect(() => {
-    if (dimensions.width && dimensions.width > 0 && !serverFailed && imageStorageBaseUrl) {
-      const serverUrl = src.replace(imageStorageBaseUrl, imageServer);
+    if (width > 0 && !serverFailed) {
+      const serverUrl = getOptimizedImgSrc(src)
 
       // Create an empty query string
       let queryParams = '';
 
       // If width is specified, otherwise use auto-detected width
-      options['w'] = options['w'] || dimensions.width;
+      options['w'] = options['w'] || width;
 
       // Loop through option object and build queryString
       Object.keys(options).map((option, i) => {
@@ -80,7 +73,7 @@ const Image: React.FC<ImageProps> = ({
       });
       setOptimizedSrc(`${serverUrl}${queryParams}`);
     }
-  }, [imgRef, imageServer, serverFailed, src, imageStorageBaseUrl, options, dimensions.width, dimensions]);
+  }, [imgRef, serverFailed, src, options, width]);
 
   const handleError = (): void => {
     setServerFailed(true);
@@ -89,9 +82,8 @@ const Image: React.FC<ImageProps> = ({
 
   return (
     <figure ref={imgRef} className={clsx(className, classes.figure)}>
-      <LazyLoad offset={300}>
         {// If the container width has been set, display the image else null
-        dimensions.width && dimensions.width > 0 && optimizedSrc ? (
+        width > 0 && optimizedSrc ? (
           backgroundImage ? (
             <div
               className={clsx(className, classes.background)}
@@ -106,12 +98,10 @@ const Image: React.FC<ImageProps> = ({
               src={optimizedSrc}
               alt={alt}
               onError={handleError}
-              width={dimensions.width}
-              // height={dimensions.height} //todo
+              width={width}
             />
           )
         ) : null}
-      </LazyLoad>
     </figure>
   );
 };

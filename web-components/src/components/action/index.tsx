@@ -77,7 +77,7 @@ export default function Action({ name, description, imgSrc }: ActionProps): JSX.
 
   return (
     <Grid container direction="column">
-      <LazyLoad offset={300}>
+      <LazyLoad offset={300} once={true}>
         <img className={classes.image} src={imgSrc} alt={name} />
       </LazyLoad>
       <Typography className={classes.name}>{name}</Typography>

@@ -5,6 +5,7 @@ import { useLocation } from 'react-router-dom';
 import { loader } from 'graphql.macro';
 import { useQuery } from '@apollo/client';
 import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
+import LazyLoad from 'react-lazyload';
 
 import { setPageView } from '../lib/ga';
 import { useLedger, ContextType } from '../ledger';
@@ -407,11 +408,13 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
         </div>
       </div>
 
-      {geojson && isGISFile ? (
-        <Map geojson={geojson} token={process.env.REACT_APP_MAPBOX_TOKEN} />
-      ) : (
-        <img className={classes.map} alt={project.name} src={mapFile} />
-      )}
+      <LazyLoad offset={300}>
+        {geojson && isGISFile ? (
+          <Map geojson={geojson} token={process.env.REACT_APP_MAPBOX_TOKEN} />
+        ) : (
+          <img className={classes.map} alt={project.name} src={mapFile} />
+        )}
+      </LazyLoad>
 
       {data &&
         data.projectByHandle &&

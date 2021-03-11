@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useTheme, makeStyles, Theme } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import ReactHtmlParser from 'react-html-parser';
+import LazyLoad from 'react-lazyload';
 
 import MediaCard from './MediaCard';
 import BreadcrumbIcon from '../icons/BreadcrumbIcon';
@@ -205,60 +206,62 @@ export default function ProjectCard({
   const [open, setOpen] = useState<boolean>(true);
 
   return (
-    <MediaCard
-      onClick={onClick}
-      imgSrc={imgSrc}
-      name={name}
-      elevation={1}
-      borderRadius="10px"
-      borderColor={theme.palette.grey[100]}
-      tag={tag}
-      href={href}
-      target={target}
-    >
-      <div className={classes.placeInfo}>
-        <ProjectPlaceInfo
-          place={place}
-          area={area}
-          areaUnit={getAbbreviation(areaUnit)}
-          smFontSize="0.8125rem"
-          fontSize="0.75rem"
-          color={theme.palette.primary.light}
-          displayCity={displayCity}
-          displayRegion={displayRegion}
-          displayCountry={displayCountry}
-        />
-      </div>
-      {comingSoon && (
-        <div className={classes.comingSoon}>
-          <span className={classes.comingSoonText}>coming soon</span>
+    <LazyLoad offset={300} style={{height: '100%'}}>
+      <MediaCard
+        onClick={onClick}
+        imgSrc={imgSrc}
+        name={name}
+        elevation={1}
+        borderRadius="10px"
+        borderColor={theme.palette.grey[100]}
+        tag={tag}
+        href={href}
+        target={target}
+      >
+        <div className={classes.placeInfo}>
+          <ProjectPlaceInfo
+            place={place}
+            area={area}
+            areaUnit={getAbbreviation(areaUnit)}
+            smFontSize="0.8125rem"
+            fontSize="0.75rem"
+            color={theme.palette.primary.light}
+            displayCity={displayCity}
+            displayRegion={displayRegion}
+            displayCountry={displayCountry}
+          />
         </div>
-      )}
-      {developer && <div className={classes.separator} />}
-      {developer && (
-        <div className={classes.userInfo}>
-          <UserInfo user={developer} size="project" />
-        </div>
-      )}
-      {purchaseInfo && <div className={classes.separator} />}
-      {purchaseInfo && (
-        <div className={classes.purchaseInfo}>
-          <span className={classes.units}>{purchaseInfo.units} credits purchased</span>
-          <span onClick={() => setOpen(!open)} className={clsx(classes.viewDetails, classes.details)}>
-            <BreadcrumbIcon direction={open ? 'up' : 'down'} className={classes.icon} /> view details
-          </span>
-          {open && (
-            <div className={classes.purchaseDetails}>
-              <PurchaseDetails title="vintage id" info={purchaseInfo.vintageId.substring(0, 8)} />
-              <PurchaseDetails title="vintage period" info={purchaseInfo.vintagePeriod} />
-              <PurchaseDetails title="credit class" info={formatInfo(purchaseInfo.creditClass)} />
-              <PurchaseDetails title="methodology" info={formatInfo(purchaseInfo.methodology)} />
-              <PurchaseDetails title="program guide" info={formatInfo(purchaseInfo.programGuide)} />
-              <PurchaseDetails title="project type" info={purchaseInfo.projectType} />
-            </div>
-          )}
-        </div>
-      )}
-    </MediaCard>
+        {comingSoon && (
+          <div className={classes.comingSoon}>
+            <span className={classes.comingSoonText}>coming soon</span>
+          </div>
+        )}
+        {developer && <div className={classes.separator} />}
+        {developer && (
+          <div className={classes.userInfo}>
+            <UserInfo user={developer} size="project" />
+          </div>
+        )}
+        {purchaseInfo && <div className={classes.separator} />}
+        {purchaseInfo && (
+          <div className={classes.purchaseInfo}>
+            <span className={classes.units}>{purchaseInfo.units} credits purchased</span>
+            <span onClick={() => setOpen(!open)} className={clsx(classes.viewDetails, classes.details)}>
+              <BreadcrumbIcon direction={open ? 'up' : 'down'} className={classes.icon} /> view details
+            </span>
+            {open && (
+              <div className={classes.purchaseDetails}>
+                <PurchaseDetails title="vintage id" info={purchaseInfo.vintageId.substring(0, 8)} />
+                <PurchaseDetails title="vintage period" info={purchaseInfo.vintagePeriod} />
+                <PurchaseDetails title="credit class" info={formatInfo(purchaseInfo.creditClass)} />
+                <PurchaseDetails title="methodology" info={formatInfo(purchaseInfo.methodology)} />
+                <PurchaseDetails title="program guide" info={formatInfo(purchaseInfo.programGuide)} />
+                <PurchaseDetails title="project type" info={purchaseInfo.projectType} />
+              </div>
+            )}
+          </div>
+        )}
+      </MediaCard>
+    </LazyLoad>
   );
 }

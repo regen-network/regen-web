@@ -6,6 +6,7 @@ import ProjectImpactCard, {
   ProjectImpactCardProps as Impact,
 } from 'web-components/lib/components/cards/ProjectImpactCard';
 import Section from 'web-components/lib/components/section';
+import { getOptimizedImgSrc } from 'web-components/lib/utils/imgSrc';
 
 interface ProjectImpactProps {
   impact: Impact[];
@@ -63,7 +64,7 @@ export default function ProjectImpact({ impact }: ProjectImpactProps): JSX.Eleme
               <ProjectImpactCard
                 name={name}
                 description={description}
-                imgSrc={imgSrc}
+                imgSrc={getOptimizedImgSrc(imgSrc)}
                 monitored={monitored}
               />
             </Grid>

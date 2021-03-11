@@ -5,6 +5,7 @@ import ReactHtmlParser from 'react-html-parser';
 import clsx from 'clsx';
 
 import { Project, ProjectDefault } from '../../mocks';
+import { getOptimizedImgSrc } from 'web-components/lib/utils/imgSrc';
 import { Media } from 'web-components/lib/components/sliders/ProjectMedia';
 import Section from 'web-components/lib/components/section';
 import Title from 'web-components/lib/components/title';
@@ -194,7 +195,7 @@ export default function ProjectTop({ project, projectDefault }: ProjectTopProps)
           </div>
           {project.glanceImgSrc && project.glanceText && (
             <div className={classes.glanceCard}>
-              <GlanceCard imgSrc={project.glanceImgSrc} text={project.glanceText} />
+              <GlanceCard imgSrc={getOptimizedImgSrc(project.glanceImgSrc)} text={project.glanceText} />
             </div>
           )}
           <Title className={classes.story} variant="h2">

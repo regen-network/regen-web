@@ -2,6 +2,8 @@ import React, { useRef, useState, useEffect } from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 import clsx from 'clsx';
 
+import { getOptimizedImgSrc } from '../../utils/imgSrc';
+
 interface ImageProps {
   src: string; // image storage url
   alt?: string;
@@ -11,6 +13,10 @@ interface ImageProps {
   height?: number;
   backgroundImage?: boolean;
   children?: any;
+}
+interface Dimensions {
+  height?: number;
+  width?: number;
 }
 
 const useStyles = makeStyles<Theme>((theme: Theme) => ({
@@ -31,6 +37,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
 /**
  * Use this component if image is stored in S3 (or app's main image store).
  * registry-server will send back an optimized version of the original.
+ * Note: will not optimize SVGs
  */
 const Image: React.FC<ImageProps> = ({
   src = '',
@@ -43,30 +50,28 @@ const Image: React.FC<ImageProps> = ({
 }) => {
   const classes = useStyles({});
   const imgRef = useRef<HTMLDivElement | null>(null);
-  const [width, setWidth] = useState(0);
+  const [dimensions, setDimensions] = useState<Dimensions>({ width: 0 });
   const [optimizedSrc, setOptimizedSrc] = useState('');
   const [serverFailed, setServerFailed] = useState(false);
-  const imageServer = `${process.env.REACT_APP_API_URI}/image/`;
-  const imageStorageBaseUrl =
-    process.env.REACT_APP_IMAGE_STORAGE_BASE_URL || 'https://regen-registry.s3.amazonaws.com/';
 
   // Destructure props and state
   useEffect(() => {
     if (!serverFailed) {
       const clientWidth = imgRef?.current?.clientWidth || 0;
-      setWidth(clientWidth);
+      const clientHeight = imgRef?.current?.clientHeight || 0; //TODO: this is not working
+      setDimensions({ width: clientWidth, height: clientHeight });
     }
   }, [imgRef, serverFailed]);
 
   useEffect(() => {
-    if (width > 0 && !serverFailed) {
-      const serverUrl = src.replace(imageStorageBaseUrl, imageServer);
+    if (dimensions.width && dimensions.width > 0 && !serverFailed) {
+      const serverUrl = getOptimizedImgSrc(src);
 
       // Create an empty query string
       let queryParams = '';
 
       // If width is specified, otherwise use auto-detected width
-      options['w'] = options['w'] || width;
+      options['w'] = options['w'] || dimensions.width;
 
       // Loop through option object and build queryString
       Object.keys(options).map((option, i) => {
@@ -74,7 +79,7 @@ const Image: React.FC<ImageProps> = ({
       });
       setOptimizedSrc(`${serverUrl}${queryParams}`);
     }
-  }, [width, imgRef, imageServer, serverFailed, src, imageStorageBaseUrl, options]);
+  }, [imgRef, serverFailed, src, options, dimensions.width, dimensions]);
 
   const handleError = (): void => {
     setServerFailed(true);
@@ -84,7 +89,7 @@ const Image: React.FC<ImageProps> = ({
   return (
     <figure ref={imgRef} className={clsx(className, classes.figure)}>
       {// If the container width has been set, display the image else null
-      width > 0 && optimizedSrc ? (
+      dimensions.width && dimensions.width > 0 && optimizedSrc ? (
         backgroundImage ? (
           <div
             className={clsx(className, classes.background)}
@@ -93,7 +98,15 @@ const Image: React.FC<ImageProps> = ({
             {children}
           </div>
         ) : (
-          <img {...rest} className={className} src={optimizedSrc} alt={alt} onError={handleError} />
+          <img
+            {...rest}
+            className={className}
+            src={optimizedSrc}
+            alt={alt}
+            onError={handleError}
+            width={dimensions.width}
+            height={dimensions.height} //todo
+          />
         )
       ) : null}
     </figure>

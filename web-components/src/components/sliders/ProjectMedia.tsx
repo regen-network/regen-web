@@ -208,6 +208,7 @@ export default function ProjectMedia({
       </div>
     ),
     customPaging: (i: number) => {
+      //TODO: handle these widths and height, test mobile
       return matches ? (
         <div className={classes.thumbnail}>
           <Image width={60} height={60} src={assets[i].thumbnail || ''} alt={assets[i].thumbnail} />

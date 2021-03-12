@@ -3,7 +3,6 @@ import { makeStyles, Theme, useTheme } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import ReactHtmlParser from 'react-html-parser';
-import LazyLoad from 'react-lazyload';
 
 import ArrowDownIcon from '../icons/ArrowDownIcon';
 import { truncate, Texts } from '../read-more/truncate';
@@ -77,9 +76,7 @@ export default function Action({ name, description, imgSrc }: ActionProps): JSX.
 
   return (
     <Grid container direction="column">
-      <LazyLoad offset={300} once={true}>
-        <img className={classes.image} src={imgSrc} alt={name} />
-      </LazyLoad>
+      <img className={classes.image} src={imgSrc} alt={name} />
       <Typography className={classes.name}>{name}</Typography>
       <Typography className={classes.description}>
         {ReactHtmlParser(desc)}

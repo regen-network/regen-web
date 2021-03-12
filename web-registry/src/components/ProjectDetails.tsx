@@ -390,25 +390,26 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
               >
                 {actionsType.title || projectDefault.landManagementActions.subtitle}
               </Description>
-              <LandManagementActions actions={actionsType.actions} />
-
+              <LazyLoad offset={400}>
+                <LandManagementActions actions={actionsType.actions} />
+              </LazyLoad>
               {/*<div className={`${classes.projectGrid} ${classes.projectActionsGrid}`}>
-                {actionsType.actions.map((action, j) => (
-                  <Grid item xs={12} sm={4} className={classes.projectGridItem} key={`${j}-${action.name}`}>
-                    <Action
-                      name={action.name}
-                      description={action.description}
-                      imgSrc={require(`../assets/${action.imgSrc}`)}
-                    />
-                  </Grid>
-                ))
-              </div>*/}
+                  {actionsType.actions.map((action, j) => (
+                    <Grid item xs={12} sm={4} className={classes.projectGridItem} key={`${j}-${action.name}`}>
+                      <Action
+                        name={action.name}
+                        description={action.description}
+                        imgSrc={require(`../assets/${action.imgSrc}`)}
+                      />
+                    </Grid>
+                  ))
+                </div>*/}
             </div>
           ))}
         </div>
       </div>
 
-      <LazyLoad offset={300}>
+      <LazyLoad offset={400}>
         {geojson && isGISFile ? (
           <Map geojson={geojson} token={process.env.REACT_APP_MAPBOX_TOKEN} />
         ) : (
@@ -427,27 +428,29 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
                   ? project.fieldsOverride.timeline.title
                   : projectDefault.timeline.title}
               </Title>
-              <Timeline
-                txClient={txClient}
-                events={data.projectByHandle.eventsByProjectId.nodes.map(
-                  (node: {
-                    // TODO use generated types from graphql schema
-                    date: string;
-                    summary: string;
-                    description?: string;
-                    creditVintageByEventId?: any;
-                  }) => ({
-                    modalData: buildIssuanceModalData(
-                      data.projectByHandle,
-                      project.documents,
-                      node.creditVintageByEventId,
-                    ),
-                    date: getFormattedDate(node.date, { year: 'numeric', month: 'long', day: 'numeric' }),
-                    summary: node.summary,
-                    description: node.description,
-                  }),
-                )}
-              />
+              <LazyLoad offset={400}>
+                <Timeline
+                  txClient={txClient}
+                  events={data.projectByHandle.eventsByProjectId.nodes.map(
+                    (node: {
+                      // TODO use generated types from graphql schema
+                      date: string;
+                      summary: string;
+                      description?: string;
+                      creditVintageByEventId?: any;
+                    }) => ({
+                      modalData: buildIssuanceModalData(
+                        data.projectByHandle,
+                        project.documents,
+                        node.creditVintageByEventId,
+                      ),
+                      date: getFormattedDate(node.date, { year: 'numeric', month: 'long', day: 'numeric' }),
+                      summary: node.summary,
+                      description: node.description,
+                    }),
+                  )}
+                />
+              </LazyLoad>
             </div>
           </div>
         )}

@@ -169,7 +169,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const ContactPage = ({ location }: { location: object }): JSX.Element => {
+const ContactPage = ({ location }: { location: Location }): JSX.Element => {
   const classes = useStyles();
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up('sm'));

@@ -186,6 +186,7 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
         color={desktopColor}
         borderBottom={location.pathname !== '/' && !headerNoBorderBottomPages.test(location.pathname)}
         pathName={location.pathname}
+        newRouteBadge="/mainnet/"
       />
       <div>
         <main>{children}</main>

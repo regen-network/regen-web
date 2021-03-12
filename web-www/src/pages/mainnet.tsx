@@ -1,8 +1,10 @@
 import React from 'react';
-import { useStaticQuery, graphql, PageProps, StaticQuery } from 'gatsby';
+import { useStaticQuery, graphql, PageProps } from 'gatsby';
 
 import SEO from '../components/seo';
 import TopSection from '../sections/mainnet/TopSection';
+import LaunchInfoSection from '../sections/mainnet/LaunchInfoSection';
+import WhatsNextSection from '../sections/mainnet/WhatsNextSection';
 
 interface Props extends PageProps {}
 
@@ -29,11 +31,13 @@ const Mainnet = ({ location }: Props): JSX.Element => {
     <>
       <SEO
         location={location}
-        description="With the help of our fantastic community and extraordinary team, mainnet is on the horizon!"
+        description="With the help of our fantastic community and extraordinary team, mainnet is on the horizon!" // TODO: What should this text say?
         title="For Buyers"
         imageUrl={data.background.publicURL}
       />
       <TopSection />
+      <LaunchInfoSection />
+      <WhatsNextSection />
     </>
   );
 };

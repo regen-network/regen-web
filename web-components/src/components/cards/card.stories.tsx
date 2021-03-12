@@ -13,6 +13,9 @@ import PurchasedCreditsCard from 'web-components/lib/components/cards/PurchasedC
 import CurrentCreditsIcon from 'web-components/lib/components/icons/CurrentCreditsIcon';
 import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
 import GreenCard from 'web-components/lib/components/cards/GreenCard';
+import GreenTopIconCard from 'web-components/lib/components/cards/GreenTopIconCard';
+
+// import ReactSvg from '../../logo.svg';
 
 export default {
   title: 'Components|Cards',
@@ -145,6 +148,12 @@ export const greenCard = (): JSX.Element => (
   <GreenCard>
     <p>Green card content</p>
   </GreenCard>
+);
+
+export const greenTopIconCard = (): JSX.Element => (
+  <GreenTopIconCard>
+    <p>Green card content</p>
+  </GreenTopIconCard>
 );
 
 export const onBoardingCard = (): JSX.Element => <OnBoardingCard>some content</OnBoardingCard>;

@@ -196,7 +196,7 @@ export default function ProjectTop({ project, projectDefault }: ProjectTopProps)
           </div>
           {project.glanceImgSrc && project.glanceText && (
             <div className={classes.glanceCard}>
-                <GlanceCard imgSrc={getOptimizedImgSrc(project.glanceImgSrc)} text={project.glanceText} />
+              <GlanceCard imgSrc={getOptimizedImgSrc(project.glanceImgSrc)} text={project.glanceText} />
             </div>
           )}
           <Title className={classes.story} variant="h2">

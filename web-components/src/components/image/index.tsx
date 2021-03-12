@@ -36,7 +36,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
 const Image: React.FC<ImageProps> = ({
   src = '',
   alt = '',
-  options = {q: 100},
+  options = { q: 100 },
   className,
   backgroundImage,
   children,
@@ -62,9 +62,9 @@ const Image: React.FC<ImageProps> = ({
 
   useEffect(() => {
     if (!!delay) {
-      setTimeout(() => setReadyToLoad(true), delay)
+      setTimeout(() => setReadyToLoad(true), delay);
     } else {
-      setReadyToLoad(true)
+      setReadyToLoad(true);
     }
   }, [delay]);
 
@@ -93,26 +93,26 @@ const Image: React.FC<ImageProps> = ({
 
   return (
     <figure ref={imgRef} className={clsx(className, classes.figure)}>
-        {// If the container width has been set, display the image else null
-        width > 0 && optimizedSrc && readyToLoad ? (
-          backgroundImage ? (
-            <div
-              className={clsx(className, classes.background)}
-              style={{ backgroundImage: `url(${optimizedSrc}), url(${src})` }}
-            >
-              {children}
-            </div>
-          ) : (
-            <img
-              {...rest}
-              className={className}
-              src={optimizedSrc}
-              alt={alt}
-              onError={handleError}
-              width={width}
-            />
-          )
-        ) : null}
+      {// If the container width has been set, display the image else null
+      width > 0 && optimizedSrc && readyToLoad ? (
+        backgroundImage ? (
+          <div
+            className={clsx(className, classes.background)}
+            style={{ backgroundImage: `url(${optimizedSrc}), url(${src})` }}
+          >
+            {children}
+          </div>
+        ) : (
+          <img
+            {...rest}
+            className={className}
+            src={optimizedSrc}
+            alt={alt}
+            onError={handleError}
+            width={width}
+          />
+        )
+      ) : null}
     </figure>
   );
 };

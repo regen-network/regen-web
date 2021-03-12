@@ -825,13 +825,16 @@ collections:
             name: form
             widget: object
             fields:
-              - label: Types of request
+              - label: "I am a:"
                 name: requestTypes
                 widget: list
                 collapsed: false
                 fields:
                   - {label: "label", name: label, widget: string}
                   - {label: "Email", name: value, widget: string}
+              - label: "Message displayed for farm projects and partners"
+                name: messageForPartners
+                widget: markdown
           - label: location
             name: location
             widget: object

@@ -7,6 +7,7 @@ export default {
   component: ImageItem,
   decorators: [withKnobs],
 };
+
 const titleText: string = 'Verified outcomes';
 const descriptionText: string =
   'Software-based and remote-sensing monitoring keeps costs low and transparency high.';

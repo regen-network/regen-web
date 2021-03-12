@@ -1,11 +1,8 @@
 import React from 'react';
-import { graphql, useStaticQuery, navigate } from 'gatsby';
-import { createStyles, withStyles, makeStyles, Theme, Typography, LinearProgress } from '@material-ui/core';
-import clsx from 'clsx';
+import { graphql, useStaticQuery } from 'gatsby';
+import { makeStyles, Theme, Typography } from '@material-ui/core';
 
 import BackgroundSection from '../../components/BackgroundSection';
-import Section from 'web-components/src/components/section';
-import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
 import { FluidObject } from 'gatsby-image';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -133,9 +130,6 @@ const useActionItemStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-/**
- * TODO: This is very similar to the `ImageItems` component, and they could probably be consolodated but when I first tried it was creating issues so I opted to re-create
- */
 // const InfoItem: React.FC<InfoItem> = p => {
 //   const classes = useActionItemStyles();
 //   return (

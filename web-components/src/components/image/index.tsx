@@ -10,6 +10,7 @@ interface ImageProps {
   height?: number;
   backgroundImage?: boolean;
   children?: any;
+  delay?: number;
 }
 
 const useStyles = makeStyles<Theme>((theme: Theme) => ({
@@ -39,6 +40,7 @@ const Image: React.FC<ImageProps> = ({
   className,
   backgroundImage,
   children,
+  delay,
   ...rest
 }) => {
   const classes = useStyles({});
@@ -46,6 +48,7 @@ const Image: React.FC<ImageProps> = ({
   const [width, setWidth] = useState(0);
   const [optimizedSrc, setOptimizedSrc] = useState('');
   const [serverFailed, setServerFailed] = useState(false);
+  const [readyToLoad, setReadyToLoad] = useState(false);
   const imageServer = `${process.env.REACT_APP_API_URI}/image/`;
   const imageStorageBaseUrl = process.env.REACT_APP_IMAGE_STORAGE_BASE_URL;
 
@@ -56,6 +59,14 @@ const Image: React.FC<ImageProps> = ({
       setWidth(clientWidth);
     }
   }, [imgRef, serverFailed]);
+
+  useEffect(() => {
+    if (!!delay) {
+      setTimeout(() => setReadyToLoad(true), delay)
+    } else {
+      setReadyToLoad(true)
+    }
+  }, [delay]);
 
   useEffect(() => {
     if (width > 0 && !serverFailed && imageStorageBaseUrl) {
@@ -83,7 +94,7 @@ const Image: React.FC<ImageProps> = ({
   return (
     <figure ref={imgRef} className={clsx(className, classes.figure)}>
         {// If the container width has been set, display the image else null
-        width > 0 && optimizedSrc ? (
+        width > 0 && optimizedSrc && readyToLoad ? (
           backgroundImage ? (
             <div
               className={clsx(className, classes.background)}

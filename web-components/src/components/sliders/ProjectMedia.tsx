@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import Slider from 'react-slick';
 import PlayIcon from '../icons/PlayIcon';
 import Image from '../image';
+import LazyLoad from 'react-lazyload';
 
 export interface Media {
   src: string;
@@ -268,7 +269,7 @@ export default function ProjectMedia({
         >
           {assets.map((item, index) => {
             if (item.type === 'image') {
-              return <Image key={index} src={item.src} className={classes.item} alt={item.src} />;
+              return <Image key={index} src={item.src} className={classes.item} alt={item.src} delay={index > 0 ? 1000: 0} />
             } else if (item.type === 'video') {
               return (
                 <video key={index} className={classes.item} controls poster={item.preview}>

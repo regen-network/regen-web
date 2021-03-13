@@ -3136,11 +3136,18 @@ exports[`Storyshots Components|Cards Green Top Icon Card 1`] = `
   }
 >
   <WithStyles(CssBaseline) />
-  <GreenTopIconCard>
-    <p>
-      Green card content
-    </p>
-  </GreenTopIconCard>
+  <GreenTopIconCard
+    description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    imgSrc="./mainnet-validators.svg"
+    linkURL="https://github.com/regen-network"
+    title="Green card 1"
+  />
+  <GreenTopIconCard
+    description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    imgSrc="./mainnet-validators.svg"
+    linkURL="https://github.com/regen-network"
+    title="Green card 2"
+  />
 </ContextProvider>
 `;
 

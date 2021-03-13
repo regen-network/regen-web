@@ -4,6 +4,7 @@ import { makeStyles, Theme, Typography } from '@material-ui/core';
 
 import BackgroundSection from '../../components/BackgroundSection';
 import { FluidObject } from 'gatsby-image';
+import GreenTopIconCard from 'web-components/src/components/cards/GreenTopIconCard';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -27,6 +28,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     maxWidth: theme.spacing(150),
     fontSize: theme.spacing(5),
     margin: theme.spacing(5, 0),
+  },
+  itemWrap: {
+    display: 'flex',
+    flexFlow: 'row wrap',
+    justifyContent: 'center',
   },
 }));
 
@@ -98,52 +104,20 @@ const WhatsNextSection: React.FC = () => {
           {title}
         </Typography>
         <Typography className={classes.description}>{description}</Typography>
+        <div className={classes.itemWrap}>
+          {infoItems.map(({ description, title, gitLink, icon }, i) => (
+            <GreenTopIconCard
+              key={i}
+              description={description}
+              title={title}
+              linkURL={gitLink}
+              imgSrc={icon.publicURL}
+            />
+          ))}
+        </div>
       </div>
     </BackgroundSection>
   );
 };
-
-const useActionItemStyles = makeStyles((theme: Theme) => ({
-  root: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    textAlign: 'center',
-    maxWidth: theme.spacing(47),
-    margin: theme.spacing(4),
-  },
-  img: {
-    minWidth: '100%',
-    maxHeight: theme.spacing(20),
-  },
-  title: {
-    fontSize: theme.spacing(6),
-    margin: theme.spacing(5, 0),
-  },
-  btn: {
-    fontSize: theme.spacing(3),
-    padding: theme.spacing(2, 4),
-    marginTop: theme.spacing(5),
-  },
-  description: {
-    color: theme.palette.info.dark,
-  },
-}));
-
-// const InfoItem: React.FC<InfoItem> = p => {
-//   const classes = useActionItemStyles();
-//   return (
-//     <div className={classes.root}>
-//       <img src={p.icon.publicURL} alt={p.description} className={classes.img} />
-//       <Typography variant="h1" className={classes.title}>
-//         {p.title}
-//       </Typography>
-//       <Typography className={classes.description}>{p.description}</Typography>
-//       <ContainedButton className={classes.btn} onClick={() => (window.location.href = p.gitLink)}>
-//         View on Github
-//       </ContainedButton>
-//     </div>
-//   );
-// };
 
 export default WhatsNextSection;

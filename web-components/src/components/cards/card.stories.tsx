@@ -151,9 +151,20 @@ export const greenCard = (): JSX.Element => (
 );
 
 export const greenTopIconCard = (): JSX.Element => (
-  <GreenTopIconCard>
-    <p>Green card content</p>
-  </GreenTopIconCard>
+  <>
+    <GreenTopIconCard
+      title="Green card 1"
+      description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+      linkURL="https://github.com/regen-network"
+      imgSrc="./mainnet-validators.svg"
+    />
+    <GreenTopIconCard
+      title="Green card 2"
+      description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+      linkURL="https://github.com/regen-network"
+      imgSrc="./mainnet-validators.svg"
+    />
+  </>
 );
 
 export const onBoardingCard = (): JSX.Element => <OnBoardingCard>some content</OnBoardingCard>;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { graphql, useStaticQuery, navigate } from 'gatsby';
+import { graphql, useStaticQuery } from 'gatsby';
 import { createStyles, withStyles, makeStyles, Theme, Typography, LinearProgress } from '@material-ui/core';
 import Img, { FluidObject } from 'gatsby-image';
 import { format } from 'date-fns';
@@ -114,7 +114,7 @@ type ActionItem = {
   title: string;
   description: string;
   linkText: string;
-  linkUrl: string;
+  linkURL: string;
   icon: {
     publicURL: string;
   };
@@ -225,19 +225,25 @@ const useActionItemStyles = makeStyles((theme: Theme) => ({
     flexDirection: 'column',
     alignItems: 'center',
     textAlign: 'center',
-    maxWidth: theme.spacing(47),
+    maxWidth: theme.spacing(70),
     margin: theme.spacing(4),
   },
   img: {
     minWidth: '100%',
-    maxHeight: theme.spacing(20),
+    height: theme.spacing(20),
   },
   title: {
     fontSize: theme.spacing(6),
     margin: theme.spacing(5, 0),
   },
+  btnWrap: {
+    flexGrow: 1,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'flex-end',
+  },
   btn: {
-    fontSize: theme.spacing(3),
+    fontSize: theme.spacing(3.5),
     padding: theme.spacing(2, 4),
     marginTop: theme.spacing(5),
   },
@@ -253,15 +259,16 @@ const ActionItem: React.FC<ActionItem> = p => {
   const classes = useActionItemStyles();
   return (
     <div className={classes.root}>
-      {/* <Img fluid={p.icon.childImageSharp.fluid} alt={p.description} className={classes.img} /> */}
       <img src={p.icon.publicURL} alt={p.description} className={classes.img} />
       <Typography variant="h1" className={classes.title}>
         {p.title}
       </Typography>
       <Typography className={classes.description}>{p.description}</Typography>
-      <ContainedButton className={classes.btn} onClick={() => navigate(p.linkUrl)}>
-        {p.linkText}
-      </ContainedButton>
+      <div className={classes.btnWrap}>
+        <ContainedButton className={classes.btn} href={p.linkURL} target="_blank" rel="noopener noreferrer">
+          {p.linkText}
+        </ContainedButton>
+      </div>
     </div>
   );
 };

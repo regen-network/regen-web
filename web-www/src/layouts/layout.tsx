@@ -7,14 +7,15 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import { graphql, useStaticQuery } from 'gatsby';
 import { useTheme } from '@material-ui/core/styles';
 
 import Header, { HeaderColors, HeaderMenuItem } from 'web-components/lib/components/header';
+import MainnetLaunchBanner from 'web-components/lib/components/header/MainnetLaunchBanner';
 import Footer, { FooterItemProps as FooterItem } from 'web-components/lib/components/footer';
 import CookiesFooter from 'web-components/lib/components/banner/CookiesBanner';
 
 import './layout.css';
-
 interface propTypes {
   children: Array<React.ReactElement>;
   location: Location;
@@ -24,8 +25,23 @@ interface BoolProps {
   [key: string]: boolean;
 }
 
+type QueryData = {
+  text: {
+    launchDate: string;
+  };
+};
+
 const Layout = ({ children, location }: propTypes): JSX.Element => {
   const theme = useTheme();
+  const {
+    text: { launchDate },
+  } = useStaticQuery<QueryData>(graphql`
+    query {
+      text: mainnetYaml {
+        launchDate
+      }
+    }
+  `);
 
   const headerColors: HeaderColors = {
     '/': theme.palette.primary.main,
@@ -179,6 +195,7 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
   ];
   return (
     <>
+      {location.pathname !== '/mainnet/' && <MainnetLaunchBanner launchDate={launchDate} />}
       <Header
         menuItems={menuItems}
         transparent={transparent}
@@ -186,7 +203,6 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
         color={desktopColor}
         borderBottom={location.pathname !== '/' && !headerNoBorderBottomPages.test(location.pathname)}
         pathName={location.pathname}
-        newRouteBadge="/mainnet/"
       />
       <div>
         <main>{children}</main>

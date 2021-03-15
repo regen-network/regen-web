@@ -24,9 +24,12 @@ const StyledLinearProgress = withStyles((theme: Theme) =>
 )(LinearProgress);
 
 const useStyles = makeStyles((theme: Theme) => ({
+  root: {
+    paddingBottom: theme.spacing(7),
+  },
   actionWrap: {
     display: 'flex',
-    margin: theme.spacing(7, 0),
+    marginBottom: theme.spacing(7),
     justifyContent: 'space-evenly',
     flexFlow: 'row wrap',
   },
@@ -179,17 +182,8 @@ const LaunchInfoSection: React.FC = () => {
     }
   `);
   const classes = useStyles();
-  const launchDateObj = new Date(launchDate);
   return (
-    <Section>
-      {launchDateObj > new Date() && (
-        <div className={classes.btnWrap}>
-          <ContainedButton aria-label="Register for mainnet livecast">
-            Register for mainnet livecast
-          </ContainedButton>
-        </div>
-      )}
-
+    <Section className={classes.root}>
       <div className={classes.actionWrap}>
         {card.actionItems.map((item, i) => (
           <ActionItem key={i} {...item} />
@@ -201,7 +195,7 @@ const LaunchInfoSection: React.FC = () => {
         <div className={classes.cardMain}>
           <Typography className={classes.cardTitle}>{card.title}</Typography>
           <Typography className={classes.launchDate}>
-            Release date: {format(launchDateObj, 'MMMM Y')}
+            Release date: {format(new Date(launchDate), 'MMMM Y')}
           </Typography>
           <Typography className={classes.listText}>{card.listTitle}</Typography>
           {card.listItems.map((item, i) => (

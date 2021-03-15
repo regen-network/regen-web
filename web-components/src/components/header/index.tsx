@@ -28,7 +28,6 @@ interface HeaderProps {
   absolute?: boolean;
   color: string;
   menuItems?: HeaderMenuItem[];
-  newRouteBadge?: string;
   borderBottom?: boolean;
   fullWidth?: boolean;
   pathName?: string;
@@ -185,24 +184,6 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     height: '100%',
     lineHeight: theme.spacing(6),
   },
-  newBadge: {
-    '&:before': {
-      content: '"New"',
-      display: 'inline-block',
-      position: 'absolute',
-      top: 0,
-      right: 0,
-      transform: 'translate(-33%, 10%)',
-      color: 'white',
-      fontSize: theme.spacing(2),
-      lineHeight: theme.spacing(3),
-      width: theme.spacing(7),
-      backgroundColor: '#3D7ACF',
-      textAlign: 'center',
-      borderRadius: '33%',
-      zIndex: '-1',
-    },
-  },
 }));
 
 export default function Header({
@@ -210,7 +191,6 @@ export default function Header({
   transparent,
   color,
   menuItems,
-  newRouteBadge,
   borderBottom = true,
   absolute = true,
   fullWidth = false,
@@ -245,12 +225,8 @@ export default function Header({
                     key={index}
                     className={
                       pathName === item.href
-                        ? clsx(
-                            classes.menuItem,
-                            classes.currentMenuItem,
-                            item.href === newRouteBadge && classes.newBadge,
-                          )
-                        : clsx(classes.menuItem, item.href === newRouteBadge && classes.newBadge)
+                        ? clsx(classes.menuItem, classes.currentMenuItem)
+                        : classes.menuItem
                     }
                   >
                     {item.dropdownItems ? (

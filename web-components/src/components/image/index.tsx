@@ -11,7 +11,6 @@ interface ImageProps {
   width?: number;
   height?: number;
   backgroundImage?: boolean;
-  children?: any;
   delay?: number;
   imageStorageBaseUrl?: string;
   apiServerUrl?: string;
@@ -68,9 +67,12 @@ const Image: React.FC<ImageProps> = ({
 
   useEffect(() => {
     if (!!delay) {
-      setTimeout(() => setReadyToLoad(true), delay);
+      let delayTimer = setTimeout(() => setReadyToLoad(true), delay);
+      return () => {
+        clearTimeout(delayTimer);
+      };
     } else {
-      setReadyToLoad(true);
+      return setReadyToLoad(true);
     }
   }, [delay]);
 

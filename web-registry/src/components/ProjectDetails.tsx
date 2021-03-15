@@ -1,11 +1,10 @@
-import React, { useState, useEffect, lazy } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import * as togeojson from '@mapbox/togeojson';
 import { useLocation } from 'react-router-dom';
 import { loader } from 'graphql.macro';
 import { useQuery } from '@apollo/client';
 import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
-import LazyLoad from 'react-lazyload';
 
 import { setPageView } from '../lib/ga';
 import { useLedger, ContextType } from '../ledger';
@@ -313,12 +312,8 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
         gridView
         mobileHeight={theme.spacing(78.75)}
       />
-      <LazyLoad offset={100}>
-        <ProjectTop project={project} projectDefault={projectDefault} />
-      </LazyLoad>
-      <LazyLoad offset={200}>
-        <ProjectImpact impact={project.impact} />
-      </LazyLoad>
+      <ProjectTop project={project} projectDefault={projectDefault} />
+      <ProjectImpact impact={project.impact} />
 
       {/* {protectedSpecies.length > 0 && (
         <div
@@ -394,9 +389,7 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
               >
                 {actionsType.title || projectDefault.landManagementActions.subtitle}
               </Description>
-              <LazyLoad offset={400}>
-                <LandManagementActions actions={actionsType.actions} />
-              </LazyLoad>
+              <LandManagementActions actions={actionsType.actions} />
               {/*<div className={`${classes.projectGrid} ${classes.projectActionsGrid}`}>
                   {actionsType.actions.map((action, j) => (
                     <Grid item xs={12} sm={4} className={classes.projectGridItem} key={`${j}-${action.name}`}>
@@ -413,13 +406,11 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
         </div>
       </div>
 
-      <LazyLoad offset={400}>
-        {geojson && isGISFile ? (
-          <Map geojson={geojson} token={process.env.REACT_APP_MAPBOX_TOKEN} />
-        ) : (
-          <img className={classes.map} alt={project.name} src={mapFile} />
-        )}
-      </LazyLoad>
+      {geojson && isGISFile ? (
+        <Map geojson={geojson} token={process.env.REACT_APP_MAPBOX_TOKEN} />
+      ) : (
+        <img className={classes.map} alt={project.name} src={mapFile} />
+      )}
 
       {data &&
         data.projectByHandle &&
@@ -432,38 +423,32 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
                   ? project.fieldsOverride.timeline.title
                   : projectDefault.timeline.title}
               </Title>
-              <LazyLoad offset={400}>
-                <Timeline
-                  txClient={txClient}
-                  events={data.projectByHandle.eventsByProjectId.nodes.map(
-                    (node: {
-                      // TODO use generated types from graphql schema
-                      date: string;
-                      summary: string;
-                      description?: string;
-                      creditVintageByEventId?: any;
-                    }) => ({
-                      modalData: buildIssuanceModalData(
-                        data.projectByHandle,
-                        project.documents,
-                        node.creditVintageByEventId,
-                      ),
-                      date: getFormattedDate(node.date, { year: 'numeric', month: 'long', day: 'numeric' }),
-                      summary: node.summary,
-                      description: node.description,
-                    }),
-                  )}
-                />
-              </LazyLoad>
+              <Timeline
+                txClient={txClient}
+                events={data.projectByHandle.eventsByProjectId.nodes.map(
+                  (node: {
+                    // TODO use generated types from graphql schema
+                    date: string;
+                    summary: string;
+                    description?: string;
+                    creditVintageByEventId?: any;
+                  }) => ({
+                    modalData: buildIssuanceModalData(
+                      data.projectByHandle,
+                      project.documents,
+                      node.creditVintageByEventId,
+                    ),
+                    date: getFormattedDate(node.date, { year: 'numeric', month: 'long', day: 'numeric' }),
+                    summary: node.summary,
+                    description: node.description,
+                  }),
+                )}
+              />
             </div>
           </div>
         )}
 
-      {otherProjects.length > 0 && (
-        <LazyLoad offset={300}>
-          <MoreProjects projects={otherProjects} />
-        </LazyLoad>
-      )}
+      {otherProjects.length > 0 && <MoreProjects projects={otherProjects} />}
 
       {project.creditPrice && <BuyFooter onClick={handleOpen} creditPrice={project.creditPrice} />}
       {project.creditPrice && project.stripePrice && (

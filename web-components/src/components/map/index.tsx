@@ -16,9 +16,10 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import PinIcon from '../icons/PinIcon';
 import PointerIcon from '../icons/PointerIcon';
 import MapCard from '../cards/MapCard';
-import MapCards from '../sliders/MapCards';
+// import MapCards from '../sliders/MapCards';
 import OutlinedButton from '../buttons/OutlinedButton';
 import ZoomIcon from '../icons/ZoomIcon';
+import LazyLoad from 'react-lazyload';
 
 interface GeoJson {
   features: any[];
@@ -219,97 +220,99 @@ export default function Map({ geojson, token }: MapProps): JSX.Element {
 
   return (
     <div className={classes.root}>
-      <ReactMapGL
-        {...viewPort}
-        scrollZoom={false}
-        onLoad={onLoad}
-        width="100%"
-        height="100%"
-        mapStyle="mapbox://styles/mapbox/satellite-streets-v10"
-        onViewportChange={v => setViewPort(v)}
-        mapboxApiAccessToken={token}
-        onClick={onMapClick}
-        // interactiveLayerIds={interactiveLayerIds} unused for now
-        attributionControl={false}
-      >
-        {viewPort.zoom < boundary.zoom - 1 && (
-          <Marker latitude={boundary.latitude} longitude={boundary.longitude}>
-            <PinIcon fontSize="large" size={35} />
-          </Marker>
-        )}
-        {geojson.features &&
-          geojson.features.map((feature, index) => {
-            return (
-              <div key={index}>
-                {feature.geometry.type !== 'Point' &&
-                  !feature.properties.boundary &&
-                  viewPort.zoom >= boundary.zoom - 1 && (
-                    // (matches || (!matches && feature.id === shownLayer)) && (
-                    <Source type="geojson" data={feature}>
-                      <Layer
-                        id={feature.id || index.toString()}
-                        type="fill"
-                        paint={{
-                          'fill-opacity': parseFloat(feature.properties['fill-opacity']) || 0,
-                          'fill-color': feature.properties['fill'] || '#000000',
-                        }}
-                      />
-                      <Layer
-                        type="line"
-                        paint={{
-                          // 'line-color': feature.properties['stroke'] || '#000000',
-                          'line-color': theme.palette.primary.main,
-                          'line-width': 2,
-                        }}
-                      />
-                    </Source>
-                  )}
-                {feature.geometry.type === 'Polygon' &&
-                  feature.properties.boundary &&
-                  viewPort.zoom >= boundary.zoom - 1 && (
-                    <Source type="geojson" data={feature}>
-                      <Layer
-                        id={feature.id || index.toString()}
-                        type="line"
-                        paint={{
-                          'line-color': theme.palette.primary.main,
-                          'line-width': 2,
-                          'line-dasharray': [2, 1.5],
-                        }}
-                      />
-                    </Source>
-                  )}
-                {feature.geometry.type === 'Point' && (matches || (!matches && feature.id === shownLayer)) && (
-                  <Marker
-                    latitude={feature.geometry.coordinates[1]}
-                    longitude={feature.geometry.coordinates[0]}
-                  >
-                    <PinIcon
-                      fontSize="large"
-                      size={35}
-                      onClick={() => onMarkerClick(feature, index.toString())}
-                    />
-                  </Marker>
-                )}
-              </div>
-            );
-          })}
-        {matches && renderPopup()}
-        <div className={classes.scaleControl}>
-          <NavigationControl showCompass={false} />
-        </div>
-      </ReactMapGL>
-      <div className={classes.zoomButton}>
-        <OutlinedButton
-          onClick={() =>
-            setViewPort({ longitude: boundary.longitude, latitude: boundary.latitude, zoom: boundary.zoom })
-          }
-          startIcon={<ZoomIcon />}
+      <LazyLoad offset={300}>
+        <ReactMapGL
+          {...viewPort}
+          scrollZoom={false}
+          onLoad={onLoad}
+          width="100%"
+          height="100%"
+          mapStyle="mapbox://styles/mapbox/satellite-streets-v10"
+          onViewportChange={v => setViewPort(v)}
+          mapboxApiAccessToken={token}
+          onClick={onMapClick}
+          // interactiveLayerIds={interactiveLayerIds} unused for now
+          attributionControl={false}
         >
-          zoom to project area
-        </OutlinedButton>
-      </div>
-      {/* {!matches && renderSlider()} */}
+          {viewPort.zoom < boundary.zoom - 1 && (
+            <Marker latitude={boundary.latitude} longitude={boundary.longitude}>
+              <PinIcon fontSize="large" size={35} />
+            </Marker>
+          )}
+          {geojson.features &&
+            geojson.features.map((feature, index) => {
+              return (
+                <div key={index}>
+                  {feature.geometry.type !== 'Point' &&
+                    !feature.properties.boundary &&
+                    viewPort.zoom >= boundary.zoom - 1 && (
+                      // (matches || (!matches && feature.id === shownLayer)) && (
+                      <Source type="geojson" data={feature}>
+                        <Layer
+                          id={feature.id || index.toString()}
+                          type="fill"
+                          paint={{
+                            'fill-opacity': parseFloat(feature.properties['fill-opacity']) || 0,
+                            'fill-color': feature.properties['fill'] || '#000000',
+                          }}
+                        />
+                        <Layer
+                          type="line"
+                          paint={{
+                            // 'line-color': feature.properties['stroke'] || '#000000',
+                            'line-color': theme.palette.primary.main,
+                            'line-width': 2,
+                          }}
+                        />
+                      </Source>
+                    )}
+                  {feature.geometry.type === 'Polygon' &&
+                    feature.properties.boundary &&
+                    viewPort.zoom >= boundary.zoom - 1 && (
+                      <Source type="geojson" data={feature}>
+                        <Layer
+                          id={feature.id || index.toString()}
+                          type="line"
+                          paint={{
+                            'line-color': theme.palette.primary.main,
+                            'line-width': 2,
+                            'line-dasharray': [2, 1.5],
+                          }}
+                        />
+                      </Source>
+                    )}
+                  {feature.geometry.type === 'Point' && (matches || (!matches && feature.id === shownLayer)) && (
+                    <Marker
+                      latitude={feature.geometry.coordinates[1]}
+                      longitude={feature.geometry.coordinates[0]}
+                    >
+                      <PinIcon
+                        fontSize="large"
+                        size={35}
+                        onClick={() => onMarkerClick(feature, index.toString())}
+                      />
+                    </Marker>
+                  )}
+                </div>
+              );
+            })}
+          {matches && renderPopup()}
+          <div className={classes.scaleControl}>
+            <NavigationControl showCompass={false} />
+          </div>
+        </ReactMapGL>
+        <div className={classes.zoomButton}>
+          <OutlinedButton
+            onClick={() =>
+              setViewPort({ longitude: boundary.longitude, latitude: boundary.latitude, zoom: boundary.zoom })
+            }
+            startIcon={<ZoomIcon />}
+          >
+            zoom to project area
+          </OutlinedButton>
+        </div>
+        {/* {!matches && renderSlider()} */}
+      </LazyLoad>
     </div>
   );
 }

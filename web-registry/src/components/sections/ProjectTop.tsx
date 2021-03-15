@@ -197,7 +197,7 @@ export default function ProjectTop({ project, projectDefault }: ProjectTopProps)
             />
           </div>
           {project.glanceImgSrc && project.glanceText && (
-            <LazyLoad offset={50} once={true}>
+            <LazyLoad offset={50} once>
               <div className={classes.glanceCard}>
                 <GlanceCard
                   imgSrc={getOptimizedImageSrc(project.glanceImgSrc, imageStorageBaseUrl, apiServerUrl)}
@@ -214,7 +214,7 @@ export default function ProjectTop({ project, projectDefault }: ProjectTopProps)
           <Description className={classes.description}>
             {ReactHtmlParser(project.shortDescription)}
           </Description>
-          <LazyLoad offset={50} once={true}>
+          <LazyLoad offset={50}>
             {videos.length > 0 &&
               (/https:\/\/www.youtube.com\/embed\/[a-zA-Z0-9_.-]+/.test(videos[0].src) ? (
                 <iframe

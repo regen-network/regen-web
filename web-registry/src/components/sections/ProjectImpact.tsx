@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
+import LazyLoad from 'react-lazyload';
 
 import ProjectImpactCard, {
   ProjectImpactCardProps as Impact,
@@ -60,18 +61,20 @@ export default function ProjectImpact({ impact }: ProjectImpactProps): JSX.Eleme
   return (
     <div className={classes.background}>
       <Section className={classes.section} title="Impact" titleVariant="h2" titleClassName={classes.title}>
-        <Grid container>
-          {impact.map(({ name, description, imgSrc, monitored }: Impact, index: number) => (
-            <Grid item key={index} xs={12} sm={6} className={classes.item}>
-              <ProjectImpactCard
-                name={name}
-                description={description}
-                imgSrc={getOptimizedImageSrc(imgSrc, imageStorageBaseUrl, apiServerUrl)}
-                monitored={monitored}
-              />
-            </Grid>
-          ))}
-        </Grid>
+        <LazyLoad offset={300}>
+          <Grid container>
+            {impact.map(({ name, description, imgSrc, monitored }: Impact, index: number) => (
+              <Grid item key={index} xs={12} sm={6} className={classes.item}>
+                <ProjectImpactCard
+                  name={name}
+                  description={description}
+                  imgSrc={getOptimizedImageSrc(imgSrc, imageStorageBaseUrl, apiServerUrl)}
+                  monitored={monitored}
+                />
+              </Grid>
+            ))}
+          </Grid>
+        </LazyLoad>
       </Section>
     </div>
   );

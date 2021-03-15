@@ -114,7 +114,7 @@ export default function MediaCard({
   const optimizedImage = (): JSX.Element => (
     <Image
       className={clsx(imageClassName, classes.image)}
-      backgroundImage={true}
+      backgroundImage
       src={imgSrc}
       imageStorageBaseUrl={imageStorageBaseUrl}
       apiServerUrl={apiServerUrl}

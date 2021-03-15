@@ -21586,7 +21586,7 @@ exports[`Storyshots Components|Image Grid Image Grid 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Image Image Default Quality 80 1`] = `
+exports[`Storyshots Components|Image Image Default Quality 100 1`] = `
 <ContextProvider
   value={
     Object {
@@ -21936,9 +21936,11 @@ exports[`Storyshots Components|Image Image Default Quality 80 1`] = `
   >
     <Image
       alt="Wilmot"
+      apiServerUrl="https://regen-registry-server-staging.herokuapp.com"
+      imageStorageBaseUrl="https://regen-registry.s3.amazonaws.com"
       options={
         Object {
-          "q": 80,
+          "q": 100,
         }
       }
       src="https://regen-registry.s3.amazonaws.com/projects/wilmot/image1.png"

@@ -3,6 +3,7 @@ import { makeStyles, Theme } from '@material-ui/core';
 import clsx from 'clsx';
 
 import { getOptimizedImageSrc } from '../../utils/imgSrc';
+
 interface ImageProps {
   src: string; // unoptimized source url
   alt?: string;

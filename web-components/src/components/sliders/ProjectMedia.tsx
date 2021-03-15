@@ -168,12 +168,12 @@ export default function ProjectMedia({
   xsBorderRadius = false,
   gridView = false,
   mobileHeight,
+  imageStorageBaseUrl,
+  apiServerUrl,
 }: ProjectMediaProps): JSX.Element {
   const classes = useStyles({ mobileHeight, xsBorderRadius });
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up('sm'));
-  const imageStorageBaseUrl = process.env.REACT_APP_IMAGE_STORAGE_BASE_URL;
-  const apiServerUrl = process.env.REACT_APP_API_URI;
 
   let thumbnailsWrapper: any = useRef(null);
   const [thumbnailsWrapperWidth, setThumbnailsWrapperWidth] = useState(0);

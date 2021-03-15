@@ -232,6 +232,8 @@ const PROJECT_BY_HANDLE = loader('../graphql/ProjectByHandle.graphql');
 
 export default function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JSX.Element {
   const { api }: ContextType = useLedger();
+  const imageStorageBaseUrl = process.env.REACT_APP_IMAGE_STORAGE_BASE_URL;
+  const apiServerUrl = process.env.REACT_APP_API_URI;
   let txClient: ServiceClientImpl | undefined;
   if (api) {
     txClient = new ServiceClientImpl(api.connection.queryConnection);
@@ -311,6 +313,8 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
         assets={project.media.filter(item => item.type === 'image')}
         gridView
         mobileHeight={theme.spacing(78.75)}
+        imageStorageBaseUrl={imageStorageBaseUrl}
+        apiServerUrl={apiServerUrl}
       />
       <ProjectTop project={project} projectDefault={projectDefault} />
       <ProjectImpact impact={project.impact} />

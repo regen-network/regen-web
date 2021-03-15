@@ -6,7 +6,6 @@ import clsx from 'clsx';
 import LazyLoad from 'react-lazyload';
 
 import { Project, ProjectDefault } from '../../mocks';
-import { getOptimizedImageSrc } from 'web-components/lib/utils/imgSrc';
 import { Media } from 'web-components/lib/components/sliders/ProjectMedia';
 import Section from 'web-components/lib/components/section';
 import Title from 'web-components/lib/components/title';
@@ -200,8 +199,10 @@ export default function ProjectTop({ project, projectDefault }: ProjectTopProps)
             <LazyLoad offset={50} once>
               <div className={classes.glanceCard}>
                 <GlanceCard
-                  imgSrc={getOptimizedImageSrc(project.glanceImgSrc, imageStorageBaseUrl, apiServerUrl)}
+                  imgSrc={project.glanceImgSrc}
                   text={project.glanceText}
+                  imageStorageBaseUrl={imageStorageBaseUrl}
+                  apiServerUrl={apiServerUrl}
                 />
               </div>
             </LazyLoad>

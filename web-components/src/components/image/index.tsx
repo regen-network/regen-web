@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 import clsx from 'clsx';
 
-import { getOptimizedImageSrc } from '../../utils/imgSrc';
+import { getOptimizedImageSrc } from '../../utils/optimizedImageSrc';
 
 interface ImageProps {
   src: string; // unoptimized source url

@@ -7,6 +7,7 @@ import LaunchInfoSection from '../sections/mainnet/LaunchInfoSection';
 import WhatsNextSection from '../sections/mainnet/WhatsNextSection';
 import FixedFooter from 'web-components/lib/components/fixed-footer';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
+import MediaSection from '../sections/mainnet/MediaSection';
 
 interface Props extends PageProps {}
 
@@ -51,6 +52,7 @@ const Mainnet = ({ location }: Props): JSX.Element => {
       <TopSection />
       <LaunchInfoSection />
       <WhatsNextSection />
+      <MediaSection />
       {new Date() < new Date(launchDate) && (
         <FixedFooter justify="flex-end">
           <ContainedButton href={livecastLink} target="_blank" rel="noopener noreferrer">

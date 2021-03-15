@@ -15,6 +15,7 @@ export interface ResponsiveSliderProps {
   arrows?: boolean;
   slidesToShow?: number;
   title?: string;
+  renderTitle?: () => JSX.Element;
   className?: string;
   padding?: number;
   itemWidth?: string;
@@ -122,6 +123,7 @@ export default function ResponsiveSlider({
   slidesToShow,
   arrows = false,
   title,
+  renderTitle,
   className,
   padding,
   itemWidth,
@@ -175,13 +177,15 @@ export default function ResponsiveSlider({
   return (
     <div className={clsx(classes.root, className)}>
       <Grid container wrap="nowrap" alignItems="center">
-        {title && (
+        {renderTitle ? (
+          renderTitle()
+        ) : title ? (
           <Grid xs={12} sm={8} item>
             <Title variant="h6" className={classes.title}>
               {title}
             </Title>
           </Grid>
-        )}
+        ) : null}
         {items.length > 1 && arrows && desktop && (
           <Grid xs={12} sm={4} container item justify="flex-end" className={classes.buttons}>
             <PrevNextButton direction="prev" onClick={slickPrev} />

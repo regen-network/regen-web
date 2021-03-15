@@ -9,9 +9,11 @@ export default {
 };
 
 const imageSrc = 'https://regen-registry.s3.amazonaws.com/projects/wilmot/image1.png';
+const imageStorageBaseUrl = 'https://regen-registry.s3.amazonaws.com';
+const apiServerUrl = 'https://regen-registry-server-staging.herokuapp.com';
 
 const label = 'Image Quality';
-const defaultValue = 80;
+const defaultValue = 100;
 const options = {
   range: true,
   min: 1,
@@ -19,12 +21,18 @@ const options = {
   step: 1,
 };
 
-export const imageDefaultQuality80 = (): JSX.Element => {
+export const imageDefaultQuality100 = (): JSX.Element => {
   const value = number(label, defaultValue, options);
 
   return (
     <div style={{ width: 521, height: 486 }}>
-      <Image src={imageSrc} alt="Wilmot" options={{ q: value }} />
+      <Image
+        src={imageSrc}
+        alt="Wilmot"
+        options={{ q: value }}
+        imageStorageBaseUrl={imageStorageBaseUrl}
+        apiServerUrl={apiServerUrl}
+      />
     </div>
   );
 };

@@ -26,6 +26,8 @@ export interface MediaCardProps {
   backgroundGradient?: boolean;
   imageClassName?: string;
   titleOverwrite?: boolean;
+  imageStorageBaseUrl?: string;
+  apiServerUrl?: string;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -104,11 +106,19 @@ export default function MediaCard({
   backgroundGradient = true,
   imageClassName,
   titleOverwrite = true,
+  imageStorageBaseUrl,
+  apiServerUrl,
 }: MediaCardProps): JSX.Element {
   const classes = useStyles({});
 
   const optimizedImage = (): JSX.Element => (
-    <Image backgroundImage src={imgSrc} className={clsx(imageClassName, classes.image)}>
+    <Image
+      className={clsx(imageClassName, classes.image)}
+      backgroundImage={true}
+      src={imgSrc}
+      imageStorageBaseUrl={imageStorageBaseUrl}
+      apiServerUrl={apiServerUrl}
+    >
       <>
         {backgroundGradient && <div className={classes.backgroundGradient} />}
         {tag && <div className={classes.tag}>{tag}</div>}

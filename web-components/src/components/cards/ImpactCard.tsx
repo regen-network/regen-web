@@ -2,7 +2,6 @@ import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 // import { useTheme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import LazyLoad from 'react-lazyload';
 
 import Card from './Card';
 // import VerifiedIcon from '../icons/VerifiedIcon';
@@ -122,13 +121,12 @@ export default function ImpactCard({
   // const theme = useTheme();
   return (
     <Card>
-      <LazyLoad offset={300} once={true}>
-        <div className={classes.background}>
-          <div className={classes.backgroundGradient} />
-          <div className={classes.text}>
-            <Typography className={classes.name}>{name}</Typography>
-            <Typography className={classes.description}>{description}</Typography>
-            {/*monitored && (
+      <div className={classes.background}>
+        <div className={classes.backgroundGradient} />
+        <div className={classes.text}>
+          <Typography className={classes.name}>{name}</Typography>
+          <Typography className={classes.description}>{description}</Typography>
+          {/*monitored && (
               <span className={classes.monitored}>
                 <span className={classes.monitoredIcon}>
                   <VerifiedIcon color={theme.palette.secondary.main} />
@@ -136,9 +134,8 @@ export default function ImpactCard({
                 verified and tracked on the regen ledger
               </span>
             )*/}
-          </div>
         </div>
-      </LazyLoad>
+      </div>
     </Card>
   );
 }

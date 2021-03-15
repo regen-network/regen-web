@@ -37,6 +37,9 @@ const useStyles = makeStyles((theme: typeof Theme) => ({
 
 const MoreProjects = ({ projects }: MoreProjectsProps): JSX.Element => {
   const classes = useStyles();
+  const imageStorageBaseUrl = process.env.REACT_APP_IMAGE_STORAGE_BASE_URL;
+  const apiServerUrl = process.env.REACT_APP_API_URI;
+
   return (
     <div className={classes.background}>
       <Section title="More Projects">
@@ -47,6 +50,8 @@ const MoreProjects = ({ projects }: MoreProjectsProps): JSX.Element => {
                 <ProjectCard
                   name={project.name}
                   imgSrc={project.image}
+                  imageStorageBaseUrl={imageStorageBaseUrl}
+                  apiServerUrl={apiServerUrl}
                   place={project.place}
                   area={project.area}
                   areaUnit={project.areaUnit}

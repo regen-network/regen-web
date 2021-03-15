@@ -172,6 +172,8 @@ export default function ProjectMedia({
   const classes = useStyles({ mobileHeight, xsBorderRadius });
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up('sm'));
+  const imageStorageBaseUrl = process.env.REACT_APP_IMAGE_STORAGE_BASE_URL;
+  const apiServerUrl = process.env.REACT_APP_API_URI;
 
   let thumbnailsWrapper: any = useRef(null);
   const [thumbnailsWrapperWidth, setThumbnailsWrapperWidth] = useState(0);
@@ -208,10 +210,16 @@ export default function ProjectMedia({
       </div>
     ),
     customPaging: (i: number) => {
-      //TODO: handle these widths and height, test mobile
       return matches ? (
         <div className={classes.thumbnail}>
-          <Image width={60} height={60} src={assets[i].thumbnail || ''} alt={assets[i].thumbnail} />
+          <Image
+            width={60}
+            height={60}
+            src={assets[i].thumbnail || ''}
+            alt={assets[i].thumbnail}
+            imageStorageBaseUrl={imageStorageBaseUrl}
+            apiServerUrl={apiServerUrl}
+          />
           {assets[i].type === 'video' && (
             <div className={classes.play}>
               <PlayIcon width="10.85px" height="10.85px" />
@@ -229,18 +237,42 @@ export default function ProjectMedia({
       {matches && gridView && assets.length >= 4 ? (
         <Grid container className={classes.grid}>
           <Grid item className={classes.sideGrid}>
-            <Image className={classes.image} src={assets[0].src} alt={assets[0].src} />
+            <Image
+              className={classes.image}
+              src={assets[0].src}
+              alt={assets[0].src}
+              imageStorageBaseUrl={imageStorageBaseUrl}
+              apiServerUrl={apiServerUrl}
+            />
           </Grid>
           <Grid item className={classes.centreGrid}>
             <div className={classes.imageContainer}>
-              <Image className={classes.image} src={assets[1].src} alt={assets[1].src} />
+              <Image
+                className={classes.image}
+                src={assets[1].src}
+                alt={assets[1].src}
+                imageStorageBaseUrl={imageStorageBaseUrl}
+                apiServerUrl={apiServerUrl}
+              />
             </div>
             <div className={classes.imageContainer}>
-              <Image className={classes.image} src={assets[2].src} alt={assets[2].src} />
+              <Image
+                className={classes.image}
+                src={assets[2].src}
+                alt={assets[2].src}
+                imageStorageBaseUrl={imageStorageBaseUrl}
+                apiServerUrl={apiServerUrl}
+              />
             </div>
           </Grid>
           <Grid item className={classes.sideGrid}>
-            <Image className={classes.image} src={assets[3].src} alt={assets[3].src} />
+            <Image
+              className={classes.image}
+              src={assets[3].src}
+              alt={assets[3].src}
+              imageStorageBaseUrl={imageStorageBaseUrl}
+              apiServerUrl={apiServerUrl}
+            />
           </Grid>
         </Grid>
       ) : (
@@ -275,6 +307,8 @@ export default function ProjectMedia({
                   className={classes.item}
                   alt={item.src}
                   delay={index > 0 ? 1000 : 0}
+                  imageStorageBaseUrl={imageStorageBaseUrl}
+                  apiServerUrl={apiServerUrl}
                 />
               );
             } else if (item.type === 'video') {

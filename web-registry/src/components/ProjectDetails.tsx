@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy } from 'react';
 import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import * as togeojson from '@mapbox/togeojson';
 import { useLocation } from 'react-router-dom';
@@ -313,8 +313,12 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
         gridView
         mobileHeight={theme.spacing(78.75)}
       />
-      <ProjectTop project={project} projectDefault={projectDefault} />
-      <ProjectImpact impact={project.impact} />
+      <LazyLoad offset={100}>
+        <ProjectTop project={project} projectDefault={projectDefault} />
+      </LazyLoad>
+      <LazyLoad offset={200}>
+        <ProjectImpact impact={project.impact} />
+      </LazyLoad>
 
       {/* {protectedSpecies.length > 0 && (
         <div
@@ -455,7 +459,11 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
           </div>
         )}
 
-      {otherProjects.length > 0 && <MoreProjects projects={otherProjects} />}
+      {otherProjects.length > 0 && (
+        <LazyLoad offset={300}>
+          <MoreProjects projects={otherProjects} />
+        </LazyLoad>
+      )}
 
       {project.creditPrice && <BuyFooter onClick={handleOpen} creditPrice={project.creditPrice} />}
       {project.creditPrice && project.stripePrice && (

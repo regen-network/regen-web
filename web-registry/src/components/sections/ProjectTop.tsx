@@ -6,7 +6,7 @@ import clsx from 'clsx';
 import LazyLoad from 'react-lazyload';
 
 import { Project, ProjectDefault } from '../../mocks';
-import { getOptimizedImgSrc } from 'web-components/lib/utils/imgSrc';
+import { getOptimizedImageSrc } from 'web-components/lib/utils/imgSrc';
 import { Media } from 'web-components/lib/components/sliders/ProjectMedia';
 import Section from 'web-components/lib/components/section';
 import Title from 'web-components/lib/components/title';
@@ -180,6 +180,8 @@ export default function ProjectTop({ project, projectDefault }: ProjectTopProps)
   const classes = useStyles();
 
   const videos: Media | Media[] | undefined = project.media.filter(item => item.type === 'video');
+  const imageStorageBaseUrl = process.env.REACT_APP_IMAGE_STORAGE_BASE_URL;
+  const apiServerUrl = process.env.REACT_APP_API_URI;
 
   return (
     <Section className={classes.section}>
@@ -195,9 +197,14 @@ export default function ProjectTop({ project, projectDefault }: ProjectTopProps)
             />
           </div>
           {project.glanceImgSrc && project.glanceText && (
-            <div className={classes.glanceCard}>
-              <GlanceCard imgSrc={getOptimizedImgSrc(project.glanceImgSrc)} text={project.glanceText} />
-            </div>
+            <LazyLoad offset={50} once={true}>
+              <div className={classes.glanceCard}>
+                <GlanceCard
+                  imgSrc={getOptimizedImageSrc(project.glanceImgSrc, imageStorageBaseUrl, apiServerUrl)}
+                  text={project.glanceText}
+                />
+              </div>
+            </LazyLoad>
           )}
           <Title className={classes.story} variant="h2">
             {project.fieldsOverride && project.fieldsOverride.story

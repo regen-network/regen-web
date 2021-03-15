@@ -1,8 +1,10 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 import clsx from 'clsx';
+
+import { getOptimizedImageSrc } from '../../utils/imgSrc';
 interface ImageProps {
-  src: string; // image storage url
+  src: string; // unoptimized source url
   alt?: string;
   options?: any;
   className?: string;
@@ -11,6 +13,8 @@ interface ImageProps {
   backgroundImage?: boolean;
   children?: any;
   delay?: number;
+  imageStorageBaseUrl?: string;
+  apiServerUrl?: string;
 }
 
 const useStyles = makeStyles<Theme>((theme: Theme) => ({
@@ -31,16 +35,20 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
 /**
  * Use this component if image is stored in S3 (or app's main image store).
  * registry-server will send back an optimized version of the original.
+ * To get an optimized image, you must include imageStorageBaseUrl and apiServerUrl.
  * Note: not compatible with SVGs
  */
 const Image: React.FC<ImageProps> = ({
-  src = '',
+  src,
   alt = '',
   options = { q: 100 },
   className,
   backgroundImage,
   children,
   delay,
+  imageStorageBaseUrl,
+  apiServerUrl,
+  height,
   ...rest
 }) => {
   const classes = useStyles({});
@@ -49,8 +57,6 @@ const Image: React.FC<ImageProps> = ({
   const [optimizedSrc, setOptimizedSrc] = useState('');
   const [serverFailed, setServerFailed] = useState(false);
   const [readyToLoad, setReadyToLoad] = useState(false);
-  const imageServer = `${process.env.REACT_APP_API_URI}/image/`;
-  const imageStorageBaseUrl = process.env.REACT_APP_IMAGE_STORAGE_BASE_URL;
 
   // Destructure props and state
   useEffect(() => {
@@ -69,8 +75,8 @@ const Image: React.FC<ImageProps> = ({
   }, [delay]);
 
   useEffect(() => {
-    if (width > 0 && !serverFailed && imageStorageBaseUrl) {
-      const serverUrl = src.replace(imageStorageBaseUrl, imageServer);
+    if (width > 0 && !serverFailed) {
+      const serverUrl = getOptimizedImageSrc(src, imageStorageBaseUrl, apiServerUrl);
 
       // Create an empty query string
       let queryParams = '';
@@ -84,7 +90,7 @@ const Image: React.FC<ImageProps> = ({
       });
       setOptimizedSrc(`${serverUrl}${queryParams}`);
     }
-  }, [imgRef, imageServer, serverFailed, src, imageStorageBaseUrl, options, width]);
+  }, [imgRef, serverFailed, src, imageStorageBaseUrl, options, width, apiServerUrl]);
 
   const handleError = (): void => {
     setServerFailed(true);
@@ -110,6 +116,7 @@ const Image: React.FC<ImageProps> = ({
             alt={alt}
             onError={handleError}
             width={width}
+            height={height}
           />
         )
       ) : null}

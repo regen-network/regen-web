@@ -6,7 +6,7 @@ import ProjectImpactCard, {
   ProjectImpactCardProps as Impact,
 } from 'web-components/lib/components/cards/ProjectImpactCard';
 import Section from 'web-components/lib/components/section';
-import { getOptimizedImgSrc } from 'web-components/lib/utils/imgSrc';
+import { getOptimizedImageSrc } from 'web-components/lib/utils/imgSrc';
 
 interface ProjectImpactProps {
   impact: Impact[];
@@ -54,6 +54,8 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 export default function ProjectImpact({ impact }: ProjectImpactProps): JSX.Element {
   const classes = useStyles();
+  const imageStorageBaseUrl = process.env.REACT_APP_IMAGE_STORAGE_BASE_URL;
+  const apiServerUrl = process.env.REACT_APP_API_URI;
 
   return (
     <div className={classes.background}>
@@ -64,7 +66,7 @@ export default function ProjectImpact({ impact }: ProjectImpactProps): JSX.Eleme
               <ProjectImpactCard
                 name={name}
                 description={description}
-                imgSrc={getOptimizedImgSrc(imgSrc)}
+                imgSrc={getOptimizedImageSrc(imgSrc, imageStorageBaseUrl, apiServerUrl)}
                 monitored={monitored}
               />
             </Grid>

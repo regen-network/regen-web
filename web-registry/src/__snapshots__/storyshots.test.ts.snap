@@ -7416,6 +7416,7 @@ exports[`Storyshots Components|FAQ Faq 1`] = `
         },
       ]
     }
+    navigate={[Function]}
   />
 </ContextProvider>
 `;

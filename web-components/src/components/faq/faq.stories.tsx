@@ -46,6 +46,7 @@ export const navigation = (): JSX.Element => (
 
 export const faq = (): JSX.Element => (
   <FAQ
+    navigate={() => {}}
     categories={[
       {
         header: 'concept',

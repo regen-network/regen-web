@@ -13,11 +13,11 @@ export interface FAQProps {
     questions: QuestionItem[];
   }[];
   header?: string; // current category header
-  questionId?: string; // current question title from url anchor
 }
 
 interface Props extends FAQProps {
   navigate: (c: string) => void;
+  questionId?: string; // current question title from url anchor
 }
 
 const useStyles = makeStyles((theme: Theme) => ({

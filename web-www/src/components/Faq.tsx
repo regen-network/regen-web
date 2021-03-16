@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { PageProps, navigate } from 'gatsby';
 import { makeStyles, Theme } from '@material-ui/core';
 
@@ -33,8 +33,19 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const FAQPage = ({ categories, location, header, questionId }: Props): JSX.Element => {
+const FAQPage = ({ categories, location, header }: Props): JSX.Element => {
   const classes = useStyles();
+
+  const [questionId, setQuestionId] = useState<string | undefined>();
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const hash = window.location.hash.substr(1);
+      if (hash) {
+        setQuestionId(hash);
+      }
+    }
+  }, []);
 
   return (
     <>

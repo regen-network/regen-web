@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles, Theme, useTheme } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import ReactHtmlParser from 'react-html-parser';
@@ -7,6 +7,8 @@ import clsx from 'clsx';
 import BreadcrumbIcon from '../icons/BreadcrumbIcon';
 import Title from '../title';
 import LinkIcon from '../icons/LinkIcon';
+import copyTextToClipboard from '../../utils/copy';
+import Banner from '../banner';
 
 export interface QuestionItem {
   question: string;
@@ -160,7 +162,9 @@ const Question = ({
     .replace(/[^\w\- ]+/g, ' ')
     .replace(/\s+/g, '-')
     .replace(/\-+$/, '');
-  const [open, setOpen] = React.useState(id === questionId);
+  const [open, setOpen] = useState(id === questionId);
+  const [copied, setCopied] = useState(false);
+
   const classes = useStyles({ first, last });
   const theme = useTheme();
 
@@ -184,7 +188,15 @@ const Question = ({
           <Grid item>
             <Title variant="h5" className={classes.question}>
               {question}
-              <a href={`#${id}`} className={classes.anchorLink}>
+              <a
+                href={`#${id}`}
+                onClick={() => {
+                  if (window && window.location) {
+                    copyTextToClipboard(window.location.href).then(() => setCopied(true));
+                  }
+                }}
+                className={classes.anchorLink}
+              >
                 <LinkIcon
                   className={classes.linkIcon}
                   color="transparent"
@@ -206,6 +218,7 @@ const Question = ({
           {open ? null : <div className={classes.gradient} />}
         </div>
       </div>
+      {copied && <Banner text="Link copied to your clipboard" />}
     </div>
   );
 };

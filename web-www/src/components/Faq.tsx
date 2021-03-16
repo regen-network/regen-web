@@ -4,17 +4,9 @@ import { makeStyles, Theme } from '@material-ui/core';
 
 import SEO from '../components/seo';
 import Section from 'web-components/src/components/section';
-import FAQ from 'web-components/lib/components/faq';
-import { QuestionItem } from 'web-components/lib/components/faq/Question';
+import FAQ, { FAQProps } from 'web-components/lib/components/faq';
 
-interface Props extends PageProps {
-  header?: string;
-  question?: number;
-  categories: {
-    header: string;
-    questions: QuestionItem[];
-  }[];
-}
+interface Props extends PageProps, FAQProps {}
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -41,7 +33,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const FAQPage = ({ categories, location, header, question }: Props): JSX.Element => {
+const FAQPage = ({ categories, location, header, questionId }: Props): JSX.Element => {
   const classes = useStyles();
 
   return (
@@ -49,7 +41,7 @@ const FAQPage = ({ categories, location, header, question }: Props): JSX.Element
       <SEO location={location} title="FAQ" description="Explore Regen Network’s frequently asked questions" />
       <div className={classes.root}>
         <Section title="FAQ" titleVariant="h1" titleClassName={classes.title} className={classes.section}>
-          <FAQ header={header} question={question} categories={categories} navigate={navigate} />
+          <FAQ header={header} questionId={questionId} categories={categories} navigate={navigate} />
         </Section>
       </div>
     </>

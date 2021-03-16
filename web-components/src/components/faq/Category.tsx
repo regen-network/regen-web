@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 
 import GreenCard from '../cards/GreenCard';
@@ -7,7 +7,7 @@ import Question, { QuestionItem } from './Question';
 
 interface CategoryProps {
   name: string;
-  question?: number;
+  questionId?: string;
   questions: QuestionItem[];
 }
 
@@ -36,15 +36,8 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const Category = ({ questions, name, question }: CategoryProps): JSX.Element => {
+const Category = ({ questions, name, questionId }: CategoryProps): JSX.Element => {
   const classes = useStyles();
-  const elems = useRef<(HTMLDivElement | null)[]>([]);
-
-  useEffect(() => {
-    if (question && elems.current[question - 1]) {
-      elems.current[question - 1]?.scrollIntoView();
-    }
-  }, [elems, question]);
 
   return (
     <GreenCard className={classes.root}>
@@ -52,9 +45,9 @@ const Category = ({ questions, name, question }: CategoryProps): JSX.Element => 
         {name}
       </Title>
       {questions.map((q, i) => (
-        <div key={i} ref={(element: HTMLDivElement) => (elems.current[i] = element)}>
+        <div key={i}>
           <Question
-            initOpen={question ? i === question - 1 : false}
+            questionId={questionId}
             first={i === 0}
             last={i === questions.length - 1}
             question={q.question}

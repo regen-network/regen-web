@@ -7,14 +7,17 @@ import Category from './Category';
 import { QuestionItem } from './Question';
 import BreadcrumbIcon from '../icons/BreadcrumbIcon';
 
-interface FAQProps {
-  navigate: (c: string) => void;
+export interface FAQProps {
   categories: {
     header: string;
     questions: QuestionItem[];
   }[];
   header?: string; // current category header
-  question?: number; // current question to show from url query param, starting at 1
+  questionId?: string; // current question title from url anchor
+}
+
+interface Props extends FAQProps {
+  navigate: (c: string) => void;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -44,7 +47,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const FAQ = ({ navigate, header, categories, question }: FAQProps): JSX.Element => {
+const FAQ = ({ navigate, header, categories, questionId }: Props): JSX.Element => {
   const classes = useStyles();
   if (!categories.length) {
     return <></>;
@@ -72,7 +75,7 @@ const FAQ = ({ navigate, header, categories, question }: FAQProps): JSX.Element 
           <Navigation category={category.header} categories={categoriesHeader} onClick={handleClick} />
         </div>
         <div>
-          <Category question={question} name={category.header} questions={category.questions} />
+          <Category questionId={questionId} name={category.header} questions={category.questions} />
         </div>
       </Box>
 
@@ -83,7 +86,7 @@ const FAQ = ({ navigate, header, categories, question }: FAQProps): JSX.Element 
               <BreadcrumbIcon className={classes.icon} direction="prev" />
               back
             </div>
-            <Category question={question} name={category.header} questions={category.questions} />
+            <Category questionId={questionId} name={category.header} questions={category.questions} />
           </div>
         ) : (
           <div className={classes.navigation}>

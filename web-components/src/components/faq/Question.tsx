@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles, Theme, useTheme } from '@material-ui/core';
+import Grid from '@material-ui/core/Grid';
 import ReactHtmlParser from 'react-html-parser';
 import clsx from 'clsx';
 
 import BreadcrumbIcon from '../icons/BreadcrumbIcon';
 import Title from '../title';
+import LinkIcon from '../icons/LinkIcon';
 
 export interface QuestionItem {
   question: string;
@@ -14,7 +16,7 @@ export interface QuestionItem {
 interface QuestionProps extends QuestionItem {
   first?: boolean;
   last?: boolean;
-  initOpen?: boolean;
+  questionId?: string;
 }
 
 interface StyleProps {
@@ -43,16 +45,13 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     },
   },
   question: {
-    cursor: 'pointer',
     lineHeight: '150%',
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
     [theme.breakpoints.up('sm')]: {
       paddingBottom: theme.spacing(2.5),
     },
   },
   icon: {
+    cursor: 'pointer',
     [theme.breakpoints.up('sm')]: {
       height: theme.spacing(5),
       width: theme.spacing(8.25),
@@ -126,21 +125,48 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       position: 'relative !important',
     },
   },
+  anchorLink: {
+    color: 'transparent',
+    textDecoration: 'none',
+    '&:link, &:visited, &:hover, &:active': {
+      textDecoration: 'none',
+    },
+  },
+  linkIcon: {
+    position: 'absolute',
+    [theme.breakpoints.up('sm')]: {
+      marginLeft: theme.spacing(2.5),
+      width: theme.spacing(7.5),
+      height: theme.spacing(7.5),
+    },
+    [theme.breakpoints.down('xs')]: {
+      marginLeft: theme.spacing(2),
+      width: theme.spacing(5.5),
+      height: theme.spacing(5.5),
+    },
+  },
 }));
 
 const Question = ({
   question,
   answer,
+  questionId,
   first = false,
   last = false,
-  initOpen = false,
 }: QuestionProps): JSX.Element => {
-  const [open, setOpen] = React.useState(initOpen);
+  const id = question
+    .trim()
+    .toLowerCase()
+    .replace(/[^\w\- ]+/g, ' ')
+    .replace(/\s+/g, '-')
+    .replace(/\-+$/, '');
+  const [open, setOpen] = React.useState(id === questionId);
   const classes = useStyles({ first, last });
+  const theme = useTheme();
 
   useEffect(() => {
-    setOpen(initOpen);
-  }, [initOpen]);
+    setOpen(id === questionId);
+  }, [id, questionId]);
 
   const handleClick = (): void => {
     setOpen(prevOpen => !prevOpen);
@@ -152,16 +178,29 @@ const Question = ({
   }
 
   return (
-    <div className={classes.root}>
+    <div className={classes.root} id={id}>
       <div className={classes.container}>
-        <Title variant="h5" className={classes.question} onClick={handleClick}>
-          {question}
-          {open ? (
-            <BreadcrumbIcon className={classes.icon} direction="up" />
-          ) : (
-            <BreadcrumbIcon className={classes.icon} />
-          )}
-        </Title>
+        <Grid container wrap="nowrap" justify="space-between" alignItems="center">
+          <Grid item>
+            <Title variant="h5" className={classes.question}>
+              {question}
+              <a href={`#${id}`} className={classes.anchorLink}>
+                <LinkIcon
+                  className={classes.linkIcon}
+                  color="transparent"
+                  hoverColor={theme.palette.secondary.dark}
+                />
+              </a>
+            </Title>
+          </Grid>
+          <Grid item>
+            {open ? (
+              <BreadcrumbIcon onClick={handleClick} className={classes.icon} direction="up" />
+            ) : (
+              <BreadcrumbIcon onClick={handleClick} className={classes.icon} />
+            )}
+          </Grid>
+        </Grid>
         <div className={clsx(answerClassName)}>
           {ReactHtmlParser(answer)}
           {open ? null : <div className={classes.gradient} />}

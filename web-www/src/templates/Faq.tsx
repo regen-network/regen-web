@@ -24,27 +24,26 @@ const FAQPage = (props: Props): JSX.Element => {
     }
   `);
 
-  const [question, setQuestion] = useState<number | undefined>();
+  const [questionId, setQuestionId] = useState<string | undefined>();
+
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      const queryString = window.location.search;
-      const urlParams = new URLSearchParams(queryString);
-      if (urlParams) {
-        const question = urlParams.get('question');
-        if (question) {
-          setQuestion(parseInt(question));
-        }
+      const hash = window.location.hash.substr(1);
+      if (hash) {
+        setQuestionId(hash);
       }
     }
   }, []);
 
   return (
-    <Faq
-      header={props.pageContext.header}
-      question={question}
-      categories={data.faqYaml.categories}
-      {...props}
-    />
+    <>
+      <Faq
+        header={props.pageContext.header}
+        questionId={questionId}
+        categories={data.faqYaml.categories}
+        {...props}
+      />
+    </>
   );
 };
 

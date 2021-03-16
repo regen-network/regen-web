@@ -7,7 +7,7 @@ import ProjectImpactCard, {
   ProjectImpactCardProps as Impact,
 } from 'web-components/lib/components/cards/ProjectImpactCard';
 import Section from 'web-components/lib/components/section';
-import { getOptimizedImageSrc } from 'web-components/lib/utils/imgSrc';
+import { getOptimizedImageSrc } from 'web-components/lib/utils/optimizedImageSrc';
 
 interface ProjectImpactProps {
   impact: Impact[];

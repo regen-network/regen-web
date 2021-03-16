@@ -3,7 +3,7 @@ import { makeStyles, Theme, useMediaQuery, useTheme } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import Slider from 'react-slick';
 import PlayIcon from '../icons/PlayIcon';
-import Image from '../image';
+import Image, { OptimizeImageProps } from '../image';
 
 export interface Media {
   src: string;
@@ -12,7 +12,7 @@ export interface Media {
   preview?: string;
 }
 
-interface ProjectMediaProps {
+interface ProjectMediaProps extends OptimizeImageProps {
   gridView: boolean;
   assets: Media[];
   xsBorderRadius?: boolean;

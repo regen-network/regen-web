@@ -4,7 +4,11 @@ import clsx from 'clsx';
 
 import { getOptimizedImageSrc } from '../../utils/optimizedImageSrc';
 
-interface ImageProps {
+export interface OptimizeImageProps {
+  imageStorageBaseUrl?: string;
+  apiServerUrl?: string;
+}
+interface ImageProps extends OptimizeImageProps {
   src: string; // unoptimized source url
   alt?: string;
   options?: any;
@@ -13,8 +17,6 @@ interface ImageProps {
   height?: number;
   backgroundImage?: boolean;
   delay?: number;
-  imageStorageBaseUrl?: string;
-  apiServerUrl?: string;
 }
 
 const useStyles = makeStyles<Theme>((theme: Theme) => ({

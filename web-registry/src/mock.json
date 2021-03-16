@@ -457,6 +457,12 @@
       "id": "cavan-station",
       "documents": [
         {
+          "name": "Project Plan",
+          "type": "Project Plan",
+          "date": "March 16, 2021",
+          "url": "https://regen-registry.s3.amazonaws.com/projects/cavan-station/Cavan+Regen+Registry+Project+Plan.pdf"
+        },
+        {
           "name": "Monitoring Report 2017 (Baseline)",
           "type": "Monitoring",
           "date": "February 18, 2021",

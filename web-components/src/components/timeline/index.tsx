@@ -49,8 +49,8 @@ export default function Timeline({ events, completedItemIndex, txClient }: Timel
   const theme = useTheme();
 
   return (
-    <div className={classes.root}>
-      <LazyLoad offset={300}>
+    <LazyLoad offset={300}>
+      <div className={classes.root}>
         {events.map((event, index) => {
           let circleColor: string;
           let barColor: string;
@@ -86,7 +86,7 @@ export default function Timeline({ events, completedItemIndex, txClient }: Timel
             </div>
           );
         })}
-      </LazyLoad>
-    </div>
+      </div>
+    </LazyLoad>
   );
 }

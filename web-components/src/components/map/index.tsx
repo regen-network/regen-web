@@ -219,8 +219,8 @@ export default function Map({ geojson, token }: MapProps): JSX.Element {
   // };
 
   return (
-    <div className={classes.root}>
-      <LazyLoad offset={300}>
+    <LazyLoad offset={300}>
+      <div className={classes.root}>
         <ReactMapGL
           {...viewPort}
           scrollZoom={false}
@@ -312,7 +312,7 @@ export default function Map({ geojson, token }: MapProps): JSX.Element {
           </OutlinedButton>
         </div>
         {/* {!matches && renderSlider()} */}
-      </LazyLoad>
-    </div>
+      </div>
+    </LazyLoad>
   );
 }

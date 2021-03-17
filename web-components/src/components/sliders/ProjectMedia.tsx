@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import Slider from 'react-slick';
 import PlayIcon from '../icons/PlayIcon';
 import Image, { OptimizeImageProps } from '../image';
+import { getOptimizedImageSrc } from '../../utils/optimizedImageSrc';
 
 export interface Media {
   src: string;
@@ -212,13 +213,11 @@ export default function ProjectMedia({
     customPaging: (i: number) => {
       return matches ? (
         <div className={classes.thumbnail}>
-          <Image
+          <img
             width={60}
             height={60}
-            src={assets[i].thumbnail || ''}
+            src={getOptimizedImageSrc(assets[i].thumbnail, imageStorageBaseUrl, apiServerUrl) || ''}
             alt={assets[i].thumbnail}
-            imageStorageBaseUrl={imageStorageBaseUrl}
-            apiServerUrl={apiServerUrl}
           />
           {assets[i].type === 'video' && (
             <div className={classes.play}>

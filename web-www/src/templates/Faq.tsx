@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useStaticQuery, graphql, PageProps } from 'gatsby';
 
 import Faq from '../components/Faq';
@@ -24,27 +24,10 @@ const FAQPage = (props: Props): JSX.Element => {
     }
   `);
 
-  const [question, setQuestion] = useState<number | undefined>();
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const queryString = window.location.search;
-      const urlParams = new URLSearchParams(queryString);
-      if (urlParams) {
-        const question = urlParams.get('question');
-        if (question) {
-          setQuestion(parseInt(question));
-        }
-      }
-    }
-  }, []);
-
   return (
-    <Faq
-      header={props.pageContext.header}
-      question={question}
-      categories={data.faqYaml.categories}
-      {...props}
-    />
+    <>
+      <Faq header={props.pageContext.header} categories={data.faqYaml.categories} {...props} />
+    </>
   );
 };
 

@@ -1,20 +1,12 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { PageProps, navigate } from 'gatsby';
 import { makeStyles, Theme } from '@material-ui/core';
 
 import SEO from '../components/seo';
 import Section from 'web-components/src/components/section';
-import FAQ from 'web-components/lib/components/faq';
-import { QuestionItem } from 'web-components/lib/components/faq/Question';
+import FAQ, { FAQProps } from 'web-components/lib/components/faq';
 
-interface Props extends PageProps {
-  header?: string;
-  question?: number;
-  categories: {
-    header: string;
-    questions: QuestionItem[];
-  }[];
-}
+interface Props extends PageProps, FAQProps {}
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -41,15 +33,26 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const FAQPage = ({ categories, location, header, question }: Props): JSX.Element => {
+const FAQPage = ({ categories, location, header }: Props): JSX.Element => {
   const classes = useStyles();
+
+  const [questionId, setQuestionId] = useState<string | undefined>();
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const hash = window.location.hash.substr(1);
+      if (hash) {
+        setQuestionId(hash);
+      }
+    }
+  }, []);
 
   return (
     <>
       <SEO location={location} title="FAQ" description="Explore Regen Network’s frequently asked questions" />
       <div className={classes.root}>
         <Section title="FAQ" titleVariant="h1" titleClassName={classes.title} className={classes.section}>
-          <FAQ header={header} question={question} categories={categories} navigate={navigate} />
+          <FAQ header={header} questionId={questionId} categories={categories} navigate={navigate} />
         </Section>
       </div>
     </>

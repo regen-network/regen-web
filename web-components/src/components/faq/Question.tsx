@@ -30,11 +30,11 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     borderBottom: !props.last ? `1px solid ${theme.palette.grey[100]}` : 'none',
     [theme.breakpoints.up('sm')]: {
       paddingTop: props.first ? theme.spacing(7) : theme.spacing(12.5),
-      paddingBottom: theme.spacing(5),
+      paddingBottom: theme.spacing(12.5),
     },
     [theme.breakpoints.down('xs')]: {
       paddingTop: props.first ? theme.spacing(7) : theme.spacing(10.75),
-      paddingBottom: theme.spacing(3.75),
+      paddingBottom: theme.spacing(10.75),
     },
   }),
   container: {

@@ -49,6 +49,8 @@ export interface ProjectCardProps {
   purchaseInfo?: PurchaseInfo;
   href?: string;
   target?: string;
+  imageStorageBaseUrl?: string;
+  apiServerUrl?: string;
 }
 
 interface AreaUnits {
@@ -198,6 +200,8 @@ export default function ProjectCard({
   purchaseInfo,
   href,
   target,
+  imageStorageBaseUrl,
+  apiServerUrl,
 }: ProjectCardProps): JSX.Element {
   const theme = useTheme();
   const classes = useStyles();
@@ -215,6 +219,8 @@ export default function ProjectCard({
       tag={tag}
       href={href}
       target={target}
+      imageStorageBaseUrl={imageStorageBaseUrl}
+      apiServerUrl={apiServerUrl}
     >
       <div className={classes.placeInfo}>
         <ProjectPlaceInfo

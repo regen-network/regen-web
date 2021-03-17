@@ -3,6 +3,8 @@ import { makeStyles, Theme, useMediaQuery, useTheme } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import Slider from 'react-slick';
 import PlayIcon from '../icons/PlayIcon';
+import Image, { OptimizeImageProps } from '../image';
+import { getOptimizedImageSrc } from '../../utils/optimizedImageSrc';
 
 export interface Media {
   src: string;
@@ -11,8 +13,8 @@ export interface Media {
   preview?: string;
 }
 
-interface ProjectMediaProps {
-  gridView: boolean;
+interface ProjectMediaProps extends OptimizeImageProps {
+  gridView?: boolean;
   assets: Media[];
   xsBorderRadius?: boolean;
   mobileHeight?: string | number;
@@ -167,6 +169,8 @@ export default function ProjectMedia({
   xsBorderRadius = false,
   gridView = false,
   mobileHeight,
+  imageStorageBaseUrl,
+  apiServerUrl,
 }: ProjectMediaProps): JSX.Element {
   const classes = useStyles({ mobileHeight, xsBorderRadius });
   const theme = useTheme();
@@ -209,7 +213,16 @@ export default function ProjectMedia({
     customPaging: (i: number) => {
       return matches ? (
         <div className={classes.thumbnail}>
-          <img width={60} height={60} src={assets[i].thumbnail} alt={assets[i].thumbnail} />
+          <img
+            width={60}
+            height={60}
+            src={
+              imageStorageBaseUrl && apiServerUrl
+                ? getOptimizedImageSrc(assets[i].thumbnail, imageStorageBaseUrl, apiServerUrl)
+                : assets[i].thumbnail || ''
+            }
+            alt={assets[i].thumbnail}
+          />
           {assets[i].type === 'video' && (
             <div className={classes.play}>
               <PlayIcon width="10.85px" height="10.85px" />
@@ -227,18 +240,42 @@ export default function ProjectMedia({
       {matches && gridView && assets.length >= 4 ? (
         <Grid container className={classes.grid}>
           <Grid item className={classes.sideGrid}>
-            <img className={classes.image} src={assets[0].src} alt={assets[0].src} />
+            <Image
+              className={classes.image}
+              src={assets[0].src}
+              alt={assets[0].src}
+              imageStorageBaseUrl={imageStorageBaseUrl}
+              apiServerUrl={apiServerUrl}
+            />
           </Grid>
           <Grid item className={classes.centreGrid}>
             <div className={classes.imageContainer}>
-              <img className={classes.image} src={assets[1].src} alt={assets[1].src} />
+              <Image
+                className={classes.image}
+                src={assets[1].src}
+                alt={assets[1].src}
+                imageStorageBaseUrl={imageStorageBaseUrl}
+                apiServerUrl={apiServerUrl}
+              />
             </div>
             <div className={classes.imageContainer}>
-              <img className={classes.image} src={assets[2].src} alt={assets[2].src} />
+              <Image
+                className={classes.image}
+                src={assets[2].src}
+                alt={assets[2].src}
+                imageStorageBaseUrl={imageStorageBaseUrl}
+                apiServerUrl={apiServerUrl}
+              />
             </div>
           </Grid>
           <Grid item className={classes.sideGrid}>
-            <img className={classes.image} src={assets[3].src} alt={assets[3].src} />
+            <Image
+              className={classes.image}
+              src={assets[3].src}
+              alt={assets[3].src}
+              imageStorageBaseUrl={imageStorageBaseUrl}
+              apiServerUrl={apiServerUrl}
+            />
           </Grid>
         </Grid>
       ) : (
@@ -266,7 +303,19 @@ export default function ProjectMedia({
         >
           {assets.map((item, index) => {
             if (item.type === 'image') {
-              return <img key={index} src={item.src} className={classes.item} alt={item.src} />;
+              return imageStorageBaseUrl && apiServerUrl ? (
+                <Image
+                  key={index}
+                  src={item.src}
+                  className={classes.item}
+                  alt={item.src}
+                  delay={index > 0 ? 1000 : 0}
+                  imageStorageBaseUrl={imageStorageBaseUrl}
+                  apiServerUrl={apiServerUrl}
+                />
+              ) : (
+                <img key={index} src={item.src} className={classes.item} alt={item.src} />
+              );
             } else if (item.type === 'video') {
               return (
                 <video key={index} className={classes.item} controls poster={item.preview}>

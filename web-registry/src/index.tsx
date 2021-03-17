@@ -10,7 +10,7 @@ import './url-search-params-polyfill.d';
 
 import { Auth0Provider } from '@auth0/auth0-react';
 import { AuthApolloProvider } from './apollo';
-// import { LedgerProvider } from './ledger';
+import { LedgerProvider } from './ledger';
 // import history from './lib/history';
 
 const config = {
@@ -39,13 +39,13 @@ ReactDOM.render(
     cacheLocation="localstorage"
   >
     <AuthApolloProvider>
-      {/* <LedgerProvider> */}
-      <ThemeProvider injectFonts>
-        {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-        <CssBaseline />
-        <App />
-      </ThemeProvider>
-      {/* </LedgerProvider> */}
+      <LedgerProvider>
+        <ThemeProvider injectFonts>
+          {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+          <CssBaseline />
+          <App />
+        </ThemeProvider>
+      </LedgerProvider>
     </AuthApolloProvider>
   </Auth0Provider>,
   document.getElementById('root'),

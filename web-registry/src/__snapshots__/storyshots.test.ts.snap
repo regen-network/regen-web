@@ -21936,8 +21936,6 @@ exports[`Storyshots Components|Image Image Default Quality 100 1`] = `
   >
     <Image
       alt="Wilmot"
-      apiServerUrl="https://regen-registry-server-staging.herokuapp.com"
-      imageStorageBaseUrl="https://regen-registry.s3.amazonaws.com"
       options={
         Object {
           "q": 100,

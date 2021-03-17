@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { makeStyles, Theme, useTheme } from '@material-ui/core';
-import Grid from '@material-ui/core/Grid';
+import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import ReactHtmlParser from 'react-html-parser';
 import clsx from 'clsx';
 
@@ -47,7 +46,11 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     },
   },
   question: {
+    cursor: 'pointer',
     lineHeight: '150%',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     [theme.breakpoints.up('sm')]: {
       paddingBottom: theme.spacing(2.5),
     },
@@ -128,24 +131,32 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     },
   },
   anchorLink: {
-    color: 'transparent',
+    color: 'transparent !important',
     textDecoration: 'none',
+    display: 'flex',
+    alignItems: 'center',
     '&:link, &:visited, &:hover, &:active': {
       textDecoration: 'none',
     },
   },
   linkIcon: {
-    position: 'absolute',
     [theme.breakpoints.up('sm')]: {
-      marginLeft: theme.spacing(2.5),
       width: theme.spacing(7.5),
       height: theme.spacing(7.5),
     },
     [theme.breakpoints.down('xs')]: {
-      marginLeft: theme.spacing(2),
       width: theme.spacing(5.5),
       height: theme.spacing(5.5),
     },
+  },
+  copyText: {
+    color: theme.palette.secondary.main,
+    fontSize: theme.spacing(3),
+    paddingLeft: theme.spacing(2.5),
+    letterSpacing: '1px',
+    textTransform: 'uppercase',
+    fontFamily: theme.typography.h1.fontFamily,
+    fontWeight: 800,
   },
 }));
 
@@ -184,37 +195,30 @@ const Question = ({
   return (
     <div className={classes.root} id={id}>
       <div className={classes.container}>
-        <Grid container wrap="nowrap" justify="space-between" alignItems="center">
-          <Grid item>
-            <Title variant="h5" className={classes.question}>
-              {question}
-              <a
-                href={`#${id}`}
-                onClick={() => {
-                  if (window && window.location) {
-                    copyTextToClipboard(window.location.href).then(() => setCopied(true));
-                  }
-                }}
-                className={classes.anchorLink}
-              >
-                <LinkIcon
-                  className={classes.linkIcon}
-                  color="transparent"
-                  hoverColor={theme.palette.secondary.dark}
-                />
-              </a>
-            </Title>
-          </Grid>
-          <Grid item>
-            {open ? (
-              <BreadcrumbIcon onClick={handleClick} className={classes.icon} direction="up" />
-            ) : (
-              <BreadcrumbIcon onClick={handleClick} className={classes.icon} />
-            )}
-          </Grid>
-        </Grid>
+        <Title variant="h5" className={classes.question} onClick={handleClick}>
+          {question}
+          {open ? (
+            <BreadcrumbIcon className={classes.icon} direction="up" />
+          ) : (
+            <BreadcrumbIcon className={classes.icon} />
+          )}
+        </Title>
         <div className={clsx(answerClassName)}>
           {ReactHtmlParser(answer)}
+          <a
+            href={`#${id}`}
+            onClick={() => {
+              if (window && window.location) {
+                copyTextToClipboard(`${window.location.origin}${window.location.pathname}#${id}`).then(() =>
+                  setCopied(true),
+                );
+              }
+            }}
+            className={classes.anchorLink}
+          >
+            <LinkIcon className={classes.linkIcon} color={theme.palette.secondary.dark} />
+            <span className={classes.copyText}>copy question link</span>
+          </a>
           {open ? null : <div className={classes.gradient} />}
         </div>
       </div>

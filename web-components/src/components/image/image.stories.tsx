@@ -9,8 +9,8 @@ export default {
 };
 
 const imageSrc = 'https://regen-registry.s3.amazonaws.com/projects/wilmot/image1.png';
-const imageStorageBaseUrl = 'https://regen-registry.s3.amazonaws.com';
-const apiServerUrl = 'https://regen-registry-server-staging.herokuapp.com';
+const imageStorageBaseUrl = process.env.STORYBOOK_IMAGE_STORAGE_BASE_URL;
+const apiServerUrl = process.env.STORYBOOK_API_URI;
 
 const label = 'Image Quality';
 const defaultValue = 100;

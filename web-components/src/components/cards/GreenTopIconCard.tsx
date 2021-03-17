@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, Theme, Typography } from '@material-ui/core';
+import { makeStyles, Theme, Typography, Grid } from '@material-ui/core';
 import clsx from 'clsx';
 
 import Card from './Card';
@@ -15,17 +15,16 @@ const useStyles = makeStyles((theme: Theme) => ({
     maxWidth: theme.spacing(90),
   },
   main: {
-    display: 'flex',
     height: '100%',
-    flexDirection: 'column',
     padding: theme.spacing(4, 4, 8),
   },
   title: {
     marginTop: theme.spacing(4),
     fontSize: theme.spacing(7),
+    fontWeight: 900,
   },
   description: {
-    fontSize: theme.spacing(3),
+    fontSize: theme.spacing(4),
     margin: theme.spacing(4, 0),
     color: theme.palette.info.dark,
   },
@@ -66,7 +65,7 @@ const GreenTopIconCard: React.FC<Props> = p => {
         <img className={classes.img} src={p.imgSrc} alt={p.description} />
       </div>
 
-      <div className={classes.main}>
+      <Grid container direction="column" className={classes.main}>
         <Typography variant="h1" className={classes.title}>
           {p.title}
         </Typography>
@@ -76,7 +75,7 @@ const GreenTopIconCard: React.FC<Props> = p => {
             View on Github
           </OutlinedButton>
         </div>
-      </div>
+      </Grid>
     </Card>
   );
 };

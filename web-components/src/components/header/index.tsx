@@ -7,6 +7,7 @@ import Box from '@material-ui/core/Box';
 import RegenIcon from '../icons/RegenIcon';
 import MenuHover from '../menu-hover';
 import MobileMenu from '../mobile-menu';
+import MainnetLaunchBanner from './MainnetLaunchBanner';
 
 export interface node {
   [key: number]: React.ReactNode;
@@ -26,6 +27,7 @@ interface HeaderProps {
   children?: any;
   transparent?: boolean;
   absolute?: boolean;
+  launchDate?: string;
   color: string;
   menuItems?: HeaderMenuItem[];
   borderBottom?: boolean;
@@ -136,6 +138,10 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     marginRight: theme.spacing(6.25),
     marginBottom: theme.spacing(1),
   },
+  launchBanner: {
+    position: 'relative',
+    zIndex: 10,
+  },
   menuIcon: {
     color: theme.palette.primary.contrastText,
   },
@@ -190,6 +196,7 @@ export default function Header({
   children,
   transparent,
   color,
+  launchDate,
   menuItems,
   borderBottom = true,
   absolute = true,
@@ -205,6 +212,7 @@ export default function Header({
 
   return (
     <div className={clsx(rootClass)}>
+      {launchDate && <MainnetLaunchBanner className={classes.launchBanner} launchDate={launchDate} />}
       <Grid className={classes.header} container direction="row" alignItems="center" justify="space-between">
         <Grid className={classes.logoItem} item>
           <a href="/">

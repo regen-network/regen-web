@@ -11,7 +11,6 @@ import { graphql, useStaticQuery } from 'gatsby';
 import { useTheme } from '@material-ui/core/styles';
 
 import Header, { HeaderColors, HeaderMenuItem } from 'web-components/lib/components/header';
-import MainnetLaunchBanner from 'web-components/lib/components/header/MainnetLaunchBanner';
 import Footer, { FooterItemProps as FooterItem } from 'web-components/lib/components/footer';
 import CookiesFooter from 'web-components/lib/components/banner/CookiesBanner';
 
@@ -72,7 +71,7 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
   // Links in rest of the site must use the trailing '/'
   // in order for these to work appropriately
   const headerNoBorderBottomPages: RegExp = new RegExp(
-    '//|/buyers/|/partners/|/contact/|/validators/|/land-stewards/|/resources/|/media/|/team/|/developers/|/science/|/invest/|/case-studies/|/press-kit/|/community/|/wallet-address-registration/|/case-studies/[a-z-]+//',
+    '//|/buyers/|/partners/|/contact/|/validators/|/land-stewards/|/resources/|/media/|/team/|/developers/|/science/|/invest/|/case-studies/|/press-kit/|/community/|/wallet-address-registration/|/mainnet/|/case-studies/[a-z-]+//',
   );
 
   const menuItems: HeaderMenuItem[] = [
@@ -195,8 +194,8 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
   ];
   return (
     <>
-      {location.pathname !== '/mainnet/' && <MainnetLaunchBanner launchDate={launchDate} />}
       <Header
+        launchDate={location.pathname !== '/mainnet/' && launchDate}
         menuItems={menuItems}
         transparent={transparent}
         absolute={location.pathname === '/' || headerNoBorderBottomPages.test(location.pathname)}

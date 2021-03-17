@@ -19,8 +19,14 @@ const useStyles = makeStyles((theme: Theme) => ({
   title: {
     color: 'white',
     textAlign: 'center',
-    fontSize: theme.spacing(10),
+    fontWeight: 900,
     margin: theme.spacing(7, 0, 4),
+    [theme.breakpoints.up('sm')]: {
+      fontSize: theme.spacing(10),
+    },
+    [theme.breakpoints.down('xs')]: {
+      fontSize: theme.spacing(8),
+    },
   },
   description: {
     color: 'white',

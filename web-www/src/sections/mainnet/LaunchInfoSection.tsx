@@ -1,6 +1,14 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import { createStyles, withStyles, makeStyles, Theme, Typography, LinearProgress } from '@material-ui/core';
+import {
+  Grid,
+  createStyles,
+  withStyles,
+  makeStyles,
+  Theme,
+  Typography,
+  LinearProgress,
+} from '@material-ui/core';
 import Img, { FluidObject } from 'gatsby-image';
 import { format } from 'date-fns';
 import clsx from 'clsx';
@@ -27,28 +35,28 @@ const useStyles = makeStyles((theme: Theme) => ({
   root: {
     paddingBottom: theme.spacing(7),
   },
-  actionWrap: {
-    display: 'flex',
-    marginBottom: theme.spacing(7),
-    justifyContent: 'space-evenly',
-    flexFlow: 'row wrap',
+  title: {
+    margin: '0 auto',
+    fontWeight: 900,
+    textAlign: 'center',
+    [theme.breakpoints.up('sm')]: {
+      fontSize: theme.spacing(10),
+    },
+    [theme.breakpoints.down('xs')]: {
+      fontSize: theme.spacing(8),
+    },
   },
-  btnWrap: {
-    display: 'flex',
-    flexDirection: 'row-reverse',
-  },
-  imgWrap: {
-    display: 'flex',
-    alignItems: 'center',
-    flex: 1,
+  actionItems: {
+    margin: theme.spacing(7, 0),
   },
   image: {
-    maxHeight: '100%',
     [theme.breakpoints.up('sm')]: {
       minWidth: '40%',
+      maxHeight: '100%',
     },
     [theme.breakpoints.down('xs')]: {
       minWidth: '100%',
+      maxHeight: theme.spacing(50),
     },
   },
   card: {
@@ -65,9 +73,12 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   cardMain: {
-    padding: theme.spacing(10),
-    display: 'flex',
-    flexDirection: 'column',
+    [theme.breakpoints.up('sm')]: {
+      padding: theme.spacing(10),
+    },
+    [theme.breakpoints.down('xs')]: {
+      padding: theme.spacing(10, 4.5),
+    },
   },
   cardTitle: {
     fontFamily: theme.typography.h1.fontFamily,
@@ -76,7 +87,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       fontSize: theme.spacing(8),
     },
     [theme.breakpoints.down('xs')]: {
-      fontSize: theme.spacing(8),
+      fontSize: theme.spacing(7),
     },
   },
   launchDate: {
@@ -127,6 +138,7 @@ type QueryData = {
   text: {
     launchDate: string;
     launchInfoSection: {
+      title: string;
       image: {
         childImageSharp: {
           fluid: FluidObject;
@@ -147,13 +159,14 @@ const LaunchInfoSection: React.FC = () => {
   const {
     text: {
       launchDate,
-      launchInfoSection: { card, image },
+      launchInfoSection: { card, image, title },
     },
   } = useStaticQuery<QueryData>(graphql`
     query {
       text: mainnetYaml {
         launchDate
         launchInfoSection {
+          title
           image {
             childImageSharp {
               fluid(quality: 90) {
@@ -184,15 +197,18 @@ const LaunchInfoSection: React.FC = () => {
   const classes = useStyles();
   return (
     <Section className={classes.root}>
-      <div className={classes.actionWrap}>
+      <Typography variant="h1" className={classes.title}>
+        {title}
+      </Typography>
+      <Grid container justify="space-evenly" className={classes.actionItems}>
         {card.actionItems.map((item, i) => (
           <ActionItem key={i} {...item} />
         ))}
-      </div>
+      </Grid>
 
       <div className={classes.card}>
         <Img className={classes.image} fluid={image.childImageSharp.fluid} />
-        <div className={classes.cardMain}>
+        <Grid container direction="column" className={classes.cardMain}>
           <Typography className={classes.cardTitle}>{card.title}</Typography>
           <Typography className={classes.launchDate}>
             Release date: {format(new Date(launchDate), 'MMMM Y')}
@@ -207,7 +223,7 @@ const LaunchInfoSection: React.FC = () => {
             <Typography className={classes.progressText}>{card.progress}% complete</Typography>
             <StyledLinearProgress variant="determinate" value={card.progress} />
           </div>
-        </div>
+        </Grid>
       </div>
     </Section>
   );
@@ -220,7 +236,7 @@ const useActionItemStyles = makeStyles((theme: Theme) => ({
     alignItems: 'center',
     textAlign: 'center',
     maxWidth: theme.spacing(70),
-    margin: theme.spacing(4),
+    margin: theme.spacing(10, 4),
   },
   img: {
     minWidth: '100%',
@@ -229,6 +245,7 @@ const useActionItemStyles = makeStyles((theme: Theme) => ({
   title: {
     fontSize: theme.spacing(6),
     margin: theme.spacing(5, 0),
+    fontWeight: 900,
   },
   btnWrap: {
     flexGrow: 1,
@@ -237,12 +254,13 @@ const useActionItemStyles = makeStyles((theme: Theme) => ({
     justifyContent: 'flex-end',
   },
   btn: {
-    fontSize: theme.spacing(3.5),
+    fontSize: theme.spacing(4),
     padding: theme.spacing(2, 4),
     marginTop: theme.spacing(5),
   },
   description: {
     color: theme.palette.info.dark,
+    fontSize: theme.spacing(4.5),
   },
 }));
 

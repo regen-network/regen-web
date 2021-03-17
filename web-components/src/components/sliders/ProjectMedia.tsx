@@ -14,7 +14,7 @@ export interface Media {
 }
 
 interface ProjectMediaProps extends OptimizeImageProps {
-  gridView: boolean;
+  gridView?: boolean;
   assets: Media[];
   xsBorderRadius?: boolean;
   mobileHeight?: string | number;
@@ -216,7 +216,11 @@ export default function ProjectMedia({
           <img
             width={60}
             height={60}
-            src={getOptimizedImageSrc(assets[i].thumbnail, imageStorageBaseUrl, apiServerUrl) || ''}
+            src={
+              imageStorageBaseUrl && apiServerUrl
+                ? getOptimizedImageSrc(assets[i].thumbnail, imageStorageBaseUrl, apiServerUrl)
+                : assets[i].thumbnail || ''
+            }
             alt={assets[i].thumbnail}
           />
           {assets[i].type === 'video' && (
@@ -299,7 +303,7 @@ export default function ProjectMedia({
         >
           {assets.map((item, index) => {
             if (item.type === 'image') {
-              return (
+              return imageStorageBaseUrl && apiServerUrl ? (
                 <Image
                   key={index}
                   src={item.src}
@@ -309,6 +313,8 @@ export default function ProjectMedia({
                   imageStorageBaseUrl={imageStorageBaseUrl}
                   apiServerUrl={apiServerUrl}
                 />
+              ) : (
+                <img key={index} src={item.src} className={classes.item} alt={item.src} />
               );
             } else if (item.type === 'video') {
               return (

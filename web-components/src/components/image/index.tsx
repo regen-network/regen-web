@@ -81,19 +81,22 @@ const Image: React.FC<ImageProps> = ({
 
   useEffect(() => {
     if (width > 0 && !serverFailed) {
-      const serverUrl = getOptimizedImageSrc(src, imageStorageBaseUrl, apiServerUrl);
+      if (imageStorageBaseUrl && apiServerUrl) {
+        const serverUrl = getOptimizedImageSrc(src, imageStorageBaseUrl, apiServerUrl);
+        // Create an empty query string
+        let queryParams = '';
 
-      // Create an empty query string
-      let queryParams = '';
+        // If width is specified, otherwise use auto-detected width
+        options['w'] = options['w'] || width;
 
-      // If width is specified, otherwise use auto-detected width
-      options['w'] = options['w'] || width;
-
-      // Loop through option object and build queryString
-      Object.keys(options).map((option, i) => {
-        return (queryParams += `${i < 1 ? '?' : '&'}${option}=${options[option]}`);
-      });
-      setOptimizedSrc(`${serverUrl}${queryParams}`);
+        // Loop through option object and build queryString
+        Object.keys(options).map((option, i) => {
+          return (queryParams += `${i < 1 ? '?' : '&'}${option}=${options[option]}`);
+        });
+        setOptimizedSrc(`${serverUrl}${queryParams}`);
+      } else {
+        setOptimizedSrc(src);
+      }
     }
   }, [imgRef, serverFailed, src, imageStorageBaseUrl, options, width, apiServerUrl]);
 

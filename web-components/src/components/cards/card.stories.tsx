@@ -15,8 +15,6 @@ import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
 import GreenCard from 'web-components/lib/components/cards/GreenCard';
 import GreenTopIconCard from 'web-components/lib/components/cards/GreenTopIconCard';
 
-// import ReactSvg from '../../logo.svg';
-
 export default {
   title: 'Components|Cards',
   component: Card,

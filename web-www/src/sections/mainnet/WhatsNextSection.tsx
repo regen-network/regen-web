@@ -9,7 +9,6 @@ import GreenTopIconCard from 'web-components/src/components/cards/GreenTopIconCa
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     paddingTop: theme.spacing(10),
-    margin: theme.spacing(10),
   },
   title: {
     color: 'white',

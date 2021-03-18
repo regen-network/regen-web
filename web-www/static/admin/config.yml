@@ -686,7 +686,7 @@ collections:
                 fields:
                   - {label: "title", name: summary, widget: string}
                   - {label: "date", name: date, widget: string}
-                  - {label: "description", name: description, widget: text}
+                  - {label: "description", name: description, widget: text, required: false}
           - label: Team Section
             name: teamSection
             widget: "object"

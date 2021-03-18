@@ -34,6 +34,7 @@ import Seller from './components/Seller';
 import Signup from './components/Signup';
 import VerifyEmail from './components/VerifyEmail';
 import UserProfile from './components/UserProfile';
+import GettingStarted from './components/GettingStarted';
 
 export const history = createBrowserHistory();
 
@@ -316,6 +317,9 @@ const App: React.FC = (props): JSX.Element => {
               </>
             )}
           />
+          <Route path="/getting-started">
+            <GettingStarted />
+          </Route>
           <Route
             path="/admin"
             render={({ match: { path } }) => (

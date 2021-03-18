@@ -4,7 +4,7 @@ import clsx from 'clsx';
 
 type Props = {
   className?: string;
-  icon: () => JSX.Element;
+  icon: JSX.Element;
 };
 
 const useStyles = makeStyles((theme: Theme) => ({

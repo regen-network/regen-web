@@ -73,6 +73,12 @@ categories:
         date: August 1, 2019
         author: Impact Alpha
         url: https://impactalpha.com/techstars-sustainability-startups-tackle-clean-water-regenerative-farming-and-supply-chains/
+      - title: Microsoft uses blockchain technology to purchase soil carbon credits in
+          Australia
+        author: Cointelegraph
+        url: https://cointelegraph.com/news/microsoft-uses-blockchain-technology-to-purchase-soil-carbon-credits-in-australia
+        date: February 1, 2021
+        image: ../../static/media/screen-shot-2021-03-17-at-11.01.31-pm.png
   - name: videos
     buttonText: watch video
     showPlay: true

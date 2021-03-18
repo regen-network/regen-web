@@ -40,8 +40,8 @@ function InterfaceIcon({ className, color, onMouseEnter, onMouseLeave }: Props):
       <ellipse cx="10.7143" cy="11.7097" rx="2.71429" ry="2.70968" fill="#4FB573" />
       <ellipse cx="18.8572" cy="11.7097" rx="2.71428" ry="2.70968" fill="#4FB573" />
       <ellipse cx="27" cy="11.7097" rx="2.71428" ry="2.70968" fill="#4FB573" />
-      <path d="M22 30H63" stroke="#4FB573" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
-      <path d="M22 53H63" stroke="#4FB573" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M22 30H63" stroke="#FFC432" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M22 53H63" stroke="#FFC432" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
       <rect
         x="22"
         y="44"

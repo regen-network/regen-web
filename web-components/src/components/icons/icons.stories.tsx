@@ -36,6 +36,7 @@ import RegenLedgerIcon from 'web-components/lib/components/icons/RegenLedgerIcon
 import InfoIcon from 'web-components/lib/components/icons/InfoIcon';
 import ShieldIcon from 'web-components/lib/components/icons/ShieldIcon';
 import InterfaceIcon from 'web-components/lib/components/icons/InterfaceIcon';
+import StepCircleBadge from 'web-components/lib/components/icons/StepCircleBadge';
 
 import { withKnobs, text } from '@storybook/addon-knobs';
 
@@ -121,15 +122,6 @@ export const interfaceIcon = (): JSX.Element => <InterfaceIcon />;
 
 export const interfaceIconOnCircle = (): JSX.Element => {
   const useStyles = makeStyles(() => ({
-    circle: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      width: 111,
-      height: 111,
-      background: '#B9E1C7',
-      borderRadius: '50%',
-    },
     interface: {
       width: 100,
       height: 100,
@@ -139,9 +131,5 @@ export const interfaceIconOnCircle = (): JSX.Element => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const classes = useStyles();
 
-  return (
-    <div className={classes.circle}>
-      <InterfaceIcon className={classes.interface} />
-    </div>
-  );
+  return <StepCircleBadge icon={<InterfaceIcon className={classes.interface} />} />;
 };

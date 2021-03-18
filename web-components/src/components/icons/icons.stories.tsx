@@ -1,4 +1,5 @@
-import * as React from 'react';
+import React from 'react';
+import { makeStyles, Theme } from '@material-ui/core';
 import ArrowDownIcon from 'web-components/lib/components/icons/ArrowDownIcon';
 import AvailableCreditsIcon from 'web-components/lib/components/icons/AvailableCreditsIcon';
 import CloseIcon from 'web-components/lib/components/icons/CloseIcon';
@@ -34,6 +35,7 @@ import PrintIcon from 'web-components/lib/components/icons/PrintIcon';
 import RegenLedgerIcon from 'web-components/lib/components/icons/RegenLedgerIcon';
 import InfoIcon from 'web-components/lib/components/icons/InfoIcon';
 import ShieldIcon from 'web-components/lib/components/icons/ShieldIcon';
+import InterfaceIcon from 'web-components/lib/components/icons/InterfaceIcon';
 
 import { withKnobs, text } from '@storybook/addon-knobs';
 
@@ -114,3 +116,32 @@ export const regenLedgerIcon = (): JSX.Element => <RegenLedgerIcon />;
 export const infoIcon = (): JSX.Element => <InfoIcon />;
 
 export const shieldIcon = (): JSX.Element => <ShieldIcon />;
+
+export const interfaceIcon = (): JSX.Element => <InterfaceIcon />;
+
+export const interfaceIconOnCircle = (): JSX.Element => {
+  const useStyles = makeStyles(() => ({
+    circle: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      width: 111,
+      height: 111,
+      background: '#B9E1C7',
+      borderRadius: '50%',
+    },
+    interface: {
+      width: 100,
+      height: 100,
+    },
+  }));
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const classes = useStyles();
+
+  return (
+    <div className={classes.circle}>
+      <InterfaceIcon className={classes.interface} />
+    </div>
+  );
+};

@@ -10,7 +10,7 @@ import {
   LinearProgress,
 } from '@material-ui/core';
 import Img, { FluidObject } from 'gatsby-image';
-import { format } from 'date-fns';
+import { getFormattedDate } from 'web-components/src/utils/format';
 import clsx from 'clsx';
 
 import Section from 'web-components/src/components/section';
@@ -134,6 +134,10 @@ type ActionItem = {
   };
 };
 
+type ListItem = {
+  text: string;
+};
+
 type QueryData = {
   text: {
     launchDate: string;
@@ -148,7 +152,7 @@ type QueryData = {
         title: string;
         listTitle: string;
         progress: number;
-        listItems: string[];
+        listItems: ListItem[];
         actionItems: ActionItem[];
       };
     };
@@ -178,7 +182,9 @@ const LaunchInfoSection: React.FC = () => {
             title
             listTitle
             progress
-            listItems
+            listItems {
+              text
+            }
             actionItems {
               title
               linkUrl
@@ -211,12 +217,12 @@ const LaunchInfoSection: React.FC = () => {
         <Grid container direction="column" className={classes.cardMain}>
           <Typography className={classes.cardTitle}>{card.title}</Typography>
           <Typography className={classes.launchDate}>
-            Release date: {format(new Date(launchDate), 'MMMM Y')}
+            Release date: {getFormattedDate(launchDate, { month: 'long', year: 'numeric' })}
           </Typography>
           <Typography className={classes.listText}>{card.listTitle}</Typography>
           {card.listItems.map((item, i) => (
             <Typography key={i} className={clsx(classes.listText, classes.listItem)}>
-              {item}
+              {item.text}
             </Typography>
           ))}
           <div className={classes.progressWrap}>

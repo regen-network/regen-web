@@ -1,6 +1,6 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import { makeStyles, Theme, Typography } from '@material-ui/core';
+import { Grid, makeStyles, Theme, Typography } from '@material-ui/core';
 
 import BackgroundSection from '../../components/BackgroundSection';
 import { FluidObject } from 'gatsby-image';
@@ -9,12 +9,7 @@ import GreenTopIconCard from 'web-components/src/components/cards/GreenTopIconCa
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     paddingTop: theme.spacing(10),
-    // paddingTop: 0,
-  },
-  main: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    margin: theme.spacing(10),
   },
   title: {
     color: 'white',
@@ -105,12 +100,12 @@ const WhatsNextSection: React.FC = () => {
       linearGradient="linear-gradient(209.5deg, rgba(250, 235, 209, 0.8) 12.63%, rgba(125, 201, 191, 0.8) 44.03%, rgba(81, 93, 137, 0.8) 75.43%);"
       imageData={childImageSharp.fluid}
     >
-      <div className={classes.main}>
+      <Grid container direction="column" alignItems="center">
         <Typography variant="h1" className={classes.title}>
           {title}
         </Typography>
         <Typography className={classes.description}>{description}</Typography>
-        <div className={classes.itemWrap}>
+        <Grid container direction="row" justify="center">
           {infoItems.map(({ description, title, gitLink, icon }, i) => (
             <GreenTopIconCard
               key={i}
@@ -120,8 +115,8 @@ const WhatsNextSection: React.FC = () => {
               imgSrc={icon.publicURL}
             />
           ))}
-        </div>
-      </div>
+        </Grid>
+      </Grid>
     </BackgroundSection>
   );
 };

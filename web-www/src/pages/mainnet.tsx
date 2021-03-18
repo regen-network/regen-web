@@ -16,6 +16,7 @@ type QueryData = {
     publicURL: string;
   };
   text: {
+    seoDescription: string;
     livecastLink: string;
     launchDate: string;
   };
@@ -24,7 +25,7 @@ type QueryData = {
 const Mainnet = ({ location }: Props): JSX.Element => {
   const {
     background,
-    text: { livecastLink, launchDate },
+    text: { livecastLink, launchDate, seoDescription },
   } = useStaticQuery<QueryData>(graphql`
     query {
       background: file(relativePath: { eq: "mainnet-globe.png" }) {
@@ -36,6 +37,7 @@ const Mainnet = ({ location }: Props): JSX.Element => {
       }
       text: mainnetYaml {
         launchDate
+        seoDescription
         livecastLink
       }
     }
@@ -45,8 +47,8 @@ const Mainnet = ({ location }: Props): JSX.Element => {
     <>
       <SEO
         location={location}
-        description="With the help of our fantastic community and extraordinary team, mainnet is on the horizon!" // TODO: What should this text say?
-        title="For Buyers"
+        description={seoDescription}
+        title="Regen Mainnet"
         imageUrl={background.publicURL}
       />
       <TopSection />

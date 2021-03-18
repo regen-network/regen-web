@@ -42,6 +42,7 @@
     "react-google-recaptcha": "^2.1.0",
     "react-html-parser": "^2.0.2",
     "react-image-crop": "^8.6.6",
+    "react-lazyload": "^3.2.0",
     "react-map-gl": "^5.2.3",
     "react-phone-input-2": "^2.13.9",
     "react-remove-scroll": "^2.3.0",
@@ -50,6 +51,7 @@
     "zxcvbn": "^4.4.2"
   },
   "devDependencies": {
+    "@types/react-lazyload": "^3.1.0",
     "prettier": "2.0.5"
   }
 }

@@ -4,6 +4,17 @@ categories:
     buttonText: read article
     showPlay: false
     items:
+      - title: Microsoft uses blockchain technology to purchase soil carbon credits in
+          Australia
+        author: Cointelegraph
+        url: https://cointelegraph.com/news/microsoft-uses-blockchain-technology-to-purchase-soil-carbon-credits-in-australia
+        date: February 1, 2021
+        image: ../../static/media/screen-shot-2021-03-17-at-11.01.31-pm.png
+      - url: https://www.forbesadvocate.com.au/story/7105688/microsoft-buys-carbon-credits-from-aussie-cattle-operation/?cs=9397
+        author: Forbes Advocate
+        title: Microsoft buys carbon credits from NSW cattle operation
+        date: January 29, 2021
+        image: ../../static/media/screen-shot-2021-03-17-at-11.04.37-pm.png
       - image: ../../static/media/bbc.png
         title: Carbon credits for farming beef, rural services under the pandemic
         author: BBC

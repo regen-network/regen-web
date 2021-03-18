@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 import { useTheme } from '@material-ui/core/styles';
 import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
+import LazyLoad from 'react-lazyload';
 
 import TimelineItem from './TimelineItem';
 import { IssuanceModalData } from '../modal/IssuanceModal';
@@ -48,41 +49,44 @@ export default function Timeline({ events, completedItemIndex, txClient }: Timel
   const theme = useTheme();
 
   return (
-    <div className={classes.root}>
-      {events.map((event, index) => {
-        let circleColor: string;
-        let barColor: string;
-        // Use completedItemIndex if available to color past timeline items
-        if (completedItemIndex || completedItemIndex === 0) {
-          circleColor = index <= completedItemIndex ? theme.palette.secondary.main : theme.palette.info.main;
-          barColor = index < completedItemIndex ? theme.palette.secondary.main : theme.palette.info.main;
-        } else {
-          // else we should provide valid dates for events so we can compare them with present date
-          const eventDate = new Date(event.date);
-          circleColor = eventDate <= new Date() ? theme.palette.secondary.main : theme.palette.info.main;
-          if (index + 1 < events.length && new Date() < new Date(events[index + 1].date)) {
-            barColor = theme.palette.info.main;
+    <LazyLoad offset={300}>
+      <div className={classes.root}>
+        {events.map((event, index) => {
+          let circleColor: string;
+          let barColor: string;
+          // Use completedItemIndex if available to color past timeline items
+          if (completedItemIndex || completedItemIndex === 0) {
+            circleColor =
+              index <= completedItemIndex ? theme.palette.secondary.main : theme.palette.info.main;
+            barColor = index < completedItemIndex ? theme.palette.secondary.main : theme.palette.info.main;
           } else {
-            barColor = circleColor;
+            // else we should provide valid dates for events so we can compare them with present date
+            const eventDate = new Date(event.date);
+            circleColor = eventDate <= new Date() ? theme.palette.secondary.main : theme.palette.info.main;
+            if (index + 1 < events.length && new Date() < new Date(events[index + 1].date)) {
+              barColor = theme.palette.info.main;
+            } else {
+              barColor = circleColor;
+            }
           }
-        }
 
-        return (
-          <div className={classes.item} key={`${index}-${event.summary}`}>
-            <TimelineItem
-              date={event.date}
-              summary={event.summary}
-              description={event.description}
-              modalData={event.modalData}
-              circleColor={circleColor}
-              barColor={barColor}
-              odd={index % 2 !== 0}
-              last={index === events.length - 1}
-              txClient={txClient}
-            />
-          </div>
-        );
-      })}
-    </div>
+          return (
+            <div className={classes.item} key={`${index}-${event.summary}`}>
+              <TimelineItem
+                date={event.date}
+                summary={event.summary}
+                description={event.description}
+                modalData={event.modalData}
+                circleColor={circleColor}
+                barColor={barColor}
+                odd={index % 2 !== 0}
+                last={index === events.length - 1}
+                txClient={txClient}
+              />
+            </div>
+          );
+        })}
+      </div>
+    </LazyLoad>
   );
 }

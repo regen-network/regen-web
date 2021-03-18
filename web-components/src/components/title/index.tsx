@@ -8,7 +8,7 @@ interface TitleProps {
   children?: any;
   color?: any;
   className?: string;
-  onClick?: () => void;
+  onClick?: React.MouseEventHandler;
   align?: 'left' | 'right' | 'inherit' | 'center' | 'justify' | undefined;
 }
 

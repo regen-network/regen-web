@@ -417,7 +417,7 @@ export default function LedgerModal({
                       ? `${numberFormat.format(parseFloat(txRes.tx.authInfo.fee.amount[0].amount))} ${
                           txRes.tx.authInfo.fee.amount[0].denom
                         }`
-                      : '-'}
+                      : '0'}
                   </Grid>
                 </Grid>
                 <Grid container className={classes.blockchainItem}>

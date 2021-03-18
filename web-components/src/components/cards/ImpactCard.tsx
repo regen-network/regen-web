@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 // import { useTheme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+
 import Card from './Card';
 // import VerifiedIcon from '../icons/VerifiedIcon';
 
@@ -126,13 +127,13 @@ export default function ImpactCard({
           <Typography className={classes.name}>{name}</Typography>
           <Typography className={classes.description}>{description}</Typography>
           {/*monitored && (
-            <span className={classes.monitored}>
-              <span className={classes.monitoredIcon}>
-                <VerifiedIcon color={theme.palette.secondary.main} />
+              <span className={classes.monitored}>
+                <span className={classes.monitoredIcon}>
+                  <VerifiedIcon color={theme.palette.secondary.main} />
+                </span>
+                verified and tracked on the regen ledger
               </span>
-              verified and tracked on the regen ledger
-            </span>
-          )*/}
+            )*/}
         </div>
       </div>
     </Card>

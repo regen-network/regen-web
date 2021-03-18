@@ -8,6 +8,7 @@ import { directionRotate } from './ArrowDownIcon';
 interface Props {
   className?: string;
   direction?: 'next' | 'prev' | 'down' | 'up';
+  onClick?: React.MouseEventHandler;
 }
 
 interface StyleProps {
@@ -20,12 +21,12 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   }),
 }));
 
-export default function BreadcrumbIcon({ direction = 'down', className }: Props): JSX.Element {
+export default function BreadcrumbIcon({ direction = 'down', className, onClick }: Props): JSX.Element {
   const rotate: string = directionRotate[direction];
   const classes = useStyles({ rotate });
 
   return (
-    <SvgIcon viewBox="0 0 33 20" className={clsx(className, classes.root)}>
+    <SvgIcon viewBox="0 0 33 20" className={clsx(className, classes.root)} onClick={onClick}>
       <rect
         width="4.27533"
         height="23.6375"

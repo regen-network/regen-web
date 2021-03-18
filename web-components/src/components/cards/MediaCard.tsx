@@ -6,9 +6,10 @@ import clsx from 'clsx';
 import ReactHtmlParser from 'react-html-parser';
 
 import Card from './Card';
+import Image, { OptimizeImageProps } from '../image';
 import Title from '../title';
 
-export interface MediaCardProps {
+export interface MediaCardProps extends OptimizeImageProps {
   children?: any;
   imgSrc: string;
   name?: string;
@@ -103,15 +104,28 @@ export default function MediaCard({
   backgroundGradient = true,
   imageClassName,
   titleOverwrite = true,
+  imageStorageBaseUrl,
+  apiServerUrl,
 }: MediaCardProps): JSX.Element {
   const classes = useStyles({});
 
-  const media = (
-    <CardMedia className={clsx(imageClassName, classes.image)} image={imgSrc}>
-      {backgroundGradient && <div className={classes.backgroundGradient} />}
-      {tag && <div className={classes.tag}>{tag}</div>}
-    </CardMedia>
+  const optimizedImage = (): JSX.Element => (
+    <Image
+      className={clsx(imageClassName, classes.image)}
+      backgroundImage
+      src={imgSrc}
+      imageStorageBaseUrl={imageStorageBaseUrl}
+      apiServerUrl={apiServerUrl}
+    >
+      <>
+        {backgroundGradient && <div className={classes.backgroundGradient} />}
+        {tag && <div className={classes.tag}>{tag}</div>}
+      </>
+    </Image>
   );
+
+  const media = <CardMedia className={clsx(imageClassName, classes.image)} component={optimizedImage} />;
+
   return (
     <Card
       className={className}

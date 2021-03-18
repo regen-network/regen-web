@@ -3,6 +3,7 @@ import { makeStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import ReactHtmlParser from 'react-html-parser';
 import clsx from 'clsx';
+import LazyLoad from 'react-lazyload';
 
 import { Project, ProjectDefault } from '../../mocks';
 import { Media } from 'web-components/lib/components/sliders/ProjectMedia';
@@ -178,6 +179,8 @@ export default function ProjectTop({ project, projectDefault }: ProjectTopProps)
   const classes = useStyles();
 
   const videos: Media | Media[] | undefined = project.media.filter(item => item.type === 'video');
+  const imageStorageBaseUrl = process.env.REACT_APP_IMAGE_STORAGE_BASE_URL;
+  const apiServerUrl = process.env.REACT_APP_API_URI;
 
   return (
     <Section className={classes.section}>
@@ -193,9 +196,16 @@ export default function ProjectTop({ project, projectDefault }: ProjectTopProps)
             />
           </div>
           {project.glanceImgSrc && project.glanceText && (
-            <div className={classes.glanceCard}>
-              <GlanceCard imgSrc={project.glanceImgSrc} text={project.glanceText} />
-            </div>
+            <LazyLoad offset={50} once>
+              <div className={classes.glanceCard}>
+                <GlanceCard
+                  imgSrc={project.glanceImgSrc}
+                  text={project.glanceText}
+                  imageStorageBaseUrl={imageStorageBaseUrl}
+                  apiServerUrl={apiServerUrl}
+                />
+              </div>
+            </LazyLoad>
           )}
           <Title className={classes.story} variant="h2">
             {project.fieldsOverride && project.fieldsOverride.story
@@ -205,23 +215,25 @@ export default function ProjectTop({ project, projectDefault }: ProjectTopProps)
           <Description className={classes.description}>
             {ReactHtmlParser(project.shortDescription)}
           </Description>
-          {videos.length > 0 &&
-            (/https:\/\/www.youtube.com\/embed\/[a-zA-Z0-9_.-]+/.test(videos[0].src) ? (
-              <iframe
-                className={clsx(classes.iframe, classes.media)}
-                title={project.name}
-                src={videos[0].src}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              ></iframe>
-            ) : (
-              <video className={classes.media} controls poster={videos[0].preview}>
-                <source src={videos[0].src} />
-              </video>
-            ))}
-          {/* Show latest image for now */}
-          {project.media.length > 4 && project.media[4].type === 'image' && (
-            <img className={classes.media} alt={project.media[4].src} src={project.media[4].src} />
-          )}
+          <LazyLoad offset={50}>
+            {videos.length > 0 &&
+              (/https:\/\/www.youtube.com\/embed\/[a-zA-Z0-9_.-]+/.test(videos[0].src) ? (
+                <iframe
+                  className={clsx(classes.iframe, classes.media)}
+                  title={project.name}
+                  src={videos[0].src}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                ></iframe>
+              ) : (
+                <video className={classes.media} controls poster={videos[0].preview}>
+                  <source src={videos[0].src} />
+                </video>
+              ))}
+            {/* Show latest image for now */}
+            {project.media.length > 4 && project.media[4].type === 'image' && (
+              <img className={classes.media} alt={project.media[4].src} src={project.media[4].src} />
+            )}
+          </LazyLoad>
           <Title variant="h4" className={classes.tagline}>
             {project.tagline}
           </Title>

@@ -32,7 +32,12 @@ const GettingStarted: React.FC<Props> = ({}) => {
       <Title variant="h3" className={classes.title}>
         Getting Started
       </Title>
-      <StepCard icon={<InterfaceIcon className={classes.interfaceIcon} />} />
+      <StepCard
+        icon={<InterfaceIcon className={classes.interfaceIcon} />}
+        stepText="STEP 1"
+        title="Fill out a project plan"
+        description="This project plan includes all the details about your monitoring, management practices, and more."
+      />
     </div>
   );
 };

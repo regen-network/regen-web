@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 import { Card } from '@material-ui/core';
+import clsx from 'clsx';
 
 import StepCircleBadge from '../icons/StepCircleBadge';
 import Title from '../title';
@@ -9,6 +10,9 @@ import Description from '../description';
 interface StepCardProps {
   className?: string;
   icon: JSX.Element;
+  stepText: string;
+  title: string;
+  description?: string;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -31,7 +35,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   step: {
     color: theme.palette.secondary.main,
     fontWeight: 800,
-    fontSize: theme.spacing(3.5),
+    [theme.breakpoints.down('xs')]: {
+      fontSize: theme.spacing(3.5),
+    },
   },
   stepTitle: {
     padding: theme.spacing(3.5, 0),
@@ -42,33 +48,34 @@ const useStyles = makeStyles((theme: Theme) => ({
   stepDescription: {
     textAlign: 'center',
     color: theme.palette.info.dark,
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(5.5),
-    },
     [theme.breakpoints.down('xs')]: {
       fontSize: theme.spacing(4),
     },
   },
 }));
 
-export default function StepCard({ className, icon }: StepCardProps): JSX.Element {
+export default function StepCard({
+  className,
+  icon,
+  stepText,
+  title,
+  description,
+}: StepCardProps): JSX.Element {
   const classes = useStyles({});
 
   return (
-    <Card variant="outlined" className={classes.card}>
+    <Card variant="outlined" className={clsx(className, classes.card)}>
       <div className={classes.cardTop}>
         <StepCircleBadge icon={icon} />
       </div>
       <div className={classes.cardBottom}>
         <Title variant="h6" className={classes.step}>
-          STEP 1
+          {stepText}
         </Title>
         <Title variant="h4" className={classes.stepTitle}>
-          Fill out a project plan
+          {title}
         </Title>
-        <Description className={classes.stepDescription}>
-          This project plan includes all the details about your monitoring, management practices, and more.{' '}
-        </Description>
+        <Description className={classes.stepDescription}>{description}</Description>
       </div>
     </Card>
   );

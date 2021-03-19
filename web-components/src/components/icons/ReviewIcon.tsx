@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-function ReviewIcon({ className, onMouseEnter, onMouseLeave }: Props): JSX.Element {
+function ReviewIcon({ className, color, onMouseEnter, onMouseLeave }: Props): JSX.Element {
   const classes = useStyles();
 
   return (
@@ -20,7 +20,7 @@ function ReviewIcon({ className, onMouseEnter, onMouseLeave }: Props): JSX.Eleme
       className={clsx(className, classes.root)}
       viewBox="0 0 96 97"
       xmlns="http://www.w3.org/2000/svg"
-      fill="none"
+      fill={color}
       width="96"
       height="97"
       onMouseEnter={onMouseEnter}

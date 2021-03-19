@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   card: {
     borderColor: theme.palette.grey[100],
     borderRadius: 5,
-    padding: theme.spacing(3.5, 0),
+    padding: theme.spacing(4, 0),
     margin: theme.spacing(4, 0),
   },
   cardTop: {
@@ -69,12 +69,14 @@ const useStyles = makeStyles((theme: Theme) => ({
   step: {
     color: theme.palette.secondary.main,
     fontWeight: 800,
+    textTransform: 'uppercase',
     [theme.breakpoints.down('xs')]: {
       fontSize: theme.spacing(3.5),
     },
   },
   stepTitle: {
     padding: theme.spacing(3.5, 0),
+    textAlign: 'center',
     [theme.breakpoints.down('xs')]: {
       fontSize: theme.spacing(4.5),
     },

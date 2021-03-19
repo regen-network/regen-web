@@ -6,6 +6,7 @@ import clsx from 'clsx';
 import StepCircleBadge from '../icons/StepCircleBadge';
 import Title from '../title';
 import Description from '../description';
+import Tag from '../tag';
 
 interface StepCardProps {
   className?: string;
@@ -20,6 +21,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     borderColor: theme.palette.grey[100],
     borderRadius: 5,
     padding: theme.spacing(3.5, 0),
+    margin: theme.spacing(2, 0),
   },
   cardTop: {
     display: 'flex',

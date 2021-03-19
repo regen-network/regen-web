@@ -14,7 +14,7 @@ interface StepCardProps {
   tagName?: string;
   stepText: string;
   title: string;
-  description?: string;
+  description?: string | JSX.Element;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -45,6 +45,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginRight: 0,
     borderRadius: 0,
     fontSize: theme.spacing(3),
+    maxWidth: '90%',
   },
   cardBottom: {
     display: 'flex',

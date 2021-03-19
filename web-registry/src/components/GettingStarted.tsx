@@ -51,24 +51,29 @@ const GettingStarted: React.FC<Props> = ({}) => {
       </Title>
       <StepCard
         icon={<InterfaceIcon className={classes.interfaceIcon} />}
-        tagName="IMMEDIATE"
+        tagName="immediate"
         stepText="STEP 1"
         title="Fill out a project plan"
         description="This project plan includes all the details about your monitoring, management practices, and more."
       />
       <StepCard
         icon={<ReviewIcon className={classes.reviewIcon} />}
-        tagName="IMMEDIATE"
+        tagName="immediate"
         stepText="STEP 2"
         title="Review and Submit"
         description="Review your project plan to make sure all entries are correct."
       />
       <StepCard
         icon={<TrustDocumentIcon className={classes.trustDocumentIcon} />}
-        tagName="IMMEDIATE"
+        tagName="immediate"
         stepText="STEP 3"
         title="Fill out a project plan"
-        description="This project plan includes all the details about your monitoring, management practices, and more."
+        description={
+          <span>
+            This project plan includes all the details about your monitoring, management practices,
+            <a href="#"> and more.</a>
+          </span>
+        }
       />
     </div>
   );

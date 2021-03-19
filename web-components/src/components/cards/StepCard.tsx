@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles, Theme, useTheme } from '@material-ui/core';
 import { Card } from '@material-ui/core';
 import clsx from 'clsx';
 
@@ -11,6 +11,7 @@ import Tag from '../tag';
 interface StepCardProps {
   className?: string;
   icon: JSX.Element;
+  tagName?: string;
   stepText: string;
   title: string;
   description?: string;
@@ -26,6 +27,24 @@ const useStyles = makeStyles((theme: Theme) => ({
   cardTop: {
     display: 'flex',
     justifyContent: 'center',
+  },
+  cardTopLeft: {
+    display: 'flex',
+    flex: 1,
+  },
+  cardTopCenter: {
+    flex: 1,
+  },
+  cardTopRight: {
+    display: 'flex',
+    flex: 1,
+    alignItems: 'flex-start',
+  },
+  tag: {
+    marginLeft: 'auto',
+    marginRight: 0,
+    borderRadius: 0,
+    fontSize: theme.spacing(3),
   },
   cardBottom: {
     display: 'flex',
@@ -59,16 +78,22 @@ const useStyles = makeStyles((theme: Theme) => ({
 export default function StepCard({
   className,
   icon,
+  tagName,
   stepText,
   title,
   description,
 }: StepCardProps): JSX.Element {
   const classes = useStyles({});
+  const theme = useTheme();
 
   return (
     <Card variant="outlined" className={clsx(className, classes.card)}>
       <div className={classes.cardTop}>
-        <StepCircleBadge icon={icon} />
+        <div className={classes.cardTopLeft}></div>
+        <StepCircleBadge icon={icon} className={classes.cardTopCenter} />
+        <div className={classes.cardTopRight}>
+          {tagName && <Tag className={classes.tag} name={tagName} color={theme.palette.secondary.main} />}
+        </div>
       </div>
       <div className={classes.cardBottom}>
         <Title variant="h6" className={classes.step}>

@@ -1,11 +1,13 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
+import clsx from 'clsx';
 
 interface StyleProps {
   color?: string;
 }
 
 interface TagProps {
+  className?: string;
   color: string;
   name: string;
 }
@@ -26,7 +28,8 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   }),
 }));
 
-export default function Tag({ name, color }: TagProps): JSX.Element {
+export default function Tag({ className, name, color }: TagProps): JSX.Element {
   const classes = useStyles({ color });
-  return <span className={classes.tag}>{name}</span>;
+
+  return <span className={clsx(className, classes.tag)}>{name}</span>;
 }

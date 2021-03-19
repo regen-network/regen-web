@@ -74,7 +74,14 @@ function ShadedCreditsIcon({ className, color, onMouseEnter, onMouseLeave }: Pro
           stroke={color || '#8F8F8F'}
           strokeWidth="1.5"
         />
-        <ellipse cx="21.3755" cy="21.3115" rx="17.2468" ry="9.55422" stroke={color || '#8F8F8F'} strokeWidth="3" />
+        <ellipse
+          cx="21.3755"
+          cy="21.3115"
+          rx="17.2468"
+          ry="9.55422"
+          stroke={color || '#8F8F8F'}
+          strokeWidth="3"
+        />
         <path
           d="M4.12866 30.0698C4.12866 35.3465 11.8503 39.624 21.3755 39.624C25.5276 39.624 29.337 38.8112 32.3135 37.4572"
           stroke={color || '#8F8F8F'}
@@ -105,7 +112,14 @@ function ShadedCreditsIcon({ className, color, onMouseEnter, onMouseLeave }: Pro
           stroke={color || '#8F8F8F'}
           strokeWidth="3"
         />
-        <ellipse cx="69.6531" cy="12.8262" rx="17.2468" ry="9.84374" stroke={color || '#8F8F8F'} strokeWidth="3" />
+        <ellipse
+          cx="69.6531"
+          cy="12.8262"
+          rx="17.2468"
+          ry="9.84374"
+          stroke={color || '#8F8F8F'}
+          strokeWidth="3"
+        />
         <path
           d="M86.9 21.8501C86.9 27.2866 79.1784 31.6938 69.6532 31.6938C68.2566 31.6938 66.8988 31.5991 65.5984 31.4202"
           stroke={color || '#8F8F8F'}
@@ -151,7 +165,14 @@ function ShadedCreditsIcon({ className, color, onMouseEnter, onMouseLeave }: Pro
           stroke={color || '#8F8F8F'}
           strokeWidth="1.5"
         />
-        <ellipse cx="49.676" cy="36.1328" rx="17.2468" ry="9.84374" stroke={color || '#8F8F8F'} strokeWidth="3" />
+        <ellipse
+          cx="49.676"
+          cy="36.1328"
+          rx="17.2468"
+          ry="9.84374"
+          stroke={color || '#8F8F8F'}
+          strokeWidth="3"
+        />
         <path
           d="M66.9228 45.1567C66.9228 50.5933 59.2012 55.0005 49.676 55.0005C40.1509 55.0005 32.4292 50.5933 32.4292 45.1567"
           stroke={color || '#8F8F8F'}

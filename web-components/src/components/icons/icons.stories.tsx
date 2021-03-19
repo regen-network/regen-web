@@ -1,5 +1,4 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
 import ArrowDownIcon from 'web-components/lib/components/icons/ArrowDownIcon';
 import AvailableCreditsIcon from 'web-components/lib/components/icons/AvailableCreditsIcon';
 import CloseIcon from 'web-components/lib/components/icons/CloseIcon';
@@ -36,7 +35,6 @@ import RegenLedgerIcon from 'web-components/lib/components/icons/RegenLedgerIcon
 import InfoIcon from 'web-components/lib/components/icons/InfoIcon';
 import ShieldIcon from 'web-components/lib/components/icons/ShieldIcon';
 import InterfaceIcon from 'web-components/lib/components/icons/InterfaceIcon';
-import StepCircleBadge from 'web-components/lib/components/icons/StepCircleBadge';
 
 import { withKnobs, text } from '@storybook/addon-knobs';
 

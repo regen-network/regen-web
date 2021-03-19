@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 
 import AccountabilityIcon from 'web-components/lib/components/icons/AccountabilityIcon';
@@ -35,11 +35,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     height: 94.7,
     marginTop: 14,
     marginLeft: 14,
-    // position: 'absolute',
-    // left: '39.44%',
-    // right: '34.68%',
-    // top: '13.82%',
-    // bottom: '83.84%',
   },
   trustDocumentIcon: {
     width: 59.42,
@@ -67,11 +62,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     height: 98.56,
     marginTop: 7,
     marginRight: 7,
-    fill: 'white !important',
   },
 }));
 
-const GettingStarted: React.FC<Props> = ({}) => {
+const GettingStarted: React.FC<Props> = () => {
   const classes = useStyles();
   const theme = useTheme();
 
@@ -102,7 +96,7 @@ const GettingStarted: React.FC<Props> = ({}) => {
         description={
           <span>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut.
-            <a href="#"> Read full documentation»</a>
+            <a href="https://regen.network"> Read full documentation»</a>
           </span>
         }
       />
@@ -121,7 +115,7 @@ const GettingStarted: React.FC<Props> = ({}) => {
         description={
           <span>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut.
-            <a href="#"> Read full documentation»</a>
+            <a href="https://regen.network"> Read full documentation»</a>
           </span>
         }
       />
@@ -133,7 +127,7 @@ const GettingStarted: React.FC<Props> = ({}) => {
         description={
           <span>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut.
-            <a href="#"> Read full documentation»</a>
+            <a href="https://regen.network"> Read full documentation»</a>
           </span>
         }
       />
@@ -145,7 +139,7 @@ const GettingStarted: React.FC<Props> = ({}) => {
         description={
           <span>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut.
-            <a href="#"> Read full documentation»</a>
+            <a href="https://regen.network"> Read full documentation»</a>
           </span>
         }
       />
@@ -157,7 +151,7 @@ const GettingStarted: React.FC<Props> = ({}) => {
         description={
           <span>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut.
-            <a href="#"> Read full documentation»</a>
+            <a href="https://regen.network"> Read full documentation»</a>
           </span>
         }
       />

@@ -33,15 +33,15 @@ function InterfaceIcon({ className, color, onMouseEnter, onMouseLeave }: Props):
         rx="2"
         fill="white"
         stroke="#4FB573"
-        stroke-width="6"
+        strokeWidth="6"
         mask="url(#path-1-inside-1)"
       />
-      <path d="M3 20L117 20" stroke="#4FB573" stroke-width="2" />
+      <path d="M3 20L117 20" stroke="#4FB573" strokeWidth="2" />
       <ellipse cx="10.7143" cy="11.7097" rx="2.71429" ry="2.70968" fill="#4FB573" />
       <ellipse cx="18.8572" cy="11.7097" rx="2.71428" ry="2.70968" fill="#4FB573" />
       <ellipse cx="27" cy="11.7097" rx="2.71428" ry="2.70968" fill="#4FB573" />
-      <path d="M22 30H63" stroke="#FFC432" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
-      <path d="M22 53H63" stroke="#FFC432" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M22 30H63" stroke="#FFC432" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M22 53H63" stroke="#FFC432" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
       <rect
         x="22"
         y="44"
@@ -49,9 +49,9 @@ function InterfaceIcon({ className, color, onMouseEnter, onMouseLeave }: Props):
         height="76"
         transform="rotate(-90 22 44)"
         stroke="#4FB573"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <rect
         x="22"
@@ -60,9 +60,9 @@ function InterfaceIcon({ className, color, onMouseEnter, onMouseLeave }: Props):
         height="36"
         transform="rotate(-90 22 67)"
         stroke="#4FB573"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <rect
         x="62"
@@ -71,9 +71,9 @@ function InterfaceIcon({ className, color, onMouseEnter, onMouseLeave }: Props):
         height="36"
         transform="rotate(-90 62 67)"
         stroke="#4FB573"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <rect
         x="79"
@@ -83,9 +83,9 @@ function InterfaceIcon({ className, color, onMouseEnter, onMouseLeave }: Props):
         transform="rotate(-90 79 85)"
         fill="#4FB573"
         stroke="#4FB573"
-        stroke-width="3"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </SvgIcon>
   );

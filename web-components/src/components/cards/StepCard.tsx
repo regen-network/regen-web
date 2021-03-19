@@ -3,6 +3,7 @@ import { makeStyles, Theme, useTheme } from '@material-ui/core';
 import { Card } from '@material-ui/core';
 import clsx from 'clsx';
 
+import ArrowFilledIcon from '../icons/ArrowFilledIcon';
 import StepCircleBadge from '../icons/StepCircleBadge';
 import Title from '../title';
 import Description from '../description';
@@ -18,11 +19,22 @@ interface StepCardProps {
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
+  root: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    '&:last-child': {
+      '& .down-arrow': {
+        display: 'none',
+        visibility: 'hidden',
+      },
+    },
+  },
   card: {
     borderColor: theme.palette.grey[100],
     borderRadius: 5,
     padding: theme.spacing(3.5, 0),
-    margin: theme.spacing(2, 0),
+    margin: theme.spacing(4, 0),
   },
   cardTop: {
     display: 'flex',
@@ -88,23 +100,26 @@ export default function StepCard({
   const theme = useTheme();
 
   return (
-    <Card variant="outlined" className={clsx(className, classes.card)}>
-      <div className={classes.cardTop}>
-        <div className={classes.cardTopLeft}></div>
-        <StepCircleBadge icon={icon} className={classes.cardTopCenter} />
-        <div className={classes.cardTopRight}>
-          {tagName && <Tag className={classes.tag} name={tagName} color={theme.palette.secondary.main} />}
+    <div className={classes.root}>
+      <Card variant="outlined" className={clsx(className, classes.card)}>
+        <div className={classes.cardTop}>
+          <div className={classes.cardTopLeft}></div>
+          <StepCircleBadge icon={icon} className={classes.cardTopCenter} />
+          <div className={classes.cardTopRight}>
+            {tagName && <Tag className={classes.tag} name={tagName} color={theme.palette.secondary.main} />}
+          </div>
         </div>
-      </div>
-      <div className={classes.cardBottom}>
-        <Title variant="h6" className={classes.step}>
-          {stepText}
-        </Title>
-        <Title variant="h4" className={classes.stepTitle}>
-          {title}
-        </Title>
-        <Description className={classes.stepDescription}>{description}</Description>
-      </div>
-    </Card>
+        <div className={classes.cardBottom}>
+          <Title variant="h6" className={classes.step}>
+            {stepText}
+          </Title>
+          <Title variant="h4" className={classes.stepTitle}>
+            {title}
+          </Title>
+          <Description className={classes.stepDescription}>{description}</Description>
+        </div>
+      </Card>
+      <ArrowFilledIcon className="down-arrow" color={theme.palette.info.main} />
+    </div>
   );
 }

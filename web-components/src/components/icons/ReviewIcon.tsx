@@ -30,15 +30,15 @@ function ReviewIcon({ className, onMouseEnter, onMouseLeave }: Props): JSX.Eleme
         d="M2 12H63V20.6145V63.9198V73H2V12Z"
         fill="white"
         stroke="#4FB573"
-        stroke-width="3"
-        stroke-linejoin="round"
+        strokeWidth="3"
+        strokeLinejoin="round"
       />
       <path
         d="M11 2H72V13.2977V70.0916V82H11V2Z"
         fill="white"
         stroke="#4FB573"
-        stroke-width="3"
-        stroke-linejoin="round"
+        strokeWidth="3"
+        strokeLinejoin="round"
       />
       <rect
         x="20.4407"
@@ -107,7 +107,7 @@ function ReviewIcon({ className, onMouseEnter, onMouseLeave }: Props): JSX.Eleme
         transform="rotate(-45 58.5359 60.1001)"
         fill="white"
         stroke="#4FB573"
-        stroke-width="3"
+        strokeWidth="3"
       />
       <rect
         x="72.8451"

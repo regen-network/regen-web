@@ -13,6 +13,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
+    alignItems: 'center',
     padding: 16,
   },
   title: {
@@ -43,6 +44,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const GettingStarted: React.FC<Props> = ({}) => {
   const classes = useStyles();
+  const theme = useTheme();
 
   return (
     <div className={classes.root}>

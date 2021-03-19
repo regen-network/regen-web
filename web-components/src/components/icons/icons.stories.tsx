@@ -119,17 +119,3 @@ export const infoIcon = (): JSX.Element => <InfoIcon />;
 export const shieldIcon = (): JSX.Element => <ShieldIcon />;
 
 export const interfaceIcon = (): JSX.Element => <InterfaceIcon />;
-
-export const interfaceIconOnCircle = (): JSX.Element => {
-  const useStyles = makeStyles(() => ({
-    interface: {
-      width: 100,
-      height: 100,
-    },
-  }));
-
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const classes = useStyles();
-
-  return <StepCircleBadge icon={<InterfaceIcon className={classes.interface} />} />;
-};

@@ -14,6 +14,7 @@ import clsx from 'clsx';
 
 import Title from '../title';
 import Modal from '../modal';
+import Tag from '../tag';
 
 interface StyleProps {
   color?: string;
@@ -112,19 +113,6 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   tags: {
     textAlign: 'left',
   },
-  tag: props => ({
-    backgroundColor: props.color || theme.palette.secondary.main,
-    color: theme.palette.primary.main,
-    lineHeight: theme.spacing(4.5),
-    fontSize: theme.spacing(3.5),
-    letterSpacing: '1px',
-    textTransform: 'uppercase',
-    textAlign: 'center',
-    borderRadius: '2px',
-    fontFamily: theme.typography.h1.fontFamily,
-    padding: `${theme.spacing(0.75)} ${theme.spacing(2)}`,
-    marginRight: theme.spacing(2.5),
-  }),
   connector: {
     backgroundColor: theme.palette.grey[100],
     width: '4px',
@@ -188,11 +176,6 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     },
   },
 }));
-
-function Tag({ name, color }: Tag): JSX.Element {
-  const classes = useStyles({ color });
-  return <span className={classes.tag}>{name}</span>;
-}
 
 function Content({ item, index, onTitleClick }: ContentProps): JSX.Element {
   const classes = useStyles({ even: index % 2 === 0 });

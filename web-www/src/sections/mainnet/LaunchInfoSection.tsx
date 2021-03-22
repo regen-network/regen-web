@@ -206,7 +206,7 @@ const LaunchInfoSection: React.FC = () => {
       <Typography variant="h1" className={classes.title}>
         {title}
       </Typography>
-      <Grid container justify="space-evenly" className={classes.actionItems}>
+      <Grid container justify="center" className={classes.actionItems}>
         {card.actionItems.map((item, i) => (
           <ActionItem key={i} {...item} />
         ))}
@@ -241,8 +241,11 @@ const useActionItemStyles = makeStyles((theme: Theme) => ({
     flexDirection: 'column',
     alignItems: 'center',
     textAlign: 'center',
-    maxWidth: theme.spacing(70),
+    maxWidth: theme.spacing(90),
     margin: theme.spacing(10, 4),
+    [theme.breakpoints.only('md')]: {
+      maxWidth: theme.spacing(70),
+    },
   },
   img: {
     minWidth: '100%',

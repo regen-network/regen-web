@@ -39,7 +39,12 @@ type CardItem = Item & {
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    padding: theme.spacing(10, 0, 20),
+    [theme.breakpoints.up('sm')]: {
+      padding: theme.spacing(10, 4, 20),
+    },
+    [theme.breakpoints.down('xs')]: {
+      padding: theme.spacing(10, 0, 20),
+    },
   },
   main: {
     display: 'flex',
@@ -48,14 +53,18 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   title: {
     fontSize: theme.spacing(10),
-    textAlign: 'left',
+    fontWeight: 900,
   },
   headerWrap: {
     display: 'flex',
-    padding: theme.spacing(0, 4),
     flexFlow: 'row nowrap',
-    justifyContent: 'space-between',
     marginBottom: theme.spacing(4),
+    [theme.breakpoints.up('sm')]: {
+      justifyContent: 'space-between',
+    },
+    [theme.breakpoints.down('xs')]: {
+      justifyContent: 'center',
+    },
   },
   slider: {
     padding: theme.spacing(4),

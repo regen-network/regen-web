@@ -10,6 +10,7 @@ import StepCircleBadge from '../icons/StepCircleBadge';
 import Title from '../title';
 import Description from '../description';
 import Tag from '../tag';
+import StepFAQs from '../faq/StepFAQs';
 
 interface StepCardProps {
   className?: string;
@@ -102,21 +103,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       fontSize: theme.spacing(4),
     },
   },
-  faq: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    width: '100%',
-    borderTop: `1px solid ${theme.palette.grey[100]}`,
-    padding: theme.spacing(4),
-  },
-  addButton: {
-    padding: theme.spacing(1),
-    minWidth: 'unset', //todo
-  },
-  add: {
-    color: theme.palette.secondary.main,
-  },
 }));
 
 export default function StepCard({
@@ -129,6 +115,16 @@ export default function StepCard({
 }: StepCardProps): JSX.Element {
   const classes = useStyles({});
   const theme = useTheme();
+  const questionItems = [
+    { question: 'How do i so and so?', answer: 'you just do' },
+    {
+      question: 'How do i so and so? Like really what do i do?',
+      answer:
+        'you just do. you just do. you just do. ok okok okok okookok ABC123 okokokok ok. you just do. you just do. you just do. ',
+    },
+    { question: 'How do i so and so?', answer: 'you just do' },
+    { question: 'How do i so and so?', answer: 'you just do' },
+  ];
 
   return (
     <div className={classes.root}>
@@ -151,14 +147,7 @@ export default function StepCard({
           </Title>
           <Description className={classes.stepDescription}>{description}</Description>
         </div>
-        <div className={classes.faq}>
-          <Title variant="h6" className={classes.step}>
-            top faqs
-          </Title>
-          <Button className={classes.addButton}>
-            <AddOutlinedIcon className={classes.add} />
-          </Button>
-        </div>
+        <StepFAQs questions={questionItems} />
       </Card>
       <ArrowFilledIcon className="down-arrow" color={theme.palette.info.main} />
     </div>

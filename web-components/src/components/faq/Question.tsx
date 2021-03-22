@@ -10,6 +10,7 @@ import copyTextToClipboard from '../../utils/copy';
 import Banner from '../banner';
 
 export interface QuestionItem {
+  classNames?: Record<string, string>;
   question: string;
   answer: string;
 }
@@ -161,6 +162,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
 }));
 
 const Question = ({
+  classNames,
   question,
   answer,
   questionId,
@@ -194,7 +196,7 @@ const Question = ({
 
   return (
     <div className={classes.root} id={id}>
-      <div className={classes.container}>
+      <div className={clsx(classes.container, classNames?.container)}>
         <Title variant="h5" className={classes.question} onClick={handleClick}>
           {question}
           {open ? (

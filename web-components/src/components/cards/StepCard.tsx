@@ -19,6 +19,7 @@ interface StepCardProps {
   stepText: string;
   title: string;
   description?: string | JSX.Element;
+  isActive?: boolean;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -40,11 +41,14 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexDirection: 'column',
     alignItems: 'center',
     width: '100%', //TODO why not flexgrow?
-
     borderColor: theme.palette.grey[100],
     borderRadius: 5,
     padding: theme.spacing(4, 0, 0),
     margin: theme.spacing(4, 0),
+    backgroundColor: theme.palette.info.light, // (inactive style by default)
+  },
+  activeCard: {
+    backgroundColor: theme.palette.primary.main,
   },
   cardTop: {
     display: 'flex',
@@ -58,7 +62,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   cardTopCenter: {
     display: 'flex',
-
     flex: 1,
     justifyContent: 'center',
   },
@@ -82,19 +85,26 @@ const useStyles = makeStyles((theme: Theme) => ({
     padding: theme.spacing(3.5, 3.5, 4),
   },
   step: {
-    color: theme.palette.secondary.main,
+    color: theme.palette.info.main,
     fontWeight: 800,
     textTransform: 'uppercase',
     [theme.breakpoints.down('xs')]: {
       fontSize: theme.spacing(3.5),
     },
   },
+  activeColor: {
+    color: theme.palette.secondary.main,
+  },
   stepTitle: {
+    color: theme.palette.info.main,
     padding: theme.spacing(3.5, 0),
     textAlign: 'center',
     [theme.breakpoints.down('xs')]: {
       fontSize: theme.spacing(4.5),
     },
+  },
+  activeTitle: {
+    color: theme.palette.primary.contrastText,
   },
   stepDescription: {
     textAlign: 'center',
@@ -112,6 +122,7 @@ export default function StepCard({
   stepText,
   title,
   description,
+  isActive,
 }: StepCardProps): JSX.Element {
   const classes = useStyles({});
   const theme = useTheme();
@@ -128,21 +139,21 @@ export default function StepCard({
 
   return (
     <div className={classes.root}>
-      <Card variant="outlined" className={clsx(className, classes.card)}>
+      <Card variant="outlined" className={clsx(className, classes.card, isActive && classes.activeCard)}>
         <div className={classes.cardTop}>
           <div className={classes.cardTopLeft}></div>
           <div className={classes.cardTopCenter}>
-            <StepCircleBadge icon={icon} />
+            <StepCircleBadge icon={icon} isActive={isActive} />
           </div>
           <div className={classes.cardTopRight}>
             {tagName && <Tag className={classes.tag} name={tagName} color={theme.palette.secondary.main} />}
           </div>
         </div>
         <div className={classes.cardBottom}>
-          <Title variant="h6" className={classes.step}>
+          <Title variant="h6" className={clsx(classes.step, isActive && classes.activeColor)}>
             {stepText}
           </Title>
-          <Title variant="h4" className={classes.stepTitle}>
+          <Title variant="h4" className={clsx(classes.stepTitle, isActive && classes.activeTitle)}>
             {title}
           </Title>
           <Description className={classes.stepDescription}>{description}</Description>

@@ -82,6 +82,7 @@ const GettingStarted: React.FC<Props> = () => {
         icon={<InterfaceIcon className={classes.interfaceIcon} />}
         tagName="immediate"
         stepText="step 1"
+        isActive
         title="Fill out a project plan"
         description="This project plan includes all the details about your monitoring, management practices, and more."
       />
@@ -89,6 +90,7 @@ const GettingStarted: React.FC<Props> = () => {
         icon={<ReviewIcon className={classes.reviewIcon} />}
         tagName="immediate"
         stepText="step 2"
+        isActive
         title="Review and Submit"
         description="Review your project plan to make sure all entries are correct."
       />
@@ -96,6 +98,7 @@ const GettingStarted: React.FC<Props> = () => {
         icon={<TrustDocumentIcon className={classes.trustDocumentIcon} />}
         tagName="immediate"
         stepText="step 3"
+        isActive
         title="Fill out a project plan"
         description={
           <span>

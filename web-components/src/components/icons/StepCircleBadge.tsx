@@ -5,6 +5,7 @@ import clsx from 'clsx';
 type Props = {
   className?: string;
   icon: JSX.Element;
+  isActive?: boolean;
 };
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -14,15 +15,18 @@ const useStyles = makeStyles((theme: Theme) => ({
     justifyContent: 'center',
     width: 111,
     height: 111,
-    background: theme.palette.secondary.contrastText,
     borderRadius: '50%',
+    background: theme.palette.primary.main,
+  },
+  active: {
+    background: theme.palette.secondary.contrastText,
   },
 }));
 
-const StepCircleBadge: React.FC<Props> = ({ className, icon }) => {
+const StepCircleBadge: React.FC<Props> = ({ className, icon, isActive }) => {
   const classes = useStyles();
 
-  return <div className={clsx(className, classes.circle)}>{icon}</div>;
+  return <div className={clsx(className, classes.circle, isActive && classes.active)}>{icon}</div>;
 };
 
 export default StepCircleBadge;

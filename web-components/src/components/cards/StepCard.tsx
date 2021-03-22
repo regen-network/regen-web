@@ -1,6 +1,8 @@
 import React from 'react';
 import { makeStyles, Theme, useTheme } from '@material-ui/core';
-import { Card } from '@material-ui/core';
+import { Card, Button } from '@material-ui/core';
+import AddOutlinedIcon from '@material-ui/icons/AddOutlined';
+import RemoveOutlinedIcon from '@material-ui/icons/RemoveOutlined';
 import clsx from 'clsx';
 
 import ArrowFilledIcon from '../icons/ArrowFilledIcon';
@@ -23,6 +25,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+    width: '100%', //TODO why not flexgrow?
+
     '&:last-child': {
       '& .down-arrow': {
         display: 'none',
@@ -31,21 +35,31 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   card: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    width: '100%', //TODO why not flexgrow?
+
     borderColor: theme.palette.grey[100],
     borderRadius: 5,
-    padding: theme.spacing(4, 0),
+    padding: theme.spacing(4, 0, 0),
     margin: theme.spacing(4, 0),
   },
   cardTop: {
     display: 'flex',
-    justifyContent: 'center',
+    flex: 1,
+    width: '100%', //TODO why not flexgrow?
+    justifyContent: 'space-between',
   },
   cardTopLeft: {
     display: 'flex',
     flex: 1,
   },
   cardTopCenter: {
+    display: 'flex',
+
     flex: 1,
+    justifyContent: 'center',
   },
   cardTopRight: {
     display: 'flex',
@@ -64,7 +78,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'space-evenly',
-    padding: theme.spacing(3.5, 3.5, 0),
+    padding: theme.spacing(3.5, 3.5, 4),
   },
   step: {
     color: theme.palette.secondary.main,
@@ -88,6 +102,21 @@ const useStyles = makeStyles((theme: Theme) => ({
       fontSize: theme.spacing(4),
     },
   },
+  faq: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '100%',
+    borderTop: `1px solid ${theme.palette.grey[100]}`,
+    padding: theme.spacing(4),
+  },
+  addButton: {
+    padding: theme.spacing(1),
+    minWidth: 'unset', //todo
+  },
+  add: {
+    color: theme.palette.secondary.main,
+  },
 }));
 
 export default function StepCard({
@@ -106,7 +135,9 @@ export default function StepCard({
       <Card variant="outlined" className={clsx(className, classes.card)}>
         <div className={classes.cardTop}>
           <div className={classes.cardTopLeft}></div>
-          <StepCircleBadge icon={icon} className={classes.cardTopCenter} />
+          <div className={classes.cardTopCenter}>
+            <StepCircleBadge icon={icon} />
+          </div>
           <div className={classes.cardTopRight}>
             {tagName && <Tag className={classes.tag} name={tagName} color={theme.palette.secondary.main} />}
           </div>
@@ -119,6 +150,14 @@ export default function StepCard({
             {title}
           </Title>
           <Description className={classes.stepDescription}>{description}</Description>
+        </div>
+        <div className={classes.faq}>
+          <Title variant="h6" className={classes.step}>
+            top faqs
+          </Title>
+          <Button className={classes.addButton}>
+            <AddOutlinedIcon className={classes.add} />
+          </Button>
         </div>
       </Card>
       <ArrowFilledIcon className="down-arrow" color={theme.palette.info.main} />

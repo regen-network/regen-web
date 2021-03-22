@@ -19,7 +19,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    padding: 16,
+    padding: theme.spacing(8),
+    [theme.breakpoints.up('sm')]: {
+      paddingLeft: '25%',
+      paddingRight: '25%',
+    },
   },
   title: {
     display: 'flex',

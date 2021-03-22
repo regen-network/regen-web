@@ -17,7 +17,8 @@
     "web-registry",
     "web-components",
     "web-storybook",
-    "web-www"
+    "web-www",
+    "web-auth"
   ],
   "scripts": {
     "bootstrap": "lerna bootstrap",

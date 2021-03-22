@@ -148,13 +148,14 @@ const LoginForm: React.FC<LoginFormProps> = ({
           errors.password = invalidPassword;
         }
         // TODO validate recaptcha as part of #350
-        if (!signup && !values.recaptcha) {
-          errors.recaptcha = requiredMessage;
-        }
+        // if (!signup && !values.recaptcha) {
+        //   errors.recaptcha = requiredMessage;
+        // }
         return errors;
       }}
       onSubmit={async (values, { setSubmitting, setStatus }) => {
         setSubmitting(true);
+
         try {
           await submit(values);
           setSubmitting(false);

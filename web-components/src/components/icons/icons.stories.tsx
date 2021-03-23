@@ -43,6 +43,7 @@ import RegistrationIcon from 'web-components/lib/components/icons/RegistrationIc
 import ShadedCreditsIcon from 'web-components/lib/components/icons/ShadedCreditsIcon';
 import TrustDocumentIcon from 'web-components/lib/components/icons/TrustDocumentIcon';
 import AccountabilityIcon from 'web-components/lib/components/icons/AccountabilityIcon';
+import ReviewIcon from 'web-components/lib/components/icons/ReviewIcon';
 
 import { withKnobs, text } from '@storybook/addon-knobs';
 
@@ -141,3 +142,5 @@ export const registrationIcon = (): JSX.Element => <RegistrationIcon />;
 export const shadedCreditsIcon = (): JSX.Element => <ShadedCreditsIcon />;
 
 export const accountabilityIcon = (): JSX.Element => <AccountabilityIcon />;
+
+export const reviewIcon = (): JSX.Element => <ReviewIcon />;

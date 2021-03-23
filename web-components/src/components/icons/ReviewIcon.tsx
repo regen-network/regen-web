@@ -1,30 +1,18 @@
 import React from 'react';
 import SvgIcon from '@material-ui/core/SvgIcon';
-import { makeStyles, Theme } from '@material-ui/core';
-import clsx from 'clsx';
 
-import withHoverColor, { Props } from './withHoverColor';
+interface IconProps {
+  className?: string;
+}
 
-const useStyles = makeStyles((theme: Theme) => ({
-  root: {
-    width: theme.spacing(9.25),
-    height: theme.spacing(9.25),
-  },
-}));
-
-function ReviewIcon({ className, color, onMouseEnter, onMouseLeave }: Props): JSX.Element {
-  const classes = useStyles();
-
+function ReviewIcon({ className }: IconProps): JSX.Element {
   return (
     <SvgIcon
-      className={clsx(className, classes.root)}
+      className={className}
       viewBox="0 0 96 97"
       xmlns="http://www.w3.org/2000/svg"
-      fill={color}
       width="96"
       height="97"
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
     >
       <path
         d="M2 12H63V20.6145V63.9198V73H2V12Z"
@@ -132,4 +120,4 @@ function ReviewIcon({ className, color, onMouseEnter, onMouseLeave }: Props): JS
   );
 }
 
-export default withHoverColor(ReviewIcon);
+export default ReviewIcon;

@@ -9,7 +9,11 @@
     "paths": {
       "~/*": ["src/*"]
     },
-    "rootDir": "src"
+    "rootDir": "src",
+    // "lib": [
+    //   "esnext"
+    // ],
+    "module": "esnext"
   },
   "include": ["src/**/*.ts", "src/**/*.tsx"],
   "exclude": ["src/**/*stories.tsx"]

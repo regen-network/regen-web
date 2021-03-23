@@ -4,11 +4,18 @@ The website for the [Regen Network](https://regen.network) decentralized infrast
 
 ## Table of Contents
 
-- [Installation](#installation)
-- [Development](#development)
-- [Deployment](#deployment)
-- [Testing](#testing)
-- [Code style](#code-style)
+- [Regen Website](#regen-website)
+  - [Table of Contents](#table-of-contents)
+  - [Installation](#installation)
+  - [Environment variables](#environment-variables)
+  - [Development](#development)
+  - [Deployment](#deployment)
+    - [Registry](#registry)
+    - [Storybook](#storybook)
+    - [Website](#website)
+  - [Testing](#testing)
+  - [Code style](#code-style)
+  - [Timeout Issue on Slower Connections](#timeout-issue-on-slower-connections)
 
 ## Installation
 
@@ -110,6 +117,10 @@ yarn format
 ```sh
 yarn lint
 ```
+
+## Deploying the Custom Login form to Auth0
+
+Please, check out [these instructions](web-auth/README.md#deploying-to-auth0).
 
 ## Timeout Issue on Slower Connections
 

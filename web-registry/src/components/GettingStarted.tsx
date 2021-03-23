@@ -164,7 +164,7 @@ const GettingStarted: React.FC<Props> = () => {
         }
       />
       <StepCard
-        icon={<ShadedCreditsIcon className={classes.creditsIcon} color={theme.palette.secondary.main} />}
+        icon={<ShadedCreditsIcon className={classes.creditsIcon} />}
         tagName="variable"
         stepText="step 8"
         title="Hire a broker or sell through Regen Network"

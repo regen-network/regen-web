@@ -15,6 +15,7 @@ The website for the [Regen Network](https://regen.network) decentralized infrast
     - [Website](#website)
   - [Testing](#testing)
   - [Code style](#code-style)
+  - [Deploying the Custom Login form to Auth0](#deploying-the-custom-login-form-to-auth0)
   - [Timeout Issue on Slower Connections](#timeout-issue-on-slower-connections)
 
 ## Installation
@@ -120,7 +121,12 @@ yarn lint
 
 ## Deploying the Custom Login form to Auth0
 
-Please, check out [these instructions](web-auth/README.md#deploying-to-auth0).
+Please, follow [these instructions](web-auth/README.md) and then:
+1. Run `yarn build-auth` command.
+2. Copy the code from `./build/index.html`.
+3. Paste it into the Universal Login HTML form from [Auth dashboard](https://manage.auth0.com/dashboard/us/regen-network-registry/login_page) and save.
+
+This could be automated in the future.
 
 ## Timeout Issue on Slower Connections
 

@@ -30,11 +30,3 @@ See the section about [running tests](https://facebook.github.io/create-react-ap
 
 Builds the app for production to the `build` folder.
 Uses [gulp](https://gulpjs.com/) to bundle the app into a single `./build/index.html` file.
-
-## Deploying to Auth0
-
-1. Run `yarn build` command from `web-auth` folder.
-2. Copy the code from `./build/index.html`.
-3. Paste it into the Universal Login HTML form from [Auth dashboard](https://manage.auth0.com/dashboard/us/regen-network-registry/login_page) and save.
-
-This could be automated in the future.

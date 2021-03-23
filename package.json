@@ -25,6 +25,7 @@
     "build": "yarn build-components && lerna run --scope web-registry build --stream",
     "build-components": "lerna run --scope web-components build --stream",
     "build-storybook": "yarn build-components && lerna run build-storybook --stream",
+    "build-auth": "yarn build-components && lerna run --scope web-auth build --stream",
     "format": "lerna run format",
     "lint": "lerna run lint",
     "storybook": "lerna run storybook --stream",

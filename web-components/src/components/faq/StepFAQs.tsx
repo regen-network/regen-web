@@ -51,6 +51,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   inactiveGradient: {
     background: `linear-gradient(180deg, rgba(239, 239, 239, 0) 0%, ${theme.palette.info.light} 100%)`,
   },
+  questionRoot: {
+    padding: theme.spacing(4, 0),
+  },
 }));
 
 const StepFAQs: React.FC<StepFAQProps> = ({ questionItems, isActive }) => {
@@ -77,6 +80,7 @@ const StepFAQs: React.FC<StepFAQProps> = ({ questionItems, isActive }) => {
         {questionItems.map(questionItem => (
           <Question
             classNames={{
+              root: classes.questionRoot,
               container: classes.question,
               gradient: isActive ? '' : classes.inactiveGradient,
             }}

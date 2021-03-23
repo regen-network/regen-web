@@ -111,7 +111,9 @@ const GettingStarted: React.FC = () => {
         description={
           <span>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut.
-            <a href="https://regen.network"> Read full documentation»</a>
+            <a href="https://regen.network" target="_blank" rel="noopener noreferrer">
+              Read full documentation»
+            </a>
           </span>
         }
         questionItems={questionItems}

@@ -195,7 +195,7 @@ const Question = ({
   }
 
   return (
-    <div className={classes.root} id={id}>
+    <div className={clsx(classes.root, classNames?.root)} id={id}>
       <div className={clsx(classes.container, classNames?.container)}>
         <Title variant="h5" className={classes.question} onClick={handleClick}>
           {question}

@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles, Theme, useTheme } from '@material-ui/core';
-import { Card } from '@material-ui/core';
+import { Card, CardMedia } from '@material-ui/core';
 import clsx from 'clsx';
 
 import ArrowFilledIcon from '../icons/ArrowFilledIcon';
@@ -19,6 +19,7 @@ interface StepCardProps {
   title: string;
   description?: string | JSX.Element;
   questionItems?: QuestionItem[];
+  video?: string;
   isActive?: boolean;
 }
 
@@ -27,8 +28,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    width: '100%', //TODO why not flexgrow?
-
+    width: '100%',
     '&:last-child': {
       '& .down-arrow': {
         display: 'none',
@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    width: '100%', //TODO why not flexgrow?
+    width: '100%',
     borderColor: theme.palette.grey[100],
     borderRadius: 5,
     padding: theme.spacing(4, 0, 0),
@@ -53,21 +53,17 @@ const useStyles = makeStyles((theme: Theme) => ({
   cardTop: {
     display: 'flex',
     flex: 1,
-    width: '100%', //TODO why not flexgrow?
+    width: '100%',
     justifyContent: 'space-between',
   },
-  cardTopLeft: {
+  cardTopThird: {
     display: 'flex',
     flex: 1,
   },
   cardTopCenter: {
-    display: 'flex',
-    flex: 1,
     justifyContent: 'center',
   },
   cardTopRight: {
-    display: 'flex',
-    flex: 1,
     alignItems: 'flex-start',
   },
   tag: {
@@ -96,7 +92,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     color: theme.palette.secondary.main,
   },
   stepTitle: {
-    color: theme.palette.info.main,
+    color: theme.palette.info.dark,
     padding: theme.spacing(3.5, 0),
     textAlign: 'center',
     [theme.breakpoints.down('xs')]: {
@@ -113,6 +109,13 @@ const useStyles = makeStyles((theme: Theme) => ({
       fontSize: theme.spacing(4),
     },
   },
+  video: {
+    height: theme.spacing(55),
+    marginBottom: theme.spacing(4),
+  },
+  withVideo: {
+    paddingTop: 0,
+  },
 }));
 
 export default function StepCard({
@@ -123,6 +126,7 @@ export default function StepCard({
   title,
   description,
   questionItems,
+  video,
   isActive,
 }: StepCardProps): JSX.Element {
   const classes = useStyles({});
@@ -130,13 +134,26 @@ export default function StepCard({
 
   return (
     <div className={classes.root}>
-      <Card variant="outlined" className={clsx(className, classes.card, isActive && classes.activeCard)}>
+      <Card
+        variant="outlined"
+        className={clsx(className, classes.card, isActive && classes.activeCard, video && classes.withVideo)}
+      >
+        {video && (
+          <CardMedia
+            className={classes.video}
+            component="iframe"
+            src={video}
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          />
+        )}
         <div className={classes.cardTop}>
-          <div className={classes.cardTopLeft}></div>
-          <div className={classes.cardTopCenter}>
+          <div className={classes.cardTopThird}></div>
+          <div className={clsx(classes.cardTopThird, classes.cardTopCenter)}>
             <StepCircleBadge icon={icon} isActive={isActive} />
           </div>
-          <div className={classes.cardTopRight}>
+          <div className={clsx(classes.cardTopThird, classes.cardTopRight)}>
             {tagName && <Tag className={classes.tag} name={tagName} color={theme.palette.secondary.main} />}
           </div>
         </div>
@@ -149,7 +166,7 @@ export default function StepCard({
           </Title>
           <Description className={classes.stepDescription}>{description}</Description>
         </div>
-        {questionItems && <StepFAQs questions={questionItems} />}
+        {questionItems && <StepFAQs questionItems={questionItems} isActive={isActive} />}
       </Card>
       <ArrowFilledIcon className="down-arrow" color={theme.palette.info.main} />
     </div>

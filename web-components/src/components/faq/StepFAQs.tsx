@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
-import { makeStyles, Theme, Collapse } from '@material-ui/core';
+import { makeStyles, Theme, Collapse, useTheme } from '@material-ui/core';
 import { Button } from '@material-ui/core';
-import AddOutlinedIcon from '@material-ui/icons/AddOutlined';
-import RemoveOutlinedIcon from '@material-ui/icons/RemoveOutlined';
+
+import MinusIcon from '../icons/MinusIcon';
+import PlusIcon from '../icons/PlusIcon';
 import Title from '../title';
 import Question, { QuestionItem } from './Question';
 
 interface StepFAQProps {
-  questions: QuestionItem[];
+  questionItems: QuestionItem[];
+  isActive?: boolean;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -16,7 +18,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexDirection: 'column',
     width: '100%',
     borderTop: `1px solid ${theme.palette.grey[100]}`,
-    padding: theme.spacing(4),
+    padding: theme.spacing(2, 4),
     '& $container': {
       padding: 0,
       background: 'pink',
@@ -40,15 +42,20 @@ const useStyles = makeStyles((theme: Theme) => ({
     minWidth: 'unset', //todo
   },
   expandCollapse: {
-    color: theme.palette.secondary.main,
+    height: 30,
+    width: 30,
   },
   question: {
     padding: 0,
   },
+  inactiveGradient: {
+    background: `linear-gradient(180deg, rgba(239, 239, 239, 0) 0%, ${theme.palette.info.light} 100%)`,
+  },
 }));
 
-const StepFAQs: React.FC<StepFAQProps> = ({ questions }) => {
+const StepFAQs: React.FC<StepFAQProps> = ({ questionItems, isActive }) => {
   const classes = useStyles();
+  const theme = useTheme();
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
@@ -59,20 +66,23 @@ const StepFAQs: React.FC<StepFAQProps> = ({ questions }) => {
         </Title>
         <Button className={classes.addButton} onClick={() => setIsExpanded(!isExpanded)}>
           {isExpanded ? (
-            <RemoveOutlinedIcon className={classes.expandCollapse} />
+            <MinusIcon className={classes.expandCollapse} color={theme.palette.secondary.main} />
           ) : (
-            <AddOutlinedIcon className={classes.expandCollapse} />
+            <PlusIcon className={classes.expandCollapse} color={theme.palette.secondary.main} />
           )}
         </Button>
       </div>
 
       <Collapse in={isExpanded}>
-        {questions.map(question => (
+        {questionItems.map(questionItem => (
           <Question
-            classNames={{ container: classes.question }}
-            key={question.question}
-            question={question.question}
-            answer={question.answer}
+            classNames={{
+              container: classes.question,
+              gradient: isActive ? '' : classes.inactiveGradient,
+            }}
+            key={questionItem.question}
+            question={questionItem.question}
+            answer={questionItem.answer}
           />
         ))}
       </Collapse>

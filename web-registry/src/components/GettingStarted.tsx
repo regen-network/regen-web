@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
+import { makeStyles, Theme } from '@material-ui/core/styles';
 
 import AccountabilityIcon from 'web-components/lib/components/icons/AccountabilityIcon';
 import FarmerIcon from 'web-components/lib/components/icons/FarmerIcon';
@@ -11,8 +11,6 @@ import TrustDocumentIcon from 'web-components/lib/components/icons/TrustDocument
 import TrustIcon from 'web-components/lib/components/icons/TrustIcon';
 import StepCard from 'web-components/lib/components/cards/StepCard';
 import Title from 'web-components/lib/components/title';
-
-type Props = {};
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -69,19 +67,18 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const GettingStarted: React.FC<Props> = () => {
+const GettingStarted: React.FC = () => {
   const classes = useStyles();
-  const theme = useTheme();
 
   const questionItems = [
-    { question: 'How do i so and so?', answer: 'you just do' },
+    { question: 'How do i so and so?', answer: '<p>you just do</p>' },
     {
       question: 'How do i so and so? Like really what do i do?',
       answer:
-        'you just do. you just do. you just do. ok okok okok okookok ABC123 okokokok ok. you just do. you just do. you just do. ',
+        '<p>you just do. you just do. you just do. ok okok okok </p><p>okookok ABC123 okokokok ok. you just do. you just do. you just do. </p>',
     },
-    { question: 'How do i so and so?', answer: 'you just do' },
-    { question: 'How do i so and so?', answer: 'you just do' },
+    { question: 'How do i so and so?', answer: '<p>you just do</p>' },
+    { question: 'How do i so and so?', answer: '<p>you just do</p>' },
   ];
 
   return (
@@ -150,6 +147,7 @@ const GettingStarted: React.FC<Props> = () => {
           </span>
         }
         questionItems={questionItems}
+        video="https://www.youtube.com/embed/Eh19aQ1dd7c"
       />
       <StepCard
         icon={<TrustIcon className={classes.trustIcon} />}

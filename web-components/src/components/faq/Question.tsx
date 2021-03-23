@@ -205,23 +205,28 @@ const Question = ({
             <BreadcrumbIcon className={classes.icon} />
           )}
         </Title>
-        <div className={clsx(answerClassName)}>
+        <div className={clsx(answerClassName, classNames?.answer)}>
           {ReactHtmlParser(answer)}
-          <a
-            href={`#${id}`}
-            onClick={() => {
-              if (window && window.location) {
-                copyTextToClipboard(`${window.location.origin}${window.location.pathname}#${id}`).then(() =>
-                  setCopied(true),
-                );
-              }
-            }}
-            className={classes.anchorLink}
-          >
-            <LinkIcon className={classes.linkIcon} color={theme.palette.secondary.dark} />
-            <span className={classes.copyText}>copy question link</span>
-          </a>
-          {open ? null : <div className={classes.gradient} />}
+          {open ? (
+            questionId && (
+              <a
+                href={`#${id}`}
+                onClick={() => {
+                  if (window && window.location) {
+                    copyTextToClipboard(
+                      `${window.location.origin}${window.location.pathname}#${id}`,
+                    ).then(() => setCopied(true));
+                  }
+                }}
+                className={classes.anchorLink}
+              >
+                <LinkIcon className={classes.linkIcon} color={theme.palette.secondary.dark} />
+                <span className={classes.copyText}>copy question link</span>
+              </a>
+            )
+          ) : (
+            <div className={clsx(classes.gradient, classNames?.gradient)} />
+          )}
         </div>
       </div>
       {copied && <Banner text="Link copied to your clipboard" />}

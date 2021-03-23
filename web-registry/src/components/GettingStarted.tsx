@@ -73,6 +73,17 @@ const GettingStarted: React.FC<Props> = () => {
   const classes = useStyles();
   const theme = useTheme();
 
+  const questionItems = [
+    { question: 'How do i so and so?', answer: 'you just do' },
+    {
+      question: 'How do i so and so? Like really what do i do?',
+      answer:
+        'you just do. you just do. you just do. ok okok okok okookok ABC123 okokokok ok. you just do. you just do. you just do. ',
+    },
+    { question: 'How do i so and so?', answer: 'you just do' },
+    { question: 'How do i so and so?', answer: 'you just do' },
+  ];
+
   return (
     <div className={classes.root}>
       <Title variant="h3" className={classes.title}>
@@ -106,6 +117,7 @@ const GettingStarted: React.FC<Props> = () => {
             <a href="https://regen.network"> Read full documentation»</a>
           </span>
         }
+        questionItems={questionItems}
       />
       <StepCard
         icon={<RegistrationIcon className={classes.registrationIcon} />}
@@ -137,6 +149,7 @@ const GettingStarted: React.FC<Props> = () => {
             <a href="https://regen.network"> Read full documentation»</a>
           </span>
         }
+        questionItems={questionItems}
       />
       <StepCard
         icon={<TrustIcon className={classes.trustIcon} />}
@@ -161,6 +174,7 @@ const GettingStarted: React.FC<Props> = () => {
             <a href="https://regen.network"> Read full documentation»</a>
           </span>
         }
+        questionItems={questionItems}
       />
     </div>
   );

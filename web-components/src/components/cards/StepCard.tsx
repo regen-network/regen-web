@@ -1,8 +1,6 @@
 import React from 'react';
 import { makeStyles, Theme, useTheme } from '@material-ui/core';
-import { Card, Button } from '@material-ui/core';
-import AddOutlinedIcon from '@material-ui/icons/AddOutlined';
-import RemoveOutlinedIcon from '@material-ui/icons/RemoveOutlined';
+import { Card } from '@material-ui/core';
 import clsx from 'clsx';
 
 import ArrowFilledIcon from '../icons/ArrowFilledIcon';
@@ -11,6 +9,7 @@ import Title from '../title';
 import Description from '../description';
 import Tag from '../tag';
 import StepFAQs from '../faq/StepFAQs';
+import { QuestionItem } from '../faq/Question';
 
 interface StepCardProps {
   className?: string;
@@ -19,6 +18,7 @@ interface StepCardProps {
   stepText: string;
   title: string;
   description?: string | JSX.Element;
+  questionItems?: QuestionItem[];
   isActive?: boolean;
 }
 
@@ -122,20 +122,11 @@ export default function StepCard({
   stepText,
   title,
   description,
+  questionItems,
   isActive,
 }: StepCardProps): JSX.Element {
   const classes = useStyles({});
   const theme = useTheme();
-  const questionItems = [
-    { question: 'How do i so and so?', answer: 'you just do' },
-    {
-      question: 'How do i so and so? Like really what do i do?',
-      answer:
-        'you just do. you just do. you just do. ok okok okok okookok ABC123 okokokok ok. you just do. you just do. you just do. ',
-    },
-    { question: 'How do i so and so?', answer: 'you just do' },
-    { question: 'How do i so and so?', answer: 'you just do' },
-  ];
 
   return (
     <div className={classes.root}>
@@ -158,7 +149,7 @@ export default function StepCard({
           </Title>
           <Description className={classes.stepDescription}>{description}</Description>
         </div>
-        <StepFAQs questions={questionItems} />
+        {questionItems && <StepFAQs questions={questionItems} />}
       </Card>
       <ArrowFilledIcon className="down-arrow" color={theme.palette.info.main} />
     </div>

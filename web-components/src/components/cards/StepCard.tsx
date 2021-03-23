@@ -131,6 +131,7 @@ export default function StepCard({
 }: StepCardProps): JSX.Element {
   const classes = useStyles({});
   const theme = useTheme();
+  // TODO: ProjectStep prop, move all data to mocks json
 
   return (
     <div className={classes.root}>

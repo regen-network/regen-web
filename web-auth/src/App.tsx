@@ -93,7 +93,7 @@ function App(): JSX.Element {
       />
       <OnBoardingSection title="Log in">
         <LoginForm
-          link={process.env.REACT_APP_SIGNUP_LINK || 'https://www.regen.network/registry/signup'}
+          signupFromLogin={process.env.REACT_APP_SIGNUP_LINK || 'https://www.regen.network/registry/signup'}
           submit={submit}
         />
       </OnBoardingSection>

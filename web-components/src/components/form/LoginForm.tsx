@@ -22,11 +22,11 @@ import {
 import { errors, SignupCode, LoginCode } from './errors';
 
 interface LoginFormProps {
-  link: string;
+  signupFromLogin?: string; // link to loginFromSignup page
+  loginFromSignup?: () => Promise<void>; // auth0 loginWithRedirect
   privacyLink?: string;
   termsLink?: string;
   forgotPassword?: string;
-  signup?: boolean;
   submit: (values: Values) => Promise<void>;
 }
 
@@ -53,6 +53,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     [theme.breakpoints.down('xs')]: {
       fontSize: theme.spacing(4),
+    },
+    '& a': {
+      pointer: 'cursor',
     },
   },
   checkboxLabel: {
@@ -104,9 +107,15 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const LoginForm: React.FC<LoginFormProps> = ({ signup = false, link, privacyLink, termsLink, submit }) => {
+const LoginForm: React.FC<LoginFormProps> = ({
+  signupFromLogin,
+  loginFromSignup,
+  privacyLink,
+  termsLink,
+  submit,
+}) => {
   const classes = useStyles();
-  const label: string = signup ? 'Sign up' : 'Log in';
+  const label: string = loginFromSignup ? 'Sign up' : 'Log in';
 
   return (
     <Formik
@@ -131,10 +140,10 @@ const LoginForm: React.FC<LoginFormProps> = ({ signup = false, link, privacyLink
         if (!values.password) {
           errors.password = requiredMessage;
         }
-        if (signup && !values.privacy) {
+        if (loginFromSignup && !values.privacy) {
           errors.privacy = requirementAgreement;
         }
-        if (signup && !validatePassword(values.password)) {
+        if (loginFromSignup && !validatePassword(values.password)) {
           errors.password = invalidPassword;
         }
         return errors;
@@ -164,13 +173,13 @@ const LoginForm: React.FC<LoginFormProps> = ({ signup = false, link, privacyLink
           <div>
             <Form>
               <OnBoardingCard>
-                {signup ? (
+                {loginFromSignup ? (
                   <Description className={classes.description}>
-                    If you've already signed up, <Link href={link}>log in here</Link>.
+                    If you've already signed up, <Link onClick={loginFromSignup}>log in here</Link>.
                   </Description>
                 ) : (
                   <Description className={classes.description}>
-                    Don't have an account? <Link href={link}>Sign up</Link>.
+                    Don't have an account? <Link href={signupFromLogin}>Sign up</Link>.
                   </Description>
                 )}
                 <Field component={TextField} type="email" label="Email address" name="email" />
@@ -178,12 +187,14 @@ const LoginForm: React.FC<LoginFormProps> = ({ signup = false, link, privacyLink
                   component={PasswordField}
                   className={classes.textField}
                   name="password"
-                  signup={signup}
+                  loginFromSignup={loginFromSignup}
                 />
-                {!signup && <Description className={classes.forgotPassword}>Forgot password</Description>}
+                {!loginFromSignup && (
+                  <Description className={classes.forgotPassword}>Forgot password</Description>
+                )}
               </OnBoardingCard>
               <div className={classes.checkboxes}>
-                {signup && (
+                {loginFromSignup && (
                   <>
                     <Field
                       component={CheckboxLabel}

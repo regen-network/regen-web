@@ -15717,7 +15717,7 @@ exports[`Storyshots Components|Icons Interface Icon 1`] = `
   }
 >
   <WithStyles(CssBaseline) />
-  <Component />
+  <InterfaceIcon />
 </ContextProvider>
 `;
 
@@ -22945,7 +22945,7 @@ exports[`Storyshots Components|Icons Trust Document Icon 1`] = `
   }
 >
   <WithStyles(CssBaseline) />
-  <Component />
+  <TrustDocumentIcon />
 </ContextProvider>
 `;
 

@@ -10,9 +10,6 @@
       "~/*": ["src/*"]
     },
     "rootDir": "src",
-    // "lib": [
-    //   "esnext"
-    // ],
     "module": "esnext"
   },
   "include": ["src/**/*.ts", "src/**/*.tsx"],

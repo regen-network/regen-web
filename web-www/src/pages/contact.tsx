@@ -56,15 +56,15 @@ const useStyles = makeStyles((theme: Theme) => ({
       fontSize: theme.spacing(8),
     },
   },
-  description: {
+  subtitle: {
     '& p': {
       margin: 0,
     },
     [theme.breakpoints.up('sm')]: {
       paddingBottom: theme.spacing(10.5),
-      fontSize: theme.spacing(5.5),
       maxWidth: theme.spacing(139),
       margin: '0 auto',
+      fontSize: theme.spacing(5.5),
     },
     [theme.breakpoints.down('xs')]: {
       paddingBottom: theme.spacing(7.5),
@@ -167,6 +167,17 @@ const useStyles = makeStyles((theme: Theme) => ({
       color: theme.palette.info.main,
     },
   },
+  messageForPartners: {
+    color: theme.palette.primary.contrastText,
+    [theme.breakpoints.up('sm')]: {
+      marginTop: theme.spacing(-8.5),
+      fontSize: theme.spacing(5),
+    },
+    [theme.breakpoints.down('xs')]: {
+      marginTop: theme.spacing(-7),
+      fontSize: theme.spacing(4),
+    },
+  },
 }));
 
 const ContactPage = ({ location }: { location: object }): JSX.Element => {
@@ -180,6 +191,7 @@ const ContactPage = ({ location }: { location: object }): JSX.Element => {
         header
         body
         form {
+          messageForPartners
           requestTypes {
             label
             value
@@ -229,7 +241,7 @@ const ContactPage = ({ location }: { location: object }): JSX.Element => {
           className={classes.section}
           titleClassName={classes.title}
         >
-          <Description align="center" className={classes.description}>
+          <Description align="center" className={classes.subtitle}>
             {ReactHtmlParser(content.body)}
           </Description>
           <div className={classes.container}>
@@ -318,7 +330,7 @@ const ContactPage = ({ location }: { location: object }): JSX.Element => {
                               <Field
                                 options={[{ value: '', label: 'Select one' }, ...content.form.requestTypes]}
                                 component={SelectTextField}
-                                label="Type of request"
+                                label="I am a:"
                                 name="requestType"
                                 className={
                                   values.requestType === ''
@@ -329,6 +341,11 @@ const ContactPage = ({ location }: { location: object }): JSX.Element => {
                             </Grid>
                           </Grid>
                         </div>
+                        {values.requestType === 'partnerships@regen.network' && (
+                          <Description className={classes.messageForPartners}>
+                            {ReactHtmlParser(content.form.messageForPartners)}
+                          </Description>
+                        )}
                         <Field
                           component={TextField}
                           name="message"

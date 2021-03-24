@@ -66,7 +66,7 @@ const LandStewardsPage = ({ location }: props): JSX.Element => {
       <PracticesOutcomesSection />
       <TimelineSection />
       <FeaturedSection />
-      <MoreQuestionsSection />
+      <MoreQuestionsSection startSellerFlow={handleOpen} />
       <FixedFooter justify="flex-end">
         <>
           <ContainedButton onClick={handleOpen}>{data.text.popup.buttonText}</ContainedButton>

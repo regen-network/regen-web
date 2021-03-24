@@ -1,11 +1,20 @@
+import React from 'react';
 import { addDecorator, addParameters, configure } from '@storybook/react';
 import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
+import { CssBaseline } from '@material-ui/core';
+import { MuiThemeProvider } from '@material-ui/core/styles';
+
 import theme from 'web-components/lib/theme/muiTheme';
-import { muiTheme } from 'storybook-addon-material-ui';
 import 'web-components/src/theme/fonts.css';
 import requireContext from 'require-context.macro';
 
-addDecorator(muiTheme([theme]));
+const MuiDecorator = storyFn => (
+  <MuiThemeProvider theme={theme}>
+    <CssBaseline />
+    {storyFn()}
+  </MuiThemeProvider>
+);
+addDecorator(MuiDecorator);
 
 addParameters({
   viewport: {

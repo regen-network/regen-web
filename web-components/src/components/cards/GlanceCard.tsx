@@ -4,8 +4,9 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Card from './Card';
 import Title from '../title';
+import Image, { OptimizeImageProps } from '../image';
 
-interface GlanceCardProps {
+interface GlanceCardProps extends OptimizeImageProps {
   title?: string;
   text: string[];
   imgSrc: string;
@@ -94,14 +95,26 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function GlanceCard({ title = 'At a glance', text, imgSrc }: GlanceCardProps): JSX.Element {
+export default function GlanceCard({
+  title = 'At a glance',
+  text,
+  imgSrc,
+  imageStorageBaseUrl,
+  apiServerUrl,
+}: GlanceCardProps): JSX.Element {
   const classes = useStyles({});
 
   return (
     <Card className={classes.root}>
       <Grid className={classes.container} container>
         <Grid xs={12} sm={5} item>
-          <img className={classes.image} src={imgSrc} alt={imgSrc} />
+          <Image
+            className={classes.image}
+            src={imgSrc}
+            alt={imgSrc}
+            imageStorageBaseUrl={imageStorageBaseUrl}
+            apiServerUrl={apiServerUrl}
+          />
         </Grid>
         <Grid xs={12} sm={7} item className={classes.textContainer}>
           <Title variant="h6" className={classes.title}>

@@ -453,6 +453,10 @@ collections:
             widget: "object"
             fields:
               - {label: Header, name: header, widget: string}
+              - {label: Description, name: description, widget: markdown}
+              - {label: First Button Text, name: firstButtonText, widget: string}
+              - {label: First Button Url, name: firstButtonUrl, widget: string}
+              - {label: Second Button Text, name: secondButtonText, widget: string}
           - label: "Popup"
             name: "popup"
             widget: "object"
@@ -682,7 +686,7 @@ collections:
                 fields:
                   - {label: "title", name: summary, widget: string}
                   - {label: "date", name: date, widget: string}
-                  - {label: "description", name: description, widget: text}
+                  - {label: "description", name: description, widget: text, required: false}
           - label: Team Section
             name: teamSection
             widget: "object"
@@ -821,13 +825,16 @@ collections:
             name: form
             widget: object
             fields:
-              - label: Types of request
+              - label: "I am a:"
                 name: requestTypes
                 widget: list
                 collapsed: false
                 fields:
                   - {label: "label", name: label, widget: string}
                   - {label: "Email", name: value, widget: string}
+              - label: "Message displayed for farm projects and partners"
+                name: messageForPartners
+                widget: markdown
           - label: location
             name: location
             widget: object

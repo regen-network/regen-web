@@ -15,11 +15,6 @@ categories:
         title: Microsoft buys carbon credits from NSW cattle operation
         date: January 29, 2021
         image: ../../static/media/screen-shot-2021-03-17-at-11.04.37-pm.png
-      - image: ../../static/media/bbc.png
-        title: Carbon credits for farming beef, rural services under the pandemic
-        author: BBC
-        url: " https://www.bbc.co.uk/sounds/play/m000s866"
-        date: February 15, 2021
       - title: Regen Network Announces Historic Carbon Credit Sale
         author: Regen Network
         url: https://medium.com/regen-network/regen-network-announces-historic-carbon-credit-sale-in-australia-b76dfadcc095
@@ -84,6 +79,11 @@ categories:
         date: August 1, 2019
         author: Impact Alpha
         url: https://impactalpha.com/techstars-sustainability-startups-tackle-clean-water-regenerative-farming-and-supply-chains/
+      - title: Can Cryptocurrencies Help The Planet?
+        author: Landscape News
+        url: https://news.globallandscapesforum.org/50857/can-cryptocurrencies-help-the-planet/
+        date: " March 23, 2021"
+        image: ../../static/media/sheep-scaled.jpeg
   - name: videos
     buttonText: watch video
     showPlay: true

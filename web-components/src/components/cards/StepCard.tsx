@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
+import { makeStyles, Theme, useTheme } from '@material-ui/core';
 import { Card, CardMedia } from '@material-ui/core';
 import clsx from 'clsx';
 
@@ -52,17 +52,28 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   cardTop: {
     display: 'flex',
+    flex: 1,
     width: '100%',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     paddingTop: theme.spacing(12),
     [theme.breakpoints.down('xs')]: {
       paddingTop: theme.spacing(4),
     },
   },
+  cardTopThird: {
+    display: 'flex',
+    flex: 1,
+  },
+  cardTopCenter: {
+    justifyContent: 'center',
+  },
+  cardTopRight: {
+    alignItems: 'flex-start',
+  },
   tag: {
-    position: 'absolute',
+    marginLeft: 'auto',
     marginTop: theme.spacing(2),
-    right: theme.spacing(0.5),
+    marginRight: 0,
     borderRadius: 0,
     fontSize: theme.spacing(3),
     maxWidth: theme.spacing(22),
@@ -143,8 +154,13 @@ export default function StepCard({
           />
         )}
         <div className={classes.cardTop}>
-          <StepCircleBadge icon={icon} isActive={isActive} />
-          {tagName && <Tag className={classes.tag} name={tagName} color={theme.palette.secondary.main} />}
+          <div className={classes.cardTopThird}></div>
+          <div className={clsx(classes.cardTopThird, classes.cardTopCenter)}>
+            <StepCircleBadge icon={icon} isActive={isActive} />
+          </div>
+          <div className={clsx(classes.cardTopThird, classes.cardTopRight)}>
+            {tagName && <Tag className={classes.tag} name={tagName} color={theme.palette.secondary.main} />}
+          </div>
         </div>
         <div className={classes.cardBottom}>
           <Title variant="h6" className={clsx(classes.step, isActive && classes.activeColor)}>

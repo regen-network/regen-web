@@ -29,6 +29,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexDirection: 'column',
     alignItems: 'center',
     width: '100%',
+    maxWidth: theme.spacing(139),
     '&:last-child': {
       '& .down-arrow': {
         display: 'none',
@@ -43,7 +44,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: '100%',
     borderColor: theme.palette.grey[100],
     borderRadius: 5,
-    padding: theme.spacing(4, 0, 0),
     margin: theme.spacing(4, 0),
     backgroundColor: theme.palette.info.light, // (inactive style by default)
   },
@@ -55,6 +55,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     flex: 1,
     width: '100%',
     justifyContent: 'space-between',
+
+    paddingTop: theme.spacing(12),
+    [theme.breakpoints.down('xs')]: {
+      paddingTop: theme.spacing(4),
+    },
   },
   cardTopThird: {
     display: 'flex',
@@ -68,6 +73,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   tag: {
     marginLeft: 'auto',
+    marginTop: theme.spacing(2),
     marginRight: 0,
     borderRadius: 0,
     fontSize: theme.spacing(3),
@@ -78,15 +84,16 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'space-evenly',
-    padding: theme.spacing(3.5, 3.5, 4),
+    padding: theme.spacing(3.5, 3.5, 6),
+    [theme.breakpoints.down('xs')]: {
+      paddingBottom: theme.spacing(4),
+    },
   },
   step: {
     color: theme.palette.info.main,
     fontWeight: 800,
     textTransform: 'uppercase',
-    [theme.breakpoints.down('xs')]: {
-      fontSize: theme.spacing(3.5),
-    },
+    fontSize: theme.spacing(3.5),
   },
   activeColor: {
     color: theme.palette.secondary.main,
@@ -105,16 +112,17 @@ const useStyles = makeStyles((theme: Theme) => ({
   stepDescription: {
     textAlign: 'center',
     color: theme.palette.info.dark,
+    fontSize: theme.spacing(4.5),
     [theme.breakpoints.down('xs')]: {
       fontSize: theme.spacing(4),
     },
   },
   video: {
-    height: theme.spacing(55),
-    marginBottom: theme.spacing(4),
-  },
-  withVideo: {
-    paddingTop: 0,
+    height: theme.spacing(81),
+    [theme.breakpoints.down('xs')]: {
+      marginBottom: theme.spacing(4),
+      height: theme.spacing(55),
+    },
   },
 }));
 
@@ -135,10 +143,7 @@ export default function StepCard({
 
   return (
     <div className={classes.root}>
-      <Card
-        variant="outlined"
-        className={clsx(className, classes.card, isActive && classes.activeCard, video && classes.withVideo)}
-      >
+      <Card variant="outlined" className={clsx(className, classes.card, isActive && classes.activeCard)}>
         {video && (
           <CardMedia
             className={classes.video}

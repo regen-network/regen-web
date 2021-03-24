@@ -18,10 +18,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexDirection: 'column',
     alignItems: 'center',
     padding: theme.spacing(8),
-    [theme.breakpoints.up('sm')]: {
-      paddingLeft: '25%',
-      paddingRight: '25%',
-    },
   },
   title: {
     display: 'flex',
@@ -29,41 +25,41 @@ const useStyles = makeStyles((theme: Theme) => ({
     paddingBottom: theme.spacing(8),
   },
   interfaceIcon: {
-    width: 100,
-    height: 100,
+    width: theme.spacing(25),
+    height: theme.spacing(25),
   },
   reviewIcon: {
-    width: 93.14, //TODO
-    height: 94.7,
-    marginTop: 14,
-    marginLeft: 14,
+    width: theme.spacing(23.285),
+    height: theme.spacing(23.675),
+    marginTop: theme.spacing(3.5),
+    marginLeft: theme.spacing(3.5),
   },
   trustDocumentIcon: {
-    width: 59.42,
-    height: 75,
+    width: theme.spacing(14.855),
+    height: theme.spacing(18.75),
   },
   registrationIcon: {
-    width: 100,
-    height: 74.07,
+    width: theme.spacing(25),
+    height: theme.spacing(18.5175),
   },
   accountabilityIcon: {
-    width: 106,
-    height: 106,
-    marginTop: 4,
+    width: theme.spacing(26.5),
+    height: theme.spacing(26.5),
+    marginTop: theme.spacing(1),
   },
   farmerIcon: {
-    width: 70,
-    height: 63,
+    width: theme.spacing(17.5),
+    height: theme.spacing(15.75),
   },
   trustIcon: {
-    width: 81.99,
-    height: 93.29,
+    width: theme.spacing(20.4975),
+    height: theme.spacing(23.3225),
   },
   creditsIcon: {
-    width: 89.9,
-    height: 98.56,
-    marginTop: 7,
-    marginRight: 7,
+    width: theme.spacing(22.475),
+    height: theme.spacing(24.64),
+    marginTop: theme.spacing(1.75),
+    marginRight: theme.spacing(1.75),
   },
 }));
 
@@ -71,14 +67,26 @@ const GettingStarted: React.FC = () => {
   const classes = useStyles();
 
   const questionItems = [
-    { question: 'How do i so and so?', answer: '<p>you just do</p>' },
+    {
+      question: 'How do i so and so?',
+      answer:
+        '<p>you just do. you just do. you just do. ok okok okok </p><p>okookok ABC123 okokokok ok. you just do. you just do. you just do. </p>',
+    },
     {
       question: 'How do i so and so? Like really what do i do?',
       answer:
         '<p>you just do. you just do. you just do. ok okok okok </p><p>okookok ABC123 okokokok ok. you just do. you just do. you just do. </p>',
     },
-    { question: 'How do i so and so?', answer: '<p>you just do</p>' },
-    { question: 'How do i so and so?', answer: '<p>you just do</p>' },
+    {
+      question: 'How do i so and so?',
+      answer:
+        '<p>you just do. you just do. you just do. ok okok okok </p><p>okookok ABC123 okokokok ok. you just do. you just do. you just do. </p>',
+    },
+    {
+      question: 'How do i so and so?',
+      answer:
+        '<p>you just do. you just do. you just do. ok okok okok okookok ABC123 okokokok ok. you just do. you just do. you just do. </p>',
+    },
   ];
 
   return (

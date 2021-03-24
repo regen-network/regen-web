@@ -1,4 +1,5 @@
 import React, { useCallback } from 'react';
+import { makeStyles, Theme } from '@material-ui/core/styles';
 import { WebAuth } from 'auth0-js';
 import axios from 'axios';
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
@@ -23,12 +24,25 @@ const auth0 = new WebAuth({
   redirectUri,
 });
 
-function App() {
+const useStyles = makeStyles((theme: Theme) => ({
+  logo: {
+    display: 'flex',
+    [theme.breakpoints.up('sm')]: {
+      margin: `${theme.spacing(11.25)} auto 0`,
+    },
+    [theme.breakpoints.down('xs')]: {
+      margin: `${theme.spacing(7)} auto 0`,
+    },
+  },
+}));
+
+function App(): JSX.Element {
+  const classes = useStyles();
   const { executeRecaptcha } = useGoogleReCaptcha();
 
   const submit = useCallback(
-     ({ email, password }: Values): Promise<void> => {
-      return new Promise(async(resolve, reject) => {
+    ({ email, password }: Values): Promise<void> => {
+      return new Promise(async (resolve, reject) => {
         try {
           const token = await executeRecaptcha('login_page');
           const apiUri: string = process.env.REACT_APP_API_URI || 'http://localhost:5000';
@@ -39,46 +53,51 @@ function App() {
               userResponse: token,
             },
           });
-          if (res && res.data && res.data.success && res.data.score >= 0.5) {
+          if (res?.data?.success && res.data.score >= 0.5) {
             auth0.login(
-            {
-              realm: 'Username-Password-Authentication',
-              email,
-              password,
-              nonce,
-              scope,
-              responseType,
-              responseMode,
-              state,
-            },
-            function(err) {
-              if (err) {
-                reject(err);
-              } else {
-                resolve()
-              }
-            },
-          );
+              {
+                realm: 'Username-Password-Authentication',
+                email,
+                password,
+                nonce,
+                scope,
+                responseType,
+                responseMode,
+                state,
+              },
+              function(err) {
+                if (err) {
+                  reject(err);
+                } else {
+                  resolve();
+                }
+              },
+            );
           } else {
             reject();
           }
-          
         } catch (err) {
           reject(err);
         }
-        
       });
     },
     [executeRecaptcha],
   );
 
   return (
-    <OnBoardingSection title="Log in">
-      <LoginForm
-        link={process.env.REACT_APP_SIGNUP_LINK || 'https://www.regen.network/registry/signup'}
-        submit={submit}
+    <>
+      <img
+        className={classes.logo}
+        src="https://regen-registry.s3.amazonaws.com/Black.png"
+        alt="Regen Network logo"
       />
-    </OnBoardingSection>
+      <OnBoardingSection title="Log in">
+        <LoginForm
+          link={process.env.REACT_APP_SIGNUP_LINK || 'https://www.regen.network/registry/signup'}
+          submit={submit}
+        />
+      </OnBoardingSection>
+    </>
   );
 }
 

@@ -79,9 +79,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   button: {
     [theme.breakpoints.up('sm')]: {
       marginTop: theme.spacing(8),
+      marginRight: theme.spacing(10),
     },
     [theme.breakpoints.down('xs')]: {
       marginTop: theme.spacing(6.25),
+      marginRight: theme.spacing(2.5),
     },
   },
   recaptcha: {
@@ -181,7 +183,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ signup = false, link, privacyLink
                 {!signup && <Description className={classes.forgotPassword}>Forgot password</Description>}
               </OnBoardingCard>
               <div className={classes.checkboxes}>
-                {signup ? (
+                {signup && (
                   <>
                     <Field
                       component={CheckboxLabel}
@@ -205,14 +207,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ signup = false, link, privacyLink
                       }
                     />
                   </>
-                ) : null
-                // <Field
-                //   component={CheckboxLabel}
-                //   type="checkbox"
-                //   name="staySigned"
-                //   label={<Description className={classes.checkboxLabel}>Stay signed in</Description>}
-                // />
-                }
+                )}
               </div>
               <Grid container justify="flex-end">
                 <ContainedButton

@@ -32,6 +32,7 @@
     "test": "lerna run --scope web-registry test --stream",
     "start": "lerna run --scope web-registry start --stream",
     "start-www": "lerna run --scope web-www start --stream",
+    "start-auth": "lerna run --scope web-auth start --stream",
     "watch": "lerna run watch --stream",
     "build-www": "yarn build-components && lerna run --scope web-www build --stream",
     "test-update-snapshot": "lerna run --scope web-registry test-update-snapshot --stream"

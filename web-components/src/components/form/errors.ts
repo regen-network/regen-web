@@ -17,7 +17,7 @@ export const errors = {
   password_leaked: 'Your password was leaked, please reset your password',
   PasswordHistoryError: 'The password provided for sign up/update has already been used',
   PasswordStrengthError: 'This is not a strong enough password',
-  too_many_attempts: 'Too many sing in attempts, please try again later',
+  too_many_attempts: 'Too many sign in attempts, please try again later',
 };
 
 export type LoginCode =

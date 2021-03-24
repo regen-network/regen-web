@@ -33,9 +33,6 @@ export default function PasswordField({ signup = false, ...props }: PasswordFiel
   const matches = useMediaQuery(theme.breakpoints.up('sm'));
   const classes = useStyles();
   const [showPassword, setShowPassword] = useState<boolean>(!matches);
-  // const [zxcvbn, setZxcvbn] = useState<
-  //   ((password: string, userInputs?: string[] | undefined) => ZXCVBNResult) | undefined
-  // >(undefined);
   const [score, setScore] = useState<number | undefined>();
 
   useEffect(() => {

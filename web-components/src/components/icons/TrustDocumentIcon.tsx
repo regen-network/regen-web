@@ -3,17 +3,20 @@ import SvgIcon from '@material-ui/core/SvgIcon';
 import { makeStyles, Theme } from '@material-ui/core';
 import clsx from 'clsx';
 
-import withHoverColor, { Props } from './withHoverColor';
+interface IconProps {
+  className?: string;
+  isActive?: boolean;
+}
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     width: theme.spacing(9.25),
     height: theme.spacing(9.25),
-    fill: 'white',
+    fill: theme.palette.primary.main,
   },
 }));
 
-function TrustDocumentIcon({ className, onMouseEnter, onMouseLeave }: Props): JSX.Element {
+function TrustDocumentIcon({ className }: IconProps): JSX.Element {
   const classes = useStyles();
 
   return (
@@ -23,8 +26,6 @@ function TrustDocumentIcon({ className, onMouseEnter, onMouseLeave }: Props): JS
       height="79"
       viewBox="0 0 63 79"
       xmlns="http://www.w3.org/2000/svg"
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
     >
       <path
         d="M61.4156 77H2V2H40.8112L61.4156 22.5295V77Z"
@@ -61,4 +62,4 @@ function TrustDocumentIcon({ className, onMouseEnter, onMouseLeave }: Props): JS
   );
 }
 
-export default withHoverColor(TrustDocumentIcon);
+export default TrustDocumentIcon;

@@ -17,12 +17,12 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    padding: theme.spacing(8),
+    padding: theme.spacing(3),
   },
   title: {
     display: 'flex',
     justifyContent: 'center',
-    paddingBottom: theme.spacing(8),
+    paddingBottom: theme.spacing(6),
   },
   interfaceIcon: {
     width: theme.spacing(25),

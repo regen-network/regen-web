@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   root: {
     width: theme.spacing(9.25),
     height: theme.spacing(9.25),
-    fill: 'white',
+    fill: theme.palette.primary.main,
   },
 }));
 

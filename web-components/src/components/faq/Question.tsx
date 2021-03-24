@@ -10,7 +10,7 @@ import copyTextToClipboard from '../../utils/copy';
 import Banner from '../banner';
 
 export interface QuestionItem {
-  classNames?: Record<string, string>;
+  classNames?: ClassNames;
   question: string;
   answer: string;
 }
@@ -24,6 +24,13 @@ interface QuestionProps extends QuestionItem {
 interface StyleProps {
   first: boolean;
   last: boolean;
+}
+
+interface ClassNames {
+  root?: string;
+  container?: string;
+  answer?: string;
+  gradient?: string;
 }
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({

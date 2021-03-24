@@ -28,7 +28,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: theme.spacing(0, 3, 0, 4),
+    padding: theme.spacing(0, 4),
+    [theme.breakpoints.down('xs')]: {
+      paddingRight: theme.spacing(3),
+    },
   },
   title: {
     color: theme.palette.secondary.main,

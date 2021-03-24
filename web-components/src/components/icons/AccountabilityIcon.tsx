@@ -10,7 +10,7 @@ interface IconProps {
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    fill: 'white',
+    fill: theme.palette.primary.main,
   },
 }));
 

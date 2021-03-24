@@ -3,17 +3,19 @@ import SvgIcon from '@material-ui/core/SvgIcon';
 import { makeStyles, Theme } from '@material-ui/core';
 import clsx from 'clsx';
 
-import withHoverColor, { Props } from './withHoverColor';
+interface IconProps {
+  className?: string;
+}
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     width: theme.spacing(9.25),
     height: theme.spacing(9.25),
-    fill: 'white',
+    fill: theme.palette.primary.main,
   },
 }));
 
-function InterfaceIcon({ className, color, onMouseEnter, onMouseLeave }: Props): JSX.Element {
+function InterfaceIcon({ className }: IconProps): JSX.Element {
   const classes = useStyles();
 
   return (
@@ -21,8 +23,6 @@ function InterfaceIcon({ className, color, onMouseEnter, onMouseLeave }: Props):
       className={clsx(className, classes.root)}
       viewBox="0 0 120 87"
       xmlns="http://www.w3.org/2000/svg"
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
     >
       <mask id="path-1-inside-1" fill="white">
         <rect width="120" height="87" rx="2" />
@@ -91,4 +91,4 @@ function InterfaceIcon({ className, color, onMouseEnter, onMouseLeave }: Props):
   );
 }
 
-export default withHoverColor(InterfaceIcon);
+export default InterfaceIcon;

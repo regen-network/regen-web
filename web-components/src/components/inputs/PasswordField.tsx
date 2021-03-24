@@ -41,7 +41,6 @@ export default function PasswordField({ signup = false, ...props }: PasswordFiel
 
   const {
     form: { errors },
-    // field: { name },
     field: { name, value },
   } = props;
 

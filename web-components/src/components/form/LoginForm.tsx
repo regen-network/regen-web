@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       fontSize: theme.spacing(4),
     },
     '& a': {
-      pointer: 'cursor',
+      cursor: 'pointer',
     },
   },
   checkboxLabel: {

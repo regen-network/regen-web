@@ -19,7 +19,7 @@ interface StepCardProps {
   stepNumber: number;
 }
 
-interface ProjectPlanStep {
+export interface ProjectPlanStep {
   stepNumber: number;
   tagName?: string;
   title: string;

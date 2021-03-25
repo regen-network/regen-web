@@ -114,16 +114,16 @@ export default function AccountabilityIcon({ className, isActive }: IconProps): 
       <path
         d="M83.213 90.5128H18.8484C17.2262 90.5128 15.9517 89.2382 15.9517 87.6161V62.8203"
         stroke="#8F8F8F"
-        stroke-width="3"
-        stroke-miterlimit="10"
-        stroke-linejoin="round"
+        strokeWidth="3"
+        strokeMiterlimit="10"
+        strokeLinejoin="round"
       />
       <path
         d="M61.1401 14.5034H89.0643C90.6865 14.5034 91.961 15.778 91.961 17.4001V84.4298"
         stroke="#8F8F8F"
-        stroke-width="3"
-        stroke-miterlimit="10"
-        stroke-linejoin="round"
+        strokeWidth="3"
+        strokeMiterlimit="10"
+        strokeLinejoin="round"
       />
       <rect
         x="63.0107"
@@ -132,22 +132,22 @@ export default function AccountabilityIcon({ className, isActive }: IconProps): 
         height="9.8718"
         transform="rotate(45 63.0107 56.0303)"
         stroke="#8F8F8F"
-        stroke-width="2"
-        stroke-miterlimit="10"
+        strokeWidth="2"
+        strokeMiterlimit="10"
       />
       <path
         d="M36.2866 69.1351C54.4283 69.1351 69.1351 54.4283 69.1351 36.2866C69.1351 18.1448 54.4283 3.43799 36.2866 3.43799C18.1448 3.43799 3.43799 18.1448 3.43799 36.2866C3.43799 54.4283 18.1448 69.1351 36.2866 69.1351Z"
         fill="#EFEFEF"
         stroke="#8F8F8F"
-        stroke-width="3"
-        stroke-miterlimit="10"
+        strokeWidth="3"
+        strokeMiterlimit="10"
       />
       <path
         d="M36.2865 60.5609C49.6929 60.5609 60.5609 49.6929 60.5609 36.2865C60.5609 22.8802 49.6929 12.0122 36.2865 12.0122C22.8802 12.0122 12.0122 22.8802 12.0122 36.2865C12.0122 49.6929 22.8802 60.5609 36.2865 60.5609Z"
         fill="white"
         stroke="#8F8F8F"
-        stroke-width="2"
-        stroke-miterlimit="10"
+        strokeWidth="2"
+        strokeMiterlimit="10"
       />
       <mask
         id="path-6-outside-1"
@@ -160,14 +160,14 @@ export default function AccountabilityIcon({ className, isActive }: IconProps): 
       >
         <rect fill="white" x="19.1538" y="26.2051" width="35" height="21" />
         <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
+          fillRule="evenodd"
+          clipRule="evenodd"
           d="M21.1538 36.6666C24.387 31.5801 30.0722 28.2051 36.5456 28.2051C43.0191 28.2051 48.7042 31.5801 51.9374 36.6666C48.7042 41.7531 43.0191 45.1282 36.5456 45.1282C30.0722 45.1282 24.387 41.7531 21.1538 36.6666Z"
         />
       </mask>
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M21.1538 36.6666C24.387 31.5801 30.0722 28.2051 36.5456 28.2051C43.0191 28.2051 48.7042 31.5801 51.9374 36.6666C48.7042 41.7531 43.0191 45.1282 36.5456 45.1282C30.0722 45.1282 24.387 41.7531 21.1538 36.6666Z"
         fill="#EFEFEF"
       />
@@ -185,15 +185,15 @@ export default function AccountabilityIcon({ className, isActive }: IconProps): 
         transform="rotate(45 77.9695 67.2161)"
         fill="#EFEFEF"
         stroke="#8F8F8F"
-        stroke-width="2"
-        stroke-miterlimit="10"
+        strokeWidth="2"
+        strokeMiterlimit="10"
       />
       <path
         d="M36.6667 43.3077C40.3344 43.3077 43.3077 40.3344 43.3077 36.6667C43.3077 32.9989 40.3344 30.0256 36.6667 30.0256C32.9989 30.0256 30.0256 32.9989 30.0256 36.6667C30.0256 40.3344 32.9989 43.3077 36.6667 43.3077Z"
         fill="white"
         stroke="#8F8F8F"
-        stroke-width="2"
-        stroke-linejoin="round"
+        strokeWidth="2"
+        strokeLinejoin="round"
       />
     </SvgIcon>
   );

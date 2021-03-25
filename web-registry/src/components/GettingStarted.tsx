@@ -67,22 +67,22 @@ const useStyles = makeStyles((theme: Theme) => ({
 // TODO: move copy to mocks.json and query
 const questionItems: QuestionItem[] = [
   {
-    question: 'How do i so and so?',
+    question: 'How do I implement the land management practices?',
     answer:
       '<p>you just do. you just do. you just do. ok okok okok </p><p>okookok ABC123 okokokok ok. you just do. you just do. you just do. </p>',
   },
   {
-    question: 'How do i so and so? Like really what do i do?',
-    answer:
-      '<p>you just do. you just do. you just do. ok okok okok </p><p>okookok ABC123 okokokok ok. you just do. you just do. you just do. </p>',
-  },
-  {
-    question: 'How do i so and so?',
+    question: 'Lorem ipsum dolor sit apsicing sit amut?',
     answer:
       '<p>you just do. you just do. you just do. ok okok okok </p><p>okookok ABC123 okokokok ok. you just do. you just do. you just do. </p>',
   },
   {
     question: 'How do i so and so?',
+    answer:
+      '<p>you just do. you just do. you just do. ok okok okok </p><p>okookok ABC123 okokokok ok. you just do. you just do. you just do. </p>',
+  },
+  {
+    question: 'How do i so and so again?',
     answer:
       '<p>you just do. you just do. you just do. ok okok okok okookok ABC123 okokokok ok. you just do. you just do. you just do. </p>',
   },

@@ -4,9 +4,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 
 import NavBar from './NavBar';
 import isAdmin from '../lib/admin';
-import getOrigin from '../lib/origin';
-
-const origin: string = getOrigin();
+import getRegistryUrl from '../lib/registryUrl';
 
 export default function Admin(): JSX.Element {
   const { user } = useAuth0();
@@ -14,7 +12,7 @@ export default function Admin(): JSX.Element {
   return (
     <div style={{ padding: '1rem' }}>
       <div style={{ textAlign: 'center' }}>
-        <NavBar redirectUri={`${origin}/admin`} />
+        <NavBar redirectUri={`${getRegistryUrl('/admin')}`} />
       </div>
       {isAdmin(user) && (
         <div>

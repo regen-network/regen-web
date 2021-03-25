@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useMutation } from '@apollo/client';
 import { loader } from 'graphql.macro';
 import { useHistory } from 'react-router-dom';
+import { useAuth0 } from '@auth0/auth0-react';
 
 import LoginForm, { Values } from 'web-components/lib/components/form/LoginForm';
 import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
@@ -15,6 +16,7 @@ const CREATE_USER = loader('../graphql/ReallyCreateUser.graphql');
 export default function Signup(): JSX.Element {
   const [createUser] = useMutation(CREATE_USER);
   const history = useHistory();
+  const { loginWithRedirect } = useAuth0();
 
   const submit = useCallback(
     ({ email, password, updates }: Values): Promise<void> => {
@@ -73,10 +75,9 @@ export default function Signup(): JSX.Element {
   return (
     <OnBoardingSection title="Sign up">
       <LoginForm
-        signup
         submit={submit}
         termsLink="/terms-service/"
-        link={getRegistryUrl('/login')}
+        loginFromSignup={() => loginWithRedirect({ redirectUri: `${getRegistryUrl('/user-profile')}` })}
         privacyLink="/privacy-policy/"
       />
     </OnBoardingSection>

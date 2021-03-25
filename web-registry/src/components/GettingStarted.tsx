@@ -163,11 +163,11 @@ const steps: ProjectPlanStep[] = [
 const GettingStarted: React.FC = () => {
   const classes = useStyles();
 
-  // TODO: maybe just organize JSON this way?
-  const stepsMap: any = steps.reduce(
-    (acc: any, step: ProjectPlanStep) => ((acc[step.stepNumber.toString()] = step), acc),
-    {},
-  );
+  // TODO: maybe just organize JSON this way (indexed by stepNumber)?
+  const stepsMap: any = steps.reduce((acc: any, step: ProjectPlanStep): any => {
+    // eslint-disable-next-line
+    return ((acc[step.stepNumber.toString()] = step), acc), {};
+  });
 
   return (
     <div className={classes.root}>

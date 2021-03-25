@@ -1,9 +1,10 @@
 import React from 'react';
 import { makeStyles, Theme, useTheme } from '@material-ui/core';
-import { Card, CardMedia } from '@material-ui/core';
+import { CardMedia } from '@material-ui/core';
 import clsx from 'clsx';
 import ReactHtmlParser from 'react-html-parser';
 
+import Card from '../cards/Card';
 import ArrowFilledIcon from '../icons/ArrowFilledIcon';
 import StepCircleBadge from '../icons/StepCircleBadge';
 import Title from '../title';
@@ -48,7 +49,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     alignItems: 'center',
     width: '100%',
     borderColor: theme.palette.grey[100],
-    borderRadius: 5,
     margin: theme.spacing(3, 0),
     backgroundColor: theme.palette.info.light, // (inactive color by default)
   },
@@ -145,7 +145,7 @@ export default function StepCard({ className, icon, step = fallbackStep }: StepC
 
   return (
     <div className={classes.root}>
-      <Card variant="outlined" className={clsx(className, classes.card, step.isActive && classes.activeCard)}>
+      <Card className={clsx(className, classes.card, step.isActive && classes.activeCard)}>
         {step.video && (
           <CardMedia
             className={classes.video}

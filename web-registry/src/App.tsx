@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter, Switch, Route, useParams, useLocation, Redirect } from 'react-router-dom';
 import { useTheme } from '@material-ui/core/styles';
-import { useAuth0, OAuthError } from '@auth0/auth0-react';
+import { useAuth0, OAuthError, withAuthenticationRequired } from '@auth0/auth0-react';
 
 import { createBrowserHistory } from 'history';
 import isAdmin from './lib/admin';
@@ -40,6 +40,10 @@ export const history = createBrowserHistory();
 
 interface BoolProps {
   [key: string]: boolean;
+}
+interface ProtectedRouteProps {
+  component: React.ComponentType;
+  path: string;
 }
 
 function ScrollToTop(): null {
@@ -238,6 +242,10 @@ function Projects(): JSX.Element {
   return <ProjectList projects={projects} />;
 }
 
+const ProtectedRoute = ({ component, ...args }: ProtectedRouteProps): JSX.Element => (
+  <Route component={withAuthenticationRequired(component)} {...args} />
+);
+
 const App: React.FC = (props): JSX.Element => {
   const { user, isLoading, error } = useAuth0();
 
@@ -317,9 +325,8 @@ const App: React.FC = (props): JSX.Element => {
               </>
             )}
           />
-          <Route path="/getting-started">
-            <GettingStarted />
-          </Route>
+          <Route path="/getting-started" component={GettingStarted} />
+          {/* <ProtectedRoute path="/getting-started" component={GettingStarted} /> */}
           <Route
             path="/admin"
             render={({ match: { path } }) => (

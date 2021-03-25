@@ -89,6 +89,27 @@ const GettingStarted: React.FC = () => {
     },
   ];
 
+  const steps = [
+    {
+      stepNumber: 1,
+      title: 'Fill out a project plan',
+      tagName: 'immediate',
+      isActive: true,
+      description:
+        'This project plan includes all the details about your monitoring, management practices, and more.',
+      faqs: [],
+    },
+    {
+      stepNumber: 2,
+      title: 'Fill out a project plan',
+      tagName: 'immediate',
+      isActive: true,
+      description:
+        'This project plan includes all the details about your monitoring, management practices, and more.',
+      faqs: questionItems,
+    },
+  ];
+
   return (
     <div className={classes.root}>
       <Title variant="h3" className={classes.title}>

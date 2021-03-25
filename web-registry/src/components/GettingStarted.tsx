@@ -12,6 +12,8 @@ import TrustIcon from 'web-components/lib/components/icons/TrustIcon';
 import StepCard from 'web-components/lib/components/cards/StepCard';
 import Title from 'web-components/lib/components/title';
 
+import { QuestionItem } from 'web-components/lib/components/faq/Question';
+
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     display: 'flex',
@@ -89,7 +91,17 @@ const GettingStarted: React.FC = () => {
     },
   ];
 
-  const steps = [
+  interface ProjectPlanStep {
+    stepNumber: number;
+    tagName?: string;
+    title: string;
+    description?: string;
+    faqs?: QuestionItem[];
+    video?: string;
+    isActive?: boolean;
+  }
+
+  const steps: ProjectPlanStep[] = [
     {
       stepNumber: 1,
       title: 'Fill out a project plan',
@@ -101,11 +113,65 @@ const GettingStarted: React.FC = () => {
     },
     {
       stepNumber: 2,
+      title: 'Review and Submit',
+      tagName: 'immediate',
+      isActive: true,
+      description: 'Review your project plan to make sure all entries are correct.',
+      faqs: questionItems,
+    },
+    {
+      stepNumber: 3,
       title: 'Fill out a project plan',
       tagName: 'immediate',
       isActive: true,
       description:
-        'This project plan includes all the details about your monitoring, management practices, and more.',
+        '<span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut.<a href="https://regen.network" target="_blank" rel="noopener noreferrer">Read full documentation»</a></span>',
+      faqs: questionItems,
+    },
+    {
+      stepNumber: 4,
+      title: 'Create a project page',
+      tagName: 'immediate',
+      isActive: false,
+      description: 'This marketing page help advertise your project to potential buyers.',
+      faqs: questionItems,
+    },
+    {
+      stepNumber: 5,
+      title:
+        'Hire a monitor to establish a baseline measurement and additional monitoring rounds (if applicable)',
+      tagName: 'within 60 days',
+      isActive: false,
+      description:
+        '<span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut.<a href="https://regen.network" target="_blank" rel="noopener noreferrer">Read full documentation»</a></span>',
+      faqs: questionItems,
+    },
+    {
+      stepNumber: 6,
+      title: 'Implement land management',
+      tagName: 'within 3 months',
+      isActive: false,
+      description:
+        '<span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut.<a href="https://regen.network" target="_blank" rel="noopener noreferrer">Read full documentation»</a></span>',
+      faqs: questionItems,
+      video: 'https://www.youtube.com/embed/Eh19aQ1dd7c',
+    },
+    {
+      stepNumber: 7,
+      title: 'Hire a verifier as needed given the verification schedule',
+      tagName: 'within 6 months',
+      isActive: false,
+      description:
+        '<span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut.<a href="https://regen.network" target="_blank" rel="noopener noreferrer">Read full documentation»</a></span>',
+      faqs: questionItems,
+    },
+    {
+      stepNumber: 8,
+      title: 'Hire a broker or sell through Regen Network',
+      tagName: 'variable',
+      isActive: false,
+      description:
+        '<span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut.<a href="https://regen.network" target="_blank" rel="noopener noreferrer">Read full documentation»</a></span>',
       faqs: questionItems,
     },
   ];
@@ -116,94 +182,44 @@ const GettingStarted: React.FC = () => {
         Getting Started
       </Title>
       <StepCard
+        stepNumber={1}
+        step={steps.find(step => step.stepNumber === 1)}
         icon={<InterfaceIcon className={classes.interfaceIcon} />}
-        tagName="immediate"
-        stepText="step 1"
-        isActive
-        title="Fill out a project plan"
-        description="This project plan includes all the details about your monitoring, management practices, and more."
       />
       <StepCard
+        stepNumber={2}
+        step={steps.find(step => step.stepNumber === 2)}
         icon={<ReviewIcon className={classes.reviewIcon} />}
-        tagName="immediate"
-        stepText="step 2"
-        isActive
-        title="Review and Submit"
-        description="Review your project plan to make sure all entries are correct."
       />
       <StepCard
+        stepNumber={3}
+        step={steps.find(step => step.stepNumber === 3)}
         icon={<TrustDocumentIcon className={classes.trustDocumentIcon} />}
-        tagName="immediate"
-        stepText="step 3"
-        isActive
-        title="Fill out a project plan"
-        description={
-          <span>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut.
-            <a href="https://regen.network" target="_blank" rel="noopener noreferrer">
-              Read full documentation»
-            </a>
-          </span>
-        }
-        questionItems={questionItems}
       />
       <StepCard
+        stepNumber={4}
+        step={steps.find(step => step.stepNumber === 4)}
         icon={<RegistrationIcon className={classes.registrationIcon} />}
-        tagName="immediate"
-        stepText="step 4"
-        title="Create a project page"
-        description="This marketing page help advertise your project to potential buyers."
       />
       <StepCard
+        stepNumber={5}
+        step={steps.find(step => step.stepNumber === 5)}
         icon={<AccountabilityIcon className={classes.accountabilityIcon} />}
-        tagName="within 60 days"
-        stepText="step 5"
-        title="Hire a monitor to establish a baseline measurement and additional monitoring rounds (if applicable)"
-        description={
-          <span>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut.
-            <a href="https://regen.network"> Read full documentation»</a>
-          </span>
-        }
       />
       <StepCard
+        stepNumber={6}
+        step={steps.find(step => step.stepNumber === 6)}
         icon={<FarmerIcon className={classes.farmerIcon} />}
-        tagName="within 3 months"
-        stepText="step 6"
-        title="Implement land management"
-        description={
-          <span>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut.
-            <a href="https://regen.network"> Read full documentation»</a>
-          </span>
-        }
-        questionItems={questionItems}
-        video="https://www.youtube.com/embed/Eh19aQ1dd7c"
       />
       <StepCard
+        stepNumber={7}
+        step={steps.find(step => step.stepNumber === 7)}
         icon={<TrustIcon className={classes.trustIcon} />}
-        tagName="within 6 months"
-        stepText="step 7"
-        title="Hire a verifier as needed given the verification schedule"
-        description={
-          <span>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut.
-            <a href="https://regen.network"> Read full documentation»</a>
-          </span>
-        }
       />
       <StepCard
+        stepNumber={8}
+        step={steps.find(step => step.stepNumber === 8)}
         icon={<ShadedCreditsIcon className={classes.creditsIcon} />}
-        tagName="variable"
-        stepText="step 8"
-        title="Hire a broker or sell through Regen Network"
-        description={
-          <span>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut.
-            <a href="https://regen.network"> Read full documentation»</a>
-          </span>
-        }
-        questionItems={questionItems}
       />
     </div>
   );

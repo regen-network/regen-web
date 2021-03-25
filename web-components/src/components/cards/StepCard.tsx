@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles, Theme, useTheme } from '@material-ui/core';
 import { Card, CardMedia } from '@material-ui/core';
 import clsx from 'clsx';
+import ReactHtmlParser from 'react-html-parser';
 
 import ArrowFilledIcon from '../icons/ArrowFilledIcon';
 import StepCircleBadge from '../icons/StepCircleBadge';
@@ -14,11 +15,16 @@ import { QuestionItem } from '../faq/Question';
 interface StepCardProps {
   className?: string;
   icon: JSX.Element;
+  step?: ProjectPlanStep;
+  stepNumber: number;
+}
+
+interface ProjectPlanStep {
+  stepNumber: number;
   tagName?: string;
-  stepText: string;
   title: string;
-  description?: string | JSX.Element;
-  questionItems?: QuestionItem[];
+  description?: string;
+  faqs?: QuestionItem[];
   video?: string;
   isActive?: boolean;
 }
@@ -125,29 +131,32 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
+const fallbackStep: ProjectPlanStep = {
+  stepNumber: 404,
+  title: 'Not found',
+  tagName: 'Not found',
+  isActive: false,
+  description: 'Please set up content for this step number',
+  faqs: [],
+};
+
 export default function StepCard({
   className,
   icon,
-  tagName,
-  stepText,
-  title,
-  description,
-  questionItems,
-  video,
-  isActive,
+  step = fallbackStep,
+  stepNumber,
 }: StepCardProps): JSX.Element {
   const classes = useStyles({});
   const theme = useTheme();
-  // TODO: ProjectStep prop, move all data to mocks json
 
   return (
     <div className={classes.root}>
-      <Card variant="outlined" className={clsx(className, classes.card, isActive && classes.activeCard)}>
-        {video && (
+      <Card variant="outlined" className={clsx(className, classes.card, step.isActive && classes.activeCard)}>
+        {step.video && (
           <CardMedia
             className={classes.video}
             component="iframe"
-            src={video}
+            src={step.video}
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
@@ -156,22 +165,26 @@ export default function StepCard({
         <div className={classes.cardTop}>
           <div className={classes.cardTopThird}></div>
           <div className={clsx(classes.cardTopThird, classes.cardTopCenter)}>
-            <StepCircleBadge icon={icon} isActive={isActive} />
+            <StepCircleBadge icon={icon} isActive={step.isActive} />
           </div>
           <div className={clsx(classes.cardTopThird, classes.cardTopRight)}>
-            {tagName && <Tag className={classes.tag} name={tagName} color={theme.palette.secondary.main} />}
+            {step.tagName && (
+              <Tag className={classes.tag} name={step.tagName} color={theme.palette.secondary.main} />
+            )}
           </div>
         </div>
         <div className={classes.cardBottom}>
-          <Title variant="h6" className={clsx(classes.step, isActive && classes.activeColor)}>
-            {stepText}
+          <Title variant="h6" className={clsx(classes.step, step.isActive && classes.activeColor)}>
+            step {stepNumber}
           </Title>
-          <Title variant="h4" className={clsx(classes.stepTitle, isActive && classes.activeTitle)}>
-            {title}
+          <Title variant="h4" className={clsx(classes.stepTitle, step.isActive && classes.activeTitle)}>
+            {step.title}
           </Title>
-          <Description className={classes.stepDescription}>{description}</Description>
+          <Description className={classes.stepDescription}>
+            {ReactHtmlParser(step.description || '')}
+          </Description>
         </div>
-        {questionItems && <StepFAQs questionItems={questionItems} isActive={isActive} />}
+        {step.faqs && step.faqs.length > 0 && <StepFAQs questionItems={step.faqs} isActive={step.isActive} />}
       </Card>
       <ArrowFilledIcon className="down-arrow" color={theme.palette.info.main} />
     </div>

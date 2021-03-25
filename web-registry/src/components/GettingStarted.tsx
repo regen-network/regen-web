@@ -9,9 +9,8 @@ import ReviewIcon from 'web-components/lib/components/icons/ReviewIcon';
 import ShadedCreditsIcon from 'web-components/lib/components/icons/ShadedCreditsIcon';
 import TrustDocumentIcon from 'web-components/lib/components/icons/TrustDocumentIcon';
 import TrustIcon from 'web-components/lib/components/icons/TrustIcon';
-import StepCard, { ProjectPlanStep } from 'web-components/lib/components/cards/StepCard';
 import Title from 'web-components/lib/components/title';
-
+import StepCard, { ProjectPlanStep } from 'web-components/lib/components/cards/StepCard';
 import { QuestionItem } from 'web-components/lib/components/faq/Question';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -108,7 +107,7 @@ const steps: ProjectPlanStep[] = [
   },
   {
     stepNumber: 3,
-    title: 'Fill out a project plan',
+    title: 'Sign a contract and project officially starts',
     tagName: 'immediate',
     isActive: true,
     description:
@@ -164,51 +163,25 @@ const steps: ProjectPlanStep[] = [
 const GettingStarted: React.FC = () => {
   const classes = useStyles();
 
+  // TODO: maybe just organize JSON this way?
+  const stepsMap: any = steps.reduce(
+    (acc: any, step: ProjectPlanStep) => ((acc[step.stepNumber.toString()] = step), acc),
+    {},
+  );
+
   return (
     <div className={classes.root}>
       <Title variant="h3" className={classes.title}>
         Getting Started
       </Title>
-      <StepCard
-        stepNumber={1}
-        step={steps.find(step => step.stepNumber === 1)}
-        icon={<InterfaceIcon className={classes.interfaceIcon} />}
-      />
-      <StepCard
-        stepNumber={2}
-        step={steps.find(step => step.stepNumber === 2)}
-        icon={<ReviewIcon className={classes.reviewIcon} />}
-      />
-      <StepCard
-        stepNumber={3}
-        step={steps.find(step => step.stepNumber === 3)}
-        icon={<TrustDocumentIcon className={classes.trustDocumentIcon} />}
-      />
-      <StepCard
-        stepNumber={4}
-        step={steps.find(step => step.stepNumber === 4)}
-        icon={<RegistrationIcon className={classes.registrationIcon} />}
-      />
-      <StepCard
-        stepNumber={5}
-        step={steps.find(step => step.stepNumber === 5)}
-        icon={<AccountabilityIcon className={classes.accountabilityIcon} />}
-      />
-      <StepCard
-        stepNumber={6}
-        step={steps.find(step => step.stepNumber === 6)}
-        icon={<FarmerIcon className={classes.farmerIcon} />}
-      />
-      <StepCard
-        stepNumber={7}
-        step={steps.find(step => step.stepNumber === 7)}
-        icon={<TrustIcon className={classes.trustIcon} />}
-      />
-      <StepCard
-        stepNumber={8}
-        step={steps.find(step => step.stepNumber === 8)}
-        icon={<ShadedCreditsIcon className={classes.creditsIcon} />}
-      />
+      <StepCard step={stepsMap['1']} icon={<InterfaceIcon className={classes.interfaceIcon} />} />
+      <StepCard step={stepsMap['2']} icon={<ReviewIcon className={classes.reviewIcon} />} />
+      <StepCard step={stepsMap['3']} icon={<TrustDocumentIcon className={classes.trustDocumentIcon} />} />
+      <StepCard step={stepsMap['4']} icon={<RegistrationIcon className={classes.registrationIcon} />} />
+      <StepCard step={stepsMap['5']} icon={<AccountabilityIcon className={classes.accountabilityIcon} />} />
+      <StepCard step={stepsMap['6']} icon={<FarmerIcon className={classes.farmerIcon} />} />
+      <StepCard step={stepsMap['7']} icon={<TrustIcon className={classes.trustIcon} />} />
+      <StepCard step={stepsMap['8']} icon={<ShadedCreditsIcon className={classes.creditsIcon} />} />
     </div>
   );
 };

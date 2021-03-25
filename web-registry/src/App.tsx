@@ -325,8 +325,7 @@ const App: React.FC = (props): JSX.Element => {
               </>
             )}
           />
-          <Route path="/getting-started" component={GettingStarted} />
-          {/* <ProtectedRoute path="/getting-started" component={GettingStarted} /> */}
+          <ProtectedRoute path="/getting-started" component={GettingStarted} />
           <Route
             path="/admin"
             render={({ match: { path } }) => (

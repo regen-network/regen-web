@@ -16,17 +16,16 @@ interface StepCardProps {
   className?: string;
   icon: JSX.Element;
   step?: ProjectPlanStep;
-  stepNumber: number;
 }
 
 export interface ProjectPlanStep {
-  stepNumber: number;
   tagName?: string;
   title: string;
   description?: string;
   faqs?: QuestionItem[];
   video?: string;
   isActive?: boolean;
+  stepNumber: number | string;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -140,12 +139,7 @@ const fallbackStep: ProjectPlanStep = {
   faqs: [],
 };
 
-export default function StepCard({
-  className,
-  icon,
-  step = fallbackStep,
-  stepNumber,
-}: StepCardProps): JSX.Element {
+export default function StepCard({ className, icon, step = fallbackStep }: StepCardProps): JSX.Element {
   const classes = useStyles({});
   const theme = useTheme();
 
@@ -175,7 +169,7 @@ export default function StepCard({
         </div>
         <div className={classes.cardBottom}>
           <Title variant="h6" className={clsx(classes.step, step.isActive && classes.activeColor)}>
-            step {stepNumber}
+            step {step.stepNumber}
           </Title>
           <Title variant="h4" className={clsx(classes.stepTitle, step.isActive && classes.activeTitle)}>
             {step.title}

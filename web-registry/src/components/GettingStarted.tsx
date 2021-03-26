@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 
 import AccountabilityIcon from 'web-components/lib/components/icons/AccountabilityIcon';
@@ -162,12 +162,17 @@ const steps: ProjectPlanStep[] = [
 
 const GettingStarted: React.FC = () => {
   const classes = useStyles();
+  const [stepsMap, setStepsMap] = useState<any>({});
 
   // TODO: maybe just organize JSON this way (indexed by stepNumber)?
-  const stepsMap: any = steps.reduce((acc: any, step: ProjectPlanStep): any => {
-    // eslint-disable-next-line
-    return ((acc[step.stepNumber.toString()] = step), acc), {};
-  });
+  const indexStepsByStepNumber = (): any => {
+    return Object.assign({}, ...steps.map(x => ({ [x.stepNumber]: x })));
+  };
+
+  useEffect(() => {
+    const indexedSteps = indexStepsByStepNumber();
+    setStepsMap(indexedSteps);
+  }, []);
 
   return (
     <div className={classes.root}>

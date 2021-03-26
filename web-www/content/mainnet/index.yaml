@@ -12,10 +12,10 @@ launchInfoSection:
     listTitle: 'The mainnet launch:'
     progress: 97
     listItems:
-      - text: Unlocks next phase towards planetary regeneration
+      - text: Unlocks next phase feature developments for planetary regeneration
       - text: REGEN token will be live on-chain (with transfers disabled initially)
-      - text: Staking will be possible for all token holders
-      - text: On-chain governance will be used for planning future upgrades and milestones
+      - text: Staking on Regen Ledger will be possible for all token holders
+      - text: On-chain governance activated for planning future upgrades and milestones
     actionItems:
       - title: Validators
         linkUrl: /gentx/
@@ -37,22 +37,22 @@ whatsNextSection:
   description: Our engineering team is hard at work on some exciting new features, to be enabled later this year via on-chain governance.
   infoItems:
     - title: Authorization
-      description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      description: The Cosmos SDK `x/authz` module implements of ADR-30, allowing the granting of arbitrary privileges from one account (the granter) to another account (the grantee). It is intended to be used in conjunction with the Groups or Fee Grants for various key & fee management use cases.
       icon: ../../static/media/mainnet-shield.svg
       gitLink: https://github.com/regen-network
     - title: Fee Grants
-      description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      description: Fee Grants allow accounts to grant fee allowances, enabling others to use fees from their accounts, paving the way for farmers and monitors to file on-chain ecological claims without having to manage their own gas fees.
       icon: ../../static/media/mainnet-counting.svg
       gitLink: https://github.com/regen-network
     - title: Groups
-      description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      description: The Cosmos SDK Group Module enables the creation and management of on chain multisig accounts. Regen Ledger will be using this as the base account for our Community Staking DAOs and for enabling threshold based voting on message execution.
       icon: ../../static/media/mainnet-groups.svg
       gitLink: https://github.com/regen-network
-    - title: Credits
-      description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    - title: Ecocredits
+      description: The Ecocredit Module is our module for managing the issuance, trading, and retiring of credits pertaining to verifiable changes in ecosystem health. It’s designed to function as an open platform for credit designers, and will first be used for Regen Network's own CarbonPlus Grasslands credit.
       icon: ../../static/media/mainnet-credits.svg
       gitLink: https://github.com/regen-network
     - title: Data
-      description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      description: The Data Module is intended to sit alongside the Ecocredit Module, serving as a flexible yet opinionated module for storing complex metadata and registering data schemas pertaining to a ecocredit batch or ecosystem service project.
       icon: ../../static/media/mainnet-data.svg
       gitLink: https://github.com/regen-network

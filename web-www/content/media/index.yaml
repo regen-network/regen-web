@@ -4,18 +4,30 @@ categories:
     buttonText: read article
     showPlay: false
     items:
+      - image: ../../static/media/cointelgraph-regen-2-01.jpg
+        title: Microsoft purchases CarbonPlus Grassland credits
+        author: Cointelegraph
+        url: https://cointelegraph.com/news/microsoft-uses-blockchain-technology-to-purchase-soil-carbon-credits-in-australia
+        date: February 01, 2021
+        isMainnet: true
+      - image: ../../static/media/can-crypto-help-the-planet.jpg
+        title: Can cryptocurrencies help the planet?
+        author: Landscape News
+        url: https://news.globallandscapesforum.org/50857/can-cryptocurrencies-help-the-planet/
+        date: March 31, 2021
+        isMainnet: true
       - image: ../../static/media/bbc.png
         title: Carbon credits for farming beef, rural services under the pandemic
         author: BBC
         url: ' https://www.bbc.co.uk/sounds/play/m000s866'
         date: February 15, 2021
-        isMainnet: true
+        isMainnet: false
       - title: Regen Network Announces Historic Carbon Credit Sale
         author: Regen Network
         url: https://medium.com/regen-network/regen-network-announces-historic-carbon-credit-sale-in-australia-b76dfadcc095
         date: January 29, 2021
         image: ../../static/media/cattle_wilmott.png
-        isMainnet: true
+        isMainnet: false
       - title: 40 Social Entrepreneurs to Watch For in 2021
         author: CauseArtist
         url: https://www.causeartist.com/social-entrepreneurs-to-watch-for-in-2021/
@@ -41,7 +53,7 @@ categories:
         author: Lift Economy Podcast with Andrew Baskin
         url: https://www.lifteconomy.com/next-economy-now-show-notes/2019/12/3/next-economy-now
         date: December 1, 2019
-        isMainnet: true
+        isMainnet: false
       - image: ../../static/media/media-article1.png
         title: Regen Network Crosses $1MM Raise Led by Interchain Foundation and
           Announces Chorus One Partnership and Completion of Techstars
@@ -94,13 +106,13 @@ categories:
         author: Regen Network for the Regenerate Conference
         url: https://www.youtube.com/watch?v=Eh19aQ1dd7c&t=1s
         date: October 30, 2020
-        isMainnet: true
+        isMainnet: false
       - image: ../../static/media/screen-shot-2020-11-10-at-9.37.29-pm.png
         title: 'CarbonPlus Credit: Methodology, Monitoring, and Blockchain'
         author: Regen Network
         url: https://www.youtube.com/watch?v=b9PvwegUCqk&t=2486s
         date: October 8, 2020
-        isMainnet: true
+        isMainnet: false
       - image: ../../static/media/media-video1.png
         title: '[LIVE] Devcon3 Day 4 Stream - Morning'
         date: November 4, 2017
@@ -148,7 +160,7 @@ categories:
         url: https://www.evolvethe.world/episodes/christian-shearer
         date: February 15, 2021
         image: ../../static/media/screen-shot-2021-02-24-at-1.51.30-pm.png
-        isMainnet: false
+        isMainnet: true
       - image: ../../static/media/screen-shot-2021-01-27-at-10.40.11-am.png
         title: Regen Network's Sarah Baxendell and Gisel Booman featured in Apogeo
           Spatial's Exec Interview

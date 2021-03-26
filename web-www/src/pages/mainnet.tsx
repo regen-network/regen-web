@@ -22,7 +22,7 @@ type QueryData = {
   };
 };
 
-const Mainnet = ({ location }: Props): JSX.Element => {
+const Mainnet: React.FC<PageProps> = ({ location }) => {
   const {
     background,
     text: { livecastLink, launchDate, seoDescription },

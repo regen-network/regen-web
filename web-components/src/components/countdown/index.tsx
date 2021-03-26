@@ -11,7 +11,7 @@ const Countdown: React.FC<Props> = p => {
     <ReactCountdown
       date={new Date(p.date)}
       renderer={({ days, hours, minutes, seconds }) => {
-        return <>{`${padN(days)}d:${padN(hours)}h:${minutes}m:${seconds}s`}</>;
+        return <>{`${padN(days)}:${padN(hours)}:${padN(minutes)}:${padN(seconds)}`}</>;
       }}
     />
   );

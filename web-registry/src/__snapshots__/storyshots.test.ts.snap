@@ -9166,8 +9166,8 @@ exports[`Storyshots Components|Forms Login Form 1`] = `
 >
   <WithStyles(CssBaseline) />
   <LoginForm
-    link="/"
     privacyLink="https://www.regen.network/privacy-policy/"
+    signupFromLogin="/"
     submit={[Function]}
     termsLink="https://www.regen.network/terms-service/"
   />
@@ -9515,9 +9515,8 @@ exports[`Storyshots Components|Forms Sign Up Form 1`] = `
 >
   <WithStyles(CssBaseline) />
   <LoginForm
-    link="/"
+    loginFromSignup={[Function]}
     privacyLink="https://www.regen.network/privacy-policy/"
-    signup={true}
     submit={[Function]}
     termsLink="https://www.regen.network/terms-service/"
   />

@@ -4,23 +4,30 @@ categories:
     buttonText: read article
     showPlay: false
     items:
-      - image: ../../static/media/cointelgraph-regen-2-01.jpg
-        title: Microsoft purchases CarbonPlus Grassland credits
-        author: Cointelegraph
-        url: https://cointelegraph.com/news/microsoft-uses-blockchain-technology-to-purchase-soil-carbon-credits-in-australia
-        date: February 01, 2021
-        isMainnet: true
-      - image: ../../static/media/can-crypto-help-the-planet.jpg
-        title: Can cryptocurrencies help the planet?
+      - title: Can Cryptocurrencies Help The Planet?
         author: Landscape News
         url: https://news.globallandscapesforum.org/50857/can-cryptocurrencies-help-the-planet/
-        date: March 31, 2021
+        date: " March 23, 2021"
+        image: ../../static/media/sheep-scaled.jpeg
+        isMainnet: true
+      - title: Microsoft uses blockchain technology to purchase soil carbon credits in
+          Australia
+        author: Cointelegraph
+        url: https://cointelegraph.com/news/microsoft-uses-blockchain-technology-to-purchase-soil-carbon-credits-in-australia
+        date: February 1, 2021
+        image: ../../static/media/screen-shot-2021-03-17-at-11.01.31-pm.png
         isMainnet: true
       - image: ../../static/media/bbc.png
         title: Carbon credits for farming beef, rural services under the pandemic
         author: BBC
         url: ' https://www.bbc.co.uk/sounds/play/m000s866'
         date: February 15, 2021
+        isMainnet: false
+      - url: https://www.forbesadvocate.com.au/story/7105688/microsoft-buys-carbon-credits-from-aussie-cattle-operation/?cs=9397
+        author: Forbes Advocate
+        title: Microsoft buys carbon credits from NSW cattle operation
+        date: January 29, 2021
+        image: ../../static/media/screen-shot-2021-03-17-at-11.04.37-pm.png
         isMainnet: false
       - title: Regen Network Announces Historic Carbon Credit Sale
         author: Regen Network

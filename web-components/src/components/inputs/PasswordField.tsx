@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useTheme, makeStyles, Theme } from '@material-ui/core/styles';
-import zxcvbn, { ZXCVBNScore } from 'zxcvbn';
+// import zxcvbn, { ZXCVBNScore } from 'zxcvbn';
+// import { ZXCVBNResult } from 'zxcvbn';
 import IconButton from '@material-ui/core/IconButton';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 
@@ -23,7 +24,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const scores = ['weak', 'okay', 'good', 'strong', 'stronger'];
 
-function getScoreLabel(score: ZXCVBNScore): string {
+function getScoreLabel(score: number): string {
   return `Password strength: ${scores[score]}`;
 }
 
@@ -32,6 +33,7 @@ export default function PasswordField({ signup = false, ...props }: PasswordFiel
   const matches = useMediaQuery(theme.breakpoints.up('sm'));
   const classes = useStyles();
   const [showPassword, setShowPassword] = useState<boolean>(!matches);
+  const [score, setScore] = useState<number | undefined>();
 
   useEffect(() => {
     setShowPassword(!matches);
@@ -46,11 +48,13 @@ export default function PasswordField({ signup = false, ...props }: PasswordFiel
     event.preventDefault();
   };
 
-  // Only verify password strength if valid to avoid unnecessary computation
-  let score: ZXCVBNScore | undefined;
-  if (validatePassword(value)) {
-    score = zxcvbn(value).score;
-  }
+  const onChange = async (event: any): Promise<void> => {
+    // Only verify password strength if valid to avoid unnecessary computation
+    if (signup && validatePassword(value)) {
+      const { default: zxcvbn } = await import('zxcvbn');
+      setScore(zxcvbn(value).score);
+    }
+  };
 
   return (
     <TextField
@@ -58,6 +62,7 @@ export default function PasswordField({ signup = false, ...props }: PasswordFiel
       type={showPassword ? 'text' : 'password'}
       helperText={score !== undefined ? getScoreLabel(score) : errors[name]}
       FormHelperTextProps={{ filled: score !== undefined }}
+      triggerOnChange={onChange}
       endAdornment={
         <IconButton
           aria-label="toggle password visibility"

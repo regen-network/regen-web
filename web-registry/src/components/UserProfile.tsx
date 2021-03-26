@@ -1,6 +1,9 @@
 import React, { useCallback, useState } from 'react';
+import { useQuery, gql } from '@apollo/client';
+import { useAuth0 } from '@auth0/auth0-react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import Link from '@material-ui/core/Link';
+import { useMutation } from '@apollo/client';
 import axios from 'axios';
 
 import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
@@ -25,10 +28,65 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const messageExpired: string = 'Access expired.';
+const UPDATE_USER_BY_EMAIL = gql`
+  mutation UpdateUserByEmail($input: UpdateUserByEmailInput!) {
+    updateUserByEmail(email: $input) {
+      email
+      userPatch {
+        phoneNumber
+        roleTitle
+      }
+      partyByPartyId {
+        name
+        description
+        image
+      }
+    }
+  }
+`;
+
+const UPDATE_PARTY_BY_ID = gql`
+  mutation UpdatePartyById($input: UpdateUserByEmailInput!) {
+    updatePartyById(email: $input) {
+      email
+      userPatch {
+        phoneNumber
+        roleTitle
+      }
+      partyByPartyId {
+        name
+        description
+        image
+      }
+    }
+  }
+`;
+
+const USER_BY_EMAIL = gql`
+  query UserByEmail($email: String!) {
+    userByEmail(email: $email) {
+      id
+      partyId
+      partyByPartyId {
+        id
+      }
+    }
+  }
+`;
 
 // TODO check login state
-export default function ConfirmEmail(): JSX.Element {
+export default function UserProfile(): JSX.Element {
+  const { user } = useAuth0();
   const classes = useStyles();
+  const [updateUserByEmail, { data, loading, error: updateUserError }] = useMutation(UPDATE_USER_BY_EMAIL, {
+    errorPolicy: 'ignore',
+  });
+  // const { data: userData, loading: userLoading, error: errorLoading } = useQuery(USER_BY_EMAIL, {
+  //   errorPolicy: 'ignore',
+  //   variables: {
+  //     email: user?.email,
+  //   },
+  // });
 
   // Get any URL parameters from auth0 after email verification
   const search = new URLSearchParams(window.location.search);
@@ -74,6 +132,23 @@ export default function ConfirmEmail(): JSX.Element {
   }, [email]);
 
   async function submitUserProfile(values: UserProfileValues): Promise<void> {
+    // if (userData.id) {
+    //   try {
+    //     await updateUserByEmail({
+    //       variables: {
+    //         input: {
+    //           email: user.email,
+    //           userPatch: {
+    //             phoneNumber: values.phone,
+    //             roleTitle: values.role,
+    //           },
+    //         },
+    //       },
+    //     });
+    //   } catch (e) {
+    //     console.error(e);
+    //   }
+    // }
     console.log('values :>> ', values);
   }
 
@@ -91,7 +166,6 @@ export default function ConfirmEmail(): JSX.Element {
           {!isSubmitting && status && <Banner text={status} />}
         </>
       )}
-      {/* TODO: add user profile form here https://github.com/regen-network/regen-registry/issues/351 */}
       {showForm && <UserProfileForm submit={submitUserProfile} />}
     </OnBoardingSection>
   );

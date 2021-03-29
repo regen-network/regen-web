@@ -6,7 +6,7 @@ import CommunitySection from '../sections/community/CollaborateSection';
 import SEO from '../components/seo';
 
 interface props {
-  location: object;
+  location: Location;
 }
 
 const CommunityPage = ({ location }: props): JSX.Element => {

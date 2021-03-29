@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const TopSection = () => {
+const TopSection: React.FC = () => {
   const classes = useStyles({});
   const data = useStaticQuery(graphql`
     query {

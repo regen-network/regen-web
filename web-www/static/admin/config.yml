@@ -649,6 +649,7 @@ collections:
                   - {label: "author / source name", name: author, widget: string}
                   - {label: "url", name: url, widget: string}
                   - {label: "date", name: date, widget: string}
+                  - {label: "Is Mainnet", name: isMainnet, widget: boolean}
       - label: "Press Kit"
         name: "press-kit"
         file: "web-www/content/press-kit/index.yaml"
@@ -889,6 +890,65 @@ collections:
             fields:
               - {label: "Airtable Link", name: airtableLink, widget: string}
               - {label: "Recaptcha Prompt Message", name: recaptchaMessage, widget: string}
+      - label: "Mainnet"
+        name: mainnet
+        file: "web-www/content/mainnet/index.yaml"
+        fields:
+          - label: "Launch Date"
+            name: launchDate
+            widget: string
+          - label: "Livecast Link"
+            name: livecastLink
+            widget: string
+          - label: "SEO Description for mainnet page"
+            name: seoDescription
+            widget: string
+          - label: "Top Section"
+            name: topSection
+            widget: object
+            fields:
+              - {label: "Header", name: header, widget: string}
+              - {label: "Body", name: body, widget: string}
+          - label: "Launch Info Section"
+            name: launchInfoSection
+            widget: object
+            fields:
+              - {label: "Image", name: image, widget: image}
+              - label: "Information Card"
+                name: card
+                widget: object
+                fields: 
+                  - {label: "Card title", name: title, widget: string}
+                  - {label: "List title", name: listTitle, widget: string}
+                  - {label: "Progress percent", name: progress, widget: number}
+                  - label: "List Items"
+                    name: listItems
+                    widget: list
+                    fields: 
+                      - {label: 'List item text', name: text, widget: string}
+                  - label: "Action Items"
+                    name: actionItems
+                    widget: list
+                    fields: 
+                      - {label: "Title", name: title, widget: string}
+                      - {label: "Link URL", name: linkUrl, widget: string}
+                      - {label: "Link text", name: linkText, widget: string}
+                      - {label: "Description", name: description, widget: string}
+                      - {label: "Icon", name: icon, widget: image}
+          - label: "What's Next Section"
+            name: whatsNextSection
+            widget: object
+            fields:
+              - {label: Title, name: title, widget: string}
+              - {label: Description, name: description, widget: string}
+              - label: Info Items
+                name: infoItems
+                widget: list
+                fields:
+                  - {label: Title, name: title, widget: string}
+                  - {label: Description, name: description, widget: string}
+                  - {label: Icon, name: icon, widget: image}
+                  - {label: "Git link", name: gitLink, widget: string}
   - label: "Case Studies content"
     name: "case-study-items"
     media_folder: '../../static/media'

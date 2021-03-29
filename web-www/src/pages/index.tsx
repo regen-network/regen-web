@@ -15,7 +15,7 @@ import EmailSubmitSection from '../sections/shared/EmailSubmitSection';
 import BlogSection from '../sections/shared/BlogSection';
 
 interface props {
-  location: object;
+  location: Location;
 }
 
 const IndexPage = ({ location }: props): JSX.Element => {

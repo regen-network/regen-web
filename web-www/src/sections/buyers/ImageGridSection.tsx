@@ -1,12 +1,33 @@
 import React from 'react';
-import Img from 'gatsby-image';
+import Img, { FluidObject } from 'gatsby-image';
 import { useStaticQuery, graphql } from 'gatsby';
 import BackgroundImage from 'gatsby-background-image';
 
 import ImageGrid from 'web-components/lib/components/image-grid';
 
-const ImageGridSection = () => {
-  const data = useStaticQuery(graphql`
+type Image = {
+  childImageSharp: {
+    fluid: FluidObject;
+  };
+};
+
+type Item = {
+  header: string;
+  description: string;
+  image: Image;
+};
+
+type QueryData = {
+  bg: any;
+  text: {
+    imageGridSection: {
+      items: Item[];
+    };
+  };
+};
+
+const ImageGridSection: React.FC = () => {
+  const data = useStaticQuery<QueryData>(graphql`
     query {
       bg: file(relativePath: { eq: "image-grid-bg.png" }) {
         childImageSharp {

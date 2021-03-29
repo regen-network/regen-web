@@ -16,7 +16,7 @@ import Modal from 'web-components/lib/components/modal';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 
 interface props {
-  location: object;
+  location: Location;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({

@@ -13,6 +13,7 @@ import PurchasedCreditsCard from 'web-components/lib/components/cards/PurchasedC
 import CurrentCreditsIcon from 'web-components/lib/components/icons/CurrentCreditsIcon';
 import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
 import GreenCard from 'web-components/lib/components/cards/GreenCard';
+import GreenTopIconCard from 'web-components/lib/components/cards/GreenTopIconCard';
 
 export default {
   title: 'Components|Cards',
@@ -145,6 +146,23 @@ export const greenCard = (): JSX.Element => (
   <GreenCard>
     <p>Green card content</p>
   </GreenCard>
+);
+
+export const greenTopIconCard = (): JSX.Element => (
+  <>
+    <GreenTopIconCard
+      title="Green card 1"
+      description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+      linkURL="https://github.com/regen-network"
+      imgSrc="./mainnet-validators.svg"
+    />
+    <GreenTopIconCard
+      title="Green card 2"
+      description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+      linkURL="https://github.com/regen-network"
+      imgSrc="./mainnet-validators.svg"
+    />
+  </>
 );
 
 export const onBoardingCard = (): JSX.Element => <OnBoardingCard>some content</OnBoardingCard>;

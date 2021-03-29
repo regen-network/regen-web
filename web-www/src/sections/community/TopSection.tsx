@@ -5,7 +5,7 @@ import { makeStyles, Theme } from '@material-ui/core';
 import BackgroundSection from '../../components/BackgroundSection';
 
 interface props {
-  location: object;
+  location: Location;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({

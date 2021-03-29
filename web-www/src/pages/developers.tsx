@@ -11,7 +11,7 @@ import ConnectSection from '../sections/developers/ConnectSection';
 import CareersSection from '../sections/developers/CareersSection';
 
 interface props {
-  location: object;
+  location: Location;
 }
 
 const DevelopersPage = ({ location }: props): JSX.Element => {

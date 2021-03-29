@@ -7,12 +7,12 @@ import Card from './Card';
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     [theme.breakpoints.up('sm')]: {
-      margin: `${theme.spacing(9)} 0 ${theme.spacing(12)}`,
-      padding: `${theme.spacing(13.5)} ${theme.spacing(10)} ${theme.spacing(12.5)}`,
+      margin: theme.spacing(9, 0, 12),
+      padding: theme.spacing(13.5, 10, 12.5),
     },
     [theme.breakpoints.down('xs')]: {
-      margin: `${theme.spacing(6.5)} 0 ${theme.spacing(10)}`,
-      padding: `${theme.spacing(8.5)} ${theme.spacing(2.5)} ${theme.spacing(10)}`,
+      margin: theme.spacing(6.5, 0, 10),
+      padding: theme.spacing(8.5, 2.5, 10),
     },
   },
 }));

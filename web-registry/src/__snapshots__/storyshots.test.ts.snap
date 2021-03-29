@@ -8118,6 +8118,7 @@ exports[`Storyshots Components|FAQ Question 1`] = `
   <Question
     answer="The Regen Ledger provides the project three key elements, without which Regen Network’s promise to create a network dedicated to monitoring, verifying and contracting or paying for ecological"
     first={false}
+    isShareable={true}
     last={false}
     question="Why do you need a OK blockchain?"
   />

@@ -1,9 +1,5 @@
 import * as React from 'react';
-import UserProfileForm from 'web-components/lib/components/form/UserProfileForm';
-// import OrganizationProfileForm from 'web-components/lib/components/form/OrganizationProfileForm';
-import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
 import FixedFooter from 'web-components/lib/components/fixed-footer';
-import BuyFooter from 'web-components/lib/components/fixed-footer/BuyFooter';
 import OnboardingFooter from 'web-components/lib/components/fixed-footer/OnboardingFooter';
 
 export default {
@@ -23,4 +19,6 @@ export const fixedFooter = (): JSX.Element => (
   </FixedFooter>
 );
 
-export const onboardingFooter = (): JSX.Element => <OnboardingFooter onSave={submit} percentComplete={30} />;
+export const onboardingFooter = (): JSX.Element => (
+  <OnboardingFooter onSave={submit} onBack={submit} onSkip={submit} percentComplete={30} />
+);

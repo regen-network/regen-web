@@ -1,10 +1,10 @@
 import React from 'react';
+import clsx from 'clsx';
 import { Theme } from '@material-ui/core';
 import { withStyles, createStyles, makeStyles, useTheme } from '@material-ui/styles';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box/Box';
-import clsx from 'clsx';
 
 import FixedFooter from './';
 import ArrowDownIcon from '../icons/ArrowDownIcon';
@@ -14,12 +14,17 @@ import ContainedButton from '../buttons/ContainedButton';
 const StyledLinearProgress = withStyles((theme: Theme) =>
   createStyles({
     root: {
-      position: 'fixed',
+      position: 'absolute',
       bottom: 0,
       left: 0,
       right: 0,
-      height: theme.spacing(2),
-      borderRadius: 2,
+      [theme.breakpoints.up('sm')]: {
+        height: theme.spacing(1.75),
+      },
+      [theme.breakpoints.down('xs')]: {
+        height: theme.spacing(1.5),
+      },
+      borderRadius: theme.spacing(0, 2, 2, 0),
     },
     colorPrimary: {
       backgroundColor: theme.palette.info.light,
@@ -40,20 +45,29 @@ interface Props {
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    height: '50%',
     marginBottom: theme.spacing(2), // same as height of progress bar
+    [theme.breakpoints.up('sm')]: {
+      justifyContent: 'space-between',
+    },
+    [theme.breakpoints.down('xs')]: {
+      justifyContent: 'flex-end',
+    },
+  },
+  arrows: {
+    marginRight: theme.spacing(8),
+  },
+  btn: {
+    [theme.breakpoints.up('sm')]: {
+      padding: theme.spacing(2, 4),
+      fontSize: theme.spacing(4),
+    },
+    [theme.breakpoints.down('xs')]: {
+      padding: theme.spacing(2, 4),
+      fontSize: theme.spacing(3),
+    },
   },
   back: {
     marginRight: theme.spacing(4),
-    // [theme.breakpoints.up('sm')]: {
-    //   maxHeight: theme.spacing(12),
-    // },
-    // [theme.breakpoints.down('xs')]: {
-    //   maxHeight: theme.spacing(9),
-    // },
-  },
-  btn: {
-    padding: theme.spacing(0, 4),
   },
 }));
 
@@ -64,15 +78,18 @@ const OnboardingFooter: React.FC<Props> = ({ saveText = 'Save & Next', ...p }) =
   return (
     <FixedFooter>
       <Grid container justify="space-between" className={classes.root}>
-        <Box display="flex">
-          <OutlinedButton className={clsx(classes.back, classes.btn)} onClick={p.onBack}>
-            <ArrowDownIcon direction="prev" color={theme.palette.secondary.main} />
-          </OutlinedButton>
-          <OutlinedButton className={classes.btn} onClick={p.onSkip}>
-            <ArrowDownIcon direction="next" color={theme.palette.secondary.main} />
-          </OutlinedButton>
+        <Box display="flex" className={classes.arrows}>
+          {p.onBack && (
+            <OutlinedButton className={clsx(classes.btn, classes.back)} onClick={p.onBack}>
+              <ArrowDownIcon fontSize="small" direction="prev" color={theme.palette.secondary.main} />
+            </OutlinedButton>
+          )}
+          {p.onSkip && (
+            <OutlinedButton className={classes.btn} onClick={p.onSkip}>
+              <ArrowDownIcon fontSize="small" direction="next" color={theme.palette.secondary.main} />
+            </OutlinedButton>
+          )}
         </Box>
-        <Box flexGrow={1} />
         <ContainedButton className={classes.btn} onClick={p.onSave}>
           {saveText}
         </ContainedButton>

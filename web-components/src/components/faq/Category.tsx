@@ -52,6 +52,7 @@ const Category = ({ questions, name, questionId }: CategoryProps): JSX.Element =
             last={i === questions.length - 1}
             question={q.question}
             answer={q.answer}
+            isShareable
           />
         </div>
       ))}

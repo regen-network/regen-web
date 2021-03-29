@@ -140,7 +140,7 @@ const fallbackStep: ProjectPlanStep = {
 };
 
 export default function StepCard({ className, icon, step = fallbackStep }: StepCardProps): JSX.Element {
-  const classes = useStyles({});
+  const classes = useStyles();
   const theme = useTheme();
 
   return (

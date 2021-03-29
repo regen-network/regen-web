@@ -30,6 +30,7 @@ export const question = (): JSX.Element => (
     last={boolean('last', false)}
     question={text('question', questions[0].question)}
     answer={text('answer', questions[0].answer)}
+    isShareable
   />
 );
 

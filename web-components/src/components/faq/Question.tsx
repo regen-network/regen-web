@@ -19,6 +19,7 @@ interface QuestionProps extends QuestionItem {
   first?: boolean;
   last?: boolean;
   questionId?: string;
+  isShareable?: boolean;
 }
 
 interface StyleProps {
@@ -29,8 +30,11 @@ interface StyleProps {
 interface ClassNames {
   root?: string;
   container?: string;
+  question?: string;
   answer?: string;
   gradient?: string;
+  collapsed?: string;
+  icon?: string;
 }
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
@@ -175,6 +179,7 @@ const Question = ({
   questionId,
   first = false,
   last = false,
+  isShareable = false,
 }: QuestionProps): JSX.Element => {
   const id = question
     .trim()
@@ -204,18 +209,25 @@ const Question = ({
   return (
     <div className={clsx(classes.root, classNames?.root)} id={id}>
       <div className={clsx(classes.container, classNames?.container)}>
-        <Title variant="h5" className={classes.question} onClick={handleClick}>
+        <Title variant="h5" className={clsx(classes.question, classNames?.question)} onClick={handleClick}>
           {question}
           {open ? (
-            <BreadcrumbIcon className={classes.icon} direction="up" />
+            <BreadcrumbIcon className={clsx(classes.icon, classNames?.icon)} direction="up" />
           ) : (
-            <BreadcrumbIcon className={classes.icon} />
+            <BreadcrumbIcon className={clsx(classes.icon, classNames?.icon)} />
           )}
         </Title>
-        <div className={clsx(answerClassName, classNames?.answer)}>
+        <div
+          className={clsx(
+            classes.answer,
+            classNames?.answer,
+            !open && classes.collapsed,
+            !open && classNames?.collapsed,
+          )}
+        >
           {ReactHtmlParser(answer)}
           {open ? (
-            questionId && (
+            isShareable && (
               <a
                 href={`#${id}`}
                 onClick={() => {

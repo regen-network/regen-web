@@ -9,21 +9,16 @@ import ReviewIcon from 'web-components/lib/components/icons/ReviewIcon';
 import ShadedCreditsIcon from 'web-components/lib/components/icons/ShadedCreditsIcon';
 import TrustDocumentIcon from 'web-components/lib/components/icons/TrustDocumentIcon';
 import TrustIcon from 'web-components/lib/components/icons/TrustIcon';
-import Title from 'web-components/lib/components/title';
 import StepCard, { ProjectPlanStep } from 'web-components/lib/components/cards/StepCard';
+import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
 import { QuestionItem } from 'web-components/lib/components/faq/Question';
 
 const useStyles = makeStyles((theme: Theme) => ({
-  root: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    padding: theme.spacing(3),
-  },
-  title: {
-    display: 'flex',
-    justifyContent: 'center',
-    paddingBottom: theme.spacing(6),
+  content: {
+    paddingTop: theme.spacing(12),
+    [theme.breakpoints.down('xs')]: {
+      paddingTop: theme.spacing(7),
+    },
   },
   interfaceIcon: {
     width: theme.spacing(25),
@@ -64,27 +59,27 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-// TODO: move copy to mocks.json and query
+// TODO: move copy to mocks.json and query.  See issue #538
 const questionItems: QuestionItem[] = [
   {
     question: 'How do I implement the land management practices?',
     answer:
-      '<p>you just do. you just do. you just do. ok okok okok </p><p>okookok ABC123 okokokok ok. you just do. you just do. you just do. </p>',
+      'you just do. you just do. you just do. ok okok okok okookok ABC123 okokokok ok. you just do. you just do. you just do.',
   },
   {
     question: 'Lorem ipsum dolor sit apsicing sit amut?',
     answer:
-      '<p>you just do. you just do. you just do. ok okok okok </p><p>okookok ABC123 okokokok ok. you just do. you just do. you just do. </p>',
+      'you just do. you just do. you just do. ok okok okok okookok ABC123 okokokok ok. you just do. you just do. you just do.',
   },
   {
     question: 'How do i so and so?',
     answer:
-      '<p>you just do. you just do. you just do. ok okok okok </p><p>okookok ABC123 okokokok ok. you just do. you just do. you just do. </p>',
+      'you just do. you just do. you just do. ok okok okok okookok ABC123 okokokok ok. you just do. you just do. you just do. you just do. you just do. you just do. ok okok okok okookok ABC123 okokokok ok. you just do. you just do. you just do. you just do. you just do. you just do. ok okok okok okookok ABC123 okokokok ok. you just do. you just do. you just do.',
   },
   {
     question: 'How do i so and so again?',
     answer:
-      '<p>you just do. you just do. you just do. ok okok okok okookok ABC123 okokokok ok. you just do. you just do. you just do. </p>',
+      'you just do. you just do. you just do. ok okok okok okookok ABC123 okokokok ok. you just do. you just do. you just do.',
   },
 ];
 
@@ -111,7 +106,7 @@ const steps: ProjectPlanStep[] = [
     tagName: 'immediate',
     isActive: true,
     description:
-      '<span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut.<a href="https://regen.network" target="_blank" rel="noopener noreferrer">Read full documentation»</a></span>',
+      '<span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut. <a href="https://regen.network" target="_blank" rel="noopener noreferrer">Read full documentation»</a></span>',
     faqs: questionItems,
   },
   {
@@ -128,7 +123,7 @@ const steps: ProjectPlanStep[] = [
     tagName: 'within 60 days',
     isActive: false,
     description:
-      '<span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut.<a href="https://regen.network" target="_blank" rel="noopener noreferrer">Read full documentation»</a></span>',
+      '<span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut. <a href="https://regen.network" target="_blank" rel="noopener noreferrer">Read full documentation»</a></span>',
     faqs: questionItems,
   },
   {
@@ -137,7 +132,7 @@ const steps: ProjectPlanStep[] = [
     tagName: 'within 3 months',
     isActive: false,
     description:
-      '<span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut.<a href="https://regen.network" target="_blank" rel="noopener noreferrer">Read full documentation»</a></span>',
+      '<span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut. <a href="https://regen.network" target="_blank" rel="noopener noreferrer">Read full documentation»</a></span>',
     faqs: questionItems,
     video: 'https://www.youtube.com/embed/Eh19aQ1dd7c',
   },
@@ -147,7 +142,7 @@ const steps: ProjectPlanStep[] = [
     tagName: 'within 6 months',
     isActive: false,
     description:
-      '<span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut.<a href="https://regen.network" target="_blank" rel="noopener noreferrer">Read full documentation»</a></span>',
+      '<span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut. <a href="https://regen.network" target="_blank" rel="noopener noreferrer">Read full documentation»</a></span>',
     faqs: questionItems,
   },
   {
@@ -155,7 +150,7 @@ const steps: ProjectPlanStep[] = [
     title: 'Hire a broker or sell through Regen Network',
     tagName: 'variable',
     description:
-      '<span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut.<a href="https://regen.network" target="_blank" rel="noopener noreferrer">Read full documentation»</a></span>',
+      '<span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut. <a href="https://regen.network" target="_blank" rel="noopener noreferrer">Read full documentation»</a></span>',
     faqs: questionItems,
   },
 ];
@@ -175,19 +170,18 @@ const GettingStarted: React.FC = () => {
   }, []);
 
   return (
-    <div className={classes.root}>
-      <Title variant="h3" className={classes.title}>
-        Getting Started
-      </Title>
-      <StepCard step={stepsMap['1']} icon={<InterfaceIcon className={classes.interfaceIcon} />} />
-      <StepCard step={stepsMap['2']} icon={<ReviewIcon className={classes.reviewIcon} />} />
-      <StepCard step={stepsMap['3']} icon={<TrustDocumentIcon className={classes.trustDocumentIcon} />} />
-      <StepCard step={stepsMap['4']} icon={<RegistrationIcon className={classes.registrationIcon} />} />
-      <StepCard step={stepsMap['5']} icon={<AccountabilityIcon className={classes.accountabilityIcon} />} />
-      <StepCard step={stepsMap['6']} icon={<FarmerIcon className={classes.farmerIcon} />} />
-      <StepCard step={stepsMap['7']} icon={<TrustIcon className={classes.trustIcon} />} />
-      <StepCard step={stepsMap['8']} icon={<ShadedCreditsIcon className={classes.creditsIcon} />} />
-    </div>
+    <OnBoardingSection title="Getting Started">
+      <div className={classes.content}>
+        <StepCard step={stepsMap['1']} icon={<InterfaceIcon className={classes.interfaceIcon} />} />
+        <StepCard step={stepsMap['2']} icon={<ReviewIcon className={classes.reviewIcon} />} />
+        <StepCard step={stepsMap['3']} icon={<TrustDocumentIcon className={classes.trustDocumentIcon} />} />
+        <StepCard step={stepsMap['4']} icon={<RegistrationIcon className={classes.registrationIcon} />} />
+        <StepCard step={stepsMap['5']} icon={<AccountabilityIcon className={classes.accountabilityIcon} />} />
+        <StepCard step={stepsMap['6']} icon={<FarmerIcon className={classes.farmerIcon} />} />
+        <StepCard step={stepsMap['7']} icon={<TrustIcon className={classes.trustIcon} />} />
+        <StepCard step={stepsMap['8']} icon={<ShadedCreditsIcon className={classes.creditsIcon} />} />
+      </div>
+    </OnBoardingSection>
   );
 };
 

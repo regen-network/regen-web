@@ -28,10 +28,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: theme.spacing(0, 4),
-    [theme.breakpoints.down('xs')]: {
-      paddingRight: theme.spacing(3),
-    },
+    padding: theme.spacing(0, 3, 0, 4),
   },
   title: {
     color: theme.palette.secondary.main,
@@ -50,11 +47,39 @@ const useStyles = makeStyles((theme: Theme) => ({
   questionContainer: {
     padding: 0,
   },
+  gradient: {
+    [theme.breakpoints.up('sm')]: {
+      top: theme.spacing(-4),
+    },
+  },
   inactiveGradient: {
     background: `linear-gradient(180deg, rgba(239, 239, 239, 0) 0%, ${theme.palette.info.light} 100%)`,
   },
   questionRoot: {
     padding: theme.spacing(4, 4, 2),
+    '&:last-child': {
+      paddingBottom: theme.spacing(5),
+    },
+  },
+  questionTitle: {
+    fontSize: theme.spacing(4.5),
+  },
+  answer: {
+    paddingBottom: theme.spacing(4),
+    [theme.breakpoints.down('xs')]: {
+      paddingTop: theme.spacing(4),
+    },
+  },
+  collapsedAnswer: {
+    [theme.breakpoints.up('sm')]: {
+      maxHeight: theme.spacing(8),
+    },
+  },
+  questionIcon: {
+    [theme.breakpoints.up('sm')]: {
+      height: theme.spacing(3.5),
+      width: theme.spacing(5.75),
+    },
   },
 }));
 
@@ -84,7 +109,11 @@ const StepFAQs: React.FC<StepFAQProps> = ({ questionItems, isActive }) => {
             classNames={{
               root: classes.questionRoot,
               container: classes.questionContainer,
-              gradient: isActive ? '' : classes.inactiveGradient,
+              gradient: clsx(classes.gradient, !isActive && classes.inactiveGradient),
+              question: classes.questionTitle,
+              answer: classes.answer,
+              collapsed: classes.collapsedAnswer,
+              icon: classes.questionIcon,
             }}
             key={questionItem.question}
             question={questionItem.question}

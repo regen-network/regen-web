@@ -18,7 +18,7 @@ launchInfoSection:
       - text: 2M REGEN tokens allocated at genesis to the Community Pool for governance spending
     actionItems:
       - title: Validators
-        linkURL: http://github.com/regen-network/mainnet
+        linkURL: ''
         linkText: Submit Gentx
         description: Participating in our validator set at genesis? Make sure you submit your GenTx by following this link!
         icon: ../../static/media/mainnet-validators.svg
@@ -30,7 +30,7 @@ launchInfoSection:
       - title: Token Holders
         linkURL: ''
         linkText: View Block Explorer
-        description: Are you a genesis token holder? Verify that your address is correct by connecting to our Prelaunch Devnet.
+        description: Are you a genesis token holder? Verify that your balance is correct by searching for your address into our prelaunch chain’s block explorer.
         icon: ../../static/media/mainnet-token-holders.svg
 whatsNextSection:
   title: What's Next?

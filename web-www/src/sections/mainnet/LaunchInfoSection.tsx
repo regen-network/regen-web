@@ -217,7 +217,7 @@ const LaunchInfoSection: React.FC = () => {
         <Grid container direction="column" className={classes.cardMain}>
           <Typography className={classes.cardTitle}>{card.title}</Typography>
           <Typography className={classes.launchDate}>
-            Release date: {getFormattedDate(launchDate, { month: 'long', year: 'numeric' })}
+            Release date: {getFormattedDate(launchDate, { month: 'long', day: 'numeric', year: 'numeric' })}
           </Typography>
           <Typography className={classes.listText}>{card.listTitle}</Typography>
           {card.listItems.map((item, i) => (

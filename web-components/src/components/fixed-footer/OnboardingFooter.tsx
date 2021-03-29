@@ -40,7 +40,12 @@ interface Props {
   onSkip?: () => void;
   onSave: () => void;
   saveText?: string;
-  percentComplete: number; // TODO: we should probably use a helper function to calculate this, or it would be hard to manage. One idea is to have an array with all routes which contain steps, and use the order of a route in that array to determine the percentage of overall completion, but that would depend on each step living in its own route
+  // TODO: we should probably use a helper function to calculate this, or it would
+  // be hard to manage. One idea is to have an array with all routes which contain
+  // steps, and use the order of a route in that array to determine the percentage
+  // of overall completion, but that would depend on each step living in its own
+  // route
+  percentComplete: number;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -77,8 +82,8 @@ const OnboardingFooter: React.FC<Props> = ({ saveText = 'Save & Next', ...p }) =
 
   return (
     <FixedFooter>
-      <Grid container justify="space-between" className={classes.root}>
-        <Box display="flex" className={classes.arrows}>
+      <Grid container spacing={4} className={classes.root}>
+        <Grid item className={classes.arrows}>
           {p.onBack && (
             <OutlinedButton className={clsx(classes.btn, classes.back)} onClick={p.onBack}>
               <ArrowDownIcon fontSize="small" direction="prev" color={theme.palette.secondary.main} />
@@ -89,10 +94,13 @@ const OnboardingFooter: React.FC<Props> = ({ saveText = 'Save & Next', ...p }) =
               <ArrowDownIcon fontSize="small" direction="next" color={theme.palette.secondary.main} />
             </OutlinedButton>
           )}
-        </Box>
-        <ContainedButton className={classes.btn} onClick={p.onSave}>
-          {saveText}
-        </ContainedButton>
+        </Grid>
+        {/* <Box display="flex" className={classes.arrows}></Box> */}
+        <Grid item>
+          <ContainedButton className={classes.btn} onClick={p.onSave}>
+            {saveText}
+          </ContainedButton>
+        </Grid>
       </Grid>
       <StyledLinearProgress variant="determinate" value={p.percentComplete} />
     </FixedFooter>

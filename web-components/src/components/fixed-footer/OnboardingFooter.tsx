@@ -50,7 +50,7 @@ interface Props {
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    marginBottom: theme.spacing(2), // same as height of progress bar
+    marginBottom: theme.spacing(1),
     [theme.breakpoints.up('sm')]: {
       justifyContent: 'space-between',
     },
@@ -59,15 +59,22 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   arrows: {
-    marginRight: theme.spacing(8),
+    margin: theme.spacing(0, 2, 0, 0),
+    [theme.breakpoints.up('sm')]: {
+      justifyContent: 'space-between',
+    },
+    [theme.breakpoints.down('xs')]: {
+      justifyContent: 'flex-end',
+    },
   },
   btn: {
+    padding: theme.spacing(2, 4),
+    minWidth: 0,
+    height: '100%',
     [theme.breakpoints.up('sm')]: {
-      padding: theme.spacing(2, 4),
       fontSize: theme.spacing(4),
     },
     [theme.breakpoints.down('xs')]: {
-      padding: theme.spacing(2, 4),
       fontSize: theme.spacing(3),
     },
   },
@@ -77,7 +84,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const OnboardingFooter: React.FC<Props> = ({ saveText = 'Save & Next', ...p }) => {
-  const classes = useStyles({});
+  const classes = useStyles();
   const theme: Theme = useTheme();
 
   return (
@@ -95,7 +102,6 @@ const OnboardingFooter: React.FC<Props> = ({ saveText = 'Save & Next', ...p }) =
             </OutlinedButton>
           )}
         </Grid>
-        {/* <Box display="flex" className={classes.arrows}></Box> */}
         <Grid item>
           <ContainedButton className={classes.btn} onClick={p.onSave}>
             {saveText}

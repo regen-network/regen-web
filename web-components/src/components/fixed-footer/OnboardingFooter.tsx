@@ -40,6 +40,7 @@ interface Props {
   onSave: () => void;
   saveDisabled: boolean;
   saveText?: string;
+  hideProgress?: boolean;
   // TODO: we should probably use a helper function to calculate this, or it would
   // be hard to manage. One idea is to have an array with all routes which contain
   // steps, and use the order of a route in that array to determine the percentage
@@ -48,16 +49,17 @@ interface Props {
   percentComplete: number;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
-  root: {
-    marginBottom: theme.spacing(1),
+type StyleProps = { hideProgress: boolean };
+const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
+  root: props => ({
+    marginBottom: props.hideProgress ? 0 : theme.spacing(1),
     [theme.breakpoints.up('sm')]: {
       justifyContent: 'space-between',
     },
     [theme.breakpoints.down('xs')]: {
       justifyContent: 'flex-end',
     },
-  },
+  }),
   arrows: {
     margin: theme.spacing(0, 2, 0, 0),
     [theme.breakpoints.up('sm')]: {
@@ -83,8 +85,8 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const OnboardingFooter: React.FC<Props> = ({ saveText = 'Save & Next', ...p }) => {
-  const classes = useStyles();
+const OnboardingFooter: React.FC<Props> = ({ saveText = 'Save & Next', hideProgress = false, ...p }) => {
+  const classes = useStyles({ hideProgress });
   const theme: Theme = useTheme();
 
   return (
@@ -108,7 +110,7 @@ const OnboardingFooter: React.FC<Props> = ({ saveText = 'Save & Next', ...p }) =
           </ContainedButton>
         </Grid>
       </Grid>
-      <StyledLinearProgress variant="determinate" value={p.percentComplete} />
+      {!hideProgress && <StyledLinearProgress variant="determinate" value={p.percentComplete} />}
     </FixedFooter>
   );
 };

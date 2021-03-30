@@ -28,6 +28,7 @@ export const onboardingFooter = (): JSX.Element => (
     saveText={text('Save text', 'Save and Next')}
     onPrev={boolean('Prev', true) ? () => null : null}
     onNext={boolean('Next', true) ? () => null : null}
+    hideProgress={boolean('hideProgress', false)}
     saveDisabled={boolean('Disable save', false)}
     percentComplete={number('Percent Complete', 33, { min: 0, max: 100 })}
   />

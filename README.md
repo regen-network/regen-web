@@ -4,11 +4,19 @@ The website for the [Regen Network](https://regen.network) decentralized infrast
 
 ## Table of Contents
 
-- [Installation](#installation)
-- [Development](#development)
-- [Deployment](#deployment)
-- [Testing](#testing)
-- [Code style](#code-style)
+- [Regen Website](#regen-website)
+  - [Table of Contents](#table-of-contents)
+  - [Installation](#installation)
+  - [Environment variables](#environment-variables)
+  - [Development](#development)
+  - [Deployment](#deployment)
+    - [Registry](#registry)
+    - [Storybook](#storybook)
+    - [Website](#website)
+    - [Deploying the Custom Login form to Auth0](#deploying-the-custom-login-form-to-auth0)
+  - [Testing](#testing)
+  - [Code style](#code-style)
+  - [Timeout Issue on Slower Connections](#timeout-issue-on-slower-connections)
 
 ## Installation
 
@@ -17,6 +25,7 @@ This project uses [lerna](https://github.com/lerna/lerna) with [yarn workspaces]
 - `web-components`: React components and [material-ui](https://material-ui.com/) custom theme
 - `web-storybook`: [Storybook](https://storybook.js.org/) config
 - `web-www`: Regen website based on [Gatsby](https://www.gatsbyjs.org/)
+- `web-auth`: React application used for Auth0 Custom Universal Login
 
 Install dependencies using:
 
@@ -34,6 +43,8 @@ yarn build
 ## Environment variables
 
 Set variables in `.env` files in `web-registry/` and `web-storybook/` folders based on provided `.env.example` files.
+
+For `web-auth`, follow these [setup instructions](web-auth/README.md#setup).
 
 ## Development
 
@@ -61,6 +72,12 @@ To run Storybook:
 yarn storybook
 ```
 
+To run the auth app:
+
+```sh
+yarn start-auth
+```
+
 ## Deployment
 
 ### Registry
@@ -82,6 +99,15 @@ Compile `web-components` and `web-www` to `web-components/lib` and `web-www/publ
 ```sh
 yarn build-www
 ```
+
+### Deploying the Custom Login form to Auth0
+
+Please, follow [these instructions](web-auth/README.md#setup) and then:
+1. Run `yarn build-auth` command.
+2. Copy the code from `./build/index.html`.
+3. Paste it into the Universal Login HTML form from [Auth dashboard](https://manage.auth0.com/dashboard/us/regen-network-registry/login_page) and save.
+
+This could be automated in the future.
 
 ## Testing
 

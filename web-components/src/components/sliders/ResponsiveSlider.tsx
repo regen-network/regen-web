@@ -15,7 +15,9 @@ export interface ResponsiveSliderProps {
   arrows?: boolean;
   slidesToShow?: number;
   title?: string;
+  renderTitle?: () => JSX.Element;
   className?: string;
+  headerWrapClassName?: string;
   padding?: number;
   itemWidth?: string;
   infinite?: boolean;
@@ -72,11 +74,16 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
         overflow: 'visible',
       },
+      '& .slick-slide .slick-active': {
+        display: 'flex',
+      },
     },
     '& .slick-track': {
       display: 'flex',
       '& .slick-slide': {
         height: 'inherit',
+        display: 'flex',
+        margin: theme.spacing(4, 0),
         [theme.breakpoints.down('xs')]: {
           paddingRight: theme.spacing(5),
           '&:last-child': {
@@ -122,9 +129,11 @@ export default function ResponsiveSlider({
   slidesToShow,
   arrows = false,
   title,
+  renderTitle,
   className,
   padding,
   itemWidth,
+  headerWrapClassName,
   infinite = true,
   dots = false,
   onChange,
@@ -174,14 +183,16 @@ export default function ResponsiveSlider({
 
   return (
     <div className={clsx(classes.root, className)}>
-      <Grid container wrap="nowrap" alignItems="center">
-        {title && (
+      <Grid container wrap="nowrap" alignItems="center" className={headerWrapClassName}>
+        {renderTitle ? (
+          renderTitle()
+        ) : title ? (
           <Grid xs={12} sm={8} item>
             <Title variant="h6" className={classes.title}>
               {title}
             </Title>
           </Grid>
-        )}
+        ) : null}
         {items.length > 1 && arrows && desktop && (
           <Grid xs={12} sm={4} container item justify="flex-end" className={classes.buttons}>
             <PrevNextButton direction="prev" onClick={slickPrev} />

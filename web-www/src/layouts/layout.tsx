@@ -7,6 +7,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import { graphql, useStaticQuery } from 'gatsby';
 import { useTheme } from '@material-ui/core/styles';
 
 import Header, { HeaderColors, HeaderMenuItem } from 'web-components/lib/components/header';
@@ -14,7 +15,6 @@ import Footer, { FooterItemProps as FooterItem } from 'web-components/lib/compon
 import CookiesFooter from 'web-components/lib/components/banner/CookiesBanner';
 
 import './layout.css';
-
 interface propTypes {
   children: Array<React.ReactElement>;
   location: Location;
@@ -24,8 +24,23 @@ interface BoolProps {
   [key: string]: boolean;
 }
 
+type QueryData = {
+  text: {
+    launchDate: string;
+  };
+};
+
 const Layout = ({ children, location }: propTypes): JSX.Element => {
   const theme = useTheme();
+  const {
+    text: { launchDate },
+  } = useStaticQuery<QueryData>(graphql`
+    query {
+      text: mainnetYaml {
+        launchDate
+      }
+    }
+  `);
 
   const headerColors: HeaderColors = {
     '/': theme.palette.primary.main,
@@ -41,6 +56,7 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
     '/validators/': theme.palette.primary.main,
     '/community/': theme.palette.primary.main,
     '/wallet-address-registration/': theme.palette.primary.light,
+    '/mainnet/': theme.palette.primary.light,
   };
 
   const headerTransparent: BoolProps = {
@@ -55,10 +71,11 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
   // Links in rest of the site must use the trailing '/'
   // in order for these to work appropriately
   const headerNoBorderBottomPages: RegExp = new RegExp(
-    '//|/buyers/|/partners/|/contact/|/validators/|/land-stewards/|/resources/|/media/|/team/|/developers/|/science/|/invest/|/case-studies/|/press-kit/|/community/|/wallet-address-registration/|/case-studies/[a-z-]+//',
+    '//|/buyers/|/partners/|/contact/|/validators/|/land-stewards/|/resources/|/media/|/team/|/developers/|/science/|/invest/|/case-studies/|/press-kit/|/community/|/wallet-address-registration/|/mainnet/|/case-studies/[a-z-]+//',
   );
 
   const menuItems: HeaderMenuItem[] = [
+    { title: 'Mainnet', href: '/mainnet/' },
     { title: 'Buyers', href: '/buyers/' },
     { title: 'Land Stewards', href: '/land-stewards/' },
     {
@@ -178,6 +195,7 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
   return (
     <>
       <Header
+        launchDate={location.pathname !== '/mainnet/' && launchDate}
         menuItems={menuItems}
         transparent={transparent}
         absolute={location.pathname === '/' || headerNoBorderBottomPages.test(location.pathname)}

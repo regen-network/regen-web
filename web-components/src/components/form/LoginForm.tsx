@@ -3,7 +3,6 @@ import { makeStyles, Theme } from '@material-ui/core/styles';
 import { Formik, Form, Field } from 'formik';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
-import ReCAPTCHA from 'react-google-recaptcha';
 
 import Description from '../description';
 import TextField from '../inputs/TextField';
@@ -20,15 +19,14 @@ import {
   validateEmail,
   invalidEmailMessage,
 } from '../inputs/validation';
-import { errors, SignupCode } from './errors';
+import { errors, SignupCode, LoginCode } from './errors';
 
 interface LoginFormProps {
-  link: string;
+  signupFromLogin?: string; // link to loginFromSignup page
+  loginFromSignup?: () => Promise<void>; // auth0 loginWithRedirect
   privacyLink?: string;
   termsLink?: string;
   forgotPassword?: string;
-  signup?: boolean;
-  recaptchaSiteKey?: string;
   submit: (values: Values) => Promise<void>;
 }
 
@@ -37,7 +35,6 @@ export interface Values {
   password: string;
   updates?: boolean;
   privacy?: boolean;
-  recaptcha?: string;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -56,6 +53,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     [theme.breakpoints.down('xs')]: {
       fontSize: theme.spacing(4),
+    },
+    '& a': {
+      cursor: 'pointer',
     },
   },
   checkboxLabel: {
@@ -82,9 +82,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   button: {
     [theme.breakpoints.up('sm')]: {
       marginTop: theme.spacing(8),
+      marginRight: theme.spacing(10),
     },
     [theme.breakpoints.down('xs')]: {
       marginTop: theme.spacing(6.25),
+      marginRight: theme.spacing(2.5),
     },
   },
   recaptcha: {
@@ -106,15 +108,14 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const LoginForm: React.FC<LoginFormProps> = ({
-  recaptchaSiteKey,
-  signup = false,
-  link,
+  signupFromLogin,
+  loginFromSignup,
   privacyLink,
   termsLink,
   submit,
 }) => {
   const classes = useStyles();
-  const label: string = signup ? 'Sign up' : 'Log in';
+  const label: string = loginFromSignup ? 'Sign up' : 'Log in';
 
   return (
     <Formik
@@ -124,14 +125,12 @@ const LoginForm: React.FC<LoginFormProps> = ({
         updates: false,
         privacy: false,
         staySigned: false,
-        recaptcha: undefined,
       }}
       validate={(values: Values) => {
         const errors: {
           email?: string;
           password?: string;
           privacy?: string;
-          recaptcha?: string;
         } = {};
         if (!values.email) {
           errors.email = requiredMessage;
@@ -141,31 +140,29 @@ const LoginForm: React.FC<LoginFormProps> = ({
         if (!values.password) {
           errors.password = requiredMessage;
         }
-        if (signup && !values.privacy) {
+        if (loginFromSignup && !values.privacy) {
           errors.privacy = requirementAgreement;
         }
-        if (signup && !validatePassword(values.password)) {
+        if (loginFromSignup && !validatePassword(values.password)) {
           errors.password = invalidPassword;
-        }
-        // TODO validate recaptcha as part of #350
-        if (!signup && !values.recaptcha) {
-          errors.recaptcha = requiredMessage;
         }
         return errors;
       }}
       onSubmit={async (values, { setSubmitting, setStatus }) => {
         setSubmitting(true);
+
         try {
           await submit(values);
           setSubmitting(false);
         } catch (e) {
-          const code: SignupCode | undefined = e.code;
-          const errorMessage: string =
-            code && code in errors
-              ? errors[code]
-              : e.message === `duplicate key value violates unique constraint "user_email_key"`
-              ? errors.invalid_signup
-              : e.toString();
+          const code: LoginCode | SignupCode | undefined = e.code;
+          let errorMessage: string = code && code in errors ? errors[code] : e.toString();
+          if (e.description === 'Wrong email or password.') {
+            errorMessage = errors.invalid_user_password;
+          }
+          if (e.message === `duplicate key value violates unique constraint "user_email_key"`) {
+            errorMessage = errors.invalid_signup;
+          }
           setStatus(errorMessage);
           setSubmitting(false);
         }
@@ -176,13 +173,13 @@ const LoginForm: React.FC<LoginFormProps> = ({
           <div>
             <Form>
               <OnBoardingCard>
-                {signup ? (
+                {loginFromSignup ? (
                   <Description className={classes.description}>
-                    If you've already signed up, <Link href={link}>log in here</Link>.
+                    If you've already signed up, <Link onClick={loginFromSignup}>log in here</Link>.
                   </Description>
                 ) : (
                   <Description className={classes.description}>
-                    Don't have an account? <Link href={link}>Sign up</Link>.
+                    Don't have an account? <Link href={signupFromLogin}>Sign up</Link>.
                   </Description>
                 )}
                 <Field component={TextField} type="email" label="Email address" name="email" />
@@ -190,12 +187,14 @@ const LoginForm: React.FC<LoginFormProps> = ({
                   component={PasswordField}
                   className={classes.textField}
                   name="password"
-                  signup={signup}
+                  loginFromSignup={loginFromSignup}
                 />
-                {!signup && <Description className={classes.forgotPassword}>Forgot password</Description>}
+                {!loginFromSignup && (
+                  <Description className={classes.forgotPassword}>Forgot password</Description>
+                )}
               </OnBoardingCard>
               <div className={classes.checkboxes}>
-                {signup ? (
+                {loginFromSignup && (
                   <>
                     <Field
                       component={CheckboxLabel}
@@ -219,21 +218,6 @@ const LoginForm: React.FC<LoginFormProps> = ({
                       }
                     />
                   </>
-                ) : (
-                  <Field
-                    component={CheckboxLabel}
-                    type="checkbox"
-                    name="staySigned"
-                    label={<Description className={classes.checkboxLabel}>Stay signed in</Description>}
-                  />
-                )}
-                {!signup && recaptchaSiteKey && (
-                  <div className={classes.recaptcha}>
-                    <ReCAPTCHA
-                      onChange={value => setFieldValue('recaptcha', value)}
-                      sitekey={recaptchaSiteKey}
-                    />
-                  </div>
                 )}
               </div>
               <Grid container justify="flex-end">

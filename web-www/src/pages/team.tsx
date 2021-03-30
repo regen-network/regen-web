@@ -8,7 +8,7 @@ import AdvisorSection from '../sections/team/AdvisorSection';
 import SEO from '../components/seo';
 
 interface props {
-  location: object;
+  location: Location;
 }
 
 const ResourcesPage = ({ location }: props): JSX.Element => {

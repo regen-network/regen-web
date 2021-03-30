@@ -4,11 +4,11 @@ import { useStaticQuery, graphql } from 'gatsby';
 import SEO from '../components/seo';
 import MarkdownSection from '../components/MarkdownSection';
 
-interface props {
-  location: object;
+interface Props {
+  location: Location;
 }
 
-const PrivacyPolicy = ({ location }: props): JSX.Element => {
+const PrivacyPolicy = ({ location }: Props): JSX.Element => {
   const data = useStaticQuery(graphql`
     query {
       markdownRemark(fileAbsolutePath: { regex: "/^.*/privacy-policy.md$/" }) {

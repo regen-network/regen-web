@@ -10,6 +10,7 @@ import copyTextToClipboard from '../../utils/copy';
 import Banner from '../banner';
 
 export interface QuestionItem {
+  classNames?: ClassNames;
   question: string;
   answer: string;
 }
@@ -18,11 +19,22 @@ interface QuestionProps extends QuestionItem {
   first?: boolean;
   last?: boolean;
   questionId?: string;
+  isShareable?: boolean;
 }
 
 interface StyleProps {
   first: boolean;
   last: boolean;
+}
+
+interface ClassNames {
+  root?: string;
+  container?: string;
+  question?: string;
+  answer?: string;
+  gradient?: string;
+  collapsed?: string;
+  icon?: string;
 }
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
@@ -161,11 +173,13 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
 }));
 
 const Question = ({
+  classNames,
   question,
   answer,
   questionId,
   first = false,
   last = false,
+  isShareable = false,
 }: QuestionProps): JSX.Element => {
   const id = question
     .trim()
@@ -193,33 +207,45 @@ const Question = ({
   }
 
   return (
-    <div className={classes.root} id={id}>
-      <div className={classes.container}>
-        <Title variant="h5" className={classes.question} onClick={handleClick}>
+    <div className={clsx(classes.root, classNames?.root)} id={id}>
+      <div className={clsx(classes.container, classNames?.container)}>
+        <Title variant="h5" className={clsx(classes.question, classNames?.question)} onClick={handleClick}>
           {question}
           {open ? (
-            <BreadcrumbIcon className={classes.icon} direction="up" />
+            <BreadcrumbIcon className={clsx(classes.icon, classNames?.icon)} direction="up" />
           ) : (
-            <BreadcrumbIcon className={classes.icon} />
+            <BreadcrumbIcon className={clsx(classes.icon, classNames?.icon)} />
           )}
         </Title>
-        <div className={clsx(answerClassName)}>
+        <div
+          className={clsx(
+            classes.answer,
+            classNames?.answer,
+            !open && classes.collapsed,
+            !open && classNames?.collapsed,
+          )}
+        >
           {ReactHtmlParser(answer)}
-          <a
-            href={`#${id}`}
-            onClick={() => {
-              if (window && window.location) {
-                copyTextToClipboard(`${window.location.origin}${window.location.pathname}#${id}`).then(() =>
-                  setCopied(true),
-                );
-              }
-            }}
-            className={classes.anchorLink}
-          >
-            <LinkIcon className={classes.linkIcon} color={theme.palette.secondary.dark} />
-            <span className={classes.copyText}>copy question link</span>
-          </a>
-          {open ? null : <div className={classes.gradient} />}
+          {open ? (
+            isShareable && (
+              <a
+                href={`#${id}`}
+                onClick={() => {
+                  if (window && window.location) {
+                    copyTextToClipboard(
+                      `${window.location.origin}${window.location.pathname}#${id}`,
+                    ).then(() => setCopied(true));
+                  }
+                }}
+                className={classes.anchorLink}
+              >
+                <LinkIcon className={classes.linkIcon} color={theme.palette.secondary.dark} />
+                <span className={classes.copyText}>copy question link</span>
+              </a>
+            )
+          ) : (
+            <div className={clsx(classes.gradient, classNames?.gradient)} />
+          )}
         </div>
       </div>
       {copied && <Banner text="Link copied to your clipboard" />}

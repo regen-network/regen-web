@@ -4,14 +4,12 @@ import axios from 'axios';
 import { useQuery, gql } from '@apollo/client';
 
 import NavBar from './NavBar';
-import getOrigin from '../lib/origin';
 import getApiUri from '../lib/apiUri';
+import getRegistryUrl from '../lib/registryUrl';
 
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import Title from 'web-components/lib/components/title';
-
-const origin: string = getOrigin();
 
 const GET_USER = gql`
   query UserByEmail($email: String!) {
@@ -39,8 +37,8 @@ const Seller = (): JSX.Element => {
           url: `${apiUri}/create-account-link`,
           data: {
             email: user?.email,
-            refreshUrl: `${origin}/projects/wilmot/admin`,
-            returnUrl: `${origin}/projects/wilmot/admin?setup=true`,
+            refreshUrl: `${getRegistryUrl('/projects/wilmot/admin')}`,
+            returnUrl: `${getRegistryUrl('/projects/wilmot/admin?setup=true')}`,
           },
           headers: { authorization: `Bearer ${accessToken}` },
         });
@@ -120,7 +118,7 @@ const Seller = (): JSX.Element => {
           ))}
       </div>
       <div style={{ textAlign: 'center' }}>
-        <NavBar redirectUri={`${origin}/projects/wilmot/admin`} />
+        <NavBar redirectUri={`${getRegistryUrl('/projects/wilmot/admin')}`} />
       </div>
     </div>
   );

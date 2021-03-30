@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import ArrowDownIcon from 'web-components/lib/components/icons/ArrowDownIcon';
 import AvailableCreditsIcon from 'web-components/lib/components/icons/AvailableCreditsIcon';
 import CloseIcon from 'web-components/lib/components/icons/CloseIcon';
@@ -34,6 +34,16 @@ import PrintIcon from 'web-components/lib/components/icons/PrintIcon';
 import RegenLedgerIcon from 'web-components/lib/components/icons/RegenLedgerIcon';
 import InfoIcon from 'web-components/lib/components/icons/InfoIcon';
 import ShieldIcon from 'web-components/lib/components/icons/ShieldIcon';
+import PlusIcon from 'web-components/lib/components/icons/PlusIcon';
+import MinusIcon from 'web-components/lib/components/icons/MinusIcon';
+import InterfaceIcon from 'web-components/lib/components/icons/InterfaceIcon';
+import FarmerIcon from 'web-components/lib/components/icons/FarmerIcon';
+import TrustIcon from 'web-components/lib/components/icons/TrustIcon';
+import RegistrationIcon from 'web-components/lib/components/icons/RegistrationIcon';
+import ShadedCreditsIcon from 'web-components/lib/components/icons/ShadedCreditsIcon';
+import TrustDocumentIcon from 'web-components/lib/components/icons/TrustDocumentIcon';
+import AccountabilityIcon from 'web-components/lib/components/icons/AccountabilityIcon';
+import ReviewIcon from 'web-components/lib/components/icons/ReviewIcon';
 
 import { withKnobs, text } from '@storybook/addon-knobs';
 
@@ -114,3 +124,23 @@ export const regenLedgerIcon = (): JSX.Element => <RegenLedgerIcon />;
 export const infoIcon = (): JSX.Element => <InfoIcon />;
 
 export const shieldIcon = (): JSX.Element => <ShieldIcon />;
+
+export const plusIcon = (): JSX.Element => <PlusIcon />;
+
+export const minusIcon = (): JSX.Element => <MinusIcon />;
+
+export const interfaceIcon = (): JSX.Element => <InterfaceIcon />;
+
+export const farmerIcon = (): JSX.Element => <FarmerIcon />;
+
+export const trustIcon = (): JSX.Element => <TrustIcon />;
+
+export const trustDocumentIcon = (): JSX.Element => <TrustDocumentIcon />;
+
+export const registrationIcon = (): JSX.Element => <RegistrationIcon />;
+
+export const shadedCreditsIcon = (): JSX.Element => <ShadedCreditsIcon />;
+
+export const accountabilityIcon = (): JSX.Element => <AccountabilityIcon />;
+
+export const reviewIcon = (): JSX.Element => <ReviewIcon />;

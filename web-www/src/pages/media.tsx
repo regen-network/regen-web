@@ -10,7 +10,7 @@ import Section from 'web-components/lib/components/section';
 import SelectTextField, { Option } from 'web-components/lib/components/inputs/SelectTextField';
 
 interface props {
-  location: object;
+  location: Location;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({

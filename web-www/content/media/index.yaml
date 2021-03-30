@@ -9,44 +9,58 @@ categories:
         url: https://news.globallandscapesforum.org/50857/can-cryptocurrencies-help-the-planet/
         date: " March 23, 2021"
         image: ../../static/media/sheep-scaled.jpeg
+        isMainnet: true
       - title: Microsoft uses blockchain technology to purchase soil carbon credits in
           Australia
         author: Cointelegraph
         url: https://cointelegraph.com/news/microsoft-uses-blockchain-technology-to-purchase-soil-carbon-credits-in-australia
         date: February 1, 2021
         image: ../../static/media/screen-shot-2021-03-17-at-11.01.31-pm.png
+        isMainnet: true
+      - image: ../../static/media/bbc.png
+        title: Carbon credits for farming beef, rural services under the pandemic
+        author: BBC
+        url: ' https://www.bbc.co.uk/sounds/play/m000s866'
+        date: February 15, 2021
+        isMainnet: false
       - url: https://www.forbesadvocate.com.au/story/7105688/microsoft-buys-carbon-credits-from-aussie-cattle-operation/?cs=9397
         author: Forbes Advocate
         title: Microsoft buys carbon credits from NSW cattle operation
         date: January 29, 2021
         image: ../../static/media/screen-shot-2021-03-17-at-11.04.37-pm.png
+        isMainnet: false
       - title: Regen Network Announces Historic Carbon Credit Sale
         author: Regen Network
         url: https://medium.com/regen-network/regen-network-announces-historic-carbon-credit-sale-in-australia-b76dfadcc095
         date: January 29, 2021
         image: ../../static/media/cattle_wilmott.png
+        isMainnet: false
       - title: 40 Social Entrepreneurs to Watch For in 2021
         author: CauseArtist
         url: https://www.causeartist.com/social-entrepreneurs-to-watch-for-in-2021/
         date: January 26, 2021
         image: ../../static/media/screen-shot-2021-01-27-at-10.33.34-am.png
+        isMainnet: false
       - image: ../../static/media/tesla.png
         title: Climate Change And The Circular Economy
         author: Frank Van Gansbeke, Forbes
         url: https://www.forbes.com/sites/frankvangansbeke/2020/09/03/climate-change-and-the-circular-economy/#4f37f42422f5
         date: September 3, 2020
+        isMainnet: false
       - image: ../../static/media/regen-network-at-techstars-demo-day.jpg
         title: How to Reverse Climate Change Through a Software Platform That
           Incentivizes Carbon Removal
         author: Grant Trahant, Cause Artist
         url: https://www.causeartist.com/reverse-climate-change-software-platform-incentives-carbon-removal/?fbclid=IwAR192dvOBe5ChT2P21bsqiL1T_Umn3KB4MFgwhxTKDnDcUw3JiV-CSibO8o
         date: August 18, 2020
+        isMainnet: false
       - image: ../../static/media/screen-shot-2020-09-30-at-8.07.53-am.png
         title: "Christian Shearer: Regen Network's Platform That Pays Farmers to Farm
           Regeneratively"
         author: Lift Economy Podcast with Andrew Baskin
         url: https://www.lifteconomy.com/next-economy-now-show-notes/2019/12/3/next-economy-now
         date: December 1, 2019
+        isMainnet: false
       - image: ../../static/media/media-article1.png
         title: Regen Network Crosses $1MM Raise Led by Interchain Foundation and
           Announces Chorus One Partnership and Completion of Techstars
@@ -54,82 +68,96 @@ categories:
         date: October 16, 2019
         author: Accesswire
         url: https://www.accesswire.com/563243/Regen-Network-Crosses-1MM-Raise-Led-by-Interchain-Foundation-and-Announces-Chorus-One-Partnership-and-Completion-of-Techstars-Sustainability-Accelerator-Program
+        isMainnet: false
       - image: ../../static/media/media-article2.png
         title: Regen Network's global marketplace and technology platform seeks to
           disrupt a $35Bn market
         date: Yahoo Finance
         author: October 16, 2019
         url: https://sports.yahoo.com/regen-network-crosses-1mm-raise-194500581.html
+        isMainnet: false
       - image: ../../static/media/media-article3.png
-        title: "Crypto Market Update: Focus on Bitcoin (BTC), XRP, Chainlink (LINK),
-          Cosmos (ATOM)"
+        title: 'Crypto Market Update: Focus on Bitcoin (BTC), XRP, Chainlink (LINK),
+          Cosmos (ATOM)'
         date: October 3, 2019
         author: Cryptoglobe
         url: https://www.cryptoglobe.com/latest/2019/10/crypto-market-update-focus-on-bitcoin-btc-xrp-chainlink-link-cosmos-atom/
+        isMainnet: false
       - image: ../../static/media/media-article4.png
         title: Can blockchain and cryptocurrency community save Amazon rainforest from
           certain doom?
         date: September 5, 2019
         author: Cryptopolitan
         url: https://www.cryptopolitan.com/blockchain-and-cryptocurrency-community-for-amazon/
+        isMainnet: false
       - image: ../../static/media/media-article5.png
         title: Global Collaborative Launches OpenTEAM to Address Soil Health and
           Mitigate Climate Change
         date: August 1, 2019
         author: No-Till Farmer
         url: https://www.no-tillfarmer.com/articles/9009-global-collaborative-launches-openteam-to-address-soil-health-and-mitigate-climate-change
+        isMainnet: false
       - image: ../../static/media/media-article6.png
         title: Techstars Sustainability startups tackle clean water, regenerative
           farming and supply chains
         date: August 1, 2019
         author: Impact Alpha
         url: https://impactalpha.com/techstars-sustainability-startups-tackle-clean-water-regenerative-farming-and-supply-chains/
+        isMainnet: false
   - name: videos
     buttonText: watch video
     showPlay: true
     items:
       - image: ../../static/media/screen-shot-2020-11-10-at-9.41.45-pm.png
-        title: "CarbonPlus Grasslands Credits for Regenerative Ranch Management "
+        title: 'CarbonPlus Grasslands Credits for Regenerative Ranch Management '
         author: Regen Network for the Regenerate Conference
         url: https://www.youtube.com/watch?v=Eh19aQ1dd7c&t=1s
         date: October 30, 2020
+        isMainnet: false
       - image: ../../static/media/screen-shot-2020-11-10-at-9.37.29-pm.png
-        title: "CarbonPlus Credit: Methodology, Monitoring, and Blockchain"
+        title: 'CarbonPlus Credit: Methodology, Monitoring, and Blockchain'
         author: Regen Network
         url: https://www.youtube.com/watch?v=b9PvwegUCqk&t=2486s
         date: October 8, 2020
+        isMainnet: false
       - image: ../../static/media/media-video1.png
-        title: "[LIVE] Devcon3 Day 4 Stream - Morning"
+        title: '[LIVE] Devcon3 Day 4 Stream - Morning'
         date: November 4, 2017
         author: Ethereum Foundation
         url: https://www.youtube.com/watch?v=vXVcuWvR5Z0
+        isMainnet: false
       - image: ../../static/media/media-video2.png
         title: Regenerative Solutions to Climate Change - Greg Landua - Plenary I - Soil
           Not OIl 2017
         date: January 7, 2019
         author: Soil Not Oil Coalition
         url: https://www.youtube.com/watch?v=TNbOZUR3zj4
+        isMainnet: false
       - image: ../../static/media/media-video3.png
-        title: "Gregory Landua: Improving Ecosystem Health through the Blockchain.
-          Blockchain for Impact March 2018"
+        title: 'Gregory Landua: Improving Ecosystem Health through the Blockchain.
+          Blockchain for Impact March 2018'
         date: April 9, 2018
         author: HelpedHope
         url: https://www.youtube.com/watch?v=0n8LW0cuUSo
+        isMainnet: false
       - image: ../../static/media/media-video4.png
         title: Regen Network Ecological Blockchain
         date: June 14, 2018
         author: Crypto Disrupted
         url: https://www.youtube.com/watch?v=vMBVupBnOEg&feature=emb_title
+        isMainnet: false
       - image: ../../static/media/media-video5.png
-        title: "Gregory Landua, CEO of Regen Network: Reversing Climate Change #26"
+        title: 'Gregory Landua, CEO of Regen Network: Reversing Climate Change #26'
         date: May 29, 2018
         author: Nori
         url: https://www.youtube.com/watch?v=3vGJEpczNlQ
+        isMainnet: false
       - image: ../../static/media/media-video6.png
         title: Environmental Crisis Heats Up, Can We Use Blockchain to Reverse the Tide?
         date: May 14, 2019
         author: Lark Davis
         url: https://www.youtube.com/watch?v=4QD8LsqmxEo
+        isMainnet: false
   - name: podcasts
     buttonText: listen to podcast
     showPlay: true
@@ -139,39 +167,47 @@ categories:
         url: https://www.evolvethe.world/episodes/christian-shearer
         date: February 15, 2021
         image: ../../static/media/screen-shot-2021-02-24-at-1.51.30-pm.png
+        isMainnet: true
       - image: ../../static/media/screen-shot-2021-01-27-at-10.40.11-am.png
         title: Regen Network's Sarah Baxendell and Gisel Booman featured in Apogeo
           Spatial's Exec Interview
         author: Apogeo Spatial
         url: http://apogeospatial.com/apogeo-spatial-executive-interview-with-regen-networks-sarah-baxendell-and-gisel-booman/
         date: January 21, 2021
+        isMainnet: false
       - image: ../../static/media/media-podcast-chen.png
-        title: "Planetary Regeneration Podcast | Episode 6: Delton Chen"
+        title: 'Planetary Regeneration Podcast | Episode 6: Delton Chen'
         date: May 14, 2019
         author: Soundcloud
         url: https://soundcloud.com/planetaryregeneration/planetary-regeneration-podcast-epsiode-6-delton-chen-1
+        isMainnet: false
       - image: ../../static/media/media-podcast-zampolin.png
-        title: "Planetary Regeneration Podcast | Episode 5: Jack Zampolin"
+        title: 'Planetary Regeneration Podcast | Episode 5: Jack Zampolin'
         date: May 14, 2019
         author: Soundcloud
         url: https://soundcloud.com/planetaryregeneration/planetary-regeneration-podcast-episode-5-jack-zampolin
+        isMainnet: false
       - image: ../../static/media/media-podcast-wahl.png
-        title: "Planetary Regeneration Podcast | Episode 4: Daniel Christian Wahl"
+        title: 'Planetary Regeneration Podcast | Episode 4: Daniel Christian Wahl'
         date: May 14, 2019
         author: Soundcloud
         url: https://soundcloud.com/planetaryregeneration/planetary-regeneration-podcast-epsiode-4-daniel-christian-wahl
+        isMainnet: false
       - image: ../../static/media/media-podcast-goes.png
-        title: "Planetary Regeneration Podcast | Episode 3: Chris Goes"
+        title: 'Planetary Regeneration Podcast | Episode 3: Chris Goes'
         date: May 14, 2019
         author: Soundcloud
         url: https://soundcloud.com/planetaryregeneration/planetary-regeneration-podcast-episode-3-chris-goes
+        isMainnet: false
       - image: ../../static/media/media-podcast-clippenger.png
-        title: "Planetary Regeneration Podcast | Episode 2: John Henry Clippenger"
+        title: 'Planetary Regeneration Podcast | Episode 2: John Henry Clippenger'
         date: May 14, 2019
         author: Soundcloud
         url: https://soundcloud.com/planetaryregeneration/planetary-regeneration-podcast-episode-2-john-henry-clippenger
+        isMainnet: false
       - image: ../../static/media/media-podcast-buchman.png
-        title: "Planetary Regeneration Podcast | Episode 1: Ethan Buchman"
+        title: 'Planetary Regeneration Podcast | Episode 1: Ethan Buchman'
         date: May 14, 2019
         author: Soundcloud
         url: https://soundcloud.com/planetaryregeneration/planetary-regeneration-podcast-episode-1-ethan-buchman
+        isMainnet: false

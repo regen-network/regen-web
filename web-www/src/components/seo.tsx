@@ -10,17 +10,15 @@ import { useStaticQuery, graphql } from 'gatsby';
 
 import SEO from 'web-components/lib/components/seo';
 
-interface propTypes {
+interface Props {
   description?: string;
   lang?: string;
   title: string;
   imageUrl?: string;
-  location?: {
-    pathname: string;
-  };
+  location?: Location;
 }
 
-function SEOWebsite({ location, description = '', lang = 'en', imageUrl, title }: propTypes): JSX.Element {
+function SEOWebsite({ location, description = '', lang = 'en', imageUrl, title }: Props): JSX.Element {
   const { seoImage, site } = useStaticQuery(
     graphql`
       query {

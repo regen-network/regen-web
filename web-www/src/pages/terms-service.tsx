@@ -4,7 +4,7 @@ import { useStaticQuery, graphql } from 'gatsby';
 import MarkdownSection from '../components/MarkdownSection';
 
 interface props {
-  location: object;
+  location: Location;
 }
 
 const TermsService = ({ location }: props): JSX.Element => {

@@ -9517,7 +9517,7 @@ exports[`Storyshots Components|Footers Onboarding Footer 1`] = `
     onBack={[Function]}
     onSave={[Function]}
     onSkip={[Function]}
-    percentComplete={30}
+    percentComplete={33}
   />
 </ContextProvider>
 `;

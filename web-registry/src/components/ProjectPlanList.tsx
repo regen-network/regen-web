@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
 
@@ -7,26 +7,30 @@ import Card from 'web-components/lib/components/cards/Card';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 
 const useStyles = makeStyles((theme: Theme) => ({
-  content: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    // [theme.breakpoints.down('xs')]: {
-    // },
-  },
   subtitle: {
-    padding: theme.spacing(4, 0),
+    padding: theme.spacing(4, 0, 6),
     textAlign: 'center',
     fontSize: theme.spacing(4),
     color: theme.palette.info.dark,
+    [theme.breakpoints.up('sm')]: {
+      fontSize: theme.spacing(4.5),
+      padding: theme.spacing(5, 0, 8),
+    },
   },
-  cards: {},
+  cards: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+  },
   createPlanCard: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     height: theme.spacing(60.5),
     background: theme.palette.info.light,
+    [theme.breakpoints.up('sm')]: {
+      height: theme.spacing(78.25),
+    },
   },
   createPlanButton: {
     paddingLeft: theme.spacing(14),
@@ -36,16 +40,19 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const ProjectPlanList: React.FC = () => {
   const classes = useStyles();
+  const [projectPlans, setProjectPlans] = useState([]);
 
   return (
     <OnBoardingSection title="Create a Project">
-      <div className={classes.content}>
-        <Typography className={classes.subtitle}>Get started with your first project.</Typography>
-        <div className={classes.cards}>
+      <Typography className={classes.subtitle}>Get started with your first project.</Typography>
+      <div className={classes.cards}>
+        {projectPlans?.length ? (
+          <div>{/*TODO: Existing Project Plans */}</div>
+        ) : (
           <Card className={classes.createPlanCard}>
             <ContainedButton className={classes.createPlanButton}>+ create project</ContainedButton>
           </Card>
-        </div>
+        )}
       </div>
     </OnBoardingSection>
   );

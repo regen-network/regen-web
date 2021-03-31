@@ -252,6 +252,15 @@ coreSection:
       title: Blockchain Engineer
       linkedUrl: https://www.linkedin.com/in/andreiivasko/
       githubUrl: https://github.com/cyberbono3
+    - description: "Rebecca has worked as a farmer, researcher, and conservationist in
+        Texas, Tennessee, and Haiti. An advocate for soil and wildlife
+        conservation, she wants to see climate change and land degradation
+        addressed through innovation and collaboration. She holds a M.S. in Soil
+        Science and writes about “yardening,” nature and wildlife. "
+      title: Land Steward Project Coordinator
+      name: Rebecca Harman
+      linkedUrl: https://www.linkedin.com/in/rebecca-harman-9691593b/
+      image: ../../static/media/screen-shot-2021-03-31-at-9.33.31-am.png
 contributorSection:
   title: Contributors
   contributors:

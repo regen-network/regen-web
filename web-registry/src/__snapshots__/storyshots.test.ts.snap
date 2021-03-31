@@ -9514,10 +9514,13 @@ exports[`Storyshots Components|Footers Onboarding Footer 1`] = `
 >
   <WithStyles(CssBaseline) />
   <OnboardingFooter
-    onBack={[Function]}
+    hideProgress={false}
+    onNext={[Function]}
+    onPrev={[Function]}
     onSave={[Function]}
-    onSkip={[Function]}
     percentComplete={33}
+    saveDisabled={false}
+    saveText="Save and Next"
   />
 </ContextProvider>
 `;

@@ -28,53 +28,44 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const messageExpired: string = 'Access expired.';
+
 const UPDATE_USER_BY_EMAIL = gql`
   mutation UpdateUserByEmail($input: UpdateUserByEmailInput!) {
-    updateUserByEmail(email: $input) {
-      email
-      userPatch {
-        phoneNumber
-        roleTitle
-      }
-      partyByPartyId {
-        name
-        description
-        image
-      }
-    }
-  }
-`;
-
-const UPDATE_PARTY_BY_ID = gql`
-  mutation UpdatePartyById($input: UpdateUserByEmailInput!) {
-    updatePartyById(email: $input) {
-      email
-      userPatch {
-        phoneNumber
-        roleTitle
-      }
-      partyByPartyId {
-        name
-        description
-        image
-      }
-    }
-  }
-`;
-
-const USER_BY_EMAIL = gql`
-  query UserByEmail($email: String!) {
-    userByEmail(email: $email) {
+    updateUserByEmail(input: $input) {
       id
-      partyId
-      partyByPartyId {
-        id
-      }
     }
   }
 `;
 
-// TODO check login state
+// const UPDATE_PARTY_BY_ID = gql`
+//   mutation UpdatePartyById($input: UpdateUserByEmailInput!) {
+//     updatePartyById(email: $input) {
+//       email
+//       userPatch {
+//         phoneNumber
+//         roleTitle
+//       }
+//       partyByPartyId {
+//         name
+//         description
+//         image
+//       }
+//     }
+//   }
+// `;
+
+// const USER_BY_EMAIL = gql`
+//   query UserByEmail($email: String!) {
+//     userByEmail(email: $email) {
+//       id
+//       partyId
+//       partyByPartyId {
+//         id
+//       }
+//     }
+//   }
+// `;
+
 export default function UserProfile(): JSX.Element {
   const { user } = useAuth0();
   const classes = useStyles();
@@ -132,24 +123,23 @@ export default function UserProfile(): JSX.Element {
   }, [email]);
 
   async function submitUserProfile(values: UserProfileValues): Promise<void> {
-    // if (userData.id) {
-    //   try {
-    //     await updateUserByEmail({
-    //       variables: {
-    //         input: {
-    //           email: user.email,
-    //           userPatch: {
-    //             phoneNumber: values.phone,
-    //             roleTitle: values.role,
-    //           },
-    //         },
-    //       },
-    //     });
-    //   } catch (e) {
-    //     console.error(e);
-    //   }
+    // if (user?.email) {
+    try {
+      await updateUserByEmail({
+        variables: {
+          input: {
+            email: user.email,
+            userPatch: {
+              phoneNumber: values.phone,
+              roleTitle: values.role,
+            },
+          },
+        },
+      });
+    } catch (e) {
+      console.error(e);
+    }
     // }
-    console.log('values :>> ', values);
   }
 
   return (

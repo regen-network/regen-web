@@ -38,9 +38,29 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
+interface CreateProjectPlanCardProps {
+  onClick: () => void;
+}
+
+const CreateProjectPlanCard: React.FC<CreateProjectPlanCardProps> = ({ onClick }) => {
+  const classes = useStyles();
+
+  return (
+    <Card className={classes.createPlanCard}>
+      <ContainedButton className={classes.createPlanButton} onClick={onClick}>
+        + create project
+      </ContainedButton>
+    </Card>
+  );
+};
+
 const ProjectPlanList: React.FC = () => {
   const classes = useStyles();
   const [projectPlans, setProjectPlans] = useState([]);
+
+  const createProjectPlan = (): void => {
+    // TODO: Go to next step. See issue regen-network/regen-registry#392
+  };
 
   return (
     <OnBoardingSection title="Create a Project">
@@ -49,9 +69,7 @@ const ProjectPlanList: React.FC = () => {
         {projectPlans?.length ? (
           <div>{/*TODO: Existing Project Plans */}</div>
         ) : (
-          <Card className={classes.createPlanCard}>
-            <ContainedButton className={classes.createPlanButton}>+ create project</ContainedButton>
-          </Card>
+          <CreateProjectPlanCard onClick={createProjectPlan} />
         )}
       </div>
     </OnBoardingSection>

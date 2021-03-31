@@ -900,6 +900,7 @@ collections:
           - label: "Livecast Link"
             name: livecastLink
             widget: string
+            required: false
           - label: "SEO Description for mainnet page"
             name: seoDescription
             widget: string
@@ -931,7 +932,7 @@ collections:
                     widget: list
                     fields: 
                       - {label: "Title", name: title, widget: string}
-                      - {label: "Link URL", name: linkUrl, widget: string}
+                      - {label: "Link URL", name: linkUrl, widget: string, required: false}
                       - {label: "Link text", name: linkText, widget: string}
                       - {label: "Description", name: description, widget: string}
                       - {label: "Icon", name: icon, widget: image}

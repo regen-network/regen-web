@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter, Switch, Route, useParams, useLocation, Redirect } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, useParams, useLocation, Redirect, RouteProps } from 'react-router-dom';
 import { useTheme } from '@material-ui/core/styles';
 import { useAuth0, OAuthError, withAuthenticationRequired } from '@auth0/auth0-react';
 
@@ -35,17 +35,17 @@ import Signup from './components/Signup';
 import VerifyEmail from './components/VerifyEmail';
 import UserProfile from './components/UserProfile';
 import GettingStarted from './components/GettingStarted';
-import ProjectPlanList from './components/ProjectPlanList';
 import ChooseCreditClass from './components/ChooseCreditClass';
+import ProjectPlanList from './components/project-plan/ProjectPlanList';
+import BasicInfo from './components/project-plan/BasicInfo';
 
 export const history = createBrowserHistory();
 
 interface BoolProps {
   [key: string]: boolean;
 }
-interface ProtectedRouteProps {
+interface ProtectedRouteProps extends RouteProps {
   component: React.ComponentType;
-  path: string;
 }
 
 function ScrollToTop(): null {
@@ -327,9 +327,17 @@ const App: React.FC = (props): JSX.Element => {
               </>
             )}
           />
-          <ProtectedRoute path="/getting-started" component={GettingStarted} />
-          <ProtectedRoute path="/project-plans" component={ProjectPlanList} />
-          <ProtectedRoute path="/choose-credit-class" component={ChooseCreditClass} />
+          <Route
+            path="/project-plans"
+            render={({ match: { path } }) => (
+              <>
+                <ProtectedRoute path={path} exact component={ProjectPlanList} />
+                <ProtectedRoute path={`${path}/getting-started`} component={GettingStarted} />
+                <ProtectedRoute path={`${path}/choose-credit-class`} component={ChooseCreditClass} />
+                <ProtectedRoute path={`${path}/create/basic-info`} component={BasicInfo} />
+              </>
+            )}
+          />
           <Route
             path="/admin"
             render={({ match: { path } }) => (

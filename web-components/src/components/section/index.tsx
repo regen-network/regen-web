@@ -5,7 +5,7 @@ import { Variant } from '@material-ui/core/styles/createTypography';
 
 import Title from '../title';
 
-interface SectionProps {
+export interface SectionProps {
   children?: any;
   className?: string;
   titleClassName?: string;
@@ -15,6 +15,7 @@ interface SectionProps {
   titleLineHeight?: string;
   titleColor?: string;
   titleAlign?: 'left' | 'right' | 'inherit' | 'center' | 'justify' | undefined;
+  topRight?: JSX.Element;
 }
 
 interface StyleProps {
@@ -56,6 +57,11 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       paddingRight: props.withSlider ? theme.spacing(4) : 0,
     },
   }),
+  spaceBetween: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'baseline',
+  },
 }));
 
 const Section = ({
@@ -67,14 +73,20 @@ const Section = ({
   titleVariant = 'h2',
   titleAlign = 'center',
   title,
+  topRight,
   withSlider = false,
 }: SectionProps): JSX.Element => {
   const classes = useStyles({ withSlider, titleLineHeight, titleColor });
   return (
     <section className={clsx(classes.root, className)}>
       {title && (
-        <Title className={clsx(classes.title, titleClassName)} variant={titleVariant} align={titleAlign}>
+        <Title
+          className={clsx(classes.title, titleClassName, topRight && classes.spaceBetween)}
+          variant={titleVariant}
+          align={titleAlign}
+        >
           {title}
+          {titleAlign === 'left' && topRight}
         </Title>
       )}
       {children}

@@ -6,18 +6,18 @@ topSection:
 coreSection:
   title: Our Team
   coreMembers:
-    - name: Christian Shearer
+    - name: Gregory Landua
       title: Chief Executive Officer
-      description: Christian has worked in ecological agriculture for 15 years,
-        primarily with farmers in Southeast Asia. As a co-founder of Terra
-        Genesis International, he worked with natural products brands, helping
-        them to invest into creating regenerative supply systems. Christian is
-        passionate about accelerating the adoption of regenerative agriculture.
-        He is a member of the Board of Directors.
-      image: ../../static/media/christian-shearer.png
-      linkedUrl: https://www.linkedin.com/in/christian-shearer-b8877312/
-      twitterUrl: ""
-      githubUrl: ""
+      description: Gregory is co-author of Regenerative Enterprise and co-creator of
+        the 8-forms of capital framework. Gregory is a Regenerative Agriculture
+        Practitioner and farmer. As co-founder and CEO of Terra Genesis
+        International, he helped to grow an ecosystem of organizations dedicated
+        to regenerative agriculture. Gregory is a member of the Board of
+        Directors.
+      image: ../../static/media/team/gregory.jpg
+      linkedUrl: https://www.linkedin.com/in/gregory-landua-4953b29/
+      twitterUrl: https://twitter.com/gregory_landua
+      githubUrl: null
     - name: Sara Johnstone
       title: Chief Operations Officer
       description: Sara is strategic operator and executor who has over a decade of
@@ -40,18 +40,18 @@ coreSection:
       linkedUrl: https://www.linkedin.com/in/aaroncraelius/
       twitterUrl: https://twitter.com/aaroncraelius
       githubUrl: https://github.com/aaronc
-    - name: Gregory Landua
-      title: Chief Regeneration Officer
-      description: Gregory is co-author of Regenerative Enterprise and co-creator of
-        the 8-forms of capital framework. Gregory is a Regenerative Agriculture
-        Practitioner and farmer. As co-founder and CEO of Terra Genesis
-        International, he helped to grow an ecosystem of organizations dedicated
-        to regenerative agriculture. Gregory is a member of the Board of
-        Directors.
-      image: ../../static/media/team/gregory.jpg
-      linkedUrl: https://www.linkedin.com/in/gregory-landua-4953b29/
-      twitterUrl: https://twitter.com/gregory_landua
-      githubUrl: null
+    - name: Christian Shearer
+      title: Chief Investment Officer
+      description: Christian has worked in ecological agriculture for 15 years,
+        primarily with farmers in Southeast Asia. As a co-founder of Terra
+        Genesis International, he worked with natural products brands, helping
+        them to invest into creating regenerative supply systems. Christian is
+        passionate about accelerating the adoption of regenerative agriculture.
+        He is a member of the Board of Directors.
+      image: ../../static/media/christian-shearer.png
+      linkedUrl: https://www.linkedin.com/in/christian-shearer-b8877312/
+      twitterUrl: ""
+      githubUrl: ""
     - name: Ron Steinherz
       title: Vice President of Product
       description: Ron brings deep expertise in Product Management and Operations from
@@ -250,6 +250,8 @@ coreSection:
         to Prysm Ethereum 2.0 client, and runs a blockchain meetup in Reno, NV
         since 2017. He’s interested in Cryptography/Distributed systems.
       title: Blockchain Engineer
+      linkedUrl: https://www.linkedin.com/in/andreiivasko/
+      githubUrl: https://github.com/cyberbono3
 contributorSection:
   title: Contributors
   contributors:

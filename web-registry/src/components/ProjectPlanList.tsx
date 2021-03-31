@@ -66,7 +66,8 @@ const CreateProjectPlanCard: React.FC<CreateProjectPlanCardProps> = ({ onClick, 
 
 const ProjectPlanList: React.FC = () => {
   const classes = useStyles();
-  const [projectPlans, setProjectPlans] = useState([]);
+  const projectPlans: any[] = []; // TODO: placeholder until we can fetch project plans;
+  // const [projectPlans, setProjectPlans] = useState([]);
   const [isFirstProject, setIsFirstProject] = useState(true);
 
   useEffect(() => {

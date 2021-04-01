@@ -35,7 +35,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexDirection: 'column',
     alignItems: 'center',
     width: '100%',
-    maxWidth: theme.spacing(139),
     '&:last-child': {
       '& .down-arrow': {
         display: 'none',

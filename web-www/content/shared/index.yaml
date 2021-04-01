@@ -15,21 +15,21 @@ featuredSection:
 blogSection:
   header: Regen Network Blog
   posts:
+    - header: Can Crypto Currencies Help the Planet?
+      description: Yes – by changing wealth distribution, reversing inequalities and
+        countering ecological degradation
+      image: ../../static/media/sheep-scaled.jpeg
+      url: https://news.globallandscapesforum.org/50857/can-cryptocurrencies-help-the-planet/
+    - header: Regen Community Update
+      description: Pre-Mainnet Launch Update
+      image: ../../static/media/mainnet-launch-5-.png
+      url: https://medium.com/regen-network/regen-network-community-update-65fb4f445187
     - header: Regen Network Announces Historic Carbon Credit Sale in Australia
       description: Agtech start-up Regen Network announces the historic sale of soil
         carbon credits to Microsoft, one of the largest soil carbon credit
         issuances ever in Australia.
       image: ../../static/media/cattle_wilmott.png
       url: http://bit.ly/regensale
-    - header: Cosmos + Regen Network = Synergy
-      description: How Regen Network became the lead maintainer of the Cosmos SDK
-      image: ../../static/media/screen-shot-2020-09-29-at-6.50.26-am.png
-      url: https://medium.com/regen-network/cosmos-regen-network-synergy-edf8f5dd12ec
-    - header: Modern Day Pastoralism
-      description: Re-Defining the Economics of Rotational Sheep Grazing on California
-        Vineyards
-      image: ../../static/media/paige_green_photo.jpeg
-      url: https://medium.com/regen-network/modern-day-pastoralism-re-defining-the-economics-of-rotational-sheep-grazing-on-california-94d02c652234
 comingSoonSection:
   header: Project Portfolio
   projects:

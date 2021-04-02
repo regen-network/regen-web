@@ -32,39 +32,12 @@ const messageExpired: string = 'Access expired.';
 const UPDATE_USER_BY_EMAIL = gql`
   mutation UpdateUserByEmail($input: UpdateUserByEmailInput!) {
     updateUserByEmail(input: $input) {
-      id
+      user {
+        id
+      }
     }
   }
 `;
-
-// const UPDATE_PARTY_BY_ID = gql`
-//   mutation UpdatePartyById($input: UpdateUserByEmailInput!) {
-//     updatePartyById(email: $input) {
-//       email
-//       userPatch {
-//         phoneNumber
-//         roleTitle
-//       }
-//       partyByPartyId {
-//         name
-//         description
-//         image
-//       }
-//     }
-//   }
-// `;
-
-// const USER_BY_EMAIL = gql`
-//   query UserByEmail($email: String!) {
-//     userByEmail(email: $email) {
-//       id
-//       partyId
-//       partyByPartyId {
-//         id
-//       }
-//     }
-//   }
-// `;
 
 export default function UserProfile(): JSX.Element {
   const { user } = useAuth0();
@@ -72,12 +45,6 @@ export default function UserProfile(): JSX.Element {
   const [updateUserByEmail, { data, loading, error: updateUserError }] = useMutation(UPDATE_USER_BY_EMAIL, {
     errorPolicy: 'ignore',
   });
-  // const { data: userData, loading: userLoading, error: errorLoading } = useQuery(USER_BY_EMAIL, {
-  //   errorPolicy: 'ignore',
-  //   variables: {
-  //     email: user?.email,
-  //   },
-  // });
 
   // Get any URL parameters from auth0 after email verification
   const search = new URLSearchParams(window.location.search);

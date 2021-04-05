@@ -4,6 +4,7 @@ import ReactHtmlParser from 'react-html-parser';
 import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 
 import Title from '../title';
+import ContainedButton from '../buttons/ContainedButton';
 import ShieldIcon from '../icons/ShieldIcon';
 import IssuanceModal from '../modal/IssuanceModal';
 import { Event } from './';
@@ -142,21 +143,11 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   }),
   summary: {
     lineHeight: '150%',
-    // position: 'relative',
     display: 'flex',
   },
-  icon: {
-    position: 'absolute',
-    marginLeft: theme.spacing(1.5),
-    [theme.breakpoints.up('sm')]: {
-      top: theme.spacing(0.5),
-    },
-  },
-  viewContainer: {
-    position: 'relative',
-    display: 'flex',
-    maxWidth: theme.spacing(35.5),
-    cursor: 'pointer',
+  ledgerBtn: {
+    padding: theme.spacing(2, 4),
+    fontSize: theme.spacing(4),
   },
   view: {
     color: theme.palette.secondary.main,
@@ -186,12 +177,15 @@ export default function TimelineItem({
     <div className={classes.content}>
       {date && <div className={classes.date}>{date}</div>}
       <Title className={classes.summary} variant="h5">
-        {summary}{' '}
+        {summary}
         {modalData && txClient && (
-          <div className={classes.viewContainer} onClick={() => setOpen(true)}>
-            <ShieldIcon className={classes.icon} />
-            <span className={classes.view}>view on regen ledger</span>
-          </div>
+          <ContainedButton
+            className={classes.ledgerBtn}
+            onClick={() => setOpen(true)}
+            startIcon={<ShieldIcon />}
+          >
+            view on regen ledger
+          </ContainedButton>
         )}
       </Title>
       {description && <div className={classes.description}>{ReactHtmlParser(description)}</div>}

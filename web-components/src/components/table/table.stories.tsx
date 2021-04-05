@@ -11,12 +11,14 @@ const data: Data[] = [
     name: 'Monitoring',
     type: 'Monitoring',
     date: '2020-03-15T00:00:00.000Z',
+    ledgerUrl: 'test',
     url: 'test',
   },
   {
     name: 'Issuance Documents',
     type: 'Issuance',
     date: '2020-03-15T00:00:00.000Z',
+    ledgerUrl: 'test',
     url: 'test',
   },
   {

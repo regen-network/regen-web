@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import clsx from 'clsx';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -8,17 +9,21 @@ import TableHead from '@material-ui/core/TableHead';
 // import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
+
 import { getComparator, stableSort, Order } from './sort';
 import DocumentIcon from '../icons/DocumentIcon';
 import EyeIcon from '../icons/EyeIcon';
+import ShieldIcon from '../icons/ShieldIcon';
 import OutlinedButton from '../buttons/OutlinedButton';
 import { getFormattedDate } from '../../utils/format';
+import ContainedButton from '../buttons/ContainedButton';
 
 export interface Data {
   name: string;
   type: string;
   date: string | Date;
   url: string;
+  ledgerUrl: string;
 }
 
 interface RegenTableProps {
@@ -35,6 +40,7 @@ const headCells: HeadCell[] = [
   { id: 'name', numeric: false, label: 'Name of document' },
   { id: 'type', numeric: true, label: 'Document type' },
   { id: 'date', numeric: true, label: 'Date of upload' },
+  { id: 'ledgerUrl', numeric: true, label: '' },
   { id: 'url', numeric: true, label: '' },
 ];
 
@@ -100,6 +106,11 @@ const useStyles = makeStyles((theme: Theme) => ({
       marginRight: '8px',
     },
   },
+  ledgerBtn: {
+    fontSize: theme.spacing(3.5),
+    padding: theme.spacing(2, 4),
+    whiteSpace: 'unset',
+  },
   documentCell: {
     minWidth: theme.spacing(50),
   },
@@ -149,7 +160,7 @@ function EnhancedTableHead(props: EnhancedTableProps): JSX.Element {
 }
 
 export default function RegenTable({ rows }: RegenTableProps): JSX.Element {
-  const classes = useStyles({});
+  const classes = useStyles();
 
   const [order, setOrder] = useState<Order>('asc');
   const [orderBy, setOrderBy] = useState<keyof Data>('name');
@@ -179,7 +190,7 @@ export default function RegenTable({ rows }: RegenTableProps): JSX.Element {
 
               return (
                 <TableRow tabIndex={-1} key={row.name} className={classes.row}>
-                  <TableCell className={`${classes.cell} ${classes.nameCell}`} id={labelId} scope="row">
+                  <TableCell className={clsx(classes.cell, classes.nameCell)} id={labelId} scope="row">
                     <div className={classes.name}>
                       <DocumentIcon className={classes.icon} /> {row.name}
                     </div>
@@ -190,7 +201,21 @@ export default function RegenTable({ rows }: RegenTableProps): JSX.Element {
                   <TableCell className={classes.cell} align="left">
                     {getFormattedDate(row.date, options)}
                   </TableCell>
-                  <TableCell className={`${classes.cell} ${classes.documentCell}`} align="left">
+                  <TableCell className={clsx(classes.cell, classes.documentCell)} align="left">
+                    {row.ledgerUrl && (
+                      <a
+                        href={row.ledgerUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={classes.link}
+                      >
+                        <ContainedButton className={classes.ledgerBtn} startIcon={<ShieldIcon />}>
+                          view On Ledger
+                        </ContainedButton>
+                      </a>
+                    )}
+                  </TableCell>
+                  <TableCell className={clsx(classes.cell, classes.documentCell)} align="left">
                     <a href={row.url} target="_blank" rel="noopener noreferrer" className={classes.link}>
                       <OutlinedButton startIcon={<EyeIcon />}>view document</OutlinedButton>
                     </a>

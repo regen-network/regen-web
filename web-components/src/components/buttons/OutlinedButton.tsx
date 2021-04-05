@@ -21,10 +21,7 @@ const styleCallback = (theme: Theme): any => ({
     fontFamily: theme.typography.h1.fontFamily,
     fontWeight: 800,
     letterSpacing: '1px',
-    paddingTop: theme.spacing(2),
-    paddingBottom: theme.spacing(2),
-    paddingRight: theme.spacing(4),
-    paddingLeft: theme.spacing(4),
+    padding: theme.spacing(2, 4),
     backgroundColor: theme.palette.primary.main,
     boxShadow: 'none',
     '&:hover': {

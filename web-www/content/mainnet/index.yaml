@@ -22,20 +22,18 @@ launchInfoSection:
           spending
     actionItems:
       - title: Validators
-        linkURL: ""
         linkText: Submit Gentx
         description: Participating in our validator set at genesis? Make sure you submit
           your GenTx by following this link!
         icon: ../../static/media/mainnet-validators.svg
         linkUrl: https://github.com/regen-network/mainnet/blob/main/regen-1/README.md
       - title: Community
-        linkURL: https://discord.com/invite/BDcBJu3
+        linkUrl: https://discord.com/invite/BDcBJu3
         linkText: Join Discord
         description: Find us on Discord! Join in the discussion as we launch the first
           Cosmos SDK blockchain for ecological regeneration.
         icon: ../../static/media/mainnet-magnifying-glass.svg
       - title: Token Holders
-        linkURL: ""
         linkText: View Block Explorer
         description: Are you a genesis token holder? Verify that your balance is correct
           by searching for your address into our prelaunch chain’s block

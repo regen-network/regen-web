@@ -50,7 +50,6 @@ export const timeline = (): JSX.Element => (
 export const timelineItem = (): JSX.Element => (
   <TimelineItem
     date={text('Date', events[0].date)}
-    // title={text('Title', events[0].title)}
     description={text('Description', events[0].description)}
     circleColor={theme.palette.secondary.main}
     barColor={theme.palette.secondary.main}

@@ -25,6 +25,7 @@ const data: Data[] = [
     name: 'Project Review',
     type: 'Project Review',
     date: '2020-03-15T00:00:00.000Z',
+    ledgerUrl: '',
     url: 'test',
   },
 ];

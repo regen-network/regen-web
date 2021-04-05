@@ -32219,18 +32219,21 @@ exports[`Storyshots Components|Table Mrv Table 1`] = `
       Array [
         Object {
           "date": "2020-03-15T00:00:00.000Z",
+          "ledgerUrl": "test",
           "name": "Monitoring",
           "type": "Monitoring",
           "url": "test",
         },
         Object {
           "date": "2020-03-15T00:00:00.000Z",
+          "ledgerUrl": "test",
           "name": "Issuance Documents",
           "type": "Issuance",
           "url": "test",
         },
         Object {
           "date": "2020-03-15T00:00:00.000Z",
+          "ledgerUrl": "",
           "name": "Project Review",
           "type": "Project Review",
           "url": "test",
@@ -33759,7 +33762,6 @@ exports[`Storyshots Components|Timeline Timeline Item 1`] = `
     description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
     last={false}
     odd={false}
-    title="Project starts"
   />
 </ContextProvider>
 `;

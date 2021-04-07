@@ -15,8 +15,8 @@ launchInfoSection:
     listTitle: "The Mainnet launch of Regen Network unlocks the next phase of
       feature developments for planetary regeneration. Initially this means:"
     listItems:
-      - text: "Mainnet Launch - LIVE! Join us April 15 starting at the 7am PT/10am ET.
-          Register at: http://bit.ly/regen-network"
+      - text: "Mainnet Launch - LIVE! Join us April 15 starting at 7am PT/10am ET.
+          Register: http://bit.ly/regen-network"
       - text: REGEN token will be live on-chain (with transfers disabled initially)
       - text: Staking on Regen Ledger will be possible for all token holders
       - text: On-chain governance activated for planning future upgrades and milestones

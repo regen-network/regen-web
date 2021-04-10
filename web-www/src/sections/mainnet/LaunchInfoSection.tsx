@@ -128,7 +128,7 @@ type ActionItem = {
   title: string;
   description: string;
   linkText: string;
-  linkURL: string;
+  linkUrl: string;
   icon: {
     publicURL: string;
   };
@@ -187,7 +187,7 @@ const LaunchInfoSection: React.FC = () => {
             }
             actionItems {
               title
-              linkURL
+              linkUrl
               linkText
               description
               icon {
@@ -288,12 +288,12 @@ const ActionItem: React.FC<ActionItem> = p => {
       <div className={classes.btnWrap}>
         <ContainedButton
           className={classes.btn}
-          href={p.linkURL}
-          disabled={!p.linkURL}
+          href={p.linkUrl}
+          disabled={!p.linkUrl}
           target="_blank"
           rel="noopener noreferrer"
         >
-          {p.linkURL ? p.linkText : 'Coming Soon'}
+          {p.linkUrl ? p.linkText : 'Coming Soon'}
         </ContainedButton>
       </div>
     </div>

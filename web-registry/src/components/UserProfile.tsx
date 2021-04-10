@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { useQuery, gql } from '@apollo/client';
+import { gql } from '@apollo/client';
 import { useAuth0 } from '@auth0/auth0-react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import Link from '@material-ui/core/Link';
@@ -33,6 +33,16 @@ const UPDATE_USER_BY_EMAIL = gql`
   mutation UpdateUserByEmail($input: UpdateUserByEmailInput!) {
     updateUserByEmail(input: $input) {
       user {
+        partyId
+      }
+    }
+  }
+`;
+
+const UPDATE_PARTY_BY_ID = gql`
+  mutation UpdatePartyById($input: UpdatePartyByIdInput!) {
+    updatePartyById(input: $input) {
+      party {
         id
       }
     }
@@ -42,7 +52,10 @@ const UPDATE_USER_BY_EMAIL = gql`
 export default function UserProfile(): JSX.Element {
   const { user } = useAuth0();
   const classes = useStyles();
-  const [updateUserByEmail, { data, loading, error: updateUserError }] = useMutation(UPDATE_USER_BY_EMAIL, {
+  const [updateUserByEmail] = useMutation(UPDATE_USER_BY_EMAIL, {
+    errorPolicy: 'ignore',
+  });
+  const [updatePartyById] = useMutation(UPDATE_PARTY_BY_ID, {
     errorPolicy: 'ignore',
   });
 
@@ -90,9 +103,8 @@ export default function UserProfile(): JSX.Element {
   }, [email]);
 
   async function submitUserProfile(values: UserProfileValues): Promise<void> {
-    // if (user?.email) {
     try {
-      await updateUserByEmail({
+      const { data: userData } = await updateUserByEmail({
         variables: {
           input: {
             email: user.email,
@@ -103,10 +115,24 @@ export default function UserProfile(): JSX.Element {
           },
         },
       });
+      const { partyId } = userData.updateUserByEmail.user;
+      await updatePartyById({
+        variables: {
+          input: {
+            id: partyId,
+            partyPatch: {
+              description: values.description,
+              name: values.name,
+              image: values.photo,
+            },
+          },
+        },
+      });
     } catch (e) {
-      console.error(e);
+      setError(e);
+    } finally {
+      setSubmitting(false);
     }
-    // }
   }
 
   return (

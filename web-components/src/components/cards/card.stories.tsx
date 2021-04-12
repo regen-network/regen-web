@@ -25,6 +25,7 @@ export default {
 
 const projectDeveloper: User = {
   name: 'Odonata',
+  type: 'usere',
   place: {
     city: 'South Melbourne',
     state: 'Victoria',
@@ -36,6 +37,7 @@ const projectDeveloper: User = {
 
 const landSteward: User = {
   name: 'Ngarrindjeri Tribe',
+  type: 'user',
   place: {
     state: 'Southern Australia',
     country: 'Australia',
@@ -53,7 +55,6 @@ export const projectTopCard = (): JSX.Element => (
 
 export const impactCard = (): JSX.Element => (
   <ImpactCard
-    title={text('title', 'Above ground biomass')}
     description={text('description', 'Increasing all living biomass which is located above the ground.')}
     imgSrc="/biomass.png"
   />
@@ -61,7 +62,6 @@ export const impactCard = (): JSX.Element => (
 
 export const monitoredImpactCard = (): JSX.Element => (
   <ImpactCard
-    title={text('title', 'Biodiversity')}
     description={text(
       'description',
       'Healthy ecosystems and rich biodiversity are fundamental to life on our planet.',
@@ -105,6 +105,7 @@ export const projectCard = (): JSX.Element => (
     imgSrc={text('imgSrc', '/coorong.png')}
     developer={object('developer', {
       name: 'Odonata',
+      type: 'user',
       imgSrc: 'http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png',
     })}
     tag="biodiversity"
@@ -179,7 +180,6 @@ export const imageActionCard = (): JSX.Element => (
     imgSrc={text('Image source', '/coorong.png')}
     onClick={() => void null}
     btnText={text('Button Text', 'Choose Credit Class')}
-    // title={text('Title', 'CarbonPlus Grasslands')}
     title={() => (
       <>
         Carbon<em>Plus</em> grasslands

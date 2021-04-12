@@ -35,7 +35,7 @@ const CREDIT_CLASSES: CreditClass[] = [
   },
 ];
 
-const ChooseCrediClass: React.FC = () => {
+const ChooseCreditClass: React.FC = () => {
   const classes = useStyles();
 
   function handleSelection(cc: CreditClass): void {
@@ -64,4 +64,4 @@ const ChooseCrediClass: React.FC = () => {
   );
 };
 
-export default ChooseCrediClass;
+export default ChooseCreditClass;

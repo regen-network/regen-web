@@ -36,7 +36,7 @@ import VerifyEmail from './components/VerifyEmail';
 import UserProfile from './components/UserProfile';
 import GettingStarted from './components/GettingStarted';
 import ProjectPlanList from './components/ProjectPlanList';
-import ChooseCrediClass from './components/ChooseCreditClass';
+import ChooseCreditClass from './components/ChooseCreditClass';
 
 export const history = createBrowserHistory();
 
@@ -329,7 +329,7 @@ const App: React.FC = (props): JSX.Element => {
           />
           <ProtectedRoute path="/getting-started" component={GettingStarted} />
           <ProtectedRoute path="/project-plans" component={ProjectPlanList} />
-          <ProtectedRoute path="/choose-credit-class" component={ChooseCrediClass} />
+          <ProtectedRoute path="/choose-credit-class" component={ChooseCreditClass} />
           <Route
             path="/admin"
             render={({ match: { path } }) => (

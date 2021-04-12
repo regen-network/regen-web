@@ -4532,7 +4532,6 @@ exports[`Storyshots Components|Cards Impact Card 1`] = `
   <ImpactCard
     description="Increasing all living biomass which is located above the ground."
     imgSrc="/biomass.png"
-    title="Above ground biomass"
   />
 </ContextProvider>
 `;
@@ -5231,7 +5230,6 @@ exports[`Storyshots Components|Cards Monitored Impact Card 1`] = `
     description="Healthy ecosystems and rich biodiversity are fundamental to life on our planet."
     imgSrc="/biodiversity.png"
     monitored={true}
-    title="Biodiversity"
   />
 </ContextProvider>
 `;
@@ -5930,6 +5928,7 @@ exports[`Storyshots Components|Cards Project Card 1`] = `
       Object {
         "imgSrc": "http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png",
         "name": "Odonata",
+        "type": "user",
       }
     }
     imgSrc="/coorong.png"
@@ -6297,6 +6296,7 @@ exports[`Storyshots Components|Cards Project Top Card 1`] = `
           "country": "Australia",
           "state": "Southern Australia",
         },
+        "type": "user",
       }
     }
     projectDeveloper={
@@ -6309,6 +6309,7 @@ exports[`Storyshots Components|Cards Project Top Card 1`] = `
           "country": "Australia",
           "state": "Victoria",
         },
+        "type": "usere",
       }
     }
   />

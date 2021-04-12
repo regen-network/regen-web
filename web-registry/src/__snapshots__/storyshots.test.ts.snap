@@ -11262,7 +11262,6 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
     title="User Profile"
   >
     <UserProfileForm
-      apiUrl=""
       submit={[Function]}
     />
   </OnBoardingContainer>

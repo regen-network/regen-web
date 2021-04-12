@@ -10,6 +10,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   card: {
     margin: theme.spacing(4),
   },
+  main: {
+    marginTop: theme.spacing(8),
+  },
 }));
 
 type CreditClass = {
@@ -41,7 +44,7 @@ const ChooseCrediClass: React.FC = () => {
 
   return (
     <Section title="Choose a credit class">
-      <Box display="flex" flexWrap="wrap" justifyContent="center">
+      <Box display="flex" flexWrap="wrap" justifyContent="center" className={classes.main}>
         {CREDIT_CLASSES.map((c, i) => (
           <ImageActionCard
             key={i}

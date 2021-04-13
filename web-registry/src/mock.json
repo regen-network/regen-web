@@ -103,6 +103,12 @@
           "url": "https://regen-registry.s3.amazonaws.com/projects/woodburn/Woodburn+Monitoring+Report+2020.pdf"
         },
         {
+          "name": "Verification Report 2017-2020",
+          "type": "Verification",
+          "date": "April 13, 2021",
+          "url": "https://regen-registry.s3.amazonaws.com/projects/woodburn/Verification+Report+2017-2020.pdf"
+        },
+        {
           "name": "Soil Sampling Data",
           "type": "Monitoring",
           "date": "December 11, 2020",
@@ -716,6 +722,12 @@
           "type": "Monitoring",
           "date": "December 11, 2020",
           "url": "https://regen-registry.s3.amazonaws.com/projects/wilmot/Wilmot+soil+data.xlsx"
+        },
+        {
+          "name": "Verification Report 2017-2019",
+          "type": "Verification",
+          "date": "April 13, 2021",
+          "url": "https://regen-registry.s3.amazonaws.com/projects/wilmot/Verification+Report+2017-2019.pdf"
         },
         {
           "name": "Issuance Document",

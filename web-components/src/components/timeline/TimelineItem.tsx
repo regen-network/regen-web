@@ -147,6 +147,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   },
   ledgerBtn: {
     padding: theme.spacing(2, 4),
+    marginTop: theme.spacing(4),
     fontSize: theme.spacing(4),
   },
   view: {
@@ -178,17 +179,17 @@ export default function TimelineItem({
       {date && <div className={classes.date}>{date}</div>}
       <Title className={classes.summary} variant="h5">
         {summary}
-        {modalData && txClient && (
-          <ContainedButton
-            className={classes.ledgerBtn}
-            onClick={() => setOpen(true)}
-            startIcon={<ShieldIcon />}
-          >
-            view on regen ledger
-          </ContainedButton>
-        )}
       </Title>
       {description && <div className={classes.description}>{ReactHtmlParser(description)}</div>}
+      {modalData && txClient && (
+        <ContainedButton
+          className={classes.ledgerBtn}
+          onClick={() => setOpen(true)}
+          startIcon={<ShieldIcon />}
+        >
+          view on ledger
+        </ContainedButton>
+      )}
       <span className={classes.circle} />
       <div className={classes.bar} />
       {modalData && (

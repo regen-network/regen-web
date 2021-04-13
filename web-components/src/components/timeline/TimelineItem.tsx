@@ -148,7 +148,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   ledgerBtn: {
     padding: theme.spacing(2, 4),
     marginTop: theme.spacing(4),
-    fontSize: theme.spacing(4),
+    fontSize: theme.spacing(3.5),
   },
   view: {
     color: theme.palette.secondary.main,

@@ -1,4 +1,5 @@
 import React, { useCallback, useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { gql } from '@apollo/client';
 import { useAuth0 } from '@auth0/auth0-react';
@@ -68,6 +69,7 @@ const UPDATE_PARTY_BY_ID = gql`
 `;
 
 export default function UserProfile(): JSX.Element {
+  const history = useHistory();
   const { user } = useAuth0();
   const userEmail = user?.email;
 
@@ -168,6 +170,8 @@ export default function UserProfile(): JSX.Element {
           },
         },
       });
+      search.set('message', 'User profile created!');
+      history.push('');
     } catch (e) {
       setError(e);
     } finally {

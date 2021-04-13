@@ -21,14 +21,13 @@ import LocationField from '../inputs/LocationField';
 import { OnboardingSubmit } from '../form/OnboardingSubmit';
 
 interface FormProps {
-  submit: (values: Values) => Promise<void>;
+  submit: (values: OrgProfileFormValues) => Promise<void>;
   goBack: () => void;
   skip: () => void;
-  apiUrl: string;
   mapToken: string;
 }
 
-interface Values {
+export interface OrgProfileFormValues {
   description?: string;
   displayName: string;
   legalName: string;
@@ -36,7 +35,7 @@ interface Values {
   logo: string;
 }
 
-type AcctType = 'individual' | 'organization';
+type AcctType = 'personal' | 'organization';
 
 const useStyles = makeStyles((theme: Theme) => ({
   topCard: {
@@ -81,10 +80,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const OrganizationProfileForm: React.FC<FormProps> = ({ submit, apiUrl, goBack, skip, mapToken }) => {
-  const [acctType, setAcctType] = useState<AcctType>('individual');
+const OrganizationProfileForm: React.FC<FormProps> = ({ submit, goBack, skip, mapToken }) => {
+  const [acctType, setAcctType] = useState<AcctType>('personal');
   const classes = useStyles();
-  const isIndividual = acctType === 'individual';
+  const isIndividual = acctType === 'personal';
   const isOrg = acctType === 'organization';
 
   return (
@@ -96,10 +95,15 @@ const OrganizationProfileForm: React.FC<FormProps> = ({ submit, apiUrl, goBack, 
         location: '',
         logo: '',
       }}
-      validate={(values: Values) => {
-        const errors: Partial<Values> = {};
+      validate={(values: OrgProfileFormValues) => {
+        const errors: Partial<OrgProfileFormValues> = {};
         if (isOrg) {
-          const errorFields: Array<keyof Values> = ['displayName', 'legalName', 'location', 'logo'];
+          const errorFields: Array<keyof OrgProfileFormValues> = [
+            'displayName',
+            'legalName',
+            'location',
+            'logo',
+          ];
           errorFields.forEach(value => {
             if (!values[value]) {
               errors[value] = requiredMessage;

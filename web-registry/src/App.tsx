@@ -34,6 +34,7 @@ import Seller from './components/Seller';
 import Signup from './components/Signup';
 import VerifyEmail from './components/VerifyEmail';
 import UserProfile from './components/UserProfile';
+import OrganizationProfile from './components/OrganizationProfile';
 import GettingStarted from './components/GettingStarted';
 import ChooseCreditClass from './components/project-plan/ChooseCreditClass';
 import ProjectPlanList from './components/project-plan/ProjectPlanList';
@@ -326,6 +327,8 @@ const App: React.FC = (props): JSX.Element => {
             )}
           />
           <ProtectedRoute path="/user-profile" component={UserProfile} />
+          <ProtectedRoute path="/organization-profile" component={OrganizationProfile} />
+          <ProtectedRoute path="/project-plans" component={ProjectPlanList} />
           <Route
             path="/project-plans"
             render={({ match: { path } }) => (

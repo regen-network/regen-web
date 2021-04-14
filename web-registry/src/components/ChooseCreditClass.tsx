@@ -4,9 +4,13 @@ import Box from '@material-ui/core/Box';
 
 import ImageActionCard from 'web-components/lib/components/cards/ImageActionCard';
 import Section from 'web-components/lib/components/section';
+import { creditClasses, BasicCreditClass } from '../mocks';
 import { getImgSrc } from '../lib/imgSrc';
 
 const useStyles = makeStyles((theme: Theme) => ({
+  root: {
+    minHeight: '50vh',
+  },
   card: {
     margin: theme.spacing(4),
   },
@@ -15,42 +19,22 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-type CreditClass = {
-  title: string;
-  description: string;
-  image: string;
-};
-const CREDIT_CLASSES: CreditClass[] = [
-  {
-    title: 'Grasslands',
-    description:
-      'This credit class is a built as a holistic credit that includes multiple ecological benefits: Carbon Sequestration and Net GHG reduction, increased animal welfare, ecosystem health, and soil health.',
-    image: getImgSrc('credit-class-grasslands.png'),
-  },
-  {
-    title: 'Forestry',
-    description:
-      'This credit class is a built as a holistic credit that includes multiple ecological benefits: Carbon Sequestration and Net GHG reduction, ecosystem health, and soil health.',
-    image: getImgSrc('credit-class-forestry.png'),
-  },
-];
-
 const ChooseCreditClass: React.FC = () => {
   const classes = useStyles();
 
-  function handleSelection(cc: CreditClass): void {
+  function handleSelection(cc: BasicCreditClass): void {
     console.log('Selected credit class:  :>> ', cc); // eslint-disable-line no-console
   }
 
   return (
-    <Section title="Choose a credit class">
+    <Section title="Choose a credit class" className={classes.root}>
       <Box display="flex" flexWrap="wrap" justifyContent="center" className={classes.main}>
-        {CREDIT_CLASSES.map((c, i) => (
+        {creditClasses.map((c, i) => (
           <ImageActionCard
             key={i}
             className={classes.card}
             description={c.description}
-            imgSrc={c.image}
+            imgSrc={getImgSrc(c.imgSrc)}
             onClick={() => handleSelection(c)}
             title={() => (
               <>

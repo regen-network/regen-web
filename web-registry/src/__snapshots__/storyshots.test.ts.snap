@@ -11603,14 +11603,15 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
   }
 >
   <WithStyles(CssBaseline) />
-  <OnBoardingContainer
+  <OnBoardingSection
+    formContainer={true}
     title="User Profile"
   >
     <UserProfileForm
       apiUrl=""
       submit={[Function]}
     />
-  </OnBoardingContainer>
+  </OnBoardingSection>
 </ContextProvider>
 `;
 

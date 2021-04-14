@@ -122,6 +122,7 @@ export interface Mock {
   creditsIssuer: User;
   projects: Project[];
   projectDefault: ProjectDefault;
+  creditClasses: BasicCreditClass[];
   purchasedCredits: PurchasedCredits[];
 }
 

@@ -1,7 +1,6 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import ReactHtmlParser from 'react-html-parser';
 
 import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
 import ImageActionCard from 'web-components/lib/components/cards/ImageActionCard';
@@ -44,7 +43,7 @@ const ChooseCreditClass: React.FC = () => {
             description={c.description}
             imgSrc={getImgSrc(c.imgSrc)}
             onClick={() => handleSelection(c)}
-            title={() => <>{ReactHtmlParser(c.title)}</>}
+            title={c.title}
           />
         ))}
       </Grid>

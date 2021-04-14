@@ -17,11 +17,11 @@ const CustomButton = withStyles((theme: Theme) => ({
     boxShadow: 'none',
     whiteSpace: 'nowrap',
     [theme.breakpoints.down('xs')]: {
-      padding: `${theme.spacing(3)} ${theme.spacing(6)}`,
+      padding: theme.spacing(3, 6),
       fontSize: '1.125rem',
     },
     [theme.breakpoints.up('sm')]: {
-      padding: `${theme.spacing(3)} ${theme.spacing(12.5)}`,
+      padding: theme.spacing(3, 12.5),
       fontSize: '1.3125rem',
     },
   },

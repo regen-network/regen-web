@@ -136,7 +136,7 @@ function AppFooter(): JSX.Element {
         },
         {
           title: 'Forum',
-          href: 'http://forum.goatech.org/c/regen-network/19',
+          href: 'https://forum.regen.network/',
           target: '_blank',
         },
         {

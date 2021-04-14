@@ -4184,7 +4184,7 @@ exports[`Storyshots Components|Cards Image Action Card 1`] = `
     description="This credit class is a built as a holistic credit that includes multiple ecological benefits: Carbon Sequestration and Net GHG reduction, increased animal welfare, ecosystem health, and soil health."
     imgSrc="/coorong.png"
     onClick={[Function]}
-    title={[Function]}
+    title="Carbon<i>Plus</i> Grasslands"
   />
 </ContextProvider>
 `;
@@ -4532,6 +4532,7 @@ exports[`Storyshots Components|Cards Impact Card 1`] = `
   <ImpactCard
     description="Increasing all living biomass which is located above the ground."
     imgSrc="/biomass.png"
+    name="name"
   />
 </ContextProvider>
 `;
@@ -5230,6 +5231,7 @@ exports[`Storyshots Components|Cards Monitored Impact Card 1`] = `
     description="Healthy ecosystems and rich biodiversity are fundamental to life on our planet."
     imgSrc="/biodiversity.png"
     monitored={true}
+    name="name"
   />
 </ContextProvider>
 `;
@@ -6309,7 +6311,7 @@ exports[`Storyshots Components|Cards Project Top Card 1`] = `
           "country": "Australia",
           "state": "Victoria",
         },
-        "type": "usere",
+        "type": "user",
       }
     }
   />

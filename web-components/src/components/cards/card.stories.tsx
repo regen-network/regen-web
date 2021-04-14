@@ -182,7 +182,7 @@ export const imageActionCard = (): JSX.Element => (
     imgSrc={text('Image source', '/coorong.png')}
     onClick={() => void null}
     btnText={text('Button Text', 'Choose Credit Class')}
-    title="Carbon<i>Plus</i> Grasslands" // Toggles don't render correctly
+    title="Carbon<i>Plus</i> Grasslands" // Knobbs don't render correctly here
     description={text(
       'description',
       'This credit class is a built as a holistic credit that includes multiple ecological benefits: Carbon Sequestration and Net GHG reduction, increased animal welfare, ecosystem health, and soil health.',

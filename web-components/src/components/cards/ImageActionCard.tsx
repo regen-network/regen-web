@@ -1,12 +1,10 @@
 import React from 'react';
-import clsx from 'clsx';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 
 import OutlinedButton from '../buttons/OutlinedButton';
-import Card from './Card';
+import MediaCard from '../cards/MediaCard';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -37,10 +35,8 @@ type Props = {
 
 const ImageActionCard: React.FC<Props> = ({ btnText = 'Choose Credit Class', ...p }) => {
   const classes = useStyles();
-
   return (
-    <Card className={clsx(classes.root, p.className)}>
-      <CardMedia className={classes.media} image={p.imgSrc} title={p.description} />
+    <MediaCard imgSrc={p.imgSrc} className={classes.root}>
       <CardContent>
         <Typography gutterBottom className={classes.title} variant="h5">
           {typeof p.title === 'function' ? p.title() : p.title}
@@ -52,7 +48,7 @@ const ImageActionCard: React.FC<Props> = ({ btnText = 'Choose Credit Class', ...
           {btnText}
         </OutlinedButton>
       </CardContent>
-    </Card>
+    </MediaCard>
   );
 };
 

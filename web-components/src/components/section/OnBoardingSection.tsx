@@ -19,14 +19,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       padding: theme.spacing(8.75, 2, 20),
     },
   },
-  title: {
-    [theme.breakpoints.up('sm')]: {
-      marginBottom: theme.spacing(12.5),
-    },
-    [theme.breakpoints.down('xs')]: {
-      marginBottom: theme.spacing(8.75),
-    },
-  },
   formWrap: {
     [theme.breakpoints.up('sm')]: {
       maxWidth: theme.spacing(140),
@@ -39,7 +31,7 @@ const OnBoardingSection: React.FC<OnBoardingSectionProps> = ({ formContainer = f
   const classes = useStyles();
 
   return (
-    <Section className={classes.root} title={p.title} titleVariant="h3" titleClassName={classes.title}>
+    <Section className={classes.root} title={p.title} titleVariant="h3">
       <div className={clsx(formContainer && classes.formWrap)}>{p.children}</div>
     </Section>
   );

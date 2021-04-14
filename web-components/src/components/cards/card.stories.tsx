@@ -25,7 +25,7 @@ export default {
 
 const projectDeveloper: User = {
   name: 'Odonata',
-  type: 'usere',
+  type: 'user',
   place: {
     city: 'South Melbourne',
     state: 'Victoria',
@@ -55,6 +55,7 @@ export const projectTopCard = (): JSX.Element => (
 
 export const impactCard = (): JSX.Element => (
   <ImpactCard
+    name={text('name', 'name')}
     description={text('description', 'Increasing all living biomass which is located above the ground.')}
     imgSrc="/biomass.png"
   />
@@ -62,6 +63,7 @@ export const impactCard = (): JSX.Element => (
 
 export const monitoredImpactCard = (): JSX.Element => (
   <ImpactCard
+    name={text('name', 'name')}
     description={text(
       'description',
       'Healthy ecosystems and rich biodiversity are fundamental to life on our planet.',

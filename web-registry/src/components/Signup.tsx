@@ -73,7 +73,7 @@ export default function Signup(): JSX.Element {
   );
 
   return (
-    <OnBoardingSection title="Sign up">
+    <OnBoardingSection formContainer title="Sign up">
       <LoginForm
         submit={submit}
         termsLink="/terms-service/"

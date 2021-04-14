@@ -91,7 +91,7 @@ function App(): JSX.Element {
         src="https://regen-registry.s3.amazonaws.com/Black.png"
         alt="Regen Network logo"
       />
-      <OnBoardingSection title="Log in">
+      <OnBoardingSection formContainer title="Log in">
         <LoginForm
           signupFromLogin={process.env.REACT_APP_SIGNUP_LINK || 'https://www.regen.network/registry/signup'}
           submit={submit}

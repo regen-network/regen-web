@@ -1,4 +1,5 @@
 import React from 'react';
+import clsx from 'clsx';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
@@ -36,7 +37,7 @@ type Props = {
 const ImageActionCard: React.FC<Props> = ({ btnText = 'Choose Credit Class', ...p }) => {
   const classes = useStyles();
   return (
-    <MediaCard imgSrc={p.imgSrc} className={classes.root}>
+    <MediaCard imgSrc={p.imgSrc} className={clsx(classes.root, p.className)}>
       <CardContent>
         <Typography gutterBottom className={classes.title} variant="h5">
           {typeof p.title === 'function' ? p.title() : p.title}

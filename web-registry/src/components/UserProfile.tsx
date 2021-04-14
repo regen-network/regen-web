@@ -73,7 +73,7 @@ export default function ConfirmEmail(): JSX.Element {
   }, [email]);
 
   return (
-    <OnBoardingSection title={title}>
+    <OnBoardingSection formContainer title={title}>
       {success === 'true' && <Banner text="Email address confirmed!" />}
       {success === 'false' && message === messageExpired && (
         <>

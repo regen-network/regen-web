@@ -33,7 +33,7 @@ launchInfoSection:
           Cosmos SDK blockchain for ecological regeneration.
         icon: ../../static/media/mainnet-magnifying-glass.svg
       - title: Wallet
-        linkText: Keplr Wallet
+        linkText: Open Keplr Wallet
         description: Stake REGEN with Keplr wallet.
         icon: ../../static/media/mainnet-token-holders.svg
         linkUrl: https://wallet.keplr.app/#/regen/stake

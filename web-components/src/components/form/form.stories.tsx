@@ -16,7 +16,7 @@ const submit = async (): Promise<void> => {
 };
 
 export const userProfile = (): JSX.Element => (
-  <OnBoardingSection title="User Profile">
+  <OnBoardingSection formContainer title="User Profile">
     <UserProfileForm apiUrl="" submit={() => null} />
   </OnBoardingSection>
 );

@@ -74,6 +74,12 @@ interface BasicProject {
   name: string;
 }
 
+export interface BasicCreditClass {
+  title: string;
+  description: string;
+  imgSrc: string;
+}
+
 interface Purchase {
   total: number;
   date: Date | string;
@@ -116,6 +122,7 @@ export interface Mock {
   creditsIssuer: User;
   projects: Project[];
   projectDefault: ProjectDefault;
+  creditClasses: BasicCreditClass[];
   purchasedCredits: PurchasedCredits[];
 }
 
@@ -123,3 +130,4 @@ export const creditsIssuer: User = mock.creditsIssuer;
 export const purchasedCredits: PurchasedCredits[] = mock.purchasedCredits;
 export const projects: Project[] = mock.projects;
 export const projectDefault: ProjectDefault = mock.projectDefault;
+export const creditClasses: BasicCreditClass[] = mock.creditClasses;

@@ -6,6 +6,18 @@
     "link": "https://www.regen.network/",
     "type": "organization"
   },
+  "creditClasses": [
+    {
+      "title": "Carbon<i>Plus</i> Grasslands",
+      "description": "This credit class is a built as a holistic credit that includes multiple ecological benefits: Carbon Sequestration and Net GHG reduction, increased animal welfare, ecosystem health, and soil health.",
+      "imgSrc": "credit-class-grasslands.png"
+    },
+    {
+      "title": "Carbon<i>Plus</i> Forestry",
+      "description": "This credit class is a built as a holistic credit that includes multiple ecological benefits: Carbon Sequestration and Net GHG reduction, ecosystem health, and soil health.",
+      "imgSrc": "credit-class-forestry.png"
+    }
+  ],
   "projectDefault": {
     "story": {
       "title": "Story"

@@ -1,10 +1,10 @@
 topSection:
   header: developers █
-  body: The Regen Ledger (currently in testnet) is a public Proof-of-Stake
-    blockchain built on the Cosmos SDK. It’s primary goal is twofold — indexing
-    claims and assertions pertaining to ecological health, and securely tracking
-    a new class of financial assets, called Ecosystem Service Credits, which are
-    tied to measurable changes in ecological health.
+  body: Regen Ledger is a public Proof-of-Stake blockchain built on the Cosmos
+    SDK. It’s primary goal is twofold — indexing claims and assertions
+    pertaining to ecological health, and securely tracking a new class of
+    financial assets, called Ecosystem Service Credits, which are tied to
+    measurable changes in ecological health.
 approachSection:
   caption: our approach_
   header: Open Source First

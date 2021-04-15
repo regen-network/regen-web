@@ -22,8 +22,9 @@ launchInfoSection:
           spending
     actionItems:
       - title: Block Explorer
-        linkText: View Block Explorer
-        description: Explore mainnet blocks, transactions and validators live!
+        linkText: Aneka Block Explorer
+        description: Explore mainnet blocks, transactions and validators live on the
+          Aneka block explorer!
         icon: ../../static/media/mainnet-validators.svg
         linkUrl: https://regen.aneka.io
       - title: Community
@@ -33,8 +34,8 @@ launchInfoSection:
           Cosmos SDK blockchain for ecological regeneration.
         icon: ../../static/media/mainnet-magnifying-glass.svg
       - title: Wallet
-        linkText: Open Keplr Wallet
-        description: Stake REGEN with Keplr wallet.
+        linkText: Keplr Wallet
+        description: Stake REGEN tokens with the Keplr wallet.
         icon: ../../static/media/mainnet-token-holders.svg
         linkUrl: https://wallet.keplr.app/#/regen/stake
 whatsNextSection:

@@ -23,7 +23,7 @@ launchInfoSection:
     actionItems:
       - title: Block Explorer
         linkText: View Block Explorer
-        description: Explore mainnet transactions live!
+        description: Explore mainnet blocks, transactions and validators live!
         icon: ../../static/media/mainnet-validators.svg
         linkUrl: https://regen.aneka.io
       - title: Community

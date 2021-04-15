@@ -3,15 +3,15 @@ livecastLink: https://www.crowdcast.io/e/regen-mainnet-launch
 seoDescription: With the help of our fantastic community and extraordinary team,
   mainnet is on the horizon!
 topSection:
-  header: Mainnet is launching in
+  header: Mainnet is live!
   body: With the help of our fantastic community and extraordinary team, mainnet
-    is on the horizon!
+    is live!
 launchInfoSection:
   title: Get Involved
   image: ../../static/media/mainnet-geese-flying.jpg
   card:
     title: Mainnet Launch
-    progress: 99
+    progress: 100
     listTitle: "The Mainnet launch of Regen Network unlocks the next phase of
       feature developments for planetary regeneration. Initially this means:"
     listItems:
@@ -21,25 +21,22 @@ launchInfoSection:
       - text: 2M REGEN tokens allocated at genesis to the Community Pool for governance
           spending
     actionItems:
-      - title: Validators
-        linkText: Submit Gentx
-        description: Participating in our validator set at genesis? Make sure you submit
-          your GenTx by following this link!
+      - title: Block Explorer
+        linkText: View Block Explorer
+        description: Explore mainnet transactions live!
         icon: ../../static/media/mainnet-validators.svg
-        linkUrl: https://github.com/regen-network/mainnet/blob/main/regen-1/README.md
+        linkUrl: https://regen.aneka.io
       - title: Community
         linkUrl: https://discord.com/invite/BDcBJu3
         linkText: Join Discord
         description: Find us on Discord! Join in the discussion as we launch the first
           Cosmos SDK blockchain for ecological regeneration.
         icon: ../../static/media/mainnet-magnifying-glass.svg
-      - title: Token Holders
-        linkText: View Block Explorer
-        description: Are you a genesis token holder? Verify that your balance is correct
-          by searching for your address into our prelaunch chain’s block
-          explorer.
+      - title: Wallet
+        linkText: Keplr Wallet
+        description: Stake REGEN with Keplr wallet.
         icon: ../../static/media/mainnet-token-holders.svg
-        linkUrl: http://prelaunch.regen.aneka.io/
+        linkUrl: https://wallet.keplr.app/#/regen/stake
 whatsNextSection:
   title: What's Next?
   description: Our engineering team is hard at work on some exciting new features,

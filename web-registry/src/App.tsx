@@ -333,8 +333,8 @@ const App: React.FC = (props): JSX.Element => {
               <>
                 <ProtectedRoute path={path} exact component={ProjectPlanList} />
                 <ProtectedRoute path={`${path}/getting-started`} component={GettingStarted} />
-                <ProtectedRoute path={`${path}/create/choose-credit-class`} component={ChooseCreditClass} />
-                <ProtectedRoute path={`${path}/create/basic-info`} component={BasicInfo} />
+                <ProtectedRoute path={`${path}/choose-credit-class`} component={ChooseCreditClass} />
+                <ProtectedRoute path={`${path}/basic-info`} component={BasicInfo} />
               </>
             )}
           />

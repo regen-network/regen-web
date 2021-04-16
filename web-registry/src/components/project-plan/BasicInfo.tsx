@@ -1,8 +1,8 @@
 import React from 'react';
 
-import ProjectPlanSection from 'web-components/lib/components/section/ProjectPlanSection';
 import PlanStepper from './PlanStepper';
 import BasicInfoForm, { Values } from './BasicInfoForm';
+import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
 
 const BasicInfo: React.FC = () => {
   const activeStep = 0;
@@ -19,9 +19,9 @@ const BasicInfo: React.FC = () => {
   return (
     <>
       <PlanStepper activeStep={activeStep} />
-      <ProjectPlanSection title="Basic Info" linkText="Save & Exit" onLinkClick={saveAndExit}>
+      <OnBoardingSection title="Basic Info" linkText="Save & Exit" onLinkClick={saveAndExit} formContainer>
         <BasicInfoForm submit={submit} />
-      </ProjectPlanSection>
+      </OnBoardingSection>
     </>
   );
 };

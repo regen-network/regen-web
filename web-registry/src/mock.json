@@ -6,6 +6,18 @@
     "link": "https://www.regen.network/",
     "type": "organization"
   },
+  "creditClasses": [
+    {
+      "title": "Carbon<i>Plus</i> Grasslands",
+      "description": "This credit class is a built as a holistic credit that includes multiple ecological benefits: Carbon Sequestration and Net GHG reduction, increased animal welfare, ecosystem health, and soil health.",
+      "imgSrc": "credit-class-grasslands.png"
+    },
+    {
+      "title": "Carbon<i>Plus</i> Forestry",
+      "description": "This credit class is a built as a holistic credit that includes multiple ecological benefits: Carbon Sequestration and Net GHG reduction, ecosystem health, and soil health.",
+      "imgSrc": "credit-class-forestry.png"
+    }
+  ],
   "projectDefault": {
     "story": {
       "title": "Story"
@@ -49,7 +61,7 @@
   "projects": [
     {
       "id": "woodburn",
-       "documents": [
+      "documents": [
         {
           "name": "Project Plan",
           "type": "Project Plan",
@@ -271,7 +283,7 @@
         "tag": "soil organic carbon"
       }
     },
-        {
+    {
       "id": "wongella",
       "documents": [],
       "name": "Wongella",
@@ -865,7 +877,7 @@
         "tag": "soil organic carbon"
       }
     },
-     {
+    {
       "id": "pillango",
       "name": "Pillango",
       "documents": [],
@@ -1019,6 +1031,6 @@
         "description": "Livestock grazing covers over 3.3 billion hectares, or 25 percent of the world’s land area. Managed grazing practices can reverse land degradation, enhance net carbon sequestration, and improve soil and vegetation quality.<br><br>Under managed grazing, carbon sequestration potential is estimated between 16.4 and 26 Gt CO2e sequestered in the period between 2020-2050.<br><br>This credit is designed to significantly increase the amount of hectares under managed grazing worldwide. To that end, the methodology relies on remote sensing to substantially reduce the cost of monitoring carbon sequestration while maintaining scientific rigor.",
         "tag": "soil organic carbon"
       }
-    } 
+    }
   ]
 }

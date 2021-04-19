@@ -43,7 +43,7 @@ const ProjectPlanList: React.FC = () => {
   };
 
   return (
-    <OnBoardingSection title={isFirstProject ? 'Create a Project' : 'Projects'}>
+    <OnBoardingSection formContainer title={isFirstProject ? 'Create a Project' : 'Projects'}>
       {isFirstProject && (
         <Typography className={classes.subtitle}>Get started with your first project.</Typography>
       )}

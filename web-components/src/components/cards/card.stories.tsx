@@ -15,6 +15,7 @@ import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
 import GreenCard from 'web-components/lib/components/cards/GreenCard';
 import GreenTopIconCard from 'web-components/lib/components/cards/GreenTopIconCard';
 import CreateProjectPlanCard from 'web-components/lib/components/cards/CreateProjectPlanCard';
+import ImageActionCard from 'web-components/lib/components/cards/ImageActionCard';
 
 export default {
   title: 'Components|Cards',
@@ -24,6 +25,7 @@ export default {
 
 const projectDeveloper: User = {
   name: 'Odonata',
+  type: 'user',
   place: {
     city: 'South Melbourne',
     state: 'Victoria',
@@ -35,6 +37,7 @@ const projectDeveloper: User = {
 
 const landSteward: User = {
   name: 'Ngarrindjeri Tribe',
+  type: 'user',
   place: {
     state: 'Southern Australia',
     country: 'Australia',
@@ -52,7 +55,7 @@ export const projectTopCard = (): JSX.Element => (
 
 export const impactCard = (): JSX.Element => (
   <ImpactCard
-    title={text('title', 'Above ground biomass')}
+    name={text('name', 'name')}
     description={text('description', 'Increasing all living biomass which is located above the ground.')}
     imgSrc="/biomass.png"
   />
@@ -60,7 +63,7 @@ export const impactCard = (): JSX.Element => (
 
 export const monitoredImpactCard = (): JSX.Element => (
   <ImpactCard
-    title={text('title', 'Biodiversity')}
+    name={text('name', 'name')}
     description={text(
       'description',
       'Healthy ecosystems and rich biodiversity are fundamental to life on our planet.',
@@ -104,6 +107,7 @@ export const projectCard = (): JSX.Element => (
     imgSrc={text('imgSrc', '/coorong.png')}
     developer={object('developer', {
       name: 'Odonata',
+      type: 'user',
       imgSrc: 'http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png',
     })}
     tag="biodiversity"
@@ -153,15 +157,12 @@ export const greenTopIconCard = (): JSX.Element => (
   <>
     <GreenTopIconCard
       title="Green card 1"
-      description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-      linkURL="https://github.com/regen-network"
-      imgSrc="./mainnet-validators.svg"
-    />
-    <GreenTopIconCard
-      title="Green card 2"
-      description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-      linkURL="https://github.com/regen-network"
-      imgSrc="./mainnet-validators.svg"
+      description={text(
+        'description',
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      )}
+      linkURL={text('Link url', 'https://github.com/regen-network')}
+      imgSrc={text('Img src', './mainnet-validators.svg')}
     />
   </>
 );
@@ -174,4 +175,17 @@ export const createProjectPlanCard = (): JSX.Element => (
 
 export const createProjectPlanCardAddAnother = (): JSX.Element => (
   <CreateProjectPlanCard isFirstProject={false} onClick={() => {}} />
+);
+
+export const imageActionCard = (): JSX.Element => (
+  <ImageActionCard
+    imgSrc={text('Image source', '/coorong.png')}
+    onClick={() => void null}
+    btnText={text('Button Text', 'Choose Credit Class')}
+    title="Carbon<i>Plus</i> Grasslands" // Knobbs don't render correctly here
+    description={text(
+      'description',
+      'This credit class is a built as a holistic credit that includes multiple ecological benefits: Carbon Sequestration and Net GHG reduction, increased animal welfare, ecosystem health, and soil health.',
+    )}
+  />
 );

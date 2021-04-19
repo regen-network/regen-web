@@ -1,5 +1,6 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
+import { Link } from '@material-ui/core';
 import clsx from 'clsx';
 
 import Section from './index';
@@ -7,6 +8,8 @@ import Section from './index';
 interface OnBoardingSectionProps {
   title: string;
   formContainer?: boolean; // set max width and center
+  linkText?: string;
+  onLinkClick?: () => void;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -25,13 +28,52 @@ const useStyles = makeStyles((theme: Theme) => ({
       margin: '0 auto',
     },
   },
+  title: {
+    [theme.breakpoints.up('sm')]: {
+      margin: '0 auto',
+      maxWidth: theme.spacing(140),
+    },
+  },
+  link: {
+    color: theme.palette.secondary.main,
+    fontFamily: theme.typography.fontFamily,
+    fontWeight: 'bold',
+    cursor: 'pointer',
+    '&:hover': {
+      textDecoration: 'none',
+    },
+    [theme.breakpoints.up('sm')]: {
+      fontSize: theme.spacing(4.5),
+    },
+    [theme.breakpoints.down('xs')]: {
+      fontSize: theme.spacing(3.5),
+    },
+  },
 }));
 
-const OnBoardingSection: React.FC<OnBoardingSectionProps> = ({ formContainer = false, ...p }) => {
+const OnBoardingSection: React.FC<OnBoardingSectionProps> = ({
+  formContainer = false,
+  linkText,
+  onLinkClick,
+  ...p
+}) => {
   const classes = useStyles();
 
   return (
-    <Section className={classes.root} title={p.title} titleVariant="h3">
+    <Section
+      className={classes.root}
+      title={p.title}
+      titleAlign={onLinkClick ? 'left' : 'center'}
+      titleVariant="h3"
+      titleClassName={classes.title}
+      topRight={
+        onLinkClick && (
+          <Link className={classes.link} onClick={onLinkClick}>
+            {linkText}
+          </Link>
+        )
+      }
+    >
       <div className={clsx(formContainer && classes.formWrap)}>{p.children}</div>
     </Section>
   );

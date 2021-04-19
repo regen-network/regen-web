@@ -38,12 +38,8 @@ const useStyles = makeStyles((theme: Theme) => ({
       padding: theme.spacing(2),
     },
   },
-  formControl: {
-    // alignItems: 'flex-start',
-  },
-  radioActive: {
+  active: {
     backgroundColor: theme.palette.grey[50],
-    // transform: 'scale(1.01)',
     boxShadow: theme.shadows[1],
     border: `1px solid ${theme.palette.secondary.light}`,
     '& .MuiTypography-body1': {
@@ -60,7 +56,7 @@ const Toggle: React.FC<ToggleProps> = ({ label, isActive, onChange, checkBox, na
   console.log('isActive', isActive);
 
   return (
-    <div className={clsx(classes.root, isActive && classes.radioActive)}>
+    <div className={clsx(classes.root, isActive && classes.active)}>
       <FormControlLabel
         control={
           checkBox ? (

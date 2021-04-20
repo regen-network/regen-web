@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     boxShadow: 'inset 0 0 0 1px rgba(16,22,26,.2), inset 0 -1px 0 rgba(16,22,26,.1)',
     backgroundColor: theme.palette.primary.main,
     '$root.Mui-focusVisible &': {
-      outline: `2px auto ${theme.palette.secondary.dark}`,
+      outline: `2px auto ${theme.palette.secondary.main}`,
       outlineOffset: 2,
     },
     'input:hover ~ &': {
@@ -67,18 +67,18 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   checkedRadioBtn: {
-    backgroundColor: theme.palette.secondary.dark,
+    backgroundColor: theme.palette.secondary.main,
     boxShadow: 'none',
     '&:before': {
       display: 'block',
       width: 16,
       height: 16,
-      backgroundImage: `radial-gradient(${theme.palette.primary.main},${theme.palette.primary.main} 35%,transparent 40%)`,
+      backgroundImage: `radial-gradient(${theme.palette.primary.main},${theme.palette.primary.main} 33%,transparent 40%)`,
       // backgroundImage: `radial-gradient(${theme.palette.primary.main},${theme.palette.primary.main} 28%,transparent 32%)`,
       content: '""',
     },
     'input:hover ~ &': {
-      backgroundColor: theme.palette.secondary.dark,
+      backgroundColor: theme.palette.secondary.main,
     },
   },
   description: {

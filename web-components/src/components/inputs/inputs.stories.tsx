@@ -79,7 +79,7 @@ function ToggleTest(): JSX.Element {
   const [value4, setValue4] = useState(false);
   const [radioValue, setValueRadio] = useState('');
   return (
-    <OnBoardingSection title="Section" formContainer>
+    <OnBoardingSection title="Toggle Variants" formContainer>
       <OnBoardingCard>
         <Toggle
           onChange={e => setValue(e.target.checked)}

@@ -4,8 +4,11 @@ import React, { useState } from 'react';
 import TextField from 'web-components/lib/components/inputs/TextField';
 // import CheckboxLabel from 'web-components/lib/components/inputs/CheckboxLabel';
 // import SelectTextField, { Option } from 'web-components/lib/components/inputs/SelectTextField';
-import Toggle from 'web-components/lib/components/inputs/Toggle';
+import Toggle from './Toggle';
 import { withKnobs, text } from '@storybook/addon-knobs';
+import OnBoardingSection from '../section/OnBoardingSection';
+import OnBoardingCard from '../cards/OnBoardingCard';
+import { RadioGroup, FormLabel } from '@material-ui/core';
 
 export default {
   title: 'Components|Inputs',
@@ -72,23 +75,141 @@ export default {
 function ToggleTest(): JSX.Element {
   const [value, setValue] = useState(false);
   const [value2, setValue2] = useState(false);
+  const [value3, setValue3] = useState(false);
+  const [value4, setValue4] = useState(false);
+  const [radioValue, setValueRadio] = useState('');
   return (
-    <div style={{ background: 'white' }}>
-      <Toggle
-        onChange={e => setValue(e.target.checked)}
-        checkBox
-        label={'This is a label'}
-        isActive={value}
-        activeContent="a bunch of explanation text"
-      />
-      <Toggle
-        onChange={e => setValue2(e.target.checked)}
-        checkBox
-        label={'Another label'}
-        isActive={value2}
-        activeContent={<div style={{ height: 50, background: 'orange' }}>SO NARANJA</div>}
-      />
-    </div>
+    <OnBoardingSection title="Section" formContainer>
+      <OnBoardingCard>
+        <Toggle
+          onChange={e => setValue(e.target.checked)}
+          checkBox
+          name="1"
+          label="No-till"
+          isActive={value}
+          description="Growing crops or pasture without disturbing the soil through tillage."
+        />
+        <Toggle
+          onChange={e => setValue2(e.target.checked)}
+          checkBox
+          name="2"
+          label="Toggle with active content"
+          isActive={value2}
+          activeContent={
+            <div
+              style={{
+                height: 99,
+                background: 'orange',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              SO NARANJA!!!
+            </div>
+          }
+        />
+        <Toggle
+          onChange={e => setValue3(e.target.checked)}
+          checkBox
+          name="3"
+          label="Toggle with description and active content"
+          isActive={value3}
+          activeContent={
+            <div
+              style={{
+                height: 99,
+                background: 'red',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              SO ROJO!!!
+            </div>
+          }
+          description="select to see red"
+        />
+        <Toggle
+          onChange={e => setValue4(e.target.checked)}
+          checkBox
+          name="4"
+          label="Toggle with description, content, and active content"
+          isActive={value4}
+          content={
+            <div
+              style={{
+                height: 30,
+                border: '1px solid grey',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                background: 'lightgrey',
+              }}
+            >
+              some grey (content)
+            </div>
+          }
+          activeContent={
+            <div
+              style={{
+                height: 199,
+                background: 'grey',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              MORE grey!!! (active content)
+            </div>
+          }
+          description="select to see more grey (description)"
+        />
+      </OnBoardingCard>
+      <OnBoardingCard>
+        <FormLabel component="legend">Blue or Green?</FormLabel>
+        <Toggle
+          onChange={e => setValueRadio(e.target.name)}
+          name="green"
+          label="Green"
+          isActive={radioValue === 'green'}
+          activeContent={
+            <div
+              style={{
+                height: 79,
+                background: 'green',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                color: 'white',
+              }}
+            >
+              SO VERDE!!!
+            </div>
+          }
+        />
+        <Toggle
+          onChange={e => setValueRadio(e.target.name)}
+          name="blue"
+          label="Blue"
+          isActive={radioValue === 'blue'}
+          activeContent={
+            <div
+              style={{
+                height: 79,
+                background: 'blue',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                color: 'white',
+              }}
+            >
+              SO Azul!!!
+            </div>
+          }
+        />
+      </OnBoardingCard>
+    </OnBoardingSection>
   );
 }
 

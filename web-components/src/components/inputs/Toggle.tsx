@@ -21,7 +21,9 @@ interface ToggleProps {
   isActive: boolean;
   checkBox?: boolean;
   onChange: (e: any) => void;
-  activeContent: any;
+  description?: any;
+  content?: any;
+  activeContent?: any;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -47,13 +49,27 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   radioBtn: {
-    padding: `0 ${theme.spacing(2)} ${theme.spacing(2)} 0`,
+    // padding: `0 ${theme.spacing(2)} ${theme.spacing(2)} 0`,
+  },
+  description: {
+    paddingLeft: theme.spacing(8),
+  },
+  content: {
+    paddingTop: theme.spacing(4),
   },
 }));
 
-const Toggle: React.FC<ToggleProps> = ({ label, isActive, onChange, checkBox, name, activeContent }) => {
+const Toggle: React.FC<ToggleProps> = ({
+  label,
+  isActive,
+  onChange,
+  checkBox,
+  name,
+  description,
+  content,
+  activeContent,
+}) => {
   const classes = useStyles();
-  console.log('isActive', isActive);
 
   return (
     <div className={clsx(classes.root, isActive && classes.active)}>
@@ -68,12 +84,16 @@ const Toggle: React.FC<ToggleProps> = ({ label, isActive, onChange, checkBox, na
               name={name}
             />
           ) : (
-            <Radio className={classes.radioBtn} name={name} />
+            <Radio className={classes.radioBtn} name={name} onChange={onChange} checked={isActive} />
           )
         }
         label={label}
       />
-      <Collapse in={isActive}>{activeContent}</Collapse>
+      <div className={classes.description}>{description}</div>
+      {content && <div className={classes.content}>{content}</div>}
+      <Collapse in={isActive} classes={{ wrapperInner: classes.content }}>
+        {activeContent}
+      </Collapse>
     </div>
   );
 };

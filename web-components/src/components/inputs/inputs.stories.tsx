@@ -142,9 +142,9 @@ function ToggleVariants(): JSX.Element {
               style={{
                 height: 30,
                 display: 'flex',
-                justifyContent: 'center',
                 alignItems: 'center',
                 background: 'lightgrey',
+                padding: 16,
               }}
             >
               content content content content content
@@ -221,6 +221,14 @@ function ToggleVariants(): JSX.Element {
               SO AZUL!!!
             </div>
           }
+        />
+        <Toggle
+          disabled
+          onChange={e => setValueRadio(e.target.name)}
+          name="disabled"
+          label="Disabled"
+          description="description disabled lorem ipsum"
+          isActive={radioValue === 'disabled'}
         />
       </OnBoardingCard>
     </OnBoardingSection>

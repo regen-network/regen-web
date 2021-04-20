@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     borderRadius: '50%',
     width: 16,
     height: 16,
-    boxShadow: 'inset 0 0 0 1px rgba(16,22,26,.2), inset 0 -1px 0 rgba(16,22,26,.1)', // TODO
+    boxShadow: 'inset 0 0 0 1px rgba(16,22,26,.2), inset 0 -1px 0 rgba(16,22,26,.1)',
     backgroundColor: theme.palette.primary.main,
     '$root.Mui-focusVisible &': {
       outline: `2px auto ${theme.palette.secondary.main}`,
@@ -63,7 +63,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     'input:disabled ~ &': {
       boxShadow: 'none',
-      background: 'rgba(206,217,224,.5)', //TODO
+      background: theme.palette.grey[300],
     },
   },
   checkedRadioBtn: {

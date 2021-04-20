@@ -72,7 +72,7 @@ export default {
 //   );
 // }
 
-function ToggleTest(): JSX.Element {
+function ToggleVariants(): JSX.Element {
   const [value, setValue] = useState(false);
   const [value2, setValue2] = useState(false);
   const [value3, setValue3] = useState(false);
@@ -136,18 +136,18 @@ function ToggleTest(): JSX.Element {
           name="4"
           label="Toggle with description, content, and active content"
           isActive={value4}
+          tooltip="and also a tooltip"
           content={
             <div
               style={{
                 height: 30,
-                border: '1px solid grey',
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
                 background: 'lightgrey',
               }}
             >
-              some grey (content)
+              content content content content content
             </div>
           }
           activeContent={
@@ -158,12 +158,24 @@ function ToggleTest(): JSX.Element {
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
+                padding: 16,
               }}
             >
-              MORE grey!!! (active content)
+              active content active content active content active content active content active content active
+              content active content active content
             </div>
           }
-          description="select to see more grey (description)"
+          description="description lorem ipsum"
+        />
+        <Toggle
+          onChange={e => setValue4(e.target.checked)}
+          checkBox
+          name="4"
+          label="Disabled Toggle"
+          isActive={value4}
+          disabled
+          tooltip="with a tooltip"
+          description="description disabled lorem ipsum"
         />
       </OnBoardingCard>
       <OnBoardingCard>
@@ -192,6 +204,8 @@ function ToggleTest(): JSX.Element {
           onChange={e => setValueRadio(e.target.name)}
           name="blue"
           label="Blue"
+          description="description lorem ipsum"
+          tooltip="with optional info tooltip"
           isActive={radioValue === 'blue'}
           activeContent={
             <div
@@ -204,7 +218,7 @@ function ToggleTest(): JSX.Element {
                 color: 'white',
               }}
             >
-              SO Azul!!!
+              SO AZUL!!!
             </div>
           }
         />
@@ -216,4 +230,4 @@ function ToggleTest(): JSX.Element {
 // export const textField = (): JSX.Element => <EditableTextField />;
 // export const selectTextField = (): JSX.Element => <EditableSelectTextField />;
 // export const checkboxLabel = (): JSX.Element => <EditableCheckboxLabel />;
-export const toggle = (): JSX.Element => <ToggleTest />;
+export const toggle = (): JSX.Element => <ToggleVariants />;

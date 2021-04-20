@@ -1,19 +1,12 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
-import {
-  FormControl,
-  RadioGroup,
-  FormControlLabel,
-  Radio,
-  Collapse,
-  Zoom,
-  Checkbox,
-} from '@material-ui/core';
+import { FormControlLabel, Radio, Collapse, Checkbox } from '@material-ui/core';
 import clsx from 'clsx';
 
 import CheckedIcon from '../icons/CheckedIcon';
 import UncheckedIcon from '../icons/UncheckedIcon';
-import FormLabel from '../form/ControlledFormLabel';
+import InfoIconOutlined from '../icons/InfoIconOutlined';
+import Tooltip from '../tooltip';
 
 interface ToggleProps {
   label: string;
@@ -24,6 +17,8 @@ interface ToggleProps {
   description?: any;
   content?: any;
   activeContent?: any;
+  tooltip?: string;
+  disabled?: boolean;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -40,6 +35,11 @@ const useStyles = makeStyles((theme: Theme) => ({
       padding: theme.spacing(2),
     },
   },
+  top: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
   active: {
     backgroundColor: theme.palette.grey[50],
     boxShadow: theme.shadows[1],
@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     borderRadius: '50%',
     width: 16,
     height: 16,
-    boxShadow: 'inset 0 0 0 1px rgba(16,22,26,.2), inset 0 -1px 0 rgba(16,22,26,.1)',
+    boxShadow: 'inset 0 0 0 1px rgba(16,22,26,.2), inset 0 -1px 0 rgba(16,22,26,.1)', // TODO
     backgroundColor: theme.palette.primary.main,
     '$root.Mui-focusVisible &': {
       outline: `2px auto ${theme.palette.secondary.main}`,
@@ -63,7 +63,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     'input:disabled ~ &': {
       boxShadow: 'none',
-      background: 'rgba(206,217,224,.5)',
+      background: 'rgba(206,217,224,.5)', //TODO
     },
   },
   checkedRadioBtn: {
@@ -74,7 +74,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       width: 16,
       height: 16,
       backgroundImage: `radial-gradient(${theme.palette.primary.main},${theme.palette.primary.main} 33%,transparent 40%)`,
-      // backgroundImage: `radial-gradient(${theme.palette.primary.main},${theme.palette.primary.main} 28%,transparent 32%)`,
       content: '""',
     },
     'input:hover ~ &': {
@@ -82,10 +81,19 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   description: {
+    paddingLeft: theme.spacing(6),
+  },
+  descriptionCheckbox: {
     paddingLeft: theme.spacing(8),
+  },
+  disabled: {
+    color: theme.palette.grey[600],
   },
   content: {
     paddingTop: theme.spacing(4),
+  },
+  info: {
+    cursor: 'pointer',
   },
 }));
 
@@ -98,34 +106,54 @@ const Toggle: React.FC<ToggleProps> = ({
   description,
   content,
   activeContent,
+  tooltip,
+  disabled,
 }) => {
   const classes = useStyles();
 
   return (
     <div className={clsx(classes.root, isActive && classes.active)}>
-      <FormControlLabel
-        control={
-          checkBox ? (
-            <Checkbox
-              color="secondary"
-              icon={<UncheckedIcon />}
-              checkedIcon={<CheckedIcon />}
-              onChange={onChange}
-              name={name}
-            />
-          ) : (
-            <Radio
-              name={name}
-              onChange={onChange}
-              checked={isActive}
-              checkedIcon={<span className={clsx(classes.radioBtn, classes.checkedRadioBtn)} />} //TODO: extract
-              icon={<span className={classes.radioBtn} />}
-            />
-          )
-        }
-        label={label}
-      />
-      <div className={classes.description}>{description}</div>
+      <div className={classes.top}>
+        <FormControlLabel
+          control={
+            checkBox ? (
+              <Checkbox
+                color="secondary"
+                icon={<UncheckedIcon />}
+                checkedIcon={<CheckedIcon />}
+                onChange={onChange}
+                name={name}
+              />
+            ) : (
+              <Radio
+                name={name}
+                onChange={onChange}
+                checked={isActive}
+                checkedIcon={<span className={clsx(classes.radioBtn, classes.checkedRadioBtn)} />} //TODO: extract
+                icon={<span className={classes.radioBtn} />}
+              />
+            )
+          }
+          label={label}
+          disabled={disabled}
+        />
+        {tooltip && (
+          <Tooltip arrow placement="top" title={tooltip}>
+            <div className={classes.info}>
+              <InfoIconOutlined />
+            </div>
+          </Tooltip>
+        )}
+      </div>
+      <div
+        className={clsx(
+          classes.description,
+          checkBox && classes.descriptionCheckbox,
+          disabled && classes.disabled,
+        )}
+      >
+        {description}
+      </div>
       {content && <div className={classes.content}>{content}</div>}
       <Collapse in={isActive} classes={{ wrapperInner: classes.content }}>
         {activeContent}

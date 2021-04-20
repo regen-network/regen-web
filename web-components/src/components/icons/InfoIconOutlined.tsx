@@ -1,26 +1,16 @@
 import React from 'react';
 import SvgIcon from '@material-ui/core/SvgIcon';
-import { makeStyles, Theme, useTheme } from '@material-ui/core';
-import clsx from 'clsx';
-
+import { useTheme } from '@material-ui/core';
 interface IconProps {
   className?: string;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
-  root: {
-    width: theme.spacing(9.25),
-    height: theme.spacing(9.25),
-  },
-}));
-
 function InfoIconOutlined({ className }: IconProps): JSX.Element {
-  const classes = useStyles();
   const theme = useTheme();
 
   return (
     <SvgIcon
-      className={clsx(className, classes.root)}
+      className={className}
       viewBox="0 0 25 26"
       width="25"
       height="26"

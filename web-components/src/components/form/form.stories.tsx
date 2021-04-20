@@ -153,9 +153,9 @@ function ToggleVariants(): JSX.Element {
         <Toggle
           onChange={e => setValue4(e.target.checked)}
           checkBox
-          name="4"
+          name="disabled"
           label="Disabled Toggle"
-          isActive={value4}
+          isActive={false}
           disabled
           tooltip="with a tooltip"
           description="description disabled lorem ipsum"

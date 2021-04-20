@@ -1,12 +1,12 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
-import { FormControlLabel, Radio, Collapse, Checkbox } from '@material-ui/core';
+import { FormControlLabel, Collapse } from '@material-ui/core';
 import clsx from 'clsx';
 
-import CheckedIcon from '../icons/CheckedIcon';
-import UncheckedIcon from '../icons/UncheckedIcon';
 import InfoIconOutlined from '../icons/InfoIconOutlined';
 import Tooltip from '../tooltip';
+import Radio from '../inputs/Radio';
+import Checkbox from '../inputs/Checkbox';
 
 interface ToggleProps {
   label: string;
@@ -27,9 +27,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     flexDirection: 'column',
     borderRadius: '5px',
-    margin: `${theme.spacing(4)} 0 0`,
+    margin: theme.spacing(4, 0, 0),
     [theme.breakpoints.up('sm')]: {
-      padding: `${theme.spacing(4)} ${theme.spacing(4)}`,
+      padding: theme.spacing(4),
     },
     [theme.breakpoints.down('xs')]: {
       padding: theme.spacing(2),
@@ -46,38 +46,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     border: `1px solid ${theme.palette.secondary.light}`,
     '& .MuiTypography-body1': {
       fontWeight: 'bold',
-    },
-  },
-  radioBtn: {
-    borderRadius: '50%',
-    width: 16,
-    height: 16,
-    boxShadow: 'inset 0 0 0 1px rgba(16,22,26,.2), inset 0 -1px 0 rgba(16,22,26,.1)',
-    backgroundColor: theme.palette.primary.main,
-    '$root.Mui-focusVisible &': {
-      outline: `2px auto ${theme.palette.secondary.main}`,
-      outlineOffset: 2,
-    },
-    'input:hover ~ &': {
-      backgroundColor: theme.palette.primary.main,
-    },
-    'input:disabled ~ &': {
-      boxShadow: 'none',
-      background: theme.palette.grey[300],
-    },
-  },
-  checkedRadioBtn: {
-    backgroundColor: theme.palette.secondary.main,
-    boxShadow: 'none',
-    '&:before': {
-      display: 'block',
-      width: 16,
-      height: 16,
-      backgroundImage: `radial-gradient(${theme.palette.primary.main},${theme.palette.primary.main} 33%,transparent 40%)`,
-      content: '""',
-    },
-    'input:hover ~ &': {
-      backgroundColor: theme.palette.secondary.main,
     },
   },
   description: {
@@ -117,21 +85,9 @@ const Toggle: React.FC<ToggleProps> = ({
         <FormControlLabel
           control={
             checkBox ? (
-              <Checkbox
-                color="secondary"
-                icon={<UncheckedIcon />}
-                checkedIcon={<CheckedIcon />}
-                onChange={onChange}
-                name={name}
-              />
+              <Checkbox onChange={onChange} name={name} checked={isActive} />
             ) : (
-              <Radio
-                name={name}
-                onChange={onChange}
-                checked={isActive}
-                checkedIcon={<span className={clsx(classes.radioBtn, classes.checkedRadioBtn)} />} //TODO: extract
-                icon={<span className={classes.radioBtn} />}
-              />
+              <Radio name={name} onChange={onChange} checked={isActive} />
             )
           }
           label={label}

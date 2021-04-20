@@ -1,10 +1,10 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
+import axios from 'axios';
 import { gql } from '@apollo/client';
 import { useAuth0 } from '@auth0/auth0-react';
+import { useMutation, useQuery } from '@apollo/client';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import Link from '@material-ui/core/Link';
-import { useMutation } from '@apollo/client';
-import axios from 'axios';
 
 import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
@@ -21,13 +21,31 @@ const useStyles = makeStyles((theme: Theme) => ({
       fontSize: theme.spacing(5),
     },
     [theme.breakpoints.down('xs')]: {
-      padding: `${theme.spacing(33)} 0 0`,
+      padding: theme.spacing(33, 0, 0),
       fontSize: theme.spacing(4.5),
     },
   },
 }));
 
 const messageExpired: string = 'Access expired.';
+
+const GET_USER_PROFILE = gql`
+  query UserByEmail($email: String!) {
+    userByEmail(email: $email) {
+      email
+      id
+      isAdmin
+      phoneNumber
+      roleTitle
+      partyByPartyId {
+        name
+        walletId
+        description
+        image
+      }
+    }
+  }
+`;
 
 const UPDATE_USER_BY_EMAIL = gql`
   mutation UpdateUserByEmail($input: UpdateUserByEmailInput!) {
@@ -51,13 +69,7 @@ const UPDATE_PARTY_BY_ID = gql`
 
 export default function UserProfile(): JSX.Element {
   const { user } = useAuth0();
-  const classes = useStyles();
-  const [updateUserByEmail] = useMutation(UPDATE_USER_BY_EMAIL, {
-    errorPolicy: 'ignore',
-  });
-  const [updatePartyById] = useMutation(UPDATE_PARTY_BY_ID, {
-    errorPolicy: 'ignore',
-  });
+  const userEmail = user?.email;
 
   // Get any URL parameters from auth0 after email verification
   const search = new URLSearchParams(window.location.search);
@@ -80,9 +92,37 @@ export default function UserProfile(): JSX.Element {
     }
   }
 
+  const { data: userProfileData } = useQuery(GET_USER_PROFILE, {
+    skip: !userEmail,
+    errorPolicy: 'ignore',
+    variables: { email: userEmail },
+  });
+
+  const [updateUserByEmail] = useMutation(UPDATE_USER_BY_EMAIL, {
+    errorPolicy: 'ignore',
+  });
+
+  const [updatePartyById] = useMutation(UPDATE_PARTY_BY_ID, {
+    errorPolicy: 'ignore',
+  });
+
   const [error, setError] = useState<Error | null>(null);
   const [status, setStatus] = useState<string | null>(null);
   const [isSubmitting, setSubmitting] = useState<boolean>(false);
+  const [initialFieldValues, setInitialFieldValues] = useState<UserProfileValues | undefined>();
+
+  useEffect(() => {
+    if (!userProfileData?.userByEmail) return;
+    const { roleTitle, phoneNumber, partyByPartyId } = userProfileData.userByEmail;
+    const { image, description, name } = partyByPartyId;
+    setInitialFieldValues({
+      name,
+      roleTitle,
+      description: description.trim(),
+      phone: phoneNumber,
+      photo: image,
+    });
+  }, [userProfileData]);
 
   const resendEmail = useCallback(() => {
     setSubmitting(true);
@@ -107,10 +147,10 @@ export default function UserProfile(): JSX.Element {
       const { data: userData } = await updateUserByEmail({
         variables: {
           input: {
-            email: user.email,
+            email: userEmail,
             userPatch: {
               phoneNumber: values.phone,
-              roleTitle: values.role,
+              roleTitle: values.roleTitle,
             },
           },
         },
@@ -135,6 +175,7 @@ export default function UserProfile(): JSX.Element {
     }
   }
 
+  const classes = useStyles();
   return (
     <OnBoardingSection title={title}>
       {success === 'true' && <Banner text="Email address confirmed!" />}
@@ -149,7 +190,7 @@ export default function UserProfile(): JSX.Element {
           {!isSubmitting && status && <Banner text={status} />}
         </>
       )}
-      {showForm && <UserProfileForm submit={submitUserProfile} />}
+      {showForm && <UserProfileForm submit={submitUserProfile} initialValues={initialFieldValues} />}
     </OnBoardingSection>
   );
 }

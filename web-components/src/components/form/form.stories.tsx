@@ -3,10 +3,12 @@ import UserProfileForm from 'web-components/lib/components/form/UserProfileForm'
 // import OrganizationProfileForm from 'web-components/lib/components/form/OrganizationProfileForm';
 import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
 import LoginForm from 'web-components/lib/components/form/LoginForm';
+import { withKnobs, text } from '@storybook/addon-knobs';
 
 export default {
   title: 'Components|Forms',
   component: LoginForm,
+  decorators: withKnobs,
 };
 
 const submit = async (): Promise<void> => {
@@ -17,7 +19,10 @@ const submit = async (): Promise<void> => {
 
 export const userProfile = (): JSX.Element => (
   <OnBoardingSection title="User Profile">
-    <UserProfileForm submit={() => null} />
+    <UserProfileForm
+      submit={() => null}
+      initialValues={{ name: text('Name', ''), roleTitle: text('Role title', '') }}
+    />
   </OnBoardingSection>
 );
 

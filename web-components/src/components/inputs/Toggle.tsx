@@ -49,7 +49,37 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   radioBtn: {
-    // padding: `0 ${theme.spacing(2)} ${theme.spacing(2)} 0`,
+    borderRadius: '50%',
+    width: 16,
+    height: 16,
+    boxShadow: 'inset 0 0 0 1px rgba(16,22,26,.2), inset 0 -1px 0 rgba(16,22,26,.1)',
+    backgroundColor: theme.palette.primary.main,
+    '$root.Mui-focusVisible &': {
+      outline: `2px auto ${theme.palette.secondary.dark}`,
+      outlineOffset: 2,
+    },
+    'input:hover ~ &': {
+      backgroundColor: theme.palette.primary.main,
+    },
+    'input:disabled ~ &': {
+      boxShadow: 'none',
+      background: 'rgba(206,217,224,.5)',
+    },
+  },
+  checkedRadioBtn: {
+    backgroundColor: theme.palette.secondary.dark,
+    boxShadow: 'none',
+    '&:before': {
+      display: 'block',
+      width: 16,
+      height: 16,
+      backgroundImage: `radial-gradient(${theme.palette.primary.main},${theme.palette.primary.main} 35%,transparent 40%)`,
+      // backgroundImage: `radial-gradient(${theme.palette.primary.main},${theme.palette.primary.main} 28%,transparent 32%)`,
+      content: '""',
+    },
+    'input:hover ~ &': {
+      backgroundColor: theme.palette.secondary.dark,
+    },
   },
   description: {
     paddingLeft: theme.spacing(8),
@@ -84,7 +114,13 @@ const Toggle: React.FC<ToggleProps> = ({
               name={name}
             />
           ) : (
-            <Radio className={classes.radioBtn} name={name} onChange={onChange} checked={isActive} />
+            <Radio
+              name={name}
+              onChange={onChange}
+              checked={isActive}
+              checkedIcon={<span className={clsx(classes.radioBtn, classes.checkedRadioBtn)} />} //TODO: extract
+              icon={<span className={classes.radioBtn} />}
+            />
           )
         }
         label={label}

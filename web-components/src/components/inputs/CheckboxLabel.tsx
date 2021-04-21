@@ -2,10 +2,12 @@ import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
+import Checkbox from '@material-ui/core/Checkbox';
+
 import { fieldToCheckbox, CheckboxProps } from 'formik-material-ui';
 import { getIn } from 'formik';
 
-import Checkbox from '../inputs/Checkbox';
+// import Checkbox from '../inputs/Checkbox';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {

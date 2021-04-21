@@ -2,18 +2,17 @@ import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import { FormControlLabel, Collapse } from '@material-ui/core';
 import clsx from 'clsx';
+import { FieldProps } from 'formik';
 
 import InfoIconOutlined from '../icons/InfoIconOutlined';
 import Tooltip from '../tooltip';
 import Radio from '../inputs/Radio';
 import Checkbox from '../inputs/Checkbox';
 
-interface ToggleProps {
+interface ToggleProps extends FieldProps {
   label: string;
-  name: string;
   isActive: boolean;
   checkBox?: boolean;
-  onChange: (e: any) => void;
   description?: any;
   content?: any;
   activeContent?: any;
@@ -68,14 +67,13 @@ const useStyles = makeStyles((theme: Theme) => ({
 const Toggle: React.FC<ToggleProps> = ({
   label,
   isActive,
-  onChange,
   checkBox,
-  name,
   description,
   content,
   activeContent,
   tooltip,
   disabled,
+  ...props
 }) => {
   const classes = useStyles();
 
@@ -83,13 +81,7 @@ const Toggle: React.FC<ToggleProps> = ({
     <div className={clsx(classes.root, isActive && classes.active)}>
       <div className={classes.top}>
         <FormControlLabel
-          control={
-            checkBox ? (
-              <Checkbox onChange={onChange} name={name} checked={isActive} />
-            ) : (
-              <Radio name={name} onChange={onChange} checked={isActive} />
-            )
-          }
+          control={checkBox ? <Checkbox {...props} /> : <Radio {...props.field} />}
           label={label}
           disabled={disabled}
         />
@@ -111,9 +103,11 @@ const Toggle: React.FC<ToggleProps> = ({
         {description}
       </div>
       {content && <div className={classes.content}>{content}</div>}
-      <Collapse in={isActive} classes={{ wrapperInner: classes.content }}>
-        {activeContent}
-      </Collapse>
+      {activeContent && (
+        <Collapse in={isActive} classes={{ wrapperInner: classes.content }}>
+          {activeContent}
+        </Collapse>
+      )}
     </div>
   );
 };

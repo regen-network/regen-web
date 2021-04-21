@@ -4,9 +4,10 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormLabel from '@material-ui/core/FormLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
+import Checkbox from '@material-ui/core/Checkbox';
 import { FieldProps } from 'formik';
 
-import Checkbox from '../inputs/Checkbox';
+// import Checkbox from '../inputs/Checkbox';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {

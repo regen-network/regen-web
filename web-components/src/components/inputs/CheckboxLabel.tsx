@@ -45,7 +45,11 @@ export default function CheckboxLabel({ label, ...props }: CheckboxLabelProps): 
 
   return (
     <div className={classes.root}>
-      <FormControlLabel className={props.className} control={<Checkbox {...props} />} label={label} />
+      <FormControlLabel
+        className={props.className}
+        control={<Checkbox field={props.field} form={props.form} meta={props.meta} />}
+        label={label}
+      />
       {showError && <FormHelperText error={showError}>{fieldError}</FormHelperText>}
     </div>
   );

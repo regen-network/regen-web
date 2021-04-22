@@ -110,11 +110,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   updatesCheckbox: {
     [theme.breakpoints.up('sm')]: {
-      marginTop: theme.spacing(7.25),
+      // marginTop: theme.spacing(7.25),
       marginBottom: theme.spacing(12.5),
     },
     [theme.breakpoints.down('xs')]: {
-      marginTop: theme.spacing(5.25),
+      // marginTop: theme.spacing(5.25),
       marginBottom: theme.spacing(8.75),
     },
   },

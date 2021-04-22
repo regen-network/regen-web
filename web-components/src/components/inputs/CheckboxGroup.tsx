@@ -4,9 +4,11 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormLabel from '@material-ui/core/FormLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
+import Checkbox from '@material-ui/core/Checkbox';
 import { FieldProps } from 'formik';
 
-import Checkbox from '../inputs/Checkbox';
+import CheckedIcon from '../icons/CheckedIcon';
+import UncheckedIcon from '../icons/UncheckedIcon';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -44,6 +46,10 @@ const useStyles = makeStyles((theme: Theme) => ({
       color: theme.palette.primary.contrastText,
     },
   },
+  check: {
+    height: theme.spacing(5),
+    width: theme.spacing(5),
+  },
 }));
 
 interface CheckboxGroupProps extends FieldProps {
@@ -71,7 +77,9 @@ export default function CheckboxGroup({ label, options, ...props }: CheckboxGrou
             key={index}
             control={
               <Checkbox
-                {...props}
+                color="secondary"
+                icon={<UncheckedIcon className={classes.check} />}
+                checkedIcon={<CheckedIcon className={classes.check} />}
                 onChange={(e, c) => {
                   if (c) {
                     value.push(opt.value);

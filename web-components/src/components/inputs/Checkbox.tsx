@@ -1,6 +1,6 @@
 import React from 'react';
-import { makeStyles, Theme, Checkbox as MuiCheckbox } from '@material-ui/core';
-import { fieldToCheckbox, CheckboxProps } from 'formik-material-ui';
+import { makeStyles, Theme } from '@material-ui/core';
+import { Checkbox as MuiCheckbox, CheckboxProps } from 'formik-material-ui';
 
 import CheckedIcon from '../icons/CheckedIcon';
 import UncheckedIcon from '../icons/UncheckedIcon';
@@ -13,11 +13,11 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 /** Custom styles on top of MUI's `Checkbox` component */
-const Radio = (props: CheckboxProps): JSX.Element => {
+const Checkbox: React.FC<CheckboxProps> = (props: CheckboxProps) => {
   const classes = useStyles();
   return (
     <MuiCheckbox
-      {...fieldToCheckbox(props)}
+      {...props}
       color="secondary"
       icon={<UncheckedIcon className={classes.check} />}
       checkedIcon={<CheckedIcon className={classes.check} />}
@@ -25,4 +25,4 @@ const Radio = (props: CheckboxProps): JSX.Element => {
   );
 };
 
-export default Radio;
+export default Checkbox;

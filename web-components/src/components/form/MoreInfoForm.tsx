@@ -107,25 +107,26 @@ export default function MoreInfoForm({ onClose, onSubmit, apiUrl }: MoreInfoForm
         ) => {
           setSubmitting(true);
           const apiUri: string = apiUrl;
-          axios
-            .post(`${apiUri}/buyers-info`, {
-              budget,
-              email,
-              name,
-              projectTypes,
-              onBehalfOf,
-            })
-            .then(resp => {
-              setSubmitting(false);
-              if (onSubmit) {
-                onSubmit();
-              }
-            })
-            .catch(e => {
-              /* eslint-disable no-console */
-              console.log(e);
-              setSubmitting(false);
-            });
+          console.log('submit projectTypes', projectTypes);
+          // axios
+          //   .post(`${apiUri}/buyers-info`, {
+          //     budget,
+          //     email,
+          //     name,
+          //     projectTypes,
+          //     onBehalfOf,
+          //   })
+          //   .then(resp => {
+          //     setSubmitting(false);
+          //     if (onSubmit) {
+          //       onSubmit();
+          //     }
+          //   })
+          //   .catch(e => {
+          //     /* eslint-disable no-console */
+          //     console.log(e);
+          //     setSubmitting(false);
+          //   });
         }}
       >
         {({ values, errors, submitForm, isSubmitting, isValid, submitCount, status }) => {
@@ -177,6 +178,7 @@ export default function MoreInfoForm({ onClose, onSubmit, apiUrl }: MoreInfoForm
                 <div>
                   <Field
                     component={CheckboxGroup}
+                    type="checkbox"
                     name="projectTypes"
                     className={classes.textField}
                     label="Which types of carbon credits projects are you interested in?"

@@ -107,26 +107,25 @@ export default function MoreInfoForm({ onClose, onSubmit, apiUrl }: MoreInfoForm
         ) => {
           setSubmitting(true);
           const apiUri: string = apiUrl;
-          console.log('submit projectTypes', projectTypes);
-          // axios
-          //   .post(`${apiUri}/buyers-info`, {
-          //     budget,
-          //     email,
-          //     name,
-          //     projectTypes,
-          //     onBehalfOf,
-          //   })
-          //   .then(resp => {
-          //     setSubmitting(false);
-          //     if (onSubmit) {
-          //       onSubmit();
-          //     }
-          //   })
-          //   .catch(e => {
-          //     /* eslint-disable no-console */
-          //     console.log(e);
-          //     setSubmitting(false);
-          //   });
+          axios
+            .post(`${apiUri}/buyers-info`, {
+              budget,
+              email,
+              name,
+              projectTypes,
+              onBehalfOf,
+            })
+            .then(resp => {
+              setSubmitting(false);
+              if (onSubmit) {
+                onSubmit();
+              }
+            })
+            .catch(e => {
+              /* eslint-disable no-console */
+              console.log(e);
+              setSubmitting(false);
+            });
         }}
       >
         {({ values, errors, submitForm, isSubmitting, isValid, submitCount, status }) => {

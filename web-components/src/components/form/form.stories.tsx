@@ -8,7 +8,7 @@ import { withKnobs, text } from '@storybook/addon-knobs';
 export default {
   title: 'Components|Forms',
   component: LoginForm,
-  decorators: withKnobs,
+  decorators: [withKnobs],
 };
 
 const submit = async (): Promise<void> => {

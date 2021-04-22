@@ -11610,6 +11610,12 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
     title="User Profile"
   >
     <UserProfileForm
+      initialValues={
+        Object {
+          "name": "",
+          "roleTitle": "",
+        }
+      }
       submit={[Function]}
     />
   </OnBoardingSection>

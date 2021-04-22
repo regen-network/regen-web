@@ -13,7 +13,6 @@ const Eligibility: React.FC = () => {
 
   const submit = (values: Values): Promise<void> => {
     // TODO: functionality
-    console.log(values);
     return Promise.resolve();
   };
 

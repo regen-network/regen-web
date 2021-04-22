@@ -12,7 +12,9 @@ const Eligibility: React.FC = () => {
   };
 
   const submit = (values: Values): Promise<void> => {
-    // TODO: functionality
+    // TODO: functionality:
+    // if includesGrasslands === true, next screen is 'Eligibility: Land Use History'
+    // if includesGrasslands === false, next screen is 'Sorry, you are not eligible for this credit class.'
     return Promise.resolve();
   };
 

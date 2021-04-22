@@ -104,7 +104,7 @@ function ToggleVariants(): JSX.Element {
                   component={Toggle}
                   onChange={handleChange}
                   name="value"
-                  isActive={values['value']}
+                  checked={values['value']}
                   description="Growing crops or pasture without disturbing the soil through tillage."
                 />
                 <Field
@@ -113,7 +113,7 @@ function ToggleVariants(): JSX.Element {
                   component={Toggle}
                   onChange={handleChange}
                   name="value2"
-                  isActive={values['value2']}
+                  checked={values['value2']}
                   activeContent={
                     <div
                       style={{
@@ -134,7 +134,7 @@ function ToggleVariants(): JSX.Element {
                   label="Toggle with description, content, and active content"
                   onChange={handleChange}
                   name="value3"
-                  isActive={values['value3']}
+                  checked={values['value3']}
                   tooltip="and also a tooltip"
                   content={
                     <div
@@ -172,7 +172,7 @@ function ToggleVariants(): JSX.Element {
                   name="disabled"
                   label="Disabled Toggle"
                   onChange={handleChange}
-                  isActive={false}
+                  checked={false}
                   disabled
                   tooltip="with a tooltip"
                   description="description disabled lorem ipsum"
@@ -186,7 +186,7 @@ function ToggleVariants(): JSX.Element {
                     label="Green"
                     value="green"
                     type="radio"
-                    isActive={values['radioValue'] === 'green'}
+                    checked={values['radioValue'] === 'green'}
                     activeContent={
                       <div
                         style={{
@@ -209,7 +209,7 @@ function ToggleVariants(): JSX.Element {
                     label="Blue"
                     description="description lorem ipsum"
                     tooltip="with optional info tooltip"
-                    isActive={values['radioValue'] === 'blue'}
+                    checked={values['radioValue'] === 'blue'}
                     activeContent={
                       <div
                         style={{
@@ -232,7 +232,7 @@ function ToggleVariants(): JSX.Element {
                     value="disabled"
                     label="Disabled"
                     description="description disabled lorem ipsum"
-                    isActive={values['radioValue'] === 'disabled'}
+                    checked={values['radioValue'] === 'disabled'}
                   />
                 </Field>
               </OnBoardingCard>

@@ -2,7 +2,6 @@ import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
-
 import { CheckboxProps } from 'formik-material-ui';
 import { getIn } from 'formik';
 

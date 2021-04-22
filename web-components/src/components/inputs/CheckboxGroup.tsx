@@ -71,9 +71,7 @@ export default function CheckboxGroup({ label, options, ...props }: CheckboxGrou
             key={index}
             control={
               <Checkbox
-                form={props.form}
-                field={props.field}
-                meta={props.meta}
+                {...props}
                 onChange={(e, c) => {
                   if (c) {
                     value.push(opt.value);

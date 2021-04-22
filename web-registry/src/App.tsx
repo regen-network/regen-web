@@ -282,9 +282,6 @@ const App: React.FC = (props): JSX.Element => {
           <Route exact path="/verify-email">
             <VerifyEmail />
           </Route>
-          <Route exact path="/user-profile">
-            <UserProfile />
-          </Route>
           <Route exact path="/signup">
             <Signup />
           </Route>
@@ -327,6 +324,7 @@ const App: React.FC = (props): JSX.Element => {
               </>
             )}
           />
+          <ProtectedRoute path="/user-profile" component={UserProfile} />
           <Route
             path="/project-plans"
             render={({ match: { path } }) => (

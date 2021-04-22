@@ -10,13 +10,13 @@ import { requiredMessage } from '../inputs/validation';
 import { OnboardingSubmit } from './OnboardingSubmit';
 
 interface UserProfileFormProps {
-  submit: (values: Values) => Promise<void>;
-  apiUrl: string;
+  initialValues?: UserProfileValues;
+  submit: (values: UserProfileValues) => Promise<void>;
 }
 
-interface Values {
+export interface UserProfileValues {
   name: string;
-  role: string;
+  roleTitle: string;
   photo?: string;
   phone?: string;
   description?: string;
@@ -36,20 +36,23 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const UserProfileForm: React.FC<UserProfileFormProps> = ({ submit, apiUrl }) => {
+const UserProfileForm: React.FC<UserProfileFormProps> = ({ submit, initialValues }) => {
   const classes = useStyles();
   return (
     <Formik
-      initialValues={{
-        name: '',
-        role: '',
-        photo: undefined,
-        phone: undefined,
-        description: undefined,
-      }}
-      validate={(values: Values) => {
-        const errors: Partial<Values> = {};
-        const errorFields: Array<keyof Values> = ['name', 'role'];
+      enableReinitialize
+      initialValues={
+        initialValues || {
+          name: '',
+          roleTitle: '',
+          photo: '',
+          phone: '',
+          description: '',
+        }
+      }
+      validate={(values: UserProfileValues) => {
+        const errors: Partial<UserProfileValues> = {};
+        const errorFields: Array<keyof UserProfileValues> = ['name', 'roleTitle'];
         errorFields.forEach(value => {
           if (!values[value]) {
             errors[value] = requiredMessage;
@@ -80,7 +83,7 @@ const UserProfileForm: React.FC<UserProfileFormProps> = ({ submit, apiUrl }) => 
               <Field
                 className={classes.textField}
                 component={ControlledTextField}
-                name="role"
+                name="roleTitle"
                 label="Role"
                 placeholder="i.e. Farmer, Conservationist, Manager, etc."
               />

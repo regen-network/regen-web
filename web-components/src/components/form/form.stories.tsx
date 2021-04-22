@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { FormLabel, Button } from '@material-ui/core';
 import { Formik, Form, Field } from 'formik';
+import { RadioGroup } from 'formik-material-ui';
 
 import UserProfileForm from 'web-components/lib/components/form/UserProfileForm';
 // import OrganizationProfileForm from 'web-components/lib/components/form/OrganizationProfileForm';
@@ -58,8 +59,6 @@ export const loginForm = (): JSX.Element => (
 );
 
 function ToggleVariants(): JSX.Element {
-  const [radioValue, setValueRadio] = useState('');
-
   return (
     <OnBoardingSection title="Toggle Variants" formContainer>
       <Formik
@@ -67,7 +66,6 @@ function ToggleVariants(): JSX.Element {
           value: false,
           value2: false,
           value3: false,
-          value4: false,
           radioValue: '',
         }}
         onSubmit={values => {
@@ -80,7 +78,7 @@ function ToggleVariants(): JSX.Element {
               <OnBoardingCard>
                 <Field
                   label="No-till"
-                  checkBox
+                  type="checkbox"
                   component={Toggle}
                   onChange={handleChange}
                   name="value"
@@ -89,7 +87,7 @@ function ToggleVariants(): JSX.Element {
                 />
                 <Field
                   label="Toggle with active content"
-                  checkBox
+                  type="checkbox"
                   component={Toggle}
                   onChange={handleChange}
                   name="value2"
@@ -108,53 +106,13 @@ function ToggleVariants(): JSX.Element {
                     </div>
                   }
                 />
-                {/* <Toggle
-                  label="Toggle with active content"
-                  checkBox
-                  onChange={formik.handleChange}
-                  name="value2"
-                  isActive={formik.values['value2']}
-                  activeContent={
-                    <div
-                      style={{
-                        height: 99,
-                        background: 'orange',
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                      }}
-                    >
-                      SO NARANJA!!!
-                    </div>
-                  }
-                />
-                <Toggle
-                  checkBox
-                  label="Toggle with description and active content"
-                  onChange={formik.handleChange}
-                  name="value3"
-                  isActive={formik.values['value3']}
-                  activeContent={
-                    <div
-                      style={{
-                        height: 99,
-                        background: 'red',
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                      }}
-                    >
-                      SO ROJO!!!
-                    </div>
-                  }
-                  description="select to see red"
-                />
-                <Toggle
-                  checkBox
+                <Field
+                  component={Toggle}
+                  type="checkbox"
                   label="Toggle with description, content, and active content"
-                  onChange={formik.handleChange}
-                  name="value4"
-                  isActive={formik.values['value4']}
+                  onChange={handleChange}
+                  name="value3"
+                  isActive={values['value3']}
                   tooltip="and also a tooltip"
                   content={
                     <div
@@ -186,72 +144,76 @@ function ToggleVariants(): JSX.Element {
                   }
                   description="description lorem ipsum"
                 />
-                <Toggle
-                  checkBox
+                <Field
+                  component={Toggle}
+                  type="checkbox"
                   name="disabled"
                   label="Disabled Toggle"
-                  onChange={formik.handleChange}
+                  onChange={handleChange}
                   isActive={false}
                   disabled
                   tooltip="with a tooltip"
                   description="description disabled lorem ipsum"
-                /> */}
+                />
               </OnBoardingCard>
-              {/* <OnBoardingCard>
+              <OnBoardingCard>
                 <FormLabel component="legend">Blue or Green?</FormLabel>
-                <Toggle
-                  label="Green"
-                  name="green"
-                  onChange={e => formik.handleChange('radioValue')(e)}
-                  // isActive={radioValue === 'green'}
-                  // onChange={formik.handleChange}
-                  isActive={formik.values['radioValue'] === 'green'}
-                  activeContent={
-                    <div
-                      style={{
-                        height: 79,
-                        background: 'green',
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        color: 'white',
-                      }}
-                    >
-                      SO VERDE!!!
-                    </div>
-                  }
-                />
-                <Toggle
-                  onChange={e => formik.handleChange('radioValue')(e)}
-                  name="blue"
-                  label="Blue"
-                  description="description lorem ipsum"
-                  tooltip="with optional info tooltip"
-                  isActive={radioValue === 'blue'}
-                  activeContent={
-                    <div
-                      style={{
-                        height: 79,
-                        background: 'blue',
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        color: 'white',
-                      }}
-                    >
-                      SO AZUL!!!
-                    </div>
-                  }
-                />
-                <Toggle
-                  disabled
-                  onChange={e => setValueRadio(e.target.name)}
-                  name="disabled"
-                  label="Disabled"
-                  description="description disabled lorem ipsum"
-                  isActive={radioValue === 'disabled'}
-                />
-              </OnBoardingCard> */}
+                <Field component={RadioGroup} name="radioValue">
+                  <Field
+                    component={Toggle}
+                    label="Green"
+                    value="green"
+                    type="radio"
+                    isActive={values['radioValue'] === 'green'}
+                    activeContent={
+                      <div
+                        style={{
+                          height: 79,
+                          background: 'green',
+                          display: 'flex',
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          color: 'white',
+                        }}
+                      >
+                        SO VERDE!!!
+                      </div>
+                    }
+                  />
+                  <Field
+                    component={Toggle}
+                    type="radio"
+                    value="blue"
+                    label="Blue"
+                    description="description lorem ipsum"
+                    tooltip="with optional info tooltip"
+                    isActive={values['radioValue'] === 'blue'}
+                    activeContent={
+                      <div
+                        style={{
+                          height: 79,
+                          background: 'blue',
+                          display: 'flex',
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          color: 'white',
+                        }}
+                      >
+                        SO AZUL!!!
+                      </div>
+                    }
+                  />
+                  <Field
+                    component={Toggle}
+                    disabled
+                    type="radio"
+                    value="disabled"
+                    label="Disabled"
+                    description="description disabled lorem ipsum"
+                    isActive={values['radioValue'] === 'disabled'}
+                  />
+                </Field>
+              </OnBoardingCard>
               <Button color="primary" variant="contained" fullWidth type="submit">
                 Submit
               </Button>

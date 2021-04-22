@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 /** Custom styles on top of MUI's `Checkbox` component */
-const Radio: React.FC<CheckboxProps> = props => {
+const Radio = (props: CheckboxProps): JSX.Element => {
   const classes = useStyles();
   return (
     <MuiCheckbox

@@ -11,13 +11,14 @@ import Checkbox from '../inputs/Checkbox';
 
 interface ToggleProps extends FieldProps {
   label: string;
+  type: string;
   isActive: boolean;
-  checkBox?: boolean;
   description?: any;
   content?: any;
   activeContent?: any;
   tooltip?: string;
   disabled?: boolean;
+  value?: string;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -67,13 +68,16 @@ const useStyles = makeStyles((theme: Theme) => ({
 const Toggle: React.FC<ToggleProps> = ({
   label,
   isActive,
-  checkBox,
   description,
   content,
   activeContent,
   tooltip,
   disabled,
-  ...props
+  type,
+  value,
+  field,
+  form,
+  meta,
 }) => {
   const classes = useStyles();
 
@@ -81,8 +85,9 @@ const Toggle: React.FC<ToggleProps> = ({
     <div className={clsx(classes.root, isActive && classes.active)}>
       <div className={classes.top}>
         <FormControlLabel
-          control={checkBox ? <Checkbox {...props} /> : <Radio {...props.field} />}
+          control={type === 'checkbox' ? <Checkbox field={field} form={form} meta={meta} /> : <Radio />}
           label={label}
+          value={value}
           disabled={disabled}
         />
         {tooltip && (
@@ -96,7 +101,7 @@ const Toggle: React.FC<ToggleProps> = ({
       <div
         className={clsx(
           classes.description,
-          checkBox && classes.descriptionCheckbox,
+          type === 'checkbox' && classes.descriptionCheckbox,
           disabled && classes.disabled,
         )}
       >

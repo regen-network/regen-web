@@ -116,11 +116,11 @@ export default function UserProfile(): JSX.Element {
     const { roleTitle, phoneNumber, partyByPartyId } = userProfileData.userByEmail;
     const { image, description, name } = partyByPartyId;
     setInitialFieldValues({
-      name,
-      roleTitle,
-      description: description.trim(),
-      phone: phoneNumber,
-      photo: image,
+      name: name || '',
+      roleTitle: roleTitle || '',
+      description: description?.trim() || '',
+      phone: phoneNumber || '',
+      photo: image || '',
     });
   }, [userProfileData]);
 
@@ -177,7 +177,7 @@ export default function UserProfile(): JSX.Element {
 
   const classes = useStyles();
   return (
-    <OnBoardingSection title={title}>
+    <OnBoardingSection formContainer title={title}>
       {success === 'true' && <Banner text="Email address confirmed!" />}
       {success === 'false' && message === messageExpired && (
         <>

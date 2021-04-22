@@ -170,7 +170,7 @@ const GettingStarted: React.FC = () => {
   }, []);
 
   return (
-    <OnBoardingSection title="Getting Started">
+    <OnBoardingSection formContainer title="Getting Started">
       <div className={classes.content}>
         <StepCard step={stepsMap['1']} icon={<InterfaceIcon className={classes.interfaceIcon} />} />
         <StepCard step={stepsMap['2']} icon={<ReviewIcon className={classes.reviewIcon} />} />

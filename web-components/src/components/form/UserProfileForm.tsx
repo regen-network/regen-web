@@ -45,9 +45,9 @@ const UserProfileForm: React.FC<UserProfileFormProps> = ({ submit, initialValues
         initialValues || {
           name: '',
           roleTitle: '',
-          photo: undefined,
-          phone: undefined,
-          description: undefined,
+          photo: '',
+          phone: '',
+          description: '',
         }
       }
       validate={(values: UserProfileValues) => {

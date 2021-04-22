@@ -89,7 +89,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const JoinFarmersSection = () => {
+const JoinFarmersSection: React.FC = () => {
   const classes = useStyles();
 
   const data = useStaticQuery(graphql`

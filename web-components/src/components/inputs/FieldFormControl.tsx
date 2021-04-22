@@ -41,14 +41,16 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     },
   }),
   txtGray: {
-    color: theme.palette.info.main,
+    color: theme.palette.info.dark,
     [theme.breakpoints.up('sm')]: {
       marginTop: theme.spacing(1),
       marginBottom: theme.spacing(4),
+      fontSize: theme.spacing(3.5),
     },
     [theme.breakpoints.down('xs')]: {
       marginTop: theme.spacing(1),
       marginBottom: theme.spacing(3),
+      fontSize: theme.spacing(3),
     },
   },
   filler: {

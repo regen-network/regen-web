@@ -90,8 +90,9 @@ function ToggleVariants(): JSX.Element {
           value3: false,
           radioValue: '',
         }}
-        onSubmit={values => {
+        onSubmit={(values, actions) => {
           alert(JSON.stringify(values, null, 2));
+          actions.resetForm();
         }}
       >
         {({ handleChange, values }) => {

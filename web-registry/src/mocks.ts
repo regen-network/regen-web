@@ -2,7 +2,6 @@ import { User } from 'web-components/lib/components/user/UserInfo';
 import { Place } from 'web-components/lib/components/place/ProjectPlaceInfo';
 import { ItemProps as ProtectedSpeciesItem } from 'web-components/lib/components/sliders/Item';
 import { Media } from 'web-components/lib/components/sliders/ProjectMedia';
-import { Event } from 'web-components/lib/components/timeline';
 import { ActionProps } from 'web-components/lib/components/action';
 import { CreditPrice } from 'web-components/lib/components/fixed-footer/BuyFooter';
 import { Data } from 'web-components/lib/components/table';
@@ -17,11 +16,6 @@ import mock from './mock.json';
 export interface ActionGroup {
   title?: string;
   actions: ActionProps[];
-}
-
-interface Timeline {
-  events: Event[];
-  completedItemIndex: number;
 }
 
 export interface Project {
@@ -47,7 +41,6 @@ export interface Project {
   impact: Impact[];
   creditClass: CreditClass;
   protectedSpecies?: ProtectedSpeciesItem[];
-  timeline?: Timeline;
   fieldsOverride?: ProjectOverride;
   credits?: {
     purchased: number;

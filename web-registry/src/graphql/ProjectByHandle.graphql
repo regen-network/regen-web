@@ -28,7 +28,7 @@ fragment organizationFields on Organization {
 
 query ProjectByHandle($handle: String!) {
   projectByHandle(handle: $handle) {
-    eventsByProjectId {
+    eventsByProjectId(orderBy: DATE_ASC) {
       nodes {
         date
         summary

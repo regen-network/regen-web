@@ -61,28 +61,6 @@
   "projects": [
     {
       "id": "woodburn",
-      "timeline": {
-        "events": [
-          {
-            "date": "June 6, 2017",
-            "summary": "Project registration"
-          },
-          {
-            "date": "December 14, 2020",
-            "summary": "Monitoring event",
-            "description": "Baseline: 2017\nMonitoring period: 2017-2018\nMonitoring period: 2018-2019\nMonitoring period: 2019-2020"
-          },
-          {
-            "date": "December 16, 2020",
-            "summary": "Credits issued"
-          },
-          {
-            "date": "June 5, 2027",
-            "summary": "Crediting term ending"
-          }
-        ],
-        "completedItemIndex": 2
-      },
       "documents": [
         {
           "name": "Project Plan",
@@ -113,6 +91,12 @@
           "type": "Monitoring",
           "date": "December 14, 2020",
           "url": "https://regen-registry.s3.amazonaws.com/projects/woodburn/Woodburn+Monitoring+Report+2020.pdf"
+        },
+        {
+          "name": "Verification Report 2017-2020",
+          "type": "Verification",
+          "date": "April 13, 2021",
+          "url": "https://regen-registry.s3.amazonaws.com/projects/woodburn/Verification+Report+2017-2020.pdf"
         },
         {
           "name": "Soil Sampling Data",
@@ -676,28 +660,6 @@
     },
     {
       "id": "wilmot",
-      "timeline": {
-        "events": [
-          {
-            "date": "June 1, 2017",
-            "summary": "Project registration"
-          },
-          {
-            "date": "December 14, 2020",
-            "summary": "Monitoring event",
-            "description": "Baseline: 2017\nMonitoring period: 2017-2018\nMonitoring period: 2018-2019"
-          },
-          {
-            "date": "December 16, 2020",
-            "summary": "Credits issued"
-          },
-          {
-            "date": "May 31, 2027",
-            "summary": "Crediting term ending"
-          }
-        ],
-        "completedItemIndex": 2
-      },
       "documents": [
         {
           "name": "Project Plan",
@@ -728,6 +690,12 @@
           "type": "Monitoring",
           "date": "December 11, 2020",
           "url": "https://regen-registry.s3.amazonaws.com/projects/wilmot/Wilmot+soil+data.xlsx"
+        },
+        {
+          "name": "Verification Report 2017-2019",
+          "type": "Verification",
+          "date": "April 13, 2021",
+          "url": "https://regen-registry.s3.amazonaws.com/projects/wilmot/Verification+Report+2017-2019.pdf"
         },
         {
           "name": "Issuance Document",

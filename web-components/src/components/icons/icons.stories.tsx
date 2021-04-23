@@ -44,6 +44,7 @@ import ShadedCreditsIcon from 'web-components/lib/components/icons/ShadedCredits
 import TrustDocumentIcon from 'web-components/lib/components/icons/TrustDocumentIcon';
 import AccountabilityIcon from 'web-components/lib/components/icons/AccountabilityIcon';
 import ReviewIcon from 'web-components/lib/components/icons/ReviewIcon';
+import InfoIconOutlined from 'web-components/lib/components/icons/InfoIconOutlined';
 
 import { withKnobs, text } from '@storybook/addon-knobs';
 
@@ -122,6 +123,8 @@ export const printIcon = (): JSX.Element => <PrintIcon />;
 export const regenLedgerIcon = (): JSX.Element => <RegenLedgerIcon />;
 
 export const infoIcon = (): JSX.Element => <InfoIcon />;
+
+export const infoIconOutlined = (): JSX.Element => <InfoIconOutlined />;
 
 export const shieldIcon = (): JSX.Element => <ShieldIcon />;
 

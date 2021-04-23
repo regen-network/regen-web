@@ -177,7 +177,6 @@ export default function MoreInfoForm({ onClose, onSubmit, apiUrl }: MoreInfoForm
                 <div>
                   <Field
                     component={CheckboxGroup}
-                    type="checkbox"
                     name="projectTypes"
                     className={classes.textField}
                     label="Which types of carbon credits projects are you interested in?"

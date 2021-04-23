@@ -5,7 +5,7 @@ import clsx from 'clsx';
 import { FieldProps } from 'formik';
 
 import InfoIconOutlined from '../icons/InfoIconOutlined';
-import Tooltip from '../tooltip';
+import Tooltip from '../tooltip/InfoTooltip';
 import Radio from '../inputs/Radio';
 import Checkbox from '../inputs/Checkbox';
 

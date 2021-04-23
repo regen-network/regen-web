@@ -136,7 +136,7 @@ function ToggleVariants(): JSX.Element {
                   onChange={handleChange}
                   name="value3"
                   checked={values['value3']}
-                  tooltip="and also a tooltip"
+                  tooltip="And also a tooltip. Lorem ipsum dolor sit amet, consectetur."
                   content={
                     <div
                       style={{
@@ -175,7 +175,7 @@ function ToggleVariants(): JSX.Element {
                   onChange={handleChange}
                   checked={false}
                   disabled
-                  tooltip="with a tooltip"
+                  tooltip="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
                   description="description disabled lorem ipsum"
                 />
               </OnBoardingCard>
@@ -209,7 +209,7 @@ function ToggleVariants(): JSX.Element {
                     value="blue"
                     label="Blue, with long label. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation"
                     description="description Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-                    tooltip="with optional info tooltip"
+                    tooltip="With optional info tooltip. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
                     checked={values['radioValue'] === 'blue'}
                     activeContent={
                       <div

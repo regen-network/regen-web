@@ -109,7 +109,7 @@ function ToggleVariants(): JSX.Element {
                   description="Growing crops or pasture without disturbing the soil through tillage."
                 />
                 <Field
-                  label="Toggle with active content"
+                  label="Toggle with active content, and a long label. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation"
                   type="checkbox"
                   component={Toggle}
                   onChange={handleChange}
@@ -207,8 +207,8 @@ function ToggleVariants(): JSX.Element {
                     component={Toggle}
                     type="radio"
                     value="blue"
-                    label="Blue"
-                    description="description lorem ipsum"
+                    label="Blue, with long label. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation"
+                    description="description Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
                     tooltip="with optional info tooltip"
                     checked={values['radioValue'] === 'blue'}
                     activeContent={

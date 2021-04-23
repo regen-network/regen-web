@@ -38,7 +38,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   top: {
     display: 'flex',
     justifyContent: 'space-between',
-    alignItems: 'center',
   },
   active: {
     backgroundColor: theme.palette.grey[50],
@@ -52,16 +51,26 @@ const useStyles = makeStyles((theme: Theme) => ({
     paddingLeft: theme.spacing(6),
   },
   descriptionCheckbox: {
-    paddingLeft: theme.spacing(8),
+    paddingLeft: theme.spacing(6.9),
   },
   disabled: {
     color: theme.palette.grey[600],
+    paddingLeft: theme.spacing(8),
   },
   content: {
     paddingTop: theme.spacing(4),
   },
   info: {
     cursor: 'pointer',
+  },
+  checkbox: {
+    paddingTop: theme.spacing(0.5),
+  },
+  radio: {
+    paddingTop: theme.spacing(1),
+  },
+  formControlLabel: {
+    alignItems: 'flex-start',
   },
 }));
 
@@ -85,11 +94,20 @@ const Toggle: React.FC<ToggleProps> = ({
     <div className={clsx(classes.root, checked && classes.active)}>
       <div className={classes.top}>
         <FormControlLabel
-          control={type === 'checkbox' ? <Checkbox field={field} form={form} meta={meta} /> : <Radio />}
+          control={
+            type === 'checkbox' ? (
+              <Checkbox className={classes.checkbox} field={field} form={form} meta={meta} />
+            ) : (
+              <Radio className={classes.radio} />
+            )
+          }
           label={label}
           value={value}
           disabled={disabled}
           checked={checked}
+          classes={{
+            root: classes.formControlLabel,
+          }}
         />
         {tooltip && (
           <Tooltip arrow placement="top" title={tooltip}>

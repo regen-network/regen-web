@@ -1,0 +1,7 @@
+mutation UpdatePartyById($input: UpdatePartyByIdInput!) {
+  updatePartyById(input: $input) {
+    party {
+      id
+    }
+  }
+}

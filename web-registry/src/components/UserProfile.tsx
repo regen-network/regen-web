@@ -2,6 +2,7 @@ import React, { useCallback, useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { gql } from '@apollo/client';
+import { loader } from 'graphql.macro';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useMutation, useQuery } from '@apollo/client';
 import { makeStyles, Theme } from '@material-ui/core/styles';
@@ -30,6 +31,8 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const messageExpired: string = 'Access expired.';
 
+const UPDATE_PARTY_BY_ID = loader('../graphql/UpdatePartyById.graphql');
+const UPDATE_USER_BY_EMAIL = loader('../graphql/UpdateUserByEmail.graphql');
 const GET_USER_PROFILE = gql`
   query UserByEmail($email: String!) {
     userByEmail(email: $email) {
@@ -38,31 +41,12 @@ const GET_USER_PROFILE = gql`
       isAdmin
       phoneNumber
       roleTitle
+      partyId
       partyByPartyId {
         name
         walletId
         description
         image
-      }
-    }
-  }
-`;
-
-const UPDATE_USER_BY_EMAIL = gql`
-  mutation UpdateUserByEmail($input: UpdateUserByEmailInput!) {
-    updateUserByEmail(input: $input) {
-      user {
-        partyId
-      }
-    }
-  }
-`;
-
-const UPDATE_PARTY_BY_ID = gql`
-  mutation UpdatePartyById($input: UpdatePartyByIdInput!) {
-    updatePartyById(input: $input) {
-      party {
-        id
       }
     }
   }
@@ -99,6 +83,8 @@ export default function UserProfile(): JSX.Element {
     errorPolicy: 'ignore',
     variables: { email: userEmail },
   });
+
+  const userByEmail = userProfileData?.userByEmail;
 
   const [updateUserByEmail] = useMutation(UPDATE_USER_BY_EMAIL, {
     errorPolicy: 'ignore',
@@ -146,7 +132,7 @@ export default function UserProfile(): JSX.Element {
 
   async function submitUserProfile(values: UserProfileValues): Promise<void> {
     try {
-      const { data: userData } = await updateUserByEmail({
+      await updateUserByEmail({
         variables: {
           input: {
             email: userEmail,
@@ -157,11 +143,10 @@ export default function UserProfile(): JSX.Element {
           },
         },
       });
-      const { partyId } = userData.updateUserByEmail.user;
       await updatePartyById({
         variables: {
           input: {
-            id: partyId,
+            id: userByEmail?.partyId,
             partyPatch: {
               description: values.description,
               name: values.name,
@@ -171,7 +156,7 @@ export default function UserProfile(): JSX.Element {
         },
       });
       search.set('message', 'User profile created!');
-      history.push('');
+      history.push('/organization-profile'); // TODO: programmatically handle routing?
     } catch (e) {
       setError(e);
     } finally {

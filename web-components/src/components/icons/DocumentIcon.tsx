@@ -7,10 +7,10 @@ type Props = {
   className?: string;
 };
 
-const DocumentIcon: React.FC<Props & Partial<typeof SvgIcon>> = ({ ...props }) => {
+const DocumentIcon: React.FC<Props & Partial<typeof SvgIcon>> = ({ className, fileType, ...props }) => {
   // const classes = useStyles({});
   const getFill = (): string => {
-    switch (props.fileType) {
+    switch (fileType) {
       case 'xls':
         return '#3D7ACF';
       case 'pdf':
@@ -23,7 +23,7 @@ const DocumentIcon: React.FC<Props & Partial<typeof SvgIcon>> = ({ ...props }) =
   const fill = getFill();
 
   return (
-    <SvgIcon viewBox="0 0 18 22" className={props.className} {...props}>
+    <SvgIcon viewBox="0 0 18 22" className={className} {...props}>
       <svg width="18" height="22" viewBox="0 0 18 22" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M1 21V1H9H12.0601L17 6.38898V21H1Z" fill="white" stroke="black" strokeWidth="2" />
         <rect x="4" y="11" width="1" height="10" rx="0.25" transform="rotate(-90 4 11)" fill="black" />

@@ -36,6 +36,12 @@ const useStyles = makeStyles((theme: Theme) => ({
     border: `2px solid ${theme.palette.secondary.contrastText}`,
     background: theme.palette.grey[50],
     borderRadius: '5px',
+    [theme.breakpoints.up('sm')]: {
+      marginTop: theme.spacing(12),
+    },
+    [theme.breakpoints.down('xs')]: {
+      marginTop: theme.spacing(10),
+    },
     '& .MuiTableCell-head': {
       padding: theme.spacing(5, 5),
     },
@@ -111,7 +117,7 @@ const RegistrySection = (): JSX.Element => {
                 {content.documentTableTitle}
               </Typography>
               <Box className={classes.table}>
-                <Table rows={content.documents} />
+                <Table canClickRow rows={content.documents} />
               </Box>
             </BackgroundSection>
           </>

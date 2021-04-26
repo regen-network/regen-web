@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import clsx from 'clsx';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -23,6 +24,7 @@ export interface Data {
 
 interface RegenTableProps {
   rows: Data[];
+  canClickRow?: boolean;
 }
 
 interface HeadCell {
@@ -69,6 +71,9 @@ const useStyles = makeStyles((theme: Theme) => ({
       backgroundColor: '#FAFAFA',
     },
   },
+  rowClickable: {
+    cursor: 'pointer',
+  },
   cell: {
     border: 'none',
     [theme.breakpoints.up('sm')]: {
@@ -84,12 +89,13 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   icon: {
     [theme.breakpoints.up('sm')]: {
+      fontSize: theme.spacing(8),
       paddingRight: theme.spacing(3.25),
     },
     [theme.breakpoints.down('xs')]: {
-      paddingRight: theme.spacing(2.75),
+      fontSize: theme.spacing(8),
+      paddingRight: theme.spacing(3.75),
     },
-    // alignSelf: 'center',
   },
   link: {
     textDecoration: 'none',
@@ -101,7 +107,15 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   documentCell: {
-    minWidth: theme.spacing(50),
+    minWidth: theme.spacing(60),
+  },
+  viewBtn: {
+    [theme.breakpoints.up('sm')]: {
+      fontSize: 'inherit',
+    },
+    [theme.breakpoints.down('xs')]: {
+      fontSize: theme.spacing(2.75),
+    },
   },
 }));
 
@@ -148,11 +162,17 @@ function EnhancedTableHead(props: EnhancedTableProps): JSX.Element {
   );
 }
 
-export default function RegenTable({ rows }: RegenTableProps): JSX.Element {
+export default function RegenTable({ rows, canClickRow = false }: RegenTableProps): JSX.Element {
   const classes = useStyles({});
 
   const [order, setOrder] = useState<Order>('asc');
   const [orderBy, setOrderBy] = useState<keyof Data>('name');
+
+  function handleClickNavigate(url: string): void {
+    if (canClickRow) {
+      window.open(url, '_blank', 'noopener,noreferrer');
+    }
+  }
 
   const handleRequestSort = (event: React.MouseEvent<unknown>, property: keyof Data): void => {
     const isAsc = orderBy === property && order === 'asc';
@@ -178,8 +198,13 @@ export default function RegenTable({ rows }: RegenTableProps): JSX.Element {
               const labelId = `enhanced-table-checkbox-${index}`;
 
               return (
-                <TableRow tabIndex={-1} key={row.name} className={classes.row}>
-                  <TableCell className={`${classes.cell} ${classes.nameCell}`} id={labelId} scope="row">
+                <TableRow
+                  tabIndex={-1}
+                  key={row.name}
+                  className={clsx(classes.row, canClickRow && classes.rowClickable)}
+                  onClick={() => handleClickNavigate(row.url)}
+                >
+                  <TableCell className={clsx(classes.cell, classes.nameCell)} id={labelId} scope="row">
                     <div className={classes.name}>
                       <DocumentIcon className={classes.icon} fileType={row.name.split('.').pop()} />{' '}
                       {row.name}
@@ -191,9 +216,11 @@ export default function RegenTable({ rows }: RegenTableProps): JSX.Element {
                   <TableCell className={classes.cell} align="left">
                     {getFormattedDate(row.date, options)}
                   </TableCell>
-                  <TableCell className={`${classes.cell} ${classes.documentCell}`} align="left">
+                  <TableCell className={clsx(classes.cell, classes.documentCell)} align="left">
                     <a href={row.url} target="_blank" rel="noopener noreferrer" className={classes.link}>
-                      <OutlinedButton startIcon={<EyeIcon />}>view document</OutlinedButton>
+                      <OutlinedButton startIcon={<EyeIcon />} className={classes.viewBtn}>
+                        view document
+                      </OutlinedButton>
                     </a>
                   </TableCell>
                 </TableRow>

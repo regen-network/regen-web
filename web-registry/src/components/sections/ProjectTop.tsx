@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import ReactHtmlParser from 'react-html-parser';
+import Link from '@material-ui/core/Link';
 import clsx from 'clsx';
 import LazyLoad from 'react-lazyload';
 
@@ -173,6 +174,27 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingTop: theme.spacing(0.25),
     },
   },
+  creditClassInfo: {
+    display: 'flex',
+    flexDirection: 'column',
+    marginTop: theme.spacing(4),
+  },
+  creditClassDetail: {
+    display: 'flex',
+    alignItems: 'baseline',
+  },
+  creditClass: {
+    textTransform: 'uppercase',
+    marginRight: theme.spacing(4),
+    fontSize: theme.typography.pxToRem(12),
+    marginTop: theme.spacing(4),
+    fontWeight: 800,
+  },
+  creditClassLink: {
+    marginTop: theme.spacing(4),
+    fontSize: theme.typography.pxToRem(16),
+    fontWeight: 700,
+  },
 }));
 
 export default function ProjectTop({ project, projectDefault }: ProjectTopProps): JSX.Element {
@@ -194,6 +216,36 @@ export default function ProjectTop({ project, projectDefault }: ProjectTopProps)
               area={project.area}
               areaUnit={project.areaUnit}
             />
+            <div className={classes.creditClassInfo}>
+              <div className={classes.creditClassDetail}>
+                <Title className={classes.creditClass} variant="h5">
+                  credit class:
+                </Title>
+                <Link
+                  className={classes.creditClassLink}
+                  href="https://medium.com/regen-network"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  color="secondary"
+                >
+                  CarbonPlus Grasslands
+                </Link>
+              </div>
+              <div className={classes.creditClassDetail}>
+                <Title className={classes.creditClass} variant="h5">
+                  methodology:
+                </Title>
+                <Link
+                  className={classes.creditClassLink}
+                  href="https://medium.com/regen-network"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  color="secondary"
+                >
+                  CarbonPlus Grasslands
+                </Link>
+              </div>
+            </div>
           </div>
           {project.glanceImgSrc && project.glanceText && (
             <LazyLoad offset={50} once>

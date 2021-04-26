@@ -1,7 +1,7 @@
 import React from 'react';
 
 import PlanStepper from './PlanStepper';
-import EligibilityForm, { Values } from './EligibilityForm';
+import EligibilityForm, { EligibilityValues } from './EligibilityForm';
 import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
 
 const Eligibility: React.FC = () => {
@@ -11,7 +11,7 @@ const Eligibility: React.FC = () => {
     // TODO: functionality
   };
 
-  const submit = (values: Values): Promise<void> => {
+  const submit = (values: EligibilityValues): Promise<void> => {
     // TODO: functionality:
     // if includesGrasslands === true, next screen is 'Eligibility: Land Use History'
     // if includesGrasslands === false, next screen is 'Sorry, you are not eligible for this credit class.'

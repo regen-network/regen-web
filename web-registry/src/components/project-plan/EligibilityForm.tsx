@@ -6,7 +6,7 @@ import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import OnboardingFooter from 'web-components/lib/components/fixed-footer/OnboardingFooter';
 import Toggle from 'web-components/lib/components/inputs/Toggle';
 import ControlledFormLabel from 'web-components/lib/components/form/ControlledFormLabel';
-import { requiredMessage } from 'web-components/lib/components/inputs//validation';
+import { requiredMessage } from 'web-components/lib/components/inputs/validation';
 
 interface EligibilityFormProps {
   submit: (values: Values) => Promise<void>;

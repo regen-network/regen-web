@@ -10,23 +10,23 @@ registrySection:
     - name: "Project page information template.xls"
       type: Marketing
       date: 'March 15, 2020'
-      url: 'TODO changeme'
+      url: 'https://docs.google.com/spreadsheets/d/1SmMC7d0o_-6iNrqK20dYgOrbgud0t0Oj'
     - name: "Regen Registry Animal Welfare Template.docx"
       type: Monitoring
       date: 'February 10, 2020'
-      url: 'TODO changeme'
+      url: 'https://docs.google.com/document/d/14sclYGJnOOqg0YiFtyBej_vkmwQ_nnLf'
     - name: "Regen Registry Monitoring Information Template.docx"
       type: Monitoring
       date: 'February 10, 2020'
-      url: 'TODO changeme'
+      url: 'https://docs.google.com/document/d/1s_iGd-g2NPD0aie6vwom3C0qQCglVHJk'
     - name: "Project Plan.docx"
       type: Project Plan
       date: 'February 10, 2020'
-      url: 'TODO changeme'
+      url: 'https://docs.google.com/document/d/12CEicMcNiS_e2Kv7j-AEc7ock0ZJ34Ap'
     - name: "Regen Registry Soil Health Template.docs"
       type: Monitoring
       date: 'February 10, 2020'
-      url: 'TODO changeme'
+      url: 'https://docs.google.com/document/d/1JjIlRXxNxJXZwxWmq4_i2avxWjgi8P9s'
   subsections:
     - title: Land Steward Resources
       cards:

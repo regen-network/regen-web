@@ -24,13 +24,12 @@ const useStyles = makeStyles((theme: Theme) => ({
     textTransform: 'uppercase',
     fontWeight: 800,
     letterSpacing: '1px',
+    margin: theme.spacing(8, 0),
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.spacing(4),
-      margin: theme.spacing(8, 0),
     },
     [theme.breakpoints.down('xs')]: {
       fontSize: theme.spacing(3.5),
-      margin: theme.spacing(8, 0),
     },
   },
   table: {

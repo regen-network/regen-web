@@ -9,26 +9,26 @@ import ControlledFormLabel from 'web-components/lib/components/form/ControlledFo
 import { requiredMessage } from 'web-components/lib/components/inputs/validation';
 
 interface EligibilityFormProps {
-  submit: (values: Values) => Promise<void>;
+  submit: (values: EligibilityValues) => Promise<void>;
 }
 
-export interface Values {
+export interface EligibilityValues {
   includesGrasslands?: boolean;
 }
 
-interface FormValues {
-  includesGrasslands?: string;
+interface EligibilityFormValues {
+  includesGrasslands?: string; // Radio always produces a string. We convert back to a Boolean on submit
 }
 
 const EligibilityForm: React.FC<EligibilityFormProps> = ({ submit }) => {
   return (
     <Formik
       initialValues={{
-        includesGrasslands: '', // Radio always produces a string. We convert back to a Boolean on submit
+        includesGrasslands: '',
       }}
-      validate={(values: FormValues) => {
-        const errors: Partial<FormValues> = {};
-        const errorFields: Array<keyof FormValues> = ['includesGrasslands'];
+      validate={(values: EligibilityFormValues) => {
+        const errors: Partial<EligibilityFormValues> = {};
+        const errorFields: Array<keyof EligibilityFormValues> = ['includesGrasslands'];
         errorFields.forEach(value => {
           if (!values[value]) {
             errors[value] = requiredMessage;

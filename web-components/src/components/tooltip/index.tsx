@@ -58,7 +58,7 @@ const CustomTooltip: any = withStyles((theme: Theme) => ({
     color: theme.palette.info.dark,
     boxShadow: theme.shadows[4],
     background: theme.palette.grey[50],
-    border: `1px solid ${theme.palette.grey[50]}`,
+    border: `1px solid ${theme.palette.grey[600]}`,
     borderRadius: '5px',
     [theme.breakpoints.down('xs')]: {
       fontSize: theme.spacing(5.25),
@@ -78,6 +78,7 @@ const CustomTooltip: any = withStyles((theme: Theme) => ({
     height: '1.42em',
     '&:before': {
       borderBottomRightRadius: '5px',
+      border: `1px solid ${theme.palette.grey[600]}`,
     },
   },
   popperArrow: arrowGenerator(),

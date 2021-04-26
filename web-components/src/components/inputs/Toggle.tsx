@@ -49,6 +49,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   description: {
     paddingLeft: theme.spacing(6),
+    [theme.breakpoints.down('xs')]: {
+      fontSize: theme.typography.pxToRem(12),
+    },
   },
   descriptionCheckbox: {
     paddingLeft: theme.spacing(6.9),

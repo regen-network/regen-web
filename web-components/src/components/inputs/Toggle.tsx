@@ -80,7 +80,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     alignItems: 'flex-start',
   },
   formControlLabelWithDescription: {
-    marginBottom: theme.spacing(2),
+    [theme.breakpoints.up('sm')]: {
+      marginBottom: theme.spacing(2),
+    },
     [theme.breakpoints.down('xs')]: {
       marginBottom: theme.spacing(1),
     },

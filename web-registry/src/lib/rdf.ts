@@ -25,6 +25,8 @@ interface ValidationReport {
   results: ValidationResult[];
 }
 
+// loadDataset parses and loads the given JSON-LD string into
+// the rdf-ext data factory.
 async function loadDataset(jsonLd: string): Promise<DatasetExt> {
   const stream = new Readable({
     read: () => {
@@ -36,6 +38,8 @@ async function loadDataset(jsonLd: string): Promise<DatasetExt> {
   return factory.dataset().import(parser.import(stream));
 }
 
+// validate validates the data in dataStr as JSON-LD string
+// using the SHACL graph in shapesStr.
 export async function validate(shapesStr: string, dataStr: string): Promise<ValidationReport> {
   const shapes = await loadDataset(shapesStr);
   const data = await loadDataset(dataStr);

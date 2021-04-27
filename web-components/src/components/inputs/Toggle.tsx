@@ -79,7 +79,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   formControlLabelRoot: {
     alignItems: 'flex-start',
   },
-  formControlLabel: {
+  formControlLabelWithDescription: {
     marginBottom: theme.spacing(2),
     [theme.breakpoints.down('xs')]: {
       marginBottom: theme.spacing(1),
@@ -120,7 +120,7 @@ const Toggle: React.FC<ToggleProps> = ({
           checked={checked}
           classes={{
             root: classes.formControlLabelRoot,
-            label: classes.formControlLabel,
+            label: description && classes.formControlLabelWithDescription,
           }}
         />
         {tooltip && (

@@ -77,7 +77,7 @@ const EligibilityForm: React.FC<EligibilityFormProps> = ({ submit }) => {
               onPrev={() => null} // TODO
               onNext={() => null} // TODO
               hideProgress={false} // TODO
-              saveDisabled={false} // TODO
+              saveDisabled={!values['includesGrasslands']}
               percentComplete={0} // TODO
             />
           </Form>

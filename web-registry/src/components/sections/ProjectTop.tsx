@@ -14,6 +14,8 @@ import ProjectPlaceInfo from 'web-components/lib/components/place/ProjectPlaceIn
 import GlanceCard from 'web-components/lib/components/cards/GlanceCard';
 import Description from 'web-components/lib/components/description';
 import ProjectTopCard from 'web-components/lib/components/cards/ProjectTopCard';
+// import ReadMore from 'web-components/lib/components/read-more';
+import ReadMore from 'web-components/lib/components/read-more/ReadMoreExp';
 
 interface ProjectTopProps {
   project: Project;
@@ -289,9 +291,9 @@ export default function ProjectTop({ project, projectDefault }: ProjectTopProps)
           <Title variant="h4" className={classes.tagline}>
             {project.tagline}
           </Title>
-          <Description className={classes.description}>
-            {ReactHtmlParser(project.longDescription)}
-          </Description>
+          <ReadMore maxLength={450} restMinLength={300}>
+            {project.longDescription}
+          </ReadMore>
           {project.quote && (
             <div>
               <Title variant="h4" className={clsx(classes.quote, classes.tagline)}>

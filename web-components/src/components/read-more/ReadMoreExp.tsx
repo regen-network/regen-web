@@ -1,0 +1,84 @@
+import React, { useState } from 'react';
+import { makeStyles, useTheme, Theme } from '@material-ui/core/styles';
+import Fade from '@material-ui/core/Fade';
+
+import OutlinedButton from '../buttons/OutlinedButton';
+import Description from '../description';
+import ArrowDownIcon from '../icons/ArrowDownIcon';
+import { truncate, Texts } from './truncate';
+import { FontSizes } from '../../theme/sizing';
+
+interface ReadMoreProps {
+  children: string;
+  maxLength?: number;
+  restMinLength?: number;
+}
+
+const useStyles = makeStyles((theme: Theme) => ({
+  root: {
+    marginBottom: theme.spacing(7),
+  },
+  textContainer: {
+    // marginBottom: theme.spacing(7),
+    paddingTop: theme.spacing(4),
+    // '& div:first-child': {
+    //   marginBottom: '0px',
+    // },
+  },
+  buttonContainer: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+  },
+  button: {
+    border: 'none',
+  },
+}));
+
+const ReadMore: React.FC<ReadMoreProps> = ({ maxLength = 700, restMinLength = 300, children }) => {
+  const classes = useStyles({});
+  const theme = useTheme();
+
+  const [expanded, setExpanded] = useState(false);
+  const fontSize: FontSizes = { xs: '1rem', sm: '1.375rem' };
+  const texts: Texts = truncate(children, maxLength, restMinLength);
+
+  const handleChange = (): void => {
+    setExpanded(prev => !prev);
+  };
+
+  const ReadButton = (): JSX.Element => (
+    <OutlinedButton
+      onClick={handleChange}
+      classes={{ root: classes.button }}
+      startIcon={
+        expanded ? (
+          <ArrowDownIcon direction="up" color={theme.palette.secondary.main} />
+        ) : (
+          <ArrowDownIcon direction="down" color={theme.palette.secondary.main} />
+        )
+      }
+    >
+      read {expanded ? 'less' : 'more'}
+    </OutlinedButton>
+  );
+
+  return (
+    <div className={classes.root}>
+      <div className={classes.textContainer}>
+        <Description fontSize={fontSize}>
+          {texts.truncated}
+          {!expanded && <ReadButton />}
+        </Description>
+        <Fade in={expanded} unmountOnExit>
+          <Description fontSize={fontSize}>
+            {!texts.rest.startsWith('\n') && '\n'}
+            {texts.rest}
+            <ReadButton />
+          </Description>
+        </Fade>
+      </div>
+    </div>
+  );
+};
+
+export default ReadMore;

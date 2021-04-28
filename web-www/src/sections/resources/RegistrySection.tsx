@@ -25,6 +25,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontWeight: 800,
     letterSpacing: '1px',
     margin: theme.spacing(8, 0),
+    '&:last-of-type': {
+      margin: theme.spacing(10, 0, 8),
+    },
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.spacing(4),
     },
@@ -36,12 +39,12 @@ const useStyles = makeStyles((theme: Theme) => ({
     border: `2px solid ${theme.palette.secondary.contrastText}`,
     background: theme.palette.grey[50],
     borderRadius: '5px',
-    [theme.breakpoints.up('sm')]: {
-      marginTop: theme.spacing(12),
-    },
-    [theme.breakpoints.down('xs')]: {
-      marginTop: theme.spacing(10),
-    },
+    // [theme.breakpoints.up('sm')]: {
+    //   marginTop: theme.spacing(12),
+    // },
+    // [theme.breakpoints.down('xs')]: {
+    //   marginTop: theme.spacing(10),
+    // },
     '& .MuiTableCell-head': {
       padding: theme.spacing(5, 5),
     },

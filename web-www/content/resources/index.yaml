@@ -66,12 +66,6 @@ registrySection:
             monitored for the Carbon<i>Plus</i> Grasslands credit.
           buttonText: View Methodology
           link: https://regen-registry.s3.amazonaws.com/Methodology+for+GHG+and+Co-Benefits+in+Grazing+Systems.pdf
-        - image: ../../static/media/resources-developer-templates-image.jpg
-          title: Project Developer Templates
-          updated: September 15, 2020
-          description: Get started here with Carbon<i>Plus</i> Grasslands.
-          buttonText: View Templates
-          link: https://drive.google.com/drive/folders/12FLwfhT50WkYv6CymXiwZpCW1HtoMq9A?usp=sharing
 ledgerSection:
   header: Regen Ledger and more
   cards:

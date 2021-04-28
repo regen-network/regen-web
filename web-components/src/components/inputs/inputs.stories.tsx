@@ -165,7 +165,8 @@ function ToggleVariants(): JSX.Element {
                       content active content active content active content
                     </div>
                   }
-                  description="description lorem ipsum"
+                  description="description lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                  "
                 />
                 <Field
                   component={Toggle}
@@ -188,6 +189,8 @@ function ToggleVariants(): JSX.Element {
                     value="green"
                     type="radio"
                     checked={values['radioValue'] === 'green'}
+                    description="description"
+
                     activeContent={
                       <div
                         style={{

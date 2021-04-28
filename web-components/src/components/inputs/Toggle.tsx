@@ -49,12 +49,17 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   description: {
     paddingLeft: theme.spacing(6),
+    [theme.breakpoints.down('xs')]: {
+      fontSize: theme.typography.pxToRem(12),
+    },
   },
   descriptionCheckbox: {
     paddingLeft: theme.spacing(6.9),
   },
   disabled: {
     color: theme.palette.grey[600],
+  },
+  disabledDescriptionCheckbox: {
     paddingLeft: theme.spacing(8),
   },
   content: {
@@ -65,12 +70,22 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   checkbox: {
     paddingTop: theme.spacing(0.5),
+    paddingBottom: theme.spacing(0.5),
   },
   radio: {
     paddingTop: theme.spacing(1),
+    paddingBottom: theme.spacing(1),
   },
-  formControlLabel: {
+  formControlLabelRoot: {
     alignItems: 'flex-start',
+  },
+  formControlLabelWithDescription: {
+    [theme.breakpoints.up('sm')]: {
+      marginBottom: theme.spacing(2),
+    },
+    [theme.breakpoints.down('xs')]: {
+      marginBottom: theme.spacing(1),
+    },
   },
 }));
 
@@ -106,7 +121,8 @@ const Toggle: React.FC<ToggleProps> = ({
           disabled={disabled}
           checked={checked}
           classes={{
-            root: classes.formControlLabel,
+            root: classes.formControlLabelRoot,
+            label: description && classes.formControlLabelWithDescription,
           }}
         />
         {tooltip && (
@@ -117,15 +133,18 @@ const Toggle: React.FC<ToggleProps> = ({
           </Tooltip>
         )}
       </div>
-      <div
-        className={clsx(
-          classes.description,
-          type === 'checkbox' && classes.descriptionCheckbox,
-          disabled && classes.disabled,
-        )}
-      >
-        {description}
-      </div>
+      {description && (
+        <div
+          className={clsx(
+            classes.description,
+            type === 'checkbox' && classes.descriptionCheckbox,
+            disabled && classes.disabled,
+            disabled && type === 'checkbox' && classes.disabledDescriptionCheckbox,
+          )}
+        >
+          {description}
+        </div>
+      )}
       {content && <div className={classes.content}>{content}</div>}
       {activeContent && (
         <Collapse in={checked} classes={{ wrapperInner: classes.content }}>

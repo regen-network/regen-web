@@ -19,11 +19,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginBottom: theme.spacing(7),
   },
   textContainer: {
-    // marginBottom: theme.spacing(7),
     paddingTop: theme.spacing(4),
-    // '& div:first-child': {
-    //   marginBottom: '0px',
-    // },
   },
   buttonContainer: {
     display: 'flex',
@@ -31,6 +27,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   button: {
     border: 'none',
+    marginLeft: theme.spacing(4),
+  },
+  buttonLabel: {
+    fontSize: theme.typography.pxToRem(18),
   },
 }));
 
@@ -49,8 +49,8 @@ const ReadMore: React.FC<ReadMoreProps> = ({ maxLength = 700, restMinLength = 30
   const ReadButton = (): JSX.Element => (
     <OutlinedButton
       onClick={handleChange}
-      classes={{ root: classes.button }}
-      startIcon={
+      classes={{ root: classes.button, label: classes.buttonLabel }}
+      endIcon={
         expanded ? (
           <ArrowDownIcon direction="up" color={theme.palette.secondary.main} />
         ) : (

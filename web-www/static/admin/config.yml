@@ -439,7 +439,7 @@ collections:
                 collapsed: false
                 fields:
                   - {label: "Header", name: title, widget: string}
-                  - {label: "Url", name: url, widget: string}
+                  - {label: "Url", name: url, widget: string, required: false}
                   - {label: "Image", name: image, widget: image}
                   - label: Tags
                     name: tags
@@ -462,7 +462,7 @@ collections:
             widget: "object"
             fields:
               - {label: button text, name: buttonText, widget: string}
-              - {label: airtable link, name: airtableLink, widget: string, required: false}
+              - {label: airtable link, name: airtableLink, widget: string}
       - label: Science page
         name: science
         file: "web-www/content/science/index.yaml"

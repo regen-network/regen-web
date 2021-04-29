@@ -110,7 +110,7 @@ timelineSection:
           color: "#6D9BDB"
         - name: farmer
           color: "#7BC796"
-      url: a
+      url: ""
     - title: Implement land management
       image: ../../static/media/Farmer.svg
       tags:

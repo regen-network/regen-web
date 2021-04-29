@@ -1,5 +1,6 @@
 fragment partyFields on Party {
   name
+  description
   organizationByPartyId {
     ...organizationFields
   }
@@ -13,7 +14,6 @@ fragment partyFields on Party {
 
 fragment organizationFields on Organization {
   id
-  description
   organizationMembersByOrganizationId(condition: { isOwner: true }) {
     nodes {
       userByMemberId {

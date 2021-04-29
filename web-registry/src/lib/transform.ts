@@ -99,6 +99,7 @@ export function buildIssuanceModalData(
 
 function getParty(party: {
   name: string;
+  description?: string;
   addressByAddressId?: {
     feature?: {
       place_name?: string;
@@ -108,7 +109,6 @@ function getParty(party: {
     addr: string;
   };
   organizationByPartyId: {
-    description?: string;
     organizationMembersByOrganizationId: {
       nodes: {
         userByMemberId: {
@@ -144,6 +144,6 @@ function getParty(party: {
       '',
     individual: (partyUser && partyUser.partyByPartyId.name) || '',
     location: partyAddress || '',
-    description: partyOrg && partyOrg.description,
+    description: party.description,
   };
 }

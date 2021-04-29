@@ -86,6 +86,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   name: {
     display: 'flex',
     alignItems: 'center',
+    lineHeight: theme.spacing(5.75),
   },
   icon: {
     [theme.breakpoints.up('sm')]: {

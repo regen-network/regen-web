@@ -73,7 +73,7 @@ const ReadMore: React.FC<ReadMoreProps> = ({ maxLength = 700, restMinLength = 30
           <Description fontSize={fontSize}>
             {!texts.rest.startsWith('\n') && '\n'}
             {texts.rest}
-            <ReadButton />
+            {expanded && <ReadButton />}
           </Description>
         </Fade>
       </div>

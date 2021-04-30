@@ -439,7 +439,7 @@ collections:
                 collapsed: false
                 fields:
                   - {label: "Header", name: title, widget: string}
-                  - {label: "Url", name: url, widget: string}
+                  - {label: "Url", name: url, widget: string, required: false}
                   - {label: "Image", name: image, widget: image}
                   - label: Tags
                     name: tags

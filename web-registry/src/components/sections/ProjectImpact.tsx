@@ -47,6 +47,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     [theme.breakpoints.down('xs')]: {
       paddingBottom: theme.spacing(3.75),
+      marginRight: theme.spacing(3.75),
     },
   },
   background: {
@@ -61,6 +62,14 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     '& div': {
       marginLeft: theme.spacing(2.5),
+    },
+  },
+  swipe: {
+    // TODO: may prefer slider
+    display: 'flex',
+    overflow: 'scroll',
+    '&::-webkit-scrollbar': {
+      display: 'none',
     },
   },
 }));
@@ -78,6 +87,7 @@ export default function ProjectImpact({ impacts }: ProjectImpactProps): JSX.Elem
     slidesToShow: slides,
     slidesToScroll: slides,
     arrows: false,
+    lazyload: true,
   };
 
   let slider: any = useRef(null);
@@ -114,18 +124,35 @@ export default function ProjectImpact({ impacts }: ProjectImpactProps): JSX.Elem
         }
       >
         <LazyLoad offset={300}>
-          <Slider {...settings} ref={slider}>
-            {impacts.map(({ name, description, imgSrc, monitored }: Impact, index: number) => (
-              <div className={classes.item} key={index}>
-                <ProjectImpactCard
-                  name={name}
-                  description={description}
-                  imgSrc={getOptimizedImageSrc(imgSrc, imageStorageBaseUrl, apiServerUrl)}
-                  monitored={monitored}
-                />
-              </div>
-            ))}
-          </Slider>
+          {isMobile ? (
+            <div className={classes.swipe}>
+              {impacts.map(({ name, description, imgSrc, monitored }: Impact, index: number) => (
+                <div className={classes.item} key={index}>
+                  <ProjectImpactCard
+                    name={name}
+                    description={description}
+                    imgSrc={getOptimizedImageSrc(imgSrc, imageStorageBaseUrl, apiServerUrl)}
+                    monitored={monitored}
+                  />
+                </div>
+              ))
+              // TODO: DRY if keeping this approach
+              }
+            </div>
+          ) : (
+            <Slider {...settings} ref={slider}>
+              {impacts.map(({ name, description, imgSrc, monitored }: Impact, index: number) => (
+                <div className={classes.item} key={index}>
+                  <ProjectImpactCard
+                    name={name}
+                    description={description}
+                    imgSrc={getOptimizedImageSrc(imgSrc, imageStorageBaseUrl, apiServerUrl)}
+                    monitored={monitored}
+                  />
+                </div>
+              ))}
+            </Slider>
+          )}
         </LazyLoad>
       </Section>
     </div>

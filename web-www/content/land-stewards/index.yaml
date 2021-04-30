@@ -139,7 +139,9 @@ timelineSection:
           color: "#7BC796"
 moreQuestionsSection:
   header: Are you interested in getting paid for your ecological practices?
-  description: md// Get started by reading our Regen Registry documentation on our <a href="/resources">Resources page</a>, and check out our <a href="/faq/regen%20registry">FAQ</a>.
+  description: md// Get started by reading our Regen Registry documentation on our
+    <a href="/resources">Resources page</a>, and check out our <a
+    href="/faq/carbonplus%20credits">FAQ</a>.
   firstButtonText: View Resources
   firstButtonUrl: /resources
   secondButtonText: Start the Process

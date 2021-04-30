@@ -22,7 +22,6 @@ import Timeline from 'web-components/lib/components/timeline';
 import CreditDetails from 'web-components/lib/components/credits/CreditDetails';
 import LandManagementActions from 'web-components/lib/components/sliders/LandManagementActions';
 import ProjectMedia from 'web-components/lib/components/sliders/ProjectMedia';
-import Map from 'web-components/lib/components/map';
 import BuyFooter from 'web-components/lib/components/fixed-footer/BuyFooter';
 import MrvTabs from 'web-components/lib/components/tabs';
 import Table from 'web-components/lib/components/table';
@@ -316,7 +315,7 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
         imageStorageBaseUrl={imageStorageBaseUrl}
         apiServerUrl={apiServerUrl}
       />
-      <ProjectTop project={project} projectDefault={projectDefault} />
+      <ProjectTop project={project} projectDefault={projectDefault} geojson={geojson} isGISFile={isGISFile} />
       <ProjectImpact impact={project.impact} />
 
       {/* {protectedSpecies.length > 0 && (
@@ -409,12 +408,6 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
           ))}
         </div>
       </div>
-
-      {geojson && isGISFile ? (
-        <Map geojson={geojson} token={process.env.REACT_APP_MAPBOX_TOKEN} />
-      ) : (
-        <img className={classes.map} alt={project.name} src={mapFile} />
-      )}
 
       {data &&
         data.projectByHandle &&

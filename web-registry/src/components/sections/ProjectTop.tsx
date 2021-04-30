@@ -20,6 +20,8 @@ import ReadMore from 'web-components/lib/components/read-more/ReadMoreExp';
 interface ProjectTopProps {
   project: Project;
   projectDefault: ProjectDefault;
+  geojson?: any;
+  isGISFile?: Boolean;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -108,7 +110,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   story: {
     [theme.breakpoints.up('sm')]: {
-      paddingTop: theme.spacing(17),
+      paddingTop: theme.spacing(14),
       paddingBottom: theme.spacing(7.5),
     },
     [theme.breakpoints.down('xs')]: {
@@ -199,7 +201,12 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function ProjectTop({ project, projectDefault }: ProjectTopProps): JSX.Element {
+export default function ProjectTop({
+  project,
+  projectDefault,
+  geojson,
+  isGISFile,
+}: ProjectTopProps): JSX.Element {
   const classes = useStyles();
 
   const videos: Media | Media[] | undefined = project.media.filter(item => item.type === 'video');
@@ -257,6 +264,8 @@ export default function ProjectTop({ project, projectDefault }: ProjectTopProps)
                   text={project.glanceText}
                   imageStorageBaseUrl={imageStorageBaseUrl}
                   apiServerUrl={apiServerUrl}
+                  geojson={geojson}
+                  isGISFile={isGISFile}
                 />
               </div>
             </LazyLoad>

@@ -4,22 +4,25 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Card from './Card';
 import Title from '../title';
+import StaticMap from '../map/StaticMap';
 import Image, { OptimizeImageProps } from '../image';
 
 interface GlanceCardProps extends OptimizeImageProps {
   title?: string;
   text: string[];
   imgSrc: string;
+  geojson?: any;
+  isGISFile?: Boolean;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
   title: {
     textTransform: 'uppercase',
     [theme.breakpoints.up('sm')]: {
-      marginTop: theme.spacing(5.25),
+      // marginTop: theme.spacing(5.25),
     },
     [theme.breakpoints.down('xs')]: {
-      marginTop: theme.spacing(2),
+      // marginTop: theme.spacing(2),
       fontSize: theme.spacing(3.5),
     },
     marginBottom: theme.spacing(2.75),
@@ -93,6 +96,9 @@ const useStyles = makeStyles((theme: Theme) => ({
       border: 'none',
     },
   },
+  mapWrapper: {
+    height: 200, //todo
+  },
 }));
 
 export default function GlanceCard({
@@ -101,6 +107,8 @@ export default function GlanceCard({
   imgSrc,
   imageStorageBaseUrl,
   apiServerUrl,
+  geojson,
+  isGISFile,
 }: GlanceCardProps): JSX.Element {
   const classes = useStyles({});
 
@@ -108,13 +116,19 @@ export default function GlanceCard({
     <Card className={classes.root}>
       <Grid className={classes.container} container>
         <Grid xs={12} sm={5} item>
-          <Image
-            className={classes.image}
-            src={imgSrc}
-            alt={imgSrc}
-            imageStorageBaseUrl={imageStorageBaseUrl}
-            apiServerUrl={apiServerUrl}
-          />
+          <div className={classes.mapWrapper}>
+            {geojson && isGISFile ? (
+              <StaticMap geojson={geojson} token={process.env.REACT_APP_MAPBOX_TOKEN} />
+            ) : (
+              <Image
+                className={classes.image}
+                src={imgSrc}
+                alt={imgSrc}
+                imageStorageBaseUrl={imageStorageBaseUrl}
+                apiServerUrl={apiServerUrl}
+              />
+            )}
+          </div>
         </Grid>
         <Grid xs={12} sm={7} item className={classes.textContainer}>
           <Title variant="h6" className={classes.title}>

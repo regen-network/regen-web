@@ -18,7 +18,8 @@ interface StyleProps {
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   root: {
-    height: '100%',
+    height: 441, //TODO
+    width: 367, //TODO
   },
   background: props => ({
     backgroundImage: `url(${props.imgSrc})`,

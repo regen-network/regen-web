@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   title: {
     [theme.breakpoints.up('sm')]: {
-      paddingBottom: theme.spacing(15),
+      paddingBottom: theme.spacing(7.5),
     },
     [theme.breakpoints.down('xs')]: {
       textAlign: 'left',
@@ -62,11 +62,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     '& div': {
       marginLeft: theme.spacing(2.5),
-    },
-  },
-  slider: {
-    [theme.breakpoints.up('sm')]: {
-      marginLeft: theme.spacing(-2.5),
     },
   },
 }));
@@ -119,7 +114,7 @@ export default function ProjectImpact({ impacts }: ProjectImpactProps): JSX.Elem
         }
       >
         <LazyLoad offset={300}>
-          <Slider {...settings} ref={slider} className={classes.slider}>
+          <Slider {...settings} ref={slider}>
             {impacts.map(({ name, description, imgSrc, monitored }: Impact, index: number) => (
               <div className={classes.item} key={index}>
                 <ProjectImpactCard

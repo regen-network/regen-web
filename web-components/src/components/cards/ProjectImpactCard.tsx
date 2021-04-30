@@ -18,8 +18,14 @@ interface StyleProps {
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   root: {
-    height: 441, //TODO
-    width: 367, //TODO
+    [theme.breakpoints.up('sm')]: {
+      height: 441, //TODO
+      width: 367, //TODO
+    },
+    [theme.breakpoints.down('xs')]: {
+      height: 404, //TODO
+      width: 292, //TODO
+    },
   },
   background: props => ({
     backgroundImage: `url(${props.imgSrc})`,
@@ -29,7 +35,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     textAlign: 'center',
     position: 'relative',
     [theme.breakpoints.up('sm')]: {
-      height: theme.spacing(81),
+      height: theme.spacing(59),
     },
     [theme.breakpoints.down('xs')]: {
       height: theme.spacing(50),
@@ -39,26 +45,20 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     color: theme.palette.primary.main,
     position: 'absolute',
     [theme.breakpoints.up('sm')]: {
-      left: theme.spacing(7),
-      bottom: theme.spacing(8),
-    },
-    [theme.breakpoints.down('xs')]: {
       left: theme.spacing(5),
       bottom: theme.spacing(6),
+    },
+    [theme.breakpoints.down('xs')]: {
+      left: theme.spacing(4),
+      bottom: theme.spacing(5),
     },
   },
   text: {
     [theme.breakpoints.up('sm')]: {
-      paddingTop: theme.spacing(7),
-      paddingLeft: theme.spacing(7),
-      paddingRight: theme.spacing(7),
-      paddingBottom: theme.spacing(9),
+      padding: theme.spacing(5),
     },
     [theme.breakpoints.down('xs')]: {
-      paddingTop: theme.spacing(5),
-      paddingLeft: theme.spacing(5),
-      paddingRight: theme.spacing(5),
-      paddingBottom: theme.spacing(6),
+      padding: theme.spacing(4),
     },
   },
   tag: {
@@ -81,9 +81,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     },
   },
   description: {
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(4.5),
-    },
+    fontSize: theme.typography.pxToRem(14),
   },
 }));
 
@@ -99,7 +97,7 @@ export default function ProjectImpactCard({
     <Card className={classes.root}>
       <div className={classes.background}>
         <div className={classes.tag}>{monitored ? 'primary impact' : 'co-benefit'}</div>
-        <Title variant="h3" className={classes.title}>
+        <Title variant="h4" className={classes.title}>
           {name}
         </Title>
       </div>

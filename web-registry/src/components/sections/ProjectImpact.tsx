@@ -32,7 +32,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingBottom: theme.spacing(7.5),
     },
     [theme.breakpoints.down('xs')]: {
-      textAlign: 'left',
       paddingBottom: theme.spacing(10),
     },
   },
@@ -71,7 +70,8 @@ export default function ProjectImpact({ impacts }: ProjectImpactProps): JSX.Elem
   const theme: Theme = useTheme();
   const imageStorageBaseUrl = process.env.REACT_APP_IMAGE_STORAGE_BASE_URL;
   const apiServerUrl = process.env.REACT_APP_API_URI;
-  const slides: number = useMediaQuery(theme.breakpoints.up('sm')) ? 3 : 1;
+  const isMobile: boolean = useMediaQuery(theme.breakpoints.down('xs'));
+  const slides: number = isMobile ? 1 : 3;
 
   const settings = {
     speed: 500,
@@ -104,7 +104,7 @@ export default function ProjectImpact({ impacts }: ProjectImpactProps): JSX.Elem
         titleAlign="left"
         topRight={
           <>
-            {impacts.length > slides && (
+            {!isMobile && impacts.length > slides && (
               <Grid container justify="flex-end" className={classes.buttons}>
                 <PrevNextButton direction="prev" onClick={slickPrev} />
                 <PrevNextButton direction="next" onClick={slickNext} />

@@ -316,7 +316,7 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
         apiServerUrl={apiServerUrl}
       />
       <ProjectTop project={project} projectDefault={projectDefault} geojson={geojson} isGISFile={isGISFile} />
-      <ProjectImpact impact={project.impact} />
+      <ProjectImpact impacts={project.impact} />
 
       {/* {protectedSpecies.length > 0 && (
         <div

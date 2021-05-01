@@ -42,8 +42,8 @@ const headCells: HeadCell[] = [
 
 const useStyles = makeStyles((theme: Theme) => ({
   tableContainer: {
-    paddingTop: theme.spacing(5),
-    paddingBottom: theme.spacing(10),
+    paddingTop: theme.spacing(2),
+    paddingBottom: theme.spacing(7),
   },
   headerCell: {
     fontFamily: theme.typography.h1.fontFamily,
@@ -55,6 +55,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     backgroundColor: 'transparent',
     borderBottom: `1px solid ${theme.palette.grey[100]}`,
     lineHeight: '1.25rem',
+    whiteSpace: 'nowrap',
+    '&:first-of-type': {
+      paddingLeft: theme.spacing(6),
+    },
   },
   row: {
     color: theme.palette.info.dark,
@@ -70,6 +74,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     '&:nth-child(even)': {
       backgroundColor: '#FAFAFA',
     },
+    '& .MuiTableCell-body': {
+      padding: theme.spacing(4, 4),
+    },
   },
   rowClickable: {
     cursor: 'pointer',
@@ -77,7 +84,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   cell: {
     border: 'none',
     [theme.breakpoints.up('sm')]: {
-      lineHeight: '40px',
+      lineHeight: theme.spacing(5.75),
     },
   },
   nameCell: {
@@ -86,7 +93,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   name: {
     display: 'flex',
     alignItems: 'center',
-    lineHeight: theme.spacing(5.75),
+    paddingLeft: theme.spacing(3),
   },
   icon: {
     [theme.breakpoints.up('sm')]: {
@@ -217,7 +224,7 @@ export default function RegenTable({ rows, canClickRow = false }: RegenTableProp
                   <TableCell className={classes.cell} align="left">
                     {getFormattedDate(row.date, options)}
                   </TableCell>
-                  <TableCell className={clsx(classes.cell, classes.documentCell)} align="left">
+                  <TableCell className={clsx(classes.cell, classes.documentCell)} align="right">
                     <a href={row.url} target="_blank" rel="noopener noreferrer" className={classes.link}>
                       <OutlinedButton startIcon={<EyeIcon />} className={classes.viewBtn}>
                         view document

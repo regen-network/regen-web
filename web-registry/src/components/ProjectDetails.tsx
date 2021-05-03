@@ -5,6 +5,7 @@ import { useLocation } from 'react-router-dom';
 import { loader } from 'graphql.macro';
 import { useQuery } from '@apollo/client';
 import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
+import clsx from 'clsx';
 
 import { setPageView } from '../lib/ga';
 import { useLedger, ContextType } from '../ledger';
@@ -219,6 +220,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   creditDetails: {
     borderTop: `1px solid ${theme.palette.grey[100]}`,
   },
+  tableBorder: {
+    border: `2px solid ${theme.palette.secondary.dark}`,
+    borderBottomLeftRadius: 5,
+    borderBottomRightRadius: 5,
+  },
 }));
 
 interface ProjectProps {
@@ -350,26 +356,12 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
         </div>
       )} */}
 
-      {!project.hideCreditDetails && (
+      {!project.hideCreditDetails && project.documents.length > 0 && (
         <div className={classes.creditDetails}>
-          <div className={`${classes.projectDetails} ${classes.projectContent}`}>
-            {project.documents.length > 0 ? (
-              <MrvTabs
-                tabs={[
-                  {
-                    label: 'Overview',
-                    children: creditDetails,
-                  },
-                  {
-                    label: 'Documentation',
-                    children: <Table rows={project.documents} />,
-                  },
-                ]}
-                background={background}
-              />
-            ) : (
-              creditDetails
-            )}
+          <div className={clsx(classes.projectDetails, classes.projectContent)}>
+            <div className={classes.tableBorder}>
+              <Table rows={project.documents} />
+            </div>
           </div>
         </div>
       )}

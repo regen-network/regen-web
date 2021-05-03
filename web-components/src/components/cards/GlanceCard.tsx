@@ -29,7 +29,8 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   container: {
     [theme.breakpoints.down('xs')]: {
-      padding: theme.spacing(4.5),
+      flexWrap: 'wrap-reverse',
+      padding: theme.spacing(6, 4.5),
     },
     [theme.breakpoints.up('sm')]: {
       flexWrap: 'nowrap',
@@ -41,7 +42,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     margin: 0,
     paddingInlineStart: theme.spacing(2),
     listStyle: 'none',
-    // marginTop: theme.spacing(4.5),
   },
   text: {
     paddingBottom: theme.spacing(1.5),

@@ -30,7 +30,12 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginLeft: theme.spacing(4),
   },
   buttonLabel: {
-    fontSize: theme.typography.pxToRem(18),
+    [theme.breakpoints.up('sm')]: {
+      fontSize: theme.typography.pxToRem(18),
+    },
+    [theme.breakpoints.down('xs')]: {
+      fontSize: theme.typography.pxToRem(14),
+    },
   },
 }));
 

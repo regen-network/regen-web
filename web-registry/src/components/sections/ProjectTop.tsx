@@ -196,8 +196,13 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   creditClassLink: {
     marginTop: theme.spacing(4),
-    fontSize: theme.typography.pxToRem(16),
     fontWeight: 700,
+    [theme.breakpoints.up('sm')]: {
+      fontSize: theme.typography.pxToRem(16),
+    },
+    [theme.breakpoints.down('xs')]: {
+      fontSize: theme.typography.pxToRem(14),
+    },
   },
 }));
 

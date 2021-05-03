@@ -1,12 +1,12 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import { makeStyles, Theme } from '@material-ui/core';
-import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Img from 'gatsby-image';
 import ReactHtmlParser from 'react-html-parser';
 
 import Title from 'web-components/lib/components/title';
+import Description from 'web-components/lib/components/description';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -89,7 +89,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const CarbonplusSection = () => {
+const CarbonplusSection = (): JSX.Element => {
   const data = useStaticQuery(graphql`
     query {
       cow: file(relativePath: { eq: "cow.png" }) {
@@ -127,9 +127,7 @@ const CarbonplusSection = () => {
           <Title className={classes.header} variant="h3">
             {ReactHtmlParser(content.header)}
           </Title>
-          <Typography className={classes.description} variant="body2">
-            {ReactHtmlParser(content.description)}
-          </Typography>
+          <Description className={classes.description}>{ReactHtmlParser(content.description)}</Description>
           <ContainedButton className={classes.button} href={content.linkUrl}>
             {content.linkText}
           </ContainedButton>

@@ -40,24 +40,25 @@ async function loadDataset(jsonLd: string): Promise<DatasetExt> {
 
 // validate validates the data in dataStr as JSON-LD string
 // using the SHACL graph in shapesStr.
-export async function validate(shapesStr: string, dataStr: string): Promise<ValidationReport> {
+export async function validate(shapesStr: string, dataStr: string, group?: string): Promise<ValidationReport> {
   const shapes = await loadDataset(shapesStr);
   const data = await loadDataset(dataStr);
 
-  const validator = new SHACLValidator(shapes, { factory });
+  // @ts-ignore
+  const validator = new SHACLValidator(shapes, { factory, group }); 
   const report = await validator.validate(data);
 
-  // console.log(report);
-  // for (const result of report.results) {
-  //   // See https://www.w3.org/TR/shacl/#results-validation-result for details
-  //   // about each property
-  //   console.log(result.message);
-  //   console.log(result.path);
-  //   console.log(result.focusNode);
-  //   console.log(result.severity);
-  //   console.log(result.sourceConstraintComponent);
-  //   console.log(result.sourceShape);
-  // }
+  console.log(report);
+  for (const result of report.results) {
+    // See https://www.w3.org/TR/shacl/#results-validation-result for details
+    // about each property
+    console.log(result.message);
+    console.log(result.path);
+    console.log(result.focusNode);
+    console.log(result.severity);
+    console.log(result.sourceConstraintComponent);
+    console.log(result.sourceShape);
+  }
 
   return report;
 }

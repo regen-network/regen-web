@@ -4,6 +4,12 @@ categories:
     buttonText: read article
     showPlay: false
     items:
+      - title: Regen Network Sells Out $10.5M Round, Launches Regen Ledger
+        author: Bankless Times
+        url: https://www.banklesstimes.com/2021/04/16/regen-network-sells-out-10-5m-round-launches-regen-ledger/
+        date: April 16, 2021
+        image: ../../static/media/rocket-launch-67643_1920-1-768x514.jpeg
+        isMainnet: true
       - image: ../../static/media/mainnet-launch-5-.png
         title: Regen Network Community Update
         author: Gregory Landua

@@ -133,7 +133,9 @@ export default function ResourcesCard({
           </Typography>
         )}
         {description && (
-          <Typography className={classes.description}>{ReactHtmlParser(description)}</Typography>
+          <Typography className={classes.description} component="div">
+            {ReactHtmlParser(description)}
+          </Typography>
         )}
       </div>
       <div className={classes.buttonWrapper}>

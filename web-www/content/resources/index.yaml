@@ -5,47 +5,67 @@ topSection:
     outs of how the Regen Ledger and Regen Registry function.
 registrySection:
   header: Regen Registry
-  cards:
-    - image: ../../static/media/resources-registry-guide.jpg
-      title: Program Guide
-      updated: October 21, 2020
-      description: The standard that defines the requirements for project
-        registration, credit issuance and MRV processes.
-      buttonText: View Guide
-      link: https://regen-registry.s3.amazonaws.com/Regen+Registry+Program+Guide.pdf
-    - image: ../../static/media/resources-grasslands-credit-class.jpg
-      title: md//Carbon<i>Plus</i> Grasslands Credit Class
-      updated: October 16, 2020
-      description: md//The standard that defines the specific requirements for the
-        Carbon<i>Plus</i> Grasslands credit.
-      buttonText: View Credit Class
-      link: https://regen-registry.s3.amazonaws.com/GHG+and+Co-Benefits+in+Grazing+Systems+Credit+Class.pdf
-    - image: ../../static/media/methodology-ghg.jpg
-      title: md//Carbon<i>Plus</i> Grasslands Methodology
-      updated: March 5, 2021
-      description: md//The methodology that defines how GHG and co-benefits are
-        monitored for the Carbon<i>Plus</i> Grasslands credit.
-      buttonText: View Methodology
-      link: https://regen-registry.s3.amazonaws.com/Methodology+for+GHG+and+Co-Benefits+in+Grazing+Systems.pdf
-    - image: ../../static/media/resources-project-developers.png
-      title: Project Developers 101
-      updated: October 16, 2020
-      description: A brief guide to how project developers can list projects on Regen
-        Registry.
-      buttonText: View Guide
-      link: https://regen-registry.s3.amazonaws.com/Regen+Registry+Project+Developers+101.pdf
-    - image: ../../static/media/resources-developer-templates-image.jpg
-      title: Project Developer Templates
-      updated: September 15, 2020
-      description: Get started here with Carbon<i>Plus</i> Grasslands.
-      buttonText: View Templates
-      link: https://drive.google.com/drive/folders/12FLwfhT50WkYv6CymXiwZpCW1HtoMq9A?usp=sharing
-    - image: ../../static/media/resources-soil-sampling.jpg
-      title: Soil Sampling Guide
-      link: https://regen-registry.s3.amazonaws.com/Soil+Sampling+Guide.pdf
-      buttonText: View Guide
-      updated: March 5, 2021
-      description: Learn about our guidelines for collecting soil samples.
+  documentTableTitle: Templates
+  documents:
+    - name: "Project page information template.xls"
+      type: Marketing
+      date: 'March 15, 2020'
+      url: 'https://docs.google.com/spreadsheets/d/1SmMC7d0o_-6iNrqK20dYgOrbgud0t0Oj'
+    - name: "Regen Registry Animal Welfare Template.docx"
+      type: Monitoring
+      date: 'February 10, 2020'
+      url: 'https://docs.google.com/document/d/14sclYGJnOOqg0YiFtyBej_vkmwQ_nnLf'
+    - name: "Regen Registry Monitoring Information Template.docx"
+      type: Monitoring
+      date: 'February 10, 2020'
+      url: 'https://docs.google.com/document/d/1s_iGd-g2NPD0aie6vwom3C0qQCglVHJk'
+    - name: "Project Plan.docx"
+      type: Project Plan
+      date: 'February 10, 2020'
+      url: 'https://docs.google.com/document/d/12CEicMcNiS_e2Kv7j-AEc7ock0ZJ34Ap'
+    - name: "Regen Registry Soil Health Template.docx"
+      type: Monitoring
+      date: 'February 10, 2020'
+      url: 'https://docs.google.com/document/d/1JjIlRXxNxJXZwxWmq4_i2avxWjgi8P9s'
+  subsections:
+    - title: Land Steward Resources
+      cards:
+        - image: ../../static/media/resources-project-developers.png
+          title: Project Developers 101
+          updated: October 16, 2020
+          description: A brief guide to how project developers can list projects on Regen
+            Registry.
+          buttonText: View Guide
+          link: https://regen-registry.s3.amazonaws.com/Regen+Registry+Project+Developers+101.pdf
+        - image: ../../static/media/resources-soil-sampling.jpg
+          title: Soil Sampling Guide
+          link: https://regen-registry.s3.amazonaws.com/Soil+Sampling+Guide.pdf
+          buttonText: View Guide
+          updated: March 5, 2021
+          description: Learn about our guidelines for collecting soil samples.
+    - title: About The Program
+      cards:
+        - image: ../../static/media/resources-registry-guide.jpg
+          title: Program Guide
+          updated: October 21, 2020
+          description: The standard that defines the requirements for project
+            registration, credit issuance and MRV processes.
+          buttonText: View Guide
+          link: https://regen-registry.s3.amazonaws.com/Regen+Registry+Program+Guide.pdf
+        - image: ../../static/media/resources-grasslands-credit-class.jpg
+          title: md//Carbon<i>Plus</i> Grasslands Credit Class
+          updated: October 16, 2020
+          description: md//The standard that defines the specific requirements for the
+            Carbon<i>Plus</i> Grasslands credit.
+          buttonText: View Credit Class
+          link: https://regen-registry.s3.amazonaws.com/GHG+and+Co-Benefits+in+Grazing+Systems+Credit+Class.pdf
+        - image: ../../static/media/methodology-ghg.jpg
+          title: md//Carbon<i>Plus</i> Grasslands Methodology
+          updated: March 5, 2021
+          description: md//The methodology that defines how GHG and co-benefits are
+            monitored for the Carbon<i>Plus</i> Grasslands credit.
+          buttonText: View Methodology
+          link: https://regen-registry.s3.amazonaws.com/Methodology+for+GHG+and+Co-Benefits+in+Grazing+Systems.pdf
 ledgerSection:
   header: Regen Ledger and more
   cards:

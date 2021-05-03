@@ -194,17 +194,32 @@ collections:
             collapsed: false
             fields:
               - {label: Header, name: header, widget: string}
-              - label: "Cards"
-                name: cards
+              - label: "Document Templates"
+                name: documents
                 widget: list
                 collapsed: false
                 fields:
-                  - {label: Image, name: image, widget: image}
-                  - {label: Title, name: title, widget: string}
-                  - {label: Updated, name: updated, widget: string}
-                  - {label: Description, name: description, widget: text, required: false}
-                  - {label: ButtonText, name: buttonText, widget: string}
-                  - {label: Link, name: link, widget: string}
+                  - {label: "Document Name", name: name, widget: string}
+                  - {label: "Document Type", name: type, widget: string}
+                  - {label: "Upload date", name: date, widget: string}
+                  - {label: "Document URL", name: url, widget: string}
+              - label: "Subsections"
+                name: subsections
+                widget: list
+                collapsed: false
+                fields:
+                  - {label: "Subsection title", name: title, widget: string}
+                  - label: "Cards"
+                    name: cards
+                    widget: list
+                    collapsed: false
+                    fields:
+                      - {label: Image, name: image, widget: image}
+                      - {label: Title, name: title, widget: string}
+                      - {label: Updated, name: updated, widget: string}
+                      - {label: Description, name: description, widget: text, required: false}
+                      - {label: ButtonText, name: buttonText, widget: string}
+                      - {label: Link, name: link, widget: string}
           - label: "Ledger Section"
             name: "ledgerSection"
             widget: "object"

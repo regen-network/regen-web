@@ -15,11 +15,12 @@ featuredSection:
 blogSection:
   header: Regen Network Blog
   posts:
-    - header: Can Crypto Currencies Help the Planet?
-      description: Yes – by changing wealth distribution, reversing inequalities and
-        countering ecological degradation
-      image: ../../static/media/sheep-scaled.jpeg
-      url: https://news.globallandscapesforum.org/50857/can-cryptocurrencies-help-the-planet/
+    - header: Regen Network Sells Out $10.5M Round, Launches Regen Ledger
+      description: "Regen Network Development, Inc (RND) has announced the
+        much-anticipated mainnet launch of Regen Ledger, a Proof-of-Stake (PoS)
+        blockchain focused on ecological data, assets, and agreements. "
+      image: ../../static/media/rocket-launch-67643_1920-1-768x514.jpeg
+      url: https://www.banklesstimes.com/2021/04/16/regen-network-sells-out-10-5m-round-launches-regen-ledger/
     - header: Regen Community Update
       description: Pre-Mainnet Launch Update
       image: ../../static/media/mainnet-launch-5-.png

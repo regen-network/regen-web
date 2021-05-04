@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { validate } from './rdf';
 
 describe('validate', () => {
@@ -181,7 +180,11 @@ describe('validate', () => {
     expect(report1.conforms).toEqual(false);
     expect(report1.results.length).toEqual(1);
 
-    const report2 = await validate(JSON.stringify(shapes), JSON.stringify(data), 'http://regen.network/ProjectPlanBasicInfoGroup');
+    const report2 = await validate(
+      JSON.stringify(shapes),
+      JSON.stringify(data),
+      'http://regen.network/ProjectPlanBasicInfoGroup',
+    );
     expect(report2.conforms).toEqual(true);
   });
 });

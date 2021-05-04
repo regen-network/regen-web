@@ -3,10 +3,8 @@ import { BrowserRouter, Switch, Route, useParams, useLocation, Redirect, RoutePr
 import { useTheme } from '@material-ui/core/styles';
 import { useAuth0, OAuthError, withAuthenticationRequired } from '@auth0/auth0-react';
 
-import { validate } from './lib/rdf';
 import { createBrowserHistory } from 'history';
 import isAdmin from './lib/admin';
-import ex from './lib/ex';
 import { init as initGA } from './lib/ga';
 
 import './App.css';
@@ -256,64 +254,6 @@ const App: React.FC = (props): JSX.Element => {
 
   useEffect(() => {
     initGA();
-    const test = JSON.stringify(ex);
-    // console.log(test)
-    validate(
-      test,
-      `{
-    "@context": {
-       "qudt" : "http://qudt.org/1.1/schema/qudt#",
-       "schema": "http://schema.org/",
-       "regen": "http://regen.network/",
-       "qudt_unit": "http://qudt.org/1.1/vocab/unit#",
-       "xsd": "http://www.w3.org/2001/XMLSchema#"
-    },
-
-    "@type": "regen:ProjectPlan",
-    "schema:name": "Awesome Project",
-    "regen:hasOtherGHGPrograms": false,
-"qudt:unit": 
-      [{
-        "@id": "http://qudt.org/1.1/vocab/unit#HA"
-      }]
-    ,
-    "regen:size": {
-
-      "qudt:numericValue": [
-      {
-        "@value": "400",
-        "@type": "xsd:double"
-      }
-    ],
-    "qudt:unit": [
-      {
-        "@value": "ok",
-        "@type": "qudt_unit:HA"
-      }
-    ]
-      
-    
-       
-},
-    "http://regen.network/expectedLeakage": {
-"http://regen.network/expectedLeakageValue": "Above De Minimis",
-"http://regen.network/explanation": "Above De Minimis"
-    },
-
-"http://regen.network/regenerativePractices": {"@list":
-[
- {"http://regen.network/regenerativePracticeName": {"@id": "http://regen.network/RotationalGrazing"}}, {"http://regen.network/regenerativePracticeName": "named"},
-{"http://regen.network/regenerativePracticeName": "namedd"}
-]},
-
-    "address": {
-        "@id": "http://example.org/ns#BobsAddress",
-        "streetAddress": "1600 Amphitheatre Pkway",
-        "postalCode": 9404
-    }
-}`,
-      'http://regen.network/ProjectPlanBasicInfoGroup',
-    );
   });
 
   if (isLoading) {

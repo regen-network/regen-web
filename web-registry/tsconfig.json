@@ -17,6 +17,6 @@
     "noEmit": true
   },
   "include": [
-    "src"
+    "src", "types/react-app-env.d.ts", "types/rdf-validate-shacl/index.d.ts", "types/url-search-params-polyfill.d.ts"
   ]
 }

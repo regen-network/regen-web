@@ -14,21 +14,24 @@ import DocumentIcon from '../icons/DocumentIcon';
 import EyeIcon from '../icons/EyeIcon';
 import OutlinedButton from '../buttons/OutlinedButton';
 import { getFormattedDate } from '../../utils/format';
+import ContainedButton from '../buttons/ContainedButton';
+import ShieldIcon from '../icons/ShieldIcon';
 
-export interface Data {
+export interface Document {
   name: string;
   type: string;
   date: string | Date;
   url: string;
+  // ledgerData?: boolean;
 }
 
 interface RegenTableProps {
-  rows: Data[];
+  rows: Document[];
   canClickRow?: boolean;
 }
 
 interface HeadCell {
-  id: keyof Data;
+  id: keyof Document;
   label: string;
   numeric: boolean;
 }
@@ -37,6 +40,7 @@ const headCells: HeadCell[] = [
   { id: 'name', numeric: false, label: 'Name of document' },
   { id: 'type', numeric: true, label: 'Document type' },
   { id: 'date', numeric: true, label: 'Date of upload' },
+  // { id: 'ledgerData', numeric: true, label: '(ledgerData)' },
   { id: 'url', numeric: true, label: '' },
 ];
 
@@ -117,7 +121,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   documentCell: {
     minWidth: theme.spacing(60),
   },
-  viewBtn: {
+  button: {
     [theme.breakpoints.up('sm')]: {
       fontSize: 'inherit',
     },
@@ -125,18 +129,21 @@ const useStyles = makeStyles((theme: Theme) => ({
       fontSize: theme.spacing(2.75),
     },
   },
+  ledgerBtn: {
+    padding: theme.spacing(2, 4),
+  },
 }));
 
 interface EnhancedTableProps {
   classes: ReturnType<typeof useStyles>;
-  onRequestSort: (event: React.MouseEvent<unknown>, property: keyof Data) => void;
+  onRequestSort: (event: React.MouseEvent<unknown>, property: keyof Document) => void;
   order: Order;
   orderBy: string;
 }
 
 function EnhancedTableHead(props: EnhancedTableProps): JSX.Element {
   const { classes, order, orderBy, onRequestSort } = props;
-  const createSortHandler = (property: keyof Data) => (event: React.MouseEvent<unknown>) => {
+  const createSortHandler = (property: keyof Document) => (event: React.MouseEvent<unknown>) => {
     onRequestSort(event, property);
   };
 
@@ -174,7 +181,7 @@ export default function RegenTable({ rows, canClickRow = false }: RegenTableProp
   const classes = useStyles({});
 
   const [order, setOrder] = useState<Order>('asc');
-  const [orderBy, setOrderBy] = useState<keyof Data>('name');
+  const [orderBy, setOrderBy] = useState<keyof Document>('name');
 
   function handleClickNavigate(url: string): void {
     if (canClickRow) {
@@ -182,7 +189,7 @@ export default function RegenTable({ rows, canClickRow = false }: RegenTableProp
     }
   }
 
-  const handleRequestSort = (event: React.MouseEvent<unknown>, property: keyof Data): void => {
+  const handleRequestSort = (event: React.MouseEvent<unknown>, property: keyof Document): void => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
     setOrderBy(property);
@@ -222,11 +229,22 @@ export default function RegenTable({ rows, canClickRow = false }: RegenTableProp
                     {row.type}
                   </TableCell>
                   <TableCell className={classes.cell} align="left">
-                    {getFormattedDate(row.date, options)}
+                    {typeof row.date === 'string' && getFormattedDate(row.date, options)}
+                  </TableCell>
+                  <TableCell className={clsx(classes.cell, classes.documentCell)} align="right">
+                    {/* {row.ledgerData && ( */}
+                    <ContainedButton
+                      className={clsx(classes.button, classes.ledgerBtn)}
+                      // onClick={() => setLedgerModalOpen(true)}
+                      startIcon={<ShieldIcon />}
+                    >
+                      view on ledger
+                    </ContainedButton>
+                    {/* )} */}
                   </TableCell>
                   <TableCell className={clsx(classes.cell, classes.documentCell)} align="right">
                     <a href={row.url} target="_blank" rel="noopener noreferrer" className={classes.link}>
-                      <OutlinedButton startIcon={<EyeIcon />} className={classes.viewBtn}>
+                      <OutlinedButton startIcon={<EyeIcon />} className={classes.button}>
                         view document
                       </OutlinedButton>
                     </a>

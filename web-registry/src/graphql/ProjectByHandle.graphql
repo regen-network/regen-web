@@ -84,6 +84,29 @@ query ProjectByHandle($handle: String!) {
         type
         date
         url
+        eventByEventId {
+          date
+          summary
+          description
+          creditVintageByEventId {
+            id
+            createdAt
+            startDate
+            endDate
+            initialDistribution
+            units
+            certificateLink
+            txHash
+            walletByIssuerId {
+              addr
+              partiesByWalletId(first: 1) {
+                nodes {
+                  ...partyFields
+                }
+              }
+            }
+          }
+        }
       }
     }
   }

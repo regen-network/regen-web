@@ -2,14 +2,14 @@ import { IssuanceModalData } from 'web-components/lib/components/modal/IssuanceM
 import { Party } from 'web-components/lib/components/party/PartyAddress';
 import { DocumentInfo } from 'web-components/lib/components/document';
 import { getFormattedPeriod } from 'web-components/lib/utils/format';
-import { Data } from 'web-components/lib/components/table';
+import { Document } from 'web-components/lib/components/table';
 
 // buildIssuanceModalData builds some IssuanceModalData to provide
 // to a Timeline Event based on some optional credit vintage data.
 // TODO get generated type for creditVintage and project from graphql schema.
 export function buildIssuanceModalData(
   project: any,
-  documents: Data[], // TODO use db data once MRV designed (for monitoring docs)
+  documents: Document[], // TODO use db data once MRV designed (for monitoring docs)
   creditVintage?: any,
 ): IssuanceModalData | null {
   if (creditVintage) {

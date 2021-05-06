@@ -150,7 +150,7 @@ coreSection:
         planet.
       name: Emily Rogers
       title: "Marketing Coordinator "
-      linkedUrl: https://www.linkedin.com/in/emily-rogers-5011706b/
+      linkedUrl: https://www.linkedin.com/in/emily-rogers-she-her-5011706b/
       image: ../../static/media/emily-rogers.png
     - title: Senior Ecological Economist
       name: "James Pittman "
@@ -261,6 +261,16 @@ coreSection:
       name: Rebecca Harman
       linkedUrl: https://www.linkedin.com/in/rebecca-harman-9691593b/
       image: ../../static/media/screen-shot-2021-03-31-at-9.33.31-am.png
+    - image: ../../static/media/ryan-christofferson.png
+      name: Ryan Christoffersen
+      title: Developer Relations
+      description: Ryan is a self-taught software developer with an educational
+        background in language studies, literature, and filmmaking. Ryan has
+        experience building tools for decentralized governance on Ethereum as
+        well as infrastructure for Polkadot. He values open-source software and
+        decentralization and he is deeply committed to ecological regeneration.
+      twitterUrl: https://twitter.com/ryanchrypto
+      githubUrl: https://github.com/ryanchrypto
 contributorSection:
   title: Contributors
   contributors:

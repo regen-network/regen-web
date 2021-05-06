@@ -78,5 +78,13 @@ query ProjectByHandle($handle: String!) {
     partyByLandOwnerId {
       ...partyFields
     }
+    documentsByProjectId {
+      nodes {
+        name
+        type
+        date
+        url
+      }
+    }
   }
 }

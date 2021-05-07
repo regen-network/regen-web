@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { makeStyles, Theme, useTheme } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
 import ReactHtmlParser from 'react-html-parser';
+import clsx from 'clsx';
 
 import ArrowDownIcon from '../icons/ArrowDownIcon';
 import { truncate, Texts } from '../read-more/truncate';
@@ -11,9 +11,18 @@ export interface ActionProps {
   name: string;
   description: string;
   imgSrc: string;
+  className?: string;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
+  root: {
+    display: 'flex',
+    flexDirection: 'column',
+    [theme.breakpoints.down('xs')]: {
+      width: theme.spacing(74.5),
+      marginRight: theme.spacing(4),
+    },
+  },
   image: {
     width: '100%',
     borderRadius: '5px',
@@ -34,6 +43,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   description: {
     fontSize: theme.spacing(3.5),
     color: theme.palette.info.dark,
+    width: 'inherit',
     '& a': {
       color: theme.palette.secondary.main,
       fontWeight: 'bold',
@@ -44,6 +54,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   readMore: {
+    width: theme.spacing(24),
     fontSize: theme.spacing(3),
     color: theme.palette.secondary.main,
     fontFamily: theme.typography.h1.fontFamily,
@@ -51,10 +62,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     textTransform: 'uppercase',
     letterSpacing: '1px',
     cursor: 'pointer',
-    position: 'relative',
+    marginLeft: theme.spacing(3),
   },
   icon: {
-    position: 'absolute',
     top: theme.spacing(0.75),
     height: theme.spacing(2.5),
     width: theme.spacing(2.5),
@@ -62,7 +72,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function Action({ name, description, imgSrc }: ActionProps): JSX.Element {
+export default function Action({ name, description, imgSrc, className }: ActionProps): JSX.Element {
   const classes = useStyles({});
   const theme = useTheme();
 
@@ -75,14 +85,13 @@ export default function Action({ name, description, imgSrc }: ActionProps): JSX.
   };
 
   return (
-    <Grid container direction="column">
+    <div className={clsx(classes.root, className)}>
       <img className={classes.image} src={imgSrc} alt={name} />
       <Typography className={classes.name}>{name}</Typography>
       <Typography className={classes.description}>
         {ReactHtmlParser(desc)}
         {texts.rest.length !== 0 && (
           <span className={classes.readMore} onClick={handleChange}>
-            {' '}
             read {expanded ? 'less' : 'more'}
             {expanded ? (
               <ArrowDownIcon className={classes.icon} direction="up" color={theme.palette.secondary.main} />
@@ -92,6 +101,6 @@ export default function Action({ name, description, imgSrc }: ActionProps): JSX.
           </span>
         )}
       </Typography>
-    </Grid>
+    </div>
   );
 }

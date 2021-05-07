@@ -9,6 +9,7 @@ import { truncate, Texts } from './truncate';
 import { FontSizes } from '../../theme/sizing';
 
 interface ReadMoreProps {
+  className?: string;
   children: string;
   maxLength?: number;
   restMinLength?: number;
@@ -17,6 +18,7 @@ interface ReadMoreProps {
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     marginBottom: theme.spacing(7),
+    width: 'inherit',
   },
   textContainer: {
     paddingTop: theme.spacing(4),
@@ -39,7 +41,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const ReadMore: React.FC<ReadMoreProps> = ({ maxLength = 700, restMinLength = 300, children }) => {
+const ReadMore: React.FC<ReadMoreProps> = ({ className, maxLength = 700, restMinLength = 300, children }) => {
   const classes = useStyles({});
   const theme = useTheme();
 
@@ -72,13 +74,13 @@ const ReadMore: React.FC<ReadMoreProps> = ({ maxLength = 700, restMinLength = 30
       <div className={classes.textContainer}>
         <Description fontSize={fontSize}>
           {texts.truncated}
-          {!expanded && <ReadButton />}
+          {texts.rest && !expanded && <ReadButton />}
         </Description>
         <Fade in={expanded} unmountOnExit>
           <Description fontSize={fontSize}>
             {!texts.rest.startsWith('\n') && '\n'}
             {texts.rest}
-            {expanded && <ReadButton />}
+            {texts.rest && expanded && <ReadButton />}
           </Description>
         </Fade>
       </div>

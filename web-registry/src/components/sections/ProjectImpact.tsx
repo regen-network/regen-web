@@ -65,7 +65,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   swipe: {
-    // TODO: may prefer slider
     display: 'flex',
     overflow: 'scroll',
     '&::-webkit-scrollbar': {

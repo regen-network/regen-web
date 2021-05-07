@@ -404,40 +404,19 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
         </div>
       )}
 
-      <div className={`project-background`}>
-        <div
-          className={`${classes.projectTopContent} ${classes.projectDetails} ${classes.projectActions} ${classes.projectContent}`}
-        >
-          <Title variant="h3">
-            {project.fieldsOverride && project.fieldsOverride.landManagementActions
-              ? project.fieldsOverride.landManagementActions.title
-              : projectDefault.landManagementActions.title}
-          </Title>
-          {landManagementActions.map((actionsType, i) => (
-            <div key={i} className={i > 0 ? classes.projectActionsGroup : ''}>
-              <Description
-                fontSize={
-                  landManagementActions.length > 1 ? { xs: '0.95rem', sm: '1.125rem' } : getFontSize('medium')
-                }
-              >
-                {actionsType.title || projectDefault.landManagementActions.subtitle}
-              </Description>
-              <LandManagementActions actions={actionsType.actions} />
-              {/*<div className={`${classes.projectGrid} ${classes.projectActionsGrid}`}>
-                  {actionsType.actions.map((action, j) => (
-                    <Grid item xs={12} sm={4} className={classes.projectGridItem} key={`${j}-${action.name}`}>
-                      <Action
-                        name={action.name}
-                        description={action.description}
-                        imgSrc={require(`../assets/${action.imgSrc}`)}
-                      />
-                    </Grid>
-                  ))
-                </div>*/}
-            </div>
-          ))}
+      {landManagementActions.map((actionsType, i) => (
+        <div key={i} className={i > 0 ? classes.projectActionsGroup : ''}>
+          <LandManagementActions
+            actions={actionsType.actions}
+            title={
+              project.fieldsOverride && project.fieldsOverride.landManagementActions
+                ? project.fieldsOverride.landManagementActions.title
+                : projectDefault.landManagementActions.title
+            }
+            subtitle={actionsType.title || projectDefault.landManagementActions.subtitle}
+          />
         </div>
-      </div>
+      ))}
 
       {data &&
         data.projectByHandle &&

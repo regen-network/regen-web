@@ -14,8 +14,7 @@ import ProjectPlaceInfo from 'web-components/lib/components/place/ProjectPlaceIn
 import GlanceCard from 'web-components/lib/components/cards/GlanceCard';
 import Description from 'web-components/lib/components/description';
 import ProjectTopCard from 'web-components/lib/components/cards/ProjectTopCard';
-// import ReadMore from 'web-components/lib/components/read-more';
-import ReadMore from 'web-components/lib/components/read-more/ReadMoreExp';
+import ReadMore from 'web-components/lib/components/read-more';
 
 interface ProjectTopProps {
   project: Project;

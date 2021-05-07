@@ -18,14 +18,10 @@ interface GlanceCardProps extends OptimizeImageProps {
 const useStyles = makeStyles((theme: Theme) => ({
   title: {
     textTransform: 'uppercase',
-    [theme.breakpoints.up('sm')]: {
-      // marginTop: theme.spacing(5.25),
-    },
+    marginBottom: theme.spacing(2.75),
     [theme.breakpoints.down('xs')]: {
-      // marginTop: theme.spacing(2),
       fontSize: theme.spacing(3.5),
     },
-    marginBottom: theme.spacing(2.75),
   },
   container: {
     [theme.breakpoints.down('xs')]: {

@@ -355,11 +355,35 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
         </div>
       )} */}
 
-      {!project.hideCreditDetails && project.documents.length > 0 && (
+      {!project.hideCreditDetails && data?.projectByHandle?.documentsByProjectId?.nodes?.length > 0 && (
         <div className={classes.creditDetails}>
           <div className={clsx(classes.projectDetails, classes.projectContent)}>
             <div className={classes.tableBorder}>
-              <Table rows={project.documents} />
+              <Table
+                // rows={data.documents}
+                rows={data.projectByHandle.documentsByProjectId.nodes.map(
+                  (node: {
+                    // TODO use generated types from graphql schema
+                    date: string;
+                    type: string;
+                    name?: string;
+                    url?: string;
+                    // creditVintageByEventId?: any;
+                    eventByEventId?: any; //todo
+                  }) => ({
+                    modalData: buildIssuanceModalData(
+                      data.projectByHandle,
+                      data.projectByHandle.documentsByProjectId.nodes,
+                      node.eventByEventId?.creditVintageByEventId,
+                    ),
+                    date: getFormattedDate(node.date, { year: 'numeric', month: 'long', day: 'numeric' }),
+                    name: node.name,
+                    type: node.type,
+                    url: node.url,
+                    creditVintageId: node.eventByEventId?.creditVintageByEventId.id,
+                  }),
+                )}
+              />
             </div>
           </div>
         </div>
@@ -423,7 +447,8 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
                   }) => ({
                     modalData: buildIssuanceModalData(
                       data.projectByHandle,
-                      project.documents,
+                      // project.documents,
+                      [],
                       node.creditVintageByEventId,
                     ),
                     date: getFormattedDate(node.date, { year: 'numeric', month: 'long', day: 'numeric' }),

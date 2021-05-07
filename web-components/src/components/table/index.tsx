@@ -17,21 +17,25 @@ import { getFormattedDate } from '../../utils/format';
 import ContainedButton from '../buttons/ContainedButton';
 import ShieldIcon from '../icons/ShieldIcon';
 
-export interface Document {
+interface DocumentRowData {
   name: string;
   type: string;
   date: string | Date;
   url: string;
-  // ledgerData?: boolean;
+  creditVintageId: string;
+}
+
+export interface Document extends DocumentRowData {
+  eventByEventId?: any;
 }
 
 interface RegenTableProps {
-  rows: Document[];
+  rows: DocumentRowData[];
   canClickRow?: boolean;
 }
 
 interface HeadCell {
-  id: keyof Document;
+  id: keyof DocumentRowData;
   label: string;
   numeric: boolean;
 }
@@ -40,7 +44,7 @@ const headCells: HeadCell[] = [
   { id: 'name', numeric: false, label: 'Name of document' },
   { id: 'type', numeric: true, label: 'Document type' },
   { id: 'date', numeric: true, label: 'Date of upload' },
-  // { id: 'ledgerData', numeric: true, label: '(ledgerData)' },
+  { id: 'creditVintageId', numeric: true, label: '' },
   { id: 'url', numeric: true, label: '' },
 ];
 
@@ -136,14 +140,14 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 interface EnhancedTableProps {
   classes: ReturnType<typeof useStyles>;
-  onRequestSort: (event: React.MouseEvent<unknown>, property: keyof Document) => void;
+  onRequestSort: (event: React.MouseEvent<unknown>, property: keyof DocumentRowData) => void;
   order: Order;
   orderBy: string;
 }
 
 function EnhancedTableHead(props: EnhancedTableProps): JSX.Element {
   const { classes, order, orderBy, onRequestSort } = props;
-  const createSortHandler = (property: keyof Document) => (event: React.MouseEvent<unknown>) => {
+  const createSortHandler = (property: keyof DocumentRowData) => (event: React.MouseEvent<unknown>) => {
     onRequestSort(event, property);
   };
 
@@ -181,7 +185,7 @@ export default function RegenTable({ rows, canClickRow = false }: RegenTableProp
   const classes = useStyles({});
 
   const [order, setOrder] = useState<Order>('asc');
-  const [orderBy, setOrderBy] = useState<keyof Document>('name');
+  const [orderBy, setOrderBy] = useState<keyof DocumentRowData>('name');
 
   function handleClickNavigate(url: string): void {
     if (canClickRow) {
@@ -189,7 +193,7 @@ export default function RegenTable({ rows, canClickRow = false }: RegenTableProp
     }
   }
 
-  const handleRequestSort = (event: React.MouseEvent<unknown>, property: keyof Document): void => {
+  const handleRequestSort = (event: React.MouseEvent<unknown>, property: keyof DocumentRowData): void => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
     setOrderBy(property);
@@ -221,7 +225,7 @@ export default function RegenTable({ rows, canClickRow = false }: RegenTableProp
                 >
                   <TableCell className={clsx(classes.cell, classes.nameCell)} id={labelId} scope="row">
                     <div className={classes.name}>
-                      <DocumentIcon className={classes.icon} fileType={row.name.split('.').pop()} />{' '}
+                      <DocumentIcon className={classes.icon} fileType={row?.name?.split('.')?.pop()} />{' '}
                       {row.name}
                     </div>
                   </TableCell>
@@ -232,15 +236,15 @@ export default function RegenTable({ rows, canClickRow = false }: RegenTableProp
                     {typeof row.date === 'string' && getFormattedDate(row.date, options)}
                   </TableCell>
                   <TableCell className={clsx(classes.cell, classes.documentCell)} align="right">
-                    {/* {row.ledgerData && ( */}
-                    <ContainedButton
-                      className={clsx(classes.button, classes.ledgerBtn)}
-                      // onClick={() => setLedgerModalOpen(true)}
-                      startIcon={<ShieldIcon />}
-                    >
-                      view on ledger
-                    </ContainedButton>
-                    {/* )} */}
+                    {row.creditVintageId && (
+                      <ContainedButton
+                        className={clsx(classes.button, classes.ledgerBtn)}
+                        // onClick={() => setLedgerModalOpen(row.creditVintageId)}
+                        startIcon={<ShieldIcon />}
+                      >
+                        view on ledger
+                      </ContainedButton>
+                    )}
                   </TableCell>
                   <TableCell className={clsx(classes.cell, classes.documentCell)} align="right">
                     <a href={row.url} target="_blank" rel="noopener noreferrer" className={classes.link}>

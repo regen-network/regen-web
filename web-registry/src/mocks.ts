@@ -49,7 +49,7 @@ export interface Project {
   creditPrice?: CreditPrice;
   presaleUrl?: string;
   hideCreditDetails?: boolean;
-  documents: Document[];
+  // documents: Document[];
   stripePrice?: string;
   tagline?: string;
   quote?: {

@@ -26,12 +26,13 @@ interface DocumentRowData {
 }
 
 export interface Document extends DocumentRowData {
-  eventByEventId?: any;
+  creditVintage?: any;
 }
 
 interface RegenTableProps {
-  rows: DocumentRowData[];
+  rows: Document[];
   canClickRow?: boolean;
+  onViewOnLedger: (creditVintage: any) => void;
 }
 
 interface HeadCell {
@@ -181,7 +182,11 @@ function EnhancedTableHead(props: EnhancedTableProps): JSX.Element {
   );
 }
 
-export default function RegenTable({ rows, canClickRow = false }: RegenTableProps): JSX.Element {
+export default function RegenTable({
+  rows,
+  canClickRow = false,
+  onViewOnLedger,
+}: RegenTableProps): JSX.Element {
   const classes = useStyles({});
 
   const [order, setOrder] = useState<Order>('asc');
@@ -236,10 +241,10 @@ export default function RegenTable({ rows, canClickRow = false }: RegenTableProp
                     {typeof row.date === 'string' && getFormattedDate(row.date, options)}
                   </TableCell>
                   <TableCell className={clsx(classes.cell, classes.documentCell)} align="right">
-                    {row.creditVintageId && (
+                    {row.creditVintage && (
                       <ContainedButton
                         className={clsx(classes.button, classes.ledgerBtn)}
-                        // onClick={() => setLedgerModalOpen(row.creditVintageId)}
+                        onClick={() => onViewOnLedger(row.creditVintage)}
                         startIcon={<ShieldIcon />}
                       >
                         view on ledger

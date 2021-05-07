@@ -4,7 +4,6 @@ import { ItemProps as ProtectedSpeciesItem } from 'web-components/lib/components
 import { Media } from 'web-components/lib/components/sliders/ProjectMedia';
 import { ActionProps } from 'web-components/lib/components/action';
 import { CreditPrice } from 'web-components/lib/components/fixed-footer/BuyFooter';
-import { Document } from 'web-components/lib/components/table';
 import { CreditClass } from 'web-components/lib/components/credits/CreditDetails';
 import { SDG } from 'web-components/lib/components/cards/ProjectTopCard';
 import { ProjectImpactCardProps as Impact } from 'web-components/lib/components/cards/ProjectImpactCard';
@@ -49,7 +48,6 @@ export interface Project {
   creditPrice?: CreditPrice;
   presaleUrl?: string;
   hideCreditDetails?: boolean;
-  // documents: Document[];
   stripePrice?: string;
   tagline?: string;
   quote?: {

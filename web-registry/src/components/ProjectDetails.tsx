@@ -33,6 +33,7 @@ import SEO from 'web-components/lib/components/seo';
 import FixedFooter from 'web-components/lib/components/fixed-footer';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import EmailIcon from 'web-components/lib/components/icons/EmailIcon';
+import IssuanceModal from 'web-components/lib/components/modal/IssuanceModal';
 
 import { getImgSrc } from '../lib/imgSrc';
 import getApiUri from '../lib/apiUri';
@@ -287,6 +288,18 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
     setOpen(false);
   };
 
+  const [issuanceData, setIssuanceData] = useState<any | null>(null);
+
+  const viewOnLedger = (creditVintage: any): void => {
+    const issuanceData = buildIssuanceModalData(
+      data.projectByHandle,
+      data.projectByHandle.documentsByProjectId.nodes,
+      creditVintage,
+    );
+
+    setIssuanceData(issuanceData);
+  };
+
   // Credits Details and MRV table
   const creditDetails: JSX.Element = (
     <CreditDetails
@@ -360,7 +373,7 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
           <div className={clsx(classes.projectDetails, classes.projectContent)}>
             <div className={classes.tableBorder}>
               <Table
-                // rows={data.documents}
+                onViewOnLedger={viewOnLedger}
                 rows={data.projectByHandle.documentsByProjectId.nodes.map(
                   (node: {
                     // TODO use generated types from graphql schema
@@ -368,22 +381,24 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
                     type: string;
                     name?: string;
                     url?: string;
-                    // creditVintageByEventId?: any;
                     eventByEventId?: any; //todo
                   }) => ({
-                    modalData: buildIssuanceModalData(
-                      data.projectByHandle,
-                      data.projectByHandle.documentsByProjectId.nodes,
-                      node.eventByEventId?.creditVintageByEventId,
-                    ),
-                    date: getFormattedDate(node.date, { year: 'numeric', month: 'long', day: 'numeric' }),
+                    date: node.date,
                     name: node.name,
                     type: node.type,
                     url: node.url,
-                    creditVintageId: node.eventByEventId?.creditVintageByEventId.id,
+                    creditVintage: node.eventByEventId?.creditVintageByEventId,
                   }),
                 )}
               />
+              {issuanceData && (
+                <IssuanceModal
+                  txClient={txClient}
+                  open={!!issuanceData}
+                  onClose={() => setIssuanceData(null)}
+                  {...issuanceData}
+                />
+              )}
             </div>
           </div>
         </div>
@@ -447,8 +462,7 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
                   }) => ({
                     modalData: buildIssuanceModalData(
                       data.projectByHandle,
-                      // project.documents,
-                      [],
+                      data.projectByHandle.documentsByProjectId.nodes,
                       node.creditVintageByEventId,
                     ),
                     date: getFormattedDate(node.date, { year: 'numeric', month: 'long', day: 'numeric' }),

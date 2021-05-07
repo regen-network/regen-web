@@ -66,7 +66,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   swipe: {
     display: 'flex',
     overflowX: 'auto',
-    minHeight: 460,
+    minHeight: theme.spacing(115),
     '&::-webkit-scrollbar': {
       display: 'none',
     },

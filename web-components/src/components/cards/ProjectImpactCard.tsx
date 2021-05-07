@@ -19,12 +19,12 @@ interface StyleProps {
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   root: {
     [theme.breakpoints.up('sm')]: {
-      height: 441, //TODO
-      width: 367, //TODO
+      height: theme.spacing(97.75), // TODO: temporary shorter height until extra content is added. Should be theme.spacing(110.25)
+      width: theme.spacing(91.75),
     },
     [theme.breakpoints.down('xs')]: {
-      height: 404, //TODO
-      width: 292, //TODO
+      height: theme.spacing(86.25), // TODO: temporary shorter height until extra content is added. Should be theme.spacing(101)
+      width: theme.spacing(73),
     },
   },
   background: props => ({

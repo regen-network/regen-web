@@ -9,18 +9,17 @@ import clsx from 'clsx';
 
 import { setPageView } from '../lib/ga';
 import { useLedger, ContextType } from '../ledger';
-import background from '../assets/background.jpg';
 import { Project, ProjectDefault, ActionGroup } from '../mocks';
 import ProjectTop from './sections/ProjectTop';
 import ProjectImpact from './sections/ProjectImpact';
 import MoreProjects from './sections/MoreProjects';
+import { getImgSrc } from '../lib/imgSrc';
+import getApiUri from '../lib/apiUri';
+import { buildIssuanceModalData } from '../lib/transform';
 
-import { getFontSize } from 'web-components/lib/theme/sizing';
 import { getFormattedDate } from 'web-components/lib/utils/format';
 import Title from 'web-components/lib/components/title';
-import Description from 'web-components/lib/components/description';
 import Timeline from 'web-components/lib/components/timeline';
-import CreditDetails from 'web-components/lib/components/credits/CreditDetails';
 import LandManagementActions from 'web-components/lib/components/sliders/LandManagementActions';
 import ProjectMedia from 'web-components/lib/components/sliders/ProjectMedia';
 import BuyFooter from 'web-components/lib/components/fixed-footer/BuyFooter';
@@ -34,10 +33,6 @@ import FixedFooter from 'web-components/lib/components/fixed-footer';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import EmailIcon from 'web-components/lib/components/icons/EmailIcon';
 import IssuanceModal from 'web-components/lib/components/modal/IssuanceModal';
-
-import { getImgSrc } from '../lib/imgSrc';
-import getApiUri from '../lib/apiUri';
-import { buildIssuanceModalData } from '../lib/transform';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -300,20 +295,6 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
     setIssuanceData(issuanceData);
   };
 
-  // Credits Details and MRV table
-  const creditDetails: JSX.Element = (
-    <CreditDetails
-      creditClass={project.creditClass}
-      activities={project.keyOutcomesActivities}
-      background={background}
-      title={
-        project.fieldsOverride && project.fieldsOverride.keyOutcomesActivities
-          ? project.fieldsOverride.keyOutcomesActivities.title
-          : projectDefault.keyOutcomesActivities.title
-      }
-    />
-  );
-
   const siteMetadata = {
     title: `Regen Network Registry`,
     description: `Learn about Regen Network's ${project.creditClass.name} credits sourced from ${project
@@ -368,7 +349,7 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
         </div>
       )} */}
 
-      {!project.hideCreditDetails && data?.projectByHandle?.documentsByProjectId?.nodes?.length > 0 && (
+      {data?.projectByHandle?.documentsByProjectId?.nodes?.length > 0 && (
         <div className={classes.creditDetails}>
           <div className={clsx(classes.projectDetails, classes.projectContent)}>
             <div className={classes.tableBorder}>
@@ -376,12 +357,11 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
                 onViewOnLedger={viewOnLedger}
                 rows={data.projectByHandle.documentsByProjectId.nodes.map(
                   (node: {
-                    // TODO use generated types from graphql schema
                     date: string;
                     type: string;
                     name?: string;
                     url?: string;
-                    eventByEventId?: any; //todo
+                    eventByEventId?: any;
                   }) => ({
                     date: node.date,
                     name: node.name,

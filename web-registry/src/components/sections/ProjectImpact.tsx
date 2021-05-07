@@ -50,10 +50,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       marginRight: theme.spacing(3.75),
     },
   },
-  background: {
-    backgroundImage: `url(${require('../../assets/project-impact-bg.png')})`,
-    backgroundSize: 'cover',
-  },
   buttons: {
     paddingTop: theme.spacing(0.25),
     [theme.breakpoints.down('xs')]: {
@@ -103,8 +99,20 @@ export default function ProjectImpact({ impacts }: ProjectImpactProps): JSX.Elem
     }
   }, [slider]);
 
+  const Impacts = (): JSX.Element[] =>
+    impacts.map(({ name, description, imgSrc, monitored }: Impact, index: number) => (
+      <div className={classes.item} key={index}>
+        <ProjectImpactCard
+          name={name}
+          description={description}
+          imgSrc={getOptimizedImageSrc(imgSrc, imageStorageBaseUrl, apiServerUrl)}
+          monitored={monitored}
+        />
+      </div>
+    ));
+
   return (
-    <div className={classes.background}>
+    <div className={`project-background`}>
       <Section
         className={classes.section}
         title="Impact"
@@ -124,32 +132,10 @@ export default function ProjectImpact({ impacts }: ProjectImpactProps): JSX.Elem
       >
         <LazyLoad offset={300}>
           {isMobile ? (
-            <div className={classes.swipe}>
-              {impacts.map(({ name, description, imgSrc, monitored }: Impact, index: number) => (
-                <div className={classes.item} key={index}>
-                  <ProjectImpactCard
-                    name={name}
-                    description={description}
-                    imgSrc={getOptimizedImageSrc(imgSrc, imageStorageBaseUrl, apiServerUrl)}
-                    monitored={monitored}
-                  />
-                </div>
-              ))
-              // TODO: DRY if keeping this approach
-              }
-            </div>
+            <div className={classes.swipe}>{Impacts()}</div>
           ) : (
             <Slider {...settings} ref={slider}>
-              {impacts.map(({ name, description, imgSrc, monitored }: Impact, index: number) => (
-                <div className={classes.item} key={index}>
-                  <ProjectImpactCard
-                    name={name}
-                    description={description}
-                    imgSrc={getOptimizedImageSrc(imgSrc, imageStorageBaseUrl, apiServerUrl)}
-                    monitored={monitored}
-                  />
-                </div>
-              ))}
+              {Impacts()}
             </Slider>
           )}
         </LazyLoad>

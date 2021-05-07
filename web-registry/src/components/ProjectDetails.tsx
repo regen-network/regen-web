@@ -422,7 +422,7 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
         data.projectByHandle &&
         data.projectByHandle.eventsByProjectId &&
         data.projectByHandle.eventsByProjectId.nodes.length > 0 && (
-          <div className={classes.timelineContainer}>
+          <div className={clsx(classes.timelineContainer, 'project-background')}>
             <div className={`${classes.projectDetails} ${classes.projectTimeline} ${classes.projectContent}`}>
               <Title className={classes.timelineTitle} variant="h3">
                 {project.fieldsOverride && project.fieldsOverride.timeline

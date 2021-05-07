@@ -17,11 +17,6 @@ export interface LandManagementActionsProps {
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
-  root: {
-    [theme.breakpoints.up('sm')]: {
-      marginLeft: theme.spacing(-2.5),
-    },
-  },
   section: {
     [theme.breakpoints.up('sm')]: {
       paddingTop: theme.spacing(21.5),
@@ -38,6 +33,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     [theme.breakpoints.down('xs')]: {
       paddingBottom: theme.spacing(2),
+    },
+  },
+  slider: {
+    [theme.breakpoints.up('sm')]: {
+      marginLeft: theme.spacing(-2.5),
     },
   },
   item: {
@@ -105,6 +105,17 @@ export default function LandManagementActions({
     }
   }, [slider]);
 
+  const Actions = (): JSX.Element[] =>
+    actions.map(action => (
+      <Action
+        key={action.name}
+        className={classes.item}
+        name={action.name}
+        description={action.description}
+        imgSrc={action.imgSrc}
+      />
+    ));
+
   return (
     <Section
       className={classes.section}
@@ -125,28 +136,10 @@ export default function LandManagementActions({
     >
       <Description className={classes.description}>{subtitle}</Description>
       {isMobile ? (
-        <div className={classes.swipe}>
-          {actions.map(action => (
-            <Action
-              key={action.name}
-              className={classes.item}
-              name={action.name}
-              description={action.description}
-              imgSrc={action.imgSrc}
-            />
-          ))}
-        </div>
+        <div className={classes.swipe}>{Actions()}</div>
       ) : (
-        <Slider {...settings} ref={slider} className={classes.root}>
-          {actions.map(action => (
-            <Action
-              key={action.name}
-              className={classes.item}
-              name={action.name}
-              description={action.description}
-              imgSrc={action.imgSrc}
-            />
-          ))}
+        <Slider {...settings} ref={slider} className={classes.slider}>
+          {Actions()}
         </Slider>
       )}
     </Section>

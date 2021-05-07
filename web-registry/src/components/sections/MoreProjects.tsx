@@ -7,7 +7,6 @@ import Section from 'web-components/lib/components/section';
 import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
 import Theme from 'web-components/lib/theme/muiTheme';
 import { Project } from '../../mocks';
-import background from '../../assets/more-projects-bg.jpg';
 import getRegistryUrl from '../../lib/registryUrl';
 import LazyLoad from 'react-lazyload';
 
@@ -18,8 +17,6 @@ interface MoreProjectsProps {
 const useStyles = makeStyles((theme: typeof Theme) => ({
   background: {
     paddingBottom: theme.spacing(20),
-    backgroundImage: `url("${background}")`,
-    backgroundRepeat: 'no-repeat',
   },
   grid: {
     paddingTop: theme.spacing(8.75),

@@ -111,7 +111,7 @@ const Toggle: React.FC<ToggleProps> = ({
         <FormControlLabel
           control={
             type === 'checkbox' ? (
-              <Checkbox className={classes.checkbox} field={field} form={form} meta={meta} />
+              <Checkbox className={classes.checkbox} field={field} form={form} meta={meta} type="checkbox" />
             ) : (
               <Radio className={classes.radio} />
             )

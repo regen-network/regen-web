@@ -21,6 +21,7 @@ The website for the [Regen Network](https://regen.network) decentralized infrast
 ## Installation
 
 This project uses [lerna](https://github.com/lerna/lerna) with [yarn workspaces](https://classic.yarnpkg.com/en/docs/workspaces/) to manage multiple packages:
+
 - `web-registry`: Registry React application
 - `web-components`: React components and [material-ui](https://material-ui.com/) custom theme
 - `web-storybook`: [Storybook](https://storybook.js.org/) config
@@ -57,11 +58,13 @@ yarn watch
 It will watch for changes in `web-components` and rebuild them in `web-components/lib` directory.
 
 Then, to run the registry app:
+
 ```sh
 yarn start
 ```
 
 Then, to run the website (Gatsby):
+
 ```sh
 yarn start-www
 ```
@@ -81,13 +84,25 @@ yarn start-auth
 ## Deployment
 
 ### Registry
+
 Compile `web-components` and `web-registry` to `web-components/lib` and `web-registry/build` respectively:
 
 ```sh
 yarn build
 ```
 
+#### GraphQL Type generation
+
+To generate Type definitions from our GraphQL Schema, as well as custom react hooks, make sure the graphQL server is running locally, `cd` into `/web-registry` and run:
+
+```sh
+yarn graphql:generate-types
+```
+
+This should be done anytime a `.graphql` file is created or modified.
+
 ### Storybook
+
 Compile `web-components` and `web-storybook` to `web-components/lib` and `web-storybook/build` respectively:
 
 ```sh
@@ -95,7 +110,9 @@ yarn build-storybook
 ```
 
 ### Website
+
 Compile `web-components` and `web-www` to `web-components/lib` and `web-www/public` respectively:
+
 ```sh
 yarn build-www
 ```
@@ -103,6 +120,7 @@ yarn build-www
 ### Deploying the Custom Login form to Auth0
 
 Please, follow [these instructions](web-auth/README.md#setup) and then:
+
 1. Run `yarn build-auth` command.
 2. Copy the code from `./build/index.html`.
 3. Paste it into the Universal Login HTML form from [Auth dashboard](https://manage.auth0.com/dashboard/us/regen-network-registry/login_page) and save.
@@ -120,6 +138,7 @@ Launches the test runner in the interactive watch mode.
 
 We're using [StoryShots](https://storybook.js.org/docs/testing/structural-testing/#using-storyshots) for snapshots testing.
 Update web-components snapshots:
+
 ```sh
 yarn test-update-snapshot
 ```

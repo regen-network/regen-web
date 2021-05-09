@@ -1,4 +1,4 @@
-{
+query AllCreditVintages {
   allCreditVintages {
     nodes {
       id

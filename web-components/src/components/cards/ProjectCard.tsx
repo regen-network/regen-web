@@ -73,7 +73,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   mediaCard: {
     [theme.breakpoints.down('sm')]: {
       width: theme.spacing(73),
-      height: theme.spacing(101.5),
     },
   },
   separator: {

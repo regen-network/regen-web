@@ -4,7 +4,7 @@ import { ItemProps as ProtectedSpeciesItem } from 'web-components/lib/components
 import { Media } from 'web-components/lib/components/sliders/ProjectMedia';
 import { ActionProps } from 'web-components/lib/components/action';
 import { CreditPrice } from 'web-components/lib/components/fixed-footer/BuyFooter';
-import { CreditClass } from 'web-components/lib/components/credits/CreditDetails';
+import { CreditClass, Methodology } from 'web-components/lib/components/credits/CreditDetails';
 import { SDG } from 'web-components/lib/components/cards/ProjectTopCard';
 import { ProjectImpactCardProps as Impact } from 'web-components/lib/components/cards/ProjectImpactCard';
 import mock from './mock.json';
@@ -39,6 +39,7 @@ export interface Project {
   landManagementActions: ActionGroup[];
   impact: Impact[];
   creditClass: CreditClass;
+  methodology: Methodology;
   protectedSpecies?: ProtectedSpeciesItem[];
   fieldsOverride?: ProjectOverride;
   credits?: {

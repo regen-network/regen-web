@@ -20,7 +20,7 @@ interface ProjectTopProps {
   project: Project;
   projectDefault: ProjectDefault;
   geojson?: any;
-  isGISFile?: Boolean;
+  isGISFile?: boolean;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -236,12 +236,12 @@ export default function ProjectTop({
                 </Title>
                 <Link
                   className={classes.creditClassLink}
-                  href="https://medium.com/regen-network"
+                  href={project.creditClass.pdfUrl}
                   rel="noopener noreferrer"
                   target="_blank"
                   color="secondary"
                 >
-                  Carbon<i>Plus</i>&nbsp;&nbsp;Grasslands
+                  {ReactHtmlParser(project.creditClass.name)}
                 </Link>
               </div>
               <div className={classes.creditClassDetail}>
@@ -250,12 +250,12 @@ export default function ProjectTop({
                 </Title>
                 <Link
                   className={classes.creditClassLink}
-                  href="https://medium.com/regen-network"
+                  href={project.methodology.pdfUrl}
                   rel="noopener noreferrer"
                   target="_blank"
                   color="secondary"
                 >
-                  Carbon<i>Plus</i>&nbsp;&nbsp;Grasslands
+                  {ReactHtmlParser(project.methodology.name)}
                 </Link>
               </div>
             </div>

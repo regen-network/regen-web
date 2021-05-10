@@ -1,16 +1,13 @@
 import React, { useState } from 'react';
 import bbox from '@turf/bbox';
 import { Marker, WebMercatorViewport, StaticMap } from 'react-map-gl';
+import { FeatureCollection } from 'geojson';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import PinIcon from '../icons/PinIcon';
 
-interface GeoJson {
-  features: any[];
-}
-
 interface MapProps {
-  geojson: GeoJson;
-  token: string | undefined;
+  geojson: FeatureCollection;
+  token?: string;
 }
 
 export default function Map({ geojson, token }: MapProps): JSX.Element {

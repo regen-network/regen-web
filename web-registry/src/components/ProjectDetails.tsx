@@ -314,7 +314,12 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
         imageStorageBaseUrl={imageStorageBaseUrl}
         apiServerUrl={apiServerUrl}
       />
-      <ProjectTop project={project} projectDefault={projectDefault} geojson={geojson} isGISFile={isGISFile} />
+      <ProjectTop
+        project={project}
+        projectDefault={projectDefault}
+        geojson={geojson}
+        isGISFile={isGISFile}
+      />
       <ProjectImpact impacts={project.impact} />
 
       {/* {protectedSpecies.length > 0 && (

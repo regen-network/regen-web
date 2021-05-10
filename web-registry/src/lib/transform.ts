@@ -9,7 +9,7 @@ import { Document } from 'web-components/lib/components/table';
 // TODO get generated type for creditVintage and project from graphql schema.
 export function buildIssuanceModalData(
   project: any,
-  documents: Document[], // TODO use db data once MRV designed (for monitoring docs)
+  documents: Document[],
   creditVintage?: any,
 ): IssuanceModalData | null {
   if (creditVintage) {

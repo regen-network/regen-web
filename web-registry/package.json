@@ -22,7 +22,7 @@
     "graphql": "^15.0.0",
     "graphql.macro": "^1.4.2",
     "rdf-ext": "^1.3.1",
-    "rdf-validate-shacl": "regen-network/rdf-validate-shacl#marie/455-group-filter",
+    "rdf-validate-shacl": "regen-network/rdf-validate-shacl#master",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-ga": "^3.1.2",

@@ -24477,9 +24477,9 @@ rdf-validate-datatype@^0.1.1:
     "@rdfjs/namespace" "^1.1.0"
     "@rdfjs/to-ntriples" "^1.0.2"
 
-rdf-validate-shacl@regen-network/rdf-validate-shacl#marie/455-group-filter:
+rdf-validate-shacl@regen-network/rdf-validate-shacl#master:
   version "0.3.1"
-  resolved "https://codeload.github.com/regen-network/rdf-validate-shacl/tar.gz/1633a40fdbbaff84ac9fe8ec751ecf2da05b0d13"
+  resolved "https://codeload.github.com/regen-network/rdf-validate-shacl/tar.gz/3b84eaa5dde62e93319cd778ac734b766e356663"
   dependencies:
     "@rdfjs/dataset" "^1.0.0"
     "@rdfjs/namespace" "^1.0.0"

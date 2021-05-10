@@ -6244,9 +6244,9 @@
   integrity sha512-2KfYa8mAnptRNeogxhQqkWNXqfYVWO04jQThtXKepySrIwYmz83+WlevQtA4VDLFe+kFd2TwgL29ekPe5XVUfA==
 
 "@rdfjs/term-set@^1.0.0":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@rdfjs/term-set/-/term-set-1.0.1.tgz#f753f37c495e85ab91e62ec93ab7c6adea4b507b"
-  integrity sha512-7+pSdm8R1nhSyP1xEqcQYFTARD/2iLr98tiAsSUfykCg0T0LrZ6j/3EEKmcKTWLMazMA9deRfmjPvzqMFwLBig==
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@rdfjs/term-set/-/term-set-1.0.2.tgz#f215b27ada58a7a8cce46af5caffa3b26642ef4b"
+  integrity sha512-t/R7nfiaPe4pZxeJpKl7x5TLMOTQiv8UzQ2WVmRxbSCeC1Pp9lWATuqmk2J9M+Wty40EkyoEFhf/AmPFeSFbug==
   dependencies:
     "@rdfjs/to-ntriples" "^1.0.2"
 
@@ -7147,13 +7147,6 @@
   resolved "https://registry.yarnpkg.com/@types/clientjs/-/clientjs-0.1.0.tgz#ca79f0ed0e2426fe0e74cca77a86d11309a0fcc2"
   integrity sha512-kTBRwtvsOcRoEMKXtozlfBZ3XtC5QJKGGqZJl5WOMc8SJCFswE74aYA3WtvUWFNLepPhvodGwEJzLVZ7SUnEqw==
 
-"@types/clownface@*":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@types/clownface/-/clownface-1.2.0.tgz#d64baf0697872b9b516d3e305bff9b483f6dad8a"
-  integrity sha512-DHEhy555Y7Lrxvkq73T5tbkwg0IdMQkQM7VgOi2FpK4f3sskV41RN2yDvQf4acfy4HJxy9wZXej6v9KaIm30og==
-  dependencies:
-    "@types/rdf-js" "*"
-
 "@types/color-name@^1.1.1":
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/@types/color-name/-/color-name-1.1.1.tgz#1c1261bbeaa10a8055bbc5d8ab84b7b2afc846a0"
@@ -7478,14 +7471,6 @@
   integrity sha512-S+28+3RoFI+3arls7dS813gYnhb2HiyLX+gs00rgIvCzHU93DaYajhx4tyT+XEO8SjtzZw90OF4OVdYXBwbvkQ==
   dependencies:
     "@types/node" "*"
-
-"@types/rdf-validate-shacl@^0.2.0":
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/@types/rdf-validate-shacl/-/rdf-validate-shacl-0.2.0.tgz#7b699d713d9895f7cc949a68d586789310ed37cc"
-  integrity sha512-uzCKiQ1G7uXhpLDA5TcNWLHEAN69ZsNoXK1PgDm5vdDqB42SOEALbXv8Lp8xgh0mLjE0hw50ZPy1D1E0c1c1ng==
-  dependencies:
-    "@types/clownface" "*"
-    "@types/rdf-js" "*"
 
 "@types/rdfjs__parser-jsonld@^1.2.3":
   version "1.2.3"
@@ -24492,10 +24477,9 @@ rdf-validate-datatype@^0.1.1:
     "@rdfjs/namespace" "^1.1.0"
     "@rdfjs/to-ntriples" "^1.0.2"
 
-rdf-validate-shacl@^0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/rdf-validate-shacl/-/rdf-validate-shacl-0.3.0.tgz#77cf9399ee42e3a9287ef03b082a7db638895cdb"
-  integrity sha512-t3Sfw9P9Sum5aeXYjdFptB8QXL3FYAFIVdCo3MUrCKxBlDX9rj6zHg8ceQsIsQXmm7hIKEg5UEvxHFTdoaai7g==
+rdf-validate-shacl@regen-network/rdf-validate-shacl#master:
+  version "0.3.1"
+  resolved "https://codeload.github.com/regen-network/rdf-validate-shacl/tar.gz/3b84eaa5dde62e93319cd778ac734b766e356663"
   dependencies:
     "@rdfjs/dataset" "^1.0.0"
     "@rdfjs/namespace" "^1.0.0"

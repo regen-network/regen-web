@@ -93,7 +93,7 @@ yarn build
 
 #### GraphQL Type generation
 
-To generate Type definitions from our GraphQL Schema, as well as custom react hooks, make sure the graphQL server is running locally, `cd` into `/web-registry` and run:
+To generate Type definitions from our GraphQL Schema, as well as custom react hooks, make sure the [graphQL server is running locally](https://github.com/regen-network/registry-server/blob/5adc07f89c0d4ee74d65779cfad591025c8bebc2/README.md#starting-a-development-server), `cd` into `/web-registry` and run:
 
 ```sh
 yarn graphql:generate-types

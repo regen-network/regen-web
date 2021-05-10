@@ -51,8 +51,16 @@ const headCells: HeadCell[] = [
 
 const useStyles = makeStyles((theme: Theme) => ({
   tableContainer: {
-    paddingTop: theme.spacing(2),
     paddingBottom: theme.spacing(7),
+    [theme.breakpoints.up('sm')]: {
+      maxHeight: theme.spacing(119.5),
+    },
+    [theme.breakpoints.down('xs')]: {
+      maxHeight: theme.spacing(88.5),
+    },
+    '&::-webkit-scrollbar': {
+      display: 'none',
+    },
   },
   headerCell: {
     fontFamily: theme.typography.h1.fontFamily,
@@ -61,7 +69,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     letterSpacing: '1px',
     fontSize: '0.75rem',
     color: theme.palette.primary.light,
-    backgroundColor: 'transparent',
     borderBottom: `1px solid ${theme.palette.grey[100]}`,
     lineHeight: '1.25rem',
     whiteSpace: 'nowrap',
@@ -81,7 +88,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       backgroundColor: theme.palette.primary.main,
     },
     '&:nth-child(even)': {
-      backgroundColor: '#FAFAFA',
+      backgroundColor: theme.palette.grey[50],
     },
     '& .MuiTableCell-body': {
       padding: theme.spacing(4, 4),
@@ -208,7 +215,7 @@ export default function RegenTable({
 
   return (
     <TableContainer className={classes.tableContainer}>
-      <Table aria-label="documentation table">
+      <Table aria-label="documentation table" stickyHeader>
         <EnhancedTableHead
           classes={classes}
           order={order}

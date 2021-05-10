@@ -61,56 +61,6 @@
   "projects": [
     {
       "id": "woodburn",
-      "documents": [
-        {
-          "name": "Project Plan",
-          "type": "Project Plan",
-          "date": "December 11, 2020",
-          "url": "https://regen-registry.s3.amazonaws.com/projects/woodburn/WOODBURN+Project+Plan.pdf"
-        },
-        {
-          "name": "Monitoring Report 2017 (Baseline)",
-          "type": "Monitoring",
-          "date": "December 14, 2020",
-          "url": "https://regen-registry.s3.amazonaws.com/projects/woodburn/Woodburn+Monitoring+Report+2017+(Baseline).pdf"
-        },
-        {
-          "name": "Monitoring Report 2018",
-          "type": "Monitoring",
-          "date": "December 14, 2020",
-          "url": "https://regen-registry.s3.amazonaws.com/projects/woodburn/Woodburn+Monitoring+Report+2018.pdf"
-        },
-        {
-          "name": "Monitoring Report 2019",
-          "type": "Monitoring",
-          "date": "December 14, 2020",
-          "url": "https://regen-registry.s3.amazonaws.com/projects/woodburn/Woodburn+Monitoring+Report+2019.pdf"
-        },
-        {
-          "name": "Monitoring Report 2020",
-          "type": "Monitoring",
-          "date": "December 14, 2020",
-          "url": "https://regen-registry.s3.amazonaws.com/projects/woodburn/Woodburn+Monitoring+Report+2020.pdf"
-        },
-        {
-          "name": "Verification Report 2017-2020",
-          "type": "Verification",
-          "date": "April 13, 2021",
-          "url": "https://regen-registry.s3.amazonaws.com/projects/woodburn/Verification+Report+2017-2020.pdf"
-        },
-        {
-          "name": "Soil Sampling Data",
-          "type": "Monitoring",
-          "date": "December 11, 2020",
-          "url": "https://regen-registry.s3.amazonaws.com/projects/woodburn/Woodburn+soil+data.xlsx"
-        },
-        {
-          "name": "Issuance Document",
-          "type": "Issuance",
-          "date": "December 16, 2020",
-          "url": "https://regen-registry.s3.amazonaws.com/projects/woodburn/woodburn-certificate-121620.pdf"
-        }
-      ],
       "name": "Woodburn",
       "fieldsOverride": {
         "nonMonitoredImpact": {
@@ -290,7 +240,6 @@
     },
     {
       "id": "wongella",
-      "documents": [],
       "name": "Wongella",
       "fieldsOverride": {
         "nonMonitoredImpact": {
@@ -461,56 +410,6 @@
     },
     {
       "id": "cavan-station",
-      "documents": [
-        {
-          "name": "Project Plan",
-          "type": "Project Plan",
-          "date": "March 16, 2021",
-          "url": "https://regen-registry.s3.amazonaws.com/projects/cavan-station/Cavan+Regen+Registry+Project+Plan.pdf"
-        },
-        {
-          "name": "Monitoring Report 2017 (Baseline)",
-          "type": "Monitoring",
-          "date": "February 18, 2021",
-          "url": "https://regen-registry.s3.amazonaws.com/projects/cavan-station/TheCavanStationProject_2017_CombinedBaseline.pdf"
-        },
-        {
-          "name": "Monitoring Report 2018",
-          "type": "Monitoring",
-          "date": "February 18, 2021",
-          "url": "https://regen-registry.s3.amazonaws.com/projects/cavan-station/TheCavanStation_2018_CombinedReport.pdf"
-        },
-        {
-          "name": "Monitoring Report 2019",
-          "type": "Monitoring",
-          "date": "February 18, 2021",
-          "url": "https://regen-registry.s3.amazonaws.com/projects/cavan-station/TheCavanStation_2019_CombinedReport.pdf"
-        },
-        {
-          "name": "Monitoring Report 2020",
-          "type": "Monitoring",
-          "date": "February 18, 2021",
-          "url": "https://regen-registry.s3.amazonaws.com/projects/cavan-station/TheCavanStation_2020_CombinedReport.pdf"
-        },
-        {
-          "name": "Issuance Document 2018",
-          "type": "Issuance",
-          "date": "March 8, 2021",
-          "url": "https://regen-registry.s3.amazonaws.com/projects/cavan-station/cavan-station-certificate-2018-030821.pdf"
-        },
-        {
-          "name": "Issuance Document 2020",
-          "type": "Issuance",
-          "date": "March 8, 2021",
-          "url": "https://regen-registry.s3.amazonaws.com/projects/cavan-station/cavan-station-certificate-2020-030821.pdf"
-        },
-        {
-          "name": "Verification Report 2017-2020",
-          "type": "Verification",
-          "date": "April 21, 2021",
-          "url": "https://regen-registry.s3.amazonaws.com/projects/cavan-station/Verification+Report+2017-2020.pdf"
-        }
-      ],
       "name": "Cavan Station",
       "fieldsOverride": {
         "nonMonitoredImpact": {
@@ -681,50 +580,6 @@
     },
     {
       "id": "wilmot",
-      "documents": [
-        {
-          "name": "Project Plan",
-          "type": "Project Plan",
-          "date": "December 11, 2020",
-          "url": "https://regen-registry.s3.amazonaws.com/projects/wilmot/WILMOT+Project+Plan.pdf"
-        },
-        {
-          "name": "Monitoring Report 2017 (Baseline)",
-          "type": "Monitoring",
-          "date": "December 14, 2020",
-          "url": "https://regen-registry.s3.amazonaws.com/projects/wilmot/Wilmot+Monitoring+Report+2017+(Baseline).pdf"
-        },
-        {
-          "name": "Monitoring Report 2018",
-          "type": "Monitoring",
-          "date": "December 14, 2020",
-          "url": "https://regen-registry.s3.amazonaws.com/projects/wilmot/Wilmot+Monitoring+Report+2018.pdf"
-        },
-        {
-          "name": "Monitoring Report 2019",
-          "type": "Monitoring",
-          "date": "December 14, 2020",
-          "url": "https://regen-registry.s3.amazonaws.com/projects/wilmot/Wilmot+Monitoring+Report+2019.pdf"
-        },
-        {
-          "name": "Soil Sampling Data",
-          "type": "Monitoring",
-          "date": "December 11, 2020",
-          "url": "https://regen-registry.s3.amazonaws.com/projects/wilmot/Wilmot+soil+data.xlsx"
-        },
-        {
-          "name": "Verification Report 2017-2019",
-          "type": "Verification",
-          "date": "April 13, 2021",
-          "url": "https://regen-registry.s3.amazonaws.com/projects/wilmot/Verification+Report+2017-2019.pdf"
-        },
-        {
-          "name": "Issuance Document",
-          "type": "Issuance",
-          "date": "December 16, 2020",
-          "url": "https://regen-registry.s3.amazonaws.com/projects/wilmot/wilmot-certificate-121620.pdf"
-        }
-      ],
       "name": "Wilmot",
       "fieldsOverride": {
         "nonMonitoredImpact": {
@@ -906,7 +761,6 @@
     {
       "id": "pillango",
       "name": "Pillango",
-      "documents": [],
       "fieldsOverride": {
         "nonMonitoredImpact": {
           "title": "Co-benefits"

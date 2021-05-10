@@ -241,7 +241,7 @@ export default function ProjectTop({
                   target="_blank"
                   color="secondary"
                 >
-                  CarbonPlus Grasslands
+                  Carbon<i>Plus</i>&nbsp;&nbsp;Grasslands
                 </Link>
               </div>
               <div className={classes.creditClassDetail}>
@@ -255,7 +255,7 @@ export default function ProjectTop({
                   target="_blank"
                   color="secondary"
                 >
-                  CarbonPlus Grasslands
+                  Carbon<i>Plus</i>&nbsp;&nbsp;Grasslands
                 </Link>
               </div>
             </div>

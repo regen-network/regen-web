@@ -38,6 +38,7 @@ export default function Map({ geojson, token }: MapProps): JSX.Element {
       mapboxApiAccessToken={token}
       mapStyle="mapbox://styles/mapbox/satellite-streets-v10"
       onLoad={onLoad}
+      attributionControl={false}
     >
       <Marker latitude={boundary.latitude} longitude={boundary.longitude}>
         <PinIcon fontSize="large" size={35} />

@@ -20,6 +20,10 @@ const useStyles = makeStyles((theme: typeof Theme) => ({
   },
   grid: {
     paddingTop: theme.spacing(8.75),
+    [theme.breakpoints.down('sm')]: {
+      flexWrap: 'nowrap',
+      overflow: 'auto',
+    },
   },
   projectCard: {
     height: '100%',
@@ -40,11 +44,11 @@ const MoreProjects = ({ projects }: MoreProjectsProps): JSX.Element => {
 
   return (
     <div className={classes.background}>
-      <Section title="More Projects">
+      <Section title="More Projects" titleAlign="left">
         <LazyLoad offset={300}>
           <Grid container className={classes.grid} spacing={5}>
             {projects.map((project, i) => (
-              <Grid item xs={12} sm={6} md={4} key={project.id} className={classes.item}>
+              <Grid item sm={6} md={4} key={project.id} className={classes.item}>
                 <Link className={classes.projectCard} href={getRegistryUrl(`/projects/${project.id}`)}>
                   <ProjectCard
                     name={project.name}

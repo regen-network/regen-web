@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
-import { useMutation, useQuery } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { gql } from '@apollo/client';
-import { loader } from 'graphql.macro';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Select from '@material-ui/core/Select';
@@ -17,6 +16,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 
 import Title from 'web-components/lib/components/title';
+import { useAllProjectsQuery } from '../generated/graphql';
 
 const ISSUE_CREDITS = gql`
   mutation IssueCredits($input: IssueCreditsInput!) {
@@ -25,8 +25,6 @@ const ISSUE_CREDITS = gql`
     }
   }
 `;
-
-const ALL_PROJECTS = loader('../graphql/AllProjects.graphql');
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -57,7 +55,8 @@ export default function CreditsIssue(): JSX.Element {
   const classes = useStyles();
 
   const [issueCredits, { data, loading, error }] = useMutation(ISSUE_CREDITS, { errorPolicy: 'ignore' });
-  const { data: projectsData, loading: projectsLoading, error: projectsError } = useQuery(ALL_PROJECTS, {
+
+  const { data: projectsData, loading: projectsLoading, error: projectsError } = useAllProjectsQuery({
     errorPolicy: 'ignore',
   });
 

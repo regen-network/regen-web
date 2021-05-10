@@ -44,7 +44,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "test-update-snapshot": "react-scripts test --updateSnapshot"
+    "test-update-snapshot": "react-scripts test --updateSnapshot",
+    "graphql:generate-types": "graphql-codegen --config codegen.yml"
   },
   "browserslist": {
     "production": [
@@ -59,15 +60,21 @@
     ]
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "1.21.4",
     "@storybook/addon-storyshots": "^5.2.8",
     "@types/enzyme": "^3.10.8",
     "@types/enzyme-adapter-react-16": "^1.0.6",
     "@types/react-lazyload": "^3.1.0",
     "@types/storybook__addon-storyshots": "^5.1.2",
+    "apollo": "^2.33.1",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.6",
     "enzyme-to-json": "^3.6.1",
     "react-test-renderer": "^16.12.0",
-    "require-context.macro": "^1.2.2"
+    "require-context.macro": "^1.2.2",
+    "@graphql-codegen/typescript": "1.22.0",
+    "@graphql-codegen/typescript-graphql-files-modules": "1.18.1",
+    "@graphql-codegen/typescript-react-apollo": "2.2.4",
+    "@graphql-codegen/introspection": "1.18.2"
   }
 }

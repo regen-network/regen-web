@@ -36,19 +36,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   item: {
-    [theme.breakpoints.up('sm')]: {
-      paddingBottom: theme.spacing(7.5),
-      '&:nth-child(odd)': {
-        paddingRight: theme.spacing(3.75),
-      },
-      '&:nth-child(even)': {
-        paddingLeft: theme.spacing(3.75),
-      },
-    },
-    [theme.breakpoints.down('xs')]: {
-      paddingBottom: theme.spacing(3.75),
-      marginRight: theme.spacing(3.75),
-    },
+    marginRight: theme.spacing(3.75),
   },
   buttons: {
     paddingTop: theme.spacing(0.25),
@@ -75,12 +63,13 @@ export default function ProjectImpact({ impacts }: ProjectImpactProps): JSX.Elem
   const imageStorageBaseUrl = process.env.REACT_APP_IMAGE_STORAGE_BASE_URL;
   const apiServerUrl = process.env.REACT_APP_API_URI;
   const isMobile: boolean = useMediaQuery(theme.breakpoints.down('xs'));
-  const slides: number = isMobile ? 1 : 3;
+  const isTablet: boolean = useMediaQuery(theme.breakpoints.between('xs', 'sm'));
+  const slidesCount: number = isTablet ? 2 : 3;
 
   const settings = {
     speed: 500,
-    slidesToShow: slides,
-    slidesToScroll: slides,
+    slidesToShow: slidesCount,
+    slidesToScroll: slidesCount,
     arrows: false,
     lazyload: true,
   };
@@ -101,36 +90,36 @@ export default function ProjectImpact({ impacts }: ProjectImpactProps): JSX.Elem
 
   const Impacts = (): JSX.Element[] =>
     impacts.map(({ name, description, imgSrc, monitored }: Impact, index: number) => (
-      <div className={classes.item} key={index}>
-        <ProjectImpactCard
-          name={name}
-          description={description}
-          imgSrc={getOptimizedImageSrc(imgSrc, imageStorageBaseUrl, apiServerUrl)}
-          monitored={monitored}
-        />
-      </div>
+      <ProjectImpactCard
+        key={index}
+        className={classes.item}
+        name={name}
+        description={description}
+        imgSrc={getOptimizedImageSrc(imgSrc, imageStorageBaseUrl, apiServerUrl)}
+        monitored={monitored}
+      />
     ));
 
   return (
     <div className={`project-background`}>
-      <Section
-        className={classes.section}
-        title="Impact"
-        titleVariant="h2"
-        titleClassName={classes.title}
-        titleAlign="left"
-        topRight={
-          <>
-            {!isMobile && impacts.length > slides && (
-              <Grid container justify="flex-end" className={classes.buttons}>
-                <PrevNextButton direction="prev" onClick={slickPrev} />
-                <PrevNextButton direction="next" onClick={slickNext} />
-              </Grid>
-            )}
-          </>
-        }
-      >
-        <LazyLoad offset={300}>
+      <LazyLoad offset={300}>
+        <Section
+          className={classes.section}
+          title="Impact"
+          titleVariant="h2"
+          titleClassName={classes.title}
+          titleAlign="left"
+          topRight={
+            <>
+              {!isMobile && impacts.length > slidesCount && (
+                <Grid container justify="flex-end" className={classes.buttons}>
+                  <PrevNextButton direction="prev" onClick={slickPrev} />
+                  <PrevNextButton direction="next" onClick={slickNext} />
+                </Grid>
+              )}
+            </>
+          }
+        >
           {isMobile ? (
             <div className={classes.swipe}>{Impacts()}</div>
           ) : (
@@ -138,8 +127,8 @@ export default function ProjectImpact({ impacts }: ProjectImpactProps): JSX.Elem
               {Impacts()}
             </Slider>
           )}
-        </LazyLoad>
-      </Section>
+        </Section>
+      </LazyLoad>
     </div>
   );
 }

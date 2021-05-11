@@ -1,11 +1,13 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
+import clsx from 'clsx';
 
 import Card from './Card';
 import Title from '../title';
 import Description from '../description';
 
 export interface ProjectImpactCardProps {
+  className?: string;
   name: string;
   description: string;
   imgSrc: string;
@@ -18,13 +20,12 @@ interface StyleProps {
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   root: {
+    minWidth: theme.spacing(73),
     [theme.breakpoints.up('sm')]: {
       height: theme.spacing(97.75), // TODO: temporary shorter height until extra content is added. Should be theme.spacing(110.25)
-      width: theme.spacing(91.75),
     },
     [theme.breakpoints.down('xs')]: {
       height: theme.spacing(86.25), // TODO: temporary shorter height until extra content is added. Should be theme.spacing(101)
-      width: theme.spacing(73),
     },
   },
   background: props => ({
@@ -90,11 +91,12 @@ export default function ProjectImpactCard({
   description,
   imgSrc,
   monitored = false,
+  className,
 }: ProjectImpactCardProps): JSX.Element {
   const classes = useStyles({ imgSrc });
 
   return (
-    <Card className={classes.root}>
+    <Card className={clsx(classes.root, className)}>
       <div className={classes.background}>
         <div className={classes.tag}>{monitored ? 'primary impact' : 'co-benefit'}</div>
         <Title variant="h4" className={classes.title}>

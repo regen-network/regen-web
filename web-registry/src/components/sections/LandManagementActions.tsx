@@ -2,7 +2,6 @@ import React, { useRef, useCallback } from 'react';
 import { makeStyles, useTheme, Theme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Grid from '@material-ui/core/Grid';
-// import LandManagementActionsItem, { ItemProps } from './Item';
 import Slider from 'react-slick';
 
 import Section from 'web-components/lib/components/section';
@@ -81,7 +80,8 @@ export default function LandManagementActions({
   const classes = useStyles({});
   const theme: Theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
-  const slidesCount = 3;
+  const isTablet: boolean = useMediaQuery(theme.breakpoints.between('xs', 'sm'));
+  const slidesCount = isTablet ? 2 : 3;
 
   const settings = {
     speed: 500,

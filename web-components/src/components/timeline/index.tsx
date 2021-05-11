@@ -5,19 +5,19 @@ import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1
 import LazyLoad from 'react-lazyload';
 
 import TimelineItem from './TimelineItem';
-import { IssuanceModalData } from '../modal/IssuanceModal';
 
 export interface Event {
   date: Date | string;
   summary: string;
   description?: string;
-  modalData?: IssuanceModalData; // | MonitoringModalProps use type guard to check modalData type;
+  ledgerData?: any; // must be converted to IssuanceModalData to open IssuanceModal
 }
 
 interface TimelineProps {
   events: Event[];
   txClient?: ServiceClientImpl;
   completedItemIndex?: number;
+  onViewOnLedger: (ledgerData: any) => void;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -44,7 +44,12 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function Timeline({ events, completedItemIndex, txClient }: TimelineProps): JSX.Element {
+export default function Timeline({
+  events,
+  completedItemIndex,
+  txClient,
+  onViewOnLedger,
+}: TimelineProps): JSX.Element {
   const classes = useStyles({});
   const theme = useTheme();
 
@@ -76,12 +81,13 @@ export default function Timeline({ events, completedItemIndex, txClient }: Timel
                 date={event.date}
                 summary={event.summary}
                 description={event.description}
-                modalData={event.modalData}
+                ledgerData={event.ledgerData}
                 circleColor={circleColor}
                 barColor={barColor}
                 odd={index % 2 !== 0}
                 last={index === events.length - 1}
                 txClient={txClient}
+                onViewOnLedger={onViewOnLedger}
               />
             </div>
           );

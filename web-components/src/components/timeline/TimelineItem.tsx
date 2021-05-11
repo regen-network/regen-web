@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 import ReactHtmlParser from 'react-html-parser';
 import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
@@ -6,7 +6,6 @@ import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1
 import Title from '../title';
 import ContainedButton from '../buttons/ContainedButton';
 import ShieldIcon from '../icons/ShieldIcon';
-import IssuanceModal from '../modal/IssuanceModal';
 import { Event } from './';
 
 interface TimelineItemProps extends Event {
@@ -15,6 +14,8 @@ interface TimelineItemProps extends Event {
   odd: boolean;
   last: boolean;
   txClient?: ServiceClientImpl;
+  onViewOnLedger: (ledgerData: any) => void;
+  ledgerData?: any;
 }
 
 interface StyleProps {
@@ -165,15 +166,15 @@ export default function TimelineItem({
   date,
   summary,
   description,
-  modalData,
+  ledgerData,
   circleColor,
   barColor,
   odd,
   last,
   txClient,
+  onViewOnLedger,
 }: TimelineItemProps): JSX.Element {
   const classes = useStyles({ circleColor, barColor, odd, last });
-  const [open, setOpen] = useState<boolean>(false);
   return (
     <div className={classes.content}>
       {date && <div className={classes.date}>{date}</div>}
@@ -181,10 +182,10 @@ export default function TimelineItem({
         {summary}
       </Title>
       {description && <div className={classes.description}>{ReactHtmlParser(description)}</div>}
-      {modalData && txClient && (
+      {ledgerData && txClient && (
         <ContainedButton
           className={classes.ledgerBtn}
-          onClick={() => setOpen(true)}
+          onClick={() => onViewOnLedger(ledgerData)}
           startIcon={<ShieldIcon />}
         >
           view on ledger
@@ -192,9 +193,6 @@ export default function TimelineItem({
       )}
       <span className={classes.circle} />
       <div className={classes.bar} />
-      {modalData && (
-        <IssuanceModal txClient={txClient} open={open} onClose={() => setOpen(false)} {...modalData} />
-      )}
     </div>
   );
 }

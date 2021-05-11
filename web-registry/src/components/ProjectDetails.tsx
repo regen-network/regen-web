@@ -17,6 +17,7 @@ import LandManagementActions from './sections/LandManagementActions';
 import { getImgSrc } from '../lib/imgSrc';
 import getApiUri from '../lib/apiUri';
 import { buildIssuanceModalData } from '../lib/transform';
+import { IssuanceModalData } from 'web-components/lib/components/modal/IssuanceModal';
 
 import { getFormattedDate } from 'web-components/lib/utils/format';
 import Title from 'web-components/lib/components/title';
@@ -283,8 +284,7 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
     setOpen(false);
   };
 
-  const [issuanceData, setIssuanceData] = useState<any | null>(null);
-
+  const [issuanceData, setIssuanceData] = useState<IssuanceModalData | null>(null);
   const viewOnLedger = (creditVintage: any): void => {
     const issuanceData = buildIssuanceModalData(
       data.projectByHandle,
@@ -368,18 +368,10 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
                     name: node.name,
                     type: node.type,
                     url: node.url,
-                    creditVintage: node.eventByEventId?.creditVintageByEventId,
+                    ledgerData: node.eventByEventId?.creditVintageByEventId,
                   }),
                 )}
               />
-              {issuanceData && (
-                <IssuanceModal
-                  txClient={txClient}
-                  open={!!issuanceData}
-                  onClose={() => setIssuanceData(null)}
-                  {...issuanceData}
-                />
-              )}
             </div>
           </div>
         </div>
@@ -412,6 +404,7 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
               </Title>
               <Timeline
                 txClient={txClient}
+                onViewOnLedger={viewOnLedger}
                 events={data.projectByHandle.eventsByProjectId.nodes.map(
                   (node: {
                     // TODO use generated types from graphql schema
@@ -420,14 +413,10 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
                     description?: string;
                     creditVintageByEventId?: any;
                   }) => ({
-                    modalData: buildIssuanceModalData(
-                      data.projectByHandle,
-                      data.projectByHandle.documentsByProjectId.nodes,
-                      node.creditVintageByEventId,
-                    ),
                     date: getFormattedDate(node.date, { year: 'numeric', month: 'long', day: 'numeric' }),
                     summary: node.summary,
                     description: node.description,
+                    ledgerData: node.creditVintageByEventId,
                   }),
                 )}
               />
@@ -467,6 +456,14 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
           }}
         />
       </Modal>
+      {issuanceData && (
+        <IssuanceModal
+          txClient={txClient}
+          open={!!issuanceData}
+          onClose={() => setIssuanceData(null)}
+          {...issuanceData}
+        />
+      )}
       {submitted && <Banner text="Thanks for submitting your information!" />}
     </div>
   );

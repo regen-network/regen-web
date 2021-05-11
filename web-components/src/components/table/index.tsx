@@ -28,13 +28,13 @@ interface DocumentRowData {
 }
 
 export interface Document extends DocumentRowData {
-  creditVintage?: any;
+  ledgerData?: any;
 }
 
 interface RegenTableProps {
   rows: Document[];
   canClickRow?: boolean;
-  onViewOnLedger: (creditVintage: any) => void;
+  onViewOnLedger: (ledgerData: any) => void;
   txClient?: ServiceClientImpl;
 }
 
@@ -252,10 +252,10 @@ export default function RegenTable({
                     {typeof row.date === 'string' && getFormattedDate(row.date, options)}
                   </TableCell>
                   <TableCell className={clsx(classes.cell, classes.documentCell)} align="right">
-                    {row.creditVintage && txClient && (
+                    {row.ledgerData && txClient && (
                       <ContainedButton
                         className={clsx(classes.button, classes.ledgerBtn)}
-                        onClick={() => onViewOnLedger(row.creditVintage)}
+                        onClick={() => onViewOnLedger(row.ledgerData)}
                         startIcon={<ShieldIcon />}
                       >
                         view on ledger

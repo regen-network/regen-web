@@ -28,6 +28,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexDirection: 'column',
     borderRadius: '5px',
     margin: theme.spacing(4, 0, 0),
+    transition: '300ms ease-in-out;',
     [theme.breakpoints.up('sm')]: {
       padding: theme.spacing(4),
     },

@@ -11,7 +11,7 @@ type FormInfo = {
 };
 
 const Eligibility: React.FC = () => {
-  const [step, setStep] = useState(2); // TODO: default should be 1
+  const [step, setStep] = useState(1);
 
   const saveAndExit = (): void => {
     // TODO: functionality
@@ -26,7 +26,7 @@ const Eligibility: React.FC = () => {
   };
 
   async function submitAdditionality(values: AdditionalityValues): Promise<void> {
-    console.log('values :>> ', values);
+    // TODO
     return Promise.resolve();
   }
 
@@ -35,13 +35,13 @@ const Eligibility: React.FC = () => {
       case 2:
         return {
           title: 'Eligibility: Additionality',
-          form: <AdditionalityForm submit={submitAdditionality} />,
+          form: <AdditionalityForm submit={submitAdditionality} goBack={() => setStep(1)} />,
         };
       case 1:
       default:
         return {
           title: 'Eligibility',
-          form: <IncludesGrasslandsForm submit={submitIncludesGrasslands} />,
+          form: <IncludesGrasslandsForm submit={submitIncludesGrasslands} goForward={() => setStep(2)} />,
         };
     }
   }

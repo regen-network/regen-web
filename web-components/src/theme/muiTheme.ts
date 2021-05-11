@@ -107,7 +107,7 @@ const theme = createMuiTheme({
     h6: {
       fontSize: '1.125rem',
     },
-    subtitle1: {
+    subtitle2: {
       [defaultTheme.breakpoints.up('sm')]: {
         fontSize: '2.375rem',
       },
@@ -173,17 +173,58 @@ const theme = createMuiTheme({
         body2: 'p',
       },
     },
-    // MuiAvatar: {
-    //   img: {
-    //     objectFit: 'scale-down',
-    //   },
-    // },
   },
 });
 
 const themeObject: ThemeOptions = {
   ...theme,
-  overrides: {},
+  // see: https://github1s.com/mui-org/material-ui-pickers/blob/HEAD/lib/src/typings/overrides.ts
+  overrides: {
+    MuiPickersToolbar: {
+      toolbar: {
+        backgroundColor: '#4FB573',
+      },
+    },
+    //@ts-ignore - not sure why it doesn't like this
+    MuiPickersToolbarText: {
+      toolbarTxt: {
+        color: theme.palette.secondary.contrastText,
+      },
+      toolbarBtnSelected: {
+        color: theme.palette.primary.main,
+      },
+    },
+    MuiPickersYear: {
+      yearSelected: {
+        color: theme.palette.secondary.main,
+        fontSize: theme.spacing(7),
+      },
+    },
+    MuiPickersMonth: {
+      root: {
+        '&:focus': {
+          color: theme.palette.secondary.main,
+        },
+      },
+      monthSelected: {
+        color: theme.palette.secondary.main,
+        // fontWeight: 'bold',
+        fontSize: theme.spacing(7),
+      },
+    },
+    // Leaving this because we'll likely need later
+    // MuiPickersDay: {
+    //   day: {
+    //     color: theme.palette.secondary.main,
+    //   },
+    //   daySelected: {
+    //     backgroundColor: '#DCF0E3',
+    //   },
+    //   current: {
+    //     color: '#DCF0E3',
+    //   },
+    // },
+  },
 };
 
 export default createMuiTheme(themeObject);

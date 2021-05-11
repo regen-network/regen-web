@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { BrowserRouter, Switch, Route, useParams, useLocation, Redirect, RouteProps } from 'react-router-dom';
 import { useTheme } from '@material-ui/core/styles';
 import { useAuth0, OAuthError, withAuthenticationRequired } from '@auth0/auth0-react';
+import { MuiPickersUtilsProvider } from '@material-ui/pickers';
+import DateFnsUtils from '@date-io/date-fns';
 
 import { createBrowserHistory } from 'history';
 import isAdmin from './lib/admin';
@@ -272,102 +274,97 @@ const App: React.FC = (props): JSX.Element => {
 
   return (
     <BrowserRouter basename={process.env.PUBLIC_URL}>
-      <ScrollToTop />
-      <div>
-        <AppHeader />
-        <Switch>
-          <Route exact path="/">
-            <Redirect to="/projects/wilmot" />
-            {/* <Home /> */}
-          </Route>
-          <Route exact path="/verify-email">
-            <VerifyEmail />
-          </Route>
-          <Route exact path="/signup">
-            <Signup />
-          </Route>
-          <Route exact path="/certificate">
-            <Certificate />
-          </Route>
-          <Route exact path={`/projects/wilmot/admin`} component={Seller} />
-          <Route exact path="/projects/impactag">
-            <Redirect to="/projects/wilmot" />
-          </Route>
-          <Route exact path="/projects/impactag/admin">
-            <Redirect to="/projects/wilmot/admin" />
-          </Route>
-          <Route
-            path="/projects"
-            render={({ match: { path } }) => (
-              <>
-                <Route path={path} component={Projects} exact>
-                  <Redirect to="/projects/wilmot" />
-                </Route>
-                <Route path={`${path}/:projectId`} component={ProjectContainer} />
-              </>
-            )}
-          />
-          <Route
-            path="/post-purchase"
-            render={({ match: { path } }) => (
-              <>
-                <Route path={`${path}/:projectId/:walletId/:name`} component={PostPurchase} />
-              </>
-            )}
-          />
-          <Route
-            path="/credits"
-            render={({ match: { path } }) => (
-              <>
-                <Route path={`${path}/:projectId`} component={CreditsContainer}>
-                  <Redirect to="/projects/wilmot" />
-                </Route>
-              </>
-            )}
-          />
-          <ProtectedRoute path="/user-profile" component={UserProfile} />
-          <Route
-            path="/project-plans"
-            render={({ match: { path } }) => (
-              <>
-                <ProtectedRoute path={path} exact component={ProjectPlanList} />
-                <ProtectedRoute path={`${path}/getting-started`} component={GettingStarted} />
-                <ProtectedRoute path={`${path}/choose-credit-class`} component={ChooseCreditClass} />
-                <ProtectedRoute path={`${path}/basic-info`} component={BasicInfo} />
-                <Route
-                  path={`${path}/eligibility`}
-                  render={({ match: { path } }) => (
+      <MuiPickersUtilsProvider utils={DateFnsUtils}>
+        <ScrollToTop />
+        <div>
+          <AppHeader />
+          <Switch>
+            <Route exact path="/">
+              <Redirect to="/projects/wilmot" />
+              {/* <Home /> */}
+            </Route>
+            <Route exact path="/verify-email">
+              <VerifyEmail />
+            </Route>
+            <Route exact path="/signup">
+              <Signup />
+            </Route>
+            <Route exact path="/certificate">
+              <Certificate />
+            </Route>
+            <Route exact path={`/projects/wilmot/admin`} component={Seller} />
+            <Route exact path="/projects/impactag">
+              <Redirect to="/projects/wilmot" />
+            </Route>
+            <Route exact path="/projects/impactag/admin">
+              <Redirect to="/projects/wilmot/admin" />
+            </Route>
+            <Route
+              path="/projects"
+              render={({ match: { path } }) => (
+                <>
+                  <Route path={path} component={Projects} exact>
+                    <Redirect to="/projects/wilmot" />
+                  </Route>
+                  <Route path={`${path}/:projectId`} component={ProjectContainer} />
+                </>
+              )}
+            />
+            <Route
+              path="/post-purchase"
+              render={({ match: { path } }) => (
+                <>
+                  <Route path={`${path}/:projectId/:walletId/:name`} component={PostPurchase} />
+                </>
+              )}
+            />
+            <Route
+              path="/credits"
+              render={({ match: { path } }) => (
+                <>
+                  <Route path={`${path}/:projectId`} component={CreditsContainer}>
+                    <Redirect to="/projects/wilmot" />
+                  </Route>
+                </>
+              )}
+            />
+            <ProtectedRoute path="/user-profile" component={UserProfile} />
+            <Route
+              path="/project-plans"
+              render={({ match: { path } }) => (
+                <>
+                  <ProtectedRoute path={path} exact component={ProjectPlanList} />
+                  <ProtectedRoute path={`${path}/getting-started`} component={GettingStarted} />
+                  <ProtectedRoute path={`${path}/choose-credit-class`} component={ChooseCreditClass} />
+                  <ProtectedRoute path={`${path}/basic-info`} component={BasicInfo} />
+                  <ProtectedRoute path={`${path}/eligibility`} component={Eligibility} />
+                </>
+              )}
+            />
+            <Route
+              path="/admin"
+              render={({ match: { path } }) => (
+                <>
+                  <Route path={path} component={Admin} exact />
+                  {isAdmin(user) && (
                     <>
-                      <ProtectedRoute path={path} exact component={Eligibility} />
+                      <Route path={`${path}/credits/issue`} component={CreditsIssue} />
+                      <Route path={`${path}/credits/transfer`} component={CreditsTransfer} />
+                      <Route path={`${path}/credits/retire`} component={CreditsRetire} />
+                      <Route path={`${path}/buyer/create`} component={BuyerCreate} />
                     </>
                   )}
-                />
-              </>
-            )}
-          />
-          <Route
-            path="/admin"
-            render={({ match: { path } }) => (
-              <>
-                <Route path={path} component={Admin} exact />
-                {isAdmin(user) && (
-                  <>
-                    <Route path={`${path}/credits/issue`} component={CreditsIssue} />
-                    <Route path={`${path}/credits/transfer`} component={CreditsTransfer} />
-                    <Route path={`${path}/credits/retire`} component={CreditsRetire} />
-                    <Route path={`${path}/buyer/create`} component={BuyerCreate} />
-                  </>
-                )}
-              </>
-            )}
-          />
-          <Route path="*" component={NotFound} />
-        </Switch>
-        <CookiesBanner privacyUrl="https://www.regen.network/privacy-policy/" />
-        <footer>
-          <AppFooter />
-        </footer>
-      </div>
+                </>
+              )}
+            />
+            <Route path="*" component={NotFound} />
+          </Switch>
+          <CookiesBanner privacyUrl="https://www.regen.network/privacy-policy/" />
+          <footer>
+            <AppFooter />
+          </footer>
+        </div>
+      </MuiPickersUtilsProvider>
     </BrowserRouter>
   );
 };

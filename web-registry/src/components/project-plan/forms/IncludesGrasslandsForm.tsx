@@ -10,6 +10,7 @@ import { requiredMessage } from 'web-components/lib/components/inputs/validation
 
 interface IncludesGrasslandsFormProps {
   submit: (values: IncludesGrasslandsValues) => Promise<void>;
+  goForward: () => void;
 }
 
 export interface IncludesGrasslandsValues {
@@ -20,7 +21,7 @@ interface IncludesGrasslandsFormValues {
   includesGrasslands?: string; // Radio always produces a string. We convert back to a Boolean on submit
 }
 
-export const IncludesGrasslandsForm: React.FC<IncludesGrasslandsFormProps> = ({ submit }) => {
+export const IncludesGrasslandsForm: React.FC<IncludesGrasslandsFormProps> = ({ submit, goForward }) => {
   return (
     <Formik
       initialValues={{
@@ -74,8 +75,7 @@ export const IncludesGrasslandsForm: React.FC<IncludesGrasslandsFormProps> = ({ 
             <OnboardingFooter
               onSave={submitForm}
               saveText={'Save and Next'}
-              onPrev={() => null} // TODO
-              onNext={() => null} // TODO
+              onNext={goForward}
               hideProgress={false} // TODO
               saveDisabled={!values['includesGrasslands']}
               percentComplete={0} // TODO

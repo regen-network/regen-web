@@ -1,5 +1,3 @@
-// TODO Update to use formik Field
-
 import React from 'react';
 import { FormLabel, Button } from '@material-ui/core';
 import { Formik, Form, Field } from 'formik';
@@ -7,7 +5,7 @@ import { RadioGroup } from 'formik-material-ui';
 import { withKnobs } from '@storybook/addon-knobs';
 
 import Toggle from './Toggle';
-import TextField from '../inputs/TextField';
+import TextField from './TextField';
 import OnBoardingCard from '../cards/OnBoardingCard';
 import OnBoardingSection from '../section/OnBoardingSection';
 // import CheckboxLabel from 'web-components/lib/components/inputs/CheckboxLabel';
@@ -190,7 +188,6 @@ function ToggleVariants(): JSX.Element {
                     type="radio"
                     checked={values['radioValue'] === 'green'}
                     description="description"
-
                     activeContent={
                       <div
                         style={{

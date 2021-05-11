@@ -35,8 +35,11 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingBottom: theme.spacing(10),
     },
   },
+  slider: {
+    margin: theme.spacing(0, -1.75),
+  },
   item: {
-    marginRight: theme.spacing(3.75),
+    margin: theme.spacing(0, 1.875),
   },
   buttons: {
     paddingTop: theme.spacing(0.25),
@@ -123,7 +126,7 @@ export default function ProjectImpact({ impacts }: ProjectImpactProps): JSX.Elem
           {isMobile ? (
             <div className={classes.swipe}>{Impacts()}</div>
           ) : (
-            <Slider {...settings} ref={slider}>
+            <Slider {...settings} ref={slider} className={classes.slider}>
               {Impacts()}
             </Slider>
           )}

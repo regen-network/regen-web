@@ -35,14 +35,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   slider: {
-    [theme.breakpoints.up('sm')]: {
-      marginLeft: theme.spacing(-2.5),
-    },
+    margin: theme.spacing(0, -1.75),
   },
   item: {
-    [theme.breakpoints.up('sm')]: {
-      padding: `${theme.spacing(3.5)} ${theme.spacing(2.5)} ${theme.spacing(2.5)}`,
-    },
+    margin: theme.spacing(0, 1.875),
   },
   buttons: {
     flex: 1,

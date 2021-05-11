@@ -20,7 +20,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexDirection: 'column',
     [theme.breakpoints.down('xs')]: {
       width: theme.spacing(74.5),
-      marginRight: theme.spacing(4),
     },
   },
   image: {

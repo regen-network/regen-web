@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     [theme.breakpoints.down('xs')]: {
       paddingTop: theme.spacing(17.5),
-      paddingBottom: theme.spacing(20.5),
+      paddingBottom: theme.spacing(13),
     },
   },
   title: {
@@ -61,7 +61,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   swipe: {
     display: 'flex',
     overflowX: 'auto',
-    minHeight: theme.spacing(115),
+    minHeight: theme.spacing(104),
     '&::-webkit-scrollbar': {
       display: 'none',
     },

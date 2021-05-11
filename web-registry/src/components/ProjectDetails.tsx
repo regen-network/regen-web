@@ -169,7 +169,12 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   projectTimeline: {
-    paddingBottom: theme.spacing(30.5),
+    [theme.breakpoints.up('sm')]: {
+      paddingBottom: theme.spacing(23),
+    },
+    [theme.breakpoints.down('xs')]: {
+      paddingBottom: theme.spacing(17),
+    },
   },
   map: {
     maxHeight: '50rem',
@@ -402,9 +407,9 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
       {data &&
         data.projectByHandle &&
         data.projectByHandle.eventsByProjectId &&
-        data.projectByHandle.eventsByProjectId.nodes.length > 0 && (
+        data?.projectByHandle?.eventsByProjectId?.nodes?.length > 0 && (
           <div className={clsx(classes.timelineContainer, 'project-background')}>
-            <div className={`${classes.projectDetails} ${classes.projectTimeline} ${classes.projectContent}`}>
+            <div className={clsx(classes.projectDetails, classes.projectTimeline, classes.projectContent)}>
               <Title className={classes.timelineTitle} variant="h2">
                 {project.fieldsOverride && project.fieldsOverride.timeline
                   ? project.fieldsOverride.timeline.title

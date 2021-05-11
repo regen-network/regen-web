@@ -9,6 +9,8 @@ import TableHead from '@material-ui/core/TableHead';
 // import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
+import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
+
 import { getComparator, stableSort, Order } from './sort';
 import DocumentIcon from '../icons/DocumentIcon';
 import EyeIcon from '../icons/EyeIcon';
@@ -33,6 +35,7 @@ interface RegenTableProps {
   rows: Document[];
   canClickRow?: boolean;
   onViewOnLedger: (creditVintage: any) => void;
+  txClient?: ServiceClientImpl;
 }
 
 interface HeadCell {
@@ -193,6 +196,7 @@ export default function RegenTable({
   rows,
   canClickRow = false,
   onViewOnLedger,
+  txClient,
 }: RegenTableProps): JSX.Element {
   const classes = useStyles({});
 
@@ -248,7 +252,7 @@ export default function RegenTable({
                     {typeof row.date === 'string' && getFormattedDate(row.date, options)}
                   </TableCell>
                   <TableCell className={clsx(classes.cell, classes.documentCell)} align="right">
-                    {row.creditVintage && (
+                    {row.creditVintage && txClient && (
                       <ContainedButton
                         className={clsx(classes.button, classes.ledgerBtn)}
                         onClick={() => onViewOnLedger(row.creditVintage)}

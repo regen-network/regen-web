@@ -354,6 +354,7 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
           <div className={clsx(classes.projectDetails, classes.projectContent)}>
             <div className={classes.tableBorder}>
               <Table
+                txClient={txClient}
                 onViewOnLedger={viewOnLedger}
                 rows={data.projectByHandle.documentsByProjectId.nodes.map(
                   (node: {

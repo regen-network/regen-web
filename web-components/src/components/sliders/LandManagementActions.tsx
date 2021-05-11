@@ -4,38 +4,15 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Grid from '@material-ui/core/Grid';
 // import LandManagementActionsItem, { ItemProps } from './Item';
 import Slider from 'react-slick';
-
-import Section from '../section';
-import Description from '../description';
 import PrevNextButton from '../buttons/PrevNextButton';
 import Action, { ActionProps } from '../action';
 
 export interface LandManagementActionsProps {
   actions: ActionProps[];
-  title: string;
-  subtitle?: string;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
-  section: {
-    [theme.breakpoints.up('sm')]: {
-      paddingTop: theme.spacing(21.5),
-      paddingBottom: theme.spacing(27.5),
-    },
-    [theme.breakpoints.down('xs')]: {
-      paddingTop: theme.spacing(17.5),
-      paddingBottom: theme.spacing(20.5),
-    },
-  },
-  title: {
-    [theme.breakpoints.up('sm')]: {
-      paddingBottom: theme.spacing(6),
-    },
-    [theme.breakpoints.down('xs')]: {
-      paddingBottom: theme.spacing(2),
-    },
-  },
-  slider: {
+  root: {
     [theme.breakpoints.up('sm')]: {
       marginLeft: theme.spacing(-2.5),
     },
@@ -46,47 +23,26 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   buttons: {
-    flex: 1,
-    position: 'relative',
-    top: theme.spacing(9.5),
+    paddingTop: theme.spacing(0.25),
+    [theme.breakpoints.down('xs')]: {
+      paddingTop: theme.spacing(3.75),
+      paddingBottom: theme.spacing(10),
+    },
     '& div': {
       marginLeft: theme.spacing(2.5),
     },
   },
-  description: {
-    [theme.breakpoints.up('sm')]: {
-      marginBottom: theme.spacing(6),
-      fontSize: theme.typography.pxToRem(16),
-    },
-    [theme.breakpoints.down('xs')]: {
-      marginBottom: theme.spacing(2),
-      fontSize: theme.typography.pxToRem(14),
-    },
-  },
-  swipe: {
-    display: 'flex',
-    overflowX: 'auto',
-    minHeight: theme.spacing(115),
-    '&::-webkit-scrollbar': {
-      display: 'none',
-    },
-  },
 }));
 
-export default function LandManagementActions({
-  actions,
-  title,
-  subtitle,
-}: LandManagementActionsProps): JSX.Element {
+export default function LandManagementActions({ actions }: LandManagementActionsProps): JSX.Element {
   const classes = useStyles({});
   const theme: Theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
-  const slidesCount = 3;
+  const slides: number = useMediaQuery(theme.breakpoints.up('sm')) ? 3 : 1;
 
   const settings = {
     speed: 500,
-    slidesToShow: slidesCount,
-    slidesToScroll: slidesCount,
+    slidesToShow: slides,
+    slidesToScroll: slides,
     arrows: false,
   };
 
@@ -105,43 +61,21 @@ export default function LandManagementActions({
     }
   }, [slider]);
 
-  const Actions = (): JSX.Element[] =>
-    actions.map(action => (
-      <Action
-        key={action.name}
-        className={classes.item}
-        name={action.name}
-        description={action.description}
-        imgSrc={action.imgSrc}
-      />
-    ));
-
   return (
-    <Section
-      className={classes.section}
-      title={title}
-      titleVariant="h2"
-      titleClassName={classes.title}
-      titleAlign="left"
-      topRight={
-        <>
-          {!isMobile && actions.length > slidesCount && (
-            <Grid container justify="flex-end" className={classes.buttons}>
-              <PrevNextButton direction="prev" onClick={slickPrev} />
-              <PrevNextButton direction="next" onClick={slickNext} />
-            </Grid>
-          )}
-        </>
-      }
-    >
-      <Description className={classes.description}>{subtitle}</Description>
-      {isMobile ? (
-        <div className={classes.swipe}>{Actions()}</div>
-      ) : (
-        <Slider {...settings} ref={slider} className={classes.slider}>
-          {Actions()}
-        </Slider>
+    <div>
+      <Slider {...settings} ref={slider} className={classes.root}>
+        {actions.map((action, index) => (
+          <div className={classes.item} key={index}>
+            <Action name={action.name} description={action.description} imgSrc={action.imgSrc} />
+          </div>
+        ))}
+      </Slider>
+      {actions.length > slides && (
+        <Grid container justify="flex-end" className={classes.buttons}>
+          <PrevNextButton direction="prev" onClick={slickPrev} />
+          <PrevNextButton direction="next" onClick={slickNext} />
+        </Grid>
       )}
-    </Section>
+    </div>
   );
 }

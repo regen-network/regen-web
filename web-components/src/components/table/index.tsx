@@ -32,9 +32,10 @@ export interface Document extends DocumentRowData {
 }
 
 interface RegenTableProps {
+  className?: string;
   rows: Document[];
   canClickRow?: boolean;
-  onViewOnLedger: (ledgerData: any) => void;
+  onViewOnLedger?: (ledgerData: any) => void;
   txClient?: ServiceClientImpl;
 }
 
@@ -55,6 +56,7 @@ const headCells: HeadCell[] = [
 const useStyles = makeStyles((theme: Theme) => ({
   tableContainer: {
     paddingBottom: theme.spacing(7),
+    borderRadius: 5,
     [theme.breakpoints.up('sm')]: {
       maxHeight: theme.spacing(119.5),
     },
@@ -197,6 +199,7 @@ export default function RegenTable({
   canClickRow = false,
   onViewOnLedger,
   txClient,
+  className,
 }: RegenTableProps): JSX.Element {
   const classes = useStyles({});
 
@@ -218,7 +221,7 @@ export default function RegenTable({
   const options = { year: 'numeric', month: 'long', day: 'numeric' };
 
   return (
-    <TableContainer className={classes.tableContainer}>
+    <TableContainer className={clsx(classes.tableContainer, className)}>
       <Table aria-label="documentation table" stickyHeader>
         <EnhancedTableHead
           classes={classes}
@@ -252,7 +255,7 @@ export default function RegenTable({
                     {typeof row.date === 'string' && getFormattedDate(row.date, options)}
                   </TableCell>
                   <TableCell className={clsx(classes.cell, classes.documentCell)} align="right">
-                    {row.ledgerData && txClient && (
+                    {row.ledgerData && txClient && onViewOnLedger && (
                       <ContainedButton
                         className={clsx(classes.button, classes.ledgerBtn)}
                         onClick={() => onViewOnLedger(row.ledgerData)}

@@ -213,16 +213,22 @@ const useStyles = makeStyles((theme: Theme) => ({
       marginBottom: `${theme.spacing(10)} !important`,
     },
   },
+  documentationTitle: {
+    [theme.breakpoints.up('sm')]: {
+      marginBottom: theme.spacing(6),
+    },
+    [theme.breakpoints.down('xs')]: {
+      marginBottom: theme.spacing(2),
+    },
+  },
   creditDetails: {
     borderTop: `1px solid ${theme.palette.grey[100]}`,
   },
   tableBorder: {
     border: `2px solid ${theme.palette.secondary.dark}`,
-    borderBottomLeftRadius: 5,
-    borderBottomRightRadius: 5,
+    borderRadius: 5,
   },
 }));
-
 interface ProjectProps {
   project: Project;
   projects: Project[];
@@ -352,27 +358,29 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
       {data?.projectByHandle?.documentsByProjectId?.nodes?.length > 0 && (
         <div className={classes.creditDetails}>
           <div className={clsx(classes.projectDetails, classes.projectContent)}>
-            <div className={classes.tableBorder}>
-              <Table
-                txClient={txClient}
-                onViewOnLedger={viewOnLedger}
-                rows={data.projectByHandle.documentsByProjectId.nodes.map(
-                  (node: {
-                    date: string;
-                    type: string;
-                    name?: string;
-                    url?: string;
-                    eventByEventId?: any;
-                  }) => ({
-                    date: node.date,
-                    name: node.name,
-                    type: node.type,
-                    url: node.url,
-                    ledgerData: node.eventByEventId?.creditVintageByEventId,
-                  }),
-                )}
-              />
-            </div>
+            <Title variant="h2" className={classes.documentationTitle}>
+              Documentation
+            </Title>
+            <Table
+              className={classes.tableBorder}
+              txClient={txClient}
+              onViewOnLedger={viewOnLedger}
+              rows={data.projectByHandle.documentsByProjectId.nodes.map(
+                (node: {
+                  date: string;
+                  type: string;
+                  name?: string;
+                  url?: string;
+                  eventByEventId?: any;
+                }) => ({
+                  date: node.date,
+                  name: node.name,
+                  type: node.type,
+                  url: node.url,
+                  ledgerData: node.eventByEventId?.creditVintageByEventId,
+                }),
+              )}
+            />
           </div>
         </div>
       )}
@@ -397,7 +405,7 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
         data.projectByHandle.eventsByProjectId.nodes.length > 0 && (
           <div className={clsx(classes.timelineContainer, 'project-background')}>
             <div className={`${classes.projectDetails} ${classes.projectTimeline} ${classes.projectContent}`}>
-              <Title className={classes.timelineTitle} variant="h3">
+              <Title className={classes.timelineTitle} variant="h2">
                 {project.fieldsOverride && project.fieldsOverride.timeline
                   ? project.fieldsOverride.timeline.title
                   : projectDefault.timeline.title}

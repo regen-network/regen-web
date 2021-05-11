@@ -24,7 +24,7 @@ interface DocumentRowData {
   type: string;
   date: string | Date;
   url: string;
-  creditVintageId: string;
+  ledger: string;
 }
 
 export interface Document extends DocumentRowData {
@@ -48,7 +48,7 @@ const headCells: HeadCell[] = [
   { id: 'name', numeric: false, label: 'Name of document' },
   { id: 'type', numeric: true, label: 'Document type' },
   { id: 'date', numeric: true, label: 'Date of upload' },
-  { id: 'creditVintageId', numeric: true, label: '' },
+  { id: 'ledger', numeric: true, label: '' },
   { id: 'url', numeric: true, label: '' },
 ];
 

@@ -79,12 +79,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   glanceCard: {
-    [theme.breakpoints.up('sm')]: {
-      paddingTop: theme.spacing(9.5),
-    },
-    [theme.breakpoints.down('xs')]: {
-      paddingTop: theme.spacing(7.5),
-    },
+    paddingTop: theme.spacing(6),
   },
   media: {
     width: '100%',
@@ -180,21 +175,20 @@ const useStyles = makeStyles((theme: Theme) => ({
   creditClassInfo: {
     display: 'flex',
     flexDirection: 'column',
-    marginTop: theme.spacing(4),
+    marginTop: theme.spacing(2.5),
   },
   creditClassDetail: {
     display: 'flex',
     alignItems: 'baseline',
+    paddingTop: theme.spacing(1.75),
   },
   creditClass: {
     textTransform: 'uppercase',
-    marginRight: theme.spacing(4),
+    marginRight: theme.spacing(2),
     fontSize: theme.typography.pxToRem(12),
-    marginTop: theme.spacing(4),
     fontWeight: 800,
   },
   creditClassLink: {
-    marginTop: theme.spacing(4),
     fontWeight: 700,
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.typography.pxToRem(16),

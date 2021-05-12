@@ -42,9 +42,6 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       color: theme.palette.grey[400],
     },
   }),
-  // '& .MuiPickersYearSelection-container .MuiTypography-subtitle1': {
-  //   fontSize: theme.spacing(4),
-  // },
 }));
 
 export default function DatePickField({

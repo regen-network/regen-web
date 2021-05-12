@@ -38,8 +38,29 @@ const useStyles = makeStyles((theme: Theme) => ({
   slider: {
     margin: theme.spacing(0, -1.75),
   },
+  swipe: {
+    display: 'flex',
+    marginLeft: theme.spacing(-4),
+    marginRight: theme.spacing(-4),
+    overflowX: 'auto',
+    minHeight: theme.spacing(104),
+    '&::-webkit-scrollbar': {
+      display: 'none',
+    },
+  },
   item: {
-    margin: theme.spacing(0, 1.875),
+    [theme.breakpoints.up('sm')]: {
+      margin: theme.spacing(0, 1.875),
+    },
+    [theme.breakpoints.down('xs')]: {
+      padding: theme.spacing(0, 1.875),
+      '&:first-child': {
+        paddingLeft: theme.spacing(4),
+      },
+      '&:last-child': {
+        paddingRight: theme.spacing(4),
+      },
+    },
   },
   buttons: {
     paddingTop: theme.spacing(0.25),
@@ -49,13 +70,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     '& div': {
       marginLeft: theme.spacing(2.5),
-    },
-  },
-  swipe: {
-    display: 'flex',
-    overflow: 'scroll',
-    '&::-webkit-scrollbar': {
-      display: 'none',
     },
   },
 }));
@@ -91,18 +105,6 @@ export default function ProjectImpact({ impacts }: ProjectImpactProps): JSX.Elem
     }
   }, [slider]);
 
-  const Impacts = (): JSX.Element[] =>
-    impacts.map(({ name, description, imgSrc, monitored }: Impact, index: number) => (
-      <ProjectImpactCard
-        key={index}
-        className={classes.item}
-        name={name}
-        description={description}
-        imgSrc={getOptimizedImageSrc(imgSrc, imageStorageBaseUrl, apiServerUrl)}
-        monitored={monitored}
-      />
-    ));
-
   return (
     <div className={`project-background`}>
       <LazyLoad offset={300}>
@@ -124,10 +126,31 @@ export default function ProjectImpact({ impacts }: ProjectImpactProps): JSX.Elem
           }
         >
           {isMobile ? (
-            <div className={classes.swipe}>{Impacts()}</div>
+            <div className={classes.swipe}>
+              {impacts.map(({ name, description, imgSrc, monitored }: Impact, index: number) => (
+                <div className={classes.item}>
+                  <ProjectImpactCard
+                    key={index}
+                    name={name}
+                    description={description}
+                    imgSrc={getOptimizedImageSrc(imgSrc, imageStorageBaseUrl, apiServerUrl)}
+                    monitored={monitored}
+                  />
+                </div>
+              ))}
+            </div>
           ) : (
             <Slider {...settings} ref={slider} className={classes.slider}>
-              {Impacts()}
+              {impacts.map(({ name, description, imgSrc, monitored }: Impact, index: number) => (
+                <ProjectImpactCard
+                  key={index}
+                  className={classes.item}
+                  name={name}
+                  description={description}
+                  imgSrc={getOptimizedImageSrc(imgSrc, imageStorageBaseUrl, apiServerUrl)}
+                  monitored={monitored}
+                />
+              ))}
             </Slider>
           )}
         </Section>

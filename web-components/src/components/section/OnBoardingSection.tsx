@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       padding: theme.spacing(12.5, 0, 30),
     },
     [theme.breakpoints.down('xs')]: {
-      padding: theme.spacing(8.75, 2, 20),
+      padding: theme.spacing(8.75, 2.5, 20),
     },
   },
   formWrap: {
@@ -30,8 +30,20 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   title: {
     [theme.breakpoints.up('sm')]: {
+      flex: 'unset',
+    },
+    [theme.breakpoints.down('xs')]: {
+      margin: 'inherit',
+      flex: 1,
+    },
+  },
+  titleWrap: {
+    [theme.breakpoints.up('sm')]: {
       margin: '0 auto',
       maxWidth: theme.spacing(140),
+    },
+    [theme.breakpoints.down('xs')]: {
+      margin: 'inherit',
     },
   },
   link: {
@@ -47,6 +59,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     [theme.breakpoints.down('xs')]: {
       fontSize: theme.spacing(3.5),
+      marginLeft: theme.spacing(4),
     },
   },
 }));
@@ -65,6 +78,7 @@ const OnBoardingSection: React.FC<OnBoardingSectionProps> = ({
       title={p.title}
       titleAlign={onLinkClick ? 'left' : 'center'}
       titleVariant="h3"
+      titleWrapClassName={classes.titleWrap}
       titleClassName={classes.title}
       topRight={
         onLinkClick && (

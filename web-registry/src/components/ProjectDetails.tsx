@@ -19,7 +19,6 @@ import getApiUri from '../lib/apiUri';
 import { buildIssuanceModalData } from '../lib/transform';
 import { IssuanceModalData } from 'web-components/lib/components/modal/IssuanceModal';
 
-import { getFormattedDate } from 'web-components/lib/utils/format';
 import Title from 'web-components/lib/components/title';
 import Timeline from 'web-components/lib/components/timeline';
 import ProjectMedia from 'web-components/lib/components/sliders/ProjectMedia';
@@ -365,21 +364,7 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
               className={classes.tableBorder}
               txClient={txClient}
               onViewOnLedger={viewOnLedger}
-              rows={data.projectByHandle.documentsByProjectId.nodes.map(
-                (node: {
-                  date: string;
-                  type: string;
-                  name?: string;
-                  url?: string;
-                  eventByEventId?: any;
-                }) => ({
-                  date: node.date,
-                  name: node.name,
-                  type: node.type,
-                  url: node.url,
-                  ledgerData: node.eventByEventId?.creditVintageByEventId,
-                }),
-              )}
+              rows={data.projectByHandle.documentsByProjectId.nodes}
             />
           </div>
         </div>
@@ -399,38 +384,22 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
         </div>
       ))}
 
-      {data &&
-        data.projectByHandle &&
-        data.projectByHandle.eventsByProjectId &&
-        data?.projectByHandle?.eventsByProjectId?.nodes?.length > 0 && (
-          <div className={clsx(classes.timelineContainer, 'project-background')}>
-            <div className={clsx(classes.projectDetails, classes.projectTimeline, classes.projectContent)}>
-              <Title className={classes.timelineTitle} variant="h2">
-                {project.fieldsOverride && project.fieldsOverride.timeline
-                  ? project.fieldsOverride.timeline.title
-                  : projectDefault.timeline.title}
-              </Title>
-              <Timeline
-                txClient={txClient}
-                onViewOnLedger={viewOnLedger}
-                events={data.projectByHandle.eventsByProjectId.nodes.map(
-                  (node: {
-                    // TODO use generated types from graphql schema
-                    date: string;
-                    summary: string;
-                    description?: string;
-                    creditVintageByEventId?: any;
-                  }) => ({
-                    date: getFormattedDate(node.date, { year: 'numeric', month: 'long', day: 'numeric' }),
-                    summary: node.summary,
-                    description: node.description,
-                    ledgerData: node.creditVintageByEventId,
-                  }),
-                )}
-              />
-            </div>
+      {data?.projectByHandle?.eventsByProjectId?.nodes?.length > 0 && (
+        <div className={clsx(classes.timelineContainer, 'project-background')}>
+          <div className={clsx(classes.projectDetails, classes.projectTimeline, classes.projectContent)}>
+            <Title className={classes.timelineTitle} variant="h2">
+              {project.fieldsOverride && project.fieldsOverride.timeline
+                ? project.fieldsOverride.timeline.title
+                : projectDefault.timeline.title}
+            </Title>
+            <Timeline
+              events={data.projectByHandle.eventsByProjectId.nodes}
+              txClient={txClient}
+              onViewOnLedger={viewOnLedger}
+            />
           </div>
-        )}
+        </div>
+      )}
 
       {otherProjects.length > 0 && <MoreProjects projects={otherProjects} />}
 

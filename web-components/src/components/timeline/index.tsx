@@ -4,20 +4,21 @@ import { useTheme } from '@material-ui/core/styles';
 import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 import LazyLoad from 'react-lazyload';
 
+import { getFormattedDate } from '../../utils/format';
 import TimelineItem from './TimelineItem';
 
 export interface Event {
   date: Date | string;
   summary: string;
   description?: string;
-  ledgerData?: any; // must be converted to IssuanceModalData to open IssuanceModal
+  creditVintageByEventId?: any; // must be converted to IssuanceModalData to open IssuanceModal
 }
 
 interface TimelineProps {
   events: Event[];
   txClient?: ServiceClientImpl;
   completedItemIndex?: number;
-  onViewOnLedger: (ledgerData: any) => void;
+  onViewOnLedger: (creditVintage: any) => void;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -78,10 +79,10 @@ export default function Timeline({
           return (
             <div className={classes.item} key={`${index}-${event.summary}`}>
               <TimelineItem
-                date={event.date}
+                date={getFormattedDate(event.date, { year: 'numeric', month: 'long', day: 'numeric' })}
                 summary={event.summary}
                 description={event.description}
-                ledgerData={event.ledgerData}
+                creditVintage={event.creditVintageByEventId}
                 circleColor={circleColor}
                 barColor={barColor}
                 odd={index % 2 !== 0}

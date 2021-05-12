@@ -28,7 +28,7 @@ interface DocumentRowData {
 }
 
 export interface Document extends DocumentRowData {
-  ledgerData?: any;
+  eventByEventId?: any;
 }
 
 interface RegenTableProps {
@@ -255,10 +255,10 @@ export default function RegenTable({
                     {typeof row.date === 'string' && getFormattedDate(row.date, options)}
                   </TableCell>
                   <TableCell className={clsx(classes.cell, classes.documentCell)} align="right">
-                    {row.ledgerData && txClient && onViewOnLedger && (
+                    {row.eventByEventId?.creditVintageByEventId && txClient && onViewOnLedger && (
                       <ContainedButton
                         className={clsx(classes.button, classes.ledgerBtn)}
-                        onClick={() => onViewOnLedger(row.ledgerData)}
+                        onClick={() => onViewOnLedger(row.eventByEventId.creditVintageByEventId)}
                         startIcon={<ShieldIcon />}
                       >
                         view on ledger

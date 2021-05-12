@@ -14,8 +14,8 @@ interface TimelineItemProps extends Event {
   odd: boolean;
   last: boolean;
   txClient?: ServiceClientImpl;
-  onViewOnLedger: (ledgerData: any) => void;
-  ledgerData?: any;
+  onViewOnLedger: (creditVintage: any) => void;
+  creditVintage?: any;
 }
 
 interface StyleProps {
@@ -166,7 +166,7 @@ export default function TimelineItem({
   date,
   summary,
   description,
-  ledgerData,
+  creditVintage,
   circleColor,
   barColor,
   odd,
@@ -182,10 +182,10 @@ export default function TimelineItem({
         {summary}
       </Title>
       {description && <div className={classes.description}>{ReactHtmlParser(description)}</div>}
-      {ledgerData && txClient && (
+      {creditVintage && txClient && (
         <ContainedButton
           className={classes.ledgerBtn}
-          onClick={() => onViewOnLedger(ledgerData)}
+          onClick={() => onViewOnLedger(creditVintage)}
           startIcon={<ShieldIcon />}
         >
           view on ledger

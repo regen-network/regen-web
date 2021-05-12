@@ -10,7 +10,7 @@ import Image, { OptimizeImageProps } from '../image';
 interface GlanceCardProps extends OptimizeImageProps {
   title?: string;
   text: string[];
-  imgSrc: string;
+  imgSrc?: string;
   geojson?: any;
   isGISFile?: Boolean;
 }

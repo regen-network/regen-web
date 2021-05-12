@@ -47,8 +47,8 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   contentLabel: {
     fontWeight: 700,
-    fontSize: theme.spacing(4),
-    marginBottom: theme.spacing(4),
+    fontSize: theme.spacing(3.5),
+    marginBottom: theme.spacing(2),
   },
 }));
 

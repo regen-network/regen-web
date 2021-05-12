@@ -27,13 +27,13 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     flexDirection: 'column',
     borderRadius: '5px',
-    margin: theme.spacing(4, 0, 0),
+    margin: theme.spacing(3.25, 0, 0),
     transition: '300ms ease-in-out;',
     [theme.breakpoints.up('sm')]: {
-      padding: theme.spacing(4),
+      padding: theme.spacing(3.5),
     },
     [theme.breakpoints.down('xs')]: {
-      padding: theme.spacing(2),
+      padding: theme.spacing(3.25),
     },
   },
   top: {
@@ -79,6 +79,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   formControlLabelRoot: {
     alignItems: 'flex-start',
+    width: '100%',
   },
   formControlLabelWithDescription: {
     [theme.breakpoints.up('sm')]: {

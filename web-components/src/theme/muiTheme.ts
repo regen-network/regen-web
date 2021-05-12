@@ -208,7 +208,6 @@ const themeObject: ThemeOptions = {
       },
       monthSelected: {
         color: theme.palette.secondary.main,
-        // fontWeight: 'bold',
         fontSize: theme.spacing(7),
       },
     },

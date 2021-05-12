@@ -22,32 +22,28 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     marginTop: theme.spacing(5),
   },
   input: props => ({
-    width: '100% !important',
-    border: `1px solid ${theme.palette.grey[100]} !important`,
-    borderRadius: '2px !important',
-    alignContent: 'center',
-    backgroundColor: theme.palette.primary.main,
-    color: props.disabled ? theme.palette.info.main : theme.palette.primary.contrastText,
-    fontFamily: theme.typography.fontFamily,
+    border: `1px solid ${theme.palette.grey[100]}`,
     display: 'flex',
-    justifyContent: 'center',
+    flexDirection: 'column',
+    borderRadius: '5px',
+    color: props.disabled ? theme.palette.info.main : theme.palette.primary.contrastText,
+    margin: theme.spacing(3.25, 0, 0),
+    transition: '300ms ease-in-out;',
     [theme.breakpoints.up('sm')]: {
-      padding: theme.spacing(7.4),
-      fontSize: `${theme.spacing(4.5)} !important`,
-      height: `${theme.spacing(15)} !important`,
+      padding: theme.spacing(3.5),
+      fontSize: `${theme.spacing(3.5)}`,
     },
     [theme.breakpoints.down('xs')]: {
-      padding: theme.spacing(6),
-      fontSize: `${theme.spacing(3.5)} !important`,
-      height: `${theme.spacing(12.5)} !important`,
+      padding: theme.spacing(3.25),
+      fontSize: `${theme.spacing(4)}`,
     },
     '&::placeholder': {
       color: theme.palette.grey[400],
     },
   }),
-  '& .MuiPickersYearSelection-container .MuiTypography-subtitle1': {
-    fontSize: theme.spacing(4),
-  },
+  // '& .MuiPickersYearSelection-container .MuiTypography-subtitle1': {
+  //   fontSize: theme.spacing(4),
+  // },
 }));
 
 export default function DatePickField({

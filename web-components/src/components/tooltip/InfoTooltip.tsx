@@ -1,7 +1,7 @@
 import { withStyles, Theme } from '@material-ui/core';
 import Tooltip from './';
 
-const InfoTooltip: any = withStyles((theme: Theme) => ({
+const InfoTooltip = withStyles((theme: Theme) => ({
   tooltip: {
     fontSize: theme.typography.pxToRem(14),
     padding: theme.spacing(3, 4),

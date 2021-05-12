@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import PlanStepper from './PlanStepper';
+import PlanStepper from '../PlanStepper';
 import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
 import { IncludesGrasslandsForm, IncludesGrasslandsValues } from './forms/IncludesGrasslandsForm';
 import { AdditionalityForm, AdditionalityValues } from './forms/AdditionalityForm';
@@ -11,7 +11,7 @@ type FormInfo = {
 };
 
 const Eligibility: React.FC = () => {
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(2);
 
   const saveAndExit = (): void => {
     // TODO: functionality

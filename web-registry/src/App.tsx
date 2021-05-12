@@ -38,7 +38,7 @@ import GettingStarted from './components/GettingStarted';
 import ChooseCreditClass from './components/project-plan/ChooseCreditClass';
 import ProjectPlanList from './components/project-plan/ProjectPlanList';
 import BasicInfo from './components/project-plan/BasicInfo';
-import Eligibility from './components/project-plan/Eligibility';
+import Eligibility from './components/project-plan/Eligibbility/Eligibility';
 
 export const history = createBrowserHistory();
 

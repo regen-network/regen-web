@@ -37,8 +37,29 @@ const useStyles = makeStyles((theme: Theme) => ({
   slider: {
     margin: theme.spacing(0, -1.75),
   },
+  swipe: {
+    display: 'flex',
+    marginLeft: theme.spacing(-4),
+    marginRight: theme.spacing(-4),
+    overflowX: 'auto',
+    minHeight: theme.spacing(104),
+    '&::-webkit-scrollbar': {
+      display: 'none',
+    },
+  },
   item: {
-    margin: theme.spacing(0, 1.875),
+    [theme.breakpoints.up('sm')]: {
+      margin: theme.spacing(0, 1.875),
+    },
+    [theme.breakpoints.down('xs')]: {
+      padding: theme.spacing(0, 1.875),
+      '&:first-child': {
+        paddingLeft: theme.spacing(4),
+      },
+      '&:last-child': {
+        paddingRight: theme.spacing(4),
+      },
+    },
   },
   buttons: {
     flex: 1,
@@ -56,14 +77,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.down('xs')]: {
       marginBottom: theme.spacing(4),
       fontSize: theme.typography.pxToRem(14),
-    },
-  },
-  swipe: {
-    display: 'flex',
-    overflowX: 'auto',
-    minHeight: theme.spacing(104),
-    '&::-webkit-scrollbar': {
-      display: 'none',
     },
   },
 }));
@@ -101,17 +114,6 @@ export default function LandManagementActions({
     }
   }, [slider]);
 
-  const Actions = (): JSX.Element[] =>
-    actions.map(action => (
-      <Action
-        key={action.name}
-        className={classes.item}
-        name={action.name}
-        description={action.description}
-        imgSrc={action.imgSrc}
-      />
-    ));
-
   return (
     <Section
       className={classes.section}
@@ -132,10 +134,29 @@ export default function LandManagementActions({
     >
       <Description className={classes.description}>{subtitle}</Description>
       {isMobile ? (
-        <div className={classes.swipe}>{Actions()}</div>
+        <div className={classes.swipe}>
+          {actions.map(action => (
+            <div className={classes.item}>
+              <Action
+                key={action.name}
+                name={action.name}
+                description={action.description}
+                imgSrc={action.imgSrc}
+              />
+            </div>
+          ))}
+        </div>
       ) : (
         <Slider {...settings} ref={slider} className={classes.slider}>
-          {Actions()}
+          {actions.map(action => (
+            <Action
+              className={classes.item}
+              key={action.name}
+              name={action.name}
+              description={action.description}
+              imgSrc={action.imgSrc}
+            />
+          ))}
         </Slider>
       )}
     </Section>

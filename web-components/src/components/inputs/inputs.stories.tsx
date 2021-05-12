@@ -190,7 +190,6 @@ function ToggleVariants(): JSX.Element {
                     type="radio"
                     checked={values['radioValue'] === 'green'}
                     description="description"
-
                     activeContent={
                       <div
                         style={{

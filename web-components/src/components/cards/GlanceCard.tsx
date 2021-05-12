@@ -117,13 +117,15 @@ export default function GlanceCard({
             {geojson && isGISFile ? (
               <StaticMap geojson={geojson} token={process.env.REACT_APP_MAPBOX_TOKEN} />
             ) : (
-              <Image
-                className={classes.image}
-                src={imgSrc}
-                alt={imgSrc}
-                imageStorageBaseUrl={imageStorageBaseUrl}
-                apiServerUrl={apiServerUrl}
-              />
+              imgSrc && (
+                <Image
+                  className={classes.image}
+                  src={imgSrc}
+                  alt={imgSrc}
+                  imageStorageBaseUrl={imageStorageBaseUrl}
+                  apiServerUrl={apiServerUrl}
+                />
+              )
             )}
           </div>
         </Grid>

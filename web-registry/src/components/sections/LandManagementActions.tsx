@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingBottom: theme.spacing(6),
     },
     [theme.breakpoints.down('xs')]: {
-      paddingBottom: theme.spacing(2),
+      paddingBottom: theme.spacing(7.5),
     },
   },
   slider: {

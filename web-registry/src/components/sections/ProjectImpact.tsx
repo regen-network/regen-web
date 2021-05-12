@@ -24,16 +24,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     [theme.breakpoints.down('xs')]: {
       paddingTop: theme.spacing(17.5),
-      paddingBottom: theme.spacing(20.5),
     },
   },
   title: {
-    [theme.breakpoints.up('sm')]: {
-      paddingBottom: theme.spacing(7.5),
-    },
-    [theme.breakpoints.down('xs')]: {
-      paddingBottom: theme.spacing(10),
-    },
+    paddingBottom: theme.spacing(7.5),
   },
   slider: {
     margin: theme.spacing(0, -1.75),

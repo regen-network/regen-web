@@ -219,12 +219,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   documentationTitle: {
-    [theme.breakpoints.up('sm')]: {
-      marginBottom: theme.spacing(6),
-    },
-    [theme.breakpoints.down('xs')]: {
-      marginBottom: theme.spacing(2),
-    },
+    paddingBottom: theme.spacing(7.5),
   },
   creditDetails: {
     borderTop: `1px solid ${theme.palette.grey[100]}`,

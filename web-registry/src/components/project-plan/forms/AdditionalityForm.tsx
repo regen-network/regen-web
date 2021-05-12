@@ -111,12 +111,13 @@ export const AdditionalityForm: React.FC<AdditionalityFormProps> = p => {
                   onChange={handleChange}
                   name="rotationalGrazing"
                   checked={!!values.rotationalGrazing}
-                  tooltip="TODO: Info about rotational grazing"
+                  tooltip="A managed grazing system where livestock are moved frequently among pasture divisions or paddocks based on forage quality and livestock nutrition needs. Portable fencing allows each paddock to rest and regrow until the next grazing rotation."
                   activeContent={
                     <>
                       <Label />
                       <Field
                         component={DatePickField}
+                        pickerViews={['year', 'month']}
                         name="rotationalGrazingStartDate"
                         value={values.rotationalGrazingStartDate}
                         type="input"
@@ -131,12 +132,13 @@ export const AdditionalityForm: React.FC<AdditionalityFormProps> = p => {
                   onChange={handleChange}
                   name="highDensityGrazing"
                   checked={!!values.highDensityGrazing}
-                  tooltip="TODO: Info about high density grazing"
+                  tooltip="In this form of rotational grazing, grazing animals, at a very high stocking density, graze a management unit for very short period of time."
                   activeContent={
                     <>
                       <Label />
                       <Field
                         component={DatePickField}
+                        pickerViews={['year', 'month']}
                         name="highDensityGrazingStartDate"
                         value={values.highDensityGrazingStartDate}
                         type="input"
@@ -151,12 +153,13 @@ export const AdditionalityForm: React.FC<AdditionalityFormProps> = p => {
                   onChange={handleChange}
                   name="residueGrazing"
                   checked={!!values.residueGrazing}
-                  tooltip="TODO: Info about residue grazing"
+                  tooltip="The practice of letting livestock graze crop residue after a crop has been harvested."
                   activeContent={
                     <>
                       <Label />
                       <Field
                         component={DatePickField}
+                        pickerViews={['year', 'month']}
                         name="residueGrazingStartDate"
                         value={values.residueGrazingStartDate}
                         type="input"

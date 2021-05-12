@@ -23,7 +23,7 @@ interface ToggleProps extends FieldProps {
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    border: `1px solid ${theme.palette.grey[100]}`,
+    border: `1px solid ${theme.palette.info.light}`,
     display: 'flex',
     flexDirection: 'column',
     borderRadius: '5px',
@@ -80,6 +80,15 @@ const useStyles = makeStyles((theme: Theme) => ({
   formControlLabelRoot: {
     alignItems: 'flex-start',
     width: '100%',
+    '& .MuiFormControlLabel-label': {
+      marginLeft: theme.spacing(1),
+      [theme.breakpoints.up('sm')]: {
+        fontSize: theme.spacing(4.5),
+      },
+      [theme.breakpoints.down('xs')]: {
+        fontSize: theme.spacing(4),
+      },
+    },
   },
   formControlLabelWithDescription: {
     [theme.breakpoints.up('sm')]: {

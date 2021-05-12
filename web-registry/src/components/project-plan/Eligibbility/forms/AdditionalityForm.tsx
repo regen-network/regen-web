@@ -33,9 +33,7 @@ export interface AdditionalityValues {
 
 const useStyles = makeStyles((theme: Theme) => ({
   card: {
-    marginTop: theme.spacing(2),
-    marginBottom: theme.spacing(2),
-
+    margin: theme.spacing(3, 0, 3),
     '&:first-of-type': {
       [theme.breakpoints.up('sm')]: {
         marginTop: theme.spacing(9),
@@ -45,10 +43,16 @@ const useStyles = makeStyles((theme: Theme) => ({
       },
     },
   },
+  sectionLabel: {
+    marginBottom: theme.spacing(2),
+  },
+  activeContent: {
+    padding: theme.spacing(2),
+  },
   contentLabel: {
     fontWeight: 700,
     fontSize: theme.spacing(3.5),
-    marginBottom: theme.spacing(2),
+    marginBottom: theme.spacing(1),
   },
 }));
 
@@ -100,7 +104,7 @@ export const AdditionalityForm: React.FC<AdditionalityFormProps> = p => {
         return (
           <Form>
             <OnBoardingCard className={classes.card}>
-              <ControlledFormLabel>
+              <ControlledFormLabel className={classes.sectionLabel}>
                 Which regenerative practices have you been applying and for how long?
               </ControlledFormLabel>
               <Field component={RadioGroup} name="includesGrasslands">
@@ -113,7 +117,7 @@ export const AdditionalityForm: React.FC<AdditionalityFormProps> = p => {
                   checked={!!values.rotationalGrazing}
                   tooltip="A managed grazing system where livestock are moved frequently among pasture divisions or paddocks based on forage quality and livestock nutrition needs. Portable fencing allows each paddock to rest and regrow until the next grazing rotation."
                   activeContent={
-                    <>
+                    <div className={classes.activeContent}>
                       <Label />
                       <Field
                         component={DatePickField}
@@ -122,7 +126,7 @@ export const AdditionalityForm: React.FC<AdditionalityFormProps> = p => {
                         value={values.rotationalGrazingStartDate}
                         type="input"
                       />
-                    </>
+                    </div>
                   }
                 />
                 <Field
@@ -134,7 +138,7 @@ export const AdditionalityForm: React.FC<AdditionalityFormProps> = p => {
                   checked={!!values.highDensityGrazing}
                   tooltip="In this form of rotational grazing, grazing animals, at a very high stocking density, graze a management unit for very short period of time."
                   activeContent={
-                    <>
+                    <div className={classes.activeContent}>
                       <Label />
                       <Field
                         component={DatePickField}
@@ -143,7 +147,7 @@ export const AdditionalityForm: React.FC<AdditionalityFormProps> = p => {
                         value={values.highDensityGrazingStartDate}
                         type="input"
                       />
-                    </>
+                    </div>
                   }
                 />
                 <Field
@@ -155,7 +159,7 @@ export const AdditionalityForm: React.FC<AdditionalityFormProps> = p => {
                   checked={!!values.residueGrazing}
                   tooltip="The practice of letting livestock graze crop residue after a crop has been harvested."
                   activeContent={
-                    <>
+                    <div className={classes.activeContent}>
                       <Label />
                       <Field
                         component={DatePickField}
@@ -164,7 +168,7 @@ export const AdditionalityForm: React.FC<AdditionalityFormProps> = p => {
                         value={values.residueGrazingStartDate}
                         type="input"
                       />
-                    </>
+                    </div>
                   }
                 />
                 <Field

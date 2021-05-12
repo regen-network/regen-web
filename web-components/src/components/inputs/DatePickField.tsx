@@ -26,6 +26,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     display: 'flex',
     flexDirection: 'column',
     borderRadius: '5px',
+    background: theme.palette.primary.main,
     color: props.disabled ? theme.palette.info.main : theme.palette.primary.contrastText,
     margin: theme.spacing(3.25, 0, 0),
     transition: '300ms ease-in-out;',

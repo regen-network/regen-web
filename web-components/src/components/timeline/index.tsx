@@ -4,14 +4,13 @@ import { useTheme } from '@material-ui/core/styles';
 import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 import LazyLoad from 'react-lazyload';
 
-import { getFormattedDate } from '../../utils/format';
 import TimelineItem from './TimelineItem';
 
 export interface Event {
   date: Date | string;
   summary: string;
   description?: string;
-  creditVintageByEventId?: any; // must be converted to IssuanceModalData to open IssuanceModal
+  creditVintage?: any; // must be converted to IssuanceModalData to open IssuanceModal
 }
 
 interface TimelineProps {
@@ -79,10 +78,10 @@ export default function Timeline({
           return (
             <div className={classes.item} key={`${index}-${event.summary}`}>
               <TimelineItem
-                date={getFormattedDate(event.date, { year: 'numeric', month: 'long', day: 'numeric' })}
+                date={event.date}
                 summary={event.summary}
                 description={event.description}
-                creditVintage={event.creditVintageByEventId}
+                creditVintage={event.creditVintage}
                 circleColor={circleColor}
                 barColor={barColor}
                 odd={index % 2 !== 0}

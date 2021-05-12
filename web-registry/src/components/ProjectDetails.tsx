@@ -19,6 +19,7 @@ import getApiUri from '../lib/apiUri';
 import { buildIssuanceModalData } from '../lib/transform';
 import { IssuanceModalData } from 'web-components/lib/components/modal/IssuanceModal';
 
+import { getFormattedDate } from 'web-components/lib/utils/format';
 import Title from 'web-components/lib/components/title';
 import Timeline from 'web-components/lib/components/timeline';
 import ProjectMedia from 'web-components/lib/components/sliders/ProjectMedia';
@@ -393,9 +394,22 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
                 : projectDefault.timeline.title}
             </Title>
             <Timeline
-              events={data.projectByHandle.eventsByProjectId.nodes}
               txClient={txClient}
               onViewOnLedger={viewOnLedger}
+              events={data.projectByHandle.eventsByProjectId.nodes.map(
+                (node: {
+                  // TODO use generated types from graphql schema
+                  date: string;
+                  summary: string;
+                  description?: string;
+                  creditVintageByEventId?: any;
+                }) => ({
+                  date: getFormattedDate(node.date, { year: 'numeric', month: 'long', day: 'numeric' }),
+                  summary: node.summary,
+                  description: node.description,
+                  creditVintage: node.creditVintageByEventId,
+                }),
+              )}
             />
           </div>
         </div>

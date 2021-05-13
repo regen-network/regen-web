@@ -9,7 +9,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { graphql, useStaticQuery } from 'gatsby';
 import { useTheme } from '@material-ui/core/styles';
-import { IntercomProvider, useIntercom } from 'react-use-intercom';
 
 import Header, { HeaderColors, HeaderMenuItem } from 'web-components/lib/components/header';
 import Footer, { FooterItemProps as FooterItem } from 'web-components/lib/components/footer';
@@ -194,8 +193,6 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
     },
   ];
 
-  const { boot, shutdown, hide, show, update } = useIntercom();
-
   return (
     <>
       <Header
@@ -212,7 +209,6 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
       </div>
       <CookiesFooter privacyUrl="/privacy-policy/" />
       <footer>
-        <button onClick={boot}>Boot intercom! ☎️</button>
         <Footer
           footerItems={footerItems}
           privacyUrl="/privacy-policy"

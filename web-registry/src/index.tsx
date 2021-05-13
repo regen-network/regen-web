@@ -19,7 +19,7 @@ const config = {
   audience: 'https://regen-registry-server.herokuapp.com/',
 };
 
-const intercomId = process.env.GATSBY_INTERCOM_APP_ID || '';
+const intercomId = process.env.REACT_APP_INTERCOM_APP_ID || '';
 
 // const onRedirectCallback = (appState: AppState) => {
 //   // If using a Hash Router, you need to use window.history.replaceState to

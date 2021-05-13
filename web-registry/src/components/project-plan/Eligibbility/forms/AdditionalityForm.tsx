@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginBottom: theme.spacing(2),
   },
   activeContent: {
-    padding: theme.spacing(2),
+    paddingBottom: theme.spacing(2),
   },
   contentLabel: {
     fontWeight: 700,

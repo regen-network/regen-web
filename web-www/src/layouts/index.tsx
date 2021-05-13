@@ -17,7 +17,6 @@ const ThemeWrap = ({ children, location }: propTypes): JSX.Element => {
         <ThemeProvider injectFonts>
           <Layout location={location}>{children}</Layout>
         </ThemeProvider>
-
       </IntercomProvider>
     </>
   );

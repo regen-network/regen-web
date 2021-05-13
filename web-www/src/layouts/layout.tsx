@@ -192,7 +192,6 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
       ],
     },
   ];
-
   return (
     <>
       <Header

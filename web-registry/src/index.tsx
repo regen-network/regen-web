@@ -40,14 +40,14 @@ ReactDOM.render(
     cacheLocation="localstorage"
   >
     <AuthApolloProvider>
-    <IntercomProvider appId={intercomId} autoBoot>
-      <LedgerProvider>
-        <ThemeProvider injectFonts>
-          {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-          <CssBaseline />
-          <App />
-        </ThemeProvider>
-      </LedgerProvider>
+      <IntercomProvider appId={intercomId} autoBoot>
+        <LedgerProvider>
+          <ThemeProvider injectFonts>
+            {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+            <CssBaseline />
+            <App />
+          </ThemeProvider>
+        </LedgerProvider>
       </IntercomProvider>
     </AuthApolloProvider>
   </Auth0Provider>,

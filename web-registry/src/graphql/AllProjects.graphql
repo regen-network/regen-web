@@ -1,6 +1,6 @@
-{
+query AllProjects {
   allProjects {
-    nodes{
+    nodes {
       id
       name
     }

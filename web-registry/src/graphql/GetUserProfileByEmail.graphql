@@ -1,0 +1,15 @@
+query GetUserProfileByEmail($email: String!) {
+  userByEmail(email: $email) {
+    email
+    id
+    isAdmin
+    phoneNumber
+    roleTitle
+    partyByPartyId {
+      name
+      walletId
+      description
+      image
+    }
+  }
+}

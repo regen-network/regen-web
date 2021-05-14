@@ -1,7 +1,10 @@
-mutation UpdateUserProfile($email: String!) {
-  updateUserByEmail(input: UpdateUserByEmailInput!) {
-    phoneNumber
-    roleTitle
+mutation UpdateUserByEmail($input: UpdateUserByEmailInput!) {
+  updateUserByEmail(input: $input) {
+    user {
+      partyId
+      phoneNumber
+      roleTitle
+    }
     partyByPartyId {
       name
       description

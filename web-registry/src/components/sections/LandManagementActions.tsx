@@ -28,10 +28,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   title: {
     [theme.breakpoints.up('sm')]: {
-      paddingBottom: theme.spacing(6),
+      paddingBottom: theme.spacing(3),
     },
     [theme.breakpoints.down('xs')]: {
-      paddingBottom: theme.spacing(7.5),
+      paddingBottom: theme.spacing(2),
     },
   },
   slider: {
@@ -71,7 +71,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   description: {
     [theme.breakpoints.up('sm')]: {
-      marginBottom: theme.spacing(6),
+      marginBottom: theme.spacing(7),
       fontSize: theme.typography.pxToRem(16),
     },
     [theme.breakpoints.down('xs')]: {

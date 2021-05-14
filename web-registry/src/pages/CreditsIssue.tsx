@@ -16,7 +16,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 
 import Title from 'web-components/lib/components/title';
-import { useAllProjectsQuery } from '../../generated/graphql';
+import { useAllProjectsQuery } from '../generated/graphql';
 
 const ISSUE_CREDITS = gql`
   mutation IssueCredits($input: IssueCreditsInput!) {

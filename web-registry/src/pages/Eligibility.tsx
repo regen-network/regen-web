@@ -1,8 +1,8 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 
-import { IncludesGrasslandsForm, IncludesGrasslandsValues } from '../organisms';
-import { OnboardingFormTemplate } from '../templates';
+import { IncludesGrasslandsForm, IncludesGrasslandsValues } from '../components/organisms';
+import { OnboardingFormTemplate } from '../components/templates';
 
 const Eligibility: React.FC = () => {
   const history = useHistory();

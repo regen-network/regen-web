@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { BasicInfoForm, BasicInfoFormValues } from '../organisms';
-import { OnboardingFormTemplate } from '../templates';
+import { BasicInfoForm, BasicInfoFormValues } from '../components/organisms';
+import { OnboardingFormTemplate } from '../components/templates';
 
 const BasicInfo: React.FC = () => {
   async function saveAndExit(): Promise<void> {

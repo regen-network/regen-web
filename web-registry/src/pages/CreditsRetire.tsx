@@ -11,8 +11,8 @@ import { loader } from 'graphql.macro';
 import Title from 'web-components/lib/components/title';
 import { pluralize } from 'web-components/lib/utils/pluralize';
 
-const ALL_CREDIT_VINTAGES = loader('../../graphql/AllCreditVintages.graphql');
-const ALL_PARTIES = loader('../../graphql/AllParties.graphql');
+const ALL_CREDIT_VINTAGES = loader('../graphql/AllCreditVintages.graphql');
+const ALL_PARTIES = loader('../graphql/AllParties.graphql');
 
 const RETIRE_CREDITS = gql`
   mutation RetireCredits($input: RetireCreditsInput!) {

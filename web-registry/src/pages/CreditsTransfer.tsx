@@ -32,8 +32,8 @@ const AVAILABLE_CREDITS = gql`
   }
 `;
 
-const ALL_CREDIT_VINTAGES = loader('../../graphql/AllCreditVintages.graphql');
-const ALL_PARTIES = loader('../../graphql/AllParties.graphql');
+const ALL_CREDIT_VINTAGES = loader('../graphql/AllCreditVintages.graphql');
+const ALL_PARTIES = loader('../graphql/AllParties.graphql');
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {

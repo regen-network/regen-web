@@ -8,7 +8,7 @@ import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import Description from 'web-components/lib/components/description';
 import Banner from 'web-components/lib/components/banner';
 import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
-import getApiUri from '../../lib/apiUri';
+import getApiUri from '../lib/apiUri';
 
 const useStyles = makeStyles((theme: Theme) => ({
   description: {

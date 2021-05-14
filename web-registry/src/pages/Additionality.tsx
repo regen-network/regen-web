@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { AdditionalityForm, AdditionalityValues } from '../organisms/AdditionalityForm';
-import { OnboardingFormTemplate } from '../templates';
+import { AdditionalityForm, AdditionalityValues } from '../components/organisms/AdditionalityForm';
+import { OnboardingFormTemplate } from '../components/templates';
 
 const Additionality: React.FC = () => {
   const history = useHistory();

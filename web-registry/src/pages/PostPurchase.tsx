@@ -11,8 +11,8 @@ import Description from 'web-components/lib/components/description';
 import Title from 'web-components/lib/components/title';
 import ShareIcons from 'web-components/lib/components/icons/ShareIcons';
 
-import sum from '../../lib/sum';
-import getRegistryUrl from '../../lib/registryUrl';
+import sum from '../lib/sum';
+import getRegistryUrl from '../lib/registryUrl';
 
 const PROJECT = gql`
   query ProjectByHandle($handle: String!) {
@@ -215,8 +215,8 @@ function PostPurchase(): JSX.Element {
       <Section className={classes.section}>
         <div className={classes.center}>
           <img
-            src={require('../../assets/cow-illustration.png')}
-            alt={require('../../assets/cow-illustration.png')}
+            src={require('../assets/cow-illustration.png')}
+            alt={require('../assets/cow-illustration.png')}
           />
           <Title className={classes.title} align="center" variant="h2">
             Thank you for your purchase!

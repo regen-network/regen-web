@@ -33,7 +33,7 @@ import {
   Signup,
   Eligibility,
   Additionality,
-} from './components/pages';
+} from './pages';
 
 import './App.css';
 

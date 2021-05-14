@@ -1,8 +1,8 @@
 import React from 'react';
-import { projects, projectDefault, Project as ProjectType } from '../../mocks';
+import { projects, projectDefault, Project as ProjectType } from '../mocks';
 import { useParams } from 'react-router-dom';
 
-import { ProjectDetails } from '../organisms';
+import { ProjectDetails } from '../components/organisms';
 
 function Project(): JSX.Element {
   let { projectId } = useParams<{ projectId: string }>();

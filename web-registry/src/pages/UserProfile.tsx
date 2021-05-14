@@ -10,7 +10,7 @@ import Description from 'web-components/lib/components/description';
 import Banner from 'web-components/lib/components/banner';
 import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 import UserProfileForm, { UserProfileValues } from 'web-components/lib/components/form/UserProfileForm';
-import getApiUri from '../../lib/apiUri';
+import getApiUri from '../lib/apiUri';
 import {
   useGetUserProfileByEmailQuery,
   useUpdateUserByEmailMutation,

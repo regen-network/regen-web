@@ -1,6 +1,6 @@
 import React from 'react';
 import NotFound from 'web-components/lib/components/not-found';
-import { getImgSrc } from '../../lib/imgSrc';
+import { getImgSrc } from '../lib/imgSrc';
 
 const NotFoundPage = (): JSX.Element => {
   return (

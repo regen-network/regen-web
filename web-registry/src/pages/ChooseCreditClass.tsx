@@ -4,8 +4,8 @@ import Grid from '@material-ui/core/Grid';
 
 import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
 import ImageActionCard from 'web-components/lib/components/cards/ImageActionCard';
-import { creditClasses, BasicCreditClass } from '../../mocks';
-import { getImgSrc } from '../../lib/imgSrc';
+import { creditClasses, BasicCreditClass } from '../mocks';
+import { getImgSrc } from '../lib/imgSrc';
 
 const useStyles = makeStyles((theme: Theme) => ({
   card: {

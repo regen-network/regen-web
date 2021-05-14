@@ -3,9 +3,9 @@ import { useAuth0 } from '@auth0/auth0-react';
 import axios from 'axios';
 import { useQuery, gql } from '@apollo/client';
 
-import { NavBar } from '../organisms';
-import getApiUri from '../../lib/apiUri';
-import getRegistryUrl from '../../lib/registryUrl';
+import { NavBar } from '../components/organisms';
+import getApiUri from '../lib/apiUri';
+import getRegistryUrl from '../lib/registryUrl';
 
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';

@@ -7,11 +7,11 @@ import { useAuth0 } from '@auth0/auth0-react';
 
 import LoginForm, { Values } from 'web-components/lib/components/form/LoginForm';
 import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
-import getRegistryUrl from '../../lib/registryUrl';
-import auth0 from '../../auth0';
-import getApiUri from '../../lib/apiUri';
+import getRegistryUrl from '../lib/registryUrl';
+import auth0 from '../auth0';
+import getApiUri from '../lib/apiUri';
 
-const CREATE_USER = loader('../../graphql/ReallyCreateUser.graphql');
+const CREATE_USER = loader('../graphql/ReallyCreateUser.graphql');
 
 function Signup(): JSX.Element {
   const [createUser] = useMutation(CREATE_USER);

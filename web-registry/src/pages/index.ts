@@ -17,6 +17,6 @@ export * from './ProjectPlans';
 export * from './Projects';
 export * from './Seller';
 export * from './Signup';
-export * from '../organisms/UserCredits';
+export * from '../components/organisms/UserCredits';
 export * from './UserProfile';
 export * from './VerifyEmail';

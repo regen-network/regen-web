@@ -5,7 +5,7 @@ import { loader } from 'graphql.macro';
 import { useQuery } from '@apollo/client';
 import ReactToPrint from 'react-to-print';
 
-import getRegistryUrl from '../../lib/registryUrl';
+import getRegistryUrl from '../lib/registryUrl';
 import Certificate from 'web-components/lib/components/certificate';
 import Title from 'web-components/lib/components/title';
 import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';
@@ -16,9 +16,9 @@ import Section from 'web-components/lib/components/section';
 import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
 import { getFormattedPeriod } from 'web-components/lib/utils/format';
 
-import background from '../../assets/certificate-bg.png';
-import pageBackground from '../../assets/certificate-page-bg.jpg';
-import projectsBackground from '../../assets/certificate-projects-bg.jpg';
+import background from '../assets/certificate-bg.png';
+import pageBackground from '../assets/certificate-page-bg.jpg';
+import projectsBackground from '../assets/certificate-projects-bg.jpg';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -130,8 +130,8 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const PURCHASES_BY_STRIPE_ID = loader('../../graphql/PurchasesByStripeId.graphql');
-const PURCHASES_BY_BUYER_WALLET_ID = loader('../../graphql/PurchasesByBuyerWalletId.graphql');
+const PURCHASES_BY_STRIPE_ID = loader('../graphql/PurchasesByStripeId.graphql');
+const PURCHASES_BY_BUYER_WALLET_ID = loader('../graphql/PurchasesByBuyerWalletId.graphql');
 
 function getName(obj?: { name: string }): string {
   return obj ? obj.name : '';

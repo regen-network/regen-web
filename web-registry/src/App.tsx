@@ -335,7 +335,6 @@ const App: React.FC = (props): JSX.Element => {
                 <ProtectedRoute path={`${path}/getting-started`} component={GettingStarted} />
                 <ProtectedRoute path={`${path}/choose-credit-class`} component={ChooseCreditClass} />
                 <ProtectedRoute path={`${path}/basic-info`} component={BasicInfo} />
-                {/* <ProtectedRoute path={`${path}/eligibility`} component={Eligibility} /> */}
                 <Route
                   path={`${path}/eligibility`}
                   render={({ match: { path } }) => (

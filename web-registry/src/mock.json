@@ -493,6 +493,12 @@
           "type": "Issuance",
           "date": "March 8, 2021",
           "url": "https://regen-registry.s3.amazonaws.com/projects/cavan-station/cavan-station-certificate-2020-030821.pdf"
+        },
+        {
+          "name": "Verification Report 2017-2020",
+          "type": "Verification",
+          "date": "April 21, 2021",
+          "url": "https://regen-registry.s3.amazonaws.com/projects/cavan-station/Verification+Report+2017-2020.pdf"
         }
       ],
       "name": "Cavan Station",

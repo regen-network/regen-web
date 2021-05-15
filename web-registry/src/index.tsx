@@ -5,8 +5,6 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import ThemeProvider from 'web-components/lib/theme/RegenThemeProvider';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import 'url-search-params-polyfill';
-import './url-search-params-polyfill.d';
 
 import { Auth0Provider } from '@auth0/auth0-react';
 import { AuthApolloProvider } from './apollo';

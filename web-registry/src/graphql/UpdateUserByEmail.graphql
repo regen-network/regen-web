@@ -1,8 +1,14 @@
 mutation UpdateUserByEmail($input: UpdateUserByEmailInput!) {
   updateUserByEmail(input: $input) {
     user {
-      id
       partyId
+      phoneNumber
+      roleTitle
+    }
+    partyByPartyId {
+      name
+      description
+      image
     }
   }
 }

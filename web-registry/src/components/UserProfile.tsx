@@ -120,7 +120,7 @@ export default function UserProfile(): JSX.Element {
       await updatePartyById({
         variables: {
           input: {
-            id: userData?.updateUserByEmail?.user?.partyId,
+            id: userProfileData?.userByEmail?.partyId,
             partyPatch: {
               description: values.description,
               name: values.name,

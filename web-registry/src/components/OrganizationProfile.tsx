@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { gql, useQuery } from '@apollo/client';
-import { loader } from 'graphql.macro';
 import { useAuth0 } from '@auth0/auth0-react';
 // import { makeStyles, Theme } from '@material-ui/core/styles';
-import { useMutation } from '@apollo/client';
 
 import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
 import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
@@ -12,31 +9,12 @@ import OrganizationProfileForm, {
   OrgProfileFormValues,
 } from 'web-components/lib/components/form/OrganizationProfileForm';
 
-const UPDATE_PARTY_BY_ID = loader('../graphql/UpdatePartyById.graphql');
-const UPDATE_ORG_BY_PARTY_ID = loader('../graphql/UpdateOrganizationByPartyId.graphql');
-const CREATE_ORG = loader('../graphql/ReallyCreateOrganizationIfNeeded.graphql');
-const GET_ORGANIZATION_PROFILE = gql`
-  query($email: String!) {
-    userByEmail(email: $email) {
-      id
-      partyId
-      partyByPartyId {
-        walletByWalletId {
-          addr
-        }
-      }
-      organizationMembersByMemberId(condition: { isOwner: true }) {
-        nodes {
-          organizationByOrganizationId {
-            partyByPartyId {
-              name
-            }
-          }
-        }
-      }
-    }
-  }
-`;
+import {
+  useGetOrganizationProfileByEmailQuery,
+  useUpdatePartyByIdMutation,
+  useReallyCreateOrganizationMutation,
+  useUpdateOrganizationByPartyIdMutation,
+} from '../generated/graphql';
 
 const OrganizationProfile: React.FC = () => {
   const history = useHistory();
@@ -45,23 +23,22 @@ const OrganizationProfile: React.FC = () => {
   const [isSubmitting, setSubmitting] = useState<boolean>(false);
   const userEmail = user?.email;
 
-  const { data: orgProfile } = useQuery(GET_ORGANIZATION_PROFILE, {
+  const { data: orgProfile } = useGetOrganizationProfileByEmailQuery({
     skip: !userEmail,
     errorPolicy: 'ignore',
     variables: { email: userEmail },
   });
   const userByEmail = orgProfile?.userByEmail;
-  console.log('orgProfile :>> ', orgProfile);
 
-  const [createOrg] = useMutation(CREATE_ORG, {
+  const [createOrg] = useReallyCreateOrganizationMutation({
     errorPolicy: 'ignore',
   });
 
-  const [updateOrgByPartyId] = useMutation(UPDATE_ORG_BY_PARTY_ID, {
+  const [updateOrgByPartyId] = useUpdateOrganizationByPartyIdMutation({
     errorPolicy: 'ignore',
   });
 
-  const [updatePartyById] = useMutation(UPDATE_PARTY_BY_ID, {
+  const [updatePartyById] = useUpdatePartyByIdMutation({
     errorPolicy: 'ignore',
   });
 
@@ -70,19 +47,20 @@ const OrganizationProfile: React.FC = () => {
   }
 
   async function submitOrgProfile(values: OrgProfileFormValues): Promise<void> {
-    console.log('values :>> ', values);
     try {
       // if there is no current organization associated with this user
+      // if (userByEmail?.partyByPartyId.wal)
       if (!userByEmail?.organizationMembersByMemberId?.nodes?.[0]) {
         await createOrg({
           variables: {
             input: {
+              description: values.description,
               legalName: values.legalName,
               displayName: values.displayName,
               orgAddress: JSON.stringify(values.location),
-              walletAddr: userByEmail.partyByPartyId.walletByWalletId.addr,
+              walletAddr: userByEmail?.partyByPartyId?.walletByWalletId?.addr,
               image: values.logo,
-              ownerId: userByEmail.id,
+              ownerId: orgProfile?.userByEmail?.id,
             },
           },
         });

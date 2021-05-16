@@ -13397,6 +13397,38 @@ export type CreateUserOrganizationIfNeededMutation = (
   )> }
 );
 
+export type GetOrganizationProfileByEmailQueryVariables = Exact<{
+  email: Scalars['String'];
+}>;
+
+
+export type GetOrganizationProfileByEmailQuery = (
+  { __typename?: 'Query' }
+  & { userByEmail?: Maybe<(
+    { __typename?: 'User' }
+    & Pick<User, 'id' | 'partyId'>
+    & { partyByPartyId?: Maybe<(
+      { __typename?: 'Party' }
+      & { walletByWalletId?: Maybe<(
+        { __typename?: 'Wallet' }
+        & Pick<Wallet, 'addr'>
+      )> }
+    )>, organizationMembersByMemberId: (
+      { __typename?: 'OrganizationMembersConnection' }
+      & { nodes: Array<Maybe<(
+        { __typename?: 'OrganizationMember' }
+        & { organizationByOrganizationId?: Maybe<(
+          { __typename?: 'Organization' }
+          & { partyByPartyId?: Maybe<(
+            { __typename?: 'Party' }
+            & Pick<Party, 'name'>
+          )> }
+        )> }
+      )>> }
+    ) }
+  )> }
+);
+
 export type GetUserProfileByEmailQueryVariables = Exact<{
   email: Scalars['String'];
 }>;
@@ -13406,7 +13438,7 @@ export type GetUserProfileByEmailQuery = (
   { __typename?: 'Query' }
   & { userByEmail?: Maybe<(
     { __typename?: 'User' }
-    & Pick<User, 'email' | 'id' | 'isAdmin' | 'phoneNumber' | 'roleTitle'>
+    & Pick<User, 'email' | 'id' | 'isAdmin' | 'phoneNumber' | 'partyId' | 'roleTitle'>
     & { partyByPartyId?: Maybe<(
       { __typename?: 'Party' }
       & Pick<Party, 'name' | 'walletId' | 'description' | 'image'>
@@ -13626,6 +13658,22 @@ export type PurchasesFieldsFragment = (
   )>> }
 );
 
+export type ReallyCreateOrganizationMutationVariables = Exact<{
+  input: ReallyCreateOrganizationInput;
+}>;
+
+
+export type ReallyCreateOrganizationMutation = (
+  { __typename?: 'Mutation' }
+  & { reallyCreateOrganization?: Maybe<(
+    { __typename?: 'ReallyCreateOrganizationPayload' }
+    & { organization?: Maybe<(
+      { __typename?: 'Organization' }
+      & Pick<Organization, 'id' | 'partyId'>
+    )> }
+  )> }
+);
+
 export type ReallyCreateUserMutationVariables = Exact<{
   input: ReallyCreateUserInput;
 }>;
@@ -13662,6 +13710,22 @@ export type ReallyCreateUserIfNeededMutation = (
         { __typename?: 'Party' }
         & Pick<Party, 'walletId' | 'addressId'>
       )> }
+    )> }
+  )> }
+);
+
+export type UpdateOrganizationByPartyIdMutationVariables = Exact<{
+  input: UpdateOrganizationByPartyIdInput;
+}>;
+
+
+export type UpdateOrganizationByPartyIdMutation = (
+  { __typename?: 'Mutation' }
+  & { updateOrganizationByPartyId?: Maybe<(
+    { __typename?: 'UpdateOrganizationPayload' }
+    & { organization?: Maybe<(
+      { __typename?: 'Organization' }
+      & Pick<Organization, 'id' | 'legalName'>
     )> }
   )> }
 );
@@ -14083,6 +14147,56 @@ export function useCreateUserOrganizationIfNeededMutation(baseOptions?: Apollo.M
 export type CreateUserOrganizationIfNeededMutationHookResult = ReturnType<typeof useCreateUserOrganizationIfNeededMutation>;
 export type CreateUserOrganizationIfNeededMutationResult = Apollo.MutationResult<CreateUserOrganizationIfNeededMutation>;
 export type CreateUserOrganizationIfNeededMutationOptions = Apollo.BaseMutationOptions<CreateUserOrganizationIfNeededMutation, CreateUserOrganizationIfNeededMutationVariables>;
+export const GetOrganizationProfileByEmailDocument = gql`
+    query GetOrganizationProfileByEmail($email: String!) {
+  userByEmail(email: $email) {
+    id
+    partyId
+    partyByPartyId {
+      walletByWalletId {
+        addr
+      }
+    }
+    organizationMembersByMemberId(condition: {isOwner: true}) {
+      nodes {
+        organizationByOrganizationId {
+          partyByPartyId {
+            name
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetOrganizationProfileByEmailQuery__
+ *
+ * To run a query within a React component, call `useGetOrganizationProfileByEmailQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetOrganizationProfileByEmailQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetOrganizationProfileByEmailQuery({
+ *   variables: {
+ *      email: // value for 'email'
+ *   },
+ * });
+ */
+export function useGetOrganizationProfileByEmailQuery(baseOptions: Apollo.QueryHookOptions<GetOrganizationProfileByEmailQuery, GetOrganizationProfileByEmailQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetOrganizationProfileByEmailQuery, GetOrganizationProfileByEmailQueryVariables>(GetOrganizationProfileByEmailDocument, options);
+      }
+export function useGetOrganizationProfileByEmailLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetOrganizationProfileByEmailQuery, GetOrganizationProfileByEmailQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetOrganizationProfileByEmailQuery, GetOrganizationProfileByEmailQueryVariables>(GetOrganizationProfileByEmailDocument, options);
+        }
+export type GetOrganizationProfileByEmailQueryHookResult = ReturnType<typeof useGetOrganizationProfileByEmailQuery>;
+export type GetOrganizationProfileByEmailLazyQueryHookResult = ReturnType<typeof useGetOrganizationProfileByEmailLazyQuery>;
+export type GetOrganizationProfileByEmailQueryResult = Apollo.QueryResult<GetOrganizationProfileByEmailQuery, GetOrganizationProfileByEmailQueryVariables>;
 export const GetUserProfileByEmailDocument = gql`
     query GetUserProfileByEmail($email: String!) {
   userByEmail(email: $email) {
@@ -14090,6 +14204,7 @@ export const GetUserProfileByEmailDocument = gql`
     id
     isAdmin
     phoneNumber
+    partyId
     roleTitle
     partyByPartyId {
       name
@@ -14282,6 +14397,42 @@ export function useAllPurchasesByStripeIdLazyQuery(baseOptions?: Apollo.LazyQuer
 export type AllPurchasesByStripeIdQueryHookResult = ReturnType<typeof useAllPurchasesByStripeIdQuery>;
 export type AllPurchasesByStripeIdLazyQueryHookResult = ReturnType<typeof useAllPurchasesByStripeIdLazyQuery>;
 export type AllPurchasesByStripeIdQueryResult = Apollo.QueryResult<AllPurchasesByStripeIdQuery, AllPurchasesByStripeIdQueryVariables>;
+export const ReallyCreateOrganizationDocument = gql`
+    mutation ReallyCreateOrganization($input: ReallyCreateOrganizationInput!) {
+  reallyCreateOrganization(input: $input) {
+    organization {
+      id
+      partyId
+    }
+  }
+}
+    `;
+export type ReallyCreateOrganizationMutationFn = Apollo.MutationFunction<ReallyCreateOrganizationMutation, ReallyCreateOrganizationMutationVariables>;
+
+/**
+ * __useReallyCreateOrganizationMutation__
+ *
+ * To run a mutation, you first call `useReallyCreateOrganizationMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useReallyCreateOrganizationMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [reallyCreateOrganizationMutation, { data, loading, error }] = useReallyCreateOrganizationMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useReallyCreateOrganizationMutation(baseOptions?: Apollo.MutationHookOptions<ReallyCreateOrganizationMutation, ReallyCreateOrganizationMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<ReallyCreateOrganizationMutation, ReallyCreateOrganizationMutationVariables>(ReallyCreateOrganizationDocument, options);
+      }
+export type ReallyCreateOrganizationMutationHookResult = ReturnType<typeof useReallyCreateOrganizationMutation>;
+export type ReallyCreateOrganizationMutationResult = Apollo.MutationResult<ReallyCreateOrganizationMutation>;
+export type ReallyCreateOrganizationMutationOptions = Apollo.BaseMutationOptions<ReallyCreateOrganizationMutation, ReallyCreateOrganizationMutationVariables>;
 export const ReallyCreateUserDocument = gql`
     mutation ReallyCreateUser($input: ReallyCreateUserInput!) {
   reallyCreateUser(input: $input) {
@@ -14360,6 +14511,42 @@ export function useReallyCreateUserIfNeededMutation(baseOptions?: Apollo.Mutatio
 export type ReallyCreateUserIfNeededMutationHookResult = ReturnType<typeof useReallyCreateUserIfNeededMutation>;
 export type ReallyCreateUserIfNeededMutationResult = Apollo.MutationResult<ReallyCreateUserIfNeededMutation>;
 export type ReallyCreateUserIfNeededMutationOptions = Apollo.BaseMutationOptions<ReallyCreateUserIfNeededMutation, ReallyCreateUserIfNeededMutationVariables>;
+export const UpdateOrganizationByPartyIdDocument = gql`
+    mutation UpdateOrganizationByPartyId($input: UpdateOrganizationByPartyIdInput!) {
+  updateOrganizationByPartyId(input: $input) {
+    organization {
+      id
+      legalName
+    }
+  }
+}
+    `;
+export type UpdateOrganizationByPartyIdMutationFn = Apollo.MutationFunction<UpdateOrganizationByPartyIdMutation, UpdateOrganizationByPartyIdMutationVariables>;
+
+/**
+ * __useUpdateOrganizationByPartyIdMutation__
+ *
+ * To run a mutation, you first call `useUpdateOrganizationByPartyIdMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateOrganizationByPartyIdMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateOrganizationByPartyIdMutation, { data, loading, error }] = useUpdateOrganizationByPartyIdMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useUpdateOrganizationByPartyIdMutation(baseOptions?: Apollo.MutationHookOptions<UpdateOrganizationByPartyIdMutation, UpdateOrganizationByPartyIdMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateOrganizationByPartyIdMutation, UpdateOrganizationByPartyIdMutationVariables>(UpdateOrganizationByPartyIdDocument, options);
+      }
+export type UpdateOrganizationByPartyIdMutationHookResult = ReturnType<typeof useUpdateOrganizationByPartyIdMutation>;
+export type UpdateOrganizationByPartyIdMutationResult = Apollo.MutationResult<UpdateOrganizationByPartyIdMutation>;
+export type UpdateOrganizationByPartyIdMutationOptions = Apollo.BaseMutationOptions<UpdateOrganizationByPartyIdMutation, UpdateOrganizationByPartyIdMutationVariables>;
 export const UpdatePartyByIdDocument = gql`
     mutation UpdatePartyById($input: UpdatePartyByIdInput!) {
   updatePartyById(input: $input) {

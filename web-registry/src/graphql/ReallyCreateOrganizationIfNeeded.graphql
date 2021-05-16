@@ -1,8 +1,0 @@
-mutation ReallyCreateOrganizationIfNeeded($input: ReallyCreateOrganizationIfNeededInput!) {
-  reallyCreateOrganizationIfNeeded(input: $input) {
-    organization {
-      id
-      partyId
-    }
-  }
-}

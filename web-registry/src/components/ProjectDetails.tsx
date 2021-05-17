@@ -295,18 +295,15 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
 
   const viewOnLedger = (creditVintage: any): void => {
     if (creditVintage?.txHash) {
-      if (creditVintage.txHash === issuanceModalData?.txHash) {
-        setIssuanceModalOpen(true);
-        return;
+      if (creditVintage.txHash !== issuanceModalData?.txHash) {
+        const issuanceData = buildIssuanceModalData(
+          data.projectByHandle,
+          data.projectByHandle.documentsByProjectId.nodes,
+          creditVintage,
+        );
+
+        setIssuanceModalData(issuanceData);
       }
-
-      const issuanceData = buildIssuanceModalData(
-        data.projectByHandle,
-        data.projectByHandle.documentsByProjectId.nodes,
-        creditVintage,
-      );
-
-      setIssuanceModalData(issuanceData);
       setIssuanceModalOpen(true);
     }
   };

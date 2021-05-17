@@ -61,56 +61,6 @@
   "projects": [
     {
       "id": "woodburn",
-      "documents": [
-        {
-          "name": "Project Plan",
-          "type": "Project Plan",
-          "date": "December 11, 2020",
-          "url": "https://regen-registry.s3.amazonaws.com/projects/woodburn/WOODBURN+Project+Plan.pdf"
-        },
-        {
-          "name": "Monitoring Report 2017 (Baseline)",
-          "type": "Monitoring",
-          "date": "December 14, 2020",
-          "url": "https://regen-registry.s3.amazonaws.com/projects/woodburn/Woodburn+Monitoring+Report+2017+(Baseline).pdf"
-        },
-        {
-          "name": "Monitoring Report 2018",
-          "type": "Monitoring",
-          "date": "December 14, 2020",
-          "url": "https://regen-registry.s3.amazonaws.com/projects/woodburn/Woodburn+Monitoring+Report+2018.pdf"
-        },
-        {
-          "name": "Monitoring Report 2019",
-          "type": "Monitoring",
-          "date": "December 14, 2020",
-          "url": "https://regen-registry.s3.amazonaws.com/projects/woodburn/Woodburn+Monitoring+Report+2019.pdf"
-        },
-        {
-          "name": "Monitoring Report 2020",
-          "type": "Monitoring",
-          "date": "December 14, 2020",
-          "url": "https://regen-registry.s3.amazonaws.com/projects/woodburn/Woodburn+Monitoring+Report+2020.pdf"
-        },
-        {
-          "name": "Verification Report 2017-2020",
-          "type": "Verification",
-          "date": "April 13, 2021",
-          "url": "https://regen-registry.s3.amazonaws.com/projects/woodburn/Verification+Report+2017-2020.pdf"
-        },
-        {
-          "name": "Soil Sampling Data",
-          "type": "Monitoring",
-          "date": "December 11, 2020",
-          "url": "https://regen-registry.s3.amazonaws.com/projects/woodburn/Woodburn+soil+data.xlsx"
-        },
-        {
-          "name": "Issuance Document",
-          "type": "Issuance",
-          "date": "December 16, 2020",
-          "url": "https://regen-registry.s3.amazonaws.com/projects/woodburn/woodburn-certificate-121620.pdf"
-        }
-      ],
       "name": "Woodburn",
       "fieldsOverride": {
         "nonMonitoredImpact": {
@@ -171,7 +121,7 @@
         }
       },
       "shortDescription": "Woodburn is a 2,555 ha beef breeding enterprise situated north of Walcha on the New England tablelands. Woodburn was purchased in 2011 with the goal of breeding our own homegrown grass-fed beef. Set at approximately 1,120m above sea level with an average annual rainfall of 730mm, the soils are basalt and sandy loam, and the land is lightly timbered.",
-      "longDescription": "<p>Grant has been managing Woodburn since it was purchased by the Wilmot Cattle Co in 2011 and has overseen the transition from conventional management systems to regenerative agricultural practices. Grant and Tanya both have an innate connection to the land having come from rural NSW Mid North Coast. Grant has worked in the North West Slopes and Plains region in a managerial role bringing over 25 years experience to the team.</p><p>Grant has overseen the conversion of Woodburn's management strategies towards regenerative agricultural practices. This process accelerated from 2016 and has led to a general improvement in the farm's productivity and ecosystem health.</p>",
+      "longDescription": "Grant has been managing Woodburn since it was purchased by the Wilmot Cattle Co in 2011 and has overseen the transition from conventional management systems to regenerative agricultural practices. Grant and Tanya both have an innate connection to the land having come from rural NSW Mid North Coast. Grant has worked in the North West Slopes and Plains region in a managerial role bringing over 25 years experience to the team.\n\nGrant has overseen the conversion of Woodburn's management strategies towards regenerative agricultural practices. This process accelerated from 2016 and has led to a general improvement in the farm's productivity and ecosystem health.",
       "media": [
         {
           "src": "https://regen-registry.s3.amazonaws.com/projects/woodburn/image1.jpg",
@@ -278,14 +228,18 @@
         }
       ],
       "creditClass": {
-        "name": "CarbonPlus Grasslands",
+        "name": "Carbon<i>Plus</i>&nbsp;&nbsp;Grasslands",
         "description": "Livestock grazing covers over 3.3 billion hectares, or 25 percent of the world’s land area. Managed grazing practices can reverse land degradation, enhance net carbon sequestration, and improve soil and vegetation quality.<br><br>Under managed grazing, carbon sequestration potential is estimated between 16.4 and 26 Gt CO2e sequestered in the period between 2020-2050.<br><br>This credit is designed to significantly increase the amount of hectares under managed grazing worldwide. To that end, the methodology relies on remote sensing to substantially reduce the cost of monitoring carbon sequestration while maintaining scientific rigor.",
-        "tag": "soil organic carbon"
+        "tag": "soil organic carbon",
+        "pdfUrl": "https://regen-registry.s3.amazonaws.com/GHG+and+Co-Benefits+in+Grazing+Systems+Credit+Class.pdf"
+      },
+      "methodology": {
+        "name": "Carbon<i>Plus</i>&nbsp;&nbsp;Grasslands",
+        "pdfUrl": "https://regen-registry.s3.amazonaws.com/Methodology+for+GHG+and+Co-Benefits+in+Grazing+Systems.pdf"
       }
     },
     {
       "id": "wongella",
-      "documents": [],
       "name": "Wongella",
       "fieldsOverride": {
         "nonMonitoredImpact": {
@@ -341,7 +295,7 @@
         }
       },
       "shortDescription": "Wongella is a 3,916 hectare property located in the South Burnett region of Queensland, Australia. At the time of purchase in 2017, the property was heavily degraded and the current management team set out to restore and regenerate the landscape while producing climate friendly grass fed beef.",
-      "longDescription": "<p>Dan Carney and the Wongella team understand the needs of a landscape starts with a custodial approach, one that embraces the whole system and speaks of the interactive relationship of soil, water, plants and animals. At Wongella the journey to restoration began with embracing this approach and applying practices and principles of regenerative agriculture to realise the potential for a sustainable eco-agricultural production enterprise. </p><p>These keystone practices centre on enhancing on-farm soil health and plant biodiversity, minimising the use of synthetic chemical and fertiliser use, minimising soil disturbance, maximising year-round ground cover and the introduction of time-controlled (regenerative) livestock grazing.</p>",
+      "longDescription": "Dan Carney and the Wongella team understand the needs of a landscape starts with a custodial approach, one that embraces the whole system and speaks of the interactive relationship of soil, water, plants and animals. At Wongella the journey to restoration began with embracing this approach and applying practices and principles of regenerative agriculture to realise the potential for a sustainable eco-agricultural production enterprise.\n\nThese keystone practices centre on enhancing on-farm soil health and plant biodiversity, minimising the use of synthetic chemical and fertiliser use, minimising soil disturbance, maximising year-round ground cover and the introduction of time-controlled (regenerative) livestock grazing.",
       "media": [
         {
           "src": "https://regen-registry.s3.amazonaws.com/projects/wongella/image1.jpg",
@@ -444,63 +398,18 @@
         }
       ],
       "creditClass": {
-        "name": "CarbonPlus Grasslands",
+        "name": "Carbon<i>Plus</i>&nbsp;&nbsp;Grasslands",
         "description": "Livestock grazing covers over 3.3 billion hectares, or 25 percent of the world’s land area. Managed grazing practices can reverse land degradation, enhance net carbon sequestration, and improve soil and vegetation quality.<br><br>Under managed grazing, carbon sequestration potential is estimated between 16.4 and 26 Gt CO2e sequestered in the period between 2020-2050.<br><br>This credit is designed to significantly increase the amount of hectares under managed grazing worldwide. To that end, the methodology relies on remote sensing to substantially reduce the cost of monitoring carbon sequestration while maintaining scientific rigor.",
-        "tag": "soil organic carbon"
+        "tag": "soil organic carbon",
+        "pdfUrl": "https://regen-registry.s3.amazonaws.com/GHG+and+Co-Benefits+in+Grazing+Systems+Credit+Class.pdf"
+      },
+      "methodology": {
+        "name": "Carbon<i>Plus</i>&nbsp;&nbsp;Grasslands",
+        "pdfUrl": "https://regen-registry.s3.amazonaws.com/Methodology+for+GHG+and+Co-Benefits+in+Grazing+Systems.pdf"
       }
     },
     {
       "id": "cavan-station",
-      "documents": [
-        {
-          "name": "Project Plan",
-          "type": "Project Plan",
-          "date": "March 16, 2021",
-          "url": "https://regen-registry.s3.amazonaws.com/projects/cavan-station/Cavan+Regen+Registry+Project+Plan.pdf"
-        },
-        {
-          "name": "Monitoring Report 2017 (Baseline)",
-          "type": "Monitoring",
-          "date": "February 18, 2021",
-          "url": "https://regen-registry.s3.amazonaws.com/projects/cavan-station/TheCavanStationProject_2017_CombinedBaseline.pdf"
-        },
-        {
-          "name": "Monitoring Report 2018",
-          "type": "Monitoring",
-          "date": "February 18, 2021",
-          "url": "https://regen-registry.s3.amazonaws.com/projects/cavan-station/TheCavanStation_2018_CombinedReport.pdf"
-        },
-        {
-          "name": "Monitoring Report 2019",
-          "type": "Monitoring",
-          "date": "February 18, 2021",
-          "url": "https://regen-registry.s3.amazonaws.com/projects/cavan-station/TheCavanStation_2019_CombinedReport.pdf"
-        },
-        {
-          "name": "Monitoring Report 2020",
-          "type": "Monitoring",
-          "date": "February 18, 2021",
-          "url": "https://regen-registry.s3.amazonaws.com/projects/cavan-station/TheCavanStation_2020_CombinedReport.pdf"
-        },
-        {
-          "name": "Issuance Document 2018",
-          "type": "Issuance",
-          "date": "March 8, 2021",
-          "url": "https://regen-registry.s3.amazonaws.com/projects/cavan-station/cavan-station-certificate-2018-030821.pdf"
-        },
-        {
-          "name": "Issuance Document 2020",
-          "type": "Issuance",
-          "date": "March 8, 2021",
-          "url": "https://regen-registry.s3.amazonaws.com/projects/cavan-station/cavan-station-certificate-2020-030821.pdf"
-        },
-        {
-          "name": "Verification Report 2017-2020",
-          "type": "Verification",
-          "date": "April 21, 2021",
-          "url": "https://regen-registry.s3.amazonaws.com/projects/cavan-station/Verification+Report+2017-2020.pdf"
-        }
-      ],
       "name": "Cavan Station",
       "fieldsOverride": {
         "nonMonitoredImpact": {
@@ -556,7 +465,7 @@
         }
       },
       "shortDescription": "Cavan Station is a 9,900 hectare aggregation of properties divided by the Murrunbidgee River at Yass, on the southern tablelands of NSW. Cavan comprises a diverse range of landscapes including limestone rocky outcrops, undulating slopes and steep native vegetated hills.",
-      "longDescription": "<p>The need to build adaptability and resilience into an iconic Merino enterprise has taken a traditional, large scale business on a successful change management journey, building economic, social, and ecological capital through 'enlightened stewardship' and a major rethink on how the business manages its land.</p><p>Cavan Station is focused on the production of the highest-quality, humanely certified merino wool along with lamb and beef. Cavan is also home to the Bogo Merino Stud, producing premium Merino genetics.</p>",
+      "longDescription": "The need to build adaptability and resilience into an iconic Merino enterprise has taken a traditional, large scale business on a successful change management journey, building economic, social, and ecological capital through 'enlightened stewardship' and a major rethink on how the business manages its land.Cavan Station is focused on the production of the highest-quality, humanely certified merino wool along with lamb and beef. Cavan is also home to the Bogo Merino Stud, producing premium Merino genetics.",
       "media": [
         {
           "src": "https://regen-registry.s3.amazonaws.com/projects/cavan-station/image1.png",
@@ -659,57 +568,18 @@
         }
       ],
       "creditClass": {
-        "name": "CarbonPlus Grasslands",
+        "name": "Carbon<i>Plus</i>&nbsp;&nbsp;Grasslands",
         "description": "Livestock grazing covers over 3.3 billion hectares, or 25 percent of the world’s land area. Managed grazing practices can reverse land degradation, enhance net carbon sequestration, and improve soil and vegetation quality.<br><br>Under managed grazing, carbon sequestration potential is estimated between 16.4 and 26 Gt CO2e sequestered in the period between 2020-2050.<br><br>This credit is designed to significantly increase the amount of hectares under managed grazing worldwide. To that end, the methodology relies on remote sensing to substantially reduce the cost of monitoring carbon sequestration while maintaining scientific rigor.",
-        "tag": "soil organic carbon"
+        "tag": "soil organic carbon",
+        "pdfUrl": "https://regen-registry.s3.amazonaws.com/GHG+and+Co-Benefits+in+Grazing+Systems+Credit+Class.pdf"
+      },
+      "methodology": {
+        "name": "Carbon<i>Plus</i>&nbsp;&nbsp;Grasslands",
+        "pdfUrl": "https://regen-registry.s3.amazonaws.com/Methodology+for+GHG+and+Co-Benefits+in+Grazing+Systems.pdf"
       }
     },
     {
       "id": "wilmot",
-      "documents": [
-        {
-          "name": "Project Plan",
-          "type": "Project Plan",
-          "date": "December 11, 2020",
-          "url": "https://regen-registry.s3.amazonaws.com/projects/wilmot/WILMOT+Project+Plan.pdf"
-        },
-        {
-          "name": "Monitoring Report 2017 (Baseline)",
-          "type": "Monitoring",
-          "date": "December 14, 2020",
-          "url": "https://regen-registry.s3.amazonaws.com/projects/wilmot/Wilmot+Monitoring+Report+2017+(Baseline).pdf"
-        },
-        {
-          "name": "Monitoring Report 2018",
-          "type": "Monitoring",
-          "date": "December 14, 2020",
-          "url": "https://regen-registry.s3.amazonaws.com/projects/wilmot/Wilmot+Monitoring+Report+2018.pdf"
-        },
-        {
-          "name": "Monitoring Report 2019",
-          "type": "Monitoring",
-          "date": "December 14, 2020",
-          "url": "https://regen-registry.s3.amazonaws.com/projects/wilmot/Wilmot+Monitoring+Report+2019.pdf"
-        },
-        {
-          "name": "Soil Sampling Data",
-          "type": "Monitoring",
-          "date": "December 11, 2020",
-          "url": "https://regen-registry.s3.amazonaws.com/projects/wilmot/Wilmot+soil+data.xlsx"
-        },
-        {
-          "name": "Verification Report 2017-2019",
-          "type": "Verification",
-          "date": "April 13, 2021",
-          "url": "https://regen-registry.s3.amazonaws.com/projects/wilmot/Verification+Report+2017-2019.pdf"
-        },
-        {
-          "name": "Issuance Document",
-          "type": "Issuance",
-          "date": "December 16, 2020",
-          "url": "https://regen-registry.s3.amazonaws.com/projects/wilmot/wilmot-certificate-121620.pdf"
-        }
-      ],
       "name": "Wilmot",
       "fieldsOverride": {
         "nonMonitoredImpact": {
@@ -771,7 +641,7 @@
         }
       },
       "shortDescription": "Wilmot is an extraordinary property high in the New England Tablelands at Ebor, New South Wales, Australia. Set on 1,854ha and at approximately 1,200m above sea level, average annual rainfall of 1,200mm, highly fertile volcanic basalt soils, and complimented by a series of pristine spring fed, year-round natural waterways including five waterfalls, it is quite simply a unique environment for growing cattle.",
-      "longDescription": "<p>Stu & Trish are the management team behind Wilmot Cattle Co and are driven by the exciting ecological opportunities they can foresee for the business. They have a wholehearted belief in regenerative agriculture and the benefits it will bring to the industry globally, as we collectively work to heal what has largely become a degraded landscape. They have a burning desire to succeed in agriculture and are very ambitious in the growth and development plans they have for Wilmot Cattle Co.</p><p>While Stu has managed the day to day operations of Wilmot since 2016, and now presides over the portfolio of all three properties in a General Manager capacity, Trish works tirelessly behind the scenes ensuring a high level of rigor around the data collection, management, and analysis of every aspect of the business. They firmly believe that you cannot manage what you do not measure and as such, the integrity of the data is paramount.</p><p>In their spare time, they enjoy exploring the natural wonders of Wilmot, including its five waterfalls and large areas of virtually native bushland, with their two kids Harry and Poppy. They all gain great satisfaction from discovering new species of plants and learning about their role in the ecosystem.</p>",
+      "longDescription": "Stu & Trish are the management team behind Wilmot Cattle Co and are driven by the exciting ecological opportunities they can foresee for the business. They have a wholehearted belief in regenerative agriculture and the benefits it will bring to the industry globally, as we collectively work to heal what has largely become a degraded landscape. They have a burning desire to succeed in agriculture and are very ambitious in the growth and development plans they have for Wilmot Cattle Co.\n\nWhile Stu has managed the day to day operations of Wilmot since 2016, and now presides over the portfolio of all three properties in a General Manager capacity, Trish works tirelessly behind the scenes ensuring a high level of rigor around the data collection, management, and analysis of every aspect of the business. They firmly believe that you cannot manage what you do not measure and as such, the integrity of the data is paramount.\n\nIn their spare time, they enjoy exploring the natural wonders of Wilmot, including its five waterfalls and large areas of virtually native bushland, with their two kids Harry and Poppy. They all gain great satisfaction from discovering new species of plants and learning about their role in the ecosystem.",
       "media": [
         {
           "src": "https://regen-registry.s3.amazonaws.com/projects/wilmot/image1.png",
@@ -878,15 +748,19 @@
         }
       ],
       "creditClass": {
-        "name": "CarbonPlus Grasslands",
+        "name": "Carbon<i>Plus</i>&nbsp;&nbsp;Grasslands",
         "description": "Livestock grazing covers over 3.3 billion hectares, or 25 percent of the world’s land area. Managed grazing practices can reverse land degradation, enhance net carbon sequestration, and improve soil and vegetation quality.<br><br>Under managed grazing, carbon sequestration potential is estimated between 16.4 and 26 Gt CO2e sequestered in the period between 2020-2050.<br><br>This credit is designed to significantly increase the amount of hectares under managed grazing worldwide. To that end, the methodology relies on remote sensing to substantially reduce the cost of monitoring carbon sequestration while maintaining scientific rigor.",
-        "tag": "soil organic carbon"
+        "tag": "soil organic carbon",
+        "pdfUrl": "https://regen-registry.s3.amazonaws.com/GHG+and+Co-Benefits+in+Grazing+Systems+Credit+Class.pdf"
+      },
+      "methodology": {
+        "name": "Carbon<i>Plus</i>&nbsp;&nbsp;Grasslands",
+        "pdfUrl": "https://regen-registry.s3.amazonaws.com/Methodology+for+GHG+and+Co-Benefits+in+Grazing+Systems.pdf"
       }
     },
     {
       "id": "pillango",
       "name": "Pillango",
-      "documents": [],
       "fieldsOverride": {
         "nonMonitoredImpact": {
           "title": "Co-benefits"
@@ -936,7 +810,7 @@
         }
       },
       "shortDescription": "The Pillango Project is a 1,101 hectare landscape rooted in an area that was once the world's second largest temperate indigenous grassland, the Great Plains of the U.S. Located in Wallace County, Kansas, Pillango resides at an altitude of 1,059m above sea level and receives an average annual rainfall of approximately 508mm. Pillango is situated in an area of the U.S. that has geographic significance due to its location above the Ogallala Aquifer, a vital water source that is rapidly depleting. In its original prairie form, the landscape was a herbaceous grassland rooted with native shortgrass prairie perennials. Over the last ten to fifteen years, the land has been cultivated as dryland corn and wheat. This has led to soil degradation, characterized by diminished carbon and water storage capacity. Despite this, the landscape has produced cropland-worthy yields under low rainfall conditions for multiple years, illustrating the underlying potential of its native soil bed.",
-      "longDescription": "<p>When Pillango’s owner Will sought to transition his Kansas cropland into climate beneficial production in 2019, he partnered with The Provenance Co (TPC). TPC is led by founders Julie and Leslie, siblings who grew up raising livestock on Kansas land. Julie and Leslie bring their institutional knowledge of regenerative agriculture and on-the-ground management experience to bear on the two biggest challenges properties like Pillango face when transitioning: degraded soil and lack of infrastructure to sustain animal, human and microbial life. Together, Will, Julie, and Leslie have been united in the philosophy that in order to restore life underground, one must simultaneously restore life above ground. TPC began implementing their proprietary land stewardship protocol, Regenerative Rewilding ®, in January of 2021.</p><p>In June of 2020, TPC began to work towards returning both human and animal life to Pillango. Jodi, an experienced farming practitioner raised on the fierce Western Kansas landscape, is the onsite crew leader. Dan, trained as an organic soil specialist, and Roberto, an expert herdsman with 20+ years of ranching experience, oversee livestock movement across Pillango land. Together, Jodi, Dan, and Roberto marry animal impact with soil restoration to rebuild the land's carbon sequestration stores. The onsite TPC team also includes Dan's wife, Cole, and their two children.</p>",
+      "longDescription": "When Pillango’s owner Will sought to transition his Kansas cropland into climate beneficial production in 2019, he partnered with The Provenance Co (TPC). TPC is led by founders Julie and Leslie, siblings who grew up raising livestock on Kansas land. Julie and Leslie bring their institutional knowledge of regenerative agriculture and on-the-ground management experience to bear on the two biggest challenges properties like Pillango face when transitioning: degraded soil and lack of infrastructure to sustain animal, human and microbial life. Together, Will, Julie, and Leslie have been united in the philosophy that in order to restore life underground, one must simultaneously restore life above ground. TPC began implementing their proprietary land stewardship protocol, Regenerative Rewilding ®, in January of 2021.\n\nIn June of 2020, TPC began to work towards returning both human and animal life to Pillango. Jodi, an experienced farming practitioner raised on the fierce Western Kansas landscape, is the onsite crew leader. Dan, trained as an organic soil specialist, and Roberto, an expert herdsman with 20+ years of ranching experience, oversee livestock movement across Pillango land. Together, Jodi, Dan, and Roberto marry animal impact with soil restoration to rebuild the land's carbon sequestration stores. The onsite TPC team also includes Dan's wife, Cole, and their two children.",
       "media": [
         {
           "src": "https://regen-registry.s3.amazonaws.com/projects/pillango/image1.png",
@@ -1033,9 +907,14 @@
         }
       ],
       "creditClass": {
-        "name": "CarbonPlus Grasslands",
+        "name": "Carbon<i>Plus</i>&nbsp;&nbsp;Grasslands",
         "description": "Livestock grazing covers over 3.3 billion hectares, or 25 percent of the world’s land area. Managed grazing practices can reverse land degradation, enhance net carbon sequestration, and improve soil and vegetation quality.<br><br>Under managed grazing, carbon sequestration potential is estimated between 16.4 and 26 Gt CO2e sequestered in the period between 2020-2050.<br><br>This credit is designed to significantly increase the amount of hectares under managed grazing worldwide. To that end, the methodology relies on remote sensing to substantially reduce the cost of monitoring carbon sequestration while maintaining scientific rigor.",
-        "tag": "soil organic carbon"
+        "tag": "soil organic carbon",
+        "pdfUrl": "https://regen-registry.s3.amazonaws.com/GHG+and+Co-Benefits+in+Grazing+Systems+Credit+Class.pdf"
+      },
+      "methodology": {
+        "name": "Carbon<i>Plus</i>&nbsp;&nbsp;Grasslands",
+        "pdfUrl": "https://regen-registry.s3.amazonaws.com/Methodology+for+GHG+and+Co-Benefits+in+Grazing+Systems.pdf"
       }
     }
   ]

@@ -290,15 +290,25 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
     setOpen(false);
   };
 
-  const [issuanceData, setIssuanceData] = useState<IssuanceModalData | null>(null);
-  const viewOnLedger = (creditVintage: any): void => {
-    const issuanceData = buildIssuanceModalData(
-      data.projectByHandle,
-      data.projectByHandle.documentsByProjectId.nodes,
-      creditVintage,
-    );
+  const [issuanceModalData, setIssuanceModalData] = useState<IssuanceModalData | null>(null);
+  const [issuanceModalOpen, setIssuanceModalOpen] = useState(false);
 
-    setIssuanceData(issuanceData);
+  const viewOnLedger = (creditVintage: any): void => {
+    if (creditVintage?.txHash) {
+      if (creditVintage.txHash === issuanceModalData?.txHash) {
+        setIssuanceModalOpen(true);
+        return;
+      }
+
+      const issuanceData = buildIssuanceModalData(
+        data.projectByHandle,
+        data.projectByHandle.documentsByProjectId.nodes,
+        creditVintage,
+      );
+
+      setIssuanceModalData(issuanceData);
+      setIssuanceModalOpen(true);
+    }
   };
 
   const siteMetadata = {
@@ -447,12 +457,12 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
           }}
         />
       </Modal>
-      {issuanceData && (
+      {issuanceModalData && (
         <IssuanceModal
           txClient={txClient}
-          open={!!issuanceData}
-          onClose={() => setIssuanceData(null)}
-          {...issuanceData}
+          open={issuanceModalOpen}
+          onClose={() => setIssuanceModalOpen(false)}
+          {...issuanceModalData}
         />
       )}
       {submitted && <Banner text="Thanks for submitting your information!" />}

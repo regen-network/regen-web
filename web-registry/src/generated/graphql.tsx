@@ -13409,6 +13409,7 @@ export type GetOrganizationProfileByEmailQuery = (
     & Pick<User, 'id' | 'partyId'>
     & { partyByPartyId?: Maybe<(
       { __typename?: 'Party' }
+      & Pick<Party, 'name'>
       & { walletByWalletId?: Maybe<(
         { __typename?: 'Wallet' }
         & Pick<Wallet, 'addr'>
@@ -13419,9 +13420,14 @@ export type GetOrganizationProfileByEmailQuery = (
         { __typename?: 'OrganizationMember' }
         & { organizationByOrganizationId?: Maybe<(
           { __typename?: 'Organization' }
+          & Pick<Organization, 'legalName'>
           & { partyByPartyId?: Maybe<(
             { __typename?: 'Party' }
-            & Pick<Party, 'name'>
+            & Pick<Party, 'name' | 'image' | 'description'>
+            & { addressByAddressId?: Maybe<(
+              { __typename?: 'Address' }
+              & Pick<Address, 'id' | 'feature'>
+            )> }
           )> }
         )> }
       )>> }
@@ -13710,6 +13716,22 @@ export type ReallyCreateUserIfNeededMutation = (
         { __typename?: 'Party' }
         & Pick<Party, 'walletId' | 'addressId'>
       )> }
+    )> }
+  )> }
+);
+
+export type UpdateAddressByIdMutationVariables = Exact<{
+  input: UpdateAddressByIdInput;
+}>;
+
+
+export type UpdateAddressByIdMutation = (
+  { __typename?: 'Mutation' }
+  & { updateAddressById?: Maybe<(
+    { __typename?: 'UpdateAddressPayload' }
+    & { address?: Maybe<(
+      { __typename?: 'Address' }
+      & Pick<Address, 'id' | 'feature'>
     )> }
   )> }
 );
@@ -14153,6 +14175,7 @@ export const GetOrganizationProfileByEmailDocument = gql`
     id
     partyId
     partyByPartyId {
+      name
       walletByWalletId {
         addr
       }
@@ -14160,8 +14183,15 @@ export const GetOrganizationProfileByEmailDocument = gql`
     organizationMembersByMemberId(condition: {isOwner: true}) {
       nodes {
         organizationByOrganizationId {
+          legalName
           partyByPartyId {
             name
+            image
+            description
+            addressByAddressId {
+              id
+              feature
+            }
           }
         }
       }
@@ -14511,6 +14541,42 @@ export function useReallyCreateUserIfNeededMutation(baseOptions?: Apollo.Mutatio
 export type ReallyCreateUserIfNeededMutationHookResult = ReturnType<typeof useReallyCreateUserIfNeededMutation>;
 export type ReallyCreateUserIfNeededMutationResult = Apollo.MutationResult<ReallyCreateUserIfNeededMutation>;
 export type ReallyCreateUserIfNeededMutationOptions = Apollo.BaseMutationOptions<ReallyCreateUserIfNeededMutation, ReallyCreateUserIfNeededMutationVariables>;
+export const UpdateAddressByIdDocument = gql`
+    mutation UpdateAddressById($input: UpdateAddressByIdInput!) {
+  updateAddressById(input: $input) {
+    address {
+      id
+      feature
+    }
+  }
+}
+    `;
+export type UpdateAddressByIdMutationFn = Apollo.MutationFunction<UpdateAddressByIdMutation, UpdateAddressByIdMutationVariables>;
+
+/**
+ * __useUpdateAddressByIdMutation__
+ *
+ * To run a mutation, you first call `useUpdateAddressByIdMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateAddressByIdMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateAddressByIdMutation, { data, loading, error }] = useUpdateAddressByIdMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useUpdateAddressByIdMutation(baseOptions?: Apollo.MutationHookOptions<UpdateAddressByIdMutation, UpdateAddressByIdMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateAddressByIdMutation, UpdateAddressByIdMutationVariables>(UpdateAddressByIdDocument, options);
+      }
+export type UpdateAddressByIdMutationHookResult = ReturnType<typeof useUpdateAddressByIdMutation>;
+export type UpdateAddressByIdMutationResult = Apollo.MutationResult<UpdateAddressByIdMutation>;
+export type UpdateAddressByIdMutationOptions = Apollo.BaseMutationOptions<UpdateAddressByIdMutation, UpdateAddressByIdMutationVariables>;
 export const UpdateOrganizationByPartyIdDocument = gql`
     mutation UpdateOrganizationByPartyId($input: UpdateOrganizationByPartyIdInput!) {
   updateOrganizationByPartyId(input: $input) {

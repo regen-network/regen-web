@@ -1,0 +1,8 @@
+mutation UpdateAddressById($input: UpdateAddressByIdInput!) {
+  updateAddressById(input: $input) {
+    address {
+      id
+      feature
+    }
+  }
+}

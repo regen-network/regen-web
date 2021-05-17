@@ -24,6 +24,7 @@ interface FormProps {
   submit: (values: OrgProfileFormValues) => Promise<void>;
   goBack: () => void;
   skip: () => void;
+  initialValues?: OrgProfileFormValues;
   mapToken: string;
 }
 
@@ -80,7 +81,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const OrganizationProfileForm: React.FC<FormProps> = ({ submit, goBack, skip, mapToken }) => {
+const OrganizationProfileForm: React.FC<FormProps> = p => {
   const [acctType, setAcctType] = useState<AcctType>('personal');
   const classes = useStyles();
   const isIndividual = acctType === 'personal';
@@ -88,13 +89,16 @@ const OrganizationProfileForm: React.FC<FormProps> = ({ submit, goBack, skip, ma
 
   return (
     <Formik
-      initialValues={{
-        description: '',
-        displayName: '',
-        legalName: '',
-        location: '',
-        logo: '',
-      }}
+      enableReinitialize
+      initialValues={
+        p.initialValues || {
+          description: '',
+          displayName: '',
+          legalName: '',
+          location: '',
+          logo: '',
+        }
+      }
       validate={(values: OrgProfileFormValues) => {
         const errors: Partial<OrgProfileFormValues> = {};
         if (isOrg) {
@@ -115,7 +119,7 @@ const OrganizationProfileForm: React.FC<FormProps> = ({ submit, goBack, skip, ma
       onSubmit={async (values, { setSubmitting }) => {
         setSubmitting(true);
         try {
-          await submit(values);
+          await p.submit(values);
           setSubmitting(false);
         } catch (e) {
           setSubmitting(false);
@@ -175,7 +179,7 @@ const OrganizationProfileForm: React.FC<FormProps> = ({ submit, goBack, skip, ma
                   label="Organization location"
                   name="location"
                   placeholder="Start typing the location"
-                  token={mapToken}
+                  token={p.mapToken}
                 />
                 <Field
                   className={classes.textField}
@@ -198,8 +202,8 @@ const OrganizationProfileForm: React.FC<FormProps> = ({ submit, goBack, skip, ma
             </PopIn>
 
             <OnboardingSubmit
-              onSubmit={isIndividual ? skip : submitForm}
-              onCancel={goBack}
+              onSubmit={isIndividual ? p.skip : submitForm}
+              onCancel={p.goBack}
               disabled={(submitCount > 0 && !isValid) || isSubmitting}
             />
           </Form>

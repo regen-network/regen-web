@@ -3,6 +3,7 @@ query GetOrganizationProfileByEmail($email: String!) {
     id
     partyId
     partyByPartyId {
+      name
       walletByWalletId {
         addr
       }
@@ -10,8 +11,15 @@ query GetOrganizationProfileByEmail($email: String!) {
     organizationMembersByMemberId(condition: { isOwner: true }) {
       nodes {
         organizationByOrganizationId {
+          legalName
           partyByPartyId {
             name
+            image
+            description
+            addressByAddressId {
+              id
+              feature
+            }
           }
         }
       }

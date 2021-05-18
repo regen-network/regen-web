@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import bbox from '@turf/bbox';
-// import { FeatureCollection } from 'geojson';
+// import { FeatureCollection } from 'geojson'; TODO
 // import { AllGeoJSON } from '@turf/helpers';
 import { makeStyles, useTheme, Theme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';

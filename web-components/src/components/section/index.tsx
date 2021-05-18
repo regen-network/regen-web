@@ -62,6 +62,9 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       paddingRight: props.withSlider ? theme.spacing(4) : 0,
     },
   }),
+  titleText: {
+    flex: 2,
+  },
   spaceBetween: {
     display: 'flex',
     justifyContent: 'space-between',

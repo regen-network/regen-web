@@ -103,10 +103,9 @@ export default function ProjectImpact({ impacts }: ProjectImpactProps): JSX.Elem
     <div className={`project-background`}>
       <LazyLoad offset={300}>
         <Section
-          className={classes.section}
+          classes={{ root: classes.section, title: classes.title }}
           title="Impact"
           titleVariant="h2"
-          titleClassName={classes.title}
           titleAlign="left"
           topRight={
             <>

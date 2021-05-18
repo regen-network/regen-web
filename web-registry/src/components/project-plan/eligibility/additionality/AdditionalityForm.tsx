@@ -17,6 +17,8 @@ interface AdditionalityFormProps {
   goBack: () => void;
 }
 
+type RegenerativePractice = { name: string; startDate: string };
+
 export interface AdditionalityValues {
   rotationalGrazing: string;
   rotationalGrazingStartDate: string | null;

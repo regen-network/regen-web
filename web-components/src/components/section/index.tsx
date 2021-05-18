@@ -74,7 +74,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
 
 const Section = ({
   children,
-  classes: propClasses,
+  classes,
   titleLineHeight,
   titleColor,
   titleVariant = 'h2',
@@ -83,16 +83,12 @@ const Section = ({
   topRight,
   withSlider = false,
 }: SectionProps): JSX.Element => {
-  const classes = useStyles({ withSlider, titleLineHeight, titleColor, topRight: !!topRight });
+  const styles = useStyles({ withSlider, titleLineHeight, titleColor, topRight: !!topRight });
   return (
-    <section className={clsx(classes.root, propClasses?.root)}>
+    <section className={clsx(styles.root, classes?.root)}>
       {title && (
-        <div className={clsx(propClasses?.titleWrap, topRight && classes.spaceBetween)}>
-          <Title
-            className={clsx(classes.title, propClasses?.title)}
-            variant={titleVariant}
-            align={titleAlign}
-          >
+        <div className={clsx(classes?.titleWrap, topRight && styles.spaceBetween)}>
+          <Title className={clsx(styles.title, classes?.title)} variant={titleVariant} align={titleAlign}>
             {title}
           </Title>
           {titleAlign === 'left' && topRight}

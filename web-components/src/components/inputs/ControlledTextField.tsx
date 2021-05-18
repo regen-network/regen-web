@@ -9,6 +9,7 @@ interface ControlledTextFieldProps extends FieldProps, InputProps {
   description?: string;
   label?: string;
   optional?: boolean;
+  onExampleClick?: () => void;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -38,6 +39,7 @@ export default function ControlledTextField({
   meta,
   optional,
   startAdornment,
+  onExampleClick,
   ...inputProps
 }: ControlledTextFieldProps): JSX.Element {
   const charsLeft = (charLimit || Infinity) - (field.value?.length || 0);
@@ -62,6 +64,7 @@ export default function ControlledTextField({
       field={field}
       form={form}
       meta={meta}
+      onExampleClick={onExampleClick}
     >
       {({ handleChange, handleBlur }) => (
         <>

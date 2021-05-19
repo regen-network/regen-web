@@ -328,7 +328,6 @@ const App: React.FC = (props): JSX.Element => {
           />
           <ProtectedRoute path="/user-profile" component={UserProfile} />
           <ProtectedRoute path="/organization-profile" component={OrganizationProfile} />
-          <ProtectedRoute path="/project-plans" component={ProjectPlanList} />
           <Route
             path="/project-plans"
             render={({ match: { path } }) => (

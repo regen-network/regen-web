@@ -93,7 +93,6 @@ export const AdditionalityForm: React.FC<AdditionalityFormProps> = p => {
         return errors;
       }}
       onSubmit={async (values, { setSubmitting }) => {
-        console.log('values :>> ', values);
         setSubmitting(true);
         try {
           await p.submit(values);

@@ -89,7 +89,7 @@ const Section = ({
   return (
     <section className={clsx(styles.root, className)}>
       {title && (
-        <div className={clsx(classes?.titleWrap, topRight && styles.spaceBetween)}>
+        <div className={clsx(classes?.titleWrap && classes.titleWrap, topRight && styles.spaceBetween)}>
           <Title className={clsx(styles.title, classes?.title)} variant={titleVariant} align={titleAlign}>
             {title}
           </Title>

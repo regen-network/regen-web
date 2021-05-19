@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import PartyAddress from 'web-components/lib/components/party/PartyAddress';
-import { withKnobs, text, object } from '@storybook/addon-knobs';
+import { withKnobs } from '@storybook/addon-knobs';
 
 export default {
   title: 'Components|Party',

@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import ReactHtmlParser from 'react-html-parser';
+import Link from '@material-ui/core/Link';
 import clsx from 'clsx';
 import LazyLoad from 'react-lazyload';
 
@@ -13,10 +14,13 @@ import ProjectPlaceInfo from 'web-components/lib/components/place/ProjectPlaceIn
 import GlanceCard from 'web-components/lib/components/cards/GlanceCard';
 import Description from 'web-components/lib/components/description';
 import ProjectTopCard from 'web-components/lib/components/cards/ProjectTopCard';
+import ReadMore from 'web-components/lib/components/read-more';
 
 interface ProjectTopProps {
   project: Project;
   projectDefault: ProjectDefault;
+  geojson?: any;
+  isGISFile?: boolean;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -75,12 +79,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   glanceCard: {
-    [theme.breakpoints.up('sm')]: {
-      paddingTop: theme.spacing(9.5),
-    },
-    [theme.breakpoints.down('xs')]: {
-      paddingTop: theme.spacing(7.5),
-    },
+    paddingTop: theme.spacing(6),
   },
   media: {
     width: '100%',
@@ -105,7 +104,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   story: {
     [theme.breakpoints.up('sm')]: {
-      paddingTop: theme.spacing(17),
+      paddingTop: theme.spacing(14),
       paddingBottom: theme.spacing(7.5),
     },
     [theme.breakpoints.down('xs')]: {
@@ -173,9 +172,39 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingTop: theme.spacing(0.25),
     },
   },
+  creditClassInfo: {
+    display: 'flex',
+    flexDirection: 'column',
+    marginTop: theme.spacing(2.5),
+  },
+  creditClassDetail: {
+    display: 'flex',
+    alignItems: 'baseline',
+    paddingTop: theme.spacing(1.75),
+  },
+  creditClass: {
+    textTransform: 'uppercase',
+    marginRight: theme.spacing(2),
+    fontSize: theme.typography.pxToRem(12),
+    fontWeight: 800,
+  },
+  creditClassLink: {
+    fontWeight: 700,
+    [theme.breakpoints.up('sm')]: {
+      fontSize: theme.typography.pxToRem(16),
+    },
+    [theme.breakpoints.down('xs')]: {
+      fontSize: theme.typography.pxToRem(14),
+    },
+  },
 }));
 
-export default function ProjectTop({ project, projectDefault }: ProjectTopProps): JSX.Element {
+export default function ProjectTop({
+  project,
+  projectDefault,
+  geojson,
+  isGISFile,
+}: ProjectTopProps): JSX.Element {
   const classes = useStyles();
 
   const videos: Media | Media[] | undefined = project.media.filter(item => item.type === 'video');
@@ -194,6 +223,36 @@ export default function ProjectTop({ project, projectDefault }: ProjectTopProps)
               area={project.area}
               areaUnit={project.areaUnit}
             />
+            <div className={classes.creditClassInfo}>
+              <div className={classes.creditClassDetail}>
+                <Title className={classes.creditClass} variant="h5">
+                  credit class:
+                </Title>
+                <Link
+                  className={classes.creditClassLink}
+                  href={project.creditClass.pdfUrl}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  color="secondary"
+                >
+                  {ReactHtmlParser(project.creditClass.name)}
+                </Link>
+              </div>
+              <div className={classes.creditClassDetail}>
+                <Title className={classes.creditClass} variant="h5">
+                  methodology:
+                </Title>
+                <Link
+                  className={classes.creditClassLink}
+                  href={project.methodology.pdfUrl}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  color="secondary"
+                >
+                  {ReactHtmlParser(project.methodology.name)}
+                </Link>
+              </div>
+            </div>
           </div>
           {project.glanceImgSrc && project.glanceText && (
             <LazyLoad offset={50} once>
@@ -203,6 +262,8 @@ export default function ProjectTop({ project, projectDefault }: ProjectTopProps)
                   text={project.glanceText}
                   imageStorageBaseUrl={imageStorageBaseUrl}
                   apiServerUrl={apiServerUrl}
+                  geojson={geojson}
+                  isGISFile={isGISFile}
                 />
               </div>
             </LazyLoad>
@@ -237,9 +298,9 @@ export default function ProjectTop({ project, projectDefault }: ProjectTopProps)
           <Title variant="h4" className={classes.tagline}>
             {project.tagline}
           </Title>
-          <Description className={classes.description}>
-            {ReactHtmlParser(project.longDescription)}
-          </Description>
+          <ReadMore maxLength={450} restMinLength={300}>
+            {project.longDescription}
+          </ReadMore>
           {project.quote && (
             <div>
               <Title variant="h4" className={clsx(classes.quote, classes.tagline)}>

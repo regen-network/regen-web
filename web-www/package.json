@@ -37,6 +37,7 @@
     "react-helmet": "^6.0.0",
     "react-html-parser": "^2.0.2",
     "react-laag": "1.7.3",
+    "react-use-intercom": "^1.2.0",
     "remark-html": "^12.0.0",
     "styled-components": "5.1.0",
     "typescript": "3.8.3",

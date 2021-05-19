@@ -8,6 +8,7 @@ import CreditsIcon from '../icons/CreditsIcon';
 
 export interface Methodology {
   name: string;
+  pdfUrl?: string;
 }
 
 export interface CreditClass {
@@ -17,6 +18,7 @@ export interface CreditClass {
   tag: string;
   imgSrc?: string;
   keyOutcomesActivitiesDesc?: string;
+  pdfUrl?: string;
 }
 
 interface CreditInfoProps {

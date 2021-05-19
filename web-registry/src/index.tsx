@@ -5,6 +5,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import ThemeProvider from 'web-components/lib/theme/RegenThemeProvider';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import { IntercomProvider } from 'react-use-intercom';
 
 import { Auth0Provider } from '@auth0/auth0-react';
 import { AuthApolloProvider } from './apollo';
@@ -17,6 +18,8 @@ const config = {
   returnTo: window.location.origin || 'http://localhost:3000/',
   audience: 'https://regen-registry-server.herokuapp.com/',
 };
+
+const intercomId = process.env.REACT_APP_INTERCOM_APP_ID || '';
 
 // const onRedirectCallback = (appState: AppState) => {
 //   // If using a Hash Router, you need to use window.history.replaceState to
@@ -37,13 +40,15 @@ ReactDOM.render(
     cacheLocation="localstorage"
   >
     <AuthApolloProvider>
-      <LedgerProvider>
-        <ThemeProvider injectFonts>
-          {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-          <CssBaseline />
-          <App />
-        </ThemeProvider>
-      </LedgerProvider>
+      <IntercomProvider appId={intercomId} autoBoot>
+        <LedgerProvider>
+          <ThemeProvider injectFonts>
+            {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+            <CssBaseline />
+            <App />
+          </ThemeProvider>
+        </LedgerProvider>
+      </IntercomProvider>
     </AuthApolloProvider>
   </Auth0Provider>,
   document.getElementById('root'),

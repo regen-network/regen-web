@@ -90,7 +90,11 @@ const Section = ({
     <section className={clsx(styles.root, className)}>
       {title && (
         <div className={clsx(classes?.titleWrap && classes.titleWrap, topRight && styles.spaceBetween)}>
-          <Title className={clsx(styles.title, classes?.title)} variant={titleVariant} align={titleAlign}>
+          <Title
+            className={clsx(styles.title, classes?.title && classes.title)}
+            variant={titleVariant}
+            align={titleAlign}
+          >
             {title}
           </Title>
           {titleAlign === 'left' && topRight}

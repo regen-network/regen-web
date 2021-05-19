@@ -1,7 +1,6 @@
 query GetOrganizationProfileByEmail($email: String!) {
   userByEmail(email: $email) {
     id
-    partyId
     partyByPartyId {
       name
       walletByWalletId {
@@ -12,6 +11,7 @@ query GetOrganizationProfileByEmail($email: String!) {
       nodes {
         organizationByOrganizationId {
           legalName
+          partyId
           partyByPartyId {
             name
             image

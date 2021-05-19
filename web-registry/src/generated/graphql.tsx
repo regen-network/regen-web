@@ -1112,6 +1112,37 @@ export type CreateCreditVintagePayloadCreditVintageEdgeArgs = {
   orderBy?: Maybe<Array<CreditVintagesOrderBy>>;
 };
 
+/** All input for the create `Document` mutation. */
+export type CreateDocumentInput = {
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `Document` to be created by this mutation. */
+  document: DocumentInput;
+};
+
+/** The output of our create `Document` mutation. */
+export type CreateDocumentPayload = {
+  __typename?: 'CreateDocumentPayload';
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `Document` that was created by this mutation. */
+  document?: Maybe<Document>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** Reads a single `Project` that is related to this `Document`. */
+  projectByProjectId?: Maybe<Project>;
+  /** Reads a single `Event` that is related to this `Document`. */
+  eventByEventId?: Maybe<Event>;
+  /** An edge for our `Document`. May be used by Relay 1. */
+  documentEdge?: Maybe<DocumentsEdge>;
+};
+
+
+/** The output of our create `Document` mutation. */
+export type CreateDocumentPayloadDocumentEdgeArgs = {
+  orderBy?: Maybe<Array<DocumentsOrderBy>>;
+};
+
 /** All input for the create `Event` mutation. */
 export type CreateEventInput = {
   /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
@@ -1519,6 +1550,33 @@ export type CreateRetirementPayload = {
 /** The output of our create `Retirement` mutation. */
 export type CreateRetirementPayloadRetirementEdgeArgs = {
   orderBy?: Maybe<Array<RetirementsOrderBy>>;
+};
+
+/** All input for the create `ShaclGraph` mutation. */
+export type CreateShaclGraphInput = {
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `ShaclGraph` to be created by this mutation. */
+  shaclGraph: ShaclGraphInput;
+};
+
+/** The output of our create `ShaclGraph` mutation. */
+export type CreateShaclGraphPayload = {
+  __typename?: 'CreateShaclGraphPayload';
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `ShaclGraph` that was created by this mutation. */
+  shaclGraph?: Maybe<ShaclGraph>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** An edge for our `ShaclGraph`. May be used by Relay 1. */
+  shaclGraphEdge?: Maybe<ShaclGraphsEdge>;
+};
+
+
+/** The output of our create `ShaclGraph` mutation. */
+export type CreateShaclGraphPayloadShaclGraphEdgeArgs = {
+  orderBy?: Maybe<Array<ShaclGraphsOrderBy>>;
 };
 
 /** All input for the create `Transaction` mutation. */
@@ -3384,6 +3442,45 @@ export type DeleteCreditVintagePayloadCreditVintageEdgeArgs = {
   orderBy?: Maybe<Array<CreditVintagesOrderBy>>;
 };
 
+/** All input for the `deleteDocumentById` mutation. */
+export type DeleteDocumentByIdInput = {
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
+  clientMutationId?: Maybe<Scalars['String']>;
+  id: Scalars['UUID'];
+};
+
+/** All input for the `deleteDocument` mutation. */
+export type DeleteDocumentInput = {
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The globally unique `ID` which will identify a single `Document` to be deleted. */
+  nodeId: Scalars['ID'];
+};
+
+/** The output of our delete `Document` mutation. */
+export type DeleteDocumentPayload = {
+  __typename?: 'DeleteDocumentPayload';
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `Document` that was deleted by this mutation. */
+  document?: Maybe<Document>;
+  deletedDocumentId?: Maybe<Scalars['ID']>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** Reads a single `Project` that is related to this `Document`. */
+  projectByProjectId?: Maybe<Project>;
+  /** Reads a single `Event` that is related to this `Document`. */
+  eventByEventId?: Maybe<Event>;
+  /** An edge for our `Document`. May be used by Relay 1. */
+  documentEdge?: Maybe<DocumentsEdge>;
+};
+
+
+/** The output of our delete `Document` mutation. */
+export type DeleteDocumentPayloadDocumentEdgeArgs = {
+  orderBy?: Maybe<Array<DocumentsOrderBy>>;
+};
+
 /** All input for the `deleteEventById` mutation. */
 export type DeleteEventByIdInput = {
   /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
@@ -3928,6 +4025,41 @@ export type DeleteRetirementPayloadRetirementEdgeArgs = {
   orderBy?: Maybe<Array<RetirementsOrderBy>>;
 };
 
+/** All input for the `deleteShaclGraphByUri` mutation. */
+export type DeleteShaclGraphByUriInput = {
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
+  clientMutationId?: Maybe<Scalars['String']>;
+  uri: Scalars['String'];
+};
+
+/** All input for the `deleteShaclGraph` mutation. */
+export type DeleteShaclGraphInput = {
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The globally unique `ID` which will identify a single `ShaclGraph` to be deleted. */
+  nodeId: Scalars['ID'];
+};
+
+/** The output of our delete `ShaclGraph` mutation. */
+export type DeleteShaclGraphPayload = {
+  __typename?: 'DeleteShaclGraphPayload';
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `ShaclGraph` that was deleted by this mutation. */
+  shaclGraph?: Maybe<ShaclGraph>;
+  deletedShaclGraphId?: Maybe<Scalars['ID']>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** An edge for our `ShaclGraph`. May be used by Relay 1. */
+  shaclGraphEdge?: Maybe<ShaclGraphsEdge>;
+};
+
+
+/** The output of our delete `ShaclGraph` mutation. */
+export type DeleteShaclGraphPayloadShaclGraphEdgeArgs = {
+  orderBy?: Maybe<Array<ShaclGraphsOrderBy>>;
+};
+
 /** All input for the `deleteTransactionById` mutation. */
 export type DeleteTransactionByIdInput = {
   /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
@@ -4074,6 +4206,120 @@ export type DeleteWalletPayloadWalletEdgeArgs = {
   orderBy?: Maybe<Array<WalletsOrderBy>>;
 };
 
+export type Document = Node & {
+  __typename?: 'Document';
+  /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
+  nodeId: Scalars['ID'];
+  id: Scalars['UUID'];
+  createdAt: Scalars['Datetime'];
+  updatedAt: Scalars['Datetime'];
+  name: Scalars['String'];
+  type: Scalars['String'];
+  date: Scalars['Datetime'];
+  url: Scalars['String'];
+  projectId?: Maybe<Scalars['UUID']>;
+  eventId?: Maybe<Scalars['UUID']>;
+  /** Reads a single `Project` that is related to this `Document`. */
+  projectByProjectId?: Maybe<Project>;
+  /** Reads a single `Event` that is related to this `Document`. */
+  eventByEventId?: Maybe<Event>;
+};
+
+/** A condition to be used against `Document` object types. All fields are tested for equality and combined with a logical ‘and.’ */
+export type DocumentCondition = {
+  /** Checks for equality with the object’s `id` field. */
+  id?: Maybe<Scalars['UUID']>;
+  /** Checks for equality with the object’s `createdAt` field. */
+  createdAt?: Maybe<Scalars['Datetime']>;
+  /** Checks for equality with the object’s `updatedAt` field. */
+  updatedAt?: Maybe<Scalars['Datetime']>;
+  /** Checks for equality with the object’s `name` field. */
+  name?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `type` field. */
+  type?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `date` field. */
+  date?: Maybe<Scalars['Datetime']>;
+  /** Checks for equality with the object’s `url` field. */
+  url?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `projectId` field. */
+  projectId?: Maybe<Scalars['UUID']>;
+  /** Checks for equality with the object’s `eventId` field. */
+  eventId?: Maybe<Scalars['UUID']>;
+};
+
+/** An input for mutations affecting `Document` */
+export type DocumentInput = {
+  id?: Maybe<Scalars['UUID']>;
+  createdAt?: Maybe<Scalars['Datetime']>;
+  updatedAt?: Maybe<Scalars['Datetime']>;
+  name: Scalars['String'];
+  type: Scalars['String'];
+  date: Scalars['Datetime'];
+  url: Scalars['String'];
+  projectId?: Maybe<Scalars['UUID']>;
+  eventId?: Maybe<Scalars['UUID']>;
+};
+
+/** Represents an update to a `Document`. Fields that are set will be updated. */
+export type DocumentPatch = {
+  id?: Maybe<Scalars['UUID']>;
+  createdAt?: Maybe<Scalars['Datetime']>;
+  updatedAt?: Maybe<Scalars['Datetime']>;
+  name?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+  date?: Maybe<Scalars['Datetime']>;
+  url?: Maybe<Scalars['String']>;
+  projectId?: Maybe<Scalars['UUID']>;
+  eventId?: Maybe<Scalars['UUID']>;
+};
+
+/** A connection to a list of `Document` values. */
+export type DocumentsConnection = {
+  __typename?: 'DocumentsConnection';
+  /** A list of `Document` objects. */
+  nodes: Array<Maybe<Document>>;
+  /** A list of edges which contains the `Document` and cursor to aid in pagination. */
+  edges: Array<DocumentsEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `Document` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `Document` edge in the connection. */
+export type DocumentsEdge = {
+  __typename?: 'DocumentsEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `Document` at the end of the edge. */
+  node?: Maybe<Document>;
+};
+
+/** Methods to use when ordering `Document`. */
+export enum DocumentsOrderBy {
+  Natural = 'NATURAL',
+  IdAsc = 'ID_ASC',
+  IdDesc = 'ID_DESC',
+  CreatedAtAsc = 'CREATED_AT_ASC',
+  CreatedAtDesc = 'CREATED_AT_DESC',
+  UpdatedAtAsc = 'UPDATED_AT_ASC',
+  UpdatedAtDesc = 'UPDATED_AT_DESC',
+  NameAsc = 'NAME_ASC',
+  NameDesc = 'NAME_DESC',
+  TypeAsc = 'TYPE_ASC',
+  TypeDesc = 'TYPE_DESC',
+  DateAsc = 'DATE_ASC',
+  DateDesc = 'DATE_DESC',
+  UrlAsc = 'URL_ASC',
+  UrlDesc = 'URL_DESC',
+  ProjectIdAsc = 'PROJECT_ID_ASC',
+  ProjectIdDesc = 'PROJECT_ID_DESC',
+  EventIdAsc = 'EVENT_ID_ASC',
+  EventIdDesc = 'EVENT_ID_DESC',
+  PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
+  PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
+}
+
 export type Event = Node & {
   __typename?: 'Event';
   /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
@@ -4096,6 +4342,10 @@ export type Event = Node & {
    * @deprecated Please use creditVintageByEventId instead
    */
   creditVintagesByEventId: CreditVintagesConnection;
+  /** Reads and enables pagination through a set of `Document`. */
+  documentsByEventId: DocumentsConnection;
+  /** Reads and enables pagination through a set of `Project`. */
+  projectsByDocumentEventIdAndProjectId: EventProjectsByDocumentEventIdAndProjectIdManyToManyConnection;
 };
 
 
@@ -4107,6 +4357,28 @@ export type EventCreditVintagesByEventIdArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<CreditVintagesOrderBy>>;
   condition?: Maybe<CreditVintageCondition>;
+};
+
+
+export type EventDocumentsByEventIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<DocumentsOrderBy>>;
+  condition?: Maybe<DocumentCondition>;
+};
+
+
+export type EventProjectsByDocumentEventIdAndProjectIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<ProjectsOrderBy>>;
+  condition?: Maybe<ProjectCondition>;
 };
 
 /** A condition to be used against `Event` object types. All fields are tested for equality and combined with a logical ‘and.’ */
@@ -4155,6 +4427,42 @@ export type EventPatch = {
   description?: Maybe<Scalars['String']>;
   fromState?: Maybe<ProjectState>;
   toState?: Maybe<ProjectState>;
+};
+
+/** A connection to a list of `Project` values, with data from `Document`. */
+export type EventProjectsByDocumentEventIdAndProjectIdManyToManyConnection = {
+  __typename?: 'EventProjectsByDocumentEventIdAndProjectIdManyToManyConnection';
+  /** A list of `Project` objects. */
+  nodes: Array<Maybe<Project>>;
+  /** A list of edges which contains the `Project`, info from the `Document`, and the cursor to aid in pagination. */
+  edges: Array<EventProjectsByDocumentEventIdAndProjectIdManyToManyEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `Project` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `Project` edge in the connection, with data from `Document`. */
+export type EventProjectsByDocumentEventIdAndProjectIdManyToManyEdge = {
+  __typename?: 'EventProjectsByDocumentEventIdAndProjectIdManyToManyEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `Project` at the end of the edge. */
+  node?: Maybe<Project>;
+  /** Reads and enables pagination through a set of `Document`. */
+  documentsByProjectId: DocumentsConnection;
+};
+
+
+/** A `Project` edge in the connection, with data from `Document`. */
+export type EventProjectsByDocumentEventIdAndProjectIdManyToManyEdgeDocumentsByProjectIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<DocumentsOrderBy>>;
+  condition?: Maybe<DocumentCondition>;
 };
 
 /** A connection to a list of `Event` values. */
@@ -4779,6 +5087,8 @@ export type Mutation = {
   createCreditClassVersion?: Maybe<CreateCreditClassVersionPayload>;
   /** Creates a single `CreditVintage`. */
   createCreditVintage?: Maybe<CreateCreditVintagePayload>;
+  /** Creates a single `Document`. */
+  createDocument?: Maybe<CreateDocumentPayload>;
   /** Creates a single `Event`. */
   createEvent?: Maybe<CreateEventPayload>;
   /** Creates a single `FlywaySchemaHistory`. */
@@ -4805,6 +5115,8 @@ export type Mutation = {
   createRegistry?: Maybe<CreateRegistryPayload>;
   /** Creates a single `Retirement`. */
   createRetirement?: Maybe<CreateRetirementPayload>;
+  /** Creates a single `ShaclGraph`. */
+  createShaclGraph?: Maybe<CreateShaclGraphPayload>;
   /** Creates a single `Transaction`. */
   createTransaction?: Maybe<CreateTransactionPayload>;
   /** Creates a single `User`. */
@@ -4843,6 +5155,10 @@ export type Mutation = {
   updateCreditVintageById?: Maybe<UpdateCreditVintagePayload>;
   /** Updates a single `CreditVintage` using a unique key and a patch. */
   updateCreditVintageByEventId?: Maybe<UpdateCreditVintagePayload>;
+  /** Updates a single `Document` using its globally unique id and a patch. */
+  updateDocument?: Maybe<UpdateDocumentPayload>;
+  /** Updates a single `Document` using a unique key and a patch. */
+  updateDocumentById?: Maybe<UpdateDocumentPayload>;
   /** Updates a single `Event` using its globally unique id and a patch. */
   updateEvent?: Maybe<UpdateEventPayload>;
   /** Updates a single `Event` using a unique key and a patch. */
@@ -4903,6 +5219,10 @@ export type Mutation = {
   updateRetirement?: Maybe<UpdateRetirementPayload>;
   /** Updates a single `Retirement` using a unique key and a patch. */
   updateRetirementById?: Maybe<UpdateRetirementPayload>;
+  /** Updates a single `ShaclGraph` using its globally unique id and a patch. */
+  updateShaclGraph?: Maybe<UpdateShaclGraphPayload>;
+  /** Updates a single `ShaclGraph` using a unique key and a patch. */
+  updateShaclGraphByUri?: Maybe<UpdateShaclGraphPayload>;
   /** Updates a single `Transaction` using its globally unique id and a patch. */
   updateTransaction?: Maybe<UpdateTransactionPayload>;
   /** Updates a single `Transaction` using a unique key and a patch. */
@@ -4955,6 +5275,10 @@ export type Mutation = {
   deleteCreditVintageById?: Maybe<DeleteCreditVintagePayload>;
   /** Deletes a single `CreditVintage` using a unique key. */
   deleteCreditVintageByEventId?: Maybe<DeleteCreditVintagePayload>;
+  /** Deletes a single `Document` using its globally unique id. */
+  deleteDocument?: Maybe<DeleteDocumentPayload>;
+  /** Deletes a single `Document` using a unique key. */
+  deleteDocumentById?: Maybe<DeleteDocumentPayload>;
   /** Deletes a single `Event` using its globally unique id. */
   deleteEvent?: Maybe<DeleteEventPayload>;
   /** Deletes a single `Event` using a unique key. */
@@ -5015,6 +5339,10 @@ export type Mutation = {
   deleteRetirement?: Maybe<DeleteRetirementPayload>;
   /** Deletes a single `Retirement` using a unique key. */
   deleteRetirementById?: Maybe<DeleteRetirementPayload>;
+  /** Deletes a single `ShaclGraph` using its globally unique id. */
+  deleteShaclGraph?: Maybe<DeleteShaclGraphPayload>;
+  /** Deletes a single `ShaclGraph` using a unique key. */
+  deleteShaclGraphByUri?: Maybe<DeleteShaclGraphPayload>;
   /** Deletes a single `Transaction` using its globally unique id. */
   deleteTransaction?: Maybe<DeleteTransactionPayload>;
   /** Deletes a single `Transaction` using a unique key. */
@@ -5094,6 +5422,12 @@ export type MutationCreateCreditVintageArgs = {
 
 
 /** The root mutation type which contains root level fields which mutate data. */
+export type MutationCreateDocumentArgs = {
+  input: CreateDocumentInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
 export type MutationCreateEventArgs = {
   input: CreateEventInput;
 };
@@ -5168,6 +5502,12 @@ export type MutationCreateRegistryArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationCreateRetirementArgs = {
   input: CreateRetirementInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationCreateShaclGraphArgs = {
+  input: CreateShaclGraphInput;
 };
 
 
@@ -5282,6 +5622,18 @@ export type MutationUpdateCreditVintageByIdArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdateCreditVintageByEventIdArgs = {
   input: UpdateCreditVintageByEventIdInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateDocumentArgs = {
+  input: UpdateDocumentInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateDocumentByIdArgs = {
+  input: UpdateDocumentByIdInput;
 };
 
 
@@ -5466,6 +5818,18 @@ export type MutationUpdateRetirementByIdArgs = {
 
 
 /** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateShaclGraphArgs = {
+  input: UpdateShaclGraphInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateShaclGraphByUriArgs = {
+  input: UpdateShaclGraphByUriInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdateTransactionArgs = {
   input: UpdateTransactionInput;
 };
@@ -5618,6 +5982,18 @@ export type MutationDeleteCreditVintageByIdArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationDeleteCreditVintageByEventIdArgs = {
   input: DeleteCreditVintageByEventIdInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeleteDocumentArgs = {
+  input: DeleteDocumentInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeleteDocumentByIdArgs = {
+  input: DeleteDocumentByIdInput;
 };
 
 
@@ -5798,6 +6174,18 @@ export type MutationDeleteRetirementArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationDeleteRetirementByIdArgs = {
   input: DeleteRetirementByIdInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeleteShaclGraphArgs = {
+  input: DeleteShaclGraphInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeleteShaclGraphByUriArgs = {
+  input: DeleteShaclGraphByUriInput;
 };
 
 
@@ -7966,7 +8354,6 @@ export type Project = Node & {
   endDate: Scalars['Datetime'];
   summaryDescription: Scalars['String'];
   longDescription: Scalars['String'];
-  documents?: Maybe<Scalars['JSON']>;
   area: Scalars['Int'];
   areaUnit: Scalars['String'];
   state: ProjectState;
@@ -8011,6 +8398,8 @@ export type Project = Node & {
   eventsByProjectId: EventsConnection;
   /** Reads and enables pagination through a set of `ProjectBroker`. */
   projectBrokersByProjectId: ProjectBrokersConnection;
+  /** Reads and enables pagination through a set of `Document`. */
+  documentsByProjectId: DocumentsConnection;
   /** Reads and enables pagination through a set of `CreditClass`. */
   creditClassesByCreditVintageProjectIdAndCreditClassId: ProjectCreditClassesByCreditVintageProjectIdAndCreditClassIdManyToManyConnection;
   /** Reads and enables pagination through a set of `Wallet`. */
@@ -8021,6 +8410,8 @@ export type Project = Node & {
   partiesByProjectBrokerProjectIdAndAuthorizedByPartyId: ProjectPartiesByProjectBrokerProjectIdAndAuthorizedByPartyIdManyToManyConnection;
   /** Reads and enables pagination through a set of `User`. */
   usersByProjectBrokerProjectIdAndSignerId: ProjectUsersByProjectBrokerProjectIdAndSignerIdManyToManyConnection;
+  /** Reads and enables pagination through a set of `Event`. */
+  eventsByDocumentProjectIdAndEventId: ProjectEventsByDocumentProjectIdAndEventIdManyToManyConnection;
 };
 
 
@@ -8065,6 +8456,17 @@ export type ProjectProjectBrokersByProjectIdArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectBrokersOrderBy>>;
   condition?: Maybe<ProjectBrokerCondition>;
+};
+
+
+export type ProjectDocumentsByProjectIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<DocumentsOrderBy>>;
+  condition?: Maybe<DocumentCondition>;
 };
 
 
@@ -8120,6 +8522,17 @@ export type ProjectUsersByProjectBrokerProjectIdAndSignerIdArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<UsersOrderBy>>;
   condition?: Maybe<UserCondition>;
+};
+
+
+export type ProjectEventsByDocumentProjectIdAndEventIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<EventsOrderBy>>;
+  condition?: Maybe<EventCondition>;
 };
 
 export type ProjectBroker = Node & {
@@ -8254,8 +8667,6 @@ export type ProjectCondition = {
   summaryDescription?: Maybe<Scalars['String']>;
   /** Checks for equality with the object’s `longDescription` field. */
   longDescription?: Maybe<Scalars['String']>;
-  /** Checks for equality with the object’s `documents` field. */
-  documents?: Maybe<Scalars['JSON']>;
   /** Checks for equality with the object’s `area` field. */
   area?: Maybe<Scalars['Int']>;
   /** Checks for equality with the object’s `areaUnit` field. */
@@ -8328,6 +8739,42 @@ export type ProjectCreditClassesByCreditVintageProjectIdAndCreditClassIdManyToMa
   condition?: Maybe<CreditVintageCondition>;
 };
 
+/** A connection to a list of `Event` values, with data from `Document`. */
+export type ProjectEventsByDocumentProjectIdAndEventIdManyToManyConnection = {
+  __typename?: 'ProjectEventsByDocumentProjectIdAndEventIdManyToManyConnection';
+  /** A list of `Event` objects. */
+  nodes: Array<Maybe<Event>>;
+  /** A list of edges which contains the `Event`, info from the `Document`, and the cursor to aid in pagination. */
+  edges: Array<ProjectEventsByDocumentProjectIdAndEventIdManyToManyEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `Event` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `Event` edge in the connection, with data from `Document`. */
+export type ProjectEventsByDocumentProjectIdAndEventIdManyToManyEdge = {
+  __typename?: 'ProjectEventsByDocumentProjectIdAndEventIdManyToManyEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `Event` at the end of the edge. */
+  node?: Maybe<Event>;
+  /** Reads and enables pagination through a set of `Document`. */
+  documentsByEventId: DocumentsConnection;
+};
+
+
+/** A `Event` edge in the connection, with data from `Document`. */
+export type ProjectEventsByDocumentProjectIdAndEventIdManyToManyEdgeDocumentsByEventIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<DocumentsOrderBy>>;
+  condition?: Maybe<DocumentCondition>;
+};
+
 /** An input for mutations affecting `Project` */
 export type ProjectInput = {
   id?: Maybe<Scalars['UUID']>;
@@ -8343,7 +8790,6 @@ export type ProjectInput = {
   endDate: Scalars['Datetime'];
   summaryDescription: Scalars['String'];
   longDescription: Scalars['String'];
-  documents?: Maybe<Scalars['JSON']>;
   area: Scalars['Int'];
   areaUnit: Scalars['String'];
   state: ProjectState;
@@ -8453,7 +8899,6 @@ export type ProjectPatch = {
   endDate?: Maybe<Scalars['Datetime']>;
   summaryDescription?: Maybe<Scalars['String']>;
   longDescription?: Maybe<Scalars['String']>;
-  documents?: Maybe<Scalars['JSON']>;
   area?: Maybe<Scalars['Int']>;
   areaUnit?: Maybe<Scalars['String']>;
   state?: Maybe<ProjectState>;
@@ -8607,8 +9052,6 @@ export enum ProjectsOrderBy {
   SummaryDescriptionDesc = 'SUMMARY_DESCRIPTION_DESC',
   LongDescriptionAsc = 'LONG_DESCRIPTION_ASC',
   LongDescriptionDesc = 'LONG_DESCRIPTION_DESC',
-  DocumentsAsc = 'DOCUMENTS_ASC',
-  DocumentsDesc = 'DOCUMENTS_DESC',
   AreaAsc = 'AREA_ASC',
   AreaDesc = 'AREA_DESC',
   AreaUnitAsc = 'AREA_UNIT_ASC',
@@ -9018,6 +9461,8 @@ export type Query = Node & {
   allCreditClassVersions?: Maybe<CreditClassVersionsConnection>;
   /** Reads and enables pagination through a set of `CreditVintage`. */
   allCreditVintages?: Maybe<CreditVintagesConnection>;
+  /** Reads and enables pagination through a set of `Document`. */
+  allDocuments?: Maybe<DocumentsConnection>;
   /** Reads and enables pagination through a set of `Event`. */
   allEvents?: Maybe<EventsConnection>;
   /** Reads and enables pagination through a set of `FlywaySchemaHistory`. */
@@ -9044,6 +9489,8 @@ export type Query = Node & {
   allRegistries?: Maybe<RegistriesConnection>;
   /** Reads and enables pagination through a set of `Retirement`. */
   allRetirements?: Maybe<RetirementsConnection>;
+  /** Reads and enables pagination through a set of `ShaclGraph`. */
+  allShaclGraphs?: Maybe<ShaclGraphsConnection>;
   /** Reads and enables pagination through a set of `Transaction`. */
   allTransactions?: Maybe<TransactionsConnection>;
   /** Reads and enables pagination through a set of `User`. */
@@ -9060,6 +9507,7 @@ export type Query = Node & {
   creditClassVersionByIdAndCreatedAt?: Maybe<CreditClassVersion>;
   creditVintageById?: Maybe<CreditVintage>;
   creditVintageByEventId?: Maybe<CreditVintage>;
+  documentById?: Maybe<Document>;
   eventById?: Maybe<Event>;
   flywaySchemaHistoryByInstalledRank?: Maybe<FlywaySchemaHistory>;
   methodologyById?: Maybe<Methodology>;
@@ -9077,6 +9525,7 @@ export type Query = Node & {
   purchaseById?: Maybe<Purchase>;
   registryById?: Maybe<Registry>;
   retirementById?: Maybe<Retirement>;
+  shaclGraphByUri?: Maybe<ShaclGraph>;
   transactionById?: Maybe<Transaction>;
   userById?: Maybe<User>;
   userByEmail?: Maybe<User>;
@@ -9099,6 +9548,8 @@ export type Query = Node & {
   creditClassVersion?: Maybe<CreditClassVersion>;
   /** Reads a single `CreditVintage` using its globally unique `ID`. */
   creditVintage?: Maybe<CreditVintage>;
+  /** Reads a single `Document` using its globally unique `ID`. */
+  document?: Maybe<Document>;
   /** Reads a single `Event` using its globally unique `ID`. */
   event?: Maybe<Event>;
   /** Reads a single `FlywaySchemaHistory` using its globally unique `ID`. */
@@ -9125,6 +9576,8 @@ export type Query = Node & {
   registry?: Maybe<Registry>;
   /** Reads a single `Retirement` using its globally unique `ID`. */
   retirement?: Maybe<Retirement>;
+  /** Reads a single `ShaclGraph` using its globally unique `ID`. */
+  shaclGraph?: Maybe<ShaclGraph>;
   /** Reads a single `Transaction` using its globally unique `ID`. */
   transaction?: Maybe<Transaction>;
   /** Reads a single `User` using its globally unique `ID`. */
@@ -9221,6 +9674,18 @@ export type QueryAllCreditVintagesArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<CreditVintagesOrderBy>>;
   condition?: Maybe<CreditVintageCondition>;
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryAllDocumentsArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<DocumentsOrderBy>>;
+  condition?: Maybe<DocumentCondition>;
 };
 
 
@@ -9381,6 +9846,18 @@ export type QueryAllRetirementsArgs = {
 
 
 /** The root query type which gives access points into the data universe. */
+export type QueryAllShaclGraphsArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<ShaclGraphsOrderBy>>;
+  condition?: Maybe<ShaclGraphCondition>;
+};
+
+
+/** The root query type which gives access points into the data universe. */
 export type QueryAllTransactionsArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
@@ -9475,6 +9952,12 @@ export type QueryCreditVintageByIdArgs = {
 /** The root query type which gives access points into the data universe. */
 export type QueryCreditVintageByEventIdArgs = {
   eventId: Scalars['UUID'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryDocumentByIdArgs = {
+  id: Scalars['UUID'];
 };
 
 
@@ -9584,6 +10067,12 @@ export type QueryRetirementByIdArgs = {
 
 
 /** The root query type which gives access points into the data universe. */
+export type QueryShaclGraphByUriArgs = {
+  uri: Scalars['String'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
 export type QueryTransactionByIdArgs = {
   id: Scalars['UUID'];
 };
@@ -9669,6 +10158,12 @@ export type QueryCreditVintageArgs = {
 
 
 /** The root query type which gives access points into the data universe. */
+export type QueryDocumentArgs = {
+  nodeId: Scalars['ID'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
 export type QueryEventArgs = {
   nodeId: Scalars['ID'];
 };
@@ -9742,6 +10237,12 @@ export type QueryRegistryArgs = {
 
 /** The root query type which gives access points into the data universe. */
 export type QueryRetirementArgs = {
+  nodeId: Scalars['ID'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryShaclGraphArgs = {
   nodeId: Scalars['ID'];
 };
 
@@ -10394,6 +10895,81 @@ export type SendTransferCreditsConfirmationPayload = {
   query?: Maybe<Query>;
 };
 
+export type ShaclGraph = Node & {
+  __typename?: 'ShaclGraph';
+  /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
+  nodeId: Scalars['ID'];
+  uri: Scalars['String'];
+  createdAt: Scalars['Datetime'];
+  updatedAt: Scalars['Datetime'];
+  graph: Scalars['JSON'];
+};
+
+/** A condition to be used against `ShaclGraph` object types. All fields are tested for equality and combined with a logical ‘and.’ */
+export type ShaclGraphCondition = {
+  /** Checks for equality with the object’s `uri` field. */
+  uri?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `createdAt` field. */
+  createdAt?: Maybe<Scalars['Datetime']>;
+  /** Checks for equality with the object’s `updatedAt` field. */
+  updatedAt?: Maybe<Scalars['Datetime']>;
+  /** Checks for equality with the object’s `graph` field. */
+  graph?: Maybe<Scalars['JSON']>;
+};
+
+/** An input for mutations affecting `ShaclGraph` */
+export type ShaclGraphInput = {
+  uri: Scalars['String'];
+  createdAt?: Maybe<Scalars['Datetime']>;
+  updatedAt?: Maybe<Scalars['Datetime']>;
+  graph: Scalars['JSON'];
+};
+
+/** Represents an update to a `ShaclGraph`. Fields that are set will be updated. */
+export type ShaclGraphPatch = {
+  uri?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['Datetime']>;
+  updatedAt?: Maybe<Scalars['Datetime']>;
+  graph?: Maybe<Scalars['JSON']>;
+};
+
+/** A connection to a list of `ShaclGraph` values. */
+export type ShaclGraphsConnection = {
+  __typename?: 'ShaclGraphsConnection';
+  /** A list of `ShaclGraph` objects. */
+  nodes: Array<Maybe<ShaclGraph>>;
+  /** A list of edges which contains the `ShaclGraph` and cursor to aid in pagination. */
+  edges: Array<ShaclGraphsEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `ShaclGraph` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `ShaclGraph` edge in the connection. */
+export type ShaclGraphsEdge = {
+  __typename?: 'ShaclGraphsEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `ShaclGraph` at the end of the edge. */
+  node?: Maybe<ShaclGraph>;
+};
+
+/** Methods to use when ordering `ShaclGraph`. */
+export enum ShaclGraphsOrderBy {
+  Natural = 'NATURAL',
+  UriAsc = 'URI_ASC',
+  UriDesc = 'URI_DESC',
+  CreatedAtAsc = 'CREATED_AT_ASC',
+  CreatedAtDesc = 'CREATED_AT_DESC',
+  UpdatedAtAsc = 'UPDATED_AT_ASC',
+  UpdatedAtDesc = 'UPDATED_AT_DESC',
+  GraphAsc = 'GRAPH_ASC',
+  GraphDesc = 'GRAPH_DESC',
+  PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
+  PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
+}
+
 export type Transaction = Node & {
   __typename?: 'Transaction';
   /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
@@ -10852,6 +11428,48 @@ export type UpdateCreditVintagePayload = {
 /** The output of our update `CreditVintage` mutation. */
 export type UpdateCreditVintagePayloadCreditVintageEdgeArgs = {
   orderBy?: Maybe<Array<CreditVintagesOrderBy>>;
+};
+
+/** All input for the `updateDocumentById` mutation. */
+export type UpdateDocumentByIdInput = {
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** An object where the defined keys will be set on the `Document` being updated. */
+  documentPatch: DocumentPatch;
+  id: Scalars['UUID'];
+};
+
+/** All input for the `updateDocument` mutation. */
+export type UpdateDocumentInput = {
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The globally unique `ID` which will identify a single `Document` to be updated. */
+  nodeId: Scalars['ID'];
+  /** An object where the defined keys will be set on the `Document` being updated. */
+  documentPatch: DocumentPatch;
+};
+
+/** The output of our update `Document` mutation. */
+export type UpdateDocumentPayload = {
+  __typename?: 'UpdateDocumentPayload';
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `Document` that was updated by this mutation. */
+  document?: Maybe<Document>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** Reads a single `Project` that is related to this `Document`. */
+  projectByProjectId?: Maybe<Project>;
+  /** Reads a single `Event` that is related to this `Document`. */
+  eventByEventId?: Maybe<Event>;
+  /** An edge for our `Document`. May be used by Relay 1. */
+  documentEdge?: Maybe<DocumentsEdge>;
+};
+
+
+/** The output of our update `Document` mutation. */
+export type UpdateDocumentPayloadDocumentEdgeArgs = {
+  orderBy?: Maybe<Array<DocumentsOrderBy>>;
 };
 
 /** All input for the `updateEventById` mutation. */
@@ -11443,6 +12061,44 @@ export type UpdateRetirementPayload = {
 /** The output of our update `Retirement` mutation. */
 export type UpdateRetirementPayloadRetirementEdgeArgs = {
   orderBy?: Maybe<Array<RetirementsOrderBy>>;
+};
+
+/** All input for the `updateShaclGraphByUri` mutation. */
+export type UpdateShaclGraphByUriInput = {
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** An object where the defined keys will be set on the `ShaclGraph` being updated. */
+  shaclGraphPatch: ShaclGraphPatch;
+  uri: Scalars['String'];
+};
+
+/** All input for the `updateShaclGraph` mutation. */
+export type UpdateShaclGraphInput = {
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The globally unique `ID` which will identify a single `ShaclGraph` to be updated. */
+  nodeId: Scalars['ID'];
+  /** An object where the defined keys will be set on the `ShaclGraph` being updated. */
+  shaclGraphPatch: ShaclGraphPatch;
+};
+
+/** The output of our update `ShaclGraph` mutation. */
+export type UpdateShaclGraphPayload = {
+  __typename?: 'UpdateShaclGraphPayload';
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `ShaclGraph` that was updated by this mutation. */
+  shaclGraph?: Maybe<ShaclGraph>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** An edge for our `ShaclGraph`. May be used by Relay 1. */
+  shaclGraphEdge?: Maybe<ShaclGraphsEdge>;
+};
+
+
+/** The output of our update `ShaclGraph` mutation. */
+export type UpdateShaclGraphPayloadShaclGraphEdgeArgs = {
+  orderBy?: Maybe<Array<ShaclGraphsOrderBy>>;
 };
 
 /** All input for the `updateTransactionById` mutation. */
@@ -13406,7 +14062,7 @@ export type GetOrganizationProfileByEmailQuery = (
   { __typename?: 'Query' }
   & { userByEmail?: Maybe<(
     { __typename?: 'User' }
-    & Pick<User, 'id' | 'partyId'>
+    & Pick<User, 'id'>
     & { partyByPartyId?: Maybe<(
       { __typename?: 'Party' }
       & Pick<Party, 'name'>
@@ -13420,7 +14076,7 @@ export type GetOrganizationProfileByEmailQuery = (
         { __typename?: 'OrganizationMember' }
         & { organizationByOrganizationId?: Maybe<(
           { __typename?: 'Organization' }
-          & Pick<Organization, 'legalName'>
+          & Pick<Organization, 'legalName' | 'partyId'>
           & { partyByPartyId?: Maybe<(
             { __typename?: 'Party' }
             & Pick<Party, 'name' | 'image' | 'description'>
@@ -14173,7 +14829,6 @@ export const GetOrganizationProfileByEmailDocument = gql`
     query GetOrganizationProfileByEmail($email: String!) {
   userByEmail(email: $email) {
     id
-    partyId
     partyByPartyId {
       name
       walletByWalletId {
@@ -14184,6 +14839,7 @@ export const GetOrganizationProfileByEmailDocument = gql`
       nodes {
         organizationByOrganizationId {
           legalName
+          partyId
           partyByPartyId {
             name
             image

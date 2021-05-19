@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
-// import { makeStyles, Theme } from '@material-ui/core/styles';
 
 import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
 import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
@@ -71,8 +70,6 @@ const OrganizationProfile: React.FC = () => {
 
   async function submitOrgProfile(values: OrgProfileFormValues): Promise<void> {
     try {
-      // if there is no current organization associated with this user
-      // if (userByEmail?.partyByPartyId.wal)
       if (!userOrg) {
         await createOrg({
           variables: {
@@ -88,11 +85,11 @@ const OrganizationProfile: React.FC = () => {
           },
         });
       } else {
-        if (userByEmail?.partyId) {
+        if (userOrg?.partyId) {
           await updateOrgByPartyId({
             variables: {
               input: {
-                partyId: userByEmail.partyId,
+                partyId: userOrg.partyId,
                 organizationPatch: {
                   legalName: values.legalName,
                 },
@@ -102,7 +99,7 @@ const OrganizationProfile: React.FC = () => {
           await updatePartyById({
             variables: {
               input: {
-                id: userByEmail.partyId,
+                id: userOrg.partyId,
                 partyPatch: {
                   description: values.description,
                   name: values.displayName,

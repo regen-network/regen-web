@@ -7,6 +7,7 @@ import Title from '../title';
 
 export interface SectionProps {
   children?: any;
+  className?: string;
   classes?: {
     root?: string;
     title?: string;
@@ -75,6 +76,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
 const Section = ({
   children,
   classes,
+  className,
   titleLineHeight,
   titleColor,
   titleVariant = 'h2',
@@ -85,7 +87,7 @@ const Section = ({
 }: SectionProps): JSX.Element => {
   const styles = useStyles({ withSlider, titleLineHeight, titleColor, topRight: !!topRight });
   return (
-    <section className={clsx(styles.root, classes?.root)}>
+    <section className={clsx(styles.root, className)}>
       {title && (
         <div className={clsx(classes?.titleWrap, topRight && styles.spaceBetween)}>
           <Title className={clsx(styles.title, classes?.title)} variant={titleVariant} align={titleAlign}>

@@ -51,6 +51,7 @@
     "react-remove-scroll": "^2.3.0",
     "react-slick": "^0.25.2",
     "slick-carousel": "^1.8.1",
+    "victory": "^35.8.0",
     "zxcvbn": "^4.4.2"
   },
   "devDependencies": {

@@ -10,18 +10,21 @@ categories:
         date: April 16, 2021
         image: ../../static/media/rocket-launch-67643_1920-1-768x514.jpeg
         isMainnet: true
+        isTokenSale: true
       - image: ../../static/media/mainnet-launch-5-.png
         title: Regen Network Community Update
         author: Gregory Landua
         url: https://medium.com/regen-network/regen-network-community-update-65fb4f445187
         date: March 31, 2021
         isMainnet: true
+        isTokenSale: true
       - title: Can Cryptocurrencies Help The Planet?
         author: Landscape News
         url: https://news.globallandscapesforum.org/50857/can-cryptocurrencies-help-the-planet/
         date: " March 23, 2021"
         image: ../../static/media/sheep-scaled.jpeg
         isMainnet: true
+        isTokenSale: true
       - title: Microsoft uses blockchain technology to purchase soil carbon credits in
           Australia
         author: Cointelegraph

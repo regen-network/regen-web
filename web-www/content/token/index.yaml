@@ -1,0 +1,41 @@
+topSection:
+  header: (X) REGEN Token
+  body: REGEN token is a utility token powering an application specific blockchain for global climate finance.
+tokenEconomics:
+  title: REGEN Token Economics
+  body: >-
+    md//Regen Network is a sovereign, proof-of-stake blockchain built on the Cosmos SDK. REGEN token is a utility, governance, security and staking token.
+
+
+    REGEN token is designed to ensure utility for ecological data and outcome markets. Regen Network is governed as a public blockchain by token holders following the model outlined and implemented by Cosmos.
+
+
+    REGEN token will accrue value from levying fees on ecological assets originated and secured on-chain, and from transaction fees paid by users paying for services on the network.
+
+
+    To learn more about Regen Network token economics, please <a>click here</a>.
+
+
+    For frequently asked questions related to REGEN tokens, please <a>click here</a>.
+infoSection:
+  title: Coming Soon - Public Sale on Gravity DEX & Osmosis
+  subtitle: "Release date: May 2021"
+  body: >-
+    md//It is expected that the REGEN token will be available for public sale on the Gravity Dex and Osmosis within the next 60 days. Gravity Dex is an advanced interchain decentralized exchange on Cosmos Hub that enables swaps and pools of digital assets between any two blockchains within the Cosmos ecosystem. Osmosis is an advanced AMM protocol built using the Cosmos SDK that will allow developers to design, build, and deploy their own customized AMMs. 
+
+
+    To receive official announcements about public token sale events, please <a href="#" target="_blank">sign up</a>.
+  image: ../../static/media/token-bird-berries.png
+unlockSchedule:
+  title: REGEN unlock schedule
+  subtitle: At Genesis 22,041,983 REGEN tokens are unlocked
+staking:
+  title: Staking
+  body: >-
+    md//Staking/delegating is a critical function to secure Regen Ledger, participate in community governance and support the growth and development of Regen Network. Staking also generates rewards for delegators. Delegating to validators by staking your REGEN tokens helps cover validator infrastructure costs, and will generate between 7% and 20% annual percentage rate (APR) on your staked tokens.
+
+
+    To learn more about staking REGEN tokens, please <a>click here</a>.
+  buttonText: check out the faq
+  buttonUrl: "#"
+

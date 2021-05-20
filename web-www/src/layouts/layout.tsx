@@ -57,6 +57,7 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
     '/community/': theme.palette.primary.main,
     '/wallet-address-registration/': theme.palette.primary.light,
     '/mainnet/': theme.palette.primary.light,
+    '/token/': theme.palette.primary.main,
   };
 
   const headerTransparent: BoolProps = {
@@ -71,7 +72,7 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
   // Links in rest of the site must use the trailing '/'
   // in order for these to work appropriately
   const headerNoBorderBottomPages: RegExp = new RegExp(
-    '//|/buyers/|/partners/|/contact/|/validators/|/land-stewards/|/resources/|/media/|/team/|/developers/|/science/|/invest/|/case-studies/|/press-kit/|/community/|/wallet-address-registration/|/mainnet/|/case-studies/[a-z-]+//',
+    '//|/buyers/|/partners/|/contact/|/validators/|/land-stewards/|/resources/|/media/|/team/|/developers/|/science/|/invest/|/case-studies/|/press-kit/|/community/|/wallet-address-registration/|/mainnet/|/token/|/case-studies/[a-z-]+//',
   );
 
   const menuItems: HeaderMenuItem[] = [

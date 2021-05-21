@@ -38,7 +38,8 @@ import GettingStarted from './components/GettingStarted';
 import ChooseCreditClass from './components/project-plan/ChooseCreditClass';
 import ProjectPlanList from './components/project-plan/ProjectPlanList';
 import BasicInfo from './components/project-plan/BasicInfo';
-import Eligibility from './components/project-plan/Eligibility';
+import { Eligibility } from './components/project-plan/eligibility';
+import { Additionality } from './components/project-plan/eligibility/additionality';
 
 export const history = createBrowserHistory();
 
@@ -334,7 +335,15 @@ const App: React.FC = (props): JSX.Element => {
                 <ProtectedRoute path={`${path}/getting-started`} component={GettingStarted} />
                 <ProtectedRoute path={`${path}/choose-credit-class`} component={ChooseCreditClass} />
                 <ProtectedRoute path={`${path}/basic-info`} component={BasicInfo} />
-                <ProtectedRoute path={`${path}/eligibility`} component={Eligibility} />
+                <Route
+                  path={`${path}/eligibility`}
+                  render={({ match: { path } }) => (
+                    <>
+                      <ProtectedRoute path={path} exact component={Eligibility} />
+                      <ProtectedRoute path={`${path}/additionality`} component={Additionality} />
+                    </>
+                  )}
+                />
               </>
             )}
           />

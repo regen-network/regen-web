@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import clsx from 'clsx';
 
 import Card from './Card';
@@ -20,7 +20,12 @@ const useStyles = makeStyles((theme: Theme) => ({
 type Props = { className?: string };
 const OnBoardingCard: React.FC<Props> = ({ children, className }) => {
   const classes = useStyles();
-  return <Card className={clsx(classes.root, className)}>{children}</Card>;
+  const theme = useTheme();
+  return (
+    <Card borderColor={theme.palette.grey[100]} className={clsx(classes.root, className)}>
+      {children}
+    </Card>
+  );
 };
 
 export default OnBoardingCard;

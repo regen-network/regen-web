@@ -99,7 +99,7 @@ const ApproachSection = () => {
   const content = data.text.featuredSection;
 
   return (
-    <Section className={classes.root} title={content.header} titleVariant="subtitle1">
+    <Section className={classes.root} title={content.header} titleVariant="subtitle2">
       <div className={classes.card}>
         <GreenCard>
           <Grid className={classes.grid} container wrap="nowrap">

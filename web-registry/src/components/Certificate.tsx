@@ -318,7 +318,7 @@ export default function CertificatePage(): JSX.Element {
       </Grid>
       {data && data.allPurchases && data.allPurchases.nodes && (
         <div className={classes.projects}>
-          <Section titleClassName={classes.projectsTitle} title="Projects Supported">
+          <Section classes={{ title: classes.projectsTitle }} title="Projects Supported">
             <Grid container spacing={5}>
               {projects.map((project, i) => (
                 <Grid item xs={12} sm={4} key={i}>

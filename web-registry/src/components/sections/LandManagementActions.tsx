@@ -116,10 +116,9 @@ export default function LandManagementActions({
 
   return (
     <Section
-      className={classes.section}
+      classes={{ root: classes.section, title: classes.title }}
       title={title}
       titleVariant="h2"
-      titleClassName={classes.title}
       titleAlign="left"
       topRight={
         <>

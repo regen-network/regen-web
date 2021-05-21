@@ -8,7 +8,11 @@ import Title from '../title';
 export interface SectionProps {
   children?: any;
   className?: string;
-  titleClassName?: string;
+  classes?: {
+    root?: string;
+    title?: string;
+    titleWrap?: string;
+  };
   title?: string;
   titleVariant?: Variant;
   withSlider?: boolean;
@@ -20,6 +24,7 @@ export interface SectionProps {
 
 interface StyleProps {
   withSlider: boolean;
+  topRight: boolean;
   titleLineHeight?: string;
   titleColor?: string;
 }
@@ -53,6 +58,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   title: props => ({
     color: props.titleColor || 'inherit',
     lineHeight: props.titleLineHeight || '140%',
+    textAlign: props.topRight ? 'left' : 'center',
     [theme.breakpoints.down('xs')]: {
       paddingRight: props.withSlider ? theme.spacing(4) : 0,
     },
@@ -69,8 +75,8 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
 
 const Section = ({
   children,
+  classes,
   className,
-  titleClassName,
   titleLineHeight,
   titleColor,
   titleVariant = 'h2',
@@ -79,18 +85,20 @@ const Section = ({
   topRight,
   withSlider = false,
 }: SectionProps): JSX.Element => {
-  const classes = useStyles({ withSlider, titleLineHeight, titleColor });
+  const styles = useStyles({ withSlider, titleLineHeight, titleColor, topRight: !!topRight });
   return (
-    <section className={clsx(classes.root, className)}>
+    <section className={clsx(styles.root, className)}>
       {title && (
-        <Title
-          className={clsx(classes.title, titleClassName, topRight && classes.spaceBetween)}
-          variant={titleVariant}
-          align={titleAlign}
-        >
-          <div className={classes.titleText}>{title}</div>
+        <div className={clsx(classes && classes.titleWrap, topRight && styles.spaceBetween)}>
+          <Title
+            className={clsx(styles.title, classes && classes.titleWrap)}
+            variant={titleVariant}
+            align={titleAlign}
+          >
+            {title}
+          </Title>
           {titleAlign === 'left' && topRight}
-        </Title>
+        </div>
       )}
       {children}
     </section>

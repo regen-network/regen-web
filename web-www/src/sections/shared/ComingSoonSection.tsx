@@ -57,7 +57,7 @@ const ComingSoonSection = () => {
 
   return (
     <BackgroundImage Tag="section" fluid={imageData} backgroundColor={theme.palette.grey['50']}>
-      <Section withSlider className={classes.root} title={content.header} titleVariant="subtitle1">
+      <Section withSlider className={classes.root} title={content.header} titleVariant="subtitle2">
         <ProjectCards
           projects={content.projects.map(
             ({

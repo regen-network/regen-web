@@ -1,5 +1,6 @@
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeOptions } from '@material-ui/core/styles/createMuiTheme';
+import { MuiPickersOverrides } from '@material-ui/pickers/typings/overrides';
 
 declare module '@material-ui/core/styles/createBreakpoints' {
   interface BreakpointOverrides {
@@ -107,7 +108,7 @@ const theme = createMuiTheme({
     h6: {
       fontSize: '1.125rem',
     },
-    subtitle1: {
+    subtitle2: {
       [defaultTheme.breakpoints.up('sm')]: {
         fontSize: '2.375rem',
       },
@@ -173,17 +174,51 @@ const theme = createMuiTheme({
         body2: 'p',
       },
     },
-    // MuiAvatar: {
-    //   img: {
-    //     objectFit: 'scale-down',
-    //   },
-    // },
   },
 });
 
+const muiPickersOverrides: MuiPickersOverrides = {
+  // see: https://github1s.com/mui-org/material-ui-pickers/blob/HEAD/lib/src/typings/overrides.ts
+  MuiPickersDatePickerRoot: {
+    toolbar: {
+      backgroundColor: theme.palette.secondary.main,
+      '& .MuiPickersToolbarText-toolbarTxt': {
+        color: theme.palette.secondary.contrastText,
+      },
+      '& .MuiPickersToolbarText-toolbarBtnSelected': {
+        color: theme.palette.primary.main,
+      },
+    },
+  },
+  MuiPickersToolbar: {
+    toolbar: {
+      backgroundColor: theme.palette.secondary.main,
+    },
+  },
+  MuiPickersYear: {
+    yearSelected: {
+      color: theme.palette.secondary.main,
+      fontSize: theme.spacing(7),
+    },
+  },
+  MuiPickersMonth: {
+    root: {
+      '&:focus': {
+        color: theme.palette.secondary.main,
+      },
+    },
+    monthSelected: {
+      color: theme.palette.secondary.main,
+      fontSize: theme.spacing(7),
+    },
+  },
+};
+
 const themeObject: ThemeOptions = {
   ...theme,
-  overrides: {},
+  overrides: {
+    ...muiPickersOverrides,
+  },
 };
 
 export default createMuiTheme(themeObject);

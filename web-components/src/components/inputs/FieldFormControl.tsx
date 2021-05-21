@@ -90,7 +90,8 @@ export default function FieldFormControl({
     form.handleBlur(value);
   }
 
-  const classes = useStyles({ optional, disabled, error: fieldTouched && errorMessage });
+  const hasError = fieldTouched && errorMessage;
+  const classes = useStyles({ optional, disabled, error: hasError });
   return (
     <FormControl className={className} fullWidth>
       {label && (
@@ -107,7 +108,7 @@ export default function FieldFormControl({
 
       {children({ handleChange, handleBlur })}
 
-      <FormHelperText className={classes.error}>{errorMessage || 'this text is hidden'}</FormHelperText>
+      {hasError && <FormHelperText className={classes.error}>{errorMessage}</FormHelperText>}
     </FormControl>
   );
 }

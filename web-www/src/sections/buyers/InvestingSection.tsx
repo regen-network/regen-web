@@ -141,7 +141,7 @@ const ApproachSection = () => {
       fluid={imageData}
       backgroundColor={theme.palette.grey['50']}
     >
-      <Section className={classes.section} title={content.header} titleVariant="subtitle1">
+      <Section className={classes.section} title={content.header} titleVariant="subtitle2">
         <Grid container justify="space-evenly" className={classes.grid}>
           {content.items.map((item: any, index: number) => (
             <Grid item key={index} xs={12} sm={6}>

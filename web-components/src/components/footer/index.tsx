@@ -205,7 +205,7 @@ export default function Footer({
 
   return (
     <div className={classes.root}>
-      <Section className={classes.section}>
+      <Section classes={{ root: classes.section }}>
         <Grid container>
           <Grid item xs={12} sm={3}>
             <FooterItem title={footerItems[0].title} items={footerItems[0].items} />

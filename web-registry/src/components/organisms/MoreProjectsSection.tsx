@@ -7,7 +7,6 @@ import Section from 'web-components/lib/components/section';
 import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
 import Theme from 'web-components/lib/theme/muiTheme';
 import { Project } from '../../mocks';
-import background from '../../assets/more-projects-bg.jpg';
 import getRegistryUrl from '../../lib/registryUrl';
 import LazyLoad from 'react-lazyload';
 
@@ -18,11 +17,13 @@ interface MoreProjectsProps {
 const useStyles = makeStyles((theme: typeof Theme) => ({
   background: {
     paddingBottom: theme.spacing(20),
-    backgroundImage: `url("${background}")`,
-    backgroundRepeat: 'no-repeat',
   },
   grid: {
     paddingTop: theme.spacing(8.75),
+    [theme.breakpoints.down('sm')]: {
+      flexWrap: 'nowrap',
+      overflow: 'auto',
+    },
   },
   projectCard: {
     height: '100%',
@@ -43,11 +44,11 @@ const MoreProjectsSection = ({ projects }: MoreProjectsProps): JSX.Element => {
 
   return (
     <div className={classes.background}>
-      <Section title="More Projects">
+      <Section title="More Projects" titleAlign="left">
         <LazyLoad offset={300}>
           <Grid container className={classes.grid} spacing={5}>
             {projects.map((project, i) => (
-              <Grid item xs={12} sm={6} md={4} key={project.id} className={classes.item}>
+              <Grid item sm={6} md={4} key={project.id} className={classes.item}>
                 <Link className={classes.projectCard} href={getRegistryUrl(`/projects/${project.id}`)}>
                   <ProjectCard
                     name={project.name}

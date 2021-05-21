@@ -212,7 +212,7 @@ function PostPurchase(): JSX.Element {
 
   return (
     <>
-      <Section className={classes.section}>
+      <Section classes={{ root: classes.section }}>
         <div className={classes.center}>
           <img
             src={require('../assets/cow-illustration.png')}

@@ -71,15 +71,14 @@ const OnBoardingSection: React.FC<OnBoardingSectionProps> = ({
   ...p
 }) => {
   const classes = useStyles();
+  const { root, title, titleWrap } = classes;
 
   return (
     <Section
-      className={classes.root}
+      classes={{ root, title, titleWrap }}
       title={p.title}
       titleAlign={onLinkClick ? 'left' : 'center'}
       titleVariant="h3"
-      titleWrapClassName={classes.titleWrap}
-      titleClassName={classes.title}
       topRight={
         onLinkClick && (
           <Link className={classes.link} onClick={onLinkClick}>

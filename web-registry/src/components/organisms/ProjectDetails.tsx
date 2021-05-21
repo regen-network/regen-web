@@ -5,24 +5,14 @@ import { useLocation } from 'react-router-dom';
 import { loader } from 'graphql.macro';
 import { useQuery } from '@apollo/client';
 import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
+import clsx from 'clsx';
 
-import { setPageView } from '../../lib/ga';
-import { useLedger, ContextType } from '../../ledger';
-import background from '../../assets/background.jpg';
-import { Project, ProjectDefault, ActionGroup } from '../../mocks';
-import { ProjectTopSection, ProjectImpactSection, MoreProjectsSection, CreditsPurchaseForm } from '.';
-
-import { getFontSize } from 'web-components/lib/theme/sizing';
 import { getFormattedDate } from 'web-components/lib/utils/format';
+import IssuanceModal, { IssuanceModalData } from 'web-components/lib/components/modal/IssuanceModal';
 import Title from 'web-components/lib/components/title';
-import Description from 'web-components/lib/components/description';
 import Timeline from 'web-components/lib/components/timeline';
-import CreditDetails from 'web-components/lib/components/credits/CreditDetails';
-import LandManagementActions from 'web-components/lib/components/sliders/LandManagementActions';
 import ProjectMedia from 'web-components/lib/components/sliders/ProjectMedia';
-import Map from 'web-components/lib/components/map';
 import BuyFooter from 'web-components/lib/components/fixed-footer/BuyFooter';
-import MrvTabs from 'web-components/lib/components/tabs';
 import Table from 'web-components/lib/components/table';
 import Modal from 'web-components/lib/components/modal';
 import MoreInfoForm from 'web-components/lib/components/form/MoreInfoForm';
@@ -32,9 +22,19 @@ import FixedFooter from 'web-components/lib/components/fixed-footer';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import EmailIcon from 'web-components/lib/components/icons/EmailIcon';
 
+import { setPageView } from '../../lib/ga';
 import { getImgSrc } from '../../lib/imgSrc';
 import getApiUri from '../../lib/apiUri';
 import { buildIssuanceModalData } from '../../lib/transform';
+import { useLedger, ContextType } from '../../ledger';
+import { Project, ProjectDefault, ActionGroup } from '../../mocks';
+import {
+  ProjectTopSection,
+  ProjectImpactSection,
+  MoreProjectsSection,
+  CreditsPurchaseForm,
+  LandManagementActions,
+} from './index';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -170,7 +170,12 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   projectTimeline: {
-    paddingBottom: theme.spacing(30.5),
+    [theme.breakpoints.up('sm')]: {
+      paddingBottom: theme.spacing(23),
+    },
+    [theme.breakpoints.down('xs')]: {
+      paddingBottom: theme.spacing(17),
+    },
   },
   map: {
     maxHeight: '50rem',
@@ -214,11 +219,17 @@ const useStyles = makeStyles((theme: Theme) => ({
       marginBottom: `${theme.spacing(10)} !important`,
     },
   },
+  documentationTitle: {
+    paddingBottom: theme.spacing(7.5),
+  },
   creditDetails: {
     borderTop: `1px solid ${theme.palette.grey[100]}`,
   },
+  tableBorder: {
+    border: `2px solid ${theme.palette.secondary.dark}`,
+    borderRadius: 5,
+  },
 }));
-
 interface ProjectProps {
   project: Project;
   projects: Project[];
@@ -280,19 +291,23 @@ function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JS
     setOpen(false);
   };
 
-  // Credits Details and MRV table
-  const creditDetails: JSX.Element = (
-    <CreditDetails
-      creditClass={project.creditClass}
-      activities={project.keyOutcomesActivities}
-      background={background}
-      title={
-        project.fieldsOverride && project.fieldsOverride.keyOutcomesActivities
-          ? project.fieldsOverride.keyOutcomesActivities.title
-          : projectDefault.keyOutcomesActivities.title
+  const [issuanceModalData, setIssuanceModalData] = useState<IssuanceModalData | null>(null);
+  const [issuanceModalOpen, setIssuanceModalOpen] = useState(false);
+
+  const viewOnLedger = (creditVintage: any): void => {
+    if (creditVintage?.txHash) {
+      if (creditVintage.txHash !== issuanceModalData?.txHash) {
+        const issuanceData = buildIssuanceModalData(
+          data.projectByHandle,
+          data.projectByHandle.documentsByProjectId.nodes,
+          creditVintage,
+        );
+
+        setIssuanceModalData(issuanceData);
       }
-    />
-  );
+      setIssuanceModalOpen(true);
+    }
+  };
 
   const siteMetadata = {
     title: `Regen Network Registry`,
@@ -313,8 +328,15 @@ function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JS
         imageStorageBaseUrl={imageStorageBaseUrl}
         apiServerUrl={apiServerUrl}
       />
-      <ProjectTopSection project={project} projectDefault={projectDefault} />
-      <ProjectImpactSection impact={project.impact} />
+      {/* <ProjectTopSection project={project} projectDefault={projectDefault} />
+      <ProjectImpactSection impact={project.impact} /> */}
+      <ProjectTopSection
+        project={project}
+        projectDefault={projectDefault}
+        geojson={geojson}
+        isGISFile={isGISFile}
+      />
+      <ProjectImpactSection impacts={project.impact} />
 
       {/* {protectedSpecies.length > 0 && (
         <div
@@ -348,106 +370,65 @@ function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JS
         </div>
       )} */}
 
-      {!project.hideCreditDetails && (
+      {data?.projectByHandle?.documentsByProjectId?.nodes?.length > 0 && (
         <div className={classes.creditDetails}>
-          <div className={`${classes.projectDetails} ${classes.projectContent}`}>
-            {project.documents.length > 0 ? (
-              <MrvTabs
-                tabs={[
-                  {
-                    label: 'Overview',
-                    children: creditDetails,
-                  },
-                  {
-                    label: 'Documentation',
-                    children: <Table rows={project.documents} />,
-                  },
-                ]}
-                background={background}
-              />
-            ) : (
-              creditDetails
-            )}
+          <div className={clsx(classes.projectDetails, classes.projectContent)}>
+            <Title variant="h2" className={classes.documentationTitle}>
+              Documentation
+            </Title>
+            <Table
+              className={classes.tableBorder}
+              txClient={txClient}
+              onViewOnLedger={viewOnLedger}
+              rows={data.projectByHandle.documentsByProjectId.nodes}
+            />
           </div>
         </div>
       )}
 
-      <div className={`project-background`}>
-        <div
-          className={`${classes.projectTopContent} ${classes.projectDetails} ${classes.projectActions} ${classes.projectContent}`}
-        >
-          <Title variant="h3">
-            {project.fieldsOverride && project.fieldsOverride.landManagementActions
-              ? project.fieldsOverride.landManagementActions.title
-              : projectDefault.landManagementActions.title}
-          </Title>
-          {landManagementActions.map((actionsType, i) => (
-            <div key={i} className={i > 0 ? classes.projectActionsGroup : ''}>
-              <Description
-                fontSize={
-                  landManagementActions.length > 1 ? { xs: '0.95rem', sm: '1.125rem' } : getFontSize('medium')
-                }
-              >
-                {actionsType.title || projectDefault.landManagementActions.subtitle}
-              </Description>
-              <LandManagementActions actions={actionsType.actions} />
-              {/*<div className={`${classes.projectGrid} ${classes.projectActionsGrid}`}>
-                  {actionsType.actions.map((action, j) => (
-                    <Grid item xs={12} sm={4} className={classes.projectGridItem} key={`${j}-${action.name}`}>
-                      <Action
-                        name={action.name}
-                        description={action.description}
-                        imgSrc={require(`../assets/${action.imgSrc}`)}
-                      />
-                    </Grid>
-                  ))
-                </div>*/}
-            </div>
-          ))}
+      {landManagementActions.map((actionsType, i) => (
+        <div key={i} className={i > 0 ? classes.projectActionsGroup : ''}>
+          <LandManagementActions
+            actions={actionsType.actions}
+            title={
+              project.fieldsOverride && project.fieldsOverride.landManagementActions
+                ? project.fieldsOverride.landManagementActions.title
+                : projectDefault.landManagementActions.title
+            }
+            subtitle={actionsType.title || projectDefault.landManagementActions.subtitle}
+          />
         </div>
-      </div>
+      ))}
 
-      {geojson && isGISFile ? (
-        <Map geojson={geojson} token={process.env.REACT_APP_MAPBOX_TOKEN} />
-      ) : (
-        <img className={classes.map} alt={project.name} src={mapFile} />
-      )}
-
-      {data &&
-        data.projectByHandle &&
-        data.projectByHandle.eventsByProjectId &&
-        data.projectByHandle.eventsByProjectId.nodes.length > 0 && (
-          <div className={classes.timelineContainer}>
-            <div className={`${classes.projectDetails} ${classes.projectTimeline} ${classes.projectContent}`}>
-              <Title className={classes.timelineTitle} variant="h3">
-                {project.fieldsOverride && project.fieldsOverride.timeline
-                  ? project.fieldsOverride.timeline.title
-                  : projectDefault.timeline.title}
-              </Title>
-              <Timeline
-                txClient={txClient}
-                events={data.projectByHandle.eventsByProjectId.nodes.map(
-                  (node: {
-                    // TODO use generated types from graphql schema
-                    date: string;
-                    summary: string;
-                    description?: string;
-                    creditVintageByEventId?: any;
-                  }) => ({
-                    modalData: buildIssuanceModalData(
-                      data.projectByHandle,
-                      project.documents,
-                      node.creditVintageByEventId,
-                    ),
-                    date: getFormattedDate(node.date, { year: 'numeric', month: 'long', day: 'numeric' }),
-                    summary: node.summary,
-                    description: node.description,
-                  }),
-                )}
-              />
-            </div>
+      {data?.projectByHandle?.eventsByProjectId?.nodes?.length > 0 && (
+        <div className={clsx(classes.timelineContainer, 'project-background')}>
+          <div className={clsx(classes.projectDetails, classes.projectTimeline, classes.projectContent)}>
+            <Title className={classes.timelineTitle} variant="h2">
+              {project.fieldsOverride && project.fieldsOverride.timeline
+                ? project.fieldsOverride.timeline.title
+                : projectDefault.timeline.title}
+            </Title>
+            <Timeline
+              txClient={txClient}
+              onViewOnLedger={viewOnLedger}
+              events={data.projectByHandle.eventsByProjectId.nodes.map(
+                (node: {
+                  // TODO use generated types from graphql schema
+                  date: string;
+                  summary: string;
+                  description?: string;
+                  creditVintageByEventId?: any;
+                }) => ({
+                  date: getFormattedDate(node.date, { year: 'numeric', month: 'long', day: 'numeric' }),
+                  summary: node.summary,
+                  description: node.description,
+                  creditVintage: node.creditVintageByEventId,
+                }),
+              )}
+            />
           </div>
-        )}
+        </div>
+      )}
 
       {otherProjects.length > 0 && <MoreProjectsSection projects={otherProjects} />}
 
@@ -481,6 +462,14 @@ function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JS
           }}
         />
       </Modal>
+      {issuanceModalData && (
+        <IssuanceModal
+          txClient={txClient}
+          open={issuanceModalOpen}
+          onClose={() => setIssuanceModalOpen(false)}
+          {...issuanceModalData}
+        />
+      )}
       {submitted && <Banner text="Thanks for submitting your information!" />}
     </div>
   );

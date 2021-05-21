@@ -6,7 +6,6 @@ export default {
   title: 'Components|ReadMore',
   component: ReadMore,
   decorators: [withKnobs],
-  
 };
 
 const readMoreText: string =

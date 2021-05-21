@@ -50,8 +50,10 @@ const TeamSection = ({
     <Section
       title={title}
       titleVariant="h2"
-      titleClassName={clsx(titleClassName, classes.title)}
-      className={clsx(className, classes.section)}
+      classes={{
+        root: clsx(className, classes.section),
+        title: clsx(titleClassName, classes.title),
+      }}
     >
       <Grid justify="center" container direction="row">
         {members.map((m: any, index: any) => {

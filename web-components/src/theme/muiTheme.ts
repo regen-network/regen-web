@@ -1,5 +1,6 @@
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeOptions } from '@material-ui/core/styles/createMuiTheme';
+import { MuiPickersOverrides } from '@material-ui/pickers/typings/overrides';
 
 declare module '@material-ui/core/styles/createBreakpoints' {
   interface BreakpointOverrides {
@@ -176,53 +177,47 @@ const theme = createMuiTheme({
   },
 });
 
-const themeObject: ThemeOptions = {
-  ...theme,
+const muiPickersOverrides: MuiPickersOverrides = {
   // see: https://github1s.com/mui-org/material-ui-pickers/blob/HEAD/lib/src/typings/overrides.ts
-  overrides: {
-    MuiPickersToolbar: {
-      toolbar: {
-        backgroundColor: '#4FB573',
-      },
-    },
-    //@ts-ignore - not sure why it doesn't like this
-    MuiPickersToolbarText: {
-      toolbarTxt: {
+  MuiPickersDatePickerRoot: {
+    toolbar: {
+      backgroundColor: theme.palette.secondary.main,
+      '& .MuiPickersToolbarText-toolbarTxt': {
         color: theme.palette.secondary.contrastText,
       },
-      toolbarBtnSelected: {
+      '& .MuiPickersToolbarText-toolbarBtnSelected': {
         color: theme.palette.primary.main,
       },
     },
-    MuiPickersYear: {
-      yearSelected: {
+  },
+  MuiPickersToolbar: {
+    toolbar: {
+      backgroundColor: theme.palette.secondary.main,
+    },
+  },
+  MuiPickersYear: {
+    yearSelected: {
+      color: theme.palette.secondary.main,
+      fontSize: theme.spacing(7),
+    },
+  },
+  MuiPickersMonth: {
+    root: {
+      '&:focus': {
         color: theme.palette.secondary.main,
-        fontSize: theme.spacing(7),
       },
     },
-    MuiPickersMonth: {
-      root: {
-        '&:focus': {
-          color: theme.palette.secondary.main,
-        },
-      },
-      monthSelected: {
-        color: theme.palette.secondary.main,
-        fontSize: theme.spacing(7),
-      },
+    monthSelected: {
+      color: theme.palette.secondary.main,
+      fontSize: theme.spacing(7),
     },
-    // Leaving this because we'll likely need later
-    // MuiPickersDay: {
-    //   day: {
-    //     color: theme.palette.secondary.main,
-    //   },
-    //   daySelected: {
-    //     backgroundColor: '#DCF0E3',
-    //   },
-    //   current: {
-    //     color: '#DCF0E3',
-    //   },
-    // },
+  },
+};
+
+const themeObject: ThemeOptions = {
+  ...theme,
+  overrides: {
+    ...muiPickersOverrides,
   },
 };
 

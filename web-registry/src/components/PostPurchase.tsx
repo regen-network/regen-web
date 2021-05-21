@@ -12,7 +12,6 @@ import Title from 'web-components/lib/components/title';
 import ShareIcons from 'web-components/lib/components/icons/ShareIcons';
 
 import sum from '../lib/sum';
-import getRegistryUrl from '../lib/registryUrl';
 
 const PROJECT = gql`
   query ProjectByHandle($handle: String!) {
@@ -203,7 +202,7 @@ export default function PostPurchase(): JSX.Element {
     variables: { id: walletId },
   });
 
-  const url: string = getRegistryUrl(`projects/${projectId}`);
+  const url: string = `projects/${projectId}`;
 
   const units: number | undefined =
     walletData &&

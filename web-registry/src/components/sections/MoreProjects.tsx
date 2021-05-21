@@ -7,7 +7,6 @@ import Section from 'web-components/lib/components/section';
 import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
 import Theme from 'web-components/lib/theme/muiTheme';
 import { Project } from '../../mocks';
-import getRegistryUrl from '../../lib/registryUrl';
 import LazyLoad from 'react-lazyload';
 
 interface MoreProjectsProps {
@@ -49,7 +48,7 @@ const MoreProjects = ({ projects }: MoreProjectsProps): JSX.Element => {
           <Grid container className={classes.grid} spacing={5}>
             {projects.map((project, i) => (
               <Grid item sm={6} md={4} key={project.id} className={classes.item}>
-                <Link className={classes.projectCard} href={getRegistryUrl(`/projects/${project.id}`)}>
+                <Link className={classes.projectCard} href={`/projects/${project.id}`}>
                   <ProjectCard
                     name={project.name}
                     imgSrc={project.image}

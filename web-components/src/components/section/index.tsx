@@ -8,6 +8,7 @@ import Title from '../title';
 export interface SectionProps {
   children?: any;
   className?: string;
+  titleClassName?: string;
   classes?: {
     root?: string;
     title?: string;
@@ -18,7 +19,7 @@ export interface SectionProps {
   withSlider?: boolean;
   titleLineHeight?: string;
   titleColor?: string;
-  titleAlign?: 'left' | 'right' | 'inherit' | 'center' | 'justify' | undefined;
+  titleAlign?: 'left' | 'right' | 'inherit' | 'center' | 'justify';
   topRight?: JSX.Element;
 }
 
@@ -77,6 +78,7 @@ const Section = ({
   children,
   classes,
   className,
+  titleClassName,
   titleLineHeight,
   titleColor,
   titleVariant = 'h2',
@@ -89,7 +91,7 @@ const Section = ({
   return (
     <section className={clsx(styles.root, className)}>
       {title && (
-        <div className={clsx(classes && classes.titleWrap, topRight && styles.spaceBetween)}>
+        <div className={clsx(titleClassName, classes && classes.titleWrap, topRight && styles.spaceBetween)}>
           <Title
             className={clsx(styles.title, classes && classes.titleWrap)}
             variant={titleVariant}

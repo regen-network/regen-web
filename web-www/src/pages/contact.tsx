@@ -238,8 +238,7 @@ const ContactPage = ({ location }: { location: Location }): JSX.Element => {
         <Section
           title={content.header}
           titleVariant="h1"
-          className={classes.section}
-          titleClassName={classes.title}
+          classes={{ root: classes.section, title: classes.title }}
         >
           <Description align="center" className={classes.subtitle}>
             {ReactHtmlParser(content.body)}

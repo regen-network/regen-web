@@ -66,9 +66,8 @@ const FAQSection = ({ header, imageData, category, children }: FAQSectionProps):
   return (
     <BackgroundImage Tag="div" fluid={imageData}>
       <Section
+        classes={{ root: clsx(classes.root, children && classes.withChildren), title: classes.title }}
         titleColor={theme.palette.primary.main}
-        titleClassName={classes.title}
-        className={clsx(classes.root, children && classes.withChildren)}
         title={header}
       >
         {children ? (

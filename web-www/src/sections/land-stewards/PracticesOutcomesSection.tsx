@@ -89,12 +89,12 @@ const PracticesOutcomesSection = (): JSX.Element => {
       description,
     }),
   );
-  const outcomesElement: JSX.Element[] = content.outcomes.items.map(({ image, header, description }) => (
+  const outcomesElement: JSX.Element[] = content.outcomes.items.map(({ image, header, description }: any) => (
     <ImpactCard name={header} imgSrc={image.publicURL} description={description} largeFontSize />
   ));
 
   return (
-    <Section withSlider titleClassName={classes.title} className={classes.root} title={content.header}>
+    <Section withSlider classes={{ root: classes.root, title: classes.title }} title={content.header}>
       <ImageItems
         className={classes.slider}
         title={content.practices.header}

@@ -8,7 +8,7 @@ import Title from '../title';
 export interface SectionProps {
   children?: any;
   className?: string;
-  titleClassName?: string;
+  titleClassName?: string; // TODO: remove and refactor uses into classes.title pattern
   classes?: {
     root?: string;
     title?: string;

@@ -1,4 +1,5 @@
 import React from 'react';
+import cx from 'clsx';
 import { makeStyles, Theme } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import { Variant } from '@material-ui/core/styles/createTypography';
@@ -9,7 +10,7 @@ interface TitleProps {
   color?: any;
   className?: string;
   onClick?: React.MouseEventHandler;
-  align?: 'left' | 'right' | 'inherit' | 'center' | 'justify' | undefined;
+  align?: 'left' | 'right' | 'inherit' | 'center' | 'justify';
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -27,10 +28,10 @@ export default function Title({
   align,
   onClick,
 }: TitleProps): JSX.Element {
-  const classes = useStyles({});
+  const styles = useStyles({});
   return (
     <Typography
-      className={`${classes.root} ${className}`}
+      className={cx(styles.root, className)}
       color={color || 'textPrimary'}
       align={align || 'left'}
       variant={variant}

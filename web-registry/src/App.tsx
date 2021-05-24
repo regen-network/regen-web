@@ -7,32 +7,32 @@ import isAdmin from './lib/admin';
 import { init as initGA } from './lib/ga';
 
 import CookiesBanner from 'web-components/lib/components/banner/CookiesBanner';
-import { ScrollToTop } from './components/atoms';
-import { ProtectedRoute } from './components/molecules';
+import { ScrollToTop, ProtectedRoute } from './components/atoms';
 import { AppHeader, AppFooter } from './components/organisms';
 
 import {
+  Additionality,
+  Admin,
+  BasicInfo,
+  BuyerCreate,
+  CertificatePage,
+  ChooseCreditClass,
   Credits,
   CreditsIssue,
-  CreditsTransfer,
   CreditsRetire,
-  BuyerCreate,
-  NotFoundPage,
-  Admin,
-  PostPurchase,
-  CertificatePage,
-  Seller,
-  VerifyEmail,
-  UserProfile,
-  GettingStarted,
-  ChooseCreditClass,
-  ProjectPlans,
-  Project,
-  Projects,
-  BasicInfo,
-  Signup,
+  CreditsTransfer,
   Eligibility,
-  Additionality,
+  GettingStarted,
+  Home,
+  NotFoundPage,
+  PostPurchase,
+  Project,
+  ProjectPlans,
+  Projects,
+  Seller,
+  Signup,
+  UserProfile,
+  VerifyEmail,
 } from './pages';
 
 import './App.css';
@@ -67,8 +67,7 @@ const App: React.FC = (): JSX.Element => {
         <AppHeader />
         <Switch>
           <Route exact path="/">
-            <Redirect to="/projects/wilmot" />
-            {/* <Home /> */}
+            <Home />
           </Route>
           <Route exact path="/verify-email">
             <VerifyEmail />

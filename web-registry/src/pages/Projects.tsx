@@ -1,10 +1,10 @@
 import React from 'react';
 
 import { projects } from '../mocks';
-import { ProjectList } from '../components/organisms';
+import { ProjectList } from '../components/templates';
 
-function Projects(): JSX.Element {
+const Projects: React.FC = () => {
   return <ProjectList projects={projects} />;
-}
+};
 
 export { Projects };

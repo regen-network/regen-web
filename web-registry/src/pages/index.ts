@@ -10,6 +10,7 @@ export * from './CreditsRetire';
 export * from './CreditsTransfer';
 export * from './Eligibility';
 export * from './GettingStarted';
+export * from './Home';
 export * from './NotFound';
 export * from './PostPurchase';
 export * from './Project';

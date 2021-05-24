@@ -34,7 +34,7 @@ import {
   MoreProjectsSection,
   CreditsPurchaseForm,
   LandManagementActions,
-} from './index';
+} from '../organisms/index';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {

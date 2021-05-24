@@ -38,7 +38,7 @@ type Props = {
 const ImageActionCard: React.FC<Props> = ({ btnText = 'Choose Credit Class', ...p }) => {
   const classes = useStyles();
   return (
-    <MediaCard imgSrc={p.imgSrc} className={clsx(classes.root, p.className)}>
+    <MediaCard imgSrc={p.imgSrc} className={clsx(classes.root, p.className)} elevation={1}>
       <CardContent>
         <Typography gutterBottom className={classes.title} variant="h5">
           {ReactHtmlParser(p.title)}

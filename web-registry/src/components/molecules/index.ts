@@ -1,2 +1,3 @@
 export * from './PlanStepper';
-export * from './ProtectedRoute';
+export * from './HeroTitle';
+export * from './HeroAction';

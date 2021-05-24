@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 import Section from 'web-components/lib/components/section';
@@ -43,7 +43,8 @@ const MoreProjects = ({ projects }: MoreProjectsProps): JSX.Element => {
   const apiServerUrl = process.env.REACT_APP_API_URI;
 
   // const isMobile = useMediaQuery
-  const isMobile = useMediaQuery((theme: Theme) => theme.breakpoints.down('xs'));
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
 
   return (
     <div className={classes.background}>

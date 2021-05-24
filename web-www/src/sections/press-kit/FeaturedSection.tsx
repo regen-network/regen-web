@@ -66,7 +66,7 @@ const FeaturedSection = (): JSX.Element => {
           <ArticleCard name={header} imgSrc={image.publicURL} author={author} date={date} url={url} />
         ));
         return (
-          <Section withSlider title={content.header} titleClassName={classes.title}>
+          <Section withSlider title={content.header} classes={{ title: classes.title }}>
             <ResponsiveSlider
               infinite={false}
               className={classes.slider}

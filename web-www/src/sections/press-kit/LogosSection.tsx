@@ -56,7 +56,7 @@ const LogosSection = (): JSX.Element => {
       render={data => {
         const content = data.content.logosSection;
         return (
-          <Section title={content.header} titleClassName={classes.title} className={classes.root}>
+          <Section title={content.header} classes={{ root: classes.root, title: classes.title }}>
             <Grid container alignItems="center" direction="column">
               <RegenIcon className={classes.logo} />
               <ContainedButton href={content.buttonLink}>{content.buttonText}</ContainedButton>

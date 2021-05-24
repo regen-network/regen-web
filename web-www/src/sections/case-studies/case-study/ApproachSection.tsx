@@ -191,8 +191,10 @@ const ApproachSection = ({
         const content = data.text.caseStudies.approachSection;
         return (
           <Section
-            titleClassName={description ? classes.titleWithDescription : classes.title}
-            className={classes.root}
+            classes={{
+              root: classes.root,
+              title: description ? classes.titleWithDescription : classes.title,
+            }}
             title={content.header}
           >
             {description && <Description className={classes.description}>{description}</Description>}

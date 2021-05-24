@@ -81,7 +81,7 @@ const AwardsSection = (): JSX.Element => {
           </a>
         ));
         return (
-          <Section withSlider title={content.header} titleClassName={classes.title}>
+          <Section withSlider title={content.header} classes={{ title: classes.title }}>
             <ResponsiveSlider
               infinite={false}
               className={classes.slider}

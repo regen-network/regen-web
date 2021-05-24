@@ -61,7 +61,7 @@ const TimelineSection = (): JSX.Element => {
       render={data => {
         const content = data.content.timelineSection;
         return (
-          <Section className={classes.root} title={content.header} titleClassName={classes.title}>
+          <Section classes={{ root: classes.root, title: classes.title }} title={content.header}>
             <Description className={classes.description}>{content.description}</Description>
             <Timeline events={content.items} completedItemIndex={content.completedItemIndex} />
           </Section>

@@ -42,7 +42,6 @@ const MoreProjects = ({ projects }: MoreProjectsProps): JSX.Element => {
   const imageStorageBaseUrl = process.env.REACT_APP_IMAGE_STORAGE_BASE_URL;
   const apiServerUrl = process.env.REACT_APP_API_URI;
 
-  // const isMobile = useMediaQuery
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
 

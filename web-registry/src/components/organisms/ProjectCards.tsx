@@ -45,7 +45,7 @@ const ProjectCards: React.FC<Props> = p => {
   return (
     <Grid container className={styles.root} spacing={5}>
       {p.projects.map((project, i) => (
-        <Grid item sm={6} md={4} key={project.id} className={styles.item}>
+        <Grid item xs={12} sm={6} md={4} key={project.id} className={styles.item}>
           <Link className={styles.projectCard} href={getRegistryUrl(`/projects/${project.id}`)}>
             <ProjectCard
               name={project.name}

@@ -1,6 +1,6 @@
 export * from './AdditionalityForm';
 export * from './AppFooter';
-export * from './AppHeader';
+export * from './RegistryHeader';
 export * from './CreditClassCards';
 export * from './BasicInfoForm';
 export * from './CreditsPurchaseForm';

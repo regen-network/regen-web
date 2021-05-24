@@ -9,6 +9,7 @@ type Props = {
   img: string;
   title: string;
   description: string;
+  maxWidth?: false | 'xs' | 'sm' | 'md' | 'lg' | 'xl';
   classes?: {
     title?: string;
     description?: string;
@@ -53,7 +54,7 @@ const HeroTitle: React.FC<Props> = p => {
 
   return (
     <CardMedia image={p.img}>
-      <Container maxWidth="md">
+      <Container maxWidth={p.maxWidth || 'md'}>
         <div className={cx(styles.main, p.classes && p.classes.main)}>
           <Typography variant="h1" className={cx(styles.title, p.classes && p.classes.title)}>
             {p.title}

@@ -9,6 +9,7 @@ import Title from 'web-components/lib/components/title';
 import { HeroTitle, HeroAction } from '../molecules';
 import { Project, BasicCreditClass } from '../../mocks';
 import { CreditClassCards, ProjectCards } from '../organisms';
+import Section from 'web-components/lib/components/section';
 
 type Props = {
   creditClasses: BasicCreditClass[];
@@ -23,6 +24,9 @@ type Props = {
 const useStyles = makeStyles((theme: Theme) => ({
   topSectionDescription: {
     maxWidth: theme.spacing(165),
+  },
+  projectBackground: {
+    backgroundColor: theme.palette.grey[50],
   },
   section: {
     [theme.breakpoints.up('sm')]: {
@@ -56,21 +60,28 @@ const HomeTemplate: React.FC<Props> = p => {
         title={p.topSectionTitle}
         description={p.topSectionDescription}
         classes={{ description: styles.topSectionDescription }}
+        maxWidth="lg"
       />
 
-      <CardMedia image={p.projectBackgroundImg}>
-        <Container maxWidth="md" className={styles.section}>
+      {/* <CardMedia image={p.projectBackgroundImg} className={styles.projectBackground}>
+        <Container maxWidth="lg" className={styles.section}>
           <Title align="center" variant="h2">
             Projects
           </Title>
           <ProjectCards projects={p.projects} />
         </Container>
+      </CardMedia> */}
+
+      <CardMedia image={p.projectBackgroundImg} className={styles.projectBackground}>
+        <Section title="Projects" titleAlign="left">
+          <ProjectCards projects={p.projects} />
+        </Section>
       </CardMedia>
-      <Container maxWidth="md" className={styles.section}>
+
+      <Container maxWidth="lg" className={styles.section}>
         <Title align="left" variant="h2">
           Credit Classes
         </Title>
-
         <CreditClassCards
           justify={isMobile ? 'center' : 'flex-start'}
           creditClasses={p.creditClasses}

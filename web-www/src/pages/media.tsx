@@ -129,8 +129,7 @@ const MediaPage = ({ location }: props): JSX.Element => {
         <Section
           title={content.header}
           titleVariant="h1"
-          className={classes.section}
-          titleClassName={classes.title}
+          classes={{ root: classes.section, title: classes.title }}
         >
           <Formik
             initialValues={{

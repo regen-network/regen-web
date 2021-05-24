@@ -64,7 +64,7 @@ const TimelineSection = (): JSX.Element => {
 
   return (
     <div className={classes.root}>
-      <Section title={content.header} titleClassName={classes.title} titleVariant="subtitle2">
+      <Section title={content.header} classes={{ title: classes.title }} titleVariant="subtitle2">
         <div className={classes.timeline}>
           <Timeline items={items} />
         </div>

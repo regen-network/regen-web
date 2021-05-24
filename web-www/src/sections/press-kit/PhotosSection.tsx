@@ -57,7 +57,7 @@ const PhotosSection = (): JSX.Element => {
       render={data => {
         const content = data.content.photosSection;
         return (
-          <Section title={content.header} titleClassName={classes.title} className={classes.root}>
+          <Section title={content.header} classes={{ root: classes.root, title: classes.title }}>
             <div className={classes.slider}>
               <ProjectMedia
                 xsBorderRadius

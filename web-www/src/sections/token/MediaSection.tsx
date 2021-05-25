@@ -40,10 +40,10 @@ type CardItem = Item & {
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     [theme.breakpoints.up('sm')]: {
-      padding: theme.spacing(10, 4, 20),
+      padding: theme.spacing(14, 4, 20),
     },
     [theme.breakpoints.down('xs')]: {
-      padding: theme.spacing(10, 0, 20),
+      padding: theme.spacing(14, 0, 20),
     },
   },
   main: {

@@ -7,6 +7,8 @@ import Info from '../sections/token/InfoSection';
 import TokenPool from '../sections/token/TokenPool';
 import UnlockSchedule from '../sections/token/UnlockSchedule';
 import Staking from '../sections/token/Staking';
+import BlockExplorerSection from '../sections/token/BlockExplorerSection';
+import ConnectSection from '../sections/token/ConnectSection';
 import MediaSection from '../sections/token/MediaSection';
 
 interface Props {
@@ -36,8 +38,8 @@ const TokenPage = ({ location }: Props): JSX.Element => {
       <TokenPool />
       <UnlockSchedule />
       <Staking />
-      {/*<BlockExplorer />
-      <Connect />*/}
+      <BlockExplorerSection />
+      <ConnectSection />
       <MediaSection />
     </>
   );

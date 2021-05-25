@@ -43,4 +43,11 @@ staking:
     To learn more about staking REGEN tokens, please <a>click here</a>.
   buttonText: check out the faq
   buttonUrl: "#"
+connectSection:
+  header: Connect
+blockExplorerSection:
+  header: Block Explorer
+  description: Explore mainnet blocks, transactions and validators live on the Aneka block explorer!
+  buttonText: aneka block explorer
+  buttonUrl: /todo
 

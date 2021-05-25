@@ -1,9 +1,8 @@
 import React from 'react';
-import { makeStyles, Theme, useTheme } from '@material-ui/core';
+import { makeStyles, Theme } from '@material-ui/core';
 import { useStaticQuery, graphql } from 'gatsby';
 import BackgroundImage from 'gatsby-background-image';
 import ReactHtmlParser from 'react-html-parser';
-import clsx from 'clsx';
 
 import Section from 'web-components/src/components/section';
 import Title from 'web-components/src/components/title';
@@ -16,12 +15,12 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    [theme.breakpoints.down('xs')]: {
-      marginTop: theme.spacing(20),
+    [theme.breakpoints.up('sm')]: {
       padding: theme.spacing(30, 0),
     },
-    [theme.breakpoints.up('sm')]: {
-      padding: theme.spacing(20, 0),
+    [theme.breakpoints.down('xs')]: {
+      marginTop: theme.spacing(20),
+      padding: theme.spacing(22, 0),
     },
     '& a': {
       textDecoration: 'none',
@@ -32,17 +31,17 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   button: {
     textAlign: 'center',
-    width: 360, //
+    width: theme.spacing(90),
   },
   title: {
     maxWidth: theme.spacing(172),
     color: theme.palette.primary.main,
     [theme.breakpoints.down('xs')]: {
       fontSize: theme.spacing(8),
-      paddingBottom: theme.spacing(7.5),
+      padding: theme.spacing(7.5, 0),
     },
     [theme.breakpoints.up('sm')]: {
-      paddingBottom: theme.spacing(9.5),
+      padding: theme.spacing(9.5, 0),
     },
   },
   content: {
@@ -65,14 +64,13 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     [theme.breakpoints.down('xs')]: {
       fontSize: theme.spacing(5),
-      padding: `${theme.spacing(2.5)} ${theme.spacing(4)}`,
+      padding: theme.spacing(0, 4, 7),
     },
   },
 }));
 
 const BlockExplorerSection = (): JSX.Element => {
   const styles = useStyles();
-  const theme = useTheme();
   const data = useStaticQuery(graphql`
     query {
       background: file(relativePath: { eq: "stones-bg.png" }) {
@@ -100,7 +98,7 @@ const BlockExplorerSection = (): JSX.Element => {
       <Section classes={{ root: styles.root }}>
         <div className={styles.content}>
           <DecentralizeIcon />
-          <Title className={styles.title} variant="h3">
+          <Title className={styles.title} variant="h2">
             {content.header}
           </Title>
           <Description className={styles.description}>{ReactHtmlParser(content.description)}</Description>

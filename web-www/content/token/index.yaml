@@ -13,10 +13,10 @@ tokenEconomics:
     REGEN token will accrue value from levying fees on ecological assets originated and secured on-chain, and from transaction fees paid by users paying for services on the network.
 
 
-    To learn more about Regen Network token economics, please <a>click here</a>.
+    To learn more about Regen Network token economics, please <a href="#" target="_blank">click here</a>.
 
 
-    For frequently asked questions related to REGEN tokens, please <a>click here</a>.
+    For frequently asked questions related to REGEN tokens, please <a href="/faq/token" target="_blank">click here</a>.
 infoSection:
   title: Coming Soon - Public Sale on Gravity DEX & Osmosis
   subtitle: "Release date: May 2021"
@@ -42,12 +42,12 @@ staking:
 
     To learn more about staking REGEN tokens, please <a>click here</a>.
   buttonText: check out the faq
-  buttonUrl: "#"
+  buttonUrl: /faq/token
 blockExplorerSection:
   header: Block Explorer
   description: Explore mainnet blocks, transactions and validators live on the Aneka block explorer!
   buttonText: aneka block explorer
-  buttonUrl: "#"
+  buttonUrl: https://regen.aneka.io
 connectSection:
   header: Connect
 

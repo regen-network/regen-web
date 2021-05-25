@@ -24,8 +24,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
   },
   chartScroll: {
     width: '100%',
-    overflow: 'scroll',
-    display: 'flex',
+    overflowX: 'scroll',
     justifyContent: 'center',
   },
   chartWrapper: {

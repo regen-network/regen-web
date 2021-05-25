@@ -34,11 +34,11 @@ type Props = {
   imgSrc: string;
   onClick: () => void;
   title: string;
-  btnText?: string;
+  btnText: string;
   className?: string;
 };
 
-const ImageActionCard: React.FC<Props> = ({ btnText = 'Choose Credit Class', ...props }) => {
+const ImageActionCard: React.FC<Props> = props => {
   const styles = useStyles();
   const theme = useTheme();
   return (
@@ -60,7 +60,7 @@ const ImageActionCard: React.FC<Props> = ({ btnText = 'Choose Credit Class', ...
         </div>
 
         <OutlinedButton className={styles.btn} onClick={props.onClick}>
-          {btnText}
+          {props.btnText}
         </OutlinedButton>
       </CardContent>
     </MediaCard>

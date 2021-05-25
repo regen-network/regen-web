@@ -7,6 +7,7 @@ import { BasicCreditClass } from '../../mocks';
 import { getImgSrc } from '../../lib/imgSrc';
 
 type Props = {
+  btnText: string;
   creditClasses: BasicCreditClass[];
   onClickCard: (c: BasicCreditClass) => void;
   justify?: 'center' | 'space-around' | 'space-between' | 'space-evenly' | 'flex-end' | 'flex-start';
@@ -22,7 +23,7 @@ const CreditClassCards: React.FC<Props> = ({ justify = 'center', ...props }) => 
         <Grid item xs={12} sm={6} md={4} key={i}>
           <ImageActionCard
             key={i}
-            btnText="Learn More"
+            btnText={props.btnText}
             description={c.description}
             imgSrc={getImgSrc(c.imgSrc)}
             onClick={() => props.onClickCard(c)}

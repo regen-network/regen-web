@@ -66,6 +66,7 @@ const HomeTemplate: React.FC<Props> = props => {
 
       <Section title="Credit Classes" titleAlign="left" classes={{ root: styles.section }}>
         <CreditClassCards
+          btnText="Learn More"
           justify={isMobile ? 'center' : 'flex-start'}
           creditClasses={props.creditClasses}
           onClickCard={handleCardSelect}

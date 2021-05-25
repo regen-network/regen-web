@@ -27,6 +27,7 @@ const ChooseCreditClass: React.FC = () => {
   return (
     <OnBoardingSection title="Choose a credit class">
       <CreditClassCards
+        btnText="Choose credit class"
         creditClasses={creditClasses}
         onClickCard={handleSelection}
         classes={{ root: styles.cards }}

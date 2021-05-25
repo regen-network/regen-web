@@ -5,26 +5,30 @@ import moment from 'moment';
 import clsx from 'clsx';
 
 import Section from 'web-components/src/components/section';
-import Title from 'web-components/src/components/title';
 import BarChart from 'web-components/src/components/charts/BarChart';
 import { TokenDescription as Description } from './Description';
 
 const useStyles = makeStyles<Theme>((theme: Theme) => ({
-  root: {},
-  content: {
-    width: '80%',
-    maxWidth: theme.spacing(236.5),
-    [theme.breakpoints.down('xs')]: {
-      width: '100%',
-    },
+  root: {
+    display: 'flex',
   },
   center: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    '& p': {
-      textAlign: 'center',
-    },
+    textAlign: 'center',
+  },
+  description: {
+    fontSize: theme.typography.pxToRem(18),
+    marginTop: theme.spacing(4),
+  },
+  chartScroll: {
+    width: '100%',
+    overflow: 'scroll',
+  },
+  chartWrapper: {
+    width: 1047,
+    height: 300,
   },
 }));
 
@@ -100,26 +104,22 @@ const UnlockSchedule = (): JSX.Element => {
   `);
 
   return (
-    <Section className={clsx(styles.root, styles.center)}>
-      <div className={clsx(styles.content, styles.center)}>
-        <Title variant="h2" align="center">
-          {title}
-        </Title>
-        <Description align="center">
-          {subtitle}
-        </Description>
-        <div style={{ width: 1047, height: 300 }}>
+    <Section className={clsx(styles.root, styles.center)} title={title}>
+      <Description className={clsx(styles.description, styles.center)}>{subtitle}</Description>
+      <div className={styles.chartScroll}>
+        <div className={styles.chartWrapper}>
           <BarChart
             data={data}
-            tickFormatX={(t: string) => {
-              if (t && t.includes('Jan')) return t.replace('-Jan', '');
-              return '';
-            }}
             x="date"
             y="tokens"
             width={907}
             height={277}
+            barWidth={17}
             labels={({ datum }) => moment(datum.date).format('MMMM YYYY')}
+            tickFormatX={(t: string) => {
+              if (t && t.includes('Jan')) return t.replace('-Jan', '');
+              return '';
+            }}
           />
         </div>
       </div>

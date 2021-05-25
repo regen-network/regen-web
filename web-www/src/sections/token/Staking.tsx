@@ -13,6 +13,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
   content: {
     width: '80%',
     maxWidth: theme.spacing(236.5),
+    marginBottom: theme.spacing(4),
     [theme.breakpoints.down('xs')]: {
       width: '100%',
     },
@@ -58,13 +59,8 @@ const Staking = (): JSX.Element => {
   `);
 
   return (
-    <Section className={clsx(styles.root, styles.center)}>
-      <div className={clsx(styles.content, styles.center)}>
-        <Title variant="h2" align="center">
-          {title}
-        </Title>
-        <Description>{body}</Description>
-      </div>
+    <Section className={clsx(styles.root, styles.center)} title={title}>
+      <Description className={clsx(styles.content, styles.center)}>{body}</Description>
       <ContainedButton href={buttonUrl}>{buttonText}</ContainedButton>
     </Section>
   );

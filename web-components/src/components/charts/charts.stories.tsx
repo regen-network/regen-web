@@ -61,6 +61,7 @@ export const barChart = (): JSX.Element => {
         width={907}
         height={277}
         labels={({ datum }) => (datum.date ? moment(datum.date).format('MMMM YYYY') : '')}
+        barWidth={17}
       />
     </div>
   );

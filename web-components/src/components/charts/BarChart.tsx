@@ -34,6 +34,13 @@ export default function RegenBarChart({
       theme={VictoryTheme.material}
       width={victoryProps.width}
       height={victoryProps.height}
+      containerComponent={
+        <VictoryContainer
+          style={{
+            touchAction: 'auto',
+          }}
+        />
+      }
     >
       <svg style={{ height: 0 }}>
         <defs>
@@ -56,8 +63,6 @@ export default function RegenBarChart({
             fill: 'url(#grad1)',
           },
         }}
-        barWidth={17}
-        containerComponent={<VictoryContainer responsive={false} />}
         labelComponent={
           <VictoryTooltip
             constrainToVisibleArea

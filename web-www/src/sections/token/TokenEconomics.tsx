@@ -4,7 +4,6 @@ import { Theme, makeStyles } from '@material-ui/core';
 import clsx from 'clsx';
 
 import Section from 'web-components/src/components/section';
-import Title from 'web-components/src/components/title';
 import { TokenDescription as Description } from './Description';
 
 const useStyles = makeStyles<Theme>((theme: Theme) => ({
@@ -53,13 +52,8 @@ const TokenEconomics = (): JSX.Element => {
   `);
 
   return (
-    <Section className={clsx(styles.root, styles.center)}>
-      <div className={clsx(styles.content)}>
-        <Title variant="h2" align="center">
-          {title}
-        </Title>
-        <Description>{body}</Description>
-      </div>
+    <Section className={clsx(styles.root, styles.center)} title={title}>
+      <Description className={clsx(styles.content, styles.center)}>{body}</Description>
     </Section>
   );
 };

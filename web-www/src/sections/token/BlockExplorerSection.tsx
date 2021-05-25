@@ -7,6 +7,7 @@ import clsx from 'clsx';
 
 import Section from 'web-components/src/components/section';
 import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
+import DecentralizeIcon from 'web-components/src/components/icons/DecentralizeIcon';
 import { TokenDescription as Description } from './Description';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -30,7 +31,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   button: {
     textAlign: 'center',
-    width: 360,//
+    width: 360, //
   },
   title: {
     maxWidth: theme.spacing(172),
@@ -100,6 +101,7 @@ const BlockExplorerSection = (): JSX.Element => {
         title={content.header}
       >
         <div className={styles.content}>
+          <DecentralizeIcon />
           <Description className={styles.description}>{ReactHtmlParser(content.description)}</Description>
           <ContainedButton className={styles.button} href={content.buttonUrl}>
             {content.buttonText}

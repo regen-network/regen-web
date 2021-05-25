@@ -5,7 +5,6 @@ import { makeStyles, Theme } from '@material-ui/core/styles';
 
 import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
 import { Project } from '../../mocks';
-import getRegistryUrl from '../../lib/registryUrl';
 
 type Props = {
   projects: Project[];
@@ -40,7 +39,7 @@ const ProjectCards: React.FC<Props> = props => {
     <Grid container className={styles.root} spacing={5}>
       {props.projects.map(project => (
         <Grid item sm={6} md={4} key={project.id} className={styles.item}>
-          <Link className={styles.projectCard} href={getRegistryUrl(`/projects/${project.id}`)}>
+          <Link className={styles.projectCard} href={`/projects/${project.id}`}>
             <ProjectCard
               name={project.name}
               imgSrc={project.image}

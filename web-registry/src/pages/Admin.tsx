@@ -4,7 +4,6 @@ import { useAuth0 } from '@auth0/auth0-react';
 
 import { AdminNav } from '../components/organisms';
 import isAdmin from '../lib/admin';
-import getRegistryUrl from '../lib/registryUrl';
 
 function Admin(): JSX.Element {
   const { user } = useAuth0();
@@ -12,7 +11,7 @@ function Admin(): JSX.Element {
   return (
     <div style={{ padding: '1rem' }}>
       <div style={{ textAlign: 'center' }}>
-        <AdminNav redirectUri={`${getRegistryUrl('/admin')}`} />
+        <AdminNav redirectUri="/admin" />
       </div>
       {isAdmin(user) && (
         <div>

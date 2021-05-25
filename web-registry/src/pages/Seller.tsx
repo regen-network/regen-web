@@ -5,7 +5,6 @@ import { useQuery, gql } from '@apollo/client';
 
 import { AdminNav } from '../components/organisms';
 import getApiUri from '../lib/apiUri';
-import getRegistryUrl from '../lib/registryUrl';
 
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
@@ -37,8 +36,8 @@ const Seller = (): JSX.Element => {
           url: `${apiUri}/create-account-link`,
           data: {
             email: user?.email,
-            refreshUrl: `${getRegistryUrl('/projects/wilmot/admin')}`,
-            returnUrl: `${getRegistryUrl('/projects/wilmot/admin?setup=true')}`,
+            refreshUrl: '/projects/wilmot/admin',
+            returnUrl: '/projects/wilmot/admin?setup=true',
           },
           headers: { authorization: `Bearer ${accessToken}` },
         });
@@ -118,7 +117,7 @@ const Seller = (): JSX.Element => {
           ))}
       </div>
       <div style={{ textAlign: 'center' }}>
-        <AdminNav redirectUri={`${getRegistryUrl('/projects/wilmot/admin')}`} />
+        <AdminNav redirectUri="/projects/wilmot/admin" />
       </div>
     </div>
   );

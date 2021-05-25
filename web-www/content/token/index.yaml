@@ -26,6 +26,11 @@ infoSection:
 
     To receive official announcements about public token sale events, please <a href="#" target="_blank">sign up</a>.
   image: ../../static/media/token-bird-berries.png
+tokenPool:
+  title: REGEN total token pool
+  subtitle: The total supply at mainnet launch was 100 million tokens.
+  image: ../../static/media/token-pool.png
+  mobileImage: ../../static/media/token-pool-mobile.png
 unlockSchedule:
   title: REGEN unlock schedule
   subtitle: At Genesis 22,041,983 REGEN tokens are unlocked

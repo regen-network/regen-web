@@ -4,6 +4,7 @@ import SEO from '../components/seo';
 import TopSection from '../sections/token/TopSection';
 import TokenEconomics from '../sections/token/TokenEconomics';
 import Info from '../sections/token/InfoSection';
+import TokenPool from '../sections/token/TokenPool';
 import UnlockSchedule from '../sections/token/UnlockSchedule';
 import Staking from '../sections/token/Staking';
 import MediaSection from '../sections/token/MediaSection';
@@ -32,7 +33,7 @@ const TokenPage = ({ location }: Props): JSX.Element => {
       <TopSection />
       <TokenEconomics />
       <Info />
-      {/* <TokenPool /> */}
+      <TokenPool />
       <UnlockSchedule />
       <Staking />
       {/*<BlockExplorer />

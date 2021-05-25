@@ -38,13 +38,13 @@ type Props = {
   className?: string;
 };
 
-const ImageActionCard: React.FC<Props> = ({ btnText = 'Choose Credit Class', ...p }) => {
+const ImageActionCard: React.FC<Props> = ({ btnText = 'Choose Credit Class', ...props }) => {
   const styles = useStyles();
   const theme = useTheme();
   return (
     <MediaCard
-      imgSrc={p.imgSrc}
-      className={clsx(styles.root, p.className)}
+      imgSrc={props.imgSrc}
+      className={clsx(styles.root, props.className)}
       elevation={1}
       borderRadius="10px"
       borderColor={theme.palette.grey[100]}
@@ -52,14 +52,14 @@ const ImageActionCard: React.FC<Props> = ({ btnText = 'Choose Credit Class', ...
       <CardContent className={styles.cardContent}>
         <div>
           <Typography gutterBottom className={styles.title} variant="h5">
-            {ReactHtmlParser(p.title)}
+            {ReactHtmlParser(props.title)}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            {p.description}
+            {props.description}
           </Typography>
         </div>
 
-        <OutlinedButton className={styles.btn} onClick={p.onClick}>
+        <OutlinedButton className={styles.btn} onClick={props.onClick}>
           {btnText}
         </OutlinedButton>
       </CardContent>

@@ -15,17 +15,17 @@ type Props = {
   };
 };
 
-const CreditClassCards: React.FC<Props> = ({ justify = 'center', ...p }) => {
+const CreditClassCards: React.FC<Props> = ({ justify = 'center', ...props }) => {
   return (
-    <Grid container justify={justify} className={p.classes && p.classes.root} spacing={5}>
-      {p.creditClasses.map((c, i) => (
+    <Grid container justify={justify} className={props.classes && props.classes.root} spacing={5}>
+      {props.creditClasses.map((c, i) => (
         <Grid item xs={12} sm={6} md={4} key={i}>
           <ImageActionCard
             key={i}
             btnText="Learn More"
             description={c.description}
             imgSrc={getImgSrc(c.imgSrc)}
-            onClick={() => p.onClickCard(c)}
+            onClick={() => props.onClickCard(c)}
             title={c.title}
           />
         </Grid>

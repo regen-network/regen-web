@@ -56,7 +56,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export const AdditionalityForm: React.FC<AdditionalityFormProps> = p => {
+export const AdditionalityForm: React.FC<AdditionalityFormProps> = props => {
   const classes = useStyles();
 
   const Label: React.FC = () => (
@@ -93,7 +93,7 @@ export const AdditionalityForm: React.FC<AdditionalityFormProps> = p => {
       onSubmit={async (values, { setSubmitting }) => {
         setSubmitting(true);
         try {
-          await p.submit(values);
+          await props.submit(values);
           setSubmitting(false);
         } catch (e) {
           setSubmitting(false);

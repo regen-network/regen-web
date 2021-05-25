@@ -50,18 +50,21 @@ const useStyles = makeStyles((theme: Theme) => ({
 /**
  * Hero section with title, description and background image justified to the lower left with our section component
  */
-const HeroTitle: React.FC<Props> = p => {
+const HeroTitle: React.FC<Props> = props => {
   const styles = useStyles();
 
   return (
-    <CardMedia image={p.img}>
+    <CardMedia image={props.img}>
       <Section>
-        <div className={cx(styles.main, p.classes && p.classes.main)}>
-          <Typography variant="h1" className={cx(styles.title, p.classes && p.classes.title)}>
-            {p.title}
+        <div className={cx(styles.main, props.classes && props.classes.main)}>
+          <Typography variant="h1" className={cx(styles.title, props.classes && props.classes.title)}>
+            {props.title}
           </Typography>
-          <Typography variant="h4" className={cx(styles.description, p.classes && p.classes.description)}>
-            {p.description}
+          <Typography
+            variant="h4"
+            className={cx(styles.description, props.classes && props.classes.description)}
+          >
+            {props.description}
           </Typography>
         </div>
       </Section>

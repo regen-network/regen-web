@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const HomeTemplate: React.FC<Props> = p => {
+const HomeTemplate: React.FC<Props> = props => {
   const styles = useStyles();
   const theme = useTheme();
 
@@ -51,23 +51,23 @@ const HomeTemplate: React.FC<Props> = p => {
   return (
     <>
       <HeroTitle
-        img={p.topImg}
-        title={p.topSectionTitle}
-        description={p.topSectionDescription}
+        img={props.topImg}
+        title={props.topSectionTitle}
+        description={props.topSectionDescription}
         classes={{ description: styles.topSectionDescription }}
         maxWidth="lg"
       />
 
-      <CardMedia image={p.projectBackgroundImg}>
+      <CardMedia image={props.projectBackgroundImg}>
         <Section title="Projects" classes={{ root: styles.section }}>
-          <ProjectCards projects={p.projects} />
+          <ProjectCards projects={props.projects} />
         </Section>
       </CardMedia>
 
       <Section title="Credit Classes" titleAlign="left" classes={{ root: styles.section }}>
         <CreditClassCards
           justify={isMobile ? 'center' : 'flex-start'}
-          creditClasses={p.creditClasses}
+          creditClasses={props.creditClasses}
           onClickCard={handleCardSelect}
           classes={{ root: styles.creditClasses }}
         />
@@ -75,7 +75,7 @@ const HomeTemplate: React.FC<Props> = p => {
 
       <HeroAction
         classes={{ main: styles.bottomSection }}
-        img={p.bottomBackgroundImg}
+        img={props.bottomBackgroundImg}
         title="Want to get paid for your ecological practices?"
         actionTxt="Register a Project"
         action={() => console.log('TODO: Register a project')}

@@ -31,14 +31,14 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const ProjectCards: React.FC<Props> = p => {
+const ProjectCards: React.FC<Props> = props => {
   const styles = useStyles();
   const imageStorageBaseUrl = process.env.REACT_APP_IMAGE_STORAGE_BASE_URL;
   const apiServerUrl = process.env.REACT_APP_API_URI;
 
   return (
     <Grid container className={styles.root} spacing={5}>
-      {p.projects.map((project, i) => (
+      {props.projects.map(project => (
         <Grid item sm={6} md={4} key={project.id} className={styles.item}>
           <Link className={styles.projectCard} href={getRegistryUrl(`/projects/${project.id}`)}>
             <ProjectCard

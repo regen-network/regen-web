@@ -36,13 +36,13 @@ const useStyles = makeStyles((theme: Theme) => ({
 /**
  * Custom dropdown item for registry nav Credit Classes
  */
-const CreditClassDropdownItem: React.FC<CreditProps> = ({ svg: SVG, isPeerReviewed = false, ...p }) => {
+const CreditClassDropdownItem: React.FC<CreditProps> = ({ svg: SVG, isPeerReviewed = false, ...props }) => {
   const styles = useStyles();
 
   return (
     <>
-      <h4 className={styles.creditClassTitle}>{ReactHtmlParser(p.title)}</h4>
-      <MethodologyDropdownItem title={p.methodology} svg={SVG} isPeerReviewed={isPeerReviewed} />
+      <h4 className={styles.creditClassTitle}>{ReactHtmlParser(props.title)}</h4>
+      <MethodologyDropdownItem title={props.methodology} svg={SVG} isPeerReviewed={isPeerReviewed} />
     </>
   );
 };
@@ -50,13 +50,17 @@ const CreditClassDropdownItem: React.FC<CreditProps> = ({ svg: SVG, isPeerReview
 /**
  * Custom dropdown item for registry nav Methodologies
  */
-const MethodologyDropdownItem: React.FC<MethodologyProps> = ({ svg: SVG, isPeerReviewed = false, ...p }) => {
+const MethodologyDropdownItem: React.FC<MethodologyProps> = ({
+  svg: SVG,
+  isPeerReviewed = false,
+  ...props
+}) => {
   const styles = useStyles();
 
   return (
     <Grid container wrap="nowrap" justify="center" alignItems="center">
       <SVG />
-      <span className={styles.label}>{ReactHtmlParser(p.title)}</span>
+      <span className={styles.label}>{ReactHtmlParser(props.title)}</span>
       {isPeerReviewed && <PeerReviewed />}
     </Grid>
   );

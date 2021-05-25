@@ -39,24 +39,24 @@ const useStyles = makeStyles((theme: Theme) => ({
 /**
  * Hero section with background image, centered title, and button with action
  */
-const HeroAction: React.FC<Props> = p => {
+const HeroAction: React.FC<Props> = props => {
   const styles = useStyles();
 
   return (
-    <CardMedia image={p.img}>
+    <CardMedia image={props.img}>
       <Container maxWidth="md">
         <Grid container justify="center">
-          <div className={cx(styles.main, p.classes && p.classes.main)}>
+          <div className={cx(styles.main, props.classes && props.classes.main)}>
             <Typography
               variant="h2"
               align="center"
-              className={cx(styles.title, p.classes && p.classes.title)}
+              className={cx(styles.title, props.classes && props.classes.title)}
             >
-              {p.title}
+              {props.title}
             </Typography>
             <Grid container justify="center">
-              <ContainedButton onClick={p.action} className={styles.btn} size="medium">
-                {p.actionTxt}
+              <ContainedButton onClick={props.action} className={styles.btn} size="medium">
+                {props.actionTxt}
               </ContainedButton>
             </Grid>
           </div>

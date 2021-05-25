@@ -13,18 +13,23 @@ type Props = {
   goForward?: () => void;
 };
 
-const OnboardingFormTemplate: React.FC<Props> = p => {
+const OnboardingFormTemplate: React.FC<Props> = props => {
   return (
     <>
-      <PlanStepper activeStep={p.activeStep} />
-      <OnBoardingSection title={p.title} linkText="Save & Exit" onLinkClick={p.saveAndExit} formContainer>
-        {p.children}
+      <PlanStepper activeStep={props.activeStep} />
+      <OnBoardingSection
+        title={props.title}
+        linkText="Save & Exit"
+        onLinkClick={props.saveAndExit}
+        formContainer
+      >
+        {props.children}
       </OnBoardingSection>
       <OnboardingFooter
-        onSave={p.submit}
+        onSave={props.submit}
         saveText={'Save and Next'}
-        onPrev={p.goBack} // TODO
-        onNext={p.goForward} // TODO
+        onPrev={props.goBack} // TODO
+        onNext={props.goForward} // TODO
         hideProgress={false} // TODO
         saveDisabled={false}
         percentComplete={0} // TODO

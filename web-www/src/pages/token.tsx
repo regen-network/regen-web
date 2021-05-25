@@ -37,8 +37,8 @@ const TokenPage = ({ location }: Props): JSX.Element => {
       <Info />
       <TokenPool />
       <UnlockSchedule />
-      <Staking />
       <BlockExplorerSection />
+      <Staking />
       <ConnectSection />
       <MediaSection />
     </>

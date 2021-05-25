@@ -11,6 +11,9 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
+    [theme.breakpoints.down('xs')]: {
+      marginTop: theme.spacing(24),
+    },
   },
   center: {
     alignItems: 'center',
@@ -20,9 +23,6 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
     width: '80%',
     maxWidth: theme.spacing(236.5),
     margin: theme.spacing(4, 0, 8),
-    [theme.breakpoints.down('xs')]: {
-      width: '100%',
-    },
   },
   image: {
     width: '100%',
@@ -83,12 +83,14 @@ const TokenEconomics = (): JSX.Element => {
   `);
 
   return isMobile ? (
-    <Img
-      className={styles.image}
-      fluid={mobileImage.childImageSharp.fluid}
-      title="Token Pool"
-      alt="Token Pool"
-    />
+    <div className={styles.root}>
+      <Img
+        className={styles.image}
+        fluid={mobileImage.childImageSharp.fluid}
+        title="Token Pool"
+        alt="Token Pool"
+      />
+    </div>
   ) : (
     <Section className={clsx(styles.root, styles.center)} title={title}>
       <Description className={clsx(styles.content, styles.center)}>{subtitle}</Description>

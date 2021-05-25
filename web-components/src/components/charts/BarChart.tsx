@@ -72,9 +72,8 @@ export default function RegenBarChart({
               fill: theme.palette.info.dark,
             }}
             flyoutStyle={{
-              fill: theme.palette.grey[50],
+              fill: theme.palette.primary.main,
               stroke: theme.palette.grey[600],
-              // boxShadow: theme.shadows[4],doesn't work?
             }}
             flyoutPadding={20}
             dy={-1}

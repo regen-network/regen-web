@@ -25,10 +25,12 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
   chartScroll: {
     width: '100%',
     overflow: 'scroll',
+    display: 'flex',
+    justifyContent: 'center',
   },
   chartWrapper: {
-    width: 1047,
-    height: 300,
+    width: theme.spacing(300),
+    height: theme.spacing(87.5),
   },
 }));
 
@@ -113,8 +115,8 @@ const UnlockSchedule = (): JSX.Element => {
             x="date"
             y="tokens"
             width={907}
-            height={277}
-            barWidth={17}
+            height={300}
+            barWidth={14.5}
             labels={({ datum }) => moment(datum.date).format('MMMM YYYY')}
             tickFormatX={(t: string) => {
               if (t && t.includes('Jan')) return t.replace('-Jan', '');

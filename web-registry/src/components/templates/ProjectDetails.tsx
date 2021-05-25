@@ -328,8 +328,6 @@ function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JS
         imageStorageBaseUrl={imageStorageBaseUrl}
         apiServerUrl={apiServerUrl}
       />
-      {/* <ProjectTopSection project={project} projectDefault={projectDefault} />
-      <ProjectImpactSection impact={project.impact} /> */}
       <ProjectTopSection
         project={project}
         projectDefault={projectDefault}

@@ -55,7 +55,6 @@ const HeroTitle: React.FC<Props> = p => {
 
   return (
     <CardMedia image={p.img}>
-      {/* <Container maxWidth={p.maxWidth || 'md'}> TODO: it might be preferable to use MUI's `Container` for layouts to avoid padding issues */}
       <Section>
         <div className={cx(styles.main, p.classes && p.classes.main)}>
           <Typography variant="h1" className={cx(styles.title, p.classes && p.classes.title)}>
@@ -66,7 +65,6 @@ const HeroTitle: React.FC<Props> = p => {
           </Typography>
         </div>
       </Section>
-      {/* </Container> */}
     </CardMedia>
   );
 };

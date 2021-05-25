@@ -15,23 +15,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   background: {
     paddingBottom: theme.spacing(20),
   },
-  grid: {
-    paddingTop: theme.spacing(8.75),
-    [theme.breakpoints.down('sm')]: {
-      flexWrap: 'nowrap',
-      overflow: 'auto',
-    },
-  },
-  projectCard: {
-    height: '100%',
-  },
-  item: {
-    [theme.breakpoints.down('sm')]: {
-      flexGrow: 0,
-      maxWidth: '100%',
-      flexBasis: '100%',
-    },
-  },
 }));
 
 const MoreProjectsSection = ({ projects }: MoreProjectsProps): JSX.Element => {

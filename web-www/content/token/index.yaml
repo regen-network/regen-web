@@ -1,5 +1,6 @@
 topSection:
-  header: (X) REGEN Token
+  header: REGEN Token
+  image: ../../static/media/REGEN-token.png
   body: REGEN token is a utility token powering an application specific blockchain for global climate finance.
 tokenEconomics:
   title: REGEN Token Economics

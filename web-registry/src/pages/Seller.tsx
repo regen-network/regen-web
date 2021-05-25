@@ -3,7 +3,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import axios from 'axios';
 import { useQuery, gql } from '@apollo/client';
 
-import { NavBar } from '../components/organisms';
+import { AdminNav } from '../components/organisms';
 import getApiUri from '../lib/apiUri';
 import getRegistryUrl from '../lib/registryUrl';
 
@@ -118,7 +118,7 @@ const Seller = (): JSX.Element => {
           ))}
       </div>
       <div style={{ textAlign: 'center' }}>
-        <NavBar redirectUri={`${getRegistryUrl('/projects/wilmot/admin')}`} />
+        <AdminNav redirectUri={`${getRegistryUrl('/projects/wilmot/admin')}`} />
       </div>
     </div>
   );

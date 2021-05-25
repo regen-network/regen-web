@@ -22,9 +22,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   topSectionDescription: {
     maxWidth: theme.spacing(165),
   },
-  projectBackground: {
-    backgroundColor: theme.palette.grey[50],
-  },
   section: {
     [theme.breakpoints.up('sm')]: {
       paddingBottom: theme.spacing(22.25),
@@ -61,11 +58,7 @@ const HomeTemplate: React.FC<Props> = p => {
         maxWidth="lg"
       />
 
-      <CardMedia
-        image={p.projectBackgroundImg}
-        classes={{ root: styles.projectBackground }}
-        // className={styles.projectBackground}
-      >
+      <CardMedia image={p.projectBackgroundImg}>
         <Section title="Projects" classes={{ root: styles.section }}>
           <ProjectCards projects={p.projects} />
         </Section>

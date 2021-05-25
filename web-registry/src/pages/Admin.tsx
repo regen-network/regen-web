@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 
-import { NavBar } from '../components/organisms';
+import { AdminNav } from '../components/organisms';
 import isAdmin from '../lib/admin';
 import getRegistryUrl from '../lib/registryUrl';
 
@@ -12,7 +12,7 @@ function Admin(): JSX.Element {
   return (
     <div style={{ padding: '1rem' }}>
       <div style={{ textAlign: 'center' }}>
-        <NavBar redirectUri={`${getRegistryUrl('/admin')}`} />
+        <AdminNav redirectUri={`${getRegistryUrl('/admin')}`} />
       </div>
       {isAdmin(user) && (
         <div>

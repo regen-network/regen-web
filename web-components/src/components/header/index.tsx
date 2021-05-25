@@ -26,7 +26,6 @@ interface HeaderProps {
   children?: any;
   transparent?: boolean;
   absolute?: boolean;
-  launchDate?: string;
   color: string;
   menuItems?: HeaderMenuItem[];
   borderBottom?: boolean;
@@ -37,7 +36,7 @@ interface HeaderProps {
 export interface HeaderMenuItem {
   title: string;
   href?: string;
-  dropdownItems?: { title: string; href: string }[];
+  dropdownItems?: { title: string; href: string; render?: () => JSX.Element }[];
 }
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
@@ -191,7 +190,6 @@ export default function Header({
   children,
   transparent,
   color,
-  launchDate,
   menuItems,
   borderBottom = true,
   absolute = true,
@@ -250,7 +248,9 @@ export default function Header({
                               }
                               key={index}
                             >
-                              <Link href={dropdownItem.href}>{dropdownItem.title}</Link>
+                              <Link href={dropdownItem.href}>
+                                {dropdownItem.render ? dropdownItem.render() : dropdownItem.title}
+                              </Link>
                             </MenuItem>
                           );
                         })}

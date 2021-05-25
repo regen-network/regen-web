@@ -5,7 +5,7 @@ import ContainedButton from 'web-components/lib/components/buttons/ContainedButt
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 import getRegistryUrl from '../../lib/registryUrl';
 
-const NavBar = ({ redirectUri = window.location.origin }: { redirectUri?: string }): JSX.Element => {
+const AdminNav = ({ redirectUri = window.location.origin }: { redirectUri?: string }): JSX.Element => {
   const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
 
   return (
@@ -28,4 +28,4 @@ const NavBar = ({ redirectUri = window.location.origin }: { redirectUri?: string
   );
 };
 
-export { NavBar };
+export { AdminNav };

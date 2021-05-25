@@ -4,8 +4,10 @@ import { useLocation } from 'react-router-dom';
 
 import Header, { HeaderMenuItem, HeaderColors } from 'web-components/lib/components/header';
 import { projects } from '../../mocks';
+import { CreditClassDropdownItem, MethodologyDropdownItem } from '../molecules';
+import { ReactComponent as Cow } from '../../assets/svgs/green-cow.svg';
 
-function RegistryHeader(): JSX.Element {
+const RegistryNav: React.FC = () => {
   const { pathname } = useLocation();
   const theme = useTheme();
   const fullWidthRegExp: RegExp = /projects\/[a-z-]+/;
@@ -21,11 +23,32 @@ function RegistryHeader(): JSX.Element {
     },
     {
       title: 'Credit Classes',
-      dropdownItems: [{ title: 'CarbonPlus Credits', href: '/' }],
+      dropdownItems: [
+        {
+          title: 'CarbonPlus Credits',
+          href: '/TODO:',
+          render: () => (
+            <CreditClassDropdownItem
+              isPeerReviewed
+              methodology="Grasslands"
+              title="Carbon<i>Plus</i> Credits"
+              svg={Cow}
+            />
+          ),
+        },
+      ],
     },
     {
       title: 'Methodologies',
-      dropdownItems: [{ title: 'CarbonPlus Grasslands', href: '/' }],
+      dropdownItems: [
+        {
+          title: 'CarbonPlus Grasslands',
+          href: '/TODO:',
+          render: () => (
+            <MethodologyDropdownItem isPeerReviewed title="Carbon<i>Plus</i> Grasslands" svg={Cow} />
+          ),
+        },
+      ],
     },
   ];
 
@@ -44,6 +67,6 @@ function RegistryHeader(): JSX.Element {
       pathName={pathname}
     />
   );
-}
+};
 
-export { RegistryHeader };
+export { RegistryNav };

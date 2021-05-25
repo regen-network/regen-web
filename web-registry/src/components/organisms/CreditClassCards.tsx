@@ -1,6 +1,4 @@
 import React from 'react';
-
-import { makeStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 
 import ImageActionCard from 'web-components/lib/components/cards/ImageActionCard';
@@ -17,22 +15,11 @@ type Props = {
   };
 };
 
-const useStyles = makeStyles((theme: Theme) => ({
-  item: {
-    // [theme.breakpoints.down('xs')]: {
-    //   flexGrow: 0,
-    //   maxWidth: '100%',
-    //   flexBasis: '100%',
-    // },
-  },
-}));
-
 const CreditClassCards: React.FC<Props> = ({ justify = 'center', ...p }) => {
-  const styles = useStyles();
   return (
     <Grid container justify={justify} className={p.classes && p.classes.root} spacing={5}>
       {p.creditClasses.map((c, i) => (
-        <Grid item xs={12} sm={6} md={4} key={i} className={styles.item}>
+        <Grid item xs={12} sm={6} md={4} key={i}>
           <ImageActionCard
             key={i}
             btnText="Learn More"

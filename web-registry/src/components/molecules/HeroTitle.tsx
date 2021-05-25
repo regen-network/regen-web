@@ -2,8 +2,9 @@ import React from 'react';
 import cx from 'clsx';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import CardMedia from '@material-ui/core/CardMedia';
-import Container from '@material-ui/core/Container';
+// import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
+import Section from 'web-components/lib/components/section';
 
 type Props = {
   img: string;
@@ -47,14 +48,15 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 /**
- * Hero section with title, description and background image justified to the lower left with a medium container
+ * Hero section with title, description and background image justified to the lower left with our section component
  */
 const HeroTitle: React.FC<Props> = p => {
   const styles = useStyles();
 
   return (
     <CardMedia image={p.img}>
-      <Container maxWidth={p.maxWidth || 'md'}>
+      {/* <Container maxWidth={p.maxWidth || 'md'}> TODO: it might be preferable to use MUI's `Container` for layouts to avoid padding issues */}
+      <Section>
         <div className={cx(styles.main, p.classes && p.classes.main)}>
           <Typography variant="h1" className={cx(styles.title, p.classes && p.classes.title)}>
             {p.title}
@@ -63,7 +65,8 @@ const HeroTitle: React.FC<Props> = p => {
             {p.description}
           </Typography>
         </div>
-      </Container>
+      </Section>
+      {/* </Container> */}
     </CardMedia>
   );
 };

@@ -1,18 +1,16 @@
 import React from 'react';
 import clsx from 'clsx';
 import ReactHtmlParser from 'react-html-parser';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 
 import OutlinedButton from '../buttons/OutlinedButton';
 import MediaCard from '../cards/MediaCard';
-import { Grid } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     height: '100%',
-    maxWidth: theme.spacing(90),
     borderRadius: theme.spacing(2),
   },
   title: {
@@ -20,7 +18,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontWeight: 900,
   },
   btn: {
-    marginTop: theme.spacing(2),
+    marginTop: theme.spacing(4),
     width: '100%',
   },
   cardContent: {
@@ -42,8 +40,15 @@ type Props = {
 
 const ImageActionCard: React.FC<Props> = ({ btnText = 'Choose Credit Class', ...p }) => {
   const styles = useStyles();
+  const theme = useTheme();
   return (
-    <MediaCard imgSrc={p.imgSrc} className={clsx(styles.root, p.className)} elevation={1}>
+    <MediaCard
+      imgSrc={p.imgSrc}
+      className={clsx(styles.root, p.className)}
+      elevation={1}
+      borderRadius="10px"
+      borderColor={theme.palette.grey[100]}
+    >
       <CardContent className={styles.cardContent}>
         <div>
           <Typography gutterBottom className={styles.title} variant="h5">

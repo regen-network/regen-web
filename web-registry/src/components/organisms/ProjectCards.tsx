@@ -1,10 +1,9 @@
 import React from 'react';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, Theme } from '@material-ui/core/styles';
 
 import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
-import Theme from 'web-components/lib/theme/muiTheme';
 import { Project } from '../../mocks';
 import getRegistryUrl from '../../lib/registryUrl';
 
@@ -12,13 +11,10 @@ type Props = {
   projects: Project[];
 };
 
-const useStyles = makeStyles((theme: typeof Theme) => ({
+const useStyles = makeStyles((theme: Theme) => ({
   root: {
     paddingTop: theme.spacing(8.75),
-    [theme.breakpoints.up('sm')]: {
-      flexWrap: 'wrap',
-    },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       flexWrap: 'nowrap',
       overflow: 'auto',
     },
@@ -27,13 +23,11 @@ const useStyles = makeStyles((theme: typeof Theme) => ({
     height: '100%',
   },
   item: {
-    // display: 'flex',
-    // justifyContent: 'center',
-    // [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
-    //   flexGrow: 0,
-    //   // maxWidth: '100%',
-    //   flexBasis: '100%',
-    // },
+    [theme.breakpoints.down('sm')]: {
+      flexGrow: 0,
+      maxWidth: '100%',
+      flexBasis: '100%',
+    },
   },
 }));
 
@@ -45,7 +39,7 @@ const ProjectCards: React.FC<Props> = p => {
   return (
     <Grid container className={styles.root} spacing={5}>
       {p.projects.map((project, i) => (
-        <Grid item xs={12} sm={6} md={4} key={project.id} className={styles.item}>
+        <Grid item sm={6} md={4} key={project.id} className={styles.item}>
           <Link className={styles.projectCard} href={getRegistryUrl(`/projects/${project.id}`)}>
             <ProjectCard
               name={project.name}

@@ -16,6 +16,11 @@
       "title": "Carbon<i>Plus</i> Forestry",
       "description": "This credit class is a built as a holistic credit that includes multiple ecological benefits: Carbon Sequestration and Net GHG reduction, ecosystem health, and soil health.",
       "imgSrc": "credit-class-forestry.png"
+    },
+    {
+      "title": "Carbon<i>Plus</i> Lorem Ipsum",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.",
+      "imgSrc": "bails-of-hay.png"
     }
   ],
   "projectDefault": {

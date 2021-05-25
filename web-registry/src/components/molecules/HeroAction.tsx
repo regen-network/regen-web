@@ -1,7 +1,6 @@
 import React from 'react';
 import cx from 'clsx';
 import { makeStyles, Theme } from '@material-ui/core/styles';
-import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import CardMedia from '@material-ui/core/CardMedia';
 import Container from '@material-ui/core/Container';

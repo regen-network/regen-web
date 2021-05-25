@@ -18,32 +18,24 @@ type Props = {
 };
 
 const useStyles = makeStyles((theme: Theme) => ({
-  card: {
-    height: '100%',
-    [theme.breakpoints.up('sm')]: {
-      margin: theme.spacing(4),
-      '&:first-of-type': {
-        marginLeft: 0,
-      },
-      '&:last-of-type': {
-        marginRight: 0,
-      },
-    },
-    [theme.breakpoints.down('xs')]: {
-      margin: theme.spacing(2, 0),
-    },
+  item: {
+    // [theme.breakpoints.down('xs')]: {
+    //   flexGrow: 0,
+    //   maxWidth: '100%',
+    //   flexBasis: '100%',
+    // },
   },
 }));
 
 const CreditClassCards: React.FC<Props> = ({ justify = 'center', ...p }) => {
   const styles = useStyles();
   return (
-    <Grid container justify={justify} className={p.classes && p.classes.root} spacing={4}>
+    <Grid container justify={justify} className={p.classes && p.classes.root} spacing={5}>
       {p.creditClasses.map((c, i) => (
-        <Grid item xs={12} sm={6} md={4}>
+        <Grid item xs={12} sm={6} md={4} key={i} className={styles.item}>
           <ImageActionCard
             key={i}
-            className={styles.card}
+            btnText="Learn More"
             description={c.description}
             imgSrc={getImgSrc(c.imgSrc)}
             onClick={() => p.onClickCard(c)}

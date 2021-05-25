@@ -1,10 +1,7 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
+import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import CardMedia from '@material-ui/core/CardMedia';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
-
-import Title from 'web-components/lib/components/title';
 
 import { HeroTitle, HeroAction } from '../molecules';
 import { Project, BasicCreditClass } from '../../mocks';
@@ -30,14 +27,14 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   section: {
     [theme.breakpoints.up('sm')]: {
-      padding: theme.spacing(22.25, 5.75),
+      paddingBottom: theme.spacing(22.25),
     },
     [theme.breakpoints.down('xs')]: {
-      padding: theme.spacing(17.75, 5.75),
+      paddingBottom: theme.spacing(17.75),
     },
   },
   creditClasses: {
-    marginTop: theme.spacing(4),
+    margin: theme.spacing(4.75, 0),
   },
   bottomSection: {
     maxWidth: theme.spacing(175),
@@ -46,12 +43,13 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const HomeTemplate: React.FC<Props> = p => {
   const styles = useStyles();
+  const theme = useTheme();
 
   function handleCardSelect(card: BasicCreditClass): void {
     console.log('TODO: handle card click :>> ', card); // eslint-disable-line
   }
 
-  const isMobile = useMediaQuery('xs');
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
     <>
@@ -63,32 +61,24 @@ const HomeTemplate: React.FC<Props> = p => {
         maxWidth="lg"
       />
 
-      {/* <CardMedia image={p.projectBackgroundImg} className={styles.projectBackground}>
-        <Container maxWidth="lg" className={styles.section}>
-          <Title align="center" variant="h2">
-            Projects
-          </Title>
-          <ProjectCards projects={p.projects} />
-        </Container>
-      </CardMedia> */}
-
-      <CardMedia image={p.projectBackgroundImg} className={styles.projectBackground}>
-        <Section title="Projects" titleAlign="left">
+      <CardMedia
+        image={p.projectBackgroundImg}
+        classes={{ root: styles.projectBackground }}
+        // className={styles.projectBackground}
+      >
+        <Section title="Projects" classes={{ root: styles.section }}>
           <ProjectCards projects={p.projects} />
         </Section>
       </CardMedia>
 
-      <Container maxWidth="lg" className={styles.section}>
-        <Title align="left" variant="h2">
-          Credit Classes
-        </Title>
+      <Section title="Credit Classes" titleAlign="left" classes={{ root: styles.section }}>
         <CreditClassCards
           justify={isMobile ? 'center' : 'flex-start'}
           creditClasses={p.creditClasses}
           onClickCard={handleCardSelect}
           classes={{ root: styles.creditClasses }}
         />
-      </Container>
+      </Section>
 
       <HeroAction
         classes={{ main: styles.bottomSection }}

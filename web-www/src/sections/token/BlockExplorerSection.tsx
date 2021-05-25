@@ -6,6 +6,7 @@ import ReactHtmlParser from 'react-html-parser';
 import clsx from 'clsx';
 
 import Section from 'web-components/src/components/section';
+import Title from 'web-components/src/components/title';
 import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
 import DecentralizeIcon from 'web-components/src/components/icons/DecentralizeIcon';
 import { TokenDescription as Description } from './Description';
@@ -35,6 +36,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   title: {
     maxWidth: theme.spacing(172),
+    color: theme.palette.primary.main,
     [theme.breakpoints.down('xs')]: {
       fontSize: theme.spacing(8),
       paddingBottom: theme.spacing(7.5),
@@ -95,13 +97,12 @@ const BlockExplorerSection = (): JSX.Element => {
 
   return (
     <BackgroundImage Tag="div" fluid={imageData}>
-      <Section
-        classes={{ root: styles.root, title: styles.title }}
-        titleColor={theme.palette.primary.main}
-        title={content.header}
-      >
+      <Section classes={{ root: styles.root }}>
         <div className={styles.content}>
           <DecentralizeIcon />
+          <Title className={styles.title} variant="h3">
+            {content.header}
+          </Title>
           <Description className={styles.description}>{ReactHtmlParser(content.description)}</Description>
           <ContainedButton className={styles.button} href={content.buttonUrl}>
             {content.buttonText}

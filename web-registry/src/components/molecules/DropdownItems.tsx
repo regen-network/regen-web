@@ -3,6 +3,7 @@ import ReactHtmlParser from 'react-html-parser';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 
+import Title from 'web-components/lib/components/title';
 import { PeerReviewed } from '../atoms';
 
 type CreditProps = {
@@ -23,13 +24,12 @@ const useStyles = makeStyles((theme: Theme) => ({
     margin: theme.spacing(0, 3),
   },
   creditClassTitle: {
-    fontFamily: theme.typography.h1.fontFamily,
     fontSize: '14px',
-    lineHeight: '17.57px',
     letterSpacing: '1px',
     fontWeight: 800,
     color: theme.palette.info.dark,
     textTransform: 'uppercase',
+    marginBottom: theme.spacing(2),
   },
 }));
 
@@ -41,7 +41,9 @@ const CreditClassDropdownItem: React.FC<CreditProps> = ({ svg: SVG, isPeerReview
 
   return (
     <>
-      <h4 className={styles.creditClassTitle}>{ReactHtmlParser(props.title)}</h4>
+      <Title variant="h4" className={styles.creditClassTitle}>
+        {ReactHtmlParser(props.title)}
+      </Title>
       <MethodologyDropdownItem title={props.methodology} svg={SVG} isPeerReviewed={isPeerReviewed} />
     </>
   );

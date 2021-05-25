@@ -76,7 +76,7 @@ export default function Signup(): JSX.Element {
       <LoginForm
         submit={submit}
         termsLink="/terms-service/"
-        loginFromSignup={() => loginWithRedirect({ redirectUri: '/user-profile' })}
+        loginFromSignup={() => loginWithRedirect({ redirectUri: `${window.location.origin}/user-profile` })}
         privacyLink="/privacy-policy/"
       />
     </OnBoardingSection>

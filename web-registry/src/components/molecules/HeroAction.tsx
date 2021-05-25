@@ -4,8 +4,8 @@ import { makeStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import CardMedia from '@material-ui/core/CardMedia';
 import Container from '@material-ui/core/Container';
-import Typography from '@material-ui/core/Typography';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
+import Title from 'web-components/lib/components/title';
 
 type Props = {
   actionTxt: string;
@@ -14,7 +14,6 @@ type Props = {
   title: string;
   maxWidth?: string;
   classes?: {
-    title?: string;
     main?: string;
   };
 };
@@ -26,10 +25,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     alignContent: 'center',
     justifyContent: 'center',
     minHeight: theme.spacing(150),
-  },
-  title: {
-    color: theme.palette.primary.main,
-    fontWeight: 900,
   },
   btn: {
     marginTop: theme.spacing(10),
@@ -47,13 +42,9 @@ const HeroAction: React.FC<Props> = props => {
       <Container maxWidth="md">
         <Grid container justify="center">
           <div className={cx(styles.main, props.classes && props.classes.main)}>
-            <Typography
-              variant="h2"
-              align="center"
-              className={cx(styles.title, props.classes && props.classes.title)}
-            >
+            <Title align="center" variant="h2" color="primary">
               {props.title}
-            </Typography>
+            </Title>
             <Grid container justify="center">
               <ContainedButton onClick={props.action} className={styles.btn} size="medium">
                 {props.actionTxt}

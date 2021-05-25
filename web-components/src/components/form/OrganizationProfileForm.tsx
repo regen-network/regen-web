@@ -36,7 +36,7 @@ export interface OrgProfileFormValues {
   logo: string;
 }
 
-type AcctType = 'personal' | 'organization';
+type AcctType = 'user' | 'organization';
 
 const useStyles = makeStyles((theme: Theme) => ({
   topCard: {
@@ -81,17 +81,17 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const OrganizationProfileForm: React.FC<FormProps> = p => {
-  const [acctType, setAcctType] = useState<AcctType>('personal');
+const OrganizationProfileForm: React.FC<FormProps> = props => {
+  const [acctType, setAcctType] = useState<AcctType>('user');
   const classes = useStyles();
-  const isIndividual = acctType === 'personal';
+  const isIndividual = acctType === 'user';
   const isOrg = acctType === 'organization';
 
   return (
     <Formik
       enableReinitialize
       initialValues={
-        p.initialValues || {
+        props.initialValues || {
           description: '',
           displayName: '',
           legalName: '',
@@ -119,7 +119,7 @@ const OrganizationProfileForm: React.FC<FormProps> = p => {
       onSubmit={async (values, { setSubmitting }) => {
         setSubmitting(true);
         try {
-          await p.submit(values);
+          await props.submit(values);
           setSubmitting(false);
         } catch (e) {
           setSubmitting(false);
@@ -179,7 +179,7 @@ const OrganizationProfileForm: React.FC<FormProps> = p => {
                   label="Organization location"
                   name="location"
                   placeholder="Start typing the location"
-                  token={p.mapToken}
+                  token={props.mapToken}
                 />
                 <Field
                   className={classes.textField}
@@ -202,8 +202,8 @@ const OrganizationProfileForm: React.FC<FormProps> = p => {
             </PopIn>
 
             <OnboardingSubmit
-              onSubmit={isIndividual ? p.skip : submitForm}
-              onCancel={p.goBack}
+              onSubmit={isIndividual ? props.skip : submitForm}
+              onCancel={props.goBack}
               disabled={(submitCount > 0 && !isValid) || isSubmitting}
             />
           </Form>

@@ -1,4 +1,4 @@
-/registry/projects/wilmot  https://deploy-preview-611--regen-registry.netlify.app/projects/wilmot  200
+https://deploy-preview-611--regen-website.netlify.app/registry/*  https://deploy-preview-611--regen-registry.netlify.app/:splat 301!
 
 /investor.html  /invest/  200
 /us_investors  /invest/  200

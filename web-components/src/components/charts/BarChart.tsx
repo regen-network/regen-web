@@ -8,6 +8,7 @@ import {
   VictoryTooltip,
   VictoryContainer,
   VictoryBarProps,
+  VictoryLabel,
 } from 'victory';
 
 export interface BarChartProps extends VictoryBarProps {
@@ -67,16 +68,33 @@ export default function RegenBarChart({
           <VictoryTooltip
             constrainToVisibleArea
             style={{
-              fontFamily: theme.typography.fontFamily,
-              fontSize: 14,
               fill: theme.palette.info.dark,
             }}
             flyoutStyle={{
               fill: theme.palette.primary.main,
               stroke: theme.palette.grey[600],
             }}
-            flyoutPadding={20}
+            flyoutPadding={14}
             dy={-1}
+            labelComponent={
+              <VictoryLabel
+                lineHeight={[1, 1.8]}
+                style={[
+                  {
+                    fontWeight: 700,
+                    fill: theme.palette.info.dark,
+                    fontFamily: theme.typography.fontFamily,
+                    fontSize: 14,
+                  },
+                  {
+                    fontWeight: 400,
+                    fill: theme.palette.info.dark,
+                    fontFamily: theme.typography.fontFamily,
+                    fontSize: 14,
+                  },
+                ]}
+              />
+            }
           />
         }
         events={[

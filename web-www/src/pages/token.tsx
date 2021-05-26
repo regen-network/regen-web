@@ -10,6 +10,7 @@ import Staking from '../sections/token/Staking';
 import BlockExplorerSection from '../sections/token/BlockExplorerSection';
 import ConnectSection from '../sections/token/ConnectSection';
 import MediaSection from '../sections/token/MediaSection';
+import EmailSubmitSection from '../sections/shared/EmailSubmitSection';
 
 interface Props {
   location: Location;
@@ -20,6 +21,13 @@ const TokenPage = ({ location }: Props): JSX.Element => {
     query {
       seoImage: file(relativePath: { eq: "token-aurora.png" }) {
         publicURL
+      }
+      emailImage: file(relativePath: { eq: "deer-newsletter-bg.jpg" }) {
+        childImageSharp {
+          fluid(quality: 90) {
+            ...GatsbyImageSharpFluid
+          }
+        }
       }
     }
   `);
@@ -41,6 +49,7 @@ const TokenPage = ({ location }: Props): JSX.Element => {
       <Staking />
       <ConnectSection />
       <MediaSection />
+      <EmailSubmitSection image={data?.emailImage?.childImageSharp?.fluid} />
     </>
   );
 };

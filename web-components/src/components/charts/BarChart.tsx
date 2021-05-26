@@ -12,10 +12,10 @@ import {
 
 export interface BarChartProps extends VictoryBarProps {
   data: any[];
-  tickFormatX?: any[] | ((tick: any, index: number, ticks: any[]) => string | number) | undefined;
-  tickValuesX?: any[] | undefined;
-  tickFormatY?: any[] | ((tick: any, index: number, ticks: any[]) => string | number) | undefined;
-  tickValuesY?: any[] | undefined;
+  tickFormatX?: any[] | ((tick: any, index: number, ticks: any[]) => string | number);
+  tickValuesX?: any[];
+  tickFormatY?: any[] | ((tick: any, index: number, ticks: any[]) => string | number);
+  tickValuesY?: any[];
 }
 
 export default function RegenBarChart({

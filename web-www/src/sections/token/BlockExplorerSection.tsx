@@ -2,7 +2,6 @@ import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 import { useStaticQuery, graphql } from 'gatsby';
 import BackgroundImage from 'gatsby-background-image';
-import ReactHtmlParser from 'react-html-parser';
 
 import Section from 'web-components/src/components/section';
 import Title from 'web-components/src/components/title';
@@ -100,7 +99,7 @@ const BlockExplorerSection = (): JSX.Element => {
           <Title className={styles.title} variant="h2">
             {content.header}
           </Title>
-          <Description className={styles.description}>{ReactHtmlParser(content.description)}</Description>
+          <Description className={styles.description}>{content.description}</Description>
           <ContainedButton className={styles.button} href={content.buttonUrl} target="_blank">
             {content.buttonText}
           </ContainedButton>

@@ -32,6 +32,8 @@ type QueryData = {
     tokenPool: {
       title: string;
       subtitle: string;
+      imageAltText: string;
+      imageTitle: string;
       image: {
         childImageSharp: {
           fluid: FluidObject;
@@ -53,13 +55,16 @@ const TokenEconomics = (): JSX.Element => {
 
   const {
     text: {
-      tokenPool: { title, subtitle, image, mobileImage },
+      tokenPool: { title, subtitle, image, mobileImage, imageAltText, imageTitle },
     },
   } = useStaticQuery<QueryData>(graphql`
     query {
       text: tokenYaml {
         tokenPool {
           title
+          subtitle
+          imageAltText
+          imageTitle
           subtitle
           image {
             childImageSharp {
@@ -85,14 +90,19 @@ const TokenEconomics = (): JSX.Element => {
       <Img
         className={styles.image}
         fluid={mobileImage.childImageSharp.fluid}
-        title="Token Pool"
-        alt="Token Pool"
+        title={imageTitle}
+        alt={imageAltText}
       />
     </div>
   ) : (
     <Section className={clsx(styles.root, styles.center)} title={title}>
       <Description className={clsx(styles.content, styles.center)}>{subtitle}</Description>
-      <Img className={styles.image} fluid={image.childImageSharp.fluid} title="Token Pool" alt="Token Pool" />
+      <Img
+        className={styles.image}
+        fluid={image.childImageSharp.fluid}
+        title={imageTitle}
+        alt={imageAltText}
+      />
     </Section>
   );
 };

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useStaticQuery, graphql } from 'gatsby';
+import { useStaticQuery, graphql, PageProps } from 'gatsby';
 
 import SEO from '../components/seo';
 import TopSection from '../sections/token/TopSection';
@@ -12,11 +12,7 @@ import MediaSection from '../sections/token/MediaSection';
 import TokenDetails from '../sections/token/TokenDetails';
 import EmailSubmitSection from '../sections/shared/EmailSubmitSection';
 
-interface Props {
-  location: Location;
-}
-
-const TokenPage = ({ location }: Props): JSX.Element => {
+const TokenPage = ({ location }: PageProps): JSX.Element => {
   const data = useStaticQuery(graphql`
     query {
       seoImage: file(relativePath: { eq: "token-aurora.png" }) {
@@ -30,6 +26,10 @@ const TokenPage = ({ location }: Props): JSX.Element => {
         }
       }
       text: tokenYaml {
+        seo {
+          title
+          description
+        }
         newsletterSection {
           header
           buttonText
@@ -43,8 +43,8 @@ const TokenPage = ({ location }: Props): JSX.Element => {
   return (
     <>
       <SEO
-        description="REGEN token is a utility token powering an application specific blockchain for global climate finance. "
-        title="REGEN Token"
+        description={data?.text?.seo?.description}
+        title={data?.text?.seo?.title}
         location={location}
         imageUrl={data?.seoImage?.publicURL}
       />

@@ -1065,6 +1065,12 @@ collections:
     name: token
     file: "web-www/content/token/index.yaml"
     fields:
+      - label: "SEO"
+        name: seo
+        widget: object
+        fields:
+          - {label: "Title", name: title, widget: string}
+          - {label: "Description", name: description, widget: string}
       - label: "Top Section"
         name: topSection
         widget: object
@@ -1092,6 +1098,8 @@ collections:
         fields:
           - {label: "Title", name: title, widget: string}
           - {label: "Subtitle", name: subtitle, widget: string}
+          - {label: "Image Alt Text", name: imageAltText, widget: string}
+          - {label: "Image Title", name: imageTitle, widget: string}
           - {label: "Image", name: image, widget: image}
           - {label: "Mobile Image", name: mobileImage, widget: image}
       - label: "Unlock Schedule"

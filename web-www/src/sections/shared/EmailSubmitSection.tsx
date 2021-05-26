@@ -7,6 +7,14 @@ import NewsletterForm from 'web-components/lib/components/form/NewsletterForm';
 
 interface Props {
   image?: object;
+  altContent?: Content;
+}
+
+interface Content {
+  header?: string;
+  description?: string;
+  buttonText?: string;
+  inputText?: string;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -43,7 +51,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const EmailSubmitSection = ({ image }: Props): JSX.Element => {
+const EmailSubmitSection = ({ image, altContent }: Props): JSX.Element => {
   const classes = useStyles({});
   return (
     <StaticQuery
@@ -66,17 +74,22 @@ const EmailSubmitSection = ({ image }: Props): JSX.Element => {
       `}
       render={data => {
         const imageData = image || data.desktop.childImageSharp.fluid;
-        const content = data.text.newsletterSection;
+        const content: Content = altContent || data.text.newsletterSection;
+        console.log('content', content);
         return (
           <BackgroundImage Tag="section" fluid={imageData} backgroundColor={`#040e18`}>
             <div className={classes.root}>
               <Title className={classes.title} variant="h2">
-                {content.header}
+                {content?.header}
               </Title>
               <Title variant="h6" className={classes.description}>
-                {content.description}
+                {content?.description}
               </Title>
-              <NewsletterForm apiUri={process.env.GATSBY_API_URI} />
+              <NewsletterForm
+                apiUri={process.env.GATSBY_API_URI}
+                submitLabel={content?.buttonText}
+                inputPlaceholder={content?.inputText}
+              />
             </div>
           </BackgroundImage>
         );

@@ -22,15 +22,24 @@ const TokenPage = ({ location }: Props): JSX.Element => {
       seoImage: file(relativePath: { eq: "token-aurora.png" }) {
         publicURL
       }
-      emailImage: file(relativePath: { eq: "deer-newsletter-bg.png" }) {
+      emailImage: file(relativePath: { eq: "deer-newsletter-bg.jpg" }) {
         childImageSharp {
           fluid(quality: 90) {
             ...GatsbyImageSharpFluid
           }
         }
       }
+      text: tokenYaml {
+        newsletterSection {
+          header
+          buttonText
+          inputText
+        }
+      }
     }
   `);
+  const newsletterContent = data?.text?.newsletterSection;
+  console.log('newsletterContent', newsletterContent);
 
   return (
     <>
@@ -49,7 +58,14 @@ const TokenPage = ({ location }: Props): JSX.Element => {
       <Staking />
       <ConnectSection />
       <MediaSection />
-      <EmailSubmitSection image={data?.emailImage?.childImageSharp?.fluid} />
+      <EmailSubmitSection
+        image={data?.emailImage?.childImageSharp?.fluid}
+        altContent={{
+          header: newsletterContent?.header,
+          buttonText: newsletterContent?.buttonText,
+          inputText: newsletterContent?.inputText,
+        }}
+      />
     </>
   );
 };

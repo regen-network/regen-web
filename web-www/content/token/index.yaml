@@ -51,4 +51,8 @@ blockExplorerSection:
   buttonUrl: https://regen.aneka.io
 connectSection:
   header: Connect
+newsletterSection:
+  header: Stay Updated
+  buttonText: subscribe
+  inputText: Enter your email
 

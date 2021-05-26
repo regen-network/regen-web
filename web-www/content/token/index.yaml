@@ -25,7 +25,7 @@ infoSection:
     md//It is expected that the REGEN token will be available for public sale on the Gravity Dex and Osmosis within the next 60 days. Gravity Dex is an advanced interchain decentralized exchange on Cosmos Hub that enables swaps and pools of digital assets between any two blockchains within the Cosmos ecosystem. Osmosis is an advanced AMM protocol built using the Cosmos SDK that will allow developers to design, build, and deploy their own customized AMMs. 
 
 
-    To receive official announcements about public token sale events, please <a href="#" target="_blank">sign up</a>.
+  signUpText: To receive official announcements about public token sale events, please <a>sign up</a>
   image: ../../static/media/token-bird-berries.png
 tokenPool:
   title: REGEN total token pool

@@ -75,10 +75,10 @@ const EmailSubmitSection = ({ image, altContent }: Props): JSX.Element => {
       render={data => {
         const imageData = image || data.desktop.childImageSharp.fluid;
         const content: Content = altContent || data.text.newsletterSection;
-        console.log('content', content);
+
         return (
           <BackgroundImage Tag="section" fluid={imageData} backgroundColor={`#040e18`}>
-            <div className={classes.root}>
+            <div className={classes.root} id="newsletter-signup">
               <Title className={classes.title} variant="h2">
                 {content?.header}
               </Title>

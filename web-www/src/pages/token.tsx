@@ -39,7 +39,6 @@ const TokenPage = ({ location }: Props): JSX.Element => {
     }
   `);
   const newsletterContent = data?.text?.newsletterSection;
-  console.log('newsletterContent', newsletterContent);
 
   return (
     <>

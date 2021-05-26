@@ -2,16 +2,14 @@ import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import { Theme, makeStyles, CardContent, Typography } from '@material-ui/core';
 import Img, { FluidObject } from 'gatsby-image';
+import ReactHtmlParser from 'react-html-parser';
 
 import Section from 'web-components/src/components/section';
 import Title from 'web-components/src/components/title';
 import Card from 'web-components/src/components/cards/Card';
-import { TokenDescription as Description } from './Description';
+import Description from 'web-components/src/components/description';
 
 const useStyles = makeStyles<Theme>((theme: Theme) => ({
-  root: {
-    [theme.breakpoints.down('xs')]: {},
-  },
   card: {
     display: 'flex',
     [theme.breakpoints.up('sm')]: {
@@ -66,6 +64,21 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
       fontSize: theme.typography.pxToRem(16),
     },
   },
+  body: {
+    display: 'flex',
+    color: theme.palette.info.dark,
+    '& a': {
+      color: theme.palette.secondary.main,
+      textDecoration: 'none',
+      cursor: 'pointer',
+    },
+    [theme.breakpoints.up('sm')]: {
+      fontSize: theme.typography.pxToRem(22),
+    },
+    [theme.breakpoints.down('xs')]: {
+      fontSize: theme.typography.pxToRem(16),
+    },
+  },
 }));
 
 type QueryData = {
@@ -74,6 +87,7 @@ type QueryData = {
       title: string;
       subtitle: string;
       body: string;
+      signUpText: string;
       image: {
         childImageSharp: {
           fluid: FluidObject;
@@ -88,7 +102,7 @@ const InfoSection = (): JSX.Element => {
 
   const {
     text: {
-      infoSection: { image, title, subtitle, body },
+      infoSection: { image, title, subtitle, body, signUpText },
     },
   } = useStaticQuery<QueryData>(graphql`
     query {
@@ -104,19 +118,28 @@ const InfoSection = (): JSX.Element => {
           title
           subtitle
           body
+          signUpText
         }
       }
     }
   `);
 
+  const scrollToSignup = (): void => {
+    const signup = document.getElementById('newsletter-signup');
+    signup?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
-    <Section className={styles.root}>
+    <Section>
       <Card className={styles.card}>
         <Img className={styles.image} fluid={image?.childImageSharp?.fluid} title="Bird" alt="Bird" />
         <CardContent className={styles.cardContent}>
           <Title variant="h3">{title}</Title>
           <Typography className={styles.subtitle}>{subtitle}</Typography>
-          <Description>{body}</Description>
+          <Description className={styles.body}>{ReactHtmlParser(body)}</Description>
+          <Description className={styles.body}>
+            <div onClick={() => scrollToSignup()}>{ReactHtmlParser(signUpText)}</div>
+          </Description>
         </CardContent>
       </Card>
     </Section>

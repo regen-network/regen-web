@@ -18,7 +18,7 @@ const TokenPage = ({ location }: PageProps): JSX.Element => {
       seoImage: file(relativePath: { eq: "token-aurora.png" }) {
         publicURL
       }
-      emailImage: file(relativePath: { eq: "deer-newsletter-bg.jpg" }) {
+      emailImage: file(relativePath: { eq: "deer-newsletter-bg.png" }) {
         childImageSharp {
           fluid(quality: 90) {
             ...GatsbyImageSharpFluid
@@ -63,6 +63,7 @@ const TokenPage = ({ location }: PageProps): JSX.Element => {
           buttonText: newsletterContent?.buttonText,
           inputText: newsletterContent?.inputText,
         }}
+        titleVariant="h3"
       />
     </>
   );

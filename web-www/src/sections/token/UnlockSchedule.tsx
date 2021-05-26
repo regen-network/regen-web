@@ -116,7 +116,7 @@ const UnlockSchedule = (): JSX.Element => {
   `);
 
   return (
-    <Section className={clsx(styles.root, styles.center)} title={title}>
+    <Section className={clsx(styles.root, styles.center)} title={title} titleVariant="h3">
       <Description className={clsx(styles.description, styles.center)}>{subtitle}</Description>
       <div className={styles.chartScroll}>
         <div className={styles.chartWrapper}>

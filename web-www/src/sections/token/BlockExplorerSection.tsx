@@ -96,7 +96,7 @@ const BlockExplorerSection = (): JSX.Element => {
       <Section classes={{ root: styles.root }}>
         <div className={styles.content}>
           <DecentralizeIcon />
-          <Title className={styles.title} variant="h2">
+          <Title className={styles.title} variant="h3">
             {content.header}
           </Title>
           <Description className={styles.description}>{content.description}</Description>

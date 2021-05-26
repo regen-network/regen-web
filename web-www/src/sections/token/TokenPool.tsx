@@ -95,7 +95,7 @@ const TokenEconomics = (): JSX.Element => {
       />
     </div>
   ) : (
-    <Section className={clsx(styles.root, styles.center)} title={title}>
+    <Section className={clsx(styles.root, styles.center)} title={title} titleVariant="h3">
       <Description className={clsx(styles.content, styles.center)}>{subtitle}</Description>
       <Img
         className={styles.image}

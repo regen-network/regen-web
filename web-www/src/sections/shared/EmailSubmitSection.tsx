@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles, Theme, TypographyVariant } from '@material-ui/core';
 import { graphql, StaticQuery } from 'gatsby';
 import BackgroundImage from 'gatsby-background-image';
 import Title from 'web-components/lib/components/title';
@@ -8,6 +8,7 @@ import NewsletterForm from 'web-components/lib/components/form/NewsletterForm';
 interface Props {
   image?: object;
   altContent?: Content;
+  titleVariant?: TypographyVariant;
 }
 
 interface Content {
@@ -51,7 +52,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const EmailSubmitSection = ({ image, altContent }: Props): JSX.Element => {
+const EmailSubmitSection = ({ image, altContent, titleVariant = 'h2' }: Props): JSX.Element => {
   const classes = useStyles({});
   return (
     <StaticQuery
@@ -79,7 +80,7 @@ const EmailSubmitSection = ({ image, altContent }: Props): JSX.Element => {
         return (
           <BackgroundImage Tag="section" fluid={imageData} backgroundColor={`#040e18`}>
             <div className={classes.root} id="newsletter-signup">
-              <Title className={classes.title} variant="h2">
+              <Title className={classes.title} variant={titleVariant}>
                 {content?.header}
               </Title>
               <Title variant="h6" className={classes.description}>

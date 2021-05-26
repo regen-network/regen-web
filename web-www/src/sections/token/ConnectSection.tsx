@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const ValidatorsConnectSection = (): JSX.Element => {
+const TokenConnectSection = (): JSX.Element => {
   const data = useStaticQuery(graphql`
     query {
       background: file(relativePath: { eq: "birds-background.png" }) {
@@ -57,8 +57,9 @@ const ValidatorsConnectSection = (): JSX.Element => {
       header={content.header}
       background={data.background}
       icons={icons}
+      titleVariant="h3"
     />
   );
 };
 
-export default ValidatorsConnectSection;
+export default TokenConnectSection;

@@ -1,10 +1,11 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import { makeStyles, Theme, Typography, useTheme } from '@material-ui/core';
+import { makeStyles, Theme, useTheme } from '@material-ui/core';
 
 import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';
 import Section from 'web-components/src/components/section';
 import ArticleCard from 'web-components/lib/components/cards/ArticleCard';
+import Title from 'web-components/lib/components/title';
 
 type Item = {
   title: string;
@@ -52,8 +53,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: '100%',
   },
   title: {
-    fontSize: theme.spacing(10),
-    fontWeight: 900,
+    // fontWeight: 900,
   },
   headerWrap: {
     display: 'flex',
@@ -136,9 +136,9 @@ const MediaSection: React.FC = () => {
           slidesToShow={3}
           items={itemCards}
           renderTitle={() => (
-            <Typography variant="h1" className={classes.title}>
+            <Title variant="h3" className={classes.title}>
               {header}
-            </Typography>
+            </Title>
           )}
         />
       </div>

@@ -59,7 +59,7 @@ const Staking = (): JSX.Element => {
   `);
 
   return (
-    <Section className={clsx(styles.root, styles.center)} title={title}>
+    <Section className={clsx(styles.root, styles.center)} title={title} titleVariant="h3">
       <Description className={clsx(styles.content, styles.center)}>{body}</Description>
       <ContainedButton href={buttonUrl}>{buttonText}</ContainedButton>
     </Section>

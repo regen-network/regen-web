@@ -1,6 +1,6 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import Img, { FluidObject } from 'gatsby-image';
+import Img from 'gatsby-image';
 import { Theme, makeStyles } from '@material-ui/core';
 
 import BackgroundSection from '../../components/BackgroundSection';
@@ -28,7 +28,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
 }));
 
 const TopSection = (): JSX.Element => {
-  const classes = useStyles();
+  const styles = useStyles();
   const data = useStaticQuery(graphql`
     query {
       background: file(relativePath: { eq: "token-aurora.png" }) {
@@ -55,18 +55,20 @@ const TopSection = (): JSX.Element => {
   `);
   const content = data?.text?.topSection;
   const imageData = data?.background?.childImageSharp?.fluid;
+
   return (
     <BackgroundSection
-      className={classes.section}
-      linearGradient="linear-gradient(209.83deg, rgba(250, 235, 209, 0.8) 11.05%, rgba(125, 201, 191, 0.8) 43.17%, rgba(81, 93, 137, 0.8) 75.29%)"
+      className={styles.section}
+      linearGradient="linear-gradient(180deg, #000000 6.73%, rgba(0, 0, 0, 0) 30.65%), linear-gradient(209.83deg, rgba(250, 235, 209, 0.8) 11.05%, rgba(125, 201, 191, 0.8) 43.17%, rgba(81, 93, 137, 0.8) 75.29%)"
       header={
-        <div className={classes.header}>
-          <Img className={classes.token} fluid={content?.image?.childImageSharp?.fluid} />
-          <Title
-            color="primary"
-            variant="h1"
-            // className={clsx(titleClassName, classes.title)}
-          >
+        <div className={styles.header}>
+          <Img
+            className={styles.token}
+            fluid={content?.image?.childImageSharp?.fluid}
+            alt="Regen Token"
+            title="REGEN Token"
+          />
+          <Title color="primary" variant="h1">
             {content.header}
           </Title>
         </div>

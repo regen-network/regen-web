@@ -65,7 +65,6 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
     },
   },
   body: {
-    display: 'flex',
     color: theme.palette.info.dark,
     '& a': {
       color: theme.palette.secondary.main,

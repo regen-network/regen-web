@@ -1,15 +1,15 @@
 import React from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
+
 import SEO from '../components/seo';
 import TopSection from '../sections/token/TopSection';
 import TokenEconomics from '../sections/token/TokenEconomics';
-import Info from '../sections/token/InfoSection';
-import TokenPool from '../sections/token/TokenPool';
-import UnlockSchedule from '../sections/token/UnlockSchedule';
+import InfoSection from '../sections/token/InfoSection';
 import Staking from '../sections/token/Staking';
 import BlockExplorerSection from '../sections/token/BlockExplorerSection';
 import ConnectSection from '../sections/token/ConnectSection';
 import MediaSection from '../sections/token/MediaSection';
+import TokenDetails from '../sections/token/TokenDetails';
 import EmailSubmitSection from '../sections/shared/EmailSubmitSection';
 
 interface Props {
@@ -50,9 +50,8 @@ const TokenPage = ({ location }: Props): JSX.Element => {
       />
       <TopSection />
       <TokenEconomics />
-      <Info />
-      <TokenPool />
-      <UnlockSchedule />
+      <InfoSection />
+      <TokenDetails />
       <BlockExplorerSection />
       <Staking />
       <ConnectSection />

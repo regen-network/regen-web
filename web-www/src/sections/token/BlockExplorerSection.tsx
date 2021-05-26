@@ -19,7 +19,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       padding: theme.spacing(30, 0),
     },
     [theme.breakpoints.down('xs')]: {
-      marginTop: theme.spacing(20),
       padding: theme.spacing(22, 0),
     },
     '& a': {
@@ -102,7 +101,7 @@ const BlockExplorerSection = (): JSX.Element => {
             {content.header}
           </Title>
           <Description className={styles.description}>{ReactHtmlParser(content.description)}</Description>
-          <ContainedButton className={styles.button} href={content.buttonUrl}>
+          <ContainedButton className={styles.button} href={content.buttonUrl} target="_blank">
             {content.buttonText}
           </ContainedButton>
         </div>

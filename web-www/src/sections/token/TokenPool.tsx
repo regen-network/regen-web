@@ -11,9 +11,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
-    [theme.breakpoints.down('xs')]: {
-      marginTop: theme.spacing(24),
-    },
+    marginTop: theme.spacing(24),
   },
   center: {
     alignItems: 'center',
@@ -98,5 +96,4 @@ const TokenEconomics = (): JSX.Element => {
     </Section>
   );
 };
-
 export default TokenEconomics;

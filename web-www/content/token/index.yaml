@@ -41,7 +41,7 @@ staking:
     md//Staking/delegating is a critical function to secure Regen Ledger, participate in community governance and support the growth and development of Regen Network. Staking also generates rewards for delegators. Delegating to validators by staking your REGEN tokens helps cover validator infrastructure costs, and will generate between 7% and 20% annual percentage rate (APR) on your staked tokens.
 
 
-    To learn more about staking REGEN tokens, please <a>click here</a>.
+    To learn more about staking REGEN tokens, please <a href="#" target="_blank">click here</a>.
   buttonText: check out the faq
   buttonUrl: /faq/token
 blockExplorerSection:

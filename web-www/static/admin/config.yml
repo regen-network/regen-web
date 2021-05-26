@@ -1061,3 +1061,71 @@ collections:
               - {label: "image", name: image, widget: image}
               - {label: "name", name: name, widget: string}
               - {label: "role", name: role, widget: string}
+  - label: "Token"
+    name: token
+    file: "web-www/content/token/index.yaml"
+    fields:
+      - label: "Top Section"
+        name: topSection
+        widget: object
+        fields:
+          - {label: "Header", name: header, widget: string}
+          - {label: "Image", name: image, widget: image}
+          - {label: "Body", name: body, widget: string}
+      - label: "Token Economics"
+        name: tokenEconomics
+        widget: object
+        fields:
+          - {label: "Title", name: title, widget: string}
+          - {label: "Body", name: body, widget: markdown}
+      - label: "Info Section"
+        name: infoSection
+        widget: object
+        fields:
+          - {label: "Title", name: title, widget: string}
+          - {label: "Subtitle", name: subtitle, widget: string}
+          - {label: "Body", name: body, widget: markdown}
+          - {label: "Signup Text", name: signupText, widget: string}
+          - {label: "Image", name: image, widget: image}
+      - label: "Token Pool"
+        name: tokenPool
+        widget: object
+        fields:
+          - {label: "Title", name: title, widget: string}
+          - {label: "Subtitle", name: subtitle, widget: string}
+          - {label: "Image", name: image, widget: image}
+          - {label: "Mobile Image", name: mobileImage, widget: image}
+      - label: "Unlock Schedule"
+        name: unlockSchedule
+        widget: object
+        fields:
+          - {label: "Title", name: title, widget: string}
+          - {label: "Subtitle", name: subtitle, widget: string}
+      - label: "Staking"
+        name: staking
+        widget: object
+        fields:
+          - {label: "Title", name: title, widget: string}
+          - {label: "Body", name: body, widget: markdown}
+          - {label: "Button Text", name: buttonText, widget: string}
+          - {label: "Button URL", name: buttonUrl, widget: string}
+      - label: "Block Explorer Section"
+        name: blockExplorerSection
+        widget: object
+        fields:
+          - {label: "Header", name: header, widget: string}
+          - {label: "Description", name: description, widget: string}
+          - {label: "Button Text", name: buttonText, widget: string}
+          - {label: "Button URL", name: buttonUrl, widget: string}
+      - label: "Connect Section"
+        name: connectSection
+        widget: object
+        fields:
+          - {label: "Header", name: header, widget: string}
+      - label: "Newsletter Section"
+        name: newsletterSection
+        widget: object
+        fields:
+          - {label: "Header", name: header, widget: string}
+          - {label: "Button Text", name: buttonText, widget: string}
+          - {label: "Input Text", name: inputText, widget: string}

@@ -85,7 +85,9 @@ const EmailSubmitSection = ({ image, altContent, classes }: Props): JSX.Element 
         return (
           <BackgroundImage Tag="section" fluid={imageData} backgroundColor={`#040e18`}>
             <div className={clsx(styles.root, classes?.root)} id="newsletter-signup">
-              <Title className={clsx(styles.title, classes?.title)}>{content?.header}</Title>
+              <Title className={clsx(styles.title, classes?.title)} variant="h2">
+                {content?.header}
+              </Title>
               <Title variant="h6" className={styles.description}>
                 {content?.description}
               </Title>

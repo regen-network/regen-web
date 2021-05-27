@@ -1,6 +1,6 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import { Theme, makeStyles, CardContent, Typography, useMediaQuery, useTheme } from '@material-ui/core';
+import { Theme, makeStyles, CardContent, Typography } from '@material-ui/core';
 import Img, { FluidObject } from 'gatsby-image';
 import ReactHtmlParser from 'react-html-parser';
 
@@ -91,36 +91,22 @@ type QueryData = {
           fluid: FluidObject;
         };
       };
-      imageMobile: {
-        childImageSharp: {
-          fluid: FluidObject;
-        };
-      };
     };
   };
 };
 
 const InfoSection = (): JSX.Element => {
   const styles = useStyles();
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
 
   const {
     text: {
-      infoSection: { image, imageMobile, title, subtitle, body, signUpText, imageAltText, imageTitle },
+      infoSection: { image, title, subtitle, body, signUpText, imageAltText, imageTitle },
     },
   } = useStaticQuery<QueryData>(graphql`
     query {
       text: tokenYaml {
         infoSection {
           image {
-            childImageSharp {
-              fluid(quality: 90) {
-                ...GatsbyImageSharpFluid_withWebp
-              }
-            }
-          }
-          imageMobile {
             childImageSharp {
               fluid(quality: 90) {
                 ...GatsbyImageSharpFluid_withWebp
@@ -148,8 +134,7 @@ const InfoSection = (): JSX.Element => {
       <Card className={styles.card}>
         <Img
           className={styles.image}
-          fluid={imageMobile?.childImageSharp?.fluid}
-          // fluid={isMobile ? imageMobile?.childImageSharp?.fluid : image?.childImageSharp?.fluid}
+          fluid={image?.childImageSharp?.fluid}
           title={imageTitle}
           alt={imageAltText}
         />

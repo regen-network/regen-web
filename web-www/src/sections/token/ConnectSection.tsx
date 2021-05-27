@@ -11,6 +11,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   connect: {
     marginTop: theme.spacing(24),
   },
+  title: {
+    [theme.breakpoints.down('xs')]: {
+      fontSize: theme.typography.pxToRem(32),
+    },
+  },
 }));
 
 const TokenConnectSection = (): JSX.Element => {
@@ -54,10 +59,10 @@ const TokenConnectSection = (): JSX.Element => {
   return (
     <ConnectSection
       className={styles.connect}
+      titleClassName={styles.title}
       header={content.header}
       background={data.background}
       icons={icons}
-      titleVariant="h3"
     />
   );
 };

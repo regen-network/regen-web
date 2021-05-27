@@ -87,6 +87,8 @@ type QueryData = {
       subtitle: string;
       body: string;
       signUpText: string;
+      imageAltText: string;
+      imageTitle: string;
       image: {
         childImageSharp: {
           fluid: FluidObject;
@@ -101,7 +103,7 @@ const InfoSection = (): JSX.Element => {
 
   const {
     text: {
-      infoSection: { image, title, subtitle, body, signUpText },
+      infoSection: { image, title, subtitle, body, signUpText, imageAltText, imageTitle },
     },
   } = useStaticQuery<QueryData>(graphql`
     query {
@@ -118,6 +120,8 @@ const InfoSection = (): JSX.Element => {
           subtitle
           body
           signUpText
+          imageAltText
+          imageTitle
         }
       }
     }
@@ -131,7 +135,12 @@ const InfoSection = (): JSX.Element => {
   return (
     <Section>
       <Card className={styles.card}>
-        <Img className={styles.image} fluid={image?.childImageSharp?.fluid} title="Bird" alt="Bird" />
+        <Img
+          className={styles.image}
+          fluid={image?.childImageSharp?.fluid}
+          title={imageTitle}
+          alt={imageAltText}
+        />
         <CardContent className={styles.cardContent}>
           <Title variant="h3">{title}</Title>
           <Typography className={styles.subtitle}>{subtitle}</Typography>

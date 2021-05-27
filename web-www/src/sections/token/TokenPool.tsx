@@ -1,7 +1,6 @@
 import React from 'react';
 import { Theme, makeStyles, useMediaQuery, useTheme } from '@material-ui/core';
 import { graphql, useStaticQuery } from 'gatsby';
-import Img, { FluidObject } from 'gatsby-image';
 import clsx from 'clsx';
 
 import Section from 'web-components/src/components/section';
@@ -25,6 +24,11 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
   image: {
     width: '100%',
   },
+  title: {
+    [theme.breakpoints.down('xs')]: {
+      fontSize: theme.typography.pxToRem(32),
+    },
+  },
 }));
 
 type QueryData = {
@@ -32,18 +36,6 @@ type QueryData = {
     tokenPool: {
       title: string;
       subtitle: string;
-      imageAltText: string;
-      imageTitle: string;
-      image: {
-        childImageSharp: {
-          fluid: FluidObject;
-        };
-      };
-      mobileImage: {
-        childImageSharp: {
-          fluid: FluidObject;
-        };
-      };
     };
   };
 };
@@ -55,7 +47,7 @@ const TokenEconomics = (): JSX.Element => {
 
   const {
     text: {
-      tokenPool: { title, subtitle, image, mobileImage, imageAltText, imageTitle },
+      tokenPool: { title, subtitle },
     },
   } = useStaticQuery<QueryData>(graphql`
     query {
@@ -63,46 +55,25 @@ const TokenEconomics = (): JSX.Element => {
         tokenPool {
           title
           subtitle
-          imageAltText
-          imageTitle
-          subtitle
-          image {
-            childImageSharp {
-              fluid(quality: 90) {
-                ...GatsbyImageSharpFluid_withWebp
-              }
-            }
-          }
-          mobileImage {
-            childImageSharp {
-              fluid(quality: 90) {
-                ...GatsbyImageSharpFluid_withWebp
-              }
-            }
-          }
         }
       }
     }
   `);
+  const imageTitle = 'Token Pool';
 
   return isMobile ? (
     <div className={styles.root}>
-      <Img
+      <img
+        src="../media/token-pool-mobile.svg"
         className={styles.image}
-        fluid={mobileImage.childImageSharp.fluid}
         title={imageTitle}
-        alt={imageAltText}
+        alt={imageTitle}
       />
     </div>
   ) : (
-    <Section className={clsx(styles.root, styles.center)} title={title} titleVariant="h3">
+    <Section title={title} classes={{ root: clsx(styles.root, styles.center), title: styles.title }}>
       <Description className={clsx(styles.content, styles.center)}>{subtitle}</Description>
-      <Img
-        className={styles.image}
-        fluid={image.childImageSharp.fluid}
-        title={imageTitle}
-        alt={imageAltText}
-      />
+      <img src="../media/token-pool.svg" className={styles.image} title={imageTitle} alt={imageTitle} />
     </Section>
   );
 };

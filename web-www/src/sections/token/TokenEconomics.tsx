@@ -22,6 +22,11 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
       width: '100%',
     },
   },
+  title: {
+    [theme.breakpoints.down('xs')]: {
+      fontSize: theme.typography.pxToRem(32),
+    },
+  },
 }));
 
 type QueryData = {
@@ -52,7 +57,7 @@ const TokenEconomics = (): JSX.Element => {
   `);
 
   return (
-    <Section className={clsx(styles.root, styles.center)} title={title} titleVariant="h3">
+    <Section title={title} classes={{ root: clsx(styles.root, styles.center), title: styles.title }}>
       <Description className={clsx(styles.content, styles.center)}>{body}</Description>
     </Section>
   );

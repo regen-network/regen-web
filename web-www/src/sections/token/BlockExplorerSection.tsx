@@ -34,12 +34,13 @@ const useStyles = makeStyles((theme: Theme) => ({
   title: {
     maxWidth: theme.spacing(172),
     color: theme.palette.primary.main,
-    [theme.breakpoints.down('xs')]: {
-      fontSize: theme.spacing(8),
-      padding: theme.spacing(7.5, 0),
-    },
     [theme.breakpoints.up('sm')]: {
+      fontSize: theme.typography.pxToRem(38),
       padding: theme.spacing(9.5, 0),
+    },
+    [theme.breakpoints.down('xs')]: {
+      fontSize: theme.typography.pxToRem(32),
+      padding: theme.spacing(7.5, 0),
     },
   },
   content: {
@@ -96,9 +97,7 @@ const BlockExplorerSection = (): JSX.Element => {
       <Section classes={{ root: styles.root }}>
         <div className={styles.content}>
           <DecentralizeIcon />
-          <Title className={styles.title} variant="h3">
-            {content.header}
-          </Title>
+          <Title className={styles.title}>{content.header}</Title>
           <Description className={styles.description}>{content.description}</Description>
           <ContainedButton className={styles.button} href={content.buttonUrl} target="_blank">
             {content.buttonText}

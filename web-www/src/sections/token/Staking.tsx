@@ -4,18 +4,21 @@ import { Theme, makeStyles } from '@material-ui/core';
 import clsx from 'clsx';
 
 import Section from 'web-components/src/components/section';
-import Title from 'web-components/src/components/title';
 import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
 import { TokenDescription as Description } from './Description';
 
 const useStyles = makeStyles<Theme>((theme: Theme) => ({
-  root: {},
   content: {
     width: '80%',
     maxWidth: theme.spacing(236.5),
     marginBottom: theme.spacing(4),
     [theme.breakpoints.down('xs')]: {
       width: '100%',
+    },
+  },
+  title: {
+    [theme.breakpoints.down('xs')]: {
+      fontSize: theme.typography.pxToRem(32),
     },
   },
   center: {
@@ -34,6 +37,7 @@ type QueryData = {
       title: string;
       body: string;
       buttonText: string;
+      buttonUrl: string;
     };
   };
 };
@@ -59,7 +63,7 @@ const Staking = (): JSX.Element => {
   `);
 
   return (
-    <Section className={clsx(styles.root, styles.center)} title={title} titleVariant="h3">
+    <Section title={title} classes={{ root: clsx(styles.root, styles.center), title: styles.title }}>
       <Description className={clsx(styles.content, styles.center)}>{body}</Description>
       <ContainedButton href={buttonUrl}>{buttonText}</ContainedButton>
     </Section>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { useStaticQuery, graphql, PageProps } from 'gatsby';
+import { makeStyles, Theme } from '@material-ui/core';
 
 import SEO from '../components/seo';
 import TopSection from '../sections/token/TopSection';
@@ -12,7 +13,16 @@ import MediaSection from '../sections/token/MediaSection';
 import TokenDetails from '../sections/token/TokenDetails';
 import EmailSubmitSection from '../sections/shared/EmailSubmitSection';
 
+const useStyles = makeStyles((theme: Theme) => ({
+  newsletterTitle: {
+    [theme.breakpoints.down('xs')]: {
+      fontSize: theme.typography.pxToRem(32),
+    },
+  },
+}));
+
 const TokenPage = ({ location }: PageProps): JSX.Element => {
+  const styles = useStyles();
   const data = useStaticQuery(graphql`
     query {
       seoImage: file(relativePath: { eq: "token-aurora.png" }) {
@@ -57,13 +67,13 @@ const TokenPage = ({ location }: PageProps): JSX.Element => {
       <ConnectSection />
       <MediaSection />
       <EmailSubmitSection
+        classes={{ title: styles.newsletterTitle }}
         image={data?.emailImage?.childImageSharp?.fluid}
         altContent={{
           header: newsletterContent?.header,
           buttonText: newsletterContent?.buttonText,
           inputText: newsletterContent?.inputText,
         }}
-        titleVariant="h3"
       />
     </>
   );

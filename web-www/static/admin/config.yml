@@ -1092,16 +1092,14 @@ collections:
           - {label: "Body", name: body, widget: markdown}
           - {label: "Signup Text", name: signupText, widget: string}
           - {label: "Image", name: image, widget: image}
+          - {label: "Image Alt Text", name: imageAltText, widget: string}
+          - {label: "Image Title", name: imageTitle, widget: string}
       - label: "Token Pool"
         name: tokenPool
         widget: object
         fields:
           - {label: "Title", name: title, widget: string}
           - {label: "Subtitle", name: subtitle, widget: string}
-          - {label: "Image Alt Text", name: imageAltText, widget: string}
-          - {label: "Image Title", name: imageTitle, widget: string}
-          - {label: "Image", name: image, widget: image}
-          - {label: "Mobile Image", name: mobileImage, widget: image}
       - label: "Unlock Schedule"
         name: unlockSchedule
         widget: object

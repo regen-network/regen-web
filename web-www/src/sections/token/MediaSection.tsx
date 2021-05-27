@@ -53,7 +53,12 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: '100%',
   },
   title: {
-    // fontWeight: 900,
+    [theme.breakpoints.up('sm')]: {
+      fontSize: theme.typography.pxToRem(38),
+    },
+    [theme.breakpoints.down('xs')]: {
+      fontSize: theme.typography.pxToRem(32),
+    },
   },
   headerWrap: {
     display: 'flex',
@@ -135,11 +140,7 @@ const MediaSection: React.FC = () => {
           headerWrapClassName={classes.headerWrap}
           slidesToShow={3}
           items={itemCards}
-          renderTitle={() => (
-            <Title variant="h3" className={classes.title}>
-              {header}
-            </Title>
-          )}
+          renderTitle={() => <Title className={classes.title}>{header}</Title>}
         />
       </div>
     </Section>

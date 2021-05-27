@@ -1,6 +1,6 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import { Theme, makeStyles, CardContent, Typography } from '@material-ui/core';
+import { Theme, makeStyles, CardContent, Typography, useMediaQuery, useTheme } from '@material-ui/core';
 import Img, { FluidObject } from 'gatsby-image';
 import ReactHtmlParser from 'react-html-parser';
 
@@ -23,20 +23,17 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       minWidth: '40%',
       maxHeight: '100%',
-      '& picture img': {
-        objectPosition: '8% !important',
-      },
     },
-    [theme.breakpoints.between('xs', 'sm')]: {
+    [theme.breakpoints.between('xs', 834)]: {
       '& picture img': {
-        objectPosition: '29% !important',
+        objectPosition: '71% !important',
       },
     },
     [theme.breakpoints.down('xs')]: {
       minWidth: '100%',
       maxHeight: theme.spacing(50),
       '& picture img': {
-        objectPosition: 'center center',
+        objectPosition: 'center 27% !important',
       },
     },
   },
@@ -94,22 +91,36 @@ type QueryData = {
           fluid: FluidObject;
         };
       };
+      imageMobile: {
+        childImageSharp: {
+          fluid: FluidObject;
+        };
+      };
     };
   };
 };
 
 const InfoSection = (): JSX.Element => {
   const styles = useStyles();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
 
   const {
     text: {
-      infoSection: { image, title, subtitle, body, signUpText, imageAltText, imageTitle },
+      infoSection: { image, imageMobile, title, subtitle, body, signUpText, imageAltText, imageTitle },
     },
   } = useStaticQuery<QueryData>(graphql`
     query {
       text: tokenYaml {
         infoSection {
           image {
+            childImageSharp {
+              fluid(quality: 90) {
+                ...GatsbyImageSharpFluid_withWebp
+              }
+            }
+          }
+          imageMobile {
             childImageSharp {
               fluid(quality: 90) {
                 ...GatsbyImageSharpFluid_withWebp
@@ -137,7 +148,8 @@ const InfoSection = (): JSX.Element => {
       <Card className={styles.card}>
         <Img
           className={styles.image}
-          fluid={image?.childImageSharp?.fluid}
+          fluid={imageMobile?.childImageSharp?.fluid}
+          // fluid={isMobile ? imageMobile?.childImageSharp?.fluid : image?.childImageSharp?.fluid}
           title={imageTitle}
           alt={imageAltText}
         />

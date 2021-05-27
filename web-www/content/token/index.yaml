@@ -28,7 +28,8 @@ infoSection:
 
 
   signUpText: To receive official announcements about public token sale events, please <a>sign up</a>.
-  image: ../../static/media/token-bird-berries.png
+  image: ../../static/media/token-bird.png
+  imageMobile: ../../static/media/bird2.jpg
   imageAltText: Bird
   imageTitle: Bird
 tokenPool:

@@ -26,7 +26,6 @@ const Story: React.FC = () => {
 
   const submit = (values: StoryValues): Promise<void> => {
     // TODO: functionality:
-    console.log('values', values);
     return Promise.resolve();
   };
 

@@ -149,6 +149,9 @@ const StoryForm: React.FC<StoryFormProps> = ({ submit, exampleProjectUrl }) => {
       landStory: 'Please fill in the story of the land',
       landStewardStory: 'Please fill in the story of the land stewards',
       landStewardStoryTitle: 'Please fill in a title for the land steward story',
+      quote: 'You must fill in all the quote fields, or none',
+      quoteSourceName: 'You must fill in all the quote fields, or none',
+      quoteSourceTitle: 'You must fill in all the quote fields, or none',
     };
 
     return errorMessages[fieldName] || requiredMessage;
@@ -156,12 +159,19 @@ const StoryForm: React.FC<StoryFormProps> = ({ submit, exampleProjectUrl }) => {
 
   const validate = (values: StoryValues): Partial<StoryValues> => {
     const errors: Partial<StoryValues> = {};
-    const errorFields: Array<keyof StoryValues> = ['landStory', 'landStewardStory', 'landStewardStoryTitle'];
-    errorFields.forEach(errorField => {
-      if (!values[errorField]) {
-        errors[errorField] = getRequiredMessage(errorField);
+    let requiredFields: Array<keyof StoryValues> = ['landStory', 'landStewardStory', 'landStewardStoryTitle'];
+    const quoteFields: Array<keyof StoryValues> = ['quote', 'quoteSourceName', 'quoteSourceTitle'];
+
+    if (quoteFields.some(quoteField => !!values[quoteField])) {
+      requiredFields = requiredFields.concat(quoteFields);
+    }
+
+    requiredFields.forEach(requiredField => {
+      if (!values[requiredField]) {
+        errors[requiredField] = getRequiredMessage(requiredField);
       }
     });
+
     return errors;
   };
 

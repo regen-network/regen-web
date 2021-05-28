@@ -76,7 +76,13 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
   );
 
   const menuItems: HeaderMenuItem[] = [
-    { title: 'Mainnet', href: '/mainnet/' },
+    {
+      title: 'Blockchain',
+      dropdownItems: [
+        { title: 'Mainnet', href: '/mainnet/' },
+        { title: 'Token', href: '/token/' },
+      ],
+    },
     { title: 'Buyers', href: '/buyers/' },
     { title: 'Land Stewards', href: '/land-stewards/' },
     {

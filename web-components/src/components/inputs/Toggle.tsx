@@ -23,16 +23,17 @@ interface ToggleProps extends FieldProps {
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    border: `1px solid ${theme.palette.grey[100]}`,
+    border: `1px solid ${theme.palette.info.light}`,
     display: 'flex',
     flexDirection: 'column',
     borderRadius: '5px',
-    margin: theme.spacing(4, 0, 0),
+    margin: theme.spacing(3.25, 0, 0),
+    transition: '300ms ease-in-out;',
     [theme.breakpoints.up('sm')]: {
-      padding: theme.spacing(4),
+      padding: theme.spacing(3.5),
     },
     [theme.breakpoints.down('xs')]: {
-      padding: theme.spacing(2),
+      padding: theme.spacing(3.25),
     },
   },
   top: {
@@ -78,6 +79,16 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   formControlLabelRoot: {
     alignItems: 'flex-start',
+    width: '100%',
+    '& .MuiFormControlLabel-label': {
+      marginLeft: theme.spacing(1),
+      [theme.breakpoints.up('sm')]: {
+        fontSize: theme.spacing(4.5),
+      },
+      [theme.breakpoints.down('xs')]: {
+        fontSize: theme.spacing(4),
+      },
+    },
   },
   formControlLabelWithDescription: {
     [theme.breakpoints.up('sm')]: {
@@ -111,7 +122,7 @@ const Toggle: React.FC<ToggleProps> = ({
         <FormControlLabel
           control={
             type === 'checkbox' ? (
-              <Checkbox className={classes.checkbox} field={field} form={form} meta={meta} />
+              <Checkbox className={classes.checkbox} field={field} form={form} meta={meta} type="checkbox" />
             ) : (
               <Radio className={classes.radio} />
             )

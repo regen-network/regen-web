@@ -212,7 +212,7 @@ export default function ProjectTop({
   const apiServerUrl = process.env.REACT_APP_API_URI;
 
   return (
-    <Section className={classes.section}>
+    <Section classes={{ root: classes.section }}>
       <Grid container>
         <Grid item xs={12} md={8} className={classes.rightGrid}>
           <Title variant="h1">{project.name}</Title>

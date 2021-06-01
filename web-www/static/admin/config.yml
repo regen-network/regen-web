@@ -665,6 +665,7 @@ collections:
                   - {label: "url", name: url, widget: string}
                   - {label: "date", name: date, widget: string}
                   - {label: "Is Mainnet", name: isMainnet, widget: boolean}
+                  - {label: "Is Token Sale", name: isTokenSale, widget: boolean}
       - label: "Press Kit"
         name: "press-kit"
         file: "web-www/content/press-kit/index.yaml"
@@ -965,6 +966,79 @@ collections:
                   - {label: Description, name: description, widget: string}
                   - {label: Icon, name: icon, widget: image}
                   - {label: "Git link", name: gitLink, widget: string}
+      - label: "Token"
+        name: token
+        file: "web-www/content/token/index.yaml"
+        fields:
+          - label: "SEO"
+            name: seo
+            widget: object
+            fields:
+              - {label: "Title", name: title, widget: string}
+              - {label: "Description", name: description, widget: string}
+          - label: "Top Section"
+            name: topSection
+            widget: object
+            fields:
+              - {label: "Header", name: header, widget: string}
+              - {label: "Body", name: body, widget: string}
+          - label: "Token Economics"
+            name: tokenEconomics
+            widget: object
+            fields:
+              - {label: "Title", name: title, widget: string}
+              - {label: "Body", name: body, widget: markdown}
+          - label: "Info Section"
+            name: infoSection
+            widget: object
+            fields:
+              - {label: "Title", name: title, widget: string}
+              - {label: "Subtitle", name: subtitle, widget: string}
+              - {label: "Body", name: body, widget: markdown}
+              - {label: "Signup Text", name: signupText, widget: string}
+              - {label: "Image", name: image, widget: image}
+              - {label: "Image Alt Text", name: imageAltText, widget: string}
+              - {label: "Image Title", name: imageTitle, widget: string}
+          - label: "Token Pool"
+            name: tokenPool
+            widget: object
+            fields:
+              - {label: "Title", name: title, widget: string}
+              - {label: "Subtitle", name: subtitle, widget: string}
+          - label: "Unlock Schedule"
+            name: unlockSchedule
+            widget: object
+            fields:
+              - {label: "Title", name: title, widget: string}
+              - {label: "Subtitle", name: subtitle, widget: string}
+          - label: "Staking"
+            name: staking
+            widget: object
+            fields:
+              - {label: "Title", name: title, widget: string}
+              - {label: "Body", name: body, widget: markdown}
+              - {label: "Button Text", name: buttonText, widget: string}
+              - {label: "Button URL", name: buttonUrl, widget: string}
+          - label: "Block Explorer Section"
+            name: blockExplorerSection
+            widget: object
+            fields:
+              - {label: "Header", name: header, widget: string}
+              - {label: "Description", name: description, widget: string}
+              - {label: "Button Text", name: buttonText, widget: string}
+              - {label: "Button URL", name: buttonUrl, widget: string}
+          - label: "Connect Section"
+            name: connectSection
+            widget: object
+            fields:
+              - {label: "Header", name: header, widget: string}
+          - label: "Newsletter Section"
+            name: newsletterSection
+            widget: object
+            fields:
+              - {label: "Header", name: header, widget: string}
+              - {label: "Button Text", name: buttonText, widget: string}
+              - {label: "Input Text", name: inputText, widget: string}
   - label: "Case Studies content"
     name: "case-study-items"
     media_folder: '../../static/media'

@@ -48,7 +48,7 @@ function arrowGenerator(): any {
   };
 }
 
-const CustomTooltip: any = withStyles((theme: Theme) => ({
+const CustomTooltip = withStyles((theme: Theme) => ({
   popper: {
     [theme.breakpoints.down('xs')]: {
       width: '90%',

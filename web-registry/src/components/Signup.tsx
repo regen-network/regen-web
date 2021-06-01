@@ -7,7 +7,6 @@ import { useAuth0 } from '@auth0/auth0-react';
 
 import LoginForm, { Values } from 'web-components/lib/components/form/LoginForm';
 import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
-import getRegistryUrl from '../lib/registryUrl';
 import auth0 from '../auth0';
 import getApiUri from '../lib/apiUri';
 
@@ -77,7 +76,7 @@ export default function Signup(): JSX.Element {
       <LoginForm
         submit={submit}
         termsLink="/terms-service/"
-        loginFromSignup={() => loginWithRedirect({ redirectUri: `${getRegistryUrl('/user-profile')}` })}
+        loginFromSignup={() => loginWithRedirect({ redirectUri: `${window.location.origin}/user-profile` })}
         privacyLink="/privacy-policy/"
       />
     </OnBoardingSection>

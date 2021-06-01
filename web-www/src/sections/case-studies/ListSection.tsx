@@ -62,8 +62,7 @@ const ListSection = (): JSX.Element => {
         const nodes = data.list.nodes;
         return (
           <Section
-            className={classes.section}
-            titleClassName={classes.title}
+            classes={{ root: classes.section, title: classes.title }}
             title={text.header}
             titleAlign="left"
             titleVariant="h3"

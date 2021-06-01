@@ -4,7 +4,7 @@ import Typography, { TypographyProps } from '@material-ui/core/Typography';
 import { getFontSize, FontSizes } from '../../theme/sizing';
 import clsx from 'clsx';
 
-interface DescriptionProps {
+export interface DescriptionProps {
   children?: any;
   fontSize?: FontSizes;
   className?: string;

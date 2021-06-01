@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles, Theme, TypographyVariant } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import clsx from 'clsx';
 import BackgroundImage from 'gatsby-background-image';
@@ -10,7 +10,7 @@ import Title from 'web-components/lib/components/title';
 interface Props {
   className?: string;
   titleClassName?: string;
-  titleVariant?: Variant;
+  titleVariant?: TypographyVariant;
   body?: React.ReactNode;
   header?: React.ReactNode;
   linearGradient?: string;

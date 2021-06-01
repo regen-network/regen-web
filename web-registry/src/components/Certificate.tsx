@@ -5,7 +5,6 @@ import { loader } from 'graphql.macro';
 import { useQuery } from '@apollo/client';
 import ReactToPrint from 'react-to-print';
 
-import getRegistryUrl from '../lib/registryUrl';
 import Certificate from 'web-components/lib/components/certificate';
 import Title from 'web-components/lib/components/title';
 import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';
@@ -246,7 +245,7 @@ export default function CertificatePage(): JSX.Element {
 
       projects.push(
         <ProjectCard
-          href={getRegistryUrl(`/projects/${project.handle}`)}
+          href={`/projects/${project.handle}`}
           name={project.name}
           imgSrc={project.image}
           place={project.addressByAddressId.feature ? project.addressByAddressId.feature.place_name : ''}
@@ -318,7 +317,7 @@ export default function CertificatePage(): JSX.Element {
       </Grid>
       {data && data.allPurchases && data.allPurchases.nodes && (
         <div className={classes.projects}>
-          <Section titleClassName={classes.projectsTitle} title="Projects Supported">
+          <Section classes={{ title: classes.projectsTitle }} title="Projects Supported">
             <Grid container spacing={5}>
               {projects.map((project, i) => (
                 <Grid item xs={12} sm={4} key={i}>

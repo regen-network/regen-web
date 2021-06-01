@@ -1,5 +1,5 @@
 import React from 'react';
-import { Theme, makeStyles } from '@material-ui/core/styles';
+import { Theme, makeStyles, TypographyVariant } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import clsx from 'clsx';
 import { FluidObject } from 'gatsby-image';
@@ -103,6 +103,7 @@ interface ConnectSectionProps {
   icons: IconLabelProps[];
   itemClassName?: string;
   titleClassName?: string;
+  titleVariant?: TypographyVariant;
   className?: string;
   background: {
     childImageSharp: {
@@ -130,6 +131,7 @@ const ConnectSection = ({
   background,
   icons,
   itemClassName,
+  titleVariant = 'h2',
 }: ConnectSectionProps): JSX.Element => {
   const classes = useStyles({});
   return (
@@ -140,7 +142,7 @@ const ConnectSection = ({
       imageData={background.childImageSharp.fluid}
       header={header}
       titleClassName={clsx(titleClassName, classes.title)}
-      titleVariant="h2"
+      titleVariant={titleVariant}
     >
       <Grid container spacing={4} justify="center">
         {icons.map((item, i) => (

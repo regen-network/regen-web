@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 import { FieldProps } from 'formik';
 import MapboxClient from '@mapbox/mapbox-sdk';
-import mbxGeocoder from '@mapbox/mapbox-sdk/services/geocoding';
+import mbxGeocoder, { GeocodeQueryType, GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import FieldFormControl from './FieldFormControl';
 import Input from './Input';
 
@@ -21,7 +21,7 @@ interface Props extends FieldProps {
   label?: string;
   optional?: boolean;
   placeholder?: string;
-  types?: string[];
+  types?: GeocodeQueryType[];
   token: string;
   transformValue?: (v: any) => any;
   triggerOnChange?: (v: any) => Promise<void>;
@@ -41,7 +41,7 @@ const LocationField: React.FC<Props> = ({
 }) => {
   const baseClient = MapboxClient({ accessToken });
   const geocoderService = mbxGeocoder(baseClient);
-  const [results, setResults] = useState<any[]>([]);
+  const [results, setResults] = useState<GeocodeFeature[]>([]);
   const [showResults, setShowResults] = useState(true);
   const { form, field } = fieldProps;
 
@@ -70,10 +70,11 @@ const LocationField: React.FC<Props> = ({
                 geocoderService
                   .forwardGeocode({
                     types,
+                    mode: 'mapbox.places',
                     query: value,
                   })
                   .send()
-                  .then((res: any) => {
+                  .then(res => {
                     setResults(res.body.features);
                     setShowResults(true);
                   });

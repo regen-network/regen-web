@@ -5,8 +5,8 @@ import { Theme, makeStyles, FormHelperText, Typography, FormControl } from '@mat
 import ControlledFormLabel from '../form/ControlledFormLabel';
 
 interface RenderProps {
-  handleChange: (value: string) => void;
-  handleBlur: (value: string) => void;
+  handleChange: (value: any) => void;
+  handleBlur: (value: any) => void;
 }
 
 interface Props extends FieldProps {

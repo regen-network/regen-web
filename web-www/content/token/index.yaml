@@ -1,13 +1,17 @@
 seo:
   title: REGEN Token
-  description: REGEN token is a utility token powering an application specific blockchain for global climate finance.
+  description: REGEN token is a utility token powering an application specific
+    blockchain for global climate finance.
 topSection:
   header: REGEN Token
-  body: REGEN token is a utility token powering an application specific blockchain for global climate finance.
+  body: REGEN token is a utility token powering an application specific blockchain
+    for global climate finance.
 tokenEconomics:
   title: REGEN Token Economics
   body: >-
-    md//Regen Network is a sovereign, proof-of-stake blockchain built on the Cosmos SDK. REGEN token is a utility, governance, security and staking token.
+    md//Regen Network is a sovereign, proof-of-stake blockchain built on the
+    Cosmos SDK. REGEN token is a utility, governance, security and staking
+    token.
 
 
     REGEN token is designed to ensure utility for ecological data and outcome markets. Regen Network is governed as a public blockchain by token holders following the model outlined and implemented by Cosmos.
@@ -23,14 +27,18 @@ tokenEconomics:
 infoSection:
   title: Coming Soon - Public Sale on Gravity DEX & Osmosis
   subtitle: "Release date: May 2021"
-  body: >-
-    md//It is expected that the REGEN token will be available for public sale on the <a href="https://gravitydex.io/about/" target="_blank">Gravity Dex</a> and <a href="https://medium.com/osmosis/vision-for-osmosis-e68e796ff1c2" target="_blank">Osmosis</a> within the next 60 days. Gravity Dex is an advanced interchain decentralized exchange on Cosmos Hub that enables swaps and pools of digital assets between any two blockchains within the Cosmos ecosystem. Osmosis is an advanced AMM protocol built using the Cosmos SDK that will allow developers to design, build, and deploy their own customized AMMs. 
-
-
-  signUpText: To receive official announcements about public token sale events, please <a>sign up</a>.
+  body: Early Regen Network community members are collaborating with the Osmosis
+    team to make a liquidity bootstrapping pool on the Osmosis decentralized
+    exchange (dex) in the next 60 days. This will be the first Cosmos ecosystem
+    dex offering. The liquidity bootstrapping pool will follow the reverse dutch
+    auction mechanism that will support fair & sustainable price discovery for
+    our community.
+  signUpText: To receive official announcements about public token sale events,
+    please <a>sign up</a>.
   image: ../../static/media/token-bird.jpg
   imageAltText: Bird
   imageTitle: Bird
+  signupText: Sign Up
 tokenPool:
   title: REGEN total token pool
   subtitle: The total supply at mainnet launch was 100 million tokens.
@@ -42,7 +50,12 @@ unlockSchedule:
 staking:
   title: Staking
   body: >-
-    md//Staking/delegating is a critical function to secure Regen Ledger, participate in community governance and support the growth and development of Regen Network. Staking also generates rewards for delegators. Delegating to validators by staking your REGEN tokens helps cover validator infrastructure costs, and will generate between 7% and 20% annual percentage rate (APR) on your staked tokens.
+    md//Staking/delegating is a critical function to secure Regen Ledger,
+    participate in community governance and support the growth and development
+    of Regen Network. Staking also generates rewards for delegators. Delegating
+    to validators by staking your REGEN tokens helps cover validator
+    infrastructure costs, and will generate between 7% and 20% annual percentage
+    rate (APR) on your staked tokens.
 
 
     To learn more about staking REGEN tokens, please <a href="#" target="_blank">click here</a>.
@@ -50,7 +63,8 @@ staking:
   buttonUrl: /faq/token
 blockExplorerSection:
   header: Block Explorer
-  description: Explore mainnet blocks, transactions and validators live on the Aneka block explorer!
+  description: Explore mainnet blocks, transactions and validators live on the
+    Aneka block explorer!
   buttonText: aneka block explorer
   buttonUrl: https://regen.aneka.io
 connectSection:
@@ -59,4 +73,3 @@ newsletterSection:
   header: Stay Updated
   buttonText: subscribe
   inputText: Enter your email
-

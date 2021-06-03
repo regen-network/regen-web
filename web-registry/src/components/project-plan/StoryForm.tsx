@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 import { Formik, Form, Field } from 'formik';
 import { Link } from 'react-router-dom';
+import * as Yup from 'yup';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import OnboardingFooter from 'web-components/lib/components/fixed-footer/OnboardingFooter';
-import { requiredMessage } from 'web-components/lib/components/inputs/validation';
 import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
 import Description from 'web-components/lib/components/description';
 import Title from 'web-components/lib/components/title';
@@ -21,14 +21,17 @@ export interface StoryValues {
   landStory: string;
   landStewardStory: string;
   landStewardStoryTitle: string;
-  quote: string;
-  quoteSourceName: string;
-  quoteSourceTitle: string;
+  quote: Quote;
 }
 
 interface Example {
   type: string;
   text: string;
+}
+interface Quote {
+  quote: string;
+  name: string;
+  jobTitle: string;
 }
 
 interface FieldNameExamples {
@@ -88,6 +91,29 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
+const quoteRequiredMessage = 'You must fill in all the quote fields, or none';
+
+const ValidationSchema = Yup.object().shape({
+  landStory: Yup.string().required('Please fill in the story of the land'),
+  landStewardStory: Yup.string().required('Please fill in the story of the land stewards'),
+  landStewardStoryTitle: Yup.string().required('Please fill in a title for the land steward story'),
+  quote: Yup.object().shape({
+    quote: Yup.string().when(['name', 'jobTitle'], {
+        is: (name: string, jobTitle: string) => !!name || !!jobTitle,
+        then: Yup.string().required(quoteRequiredMessage) 
+      }),
+    name: Yup.string().when(['quote', 'jobTitle'], {
+        is: (quote: string, jobTitle: string) => !!quote || !!jobTitle,
+        then: Yup.string().required(quoteRequiredMessage) 
+      }),
+    jobTitle: Yup.string().when(['quote', 'name'], {
+        is: (quote: string, name: string) => !!quote || !!name,
+        then: Yup.string().required(quoteRequiredMessage) 
+      }),
+  }, [['quote', 'name'], ['quote', 'jobTitle'], ['name', 'jobTitle']])
+});
+
+
 const StoryForm: React.FC<StoryFormProps> = ({ submit, exampleProjectUrl }) => {
   const styles = useStyles();
   const [modalContent, setModalContent] = useState<JSX.Element | null>(null);
@@ -144,37 +170,6 @@ const StoryForm: React.FC<StoryFormProps> = ({ submit, exampleProjectUrl }) => {
     setModalContent(null);
   };
 
-  const getRequiredMessage = (fieldName: keyof StoryValues): string => {
-    const errorMessages: Partial<StoryValues> = {
-      landStory: 'Please fill in the story of the land',
-      landStewardStory: 'Please fill in the story of the land stewards',
-      landStewardStoryTitle: 'Please fill in a title for the land steward story',
-      quote: 'You must fill in all the quote fields, or none',
-      quoteSourceName: 'You must fill in all the quote fields, or none',
-      quoteSourceTitle: 'You must fill in all the quote fields, or none',
-    };
-
-    return errorMessages[fieldName] || requiredMessage;
-  };
-
-  const validate = (values: StoryValues): Partial<StoryValues> => {
-    const errors: Partial<StoryValues> = {};
-    let requiredFields: Array<keyof StoryValues> = ['landStory', 'landStewardStory', 'landStewardStoryTitle'];
-    const quoteFields: Array<keyof StoryValues> = ['quote', 'quoteSourceName', 'quoteSourceTitle'];
-
-    if (quoteFields.some(quoteField => !!values[quoteField])) {
-      requiredFields = requiredFields.concat(quoteFields);
-    }
-
-    requiredFields.forEach(requiredField => {
-      if (!values[requiredField]) {
-        errors[requiredField] = getRequiredMessage(requiredField);
-      }
-    });
-
-    return errors;
-  };
-
   return (
     <>
       <Formik
@@ -182,11 +177,13 @@ const StoryForm: React.FC<StoryFormProps> = ({ submit, exampleProjectUrl }) => {
           landStory: '',
           landStewardStory: '',
           landStewardStoryTitle: '',
-          quote: '',
-          quoteSourceName: '',
-          quoteSourceTitle: '',
+          quote: {
+            quote: '',
+            name: '',
+            jobTitle: '',
+          },
         }}
-        validate={validate}
+        validationSchema={ValidationSchema}
         onSubmit={async (values, { setSubmitting }) => {
           setSubmitting(true);
           try {
@@ -199,7 +196,7 @@ const StoryForm: React.FC<StoryFormProps> = ({ submit, exampleProjectUrl }) => {
       >
         {({ submitForm, values }) => {
           return (
-            <Form>
+            <Form translate="yes">
               <OnBoardingCard className={styles.storyCard}>
                 <Field
                   className={styles.field}
@@ -251,7 +248,7 @@ const StoryForm: React.FC<StoryFormProps> = ({ submit, exampleProjectUrl }) => {
                   label="Quote from land steward or other important stakeholder"
                   description="Choose an inspiring quote that helps others understand why this project is important."
                   onExampleClick={() => showExample('quote')}
-                  name="quote"
+                  name="quote.quote"
                   rows={16}
                   multiline
                 />
@@ -259,13 +256,13 @@ const StoryForm: React.FC<StoryFormProps> = ({ submit, exampleProjectUrl }) => {
                   className={styles.field}
                   component={ControlledTextField}
                   label="Name of person quoted"
-                  name="quoteSourceName"
+                  name="quote.name"
                 />
                 <Field
                   className={styles.field}
                   component={ControlledTextField}
                   label="Title of person quoted"
-                  name="quoteSourceTitle"
+                  name="quote.jobTitle"
                 />
               </OnBoardingCard>
 

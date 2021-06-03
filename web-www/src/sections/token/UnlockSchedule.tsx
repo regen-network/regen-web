@@ -10,6 +10,9 @@ import { TokenDescription as Description } from './Description';
 const useStyles = makeStyles<Theme>((theme: Theme) => ({
   root: {
     display: 'flex',
+    [theme.breakpoints.down('xs')]: {
+      paddingBottom: theme.spacing(12),
+    },
   },
   center: {
     display: 'flex',

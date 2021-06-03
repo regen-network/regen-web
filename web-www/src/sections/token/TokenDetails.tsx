@@ -5,7 +5,6 @@ import { FluidObject } from 'gatsby-image';
 import { Theme, makeStyles } from '@material-ui/core';
 
 import TokenPool from './TokenPool';
-import UnlockSchedule from './UnlockSchedule';
 
 type QueryData = {
   bg: {
@@ -20,9 +19,6 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
     marginTop: theme.spacing(24),
     [theme.breakpoints.up('sm')]: {
       paddingBottom: theme.spacing(20),
-    },
-    [theme.breakpoints.down('xs')]: {
-      paddingBottom: theme.spacing(12),
     },
   },
 }));
@@ -45,7 +41,6 @@ const TokenEconomics = (): JSX.Element => {
   return (
     <BackgroundImage fluid={topo} className={styles.root}>
       <TokenPool />
-      {/* <UnlockSchedule /> */}
     </BackgroundImage>
   );
 };

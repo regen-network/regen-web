@@ -16,7 +16,6 @@ type Props = {
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    // paddingTop: theme.spacing(8.75),
     [theme.breakpoints.down('sm')]: {
       flexWrap: 'nowrap',
       overflow: 'auto',

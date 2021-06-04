@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import CardMedia from '@material-ui/core/CardMedia';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 import Section from 'web-components/lib/components/section';
+import Modal from 'web-components/lib/components/modal';
 import { HeroTitle, HeroAction } from '../components/molecules';
 import { ProjectCards, CreditClassCards } from '../components/organisms';
 import { projects, creditClasses, BasicCreditClass } from '../mocks';
@@ -30,9 +31,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       marginBottom: theme.spacing(8),
     },
   },
-  // creditClassCards: {
-  //   marginTop: theme.spacing(4.75),
-  // },
   projectCards: {
     [theme.breakpoints.down('sm')]: {
       width: '100vw',
@@ -45,9 +43,14 @@ const useStyles = makeStyles((theme: Theme) => ({
   bottomSection: {
     maxWidth: theme.spacing(175),
   },
+  modal: {
+    padding: 0,
+    overflow: 'hidden',
+  },
 }));
 
 const Home: React.FC = () => {
+  const [showModal, setShowModal] = useState(false);
   const styles = useStyles();
   const theme = useTheme();
 
@@ -79,7 +82,6 @@ const Home: React.FC = () => {
       >
         <CreditClassCards
           btnText="Learn More"
-          // classes={{ root: styles.creditClassCards }}
           justify={isMobile ? 'center' : 'flex-start'}
           creditClasses={[creditClasses[0]]}
           // creditClasses={creditClasses} // TODO: Right now we are only displaying carbonPlus grasslands, but eventually we should display all classes
@@ -92,8 +94,12 @@ const Home: React.FC = () => {
         img={horsesImg}
         title="Want to get paid for your ecological practices?"
         actionTxt="Register a Project"
-        action={() => console.log('TODO: Register a project')}
+        action={() => setShowModal(true)}
       />
+
+      <Modal open={showModal} onClose={() => setShowModal(false)} className={styles.modal}>
+        <iframe title="airtable-signup-form" src="https://airtable.com/embed/shrnnbymyofPB75WQ" />
+      </Modal>
     </>
   );
 };

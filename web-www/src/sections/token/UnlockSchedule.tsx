@@ -10,9 +10,6 @@ import { TokenDescription as Description } from './Description';
 const useStyles = makeStyles<Theme>((theme: Theme) => ({
   root: {
     display: 'flex',
-    [theme.breakpoints.up('sm')]: {
-      paddingBottom: theme.spacing(20),
-    },
     [theme.breakpoints.down('xs')]: {
       paddingBottom: theme.spacing(12),
     },
@@ -135,7 +132,7 @@ const UnlockSchedule = (): JSX.Element => {
             height={300}
             barWidth={14.5}
             tickFormatX={(t: string) => {
-              if (t && t.includes('Jan')) return t.replace('-Jan', '');
+              if (t && t.includes('January')) return t.replace('January', '');
               return '';
             }}
             labels={data => [data.datum.date, `${formatter.format(Math.floor(data.datum.tokens))} tokens`]}

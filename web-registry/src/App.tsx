@@ -31,6 +31,7 @@ import {
   Projects,
   Seller,
   Signup,
+  Story,
   UserProfile,
   VerifyEmail,
 } from './pages';

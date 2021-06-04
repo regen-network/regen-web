@@ -45,4 +45,4 @@ const Story: React.FC = () => {
   );
 };
 
-export default Story;
+export { Story };

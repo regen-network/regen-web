@@ -2,11 +2,25 @@ import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 import { graphql, StaticQuery } from 'gatsby';
 import BackgroundImage from 'gatsby-background-image';
+import clsx from 'clsx';
+
 import Title from 'web-components/lib/components/title';
 import NewsletterForm from 'web-components/lib/components/form/NewsletterForm';
 
 interface Props {
   image?: object;
+  altContent?: Content;
+  classes?: {
+    root?: string;
+    title?: string;
+  };
+}
+
+interface Content {
+  header?: string;
+  description?: string;
+  buttonText?: string;
+  inputText?: string;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -43,8 +57,8 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const EmailSubmitSection = ({ image }: Props): JSX.Element => {
-  const classes = useStyles({});
+const EmailSubmitSection = ({ image, altContent, classes }: Props): JSX.Element => {
+  const styles = useStyles({});
   return (
     <StaticQuery
       query={graphql`
@@ -66,17 +80,22 @@ const EmailSubmitSection = ({ image }: Props): JSX.Element => {
       `}
       render={data => {
         const imageData = image || data.desktop.childImageSharp.fluid;
-        const content = data.text.newsletterSection;
+        const content: Content = altContent || data.text.newsletterSection;
+
         return (
           <BackgroundImage Tag="section" fluid={imageData} backgroundColor={`#040e18`}>
-            <div className={classes.root}>
-              <Title className={classes.title} variant="h2">
-                {content.header}
+            <div className={clsx(styles.root, classes?.root)} id="newsletter-signup">
+              <Title className={clsx(styles.title, classes?.title)} variant="h2">
+                {content?.header}
               </Title>
-              <Title variant="h6" className={classes.description}>
-                {content.description}
+              <Title variant="h6" className={styles.description}>
+                {content?.description}
               </Title>
-              <NewsletterForm apiUri={process.env.GATSBY_API_URI} />
+              <NewsletterForm
+                apiUri={process.env.GATSBY_API_URI}
+                submitLabel={content?.buttonText}
+                inputPlaceholder={content?.inputText}
+              />
             </div>
           </BackgroundImage>
         );

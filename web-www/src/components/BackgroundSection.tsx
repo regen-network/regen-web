@@ -1,8 +1,6 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, TypographyVariant } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import { Variant } from '@material-ui/core/styles/createTypography';
-import CardMedia from '@material-ui/core/CardMedia';
 import clsx from 'clsx';
 import BackgroundImage from 'gatsby-background-image';
 import Box from '@material-ui/core/Box';
@@ -13,7 +11,7 @@ import { Theme } from 'web-components/lib/theme/muiTheme';
 interface Props {
   className?: string;
   titleClassName?: string;
-  titleVariant?: Variant;
+  titleVariant?: TypographyVariant;
   body?: React.ReactNode;
   header?: React.ReactNode;
   linearGradient?: string;

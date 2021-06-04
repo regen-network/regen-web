@@ -18,6 +18,6 @@ export * from './ProjectPlans';
 export * from './Projects';
 export * from './Seller';
 export * from './Signup';
-export * from '../components/organisms/UserCredits';
+export * from './Story';
 export * from './UserProfile';
 export * from './VerifyEmail';

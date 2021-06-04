@@ -116,7 +116,7 @@ const App: React.FC = (): JSX.Element => {
           />
           <ProtectedRoute path="/user-profile" component={UserProfile} />
           <Route
-            path="/project-plans"
+            path="/project-pages"
             render={({ match: { path } }) => (
               <>
                 <ProtectedRoute path={path} exact component={ProjectPlans} />
@@ -132,6 +132,7 @@ const App: React.FC = (): JSX.Element => {
                     </>
                   )}
                 />
+                <ProtectedRoute path={`${path}/story`} component={Story} />
               </>
             )}
           />

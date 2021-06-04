@@ -3,7 +3,7 @@ import { makeStyles, Theme, useMediaQuery, useTheme } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import Slider from 'react-slick';
 import PlayIcon from '../icons/PlayIcon';
-import Image, { OptimizeImageProps } from '../image';
+import { Image, OptimizeImageProps } from '../image';
 import { getOptimizedImageSrc } from '../../utils/optimizedImageSrc';
 
 export interface Media {

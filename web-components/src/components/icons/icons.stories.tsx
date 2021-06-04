@@ -45,6 +45,10 @@ import TrustDocumentIcon from 'web-components/lib/components/icons/TrustDocument
 import AccountabilityIcon from 'web-components/lib/components/icons/AccountabilityIcon';
 import ReviewIcon from 'web-components/lib/components/icons/ReviewIcon';
 import InfoIconOutlined from 'web-components/lib/components/icons/InfoIconOutlined';
+import CoBenefitsIcon from 'web-components/lib/components/icons/CoBenefitsIcon';
+import CountingIcon from 'web-components/lib/components/icons/CountingIcon';
+import SatelliteIcon from 'web-components/lib/components/icons/SatelliteIcon';
+import SoilSampleIcon from 'web-components/lib/components/icons/SoilSampleIcon';
 
 import { withKnobs, text } from '@storybook/addon-knobs';
 
@@ -147,3 +151,11 @@ export const shadedCreditsIcon = (): JSX.Element => <ShadedCreditsIcon />;
 export const accountabilityIcon = (): JSX.Element => <AccountabilityIcon />;
 
 export const reviewIcon = (): JSX.Element => <ReviewIcon />;
+
+export const coBenefitsIcon = (): JSX.Element => <CoBenefitsIcon />;
+
+export const countingIcon = (): JSX.Element => <CountingIcon />;
+
+export const satelliteIcon = (): JSX.Element => <SatelliteIcon />;
+
+export const soilSampleIcon = (): JSX.Element => <SoilSampleIcon />;

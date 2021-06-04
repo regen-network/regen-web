@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import { Link } from '@material-ui/core';
-import clsx from 'clsx';
+import cx from 'clsx';
 
 import Section from './index';
 
@@ -10,6 +10,12 @@ interface OnBoardingSectionProps {
   formContainer?: boolean; // set max width and center
   linkText?: string;
   onLinkClick?: () => void;
+  classes?: {
+    root?: string;
+    title?: string;
+    titleWrap?: string;
+    formWrap?: string;
+  };
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -68,26 +74,31 @@ const OnBoardingSection: React.FC<OnBoardingSectionProps> = ({
   formContainer = false,
   linkText,
   onLinkClick,
+  classes,
   ...p
 }) => {
-  const classes = useStyles();
-  const { root, title, titleWrap } = classes;
+  const styles = useStyles();
+  const { root, title, titleWrap } = styles;
 
   return (
     <Section
-      classes={{ root, title, titleWrap }}
+      classes={{
+        root: cx(root, !!classes && classes.root),
+        title: cx(title, !!classes && classes.title),
+        titleWrap: cx(titleWrap, !!classes && classes.titleWrap),
+      }}
       title={p.title}
       titleAlign={onLinkClick ? 'left' : 'center'}
       titleVariant="h3"
       topRight={
         onLinkClick && (
-          <Link className={classes.link} onClick={onLinkClick}>
+          <Link className={styles.link} onClick={onLinkClick}>
             {linkText}
           </Link>
         )
       }
     >
-      <div className={clsx(formContainer && classes.formWrap)}>{p.children}</div>
+      <div className={cx(formContainer && styles.formWrap, !!classes && classes.formWrap)}>{p.children}</div>
     </Section>
   );
 };

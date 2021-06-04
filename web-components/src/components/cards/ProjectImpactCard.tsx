@@ -20,7 +20,6 @@ interface StyleProps {
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   root: {
-    minWidth: theme.spacing(73),
     [theme.breakpoints.up('sm')]: {
       height: theme.spacing(97.75), // TODO: temporary shorter height until extra content is added. Should be theme.spacing(110.25)
     },

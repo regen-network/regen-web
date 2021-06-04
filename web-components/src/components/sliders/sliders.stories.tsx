@@ -37,10 +37,12 @@ const assets: Media[] = [
   {
     src: './andover.jpg',
     thumbnail: './andover.jpg',
+    type: 'image',
   },
   {
     src: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
     thumbnail: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/BigBuckBunny.jpg',
+    type: 'video',
   },
 ];
 

@@ -9,7 +9,7 @@ import ReviewIcon from 'web-components/lib/components/icons/ReviewIcon';
 import ShadedCreditsIcon from 'web-components/lib/components/icons/ShadedCreditsIcon';
 import TrustDocumentIcon from 'web-components/lib/components/icons/TrustDocumentIcon';
 import TrustIcon from 'web-components/lib/components/icons/TrustIcon';
-import StepCard, { ProjectStep } from 'web-components/lib/components/cards/StepCard';
+import { StepCard, Step } from 'web-components/lib/components/cards/StepCard';
 import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
 import { QuestionItem } from 'web-components/lib/components/faq/Question';
 
@@ -83,7 +83,7 @@ const questionItems: QuestionItem[] = [
   },
 ];
 
-const steps: ProjectStep[] = [
+const steps: Step[] = [
   {
     stepNumber: 1,
     title: 'Fill out a project plan',

@@ -123,6 +123,9 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingLeft: props.padding || theme.spacing(4),
       paddingRight: props.padding || theme.spacing(4),
+      '&:last-child': {
+        paddingRight: 0,
+      },
     },
   }),
 }));

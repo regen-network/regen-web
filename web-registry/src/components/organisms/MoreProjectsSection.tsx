@@ -15,16 +15,26 @@ const useStyles = makeStyles((theme: Theme) => ({
   background: {
     paddingBottom: theme.spacing(20),
   },
+  title: {
+    marginBottom: theme.spacing(8.75),
+    [theme.breakpoints.down('xs')]: {
+      marginBottom: theme.spacing(8),
+    },
+  },
 }));
 
 const MoreProjectsSection = ({ projects }: MoreProjectsProps): JSX.Element => {
-  const classes = useStyles();
+  const styles = useStyles();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
 
   return (
-    <div className={classes.background}>
-      <Section title="More Projects" titleAlign={isMobile ? 'left' : 'center'}>
+    <div className={styles.background}>
+      <Section
+        title="More Projects"
+        titleAlign={isMobile ? 'left' : 'center'}
+        classes={{ title: styles.title }}
+      >
         <LazyLoad offset={300}>
           <ProjectCards projects={projects} />
         </LazyLoad>

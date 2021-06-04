@@ -422,7 +422,11 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
         </div>
       )}
 
-      {otherProjects.length > 0 && <MoreProjects projects={otherProjects} />}
+      {otherProjects.length > 0 && (
+        <div className="project-background">
+          <MoreProjects projects={otherProjects} />
+        </div>
+      )}
 
       {project.creditPrice && <BuyFooter onClick={handleOpen} creditPrice={project.creditPrice} />}
       {project.creditPrice && project.stripePrice && (

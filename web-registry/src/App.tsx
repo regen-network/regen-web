@@ -41,6 +41,7 @@ import ProjectPlanList from './components/project-plan/ProjectPlanList';
 import BasicInfo from './components/project-plan/BasicInfo';
 import { Eligibility } from './components/project-plan/eligibility';
 import { Additionality } from './components/project-plan/eligibility/additionality';
+import Story from './components/project-plan/Story';
 
 export const history = createBrowserHistory();
 
@@ -330,7 +331,7 @@ const App: React.FC = (props): JSX.Element => {
           <ProtectedRoute path="/user-profile" component={UserProfile} />
           <ProtectedRoute path="/organization-profile" component={OrganizationProfile} />
           <Route
-            path="/project-plans"
+            path="/project-pages"
             render={({ match: { path } }) => (
               <>
                 <ProtectedRoute path={path} exact component={ProjectPlanList} />
@@ -346,6 +347,7 @@ const App: React.FC = (props): JSX.Element => {
                     </>
                   )}
                 />
+                <ProtectedRoute path={`${path}/story`} component={Story} />
               </>
             )}
           />

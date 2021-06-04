@@ -1,6 +1,7 @@
 import React from 'react';
 import { FieldProps, getIn } from 'formik';
 import { Theme, makeStyles, FormHelperText, Typography, FormControl } from '@material-ui/core';
+import clsx from 'clsx';
 
 import ControlledFormLabel from '../form/ControlledFormLabel';
 
@@ -16,6 +17,7 @@ interface Props extends FieldProps {
   disabled?: boolean;
   optional?: boolean;
   label?: string;
+  onExampleClick?: () => void;
 }
 
 interface StyleProps {
@@ -40,8 +42,8 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       fontSize: theme.spacing(3),
     },
   }),
-  txtGray: {
-    color: theme.palette.info.dark,
+  description: {
+    display: 'flex',
     [theme.breakpoints.up('sm')]: {
       marginTop: theme.spacing(1),
       marginBottom: theme.spacing(4),
@@ -52,6 +54,21 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       marginBottom: theme.spacing(3),
       fontSize: theme.spacing(3),
     },
+  },
+  descriptionText: {
+    [theme.breakpoints.up('sm')]: {
+      fontSize: theme.spacing(3.5),
+    },
+    [theme.breakpoints.down('xs')]: {
+      fontSize: theme.spacing(3),
+    },
+  },
+  txtGray: {
+    color: theme.palette.info.dark,
+  },
+  example: {
+    color: theme.palette.secondary.main,
+    cursor: 'pointer',
   },
   filler: {
     [theme.breakpoints.up('sm')]: {
@@ -75,6 +92,7 @@ export default function FieldFormControl({
   disabled,
   className,
   optional,
+  onExampleClick,
   ...fieldProps
 }: Props): JSX.Element {
   const { form, field } = fieldProps;
@@ -99,13 +117,18 @@ export default function FieldFormControl({
           {label}
         </ControlledFormLabel>
       )}
-
-      {description && (
-        <Typography variant="body1" className={classes.txtGray}>
-          {description}
-        </Typography>
-      )}
-
+      <div className={classes.description}>
+        {description && (
+          <Typography variant="body1" className={clsx(classes.descriptionText, classes.txtGray)}>
+            {description}
+            {onExampleClick && (
+              <span className={classes.example} onClick={onExampleClick}>
+                &nbsp;See an example»
+              </span>
+            )}
+          </Typography>
+        )}
+      </div>
       {children({ handleChange, handleBlur })}
 
       {hasError && <FormHelperText className={classes.error}>{errorMessage}</FormHelperText>}

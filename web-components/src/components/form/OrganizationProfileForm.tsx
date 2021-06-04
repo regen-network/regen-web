@@ -22,7 +22,6 @@ export interface OrgProfileFormValues {
   description?: string;
   displayName: string;
   legalName: string;
-  // location: string;
   location: GeocodeFeature;
   logo: string;
 }

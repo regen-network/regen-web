@@ -1,4 +1,7 @@
 import React from 'react';
+import clsx from 'clsx';
+import { makeStyles, Theme, useTheme } from '@material-ui/core';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Grid from '@material-ui/core/Grid';
 
 import ImageActionCard from 'web-components/lib/components/cards/ImageActionCard';
@@ -17,11 +20,40 @@ type Props = {
   };
 };
 
+const useStyles = makeStyles((theme: Theme) => ({
+  root: {
+    [theme.breakpoints.down('xs')]: {
+      width: 'unset',
+    },
+  },
+  card: {
+    [theme.breakpoints.down('xs')]: {
+      padding: theme.spacing(3, 0),
+    },
+  },
+}));
+
 const CreditClassCards: React.FC<Props> = ({ justify = 'center', ...props }) => {
+  const styles = useStyles();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
+
   return (
-    <Grid container justify={justify} className={props.classes && props.classes.root} spacing={5}>
+    <Grid
+      container
+      justify={justify}
+      className={clsx(styles.root, props.classes && props.classes.root)}
+      spacing={isMobile ? 0 : 5}
+    >
       {props.creditClasses.map((c, i) => (
-        <Grid item xs={12} sm={6} md={4} key={i} className={props.classes && props.classes.card}>
+        <Grid
+          item
+          xs={12}
+          sm={6}
+          md={4}
+          key={i}
+          className={clsx(styles.card, props.classes && props.classes.card)}
+        >
           <ImageActionCard
             key={i}
             btnText={props.btnText}

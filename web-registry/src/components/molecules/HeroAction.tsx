@@ -23,6 +23,14 @@ const useStyles = makeStyles((theme: Theme) => ({
     alignContent: 'center',
     justifyContent: 'center',
   },
+  title: {
+    fontWeight: 900,
+    lineHeight: theme.typography.pxToRem(53.2),
+    [theme.breakpoints.down('xs')]: {
+      fontSize: theme.typography.pxToRem(32),
+      lineHeight: theme.typography.pxToRem(44.8),
+    },
+  },
   btn: {
     marginTop: theme.spacing(10),
   },
@@ -39,7 +47,7 @@ const HeroAction: React.FC<Props> = props => {
       <Container maxWidth="md">
         <Grid container justify="center">
           <div className={cx(styles.main, props.classes && props.classes.main)}>
-            <Title align="center" variant="h2" color="primary">
+            <Title align="center" variant="h2" color="primary" className={styles.title}>
               {props.title}
             </Title>
             <Grid container justify="center">

@@ -24,8 +24,23 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingBottom: theme.spacing(17.75),
     },
   },
-  creditClasses: {
-    margin: theme.spacing(4.75, 0),
+  title: {
+    marginBottom: theme.spacing(8.75),
+    [theme.breakpoints.down('xs')]: {
+      marginBottom: theme.spacing(8),
+    },
+  },
+  // creditClassCards: {
+  //   marginTop: theme.spacing(4.75),
+  // },
+  projectCards: {
+    [theme.breakpoints.down('sm')]: {
+      width: '100vw',
+      marginLeft: theme.spacing(-8), // MUI Grid spacing in our `section` component with padding prevents scrolling all the way over. This presents d
+    },
+    [theme.breakpoints.down('xs')]: {
+      marginLeft: theme.spacing(-4),
+    },
   },
   bottomSection: {
     maxWidth: theme.spacing(175),
@@ -41,6 +56,7 @@ const Home: React.FC = () => {
   }
 
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
   return (
     <>
       <HeroTitle
@@ -51,18 +67,23 @@ const Home: React.FC = () => {
       />
 
       <CardMedia image={topographyImg}>
-        <Section title="Projects" classes={{ root: styles.section }}>
-          <ProjectCards projects={projects} />
+        <Section title="Projects" classes={{ root: styles.section, title: styles.title }}>
+          <ProjectCards projects={projects} classes={{ root: styles.projectCards }} />
         </Section>
       </CardMedia>
 
-      <Section title="Credit Classes" titleAlign="left" classes={{ root: styles.section }}>
+      <Section
+        title="Credit Classes"
+        titleAlign="left"
+        classes={{ root: styles.section, title: styles.title }}
+      >
         <CreditClassCards
           btnText="Learn More"
+          // classes={{ root: styles.creditClassCards }}
           justify={isMobile ? 'center' : 'flex-start'}
-          creditClasses={creditClasses}
+          creditClasses={[creditClasses[0]]}
+          // creditClasses={creditClasses} // TODO: Right now we are only displaying carbonPlus grasslands, but eventually we should display all classes
           onClickCard={handleCardSelect}
-          classes={{ root: styles.creditClasses }}
         />
       </Section>
 

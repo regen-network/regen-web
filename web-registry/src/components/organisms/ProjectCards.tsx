@@ -1,4 +1,5 @@
 import React from 'react';
+import clsx from 'clsx';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles, Theme } from '@material-ui/core/styles';
@@ -8,11 +9,14 @@ import { Project } from '../../mocks';
 
 type Props = {
   projects: Project[];
+  classes?: {
+    root?: string;
+  };
 };
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    paddingTop: theme.spacing(8.75),
+    // paddingTop: theme.spacing(8.75),
     [theme.breakpoints.down('sm')]: {
       flexWrap: 'nowrap',
       overflow: 'auto',
@@ -36,7 +40,7 @@ const ProjectCards: React.FC<Props> = props => {
   const apiServerUrl = process.env.REACT_APP_API_URI;
 
   return (
-    <Grid container className={styles.root} spacing={5}>
+    <Grid container className={clsx(props.classes && props.classes.root, styles.root)} spacing={5}>
       {props.projects.map(project => (
         <Grid item sm={6} md={4} key={project.id} className={styles.item}>
           <Link className={styles.projectCard} href={`/projects/${project.id}`}>

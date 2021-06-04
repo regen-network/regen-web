@@ -5,6 +5,7 @@ import clsx from 'clsx';
 import Box from '@material-ui/core/Box';
 
 import RegenIcon from '../icons/RegenIcon';
+import RegistryIcon from '../icons/RegistryIcon';
 import MenuHover from '../menu-hover';
 import MobileMenu from '../mobile-menu';
 
@@ -29,6 +30,7 @@ interface HeaderProps {
   color: string;
   menuItems?: HeaderMenuItem[];
   borderBottom?: boolean;
+  isRegistry?: boolean;
   fullWidth?: boolean;
   pathName?: string;
 }
@@ -149,6 +151,16 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       width: theme.spacing(23),
     },
   },
+  registryIcon: {
+    [theme.breakpoints.up('sm')]: {
+      height: theme.typography.pxToRem(76),
+      width: theme.typography.pxToRem(117),
+    },
+    [theme.breakpoints.down('xs')]: {
+      height: theme.spacing(10.25),
+      width: theme.spacing(23),
+    },
+  },
   subMenuHover: {
     '& a:hover': {
       borderBottom: `2px solid ${theme.palette.secondary.main}`,
@@ -194,6 +206,7 @@ export default function Header({
   borderBottom = true,
   absolute = true,
   fullWidth = false,
+  isRegistry = false,
   pathName = '/',
 }: HeaderProps): JSX.Element {
   const classes = useStyles({ fullWidth, color, borderBottom });
@@ -203,16 +216,21 @@ export default function Header({
 
   const theme = useTheme();
 
+  const AppIcon = isRegistry ? RegistryIcon : RegenIcon;
+
   return (
     <div className={clsx(rootClass)}>
       <Grid className={classes.header} container direction="row" alignItems="center" justify="space-between">
         <Grid className={classes.logoItem} item>
           <a href="/">
             <Box display={{ xs: 'none', sm: 'block' }}>
-              <RegenIcon className={classes.regenIcon} color={color} />
+              <AppIcon className={isRegistry ? classes.registryIcon : classes.regenIcon} color={color} />
             </Box>
             <Box display={{ xs: 'block', sm: 'none' }}>
-              <RegenIcon className={classes.regenIcon} color={theme.palette.primary.contrastText} />
+              <AppIcon
+                className={isRegistry ? classes.registryIcon : classes.regenIcon}
+                color={theme.palette.primary.contrastText}
+              />
             </Box>
           </a>
         </Grid>
@@ -248,9 +266,11 @@ export default function Header({
                               }
                               key={index}
                             >
-                              <Link href={dropdownItem.href}>
-                                {dropdownItem.render ? dropdownItem.render() : dropdownItem.title}
-                              </Link>
+                              {dropdownItem.render ? (
+                                dropdownItem.render()
+                              ) : (
+                                <Link href={dropdownItem.href}>{dropdownItem.title}</Link>
+                              )}
                             </MenuItem>
                           );
                         })}

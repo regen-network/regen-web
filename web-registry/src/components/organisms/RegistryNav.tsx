@@ -32,6 +32,7 @@ const RegistryNav: React.FC = () => {
               isPeerReviewed
               methodology="Grasslands"
               title="Carbon<i>Plus</i> Credits"
+              href="/TODO"
               svg={Cow}
             />
           ),
@@ -45,7 +46,12 @@ const RegistryNav: React.FC = () => {
           title: 'CarbonPlus Grasslands',
           href: '/TODO:',
           render: () => (
-            <MethodologyDropdownItem isPeerReviewed title="Carbon<i>Plus</i> Grasslands" svg={Cow} />
+            <MethodologyDropdownItem
+              isPeerReviewed
+              href="/todo"
+              title="Carbon<i>Plus</i> Grasslands"
+              svg={Cow}
+            />
           ),
         },
       ],
@@ -58,6 +64,7 @@ const RegistryNav: React.FC = () => {
 
   return (
     <Header
+      isRegistry
       menuItems={menuItems}
       color={headerColors[pathname] ? headerColors[pathname] : theme.palette.primary.light}
       transparent={pathname === '/certificate'}

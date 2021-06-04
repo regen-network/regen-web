@@ -1,16 +1,13 @@
 import React from 'react';
 import cx from 'clsx';
 import { makeStyles, Theme } from '@material-ui/core/styles';
-import CardMedia from '@material-ui/core/CardMedia';
-// import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
-import Section from 'web-components/lib/components/section';
+import { BackgroundImgSection } from './BackgroundImgSection';
 
 type Props = {
   img: string;
   title: string;
   description: string;
-  maxWidth?: false | 'xs' | 'sm' | 'md' | 'lg' | 'xl';
   classes?: {
     title?: string;
     description?: string;
@@ -20,10 +17,7 @@ type Props = {
 
 const useStyles = makeStyles((theme: Theme) => ({
   main: {
-    display: 'flex',
-    flexFlow: 'column nowrap',
     justifyContent: 'flex-end',
-    minHeight: theme.spacing(150),
     [theme.breakpoints.up('sm')]: {
       paddingBottom: theme.spacing(30),
     },
@@ -54,21 +48,17 @@ const HeroTitle: React.FC<Props> = props => {
   const styles = useStyles();
 
   return (
-    <CardMedia image={props.img}>
-      <Section>
-        <div className={cx(styles.main, props.classes && props.classes.main)}>
-          <Typography variant="h1" className={cx(styles.title, props.classes && props.classes.title)}>
-            {props.title}
-          </Typography>
-          <Typography
-            variant="h4"
-            className={cx(styles.description, props.classes && props.classes.description)}
-          >
-            {props.description}
-          </Typography>
-        </div>
-      </Section>
-    </CardMedia>
+    <BackgroundImgSection
+      img={props.img}
+      classes={{ main: cx(styles.main, props.classes && props.classes.main) }}
+    >
+      <Typography variant="h1" className={cx(styles.title, props.classes && props.classes.title)}>
+        {props.title}
+      </Typography>
+      <Typography variant="h4" className={cx(styles.description, props.classes && props.classes.description)}>
+        {props.description}
+      </Typography>
+    </BackgroundImgSection>
   );
 };
 

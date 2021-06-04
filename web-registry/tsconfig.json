@@ -8,15 +8,14 @@
     "rootDir": "src",
     "allowJs": true,
     "jsx": "preserve",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "module": "esnext",
     "noEmit": true
   },
   "include": [
-    "src", "types/react-app-env.d.ts", "types/rdf-validate-shacl/index.d.ts", "types/url-search-params-polyfill.d.ts"
+    "src",
+    "types/react-app-env.d.ts",
+    "types/rdf-validate-shacl/index.d.ts",
+    "types/url-search-params-polyfill.d.ts"
   ]
 }

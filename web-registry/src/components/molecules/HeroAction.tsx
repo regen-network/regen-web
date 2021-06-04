@@ -2,17 +2,17 @@ import React from 'react';
 import cx from 'clsx';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import CardMedia from '@material-ui/core/CardMedia';
 import Container from '@material-ui/core/Container';
+
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import Title from 'web-components/lib/components/title';
+import { BackgroundImgSection } from './BackgroundImgSection';
 
 type Props = {
   actionTxt: string;
   action: () => void;
   img: string;
   title: string;
-  maxWidth?: string;
   classes?: {
     main?: string;
   };
@@ -20,11 +20,8 @@ type Props = {
 
 const useStyles = makeStyles((theme: Theme) => ({
   main: {
-    display: 'flex',
-    flexFlow: 'column nowrap',
     alignContent: 'center',
     justifyContent: 'center',
-    minHeight: theme.spacing(150),
   },
   btn: {
     marginTop: theme.spacing(10),
@@ -38,7 +35,7 @@ const HeroAction: React.FC<Props> = props => {
   const styles = useStyles();
 
   return (
-    <CardMedia image={props.img}>
+    <BackgroundImgSection img={props.img} classes={{ main: styles.main }}>
       <Container maxWidth="md">
         <Grid container justify="center">
           <div className={cx(styles.main, props.classes && props.classes.main)}>
@@ -53,7 +50,7 @@ const HeroAction: React.FC<Props> = props => {
           </div>
         </Grid>
       </Container>
-    </CardMedia>
+    </BackgroundImgSection>
   );
 };
 

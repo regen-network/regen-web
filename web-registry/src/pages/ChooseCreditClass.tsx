@@ -15,6 +15,9 @@ const useStyles = makeStyles((theme: Theme) => ({
       marginTop: theme.spacing(4.75),
     },
   },
+  card: {
+    maxWidth: theme.spacing(90),
+  },
 }));
 
 const ChooseCreditClass: React.FC = () => {
@@ -30,7 +33,7 @@ const ChooseCreditClass: React.FC = () => {
         btnText="Choose credit class"
         creditClasses={creditClasses}
         onClickCard={handleSelection}
-        classes={{ root: styles.cards }}
+        classes={{ root: styles.cards, card: styles.card }}
       />
     </OnBoardingSection>
   );

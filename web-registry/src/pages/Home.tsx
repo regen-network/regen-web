@@ -48,7 +48,6 @@ const Home: React.FC = () => {
         title="Welcome to Regen Registry"
         description="Regen Registry is lrem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magn."
         classes={{ description: styles.topSectionDescription }}
-        maxWidth="lg"
       />
 
       <CardMedia image={topographyImg}>

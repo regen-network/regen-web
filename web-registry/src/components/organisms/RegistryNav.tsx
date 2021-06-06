@@ -1,6 +1,7 @@
 import React from 'react';
+import { useAuth0 } from '@auth0/auth0-react';
 import { useTheme } from '@material-ui/core/styles';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 
 import Header, { HeaderMenuItem, HeaderColors } from 'web-components/lib/components/header';
 import { projects } from '../../mocks';
@@ -9,6 +10,8 @@ import { ReactComponent as Cow } from '../../assets/svgs/green-cow.svg';
 
 const RegistryNav: React.FC = () => {
   const { pathname } = useLocation();
+  const history = useHistory();
+  const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
   const theme = useTheme();
   const fullWidthRegExp: RegExp = /projects\/[a-z-]+/;
   const projectDropdownItems: HeaderMenuItem['dropdownItems'] = projects.map(p => ({
@@ -64,7 +67,10 @@ const RegistryNav: React.FC = () => {
 
   return (
     <Header
-      isRegistry
+      isAuthenticated={isAuthenticated}
+      onLogin={() => loginWithRedirect({ redirectUri: window.location.origin })}
+      onLogout={() => logout({ returnTo: window.location.origin })}
+      onSignup={() => history.push('/signup')}
       menuItems={menuItems}
       color={headerColors[pathname] ? headerColors[pathname] : theme.palette.primary.light}
       transparent={pathname === '/certificate'}

@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles, Theme, MenuItem, MenuList, Link, useTheme } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
 import clsx from 'clsx';
 import Box from '@material-ui/core/Box';
 
@@ -8,6 +9,7 @@ import RegenIcon from '../icons/RegenIcon';
 import RegistryIcon from '../icons/RegistryIcon';
 import MenuHover from '../menu-hover';
 import MobileMenu from '../mobile-menu';
+import ContainedButton from '../buttons/ContainedButton';
 
 export interface node {
   [key: number]: React.ReactNode;
@@ -24,15 +26,18 @@ interface StyleProps {
 }
 
 interface HeaderProps {
-  children?: any;
-  transparent?: boolean;
   absolute?: boolean;
-  color: string;
-  menuItems?: HeaderMenuItem[];
   borderBottom?: boolean;
-  isRegistry?: boolean;
+  children?: any;
+  color: string;
   fullWidth?: boolean;
+  isAuthenticated?: boolean;
+  menuItems?: HeaderMenuItem[];
+  onSignup?: () => void;
+  onLogin?: () => void;
+  onLogout?: () => void;
   pathName?: string;
+  transparent?: boolean;
 }
 
 export interface HeaderMenuItem {
@@ -63,7 +68,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     position: 'relative',
     zIndex: 10,
     [theme.breakpoints.up('md')]: {
-      padding: `${theme.spacing(2.5)} 0 ${theme.spacing(2.5)} ${theme.spacing(12)}`,
+      padding: theme.spacing(2.5, 0, 2.5, 12),
     },
     [theme.breakpoints.up('sm')]: {
       height: theme.spacing(27.5),
@@ -73,10 +78,10 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       },
     },
     [theme.breakpoints.down('sm')]: {
-      padding: `${theme.spacing(2.5)} ${theme.spacing(10)}`,
+      padding: theme.spacing(2.5, 10),
     },
     [theme.breakpoints.down('xs')]: {
-      padding: `${theme.spacing(2.5)} ${theme.spacing(3.75)}`,
+      padding: theme.spacing(2.5, 3.75),
       height: theme.spacing(15),
       color: theme.palette.primary.light,
     },
@@ -196,6 +201,16 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     height: '100%',
     lineHeight: theme.spacing(6),
   },
+  signUpBtn: {
+    fontSize: theme.typography.pxToRem(12),
+    padding: theme.spacing(2, 7),
+  },
+  loginBtn: {
+    textTransform: 'none',
+    '&:hover': {
+      backgroundColor: 'transparent',
+    },
+  },
 }));
 
 export default function Header({
@@ -203,48 +218,50 @@ export default function Header({
   transparent,
   color,
   menuItems,
+  isAuthenticated,
+  onSignup,
+  onLogin,
+  onLogout,
   borderBottom = true,
   absolute = true,
   fullWidth = false,
-  isRegistry = false,
   pathName = '/',
 }: HeaderProps): JSX.Element {
-  const classes = useStyles({ fullWidth, color, borderBottom });
-  const rootClass = [classes.borderBottom];
-  rootClass.push(transparent ? classes.transparent : classes.background);
-  rootClass.push(absolute ? classes.absolute : '');
+  const styles = useStyles({ fullWidth, color, borderBottom });
+  const rootClass = [styles.borderBottom];
+  rootClass.push(transparent ? styles.transparent : styles.background);
+  rootClass.push(absolute ? styles.absolute : '');
 
   const theme = useTheme();
 
+  const isRegistry = !!onLogin && !!onLogout && !!onSignup;
   const AppIcon = isRegistry ? RegistryIcon : RegenIcon;
 
   return (
     <div className={clsx(rootClass)}>
-      <Grid className={classes.header} container direction="row" alignItems="center" justify="space-between">
-        <Grid className={classes.logoItem} item>
+      <Grid className={styles.header} container direction="row" alignItems="center" justify="space-between">
+        <Grid className={styles.logoItem} item>
           <a href="/">
             <Box display={{ xs: 'none', sm: 'block' }}>
-              <AppIcon className={isRegistry ? classes.registryIcon : classes.regenIcon} color={color} />
+              <AppIcon className={isRegistry ? styles.registryIcon : styles.regenIcon} color={color} />
             </Box>
             <Box display={{ xs: 'block', sm: 'none' }}>
               <AppIcon
-                className={isRegistry ? classes.registryIcon : classes.regenIcon}
+                className={isRegistry ? styles.registryIcon : styles.regenIcon}
                 color={theme.palette.primary.contrastText}
               />
             </Box>
           </a>
         </Grid>
-        <Grid className={classes.menu} item>
-          <Box display={{ xs: 'none', sm: 'block' }}>
-            <MenuList className={classes.menuList}>
+        <Grid className={styles.menu} item>
+          <Box display={{ xs: 'none', sm: 'flex' }}>
+            <MenuList className={styles.menuList}>
               {menuItems?.map((item, index) => {
                 return (
                   <MenuItem
                     key={index}
                     className={
-                      pathName === item.href
-                        ? clsx(classes.menuItem, classes.currentMenuItem)
-                        : classes.menuItem
+                      pathName === item.href ? clsx(styles.menuItem, styles.currentMenuItem) : styles.menuItem
                     }
                   >
                     {item.dropdownItems ? (
@@ -261,8 +278,8 @@ export default function Header({
                             <MenuItem
                               className={
                                 pathName.includes(dropdownItem.href)
-                                  ? clsx(classes.subMenuHover, classes.currentMenuItem)
-                                  : classes.subMenuHover
+                                  ? clsx(styles.subMenuHover, styles.currentMenuItem)
+                                  : styles.subMenuHover
                               }
                               key={index}
                             >
@@ -281,10 +298,37 @@ export default function Header({
                   </MenuItem>
                 );
               })}
+              {isRegistry && (
+                <li>
+                  {isAuthenticated ? (
+                    <Button variant="text" className={styles.loginBtn} onClick={onLogout}>
+                      Logout
+                    </Button>
+                  ) : (
+                    <>
+                      <Button variant="text" className={styles.loginBtn} onClick={onLogin}>
+                        Login
+                      </Button>
+                      <ContainedButton size="small" className={styles.signUpBtn} onClick={onSignup}>
+                        Sign Up
+                      </ContainedButton>
+                    </>
+                  )}
+                </li>
+              )}
             </MenuList>
+            {/* <ContainedButton size="small">Login</ContainedButton> */}
           </Box>
           <Box display={{ xs: 'block', sm: 'none' }}>
-            <MobileMenu pathName={pathName} menuItems={menuItems} className={classes.mobile} />
+            <MobileMenu
+              pathName={pathName}
+              menuItems={menuItems}
+              className={styles.mobile}
+              isAuthenticated={isAuthenticated}
+              onLogin={onLogin}
+              onLogout={onLogout}
+              onSignup={onSignup}
+            />
           </Box>
         </Grid>
         {children}

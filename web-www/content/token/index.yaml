@@ -9,15 +9,15 @@ topSection:
 tokenEconomics:
   title: REGEN Token Economics
   body: >-
-    md//Regen Network is a sovereign, proof-of-stake blockchain built on the
-    Cosmos SDK. REGEN token is a utility, governance, security and staking
-    token.
+    md//Regen Ledger is a sovereign, proof-of-stake blockchain built on the
+    Cosmos SDK. REGEN is a staking token, providing Regen Ledger with a utility
+    - fees and gas, governance and security. 
 
 
-    REGEN token is designed to ensure utility for ecological data and outcome markets. Regen Network is governed as a public blockchain by token holders following the model outlined and implemented by Cosmos.
+    REGEN token is designed to ensure utility for ecological data and outcome markets. Regen Network is governed as a public blockchain by token holders. 
 
 
-    REGEN token will accrue value from levying fees on ecological assets originated and secured on-chain, and from transaction fees paid by users paying for services on the network.
+    REGEN token will accrue value from transaction fees on ecological assets and other transactions originated and secured on-chain.
 
 
     To learn more about Regen Network token economics, please <a href="https://regen-network.gitlab.io/whitepaper/Economics.pdf" target="_blank">click here</a>.
@@ -54,10 +54,8 @@ staking:
   body: >-
     md//Staking/delegating is a critical function to secure Regen Ledger,
     participate in community governance and support the growth and development
-    of Regen Network. Staking also generates rewards for delegators. Delegating
-    to validators by staking your REGEN tokens helps cover validator
-    infrastructure costs, and will generate between 7% and 20% annual percentage
-    rate (APR) on your staked tokens.
+    of Regen Network. Staking also generates rewards for delegators. Staking
+    tokens accue yiels between  7% and 40% annual percentage yield (APY)..
 
 
     To learn more about staking REGEN tokens, please <a href="#" target="_blank">click here</a>.

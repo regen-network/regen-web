@@ -12,6 +12,7 @@ import Description from '../description';
 import Tag from '../tag';
 import StepFAQs from '../faq/StepFAQs';
 import { QuestionItem } from '../faq/Question';
+import ContainedButton from '../buttons/ContainedButton';
 
 interface StepCardProps {
   className?: string;
@@ -27,6 +28,8 @@ export interface ProjectPlanStep {
   video?: string;
   isActive?: boolean;
   stepNumber: number | string;
+  btnText?: string;
+  onBtnClick?: () => void;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -53,6 +56,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   activeCard: {
     backgroundColor: theme.palette.primary.main,
+  },
+  btn: {
+    margin: theme.spacing(3, 0, 5),
   },
   cardTop: {
     display: 'flex',
@@ -176,6 +182,11 @@ export default function StepCard({ className, icon, step = fallbackStep }: StepC
           <Description className={classes.stepDescription}>
             {ReactHtmlParser(step.description || '')}
           </Description>
+          {!!step.btnText && !!step.onBtnClick && (
+            <ContainedButton onClick={step.onBtnClick} className={classes.btn}>
+              {step.btnText}
+            </ContainedButton>
+          )}
         </div>
         {step.faqs && step.faqs.length > 0 && <StepFAQs questionItems={step.faqs} isActive={step.isActive} />}
       </Card>

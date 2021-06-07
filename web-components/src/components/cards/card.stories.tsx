@@ -16,6 +16,9 @@ import GreenCard from 'web-components/lib/components/cards/GreenCard';
 import GreenTopIconCard from 'web-components/lib/components/cards/GreenTopIconCard';
 import CreateProjectPlanCard from 'web-components/lib/components/cards/CreateProjectPlanCard';
 import ImageActionCard from 'web-components/lib/components/cards/ImageActionCard';
+import StepCard from 'web-components/lib/components/cards/StepCard';
+import FarmerIcon from 'web-components/lib/components/icons/FarmerIcon';
+import { QuestionItem } from '../../../lib/components/faq/Question';
 
 export default {
   title: 'Components|Cards',
@@ -189,3 +192,30 @@ export const imageActionCard = (): JSX.Element => (
     )}
   />
 );
+
+const stubFaqs: QuestionItem[] = [
+  { question: 'What is the question', answer: 'This is the answer' },
+  { question: 'What is the question', answer: 'This is the answer' },
+  { question: 'What is the question', answer: 'This is the answer' },
+];
+
+export const stepCard: React.FC = () => {
+  return (
+    <StepCard
+      icon={<FarmerIcon />}
+      step={{
+        stepNumber: number('step number', 1),
+        btnText: text('button text', 'submit a concept note'),
+        onBtnClick: () => null,
+        title: text('title', 'Step Card'),
+        tagName: text('tag name', 'tagname'),
+        isActive: boolean('is active', true),
+        faqs: stubFaqs,
+        description: text(
+          'description',
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        ),
+      }}
+    />
+  );
+};

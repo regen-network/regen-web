@@ -77,12 +77,8 @@ const OrganizationProfile: React.FC = () => {
   useEffect(() => {
     if (!userByEmail || !userOrg) return;
     setAcctType('organization');
-    const location = userOrg?.partyByPartyId?.addressByAddressId?.feature
-      ? JSON.parse(userOrg.partyByPartyId.addressByAddressId.feature)
-      : '';
-
     setInitialFieldValues({
-      location,
+      location: JSON.parse(userOrg?.partyByPartyId?.addressByAddressId?.feature) || {},
       description: userOrg?.partyByPartyId?.description?.trim() || '',
       displayName: userOrg.partyByPartyId?.name || '',
       legalName: userOrg?.legalName || '',
@@ -122,7 +118,7 @@ const OrganizationProfile: React.FC = () => {
               description: values.description,
               legalName: values.legalName,
               displayName: values.displayName,
-              orgAddress: JSON.stringify(values.location),
+              orgAddress: values.location,
               walletAddr: userByEmail?.partyByPartyId?.walletByWalletId?.addr,
               image: values.logo,
               ownerId: orgProfile?.userByEmail?.id,

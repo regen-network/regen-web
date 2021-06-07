@@ -51,7 +51,9 @@ const OrganizationProfileForm: React.FC<FormProps> = props => {
           description: '',
           displayName: '',
           legalName: '',
-          location: {} as GeocodeFeature,
+          location: {
+            place_name: '',
+          } as GeocodeFeature,
           logo: '',
         }
       }

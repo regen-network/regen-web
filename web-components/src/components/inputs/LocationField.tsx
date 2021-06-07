@@ -41,7 +41,7 @@ const LocationField: React.FC<Props> = ({
 }) => {
   const baseClient = MapboxClient({ accessToken });
   const geocoderService = mbxGeocoder(baseClient);
-  const [results, setResults] = useState<GeocodeFeature[]>([]);
+  const [features, setFeatures] = useState<GeocodeFeature[]>([]);
   const [showResults, setShowResults] = useState(true);
   const { form, field } = fieldProps;
 
@@ -59,7 +59,7 @@ const LocationField: React.FC<Props> = ({
           <Input
             {...fieldProps}
             placeholder={placeholder}
-            value={field.value.place_name}
+            value={field.value?.place_name}
             onBlur={({ target: { value } }) => {
               handleBlur(value);
               setTimeout(() => setShowResults(false), 200); // without the timeout, `onBlur` fires before the click event on the results list, so the value doesn't properly update. There's probably a better solution to this, but it works fo rnow
@@ -75,14 +75,14 @@ const LocationField: React.FC<Props> = ({
                   })
                   .send()
                   .then(res => {
-                    setResults(res.body.features);
+                    setFeatures(res.body.features);
                     setShowResults(true);
                   });
               }
             }}
           />
           {showResults &&
-            results.map((item, index) => (
+            features.map((item, index) => (
               <div
                 key={index}
                 className={classes.result}

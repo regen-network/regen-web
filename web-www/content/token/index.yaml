@@ -9,9 +9,10 @@ topSection:
 tokenEconomics:
   title: REGEN Token Economics
   body: >-
-    md//Regen Ledger is a sovereign, proof-of-stake blockchain built on the
-    Cosmos SDK. REGEN is a staking token, providing Regen Ledger with a utility
-    - fees and gas, governance and security. 
+    md//[Regen Ledger](https://docs.regen.network/) is a sovereign,
+    proof-of-stake blockchain built on the Cosmos SDK. REGEN is a staking token,
+    providing Regen Ledger with a utility - fees and gas, governance and
+    security. 
 
 
     REGEN token is designed to ensure utility for ecological data and outcome markets. Regen Network is governed as a public blockchain by token holders. 

@@ -13,6 +13,7 @@ import { Project, ProjectDefault, ActionGroup } from '../mocks';
 import ProjectTop from './sections/ProjectTop';
 import ProjectImpact from './sections/ProjectImpact';
 import MoreProjects from './sections/MoreProjects';
+import Documentation from './sections/Documentation';
 import LandManagementActions from './sections/LandManagementActions';
 import { getImgSrc } from '../lib/imgSrc';
 import getApiUri from '../lib/apiUri';
@@ -24,7 +25,7 @@ import Title from 'web-components/lib/components/title';
 import Timeline from 'web-components/lib/components/timeline';
 import ProjectMedia from 'web-components/lib/components/sliders/ProjectMedia';
 import BuyFooter from 'web-components/lib/components/fixed-footer/BuyFooter';
-import Table from 'web-components/lib/components/table';
+import Section from 'web-components/lib/components/section';
 import Modal from 'web-components/lib/components/modal';
 import MoreInfoForm from 'web-components/lib/components/form/MoreInfoForm';
 import CreditsPurchaseForm from './CreditsPurchaseForm';
@@ -77,14 +78,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     [theme.breakpoints.down('xs')]: {
       padding: `${theme.spacing(13)} ${theme.spacing(3.75)} 0`,
-    },
-    '& h3': {
-      [theme.breakpoints.up('sm')]: {
-        marginBottom: theme.spacing(7),
-      },
-      [theme.breakpoints.down('xs')]: {
-        marginBottom: theme.spacing(3.25),
-      },
     },
   },
   projectActions: {
@@ -169,11 +162,21 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   projectTimeline: {
+    backgroundColor: theme.palette.primary.main,
     [theme.breakpoints.up('sm')]: {
-      paddingBottom: theme.spacing(23),
+      paddingTop: theme.spacing(21.5),
+      paddingBottom: theme.spacing(22.25),
     },
     [theme.breakpoints.down('xs')]: {
       paddingBottom: theme.spacing(17),
+    },
+  },
+  timelineTitle: {
+    [theme.breakpoints.up('sm')]: {
+      marginBottom: theme.spacing(12),
+    },
+    [theme.breakpoints.down('xs')]: {
+      marginBottom: theme.spacing(10),
     },
   },
   map: {
@@ -206,27 +209,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingRight: theme.spacing(7.5),
     },
-  },
-  timelineContainer: {
-    backgroundColor: theme.palette.primary.main,
-  },
-  timelineTitle: {
-    [theme.breakpoints.up('sm')]: {
-      marginBottom: `${theme.spacing(12)} !important`,
-    },
-    [theme.breakpoints.down('xs')]: {
-      marginBottom: `${theme.spacing(10)} !important`,
-    },
-  },
-  documentationTitle: {
-    paddingBottom: theme.spacing(7.5),
-  },
-  creditDetails: {
-    borderTop: `1px solid ${theme.palette.grey[100]}`,
-  },
-  tableBorder: {
-    border: `2px solid ${theme.palette.secondary.dark}`,
-    borderRadius: 5,
   },
 }));
 interface ProjectProps {
@@ -328,7 +310,9 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
         apiServerUrl={apiServerUrl}
       />
       <ProjectTop project={project} projectDefault={projectDefault} geojson={geojson} isGISFile={isGISFile} />
-      <ProjectImpact impacts={project.impact} />
+      <div className="project-background">
+        <ProjectImpact impacts={project.impact} />
+      </div>
 
       {/* {protectedSpecies.length > 0 && (
         <div
@@ -363,23 +347,17 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
       )} */}
 
       {data?.projectByHandle?.documentsByProjectId?.nodes?.length > 0 && (
-        <div className={classes.creditDetails}>
-          <div className={clsx(classes.projectDetails, classes.projectContent)}>
-            <Title variant="h2" className={classes.documentationTitle}>
-              Documentation
-            </Title>
-            <Table
-              className={classes.tableBorder}
-              txClient={txClient}
-              onViewOnLedger={viewOnLedger}
-              rows={data.projectByHandle.documentsByProjectId.nodes}
-            />
-          </div>
+        <div className={clsx('project-background', classes.projectContent)}>
+          <Documentation
+            txClient={txClient}
+            onViewOnLedger={viewOnLedger}
+            documents={data.projectByHandle.documentsByProjectId.nodes}
+          />
         </div>
       )}
 
       {landManagementActions.map((actionsType, i) => (
-        <div key={i} className={i > 0 ? classes.projectActionsGroup : ''}>
+        <div key={i} className={clsx('project-background', i > 0 ? classes.projectActionsGroup : '')}>
           <LandManagementActions
             actions={actionsType.actions}
             title={
@@ -393,32 +371,37 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
       ))}
 
       {data?.projectByHandle?.eventsByProjectId?.nodes?.length > 0 && (
-        <div className={clsx(classes.timelineContainer, 'project-background')}>
-          <div className={clsx(classes.projectDetails, classes.projectTimeline, classes.projectContent)}>
-            <Title className={classes.timelineTitle} variant="h2">
-              {project.fieldsOverride && project.fieldsOverride.timeline
-                ? project.fieldsOverride.timeline.title
-                : projectDefault.timeline.title}
-            </Title>
-            <Timeline
-              txClient={txClient}
-              onViewOnLedger={viewOnLedger}
-              events={data.projectByHandle.eventsByProjectId.nodes.map(
-                (node: {
-                  // TODO use generated types from graphql schema
-                  date: string;
-                  summary: string;
-                  description?: string;
-                  creditVintageByEventId?: any;
-                }) => ({
-                  date: getFormattedDate(node.date, { year: 'numeric', month: 'long', day: 'numeric' }),
-                  summary: node.summary,
-                  description: node.description,
-                  creditVintage: node.creditVintageByEventId,
-                }),
-              )}
-            />
-          </div>
+        <div
+          className={clsx(
+            'project-background',
+            classes.projectDetails,
+            classes.projectTimeline,
+            classes.projectContent,
+          )}
+        >
+          <Title className={classes.timelineTitle} variant="h2">
+            {project.fieldsOverride && project.fieldsOverride.timeline
+              ? project.fieldsOverride.timeline.title
+              : projectDefault.timeline.title}
+          </Title>
+          <Timeline
+            txClient={txClient}
+            onViewOnLedger={viewOnLedger}
+            events={data.projectByHandle.eventsByProjectId.nodes.map(
+              (node: {
+                // TODO use generated types from graphql schema
+                date: string;
+                summary: string;
+                description?: string;
+                creditVintageByEventId?: any;
+              }) => ({
+                date: getFormattedDate(node.date, { year: 'numeric', month: 'long', day: 'numeric' }),
+                summary: node.summary,
+                description: node.description,
+                creditVintage: node.creditVintageByEventId,
+              }),
+            )}
+          />
         </div>
       )}
 

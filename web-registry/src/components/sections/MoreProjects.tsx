@@ -14,8 +14,8 @@ interface MoreProjectsProps {
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
-  background: {
-    paddingBottom: theme.spacing(20),
+  root: {
+    paddingBottom: theme.spacing(22.25),
   },
   grid: {
     paddingTop: theme.spacing(8.75),
@@ -45,36 +45,34 @@ const MoreProjects = ({ projects }: MoreProjectsProps): JSX.Element => {
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
 
   return (
-    <div className={classes.background}>
-      <Section title="More Projects" titleAlign={isMobile ? 'left' : 'center'}>
-        <LazyLoad offset={300}>
-          <Grid container className={classes.grid} spacing={5}>
-            {projects.map((project, i) => (
-              <Grid item sm={6} md={4} key={project.id} className={classes.item}>
-                <Link className={classes.projectCard} href={`/projects/${project.id}`}>
-                  <ProjectCard
-                    name={project.name}
-                    imgSrc={project.image}
-                    imageStorageBaseUrl={imageStorageBaseUrl}
-                    apiServerUrl={apiServerUrl}
-                    place={project.place}
-                    area={project.area}
-                    areaUnit={project.areaUnit}
-                    developer={
-                      project.developer && {
-                        name: project.developer.name,
-                        type: project.developer.type,
-                        imgSrc: project.developer.imgSrc,
-                      }
+    <Section title="More Projects" titleAlign={isMobile ? 'left' : 'center'} classes={{ root: classes.root }}>
+      <LazyLoad offset={300}>
+        <Grid container className={classes.grid} spacing={5}>
+          {projects.map((project, i) => (
+            <Grid item sm={6} md={4} key={project.id} className={classes.item}>
+              <Link className={classes.projectCard} href={`/projects/${project.id}`}>
+                <ProjectCard
+                  name={project.name}
+                  imgSrc={project.image}
+                  imageStorageBaseUrl={imageStorageBaseUrl}
+                  apiServerUrl={apiServerUrl}
+                  place={project.place}
+                  area={project.area}
+                  areaUnit={project.areaUnit}
+                  developer={
+                    project.developer && {
+                      name: project.developer.name,
+                      type: project.developer.type,
+                      imgSrc: project.developer.imgSrc,
                     }
-                  />
-                </Link>
-              </Grid>
-            ))}
-          </Grid>
-        </LazyLoad>
-      </Section>
-    </div>
+                  }
+                />
+              </Link>
+            </Grid>
+          ))}
+        </Grid>
+      </LazyLoad>
+    </Section>
   );
 };
 

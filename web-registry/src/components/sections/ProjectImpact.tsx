@@ -100,54 +100,52 @@ export default function ProjectImpact({ impacts }: ProjectImpactProps): JSX.Elem
   }, [slider]);
 
   return (
-    <div className={`project-background`}>
-      <LazyLoad offset={300}>
-        <Section
-          classes={{ root: classes.section, title: classes.title }}
-          title="Impact"
-          titleVariant="h2"
-          titleAlign="left"
-          topRight={
-            <>
-              {!isMobile && impacts.length > slidesCount && (
-                <Grid container justify="flex-end" className={classes.buttons}>
-                  <PrevNextButton direction="prev" onClick={slickPrev} />
-                  <PrevNextButton direction="next" onClick={slickNext} />
-                </Grid>
-              )}
-            </>
-          }
-        >
-          {isMobile ? (
-            <div className={classes.swipe}>
-              {impacts.map(({ name, description, imgSrc, monitored }: Impact, index: number) => (
-                <div className={classes.item}>
-                  <ProjectImpactCard
-                    key={index}
-                    name={name}
-                    description={description}
-                    imgSrc={getOptimizedImageSrc(imgSrc, imageStorageBaseUrl, apiServerUrl)}
-                    monitored={monitored}
-                  />
-                </div>
-              ))}
-            </div>
-          ) : (
-            <Slider {...settings} ref={slider} className={classes.slider}>
-              {impacts.map(({ name, description, imgSrc, monitored }: Impact, index: number) => (
+    <LazyLoad offset={300}>
+      <Section
+        classes={{ root: classes.section, title: classes.title }}
+        title="Impact"
+        titleVariant="h2"
+        titleAlign="left"
+        topRight={
+          <>
+            {!isMobile && impacts.length > slidesCount && (
+              <Grid container justify="flex-end" className={classes.buttons}>
+                <PrevNextButton direction="prev" onClick={slickPrev} />
+                <PrevNextButton direction="next" onClick={slickNext} />
+              </Grid>
+            )}
+          </>
+        }
+      >
+        {isMobile ? (
+          <div className={classes.swipe}>
+            {impacts.map(({ name, description, imgSrc, monitored }: Impact, index: number) => (
+              <div className={classes.item}>
                 <ProjectImpactCard
                   key={index}
-                  className={classes.item}
                   name={name}
                   description={description}
                   imgSrc={getOptimizedImageSrc(imgSrc, imageStorageBaseUrl, apiServerUrl)}
                   monitored={monitored}
                 />
-              ))}
-            </Slider>
-          )}
-        </Section>
-      </LazyLoad>
-    </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <Slider {...settings} ref={slider} className={classes.slider}>
+            {impacts.map(({ name, description, imgSrc, monitored }: Impact, index: number) => (
+              <ProjectImpactCard
+                key={index}
+                className={classes.item}
+                name={name}
+                description={description}
+                imgSrc={getOptimizedImageSrc(imgSrc, imageStorageBaseUrl, apiServerUrl)}
+                monitored={monitored}
+              />
+            ))}
+          </Slider>
+        )}
+      </Section>
+    </LazyLoad>
   );
 }

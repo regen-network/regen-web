@@ -19,11 +19,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   section: {
     [theme.breakpoints.up('sm')]: {
       paddingTop: theme.spacing(21.5),
-      paddingBottom: theme.spacing(27.5),
+      paddingBottom: theme.spacing(22.25),
     },
     [theme.breakpoints.down('xs')]: {
       paddingTop: theme.spacing(17.5),
-      paddingBottom: theme.spacing(13),
+      paddingBottom: theme.spacing(17.5),
     },
   },
   title: {
@@ -135,13 +135,8 @@ export default function LandManagementActions({
       {isMobile ? (
         <div className={classes.swipe}>
           {actions.map(action => (
-            <div className={classes.item}>
-              <Action
-                key={action.name}
-                name={action.name}
-                description={action.description}
-                imgSrc={action.imgSrc}
-              />
+            <div className={classes.item} key={action.name}>
+              <Action name={action.name} description={action.description} imgSrc={action.imgSrc} />
             </div>
           ))}
         </div>

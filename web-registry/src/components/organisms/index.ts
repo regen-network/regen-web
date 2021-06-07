@@ -6,6 +6,7 @@ export * from './CreditClassCards';
 export * from './CreditsPurchaseForm';
 export * from './IncludesGrasslandsForm';
 export * from './LandManagementActions';
+export * from './MarketingNav';
 export * from './MoreProjectsSection';
 export * from './ProjectCards';
 export * from './ProjectImpactSection';

@@ -78,7 +78,7 @@ const OrganizationProfile: React.FC = () => {
     if (!userByEmail || !userOrg) return;
     setAcctType('organization');
     setInitialFieldValues({
-      location: JSON.parse(userOrg?.partyByPartyId?.addressByAddressId?.feature) || {},
+      location: userOrg?.partyByPartyId?.addressByAddressId?.feature || {},
       description: userOrg?.partyByPartyId?.description?.trim() || '',
       displayName: userOrg.partyByPartyId?.name || '',
       legalName: userOrg?.legalName || '',
@@ -156,7 +156,7 @@ const OrganizationProfile: React.FC = () => {
               input: {
                 id: userOrg.partyByPartyId.addressByAddressId.id,
                 addressPatch: {
-                  feature: JSON.stringify(values.location),
+                  feature: values.location,
                 },
               },
             },

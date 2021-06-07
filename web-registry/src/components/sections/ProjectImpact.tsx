@@ -69,7 +69,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 export default function ProjectImpact({ impacts }: ProjectImpactProps): JSX.Element {
-  const classes = useStyles();
+  const styles = useStyles();
   const theme: Theme = useTheme();
   const imageStorageBaseUrl = process.env.REACT_APP_IMAGE_STORAGE_BASE_URL;
   const apiServerUrl = process.env.REACT_APP_API_URI;
@@ -102,14 +102,14 @@ export default function ProjectImpact({ impacts }: ProjectImpactProps): JSX.Elem
   return (
     <LazyLoad offset={300}>
       <Section
-        classes={{ root: classes.section, title: classes.title }}
+        classes={{ root: styles.section, title: styles.title }}
         title="Impact"
         titleVariant="h2"
         titleAlign="left"
         topRight={
           <>
             {!isMobile && impacts.length > slidesCount && (
-              <Grid container justify="flex-end" className={classes.buttons}>
+              <Grid container justify="flex-end" className={styles.buttons}>
                 <PrevNextButton direction="prev" onClick={slickPrev} />
                 <PrevNextButton direction="next" onClick={slickNext} />
               </Grid>
@@ -118,9 +118,9 @@ export default function ProjectImpact({ impacts }: ProjectImpactProps): JSX.Elem
         }
       >
         {isMobile ? (
-          <div className={classes.swipe}>
+          <div className={styles.swipe}>
             {impacts.map(({ name, description, imgSrc, monitored }: Impact, index: number) => (
-              <div className={classes.item}>
+              <div className={styles.item}>
                 <ProjectImpactCard
                   key={index}
                   name={name}
@@ -132,11 +132,11 @@ export default function ProjectImpact({ impacts }: ProjectImpactProps): JSX.Elem
             ))}
           </div>
         ) : (
-          <Slider {...settings} ref={slider} className={classes.slider}>
+          <Slider {...settings} ref={slider} className={styles.slider}>
             {impacts.map(({ name, description, imgSrc, monitored }: Impact, index: number) => (
               <ProjectImpactCard
                 key={index}
-                className={classes.item}
+                className={styles.item}
                 name={name}
                 description={description}
                 imgSrc={getOptimizedImageSrc(imgSrc, imageStorageBaseUrl, apiServerUrl)}

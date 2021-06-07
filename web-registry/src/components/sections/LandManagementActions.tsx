@@ -86,7 +86,7 @@ export default function LandManagementActions({
   title,
   subtitle,
 }: LandManagementActionsProps): JSX.Element {
-  const classes = useStyles({});
+  const styles = useStyles({});
   const theme: Theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
   const isTablet: boolean = useMediaQuery(theme.breakpoints.between('xs', 'sm'));
@@ -116,14 +116,14 @@ export default function LandManagementActions({
 
   return (
     <Section
-      classes={{ root: classes.section, title: classes.title }}
+      styles={{ root: styles.section, title: styles.title }}
       title={title}
       titleVariant="h2"
       titleAlign="left"
       topRight={
         <>
           {!isMobile && actions.length > slidesCount && (
-            <Grid container justify="flex-end" className={classes.buttons}>
+            <Grid container justify="flex-end" className={styles.buttons}>
               <PrevNextButton direction="prev" onClick={slickPrev} />
               <PrevNextButton direction="next" onClick={slickNext} />
             </Grid>
@@ -131,20 +131,20 @@ export default function LandManagementActions({
         </>
       }
     >
-      <Description className={classes.description}>{subtitle}</Description>
+      <Description className={styles.description}>{subtitle}</Description>
       {isMobile ? (
-        <div className={classes.swipe}>
+        <div className={styles.swipe}>
           {actions.map(action => (
-            <div className={classes.item} key={action.name}>
+            <div className={styles.item} key={action.name}>
               <Action name={action.name} description={action.description} imgSrc={action.imgSrc} />
             </div>
           ))}
         </div>
       ) : (
-        <Slider {...settings} ref={slider} className={classes.slider}>
+        <Slider {...settings} ref={slider} className={styles.slider}>
           {actions.map(action => (
             <Action
-              className={classes.item}
+              className={styles.item}
               key={action.name}
               name={action.name}
               description={action.description}

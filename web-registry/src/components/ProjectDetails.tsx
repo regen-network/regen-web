@@ -237,7 +237,7 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
     setPageView(location);
   }, [location]);
 
-  const classes = useStyles();
+  const styles = useStyles();
   const theme = useTheme();
   const landManagementActions: ActionGroup[] = project.landManagementActions.map(group => ({
     ...group,
@@ -298,7 +298,7 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
   };
 
   return (
-    <div className={classes.root}>
+    <div className={styles.root}>
       <SEO location={location} siteMetadata={siteMetadata} title={project.name} imageUrl={project.image} />
 
       <ProjectMedia
@@ -315,7 +315,7 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
 
       {/* {protectedSpecies.length > 0 && (
         <div
-          className={`${classes.projectDetails} ${classes.projectContent} ${classes.projectImpactContainer}`}
+          className={`${styles.projectDetails} ${styles.projectContent} ${styles.projectImpactContainer}`}
         >
           <Title variant="h3">
             {project.fieldsOverride && project.fieldsOverride.nonMonitoredImpact
@@ -329,13 +329,13 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
               ? project.fieldsOverride.nonMonitoredImpact.subtitle
               : projectDefault.nonMonitoredImpact.subtitle}
           </Description>
-          <Grid container className={`${classes.projectGrid} ${classes.projectImpactGrid}`}>
+          <Grid container className={`${styles.projectGrid} ${styles.projectImpactGrid}`}>
             {impact.map((item, index) => (
               <Grid
                 item
                 xs={12}
                 sm={4}
-                className={`${classes.projectGridItem} ${classes.projectImpact}`}
+                className={`${styles.projectGridItem} ${styles.projectImpact}`}
                 key={`${index}-${item.name}`}
               >
                 <ImpactCard name={item.name} description={item.description} imgSrc={item.imgSrc} />
@@ -346,7 +346,7 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
       )} */}
 
       {data?.projectByHandle?.documentsByProjectId?.nodes?.length > 0 && (
-        <div className={clsx('project-background', classes.projectContent)}>
+        <div className={clsx('project-background', styles.projectContent)}>
           <Documentation
             txClient={txClient}
             onViewOnLedger={viewOnLedger}
@@ -356,7 +356,7 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
       )}
 
       {landManagementActions.map((actionsType, i) => (
-        <div key={i} className={clsx('project-background', i > 0 ? classes.projectActionsGroup : '')}>
+        <div key={i} className={clsx('project-background', i > 0 ? styles.projectActionsGroup : '')}>
           <LandManagementActions
             actions={actionsType.actions}
             title={
@@ -373,12 +373,12 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
         <div
           className={clsx(
             'project-background',
-            classes.projectDetails,
-            classes.projectTimeline,
-            classes.projectContent,
+            styles.projectDetails,
+            styles.projectTimeline,
+            styles.projectContent,
           )}
         >
-          <Title className={classes.timelineTitle} variant="h2">
+          <Title className={styles.timelineTitle} variant="h2">
             {project.fieldsOverride && project.fieldsOverride.timeline
               ? project.fieldsOverride.timeline.title
               : projectDefault.timeline.title}
@@ -427,7 +427,7 @@ export default function ProjectDetails({ projects, project, projectDefault }: Pr
           <ContainedButton onClick={handleOpen} startIcon={<EmailIcon />}>
             send me more info
           </ContainedButton>
-          {/* {<OutlinedButton className={classes.callButton} startIcon={<PhoneIcon />}>schedule a call</OutlinedButton>} */}
+          {/* {<OutlinedButton className={styles.callButton} startIcon={<PhoneIcon />}>schedule a call</OutlinedButton>} */}
         </>
       </FixedFooter>
       <Modal open={open} onClose={handleClose}>

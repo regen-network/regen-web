@@ -35,17 +35,17 @@ export default function Documentation({
   onViewOnLedger,
   documents,
 }: DocumentationProps): JSX.Element {
-  const classes = useStyles();
+  const styles = useStyles();
 
   return (
     <Section
-      classes={{ root: classes.section, title: classes.title }}
+      classes={{ root: styles.section, title: styles.title }}
       title="Documentation"
       titleVariant="h2"
       titleAlign="left"
     >
       <Table
-        className={classes.tableBorder}
+        className={styles.tableBorder}
         txClient={txClient}
         onViewOnLedger={onViewOnLedger}
         rows={documents}

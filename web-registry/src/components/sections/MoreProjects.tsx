@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const MoreProjects = ({ projects }: MoreProjectsProps): JSX.Element => {
-  const classes = useStyles();
+  const styles = useStyles();
   const imageStorageBaseUrl = process.env.REACT_APP_IMAGE_STORAGE_BASE_URL;
   const apiServerUrl = process.env.REACT_APP_API_URI;
 
@@ -45,12 +45,12 @@ const MoreProjects = ({ projects }: MoreProjectsProps): JSX.Element => {
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
 
   return (
-    <Section title="More Projects" titleAlign={isMobile ? 'left' : 'center'} classes={{ root: classes.root }}>
+    <Section title="More Projects" titleAlign={isMobile ? 'left' : 'center'} classes={{ root: styles.root }}>
       <LazyLoad offset={300}>
-        <Grid container className={classes.grid} spacing={5}>
+        <Grid container className={styles.grid} spacing={5}>
           {projects.map((project, i) => (
-            <Grid item sm={6} md={4} key={project.id} className={classes.item}>
-              <Link className={classes.projectCard} href={`/projects/${project.id}`}>
+            <Grid item sm={6} md={4} key={project.id} className={styles.item}>
+              <Link className={styles.projectCard} href={`/projects/${project.id}`}>
                 <ProjectCard
                   name={project.name}
                   imgSrc={project.image}

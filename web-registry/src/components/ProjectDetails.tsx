@@ -25,7 +25,6 @@ import Title from 'web-components/lib/components/title';
 import Timeline from 'web-components/lib/components/timeline';
 import ProjectMedia from 'web-components/lib/components/sliders/ProjectMedia';
 import BuyFooter from 'web-components/lib/components/fixed-footer/BuyFooter';
-import Section from 'web-components/lib/components/section';
 import Modal from 'web-components/lib/components/modal';
 import MoreInfoForm from 'web-components/lib/components/form/MoreInfoForm';
 import CreditsPurchaseForm from './CreditsPurchaseForm';

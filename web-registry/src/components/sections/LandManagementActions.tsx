@@ -116,7 +116,7 @@ export default function LandManagementActions({
 
   return (
     <Section
-      styles={{ root: styles.section, title: styles.title }}
+      classes={{ root: styles.section, title: styles.title }}
       title={title}
       titleVariant="h2"
       titleAlign="left"

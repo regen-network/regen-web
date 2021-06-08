@@ -119,7 +119,7 @@ const OrganizationProfile: React.FC = () => {
               legalName: values.legalName,
               displayName: values.displayName,
               orgAddress: values.location,
-              walletAddr: userByEmail?.partyByPartyId?.walletByWalletId?.addr,
+              walletAddr: userByEmail?.partyByPartyId?.walletByWalletId?.addr || '',
               image: values.logo,
               ownerId: orgProfile?.userByEmail?.id,
             },

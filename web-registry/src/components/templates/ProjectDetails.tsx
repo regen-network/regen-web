@@ -7,13 +7,25 @@ import { useQuery } from '@apollo/client';
 import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 import clsx from 'clsx';
 
+// import { setPageView } from '../lib/ga';
+// import { useLedger, ContextType } from '../ledger';
+// import { Project, ProjectDefault, ActionGroup } from '../mocks';
+// import ProjectTop from './sections/ProjectTop';
+// import ProjectImpact from './sections/ProjectImpact';
+// import MoreProjects from './sections/MoreProjects';
+// import Documentation from './sections/Documentation';
+// import LandManagementActions from './sections/LandManagementActions';
+// import { getImgSrc } from '../lib/imgSrc';
+// import getApiUri from '../lib/apiUri';
+// import { buildIssuanceModalData } from '../lib/transform';
+// import { IssuanceModalData } from 'web-components/lib/components/modal/IssuanceModal';
+
 import { getFormattedDate } from 'web-components/lib/utils/format';
 import IssuanceModal, { IssuanceModalData } from 'web-components/lib/components/modal/IssuanceModal';
 import Title from 'web-components/lib/components/title';
 import Timeline from 'web-components/lib/components/timeline';
 import ProjectMedia from 'web-components/lib/components/sliders/ProjectMedia';
 import BuyFooter from 'web-components/lib/components/fixed-footer/BuyFooter';
-import Table from 'web-components/lib/components/table';
 import Modal from 'web-components/lib/components/modal';
 import MoreInfoForm from 'web-components/lib/components/form/MoreInfoForm';
 import Banner from 'web-components/lib/components/banner';
@@ -29,12 +41,13 @@ import { buildIssuanceModalData } from '../../lib/transform';
 import { useLedger, ContextType } from '../../ledger';
 import { Project, ProjectDefault, ActionGroup } from '../../mocks';
 import {
+  Documentation,
   ProjectTopSection,
   ProjectImpactSection,
   MoreProjectsSection,
   CreditsPurchaseForm,
   LandManagementActions,
-} from '../organisms/index';
+} from '../organisms';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -67,7 +80,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.between('md', 'lg')]: {
       paddingLeft: theme.spacing(35.875),
       paddingRight: theme.spacing(35.875),
-      // paddingRight: theme.spacing(33.25),
     },
     [theme.breakpoints.down('sm')]: {
       paddingLeft: theme.spacing(10),
@@ -78,14 +90,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     [theme.breakpoints.down('xs')]: {
       padding: `${theme.spacing(13)} ${theme.spacing(3.75)} 0`,
-    },
-    '& h3': {
-      [theme.breakpoints.up('sm')]: {
-        marginBottom: theme.spacing(7),
-      },
-      [theme.breakpoints.down('xs')]: {
-        marginBottom: theme.spacing(3.25),
-      },
     },
   },
   projectActions: {
@@ -170,11 +174,21 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   projectTimeline: {
+    backgroundColor: theme.palette.primary.main,
     [theme.breakpoints.up('sm')]: {
-      paddingBottom: theme.spacing(23),
+      paddingTop: theme.spacing(21.5),
+      paddingBottom: theme.spacing(22.25),
     },
     [theme.breakpoints.down('xs')]: {
       paddingBottom: theme.spacing(17),
+    },
+  },
+  timelineTitle: {
+    [theme.breakpoints.up('sm')]: {
+      marginBottom: theme.spacing(12),
+    },
+    [theme.breakpoints.down('xs')]: {
+      marginBottom: theme.spacing(10),
     },
   },
   map: {
@@ -208,27 +222,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingRight: theme.spacing(7.5),
     },
   },
-  timelineContainer: {
-    backgroundColor: theme.palette.primary.main,
-  },
-  timelineTitle: {
-    [theme.breakpoints.up('sm')]: {
-      marginBottom: `${theme.spacing(12)} !important`,
-    },
-    [theme.breakpoints.down('xs')]: {
-      marginBottom: `${theme.spacing(10)} !important`,
-    },
-  },
-  documentationTitle: {
-    paddingBottom: theme.spacing(7.5),
-  },
-  creditDetails: {
-    borderTop: `1px solid ${theme.palette.grey[100]}`,
-  },
-  tableBorder: {
-    border: `2px solid ${theme.palette.secondary.dark}`,
-    borderRadius: 5,
-  },
 }));
 interface ProjectProps {
   project: Project;
@@ -257,7 +250,7 @@ function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JS
     setPageView(location);
   }, [location]);
 
-  const classes = useStyles();
+  const styles = useStyles();
   const theme = useTheme();
   const landManagementActions: ActionGroup[] = project.landManagementActions.map(group => ({
     ...group,
@@ -318,7 +311,7 @@ function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JS
   };
 
   return (
-    <div className={classes.root}>
+    <div className={styles.root}>
       <SEO location={location} siteMetadata={siteMetadata} title={project.name} imageUrl={project.image} />
 
       <ProjectMedia
@@ -334,11 +327,13 @@ function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JS
         geojson={geojson}
         isGISFile={isGISFile}
       />
-      <ProjectImpactSection impacts={project.impact} />
+      <div className="project-background">
+        <ProjectImpactSection impacts={project.impact} />
+      </div>
 
       {/* {protectedSpecies.length > 0 && (
         <div
-          className={`${classes.projectDetails} ${classes.projectContent} ${classes.projectImpactContainer}`}
+          className={`${styles.projectDetails} ${styles.projectContent} ${styles.projectImpactContainer}`}
         >
           <Title variant="h3">
             {project.fieldsOverride && project.fieldsOverride.nonMonitoredImpact
@@ -352,13 +347,13 @@ function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JS
               ? project.fieldsOverride.nonMonitoredImpact.subtitle
               : projectDefault.nonMonitoredImpact.subtitle}
           </Description>
-          <Grid container className={`${classes.projectGrid} ${classes.projectImpactGrid}`}>
+          <Grid container className={`${styles.projectGrid} ${styles.projectImpactGrid}`}>
             {impact.map((item, index) => (
               <Grid
                 item
                 xs={12}
                 sm={4}
-                className={`${classes.projectGridItem} ${classes.projectImpact}`}
+                className={`${styles.projectGridItem} ${styles.projectImpact}`}
                 key={`${index}-${item.name}`}
               >
                 <ImpactCard name={item.name} description={item.description} imgSrc={item.imgSrc} />
@@ -369,23 +364,17 @@ function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JS
       )} */}
 
       {data?.projectByHandle?.documentsByProjectId?.nodes?.length > 0 && (
-        <div className={classes.creditDetails}>
-          <div className={clsx(classes.projectDetails, classes.projectContent)}>
-            <Title variant="h2" className={classes.documentationTitle}>
-              Documentation
-            </Title>
-            <Table
-              className={classes.tableBorder}
-              txClient={txClient}
-              onViewOnLedger={viewOnLedger}
-              rows={data.projectByHandle.documentsByProjectId.nodes}
-            />
-          </div>
+        <div className={clsx('project-background', styles.projectContent)}>
+          <Documentation
+            txClient={txClient}
+            onViewOnLedger={viewOnLedger}
+            documents={data.projectByHandle.documentsByProjectId.nodes}
+          />
         </div>
       )}
 
       {landManagementActions.map((actionsType, i) => (
-        <div key={i} className={i > 0 ? classes.projectActionsGroup : ''}>
+        <div key={i} className={clsx('project-background', i > 0 ? styles.projectActionsGroup : '')}>
           <LandManagementActions
             actions={actionsType.actions}
             title={
@@ -399,36 +388,45 @@ function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JS
       ))}
 
       {data?.projectByHandle?.eventsByProjectId?.nodes?.length > 0 && (
-        <div className={clsx(classes.timelineContainer, 'project-background')}>
-          <div className={clsx(classes.projectDetails, classes.projectTimeline, classes.projectContent)}>
-            <Title className={classes.timelineTitle} variant="h2">
-              {project.fieldsOverride && project.fieldsOverride.timeline
-                ? project.fieldsOverride.timeline.title
-                : projectDefault.timeline.title}
-            </Title>
-            <Timeline
-              txClient={txClient}
-              onViewOnLedger={viewOnLedger}
-              events={data.projectByHandle.eventsByProjectId.nodes.map(
-                (node: {
-                  // TODO use generated types from graphql schema
-                  date: string;
-                  summary: string;
-                  description?: string;
-                  creditVintageByEventId?: any;
-                }) => ({
-                  date: getFormattedDate(node.date, { year: 'numeric', month: 'long', day: 'numeric' }),
-                  summary: node.summary,
-                  description: node.description,
-                  creditVintage: node.creditVintageByEventId,
-                }),
-              )}
-            />
-          </div>
+        <div
+          className={clsx(
+            'project-background',
+            styles.projectDetails,
+            styles.projectTimeline,
+            styles.projectContent,
+          )}
+        >
+          <Title className={styles.timelineTitle} variant="h2">
+            {project.fieldsOverride && project.fieldsOverride.timeline
+              ? project.fieldsOverride.timeline.title
+              : projectDefault.timeline.title}
+          </Title>
+          <Timeline
+            txClient={txClient}
+            onViewOnLedger={viewOnLedger}
+            events={data.projectByHandle.eventsByProjectId.nodes.map(
+              (node: {
+                // TODO use generated types from graphql schema
+                date: string;
+                summary: string;
+                description?: string;
+                creditVintageByEventId?: any;
+              }) => ({
+                date: getFormattedDate(node.date, { year: 'numeric', month: 'long', day: 'numeric' }),
+                summary: node.summary,
+                description: node.description,
+                creditVintage: node.creditVintageByEventId,
+              }),
+            )}
+          />
         </div>
       )}
 
-      {otherProjects.length > 0 && <MoreProjectsSection projects={otherProjects} />}
+      {otherProjects.length > 0 && (
+        <div className="project-background">
+          <MoreProjectsSection projects={otherProjects} />
+        </div>
+      )}
 
       {project.creditPrice && <BuyFooter onClick={handleOpen} creditPrice={project.creditPrice} />}
       {project.creditPrice && project.stripePrice && (
@@ -447,7 +445,7 @@ function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JS
           <ContainedButton onClick={handleOpen} startIcon={<EmailIcon />}>
             send me more info
           </ContainedButton>
-          {/* {<OutlinedButton className={classes.callButton} startIcon={<PhoneIcon />}>schedule a call</OutlinedButton>} */}
+          {/* {<OutlinedButton className={styles.callButton} startIcon={<PhoneIcon />}>schedule a call</OutlinedButton>} */}
         </>
       </FixedFooter>
       <Modal open={open} onClose={handleClose}>

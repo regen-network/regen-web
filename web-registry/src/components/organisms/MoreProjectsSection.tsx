@@ -1,10 +1,10 @@
 import React from 'react';
+import LazyLoad from 'react-lazyload';
 import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 import Section from 'web-components/lib/components/section';
 import { Project } from '../../mocks';
-import LazyLoad from 'react-lazyload';
 import { ProjectCards } from './ProjectCards';
 
 interface MoreProjectsProps {
@@ -12,8 +12,8 @@ interface MoreProjectsProps {
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
-  background: {
-    paddingBottom: theme.spacing(20),
+  root: {
+    paddingBottom: theme.spacing(22.25),
   },
   title: {
     marginBottom: theme.spacing(8.75),
@@ -29,17 +29,15 @@ const MoreProjectsSection = ({ projects }: MoreProjectsProps): JSX.Element => {
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
 
   return (
-    <div className={styles.background}>
-      <Section
-        title="More Projects"
-        titleAlign={isMobile ? 'left' : 'center'}
-        classes={{ title: styles.title }}
-      >
-        <LazyLoad offset={300}>
-          <ProjectCards projects={projects} />
-        </LazyLoad>
-      </Section>
-    </div>
+    <Section
+      title="More Projects"
+      titleAlign={isMobile ? 'left' : 'center'}
+      classes={{ root: styles.root, title: styles.title }}
+    >
+      <LazyLoad offset={300}>
+        <ProjectCards projects={projects} />
+      </LazyLoad>
+    </Section>
   );
 };
 

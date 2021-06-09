@@ -4,6 +4,7 @@ export * from './AppFooter';
 export * from './BasicInfoForm';
 export * from './CreditClassCards';
 export * from './CreditsPurchaseForm';
+export * from './Documentation';
 export * from './IncludesGrasslandsForm';
 export * from './LandManagementActions';
 export * from './MarketingNav';

@@ -39,7 +39,7 @@ const ProjectCards: React.FC<Props> = props => {
   const apiServerUrl = process.env.REACT_APP_API_URI;
 
   return (
-    <Grid container className={clsx(props.classes && props.classes.root, styles.root)} spacing={5}>
+    <Grid container className={clsx(styles.root, props.classes && props.classes.root)} spacing={5}>
       {props.projects.map(project => (
         <Grid item sm={6} md={4} key={project.id} className={styles.item}>
           <Link className={styles.projectCard} href={`/projects/${project.id}`}>

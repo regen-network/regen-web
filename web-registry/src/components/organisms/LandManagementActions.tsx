@@ -19,11 +19,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   section: {
     [theme.breakpoints.up('sm')]: {
       paddingTop: theme.spacing(21.5),
-      paddingBottom: theme.spacing(27.5),
+      paddingBottom: theme.spacing(22.25),
     },
     [theme.breakpoints.down('xs')]: {
       paddingTop: theme.spacing(17.5),
-      paddingBottom: theme.spacing(13),
+      paddingBottom: theme.spacing(17.5),
     },
   },
   title: {
@@ -82,7 +82,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 function LandManagementActions({ actions, title, subtitle }: LandManagementActionsProps): JSX.Element {
-  const classes = useStyles({});
+  const styles = useStyles({});
   const theme: Theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
   const isTablet: boolean = useMediaQuery(theme.breakpoints.between('xs', 'sm'));
@@ -112,14 +112,14 @@ function LandManagementActions({ actions, title, subtitle }: LandManagementActio
 
   return (
     <Section
-      classes={{ root: classes.section, title: classes.title }}
+      classes={{ root: styles.section, title: styles.title }}
       title={title}
       titleVariant="h2"
       titleAlign="left"
       topRight={
         <>
           {!isMobile && actions.length > slidesCount && (
-            <Grid container justify="flex-end" className={classes.buttons}>
+            <Grid container justify="flex-end" className={styles.buttons}>
               <PrevNextButton direction="prev" onClick={slickPrev} />
               <PrevNextButton direction="next" onClick={slickNext} />
             </Grid>
@@ -127,25 +127,20 @@ function LandManagementActions({ actions, title, subtitle }: LandManagementActio
         </>
       }
     >
-      <Description className={classes.description}>{subtitle}</Description>
+      <Description className={styles.description}>{subtitle}</Description>
       {isMobile ? (
-        <div className={classes.swipe}>
+        <div className={styles.swipe}>
           {actions.map(action => (
-            <div className={classes.item}>
-              <Action
-                key={action.name}
-                name={action.name}
-                description={action.description}
-                imgSrc={action.imgSrc}
-              />
+            <div className={styles.item} key={action.name}>
+              <Action name={action.name} description={action.description} imgSrc={action.imgSrc} />
             </div>
           ))}
         </div>
       ) : (
-        <Slider {...settings} ref={slider} className={classes.slider}>
+        <Slider {...settings} ref={slider} className={styles.slider}>
           {actions.map(action => (
             <Action
-              className={classes.item}
+              className={styles.item}
               key={action.name}
               name={action.name}
               description={action.description}

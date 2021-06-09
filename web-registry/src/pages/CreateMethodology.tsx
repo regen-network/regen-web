@@ -1,14 +1,11 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import Link from '@material-ui/core/Link';
 
 import Section from 'web-components/lib/components/section';
 import { HeroTitle, HeroAction } from '../components/molecules';
 
 import fernImg from '../assets/fern-in-hands.png';
 import writingOnPaperImg from '../assets/writing-on-paper.png';
-import Description from 'web-components/lib/components/description';
 import StepCard, { ProjectPlanStep } from 'web-components/lib/components/cards/StepCard';
 
 import { ReactComponent as Checklist } from '../assets/svgs/green-yellow-checklist.svg';
@@ -16,6 +13,7 @@ import { ReactComponent as Charts } from '../assets/svgs/green-charts.svg';
 import { ReactComponent as DocumentWithCheckmark } from '../assets/svgs/yellow-check-document.svg';
 import { ReactComponent as Scientist } from '../assets/svgs/scientist-with-vial.svg';
 import { ReactComponent as CowCelebrating } from '../assets/svgs/green-cow-celebrating.svg';
+import { StepCardsWithDescription } from '../components/organisms';
 
 const useStyles = makeStyles((theme: Theme) => ({
   heroMain: {
@@ -44,16 +42,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   bottomSection: {
     maxWidth: theme.typography.pxToRem(946),
   },
-  topSectionMain: {
-    maxWidth: theme.typography.pxToRem(942),
-  },
   topSectionCards: {
-    maxWidth: theme.typography.pxToRem(754),
-  },
-  topSectionDescription: {
-    lineHeight: theme.typography.pxToRem(33),
-    fontSize: theme.typography.pxToRem(22),
-    textAlign: 'center',
     maxWidth: theme.typography.pxToRem(942),
   },
 }));
@@ -140,6 +129,7 @@ const stepCards: StepCard[] = [
 
 const CreateMethodology: React.FC = () => {
   const styles = useStyles();
+  const methodologyLink = '/TODO:methodology link';
 
   return (
     <>
@@ -153,23 +143,16 @@ const CreateMethodology: React.FC = () => {
         title="General process for creating a new methodology"
         classes={{ root: styles.section, title: styles.title }}
       >
-        <Grid container justify="center" className={styles.topSectionMain}>
-          <Description className={styles.topSectionDescription}>
-            A lot can go into writing a new methodology and it might seem like an overwhelming process, but
-            we’re here to help! Check out our{' '}
-            <Link href="/TODO: methodology link">
-              Carbon<i>Plus</i> Grasslands Methodology
-            </Link>{' '}
-            to get a feel for what a methodology might entail and the various components included, and feel
-            free to email <Link href="mailto:science@regen.network">science@regen.network</Link> for any
-            additional questions.
-          </Description>
-          <Grid container justify="center" className={styles.topSectionCards}>
-            {stepCards.map((card, i) => (
-              <StepCard icon={card.icon} step={card.step} key={i} />
-            ))}
-          </Grid>
-        </Grid>
+        <StepCardsWithDescription
+          className={styles.topSectionCards}
+          stepCards={stepCards}
+          bottomDescription={{
+            title: 'Help develop a range of methodologies for the diversity of nature based solutions',
+            body:
+              'In addition to developing methodologies focused on carbon reduction and removal, we must also work to incorporate protocols to track water cycles, nutrient cycles, biodiversity, pollution management, changing weather patterns, and more.',
+          }}
+          description={`A lot can go into writing a new methodology and it might seem like an overwhelming process, but we’re here to help! Check out our <a href="${methodologyLink}">Carbon<i>Plus</i> Grasslands Methodology</a> to get a feel for what a methodology might entail and the various components included, and feel free to email science@regen.network for any additional questions.`}
+        />
       </Section>
 
       <HeroAction

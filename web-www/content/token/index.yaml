@@ -33,7 +33,7 @@ infoSection:
     community. After price discovery on the Osmosis LBP, we are working to
     ensure there is an Atom-Regen trading as soon as the Gravity DEX is live on
     Cosmos Hub.
-  signupText:
+  signupText: ""
   image: ../../static/media/token-bird.jpg
   imageAltText: Bird
   imageTitle: Bird

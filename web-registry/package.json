@@ -69,6 +69,7 @@
     "@graphql-codegen/typescript": "1.22.0",
     "@graphql-codegen/typescript-graphql-files-modules": "1.18.1",
     "@graphql-codegen/typescript-react-apollo": "2.2.4",
+    "@graphql-codegen/typescript-operations": "^1.18.0",
     "@storybook/addon-storyshots": "^5.2.8",
     "@types/enzyme": "^3.10.8",
     "@types/enzyme-adapter-react-16": "^1.0.6",

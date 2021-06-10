@@ -2674,7 +2674,7 @@ exports[`Storyshots Components|Cards Create Project Plan Card 1`] = `
   }
 >
   <WithStyles(CssBaseline) />
-  <CreateProjectPlanCard
+  <CreateProjectCard
     isFirstProject={true}
     onClick={[Function]}
   />
@@ -3055,7 +3055,7 @@ exports[`Storyshots Components|Cards Create Project Plan Card Add Another 1`] = 
   }
 >
   <WithStyles(CssBaseline) />
-  <CreateProjectPlanCard
+  <CreateProjectCard
     isFirstProject={false}
     onClick={[Function]}
   />

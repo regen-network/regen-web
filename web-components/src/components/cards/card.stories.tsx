@@ -14,7 +14,7 @@ import CurrentCreditsIcon from 'web-components/lib/components/icons/CurrentCredi
 import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
 import GreenCard from 'web-components/lib/components/cards/GreenCard';
 import GreenTopIconCard from 'web-components/lib/components/cards/GreenTopIconCard';
-import CreateProjectPlanCard from 'web-components/lib/components/cards/CreateProjectPlanCard';
+import CreateProjectCard from 'web-components/lib/components/cards/CreateProjectCard';
 import ImageActionCard from 'web-components/lib/components/cards/ImageActionCard';
 
 export default {
@@ -169,12 +169,12 @@ export const greenTopIconCard = (): JSX.Element => (
 
 export const onBoardingCard = (): JSX.Element => <OnBoardingCard>some content</OnBoardingCard>;
 
-export const createProjectPlanCard = (): JSX.Element => (
-  <CreateProjectPlanCard isFirstProject onClick={() => {}} />
+export const createProjectCard = (): JSX.Element => (
+  <CreateProjectCard isFirstProject onClick={() => {}} />
 );
 
-export const createProjectPlanCardAddAnother = (): JSX.Element => (
-  <CreateProjectPlanCard isFirstProject={false} onClick={() => {}} />
+export const createProjectCardAddAnother = (): JSX.Element => (
+  <CreateProjectCard isFirstProject={false} onClick={() => {}} />
 );
 
 export const imageActionCard = (): JSX.Element => (

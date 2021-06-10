@@ -2,11 +2,11 @@ import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import clsx from 'clsx';
 
-import Card from '../cards/Card';
+import Card from './Card';
 import ContainedButton from '../buttons/ContainedButton';
 import OutlinedButton from '../buttons/OutlinedButton';
 
-interface CreateProjectPlanCardProps {
+interface CreateProjectCardProps {
   className?: string;
   onClick: () => void;
   isFirstProject: boolean;
@@ -29,11 +29,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const CreateProjectPlanCard: React.FC<CreateProjectPlanCardProps> = ({
-  className,
-  onClick,
-  isFirstProject,
-}) => {
+const CreateProjectCard: React.FC<CreateProjectCardProps> = ({ className, onClick, isFirstProject }) => {
   const classes = useStyles();
 
   return (
@@ -51,4 +47,4 @@ const CreateProjectPlanCard: React.FC<CreateProjectPlanCardProps> = ({
   );
 };
 
-export default CreateProjectPlanCard;
+export default CreateProjectCard;

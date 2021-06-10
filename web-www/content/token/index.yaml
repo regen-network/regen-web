@@ -33,12 +33,10 @@ infoSection:
     community. After price discovery on the Osmosis LBP, we are working to
     ensure there is an Atom-Regen trading as soon as the Gravity DEX is live on
     Cosmos Hub.
-  signUpText: To receive official announcements about public token sale events,
-    please <a>sign up</a>.
+  signUpText:
   image: ../../static/media/token-bird.jpg
   imageAltText: Bird
   imageTitle: Bird
-  signupText: Sign Up
 tokenPool:
   title: REGEN total token pool
   subtitle: The total supply at mainnet launch was 100 million tokens.

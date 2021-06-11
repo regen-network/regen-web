@@ -28,7 +28,6 @@ interface Props extends FieldProps {
 }
 
 const LocationField: React.FC<Props> = ({
-  description,
   className,
   label,
   optional,

@@ -32,10 +32,10 @@ const useStyles = makeStyles((theme: Theme) => ({
       marginTop: 0,
     },
     [theme.breakpoints.up('sm')]: {
-      marginTop: theme.spacing(4.5),
+      marginTop: theme.typography.pxToRem(40),
     },
     [theme.breakpoints.down('xs')]: {
-      marginTop: theme.spacing(4),
+      marginTop: theme.typography.pxToRem(33),
     },
   },
 }));
@@ -121,7 +121,7 @@ const OrganizationProfileForm: React.FC<FormProps> = props => {
                 className={styles.textField}
                 charLimit={160}
                 component={ControlledTextField}
-                description="Describe any relevant background and experience. This info may be shown on the project page."
+                // description="Describe any relevant background and experience. This info may be shown on the project page."
                 label="Short organization description"
                 name="description"
                 rows={3}

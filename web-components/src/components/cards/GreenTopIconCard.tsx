@@ -57,21 +57,26 @@ type Props = {
   imgSrc: string;
 };
 
-const GreenTopIconCard: React.FC<Props> = p => {
+const GreenTopIconCard: React.FC<Props> = props => {
   const classes = useStyles();
   return (
-    <Card className={clsx(classes.root, p.className)}>
+    <Card className={clsx(classes.root, props.className)}>
       <div className={classes.imgWrap}>
-        <img className={classes.img} src={p.imgSrc} alt={p.description} />
+        <img className={classes.img} src={props.imgSrc} alt={props.description} />
       </div>
 
       <Grid container direction="column" className={classes.main}>
         <Typography variant="h1" className={classes.title}>
-          {p.title}
+          {props.title}
         </Typography>
-        <Typography className={classes.description}>{p.description}</Typography>
+        <Typography className={classes.description}>{props.description}</Typography>
         <div className={classes.btnWrap}>
-          <OutlinedButton className={classes.btn} href={p.linkURL} target="_blank" rel="noopener noreferrer">
+          <OutlinedButton
+            className={classes.btn}
+            href={props.linkURL}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             View on Github
           </OutlinedButton>
         </div>

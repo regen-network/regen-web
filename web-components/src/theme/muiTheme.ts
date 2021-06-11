@@ -221,4 +221,8 @@ const themeObject: ThemeOptions = {
   },
 };
 
-export default createMuiTheme(themeObject);
+const regenTheme = createMuiTheme(themeObject);
+type Theme = typeof regenTheme;
+
+export { Theme }; // avoid having to do manual type definitions for added breakpoint values by importing here instead of MUI
+export default regenTheme;

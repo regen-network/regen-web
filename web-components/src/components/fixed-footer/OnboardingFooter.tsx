@@ -85,7 +85,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   },
 }));
 
-const OnboardingFooter: React.FC<Props> = ({ saveText = 'Save & Next', hideProgress = false, ...p }) => {
+const OnboardingFooter: React.FC<Props> = ({ saveText = 'Save & Next', hideProgress = false, ...props }) => {
   const classes = useStyles({ hideProgress });
   const theme: Theme = useTheme();
 
@@ -93,24 +93,24 @@ const OnboardingFooter: React.FC<Props> = ({ saveText = 'Save & Next', hideProgr
     <FixedFooter>
       <Grid container spacing={4} className={classes.root}>
         <Grid item className={classes.arrows}>
-          {p.onPrev && (
-            <OutlinedButton className={clsx(classes.btn, classes.back)} onClick={p.onPrev}>
+          {props.onPrev && (
+            <OutlinedButton className={clsx(classes.btn, classes.back)} onClick={props.onPrev}>
               <ArrowDownIcon fontSize="small" direction="prev" color={theme.palette.secondary.main} />
             </OutlinedButton>
           )}
-          {p.onNext && (
-            <OutlinedButton className={classes.btn} onClick={p.onNext}>
+          {props.onNext && (
+            <OutlinedButton className={classes.btn} onClick={props.onNext}>
               <ArrowDownIcon fontSize="small" direction="next" color={theme.palette.secondary.main} />
             </OutlinedButton>
           )}
         </Grid>
         <Grid item>
-          <ContainedButton className={classes.btn} onClick={p.onSave} disabled={p.saveDisabled}>
+          <ContainedButton className={classes.btn} onClick={props.onSave} disabled={props.saveDisabled}>
             {saveText}
           </ContainedButton>
         </Grid>
       </Grid>
-      {!hideProgress && <StyledLinearProgress variant="determinate" value={p.percentComplete} />}
+      {!hideProgress && <StyledLinearProgress variant="determinate" value={props.percentComplete} />}
     </FixedFooter>
   );
 };

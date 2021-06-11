@@ -1,7 +1,6 @@
 import { ThemeProvider } from '@material-ui/core/styles';
 import * as React from 'react';
 import theme from './muiTheme';
-
 interface Props {
   readonly injectFonts?: boolean;
   readonly injectStyles?: (props?: any) => void;

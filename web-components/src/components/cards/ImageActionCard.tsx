@@ -1,7 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 import ReactHtmlParser from 'react-html-parser';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 
@@ -10,7 +10,7 @@ import MediaCard from '../cards/MediaCard';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    maxWidth: theme.spacing(90),
+    height: '100%',
     borderRadius: theme.spacing(2),
   },
   title: {
@@ -18,11 +18,14 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontWeight: 900,
   },
   btn: {
+    marginTop: theme.spacing(4),
     width: '100%',
-    marginTop: theme.spacing(6),
   },
-  media: {
-    height: theme.spacing(40),
+  cardContent: {
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
   },
 }));
 
@@ -31,23 +34,33 @@ type Props = {
   imgSrc: string;
   onClick: () => void;
   title: string;
-  btnText?: string;
+  btnText: string;
   className?: string;
 };
 
-const ImageActionCard: React.FC<Props> = ({ btnText = 'Choose Credit Class', ...p }) => {
-  const classes = useStyles();
+const ImageActionCard: React.FC<Props> = props => {
+  const styles = useStyles();
+  const theme = useTheme();
   return (
-    <MediaCard imgSrc={p.imgSrc} className={clsx(classes.root, p.className)}>
-      <CardContent>
-        <Typography gutterBottom className={classes.title} variant="h5">
-          {ReactHtmlParser(p.title)}
-        </Typography>
-        <Typography variant="body2" color="textSecondary" component="p">
-          {p.description}
-        </Typography>
-        <OutlinedButton className={classes.btn} onClick={p.onClick}>
-          {btnText}
+    <MediaCard
+      imgSrc={props.imgSrc}
+      className={clsx(styles.root, props.className)}
+      elevation={1}
+      borderRadius="10px"
+      borderColor={theme.palette.grey[100]}
+    >
+      <CardContent className={styles.cardContent}>
+        <div>
+          <Typography gutterBottom className={styles.title} variant="h5">
+            {ReactHtmlParser(props.title)}
+          </Typography>
+          <Typography variant="body2" color="textSecondary" component="p">
+            {props.description}
+          </Typography>
+        </div>
+
+        <OutlinedButton className={styles.btn} onClick={props.onClick}>
+          {props.btnText}
         </OutlinedButton>
       </CardContent>
     </MediaCard>

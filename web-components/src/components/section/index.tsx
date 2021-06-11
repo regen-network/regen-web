@@ -88,7 +88,7 @@ const Section = ({
 }: SectionProps): JSX.Element => {
   const styles = useStyles({ withSlider, titleLineHeight, titleAlign, titleColor, topRight: !!topRight });
   return (
-    <section className={clsx(styles.root, className, classes && classes.root)}>
+    <section className={clsx(styles.root, className || (classes && classes.root))}>
       {title && (
         <div className={clsx(classes && classes.titleWrap, topRight && styles.spaceBetween)}>
           <Title

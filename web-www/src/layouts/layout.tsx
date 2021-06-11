@@ -196,7 +196,6 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
   return (
     <>
       <Header
-        launchDate={location.pathname !== '/mainnet/' && launchDate}
         menuItems={menuItems}
         transparent={transparent}
         absolute={location.pathname === '/' || headerNoBorderBottomPages.test(location.pathname)}

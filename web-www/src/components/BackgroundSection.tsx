@@ -1,11 +1,12 @@
 import React from 'react';
-import { makeStyles, Theme, TypographyVariant } from '@material-ui/core/styles';
+import { makeStyles, TypographyVariant } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import clsx from 'clsx';
 import BackgroundImage from 'gatsby-background-image';
 import Box from '@material-ui/core/Box';
 
 import Title from 'web-components/lib/components/title';
+import { Theme } from 'web-components/lib/theme/muiTheme';
 
 interface Props {
   className?: string;
@@ -18,14 +19,12 @@ interface Props {
   children?: React.ReactNode;
   imageData: any;
   imageDataMobile?: any;
-  withSlider?: boolean;
   topSection?: boolean;
 }
 
 interface StyleProps {
   linearGradient?: string;
   linearGradientMobile?: string;
-  withSlider?: boolean;
   topSection?: boolean;
 }
 
@@ -99,7 +98,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     margin: '0 auto',
     position: 'relative',
   },
-  children: props => ({
+  children: {
     [theme.breakpoints.up('md')]: {
       paddingLeft: theme.spacing(37.5),
       paddingRight: theme.spacing(37.5),
@@ -109,7 +108,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       paddingRight: theme.spacing(10),
     },
     [theme.breakpoints.down('xs')]: {
-      paddingRight: props.withSlider ? 0 : theme.spacing(4),
+      paddingRight: theme.spacing(4),
       paddingLeft: theme.spacing(4),
     },
     [theme.breakpoints.up('xl')]: {
@@ -120,7 +119,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     margin: '0 auto',
     zIndex: 1,
     position: 'relative',
-  }),
+  },
   subtitle: {
     [theme.breakpoints.down('xs')]: {
       paddingTop: theme.spacing(3),
@@ -154,11 +153,12 @@ const BackgroundSection = ({
   body,
   header,
   children,
-  withSlider,
   topSection = true,
 }: Props): JSX.Element => {
   const classes = useStyles({ linearGradientMobile, linearGradient, topSection });
-  let headerJSX, bodyJSX, textJSX;
+  let headerJSX: JSX.Element | null = null;
+  let bodyJSX: JSX.Element | null = null;
+  let textJSX: JSX.Element | null = null;
   // Tried to use && operator, but it doesn't seem to play nicely with passing in dynamic props to the object
   if (header) {
     headerJSX = (

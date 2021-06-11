@@ -4,7 +4,7 @@ import { useStaticQuery, graphql } from 'gatsby';
 import BackgroundImage from 'gatsby-background-image';
 
 import Section from 'web-components/src/components/section';
-import ProjectCards from 'web-components/lib/components/sliders/ProjectCards';
+import ProjectCardsSlider from 'web-components/lib/components/sliders/ProjectCardsSlider';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const ComingSoonSection = () => {
+const ComingSoonSection: React.FC = () => {
   const data = useStaticQuery(graphql`
     query {
       background: file(relativePath: { eq: "coming-soon-bg.jpg" }) {
@@ -58,7 +58,7 @@ const ComingSoonSection = () => {
   return (
     <BackgroundImage Tag="section" fluid={imageData} backgroundColor={theme.palette.grey['50']}>
       <Section withSlider className={classes.root} title={content.header} titleVariant="subtitle2">
-        <ProjectCards
+        <ProjectCardsSlider
           projects={content.projects.map(
             ({
               handle,

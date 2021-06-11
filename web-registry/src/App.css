@@ -2,7 +2,7 @@
   background-image: url(./assets/background3.jpg);
 }
 
-.project-background {
+.project-background:nth-child(odd) {
   background-image: url(./assets/background.jpg);
   background-size: cover;
 }

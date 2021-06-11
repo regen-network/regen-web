@@ -78,17 +78,8 @@ const useStyles = makeStyles((theme: Theme) => ({
       margin: '0 auto',
     },
   },
-  headquarters: {
-    fontWeight: 'bold',
-    margin: 0,
-  },
   email: {
     paddingTop: theme.spacing(8.5),
-  },
-  headquartersBody: {
-    '& p': {
-      margin: 0,
-    },
   },
   body: {
     [theme.breakpoints.up('sm')]: {
@@ -207,10 +198,6 @@ const ContactPage = ({ location }: { location: Location }): JSX.Element => {
               }
             }
           }
-        }
-        headquarters {
-          header
-          body
         }
         email {
           header
@@ -373,10 +360,6 @@ const ContactPage = ({ location }: { location: Location }): JSX.Element => {
               <Grid item xs={12} sm={6}>
                 <Title variant="h4">{content.location.header}</Title>
                 <Description className={classes.body}>{ReactHtmlParser(content.location.body)}</Description>
-                <Description className={classes.headquarters}>{content.headquarters.header}:</Description>
-                <Description className={classes.headquartersBody}>
-                  {ReactHtmlParser(content.headquarters.body)}
-                </Description>
                 <Title className={classes.email} variant="h4">
                   {content.email.header}
                 </Title>

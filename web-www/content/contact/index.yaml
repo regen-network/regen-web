@@ -28,11 +28,6 @@ location:
   image: ../../static/media/team-location.webp
   body: md//Our distributed team works across North America, South America, and
     Europe.
-headquarters:
-  header: Headquarters
-  body: |-
-    md//Great Barrington
-    Massachusetts, USA
 email:
   header: Email
   body: >-

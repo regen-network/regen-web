@@ -859,12 +859,6 @@ collections:
               - {label: "header", name: header, widget: string}
               - {label: "body", name: body, widget: markdown}
               - {label: "image", name: image, widget: image}
-          - label: headquarters
-            name: headquarters
-            widget: object
-            fields:
-              - {label: "header", name: header, widget: string}
-              - {label: "body", name: body, widget: markdown}
           - label: email
             name: email
             widget: object

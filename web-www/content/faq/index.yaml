@@ -626,8 +626,6 @@ categories:
         answer: md//REGEN is not yet available on exchanges but if the current on-chain
           proposals pass then several members of our community plan to launch a
           pool on the Osmosis DEX as the first Liquidity Bootstrapping Pool.
-          Also, REGEN will be listed on Gravity Dex in partnership with
-          Tendermint Inc for liquidity provisioning.
       - question: How many tokens will be created when?
         answer: md//During the Token Generation Event, which happened on Apr 15 2021,
           100,000,000 REGEN were created and distributed to the various wallets

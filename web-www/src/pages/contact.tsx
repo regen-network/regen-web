@@ -169,6 +169,11 @@ const useStyles = makeStyles((theme: Theme) => ({
       fontSize: theme.spacing(4),
     },
   },
+  contactInfo: {
+    [theme.breakpoints.up('sm')]: {
+      paddingRight: theme.spacing(5),
+    },
+  },
 }));
 
 const ContactPage = ({ location }: { location: Location }): JSX.Element => {
@@ -357,7 +362,7 @@ const ContactPage = ({ location }: { location: Location }): JSX.Element => {
               </Formik>
             </Card>
             <Grid container>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12} sm={6} className={classes.contactInfo}>
                 <Title variant="h4">{content.location.header}</Title>
                 <Description className={classes.body}>{ReactHtmlParser(content.location.body)}</Description>
                 <Title className={classes.email} variant="h4">

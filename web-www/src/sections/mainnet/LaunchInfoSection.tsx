@@ -276,24 +276,24 @@ const useActionItemStyles = makeStyles((theme: Theme) => ({
 /**
  * TODO: This is very similar to the `ImageItems` component, and they could probably be consolodated but when I first tried it was creating issues so I opted to re-create
  */
-const ActionItem: React.FC<ActionItem> = p => {
+const ActionItem: React.FC<ActionItem> = props => {
   const classes = useActionItemStyles();
   return (
     <div className={classes.root}>
-      <img src={p.icon.publicURL} alt={p.description} className={classes.img} />
+      <img src={props.icon.publicURL} alt={props.description} className={classes.img} />
       <Typography variant="h1" className={classes.title}>
-        {p.title}
+        {props.title}
       </Typography>
-      <Typography className={classes.description}>{p.description}</Typography>
+      <Typography className={classes.description}>{props.description}</Typography>
       <div className={classes.btnWrap}>
         <ContainedButton
           className={classes.btn}
-          href={p.linkUrl}
-          disabled={!p.linkUrl}
+          href={props.linkUrl}
+          disabled={!props.linkUrl}
           target="_blank"
           rel="noopener noreferrer"
         >
-          {p.linkUrl ? p.linkText : 'Coming Soon'}
+          {props.linkUrl ? props.linkText : 'Coming Soon'}
         </ContainedButton>
       </div>
     </div>

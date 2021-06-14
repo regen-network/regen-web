@@ -11,6 +11,9 @@ query GetUserProfileByEmail($email: String!) {
     isAdmin
     phoneNumber
     roleTitle
+    projectsByCreatorId {
+      ...project
+    }
     partyByPartyId {
       name
       walletId

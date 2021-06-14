@@ -83,7 +83,7 @@ type QueryData = {
       title: string;
       subtitle: string;
       body: string;
-      signUpText: string;
+      signupText: string;
       imageAltText: string;
       imageTitle: string;
       image: {
@@ -100,7 +100,7 @@ const InfoSection = (): JSX.Element => {
 
   const {
     text: {
-      infoSection: { image, title, subtitle, body, signUpText, imageAltText, imageTitle },
+      infoSection: { image, title, subtitle, body, signupText, imageAltText, imageTitle },
     },
   } = useStaticQuery<QueryData>(graphql`
     query {
@@ -116,7 +116,7 @@ const InfoSection = (): JSX.Element => {
           title
           subtitle
           body
-          signUpText
+          signupText
           imageAltText
           imageTitle
         }
@@ -143,7 +143,7 @@ const InfoSection = (): JSX.Element => {
           <Typography className={styles.subtitle}>{subtitle}</Typography>
           <Description className={styles.body}>{ReactHtmlParser(body)}</Description>
           <Description className={styles.body}>
-            <div onClick={() => scrollToSignup()}>{ReactHtmlParser(signUpText)}</div>
+            <div onClick={() => scrollToSignup()}>{ReactHtmlParser(signupText)}</div>
           </Description>
         </CardContent>
       </Card>

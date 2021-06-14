@@ -1,6 +1,7 @@
 query AllCreditClasses {
   allCreditClasses {
     nodes {
+      id
       uri
       creditClassVersionsById(orderBy: CREATED_AT_DESC, first: 1) {
         nodes {

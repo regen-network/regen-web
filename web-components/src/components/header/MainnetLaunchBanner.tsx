@@ -37,10 +37,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const MainnetLaunchBanner: React.FC<Props> = p => {
+const MainnetLaunchBanner: React.FC<Props> = props => {
   const classes = useStyles();
-  return new Date() < new Date(p.launchDate) ? (
-    <div className={clsx(classes.root, p.className)}>
+  return new Date() < new Date(props.launchDate) ? (
+    <div className={clsx(classes.root, props.className)}>
       <Typography className={classes.text}>
         <span role="img" aria-label="mainnet launch">
           🚀
@@ -48,7 +48,7 @@ const MainnetLaunchBanner: React.FC<Props> = p => {
         <Link className={classes.link} href="/mainnet/">
           Mainnet
         </Link>{' '}
-        is launching in <Countdown date={p.launchDate} />
+        is launching in <Countdown date={props.launchDate} />
       </Typography>
     </div>
   ) : null;

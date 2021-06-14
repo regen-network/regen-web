@@ -62,7 +62,7 @@ export default function ImageField({
     });
   }
 
-  const classes = useStyles();
+  const styles = useStyles();
 
   return (
     <>
@@ -75,7 +75,7 @@ export default function ImageField({
       >
         {() => (
           <Box display="flex" alignItems="center">
-            <Avatar className={classes.avatar} src={field.value} />
+            <Avatar className={styles.avatar} src={field.value} />
 
             <input
               type="file"
@@ -94,7 +94,7 @@ export default function ImageField({
               id="image-upload-input"
             />
             <label htmlFor="image-upload-input">
-              <OutlinedButton isImageBtn className={classes.button}>
+              <OutlinedButton isImageBtn className={styles.button}>
                 Add Image
               </OutlinedButton>
             </label>

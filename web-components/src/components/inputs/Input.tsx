@@ -8,7 +8,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     borderRadius: '2px',
     [theme.breakpoints.up('sm')]: {
       padding: theme.spacing(3),
-      // fontSize: theme.spacing(4.5),
       fontSize: theme.typography.pxToRem(16),
       lineHeight: theme.typography.pxToRem(24),
     },

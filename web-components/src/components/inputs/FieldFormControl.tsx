@@ -23,6 +23,7 @@ interface Props extends FieldProps {
 interface StyleProps {
   optional?: boolean;
   disabled?: boolean;
+  description?: string;
   error: boolean;
 }
 
@@ -42,19 +43,19 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       fontSize: theme.spacing(3),
     },
   }),
-  description: {
+  description: props => ({
     display: 'flex',
     [theme.breakpoints.up('sm')]: {
       marginTop: theme.spacing(1),
-      marginBottom: theme.spacing(4),
+      marginBottom: !!props.description ? theme.spacing(4) : theme.spacing(2),
       fontSize: theme.spacing(3.5),
     },
     [theme.breakpoints.down('xs')]: {
       marginTop: theme.spacing(1),
-      marginBottom: theme.spacing(3),
+      marginBottom: !!props.description ? theme.spacing(3) : theme.spacing(1),
       fontSize: theme.spacing(3),
     },
-  },
+  }),
   descriptionText: {
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.spacing(3.5),
@@ -109,7 +110,7 @@ export default function FieldFormControl({
   }
 
   const hasError = fieldTouched && errorMessage;
-  const classes = useStyles({ optional, disabled, error: hasError });
+  const styles = useStyles({ optional, disabled, description, error: hasError });
   return (
     <FormControl className={className} fullWidth>
       {label && (
@@ -117,12 +118,12 @@ export default function FieldFormControl({
           {label}
         </ControlledFormLabel>
       )}
-      <div className={classes.description}>
+      <div className={styles.description}>
         {description && (
-          <Typography variant="body1" className={clsx(classes.descriptionText, classes.txtGray)}>
+          <Typography variant="body1" className={clsx(styles.descriptionText, styles.txtGray)}>
             {description}
             {onExampleClick && (
-              <span className={classes.example} onClick={onExampleClick}>
+              <span className={styles.example} onClick={onExampleClick}>
                 &nbsp;See an example»
               </span>
             )}
@@ -131,7 +132,7 @@ export default function FieldFormControl({
       </div>
       {children({ handleChange, handleBlur })}
 
-      {hasError && <FormHelperText className={classes.error}>{errorMessage}</FormHelperText>}
+      {hasError && <FormHelperText className={styles.error}>{errorMessage}</FormHelperText>}
     </FormControl>
   );
 }

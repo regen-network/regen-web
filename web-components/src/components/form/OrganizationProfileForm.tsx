@@ -121,7 +121,6 @@ const OrganizationProfileForm: React.FC<FormProps> = props => {
                 className={styles.textField}
                 charLimit={160}
                 component={ControlledTextField}
-                // description="Describe any relevant background and experience. This info may be shown on the project page."
                 label="Short organization description"
                 name="description"
                 rows={3}

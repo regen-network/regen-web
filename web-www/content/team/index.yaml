@@ -271,6 +271,19 @@ coreSection:
         decentralization and he is deeply committed to ecological regeneration.
       twitterUrl: https://twitter.com/ryanchrypto
       githubUrl: https://github.com/ryanchrypto
+    - image: ../../static/media/ru.png
+      description: >+
+        Ru has a background in Computer Science, focusing on mathematical stuff
+        like type theory and formal proof. He has a lot of energy for nature,
+        community building, and social change, which he channels through work
+        with Extinction Rebellion. He is in the early stages of a regenerative
+        land project, combining rewilding and syntropic agroforestry, to
+        help  soils and biodiversity flourish.
+         
+      name: Ru Horlick
+      title: Blockchain Engineer
+      linkedUrl: https://www.linkedin.com/in/rupert-horlick/
+      githubUrl: https://github.com/ruhatch
 contributorSection:
   title: Contributors
   contributors:

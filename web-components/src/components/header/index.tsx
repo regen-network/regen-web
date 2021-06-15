@@ -33,6 +33,7 @@ interface HeaderProps {
   fullWidth?: boolean;
   isAuthenticated?: boolean;
   menuItems?: HeaderMenuItem[];
+  isRegistry?: boolean; // TODO: We can remove this once we have the login buttons and rest of registry homepage live - can calculate from passed values (see below)
   onSignup?: () => void;
   onLogin?: () => void;
   onLogout?: () => void;
@@ -116,7 +117,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   logoItem: {
     [theme.breakpoints.down('xs')]: {},
   },
-  menuList: props => ({
+  menuList: {
     [theme.breakpoints.up('sm')]: {
       display: 'flex',
       paddingTop: theme.spacing(6.5),
@@ -131,7 +132,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     position: 'relative',
     width: 'unset',
     zIndex: 0,
-  }),
+  },
   background: {
     backgroundColor: theme.palette.primary.main,
   },
@@ -222,6 +223,7 @@ export default function Header({
   onSignup,
   onLogin,
   onLogout,
+  isRegistry = false,
   borderBottom = true,
   absolute = true,
   fullWidth = false,
@@ -234,7 +236,7 @@ export default function Header({
 
   const theme = useTheme();
 
-  const isRegistry = !!onLogin && !!onLogout && !!onSignup;
+  // const isRegistry = !!onLogin && !!onLogout && !!onSignup;
   const AppIcon = isRegistry ? RegistryIcon : RegenIcon;
 
   return (
@@ -298,7 +300,7 @@ export default function Header({
                   </MenuItem>
                 );
               })}
-              {isRegistry && (
+              {/* {isRegistry && ( // TODO: This should be un-commented once registry homepage is live
                 <li>
                   {isAuthenticated ? (
                     <Button variant="text" className={styles.loginBtn} onClick={onLogout}>
@@ -315,9 +317,8 @@ export default function Header({
                     </>
                   )}
                 </li>
-              )}
+              )} */}
             </MenuList>
-            {/* <ContainedButton size="small">Login</ContainedButton> */}
           </Box>
           <Box display={{ xs: 'block', sm: 'none' }}>
             <MobileMenu
@@ -332,10 +333,6 @@ export default function Header({
           </Box>
         </Grid>
         {children}
-        {/*<Grid item alignItems="center">
-          <SearchIcon className={classes.searchIcon} />
-          <MenuIcon className={classes.menuIcon} fontSize="large" />
-        </Grid>*/}
       </Grid>
     </div>
   );

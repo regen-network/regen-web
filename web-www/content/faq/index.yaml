@@ -2,13 +2,22 @@ categories:
   - header: concept
     questions:
       - question: What does Regen Network do?
-        answer: md//Regen Network realigns the agricultural economy with ecological health by creating the global marketplace for planetary stewardship. Using a distributed ledger and modern remote sensing technology, our team is creating new tools for how humanity relates to its environment.
-      - question: How does your technology improve the ability to monitor ecological change?
-        answer: >-
-          md//We bring together two cutting edge technologies: satellite driven earth observation science, and blockchain technology, to create the foundation of a new digital monitoring, reporting and verification system for ecological health. The foundation of our approach is open science and open source technology.
+        answer: md//Regen Network realigns the agricultural economy with ecological
+          health by creating the global marketplace for planetary stewardship.
+          Using a distributed ledger and modern remote sensing technology, our
+          team is creating new tools for how humanity relates to its
+          environment.
+      - question: How does your technology improve the ability to monitor ecological
+          change?
+        answer: "md//We bring together two cutting edge technologies: satellite driven
+          earth observation science, and blockchain technology, to create the
+          foundation of a new digital monitoring, reporting and verification
+          system for ecological health. The foundation of our approach is open
+          science and open source technology."
       - question: Who will use Regen Network?
         answer: >-
-          md//**The World’s Farmers** - 37% of the total land area of this planet is engaged in agriculture
+          md//**The World’s Farmers** - 37% of the total land area of this
+          planet is engaged in agriculture
 
 
           **Researchers and Academics** - access to a global incentivized peer to peer ecological data market.
@@ -32,7 +41,9 @@ categories:
           **Black, Indigenous, and People of Color** - We are committed to equity and inclusion for the communities that steward the earth. We are a user governed platform and invite you to participate.
       - question: What are Regen Network's Values?
         answer: >-
-          md//Regen Network’s values can best be expressed in pairing words that normally seemed opposed. We find strength in holding complexity with care and imbuing technology with intention in service to regeneration.
+          md//Regen Network’s values can best be expressed in pairing words that
+          normally seemed opposed. We find strength in holding complexity with
+          care and imbuing technology with intention in service to regeneration.
 
 
           Agency and Cooperation
@@ -49,7 +60,10 @@ categories:
     questions:
       - question: Why do you need a blockchain?
         answer: >-
-          md//The Regen Ledger provides the project three key elements, without which Regen Network’s promise to create a network dedicated to monitoring, verifying and contracting or paying for ecological health outcomes would be impossible.
+          md//The Regen Ledger provides the project three key elements, without
+          which Regen Network’s promise to create a network dedicated to
+          monitoring, verifying and contracting or paying for ecological health
+          outcomes would be impossible.
 
 
           **Data Verification.** Data provenance, and quality can be tracked and verified.
@@ -60,18 +74,38 @@ categories:
 
           **Smart Contracts.** Smart contracts allow for automation of the issuing of ecosystem service credits, or direct payment for ecosystem services, based on verifiable changes in ecological health.
       - question: Why are you building your own blockchain?
-        answer: md//Security, Governance, Scalability, Speed, and above all Usability. We are building as a domain specific blockchain using the Cosmos SDK. Building on the Cosmos SDK means we are in the cosmos ecosystem of zones and hubs which is creating a scalable and interoperable system of blockchains which can be programmed for specific use cases and have governance autonomy.
+        answer: md//Security, Governance, Scalability, Speed, and above all Usability.
+          We are building as a domain specific blockchain using the Cosmos SDK.
+          Building on the Cosmos SDK means we are in the cosmos ecosystem of
+          zones and hubs which is creating a scalable and interoperable system
+          of blockchains which can be programmed for specific use cases and have
+          governance autonomy.
       - question: Why do you need a token?
-        answer: >-
-          md//The REGEN token serves three key functions: to provide security, to govern, and to be used as transaction fees for Regen Ledger. The token also brings users together into a community of shared value: the mutual value of regeneration.
+        answer: "md//The REGEN token serves three key functions: to provide security, to
+          govern, and to be used as transaction fees for Regen Ledger. The token
+          also brings users together into a community of shared value: the
+          mutual value of regeneration."
       - question: What is Regen Network's governance model?
-        answer: >-
-          md//Regen Network’s governance model is Proof of Stake with a substantial upgrade: the Community Staking DAO allocation. The hybrid of pure PoS with an identity and reputation based community of organizations securing and governing the network will create a best in class trust layer for verifying, securing and exchanging natural capital assets.
+        answer: "md//Regen Network’s governance model is Proof of Stake with a
+          substantial upgrade: the Community Staking DAO allocation. The hybrid
+          of pure PoS with an identity and reputation based community of
+          organizations securing and governing the network will create a best in
+          class trust layer for verifying, securing and exchanging natural
+          capital assets."
       - question: Why are you using the Cosmos SDK?
-        answer: md//Regen Network vetted every Open Source Distributed Ledger solution and Tendermint was found to have the right mix of security, deployability, and flexibility for Regen’s Ecological Domain use case.
+        answer: md//Regen Network vetted every Open Source Distributed Ledger solution
+          and Tendermint was found to have the right mix of security,
+          deployability, and flexibility for Regen’s Ecological Domain use case.
       - question: Which protocols are you developing and why?
         answer: >-
-          md//There are several criteria to be taken into account in protocol development. Technical feasibility, how it would compare to existing industry methods, how well the underlying data can encourage positive change in our ecology, whether there is existing market demand, if so, at what cost points, how much human ground truthing is required, and finally would such a protocol be positioned to actually influence current systems of production. With all of these factors in mind, here are some of the protocols currently in the works.
+          md//There are several criteria to be taken into account in protocol
+          development. Technical feasibility, how it would compare to existing
+          industry methods, how well the underlying data can encourage positive
+          change in our ecology, whether there is existing market demand, if so,
+          at what cost points, how much human ground truthing is required, and
+          finally would such a protocol be positioned to actually influence
+          current systems of production. With all of these factors in mind, here
+          are some of the protocols currently in the works.
 
 
           Till / No-Till - highly feasible via satellite, little to no ground truth, strong market demand, has a great positive effect on building and maintaining soil health.
@@ -123,23 +157,45 @@ categories:
   - header: regeneration
     questions:
       - question: What is Regeneration?
-        answer: >-
-          md//Regeneration is the growth of vitality, viability and evolutionary capacity of a system. As defined by our mentor Carol Sanford, the seven first principles of regeneration are: whole, potential, reciprocity, essence, nestedness, nodal, and development. You can [read more here.](https://theregenerativebusinesssummit.com/regeneration/)
+        answer: "md//Regeneration is the growth of vitality, viability and evolutionary
+          capacity of a system. As defined by our mentor Carol Sanford, the
+          seven first principles of regeneration are: whole, potential,
+          reciprocity, essence, nestedness, nodal, and development. You can
+          [read more
+          here.](https://theregenerativebusinesssummit.com/regeneration/)"
       - question: Why is it important to regenerate ecosystems?
         answer: md//Why is it important to refill your bank account?
       - question: Why is farming important?
-        answer: md//Agriculture is the second largest global producer of greenhouse gas emissions. It’s also the critical industry supporting human civilization. And it’s becoming increasingly fragile, much more fragile than most people realize.
+        answer: md//Agriculture is the second largest global producer of greenhouse gas
+          emissions. It’s also the critical industry supporting human
+          civilization. And it’s becoming increasingly fragile, much more
+          fragile than most people realize.
       - question: Why focus on land use?
-        answer: md//All land is deeply connected in biological processes and weather patterns. You can’t just ignore parts of it, what you do in one place, is always affecting others. Our land usage habits are constantly feeding back into the ecology that produces our food, water, fresh air, and biological stability.
+        answer: md//All land is deeply connected in biological processes and weather
+          patterns. You can’t just ignore parts of it, what you do in one place,
+          is always affecting others. Our land usage habits are constantly
+          feeding back into the ecology that produces our food, water, fresh
+          air, and biological stability.
   - header: organization
     questions:
       - question: Who is the team developing Regen Network?
-        answer: md//To learn more about our team and partners, please view [the team page.](/team/)
+        answer: md//To learn more about our team and partners, please view [the team
+          page.](/team/)
       - question: Is Regen Network decentralized?
-        answer: md//Regen Network’s decentralized backbone, Regen Ledger, is decentralized by design. The proof of stake tokens will be widely distributed and different organizations are already responsible for ensuring the success of the larger network vision. We are actively seeking members for our Community Staking DAO program, so if you are a developer, scientist, or land steward, please reach out to engage and support this network being as decentralized as possible at launch.
-      - question: How would you describe the constellation of entities referred to as Regen Network?
+        answer: md//Regen Network’s decentralized backbone, Regen Ledger, is
+          decentralized by design. The proof of stake tokens will be widely
+          distributed and different organizations are already responsible for
+          ensuring the success of the larger network vision. We are actively
+          seeking members for our Community Staking DAO program, so if you are a
+          developer, scientist, or land steward, please reach out to engage and
+          support this network being as decentralized as possible at launch.
+      - question: How would you describe the constellation of entities referred to as
+          Regen Network?
         answer: >-
-          md//**Regen Network** is the overarching whole. Although we often refer to ourselves as Regen Network, the Network is not an organization, but rather a community, a commons, a movement, a public blockchain-based protocol, and a network.
+          md//**Regen Network** is the overarching whole. Although we often
+          refer to ourselves as Regen Network, the Network is not an
+          organization, but rather a community, a commons, a movement, a public
+          blockchain-based protocol, and a network.
 
 
           **Regen Network Development, Inc.** is a Delaware C-Corp running the token sale to capitalize the development of Regen Network. Much of the team you see listed on the website are housed out of RND.
@@ -147,10 +203,15 @@ categories:
 
           **Regen Foundation** is a Delaware 501(c)(3) Organization. Regen Foundation focuses on the pillars of Open Science, Education and Capacity Building, and Technological Tools for the commons. Regen Foundation will govern 5% of the token supply of Regen Ledger as an independent entity after main net launches.
       - question: Are you hiring?
-        answer: md//Check out our hiring updates [here](https://apply.workable.com/regen-network/). If you don’t see a position open, send us a note about yourself anyway - [office@regen.network](mailto:office@regen.network).
+        answer: md//Check out our hiring updates
+          [here](https://apply.workable.com/regen-network/). If you don’t see a
+          position open, send us a note about yourself anyway -
+          [office@regen.network](mailto:office@regen.network).
       - question: How can I get involved?
         answer: >-
-          md//**Develop:** Use our open tech stack to build your own ecological application. Develop a new scientific methodology for verifying ecological state or quantifying ecosystem services.
+          md//**Develop:** Use our open tech stack to build your own ecological
+          application. Develop a new scientific methodology for verifying
+          ecological state or quantifying ecosystem services.
 
 
           **Validate**: Run a validator on our testnets to grow your reputation and your XRN token holdings to make it into the active validator set at main net launch.
@@ -163,60 +224,81 @@ categories:
   - header: developers
     questions:
       - question: When will you launch the first version of Regen Ledger?
-        answer: md//Starting in 2019, Regen Ledger launched a series of testnets, which had the participation of over 80 independent validators in total. Regen Ledger mainnet will launch into the wild in early 2021. Check out [our current roadmap here.](https://www.notion.so/regennetwork/Regen-Network-Roadmap-b804e0d0af7b485ea89c9a723328fd65)
+        answer: md//Starting in 2019, Regen Ledger launched a series of testnets, which
+          had the participation of over 80 independent validators in total.
+          Regen Ledger mainnet will launch into the wild in early 2021. Check
+          out [our current roadmap
+          here.](https://www.notion.so/regennetwork/Regen-Network-Roadmap-b804e0d0af7b485ea89c9a723328fd65)
       - question: When can I try the system out?
-        answer: md//Go to our [github](http://github.com/regen-network/regen-ledger) to follow the latest updates on our blockchain and download the most current version of Regen Ledger. Information on participating in current and upcoming testnets can be found [here](http://github.com/regen-network/testnets).
+        answer: md//Go to our [github](http://github.com/regen-network/regen-ledger) to
+          follow the latest updates on our blockchain and download the most
+          current version of Regen Ledger. Information on participating in
+          current and upcoming testnets can be found
+          [here](http://github.com/regen-network/testnets).
   - header: regen registry
     questions:
       - question: Why should I develop a project on Regen Registry?
         answer: >-
-          md//* **Create a New Revenue Stream:** Get paid for good stewardship for best management practices on Regen Registry, including afforestation, reforestation, forest protection, agroforestry, grazing and ranching, cover crops, crop rotation, and no till/low till. 
-          
+          md//* **Create a New Revenue Stream:** Get paid for good stewardship
+          for best management practices on Regen Registry, including
+          afforestation, reforestation, forest protection, agroforestry, grazing
+          and ranching, cover crops, crop rotation, and no till/low till. 
+
           * **Streamlined End-to-End Process:** On Regen Registry the registration, monitoring, reporting, verification, and marketing are streamlined to save you precious time.
-          
+
           * **Keep More Money:** More money stays in your pocket through automated monitoring services using remote sensing and simplified verification.
-          
+
           * **Integrated Marketing:** Regen Registry's built-in marketing platform showcases the unique story of farmers, land stewards, and ecological change.
-          
+
           * **Highlight Ecological Co-Benefits:** Measure carbon stocks, as well as important ecological and social co-benefits.
       - question: When my project's CarbonPlus credits sell, how do I get paid?
-        answer: md//Project developers create an account on the Regen Registry platform and provide their bank account or credit card. Once a buyer purchases a credit, a payment is made to the project developer’s account after deducting the appropriate fees.
-      - question: What are the steps to register a project on Regen Registry and issue CarbonPlus Credits?
+        answer: md//Project developers create an account on the Regen Registry platform
+          and provide their bank account or credit card. Once a buyer purchases
+          a credit, a payment is made to the project developer’s account after
+          deducting the appropriate fees.
+      - question: What are the steps to register a project on Regen Registry and issue
+          CarbonPlus Credits?
         answer: >-
           md//1. Register a Project.
-          
+
           2. Submit a Project Plan. 
-          
+
           3. Regen Registry reviews the project information for approval.
-          
+
           4. Sign the Regen Registry contract.
-          
+
           5. A dedicated Project Page is published on Regen Registry.
-          
+
           6. Sign a Monitoring contract.
-          
+
           7. Establish a Project Baseline - engage with a Monitor to measure the project baseline.
-          
+
           8. Implement Land Management - implement the project activity(s).
-          
+
           9. Monitor Carbon Stock Change - engage a Monitor throughout Crediting Term to measure the change.
-          
+
           10. Verify - engage with a 3rd party Verifier to validate project data and monitoring.
-          
+
           11. Issue CarbonPlus Credit - Regen Registry issues CarbonPlus Credits based on positive ecological change after Monitoring rounds.
-          
+
           12. Get Paid - Sell your credits through Regen Registry. 
-          
+
           13. Repeat Steps 9-12 for each CarbonPlus Credits issuance during the Project Term.
       - question: How is project data managed?
         answer: >-
-          md//Regen Network aims to provide maximum transparency to CarbonPlus Credit buyers and other stakeholders by making the project documentation, including the Project Plan, Baseline Report, Monitoring Reports, and Verification Reports, publicly available on each Project Page. The data provided as inputs for the Monitoring and Verification process is not made public, but rather the outputs.
+          md//Regen Network aims to provide maximum transparency to CarbonPlus
+          Credit buyers and other stakeholders by making the project
+          documentation, including the Project Plan, Baseline Report, Monitoring
+          Reports, and Verification Reports, publicly available on each Project
+          Page. The data provided as inputs for the Monitoring and Verification
+          process is not made public, but rather the outputs.
 
 
           *In order to provide Project Proponents with data privacy, the [Project Plan](https://docs.google.com/document/d/1wM6LND5SASmwlJ71PqEZZ_L8ECSxEDc0nl98978HRrI/edit?usp=sharing) permits the designation of certain information as “commercially sensitive.” This information will be excluded from the public version of the Project Plan that is made available on the Project Page on Regen Registry.*
       - question: How are CarbonPlus Credits issued for a project on Regen Registry?
         answer: >-
-          md//Each CarbonPlus Credit represents 1 ton of CO2e removed from the atmosphere. 
+          md//Each CarbonPlus Credit represents 1 ton of CO2e removed from the
+          atmosphere. 
 
 
           The approved Methodology for each Credit Class defines how each underlying indicator, such as Soil Organic Carbon, is measured. Regen Registry issues CarbonPlus Credits based on the difference between the latest monitoring round’s measurements and the measurements during the latest issuance event (or the baseline measurement if this is the first issuance). When there is an increase in carbon stocks between monitoring rounds, a Project Proponent can issue a CarbonPlus Credit. 
@@ -229,9 +311,11 @@ categories:
 
 
           See the Program Guide for more details.
-      - question: What types of ecological change can Regen Registry monitor and issue CarbonPlus Credits for?
+      - question: What types of ecological change can Regen Registry monitor and issue
+          CarbonPlus Credits for?
         answer: >-
-          md//The CarbonPlus Grasslands Credit focuses on Soil Organic Carbon in grasslands and pastureland. 
+          md//The CarbonPlus Grasslands Credit focuses on Soil Organic Carbon in
+          grasslands and pastureland. 
 
 
           Other CarbonPlus Credits in development include forestry-based Credits (afforestation, reforestation, avoided deforestation, and agroforestry) and cropland-based Soil Organic Carbon Credits (no-till and low-till, cover crop, and crop rotation).
@@ -240,30 +324,34 @@ categories:
           In the future, Regen Registry will invite Credit designers and Methodology developers to innovate and design new Credits and Methodologies, subject to the approval and peer review processes required by Regen Registry.
       - question: Why should I purchase CarbonPlus credits from Regen Registry?
         answer: >-
-          md//Financing carbon offsets / removals is a core component of climate action for companies and individuals. Climate commitments can help:
+          md//Financing carbon offsets / removals is a core component of climate
+          action for companies and individuals. Climate commitments can help:
 
 
           1. **Deliver on Climate Action Goals:** Contribute to the United Nations Framework Convention on Climate Change (UNFCCC) Paris Agreement by making a direct investment in the low-carbon transition through supporting carbon removal projects.
-          
+
           2. **Make an Impact towards the UN Sustainable Development Goals:** Regen Registry projects measure regenerative environmental and social co-benefits that deliver UN Sustainable Development Goal impacts.
-          
+
           3. **Gain Recognition by Civil Society:** Companies are motivated to remove their carbon footprint and engage in credible climate impact strategies.
-          
+
           4. **Make Climate Claims:** Purchases of carbon offsets / removals that are equivalent to or greater than your carbon footprint can be used to fulfill ‘carbon neutral,’ ‘climate neutral,’ and ‘climate positive’ claims.
-          
+
           5. **Invest Directly in Farmers and Land Stewards:** CarbonPlus Credit purchases contribute 75 cents of each dollar directly to Project Proponents to continue and expand their ecologically postive land stewardship.
-      - question: How is Regen Registry different from other programs that help land stewards receive payments for carbon removals and ecological services?
+      - question: How is Regen Registry different from other programs that help land
+          stewards receive payments for carbon removals and ecological services?
         answer: >-
-          md//Regen Registry was designed from the ground-up with a team of farmers, ranchers, and land stewards to address many of the challenges with existing ecological payments programs:
+          md//Regen Registry was designed from the ground-up with a team of
+          farmers, ranchers, and land stewards to address many of the challenges
+          with existing ecological payments programs:
 
 
           **Regen Registry Offers Low Project Costs**
 
 
           * Low Cost - significantly lower than existing registries, which require consultants to perform manual in-situ measurements; Regen Registry relies on automated remote sensing monitoring to streamline projects costs.
-          
+
           * Minimal Registry Fees - Regen Registry charges a single fee for credit issuance. There are no account fees, project listing fees, transfer fees, activation fee, etc.
-          
+
           * Share Upfront Project Costs - Regen Registry supports multi-party ownership of CarbonPlus Credits to enable the sharing of upfront costs between farmers, land owners and/or project developers. Further, through aggregated projects with multiple local farmers, monitoring and verification costs can be further streamlined.
 
 
@@ -271,9 +359,9 @@ categories:
 
 
           * Premiums - Project Pages on Regen Registry tell the unique story of each land steward and ecological practice. CarbonPlus Credit buyers can explore projects with holistic ecological impacts, including carbon stock measurement, ecological co-benefits, and UN Sustainable Development Goal outcomes. Each project's ecological impact on Regen Registry is unique, which translates into premium CarbonPlus Credits.
-          
+
           * Simplified Payments - integrated payment platform provides direct real-time payments, including credit card, bank, and mobile. 
-          
+
           * Affordable Brokerage Services - Regen Registry offers affordable, optional brokerage services. 
 
 
@@ -281,42 +369,52 @@ categories:
 
 
           * Simple Project Registration - Regen Registry's simple registration involves a short intake form and project plan that can be completed in one sitting.
-          
+
           * Monitoring Services - Regen Registry provides automated monitoring services that require only a minimal set of soil samples.
   - header: carbonplus credits
     questions:
       - question: What is a CarbonPlus credit?
         answer: >-
-          md//CarbonPlus credits are voluntary carbon credits. Each credit represents one tonne of CO2e removed from the atmosphere and stored in the soil or biomass. On top of carbon removal, credits also include ecological and social co-benefits, such as soil health, ecosystem health, and animal welfare.
+          md//CarbonPlus credits are voluntary carbon credits. Each credit
+          represents one tonne of CO2e removed from the atmosphere and stored in
+          the soil or biomass. On top of carbon removal, credits also include
+          ecological and social co-benefits, such as soil health, ecosystem
+          health, and animal welfare.
 
 
           Both the carbon sequestration and the co-benefits are measured. The number of credits are issued solely based on the tons of CO2e sequestered, measured based on remote sensing analysis in combination with a limited set of soil samples.
 
 
           In the case of the CarbonPlus Grasslands Credit, Livestock emissions (N2O and CH4) quantification is based on the number of livestock and number of days they spent in the project area.
-      - question: What are the CarbonPlus Credit terms related to greenhouse gas accounting?
+      - question: What are the CarbonPlus Credit terms related to greenhouse gas
+          accounting?
         answer: >-
-          md//1. **Additionality** - based on adopting a new activity from a pre-approved list which includes activities approved by either the Australian Government’s Carbon Farming Initiative or the California Department of Food and Agriculture (CDFA) Healthy Soils Program (HSP). We accept adoption dates (the date the new project activity was applied) up to 10 years prior to project registration.
-          
+          md//1. **Additionality** - based on adopting a new activity from a
+          pre-approved list which includes activities approved by either the
+          Australian Government’s Carbon Farming Initiative or the California
+          Department of Food and Agriculture (CDFA) Healthy Soils Program (HSP).
+          We accept adoption dates (the date the new project activity was
+          applied) up to 10 years prior to project registration.
+
           2. **Permanence** - 25 year, either through covenant or dedicated reversal buffer (5% of each issuance)
-          
+
           3. **Buffer Pool** - 20% of each issuance is allocated to a dedicated uncertainty pool (note, this is a separate account than the Permanence Reversal Buffer)
-          
+
           4. **Leakage** - market leakage related to grassland management activities is likely to be negligible (de minimis) but if project proponents expect above de minimis rates, an appropriate discount factor will be applied during the GHG quantification.
-          
+
           5. **Double Counting** - project proponents will be required to commit to not applying for credits for the same land and emission reduction/removal concurrently on any other registry / GHG Program
-          
+
           6. **Verification** - an independent third-party verifier provides an assurance of the integrity of the data and information provided by project proponents and the monitoring process
       - question: Are CarbonPlus Credits securities or commodities?
-        answer: >-
-          md//CarbonPlus Credits are a commodity.
-      - question: As a project developer, how much can I earn by issuing CarbonPlus Credits for my project?
+        answer: md//CarbonPlus Credits are a commodity.
+      - question: As a project developer, how much can I earn by issuing CarbonPlus
+          Credits for my project?
         answer: >-
           md//CarbonPlus Credits returns are highly dependent on two factors:
 
 
           * Credit Price - which fluctuates with the demand and supply of the voluntary carbon credit markets
-          
+
           * Carbon Sequestration Rate - which depends on land management and climatic conditions
 
 
@@ -335,29 +433,42 @@ categories:
           - **Monitoring**:
             - Soil Sampling  - soil sampling collection and lab analysis ($25 - $100 per sample)
             - Remote Sensing Analysis - quantifies GHG based on Soil Organic Carbon measurements and satellite imagery ($7,500 to $15,000 per monitoring round)
-          
+
 
           - **Verification**: independent 3rd party auditor ($5,000 to $15,000 per monitoring round)
-          
+
 
           - **CarbonPlus Credit Issuance fees**: Regen Network charges a fee for each credit issuance.
-          
+
 
           - **CarbonPlus Credit Brokerage fees**: Regen Network charges a fee for optional brokerage services.
 
 
           *The CarbonPlus Credit Issuance and CarbonPlus Credit Brokerage fees are deferred to issuance and sale respectively, and therefore are not upfront costs. Regen Network does not fulfill the role of Verifier for projects where Regen Network is the monitor. This requires an external party, and fees associated are not charged by Regen Network Development, Inc.*
       - question: Is funding available for upfront project development costs?
-        answer: >-
-          md//Regen Network does not provide funding support for upfront project development costs. In the case that Regen Network secures forward contracts with CarbonPlus Credit buyers, Regen Network may consider supporting some projects directly.
+        answer: md//Regen Network does not provide funding support for upfront project
+          development costs. In the case that Regen Network secures forward
+          contracts with CarbonPlus Credit buyers, Regen Network may consider
+          supporting some projects directly.
       - question: How are carbon removals quantified?
-        answer: >-
-          md//Carbon removals are calculated using standard GHG accounting practices. Soil Organic Carbon percentages measured in soil samples are calibrated with [Sentinel 2](https://sentinel.esa.int/web/sentinel/missions/sentinel-2) satellite imagery in a given monitoring time period to calculate the changes in Soil Organic Carbon stocks from the baseline measurement.
+        answer: md//Carbon removals are calculated using standard GHG accounting
+          practices. Soil Organic Carbon percentages measured in soil samples
+          are calibrated with [Sentinel
+          2](https://sentinel.esa.int/web/sentinel/missions/sentinel-2)
+          satellite imagery in a given monitoring time period to calculate the
+          changes in Soil Organic Carbon stocks from the baseline measurement.
       - question: Is soil sampling required for project monitoring?
-        answer: md//Yes, a limited number of soil samples are required. The average farm will require around 25 samples per monitoring round, whereas larger farms may require 50-75 samples per monitoring round. Refer to the Monitoring Methodology document for each CarbonPlus Credit Class for further instructions.
-      - question: Can historical project data be used to monitor and issue CarbonPlus Credits?
+        answer: md//Yes, a limited number of soil samples are required. The average farm
+          will require around 25 samples per monitoring round, whereas larger
+          farms may require 50-75 samples per monitoring round. Refer to the
+          Monitoring Methodology document for each CarbonPlus Credit Class for
+          further instructions.
+      - question: Can historical project data be used to monitor and issue CarbonPlus
+          Credits?
         answer: >-
-          md//If the adoption date of the approved project activity is within 10 years prior to project registration, we can accept historical soil sampling data as early as 2017. 
+          md//If the adoption date of the approved project activity is within 10
+          years prior to project registration, we can accept historical soil
+          sampling data as early as 2017. 
 
 
           CarbonPlus Grasslands Credits projects must follow the instructions provided in Regen Network’s [Methodology for Soil Sampling in Grazing Systems](https://drive.google.com/file/d/1Rn-BhjCxKHfnmenSqNcx0wW9j1_pNjXP/view?usp=sharing) to align with the monitoring protocol. If the monitor can verify that Soil Organic Carbon has been sequestered over these historical time periods, your project may be eligible for credit issuance for 2017 onward.
@@ -367,84 +478,107 @@ categories:
 
 
           * Ecosystem health is based on the Costanza Framework, measuring its ability to maintain structure (organization) and function (vigor) over time in the face of external stress (resilience).
-          
+
           * Soil health is based on Cornell University’s Soil Health Assessment, assessing micronutrients and macronutrients.
-          
+
           * Animal welfare is based on adherence to national animal welfare standards that track nutrition level, access to water, social contact, and more key factors.
 
 
 
           *Guidance for additional ecological co-benefits measurement is forthcoming.*
       - question: Where can I learn more about the CarbonPlus Grasslands Credit?
-        answer: >-
-          md//Please review the [Program Guide](https://regen-registry.s3.amazonaws.com/Regen+Registry+Program+Guide.pdf), the [Credit Class](https://regen-registry.s3.amazonaws.com/GHG+and+Co-Benefits+in+Grazing+Systems+Credit+Class.pdf) and the [Methodology](https://regen-registry.s3.amazonaws.com/Methodology+for+GHG+and+Co-Benefits+in+Grazing+Systems.pdf).
+        answer: md//Please review the [Program
+          Guide](https://regen-registry.s3.amazonaws.com/Regen+Registry+Program+Guide.pdf),
+          the [Credit
+          Class](https://regen-registry.s3.amazonaws.com/GHG+and+Co-Benefits+in+Grazing+Systems+Credit+Class.pdf)
+          and the
+          [Methodology](https://regen-registry.s3.amazonaws.com/Methodology+for+GHG+and+Co-Benefits+in+Grazing+Systems.pdf).
       - question: What standards are followed for CarbonPlus Credits?
         answer: >-
-          md//Regen Registry standards can be found in the Program Guide and the respective Credit Class for each CarbonPlus Credit.
+          md//Regen Registry standards can be found in the Program Guide and the
+          respective Credit Class for each CarbonPlus Credit.
 
 
           The Program Guide follows the best practices of GHG accounting, AFOLU (Agriculture, Forestry and Other Land Use) and SOC (Soil Organic Carbon) methodologies, including these well established reference standards:
 
 
           * American Carbon Registry (ACR) Registry Standard v6.0
-          
+
           * The Australian Government’s Carbon Farming Initiative - Measurement of Soil Carbon Sequestration in Agricultural Systems - Methodology Determination 2018
-          
+
           * Gold Standard Soil Organic Carbon Framework Methodology v1.0
-          
+
           * VCS Standard v4.0
-          
+
           * GHG Protocol for Project Accounting
       - question: Who are the Verifiers?
-        answer: >-
-          md//Regen Network accepts Verifiers who are already approved as Verifiers on American Carbon Registry, Verra, and Gold Standard. New Verifiers may apply to Regen Network for approval. See the Program Guide for more details.
-      - question: Which activities are approved for the CarbonPlus Grasslands Credit and satisfy the additionality requirement?
+        answer: md//Regen Network accepts Verifiers who are already approved as
+          Verifiers on American Carbon Registry, Verra, and Gold Standard. New
+          Verifiers may apply to Regen Network for approval. See the Program
+          Guide for more details.
+      - question: Which activities are approved for the CarbonPlus Grasslands Credit and
+          satisfy the additionality requirement?
         answer: >-
           md//Eligible approved activities include:
 
 
           * Any management activity approved by the Carbon Farming Initiative related to grasslands and/or grazing.
-          
+
           * Any conservation practice approved by California Department of Food and Agriculture [Healthy Soils Program](https://www.cdfa.ca.gov/oefi/healthysoils/IncentivesProgram.html) related to grasslands and/or grazing.
       - question: What happens if a project loses Soil Organic Carbon in a given year?
-        answer: md//Regen Network recognize that Soil Organic Carbon stocks fluctuate naturally, especially during extreme climatic conditions, such as drought. At the end of the project term we reconcile the Soil Organic Carbon stock level with the prior monitored level. If Soil Organic Carbon has been lost we use the Buffer Pool to accommodate the carbon stock gap. See the Program Guide’s Buffer Pool section for more details.
+        answer: md//Regen Network recognize that Soil Organic Carbon stocks fluctuate
+          naturally, especially during extreme climatic conditions, such as
+          drought. At the end of the project term we reconcile the Soil Organic
+          Carbon stock level with the prior monitored level. If Soil Organic
+          Carbon has been lost we use the Buffer Pool to accommodate the carbon
+          stock gap. See the Program Guide’s Buffer Pool section for more
+          details.
       - question: When are CarbonPlus Credits issued?
-        answer: >-
-          md//The first CarbonPlus Credits issuance happens after a new project has completed the baseline and two monitoring rounds, in Year 2 of the project. The Monitoring Methodology requires a minimum of six monitoring rounds in the 10 year Crediting Term. After each monitoring event, if there is positive change in soil carbon stocks since the last monitoring, projects can elect to issue CarbonPlus Credits.
+        answer: md//The first CarbonPlus Credits issuance happens after a new project
+          has completed the baseline and two monitoring rounds, in Year 2 of the
+          project. The Monitoring Methodology requires a minimum of six
+          monitoring rounds in the 10 year Crediting Term. After each monitoring
+          event, if there is positive change in soil carbon stocks since the
+          last monitoring, projects can elect to issue CarbonPlus Credits.
       - question: Can projects be cancelled prematurely after they have begun?
-        answer: >-
-          md//Regen Registry allows projects to cancel prematurely. Please refer to the Program Guide’s Premature Termination section for more details.
+        answer: md//Regen Registry allows projects to cancel prematurely. Please refer
+          to the Program Guide’s Premature Termination section for more details.
       - question: What does the Project Page on Regen Registry include?
         answer: >-
           md//The Project Page includes:
 
 
           * Project description
-          
+
           * Land Steward description
-          
+
           * Photos and videos of the project
-          
+
           * Key land management activities
-          
+
           * Summary of the CarbonPlus Credit and ecological co-benefits
-          
+
           * Number of Credits Issued, Available for Sale
-          
+
           * Project timeline
-          
+
           * Monitoring Reports, including the Baseline Reports, Monitoring Reports, and Soil Samples
-          
+
           * Project Plan 
 
 
             *Project Pages can be customized.*
       - question: Do CarbonPlus Credit prices vary?
-        answer: >-
-          md//CarbonPlus Credit price is a function of demand and supply. CarbonPlus Credit price is also informed by the type and quality of each project on the Regen Registry.
+        answer: md//CarbonPlus Credit price is a function of demand and supply.
+          CarbonPlus Credit price is also informed by the type and quality of
+          each project on the Regen Registry.
       - question: Is Monitoring performed during the Permanence Period?
-        answer: >-
-          md//Projects that choose to utilize a Permanence Reversal Buffer (rather than putting the land under covenant) are required to complete a monitoring round at the end of the Permanence Period to reconcile carbon stock levels and address any carbon stock reversals that may have occurred. See the Program Guide’s Permanence Reversal Buffer section for more details.
+        answer: md//Projects that choose to utilize a Permanence Reversal Buffer (rather
+          than putting the land under covenant) are required to complete a
+          monitoring round at the end of the Permanence Period to reconcile
+          carbon stock levels and address any carbon stock reversals that may
+          have occurred. See the Program Guide’s Permanence Reversal Buffer
+          section for more details.
       - question: Do I have to use Regen Network for monitoring?
         answer: >-
           md//At this time, Regen Network is the only approved monitor. 
@@ -477,17 +611,33 @@ categories:
   - header: token
     questions:
       - question: How do I get REGEN?
-        answer: >-
-          md//Regen Ledger is not yet live, so REGEN are not yet available on exchanges. The only way to gain access to REGEN at this moment is through our private token sale to accredited investors only under US Reg D, Reg S exemptions, or through participation in our testnets or developer bounty programs.
+        answer: md//REGEN are not yet available on exchanges however governance
+          proposals required to allow transfers and Inter Blockchain
+          Communication (IBC) are currently in the voting period on chain. If
+          and when this passes, token holders may transfer tokens to anyone with
+          a REGEN wallet. Please see the “Are you listed on exchanges” for more
+          information.
       - question: What type of tokens are REGEN?
-        answer: >-
-          md//The REGEN token is a staking and utility token launched on our own Tendermint BFT powered blockchain. It will be a functional sidechain of Ethereum and other primary cryptocurrencies through the Cosmos IBC protocol.
-      - question: Are you listed on exchanges? 
-        answer: >-
-          md//Regen Ledger is not yet live, so REGEN is not yet available on exchanges.
+        answer: md//The REGEN token is a staking and utility token launched on our own
+          Tendermint BFT powered blockchain. Transaction fees on Regen Network
+          will be paid in REGEN, and additional fees in REGEN will be required
+          for special actions such as creating a new ecocredit class on chain.
+      - question: Are you listed on exchanges?
+        answer: md//REGEN is not yet available on exchanges but if the current on-chain
+          proposals pass then several members of our community plan to launch a
+          pool on the Osmosis DEX as the first Liquidity Bootstrapping Pool.
       - question: How many tokens will be created when?
-        answer: >-
-          md//At the Token Generation Event, which is scheduled for Q1, 2021, 100,000,000 REGEN will be created and distributed to the various wallets and contracts as dictated by the genesis file. From that point forward, the only Regen Tokens that will be added to the supply are through a mechanism referred to as inflation, which is a Proof of Stake mechanism to encourage token holders to stake their tokens and participate in governance.
+        answer: md//During the Token Generation Event, which happened on Apr 15 2021,
+          100,000,000 REGEN were created and distributed to the various wallets
+          and contracts as dictated by the genesis file. Since then, the only
+          Regen Tokens that have been added to the supply are through a
+          mechanism referred to as inflation, which is a Proof of Stake
+          mechanism to encourage token holders to stake their tokens and
+          participate in governance.
       - question: What does REGEN allow me to do?
-        answer: >-
-          md//REGEN is the native governance token of Regen Network. Assuming the token holder stakes their tokens, they allow one to participate in the governance of the chain, receive block rewards and receive their share of the inflation mechanism. As the native token for Regen Ledger, REGEN must be used to pay for transaction costs on-chain.
+        answer: md//REGEN is the native governance token of Regen Network. Assuming the
+          token holders stake their tokens, the token allows one to participate
+          in the governance of the chain, receive block rewards and receive
+          their share of the inflation mechanism. As the native token for Regen
+          Ledger, REGEN must be used to pay for transaction costs on-chain
+          commonly referred to as gas which is required to transfer REGEN.

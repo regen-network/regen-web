@@ -211,6 +211,7 @@ const App: React.FC = (): JSX.Element => {
                         ],
                         'http://www.w3.org/ns/shacl#maxCount': [{ '@value': 1 }],
                         'http://www.w3.org/ns/shacl#minCount': [{ '@value': 1 }],
+                        'http://www.w3.org/ns/shacl#minLength': [{ '@value': 1 }],
                         'http://www.w3.org/ns/shacl#group': [
                           { '@id': 'http://regen.network/ProjectPageBasicInfoGroup' },
                         ],
@@ -709,6 +710,7 @@ const App: React.FC = (): JSX.Element => {
                           { '@id': 'http://www.w3.org/2001/XMLSchema#double' },
                         ],
                         'http://www.w3.org/ns/shacl#minCount': [{ '@value': 1 }],
+                        'http://www.w3.org/ns/shacl#minExclusive': [{ '@value': 0 }],
                         'http://www.w3.org/ns/shacl#maxCount': [{ '@value': 1 }],
                         'http://www.w3.org/ns/shacl#group': [
                           { '@id': 'http://regen.network/ProjectPageBasicInfoGroup' },
@@ -732,14 +734,20 @@ const App: React.FC = (): JSX.Element => {
                       {
                         '@id': '_:b65',
                         'http://www.w3.org/1999/02/22-rdf-syntax-ns#first': [
-                          { '@id': 'http://qudt.org/1.1/vocab/unit#HA' },
+                          {
+                            '@value': 'http://qudt.org/1.1/vocab/unit#HA',
+                            '@type': 'http://qudt.org/1.1/schema/qudt#unit',
+                          },
                         ],
                         'http://www.w3.org/1999/02/22-rdf-syntax-ns#rest': [{ '@id': '_:b66' }],
                       },
                       {
                         '@id': '_:b66',
                         'http://www.w3.org/1999/02/22-rdf-syntax-ns#first': [
-                          { '@id': 'http://qudt.org/1.1/vocab/unit#AC' },
+                          {
+                            '@value': 'http://qudt.org/1.1/vocab/unit#AC',
+                            '@type': 'http://qudt.org/1.1/schema/qudt#unit',
+                          },
                         ],
                         'http://www.w3.org/1999/02/22-rdf-syntax-ns#rest': [
                           { '@id': 'http://www.w3.org/1999/02/22-rdf-syntax-ns#nil' },

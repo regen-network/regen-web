@@ -43,31 +43,19 @@ const ChooseCreditClass: React.FC = () => {
     },
   });
   const [updateProject] = useUpdateProjectByIdMutation();
-  console.log(creditClassesData);
 
   async function handleSelection(creditClassId: string, creditClassUri: string): Promise<void> {
     if (graphData?.shaclGraphByUri?.graph) {
-      const projectPageData = getProjectPageBaseData();
-      projectPageData['regen:creditClass'] = {
-        '@type': 'regen:CreditClass',
+      const metadata = getProjectPageBaseData();
+      metadata['http://regen.network/creditClass'] = {
+        '@type': 'http://regen.network/CreditClass',
         '@id': creditClassUri,
       };
       const report = await validate(
         graphData.shaclGraphByUri.graph,
-        projectPageData,
+        metadata,
         'http://regen.network/ProjectPageCreditClassGroup',
       );
-      console.log(report);
-      for (const result of report.results) {
-        // See https://www.w3.org/TR/shacl/#results-validation-result for details
-        // about each property
-        console.log(result.message);
-        console.log(result.path);
-        console.log(result.focusNode);
-        console.log(result.severity);
-        console.log(result.sourceConstraintComponent);
-        console.log(result.sourceShape);
-      }
       if (report.conforms) {
         try {
           await updateProject({
@@ -76,14 +64,14 @@ const ChooseCreditClass: React.FC = () => {
                 id: projectId,
                 projectPatch: {
                   creditClassId,
-                  metadata: projectPageData,
+                  metadata,
                 },
               },
             },
           });
           history.push(`/project-pages/${projectId}/basic-info`);
         } catch (e) {
-          // Should we display the error banner here?
+          // TODO: Should we display the error banner here?
           console.log(e);
         }
       }

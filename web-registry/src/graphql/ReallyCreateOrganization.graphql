@@ -1,0 +1,8 @@
+mutation ReallyCreateOrganization($input: ReallyCreateOrganizationInput!) {
+  reallyCreateOrganization(input: $input) {
+    organization {
+      id
+      partyId
+    }
+  }
+}

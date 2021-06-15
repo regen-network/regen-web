@@ -25,6 +25,7 @@ import {
   GettingStarted,
   // Home,
   NotFoundPage,
+  OrganizationProfile,
   PostPurchase,
   Project,
   ProjectPlans,
@@ -118,6 +119,7 @@ const App: React.FC = (): JSX.Element => {
             )}
           />
           <ProtectedRoute path="/user-profile" component={UserProfile} />
+          <ProtectedRoute path="/organization-profile" component={OrganizationProfile} />
           <Route
             path="/project-pages"
             render={({ match: { path } }) => (

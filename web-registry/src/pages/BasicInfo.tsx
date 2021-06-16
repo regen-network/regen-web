@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 
 import { BasicInfoForm, BasicInfoFormValues } from '../components/organisms';
@@ -14,8 +14,14 @@ const BasicInfo: React.FC = () => {
     variables: { id: projectId },
   });
 
-  // TODO Set initial field values based on existing project data
-  const [initialFieldValues] = useState<Partial<BasicInfoFormValues> | undefined>();
+  let initialFieldValues: BasicInfoFormValues | undefined;
+  if (data?.projectById?.metadata) {
+    const metadata = data.projectById.metadata;
+    initialFieldValues = {
+      'http://schema.org/name': metadata['http://schema.org/name'],
+      'http://regen.network/size': metadata['http://regen.network/size'],
+    };
+  }
 
   async function saveAndExit(): Promise<void> {
     // TODO: functionality

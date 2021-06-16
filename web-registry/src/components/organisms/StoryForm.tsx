@@ -16,6 +16,7 @@ import { validate, getProjectPageBaseData } from '../../lib/rdf';
 interface StoryFormProps {
   submit: (values: StoryValues) => Promise<void>;
   exampleProjectUrl: string;
+  initialValues?: StoryValues;
 }
 
 export interface StoryValues {
@@ -159,7 +160,7 @@ const ModalContent: React.FC<{ exampleProjectUrl: string; fieldName: exampleFiel
   );
 };
 
-const StoryForm: React.FC<StoryFormProps> = ({ submit, exampleProjectUrl }) => {
+const StoryForm: React.FC<StoryFormProps> = ({ submit, exampleProjectUrl, initialValues }) => {
   const styles = useStyles();
   const { data: graphData } = useShaclGraphByUriQuery({
     variables: {
@@ -181,12 +182,15 @@ const StoryForm: React.FC<StoryFormProps> = ({ submit, exampleProjectUrl }) => {
   return (
     <>
       <Formik
-        initialValues={{
-          'http://regen.network/landStory': '',
-          'http://regen.network/landStewardStory': '',
-          'http://regen.network/landStewardStoryTitle': '',
-          'http://regen.network/projectQuote': undefined,
-        }}
+        enableReinitialize
+        initialValues={
+          initialValues || {
+            'http://regen.network/landStory': '',
+            'http://regen.network/landStewardStory': '',
+            'http://regen.network/landStewardStoryTitle': '',
+            'http://regen.network/projectQuote': undefined,
+          }
+        }
         validate={async (values: StoryValues) => {
           const errors: FormikErrors<StoryValues> = {};
           if (graphData?.shaclGraphByUri?.graph) {

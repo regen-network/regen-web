@@ -15,7 +15,7 @@ import { validate, getProjectPageBaseData } from '../../lib/rdf';
 
 interface BasicInfoFormProps {
   submit: (values: BasicInfoFormValues) => Promise<void>;
-  initialValues?: Partial<BasicInfoFormValues>;
+  initialValues?: BasicInfoFormValues;
 }
 
 export interface BasicInfoFormValues {
@@ -70,7 +70,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const BasicInfoForm: React.FC<BasicInfoFormProps> = ({ submit }) => {
+const BasicInfoForm: React.FC<BasicInfoFormProps> = ({ submit, initialValues }) => {
   const classes = useStyles();
   const { data: graphData } = useShaclGraphByUriQuery({
     variables: {
@@ -80,19 +80,22 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({ submit }) => {
 
   return (
     <Formik
-      initialValues={{
-        'http://schema.org/name': '',
-        'http://regen.network/size': {
-          'http://qudt.org/1.1/schema/qudt#numericValue': {
-            '@type': 'http://www.w3.org/2001/XMLSchema#double',
-            '@value': undefined,
+      enableReinitialize
+      initialValues={
+        initialValues || {
+          'http://schema.org/name': '',
+          'http://regen.network/size': {
+            'http://qudt.org/1.1/schema/qudt#numericValue': {
+              '@type': 'http://www.w3.org/2001/XMLSchema#double',
+              '@value': undefined,
+            },
+            'http://qudt.org/1.1/schema/qudt#unit': {
+              '@type': 'http://qudt.org/1.1/schema/qudt#unit',
+              '@value': 'http://qudt.org/1.1/vocab/unit#HA',
+            },
           },
-          'http://qudt.org/1.1/schema/qudt#unit': {
-            '@type': 'http://qudt.org/1.1/schema/qudt#unit',
-            '@value': 'http://qudt.org/1.1/vocab/unit#HA',
-          },
-        },
-      }}
+        }
+      }
       validate={async (values: BasicInfoFormValues) => {
         const errors: FormikErrors<BasicInfoFormValues> = {};
         if (graphData?.shaclGraphByUri?.graph) {

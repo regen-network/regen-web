@@ -23,7 +23,6 @@ const BasicInfo: React.FC = () => {
 
   async function submit(values: BasicInfoFormValues): Promise<void> {
     const metadata = { ...data?.projectById?.metadata, ...values };
-    console.log(values)
     try {
       await updateProject({
         variables: {
@@ -46,14 +45,7 @@ const BasicInfo: React.FC = () => {
   }
 
   return (
-    <OnboardingFormTemplate
-      activeStep={0}
-      title="Basic Info"
-      submit={submit}
-      goBack={() => Promise.resolve()}
-      goForward={() => Promise.resolve()}
-      saveAndExit={saveAndExit}
-    >
+    <OnboardingFormTemplate activeStep={0} title="Basic Info" saveAndExit={saveAndExit}>
       <BasicInfoForm submit={submit} initialValues={initialFieldValues} />
     </OnboardingFormTemplate>
   );

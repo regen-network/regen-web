@@ -9,6 +9,7 @@ import TextField from 'web-components/lib/components/inputs/TextField';
 import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
 import SelectTextField from 'web-components/lib/components/inputs/SelectTextField';
 import { requiredMessage } from 'web-components/lib/components/inputs/validation';
+import OnboardingFooter from 'web-components/lib/components/fixed-footer/OnboardingFooter';
 import { useShaclGraphByUriQuery } from '../../generated/graphql';
 import { validate, getProjectPageBaseData } from '../../lib/rdf';
 
@@ -117,7 +118,6 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({ submit }) => {
         return errors;
       }}
       onSubmit={async (values, { setSubmitting }) => {
-        console.log(values)
         setSubmitting(true);
         try {
           await submit(values);
@@ -127,7 +127,7 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({ submit }) => {
         }
       }}
     >
-      {() => {
+      {({ submitForm, submitCount, isValid, isSubmitting }) => {
         return (
           <Form>
             <OnBoardingCard>
@@ -159,6 +159,15 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({ submit }) => {
                 </div>
               </div>
             </OnBoardingCard>
+            <OnboardingFooter
+              saveText={'Save and Next'}
+              onSave={submitForm}
+              // onPrev={} // TODO
+              // onNext={} // TODO
+              hideProgress={false} // TODO
+              saveDisabled={(submitCount > 0 && !isValid) || isSubmitting}
+              percentComplete={0} // TODO
+            />
           </Form>
         );
       }}

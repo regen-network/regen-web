@@ -10,9 +10,15 @@ import Title from 'web-components/lib/components/title';
 
 const useStyles = makeStyles((theme: Theme) => ({
   description: {
-    lineHeight: theme.typography.pxToRem(33),
-    fontSize: theme.typography.pxToRem(22),
     textAlign: 'center',
+    [theme.breakpoints.up('sm')]: {
+      fontSize: theme.typography.pxToRem(22),
+      lineHeight: theme.typography.pxToRem(33),
+    },
+    [theme.breakpoints.down('xs')]: {
+      fontSize: theme.typography.pxToRem(18),
+      lineHeight: theme.typography.pxToRem(27),
+    },
   },
   topDescription: {
     paddingBottom: theme.spacing(8),

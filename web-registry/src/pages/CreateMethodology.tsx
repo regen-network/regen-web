@@ -1,31 +1,67 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
+import CardMedia from '@material-ui/core/CardMedia';
 
 import Section from 'web-components/lib/components/section';
-import { HeroTitle, HeroAction } from '../components/molecules';
-
-import fernImg from '../assets/fern-in-hands.png';
-import writingOnPaperImg from '../assets/writing-on-paper.png';
 import StepCard, { ProjectPlanStep } from 'web-components/lib/components/cards/StepCard';
+import ImpactCard from 'web-components/lib/components/cards/ImpactCard';
+import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';
+import ResourcesCard from 'web-components/lib/components/cards/ResourcesCard';
+
+import { HeroTitle, HeroAction } from '../components/molecules';
+import { StepCardsWithDescription } from '../components/organisms';
+import { outcomes, resources } from '../mocks';
 
 import { ReactComponent as Checklist } from '../assets/svgs/green-yellow-checklist.svg';
 import { ReactComponent as Charts } from '../assets/svgs/green-charts.svg';
+import { ReactComponent as MagnifyingGlass } from '../assets/svgs/green-magnifying-glass-eye.svg';
 import { ReactComponent as DocumentWithCheckmark } from '../assets/svgs/yellow-check-document.svg';
 import { ReactComponent as Scientist } from '../assets/svgs/scientist-with-vial.svg';
 import { ReactComponent as CowCelebrating } from '../assets/svgs/green-cow-celebrating.svg';
-import { StepCardsWithDescription } from '../components/organisms';
+import fernImg from '../assets/fern-in-hands.png';
+import writingOnPaperImg from '../assets/writing-on-paper.png';
+import topographyImg from '../assets/topography-pattern-full-1.png';
+import FixedFooter from 'web-components/lib/components/fixed-footer';
+import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 
 const useStyles = makeStyles((theme: Theme) => ({
+  root: {
+    background: theme.palette.primary.main,
+  },
   heroMain: {
-    paddingBottom: theme.spacing(22),
+    [theme.breakpoints.up('sm')]: {
+      paddingBottom: theme.spacing(22),
+    },
+    [theme.breakpoints.down('xs')]: {
+      paddingBottom: theme.spacing(12),
+    },
   },
   heroDescription: {
-    // maxWidth: theme.spacing(165),
     maxWidth: theme.typography.pxToRem(744),
-    lineHeight: theme.typography.pxToRem(35.2),
-    // paddingBottom: theme.spacing(4),
   },
-  section: {
+  topSection: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  topSectionCards: {
+    maxWidth: theme.typography.pxToRem(942),
+  },
+  outcomeSection: {
+    paddingTop: 0,
+    [theme.breakpoints.up('sm')]: {
+      paddingTop: theme.spacing(10),
+      paddingBottom: theme.spacing(25),
+    },
+    [theme.breakpoints.down('xs')]: {
+      paddingTop: theme.spacing(0),
+      paddingBottom: theme.spacing(20),
+    },
+  },
+  resourcesSection: {
+    background: theme.palette.grey[50],
+    borderTop: `1px solid ${theme.palette.grey[100]}`,
+    borderBottom: `1px solid ${theme.palette.grey[100]}`,
     [theme.breakpoints.up('sm')]: {
       paddingBottom: theme.spacing(22.25),
     },
@@ -33,17 +69,28 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingBottom: theme.spacing(17.75),
     },
   },
-  title: {
+  methodologyTitle: {
     marginBottom: theme.spacing(8.75),
     [theme.breakpoints.down('xs')]: {
       marginBottom: theme.spacing(8),
+      fontSize: theme.typography.pxToRem(32),
+      lineHeight: theme.typography.pxToRem(41.6),
     },
   },
   bottomSection: {
     maxWidth: theme.typography.pxToRem(946),
+    paddingBottom: theme.typography.pxToRem(100),
   },
-  topSectionCards: {
-    maxWidth: theme.typography.pxToRem(942),
+  resourcesTitle: {
+    textTransform: 'none',
+    color: theme.palette.text.primary,
+    fontWeight: 900,
+    [theme.breakpoints.down('xs')]: {
+      fontSize: theme.typography.pxToRem(32),
+    },
+  },
+  resourcesRoot: {
+    paddingTop: 0,
   },
 }));
 
@@ -52,13 +99,33 @@ type StepCard = {
   step: ProjectPlanStep;
 };
 
+const acceptedProgramsLink = 'TODO:';
+const methdologyReviewLink =
+  'https://docs.google.com/document/d/12YzGNI-kQwT82keMR9mr7BdisLUpNN9O6H4H_dMlox4/edit?usp=sharing';
+const methodologyLink =
+  'https://regen-registry.s3.amazonaws.com/Methodology+for+GHG+and+Co-Benefits+in+Grazing+Systems.pdf';
+
 const stepCards: StepCard[] = [
+  {
+    icon: <MagnifyingGlass />,
+    step: {
+      stepNumber: 1,
+      isActive: true,
+      title: 'Check if there is an approved methodology listed on one of the accepted programs',
+      faqs: [
+        { question: 'What is the question', answer: 'This is the answer' },
+        { question: 'What is the question', answer: 'This is the answer' },
+        { question: 'What is the question', answer: 'This is the answer' },
+      ],
+      description: `Prior to developing a methodology, take a look to see if there is a similar methodology that is already approved on our program or other accepted programs. <a href="${acceptedProgramsLink}" target="_blank" rel="noopener noreferrer">View our list of accepted programs»</a>`,
+    },
+  },
   {
     icon: <Checklist />,
     step: {
       btnText: 'submit a concept note',
-      onBtnClick: () => null,
-      stepNumber: 1,
+      onBtnClick: () => void window.open('https://airtable.com/shrRIa2VcxfeXsTXy', '_blank'),
+      stepNumber: 2,
       isActive: true,
       tagName: '2-3 weeks',
       title: 'Generate an idea for a methodology and submit a concept note for internal review',
@@ -75,8 +142,8 @@ const stepCards: StepCard[] = [
     icon: <Charts />,
     step: {
       btnText: 'submit a methodology',
-      onBtnClick: () => null,
-      stepNumber: 2,
+      onBtnClick: () => void window.open('https://airtable.com/shrRIa2VcxfeXsTXy', '_blank'),
+      stepNumber: 3,
       isActive: true,
       tagName: '2-3 weeks',
       title: 'Create a methodology draft and submit it for internal review',
@@ -92,33 +159,32 @@ const stepCards: StepCard[] = [
   {
     icon: <DocumentWithCheckmark />,
     step: {
-      stepNumber: 3,
+      stepNumber: 4,
       isActive: true,
-      title: 'Create a methodology draft and submit it for internal review',
+      title: 'Methodology accepted in beta form',
       faqs: [
         { question: 'What is the question', answer: 'This is the answer' },
         { question: 'What is the question', answer: 'This is the answer' },
         { question: 'What is the question', answer: 'This is the answer' },
       ],
       description:
-        'Your methodology should aim to outline standards and tools to monitor the ecological, environmental, and social indicators covered by your nature based solution. Your approach can be region specific or cover a wide range of locations.',
+        'Methodologies that exist in beta form have not undergone any external review by experts or community members.',
     },
   },
   {
     icon: <Scientist />,
     step: {
-      stepNumber: 4,
+      stepNumber: 5,
       isActive: true,
       tagName: '2-3 weeks',
-      title: 'Create a methodology draft and submit it for internal review',
-      description:
-        'After internal review, it may be recommended that some methods undergo external review to ensure the methodology is supported by the scientific community. See our <a href="TODO: methodology review link" target="_blank" rel="noopener noreferrer">Methodology Review Process</a> for more information.',
+      title: 'Scientific peer review and public comment, updates made to beta methodology',
+      description: `After internal review, it may be recommended that some methods undergo external review to ensure the methodology is supported by the scientific community. See our <a href="${methdologyReviewLink}" target="_blank" rel="noopener noreferrer">Methodology Review Process</a> for more information.`,
     },
   },
   {
     icon: <CowCelebrating />,
     step: {
-      stepNumber: 5,
+      stepNumber: 6,
       isActive: true,
       title: 'Methodology accepted!',
       description:
@@ -127,21 +193,25 @@ const stepCards: StepCard[] = [
   },
 ];
 
+const outcomeCards = outcomes.map(({ imgSrc, title, description }) => (
+  <ImpactCard name={title} imgSrc={imgSrc} description={description} largeFontSize />
+));
+
 const CreateMethodology: React.FC = () => {
   const styles = useStyles();
-  const methodologyLink = '/TODO:methodology link';
+  const theme = useTheme();
 
   return (
-    <>
+    <div className={styles.root}>
       <HeroTitle
         img={fernImg}
         title="Create a methodology on Regen Registry."
         description="We are working hard to promote integrity and innovation in the methods used to monitor ecosystems and invite any and all methodology designers to take part in expanding this body of work."
-        classes={{ description: styles.heroDescription, main: styles.heroMain }}
+        classes={{ main: styles.heroMain, description: styles.heroDescription }}
       />
       <Section
         title="General process for creating a new methodology"
-        classes={{ root: styles.section, title: styles.title }}
+        classes={{ root: styles.topSection, title: styles.methodologyTitle }}
       >
         <StepCardsWithDescription
           className={styles.topSectionCards}
@@ -151,19 +221,72 @@ const CreateMethodology: React.FC = () => {
             body:
               'In addition to developing methodologies focused on carbon reduction and removal, we must also work to incorporate protocols to track water cycles, nutrient cycles, biodiversity, pollution management, changing weather patterns, and more.',
           }}
-          description={`A lot can go into writing a new methodology and it might seem like an overwhelming process, but we’re here to help! Check out our <a href="${methodologyLink}">Carbon<i>Plus</i> Grasslands Methodology</a> to get a feel for what a methodology might entail and the various components included, and feel free to email science@regen.network for any additional questions.`}
+          description={`A lot can go into writing a new methodology and it might seem like an overwhelming process, but we’re here to help! Check out our <a href="${methodologyLink}">Carbon<i>Plus</i> Grasslands Methodology</a> to get a feel for what a methodology might entail and the various components included, and feel free to email <a href="mailto:science@regen.network">science@regen.network</a> for any additional questions.`}
         />
       </Section>
+
+      <Section withSlider className={styles.outcomeSection}>
+        <ResponsiveSlider
+          itemWidth="90%"
+          padding={theme.spacing(2.5)}
+          // className={styles.slider}
+          title="Ecological outcomes"
+          arrows
+          slidesToShow={3}
+          items={outcomeCards}
+        />
+      </Section>
+
+      <CardMedia image={topographyImg} className={styles.resourcesSection}>
+        <Section withSlider titleAlign="left">
+          <ResponsiveSlider
+            itemWidth="90%"
+            classes={{ title: styles.resourcesTitle, root: styles.resourcesRoot }}
+            padding={theme.spacing(2.5)}
+            title="Resources"
+            titleVariant="h2"
+            arrows
+            slidesToShow={3}
+            items={resources.map(({ btnText, description, href, imgSrc, lastUpdated, title }) => (
+              <ResourcesCard
+                image={{ publicURL: require(`../assets/${imgSrc}`) }}
+                title={title}
+                updated={lastUpdated}
+                description={description}
+                buttonText={btnText}
+                link={href}
+              />
+            ))}
+          />
+        </Section>
+      </CardMedia>
+
+      <HeroAction
+        classes={{ main: styles.bottomSection }}
+        title="Participate in Methodology Peer Review"
+        description={`Methodologies submitted to Regen Network will go through a review process to provide valuable feedback which can be used to improve our understanding of the science and techniques/approaches, while promoting scientific transparency and instilling buyer assurance and confidence in claims. This process is in place to promote best practices in MRV and foster both innovation and trust. If you are interested in reviewing methodologies that have been submitted, please contact us at <a href="mailto:science@regen.network">science@regen.network.</a>`}
+        actionTxt="See the Review Process"
+        action={() => null} // TODO:
+      />
 
       <HeroAction
         classes={{ main: styles.bottomSection }}
         img={writingOnPaperImg}
         title="Create a Credit Class"
-        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+        description="If you haven’t yet created a credit class for this methodology, learn more below."
         actionTxt="Create a Credit Class"
         action={() => null} // TODO:
       />
-    </>
+      <FixedFooter justify="flex-end">
+        <ContainedButton
+          href="https://airtable.com/shrRIa2VcxfeXsTXy"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Submit a methodology
+        </ContainedButton>
+      </FixedFooter>
+    </div>
   );
 };
 

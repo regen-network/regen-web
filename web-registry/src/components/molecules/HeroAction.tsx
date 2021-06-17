@@ -8,11 +8,12 @@ import ContainedButton from 'web-components/lib/components/buttons/ContainedButt
 import Title from 'web-components/lib/components/title';
 import { BackgroundImgSection } from './BackgroundImgSection';
 import Description from 'web-components/lib/components/description';
+import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 
 type Props = {
   actionTxt: string;
   action: () => void;
-  img: string;
+  img?: string;
   title: string;
   description?: string;
   classes?: {
@@ -21,8 +22,12 @@ type Props = {
   };
 };
 
-const useStyles = makeStyles((theme: Theme) => ({
-  main: {
+type StyleProps = {
+  hasImg: boolean;
+};
+
+const useStyles = makeStyles<Theme, StyleProps>(theme => ({
+  root: {
     alignContent: 'center',
     justifyContent: 'center',
   },
@@ -36,43 +41,63 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   btn: {
     marginTop: theme.spacing(10),
+    [theme.breakpoints.up('sm')]: {
+      fontSize: theme.typography.pxToRem(21),
+      padding: theme.spacing(2, 8),
+    },
+    [theme.breakpoints.down('xs')]: {
+      fontSize: theme.typography.pxToRem(18),
+      padding: theme.spacing(2, 4),
+    },
   },
-  description: {
-    color: theme.palette.primary.main,
+  description: props => ({
+    color: props.hasImg ? theme.palette.primary.main : theme.palette.text.primary,
     marginTop: theme.spacing(4),
     textAlign: 'center',
-    fontSize: theme.typography.pxToRem(22),
-    lineHeight: theme.typography.pxToRem(33),
-  },
+    [theme.breakpoints.up('sm')]: {
+      fontSize: theme.typography.pxToRem(22),
+      lineHeight: theme.typography.pxToRem(33),
+    },
+    [theme.breakpoints.down('xs')]: {
+      fontSize: theme.typography.pxToRem(18),
+      lineHeight: theme.typography.pxToRem(27),
+    },
+  }),
 }));
 
 /**
- * Hero section with background image, centered title, and button with action
+ * Hero section with optional background image, centered title, and button with action. Passing no img will render with a light background and dark text & buttons
  */
 const HeroAction: React.FC<Props> = ({ classes, ...props }) => {
-  const styles = useStyles();
+  const hasImg = !!props.img;
+  const styles = useStyles({ hasImg });
+
+  const Button = hasImg ? ContainedButton : OutlinedButton;
 
   return (
-    <BackgroundImgSection img={props.img} classes={{ main: styles.main }}>
-      {/* <Container maxWidth="md"> */}
+    <BackgroundImgSection img={props.img || ''} classes={{ main: styles.root }}>
       <Grid container justify="center">
-        <div className={clsx(styles.main, classes && classes.main)}>
-          <Title align="center" variant="h2" color="primary" className={styles.title}>
+        <div className={clsx(styles.main, classes?.main)}>
+          <Title
+            align="center"
+            variant="h2"
+            color={hasImg ? 'primary' : 'textPrimary'}
+            className={styles.title}
+          >
             {ReactHtmlParser(props.title)}
           </Title>
           {!!props.description && (
-            <Description className={clsx(styles.description, classes && classes.description)}>
-              {props.description}
+            <Description className={clsx(styles.description, classes?.description)}>
+              {ReactHtmlParser(props.description)}
             </Description>
           )}
           <Grid container justify="center">
-            <ContainedButton onClick={props.action} className={styles.btn} size="medium">
+            <Button onClick={props.action} className={styles.btn} size="medium">
               {ReactHtmlParser(props.actionTxt)}
-            </ContainedButton>
+            </Button>
           </Grid>
         </div>
       </Grid>
-      {/* </Container> */}
     </BackgroundImgSection>
   );
 };

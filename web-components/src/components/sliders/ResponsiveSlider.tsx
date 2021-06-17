@@ -4,7 +4,7 @@ import { Variant } from '@material-ui/core/styles/createTypography';
 import Grid from '@material-ui/core/Grid';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Slider from 'react-slick';
-import clsx from 'clsx';
+import cx from 'clsx';
 
 import PrevNextButton from '../buttons/PrevNextButton';
 import Title from '../title';
@@ -17,7 +17,11 @@ export interface ResponsiveSliderProps {
   title?: string;
   renderTitle?: () => JSX.Element;
   className?: string;
-  headerWrapClassName?: string;
+  classes?: {
+    root?: string;
+    title?: string;
+    headerWrap?: string;
+  };
   padding?: number;
   itemWidth?: string;
   infinite?: boolean;
@@ -125,15 +129,15 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
 
 export default function ResponsiveSlider({
   items,
-  titleVariant,
+  titleVariant = 'h6',
   slidesToShow,
   arrows = false,
   title,
   renderTitle,
   className,
+  classes,
   padding,
   itemWidth,
-  headerWrapClassName,
   infinite = true,
   dots = false,
   onChange,
@@ -148,7 +152,7 @@ export default function ResponsiveSlider({
   const rows: number = gridView ? 2 : 1;
   const slides: number = gridView ? 2 : desktop ? slidesToShow || items.length : mobile ? 1 : 2;
 
-  const classes = useStyles({ gridView, padding, title, itemWidth });
+  const styles = useStyles({ gridView, padding, title, itemWidth });
 
   let slider: any = useRef(null);
 
@@ -178,23 +182,23 @@ export default function ResponsiveSlider({
         <ul> {dots} </ul>
       </div>
     ),
-    customPaging: (i: number) => <div className={classes.dot} />,
+    customPaging: (i: number) => <div className={styles.dot} />,
   };
 
   return (
-    <div className={clsx(classes.root, className)}>
-      <Grid container wrap="nowrap" alignItems="center" className={headerWrapClassName}>
+    <div className={cx(styles.root, className || (classes && classes.root))}>
+      <Grid container wrap="nowrap" alignItems="center" className={classes && classes.headerWrap}>
         {renderTitle ? (
           renderTitle()
         ) : title ? (
           <Grid xs={12} sm={8} item>
-            <Title variant="h6" className={classes.title}>
+            <Title variant={titleVariant} className={cx(styles.title, classes && classes.title)}>
               {title}
             </Title>
           </Grid>
         ) : null}
         {items.length > 1 && arrows && desktop && (
-          <Grid xs={12} sm={4} container item justify="flex-end" className={classes.buttons}>
+          <Grid xs={12} sm={4} container item justify="flex-end" className={styles.buttons}>
             <PrevNextButton direction="prev" onClick={slickPrev} />
             <PrevNextButton direction="next" onClick={slickNext} />
           </Grid>
@@ -204,13 +208,13 @@ export default function ResponsiveSlider({
       <Slider
         {...settings}
         ref={slider}
-        className={classes.slider}
+        className={styles.slider}
         afterChange={i => {
           if (onChange) onChange(i);
         }}
       >
         {items.map((item, index) => (
-          <div className={classes.item} key={index}>
+          <div className={styles.item} key={index}>
             {item}
           </div>
         ))}

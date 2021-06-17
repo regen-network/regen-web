@@ -2,10 +2,11 @@ import React from 'react';
 import cx from 'clsx';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import CardMedia from '@material-ui/core/CardMedia';
-import Section from 'web-components/lib/components/section';
+import Section, { SectionProps } from 'web-components/lib/components/section';
 
 type Props = {
   img: string;
+  sectionProps?: SectionProps;
   classes?: {
     main?: string;
   };
@@ -29,7 +30,7 @@ const BackgroundImgSection: React.FC<Props> = props => {
 
   return (
     <CardMedia image={props.img}>
-      <Section>
+      <Section {...props.sectionProps}>
         <div className={cx(styles.main, props.classes && props.classes.main)}>{props.children}</div>
       </Section>
     </CardMedia>

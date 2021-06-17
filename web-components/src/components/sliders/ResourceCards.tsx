@@ -9,9 +9,7 @@ import ResourcesCard, { ResourcesCardProps } from '../cards/ResourcesCard';
 
 export interface ResourceCardsProps {
   items: ResourcesCardProps[];
-  titleVariant?: Variant;
   imageClassName?: string;
-  title?: string;
   className?: string;
   target?: string;
 }
@@ -57,8 +55,6 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 export default function ResourceCards({
   items,
-  titleVariant,
-  title,
   className,
   target = '_blank',
 }: ResourceCardsProps): JSX.Element {

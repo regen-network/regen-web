@@ -33,10 +33,12 @@ const useStyles = makeStyles((theme: Theme) => ({
     color: theme.palette.primary.main,
     marginTop: theme.spacing(5.5),
     [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(5.5),
+      fontSize: theme.typography.pxToRem(22),
+      lineHeight: theme.typography.pxToRem(35.2),
     },
     [theme.breakpoints.down('xs')]: {
-      fontSize: theme.spacing(4.75),
+      fontSize: theme.typography.pxToRem(16),
+      lineHeight: theme.typography.pxToRem(25),
     },
   },
 }));

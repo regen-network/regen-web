@@ -131,8 +131,10 @@ const MediaSection: React.FC = () => {
           arrows
           itemWidth="90%"
           padding={theme.spacing(2.5)}
-          className={classes.slider}
-          headerWrapClassName={classes.headerWrap}
+          classes={{
+            root: classes.slider,
+            headerWrap: classes.headerWrap,
+          }}
           slidesToShow={3}
           items={itemCards}
           renderTitle={() => (

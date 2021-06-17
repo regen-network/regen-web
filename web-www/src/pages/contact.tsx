@@ -78,17 +78,8 @@ const useStyles = makeStyles((theme: Theme) => ({
       margin: '0 auto',
     },
   },
-  headquarters: {
-    fontWeight: 'bold',
-    margin: 0,
-  },
   email: {
     paddingTop: theme.spacing(8.5),
-  },
-  headquartersBody: {
-    '& p': {
-      margin: 0,
-    },
   },
   body: {
     [theme.breakpoints.up('sm')]: {
@@ -178,6 +169,11 @@ const useStyles = makeStyles((theme: Theme) => ({
       fontSize: theme.spacing(4),
     },
   },
+  contactInfo: {
+    [theme.breakpoints.up('sm')]: {
+      paddingRight: theme.spacing(5),
+    },
+  },
 }));
 
 const ContactPage = ({ location }: { location: Location }): JSX.Element => {
@@ -207,10 +203,6 @@ const ContactPage = ({ location }: { location: Location }): JSX.Element => {
               }
             }
           }
-        }
-        headquarters {
-          header
-          body
         }
         email {
           header
@@ -370,13 +362,9 @@ const ContactPage = ({ location }: { location: Location }): JSX.Element => {
               </Formik>
             </Card>
             <Grid container>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12} sm={6} className={classes.contactInfo}>
                 <Title variant="h4">{content.location.header}</Title>
                 <Description className={classes.body}>{ReactHtmlParser(content.location.body)}</Description>
-                <Description className={classes.headquarters}>{content.headquarters.header}:</Description>
-                <Description className={classes.headquartersBody}>
-                  {ReactHtmlParser(content.headquarters.body)}
-                </Description>
                 <Title className={classes.email} variant="h4">
                   {content.email.header}
                 </Title>

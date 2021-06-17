@@ -18,9 +18,6 @@ interface StyleProps {
 }
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
-  inputWrap: {
-    marginTop: theme.spacing(5),
-  },
   input: props => ({
     width: '100% !important',
     border: `1px solid ${theme.palette.grey[100]} !important`,
@@ -29,12 +26,14 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     fontFamily: theme.typography.fontFamily,
     [theme.breakpoints.up('sm')]: {
       padding: theme.spacing(7.4),
-      fontSize: `${theme.spacing(4.5)} !important`,
+      fontSize: `${theme.typography.pxToRem(16)} !important`,
+      lineHeight: `${theme.typography.pxToRem(24)} !important`,
       height: `${theme.spacing(15)} !important`,
     },
     [theme.breakpoints.down('xs')]: {
       padding: theme.spacing(6),
-      fontSize: `${theme.spacing(3.5)} !important`,
+      fontSize: `${theme.typography.pxToRem(14)} !important`,
+      lineHeight: `${theme.typography.pxToRem(21)} !important`,
       height: `${theme.spacing(12.5)} !important`,
     },
     '&::placeholder': {
@@ -65,7 +64,6 @@ export default function RegenPhoneField({
       {({ handleBlur, handleChange }) => (
         <PhoneInput
           autoFormat={countryCode === 'us'}
-          containerClass={classes.inputWrap}
           inputClass={classes.input}
           country={countryCode}
           value={field.value}

@@ -75,6 +75,7 @@ function BuyerCreate(): JSX.Element {
                 variables: {
                   input: {
                     roles: ['buyer'],
+                    image: '',
                     email,
                     name,
                     orgName,

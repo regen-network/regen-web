@@ -18,14 +18,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       marginRight: theme.spacing(3),
     },
   },
-  imageBox: {
-    [theme.breakpoints.up('sm')]: {
-      marginTop: theme.spacing(5),
-    },
-    [theme.breakpoints.down('xs')]: {
-      marginTop: theme.spacing(3),
-    },
-  },
   button: {
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.spacing(3),
@@ -70,7 +62,7 @@ export default function ImageField({
     });
   }
 
-  const classes = useStyles();
+  const styles = useStyles();
 
   return (
     <>
@@ -82,8 +74,8 @@ export default function ImageField({
         {...fieldProps}
       >
         {() => (
-          <Box className={classes.imageBox} display="flex" alignItems="center">
-            <Avatar className={classes.avatar} src={field.value} />
+          <Box display="flex" alignItems="center">
+            <Avatar className={styles.avatar} src={field.value} />
 
             <input
               type="file"
@@ -102,7 +94,7 @@ export default function ImageField({
               id="image-upload-input"
             />
             <label htmlFor="image-upload-input">
-              <OutlinedButton isImageBtn className={classes.button}>
+              <OutlinedButton isImageBtn className={styles.button}>
                 Add Image
               </OutlinedButton>
             </label>

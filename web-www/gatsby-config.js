@@ -12,7 +12,6 @@ module.exports = {
       options: {
         headers: {
           '/wallet-address-registration': ['Basic-Auth: regen:carboncanopy'],
-          '/token': ['Basic-Auth: regen:cicada'], //TODO: delete this line when ready to go live
         },
       },
     },

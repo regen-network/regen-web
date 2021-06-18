@@ -135,7 +135,7 @@ const MediaSection: React.FC = () => {
       <div className={classes.main}>
         {slidesToShow > 0 && (
           <ResponsiveSlider
-            arrows
+            arrows={itemCards.length > 3}
             itemWidth="90%"
             padding={theme.spacing(2.5)}
             className={classes.slider}

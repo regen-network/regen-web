@@ -2,6 +2,7 @@ import React from 'react';
 import cx from 'clsx';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import CardMedia from '@material-ui/core/CardMedia';
+
 import Section, { SectionProps } from 'web-components/lib/components/section';
 
 type Props = {

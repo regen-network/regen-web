@@ -44,11 +44,8 @@ const MarketingNav: React.FC = () => {
       isRegistry
       menuItems={menuItems}
       color={headerColors[pathname] || theme.palette.primary.light}
-      // transparent={pathname === '/certificate'}
       transparent={transparentHeaders.test(pathname)}
-      // absolute={pathname === '/certificate'}
       absolute={transparentHeaders.test(pathname)}
-      // borderBottom={pathname !== '/certificate'}
       borderBottom={!transparentHeaders.test(pathname)}
       fullWidth={fullWidthRegExp.test(pathname)}
       pathName={pathname}

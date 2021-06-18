@@ -6,9 +6,10 @@ import Grid from '@material-ui/core/Grid';
 
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import Title from 'web-components/lib/components/title';
-import { BackgroundImgSection } from './BackgroundImgSection';
 import Description from 'web-components/lib/components/description';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
+
+import { BackgroundImgSection } from './BackgroundImgSection';
 
 type Props = {
   actionTxt: string;

@@ -7,6 +7,8 @@ import StepCard, { ProjectPlanStep } from 'web-components/lib/components/cards/S
 import ImpactCard from 'web-components/lib/components/cards/ImpactCard';
 import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';
 import ResourcesCard from 'web-components/lib/components/cards/ResourcesCard';
+import FixedFooter from 'web-components/lib/components/fixed-footer';
+import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 
 import { HeroTitle, HeroAction } from '../components/molecules';
 import { StepCardsWithDescription } from '../components/organisms';
@@ -21,8 +23,6 @@ import { ReactComponent as CowCelebrating } from '../assets/svgs/green-cow-celeb
 import fernImg from '../assets/fern-in-hands.png';
 import writingOnPaperImg from '../assets/writing-on-paper.png';
 import topographyImg from '../assets/topography-pattern-full-1.png';
-import FixedFooter from 'web-components/lib/components/fixed-footer';
-import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -99,6 +99,8 @@ type StepCard = {
   step: ProjectPlanStep;
 };
 
+const openLink = (url: string): void => void window.open(url, '_blank', 'noopener');
+
 const acceptedProgramsLink = 'TODO:';
 const methdologyReviewLink =
   'https://docs.google.com/document/d/12YzGNI-kQwT82keMR9mr7BdisLUpNN9O6H4H_dMlox4/edit?usp=sharing';
@@ -124,7 +126,7 @@ const stepCards: StepCard[] = [
     icon: <Checklist />,
     step: {
       btnText: 'submit a concept note',
-      onBtnClick: () => void window.open('https://airtable.com/shrRIa2VcxfeXsTXy', '_blank'),
+      onBtnClick: () => openLink('https://airtable.com/shrRIa2VcxfeXsTXy'),
       stepNumber: 2,
       isActive: true,
       tagName: '2-3 weeks',
@@ -142,7 +144,7 @@ const stepCards: StepCard[] = [
     icon: <Charts />,
     step: {
       btnText: 'submit a methodology',
-      onBtnClick: () => void window.open('https://airtable.com/shrRIa2VcxfeXsTXy', '_blank'),
+      onBtnClick: () => openLink('https://airtable.com/shrRIa2VcxfeXsTXy'),
       stepNumber: 3,
       isActive: true,
       tagName: '2-3 weeks',
@@ -266,7 +268,11 @@ const CreateMethodology: React.FC = () => {
         title="Participate in Methodology Peer Review"
         description={`Methodologies submitted to Regen Network will go through a review process to provide valuable feedback which can be used to improve our understanding of the science and techniques/approaches, while promoting scientific transparency and instilling buyer assurance and confidence in claims. This process is in place to promote best practices in MRV and foster both innovation and trust. If you are interested in reviewing methodologies that have been submitted, please contact us at <a href="mailto:science@regen.network">science@regen.network.</a>`}
         actionTxt="See the Review Process"
-        action={() => null} // TODO:
+        action={() =>
+          openLink(
+            'https://docs.google.com/document/d/12YzGNI-kQwT82keMR9mr7BdisLUpNN9O6H4H_dMlox4/edit?usp=sharing',
+          )
+        }
       />
 
       <HeroAction
@@ -275,7 +281,7 @@ const CreateMethodology: React.FC = () => {
         title="Create a Credit Class"
         description="If you haven’t yet created a credit class for this methodology, learn more below."
         actionTxt="Create a Credit Class"
-        action={() => null} // TODO:
+        action={() => null} // TODO: once create credit class page is created, link there
       />
       <FixedFooter justify="flex-end">
         <ContainedButton

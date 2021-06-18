@@ -77,10 +77,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   card: {
     border: `1px solid ${theme.palette.grey[100]}`,
     borderRadius: '10px',
-    [theme.breakpoints.up('sm')]: {
-      minWidth: theme.spacing(85.5),
-      maxWidth: theme.spacing(85.5),
-    },
   },
 }));
 
@@ -132,18 +128,19 @@ const MediaSection: React.FC = () => {
       play={item.type === 'videos'}
     />
   ));
+  const slidesToShow = itemCards && itemCards.length < 3 ? itemCards.length : 3;
 
   return (
     <Section className={classes.root}>
       <div className={classes.main}>
-        {itemCards && itemCards.length > 0 && (
+        {slidesToShow > 0 && (
           <ResponsiveSlider
             arrows
             itemWidth="90%"
             padding={theme.spacing(2.5)}
             className={classes.slider}
             headerWrapClassName={classes.headerWrap}
-            slidesToShow={itemCards.length < 3 ? itemCards.length : 3}
+            slidesToShow={slidesToShow}
             items={itemCards}
             renderTitle={() => <Title className={classes.title}>{header}</Title>}
           />

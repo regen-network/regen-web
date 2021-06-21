@@ -81,21 +81,19 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({ submit, initialValues }) 
   return (
     <Formik
       enableReinitialize
-      initialValues={
-        initialValues || {
-          'http://schema.org/name': '',
-          'http://regen.network/size': {
-            'http://qudt.org/1.1/schema/qudt#numericValue': {
-              '@type': 'http://www.w3.org/2001/XMLSchema#double',
-              '@value': undefined,
-            },
-            'http://qudt.org/1.1/schema/qudt#unit': {
-              '@type': 'http://qudt.org/1.1/schema/qudt#unit',
-              '@value': 'http://qudt.org/1.1/vocab/unit#HA',
-            },
+      initialValues={{
+        'http://schema.org/name': initialValues?.['http://schema.org/name'] || '',
+        'http://regen.network/size': initialValues?.['http://regen.network/size'] || {
+          'http://qudt.org/1.1/schema/qudt#numericValue': {
+            '@type': 'http://www.w3.org/2001/XMLSchema#double',
+            '@value': undefined,
           },
-        }
-      }
+          'http://qudt.org/1.1/schema/qudt#unit': {
+            '@type': 'http://qudt.org/1.1/schema/qudt#unit',
+            '@value': 'http://qudt.org/1.1/vocab/unit#HA',
+          },
+        },
+      }}
       validate={async (values: BasicInfoFormValues) => {
         const errors: FormikErrors<BasicInfoFormValues> = {};
         if (graphData?.shaclGraphByUri?.graph) {

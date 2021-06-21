@@ -37,6 +37,7 @@ const ProjectList: React.FC = () => {
   const history = useHistory();
 
   // TODO Create provider to get directly user data if logged in
+  // https://github.com/regen-network/regen-registry/issues/555
   const { user } = useAuth0();
   const userEmail = user?.email;
   const { data } = useGetUserProfileByEmailQuery({
@@ -67,7 +68,8 @@ const ProjectList: React.FC = () => {
         history.push(`/project-pages/${projectId}/choose-credit-class`);
       }
     } catch (e) {
-      // Should we display the error banner here?
+      // TODO: Should we display the error banner here?
+      // https://github.com/regen-network/regen-registry/issues/555
       console.log(e);
     }
   }

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
-import { Formik, Form, Field, FormikErrors } from 'formik';
+import { Formik, Form, Field } from 'formik';
 import { Link } from 'react-router-dom';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
@@ -26,6 +26,13 @@ export interface StoryValues {
   'http://regen.network/projectQuote'?: Quote;
 }
 
+export interface StoryValuesErrors {
+  'http://regen.network/landStory'?: string;
+  'http://regen.network/landStewardStory'?: string;
+  'http://regen.network/landStewardStoryTitle'?: string;
+  'http://regen.network/projectQuote'?: QuoteErrors;
+}
+
 interface Example {
   type: string;
   text: string;
@@ -35,6 +42,12 @@ interface Quote {
   'http://regen.network/quote': string;
   'http://schema.org/name': string;
   'http://schema.org/jobTitle': string;
+}
+
+interface QuoteErrors {
+  'http://regen.network/quote'?: string;
+  'http://schema.org/name'?: string;
+  'http://schema.org/jobTitle'?: string;
 }
 
 interface FieldNameExamples {
@@ -129,11 +142,16 @@ const examples: FieldNameExamples = {
   },
 };
 
+const quoteError: string = 'You must fill in all the quote fields, or none';
 const errorMsgs: Errors = {
   'http://regen.network/landStory': 'Please fill in the story of the land',
   'http://regen.network/landStewardStory': 'Please fill in the story of the land stewards',
   'http://regen.network/landStewardStoryTitle': 'Please fill in a title for the land steward story',
-  'http://regen.network/projectQuote': 'You must fill in all the quote fields, or none',
+  'http://regen.network/projectQuote': quoteError,
+    // 'http://regen.network/quote': quoteError,
+    // 'http://schema.org/name': quoteError,
+    // 'http://schema.org/jobTitle': quoteError,
+  // },
 };
 
 const ModalContent: React.FC<{ exampleProjectUrl: string; fieldName: exampleFieldName }> = ({
@@ -185,14 +203,17 @@ const StoryForm: React.FC<StoryFormProps> = ({ submit, exampleProjectUrl, initia
         enableReinitialize
         initialValues={
           initialValues || {
-            'http://regen.network/landStory': '',
-            'http://regen.network/landStewardStory': '',
-            'http://regen.network/landStewardStoryTitle': '',
-            'http://regen.network/projectQuote': undefined,
+            'http://regen.network/landStory': initialValues?.['http://regen.network/landStory'] || '',
+            'http://regen.network/landStewardStory':
+              initialValues?.['http://regen.network/landStewardStory'] || '',
+            'http://regen.network/landStewardStoryTitle':
+              initialValues?.['http://regen.network/landStewardStoryTitle'] || '',
+            'http://regen.network/projectQuote':
+              initialValues?.['http://regen.network/projectQuote'] || undefined,
           }
         }
         validate={async (values: StoryValues) => {
-          const errors: FormikErrors<StoryValues> = {};
+          const errors: StoryValuesErrors = {};
           if (graphData?.shaclGraphByUri?.graph) {
             const projectPageData = { ...getProjectPageBaseData(), ...values };
             const report = await validate(
@@ -202,7 +223,15 @@ const StoryForm: React.FC<StoryFormProps> = ({ submit, exampleProjectUrl, initia
             );
             for (const result of report.results) {
               const path: keyof StoryValues = result.path.value;
-              errors[path] = errorMsgs[path];
+              if (path === 'http://regen.network/projectQuote') {
+                errors['http://regen.network/projectQuote'] = {
+                  'http://regen.network/quote': getProjectQuoteError(values, 'http://regen.network/quote'),
+                  'http://schema.org/name': getProjectQuoteError(values, 'http://schema.org/name'),
+                  'http://schema.org/jobTitle': getProjectQuoteError(values, 'http://schema.org/jobTitle'),
+                };
+              } else {
+                errors[path] = errorMsgs[path];
+              }
             }
           }
           return errors;
@@ -308,5 +337,11 @@ const StoryForm: React.FC<StoryFormProps> = ({ submit, exampleProjectUrl, initia
     </>
   );
 };
+
+function getProjectQuoteError(values: StoryValues, key: keyof Quote): string | undefined {
+  return values?.['http://regen.network/projectQuote']?.[key]
+    ? undefined
+    : errorMsgs['http://regen.network/projectQuote'];
+}
 
 export { StoryForm };

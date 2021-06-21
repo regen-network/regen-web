@@ -46,6 +46,7 @@ const BasicInfo: React.FC = () => {
       history.push(`/project-pages/${projectId}/story`);
     } catch (e) {
       // TODO: Should we display the error banner here?
+      // https://github.com/regen-network/regen-registry/issues/555
       console.log(e);
     }
   }

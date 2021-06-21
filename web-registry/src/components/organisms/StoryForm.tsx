@@ -148,10 +148,6 @@ const errorMsgs: Errors = {
   'http://regen.network/landStewardStory': 'Please fill in the story of the land stewards',
   'http://regen.network/landStewardStoryTitle': 'Please fill in a title for the land steward story',
   'http://regen.network/projectQuote': quoteError,
-    // 'http://regen.network/quote': quoteError,
-    // 'http://schema.org/name': quoteError,
-    // 'http://schema.org/jobTitle': quoteError,
-  // },
 };
 
 const ModalContent: React.FC<{ exampleProjectUrl: string; fieldName: exampleFieldName }> = ({

@@ -1,4 +1,5 @@
 import React, { useCallback, useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth0 } from '@auth0/auth0-react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
@@ -34,6 +35,7 @@ const messageExpired: string = 'Access expired.';
 
 function UserProfile(): JSX.Element {
   const { user } = useAuth0();
+  const history = useHistory();
   const userEmail = user?.email;
 
   // Get any URL parameters from auth0 after email verification
@@ -65,7 +67,6 @@ function UserProfile(): JSX.Element {
   });
 
   const [updateUserByEmail] = useUpdateUserByEmailMutation();
-
   const [updatePartyById] = useUpdatePartyByIdMutation();
 
   const [error, setError] = useState<Error | null>(null);
@@ -105,7 +106,7 @@ function UserProfile(): JSX.Element {
 
   async function submitUserProfile(values: UserProfileValues): Promise<void> {
     try {
-      const { data: userData } = await updateUserByEmail({
+      await updateUserByEmail({
         variables: {
           input: {
             email: userEmail,
@@ -119,7 +120,7 @@ function UserProfile(): JSX.Element {
       await updatePartyById({
         variables: {
           input: {
-            id: userData?.updateUserByEmail?.user?.partyId,
+            id: userProfileData?.userByEmail?.partyId,
             partyPatch: {
               description: values.description,
               name: values.name,
@@ -128,6 +129,8 @@ function UserProfile(): JSX.Element {
           },
         },
       });
+      search.set('message', 'User profile created!');
+      history.push('/organization-profile'); // TODO: programmatically handle routing?
     } catch (e) {
       setError(e);
     } finally {

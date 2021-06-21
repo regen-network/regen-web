@@ -615,8 +615,8 @@ categories:
           proposals required to allow transfers and Inter Blockchain
           Communication (IBC) are currently in the voting period on chain. If
           and when this passes, token holders may transfer tokens to anyone with
-          a REGEN wallet. Please see the “Are you listed on exchanges” for more
-          information.
+          a REGEN wallet. Please see the “Are you listed on exchanges” section
+          for more information.
       - question: What type of tokens are REGEN?
         answer: md//The REGEN token is a staking and utility token launched on our own
           Tendermint BFT powered blockchain. Transaction fees on Regen Network
@@ -626,8 +626,6 @@ categories:
         answer: md//REGEN is not yet available on exchanges but if the current on-chain
           proposals pass then several members of our community plan to launch a
           pool on the Osmosis DEX as the first Liquidity Bootstrapping Pool.
-          Also, REGEN will be listed on Gravity Dex in partnership with
-          Tendermint Inc for liquidity provisioning.
       - question: How many tokens will be created when?
         answer: md//During the Token Generation Event, which happened on Apr 15 2021,
           100,000,000 REGEN were created and distributed to the various wallets
@@ -637,9 +635,11 @@ categories:
           mechanism to encourage token holders to stake their tokens and
           participate in governance.
       - question: What does REGEN allow me to do?
-        answer: md//REGEN is the native governance token of Regen Network. Assuming the
-          token holders stake their tokens, the token allows one to participate
-          in the governance of the chain, receive block rewards and receive
-          their share of the inflation mechanism. As the native token for Regen
-          Ledger, REGEN must be used to pay for transaction costs on-chain
-          commonly referred to as gas which is required to transfer REGEN.
+        answer: md//**REGEN is the native governance token of Regen Network. Assuming
+          the token holders stake their tokens, the token allows one to
+          participate in the governance of the chain, receive block rewards and
+          receive their share of the inflation mechanism. As the native token
+          for Regen Ledger, REGEN must be used to pay for transaction costs
+          on-chain, commonly referred to as gas, which is required to transfer
+          REGEN. Future utility of the token is connected to the issuance,
+          governance, curation, auditing and exchange for eco-credits.**

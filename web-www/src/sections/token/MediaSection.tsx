@@ -128,20 +128,23 @@ const MediaSection: React.FC = () => {
       play={item.type === 'videos'}
     />
   ));
+  const slidesToShow = itemCards && itemCards.length < 3 ? itemCards.length : 3;
 
   return (
     <Section className={classes.root}>
       <div className={classes.main}>
-        <ResponsiveSlider
-          arrows
-          itemWidth="90%"
-          padding={theme.spacing(2.5)}
-          className={classes.slider}
-          headerWrapClassName={classes.headerWrap}
-          slidesToShow={3}
-          items={itemCards}
-          renderTitle={() => <Title className={classes.title}>{header}</Title>}
-        />
+        {slidesToShow > 0 && (
+          <ResponsiveSlider
+            arrows={itemCards.length > 3}
+            itemWidth="90%"
+            padding={theme.spacing(2.5)}
+            className={classes.slider}
+            headerWrapClassName={classes.headerWrap}
+            slidesToShow={slidesToShow}
+            items={itemCards}
+            renderTitle={() => <Title className={classes.title}>{header}</Title>}
+          />
+        )}
       </div>
     </Section>
   );

@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles, Theme } from '@material-ui/core';
 import MapboxClient from '@mapbox/mapbox-sdk';
-import mbxGeocoder from '@mapbox/mapbox-sdk/services/geocoding';
+import mbxGeocoder, { GeocodeQueryType } from '@mapbox/mapbox-sdk/services/geocoding';
 
 interface GeocoderProps {
   token: string | undefined;
-  types?: string[];
+  types?: GeocodeQueryType[];
   setFeature: (feature: any) => void;
   fullWidth: boolean;
   label: string;
@@ -52,6 +52,7 @@ export default function Geocoder({
           const res = await geocoderService
             .forwardGeocode({
               types,
+              mode: 'mapbox.places',
               query: value,
             })
             .send();

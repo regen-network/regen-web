@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 import { FieldProps } from 'formik';
 import MapboxClient from '@mapbox/mapbox-sdk';
-import mbxGeocoder from '@mapbox/mapbox-sdk/services/geocoding';
+import mbxGeocoder, { GeocodeQueryType, GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import FieldFormControl from './FieldFormControl';
 import Input from './Input';
 
@@ -21,14 +21,13 @@ interface Props extends FieldProps {
   label?: string;
   optional?: boolean;
   placeholder?: string;
-  types?: string[];
+  types?: GeocodeQueryType[];
   token: string;
   transformValue?: (v: any) => any;
   triggerOnChange?: (v: any) => Promise<void>;
 }
 
 const LocationField: React.FC<Props> = ({
-  description,
   className,
   label,
   optional,
@@ -41,7 +40,7 @@ const LocationField: React.FC<Props> = ({
 }) => {
   const baseClient = MapboxClient({ accessToken });
   const geocoderService = mbxGeocoder(baseClient);
-  const [results, setResults] = useState<any[]>([]);
+  const [features, setFeatures] = useState<GeocodeFeature[]>([]);
   const [showResults, setShowResults] = useState(true);
   const { form, field } = fieldProps;
 
@@ -59,7 +58,7 @@ const LocationField: React.FC<Props> = ({
           <Input
             {...fieldProps}
             placeholder={placeholder}
-            value={field.value.place_name}
+            value={field.value?.place_name}
             onBlur={({ target: { value } }) => {
               handleBlur(value);
               setTimeout(() => setShowResults(false), 200); // without the timeout, `onBlur` fires before the click event on the results list, so the value doesn't properly update. There's probably a better solution to this, but it works fo rnow
@@ -70,18 +69,19 @@ const LocationField: React.FC<Props> = ({
                 geocoderService
                   .forwardGeocode({
                     types,
+                    mode: 'mapbox.places',
                     query: value,
                   })
                   .send()
-                  .then((res: any) => {
-                    setResults(res.body.features);
+                  .then(res => {
+                    setFeatures(res.body.features);
                     setShowResults(true);
                   });
               }
             }}
           />
           {showResults &&
-            results.map((item, index) => (
+            features.map((item, index) => (
               <div
                 key={index}
                 className={classes.result}

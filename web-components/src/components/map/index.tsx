@@ -134,8 +134,8 @@ export default function Map({ geojson, token }: MapProps): JSX.Element {
 
   const filteredFeatures: any[] = geojson.features.filter(feature => !feature.properties.boundary);
 
-  const [viewPort, setViewPort] = useState({ zoom: 11, latitude: 0.0, longitude: 0.0 });
-  const [boundary, setBoundary] = useState({ zoom: 11, latitude: 0.0, longitude: 0.0 });
+  const [viewPort, setViewPort] = useState<any>({ zoom: 11, latitude: 0.0, longitude: 0.0 });
+  const [boundary, setBoundary] = useState<any>({ zoom: 11, latitude: 0.0, longitude: 0.0 });
   const [popupInfo, setPopupInfo] = useState<PopupInfo | null>(null);
   // const [shownLayer, setShownLayer] = useState<string | null>(
   const [shownLayer] = useState<string | null>(filteredFeatures.length ? filteredFeatures[0].id : null);
@@ -228,7 +228,7 @@ export default function Map({ geojson, token }: MapProps): JSX.Element {
           width="100%"
           height="100%"
           mapStyle="mapbox://styles/mapbox/satellite-streets-v10"
-          onViewportChange={v => setViewPort(v)}
+          onViewportChange={(v: any) => setViewPort(v)}
           mapboxApiAccessToken={token}
           onClick={onMapClick}
           // interactiveLayerIds={interactiveLayerIds} unused for now

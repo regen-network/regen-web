@@ -25,14 +25,14 @@ tokenEconomics:
 infoSection:
   title: Gravity DEX & Osmosis - Liquidity Bootstrapping and Reverse Dutch Auction
   subtitle: "Release date: June 2021"
-  body: Early regen community members are collaborating with the Osmosis team to
+  body: Early Regen community members are collaborating with the Osmosis team to
     make a liquidity bootstrapping pool on the Osmosis DEX in the next 60 days.
     This will be the first Cosmos ecosystem initial DEX offering (IDO). The
-    liquidity bootstrapping pool (LBP) will use a reverse dutch auction
-    mechanism that will support fair and sustainable price discovery for our
-    community. After price discovery on the Osmosis LBP, we are working to
-    ensure there is an Atom-Regen trading as soon as the Gravity DEX is live on
-    Cosmos Hub.
+    liquidity bootstrapping pool (LBP) will use a variant of a reverse dutch
+    auction mechanism that will support fair and sustainable price discovery for
+    our community. After price discovery on the Osmosis LBP, we are working to
+    ensure there is an ATOM-REGEN trading pair as soon as the Gravity DEX is
+    live on Cosmos Hub.
   signupText: ""
   image: ../../static/media/token-bird.jpg
   imageAltText: Bird

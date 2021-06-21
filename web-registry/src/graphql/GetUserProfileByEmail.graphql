@@ -10,6 +10,7 @@ query GetUserProfileByEmail($email: String!) {
     id
     isAdmin
     phoneNumber
+    partyId
     roleTitle
     projectsByCreatorId {
       ...project

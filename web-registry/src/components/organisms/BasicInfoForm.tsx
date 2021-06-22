@@ -163,8 +163,8 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({ submit, initialValues }) 
             <OnboardingFooter
               saveText={'Save and Next'}
               onSave={submitForm}
-              // onPrev={} // TODO
-              // onNext={} // TODO
+              onPrev={() => null} // TODO https://github.com/regen-network/regen-web/issues/655
+              onNext={() => null} // TODO https://github.com/regen-network/regen-web/issues/655
               hideProgress={false} // TODO
               saveDisabled={!isValid || isSubmitting}
               percentComplete={0} // TODO

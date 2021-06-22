@@ -317,10 +317,10 @@ const StoryForm: React.FC<StoryFormProps> = ({ submit, exampleProjectUrl, initia
               <OnboardingFooter
                 onSave={submitForm}
                 saveText={'Save and Next'}
-                onPrev={() => null} // TODO
-                onNext={() => null} // TODO
+                onPrev={() => null} // TODO https://github.com/regen-network/regen-web/issues/655
+                onNext={() => null} // TODO https://github.com/regen-network/regen-web/issues/655
                 hideProgress={false} // TODO
-                saveDisabled={!isValid || isSubmitting} // TODO
+                saveDisabled={!isValid || isSubmitting}
                 percentComplete={0} // TODO
               />
             </Form>

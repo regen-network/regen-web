@@ -8,6 +8,7 @@ type Props = {
   img: string;
   title: string;
   description: string;
+  isBanner?: boolean;
   classes?: {
     title?: string;
     description?: string;
@@ -50,11 +51,15 @@ const HeroTitle: React.FC<Props> = ({ classes, ...props }) => {
   const styles = useStyles();
 
   return (
-    <BackgroundImgSection img={props.img} classes={{ main: cx(styles.main, classes && classes.main) }}>
-      <Typography variant="h1" className={cx(styles.title, classes && classes.title)}>
+    <BackgroundImgSection
+      isBanner={props.isBanner}
+      img={props.img}
+      classes={{ main: cx(styles.main, classes?.main) }}
+    >
+      <Typography variant="h1" className={cx(styles.title, classes?.title)}>
         {props.title}
       </Typography>
-      <Typography variant="h4" className={cx(styles.description, classes && classes.description)}>
+      <Typography variant="h4" className={cx(styles.description, classes?.description)}>
         {props.description}
       </Typography>
     </BackgroundImgSection>

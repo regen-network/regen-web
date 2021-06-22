@@ -1,4 +1,12 @@
 {
+  "linksByCategory": {
+    "methodology": {
+      "acceptedPrograms": "TODO:",
+      "reviewProcess": "https://docs.google.com/document/d/12YzGNI-kQwT82keMR9mr7BdisLUpNN9O6H4H_dMlox4/edit",
+      "carbonPlusOverview": "https://regen-registry.s3.amazonaws.com/Methodology+for+GHG+and+Co-Benefits+in+Grazing+Systems.pdf",
+      "submitMethodology": "https://airtable.com/shrRIa2VcxfeXsTXy"
+    }
+  },
   "outcomes": [
     {
       "imgSrc": "https://www.regen.network/static/a6d227581458b7e2c861acc2a8ce2ab5/carbon-sequestration.jpg",
@@ -37,14 +45,14 @@
       "imgSrc": "crm-duplicates/resources/create-methodology-flow-chart.png",
       "title": "Create a Methodology Flow Chart",
       "description": "View a visual guide to methodology creation.",
-      "href": "TODO:",
+      "href": "pdf/process-for-creating-a-methodology.pdf",
       "lastUpdated": "May 24, 2021"
     },
     {
       "btnText": "view guide",
       "imgSrc": "crm-duplicates/resources/methodology-template.png",
       "title": "Methodology Template",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
+      "description": "The intent of this framework is to provide a general structure for the development of new methodologies.",
       "href": "https://docs.google.com/document/d/1ccQRkhc5fDv1qTtlh7EEJ6eZsJ4IqtbU0Cwd_lwiI5A/edit#heading=h.5x0d5h95i329",
       "lastUpdated": "June 30, 2020"
     },
@@ -53,7 +61,7 @@
       "imgSrc": "crm-duplicates/resources/methodology-review-process.png",
       "title": "Methodology Review Process",
       "description": "Learn about the process your methodology will undergo after it has been submitted.",
-      "href": "TODO:",
+      "href": "https://docs.google.com/document/d/12YzGNI-kQwT82keMR9mr7BdisLUpNN9O6H4H_dMlox4/edit",
       "lastUpdated": "June 30, 2020"
     }
   ]

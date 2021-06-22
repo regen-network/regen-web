@@ -93,9 +93,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'space-evenly',
-    padding: theme.spacing(3.5, 3.5, 6),
+    padding: theme.spacing(3.5, 8, 6),
     [theme.breakpoints.down('xs')]: {
-      paddingBottom: theme.spacing(4),
+      padding: theme.spacing(3.5, 3.5, 4),
     },
   },
   step: {

@@ -12,7 +12,7 @@ import ContainedButton from 'web-components/lib/components/buttons/ContainedButt
 
 import { HeroTitle, HeroAction } from '../components/molecules';
 import { StepCardsWithDescription } from '../components/organisms';
-import { outcomes, resources } from '../mocks';
+import { outcomes, resources, linksByCategory } from '../mocks';
 
 import { ReactComponent as Checklist } from '../assets/svgs/green-yellow-checklist.svg';
 import { ReactComponent as Charts } from '../assets/svgs/green-charts.svg';
@@ -29,15 +29,13 @@ const useStyles = makeStyles((theme: Theme) => ({
     background: theme.palette.primary.main,
   },
   heroMain: {
+    maxWidth: theme.typography.pxToRem(744),
     [theme.breakpoints.up('sm')]: {
       paddingBottom: theme.spacing(22),
     },
     [theme.breakpoints.down('xs')]: {
       paddingBottom: theme.spacing(12),
     },
-  },
-  heroDescription: {
-    maxWidth: theme.typography.pxToRem(744),
   },
   topSection: {
     display: 'flex',
@@ -100,12 +98,15 @@ type StepCard = {
 };
 
 const openLink = (url: string): void => void window.open(url, '_blank', 'noopener');
+const htmlLink = (url: string, text: string): string =>
+  `<a href="${url}" target="_blank" rel="noopener noreferrer">${text}</a>`;
 
-const acceptedProgramsLink = 'TODO:';
-const methdologyReviewLink =
-  'https://docs.google.com/document/d/12YzGNI-kQwT82keMR9mr7BdisLUpNN9O6H4H_dMlox4/edit?usp=sharing';
-const methodologyLink =
-  'https://regen-registry.s3.amazonaws.com/Methodology+for+GHG+and+Co-Benefits+in+Grazing+Systems.pdf';
+const {
+  acceptedPrograms,
+  carbonPlusOverview,
+  reviewProcess,
+  submitMethodology,
+} = linksByCategory.methodology;
 
 const stepCards: StepCard[] = [
   {
@@ -119,14 +120,17 @@ const stepCards: StepCard[] = [
         { question: 'What is the question', answer: 'This is the answer' },
         { question: 'What is the question', answer: 'This is the answer' },
       ],
-      description: `Prior to developing a methodology, take a look to see if there is a similar methodology that is already approved on our program or other accepted programs. <a href="${acceptedProgramsLink}" target="_blank" rel="noopener noreferrer">View our list of accepted programs»</a>`,
+      description: `Prior to developing a methodology, take a look to see if there is a similar methodology that is already approved on our program or other accepted programs. ${htmlLink(
+        acceptedPrograms,
+        'View our list of accepted programs',
+      )}`,
     },
   },
   {
     icon: <Checklist />,
     step: {
       btnText: 'submit a concept note',
-      onBtnClick: () => openLink('https://airtable.com/shrRIa2VcxfeXsTXy'),
+      onBtnClick: () => openLink(submitMethodology),
       stepNumber: 2,
       isActive: true,
       tagName: '2-3 weeks',
@@ -144,7 +148,7 @@ const stepCards: StepCard[] = [
     icon: <Charts />,
     step: {
       btnText: 'submit a methodology',
-      onBtnClick: () => openLink('https://airtable.com/shrRIa2VcxfeXsTXy'),
+      onBtnClick: () => openLink(submitMethodology),
       stepNumber: 3,
       isActive: true,
       tagName: '2-3 weeks',
@@ -180,7 +184,10 @@ const stepCards: StepCard[] = [
       isActive: true,
       tagName: '2-3 weeks',
       title: 'Scientific peer review and public comment, updates made to beta methodology',
-      description: `After internal review, it may be recommended that some methods undergo external review to ensure the methodology is supported by the scientific community. See our <a href="${methdologyReviewLink}" target="_blank" rel="noopener noreferrer">Methodology Review Process</a> for more information.`,
+      description: `After internal review, it may be recommended that some methods undergo external review to ensure the methodology is supported by the scientific community. See our ${htmlLink(
+        reviewProcess,
+        'Methodology Review Process',
+      )} for more information.`,
     },
   },
   {
@@ -206,10 +213,11 @@ const CreateMethodology: React.FC = () => {
   return (
     <div className={styles.root}>
       <HeroTitle
+        isBanner
         img={fernImg}
         title="Create a methodology on Regen Registry."
         description="We are working hard to promote integrity and innovation in the methods used to monitor ecosystems and invite any and all methodology designers to take part in expanding this body of work."
-        classes={{ main: styles.heroMain, description: styles.heroDescription }}
+        classes={{ main: styles.heroMain }}
       />
       <Section
         title="General process for creating a new methodology"
@@ -223,7 +231,10 @@ const CreateMethodology: React.FC = () => {
             body:
               'In addition to developing methodologies focused on carbon reduction and removal, we must also work to incorporate protocols to track water cycles, nutrient cycles, biodiversity, pollution management, changing weather patterns, and more.',
           }}
-          description={`A lot can go into writing a new methodology and it might seem like an overwhelming process, but we’re here to help! Check out our <a href="${methodologyLink}">Carbon<i>Plus</i> Grasslands Methodology</a> to get a feel for what a methodology might entail and the various components included, and feel free to email <a href="mailto:science@regen.network">science@regen.network</a> for any additional questions.`}
+          description={`A lot can go into writing a new methodology and it might seem like an overwhelming process, but we’re here to help! Check out our ${htmlLink(
+            carbonPlusOverview,
+            'Carbon<i>Plus</i> Grasslands Methodology',
+          )} to get a feel for what a methodology might entail and the various components included, and feel free to email <a href="mailto:science@regen.network">science@regen.network</a> for any additional questions.`}
         />
       </Section>
 
@@ -231,9 +242,8 @@ const CreateMethodology: React.FC = () => {
         <ResponsiveSlider
           itemWidth="90%"
           padding={theme.spacing(2.5)}
-          // className={styles.slider}
           title="Ecological outcomes"
-          arrows
+          arrows={outcomes?.length > 3}
           slidesToShow={3}
           items={outcomeCards}
         />
@@ -247,7 +257,7 @@ const CreateMethodology: React.FC = () => {
             padding={theme.spacing(2.5)}
             title="Resources"
             titleVariant="h2"
-            arrows
+            arrows={resources?.length > 3}
             slidesToShow={3}
             items={resources.map(({ btnText, description, href, imgSrc, lastUpdated, title }) => (
               <ResourcesCard
@@ -256,7 +266,7 @@ const CreateMethodology: React.FC = () => {
                 updated={lastUpdated}
                 description={description}
                 buttonText={btnText}
-                link={href}
+                link={href.startsWith('http') ? href : require(`../assets/${href}`)}
               />
             ))}
           />
@@ -268,11 +278,7 @@ const CreateMethodology: React.FC = () => {
         title="Participate in Methodology Peer Review"
         description={`Methodologies submitted to Regen Network will go through a review process to provide valuable feedback which can be used to improve our understanding of the science and techniques/approaches, while promoting scientific transparency and instilling buyer assurance and confidence in claims. This process is in place to promote best practices in MRV and foster both innovation and trust. If you are interested in reviewing methodologies that have been submitted, please contact us at <a href="mailto:science@regen.network">science@regen.network.</a>`}
         actionTxt="See the Review Process"
-        action={() =>
-          openLink(
-            'https://docs.google.com/document/d/12YzGNI-kQwT82keMR9mr7BdisLUpNN9O6H4H_dMlox4/edit?usp=sharing',
-          )
-        }
+        action={() => openLink(reviewProcess)}
       />
 
       <HeroAction
@@ -284,11 +290,7 @@ const CreateMethodology: React.FC = () => {
         action={() => null} // TODO: once create credit class page is created, link there
       />
       <FixedFooter justify="flex-end">
-        <ContainedButton
-          href="https://airtable.com/shrRIa2VcxfeXsTXy"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <ContainedButton href={submitMethodology} target="_blank" rel="noopener noreferrer">
           Submit a methodology
         </ContainedButton>
       </FixedFooter>

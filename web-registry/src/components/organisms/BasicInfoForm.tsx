@@ -81,6 +81,7 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({ submit, initialValues }) 
   return (
     <Formik
       enableReinitialize
+      validateOnMount
       initialValues={{
         'http://schema.org/name': initialValues?.['http://schema.org/name'] || '',
         'http://regen.network/size': initialValues?.['http://regen.network/size'] || {

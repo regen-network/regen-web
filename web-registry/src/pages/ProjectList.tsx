@@ -80,9 +80,10 @@ const ProjectList: React.FC = () => {
         <Typography className={classes.subtitle}>Get started with your first project.</Typography>
       )}
       <div className={classes.cards}>
-        {projects?.map(project => (
-          <div>{/*TODO: Existing Projects. see regen-network/regen-registry#360 */}</div>
-        ))}
+        {/* TODO: Existing Projects. see regen-network/regen-registry#360 */}
+        {/* {projects?.map(project => (
+          <div></div>
+        ))} */}
         <CreateProjectCard
           className={classes.createCard}
           onClick={submitCreateProject}

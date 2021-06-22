@@ -197,6 +197,7 @@ const StoryForm: React.FC<StoryFormProps> = ({ submit, exampleProjectUrl, initia
     <>
       <Formik
         enableReinitialize
+        validateOnMount
         initialValues={
           initialValues || {
             'http://regen.network/landStory': initialValues?.['http://regen.network/landStory'] || '',

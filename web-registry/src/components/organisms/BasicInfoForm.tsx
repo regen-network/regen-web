@@ -166,7 +166,7 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({ submit, initialValues }) 
               // onPrev={} // TODO
               // onNext={} // TODO
               hideProgress={false} // TODO
-              saveDisabled={(submitCount > 0 && !isValid) || isSubmitting}
+              saveDisabled={!isValid || isSubmitting}
               percentComplete={0} // TODO
             />
           </Form>

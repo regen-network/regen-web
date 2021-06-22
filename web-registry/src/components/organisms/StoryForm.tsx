@@ -320,7 +320,7 @@ const StoryForm: React.FC<StoryFormProps> = ({ submit, exampleProjectUrl, initia
                 onPrev={() => null} // TODO
                 onNext={() => null} // TODO
                 hideProgress={false} // TODO
-                saveDisabled={(submitCount > 0 && !isValid) || isSubmitting} // TODO
+                saveDisabled={!isValid || isSubmitting} // TODO
                 percentComplete={0} // TODO
               />
             </Form>

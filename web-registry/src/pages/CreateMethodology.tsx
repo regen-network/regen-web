@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import CardMedia from '@material-ui/core/CardMedia';
 
@@ -9,6 +9,7 @@ import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSl
 import ResourcesCard from 'web-components/lib/components/cards/ResourcesCard';
 import FixedFooter from 'web-components/lib/components/fixed-footer';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
+import Modal from 'web-components/lib/components/modal';
 
 import { HeroTitle, HeroAction } from '../components/molecules';
 import { StepCardsWithDescription } from '../components/organisms';
@@ -90,6 +91,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   resourcesRoot: {
     paddingTop: 0,
   },
+  modal: {
+    padding: 0,
+    overflow: 'hidden',
+  },
 }));
 
 type StepCard = {
@@ -108,141 +113,143 @@ const {
   submitMethodology,
 } = linksByCategory.methodology;
 
-const stepCards: StepCard[] = [
-  {
-    icon: <MagnifyingGlass />,
-    step: {
-      stepNumber: 1,
-      isActive: true,
-      title: 'Check if there is an approved methodology listed on one of the accepted programs',
-      description: `Prior to developing a methodology, take a look to see if there is a similar methodology that is already approved on our program or other accepted programs. ${htmlLink(
-        acceptedPrograms,
-        'View our list of accepted programs',
-      )}`,
-    },
-  },
-  {
-    icon: <Checklist />,
-    step: {
-      btnText: 'submit a concept note',
-      onBtnClick: () => openLink(submitMethodology),
-      stepNumber: 2,
-      isActive: true,
-      tagName: '2-3 weeks',
-      title: 'Generate an idea for a methodology and submit a concept note for internal review',
-      faqs: [
-        {
-          question: 'What to include in your concept note?',
-          answer:
-            'We invite you to share your idea for a nature based solution and we can work together to refine it. Your concept note can include the management activities your concept applies to (cover cropping, rotational grazing, etc.), a high level summary of the indicators being measured, and the monitoring approach.',
-        },
-        {
-          question: 'Where to start:',
-          answer: htmlLink(
-            'https://docs.google.com/document/d/130AafzVweNC6Qg7Y3q7ds-6MoDFCz_A_-Pz3qCWt4-Y/edit?usp=sharing',
-            'Methodology Concept Note Template',
-          ),
-        },
-      ],
-      description:
-        'A concept note is a short proposal of an idea for a project or methodology which could be used to address environmental and societal challenges and provide human well-being and ecological benefits.',
-    },
-  },
-  {
-    icon: <Charts />,
-    step: {
-      btnText: 'submit a methodology',
-      onBtnClick: () => openLink(submitMethodology),
-      stepNumber: 3,
-      isActive: true,
-      tagName: '2-3 weeks',
-      title: 'Create a methodology draft and submit it for internal review',
-      faqs: [
-        {
-          question: 'What is the internal review process? ',
-          answer:
-            'Upon submission, the Regen Network Science Team will conduct an initial review to ensure all the proper information for monitoring, reporting, and verification (MRV) is included in your methodology. Feedback with suggested upgrades to your methodology will be provided after which the method will be accepted in beta form.',
-        },
-        {
-          question: 'How complete does my draft need to be?',
-          answer:
-            'The draft should include all the information needed for the MRV, however this process can also be used as an opportunity to work with the science community to refine your ideas and develop tools.',
-        },
-      ],
-      description:
-        'Your methodology should aim to outline standards and tools to monitor the ecological, environmental, and social indicators covered by your nature based solution. Your approach can be region specific or cover a wide range of locations.',
-    },
-  },
-  {
-    icon: <DocumentWithCheckmark />,
-    step: {
-      stepNumber: 4,
-      isActive: true,
-      title: 'Methodology accepted in beta form',
-      faqs: [
-        {
-          question: 'Can you run projects in beta form?',
-          answer:
-            'Yes! Credits can still be issued using a beta methodology, however they will be marked to indicate they have yet to undergo a scientific peer review. Beta methodologies will be indicated in our methods library with an [X] icon.',
-        },
-        {
-          question: 'How does a methodology move out of the beta form?',
-          answer:
-            'Methodologies move out of beta form after a scientific peer review. See step 4 for more details.',
-        },
-      ],
-      description:
-        'Methodologies that exist in beta form have not undergone any external review by experts or community members.',
-    },
-  },
-  {
-    icon: <Scientist />,
-    step: {
-      stepNumber: 5,
-      isActive: true,
-      tagName: '2-3 weeks',
-      title: 'Scientific peer review and public comment, updates made to beta methodology',
-      faqs: [
-        {
-          question: 'How long does a scientific peer review take?',
-          answer:
-            'The timeline for scientific peer review can vary. It is up to the methodology designer to drive the peer review process, however we expect this process to take anywhere from one and a half to two months depending on the speed of the reviewers.',
-        },
-        {
-          question: 'What is the public comment period?',
-          answer:
-            'The public comment period consists of a 30 day time period, where your method is opened up for review by community members who can submit comments, questions and feedback.',
-        },
-        {
-          question: 'Can public comment and peer review happen concurrently?',
-          answer: 'Yes, these two processes can be run in parallel.',
-        },
-      ],
-      description: `After internal review, it may be recommended that some methods undergo external review to ensure the methodology is supported by the scientific community. See our ${htmlLink(
-        reviewProcess,
-        'Methodology Review Process',
-      )} for more information.`,
-    },
-  },
-  {
-    icon: <CowCelebrating />,
-    step: {
-      stepNumber: 6,
-      isActive: true,
-      title: 'Methodology accepted!',
-      description:
-        'Once it has been confirmed that the methodology developer has addressed each comment or revision request, the methodology will be accepted and move out of its beta form.',
-    },
-  },
-];
-
-const outcomeCards = outcomes.map(({ imgSrc, title, description }) => (
-  <ImpactCard name={title} imgSrc={imgSrc} description={description} largeFontSize />
-));
-
 const CreateMethodology: React.FC = () => {
   const styles = useStyles();
   const theme = useTheme();
+
+  const [open, setOpen] = useState(false);
+
+  const stepCards: StepCard[] = [
+    {
+      icon: <MagnifyingGlass />,
+      step: {
+        stepNumber: 1,
+        isActive: true,
+        title: 'Check if there is an approved methodology listed on one of the accepted programs',
+        description: `Prior to developing a methodology, take a look to see if there is a similar methodology that is already approved on our program or other accepted programs. ${htmlLink(
+          acceptedPrograms,
+          'View our list of accepted programs »',
+        )}`,
+      },
+    },
+    {
+      icon: <Checklist />,
+      step: {
+        btnText: 'submit a concept note',
+        onBtnClick: () => setOpen(true),
+        stepNumber: 2,
+        isActive: true,
+        tagName: '2-3 weeks',
+        title: 'Generate an idea for a methodology and submit a concept note for internal review',
+        faqs: [
+          {
+            question: 'What to include in your concept note?',
+            answer:
+              'We invite you to share your idea for a nature based solution and we can work together to refine it. Your concept note can include the management activities your concept applies to (cover cropping, rotational grazing, etc.), a high level summary of the indicators being measured, and the monitoring approach.',
+          },
+          {
+            question: 'Where to start:',
+            answer: htmlLink(
+              'https://docs.google.com/document/d/130AafzVweNC6Qg7Y3q7ds-6MoDFCz_A_-Pz3qCWt4-Y/edit?usp=sharing',
+              'Methodology Concept Note Template',
+            ),
+          },
+        ],
+        description:
+          'A concept note is a short proposal of an idea for a project or methodology which could be used to address environmental and societal challenges and provide human well-being and ecological benefits.',
+      },
+    },
+    {
+      icon: <Charts />,
+      step: {
+        btnText: 'submit a methodology',
+        onBtnClick: () => setOpen(true),
+        stepNumber: 3,
+        isActive: true,
+        tagName: '2-3 weeks',
+        title: 'Create a methodology draft and submit it for internal review',
+        faqs: [
+          {
+            question: 'What is the internal review process? ',
+            answer:
+              'Upon submission, the Regen Network Science Team will conduct an initial review to ensure all the proper information for monitoring, reporting, and verification (MRV) is included in your methodology. Feedback with suggested upgrades to your methodology will be provided after which the method will be accepted in beta form.',
+          },
+          {
+            question: 'How complete does my draft need to be?',
+            answer:
+              'The draft should include all the information needed for the MRV, however this process can also be used as an opportunity to work with the science community to refine your ideas and develop tools.',
+          },
+        ],
+        description:
+          'Your methodology should aim to outline standards and tools to monitor the ecological, environmental, and social indicators covered by your nature based solution. Your approach can be region specific or cover a wide range of locations.',
+      },
+    },
+    {
+      icon: <DocumentWithCheckmark />,
+      step: {
+        stepNumber: 4,
+        isActive: true,
+        title: 'Methodology accepted in beta form',
+        faqs: [
+          {
+            question: 'Can you run projects in beta form?',
+            answer:
+              'Yes! Credits can still be issued using a beta methodology, however they will be marked to indicate they have yet to undergo a scientific peer review. Beta methodologies will be indicated in our methods library with an [X] icon.',
+          },
+          {
+            question: 'How does a methodology move out of the beta form?',
+            answer:
+              'Methodologies move out of beta form after a scientific peer review. See step 5 for more details.',
+          },
+        ],
+        description:
+          'Methodologies that exist in beta form have not undergone any external review by experts or community members.',
+      },
+    },
+    {
+      icon: <Scientist />,
+      step: {
+        stepNumber: 5,
+        isActive: true,
+        tagName: '2-3 weeks',
+        title: 'Scientific peer review and public comment, updates made to beta methodology',
+        faqs: [
+          {
+            question: 'How long does a scientific peer review take?',
+            answer:
+              'The timeline for scientific peer review can vary. It is up to the methodology designer to drive the peer review process, however we expect this process to take anywhere from one and a half to two months depending on the speed of the reviewers.',
+          },
+          {
+            question: 'What is the public comment period?',
+            answer:
+              'The public comment period consists of a 30 day time period, where your method is opened up for review by community members who can submit comments, questions and feedback.',
+          },
+          {
+            question: 'Can public comment and peer review happen concurrently?',
+            answer: 'Yes, these two processes can be run in parallel.',
+          },
+        ],
+        description: `After internal review, it may be recommended that some methods undergo external review to ensure the methodology is supported by the scientific community. See our ${htmlLink(
+          reviewProcess,
+          'Methodology Review Process',
+        )} for more information.`,
+      },
+    },
+    {
+      icon: <CowCelebrating />,
+      step: {
+        stepNumber: 6,
+        isActive: true,
+        title: 'Methodology accepted!',
+        description:
+          'Once it has been confirmed that the methodology developer has addressed each comment or revision request, the methodology will be accepted and move out of its beta form.',
+      },
+    },
+  ];
+
+  const outcomeCards = outcomes.map(({ imgSrc, title, description }) => (
+    <ImpactCard name={title} imgSrc={imgSrc} description={description} largeFontSize />
+  ));
 
   return (
     <div className={styles.root}>
@@ -324,10 +331,11 @@ const CreateMethodology: React.FC = () => {
         action={() => null} // TODO: once create credit class page is created, link there
       />
       <FixedFooter justify="flex-end">
-        <ContainedButton href={submitMethodology} target="_blank" rel="noopener noreferrer">
-          Submit a methodology
-        </ContainedButton>
+        <ContainedButton onClick={() => setOpen(true)}>Submit a methodology</ContainedButton>
       </FixedFooter>
+      <Modal open={open} onClose={() => setOpen(false)} className={styles.modal}>
+        <iframe title="airtable-signup-form" src={submitMethodology} />
+      </Modal>
     </div>
   );
 };

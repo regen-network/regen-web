@@ -665,7 +665,7 @@ collections:
                   - {label: "url", name: url, widget: string}
                   - {label: "date", name: date, widget: string}
                   - {label: "Is Mainnet", name: isMainnet, widget: boolean}
-                  - {label: "Is Token Sale", name: isTokenSale, widget: boolean}
+                  - {label: "Is Token Sale", name: isTokenSale, widget: boolean, required: false}
       - label: "Press Kit"
         name: "press-kit"
         file: "web-www/content/press-kit/index.yaml"

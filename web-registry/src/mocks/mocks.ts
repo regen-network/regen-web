@@ -8,7 +8,6 @@ import { CreditClass, Methodology } from 'web-components/lib/components/credits/
 import { SDG } from 'web-components/lib/components/cards/ProjectTopCard';
 import { ProjectImpactCardProps as Impact } from 'web-components/lib/components/cards/ProjectImpactCard';
 import mock from './mock.json';
-import duplicateMocks from './mock-cms-duplicates.json';
 
 // imgSrc should be either web url or static image filenames within web/src/assets/
 // (eg to load web/src/assets/coorong.jpg, use "coorong.jpg" as imgSrc)
@@ -77,21 +76,6 @@ interface Purchase {
   total: number;
   date: Date | string;
 }
-export interface Resource {
-  btnText: string;
-  description: string;
-  href: string;
-  imgSrc: string;
-  lastUpdated: string;
-  title: string;
-}
-
-export interface Outcome {
-  description: string;
-  imgSrc: string;
-  title: string;
-}
-
 export interface PurchasedCredits {
   userId: string;
   project: BasicProject;
@@ -125,15 +109,6 @@ export interface ProjectOverride {
   timeline?: ProjectDefaultFields;
 }
 
-interface LinksByCategory {
-  methodology: {
-    acceptedPrograms: string;
-    reviewProcess: string;
-    carbonPlusOverview: string;
-    submitMethodology: string;
-  };
-}
-
 export interface Mock {
   creditsIssuer: User;
   projects: Project[];
@@ -142,17 +117,8 @@ export interface Mock {
   purchasedCredits: PurchasedCredits[];
 }
 
-export interface DuplicateMocks {
-  resources: Resource[];
-  outcomes: Outcome[];
-  linksByCategory: LinksByCategory;
-}
-
 export const creditsIssuer: User = mock.creditsIssuer;
 export const purchasedCredits: PurchasedCredits[] = mock.purchasedCredits;
 export const projects: Project[] = mock.projects;
 export const projectDefault: ProjectDefault = mock.projectDefault;
 export const creditClasses: BasicCreditClass[] = mock.creditClasses;
-export const resources: Resource[] = duplicateMocks.resources;
-export const outcomes: Outcome[] = duplicateMocks.outcomes;
-export const linksByCategory: LinksByCategory = duplicateMocks.linksByCategory;

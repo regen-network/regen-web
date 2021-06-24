@@ -1,0 +1,182 @@
+{
+  "contentByPage": {
+    "CreateMethodology": {
+      "footerLink": "https://airtable.com/embed/shrnnbymyofPB75WQ",
+      "heroSection": {
+        "title": "Create a methodology on Regen Registry.",
+        "description": "We are working hard to promote integrity and innovation in the methods used to monitor ecosystems and invite any and all methodology designers to take part in expanding this body of work."
+      },
+      "stepCardSection": {
+        "title": "General process for creating a new methodology",
+        "mainDescription": "A lot can go into writing a new methodology and it might seem like an overwhelming process, but we’re here to help! Check out our <a href=\"https://regen-registry.s3.amazonaws.com/Methodology+for+GHG+and+Co-Benefits+in+Grazing+Systems.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Carbon<i>Plus</i> Grasslands Methodology</a> to get a feel for what a methodology might entail and the various components included, and feel free to email <a href=\"mailto:science@regen.network\">science@regen.network</a> for any additional questions.",
+        "bottomTitle": "Help develop a range of methodologies for the diversity of nature based solutions",
+        "bottomDescription": "In addition to developing methodologies focused on carbon reduction and removal, we must also work to incorporate protocols to track water cycles, nutrient cycles, biodiversity, pollution management, changing weather patterns, and more.",
+        "stepCards": [
+          {
+            "stepNumber": 1,
+            "isActive": true,
+            "icon": "svgs/green-magnifying-glass-eye.svg",
+            "btnText": "submit a concept note",
+            "href": "MODAL",
+            "title": "Check if there is an approved methodology listed on one of the accepted programs",
+            "description": "Prior to developing a methodology, take a look to see if there is a similar methodology that is already approved on our program or other accepted programs. <a href=\"TODO:\" target=\"_blank\" rel=\"noopener noreferrer\">View our list of accepted programs»</a>"
+          },
+          {
+            "stepNumber": 2,
+            "isActive": true,
+            "icon": "svgs/green-yellow-checklist.svg",
+            "title": "Generate an idea for a methodology and submit a concept note for internal review",
+            "description": "A concept note is a short proposal of an idea for a project or methodology which could be used to address environmental and societal challenges and provide human well-being and ecological benefits.",
+            "btnText": "submit a methodology",
+            "href": "MODAL",
+            "tagName": "2-3 weeks",
+            "faqs": [
+              {
+                "question": "What to include in your concept note?",
+                "answer": "We invite you to share your idea for a nature based solution and we can work together to refine it. Your concept note can include the management activities your concept applies to (cover cropping, rotational grazing, etc.), a high level summary of the indicators being measured, and the monitoring approach."
+              },
+              {
+                "question": "Where to start:",
+                "answer": "<a href=\"https://docs.google.com/document/d/130AafzVweNC6Qg7Y3q7ds-6MoDFCz_A_-Pz3qCWt4-Y/edit?usp=sharing\" target=\"_blank\" rel=\"noopener noreferrer\">Methodology Concept Note Template</a>"
+              }
+            ]
+          },
+          {
+            "stepNumber": 3,
+            "isActive": true,
+            "icon": "svgs/green-charts.svg",
+            "title": "Create a methodology draft and submit it for internal review",
+            "description": "Your methodology should aim to outline standards and tools to monitor the ecological, environmental, and social indicators covered by your nature based solution. Your approach can be region specific or cover a wide range of locations.",
+            "tagName": "2-3 weeks",
+            "faqs": [
+              {
+                "question": "What is the internal review process? ",
+                "answer": "Upon submission, the Regen Network Science Team will conduct an initial review to ensure all the proper information for monitoring, reporting, and verification (MRV) is included in your methodology. Feedback with suggested upgrades to your methodology will be provided after which the method will be accepted in beta form."
+              },
+              {
+                "question": "How complete does my draft need to be?",
+                "answer": "The draft should include all the information needed for the MRV, however this process can also be used as an opportunity to work with the science community to refine your ideas and develop tools."
+              }
+            ]
+          },
+          {
+            "stepNumber": 4,
+            "isActive": true,
+            "icon": "svgs/green-yellow-checklist.svg",
+            "title": "Methodology accepted in beta form",
+            "description": "Methodologies that exist in beta form have not undergone any external review by experts or community members.",
+            "faqs": [
+              {
+                "question": "Can you run projects in beta form?",
+                "answer": "The draft should include all the information needed for the MRV, however this process can also be used as an opportunity to work with the science community to refine your ideas and develop tools."
+              },
+              {
+                "question": "How does a methodology move out of the beta form?",
+                "answer": "Methodologies move out of beta form after a scientific peer review. See step 5 for more details."
+              }
+            ]
+          },
+          {
+            "stepNumber": 5,
+            "isActive": true,
+            "icon": "svgs/scientist-with-vial.svg",
+            "title": "Scientific peer review and public comment, updates made to beta methodology",
+            "description": "After internal review, it may be recommended that some methods undergo external review to ensure the methodology is supported by the scientific community. See our <a href=\"https://docs.google.com/document/d/12YzGNI-kQwT82keMR9mr7BdisLUpNN9O6H4H_dMlox4/edit\" target=\"_blank\" rel=\"noopener noreferrer\">Methodology Review Process</a> for more information.",
+            "tagName": "2-3 weeks",
+            "faqs": [
+              {
+                "question": "How long does a scientific peer review take?",
+                "answer": "The timeline for scientific peer review can vary. It is up to the methodology designer to drive the peer review process, however we expect this process to take anywhere from one and a half to two months depending on the speed of the reviewers."
+              },
+              {
+                "question": "What is the public comment period?",
+                "answer": "The public comment period consists of a 30 day time period, where your method is opened up for review by community members who can submit comments, questions and feedback."
+              },
+              {
+                "question": "Can public comment and peer review happen concurrently?",
+                "answer": "Yes, these two processes can be run in parallel."
+              }
+            ]
+          },
+          {
+            "stepNumber": 6,
+            "isActive": true,
+            "icon": "svgs/green-cow-celebrating.svg",
+            "title": "Methodology accepted!",
+            "description": "Once it has been confirmed that the methodology developer has addressed each comment or revision request, the methodology will be accepted and move out of its beta form."
+          }
+        ]
+      },
+      "peerReviewSection": {
+        "title": "Participate in Methodology Peer Review",
+        "description": "Methodologies submitted to Regen Network will go through a review process to provide valuable feedback which can be used to improve our understanding of the science and techniques/approaches, while promoting scientific transparency and instilling buyer assurance and confidence in claims. This process is in place to promote best practices in MRV and foster both innovation and trust. If you are interested in reviewing methodologies that have been submitted, please contact us at <a href=\"mailto:science@regen.network\">science@regen.network.</a",
+        "btnText": "See the Review Process",
+        "href": "https://docs.google.com/document/d/12YzGNI-kQwT82keMR9mr7BdisLUpNN9O6H4H_dMlox4/edit"
+      },
+      "createCreditClassSection": {
+        "title": "Create a Credit Class",
+        "description": "If you haven’t yet created a credit class for this methodology, learn more below.",
+        "btnText": "Create a Credit Class",
+        "href": "/create-credit-class"
+      }
+    }
+  },
+  "outcomes": [
+    {
+      "imgSrc": "https://www.regen.network/static/a6d227581458b7e2c861acc2a8ce2ab5/carbon-sequestration.jpg",
+      "title": "Carbon sequestration",
+      "description": "Sequestering carbon in SOC is one way to mitigate climate change."
+    },
+    {
+      "imgSrc": "https://www.regen.network/static/9004592a263b1d38338b39f7c703c0d8/above-ground-biomass.png",
+      "title": "Above ground biomass",
+      "description": "Increasing all living biomass which is located above the ground."
+    },
+    {
+      "imgSrc": "https://www.regen.network/static/9c77fdbdf6a07c8491b2d65f54fe34b6/soil-health.png",
+      "title": "Soil health",
+      "description": "Healthy soil acts as a vital living ecosystem that sustains plants, animals, and humans."
+    },
+    {
+      "imgSrc": "https://www.regen.network/static/de7d6044fa20a75408f27f2436b2179a/animal-welfare.png",
+      "title": "Animal welfare",
+      "description": "Animals play an important role in the maintenance of balance in an ecosystem."
+    },
+    {
+      "imgSrc": "https://www.regen.network/static/82026eabfdcb65bbe258fc9fc7cf975a/ecosystem-health.png",
+      "title": "Ecosystem health",
+      "description": "Robust ecosystems provide a home for humans, plants, and animals to flourish."
+    },
+    {
+      "imgSrc": "https://www.regen.network/static/8ed59ff2969cc9ee8b51f14398bf2665/enhance-biodiversity.png",
+      "title": "Enhance biodiversity",
+      "description": "The diversity of plants and animals is of vital importance to our well-being."
+    }
+  ],
+  "resources": [
+    {
+      "btnText": "view flow chart",
+      "imgSrc": "crm-duplicates/resources/create-methodology-flow-chart.png",
+      "title": "Create a Methodology Flow Chart",
+      "description": "View a visual guide to methodology creation.",
+      "href": "pdf/process-for-creating-a-methodology.pdf",
+      "lastUpdated": "May 24, 2021"
+    },
+    {
+      "btnText": "view guide",
+      "imgSrc": "crm-duplicates/resources/methodology-template.png",
+      "title": "Methodology Template",
+      "description": "The intent of this framework is to provide a general structure for the development of new methodologies.",
+      "href": "https://docs.google.com/document/d/1ccQRkhc5fDv1qTtlh7EEJ6eZsJ4IqtbU0Cwd_lwiI5A/edit#heading=h.5x0d5h95i329",
+      "lastUpdated": "June 30, 2020"
+    },
+    {
+      "btnText": "view document",
+      "imgSrc": "crm-duplicates/resources/methodology-review-process.png",
+      "title": "Methodology Review Process",
+      "description": "Learn about the process your methodology will undergo after it has been submitted.",
+      "href": "https://docs.google.com/document/d/12YzGNI-kQwT82keMR9mr7BdisLUpNN9O6H4H_dMlox4/edit",
+      "lastUpdated": "June 30, 2020"
+    }
+  ]
+}

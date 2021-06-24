@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import CardMedia from '@material-ui/core/CardMedia';
 
@@ -13,14 +14,8 @@ import Modal from 'web-components/lib/components/modal';
 
 import { HeroTitle, HeroAction } from '../components/molecules';
 import { StepCardsWithDescription } from '../components/organisms';
-import { outcomes, resources, linksByCategory } from '../mocks';
+import { outcomes, resources, contentByPage } from '../mocks';
 
-import { ReactComponent as Checklist } from '../assets/svgs/green-yellow-checklist.svg';
-import { ReactComponent as Charts } from '../assets/svgs/green-charts.svg';
-import { ReactComponent as MagnifyingGlass } from '../assets/svgs/green-magnifying-glass-eye.svg';
-import { ReactComponent as DocumentWithCheckmark } from '../assets/svgs/yellow-check-document.svg';
-import { ReactComponent as Scientist } from '../assets/svgs/scientist-with-vial.svg';
-import { ReactComponent as CowCelebrating } from '../assets/svgs/green-cow-celebrating.svg';
 import fernImg from '../assets/fern-in-hands.png';
 import writingOnPaperImg from '../assets/writing-on-paper.png';
 import topographyImg from '../assets/topography-pattern-full-1.png';
@@ -103,179 +98,63 @@ type StepCard = {
 };
 
 const openLink = (url: string): void => void window.open(url, '_blank', 'noopener');
-const htmlLink = (url: string, text: string): string =>
-  `<a href="${url}" target="_blank" rel="noopener noreferrer">${text}</a>`;
-
-const {
-  acceptedPrograms,
-  carbonPlusOverview,
-  reviewProcess,
-  submitMethodology,
-} = linksByCategory.methodology;
 
 const CreateMethodology: React.FC = () => {
   const styles = useStyles();
   const theme = useTheme();
-
+  const history = useHistory();
   const [open, setOpen] = useState(false);
 
-  const stepCards: StepCard[] = [
-    {
-      icon: <MagnifyingGlass />,
-      step: {
-        stepNumber: 1,
-        isActive: true,
-        title: 'Check if there is an approved methodology listed on one of the accepted programs',
-        description: `Prior to developing a methodology, take a look to see if there is a similar methodology that is already approved on our program or other accepted programs. ${htmlLink(
-          acceptedPrograms,
-          'View our list of accepted programs »',
-        )}`,
-      },
-    },
-    {
-      icon: <Checklist />,
-      step: {
-        btnText: 'submit a concept note',
-        onBtnClick: () => setOpen(true),
-        stepNumber: 2,
-        isActive: true,
-        tagName: '2-3 weeks',
-        title: 'Generate an idea for a methodology and submit a concept note for internal review',
-        faqs: [
-          {
-            question: 'What to include in your concept note?',
-            answer:
-              'We invite you to share your idea for a nature based solution and we can work together to refine it. Your concept note can include the management activities your concept applies to (cover cropping, rotational grazing, etc.), a high level summary of the indicators being measured, and the monitoring approach.',
-          },
-          {
-            question: 'Where to start:',
-            answer: htmlLink(
-              'https://docs.google.com/document/d/130AafzVweNC6Qg7Y3q7ds-6MoDFCz_A_-Pz3qCWt4-Y/edit?usp=sharing',
-              'Methodology Concept Note Template',
-            ),
-          },
-        ],
-        description:
-          'A concept note is a short proposal of an idea for a project or methodology which could be used to address environmental and societal challenges and provide human well-being and ecological benefits.',
-      },
-    },
-    {
-      icon: <Charts />,
-      step: {
-        btnText: 'submit a methodology',
-        onBtnClick: () => setOpen(true),
-        stepNumber: 3,
-        isActive: true,
-        tagName: '2-3 weeks',
-        title: 'Create a methodology draft and submit it for internal review',
-        faqs: [
-          {
-            question: 'What is the internal review process? ',
-            answer:
-              'Upon submission, the Regen Network Science Team will conduct an initial review to ensure all the proper information for monitoring, reporting, and verification (MRV) is included in your methodology. Feedback with suggested upgrades to your methodology will be provided after which the method will be accepted in beta form.',
-          },
-          {
-            question: 'How complete does my draft need to be?',
-            answer:
-              'The draft should include all the information needed for the MRV, however this process can also be used as an opportunity to work with the science community to refine your ideas and develop tools.',
-          },
-        ],
-        description:
-          'Your methodology should aim to outline standards and tools to monitor the ecological, environmental, and social indicators covered by your nature based solution. Your approach can be region specific or cover a wide range of locations.',
-      },
-    },
-    {
-      icon: <DocumentWithCheckmark />,
-      step: {
-        stepNumber: 4,
-        isActive: true,
-        title: 'Methodology accepted in beta form',
-        faqs: [
-          {
-            question: 'Can you run projects in beta form?',
-            answer:
-              'Yes! Credits can still be issued using a beta methodology, however they will be marked to indicate they have yet to undergo a scientific peer review. Beta methodologies will be indicated in our methods library with an [X] icon.',
-          },
-          {
-            question: 'How does a methodology move out of the beta form?',
-            answer:
-              'Methodologies move out of beta form after a scientific peer review. See step 5 for more details.',
-          },
-        ],
-        description:
-          'Methodologies that exist in beta form have not undergone any external review by experts or community members.',
-      },
-    },
-    {
-      icon: <Scientist />,
-      step: {
-        stepNumber: 5,
-        isActive: true,
-        tagName: '2-3 weeks',
-        title: 'Scientific peer review and public comment, updates made to beta methodology',
-        faqs: [
-          {
-            question: 'How long does a scientific peer review take?',
-            answer:
-              'The timeline for scientific peer review can vary. It is up to the methodology designer to drive the peer review process, however we expect this process to take anywhere from one and a half to two months depending on the speed of the reviewers.',
-          },
-          {
-            question: 'What is the public comment period?',
-            answer:
-              'The public comment period consists of a 30 day time period, where your method is opened up for review by community members who can submit comments, questions and feedback.',
-          },
-          {
-            question: 'Can public comment and peer review happen concurrently?',
-            answer: 'Yes, these two processes can be run in parallel.',
-          },
-        ],
-        description: `After internal review, it may be recommended that some methods undergo external review to ensure the methodology is supported by the scientific community. See our ${htmlLink(
-          reviewProcess,
-          'Methodology Review Process',
-        )} for more information.`,
-      },
-    },
-    {
-      icon: <CowCelebrating />,
-      step: {
-        stepNumber: 6,
-        isActive: true,
-        title: 'Methodology accepted!',
-        description:
-          'Once it has been confirmed that the methodology developer has addressed each comment or revision request, the methodology will be accepted and move out of its beta form.',
-      },
-    },
-  ];
+  const {
+    stepCardSection,
+    createCreditClassSection,
+    heroSection,
+    peerReviewSection,
+    footerLink,
+  } = contentByPage.CreateMethodology;
 
   const outcomeCards = outcomes.map(({ imgSrc, title, description }) => (
     <ImpactCard name={title} imgSrc={imgSrc} description={description} largeFontSize />
   ));
+
+  const stepCards: StepCard[] = stepCardSection.stepCards.map(
+    ({ icon, title, btnText, href, description, isActive, stepNumber, faqs, tagName }) => ({
+      icon: <img src={require(`../assets/${icon}`)} alt={title} />,
+      step: {
+        stepNumber,
+        faqs,
+        tagName,
+        isActive,
+        title,
+        description,
+        btnText,
+        onBtnClick: href ? (href === 'MODAL' ? () => setOpen(true) : () => openLink(href)) : undefined,
+      },
+    }),
+  );
 
   return (
     <div className={styles.root}>
       <HeroTitle
         isBanner
         img={fernImg}
-        title="Create a methodology on Regen Registry."
-        description="We are working hard to promote integrity and innovation in the methods used to monitor ecosystems and invite any and all methodology designers to take part in expanding this body of work."
+        title={heroSection.title}
+        description={heroSection.description}
         classes={{ main: styles.heroMain }}
       />
+
       <Section
-        title="General process for creating a new methodology"
+        title={stepCardSection.title}
         classes={{ root: styles.topSection, title: styles.methodologyTitle }}
       >
         <StepCardsWithDescription
           className={styles.topSectionCards}
           stepCards={stepCards}
+          description={stepCardSection.mainDescription}
           bottomDescription={{
-            title: 'Help develop a range of methodologies for the diversity of nature based solutions',
-            body:
-              'In addition to developing methodologies focused on carbon reduction and removal, we must also work to incorporate protocols to track water cycles, nutrient cycles, biodiversity, pollution management, changing weather patterns, and more.',
+            title: stepCardSection.bottomTitle,
+            body: stepCardSection.bottomDescription,
           }}
-          description={`A lot can go into writing a new methodology and it might seem like an overwhelming process, but we’re here to help! Check out our ${htmlLink(
-            carbonPlusOverview,
-            'Carbon<i>Plus</i> Grasslands Methodology',
-          )} to get a feel for what a methodology might entail and the various components included, and feel free to email <a href="mailto:science@regen.network">science@regen.network</a> for any additional questions.`}
         />
       </Section>
 
@@ -316,25 +195,25 @@ const CreateMethodology: React.FC = () => {
 
       <HeroAction
         classes={{ main: styles.bottomSection }}
-        title="Participate in Methodology Peer Review"
-        description={`Methodologies submitted to Regen Network will go through a review process to provide valuable feedback which can be used to improve our understanding of the science and techniques/approaches, while promoting scientific transparency and instilling buyer assurance and confidence in claims. This process is in place to promote best practices in MRV and foster both innovation and trust. If you are interested in reviewing methodologies that have been submitted, please contact us at <a href="mailto:science@regen.network">science@regen.network.</a>`}
-        actionTxt="See the Review Process"
-        action={() => openLink(reviewProcess)}
+        title={peerReviewSection.title}
+        description={peerReviewSection.description}
+        actionTxt={peerReviewSection.btnText}
+        action={() => openLink(peerReviewSection.href)}
       />
 
       <HeroAction
         classes={{ main: styles.bottomSection }}
         img={writingOnPaperImg}
-        title="Create a Credit Class"
-        description="If you haven’t yet created a credit class for this methodology, learn more below."
-        actionTxt="Create a Credit Class"
-        action={() => null} // TODO: once create credit class page is created, link there
+        title={createCreditClassSection.title}
+        description={createCreditClassSection.description}
+        actionTxt={createCreditClassSection.btnText}
+        action={() => history.push(createCreditClassSection.href)}
       />
       <FixedFooter justify="flex-end">
         <ContainedButton onClick={() => setOpen(true)}>Submit a methodology</ContainedButton>
       </FixedFooter>
       <Modal open={open} onClose={() => setOpen(false)} className={styles.modal}>
-        <iframe title="airtable-signup-form" src={submitMethodology} />
+        <iframe title="airtable-signup-form" src={footerLink} />
       </Modal>
     </div>
   );

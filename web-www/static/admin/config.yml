@@ -664,7 +664,7 @@ collections:
                   - {label: "author / source name", name: author, widget: string}
                   - {label: "url", name: url, widget: string}
                   - {label: "date", name: date, widget: string}
-                  - {label: "Is Mainnet", name: isMainnet, widget: boolean}
+                  - {label: "Is Mainnet", name: isMainnet, widget: boolean, required: false}
                   - {label: "Is Token Sale", name: isTokenSale, widget: boolean, required: false}
       - label: "Press Kit"
         name: "press-kit"

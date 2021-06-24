@@ -27,8 +27,8 @@ infoSection:
   subtitle: "Release date: June 2021"
   body: md//Early Regen community members are collaborating with the Osmosis team
     to make a [liquidity bootstrapping pool on the Osmosis
-    DEX](https://app.osmosis.zone/pool/21) in the next 60 days. This will be the
-    first Cosmos ecosystem initial DEX offering (IDO). The liquidity
+    DEX](https://app.osmosis.zone/bootstrap) in the next 60 days. This will be
+    the first Cosmos ecosystem initial DEX offering (IDO). The liquidity
     bootstrapping pool (LBP) will use a variant of a reverse dutch auction
     mechanism that will support fair and sustainable price discovery for our
     community.

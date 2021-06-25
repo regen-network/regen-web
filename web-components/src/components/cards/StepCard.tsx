@@ -217,7 +217,7 @@ function StepCard({
             {ReactHtmlParser(step.description || '')}
           </Description>
           {!!step.btnText && !!step.onBtnClick && (
-            <ContainedButton onClick={step.onBtnClick} className={classes.btn}>
+            <ContainedButton onClick={step.onBtnClick} className={styles.btn}>
               {step.btnText}
             </ContainedButton>
           )}

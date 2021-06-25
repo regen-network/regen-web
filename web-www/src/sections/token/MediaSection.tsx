@@ -105,7 +105,7 @@ const MediaSection: React.FC = () => {
       }
     }
   `);
-  const classes = useStyles();
+  const styles = useStyles();
   const theme = useTheme();
   const allItems: CardItem[] = categories.reduce((prev: CardItem[], curr) => {
     const { showPlay, buttonText, name } = curr;
@@ -117,7 +117,7 @@ const MediaSection: React.FC = () => {
 
   const itemCards: JSX.Element[] = allItems.map((item, i) => (
     <ArticleCard
-      className={classes.card}
+      className={styles.card}
       key={i}
       url={item.url}
       name={item.title}
@@ -131,18 +131,20 @@ const MediaSection: React.FC = () => {
   const slidesToShow = itemCards && itemCards.length < 3 ? itemCards.length : 3;
 
   return (
-    <Section className={classes.root}>
-      <div className={classes.main}>
-        {slidesToShow > 0 && (
+    <Section className={styles.root}>
+      <div className={styles.main}>
+        {itemCards && itemCards.length > 0 && (
           <ResponsiveSlider
             arrows={itemCards.length > 3}
+            classes={{
+              root: styles.slider,
+              headerWrap: styles.headerWrap,
+            }}
             itemWidth="90%"
             padding={theme.spacing(2.5)}
-            className={classes.slider}
-            headerWrapClassName={classes.headerWrap}
             slidesToShow={slidesToShow}
             items={itemCards}
-            renderTitle={() => <Title className={classes.title}>{header}</Title>}
+            renderTitle={() => <Title className={styles.title}>{header}</Title>}
           />
         )}
       </div>

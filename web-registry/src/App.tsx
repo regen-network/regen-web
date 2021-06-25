@@ -17,6 +17,7 @@ import {
   BuyerCreate,
   CertificatePage,
   ChooseCreditClass,
+  CreateMethodology,
   Credits,
   CreditsIssue,
   CreditsRetire,
@@ -88,6 +89,9 @@ const App: React.FC = (): JSX.Element => {
           </Route>
           <Route exact path="/projects/impactag/admin">
             <Redirect to="/projects/wilmot/admin" />
+          </Route>
+          <Route exact path="/create-a-methodology">
+            <CreateMethodology />
           </Route>
           <Route
             path="/projects"

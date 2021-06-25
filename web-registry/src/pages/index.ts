@@ -4,6 +4,7 @@ export * from './BasicInfo';
 export * from './BuyerCreate';
 export * from './Certificate';
 export * from './ChooseCreditClass';
+export * from './CreateMethodology';
 export * from './Credits';
 export * from './CreditsIssue';
 export * from './CreditsRetire';

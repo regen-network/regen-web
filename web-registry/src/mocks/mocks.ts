@@ -76,7 +76,6 @@ interface Purchase {
   total: number;
   date: Date | string;
 }
-
 export interface PurchasedCredits {
   userId: string;
   project: BasicProject;

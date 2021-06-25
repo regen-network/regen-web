@@ -8,6 +8,7 @@ type Props = {
   img: string;
   title: string;
   description: string;
+  isBanner?: boolean;
   classes?: {
     title?: string;
     description?: string;
@@ -33,10 +34,12 @@ const useStyles = makeStyles((theme: Theme) => ({
     color: theme.palette.primary.main,
     marginTop: theme.spacing(5.5),
     [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(5.5),
+      fontSize: theme.typography.pxToRem(22),
+      lineHeight: theme.typography.pxToRem(35.2),
     },
     [theme.breakpoints.down('xs')]: {
-      fontSize: theme.spacing(4.75),
+      fontSize: theme.typography.pxToRem(16),
+      lineHeight: theme.typography.pxToRem(25),
     },
   },
 }));
@@ -44,18 +47,19 @@ const useStyles = makeStyles((theme: Theme) => ({
 /**
  * Hero section with title, description and background image justified to the lower left with our section component
  */
-const HeroTitle: React.FC<Props> = props => {
+const HeroTitle: React.FC<Props> = ({ classes, ...props }) => {
   const styles = useStyles();
 
   return (
     <BackgroundImgSection
+      isBanner={props.isBanner}
       img={props.img}
-      classes={{ main: cx(styles.main, props.classes && props.classes.main) }}
+      classes={{ main: cx(styles.main, classes?.main) }}
     >
-      <Typography variant="h1" className={cx(styles.title, props.classes && props.classes.title)}>
+      <Typography variant="h1" className={cx(styles.title, classes?.title)}>
         {props.title}
       </Typography>
-      <Typography variant="h4" className={cx(styles.description, props.classes && props.classes.description)}>
+      <Typography variant="h4" className={cx(styles.description, classes?.description)}>
         {props.description}
       </Typography>
     </BackgroundImgSection>

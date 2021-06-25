@@ -14,4 +14,5 @@ export * from './ProjectImpactSection';
 export * from './ProjectTopSection';
 export * from './RegistryNav';
 export * from './StoryForm';
+export * from './StepCardsWithDescription';
 export * from './UserCredits';

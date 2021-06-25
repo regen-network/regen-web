@@ -133,6 +133,11 @@ categories:
         url: https://impactalpha.com/techstars-sustainability-startups-tackle-clean-water-regenerative-farming-and-supply-chains/
         isMainnet: false
         isTokenSale: false
+      - url: https://medium.com/regen-network/how-to-participate-in-governance-ae35200777a6
+        title: How to Participate in Governance
+        author: Regen Network
+        date: May 21, 2021
+        image: ../../static/media/0_go_cnas85vuodv_d.png
   - name: videos
     buttonText: watch video
     showPlay: true

@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import Parser from '@rdfjs/parser-jsonld';
 import SHACLValidator, { ValidationReport } from 'rdf-validate-shacl';
 import factory from 'rdf-ext';
@@ -18,17 +17,13 @@ async function loadDataset(jsonLd: string): Promise<DatasetExt> {
   return factory.dataset().import(parser.import(stream));
 }
 
-// validate validates the data in dataStr as JSON-LD string
-// using the SHACL graph in shapesStr.
+// validate validates the data in dataStr as JSON-LD
+// using the SHACL graph in shapesJSON.
 // If an optional group is passed, it will validate against shapes
 // of the given sh:group.
-export async function validate(
-  shapesStr: string,
-  dataStr: string,
-  group?: string,
-): ValidationReport {
-  const shapes = await loadDataset(shapesStr);
-  const data = await loadDataset(dataStr);
+export async function validate(shapesJSON: any, dataJSON: any, group?: string): ValidationReport {
+  const shapes = await loadDataset(JSON.stringify(shapesJSON));
+  const data = await loadDataset(JSON.stringify(dataJSON));
 
   const validator = new SHACLValidator(shapes, { factory, group });
   const report = validator.validate(data);
@@ -46,4 +41,10 @@ export async function validate(
   // }
 
   return report;
+}
+
+export function getProjectPageBaseData(): any {
+  return {
+    '@type': 'http://regen.network/ProjectPage',
+  };
 }

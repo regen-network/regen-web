@@ -1,0 +1,5 @@
+query ShaclGraphByUri($uri: String!) {
+  shaclGraphByUri(uri: $uri) {
+    graph
+  }
+}

@@ -25,13 +25,7 @@ const Eligibility: React.FC = () => {
   }
 
   return (
-    <OnboardingFormTemplate
-      activeStep={0}
-      title="Eligibility"
-      submit={submitIncludesGrasslands}
-      goForward={next}
-      saveAndExit={saveAndExit}
-    >
+    <OnboardingFormTemplate activeStep={0} title="Eligibility" saveAndExit={saveAndExit}>
       <IncludesGrasslandsForm submit={submitIncludesGrasslands} />
     </OnboardingFormTemplate>
   );

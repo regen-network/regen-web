@@ -11,7 +11,7 @@ import { ScrollToTop, ProtectedRoute } from './components/atoms';
 import { /* RegistryNav, */ AppFooter, MarketingNav } from './components/organisms';
 
 import {
-  Additionality,
+  // Additionality,
   Admin,
   BasicInfo,
   BuyerCreate,
@@ -21,14 +21,14 @@ import {
   CreditsIssue,
   CreditsRetire,
   CreditsTransfer,
-  Eligibility,
-  GettingStarted,
+  // Eligibility,
+  // GettingStarted,
   // Home,
   NotFoundPage,
   OrganizationProfile,
   PostPurchase,
   Project,
-  ProjectPlans,
+  ProjectList,
   Projects,
   Seller,
   Signup,
@@ -124,10 +124,16 @@ const App: React.FC = (): JSX.Element => {
             path="/project-pages"
             render={({ match: { path } }) => (
               <>
-                <ProtectedRoute path={path} exact component={ProjectPlans} />
-                <ProtectedRoute path={`${path}/getting-started`} component={GettingStarted} />
-                <ProtectedRoute path={`${path}/choose-credit-class`} component={ChooseCreditClass} />
-                <ProtectedRoute path={`${path}/basic-info`} component={BasicInfo} />
+                <ProtectedRoute path={path} exact component={ProjectList} />
+                <ProtectedRoute
+                  path={`${path}/:projectId/choose-credit-class`}
+                  component={ChooseCreditClass}
+                />
+                <ProtectedRoute path={`${path}/:projectId/basic-info`} component={BasicInfo} />
+                <ProtectedRoute path={`${path}/:projectId/story`} component={Story} />
+
+                {/* Used for Project Plan flow
+                <ProtectedRoute path={`${path}/:projectId/getting-started`} component={GettingStarted} />
                 <Route
                   path={`${path}/eligibility`}
                   render={({ match: { path } }) => (
@@ -136,8 +142,7 @@ const App: React.FC = (): JSX.Element => {
                       <ProtectedRoute path={`${path}/additionality`} component={Additionality} />
                     </>
                   )}
-                />
-                <ProtectedRoute path={`${path}/story`} component={Story} />
+                /> */}
               </>
             )}
           />

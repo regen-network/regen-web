@@ -1,10 +1,8 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
 import { AdditionalityForm, AdditionalityValues } from '../components/organisms/AdditionalityForm';
 import { OnboardingFormTemplate } from '../components/templates';
 
 const Additionality: React.FC = () => {
-  const history = useHistory();
 
   async function saveAndExit(): Promise<void> {
     // TODO: functionality
@@ -16,14 +14,7 @@ const Additionality: React.FC = () => {
   }
 
   return (
-    <OnboardingFormTemplate
-      activeStep={0}
-      title="Eligibility"
-      submit={submitAdditionality}
-      goBack={() => history.push('/project-plans/eligibility')}
-      goForward={() => Promise.resolve()}
-      saveAndExit={saveAndExit}
-    >
+    <OnboardingFormTemplate activeStep={0} title="Eligibility" saveAndExit={saveAndExit}>
       <AdditionalityForm submit={submitAdditionality} />
     </OnboardingFormTemplate>
   );

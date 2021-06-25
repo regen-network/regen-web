@@ -38,8 +38,7 @@
     "slick-carousel": "^1.8.1",
     "stream": "^0.0.2",
     "url-search-params-polyfill": "^8.1.0",
-    "web-components": "0.0.0",
-    "yup": "^0.32.9"
+    "web-components": "0.0.0"
   },
   "scripts": {
     "lint": "tsc --noEmit && eslint -c .eslintrc.js --max-warnings 0 'src/**/*.ts{,x}'",
@@ -69,6 +68,7 @@
     "@graphql-codegen/typescript": "1.22.0",
     "@graphql-codegen/typescript-graphql-files-modules": "1.18.1",
     "@graphql-codegen/typescript-react-apollo": "2.2.4",
+    "@graphql-codegen/typescript-operations": "^1.18.0",
     "@storybook/addon-storyshots": "^5.2.8",
     "@types/enzyme": "^3.10.8",
     "@types/enzyme-adapter-react-16": "^1.0.6",

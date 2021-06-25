@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
-import { Formik, Form, Field } from 'formik';
+import { Formik, Form, Field, FormikErrors } from 'formik';
 import clsx from 'clsx';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
@@ -8,15 +8,28 @@ import InputLabel from 'web-components/lib/components/inputs/InputLabel';
 import TextField from 'web-components/lib/components/inputs/TextField';
 import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
 import SelectTextField from 'web-components/lib/components/inputs/SelectTextField';
+import { requiredMessage } from 'web-components/lib/components/inputs/validation';
+import OnboardingFooter from 'web-components/lib/components/fixed-footer/OnboardingFooter';
+import { useShaclGraphByUriQuery } from '../../generated/graphql';
+import { validate, getProjectPageBaseData } from '../../lib/rdf';
 
 interface BasicInfoFormProps {
   submit: (values: BasicInfoFormValues) => Promise<void>;
+  initialValues?: BasicInfoFormValues;
 }
 
 export interface BasicInfoFormValues {
-  projectName: string;
-  parcelSize: number | undefined;
-  parcelUnit: string;
+  'http://schema.org/name': string;
+  'http://regen.network/size': {
+    'http://qudt.org/1.1/schema/qudt#numericValue': {
+      '@type': 'http://www.w3.org/2001/XMLSchema#double';
+      '@value'?: number | string;
+    };
+    'http://qudt.org/1.1/schema/qudt#unit': {
+      '@type': string;
+      '@value': string;
+    };
+  };
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -57,23 +70,53 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const BasicInfoForm: React.FC<BasicInfoFormProps> = ({ submit }) => {
+const BasicInfoForm: React.FC<BasicInfoFormProps> = ({ submit, initialValues }) => {
   const classes = useStyles();
+  const { data: graphData } = useShaclGraphByUriQuery({
+    variables: {
+      uri: 'http://regen.network/ProjectPageShape',
+    },
+  });
+
   return (
     <Formik
+      enableReinitialize
+      validateOnMount
       initialValues={{
-        projectName: '',
-        parcelSize: undefined,
-        parcelUnit: 'hectares',
+        'http://schema.org/name': initialValues?.['http://schema.org/name'] || '',
+        'http://regen.network/size': initialValues?.['http://regen.network/size'] || {
+          'http://qudt.org/1.1/schema/qudt#numericValue': {
+            '@type': 'http://www.w3.org/2001/XMLSchema#double',
+            '@value': undefined,
+          },
+          'http://qudt.org/1.1/schema/qudt#unit': {
+            '@type': 'http://qudt.org/1.1/schema/qudt#unit',
+            '@value': 'http://qudt.org/1.1/vocab/unit#HA',
+          },
+        },
       }}
-      validate={(values: BasicInfoFormValues) => {
-        const errors: Partial<BasicInfoFormValues> = {};
-        const errorFields: Array<keyof BasicInfoFormValues> = ['projectName', 'parcelSize', 'parcelUnit'];
-        errorFields.forEach(value => {
-          if (!values[value]) {
-            // errors[value] = requiredMessage; TODO: validation
+      validate={async (values: BasicInfoFormValues) => {
+        const errors: FormikErrors<BasicInfoFormValues> = {};
+        if (graphData?.shaclGraphByUri?.graph) {
+          const projectPageData = { ...getProjectPageBaseData(), ...values };
+          const report = await validate(
+            graphData.shaclGraphByUri.graph,
+            projectPageData,
+            'http://regen.network/ProjectPageBasicInfoGroup',
+          );
+          for (const result of report.results) {
+            const path: keyof BasicInfoFormValues = result.path.value;
+            if (path === 'http://regen.network/size') {
+              errors[path] = {
+                'http://qudt.org/1.1/schema/qudt#numericValue': {
+                  '@value': requiredMessage,
+                },
+              };
+            } else {
+              errors[path] = requiredMessage;
+            }
           }
-        });
+        }
         return errors;
       }}
       onSubmit={async (values, { setSubmitting }) => {
@@ -86,7 +129,7 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({ submit }) => {
         }
       }}
     >
-      {({ submitForm, isSubmitting, isValid, submitCount }) => {
+      {({ submitForm, submitCount, isValid, isSubmitting }) => {
         return (
           <Form>
             <OnBoardingCard>
@@ -95,7 +138,7 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({ submit }) => {
                 label="Project name"
                 description="This is the name of the farm, ranch, property, or conservation project."
                 placeholder="i.e. Sunnybrook Farms"
-                name="projectName"
+                name="['http://schema.org/name']"
               />
               <div className={classes.parcelSizeContainer}>
                 <InputLabel>Size in hectares or acres</InputLabel>
@@ -103,20 +146,30 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({ submit }) => {
                   <Field
                     className={clsx(classes.parcelField, classes.parcelSize)}
                     component={TextField}
-                    name="parcelSize"
+                    type="number"
+                    name="['http://regen.network/size'].['http://qudt.org/1.1/schema/qudt#numericValue'].@value"
                   />
                   <Field
                     className={clsx(classes.parcelField, classes.parcelUnit)}
                     component={SelectTextField}
-                    name="parcelUnit"
+                    name="['http://regen.network/size'].['http://qudt.org/1.1/schema/qudt#unit'].@value"
                     options={[
-                      { value: 'hectares', label: 'Hectares' },
-                      { value: 'acres', label: 'Acres' },
+                      { value: 'http://qudt.org/1.1/vocab/unit#HA', label: 'Hectares' },
+                      { value: 'http://qudt.org/1.1/vocab/unit#AC', label: 'Acres' },
                     ]}
                   />
                 </div>
               </div>
             </OnBoardingCard>
+            <OnboardingFooter
+              saveText={'Save and Next'}
+              onSave={submitForm}
+              onPrev={() => null} // TODO https://github.com/regen-network/regen-web/issues/655
+              onNext={() => null} // TODO https://github.com/regen-network/regen-web/issues/655
+              hideProgress={false} // TODO
+              saveDisabled={!isValid || isSubmitting}
+              percentComplete={0} // TODO
+            />
           </Form>
         );
       }}

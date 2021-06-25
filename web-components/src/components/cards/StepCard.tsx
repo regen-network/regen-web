@@ -16,10 +16,10 @@ import { QuestionItem } from '../faq/Question';
 interface StepCardProps {
   className?: string;
   icon: JSX.Element;
-  step?: ProjectPlanStep;
+  step?: ProjectStep;
 }
 
-export interface ProjectPlanStep {
+export interface ProjectStep {
   tagName?: string;
   title: string;
   description?: string;
@@ -129,7 +129,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const fallbackStep: ProjectPlanStep = {
+const fallbackStep: ProjectStep = {
   stepNumber: 404,
   title: 'Not found',
   tagName: 'Not found',

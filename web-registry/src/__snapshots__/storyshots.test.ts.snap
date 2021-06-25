@@ -2300,7 +2300,7 @@ exports[`Storyshots Components|Buttons Prev Button 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Cards Create Project Plan Card 1`] = `
+exports[`Storyshots Components|Cards Create Project Card 1`] = `
 <ContextProvider
   value={
     Object {
@@ -2674,14 +2674,14 @@ exports[`Storyshots Components|Cards Create Project Plan Card 1`] = `
   }
 >
   <WithStyles(CssBaseline) />
-  <CreateProjectPlanCard
+  <CreateProjectCard
     isFirstProject={true}
     onClick={[Function]}
   />
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Cards Create Project Plan Card Add Another 1`] = `
+exports[`Storyshots Components|Cards Create Project Card Add Another 1`] = `
 <ContextProvider
   value={
     Object {
@@ -3055,7 +3055,7 @@ exports[`Storyshots Components|Cards Create Project Plan Card Add Another 1`] = 
   }
 >
   <WithStyles(CssBaseline) />
-  <CreateProjectPlanCard
+  <CreateProjectCard
     isFirstProject={false}
     onClick={[Function]}
   />

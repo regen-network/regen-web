@@ -1,11 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { makeStyles, Theme } from '@material-ui/core/styles';
+import { useParams } from 'react-router-dom';
 
-import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
 import Description from 'web-components/lib/components/description';
-import { PlanStepper } from '../components/molecules';
+import { OnboardingFormTemplate } from '../components/templates';
 import { StoryForm, StoryValues } from '../components/organisms';
+import { useProjectByIdQuery, useUpdateProjectByIdMutation } from '../generated/graphql';
 
 const exampleProjectUrl = '/projects/wilmot';
 
@@ -19,29 +20,61 @@ const useStyles = makeStyles((theme: Theme) => ({
 const Story: React.FC = () => {
   const styles = useStyles();
   const activeStep = 0;
+  const { projectId } = useParams();
 
-  const saveAndExit = (): void => {
+  const [updateProject] = useUpdateProjectByIdMutation();
+  const { data } = useProjectByIdQuery({
+    variables: { id: projectId },
+  });
+
+  let initialFieldValues: StoryValues | undefined;
+  if (data?.projectById?.metadata) {
+    const metadata = data.projectById.metadata;
+    initialFieldValues = {
+      'http://regen.network/landStory': metadata['http://regen.network/landStory'],
+      'http://regen.network/landStewardStory': metadata['http://regen.network/landStory'],
+      'http://regen.network/landStewardStoryTitle': metadata['http://regen.network/landStewardStoryTitle'],
+      'http://regen.network/projectQuote': metadata['http://regen.network/projectQuote'],
+    };
+  }
+
+  const saveAndExit = (): Promise<void> => {
     // TODO: functionality
-  };
-
-  const submit = (values: StoryValues): Promise<void> => {
-    // TODO: functionality:
     return Promise.resolve();
   };
 
+  async function submit(values: StoryValues): Promise<void> {
+    const metadata = { ...data?.projectById?.metadata, ...values };
+    try {
+      await updateProject({
+        variables: {
+          input: {
+            id: projectId,
+            projectPatch: {
+              metadata,
+            },
+          },
+        },
+      });
+      // TODO: Uncomment when media form implemented
+      // history.push(`/project-pages/${projectId}/media`);
+    } catch (e) {
+      // TODO: Should we display the error banner here?
+      // https://github.com/regen-network/regen-registry/issues/555
+      // console.log(e);
+    }
+  }
+
   return (
-    <>
-      <PlanStepper activeStep={activeStep} />
-      <OnBoardingSection title="Story" linkText="Save & Exit" onLinkClick={saveAndExit} formContainer>
-        <Description className={styles.description}>
-          See an example{' '}
-          <Link to={exampleProjectUrl} target="_blank">
-            project page»
-          </Link>
-        </Description>
-        <StoryForm submit={submit} exampleProjectUrl={exampleProjectUrl} />
-      </OnBoardingSection>
-    </>
+    <OnboardingFormTemplate activeStep={activeStep} title="Story" saveAndExit={saveAndExit}>
+      <Description className={styles.description}>
+        See an example{' '}
+        <Link to={exampleProjectUrl} target="_blank">
+          project page»
+        </Link>
+      </Description>
+      <StoryForm submit={submit} initialValues={initialFieldValues} exampleProjectUrl={exampleProjectUrl} />
+    </OnboardingFormTemplate>
   );
 };
 

@@ -1,3 +1,9 @@
+fragment project on ProjectsConnection {
+  nodes {
+    creditClassId
+    metadata
+  }
+}
 query GetUserProfileByEmail($email: String!) {
   userByEmail(email: $email) {
     email
@@ -6,11 +12,23 @@ query GetUserProfileByEmail($email: String!) {
     phoneNumber
     partyId
     roleTitle
+    projectsByCreatorId {
+      ...project
+    }
     partyByPartyId {
       name
       walletId
       description
       image
+      projectsByStewardId {
+        ...project
+      }
+      projectsByDeveloperId {
+        ...project
+      }
+      projectsByLandOwnerId {
+        ...project
+      }
     }
   }
 }

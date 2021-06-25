@@ -30,14 +30,26 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexDirection: 'column',
     alignItems: 'center',
     height: 197, //
-    width: 350.5, //
-    padding: theme.spacing(5, 8),
+    borderColor: theme.palette.grey[100],
     [theme.breakpoints.up('sm')]: {
+      width: 350.5, //
+      padding: theme.spacing(5, 8),
       marginRight: 21.5, //
       marginBottom: 20, //
     },
     [theme.breakpoints.down('xs')]: {
+      minWidth: 278, //
+      height: 183, //
+      padding: theme.spacing(4),
       marginRight: 13, //
+    },
+    '& a': {
+      color: theme.palette.secondary.main,
+      fontWeight: 'bold',
+      textDecoration: 'none',
+      '&:link, &:visited, &:hover, &:active': {
+        textDecoration: 'none',
+      },
     },
   },
   top: {
@@ -56,9 +68,15 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   info: {
     marginLeft: 'auto',
-    marginTop: -8,
-    marginRight: -20,
     cursor: 'pointer',
+    [theme.breakpoints.up('sm')]: {
+      marginTop: -8,
+      marginRight: -20,
+    },
+    [theme.breakpoints.down('xs')]: {
+      marginTop: -6,
+      marginRight: -8,
+    },
   },
   bottom: {
     display: 'flex',
@@ -80,7 +98,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     justifyContent: 'center',
     textAlign: 'center',
-
+    flexWrap: 'wrap',
     color: theme.palette.info.dark,
     fontSize: theme.typography.pxToRem(14),
     paddingTop: theme.spacing(3),

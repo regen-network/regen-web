@@ -231,6 +231,12 @@ export const stepCard: React.FC = () => {
 };
 
 const useStylesOverview = makeStyles((theme: Theme) => ({
+  root: {
+    display: 'flex',
+    [theme.breakpoints.up('sm')]: {
+      flexWrap: 'wrap',
+    },
+  },
   trustIcon: {
     width: 61.87,
     height: 70.68,
@@ -252,17 +258,23 @@ function OverviewCards(): JSX.Element {
     },
     { title: 'unique', tooltip: 'test 2', description: 'Avoiding double issuance' },
     {
-      title: 'independently verified',
+      title: 'no tooltip',
       description: 'All carbon reductions and removals are proven to have genuinely taken place',
+    },
+    {
+      title: 'with a link',
+      description: 'A new practice adopted from &nbsp;<a href="#">pre-approved list</a>',
+      tooltip: 'test',
     },
   ];
 
   return (
-    <>
+    <div className={styles.root}>
       <OverviewzCard icon={<TrustIcon className={styles.trustIcon} isActive />} item={items[0]} />
       <OverviewzCard icon={<CurrentCreditsIcon className={styles.creditsIcon} />} item={items[1]} />
+      <OverviewzCard icon={<CurrentCreditsIcon className={styles.creditsIcon} />} item={items[3]} />
       <OverviewzCard icon={<TrustIcon className={styles.trustIcon} isActive />} item={items[2]} />
-    </>
+    </div>
   );
 }
 
@@ -289,14 +301,26 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexDirection: 'column',
     alignItems: 'center',
     height: 197, //
-    width: 350.5, //
-    padding: theme.spacing(5, 8),
+    borderColor: theme.palette.grey[100],
     [theme.breakpoints.up('sm')]: {
+      width: 350.5, //
+      padding: theme.spacing(5, 8),
       marginRight: 21.5, //
       marginBottom: 20, //
     },
     [theme.breakpoints.down('xs')]: {
+      minWidth: 278, //
+      height: 183, //
+      padding: theme.spacing(4),
       marginRight: 13, //
+    },
+    '& a': {
+      color: theme.palette.secondary.main,
+      fontWeight: 'bold',
+      textDecoration: 'none',
+      '&:link, &:visited, &:hover, &:active': {
+        textDecoration: 'none',
+      },
     },
   },
   top: {
@@ -315,9 +339,15 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   info: {
     marginLeft: 'auto',
-    marginTop: -8,
-    marginRight: -20,
     cursor: 'pointer',
+    [theme.breakpoints.up('sm')]: {
+      marginTop: -8,
+      marginRight: -20,
+    },
+    [theme.breakpoints.down('xs')]: {
+      marginTop: -6,
+      marginRight: -8,
+    },
   },
   bottom: {
     display: 'flex',
@@ -339,7 +369,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     justifyContent: 'center',
     textAlign: 'center',
-
+    flexWrap: 'wrap',
     color: theme.palette.info.dark,
     fontSize: theme.typography.pxToRem(14),
     paddingTop: theme.spacing(3),

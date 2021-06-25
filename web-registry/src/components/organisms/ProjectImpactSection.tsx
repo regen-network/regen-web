@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import LazyLoad from 'react-lazyload';
 import Slider from 'react-slick';
+import cx from 'clsx';
 
 import ProjectImpactCard, {
   ProjectImpactCardProps as Impact,
@@ -14,10 +15,14 @@ import { getOptimizedImageSrc } from 'web-components/lib/utils/optimizedImageSrc
 
 interface ProjectImpactProps {
   impacts: Impact[];
+  title?: string;
+  classes?: {
+    root?: string;
+  };
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
-  section: {
+  root: {
     [theme.breakpoints.up('sm')]: {
       paddingTop: theme.spacing(21.5),
       paddingBottom: theme.spacing(27.5),
@@ -43,6 +48,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   item: {
+    minWidth: theme.spacing(73),
     [theme.breakpoints.up('sm')]: {
       margin: theme.spacing(0, 1.875),
     },
@@ -58,6 +64,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   buttons: {
     paddingTop: theme.spacing(0.25),
+    width: '50%',
     [theme.breakpoints.down('xs')]: {
       paddingTop: theme.spacing(3.75),
       paddingBottom: theme.spacing(10),
@@ -68,7 +75,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-function ProjectImpactSection({ impacts }: ProjectImpactProps): JSX.Element {
+function ProjectImpactSection({ impacts, title, classes }: ProjectImpactProps): JSX.Element {
   const styles = useStyles();
   const theme: Theme = useTheme();
   const imageStorageBaseUrl = process.env.REACT_APP_IMAGE_STORAGE_BASE_URL;
@@ -100,23 +107,23 @@ function ProjectImpactSection({ impacts }: ProjectImpactProps): JSX.Element {
   }, [slider]);
 
   return (
-    <LazyLoad offset={300}>
-      <Section
-        classes={{ root: styles.section, title: styles.title }}
-        title="Impact"
-        titleVariant="h2"
-        titleAlign="left"
-        topRight={
-          <>
-            {!isMobile && impacts.length > slidesCount && (
-              <Grid container justify="flex-end" className={styles.buttons}>
-                <PrevNextButton direction="prev" onClick={slickPrev} />
-                <PrevNextButton direction="next" onClick={slickNext} />
-              </Grid>
-            )}
-          </>
-        }
-      >
+    <Section
+      classes={{ root: cx(styles.root, classes?.root), title: styles.title }}
+      title={title || 'Impact'}
+      titleVariant="h2"
+      titleAlign="left"
+      topRight={
+        <>
+          {!isMobile && impacts.length > slidesCount && (
+            <Grid container justify="flex-end" className={styles.buttons}>
+              <PrevNextButton direction="prev" onClick={slickPrev} />
+              <PrevNextButton direction="next" onClick={slickNext} />
+            </Grid>
+          )}
+        </>
+      }
+    >
+      <LazyLoad offset={300}>
         {isMobile ? (
           <div className={styles.swipe}>
             {impacts.map(({ name, description, imgSrc, monitored }: Impact, index: number) => (
@@ -145,8 +152,8 @@ function ProjectImpactSection({ impacts }: ProjectImpactProps): JSX.Element {
             ))}
           </Slider>
         )}
-      </Section>
-    </LazyLoad>
+      </LazyLoad>
+    </Section>
   );
 }
 

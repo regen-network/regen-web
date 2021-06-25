@@ -5,7 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import Card from './Card';
 import Title from '../title';
 import StaticMap from '../map/StaticMap';
-import Image, { OptimizeImageProps } from '../image';
+import { Image, OptimizeImageProps } from '../image';
 
 interface GlanceCardProps extends OptimizeImageProps {
   title?: string;

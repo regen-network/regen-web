@@ -11,6 +11,7 @@ type Props = {
   /** sets larger larger `minHeight` on mobile to match gatsby `BackgroundSection` */
   isBanner?: boolean;
   classes?: {
+    section?: string;
     main?: string;
   };
 };
@@ -37,8 +38,8 @@ const BackgroundImgSection: React.FC<Props> = ({ classes, ...props }) => {
 
   return (
     <CardMedia image={props.img}>
-      <Section {...props.sectionProps}>
-        <div className={cx(styles.main, classes?.main)}>{props.children}</div>
+      <Section classes={{ root: cx(classes && classes.section) }}>
+        <div className={cx(styles.main, classes && classes.main)}>{props.children}</div>
       </Section>
     </CardMedia>
   );

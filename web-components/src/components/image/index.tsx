@@ -8,7 +8,7 @@ export interface OptimizeImageProps {
   imageStorageBaseUrl?: string;
   apiServerUrl?: string;
 }
-interface ImageProps extends OptimizeImageProps {
+export interface ImageProps extends OptimizeImageProps {
   src: string; // unoptimized source url
   alt?: string;
   options?: any;
@@ -132,4 +132,4 @@ const Image: React.FC<ImageProps> = ({
   );
 };
 
-export default Image;
+export { Image };

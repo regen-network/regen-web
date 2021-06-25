@@ -36,6 +36,7 @@ import {
   Story,
   UserProfile,
   VerifyEmail,
+  MethodologyDetails,
 } from './pages';
 
 import './App.css';
@@ -163,6 +164,15 @@ const App: React.FC = (): JSX.Element => {
                     <Route path={`${path}/buyer/create`} component={BuyerCreate} />
                   </>
                 )}
+              </>
+            )}
+          />
+          <Route
+            path="/methodologies"
+            render={({ match: { path } }) => (
+              <>
+                {/* <Route path={path} exact component={MethodologiesList} /> TODO */}
+                <Route path={`${path}/:methodologyId`} component={MethodologyDetails} />
               </>
             )}
           />

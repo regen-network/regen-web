@@ -4,7 +4,7 @@ import ReactHtmlParser from 'react-html-parser';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 
-import StepCard, { ProjectPlanStep } from 'web-components/lib/components/cards/StepCard';
+import { StepCard, Step } from 'web-components/lib/components/cards/StepCard';
 import Description from 'web-components/lib/components/description';
 import Title from 'web-components/lib/components/title';
 
@@ -52,7 +52,7 @@ const StepCardsWithDescription: React.FC<{
     title: string;
     body: string;
   };
-  stepCards: Array<{ icon: JSX.Element; step: ProjectPlanStep }>;
+  stepCards: Array<{ icon: JSX.Element; step: Step }>;
   className?: string;
 }> = ({ stepCards, className, description, bottomDescription }) => {
   const styles = useStyles();

@@ -5,11 +5,7 @@ import Typography from '@material-ui/core/Typography';
 
 import Title from '../title';
 import CreditsIcon from '../icons/CreditsIcon';
-
-export interface Methodology {
-  name: string;
-  pdfUrl?: string;
-}
+import { Methodology } from '../methodologies';
 
 export interface CreditClass {
   name: string;

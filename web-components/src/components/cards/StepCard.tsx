@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles, Theme, useTheme } from '@material-ui/core';
 import { CardMedia } from '@material-ui/core';
-import clsx from 'clsx';
+import cx from 'clsx';
 import ReactHtmlParser from 'react-html-parser';
 
 import Card from '../cards/Card';
@@ -11,21 +11,26 @@ import Title from '../title';
 import Description from '../description';
 import Tag from '../tag';
 import StepFAQs from '../faq/StepFAQs';
+import { Image } from '../image';
 import { QuestionItem } from '../faq/Question';
 import ContainedButton from '../buttons/ContainedButton';
 
-interface StepCardProps {
+export interface StepCardProps {
   className?: string;
   icon: JSX.Element;
-  step?: ProjectStep;
+  step?: Step;
+  apiServerUrl?: string;
+  imageStorageBaseUrl?: string;
 }
 
-export interface ProjectStep {
+export interface Step {
   tagName?: string;
   title: string;
   description?: string;
   faqs?: QuestionItem[];
   video?: string;
+  imageSrc?: string;
+  imageAlt?: string;
   isActive?: boolean;
   stepNumber: number | string;
   btnText?: string;
@@ -126,16 +131,28 @@ const useStyles = makeStyles((theme: Theme) => ({
       fontSize: theme.spacing(4),
     },
   },
-  video: {
-    height: theme.spacing(81),
+  media: {
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      height: theme.spacing(81),
+    },
     [theme.breakpoints.down('xs')]: {
       marginBottom: theme.spacing(2),
       height: theme.spacing(55),
     },
   },
+  imageWrap: {
+    [theme.breakpoints.up('sm')]: {
+      height: theme.spacing(105.25),
+    },
+  },
+  image: {
+    height: '100%',
+    width: '100%',
+  },
 }));
 
-const fallbackStep: ProjectStep = {
+const fallbackStep: Step = {
   stepNumber: 404,
   title: 'Not found',
   tagName: 'Not found',
@@ -144,16 +161,21 @@ const fallbackStep: ProjectStep = {
   faqs: [],
 };
 
-export default function StepCard({ className, icon, step = fallbackStep }: StepCardProps): JSX.Element {
-  const classes = useStyles();
+function StepCard({
+  className,
+  icon,
+  step = fallbackStep,
+  imageStorageBaseUrl,
+  apiServerUrl,
+}: StepCardProps): JSX.Element {
+  const styles = useStyles();
   const theme = useTheme();
-
   return (
-    <div className={classes.root}>
-      <Card className={clsx(className, classes.card, step.isActive && classes.activeCard)}>
+    <div className={styles.root}>
+      <Card className={cx(className, styles.card, step.isActive && styles.activeCard)}>
         {step.video && (
           <CardMedia
-            className={classes.video}
+            className={styles.media}
             component="iframe"
             src={step.video}
             frameBorder="0"
@@ -161,29 +183,41 @@ export default function StepCard({ className, icon, step = fallbackStep }: StepC
             allowFullScreen
           />
         )}
-        <div className={classes.cardTop}>
-          <div className={classes.cardTopThird}></div>
-          <div className={clsx(classes.cardTopThird, classes.cardTopCenter)}>
+        {step.imageSrc && (
+          <div className={cx(styles.media, styles.imageWrap)}>
+            <Image
+              backgroundImage
+              className={styles.image}
+              src={step.imageSrc}
+              alt={step?.imageAlt}
+              imageStorageBaseUrl={imageStorageBaseUrl}
+              apiServerUrl={apiServerUrl}
+            />
+          </div>
+        )}
+        <div className={styles.cardTop}>
+          <div className={styles.cardTopThird}></div>
+          <div className={cx(styles.cardTopThird, styles.cardTopCenter)}>
             <StepCircleBadge icon={icon} isActive={step.isActive} />
           </div>
-          <div className={clsx(classes.cardTopThird, classes.cardTopRight)}>
+          <div className={cx(styles.cardTopThird, styles.cardTopRight)}>
             {step.tagName && (
-              <Tag className={classes.tag} name={step.tagName} color={theme.palette.secondary.main} />
+              <Tag className={styles.tag} name={step.tagName} color={theme.palette.secondary.main} />
             )}
           </div>
         </div>
-        <div className={classes.cardBottom}>
-          <Title variant="h6" className={clsx(classes.step, step.isActive && classes.activeColor)}>
+        <div className={styles.cardBottom}>
+          <Title variant="h6" className={cx(styles.step, step.isActive && styles.activeColor)}>
             step {step.stepNumber}
           </Title>
-          <Title variant="h4" className={clsx(classes.stepTitle, step.isActive && classes.activeTitle)}>
+          <Title variant="h4" className={cx(styles.stepTitle, step.isActive && styles.activeTitle)}>
             {step.title}
           </Title>
-          <Description className={classes.stepDescription}>
+          <Description className={styles.stepDescription}>
             {ReactHtmlParser(step.description || '')}
           </Description>
           {!!step.btnText && !!step.onBtnClick && (
-            <ContainedButton onClick={step.onBtnClick} className={classes.btn}>
+            <ContainedButton onClick={step.onBtnClick} className={styles.btn}>
               {step.btnText}
             </ContainedButton>
           )}
@@ -194,3 +228,5 @@ export default function StepCard({ className, icon, step = fallbackStep }: StepC
     </div>
   );
 }
+
+export { StepCard };

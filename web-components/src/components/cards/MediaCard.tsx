@@ -6,7 +6,7 @@ import clsx from 'clsx';
 import ReactHtmlParser from 'react-html-parser';
 
 import Card from './Card';
-import Image, { OptimizeImageProps } from '../image';
+import { Image, OptimizeImageProps } from '../image';
 import Title from '../title';
 
 export interface MediaCardProps extends OptimizeImageProps {

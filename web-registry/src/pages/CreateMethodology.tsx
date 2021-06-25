@@ -4,7 +4,7 @@ import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import CardMedia from '@material-ui/core/CardMedia';
 
 import Section from 'web-components/lib/components/section';
-import StepCard, { ProjectPlanStep } from 'web-components/lib/components/cards/StepCard';
+import { StepCard, Step } from 'web-components/lib/components/cards/StepCard';
 import ImpactCard from 'web-components/lib/components/cards/ImpactCard';
 import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';
 import ResourcesCard from 'web-components/lib/components/cards/ResourcesCard';
@@ -94,7 +94,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 type StepCard = {
   icon: JSX.Element;
-  step: ProjectPlanStep;
+  step: Step;
 };
 
 const openLink = (url: string): void => void window.open(url, '_blank', 'noopener');

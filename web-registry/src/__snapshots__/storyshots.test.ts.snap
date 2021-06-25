@@ -33381,7 +33381,7 @@ exports[`Storyshots Components|Image Image Default Quality 100 1`] = `
       }
     }
   >
-    <Component
+    <Image
       alt="Wilmot"
       options={
         Object {

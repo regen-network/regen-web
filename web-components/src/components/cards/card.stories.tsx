@@ -16,7 +16,7 @@ import GreenCard from 'web-components/lib/components/cards/GreenCard';
 import GreenTopIconCard from 'web-components/lib/components/cards/GreenTopIconCard';
 import CreateProjectCard from 'web-components/lib/components/cards/CreateProjectCard';
 import ImageActionCard from 'web-components/lib/components/cards/ImageActionCard';
-import StepCard from 'web-components/lib/components/cards/StepCard';
+import { StepCard } from 'web-components/lib/components/cards/StepCard';
 import FarmerIcon from 'web-components/lib/components/icons/FarmerIcon';
 import { QuestionItem } from '../../../lib/components/faq/Question';
 
@@ -172,9 +172,7 @@ export const greenTopIconCard = (): JSX.Element => (
 
 export const onBoardingCard = (): JSX.Element => <OnBoardingCard>some content</OnBoardingCard>;
 
-export const createProjectCard = (): JSX.Element => (
-  <CreateProjectCard isFirstProject onClick={() => {}} />
-);
+export const createProjectCard = (): JSX.Element => <CreateProjectCard isFirstProject onClick={() => {}} />;
 
 export const createProjectCardAddAnother = (): JSX.Element => (
   <CreateProjectCard isFirstProject={false} onClick={() => {}} />

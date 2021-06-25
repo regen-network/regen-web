@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Image from 'web-components/lib/components/image';
+import { Image } from 'web-components/lib/components/image';
 import { withKnobs, number } from '@storybook/addon-knobs';
 
 export default {

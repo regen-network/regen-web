@@ -17,14 +17,14 @@ categories:
         url: https://medium.com/regen-network/regen-network-community-update-65fb4f445187
         date: March 31, 2021
         isMainnet: true
-        isTokenSale: true
+        isTokenSale: false
       - title: Can Cryptocurrencies Help The Planet?
         author: Landscape News
         url: https://news.globallandscapesforum.org/50857/can-cryptocurrencies-help-the-planet/
         date: " March 23, 2021"
         image: ../../static/media/sheep-scaled.jpeg
         isMainnet: true
-        isTokenSale: true
+        isTokenSale: false
       - title: Microsoft uses blockchain technology to purchase soil carbon credits in
           Australia
         author: Cointelegraph
@@ -133,6 +133,34 @@ categories:
         url: https://impactalpha.com/techstars-sustainability-startups-tackle-clean-water-regenerative-farming-and-supply-chains/
         isMainnet: false
         isTokenSale: false
+      - url: https://medium.com/regen-network/how-to-participate-in-governance-ae35200777a6
+        title: How to Participate in Governance
+        author: Regen Network Development Inc.
+        date: May 21, 2021
+        image: ../../static/media/0_go_cnas85vuodv_d.png
+      - url: https://medium.com/regen-network/regen-network-and-althea-token-swap-74a6a8be72c0
+        title: Regen Network and Althea Token Swap
+        author: Regen Network Development Inc.
+        date: June 16, 2021
+        image: ../../static/media/1_kqnfzwktf6iylxmze32dra.png
+      - url: https://medium.com/regen-network/regen-network-liquidity-bootstrapping-pool-on-osmosis-cafd93f5d7d6?source=collection_home---4------2-----------------------
+        title: Regen Network Liquidity Bootstrapping Pool on Osmosis
+        author: Regen Network Development Inc.
+        image: ../../static/media/1_vik5a7x0o2tgnxr4eicxvq-2-.png
+        date: June 18, 2021
+        isTokenSale: true
+      - image: ../../static/media/1_jjdxlgoaxztmipiqnvqifg-1-.jpeg
+        title: Regen Network LBP Participation
+        author: Regen Network Development Inc.
+        date: June 23, 2021
+        url: https://medium.com/regen-network/regen-network-lbp-participation-8788a94625b9
+        isTokenSale: true
+      - url: https://medium.com/regen-network/regen-network-ixo-token-swap-94138e5a21b0?source=collection_home---4------0-----------------------
+        title: Regen Network & ixo Token Swap
+        author: Regen Network Development Inc.
+        date: June 24, 2021
+        isTokenSale: false
+        image: ../../static/media/1_xffnhbjm3qf3m_3tchyayw.png
   - name: videos
     buttonText: watch video
     showPlay: true

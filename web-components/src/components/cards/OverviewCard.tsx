@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, Theme, SvgIcon } from '@material-ui/core';
+import { makeStyles, Theme } from '@material-ui/core';
 import clsx from 'clsx';
 import ReactHtmlParser from 'react-html-parser';
 
@@ -7,7 +7,6 @@ import Card from '../cards/Card';
 import CheckIcon from '../icons/CheckIcon';
 import InfoIconOutlined from '../icons/InfoIconOutlined';
 import InfoTooltip from '../tooltip/InfoTooltip';
-import Item from '../sliders/Item';
 
 interface OverviewCardProps {
   className?: string;
@@ -29,19 +28,21 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    height: 197, //
     borderColor: theme.palette.grey[100],
     [theme.breakpoints.up('sm')]: {
-      width: 350.5, //
+      width: theme.spacing(87.625),
+      minHeight: theme.spacing(45.75),
+      maxHeight: theme.spacing(49.25),
       padding: theme.spacing(5, 8),
-      marginRight: 21.5, //
-      marginBottom: 20, //
+      marginRight: theme.spacing(5.375),
+      marginBottom: theme.spacing(5),
     },
     [theme.breakpoints.down('xs')]: {
-      minWidth: 278, //
-      height: 183, //
+      minWidth: theme.spacing(69.5),
+      minHeight: theme.spacing(40.75),
+      maxHeight: theme.spacing(49.25),
       padding: theme.spacing(4),
-      marginRight: 13, //
+      marginRight: theme.spacing(3.25),
     },
     '& a': {
       color: theme.palette.secondary.main,
@@ -55,6 +56,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   top: {
     display: 'flex',
     width: '100%',
+    height: theme.spacing(18),
   },
   cardTopThird: {
     display: 'flex',
@@ -70,12 +72,12 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginLeft: 'auto',
     cursor: 'pointer',
     [theme.breakpoints.up('sm')]: {
-      marginTop: -8,
-      marginRight: -20,
+      marginTop: theme.spacing(-2),
+      marginRight: theme.spacing(-5),
     },
     [theme.breakpoints.down('xs')]: {
-      marginTop: -6,
-      marginRight: -8,
+      marginTop: theme.spacing(-1.5),
+      marginRight: theme.spacing(-2),
     },
   },
   bottom: {
@@ -104,8 +106,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     paddingTop: theme.spacing(3),
   },
   check: {
-    height: 17,
-    width: 17,
+    height: theme.spacing(4.25),
+    width: theme.spacing(4.25),
     marginRight: theme.spacing(1.715),
   },
 }));

@@ -55,6 +55,13 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
+  switch: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+  label: {
+    marginRight: 8,
+  },
   toggleContainer: {
     display: 'flex',
     width: 329,
@@ -72,28 +79,28 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    height: 44,
+
     minWidth: '35%',
     padding: '0 36px',
     borderRadius: 50,
     margin: '0 3px',
+    cursor: 'pointer',
   },
   active: {
-    display: 'flex',
-    alignItems: 'center',
-
-    // position: 'relative',
-    height: 44,
-
-    // left: 3,
-    // top: 3,
     background: theme.palette.secondary.dark,
   },
-  activeLeft: {
-    justifyContent: 'flex-start',
+  inactive: {
+    '&:hover': {
+      background: theme.palette.grey[100],
+    },
   },
-  activeRight: {
-    justifyContent: 'flex-end',
-  },
+  // activeLeft: {
+  //   justifyContent: 'flex-start',
+  // },
+  // activeRight: {
+  //   justifyContent: 'flex-end',
+  // },
   btn: {
     padding: theme.spacing(2, 4),
     height: 60,
@@ -114,9 +121,12 @@ const SwitchFooter: React.FC<Props> = ({ buttonText, activeText, inactiveText, o
   return (
     <FixedFooter>
       <div className={styles.root}>
-        <div className={styles.toggleContainer}>
-          <div className={styles.option}>{inactiveText}</div>
-          <div className={clsx(styles.option, styles.active)}>{activeText}</div>
+        <div className={styles.switch}>
+          <span className={styles.label}>I am a:</span>
+          <div className={styles.toggleContainer}>
+            <div className={clsx(styles.option, styles.inactive)}>{inactiveText}</div>
+            <div className={clsx(styles.option, styles.active)}>{activeText}</div>
+          </div>
         </div>
         <ContainedButton className={styles.btn} onClick={onCtaClick}>
           {buttonText}

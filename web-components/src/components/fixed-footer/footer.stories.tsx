@@ -46,6 +46,7 @@ interface Props {
   activeOption: string;
   leftOption: string;
   rightOption: string;
+  label?: string;
   onCtaClick: () => void;
   onToggleClick: () => void;
 }
@@ -91,11 +92,14 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
   },
   active: {
     background: theme.palette.secondary.dark,
+
+    animation: `$activate 0.3s`,
   },
   inactive: {
     '&:hover': {
       background: theme.palette.grey[100],
     },
+    animation: `$deactivate 0.3s`,
   },
   btn: {
     padding: theme.spacing(2, 4),
@@ -109,6 +113,23 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
       fontSize: theme.typography.pxToRem(12),
     },
   },
+
+  '@keyframes activate': {
+    '0%': {
+      background: theme.palette.grey[100],
+    },
+    '100%': {
+      background: theme.palette.secondary.dark,
+    },
+  },
+  '@keyframes deactivate': {
+    '0%': {
+      background: theme.palette.secondary.dark,
+    },
+    '100%': {
+      background: theme.palette.grey[100],
+    },
+  },
 }));
 
 const SwitchFooter: React.FC<Props> = ({
@@ -116,6 +137,7 @@ const SwitchFooter: React.FC<Props> = ({
   activeOption,
   leftOption,
   rightOption,
+  label,
   onCtaClick,
   onToggleClick,
 }) => {
@@ -125,7 +147,7 @@ const SwitchFooter: React.FC<Props> = ({
     <FixedFooter>
       <div className={styles.root}>
         <div className={styles.switch}>
-          <span className={styles.label}>I am a:</span>
+          {label && <span className={styles.label}>{label}</span>}
           <div className={styles.toggleContainer}>
             <div
               className={clsx(styles.option, activeOption === leftOption ? styles.active : styles.inactive)}
@@ -150,7 +172,7 @@ const SwitchFooter: React.FC<Props> = ({
 };
 
 const SwitchFooterDemo = (): JSX.Element => {
-  const [activeOption, setActiveOption] = React.useState<string>('Buyer');
+  const [activeOption, setActiveOption] = React.useState<'Buyer' | 'Land Steward'>('Buyer');
 
   const toggle = (): void => {
     if (activeOption === 'Buyer') {
@@ -160,13 +182,22 @@ const SwitchFooterDemo = (): JSX.Element => {
     }
   };
 
+  const onClick = (): void => {
+    if (activeOption === 'Buyer') {
+      alert('go to purchase page');
+    } else {
+      alert('go to intake form');
+    }
+  };
+
   return (
     <SwitchFooter
       buttonText={activeOption === 'Buyer' ? 'buy credits' : 'fill in intake form'}
       activeOption={activeOption}
+      label="I am a:"
       leftOption="Land Steward"
       rightOption="Buyer"
-      onCtaClick={() => {}}
+      onCtaClick={onClick}
       onToggleClick={toggle}
     />
   );

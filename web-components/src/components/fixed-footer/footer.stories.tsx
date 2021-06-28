@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { withKnobs, number, boolean, text } from '@storybook/addon-knobs';
+import clsx from 'clsx';
 
 import FixedFooter from 'web-components/lib/components/fixed-footer';
 import OnboardingFooter from 'web-components/lib/components/fixed-footer/OnboardingFooter';
@@ -42,6 +43,7 @@ export const onboardingFooter = (): JSX.Element => (
 interface Props {
   buttonText: string;
   activeText: string;
+  inactiveText: string;
   onCtaClick: () => void;
   onToggleClick: () => void;
 }
@@ -51,50 +53,70 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
     display: 'flex',
     flex: 1,
     justifyContent: 'space-between',
+    alignItems: 'center',
   },
-  toggle: {
+  toggleContainer: {
+    display: 'flex',
     width: 329,
     height: 50,
     borderRadius: 50,
     background: theme.palette.info.light,
-  },
-  active: {
-    display: 'flex',
-    justifyContent: 'center',
     alignItems: 'center',
+    justifyContent: 'space-between',
+
     textTransform: 'uppercase',
     fontSize: theme.typography.pxToRem(14),
     fontFamily: theme.typography.h1.fontFamily,
-
-    position: 'relative',
-    height: 44,
-    width: 161,
-    left: 164,
-    top: 3,
+  },
+  option: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    minWidth: '35%',
+    padding: '0 36px',
     borderRadius: 50,
+    margin: '0 3px',
+  },
+  active: {
+    display: 'flex',
+    alignItems: 'center',
+
+    // position: 'relative',
+    height: 44,
+
+    // left: 3,
+    // top: 3,
     background: theme.palette.secondary.dark,
+  },
+  activeLeft: {
+    justifyContent: 'flex-start',
+  },
+  activeRight: {
+    justifyContent: 'flex-end',
   },
   btn: {
     padding: theme.spacing(2, 4),
-    minWidth: 0,
-    height: '100%',
+    height: 60,
     [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(4),
+      minWidth: 299,
+      fontSize: theme.typography.pxToRem(21),
     },
     [theme.breakpoints.down('xs')]: {
-      fontSize: theme.spacing(3),
+      minWidth: 159,
+      fontSize: theme.typography.pxToRem(12),
     },
   },
 }));
 
-const SwitchFooter: React.FC<Props> = ({ buttonText, activeText, onCtaClick }) => {
+const SwitchFooter: React.FC<Props> = ({ buttonText, activeText, inactiveText, onCtaClick }) => {
   const styles = useStyles();
 
   return (
     <FixedFooter>
       <div className={styles.root}>
-        <div className={styles.toggle}>
-          <div className={styles.active}>{activeText}</div>
+        <div className={styles.toggleContainer}>
+          <div className={styles.option}>{inactiveText}</div>
+          <div className={clsx(styles.option, styles.active)}>{activeText}</div>
         </div>
         <ContainedButton className={styles.btn} onClick={onCtaClick}>
           {buttonText}
@@ -108,6 +130,7 @@ export const switchFooter = (): JSX.Element => (
   <SwitchFooter
     buttonText="Buy Credits"
     activeText={'Buyer'}
+    inactiveText={'Land Steward'}
     onCtaClick={() => {}}
     onToggleClick={() => {}}
   />

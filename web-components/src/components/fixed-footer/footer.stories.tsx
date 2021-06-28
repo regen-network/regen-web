@@ -93,13 +93,13 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
   active: {
     background: theme.palette.secondary.dark,
 
-    animation: `$activate 0.3s`,
+    animation: `$activate 0.2s`,
   },
   inactive: {
     '&:hover': {
       background: theme.palette.grey[100],
     },
-    animation: `$deactivate 0.3s`,
+    animation: `$deactivate 0.2s`,
   },
   btn: {
     padding: theme.spacing(2, 4),
@@ -127,7 +127,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
       background: theme.palette.secondary.dark,
     },
     '100%': {
-      background: theme.palette.grey[100],
+      background: theme.palette.info.light,
     },
   },
 }));

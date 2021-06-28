@@ -126,7 +126,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
     animation: `$activate 0.2s`,
   },
   inactive: {
-    color: '#3D7ACF',
+    color: '#3D7ACF', //TODO
     animation: `$deactivate 0.2s`,
     '&:hover': {
       background: theme.palette.grey[100],
@@ -141,8 +141,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
     },
     [theme.breakpoints.down('xs')]: {
       padding: theme.spacing(2),
-
-      // minWidth: theme.spacing(39.75),
+      minWidth: theme.spacing(35),
       fontSize: theme.typography.pxToRem(12),
     },
   },

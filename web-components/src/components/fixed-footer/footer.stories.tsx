@@ -9,6 +9,7 @@ import ContainedButton from '../buttons/ContainedButton';
 
 import { Theme } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
+import { set } from 'js-cookie';
 
 export default {
   title: 'Components|Footers',
@@ -42,8 +43,9 @@ export const onboardingFooter = (): JSX.Element => (
 
 interface Props {
   buttonText: string;
-  activeText: string;
-  inactiveText: string;
+  activeOption: string;
+  leftOption: string;
+  rightOption: string;
   onCtaClick: () => void;
   onToggleClick: () => void;
 }
@@ -95,12 +97,6 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
       background: theme.palette.grey[100],
     },
   },
-  // activeLeft: {
-  //   justifyContent: 'flex-start',
-  // },
-  // activeRight: {
-  //   justifyContent: 'flex-end',
-  // },
   btn: {
     padding: theme.spacing(2, 4),
     height: 60,
@@ -115,7 +111,14 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
   },
 }));
 
-const SwitchFooter: React.FC<Props> = ({ buttonText, activeText, inactiveText, onCtaClick }) => {
+const SwitchFooter: React.FC<Props> = ({
+  buttonText,
+  activeOption,
+  leftOption,
+  rightOption,
+  onCtaClick,
+  onToggleClick,
+}) => {
   const styles = useStyles();
 
   return (
@@ -124,8 +127,18 @@ const SwitchFooter: React.FC<Props> = ({ buttonText, activeText, inactiveText, o
         <div className={styles.switch}>
           <span className={styles.label}>I am a:</span>
           <div className={styles.toggleContainer}>
-            <div className={clsx(styles.option, styles.inactive)}>{inactiveText}</div>
-            <div className={clsx(styles.option, styles.active)}>{activeText}</div>
+            <div
+              className={clsx(styles.option, activeOption === leftOption ? styles.active : styles.inactive)}
+              onClick={onToggleClick}
+            >
+              {leftOption}
+            </div>
+            <div
+              className={clsx(styles.option, activeOption === rightOption ? styles.active : styles.inactive)}
+              onClick={onToggleClick}
+            >
+              {rightOption}
+            </div>
           </div>
         </div>
         <ContainedButton className={styles.btn} onClick={onCtaClick}>
@@ -136,12 +149,27 @@ const SwitchFooter: React.FC<Props> = ({ buttonText, activeText, inactiveText, o
   );
 };
 
-export const switchFooter = (): JSX.Element => (
-  <SwitchFooter
-    buttonText="Buy Credits"
-    activeText={'Buyer'}
-    inactiveText={'Land Steward'}
-    onCtaClick={() => {}}
-    onToggleClick={() => {}}
-  />
-);
+const SwitchFooterDemo = (): JSX.Element => {
+  const [activeOption, setActiveOption] = React.useState<string>('Buyer');
+
+  const toggle = (): void => {
+    if (activeOption === 'Buyer') {
+      setActiveOption('Land Steward');
+    } else {
+      setActiveOption('Buyer');
+    }
+  };
+
+  return (
+    <SwitchFooter
+      buttonText={activeOption === 'Buyer' ? 'buy credits' : 'fill in intake form'}
+      activeOption={activeOption}
+      leftOption="Land Steward"
+      rightOption="Buyer"
+      onCtaClick={() => {}}
+      onToggleClick={toggle}
+    />
+  );
+};
+
+export const switchFooter = (): JSX.Element => <SwitchFooterDemo />;

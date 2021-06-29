@@ -284,6 +284,20 @@ coreSection:
       title: Blockchain Engineer
       linkedUrl: https://www.linkedin.com/in/rupert-horlick/
       githubUrl: https://github.com/ruhatch
+    - image: ../../static/media/john-kemp.png
+      name: John Kemp
+      title: Lead Software Engineer
+      description: John has a twenty-year history of developing security software
+        products, most recently as the lead architect for a set of web
+        applications and specialized hardware for providing cryptographic
+        signing, encryption, and public-key infrastructure for automobile
+        mapping and location services. He lives with his family in rural western
+        Massachusetts and is excited to bring his experience of security
+        software engineering together to support regenerative agriculture
+        practices.
+      linkedUrl: https://www.linkedin.com/in/john-kemp-0xdeadbabe/
+      twitterUrl: https://twitter.com/frumioj
+      githubUrl: https://github.com/frumioj
 contributorSection:
   title: Contributors
   contributors:

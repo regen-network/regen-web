@@ -25,54 +25,89 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
   },
   switch: {
     display: 'flex',
-    alignItems: 'center',
+    [theme.breakpoints.up('sm')]: {
+      alignItems: 'center',
+    },
+    [theme.breakpoints.down('xs')]: {
+      alignItems: 'flex-start',
+      flexDirection: 'column',
+    },
   },
   label: {
-    marginRight: theme.spacing(2),
+    [theme.breakpoints.up('sm')]: {
+      fontSize: theme.typography.pxToRem(16),
+      marginRight: theme.spacing(2),
+    },
+    [theme.breakpoints.down('xs')]: {
+      fontSize: theme.typography.pxToRem(12),
+      marginBottom: 3,
+    },
   },
   toggleContainer: {
     display: 'flex',
-    width: theme.spacing(82.25),
-    height: theme.spacing(12.5),
+
     borderRadius: theme.spacing(12.5),
     background: theme.palette.info.light,
     alignItems: 'center',
     justifyContent: 'space-between',
     textTransform: 'uppercase',
-    fontSize: theme.typography.pxToRem(14),
     fontFamily: theme.typography.h1.fontFamily,
+    boxShadow: 'inset 0px 1px 2px rgba(0, 0, 0, 0.25)', //TODO
+    [theme.breakpoints.up('sm')]: {
+      width: theme.spacing(82.25),
+      height: theme.spacing(12.5),
+      fontSize: theme.typography.pxToRem(14),
+    },
+    [theme.breakpoints.down('xs')]: {
+      width: 160,
+      height: 32,
+      fontSize: theme.typography.pxToRem(9),
+    },
   },
   option: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    height: theme.spacing(11),
     minWidth: '35%',
-    padding: theme.spacing(0, 9),
     borderRadius: theme.spacing(12.5),
     margin: theme.spacing(0, 0.75),
     cursor: 'pointer',
+
+    [theme.breakpoints.up('sm')]: {
+      height: theme.spacing(11),
+      padding: theme.spacing(0, 9),
+      borderRadius: theme.spacing(12.5),
+      margin: theme.spacing(0, 0.75),
+    },
+    [theme.breakpoints.down('xs')]: {
+      height: 28,
+      padding: theme.spacing(0, 2),
+      borderRadius: theme.spacing(12.5),
+      margin: theme.spacing(0, 0.75),
+    },
   },
   active: {
     background: theme.palette.secondary.dark,
+    boxShadow: '0px 1px 1px 1px rgba(0, 0, 0, 0.1)', //TODO
     animation: `$activate 0.2s`,
   },
   inactive: {
-    color: '#3D7ACF',
+    color: '#3D7ACF', //TODO
     animation: `$deactivate 0.2s`,
     '&:hover': {
       background: theme.palette.grey[100],
     },
   },
   btn: {
-    padding: theme.spacing(2, 4),
     height: theme.spacing(15),
     [theme.breakpoints.up('sm')]: {
+      padding: theme.spacing(2, 4),
       minWidth: theme.spacing(74.75),
       fontSize: theme.typography.pxToRem(21),
     },
     [theme.breakpoints.down('xs')]: {
-      minWidth: theme.spacing(39.75),
+      padding: theme.spacing(2),
+      minWidth: theme.spacing(35),
       fontSize: theme.typography.pxToRem(12),
     },
   },

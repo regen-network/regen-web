@@ -40,7 +40,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
     },
     [theme.breakpoints.down('xs')]: {
       fontSize: theme.typography.pxToRem(12),
-      marginBottom: 3,
+      marginBottom: theme.spacing(0.75),
     },
   },
   toggleContainer: {
@@ -52,15 +52,15 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
     justifyContent: 'space-between',
     textTransform: 'uppercase',
     fontFamily: theme.typography.h1.fontFamily,
-    boxShadow: 'inset 0px 1px 2px rgba(0, 0, 0, 0.25)', //TODO
+    boxShadow: 'inset 0px 1px 2px rgba(0, 0, 0, 0.25)',
     [theme.breakpoints.up('sm')]: {
       width: theme.spacing(82.25),
       height: theme.spacing(12.5),
       fontSize: theme.typography.pxToRem(14),
     },
     [theme.breakpoints.down('xs')]: {
-      width: 160,
-      height: 32,
+      width: theme.spacing(40),
+      height: theme.spacing(8),
       fontSize: theme.typography.pxToRem(9),
     },
   },
@@ -80,7 +80,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
       margin: theme.spacing(0, 0.75),
     },
     [theme.breakpoints.down('xs')]: {
-      height: 28,
+      height: theme.spacing(7),
       padding: theme.spacing(0, 2),
       borderRadius: theme.spacing(12.5),
       margin: theme.spacing(0, 0.75),
@@ -88,11 +88,11 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
   },
   active: {
     background: theme.palette.secondary.dark,
-    boxShadow: '0px 1px 1px 1px rgba(0, 0, 0, 0.1)', //TODO
+    boxShadow: '0px 1px 1px 1px rgba(0, 0, 0, 0.1)',
     animation: `$activate 0.2s`,
   },
   inactive: {
-    color: '#3D7ACF', //TODO
+    color: '#3D7ACF', // TODO: new blue; add to palette?
     animation: `$deactivate 0.2s`,
     '&:hover': {
       background: theme.palette.grey[100],

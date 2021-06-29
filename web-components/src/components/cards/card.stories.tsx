@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { makeStyles, Theme } from '@material-ui/core';
 
 import Card from 'web-components/lib/components/cards/Card';
 import ProjectTopCard from 'web-components/lib/components/cards/ProjectTopCard';
@@ -22,15 +23,6 @@ import { StepCard } from 'web-components/lib/components/cards/StepCard';
 import FarmerIcon from 'web-components/lib/components/icons/FarmerIcon';
 import { QuestionItem } from '../../../lib/components/faq/Question';
 import { OverviewCard } from 'web-components/lib/components/cards/OverviewCard';
-
-import { makeStyles, Theme, SvgIcon } from '@material-ui/core';
-import clsx from 'clsx';
-import ReactHtmlParser from 'react-html-parser';
-
-import CheckIcon from '../icons/CheckIcon';
-import InfoIconOutlined from '../icons/InfoIconOutlined';
-import InfoTooltip from '../tooltip/InfoTooltip';
-import Item from '../sliders/Item';
 
 export default {
   title: 'Components|Cards',

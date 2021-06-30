@@ -119,6 +119,163 @@
         "btnText": "Create a Credit Class",
         "href": "/create-credit-class"
       }
+    },
+    "CreateCreditClass": {
+      "footerLink": "https://airtable.com/embed/shrnnbymyofPB75WQ",
+      "heroSection": {
+        "title": "Create a credit class on Regen Registry.",
+        "description": "Instead of a one-size-fits-all solution, design the ecosystem service credit that works for your constituents, ecological context and use case."
+      },
+      "stepCardSection": {
+        "title": "General process for creating a new credit class",
+        "mainDescription": "A lot can go into writing a new methodology and it might seem like an overwhelming process, but we’re here to help! Check out our <a href=\"https://regen-registry.s3.amazonaws.com/Methodology+for+GHG+and+Co-Benefits+in+Grazing+Systems.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Carbon<i>Plus</i> Grasslands Methodology</a> to get a feel for what a methodology might entail and the various components included, and feel free to email <a href=\"mailto:science@regen.network\">science@regen.network</a> for any additional questions.",
+        "stepCards": [
+          {
+            "stepNumber": 1,
+            "isActive": true,
+            "icon": "svgs/green-yellow-checklist.svg",
+            "btnText": "submit a concept note",
+            "tagName": "2-3 weeks",
+            "href": "MODAL",
+            "title": "Generate an idea for a credit class and submit a concept note for internal review",
+            "description": "Outline your idea for a new credit class in a short one-page concept note and submit for internal review. We will review and provide you with feedback and guide you to the next step. \n\n<i>How much time will it take to write a concept note? A few hours or a couple of days at most. Expected response time: one week.</i>"
+          },
+          {
+            "stepNumber": 2,
+            "isActive": true,
+            "icon": "svgs/green-charts.svg",
+            "title": "Generate an idea for a methodology and submit a concept note for internal review",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
+            "btnText": "submit a credit class",
+            "href": "MODAL",
+            "tagName": "2-3 weeks",
+            "faqs": [
+              {
+                "question": "What to include in your concept note?",
+                "answer": "We invite you to share your idea for a nature based solution and we can work together to refine it. Your concept note can include the management activities your concept applies to (cover cropping, rotational grazing, etc.), a high level summary of the indicators being measured, and the monitoring approach."
+              },
+              {
+                "question": "Where to start:",
+                "answer": "<a href=\"https://docs.google.com/document/d/130AafzVweNC6Qg7Y3q7ds-6MoDFCz_A_-Pz3qCWt4-Y/edit?usp=sharing\" target=\"_blank\" rel=\"noopener noreferrer\">Methodology Concept Note Template</a>"
+              }
+            ]
+          },
+          {
+            "stepNumber": 3,
+            "isActive": true,
+            "icon": "svgs/green-magnifying-glass-leaf.svg",
+            "title": "Credit class shared with methodology reviewers",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
+            "faqs": [
+              {
+                "question": "What is the internal review process? ",
+                "answer": "Upon submission, the Regen Network Science Team will conduct an initial review to ensure all the proper information for monitoring, reporting, and verification (MRV) is included in your methodology. Feedback with suggested upgrades to your methodology will be provided after which the method will be accepted in beta form."
+              },
+              {
+                "question": "How complete does my draft need to be?",
+                "answer": "The draft should include all the information needed for the MRV, however this process can also be used as an opportunity to work with the science community to refine your ideas and develop tools."
+              }
+            ]
+          },
+          {
+            "stepNumber": 4,
+            "isActive": true,
+            "icon": "svgs/green-cow-celebrating.svg",
+            "title": "Credit class accepted",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+          }
+        ]
+      },
+      "creditTypeSection": {
+        "title": "Institutional vs. Flex Credits",
+        "subtitleTop": "Institutional Credits",
+        "descriptionTop": "These credits fit the requirements that institutional buyers are looking for as it relates to GHG accounting and internationally accepted standards including:",
+        "institutionalCreditCards": [
+          {
+            "title": "Independently Verified",
+            "description": "All emission reductions and removals shall be verified by an independent 3rd party verifier.",
+            "icon": "/svgs/green-trust-yellow-check.svg"
+          },
+          {
+            "title": "Independently Verified",
+            "description": "All emission reductions and removals shall be verified by an independent 3rd party verifier.",
+            "icon": "/svgs/green-trust-yellow-check.svg"
+          }
+        ],
+        "subtitleBottom": "Flex Credits",
+        "descriptionBottom": "While Institutional  Credits meet the needs institutions look for best-in-class offsets, there are situations that merit more flexibility on the GHG accounting requirements, such as corporate insetting, long standing nature based projects, and local / community engagements. For these and other situations, Credit Designers default to using Flex Credits. That is, when a credit does not meet all of the Institutional  Credit criteria then it is labeled as a Flex Credit.",
+        "institutionalCards": [
+          {
+            "title": "Independently Verified",
+            "description": "All emission reductions and removals shall be verified by an independent 3rd party verifier.",
+            "icon": "/svgs/green-trust-yellow-check.svg",
+            "tooltop": "TODO:"
+          },
+          {
+            "title": "Unique",
+            "description": "No more than one carbon credit can be associated with a single emission reduction or removal as 1ton of CO2e.",
+            "icon": "/svgs/green-unique-thumbprint.svg",
+            "tooltop": "TODO:"
+          },
+          {
+            "title": "Additionality",
+            "description": "Ensures that GHG emission reductions or removal enhancements generated by the project go beyond what would have happened in the absence of the project.",
+            "icon": "/svgs/green-additionality-plus.svg",
+            "tooltop": "TODO:"
+          },
+          {
+            "title": "Real",
+            "description": "All carbon reductions and removals and project activities that generate them shall be proven to have genuinely taken place.",
+            "icon": "/svgs/green-document-yellow-check.svg",
+            "tooltop": "TODO:"
+          },
+          {
+            "title": "Measurable",
+            "description": "All emission reductions and removals shall be quantifiable, using recognized measurement tools, including adjustments for uncertainty and leakage, against a credible emissions baseline.",
+            "icon": "/svgs/green-measurable-yellow-beads.svg",
+            "tooltop": "TODO:"
+          },
+          {
+            "title": "Permanence",
+            "description": "Carbon credits shall represent permanent emission reductions and removals. ",
+            "icon": "/svgs/green-permanence.svg",
+            "tooltop": "TODO:"
+          },
+          {
+            "title": "Reversal",
+            "description": "Safeguards shall be in place to ensure that reversal risk is minimized. ",
+            "icon": "/svgs/green-reversal.svg",
+            "tooltop": "TODO:"
+          }
+        ],
+        "flexCreditCards": [
+          {
+            "title": "Flexibility",
+            "description": "Provide more flexibility to credit designers in tailoring credits to their needs with fewer limitations on land stewards and project developers.",
+            "icon": "/svgs/green-flexibility-person-yellow-arrows.svg"
+          },
+          {
+            "title": "Evaluate New Approaches",
+            "description": "Serve to evaluate new nature based approaches, which if proven successful can be later upgraded to Institutional Credits.",
+            "icon": "/svgs/green-idea-plant-lightbulb.svg"
+          },
+          {
+            "title": "Full Gamut",
+            "description": "Run the full gamut from semi Institutional  Credit to a more bespoke design.",
+            "icon": "/svgs/green-data-graph.svg"
+          }
+        ]
+      },
+      "outcomeSection": {
+        "title": "Help develop a range of credit classes for the diversity of nature based solutions",
+        "description": "In addition to developing credit classes focused on carbon reduction and removal, we must also work to incorporate protocols to track water cycles, nutrient cycles, biodiversity, pollution management, changing weather patterns, and more."
+      },
+      "bottomBanner": {
+        "title": "Create a Methodology",
+        "description": "If you haven’t yet created a methodology for this credit class, learn more below.",
+        "btnText": "Create a Methodology",
+        "href": "/create-methodology"
+      }
     }
   },
   "outcomes": [

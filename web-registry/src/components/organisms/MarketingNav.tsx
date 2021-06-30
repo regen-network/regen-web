@@ -34,10 +34,11 @@ const MarketingNav: React.FC = () => {
 
   const headerColors: HeaderColors = {
     '/certificate': theme.palette.primary.main,
-    '/create-a-methodology': theme.palette.primary.main,
+    '/create-methodology': theme.palette.primary.main,
+    '/create-credit-class': theme.palette.primary.main,
   };
 
-  const transparentHeaders: RegExp = new RegExp('/create-a-methodology|/certificate');
+  const transparentHeaders: RegExp = new RegExp('/create-methodology|/create-credit-class|/certificate');
 
   return (
     <Header

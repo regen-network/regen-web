@@ -92,7 +92,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
     animation: `$activate 0.2s`,
   },
   inactive: {
-    color: '#3D7ACF', // TODO: new blue; add to palette?
+    color: theme.palette.secondary.main,
     animation: `$deactivate 0.2s`,
     '&:hover': {
       background: theme.palette.grey[100],
@@ -114,7 +114,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
   '@keyframes activate': {
     '0%': {
       background: theme.palette.grey[100],
-      color: '#3D7ACF',
+      color: theme.palette.secondary.main,
     },
     '100%': {
       background: theme.palette.secondary.dark,
@@ -128,7 +128,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
     },
     '100%': {
       background: theme.palette.info.light,
-      color: '#3D7ACF',
+      color: theme.palette.secondary.main,
     },
   },
 }));

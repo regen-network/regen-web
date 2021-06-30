@@ -57,7 +57,7 @@ const SwitchFooterDemo = (): JSX.Element => {
   return (
     <SwitchFooter
       activeOption={activeOption}
-      buttonText={activeOption === 'Buyer' ? 'buy credits' : 'fill in intake form'}
+      buttonText={activeOption === 'Buyer' ? 'buy credits' : 'get started'}
       label="I am a:"
       leftOption="Land Steward"
       rightOption="Buyer"

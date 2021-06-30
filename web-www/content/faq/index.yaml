@@ -373,7 +373,7 @@ categories:
           * Monitoring Services - Regen Registry provides automated monitoring services that require only a minimal set of soil samples.
       - question: Do you accept methodologies from third-party programs?
         answer: >-
-          Yes, we accept methodologies from the following programs:
+          md//Yes, we accept methodologies from the following programs:
 
 
           * Verra: VCS Program, CCB Program, Jurisdictional & Nested REDD+, SD Vista

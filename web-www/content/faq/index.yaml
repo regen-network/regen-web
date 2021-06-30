@@ -371,6 +371,22 @@ categories:
           * Simple Project Registration - Regen Registry's simple registration involves a short intake form and project plan that can be completed in one sitting.
 
           * Monitoring Services - Regen Registry provides automated monitoring services that require only a minimal set of soil samples.
+      - question: Which programs to you accept methodologies from?
+        answer: >-
+          We accept methodologies from the following programs:
+
+
+          1. Verra: VCS Program, CCB Program, Jurisdictional & Nested REDD+, SD Vista
+
+          2. Gold Standard
+
+          3. American Carbon Registry
+
+          4. Climate Action Reserve
+
+          5. CDM
+
+          6. Australian Emission Reduction Fund - Carbon Farming Initiative
   - header: carbonplus credits
     questions:
       - question: What is a CarbonPlus credit?

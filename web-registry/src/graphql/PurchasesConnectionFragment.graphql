@@ -18,7 +18,9 @@ fragment purchasesFields on PurchasesConnection {
       id
       startDate
       endDate
-      walletByIssuerId {
+      initialDistribution
+      metadata
+      walletByTokenizerId {
         partiesByWalletId(first: 1) {
           nodes {
             name
@@ -26,6 +28,7 @@ fragment purchasesFields on PurchasesConnection {
               id
               organizationMembersByOrganizationId(condition: { isOwner: true }) {
                 nodes {
+                  roles
                   userByMemberId {
                     partyByPartyId {
                       name
@@ -38,6 +41,26 @@ fragment purchasesFields on PurchasesConnection {
           }
         }
       }
+      partyByIssuerId {
+        name
+        image
+      }
+      creditClassVersionByCreditClassVersionIdAndCreditClassVersionCreatedAt {
+        name
+        version
+        metadata
+        creditClassById {
+          handle
+          standard
+        }
+      }
+      methodologyVersionByMethodologyVersionIdAndMethodologyVersionCreatedAt {
+        name
+        version
+        methodologyById {
+          handle
+        }
+      }
       projectByProjectId {
         name
         area
@@ -45,39 +68,35 @@ fragment purchasesFields on PurchasesConnection {
         image
         type
         handle
-        creditClassVersionByCreditClassVersionIdAndCreditClassVersionCreatedAt {
-          name
-          version
-          metadata
-          creditClassById {
-            handle
-          }
-        }
-        methodologyVersionByMethodologyVersionIdAndMethodologyVersionCreatedAt {
-          name
-          version
-          methodologyById {
-            handle
-          }
-        }
         addressByAddressId {
           feature
         }
         partyByLandOwnerId {
-          id
-          name
-          organizationByPartyId {
-            id
-            organizationMembersByOrganizationId(condition: { isOwner: true }) {
-              nodes {
-                userByMemberId {
-                  partyByPartyId {
-                    name
-                    roles
-                  }
-                }
-              }
-            }
+          ...projectParty
+        }
+        partyByStewardId {
+          ...projectParty
+        }
+        partyByDeveloperId {
+          ...projectParty
+        }
+      }
+    }
+  }
+}
+
+fragment projectParty on Party {
+  id
+  name
+  organizationByPartyId {
+    id
+    organizationMembersByOrganizationId(condition: { isOwner: true }) {
+      nodes {
+        roles
+        userByMemberId {
+          partyByPartyId {
+            name
+            roles
           }
         }
       }

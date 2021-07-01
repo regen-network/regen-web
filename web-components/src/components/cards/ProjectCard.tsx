@@ -23,11 +23,16 @@ interface Info {
   version: string;
 }
 
+interface CreditClassInfo extends Info {
+  standard: boolean;
+}
+
 interface PurchaseInfo {
   units: number;
   vintageId: string;
+  vintageMetadata: any;
   vintagePeriod: string;
-  creditClass: Info;
+  creditClass: CreditClassInfo;
   methodology: Info;
   programGuide: Info;
   projectType: string;
@@ -189,6 +194,10 @@ function formatInfo(info: Info): string {
   return `${info.name ? `${info.name}, ` : ''}${info.id}, ${info.version}`;
 }
 
+function formatStandard(info: CreditClassInfo): string {
+  return `${info.id} Standard ${info.version}`;
+}
+
 export default function ProjectCard({
   name,
   imgSrc,
@@ -212,6 +221,11 @@ export default function ProjectCard({
   const classes = useStyles();
 
   const [open, setOpen] = useState<boolean>(true);
+
+  const serialNumber: string | undefined =
+    purchaseInfo?.vintageMetadata?.['http://regen.network/serialNumber'];
+  const additionalCertifications: string[] | undefined =
+    purchaseInfo?.vintageMetadata?.['http://regen.network/additionalCertifications'];
 
   return (
     <MediaCard
@@ -261,12 +275,36 @@ export default function ProjectCard({
           </span>
           {open && (
             <div className={classes.purchaseDetails}>
-              <PurchaseDetails title="vintage id" info={purchaseInfo.vintageId.substring(0, 8)} />
+              {purchaseInfo.creditClass.standard && (
+                <PurchaseDetails
+                  title={`vintage id${serialNumber ? ' (serial number)' : ''}`}
+                  info={serialNumber || purchaseInfo.vintageId.substring(0, 8)}
+                />
+              )}
               <PurchaseDetails title="vintage period" info={purchaseInfo.vintagePeriod} />
-              <PurchaseDetails title="credit class" info={formatInfo(purchaseInfo.creditClass)} />
+              <PurchaseDetails
+                title={`credit class${purchaseInfo.creditClass.standard ? ' (type)' : ''}`}
+                info={
+                  purchaseInfo.creditClass.standard && purchaseInfo.creditClass.name
+                    ? purchaseInfo.creditClass.name
+                    : formatInfo(purchaseInfo.creditClass)
+                }
+              />
               <PurchaseDetails title="methodology" info={formatInfo(purchaseInfo.methodology)} />
-              <PurchaseDetails title="program guide" info={formatInfo(purchaseInfo.programGuide)} />
-              <PurchaseDetails title="project type" info={purchaseInfo.projectType} />
+              {purchaseInfo.creditClass.standard ? (
+                <PurchaseDetails title="standard" info={formatStandard(purchaseInfo.creditClass)} />
+              ) : (
+                <>
+                  <PurchaseDetails title="program guide" info={formatInfo(purchaseInfo.programGuide)} />
+                  <PurchaseDetails title="project type" info={purchaseInfo.projectType} />
+                </>
+              )}
+              {additionalCertifications && (
+                <PurchaseDetails
+                  title="additional certifications"
+                  info={additionalCertifications.join(', ')}
+                />
+              )}
             </div>
           )}
         </div>

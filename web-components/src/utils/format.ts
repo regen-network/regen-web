@@ -10,5 +10,10 @@ export function getFormattedNumber(number: number, options?: Intl.NumberFormatOp
 }
 
 export function getFormattedPeriod(start: string, end: string | Date): string {
-  return `${new Date(start).getUTCFullYear()}-${new Date(end).getUTCFullYear()}`;
+  const startYear = new Date(start).getUTCFullYear();
+  const endYear = new Date(end).getUTCFullYear();
+  if (startYear === endYear) {
+    return `${startYear}`;
+  }
+  return `${startYear}-${new Date(end).getUTCFullYear()}`;
 }

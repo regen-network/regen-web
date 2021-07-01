@@ -1,11 +1,9 @@
 import React, { useRef, useState } from 'react';
 import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import { loader } from 'graphql.macro';
-import { useQuery } from '@apollo/client';
 import ReactToPrint from 'react-to-print';
 
-import Certificate from 'web-components/lib/components/certificate';
+import Certificate, { StakeholderInfo } from 'web-components/lib/components/certificate';
 import Title from 'web-components/lib/components/title';
 import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';
 import ShareIcons from 'web-components/lib/components/icons/ShareIcons';
@@ -14,6 +12,12 @@ import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton
 import Section from 'web-components/lib/components/section';
 import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
 import { getFormattedPeriod } from 'web-components/lib/utils/format';
+import {
+  useAllPurchasesByStripeIdQuery,
+  useAllPurchasesByWalletIdQuery,
+  Maybe,
+  ProjectPartyFragment,
+} from '../generated/graphql';
 
 import background from '../assets/certificate-bg.png';
 import pageBackground from '../assets/certificate-page-bg.jpg';
@@ -129,17 +133,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const PURCHASES_BY_STRIPE_ID = loader('../graphql/PurchasesByStripeId.graphql');
-const PURCHASES_BY_BUYER_WALLET_ID = loader('../graphql/PurchasesByBuyerWalletId.graphql');
-
-function getName(obj?: { name: string }): string {
-  return obj ? obj.name : '';
-}
-
-function getRole(obj?: { roles?: string[] }): string {
-  return obj && obj.roles && obj.roles.length ? obj.roles[0] : '';
-}
-
 function CertificatePage(): JSX.Element {
   const classes = useStyles();
   const theme = useTheme();
@@ -151,13 +144,13 @@ function CertificatePage(): JSX.Element {
 
   const ref = useRef<Array<HTMLDivElement | null>>([]);
 
-  const { data: dataByStripeId } = useQuery(PURCHASES_BY_STRIPE_ID, {
+  const { data: dataByStripeId } = useAllPurchasesByStripeIdQuery({
     skip: !stripeId,
     errorPolicy: 'ignore',
     variables: { stripeId },
   });
 
-  const { data: dataByBuyerWalletId } = useQuery(PURCHASES_BY_BUYER_WALLET_ID, {
+  const { data: dataByBuyerWalletId } = useAllPurchasesByWalletIdQuery({
     skip: !buyerWalletId,
     errorPolicy: 'ignore',
     variables: { buyerWalletId },
@@ -176,103 +169,116 @@ function CertificatePage(): JSX.Element {
     const nodes = data.allPurchases.nodes;
     for (let i = 0; i < nodes.length; i++) {
       const node = data.allPurchases.nodes[i];
+      if (node) {
+        const units: number = Math.round(
+          node.transactionsByPurchaseId?.nodes
+            .map(n => (n ? parseFloat(n.units) : 0))
+            .reduce((accumulator: number, currentValue: number) => accumulator + currentValue),
+        );
 
-      const units: number = Math.round(
-        node.transactionsByPurchaseId.nodes
-          .map((n: { units: string }) => parseFloat(n.units))
-          .reduce((accumulator: number, currentValue: number) => accumulator + currentValue),
-      );
+        const vintage = node.creditVintageByCreditVintageId;
+        const project = vintage?.projectByProjectId;
 
-      const vintage = node.creditVintageByCreditVintageId;
-      const project = vintage.projectByProjectId;
-      const landOwner = project.partyByLandOwnerId;
-      const landOwnerPerson =
-        landOwner &&
-        landOwner.organizationByPartyId &&
-        landOwner.organizationByPartyId.organizationMembersByOrganizationId.nodes.length &&
-        landOwner.organizationByPartyId.organizationMembersByOrganizationId.nodes[0].userByMemberId
-          .partyByPartyId;
+        if (project && vintage) {
+          const projectStakeholders: StakeholderInfo[] = [];
+          const landOwnerInfo = getStakeholderInfo(
+            'Land Owner',
+            project.partyByLandOwnerId,
+            vintage.initialDistribution?.['http://regen.network/landOwner'],
+          );
+          if (landOwnerInfo) {
+            projectStakeholders.push(landOwnerInfo);
+          }
+          const landStewardInfo = getStakeholderInfo(
+            'Land Steward',
+            project.partyByStewardId,
+            vintage.initialDistribution?.['http://regen.network/landSteward'],
+          );
+          if (landStewardInfo) {
+            projectStakeholders.push(landStewardInfo);
+          }
+          const projectDeveloperInfo = getStakeholderInfo(
+            'Project Developer',
+            project.partyByDeveloperId,
+            vintage.initialDistribution?.['http://regen.network/projectDeveloper'],
+          );
+          if (projectDeveloperInfo) {
+            projectStakeholders.push(projectDeveloperInfo);
+          }
 
-      const issuer =
-        vintage.walletByIssuerId.partiesByWalletId.nodes.length &&
-        vintage.walletByIssuerId.partiesByWalletId.nodes[0];
+          const tokenizer = vintage.walletByTokenizerId?.partiesByWalletId.nodes[0];
 
-      const creditClassVersion =
-        project.creditClassVersionByCreditClassVersionIdAndCreditClassVersionCreatedAt;
-      const methodologyVersion =
-        project.methodologyVersionByMethodologyVersionIdAndMethodologyVersionCreatedAt;
+          const creditClassVersion =
+            vintage.creditClassVersionByCreditClassVersionIdAndCreditClassVersionCreatedAt;
+          const methodologyVersion =
+            vintage.methodologyVersionByMethodologyVersionIdAndMethodologyVersionCreatedAt;
 
-      items.push(
-        <div
-          ref={element => {
-            if (element && ref && ref.current && ref.current.length < nodes.length) {
-              ref.current.push(element);
-            }
-          }}
-        >
-          <Certificate
-            background={background}
-            creditName={getName(creditClassVersion)}
-            creditsUnits={units}
-            equivalentTonsCO2={units} // TODO replace with db data (1 credit <=> 1 ton CO2e for now)
-            buyerName={
-              node.walletByBuyerWalletId.partiesByWalletId.nodes.length
-                ? node.walletByBuyerWalletId.partiesByWalletId.nodes[0].name
-                : ''
-            }
-            date={node.createdAt}
-            issuer={{
-              companyName: getName(issuer),
-              personName: 'Christian Shearer',
-              personRole: 'CEO',
-            }}
-            issuee={{
-              companyName: landOwner?.name,
-              personName: getName(landOwnerPerson),
-              personRole: getRole(landOwnerPerson),
-            }}
-            // TODO add retirement info
-            // retired={}
-            // TODO replace with db data once we have verifier data
-            // verifier={{
-            //   companyName: 'RSM Australia Pty Ltd',
-            //   personName: 'Tim Pittaway',
-            //   personRole: 'Partner',
-            // }}
-          />
-        </div>,
-      );
+          items.push(
+            <div
+              ref={element => {
+                if (element && ref && ref.current && ref.current.length < nodes.length) {
+                  ref.current.push(element);
+                }
+              }}
+            >
+              <Certificate
+                background={background}
+                creditName={creditClassVersion?.name || ''}
+                creditUnitName={creditClassVersion?.metadata?.['http://regen.network/creditClassUnit']}
+                projectName={project?.name || ''}
+                creditsUnits={units}
+                equivalentTonsCO2={units} // 1 credit <=> 1 ton CO2e
+                buyerName={node?.walletByBuyerWalletId?.partiesByWalletId.nodes[0]?.name || ''}
+                date={node.createdAt}
+                stakeholders={[
+                  {
+                    companyName: tokenizer?.name || '',
+                    personName: 'Gregory Landua',
+                    personRole: 'CEO',
+                    label: 'Tokenizer',
+                  },
+                  ...projectStakeholders,
+                ]}
+                // TODO add retirement info
+                // retired={}
+              />
+            </div>,
+          );
 
-      projects.push(
-        <ProjectCard
-          href={`/projects/${project.handle}`}
-          name={project.name}
-          imgSrc={project.image}
-          place={project.addressByAddressId.feature ? project.addressByAddressId.feature.place_name : ''}
-          area={project.area}
-          areaUnit={project.areaUnit}
-          purchaseInfo={{
-            units,
-            vintageId: vintage.id,
-            vintagePeriod: getFormattedPeriod(vintage.startDate, vintage.endDate),
-            creditClass: {
-              id: creditClassVersion?.creditClassById.handle,
-              name: creditClassVersion?.name,
-              version: creditClassVersion?.version,
-            },
-            methodology: {
-              id: methodologyVersion?.methodologyById.handle,
-              name: methodologyVersion?.name,
-              version: methodologyVersion?.version,
-            },
-            programGuide: {
-              id: creditClassVersion?.metadata?.programGuide?.handle,
-              version: creditClassVersion?.metadata?.programGuide?.version,
-            },
-            projectType: project.type,
-          }}
-        />,
-      );
+          projects.push(
+            <ProjectCard
+              href={`/projects/${project.handle}`}
+              name={project.name || ''}
+              imgSrc={project.image || ''}
+              place={project.addressByAddressId?.feature?.place_name || ''}
+              area={project.area || 0}
+              areaUnit={project.areaUnit || ''}
+              purchaseInfo={{
+                units,
+                vintageId: vintage.id,
+                vintageMetadata: vintage.metadata,
+                vintagePeriod: getFormattedPeriod(vintage.startDate, vintage.endDate),
+                creditClass: {
+                  standard: creditClassVersion?.creditClassById?.standard || false,
+                  id: creditClassVersion?.creditClassById?.handle || '',
+                  name: creditClassVersion?.name,
+                  version: creditClassVersion?.version || '',
+                },
+                methodology: {
+                  id: methodologyVersion?.methodologyById?.handle || '',
+                  name: methodologyVersion?.name,
+                  version: methodologyVersion?.version || '',
+                },
+                programGuide: {
+                  id: creditClassVersion?.metadata?.programGuide?.handle,
+                  version: creditClassVersion?.metadata?.programGuide?.version,
+                },
+                projectType: project.type || '',
+              }}
+            />,
+          );
+        }
+      }
     }
   }
 
@@ -295,6 +301,9 @@ function CertificatePage(): JSX.Element {
           </>
         )}
       </div>
+      {<Grid alignItems="center">
+        <Title variant="h4">View on</Title>
+      </Grid>}
       <Grid container className={classes.share} alignItems="flex-end">
         <Grid item xs={12} sm={6}>
           <Title className={classes.shareTitle} variant="h4">
@@ -330,6 +339,24 @@ function CertificatePage(): JSX.Element {
       )}
     </div>
   );
+}
+
+function getStakeholderInfo(
+  label: string,
+  stakeholder?: Maybe<{ __typename?: 'Party' | undefined } & ProjectPartyFragment>,
+  distribution: number | undefined = 0,
+): StakeholderInfo | null {
+  const orgMember = stakeholder?.organizationByPartyId?.organizationMembersByOrganizationId?.nodes[0];
+  const person = orgMember?.userByMemberId?.partyByPartyId;
+  if (distribution > 0) {
+    return {
+      companyName: stakeholder?.name || '',
+      personName: person?.name || '',
+      personRole: orgMember?.roles?.join(', ') || '',
+      label,
+    };
+  }
+  return null;
 }
 
 export { CertificatePage };

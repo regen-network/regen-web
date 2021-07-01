@@ -13,7 +13,7 @@ export function buildIssuanceModalData(
   creditVintage?: any,
 ): IssuanceModalData | null {
   if (creditVintage) {
-    const issuerWallet = creditVintage.walletByIssuerId;
+    const issuerWallet = creditVintage.walletByTokenizerId;
     const issuerParty = issuerWallet.partiesByWalletId.nodes[0]; // have party-wallet 1-1 relation?
 
     const issuees: Party[] = [];
@@ -33,8 +33,10 @@ export function buildIssuanceModalData(
       }
     }
 
-    const creditClassVersion = project.creditClassVersionByCreditClassVersionIdAndCreditClassVersionCreatedAt;
-    const methodologyVersion = project.methodologyVersionByMethodologyVersionIdAndMethodologyVersionCreatedAt;
+    const creditClassVersion =
+      creditVintage.creditClassVersionByCreditClassVersionIdAndCreditClassVersionCreatedAt;
+    const methodologyVersion =
+      creditVintage.methodologyVersionByMethodologyVersionIdAndMethodologyVersionCreatedAt;
 
     const bufferPoolDist = creditClassVersion?.metadata?.distribution?.bufferPool;
     const permanenceReversalBufferDist = creditClassVersion?.metadata?.distribution?.permanenceReversalBuffer;

@@ -6,11 +6,13 @@ import ReactHtmlParser from 'react-html-parser';
 
 import Title from '../title';
 import RegenIcon from '../icons/RegenIcon';
+import { pluralize } from '../../utils/pluralize';
 
-interface StakeholderInfo {
+export interface StakeholderInfo {
   companyName: string;
   personName: string;
   personRole: string;
+  label: string;
 }
 
 interface StyleProps {
@@ -20,15 +22,14 @@ interface StyleProps {
 interface CertificateProps {
   background: string;
   creditName: string;
+  creditUnitName?: string;
+  projectName: string;
   creditsUnits: number;
   equivalentTonsCO2: number;
   buyerName: string;
   date: string | Date;
+  stakeholders: StakeholderInfo[];
   retired?: boolean;
-  issuer: StakeholderInfo;
-  verifier?: StakeholderInfo;
-  issuee: StakeholderInfo;
-  issueeLabel?: string;
 }
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
@@ -212,23 +213,15 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
 const formater = new Intl.NumberFormat('en-US');
 const options = { year: 'numeric', month: 'long', day: 'numeric' };
 
-function Stakeholder({
-  info,
-  label,
-  withVerifier,
-}: {
-  info: StakeholderInfo;
-  label: string;
-  withVerifier: boolean;
-}): JSX.Element {
+function Stakeholder({ info, total }: { info: StakeholderInfo; total: number }): JSX.Element {
   const classes = useStyles({});
 
   return (
-    <Grid item xs={withVerifier ? 4 : 6}>
+    <Grid item xs={6}>
       <div className={classes.personName}>{info.personName}</div>
       <hr className={classes.hr} />
       <div className={classes.companyInfo}>
-        {label}: {info.companyName}
+        {info.label}: {info.companyName}
       </div>
       <div className={classes.personInfo}>
         {info.personName}, {info.personRole}
@@ -240,18 +233,17 @@ function Stakeholder({
 export default function Certificate({
   background,
   creditName,
+  creditUnitName,
+  projectName,
   creditsUnits,
   equivalentTonsCO2,
   buyerName,
   date,
+  stakeholders,
   retired = true,
-  issuer,
-  verifier,
-  issuee,
-  issueeLabel = 'Land Owner',
 }: CertificateProps): JSX.Element {
   const classes = useStyles({ background });
-  const withVerifier: boolean = verifier ? true : false;
+
   return (
     <div className={classes.root}>
       <div className={classes.content}>
@@ -272,10 +264,13 @@ export default function Certificate({
         <div className={classes.text}>
           Credits:{' '}
           <b>
-            {formater.format(creditsUnits)} {ReactHtmlParser(creditName)}
+            {formater.format(creditsUnits)}{' '}
+            {ReactHtmlParser(creditUnitName ? pluralize(creditsUnits, creditUnitName) : creditName)}
           </b>
           <br />
           Equivalent to: <b>{formater.format(equivalentTonsCO2)} tons of CO2e</b>
+          <br />
+          Project: <b>{projectName}</b>
           <br />
           Beneficiary: <b>{buyerName}</b>
           <br />
@@ -288,9 +283,9 @@ export default function Certificate({
           Date: <b>{new Date(date).toLocaleDateString('en-US', options)}</b>
         </div>
         <Grid container>
-          <Stakeholder label="Issuer" info={issuer} withVerifier={withVerifier} />
-          {verifier && <Stakeholder label="Verifier" info={verifier} withVerifier={withVerifier} />}
-          <Stakeholder label={issueeLabel} info={issuee} withVerifier={withVerifier} />
+          {stakeholders.map((s, i) => (
+            <Stakeholder key={i} info={s} total={stakeholders.length} />
+          ))}
         </Grid>
       </div>
     </div>

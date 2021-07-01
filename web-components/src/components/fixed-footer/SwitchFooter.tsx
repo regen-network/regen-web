@@ -45,7 +45,6 @@ const useStyles = makeStyles<Theme>(theme => ({
   },
   toggleContainer: {
     display: 'flex',
-
     borderRadius: theme.spacing(12.5),
     background: theme.palette.info.light,
     alignItems: 'center',
@@ -59,7 +58,7 @@ const useStyles = makeStyles<Theme>(theme => ({
       fontSize: theme.typography.pxToRem(14),
     },
     [theme.breakpoints.down('xs')]: {
-      width: theme.spacing(40),
+      width: theme.spacing(38),
       height: theme.spacing(8),
       fontSize: theme.typography.pxToRem(9),
     },
@@ -72,7 +71,6 @@ const useStyles = makeStyles<Theme>(theme => ({
     borderRadius: theme.spacing(12.5),
     margin: theme.spacing(0, 0.75),
     cursor: 'pointer',
-
     [theme.breakpoints.up('sm')]: {
       height: theme.spacing(11),
       padding: theme.spacing(0, 9),
@@ -81,7 +79,7 @@ const useStyles = makeStyles<Theme>(theme => ({
     },
     [theme.breakpoints.down('xs')]: {
       height: theme.spacing(7),
-      padding: theme.spacing(0, 2),
+      padding: theme.spacing(0, 1.4),
       borderRadius: theme.spacing(12.5),
       margin: theme.spacing(0, 0.75),
     },
@@ -106,8 +104,8 @@ const useStyles = makeStyles<Theme>(theme => ({
       fontSize: theme.typography.pxToRem(21),
     },
     [theme.breakpoints.down('xs')]: {
-      padding: theme.spacing(2),
-      minWidth: theme.spacing(35),
+      padding: theme.spacing(2, 1),
+      minWidth: theme.spacing(31),
       fontSize: theme.typography.pxToRem(12),
     },
   },

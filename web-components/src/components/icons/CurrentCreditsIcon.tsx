@@ -1,8 +1,10 @@
 import React from 'react';
 import SvgIcon from '@material-ui/core/SvgIcon';
 import { makeStyles, useTheme, Theme } from '@material-ui/core';
+import cx from 'clsx';
 
 interface CurrentCreditsIconProps {
+  className?: string;
   color?: string;
   height?: string;
   width?: string;
@@ -20,12 +22,17 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   }),
 }));
 
-export default function CurrentCreditsIcon({ color, height, width }: CurrentCreditsIconProps): JSX.Element {
+export default function CurrentCreditsIcon({
+  className,
+  color,
+  height,
+  width,
+}: CurrentCreditsIconProps): JSX.Element {
   const classes = useStyles({ height, width });
   const theme = useTheme();
 
   return (
-    <SvgIcon viewBox="0 0 59 54" className={classes.root}>
+    <SvgIcon viewBox="0 0 59 54" className={cx(className, classes.root)}>
       <path
         d="M38.14 19.1522L38.0889 19.1523C37.5366 19.1542 37.0905 19.6036 37.0925 20.1558C37.0945 20.7081 37.5438 21.1542 38.0961 21.1523L38.14 21.1522L38.184 21.1523C38.7362 21.1542 39.1856 20.7081 39.1875 20.1558C39.1895 19.6036 38.7434 19.1542 38.1911 19.1523L38.14 19.1522Z"
         fill={color || theme.palette.secondary.main}

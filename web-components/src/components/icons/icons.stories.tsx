@@ -17,6 +17,7 @@ import EyeIcon from 'web-components/lib/components/icons/EyeIcon';
 import EmailIcon from 'web-components/lib/components/icons/EmailIcon';
 import PhoneIcon from 'web-components/lib/components/icons/PhoneIcon';
 import DropdownIcon from 'web-components/lib/components/icons/DropdownIcon';
+import CheckIcon from 'web-components/lib/components/icons/CheckIcon';
 import CheckedIcon from 'web-components/lib/components/icons/CheckedIcon';
 import BreadcrumbIcon from 'web-components/lib/components/icons/BreadcrumbIcon';
 import FacebookIcon from 'web-components/lib/components/icons/social/FacebookIcon';
@@ -97,6 +98,8 @@ export const totalCreditsIcon = (): JSX.Element => <TotalCreditsIcon />;
 export const verifiedIcon = (): JSX.Element => <VerifiedIcon color={text('color', '#000')} />;
 
 export const dropdownIcon = (): JSX.Element => <DropdownIcon />;
+
+export const checkIcon = (): JSX.Element => <CheckIcon />;
 
 export const checkedIcon = (): JSX.Element => <CheckedIcon />;
 

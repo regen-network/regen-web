@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { makeStyles, Theme } from '@material-ui/core';
+
 import Card from 'web-components/lib/components/cards/Card';
 import ProjectTopCard from 'web-components/lib/components/cards/ProjectTopCard';
 import ImpactCard from 'web-components/lib/components/cards/ImpactCard';
@@ -11,6 +13,7 @@ import { withKnobs, boolean, text, object, number, array } from '@storybook/addo
 // import CreditCard, { CreditInfo } from 'web-components/lib/components/cards/CreditCard';
 import PurchasedCreditsCard from 'web-components/lib/components/cards/PurchasedCreditsCard';
 import CurrentCreditsIcon from 'web-components/lib/components/icons/CurrentCreditsIcon';
+import TrustIcon from 'web-components/lib/components/icons/TrustIcon';
 import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
 import GreenCard from 'web-components/lib/components/cards/GreenCard';
 import GreenTopIconCard from 'web-components/lib/components/cards/GreenTopIconCard';
@@ -19,6 +22,7 @@ import ImageActionCard from 'web-components/lib/components/cards/ImageActionCard
 import { StepCard } from 'web-components/lib/components/cards/StepCard';
 import FarmerIcon from 'web-components/lib/components/icons/FarmerIcon';
 import { QuestionItem } from '../../../lib/components/faq/Question';
+import { OverviewCard } from 'web-components/lib/components/cards/OverviewCard';
 
 export default {
   title: 'Components|Cards',
@@ -217,3 +221,68 @@ export const stepCard: React.FC = () => {
     />
   );
 };
+
+const useStylesOverview = makeStyles((theme: Theme) => ({
+  root: {
+    display: 'flex',
+    [theme.breakpoints.up('sm')]: {
+      flexWrap: 'wrap',
+    },
+  },
+  trustIcon: {
+    width: 61.87,
+    height: 70.68,
+  },
+  creditsIcon: {
+    width: 63,
+    height: 72,
+  },
+}));
+
+function OverviewCards(): JSX.Element {
+  const styles = useStylesOverview();
+
+  const items = [
+    {
+      title: 'independently verified',
+      tooltip: 'Blockchain data: data stored on the Regen Ledger.',
+      description: 'Verified by 3rd party',
+    },
+    {
+      title: 'no tooltip',
+      description: 'Two lines: Blockchain data: data stored on the Regen Ledger.',
+    },
+    {
+      title: 'with a link',
+      description: 'A new practice adopted from &nbsp;<a href="#">pre-approved list</a>',
+      tooltip: 'test',
+    },
+    { title: 'unique', tooltip: 'test 2', description: 'Avoiding double issuance' },
+    { title: 'short', tooltip: 'test 2', description: 'single line description' },
+    { title: 'short', tooltip: 'test 2', description: 'single line description' },
+  ];
+
+  return (
+    <div className={styles.root}>
+      <OverviewCard icon={<TrustIcon className={styles.trustIcon} isActive />} item={items[0]} />
+      <OverviewCard icon={<CurrentCreditsIcon className={styles.creditsIcon} />} item={items[1]} />
+      <OverviewCard icon={<CurrentCreditsIcon className={styles.creditsIcon} />} item={items[3]} />
+      <OverviewCard icon={<TrustIcon className={styles.trustIcon} isActive />} item={items[2]} />
+      <OverviewCard icon={<TrustIcon className={styles.trustIcon} isActive />} item={items[4]} />
+      <OverviewCard icon={<TrustIcon className={styles.trustIcon} isActive />} item={items[5]} />
+    </div>
+  );
+}
+
+export const overviewCard = (): JSX.Element => (
+  <OverviewCard
+    icon={<CurrentCreditsIcon />}
+    item={{
+      title: 'sample',
+      tooltip: 'Example tooltip',
+      description: 'Icon must be styled in each use. It is shown here unstyled.',
+    }}
+  />
+);
+
+export const overviewCardsGroup = (): JSX.Element => <OverviewCards />;

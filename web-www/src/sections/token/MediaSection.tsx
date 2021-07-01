@@ -130,7 +130,7 @@ const MediaSection: React.FC = () => {
   ));
   const slidesToShow = itemCards && itemCards.length < 3 ? itemCards.length : 3;
 
-  return (
+  return itemCards && itemCards.length > 0 ? (
     <Section className={styles.root}>
       <div className={styles.main}>
         {itemCards && itemCards.length > 0 && (
@@ -149,6 +149,8 @@ const MediaSection: React.FC = () => {
         )}
       </div>
     </Section>
+  ) : (
+    <></>
   );
 };
 

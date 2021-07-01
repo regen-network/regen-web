@@ -47,14 +47,14 @@ interface CreditTypeSection {
   flexCreditCards: Card[];
 }
 
-interface Card {
+export interface Card {
   title: string;
   description: string;
   icon: string;
-  tooltop?: string;
+  tooltip?: string;
 }
 
-interface HeroSection {
+export interface HeroSection {
   title: string;
   description: string;
 }
@@ -146,6 +146,17 @@ interface Resource {
   description: string;
   href: string;
   lastUpdated: string;
+}
+
+export interface Article {
+  title: string;
+  date: string;
+  author: string;
+  url: string;
+  imgSrc: string;
+  buttonText: string;
+  type?: string;
+  showPlay?: boolean;
 }
 
 const mock: MockCMS = duplicateMocks;

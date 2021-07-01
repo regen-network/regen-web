@@ -44,6 +44,7 @@ const MarketingNav: React.FC = () => {
     '/methodology-review-process',
     '/create-credit-class',
     '/certificate',
+    '/credit-classes',
   ].some(route => pathname.startsWith(route));
 
   return (

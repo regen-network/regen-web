@@ -83,7 +83,7 @@ function getAbbreviation(unit: string): string {
 const useStyles = makeStyles((theme: Theme) => ({
   mediaCard: {
     [theme.breakpoints.down('sm')]: {
-      width: theme.spacing(73),
+      width: theme.spacing(70),
     },
   },
   separator: {

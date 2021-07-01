@@ -6,14 +6,16 @@
     "link": "https://www.regen.network/",
     "type": "organization"
   },
-  "creditClasses": [
+  "basicCreditClasses": [
     {
       "title": "Carbon<i>Plus</i> Grasslands",
+      "id": "carbonplus-grasslands",
       "description": "This credit class is a built as a holistic credit that includes multiple ecological benefits: Carbon Sequestration and Net GHG reduction, increased animal welfare, ecosystem health, and soil health.",
       "imgSrc": "credit-class-grasslands.png"
     },
     {
       "title": "Carbon<i>Plus</i> Forestry",
+      "id": "carbonplus-forestry",
       "description": "This credit class is a built as a holistic credit that includes multiple ecological benefits: Carbon Sequestration and Net GHG reduction, ecosystem health, and soil health.",
       "imgSrc": "credit-class-forestry.png"
     }
@@ -441,7 +443,8 @@
         }
       ],
       "creditClass": {
-        "name": "Carbon<i>Plus</i>&nbsp;&nbsp;Grasslands",
+        "title": "Carbon<i>Plus</i>&nbsp;&nbsp;Grasslands",
+        "id": "carbonplus-grasslands",
         "description": "Livestock grazing covers over 3.3 billion hectares, or 25 percent of the world’s land area. Managed grazing practices can reverse land degradation, enhance net carbon sequestration, and improve soil and vegetation quality.<br><br>Under managed grazing, carbon sequestration potential is estimated between 16.4 and 26 Gt CO2e sequestered in the period between 2020-2050.<br><br>This credit is designed to significantly increase the amount of hectares under managed grazing worldwide. To that end, the methodology relies on remote sensing to substantially reduce the cost of monitoring carbon sequestration while maintaining scientific rigor.",
         "tag": "soil organic carbon",
         "pdfUrl": "https://regen-registry.s3.amazonaws.com/GHG+and+Co-Benefits+in+Grazing+Systems+Credit+Class.pdf"
@@ -612,7 +615,8 @@
         }
       ],
       "creditClass": {
-        "name": "Carbon<i>Plus</i>&nbsp;&nbsp;Grasslands",
+        "title": "Carbon<i>Plus</i>&nbsp;&nbsp;Grasslands",
+        "id": "carbonplus-grasslands",
         "description": "Livestock grazing covers over 3.3 billion hectares, or 25 percent of the world’s land area. Managed grazing practices can reverse land degradation, enhance net carbon sequestration, and improve soil and vegetation quality.<br><br>Under managed grazing, carbon sequestration potential is estimated between 16.4 and 26 Gt CO2e sequestered in the period between 2020-2050.<br><br>This credit is designed to significantly increase the amount of hectares under managed grazing worldwide. To that end, the methodology relies on remote sensing to substantially reduce the cost of monitoring carbon sequestration while maintaining scientific rigor.",
         "tag": "soil organic carbon",
         "pdfUrl": "https://regen-registry.s3.amazonaws.com/GHG+and+Co-Benefits+in+Grazing+Systems+Credit+Class.pdf"
@@ -793,7 +797,8 @@
         }
       ],
       "creditClass": {
-        "name": "Carbon<i>Plus</i>&nbsp;&nbsp;Grasslands",
+        "title": "Carbon<i>Plus</i>&nbsp;&nbsp;Grasslands",
+        "id": "carbonplus-grasslands",
         "description": "Livestock grazing covers over 3.3 billion hectares, or 25 percent of the world’s land area. Managed grazing practices can reverse land degradation, enhance net carbon sequestration, and improve soil and vegetation quality.<br><br>Under managed grazing, carbon sequestration potential is estimated between 16.4 and 26 Gt CO2e sequestered in the period between 2020-2050.<br><br>This credit is designed to significantly increase the amount of hectares under managed grazing worldwide. To that end, the methodology relies on remote sensing to substantially reduce the cost of monitoring carbon sequestration while maintaining scientific rigor.",
         "tag": "soil organic carbon",
         "pdfUrl": "https://regen-registry.s3.amazonaws.com/GHG+and+Co-Benefits+in+Grazing+Systems+Credit+Class.pdf"
@@ -953,7 +958,8 @@
         }
       ],
       "creditClass": {
-        "name": "Carbon<i>Plus</i>&nbsp;&nbsp;Grasslands",
+        "title": "Carbon<i>Plus</i>&nbsp;&nbsp;Grasslands",
+        "id": "carbonplus-grasslands",
         "description": "Livestock grazing covers over 3.3 billion hectares, or 25 percent of the world’s land area. Managed grazing practices can reverse land degradation, enhance net carbon sequestration, and improve soil and vegetation quality.<br><br>Under managed grazing, carbon sequestration potential is estimated between 16.4 and 26 Gt CO2e sequestered in the period between 2020-2050.<br><br>This credit is designed to significantly increase the amount of hectares under managed grazing worldwide. To that end, the methodology relies on remote sensing to substantially reduce the cost of monitoring carbon sequestration while maintaining scientific rigor.",
         "tag": "soil organic carbon",
         "pdfUrl": "https://regen-registry.s3.amazonaws.com/GHG+and+Co-Benefits+in+Grazing+Systems+Credit+Class.pdf"

@@ -46,6 +46,8 @@ const useStyles = makeStyles((theme: Theme) => ({
   label: {
     fontSize: theme.typography.pxToRem(12),
     color: theme.palette.primary.contrastText,
+    letterSpacing: '1px',
+    lineHeight: '15px',
     marginBottom: theme.spacing(2),
   },
   data: {

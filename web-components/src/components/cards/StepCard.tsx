@@ -28,13 +28,22 @@ export interface Step {
   title: string;
   description?: string;
   faqs?: QuestionItem[];
-  video?: string;
+  icon?: string;
   imageSrc?: string;
+  videoSrc?: string;
   imageAlt?: string;
   isActive?: boolean;
   stepNumber: number | string;
+  href?: string;
   btnText?: string;
   onBtnClick?: () => void;
+}
+
+export interface StepSequence {
+  steps: Step[];
+  title?: string;
+  preTitle?: string;
+  description?: string;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -163,6 +172,7 @@ const fallbackStep: Step = {
   tagName: 'Not found',
   isActive: false,
   description: 'Please set up content for this step number',
+  icon: 'none',
   faqs: [],
 };
 
@@ -178,11 +188,11 @@ function StepCard({
   return (
     <div className={styles.root}>
       <Card className={cx(className, styles.card, step.isActive && styles.activeCard)}>
-        {step.video && (
+        {step.videoSrc && (
           <CardMedia
             className={styles.media}
             component="iframe"
-            src={step.video}
+            src={step.videoSrc}
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen

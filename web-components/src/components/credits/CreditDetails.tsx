@@ -5,23 +5,18 @@ import Typography from '@material-ui/core/Typography';
 
 import Title from '../title';
 import CreditsIcon from '../icons/CreditsIcon';
-import { Methodology } from '../methodologies';
-
-export interface CreditClass {
-  name: string;
-  description: string;
-  methodology?: Methodology;
-  tag: string;
-  imgSrc?: string;
-  keyOutcomesActivitiesDesc?: string;
-  pdfUrl?: string;
-}
 
 interface CreditInfoProps {
   creditClass: CreditClass;
   activities: string[];
   background?: string;
   title: string;
+}
+interface CreditClass {
+  name: string;
+  tag: string;
+  description: string;
+  keyOutcomesActivitiesDesc: string;
 }
 
 interface StyleProps {

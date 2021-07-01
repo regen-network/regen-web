@@ -1,0 +1,327 @@
+{
+  "creditClasses": [
+    {
+      "name": "Carbon<i>Plus</i> Grasslands",
+      "id": "carbonplus-grasslands",
+      "version": "Version 0.9 (beta)",
+      "creditDesigner": "Regen Network Development, Inc",
+      "ecoType": "Grasslands",
+      "ecoServiceType":"Carbon Removal",
+      "approvedMethodology": "Carbon<i>Plus</i> Grasslands Methodology",
+      "methodologyUrl": "https://registry.regen.network/methodologies/carbonplus-grasslands",
+      "methodologyId": "carbonplus-grasslands",
+      "description": "The Carbon<i>Plus</i> Grasslands credit is designed to significantly increase the amount of hectares regeneratively grazed worldwide. The <a href=\"https://registry.regen.network/methodologies/carbonplus-grasslands\" target=\"_blank\">methodology</a> relies on remote sensing to substantially reduce the cost of monitoring carbon sequestration while maintaining location-based scientific rigor.", 
+      "imgSrc": "credit-class-grasslands.png",
+      "overviewCards": [
+        {
+          "title": "Independently Verified",
+          "description": "Verified by 3rd party",
+          "icon": "svgs/green-trust-yellow-check.svg",
+          "tooltip": "Blockchain data: data stored on the Regen Ledger."
+        },
+        {
+          "title": "Unique",
+          "description": "Avoiding double issuance",
+          "icon": "svgs/green-unique-thumbprint.svg"
+        },
+        {
+          "title": "Real",
+          "description": "All carbon reductions and removals are proven to have genuinely taken place",
+          "icon": "svgs/green-document-yellow-check.svg"
+        },
+        {
+          "title": "Measurable",
+          "description": "Emission removal is quantifiable using GIS tools and adjusted for uncertainty",
+          "icon": "svgs/green-yellow-counting.svg"
+        },
+        {
+          "title": "Permanent",
+          "description": "25 year period through reversal buffer or covenant",
+          "icon": "svgs/green-permanence.svg"
+        },
+        {
+          "title": "Additional",
+          "description": "A new practice adopted from &nbsp;<a href=\"#\">pre-approved list</a>",
+          "icon": "svgs/green-additionality-plus.svg"
+        },
+        {
+          "title": "Leakage",
+          "description": "De minimis in agricultural land management",
+          "icon": "svgs/green-leakage.svg"
+        },
+        {
+          "title": "co-benefits",
+          "description": "Ecosystem health, animal welfare, and soil health",
+          "icon": "svgs/green-yellow-co-benefits.svg"
+        }
+      ],
+      "buyer": {
+        "heroSection": {
+          "title": "Support regenerative ranch management.",
+          "description": "Livestock grazing covers over 3.3 billion hectares, or 25 percent of the world’s land area. Managed grazing practices can reverse land degradation, enhance net carbon sequestration, and improve soil and ecosystem health."
+        },
+        "projectsTitle": "Grasslands Projects",
+        "resources": [
+          {
+            "title": "Credit Buyer 101",
+            "description": "lorem ipsum",
+            "image": { "publicURL": "https://regen-registry.s3.amazonaws.com/credit_classes/carbonplus-grasslands/credit-buyer-summit.png" },
+            "buttonText": "view document",
+            "link": "#",
+            "updated": "May 24, 2021"
+          },
+          {
+            "title": "Carbon<i>Plus</i> Grasslands Credit Class",
+            "description": "The standard that defines the specific requirements for the CarbonPlus Grasslands credit.",
+            "image": { "publicURL": "https://regen-registry.s3.amazonaws.com/credit_classes/carbonplus-grasslands/solo-tree.png" },
+            "buttonText": "view credit class",
+            "link": "https://regen-registry.s3.amazonaws.com/GHG+and+Co-Benefits+in+Grazing+Systems+Credit+Class.pdf",
+            "updated": "March 16, 2020"
+          },
+          {
+            "title": "Carbon<i>Plus</i> Grasslands Methodology",
+            "description": "The methodology that defines how GHG and co-benefits are monitored for the CarbonPlus Grasslands credit.",
+            "image": { "publicURL": "https://regen-registry.s3.amazonaws.com/credit_classes/carbonplus-grasslands/methodology-dew.png" },
+            "buttonText": "view methodology",
+            "link": "https://regen-registry.s3.amazonaws.com/Methodology+for+GHG+and+Co-Benefits+in+Grazing+Systems.pdf",
+            "updated": "March 5, 2021"
+          }
+        ],
+        "videos": [
+          {
+            "title": "CarbonPlus Credit: Methodology, Monitoring, and Blockchain",
+            "date": "October 8, 2020",
+            "author": "Regen Network",
+            "imgSrc": "https://regen-registry.s3.amazonaws.com/credit_classes/carbonplus-grasslands/carbonplus-credit-youtube.png",
+            "url": "https://www.youtube.com/watch?v=b9PvwegUCqk&t=2486s",
+            "buttonText": "watch video",
+            "type": "video"
+          },
+          {
+            "title": "Carbonplus Grasslands Credits for Regenerative Ranch Management",
+            "date": "October 30, 2020",
+            "author": "Regen Network",
+            "imgSrc": "https://regen-registry.s3.amazonaws.com/credit_classes/carbonplus-grasslands/carbonplus-grasslands-video-cap.png",
+            "url": "https://www.youtube.com/watch?v=Eh19aQ1dd7c&t=1s",
+            "buttonText": "watch video",
+            "type": "video"
+          },
+          {
+            "title": "Regen Network's Remote Sensing Methods for Soil Carbon Accounting",
+            "date": "February 17, 2021",
+            "author": "Regen Network",
+            "imgSrc": "https://regen-registry.s3.amazonaws.com/credit_classes/carbonplus-grasslands/regen-science-deep-dive-video.png",
+            "url": "https://www.youtube.com/watch?v=nJ3IFYuYlcY&t=92s",
+            "buttonText": "watch video",
+            "type": "video"
+          }
+        ]
+      },
+      "landSteward": {
+        "ctaHref": "MODAL:https://airtable.com/embed/shrnnbymyofPB75WQ",
+        "heroSection": {
+          "title": "Get paid for your regenerative ranch management.",
+          "description": "Livestock grazing covers over 3.3 billion hectares, or 25 percent of the world’s land area. Managed grazing practices can reverse land degradation, enhance net carbon sequestration, and improve soil and ecosystem health."
+        },
+        "featuredProjectIds": ["wilmot", "woodburn", "cavan-station"],
+        "connectSection": {
+          "header": "Connect and Learn",
+          "links": [
+            {
+              "name": "Resources for Practice Transitioning",
+              "description": "Access our repository of resources for transitioning to regenerative practices.",
+              "icon": "https://regen-registry.s3.amazonaws.com/svg/document-icon.svg",
+              "href": "#TODO"
+            }
+          ]
+        },
+        "resources": [
+          {
+            "title": "TODO Program Basics",
+            "description": "lorem",
+            "image": { "publicURL": "https://regen-registry.s3.amazonaws.com/credit_classes/carbonplus-grasslands/basics-cow.png" },
+            "buttonText": "view document",
+            "link": "#TODO",
+            "updated": "May 24, 2021"
+          },
+          {
+            "title": "CarbonPlus Grasslands FAQ",
+            "description": "Get answers to frequently asked questions.",
+            "image": { "publicURL": "https://regen-registry.s3.amazonaws.com/credit_classes/carbonplus-grasslands/pasture-cows.png" },
+            "buttonText": "view faq",
+            "link": "https://www.regen.network/faq/carbonplus%20credits",
+            "updated": "May 24, 2021"
+          },
+          {
+            "title": "Soil Sampling Guide",
+            "description": "Learn about our guidelines for collecting soil samples.",
+            "image": { "publicURL": "https://regen-registry.s3.amazonaws.com/methodologies/carbonplus_grasslands/soil-sample-guide.png" },
+            "buttonText": "view guide",
+            "link": "https://regen-registry.s3.amazonaws.com/Soil+Sampling+Guide.pdf",
+            "updated": "March 5, 2021"
+          }
+        ],
+        "videos": [
+          {
+            "title": "CarbonPlus Credit: Methodology, Monitoring, and Blockchain",
+            "date": "October 8, 2020",
+            "author": "Regen Network",
+            "imgSrc": "https://regen-registry.s3.amazonaws.com/credit_classes/carbonplus-grasslands/carbonplus-credit-youtube.png",
+            "url": "https://www.youtube.com/watch?v=b9PvwegUCqk&t=2486s",
+            "buttonText": "watch video",
+            "type": "video"
+          },
+          {
+            "title": "Carbonplus Grasslands Credits for Regenerative Ranch Management",
+            "date": "October 30, 2020",
+            "author": "Regen Network",
+            "imgSrc": "https://regen-registry.s3.amazonaws.com/credit_classes/carbonplus-grasslands/carbonplus-grasslands-video-cap.png",
+            "url": "https://www.youtube.com/watch?v=Eh19aQ1dd7c&t=1s",
+            "buttonText": "watch video",
+            "type": "video"
+          },
+          {
+            "title": "Regen Network's Remote Sensing Methods for Soil Carbon Accounting",
+            "date": "February 17, 2021",
+            "author": "Regen Network",
+            "imgSrc": "https://regen-registry.s3.amazonaws.com/credit_classes/carbonplus-grasslands/regen-science-deep-dive-video.png",
+            "url": "https://www.youtube.com/watch?v=nJ3IFYuYlcY&t=92s",
+            "buttonText": "watch video",
+            "type": "video"
+          }
+        ],
+        "steps": [
+          {
+            "title": "Part 1: Pre-Evaluation",
+            "steps": [
+              {
+                "stepNumber": 1,
+                "title": "Qualify via our intake form",
+                "icon": "svgs/green-yellow-checklist.svg",
+                "isActive": true,
+                "description":
+                  "To qualify, you have already implemented or intend to adopt one of these practices: rotational grazing, holistic grazing, adaptive grazing, or intensive grazing",
+                "tagName": "immediate",
+                "btnText": "sign up now",
+                "href": "MODAL:https://airtable.com/embed/shrnnbymyofPB75WQ"
+              },
+              {
+                "stepNumber": 2,
+                "title": "Schedule an introduction",
+                "isActive": true,
+                "icon": "svgs/green-yellow-phone.svg",
+                "btnText": "schedule an introduction",
+                "href": "https://calendly.com/rebecca-regen",
+                "description":
+                  "Be sure to review these items before the call: <a href=\"#\" target=\"_blank\">Data Requirements</a> and <a href=\"#\" target=\"_blank\">Project Basics</a>.",
+                "tagName": "immediate"
+              }
+            ]
+          },
+          {
+            "title": "Part 2: Project Implementation",
+            "preTitle": "the process",
+            "description": "You are pre-qualified. Proceed with these steps.",
+            "steps": [
+              {
+                "stepNumber": 1,
+                "title": "Complete a Project Plan",
+                "isActive": true,
+                "icon": "svgs/green-yellow-interface.svg",
+                "description":
+                  "The project plan includes details about your land use history, management practices, and more. <a href=\"https://docs.google.com/document/d/12CEicMcNiS_e2Kv7j-AEc7ock0ZJ34Ap\" target=\"_blank\">Download project plan template»</a>",
+                "tagName": "immediate"
+              },
+              {
+                "stepNumber": 2,
+                "title": "Sign contracts",
+                "isActive": true,
+                "icon": "svgs/yellow-check-document.svg",
+                "description":
+                  "To officially start the CarbonPlus Grasslands project, project contracts must be signed.",
+                "tagName": "immediate"
+              },
+              {
+                "stepNumber": 3,
+                "title": "Create a project page",
+                "isActive": true,
+                "icon": "svgs/green-yellow-registration.svg",
+                "tagName": "immediate",
+                "description":
+                  "This marketing page helps to advertise your project to potential credit buyers, like <a>this project page</a> for Wilmot. <a>See project page template»</a>"
+              },
+              {
+                "stepNumber": 4,
+                "title": "Collect data & establish a baseline measurement",
+                "isActive": true,
+                "icon": "svgs/green-magnifying-glass-eye.svg",
+                "tagName": "within 60 days",
+                "videoSrc": "https://www.youtube.com/embed/Eh19aQ1dd7c",
+                "description":
+                  "Collect soil samples and have them analyzed by a laboratory.  <a>Download the Soil Sampling Guidelines»</a> Submit location-based project data.  <a>Download the Data Requirements»</a>"
+              },
+              {
+                "stepNumber": 5,
+                "title": "Hire a verifier (as required)",
+                "isActive": true,
+                "icon": "svgs/green-yellow-trust.svg",
+                "description":
+                  "Hire a third party Verifier to confirm your project information.",
+                "tagName": "within 6 months"
+              },
+              {
+                "stepNumber": 6,
+                "title": "Issue and sell your credits",
+                "isActive": true,
+                "icon": "svgs/green-shaded-credits.svg",
+                "description":
+                  "Issue CarbonPlus credits and sell them via Regen Registry. Use your own broker or sell through the Regen Network brokerage services.",
+                "tagName": "variable"
+              }
+            ]
+          }
+        ]
+      },
+      "impact": [
+        {
+          "name": "Soil Organic Carbon",
+          "description": "Organic matter contributes to nutrient retention and turnover, soil structure, moisture retention and availability, degradation of pollutants, carbon sequestration and soil resilience.",
+          "monitored": true,
+          "imgSrc": "https://regen-registry.s3.amazonaws.com/projects/wilmot/impact1.png"
+        },
+        {
+          "name": "Animal Welfare",
+          "description": "Animal welfare is an important component in a well managed grazing enterprise. Low stress stock handling techniques have been adopted to ensure animals have higher quality life.",
+          "monitored": false,
+          "imgSrc": "https://regen-registry.s3.amazonaws.com/projects/wilmot/impact2.png"
+        },
+        {
+          "name": "Ecosystem Health",
+          "description": "In the ecological realm, ‘health’ is characterized by system integrity and the exhibition of certain fundamental properties of self-organizing complex systems.",
+          "monitored": false,
+          "imgSrc": "https://regen-registry.s3.amazonaws.com/projects/wilmot/impact3.png"
+        },
+        {
+          "name": "Soil Health",
+          "description": "The capacity of soil to function as a vital living ecosystem that sustains plants, animals, and humans.",
+          "monitored": false,
+          "imgSrc": "https://regen-registry.s3.amazonaws.com/projects/wilmot/impact4.png"
+        }
+      ],
+      "sdgs": [
+        {
+          "imageUrl": "https://regen-registry.s3.amazonaws.com/sdgs/sdg2.svg",
+          "title": "200k kg protein production"
+        },
+        {
+          "imageUrl": "https://regen-registry.s3.amazonaws.com/sdgs/sdg13.svg",
+          "title": "6.07 tons CO2e"
+        },
+        {
+          "imageUrl": "https://regen-registry.s3.amazonaws.com/sdgs/sdg15.svg",
+          "title": "28% increase in NDVI (vegetation health) "
+        }
+      ]
+    }
+  ]
+}

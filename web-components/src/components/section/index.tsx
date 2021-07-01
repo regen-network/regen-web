@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 import clsx from 'clsx';
+import ReactHtmlParser from 'react-html-parser';
 import { Variant } from '@material-ui/core/styles/createTypography';
 
 import Title from '../title';
@@ -96,7 +97,7 @@ const Section = ({
             variant={titleVariant}
             align={titleAlign}
           >
-            {title}
+            {ReactHtmlParser(title)}
           </Title>
           {titleAlign === 'left' && topRight}
         </div>

@@ -17,13 +17,14 @@ interface OverviewCardProps {
   icon: JSX.Element;
   item: OverviewItem;
 }
+
 interface OverviewItem {
   title: string;
   description: string;
   tooltip?: string;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
     flexDirection: 'column',

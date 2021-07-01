@@ -16,7 +16,7 @@ interface SwitchFooterProps {
   onToggleClick: () => void;
 }
 
-const useStyles = makeStyles<Theme>((theme: Theme) => ({
+const useStyles = makeStyles<Theme>(theme => ({
   root: {
     display: 'flex',
     flex: 1,

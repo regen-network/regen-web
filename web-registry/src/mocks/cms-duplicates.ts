@@ -42,7 +42,6 @@ interface CreditTypeSection {
   title: string;
   subtitleTop: string;
   descriptionTop: string;
-  institutionalCreditCards: Card[];
   subtitleBottom: string;
   descriptionBottom: string;
   institutionalCards: Card[];

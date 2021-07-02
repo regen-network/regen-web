@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
 import clsx from 'clsx';
 import ReactHtmlParser from 'react-html-parser';
 
@@ -33,7 +33,6 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up('sm')]: {
       width: theme.spacing(87.625),
       minHeight: theme.spacing(45.75),
-      maxHeight: theme.spacing(49.25),
       padding: theme.spacing(5, 8),
       marginRight: theme.spacing(5.375),
       marginBottom: theme.spacing(5),
@@ -41,7 +40,6 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.down('xs')]: {
       minWidth: theme.spacing(69.5),
       minHeight: theme.spacing(40.75),
-      maxHeight: theme.spacing(49.25),
       padding: theme.spacing(4),
       marginRight: theme.spacing(3.25),
     },
@@ -119,7 +117,7 @@ function OverviewCard({ className, classes, icon, item }: OverviewCardProps): JS
   return (
     <Card className={clsx(className, styles.root, classes && classes.root)}>
       <div className={styles.top}>
-        <div className={clsx(styles.cardTopThird)}></div>
+        <div className={clsx(styles.cardTopThird)} />
         <div className={clsx(styles.cardTopThird, styles.iconWrap)}>{icon}</div>
         <div className={clsx(styles.cardTopThird, styles.cardTopRight)}>
           {item.tooltip && (

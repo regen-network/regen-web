@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
+import cx from 'clsx';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import CardMedia from '@material-ui/core/CardMedia';
+import Container from '@material-ui/core/Container';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 import Section from 'web-components/lib/components/section';
 import { StepCard, Step } from 'web-components/lib/components/cards/StepCard';
+import { OverviewCard } from 'web-components/lib/components/cards/OverviewCard';
 import ImpactCard from 'web-components/lib/components/cards/ImpactCard';
 import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';
 import ResourcesCard from 'web-components/lib/components/cards/ResourcesCard';
@@ -19,8 +23,11 @@ import { outcomes, resources, contentByPage } from '../mocks';
 import fernImg from '../assets/fern-in-hands.png';
 import writingOnPaperImg from '../assets/writing-on-paper.png';
 import topographyImg from '../assets/topography-pattern-full-1.png';
+import topographyImg2 from '../assets/topography-pattern-cutout-1.png';
+import Title from 'web-components/lib/components/title';
+import Description from 'web-components/lib/components/description';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     background: theme.palette.primary.main,
   },
@@ -41,29 +48,26 @@ const useStyles = makeStyles((theme: Theme) => ({
   topSectionCards: {
     maxWidth: theme.typography.pxToRem(942),
   },
-  outcomeSection: {
-    paddingTop: 0,
+  sectionPadBottom: {
     [theme.breakpoints.up('sm')]: {
-      paddingTop: theme.spacing(10),
       paddingBottom: theme.spacing(25),
     },
     [theme.breakpoints.down('xs')]: {
-      paddingTop: theme.spacing(0),
       paddingBottom: theme.spacing(20),
     },
   },
-  resourcesSection: {
+  outcomeSection: {
+    [theme.breakpoints.down('xs')]: {
+      paddingLeft: theme.spacing(3),
+      paddingRight: theme.spacing(3),
+    },
+  },
+  topoSection: {
     background: theme.palette.grey[50],
     borderTop: `1px solid ${theme.palette.grey[100]}`,
     borderBottom: `1px solid ${theme.palette.grey[100]}`,
-    [theme.breakpoints.up('sm')]: {
-      paddingBottom: theme.spacing(22.25),
-    },
-    [theme.breakpoints.down('xs')]: {
-      paddingBottom: theme.spacing(17.75),
-    },
   },
-  methodologyTitle: {
+  sectionTitle: {
     marginBottom: theme.spacing(8.75),
     [theme.breakpoints.down('xs')]: {
       marginBottom: theme.spacing(8),
@@ -86,9 +90,43 @@ const useStyles = makeStyles((theme: Theme) => ({
   resourcesRoot: {
     paddingTop: 0,
   },
+  cardWrap: {
+    display: 'flex',
+    [theme.breakpoints.up('sm')]: {
+      flexWrap: 'wrap',
+      justifyContent: 'center',
+      paddingTop: theme.spacing(4),
+      paddingBottom: theme.typography.pxToRem(109),
+    },
+    [theme.breakpoints.down('xs')]: {
+      flexWrap: 'nowrap',
+      overflow: 'scroll',
+      paddingTop: theme.spacing(2),
+      paddingBottom: theme.typography.pxToRem(64),
+    },
+  },
+  overviewCard: {
+    margin: theme.spacing(2),
+  },
   modal: {
     padding: 0,
     overflow: 'hidden',
+  },
+  maxW948: {
+    maxWidth: theme.typography.pxToRem(948),
+    margin: '0 auto',
+  },
+  description: {
+    [theme.breakpoints.up('sm')]: {
+      padding: theme.spacing(7, 0),
+      fontSize: theme.typography.pxToRem(22),
+      lineHeight: theme.typography.pxToRem(33),
+    },
+    [theme.breakpoints.down('xs')]: {
+      padding: theme.spacing(5, 0),
+      fontSize: theme.typography.pxToRem(18),
+      lineHeight: theme.typography.pxToRem(27),
+    },
   },
 }));
 
@@ -104,6 +142,7 @@ const CreateCreditClass: React.FC = () => {
   const theme = useTheme();
   const history = useHistory();
   const [open, setOpen] = useState(false);
+  const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
 
   const {
     stepCardSection,
@@ -146,7 +185,7 @@ const CreateCreditClass: React.FC = () => {
 
       <Section
         title={stepCardSection.title}
-        classes={{ root: styles.topSection, title: styles.methodologyTitle }}
+        classes={{ root: cx(styles.topSection, styles.sectionPadBottom), title: styles.sectionTitle }}
       >
         <StepCardsWithDescription
           className={styles.topSectionCards}
@@ -155,7 +194,60 @@ const CreateCreditClass: React.FC = () => {
         />
       </Section>
 
-      <Section withSlider className={styles.outcomeSection}>
+      <CardMedia image={topographyImg2} className={styles.topoSection}>
+        <Section
+          title={creditTypeSection.title}
+          titleAlign={isMobile ? 'left' : 'center'}
+          classes={{ title: styles.sectionTitle }}
+        >
+          <Title align={isMobile ? 'left' : 'center'} variant="h3">
+            {creditTypeSection.subtitleTop}
+          </Title>
+          <Description
+            align={isMobile ? 'left' : 'center'}
+            className={cx(styles.description, styles.maxW948)}
+          >
+            {creditTypeSection.descriptionTop}
+          </Description>
+          <div className={styles.cardWrap}>
+            {creditTypeSection.institutionalCards.map((card, i) => (
+              <OverviewCard
+                key={i}
+                className={styles.overviewCard}
+                icon={<img src={require(`../assets/${card.icon}`)} alt={card.description} />}
+                item={{ title: card.title, description: card.description }}
+              />
+            ))}
+          </div>
+          <Title align={isMobile ? 'left' : 'center'} variant="h3">
+            {creditTypeSection.subtitleBottom}
+          </Title>
+          <Description
+            align={isMobile ? 'left' : 'center'}
+            className={cx(styles.description, styles.maxW948)}
+          >
+            {creditTypeSection.descriptionBottom}
+          </Description>
+          <div className={styles.cardWrap}>
+            {creditTypeSection.flexCreditCards.map((card, i) => (
+              <OverviewCard
+                key={i}
+                className={styles.overviewCard}
+                icon={<img src={require(`../assets/${card.icon}`)} alt={card.description} />}
+                item={{ title: card.title, description: card.description }}
+              />
+            ))}
+          </div>
+        </Section>
+      </CardMedia>
+
+      <Section withSlider className={cx(styles.sectionPadBottom, styles.outcomeSection)}>
+        <Title align="center" variant="h3" className={styles.maxW948}>
+          {outcomeSection.title}
+        </Title>
+        <Description align="center" className={cx(styles.description, styles.maxW948)}>
+          {outcomeSection.description}
+        </Description>
         <ResponsiveSlider
           itemWidth="90%"
           padding={theme.spacing(2.5)}
@@ -166,8 +258,8 @@ const CreateCreditClass: React.FC = () => {
         />
       </Section>
 
-      <CardMedia image={topographyImg} className={styles.resourcesSection}>
-        <Section withSlider titleAlign="left">
+      <CardMedia image={topographyImg2} className={styles.topoSection}>
+        <Section withSlider className={styles.sectionPadBottom}>
           <ResponsiveSlider
             itemWidth="90%"
             classes={{ title: styles.resourcesTitle, root: styles.resourcesRoot }}
@@ -199,7 +291,7 @@ const CreateCreditClass: React.FC = () => {
         action={() => history.push(bottomBanner.href)}
       />
       <FixedFooter justify="flex-end">
-        <ContainedButton onClick={() => setOpen(true)}>Submit a methodology</ContainedButton>
+        <ContainedButton onClick={() => setOpen(true)}>Submit a Credit Class</ContainedButton>
       </FixedFooter>
       <Modal open={open} onClose={() => setOpen(false)} className={styles.modal}>
         <iframe title="airtable-signup-form" src={footerLink} />

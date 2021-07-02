@@ -162,6 +162,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     lineHeight: '150%',
     color: theme.palette.info.dark,
     fontSize: theme.spacing(3.5),
+    display: 'inline',
   },
   purchaseInfo: {
     paddingTop: theme.spacing(3.5),

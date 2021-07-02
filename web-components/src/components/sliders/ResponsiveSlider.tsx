@@ -153,7 +153,13 @@ export default function ResponsiveSlider({
 
   const gridView: boolean = !slidesToShow && desktop && !xl && items.length > 3;
   const rows: number = gridView ? 2 : 1;
-  const slides: number = gridView ? 2 : desktop ? slidesToShow || items.length : mobile ? 1 : 2;
+  const slides: number = gridView
+    ? 2
+    : desktop
+    ? slidesToShow || items.length
+    : mobile
+    ? 1
+    : Math.min(items.length, 2);
 
   const styles = useStyles({ gridView, padding, title, itemWidth });
 

@@ -24,6 +24,16 @@ import background from '../assets/certificate-bg.png';
 import pageBackground from '../assets/certificate-page-bg.jpg';
 import projectsBackground from '../assets/certificate-projects-bg.jpg';
 
+declare module '@material-ui/core/styles/createBreakpoints' {
+  interface BreakpointOverrides {
+    xs: true;
+    sm: true;
+    tablet: true; // adds the `tablet` breakpoint
+    md: true;
+    lg: true;
+    xl: true;
+  }
+}
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     backgroundColor: theme.palette.primary.main,
@@ -37,8 +47,14 @@ const useStyles = makeStyles((theme: Theme) => ({
     margin: '0 auto',
     [theme.breakpoints.up('sm')]: {
       paddingTop: theme.spacing(41.25),
+    },
+    [theme.breakpoints.up('md')]: {
       paddingRight: theme.spacing(60),
       paddingLeft: theme.spacing(60),
+    },
+    [theme.breakpoints.between(theme.breakpoints.values.tablet, 'md')]: {
+      paddingRight: theme.spacing(30),
+      paddingLeft: theme.spacing(30),
     },
     [theme.breakpoints.up('xl')]: {
       maxWidth: theme.spacing(236),
@@ -47,6 +63,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     [theme.breakpoints.down('xs')]: {
       paddingTop: theme.spacing(10),
+    },
+    [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
       paddingRight: theme.spacing(4),
       paddingLeft: theme.spacing(4),
     },

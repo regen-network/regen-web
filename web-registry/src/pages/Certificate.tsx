@@ -271,7 +271,7 @@ function CertificatePage(): JSX.Element {
 
           projects.push(
             <ProjectCard
-              href={`/projects/${project.handle}`}
+              href={project.handle ? `/projects/${project.handle}` : undefined}
               name={project.name || ''}
               imgSrc={project.image || ''}
               place={project.addressByAddressId?.feature?.place_name || ''}

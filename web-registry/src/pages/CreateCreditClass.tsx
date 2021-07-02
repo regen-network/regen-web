@@ -3,7 +3,6 @@ import { useHistory } from 'react-router-dom';
 import cx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import CardMedia from '@material-ui/core/CardMedia';
-import Container from '@material-ui/core/Container';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 import Section from 'web-components/lib/components/section';
@@ -22,8 +21,7 @@ import { outcomes, resources, contentByPage } from '../mocks';
 
 import fernImg from '../assets/fern-in-hands.png';
 import writingOnPaperImg from '../assets/writing-on-paper.png';
-import topographyImg from '../assets/topography-pattern-full-1.png';
-import topographyImg2 from '../assets/topography-pattern-cutout-1.png';
+import topographyImg from '../assets/topography-pattern-cutout-1.png';
 import Title from 'web-components/lib/components/title';
 import Description from 'web-components/lib/components/description';
 
@@ -194,7 +192,7 @@ const CreateCreditClass: React.FC = () => {
         />
       </Section>
 
-      <CardMedia image={topographyImg2} className={styles.topoSection}>
+      <CardMedia image={topographyImg} className={styles.topoSection}>
         <Section
           title={creditTypeSection.title}
           titleAlign={isMobile ? 'left' : 'center'}
@@ -258,7 +256,7 @@ const CreateCreditClass: React.FC = () => {
         />
       </Section>
 
-      <CardMedia image={topographyImg2} className={styles.topoSection}>
+      <CardMedia image={topographyImg} className={styles.topoSection}>
         <Section withSlider className={styles.sectionPadBottom}>
           <ResponsiveSlider
             itemWidth="90%"

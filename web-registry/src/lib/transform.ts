@@ -19,15 +19,24 @@ export function buildIssuanceModalData(
     const issuees: Party[] = [];
     if (creditVintage.initialDistribution) {
       // Check credit vintage initial distribution to define the issuees
-      if (creditVintage.initialDistribution.projectDeveloper > 0 && project.partyByDeveloperId) {
+      if (
+        creditVintage.initialDistribution['http://regen.network/projectDeveloperDistribution'] > 0 &&
+        project.partyByDeveloperId
+      ) {
         const projectDeveloper = getParty(project.partyByDeveloperId);
         issuees.push(projectDeveloper);
       }
-      if (creditVintage.initialDistribution.landSteward > 0 && project.partyByStewardId) {
+      if (
+        creditVintage.initialDistribution['http://regen.network/landStewardDistribution'] > 0 &&
+        project.partyByStewardId
+      ) {
         const landSteward = getParty(project.partyByStewardId);
         issuees.push(landSteward);
       }
-      if (creditVintage.initialDistribution.landOwner > 0 && project.partyByLandOwnerId) {
+      if (
+        creditVintage.initialDistribution['http://regen.network/landOwnerDistribution'] > 0 &&
+        project.partyByLandOwnerId
+      ) {
         const landOwner = getParty(project.partyByLandOwnerId);
         issuees.push(landOwner);
       }
@@ -38,8 +47,14 @@ export function buildIssuanceModalData(
     const methodologyVersion =
       creditVintage.methodologyVersionByMethodologyVersionIdAndMethodologyVersionCreatedAt;
 
-    const bufferPoolDist = creditClassVersion?.metadata?.distribution?.bufferPool;
-    const permanenceReversalBufferDist = creditClassVersion?.metadata?.distribution?.permanenceReversalBuffer;
+    const bufferPoolDist =
+      creditVintage.metadata?.['http://regen.network/bufferDistribution']?.[
+        'http://regen.network/bufferPool'
+      ];
+    const permanenceReversalBufferDist =
+      creditVintage.metadata?.['http://regen.network/bufferDistribution']?.[
+        'http://regen.network/permanenceReversalBuffer'
+      ];
 
     let numberOfCredits: number = creditVintage.units;
     let bufferPool: number | undefined;

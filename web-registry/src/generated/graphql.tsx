@@ -15852,7 +15852,7 @@ export type PurchasesFieldsFragment = (
         )> }
       )>, methodologyVersionByMethodologyVersionIdAndMethodologyVersionCreatedAt?: Maybe<(
         { __typename?: 'MethodologyVersion' }
-        & Pick<MethodologyVersion, 'name' | 'version'>
+        & Pick<MethodologyVersion, 'name' | 'version' | 'metadata'>
         & { methodologyById?: Maybe<(
           { __typename?: 'Methodology' }
           & Pick<Methodology, 'handle'>
@@ -16171,6 +16171,7 @@ export const PurchasesFieldsFragmentDoc = gql`
       methodologyVersionByMethodologyVersionIdAndMethodologyVersionCreatedAt {
         name
         version
+        metadata
         methodologyById {
           handle
         }

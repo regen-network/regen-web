@@ -5,6 +5,7 @@ import clsx from 'clsx';
 import Card from './Card';
 import Title from '../title';
 import Description from '../description';
+import { Image } from '../image';
 
 export interface ProjectImpactCardProps {
   className?: string;
@@ -12,6 +13,9 @@ export interface ProjectImpactCardProps {
   description: string;
   imgSrc: string;
   monitored?: boolean;
+  standard?: string;
+  apiServerUrl?: string;
+  imageStorageBaseUrl?: string;
 }
 
 interface StyleProps {
@@ -83,6 +87,9 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   description: {
     fontSize: theme.typography.pxToRem(14),
   },
+  image: {
+    height: theme.spacing(10),
+  },
 }));
 
 export default function ProjectImpactCard({
@@ -91,6 +98,9 @@ export default function ProjectImpactCard({
   imgSrc,
   monitored = false,
   className,
+  standard,
+  imageStorageBaseUrl,
+  apiServerUrl,
 }: ProjectImpactCardProps): JSX.Element {
   const classes = useStyles({ imgSrc });
 
@@ -104,6 +114,15 @@ export default function ProjectImpactCard({
       </div>
       <div className={classes.text}>
         <Description className={classes.description}>{description}</Description>
+        {standard && (
+          <Image
+            className={classes.image}
+            src={standard}
+            alt={standard}
+            imageStorageBaseUrl={imageStorageBaseUrl}
+            apiServerUrl={apiServerUrl}
+          />
+        )}
       </div>
     </Card>
   );

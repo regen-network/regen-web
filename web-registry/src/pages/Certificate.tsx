@@ -287,11 +287,14 @@ function CertificatePage(): JSX.Element {
                   id: creditClassVersion?.creditClassById?.handle || '',
                   name: creditClassVersion?.name,
                   version: creditClassVersion?.version || '',
+                  standardUrl: creditClassVersion?.metadata?.['http://regen.network/standardUrl'],
+                  url: creditClassVersion?.metadata?.['http://schema.org/url'],
                 },
                 methodology: {
                   id: methodologyVersion?.methodologyById?.handle || '',
                   name: methodologyVersion?.name,
                   version: methodologyVersion?.version || '',
+                  url: methodologyVersion?.metadata?.['http://schema.org/url'],
                 },
                 programGuide: {
                   id: creditClassVersion?.metadata?.programGuide?.handle,

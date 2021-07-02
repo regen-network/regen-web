@@ -37,7 +37,7 @@ export interface Project {
   image: string;
   map: string;
   keyOutcomesActivities: string[];
-  landManagementActions: ActionGroup[];
+  landManagementActions?: ActionGroup[];
   impact: Impact[];
   creditClass: CreditClass;
   methodology: ProjectMethodology;

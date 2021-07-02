@@ -57,6 +57,7 @@ fragment purchasesFields on PurchasesConnection {
       methodologyVersionByMethodologyVersionIdAndMethodologyVersionCreatedAt {
         name
         version
+        metadata
         methodologyById {
           handle
         }

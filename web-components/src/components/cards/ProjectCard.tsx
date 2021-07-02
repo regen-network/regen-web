@@ -5,6 +5,7 @@ import ReactHtmlParser from 'react-html-parser';
 
 import MediaCard from './MediaCard';
 import BreadcrumbIcon from '../icons/BreadcrumbIcon';
+import Description from '../description';
 import ProjectPlaceInfo, { Place } from '../place/ProjectPlaceInfo';
 import UserInfo, { User } from '../user/UserInfo';
 
@@ -23,8 +24,13 @@ interface Info {
   version: string;
 }
 
-interface CreditClassInfo extends Info {
+interface InfoWithUrl extends Info {
+  url?: string;
+}
+
+interface CreditClassInfo extends Info, InfoWithUrl {
   standard: boolean;
+  standardUrl?: string;
 }
 
 interface PurchaseInfo {
@@ -33,7 +39,7 @@ interface PurchaseInfo {
   vintageMetadata: any;
   vintagePeriod: string;
   creditClass: CreditClassInfo;
-  methodology: Info;
+  methodology: InfoWithUrl;
   programGuide: Info;
   projectType: string;
 }
@@ -179,13 +185,22 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-function PurchaseDetails({ title, info }: { title: string; info: string }): JSX.Element {
+function PurchaseDetails({ title, info, url }: { title: string; info: string; url?: string }): JSX.Element {
   const classes = useStyles();
+  const parsedInfo = ReactHtmlParser(info);
 
   return (
     <div>
       <span className={clsx(classes.details, classes.detailsContent)}>{title}: </span>
-      <span className={clsx(classes.detailsContent)}>{ReactHtmlParser(info)}</span>
+      <Description className={classes.detailsContent}>
+        {url ? (
+          <a href={url} target="_blank" rel="noopener noreferrer">
+            {parsedInfo}»
+          </a>
+        ) : (
+          parsedInfo
+        )}
+      </Description>
     </div>
   );
 }
@@ -283,6 +298,7 @@ export default function ProjectCard({
               )}
               <PurchaseDetails title="vintage period" info={purchaseInfo.vintagePeriod} />
               <PurchaseDetails
+                url={purchaseInfo.creditClass.url}
                 title={`credit class${purchaseInfo.creditClass.standard ? ' (type)' : ''}`}
                 info={
                   purchaseInfo.creditClass.standard && purchaseInfo.creditClass.name
@@ -290,9 +306,17 @@ export default function ProjectCard({
                     : formatInfo(purchaseInfo.creditClass)
                 }
               />
-              <PurchaseDetails title="methodology" info={formatInfo(purchaseInfo.methodology)} />
+              <PurchaseDetails
+                url={purchaseInfo.methodology.url}
+                title="methodology"
+                info={formatInfo(purchaseInfo.methodology)}
+              />
               {purchaseInfo.creditClass.standard ? (
-                <PurchaseDetails title="standard" info={formatStandard(purchaseInfo.creditClass)} />
+                <PurchaseDetails
+                  url={purchaseInfo.creditClass.standardUrl}
+                  title="standard"
+                  info={formatStandard(purchaseInfo.creditClass)}
+                />
               ) : (
                 <>
                   <PurchaseDetails title="program guide" info={formatInfo(purchaseInfo.programGuide)} />

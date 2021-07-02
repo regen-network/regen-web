@@ -15840,6 +15840,9 @@ export type PurchasesFieldsFragment = (
             )> }
           )>> }
         ) }
+      )>, partyByIssuerId?: Maybe<(
+        { __typename?: 'Party' }
+        & Pick<Party, 'name' | 'image'>
       )>, creditClassVersionByCreditClassVersionIdAndCreditClassVersionCreatedAt?: Maybe<(
         { __typename?: 'CreditClassVersion' }
         & Pick<CreditClassVersion, 'name' | 'version' | 'metadata'>
@@ -15856,7 +15859,7 @@ export type PurchasesFieldsFragment = (
         )> }
       )>, projectByProjectId?: Maybe<(
         { __typename?: 'Project' }
-        & Pick<Project, 'name' | 'area' | 'areaUnit' | 'image' | 'type' | 'handle'>
+        & Pick<Project, 'name' | 'area' | 'areaUnit' | 'image' | 'type' | 'handle' | 'metadata'>
         & { addressByAddressId?: Maybe<(
           { __typename?: 'Address' }
           & Pick<Address, 'feature'>
@@ -16152,6 +16155,10 @@ export const PurchasesFieldsFragmentDoc = gql`
           }
         }
       }
+      partyByIssuerId {
+        name
+        image
+      }
       creditClassVersionByCreditClassVersionIdAndCreditClassVersionCreatedAt {
         name
         version
@@ -16175,6 +16182,7 @@ export const PurchasesFieldsFragmentDoc = gql`
         image
         type
         handle
+        metadata
         addressByAddressId {
           feature
         }

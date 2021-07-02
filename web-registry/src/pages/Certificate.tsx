@@ -11,6 +11,7 @@ import PrintIcon from 'web-components/lib/components/icons/PrintIcon';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 import Section from 'web-components/lib/components/section';
 import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
+import UserAvatar from 'web-components/lib/components/user/UserAvatar';
 import { getFormattedPeriod } from 'web-components/lib/utils/format';
 import {
   useAllPurchasesByStripeIdQuery,
@@ -67,6 +68,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     '& .slick-track': {
       '& .slick-slide': {
         paddingRight: 0,
+        '& > div': {
+          width: '100%',
+        },
       },
     },
   },
@@ -84,7 +88,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingLeft: 0,
     },
     [theme.breakpoints.down('xs')]: {
-      paddingTop: theme.spacing(17.5),
+      paddingTop: theme.spacing(9.25),
       paddingBottom: theme.spacing(20),
       paddingRight: theme.spacing(10),
       paddingLeft: theme.spacing(10),
@@ -131,6 +135,26 @@ const useStyles = makeStyles((theme: Theme) => ({
   icon: {
     marginRight: theme.spacing(1.5),
   },
+  issuer: {
+    margin: '0 auto',
+    textAlign: 'center',
+    '& img': {
+      objectFit: 'contain',
+    },
+  },
+  issuerInfo: {
+    paddingBottom: theme.spacing(4.25),
+    paddingTop: theme.spacing(4),
+  },
+  issuerName: {
+    paddingLeft: theme.spacing(3),
+  },
+  issuanceButton: {
+    marginRight: theme.spacing(1.25),
+  },
+  projectPageButton: {
+    marginLeft: theme.spacing(1.25),
+  },
 }));
 
 function CertificatePage(): JSX.Element {
@@ -165,7 +189,7 @@ function CertificatePage(): JSX.Element {
 
   let items: JSX.Element[] = [];
   let projects: JSX.Element[] = [];
-  if (data && data.allPurchases && data.allPurchases.nodes) {
+  if (data?.allPurchases?.nodes) {
     const nodes = data.allPurchases.nodes;
     for (let i = 0; i < nodes.length; i++) {
       const node = data.allPurchases.nodes[i];
@@ -282,10 +306,16 @@ function CertificatePage(): JSX.Element {
     }
   }
 
+  const currentVintage = data?.allPurchases?.nodes[current]?.creditVintageByCreditVintageId;
+  const currentProject = currentVintage?.projectByProjectId;
+  const externalProjectLink = currentProject?.metadata?.['http://regen.network/externalProjectPageLink'];
+  const issuer = currentVintage?.partyByIssuerId;
+  const externalIssuanceLink = currentVintage?.metadata?.['http://regen.network/externalIssuanceLink'];
+
   return (
     <div className={classes.root}>
       <div className={classes.background}>
-        {data && data.allPurchases && data.allPurchases.nodes && (
+        {data?.allPurchases?.nodes && (
           <>
             <div className={classes.certificate}>
               <ResponsiveSlider
@@ -301,9 +331,26 @@ function CertificatePage(): JSX.Element {
           </>
         )}
       </div>
-      {<Grid alignItems="center">
-        <Title variant="h4">View on</Title>
-      </Grid>}
+      {issuer && (
+        <div className={classes.issuer}>
+          <Grid container alignItems="center" justify="center" className={classes.issuerInfo}>
+            {issuer.image && <UserAvatar src={issuer.image} alt={issuer.image} />}
+            <Title className={classes.issuerName} variant="h4">
+              View on {issuer.name}
+            </Title>
+          </Grid>
+          {externalIssuanceLink && (
+            <OutlinedButton href={externalIssuanceLink} target="_blank" className={classes.issuanceButton}>
+              issuance»
+            </OutlinedButton>
+          )}
+          {externalProjectLink && (
+            <OutlinedButton href={externalProjectLink} target="_blank" className={classes.projectPageButton}>
+              project page»
+            </OutlinedButton>
+          )}
+        </div>
+      )}
       <Grid container className={classes.share} alignItems="flex-end">
         <Grid item xs={12} sm={6}>
           <Title className={classes.shareTitle} variant="h4">
@@ -311,7 +358,7 @@ function CertificatePage(): JSX.Element {
           </Title>
           <ShareIcons xsSize={theme.spacing(10)} url={`${window.location.origin}/buyers`} />
         </Grid>
-        {data && data.allPurchases && data.allPurchases.nodes && (
+        {data?.allPurchases?.nodes && (
           <Grid item xs={12} sm={6}>
             <ReactToPrint
               trigger={() => (
@@ -324,7 +371,7 @@ function CertificatePage(): JSX.Element {
           </Grid>
         )}
       </Grid>
-      {data && data.allPurchases && data.allPurchases.nodes && (
+      {data?.allPurchases?.nodes && (
         <div className={classes.projects}>
           <Section classes={{ title: classes.projectsTitle }} title="Projects Supported">
             <Grid container spacing={5}>

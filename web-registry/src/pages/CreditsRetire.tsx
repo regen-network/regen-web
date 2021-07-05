@@ -98,8 +98,9 @@ function CreditsRetire(): JSX.Element {
       const selectedVintage = vintagesData.allCreditVintages.nodes.find(
         (vintage: any) => vintage.id === event.target.value,
       );
-      if (selectedVintage) {
-        const selectedCredit = selectedVintage.creditClassByCreditClassId.creditClassVersionsById.nodes[0];
+      if (selectedVintage?.creditClassVersionByCreditClassVersionIdAndCreditClassVersionCreatedAt) {
+        const selectedCredit =
+          selectedVintage.creditClassVersionByCreditClassVersionIdAndCreditClassVersionCreatedAt;
         setCreditName(selectedCredit.name);
       }
     }

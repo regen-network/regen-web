@@ -11586,6 +11586,7 @@ export type Retirement = Node & {
   addressId: Scalars['UUID'];
   creditVintageId: Scalars['UUID'];
   units: Scalars['BigFloat'];
+  metadata?: Maybe<Scalars['JSON']>;
   /** Reads a single `Wallet` that is related to this `Retirement`. */
   walletByWalletId?: Maybe<Wallet>;
   /** Reads a single `Address` that is related to this `Retirement`. */
@@ -11610,6 +11611,8 @@ export type RetirementCondition = {
   creditVintageId?: Maybe<Scalars['UUID']>;
   /** Checks for equality with the object’s `units` field. */
   units?: Maybe<Scalars['BigFloat']>;
+  /** Checks for equality with the object’s `metadata` field. */
+  metadata?: Maybe<Scalars['JSON']>;
 };
 
 /** An input for mutations affecting `Retirement` */
@@ -11621,6 +11624,7 @@ export type RetirementInput = {
   addressId: Scalars['UUID'];
   creditVintageId: Scalars['UUID'];
   units: Scalars['BigFloat'];
+  metadata?: Maybe<Scalars['JSON']>;
 };
 
 /** Represents an update to a `Retirement`. Fields that are set will be updated. */
@@ -11632,6 +11636,7 @@ export type RetirementPatch = {
   addressId?: Maybe<Scalars['UUID']>;
   creditVintageId?: Maybe<Scalars['UUID']>;
   units?: Maybe<Scalars['BigFloat']>;
+  metadata?: Maybe<Scalars['JSON']>;
 };
 
 /** A connection to a list of `Retirement` values. */
@@ -11673,6 +11678,8 @@ export enum RetirementsOrderBy {
   CreditVintageIdDesc = 'CREDIT_VINTAGE_ID_DESC',
   UnitsAsc = 'UNITS_ASC',
   UnitsDesc = 'UNITS_DESC',
+  MetadataAsc = 'METADATA_ASC',
+  MetadataDesc = 'METADATA_DESC',
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
@@ -15794,7 +15801,7 @@ export type PurchasesFieldsFragment = (
   { __typename?: 'PurchasesConnection' }
   & { nodes: Array<Maybe<(
     { __typename?: 'Purchase' }
-    & Pick<Purchase, 'id' | 'createdAt'>
+    & Pick<Purchase, 'id' | 'createdAt' | 'buyerWalletId'>
     & { walletByBuyerWalletId?: Maybe<(
       { __typename?: 'Wallet' }
       & { partiesByWalletId: (
@@ -15813,7 +15820,13 @@ export type PurchasesFieldsFragment = (
     ), creditVintageByCreditVintageId?: Maybe<(
       { __typename?: 'CreditVintage' }
       & Pick<CreditVintage, 'id' | 'startDate' | 'endDate' | 'initialDistribution' | 'metadata'>
-      & { walletByTokenizerId?: Maybe<(
+      & { retirementsByCreditVintageId: (
+        { __typename?: 'RetirementsConnection' }
+        & { nodes: Array<Maybe<(
+          { __typename?: 'Retirement' }
+          & Pick<Retirement, 'walletId' | 'metadata'>
+        )>> }
+      ), walletByTokenizerId?: Maybe<(
         { __typename?: 'Wallet' }
         & { partiesByWalletId: (
           { __typename?: 'PartiesConnection' }
@@ -16116,6 +16129,7 @@ export const PurchasesFieldsFragmentDoc = gql`
   nodes {
     id
     createdAt
+    buyerWalletId
     walletByBuyerWalletId {
       partiesByWalletId(first: 1) {
         nodes {
@@ -16134,6 +16148,12 @@ export const PurchasesFieldsFragmentDoc = gql`
       endDate
       initialDistribution
       metadata
+      retirementsByCreditVintageId {
+        nodes {
+          walletId
+          metadata
+        }
+      }
       walletByTokenizerId {
         partiesByWalletId(first: 1) {
           nodes {

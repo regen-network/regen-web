@@ -327,11 +327,14 @@ function CertificatePage(): JSX.Element {
     }
   }
 
-  const currentVintage = data?.allPurchases?.nodes[current]?.creditVintageByCreditVintageId;
+  const currentPurchase = data?.allPurchases?.nodes[current];
+  const currentVintage = currentPurchase?.creditVintageByCreditVintageId;
   const currentProject = currentVintage?.projectByProjectId;
   const externalProjectLink = currentProject?.metadata?.['http://regen.network/externalProjectPageLink'];
   const issuer = currentVintage?.partyByIssuerId;
-  const externalIssuanceLink = currentVintage?.metadata?.['http://regen.network/externalIssuanceLink'];
+  const retirements = currentVintage?.retirementsByCreditVintageId?.nodes?.filter(n =>
+    buyerWalletId ? n?.walletId === buyerWalletId : n?.walletId === currentPurchase?.buyerWalletId,
+  );
 
   return (
     <div className={classes.root}>
@@ -360,10 +363,17 @@ function CertificatePage(): JSX.Element {
               View on {issuer.name}
             </Title>
           </Grid>
-          {externalIssuanceLink && (
-            <OutlinedButton href={externalIssuanceLink} target="_blank" className={classes.issuanceButton}>
-              issuance»
-            </OutlinedButton>
+          {retirements?.map(
+            (r, i) =>
+              r?.metadata?.['http://schema.org/url'] && (
+                <OutlinedButton
+                  href={r?.metadata?.['http://schema.org/url']}
+                  target="_blank"
+                  className={classes.issuanceButton}
+                >
+                  retirement»
+                </OutlinedButton>
+              ),
           )}
           {externalProjectLink && (
             <OutlinedButton href={externalProjectLink} target="_blank" className={classes.projectPageButton}>

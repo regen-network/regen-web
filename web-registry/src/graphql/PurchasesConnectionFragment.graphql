@@ -2,6 +2,7 @@ fragment purchasesFields on PurchasesConnection {
   nodes {
     id
     createdAt
+    buyerWalletId
     walletByBuyerWalletId {
       partiesByWalletId(first: 1) {
         nodes {
@@ -20,6 +21,12 @@ fragment purchasesFields on PurchasesConnection {
       endDate
       initialDistribution
       metadata
+      retirementsByCreditVintageId {
+        nodes {
+          walletId
+          metadata
+        }
+      }
       walletByTokenizerId {
         partiesByWalletId(first: 1) {
           nodes {

@@ -66393,6 +66393,18 @@
             "deprecationReason": null
           },
           {
+            "name": "metadata",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "JSON",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "walletByWalletId",
             "description": "Reads a single `Wallet` that is related to this `Retirement`.",
             "args": [],
@@ -66515,6 +66527,16 @@
               "ofType": null
             },
             "defaultValue": null
+          },
+          {
+            "name": "metadata",
+            "description": "Checks for equality with the object’s `metadata` field.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "JSON",
+              "ofType": null
+            },
+            "defaultValue": null
           }
         ],
         "interfaces": null,
@@ -66612,6 +66634,16 @@
               }
             },
             "defaultValue": null
+          },
+          {
+            "name": "metadata",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "JSON",
+              "ofType": null
+            },
+            "defaultValue": null
           }
         ],
         "interfaces": null,
@@ -66690,6 +66722,16 @@
             "type": {
               "kind": "SCALAR",
               "name": "BigFloat",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "metadata",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "JSON",
               "ofType": null
             },
             "defaultValue": null
@@ -66915,6 +66957,18 @@
           },
           {
             "name": "UNITS_DESC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "METADATA_ASC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "METADATA_DESC",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null

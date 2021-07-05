@@ -117,7 +117,7 @@ const Seller = (): JSX.Element => {
           ))}
       </div>
       <div style={{ textAlign: 'center' }}>
-        <AdminNav redirectUri="/projects/wilmot/admin" />
+        <AdminNav redirectUri={`${window.location.origin}/projects/wilmot/admin`} />
       </div>
     </div>
   );

@@ -42,7 +42,22 @@ query ProjectByHandle($handle: String!) {
           units
           certificateLink
           txHash
-          walletByIssuerId {
+          creditClassVersionByCreditClassVersionIdAndCreditClassVersionCreatedAt {
+            name
+            version
+            metadata
+            creditClassById {
+              handle
+            }
+          }
+          methodologyVersionByMethodologyVersionIdAndMethodologyVersionCreatedAt {
+            name
+            version
+            methodologyById {
+              handle
+            }
+          }
+          walletByTokenizerId {
             addr
             partiesByWalletId(first: 1) {
               nodes {
@@ -54,21 +69,6 @@ query ProjectByHandle($handle: String!) {
       }
     }
     name
-    creditClassVersionByCreditClassVersionIdAndCreditClassVersionCreatedAt {
-      name
-      version
-      metadata
-      creditClassById {
-        handle
-      }
-    }
-    methodologyVersionByMethodologyVersionIdAndMethodologyVersionCreatedAt {
-      name
-      version
-      methodologyById {
-        handle
-      }
-    }
     partyByDeveloperId {
       ...partyFields
     }
@@ -97,7 +97,7 @@ query ProjectByHandle($handle: String!) {
             units
             certificateLink
             txHash
-            walletByIssuerId {
+            walletByTokenizerId {
               addr
               partiesByWalletId(first: 1) {
                 nodes {

@@ -226,7 +226,7 @@ function CertificatePage(): JSX.Element {
           const landOwnerInfo = getStakeholderInfo(
             'Land Owner',
             project.partyByLandOwnerId,
-            vintage.initialDistribution?.['http://regen.network/landOwner'],
+            vintage.initialDistribution?.['http://regen.network/landOwnerDistribution'],
           );
           if (landOwnerInfo) {
             projectStakeholders.push(landOwnerInfo);
@@ -234,7 +234,7 @@ function CertificatePage(): JSX.Element {
           const landStewardInfo = getStakeholderInfo(
             'Land Steward',
             project.partyByStewardId,
-            vintage.initialDistribution?.['http://regen.network/landSteward'],
+            vintage.initialDistribution?.['http://regen.network/landStewardDistribution'],
           );
           if (landStewardInfo) {
             projectStakeholders.push(landStewardInfo);
@@ -242,7 +242,7 @@ function CertificatePage(): JSX.Element {
           const projectDeveloperInfo = getStakeholderInfo(
             'Project Developer',
             project.partyByDeveloperId,
-            vintage.initialDistribution?.['http://regen.network/projectDeveloper'],
+            vintage.initialDistribution?.['http://regen.network/projectDeveloperDistribution'],
           );
           if (projectDeveloperInfo) {
             projectStakeholders.push(projectDeveloperInfo);

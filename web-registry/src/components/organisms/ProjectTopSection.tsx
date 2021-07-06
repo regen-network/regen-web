@@ -297,6 +297,7 @@ function ProjectTopSection({ project, projectDefault, geojson, isGISFile }: Proj
                   label="additional certification:"
                   name={project.additionalCertification.name}
                   url={project.additionalCertification.url}
+                  standard={project.creditClass.standard}
                 />
               )}
             </div>

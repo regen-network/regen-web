@@ -273,7 +273,138 @@
   ],
   "projects": [
     {
+      "id": "kasigau",
+      "name": "The Kasigau Corridor REDD Project - Phase II The Community Ranches",
+      "fieldsOverride": {
+        "nonMonitoredImpact": {
+          "title": "Co-benefits"
+        }
+      },
+      "glanceImgSrc": "https://regen-registry.s3.amazonaws.com/projects/woodburn/woodburn-map.png",
+      "glanceText": [
+        "55,000 trees were planted in the last four years.",
+        "10 water projects completed serving 26,000+ people.",
+        "11,000+ elephants in the ecosystem."
+      ],
+      "place": {
+        "state": "Taita–Taveta",
+        "country": "Kenya"
+      },
+      "hideCreditDetails": false,
+      "area": 169741,
+      "areaUnit": "hectares",
+      "developer": {
+        "name": "Wildlife Works Carbon LLC",
+        "type": "organization",
+        "place": {
+          "state": "California",
+          "country": "United States"
+        },
+        "imgSrc": "https://regen-registry.s3.amazonaws.com/projects/kasigau/wildlife-works.png",
+        "description": "Wildlife Works is the world's leading REDD+ program development and management company with an effective approach to applying innovative market based solutions to the conservation of biodiversity."
+      },
+      "broker": {
+        "name": "Regen Network Development, Inc.",
+        "type": "organization",
+        "place": {
+          "state": "Massachussetts",
+          "country": "United States"
+        },
+        "imgSrc": "https://regen-registry.s3.amazonaws.com/regen-logo-green.svg",
+        "description": "Regen Network realigns the agricultural economy with ecological health by creating the global marketplace for planetary stewardship."
+      },
+      "tagline": "The project area is home to a fantastic diversity of over 50 species of large mammals including elephants, zebras, lions, cheetahs and leopards.",
+      "shortDescription": "For years, the land between Tsavo East and Tsavo West National parks in Kenya served both as home to a slowly failing cattle ranch and as the main migration corridor for local wildlife moving between the two National Parks. When we first encountered Rukinga, the community and the wildlife were at odds. Rukinga was a bruised, balding land, barren of wildlife. Cattle had grazed the fields into dust, poachers slipped on and off the ranch with ease, and trees were being clear cut along the area’s critical rainwater basin.",
+      "longDescription": "In 1998, the local community supported our plan to establish the Rukinga Wildlife Sanctuary that covers 80,000 acres of forest. We established a community works project so local residents had an alternative income stream in place of poaching and clear cutting​. We brought on locally hired rangers and trained them to be wilderness guardians. We convinced the owners of the cattle to remove the cattle from the land to reduce conflict over resources.",
+      "media": [
+        {
+          "src": "https://regen-registry.s3.amazonaws.com/projects/kasigau/image1.jpg",
+          "type": "image"
+        },
+        {
+          "src": "https://regen-registry.s3.amazonaws.com/projects/kasigau/image2.png",
+          "type": "image"
+        },
+        {
+          "src": "https://regen-registry.s3.amazonaws.com/projects/kasigau/image3.png",
+          "type": "image"
+        },
+        {
+          "src": "https://regen-registry.s3.amazonaws.com/projects/kasigau/image4.jpg",
+          "type": "image"
+        },
+        {
+          "src": "https://player.vimeo.com/video/238682641",
+          "type": "video"
+        }
+      ],
+      "sdgs": [
+        {
+          "imageUrl": "https://regen-registry.s3.amazonaws.com/sdgs/sdg3.svg"
+        },
+        {
+          "imageUrl": "https://regen-registry.s3.amazonaws.com/sdgs/sdg4.svg"
+        },
+        {
+          "imageUrl": "https://regen-registry.s3.amazonaws.com/sdgs/sdg8.svg"
+        },
+        {
+          "imageUrl": "https://regen-registry.s3.amazonaws.com/sdgs/sdg12.svg"
+        },
+        {
+          "imageUrl": "https://regen-registry.s3.amazonaws.com/sdgs/sdg13.svg"
+        },
+        {
+          "imageUrl": "https://regen-registry.s3.amazonaws.com/sdgs/sdg15.svg"
+        }
+      ],
+      "image": "https://regen-registry.s3.amazonaws.com/projects/kasigau/kasigau.png",
+      "map": "https://regen-registry.s3.amazonaws.com/projects/kasigau/kasigau-map.json",
+      "impact": [
+        {
+          "name": "Avoided Deforestation",
+          "description": "An avoided deforestation project protects native forest in areas that would otherwise be cleared for crops or grassland.",
+          "monitored": true,
+          "imgSrc": "https://regen-registry.s3.amazonaws.com/projects/kasigau/avoided-deforestation.png",
+          "standard": "https://regen-registry.s3.amazonaws.com/projects/kasigau/VCS.png"
+        },
+        {
+          "name": "Biodiversity",
+          "description": "'Biological diversity' means the variability among living organisms from all sources includingdiversity within species, between species and of ecosystems.",
+          "monitored": false,
+          "imgSrc": "https://regen-registry.s3.amazonaws.com/projects/kasigau/biodiversity.png",
+          "standard": "https://regen-registry.s3.amazonaws.com/projects/kasigau/CCBS.png"
+        },
+        {
+          "name": "Climate",
+          "description": "This project helps to mitigate the many risks of the warming of the Earth’s climate, including rising sea levels, changes in precipitation, shrinking of polar ice caps, and increasing severity of tropical storms.",
+          "monitored": false,
+          "imgSrc": "https://regen-registry.s3.amazonaws.com/projects/kasigau/climate.png",
+          "standard": "https://regen-registry.s3.amazonaws.com/projects/kasigau/CCBS.png"
+        }
+      ],
+      "creditClass": {
+        "handle": "VCS",
+        "name": "REDD+",
+        "url": "https://redd.unfccc.int/",
+        "standardUrl": "https://verra.org/wp-content/uploads/2019/09/VCS_Standard_v4.0.pdf",
+        "standard": true
+      },
+      "additionalCertification": {
+        "name": "CCB",
+        "url": "https://verra.org/project/ccb-program/"
+      },
+      "registry": {
+        "name": "Verra",
+        "image": "https://regen-registry.s3.amazonaws.com/projects/kasigau/verra.png"
+      }
+    },
+    {
       "id": "woodburn",
+      "registry": {
+        "name": "Regen Registry",
+        "image": "https://regen-registry.s3.amazonaws.com/regen-registry-logo.png"
+      },
       "name": "Woodburn",
       "fieldsOverride": {
         "nonMonitoredImpact": {
@@ -444,16 +575,20 @@
         "name": "Carbon<i>Plus</i>&nbsp;&nbsp;Grasslands",
         "description": "Livestock grazing covers over 3.3 billion hectares, or 25 percent of the world’s land area. Managed grazing practices can reverse land degradation, enhance net carbon sequestration, and improve soil and vegetation quality.<br><br>Under managed grazing, carbon sequestration potential is estimated between 16.4 and 26 Gt CO2e sequestered in the period between 2020-2050.<br><br>This credit is designed to significantly increase the amount of hectares under managed grazing worldwide. To that end, the methodology relies on remote sensing to substantially reduce the cost of monitoring carbon sequestration while maintaining scientific rigor.",
         "tag": "soil organic carbon",
-        "pdfUrl": "https://regen-registry.s3.amazonaws.com/GHG+and+Co-Benefits+in+Grazing+Systems+Credit+Class.pdf"
+        "url": "https://regen-registry.s3.amazonaws.com/GHG+and+Co-Benefits+in+Grazing+Systems+Credit+Class.pdf"
       },
       "methodology": {
         "name": "Carbon<i>Plus</i>&nbsp;&nbsp;Grasslands",
         "id": "carbonplus-grasslands",
-        "pdfUrl": "https://regen-registry.s3.amazonaws.com/Methodology+for+GHG+and+Co-Benefits+in+Grazing+Systems.pdf"
+        "url": "https://regen-registry.s3.amazonaws.com/Methodology+for+GHG+and+Co-Benefits+in+Grazing+Systems.pdf"
       }
     },
     {
       "id": "cavan-station",
+      "registry": {
+        "name": "Regen Registry",
+        "image": "https://regen-registry.s3.amazonaws.com/regen-registry-logo.png"
+      },
       "name": "Cavan Station",
       "fieldsOverride": {
         "nonMonitoredImpact": {
@@ -615,16 +750,20 @@
         "name": "Carbon<i>Plus</i>&nbsp;&nbsp;Grasslands",
         "description": "Livestock grazing covers over 3.3 billion hectares, or 25 percent of the world’s land area. Managed grazing practices can reverse land degradation, enhance net carbon sequestration, and improve soil and vegetation quality.<br><br>Under managed grazing, carbon sequestration potential is estimated between 16.4 and 26 Gt CO2e sequestered in the period between 2020-2050.<br><br>This credit is designed to significantly increase the amount of hectares under managed grazing worldwide. To that end, the methodology relies on remote sensing to substantially reduce the cost of monitoring carbon sequestration while maintaining scientific rigor.",
         "tag": "soil organic carbon",
-        "pdfUrl": "https://regen-registry.s3.amazonaws.com/GHG+and+Co-Benefits+in+Grazing+Systems+Credit+Class.pdf"
+        "url": "https://regen-registry.s3.amazonaws.com/GHG+and+Co-Benefits+in+Grazing+Systems+Credit+Class.pdf"
       },
       "methodology": {
         "name": "Carbon<i>Plus</i>&nbsp;&nbsp;Grasslands",
         "id": "carbonplus-grasslands",
-        "pdfUrl": "https://regen-registry.s3.amazonaws.com/Methodology+for+GHG+and+Co-Benefits+in+Grazing+Systems.pdf"
+        "url": "https://regen-registry.s3.amazonaws.com/Methodology+for+GHG+and+Co-Benefits+in+Grazing+Systems.pdf"
       }
     },
     {
       "id": "wilmot",
+      "registry": {
+        "name": "Regen Registry",
+        "image": "https://regen-registry.s3.amazonaws.com/regen-registry-logo.png"
+      },
       "name": "Wilmot",
       "fieldsOverride": {
         "nonMonitoredImpact": {
@@ -796,16 +935,20 @@
         "name": "Carbon<i>Plus</i>&nbsp;&nbsp;Grasslands",
         "description": "Livestock grazing covers over 3.3 billion hectares, or 25 percent of the world’s land area. Managed grazing practices can reverse land degradation, enhance net carbon sequestration, and improve soil and vegetation quality.<br><br>Under managed grazing, carbon sequestration potential is estimated between 16.4 and 26 Gt CO2e sequestered in the period between 2020-2050.<br><br>This credit is designed to significantly increase the amount of hectares under managed grazing worldwide. To that end, the methodology relies on remote sensing to substantially reduce the cost of monitoring carbon sequestration while maintaining scientific rigor.",
         "tag": "soil organic carbon",
-        "pdfUrl": "https://regen-registry.s3.amazonaws.com/GHG+and+Co-Benefits+in+Grazing+Systems+Credit+Class.pdf"
+        "url": "https://regen-registry.s3.amazonaws.com/GHG+and+Co-Benefits+in+Grazing+Systems+Credit+Class.pdf"
       },
       "methodology": {
         "name": "Carbon<i>Plus</i>&nbsp;&nbsp;Grasslands",
         "id": "carbonplus-grasslands",
-        "pdfUrl": "https://regen-registry.s3.amazonaws.com/Methodology+for+GHG+and+Co-Benefits+in+Grazing+Systems.pdf"
+        "url": "https://regen-registry.s3.amazonaws.com/Methodology+for+GHG+and+Co-Benefits+in+Grazing+Systems.pdf"
       }
     },
     {
       "id": "pillango",
+      "registry": {
+        "name": "Regen Registry",
+        "image": "https://regen-registry.s3.amazonaws.com/regen-registry-logo.png"
+      },
       "name": "Pillango",
       "fieldsOverride": {
         "nonMonitoredImpact": {
@@ -956,12 +1099,12 @@
         "name": "Carbon<i>Plus</i>&nbsp;&nbsp;Grasslands",
         "description": "Livestock grazing covers over 3.3 billion hectares, or 25 percent of the world’s land area. Managed grazing practices can reverse land degradation, enhance net carbon sequestration, and improve soil and vegetation quality.<br><br>Under managed grazing, carbon sequestration potential is estimated between 16.4 and 26 Gt CO2e sequestered in the period between 2020-2050.<br><br>This credit is designed to significantly increase the amount of hectares under managed grazing worldwide. To that end, the methodology relies on remote sensing to substantially reduce the cost of monitoring carbon sequestration while maintaining scientific rigor.",
         "tag": "soil organic carbon",
-        "pdfUrl": "https://regen-registry.s3.amazonaws.com/GHG+and+Co-Benefits+in+Grazing+Systems+Credit+Class.pdf"
+        "url": "https://regen-registry.s3.amazonaws.com/GHG+and+Co-Benefits+in+Grazing+Systems+Credit+Class.pdf"
       },
       "methodology": {
         "name": "Carbon<i>Plus</i>&nbsp;&nbsp;Grasslands",
         "id": "carbonplus-grasslands",
-        "pdfUrl": "https://regen-registry.s3.amazonaws.com/Methodology+for+GHG+and+Co-Benefits+in+Grazing+Systems.pdf"
+        "url": "https://regen-registry.s3.amazonaws.com/Methodology+for+GHG+and+Co-Benefits+in+Grazing+Systems.pdf"
       }
     }
   ]

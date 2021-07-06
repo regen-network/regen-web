@@ -1,9 +1,9 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import ReactHtmlParser from 'react-html-parser';
 import Link from '@material-ui/core/Link';
-import clsx from 'clsx';
+import cx from 'clsx';
 import LazyLoad from 'react-lazyload';
 
 import { Project, ProjectDefault } from '../../mocks';
@@ -14,6 +14,7 @@ import ProjectPlaceInfo from 'web-components/lib/components/place/ProjectPlaceIn
 import GlanceCard from 'web-components/lib/components/cards/GlanceCard';
 import Description from 'web-components/lib/components/description';
 import ProjectTopCard from 'web-components/lib/components/cards/ProjectTopCard';
+import ArrowIcon from 'web-components/lib/components/icons/ArrowDownIcon';
 import ReadMore from 'web-components/lib/components/read-more';
 
 interface ProjectTopProps {
@@ -188,8 +189,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontSize: theme.typography.pxToRem(12),
     fontWeight: 800,
   },
-  creditClassLink: {
-    fontWeight: 700,
+  standardName: {
+    color: theme.palette.info.dark,
+  },
+  creditClassName: {
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.typography.pxToRem(16),
     },
@@ -197,7 +200,54 @@ const useStyles = makeStyles((theme: Theme) => ({
       fontSize: theme.typography.pxToRem(14),
     },
   },
+  creditClassLink: {
+    fontWeight: 700,
+  },
+  arrowIcon: {
+    height: theme.spacing(3.5),
+  },
 }));
+
+function ProjectTopLink({
+  label,
+  name,
+  url,
+  standard = false,
+}: {
+  label: string;
+  name: string;
+  url: string;
+  standard?: boolean;
+}): JSX.Element {
+  const classes = useStyles();
+  const theme = useTheme();
+
+  return (
+    <div className={classes.creditClassDetail}>
+      <Title className={classes.creditClass} variant="h5">
+        {label}
+      </Title>
+      {standard ? (
+        <div className={cx(classes.creditClassName, classes.standardName)}>
+          {ReactHtmlParser(name)}
+          <Link href={url} rel="noopener noreferrer" target="_blank">
+            <ArrowIcon className={classes.arrowIcon} direction="next" color={theme.palette.secondary.main} />
+          </Link>
+        </div>
+      ) : (
+        <Link
+          className={cx(classes.creditClassName, classes.creditClassLink)}
+          href={url}
+          rel="noopener noreferrer"
+          target="_blank"
+          color="secondary"
+        >
+          {ReactHtmlParser(name)}
+        </Link>
+      )}
+    </div>
+  );
+}
 
 function ProjectTopSection({ project, projectDefault, geojson, isGISFile }: ProjectTopProps): JSX.Element {
   const classes = useStyles();
@@ -219,34 +269,29 @@ function ProjectTopSection({ project, projectDefault, geojson, isGISFile }: Proj
               areaUnit={project.areaUnit}
             />
             <div className={classes.creditClassInfo}>
-              <div className={classes.creditClassDetail}>
-                <Title className={classes.creditClass} variant="h5">
-                  credit class:
-                </Title>
-                <Link
-                  className={classes.creditClassLink}
-                  href={project.creditClass.pdfUrl}
-                  rel="noopener noreferrer"
-                  target="_blank"
-                  color="secondary"
-                >
-                  {ReactHtmlParser(project.creditClass.name)}
-                </Link>
-              </div>
-              <div className={classes.creditClassDetail}>
-                <Title className={classes.creditClass} variant="h5">
-                  methodology:
-                </Title>
-                <Link
-                  className={classes.creditClassLink}
-                  href={project.methodology.pdfUrl}
-                  rel="noopener noreferrer"
-                  target="_blank"
-                  color="secondary"
-                >
-                  {ReactHtmlParser(project.methodology.name)}
-                </Link>
-              </div>
+              {project.creditClass.standard &&
+                project.creditClass.handle &&
+                project.creditClass.standardUrl && (
+                  <ProjectTopLink
+                    label="standard:"
+                    name={project.creditClass.handle}
+                    url={project.creditClass.standardUrl}
+                    standard={project.creditClass.standard}
+                  />
+                )}
+              <ProjectTopLink
+                label={`credit class${project.creditClass.standard ? ' (type)' : ''}:`}
+                name={project.creditClass.name}
+                url={project.creditClass.url}
+                standard={project.creditClass.standard}
+              />
+              {project.methodology && (
+                <ProjectTopLink
+                  label="methodology:"
+                  name={project.methodology.name}
+                  url={project.methodology.url}
+                />
+              )}
             </div>
           </div>
           {project.glanceImgSrc && project.glanceText && (
@@ -273,9 +318,10 @@ function ProjectTopSection({ project, projectDefault, geojson, isGISFile }: Proj
           </Description>
           <LazyLoad offset={50}>
             {videos.length > 0 &&
-              (/https:\/\/www.youtube.com\/embed\/[a-zA-Z0-9_.-]+/.test(videos[0].src) ? (
+              (/https:\/\/www.youtube.com\/embed\/[a-zA-Z0-9_.-]+/.test(videos[0].src) ||
+              /https:\/\/player.vimeo.com\/video\/[a-zA-Z0-9_.-]+/.test(videos[0].src) ? (
                 <iframe
-                  className={clsx(classes.iframe, classes.media)}
+                  className={cx(classes.iframe, classes.media)}
                   title={project.name}
                   src={videos[0].src}
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -298,10 +344,10 @@ function ProjectTopSection({ project, projectDefault, geojson, isGISFile }: Proj
           </ReadMore>
           {project.quote && (
             <div>
-              <Title variant="h4" className={clsx(classes.quote, classes.tagline)}>
-                <span className={clsx(classes.firstQuote, classes.quotes)}>“</span>
+              <Title variant="h4" className={cx(classes.quote, classes.tagline)}>
+                <span className={cx(classes.firstQuote, classes.quotes)}>“</span>
                 <span className={classes.textQuote}>{project.quote.text}</span>
-                <span className={clsx(classes.secondQuote, classes.quotes)}>”</span>
+                <span className={cx(classes.secondQuote, classes.quotes)}>”</span>
               </Title>
               <Title variant="h6" className={classes.quotePersonName}>
                 {project.quote.person.name}

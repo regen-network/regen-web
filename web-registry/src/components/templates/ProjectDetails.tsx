@@ -264,13 +264,19 @@ function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JS
   // Convert kml to geojson
   const mapFile: string = project.map;
   const isGISFile: boolean = /\.(json|kml)$/i.test(mapFile);
+  const isKMLFile: boolean = /\.kml$/i.test(mapFile);
 
   if (!geojson && isGISFile) {
     fetch(mapFile)
       .then(r => r.text())
-      .then(kml => {
-        const dom = new DOMParser().parseFromString(kml, 'text/xml');
-        setGeojson(togeojson.kml(dom));
+      .then(text => {
+        if (isKMLFile) {
+          const dom = new DOMParser().parseFromString(text, 'text/xml');
+          setGeojson(togeojson.kml(dom));
+        } else {
+          const geojson = JSON.parse(text);
+          setGeojson(geojson);
+        }
       });
   }
 

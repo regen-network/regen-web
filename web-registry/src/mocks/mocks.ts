@@ -22,7 +22,7 @@ export interface Project {
   id: string; // human-readable id for now
   name: string;
   place: Place;
-  type: string;
+  type?: string;
   area: number;
   areaUnit: string;
   developer?: User;
@@ -36,11 +36,15 @@ export interface Project {
   media: Media[];
   image: string;
   map: string;
-  keyOutcomesActivities: string[];
+  keyOutcomesActivities?: string[];
   landManagementActions?: ActionGroup[];
   impact: Impact[];
   creditClass: CreditClass;
-  methodology: ProjectMethodology;
+  additionalCertification?: {
+    name: string;
+    url: string;
+  };
+  methodology?: ProjectMethodology;
   protectedSpecies?: ProtectedSpeciesItem[];
   fieldsOverride?: ProjectOverride;
   credits?: {
@@ -60,6 +64,10 @@ export interface Project {
     };
   };
   sdgs?: SDG[];
+  registry: {
+    name: string;
+    image: string;
+  };
 }
 
 interface BasicProject {
@@ -114,7 +122,7 @@ export interface ProjectMethodology {
   //TODO: relational?
   name: string;
   id: string;
-  pdfUrl?: string;
+  url: string;
 }
 
 export interface Mock {

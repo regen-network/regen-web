@@ -9,12 +9,15 @@ import { Methodology } from '../methodologies';
 
 export interface CreditClass {
   name: string;
-  description: string;
+  url: string;
+  description?: string;
   methodology?: Methodology;
-  tag: string;
+  tag?: string;
   imgSrc?: string;
   keyOutcomesActivitiesDesc?: string;
-  pdfUrl?: string;
+  standard?: boolean;
+  standardUrl?: string;
+  handle?: string;
 }
 
 interface CreditInfoProps {
@@ -174,11 +177,13 @@ export default function CreditInfo({
             {creditClass.name}
           </Title>
         </div>
-        <div className={classes.descriptionItem}>
-          <Typography component="div" className={classes.description}>
-            {ReactHtmlParser(creditClass.description)}
-          </Typography>
-        </div>
+        {creditClass.description && (
+          <div className={classes.descriptionItem}>
+            <Typography component="div" className={classes.description}>
+              {ReactHtmlParser(creditClass.description)}
+            </Typography>
+          </div>
+        )}
         <div className={classes.activitiesTitleContainer}>
           <Title className={classes.activitiesTitle} variant="h4">
             {title}

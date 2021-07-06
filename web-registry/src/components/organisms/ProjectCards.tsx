@@ -51,13 +51,11 @@ const ProjectCards: React.FC<Props> = props => {
               place={project.place}
               area={project.area}
               areaUnit={project.areaUnit}
-              developer={
-                project.developer && {
-                  name: project.developer.name,
-                  type: project.developer.type,
-                  imgSrc: project.developer.imgSrc,
-                }
-              }
+              registry={{
+                name: project.registry.name,
+                type: 'organization',
+                imgSrc: project.registry.image,
+              }}
             />
           </Link>
         </Grid>

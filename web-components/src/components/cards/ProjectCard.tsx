@@ -15,7 +15,7 @@ export interface ProjectInfo {
   place: string;
   area: number;
   areaUnit: string;
-  developer: User;
+  registry: User;
 }
 
 interface Info {
@@ -50,7 +50,7 @@ export interface ProjectCardProps {
   place: Place | string;
   area: number;
   areaUnit: string;
-  developer?: User;
+  registry?: User;
   tag?: string;
   onClick?: () => void;
   displayCity?: boolean;
@@ -220,7 +220,7 @@ export default function ProjectCard({
   place,
   area,
   areaUnit,
-  developer,
+  registry,
   onClick,
   tag,
   displayCity = true,
@@ -276,10 +276,10 @@ export default function ProjectCard({
           <span className={classes.comingSoonText}>coming soon</span>
         </div>
       )}
-      {developer && <div className={classes.separator} />}
-      {developer && (
+      {registry && <div className={classes.separator} />}
+      {registry && (
         <div className={classes.userInfo}>
-          <UserInfo user={developer} size="project" />
+          <UserInfo user={registry} size="project" />
         </div>
       )}
       {purchaseInfo && <div className={classes.separator} />}

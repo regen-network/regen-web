@@ -23,14 +23,14 @@ tokenEconomics:
 
     To learn more about Regen Network token economics, please read <a href="https://regen-network.gitlab.io/whitepaper/Economics.pdf" target="_blank">our whitepaper</a>.
 infoSection:
-  title: OSMOSIS DEX Initial Decentralized Exchange Offering
-  subtitle: "Release date: June 2021"
-  body: md//Early Regen community members have collaborated with the Osmosis team
-    to create a [liquidity bootstrapping pool on the Osmosis
-    DEX](https://app.osmosis.zone/bootstrap). This is the first Cosmos ecosystem
-    initial DEX offering (IDO). The liquidity bootstrapping pool (LBP) uses a
-    variant of a reverse dutch auction mechanism that supports fair and
-    sustainable price discovery for our community.
+  title: REGEN token on Osmosis Decentralized Exchange
+  subtitle: "Release date: July 2021"
+  body: md//REGEN tokens are now available on the [Osmosis Decentralized
+    Exchange](https://app.osmosis.zone/). Token holders may also participate in
+    providing liquidity in the [REGEN:ATOM](https://app.osmosis.zone/pool/22)
+    and [REGEN:OSMO](https://app.osmosis.zone/pool/42) pools.
+    [Osmosis](https://medium.com/@Osmosis) is a Cosmos-Hub based automated
+    market maker (AMM) protocol built for liquidity providers.
   signupText: ""
   image: ../../static/media/token-bird.jpg
   imageAltText: Bird

@@ -292,6 +292,13 @@ function ProjectTopSection({ project, projectDefault, geojson, isGISFile }: Proj
                   url={project.methodology.url}
                 />
               )}
+              {project.additionalCertification && (
+                <ProjectTopLink
+                  label="additional certification:"
+                  name={project.additionalCertification.name}
+                  url={project.additionalCertification.url}
+                />
+              )}
             </div>
           </div>
           {project.glanceImgSrc && project.glanceText && (

@@ -270,13 +270,14 @@ function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JS
     fetch(mapFile)
       .then(r => r.text())
       .then(text => {
+        let geojson;
         if (isKMLFile) {
           const dom = new DOMParser().parseFromString(text, 'text/xml');
-          setGeojson(togeojson.kml(dom));
+          geojson = togeojson.kml(dom);
         } else {
-          const geojson = JSON.parse(text);
-          setGeojson(geojson);
+          geojson = JSON.parse(text);
         }
+        setGeojson(geojson);
       });
   }
 

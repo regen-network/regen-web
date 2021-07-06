@@ -140,13 +140,14 @@ function ProjectImpactSection({ impacts, title, classes }: ProjectImpactProps): 
           </div>
         ) : (
           <Slider {...settings} ref={slider} className={styles.slider}>
-            {impacts.map(({ name, description, imgSrc, monitored }: Impact, index: number) => (
+            {impacts.map(({ name, description, imgSrc, monitored, standard }: Impact, index: number) => (
               <ProjectImpactCard
                 key={index}
                 className={styles.item}
                 name={name}
                 description={description}
                 imgSrc={getOptimizedImageSrc(imgSrc, imageStorageBaseUrl, apiServerUrl)}
+                standard={getOptimizedImageSrc(standard, imageStorageBaseUrl, apiServerUrl)}
                 monitored={monitored}
               />
             ))}

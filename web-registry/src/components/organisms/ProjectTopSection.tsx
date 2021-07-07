@@ -191,6 +191,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   standardName: {
     color: theme.palette.info.dark,
+    position: 'relative',
   },
   creditClassName: {
     [theme.breakpoints.up('sm')]: {
@@ -205,6 +206,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   arrowIcon: {
     height: theme.spacing(3.5),
+  },
+  arrowLink: {
+    position: 'absolute',
+    top: theme.spacing(0.5),
   },
 }));
 
@@ -230,7 +235,7 @@ function ProjectTopLink({
       {standard ? (
         <div className={cx(classes.creditClassName, classes.standardName)}>
           {ReactHtmlParser(name)}
-          <Link href={url} rel="noopener noreferrer" target="_blank">
+          <Link className={classes.arrowLink} href={url} rel="noopener noreferrer" target="_blank">
             <ArrowIcon className={classes.arrowIcon} direction="next" color={theme.palette.secondary.main} />
           </Link>
         </div>

@@ -78,8 +78,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   description: {
     fontSize: theme.typography.pxToRem(14),
   },
-  image: {
-  },
+  image: {},
 }));
 
 export default function ProjectImpactCard({

@@ -220,6 +220,13 @@ export default function RegenTable({
 
   const options = { year: 'numeric', month: 'long', day: 'numeric' };
 
+  let hasViewOnLedgerColumn: boolean = false;
+  for (const r of rows) {
+    if (r.eventByEventId?.creditVintageByEventId?.txHash && txClient && onViewOnLedger) {
+      hasViewOnLedgerColumn = true;
+    }
+  }
+
   return (
     <TableContainer className={clsx(classes.tableContainer, className)}>
       <Table aria-label="documentation table" stickyHeader>
@@ -234,7 +241,8 @@ export default function RegenTable({
             // .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             .map((row, index) => {
               const labelId = `enhanced-table-checkbox-${index}`;
-
+              const hasViewOnLedger =
+                row.eventByEventId?.creditVintageByEventId?.txHash && txClient && onViewOnLedger;
               return (
                 <TableRow
                   tabIndex={-1}
@@ -254,9 +262,8 @@ export default function RegenTable({
                   <TableCell className={classes.cell} align="left">
                     {typeof row.date === 'string' && getFormattedDate(row.date, options)}
                   </TableCell>
-                  {row.eventByEventId?.creditVintageByEventId && txClient && onViewOnLedger && (
+                  {hasViewOnLedger && onViewOnLedger && (
                     <TableCell className={clsx(classes.cell, classes.documentCell)} align="right">
-                      (
                       <ContainedButton
                         className={clsx(classes.button, classes.ledgerBtn)}
                         onClick={() => onViewOnLedger(row.eventByEventId.creditVintageByEventId)}
@@ -264,8 +271,10 @@ export default function RegenTable({
                       >
                         view on ledger
                       </ContainedButton>
-                      )
                     </TableCell>
+                  )}
+                  {hasViewOnLedgerColumn && !hasViewOnLedger && (
+                    <TableCell className={clsx(classes.cell, classes.documentCell)} align="right"></TableCell>
                   )}
                   <TableCell className={clsx(classes.cell, classes.documentCell)} align="right">
                     <a href={row.url} target="_blank" rel="noopener noreferrer" className={classes.link}>

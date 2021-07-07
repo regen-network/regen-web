@@ -36,6 +36,15 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   slider: {
     margin: theme.spacing(0, -1.75),
+    '& .slick-track': {
+      display: 'flex',
+    },
+    '& .slick-slide': {
+      height: 'inherit',
+      '& > div': {
+        height: '100%',
+      },
+    },
   },
   swipe: {
     display: 'flex',

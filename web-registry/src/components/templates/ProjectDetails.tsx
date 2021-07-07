@@ -7,19 +7,6 @@ import { useQuery } from '@apollo/client';
 import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 import clsx from 'clsx';
 
-// import { setPageView } from '../lib/ga';
-// import { useLedger, ContextType } from '../ledger';
-// import { Project, ProjectDefault, ActionGroup } from '../mocks';
-// import ProjectTop from './sections/ProjectTop';
-// import ProjectImpact from './sections/ProjectImpact';
-// import MoreProjects from './sections/MoreProjects';
-// import Documentation from './sections/Documentation';
-// import LandManagementActions from './sections/LandManagementActions';
-// import { getImgSrc } from '../lib/imgSrc';
-// import getApiUri from '../lib/apiUri';
-// import { buildIssuanceModalData } from '../lib/transform';
-// import { IssuanceModalData } from 'web-components/lib/components/modal/IssuanceModal';
-
 import { getFormattedDate } from 'web-components/lib/utils/format';
 import IssuanceModal, { IssuanceModalData } from 'web-components/lib/components/modal/IssuanceModal';
 import Title from 'web-components/lib/components/title';

@@ -1,6 +1,5 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
-import clsx from 'clsx';
 
 import Card from './Card';
 import Title from '../title';
@@ -23,14 +22,6 @@ interface StyleProps {
 }
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
-  root: {
-    [theme.breakpoints.up('sm')]: {
-      height: theme.spacing(97.75), // TODO: temporary shorter height until extra content is added. Should be theme.spacing(110.25)
-    },
-    [theme.breakpoints.down('xs')]: {
-      height: theme.spacing(86.25), // TODO: temporary shorter height until extra content is added. Should be theme.spacing(101)
-    },
-  },
   background: props => ({
     backgroundImage: `url(${props.imgSrc})`,
     backgroundRepeat: 'no-repeat',
@@ -88,7 +79,13 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     fontSize: theme.typography.pxToRem(14),
   },
   image: {
-    height: theme.spacing(10),
+    position: 'absolute',
+    [theme.breakpoints.up('sm')]: {
+      bottom: theme.spacing(5),
+    },
+    [theme.breakpoints.down('xs')]: {
+      bottom: theme.spacing(4),
+    },
   },
 }));
 
@@ -105,7 +102,7 @@ export default function ProjectImpactCard({
   const classes = useStyles({ imgSrc });
 
   return (
-    <Card className={clsx(classes.root, className)}>
+    <Card className={className}>
       <div className={classes.background}>
         <div className={classes.tag}>{monitored ? 'primary impact' : 'co-benefit'}</div>
         <Title variant="h4" className={classes.title}>
@@ -121,6 +118,7 @@ export default function ProjectImpactCard({
             alt={standard}
             imageStorageBaseUrl={imageStorageBaseUrl}
             apiServerUrl={apiServerUrl}
+            width={140}
           />
         )}
       </div>

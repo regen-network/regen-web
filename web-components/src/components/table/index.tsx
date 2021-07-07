@@ -254,8 +254,9 @@ export default function RegenTable({
                   <TableCell className={classes.cell} align="left">
                     {typeof row.date === 'string' && getFormattedDate(row.date, options)}
                   </TableCell>
-                  <TableCell className={clsx(classes.cell, classes.documentCell)} align="right">
-                    {row.eventByEventId?.creditVintageByEventId && txClient && onViewOnLedger && (
+                  {row.eventByEventId?.creditVintageByEventId && txClient && onViewOnLedger && (
+                    <TableCell className={clsx(classes.cell, classes.documentCell)} align="right">
+                      (
                       <ContainedButton
                         className={clsx(classes.button, classes.ledgerBtn)}
                         onClick={() => onViewOnLedger(row.eventByEventId.creditVintageByEventId)}
@@ -263,8 +264,9 @@ export default function RegenTable({
                       >
                         view on ledger
                       </ContainedButton>
-                    )}
-                  </TableCell>
+                      )
+                    </TableCell>
+                  )}
                   <TableCell className={clsx(classes.cell, classes.documentCell)} align="right">
                     <a href={row.url} target="_blank" rel="noopener noreferrer" className={classes.link}>
                       <OutlinedButton startIcon={<EyeIcon />} className={classes.button}>

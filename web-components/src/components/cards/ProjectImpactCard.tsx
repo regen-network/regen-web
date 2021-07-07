@@ -1,5 +1,6 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
+import cx from 'clsx';
 
 import Card from './Card';
 import Title from '../title';
@@ -22,6 +23,10 @@ interface StyleProps {
 }
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
+  root: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
   background: props => ({
     backgroundImage: `url(${props.imgSrc})`,
     backgroundRepeat: 'no-repeat',
@@ -49,6 +54,9 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     },
   },
   text: {
+    display: 'flex',
+    flexDirection: 'column',
+    flexGrow: 1,
     [theme.breakpoints.up('sm')]: {
       padding: theme.spacing(5),
     },
@@ -77,8 +85,8 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   },
   description: {
     fontSize: theme.typography.pxToRem(14),
+    flex: '1 0 auto',
   },
-  image: {},
 }));
 
 export default function ProjectImpactCard({
@@ -94,7 +102,7 @@ export default function ProjectImpactCard({
   const classes = useStyles({ imgSrc });
 
   return (
-    <Card className={className}>
+    <Card className={cx(classes.root, className)}>
       <div className={classes.background}>
         <div className={classes.tag}>{monitored ? 'primary impact' : 'co-benefit'}</div>
         <Title variant="h4" className={classes.title}>
@@ -105,7 +113,6 @@ export default function ProjectImpactCard({
         <Description className={classes.description}>{description}</Description>
         {standard && (
           <Image
-            className={classes.image}
             src={standard}
             alt={standard}
             imageStorageBaseUrl={imageStorageBaseUrl}

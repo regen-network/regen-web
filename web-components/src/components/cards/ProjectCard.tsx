@@ -102,10 +102,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   placeInfo: {
     flex: '1 0 auto',
     [theme.breakpoints.up('sm')]: {
-      padding: `0 ${theme.spacing(5.25)} ${theme.spacing(5.25)}`,
+      padding: `${theme.spacing(1.75)} ${theme.spacing(5.25)} ${theme.spacing(5.25)}`,
     },
     [theme.breakpoints.down('xs')]: {
-      padding: `0 ${theme.spacing(4.5)} ${theme.spacing(5)}`,
+      padding: `${theme.spacing(1.75)} ${theme.spacing(4.5)} ${theme.spacing(5)}`,
     },
   },
   userInfo: {

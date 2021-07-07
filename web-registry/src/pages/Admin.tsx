@@ -11,7 +11,7 @@ function Admin(): JSX.Element {
   return (
     <div style={{ padding: '1rem' }}>
       <div style={{ textAlign: 'center' }}>
-        <AdminNav redirectUri="/admin" />
+        <AdminNav redirectUri={`${window.location.origin}/admin`} />
       </div>
       {isAdmin(user) && (
         <div>

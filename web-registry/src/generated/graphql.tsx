@@ -1148,9 +1148,17 @@ export type CreateCreditVintagePayload = {
   /** Reads a single `Project` that is related to this `CreditVintage`. */
   projectByProjectId?: Maybe<Project>;
   /** Reads a single `Wallet` that is related to this `CreditVintage`. */
-  walletByIssuerId?: Maybe<Wallet>;
+  walletByTokenizerId?: Maybe<Wallet>;
   /** Reads a single `Event` that is related to this `CreditVintage`. */
   eventByEventId?: Maybe<Event>;
+  /** Reads a single `MethodologyVersion` that is related to this `CreditVintage`. */
+  methodologyVersionByMethodologyVersionIdAndMethodologyVersionCreatedAt?: Maybe<MethodologyVersion>;
+  /** Reads a single `CreditClassVersion` that is related to this `CreditVintage`. */
+  creditClassVersionByCreditClassVersionIdAndCreditClassVersionCreatedAt?: Maybe<CreditClassVersion>;
+  /** Reads a single `Party` that is related to this `CreditVintage`. */
+  partyByIssuerId?: Maybe<Party>;
+  /** Reads a single `Wallet` that is related to this `CreditVintage`. */
+  walletByResellerId?: Maybe<Wallet>;
   /** An edge for our `CreditVintage`. May be used by Relay 1. */
   creditVintageEdge?: Maybe<CreditVintagesEdge>;
 };
@@ -1490,10 +1498,6 @@ export type CreateProjectPayload = {
   registryByRegistryId?: Maybe<Registry>;
   /** Reads a single `Address` that is related to this `Project`. */
   addressByAddressId?: Maybe<Address>;
-  /** Reads a single `CreditClassVersion` that is related to this `Project`. */
-  creditClassVersionByCreditClassVersionIdAndCreditClassVersionCreatedAt?: Maybe<CreditClassVersion>;
-  /** Reads a single `MethodologyVersion` that is related to this `Project`. */
-  methodologyVersionByMethodologyVersionIdAndMethodologyVersionCreatedAt?: Maybe<MethodologyVersion>;
   /** Reads a single `User` that is related to this `Project`. */
   userByCreatorId?: Maybe<User>;
   /** An edge for our `Project`. May be used by Relay 1. */
@@ -1628,33 +1632,6 @@ export type CreateShaclGraphPayload = {
 /** The output of our create `ShaclGraph` mutation. */
 export type CreateShaclGraphPayloadShaclGraphEdgeArgs = {
   orderBy?: Maybe<Array<ShaclGraphsOrderBy>>;
-};
-
-/** All input for the create `Test1` mutation. */
-export type CreateTest1Input = {
-  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** The `Test1` to be created by this mutation. */
-  test1: Test1Input;
-};
-
-/** The output of our create `Test1` mutation. */
-export type CreateTest1Payload = {
-  __typename?: 'CreateTest1Payload';
-  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** The `Test1` that was created by this mutation. */
-  test1?: Maybe<Test1>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query?: Maybe<Query>;
-  /** An edge for our `Test1`. May be used by Relay 1. */
-  test1Edge?: Maybe<Test1SEdge>;
-};
-
-
-/** The output of our create `Test1` mutation. */
-export type CreateTest1PayloadTest1EdgeArgs = {
-  orderBy?: Maybe<Array<Test1SOrderBy>>;
 };
 
 /** All input for the create `Transaction` mutation. */
@@ -1828,6 +1805,7 @@ export type CreditClass = Node & {
   methodologyId: Scalars['UUID'];
   handle?: Maybe<Scalars['String']>;
   uri: Scalars['String'];
+  standard: Scalars['Boolean'];
   /** Reads a single `Party` that is related to this `CreditClass`. */
   partyByDesignerId?: Maybe<Party>;
   /** Reads a single `Methodology` that is related to this `CreditClass`. */
@@ -1845,7 +1823,11 @@ export type CreditClass = Node & {
   /** Reads and enables pagination through a set of `Project`. */
   projectsByCreditVintageCreditClassIdAndProjectId: CreditClassProjectsByCreditVintageCreditClassIdAndProjectIdManyToManyConnection;
   /** Reads and enables pagination through a set of `Wallet`. */
-  walletsByCreditVintageCreditClassIdAndIssuerId: CreditClassWalletsByCreditVintageCreditClassIdAndIssuerIdManyToManyConnection;
+  walletsByCreditVintageCreditClassIdAndTokenizerId: CreditClassWalletsByCreditVintageCreditClassIdAndTokenizerIdManyToManyConnection;
+  /** Reads and enables pagination through a set of `Party`. */
+  partiesByCreditVintageCreditClassIdAndIssuerId: CreditClassPartiesByCreditVintageCreditClassIdAndIssuerIdManyToManyConnection;
+  /** Reads and enables pagination through a set of `Wallet`. */
+  walletsByCreditVintageCreditClassIdAndResellerId: CreditClassWalletsByCreditVintageCreditClassIdAndResellerIdManyToManyConnection;
   /** Reads and enables pagination through a set of `Party`. */
   partiesByProjectCreditClassIdAndDeveloperId: CreditClassPartiesByProjectCreditClassIdAndDeveloperIdManyToManyConnection;
   /** Reads and enables pagination through a set of `Party`. */
@@ -1927,7 +1909,29 @@ export type CreditClassProjectsByCreditVintageCreditClassIdAndProjectIdArgs = {
 };
 
 
-export type CreditClassWalletsByCreditVintageCreditClassIdAndIssuerIdArgs = {
+export type CreditClassWalletsByCreditVintageCreditClassIdAndTokenizerIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<WalletsOrderBy>>;
+  condition?: Maybe<WalletCondition>;
+};
+
+
+export type CreditClassPartiesByCreditVintageCreditClassIdAndIssuerIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<PartiesOrderBy>>;
+  condition?: Maybe<PartyCondition>;
+};
+
+
+export type CreditClassWalletsByCreditVintageCreditClassIdAndResellerIdArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
@@ -2055,6 +2059,8 @@ export type CreditClassCondition = {
   handle?: Maybe<Scalars['String']>;
   /** Checks for equality with the object’s `uri` field. */
   uri?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `standard` field. */
+  standard?: Maybe<Scalars['Boolean']>;
 };
 
 /** An input for mutations affecting `CreditClass` */
@@ -2066,6 +2072,7 @@ export type CreditClassInput = {
   methodologyId: Scalars['UUID'];
   handle?: Maybe<Scalars['String']>;
   uri?: Maybe<Scalars['String']>;
+  standard?: Maybe<Scalars['Boolean']>;
 };
 
 export type CreditClassIssuer = {
@@ -2134,6 +2141,42 @@ export enum CreditClassIssuersOrderBy {
   IssuerIdAsc = 'ISSUER_ID_ASC',
   IssuerIdDesc = 'ISSUER_ID_DESC'
 }
+
+/** A connection to a list of `Party` values, with data from `CreditVintage`. */
+export type CreditClassPartiesByCreditVintageCreditClassIdAndIssuerIdManyToManyConnection = {
+  __typename?: 'CreditClassPartiesByCreditVintageCreditClassIdAndIssuerIdManyToManyConnection';
+  /** A list of `Party` objects. */
+  nodes: Array<Maybe<Party>>;
+  /** A list of edges which contains the `Party`, info from the `CreditVintage`, and the cursor to aid in pagination. */
+  edges: Array<CreditClassPartiesByCreditVintageCreditClassIdAndIssuerIdManyToManyEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `Party` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `Party` edge in the connection, with data from `CreditVintage`. */
+export type CreditClassPartiesByCreditVintageCreditClassIdAndIssuerIdManyToManyEdge = {
+  __typename?: 'CreditClassPartiesByCreditVintageCreditClassIdAndIssuerIdManyToManyEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `Party` at the end of the edge. */
+  node?: Maybe<Party>;
+  /** Reads and enables pagination through a set of `CreditVintage`. */
+  creditVintagesByIssuerId: CreditVintagesConnection;
+};
+
+
+/** A `Party` edge in the connection, with data from `CreditVintage`. */
+export type CreditClassPartiesByCreditVintageCreditClassIdAndIssuerIdManyToManyEdgeCreditVintagesByIssuerIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<CreditVintagesOrderBy>>;
+  condition?: Maybe<CreditVintageCondition>;
+};
 
 /** A connection to a list of `Party` values, with data from `Project`. */
 export type CreditClassPartiesByProjectCreditClassIdAndDeveloperIdManyToManyConnection = {
@@ -2252,6 +2295,7 @@ export type CreditClassPatch = {
   methodologyId?: Maybe<Scalars['UUID']>;
   handle?: Maybe<Scalars['String']>;
   uri?: Maybe<Scalars['String']>;
+  standard?: Maybe<Scalars['Boolean']>;
 };
 
 /** A connection to a list of `Project` values, with data from `CreditVintage`. */
@@ -2372,24 +2416,24 @@ export type CreditClassVersion = Node & {
   version: Scalars['String'];
   dateDeveloped: Scalars['Datetime'];
   description?: Maybe<Scalars['String']>;
-  stateMachine: Scalars['JSON'];
+  stateMachine?: Maybe<Scalars['JSON']>;
   metadata?: Maybe<Scalars['JSON']>;
   image: Scalars['String'];
   /** Reads a single `CreditClass` that is related to this `CreditClassVersion`. */
   creditClassById?: Maybe<CreditClass>;
-  /** Reads and enables pagination through a set of `Project`. */
-  projectsByCreditClassVersionIdAndCreditClassVersionCreatedAt: ProjectsConnection;
+  /** Reads and enables pagination through a set of `CreditVintage`. */
+  creditVintagesByCreditClassVersionIdAndCreditClassVersionCreatedAt: CreditVintagesConnection;
 };
 
 
-export type CreditClassVersionProjectsByCreditClassVersionIdAndCreditClassVersionCreatedAtArgs = {
+export type CreditClassVersionCreditVintagesByCreditClassVersionIdAndCreditClassVersionCreatedAtArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['Cursor']>;
   after?: Maybe<Scalars['Cursor']>;
-  orderBy?: Maybe<Array<ProjectsOrderBy>>;
-  condition?: Maybe<ProjectCondition>;
+  orderBy?: Maybe<Array<CreditVintagesOrderBy>>;
+  condition?: Maybe<CreditVintageCondition>;
 };
 
 /** A condition to be used against `CreditClassVersion` object types. All fields are tested for equality and combined with a logical ‘and.’ */
@@ -2422,7 +2466,7 @@ export type CreditClassVersionInput = {
   version: Scalars['String'];
   dateDeveloped: Scalars['Datetime'];
   description?: Maybe<Scalars['String']>;
-  stateMachine: Scalars['JSON'];
+  stateMachine?: Maybe<Scalars['JSON']>;
   metadata?: Maybe<Scalars['JSON']>;
   image?: Maybe<Scalars['String']>;
 };
@@ -2524,12 +2568,12 @@ export type CreditClassWalletsByCreditClassIssuerCreditClassIdAndIssuerIdManyToM
 };
 
 /** A connection to a list of `Wallet` values, with data from `CreditVintage`. */
-export type CreditClassWalletsByCreditVintageCreditClassIdAndIssuerIdManyToManyConnection = {
-  __typename?: 'CreditClassWalletsByCreditVintageCreditClassIdAndIssuerIdManyToManyConnection';
+export type CreditClassWalletsByCreditVintageCreditClassIdAndResellerIdManyToManyConnection = {
+  __typename?: 'CreditClassWalletsByCreditVintageCreditClassIdAndResellerIdManyToManyConnection';
   /** A list of `Wallet` objects. */
   nodes: Array<Maybe<Wallet>>;
   /** A list of edges which contains the `Wallet`, info from the `CreditVintage`, and the cursor to aid in pagination. */
-  edges: Array<CreditClassWalletsByCreditVintageCreditClassIdAndIssuerIdManyToManyEdge>;
+  edges: Array<CreditClassWalletsByCreditVintageCreditClassIdAndResellerIdManyToManyEdge>;
   /** Information to aid in pagination. */
   pageInfo: PageInfo;
   /** The count of *all* `Wallet` you could get from the connection. */
@@ -2537,19 +2581,55 @@ export type CreditClassWalletsByCreditVintageCreditClassIdAndIssuerIdManyToManyC
 };
 
 /** A `Wallet` edge in the connection, with data from `CreditVintage`. */
-export type CreditClassWalletsByCreditVintageCreditClassIdAndIssuerIdManyToManyEdge = {
-  __typename?: 'CreditClassWalletsByCreditVintageCreditClassIdAndIssuerIdManyToManyEdge';
+export type CreditClassWalletsByCreditVintageCreditClassIdAndResellerIdManyToManyEdge = {
+  __typename?: 'CreditClassWalletsByCreditVintageCreditClassIdAndResellerIdManyToManyEdge';
   /** A cursor for use in pagination. */
   cursor?: Maybe<Scalars['Cursor']>;
   /** The `Wallet` at the end of the edge. */
   node?: Maybe<Wallet>;
   /** Reads and enables pagination through a set of `CreditVintage`. */
-  creditVintagesByIssuerId: CreditVintagesConnection;
+  creditVintagesByResellerId: CreditVintagesConnection;
 };
 
 
 /** A `Wallet` edge in the connection, with data from `CreditVintage`. */
-export type CreditClassWalletsByCreditVintageCreditClassIdAndIssuerIdManyToManyEdgeCreditVintagesByIssuerIdArgs = {
+export type CreditClassWalletsByCreditVintageCreditClassIdAndResellerIdManyToManyEdgeCreditVintagesByResellerIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<CreditVintagesOrderBy>>;
+  condition?: Maybe<CreditVintageCondition>;
+};
+
+/** A connection to a list of `Wallet` values, with data from `CreditVintage`. */
+export type CreditClassWalletsByCreditVintageCreditClassIdAndTokenizerIdManyToManyConnection = {
+  __typename?: 'CreditClassWalletsByCreditVintageCreditClassIdAndTokenizerIdManyToManyConnection';
+  /** A list of `Wallet` objects. */
+  nodes: Array<Maybe<Wallet>>;
+  /** A list of edges which contains the `Wallet`, info from the `CreditVintage`, and the cursor to aid in pagination. */
+  edges: Array<CreditClassWalletsByCreditVintageCreditClassIdAndTokenizerIdManyToManyEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `Wallet` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `Wallet` edge in the connection, with data from `CreditVintage`. */
+export type CreditClassWalletsByCreditVintageCreditClassIdAndTokenizerIdManyToManyEdge = {
+  __typename?: 'CreditClassWalletsByCreditVintageCreditClassIdAndTokenizerIdManyToManyEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `Wallet` at the end of the edge. */
+  node?: Maybe<Wallet>;
+  /** Reads and enables pagination through a set of `CreditVintage`. */
+  creditVintagesByTokenizerId: CreditVintagesConnection;
+};
+
+
+/** A `Wallet` edge in the connection, with data from `CreditVintage`. */
+export type CreditClassWalletsByCreditVintageCreditClassIdAndTokenizerIdManyToManyEdgeCreditVintagesByTokenizerIdArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
@@ -2598,6 +2678,8 @@ export enum CreditClassesOrderBy {
   HandleDesc = 'HANDLE_DESC',
   UriAsc = 'URI_ASC',
   UriDesc = 'URI_DESC',
+  StandardAsc = 'STANDARD_ASC',
+  StandardDesc = 'STANDARD_DESC',
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
@@ -2610,7 +2692,7 @@ export type CreditVintage = Node & {
   createdAt: Scalars['Datetime'];
   creditClassId?: Maybe<Scalars['UUID']>;
   projectId?: Maybe<Scalars['UUID']>;
-  issuerId?: Maybe<Scalars['UUID']>;
+  tokenizerId?: Maybe<Scalars['UUID']>;
   units?: Maybe<Scalars['BigFloat']>;
   initialDistribution?: Maybe<Scalars['JSON']>;
   startDate?: Maybe<Scalars['Datetime']>;
@@ -2618,14 +2700,29 @@ export type CreditVintage = Node & {
   eventId?: Maybe<Scalars['UUID']>;
   certificateLink?: Maybe<Scalars['String']>;
   txHash?: Maybe<Scalars['String']>;
+  methodologyVersionId?: Maybe<Scalars['UUID']>;
+  methodologyVersionCreatedAt?: Maybe<Scalars['Datetime']>;
+  creditClassVersionId?: Maybe<Scalars['UUID']>;
+  creditClassVersionCreatedAt?: Maybe<Scalars['Datetime']>;
+  metadata?: Maybe<Scalars['JSON']>;
+  issuerId?: Maybe<Scalars['UUID']>;
+  resellerId?: Maybe<Scalars['UUID']>;
   /** Reads a single `CreditClass` that is related to this `CreditVintage`. */
   creditClassByCreditClassId?: Maybe<CreditClass>;
   /** Reads a single `Project` that is related to this `CreditVintage`. */
   projectByProjectId?: Maybe<Project>;
   /** Reads a single `Wallet` that is related to this `CreditVintage`. */
-  walletByIssuerId?: Maybe<Wallet>;
+  walletByTokenizerId?: Maybe<Wallet>;
   /** Reads a single `Event` that is related to this `CreditVintage`. */
   eventByEventId?: Maybe<Event>;
+  /** Reads a single `MethodologyVersion` that is related to this `CreditVintage`. */
+  methodologyVersionByMethodologyVersionIdAndMethodologyVersionCreatedAt?: Maybe<MethodologyVersion>;
+  /** Reads a single `CreditClassVersion` that is related to this `CreditVintage`. */
+  creditClassVersionByCreditClassVersionIdAndCreditClassVersionCreatedAt?: Maybe<CreditClassVersion>;
+  /** Reads a single `Party` that is related to this `CreditVintage`. */
+  partyByIssuerId?: Maybe<Party>;
+  /** Reads a single `Wallet` that is related to this `CreditVintage`. */
+  walletByResellerId?: Maybe<Wallet>;
   /** Reads and enables pagination through a set of `AccountBalance`. */
   accountBalancesByCreditVintageId: AccountBalancesConnection;
   /** Reads and enables pagination through a set of `Transaction`. */
@@ -2905,8 +3002,8 @@ export type CreditVintageCondition = {
   creditClassId?: Maybe<Scalars['UUID']>;
   /** Checks for equality with the object’s `projectId` field. */
   projectId?: Maybe<Scalars['UUID']>;
-  /** Checks for equality with the object’s `issuerId` field. */
-  issuerId?: Maybe<Scalars['UUID']>;
+  /** Checks for equality with the object’s `tokenizerId` field. */
+  tokenizerId?: Maybe<Scalars['UUID']>;
   /** Checks for equality with the object’s `units` field. */
   units?: Maybe<Scalars['BigFloat']>;
   /** Checks for equality with the object’s `initialDistribution` field. */
@@ -2921,6 +3018,20 @@ export type CreditVintageCondition = {
   certificateLink?: Maybe<Scalars['String']>;
   /** Checks for equality with the object’s `txHash` field. */
   txHash?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `methodologyVersionId` field. */
+  methodologyVersionId?: Maybe<Scalars['UUID']>;
+  /** Checks for equality with the object’s `methodologyVersionCreatedAt` field. */
+  methodologyVersionCreatedAt?: Maybe<Scalars['Datetime']>;
+  /** Checks for equality with the object’s `creditClassVersionId` field. */
+  creditClassVersionId?: Maybe<Scalars['UUID']>;
+  /** Checks for equality with the object’s `creditClassVersionCreatedAt` field. */
+  creditClassVersionCreatedAt?: Maybe<Scalars['Datetime']>;
+  /** Checks for equality with the object’s `metadata` field. */
+  metadata?: Maybe<Scalars['JSON']>;
+  /** Checks for equality with the object’s `issuerId` field. */
+  issuerId?: Maybe<Scalars['UUID']>;
+  /** Checks for equality with the object’s `resellerId` field. */
+  resellerId?: Maybe<Scalars['UUID']>;
 };
 
 /** An input for mutations affecting `CreditVintage` */
@@ -2929,7 +3040,7 @@ export type CreditVintageInput = {
   createdAt?: Maybe<Scalars['Datetime']>;
   creditClassId?: Maybe<Scalars['UUID']>;
   projectId?: Maybe<Scalars['UUID']>;
-  issuerId?: Maybe<Scalars['UUID']>;
+  tokenizerId?: Maybe<Scalars['UUID']>;
   units?: Maybe<Scalars['BigFloat']>;
   initialDistribution?: Maybe<Scalars['JSON']>;
   startDate?: Maybe<Scalars['Datetime']>;
@@ -2937,6 +3048,13 @@ export type CreditVintageInput = {
   eventId?: Maybe<Scalars['UUID']>;
   certificateLink?: Maybe<Scalars['String']>;
   txHash?: Maybe<Scalars['String']>;
+  methodologyVersionId?: Maybe<Scalars['UUID']>;
+  methodologyVersionCreatedAt?: Maybe<Scalars['Datetime']>;
+  creditClassVersionId?: Maybe<Scalars['UUID']>;
+  creditClassVersionCreatedAt?: Maybe<Scalars['Datetime']>;
+  metadata?: Maybe<Scalars['JSON']>;
+  issuerId?: Maybe<Scalars['UUID']>;
+  resellerId?: Maybe<Scalars['UUID']>;
 };
 
 /** A connection to a list of `Party` values, with data from `Purchase`. */
@@ -3017,7 +3135,7 @@ export type CreditVintagePatch = {
   createdAt?: Maybe<Scalars['Datetime']>;
   creditClassId?: Maybe<Scalars['UUID']>;
   projectId?: Maybe<Scalars['UUID']>;
-  issuerId?: Maybe<Scalars['UUID']>;
+  tokenizerId?: Maybe<Scalars['UUID']>;
   units?: Maybe<Scalars['BigFloat']>;
   initialDistribution?: Maybe<Scalars['JSON']>;
   startDate?: Maybe<Scalars['Datetime']>;
@@ -3025,6 +3143,13 @@ export type CreditVintagePatch = {
   eventId?: Maybe<Scalars['UUID']>;
   certificateLink?: Maybe<Scalars['String']>;
   txHash?: Maybe<Scalars['String']>;
+  methodologyVersionId?: Maybe<Scalars['UUID']>;
+  methodologyVersionCreatedAt?: Maybe<Scalars['Datetime']>;
+  creditClassVersionId?: Maybe<Scalars['UUID']>;
+  creditClassVersionCreatedAt?: Maybe<Scalars['Datetime']>;
+  metadata?: Maybe<Scalars['JSON']>;
+  issuerId?: Maybe<Scalars['UUID']>;
+  resellerId?: Maybe<Scalars['UUID']>;
 };
 
 /** A connection to a list of `Purchase` values, with data from `Transaction`. */
@@ -3303,8 +3428,8 @@ export enum CreditVintagesOrderBy {
   CreditClassIdDesc = 'CREDIT_CLASS_ID_DESC',
   ProjectIdAsc = 'PROJECT_ID_ASC',
   ProjectIdDesc = 'PROJECT_ID_DESC',
-  IssuerIdAsc = 'ISSUER_ID_ASC',
-  IssuerIdDesc = 'ISSUER_ID_DESC',
+  TokenizerIdAsc = 'TOKENIZER_ID_ASC',
+  TokenizerIdDesc = 'TOKENIZER_ID_DESC',
   UnitsAsc = 'UNITS_ASC',
   UnitsDesc = 'UNITS_DESC',
   InitialDistributionAsc = 'INITIAL_DISTRIBUTION_ASC',
@@ -3319,6 +3444,20 @@ export enum CreditVintagesOrderBy {
   CertificateLinkDesc = 'CERTIFICATE_LINK_DESC',
   TxHashAsc = 'TX_HASH_ASC',
   TxHashDesc = 'TX_HASH_DESC',
+  MethodologyVersionIdAsc = 'METHODOLOGY_VERSION_ID_ASC',
+  MethodologyVersionIdDesc = 'METHODOLOGY_VERSION_ID_DESC',
+  MethodologyVersionCreatedAtAsc = 'METHODOLOGY_VERSION_CREATED_AT_ASC',
+  MethodologyVersionCreatedAtDesc = 'METHODOLOGY_VERSION_CREATED_AT_DESC',
+  CreditClassVersionIdAsc = 'CREDIT_CLASS_VERSION_ID_ASC',
+  CreditClassVersionIdDesc = 'CREDIT_CLASS_VERSION_ID_DESC',
+  CreditClassVersionCreatedAtAsc = 'CREDIT_CLASS_VERSION_CREATED_AT_ASC',
+  CreditClassVersionCreatedAtDesc = 'CREDIT_CLASS_VERSION_CREATED_AT_DESC',
+  MetadataAsc = 'METADATA_ASC',
+  MetadataDesc = 'METADATA_DESC',
+  IssuerIdAsc = 'ISSUER_ID_ASC',
+  IssuerIdDesc = 'ISSUER_ID_DESC',
+  ResellerIdAsc = 'RESELLER_ID_ASC',
+  ResellerIdDesc = 'RESELLER_ID_DESC',
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
@@ -3570,9 +3709,17 @@ export type DeleteCreditVintagePayload = {
   /** Reads a single `Project` that is related to this `CreditVintage`. */
   projectByProjectId?: Maybe<Project>;
   /** Reads a single `Wallet` that is related to this `CreditVintage`. */
-  walletByIssuerId?: Maybe<Wallet>;
+  walletByTokenizerId?: Maybe<Wallet>;
   /** Reads a single `Event` that is related to this `CreditVintage`. */
   eventByEventId?: Maybe<Event>;
+  /** Reads a single `MethodologyVersion` that is related to this `CreditVintage`. */
+  methodologyVersionByMethodologyVersionIdAndMethodologyVersionCreatedAt?: Maybe<MethodologyVersion>;
+  /** Reads a single `CreditClassVersion` that is related to this `CreditVintage`. */
+  creditClassVersionByCreditClassVersionIdAndCreditClassVersionCreatedAt?: Maybe<CreditClassVersion>;
+  /** Reads a single `Party` that is related to this `CreditVintage`. */
+  partyByIssuerId?: Maybe<Party>;
+  /** Reads a single `Wallet` that is related to this `CreditVintage`. */
+  walletByResellerId?: Maybe<Wallet>;
   /** An edge for our `CreditVintage`. May be used by Relay 1. */
   creditVintageEdge?: Maybe<CreditVintagesEdge>;
 };
@@ -4031,10 +4178,6 @@ export type DeleteProjectPayload = {
   registryByRegistryId?: Maybe<Registry>;
   /** Reads a single `Address` that is related to this `Project`. */
   addressByAddressId?: Maybe<Address>;
-  /** Reads a single `CreditClassVersion` that is related to this `Project`. */
-  creditClassVersionByCreditClassVersionIdAndCreditClassVersionCreatedAt?: Maybe<CreditClassVersion>;
-  /** Reads a single `MethodologyVersion` that is related to this `Project`. */
-  methodologyVersionByMethodologyVersionIdAndMethodologyVersionCreatedAt?: Maybe<MethodologyVersion>;
   /** Reads a single `User` that is related to this `Project`. */
   userByCreatorId?: Maybe<User>;
   /** An edge for our `Project`. May be used by Relay 1. */
@@ -4201,41 +4344,6 @@ export type DeleteShaclGraphPayload = {
 /** The output of our delete `ShaclGraph` mutation. */
 export type DeleteShaclGraphPayloadShaclGraphEdgeArgs = {
   orderBy?: Maybe<Array<ShaclGraphsOrderBy>>;
-};
-
-/** All input for the `deleteTest1ByHandle` mutation. */
-export type DeleteTest1ByHandleInput = {
-  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
-  clientMutationId?: Maybe<Scalars['String']>;
-  handle: Scalars['String'];
-};
-
-/** All input for the `deleteTest1` mutation. */
-export type DeleteTest1Input = {
-  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** The globally unique `ID` which will identify a single `Test1` to be deleted. */
-  nodeId: Scalars['ID'];
-};
-
-/** The output of our delete `Test1` mutation. */
-export type DeleteTest1Payload = {
-  __typename?: 'DeleteTest1Payload';
-  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** The `Test1` that was deleted by this mutation. */
-  test1?: Maybe<Test1>;
-  deletedTest1Id?: Maybe<Scalars['ID']>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query?: Maybe<Query>;
-  /** An edge for our `Test1`. May be used by Relay 1. */
-  test1Edge?: Maybe<Test1SEdge>;
-};
-
-
-/** The output of our delete `Test1` mutation. */
-export type DeleteTest1PayloadTest1EdgeArgs = {
-  orderBy?: Maybe<Array<Test1SOrderBy>>;
 };
 
 /** All input for the `deleteTransactionById` mutation. */
@@ -4889,8 +4997,17 @@ export type IssueCreditsInput = {
   /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   projectId: Scalars['UUID'];
+  creditClassVersionId: Scalars['UUID'];
+  creditClassVersionCreatedAt: Scalars['Datetime'];
+  methodologyVersionId: Scalars['UUID'];
+  methodologyVersionCreatedAt: Scalars['Datetime'];
   units: Scalars['Int'];
   initialDistribution: Scalars['JSON'];
+  startDate: Scalars['Datetime'];
+  endDate: Scalars['Datetime'];
+  metadata?: Maybe<Scalars['JSON']>;
+  initialIssuerId?: Maybe<Scalars['UUID']>;
+  resellerId?: Maybe<Scalars['UUID']>;
 };
 
 /** The output of our `issueCredits` mutation. */
@@ -5073,24 +5190,24 @@ export type MethodologyVersion = Node & {
   version: Scalars['String'];
   dateDeveloped: Scalars['Datetime'];
   description?: Maybe<Scalars['String']>;
-  boundary: Scalars['String'];
+  boundary?: Maybe<Scalars['String']>;
   metadata?: Maybe<Scalars['JSON']>;
   files?: Maybe<Scalars['JSON']>;
   /** Reads a single `Methodology` that is related to this `MethodologyVersion`. */
   methodologyById?: Maybe<Methodology>;
-  /** Reads and enables pagination through a set of `Project`. */
-  projectsByMethodologyVersionIdAndMethodologyVersionCreatedAt: ProjectsConnection;
+  /** Reads and enables pagination through a set of `CreditVintage`. */
+  creditVintagesByMethodologyVersionIdAndMethodologyVersionCreatedAt: CreditVintagesConnection;
 };
 
 
-export type MethodologyVersionProjectsByMethodologyVersionIdAndMethodologyVersionCreatedAtArgs = {
+export type MethodologyVersionCreditVintagesByMethodologyVersionIdAndMethodologyVersionCreatedAtArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['Cursor']>;
   after?: Maybe<Scalars['Cursor']>;
-  orderBy?: Maybe<Array<ProjectsOrderBy>>;
-  condition?: Maybe<ProjectCondition>;
+  orderBy?: Maybe<Array<CreditVintagesOrderBy>>;
+  condition?: Maybe<CreditVintageCondition>;
 };
 
 /** A condition to be used against `MethodologyVersion` object types. All fields are tested for equality and combined with a logical ‘and.’ */
@@ -5123,7 +5240,7 @@ export type MethodologyVersionInput = {
   version: Scalars['String'];
   dateDeveloped: Scalars['Datetime'];
   description?: Maybe<Scalars['String']>;
-  boundary: Scalars['String'];
+  boundary?: Maybe<Scalars['String']>;
   metadata?: Maybe<Scalars['JSON']>;
   files?: Maybe<Scalars['JSON']>;
 };
@@ -5312,8 +5429,6 @@ export type Mutation = {
   createRetirement?: Maybe<CreateRetirementPayload>;
   /** Creates a single `ShaclGraph`. */
   createShaclGraph?: Maybe<CreateShaclGraphPayload>;
-  /** Creates a single `Test1`. */
-  createTest1?: Maybe<CreateTest1Payload>;
   /** Creates a single `Transaction`. */
   createTransaction?: Maybe<CreateTransactionPayload>;
   /** Creates a single `User`. */
@@ -5420,10 +5535,6 @@ export type Mutation = {
   updateShaclGraph?: Maybe<UpdateShaclGraphPayload>;
   /** Updates a single `ShaclGraph` using a unique key and a patch. */
   updateShaclGraphByUri?: Maybe<UpdateShaclGraphPayload>;
-  /** Updates a single `Test1` using its globally unique id and a patch. */
-  updateTest1?: Maybe<UpdateTest1Payload>;
-  /** Updates a single `Test1` using a unique key and a patch. */
-  updateTest1ByHandle?: Maybe<UpdateTest1Payload>;
   /** Updates a single `Transaction` using its globally unique id and a patch. */
   updateTransaction?: Maybe<UpdateTransactionPayload>;
   /** Updates a single `Transaction` using a unique key and a patch. */
@@ -5544,10 +5655,6 @@ export type Mutation = {
   deleteShaclGraph?: Maybe<DeleteShaclGraphPayload>;
   /** Deletes a single `ShaclGraph` using a unique key. */
   deleteShaclGraphByUri?: Maybe<DeleteShaclGraphPayload>;
-  /** Deletes a single `Test1` using its globally unique id. */
-  deleteTest1?: Maybe<DeleteTest1Payload>;
-  /** Deletes a single `Test1` using a unique key. */
-  deleteTest1ByHandle?: Maybe<DeleteTest1Payload>;
   /** Deletes a single `Transaction` using its globally unique id. */
   deleteTransaction?: Maybe<DeleteTransactionPayload>;
   /** Deletes a single `Transaction` using a unique key. */
@@ -5716,12 +5823,6 @@ export type MutationCreateRetirementArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationCreateShaclGraphArgs = {
   input: CreateShaclGraphInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationCreateTest1Args = {
-  input: CreateTest1Input;
 };
 
 
@@ -6040,18 +6141,6 @@ export type MutationUpdateShaclGraphArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdateShaclGraphByUriArgs = {
   input: UpdateShaclGraphByUriInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationUpdateTest1Args = {
-  input: UpdateTest1Input;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationUpdateTest1ByHandleArgs = {
-  input: UpdateTest1ByHandleInput;
 };
 
 
@@ -6412,18 +6501,6 @@ export type MutationDeleteShaclGraphArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationDeleteShaclGraphByUriArgs = {
   input: DeleteShaclGraphByUriInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationDeleteTest1Args = {
-  input: DeleteTest1Input;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationDeleteTest1ByHandleArgs = {
-  input: DeleteTest1ByHandleInput;
 };
 
 
@@ -6932,6 +7009,8 @@ export type Party = Node & {
   methodologiesByAuthorId: MethodologiesConnection;
   /** Reads and enables pagination through a set of `CreditClass`. */
   creditClassesByDesignerId: CreditClassesConnection;
+  /** Reads and enables pagination through a set of `CreditVintage`. */
+  creditVintagesByIssuerId: CreditVintagesConnection;
   /** Reads and enables pagination through a set of `Project`. */
   projectsByDeveloperId: ProjectsConnection;
   /** Reads and enables pagination through a set of `Project`. */
@@ -6948,6 +7027,14 @@ export type Party = Node & {
   projectBrokersByAuthorizedByPartyId: ProjectBrokersConnection;
   /** Reads and enables pagination through a set of `Methodology`. */
   methodologiesByCreditClassDesignerIdAndMethodologyId: PartyMethodologiesByCreditClassDesignerIdAndMethodologyIdManyToManyConnection;
+  /** Reads and enables pagination through a set of `CreditClass`. */
+  creditClassesByCreditVintageIssuerIdAndCreditClassId: PartyCreditClassesByCreditVintageIssuerIdAndCreditClassIdManyToManyConnection;
+  /** Reads and enables pagination through a set of `Project`. */
+  projectsByCreditVintageIssuerIdAndProjectId: PartyProjectsByCreditVintageIssuerIdAndProjectIdManyToManyConnection;
+  /** Reads and enables pagination through a set of `Wallet`. */
+  walletsByCreditVintageIssuerIdAndTokenizerId: PartyWalletsByCreditVintageIssuerIdAndTokenizerIdManyToManyConnection;
+  /** Reads and enables pagination through a set of `Wallet`. */
+  walletsByCreditVintageIssuerIdAndResellerId: PartyWalletsByCreditVintageIssuerIdAndResellerIdManyToManyConnection;
   /** Reads and enables pagination through a set of `Party`. */
   partiesByProjectDeveloperIdAndStewardId: PartyPartiesByProjectDeveloperIdAndStewardIdManyToManyConnection;
   /** Reads and enables pagination through a set of `Party`. */
@@ -7059,6 +7146,17 @@ export type PartyCreditClassesByDesignerIdArgs = {
 };
 
 
+export type PartyCreditVintagesByIssuerIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<CreditVintagesOrderBy>>;
+  condition?: Maybe<CreditVintageCondition>;
+};
+
+
 export type PartyProjectsByDeveloperIdArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
@@ -7144,6 +7242,50 @@ export type PartyMethodologiesByCreditClassDesignerIdAndMethodologyIdArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<MethodologiesOrderBy>>;
   condition?: Maybe<MethodologyCondition>;
+};
+
+
+export type PartyCreditClassesByCreditVintageIssuerIdAndCreditClassIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<CreditClassesOrderBy>>;
+  condition?: Maybe<CreditClassCondition>;
+};
+
+
+export type PartyProjectsByCreditVintageIssuerIdAndProjectIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<ProjectsOrderBy>>;
+  condition?: Maybe<ProjectCondition>;
+};
+
+
+export type PartyWalletsByCreditVintageIssuerIdAndTokenizerIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<WalletsOrderBy>>;
+  condition?: Maybe<WalletCondition>;
+};
+
+
+export type PartyWalletsByCreditVintageIssuerIdAndResellerIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<WalletsOrderBy>>;
+  condition?: Maybe<WalletCondition>;
 };
 
 
@@ -7666,6 +7808,42 @@ export type PartyCondition = {
   description?: Maybe<Scalars['String']>;
   /** Checks for equality with the object’s `image` field. */
   image?: Maybe<Scalars['String']>;
+};
+
+/** A connection to a list of `CreditClass` values, with data from `CreditVintage`. */
+export type PartyCreditClassesByCreditVintageIssuerIdAndCreditClassIdManyToManyConnection = {
+  __typename?: 'PartyCreditClassesByCreditVintageIssuerIdAndCreditClassIdManyToManyConnection';
+  /** A list of `CreditClass` objects. */
+  nodes: Array<Maybe<CreditClass>>;
+  /** A list of edges which contains the `CreditClass`, info from the `CreditVintage`, and the cursor to aid in pagination. */
+  edges: Array<PartyCreditClassesByCreditVintageIssuerIdAndCreditClassIdManyToManyEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `CreditClass` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `CreditClass` edge in the connection, with data from `CreditVintage`. */
+export type PartyCreditClassesByCreditVintageIssuerIdAndCreditClassIdManyToManyEdge = {
+  __typename?: 'PartyCreditClassesByCreditVintageIssuerIdAndCreditClassIdManyToManyEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `CreditClass` at the end of the edge. */
+  node?: Maybe<CreditClass>;
+  /** Reads and enables pagination through a set of `CreditVintage`. */
+  creditVintagesByCreditClassId: CreditVintagesConnection;
+};
+
+
+/** A `CreditClass` edge in the connection, with data from `CreditVintage`. */
+export type PartyCreditClassesByCreditVintageIssuerIdAndCreditClassIdManyToManyEdgeCreditVintagesByCreditClassIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<CreditVintagesOrderBy>>;
+  condition?: Maybe<CreditVintageCondition>;
 };
 
 /** A connection to a list of `CreditClass` values, with data from `Project`. */
@@ -8202,6 +8380,42 @@ export type PartyPatch = {
   image?: Maybe<Scalars['String']>;
 };
 
+/** A connection to a list of `Project` values, with data from `CreditVintage`. */
+export type PartyProjectsByCreditVintageIssuerIdAndProjectIdManyToManyConnection = {
+  __typename?: 'PartyProjectsByCreditVintageIssuerIdAndProjectIdManyToManyConnection';
+  /** A list of `Project` objects. */
+  nodes: Array<Maybe<Project>>;
+  /** A list of edges which contains the `Project`, info from the `CreditVintage`, and the cursor to aid in pagination. */
+  edges: Array<PartyProjectsByCreditVintageIssuerIdAndProjectIdManyToManyEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `Project` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `Project` edge in the connection, with data from `CreditVintage`. */
+export type PartyProjectsByCreditVintageIssuerIdAndProjectIdManyToManyEdge = {
+  __typename?: 'PartyProjectsByCreditVintageIssuerIdAndProjectIdManyToManyEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `Project` at the end of the edge. */
+  node?: Maybe<Project>;
+  /** Reads and enables pagination through a set of `CreditVintage`. */
+  creditVintagesByProjectId: CreditVintagesConnection;
+};
+
+
+/** A `Project` edge in the connection, with data from `CreditVintage`. */
+export type PartyProjectsByCreditVintageIssuerIdAndProjectIdManyToManyEdgeCreditVintagesByProjectIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<CreditVintagesOrderBy>>;
+  condition?: Maybe<CreditVintageCondition>;
+};
+
 /** A connection to a list of `Project` values, with data from `ProjectBroker`. */
 export type PartyProjectsByProjectBrokerAuthorizedByPartyIdAndProjectIdManyToManyConnection = {
   __typename?: 'PartyProjectsByProjectBrokerAuthorizedByPartyIdAndProjectIdManyToManyConnection';
@@ -8639,6 +8853,78 @@ export type PartyUsersByPurchasePartyIdAndUserIdManyToManyEdgePurchasesByUserIdA
   condition?: Maybe<PurchaseCondition>;
 };
 
+/** A connection to a list of `Wallet` values, with data from `CreditVintage`. */
+export type PartyWalletsByCreditVintageIssuerIdAndResellerIdManyToManyConnection = {
+  __typename?: 'PartyWalletsByCreditVintageIssuerIdAndResellerIdManyToManyConnection';
+  /** A list of `Wallet` objects. */
+  nodes: Array<Maybe<Wallet>>;
+  /** A list of edges which contains the `Wallet`, info from the `CreditVintage`, and the cursor to aid in pagination. */
+  edges: Array<PartyWalletsByCreditVintageIssuerIdAndResellerIdManyToManyEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `Wallet` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `Wallet` edge in the connection, with data from `CreditVintage`. */
+export type PartyWalletsByCreditVintageIssuerIdAndResellerIdManyToManyEdge = {
+  __typename?: 'PartyWalletsByCreditVintageIssuerIdAndResellerIdManyToManyEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `Wallet` at the end of the edge. */
+  node?: Maybe<Wallet>;
+  /** Reads and enables pagination through a set of `CreditVintage`. */
+  creditVintagesByResellerId: CreditVintagesConnection;
+};
+
+
+/** A `Wallet` edge in the connection, with data from `CreditVintage`. */
+export type PartyWalletsByCreditVintageIssuerIdAndResellerIdManyToManyEdgeCreditVintagesByResellerIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<CreditVintagesOrderBy>>;
+  condition?: Maybe<CreditVintageCondition>;
+};
+
+/** A connection to a list of `Wallet` values, with data from `CreditVintage`. */
+export type PartyWalletsByCreditVintageIssuerIdAndTokenizerIdManyToManyConnection = {
+  __typename?: 'PartyWalletsByCreditVintageIssuerIdAndTokenizerIdManyToManyConnection';
+  /** A list of `Wallet` objects. */
+  nodes: Array<Maybe<Wallet>>;
+  /** A list of edges which contains the `Wallet`, info from the `CreditVintage`, and the cursor to aid in pagination. */
+  edges: Array<PartyWalletsByCreditVintageIssuerIdAndTokenizerIdManyToManyEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `Wallet` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `Wallet` edge in the connection, with data from `CreditVintage`. */
+export type PartyWalletsByCreditVintageIssuerIdAndTokenizerIdManyToManyEdge = {
+  __typename?: 'PartyWalletsByCreditVintageIssuerIdAndTokenizerIdManyToManyEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `Wallet` at the end of the edge. */
+  node?: Maybe<Wallet>;
+  /** Reads and enables pagination through a set of `CreditVintage`. */
+  creditVintagesByTokenizerId: CreditVintagesConnection;
+};
+
+
+/** A `Wallet` edge in the connection, with data from `CreditVintage`. */
+export type PartyWalletsByCreditVintageIssuerIdAndTokenizerIdManyToManyEdgeCreditVintagesByTokenizerIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<CreditVintagesOrderBy>>;
+  condition?: Maybe<CreditVintageCondition>;
+};
+
 /** A connection to a list of `Wallet` values, with data from `Purchase`. */
 export type PartyWalletsByPurchasePartyIdAndBuyerWalletIdManyToManyConnection = {
   __typename?: 'PartyWalletsByPurchasePartyIdAndBuyerWalletIdManyToManyConnection';
@@ -8778,10 +9064,6 @@ export type Project = Node & {
   addressId?: Maybe<Scalars['UUID']>;
   handle?: Maybe<Scalars['String']>;
   type?: Maybe<Scalars['String']>;
-  creditClassVersionId?: Maybe<Scalars['UUID']>;
-  creditClassVersionCreatedAt?: Maybe<Scalars['Datetime']>;
-  methodologyVersionId?: Maybe<Scalars['UUID']>;
-  methodologyVersionCreatedAt?: Maybe<Scalars['Datetime']>;
   creatorId?: Maybe<Scalars['UUID']>;
   /** Reads a single `Party` that is related to this `Project`. */
   partyByDeveloperId?: Maybe<Party>;
@@ -8795,10 +9077,6 @@ export type Project = Node & {
   registryByRegistryId?: Maybe<Registry>;
   /** Reads a single `Address` that is related to this `Project`. */
   addressByAddressId?: Maybe<Address>;
-  /** Reads a single `CreditClassVersion` that is related to this `Project`. */
-  creditClassVersionByCreditClassVersionIdAndCreditClassVersionCreatedAt?: Maybe<CreditClassVersion>;
-  /** Reads a single `MethodologyVersion` that is related to this `Project`. */
-  methodologyVersionByMethodologyVersionIdAndMethodologyVersionCreatedAt?: Maybe<MethodologyVersion>;
   /** Reads a single `User` that is related to this `Project`. */
   userByCreatorId?: Maybe<User>;
   /** Reads and enables pagination through a set of `CreditVintage`. */
@@ -8814,7 +9092,11 @@ export type Project = Node & {
   /** Reads and enables pagination through a set of `CreditClass`. */
   creditClassesByCreditVintageProjectIdAndCreditClassId: ProjectCreditClassesByCreditVintageProjectIdAndCreditClassIdManyToManyConnection;
   /** Reads and enables pagination through a set of `Wallet`. */
-  walletsByCreditVintageProjectIdAndIssuerId: ProjectWalletsByCreditVintageProjectIdAndIssuerIdManyToManyConnection;
+  walletsByCreditVintageProjectIdAndTokenizerId: ProjectWalletsByCreditVintageProjectIdAndTokenizerIdManyToManyConnection;
+  /** Reads and enables pagination through a set of `Party`. */
+  partiesByCreditVintageProjectIdAndIssuerId: ProjectPartiesByCreditVintageProjectIdAndIssuerIdManyToManyConnection;
+  /** Reads and enables pagination through a set of `Wallet`. */
+  walletsByCreditVintageProjectIdAndResellerId: ProjectWalletsByCreditVintageProjectIdAndResellerIdManyToManyConnection;
   /** Reads and enables pagination through a set of `Party`. */
   partiesByProjectBrokerProjectIdAndBrokerId: ProjectPartiesByProjectBrokerProjectIdAndBrokerIdManyToManyConnection;
   /** Reads and enables pagination through a set of `Party`. */
@@ -8892,7 +9174,29 @@ export type ProjectCreditClassesByCreditVintageProjectIdAndCreditClassIdArgs = {
 };
 
 
-export type ProjectWalletsByCreditVintageProjectIdAndIssuerIdArgs = {
+export type ProjectWalletsByCreditVintageProjectIdAndTokenizerIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<WalletsOrderBy>>;
+  condition?: Maybe<WalletCondition>;
+};
+
+
+export type ProjectPartiesByCreditVintageProjectIdAndIssuerIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<PartiesOrderBy>>;
+  condition?: Maybe<PartyCondition>;
+};
+
+
+export type ProjectWalletsByCreditVintageProjectIdAndResellerIdArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
@@ -9100,14 +9404,6 @@ export type ProjectCondition = {
   handle?: Maybe<Scalars['String']>;
   /** Checks for equality with the object’s `type` field. */
   type?: Maybe<Scalars['String']>;
-  /** Checks for equality with the object’s `creditClassVersionId` field. */
-  creditClassVersionId?: Maybe<Scalars['UUID']>;
-  /** Checks for equality with the object’s `creditClassVersionCreatedAt` field. */
-  creditClassVersionCreatedAt?: Maybe<Scalars['Datetime']>;
-  /** Checks for equality with the object’s `methodologyVersionId` field. */
-  methodologyVersionId?: Maybe<Scalars['UUID']>;
-  /** Checks for equality with the object’s `methodologyVersionCreatedAt` field. */
-  methodologyVersionCreatedAt?: Maybe<Scalars['Datetime']>;
   /** Checks for equality with the object’s `creatorId` field. */
   creatorId?: Maybe<Scalars['UUID']>;
 };
@@ -9213,11 +9509,43 @@ export type ProjectInput = {
   addressId?: Maybe<Scalars['UUID']>;
   handle?: Maybe<Scalars['String']>;
   type?: Maybe<Scalars['String']>;
-  creditClassVersionId?: Maybe<Scalars['UUID']>;
-  creditClassVersionCreatedAt?: Maybe<Scalars['Datetime']>;
-  methodologyVersionId?: Maybe<Scalars['UUID']>;
-  methodologyVersionCreatedAt?: Maybe<Scalars['Datetime']>;
   creatorId?: Maybe<Scalars['UUID']>;
+};
+
+/** A connection to a list of `Party` values, with data from `CreditVintage`. */
+export type ProjectPartiesByCreditVintageProjectIdAndIssuerIdManyToManyConnection = {
+  __typename?: 'ProjectPartiesByCreditVintageProjectIdAndIssuerIdManyToManyConnection';
+  /** A list of `Party` objects. */
+  nodes: Array<Maybe<Party>>;
+  /** A list of edges which contains the `Party`, info from the `CreditVintage`, and the cursor to aid in pagination. */
+  edges: Array<ProjectPartiesByCreditVintageProjectIdAndIssuerIdManyToManyEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `Party` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `Party` edge in the connection, with data from `CreditVintage`. */
+export type ProjectPartiesByCreditVintageProjectIdAndIssuerIdManyToManyEdge = {
+  __typename?: 'ProjectPartiesByCreditVintageProjectIdAndIssuerIdManyToManyEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `Party` at the end of the edge. */
+  node?: Maybe<Party>;
+  /** Reads and enables pagination through a set of `CreditVintage`. */
+  creditVintagesByIssuerId: CreditVintagesConnection;
+};
+
+
+/** A `Party` edge in the connection, with data from `CreditVintage`. */
+export type ProjectPartiesByCreditVintageProjectIdAndIssuerIdManyToManyEdgeCreditVintagesByIssuerIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<CreditVintagesOrderBy>>;
+  condition?: Maybe<CreditVintageCondition>;
 };
 
 /** A connection to a list of `Party` values, with data from `ProjectBroker`. */
@@ -9321,10 +9649,6 @@ export type ProjectPatch = {
   addressId?: Maybe<Scalars['UUID']>;
   handle?: Maybe<Scalars['String']>;
   type?: Maybe<Scalars['String']>;
-  creditClassVersionId?: Maybe<Scalars['UUID']>;
-  creditClassVersionCreatedAt?: Maybe<Scalars['Datetime']>;
-  methodologyVersionId?: Maybe<Scalars['UUID']>;
-  methodologyVersionCreatedAt?: Maybe<Scalars['Datetime']>;
   creatorId?: Maybe<Scalars['UUID']>;
 };
 
@@ -9373,12 +9697,12 @@ export type ProjectUsersByProjectBrokerProjectIdAndSignerIdManyToManyEdgeProject
 };
 
 /** A connection to a list of `Wallet` values, with data from `CreditVintage`. */
-export type ProjectWalletsByCreditVintageProjectIdAndIssuerIdManyToManyConnection = {
-  __typename?: 'ProjectWalletsByCreditVintageProjectIdAndIssuerIdManyToManyConnection';
+export type ProjectWalletsByCreditVintageProjectIdAndResellerIdManyToManyConnection = {
+  __typename?: 'ProjectWalletsByCreditVintageProjectIdAndResellerIdManyToManyConnection';
   /** A list of `Wallet` objects. */
   nodes: Array<Maybe<Wallet>>;
   /** A list of edges which contains the `Wallet`, info from the `CreditVintage`, and the cursor to aid in pagination. */
-  edges: Array<ProjectWalletsByCreditVintageProjectIdAndIssuerIdManyToManyEdge>;
+  edges: Array<ProjectWalletsByCreditVintageProjectIdAndResellerIdManyToManyEdge>;
   /** Information to aid in pagination. */
   pageInfo: PageInfo;
   /** The count of *all* `Wallet` you could get from the connection. */
@@ -9386,19 +9710,55 @@ export type ProjectWalletsByCreditVintageProjectIdAndIssuerIdManyToManyConnectio
 };
 
 /** A `Wallet` edge in the connection, with data from `CreditVintage`. */
-export type ProjectWalletsByCreditVintageProjectIdAndIssuerIdManyToManyEdge = {
-  __typename?: 'ProjectWalletsByCreditVintageProjectIdAndIssuerIdManyToManyEdge';
+export type ProjectWalletsByCreditVintageProjectIdAndResellerIdManyToManyEdge = {
+  __typename?: 'ProjectWalletsByCreditVintageProjectIdAndResellerIdManyToManyEdge';
   /** A cursor for use in pagination. */
   cursor?: Maybe<Scalars['Cursor']>;
   /** The `Wallet` at the end of the edge. */
   node?: Maybe<Wallet>;
   /** Reads and enables pagination through a set of `CreditVintage`. */
-  creditVintagesByIssuerId: CreditVintagesConnection;
+  creditVintagesByResellerId: CreditVintagesConnection;
 };
 
 
 /** A `Wallet` edge in the connection, with data from `CreditVintage`. */
-export type ProjectWalletsByCreditVintageProjectIdAndIssuerIdManyToManyEdgeCreditVintagesByIssuerIdArgs = {
+export type ProjectWalletsByCreditVintageProjectIdAndResellerIdManyToManyEdgeCreditVintagesByResellerIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<CreditVintagesOrderBy>>;
+  condition?: Maybe<CreditVintageCondition>;
+};
+
+/** A connection to a list of `Wallet` values, with data from `CreditVintage`. */
+export type ProjectWalletsByCreditVintageProjectIdAndTokenizerIdManyToManyConnection = {
+  __typename?: 'ProjectWalletsByCreditVintageProjectIdAndTokenizerIdManyToManyConnection';
+  /** A list of `Wallet` objects. */
+  nodes: Array<Maybe<Wallet>>;
+  /** A list of edges which contains the `Wallet`, info from the `CreditVintage`, and the cursor to aid in pagination. */
+  edges: Array<ProjectWalletsByCreditVintageProjectIdAndTokenizerIdManyToManyEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `Wallet` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `Wallet` edge in the connection, with data from `CreditVintage`. */
+export type ProjectWalletsByCreditVintageProjectIdAndTokenizerIdManyToManyEdge = {
+  __typename?: 'ProjectWalletsByCreditVintageProjectIdAndTokenizerIdManyToManyEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `Wallet` at the end of the edge. */
+  node?: Maybe<Wallet>;
+  /** Reads and enables pagination through a set of `CreditVintage`. */
+  creditVintagesByTokenizerId: CreditVintagesConnection;
+};
+
+
+/** A `Wallet` edge in the connection, with data from `CreditVintage`. */
+export type ProjectWalletsByCreditVintageProjectIdAndTokenizerIdManyToManyEdgeCreditVintagesByTokenizerIdArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
@@ -9481,14 +9841,6 @@ export enum ProjectsOrderBy {
   HandleDesc = 'HANDLE_DESC',
   TypeAsc = 'TYPE_ASC',
   TypeDesc = 'TYPE_DESC',
-  CreditClassVersionIdAsc = 'CREDIT_CLASS_VERSION_ID_ASC',
-  CreditClassVersionIdDesc = 'CREDIT_CLASS_VERSION_ID_DESC',
-  CreditClassVersionCreatedAtAsc = 'CREDIT_CLASS_VERSION_CREATED_AT_ASC',
-  CreditClassVersionCreatedAtDesc = 'CREDIT_CLASS_VERSION_CREATED_AT_DESC',
-  MethodologyVersionIdAsc = 'METHODOLOGY_VERSION_ID_ASC',
-  MethodologyVersionIdDesc = 'METHODOLOGY_VERSION_ID_DESC',
-  MethodologyVersionCreatedAtAsc = 'METHODOLOGY_VERSION_CREATED_AT_ASC',
-  MethodologyVersionCreatedAtDesc = 'METHODOLOGY_VERSION_CREATED_AT_DESC',
   CreatorIdAsc = 'CREATOR_ID_ASC',
   CreatorIdDesc = 'CREATOR_ID_DESC',
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
@@ -9896,8 +10248,6 @@ export type Query = Node & {
   allRetirements?: Maybe<RetirementsConnection>;
   /** Reads and enables pagination through a set of `ShaclGraph`. */
   allShaclGraphs?: Maybe<ShaclGraphsConnection>;
-  /** Reads and enables pagination through a set of `Test1`. */
-  allTest1S?: Maybe<Test1SConnection>;
   /** Reads and enables pagination through a set of `Transaction`. */
   allTransactions?: Maybe<TransactionsConnection>;
   /** Reads and enables pagination through a set of `User`. */
@@ -9933,7 +10283,6 @@ export type Query = Node & {
   registryById?: Maybe<Registry>;
   retirementById?: Maybe<Retirement>;
   shaclGraphByUri?: Maybe<ShaclGraph>;
-  test1ByHandle?: Maybe<Test1>;
   transactionById?: Maybe<Transaction>;
   userById?: Maybe<User>;
   userByEmail?: Maybe<User>;
@@ -9986,8 +10335,6 @@ export type Query = Node & {
   retirement?: Maybe<Retirement>;
   /** Reads a single `ShaclGraph` using its globally unique `ID`. */
   shaclGraph?: Maybe<ShaclGraph>;
-  /** Reads a single `Test1` using its globally unique `ID`. */
-  test1?: Maybe<Test1>;
   /** Reads a single `Transaction` using its globally unique `ID`. */
   transaction?: Maybe<Transaction>;
   /** Reads a single `User` using its globally unique `ID`. */
@@ -10268,18 +10615,6 @@ export type QueryAllShaclGraphsArgs = {
 
 
 /** The root query type which gives access points into the data universe. */
-export type QueryAllTest1SArgs = {
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['Cursor']>;
-  after?: Maybe<Scalars['Cursor']>;
-  orderBy?: Maybe<Array<Test1SOrderBy>>;
-  condition?: Maybe<Test1Condition>;
-};
-
-
-/** The root query type which gives access points into the data universe. */
 export type QueryAllTransactionsArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
@@ -10495,12 +10830,6 @@ export type QueryShaclGraphByUriArgs = {
 
 
 /** The root query type which gives access points into the data universe. */
-export type QueryTest1ByHandleArgs = {
-  handle: Scalars['String'];
-};
-
-
-/** The root query type which gives access points into the data universe. */
 export type QueryTransactionByIdArgs = {
   id: Scalars['UUID'];
 };
@@ -10671,12 +11000,6 @@ export type QueryRetirementArgs = {
 
 /** The root query type which gives access points into the data universe. */
 export type QueryShaclGraphArgs = {
-  nodeId: Scalars['ID'];
-};
-
-
-/** The root query type which gives access points into the data universe. */
-export type QueryTest1Args = {
   nodeId: Scalars['ID'];
 };
 
@@ -11263,6 +11586,7 @@ export type Retirement = Node & {
   addressId: Scalars['UUID'];
   creditVintageId: Scalars['UUID'];
   units: Scalars['BigFloat'];
+  metadata?: Maybe<Scalars['JSON']>;
   /** Reads a single `Wallet` that is related to this `Retirement`. */
   walletByWalletId?: Maybe<Wallet>;
   /** Reads a single `Address` that is related to this `Retirement`. */
@@ -11287,6 +11611,8 @@ export type RetirementCondition = {
   creditVintageId?: Maybe<Scalars['UUID']>;
   /** Checks for equality with the object’s `units` field. */
   units?: Maybe<Scalars['BigFloat']>;
+  /** Checks for equality with the object’s `metadata` field. */
+  metadata?: Maybe<Scalars['JSON']>;
 };
 
 /** An input for mutations affecting `Retirement` */
@@ -11298,6 +11624,7 @@ export type RetirementInput = {
   addressId: Scalars['UUID'];
   creditVintageId: Scalars['UUID'];
   units: Scalars['BigFloat'];
+  metadata?: Maybe<Scalars['JSON']>;
 };
 
 /** Represents an update to a `Retirement`. Fields that are set will be updated. */
@@ -11309,6 +11636,7 @@ export type RetirementPatch = {
   addressId?: Maybe<Scalars['UUID']>;
   creditVintageId?: Maybe<Scalars['UUID']>;
   units?: Maybe<Scalars['BigFloat']>;
+  metadata?: Maybe<Scalars['JSON']>;
 };
 
 /** A connection to a list of `Retirement` values. */
@@ -11350,6 +11678,8 @@ export enum RetirementsOrderBy {
   CreditVintageIdDesc = 'CREDIT_VINTAGE_ID_DESC',
   UnitsAsc = 'UNITS_ASC',
   UnitsDesc = 'UNITS_DESC',
+  MetadataAsc = 'METADATA_ASC',
+  MetadataDesc = 'METADATA_DESC',
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
@@ -11449,67 +11779,6 @@ export enum ShaclGraphsOrderBy {
   UpdatedAtDesc = 'UPDATED_AT_DESC',
   GraphAsc = 'GRAPH_ASC',
   GraphDesc = 'GRAPH_DESC',
-  PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
-  PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
-}
-
-export type Test1 = Node & {
-  __typename?: 'Test1';
-  /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
-  nodeId: Scalars['ID'];
-  handle: Scalars['String'];
-  metadata?: Maybe<Scalars['JSON']>;
-};
-
-/** A condition to be used against `Test1` object types. All fields are tested for equality and combined with a logical ‘and.’ */
-export type Test1Condition = {
-  /** Checks for equality with the object’s `handle` field. */
-  handle?: Maybe<Scalars['String']>;
-  /** Checks for equality with the object’s `metadata` field. */
-  metadata?: Maybe<Scalars['JSON']>;
-};
-
-/** An input for mutations affecting `Test1` */
-export type Test1Input = {
-  handle: Scalars['String'];
-  metadata?: Maybe<Scalars['JSON']>;
-};
-
-/** Represents an update to a `Test1`. Fields that are set will be updated. */
-export type Test1Patch = {
-  handle?: Maybe<Scalars['String']>;
-  metadata?: Maybe<Scalars['JSON']>;
-};
-
-/** A connection to a list of `Test1` values. */
-export type Test1SConnection = {
-  __typename?: 'Test1SConnection';
-  /** A list of `Test1` objects. */
-  nodes: Array<Maybe<Test1>>;
-  /** A list of edges which contains the `Test1` and cursor to aid in pagination. */
-  edges: Array<Test1SEdge>;
-  /** Information to aid in pagination. */
-  pageInfo: PageInfo;
-  /** The count of *all* `Test1` you could get from the connection. */
-  totalCount: Scalars['Int'];
-};
-
-/** A `Test1` edge in the connection. */
-export type Test1SEdge = {
-  __typename?: 'Test1SEdge';
-  /** A cursor for use in pagination. */
-  cursor?: Maybe<Scalars['Cursor']>;
-  /** The `Test1` at the end of the edge. */
-  node?: Maybe<Test1>;
-};
-
-/** Methods to use when ordering `Test1`. */
-export enum Test1SOrderBy {
-  Natural = 'NATURAL',
-  HandleAsc = 'HANDLE_ASC',
-  HandleDesc = 'HANDLE_DESC',
-  MetadataAsc = 'METADATA_ASC',
-  MetadataDesc = 'METADATA_DESC',
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
@@ -11993,9 +12262,17 @@ export type UpdateCreditVintagePayload = {
   /** Reads a single `Project` that is related to this `CreditVintage`. */
   projectByProjectId?: Maybe<Project>;
   /** Reads a single `Wallet` that is related to this `CreditVintage`. */
-  walletByIssuerId?: Maybe<Wallet>;
+  walletByTokenizerId?: Maybe<Wallet>;
   /** Reads a single `Event` that is related to this `CreditVintage`. */
   eventByEventId?: Maybe<Event>;
+  /** Reads a single `MethodologyVersion` that is related to this `CreditVintage`. */
+  methodologyVersionByMethodologyVersionIdAndMethodologyVersionCreatedAt?: Maybe<MethodologyVersion>;
+  /** Reads a single `CreditClassVersion` that is related to this `CreditVintage`. */
+  creditClassVersionByCreditClassVersionIdAndCreditClassVersionCreatedAt?: Maybe<CreditClassVersion>;
+  /** Reads a single `Party` that is related to this `CreditVintage`. */
+  partyByIssuerId?: Maybe<Party>;
+  /** Reads a single `Wallet` that is related to this `CreditVintage`. */
+  walletByResellerId?: Maybe<Wallet>;
   /** An edge for our `CreditVintage`. May be used by Relay 1. */
   creditVintageEdge?: Maybe<CreditVintagesEdge>;
 };
@@ -12495,10 +12772,6 @@ export type UpdateProjectPayload = {
   registryByRegistryId?: Maybe<Registry>;
   /** Reads a single `Address` that is related to this `Project`. */
   addressByAddressId?: Maybe<Address>;
-  /** Reads a single `CreditClassVersion` that is related to this `Project`. */
-  creditClassVersionByCreditClassVersionIdAndCreditClassVersionCreatedAt?: Maybe<CreditClassVersion>;
-  /** Reads a single `MethodologyVersion` that is related to this `Project`. */
-  methodologyVersionByMethodologyVersionIdAndMethodologyVersionCreatedAt?: Maybe<MethodologyVersion>;
   /** Reads a single `User` that is related to this `Project`. */
   userByCreatorId?: Maybe<User>;
   /** An edge for our `Project`. May be used by Relay 1. */
@@ -12677,44 +12950,6 @@ export type UpdateShaclGraphPayload = {
 /** The output of our update `ShaclGraph` mutation. */
 export type UpdateShaclGraphPayloadShaclGraphEdgeArgs = {
   orderBy?: Maybe<Array<ShaclGraphsOrderBy>>;
-};
-
-/** All input for the `updateTest1ByHandle` mutation. */
-export type UpdateTest1ByHandleInput = {
-  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** An object where the defined keys will be set on the `Test1` being updated. */
-  test1Patch: Test1Patch;
-  handle: Scalars['String'];
-};
-
-/** All input for the `updateTest1` mutation. */
-export type UpdateTest1Input = {
-  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** The globally unique `ID` which will identify a single `Test1` to be updated. */
-  nodeId: Scalars['ID'];
-  /** An object where the defined keys will be set on the `Test1` being updated. */
-  test1Patch: Test1Patch;
-};
-
-/** The output of our update `Test1` mutation. */
-export type UpdateTest1Payload = {
-  __typename?: 'UpdateTest1Payload';
-  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** The `Test1` that was updated by this mutation. */
-  test1?: Maybe<Test1>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query?: Maybe<Query>;
-  /** An edge for our `Test1`. May be used by Relay 1. */
-  test1Edge?: Maybe<Test1SEdge>;
-};
-
-
-/** The output of our update `Test1` mutation. */
-export type UpdateTest1PayloadTest1EdgeArgs = {
-  orderBy?: Maybe<Array<Test1SOrderBy>>;
 };
 
 /** All input for the `updateTransactionById` mutation. */
@@ -13756,7 +13991,9 @@ export type Wallet = Node & {
   /** Reads and enables pagination through a set of `CreditClassIssuer`. */
   creditClassIssuersByIssuerId: CreditClassIssuersConnection;
   /** Reads and enables pagination through a set of `CreditVintage`. */
-  creditVintagesByIssuerId: CreditVintagesConnection;
+  creditVintagesByTokenizerId: CreditVintagesConnection;
+  /** Reads and enables pagination through a set of `CreditVintage`. */
+  creditVintagesByResellerId: CreditVintagesConnection;
   /** Reads and enables pagination through a set of `Transaction`. */
   transactionsByFromWalletId: TransactionsConnection;
   /** Reads and enables pagination through a set of `Transaction`. */
@@ -13772,9 +14009,21 @@ export type Wallet = Node & {
   /** Reads and enables pagination through a set of `CreditClass`. */
   creditClassesByCreditClassIssuerIssuerIdAndCreditClassId: WalletCreditClassesByCreditClassIssuerIssuerIdAndCreditClassIdManyToManyConnection;
   /** Reads and enables pagination through a set of `CreditClass`. */
-  creditClassesByCreditVintageIssuerIdAndCreditClassId: WalletCreditClassesByCreditVintageIssuerIdAndCreditClassIdManyToManyConnection;
+  creditClassesByCreditVintageTokenizerIdAndCreditClassId: WalletCreditClassesByCreditVintageTokenizerIdAndCreditClassIdManyToManyConnection;
   /** Reads and enables pagination through a set of `Project`. */
-  projectsByCreditVintageIssuerIdAndProjectId: WalletProjectsByCreditVintageIssuerIdAndProjectIdManyToManyConnection;
+  projectsByCreditVintageTokenizerIdAndProjectId: WalletProjectsByCreditVintageTokenizerIdAndProjectIdManyToManyConnection;
+  /** Reads and enables pagination through a set of `Party`. */
+  partiesByCreditVintageTokenizerIdAndIssuerId: WalletPartiesByCreditVintageTokenizerIdAndIssuerIdManyToManyConnection;
+  /** Reads and enables pagination through a set of `Wallet`. */
+  walletsByCreditVintageTokenizerIdAndResellerId: WalletWalletsByCreditVintageTokenizerIdAndResellerIdManyToManyConnection;
+  /** Reads and enables pagination through a set of `CreditClass`. */
+  creditClassesByCreditVintageResellerIdAndCreditClassId: WalletCreditClassesByCreditVintageResellerIdAndCreditClassIdManyToManyConnection;
+  /** Reads and enables pagination through a set of `Project`. */
+  projectsByCreditVintageResellerIdAndProjectId: WalletProjectsByCreditVintageResellerIdAndProjectIdManyToManyConnection;
+  /** Reads and enables pagination through a set of `Wallet`. */
+  walletsByCreditVintageResellerIdAndTokenizerId: WalletWalletsByCreditVintageResellerIdAndTokenizerIdManyToManyConnection;
+  /** Reads and enables pagination through a set of `Party`. */
+  partiesByCreditVintageResellerIdAndIssuerId: WalletPartiesByCreditVintageResellerIdAndIssuerIdManyToManyConnection;
   /** Reads and enables pagination through a set of `Party`. */
   partiesByTransactionFromWalletIdAndBrokerId: WalletPartiesByTransactionFromWalletIdAndBrokerIdManyToManyConnection;
   /** Reads and enables pagination through a set of `Wallet`. */
@@ -13839,7 +14088,18 @@ export type WalletCreditClassIssuersByIssuerIdArgs = {
 };
 
 
-export type WalletCreditVintagesByIssuerIdArgs = {
+export type WalletCreditVintagesByTokenizerIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<CreditVintagesOrderBy>>;
+  condition?: Maybe<CreditVintageCondition>;
+};
+
+
+export type WalletCreditVintagesByResellerIdArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
@@ -13927,7 +14187,7 @@ export type WalletCreditClassesByCreditClassIssuerIssuerIdAndCreditClassIdArgs =
 };
 
 
-export type WalletCreditClassesByCreditVintageIssuerIdAndCreditClassIdArgs = {
+export type WalletCreditClassesByCreditVintageTokenizerIdAndCreditClassIdArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
@@ -13938,7 +14198,7 @@ export type WalletCreditClassesByCreditVintageIssuerIdAndCreditClassIdArgs = {
 };
 
 
-export type WalletProjectsByCreditVintageIssuerIdAndProjectIdArgs = {
+export type WalletProjectsByCreditVintageTokenizerIdAndProjectIdArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
@@ -13946,6 +14206,72 @@ export type WalletProjectsByCreditVintageIssuerIdAndProjectIdArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+};
+
+
+export type WalletPartiesByCreditVintageTokenizerIdAndIssuerIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<PartiesOrderBy>>;
+  condition?: Maybe<PartyCondition>;
+};
+
+
+export type WalletWalletsByCreditVintageTokenizerIdAndResellerIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<WalletsOrderBy>>;
+  condition?: Maybe<WalletCondition>;
+};
+
+
+export type WalletCreditClassesByCreditVintageResellerIdAndCreditClassIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<CreditClassesOrderBy>>;
+  condition?: Maybe<CreditClassCondition>;
+};
+
+
+export type WalletProjectsByCreditVintageResellerIdAndProjectIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<ProjectsOrderBy>>;
+  condition?: Maybe<ProjectCondition>;
+};
+
+
+export type WalletWalletsByCreditVintageResellerIdAndTokenizerIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<WalletsOrderBy>>;
+  condition?: Maybe<WalletCondition>;
+};
+
+
+export type WalletPartiesByCreditVintageResellerIdAndIssuerIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<PartiesOrderBy>>;
+  condition?: Maybe<PartyCondition>;
 };
 
 
@@ -14259,12 +14585,12 @@ export type WalletCreditClassesByCreditClassIssuerIssuerIdAndCreditClassIdManyTo
 };
 
 /** A connection to a list of `CreditClass` values, with data from `CreditVintage`. */
-export type WalletCreditClassesByCreditVintageIssuerIdAndCreditClassIdManyToManyConnection = {
-  __typename?: 'WalletCreditClassesByCreditVintageIssuerIdAndCreditClassIdManyToManyConnection';
+export type WalletCreditClassesByCreditVintageResellerIdAndCreditClassIdManyToManyConnection = {
+  __typename?: 'WalletCreditClassesByCreditVintageResellerIdAndCreditClassIdManyToManyConnection';
   /** A list of `CreditClass` objects. */
   nodes: Array<Maybe<CreditClass>>;
   /** A list of edges which contains the `CreditClass`, info from the `CreditVintage`, and the cursor to aid in pagination. */
-  edges: Array<WalletCreditClassesByCreditVintageIssuerIdAndCreditClassIdManyToManyEdge>;
+  edges: Array<WalletCreditClassesByCreditVintageResellerIdAndCreditClassIdManyToManyEdge>;
   /** Information to aid in pagination. */
   pageInfo: PageInfo;
   /** The count of *all* `CreditClass` you could get from the connection. */
@@ -14272,8 +14598,8 @@ export type WalletCreditClassesByCreditVintageIssuerIdAndCreditClassIdManyToMany
 };
 
 /** A `CreditClass` edge in the connection, with data from `CreditVintage`. */
-export type WalletCreditClassesByCreditVintageIssuerIdAndCreditClassIdManyToManyEdge = {
-  __typename?: 'WalletCreditClassesByCreditVintageIssuerIdAndCreditClassIdManyToManyEdge';
+export type WalletCreditClassesByCreditVintageResellerIdAndCreditClassIdManyToManyEdge = {
+  __typename?: 'WalletCreditClassesByCreditVintageResellerIdAndCreditClassIdManyToManyEdge';
   /** A cursor for use in pagination. */
   cursor?: Maybe<Scalars['Cursor']>;
   /** The `CreditClass` at the end of the edge. */
@@ -14284,7 +14610,43 @@ export type WalletCreditClassesByCreditVintageIssuerIdAndCreditClassIdManyToMany
 
 
 /** A `CreditClass` edge in the connection, with data from `CreditVintage`. */
-export type WalletCreditClassesByCreditVintageIssuerIdAndCreditClassIdManyToManyEdgeCreditVintagesByCreditClassIdArgs = {
+export type WalletCreditClassesByCreditVintageResellerIdAndCreditClassIdManyToManyEdgeCreditVintagesByCreditClassIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<CreditVintagesOrderBy>>;
+  condition?: Maybe<CreditVintageCondition>;
+};
+
+/** A connection to a list of `CreditClass` values, with data from `CreditVintage`. */
+export type WalletCreditClassesByCreditVintageTokenizerIdAndCreditClassIdManyToManyConnection = {
+  __typename?: 'WalletCreditClassesByCreditVintageTokenizerIdAndCreditClassIdManyToManyConnection';
+  /** A list of `CreditClass` objects. */
+  nodes: Array<Maybe<CreditClass>>;
+  /** A list of edges which contains the `CreditClass`, info from the `CreditVintage`, and the cursor to aid in pagination. */
+  edges: Array<WalletCreditClassesByCreditVintageTokenizerIdAndCreditClassIdManyToManyEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `CreditClass` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `CreditClass` edge in the connection, with data from `CreditVintage`. */
+export type WalletCreditClassesByCreditVintageTokenizerIdAndCreditClassIdManyToManyEdge = {
+  __typename?: 'WalletCreditClassesByCreditVintageTokenizerIdAndCreditClassIdManyToManyEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `CreditClass` at the end of the edge. */
+  node?: Maybe<CreditClass>;
+  /** Reads and enables pagination through a set of `CreditVintage`. */
+  creditVintagesByCreditClassId: CreditVintagesConnection;
+};
+
+
+/** A `CreditClass` edge in the connection, with data from `CreditVintage`. */
+export type WalletCreditClassesByCreditVintageTokenizerIdAndCreditClassIdManyToManyEdgeCreditVintagesByCreditClassIdArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
@@ -14473,6 +14835,78 @@ export type WalletInput = {
   addr: Scalars['String'];
 };
 
+/** A connection to a list of `Party` values, with data from `CreditVintage`. */
+export type WalletPartiesByCreditVintageResellerIdAndIssuerIdManyToManyConnection = {
+  __typename?: 'WalletPartiesByCreditVintageResellerIdAndIssuerIdManyToManyConnection';
+  /** A list of `Party` objects. */
+  nodes: Array<Maybe<Party>>;
+  /** A list of edges which contains the `Party`, info from the `CreditVintage`, and the cursor to aid in pagination. */
+  edges: Array<WalletPartiesByCreditVintageResellerIdAndIssuerIdManyToManyEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `Party` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `Party` edge in the connection, with data from `CreditVintage`. */
+export type WalletPartiesByCreditVintageResellerIdAndIssuerIdManyToManyEdge = {
+  __typename?: 'WalletPartiesByCreditVintageResellerIdAndIssuerIdManyToManyEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `Party` at the end of the edge. */
+  node?: Maybe<Party>;
+  /** Reads and enables pagination through a set of `CreditVintage`. */
+  creditVintagesByIssuerId: CreditVintagesConnection;
+};
+
+
+/** A `Party` edge in the connection, with data from `CreditVintage`. */
+export type WalletPartiesByCreditVintageResellerIdAndIssuerIdManyToManyEdgeCreditVintagesByIssuerIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<CreditVintagesOrderBy>>;
+  condition?: Maybe<CreditVintageCondition>;
+};
+
+/** A connection to a list of `Party` values, with data from `CreditVintage`. */
+export type WalletPartiesByCreditVintageTokenizerIdAndIssuerIdManyToManyConnection = {
+  __typename?: 'WalletPartiesByCreditVintageTokenizerIdAndIssuerIdManyToManyConnection';
+  /** A list of `Party` objects. */
+  nodes: Array<Maybe<Party>>;
+  /** A list of edges which contains the `Party`, info from the `CreditVintage`, and the cursor to aid in pagination. */
+  edges: Array<WalletPartiesByCreditVintageTokenizerIdAndIssuerIdManyToManyEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `Party` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `Party` edge in the connection, with data from `CreditVintage`. */
+export type WalletPartiesByCreditVintageTokenizerIdAndIssuerIdManyToManyEdge = {
+  __typename?: 'WalletPartiesByCreditVintageTokenizerIdAndIssuerIdManyToManyEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `Party` at the end of the edge. */
+  node?: Maybe<Party>;
+  /** Reads and enables pagination through a set of `CreditVintage`. */
+  creditVintagesByIssuerId: CreditVintagesConnection;
+};
+
+
+/** A `Party` edge in the connection, with data from `CreditVintage`. */
+export type WalletPartiesByCreditVintageTokenizerIdAndIssuerIdManyToManyEdgeCreditVintagesByIssuerIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<CreditVintagesOrderBy>>;
+  condition?: Maybe<CreditVintageCondition>;
+};
+
 /** A connection to a list of `Party` values, with data from `Purchase`. */
 export type WalletPartiesByPurchaseBuyerWalletIdAndPartyIdManyToManyConnection = {
   __typename?: 'WalletPartiesByPurchaseBuyerWalletIdAndPartyIdManyToManyConnection';
@@ -14590,12 +15024,12 @@ export type WalletPatch = {
 };
 
 /** A connection to a list of `Project` values, with data from `CreditVintage`. */
-export type WalletProjectsByCreditVintageIssuerIdAndProjectIdManyToManyConnection = {
-  __typename?: 'WalletProjectsByCreditVintageIssuerIdAndProjectIdManyToManyConnection';
+export type WalletProjectsByCreditVintageResellerIdAndProjectIdManyToManyConnection = {
+  __typename?: 'WalletProjectsByCreditVintageResellerIdAndProjectIdManyToManyConnection';
   /** A list of `Project` objects. */
   nodes: Array<Maybe<Project>>;
   /** A list of edges which contains the `Project`, info from the `CreditVintage`, and the cursor to aid in pagination. */
-  edges: Array<WalletProjectsByCreditVintageIssuerIdAndProjectIdManyToManyEdge>;
+  edges: Array<WalletProjectsByCreditVintageResellerIdAndProjectIdManyToManyEdge>;
   /** Information to aid in pagination. */
   pageInfo: PageInfo;
   /** The count of *all* `Project` you could get from the connection. */
@@ -14603,8 +15037,8 @@ export type WalletProjectsByCreditVintageIssuerIdAndProjectIdManyToManyConnectio
 };
 
 /** A `Project` edge in the connection, with data from `CreditVintage`. */
-export type WalletProjectsByCreditVintageIssuerIdAndProjectIdManyToManyEdge = {
-  __typename?: 'WalletProjectsByCreditVintageIssuerIdAndProjectIdManyToManyEdge';
+export type WalletProjectsByCreditVintageResellerIdAndProjectIdManyToManyEdge = {
+  __typename?: 'WalletProjectsByCreditVintageResellerIdAndProjectIdManyToManyEdge';
   /** A cursor for use in pagination. */
   cursor?: Maybe<Scalars['Cursor']>;
   /** The `Project` at the end of the edge. */
@@ -14615,7 +15049,43 @@ export type WalletProjectsByCreditVintageIssuerIdAndProjectIdManyToManyEdge = {
 
 
 /** A `Project` edge in the connection, with data from `CreditVintage`. */
-export type WalletProjectsByCreditVintageIssuerIdAndProjectIdManyToManyEdgeCreditVintagesByProjectIdArgs = {
+export type WalletProjectsByCreditVintageResellerIdAndProjectIdManyToManyEdgeCreditVintagesByProjectIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<CreditVintagesOrderBy>>;
+  condition?: Maybe<CreditVintageCondition>;
+};
+
+/** A connection to a list of `Project` values, with data from `CreditVintage`. */
+export type WalletProjectsByCreditVintageTokenizerIdAndProjectIdManyToManyConnection = {
+  __typename?: 'WalletProjectsByCreditVintageTokenizerIdAndProjectIdManyToManyConnection';
+  /** A list of `Project` objects. */
+  nodes: Array<Maybe<Project>>;
+  /** A list of edges which contains the `Project`, info from the `CreditVintage`, and the cursor to aid in pagination. */
+  edges: Array<WalletProjectsByCreditVintageTokenizerIdAndProjectIdManyToManyEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `Project` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `Project` edge in the connection, with data from `CreditVintage`. */
+export type WalletProjectsByCreditVintageTokenizerIdAndProjectIdManyToManyEdge = {
+  __typename?: 'WalletProjectsByCreditVintageTokenizerIdAndProjectIdManyToManyEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `Project` at the end of the edge. */
+  node?: Maybe<Project>;
+  /** Reads and enables pagination through a set of `CreditVintage`. */
+  creditVintagesByProjectId: CreditVintagesConnection;
+};
+
+
+/** A `Project` edge in the connection, with data from `CreditVintage`. */
+export type WalletProjectsByCreditVintageTokenizerIdAndProjectIdManyToManyEdgeCreditVintagesByProjectIdArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
@@ -14731,6 +15201,78 @@ export type WalletUsersByPurchaseBuyerWalletIdAndUserIdManyToManyEdgePurchasesBy
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<PurchasesOrderBy>>;
   condition?: Maybe<PurchaseCondition>;
+};
+
+/** A connection to a list of `Wallet` values, with data from `CreditVintage`. */
+export type WalletWalletsByCreditVintageResellerIdAndTokenizerIdManyToManyConnection = {
+  __typename?: 'WalletWalletsByCreditVintageResellerIdAndTokenizerIdManyToManyConnection';
+  /** A list of `Wallet` objects. */
+  nodes: Array<Maybe<Wallet>>;
+  /** A list of edges which contains the `Wallet`, info from the `CreditVintage`, and the cursor to aid in pagination. */
+  edges: Array<WalletWalletsByCreditVintageResellerIdAndTokenizerIdManyToManyEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `Wallet` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `Wallet` edge in the connection, with data from `CreditVintage`. */
+export type WalletWalletsByCreditVintageResellerIdAndTokenizerIdManyToManyEdge = {
+  __typename?: 'WalletWalletsByCreditVintageResellerIdAndTokenizerIdManyToManyEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `Wallet` at the end of the edge. */
+  node?: Maybe<Wallet>;
+  /** Reads and enables pagination through a set of `CreditVintage`. */
+  creditVintagesByTokenizerId: CreditVintagesConnection;
+};
+
+
+/** A `Wallet` edge in the connection, with data from `CreditVintage`. */
+export type WalletWalletsByCreditVintageResellerIdAndTokenizerIdManyToManyEdgeCreditVintagesByTokenizerIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<CreditVintagesOrderBy>>;
+  condition?: Maybe<CreditVintageCondition>;
+};
+
+/** A connection to a list of `Wallet` values, with data from `CreditVintage`. */
+export type WalletWalletsByCreditVintageTokenizerIdAndResellerIdManyToManyConnection = {
+  __typename?: 'WalletWalletsByCreditVintageTokenizerIdAndResellerIdManyToManyConnection';
+  /** A list of `Wallet` objects. */
+  nodes: Array<Maybe<Wallet>>;
+  /** A list of edges which contains the `Wallet`, info from the `CreditVintage`, and the cursor to aid in pagination. */
+  edges: Array<WalletWalletsByCreditVintageTokenizerIdAndResellerIdManyToManyEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `Wallet` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `Wallet` edge in the connection, with data from `CreditVintage`. */
+export type WalletWalletsByCreditVintageTokenizerIdAndResellerIdManyToManyEdge = {
+  __typename?: 'WalletWalletsByCreditVintageTokenizerIdAndResellerIdManyToManyEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `Wallet` at the end of the edge. */
+  node?: Maybe<Wallet>;
+  /** Reads and enables pagination through a set of `CreditVintage`. */
+  creditVintagesByResellerId: CreditVintagesConnection;
+};
+
+
+/** A `Wallet` edge in the connection, with data from `CreditVintage`. */
+export type WalletWalletsByCreditVintageTokenizerIdAndResellerIdManyToManyEdgeCreditVintagesByResellerIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<CreditVintagesOrderBy>>;
+  condition?: Maybe<CreditVintageCondition>;
 };
 
 /** A connection to a list of `Wallet` values, with data from `Transaction`. */
@@ -15140,7 +15682,21 @@ export type ProjectByHandleQuery = (
         & { creditVintageByEventId?: Maybe<(
           { __typename?: 'CreditVintage' }
           & Pick<CreditVintage, 'id' | 'createdAt' | 'startDate' | 'endDate' | 'initialDistribution' | 'units' | 'certificateLink' | 'txHash'>
-          & { walletByIssuerId?: Maybe<(
+          & { creditClassVersionByCreditClassVersionIdAndCreditClassVersionCreatedAt?: Maybe<(
+            { __typename?: 'CreditClassVersion' }
+            & Pick<CreditClassVersion, 'name' | 'version' | 'metadata'>
+            & { creditClassById?: Maybe<(
+              { __typename?: 'CreditClass' }
+              & Pick<CreditClass, 'handle'>
+            )> }
+          )>, methodologyVersionByMethodologyVersionIdAndMethodologyVersionCreatedAt?: Maybe<(
+            { __typename?: 'MethodologyVersion' }
+            & Pick<MethodologyVersion, 'name' | 'version'>
+            & { methodologyById?: Maybe<(
+              { __typename?: 'Methodology' }
+              & Pick<Methodology, 'handle'>
+            )> }
+          )>, walletByTokenizerId?: Maybe<(
             { __typename?: 'Wallet' }
             & Pick<Wallet, 'addr'>
             & { partiesByWalletId: (
@@ -15153,21 +15709,7 @@ export type ProjectByHandleQuery = (
           )> }
         )> }
       )>> }
-    ), creditClassVersionByCreditClassVersionIdAndCreditClassVersionCreatedAt?: Maybe<(
-      { __typename?: 'CreditClassVersion' }
-      & Pick<CreditClassVersion, 'name' | 'version' | 'metadata'>
-      & { creditClassById?: Maybe<(
-        { __typename?: 'CreditClass' }
-        & Pick<CreditClass, 'handle'>
-      )> }
-    )>, methodologyVersionByMethodologyVersionIdAndMethodologyVersionCreatedAt?: Maybe<(
-      { __typename?: 'MethodologyVersion' }
-      & Pick<MethodologyVersion, 'name' | 'version'>
-      & { methodologyById?: Maybe<(
-        { __typename?: 'Methodology' }
-        & Pick<Methodology, 'handle'>
-      )> }
-    )>, partyByDeveloperId?: Maybe<(
+    ), partyByDeveloperId?: Maybe<(
       { __typename?: 'Party' }
       & PartyFieldsFragment
     )>, partyByStewardId?: Maybe<(
@@ -15187,7 +15729,7 @@ export type ProjectByHandleQuery = (
           & { creditVintageByEventId?: Maybe<(
             { __typename?: 'CreditVintage' }
             & Pick<CreditVintage, 'id' | 'createdAt' | 'startDate' | 'endDate' | 'initialDistribution' | 'units' | 'certificateLink' | 'txHash'>
-            & { walletByIssuerId?: Maybe<(
+            & { walletByTokenizerId?: Maybe<(
               { __typename?: 'Wallet' }
               & Pick<Wallet, 'addr'>
               & { partiesByWalletId: (
@@ -15215,13 +15757,16 @@ export type ProjectByIdQuery = (
   & { projectById?: Maybe<(
     { __typename?: 'Project' }
     & Pick<Project, 'metadata'>
-    & { creditClassVersionByCreditClassVersionIdAndCreditClassVersionCreatedAt?: Maybe<(
-      { __typename?: 'CreditClassVersion' }
-      & Pick<CreditClassVersion, 'name' | 'version' | 'metadata'>
-      & { creditClassById?: Maybe<(
-        { __typename?: 'CreditClass' }
-        & Pick<CreditClass, 'id'>
-      )> }
+    & { creditClassByCreditClassId?: Maybe<(
+      { __typename?: 'CreditClass' }
+      & Pick<CreditClass, 'id'>
+      & { creditClassVersionsById: (
+        { __typename?: 'CreditClassVersionsConnection' }
+        & { nodes: Array<Maybe<(
+          { __typename?: 'CreditClassVersion' }
+          & Pick<CreditClassVersion, 'name' | 'version' | 'metadata'>
+        )>> }
+      ) }
     )> }
   )> }
 );
@@ -15256,7 +15801,7 @@ export type PurchasesFieldsFragment = (
   { __typename?: 'PurchasesConnection' }
   & { nodes: Array<Maybe<(
     { __typename?: 'Purchase' }
-    & Pick<Purchase, 'id' | 'createdAt'>
+    & Pick<Purchase, 'id' | 'createdAt' | 'buyerWalletId'>
     & { walletByBuyerWalletId?: Maybe<(
       { __typename?: 'Wallet' }
       & { partiesByWalletId: (
@@ -15274,8 +15819,14 @@ export type PurchasesFieldsFragment = (
       )>> }
     ), creditVintageByCreditVintageId?: Maybe<(
       { __typename?: 'CreditVintage' }
-      & Pick<CreditVintage, 'id' | 'startDate' | 'endDate'>
-      & { walletByIssuerId?: Maybe<(
+      & Pick<CreditVintage, 'id' | 'startDate' | 'endDate' | 'initialDistribution' | 'metadata'>
+      & { retirementsByCreditVintageId: (
+        { __typename?: 'RetirementsConnection' }
+        & { nodes: Array<Maybe<(
+          { __typename?: 'Retirement' }
+          & Pick<Retirement, 'walletId' | 'metadata'>
+        )>> }
+      ), walletByTokenizerId?: Maybe<(
         { __typename?: 'Wallet' }
         & { partiesByWalletId: (
           { __typename?: 'PartiesConnection' }
@@ -15289,6 +15840,7 @@ export type PurchasesFieldsFragment = (
                 { __typename?: 'OrganizationMembersConnection' }
                 & { nodes: Array<Maybe<(
                   { __typename?: 'OrganizationMember' }
+                  & Pick<OrganizationMember, 'roles'>
                   & { userByMemberId?: Maybe<(
                     { __typename?: 'User' }
                     & { partyByPartyId?: Maybe<(
@@ -15301,50 +15853,65 @@ export type PurchasesFieldsFragment = (
             )> }
           )>> }
         ) }
+      )>, partyByIssuerId?: Maybe<(
+        { __typename?: 'Party' }
+        & Pick<Party, 'name' | 'image'>
+      )>, creditClassVersionByCreditClassVersionIdAndCreditClassVersionCreatedAt?: Maybe<(
+        { __typename?: 'CreditClassVersion' }
+        & Pick<CreditClassVersion, 'name' | 'version' | 'metadata'>
+        & { creditClassById?: Maybe<(
+          { __typename?: 'CreditClass' }
+          & Pick<CreditClass, 'handle' | 'standard'>
+        )> }
+      )>, methodologyVersionByMethodologyVersionIdAndMethodologyVersionCreatedAt?: Maybe<(
+        { __typename?: 'MethodologyVersion' }
+        & Pick<MethodologyVersion, 'name' | 'version' | 'metadata'>
+        & { methodologyById?: Maybe<(
+          { __typename?: 'Methodology' }
+          & Pick<Methodology, 'handle'>
+        )> }
       )>, projectByProjectId?: Maybe<(
         { __typename?: 'Project' }
-        & Pick<Project, 'name' | 'area' | 'areaUnit' | 'image' | 'type' | 'handle'>
-        & { creditClassVersionByCreditClassVersionIdAndCreditClassVersionCreatedAt?: Maybe<(
-          { __typename?: 'CreditClassVersion' }
-          & Pick<CreditClassVersion, 'name' | 'version' | 'metadata'>
-          & { creditClassById?: Maybe<(
-            { __typename?: 'CreditClass' }
-            & Pick<CreditClass, 'handle'>
-          )> }
-        )>, methodologyVersionByMethodologyVersionIdAndMethodologyVersionCreatedAt?: Maybe<(
-          { __typename?: 'MethodologyVersion' }
-          & Pick<MethodologyVersion, 'name' | 'version'>
-          & { methodologyById?: Maybe<(
-            { __typename?: 'Methodology' }
-            & Pick<Methodology, 'handle'>
-          )> }
-        )>, addressByAddressId?: Maybe<(
+        & Pick<Project, 'name' | 'area' | 'areaUnit' | 'image' | 'type' | 'handle' | 'metadata'>
+        & { addressByAddressId?: Maybe<(
           { __typename?: 'Address' }
           & Pick<Address, 'feature'>
         )>, partyByLandOwnerId?: Maybe<(
           { __typename?: 'Party' }
-          & Pick<Party, 'id' | 'name'>
-          & { organizationByPartyId?: Maybe<(
-            { __typename?: 'Organization' }
-            & Pick<Organization, 'id'>
-            & { organizationMembersByOrganizationId: (
-              { __typename?: 'OrganizationMembersConnection' }
-              & { nodes: Array<Maybe<(
-                { __typename?: 'OrganizationMember' }
-                & { userByMemberId?: Maybe<(
-                  { __typename?: 'User' }
-                  & { partyByPartyId?: Maybe<(
-                    { __typename?: 'Party' }
-                    & Pick<Party, 'name' | 'roles'>
-                  )> }
-                )> }
-              )>> }
-            ) }
-          )> }
+          & ProjectPartyFragment
+        )>, partyByStewardId?: Maybe<(
+          { __typename?: 'Party' }
+          & ProjectPartyFragment
+        )>, partyByDeveloperId?: Maybe<(
+          { __typename?: 'Party' }
+          & ProjectPartyFragment
         )> }
       )> }
     )> }
   )>> }
+);
+
+export type ProjectPartyFragment = (
+  { __typename?: 'Party' }
+  & Pick<Party, 'id' | 'name'>
+  & { organizationByPartyId?: Maybe<(
+    { __typename?: 'Organization' }
+    & Pick<Organization, 'id'>
+    & { organizationMembersByOrganizationId: (
+      { __typename?: 'OrganizationMembersConnection' }
+      & { nodes: Array<Maybe<(
+        { __typename?: 'OrganizationMember' }
+        & Pick<OrganizationMember, 'roles'>
+        & { userByMemberId?: Maybe<(
+          { __typename?: 'User' }
+          & { partyByPartyId?: Maybe<(
+            { __typename?: 'Party' }
+            & Pick<Party, 'name' | 'roles'>
+          )> }
+        )> }
+      )>> }
+    ) }
+  )> }
 );
 
 export type ReallyCreateOrganizationMutationVariables = Exact<{
@@ -15537,11 +16104,32 @@ export const PartyFieldsFragmentDoc = gql`
   }
 }
     ${OrganizationFieldsFragmentDoc}`;
+export const ProjectPartyFragmentDoc = gql`
+    fragment projectParty on Party {
+  id
+  name
+  organizationByPartyId {
+    id
+    organizationMembersByOrganizationId(condition: {isOwner: true}) {
+      nodes {
+        roles
+        userByMemberId {
+          partyByPartyId {
+            name
+            roles
+          }
+        }
+      }
+    }
+  }
+}
+    `;
 export const PurchasesFieldsFragmentDoc = gql`
     fragment purchasesFields on PurchasesConnection {
   nodes {
     id
     createdAt
+    buyerWalletId
     walletByBuyerWalletId {
       partiesByWalletId(first: 1) {
         nodes {
@@ -15558,7 +16146,15 @@ export const PurchasesFieldsFragmentDoc = gql`
       id
       startDate
       endDate
-      walletByIssuerId {
+      initialDistribution
+      metadata
+      retirementsByCreditVintageId {
+        nodes {
+          walletId
+          metadata
+        }
+      }
+      walletByTokenizerId {
         partiesByWalletId(first: 1) {
           nodes {
             name
@@ -15566,6 +16162,7 @@ export const PurchasesFieldsFragmentDoc = gql`
               id
               organizationMembersByOrganizationId(condition: {isOwner: true}) {
                 nodes {
+                  roles
                   userByMemberId {
                     partyByPartyId {
                       name
@@ -15578,6 +16175,27 @@ export const PurchasesFieldsFragmentDoc = gql`
           }
         }
       }
+      partyByIssuerId {
+        name
+        image
+      }
+      creditClassVersionByCreditClassVersionIdAndCreditClassVersionCreatedAt {
+        name
+        version
+        metadata
+        creditClassById {
+          handle
+          standard
+        }
+      }
+      methodologyVersionByMethodologyVersionIdAndMethodologyVersionCreatedAt {
+        name
+        version
+        metadata
+        methodologyById {
+          handle
+        }
+      }
       projectByProjectId {
         name
         area
@@ -15585,46 +16203,24 @@ export const PurchasesFieldsFragmentDoc = gql`
         image
         type
         handle
-        creditClassVersionByCreditClassVersionIdAndCreditClassVersionCreatedAt {
-          name
-          version
-          metadata
-          creditClassById {
-            handle
-          }
-        }
-        methodologyVersionByMethodologyVersionIdAndMethodologyVersionCreatedAt {
-          name
-          version
-          methodologyById {
-            handle
-          }
-        }
+        metadata
         addressByAddressId {
           feature
         }
         partyByLandOwnerId {
-          id
-          name
-          organizationByPartyId {
-            id
-            organizationMembersByOrganizationId(condition: {isOwner: true}) {
-              nodes {
-                userByMemberId {
-                  partyByPartyId {
-                    name
-                    roles
-                  }
-                }
-              }
-            }
-          }
+          ...projectParty
+        }
+        partyByStewardId {
+          ...projectParty
+        }
+        partyByDeveloperId {
+          ...projectParty
         }
       }
     }
   }
 }
-    `;
+    ${ProjectPartyFragmentDoc}`;
 export const AllCreditClassesDocument = gql`
     query AllCreditClasses {
   allCreditClasses {
@@ -16101,7 +16697,22 @@ export const ProjectByHandleDocument = gql`
           units
           certificateLink
           txHash
-          walletByIssuerId {
+          creditClassVersionByCreditClassVersionIdAndCreditClassVersionCreatedAt {
+            name
+            version
+            metadata
+            creditClassById {
+              handle
+            }
+          }
+          methodologyVersionByMethodologyVersionIdAndMethodologyVersionCreatedAt {
+            name
+            version
+            methodologyById {
+              handle
+            }
+          }
+          walletByTokenizerId {
             addr
             partiesByWalletId(first: 1) {
               nodes {
@@ -16113,21 +16724,6 @@ export const ProjectByHandleDocument = gql`
       }
     }
     name
-    creditClassVersionByCreditClassVersionIdAndCreditClassVersionCreatedAt {
-      name
-      version
-      metadata
-      creditClassById {
-        handle
-      }
-    }
-    methodologyVersionByMethodologyVersionIdAndMethodologyVersionCreatedAt {
-      name
-      version
-      methodologyById {
-        handle
-      }
-    }
     partyByDeveloperId {
       ...partyFields
     }
@@ -16156,7 +16752,7 @@ export const ProjectByHandleDocument = gql`
             units
             certificateLink
             txHash
-            walletByIssuerId {
+            walletByTokenizerId {
               addr
               partiesByWalletId(first: 1) {
                 nodes {
@@ -16203,12 +16799,14 @@ export const ProjectByIdDocument = gql`
     query ProjectById($id: UUID!) {
   projectById(id: $id) {
     metadata
-    creditClassVersionByCreditClassVersionIdAndCreditClassVersionCreatedAt {
-      name
-      version
-      metadata
-      creditClassById {
-        id
+    creditClassByCreditClassId {
+      id
+      creditClassVersionsById(orderBy: CREATED_AT_DESC, first: 1) {
+        nodes {
+          name
+          version
+          metadata
+        }
       }
     }
   }

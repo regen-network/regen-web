@@ -252,7 +252,7 @@ function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JS
 
   const styles = useStyles();
   const theme = useTheme();
-  const landManagementActions: ActionGroup[] = project.landManagementActions.map(group => ({
+  const landManagementActions: ActionGroup[] | undefined = project.landManagementActions?.map(group => ({
     ...group,
     actions: group.actions.map(action => ({ ...action, imgSrc: getImgSrc(action.imgSrc) })),
   }));
@@ -373,19 +373,20 @@ function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JS
         </div>
       )}
 
-      {landManagementActions.map((actionsType, i) => (
-        <div key={i} className={clsx('project-background', i > 0 ? styles.projectActionsGroup : '')}>
-          <LandManagementActions
-            actions={actionsType.actions}
-            title={
-              project.fieldsOverride && project.fieldsOverride.landManagementActions
-                ? project.fieldsOverride.landManagementActions.title
-                : projectDefault.landManagementActions.title
-            }
-            subtitle={actionsType.title || projectDefault.landManagementActions.subtitle}
-          />
-        </div>
-      ))}
+      {landManagementActions &&
+        landManagementActions.map((actionsType, i) => (
+          <div key={i} className={clsx('project-background', i > 0 ? styles.projectActionsGroup : '')}>
+            <LandManagementActions
+              actions={actionsType.actions}
+              title={
+                project.fieldsOverride && project.fieldsOverride.landManagementActions
+                  ? project.fieldsOverride.landManagementActions.title
+                  : projectDefault.landManagementActions.title
+              }
+              subtitle={actionsType.title || projectDefault.landManagementActions.subtitle}
+            />
+          </div>
+        ))}
 
       {data?.projectByHandle?.eventsByProjectId?.nodes?.length > 0 && (
         <div

@@ -16,19 +16,21 @@ type Props = {
   action: () => void;
   img?: string;
   title: string;
+  lightBg?: boolean;
   description?: string;
   classes?: {
+    root?: string;
     main?: string;
     description?: string;
   };
 };
 
 type StyleProps = {
-  hasImg: boolean;
+  lightBg: boolean;
 };
 
 const useStyles = makeStyles<Theme, StyleProps>(theme => ({
-  root: {
+  main: {
     alignContent: 'center',
     justifyContent: 'center',
   },
@@ -52,7 +54,7 @@ const useStyles = makeStyles<Theme, StyleProps>(theme => ({
     },
   },
   description: props => ({
-    color: props.hasImg ? theme.palette.primary.main : theme.palette.text.primary,
+    color: props.lightBg ? theme.palette.text.primary : theme.palette.primary.main,
     marginTop: theme.spacing(4),
     textAlign: 'center',
     [theme.breakpoints.up('sm')]: {
@@ -70,19 +72,19 @@ const useStyles = makeStyles<Theme, StyleProps>(theme => ({
  * Hero section with optional background image, centered title, and button with action. Passing no img will render with a light background and dark text & buttons
  */
 const HeroAction: React.FC<Props> = ({ classes, ...props }) => {
-  const hasImg = !!props.img;
-  const styles = useStyles({ hasImg });
+  const lightBg = props.lightBg || !props.img;
+  const styles = useStyles({ lightBg });
 
-  const Button = hasImg ? ContainedButton : OutlinedButton;
+  const Button = lightBg ? ContainedButton : OutlinedButton;
 
   return (
-    <BackgroundImgSection img={props.img || ''} classes={{ main: styles.root }}>
+    <BackgroundImgSection img={props.img || ''} classes={{ main: styles.main, root: classes?.root }}>
       <Grid container justify="center">
         <div className={clsx(styles.main, classes?.main)}>
           <Title
             align="center"
             variant="h2"
-            color={hasImg ? 'primary' : 'textPrimary'}
+            color={lightBg ? 'textPrimary' : 'primary'}
             className={styles.title}
           >
             {ReactHtmlParser(props.title)}

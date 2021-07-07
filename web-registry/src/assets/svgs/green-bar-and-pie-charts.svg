@@ -1,0 +1,27 @@
+<svg width="98" height="71" viewBox="0 0 98 71" fill="none" xmlns="http://www.w3.org/2000/svg">
+<mask id="path-1-inside-1" fill="white">
+<rect x="0.579102" y="0.571411" width="96.8421" height="70.4286" rx="2"/>
+</mask>
+<rect x="0.579102" y="0.571411" width="96.8421" height="70.4286" rx="2" fill="white" stroke="#4FB573" stroke-width="6" mask="url(#path-1-inside-1)"/>
+<path d="M3 16.762L95 16.762" stroke="#4FB573" stroke-width="2"/>
+<ellipse cx="9.22563" cy="10.0507" rx="2.19048" ry="2.19355" fill="#4FB573"/>
+<ellipse cx="15.7969" cy="10.0507" rx="2.19047" ry="2.19355" fill="#4FB573"/>
+<ellipse cx="22.3682" cy="10.0507" rx="2.19048" ry="2.19355" fill="#4FB573"/>
+<path d="M12.6841 33.762V56.4286H45.7718" stroke="#4FB573" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="17.5264" y="43.4762" width="4.84211" height="12.9524" fill="#DCF0E3" stroke="#4FB573" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="27.2104" y="40.238" width="4.84211" height="16.1905" fill="#DCF0E3" stroke="#4FB573" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="36.8945" y="37" width="4.84211" height="19.4286" fill="#DCF0E3" stroke="#4FB573" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<ellipse cx="69.1756" cy="43.4762" rx="15.3333" ry="15.381" fill="#DCF0E3" stroke="#4FB573" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="52" y="27" width="34" height="33">
+<ellipse cx="69.1756" cy="43.4762" rx="15.3333" ry="15.381" fill="#DCF0E3" stroke="#4FB573" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</mask>
+<g mask="url(#mask0)">
+<path d="M68.772 44.2857L86.1228 30.5238L70.7895 23.6428L68.772 44.2857Z" fill="white" stroke="#4FB573" stroke-width="2" stroke-linejoin="round"/>
+</g>
+<mask id="mask1" mask-type="alpha" maskUnits="userSpaceOnUse" x="71" y="15" width="20" height="24">
+<path d="M72.4033 37.4048L89.7542 23.6429L74.4209 16.762L72.4033 37.4048Z" fill="white" stroke="#4FB573" stroke-width="2" stroke-linejoin="round"/>
+</mask>
+<g mask="url(#mask1)">
+<ellipse cx="72.807" cy="36.5953" rx="15.3333" ry="15.381" fill="#FFC432"/>
+</g>
+</svg>

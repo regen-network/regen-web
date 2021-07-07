@@ -3,15 +3,15 @@ import cx from 'clsx';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import CardMedia from '@material-ui/core/CardMedia';
 
-import Section, { SectionProps } from 'web-components/lib/components/section';
+import Section from 'web-components/lib/components/section';
 
 type Props = {
   img: string;
-  sectionProps?: SectionProps;
   /** sets larger larger `minHeight` on mobile to match gatsby `BackgroundSection` */
   isBanner?: boolean;
   classes?: {
     section?: string;
+    root?: string;
     main?: string;
   };
 };
@@ -37,8 +37,8 @@ const BackgroundImgSection: React.FC<Props> = ({ classes, ...props }) => {
   const styles = useStyles({ isBanner: !!props.isBanner });
 
   return (
-    <CardMedia image={props.img}>
-      <Section classes={{ root: cx(classes && classes.section) }}>
+    <CardMedia image={props.img} classes={{ root: classes?.root }}>
+      <Section classes={{ root: classes?.section }}>
         <div className={cx(styles.main, classes && classes.main)}>{props.children}</div>
       </Section>
     </CardMedia>

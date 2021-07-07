@@ -119,6 +119,125 @@
         "btnText": "Create a Credit Class",
         "href": "/create-credit-class"
       }
+    },
+    "HowToCreateMethodology": {
+      "heroBannerTop": {
+        "title": "Learn more about our methodology review process.",
+        "description": "Methodologies submitted to Regen Registry will undergo a scientific review process to support the adoption of best practices for the monitoring, reporting, and verification of nature based solutions. This process is a great opportunity to work with the scientific community to develop your methodology in a way that fosters innovation and trust."
+      },
+      "internalReviewSection": {
+        "title": "Part 1: Internal Review",
+        "timespan": "2-4 weeks*",
+        "description": "Methodologies submitted to Regen Network Development Inc. will pass through an internal review process to ensure that all the components needed to monitor a nature based solution are included. If your methodology is missing important information needed for the monitoring, reporting and verification, we may ask you to make some upgrades and resubmit. Otherwise your methodology will be accepted in beta form on our website! If you are creating a Flex Methodology, then only an internal review is required.",
+        "btnText": "submit a methodology",
+        "href": "TODO:",
+        "disclaimerBottom": "*All time frames are estimations that may vary"
+      },
+      "externalReviewSection": {
+        "title": "Part 2: External Review Process",
+        "timespan": "8-12 weeks*",
+        "description": "The external review process consists of A) a public comment period and B) a formal scientific peer review where members of the science community and experts in the field can provide feedback on a methodology. <b>The two processes can be run in parallel</b>, and provide methodology designers with the opportunity to address critiques and improve the science backing their methods.",
+        "btnText": "submit a methodology",
+        "href": "TODO:",
+        "disclaimerTop": "Institutional credits only",
+        "disclaimerBottom": "*All time frames are estimations that may vary"
+      },
+      "stepCardSections": {
+        "public": {
+          "title": "Part 2A: Public Comment Process",
+          "stepCards": [
+            {
+              "stepNumber": 1,
+              "isActive": true,
+              "icon": "svgs/green-bar-and-pie-charts.svg",
+              "image": "microphone-with-crowd.png",
+              "tagName": "30 days",
+              "title": "Methodology opened on Regen Registry for a 30-day public comment period",
+              "description": "The public comment period is an opportunity for the scientific community to ask questions and provide feedback on a methodology. Questions and comments are compiled into a Feedback Document which is returned to the Methodology Developer."
+            },
+            {
+              "stepNumber": 2,
+              "isActive": true,
+              "icon": "svgs/green-folders-yellow-accent.svg",
+              "title": "Methodology Developer compiles a Revision Report & upgrades methodology",
+              "description": "The Revision Report is an opportunity for the methodology developer to address comments, questions, and revision requests outlined in the public comment or scientific peer review process. The report includes answers to clarifying questions, indications of how comments or revision requests were incorporated into the updated methodology, or explanations of why the comment or revision request was not incorporated.",
+              "tagName": "1-2 weeks"
+            },
+            {
+              "stepNumber": 3,
+              "isActive": true,
+              "icon": "svgs/green-magnifying-glass-eye.svg",
+              "title": "Create a methodology draft and submit it for internal review",
+              "description": "Your methodology should aim to outline standards and tools to monitor the ecological, environmental, and social indicators covered by your nature based solution. Your approach can be region specific or cover a wide range of locations.",
+              "tagName": "2-3 weeks",
+              "faqs": [
+                {
+                  "question": "How long does a scientific peer review take?",
+                  "answer": "The timeline for scientific peer review can vary. It is up to the methodology designer to drive the peer review process, however we expect this process to take anywhere from one and a half to two months depending on the speed of the reviewers."
+                },
+                {
+                  "question": "What is the public comment period?",
+                  "answer": "The public comment period consists of a 30 day time period, where your method is opened up for review by community members who can submit comments, questions and feedback."
+                },
+                {
+                  "question": "Can public comment and peer review happen concurrently?",
+                  "answer": "Yes, these two processes can be run in parallel."
+                }
+              ]
+            }
+          ]
+        },
+        "scientific": {
+          "title": "Part 2A: Public Comment Process",
+          "stepCards": [
+            {
+              "stepNumber": 1,
+              "isActive": true,
+              "icon": "svgs/scientist-with-vial.svg",
+              "image": "scientists-talking-plants-foreground.png",
+              "tagName": "3-4 weeks",
+              "title": "Step 1: Scientific advisors review the methodology",
+              "description": "The Methodology Developer identifies a minimum of three scientific advisors which have appropriate training, background, knowledge and qualifications to provide an in-depth review of the submitted methodology. Scientific advisors will review the methodology and provide the Methodology Developer with a Feedback Document with all their comments, questions and revision requests."
+            },
+            {
+              "stepNumber": 2,
+              "isActive": true,
+              "icon": "svgs/green-folders-yellow-accent.svg",
+              "title": "The Methodology Developer compiles a Revision Report",
+              "description": "The Revision Report is an opportunity for the methodology developer to address comments, questions, and revision requests outlined in the public comment or scientific peer review process. The report includes answers to clarifying questions, indications of how comments or revision requests were incorporated into the updated methodology, or explanations of why the comment or revision request was not incorporated.",
+              "tagName": "1-2 weeks"
+            },
+            {
+              "stepNumber": 3,
+              "isActive": true,
+              "icon": "svgs/green-magnifying-glass-eye.svg",
+              "title": "Regen Registry rejects or accepts the methodology",
+              "description": "The Methodology Developer submits the Revision Report to Regen Registry. If Regen Registry confirms that the Revision Report completes the requirements, it will be posted alongside the methodology (which moves out of beta version) and made publicly available. If Regen Registry rejects the methodology, full evaluation documentation will be provided.",
+              "tagName": "2-3 weeks",
+              "faqs": [
+                {
+                  "question": "How long does a scientific peer review take?",
+                  "answer": "The timeline for scientific peer review can vary. It is up to the methodology designer to drive the peer review process, however we expect this process to take anywhere from one and a half to two months depending on the speed of the reviewers."
+                },
+                {
+                  "question": "What is the public comment period?",
+                  "answer": "The public comment period consists of a 30 day time period, where your method is opened up for review by community members who can submit comments, questions and feedback."
+                },
+                {
+                  "question": "Can public comment and peer review happen concurrently?",
+                  "answer": "Yes, these two processes can be run in parallel."
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "heroBannerBottom": {
+        "title": "Create a Methodology",
+        "description": "Learn more about the ins and outs of creating a new methodology with Regen Registry.",
+        "btnText": "Create a Methodology",
+        "href": "TODO: "
+      }
     }
   },
   "outcomes": [

@@ -25,6 +25,7 @@ import {
   // Eligibility,
   // GettingStarted,
   // Home,
+  MethodologyReviewProcess,
   NotFoundPage,
   OrganizationProfile,
   PostPurchase,
@@ -94,6 +95,7 @@ const App: React.FC = (): JSX.Element => {
           <Route exact path="/create-a-methodology">
             <CreateMethodology />
           </Route>
+          <Route exact path="/methodology-review-process" component={MethodologyReviewProcess} />
           <Route
             path="/projects"
             render={({ match: { path } }) => (

@@ -11,7 +11,6 @@ import ProjectImpactCard, {
 } from 'web-components/lib/components/cards/ProjectImpactCard';
 import Section from 'web-components/lib/components/section';
 import PrevNextButton from 'web-components/lib/components/buttons/PrevNextButton';
-import { getOptimizedImageSrc } from 'web-components/lib/utils/optimizedImageSrc';
 
 interface ProjectImpactProps {
   impacts: Impact[];
@@ -78,8 +77,6 @@ const useStyles = makeStyles((theme: Theme) => ({
 function ProjectImpactSection({ impacts, title, classes }: ProjectImpactProps): JSX.Element {
   const styles = useStyles();
   const theme: Theme = useTheme();
-  const imageStorageBaseUrl = process.env.REACT_APP_IMAGE_STORAGE_BASE_URL;
-  const apiServerUrl = process.env.REACT_APP_API_URI;
   const isMobile: boolean = useMediaQuery(theme.breakpoints.down('xs'));
   const isTablet: boolean = useMediaQuery(theme.breakpoints.between('xs', 'sm'));
   const slidesCount: number = isTablet ? 2 : 3;
@@ -132,7 +129,7 @@ function ProjectImpactSection({ impacts, title, classes }: ProjectImpactProps): 
                   key={index}
                   name={name}
                   description={description}
-                  imgSrc={getOptimizedImageSrc(imgSrc, imageStorageBaseUrl, apiServerUrl)}
+                  imgSrc={imgSrc}
                   monitored={monitored}
                 />
               </div>
@@ -146,7 +143,7 @@ function ProjectImpactSection({ impacts, title, classes }: ProjectImpactProps): 
                 className={styles.item}
                 name={name}
                 description={description}
-                imgSrc={getOptimizedImageSrc(imgSrc, imageStorageBaseUrl, apiServerUrl)}
+                imgSrc={imgSrc}
                 monitored={monitored}
               />
             ))}

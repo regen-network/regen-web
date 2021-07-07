@@ -79,13 +79,6 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     fontSize: theme.typography.pxToRem(14),
   },
   image: {
-    position: 'absolute',
-    [theme.breakpoints.up('sm')]: {
-      bottom: theme.spacing(5),
-    },
-    [theme.breakpoints.down('xs')]: {
-      bottom: theme.spacing(4),
-    },
   },
 }));
 

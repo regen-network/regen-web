@@ -51,8 +51,6 @@ type StepCard = {
   step: Step;
 };
 
-const openLink = (url: string): void => void window.open(url, '_blank', 'noopener');
-
 // TODO: Once the API is connected, replace this type (it shouldn't be necessary to define it here)
 type ApiCard = typeof contentByPage.HowToCreateMethodology['stepCardSections']['public']['stepCards'];
 const createStepCards = (raw: ApiCard): StepCard[] =>
@@ -68,7 +66,7 @@ const createStepCards = (raw: ApiCard): StepCard[] =>
       btnText,
       imageAlt: image && title,
       imageSrc: image ? require(`../assets/${image}`) : undefined,
-      onBtnClick: href ? () => openLink(href) : undefined,
+      onBtnClick: href ? () => void window.open(href, '_blank', 'noopener') : undefined,
     },
   }));
 

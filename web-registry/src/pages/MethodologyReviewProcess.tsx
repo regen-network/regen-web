@@ -11,7 +11,7 @@ import { HeroTitle, HeroAction, ReviewProcessInfo, BackgroundImgSection } from '
 import { contentByPage } from '../mocks';
 
 import typewriterReview from '../assets/typewriter-review.png';
-import topographyImg from '../assets/topography-pattern-full-1.png';
+import topographyImg from '../assets/topography-pattern-cutout-1.png';
 import fernImg from '../assets/fern-in-hands.png';
 
 const useStyles = makeStyles(theme => ({

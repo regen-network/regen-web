@@ -298,6 +298,16 @@ coreSection:
       linkedUrl: https://www.linkedin.com/in/john-kemp-0xdeadbabe/
       twitterUrl: https://twitter.com/frumioj
       githubUrl: https://github.com/frumioj
+    - image: ../../static/media/alex.png
+      linkedUrl: linkedIn.com/in/alexkarana
+      description: "Alex is a licensed attorney in Illinois and holds a chemical
+        engineering degree. Alex practices intellectual property law and worked
+        in automotive prior to law school with brands like Jeep, Polaris,
+        Toyota, and GM.  Alex has a passion for working with startups and is
+        interested in blockchain, NFTs, and cryptography.  Alex currently lives
+        in Chicago and is from Detroit. "
+      name: Alex Karana
+      title: Product Legal Assistant
 contributorSection:
   title: Contributors
   contributors:

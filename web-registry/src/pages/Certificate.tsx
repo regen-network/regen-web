@@ -266,6 +266,9 @@ function CertificatePage(): JSX.Element {
               <Certificate
                 background={background}
                 creditName={creditClassVersion?.name || ''}
+                certificateTitle={
+                  creditClassVersion?.metadata?.['http://regen.network/certificateTitle'] || 'Carbon Removal'
+                }
                 creditUnitName={creditClassVersion?.metadata?.['http://regen.network/creditClassUnit']}
                 projectName={project?.name || ''}
                 creditsUnits={units}

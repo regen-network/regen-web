@@ -50,7 +50,7 @@ function MethodologyTestSection({ methodology }: Props): JSX.Element {
   const styles = useStyles();
 
   return (
-    <BackgroundImgSection img={testMethodologyImg} classes={{ main: styles.main, section: styles.section }}>
+    <BackgroundImgSection img={testMethodologyImg} classes={{ main: styles.main, root: styles.section }}>
       <Title className={styles.title} variant="h2" align="center">
         {methodology.testMethodologyTitle}
       </Title>

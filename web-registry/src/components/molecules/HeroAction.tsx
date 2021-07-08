@@ -75,7 +75,7 @@ const HeroAction: React.FC<Props> = ({ classes, ...props }) => {
   const lightBg = props.lightBg || !props.img;
   const styles = useStyles({ lightBg });
 
-  const Button = lightBg ? ContainedButton : OutlinedButton;
+  const Button = lightBg ? OutlinedButton : ContainedButton;
 
   return (
     <BackgroundImgSection img={props.img || ''} classes={{ main: styles.main, root: classes?.root }}>

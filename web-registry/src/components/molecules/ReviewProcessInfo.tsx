@@ -1,4 +1,5 @@
 import React from 'react';
+import cx from 'clsx';
 import ReactHtmlParser from 'react-html-parser';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -14,7 +15,10 @@ import { Label } from '../atoms';
 const useStyles = makeStyles(theme => ({
   root: {
     '& > div': {
-      padding: theme.spacing(3.75, 0),
+      padding: theme.spacing(3, 0),
+      [theme.breakpoints.down('xs')]: {
+        padding: theme.spacing(2, 0),
+      },
       '&:first-of-type': {
         paddingTop: 0,
       },
@@ -23,26 +27,44 @@ const useStyles = makeStyles(theme => ({
       },
     },
   },
+  title: {
+    [theme.breakpoints.down('xs')]: {
+      fontSize: theme.typography.pxToRem(32),
+    },
+  },
   disclaimerTop: {
-    fontSize: theme.typography.pxToRem(18),
     color: theme.palette.info.dark,
     fontWeight: 700,
+    fontSize: theme.typography.pxToRem(18),
+    [theme.breakpoints.down('xs')]: {
+      fontSize: theme.typography.pxToRem(16),
+    },
   },
   timespan: {
     color: theme.palette.secondary.main,
+    letterSpacing: '1px',
     fontSize: theme.typography.pxToRem(18),
+    [theme.breakpoints.down('xs')]: {
+      fontSize: theme.typography.pxToRem(14),
+    },
   },
   description: {
     fontSize: theme.typography.pxToRem(22),
     lineHeight: theme.typography.pxToRem(33),
+    [theme.breakpoints.down('xs')]: {
+      fontSize: theme.typography.pxToRem(18),
+      lineHeight: theme.typography.pxToRem(27),
+    },
   },
   disclaimerBottom: {
     fontSize: theme.typography.pxToRem(12),
+    paddingTop: theme.spacing(2),
     color: theme.palette.info.dark,
   },
 }));
 
 const ReviewProcessInfo: React.FC<{
+  className?: string;
   title: string;
   description: string;
   disclaimerTop?: string;
@@ -53,14 +75,21 @@ const ReviewProcessInfo: React.FC<{
 }> = props => {
   const styles = useStyles();
   return (
-    <Box display="flex" alignItems="center" flexDirection="column" className={styles.root}>
+    <Box
+      display="flex"
+      alignItems="center"
+      flexDirection="column"
+      className={cx(styles.root, props.className)}
+    >
       {props.disclaimerTop && (
         <div>
           <Typography className={styles.disclaimerTop}>{ReactHtmlParser(props.disclaimerTop)}</Typography>
         </div>
       )}
       <div>
-        <Title variant="h2">{ReactHtmlParser(props.title)}</Title>
+        <Title variant="h2" align="center" className={styles.title}>
+          {ReactHtmlParser(props.title)}
+        </Title>
       </div>
       {props.timespan && (
         <div>

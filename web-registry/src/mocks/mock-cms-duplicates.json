@@ -128,7 +128,7 @@
       "internalReviewSection": {
         "title": "Part 1: Internal Review",
         "timespan": "2-4 weeks*",
-        "description": "Methodologies submitted to Regen Network Development Inc. will pass through an internal review process to ensure that all the components needed to monitor a nature based solution are included. If your methodology is missing important information needed for the monitoring, reporting and verification, we may ask you to make some upgrades and resubmit. Otherwise your methodology will be accepted in beta form on our website! If you are creating a Flex Methodology, then only an internal review is required.",
+        "description": "Methodologies submitted to Regen Network Development Inc. will pass through an internal review process to ensure that all the components needed to monitor a nature based solution are included. If your methodology is missing important information needed for the monitoring, reporting and verification, we may ask you to make some upgrades and resubmit. Otherwise your methodology will be accepted in beta form on our website! \n\n If you are creating a Flex Methodology, then only an internal review is required.",
         "btnText": "submit a methodology",
         "href": "TODO:",
         "disclaimerBottom": "*All time frames are estimations that may vary"
@@ -188,7 +188,7 @@
           ]
         },
         "scientific": {
-          "title": "Part 2A: Public Comment Process",
+          "title": "Part 2B: Scientific Review Process",
           "stepCards": [
             {
               "stepNumber": 1,

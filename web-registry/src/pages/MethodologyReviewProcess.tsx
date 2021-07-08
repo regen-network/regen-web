@@ -1,5 +1,4 @@
 import React from 'react';
-import cx from 'clsx';
 import { useHistory } from 'react-router-dom';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
@@ -19,9 +18,31 @@ const useStyles = makeStyles(theme => ({
   root: {
     background: theme.palette.primary.main,
   },
+  section: {
+    paddingBottom: theme.spacing(22),
+    [theme.breakpoints.down('xs')]: {
+      paddingLeft: theme.spacing(2),
+      paddingRight: theme.spacing(2),
+    },
+  },
+  heroMain: {
+    maxWidth: theme.typography.pxToRem(775),
+    paddingBottom: theme.spacing(20),
+    [theme.breakpoints.down('xs')]: {
+      paddingBottom: theme.spacing(12),
+    },
+  },
   topoBg: {
     background: theme.palette.grey[50],
     borderTop: `1px solid ${theme.palette.grey[100]}`,
+  },
+  sectionContent: {
+    maxWidth: theme.typography.pxToRem(924),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    alignSelf: 'center',
+    margin: '0 auto',
   },
 }));
 
@@ -67,25 +88,17 @@ const MethodologyReviewProcess: React.FC = () => {
   const publicCommentCards = createStepCards(stepCardSections.public.stepCards);
   const scienceReviewCards = createStepCards(stepCardSections.scientific.stepCards);
 
-  /** Centered div with a `maxWidth` of `753px` */
-  const CardLayout: React.FC = ({ children }) => (
-    // <Box maxWidth={753} display="flex" flexDirection="column" alignItems="center" alignSelf="center">
-    <Box maxWidth={753} margin="0 auto" display="flex" flexDirection="column" alignItems="center">
-      {children}
-    </Box>
-  );
-
-  const SectionContent: React.FC = ({ children }) => (
-    <Box
-      display="flex'"
-      maxWidth={theme.typography.pxToRem(924)}
-      paddingBottom={24}
-      flexDirection="column"
-      alignItems="center"
-      alignSelf="center"
-    >
-      {children}
-    </Box>
+  const StepCards: React.FC<{ title: string; stepCards: StepCard[] }> = props => (
+    <>
+      <Title variant="h3" align="center">
+        {props.title}
+      </Title>
+      <Box maxWidth={theme.typography.pxToRem(753)} mt={8}>
+        {props.stepCards.map((card, i) => (
+          <StepCard key={i} icon={card.icon} step={card.step} />
+        ))}
+      </Box>
+    </>
   );
 
   return (
@@ -95,11 +108,11 @@ const MethodologyReviewProcess: React.FC = () => {
         img={typewriterReview}
         title={heroBannerTop.title}
         description={heroBannerTop.description}
-        // classes={{ main: styles.heroMain }}
+        classes={{ main: styles.heroMain }}
       />
 
-      <Section>
-        <SectionContent>
+      <Section className={styles.section}>
+        <div className={styles.sectionContent}>
           <ReviewProcessInfo
             title={internalReviewSection.title}
             timespan={internalReviewSection.timespan}
@@ -108,11 +121,11 @@ const MethodologyReviewProcess: React.FC = () => {
             btnText={internalReviewSection.btnText}
             href={internalReviewSection.href}
           />
-        </SectionContent>
+        </div>
       </Section>
 
-      <BackgroundImgSection img={topographyImg} classes={{ root: styles.topoBg }}>
-        <SectionContent>
+      <BackgroundImgSection img={topographyImg} classes={{ root: styles.topoBg, section: styles.section }}>
+        <div className={styles.sectionContent}>
           <ReviewProcessInfo
             title={externalReviewSection.title}
             timespan={externalReviewSection.timespan}
@@ -120,24 +133,16 @@ const MethodologyReviewProcess: React.FC = () => {
             disclaimerBottom={externalReviewSection.disclaimerBottom}
             description={externalReviewSection.description}
           />
-          <CardLayout>
-            <Title variant="h3">{stepCardSections.public.title}</Title>
-            {publicCommentCards.map((card, i) => (
-              <StepCard key={i} icon={card.icon} step={card.step} />
-            ))}
-          </CardLayout>
-
-          <CardLayout>
-            <Title variant="h3">{stepCardSections.scientific.title}</Title>
-            {scienceReviewCards.map((card, i) => (
-              <StepCard key={i} icon={card.icon} step={card.step} />
-            ))}
-          </CardLayout>
-        </SectionContent>
+          <Box display="flex" flexDirection="column" mt={[10, 20]} maxWidth={theme.typography.pxToRem(924)}>
+            <StepCards title={stepCardSections.public.title} stepCards={publicCommentCards} />
+            <Box mt={[12, 15]}>
+              <StepCards title={stepCardSections.scientific.title} stepCards={scienceReviewCards} />
+            </Box>
+          </Box>
+        </div>
       </BackgroundImgSection>
 
       <HeroAction
-        // classes={{ main: styles.bottomSection }}
         img={fernImg}
         title={heroBannerBottom.title}
         description={heroBannerBottom.description}

@@ -165,7 +165,7 @@ export default function ProjectTopCard({
           </div>
         )}
         {reseller && (
-          <div>
+          <div className={classes.broker}>
             <UserInfoWithTitle size="xl" user={reseller} title="reseller" />
           </div>
         )}

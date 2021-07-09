@@ -255,7 +255,7 @@ export default function Certificate({
             <div className={classes.whiteTriangle} />
             <div className={classes.greenTriangle} />
           </div>
-          <Title variant="h2" className={classes.bannerContent}>
+          <Title variant="h3" className={classes.bannerContent}>
             Certificate of {certificateTitle}
           </Title>
           <div className={clsx(classes.bannerSideRight, classes.bannerSide)}>

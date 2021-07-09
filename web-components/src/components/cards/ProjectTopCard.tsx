@@ -17,6 +17,7 @@ interface ProjectTopCardProps {
   landSteward?: User;
   landOwner?: User;
   broker?: User;
+  reseller?: User;
   sdgs?: SDG[];
 }
 
@@ -111,6 +112,7 @@ export default function ProjectTopCard({
   landSteward,
   landOwner,
   broker,
+  reseller,
   sdgs,
 }: ProjectTopCardProps): JSX.Element {
   const classes = useStyles({});
@@ -160,6 +162,11 @@ export default function ProjectTopCard({
         {broker && (
           <div className={classes.broker}>
             <UserInfoWithTitle size="xl" user={broker} title="broker" />
+          </div>
+        )}
+        {reseller && (
+          <div>
+            <UserInfoWithTitle size="xl" user={reseller} title="reseller" />
           </div>
         )}
       </div>

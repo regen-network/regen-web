@@ -375,6 +375,7 @@ function ProjectTopSection({ project, projectDefault, geojson, isGISFile }: Proj
             landSteward={project.steward}
             landOwner={project.owner}
             broker={project.broker}
+            reseller={project.reseller}
             sdgs={project.sdgs}
           />
         </Grid>

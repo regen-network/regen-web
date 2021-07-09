@@ -303,7 +303,7 @@
         "imgSrc": "https://regen-registry.s3.amazonaws.com/projects/kasigau/wildlife-works.png",
         "description": "Wildlife Works is the world's leading REDD+ program development and management company with an effective approach to applying innovative market based solutions to the conservation of biodiversity."
       },
-      "broker": {
+      "reseller": {
         "name": "Regen Network Development, Inc.",
         "type": "organization",
         "place": {

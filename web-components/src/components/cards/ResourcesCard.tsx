@@ -46,13 +46,13 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   lastUpdatedLabel: {
     textTransform: 'uppercase',
+    letterSpacing: theme.spacing(0.25),
     fontWeight: 800,
   },
   lastUpdated: {
     lineHeight: theme.spacing(3.75),
     color: theme.palette.info.main,
     fontSize: theme.spacing(3),
-    letterSpacing: theme.spacing(0.25),
     [theme.breakpoints.down('xs')]: {
       paddingTop: theme.spacing(1.25),
     },

@@ -64,6 +64,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   btn: {
     margin: theme.spacing(3, 0, 5),
+    [theme.breakpoints.down('xs')]: {
+      fontSize: theme.typography.pxToRem(14),
+      padding: theme.spacing(2, 8),
+    },
   },
   cardTop: {
     display: 'flex',

@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
     borderColor: theme.palette.grey[100],
     [theme.breakpoints.up('sm')]: {
       width: theme.spacing(87.625),
-      minHeight: theme.spacing(45.75),
+      height: theme.spacing(45.75),
       padding: theme.spacing(5, 8),
       marginRight: theme.spacing(5.375),
       marginBottom: theme.spacing(5),

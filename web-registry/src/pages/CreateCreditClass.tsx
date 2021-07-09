@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import cx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import CardMedia from '@material-ui/core/CardMedia';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
-
+import CardMedia from '@material-ui/core/CardMedia';
+import Box from '@material-ui/core/Box';
+import Grid from '@material-ui/core/Grid';
 import Section from 'web-components/lib/components/section';
+
 import { StepCard, Step } from 'web-components/lib/components/cards/StepCard';
 import { OverviewCard } from 'web-components/lib/components/cards/OverviewCard';
 import ImpactCard from 'web-components/lib/components/cards/ImpactCard';
@@ -14,6 +16,8 @@ import ResourcesCard from 'web-components/lib/components/cards/ResourcesCard';
 import FixedFooter from 'web-components/lib/components/fixed-footer';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import Modal from 'web-components/lib/components/modal';
+import Title from 'web-components/lib/components/title';
+import Description from 'web-components/lib/components/description';
 
 import { HeroTitle, HeroAction } from '../components/molecules';
 import { StepCardsWithDescription } from '../components/organisms';
@@ -22,8 +26,6 @@ import { outcomes, resources, contentByPage } from '../mocks';
 import fernImg from '../assets/fern-in-hands.png';
 import writingOnPaperImg from '../assets/writing-on-paper.png';
 import topographyImg from '../assets/topography-pattern-cutout-1.png';
-import Title from 'web-components/lib/components/title';
-import Description from 'web-components/lib/components/description';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -38,26 +40,14 @@ const useStyles = makeStyles(theme => ({
       paddingBottom: theme.spacing(12),
     },
   },
-  topSection: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  topSectionCards: {
-    maxWidth: theme.typography.pxToRem(942),
-  },
-  sectionPadBottom: {
+  section: {
     [theme.breakpoints.up('sm')]: {
       paddingBottom: theme.spacing(25),
     },
     [theme.breakpoints.down('xs')]: {
       paddingBottom: theme.spacing(20),
-    },
-  },
-  outcomeSection: {
-    [theme.breakpoints.down('xs')]: {
-      paddingLeft: theme.spacing(3),
-      paddingRight: theme.spacing(3),
+      paddingRight: theme.spacing(2),
+      paddingLeft: theme.spacing(2),
     },
   },
   topoSection: {
@@ -66,9 +56,7 @@ const useStyles = makeStyles(theme => ({
     borderBottom: `1px solid ${theme.palette.grey[100]}`,
   },
   sectionTitle: {
-    marginBottom: theme.spacing(8.75),
     [theme.breakpoints.down('xs')]: {
-      marginBottom: theme.spacing(8),
       fontSize: theme.typography.pxToRem(32),
       lineHeight: theme.typography.pxToRem(41.6),
     },
@@ -89,39 +77,27 @@ const useStyles = makeStyles(theme => ({
     paddingTop: 0,
   },
   cardWrap: {
-    display: 'flex',
-    [theme.breakpoints.up('sm')]: {
-      flexWrap: 'wrap',
-      justifyContent: 'center',
-      paddingTop: theme.spacing(4),
-      paddingBottom: theme.typography.pxToRem(109),
-    },
+    justifyContent: 'center',
     [theme.breakpoints.down('xs')]: {
+      justifyContent: 'flex-start',
       flexWrap: 'nowrap',
       overflow: 'scroll',
-      paddingTop: theme.spacing(2),
-      paddingBottom: theme.typography.pxToRem(64),
     },
   },
   overviewCard: {
-    margin: theme.spacing(2),
+    width: '100%',
+    height: '100%',
   },
   modal: {
     padding: 0,
     overflow: 'hidden',
   },
-  maxW948: {
-    maxWidth: theme.typography.pxToRem(948),
-    margin: '0 auto',
-  },
   description: {
     [theme.breakpoints.up('sm')]: {
-      padding: theme.spacing(7, 0),
       fontSize: theme.typography.pxToRem(22),
       lineHeight: theme.typography.pxToRem(33),
     },
     [theme.breakpoints.down('xs')]: {
-      padding: theme.spacing(5, 0),
       fontSize: theme.typography.pxToRem(18),
       lineHeight: theme.typography.pxToRem(27),
     },
@@ -171,6 +147,44 @@ const CreateCreditClass: React.FC = () => {
     }),
   );
 
+  const SubtitleAndDescription: React.FC<{
+    title: string;
+    description: string;
+    align?: 'left' | 'center';
+  }> = props => {
+    const align = props.align || (isMobile ? 'left' : 'center');
+    return (
+      <Grid container justify="center">
+        <Box maxWidth={theme.typography.pxToRem(948)}>
+          <Title align={align} variant="h3">
+            {props.title}
+          </Title>
+          <Box pt={[5, 7]}>
+            <Description className={styles.description} align={align}>
+              {props.description}
+            </Description>
+          </Box>
+        </Box>
+      </Grid>
+    );
+  };
+
+  const OverviewCards: React.FC<{ cards: any[] }> = props => (
+    <Box mt={[8, 12]}>
+      <Grid container spacing={4} className={styles.cardWrap}>
+        {props.cards.map((card, i) => (
+          <Grid item xs={12} sm={6} md={4} key={i}>
+            <OverviewCard
+              className={styles.overviewCard}
+              icon={<img src={require(`../assets/${card.icon}`)} alt={card.description} />}
+              item={{ title: card.title, description: card.description }}
+            />
+          </Grid>
+        ))}
+      </Grid>
+    </Box>
+  );
+
   return (
     <div className={styles.root}>
       <HeroTitle
@@ -181,71 +195,41 @@ const CreateCreditClass: React.FC = () => {
         classes={{ main: styles.heroMain }}
       />
 
-      <Section
-        title={stepCardSection.title}
-        classes={{ root: cx(styles.topSection, styles.sectionPadBottom), title: styles.sectionTitle }}
-      >
-        <StepCardsWithDescription
-          className={styles.topSectionCards}
-          stepCards={stepCards}
-          description={stepCardSection.mainDescription}
-        />
+      <Section title={stepCardSection.title} classes={{ root: styles.section, title: styles.sectionTitle }}>
+        <Box maxWidth={theme.typography.pxToRem(942)} mt={[0, 8.75]} m="0 auto">
+          <StepCardsWithDescription stepCards={stepCards} description={stepCardSection.mainDescription} />
+        </Box>
       </Section>
 
       <CardMedia image={topographyImg} className={styles.topoSection}>
         <Section
           title={creditTypeSection.title}
           titleAlign={isMobile ? 'left' : 'center'}
-          classes={{ title: styles.sectionTitle }}
+          classes={{ root: styles.section, title: styles.sectionTitle }}
         >
-          <Title align={isMobile ? 'left' : 'center'} variant="h3">
-            {creditTypeSection.subtitleTop}
-          </Title>
-          <Description
-            align={isMobile ? 'left' : 'center'}
-            className={cx(styles.description, styles.maxW948)}
-          >
-            {creditTypeSection.descriptionTop}
-          </Description>
-          <div className={styles.cardWrap}>
-            {creditTypeSection.institutionalCards.map((card, i) => (
-              <OverviewCard
-                key={i}
-                className={styles.overviewCard}
-                icon={<img src={require(`../assets/${card.icon}`)} alt={card.description} />}
-                item={{ title: card.title, description: card.description }}
-              />
-            ))}
-          </div>
-          <Title align={isMobile ? 'left' : 'center'} variant="h3">
-            {creditTypeSection.subtitleBottom}
-          </Title>
-          <Description
-            align={isMobile ? 'left' : 'center'}
-            className={cx(styles.description, styles.maxW948)}
-          >
-            {creditTypeSection.descriptionBottom}
-          </Description>
-          <div className={styles.cardWrap}>
-            {creditTypeSection.flexCreditCards.map((card, i) => (
-              <OverviewCard
-                key={i}
-                className={styles.overviewCard}
-                icon={<img src={require(`../assets/${card.icon}`)} alt={card.description} />}
-                item={{ title: card.title, description: card.description }}
-              />
-            ))}
-          </div>
+          <Box mt={[8, 16]}>
+            <SubtitleAndDescription
+              title={creditTypeSection.subtitleTop}
+              description={creditTypeSection.descriptionTop}
+            />
+            <OverviewCards cards={creditTypeSection.institutionalCards} />
+          </Box>
+          <Box mt={[15, 22]} pb={[4, 8]}>
+            <SubtitleAndDescription
+              title={creditTypeSection.subtitleBottom}
+              description={creditTypeSection.descriptionBottom}
+            />
+            <OverviewCards cards={creditTypeSection.flexCreditCards} />
+          </Box>
         </Section>
       </CardMedia>
 
-      <Section withSlider className={cx(styles.sectionPadBottom, styles.outcomeSection)}>
-        <Title align="center" variant="h3" className={styles.maxW948}>
-          {outcomeSection.title}
-        </Title>
-        <Description align="center" className={cx(styles.description, styles.maxW948)}>
-          {outcomeSection.description}
-        </Description>
+      <Section withSlider className={styles.section}>
+        <SubtitleAndDescription
+          align="center"
+          title={outcomeSection.title}
+          description={outcomeSection.description}
+        />
         <ResponsiveSlider
           itemWidth="90%"
           padding={theme.spacing(2.5)}
@@ -257,7 +241,7 @@ const CreateCreditClass: React.FC = () => {
       </Section>
 
       <CardMedia image={topographyImg} className={styles.topoSection}>
-        <Section withSlider className={styles.sectionPadBottom}>
+        <Section withSlider className={styles.section}>
           <ResponsiveSlider
             itemWidth="90%"
             classes={{ title: styles.resourcesTitle, root: styles.resourcesRoot }}

@@ -117,6 +117,7 @@ const CreateCreditClass: React.FC = () => {
   const history = useHistory();
   const [open, setOpen] = useState(false);
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
+  const isDesktop = useMediaQuery(theme.breakpoints.up('lg'));
 
   const {
     stepCardSection,
@@ -185,6 +186,8 @@ const CreateCreditClass: React.FC = () => {
     </Box>
   );
 
+  const resourceCardsShown = isDesktop ? 3 : 2;
+
   return (
     <div className={styles.root}>
       <HeroTitle
@@ -248,8 +251,8 @@ const CreateCreditClass: React.FC = () => {
             padding={theme.spacing(2.5)}
             title="Resources"
             titleVariant="h2"
-            arrows={resources?.length > 3}
-            slidesToShow={3}
+            arrows={resources?.length > resourceCardsShown}
+            slidesToShow={resourceCardsShown}
             items={resources.map(({ btnText, description, href, imgSrc, lastUpdated, title }) => (
               <ResourcesCard
                 image={{ publicURL: require(`../assets/${imgSrc}`) }}

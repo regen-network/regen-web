@@ -202,6 +202,7 @@ const CreateMethodology: React.FC = () => {
       />
 
       <HeroAction
+        isBanner
         classes={{ main: styles.bottomSection }}
         img={writingOnPaperImg}
         title={createCreditClassSection.title}

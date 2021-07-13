@@ -18,6 +18,7 @@ type Props = {
   title: string;
   lightBg?: boolean;
   description?: string;
+  isBanner?: boolean;
   classes?: {
     root?: string;
     main?: string;
@@ -78,7 +79,11 @@ const HeroAction: React.FC<Props> = ({ classes, ...props }) => {
   const Button = lightBg ? OutlinedButton : ContainedButton;
 
   return (
-    <BackgroundImgSection img={props.img || ''} classes={{ main: styles.main, root: classes?.root }}>
+    <BackgroundImgSection
+      img={props.img || ''}
+      classes={{ main: styles.main, root: classes?.root }}
+      isBanner={props.isBanner}
+    >
       <Grid container justify="center">
         <div className={clsx(styles.main, classes?.main)}>
           <Title

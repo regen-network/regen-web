@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 
+import Modal from 'web-components/lib/components/modal';
 import Section from 'web-components/lib/components/section';
 import Title from 'web-components/lib/components/title';
 import { StepCard, Step } from 'web-components/lib/components/cards/StepCard';
@@ -21,8 +22,8 @@ const useStyles = makeStyles(theme => ({
   section: {
     paddingBottom: theme.spacing(22),
     [theme.breakpoints.down('xs')]: {
-      paddingLeft: theme.spacing(2),
-      paddingRight: theme.spacing(2),
+      paddingLeft: theme.spacing(3),
+      paddingRight: theme.spacing(3),
     },
   },
   heroMain: {
@@ -30,6 +31,12 @@ const useStyles = makeStyles(theme => ({
     paddingBottom: theme.spacing(20),
     [theme.breakpoints.down('xs')]: {
       paddingBottom: theme.spacing(12),
+    },
+  },
+  heroSection: {
+    [theme.breakpoints.down('xs')]: {
+      paddingLeft: theme.spacing(3),
+      paddingRight: theme.spacing(3),
     },
   },
   topoBg: {
@@ -43,6 +50,10 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center',
     alignSelf: 'center',
     margin: '0 auto',
+  },
+  modal: {
+    padding: 0,
+    overflow: 'hidden',
   },
 }));
 
@@ -74,6 +85,7 @@ const MethodologyReviewProcess: React.FC = () => {
   const styles = useStyles();
   const theme = useTheme();
   const history = useHistory();
+  const [open, setOpen] = useState(false);
 
   const {
     heroBannerTop,
@@ -81,6 +93,7 @@ const MethodologyReviewProcess: React.FC = () => {
     externalReviewSection,
     stepCardSections,
     heroBannerBottom,
+    modalContent,
   } = contentByPage.HowToCreateMethodology;
 
   const publicCommentCards = createStepCards(stepCardSections.public.stepCards);
@@ -106,7 +119,7 @@ const MethodologyReviewProcess: React.FC = () => {
         img={typewriterReview}
         title={heroBannerTop.title}
         description={heroBannerTop.description}
-        classes={{ main: styles.heroMain }}
+        classes={{ main: styles.heroMain, section: styles.heroSection }}
       />
 
       <Section className={styles.section}>
@@ -117,7 +130,7 @@ const MethodologyReviewProcess: React.FC = () => {
             description={internalReviewSection.description}
             disclaimerBottom={internalReviewSection.disclaimerBottom}
             btnText={internalReviewSection.btnText}
-            href={internalReviewSection.href}
+            onBtnClick={() => setOpen(true)}
           />
         </div>
       </Section>
@@ -141,12 +154,17 @@ const MethodologyReviewProcess: React.FC = () => {
       </BackgroundImgSection>
 
       <HeroAction
+        isBanner
         img={fernImg}
         title={heroBannerBottom.title}
         description={heroBannerBottom.description}
         actionTxt={heroBannerBottom.btnText}
         action={() => history.push(heroBannerBottom.href)}
       />
+
+      <Modal open={open} onClose={() => setOpen(false)} className={styles.modal}>
+        <iframe title="airtable-signup-form" src={modalContent} />
+      </Modal>
     </div>
   );
 };

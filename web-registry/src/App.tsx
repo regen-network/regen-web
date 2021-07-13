@@ -92,7 +92,7 @@ const App: React.FC = (): JSX.Element => {
           <Route exact path="/projects/impactag/admin">
             <Redirect to="/projects/wilmot/admin" />
           </Route>
-          <Route exact path="/create-a-methodology">
+          <Route exact path="/create-methodology">
             <CreateMethodology />
           </Route>
           <Route exact path="/methodology-review-process" component={MethodologyReviewProcess} />

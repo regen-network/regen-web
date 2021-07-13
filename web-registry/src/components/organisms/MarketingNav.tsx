@@ -34,11 +34,11 @@ const MarketingNav: React.FC = () => {
 
   const headerColors: HeaderColors = {
     '/certificate': theme.palette.primary.main,
-    '/create-a-methodology': theme.palette.primary.main,
+    '/create-methodology': theme.palette.primary.main,
     '/methodology-review-process': theme.palette.primary.main,
   };
 
-  const isTransparent = ['/create-a-methodology', '/methodology-review-process', '/certificate'].some(route =>
+  const isTransparent = ['/create-methodology', '/methodology-review-process', '/certificate'].some(route =>
     pathname.startsWith(route),
   );
 

@@ -67,14 +67,15 @@ interface FAQ {
 }
 
 interface HowToCreateMethodology {
+  modalContent: string;
   heroBannerTop: Hero;
-  internalReviewSection: TernalReviewSection;
-  externalReviewSection: TernalReviewSection;
+  internalReviewSection: ReviewSection;
+  externalReviewSection: ReviewSection;
   stepCardSections: StepCardSections;
   heroBannerBottom: CreateCreditClassSection;
 }
 
-interface TernalReviewSection {
+interface ReviewSection {
   title: string;
   timespan: string;
   description: string;

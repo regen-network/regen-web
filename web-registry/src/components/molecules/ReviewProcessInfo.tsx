@@ -70,7 +70,7 @@ const ReviewProcessInfo: React.FC<{
   disclaimerTop?: string;
   disclaimerBottom?: string;
   btnText?: string;
-  href?: string;
+  onBtnClick?: () => void;
   timespan?: string;
 }> = props => {
   const styles = useStyles();
@@ -101,9 +101,9 @@ const ReviewProcessInfo: React.FC<{
           {ReactHtmlParser(props.description)}
         </Description>
       </div>
-      {props.btnText && props.href && (
+      {props.btnText && props.onBtnClick && (
         <div>
-          <ContainedButton href={props.href}>{ReactHtmlParser(props.btnText)}</ContainedButton>
+          <ContainedButton onClick={props.onBtnClick}>{ReactHtmlParser(props.btnText)}</ContainedButton>
         </div>
       )}
       {props.disclaimerBottom && (

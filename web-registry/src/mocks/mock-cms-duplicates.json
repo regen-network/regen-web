@@ -121,6 +121,7 @@
       }
     },
     "HowToCreateMethodology": {
+      "modalContent": "https://airtable.com/embed/shrRIa2VcxfeXsTXy",
       "heroBannerTop": {
         "title": "Learn more about our methodology review process.",
         "description": "Methodologies submitted to Regen Registry will undergo a scientific review process to support the adoption of best practices for the monitoring, reporting, and verification of nature based solutions. This process is a great opportunity to work with the scientific community to develop your methodology in a way that fosters innovation and trust."
@@ -130,7 +131,7 @@
         "timespan": "2-4 weeks*",
         "description": "Methodologies submitted to Regen Network Development Inc. will pass through an internal review process to ensure that all the components needed to monitor a nature based solution are included. If your methodology is missing important information needed for the monitoring, reporting and verification, we may ask you to make some upgrades and resubmit. Otherwise your methodology will be accepted in beta form on our website! \n\n If you are creating a Flex Methodology, then only an internal review is required.",
         "btnText": "submit a methodology",
-        "href": "TODO:",
+        "href": "MODAL",
         "disclaimerBottom": "*All time frames are estimations that may vary"
       },
       "externalReviewSection": {
@@ -138,7 +139,7 @@
         "timespan": "8-12 weeks*",
         "description": "The external review process consists of A) a public comment period and B) a formal scientific peer review where members of the science community and experts in the field can provide feedback on a methodology. <b>The two processes can be run in parallel</b>, and provide methodology designers with the opportunity to address critiques and improve the science backing their methods.",
         "btnText": "submit a methodology",
-        "href": "TODO:",
+        "href": "/create-methodology",
         "disclaimerTop": "Institutional credits only",
         "disclaimerBottom": "*All time frames are estimations that may vary"
       },
@@ -236,7 +237,7 @@
         "title": "Create a Methodology",
         "description": "Learn more about the ins and outs of creating a new methodology with Regen Registry.",
         "btnText": "Create a Methodology",
-        "href": "TODO: "
+        "href": "/create-methodology"
       }
     }
   },

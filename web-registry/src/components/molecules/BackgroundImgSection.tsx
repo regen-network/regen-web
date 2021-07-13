@@ -25,10 +25,10 @@ const useStyles = makeStyles<Theme, StyleProps>(theme => ({
     display: 'flex',
     flexFlow: 'column nowrap',
     [theme.breakpoints.up('sm')]: {
-      minHeight: theme.spacing(125),
+      minHeight: props.isBanner ? theme.spacing(125) : 'inherit',
     },
     [theme.breakpoints.down('xs')]: {
-      minHeight: theme.spacing(props.isBanner ? 137 : 90),
+      minHeight: props.isBanner ? theme.spacing(90) : 'inherit',
     },
   }),
 }));

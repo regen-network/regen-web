@@ -45,8 +45,8 @@ const useStyles = makeStyles(theme => ({
     },
     [theme.breakpoints.down('xs')]: {
       paddingBottom: theme.spacing(20),
-      paddingRight: theme.spacing(2),
-      paddingLeft: theme.spacing(2),
+      paddingRight: theme.spacing(3),
+      paddingLeft: theme.spacing(3),
     },
   },
   topoSection: {
@@ -81,6 +81,11 @@ const useStyles = makeStyles(theme => ({
       justifyContent: 'flex-start',
       flexWrap: 'nowrap',
       overflow: 'scroll',
+    },
+  },
+  cardItem: {
+    [theme.breakpoints.down('xs')]: {
+      width: '95%',
     },
   },
   overviewCard: {
@@ -173,7 +178,7 @@ const CreateCreditClass: React.FC = () => {
     <Box mt={[8, 12]}>
       <Grid container spacing={4} className={styles.cardWrap}>
         {props.cards.map((card, i) => (
-          <Grid item xs={12} sm={6} md={4} key={i}>
+          <Grid item xs={12} sm={6} md={4} key={i} className={styles.cardItem}>
             <OverviewCard
               className={styles.overviewCard}
               icon={<img src={require(`../assets/${card.icon}`)} alt={card.description} />}
@@ -194,7 +199,7 @@ const CreateCreditClass: React.FC = () => {
         img={writingOnPaperImg}
         title={heroSection.title}
         description={heroSection.description}
-        classes={{ main: styles.heroMain }}
+        classes={{ main: styles.heroMain, section: styles.section }}
       />
 
       <Section title={stepCardSection.title} classes={{ root: styles.section, title: styles.sectionTitle }}>

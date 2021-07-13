@@ -1,7 +1,8 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core';
 import clsx from 'clsx';
 import ReactHtmlParser from 'react-html-parser';
+import { makeStyles } from '@material-ui/core';
+import Box from '@material-ui/core/Box';
 
 import Card from '../cards/Card';
 import CheckIcon from '../icons/CheckIcon';
@@ -85,15 +86,13 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'center',
   },
   title: {
-    display: 'flex',
-    justifyContent: 'center',
     fontWeight: 800,
     fontSize: theme.typography.pxToRem(14),
     fontFamily: theme.typography.h1.fontFamily,
     textAlign: 'center',
     textTransform: 'uppercase',
     letterSpacing: 1,
-    paddingTop: theme.spacing(2),
+    inlineSize: 'min-content',
   },
   description: {
     display: 'flex',
@@ -130,10 +129,10 @@ function OverviewCard({ className, classes, icon, item }: OverviewCardProps): JS
         </div>
       </div>
       <div className={styles.bottom}>
-        <div className={styles.title}>
+        <Box display="flex" justifyContent="center" pt={2}>
           <CheckIcon className={styles.check} />
-          {item.title}
-        </div>
+          <div className={styles.title}>{item.title}</div>
+        </Box>
         <div className={styles.description}>{ReactHtmlParser(item.description)}</div>
       </div>
     </Card>

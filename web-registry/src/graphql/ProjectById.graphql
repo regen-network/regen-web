@@ -1,12 +1,14 @@
 query ProjectById($id: UUID!) {
   projectById(id: $id) {
     metadata
-    creditClassVersionByCreditClassVersionIdAndCreditClassVersionCreatedAt {
-      name
-      version
-      metadata
-      creditClassById {
-        id
+    creditClassByCreditClassId {
+      id
+      creditClassVersionsById(orderBy: CREATED_AT_DESC, first: 1) {
+        nodes {
+          name
+          version
+          metadata
+        }
       }
     }
   }

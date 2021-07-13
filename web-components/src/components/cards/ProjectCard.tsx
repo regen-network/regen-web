@@ -5,6 +5,7 @@ import ReactHtmlParser from 'react-html-parser';
 
 import MediaCard from './MediaCard';
 import BreadcrumbIcon from '../icons/BreadcrumbIcon';
+import Description from '../description';
 import ProjectPlaceInfo, { Place } from '../place/ProjectPlaceInfo';
 import UserInfo, { User } from '../user/UserInfo';
 
@@ -23,12 +24,22 @@ interface Info {
   version: string;
 }
 
+interface InfoWithUrl extends Info {
+  url?: string;
+}
+
+interface CreditClassInfo extends Info, InfoWithUrl {
+  standard: boolean;
+  standardUrl?: string;
+}
+
 interface PurchaseInfo {
   units: number;
   vintageId: string;
+  vintageMetadata: any;
   vintagePeriod: string;
-  creditClass: Info;
-  methodology: Info;
+  creditClass: CreditClassInfo;
+  methodology: InfoWithUrl;
   programGuide: Info;
   projectType: string;
 }
@@ -151,6 +162,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     lineHeight: '150%',
     color: theme.palette.info.dark,
     fontSize: theme.spacing(3.5),
+    display: 'inline',
   },
   purchaseInfo: {
     paddingTop: theme.spacing(3.5),
@@ -174,19 +186,32 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-function PurchaseDetails({ title, info }: { title: string; info: string }): JSX.Element {
+function PurchaseDetails({ title, info, url }: { title: string; info: string; url?: string }): JSX.Element {
   const classes = useStyles();
+  const parsedInfo = ReactHtmlParser(info);
 
   return (
     <div>
       <span className={clsx(classes.details, classes.detailsContent)}>{title}: </span>
-      <span className={clsx(classes.detailsContent)}>{ReactHtmlParser(info)}</span>
+      <Description className={classes.detailsContent}>
+        {url ? (
+          <a href={url} target="_blank" rel="noopener noreferrer">
+            {parsedInfo}»
+          </a>
+        ) : (
+          parsedInfo
+        )}
+      </Description>
     </div>
   );
 }
 
 function formatInfo(info: Info): string {
   return `${info.name ? `${info.name}, ` : ''}${info.id}, ${info.version}`;
+}
+
+function formatStandard(info: CreditClassInfo): string {
+  return `${info.id} Standard ${info.version}`;
 }
 
 export default function ProjectCard({
@@ -212,6 +237,11 @@ export default function ProjectCard({
   const classes = useStyles();
 
   const [open, setOpen] = useState<boolean>(true);
+
+  const serialNumber: string | undefined =
+    purchaseInfo?.vintageMetadata?.['http://regen.network/serialNumber'];
+  const additionalCertifications: string[] | undefined =
+    purchaseInfo?.vintageMetadata?.['http://regen.network/additionalCertifications'];
 
   return (
     <MediaCard
@@ -261,12 +291,45 @@ export default function ProjectCard({
           </span>
           {open && (
             <div className={classes.purchaseDetails}>
-              <PurchaseDetails title="vintage id" info={purchaseInfo.vintageId.substring(0, 8)} />
+              {purchaseInfo.creditClass.standard && (
+                <PurchaseDetails
+                  title={`vintage id${serialNumber ? ' (serial number)' : ''}`}
+                  info={serialNumber || purchaseInfo.vintageId.substring(0, 8)}
+                />
+              )}
               <PurchaseDetails title="vintage period" info={purchaseInfo.vintagePeriod} />
-              <PurchaseDetails title="credit class" info={formatInfo(purchaseInfo.creditClass)} />
-              <PurchaseDetails title="methodology" info={formatInfo(purchaseInfo.methodology)} />
-              <PurchaseDetails title="program guide" info={formatInfo(purchaseInfo.programGuide)} />
-              <PurchaseDetails title="project type" info={purchaseInfo.projectType} />
+              <PurchaseDetails
+                url={purchaseInfo.creditClass.url}
+                title={`credit class${purchaseInfo.creditClass.standard ? ' (type)' : ''}`}
+                info={
+                  purchaseInfo.creditClass.standard && purchaseInfo.creditClass.name
+                    ? purchaseInfo.creditClass.name
+                    : formatInfo(purchaseInfo.creditClass)
+                }
+              />
+              <PurchaseDetails
+                url={purchaseInfo.methodology.url}
+                title="methodology"
+                info={formatInfo(purchaseInfo.methodology)}
+              />
+              {purchaseInfo.creditClass.standard ? (
+                <PurchaseDetails
+                  url={purchaseInfo.creditClass.standardUrl}
+                  title="standard"
+                  info={formatStandard(purchaseInfo.creditClass)}
+                />
+              ) : (
+                <>
+                  <PurchaseDetails title="program guide" info={formatInfo(purchaseInfo.programGuide)} />
+                  <PurchaseDetails title="project type" info={purchaseInfo.projectType} />
+                </>
+              )}
+              {additionalCertifications && (
+                <PurchaseDetails
+                  title="additional certifications"
+                  info={additionalCertifications.join(', ')}
+                />
+              )}
             </div>
           )}
         </div>

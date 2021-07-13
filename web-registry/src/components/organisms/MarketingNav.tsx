@@ -36,18 +36,24 @@ const MarketingNav: React.FC = () => {
     '/certificate': theme.palette.primary.main,
     '/create-methodology': theme.palette.primary.main,
     '/create-credit-class': theme.palette.primary.main,
+    '/methodology-review-process': theme.palette.primary.main,
   };
 
-  const transparentHeaders: RegExp = new RegExp('/create-methodology|/create-credit-class|/certificate');
+  const isTransparent = [
+    '/create-methodology',
+    '/methodology-review-process',
+    '/create-credit-class',
+    '/certificate',
+  ].some(route => pathname.startsWith(route));
 
   return (
     <Header
       isRegistry
       menuItems={menuItems}
       color={headerColors[pathname] || theme.palette.primary.light}
-      transparent={transparentHeaders.test(pathname)}
-      absolute={transparentHeaders.test(pathname)}
-      borderBottom={!transparentHeaders.test(pathname)}
+      transparent={isTransparent}
+      absolute={isTransparent}
+      borderBottom={!isTransparent}
       fullWidth={fullWidthRegExp.test(pathname)}
       pathName={pathname}
     />

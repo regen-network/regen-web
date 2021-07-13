@@ -18,14 +18,15 @@ interface MockCMS {
 interface ContentByPage {
   CreateMethodology: CreateMethodology;
   CreateCreditClass: CreateCreditClass;
+  HowToCreateMethodology: HowToCreateMethodology;
 }
 
 interface CreateCreditClass {
   footerLink: string;
-  heroSection: Section;
+  heroSection: HeroSection;
   stepCardSection: CreateCreditClassStepCardSection;
   creditTypeSection: CreditTypeSection;
-  outcomeSection: Section;
+  outcomeSection: HeroSection;
   bottomBanner: BottomBanner;
 }
 
@@ -53,7 +54,7 @@ interface Card {
   tooltop?: string;
 }
 
-interface Section {
+interface HeroSection {
   title: string;
   description: string;
 }
@@ -67,13 +68,14 @@ interface CreateCreditClassStepCardSection {
 interface StepCard {
   stepNumber: number;
   isActive: boolean;
-  icon?: string;
+  icon: string;
   btnText?: string;
   tagName?: string;
   href?: string;
   title: string;
   description: string;
   faqs?: FAQ[];
+  image?: string;
 }
 
 interface FAQ {
@@ -83,7 +85,7 @@ interface FAQ {
 
 interface CreateMethodology {
   footerLink: string;
-  heroSection: Section;
+  heroSection: HeroSection;
   stepCardSection: CreateMethodologyStepCardSection;
   peerReviewSection: BottomBanner;
   createCreditClassSection: BottomBanner;
@@ -94,6 +96,35 @@ interface CreateMethodologyStepCardSection {
   mainDescription: string;
   bottomTitle: string;
   bottomDescription: string;
+  stepCards: StepCard[];
+}
+
+interface HowToCreateMethodology {
+  modalContent: string;
+  heroBannerTop: HeroSection;
+  internalReviewSection: TernalReviewSection;
+  externalReviewSection: TernalReviewSection;
+  stepCardSections: StepCardSections;
+  heroBannerBottom: BottomBanner;
+}
+
+interface TernalReviewSection {
+  title: string;
+  timespan: string;
+  description: string;
+  btnText: string;
+  href: string;
+  disclaimerTop?: string;
+  disclaimerBottom: string;
+}
+
+interface StepCardSections {
+  public: Public;
+  scientific: Public;
+}
+
+interface Public {
+  title: string;
   stepCards: StepCard[];
 }
 

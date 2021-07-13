@@ -15,6 +15,7 @@ export * from './GettingStarted';
 export * from './Home';
 export * from './MethodologyDetails';
 export * from './MethodologiesList';
+export * from './MethodologyReviewProcess';
 export * from './NotFound';
 export * from './OrganizationProfile';
 export * from './PostPurchase';

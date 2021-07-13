@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import cx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -39,12 +40,16 @@ const useStyles = makeStyles(theme => ({
       paddingBottom: theme.spacing(12),
     },
   },
-  section: {
+  padBottom: {
     [theme.breakpoints.up('sm')]: {
       paddingBottom: theme.spacing(25),
     },
     [theme.breakpoints.down('xs')]: {
       paddingBottom: theme.spacing(20),
+    },
+  },
+  padSides: {
+    [theme.breakpoints.down('xs')]: {
       paddingRight: theme.spacing(3),
       paddingLeft: theme.spacing(3),
     },
@@ -192,6 +197,8 @@ const CreateCreditClass: React.FC = () => {
 
   const resourceCardsShown = isDesktop ? 3 : 2;
 
+  const sectionClasses = cx(styles.padBottom, styles.padSides);
+
   return (
     <div className={styles.root}>
       <HeroTitle
@@ -199,10 +206,10 @@ const CreateCreditClass: React.FC = () => {
         img={writingOnPaperImg}
         title={heroSection.title}
         description={heroSection.description}
-        classes={{ main: styles.heroMain, section: styles.section }}
+        classes={{ main: styles.heroMain, section: styles.padSides }}
       />
 
-      <Section title={stepCardSection.title} classes={{ root: styles.section, title: styles.sectionTitle }}>
+      <Section title={stepCardSection.title} classes={{ root: sectionClasses, title: styles.sectionTitle }}>
         <Box maxWidth={theme.typography.pxToRem(942)} mt={[0, 8.75]} m="0 auto">
           <StepCardsWithDescription stepCards={stepCards} description={stepCardSection.mainDescription} />
         </Box>
@@ -212,7 +219,7 @@ const CreateCreditClass: React.FC = () => {
         <Section
           title={creditTypeSection.title}
           titleAlign={isMobile ? 'left' : 'center'}
-          classes={{ root: styles.section, title: styles.sectionTitle }}
+          classes={{ root: sectionClasses, title: styles.sectionTitle }}
         >
           <Box mt={[8, 16]}>
             <SubtitleAndDescription
@@ -231,7 +238,7 @@ const CreateCreditClass: React.FC = () => {
         </Section>
       </CardMedia>
 
-      <Section withSlider className={styles.section}>
+      <Section withSlider className={sectionClasses}>
         <SubtitleAndDescription
           align="center"
           title={outcomeSection.title}
@@ -248,7 +255,7 @@ const CreateCreditClass: React.FC = () => {
       </Section>
 
       <CardMedia image={topographyImg} className={styles.topoSection}>
-        <Section withSlider className={styles.section}>
+        <Section withSlider className={sectionClasses}>
           <ResponsiveSlider
             itemWidth="90%"
             classes={{ title: styles.resourcesTitle, root: styles.resourcesRoot }}

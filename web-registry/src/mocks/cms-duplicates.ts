@@ -17,24 +17,25 @@ interface MockCMS {
 
 interface ContentByPage {
   CreateMethodology: CreateMethodology;
+  HowToCreateMethodology: HowToCreateMethodology;
 }
 
 interface CreateMethodology {
   footerLink: string;
-  heroSection: HeroSection;
+  heroSection: Hero;
   stepCardSection: StepCardSection;
-  peerReviewSection: Section;
-  createCreditClassSection: Section;
+  peerReviewSection: CreateCreditClassSection;
+  createCreditClassSection: CreateCreditClassSection;
 }
 
-interface Section {
+interface CreateCreditClassSection {
   title: string;
   description: string;
   btnText: string;
   href: string;
 }
 
-interface HeroSection {
+interface Hero {
   title: string;
   description: string;
 }
@@ -57,11 +58,41 @@ interface StepCard {
   description: string;
   tagName?: string;
   faqs?: FAQ[];
+  image?: string;
 }
 
 interface FAQ {
   question: string;
   answer: string;
+}
+
+interface HowToCreateMethodology {
+  modalContent: string;
+  heroBannerTop: Hero;
+  internalReviewSection: ReviewSection;
+  externalReviewSection: ReviewSection;
+  stepCardSections: StepCardSections;
+  heroBannerBottom: CreateCreditClassSection;
+}
+
+interface ReviewSection {
+  title: string;
+  timespan: string;
+  description: string;
+  btnText: string;
+  href: string;
+  disclaimerTop?: string;
+  disclaimerBottom: string;
+}
+
+interface StepCardSections {
+  public: Public;
+  scientific: Public;
+}
+
+interface Public {
+  title: string;
+  stepCards: StepCard[];
 }
 
 interface Outcome {

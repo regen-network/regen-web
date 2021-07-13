@@ -13,6 +13,7 @@ type Props = {
     title?: string;
     description?: string;
     main?: string;
+    section?: string;
   };
 };
 
@@ -54,7 +55,7 @@ const HeroTitle: React.FC<Props> = ({ classes, ...props }) => {
     <BackgroundImgSection
       isBanner={props.isBanner}
       img={props.img}
-      classes={{ main: cx(styles.main, classes?.main) }}
+      classes={{ main: cx(styles.main, classes?.main), section: classes?.section }}
     >
       <Typography variant="h1" className={cx(styles.title, classes?.title)}>
         {props.title}

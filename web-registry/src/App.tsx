@@ -38,6 +38,7 @@ import {
   UserProfile,
   VerifyEmail,
   MethodologyDetails,
+  CreateCreditClass,
 } from './pages';
 
 import './App.css';
@@ -92,9 +93,8 @@ const App: React.FC = (): JSX.Element => {
           <Route exact path="/projects/impactag/admin">
             <Redirect to="/projects/wilmot/admin" />
           </Route>
-          <Route exact path="/create-methodology">
-            <CreateMethodology />
-          </Route>
+          <Route exact path="/create-methodology" component={CreateMethodology} />
+          <Route exact path="/create-credit-class" component={CreateCreditClass} />
           <Route exact path="/methodology-review-process" component={MethodologyReviewProcess} />
           <Route
             path="/projects"

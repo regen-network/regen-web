@@ -17,34 +17,51 @@ interface MockCMS {
 
 interface ContentByPage {
   CreateMethodology: CreateMethodology;
+  CreateCreditClass: CreateCreditClass;
   HowToCreateMethodology: HowToCreateMethodology;
 }
 
-interface CreateMethodology {
+interface CreateCreditClass {
   footerLink: string;
-  heroSection: Hero;
-  stepCardSection: StepCardSection;
-  peerReviewSection: CreateCreditClassSection;
-  createCreditClassSection: CreateCreditClassSection;
+  heroSection: HeroSection;
+  stepCardSection: CreateCreditClassStepCardSection;
+  creditTypeSection: CreditTypeSection;
+  outcomeSection: HeroSection;
+  bottomBanner: BottomBanner;
 }
 
-interface CreateCreditClassSection {
+interface BottomBanner {
   title: string;
   description: string;
   btnText: string;
   href: string;
 }
 
-interface Hero {
+interface CreditTypeSection {
+  title: string;
+  subtitleTop: string;
+  descriptionTop: string;
+  subtitleBottom: string;
+  descriptionBottom: string;
+  institutionalCards: Card[];
+  flexCreditCards: Card[];
+}
+
+interface Card {
+  title: string;
+  description: string;
+  icon: string;
+  tooltop?: string;
+}
+
+interface HeroSection {
   title: string;
   description: string;
 }
 
-interface StepCardSection {
+interface CreateCreditClassStepCardSection {
   title: string;
   mainDescription: string;
-  bottomTitle: string;
-  bottomDescription: string;
   stepCards: StepCard[];
 }
 
@@ -53,10 +70,10 @@ interface StepCard {
   isActive: boolean;
   icon: string;
   btnText?: string;
+  tagName?: string;
   href?: string;
   title: string;
   description: string;
-  tagName?: string;
   faqs?: FAQ[];
   image?: string;
 }
@@ -66,16 +83,32 @@ interface FAQ {
   answer: string;
 }
 
-interface HowToCreateMethodology {
-  modalContent: string;
-  heroBannerTop: Hero;
-  internalReviewSection: ReviewSection;
-  externalReviewSection: ReviewSection;
-  stepCardSections: StepCardSections;
-  heroBannerBottom: CreateCreditClassSection;
+interface CreateMethodology {
+  footerLink: string;
+  heroSection: HeroSection;
+  stepCardSection: CreateMethodologyStepCardSection;
+  peerReviewSection: BottomBanner;
+  createCreditClassSection: BottomBanner;
 }
 
-interface ReviewSection {
+interface CreateMethodologyStepCardSection {
+  title: string;
+  mainDescription: string;
+  bottomTitle: string;
+  bottomDescription: string;
+  stepCards: StepCard[];
+}
+
+interface HowToCreateMethodology {
+  modalContent: string;
+  heroBannerTop: HeroSection;
+  internalReviewSection: TernalReviewSection;
+  externalReviewSection: TernalReviewSection;
+  stepCardSections: StepCardSections;
+  heroBannerBottom: BottomBanner;
+}
+
+interface TernalReviewSection {
   title: string;
   timespan: string;
   description: string;

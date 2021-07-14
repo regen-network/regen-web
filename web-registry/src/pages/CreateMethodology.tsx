@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import CardMedia from '@material-ui/core/CardMedia';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 import Section from 'web-components/lib/components/section';
 import { StepCard, Step } from 'web-components/lib/components/cards/StepCard';
@@ -105,6 +106,9 @@ const CreateMethodology: React.FC = () => {
   const history = useHistory();
   const [open, setOpen] = useState(false);
 
+  const isDesktop = useMediaQuery(theme.breakpoints.up('lg'));
+  const resourceCardsShown = isDesktop ? 3 : 2;
+
   const {
     stepCardSection,
     createCreditClassSection,
@@ -172,13 +176,14 @@ const CreateMethodology: React.FC = () => {
       <CardMedia image={topographyImg} className={styles.resourcesSection}>
         <Section withSlider titleAlign="left">
           <ResponsiveSlider
+            infinite={false}
             itemWidth="90%"
             classes={{ title: styles.resourcesTitle, root: styles.resourcesRoot }}
             padding={theme.spacing(2.5)}
             title="Resources"
             titleVariant="h2"
-            arrows={resources?.length > 3}
-            slidesToShow={3}
+            arrows={resources?.length > resourceCardsShown}
+            slidesToShow={resourceCardsShown}
             items={resources.map(({ btnText, description, href, imgSrc, lastUpdated, title }) => (
               <ResourcesCard
                 image={{ publicURL: require(`../assets/${imgSrc}`) }}

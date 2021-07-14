@@ -382,6 +382,17 @@ contributorSection:
         of the ETH RPG games. As both a farmer and developer, he feels extremely
         lucky to serve ecological regeneration with Regen Network.
       linkedUrl: https://www.linkedin.com/in/jaredmsmith/
+    - image: ../../static/media/garette.jpeg
+      title: BUSINESS DEVELOPMENT AND BLOCKCHAIN ECONOMICS
+      name: Garrette Furo
+      description: Garrette knows that ecological auditing and distributed networks
+        are paramount to capitalism in the twenty-first century. Garrette has
+        worked with family offices and private equity funds on ESG
+        classification and blockchain tech. Garrette has held positions as a
+        neuroscientist at Columbia University (CUMC), a U.S. Bitcoin ETF
+        applicant, miner, and investor in emerging industries.
+      twitterUrl: https://twitter.com/GarretteDVF
+      linkedUrl: https://www.linkedin.com/in/garrettefuro/
 advisorSection:
   title: Advisors
   advisors:
@@ -410,18 +421,6 @@ advisorSection:
         about social impact businesses capable of driving change at the
         intersection of privacy, democracy, education, human rights, and
         technology. 
-    - name: Garrette Furo
-      title: Business Development and Blockchain Economics
-      image: ../../static/media/team/garette.jpg
-      linkedUrl: https://www.linkedin.com/in/garrettefuro/
-      twitterUrl: https://twitter.com/GarretteDVF
-      githubUrl: ""
-      description: Garrette knows that ecological auditing and distributed networks
-        are paramount to capitalism in the twenty-first century. Garrette has
-        worked with family offices and private equity funds on ESG
-        classification and blockchain tech. Garrette has held positions as a
-        neuroscientist at Columbia University (CUMC), a U.S. Bitcoin ETF
-        applicant, miner, and investor in emerging industries.
     - name: Andrew Nannini
       title: Investment Adviser and Business Development
       image: ../../static/media/team/andrew.jpg

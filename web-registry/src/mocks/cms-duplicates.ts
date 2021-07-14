@@ -17,7 +17,7 @@ interface MockCMS {
 
 interface ContentByPage {
   CreateMethodology: CreateMethodology;
-  HowToCreateMethodology: HowToCreateMethodology;
+  MethodologyReviewProcess: MethodologyReviewProcess;
 }
 
 interface CreateMethodology {
@@ -66,7 +66,7 @@ interface FAQ {
   answer: string;
 }
 
-interface HowToCreateMethodology {
+interface MethodologyReviewProcess {
   modalContent: string;
   heroBannerTop: Hero;
   internalReviewSection: ReviewSection;

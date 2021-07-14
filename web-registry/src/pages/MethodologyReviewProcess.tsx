@@ -45,7 +45,7 @@ type StepCard = {
 };
 
 // TODO: Once the API is connected, replace this type (it shouldn't be necessary to define it here)
-type ApiCard = typeof contentByPage.HowToCreateMethodology['stepCardSections']['public']['stepCards'];
+type ApiCard = typeof contentByPage.MethodologyReviewProcess['stepCardSections']['public']['stepCards'];
 const createStepCards = (raw: ApiCard): StepCard[] =>
   raw.map(({ icon, title, btnText, href, description, isActive, stepNumber, faqs, tagName, image }) => ({
     icon: <img src={require(`../assets/${icon}`)} alt={title} />,
@@ -76,7 +76,7 @@ const MethodologyReviewProcess: React.FC = () => {
     stepCardSections,
     heroBannerBottom,
     modalContent,
-  } = contentByPage.HowToCreateMethodology;
+  } = contentByPage.MethodologyReviewProcess;
 
   const publicCommentCards = createStepCards(stepCardSections.public.stepCards);
   const scienceReviewCards = createStepCards(stepCardSections.scientific.stepCards);

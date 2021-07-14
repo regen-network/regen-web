@@ -48,12 +48,12 @@ const useStyles = makeStyles(theme => ({
       paddingBottom: theme.spacing(20),
     },
   },
-  padSides: {
-    [theme.breakpoints.down('xs')]: {
-      paddingRight: theme.spacing(3),
-      paddingLeft: theme.spacing(3),
-    },
-  },
+  // padSides: {
+  //   [theme.breakpoints.down('xs')]: {
+  //     paddingRight: theme.spacing(3),
+  //     paddingLeft: theme.spacing(3),
+  //   },
+  // },
   topoSection: {
     background: theme.palette.grey[50],
     borderTop: `1px solid ${theme.palette.grey[100]}`,
@@ -197,7 +197,7 @@ const CreateCreditClass: React.FC = () => {
 
   const resourceCardsShown = isDesktop ? 3 : 2;
 
-  const sectionClasses = cx(styles.padBottom, styles.padSides);
+  // const sectionClasses = cx(styles.padBottom, styles.padSides);
 
   return (
     <div className={styles.root}>
@@ -206,12 +206,14 @@ const CreateCreditClass: React.FC = () => {
         img={writingOnPaperImg}
         title={heroSection.title}
         description={heroSection.description}
-        classes={{ main: styles.heroMain, section: styles.padSides }}
+        classes={{ main: styles.heroMain }}
       />
 
-      <Section title={stepCardSection.title} classes={{ root: sectionClasses, title: styles.sectionTitle }}>
-        <Box maxWidth={theme.typography.pxToRem(942)} mt={[0, 8.75]} m="0 auto">
-          <StepCardsWithDescription stepCards={stepCards} description={stepCardSection.mainDescription} />
+      <Section title={stepCardSection.title} classes={{ root: styles.padBottom, title: styles.sectionTitle }}>
+        <Box display={['block', 'flex']} justifyContent="center">
+          <Box maxWidth={theme.typography.pxToRem(942)} mt={[0, 8.75]} mx={[-1, 'inherit']}>
+            <StepCardsWithDescription stepCards={stepCards} description={stepCardSection.mainDescription} />
+          </Box>
         </Box>
       </Section>
 
@@ -219,7 +221,7 @@ const CreateCreditClass: React.FC = () => {
         <Section
           title={creditTypeSection.title}
           titleAlign={isMobile ? 'left' : 'center'}
-          classes={{ root: sectionClasses, title: styles.sectionTitle }}
+          classes={{ root: styles.padBottom, title: styles.sectionTitle }}
         >
           <Box mt={[8, 16]}>
             <SubtitleAndDescription
@@ -238,7 +240,7 @@ const CreateCreditClass: React.FC = () => {
         </Section>
       </CardMedia>
 
-      <Section withSlider className={sectionClasses}>
+      <Section withSlider className={styles.padBottom}>
         <SubtitleAndDescription
           align="center"
           title={outcomeSection.title}
@@ -255,7 +257,7 @@ const CreateCreditClass: React.FC = () => {
       </Section>
 
       <CardMedia image={topographyImg} className={styles.topoSection}>
-        <Section withSlider className={sectionClasses}>
+        <Section withSlider className={styles.padBottom}>
           <ResponsiveSlider
             itemWidth="90%"
             classes={{ title: styles.resourcesTitle, root: styles.resourcesRoot }}
@@ -279,6 +281,7 @@ const CreateCreditClass: React.FC = () => {
       </CardMedia>
 
       <HeroAction
+        isBanner
         classes={{ main: styles.bottomSection }}
         img={fernImg}
         title={bottomBanner.title}

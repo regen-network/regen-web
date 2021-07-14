@@ -48,12 +48,6 @@ const useStyles = makeStyles(theme => ({
       paddingBottom: theme.spacing(20),
     },
   },
-  // padSides: {
-  //   [theme.breakpoints.down('xs')]: {
-  //     paddingRight: theme.spacing(3),
-  //     paddingLeft: theme.spacing(3),
-  //   },
-  // },
   topoSection: {
     background: theme.palette.grey[50],
     borderTop: `1px solid ${theme.palette.grey[100]}`,
@@ -197,8 +191,6 @@ const CreateCreditClass: React.FC = () => {
 
   const resourceCardsShown = isDesktop ? 3 : 2;
 
-  // const sectionClasses = cx(styles.padBottom, styles.padSides);
-
   return (
     <div className={styles.root}>
       <HeroTitle
@@ -259,6 +251,7 @@ const CreateCreditClass: React.FC = () => {
       <CardMedia image={topographyImg} className={styles.topoSection}>
         <Section withSlider className={styles.padBottom}>
           <ResponsiveSlider
+            infinite={false}
             itemWidth="90%"
             classes={{ title: styles.resourcesTitle, root: styles.resourcesRoot }}
             padding={theme.spacing(2.5)}

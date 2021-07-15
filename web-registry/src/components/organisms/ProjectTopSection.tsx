@@ -189,7 +189,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontSize: theme.typography.pxToRem(12),
     fontWeight: 800,
   },
-  standardName: {
+  darkText: {
     color: theme.palette.info.dark,
     position: 'relative',
   },
@@ -221,7 +221,7 @@ function ProjectTopLink({
 }: {
   label: string;
   name: string;
-  url: string;
+  url?: string;
   standard?: boolean;
 }): JSX.Element {
   const classes = useStyles();
@@ -230,25 +230,33 @@ function ProjectTopLink({
   return (
     <div className={classes.creditClassDetail}>
       <Title className={classes.creditClass} variant="h5">
-        {label}
+        {label}:
       </Title>
-      {standard ? (
-        <div className={cx(classes.creditClassName, classes.standardName)}>
-          {ReactHtmlParser(name)}
-          <Link className={classes.arrowLink} href={url} rel="noopener noreferrer" target="_blank">
-            <ArrowIcon className={classes.arrowIcon} direction="next" color={theme.palette.secondary.main} />
+      {url ? (
+        standard ? (
+          <div className={cx(classes.creditClassName, classes.darkText)}>
+            {ReactHtmlParser(name)}
+            <Link className={classes.arrowLink} href={url} rel="noopener noreferrer" target="_blank">
+              <ArrowIcon
+                className={classes.arrowIcon}
+                direction="next"
+                color={theme.palette.secondary.main}
+              />
+            </Link>
+          </div>
+        ) : (
+          <Link
+            className={cx(classes.creditClassName, classes.creditClassLink)}
+            href={url}
+            rel="noopener noreferrer"
+            target="_blank"
+            color="secondary"
+          >
+            {ReactHtmlParser(name)}
           </Link>
-        </div>
+        )
       ) : (
-        <Link
-          className={cx(classes.creditClassName, classes.creditClassLink)}
-          href={url}
-          rel="noopener noreferrer"
-          target="_blank"
-          color="secondary"
-        >
-          {ReactHtmlParser(name)}
-        </Link>
+        <div className={cx(classes.creditClassName, classes.darkText)}>{ReactHtmlParser(name)}</div>
       )}
     </div>
   );
@@ -278,28 +286,32 @@ function ProjectTopSection({ project, projectDefault, geojson, isGISFile }: Proj
                 project.creditClass.handle &&
                 project.creditClass.standardUrl && (
                   <ProjectTopLink
-                    label="standard:"
+                    label="standard"
                     name={project.creditClass.handle}
                     url={project.creditClass.standardUrl}
                     standard={project.creditClass.standard}
                   />
                 )}
               <ProjectTopLink
-                label={`credit class${project.creditClass.standard ? ' (type)' : ''}:`}
+                label="offset generation method"
+                name={project.creditClass.offsetGenerationMethod}
+              />
+              <ProjectTopLink
+                label={`credit class${project.creditClass.standard ? ' (type)' : ''}`}
                 name={project.creditClass.name}
                 url={project.creditClass.url}
                 standard={project.creditClass.standard}
               />
               {project.methodology && (
                 <ProjectTopLink
-                  label="methodology:"
+                  label="methodology"
                   name={project.methodology.name}
                   url={project.methodology.url}
                 />
               )}
               {project.additionalCertification && (
                 <ProjectTopLink
-                  label="additional certification:"
+                  label="additional certification"
                   name={project.additionalCertification.name}
                   url={project.additionalCertification.url}
                   standard={project.creditClass.standard}

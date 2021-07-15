@@ -10,6 +10,7 @@ import { Methodology } from '../methodologies';
 export interface CreditClass {
   name: string;
   url: string;
+  offsetGenerationMethod: string;
   description?: string;
   methodology?: Methodology;
   tag?: string;

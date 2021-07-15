@@ -267,7 +267,8 @@ function CertificatePage(): JSX.Element {
                 background={background}
                 creditName={creditClassVersion?.name || ''}
                 certificateTitle={
-                  creditClassVersion?.metadata?.['http://regen.network/certificateTitle'] || 'Carbon Removal'
+                  creditClassVersion?.metadata?.['http://regen.network/offsetGenerationMethod'] ||
+                  'Carbon Removal'
                 }
                 creditUnitName={creditClassVersion?.metadata?.['http://regen.network/creditClassUnit']}
                 projectName={project?.name || ''}

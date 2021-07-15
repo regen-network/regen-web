@@ -293,14 +293,14 @@ function ProjectTopSection({ project, projectDefault, geojson, isGISFile }: Proj
                   />
                 )}
               <ProjectTopLink
-                label="offset generation method"
-                name={project.creditClass.offsetGenerationMethod}
-              />
-              <ProjectTopLink
                 label={`credit class${project.creditClass.standard ? ' (type)' : ''}`}
                 name={project.creditClass.name}
                 url={project.creditClass.url}
                 standard={project.creditClass.standard}
+              />
+              <ProjectTopLink
+                label="offset generation method"
+                name={project.creditClass.offsetGenerationMethod}
               />
               {project.methodology && (
                 <ProjectTopLink

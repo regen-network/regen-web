@@ -152,15 +152,6 @@ coreSection:
       title: "Marketing Coordinator "
       linkedUrl: https://www.linkedin.com/in/emily-rogers-she-her-5011706b/
       image: ../../static/media/emily-rogers.png
-    - title: Senior Ecological Economist
-      name: "James Pittman "
-      description: "James has over 20 years of experience in whole systems design,
-        triple bottom line accounting, and sustainability strategy with a focus
-        on land management and agriculture.  He specializes in the development
-        of innovative strategies and incentive mechanisms for carbon asset
-        management, ecosystem service payments, and regenerative natural capital
-        investment finance. "
-      image: ../../static/media/james-pittman.png
     - name: Erika Logie
       title: UI/UX Designer
       description: Erika has 13+ years of experience as a UX and UI Designer, and
@@ -298,6 +289,16 @@ coreSection:
       linkedUrl: https://www.linkedin.com/in/john-kemp-0xdeadbabe/
       twitterUrl: https://twitter.com/frumioj
       githubUrl: https://github.com/frumioj
+    - image: ../../static/media/alex.png
+      linkedUrl: linkedIn.com/in/alexkarana
+      description: "Alex is a licensed attorney in Illinois and holds a chemical
+        engineering degree. Alex practices intellectual property law and worked
+        in automotive prior to law school with brands like Jeep, Polaris,
+        Toyota, and GM.  Alex has a passion for working with startups and is
+        interested in blockchain, NFTs, and cryptography.  Alex currently lives
+        in Chicago and is from Detroit. "
+      name: Alex Karana
+      title: Product Legal Assistant
 contributorSection:
   title: Contributors
   contributors:
@@ -372,6 +373,26 @@ contributorSection:
         of the ETH RPG games. As both a farmer and developer, he feels extremely
         lucky to serve ecological regeneration with Regen Network.
       linkedUrl: https://www.linkedin.com/in/jaredmsmith/
+    - image: ../../static/media/garette.jpeg
+      title: BUSINESS DEVELOPMENT AND BLOCKCHAIN ECONOMICS
+      name: Garrette Furo
+      description: Garrette knows that ecological auditing and distributed networks
+        are paramount to capitalism in the twenty-first century. Garrette has
+        worked with family offices and private equity funds on ESG
+        classification and blockchain tech. Garrette has held positions as a
+        neuroscientist at Columbia University (CUMC), a U.S. Bitcoin ETF
+        applicant, miner, and investor in emerging industries.
+      twitterUrl: https://twitter.com/GarretteDVF
+      linkedUrl: https://www.linkedin.com/in/garrettefuro/
+    - image: ../../static/media/james-pittman.png
+      name: James Pittman
+      title: SENIOR ECOLOGICAL ECONOMIST
+      description: James has over 20 years of experience in whole systems design,
+        triple bottom line accounting, and sustainability strategy with a focus
+        on land management and agriculture. He specializes in the development of
+        innovative strategies and incentive mechanisms for carbon asset
+        management, ecosystem service payments, and regenerative natural capital
+        investment finance.
 advisorSection:
   title: Advisors
   advisors:
@@ -400,18 +421,6 @@ advisorSection:
         about social impact businesses capable of driving change at the
         intersection of privacy, democracy, education, human rights, and
         technology. 
-    - name: Garrette Furo
-      title: Business Development and Blockchain Economics
-      image: ../../static/media/team/garette.jpg
-      linkedUrl: https://www.linkedin.com/in/garrettefuro/
-      twitterUrl: https://twitter.com/GarretteDVF
-      githubUrl: ""
-      description: Garrette knows that ecological auditing and distributed networks
-        are paramount to capitalism in the twenty-first century. Garrette has
-        worked with family offices and private equity funds on ESG
-        classification and blockchain tech. Garrette has held positions as a
-        neuroscientist at Columbia University (CUMC), a U.S. Bitcoin ETF
-        applicant, miner, and investor in emerging industries.
     - name: Andrew Nannini
       title: Investment Adviser and Business Development
       image: ../../static/media/team/andrew.jpg

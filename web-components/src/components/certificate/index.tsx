@@ -22,6 +22,7 @@ interface StyleProps {
 interface CertificateProps {
   background: string;
   creditName: string;
+  certificateTitle: string;
   creditUnitName?: string;
   projectName: string;
   creditsUnits: number;
@@ -233,6 +234,7 @@ function Stakeholder({ info, total }: { info: StakeholderInfo; total: number }):
 export default function Certificate({
   background,
   creditName,
+  certificateTitle,
   creditUnitName,
   projectName,
   creditsUnits,
@@ -253,8 +255,8 @@ export default function Certificate({
             <div className={classes.whiteTriangle} />
             <div className={classes.greenTriangle} />
           </div>
-          <Title variant="h2" className={classes.bannerContent}>
-            Certificate of Carbon Removal
+          <Title variant="h3" className={classes.bannerContent}>
+            Certificate of {certificateTitle}
           </Title>
           <div className={clsx(classes.bannerSideRight, classes.bannerSide)}>
             <div className={classes.whiteTriangle} />

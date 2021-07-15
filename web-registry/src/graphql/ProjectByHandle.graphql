@@ -26,6 +26,40 @@ fragment organizationFields on Organization {
   }
 }
 
+fragment creditVintageFields on CreditVintage {
+  id
+  createdAt
+  startDate
+  endDate
+  initialDistribution
+  units
+  certificateLink
+  txHash
+  creditClassVersionByCreditClassVersionIdAndCreditClassVersionCreatedAt {
+    name
+    version
+    metadata
+    creditClassById {
+      handle
+    }
+  }
+  methodologyVersionByMethodologyVersionIdAndMethodologyVersionCreatedAt {
+    name
+    version
+    methodologyById {
+      handle
+    }
+  }
+  walletByTokenizerId {
+    addr
+    partiesByWalletId(first: 1) {
+      nodes {
+        ...partyFields
+      }
+    }
+  }
+}
+
 query ProjectByHandle($handle: String!) {
   projectByHandle(handle: $handle) {
     eventsByProjectId(orderBy: DATE_ASC) {
@@ -34,37 +68,7 @@ query ProjectByHandle($handle: String!) {
         summary
         description
         creditVintageByEventId {
-          id
-          createdAt
-          startDate
-          endDate
-          initialDistribution
-          units
-          certificateLink
-          txHash
-          creditClassVersionByCreditClassVersionIdAndCreditClassVersionCreatedAt {
-            name
-            version
-            metadata
-            creditClassById {
-              handle
-            }
-          }
-          methodologyVersionByMethodologyVersionIdAndMethodologyVersionCreatedAt {
-            name
-            version
-            methodologyById {
-              handle
-            }
-          }
-          walletByTokenizerId {
-            addr
-            partiesByWalletId(first: 1) {
-              nodes {
-                ...partyFields
-              }
-            }
-          }
+          ...creditVintageFields
         }
       }
     }
@@ -89,22 +93,7 @@ query ProjectByHandle($handle: String!) {
           summary
           description
           creditVintageByEventId {
-            id
-            createdAt
-            startDate
-            endDate
-            initialDistribution
-            units
-            certificateLink
-            txHash
-            walletByTokenizerId {
-              addr
-              partiesByWalletId(first: 1) {
-                nodes {
-                  ...partyFields
-                }
-              }
-            }
+            ...creditVintageFields
           }
         }
       }

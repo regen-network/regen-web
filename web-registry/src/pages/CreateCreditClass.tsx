@@ -173,7 +173,7 @@ const CreateCreditClass: React.FC = () => {
   };
 
   const OverviewCards: React.FC<{ cards: any[] }> = props => (
-    <Box mt={[8, 12]}>
+    <Box mt={[8, 12]} mx={[-1.5, 'auto']}>
       <Grid container spacing={4} className={styles.cardWrap}>
         {props.cards.map((card, i) => (
           <Grid item xs={12} sm={6} md={4} key={i} className={styles.cardItem}>
@@ -202,7 +202,7 @@ const CreateCreditClass: React.FC = () => {
 
       <Section title={stepCardSection.title} classes={{ root: styles.padBottom, title: styles.sectionTitle }}>
         <Box display={['block', 'flex']} justifyContent="center">
-          <Box maxWidth={theme.typography.pxToRem(942)} mt={[0, 8.75]} mx={[-1, 'inherit']}>
+          <Box maxWidth={theme.typography.pxToRem(942)} mt={[6, 8.75]} mx={[-1, 'inherit']}>
             <StepCardsWithDescription stepCards={stepCards} description={stepCardSection.mainDescription} />
           </Box>
         </Box>
@@ -231,7 +231,7 @@ const CreateCreditClass: React.FC = () => {
         </Section>
       </CardMedia>
 
-      <Section withSlider className={styles.padBottom}>
+      <Section className={styles.padBottom}>
         <SubtitleAndDescription
           align="center"
           title={outcomeSection.title}

@@ -8,7 +8,7 @@ import { init as initGA } from './lib/ga';
 
 import CookiesBanner from 'web-components/lib/components/banner/CookiesBanner';
 import { ScrollToTop, ProtectedRoute } from './components/atoms';
-import { /* RegistryNav, */ AppFooter, MarketingNav } from './components/organisms';
+import { RegistryNav, AppFooter, MarketingNav } from './components/organisms';
 
 import {
   // Additionality,
@@ -70,8 +70,8 @@ const App: React.FC = (): JSX.Element => {
     <BrowserRouter basename={process.env.PUBLIC_URL}>
       <ScrollToTop />
       <div>
-        {/* <RegistryNav /> */}
-        <MarketingNav />
+        <RegistryNav />
+        {/* <MarketingNav /> */}
         <Switch>
           <Route exact path="/">
             {/* <Home /> */}

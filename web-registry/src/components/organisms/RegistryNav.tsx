@@ -59,23 +59,38 @@ const RegistryNav: React.FC = () => {
         },
       ],
     },
+    // {
+    //   title: 'Program',
+    //   dropdownItems: [{ title: 'program' }],
+    // },
   ];
 
   const headerColors: HeaderColors = {
     '/certificate': theme.palette.primary.main,
+    '/create-methodology': theme.palette.primary.main,
+    '/create-credit-class': theme.palette.primary.main,
+    '/methodology-review-process': theme.palette.primary.main,
   };
+
+  const isTransparent = [
+    '/create-methodology',
+    '/methodology-review-process',
+    '/create-credit-class',
+    '/certificate',
+  ].some(route => pathname.startsWith(route));
 
   return (
     <Header
+      isRegistry
       isAuthenticated={isAuthenticated}
       onLogin={() => loginWithRedirect({ redirectUri: window.location.origin })}
       onLogout={() => logout({ returnTo: window.location.origin })}
       onSignup={() => history.push('/signup')}
       menuItems={menuItems}
       color={headerColors[pathname] ? headerColors[pathname] : theme.palette.primary.light}
-      transparent={pathname === '/certificate'}
-      absolute={pathname === '/certificate'}
-      borderBottom={pathname !== '/certificate'}
+      transparent={isTransparent}
+      absolute={isTransparent}
+      borderBottom={!isTransparent}
       fullWidth={fullWidthRegExp.test(pathname)}
       pathName={pathname}
     />

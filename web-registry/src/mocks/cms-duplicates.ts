@@ -62,10 +62,10 @@ interface HeroSection {
 interface CreateCreditClassStepCardSection {
   title: string;
   mainDescription: string;
-  stepCards: StepCardSectionStepCard[];
+  stepCards: StepCard[];
 }
 
-interface StepCardSectionStepCard {
+interface StepCard {
   stepNumber: number;
   isActive: boolean;
   icon: string;
@@ -96,7 +96,7 @@ interface CreateMethodologyStepCardSection {
   mainDescription: string;
   bottomTitle: string;
   bottomDescription: string;
-  stepCards: StepCardSectionStepCard[];
+  stepCards: StepCard[];
 }
 
 interface MethodologyReviewProcess {
@@ -125,12 +125,12 @@ interface StepCardSections {
 
 interface Public {
   title: string;
-  stepCards: StepCardSectionStepCard[];
+  stepCards: StepCard[];
 }
 
 interface Scientific {
   title: string;
-  stepCards: StepCardSectionStepCard[];
+  stepCards: StepCard[];
 }
 
 interface Outcome {

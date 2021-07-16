@@ -146,9 +146,7 @@ const MethodologyReviewProcess: React.FC = () => {
         title={heroBannerBottom.title}
         description={heroBannerBottom.description}
         actionTxt={heroBannerBottom.btnText}
-        action={() =>
-          heroBannerBottom.href === 'MODAL' ? setOpen(true) : history.push(heroBannerBottom.href)
-        }
+        action={() => history.push(heroBannerBottom.href)}
       />
 
       <Modal open={open} onClose={() => setOpen(false)} className={styles.modal}>

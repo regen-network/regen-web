@@ -43,11 +43,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     maxWidth: theme.typography.pxToRem(942),
   },
   outcomeSection: {
-    paddingTop: 0,
-    [theme.breakpoints.up('sm')]: {
-      paddingTop: theme.spacing(10),
-      paddingBottom: theme.spacing(25),
-    },
+    paddingTop: theme.spacing(10),
+    paddingBottom: theme.spacing(25),
     [theme.breakpoints.down('xs')]: {
       paddingTop: theme.spacing(0),
       paddingBottom: theme.spacing(20),
@@ -57,9 +54,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     background: theme.palette.grey[50],
     borderTop: `1px solid ${theme.palette.grey[100]}`,
     borderBottom: `1px solid ${theme.palette.grey[100]}`,
-    [theme.breakpoints.up('sm')]: {
-      paddingBottom: theme.spacing(22.25),
-    },
+    paddingBottom: theme.spacing(22.25),
     [theme.breakpoints.down('xs')]: {
       paddingBottom: theme.spacing(17.75),
     },

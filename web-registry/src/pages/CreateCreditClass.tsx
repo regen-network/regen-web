@@ -8,7 +8,6 @@ import Grid from '@material-ui/core/Grid';
 import Section from 'web-components/lib/components/section';
 
 import { StepCard, Step } from 'web-components/lib/components/cards/StepCard';
-import { OverviewCard } from 'web-components/lib/components/cards/OverviewCard';
 import ImpactCard from 'web-components/lib/components/cards/ImpactCard';
 import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';
 import ResourcesCard from 'web-components/lib/components/cards/ResourcesCard';
@@ -18,7 +17,7 @@ import Modal from 'web-components/lib/components/modal';
 import Title from 'web-components/lib/components/title';
 import Description from 'web-components/lib/components/description';
 
-import { HeroTitle, HeroAction } from '../components/molecules';
+import { HeroTitle, HeroAction, OverviewCards } from '../components/molecules';
 import { StepCardsWithDescription } from '../components/organisms';
 import { outcomes, resources, contentByPage } from '../mocks';
 
@@ -72,23 +71,6 @@ const useStyles = makeStyles(theme => ({
   },
   resourcesRoot: {
     paddingTop: 0,
-  },
-  cardWrap: {
-    justifyContent: 'center',
-    [theme.breakpoints.down('xs')]: {
-      justifyContent: 'flex-start',
-      flexWrap: 'nowrap',
-      overflow: 'scroll',
-    },
-  },
-  cardItem: {
-    [theme.breakpoints.down('xs')]: {
-      width: '95%',
-    },
-  },
-  overviewCard: {
-    width: '100%',
-    height: '100%',
   },
   modal: {
     padding: 0,
@@ -172,19 +154,9 @@ const CreateCreditClass: React.FC = () => {
     );
   };
 
-  const OverviewCards: React.FC<{ cards: any[] }> = props => (
+  const OverviewWrap: React.FC = ({ children }) => (
     <Box mt={[8, 12]} mx={[-1.5, 'auto']}>
-      <Grid container spacing={4} className={styles.cardWrap}>
-        {props.cards.map((card, i) => (
-          <Grid item xs={12} sm={6} md={4} key={i} className={styles.cardItem}>
-            <OverviewCard
-              className={styles.overviewCard}
-              icon={<img src={require(`../assets/${card.icon}`)} alt={card.description} />}
-              item={{ title: card.title, description: card.description }}
-            />
-          </Grid>
-        ))}
-      </Grid>
+      {children}
     </Box>
   );
 
@@ -219,14 +191,18 @@ const CreateCreditClass: React.FC = () => {
               title={creditTypeSection.subtitleTop}
               description={creditTypeSection.descriptionTop}
             />
-            <OverviewCards cards={creditTypeSection.institutionalCards} />
+            <OverviewWrap>
+              <OverviewCards cards={creditTypeSection.institutionalCards} />
+            </OverviewWrap>
           </Box>
           <Box mt={[15, 22]} pb={[4, 8]}>
             <SubtitleAndDescription
               title={creditTypeSection.subtitleBottom}
               description={creditTypeSection.descriptionBottom}
             />
-            <OverviewCards cards={creditTypeSection.flexCreditCards} />
+            <OverviewWrap>
+              <OverviewCards cards={creditTypeSection.flexCreditCards} />
+            </OverviewWrap>
           </Box>
         </Section>
       </CardMedia>

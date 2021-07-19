@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import ReactHtmlParser from 'react-html-parser';
 import { makeStyles } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
+import Icon from '@material-ui/core/Icon';
 
 import Card from '../cards/Card';
 import CheckIcon from '../icons/CheckIcon';
@@ -92,8 +93,9 @@ const useStyles = makeStyles(theme => ({
     textAlign: 'center',
     textTransform: 'uppercase',
     letterSpacing: 1,
-    inlineSize: 'min-content',
+    inlineSize: 'max-content',
     position: 'relative',
+    display: 'inline-block',
   },
   description: {
     display: 'flex',
@@ -108,9 +110,7 @@ const useStyles = makeStyles(theme => ({
     height: theme.spacing(4.25),
     width: theme.spacing(4.25),
     marginRight: theme.spacing(1.715),
-    position: 'absolute',
-    top: 0,
-    left: theme.spacing(-5.5),
+    display: 'inline-block',
   },
 }));
 
@@ -134,10 +134,8 @@ function OverviewCard({ className, classes, icon, item }: OverviewCardProps): JS
       </div>
       <div className={styles.bottom}>
         <Box display="flex" justifyContent="center" pt={2}>
-          <div className={styles.title}>
-            {item.title}
-            <CheckIcon className={styles.check} />
-          </div>
+          <CheckIcon className={styles.check} />
+          <div className={styles.title}>{item.title}</div>
         </Box>
         <div className={styles.description}>{ReactHtmlParser(item.description)}</div>
       </div>

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import CardMedia from '@material-ui/core/CardMedia';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 import Section from 'web-components/lib/components/section';
 import { StepCard, Step } from 'web-components/lib/components/cards/StepCard';
@@ -42,11 +43,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     maxWidth: theme.typography.pxToRem(942),
   },
   outcomeSection: {
-    paddingTop: 0,
-    [theme.breakpoints.up('sm')]: {
-      paddingTop: theme.spacing(10),
-      paddingBottom: theme.spacing(25),
-    },
+    paddingTop: theme.spacing(10),
+    paddingBottom: theme.spacing(25),
     [theme.breakpoints.down('xs')]: {
       paddingTop: theme.spacing(0),
       paddingBottom: theme.spacing(20),
@@ -56,9 +54,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     background: theme.palette.grey[50],
     borderTop: `1px solid ${theme.palette.grey[100]}`,
     borderBottom: `1px solid ${theme.palette.grey[100]}`,
-    [theme.breakpoints.up('sm')]: {
-      paddingBottom: theme.spacing(22.25),
-    },
+    paddingBottom: theme.spacing(22.25),
     [theme.breakpoints.down('xs')]: {
       paddingBottom: theme.spacing(17.75),
     },
@@ -104,6 +100,9 @@ const CreateMethodology: React.FC = () => {
   const theme = useTheme();
   const history = useHistory();
   const [open, setOpen] = useState(false);
+
+  const isDesktop = useMediaQuery(theme.breakpoints.up('lg'));
+  const resourceCardsShown = isDesktop ? 3 : 2;
 
   const {
     stepCardSection,
@@ -172,13 +171,14 @@ const CreateMethodology: React.FC = () => {
       <CardMedia image={topographyImg} className={styles.resourcesSection}>
         <Section withSlider titleAlign="left">
           <ResponsiveSlider
+            infinite={false}
             itemWidth="90%"
             classes={{ title: styles.resourcesTitle, root: styles.resourcesRoot }}
             padding={theme.spacing(2.5)}
             title="Resources"
             titleVariant="h2"
-            arrows={resources?.length > 3}
-            slidesToShow={3}
+            arrows={resources?.length > resourceCardsShown}
+            slidesToShow={resourceCardsShown}
             items={resources.map(({ btnText, description, href, imgSrc, lastUpdated, title }) => (
               <ResourcesCard
                 image={{ publicURL: require(`../assets/${imgSrc}`) }}
@@ -202,6 +202,7 @@ const CreateMethodology: React.FC = () => {
       />
 
       <HeroAction
+        isBanner
         classes={{ main: styles.bottomSection }}
         img={writingOnPaperImg}
         title={createCreditClassSection.title}

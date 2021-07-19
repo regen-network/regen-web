@@ -1,9 +1,9 @@
-import React, { useRef, useCallback } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import { makeStyles, Theme, useTheme } from '@material-ui/core';
 import { Variant } from '@material-ui/core/styles/createTypography';
 import Grid from '@material-ui/core/Grid';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
-import Slider from 'react-slick';
+import Slider, { Settings as SlickSettings } from 'react-slick';
 import cx from 'clsx';
 
 import PrevNextButton from '../buttons/PrevNextButton';
@@ -146,6 +146,7 @@ export default function ResponsiveSlider({
   onChange,
 }: ResponsiveSliderProps): JSX.Element {
   const theme = useTheme();
+  const [currSlide, setCurrSlide] = useState(0);
 
   const xl = useMediaQuery(theme.breakpoints.up('xl'));
   const desktop = useMediaQuery(theme.breakpoints.up('tablet'));
@@ -177,15 +178,15 @@ export default function ResponsiveSlider({
     }
   }, [slider]);
 
-  const settings = {
+  const settings: SlickSettings = {
+    rows,
+    dots,
     infinite,
     speed: 500,
     slidesToShow: slides,
     slidesToScroll: slides,
     initialSlide: 0,
     arrows: false,
-    rows,
-    dots,
     appendDots: (dots: any) => (
       <div>
         <ul> {dots} </ul>
@@ -193,6 +194,9 @@ export default function ResponsiveSlider({
     ),
     customPaging: (i: number) => <div className={styles.dot} />,
   };
+
+  const prevDisabled = currSlide === 0 && !infinite;
+  const nextDisabled = currSlide >= items.length - slides && !infinite;
 
   return (
     <div className={cx(styles.root, className || (classes && classes.root))}>
@@ -208,8 +212,8 @@ export default function ResponsiveSlider({
         ) : null}
         {items.length > 1 && arrows && desktop && (
           <Grid xs={12} sm={4} container item justify="flex-end" className={styles.buttons}>
-            <PrevNextButton direction="prev" onClick={slickPrev} />
-            <PrevNextButton direction="next" onClick={slickNext} />
+            <PrevNextButton direction="prev" onClick={slickPrev} disabled={prevDisabled} />
+            <PrevNextButton direction="next" onClick={slickNext} disabled={nextDisabled} />
           </Grid>
         )}
       </Grid>
@@ -218,6 +222,9 @@ export default function ResponsiveSlider({
         {...settings}
         ref={slider}
         className={styles.slider}
+        beforeChange={(_, newIdx) => {
+          setCurrSlide(newIdx);
+        }}
         afterChange={i => {
           if (onChange) onChange(i);
         }}

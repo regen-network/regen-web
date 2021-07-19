@@ -15664,6 +15664,36 @@ export type OrganizationFieldsFragment = (
   ) }
 );
 
+export type CreditVintageFieldsFragment = (
+  { __typename?: 'CreditVintage' }
+  & Pick<CreditVintage, 'id' | 'createdAt' | 'startDate' | 'endDate' | 'initialDistribution' | 'units' | 'certificateLink' | 'txHash'>
+  & { creditClassVersionByCreditClassVersionIdAndCreditClassVersionCreatedAt?: Maybe<(
+    { __typename?: 'CreditClassVersion' }
+    & Pick<CreditClassVersion, 'name' | 'version' | 'metadata'>
+    & { creditClassById?: Maybe<(
+      { __typename?: 'CreditClass' }
+      & Pick<CreditClass, 'handle'>
+    )> }
+  )>, methodologyVersionByMethodologyVersionIdAndMethodologyVersionCreatedAt?: Maybe<(
+    { __typename?: 'MethodologyVersion' }
+    & Pick<MethodologyVersion, 'name' | 'version'>
+    & { methodologyById?: Maybe<(
+      { __typename?: 'Methodology' }
+      & Pick<Methodology, 'handle'>
+    )> }
+  )>, walletByTokenizerId?: Maybe<(
+    { __typename?: 'Wallet' }
+    & Pick<Wallet, 'addr'>
+    & { partiesByWalletId: (
+      { __typename?: 'PartiesConnection' }
+      & { nodes: Array<Maybe<(
+        { __typename?: 'Party' }
+        & PartyFieldsFragment
+      )>> }
+    ) }
+  )> }
+);
+
 export type ProjectByHandleQueryVariables = Exact<{
   handle: Scalars['String'];
 }>;
@@ -15681,32 +15711,7 @@ export type ProjectByHandleQuery = (
         & Pick<Event, 'date' | 'summary' | 'description'>
         & { creditVintageByEventId?: Maybe<(
           { __typename?: 'CreditVintage' }
-          & Pick<CreditVintage, 'id' | 'createdAt' | 'startDate' | 'endDate' | 'initialDistribution' | 'units' | 'certificateLink' | 'txHash'>
-          & { creditClassVersionByCreditClassVersionIdAndCreditClassVersionCreatedAt?: Maybe<(
-            { __typename?: 'CreditClassVersion' }
-            & Pick<CreditClassVersion, 'name' | 'version' | 'metadata'>
-            & { creditClassById?: Maybe<(
-              { __typename?: 'CreditClass' }
-              & Pick<CreditClass, 'handle'>
-            )> }
-          )>, methodologyVersionByMethodologyVersionIdAndMethodologyVersionCreatedAt?: Maybe<(
-            { __typename?: 'MethodologyVersion' }
-            & Pick<MethodologyVersion, 'name' | 'version'>
-            & { methodologyById?: Maybe<(
-              { __typename?: 'Methodology' }
-              & Pick<Methodology, 'handle'>
-            )> }
-          )>, walletByTokenizerId?: Maybe<(
-            { __typename?: 'Wallet' }
-            & Pick<Wallet, 'addr'>
-            & { partiesByWalletId: (
-              { __typename?: 'PartiesConnection' }
-              & { nodes: Array<Maybe<(
-                { __typename?: 'Party' }
-                & PartyFieldsFragment
-              )>> }
-            ) }
-          )> }
+          & CreditVintageFieldsFragment
         )> }
       )>> }
     ), partyByDeveloperId?: Maybe<(
@@ -15728,18 +15733,7 @@ export type ProjectByHandleQuery = (
           & Pick<Event, 'date' | 'summary' | 'description'>
           & { creditVintageByEventId?: Maybe<(
             { __typename?: 'CreditVintage' }
-            & Pick<CreditVintage, 'id' | 'createdAt' | 'startDate' | 'endDate' | 'initialDistribution' | 'units' | 'certificateLink' | 'txHash'>
-            & { walletByTokenizerId?: Maybe<(
-              { __typename?: 'Wallet' }
-              & Pick<Wallet, 'addr'>
-              & { partiesByWalletId: (
-                { __typename?: 'PartiesConnection' }
-                & { nodes: Array<Maybe<(
-                  { __typename?: 'Party' }
-                  & PartyFieldsFragment
-                )>> }
-              ) }
-            )> }
+            & CreditVintageFieldsFragment
           )> }
         )> }
       )>> }
@@ -16104,6 +16098,41 @@ export const PartyFieldsFragmentDoc = gql`
   }
 }
     ${OrganizationFieldsFragmentDoc}`;
+export const CreditVintageFieldsFragmentDoc = gql`
+    fragment creditVintageFields on CreditVintage {
+  id
+  createdAt
+  startDate
+  endDate
+  initialDistribution
+  units
+  certificateLink
+  txHash
+  creditClassVersionByCreditClassVersionIdAndCreditClassVersionCreatedAt {
+    name
+    version
+    metadata
+    creditClassById {
+      handle
+    }
+  }
+  methodologyVersionByMethodologyVersionIdAndMethodologyVersionCreatedAt {
+    name
+    version
+    methodologyById {
+      handle
+    }
+  }
+  walletByTokenizerId {
+    addr
+    partiesByWalletId(first: 1) {
+      nodes {
+        ...partyFields
+      }
+    }
+  }
+}
+    ${PartyFieldsFragmentDoc}`;
 export const ProjectPartyFragmentDoc = gql`
     fragment projectParty on Party {
   id
@@ -16689,37 +16718,7 @@ export const ProjectByHandleDocument = gql`
         summary
         description
         creditVintageByEventId {
-          id
-          createdAt
-          startDate
-          endDate
-          initialDistribution
-          units
-          certificateLink
-          txHash
-          creditClassVersionByCreditClassVersionIdAndCreditClassVersionCreatedAt {
-            name
-            version
-            metadata
-            creditClassById {
-              handle
-            }
-          }
-          methodologyVersionByMethodologyVersionIdAndMethodologyVersionCreatedAt {
-            name
-            version
-            methodologyById {
-              handle
-            }
-          }
-          walletByTokenizerId {
-            addr
-            partiesByWalletId(first: 1) {
-              nodes {
-                ...partyFields
-              }
-            }
-          }
+          ...creditVintageFields
         }
       }
     }
@@ -16744,29 +16743,15 @@ export const ProjectByHandleDocument = gql`
           summary
           description
           creditVintageByEventId {
-            id
-            createdAt
-            startDate
-            endDate
-            initialDistribution
-            units
-            certificateLink
-            txHash
-            walletByTokenizerId {
-              addr
-              partiesByWalletId(first: 1) {
-                nodes {
-                  ...partyFields
-                }
-              }
-            }
+            ...creditVintageFields
           }
         }
       }
     }
   }
 }
-    ${PartyFieldsFragmentDoc}`;
+    ${CreditVintageFieldsFragmentDoc}
+${PartyFieldsFragmentDoc}`;
 
 /**
  * __useProjectByHandleQuery__

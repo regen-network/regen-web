@@ -21,10 +21,6 @@ const useStyles = makeStyles(theme => ({
   },
   section: {
     paddingBottom: theme.spacing(22),
-    [theme.breakpoints.down('xs')]: {
-      paddingLeft: theme.spacing(3),
-      paddingRight: theme.spacing(3),
-    },
   },
   heroMain: {
     maxWidth: theme.typography.pxToRem(775),
@@ -33,23 +29,9 @@ const useStyles = makeStyles(theme => ({
       paddingBottom: theme.spacing(12),
     },
   },
-  heroSection: {
-    [theme.breakpoints.down('xs')]: {
-      paddingLeft: theme.spacing(3),
-      paddingRight: theme.spacing(3),
-    },
-  },
   topoBg: {
     background: theme.palette.grey[50],
     borderTop: `1px solid ${theme.palette.grey[100]}`,
-  },
-  sectionContent: {
-    maxWidth: theme.typography.pxToRem(924),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    alignSelf: 'center',
-    margin: '0 auto',
   },
   modal: {
     padding: 0,
@@ -63,7 +45,7 @@ type StepCard = {
 };
 
 // TODO: Once the API is connected, replace this type (it shouldn't be necessary to define it here)
-type ApiCard = typeof contentByPage.HowToCreateMethodology['stepCardSections']['public']['stepCards'];
+type ApiCard = typeof contentByPage.MethodologyReviewProcess['stepCardSections']['public']['stepCards'];
 const createStepCards = (raw: ApiCard): StepCard[] =>
   raw.map(({ icon, title, btnText, href, description, isActive, stepNumber, faqs, tagName, image }) => ({
     icon: <img src={require(`../assets/${icon}`)} alt={title} />,
@@ -94,7 +76,7 @@ const MethodologyReviewProcess: React.FC = () => {
     stepCardSections,
     heroBannerBottom,
     modalContent,
-  } = contentByPage.HowToCreateMethodology;
+  } = contentByPage.MethodologyReviewProcess;
 
   const publicCommentCards = createStepCards(stepCardSections.public.stepCards);
   const scienceReviewCards = createStepCards(stepCardSections.scientific.stepCards);
@@ -111,6 +93,11 @@ const MethodologyReviewProcess: React.FC = () => {
       </Box>
     </>
   );
+  const MaxW924: React.FC = ({ children }) => (
+    <Box display={['block', 'flex']} justifyContent="center">
+      <Box maxWidth={theme.typography.pxToRem(924)}>{children}</Box>
+    </Box>
+  );
 
   return (
     <div className={styles.root}>
@@ -119,11 +106,11 @@ const MethodologyReviewProcess: React.FC = () => {
         img={typewriterReview}
         title={heroBannerTop.title}
         description={heroBannerTop.description}
-        classes={{ main: styles.heroMain, section: styles.heroSection }}
+        classes={{ main: styles.heroMain }}
       />
 
       <Section className={styles.section}>
-        <div className={styles.sectionContent}>
+        <MaxW924>
           <ReviewProcessInfo
             title={internalReviewSection.title}
             timespan={internalReviewSection.timespan}
@@ -132,11 +119,11 @@ const MethodologyReviewProcess: React.FC = () => {
             btnText={internalReviewSection.btnText}
             onBtnClick={() => setOpen(true)}
           />
-        </div>
+        </MaxW924>
       </Section>
 
       <BackgroundImgSection img={topographyImg} classes={{ root: styles.topoBg, section: styles.section }}>
-        <div className={styles.sectionContent}>
+        <MaxW924>
           <ReviewProcessInfo
             title={externalReviewSection.title}
             timespan={externalReviewSection.timespan}
@@ -144,13 +131,13 @@ const MethodologyReviewProcess: React.FC = () => {
             disclaimerBottom={externalReviewSection.disclaimerBottom}
             description={externalReviewSection.description}
           />
-          <Box display="flex" flexDirection="column" mt={[10, 20]} maxWidth={theme.typography.pxToRem(924)}>
-            <StepCards title={stepCardSections.public.title} stepCards={publicCommentCards} />
-            <Box mt={[12, 15]}>
-              <StepCards title={stepCardSections.scientific.title} stepCards={scienceReviewCards} />
-            </Box>
+        </MaxW924>
+        <Box display="flex" alignSelf="center" flexDirection="column" mt={[10, 20]} mx={[-1, 'inherit']}>
+          <StepCards title={stepCardSections.public.title} stepCards={publicCommentCards} />
+          <Box mt={[12, 15]}>
+            <StepCards title={stepCardSections.scientific.title} stepCards={scienceReviewCards} />
           </Box>
-        </div>
+        </Box>
       </BackgroundImgSection>
 
       <HeroAction

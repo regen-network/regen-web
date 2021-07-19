@@ -198,7 +198,7 @@ const CreateMethodology: React.FC = () => {
         title={peerReviewSection.title}
         description={peerReviewSection.description}
         actionTxt={peerReviewSection.btnText}
-        action={() => openLink(peerReviewSection.href)}
+        action={() => history.push(peerReviewSection.href)}
       />
 
       <HeroAction

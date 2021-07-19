@@ -627,21 +627,17 @@ categories:
   - header: token
     questions:
       - question: How do I get REGEN?
-        answer: md//REGEN are not yet available on exchanges however governance
-          proposals required to allow transfers and Inter Blockchain
-          Communication (IBC) are currently in the voting period on chain. If
-          and when this passes, token holders may transfer tokens to anyone with
-          a REGEN wallet. Please see the “Are you listed on exchanges” section
-          for more information.
+        answer: md//REGEN are available on [Osmosis DE](https://app.osmosis.dex)X via
+          Inter Blockchain Communication (IBC) transfers and via the staking
+          mechanism available on [Keplr wallet](https://wallet.keplr.app/).
       - question: What type of tokens are REGEN?
         answer: md//The REGEN token is a staking and utility token launched on our own
           Tendermint BFT powered blockchain. Transaction fees on Regen Network
           will be paid in REGEN, and additional fees in REGEN will be required
           for special actions such as creating a new ecocredit class on chain.
       - question: Are you listed on exchanges?
-        answer: md//REGEN is not yet available on exchanges but if the current on-chain
-          proposals pass then several members of our community plan to launch a
-          pool on the Osmosis DEX as the first Liquidity Bootstrapping Pool.
+        answer: md//REGEN is currently listed on [Osmosis
+          DEX](https://app.osmsosis.dex).
       - question: How many tokens will be created when?
         answer: md//During the Token Generation Event, which happened on Apr 15 2021,
           100,000,000 REGEN were created and distributed to the various wallets

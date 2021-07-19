@@ -120,6 +120,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     color: theme.palette.info.dark,
     padding: theme.spacing(3.5, 0),
     textAlign: 'center',
+    lineHeight: '145%',
     [theme.breakpoints.down('xs')]: {
       fontSize: theme.spacing(4.5),
     },

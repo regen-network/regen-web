@@ -1,7 +1,7 @@
 {
   "contentByPage": {
     "CreateMethodology": {
-      "footerLink": "https://airtable.com/embed/shrnnbymyofPB75WQ",
+      "footerLink": "https://airtable.com/embed/shrRIa2VcxfeXsTXy",
       "heroSection": {
         "title": "Create a methodology on Regen Registry.",
         "description": "We are working hard to promote integrity and innovation in the methods used to monitor ecosystems and invite any and all methodology designers to take part in expanding this body of work."
@@ -265,7 +265,7 @@
         "href": "/create-methodology"
       }
     },
-    "HowToCreateMethodology": {
+    "MethodologyReviewProcess": {
       "modalContent": "https://airtable.com/embed/shrRIa2VcxfeXsTXy",
       "heroBannerTop": {
         "title": "Learn more about our methodology review process.",
@@ -315,21 +315,7 @@
               "icon": "svgs/green-magnifying-glass-eye.svg",
               "title": "Create a methodology draft and submit it for internal review",
               "description": "Your methodology should aim to outline standards and tools to monitor the ecological, environmental, and social indicators covered by your nature based solution. Your approach can be region specific or cover a wide range of locations.",
-              "tagName": "2-3 weeks",
-              "faqs": [
-                {
-                  "question": "How long does a scientific peer review take?",
-                  "answer": "The timeline for scientific peer review can vary. It is up to the methodology designer to drive the peer review process, however we expect this process to take anywhere from one and a half to two months depending on the speed of the reviewers."
-                },
-                {
-                  "question": "What is the public comment period?",
-                  "answer": "The public comment period consists of a 30 day time period, where your method is opened up for review by community members who can submit comments, questions and feedback."
-                },
-                {
-                  "question": "Can public comment and peer review happen concurrently?",
-                  "answer": "Yes, these two processes can be run in parallel."
-                }
-              ]
+              "tagName": "2-3 weeks"
             }
           ]
         },
@@ -343,7 +329,21 @@
               "image": "scientists-talking-plants-foreground.png",
               "tagName": "3-4 weeks",
               "title": "Step 1: Scientific advisors review the methodology",
-              "description": "The Methodology Developer identifies a minimum of three scientific advisors which have appropriate training, background, knowledge and qualifications to provide an in-depth review of the submitted methodology. Scientific advisors will review the methodology and provide the Methodology Developer with a Feedback Document with all their comments, questions and revision requests."
+              "description": "The Methodology Developer identifies a minimum of three scientific advisors which have appropriate training, background, knowledge and qualifications to provide an in-depth review of the submitted methodology. Scientific advisors will review the methodology and provide the Methodology Developer with a Feedback Document with all their comments, questions and revision requests.",
+              "faqs": [
+                {
+                  "question": "Who can be a scientific advisor?",
+                  "answer": "Some examples of qualifications may include, but are not limited to: a PhD in soil science, ecology, or relevant field of study, expert-level GIS, expert-level data scientist, Remote Sensing Specialist, or technical expert with sectoral knowledge."
+                },
+                {
+                  "question": "What is provided to the scientific advisor?",
+                  "answer": "The Methodology Developer provides the reviewers with the methodology and any Revision Reports from previous steps."
+                },
+                {
+                  "question": "The timeline says this takes 3-4 weeks, could this be completed in a shorter period of time?",
+                  "answer": "Yes! The 3-4 week timeline is an estimate on the amount of time it may take to find appropriate reviewers and receive their feedback."
+                }
+              ]
             },
             {
               "stepNumber": 2,
@@ -362,16 +362,12 @@
               "tagName": "2-3 weeks",
               "faqs": [
                 {
-                  "question": "How long does a scientific peer review take?",
-                  "answer": "The timeline for scientific peer review can vary. It is up to the methodology designer to drive the peer review process, however we expect this process to take anywhere from one and a half to two months depending on the speed of the reviewers."
+                  "question": "Can my method go through multiple review processes?",
+                  "answer": "Yes! As the science and technology supporting continues to evolve, so should your methods. Whether as a second formal review process, or as a peer review, we encourage you to continue to work together with your peers and continue to upgrade your methods."
                 },
                 {
-                  "question": "What is the public comment period?",
-                  "answer": "The public comment period consists of a 30 day time period, where your method is opened up for review by community members who can submit comments, questions and feedback."
-                },
-                {
-                  "question": "Can public comment and peer review happen concurrently?",
-                  "answer": "Yes, these two processes can be run in parallel."
+                  "question": "Why would a method be rejected?",
+                  "answer": "Revision Reports reviewed by Regen Registry might be determined incomplete if they did not properly address comments or incorporate revision requests into the upgraded methodology. In this scenario, the methodology will need to be upgraded before acceptance."
                 }
               ]
             }

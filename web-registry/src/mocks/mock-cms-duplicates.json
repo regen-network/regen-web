@@ -111,7 +111,7 @@
         "title": "Participate in Methodology Peer Review",
         "description": "Methodologies submitted to Regen Network will go through a review process to provide valuable feedback which can be used to improve our understanding of the science and techniques/approaches, while promoting scientific transparency and instilling buyer assurance and confidence in claims. This process is in place to promote best practices in MRV and foster both innovation and trust. If you are interested in reviewing methodologies that have been submitted, please contact us at <a href=\"mailto:science@regen.network\">science@regen.network.</a",
         "btnText": "See the Review Process",
-        "href": "https://docs.google.com/document/d/12YzGNI-kQwT82keMR9mr7BdisLUpNN9O6H4H_dMlox4/edit"
+        "href": "/methodology-review-process"
       },
       "createCreditClassSection": {
         "title": "Create a Credit Class",

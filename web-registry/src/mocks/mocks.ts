@@ -73,8 +73,7 @@ interface BasicProject {
 }
 
 export interface BasicCreditClass {
-  name?: string;
-  title: string;
+  name: string;
   id: string;
   description: string;
   imgSrc?: string;

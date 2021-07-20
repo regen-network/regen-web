@@ -230,7 +230,7 @@ function ProjectTopSection({ project, projectDefault, geojson, isGISFile }: Proj
                   target="_blank"
                   color="secondary"
                 >
-                  {ReactHtmlParser(project.creditClass.title)}
+                  {ReactHtmlParser(project.creditClass.name)}
                 </Link>
               </div>
               <div className={classes.creditClassDetail}>

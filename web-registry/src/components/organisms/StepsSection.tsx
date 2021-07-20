@@ -73,9 +73,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       maxWidth: theme.spacing(199.75),
     },
   },
-  lastCard: {
-    marginBottom: 0, //todo
-  },
   modal: {
     padding: 0,
     overflow: 'hidden',

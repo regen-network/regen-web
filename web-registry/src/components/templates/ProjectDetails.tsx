@@ -304,7 +304,7 @@ function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JS
 
   const siteMetadata = {
     title: `Regen Network Registry`,
-    description: `Learn about Regen Network's ${project.creditClass.title} credits sourced from ${project
+    description: `Learn about Regen Network's ${project.creditClass.name} credits sourced from ${project
       .steward?.name || project.developer?.name} in ${project.place.state}, ${project.place.country}.`,
     author: `Regen Network`,
     siteUrl: `${window.location.origin}/registry`,

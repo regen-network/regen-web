@@ -8,9 +8,9 @@
       "ecoType": "Grasslands",
       "ecoServiceType":"Carbon Removal",
       "approvedMethodology": "Carbon<i>Plus</i> Grasslands Methodology",
-      "methodologyUrl": "https://registry.regen.network/methodologies/carbonplus-grasslands",
+      "methodologyUrl": "/methodologies/carbonplus-grasslands",
       "methodologyId": "carbonplus-grasslands",
-      "description": "The Carbon<i>Plus</i> Grasslands credit is designed to significantly increase the amount of hectares regeneratively grazed worldwide. The <a href=\"https://registry.regen.network/methodologies/carbonplus-grasslands\" target=\"_blank\">methodology</a> relies on remote sensing to substantially reduce the cost of monitoring carbon sequestration while maintaining location-based scientific rigor.", 
+      "description": "The Carbon<i>Plus</i> Grasslands credit is designed to significantly increase the amount of hectares regeneratively grazed worldwide. The <a href=\"/methodologies/carbonplus-grasslands\" target=\"_blank\">methodology</a> relies on remote sensing to substantially reduce the cost of monitoring carbon sequestration while maintaining location-based scientific rigor.",
       "imgSrc": "credit-class-grasslands.png",
       "overviewCards": [
         {

@@ -122,9 +122,7 @@ export default function MediaCard({
     </Image>
   );
 
-  const media = (): JSX.Element => (
-    <CardMedia className={cx(imageClassName, classes.image)} component={optimizedImage} />
-  );
+  const media = <CardMedia className={cx(imageClassName, classes.image)} component={optimizedImage} />;
 
   return (
     <Card
@@ -137,10 +135,10 @@ export default function MediaCard({
     >
       {href ? (
         <a href={href} target={target}>
-          {media()}
+          {media}
         </a>
       ) : (
-        media()
+        media
       )}
       {name && (
         <Title

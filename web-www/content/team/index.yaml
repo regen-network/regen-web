@@ -299,6 +299,16 @@ coreSection:
         in Chicago and is from Detroit. "
       name: Alex Karana
       title: Product Legal Assistant
+    - image: ../../static/media/ned.png
+      title: Remote Sensing Specialist
+      name: Ned Horning
+      linkedUrl: https://www.linkedin.com/in/ned-horning-a406414/
+      description: Ned is an environmental remote sensing specialist and geospatial
+        jack of all trades with over 35+ years of experience. Ned has spent nine
+        years at NASA’s Goddard Space Flight Center, nine years working as a
+        private consultant, and 18 years with the American Museum of Natural
+        History. He is thrilled to be applying his skills to support planetary
+        regeneration with Regen Network.
 contributorSection:
   title: Contributors
   contributors:

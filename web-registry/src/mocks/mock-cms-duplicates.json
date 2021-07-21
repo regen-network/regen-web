@@ -474,7 +474,7 @@
         },
         {
           "title": "Additional",
-          "description": "A new practice adopted from &nbsp;<a href=\"#\">pre-approved list</a>",
+          "description": "A new practice adopted from &nbsp;<a>pre-approved list</a>",
           "icon": "svgs/green-additionality-plus.svg"
         },
         {
@@ -630,7 +630,7 @@
                 "btnText": "schedule an introduction",
                 "href": "https://calendly.com/rebecca-regen",
                 "description":
-                  "Be sure to review these items before the call: <a href=\"#\" target=\"_blank\">Data Requirements</a> and <a href=\"#\" target=\"_blank\">Project Basics</a>.",
+                  "Be sure to review these items before the call: <a target=\"_blank\">Data Requirements</a> and <a target=\"_blank\">Project Basics</a>.",
                 "tagName": "immediate"
               }
             ]
@@ -665,7 +665,7 @@
                 "icon": "svgs/green-yellow-registration.svg",
                 "tagName": "immediate",
                 "description":
-                  "This marketing page helps to advertise your project to potential credit buyers, like <a>this project page</a> for Wilmot. <a>See project page template»</a>"
+                  "This marketing page helps to advertise your project to potential credit buyers, like <a href=\"/projects/wilmot\">this project page</a> for Wilmot. <a href=\"https://docs.google.com/spreadsheets/d/1SmMC7d0o_-6iNrqK20dYgOrbgud0t0Oj\" target=\"_blank\">See project page template»</a>"
               },
               {
                 "stepNumber": 4,
@@ -675,7 +675,7 @@
                 "tagName": "within 60 days",
                 "videoSrc": "https://www.youtube.com/embed/Eh19aQ1dd7c",
                 "description":
-                  "Collect soil samples and have them analyzed by a laboratory.  <a>Download the Soil Sampling Guidelines»</a> Submit location-based project data.  <a>Download the Data Requirements»</a>"
+                  "Collect soil samples and have them analyzed by a laboratory.  <a href=\"https://regen-registry.s3.amazonaws.com/Soil+Sampling+Guide.pdf\" target=\"_blank\">Download the Soil Sampling Guidelines»</a> Submit location-based project data.  <a>Download the Data Requirements»</a>"
               },
               {
                 "stepNumber": 5,

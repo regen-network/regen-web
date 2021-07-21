@@ -457,8 +457,7 @@
         {
           "title": "Independently Verified",
           "description": "Verified by 3rd party",
-          "icon": "svgs/green-trust-yellow-check.svg",
-          "tooltip": "Blockchain data: data stored on the Regen Ledger."
+          "icon": "svgs/green-trust-yellow-check.svg"
         },
         {
           "title": "Unique",
@@ -503,14 +502,6 @@
         },
         "projectsTitle": "Grasslands Projects",
         "resources": [
-          {
-            "title": "Credit Buyer 101",
-            "description": "lorem ipsum",
-            "imgSrc": "https://regen-registry.s3.amazonaws.com/credit_classes/carbonplus-grasslands/credit-buyer-summit.png",
-            "btnText": "view document",
-            "href": "#",
-            "lastUpdated": "May 24, 2021"
-          },
           {
             "title": "Carbon<i>Plus</i> Grasslands Credit Class",
             "description": "The standard that defines the specific requirements for the CarbonPlus Grasslands credit.",
@@ -577,14 +568,6 @@
           ]
         },
         "resources": [
-          {
-            "title": "TODO Program Basics",
-            "description": "lorem",
-            "imgSrc": "https://regen-registry.s3.amazonaws.com/credit_classes/carbonplus-grasslands/basics-cow.png",
-            "btnText": "view document",
-            "href": "#TODO",
-            "lastUpdated": "May 24, 2021"
-          },
           {
             "title": "CarbonPlus Grasslands FAQ",
             "description": "Get answers to frequently asked questions.",
@@ -784,7 +767,7 @@
       "creditClassName": "Carbon<i>Plus</i> Grasslands Credit Class",
       "creditClassImage": "https://regen-registry.s3.amazonaws.com/methodologies/carbonplus_grasslands/credit-class-doc.png",
       "creditClassImageAltText": "Cattle Ranch",
-      "creditClassUrl": "https://regen-registry.s3.amazonaws.com/GHG+and+Co-Benefits+in+Grazing+Systems+Credit+Class.pdf",
+      "creditClassUrl": "/credit-classes/carbonplus-grasslands",
       "testMethodologyTitle": "Test this methodology",
       "testMethodologyDescription": "Have your own soil samples? Want to learn how this methodology works in your area? So would we! In supporting the movement of #OpenScience, Regen Network Development Inc., hopes to build a community of scientists and land stewards who actively contribute to improving the methods used to monitor ecological landscapes. We encourage anyone interested to contribute to this growing body of knowledge by testing our methodology in your area.<br><br>Reach out to us at <a href=\"mailto:science@regen.network\" target=\"_blank\">science@regen.network</a> to share your results!",
       "steps":  [

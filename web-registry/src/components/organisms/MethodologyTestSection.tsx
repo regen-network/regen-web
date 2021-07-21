@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     justifyContent: 'center',
     [theme.breakpoints.up('sm')]: {
-      padding: theme.spacing(8, 5),
+      padding: theme.spacing(30, 5),
     },
     [theme.breakpoints.down('xs')]: {
       paddingBottom: theme.spacing(17.75),

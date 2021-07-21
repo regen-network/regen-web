@@ -97,7 +97,7 @@ const CreditClassOverviewSection: React.FC<CreditClassOverviewSectionProps> = ({
   const OverviewCards: React.FC<{ cards: any[] }> = props => (
     <Grid container spacing={4} className={styles.cardWrap}>
       {props.cards.map((card, i) => (
-        <Grid item xs={12} md={6} key={i} className={styles.cardItem}>
+        <Grid item sm={12} lg={6} key={i} className={styles.cardItem}>
           <OverviewCard
             className={styles.overviewCard}
             icon={<img src={require(`../../assets/${card.icon}`)} alt={card.description} />}

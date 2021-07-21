@@ -32,6 +32,7 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'column',
     alignItems: 'center',
     borderColor: theme.palette.grey[100],
+    minWidth: theme.spacing(57.75),
     [theme.breakpoints.up('sm')]: {
       width: theme.spacing(87.625),
       height: theme.spacing(45.75),

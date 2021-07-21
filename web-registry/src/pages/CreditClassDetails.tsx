@@ -12,9 +12,9 @@ import MoreInfoForm from 'web-components/lib/components/form/MoreInfoForm';
 import { SwitchFooter } from 'web-components/lib/components/fixed-footer/SwitchFooter';
 import { StepSequence } from 'web-components/lib/components/cards/StepCard';
 
-import creditClassesData from '../mocks/credit-classes.json';
-import { Project } from '../mocks';
 import mock from '../mocks/mock.json';
+import { Project } from '../mocks';
+import { creditClasses } from '../mocks/cms-duplicates';
 import { HeroTitle } from '../components/molecules';
 import {
   ImpactSection,
@@ -123,7 +123,7 @@ function CreditClassDetail({ isLandSteward }: CreditDetailsProps): JSX.Element {
 
   let { creditClassId } = useParams<{ creditClassId: string }>();
 
-  const creditClass = creditClassesData?.creditClasses.find(creditClass => creditClass.id === creditClassId);
+  const creditClass = creditClasses.find(creditClass => creditClass.id === creditClassId);
 
   const getFeaturedProjects = (): JSX.Element => {
     const featuredProjects = mock?.projects.filter(project =>
@@ -204,7 +204,7 @@ function CreditClassDetail({ isLandSteward }: CreditDetailsProps): JSX.Element {
           </Description>
         </Section>
         <div className="topo-background-alternate">
-          <ImpactSection title="Ecological Impact" impacts={creditClass.impact} />
+          {creditClass.impact && <ImpactSection title="Ecological Impact" impacts={creditClass.impact} />}
           {!isLandSteward && (
             <CreditClassOverviewSection className={styles.overviewSection} creditClass={creditClass} />
           )}

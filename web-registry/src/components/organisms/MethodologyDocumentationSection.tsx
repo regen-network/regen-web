@@ -3,10 +3,10 @@ import { makeStyles, Theme } from '@material-ui/core/styles';
 
 import EyeIcon from 'web-components/lib/components/icons/EyeIcon';
 import Section from 'web-components/lib/components/section';
-import { Methodology } from 'web-components/lib/components/methodologies';
 
 import { DocumentationCard } from '../molecules/DocumentationCard';
 import { MethodologyDetailsColumn } from '../molecules/MethodologyDetailsColumn';
+import { Methodology } from '../../mocks/cms-duplicates';
 
 interface Props {
   methodology: Methodology;

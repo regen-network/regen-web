@@ -6,8 +6,8 @@ import cx from 'clsx';
 import Card from 'web-components/lib/components/cards/Card';
 import Title from 'web-components/lib/components/title';
 import Description from 'web-components/lib/components/description';
-import { Methodology } from 'web-components/lib/components/methodologies';
 
+import { Methodology } from '../../mocks/cms-duplicates';
 import { Label } from '../atoms/Label';
 
 interface MethodologyDetailsColumnProps {

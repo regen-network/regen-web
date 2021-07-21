@@ -32,7 +32,7 @@ const MediaSection: React.FC<MediaSectionProps> = ({ header, items }) => {
             url={item.url}
             name={item.title}
             author={item.author}
-            buttonText={item.buttonText}
+            buttonText={item.btnText}
             imgSrc={item.imgSrc}
             date={item.date}
             play={item.type === 'video'}

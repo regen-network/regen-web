@@ -9,7 +9,7 @@ import Title from 'web-components/lib/components/title';
 import Description from 'web-components/lib/components/description';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 
-import { CreditClass } from '../../mocks';
+import { CreditClass } from '../../mocks/cms-duplicates';
 import { Label } from '../atoms/Label';
 
 interface CreditClassDetailsColumnProps {

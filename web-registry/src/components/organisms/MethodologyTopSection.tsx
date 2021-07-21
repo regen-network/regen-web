@@ -5,9 +5,9 @@ import ReactHtmlParser from 'react-html-parser';
 
 import Title from 'web-components/lib/components/title';
 import Description from 'web-components/lib/components/description';
-import { Methodology } from 'web-components/lib/components/methodologies';
 
 import { OptimizedImage } from '../atoms/OptimizedImage';
+import { Methodology } from '../../mocks/cms-duplicates';
 import topoBackground from '../../assets/background.jpg';
 
 type Props = {

@@ -130,23 +130,21 @@ const MediaSection: React.FC = () => {
   ));
   const slidesToShow = itemCards && itemCards.length < 3 ? itemCards.length : 3;
 
-  return itemCards && itemCards.length > 0 ? (
+  return itemCards && itemCards?.length > 0 ? (
     <Section className={styles.root}>
       <div className={styles.main}>
-        {itemCards && itemCards.length > 0 && (
-          <ResponsiveSlider
-            arrows={itemCards.length > 3}
-            classes={{
-              root: styles.slider,
-              headerWrap: styles.headerWrap,
-            }}
-            itemWidth="90%"
-            padding={theme.spacing(2.5)}
-            slidesToShow={slidesToShow}
-            items={itemCards}
-            renderTitle={() => <Title className={styles.title}>{header}</Title>}
-          />
-        )}
+        <ResponsiveSlider
+          arrows={itemCards.length > 3}
+          classes={{
+            root: styles.slider,
+            headerWrap: styles.headerWrap,
+          }}
+          itemWidth="90%"
+          padding={theme.spacing(2.5)}
+          slidesToShow={slidesToShow}
+          items={itemCards}
+          renderTitle={() => <Title className={styles.title}>{header}</Title>}
+        />
       </div>
     </Section>
   ) : (

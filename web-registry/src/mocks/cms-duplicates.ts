@@ -18,7 +18,7 @@ interface MockCMS {
 interface ContentByPage {
   CreateMethodology: CreateMethodology;
   CreateCreditClass: CreateCreditClass;
-  HowToCreateMethodology: HowToCreateMethodology;
+  MethodologyReviewProcess: MethodologyReviewProcess;
 }
 
 interface CreateCreditClass {
@@ -99,7 +99,7 @@ interface CreateMethodologyStepCardSection {
   stepCards: StepCard[];
 }
 
-interface HowToCreateMethodology {
+interface MethodologyReviewProcess {
   modalContent: string;
   heroBannerTop: HeroSection;
   internalReviewSection: TernalReviewSection;
@@ -120,10 +120,15 @@ interface TernalReviewSection {
 
 interface StepCardSections {
   public: Public;
-  scientific: Public;
+  scientific: Scientific;
 }
 
 interface Public {
+  title: string;
+  stepCards: StepCard[];
+}
+
+interface Scientific {
   title: string;
   stepCards: StepCard[];
 }

@@ -14,6 +14,7 @@ export * from './CreditsTransfer';
 export * from './Eligibility';
 export * from './GettingStarted';
 export * from './Home';
+export * from './Media';
 export * from './MethodologyDetails';
 export * from './MethodologiesList';
 export * from './MethodologyReviewProcess';

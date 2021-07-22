@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles, Theme, Button } from '@material-ui/core';
 import { Formik, Form, Field } from 'formik';
 import { Link } from 'react-router-dom';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import OnboardingFooter from 'web-components/lib/components/fixed-footer/OnboardingFooter';
+import ImageField from 'web-components/lib/components/inputs/ImageField';
+import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
 import Description from 'web-components/lib/components/description';
 import Title from 'web-components/lib/components/title';
@@ -19,49 +21,16 @@ interface MediaFormProps {
 }
 
 export interface MediaValues {
-  'http://regen.network/landStory': string;
+  'http://regen.network/previewPhoto': string;
 }
 
 export interface MediaValuesErrors {
-  'http://regen.network/landMedia'?: string;
-}
-
-interface Example {
-  type: string;
-  text: string;
-}
-
-interface Quote {
-  'http://regen.network/quote': string;
-  'http://schema.org/name': string;
-  'http://schema.org/jobTitle': string;
-}
-
-interface QuoteErrors {
-  'http://regen.network/quote'?: string;
-  'http://schema.org/name'?: string;
-  'http://schema.org/jobTitle'?: string;
-}
-
-interface FieldNameExamples {
-  'http://regen.network/landMedia': Example;
-  'http://regen.network/landStewardMedia': Example;
-  'http://regen.network/landStewardMediaTitle': Example;
-  'http://regen.network/projectQuote': Example;
+  'http://regen.network/previewPhoto'?: string;
 }
 
 interface Errors {
-  'http://regen.network/landMedia': string;
-  'http://regen.network/landStewardMedia': string;
-  'http://regen.network/landStewardMediaTitle': string;
-  'http://regen.network/projectQuote': string;
+  'http://regen.network/previewPhoto': string;
 }
-
-type exampleFieldName =
-  | 'http://regen.network/landMedia'
-  | 'http://regen.network/landStewardMedia'
-  | 'http://regen.network/landStewardMediaTitle'
-  | 'http://regen.network/projectQuote';
 
 const useStyles = makeStyles((theme: Theme) => ({
   storyCard: {
@@ -170,8 +139,8 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
           initialValues || {
             'http://regen.network/previewPhoto': initialValues?.['http://regen.network/previewPhoto'] || '',
 
-            'http://regen.network/landStewardPhoto':
-              initialValues?.['http://regen.network/landStewardPhoto'] || '',
+            // 'http://regen.network/landStewardPhoto':
+            //   initialValues?.['http://regen.network/landStewardPhoto'] || '',
           }
         }
         validate={async (values: MediaValues) => {
@@ -212,21 +181,17 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
           return (
             <Form translate="yes">
               <OnBoardingCard className={styles.storyCard}>
-                <Field
+                {/* <Field
                   className={styles.field}
-                  charLimit={1500}
-                  component={ControlledTextField}
+                  component={ImageField}
                   label="Preview photo"
                   description="Choose the summary photo that will show up in project previews."
-                  name="['http://regen.network/landStewardStory']"
-                  rows={16}
-                  multiline
-                />
-
-                <Button variant="contained" component="label">
-                  Add Image
-                  <input type="file" hidden onChange={onFileChange} accept="image/*" />
-                </Button>
+                  name="['http://regen.network/previewPhoto']"
+                /> */}
+                <input type="file" hidden onChange={onFileChange} accept="image/*" id="image-upload-input" />
+                <label htmlFor="image-upload-input">
+                  <OutlinedButton isImageBtn>Add Preview photo</OutlinedButton>
+                </label>
               </OnBoardingCard>
 
               <OnboardingFooter

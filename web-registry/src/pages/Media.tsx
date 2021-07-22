@@ -31,10 +31,7 @@ const Media: React.FC = () => {
   if (data?.projectById?.metadata) {
     const metadata = data.projectById.metadata;
     initialFieldValues = {
-      'http://regen.network/landStory': metadata['http://regen.network/landStory'],
-      'http://regen.network/landStewardStory': metadata['http://regen.network/landStory'],
-      'http://regen.network/landStewardStoryTitle': metadata['http://regen.network/landStewardStoryTitle'],
-      'http://regen.network/projectQuote': metadata['http://regen.network/projectQuote'],
+      'http://regen.network/previewPhoto': metadata['http://regen.network/previewPhoto'],
     };
   }
 
@@ -73,7 +70,7 @@ const Media: React.FC = () => {
           project page»
         </Link>
       </Description>
-      <MediaForm submit={submit} initialValues={initialFieldValues} exampleProjectUrl={exampleProjectUrl} />
+      <MediaForm submit={submit} initialValues={initialFieldValues} />
     </OnboardingFormTemplate>
   );
 };

@@ -51,7 +51,6 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       paddingTop: props.title ? theme.spacing(4) : 0,
     },
     [theme.breakpoints.up('sm')]: {
-      width: props.itemWidth || '70%',
       marginLeft: props.padding ? `-${props.padding}` : 0,
       paddingTop: props.title ? theme.spacing(8) : 0,
     },

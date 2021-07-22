@@ -6,7 +6,7 @@ import Description from '../description';
 import OutlinedButton from '../buttons/OutlinedButton';
 import PlayIcon from '../icons/PlayIcon';
 
-interface ArticleCardProps {
+export interface ArticleCardProps {
   buttonText?: string;
   name: string;
   date: string;

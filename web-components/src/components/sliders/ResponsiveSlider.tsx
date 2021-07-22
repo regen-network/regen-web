@@ -78,8 +78,11 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
         overflow: 'visible',
       },
-      '& .slick-slide .slick-active': {
+      '& .slick-slide': {
         display: 'flex',
+        '& > div': {
+          width: '100%',
+        },
       },
     },
     '& .slick-track': {

@@ -32,6 +32,7 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'column',
     alignItems: 'center',
     borderColor: theme.palette.grey[100],
+    minWidth: theme.spacing(57.75),
     [theme.breakpoints.up('sm')]: {
       width: theme.spacing(87.625),
       height: theme.spacing(45.75),
@@ -85,6 +86,7 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
+    width: '100%',
   },
   title: {
     fontWeight: 800,
@@ -134,8 +136,10 @@ function OverviewCard({ className, classes, icon, item }: OverviewCardProps): JS
       </div>
       <div className={styles.bottom}>
         <Box display="flex" justifyContent="center" pt={2}>
-          <CheckIcon className={styles.check} />
-          <div className={styles.title}>{item.title}</div>
+          <div className={styles.title}>
+            <CheckIcon className={styles.check} />
+            {item.title}
+          </div>
         </Box>
         <div className={styles.description}>{ReactHtmlParser(item.description)}</div>
       </div>

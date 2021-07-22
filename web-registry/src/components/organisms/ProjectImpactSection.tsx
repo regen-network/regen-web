@@ -6,11 +6,10 @@ import LazyLoad from 'react-lazyload';
 import Slider from 'react-slick';
 import cx from 'clsx';
 
-import ProjectImpactCard, {
-  ProjectImpactCardProps as Impact,
-} from 'web-components/lib/components/cards/ProjectImpactCard';
+import ProjectImpactCard from 'web-components/lib/components/cards/ProjectImpactCard';
 import Section from 'web-components/lib/components/section';
 import PrevNextButton from 'web-components/lib/components/buttons/PrevNextButton';
+import { Impact } from '../../mocks/cms-duplicates';
 
 interface ProjectImpactProps {
   impacts: Impact[];

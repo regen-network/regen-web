@@ -1,10 +1,10 @@
 import React from 'react';
 
-import ProjectImpactCard, {
-  ProjectImpactCardProps as Impact,
-} from 'web-components/lib/components/cards/ProjectImpactCard';
+import ProjectImpactCard from 'web-components/lib/components/cards/ProjectImpactCard';
 import { getOptimizedImageSrc } from 'web-components/lib/utils/optimizedImageSrc';
 import { SliderSection } from 'web-components/lib/components/section/SliderSection';
+
+import { Impact } from '../../mocks/cms-duplicates';
 
 interface ProjectImpactProps {
   impacts: Impact[];

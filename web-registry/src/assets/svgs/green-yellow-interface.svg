@@ -1,0 +1,16 @@
+<svg width="104" height="75" viewBox="0 0 104 75" fill="none" xmlns="http://www.w3.org/2000/svg">
+<mask id="path-1-inside-1" fill="white">
+<rect x="0.420898" y="0.363159" width="103.158" height="74.5714" rx="2"/>
+</mask>
+<rect x="0.420898" y="0.363159" width="103.158" height="74.5714" rx="2" fill="white" stroke="#4FB573" stroke-width="6" mask="url(#path-1-inside-1)"/>
+<path d="M3 17.506L101 17.506" stroke="#4FB573" stroke-width="2"/>
+<ellipse cx="9.63119" cy="10.4" rx="2.33333" ry="2.32258" fill="#4FB573"/>
+<ellipse cx="16.6312" cy="10.4" rx="2.33333" ry="2.32258" fill="#4FB573"/>
+<ellipse cx="23.6312" cy="10.4" rx="2.33333" ry="2.32258" fill="#4FB573"/>
+<path d="M19.333 26.0774H54.5786" stroke="#FFC432" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M19.333 45.7917H54.5786" stroke="#FFC432" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="19.333" y="38.0774" width="7.71428" height="65.3333" transform="rotate(-90 19.333 38.0774)" stroke="#4FB573" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="19.333" y="57.7917" width="7.71428" height="30.9474" transform="rotate(-90 19.333 57.7917)" stroke="#4FB573" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="53.7197" y="57.7917" width="7.71428" height="30.9474" transform="rotate(-90 53.7197 57.7917)" stroke="#4FB573" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="68.333" y="73.2203" width="7.71428" height="16.3333" transform="rotate(-90 68.333 73.2203)" fill="#4FB573" stroke="#4FB573" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

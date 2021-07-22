@@ -12,7 +12,7 @@ export interface ResourcesCardProps {
   title: string;
   updated?: string;
   description: string;
-  buttonText: string;
+  buttonText?: string;
   link: string;
   target?: string;
   backgroundGradient?: boolean;
@@ -109,7 +109,7 @@ export default function ResourcesCard({
   title,
   updated,
   description,
-  buttonText,
+  buttonText = 'view resource',
   link,
   target = '_blank',
   backgroundGradient = true,

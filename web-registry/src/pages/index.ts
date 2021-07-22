@@ -6,6 +6,7 @@ export * from './Certificate';
 export * from './ChooseCreditClass';
 export * from './CreateCreditClass';
 export * from './CreateMethodology';
+export * from './CreditClassDetails';
 export * from './Credits';
 export * from './CreditsIssue';
 export * from './CreditsRetire';

@@ -2,9 +2,12 @@
   background-image: url(./assets/background3.jpg);
 }
 
-.project-background:nth-child(odd) {
-  background-image: url(./assets/background.jpg);
+.topo-background-alternate:nth-child(odd) {
+  background-image: url(./assets/topo-background-large.jpeg);
   background-size: cover;
+  background-position: center;
+  border-top: 1px solid #D2D5D9;
+  border-bottom: 1px solid #D2D5D9;
 }
 
 @media print {

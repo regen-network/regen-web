@@ -2,7 +2,6 @@ import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import { useParams } from 'react-router-dom';
 
-import { Methodology } from 'web-components/lib/components/methodologies';
 
 import {
   MethodologyTopSection,
@@ -12,7 +11,7 @@ import {
   ResourcesSection,
   MethodologyTestSection,
 } from '../components/organisms';
-import { methodologies } from '../mocks';
+import { methodologies } from '../mocks/cms-duplicates';
 import topoBackground from '../assets/background.jpg';
 
 const useStyles = makeStyles<Theme>((theme: Theme) => ({
@@ -29,7 +28,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
 function MethodologyDetails(): JSX.Element {
   const styles = useStyles();
   let { methodologyId } = useParams<{ methodologyId: string }>();
-  const methodology: Methodology | undefined = methodologies.find(p => p.id === methodologyId);
+  const methodology = methodologies.find(p => p.id === methodologyId);
 
   if (methodology) {
     return (

@@ -7,7 +7,7 @@ import Section from 'web-components/lib/components/section';
 import Modal from 'web-components/lib/components/modal';
 import { HeroTitle, HeroAction } from '../components/molecules';
 import { ProjectCards, CreditClassCards } from '../components/organisms';
-import { projects, creditClasses, BasicCreditClass } from '../mocks';
+import { projects, basicCreditClasses, BasicCreditClass } from '../mocks';
 
 import cowsImg from '../assets/cows-by-barn.png';
 import topographyImg from '../assets/background.jpg';
@@ -83,8 +83,8 @@ const Home: React.FC = () => {
         <CreditClassCards
           btnText="Learn More"
           justify={isMobile ? 'center' : 'flex-start'}
-          creditClasses={[creditClasses[0]]}
-          // creditClasses={creditClasses} // TODO: Right now we are only displaying carbonPlus grasslands, but eventually we should display all classes
+          creditClasses={[basicCreditClasses[0]]}
+          // creditClasses={basicCreditClasses} // TODO: Right now we are only displaying carbonPlus grasslands, but eventually we should display all classes
           onClickCard={handleCardSelect}
         />
       </Section>

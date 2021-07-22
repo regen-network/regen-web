@@ -131,11 +131,13 @@ function CreditClassDetail({ isLandSteward }: CreditDetailsProps): JSX.Element {
     );
 
     return featuredProjects?.length > 0 ? (
-      <MoreProjectsSection
-        classes={{ root: styles.sectionPadding, title: styles.title }}
-        title="Featured Projects"
-        projects={featuredProjects}
-      />
+      <div className="topo-background-alternate">
+        <MoreProjectsSection
+          classes={{ root: styles.sectionPadding, title: styles.title }}
+          title="Featured Projects"
+          projects={featuredProjects}
+        />
+      </div>
     ) : (
       <></>
     );
@@ -145,11 +147,13 @@ function CreditClassDetail({ isLandSteward }: CreditDetailsProps): JSX.Element {
     const projects: Project[] = mock?.projects.filter(project => project?.creditClass?.id === creditClassId);
 
     return projects?.length > 0 ? (
-      <MoreProjectsSection
-        classes={{ root: styles.sectionPadding, title: styles.title }}
-        title={creditClass?.buyer?.projectsTitle}
-        projects={projects}
-      />
+      <div className="topo-background-alternate">
+        <MoreProjectsSection
+          classes={{ root: styles.sectionPadding, title: styles.title }}
+          title={creditClass?.buyer?.projectsTitle}
+          projects={projects}
+        />
+      </div>
     ) : (
       <></>
     );
@@ -209,13 +213,15 @@ function CreditClassDetail({ isLandSteward }: CreditDetailsProps): JSX.Element {
             <CreditClassOverviewSection className={styles.overviewSection} creditClass={creditClass} />
           )}
         </div>
-        {isLandSteward && <div className="topo-background-alternate">{getFeaturedProjects()}</div>}
         {isLandSteward && (
-          <div className="topo-background-alternate">
-            <CreditClassOverviewSection creditClass={creditClass} />
-          </div>
+          <>
+            {getFeaturedProjects()}
+            <div className="topo-background-alternate">
+              <CreditClassOverviewSection creditClass={creditClass} />
+            </div>
+          </>
         )}
-        {!isLandSteward && <div className="topo-background-alternate">{getAllProjects()}</div>}
+        {!isLandSteward && getAllProjects()}
         {isLandSteward &&
           creditClass.landSteward?.steps?.map((stepSequence: StepSequence, index) => (
             <div className={cx('topo-background-alternate', styles.flex)} key={index}>

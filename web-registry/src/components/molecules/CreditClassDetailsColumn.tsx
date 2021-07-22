@@ -50,7 +50,7 @@ const useStyles = makeStyles(theme => ({
     marginBottom: theme.spacing(4),
   },
   explainer: {
-    width: 130,
+    width: theme.typography.pxToRem(130),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',

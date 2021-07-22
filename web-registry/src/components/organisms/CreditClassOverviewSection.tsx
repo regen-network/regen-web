@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, Theme, useTheme, useMediaQuery } from '@material-ui/core';
+import { makeStyles, useTheme, useMediaQuery } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import cx from 'clsx';
 
@@ -16,7 +16,7 @@ interface CreditClassOverviewSectionProps {
   creditClass: CreditClass;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles(theme => ({
   sectionRoot: {
     [theme.breakpoints.up('sm')]: {
       paddingTop: theme.spacing(30),

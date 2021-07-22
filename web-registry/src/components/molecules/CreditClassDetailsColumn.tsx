@@ -1,16 +1,14 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
 import { Avatar } from '@material-ui/core';
-import ReactHtmlParser from 'react-html-parser';
 import cx from 'clsx';
 
 import Card from 'web-components/lib/components/cards/Card';
 import Title from 'web-components/lib/components/title';
-import Description from 'web-components/lib/components/description';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 
+import { LineItem } from './LineItem';
 import { CreditClass } from '../../mocks/cms-duplicates';
-import { Label } from '../atoms/Label';
 
 interface CreditClassDetailsColumnProps {
   creditClass: CreditClass;
@@ -20,12 +18,7 @@ interface CreditClassDetailsColumnProps {
   className?: string;
 }
 
-interface LineItemProps {
-  label: string;
-  data: string;
-}
-
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles(theme => ({
   card: {
     display: 'flex',
     flexDirection: 'column',
@@ -43,23 +36,12 @@ const useStyles = makeStyles((theme: Theme) => ({
   title: {
     marginBottom: theme.spacing(4),
   },
-  lineItem: {
-    marginTop: theme.spacing(4),
-  },
-  label: {
-    fontSize: theme.typography.pxToRem(12),
-    color: theme.palette.primary.contrastText,
-    letterSpacing: '1px',
-    lineHeight: '15px',
-    marginBottom: theme.spacing(2),
-  },
-  data: {
-    fontSize: theme.typography.pxToRem(16),
-    fontWeight: 400,
-  },
   button: {
     marginTop: theme.spacing(1),
     width: theme.typography.pxToRem(232),
+  },
+  lineItem: {
+    marginTop: theme.spacing(4),
   },
   images: {
     display: 'flex',
@@ -111,13 +93,6 @@ function CreditClassDetailsColumn({
   className,
 }: CreditClassDetailsColumnProps): JSX.Element {
   const styles = useStyles();
-
-  const LineItem = ({ label, data }: LineItemProps): JSX.Element => (
-    <div className={styles.lineItem}>
-      <Label className={styles.label}>{label}</Label>
-      <Description className={styles.data}>{ReactHtmlParser(data)}</Description>
-    </div>
-  );
 
   return (
     <div className={cx(classes?.root, className)}>

@@ -1,14 +1,12 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
-import ReactHtmlParser from 'react-html-parser';
 import cx from 'clsx';
 
 import Card from 'web-components/lib/components/cards/Card';
 import Title from 'web-components/lib/components/title';
-import Description from 'web-components/lib/components/description';
 
 import { Methodology } from '../../mocks/cms-duplicates';
-import { Label } from '../atoms/Label';
+import { LineItem } from './LineItem';
 
 interface MethodologyDetailsColumnProps {
   methodology: Methodology;
@@ -16,11 +14,6 @@ interface MethodologyDetailsColumnProps {
     root?: string;
   };
   className?: string;
-}
-
-interface LineItemProps {
-  label: string;
-  data: string;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -40,20 +33,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   title: {
     marginBottom: theme.spacing(4),
   },
-  lineItem: {
-    marginTop: theme.spacing(4),
-  },
-  label: {
-    fontSize: theme.typography.pxToRem(12),
-    color: theme.palette.primary.contrastText,
-    letterSpacing: '1px',
-    lineHeight: '15px',
-    marginBottom: theme.spacing(2),
-  },
-  data: {
-    fontSize: theme.typography.pxToRem(16),
-    fontWeight: 400,
-  },
 }));
 
 function MethodologyDetailsColumn({
@@ -62,13 +41,6 @@ function MethodologyDetailsColumn({
   className,
 }: MethodologyDetailsColumnProps): JSX.Element {
   const styles = useStyles();
-
-  const LineItem = ({ label, data }: LineItemProps): JSX.Element => (
-    <div className={styles.lineItem}>
-      <Label className={styles.label}>{label}</Label>
-      <Description className={styles.data}>{ReactHtmlParser(data)}</Description>
-    </div>
-  );
 
   return (
     <div className={cx(classes?.root, className)}>

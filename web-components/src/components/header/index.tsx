@@ -7,9 +7,9 @@ import Box from '@material-ui/core/Box';
 
 import RegenIcon from '../icons/RegenIcon';
 import RegistryIcon from '../icons/RegistryIcon';
-import MenuHover from '../menu-hover';
 import MobileMenu from '../mobile-menu';
 import ContainedButton from '../buttons/ContainedButton';
+import { HeaderItem } from './HeaderItem';
 
 export interface node {
   [key: number]: React.ReactNode;
@@ -33,7 +33,7 @@ interface HeaderProps {
   fullWidth?: boolean;
   isAuthenticated?: boolean;
   menuItems?: HeaderMenuItem[];
-  isRegistry?: boolean; // TODO: We can remove this once we have the login buttons and rest of registry homepage live - can calculate from passed values (see below)
+  isRegistry?: boolean;
   onSignup?: () => void;
   onLogin?: () => void;
   onLogout?: () => void;
@@ -44,6 +44,7 @@ interface HeaderProps {
 export interface HeaderMenuItem {
   title: string;
   href?: string;
+  render?: () => JSX.Element;
   dropdownItems?: { title: string; href: string; render?: () => JSX.Element }[];
 }
 
@@ -139,14 +140,6 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   transparent: {
     backgroundColor: `rgba(0,0,0,0)`,
   },
-  searchIcon: {
-    color: theme.palette.grey[100],
-    marginRight: theme.spacing(6.25),
-    marginBottom: theme.spacing(1),
-  },
-  menuIcon: {
-    color: theme.palette.primary.contrastText,
-  },
   regenIcon: {
     [theme.breakpoints.up('sm')]: {
       height: theme.spacing(20.75),
@@ -167,37 +160,6 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       width: theme.spacing(23),
     },
   },
-  subMenuHover: {
-    '& a:hover': {
-      borderBottom: `2px solid ${theme.palette.secondary.main}`,
-    },
-    '& a': {
-      borderBottom: `2px solid transparent`,
-    },
-  },
-  menuItem: {
-    boxSizing: 'border-box',
-    height: '100%',
-    lineHeight: theme.spacing(6),
-    paddingRight: theme.spacing(7.375),
-    paddingLeft: theme.spacing(7.375),
-    'background-color': 'inherit',
-    '& a:hover': {
-      borderBottom: `2px solid ${theme.palette.secondary.main}`,
-    },
-    '&:last-child': {
-      paddingTop: theme.spacing(1.25),
-    },
-    [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
-      paddingRight: theme.spacing(1.25),
-      paddingLeft: theme.spacing(1.25),
-    },
-  },
-  currentMenuItem: {
-    '& > a': {
-      borderBottom: `2px solid ${theme.palette.secondary.main}`,
-    },
-  },
   menu: {
     height: '100%',
     lineHeight: theme.spacing(6),
@@ -206,12 +168,13 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     fontSize: theme.typography.pxToRem(12),
     padding: theme.spacing(2, 7),
   },
-  loginBtn: {
+  loginBtn: props => ({
     textTransform: 'none',
+    color: props.color,
     '&:hover': {
       backgroundColor: 'transparent',
     },
-  },
+  }),
 }));
 
 export default function Header({
@@ -235,9 +198,26 @@ export default function Header({
   rootClass.push(absolute ? styles.absolute : '');
 
   const theme = useTheme();
-
-  // const isRegistry = !!onLogin && !!onLogout && !!onSignup;
   const AppIcon = isRegistry ? RegistryIcon : RegenIcon;
+
+  const RegistryLoginBtns: React.FC = () => (
+    <li>
+      {isAuthenticated ? (
+        <Button variant="text" className={styles.loginBtn} onClick={onLogout}>
+          Logout
+        </Button>
+      ) : (
+        <>
+          <Button variant="text" className={styles.loginBtn} onClick={onLogin}>
+            Login
+          </Button>
+          <ContainedButton size="small" className={styles.signUpBtn} onClick={onSignup}>
+            Sign Up
+          </ContainedButton>
+        </>
+      )}
+    </li>
+  );
 
   return (
     <div className={clsx(rootClass)}>
@@ -259,65 +239,9 @@ export default function Header({
           <Box display={{ xs: 'none', sm: 'flex' }}>
             <MenuList className={styles.menuList}>
               {menuItems?.map((item, index) => {
-                return (
-                  <MenuItem
-                    key={index}
-                    className={
-                      pathName === item.href ? clsx(styles.menuItem, styles.currentMenuItem) : styles.menuItem
-                    }
-                  >
-                    {item.dropdownItems ? (
-                      <MenuHover
-                        dropdownColor={
-                          color === theme.palette.primary.light
-                            ? theme.palette.secondary.main
-                            : theme.palette.secondary.contrastText
-                        }
-                        text={item.title}
-                      >
-                        {item.dropdownItems.map((dropdownItem, index) => {
-                          return (
-                            <MenuItem
-                              className={
-                                pathName.includes(dropdownItem.href)
-                                  ? clsx(styles.subMenuHover, styles.currentMenuItem)
-                                  : styles.subMenuHover
-                              }
-                              key={index}
-                            >
-                              {dropdownItem.render ? (
-                                dropdownItem.render()
-                              ) : (
-                                <Link href={dropdownItem.href}>{dropdownItem.title}</Link>
-                              )}
-                            </MenuItem>
-                          );
-                        })}
-                      </MenuHover>
-                    ) : (
-                      <Link href={item.href}>{item.title}</Link>
-                    )}
-                  </MenuItem>
-                );
+                return <HeaderItem key={index} item={item} color={color} pathName={pathName} />;
               })}
-              {/* {isRegistry && ( // TODO: This should be un-commented once registry homepage is live
-                <li>
-                  {isAuthenticated ? (
-                    <Button variant="text" className={styles.loginBtn} onClick={onLogout}>
-                      Logout
-                    </Button>
-                  ) : (
-                    <>
-                      <Button variant="text" className={styles.loginBtn} onClick={onLogin}>
-                        Login
-                      </Button>
-                      <ContainedButton size="small" className={styles.signUpBtn} onClick={onSignup}>
-                        Sign Up
-                      </ContainedButton>
-                    </>
-                  )}
-                </li>
-              )} */}
+              {isRegistry && <RegistryLoginBtns />}
             </MenuList>
           </Box>
           <Box display={{ xs: 'block', sm: 'none' }}>

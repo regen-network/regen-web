@@ -1,5 +1,5 @@
 export * from './BackgroundImgSection';
-export * from './DropdownItems';
+export * from './NavDropdownItems';
 export * from './ReviewProcessInfo';
 export * from './PlanStepper';
 export * from './HeroTitle';

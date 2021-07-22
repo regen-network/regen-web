@@ -1,16 +1,16 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useTheme } from '@material-ui/core/styles';
-import { useLocation, useHistory } from 'react-router-dom';
 
 import Header, { HeaderMenuItem, HeaderColors } from 'web-components/lib/components/header';
 import { projects } from '../../mocks';
-import { CreditClassDropdownItem, MethodologyDropdownItem } from '../molecules';
+import { CreditClassDropdown, MethodologyDropdown, ProgramDropdown } from '../molecules';
 import { ReactComponent as Cow } from '../../assets/svgs/green-cow.svg';
 
 const RegistryNav: React.FC = () => {
-  const { pathname } = useLocation();
   const history = useHistory();
+  const { pathname } = history.location;
   const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
   const theme = useTheme();
   const fullWidthRegExp: RegExp = /projects\/[a-z-]+/;
@@ -26,43 +26,40 @@ const RegistryNav: React.FC = () => {
     },
     {
       title: 'Credit Classes',
-      dropdownItems: [
-        {
-          title: 'CarbonPlus Credits',
-          href: '/TODO:',
-          render: () => (
-            <CreditClassDropdownItem
-              isPeerReviewed
-              methodology="Grasslands"
-              title="Carbon<i>Plus</i> Credits"
-              href="/TODO"
-              svg={Cow}
-            />
-          ),
-        },
-      ],
+      render: () => (
+        <CreditClassDropdown
+          carbonPlusCredits={[{ title: 'Grasslands', to: '/TODO', svg: Cow, isPeerReviewed: true }]}
+        />
+      ),
     },
     {
       title: 'Methodologies',
-      dropdownItems: [
-        {
-          title: 'CarbonPlus Grasslands',
-          href: '/TODO:',
-          render: () => (
-            <MethodologyDropdownItem
-              isPeerReviewed
-              href="/todo"
-              title="Carbon<i>Plus</i> Grasslands"
-              svg={Cow}
-            />
-          ),
-        },
-      ],
+      render: () => (
+        <MethodologyDropdown
+          methodologies={[
+            { title: 'Carbon<i>Plus</i> Grasslands', isPeerReviewed: true, svg: Cow, to: '/TODO' },
+          ]}
+        />
+      ),
     },
-    // {
-    //   title: 'Program',
-    //   dropdownItems: [{ title: 'program' }],
-    // },
+    {
+      title: 'Program',
+      render: () => (
+        <ProgramDropdown
+          standardLinks={[
+            { to: '/program-guide', title: 'Program Guide' },
+            // { to: '/process', title: 'Process' },
+          ]}
+          howToLinks={[
+            { to: '/create-credit-class', title: 'Create Credit Class' },
+            { to: '/create-methodology', title: 'Create a Methodology' },
+            { to: '/methodology-review-process', title: 'Methodology Review Process' },
+            // { to: '/become-a-monitor', title: 'Become a Monitor' },
+            // { to: '/become-a-verifier', title: 'Become a Verifier' },
+          ]}
+        />
+      ),
+    },
   ];
 
   const headerColors: HeaderColors = {

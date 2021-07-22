@@ -79,11 +79,11 @@ const MenuHover = ({ text, textColor, dropdownColor, children }: Props): JSX.Ele
         anchorEl={popoverAnchor.current}
         anchorOrigin={{
           vertical: 'bottom',
-          horizontal: 'left',
+          horizontal: 'right',
         }}
         transformOrigin={{
           vertical: 'top',
-          horizontal: 'left',
+          horizontal: 'right',
         }}
         disableScrollLock
         PaperProps={{ onMouseEnter: popoverEnter, onMouseLeave: popoverLeave }}

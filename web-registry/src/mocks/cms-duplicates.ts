@@ -61,20 +61,7 @@ export interface HeroSection {
 export interface CreateCreditClassStepCardSection {
   title: string;
   mainDescription: string;
-  stepCards: StepCardSectionStepCard[];
-}
-
-export interface StepCardSectionStepCard {
-  stepNumber: number;
-  isActive: boolean;
-  icon: string;
-  btnText?: string;
-  tagName?: string;
-  href?: string;
-  title: string;
-  description: string;
-  faqs?: FAQ[];
-  image?: string;
+  stepCards: Step[];
 }
 
 export interface FAQ {
@@ -95,7 +82,7 @@ export interface CreateMethodologyStepCardSection {
   mainDescription: string;
   bottomTitle: string;
   bottomDescription: string;
-  stepCards: StepCardSectionStepCard[];
+  stepCards: Step[];
 }
 
 export interface MethodologyReviewProcess {
@@ -124,10 +111,10 @@ export interface StepCardSections {
 
 export interface Public {
   title: string;
-  stepCards: PublicStepCard[];
+  stepCards: Step[];
 }
 
-export interface PublicStepCard {
+export interface Step {
   stepNumber: number;
   isActive: boolean;
   icon: string;
@@ -142,7 +129,7 @@ export interface PublicStepCard {
 
 export interface Scientific {
   title: string;
-  stepCards: StepCardSectionStepCard[];
+  stepCards: Step[];
 }
 
 export interface Outcome {

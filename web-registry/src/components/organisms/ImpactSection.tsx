@@ -4,7 +4,7 @@ import ProjectImpactCard from 'web-components/lib/components/cards/ProjectImpact
 import { getOptimizedImageSrc } from 'web-components/lib/utils/optimizedImageSrc';
 import { SliderSection } from 'web-components/lib/components/section/SliderSection';
 
-import { Impact } from '../../mocks/cms-duplicates';
+import { Impact } from '../../mocks/mocks';
 
 interface ProjectImpactProps {
   impacts: Impact[];

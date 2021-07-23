@@ -8,7 +8,7 @@ import Title from 'web-components/lib/components/title';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 
 import { LineItem } from './LineItem';
-import { CreditClass } from '../../mocks/cms-duplicates';
+import { CreditClass } from '../../mocks/mocks';
 
 interface CreditClassDetailsColumnProps {
   creditClass: CreditClass;

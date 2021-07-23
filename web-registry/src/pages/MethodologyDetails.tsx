@@ -2,7 +2,6 @@ import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import { useParams } from 'react-router-dom';
 
-
 import {
   MethodologyTopSection,
   MethodologySteps,
@@ -11,7 +10,7 @@ import {
   ResourcesSection,
   MethodologyTestSection,
 } from '../components/organisms';
-import { methodologies } from '../mocks/cms-duplicates';
+import { methodologies } from '../mocks/mocks';
 import topoBackground from '../assets/background.jpg';
 
 const useStyles = makeStyles<Theme>((theme: Theme) => ({

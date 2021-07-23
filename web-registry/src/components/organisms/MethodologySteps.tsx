@@ -9,7 +9,7 @@ import GrowIcon from 'web-components/lib/components/icons/GrowIcon';
 import CoBenefitsIcon from 'web-components/lib/components/icons/CoBenefitsIcon';
 
 import { ProcessStepCard } from '../atoms/ProcessStepCard';
-import { Methodology } from '../../mocks/cms-duplicates';
+import { Methodology } from '../../mocks/mocks';
 
 type Props = {
   methodology: Methodology;

@@ -7,7 +7,7 @@ import Title from 'web-components/lib/components/title';
 import Description from 'web-components/lib/components/description';
 
 import { OptimizedImage } from '../atoms/OptimizedImage';
-import { Methodology } from '../../mocks/cms-duplicates';
+import { Methodology } from '../../mocks/mocks';
 import topoBackground from '../../assets/background.jpg';
 
 type Props = {

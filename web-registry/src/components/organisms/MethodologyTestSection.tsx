@@ -7,7 +7,7 @@ import Description from 'web-components/lib/components/description';
 
 import { BackgroundImgSection } from '../molecules/BackgroundImgSection';
 import testMethodologyImg from '../../assets/test-methodology.png';
-import { Methodology } from '../../mocks/cms-duplicates';
+import { Methodology } from '../../mocks/mocks';
 
 type Props = {
   methodology: Methodology;

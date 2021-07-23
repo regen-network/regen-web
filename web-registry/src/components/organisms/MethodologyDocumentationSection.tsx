@@ -6,7 +6,7 @@ import Section from 'web-components/lib/components/section';
 
 import { DocumentationCard } from '../molecules/DocumentationCard';
 import { MethodologyDetailsColumn } from '../molecules/MethodologyDetailsColumn';
-import { Methodology } from '../../mocks/cms-duplicates';
+import { Methodology } from '../../mocks/mocks';
 
 interface Props {
   methodology: Methodology;

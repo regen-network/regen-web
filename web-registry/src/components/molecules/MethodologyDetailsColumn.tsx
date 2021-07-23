@@ -5,7 +5,7 @@ import cx from 'clsx';
 import Card from 'web-components/lib/components/cards/Card';
 import Title from 'web-components/lib/components/title';
 
-import { Methodology } from '../../mocks/cms-duplicates';
+import { Methodology } from '../../mocks/mocks';
 import { LineItem } from './LineItem';
 
 interface MethodologyDetailsColumnProps {

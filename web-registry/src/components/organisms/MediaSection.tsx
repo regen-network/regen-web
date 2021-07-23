@@ -4,7 +4,7 @@ import { makeStyles, Theme } from '@material-ui/core';
 import ArticleCard from 'web-components/lib/components/cards/ArticleCard';
 import { SliderSection } from 'web-components/lib/components/section/SliderSection';
 
-import { Article } from '../../mocks/cms-duplicates';
+import { Article } from '../../mocks/mocks';
 
 interface MediaSectionProps {
   header?: string;

@@ -13,8 +13,6 @@ export interface MockCMS {
   contentByPage: ContentByPage;
   outcomes: Outcome[];
   resources: Resource[];
-  creditClasses: CreditClass[];
-  methodologies: Methodology[];
 }
 
 export interface ContentByPage {
@@ -53,7 +51,6 @@ export interface Card {
   title: string;
   description: string;
   icon: string;
-  tooltip?: string;
 }
 
 export interface HeroSection {
@@ -64,7 +61,20 @@ export interface HeroSection {
 export interface CreateCreditClassStepCardSection {
   title: string;
   mainDescription: string;
-  stepCards: Step[];
+  stepCards: StepCardSectionStepCard[];
+}
+
+export interface StepCardSectionStepCard {
+  stepNumber: number;
+  isActive: boolean;
+  icon: string;
+  btnText?: string;
+  tagName?: string;
+  href?: string;
+  title: string;
+  description: string;
+  faqs?: FAQ[];
+  image?: string;
 }
 
 export interface FAQ {
@@ -85,7 +95,7 @@ export interface CreateMethodologyStepCardSection {
   mainDescription: string;
   bottomTitle: string;
   bottomDescription: string;
-  stepCards: Step[];
+  stepCards: StepCardSectionStepCard[];
 }
 
 export interface MethodologyReviewProcess {
@@ -114,10 +124,10 @@ export interface StepCardSections {
 
 export interface Public {
   title: string;
-  stepCards: Step[];
+  stepCards: PublicStepCard[];
 }
 
-export interface Step {
+export interface PublicStepCard {
   stepNumber: number;
   isActive: boolean;
   icon: string;
@@ -128,139 +138,11 @@ export interface Step {
   btnText?: string;
   href?: string;
   faqs?: FAQ[];
-  videoSrc?: string;
 }
 
 export interface Scientific {
   title: string;
-  stepCards: Step[];
-}
-
-export interface CreditClass {
-  name: string;
-  id: string;
-  version: string;
-  creditDesigner: string;
-  ecoType: string;
-  ecoServiceType: string;
-  approvedMethodology: string;
-  methodologyUrl: string;
-  methodologyId: string;
-  description: string;
-  imgSrc: string;
-  overviewCards: Card[];
-  buyer: Buyer;
-  landSteward: LandSteward;
-  impact: Impact[];
-  sdgs: Sdg[];
-}
-
-export interface Buyer {
-  heroSection: HeroSection;
-  projectsTitle: string;
-  resources: Resource[];
-  videos: Article[];
-}
-
-export interface Resource {
-  title: string;
-  description: string;
-  imgSrc: string;
-  btnText: string;
-  href: string;
-  lastUpdated: string;
-  target?: string;
-}
-
-export interface Article {
-  title: string;
-  date: string;
-  author: string;
-  imgSrc: string;
-  url: string;
-  btnText: string;
-  type: string;
-}
-
-export interface Impact {
-  name: string;
-  description: string;
-  monitored: boolean;
-  imgSrc: string;
-}
-
-export interface LandSteward {
-  ctaHref: string;
-  heroSection: HeroSection;
-  featuredProjectIds: string[];
-  connectSection: ConnectSection;
-  resources: Resource[];
-  videos: Article[];
-  steps: LandStewardStep[];
-}
-
-export interface ConnectSection {
-  header: string;
-  links: Link[];
-}
-
-export interface Link {
-  name: string;
-  description: string;
-  icon: string;
-  href: string;
-}
-
-export interface LandStewardStep {
-  title: string;
-  steps: Step[];
-  preTitle?: string;
-  description?: string;
-}
-
-export interface Sdg {
-  imageUrl: string;
-  title: string;
-}
-
-export interface Methodology {
-  name: string;
-  id: string;
-  description: string;
-  imageSrc: string;
-  imageAlt: string;
-  documentationUrl: string;
-  documentationTitle: string;
-  documentationImage: string;
-  documentationImageAltText: string;
-  version: string;
-  program: string;
-  methodologyDesigner: string;
-  uncertaintyDeductions: string;
-  measurementApproach: string;
-  creditClassName: string;
-  creditClassImage: string;
-  creditClassImageAltText: string;
-  creditClassUrl: string;
-  testMethodologyTitle: string;
-  testMethodologyDescription: string;
-  steps: MethodologyStep[];
-  impact: Impact[];
-  resources: Resource[];
-}
-
-export interface Image {
-  publicURL: string;
-}
-
-export interface MethodologyStep {
-  stepNumber: number;
-  title: string;
-  isActive: boolean;
-  description: string;
-  imageSrc: string;
-  imageAlt: string;
-  faqs: FAQ[];
+  stepCards: StepCardSectionStepCard[];
 }
 
 export interface Outcome {
@@ -269,10 +151,18 @@ export interface Outcome {
   description: string;
 }
 
+export interface Resource {
+  btnText: string;
+  imgSrc: string;
+  title: string;
+  description: string;
+  href: string;
+  lastUpdated: string;
+  target?: string;
+}
+
 const mock: MockCMS = duplicateMocks;
 
 export const outcomes = mock.outcomes;
 export const resources = mock.resources;
 export const contentByPage = mock.contentByPage;
-export const creditClasses = mock.creditClasses;
-export const methodologies = mock.methodologies;

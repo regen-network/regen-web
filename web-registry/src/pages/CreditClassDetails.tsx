@@ -13,8 +13,7 @@ import { SwitchFooter } from 'web-components/lib/components/fixed-footer/SwitchF
 import { StepSequence } from 'web-components/lib/components/cards/StepCard';
 
 import mock from '../mocks/mock.json';
-import { Project } from '../mocks';
-import { creditClasses } from '../mocks/cms-duplicates';
+import { Project, creditClasses } from '../mocks';
 import { HeroTitle } from '../components/molecules';
 import {
   ImpactSection,

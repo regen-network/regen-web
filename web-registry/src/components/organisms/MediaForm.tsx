@@ -5,12 +5,10 @@ import { Link } from 'react-router-dom';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import OnboardingFooter from 'web-components/lib/components/fixed-footer/OnboardingFooter';
-import ImageField from 'web-components/lib/components/inputs/ImageField';
-import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
+import { FileDrop } from './FileDrop';
 import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
 import Description from 'web-components/lib/components/description';
 import Title from 'web-components/lib/components/title';
-import CropImageModal from 'web-components/lib/components/modal/CropImageModal';
 import Card from 'web-components/lib/components/cards/Card';
 import { useShaclGraphByUriQuery } from '../../generated/graphql';
 import { validate, getProjectPageBaseData } from '../../lib/rdf';
@@ -89,46 +87,15 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
   const styles = useStyles();
-  const [cropModalOpen, setCropModalOpen] = useState(false);
-  const [uploadedImage, setUploadedImage] = useState('');
   const { data: graphData } = useShaclGraphByUriQuery({
     variables: {
       uri: 'http://regen.network/ProjectPageShape',
     },
   });
 
-  const onFileChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    if (event && event.target && event.target.files && event.target.files.length) {
-      const file = event.target.files[0];
-      toBase64(file).then(image => {
-        if (typeof image === 'string') {
-          setUploadedImage(image);
-          setCropModalOpen(true);
-        }
-      });
-    }
-  };
-
-  const handleCropModalClose = (): void => {
-    setUploadedImage('');
-    // setImage('');
-    setCropModalOpen(false);
-  };
-
-  const handleCropModalSubmit = (croppedImage: HTMLImageElement): void => {
-    const imageUrl = croppedImage.src;
-    // setImage(imageUrl);
-    setCropModalOpen(false);
-  };
-
-  // Convert file to base64 string
-  const toBase64 = (file: File): Promise<string | ArrayBuffer | null> =>
-    new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = error => reject(error);
-    });
+  // const onFileChange = (image: string): void => {
+  //   setUploadedImage(image);
+  // };
 
   return (
     <>
@@ -181,17 +148,13 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
           return (
             <Form translate="yes">
               <OnBoardingCard className={styles.storyCard}>
-                {/* <Field
+                <Field
                   className={styles.field}
-                  component={ImageField}
+                  component={FileDrop}
                   label="Preview photo"
                   description="Choose the summary photo that will show up in project previews."
                   name="['http://regen.network/previewPhoto']"
-                /> */}
-                <input type="file" hidden onChange={onFileChange} accept="image/*" id="image-upload-input" />
-                <label htmlFor="image-upload-input">
-                  <OutlinedButton isImageBtn>Add Preview photo</OutlinedButton>
-                </label>
+                />
               </OnBoardingCard>
 
               <OnboardingFooter
@@ -207,12 +170,6 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
           );
         }}
       </Formik>
-      <CropImageModal
-        open={cropModalOpen}
-        onClose={handleCropModalClose}
-        onSubmit={handleCropModalSubmit}
-        initialImage={uploadedImage}
-      />
     </>
   );
 };

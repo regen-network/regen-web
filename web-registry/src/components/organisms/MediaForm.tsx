@@ -131,6 +131,11 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                   label="Preview photo"
                   description="Choose the summary photo that will show up in project previews."
                   buttonText="+ Add preview Photo"
+                  fixedCrop={{
+                    aspect: 481 / 290,
+                    // height: 290,
+                    // width: 481,
+                  }}
                   name="['http://regen.network/previewPhoto']"
                 />
               </OnBoardingCard>

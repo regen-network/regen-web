@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import { FieldProps } from 'formik';
+import { Crop } from 'react-image-crop';
 import cx from 'clsx';
 
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
@@ -18,6 +19,7 @@ export interface FileDropProps extends FieldProps {
   optional?: boolean;
   buttonText?: string;
   onChange: (file: string) => void;
+  fixedCrop?: Crop;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -25,7 +27,14 @@ const useStyles = makeStyles((theme: Theme) => ({
     height: '100%',
     width: '100%',
   },
-  preview: {},
+  preview: {
+    height: '100%',
+    width: '100%',
+  },
+  previewImage: {
+    height: '100%',
+    width: '100%',
+  },
   drop: {
     height: '100%',
     display: 'flex',
@@ -51,6 +60,7 @@ function FileDrop({
   optional,
   onChange,
   buttonText,
+  fixedCrop,
   ...fieldProps
 }: FileDropProps): JSX.Element {
   const [cropModalOpen, setCropModalOpen] = useState(false);
@@ -101,8 +111,11 @@ function FileDrop({
       >
         {() =>
           field.value ? (
-            <div className={styles.preview}>
-              <img src={field.value} alt="preview" />
+            <div
+              className={cx(styles.preview, classes?.main)}
+              // style={{ background: `url(${field.value})` }}
+            >
+              <img className={styles.previewImage} src={field.value} alt="preview" />
             </div>
           ) : (
             <div className={cx(styles.drop, classes?.main)}>
@@ -121,6 +134,7 @@ function FileDrop({
         onClose={handleCropModalClose}
         onSubmit={handleCropModalSubmit}
         initialImage={initialImage}
+        fixedCrop={fixedCrop}
       />
     </>
   );

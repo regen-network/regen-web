@@ -63,7 +63,7 @@ const Media: React.FC = () => {
   }
 
   return (
-    <OnboardingFormTemplate activeStep={activeStep} title="Story" saveAndExit={saveAndExit}>
+    <OnboardingFormTemplate activeStep={activeStep} title="Media" saveAndExit={saveAndExit}>
       <Description className={styles.description}>
         See an example{' '}
         <Link to={exampleProjectUrl} target="_blank">

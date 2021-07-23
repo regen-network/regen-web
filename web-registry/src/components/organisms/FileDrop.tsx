@@ -1,33 +1,56 @@
 import React, { useState } from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import { FieldProps } from 'formik';
+import cx from 'clsx';
 
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 import FieldFormControl from 'web-components/lib/components/inputs/FieldFormControl';
 import CropImageModal from 'web-components/lib/components/modal/CropImageModal';
+import { Label } from '../atoms/Label';
 
 export interface FileDropProps extends FieldProps {
   className?: string;
-  description?: string;
+  classes?: {
+    root?: string;
+    main?: string;
+  };
   label?: string;
   optional?: boolean;
+  buttonText?: string;
   onChange: (file: string) => void;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    height: 200,
-    width: 300,
+    height: '100%',
+    width: '100%',
   },
-  drop: {},
+  preview: {},
+  drop: {
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: theme.spacing(4),
+    background: theme.palette.grey[50],
+    border: `2px dashed ${theme.palette.grey[100]}`,
+  },
+  label: {
+    marginBottom: theme.spacing(2),
+  },
+  or: {
+    marginBottom: theme.spacing(4),
+  },
 }));
 
 function FileDrop({
   className,
-  description,
+  classes,
   label,
   optional,
   onChange,
+  buttonText,
   ...fieldProps
 }: FileDropProps): JSX.Element {
   const [cropModalOpen, setCropModalOpen] = useState(false);
@@ -68,9 +91,9 @@ function FileDrop({
   };
 
   return (
-    <div className={styles.root}>
+    <>
       <FieldFormControl
-        className={className}
+        className={cx(styles.root, classes?.root, className)}
         label={label}
         disabled={form.isSubmitting}
         optional={optional}
@@ -78,12 +101,16 @@ function FileDrop({
       >
         {() =>
           field.value ? (
-            <img src={field.value} alt="preview" />
+            <div className={styles.preview}>
+              <img src={field.value} alt="preview" />
+            </div>
           ) : (
-            <div className={styles.drop}>
+            <div className={cx(styles.drop, classes?.main)}>
+              <Label className={styles.label}>drag and drop</Label>
+              <span className={styles.or}>or</span>
               <input type="file" hidden onChange={handleFileChange} accept="image/*" id="file-drop-input" />
               <label htmlFor="file-drop-input">
-                <OutlinedButton isImageBtn>Add Preview photo</OutlinedButton>
+                <OutlinedButton isImageBtn>{buttonText || '+ add'}</OutlinedButton>
               </label>
             </div>
           )
@@ -95,7 +122,7 @@ function FileDrop({
         onSubmit={handleCropModalSubmit}
         initialImage={initialImage}
       />
-    </div>
+    </>
   );
 }
 

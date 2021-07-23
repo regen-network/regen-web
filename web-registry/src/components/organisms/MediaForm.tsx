@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { makeStyles, Theme, Button } from '@material-ui/core';
 import { Formik, Form, Field } from 'formik';
 import { Link } from 'react-router-dom';
+import cx from 'clsx';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import OnboardingFooter from 'web-components/lib/components/fixed-footer/OnboardingFooter';
@@ -34,11 +35,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   storyCard: {
     paddingBottom: 0,
   },
-  quoteTitle: {
-    marginBottom: theme.spacing(5),
-    display: 'flex',
-    alignItems: 'baseline',
-  },
   title: {
     fontWeight: 800,
     color: theme.palette.info.dark,
@@ -53,28 +49,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   error: {
     marginTop: 0,
   },
-  modalContent: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  modalTitle: {
-    maxWidth: '70%',
-    textAlign: 'center',
-    paddingBottom: theme.spacing(4),
-  },
-  modalCard: {
-    padding: theme.spacing(6, 4),
-    whiteSpace: 'pre-wrap',
-  },
-  modalText: {
-    [theme.breakpoints.down('xs')]: {
-      fontSize: theme.spacing(4),
-    },
-  },
-  examplePageText: {
-    fontSize: theme.typography.pxToRem(16),
-    paddingBottom: theme.spacing(5),
+  fullImage: {
+    height: 290,
+    width: '100%',
   },
 }));
 
@@ -149,10 +126,11 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
             <Form translate="yes">
               <OnBoardingCard className={styles.storyCard}>
                 <Field
-                  className={styles.field}
+                  classes={{ root: styles.field, main: styles.fullImage }}
                   component={FileDrop}
                   label="Preview photo"
                   description="Choose the summary photo that will show up in project previews."
+                  buttonText="+ Add preview Photo"
                   name="['http://regen.network/previewPhoto']"
                 />
               </OnBoardingCard>

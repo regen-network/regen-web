@@ -8,23 +8,9 @@ import Box from '@material-ui/core/Box';
 
 import Title from 'web-components/lib/components/title';
 
-import { PeerReviewed } from '../atoms';
+import { PeerReviewed, NavLink } from '../atoms';
 
 const useStyles = makeStyles(theme => ({
-  link: {
-    color: theme.palette.primary.contrastText,
-    textDecoration: 'none',
-    fontWeight: 400,
-    fontSize: theme.typography.pxToRem(18),
-    lineHeight: '240%',
-    cursor: 'pointer',
-    '&:hover': {
-      borderBottom: `2px solid ${theme.palette.secondary.main}`,
-    },
-    '&:link, &:visited, &:hover, &:active': {
-      textDecoration: 'none',
-    },
-  },
   label: {
     fontSize: '14px',
     letterSpacing: '1px',
@@ -53,9 +39,7 @@ const DropdownItemWithIcon: React.FC<DropdownItemWithIconProps> = ({
       <Grid container wrap="nowrap" justify="center" alignItems="center">
         <SVG />
         <Box mx={3}>
-          <Link href={props.to} className={styles.link}>
-            {ReactHtmlParser(props.title)}
-          </Link>
+          <NavLink to={props.to}>{ReactHtmlParser(props.title)}</NavLink>
         </Box>
         {isPeerReviewed && <PeerReviewed />}
       </Grid>
@@ -68,23 +52,6 @@ const DropdownPadding: React.FC = ({ children }) => (
     {children}
   </Box>
 );
-
-/**
- * @returns a MUI HTML Anchor for external links, react router for internal links
- */
-const NavLink: React.FC<{ to: string }> = ({ to, children }) => {
-  const styles = useStyles();
-  const isInternalLink = (href: string) => href.startsWith('/');
-  return isInternalLink(to) ? (
-    <Link className={styles.link} component={RouterLink} to={to}>
-      {children}
-    </Link>
-  ) : (
-    <Link className={styles.link} href={to}>
-      {children}
-    </Link>
-  );
-};
 
 const NavColumn: React.FC<{ title: string }> = props => {
   const styles = useStyles();
@@ -117,17 +84,17 @@ export const CreditClassDropdown: React.FC<{ carbonPlusCredits: DropdownItemWith
   ...props
 }) => {
   return (
-    <DropdownPadding>
-      <NavColumn title="Carbon<i>Plus</i> Credits">
-        <Box mt={2}>
-          {props.carbonPlusCredits.map((item, i) => (
-            <Box key={i} py={2}>
-              <DropdownItemWithIcon {...item} />
-            </Box>
-          ))}
-        </Box>
-      </NavColumn>
-    </DropdownPadding>
+    // <DropdownPadding>
+    <NavColumn title="Carbon<i>Plus</i> Credits">
+      <Box mt={2}>
+        {props.carbonPlusCredits.map((item, i) => (
+          <Box key={i} py={2}>
+            <DropdownItemWithIcon {...item} />
+          </Box>
+        ))}
+      </Box>
+    </NavColumn>
+    // </DropdownPadding>
   );
 };
 
@@ -135,15 +102,15 @@ export const MethodologyDropdown: React.FC<{ methodologies: DropdownItemWithIcon
   methodologies,
 }) => {
   return (
-    <DropdownPadding>
-      <Grid container wrap="nowrap" justify="center" alignItems="center">
-        {methodologies.map((item, i) => (
-          <Box key={i}>
-            <DropdownItemWithIcon {...item} />
-          </Box>
-        ))}
-      </Grid>
-    </DropdownPadding>
+    // <DropdownPadding>
+    <Grid container wrap="nowrap" justify="center" alignItems="center">
+      {methodologies.map((item, i) => (
+        <Box key={i}>
+          <DropdownItemWithIcon {...item} />
+        </Box>
+      ))}
+    </Grid>
+    // </DropdownPadding>
   );
 };
 
@@ -154,15 +121,15 @@ export const ProgramDropdown: React.FC<{
   howToLinks: InternalLink[];
 }> = props => {
   return (
-    <DropdownPadding>
-      <Box display="flex" justifyContent="space-between">
-        <Box pr={20}>
-          <NavLinkColumn colTitle="Standard" links={props.standardLinks} />
-        </Box>
-        <Box display="flex" flexDirection="column">
-          <NavLinkColumn colTitle="How Tos" links={props.howToLinks} />
-        </Box>
+    // <DropdownPadding>
+    <Box display="flex" justifyContent="space-between">
+      <Box pr={20}>
+        <NavLinkColumn colTitle="Standard" links={props.standardLinks} />
       </Box>
-    </DropdownPadding>
+      <Box display="flex" flexDirection="column">
+        <NavLinkColumn colTitle="How Tos" links={props.howToLinks} />
+      </Box>
+    </Box>
+    // </DropdownPadding>
   );
 };

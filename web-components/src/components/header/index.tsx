@@ -121,6 +121,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   menuList: {
     [theme.breakpoints.up('sm')]: {
       display: 'flex',
+      justifySelf: 'center',
       paddingTop: theme.spacing(6.5),
     },
     '& li.MuiListItem-button, li.MuiListItem-button > div': {

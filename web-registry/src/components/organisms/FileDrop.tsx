@@ -128,10 +128,7 @@ function FileDrop({
       >
         {() =>
           field.value ? (
-            <div
-              className={cx(styles.preview, classes?.main)}
-              // style={{ background: `url(${field.value})` }}
-            >
+            <div className={cx(styles.preview, classes?.main)}>
               <img className={styles.previewImage} src={field.value} alt="preview" />
               <IconButton classes={{ root: styles.deleteButton }} onClick={handleDelete} aria-label="delete">
                 <TrashIcon color="red" />

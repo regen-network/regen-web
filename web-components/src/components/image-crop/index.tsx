@@ -57,10 +57,6 @@ export default function ImageCrop({
   const [completedCrop, setCompletedCrop] = useState<Crop | undefined>(undefined);
   const mobileMatches = useMediaQuery('(max-width:834px)');
 
-  const onCropComplete = useCallback((newCrop: Crop): void => {
-    setCompletedCrop(newCrop);
-  }, []);
-
   const showCroppedImage = useCallback(async () => {
     if (!!completedCrop) {
       try {
@@ -121,10 +117,8 @@ export default function ImageCrop({
           src={image}
           crop={crop}
           onImageLoaded={onLoad}
-          onChange={(crop: Crop, percentCrop: any) => setCrop(percentCrop)}
-          onComplete={c => onCropComplete(c)}
-          // onChange={c => setCrop(c)}
-          // onComplete={c => setCompletedCrop(c)}
+          onChange={setCrop}
+          onComplete={setCompletedCrop}
           circularCrop={circularCrop}
           crossorigin="anonymous"
           imageStyle={{ maxHeight: mobileMatches ? 380 : 500 }}

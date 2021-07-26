@@ -112,6 +112,11 @@ function FileDrop({
     setCropModalOpen(false);
   };
 
+  const handleDelete = (): void => {
+    form.setFieldValue(field.name, undefined);
+    setInitialImage('');
+  };
+
   return (
     <>
       <FieldFormControl
@@ -128,7 +133,7 @@ function FileDrop({
               // style={{ background: `url(${field.value})` }}
             >
               <img className={styles.previewImage} src={field.value} alt="preview" />
-              <IconButton classes={{ root: styles.deleteButton }} aria-label="delete">
+              <IconButton classes={{ root: styles.deleteButton }} onClick={handleDelete} aria-label="delete">
                 <TrashIcon color="red" />
               </IconButton>
             </div>

@@ -54,7 +54,7 @@ export default function ImageCrop({
   const classes = useStyles();
   const imgRef = useRef<any>(null);
   const [crop, setCrop] = useState<Crop | undefined>(fixedCrop);
-  const [completedCrop, setCompletedCrop] = useState<Crop | undefined>(fixedCrop);
+  const [completedCrop, setCompletedCrop] = useState<Crop | undefined>(undefined);
   const mobileMatches = useMediaQuery('(max-width:834px)');
 
   const onCropComplete = useCallback((newCrop: Crop): void => {
@@ -80,21 +80,8 @@ export default function ImageCrop({
       const aspect = crop?.aspect || 1;
       const isPortrait = imgWidth / aspect < imgHeight * aspect;
       const isLandscape = imgWidth / aspect > imgHeight * aspect;
-      let width;
-      let height;
-
-      if (crop?.width) {
-        width = crop.width;
-      } else {
-        width = isPortrait ? 90 : ((imgHeight * aspect) / imgWidth) * 90;
-      }
-
-      if (crop?.height) {
-        height = crop.height;
-      } else {
-        height = isLandscape ? 90 : (imgWidth / aspect / imgHeight) * 90;
-      }
-
+      const width = isPortrait ? 90 : ((imgHeight * aspect) / imgWidth) * 90;
+      const height = isLandscape ? 90 : (imgWidth / aspect / imgHeight) * 90;
       const y = (100 - height) / 2;
       const x = (100 - width) / 2;
       const percentCrop: Crop = {
@@ -109,7 +96,7 @@ export default function ImageCrop({
       setCrop(percentCrop);
 
       const pxWidth = isPortrait ? imgWidth * 0.9 : imgHeight * 0.9;
-      const pxHeight = pxWidth; // Square. This calculation will change if we need to support other aspect ratios
+      const pxHeight = isPortrait ? imgHeight * 0.9 : imgWidth * 0.9;
       const pxX = (imgWidth - pxWidth) / 2;
       const pxY = (imgHeight - pxHeight) / 2;
       const pxCrop: Crop = {
@@ -136,6 +123,8 @@ export default function ImageCrop({
           onImageLoaded={onLoad}
           onChange={(crop: Crop, percentCrop: any) => setCrop(percentCrop)}
           onComplete={c => onCropComplete(c)}
+          // onChange={c => setCrop(c)}
+          // onComplete={c => setCompletedCrop(c)}
           circularCrop={circularCrop}
           crossorigin="anonymous"
           imageStyle={{ maxHeight: mobileMatches ? 380 : 500 }}

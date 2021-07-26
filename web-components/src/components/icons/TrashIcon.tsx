@@ -1,20 +1,12 @@
 import React from 'react';
 import SvgIcon from '@material-ui/core/SvgIcon';
-import { makeStyles, Theme } from '@material-ui/core';
-import clsx from 'clsx';
 
 import withHoverColor, { Props } from './withHoverColor';
 
-const useStyles = makeStyles((theme: Theme) => ({
-  root: {},
-}));
-
-function BlockIcon({ className, color, onMouseEnter, onMouseLeave }: Props): JSX.Element {
-  const styles = useStyles();
-
+function TrashIcon({ className, color, onMouseEnter, onMouseLeave }: Props): JSX.Element {
   return (
     <SvgIcon
-      className={clsx(className, styles.root)}
+      className={className}
       width="17"
       height="24"
       viewBox="0 0 17 24"
@@ -59,4 +51,4 @@ function BlockIcon({ className, color, onMouseEnter, onMouseLeave }: Props): JSX
   );
 }
 
-export default withHoverColor(BlockIcon);
+export default withHoverColor(TrashIcon);

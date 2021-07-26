@@ -121,8 +121,8 @@ function FileDrop({
               // style={{ background: `url(${field.value})` }}
             >
               <img className={styles.previewImage} src={field.value} alt="preview" />
-              <IconButton>
-                <TrashIcon />
+              <IconButton classes={{ root: styles.deleteButton }}>
+                <TrashIcon color="red" />
               </IconButton>
             </div>
           ) : (
@@ -133,9 +133,6 @@ function FileDrop({
               <label htmlFor="file-drop-input">
                 <OutlinedButton isImageBtn>{buttonText || '+ add'}</OutlinedButton>
               </label>
-              <IconButton classes={{ root: styles.deleteButton }}>
-                <TrashIcon color="red" />
-              </IconButton>
             </div>
           )
         }

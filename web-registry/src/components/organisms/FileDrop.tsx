@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
+import { IconButton } from '@material-ui/core';
 import { FieldProps } from 'formik';
 import { Crop } from 'react-image-crop';
 import cx from 'clsx';
@@ -7,6 +8,7 @@ import cx from 'clsx';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 import FieldFormControl from 'web-components/lib/components/inputs/FieldFormControl';
 import CropImageModal from 'web-components/lib/components/modal/CropImageModal';
+import TrashIcon from 'web-components/lib/components/icons/TrashIcon';
 import { Label } from '../atoms/Label';
 
 export interface FileDropProps extends FieldProps {
@@ -50,6 +52,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   or: {
     marginBottom: theme.spacing(4),
+  },
+  deleteButton: {
+    background: theme.palette.primary.main,
   },
 }));
 
@@ -116,6 +121,9 @@ function FileDrop({
               // style={{ background: `url(${field.value})` }}
             >
               <img className={styles.previewImage} src={field.value} alt="preview" />
+              <IconButton>
+                <TrashIcon />
+              </IconButton>
             </div>
           ) : (
             <div className={cx(styles.drop, classes?.main)}>
@@ -125,6 +133,9 @@ function FileDrop({
               <label htmlFor="file-drop-input">
                 <OutlinedButton isImageBtn>{buttonText || '+ add'}</OutlinedButton>
               </label>
+              <IconButton classes={{ root: styles.deleteButton }}>
+                <TrashIcon color="red" />
+              </IconButton>
             </div>
           )
         }

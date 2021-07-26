@@ -32,6 +32,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   preview: {
     height: '100%',
     width: '100%',
+    position: 'relative',
   },
   previewImage: {
     height: '100%',
@@ -55,6 +56,12 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   deleteButton: {
     background: theme.palette.primary.main,
+    position: 'absolute',
+    right: 0,
+    margin: theme.spacing(4),
+    '&:hover': {
+      background: theme.palette.grey[100],
+    },
   },
 }));
 
@@ -121,7 +128,7 @@ function FileDrop({
               // style={{ background: `url(${field.value})` }}
             >
               <img className={styles.previewImage} src={field.value} alt="preview" />
-              <IconButton classes={{ root: styles.deleteButton }}>
+              <IconButton classes={{ root: styles.deleteButton }} aria-label="delete">
                 <TrashIcon color="red" />
               </IconButton>
             </div>

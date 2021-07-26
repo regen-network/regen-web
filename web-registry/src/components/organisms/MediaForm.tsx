@@ -21,6 +21,7 @@ interface MediaFormProps {
 
 export interface MediaValues {
   'http://regen.network/previewPhoto': string;
+  'http://regen.network/landStewardPhoto': string;
 }
 
 export interface MediaValuesErrors {
@@ -70,10 +71,6 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
     },
   });
 
-  // const onFileChange = (image: string): void => {
-  //   setUploadedImage(image);
-  // };
-
   return (
     <>
       <Formik
@@ -83,8 +80,8 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
           initialValues || {
             'http://regen.network/previewPhoto': initialValues?.['http://regen.network/previewPhoto'] || '',
 
-            // 'http://regen.network/landStewardPhoto':
-            //   initialValues?.['http://regen.network/landStewardPhoto'] || '',
+            'http://regen.network/landStewardPhoto':
+              initialValues?.['http://regen.network/landStewardPhoto'] || '',
           }
         }
         validate={async (values: MediaValues) => {
@@ -131,12 +128,18 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                   label="Preview photo"
                   description="Choose the summary photo that will show up in project previews."
                   buttonText="+ Add preview Photo"
-                  fixedCrop={{
-                    aspect: 481 / 290,
-                    // height: 290,
-                    // width: 481,
-                  }}
+                  fixedCrop={{ aspect: 481 / 290 }}
                   name="['http://regen.network/previewPhoto']"
+                />
+                <Field
+                  classes={{ root: styles.field, main: styles.fullImage }}
+                  component={FileDrop}
+                  label="Land Steward photo"
+                  labelSubText="(required if you don’t add a video)"
+                  description="Upload a nice portrait of the land stewards and their families. This should be different from the other photos of land stewards you uploaded in the gallery above."
+                  buttonText="+ Add Photo"
+                  fixedCrop={{ aspect: 481 / 290 }}
+                  name="['http://regen.network/landStewardPhoto']"
                 />
               </OnBoardingCard>
 

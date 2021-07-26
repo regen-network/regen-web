@@ -19,6 +19,7 @@ export interface FileDropProps extends FieldProps {
   };
   label?: string;
   optional?: boolean;
+  labelSubText?: string;
   buttonText?: string;
   onChange: (file: string) => void;
   fixedCrop?: Crop;
@@ -70,6 +71,7 @@ function FileDrop({
   classes,
   label,
   optional,
+  labelSubText,
   onChange,
   buttonText,
   fixedCrop,
@@ -124,6 +126,7 @@ function FileDrop({
         label={label}
         disabled={form.isSubmitting}
         optional={optional}
+        labelSubText={labelSubText}
         {...fieldProps}
       >
         {() =>

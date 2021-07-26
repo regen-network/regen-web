@@ -18,6 +18,7 @@ interface Props extends FieldProps {
   optional?: boolean;
   label?: string;
   onExampleClick?: () => void;
+  labelSubText?: string;
 }
 
 interface StyleProps {
@@ -93,6 +94,7 @@ export default function FieldFormControl({
   disabled,
   className,
   optional,
+  labelSubText,
   onExampleClick,
   ...fieldProps
 }: Props): JSX.Element {
@@ -114,7 +116,7 @@ export default function FieldFormControl({
   return (
     <FormControl className={className} fullWidth>
       {label && (
-        <ControlledFormLabel optional={optional} disabled={disabled}>
+        <ControlledFormLabel optional={optional} disabled={disabled} labelSubText={labelSubText}>
           {label}
         </ControlledFormLabel>
       )}

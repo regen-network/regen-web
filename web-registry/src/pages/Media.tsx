@@ -32,6 +32,7 @@ const Media: React.FC = () => {
     const metadata = data.projectById.metadata;
     initialFieldValues = {
       'http://regen.network/previewPhoto': metadata['http://regen.network/previewPhoto'],
+      'http://regen.network/landStewardPhoto': metadata['http://regen.network/landStewardPhoto'],
     };
   }
 

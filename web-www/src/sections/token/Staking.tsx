@@ -2,6 +2,7 @@ import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import { Theme, makeStyles } from '@material-ui/core';
 import clsx from 'clsx';
+import ReactHtmlParser from 'react-html-parser';
 
 import Section from 'web-components/src/components/section';
 import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
@@ -65,7 +66,7 @@ const Staking = (): JSX.Element => {
   return (
     <Section title={title} classes={{ root: clsx(styles.root, styles.center), title: styles.title }}>
       <Description className={clsx(styles.content, styles.center)}>{body}</Description>
-      <ContainedButton href={buttonUrl}>{buttonText}</ContainedButton>
+      <ContainedButton href={buttonUrl}>{ReactHtmlParser(buttonText)}</ContainedButton>
     </Section>
   );
 };

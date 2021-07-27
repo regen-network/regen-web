@@ -16,6 +16,7 @@ export interface FileDropProps extends FieldProps {
   classes?: {
     root?: string;
     main?: string;
+    button?: string;
   };
   label?: string;
   optional?: boolean;
@@ -23,6 +24,7 @@ export interface FileDropProps extends FieldProps {
   buttonText?: string;
   onChange: (file: string) => void;
   fixedCrop?: Crop;
+  hideDragText?: boolean;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -45,15 +47,20 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    padding: theme.spacing(4),
+    padding: theme.spacing(2),
     background: theme.palette.grey[50],
     border: `2px dashed ${theme.palette.grey[100]}`,
   },
   label: {
     marginBottom: theme.spacing(2),
+    fontSize: theme.typography.pxToRem(12),
   },
   or: {
     marginBottom: theme.spacing(4),
+    fontSize: theme.typography.pxToRem(12),
+  },
+  button: {
+    fontSize: theme.typography.pxToRem(18),
   },
   deleteButton: {
     background: theme.palette.primary.main,
@@ -75,6 +82,7 @@ function FileDrop({
   onChange,
   buttonText,
   fixedCrop,
+  hideDragText,
   ...fieldProps
 }: FileDropProps): JSX.Element {
   const [cropModalOpen, setCropModalOpen] = useState(false);
@@ -139,11 +147,17 @@ function FileDrop({
             </div>
           ) : (
             <div className={cx(styles.drop, classes?.main)}>
-              <Label className={styles.label}>drag and drop</Label>
-              <span className={styles.or}>or</span>
+              {!hideDragText && (
+                <>
+                  <Label className={styles.label}>drag and drop</Label>
+                  <span className={styles.or}>or</span>
+                </>
+              )}
               <input type="file" hidden onChange={handleFileChange} accept="image/*" id="file-drop-input" />
               <label htmlFor="file-drop-input">
-                <OutlinedButton isImageBtn>{buttonText || '+ add'}</OutlinedButton>
+                <OutlinedButton classes={{ root: cx(styles.button, classes?.button) }} isImageBtn>
+                  {buttonText || '+ add'}
+                </OutlinedButton>
               </label>
             </div>
           )

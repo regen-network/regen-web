@@ -13,6 +13,8 @@ import Title from 'web-components/lib/components/title';
 import Card from 'web-components/lib/components/cards/Card';
 import { useShaclGraphByUriQuery } from '../../generated/graphql';
 import { validate, getProjectPageBaseData } from '../../lib/rdf';
+import ControlledFormLabel from 'web-components/lib/components/form/ControlledFormLabel';
+import FormLabel from 'web-components/lib/components/inputs/FormLabel';
 
 interface MediaFormProps {
   submit: (values: MediaValues) => Promise<void>;
@@ -53,6 +55,24 @@ const useStyles = makeStyles((theme: Theme) => ({
   fullImage: {
     height: 290,
     width: '100%',
+  },
+  galleryPhotos: {
+    margin: theme.spacing(8, 0, 12),
+  },
+  gallery: {
+    display: 'flex',
+    justifyContent: 'space-between',
+  },
+  square: {
+    height: 164,
+    width: 169,
+  },
+  center: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  smallButton: {
+    fontSize: theme.typography.pxToRem(14),
   },
 }));
 
@@ -131,6 +151,50 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                   fixedCrop={{ aspect: 481 / 290 }}
                   name="['http://regen.network/previewPhoto']"
                 />
+                <div className={styles.galleryPhotos}>
+                  {/* <ControlledFormLabel>Gallery Photos</ControlledFormLabel> */}
+                  <FormLabel
+                    label="Gallery Photos"
+                    labelSubText="(min 4 photos)"
+                    description="People love pictures of people! Upload images of the land stewards, in addition to the land and animals."
+                  >
+                    <div className={styles.gallery}>
+                      <div className={styles.square}>
+                        <Field
+                          classes={{ button: styles.smallButton }}
+                          component={FileDrop}
+                          buttonText="+ Add Photo"
+                          name="['http://regen.network/galleryLeft']"
+                        />
+                      </div>
+                      <div className={styles.center}>
+                        <Field
+                          classes={{ button: styles.smallButton }}
+                          component={FileDrop}
+                          fixedCrop={{ aspect: 120 / 76 }}
+                          name="['http://regen.network/galleryTop']"
+                          hideDragText
+                        />
+                        <Field
+                          classes={{ button: styles.smallButton }}
+                          component={FileDrop}
+                          fixedCrop={{ aspect: 120 / 76 }}
+                          name="['http://regen.network/galleryBottom']"
+                          hideDragText
+                        />
+                      </div>
+                      <div className={styles.square}>
+                        <Field
+                          classes={{ button: styles.smallButton }}
+                          component={FileDrop}
+                          buttonText="+ Add Photo"
+                          name="['http://regen.network/galleryRight']"
+                        />
+                      </div>
+                    </div>
+                  </FormLabel>
+                </div>
+
                 <Field
                   classes={{ root: styles.field, main: styles.fullImage }}
                   component={FileDrop}

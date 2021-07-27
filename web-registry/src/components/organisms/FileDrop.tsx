@@ -9,6 +9,7 @@ import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton
 import FieldFormControl from 'web-components/lib/components/inputs/FieldFormControl';
 import CropImageModal from 'web-components/lib/components/modal/CropImageModal';
 import TrashIcon from 'web-components/lib/components/icons/TrashIcon';
+import { Image } from 'web-components/lib/components/image';
 import { Label } from '../atoms/Label';
 
 export interface FileDropProps extends FieldProps {
@@ -66,6 +67,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     background: theme.palette.primary.main,
     position: 'absolute',
     right: 0,
+    top: 0,
     margin: theme.spacing(4),
     '&:hover': {
       background: theme.palette.grey[100],
@@ -96,6 +98,9 @@ function FileDrop({
       toBase64(file).then(base64String => {
         if (typeof base64String === 'string') {
           setCropModalOpen(true);
+          console.log('form', form);
+          console.log('field open', field.name);
+
           setInitialImage(base64String);
         }
       });
@@ -118,11 +123,14 @@ function FileDrop({
   };
 
   const handleCropModalSubmit = (croppedImage: HTMLImageElement): void => {
+    console.log('field.name submit', field.name);
     form.setFieldValue(field.name, croppedImage.src);
     setCropModalOpen(false);
   };
 
   const handleDelete = (): void => {
+    console.log('field.name delete', field.name);
+
     form.setFieldValue(field.name, undefined);
     setInitialImage('');
   };
@@ -140,7 +148,7 @@ function FileDrop({
         {() =>
           field.value ? (
             <div className={cx(styles.preview, classes?.main)}>
-              <img className={styles.previewImage} src={field.value} alt="preview" />
+              <Image className={styles.previewImage} src={field.value} backgroundImage />
               <IconButton classes={{ root: styles.deleteButton }} onClick={handleDelete} aria-label="delete">
                 <TrashIcon color="red" />
               </IconButton>

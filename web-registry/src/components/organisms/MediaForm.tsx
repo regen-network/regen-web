@@ -23,6 +23,10 @@ interface MediaFormProps {
 
 export interface MediaValues {
   'http://regen.network/previewPhoto': string;
+  'http://regen.network/galleryLeft': string;
+  'http://regen.network/galleryTop': string;
+  'http://regen.network/galleryBottom': string;
+  'http://regen.network/galleryRight': string;
   'http://regen.network/landStewardPhoto': string;
 }
 
@@ -64,7 +68,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     justifyContent: 'space-between',
   },
   square: {
-    height: 164,
+    height: 169,
     width: 169,
   },
   center: {
@@ -73,6 +77,8 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   smallButton: {
     fontSize: theme.typography.pxToRem(14),
+    paddingTop: theme.spacing(1),
+    paddingBottom: theme.spacing(1),
   },
 }));
 
@@ -99,6 +105,10 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
         initialValues={
           initialValues || {
             'http://regen.network/previewPhoto': initialValues?.['http://regen.network/previewPhoto'] || '',
+            'http://regen.network/galleryLeft': initialValues?.['http://regen.network/galleryLeft'] || '',
+            'http://regen.network/galleryTop': initialValues?.['http://regen.network/galleryTop'] || '',
+            'http://regen.network/galleryBottom': initialValues?.['http://regen.network/galleryBottom'] || '',
+            'http://regen.network/galleryRight': initialValues?.['http://regen.network/galleryRight'] || '',
 
             'http://regen.network/landStewardPhoto':
               initialValues?.['http://regen.network/landStewardPhoto'] || '',
@@ -148,11 +158,10 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                   label="Preview photo"
                   description="Choose the summary photo that will show up in project previews."
                   buttonText="+ Add preview Photo"
-                  fixedCrop={{ aspect: 481 / 290 }}
+                  fixedCrop={{ aspect: 16 / 9 }}
                   name="['http://regen.network/previewPhoto']"
                 />
                 <div className={styles.galleryPhotos}>
-                  {/* <ControlledFormLabel>Gallery Photos</ControlledFormLabel> */}
                   <FormLabel
                     label="Gallery Photos"
                     labelSubText="(min 4 photos)"
@@ -164,6 +173,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                           classes={{ button: styles.smallButton }}
                           component={FileDrop}
                           buttonText="+ Add Photo"
+                          fixedCrop={{ aspect: 16 / 9 }}
                           name="['http://regen.network/galleryLeft']"
                         />
                       </div>
@@ -171,14 +181,14 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                         <Field
                           classes={{ button: styles.smallButton }}
                           component={FileDrop}
-                          fixedCrop={{ aspect: 120 / 76 }}
+                          fixedCrop={{ aspect: 16 / 9 }}
                           name="['http://regen.network/galleryTop']"
                           hideDragText
                         />
                         <Field
                           classes={{ button: styles.smallButton }}
                           component={FileDrop}
-                          fixedCrop={{ aspect: 120 / 76 }}
+                          fixedCrop={{ aspect: 16 / 9 }}
                           name="['http://regen.network/galleryBottom']"
                           hideDragText
                         />
@@ -188,6 +198,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                           classes={{ button: styles.smallButton }}
                           component={FileDrop}
                           buttonText="+ Add Photo"
+                          fixedCrop={{ aspect: 16 / 9 }}
                           name="['http://regen.network/galleryRight']"
                         />
                       </div>
@@ -202,7 +213,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                   labelSubText="(required if you don’t add a video)"
                   description="Upload a nice portrait of the land stewards and their families. This should be different from the other photos of land stewards you uploaded in the gallery above."
                   buttonText="+ Add Photo"
-                  fixedCrop={{ aspect: 481 / 290 }}
+                  fixedCrop={{ aspect: 16 / 9 }}
                   name="['http://regen.network/landStewardPhoto']"
                 />
               </OnBoardingCard>

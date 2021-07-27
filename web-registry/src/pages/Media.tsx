@@ -37,6 +37,7 @@ const Media: React.FC = () => {
       'http://regen.network/galleryBottom': metadata['http://regen.network/galleryBottom'],
       'http://regen.network/galleryRight': metadata['http://regen.network/galleryRight'],
       'http://regen.network/landStewardPhoto': metadata['http://regen.network/landStewardPhoto'],
+      'http://regen.network/videoUrl': metadata['http://regen.network/videoUrl'],
     };
   }
 

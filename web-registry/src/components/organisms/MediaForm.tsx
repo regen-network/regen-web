@@ -7,6 +7,7 @@ import cx from 'clsx';
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import OnboardingFooter from 'web-components/lib/components/fixed-footer/OnboardingFooter';
 import { FileDrop } from './FileDrop';
+import { VideoInput } from './VideoInput';
 import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
 import Description from 'web-components/lib/components/description';
 import Title from 'web-components/lib/components/title';
@@ -28,6 +29,7 @@ export interface MediaValues {
   'http://regen.network/galleryBottom': string;
   'http://regen.network/galleryRight': string;
   'http://regen.network/landStewardPhoto': string;
+  'http://regen.network/videoUrl': string;
 }
 
 export interface MediaValuesErrors {
@@ -51,7 +53,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontSize: theme.typography.pxToRem(16),
   },
   field: {
-    marginBottom: theme.spacing(4),
+    marginBottom: theme.spacing(12),
   },
   error: {
     marginTop: 0,
@@ -60,9 +62,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     height: 290,
     width: '100%',
   },
-  galleryPhotos: {
-    margin: theme.spacing(8, 0, 12),
-  },
+  // galleryPhotos: {
+  //   margin: theme.spacing(0, 0, 12),
+  // },
   gallery: {
     display: 'flex',
     justifyContent: 'space-between',
@@ -112,6 +114,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
 
             'http://regen.network/landStewardPhoto':
               initialValues?.['http://regen.network/landStewardPhoto'] || '',
+            'http://regen.network/videoUrl': initialValues?.['http://regen.network/videoUrl'] || '',
           }
         }
         validate={async (values: MediaValues) => {
@@ -161,7 +164,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                   fixedCrop={{ aspect: 16 / 9 }}
                   name="['http://regen.network/previewPhoto']"
                 />
-                <div className={styles.galleryPhotos}>
+                <div className={styles.field}>
                   <FormLabel
                     label="Gallery Photos"
                     labelSubText="(min 4 photos)"
@@ -205,6 +208,15 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                     </div>
                   </FormLabel>
                 </div>
+
+                <Field
+                  classes={{ root: styles.field }}
+                  component={VideoInput}
+                  label="Video url"
+                  optional
+                  description="Copy and paste a video url from YouTube, Vimeo, or Facebook."
+                  name="['http://regen.network/videoUrl']"
+                />
 
                 <Field
                   classes={{ root: styles.field, main: styles.fullImage }}

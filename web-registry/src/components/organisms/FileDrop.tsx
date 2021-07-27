@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { IconButton } from '@material-ui/core';
 import { FieldProps } from 'formik';
 import { Crop } from 'react-image-crop';
@@ -27,7 +27,7 @@ export interface FileDropProps extends FieldProps {
   hideDragText?: boolean;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     height: '100%',
     width: '100%',
@@ -88,6 +88,7 @@ function FileDrop({
   const [cropModalOpen, setCropModalOpen] = useState(false);
   const [initialImage, setInitialImage] = useState('');
   const styles = useStyles();
+  const theme = useTheme();
   const { form, field } = fieldProps;
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -142,7 +143,7 @@ function FileDrop({
             <div className={cx(styles.preview, classes?.main)}>
               <Image className={styles.previewImage} src={field.value} backgroundImage />
               <IconButton classes={{ root: styles.deleteButton }} onClick={handleDelete} aria-label="delete">
-                <TrashIcon color="red" />
+                <TrashIcon color={theme.palette.error.light} />
               </IconButton>
             </div>
           ) : (

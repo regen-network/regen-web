@@ -28,11 +28,13 @@ const useStyles = makeStyles(theme => ({
     height: '100%',
     width: '100%',
   },
+  collapse: {
+    marginBottom: theme.spacing(4),
+  },
   preview: {
     height: '100%',
     width: '100%',
     position: 'relative',
-    marginBottom: theme.spacing(4),
   },
   video: {
     height: 318, //todo
@@ -98,9 +100,9 @@ function VideoInput({
     >
       {() => (
         <>
-          <Collapse in={!!field.value}>
+          <Collapse className={styles.collapse} in={!!field.value}>
             <Card className={styles.preview}>
-              <CardMedia className={styles.video} component="iframe" src={field.value} />
+              <CardMedia className={styles.video} component="iframe" src={field.value} frameBorder="0" />
               <IconButton classes={{ root: styles.deleteButton }} onClick={handleDelete} aria-label="delete">
                 <TrashIcon color={theme.palette.error.light} />
               </IconButton>

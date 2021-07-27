@@ -161,6 +161,12 @@ categories:
         date: June 24, 2021
         isTokenSale: false
         image: ../../static/media/1_xffnhbjm3qf3m_3tchyayw.png
+      - url: https://catdotfish.medium.com/regen-enters-osmosis-dex-898ead30e034
+        title: $REGEN enters Osmosis DEX!
+        author: Catdotfish
+        image: ../../static/media/1_dy6w9xhlpsz3zw19yb9qga-2-.jpeg
+        date: July 13, 2021
+        isTokenSale: true
   - name: videos
     buttonText: watch video
     showPlay: true

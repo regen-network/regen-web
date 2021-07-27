@@ -65,8 +65,8 @@ const Staking = (): JSX.Element => {
 
   return (
     <Section title={title} classes={{ root: clsx(styles.root, styles.center), title: styles.title }}>
-      <Description className={clsx(styles.content, styles.center)}>{body}</Description>
-      <ContainedButton href={buttonUrl}>{ReactHtmlParser(buttonText)}</ContainedButton>
+      <Description className={clsx(styles.content, styles.center)}>{ReactHtmlParser(body)}</Description>
+      <ContainedButton href={buttonUrl}>{buttonText}</ContainedButton>
     </Section>
   );
 };

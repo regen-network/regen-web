@@ -1,19 +1,14 @@
 import React, { useState } from 'react';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import { CardMedia } from '@material-ui/core';
-import { IconButton } from '@material-ui/core';
+import { CardMedia, IconButton, Collapse } from '@material-ui/core';
 import { FieldProps } from 'formik';
-import { Crop } from 'react-image-crop';
 import cx from 'clsx';
 
+import Card from 'web-components/lib/components/cards/Card';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 import FieldFormControl from 'web-components/lib/components/inputs/FieldFormControl';
-import TextField from 'web-components/lib/components/inputs/TextField';
 import Input from 'web-components/lib/components/inputs/Input';
-import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
 import TrashIcon from 'web-components/lib/components/icons/TrashIcon';
-import { Image } from 'web-components/lib/components/image';
-import { Label } from '../atoms/Label';
 
 export interface VideoInputProps extends FieldProps {
   className?: string;
@@ -26,8 +21,6 @@ export interface VideoInputProps extends FieldProps {
   optional?: boolean;
   labelSubText?: string;
   buttonText?: string;
-  fixedCrop?: Crop;
-  hideDragText?: boolean;
 }
 
 const useStyles = makeStyles(theme => ({
@@ -44,6 +37,7 @@ const useStyles = makeStyles(theme => ({
   video: {
     height: 318, //todo
     width: '100%',
+    borderRadius: 5,
   },
   inputRow: {
     display: 'flex',
@@ -73,8 +67,6 @@ function VideoInput({
   optional,
   labelSubText,
   buttonText,
-  fixedCrop,
-  hideDragText,
   ...fieldProps
 }: VideoInputProps): JSX.Element {
   const [videoUrl, setVideoUrl] = useState('');
@@ -106,14 +98,14 @@ function VideoInput({
     >
       {() => (
         <>
-          {field.value && (
-            <div className={styles.preview}>
+          <Collapse in={!!field.value}>
+            <Card className={styles.preview}>
               <CardMedia className={styles.video} component="iframe" src={field.value} />
               <IconButton classes={{ root: styles.deleteButton }} onClick={handleDelete} aria-label="delete">
                 <TrashIcon color={theme.palette.error.light} />
               </IconButton>
-            </div>
-          )}
+            </Card>
+          </Collapse>
           <div className={cx(styles.inputRow, classes?.main)}>
             <Input
               className={styles.input}
@@ -121,7 +113,11 @@ function VideoInput({
               value={videoUrl}
               placeholder="Add video url"
             />
-            <OutlinedButton classes={{ root: cx(styles.button, classes?.button) }} onClick={handleUrlSubmit}>
+            <OutlinedButton
+              classes={{ root: cx(styles.button, classes?.button) }}
+              onClick={handleUrlSubmit}
+              aria-label="set video url"
+            >
               {buttonText || '+ video'}
             </OutlinedButton>
           </div>

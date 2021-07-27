@@ -183,14 +183,6 @@ coreSection:
         for carbon sequestration in hardwood forests that address climate
         change.
       image: ../../static/media/sam-bennetts.png
-    - name: Adriana Mihai
-      title: Blockchain Community Liason
-      description: Adriana is a long term community contributor of the @cosmos
-        ecosystem, helping Regen with community awareness through “Last/This
-        week in Regen”. She believes that humanity is at a critical breaking
-        point and Regen’s project on ecological regeneration acts as a beacon of
-        light by adding value to the worldwide efforts in saving the world.
-      image: ../../static/media/adriana-mihai.png
     - image: ../../static/media/daniel-pittman.jpg
       name: Daniel Pittman
       description: Daniel is a highly motivated software engineer experienced with
@@ -403,6 +395,14 @@ contributorSection:
         innovative strategies and incentive mechanisms for carbon asset
         management, ecosystem service payments, and regenerative natural capital
         investment finance.
+    - name: Adriana Mihai
+      title: Blockchain Community Liason
+      description: Adriana is a long term community contributor of the @cosmos
+        ecosystem, helping Regen with community awareness through “Last/This
+        week in Regen”. She believes that humanity is at a critical breaking
+        point and Regen’s project on ecological regeneration acts as a beacon of
+        light by adding value to the worldwide efforts in saving the world.
+      image: ../../static/media/adriana-mihai.png
 advisorSection:
   title: Advisors
   advisors:

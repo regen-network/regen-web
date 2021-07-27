@@ -8,7 +8,20 @@ topSection:
     for global climate finance.
 tokenEconomics:
   title: REGEN Token Economics
-  body: Under Maintenance
+  body: >-
+    md//[Regen Ledger](https://docs.regen.network/) is a sovereign,
+    proof-of-stake blockchain built on the Cosmos SDK. REGEN is a staking token,
+    providing Regen Ledger with utility - namely, fees, gas, governance and
+    security. 
+
+
+    REGEN token is designed to ensure utility for ecological data and climate markets. Regen Network is governed as a public blockchain by token holders. 
+
+
+    REGEN token will accrue value from transaction fees on ecological assets and other transactions originated and secured on-chain.
+
+
+    To learn more about Regen Network token economics, please read [our whitepaper](https://regen-network.gitlab.io/whitepaper/Economics.pdf).
 infoSection:
   title: REGEN token on Osmosis Decentralized Exchange
   subtitle: "Release date: July 2021"

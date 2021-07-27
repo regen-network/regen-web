@@ -1,6 +1,5 @@
 import React from 'react';
 import { Theme, makeStyles } from '@material-ui/core';
-import ReactHtmlParser from 'react-html-parser';
 import clsx from 'clsx';
 
 import Description, { DescriptionProps } from 'web-components/src/components/description';
@@ -25,5 +24,5 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
 export const TokenDescription = ({ children, className }: DescriptionProps): JSX.Element => {
   const styles = useStyles();
 
-  return <Description className={clsx(className, styles.root)}>{ReactHtmlParser(children)}</Description>;
+  return <Description className={clsx(className, styles.root)}>{children}</Description>;
 };

@@ -60,7 +60,7 @@ const CreditClassCards: React.FC<Props> = ({ justify = 'center', ...props }) => 
             description={c.description}
             imgSrc={getImgSrc(c.imgSrc)}
             onClick={() => props.onClickCard(c)}
-            title={c.title}
+            title={c.name}
           />
         </Grid>
       ))}

@@ -39,6 +39,7 @@ import {
   VerifyEmail,
   MethodologyDetails,
   CreateCreditClass,
+  CreditClassDetails,
 } from './pages';
 
 import './App.css';
@@ -174,6 +175,14 @@ const App: React.FC = (): JSX.Element => {
               <>
                 {/* <Route path={path} exact component={MethodologiesList} /> TODO */}
                 <Route path={`${path}/:methodologyId`} component={MethodologyDetails} />
+              </>
+            )}
+          />
+          <Route
+            path="/credit-classes"
+            render={({ match: { path } }) => (
+              <>
+                <Route path={`${path}/:creditClassId`} component={CreditClassDetails} />
               </>
             )}
           />

@@ -134,7 +134,7 @@ const steps: Step[] = [
     description:
       '<span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut. <a href="https://regen.network" target="_blank" rel="noopener noreferrer">Read full documentation»</a></span>',
     faqs: questionItems,
-    video: 'https://www.youtube.com/embed/Eh19aQ1dd7c',
+    videoSrc: 'https://www.youtube.com/embed/Eh19aQ1dd7c',
   },
   {
     stepNumber: 7,

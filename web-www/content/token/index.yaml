@@ -21,7 +21,7 @@ tokenEconomics:
     REGEN token will accrue value from transaction fees on ecological assets and other transactions originated and secured on-chain.
 
 
-    To learn more about Regen Network token economics, please read <a href="https://regen-network.gitlab.io/whitepaper/Economics.pdf" target="_blank">our whitepaper</a>.
+    To learn more about Regen Network token economics, please read [our whitepaper](https://regen-network.gitlab.io/whitepaper/Economics.pdf).
 infoSection:
   title: REGEN token on Osmosis Decentralized Exchange
   subtitle: "Release date: July 2021"

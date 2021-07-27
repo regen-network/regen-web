@@ -6,7 +6,7 @@ import Box from '@material-ui/core/Box';
 import Modal from 'web-components/lib/components/modal';
 import Section from 'web-components/lib/components/section';
 import Title from 'web-components/lib/components/title';
-import { StepCard, Step } from 'web-components/lib/components/cards/StepCard';
+import { StepCard, StepCardProps } from 'web-components/lib/components/cards/StepCard';
 
 import { HeroTitle, HeroAction, ReviewProcessInfo, BackgroundImgSection } from '../components/molecules';
 import { contentByPage } from '../mocks';
@@ -39,14 +39,8 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-type StepCard = {
-  icon: JSX.Element;
-  step: Step;
-};
-
-// TODO: Once the API is connected, replace this type (it shouldn't be necessary to define it here)
 type ApiCard = typeof contentByPage.MethodologyReviewProcess['stepCardSections']['public']['stepCards'];
-const createStepCards = (raw: ApiCard): StepCard[] =>
+const createStepCards = (raw: ApiCard): StepCardProps[] =>
   raw.map(({ icon, title, btnText, href, description, isActive, stepNumber, faqs, tagName, image }) => ({
     icon: <img src={require(`../assets/${icon}`)} alt={title} />,
     step: {
@@ -81,7 +75,7 @@ const MethodologyReviewProcess: React.FC = () => {
   const publicCommentCards = createStepCards(stepCardSections.public.stepCards);
   const scienceReviewCards = createStepCards(stepCardSections.scientific.stepCards);
 
-  const StepCards: React.FC<{ title: string; stepCards: StepCard[] }> = props => (
+  const StepCards: React.FC<{ title: string; stepCards: StepCardProps[] }> = props => (
     <>
       <Title variant="h3" align="center">
         {props.title}

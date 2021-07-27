@@ -7,9 +7,9 @@ import SatelliteIcon from 'web-components/lib/components/icons/SatelliteIcon';
 import CountingIcon from 'web-components/lib/components/icons/CountingIcon';
 import GrowIcon from 'web-components/lib/components/icons/GrowIcon';
 import CoBenefitsIcon from 'web-components/lib/components/icons/CoBenefitsIcon';
-import { Methodology } from 'web-components/lib/components/methodologies';
 
 import { ProcessStepCard } from '../atoms/ProcessStepCard';
+import { Methodology } from '../../mocks/cms-duplicates';
 
 type Props = {
   methodology: Methodology;

@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 import CardMedia from '@material-ui/core/CardMedia';
 import { Variant } from '@material-ui/core/styles/createTypography';
-import clsx from 'clsx';
+import cx from 'clsx';
 import ReactHtmlParser from 'react-html-parser';
 
 import Card from './Card';
@@ -111,50 +111,46 @@ export default function MediaCard({
 
   const optimizedImage = (): JSX.Element => (
     <Image
-      className={clsx(imageClassName, classes.image)}
+      className={cx(imageClassName, classes.image)}
       backgroundImage
       src={imgSrc}
       imageStorageBaseUrl={imageStorageBaseUrl}
       apiServerUrl={apiServerUrl}
     >
-      <>
-        {backgroundGradient && <div className={classes.backgroundGradient} />}
-        {tag && <div className={classes.tag}>{tag}</div>}
-      </>
+      {backgroundGradient && <div className={classes.backgroundGradient} />}
+      {tag && <div className={classes.tag}>{tag}</div>}
     </Image>
   );
 
-  const media = <CardMedia className={clsx(imageClassName, classes.image)} component={optimizedImage} />;
+  const media = <CardMedia className={cx(imageClassName, classes.image)} component={optimizedImage} />;
 
   return (
     <Card
-      className={className}
+      className={cx(classes.root, className)}
       onClick={onClick}
       width={width}
       elevation={elevation}
       borderColor={borderColor}
       borderRadius={borderRadius}
     >
-      <div className={classes.root}>
-        {href ? (
-          <a href={href} target={target}>
-            {media}
-          </a>
-        ) : (
-          media
-        )}
-        {name && (
-          <Title
-            className={
-              titleVariant === 'h4' && titleOverwrite ? clsx(classes.h4title, classes.title) : classes.title
-            }
-            variant={titleVariant}
-          >
-            {ReactHtmlParser(name)}
-          </Title>
-        )}
-        {children}
-      </div>
+      {href ? (
+        <a href={href} target={target}>
+          {media}
+        </a>
+      ) : (
+        media
+      )}
+      {name && (
+        <Title
+          className={
+            titleVariant === 'h4' && titleOverwrite ? cx(classes.h4title, classes.title) : classes.title
+          }
+          variant={titleVariant}
+        >
+          {ReactHtmlParser(name)}
+        </Title>
+      )}
+      {children}
     </Card>
   );
 }

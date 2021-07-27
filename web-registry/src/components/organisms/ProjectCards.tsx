@@ -2,7 +2,8 @@ import React from 'react';
 import clsx from 'clsx';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
 import { Project } from '../../mocks';
@@ -31,34 +32,72 @@ const useStyles = makeStyles((theme: Theme) => ({
       flexBasis: '100%',
     },
   },
+  swipe: {
+    display: 'flex',
+    marginLeft: theme.spacing(-4),
+    marginRight: theme.spacing(-4),
+    overflowX: 'auto',
+    minHeight: theme.spacing(104),
+    '&::-webkit-scrollbar': {
+      display: 'none',
+    },
+  },
+  swipeItem: {
+    [theme.breakpoints.up('sm')]: {
+      margin: theme.spacing(0, 1.875),
+    },
+    [theme.breakpoints.down('xs')]: {
+      padding: theme.spacing(0, 1.875),
+      '&:first-child': {
+        paddingLeft: theme.spacing(4),
+      },
+      '&:last-child': {
+        paddingRight: theme.spacing(4),
+      },
+    },
+  },
 }));
 
 const ProjectCards: React.FC<Props> = props => {
   const styles = useStyles();
+  const theme: Theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
   const imageStorageBaseUrl = process.env.REACT_APP_IMAGE_STORAGE_BASE_URL;
   const apiServerUrl = process.env.REACT_APP_API_URI;
 
-  return (
+  const LinkedProject: React.FC<{ project: Project }> = ({ project }) => (
+    <ProjectCard
+      name={project.name}
+      imgSrc={project.image}
+      imageStorageBaseUrl={imageStorageBaseUrl}
+      apiServerUrl={apiServerUrl}
+      place={project.place}
+      area={project.area}
+      areaUnit={project.areaUnit}
+      developer={
+        project.developer && {
+          name: project.developer.name,
+          type: project.developer.type,
+          imgSrc: project.developer.imgSrc,
+        }
+      }
+    />
+  );
+
+  return isMobile ? (
+    <div className={styles.swipe}>
+      {props.projects.map(project => (
+        <Link className={styles.swipeItem} key={project.id} href={`/projects/${project.id}`}>
+          <LinkedProject project={project} />
+        </Link>
+      ))}
+    </div>
+  ) : (
     <Grid container className={clsx(styles.root, props.classes && props.classes.root)} spacing={5}>
       {props.projects.map(project => (
         <Grid item sm={6} md={4} key={project.id} className={styles.item}>
           <Link className={styles.projectCard} href={`/projects/${project.id}`}>
-            <ProjectCard
-              name={project.name}
-              imgSrc={project.image}
-              imageStorageBaseUrl={imageStorageBaseUrl}
-              apiServerUrl={apiServerUrl}
-              place={project.place}
-              area={project.area}
-              areaUnit={project.areaUnit}
-              developer={
-                project.developer && {
-                  name: project.developer.name,
-                  type: project.developer.type,
-                  imgSrc: project.developer.imgSrc,
-                }
-              }
-            />
+            <LinkedProject project={project} />
           </Link>
         </Grid>
       ))}

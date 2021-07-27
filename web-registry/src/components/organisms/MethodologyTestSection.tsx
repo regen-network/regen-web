@@ -2,12 +2,12 @@ import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import ReactHtmlParser from 'react-html-parser';
 
-import { Methodology } from 'web-components/lib/components/methodologies';
 import Title from 'web-components/lib/components/title';
 import Description from 'web-components/lib/components/description';
 
 import { BackgroundImgSection } from '../molecules/BackgroundImgSection';
 import testMethodologyImg from '../../assets/test-methodology.png';
+import { Methodology } from '../../mocks/cms-duplicates';
 
 type Props = {
   methodology: Methodology;
@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     justifyContent: 'center',
     [theme.breakpoints.up('sm')]: {
-      padding: theme.spacing(8, 5),
+      padding: theme.spacing(30, 5),
     },
     [theme.breakpoints.down('xs')]: {
       paddingBottom: theme.spacing(17.75),

@@ -4,11 +4,10 @@ import { ItemProps as ProtectedSpeciesItem } from 'web-components/lib/components
 import { Media } from 'web-components/lib/components/sliders/ProjectMedia';
 import { ActionProps } from 'web-components/lib/components/action';
 import { CreditPrice } from 'web-components/lib/components/fixed-footer/BuyFooter';
-import { CreditClass } from 'web-components/lib/components/credits/CreditDetails';
 import { SDG } from 'web-components/lib/components/cards/ProjectTopCard';
-import { ProjectImpactCardProps as Impact } from 'web-components/lib/components/cards/ProjectImpactCard';
-import { Methodology } from 'web-components/lib/components/methodologies';
+
 import mock from './mock.json';
+import { Impact } from './cms-duplicates';
 
 // imgSrc should be either web url or static image filenames within web/src/assets/
 // (eg to load web/src/assets/coorong.jpg, use "coorong.jpg" as imgSrc)
@@ -39,7 +38,7 @@ export interface Project {
   keyOutcomesActivities: string[];
   landManagementActions?: ActionGroup[];
   impact: Impact[];
-  creditClass: CreditClass;
+  creditClass: BasicCreditClass;
   methodology: ProjectMethodology;
   protectedSpecies?: ProtectedSpeciesItem[];
   fieldsOverride?: ProjectOverride;
@@ -68,9 +67,12 @@ interface BasicProject {
 }
 
 export interface BasicCreditClass {
-  title: string;
+  name: string;
+  id: string;
   description: string;
-  imgSrc: string;
+  imgSrc?: string;
+  pdfUrl?: string;
+  tag?: string;
 }
 
 interface Purchase {
@@ -111,7 +113,6 @@ export interface ProjectOverride {
 }
 
 export interface ProjectMethodology {
-  //TODO: relational?
   name: string;
   id: string;
   pdfUrl?: string;
@@ -121,14 +122,12 @@ export interface Mock {
   creditsIssuer: User;
   projects: Project[];
   projectDefault: ProjectDefault;
-  creditClasses: BasicCreditClass[];
+  basicCreditClasses: BasicCreditClass[];
   purchasedCredits: PurchasedCredits[];
-  methodologies: Methodology[];
 }
 
 export const creditsIssuer: User = mock.creditsIssuer;
 export const purchasedCredits: PurchasedCredits[] = mock.purchasedCredits;
 export const projects: Project[] = mock.projects;
 export const projectDefault: ProjectDefault = mock.projectDefault;
-export const creditClasses: BasicCreditClass[] = mock.creditClasses;
-export const methodologies: Methodology[] = mock.methodologies;
+export const basicCreditClasses: BasicCreditClass[] = mock.basicCreditClasses;

@@ -23,7 +23,6 @@ export interface FileDropProps extends FieldProps {
   optional?: boolean;
   labelSubText?: string;
   buttonText?: string;
-  onChange: (file: string) => void;
   fixedCrop?: Crop;
   hideDragText?: boolean;
 }
@@ -81,7 +80,6 @@ function FileDrop({
   label,
   optional,
   labelSubText,
-  onChange,
   buttonText,
   fixedCrop,
   hideDragText,
@@ -98,9 +96,6 @@ function FileDrop({
       toBase64(file).then(base64String => {
         if (typeof base64String === 'string') {
           setCropModalOpen(true);
-          console.log('form', form);
-          console.log('field open', field.name);
-
           setInitialImage(base64String);
         }
       });
@@ -123,14 +118,11 @@ function FileDrop({
   };
 
   const handleCropModalSubmit = (croppedImage: HTMLImageElement): void => {
-    console.log('field.name submit', field.name);
     form.setFieldValue(field.name, croppedImage.src);
     setCropModalOpen(false);
   };
 
   const handleDelete = (): void => {
-    console.log('field.name delete', field.name);
-
     form.setFieldValue(field.name, undefined);
     setInitialImage('');
   };
@@ -161,8 +153,14 @@ function FileDrop({
                   <span className={styles.or}>or</span>
                 </>
               )}
-              <input type="file" hidden onChange={handleFileChange} accept="image/*" id="file-drop-input" />
-              <label htmlFor="file-drop-input">
+              <input
+                type="file"
+                hidden
+                onChange={handleFileChange}
+                accept="image/*"
+                id={`file-drop-input-${field.name}`}
+              />
+              <label htmlFor={`file-drop-input-${field.name}`}>
                 <OutlinedButton classes={{ root: cx(styles.button, classes?.button) }} isImageBtn>
                   {buttonText || '+ add'}
                 </OutlinedButton>

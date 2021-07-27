@@ -1,15 +1,16 @@
 import React from 'react';
-import { makeStyles, Theme, MenuItem, MenuList, Link, useTheme } from '@material-ui/core';
+import { makeStyles, Theme, MenuItem, MenuList, Link, useTheme, useMediaQuery } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
-import clsx from 'clsx';
+import Container from '@material-ui/core/Container';
+import cx from 'clsx';
 import Box from '@material-ui/core/Box';
 
 import RegenIcon from '../icons/RegenIcon';
 import RegistryIcon from '../icons/RegistryIcon';
 import MobileMenu from '../mobile-menu';
 import ContainedButton from '../buttons/ContainedButton';
-import { HeaderItem } from './HeaderItem';
+import { HeaderMenuItem } from './HeaderMenuItem';
 
 export interface node {
   [key: number]: React.ReactNode;
@@ -22,7 +23,7 @@ export interface HeaderColors {
 interface StyleProps {
   color: string;
   borderBottom?: boolean;
-  fullWidth: boolean;
+  isRegistry: boolean;
 }
 
 interface HeaderProps {
@@ -45,7 +46,7 @@ export interface HeaderMenuItem {
   title: string;
   href?: string;
   render?: () => JSX.Element;
-  dropdownItems?: { title: string; href: string; render?: () => JSX.Element }[];
+  dropdownItems?: { title: string; href: string }[];
 }
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
@@ -65,31 +66,17 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   }),
   header: props => ({
     color: props.color,
-    maxWidth: props.fullWidth ? '100%' : theme.breakpoints.values.lg,
-    margin: '0 auto',
     position: 'relative',
     zIndex: 10,
-    [theme.breakpoints.up('md')]: {
-      padding: theme.spacing(2.5, 0, 2.5, 12),
-    },
-    [theme.breakpoints.up('sm')]: {
-      height: theme.spacing(27.5),
-      '& a > svg': {
-        fontSize: '12rem',
-        height: theme.spacing(20.75),
-      },
-    },
-    [theme.breakpoints.down('sm')]: {
-      padding: theme.spacing(2.5, 10),
-    },
+    display: 'flex',
+    flexWrap: 'nowrap',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    height: '110px',
     [theme.breakpoints.down('xs')]: {
       padding: theme.spacing(2.5, 3.75),
       height: theme.spacing(15),
       color: theme.palette.primary.light,
-    },
-    [theme.breakpoints.up('xl')]: {
-      paddingRight: props.fullWidth ? theme.spacing(12.5) : theme.spacing(5),
-      paddingLeft: props.fullWidth ? theme.spacing(12.5) : theme.spacing(5),
     },
     '& .MuiMenuItem-root > a, .MuiMenuItem-root > div > span': {
       fontSize: theme.spacing(3.25),
@@ -108,21 +95,9 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       },
     },
   }),
-  mobile: {
-    [theme.breakpoints.down('xs')]: {
-      display: 'inline-block',
-      padding: theme.spacing(1),
-      'align-items': 'unset',
-    },
-  },
-  logoItem: {
-    [theme.breakpoints.down('xs')]: {},
-  },
   menuList: {
     [theme.breakpoints.up('sm')]: {
       display: 'flex',
-      justifySelf: 'center',
-      paddingTop: theme.spacing(6.5),
     },
     '& li.MuiListItem-button, li.MuiListItem-button > div': {
       '& span:hover, svg:hover, path:hover': {
@@ -151,23 +126,21 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       width: theme.spacing(23),
     },
   },
-  registryIcon: {
-    [theme.breakpoints.up('sm')]: {
-      height: theme.typography.pxToRem(76),
-      width: theme.typography.pxToRem(117),
-    },
-    [theme.breakpoints.down('xs')]: {
-      height: theme.spacing(10.25),
-      width: theme.spacing(23),
-    },
-  },
-  menu: {
+  appIcon: props => ({
     height: '100%',
-    lineHeight: theme.spacing(6),
-  },
+    width: '100%',
+    [theme.breakpoints.down('xs')]: {
+      height: 'auto',
+      width: theme.spacing(props.isRegistry ? 12 : 20),
+    },
+  }),
   signUpBtn: {
-    fontSize: theme.typography.pxToRem(12),
     padding: theme.spacing(2, 7),
+    fontSize: theme.typography.pxToRem(12),
+    [theme.breakpoints.down('sm')]: {
+      padding: theme.spacing(2, 4),
+      fontSize: theme.typography.pxToRem(9),
+    },
   },
   loginBtn: props => ({
     textTransform: 'none',
@@ -179,7 +152,6 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
 }));
 
 export default function Header({
-  children,
   transparent,
   color,
   menuItems,
@@ -193,13 +165,8 @@ export default function Header({
   fullWidth = false,
   pathName = '/',
 }: HeaderProps): JSX.Element {
-  const styles = useStyles({ fullWidth, color, borderBottom });
-  const rootClass = [styles.borderBottom];
-  rootClass.push(transparent ? styles.transparent : styles.background);
-  rootClass.push(absolute ? styles.absolute : '');
-
   const theme = useTheme();
-  const AppIcon = isRegistry ? RegistryIcon : RegenIcon;
+  const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
 
   const RegistryLoginBtns: React.FC = () => (
     <li>
@@ -208,57 +175,60 @@ export default function Header({
           Logout
         </Button>
       ) : (
-        <>
+        <Box display="flex" flexWrap="nowrap" alignItems="center">
           <Button variant="text" className={styles.loginBtn} onClick={onLogin}>
             Login
           </Button>
           <ContainedButton size="small" className={styles.signUpBtn} onClick={onSignup}>
             Sign Up
           </ContainedButton>
-        </>
+        </Box>
       )}
     </li>
   );
 
+  const styles = useStyles({ color, borderBottom, isRegistry });
+  const AppIcon = isRegistry ? RegistryIcon : RegenIcon;
   return (
-    <div className={clsx(rootClass)}>
-      <Grid className={styles.header} container direction="row" alignItems="center" justify="space-between">
-        <Grid className={styles.logoItem} item>
-          <a href="/">
-            <Box display={{ xs: 'none', sm: 'block' }}>
-              <AppIcon className={isRegistry ? styles.registryIcon : styles.regenIcon} color={color} />
-            </Box>
-            <Box display={{ xs: 'block', sm: 'none' }}>
+    <div
+      className={cx(
+        styles.borderBottom,
+        absolute && styles.absolute,
+        transparent ? styles.transparent : styles.background,
+      )}
+    >
+      <Container maxWidth={fullWidth ? undefined : 'xl'}>
+        <Box className={styles.header} px={[4, 5, 6]}>
+          <Box display="flex" maxHeight="72px" mr={4}>
+            <a href="/">
               <AppIcon
-                className={isRegistry ? styles.registryIcon : styles.regenIcon}
-                color={theme.palette.primary.contrastText}
+                className={styles.appIcon}
+                color={isMobile ? theme.palette.primary.contrastText : color}
               />
-            </Box>
-          </a>
-        </Grid>
-        <Grid className={styles.menu} item>
-          <Box display={{ xs: 'none', sm: 'flex' }}>
-            <MenuList className={styles.menuList}>
-              {menuItems?.map((item, index) => {
-                return <HeaderItem key={index} item={item} color={color} pathName={pathName} />;
-              })}
-              {isRegistry && <RegistryLoginBtns />}
-            </MenuList>
+            </a>
           </Box>
-          <Box display={{ xs: 'block', sm: 'none' }}>
-            <MobileMenu
-              pathName={pathName}
-              menuItems={menuItems}
-              className={styles.mobile}
-              isAuthenticated={isAuthenticated}
-              onLogin={onLogin}
-              onLogout={onLogout}
-              onSignup={onSignup}
-            />
+          <Box flexShrink={0} display="flex" flexWrap="nowrap" alignItems="center" height="100%">
+            {!isMobile ? (
+              <MenuList className={styles.menuList}>
+                {menuItems?.map((item, index) => {
+                  return <HeaderMenuItem key={index} item={item} color={color} pathName={pathName} />;
+                })}
+                {isRegistry && <RegistryLoginBtns />}
+              </MenuList>
+            ) : (
+              <MobileMenu
+                isRegistry={isRegistry}
+                pathName={pathName}
+                menuItems={menuItems}
+                isAuthenticated={isAuthenticated}
+                onLogin={onLogin}
+                onLogout={onLogout}
+                onSignup={onSignup}
+              />
+            )}
           </Box>
-        </Grid>
-        {children}
-      </Grid>
+        </Box>
+      </Container>
     </div>
   );
 }

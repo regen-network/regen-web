@@ -1,16 +1,11 @@
 import React from 'react';
-import { makeStyles, Theme, MenuItem, MenuList, Link, useTheme } from '@material-ui/core';
-import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
 import clsx from 'clsx';
-import Box from '@material-ui/core/Box';
+import { makeStyles, MenuItem, useTheme } from '@material-ui/core';
 
-import RegenIcon from '../icons/RegenIcon';
-import RegistryIcon from '../icons/RegistryIcon';
 import MenuHover from '../menu-hover';
-import MobileMenu from '../mobile-menu';
-import ContainedButton from '../buttons/ContainedButton';
+import { NavLink } from './NavLink';
 import { HeaderMenuItem } from '.';
+import { HeaderDropdownColumn } from './HeaderDropdownItems';
 
 const useStyles = makeStyles(theme => ({
   menuItem: {
@@ -31,14 +26,6 @@ const useStyles = makeStyles(theme => ({
       paddingLeft: theme.spacing(1.25),
     },
   },
-  subMenuHover: {
-    '& a:hover': {
-      borderBottom: `2px solid ${theme.palette.secondary.main}`,
-    },
-    '& a': {
-      borderBottom: `2px solid transparent`,
-    },
-  },
   currentMenuItem: {
     '& > a': {
       borderBottom: `2px solid ${theme.palette.secondary.main}`,
@@ -46,7 +33,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const HeaderItem: React.FC<{ item: HeaderMenuItem; pathName: string; color: string }> = ({
+const HeaderMenuItem: React.FC<{ item: HeaderMenuItem; pathName: string; color: string }> = ({
   item,
   pathName,
   color,
@@ -55,8 +42,8 @@ const HeaderItem: React.FC<{ item: HeaderMenuItem; pathName: string; color: stri
   const styles = useStyles();
 
   const Content: React.FC = () => {
-    if (!item.dropdownItems && !item.render) {
-      return <Link href={item.href}>{item.title}</Link>;
+    if (item.href && !item.dropdownItems && !item.render) {
+      return <NavLink to={item.href}>{item.title}</NavLink>;
     }
     return (
       <MenuHover
@@ -67,19 +54,8 @@ const HeaderItem: React.FC<{ item: HeaderMenuItem; pathName: string; color: stri
         }
         text={item.title}
       >
-        {item.dropdownItems &&
-          item.dropdownItems.map((dropdownItem, index) => (
-            <MenuItem
-              className={
-                pathName.includes(dropdownItem.href)
-                  ? clsx(styles.subMenuHover, styles.currentMenuItem)
-                  : styles.subMenuHover
-              }
-              key={index}
-            >
-              <Link href={dropdownItem.href}>{dropdownItem.title}</Link>
-            </MenuItem>
-          ))}
+        {/* `render` overrides default dropdown */}
+        {item.dropdownItems && !item.render && <HeaderDropdownColumn items={item.dropdownItems} />}
         {item.render && item.render()}
       </MenuHover>
     );
@@ -94,4 +70,4 @@ const HeaderItem: React.FC<{ item: HeaderMenuItem; pathName: string; color: stri
   );
 };
 
-export { HeaderItem };
+export { HeaderMenuItem };

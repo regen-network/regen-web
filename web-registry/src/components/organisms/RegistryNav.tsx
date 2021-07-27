@@ -2,10 +2,16 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useTheme } from '@material-ui/core/styles';
+import Box from '@material-ui/core/Box';
 
 import Header, { HeaderMenuItem, HeaderColors } from 'web-components/lib/components/header';
+import {
+  HeaderDropdownColumn,
+  HeaderDropdownItemProps,
+} from 'web-components/lib/components/header/HeaderDropdownItems';
+
 import { projects } from '../../mocks';
-import { CreditClassDropdown, MethodologyDropdown, ProgramDropdown } from '../molecules';
+import { PeerReviewed } from '../atoms';
 import { ReactComponent as Cow } from '../../assets/svgs/green-cow.svg';
 
 const RegistryNav: React.FC = () => {
@@ -14,50 +20,65 @@ const RegistryNav: React.FC = () => {
   const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
   const theme = useTheme();
   const fullWidthRegExp: RegExp = /projects\/[a-z-]+/;
-  const projectDropdownItems: HeaderMenuItem['dropdownItems'] = projects.map(p => ({
-    title: p.name,
-    href: `/projects/${p.id}`,
-  }));
+
+  //  each custom dropdown still needs to be passed `dropdownItems` to render
+  //  correctly on mobile, so I declare here to avoid duplicate code
+  const creditClassItems: HeaderDropdownItemProps[] = [
+    { title: 'Grasslands', href: '/TODO', svg: Cow, right: () => <PeerReviewed /> },
+  ];
+
+  const methodologyItems: HeaderDropdownItemProps[] = [
+    {
+      title: 'Carbon<i>Plus</i> Grasslands',
+      href: '/TODO',
+      svg: Cow,
+      right: () => <PeerReviewed />,
+    },
+  ];
+
+  const programStandardItems: HeaderDropdownItemProps[] = [
+    { href: '/program-guide', title: 'Program Guide' },
+    // { href: '/process', title: 'Process' },
+  ];
+
+  const programHowToItems: HeaderDropdownItemProps[] = [
+    { href: '/create-credit-class', title: 'Create Credit Class' },
+    { href: '/create-methodology', title: 'Create a Methodology' },
+    { href: '/methodology-review-process', title: 'Methodology Review Process' },
+    // { href: '/become-a-monitor', title: 'Become a Monitor' },
+    // { href: '/become-a-verifier', title: 'Become a Verifier' },
+  ];
 
   const menuItems: HeaderMenuItem[] = [
     {
       title: 'Projects',
-      dropdownItems: projectDropdownItems,
+      dropdownItems: projects.map(p => ({
+        title: p.name,
+        href: `/projects/${p.id}`,
+      })),
     },
     {
       title: 'Credit Classes',
-      render: () => (
-        <CreditClassDropdown
-          carbonPlusCredits={[{ title: 'Grasslands', to: '/TODO', svg: Cow, isPeerReviewed: true }]}
-        />
-      ),
+      dropdownItems: creditClassItems,
+      render: () => <HeaderDropdownColumn title="Carbon<i>Plus</i> Credits" items={creditClassItems} />,
     },
     {
       title: 'Methodologies',
-      render: () => (
-        <MethodologyDropdown
-          methodologies={[
-            { title: 'Carbon<i>Plus</i> Grasslands', isPeerReviewed: true, svg: Cow, to: '/TODO' },
-          ]}
-        />
-      ),
+      dropdownItems: methodologyItems,
+      render: () => <HeaderDropdownColumn items={methodologyItems} />,
     },
     {
       title: 'Program',
+      dropdownItems: [...programStandardItems, ...programHowToItems],
       render: () => (
-        <ProgramDropdown
-          standardLinks={[
-            { to: '/program-guide', title: 'Program Guide' },
-            // { to: '/process', title: 'Process' },
-          ]}
-          howToLinks={[
-            { to: '/create-credit-class', title: 'Create Credit Class' },
-            { to: '/create-methodology', title: 'Create a Methodology' },
-            { to: '/methodology-review-process', title: 'Methodology Review Process' },
-            // { to: '/become-a-monitor', title: 'Become a Monitor' },
-            // { to: '/become-a-verifier', title: 'Become a Verifier' },
-          ]}
-        />
+        <Box display="flex" justifyContent="space-between">
+          <Box pr={20}>
+            <HeaderDropdownColumn title="Standard" items={programStandardItems} />
+          </Box>
+          <Box display="flex" flexDirection="column">
+            <HeaderDropdownColumn title="How Tos" items={programHowToItems} />
+          </Box>
+        </Box>
       ),
     },
   ];

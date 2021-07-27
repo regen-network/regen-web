@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   paper: {
     'border-radius': '2px',
     border: `1px solid ${theme.palette.grey[400]}`,
-    paddingRight: '1.25rem',
+    padding: theme.spacing(5, 9),
   },
 }));
 
@@ -50,11 +50,11 @@ const MenuHover = ({ text, textColor, dropdownColor, children }: Props): JSX.Ele
   // nullish coalescing operator ?? to avoid typescript error on undefined
   const classes = useStyles({ textColor: textColor ?? '' });
 
-  const popoverEnter = ({ currentTarget }: any): void => {
+  const popoverEnter = (): void => {
     setOpenedPopover(true);
   };
 
-  const popoverLeave = ({ currentTarget }: any): void => {
+  const popoverLeave = (): void => {
     setOpenedPopover(false);
   };
 

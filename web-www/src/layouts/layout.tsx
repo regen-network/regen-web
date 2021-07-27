@@ -6,17 +6,14 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
-import { graphql, useStaticQuery } from 'gatsby';
-import { useTheme } from '@material-ui/core/styles';
 
-import Header, { HeaderColors, HeaderMenuItem } from 'web-components/lib/components/header';
 import Footer, { FooterItemProps as FooterItem } from 'web-components/lib/components/footer';
 import CookiesFooter from 'web-components/lib/components/banner/CookiesBanner';
 
+import { MarketingNav } from '../components/MarketingNav';
+
 import './layout.css';
-interface propTypes {
-  children: Array<React.ReactElement>;
+interface Props {
   location: Location;
 }
 
@@ -24,93 +21,11 @@ interface BoolProps {
   [key: string]: boolean;
 }
 
-type QueryData = {
-  text: {
-    launchDate: string;
-  };
-};
-
-const Layout = ({ children, location }: propTypes): JSX.Element => {
-  const theme = useTheme();
-  const {
-    text: { launchDate },
-  } = useStaticQuery<QueryData>(graphql`
-    query {
-      text: mainnetYaml {
-        launchDate
-      }
-    }
-  `);
-
-  const headerColors: HeaderColors = {
-    '/': theme.palette.primary.main,
-    '/land-stewards/': theme.palette.primary.main,
-    '/buyers/': theme.palette.primary.light,
-    '/resources/': theme.palette.primary.main,
-    '/privacy-policy/': theme.palette.primary.light,
-    '/terms-service/': theme.palette.primary.light,
-    '/team/': theme.palette.primary.light,
-    '/developers/': theme.palette.primary.main,
-    '/invest/': theme.palette.primary.light,
-    '/science/': theme.palette.primary.main,
-    '/validators/': theme.palette.primary.main,
-    '/community/': theme.palette.primary.main,
-    '/wallet-address-registration/': theme.palette.primary.light,
-    '/mainnet/': theme.palette.primary.light,
-    '/token/': theme.palette.primary.main,
-  };
-
-  const headerTransparent: BoolProps = {
-    '/faq/': false,
-  };
-
+const Layout: React.FC<Props> = ({ children, location }) => {
   const footerPaddingBottom: BoolProps = {
     '/buyers/': true,
     '/land-stewards/': true,
   };
-
-  // Links in rest of the site must use the trailing '/'
-  // in order for these to work appropriately
-  const headerNoBorderBottomPages: RegExp = new RegExp(
-    '//|/buyers/|/partners/|/contact/|/validators/|/land-stewards/|/resources/|/media/|/team/|/developers/|/science/|/invest/|/case-studies/|/press-kit/|/community/|/wallet-address-registration/|/mainnet/|/token/|/case-studies/[a-z-]+//',
-  );
-
-  const menuItems: HeaderMenuItem[] = [
-    {
-      title: 'Blockchain',
-      dropdownItems: [
-        { title: 'Mainnet', href: '/mainnet/' },
-        { title: 'Token', href: '/token/' },
-      ],
-    },
-    { title: 'Buyers', href: '/buyers/' },
-    { title: 'Land Stewards', href: '/land-stewards/' },
-    {
-      title: 'Community',
-      dropdownItems: [
-        { title: 'Community Overview', href: '/community/' },
-        { title: 'Developers', href: '/developers/' },
-        { title: 'Scientists', href: '/science/' },
-        { title: 'Validators', href: '/validators/' },
-      ],
-    },
-    {
-      title: 'Learn More',
-      dropdownItems: [
-        { title: 'Case Studies', href: '/case-studies/' },
-        { title: 'Resources', href: '/resources/' },
-        { title: 'FAQ', href: '/faq/' },
-        { title: 'Team', href: '/team/' },
-      ],
-    },
-  ];
-
-  const desktopColor: string = headerColors[location.pathname]
-    ? headerColors[location.pathname]
-    : theme.palette.primary.light;
-
-  const transparent: boolean =
-    headerTransparent[location.pathname] !== undefined ? headerTransparent[location.pathname] : true;
 
   const footerItems: [FooterItem, FooterItem, FooterItem] = [
     {
@@ -201,14 +116,7 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
   ];
   return (
     <>
-      <Header
-        menuItems={menuItems}
-        transparent={transparent}
-        absolute={location.pathname === '/' || headerNoBorderBottomPages.test(location.pathname)}
-        color={desktopColor}
-        borderBottom={location.pathname !== '/' && !headerNoBorderBottomPages.test(location.pathname)}
-        pathName={location.pathname}
-      />
+      <MarketingNav location={location} />
       <div>
         <main>{children}</main>
       </div>
@@ -224,10 +132,6 @@ const Layout = ({ children, location }: propTypes): JSX.Element => {
       </footer>
     </>
   );
-};
-
-Layout.propTypes = {
-  children: PropTypes.node.isRequired,
 };
 
 export default Layout;

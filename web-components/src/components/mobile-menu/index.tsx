@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
+import clsx from 'clsx';
+import ReactHtmlParser from 'react-html-parser';
+
 import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import Divider from '@material-ui/core/Divider';
 import MenuList from '@material-ui/core/MenuList';
 import MenuItem from '@material-ui/core/MenuItem';
 import Link from '@material-ui/core/Link';
-import clsx from 'clsx';
 
 import HamburgerIcon from '../icons/HamburgerIcon';
 import ContainedButton from '../buttons/ContainedButton';
@@ -14,6 +16,11 @@ import CloseIcon from '../icons/CloseIcon';
 import { HeaderMenuItem } from '../header';
 
 const useStyles = makeStyles((theme: Theme) => ({
+  root: {
+    display: 'inline-block',
+    padding: theme.spacing(1),
+    'align-items': 'unset',
+  },
   drawer: {
     '& .MuiDrawer-paper': {
       backgroundColor: theme.palette.primary.light,
@@ -99,8 +106,8 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 type Props = {
-  className?: string;
   menuItems?: HeaderMenuItem[];
+  isRegistry?: boolean;
   pathName?: string;
   isAuthenticated?: boolean;
   onSignup?: () => void;
@@ -108,7 +115,7 @@ type Props = {
   onLogout?: () => void;
 };
 
-const MobileMenu = ({ menuItems, className, pathName, ...props }: Props): JSX.Element => {
+const MobileMenu = ({ menuItems, pathName, ...props }: Props): JSX.Element => {
   const styles = useStyles();
   const theme = useTheme();
   const [open, setOpen] = useState(false);
@@ -121,10 +128,8 @@ const MobileMenu = ({ menuItems, className, pathName, ...props }: Props): JSX.El
     setOpen(false);
   };
 
-  const isRegistry = !!props.onLogin && !!props.onLogout && !!props.onSignup;
-
   return (
-    <div className={className}>
+    <div className={styles.root}>
       <HamburgerIcon
         className={clsx(styles.hamburger, styles.icon)}
         onClick={handleOpen}
@@ -146,7 +151,7 @@ const MobileMenu = ({ menuItems, className, pathName, ...props }: Props): JSX.El
               }
             >
               {item.dropdownItems ? (
-                <>
+                <div>
                   <span className={styles.subMenuTitle}>{item.title}</span>
                   <MenuList>
                     {item.dropdownItems.map((dropdownItem, j) => (
@@ -158,17 +163,17 @@ const MobileMenu = ({ menuItems, className, pathName, ...props }: Props): JSX.El
                         }
                         key={`${i}-${j}`}
                       >
-                        <Link href={dropdownItem.href}>{dropdownItem.title}</Link>
+                        <Link href={dropdownItem.href}>{ReactHtmlParser(dropdownItem.title)}</Link>
                       </MenuItem>
                     ))}
                   </MenuList>
-                </>
+                </div>
               ) : (
                 <Link href={item.href}>{item.title}</Link>
               )}
             </MenuItem>
           ))}
-          {isRegistry && (
+          {props.isRegistry && (
             <>
               <Divider light className={styles.divider} />
               <li className={styles.loginBtns}>

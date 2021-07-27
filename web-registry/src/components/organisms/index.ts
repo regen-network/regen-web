@@ -8,7 +8,6 @@ export * from './Documentation';
 export * from './ImpactSection';
 export * from './IncludesGrasslandsForm';
 export * from './LandManagementActions';
-export * from './MarketingNav';
 export * from './MethodologyDocumentationSection';
 export * from './MoreProjectsSection';
 export * from './MethodologySteps';

@@ -52,9 +52,23 @@ const MarketingNav: React.FC<{ location: Location }> = ({ location }) => {
     '//|/buyers/|/partners/|/contact/|/validators/|/land-stewards/|/resources/|/media/|/team/|/developers/|/science/|/invest/|/case-studies/|/press-kit/|/community/|/wallet-address-registration/|/mainnet/|/token/|/case-studies/[a-z-]+//',
   );
 
-  const mobileProgramItems: HeaderDropdownItemProps[] = [
-    { title: 'Homepage', href: 'https://registry.regen.network/' },
+  const standardItems: HeaderDropdownItemProps[] = [
     { title: 'Program Guide', href: 'https://registry.regen.network/program-guide/' },
+  ];
+
+  const howToItems: HeaderDropdownItemProps[] = [
+    {
+      title: 'Create a Credit Class',
+      href: 'https://registry.regen.network/create-credit-class/',
+    },
+    {
+      title: 'Create a Methodology',
+      href: 'https://registry.regen.network/create-a-methodology/',
+    },
+    {
+      title: 'Methodology Review Process',
+      href: 'https://registry.regen.network/methodology-review-process/',
+    },
   ];
 
   const stakeholderItemsRegistry: HeaderDropdownItemProps[] = [
@@ -68,7 +82,14 @@ const MarketingNav: React.FC<{ location: Location }> = ({ location }) => {
     { title: 'Validators', href: '/validators/', svg: ValidatorsIcon },
   ];
 
+  const mobileProgramItems: HeaderDropdownItemProps[] = [
+    { title: 'Homepage', href: 'https://registry.regen.network/' },
+    ...standardItems,
+    ...howToItems,
+  ];
+
   const STACKED_COL_SPACE = 6;
+
   const menuItems: HeaderMenuItem[] = [
     {
       title: 'Program',
@@ -77,29 +98,10 @@ const MarketingNav: React.FC<{ location: Location }> = ({ location }) => {
         <Box display="flex" flexDirection="column">
           <HeaderDropdownItem title="Homepage" href="https://registry.regen.network" svg={RegistryIcon} />
           <Box mt={2}>
-            <HeaderDropdownColumn
-              title="Standard"
-              items={[{ title: 'Program Guide', href: 'https://registry.regen.network/program-guide/' }]}
-            />
+            <HeaderDropdownColumn title="Standard" items={standardItems} />
           </Box>
           <Box mt={STACKED_COL_SPACE}>
-            <HeaderDropdownColumn
-              title="How Tos"
-              items={[
-                {
-                  title: 'Create a Credit Class',
-                  href: 'https://registry.regen.network/create-credit-class/',
-                },
-                {
-                  title: 'Create a Methodology',
-                  href: 'https://registry.regen.network/create-a-methodology/',
-                },
-                {
-                  title: 'Methodology Review Process',
-                  href: 'https://registry.regen.network/methodology-review-process/',
-                },
-              ]}
-            />
+            <HeaderDropdownColumn title="How Tos" items={howToItems} />
           </Box>
         </Box>
       ),

@@ -4,13 +4,15 @@ import { IconButton } from '@material-ui/core';
 import { FieldProps } from 'formik';
 import { Crop } from 'react-image-crop';
 import cx from 'clsx';
+import { useDropzone } from 'react-dropzone';
+// import Dropzone from 'react-dropzone';
 
-import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
-import FieldFormControl from 'web-components/lib/components/inputs/FieldFormControl';
-import CropImageModal from 'web-components/lib/components/modal/CropImageModal';
-import TrashIcon from 'web-components/lib/components/icons/TrashIcon';
-import { Image } from 'web-components/lib/components/image';
-import { Label } from '../atoms/Label';
+import OutlinedButton from '../buttons/OutlinedButton';
+import FieldFormControl from '../inputs/FieldFormControl';
+import CropImageModal from '../modal/CropImageModal';
+import TrashIcon from '../icons/TrashIcon';
+import { Image } from '../image';
+import { Label } from '../label';
 
 export interface FileDropProps extends FieldProps {
   className?: string;
@@ -91,6 +93,26 @@ function FileDrop({
   const theme = useTheme();
   const { form, field } = fieldProps;
 
+  const handleDrop = (event: any): void => {
+    const fileList = event.dataTransfer ? event.dataTransfer.files : [];
+    if (fileList && fileList.length > 0) {
+      const file = fileList[0];
+      console.log('handleDrop', file);
+
+      toBase64(file).then(base64String => {
+        if (typeof base64String === 'string') {
+          setCropModalOpen(true);
+          setInitialImage(base64String);
+        }
+      });
+    }
+  };
+
+  const { getRootProps, getInputProps } = useDropzone({
+    accept: 'image/*',
+    onDrop: handleDrop,
+  });
+
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     if (event && event.target && event.target.files && event.target.files.length) {
       const file = event.target.files[0];
@@ -147,25 +169,38 @@ function FileDrop({
               </IconButton>
             </div>
           ) : (
-            <div className={cx(styles.drop, classes?.main)}>
-              {!hideDragText && (
-                <>
-                  <Label className={styles.label}>drag and drop</Label>
-                  <span className={styles.or}>or</span>
-                </>
-              )}
-              <input
-                type="file"
-                hidden
-                onChange={handleFileChange}
-                accept="image/*"
-                id={`file-drop-input-${field.name}`}
-              />
-              <label htmlFor={`file-drop-input-${field.name}`}>
-                <OutlinedButton classes={{ root: cx(styles.button, classes?.button) }} isImageBtn>
-                  {buttonText || '+ add'}
-                </OutlinedButton>
-              </label>
+            <div className={cx('container')}>
+              <div
+                {...getRootProps({
+                  className: cx('dropzone', classes?.main, styles.drop),
+                  onDrop: handleDrop,
+                })}
+              >
+                {!hideDragText && (
+                  <>
+                    <Label className={styles.label}>drag and drop</Label>
+                    <span className={styles.or}>or</span>
+                  </>
+                )}
+                <input
+                  {...getInputProps({
+                    defaultValue: '',
+                    contentEditable: false,
+                    draggable: false,
+                    spellCheck: false,
+                  })}
+                  // type="file"
+                  // hidden
+                  onChange={handleFileChange}
+                  // accept="image/*"
+                  id={`file-drop-input-${field.name}`}
+                />
+                <label htmlFor={`file-drop-input-${field.name}`}>
+                  <OutlinedButton classes={{ root: cx(styles.button, classes?.button) }} isImageBtn>
+                    {buttonText || '+ add'}
+                  </OutlinedButton>
+                </label>
+              </div>
             </div>
           )
         }

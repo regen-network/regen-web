@@ -6,15 +6,10 @@ import cx from 'clsx';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import OnboardingFooter from 'web-components/lib/components/fixed-footer/OnboardingFooter';
-import { FileDrop } from './FileDrop';
+import { FileDrop } from 'web-components/lib/components/inputs/FileDrop';
 import { VideoInput } from './VideoInput';
-import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
-import Description from 'web-components/lib/components/description';
-import Title from 'web-components/lib/components/title';
-import Card from 'web-components/lib/components/cards/Card';
 import { useShaclGraphByUriQuery } from '../../generated/graphql';
 import { validate, getProjectPageBaseData } from '../../lib/rdf';
-import ControlledFormLabel from 'web-components/lib/components/form/ControlledFormLabel';
 import FormLabel from 'web-components/lib/components/inputs/FormLabel';
 
 interface MediaFormProps {
@@ -62,9 +57,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     height: 290,
     width: '100%',
   },
-  // galleryPhotos: {
-  //   margin: theme.spacing(0, 0, 12),
-  // },
   gallery: {
     display: 'flex',
     justifyContent: 'space-between',

@@ -1,16 +1,14 @@
-import React, { useState } from 'react';
-import { makeStyles, Theme, Button, useMediaQuery, useTheme } from '@material-ui/core';
+import React from 'react';
+import { makeStyles, Theme, useMediaQuery, useTheme } from '@material-ui/core';
 import { Formik, Form, Field } from 'formik';
 import Grid from '@material-ui/core/Grid';
-import { Link } from 'react-router-dom';
-import cx from 'clsx';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import OnboardingFooter from 'web-components/lib/components/fixed-footer/OnboardingFooter';
 import { FileDrop } from 'web-components/lib/components/inputs/FileDrop';
 import { VideoInput } from './VideoInput';
 import { useShaclGraphByUriQuery } from '../../generated/graphql';
-import { validate, getProjectPageBaseData } from '../../lib/rdf';
+// import { validate, getProjectPageBaseData } from '../../lib/rdf';
 import FormLabel from 'web-components/lib/components/inputs/FormLabel';
 
 interface MediaFormProps {
@@ -63,11 +61,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       height: 210,
     },
   },
-  gallery: {
-    display: 'flex',
-    justifyContent: 'space-between',
-  },
-  square: {
+  galleryImage: {
     [theme.breakpoints.up('sm')]: {
       height: 169,
       flex: 1,
@@ -174,7 +168,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                     description="People love pictures of people! Upload images of the land stewards, in addition to the land and animals."
                   >
                     <Grid container spacing={3} direction="row">
-                      <Grid item xs={6} sm="auto" className={styles.square}>
+                      <Grid item xs={6} sm="auto" className={styles.galleryImage}>
                         <Field
                           classes={{ button: styles.smallButton }}
                           component={FileDrop}
@@ -206,7 +200,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                         </Grid>
                       ) : (
                         <>
-                          <Grid item xs={6} sm={12} className={styles.square}>
+                          <Grid item xs={6} sm={12} className={styles.galleryImage}>
                             <Field
                               classes={{ button: styles.smallButton }}
                               component={FileDrop}
@@ -215,7 +209,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                               buttonText="+ Add Photo"
                             />
                           </Grid>
-                          <Grid item xs={6} sm={12} className={styles.square}>
+                          <Grid item xs={6} sm={12} className={styles.galleryImage}>
                             <Field
                               classes={{ button: styles.smallButton }}
                               component={FileDrop}
@@ -227,7 +221,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                         </>
                       )}
 
-                      <Grid item xs={6} sm="auto" className={styles.square}>
+                      <Grid item xs={6} sm="auto" className={styles.galleryImage}>
                         <Field
                           classes={{ button: styles.smallButton }}
                           component={FileDrop}
@@ -239,44 +233,6 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                     </Grid>
                   </FormLabel>
                 </div>
-
-                {/* <div className={styles.gallery}>
-                      <div className={styles.square}>
-                        <Field
-                          classes={{ button: styles.smallButton }}
-                          component={FileDrop}
-                          buttonText="+ Add Photo"
-                          fixedCrop={{ aspect: 16 / 9 }}
-                          name="['http://regen.network/galleryLeft']"
-                        />
-                      </div>
-                      <div className={styles.center}>
-                        <Field
-                          classes={{ button: styles.smallButton }}
-                          component={FileDrop}
-                          fixedCrop={{ aspect: 16 / 9 }}
-                          name="['http://regen.network/galleryTop']"
-                          hideDragText
-                        />
-                        <Field
-                          classes={{ button: styles.smallButton }}
-                          component={FileDrop}
-                          fixedCrop={{ aspect: 16 / 9 }}
-                          name="['http://regen.network/galleryBottom']"
-                          hideDragText
-                        />
-                      </div>
-                      <div className={styles.square}>
-                        <Field
-                          classes={{ button: styles.smallButton }}
-                          component={FileDrop}
-                          buttonText="+ Add Photo"
-                          fixedCrop={{ aspect: 16 / 9 }}
-                          name="['http://regen.network/galleryRight']"
-                        />
-                      </div>
-                    </div> */}
-
                 <Field
                   classes={{ root: styles.field }}
                   component={VideoInput}
@@ -285,7 +241,6 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                   description="Copy and paste a video url from YouTube, Vimeo, or Facebook."
                   name="['http://regen.network/videoUrl']"
                 />
-
                 <Field
                   classes={{ root: styles.field, main: styles.fullImage }}
                   component={FileDrop}

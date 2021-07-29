@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { CardMedia, IconButton, Collapse } from '@material-ui/core';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { FieldProps } from 'formik';
 import cx from 'clsx';
 

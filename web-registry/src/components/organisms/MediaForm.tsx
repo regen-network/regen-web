@@ -7,7 +7,7 @@ import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import OnboardingFooter from 'web-components/lib/components/fixed-footer/OnboardingFooter';
 import { FileDrop } from 'web-components/lib/components/inputs/FileDrop';
 import { VideoInput } from './VideoInput';
-import { useShaclGraphByUriQuery } from '../../generated/graphql';
+// import { useShaclGraphByUriQuery } from '../../generated/graphql';
 // import { validate, getProjectPageBaseData } from '../../lib/rdf';
 import FormLabel from 'web-components/lib/components/inputs/FormLabel';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import SvgIcon from '@material-ui/core/SvgIcon';
-import { makeStyles } from '@material-ui/core';
+import { makeStyles, Theme } from '@material-ui/core';
 
 interface DecentralizeIconProps {
   color?: string;

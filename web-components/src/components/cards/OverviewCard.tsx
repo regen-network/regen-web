@@ -3,7 +3,6 @@ import clsx from 'clsx';
 import ReactHtmlParser from 'react-html-parser';
 import { makeStyles } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
-import Icon from '@material-ui/core/Icon';
 
 import Card from '../cards/Card';
 import CheckIcon from '../icons/CheckIcon';

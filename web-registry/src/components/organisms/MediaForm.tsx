@@ -90,11 +90,11 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
   const styles = useStyles();
   const theme = useTheme();
   const isTabletOrLarger = useMediaQuery(theme.breakpoints.up('sm'));
-  const { data: graphData } = useShaclGraphByUriQuery({
-    variables: {
-      uri: 'http://regen.network/ProjectPageShape',
-    },
-  });
+  // const { data: graphData } = useShaclGraphByUriQuery({
+  //   variables: {
+  //     uri: 'http://regen.network/ProjectPageShape',
+  //   },
+  // });
 
   return (
     <>
@@ -148,7 +148,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
           }
         }}
       >
-        {({ submitForm, submitCount, isValid, isSubmitting }) => {
+        {({ submitForm, isValid, isSubmitting }) => {
           return (
             <Form translate="yes">
               <OnBoardingCard className={styles.storyCard}>

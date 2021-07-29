@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { makeStyles, Theme, Button } from '@material-ui/core';
+import { makeStyles, Theme, Button, useMediaQuery, useTheme } from '@material-ui/core';
 import { Formik, Form, Field } from 'formik';
+import Grid from '@material-ui/core/Grid';
 import { Link } from 'react-router-dom';
 import cx from 'clsx';
 
@@ -54,25 +55,33 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginTop: 0,
   },
   fullImage: {
-    height: 290,
     width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      height: 290,
+    },
+    [theme.breakpoints.down('xs')]: {
+      height: 210,
+    },
   },
   gallery: {
     display: 'flex',
     justifyContent: 'space-between',
   },
   square: {
-    height: 169,
-    width: 169,
+    [theme.breakpoints.up('sm')]: {
+      height: 169,
+      flex: 1,
+    },
+    [theme.breakpoints.down('xs')]: {
+      height: 114,
+    },
   },
   center: {
-    display: 'flex',
-    flexDirection: 'column',
+    height: '50%',
   },
   smallButton: {
     fontSize: theme.typography.pxToRem(14),
-    paddingTop: theme.spacing(1),
-    paddingBottom: theme.spacing(1),
+    padding: theme.spacing(1),
   },
 }));
 
@@ -85,6 +94,8 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
   const styles = useStyles();
+  const theme = useTheme();
+  const isTabletOrLarger = useMediaQuery(theme.breakpoints.up('sm'));
   const { data: graphData } = useShaclGraphByUriQuery({
     variables: {
       uri: 'http://regen.network/ProjectPageShape',
@@ -162,7 +173,74 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                     labelSubText="(min 4 photos)"
                     description="People love pictures of people! Upload images of the land stewards, in addition to the land and animals."
                   >
-                    <div className={styles.gallery}>
+                    <Grid container spacing={3} direction="row">
+                      <Grid item xs={6} sm="auto" className={styles.square}>
+                        <Field
+                          classes={{ button: styles.smallButton }}
+                          component={FileDrop}
+                          buttonText="+ Add Photo"
+                          fixedCrop={{ aspect: 16 / 9 }}
+                          name="['http://regen.network/galleryLeft']"
+                        />
+                      </Grid>
+                      {isTabletOrLarger ? (
+                        <Grid item sm={3}>
+                          <Grid item sm={12} className={styles.center}>
+                            <Field
+                              classes={{ button: styles.smallButton }}
+                              component={FileDrop}
+                              fixedCrop={{ aspect: 16 / 9 }}
+                              name="['http://regen.network/galleryTop']"
+                              hideDragText
+                            />
+                          </Grid>
+                          <Grid item sm={12} className={styles.center}>
+                            <Field
+                              classes={{ button: styles.smallButton }}
+                              component={FileDrop}
+                              fixedCrop={{ aspect: 16 / 9 }}
+                              name="['http://regen.network/galleryBottom']"
+                              hideDragText
+                            />
+                          </Grid>
+                        </Grid>
+                      ) : (
+                        <>
+                          <Grid item xs={6} sm={12} className={styles.square}>
+                            <Field
+                              classes={{ button: styles.smallButton }}
+                              component={FileDrop}
+                              fixedCrop={{ aspect: 16 / 9 }}
+                              name="['http://regen.network/galleryTop']"
+                              buttonText="+ Add Photo"
+                            />
+                          </Grid>
+                          <Grid item xs={6} sm={12} className={styles.square}>
+                            <Field
+                              classes={{ button: styles.smallButton }}
+                              component={FileDrop}
+                              fixedCrop={{ aspect: 16 / 9 }}
+                              name="['http://regen.network/galleryBottom']"
+                              buttonText="+ Add Photo"
+                            />
+                          </Grid>
+                        </>
+                      )}
+
+                      <Grid item xs={6} sm="auto" className={styles.square}>
+                        <Field
+                          classes={{ button: styles.smallButton }}
+                          component={FileDrop}
+                          buttonText="+ Add Photo"
+                          fixedCrop={{ aspect: 16 / 9 }}
+                          name="['http://regen.network/galleryRight']"
+                        />
+                      </Grid>
+                    </Grid>
+                  </FormLabel>
+                </div>
+
+                {/* <div className={styles.gallery}>
                       <div className={styles.square}>
                         <Field
                           classes={{ button: styles.smallButton }}
@@ -197,9 +275,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                           name="['http://regen.network/galleryRight']"
                         />
                       </div>
-                    </div>
-                  </FormLabel>
-                </div>
+                    </div> */}
 
                 <Field
                   classes={{ root: styles.field }}

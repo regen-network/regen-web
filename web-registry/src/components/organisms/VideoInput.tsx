@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { CardMedia, IconButton, Collapse } from '@material-ui/core';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { FieldProps } from 'formik';
 import cx from 'clsx';
 
@@ -30,6 +31,9 @@ const useStyles = makeStyles(theme => ({
   },
   collapse: {
     marginBottom: theme.spacing(4),
+  },
+  collapseHidden: {
+    marginBottom: 0,
   },
   preview: {
     height: '100%',
@@ -72,6 +76,7 @@ function VideoInput({
   ...fieldProps
 }: VideoInputProps): JSX.Element {
   const [videoUrl, setVideoUrl] = useState('');
+  const [iframeLoaded, setIframeLoaded] = useState(false);
   const styles = useStyles();
   const theme = useTheme();
   const { form, field } = fieldProps;
@@ -87,6 +92,7 @@ function VideoInput({
   const handleDelete = (): void => {
     form.setFieldValue(field.name, null);
     setVideoUrl('');
+    setIframeLoaded(false);
   };
 
   return (
@@ -100,9 +106,18 @@ function VideoInput({
     >
       {() => (
         <>
-          <Collapse className={styles.collapse} in={!!field.value}>
+          <Collapse
+            classes={{ entered: styles.collapse, hidden: styles.collapseHidden }}
+            in={!!field.value && iframeLoaded}
+          >
             <Card className={styles.preview}>
-              <CardMedia className={styles.video} component="iframe" src={field.value} frameBorder="0" />
+              <CardMedia
+                className={styles.video}
+                component="iframe"
+                src={field.value}
+                frameBorder="0"
+                onLoad={() => setIframeLoaded(true)}
+              />
               <IconButton classes={{ root: styles.deleteButton }} onClick={handleDelete} aria-label="delete">
                 <TrashIcon color={theme.palette.error.light} />
               </IconButton>

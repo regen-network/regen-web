@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import { IconButton } from '@material-ui/core';
+import { IconButton, useMediaQuery } from '@material-ui/core';
 import { FieldProps } from 'formik';
 import { Crop } from 'react-image-crop';
 import cx from 'clsx';
 import { useDropzone } from 'react-dropzone';
-// import Dropzone from 'react-dropzone';
 
 import OutlinedButton from '../buttons/OutlinedButton';
 import FieldFormControl from '../inputs/FieldFormControl';
@@ -40,6 +39,10 @@ const useStyles = makeStyles(theme => ({
     position: 'relative',
   },
   previewImage: {
+    height: '100%',
+    width: '100%',
+  },
+  main: {
     height: '100%',
     width: '100%',
   },
@@ -91,13 +94,13 @@ function FileDrop({
   const [initialImage, setInitialImage] = useState('');
   const styles = useStyles();
   const theme = useTheme();
+  const isDesktop = useMediaQuery(theme.breakpoints.up('tablet'));
   const { form, field } = fieldProps;
 
   const handleDrop = (event: any): void => {
     const fileList = event.dataTransfer ? event.dataTransfer.files : [];
     if (fileList && fileList.length > 0) {
       const file = fileList[0];
-      console.log('handleDrop', file);
 
       toBase64(file).then(base64String => {
         if (typeof base64String === 'string') {
@@ -111,6 +114,8 @@ function FileDrop({
   const { getRootProps, getInputProps } = useDropzone({
     accept: 'image/*',
     onDrop: handleDrop,
+    noClick: true,
+    noKeyboard: true,
   });
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -169,14 +174,14 @@ function FileDrop({
               </IconButton>
             </div>
           ) : (
-            <div className={cx('container')}>
+            <div className={cx('container', styles.main, classes?.main)}>
               <div
                 {...getRootProps({
-                  className: cx('dropzone', classes?.main, styles.drop),
+                  className: cx('dropzone', styles.drop),
                   onDrop: handleDrop,
                 })}
               >
-                {!hideDragText && (
+                {isDesktop && !hideDragText && (
                   <>
                     <Label className={styles.label}>drag and drop</Label>
                     <span className={styles.or}>or</span>
@@ -189,13 +194,15 @@ function FileDrop({
                     draggable: false,
                     spellCheck: false,
                   })}
-                  // type="file"
-                  // hidden
-                  onChange={handleFileChange}
-                  // accept="image/*"
-                  id={`file-drop-input-${field.name}`}
                 />
-                <label htmlFor={`file-drop-input-${field.name}`}>
+                <input
+                  type="file"
+                  hidden
+                  onChange={handleFileChange}
+                  accept="image/*"
+                  id={`btn-file-input-${field.name}`}
+                />
+                <label htmlFor={`btn-file-input-${field.name}`}>
                   <OutlinedButton classes={{ root: cx(styles.button, classes?.button) }} isImageBtn>
                     {buttonText || '+ add'}
                   </OutlinedButton>

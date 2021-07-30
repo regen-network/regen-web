@@ -29,11 +29,11 @@ interface StyleProps {
 interface HeaderProps {
   absolute?: boolean;
   borderBottom?: boolean;
-  children?: any;
   color: string;
   fullWidth?: boolean;
   isAuthenticated?: boolean;
   menuItems?: HeaderMenuItem[];
+  linkComponent?: React.ReactNode;
   isRegistry?: boolean;
   onSignup?: () => void;
   onLogin?: () => void;
@@ -49,107 +49,103 @@ export interface HeaderMenuItem {
   dropdownItems?: { title: string; href: string }[];
 }
 
-const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
-  absolute: {
-    [theme.breakpoints.up('sm')]: {
-      position: 'absolute',
-      width: '100%',
+const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => {
+  const {
+    typography: { pxToRem },
+  } = theme;
+
+  return {
+    absolute: {
+      [theme.breakpoints.up('sm')]: {
+        position: 'absolute',
+        width: '100%',
+      },
     },
-  },
-  borderBottom: props => ({
-    [theme.breakpoints.up('sm')]: {
-      borderBottom: props.borderBottom ? `1px ${theme.palette.grey[100]} solid` : 'none',
-    },
-    [theme.breakpoints.down('xs')]: {
-      borderBottom: `1px ${theme.palette.grey[100]} solid`,
-    },
-  }),
-  header: props => ({
-    color: props.color,
-    position: 'relative',
-    zIndex: 10,
-    display: 'flex',
-    flexWrap: 'nowrap',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    height: '110px',
-    [theme.breakpoints.down('xs')]: {
-      padding: theme.spacing(2.5, 3.75),
-      height: theme.spacing(15),
-      color: theme.palette.primary.light,
-    },
-    '& .MuiMenuItem-root > a, .MuiMenuItem-root > div > span': {
-      fontSize: theme.spacing(3.25),
-      letterSpacing: '1px',
-    },
-    '& ul > li > a, & ul > li > div > span': {
-      color: props.color,
+    borderBottom: props => ({
+      [theme.breakpoints.up('sm')]: {
+        borderBottom: props.borderBottom ? `1px ${theme.palette.grey[100]} solid` : 'none',
+      },
       [theme.breakpoints.down('xs')]: {
-        color: theme.palette.primary.light,
+        borderBottom: `1px ${theme.palette.grey[100]} solid`,
       },
-      textDecoration: 'none',
-      fontFamily: 'Muli',
-      textTransform: 'uppercase',
-      '&:link, &:visited, &:hover, &:active': {
-        textDecoration: 'none',
-      },
-    },
-  }),
-  menuList: {
-    [theme.breakpoints.up('sm')]: {
+    }),
+    header: props => ({
+      color: props.color,
+      position: 'relative',
+      zIndex: 10,
       display: 'flex',
-    },
-    '& li.MuiListItem-button, li.MuiListItem-button > div': {
-      '& span:hover, svg:hover, path:hover': {
-        borderBottom: 'none',
+      flexWrap: 'nowrap',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      height: '110px',
+      [theme.breakpoints.down('sm')]: {
+        padding: theme.spacing(2.5, 3.75),
+        height: theme.spacing(15),
+        color: theme.palette.primary.light,
+        background: theme.palette.primary.main,
       },
-      'background-color': 'inherit',
-      'text-decoration': 'none',
+      '& .MuiMenuItem-root > a, .MuiMenuItem-root > div > span': {
+        fontSize: theme.spacing(3.25),
+        letterSpacing: '1px',
+      },
+      '& ul > li > a, & ul > li > div > span': {
+        color: props.color,
+        textDecoration: 'none',
+        fontFamily: 'Muli',
+        textTransform: 'uppercase',
+        '&:link, &:visited, &:hover, &:active': {
+          textDecoration: 'none',
+        },
+      },
+    }),
+    menuList: {
+      [theme.breakpoints.up('sm')]: {
+        display: 'flex',
+      },
+      '& li.MuiListItem-button, li.MuiListItem-button > div': {
+        '& span:hover, svg:hover, path:hover': {
+          borderBottom: 'none',
+        },
+        'background-color': 'inherit',
+        'text-decoration': 'none',
+      },
+      position: 'relative',
+      width: 'unset',
+      zIndex: 0,
     },
-    position: 'relative',
-    width: 'unset',
-    zIndex: 0,
-  },
-  background: {
-    backgroundColor: theme.palette.primary.main,
-  },
-  transparent: {
-    backgroundColor: `rgba(0,0,0,0)`,
-  },
-  regenIcon: {
-    [theme.breakpoints.up('sm')]: {
-      height: theme.spacing(20.75),
-      width: theme.spacing(46.5),
+    background: {
+      backgroundColor: theme.palette.primary.main,
     },
-    [theme.breakpoints.down('xs')]: {
-      height: theme.spacing(10.25),
-      width: theme.spacing(23),
+    transparent: {
+      backgroundColor: `rgba(0,0,0,0)`,
     },
-  },
-  appIcon: props => ({
-    height: '100%',
-    width: '100%',
-    [theme.breakpoints.down('xs')]: {
+    appIcon: props => ({
       height: 'auto',
-      width: theme.spacing(props.isRegistry ? 12 : 20),
+      width: props.isRegistry ? pxToRem(117) : pxToRem(186),
+      [theme.breakpoints.down('sm')]: {
+        width: props.isRegistry ? pxToRem(70) : pxToRem(111),
+      },
+      [theme.breakpoints.down('xs')]: {
+        width: props.isRegistry ? pxToRem(62) : pxToRem(104),
+      },
+    }),
+    signUpBtn: {
+      padding: theme.spacing(2, 7),
+      fontSize: pxToRem(12),
+      [theme.breakpoints.down('sm')]: {
+        padding: theme.spacing(2, 4),
+        fontSize: pxToRem(9),
+      },
     },
-  }),
-  signUpBtn: {
-    padding: theme.spacing(2, 7),
-    fontSize: theme.typography.pxToRem(12),
-    [theme.breakpoints.down('sm')]: {
-      padding: theme.spacing(2, 4),
-      fontSize: theme.typography.pxToRem(9),
-    },
-  },
-  loginBtn: props => ({
-    textTransform: 'none',
-    color: props.color,
-    '&:hover': {
-      backgroundColor: 'transparent',
-    },
-  }),
-}));
+    loginBtn: props => ({
+      textTransform: 'none',
+      color: props.color,
+      '&:hover': {
+        backgroundColor: 'transparent',
+      },
+    }),
+  };
+});
 
 export default function Header({
   transparent,
@@ -166,7 +162,7 @@ export default function Header({
   pathName = '/',
 }: HeaderProps): JSX.Element {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
+  const isTablet = useMediaQuery(theme.breakpoints.down('sm'));
 
   const RegistryLoginBtns: React.FC = () => (
     <li>
@@ -197,18 +193,18 @@ export default function Header({
         transparent ? styles.transparent : styles.background,
       )}
     >
-      <Container maxWidth={fullWidth ? undefined : 'xl'}>
+      <Container disableGutters={isTablet} maxWidth={fullWidth ? false : 'xl'}>
         <Box className={styles.header} px={[4, 5, 6]}>
-          <Box display="flex" maxHeight="72px" mr={4}>
-            <a href="/">
-              <AppIcon
-                className={styles.appIcon}
-                color={isMobile ? theme.palette.primary.contrastText : color}
-              />
-            </a>
-          </Box>
+          {/* <Box display="flex" maxHeight="72px" mr={4}> */}
+          <a href="/">
+            <AppIcon
+              className={styles.appIcon}
+              color={isTablet ? theme.palette.primary.contrastText : color}
+            />
+          </a>
+          {/* </Box> */}
           <Box flexShrink={0} display="flex" flexWrap="nowrap" alignItems="center" height="100%">
-            {!isMobile ? (
+            {!isTablet ? (
               <MenuList className={styles.menuList}>
                 {menuItems?.map((item, index) => {
                   return <HeaderMenuItem key={index} item={item} color={color} pathName={pathName} />;

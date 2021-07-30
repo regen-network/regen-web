@@ -11,7 +11,7 @@ import {
 } from 'web-components/lib/components/header/HeaderDropdownItems';
 
 import { projects } from '../../mocks';
-import { PeerReviewed } from '../atoms';
+// import { PeerReviewed } from '../atoms';
 import { ReactComponent as Cow } from '../../assets/svgs/green-cow.svg';
 
 const RegistryNav: React.FC = () => {
@@ -24,25 +24,32 @@ const RegistryNav: React.FC = () => {
   //  each custom dropdown still needs to be passed `dropdownItems` to render
   //  correctly on mobile, so I declare here to avoid duplicate code
   const creditClassItems: HeaderDropdownItemProps[] = [
-    { title: 'Grasslands', href: '/TODO', svg: Cow, right: () => <PeerReviewed /> },
+    {
+      title: 'Carbon<i>Plus</i> Grasslands',
+      href: '/credit-classes/carbonplus-grasslands',
+      svg: Cow /* , right: () => <PeerReviewed /> */,
+    },
   ];
 
   const methodologyItems: HeaderDropdownItemProps[] = [
     {
       title: 'Carbon<i>Plus</i> Grasslands',
-      href: '/TODO',
+      href: '/methodologies/carbonplus-grasslands',
       svg: Cow,
-      right: () => <PeerReviewed />,
+      /* right: () => <PeerReviewed />, */
     },
   ];
 
   const programStandardItems: HeaderDropdownItemProps[] = [
-    { href: '/program-guide', title: 'Program Guide' },
+    {
+      href: 'https://regen-registry.s3.amazonaws.com/Regen+Registry+Program+Guide.pdf',
+      title: 'Program Guide',
+    },
     // { href: '/process', title: 'Process' },
   ];
 
   const programHowToItems: HeaderDropdownItemProps[] = [
-    { href: '/create-credit-class', title: 'Create Credit Class' },
+    { href: '/create-credit-class', title: 'Create a Credit Class' },
     { href: '/create-methodology', title: 'Create a Methodology' },
     { href: '/methodology-review-process', title: 'Methodology Review Process' },
     // { href: '/become-a-monitor', title: 'Become a Monitor' },

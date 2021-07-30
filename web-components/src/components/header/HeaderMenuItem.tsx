@@ -33,17 +33,18 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const HeaderMenuItem: React.FC<{ item: HeaderMenuItem; pathName: string; color: string }> = ({
-  item,
-  pathName,
-  color,
-}) => {
+const HeaderMenuItem: React.FC<{
+  item: HeaderMenuItem;
+  pathName: string;
+  color: string;
+  linkComponent?: React.ReactNode;
+}> = ({ item, pathName, color }) => {
   const theme = useTheme();
   const styles = useStyles();
 
   const Content: React.FC = () => {
     if (item.href && !item.dropdownItems && !item.render) {
-      return <NavLink to={item.href}>{item.title}</NavLink>;
+      return <NavLink href={item.href}>{item.title}</NavLink>;
     }
     return (
       <MenuHover

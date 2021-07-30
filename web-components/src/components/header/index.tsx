@@ -11,6 +11,7 @@ import RegistryIcon from '../icons/RegistryIcon';
 import MobileMenu from '../mobile-menu';
 import ContainedButton from '../buttons/ContainedButton';
 import { HeaderMenuItem } from './HeaderMenuItem';
+import { HeaderDropdownItemProps } from './HeaderDropdownItems';
 
 export interface node {
   [key: number]: React.ReactNode;
@@ -46,7 +47,7 @@ export interface HeaderMenuItem {
   title: string;
   href?: string;
   render?: () => JSX.Element;
-  dropdownItems?: { title: string; href: string }[];
+  dropdownItems?: HeaderDropdownItemProps[];
 }
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => {
@@ -195,34 +196,30 @@ export default function Header({
     >
       <Container disableGutters={isTablet} maxWidth={fullWidth ? false : 'xl'}>
         <Box className={styles.header} px={[4, 5, 6]}>
-          {/* <Box display="flex" maxHeight="72px" mr={4}> */}
           <a href="/">
             <AppIcon
               className={styles.appIcon}
               color={isTablet ? theme.palette.primary.contrastText : color}
             />
           </a>
-          {/* </Box> */}
-          <Box flexShrink={0} display="flex" flexWrap="nowrap" alignItems="center" height="100%">
-            {!isTablet ? (
-              <MenuList className={styles.menuList}>
-                {menuItems?.map((item, index) => {
-                  return <HeaderMenuItem key={index} item={item} color={color} pathName={pathName} />;
-                })}
-                {isRegistry && <RegistryLoginBtns />}
-              </MenuList>
-            ) : (
-              <MobileMenu
-                isRegistry={isRegistry}
-                pathName={pathName}
-                menuItems={menuItems}
-                isAuthenticated={isAuthenticated}
-                onLogin={onLogin}
-                onLogout={onLogout}
-                onSignup={onSignup}
-              />
-            )}
-          </Box>
+          {!isTablet ? (
+            <MenuList className={styles.menuList}>
+              {menuItems?.map((item, index) => {
+                return <HeaderMenuItem key={index} item={item} color={color} pathName={pathName} />;
+              })}
+              {isRegistry && <RegistryLoginBtns />}
+            </MenuList>
+          ) : (
+            <MobileMenu
+              isRegistry={isRegistry}
+              pathName={pathName}
+              menuItems={menuItems}
+              isAuthenticated={isAuthenticated}
+              onLogin={onLogin}
+              onLogout={onLogout}
+              onSignup={onSignup}
+            />
+          )}
         </Box>
       </Container>
     </div>

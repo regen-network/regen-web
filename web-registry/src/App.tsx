@@ -24,7 +24,7 @@ import {
   CreditsTransfer,
   // Eligibility,
   // GettingStarted,
-  // Home,
+  Home,
   MethodologyReviewProcess,
   NotFoundPage,
   OrganizationProfile,
@@ -74,8 +74,8 @@ const App: React.FC = (): JSX.Element => {
         <RegistryNav />
         <Switch>
           <Route exact path="/">
-            {/* <Home /> */}
-            <Redirect to="/projects/wilmot" />
+            <Home />
+            {/* <Redirect to="/projects/wilmot" /> */}
           </Route>
           <Route exact path="/verify-email">
             <VerifyEmail />

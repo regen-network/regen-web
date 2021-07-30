@@ -91,6 +91,7 @@ const RegistryNav: React.FC = () => {
   ];
 
   const headerColors: HeaderColors = {
+    '/': theme.palette.primary.main,
     '/certificate': theme.palette.primary.main,
     '/create-methodology': theme.palette.primary.main,
     '/create-credit-class': theme.palette.primary.main,
@@ -98,6 +99,7 @@ const RegistryNav: React.FC = () => {
   };
 
   const isTransparent = [
+    '/',
     '/create-methodology',
     '/methodology-review-process',
     '/create-credit-class',

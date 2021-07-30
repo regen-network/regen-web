@@ -83,24 +83,26 @@ const MarketingNav: React.FC<{ location: Location }> = ({ location }) => {
   ];
 
   const mobileProgramItems: HeaderDropdownItemProps[] = [
-    { title: 'Homepage', href: 'https://registry.regen.network/' },
+    { title: 'Registry Homepage', href: 'https://registry.regen.network/' },
     ...standardItems,
     ...howToItems,
   ];
 
-  const STACKED_COL_SPACE = 6;
+  const STACKED_COL_SPACE = 12;
 
   const menuItems: HeaderMenuItem[] = [
     {
       title: 'Program',
       dropdownItems: mobileProgramItems,
       render: () => (
-        <Box display="flex" flexDirection="column">
-          <HeaderDropdownItem title="Homepage" href="https://registry.regen.network" svg={RegistryIcon} />
-          <Box mt={2}>
-            <HeaderDropdownColumn title="Standard" items={standardItems} />
+        <Box display="flex">
+          <Box mr={STACKED_COL_SPACE}>
+            <HeaderDropdownItem title="Homepage" href="https://registry.regen.network" svg={RegistryIcon} />
+            <Box mt={4}>
+              <HeaderDropdownColumn title="Standard" items={standardItems} />
+            </Box>
           </Box>
-          <Box mt={STACKED_COL_SPACE}>
+          <Box>
             <HeaderDropdownColumn title="How Tos" items={howToItems} />
           </Box>
         </Box>
@@ -110,11 +112,11 @@ const MarketingNav: React.FC<{ location: Location }> = ({ location }) => {
       title: 'Stakeholders',
       dropdownItems: [...stakeholderItemsRegistry, ...stakeholderItemsCommunity],
       render: () => (
-        <Box display="flex" flexDirection="column">
-          <Box>
+        <Box display="flex">
+          <Box mr={STACKED_COL_SPACE}>
             <HeaderDropdownColumn title="Registry" items={stakeholderItemsRegistry} />
           </Box>
-          <Box mt={STACKED_COL_SPACE}>
+          <Box>
             <HeaderDropdownColumn title="Community" items={stakeholderItemsCommunity} />
           </Box>
         </Box>

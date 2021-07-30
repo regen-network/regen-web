@@ -63,6 +63,7 @@ const Home: React.FC = () => {
   return (
     <>
       <HeroTitle
+        isBanner
         img={cowsImg}
         title="Welcome to Regen Registry"
         description="Regen Registry is lrem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magn."
@@ -90,6 +91,7 @@ const Home: React.FC = () => {
       </Section>
 
       <HeroAction
+        isBanner
         classes={{ main: styles.bottomSection }}
         img={horsesImg}
         title="Want to get paid for your ecological practices?"

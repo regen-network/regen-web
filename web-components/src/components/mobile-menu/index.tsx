@@ -8,6 +8,7 @@ import Divider from '@material-ui/core/Divider';
 import MenuList from '@material-ui/core/MenuList';
 import MenuItem from '@material-ui/core/MenuItem';
 import Link from '@material-ui/core/Link';
+import Box from '@material-ui/core/Box';
 
 import HamburgerIcon from '../icons/HamburgerIcon';
 import ContainedButton from '../buttons/ContainedButton';
@@ -154,18 +155,26 @@ const MobileMenu = ({ menuItems, pathName, ...props }: Props): JSX.Element => {
                 <div>
                   <span className={styles.subMenuTitle}>{item.title}</span>
                   <MenuList>
-                    {item.dropdownItems.map((dropdownItem, j) => (
-                      <MenuItem
-                        className={
-                          pathName === dropdownItem.href
-                            ? clsx(styles.subMenuItem, styles.currentMenuItem)
-                            : styles.subMenuItem
-                        }
-                        key={`${i}-${j}`}
-                      >
-                        <Link href={dropdownItem.href}>{ReactHtmlParser(dropdownItem.title)}</Link>
-                      </MenuItem>
-                    ))}
+                    {item.dropdownItems.map((dropdownItem, j) => {
+                      const { svg: SVG } = dropdownItem;
+                      return (
+                        <MenuItem
+                          className={
+                            pathName === dropdownItem.href
+                              ? clsx(styles.subMenuItem, styles.currentMenuItem)
+                              : styles.subMenuItem
+                          }
+                          key={`${i}-${j}`}
+                        >
+                          {SVG && (
+                            <Box mr={2}>
+                              <SVG height={29} width={29} />
+                            </Box>
+                          )}
+                          <Link href={dropdownItem.href}>{ReactHtmlParser(dropdownItem.title)}</Link>
+                        </MenuItem>
+                      );
+                    })}
                   </MenuList>
                 </div>
               ) : (

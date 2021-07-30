@@ -1,7 +1,6 @@
 import React from 'react';
 import { FieldProps, getIn } from 'formik';
-import { Theme, makeStyles, FormHelperText, Typography, FormControl } from '@material-ui/core';
-import clsx from 'clsx';
+import { Theme, makeStyles, FormHelperText, FormControl } from '@material-ui/core';
 
 import FormLabel from './FormLabel';
 

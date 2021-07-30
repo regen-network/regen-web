@@ -7,13 +7,13 @@ import cx from 'clsx';
 import { useDropzone } from 'react-dropzone';
 
 import OutlinedButton from '../buttons/OutlinedButton';
-import FieldFormControl from '../inputs/FieldFormControl';
+import FieldFormControl from './FieldFormControl';
 import CropImageModal from '../modal/CropImageModal';
 import TrashIcon from '../icons/TrashIcon';
 import { Image } from '../image';
 import { Label } from '../label';
 
-export interface FileDropProps extends FieldProps {
+export interface ImageDropProps extends FieldProps {
   className?: string;
   classes?: {
     root?: string;
@@ -80,7 +80,10 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function FileDrop({
+/**
+ * Drop and Image File and the Crop Modal will open with your image
+ */
+function ImageDrop({
   className,
   classes,
   label,
@@ -90,7 +93,7 @@ function FileDrop({
   fixedCrop,
   hideDragText,
   ...fieldProps
-}: FileDropProps): JSX.Element {
+}: ImageDropProps): JSX.Element {
   const [cropModalOpen, setCropModalOpen] = useState(false);
   const [initialImage, setInitialImage] = useState('');
   const styles = useStyles();
@@ -224,4 +227,4 @@ function FileDrop({
   );
 }
 
-export { FileDrop };
+export { ImageDrop };

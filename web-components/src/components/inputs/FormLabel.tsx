@@ -5,7 +5,6 @@ import clsx from 'clsx';
 import ControlledFormLabel from '../form/ControlledFormLabel';
 
 interface Props {
-  children: JSX.Element;
   className?: string;
   description?: string;
   disabled?: boolean;
@@ -19,25 +18,9 @@ interface StyleProps {
   optional?: boolean;
   disabled?: boolean;
   description?: string;
-  // error: boolean;
 }
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
-  error: props => ({
-    color: theme.palette.error.main,
-    borderColor: theme.palette.error.main,
-    marginTop: theme.spacing(1),
-    marginBottom: 0,
-    fontFamily: '"Lato",-apple-system,sans-serif',
-    fontWeight: 'bold',
-    // visibility: props.error ? 'visible' : 'hidden',
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(3.5),
-    },
-    [theme.breakpoints.down('xs')]: {
-      fontSize: theme.spacing(3),
-    },
-  }),
   description: props => ({
     display: 'flex',
     [theme.breakpoints.up('sm')]: {
@@ -77,12 +60,9 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
 }));
 
 /**
- *  This component uses MUI's `FormControl` component as a wrapper, and provides
- *  styled decorations for label, description, and error message with our custom styles
- *  returns a render prop pattern with handlers for `onChange` and `onBlur` that will update the formik field
+ *  This component provides styled decorations for label, description, and error message with our custom styles
  */
 export default function FormLabel({
-  children,
   label,
   description,
   disabled,
@@ -99,8 +79,8 @@ export default function FormLabel({
           {label}
         </ControlledFormLabel>
       )}
-      <div className={styles.description}>
-        {description && (
+      {description && (
+        <div className={styles.description}>
           <Typography variant="body1" className={clsx(styles.descriptionText, styles.txtGray)}>
             {description}
             {onExampleClick && (
@@ -109,11 +89,8 @@ export default function FormLabel({
               </span>
             )}
           </Typography>
-        )}
-      </div>
-      {children}
-
-      {/* {hasError && <FormHelperText className={styles.error}>{errorMessage}</FormHelperText>} */}
+        </div>
+      )}
     </div>
   );
 }

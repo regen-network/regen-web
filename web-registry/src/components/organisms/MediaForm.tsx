@@ -6,8 +6,6 @@ import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import OnboardingFooter from 'web-components/lib/components/fixed-footer/OnboardingFooter';
 import { FileDrop } from 'web-components/lib/components/inputs/FileDrop';
 import { VideoInput } from 'web-components/lib/components/inputs/VideoInput';
-// import { useShaclGraphByUriQuery } from '../../generated/graphql';
-// import { validate, getProjectPageBaseData } from '../../lib/rdf';
 import FormLabel from 'web-components/lib/components/inputs/FormLabel';
 
 interface MediaFormProps {
@@ -27,10 +25,6 @@ export interface MediaValues {
 
 export interface MediaValuesErrors {
   'http://regen.network/previewPhoto'?: string;
-}
-
-interface Errors {
-  'http://regen.network/previewPhoto': string;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -82,22 +76,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-// const errorMsgs: Errors = {
-//   'http://regen.network/landMedia': 'Please fill in the story of the land',
-//   'http://regen.network/landStewardMedia': 'Please fill in the story of the land stewards',
-//   'http://regen.network/landStewardMediaTitle': 'Please fill in a title for the land steward story',
-//   'http://regen.network/projectQuote': quoteError,
-// };
-
 const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
   const styles = useStyles();
   const theme = useTheme();
   const isTabletOrLarger = useMediaQuery(theme.breakpoints.up('sm'));
-  // const { data: graphData } = useShaclGraphByUriQuery({
-  //   variables: {
-  //     uri: 'http://regen.network/ProjectPageShape',
-  //   },
-  // });
 
   return (
     <>
@@ -111,36 +93,11 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
             'http://regen.network/galleryTop': initialValues?.['http://regen.network/galleryTop'] || '',
             'http://regen.network/galleryBottom': initialValues?.['http://regen.network/galleryBottom'] || '',
             'http://regen.network/galleryRight': initialValues?.['http://regen.network/galleryRight'] || '',
-
             'http://regen.network/landStewardPhoto':
               initialValues?.['http://regen.network/landStewardPhoto'] || '',
             'http://regen.network/videoUrl': initialValues?.['http://regen.network/videoUrl'] || '',
           }
         }
-        validate={async (values: MediaValues) => {
-          // const errors: MediaValuesErrors = {};
-          // if (graphData?.shaclGraphByUri?.graph) {
-          //   const projectPageData = { ...getProjectPageBaseData(), ...values };
-          //   const report = await validate(
-          //     graphData.shaclGraphByUri.graph,
-          //     projectPageData,
-          //     'http://regen.network/ProjectPageMediaGroup',
-          //   );
-          //   for (const result of report.results) {
-          //     const path: keyof MediaValues = result.path.value;
-          //     if (path === 'http://regen.network/projectQuote') {
-          //       errors['http://regen.network/projectQuote'] = {
-          //         'http://regen.network/quote': getProjectQuoteError(values, 'http://regen.network/quote'),
-          //         'http://schema.org/name': getProjectQuoteError(values, 'http://schema.org/name'),
-          //         'http://schema.org/jobTitle': getProjectQuoteError(values, 'http://schema.org/jobTitle'),
-          //       };
-          //     } else {
-          //       errors[path] = errorMsgs[path];
-          //     }
-          //   }
-          // }
-          // return errors;
-        }}
         onSubmit={async (values, { setSubmitting }) => {
           setSubmitting(true);
           try {
@@ -169,72 +126,71 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                     label="Gallery Photos"
                     labelSubText="(min 4 photos)"
                     description="People love pictures of people! Upload images of the land stewards, in addition to the land and animals."
-                  >
-                    <Grid container spacing={3} direction="row">
-                      <Grid item xs={6} sm="auto" className={styles.galleryImage}>
-                        <Field
-                          classes={{ button: styles.smallButton }}
-                          component={FileDrop}
-                          buttonText="+ Add Photo"
-                          fixedCrop={{ aspect: 16 / 9 }}
-                          name="['http://regen.network/galleryLeft']"
-                        />
-                      </Grid>
-                      {isTabletOrLarger ? (
-                        <Grid item sm={3} className={styles.centerImages} direction="column">
-                          <Grid item sm={12} className={styles.centerSmall}>
-                            <Field
-                              classes={{ button: styles.smallButton }}
-                              component={FileDrop}
-                              fixedCrop={{ aspect: 16 / 9 }}
-                              name="['http://regen.network/galleryTop']"
-                              hideDragText
-                            />
-                          </Grid>
-                          <Grid item sm={12} className={styles.centerSmall}>
-                            <Field
-                              classes={{ button: styles.smallButton }}
-                              component={FileDrop}
-                              fixedCrop={{ aspect: 16 / 9 }}
-                              name="['http://regen.network/galleryBottom']"
-                              hideDragText
-                            />
-                          </Grid>
-                        </Grid>
-                      ) : (
-                        <>
-                          <Grid item xs={6} sm={12} className={styles.galleryImage}>
-                            <Field
-                              classes={{ button: styles.smallButton }}
-                              component={FileDrop}
-                              fixedCrop={{ aspect: 16 / 9 }}
-                              name="['http://regen.network/galleryTop']"
-                              buttonText="+ Add Photo"
-                            />
-                          </Grid>
-                          <Grid item xs={6} sm={12} className={styles.galleryImage}>
-                            <Field
-                              classes={{ button: styles.smallButton }}
-                              component={FileDrop}
-                              fixedCrop={{ aspect: 16 / 9 }}
-                              name="['http://regen.network/galleryBottom']"
-                              buttonText="+ Add Photo"
-                            />
-                          </Grid>
-                        </>
-                      )}
-
-                      <Grid item xs={6} sm="auto" className={styles.galleryImage}>
-                        <Field
-                          classes={{ button: styles.smallButton }}
-                          component={FileDrop}
-                          buttonText="+ Add Photo"
-                          fixedCrop={{ aspect: 16 / 9 }}
-                          name="['http://regen.network/galleryRight']"
-                        />
-                      </Grid>
+                  />
+                  <Grid container spacing={3} direction="row">
+                    <Grid item xs={6} sm="auto" className={styles.galleryImage}>
+                      <Field
+                        classes={{ button: styles.smallButton }}
+                        component={FileDrop}
+                        buttonText="+ Add Photo"
+                        fixedCrop={{ aspect: 16 / 9 }}
+                        name="['http://regen.network/galleryLeft']"
+                      />
                     </Grid>
-                  </FormLabel>
+                    {isTabletOrLarger ? (
+                      <Grid item sm={3} className={styles.centerImages} direction="column">
+                        <Grid item sm={12} className={styles.centerSmall}>
+                          <Field
+                            classes={{ button: styles.smallButton }}
+                            component={FileDrop}
+                            fixedCrop={{ aspect: 16 / 9 }}
+                            name="['http://regen.network/galleryTop']"
+                            hideDragText
+                          />
+                        </Grid>
+                        <Grid item sm={12} className={styles.centerSmall}>
+                          <Field
+                            classes={{ button: styles.smallButton }}
+                            component={FileDrop}
+                            fixedCrop={{ aspect: 16 / 9 }}
+                            name="['http://regen.network/galleryBottom']"
+                            hideDragText
+                          />
+                        </Grid>
+                      </Grid>
+                    ) : (
+                      <>
+                        <Grid item xs={6} sm={12} className={styles.galleryImage}>
+                          <Field
+                            classes={{ button: styles.smallButton }}
+                            component={FileDrop}
+                            fixedCrop={{ aspect: 16 / 9 }}
+                            name="['http://regen.network/galleryTop']"
+                            buttonText="+ Add Photo"
+                          />
+                        </Grid>
+                        <Grid item xs={6} sm={12} className={styles.galleryImage}>
+                          <Field
+                            classes={{ button: styles.smallButton }}
+                            component={FileDrop}
+                            fixedCrop={{ aspect: 16 / 9 }}
+                            name="['http://regen.network/galleryBottom']"
+                            buttonText="+ Add Photo"
+                          />
+                        </Grid>
+                      </>
+                    )}
+
+                    <Grid item xs={6} sm="auto" className={styles.galleryImage}>
+                      <Field
+                        classes={{ button: styles.smallButton }}
+                        component={FileDrop}
+                        buttonText="+ Add Photo"
+                        fixedCrop={{ aspect: 16 / 9 }}
+                        name="['http://regen.network/galleryRight']"
+                      />
+                    </Grid>
+                  </Grid>
                 </div>
                 <Field
                   classes={{ root: styles.field }}
@@ -259,8 +215,8 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
               <OnboardingFooter
                 onSave={submitForm}
                 saveText={'Save and Next'}
-                onPrev={() => null} // TODO https://github.com/regen-network/regen-web/issues/655
-                onNext={() => null} // TODO https://github.com/regen-network/regen-web/issues/655
+                onPrev={() => null} // TODO
+                onNext={() => null} // TODO
                 hideProgress={false} // TODO
                 saveDisabled={!isValid || isSubmitting}
                 percentComplete={0} // TODO

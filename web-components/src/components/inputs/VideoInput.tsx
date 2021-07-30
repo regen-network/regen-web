@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import { CardMedia, IconButton, Collapse } from '@material-ui/core';
+import { CardMedia, IconButton, Collapse, LinearProgress } from '@material-ui/core';
 import { FieldProps } from 'formik';
 import cx from 'clsx';
 
@@ -40,9 +40,14 @@ const useStyles = makeStyles(theme => ({
     position: 'relative',
   },
   video: {
-    height: theme.typography.pxToRem(318),
     width: '100%',
     borderRadius: 5,
+    [theme.breakpoints.up('sm')]: {
+      height: theme.typography.pxToRem(318),
+    },
+    [theme.breakpoints.down('xs')]: {
+      height: theme.typography.pxToRem(210),
+    },
   },
   inputRow: {
     display: 'flex',
@@ -65,6 +70,9 @@ const useStyles = makeStyles(theme => ({
     '&:hover': {
       background: theme.palette.grey[100],
     },
+  },
+  progress: {
+    marginBottom: theme.spacing(4),
   },
 }));
 
@@ -108,23 +116,33 @@ function VideoInput({
     >
       {() => (
         <>
-          <Collapse
-            classes={{ entered: styles.collapse, hidden: styles.collapseHidden }}
-            in={!!field.value && iframeLoaded}
-          >
-            <Card className={styles.preview}>
-              <CardMedia
-                className={styles.video}
-                component="iframe"
-                src={field.value}
-                frameBorder="0"
-                onLoad={() => setIframeLoaded(true)}
-              />
-              <IconButton classes={{ root: styles.deleteButton }} onClick={handleDelete} aria-label="delete">
-                <TrashIcon color={theme.palette.error.light} />
-              </IconButton>
-            </Card>
-          </Collapse>
+          {!!field.value && (
+            <>
+              <Collapse
+                classes={{ entered: styles.collapse, hidden: styles.collapseHidden }}
+                in={iframeLoaded}
+              >
+                <Card className={styles.preview}>
+                  <CardMedia
+                    className={styles.video}
+                    component="iframe"
+                    src={field.value}
+                    frameBorder="0"
+                    onLoad={() => setIframeLoaded(true)}
+                  />
+                  <IconButton
+                    classes={{ root: styles.deleteButton }}
+                    onClick={handleDelete}
+                    aria-label="delete"
+                  >
+                    <TrashIcon color={theme.palette.error.light} />
+                  </IconButton>
+                </Card>
+              </Collapse>
+              {!iframeLoaded && <LinearProgress color="secondary" className={styles.progress} />}
+            </>
+          )}
+
           <div className={cx(styles.inputRow, classes?.main)}>
             <Input
               className={styles.input}

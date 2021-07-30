@@ -1,7 +1,6 @@
 import React from 'react';
-import { makeStyles, Theme, useMediaQuery, useTheme } from '@material-ui/core';
+import { makeStyles, Theme, useMediaQuery, useTheme, Grid } from '@material-ui/core';
 import { Formik, Form, Field } from 'formik';
-import Grid from '@material-ui/core/Grid';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import OnboardingFooter from 'web-components/lib/components/fixed-footer/OnboardingFooter';
@@ -52,7 +51,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   error: {
     marginTop: 0,
   },
-  fullImage: {
+  fullSizeMedia: {
     width: '100%',
     [theme.breakpoints.up('sm')]: {
       height: theme.typography.pxToRem(290),
@@ -157,7 +156,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
             <Form translate="yes">
               <OnBoardingCard className={styles.storyCard}>
                 <Field
-                  classes={{ root: styles.field, main: styles.fullImage }}
+                  classes={{ root: styles.field, main: styles.fullSizeMedia }}
                   component={FileDrop}
                   label="Preview photo"
                   description="Choose the summary photo that will show up in project previews."
@@ -246,7 +245,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                   name="['http://regen.network/videoUrl']"
                 />
                 <Field
-                  classes={{ root: styles.field, main: styles.fullImage }}
+                  classes={{ root: styles.field, main: styles.fullSizeMedia }}
                   component={FileDrop}
                   label="Land Steward photo"
                   labelSubText="(required if you don’t add a video)"

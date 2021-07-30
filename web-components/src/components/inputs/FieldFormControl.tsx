@@ -120,8 +120,8 @@ export default function FieldFormControl({
           {label}
         </ControlledFormLabel>
       )}
-      <div className={styles.description}>
-        {description && (
+      {description && (
+        <div className={styles.description}>
           <Typography variant="body1" className={clsx(styles.descriptionText, styles.txtGray)}>
             {description}
             {onExampleClick && (
@@ -130,8 +130,8 @@ export default function FieldFormControl({
               </span>
             )}
           </Typography>
-        )}
-      </div>
+        </div>
+      )}
       {children({ handleChange, handleBlur })}
 
       {hasError && <FormHelperText className={styles.error}>{errorMessage}</FormHelperText>}

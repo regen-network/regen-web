@@ -55,27 +55,31 @@ const useStyles = makeStyles((theme: Theme) => ({
   fullImage: {
     width: '100%',
     [theme.breakpoints.up('sm')]: {
-      height: 290,
+      height: theme.typography.pxToRem(290),
     },
     [theme.breakpoints.down('xs')]: {
-      height: 210,
+      height: theme.typography.pxToRem(210),
     },
   },
   galleryImage: {
     [theme.breakpoints.up('sm')]: {
-      height: 169,
+      height: theme.typography.pxToRem(169),
       flex: 1,
     },
     [theme.breakpoints.down('xs')]: {
-      height: 114,
+      height: theme.typography.pxToRem(139),
     },
   },
-  center: {
-    height: '50%',
+  centerImages: {
+    display: 'flex',
+    justifyContent: 'space-between',
+  },
+  centerSmall: {
+    maxHeight: theme.typography.pxToRem(72),
   },
   smallButton: {
     fontSize: theme.typography.pxToRem(14),
-    padding: theme.spacing(1),
+    padding: theme.spacing(2, 3),
   },
 }));
 
@@ -178,8 +182,8 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                         />
                       </Grid>
                       {isTabletOrLarger ? (
-                        <Grid item sm={3}>
-                          <Grid item sm={12} className={styles.center}>
+                        <Grid item sm={3} className={styles.centerImages} direction="column">
+                          <Grid item sm={12} className={styles.centerSmall}>
                             <Field
                               classes={{ button: styles.smallButton }}
                               component={FileDrop}
@@ -188,7 +192,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                               hideDragText
                             />
                           </Grid>
-                          <Grid item sm={12} className={styles.center}>
+                          <Grid item sm={12} className={styles.centerSmall}>
                             <Field
                               classes={{ button: styles.smallButton }}
                               component={FileDrop}

@@ -50,9 +50,11 @@ const useStyles = makeStyles(theme => ({
   },
   input: {
     flex: 1,
-    marginRight: theme.spacing(4),
+    marginRight: theme.spacing(2),
   },
-  button: {},
+  button: {
+    width: 124,
+  },
   deleteButton: {
     background: theme.palette.primary.main,
     position: 'absolute',

@@ -4,11 +4,11 @@ import { CardMedia, IconButton, Collapse } from '@material-ui/core';
 import { FieldProps } from 'formik';
 import cx from 'clsx';
 
-import Card from 'web-components/lib/components/cards/Card';
-import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
-import FieldFormControl from 'web-components/lib/components/inputs/FieldFormControl';
-import Input from 'web-components/lib/components/inputs/Input';
-import TrashIcon from 'web-components/lib/components/icons/TrashIcon';
+import Card from '../cards/Card';
+import OutlinedButton from '../buttons/OutlinedButton';
+import FieldFormControl from './FieldFormControl';
+import Input from './Input';
+import TrashIcon from '../icons/TrashIcon';
 
 export interface VideoInputProps extends FieldProps {
   className?: string;
@@ -40,7 +40,7 @@ const useStyles = makeStyles(theme => ({
     position: 'relative',
   },
   video: {
-    height: 318, //todo
+    height: theme.typography.pxToRem(318),
     width: '100%',
     borderRadius: 5,
   },
@@ -53,7 +53,7 @@ const useStyles = makeStyles(theme => ({
     marginRight: theme.spacing(2),
   },
   button: {
-    width: 124,
+    width: theme.typography.pxToRem(124),
   },
   deleteButton: {
     background: theme.palette.primary.main,

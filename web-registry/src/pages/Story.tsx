@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { makeStyles, Theme } from '@material-ui/core/styles';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 
 import Description from 'web-components/lib/components/description';
 import { OnboardingFormTemplate } from '../components/templates';
@@ -19,6 +19,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const Story: React.FC = () => {
   const styles = useStyles();
+  const history = useHistory();
   const activeStep = 0;
   const { projectId } = useParams();
 
@@ -56,8 +57,7 @@ const Story: React.FC = () => {
           },
         },
       });
-      // TODO: Uncomment when media form implemented
-      // history.push(`/project-pages/${projectId}/media`);
+      history.push(`/project-pages/${projectId}/media`);
     } catch (e) {
       // TODO: Should we display the error banner here?
       // https://github.com/regen-network/regen-registry/issues/555

@@ -59,8 +59,7 @@ const Media: React.FC = () => {
           },
         },
       });
-      // TODO: Uncomment when media form implemented
-      // history.push(`/project-pages/${projectId}/media`);
+      // TODO: go to next step
     } catch (e) {
       // TODO: Should we display the error banner here?
       // https://github.com/regen-network/regen-registry/issues/555

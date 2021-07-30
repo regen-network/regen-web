@@ -33,6 +33,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   menuList: {
     paddingTop: theme.spacing(12.25),
+    paddingBottom: theme.spacing(20),
   },
   menuItem: {
     display: 'block',
@@ -102,7 +103,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: '85%',
     margin: '0 auto',
     marginBottom: theme.spacing(8),
-    marginTop: theme.spacing(8),
+    marginTop: theme.spacing(4),
   },
 }));
 

@@ -72,7 +72,8 @@ const useStyles = makeStyles(theme => ({
     position: 'absolute',
     right: 0,
     top: 0,
-    margin: theme.spacing(4),
+    margin: theme.spacing(2),
+    padding: theme.spacing(2),
     '&:hover': {
       background: theme.palette.grey[100],
     },

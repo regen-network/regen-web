@@ -9,8 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import Title from 'web-components/lib/components/title';
 import Description from 'web-components/lib/components/description';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-
-import { Label } from '../atoms';
+import { Label } from 'web-components/lib/components/label';
 
 const useStyles = makeStyles(theme => ({
   root: {

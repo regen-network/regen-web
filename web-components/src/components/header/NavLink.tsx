@@ -20,11 +20,16 @@ export const useNavLinkStyles = makeStyles<Theme, { isActive: boolean }>(theme =
   }),
 }));
 
-export const NavLink: React.FC<{ href: string }> = ({ href: to, children }) => {
-  const isActive = window && window.location && window.location.pathname === to;
-  const styles = useNavLinkStyles({ isActive: !!isActive });
+export type NavLinkProps = {
+  href: string;
+};
+
+export const NavLink: React.FC<NavLinkProps> = ({ href, children }) => {
+  const pathname = window && window.location && window.location.pathname;
+  const styles = useNavLinkStyles({ isActive: pathname === href });
+
   return (
-    <Link className={styles.navLink} href={to}>
+    <Link className={styles.navLink} href={href}>
       {children}
     </Link>
   );

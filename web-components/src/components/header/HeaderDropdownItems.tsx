@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 
 import Title from '../title';
-import { NavLink } from './NavLink';
+import { NavLinkProps } from './NavLink';
 
 const useStyles = makeStyles(theme => ({
   item: {
@@ -29,11 +29,16 @@ const useStyles = makeStyles(theme => ({
 export type HeaderDropdownItemProps = {
   title: string;
   href: string;
+  linkComponent: React.FC<NavLinkProps>;
   svg?: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
   right?: () => JSX.Element;
 };
 
-export const HeaderDropdownItem: React.FC<HeaderDropdownItemProps> = ({ svg: SVG, ...props }) => {
+export const HeaderDropdownItem: React.FC<HeaderDropdownItemProps> = ({
+  svg: SVG,
+  linkComponent: LinkComponent,
+  ...props
+}) => {
   const styles = useStyles();
   return (
     <Box display="flex" flexWrap="nowrap" alignItems="center" className={styles.item}>
@@ -42,7 +47,7 @@ export const HeaderDropdownItem: React.FC<HeaderDropdownItemProps> = ({ svg: SVG
           <SVG />
         </Box>
       )}
-      <NavLink href={props.href}>{ReactHtmlParser(props.title)}</NavLink>
+      <LinkComponent href={props.href}>{ReactHtmlParser(props.title)}</LinkComponent>
       {props.right && <Box ml={3}>{props.right()}</Box>}
     </Box>
   );
@@ -50,8 +55,9 @@ export const HeaderDropdownItem: React.FC<HeaderDropdownItemProps> = ({ svg: SVG
 
 /** column with a title and links */
 export const HeaderDropdownColumn: React.FC<{
-  title?: string;
   items: HeaderDropdownItemProps[];
+  linkComponent: React.FC<NavLinkProps>;
+  title?: string;
 }> = props => {
   const styles = useStyles();
   return (
@@ -64,7 +70,7 @@ export const HeaderDropdownColumn: React.FC<{
         </Box>
       )}
       {props.items.map((link, i) => (
-        <HeaderDropdownItem key={i} {...link} />
+        <HeaderDropdownItem key={i} {...link} linkComponent={props.linkComponent} />
       ))}
     </Box>
   );

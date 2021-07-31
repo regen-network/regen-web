@@ -1,9 +1,9 @@
 import React from 'react';
-import clsx from 'clsx';
+import cx from 'clsx';
 import { makeStyles, MenuItem, useTheme } from '@material-ui/core';
 
 import MenuHover from '../menu-hover';
-import { NavLink } from './NavLink';
+import { NavLinkProps } from './NavLink';
 import { HeaderMenuItem } from '.';
 import { HeaderDropdownColumn } from './HeaderDropdownItems';
 
@@ -37,14 +37,15 @@ const HeaderMenuItem: React.FC<{
   item: HeaderMenuItem;
   pathName: string;
   color: string;
-  linkComponent?: React.ReactNode;
-}> = ({ item, pathName, color }) => {
+  isRegistry: boolean;
+  linkComponent: React.FC<NavLinkProps>;
+}> = ({ item, pathName, color, linkComponent: LinkComponent }) => {
   const theme = useTheme();
   const styles = useStyles();
 
   const Content: React.FC = () => {
     if (item.href && !item.dropdownItems && !item.render) {
-      return <NavLink href={item.href}>{item.title}</NavLink>;
+      return <LinkComponent href={item.href}>{item.title}</LinkComponent>;
     }
     return (
       <MenuHover
@@ -56,16 +57,16 @@ const HeaderMenuItem: React.FC<{
         text={item.title}
       >
         {/* `render` overrides default dropdown */}
-        {item.dropdownItems && !item.render && <HeaderDropdownColumn items={item.dropdownItems} />}
+        {item.dropdownItems && !item.render && (
+          <HeaderDropdownColumn items={item.dropdownItems} linkComponent={LinkComponent} />
+        )}
         {item.render && item.render()}
       </MenuHover>
     );
   };
 
   return (
-    <MenuItem
-      className={pathName === item.href ? clsx(styles.menuItem, styles.currentMenuItem) : styles.menuItem}
-    >
+    <MenuItem className={cx(styles.menuItem, pathName === item.href && styles.currentMenuItem)}>
       <Content />
     </MenuItem>
   );

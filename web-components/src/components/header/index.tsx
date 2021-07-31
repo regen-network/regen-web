@@ -1,6 +1,5 @@
 import React from 'react';
 import { makeStyles, Theme, MenuItem, MenuList, Link, useTheme, useMediaQuery } from '@material-ui/core';
-import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import cx from 'clsx';
@@ -13,6 +12,9 @@ import ContainedButton from '../buttons/ContainedButton';
 import { HeaderMenuItem } from './HeaderMenuItem';
 import { HeaderDropdownItemProps } from './HeaderDropdownItems';
 
+import { NavLink, NavLinkProps } from './NavLink';
+import { HeaderLogoLink } from './HeaderLogoLink';
+
 export interface node {
   [key: number]: React.ReactNode;
 }
@@ -24,7 +26,6 @@ export interface HeaderColors {
 interface StyleProps {
   color: string;
   borderBottom?: boolean;
-  isRegistry: boolean;
 }
 
 interface HeaderProps {
@@ -34,7 +35,8 @@ interface HeaderProps {
   fullWidth?: boolean;
   isAuthenticated?: boolean;
   menuItems?: HeaderMenuItem[];
-  linkComponent?: React.ReactNode;
+  linkComponent?: React.FC<NavLinkProps>;
+  homeLink?: React.FC<{ color: string }>;
   isRegistry?: boolean;
   onSignup?: () => void;
   onLogin?: () => void;
@@ -120,16 +122,6 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => {
     transparent: {
       backgroundColor: `rgba(0,0,0,0)`,
     },
-    appIcon: props => ({
-      height: 'auto',
-      width: props.isRegistry ? pxToRem(117) : pxToRem(186),
-      [theme.breakpoints.down('sm')]: {
-        width: props.isRegistry ? pxToRem(70) : pxToRem(111),
-      },
-      [theme.breakpoints.down('xs')]: {
-        width: props.isRegistry ? pxToRem(62) : pxToRem(104),
-      },
-    }),
     signUpBtn: {
       padding: theme.spacing(2, 7),
       fontSize: pxToRem(12),
@@ -156,6 +148,8 @@ export default function Header({
   onSignup,
   onLogin,
   onLogout,
+  linkComponent = NavLink,
+  homeLink: HomeLink = HeaderLogoLink,
   isRegistry = false,
   borderBottom = true,
   absolute = true,
@@ -184,8 +178,7 @@ export default function Header({
     </li>
   );
 
-  const styles = useStyles({ color, borderBottom, isRegistry });
-  const AppIcon = isRegistry ? RegistryIcon : RegenIcon;
+  const styles = useStyles({ color, borderBottom });
   return (
     <div
       className={cx(
@@ -196,16 +189,20 @@ export default function Header({
     >
       <Container disableGutters={isTablet} maxWidth={fullWidth ? false : 'xl'}>
         <Box className={styles.header} px={[4, 5, 6]}>
-          <a href="/">
-            <AppIcon
-              className={styles.appIcon}
-              color={isTablet ? theme.palette.primary.contrastText : color}
-            />
-          </a>
-          {!isTablet ? (
+          <HomeLink color={isTablet ? theme.palette.primary.contrastText : color} />
+          {!isTablet && !!menuItems ? (
             <MenuList className={styles.menuList}>
-              {menuItems?.map((item, index) => {
-                return <HeaderMenuItem key={index} item={item} color={color} pathName={pathName} />;
+              {menuItems.map((item, index) => {
+                return (
+                  <HeaderMenuItem
+                    key={index}
+                    linkComponent={linkComponent}
+                    item={item}
+                    color={color}
+                    pathName={pathName}
+                    isRegistry={isRegistry}
+                  />
+                );
               })}
               {isRegistry && <RegistryLoginBtns />}
             </MenuList>

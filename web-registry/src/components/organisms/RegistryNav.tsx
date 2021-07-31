@@ -1,7 +1,7 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { useTheme, makeStyles } from '@material-ui/core/styles';
+import { useHistory, Link as RouterLink } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
-import { useTheme } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 
 import Header, { HeaderMenuItem, HeaderColors } from 'web-components/lib/components/header';
@@ -9,6 +9,9 @@ import {
   HeaderDropdownColumn,
   HeaderDropdownItemProps,
 } from 'web-components/lib/components/header/HeaderDropdownItems';
+import RegistryIcon from 'web-components/lib/components/icons/RegistryIcon';
+
+import { RegistryNavLink } from '../atoms';
 
 import { projects } from '../../mocks';
 // import { PeerReviewed } from '../atoms';
@@ -25,6 +28,7 @@ const RegistryNav: React.FC = () => {
   //  correctly on mobile, so I declare here to avoid duplicate code
   const creditClassItems: HeaderDropdownItemProps[] = [
     {
+      linkComponent: RegistryNavLink,
       title: 'Carbon<i>Plus</i> Grasslands',
       href: '/credit-classes/carbonplus-grasslands',
       svg: Cow /* , right: () => <PeerReviewed /> */,
@@ -33,6 +37,7 @@ const RegistryNav: React.FC = () => {
 
   const methodologyItems: HeaderDropdownItemProps[] = [
     {
+      linkComponent: RegistryNavLink,
       title: 'Carbon<i>Plus</i> Grasslands',
       href: '/methodologies/carbonplus-grasslands',
       svg: Cow,
@@ -42,6 +47,7 @@ const RegistryNav: React.FC = () => {
 
   const programStandardItems: HeaderDropdownItemProps[] = [
     {
+      linkComponent: RegistryNavLink,
       href: 'https://regen-registry.s3.amazonaws.com/Regen+Registry+Program+Guide.pdf',
       title: 'Program Guide',
     },
@@ -49,9 +55,13 @@ const RegistryNav: React.FC = () => {
   ];
 
   const programHowToItems: HeaderDropdownItemProps[] = [
-    { href: '/create-credit-class', title: 'Create a Credit Class' },
-    { href: '/create-methodology', title: 'Create a Methodology' },
-    { href: '/methodology-review-process', title: 'Methodology Review Process' },
+    { href: '/create-credit-class', title: 'Create a Credit Class', linkComponent: RegistryNavLink },
+    { href: '/create-methodology', title: 'Create a Methodology', linkComponent: RegistryNavLink },
+    {
+      href: '/methodology-review-process',
+      title: 'Methodology Review Process',
+      linkComponent: RegistryNavLink,
+    },
     // { href: '/become-a-monitor', title: 'Become a Monitor' },
     // { href: '/become-a-verifier', title: 'Become a Verifier' },
   ];
@@ -62,17 +72,24 @@ const RegistryNav: React.FC = () => {
       dropdownItems: projects.map(p => ({
         title: p.name,
         href: `/projects/${p.id}`,
+        linkComponent: RegistryNavLink,
       })),
     },
     {
       title: 'Credit Classes',
       dropdownItems: creditClassItems,
-      render: () => <HeaderDropdownColumn title="Carbon<i>Plus</i> Credits" items={creditClassItems} />,
+      render: () => (
+        <HeaderDropdownColumn
+          title="Carbon<i>Plus</i> Credits"
+          items={creditClassItems}
+          linkComponent={RegistryNavLink}
+        />
+      ),
     },
     {
       title: 'Methodologies',
       dropdownItems: methodologyItems,
-      render: () => <HeaderDropdownColumn items={methodologyItems} />,
+      render: () => <HeaderDropdownColumn items={methodologyItems} linkComponent={RegistryNavLink} />,
     },
     {
       title: 'Program',
@@ -80,10 +97,14 @@ const RegistryNav: React.FC = () => {
       render: () => (
         <Box display="flex" justifyContent="space-between">
           <Box pr={20}>
-            <HeaderDropdownColumn title="Standard" items={programStandardItems} />
+            <HeaderDropdownColumn
+              title="Standard"
+              items={programStandardItems}
+              linkComponent={RegistryNavLink}
+            />
           </Box>
           <Box display="flex" flexDirection="column">
-            <HeaderDropdownColumn title="How Tos" items={programHowToItems} />
+            <HeaderDropdownColumn title="How Tos" items={programHowToItems} linkComponent={RegistryNavLink} />
           </Box>
         </Box>
       ),
@@ -98,17 +119,20 @@ const RegistryNav: React.FC = () => {
     '/methodology-review-process': theme.palette.primary.main,
   };
 
-  const isTransparent = [
-    '/',
-    '/create-methodology',
-    '/methodology-review-process',
-    '/create-credit-class',
-    '/certificate',
-  ].some(route => pathname.startsWith(route));
+  const isTransparent =
+    pathname === '/' ||
+    [
+      '/create-methodology',
+      '/methodology-review-process',
+      '/create-credit-class',
+      '/certificate',
+    ].some(route => pathname.startsWith(route));
 
   return (
     <Header
       isRegistry
+      linkComponent={RegistryNavLink}
+      homeLink={LogoLink}
       isAuthenticated={isAuthenticated}
       onLogin={() => loginWithRedirect({ redirectUri: window.location.origin })}
       onLogout={() => logout({ returnTo: window.location.origin })}
@@ -121,6 +145,31 @@ const RegistryNav: React.FC = () => {
       fullWidth={fullWidthRegExp.test(pathname)}
       pathName={pathname}
     />
+  );
+};
+
+const useLogoStyles = makeStyles(theme => {
+  const { pxToRem } = theme.typography;
+  return {
+    icon: {
+      height: 'auto',
+      width: pxToRem(117),
+      [theme.breakpoints.down('sm')]: {
+        width: pxToRem(70),
+      },
+      [theme.breakpoints.down('xs')]: {
+        width: pxToRem(62),
+      },
+    },
+  };
+});
+
+const LogoLink: React.FC<{ color: string }> = ({ color }) => {
+  const styles = useLogoStyles();
+  return (
+    <RouterLink to="/">
+      <RegistryIcon className={styles.icon} color={color} />
+    </RouterLink>
   );
 };
 

@@ -1,10 +1,9 @@
 import React from 'react';
-import { useTheme } from '@material-ui/core/styles';
+import { useTheme, makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 
 import Header, { HeaderColors, HeaderMenuItem } from 'web-components/lib/components/header';
-import Footer, { FooterItemProps as FooterItem } from 'web-components/lib/components/footer';
-import CookiesFooter from 'web-components/lib/components/banner/CookiesBanner';
+import { NavLink } from 'web-components/lib/components/header/NavLink';
 import {
   HeaderDropdownColumn,
   HeaderDropdownItem,
@@ -17,10 +16,36 @@ import LandStewardsIcon from '../../static/media/svgs/nav-dropdown/land-stewards
 import DevelopersIcon from '../../static/media/svgs/nav-dropdown/developers.svg';
 import ScientistIcon from '../../static/media/svgs/nav-dropdown/scientists.svg';
 import ValidatorsIcon from '../../static/media/svgs/nav-dropdown/validators.svg';
+import RegenIcon from '../../../web-components/lib/components/icons/RegenIcon';
 
 interface BoolProps {
   [key: string]: boolean;
 }
+
+const useStyles = makeStyles(theme => {
+  const { pxToRem } = theme.typography;
+  return {
+    icon: {
+      height: 'auto',
+      width: pxToRem(186),
+      [theme.breakpoints.down('sm')]: {
+        width: pxToRem(111),
+      },
+      [theme.breakpoints.down('xs')]: {
+        width: pxToRem(104),
+      },
+    },
+  };
+});
+
+const MarketingIcon: React.FC<{ color: string }> = ({ color }) => {
+  const styles = useStyles();
+  return (
+    <a href="/">
+      <RegenIcon className={styles.icon} color={color} />
+    </a>
+  );
+};
 
 const MarketingNav: React.FC<{ location: Location }> = ({ location }) => {
   const theme = useTheme();
@@ -53,37 +78,40 @@ const MarketingNav: React.FC<{ location: Location }> = ({ location }) => {
   );
 
   const standardItems: HeaderDropdownItemProps[] = [
-    { title: 'Program Guide', href: 'https://registry.regen.network/program-guide/' },
+    { title: 'Program Guide', href: 'https://registry.regen.network/program-guide/', linkComponent: NavLink },
   ];
 
   const howToItems: HeaderDropdownItemProps[] = [
     {
       title: 'Create a Credit Class',
       href: 'https://registry.regen.network/create-credit-class/',
+      linkComponent: NavLink,
     },
     {
       title: 'Create a Methodology',
       href: 'https://registry.regen.network/create-a-methodology/',
+      linkComponent: NavLink,
     },
     {
       title: 'Methodology Review Process',
       href: 'https://registry.regen.network/methodology-review-process/',
+      linkComponent: NavLink,
     },
   ];
 
   const stakeholderItemsRegistry: HeaderDropdownItemProps[] = [
-    { title: 'Buyers', href: '/buyers/', svg: BuyersIcon },
-    { title: 'Land Stewards', href: '/land-stewards/', svg: LandStewardsIcon },
+    { title: 'Buyers', href: '/buyers/', svg: BuyersIcon, linkComponent: NavLink },
+    { title: 'Land Stewards', href: '/land-stewards/', svg: LandStewardsIcon, linkComponent: NavLink },
   ];
 
   const stakeholderItemsCommunity: HeaderDropdownItemProps[] = [
-    { title: 'Developers', href: '/developers/', svg: DevelopersIcon },
-    { title: 'Scientists', href: '/science/', svg: ScientistIcon },
-    { title: 'Validators', href: '/validators/', svg: ValidatorsIcon },
+    { title: 'Developers', href: '/developers/', svg: DevelopersIcon, linkComponent: NavLink },
+    { title: 'Scientists', href: '/science/', svg: ScientistIcon, linkComponent: NavLink },
+    { title: 'Validators', href: '/validators/', svg: ValidatorsIcon, linkComponent: NavLink },
   ];
 
   const mobileProgramItems: HeaderDropdownItemProps[] = [
-    { title: 'Registry Homepage', href: 'https://registry.regen.network/' },
+    { title: 'Registry Homepage', href: 'https://registry.regen.network/', linkComponent: NavLink },
     ...standardItems,
     ...howToItems,
   ];
@@ -97,13 +125,18 @@ const MarketingNav: React.FC<{ location: Location }> = ({ location }) => {
       render: () => (
         <Box display="flex">
           <Box mr={STACKED_COL_SPACE}>
-            <HeaderDropdownItem title="Homepage" href="https://registry.regen.network" svg={RegistryIcon} />
+            <HeaderDropdownItem
+              title="Homepage"
+              href="https://registry.regen.network"
+              svg={RegistryIcon}
+              linkComponent={NavLink}
+            />
             <Box mt={4}>
-              <HeaderDropdownColumn title="Standard" items={standardItems} />
+              <HeaderDropdownColumn title="Standard" items={standardItems} linkComponent={NavLink} />
             </Box>
           </Box>
           <Box>
-            <HeaderDropdownColumn title="How Tos" items={howToItems} />
+            <HeaderDropdownColumn title="How Tos" items={howToItems} linkComponent={NavLink} />
           </Box>
         </Box>
       ),
@@ -114,10 +147,14 @@ const MarketingNav: React.FC<{ location: Location }> = ({ location }) => {
       render: () => (
         <Box display="flex">
           <Box mr={STACKED_COL_SPACE}>
-            <HeaderDropdownColumn title="Registry" items={stakeholderItemsRegistry} />
+            <HeaderDropdownColumn title="Registry" items={stakeholderItemsRegistry} linkComponent={NavLink} />
           </Box>
           <Box>
-            <HeaderDropdownColumn title="Community" items={stakeholderItemsCommunity} />
+            <HeaderDropdownColumn
+              title="Community"
+              items={stakeholderItemsCommunity}
+              linkComponent={NavLink}
+            />
           </Box>
         </Box>
       ),
@@ -125,17 +162,17 @@ const MarketingNav: React.FC<{ location: Location }> = ({ location }) => {
     {
       title: 'Blockchain',
       dropdownItems: [
-        { title: 'Mainnet', href: '/mainnet/' },
-        { title: 'Token', href: '/token/' },
+        { title: 'Mainnet', href: '/mainnet/', linkComponent: NavLink },
+        { title: 'Token', href: '/token/', linkComponent: NavLink },
       ],
     },
     {
       title: 'Learn More',
       dropdownItems: [
-        { title: 'Case Studies', href: '/case-studies/' },
-        { title: 'Resources', href: '/resources/' },
-        { title: 'FAQ', href: '/faq/' },
-        { title: 'Team', href: '/team/' },
+        { title: 'Case Studies', href: '/case-studies/', linkComponent: NavLink },
+        { title: 'Resources', href: '/resources/', linkComponent: NavLink },
+        { title: 'FAQ', href: '/faq/', linkComponent: NavLink },
+        { title: 'Team', href: '/team/', linkComponent: NavLink },
       ],
     },
   ];

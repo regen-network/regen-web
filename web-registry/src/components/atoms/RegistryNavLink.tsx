@@ -11,17 +11,19 @@ import {
 /**
  * @returns a HTML Anchor for external links, react router for internal links for use in Registry app (not web-www)
  */
-export const RegistryNavLink: React.FC<NavLinkProps> = ({ href, children }) => {
+export const RegistryNavLink: React.FC<NavLinkProps> = ({ children, href, overrideClassname }) => {
   const isActive = window && window.location && window.location.pathname === href;
   const styles = useNavLinkStyles({ isActive: !!isActive });
 
   // TODO: ideally we would use a routerLink here, but it's not working with the gatsby setup
   const isInternalLink = (href: string) => href.startsWith('/');
   return isInternalLink(href) ? (
-    <Link className={styles.navLink} component={RouterLink} to={href}>
+    <Link className={overrideClassname ?? styles.navLink} component={RouterLink} to={href}>
       {children}
     </Link>
   ) : (
-    <DefaultLink href={href}>{children}</DefaultLink>
+    <DefaultLink overrideClassname={overrideClassname} href={href}>
+      {children}
+    </DefaultLink>
   );
 };

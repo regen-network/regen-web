@@ -3,9 +3,9 @@ import cx from 'clsx';
 import { makeStyles, MenuItem, useTheme } from '@material-ui/core';
 
 import MenuHover from '../menu-hover';
-import { NavLinkProps } from './NavLink';
-import { HeaderMenuItem } from '.';
-import { HeaderDropdownColumn } from './HeaderDropdownItems';
+import { NavLink, NavLinkProps } from './NavLink';
+// import { HeaderMenuHover as HeaderMenuHover } from '.';
+import { HeaderDropdownColumn, HeaderDropdownItemProps } from './HeaderDropdownItems';
 
 const useStyles = makeStyles(theme => ({
   menuItem: {
@@ -33,13 +33,19 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const HeaderMenuItem: React.FC<{
+export interface HeaderMenuItem {
+  title: string;
+  href?: string;
+  render?: () => JSX.Element;
+  dropdownItems?: HeaderDropdownItemProps[];
+}
+
+const HeaderMenuHover: React.FC<{
   item: HeaderMenuItem;
   pathName: string;
   color: string;
-  isRegistry: boolean;
-  linkComponent: React.FC<NavLinkProps>;
-}> = ({ item, pathName, color, linkComponent: LinkComponent }) => {
+  linkComponent?: React.FC<NavLinkProps>;
+}> = ({ item, pathName, color, linkComponent: LinkComponent = NavLink }) => {
   const theme = useTheme();
   const styles = useStyles();
 
@@ -72,4 +78,4 @@ const HeaderMenuItem: React.FC<{
   );
 };
 
-export { HeaderMenuItem };
+export { HeaderMenuHover };

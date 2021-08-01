@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 
 import Title from '../title';
-import { NavLinkProps } from './NavLink';
+import { NavLink, NavLinkProps } from './NavLink';
 
 const useStyles = makeStyles(theme => ({
   item: {

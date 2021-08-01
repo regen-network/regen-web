@@ -1,4 +1,5 @@
 import React from 'react';
+import cx from 'clsx';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import Link from '@material-ui/core/Link';
 
@@ -22,14 +23,16 @@ export const useNavLinkStyles = makeStyles<Theme, { isActive: boolean }>(theme =
 
 export type NavLinkProps = {
   href: string;
+  /** replaces default styles with passed styles */
+  overrideClassname?: string;
 };
 
-export const NavLink: React.FC<NavLinkProps> = ({ href, children }) => {
+export const NavLink: React.FC<NavLinkProps> = ({ children, href, overrideClassname }) => {
   const pathname = window && window.location && window.location.pathname;
   const styles = useNavLinkStyles({ isActive: pathname === href });
 
   return (
-    <Link className={styles.navLink} href={href}>
+    <Link className={overrideClassname ?? styles.navLink} href={href}>
       {children}
     </Link>
   );

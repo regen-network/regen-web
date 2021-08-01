@@ -2,7 +2,8 @@ import React from 'react';
 import { useTheme, makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 
-import Header, { HeaderColors, HeaderMenuItem } from 'web-components/lib/components/header';
+import Header, { HeaderColors } from 'web-components/lib/components/header';
+import { HeaderMenuItem } from 'web-components/lib/components/header/HeaderMenuHover';
 import { NavLink } from 'web-components/lib/components/header/NavLink';
 import {
   HeaderDropdownColumn,

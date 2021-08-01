@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import ReactHtmlParser from 'react-html-parser';
 
@@ -7,14 +7,14 @@ import Drawer from '@material-ui/core/Drawer';
 import Divider from '@material-ui/core/Divider';
 import MenuList from '@material-ui/core/MenuList';
 import MenuItem from '@material-ui/core/MenuItem';
-import Link from '@material-ui/core/Link';
 import Box from '@material-ui/core/Box';
 
 import HamburgerIcon from '../icons/HamburgerIcon';
 import ContainedButton from '../buttons/ContainedButton';
 import Button from '@material-ui/core/Button';
 import CloseIcon from '../icons/CloseIcon';
-import { HeaderMenuItem } from '../header';
+import { HeaderMenuItem } from '../header/HeaderMenuHover';
+import { NavLinkProps } from '../header/NavLink';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -112,23 +112,24 @@ type Props = {
   isRegistry?: boolean;
   pathName?: string;
   isAuthenticated?: boolean;
+  linkComponent: React.FC<NavLinkProps>;
   onSignup?: () => void;
   onLogin?: () => void;
   onLogout?: () => void;
 };
 
-const MobileMenu = ({ menuItems, pathName, ...props }: Props): JSX.Element => {
+const MobileMenu: React.FC<Props> = ({ menuItems, pathName, linkComponent: Link, ...props }) => {
   const styles = useStyles();
   const theme = useTheme();
   const [open, setOpen] = useState(false);
 
-  const handleOpen = (): void => {
-    setOpen(true);
-  };
+  const handleOpen = () => void setOpen(true);
+  const handleClose = () => void setOpen(false);
 
-  const handleClose = (): void => {
-    setOpen(false);
-  };
+  // close drawer if route changes
+  useEffect(() => {
+    handleClose();
+  }, [pathName]);
 
   return (
     <div className={styles.root}>
@@ -173,14 +174,18 @@ const MobileMenu = ({ menuItems, pathName, ...props }: Props): JSX.Element => {
                                 <SVG height={29} width={29} />
                               </Box>
                             )}
-                            <Link href={dropdownItem.href}>{ReactHtmlParser(dropdownItem.title)}</Link>
+                            <Link href={dropdownItem.href} overrideClassname="">
+                              {ReactHtmlParser(dropdownItem.title)}
+                            </Link>
                           </MenuItem>
                         );
                       })}
                     </MenuList>
                   </div>
                 ) : (
-                  <Link href={item.href}>{item.title}</Link>
+                  <Link overrideClassname="" href={item.href || ''}>
+                    {item.title}
+                  </Link>
                 )}
               </MenuItem>
             ))}

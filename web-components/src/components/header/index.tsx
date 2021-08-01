@@ -1,16 +1,13 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { makeStyles, Theme, MenuItem, MenuList, Link, useTheme, useMediaQuery } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import cx from 'clsx';
 import Box from '@material-ui/core/Box';
 
-import RegenIcon from '../icons/RegenIcon';
-import RegistryIcon from '../icons/RegistryIcon';
 import MobileMenu from '../mobile-menu';
 import ContainedButton from '../buttons/ContainedButton';
-import { HeaderMenuItem } from './HeaderMenuItem';
-import { HeaderDropdownItemProps } from './HeaderDropdownItems';
+import { HeaderMenuHover, HeaderMenuItem } from './HeaderMenuHover';
 
 import { NavLink, NavLinkProps } from './NavLink';
 import { HeaderLogoLink } from './HeaderLogoLink';
@@ -43,13 +40,6 @@ interface HeaderProps {
   onLogout?: () => void;
   pathName?: string;
   transparent?: boolean;
-}
-
-export interface HeaderMenuItem {
-  title: string;
-  href?: string;
-  render?: () => JSX.Element;
-  dropdownItems?: HeaderDropdownItemProps[];
 }
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => {
@@ -178,7 +168,10 @@ export default function Header({
     </li>
   );
 
-  const styles = useStyles({ color, borderBottom });
+  // useStyles seems to cache prop values, so this is to force re-render on prop
+  // change (route change) - otherwise the border will render on pages it
+  // shouldnt
+  const styles = useMemo(() => useStyles({ color, borderBottom }), [color, borderBottom]);
   return (
     <div
       className={cx(
@@ -194,13 +187,12 @@ export default function Header({
             <MenuList className={styles.menuList}>
               {menuItems.map((item, index) => {
                 return (
-                  <HeaderMenuItem
+                  <HeaderMenuHover
                     key={index}
                     linkComponent={linkComponent}
                     item={item}
                     color={color}
                     pathName={pathName}
-                    isRegistry={isRegistry}
                   />
                 );
               })}
@@ -208,6 +200,7 @@ export default function Header({
             </MenuList>
           ) : (
             <MobileMenu
+              linkComponent={linkComponent}
               isRegistry={isRegistry}
               pathName={pathName}
               menuItems={menuItems}

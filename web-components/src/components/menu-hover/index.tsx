@@ -12,6 +12,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginTop: theme.spacing(4.75),
   },
   text: {
+    // '& ul:selected, & ul:focus': {
+    //   outline: 'none',
+    // },
     '& li.MuiListItem-button:hover': {
       backgroundColor: 'transparent',
     },
@@ -24,6 +27,12 @@ const useStyles = makeStyles((theme: Theme) => ({
       },
     },
     backgroundColor: 'rgba(0, 0, 0, 0)',
+  },
+  noOutline: {
+    outline: 'none',
+    '&:focus, &:selected': {
+      outline: 'none',
+    },
   },
   paper: {
     'border-radius': '2px',
@@ -48,7 +57,7 @@ const MenuHover = ({ text, textColor, dropdownColor, children }: Props): JSX.Ele
   const popoverAnchor = useRef(null);
 
   // nullish coalescing operator ?? to avoid typescript error on undefined
-  const classes = useStyles({ textColor: textColor ?? '' });
+  const styles = useStyles({ textColor: textColor ?? '' });
 
   const popoverEnter = (): void => {
     setOpenedPopover(true);
@@ -71,9 +80,9 @@ const MenuHover = ({ text, textColor, dropdownColor, children }: Props): JSX.Ele
       </span>
       <Popover
         id="mouse-over-popover"
-        className={classes.popover}
+        className={styles.popover}
         classes={{
-          paper: classes.popoverContent,
+          paper: styles.popoverContent,
         }}
         open={openedPopover}
         anchorEl={popoverAnchor.current}
@@ -88,8 +97,8 @@ const MenuHover = ({ text, textColor, dropdownColor, children }: Props): JSX.Ele
         disableScrollLock
         PaperProps={{ onMouseEnter: popoverEnter, onMouseLeave: popoverLeave }}
       >
-        <Paper className={classes.paper} elevation={5}>
-          <MenuList className={classes.text}>{children}</MenuList>
+        <Paper className={styles.paper} elevation={5}>
+          <MenuList classes={{ root: styles.text, padding: styles.noOutline }}>{children}</MenuList>
         </Paper>
       </Popover>
     </div>

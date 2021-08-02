@@ -169,6 +169,7 @@ export default function Header({
   );
 
   const styles = useStyles({ color, borderBottom });
+  if (isTablet === null || isTablet === undefined) return <></>; // hack to prevent flicker on initial render
   return (
     <div
       className={cx(

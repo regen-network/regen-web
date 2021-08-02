@@ -3,8 +3,7 @@ import cx from 'clsx';
 import { makeStyles, MenuItem, useTheme } from '@material-ui/core';
 
 import MenuHover from '../menu-hover';
-import { NavLink, NavLinkProps } from './NavLink';
-// import { HeaderMenuHover as HeaderMenuHover } from '.';
+import { NavLinkProps } from './NavLink';
 import { HeaderDropdownColumn, HeaderDropdownItemProps } from './HeaderDropdownItems';
 
 const useStyles = makeStyles(theme => ({

@@ -90,7 +90,7 @@ const MarketingNav: React.FC<{ location: Location }> = ({ location }) => {
     },
     {
       title: 'Create a Methodology',
-      href: 'https://registry.regen.network/create-a-methodology/',
+      href: 'https://registry.regen.network/create-methodology/',
       linkComponent: NavLink,
     },
     {

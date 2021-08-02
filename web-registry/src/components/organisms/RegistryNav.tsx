@@ -82,7 +82,7 @@ const RegistryNav: React.FC = () => {
       dropdownItems: creditClassItems,
       render: () => (
         <HeaderDropdownColumn
-          title="Carbon<i>Plus</i> Credits"
+          // title="Carbon<i>Plus</i> Credits"
           items={creditClassItems}
           linkComponent={RegistryNavLink}
         />

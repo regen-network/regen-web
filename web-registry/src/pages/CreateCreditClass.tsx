@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -7,18 +6,18 @@ import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 
 import Section from 'web-components/lib/components/section';
-import ImpactCard from 'web-components/lib/components/cards/ImpactCard';
 import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';
-import ResourcesCard from 'web-components/lib/components/cards/ResourcesCard';
 import FixedFooter from 'web-components/lib/components/fixed-footer';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import Modal from 'web-components/lib/components/modal';
 import Title from 'web-components/lib/components/title';
 import Description from 'web-components/lib/components/description';
+import { BlockContent } from 'web-components/lib/components/block-content';
 
 import { HeroTitle, HeroAction, OverviewCards } from '../components/molecules';
 import { StepCardsWithDescription } from '../components/organisms';
-import { outcomes, resources, contentByPage } from '../mocks';
+import { WrappedImpactCard } from '../components/atoms';
+import { WrappedResourcesCard } from '../components/atoms';
 
 import fernImg from '../assets/fern-in-hands.png';
 import writingOnPaperImg from '../assets/writing-on-paper.png';
@@ -93,38 +92,24 @@ const useStyles = makeStyles(theme => ({
 const CreateCreditClass: React.FC = () => {
   const styles = useStyles();
   const theme = useTheme();
-  const history = useHistory();
   const [open, setOpen] = useState(false);
-  const [modalLink, setModalLink] = useState<string>();
+  const [modalLink, setModalLink] = useState<string | undefined>();
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
   const isDesktop = useMediaQuery(theme.breakpoints.up('lg'));
 
   const { data } = useAllCreateCreditClassPageQuery({ client });
   const content = data?.allCreateCreditClassPage?.[0];
 
-  const {
-    stepCardSection,
-    bottomBanner,
-    creditTypeSection,
-    outcomeSection,
-    heroSection,
-    footerLink,
-  } = contentByPage.CreateCreditClass;
-
-  const openModal = (href: string): void => {
-    setModalLink(href);
+  const openModal = (href?: string | null): void => {
+    setModalLink(href || undefined);
     setOpen(true);
   };
 
-  const outcomeCards = outcomes.map(({ imgSrc, title, description }) => (
-    <ImpactCard name={title} imgSrc={imgSrc} description={description} largeFontSize />
-  ));
-
-
+  const outcomeCards = content?.outcomes?.map(outcome => <WrappedImpactCard outcome={outcome} />);
 
   const SubtitleAndDescription: React.FC<{
     title: string;
-    description: string;
+    descriptionRaw: string;
     align?: 'left' | 'center';
   }> = props => {
     const align = props.align || (isMobile ? 'left' : 'center');
@@ -136,7 +121,7 @@ const CreateCreditClass: React.FC = () => {
           </Title>
           <Box pt={[5, 7]}>
             <Description className={styles.description} align={align}>
-              {props.description}
+              <BlockContent content={props.descriptionRaw} />
             </Description>
           </Box>
         </Box>
@@ -157,18 +142,21 @@ const CreateCreditClass: React.FC = () => {
       <HeroTitle
         isBanner
         img={writingOnPaperImg}
-        title={heroSection.title}
-        description={heroSection.description}
+        title={content?.heroSection?.title}
+        descriptionRaw={content?.heroSection?.descriptionRaw}
         classes={{ main: styles.heroMain }}
       />
 
-      <Section title={stepCardSection.title} classes={{ root: styles.padBottom, title: styles.sectionTitle }}>
+      <Section
+        title={content?.stepCardSection?.title || ''}
+        classes={{ root: styles.padBottom, title: styles.sectionTitle }}
+      >
         <Box display={['block', 'flex']} justifyContent="center">
           <Box maxWidth={theme.typography.pxToRem(942)} mt={[6, 8.75]} mx={[-1, 'inherit']}>
             <StepCardsWithDescription
               openModal={openModal}
               stepCards={content?.stepCardSection?.stepCards}
-              description={stepCardSection.mainDescription}
+              descriptionRaw={content?.stepCardSection?.descriptionRaw}
             />
           </Box>
         </Box>
@@ -176,26 +164,26 @@ const CreateCreditClass: React.FC = () => {
 
       <CardMedia image={topographyImg} className={styles.topoSection}>
         <Section
-          title={creditTypeSection.title}
+          title={content?.creditTypeSection?.title || ''}
           titleAlign={isMobile ? 'left' : 'center'}
           classes={{ root: styles.padBottom, title: styles.sectionTitle }}
         >
           <Box mt={[8, 16]}>
             <SubtitleAndDescription
-              title={creditTypeSection.subtitleTop}
-              description={creditTypeSection.descriptionTop}
+              title={content?.creditTypeSection?.subtitleTop || ''}
+              descriptionRaw={content?.creditTypeSection?.descriptionTopRaw}
             />
             <OverviewWrap>
-              <OverviewCards cards={creditTypeSection.institutionalCards} />
+              <OverviewCards cards={content?.creditTypeSection?.institutionalCards} />
             </OverviewWrap>
           </Box>
           <Box mt={[15, 22]} pb={[4, 8]}>
             <SubtitleAndDescription
-              title={creditTypeSection.subtitleBottom}
-              description={creditTypeSection.descriptionBottom}
+              title={content?.creditTypeSection?.subtitleBottom || ''}
+              descriptionRaw={content?.creditTypeSection?.descriptionBottomRaw}
             />
             <OverviewWrap>
-              <OverviewCards cards={creditTypeSection.flexCreditCards} />
+              <OverviewCards cards={content?.creditTypeSection?.flexCreditCards} />
             </OverviewWrap>
           </Box>
         </Section>
@@ -204,14 +192,14 @@ const CreateCreditClass: React.FC = () => {
       <Section className={styles.padBottom}>
         <SubtitleAndDescription
           align="center"
-          title={outcomeSection.title}
-          description={outcomeSection.description}
+          title={content?.outcomeSection?.title || ''}
+          descriptionRaw={content?.outcomeSection?.descriptionRaw}
         />
         <ResponsiveSlider
           itemWidth="90%"
           padding={theme.spacing(2.5)}
           title="Ecological outcomes"
-          arrows={outcomes?.length > 3}
+          arrows={content?.outcomes ? content.outcomes.length > 3 : false}
           slidesToShow={3}
           items={outcomeCards}
         />
@@ -226,17 +214,10 @@ const CreateCreditClass: React.FC = () => {
             padding={theme.spacing(2.5)}
             title="Resources"
             titleVariant="h2"
-            arrows={resources?.length > resourceCardsShown}
+            arrows={content?.resources ? content.resources.length > resourceCardsShown : false}
             slidesToShow={resourceCardsShown}
-            items={resources.map(({ btnText, description, href, imgSrc, lastUpdated, title }) => (
-              <ResourcesCard
-                image={{ publicURL: require(`../assets/${imgSrc}`) }}
-                title={title}
-                updated={lastUpdated}
-                description={description}
-                buttonText={btnText}
-                link={href.startsWith('http') ? href : require(`../assets/${href}`)}
-              />
+            items={content?.resources?.map(resource => (
+              <WrappedResourcesCard resource={resource} />
             ))}
           />
         </Section>
@@ -246,13 +227,13 @@ const CreateCreditClass: React.FC = () => {
         isBanner
         classes={{ main: styles.bottomSection }}
         img={fernImg}
-        title={bottomBanner.title}
-        description={bottomBanner.description}
-        actionTxt={bottomBanner.btnText}
-        action={() => history.push(bottomBanner.href)}
+        bottomBanner={content?.bottomBanner}
+        openModal={openModal}
       />
       <FixedFooter justify="flex-end">
-        <ContainedButton onClick={() => openModal(footerLink)}>Submit a Credit Class</ContainedButton>
+        <ContainedButton onClick={() => openModal(content?.footerLink)}>
+          Submit a Credit Class
+        </ContainedButton>
       </FixedFooter>
       <Modal open={open} onClose={() => setOpen(false)} className={styles.modal}>
         <iframe title="airtable-signup-form" src={modalLink} />

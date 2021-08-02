@@ -26,6 +26,12 @@ query allCreateCreditClassPage {
     outcomeSection {
       ...heroSectionFields
     }
+    outcomes {
+      ...ecologicalOutcomeFields
+    }
+    resources {
+      ...resourceFields
+    }
     bottomBanner {
       ...bottomBannerFields
     }

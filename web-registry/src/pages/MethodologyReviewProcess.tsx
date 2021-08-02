@@ -15,6 +15,9 @@ import typewriterReview from '../assets/typewriter-review.png';
 import topographyImg from '../assets/topography-pattern-cutout-1.png';
 import fernImg from '../assets/fern-in-hands.png';
 
+import { useAllMethodologyReviewProcessPageQuery } from '../generated/sanity-graphql';
+import { client } from '../sanity';
+
 const useStyles = makeStyles(theme => ({
   root: {
     background: theme.palette.primary.main,
@@ -58,11 +61,6 @@ const createStepCards = (raw: ApiCard): StepCardProps[] =>
   }));
 
 const MethodologyReviewProcess: React.FC = () => {
-  const styles = useStyles();
-  const theme = useTheme();
-  const history = useHistory();
-  const [open, setOpen] = useState(false);
-
   const {
     heroBannerTop,
     internalReviewSection,
@@ -71,6 +69,15 @@ const MethodologyReviewProcess: React.FC = () => {
     heroBannerBottom,
     modalContent,
   } = contentByPage.MethodologyReviewProcess;
+
+  const styles = useStyles();
+  const theme = useTheme();
+  const history = useHistory();
+  const [open, setOpen] = useState(false);
+
+  const { data } = useAllMethodologyReviewProcessPageQuery({ client });
+  const content = data?.allMethodologyReviewProcessPage?.[0];
+  const [modalLink, setModalLink] = useState<string>(modalContent);
 
   const publicCommentCards = createStepCards(stepCardSections.public.stepCards);
   const scienceReviewCards = createStepCards(stepCardSections.scientific.stepCards);
@@ -98,8 +105,8 @@ const MethodologyReviewProcess: React.FC = () => {
       <HeroTitle
         isBanner
         img={typewriterReview}
-        title={heroBannerTop.title}
-        description={heroBannerTop.description}
+        title={content?.heroSection?.title}
+        descriptionRaw={content?.heroSection?.descriptionRaw}
         classes={{ main: styles.heroMain }}
       />
 
@@ -137,14 +144,15 @@ const MethodologyReviewProcess: React.FC = () => {
       <HeroAction
         isBanner
         img={fernImg}
-        title={heroBannerBottom.title}
-        description={heroBannerBottom.description}
-        actionTxt={heroBannerBottom.btnText}
-        action={() => history.push(heroBannerBottom.href)}
+        bottomBanner={content?.bottomBanner}
+        openModal={(href: string): void => {
+          setModalLink(href);
+          setOpen(true);
+        }}
       />
 
       <Modal open={open} onClose={() => setOpen(false)} className={styles.modal}>
-        <iframe title="airtable-signup-form" src={modalContent} />
+        <iframe title="airtable-signup-form" src={modalLink} />
       </Modal>
     </div>
   );

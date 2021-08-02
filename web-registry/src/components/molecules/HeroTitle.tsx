@@ -2,12 +2,15 @@ import React from 'react';
 import cx from 'clsx';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+
+import { BlockContent } from 'web-components/lib/components/block-content';
 import { BackgroundImgSection } from './BackgroundImgSection';
+import { Maybe, Scalars } from '../../generated/sanity-graphql';
 
 type Props = {
   img: string;
-  title: string;
-  description: string;
+  title?: string | null;
+  descriptionRaw?: Maybe<Scalars['JSON']> | string;
   isBanner?: boolean;
   classes?: {
     title?: string;
@@ -42,6 +45,9 @@ const useStyles = makeStyles((theme: Theme) => ({
       fontSize: theme.typography.pxToRem(16),
       lineHeight: theme.typography.pxToRem(25),
     },
+    '& p': {
+      margin: 0,
+    },
   },
 }));
 
@@ -57,11 +63,11 @@ const HeroTitle: React.FC<Props> = ({ classes, ...props }) => {
       img={props.img}
       classes={{ main: cx(styles.main, classes?.main), section: classes?.section }}
     >
-      <Typography variant="h1" className={cx(styles.title, classes?.title)}>
+      {props.title && <Typography variant="h1" className={cx(styles.title, classes?.title)}>
         {props.title}
-      </Typography>
+      </Typography>}
       <Typography variant="h4" className={cx(styles.description, classes?.description)}>
-        {props.description}
+        <BlockContent content={props.descriptionRaw} />
       </Typography>
     </BackgroundImgSection>
   );

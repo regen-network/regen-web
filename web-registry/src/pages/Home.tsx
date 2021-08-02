@@ -50,7 +50,9 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const Home: React.FC = () => {
-  const [showModal, setShowModal] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [modalLink, setModalLink] = useState<string>('https://airtable.com/embed/shrnnbymyofPB75WQ');
+
   const styles = useStyles();
   const theme = useTheme();
 
@@ -65,7 +67,7 @@ const Home: React.FC = () => {
       <HeroTitle
         img={cowsImg}
         title="Welcome to Regen Registry"
-        description="Regen Registry is lrem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magn."
+        // description="Regen Registry is lrem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magn."
         classes={{ description: styles.topSectionDescription }}
       />
 
@@ -92,13 +94,18 @@ const Home: React.FC = () => {
       <HeroAction
         classes={{ main: styles.bottomSection }}
         img={horsesImg}
-        title="Want to get paid for your ecological practices?"
-        actionTxt="Register a Project"
-        action={() => setShowModal(true)}
+        openModal={(href: string): void => {
+          setModalLink(href);
+          setOpen(true);
+        }}
+        // TODO
+        // title="Want to get paid for your ecological practices?"
+        // actionTxt="Register a Project"
+        // action={() => setOpen(true)}
       />
 
-      <Modal open={showModal} onClose={() => setShowModal(false)} className={styles.modal}>
-        <iframe title="airtable-signup-form" src="https://airtable.com/embed/shrnnbymyofPB75WQ" />
+      <Modal open={open} onClose={() => setOpen(false)} className={styles.modal}>
+        <iframe title="airtable-signup-form" src={modalLink} />
       </Modal>
     </>
   );

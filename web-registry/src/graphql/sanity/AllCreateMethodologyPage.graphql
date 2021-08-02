@@ -4,12 +4,20 @@ query allCreateMethodologyPage {
       ...heroSectionFields
     }
     stepCardSection {
-      mainDescriptionRaw
-      bottomTitle
-      bottomDescriptionRaw
+      title
+      descriptionRaw
       stepCards {
         ...stepCardFields
       }
+    }
+    outcomeSection {
+      ...heroSectionFields
+    }
+    outcomes {
+      ...ecologicalOutcomeFields
+    }
+    resources {
+      ...resourceFields
     }
     peerReviewSection {
       ...bottomBannerFields

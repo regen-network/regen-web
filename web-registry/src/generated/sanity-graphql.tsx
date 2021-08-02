@@ -223,6 +223,8 @@ export type CreateCreditClassPage = Document & {
   stepCardSection?: Maybe<StepCardSection>;
   creditTypeSection?: Maybe<CreditTypeSection>;
   outcomeSection?: Maybe<HeroSection>;
+  outcomes?: Maybe<Array<Maybe<EcologicalOutcome>>>;
+  resources?: Maybe<Array<Maybe<Resource>>>;
   bottomBanner?: Maybe<BottomBanner>;
   footerLink?: Maybe<Scalars['String']>;
   metadata?: Maybe<PageMetadata>;
@@ -276,7 +278,10 @@ export type CreateMethodologyPage = Document & {
   _rev?: Maybe<Scalars['String']>;
   _key?: Maybe<Scalars['String']>;
   heroSection?: Maybe<HeroSection>;
-  stepCardSection?: Maybe<CreateMethodologyStepCardSection>;
+  stepCardSection?: Maybe<StepCardSection>;
+  outcomeSection?: Maybe<HeroSection>;
+  outcomes?: Maybe<Array<Maybe<EcologicalOutcome>>>;
+  resources?: Maybe<Array<Maybe<Resource>>>;
   peerReviewSection?: Maybe<BottomBanner>;
   createCreditClassSection?: Maybe<BottomBanner>;
   footerLink?: Maybe<Scalars['String']>;
@@ -293,7 +298,8 @@ export type CreateMethodologyPageFilter = {
   _rev?: Maybe<StringFilter>;
   _key?: Maybe<StringFilter>;
   heroSection?: Maybe<HeroSectionFilter>;
-  stepCardSection?: Maybe<CreateMethodologyStepCardSectionFilter>;
+  stepCardSection?: Maybe<StepCardSectionFilter>;
+  outcomeSection?: Maybe<HeroSectionFilter>;
   peerReviewSection?: Maybe<BottomBannerFilter>;
   createCreditClassSection?: Maybe<BottomBannerFilter>;
   footerLink?: Maybe<StringFilter>;
@@ -308,7 +314,8 @@ export type CreateMethodologyPageSorting = {
   _rev?: Maybe<SortOrder>;
   _key?: Maybe<SortOrder>;
   heroSection?: Maybe<HeroSectionSorting>;
-  stepCardSection?: Maybe<CreateMethodologyStepCardSectionSorting>;
+  stepCardSection?: Maybe<StepCardSectionSorting>;
+  outcomeSection?: Maybe<HeroSectionSorting>;
   peerReviewSection?: Maybe<BottomBannerSorting>;
   createCreditClassSection?: Maybe<BottomBannerSorting>;
   footerLink?: Maybe<SortOrder>;
@@ -639,6 +646,48 @@ export type EcologicalImpactSorting = {
   _rev?: Maybe<SortOrder>;
   _key?: Maybe<SortOrder>;
   name?: Maybe<SortOrder>;
+  image?: Maybe<CustomImageSorting>;
+};
+
+export type EcologicalOutcome = Document & {
+  __typename?: 'EcologicalOutcome';
+  /** Document ID */
+  _id?: Maybe<Scalars['ID']>;
+  /** Document type */
+  _type?: Maybe<Scalars['String']>;
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars['DateTime']>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars['DateTime']>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars['String']>;
+  _key?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  descriptionRaw?: Maybe<Scalars['JSON']>;
+  image?: Maybe<CustomImage>;
+};
+
+export type EcologicalOutcomeFilter = {
+  /** Apply filters on document level */
+  _?: Maybe<Sanity_DocumentFilter>;
+  _id?: Maybe<IdFilter>;
+  _type?: Maybe<StringFilter>;
+  _createdAt?: Maybe<DatetimeFilter>;
+  _updatedAt?: Maybe<DatetimeFilter>;
+  _rev?: Maybe<StringFilter>;
+  _key?: Maybe<StringFilter>;
+  title?: Maybe<StringFilter>;
+  image?: Maybe<CustomImageFilter>;
+};
+
+export type EcologicalOutcomeSorting = {
+  _id?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  _createdAt?: Maybe<SortOrder>;
+  _updatedAt?: Maybe<SortOrder>;
+  _rev?: Maybe<SortOrder>;
+  _key?: Maybe<SortOrder>;
+  title?: Maybe<SortOrder>;
   image?: Maybe<CustomImageSorting>;
 };
 
@@ -1155,6 +1204,7 @@ export type RootQuery = {
   EcologicalImpact?: Maybe<EcologicalImpact>;
   Media?: Maybe<Media>;
   Sdg?: Maybe<Sdg>;
+  EcologicalOutcome?: Maybe<EcologicalOutcome>;
   CreateCreditClassPage?: Maybe<CreateCreditClassPage>;
   CreateMethodologyPage?: Maybe<CreateMethodologyPage>;
   MethodologyReviewProcessPage?: Maybe<MethodologyReviewProcessPage>;
@@ -1169,6 +1219,7 @@ export type RootQuery = {
   allEcologicalImpact: Array<EcologicalImpact>;
   allMedia: Array<Media>;
   allSdg: Array<Sdg>;
+  allEcologicalOutcome: Array<EcologicalOutcome>;
   allCreateCreditClassPage: Array<CreateCreditClassPage>;
   allCreateMethodologyPage: Array<CreateMethodologyPage>;
   allMethodologyReviewProcessPage: Array<MethodologyReviewProcessPage>;
@@ -1206,6 +1257,11 @@ export type RootQueryMediaArgs = {
 
 
 export type RootQuerySdgArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type RootQueryEcologicalOutcomeArgs = {
   id: Scalars['ID'];
 };
 
@@ -1293,6 +1349,14 @@ export type RootQueryAllMediaArgs = {
 export type RootQueryAllSdgArgs = {
   where?: Maybe<SdgFilter>;
   sort?: Maybe<Array<SdgSorting>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+};
+
+
+export type RootQueryAllEcologicalOutcomeArgs = {
+  where?: Maybe<EcologicalOutcomeFilter>;
+  sort?: Maybe<Array<EcologicalOutcomeSorting>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
@@ -1904,7 +1968,13 @@ export type AllCreateCreditClassPageQuery = (
     )>, outcomeSection?: Maybe<(
       { __typename?: 'HeroSection' }
       & HeroSectionFieldsFragment
-    )>, bottomBanner?: Maybe<(
+    )>, outcomes?: Maybe<Array<Maybe<(
+      { __typename?: 'EcologicalOutcome' }
+      & EcologicalOutcomeFieldsFragment
+    )>>>, resources?: Maybe<Array<Maybe<(
+      { __typename?: 'Resource' }
+      & ResourceFieldsFragment
+    )>>>, bottomBanner?: Maybe<(
       { __typename?: 'BottomBanner' }
       & BottomBannerFieldsFragment
     )>, metadata?: Maybe<(
@@ -1926,13 +1996,22 @@ export type AllCreateMethodologyPageQuery = (
       { __typename?: 'HeroSection' }
       & HeroSectionFieldsFragment
     )>, stepCardSection?: Maybe<(
-      { __typename?: 'CreateMethodologyStepCardSection' }
-      & Pick<CreateMethodologyStepCardSection, 'mainDescriptionRaw' | 'bottomTitle' | 'bottomDescriptionRaw'>
+      { __typename?: 'StepCardSection' }
+      & Pick<StepCardSection, 'title' | 'descriptionRaw'>
       & { stepCards?: Maybe<Array<Maybe<(
         { __typename?: 'StepCard' }
         & StepCardFieldsFragment
       )>>> }
-    )>, peerReviewSection?: Maybe<(
+    )>, outcomeSection?: Maybe<(
+      { __typename?: 'HeroSection' }
+      & HeroSectionFieldsFragment
+    )>, outcomes?: Maybe<Array<Maybe<(
+      { __typename?: 'EcologicalOutcome' }
+      & EcologicalOutcomeFieldsFragment
+    )>>>, resources?: Maybe<Array<Maybe<(
+      { __typename?: 'Resource' }
+      & ResourceFieldsFragment
+    )>>>, peerReviewSection?: Maybe<(
       { __typename?: 'BottomBanner' }
       & BottomBannerFieldsFragment
     )>, createCreditClassSection?: Maybe<(
@@ -2161,6 +2240,15 @@ export type EcologicalImpactRelationFieldsFragment = (
   )> }
 );
 
+export type EcologicalOutcomeFieldsFragment = (
+  { __typename?: 'EcologicalOutcome' }
+  & Pick<EcologicalOutcome, 'title' | 'descriptionRaw'>
+  & { image?: Maybe<(
+    { __typename?: 'CustomImage' }
+    & CustomImageFieldsFragment
+  )> }
+);
+
 export type HeroSectionFieldsFragment = (
   { __typename?: 'HeroSection' }
   & Pick<HeroSection, 'title' | 'descriptionRaw'>
@@ -2340,6 +2428,15 @@ export const EcologicalImpactRelationFieldsFragmentDoc = gql`
   }
 }
     ${CustomImageFieldsFragmentDoc}`;
+export const EcologicalOutcomeFieldsFragmentDoc = gql`
+    fragment ecologicalOutcomeFields on EcologicalOutcome {
+  title
+  descriptionRaw
+  image {
+    ...customImageFields
+  }
+}
+    ${CustomImageFieldsFragmentDoc}`;
 export const HeroSectionFieldsFragmentDoc = gql`
     fragment heroSectionFields on HeroSection {
   title
@@ -2412,6 +2509,12 @@ export const AllCreateCreditClassPageDocument = gql`
     outcomeSection {
       ...heroSectionFields
     }
+    outcomes {
+      ...ecologicalOutcomeFields
+    }
+    resources {
+      ...resourceFields
+    }
     bottomBanner {
       ...bottomBannerFields
     }
@@ -2424,6 +2527,8 @@ export const AllCreateCreditClassPageDocument = gql`
     ${HeroSectionFieldsFragmentDoc}
 ${StepCardFieldsFragmentDoc}
 ${CardFieldsFragmentDoc}
+${EcologicalOutcomeFieldsFragmentDoc}
+${ResourceFieldsFragmentDoc}
 ${BottomBannerFieldsFragmentDoc}
 ${PageMetadataFieldsFragmentDoc}`;
 
@@ -2460,12 +2565,20 @@ export const AllCreateMethodologyPageDocument = gql`
       ...heroSectionFields
     }
     stepCardSection {
-      mainDescriptionRaw
-      bottomTitle
-      bottomDescriptionRaw
+      title
+      descriptionRaw
       stepCards {
         ...stepCardFields
       }
+    }
+    outcomeSection {
+      ...heroSectionFields
+    }
+    outcomes {
+      ...ecologicalOutcomeFields
+    }
+    resources {
+      ...resourceFields
     }
     peerReviewSection {
       ...bottomBannerFields
@@ -2481,6 +2594,8 @@ export const AllCreateMethodologyPageDocument = gql`
 }
     ${HeroSectionFieldsFragmentDoc}
 ${StepCardFieldsFragmentDoc}
+${EcologicalOutcomeFieldsFragmentDoc}
+${ResourceFieldsFragmentDoc}
 ${BottomBannerFieldsFragmentDoc}
 ${PageMetadataFieldsFragmentDoc}`;
 

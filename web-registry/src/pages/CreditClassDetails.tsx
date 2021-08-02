@@ -193,12 +193,12 @@ function CreditClassDetail({ isLandSteward }: CreditDetailsProps): JSX.Element {
           isBanner
           img={hero}
           title={
-            isLandSteward ? creditClass.landSteward.heroSection.title : creditClass.buyer.heroSection.title
+            isLandSteward ? content?.landSteward?.heroSection?.title : content?.buyer?.heroSection?.title
           }
-          description={
+          descriptionRaw={
             isLandSteward
-              ? creditClass.landSteward.heroSection.description
-              : creditClass.buyer.heroSection.description
+              ? content?.landSteward?.heroSection?.descriptionRaw
+              : content?.buyer?.heroSection?.descriptionRaw
           }
           classes={{ main: styles.heroMain }}
         />

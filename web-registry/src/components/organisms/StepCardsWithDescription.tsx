@@ -1,13 +1,13 @@
 import React from 'react';
 import cx from 'clsx';
-import ReactHtmlParser from 'react-html-parser';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 
 import Description from 'web-components/lib/components/description';
 import Title from 'web-components/lib/components/title';
+import { BlockContent } from 'web-components/lib/components/block-content';
 import { WrappedStepCard } from '../atoms';
-import { StepCardFieldsFragment, Maybe } from '../../generated/sanity-graphql';
+import { StepCardFieldsFragment, Maybe, Scalars } from '../../generated/sanity-graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
   description: {
@@ -48,22 +48,22 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const StepCardsWithDescription: React.FC<{
-  description?: string;
+  descriptionRaw?: Maybe<Scalars['JSON']>;
   bottomDescription?: {
     title: string;
-    body: string;
+    body?: Maybe<Scalars['JSON']>;
   };
   stepCards?: Maybe<Array<Maybe<StepCardFieldsFragment>>>;
   openModal: (link: string) => void;
   className?: string;
-}> = ({ stepCards, className, description, bottomDescription, openModal }) => {
+}> = ({ stepCards, className, descriptionRaw, bottomDescription, openModal }) => {
   const styles = useStyles();
 
   return (
     <Grid container justify="center" className={className}>
-      {!!description && (
+      {descriptionRaw && (
         <Description className={cx(styles.description, styles.topDescription)}>
-          {ReactHtmlParser(description)}
+          <BlockContent content={descriptionRaw} />
         </Description>
       )}
       <Grid container justify="center" className={styles.stepCardsContainer}>
@@ -74,10 +74,10 @@ const StepCardsWithDescription: React.FC<{
       {!!bottomDescription && (
         <>
           <Title align="center" className={styles.bottomTitle}>
-            {ReactHtmlParser(bottomDescription.title)}
+            {bottomDescription.title}
           </Title>
           <Description className={cx(styles.description, styles.bottomDescription)}>
-            {ReactHtmlParser(bottomDescription.body)}
+            <BlockContent content={bottomDescription.body} />
           </Description>
         </>
       )}

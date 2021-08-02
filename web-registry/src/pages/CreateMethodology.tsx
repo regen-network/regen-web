@@ -1,20 +1,18 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import CardMedia from '@material-ui/core/CardMedia';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 import Section from 'web-components/lib/components/section';
-import ImpactCard from 'web-components/lib/components/cards/ImpactCard';
 import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';
-import ResourcesCard from 'web-components/lib/components/cards/ResourcesCard';
 import FixedFooter from 'web-components/lib/components/fixed-footer';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import Modal from 'web-components/lib/components/modal';
 
 import { HeroTitle, HeroAction } from '../components/molecules';
 import { StepCardsWithDescription } from '../components/organisms';
-import { outcomes, resources, contentByPage } from '../mocks';
+import { WrappedImpactCard } from '../components/atoms';
+import { WrappedResourcesCard } from '../components/atoms';
 
 import fernImg from '../assets/fern-in-hands.png';
 import writingOnPaperImg from '../assets/writing-on-paper.png';
@@ -93,7 +91,6 @@ const useStyles = makeStyles((theme: Theme) => ({
 const CreateMethodology: React.FC = () => {
   const styles = useStyles();
   const theme = useTheme();
-  const history = useHistory();
   const [open, setOpen] = useState(false);
   const [modalLink, setModalLink] = useState<string>();
 
@@ -103,45 +100,35 @@ const CreateMethodology: React.FC = () => {
   const { data } = useAllCreateMethodologyPageQuery({ client });
   const content = data?.allCreateMethodologyPage?.[0];
 
-  const {
-    stepCardSection,
-    createCreditClassSection,
-    heroSection,
-    peerReviewSection,
-    footerLink,
-  } = contentByPage.CreateMethodology;
-
-  const openModal = (href: string): void => {
-    setModalLink(href);
+  const openModal = (href?: string | null): void => {
+    setModalLink(href || undefined);
     setOpen(true);
   };
 
-  const outcomeCards = outcomes.map(({ imgSrc, title, description }) => (
-    <ImpactCard name={title} imgSrc={imgSrc} description={description} largeFontSize />
-  ));
+  const outcomeCards = content?.outcomes?.map(outcome => <WrappedImpactCard outcome={outcome} />);
 
   return (
     <div className={styles.root}>
       <HeroTitle
         isBanner
         img={fernImg}
-        title={heroSection.title}
-        description={heroSection.description}
+        title={content?.heroSection?.title}
+        descriptionRaw={content?.heroSection?.descriptionRaw}
         classes={{ main: styles.heroMain }}
       />
 
       <Section
-        title={stepCardSection.title}
+        title={content?.stepCardSection?.title || ''}
         classes={{ root: styles.topSection, title: styles.methodologyTitle }}
       >
         <StepCardsWithDescription
           className={styles.topSectionCards}
           openModal={openModal}
           stepCards={content?.stepCardSection?.stepCards}
-          description={stepCardSection.mainDescription}
+          descriptionRaw={content?.stepCardSection?.descriptionRaw}
           bottomDescription={{
-            title: stepCardSection.bottomTitle,
-            body: stepCardSection.bottomDescription,
+            title: content?.outcomeSection?.title || '',
+            body: content?.outcomeSection?.descriptionRaw,
           }}
         />
       </Section>
@@ -151,7 +138,7 @@ const CreateMethodology: React.FC = () => {
           itemWidth="90%"
           padding={theme.spacing(2.5)}
           title="Ecological outcomes"
-          arrows={outcomes?.length > 3}
+          arrows={content?.outcomes ? content.outcomes.length > 3 : false}
           slidesToShow={3}
           items={outcomeCards}
         />
@@ -166,17 +153,10 @@ const CreateMethodology: React.FC = () => {
             padding={theme.spacing(2.5)}
             title="Resources"
             titleVariant="h2"
-            arrows={resources?.length > resourceCardsShown}
+            arrows={content?.resources ? content.resources.length > resourceCardsShown : false}
             slidesToShow={resourceCardsShown}
-            items={resources.map(({ btnText, description, href, imgSrc, lastUpdated, title }) => (
-              <ResourcesCard
-                image={{ publicURL: require(`../assets/${imgSrc}`) }}
-                title={title}
-                updated={lastUpdated}
-                description={description}
-                buttonText={btnText}
-                link={href.startsWith('http') ? href : require(`../assets/${href}`)}
-              />
+            items={content?.resources?.map(resource => (
+              <WrappedResourcesCard resource={resource} />
             ))}
           />
         </Section>
@@ -184,23 +164,19 @@ const CreateMethodology: React.FC = () => {
 
       <HeroAction
         classes={{ main: styles.bottomSection }}
-        title={peerReviewSection.title}
-        description={peerReviewSection.description}
-        actionTxt={peerReviewSection.btnText}
-        action={() => history.push(peerReviewSection.href)}
+        bottomBanner={content?.peerReviewSection}
+        openModal={openModal}
       />
 
       <HeroAction
         isBanner
         classes={{ main: styles.bottomSection }}
         img={writingOnPaperImg}
-        title={createCreditClassSection.title}
-        description={createCreditClassSection.description}
-        actionTxt={createCreditClassSection.btnText}
-        action={() => history.push(createCreditClassSection.href)}
+        bottomBanner={content?.createCreditClassSection}
+        openModal={openModal}
       />
       <FixedFooter justify="flex-end">
-        <ContainedButton onClick={() => openModal(footerLink)}>Submit a methodology</ContainedButton>
+        <ContainedButton onClick={() => openModal(content?.footerLink)}>Submit a methodology</ContainedButton>
       </FixedFooter>
       <Modal open={open} onClose={() => setOpen(false)} className={styles.modal}>
         <iframe title="airtable-signup-form" src={modalLink} />

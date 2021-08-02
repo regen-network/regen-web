@@ -12,7 +12,7 @@ import Title from '../title';
 export interface MediaCardProps extends OptimizeImageProps {
   children?: any;
   imgSrc: string;
-  name?: string;
+  name?: JSX.Element | string;
   href?: string;
   target?: string;
   tag?: string;
@@ -147,7 +147,7 @@ export default function MediaCard({
           }
           variant={titleVariant}
         >
-          {ReactHtmlParser(name)}
+          {typeof name === 'string' ? ReactHtmlParser(name) : name}
         </Title>
       )}
       {children}

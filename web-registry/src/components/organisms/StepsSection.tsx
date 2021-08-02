@@ -14,8 +14,8 @@ import { WrappedStepCard } from '../atoms';
 
 type Props = {
   className?: string;
-  title?: string | null;
-  preTitle?: string | null;
+  title?: Maybe<string>;
+  preTitle?: Maybe<string>;
   descriptionRaw?: Maybe<Scalars['JSON']>;
   stepCards?: Maybe<Array<Maybe<StepCardFieldsFragment>>>;
 };

@@ -44,8 +44,8 @@ const HeaderMenuHover: React.FC<{
   item: HeaderMenuItem;
   pathName: string;
   color: string;
-  linkComponent?: React.FC<NavLinkProps>;
-}> = ({ item, pathName, color, linkComponent: LinkComponent = NavLink }) => {
+  linkComponent: React.FC<NavLinkProps>;
+}> = ({ item, pathName, color, linkComponent: LinkComponent }) => {
   const theme = useTheme();
   const styles = useStyles();
 

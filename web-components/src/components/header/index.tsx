@@ -168,10 +168,7 @@ export default function Header({
     </li>
   );
 
-  // useStyles seems to cache prop values, so this is to force re-render on prop
-  // change (route change) - otherwise the border will render on pages it
-  // shouldnt
-  const styles = useMemo(() => useStyles({ color, borderBottom }), [color, borderBottom]);
+  const styles = useStyles({ color, borderBottom });
   return (
     <div
       className={cx(

@@ -6,6 +6,7 @@ import Box from '@material-ui/core/Box';
 
 import Header, { HeaderColors } from 'web-components/lib/components/header';
 import { HeaderMenuItem } from 'web-components/lib/components/header/HeaderMenuHover';
+import { NavLink } from 'web-components/lib/components/header/NavLink';
 import {
   HeaderDropdownColumn,
   HeaderDropdownItemProps,
@@ -48,7 +49,7 @@ const RegistryNav: React.FC = () => {
 
   const programStandardItems: HeaderDropdownItemProps[] = [
     {
-      linkComponent: RegistryNavLink,
+      linkComponent: NavLink,
       href: 'https://regen-registry.s3.amazonaws.com/Regen+Registry+Program+Guide.pdf',
       title: 'Program Guide',
     },

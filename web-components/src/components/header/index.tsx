@@ -1,5 +1,5 @@
-import React, { useMemo } from 'react';
-import { makeStyles, Theme, MenuItem, MenuList, Link, useTheme, useMediaQuery } from '@material-ui/core';
+import React from 'react';
+import { makeStyles, Theme, MenuList, useTheme, useMediaQuery } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import cx from 'clsx';
@@ -169,7 +169,6 @@ export default function Header({
   );
 
   const styles = useStyles({ color, borderBottom });
-  if (isTablet === null || isTablet === undefined) return <></>; // hack to prevent flicker on initial render
   return (
     <div
       className={cx(
@@ -181,9 +180,9 @@ export default function Header({
       <Container disableGutters={isTablet} maxWidth={fullWidth ? false : 'xl'}>
         <Box className={styles.header} px={[4, 5, 6]}>
           <HomeLink color={isTablet ? theme.palette.primary.contrastText : color} />
-          {!isTablet && !!menuItems ? (
+          <Box display={{ xs: 'none', md: 'block' }}>
             <MenuList className={styles.menuList}>
-              {menuItems.map((item, index) => {
+              {menuItems?.map((item, index) => {
                 return (
                   <HeaderMenuHover
                     key={index}
@@ -196,7 +195,9 @@ export default function Header({
               })}
               {isRegistry && <RegistryLoginBtns />}
             </MenuList>
-          ) : (
+          </Box>
+
+          <Box display={{ xs: 'block', md: 'none' }}>
             <MobileMenu
               linkComponent={linkComponent}
               isRegistry={isRegistry}
@@ -207,7 +208,7 @@ export default function Header({
               onLogout={onLogout}
               onSignup={onSignup}
             />
-          )}
+          </Box>
         </Box>
       </Container>
     </div>

@@ -177,7 +177,7 @@ export default function Header({
         transparent ? styles.transparent : styles.background,
       )}
     >
-      <Container disableGutters={isTablet} maxWidth={fullWidth ? false : 'xl'}>
+      <Container disableGutters maxWidth={fullWidth ? false : 'xl'}>
         <Box className={styles.header} px={[4, 5, 6]}>
           <HomeLink color={isTablet ? theme.palette.primary.contrastText : color} />
           <Box display={{ xs: 'none', md: 'block' }}>

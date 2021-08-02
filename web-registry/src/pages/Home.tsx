@@ -66,7 +66,7 @@ const Home: React.FC = () => {
         isBanner
         img={cowsImg}
         title="Welcome to Regen Registry"
-        description="Regen Registry is lrem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magn."
+        description="Regen Registry is an emerging ecosystem services program operating in the voluntary market that aims to regenerate our ecosystems and accelerate the adoption of nature-based solutions while maintaining scientific rigor, reducing project development costs, streamlining the Monitoring, Reporting and Verification (MRV) processes and increasing revenues for land stewards."
         classes={{ description: styles.topSectionDescription }}
       />
 

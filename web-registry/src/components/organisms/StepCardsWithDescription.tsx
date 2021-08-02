@@ -4,9 +4,10 @@ import ReactHtmlParser from 'react-html-parser';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 
-import { StepCard, Step } from 'web-components/lib/components/cards/StepCard';
 import Description from 'web-components/lib/components/description';
 import Title from 'web-components/lib/components/title';
+import { WrappedStepCard } from '../atoms';
+import { StepCardFieldsFragment, Maybe } from '../../generated/sanity-graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
   description: {
@@ -52,9 +53,10 @@ const StepCardsWithDescription: React.FC<{
     title: string;
     body: string;
   };
-  stepCards: Array<{ icon: JSX.Element; step: Step }>;
+  stepCards?: Maybe<Array<Maybe<StepCardFieldsFragment>>>;
+  openModal: (link: string) => void;
   className?: string;
-}> = ({ stepCards, className, description, bottomDescription }) => {
+}> = ({ stepCards, className, description, bottomDescription, openModal }) => {
   const styles = useStyles();
 
   return (
@@ -65,8 +67,8 @@ const StepCardsWithDescription: React.FC<{
         </Description>
       )}
       <Grid container justify="center" className={styles.stepCardsContainer}>
-        {stepCards.map((card, i) => (
-          <StepCard icon={card.icon} step={card.step} key={i} />
+        {stepCards?.map((card, i) => (
+          <WrappedStepCard stepNumber={i} stepCard={card} openModal={openModal} />
         ))}
       </Grid>
       {!!bottomDescription && (

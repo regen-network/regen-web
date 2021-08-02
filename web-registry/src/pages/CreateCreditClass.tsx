@@ -5,9 +5,8 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import CardMedia from '@material-ui/core/CardMedia';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
-import Section from 'web-components/lib/components/section';
 
-import { StepCard, Step } from 'web-components/lib/components/cards/StepCard';
+import Section from 'web-components/lib/components/section';
 import ImpactCard from 'web-components/lib/components/cards/ImpactCard';
 import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';
 import ResourcesCard from 'web-components/lib/components/cards/ResourcesCard';
@@ -24,6 +23,9 @@ import { outcomes, resources, contentByPage } from '../mocks';
 import fernImg from '../assets/fern-in-hands.png';
 import writingOnPaperImg from '../assets/writing-on-paper.png';
 import topographyImg from '../assets/topography-pattern-cutout-1.png';
+
+import { useAllCreateCreditClassPageQuery } from '../generated/sanity-graphql';
+import { client } from '../sanity';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -88,20 +90,17 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-type StepCard = {
-  icon: JSX.Element;
-  step: Step;
-};
-
-const openLink = (url: string): void => void window.open(url, '_blank', 'noopener');
-
 const CreateCreditClass: React.FC = () => {
   const styles = useStyles();
   const theme = useTheme();
   const history = useHistory();
   const [open, setOpen] = useState(false);
+  const [modalLink, setModalLink] = useState<string>();
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
   const isDesktop = useMediaQuery(theme.breakpoints.up('lg'));
+
+  const { data } = useAllCreateCreditClassPageQuery({ client });
+  const content = data?.allCreateCreditClassPage?.[0];
 
   const {
     stepCardSection,
@@ -112,25 +111,16 @@ const CreateCreditClass: React.FC = () => {
     footerLink,
   } = contentByPage.CreateCreditClass;
 
+  const openModal = (href: string): void => {
+    setModalLink(href);
+    setOpen(true);
+  };
+
   const outcomeCards = outcomes.map(({ imgSrc, title, description }) => (
     <ImpactCard name={title} imgSrc={imgSrc} description={description} largeFontSize />
   ));
 
-  const stepCards: StepCard[] = stepCardSection.stepCards.map(
-    ({ icon, title, btnText, href, description, isActive, stepNumber, faqs, tagName }) => ({
-      icon: <img src={require(`../assets/${icon}`)} alt={title} />,
-      step: {
-        stepNumber,
-        faqs,
-        tagName,
-        isActive,
-        title,
-        description,
-        btnText,
-        onBtnClick: href ? (href === 'MODAL' ? () => setOpen(true) : () => openLink(href)) : undefined,
-      },
-    }),
-  );
+
 
   const SubtitleAndDescription: React.FC<{
     title: string;
@@ -175,7 +165,11 @@ const CreateCreditClass: React.FC = () => {
       <Section title={stepCardSection.title} classes={{ root: styles.padBottom, title: styles.sectionTitle }}>
         <Box display={['block', 'flex']} justifyContent="center">
           <Box maxWidth={theme.typography.pxToRem(942)} mt={[6, 8.75]} mx={[-1, 'inherit']}>
-            <StepCardsWithDescription stepCards={stepCards} description={stepCardSection.mainDescription} />
+            <StepCardsWithDescription
+              openModal={openModal}
+              stepCards={content?.stepCardSection?.stepCards}
+              description={stepCardSection.mainDescription}
+            />
           </Box>
         </Box>
       </Section>
@@ -258,10 +252,10 @@ const CreateCreditClass: React.FC = () => {
         action={() => history.push(bottomBanner.href)}
       />
       <FixedFooter justify="flex-end">
-        <ContainedButton onClick={() => setOpen(true)}>Submit a Credit Class</ContainedButton>
+        <ContainedButton onClick={() => openModal(footerLink)}>Submit a Credit Class</ContainedButton>
       </FixedFooter>
       <Modal open={open} onClose={() => setOpen(false)} className={styles.modal}>
-        <iframe title="airtable-signup-form" src={footerLink} />
+        <iframe title="airtable-signup-form" src={modalLink} />
       </Modal>
     </div>
   );

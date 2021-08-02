@@ -1,0 +1,22 @@
+fragment stepCardFields on StepCard {
+  isActive
+  icon {
+    asset {
+      url
+    }
+  }
+  title
+  descriptionRaw
+  button {
+    ...buttonFields
+  }
+  tagName
+  faqs {
+    question
+    answerRaw
+  }
+  image {
+    ...customImageFields
+  }
+  videoSrc
+}

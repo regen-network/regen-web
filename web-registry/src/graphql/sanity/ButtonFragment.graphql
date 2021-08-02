@@ -1,0 +1,8 @@
+fragment buttonFields on Button {
+  buttonText
+  buttonLink {
+    ...linkFields
+  }
+  buttonModal
+  buttonBlankTarget
+}

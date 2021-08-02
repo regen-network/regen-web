@@ -1,0 +1,25 @@
+query allCreateMethodologyPage {
+  allCreateMethodologyPage {
+    heroSection {
+      ...heroSectionFields
+    }
+    stepCardSection {
+      mainDescriptionRaw
+      bottomTitle
+      bottomDescriptionRaw
+      stepCards {
+        ...stepCardFields
+      }
+    }
+    peerReviewSection {
+      ...bottomBannerFields
+    }
+    createCreditClassSection {
+      ...bottomBannerFields
+    }
+    footerLink
+    metadata {
+      ...pageMetadataFields
+    }
+  }
+}

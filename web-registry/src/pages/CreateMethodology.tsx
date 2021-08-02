@@ -5,7 +5,6 @@ import CardMedia from '@material-ui/core/CardMedia';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 import Section from 'web-components/lib/components/section';
-import { StepCard, Step } from 'web-components/lib/components/cards/StepCard';
 import ImpactCard from 'web-components/lib/components/cards/ImpactCard';
 import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';
 import ResourcesCard from 'web-components/lib/components/cards/ResourcesCard';
@@ -20,6 +19,9 @@ import { outcomes, resources, contentByPage } from '../mocks';
 import fernImg from '../assets/fern-in-hands.png';
 import writingOnPaperImg from '../assets/writing-on-paper.png';
 import topographyImg from '../assets/topography-pattern-full-1.png';
+
+import { useAllCreateMethodologyPageQuery } from '../generated/sanity-graphql';
+import { client } from '../sanity';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -88,21 +90,18 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-type StepCard = {
-  icon: JSX.Element;
-  step: Step;
-};
-
-const openLink = (url: string): void => void window.open(url, '_blank', 'noopener');
-
 const CreateMethodology: React.FC = () => {
   const styles = useStyles();
   const theme = useTheme();
   const history = useHistory();
   const [open, setOpen] = useState(false);
+  const [modalLink, setModalLink] = useState<string>();
 
   const isDesktop = useMediaQuery(theme.breakpoints.up('lg'));
   const resourceCardsShown = isDesktop ? 3 : 2;
+
+  const { data } = useAllCreateMethodologyPageQuery({ client });
+  const content = data?.allCreateMethodologyPage?.[0];
 
   const {
     stepCardSection,
@@ -112,25 +111,14 @@ const CreateMethodology: React.FC = () => {
     footerLink,
   } = contentByPage.CreateMethodology;
 
+  const openModal = (href: string): void => {
+    setModalLink(href);
+    setOpen(true);
+  };
+
   const outcomeCards = outcomes.map(({ imgSrc, title, description }) => (
     <ImpactCard name={title} imgSrc={imgSrc} description={description} largeFontSize />
   ));
-
-  const stepCards: StepCard[] = stepCardSection.stepCards.map(
-    ({ icon, title, btnText, href, description, isActive, stepNumber, faqs, tagName }) => ({
-      icon: <img src={require(`../assets/${icon}`)} alt={title} />,
-      step: {
-        stepNumber,
-        faqs,
-        tagName,
-        isActive,
-        title,
-        description,
-        btnText,
-        onBtnClick: href ? (href === 'MODAL' ? () => setOpen(true) : () => openLink(href)) : undefined,
-      },
-    }),
-  );
 
   return (
     <div className={styles.root}>
@@ -148,7 +136,8 @@ const CreateMethodology: React.FC = () => {
       >
         <StepCardsWithDescription
           className={styles.topSectionCards}
-          stepCards={stepCards}
+          openModal={openModal}
+          stepCards={content?.stepCardSection?.stepCards}
           description={stepCardSection.mainDescription}
           bottomDescription={{
             title: stepCardSection.bottomTitle,
@@ -211,10 +200,10 @@ const CreateMethodology: React.FC = () => {
         action={() => history.push(createCreditClassSection.href)}
       />
       <FixedFooter justify="flex-end">
-        <ContainedButton onClick={() => setOpen(true)}>Submit a methodology</ContainedButton>
+        <ContainedButton onClick={() => openModal(footerLink)}>Submit a methodology</ContainedButton>
       </FixedFooter>
       <Modal open={open} onClose={() => setOpen(false)} className={styles.modal}>
-        <iframe title="airtable-signup-form" src={footerLink} />
+        <iframe title="airtable-signup-form" src={modalLink} />
       </Modal>
     </div>
   );

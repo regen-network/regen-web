@@ -4,3 +4,4 @@ export * from './PeerReviewed';
 export * from './OptimizedImage';
 export * from './Label';
 export * from './ProcessStepCard';
+export * from './WrappedStepCard';

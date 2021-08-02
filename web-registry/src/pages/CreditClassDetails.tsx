@@ -10,7 +10,6 @@ import Modal from 'web-components/lib/components/modal';
 import Banner from 'web-components/lib/components/banner';
 import MoreInfoForm from 'web-components/lib/components/form/MoreInfoForm';
 import { SwitchFooter } from 'web-components/lib/components/fixed-footer/SwitchFooter';
-import { StepSequence } from 'web-components/lib/components/cards/StepCard';
 
 import mock from '../mocks/mock.json';
 import { Project } from '../mocks';
@@ -27,6 +26,8 @@ import {
 } from '../components/organisms';
 import hero from '../assets/credit-class-grasslands-hero.png';
 import getApiUri from '../lib/apiUri';
+import { useAllCreditClassQuery } from '../generated/sanity-graphql';
+import { client } from '../sanity';
 
 interface CreditDetailsProps {
   isLandSteward?: boolean;
@@ -123,6 +124,8 @@ function CreditClassDetail({ isLandSteward }: CreditDetailsProps): JSX.Element {
 
   let { creditClassId } = useParams<{ creditClassId: string }>();
 
+  const { data } = useAllCreditClassQuery({ client });
+  const content = data?.allCreditClass?.find(creditClass => creditClass.path === creditClassId);
   const creditClass = creditClasses.find(creditClass => creditClass.id === creditClassId);
 
   const getFeaturedProjects = (): JSX.Element => {
@@ -223,14 +226,14 @@ function CreditClassDetail({ isLandSteward }: CreditDetailsProps): JSX.Element {
         )}
         {!isLandSteward && getAllProjects()}
         {isLandSteward &&
-          creditClass.landSteward?.steps?.map((stepSequence: StepSequence, index) => (
+          content?.landSteward?.steps?.map((stepSequence, index) => (
             <div className={cx('topo-background-alternate', styles.flex)} key={index}>
               <StepsSection
                 className={styles.stepsSection}
                 title={stepSequence?.title}
                 preTitle={stepSequence?.preTitle}
-                description={stepSequence?.description}
-                steps={stepSequence.steps}
+                descriptionRaw={stepSequence?.descriptionRaw}
+                stepCards={stepSequence?.stepCards}
               />
             </div>
           ))}

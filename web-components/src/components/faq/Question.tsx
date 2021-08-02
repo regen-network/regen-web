@@ -12,7 +12,7 @@ import Banner from '../banner';
 export interface QuestionItem {
   classNames?: ClassNames;
   question: string;
-  answer: string;
+  answer: string | JSX.Element;
 }
 
 interface QuestionProps extends QuestionItem {
@@ -225,7 +225,8 @@ const Question = ({
             !open && classNames?.collapsed,
           )}
         >
-          {ReactHtmlParser(answer)}
+          {/* This can be removed once we migrate the website to Sanity */}
+          {typeof answer === 'string' ? ReactHtmlParser(answer) : answer}
           {open ? (
             isShareable && (
               <a

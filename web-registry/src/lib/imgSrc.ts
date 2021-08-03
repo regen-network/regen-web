@@ -1,5 +1,4 @@
 import { Maybe, CustomImage } from '../generated/sanity-graphql';
-import { getOptimizedImageSrc } from 'web-components/lib/utils/optimizedImageSrc';
 
 function validURL(str: string): boolean {
   return str.startsWith('http');

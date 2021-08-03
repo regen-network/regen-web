@@ -6,7 +6,7 @@
     "link": "https://www.regen.network/",
     "type": "organization"
   },
-    "creditClasses": [
+  "creditClasses": [
     {
       "id": "carbonplus-grasslands",
       "version": "Version 0.9 (beta)",

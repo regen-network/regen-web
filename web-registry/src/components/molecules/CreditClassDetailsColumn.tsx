@@ -6,6 +6,7 @@ import cx from 'clsx';
 import Card from 'web-components/lib/components/cards/Card';
 import Title from 'web-components/lib/components/title';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
+import { BlockContent } from 'web-components/lib/components/block-content';
 
 import { LineItem } from './LineItem';
 import { CreditClass } from '../../mocks/mocks';
@@ -130,7 +131,7 @@ function CreditClassDetailsColumn({
             </Title>
           </div>
         </div>
-        {nameRaw && <LineItem label="credit name" data={nameRaw} />}
+        {nameRaw && <LineItem label="credit name" data={<BlockContent content={nameRaw} />} />}
         {creditClass.version && <LineItem label="version" data={creditClass.version} />}
         {creditClass.creditDesigner && <LineItem label="credit designer" data={creditClass.creditDesigner} />}
         {creditClass.ecoType && <LineItem label="ecotype" data={creditClass.ecoType} />}

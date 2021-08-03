@@ -13,7 +13,6 @@ import { BlockContent } from 'web-components/lib/components/block-content';
 
 import mock from '../mocks/mock.json';
 import { Project } from '../mocks';
-import { creditClasses } from '../mocks/mocks';
 import { HeroTitle } from '../components/molecules';
 import {
   ImpactSection,
@@ -127,7 +126,7 @@ function CreditClassDetail({ isLandSteward }: CreditDetailsProps): JSX.Element {
 
   const { data } = useAllCreditClassQuery({ client });
   const content = data?.allCreditClass?.find(creditClass => creditClass.path === creditClassId);
-  const creditClass = creditClasses.find(creditClass => creditClass.id === creditClassId);
+  const creditClass = mock?.creditClasses.find(creditClass => creditClass.id === creditClassId);
 
   const getFeaturedProjects = (): JSX.Element => {
     const featuredProjects = mock?.projects.filter(project =>

@@ -10,7 +10,7 @@ import {
   ResourcesSection,
   MethodologyTestSection,
 } from '../components/organisms';
-import { methodologies } from '../mocks/mocks';
+import mock from '../mocks/mock.json';
 import topoBackground from '../assets/background.jpg';
 import { useAllMethodologyQuery } from '../generated/sanity-graphql';
 import { client } from '../sanity';
@@ -32,9 +32,9 @@ function MethodologyDetails(): JSX.Element {
   const { data } = useAllMethodologyQuery({ client });
   const content = data?.allMethodology?.find(methodology => methodology.path === methodologyId);
   // TODO replace with methodology data from db
-  const methodology = methodologies.find(p => p.id === methodologyId);
+  const methodology = mock.methodologies.find(p => p.id === methodologyId);
 
-  if (methodology && content) {
+  if (methodology) {
     return (
       <div className={styles.root}>
         <MethodologyTopSection

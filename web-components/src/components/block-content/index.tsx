@@ -11,8 +11,11 @@ import BlockContent from '@sanity/block-content-to-react';
 //   },
 // };
 
-const CustomBlockContent: React.FC<{ content: any }> = ({ content }) => {
-  return <BlockContent blocks={content} />;
+const CustomBlockContent: React.FC<{ content?: any }> = ({ content }) => {
+  if (content) {
+    return <BlockContent blocks={content} />;
+  }
+  return <></>;
 };
 
 export { CustomBlockContent as BlockContent };

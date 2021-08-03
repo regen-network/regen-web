@@ -80,6 +80,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
   const styles = useStyles();
   const theme = useTheme();
   const isTabletOrLarger = useMediaQuery(theme.breakpoints.up('sm'));
+  const cropAspect = { aspect: 322 / 211 }; // px values pulled from mockups (width / height)
 
   return (
     <>
@@ -118,7 +119,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                   label="Preview photo"
                   description="Choose the summary photo that will show up in project previews."
                   buttonText="+ Add preview Photo"
-                  fixedCrop={{ aspect: 16 / 9 }}
+                  fixedCrop={cropAspect}
                   name="['http://regen.network/previewPhoto']"
                 />
                 <div className={styles.field}>
@@ -133,7 +134,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                         classes={{ button: styles.smallButton }}
                         component={ImageDrop}
                         buttonText="+ Add Photo"
-                        fixedCrop={{ aspect: 16 / 9 }}
+                        fixedCrop={cropAspect}
                         name="['http://regen.network/galleryLeft']"
                       />
                     </Grid>
@@ -143,7 +144,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                           <Field
                             classes={{ button: styles.smallButton }}
                             component={ImageDrop}
-                            fixedCrop={{ aspect: 16 / 9 }}
+                            fixedCrop={cropAspect}
                             name="['http://regen.network/galleryTop']"
                             hideDragText
                           />
@@ -152,7 +153,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                           <Field
                             classes={{ button: styles.smallButton }}
                             component={ImageDrop}
-                            fixedCrop={{ aspect: 16 / 9 }}
+                            fixedCrop={cropAspect}
                             name="['http://regen.network/galleryBottom']"
                             hideDragText
                           />
@@ -164,7 +165,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                           <Field
                             classes={{ button: styles.smallButton }}
                             component={ImageDrop}
-                            fixedCrop={{ aspect: 16 / 9 }}
+                            fixedCrop={cropAspect}
                             name="['http://regen.network/galleryTop']"
                             buttonText="+ Add Photo"
                           />
@@ -173,7 +174,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                           <Field
                             classes={{ button: styles.smallButton }}
                             component={ImageDrop}
-                            fixedCrop={{ aspect: 16 / 9 }}
+                            fixedCrop={cropAspect}
                             name="['http://regen.network/galleryBottom']"
                             buttonText="+ Add Photo"
                           />
@@ -186,7 +187,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                         classes={{ button: styles.smallButton }}
                         component={ImageDrop}
                         buttonText="+ Add Photo"
-                        fixedCrop={{ aspect: 16 / 9 }}
+                        fixedCrop={cropAspect}
                         name="['http://regen.network/galleryRight']"
                       />
                     </Grid>
@@ -207,7 +208,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                   labelSubText="(required if you don’t add a video)"
                   description="Upload a nice portrait of the land stewards and their families. This should be different from the other photos of land stewards you uploaded in the gallery above."
                   buttonText="+ Add Photo"
-                  fixedCrop={{ aspect: 16 / 9 }}
+                  fixedCrop={cropAspect}
                   name="['http://regen.network/landStewardPhoto']"
                 />
               </OnBoardingCard>

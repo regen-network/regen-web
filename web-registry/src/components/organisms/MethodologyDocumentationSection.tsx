@@ -7,11 +7,12 @@ import Section from 'web-components/lib/components/section';
 import { DocumentationCard } from '../molecules/DocumentationCard';
 import { MethodologyDetailsColumn } from '../molecules/MethodologyDetailsColumn';
 import { Methodology } from '../../mocks/cms-duplicates';
-import { Documentation, Maybe } from '../../generated/sanity-graphql';
+import { Documentation, Maybe, Scalars } from '../../generated/sanity-graphql';
 import { getBtnHref } from '../../lib/button';
 import { getSanityImgSrc } from '../../lib/imgSrc';
 
 interface Props {
+  nameRaw?: Maybe<Scalars['JSON']>;
   methodology: Methodology;
   documentation?: Maybe<Documentation>;
 }
@@ -58,7 +59,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-function MethodologyDocumentationSection({ methodology, documentation }: Props): JSX.Element {
+function MethodologyDocumentationSection({ methodology, documentation, nameRaw }: Props): JSX.Element {
   const styles = useStyles();
 
   return (
@@ -87,7 +88,11 @@ function MethodologyDocumentationSection({ methodology, documentation }: Props):
             buttonUrl={methodology.creditClassUrl}
           />
         </div>
-        <MethodologyDetailsColumn className={styles.detailColumn} methodology={methodology} />
+        <MethodologyDetailsColumn
+          className={styles.detailColumn}
+          nameRaw={nameRaw}
+          methodology={methodology}
+        />
       </div>
     </Section>
   );

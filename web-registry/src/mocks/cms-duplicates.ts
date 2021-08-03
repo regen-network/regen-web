@@ -10,7 +10,6 @@ import duplicateMocks from './mock-cms-duplicates.json';
 // 5. Remove `` from generated types
 
 export interface MockCMS {
-  contentByPage: ContentByPage;
   outcomes: Outcome[];
   resources: Resource[];
   creditClasses: CreditClass[];
@@ -261,6 +260,5 @@ const mock: MockCMS = duplicateMocks;
 
 export const outcomes = mock.outcomes;
 export const resources = mock.resources;
-export const contentByPage = mock.contentByPage;
 export const creditClasses = mock.creditClasses;
 export const methodologies = mock.methodologies;

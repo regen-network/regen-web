@@ -186,7 +186,7 @@ function CreditClassDetail({ isLandSteward }: CreditDetailsProps): JSX.Element {
     history.push(`/credit-classes/${creditClassId}/${isLandSteward ? 'buyer' : 'land-steward'}`);
   };
 
-  if (creditClass) {
+  if (creditClass && content) {
     return (
       <div className={styles.root}>
         <HeroTitle

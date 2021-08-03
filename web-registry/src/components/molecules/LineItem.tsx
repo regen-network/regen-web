@@ -7,7 +7,7 @@ import { Label } from '../atoms/Label';
 
 interface LineItemProps {
   label: string;
-  data: string;
+  data: string | JSX.Element;
 }
 
 const useStyles = makeStyles(theme => ({
@@ -33,7 +33,9 @@ const LineItem = ({ label, data }: LineItemProps): JSX.Element => {
   return (
     <div className={styles.lineItem}>
       <Label className={styles.label}>{label}</Label>
-      <Description className={styles.data}>{ReactHtmlParser(data)}</Description>
+      <Description className={styles.data}>
+        {typeof data === 'string' ? ReactHtmlParser(data) : data}
+      </Description>
     </div>
   );
 };

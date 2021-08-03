@@ -67,7 +67,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-function MethodologySteps({ methodology, steps }: Props): JSX.Element {
+function MethodologySteps({ steps }: Props): JSX.Element {
   const styles = useStyles();
 
   return (

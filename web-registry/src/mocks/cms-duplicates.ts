@@ -224,15 +224,8 @@ export interface Sdg {
 }
 
 export interface Methodology {
-  name: string;
   id: string;
-  description: string;
   imageSrc: string;
-  imageAlt: string;
-  documentationUrl: string;
-  documentationTitle: string;
-  documentationImage: string;
-  documentationImageAltText: string;
   version: string;
   program: string;
   methodologyDesigner: string;
@@ -242,11 +235,6 @@ export interface Methodology {
   creditClassImage: string;
   creditClassImageAltText: string;
   creditClassUrl: string;
-  testMethodologyTitle: string;
-  testMethodologyDescription: string;
-  steps: MethodologyStep[];
-  impact: Impact[];
-  resources: Resource[];
 }
 
 export interface Image {

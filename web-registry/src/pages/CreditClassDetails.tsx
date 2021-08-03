@@ -211,7 +211,9 @@ function CreditClassDetail({ isLandSteward }: CreditDetailsProps): JSX.Element {
           </Description>
         </Section>
         <div className="topo-background-alternate">
-          {creditClass.impact && <ImpactSection title="Ecological Impact" impacts={creditClass.impact} />}
+          {content?.ecologicalImpact && (
+            <ImpactSection title="Ecological Impact" impacts={content?.ecologicalImpact} />
+          )}
           {!isLandSteward && (
             <CreditClassOverviewSection className={styles.overviewSection} creditClass={creditClass} />
           )}
@@ -245,7 +247,7 @@ function CreditClassDetail({ isLandSteward }: CreditDetailsProps): JSX.Element {
         </div>
         <div className="topo-background-alternate">
           <ResourcesSection
-            resources={isLandSteward ? creditClass.landSteward.resources : creditClass.buyer.resources}
+            resources={isLandSteward ? content?.landSteward?.resources : content?.buyer?.resources}
           />
         </div>
         {isLandSteward && <CreditClassConnectSection creditClass={creditClass} />}

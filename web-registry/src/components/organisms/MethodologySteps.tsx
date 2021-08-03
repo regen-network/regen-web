@@ -2,20 +2,14 @@ import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 
 import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
-import SoilSampleIcon from 'web-components/lib/components/icons/SoilSampleIcon';
-import SatelliteIcon from 'web-components/lib/components/icons/SatelliteIcon';
-import CountingIcon from 'web-components/lib/components/icons/CountingIcon';
-import GrowIcon from 'web-components/lib/components/icons/GrowIcon';
-import CoBenefitsIcon from 'web-components/lib/components/icons/CoBenefitsIcon';
 
-import { ProcessStepCard } from '../atoms/ProcessStepCard';
-import { Methodology } from '../../mocks/cms-duplicates';
+import { WrappedStepCard } from '../atoms/WrappedStepCard';
+import { Maybe, BasicStepCardSectionFieldsFragment } from '../../generated/sanity-graphql';
 
 type Props = {
-  methodology: Methodology;
+  steps?: Maybe<BasicStepCardSectionFieldsFragment>;
 };
 
-//TODO: the below icons and styles are related to Grasslands. We will need to make this dynamic when more methodologies are added.
 const useStyles = makeStyles((theme: Theme) => ({
   stepSection: {
     paddingTop: 0,
@@ -73,12 +67,12 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-function MethodologySteps({ methodology }: Props): JSX.Element {
+function MethodologySteps({ methodology, steps }: Props): JSX.Element {
   const styles = useStyles();
 
   return (
     <OnBoardingSection
-      title="Methodology Process"
+      title={steps?.title || 'Methodology Process'}
       classes={{
         root: styles.stepSection,
         title: styles.sectionTitle,
@@ -86,24 +80,10 @@ function MethodologySteps({ methodology }: Props): JSX.Element {
       }}
     >
       <div className={styles.steps}>
-        <ProcessStepCard
-          step={methodology.steps[0]}
-          icon={<SoilSampleIcon className={styles.soilSampleIcon} />}
-        />
-        <ProcessStepCard
-          step={methodology.steps[1]}
-          icon={<SatelliteIcon className={styles.satelliteIcon} />}
-        />
-        <ProcessStepCard
-          step={methodology.steps[2]}
-          icon={<CountingIcon className={styles.countingIcon} />}
-        />
-        <ProcessStepCard step={methodology.steps[3]} icon={<GrowIcon className={styles.growIcon} />} />
-        <ProcessStepCard
-          className={styles.lastCard}
-          step={methodology.steps[4]}
-          icon={<CoBenefitsIcon className={styles.coBenefitsIcon} />}
-        />
+        {steps?.stepCards?.map((s, i) => (
+          <WrappedStepCard stepNumber={i} stepCard={s} openModal={() => {}} />
+        ))}
+        {/* className={styles.lastCard} */}
       </div>
     </OnBoardingSection>
   );

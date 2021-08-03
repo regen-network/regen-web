@@ -3,6 +3,8 @@ import React from 'react';
 import ResourcesCard from 'web-components/lib/components/cards/ResourcesCard';
 import { BlockContent } from 'web-components/lib/components/block-content';
 import { ResourceFieldsFragment, Maybe } from '../../generated/sanity-graphql';
+import { getSanityImgSrc } from '../../lib/imgSrc';
+import { getBtnHref } from '../../lib/button';
 
 /**
  * ResourcesCard wrapping content from Sanity
@@ -13,13 +15,13 @@ const WrappedResourcesCard: React.FC<{
 }> = ({ resource }) => {
   return (
     <ResourcesCard
-      image={{ publicURL: resource?.image?.imageHref || resource?.image?.image?.asset?.url || '' }}
+      image={{ publicURL: getSanityImgSrc(resource?.image) }}
       title={<BlockContent content={resource?.titleRaw} />}
       description={<BlockContent content={resource?.descriptionRaw} />}
       updated={resource?.lastUpdated || resource?._updatedAt}
       buttonText={resource?.button?.buttonText}
       target={resource?.button?.buttonBlankTarget ? '_blank' : '_self'}
-      link={resource?.button?.buttonLink?.buttonHref || resource?.button?.buttonLink?.buttonDoc?.href || ''}
+      link={getBtnHref(resource?.button)}
     />
   );
 };

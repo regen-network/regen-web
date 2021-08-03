@@ -81,7 +81,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 /**
- * Drop and Image File and the Crop Modal will open with your image
+ * Drop an Image File and the Crop Modal will open with your image
  */
 function ImageDrop({
   className,
@@ -101,10 +101,9 @@ function ImageDrop({
   const isDesktop = useMediaQuery(theme.breakpoints.up('tablet'));
   const { form, field } = fieldProps;
 
-  const handleDrop = (event: any): void => {
-    const fileList = event.dataTransfer ? event.dataTransfer.files : [];
-    if (fileList && fileList.length > 0) {
-      const file = fileList[0];
+  const handleDrop = (files: File[]): void => {
+    if (files && files.length > 0) {
+      const file = files[0];
 
       toBase64(file).then(base64String => {
         if (typeof base64String === 'string') {
@@ -117,13 +116,14 @@ function ImageDrop({
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: 'image/*',
-    onDrop: handleDrop,
+    onDropAccepted: handleDrop,
+    onDropRejected: () => {},
     noClick: true,
     noKeyboard: true,
   });
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    if (event && event.target && event.target.files && event.target.files.length) {
+    if (event && event.target && event.target.files && event.target.files.length > 0) {
       const file = event.target.files[0];
       toBase64(file).then(base64String => {
         if (typeof base64String === 'string') {
@@ -182,7 +182,6 @@ function ImageDrop({
               <div
                 {...getRootProps({
                   className: cx('dropzone', styles.drop),
-                  onDrop: handleDrop,
                 })}
               >
                 {isDesktop && !hideDragText && (

@@ -1,0 +1,7 @@
+mutation RetireCredits($input: RetireCreditsInput!) {
+  retireCredits(input: $input) {
+    retirement {
+      id
+    }
+  }
+}

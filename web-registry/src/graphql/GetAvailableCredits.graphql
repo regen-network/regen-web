@@ -1,0 +1,3 @@
+query GetAvailableCredits($vintageId: UUID) {
+  getAvailableCredits(vintageId: $vintageId)
+}

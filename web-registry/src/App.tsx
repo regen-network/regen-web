@@ -20,6 +20,7 @@ import {
   CreateMethodology,
   Credits,
   CreditsIssue,
+  CreditsPortal,
   CreditsRetire,
   CreditsTransfer,
   // Eligibility,
@@ -161,6 +162,7 @@ const App: React.FC = (): JSX.Element => {
                 <Route path={path} component={Admin} exact />
                 {isAdmin(user) && (
                   <>
+                    <Route path={`${path}/credits/portal`} component={CreditsPortal} />
                     <Route path={`${path}/credits/issue`} component={CreditsIssue} />
                     <Route path={`${path}/credits/transfer`} component={CreditsTransfer} />
                     <Route path={`${path}/credits/retire`} component={CreditsRetire} />

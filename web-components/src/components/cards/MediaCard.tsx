@@ -3,11 +3,11 @@ import { makeStyles, Theme } from '@material-ui/core';
 import CardMedia from '@material-ui/core/CardMedia';
 import { Variant } from '@material-ui/core/styles/createTypography';
 import cx from 'clsx';
-import ReactHtmlParser from 'react-html-parser';
 
 import Card from './Card';
 import { Image, OptimizeImageProps } from '../image';
 import Title from '../title';
+import { parseText } from '../../utils/textParser';
 
 export interface MediaCardProps extends OptimizeImageProps {
   children?: any;
@@ -147,7 +147,7 @@ export default function MediaCard({
           }
           variant={titleVariant}
         >
-          {typeof name === 'string' ? ReactHtmlParser(name) : name}
+          {parseText(name)}
         </Title>
       )}
       {children}

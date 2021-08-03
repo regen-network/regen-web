@@ -102,7 +102,7 @@ function StepsSection({ className, stepCards, title, preTitle, descriptionRaw }:
       </div>
       <div className={styles.steps}>
         {stepCards?.map((card, i) => (
-          <WrappedStepCard stepNumber={i} stepCard={card} openModal={setModalIframeLink} />
+          <WrappedStepCard key={i} stepNumber={i} stepCard={card} openModal={setModalIframeLink} />
         ))}
       </div>
       <Modal open={!!modalIframeLink} onClose={() => setModalIframeLink('')} className={styles.modal}>

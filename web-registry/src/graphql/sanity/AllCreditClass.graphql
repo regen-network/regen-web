@@ -10,6 +10,7 @@ query allCreditClass {
       ...cardFields
     }
     sdgs {
+      title
       image {
         ...customImageFields
       }

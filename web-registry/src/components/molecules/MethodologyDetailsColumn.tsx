@@ -6,7 +6,7 @@ import Card from 'web-components/lib/components/cards/Card';
 import Title from 'web-components/lib/components/title';
 import { BlockContent }  from 'web-components/lib/components/block-content';
 
-import { Methodology } from '../../mocks/cms-duplicates';
+import { Methodology } from '../../mocks/mocks';
 import { LineItem } from './LineItem';
 import { Maybe, Scalars } from '../../generated/sanity-graphql';
 

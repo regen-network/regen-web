@@ -7,14 +7,46 @@ import { CreditPrice } from 'web-components/lib/components/fixed-footer/BuyFoote
 import { SDG } from 'web-components/lib/components/cards/ProjectTopCard';
 
 import mock from './mock.json';
-import { Impact } from './cms-duplicates';
 
 // imgSrc should be either web url or static image filenames within web/src/assets/
 // (eg to load web/src/assets/coorong.jpg, use "coorong.jpg" as imgSrc)
 
+export interface Impact {
+  name: string;
+  description: string;
+  monitored: boolean;
+  imgSrc: string;
+}
+
 export interface ActionGroup {
   title?: string;
   actions: ActionProps[];
+}
+
+export interface CreditClass {
+  id: string;
+  version: string;
+  creditDesigner: string;
+  ecoType: string;
+  ecoServiceType: string;
+  approvedMethodology: string;
+  methodologyUrl: string;
+  methodologyId: string;
+  imgSrc: string;
+}
+
+export interface Methodology {
+  id: string;
+  imageSrc: string;
+  version: string;
+  program: string;
+  methodologyDesigner: string;
+  uncertaintyDeductions: string;
+  measurementApproach: string;
+  creditClassName: string;
+  creditClassImage: string;
+  creditClassImageAltText: string;
+  creditClassUrl: string;
 }
 
 export interface Project {
@@ -131,3 +163,5 @@ export const purchasedCredits: PurchasedCredits[] = mock.purchasedCredits;
 export const projects: Project[] = mock.projects;
 export const projectDefault: ProjectDefault = mock.projectDefault;
 export const basicCreditClasses: BasicCreditClass[] = mock.basicCreditClasses;
+export const creditClasses = mock.creditClasses;
+export const methodologies = mock.methodologies;

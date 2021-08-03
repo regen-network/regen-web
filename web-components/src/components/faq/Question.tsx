@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
-import ReactHtmlParser from 'react-html-parser';
 import clsx from 'clsx';
 
 import BreadcrumbIcon from '../icons/BreadcrumbIcon';
 import Title from '../title';
 import LinkIcon from '../icons/LinkIcon';
-import copyTextToClipboard from '../../utils/copy';
 import Banner from '../banner';
+import copyTextToClipboard from '../../utils/copy';
+import { parseText } from '../../utils/textParser';
 
 export interface QuestionItem {
   classNames?: ClassNames;
@@ -226,7 +226,7 @@ const Question = ({
           )}
         >
           {/* This can be removed once we migrate the website to Sanity */}
-          {typeof answer === 'string' ? ReactHtmlParser(answer) : answer}
+          {parseText(answer)}
           {open ? (
             isShareable && (
               <a

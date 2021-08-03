@@ -6,6 +6,34 @@
     "link": "https://www.regen.network/",
     "type": "organization"
   },
+    "creditClasses": [
+    {
+      "id": "carbonplus-grasslands",
+      "version": "Version 0.9 (beta)",
+      "creditDesigner": "Regen Network Development, Inc",
+      "ecoType": "Grasslands",
+      "ecoServiceType":"Carbon Removal",
+      "approvedMethodology": "Carbon<i>Plus</i> Grasslands Methodology",
+      "methodologyUrl": "/methodologies/carbonplus-grasslands",
+      "methodologyId": "carbonplus-grasslands",
+      "imgSrc": "credit-class-grasslands.png"
+    }
+  ],
+  "methodologies": [
+    {
+      "id": "carbonplus-grasslands",
+      "imageSrc": "https://regen-registry.s3.amazonaws.com/methodologies/carbonplus_grasslands/grasslands.png",
+      "version": "0.9 (Beta)",
+      "program": "Regen Registry",
+      "methodologyDesigner": "Regen Network Development, Inc",
+      "uncertaintyDeductions": "Included",
+      "measurementApproach": "In field",
+      "creditClassName": "Carbon<i>Plus</i> Grasslands Credit Class",
+      "creditClassImage": "https://regen-registry.s3.amazonaws.com/methodologies/carbonplus_grasslands/credit-class-doc.png",
+      "creditClassImageAltText": "Cattle Ranch",
+      "creditClassUrl": "/credit-classes/carbonplus-grasslands"
+    }
+  ],
   "basicCreditClasses": [
     {
       "name": "Carbon<i>Plus</i> Grasslands",

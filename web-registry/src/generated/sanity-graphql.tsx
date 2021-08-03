@@ -2040,6 +2040,7 @@ export type AllCreditClassQuery = (
       & CardFieldsFragment
     )>>>, sdgs?: Maybe<Array<Maybe<(
       { __typename?: 'Sdg' }
+      & Pick<Sdg, 'title'>
       & { image?: Maybe<(
         { __typename?: 'CustomImage' }
         & CustomImageFieldsFragment
@@ -2638,6 +2639,7 @@ export const AllCreditClassDocument = gql`
       ...cardFields
     }
     sdgs {
+      title
       image {
         ...customImageFields
       }

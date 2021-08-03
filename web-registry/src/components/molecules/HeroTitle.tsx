@@ -63,12 +63,16 @@ const HeroTitle: React.FC<Props> = ({ classes, ...props }) => {
       img={props.img}
       classes={{ main: cx(styles.main, classes?.main), section: classes?.section }}
     >
-      {props.title && <Typography variant="h1" className={cx(styles.title, classes?.title)}>
-        {props.title}
-      </Typography>}
-      <Typography variant="h4" className={cx(styles.description, classes?.description)}>
-        <BlockContent content={props.descriptionRaw} />
-      </Typography>
+      {props.title && (
+        <Typography variant="h1" className={cx(styles.title, classes?.title)}>
+          {props.title}
+        </Typography>
+      )}
+      {props.descriptionRaw && (
+        <Typography variant="h4" className={cx(styles.description, classes?.description)}>
+          <BlockContent content={props.descriptionRaw} />
+        </Typography>
+      )}
     </BackgroundImgSection>
   );
 };

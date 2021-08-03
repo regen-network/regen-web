@@ -1,6 +1,7 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
+import cx from 'clsx';
 
 import { OverviewCard } from 'web-components/lib/components/cards/OverviewCard';
 import { BlockContent } from 'web-components/lib/components/block-content';
@@ -23,21 +24,22 @@ const useStyles = makeStyles(theme => ({
   overviewCard: {
     width: '100%',
     height: '100%',
+    [theme.breakpoints.down('sm')]: {
+      minWidth: theme.spacing(69.5),
+      minHeight: theme.spacing(40.75),
+    },
   },
 }));
 
-type Card = {
-  title: string;
-  description: string;
-  icon: string;
-};
-
-const OverviewCards: React.FC<{ cards?: Maybe<Array<Maybe<CardFieldsFragment>>> }> = props => {
+const OverviewCards: React.FC<{
+  cards?: Maybe<Array<Maybe<CardFieldsFragment>>>;
+  classes?: { root: string; item: string };
+}> = props => {
   const styles = useStyles();
   return (
-    <Grid container spacing={4} className={styles.wrap}>
+    <Grid container spacing={4} className={cx(props.classes?.root, styles.wrap)}>
       {props.cards?.map((card, i) => (
-        <Grid item xs={12} sm={6} md={4} key={i} className={styles.item}>
+        <Grid item xs={12} sm={6} md={4} key={i} className={cx(props.classes?.item, styles.item)}>
           <OverviewCard
             className={styles.overviewCard}
             icon={

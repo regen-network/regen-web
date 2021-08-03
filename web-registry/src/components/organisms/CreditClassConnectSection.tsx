@@ -3,13 +3,14 @@ import { makeStyles, Theme } from '@material-ui/core/styles';
 
 import Title from 'web-components/lib/components/title';
 
-import { CreditClass } from '../../mocks';
+import { ConnectSection, Maybe } from '../../generated/sanity-graphql';
 import { BackgroundImgSection } from '../molecules/BackgroundImgSection';
 import { IconLabel } from '../molecules/IconLabel';
 import creditClassConnectImg from '../../assets/credit-class-connect-bg.png';
+import { getLinkHref } from '../../lib/button';
 
 type Props = {
-  creditClass: CreditClass;
+  connectSection?: Maybe<ConnectSection>;
 };
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -65,7 +66,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-function CreditClassConnectSection({ creditClass }: Props): JSX.Element {
+function CreditClassConnectSection({ connectSection }: Props): JSX.Element {
   const styles = useStyles();
 
   return (
@@ -74,17 +75,17 @@ function CreditClassConnectSection({ creditClass }: Props): JSX.Element {
       classes={{ root: styles.connectRoot, main: styles.main, section: styles.section }}
     >
       <Title className={styles.header} variant="h2" align="center">
-        {creditClass.landSteward.connectSection?.header || 'Connect and Learn'}
+        {connectSection?.title || 'Connect and Learn'}
       </Title>
       <div className={styles.links}>
-        {creditClass.landSteward.connectSection?.links?.map(link => (
+        {connectSection?.links?.map((link, i) => (
           <IconLabel
             className={styles.iconLabel}
-            key={link.name}
-            label={link.name}
-            icon={<img src={link.icon} alt={link.name} />}
-            description={link.description}
-            href={link.href}
+            key={link?.name || i}
+            label={link?.name || ''}
+            icon={<img src={link?.icon?.asset?.url || ''} alt={link?.name || 'connect'} />}
+            descriptionRaw={link?.descriptionRaw}
+            href={getLinkHref(link?.href)}
           />
         ))}
       </div>

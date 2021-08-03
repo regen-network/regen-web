@@ -10,7 +10,7 @@ import {
   ResourcesSection,
   MethodologyTestSection,
 } from '../components/organisms';
-import { methodologies } from '../mocks/cms-duplicates';
+import { methodologies } from '../mocks/mocks';
 import topoBackground from '../assets/background.jpg';
 import { useAllMethodologyQuery } from '../generated/sanity-graphql';
 import { client } from '../sanity';
@@ -43,7 +43,11 @@ function MethodologyDetails(): JSX.Element {
           descriptionRaw={content?.descriptionRaw}
         />
         <MethodologySteps steps={content?.steps} />
-        <MethodologyDocumentationSection methodology={methodology} documentation={content?.documentation} />
+        <MethodologyDocumentationSection
+          methodology={methodology}
+          nameRaw={content?.nameRaw}
+          documentation={content?.documentation}
+        />
         <div className={styles.topoBackground}>
           <ImpactSection title="Ecological Impact" impacts={content?.ecologicalImpact} />
         </div>

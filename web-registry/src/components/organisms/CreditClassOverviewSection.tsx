@@ -1,19 +1,22 @@
 import React from 'react';
 import { makeStyles, useTheme, useMediaQuery } from '@material-ui/core';
-import Grid from '@material-ui/core/Grid';
 import cx from 'clsx';
 
 import Section from 'web-components/lib/components/section';
 import Title from 'web-components/lib/components/title';
-import { OverviewCard } from 'web-components/lib/components/cards/OverviewCard';
 
-import { CreditClass } from '../../mocks';
+import { CardFieldsFragment, Sdg, Maybe, Scalars } from '../../generated/sanity-graphql';
 import { SDGs } from './SDGs';
 import { CreditClassDetailsColumn } from '../molecules/CreditClassDetailsColumn';
+import { OverviewCards } from '../molecules/OverviewCards';
+import { CreditClass } from '../../mocks/mocks';
 
 interface CreditClassOverviewSectionProps {
-  className?: string;
   creditClass: CreditClass;
+  className?: string;
+  nameRaw?: Maybe<Scalars['JSON']>;
+  overviewCards?: Maybe<Array<Maybe<CardFieldsFragment>>>;
+  sdgs?: Maybe<Array<Maybe<Sdg>>>;
 }
 
 const useStyles = makeStyles(theme => ({
@@ -65,14 +68,6 @@ const useStyles = makeStyles(theme => ({
       },
     },
   },
-  overviewCard: {
-    width: '100%',
-    height: '100%',
-    [theme.breakpoints.down('sm')]: {
-      minWidth: theme.spacing(69.5),
-      minHeight: theme.spacing(40.75),
-    },
-  },
   sdgsMobile: {
     [theme.breakpoints.down('xs')]: {
       padding: theme.spacing(20, 0),
@@ -87,26 +82,15 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const CreditClassOverviewSection: React.FC<CreditClassOverviewSectionProps> = ({
-  className,
   creditClass,
+  className,
+  nameRaw,
+  overviewCards,
+  sdgs,
 }) => {
   const styles = useStyles();
   const theme = useTheme();
   const isMobile: boolean = useMediaQuery(theme.breakpoints.down('xs'));
-
-  const OverviewCards: React.FC<{ cards: any[] }> = props => (
-    <Grid container spacing={4} className={styles.cardWrap}>
-      {props.cards.map((card, i) => (
-        <Grid item sm={12} lg={6} key={i} className={styles.cardItem}>
-          <OverviewCard
-            className={styles.overviewCard}
-            icon={<img src={require(`../../assets/${card.icon}`)} alt={card.description} />}
-            item={card}
-          />
-        </Grid>
-      ))}
-    </Grid>
-  );
 
   return (
     <>
@@ -117,21 +101,21 @@ const CreditClassOverviewSection: React.FC<CreditClassOverviewSectionProps> = ({
         titleAlign="left"
       >
         <div className={styles.overview}>
-          <OverviewCards cards={creditClass.overviewCards} />
-          {isMobile && creditClass.sdgs && (
+          <OverviewCards cards={overviewCards} classes={{ root: styles.cardWrap, item: styles.cardItem }} />
+          {isMobile && sdgs && (
             <div className={styles.sdgsMobile}>
               <Title className={styles.title} variant="h2" align="left">
                 SDGs
               </Title>
-              <SDGs sdgs={creditClass.sdgs} />
+              <SDGs sdgs={sdgs} />
             </div>
           )}
-          <CreditClassDetailsColumn creditClass={creditClass} />
+          <CreditClassDetailsColumn nameRaw={nameRaw} creditClass={creditClass} />
         </div>
       </Section>
-      {!isMobile && creditClass.sdgs && (
+      {!isMobile && sdgs && (
         <Section classes={{ root: styles.sdgsSection, title: styles.title }} title="SDGs" titleAlign="left">
-          <SDGs sdgs={creditClass.sdgs} />
+          <SDGs sdgs={sdgs} />
         </Section>
       )}
     </>

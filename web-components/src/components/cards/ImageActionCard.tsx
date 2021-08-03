@@ -1,12 +1,12 @@
 import React from 'react';
 import clsx from 'clsx';
-import ReactHtmlParser from 'react-html-parser';
 import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 
 import OutlinedButton from '../buttons/OutlinedButton';
 import MediaCard from '../cards/MediaCard';
+import { parseText } from '../../utils/textParser';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -26,14 +26,17 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
+    '& p': {
+      margin: 0,
+    },
   },
 }));
 
 type Props = {
-  description: string;
+  description: string | JSX.Element;
   imgSrc: string;
   onClick: () => void;
-  title: string;
+  title: string | JSX.Element;
   btnText: string;
   className?: string;
 };
@@ -52,10 +55,10 @@ const ImageActionCard: React.FC<Props> = props => {
       <CardContent className={styles.cardContent}>
         <div>
           <Typography gutterBottom className={styles.title} variant="h5">
-            {ReactHtmlParser(props.title)}
+            {parseText(props.title)}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            {props.description}
+            {parseText(props.description)}
           </Typography>
         </div>
 

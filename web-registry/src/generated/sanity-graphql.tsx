@@ -364,6 +364,7 @@ export type CreditClass = Document & {
   /** This will be used in the credit class page url: "/credit-classes/{path}" */
   path?: Maybe<Scalars['String']>;
   descriptionRaw?: Maybe<Scalars['JSON']>;
+  shortDescriptionRaw?: Maybe<Scalars['JSON']>;
   ecologicalImpact?: Maybe<Array<Maybe<EcologicalImpactRelation>>>;
   overviewCards?: Maybe<Array<Maybe<Card>>>;
   sdgs?: Maybe<Array<Maybe<Sdg>>>;
@@ -832,6 +833,47 @@ export type HeroSectionSorting = {
   title?: Maybe<SortOrder>;
 };
 
+export type HomePage = Document & {
+  __typename?: 'HomePage';
+  /** Document ID */
+  _id?: Maybe<Scalars['ID']>;
+  /** Document type */
+  _type?: Maybe<Scalars['String']>;
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars['DateTime']>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars['DateTime']>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars['String']>;
+  _key?: Maybe<Scalars['String']>;
+  heroSection?: Maybe<HeroSection>;
+  bottomBanner?: Maybe<BottomBanner>;
+};
+
+export type HomePageFilter = {
+  /** Apply filters on document level */
+  _?: Maybe<Sanity_DocumentFilter>;
+  _id?: Maybe<IdFilter>;
+  _type?: Maybe<StringFilter>;
+  _createdAt?: Maybe<DatetimeFilter>;
+  _updatedAt?: Maybe<DatetimeFilter>;
+  _rev?: Maybe<StringFilter>;
+  _key?: Maybe<StringFilter>;
+  heroSection?: Maybe<HeroSectionFilter>;
+  bottomBanner?: Maybe<BottomBannerFilter>;
+};
+
+export type HomePageSorting = {
+  _id?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  _createdAt?: Maybe<SortOrder>;
+  _updatedAt?: Maybe<SortOrder>;
+  _rev?: Maybe<SortOrder>;
+  _key?: Maybe<SortOrder>;
+  heroSection?: Maybe<HeroSectionSorting>;
+  bottomBanner?: Maybe<BottomBannerSorting>;
+};
+
 export type IdFilter = {
   /** Checks if the value is equal to the given input. */
   eq?: Maybe<Scalars['ID']>;
@@ -1205,6 +1247,7 @@ export type RootQuery = {
   Media?: Maybe<Media>;
   Sdg?: Maybe<Sdg>;
   EcologicalOutcome?: Maybe<EcologicalOutcome>;
+  HomePage?: Maybe<HomePage>;
   CreateCreditClassPage?: Maybe<CreateCreditClassPage>;
   CreateMethodologyPage?: Maybe<CreateMethodologyPage>;
   MethodologyReviewProcessPage?: Maybe<MethodologyReviewProcessPage>;
@@ -1220,6 +1263,7 @@ export type RootQuery = {
   allMedia: Array<Media>;
   allSdg: Array<Sdg>;
   allEcologicalOutcome: Array<EcologicalOutcome>;
+  allHomePage: Array<HomePage>;
   allCreateCreditClassPage: Array<CreateCreditClassPage>;
   allCreateMethodologyPage: Array<CreateMethodologyPage>;
   allMethodologyReviewProcessPage: Array<MethodologyReviewProcessPage>;
@@ -1262,6 +1306,11 @@ export type RootQuerySdgArgs = {
 
 
 export type RootQueryEcologicalOutcomeArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type RootQueryHomePageArgs = {
   id: Scalars['ID'];
 };
 
@@ -1357,6 +1406,14 @@ export type RootQueryAllSdgArgs = {
 export type RootQueryAllEcologicalOutcomeArgs = {
   where?: Maybe<EcologicalOutcomeFilter>;
   sort?: Maybe<Array<EcologicalOutcomeSorting>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+};
+
+
+export type RootQueryAllHomePageArgs = {
+  where?: Maybe<HomePageFilter>;
+  sort?: Maybe<Array<HomePageSorting>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
@@ -2031,7 +2088,7 @@ export type AllCreditClassQuery = (
   { __typename?: 'RootQuery' }
   & { allCreditClass: Array<(
     { __typename?: 'CreditClass' }
-    & Pick<CreditClass, 'path' | 'nameRaw' | 'descriptionRaw'>
+    & Pick<CreditClass, 'path' | 'nameRaw' | 'descriptionRaw' | 'shortDescriptionRaw'>
     & { ecologicalImpact?: Maybe<Array<Maybe<(
       { __typename?: 'EcologicalImpactRelation' }
       & EcologicalImpactRelationFieldsFragment
@@ -2101,6 +2158,23 @@ export type AllCreditClassQuery = (
           )> }
         )>>> }
       )> }
+    )> }
+  )> }
+);
+
+export type AllHomePageQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllHomePageQuery = (
+  { __typename?: 'RootQuery' }
+  & { allHomePage: Array<(
+    { __typename?: 'HomePage' }
+    & { heroSection?: Maybe<(
+      { __typename?: 'HeroSection' }
+      & HeroSectionFieldsFragment
+    )>, bottomBanner?: Maybe<(
+      { __typename?: 'BottomBanner' }
+      & BottomBannerFieldsFragment
     )> }
   )> }
 );
@@ -2632,6 +2706,7 @@ export const AllCreditClassDocument = gql`
     path
     nameRaw
     descriptionRaw
+    shortDescriptionRaw
     ecologicalImpact {
       ...ecologicalImpactRelationFields
     }
@@ -2736,6 +2811,46 @@ export function useAllCreditClassLazyQuery(baseOptions?: Apollo.LazyQueryHookOpt
 export type AllCreditClassQueryHookResult = ReturnType<typeof useAllCreditClassQuery>;
 export type AllCreditClassLazyQueryHookResult = ReturnType<typeof useAllCreditClassLazyQuery>;
 export type AllCreditClassQueryResult = Apollo.QueryResult<AllCreditClassQuery, AllCreditClassQueryVariables>;
+export const AllHomePageDocument = gql`
+    query allHomePage {
+  allHomePage {
+    heroSection {
+      ...heroSectionFields
+    }
+    bottomBanner {
+      ...bottomBannerFields
+    }
+  }
+}
+    ${HeroSectionFieldsFragmentDoc}
+${BottomBannerFieldsFragmentDoc}`;
+
+/**
+ * __useAllHomePageQuery__
+ *
+ * To run a query within a React component, call `useAllHomePageQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAllHomePageQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAllHomePageQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useAllHomePageQuery(baseOptions?: Apollo.QueryHookOptions<AllHomePageQuery, AllHomePageQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AllHomePageQuery, AllHomePageQueryVariables>(AllHomePageDocument, options);
+      }
+export function useAllHomePageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllHomePageQuery, AllHomePageQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AllHomePageQuery, AllHomePageQueryVariables>(AllHomePageDocument, options);
+        }
+export type AllHomePageQueryHookResult = ReturnType<typeof useAllHomePageQuery>;
+export type AllHomePageLazyQueryHookResult = ReturnType<typeof useAllHomePageLazyQuery>;
+export type AllHomePageQueryResult = Apollo.QueryResult<AllHomePageQuery, AllHomePageQueryVariables>;
 export const AllMethodologyDocument = gql`
     query allMethodology {
   allMethodology {

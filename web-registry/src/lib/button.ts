@@ -1,6 +1,6 @@
 import { LinkFieldsFragment, ButtonFieldsFragment, Maybe } from '../generated/sanity-graphql';
 
-const openLink = (url: string, blankTarget: boolean): void =>
+export const openLink = (url: string, blankTarget: boolean): void =>
   void window.open(url, blankTarget ? '_blank' : '_self', 'noopener');
 
 export function getBtnHref(button?: Maybe<ButtonFieldsFragment>): string {

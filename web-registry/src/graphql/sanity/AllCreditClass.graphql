@@ -3,6 +3,7 @@ query allCreditClass {
     path
     nameRaw
     descriptionRaw
+    shortDescriptionRaw
     ecologicalImpact {
       ...ecologicalImpactRelationFields
     }

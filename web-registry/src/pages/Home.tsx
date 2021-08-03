@@ -7,11 +7,14 @@ import Section from 'web-components/lib/components/section';
 import Modal from 'web-components/lib/components/modal';
 import { HeroTitle, HeroAction } from '../components/molecules';
 import { ProjectCards, CreditClassCards } from '../components/organisms';
-import { projects, basicCreditClasses, BasicCreditClass } from '../mocks';
+import { projects, creditClasses } from '../mocks';
 
 import cowsImg from '../assets/cows-by-barn.png';
 import topographyImg from '../assets/background.jpg';
 import horsesImg from '../assets/horses-grazing.png';
+
+import { useAllHomePageQuery, useAllCreditClassQuery } from '../generated/sanity-graphql';
+import { client } from '../sanity';
 
 const useStyles = makeStyles((theme: Theme) => ({
   topSectionDescription: {
@@ -51,14 +54,15 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const Home: React.FC = () => {
   const [open, setOpen] = useState(false);
-  const [modalLink, setModalLink] = useState<string>('https://airtable.com/embed/shrnnbymyofPB75WQ');
+  const [modalLink, setModalLink] = useState<string>('');
 
   const styles = useStyles();
   const theme = useTheme();
 
-  function handleCardSelect(card: BasicCreditClass): void {
-    console.log('TODO: handle card click :>> ', card); // eslint-disable-line
-  }
+  const { data } = useAllHomePageQuery({ client });
+  const { data: creditClassData } = useAllCreditClassQuery({ client });
+  const content = data?.allHomePage?.[0];
+  const creditClassesContent = creditClassData?.allCreditClass;
 
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
@@ -66,8 +70,8 @@ const Home: React.FC = () => {
     <>
       <HeroTitle
         img={cowsImg}
-        title="Welcome to Regen Registry"
-        // description="Regen Registry is lrem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magn."
+        title={content?.heroSection?.title}
+        descriptionRaw={content?.heroSection?.descriptionRaw}
         classes={{ description: styles.topSectionDescription }}
       />
 
@@ -85,9 +89,8 @@ const Home: React.FC = () => {
         <CreditClassCards
           btnText="Learn More"
           justify={isMobile ? 'center' : 'flex-start'}
-          creditClasses={[basicCreditClasses[0]]}
-          // creditClasses={basicCreditClasses} // TODO: Right now we are only displaying carbonPlus grasslands, but eventually we should display all classes
-          onClickCard={handleCardSelect}
+          creditClasses={creditClasses} // mock/db data
+          creditClassesContent={creditClassesContent} // CMS data
         />
       </Section>
 
@@ -98,10 +101,7 @@ const Home: React.FC = () => {
           setModalLink(href);
           setOpen(true);
         }}
-        // TODO
-        // title="Want to get paid for your ecological practices?"
-        // actionTxt="Register a Project"
-        // action={() => setOpen(true)}
+        bottomBanner={content?.bottomBanner}
       />
 
       <Modal open={open} onClose={() => setOpen(false)} className={styles.modal}>

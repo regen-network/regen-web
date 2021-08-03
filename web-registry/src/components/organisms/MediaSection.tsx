@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 
 import ArticleCard, { getBtnText } from 'web-components/lib/components/cards/ArticleCard';
+import { getFormattedDate } from 'web-components/lib/utils/format';
 import { SliderSection } from 'web-components/lib/components/section/SliderSection';
 
 import { MediaFieldsFragment, Maybe } from '../../generated/sanity-graphql';
@@ -36,7 +37,7 @@ const MediaSection: React.FC<MediaSectionProps> = ({ header, items }) => {
               author={item?.author || ''}
               buttonText={getBtnText(item?.type)}
               imgSrc={getSanityImgSrc(item?.image)}
-              date={item?.date}
+              date={getFormattedDate(item?.date)}
               play={item?.type === 'video'}
             />
           )) || []

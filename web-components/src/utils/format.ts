@@ -1,5 +1,5 @@
 export function getFormattedDate(
-  date: string | Date,
+  date?: string | Date | null,
   options?: Intl.DateTimeFormatOptions | undefined,
 ): string {
   return new Intl.DateTimeFormat('en-US', { timeZone: 'UTC', ...options }).format(new Date(date));

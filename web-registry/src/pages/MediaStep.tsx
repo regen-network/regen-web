@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const Media: React.FC = () => {
+const MediaStep: React.FC = () => {
   const styles = useStyles();
   const activeStep = 0;
   const { projectId } = useParams();
@@ -80,4 +80,4 @@ const Media: React.FC = () => {
   );
 };
 
-export { Media };
+export { MediaStep };

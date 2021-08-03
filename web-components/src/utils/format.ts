@@ -2,7 +2,10 @@ export function getFormattedDate(
   date?: string | Date | null,
   options?: Intl.DateTimeFormatOptions | undefined,
 ): string {
-  return new Intl.DateTimeFormat('en-US', { timeZone: 'UTC', ...options }).format(new Date(date));
+  if (date) {
+    return new Intl.DateTimeFormat('en-US', { timeZone: 'UTC', ...options }).format(new Date(date));
+  }
+  return '';
 }
 
 export function getFormattedNumber(number: number, options?: Intl.NumberFormatOptions | undefined): string {

@@ -95,6 +95,7 @@ const Home: React.FC = () => {
       </Section>
 
       <HeroAction
+        isBanner
         classes={{ main: styles.bottomSection }}
         img={horsesImg}
         openModal={(href: string): void => {

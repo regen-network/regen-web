@@ -11,6 +11,7 @@ export * from './ImpactSection';
 export * from './IncludesGrasslandsForm';
 export * from './LandManagementActions';
 export * from './MediaSection';
+export * from './MediaForm';
 export * from './MethodologyDocumentationSection';
 export * from './MethodologySteps';
 export * from './MethodologyTestSection';

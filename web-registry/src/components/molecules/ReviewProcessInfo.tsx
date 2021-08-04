@@ -9,8 +9,8 @@ import Title from 'web-components/lib/components/title';
 import { BlockContent } from 'web-components/lib/components/block-content';
 import Description from 'web-components/lib/components/description';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
+import { Label } from 'web-components/lib/components/label';
 
-import { Label } from '../atoms';
 import { ReviewSectionFieldsFragment, Maybe } from '../../generated/sanity-graphql';
 import { onBtnClick } from '../../lib/button';
 

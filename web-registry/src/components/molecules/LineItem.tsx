@@ -1,10 +1,9 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core';
 
-import Description from 'web-components/lib/components/description';
 import { parseText } from 'web-components/lib/utils/textParser';
-
-import { Label } from '../atoms/Label';
+import Description from 'web-components/lib/components/description';
+import { Label } from 'web-components/lib/components/label';
 
 interface LineItemProps {
   label: string;

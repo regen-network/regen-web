@@ -25,6 +25,8 @@ import {
   // Eligibility,
   // GettingStarted,
   Home,
+  // Home,
+  MediaStep,
   MethodologyReviewProcess,
   NotFoundPage,
   OrganizationProfile,
@@ -138,6 +140,7 @@ const App: React.FC = (): JSX.Element => {
                 />
                 <ProtectedRoute path={`${path}/:projectId/basic-info`} component={BasicInfo} />
                 <ProtectedRoute path={`${path}/:projectId/story`} component={Story} />
+                <ProtectedRoute path={`${path}/:projectId/media`} component={MediaStep} />
 
                 {/* Used for Project Plan flow
                 <ProtectedRoute path={`${path}/:projectId/getting-started`} component={GettingStarted} />

@@ -20,7 +20,7 @@ import {
   StepsSection,
   MoreProjectsSection,
   MediaSection,
-  CreditClassConnectSection,
+  // CreditClassConnectSection,
   CreditClassOverviewSection,
 } from '../components/organisms';
 import hero from '../assets/credit-class-grasslands-hero.png';

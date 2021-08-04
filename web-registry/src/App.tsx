@@ -141,8 +141,6 @@ const App: React.FC = (): JSX.Element => {
                 <ProtectedRoute path={`${path}/:projectId/basic-info`} component={BasicInfo} />
                 <ProtectedRoute path={`${path}/:projectId/story`} component={Story} />
                 <ProtectedRoute path={`${path}/:projectId/media`} component={MediaStep} />
-                {/* TODO: delete line below - using for easy UI testing */}
-                <Route path={`${path}/media`} component={MediaStep} />
 
                 {/* Used for Project Plan flow
                 <ProtectedRoute path={`${path}/:projectId/getting-started`} component={GettingStarted} />

@@ -5,7 +5,7 @@ import { Formik, Form, Field } from 'formik';
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import OnboardingFooter from 'web-components/lib/components/fixed-footer/OnboardingFooter';
 import { ImageDrop } from 'web-components/lib/components/inputs/ImageDrop';
-import { VideoInput } from 'web-components/lib/components/inputs/VideoInput';
+// import { VideoInput } from 'web-components/lib/components/inputs/VideoInput'; //TODO: make this component easier to use with share links from youtube, vimeo, etc
 import FormLabel from 'web-components/lib/components/inputs/FormLabel';
 
 interface MediaFormProps {
@@ -193,19 +193,19 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                     </Grid>
                   </Grid>
                 </div>
-                <Field
+                {/* <Field
                   classes={{ root: styles.field }}
                   component={VideoInput}
                   label="Video url"
                   optional
                   description="Copy and paste a video url from YouTube, Vimeo, or Facebook."
                   name="['http://regen.network/videoUrl']"
-                />
+                /> */}
                 <Field
                   classes={{ root: styles.field, main: styles.fullSizeMedia }}
                   component={ImageDrop}
                   label="Land Steward photo"
-                  labelSubText="(required if you don’t add a video)"
+                  // labelSubText="(required if you don’t add a video)" TODO: uncomment when video input is ready
                   description="Upload a nice portrait of the land stewards and their families. This should be different from the other photos of land stewards you uploaded in the gallery above."
                   buttonText="+ Add Photo"
                   fixedCrop={cropAspect}

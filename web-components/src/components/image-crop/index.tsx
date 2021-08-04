@@ -30,13 +30,19 @@ const useStyles = makeStyles((theme: Theme) => ({
     height: 80,
     width: '100%',
     padding: theme.spacing(6),
+    marginTop: theme.spacing(10),
+    [theme.breakpoints.up('sm')]: {
+      paddingRight: 0,
+    },
   },
   button: {
     marginLeft: theme.spacing(2),
-    marginRight: theme.spacing(6),
+    [theme.breakpoints.down('xs')]: {
+      marginRight: theme.spacing(6),
+    },
   },
   cancelButton: {
-    color: theme.palette.grey[400],
+    color: theme.palette.grey[500],
     textTransform: 'none',
     fontSize: theme.spacing(4),
     marginLeft: theme.spacing(2),

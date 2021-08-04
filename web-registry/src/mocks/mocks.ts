@@ -154,7 +154,6 @@ export interface Mock {
   creditsIssuer: User;
   projects: Project[];
   projectDefault: ProjectDefault;
-  basicCreditClasses: BasicCreditClass[];
   purchasedCredits: PurchasedCredits[];
 }
 
@@ -162,6 +161,5 @@ export const creditsIssuer: User = mock.creditsIssuer;
 export const purchasedCredits: PurchasedCredits[] = mock.purchasedCredits;
 export const projects: Project[] = mock.projects;
 export const projectDefault: ProjectDefault = mock.projectDefault;
-export const basicCreditClasses: BasicCreditClass[] = mock.basicCreditClasses;
 export const creditClasses = mock.creditClasses;
 export const methodologies = mock.methodologies;

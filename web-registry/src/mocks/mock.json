@@ -34,20 +34,6 @@
       "creditClassUrl": "/credit-classes/carbonplus-grasslands"
     }
   ],
-  "basicCreditClasses": [
-    {
-      "name": "Carbon<i>Plus</i> Grasslands",
-      "id": "carbonplus-grasslands",
-      "description": "This credit class is a built as a holistic credit that includes multiple ecological benefits: Carbon Sequestration and Net GHG reduction, increased animal welfare, ecosystem health, and soil health.",
-      "imgSrc": "credit-class-grasslands.png"
-    },
-    {
-      "name": "Carbon<i>Plus</i> Forestry",
-      "id": "carbonplus-forestry",
-      "description": "This credit class is a built as a holistic credit that includes multiple ecological benefits: Carbon Sequestration and Net GHG reduction, ecosystem health, and soil health.",
-      "imgSrc": "credit-class-forestry.png"
-    }
-  ],
   "projectDefault": {
     "story": {
       "title": "Story"

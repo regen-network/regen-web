@@ -68,13 +68,7 @@ const useStyles = makeStyles(theme => ({
 const ReviewProcessInfo: React.FC<{
   className?: string;
   reviewSection?: Maybe<ReviewSectionFieldsFragment>;
-  // title: string;
-  // description: string;
-  // disclaimerTop?: string;
-  // disclaimerBottom?: string;
-  // btnText?: string;
-  onBtnClick?: () => void;
-  // timespan?: string;
+  openModal: (link: string) => void;
 }> = props => {
   const styles = useStyles();
   return (
@@ -106,7 +100,7 @@ const ReviewProcessInfo: React.FC<{
       </div>
       {props.reviewSection?.button && (
         <div>
-          <ContainedButton onClick={() => onBtnClick(() => {}, props.reviewSection?.button)}>
+          <ContainedButton onClick={() => onBtnClick(props.openModal, props.reviewSection?.button)}>
             {props.reviewSection.button.buttonText}
           </ContainedButton>
         </div>

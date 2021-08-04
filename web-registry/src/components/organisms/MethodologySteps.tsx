@@ -35,6 +35,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       maxWidth: theme.spacing(199.75),
     },
+    '& :last-child': {
+      marginBottom: 0,
+    },
   },
   soilSampleIcon: {
     marginTop: -3,
@@ -62,9 +65,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: theme.spacing(19.25),
     height: theme.spacing(24.75),
   },
-  lastCard: {
-    marginBottom: 0,
-  },
 }));
 
 function MethodologySteps({ steps }: Props): JSX.Element {
@@ -83,7 +83,6 @@ function MethodologySteps({ steps }: Props): JSX.Element {
         {steps?.stepCards?.map((s, i) => (
           <WrappedStepCard stepNumber={i} stepCard={s} openModal={() => {}} />
         ))}
-        {/* className={styles.lastCard} */}
       </div>
     </OnBoardingSection>
   );

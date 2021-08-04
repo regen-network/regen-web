@@ -2,15 +2,21 @@ import React from 'react';
 import BlockContent from '@sanity/block-content-to-react';
 import { makeStyles, Theme } from '@material-ui/core';
 
-// const serializers = {
-//   types: {
-//     code: props => (
-//       <pre data-language={props.node.language}>
-//         <code>{props.node.code}</code>
-//       </pre>
-//     ),
-//   },
-// };
+const serializers = {
+  marks: {
+    link: (props: any) => {
+      const { mark, children } = props;
+      const { blank, href } = mark;
+      return blank ? (
+        <a href={href} target="_blank" rel="noreferrer noopener">
+          {children}
+        </a>
+      ) : (
+        <a href={href}>{children}</a>
+      );
+    },
+  },
+};
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -28,7 +34,7 @@ const CustomBlockContent: React.FC<{ content?: any }> = ({ content }) => {
   if (content) {
     return (
       <div className={styles.root}>
-        <BlockContent blocks={content} />
+        <BlockContent blocks={content} serializers={serializers} />
       </div>
     );
   }

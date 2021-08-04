@@ -71,13 +71,13 @@ const MethodologyReviewProcess: React.FC = () => {
 
       <Section className={styles.section}>
         <MaxW924>
-          <ReviewProcessInfo reviewSection={content?.internalReviewSection} />
+          <ReviewProcessInfo reviewSection={content?.internalReviewSection} openModal={openModal} />
         </MaxW924>
       </Section>
 
       <BackgroundImgSection img={topographyImg} classes={{ root: styles.topoBg, section: styles.section }}>
         <MaxW924>
-          <ReviewProcessInfo reviewSection={content?.externalReviewSection} />
+          <ReviewProcessInfo reviewSection={content?.externalReviewSection} openModal={openModal} />
         </MaxW924>
         <Box display="flex" alignSelf="center" flexDirection="column" mt={[2, 5]} mx={[-1, 'inherit']}>
           {content?.externalReviewSection?.stepCardsSubsections?.map(s => (

@@ -12,6 +12,7 @@ export * from './IncludesGrasslandsForm';
 export * from './LandManagementActions';
 export * from './MarketingNav';
 export * from './MediaSection';
+export * from './MediaForm';
 export * from './MethodologyDocumentationSection';
 export * from './MethodologySteps';
 export * from './MethodologyTestSection';

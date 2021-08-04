@@ -10,7 +10,7 @@ import { Image } from '../image';
 export interface ProjectImpactCardProps {
   className?: string;
   name: string;
-  description: string;
+  description: JSX.Element | string;
   imgSrc: string;
   monitored?: boolean;
   standard?: string;

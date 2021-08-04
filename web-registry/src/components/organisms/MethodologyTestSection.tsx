@@ -1,16 +1,17 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
-import ReactHtmlParser from 'react-html-parser';
 
 import Title from 'web-components/lib/components/title';
 import Description from 'web-components/lib/components/description';
+import { BlockContent } from 'web-components/lib/components/block-content';
 
 import { BackgroundImgSection } from '../molecules/BackgroundImgSection';
 import testMethodologyImg from '../../assets/test-methodology.png';
-import { Methodology } from '../../mocks/cms-duplicates';
+import { Maybe, Scalars } from '../../generated/sanity-graphql';
 
 type Props = {
-  methodology: Methodology;
+  title?: string | null;
+  descriptionRaw?: Maybe<Scalars['JSON']>;
 };
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -46,16 +47,18 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-function MethodologyTestSection({ methodology }: Props): JSX.Element {
+function MethodologyTestSection({ title, descriptionRaw }: Props): JSX.Element {
   const styles = useStyles();
 
   return (
     <BackgroundImgSection img={testMethodologyImg} classes={{ main: styles.main, section: styles.section }}>
-      <Title className={styles.title} variant="h2" align="center">
-        {methodology.testMethodologyTitle}
-      </Title>
+      {title && (
+        <Title className={styles.title} variant="h2" align="center">
+          {title}
+        </Title>
+      )}
       <Description className={styles.description} align="center">
-        {ReactHtmlParser(methodology.testMethodologyDescription)}
+        <BlockContent content={descriptionRaw} />
       </Description>
     </BackgroundImgSection>
   );

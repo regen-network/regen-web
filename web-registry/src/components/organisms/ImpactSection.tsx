@@ -1,13 +1,14 @@
 import React from 'react';
 
 import ProjectImpactCard from 'web-components/lib/components/cards/ProjectImpactCard';
-import { getOptimizedImageSrc } from 'web-components/lib/utils/optimizedImageSrc';
 import { SliderSection } from 'web-components/lib/components/section/SliderSection';
+import { BlockContent } from 'web-components/lib/components/block-content';
 
-import { Impact } from '../../mocks/cms-duplicates';
+import { EcologicalImpactRelation, Maybe } from '../../generated/sanity-graphql';
+import { getSanityImgSrc } from '../../lib/imgSrc';
 
 interface ProjectImpactProps {
-  impacts: Impact[];
+  impacts?: Maybe<Array<Maybe<EcologicalImpactRelation>>>;
   title?: string;
   classes?: {
     root?: string;
@@ -15,22 +16,21 @@ interface ProjectImpactProps {
 }
 
 function ImpactSection({ impacts, title, classes }: ProjectImpactProps): JSX.Element {
-  const imageStorageBaseUrl = process.env.REACT_APP_IMAGE_STORAGE_BASE_URL;
-  const apiServerUrl = process.env.REACT_APP_API_URI;
-
   return (
     <SliderSection
       classes={classes}
       title={title || 'Impact'}
-      items={impacts.map((impact, index) => (
-        <ProjectImpactCard
-          key={index}
-          name={impact.name}
-          description={impact.description}
-          imgSrc={getOptimizedImageSrc(impact.imgSrc, imageStorageBaseUrl, apiServerUrl)}
-          monitored={impact.monitored}
-        />
-      ))}
+      items={
+        impacts?.map((impact, index) => (
+          <ProjectImpactCard
+            key={index}
+            name={impact?.ecologicalImpact?.name || ''}
+            description={<BlockContent content={impact?.ecologicalImpact?.descriptionRaw} />}
+            imgSrc={getSanityImgSrc(impact?.ecologicalImpact?.image)}
+            monitored={impact?.primary ? true : false}
+          />
+        )) || []
+      }
     />
   );
 }

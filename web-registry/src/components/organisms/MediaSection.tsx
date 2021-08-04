@@ -1,14 +1,16 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 
-import ArticleCard from 'web-components/lib/components/cards/ArticleCard';
+import ArticleCard, { getBtnText } from 'web-components/lib/components/cards/ArticleCard';
+import { getFormattedDate } from 'web-components/lib/utils/format';
 import { SliderSection } from 'web-components/lib/components/section/SliderSection';
 
-import { Article } from '../../mocks/cms-duplicates';
+import { MediaFieldsFragment, Maybe } from '../../generated/sanity-graphql';
+import { getSanityImgSrc } from '../../lib/imgSrc';
 
 interface MediaSectionProps {
   header?: string;
-  items: Article[];
+  items?: Maybe<Array<Maybe<MediaFieldsFragment>>>;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -25,19 +27,21 @@ const MediaSection: React.FC<MediaSectionProps> = ({ header, items }) => {
     <div>
       <SliderSection
         title={header || 'Resources'}
-        items={items.map((item, i) => (
-          <ArticleCard
-            className={styles.card}
-            key={i}
-            url={item.url}
-            name={item.title}
-            author={item.author}
-            buttonText={item.btnText}
-            imgSrc={item.imgSrc}
-            date={item.date}
-            play={item.type === 'video'}
-          />
-        ))}
+        items={
+          items?.map((item, i) => (
+            <ArticleCard
+              className={styles.card}
+              key={i}
+              url={item?.href || ''}
+              name={item?.title || ''}
+              author={item?.author || ''}
+              buttonText={getBtnText(item?.type)}
+              imgSrc={getSanityImgSrc(item?.image)}
+              date={getFormattedDate(item?.date)}
+              play={item?.type === 'video'}
+            />
+          )) || []
+        }
       />
     </div>
   );

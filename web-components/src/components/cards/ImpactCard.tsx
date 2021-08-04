@@ -8,7 +8,7 @@ import Card from './Card';
 
 export interface ImpactCardProps {
   name: string;
-  description: string;
+  description: JSX.Element | string;
   imgSrc: string;
   monitored?: boolean;
   largeFontSize?: boolean;

@@ -10,7 +10,7 @@ import PrevNextButton from '../buttons/PrevNextButton';
 import Title from '../title';
 
 export interface ResponsiveSliderProps {
-  items: JSX.Element[];
+  items?: JSX.Element[];
   titleVariant?: Variant;
   arrows?: boolean;
   slidesToShow?: number;
@@ -134,7 +134,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
 }));
 
 export default function ResponsiveSlider({
-  items,
+  items = [],
   titleVariant = 'h6',
   slidesToShow,
   arrows = false,

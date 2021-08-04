@@ -1,18 +1,18 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
-import ReactHtmlParser from 'react-html-parser';
 
 import OutlinedButton from '../buttons/OutlinedButton';
 import EyeIcon from '../icons/EyeIcon';
 import MediaCard from './MediaCard';
+import { parseText } from '../../utils/textParser';
 
 export interface ResourcesCardProps {
   image: { publicURL: string };
-  title: string;
+  title: JSX.Element | string;
   updated?: string;
-  description: string;
-  buttonText?: string;
+  description: JSX.Element | string;
+  buttonText?: string | null;
   link: string;
   target?: string;
   backgroundGradient?: boolean;
@@ -135,7 +135,7 @@ export default function ResourcesCard({
         )}
         {description && (
           <Typography className={classes.description} component="div">
-            {ReactHtmlParser(description)}
+            {parseText(description)}
           </Typography>
         )}
       </div>

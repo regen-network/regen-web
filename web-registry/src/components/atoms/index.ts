@@ -5,3 +5,6 @@ export * from './ProcessStepCard';
 export * from './ProtectedRoute';
 export * from './RegistryNavLink';
 export * from './ScrollToTop';
+export * from './WrappedStepCard';
+export * from './WrappedImpactCard';
+export * from './WrappedResourcesCard';

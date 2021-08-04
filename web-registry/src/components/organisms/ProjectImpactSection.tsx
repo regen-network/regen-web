@@ -9,7 +9,7 @@ import cx from 'clsx';
 import ProjectImpactCard from 'web-components/lib/components/cards/ProjectImpactCard';
 import Section from 'web-components/lib/components/section';
 import PrevNextButton from 'web-components/lib/components/buttons/PrevNextButton';
-import { Impact } from '../../mocks/cms-duplicates';
+import { Impact } from '../../mocks/mocks';
 
 interface ProjectImpactProps {
   impacts: Impact[];

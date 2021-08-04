@@ -1,0 +1,10 @@
+query allHomePage {
+  allHomePage {
+    heroSection {
+      ...heroSectionFields
+    }
+    bottomBanner {
+      ...bottomBannerFields
+    }
+  }
+}

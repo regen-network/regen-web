@@ -1,0 +1,74 @@
+query allCreditClass {
+  allCreditClass {
+    path
+    nameRaw
+    descriptionRaw
+    shortDescriptionRaw
+    ecologicalImpact {
+      ...ecologicalImpactRelationFields
+    }
+    overviewCards {
+      ...cardFields
+    }
+    sdgs {
+      title
+      image {
+        ...customImageFields
+      }
+    }
+    buyer {
+      heroSection {
+        ...heroSectionFields
+      }
+      resources {
+        ...resourceFields
+      }
+      videos {
+        ...mediaFields
+      }
+      projectsTitle
+      ctaButton {
+        ...buttonFields
+      }
+    }
+    landSteward {
+      heroSection {
+        ...heroSectionFields
+      }
+      resources {
+        ...resourceFields
+      }
+      videos {
+        ...mediaFields
+      }
+      projectsTitle
+      ctaButton {
+        ...buttonFields
+      }
+      featuredProjectIds
+      steps {
+        preTitle
+        title
+        descriptionRaw
+        stepCards {
+          ...stepCardFields
+        }
+      }
+      connectSection {
+        title
+        links {
+          name
+          descriptionRaw
+          icon {
+            asset {
+              url
+            }
+          }
+          href {
+            ...linkFields
+          }
+        }
+      }
+    }
+  }
+}

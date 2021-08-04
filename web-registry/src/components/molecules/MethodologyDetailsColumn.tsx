@@ -4,11 +4,14 @@ import cx from 'clsx';
 
 import Card from 'web-components/lib/components/cards/Card';
 import Title from 'web-components/lib/components/title';
+import { BlockContent }  from 'web-components/lib/components/block-content';
 
-import { Methodology } from '../../mocks/cms-duplicates';
+import { Methodology } from '../../mocks/mocks';
 import { LineItem } from './LineItem';
+import { Maybe, Scalars } from '../../generated/sanity-graphql';
 
 interface MethodologyDetailsColumnProps {
+  nameRaw?: Maybe<Scalars['JSON']>;
   methodology: Methodology;
   classes?: {
     root?: string;
@@ -36,6 +39,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 function MethodologyDetailsColumn({
+  nameRaw,
   methodology,
   classes,
   className,
@@ -48,7 +52,7 @@ function MethodologyDetailsColumn({
         <Title className={styles.title} variant="h4">
           Methodology Details
         </Title>
-        {methodology.name && <LineItem label="methodology name" data={methodology.name} />}
+        {nameRaw && <LineItem label="methodology name" data={<BlockContent content={nameRaw} />} />}
         {methodology.version && <LineItem label="version" data={methodology.version} />}
         {methodology.methodologyDesigner && (
           <LineItem label="methodology designer" data={methodology.methodologyDesigner} />

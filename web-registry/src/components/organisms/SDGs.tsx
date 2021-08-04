@@ -1,10 +1,11 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 
-import { SDG } from 'web-components/lib/components/cards/ProjectTopCard';
+import { getSanityImgSrc } from '../../lib/imgSrc';
+import { Sdg, Maybe } from '../../generated/sanity-graphql';
 
 interface Props {
-  sdgs: SDG[];
+  sdgs: Array<Maybe<Sdg>>;
 }
 
 const useStyles = makeStyles<Theme>((theme: Theme) => ({
@@ -38,8 +39,13 @@ function SDGs({ sdgs }: Props): JSX.Element {
 
   return (
     <div className={styles.sdgs}>
-      {sdgs.map((sdg: SDG) => (
-        <img key={sdg.title} className={styles.image} alt={sdg.imageUrl} src={sdg.imageUrl} />
+      {sdgs.map((sdg, i) => (
+        <img
+          key={sdg?.title || i}
+          className={styles.image}
+          alt={sdg?.title || 'sdg'}
+          src={getSanityImgSrc(sdg?.image)}
+        />
       ))}
     </div>
   );

@@ -1,0 +1,8 @@
+fragment pageMetadataFields on PageMetadata {
+  description
+  openGraphImage {
+    asset {
+      url
+    }
+  }
+}

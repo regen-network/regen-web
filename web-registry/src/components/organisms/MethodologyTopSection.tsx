@@ -1,17 +1,19 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 
-import ReactHtmlParser from 'react-html-parser';
-
 import Title from 'web-components/lib/components/title';
 import Description from 'web-components/lib/components/description';
+import { BlockContent } from 'web-components/lib/components/block-content';
 
 import { OptimizedImage } from '../atoms/OptimizedImage';
-import { Methodology } from '../../mocks/cms-duplicates';
+import { Methodology } from '../../mocks/mocks';
 import topoBackground from '../../assets/background.jpg';
+import { Maybe, Scalars } from '../../generated/sanity-graphql';
 
 type Props = {
   methodology: Methodology;
+  nameRaw?: Maybe<Scalars['JSON']>;
+  descriptionRaw?: Maybe<Scalars['JSON']>;
 };
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -73,22 +75,22 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-function MethodologyTopSection({ methodology }: Props): JSX.Element {
+function MethodologyTopSection({ methodology, nameRaw, descriptionRaw }: Props): JSX.Element {
   const styles = useStyles();
 
   return (
     <div className={styles.top}>
       <div className={styles.content}>
         <div className={styles.imageContainer}>
-          <OptimizedImage className={styles.image} src={methodology.imageSrc} alt={methodology?.imageAlt} />
+          <OptimizedImage className={styles.image} src={methodology.imageSrc} alt={methodology.id} />
         </div>
         <div className={styles.text}>
-          <Title variant="h1">{ReactHtmlParser(methodology.name)}</Title>
-          {methodology.description && (
-            <Description className={styles.description}>
-              {ReactHtmlParser(methodology?.description)}
-            </Description>
-          )}
+          <Title variant="h1">
+            <BlockContent content={nameRaw} />
+          </Title>
+          <Description className={styles.description}>
+            <BlockContent content={descriptionRaw} />
+          </Description>
         </div>
       </div>
     </div>

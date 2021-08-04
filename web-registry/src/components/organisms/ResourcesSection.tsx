@@ -1,11 +1,11 @@
 import React from 'react';
 
-import ResourcesCard from 'web-components/lib/components/cards/ResourcesCard';
 import { SliderSection } from 'web-components/lib/components/section/SliderSection';
-import { Resource } from '../../mocks/cms-duplicates';
+import { ResourceFieldsFragment, Maybe } from '../../generated/sanity-graphql';
+import { WrappedResourcesCard } from '../atoms/WrappedResourcesCard';
 
 interface ProjectImpactProps {
-  resources: Resource[];
+  resources?: Maybe<Array<Maybe<ResourceFieldsFragment>>>;
   title?: string;
   classes?: {
     root?: string;
@@ -19,17 +19,7 @@ function ResourcesSection({ resources, title, classes }: ProjectImpactProps): JS
       <SliderSection
         classes={classes}
         title={title || 'Resources'}
-        items={resources.map(resource => (
-          <ResourcesCard
-            key={resource.title}
-            target={resource?.target || '_self'}
-            title={resource.title}
-            description={resource.description}
-            image={{ publicURL: resource.imgSrc }}
-            buttonText={resource?.btnText}
-            link={resource.href}
-          />
-        ))}
+        items={resources?.map(resource => <WrappedResourcesCard resource={resource} />) || []}
       />
     </div>
   );

@@ -19,6 +19,7 @@ interface DocumentationCardProps {
   buttonText: string;
   buttonUrl: string;
   buttonIcon?: JSX.Element;
+  buttonBlankTarget?: boolean;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -56,6 +57,7 @@ function DocumentationCard({
   imageAlt,
   buttonText,
   buttonUrl,
+  buttonBlankTarget,
   buttonIcon,
   version,
   program,
@@ -74,6 +76,7 @@ function DocumentationCard({
         buttonText={buttonText}
         buttonUrl={buttonUrl}
         buttonIcon={buttonIcon}
+        buttonBlankTarget={buttonBlankTarget}
         imageStorageBaseUrl={imageStorageBaseUrl}
         apiServerUrl={apiServerUrl}
       >

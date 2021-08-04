@@ -2,6 +2,7 @@ import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import { Theme, makeStyles } from '@material-ui/core';
 import clsx from 'clsx';
+import ReactHtmlParser from 'react-html-parser';
 
 import Section from 'web-components/src/components/section';
 import { TokenDescription as Description } from './Description';
@@ -58,7 +59,7 @@ const TokenEconomics = (): JSX.Element => {
 
   return (
     <Section title={title} classes={{ root: clsx(styles.root, styles.center), title: styles.title }}>
-      <Description className={clsx(styles.content, styles.center)}>{body}</Description>
+      <Description className={clsx(styles.content, styles.center)}>{ReactHtmlParser(body)}</Description>
     </Section>
   );
 };

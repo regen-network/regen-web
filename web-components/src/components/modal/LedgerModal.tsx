@@ -14,6 +14,7 @@ import Title from '../title';
 import { Party } from '../party/PartyAddress';
 import Tooltip from '../tooltip';
 import BreadcrumbIcon from '../icons/BreadcrumbIcon';
+import { parseText } from '../../utils/textParser';
 
 interface Item {
   label: string;
@@ -259,7 +260,7 @@ function SummaryItem({ item }: { item: Item }): JSX.Element {
             {item.label}
           </Grid>
           <Grid xs={8} className={clsx(classes.value, classes.summaryValue)} item>
-            {typeof item.value === 'string' ? ReactHtmlParser(item.value) : item.value}
+            {parseText(item.value)}
           </Grid>
         </Grid>
       ) : null}

@@ -1,15 +1,18 @@
 import React from 'react';
 import cx from 'clsx';
-import ReactHtmlParser from 'react-html-parser';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 
 import Title from 'web-components/lib/components/title';
+import { BlockContent } from 'web-components/lib/components/block-content';
 import Description from 'web-components/lib/components/description';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import { Label } from 'web-components/lib/components/label';
+
+import { ReviewSectionFieldsFragment, Maybe } from '../../generated/sanity-graphql';
+import { onBtnClick } from '../../lib/button';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -64,13 +67,8 @@ const useStyles = makeStyles(theme => ({
 
 const ReviewProcessInfo: React.FC<{
   className?: string;
-  title: string;
-  description: string;
-  disclaimerTop?: string;
-  disclaimerBottom?: string;
-  btnText?: string;
-  onBtnClick?: () => void;
-  timespan?: string;
+  reviewSection?: Maybe<ReviewSectionFieldsFragment>;
+  openModal: (link: string) => void;
 }> = props => {
   const styles = useStyles();
   return (
@@ -80,34 +78,36 @@ const ReviewProcessInfo: React.FC<{
       flexDirection="column"
       className={cx(styles.root, props.className)}
     >
-      {props.disclaimerTop && (
+      {props.reviewSection?.disclaimerTop && (
         <div>
-          <Typography className={styles.disclaimerTop}>{ReactHtmlParser(props.disclaimerTop)}</Typography>
+          <Typography className={styles.disclaimerTop}>{props.reviewSection?.disclaimerTop}</Typography>
         </div>
       )}
       <div>
         <Title variant="h2" align="center" className={styles.title}>
-          {ReactHtmlParser(props.title)}
+          {props.reviewSection?.title}
         </Title>
       </div>
-      {props.timespan && (
+      {props.reviewSection?.timespan && (
         <div>
-          <Label className={styles.timespan}>{props.timespan}</Label>
+          <Label className={styles.timespan}>{props.reviewSection?.timespan}</Label>
         </div>
       )}
       <div>
         <Description className={styles.description} align="center">
-          {ReactHtmlParser(props.description)}
+          <BlockContent content={props.reviewSection?.descriptionRaw} />
         </Description>
       </div>
-      {props.btnText && props.onBtnClick && (
+      {props.reviewSection?.button && (
         <div>
-          <ContainedButton onClick={props.onBtnClick}>{ReactHtmlParser(props.btnText)}</ContainedButton>
+          <ContainedButton onClick={() => onBtnClick(props.openModal, props.reviewSection?.button)}>
+            {props.reviewSection.button.buttonText}
+          </ContainedButton>
         </div>
       )}
-      {props.disclaimerBottom && (
+      {props.reviewSection?.disclaimerBottom && (
         <div>
-          <Typography className={styles.disclaimerBottom}>{props.disclaimerBottom}</Typography>
+          <Typography className={styles.disclaimerBottom}>{props.reviewSection?.disclaimerBottom}</Typography>
         </div>
       )}
     </Box>

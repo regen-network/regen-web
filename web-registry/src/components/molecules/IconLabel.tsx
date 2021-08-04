@@ -1,18 +1,19 @@
 import React from 'react';
 import { Theme, makeStyles } from '@material-ui/core/styles';
 import { Avatar } from '@material-ui/core';
-import ReactHtmlParser from 'react-html-parser';
 import cx from 'clsx';
 
 import Description from 'web-components/lib/components/description';
 import Title from 'web-components/lib/components/title';
+import { BlockContent } from 'web-components/lib/components/block-content';
+import { Maybe, Scalars } from '../../generated/sanity-graphql';
 
 export interface IconLabelProps {
   className?: string;
   icon: JSX.Element;
   label: string;
   href: string;
-  description?: string;
+  descriptionRaw?: Maybe<Scalars['JSON']>;
   small?: boolean;
 }
 
@@ -96,7 +97,7 @@ const IconLabel = ({
   icon,
   label,
   href,
-  description,
+  descriptionRaw,
   small = false,
 }: IconLabelProps): JSX.Element => {
   const styles = useStyles({ small });
@@ -107,11 +108,11 @@ const IconLabel = ({
       </a>
       <div className={styles.textContainer}>
         <Title className={styles.label} variant="h4">
-          {ReactHtmlParser(label)}
+          {label}
         </Title>
-        {description && (
+        {descriptionRaw && (
           <Description className={styles.linkDescription} align="center">
-            {ReactHtmlParser(description)}
+            {BlockContent(descriptionRaw)}
           </Description>
         )}
       </div>

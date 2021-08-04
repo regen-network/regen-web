@@ -1,0 +1,7 @@
+fragment bottomBannerFields on BottomBanner {
+  title
+  descriptionRaw
+  button {
+    ...buttonFields
+  }
+}

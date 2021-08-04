@@ -1,6 +1,5 @@
 import React from 'react';
 import clsx from 'clsx';
-import ReactHtmlParser from 'react-html-parser';
 import { makeStyles } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 
@@ -15,13 +14,13 @@ interface OverviewCardProps {
     root?: string;
     icon?: string;
   };
-  icon: JSX.Element;
+  icon?: JSX.Element;
   item: OverviewItem;
 }
 
 interface OverviewItem {
   title: string;
-  description: string;
+  description: JSX.Element;
   tooltip?: string;
 }
 
@@ -122,7 +121,7 @@ function OverviewCard({ className, classes, icon, item }: OverviewCardProps): JS
     <Card className={clsx(className, styles.root, classes && classes.root)}>
       <div className={styles.top}>
         <div className={clsx(styles.cardTopThird)} />
-        <div className={clsx(styles.cardTopThird, styles.iconWrap)}>{icon}</div>
+        {icon && <div className={clsx(styles.cardTopThird, styles.iconWrap)}>{icon}</div>}
         <div className={clsx(styles.cardTopThird, styles.cardTopRight)}>
           {item.tooltip && (
             <InfoTooltip title={item.tooltip || ''} arrow placement="top">
@@ -140,7 +139,7 @@ function OverviewCard({ className, classes, icon, item }: OverviewCardProps): JS
             {item.title}
           </div>
         </Box>
-        <div className={styles.description}>{ReactHtmlParser(item.description)}</div>
+        <div className={styles.description}>{item.description}</div>
       </div>
     </Card>
   );

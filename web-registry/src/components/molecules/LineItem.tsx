@@ -1,13 +1,13 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core';
-import ReactHtmlParser from 'react-html-parser';
 
+import { parseText } from 'web-components/lib/utils/textParser';
 import Description from 'web-components/lib/components/description';
 import { Label } from 'web-components/lib/components/label';
 
 interface LineItemProps {
   label: string;
-  data: string;
+  data: string | JSX.Element;
 }
 
 const useStyles = makeStyles(theme => ({
@@ -33,7 +33,7 @@ const LineItem = ({ label, data }: LineItemProps): JSX.Element => {
   return (
     <div className={styles.lineItem}>
       <Label className={styles.label}>{label}</Label>
-      <Description className={styles.data}>{ReactHtmlParser(data)}</Description>
+      <Description className={styles.data}>{parseText(data)}</Description>
     </div>
   );
 };

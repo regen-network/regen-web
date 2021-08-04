@@ -9,7 +9,6 @@ import Title from 'web-components/lib/components/title';
 import { BlockContent } from 'web-components/lib/components/block-content';
 
 import { StepCardFieldsFragment, Maybe, Scalars } from '../../generated/sanity-graphql';
-// import { ProcessStepCard } from '../atoms/ProcessStepCard';
 import { WrappedStepCard } from '../atoms';
 
 type Props = {

@@ -45,9 +45,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       fontSize: theme.typography.pxToRem(16),
       lineHeight: theme.typography.pxToRem(25),
     },
-    '& p': {
-      margin: 0,
-    },
   },
 }));
 

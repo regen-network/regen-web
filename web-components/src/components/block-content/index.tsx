@@ -1,5 +1,6 @@
 import React from 'react';
 import BlockContent from '@sanity/block-content-to-react';
+import { makeStyles, Theme } from '@material-ui/core';
 
 // const serializers = {
 //   types: {
@@ -11,9 +12,25 @@ import BlockContent from '@sanity/block-content-to-react';
 //   },
 // };
 
+const useStyles = makeStyles((theme: Theme) => ({
+  root: {
+    '& p:first-child': {
+      marginTop: 0,
+    },
+    '& p:last-child': {
+      marginBottom: 0,
+    },
+  },
+}));
+
 const CustomBlockContent: React.FC<{ content?: any }> = ({ content }) => {
+  const styles = useStyles();
   if (content) {
-    return <BlockContent blocks={content} />;
+    return (
+      <div className={styles.root}>
+        <BlockContent blocks={content} />
+      </div>
+    );
   }
   return <></>;
 };

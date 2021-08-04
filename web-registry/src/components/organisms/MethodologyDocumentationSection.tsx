@@ -77,6 +77,7 @@ function MethodologyDocumentationSection({ methodology, documentation, nameRaw }
               buttonIcon={<EyeIcon />}
               version={methodology.version}
               program={methodology.program}
+              buttonBlankTarget={documentation.button?.buttonBlankTarget ? true : false}
             />
           )}
           <DocumentationCard
@@ -86,6 +87,7 @@ function MethodologyDocumentationSection({ methodology, documentation, nameRaw }
             imageAlt={methodology?.creditClassImageAltText}
             buttonText={'learn more'}
             buttonUrl={methodology.creditClassUrl}
+            buttonBlankTarget
           />
         </div>
         <MethodologyDetailsColumn

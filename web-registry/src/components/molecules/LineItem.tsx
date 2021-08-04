@@ -25,9 +25,6 @@ const useStyles = makeStyles(theme => ({
   data: {
     fontSize: theme.typography.pxToRem(16),
     fontWeight: 400,
-    '& p': {
-      margin: 0,
-    },
   },
 }));
 

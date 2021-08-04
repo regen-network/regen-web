@@ -253,7 +253,7 @@ function CreditClassDetail({ isLandSteward }: CreditDetailsProps): JSX.Element {
             resources={isLandSteward ? content?.landSteward?.resources : content?.buyer?.resources}
           />
         </div>
-        {isLandSteward && <CreditClassConnectSection connectSection={content?.landSteward?.connectSection} />}
+        {/* {isLandSteward && <CreditClassConnectSection connectSection={content?.landSteward?.connectSection} />} TODO: hidden until resource is ready */}
         <SwitchFooter
           activeOption={isLandSteward ? 'Land Steward' : 'Buyer'}
           buttonText={

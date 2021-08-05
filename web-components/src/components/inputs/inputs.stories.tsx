@@ -6,6 +6,7 @@ import { withKnobs } from '@storybook/addon-knobs';
 
 import Toggle from './Toggle';
 import TextField from './TextField';
+import { RoleField } from './RoleField';
 import OnBoardingCard from '../cards/OnBoardingCard';
 import OnBoardingSection from '../section/OnBoardingSection';
 // import CheckboxLabel from 'web-components/lib/components/inputs/CheckboxLabel';
@@ -247,5 +248,51 @@ function ToggleVariants(): JSX.Element {
     </OnBoardingSection>
   );
 }
+function RoleInput(): JSX.Element {
+  // const entityGroups = [
+  //   { organizations: [{ name: 'Impact Ag', id: 1 }] },
+  //   { individuals: [{ name: 'Toby Grogan', id: 2 }] },
+  // ];
+
+  const entities = [
+    { name: 'Impact Ag', id: 1, type: 'Organization' },
+    { name: 'Toby Grogan', id: 2, type: 'Individual' },
+  ];
+
+  return (
+    <OnBoardingSection title="Role form" formContainer>
+      <Formik
+        initialValues={{
+          role: '',
+        }}
+        onSubmit={(values, actions) => {
+          alert(JSON.stringify(values, null, 2));
+          actions.resetForm();
+        }}
+      >
+        {({ handleChange, values }) => {
+          console.log(values);
+          return (
+            <Form>
+              <OnBoardingCard>
+                <Field
+                  label="Role"
+                  component={RoleField}
+                  options={entities}
+                  getOptionLabel={entity => entity.name}
+                  name="role"
+                />
+              </OnBoardingCard>
+              <Button color="primary" variant="contained" fullWidth type="submit">
+                Submit
+              </Button>
+            </Form>
+          );
+        }}
+      </Formik>
+    </OnBoardingSection>
+  );
+}
 
 export const toggle = (): JSX.Element => <ToggleVariants />;
+export const rolesInput = (): JSX.Element => <RoleInput />;

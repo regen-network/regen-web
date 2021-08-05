@@ -20,7 +20,7 @@ import {
   StepsSection,
   MoreProjectsSection,
   MediaSection,
-  CreditClassConnectSection,
+  // CreditClassConnectSection,
   CreditClassOverviewSection,
 } from '../components/organisms';
 import hero from '../assets/credit-class-grasslands-hero.png';
@@ -253,7 +253,7 @@ function CreditClassDetail({ isLandSteward }: CreditDetailsProps): JSX.Element {
             resources={isLandSteward ? content?.landSteward?.resources : content?.buyer?.resources}
           />
         </div>
-        {isLandSteward && <CreditClassConnectSection connectSection={content?.landSteward?.connectSection} />}
+        {/* {isLandSteward && <CreditClassConnectSection connectSection={content?.landSteward?.connectSection} />} TODO: hidden until resource is ready */}
         <SwitchFooter
           activeOption={isLandSteward ? 'Land Steward' : 'Buyer'}
           buttonText={

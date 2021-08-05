@@ -5,14 +5,17 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Grid from '@material-ui/core/Grid';
 
 import ImageActionCard from 'web-components/lib/components/cards/ImageActionCard';
+import { BlockContent } from 'web-components/lib/components/block-content';
 
-import { BasicCreditClass } from '../../mocks';
+import { CreditClass } from '../../mocks';
 import { getImgSrc } from '../../lib/imgSrc';
+import { openLink } from '../../lib/button';
+import { CreditClass as CreditClassContent, Maybe } from '../../generated/sanity-graphql';
 
 type Props = {
   btnText: string;
-  creditClasses: BasicCreditClass[];
-  onClickCard: (c: BasicCreditClass) => void;
+  creditClasses: CreditClass[];
+  creditClassesContent?: Maybe<Array<CreditClassContent>>;
   justify?: 'center' | 'space-around' | 'space-between' | 'space-evenly' | 'flex-end' | 'flex-start';
   classes?: {
     root?: string;
@@ -45,25 +48,28 @@ const CreditClassCards: React.FC<Props> = ({ justify = 'center', ...props }) => 
       className={clsx(styles.root, props.classes && props.classes.root)}
       spacing={isMobile ? 0 : 5}
     >
-      {props.creditClasses.map((c, i) => (
-        <Grid
-          item
-          xs={12}
-          sm={6}
-          md={4}
-          key={i}
-          className={clsx(styles.card, props.classes && props.classes.card)}
-        >
-          <ImageActionCard
+      {props.creditClasses.map((c, i) => {
+        const creditClassContent = props.creditClassesContent?.find(creditClass => creditClass.path === c.id);
+        return (
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            md={4}
             key={i}
-            btnText={props.btnText}
-            description={c.description}
-            imgSrc={getImgSrc(c.imgSrc)}
-            onClick={() => props.onClickCard(c)}
-            title={c.name}
-          />
-        </Grid>
-      ))}
+            className={clsx(styles.card, props.classes && props.classes.card)}
+          >
+            <ImageActionCard
+              key={i}
+              btnText={props.btnText}
+              description={<BlockContent content={creditClassContent?.shortDescriptionRaw} />}
+              imgSrc={getImgSrc(c.imgSrc)}
+              onClick={() => openLink(`/credit-classes/${creditClassContent?.path}`, true)}
+              title={<BlockContent content={creditClassContent?.nameRaw} />}
+            />
+          </Grid>
+        );
+      })}
     </Grid>
   );
 };

@@ -6,12 +6,15 @@ import cx from 'clsx';
 import Card from 'web-components/lib/components/cards/Card';
 import Title from 'web-components/lib/components/title';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
+import { BlockContent } from 'web-components/lib/components/block-content';
 
 import { LineItem } from './LineItem';
-import { CreditClass } from '../../mocks/cms-duplicates';
+import { CreditClass } from '../../mocks/mocks';
+import { Maybe, Scalars } from '../../generated/sanity-graphql';
 
 interface CreditClassDetailsColumnProps {
   creditClass: CreditClass;
+  nameRaw?: Maybe<Scalars['JSON']>;
   classes?: {
     root?: string;
   };
@@ -89,6 +92,7 @@ const useStyles = makeStyles(theme => ({
 
 function CreditClassDetailsColumn({
   creditClass,
+  nameRaw,
   classes,
   className,
 }: CreditClassDetailsColumnProps): JSX.Element {
@@ -127,7 +131,7 @@ function CreditClassDetailsColumn({
             </Title>
           </div>
         </div>
-        {creditClass.name && <LineItem label="credit name" data={creditClass.name} />}
+        {nameRaw && <LineItem label="credit name" data={<BlockContent content={nameRaw} />} />}
         {creditClass.version && <LineItem label="version" data={creditClass.version} />}
         {creditClass.creditDesigner && <LineItem label="credit designer" data={creditClass.creditDesigner} />}
         {creditClass.ecoType && <LineItem label="ecotype" data={creditClass.ecoType} />}

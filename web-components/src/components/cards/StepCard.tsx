@@ -2,7 +2,6 @@ import React from 'react';
 import { makeStyles, Theme, useTheme } from '@material-ui/core';
 import { CardMedia } from '@material-ui/core';
 import cx from 'clsx';
-import ReactHtmlParser from 'react-html-parser';
 
 import Card from '../cards/Card';
 import ArrowFilledIcon from '../icons/ArrowFilledIcon';
@@ -17,33 +16,24 @@ import ContainedButton from '../buttons/ContainedButton';
 
 export interface StepCardProps {
   className?: string;
-  icon: JSX.Element;
+  icon?: JSX.Element;
   step?: Step;
   apiServerUrl?: string;
   imageStorageBaseUrl?: string;
 }
 
 export interface Step {
-  tagName?: string;
+  tagName?: string | null;
   title: string;
-  description?: string;
+  description?: string | JSX.Element;
   faqs?: QuestionItem[];
-  icon?: string;
-  imageSrc?: string;
-  videoSrc?: string;
+  imageSrc?: string | null;
+  videoSrc?: string | null;
   imageAlt?: string;
   isActive?: boolean;
   stepNumber: number | string;
-  href?: string;
-  btnText?: string;
+  btnText?: string | null;
   onBtnClick?: () => void;
-}
-
-export interface StepSequence {
-  steps: Step[];
-  title?: string;
-  preTitle?: string;
-  description?: string;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -172,7 +162,6 @@ const fallbackStep: Step = {
   tagName: 'Not found',
   isActive: false,
   description: 'Please set up content for this step number',
-  icon: 'none',
   faqs: [],
 };
 
@@ -212,9 +201,11 @@ function StepCard({
         )}
         <div className={styles.cardTop}>
           <div className={styles.cardTopThird}></div>
-          <div className={cx(styles.cardTopThird, styles.cardTopCenter)}>
-            <StepCircleBadge icon={icon} isActive={step.isActive} />
-          </div>
+          {icon && (
+            <div className={cx(styles.cardTopThird, styles.cardTopCenter)}>
+              <StepCircleBadge icon={icon} isActive={step.isActive} />
+            </div>
+          )}
           <div className={cx(styles.cardTopThird, styles.cardTopRight)}>
             {step.tagName && (
               <Tag className={styles.tag} name={step.tagName} color={theme.palette.secondary.main} />
@@ -228,9 +219,7 @@ function StepCard({
           <Title variant="h4" className={cx(styles.stepTitle, step.isActive && styles.activeTitle)}>
             {step.title}
           </Title>
-          <Description className={styles.stepDescription}>
-            {ReactHtmlParser(step.description || '')}
-          </Description>
+          <Description className={styles.stepDescription}>{step.description}</Description>
           {!!step.btnText && !!step.onBtnClick && (
             <ContainedButton onClick={step.onBtnClick} className={styles.btn}>
               {step.btnText}

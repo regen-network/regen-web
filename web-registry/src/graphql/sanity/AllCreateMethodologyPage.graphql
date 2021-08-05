@@ -1,0 +1,33 @@
+query allCreateMethodologyPage {
+  allCreateMethodologyPage {
+    heroSection {
+      ...heroSectionFields
+    }
+    stepCardSection {
+      title
+      descriptionRaw
+      stepCards {
+        ...stepCardFields
+      }
+    }
+    outcomeSection {
+      ...heroSectionFields
+    }
+    outcomes {
+      ...ecologicalOutcomeFields
+    }
+    resources {
+      ...resourceFields
+    }
+    peerReviewSection {
+      ...bottomBannerFields
+    }
+    createCreditClassSection {
+      ...bottomBannerFields
+    }
+    footerLink
+    metadata {
+      ...pageMetadataFields
+    }
+  }
+}

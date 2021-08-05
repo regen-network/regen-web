@@ -1,14 +1,18 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
+import { Crop } from 'react-image-crop';
+
 import ImageCrop from '../image-crop';
 import Title from '../title';
 import Modal from './';
+
 export interface CropImageModalProps {
   open: boolean;
   onClose: () => void;
   onSubmit: (image: HTMLImageElement) => void;
   circularCrop?: boolean;
   initialImage: string;
+  fixedCrop?: Crop;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -46,6 +50,7 @@ export default function CropImageModal({
   onSubmit,
   circularCrop,
   initialImage,
+  fixedCrop,
 }: CropImageModalProps): JSX.Element {
   const classes = useStyles();
 
@@ -60,6 +65,7 @@ export default function CropImageModal({
           onCropSubmit={onSubmit}
           onCancel={onClose}
           circularCrop={circularCrop}
+          fixedCrop={fixedCrop}
         />
       </div>
     </Modal>

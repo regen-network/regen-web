@@ -1,22 +1,22 @@
 import React, { useState } from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import cx from 'clsx';
-import ReactHtmlParser from 'react-html-parser';
 
 import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
-import { Step, StepCardProps } from 'web-components/lib/components/cards/StepCard';
 import Modal from 'web-components/lib/components/modal';
-
-import { ProcessStepCard } from '../atoms/ProcessStepCard';
 import Description from 'web-components/lib/components/description';
 import Title from 'web-components/lib/components/title';
+import { BlockContent } from 'web-components/lib/components/block-content';
+
+import { StepCardFieldsFragment, Maybe, Scalars } from '../../generated/sanity-graphql';
+import { WrappedStepCard } from '../atoms';
 
 type Props = {
   className?: string;
-  title?: string;
-  preTitle?: string;
-  description?: string;
-  steps: Step[];
+  title?: Maybe<string>;
+  preTitle?: Maybe<string>;
+  descriptionRaw?: Maybe<Scalars['JSON']>;
+  stepCards?: Maybe<Array<Maybe<StepCardFieldsFragment>>>;
 };
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -79,28 +79,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-function StepsSection({ className, steps, title, preTitle, description }: Props): JSX.Element {
+function StepsSection({ className, stepCards, title, preTitle, descriptionRaw }: Props): JSX.Element {
   const styles = useStyles();
   const [modalIframeLink, setModalIframeLink] = useState<string>('');
-
-  const openLink = (url: string): void => void window.open(url, '_blank', 'noopener');
-
-  const openModalLink = (modalLink: string): void => {
-    const iframeLink = modalLink.replace('MODAL:', '');
-    setModalIframeLink(iframeLink);
-  };
-
-  const stepCards: StepCardProps[] = steps.map(({ href, icon, ...props }) => ({
-    icon: icon ? <img src={require(`../../assets/${icon}`)} alt={title} /> : <div />,
-    step: {
-      ...props,
-      onBtnClick: href
-        ? href.includes('MODAL')
-          ? () => openModalLink(href)
-          : () => openLink(href)
-        : undefined,
-    },
-  }));
 
   return (
     <OnBoardingSection
@@ -112,13 +93,15 @@ function StepsSection({ className, steps, title, preTitle, description }: Props)
       <div className={styles.titleWrap}>
         {preTitle && <div className={styles.preTitle}>{preTitle}</div>}
         {title && <Title className={styles.sectionTitle}>{title}</Title>}
-        {description && (
-          <Description className={styles.description}>{ReactHtmlParser(description)}</Description>
+        {descriptionRaw && (
+          <Description className={styles.description}>
+            <BlockContent content={descriptionRaw} />
+          </Description>
         )}
       </div>
       <div className={styles.steps}>
-        {stepCards.map(card => (
-          <ProcessStepCard icon={card.icon} step={card.step} key={card.step?.stepNumber} />
+        {stepCards?.map((card, i) => (
+          <WrappedStepCard key={i} stepNumber={i} stepCard={card} openModal={setModalIframeLink} />
         ))}
       </div>
       <Modal open={!!modalIframeLink} onClose={() => setModalIframeLink('')} className={styles.modal}>

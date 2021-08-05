@@ -50,6 +50,7 @@ import CoBenefitsIcon from 'web-components/lib/components/icons/CoBenefitsIcon';
 import CountingIcon from 'web-components/lib/components/icons/CountingIcon';
 import SatelliteIcon from 'web-components/lib/components/icons/SatelliteIcon';
 import SoilSampleIcon from 'web-components/lib/components/icons/SoilSampleIcon';
+import TrashIcon from 'web-components/lib/components/icons/TrashIcon';
 
 import { withKnobs, text } from '@storybook/addon-knobs';
 
@@ -162,3 +163,5 @@ export const countingIcon = (): JSX.Element => <CountingIcon />;
 export const satelliteIcon = (): JSX.Element => <SatelliteIcon />;
 
 export const soilSampleIcon = (): JSX.Element => <SoilSampleIcon />;
+
+export const trashIcon = (): JSX.Element => <TrashIcon />;

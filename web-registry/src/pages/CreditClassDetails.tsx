@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import { useParams, useHistory, useRouteMatch, Switch, Route } from 'react-router-dom';
 import cx from 'clsx';
-import ReactHtmlParser from 'react-html-parser';
 
 import Section from 'web-components/lib/components/section';
 import Description from 'web-components/lib/components/description';
@@ -10,11 +9,10 @@ import Modal from 'web-components/lib/components/modal';
 import Banner from 'web-components/lib/components/banner';
 import MoreInfoForm from 'web-components/lib/components/form/MoreInfoForm';
 import { SwitchFooter } from 'web-components/lib/components/fixed-footer/SwitchFooter';
-import { StepSequence } from 'web-components/lib/components/cards/StepCard';
+import { BlockContent } from 'web-components/lib/components/block-content';
 
 import mock from '../mocks/mock.json';
 import { Project } from '../mocks';
-import { creditClasses } from '../mocks/cms-duplicates';
 import { HeroTitle } from '../components/molecules';
 import {
   ImpactSection,
@@ -27,6 +25,9 @@ import {
 } from '../components/organisms';
 import hero from '../assets/credit-class-grasslands-hero.png';
 import getApiUri from '../lib/apiUri';
+import { onBtnClick } from '../lib/button';
+import { useAllCreditClassQuery } from '../generated/sanity-graphql';
+import { client } from '../sanity';
 
 interface CreditDetailsProps {
   isLandSteward?: boolean;
@@ -123,18 +124,20 @@ function CreditClassDetail({ isLandSteward }: CreditDetailsProps): JSX.Element {
 
   let { creditClassId } = useParams<{ creditClassId: string }>();
 
-  const creditClass = creditClasses.find(creditClass => creditClass.id === creditClassId);
+  const { data } = useAllCreditClassQuery({ client });
+  const content = data?.allCreditClass?.find(creditClass => creditClass.path === creditClassId);
+  const creditClass = mock?.creditClasses.find(creditClass => creditClass.id === creditClassId);
 
   const getFeaturedProjects = (): JSX.Element => {
     const featuredProjects = mock?.projects.filter(project =>
-      creditClass?.landSteward.featuredProjectIds.some((projectId: string) => projectId === project.id),
+      content?.landSteward?.featuredProjectIds?.some(projectId => projectId === project.id),
     );
 
     return featuredProjects?.length > 0 ? (
       <div className="topo-background-alternate">
         <MoreProjectsSection
           classes={{ root: styles.sectionPadding, title: styles.title }}
-          title="Featured Projects"
+          title={content?.landSteward?.projectsTitle || 'Featured Projects'}
           projects={featuredProjects}
         />
       </div>
@@ -150,7 +153,7 @@ function CreditClassDetail({ isLandSteward }: CreditDetailsProps): JSX.Element {
       <div className="topo-background-alternate">
         <MoreProjectsSection
           classes={{ root: styles.sectionPadding, title: styles.title }}
-          title={creditClass?.buyer?.projectsTitle}
+          title={content?.buyer?.projectsTitle || 'More Projects'}
           projects={projects}
         />
       </div>
@@ -160,23 +163,15 @@ function CreditClassDetail({ isLandSteward }: CreditDetailsProps): JSX.Element {
   };
 
   const onCtaClick = (): void => {
-    if (isLandSteward && creditClass) {
-      return handleLink(creditClass.landSteward.ctaHref);
+    if (isLandSteward && content) {
+      return onBtnClick(openModalLink, content?.landSteward?.ctaButton);
     } else {
       return setBuyerModalOpen(true);
     }
   };
 
-  const handleLink = (link?: string): void => {
-    if (!!link) return link.includes('MODAL') ? openModalLink(link) : openLink(link);
-    return alert('Call to action not set!');
-  };
-
-  const openLink = (url: string): void => void window.open(url, '_blank', 'noopener');
-
   const openModalLink = (modalLink: string): void => {
-    const iframeLink = modalLink.replace('MODAL:', '');
-    setModalIframeLink(iframeLink);
+    setModalIframeLink(modalLink);
   };
 
   const setContent = (): void => {
@@ -190,65 +185,82 @@ function CreditClassDetail({ isLandSteward }: CreditDetailsProps): JSX.Element {
           isBanner
           img={hero}
           title={
-            isLandSteward ? creditClass.landSteward.heroSection.title : creditClass.buyer.heroSection.title
+            isLandSteward ? content?.landSteward?.heroSection?.title : content?.buyer?.heroSection?.title
           }
-          description={
+          descriptionRaw={
             isLandSteward
-              ? creditClass.landSteward.heroSection.description
-              : creditClass.buyer.heroSection.description
+              ? content?.landSteward?.heroSection?.descriptionRaw
+              : content?.buyer?.heroSection?.descriptionRaw
           }
           classes={{ main: styles.heroMain }}
         />
         <Section
-          title={creditClass.name}
+          title={content?.nameRaw ? <BlockContent content={content?.nameRaw} /> : ''}
           classes={{ root: styles.introSection, title: styles.title, titleWrap: styles.titleWrap }}
         >
           <Description className={styles.sectionDescription}>
-            {ReactHtmlParser(creditClass.description)}
+            <BlockContent content={content?.descriptionRaw} />
           </Description>
         </Section>
         <div className="topo-background-alternate">
-          {creditClass.impact && <ImpactSection title="Ecological Impact" impacts={creditClass.impact} />}
+          {content?.ecologicalImpact && (
+            <ImpactSection title="Ecological Impact" impacts={content?.ecologicalImpact} />
+          )}
           {!isLandSteward && (
-            <CreditClassOverviewSection className={styles.overviewSection} creditClass={creditClass} />
+            <CreditClassOverviewSection
+              className={styles.overviewSection}
+              creditClass={creditClass}
+              nameRaw={content?.nameRaw}
+              overviewCards={content?.overviewCards}
+              sdgs={content?.sdgs}
+            />
           )}
         </div>
         {isLandSteward && (
           <>
             {getFeaturedProjects()}
             <div className="topo-background-alternate">
-              <CreditClassOverviewSection creditClass={creditClass} />
+              <CreditClassOverviewSection
+                creditClass={creditClass}
+                nameRaw={content?.nameRaw}
+                overviewCards={content?.overviewCards}
+                sdgs={content?.sdgs}
+              />
             </div>
           </>
         )}
         {!isLandSteward && getAllProjects()}
         {isLandSteward &&
-          creditClass.landSteward?.steps?.map((stepSequence: StepSequence, index) => (
+          content?.landSteward?.steps?.map((stepSequence, index) => (
             <div className={cx('topo-background-alternate', styles.flex)} key={index}>
               <StepsSection
                 className={styles.stepsSection}
                 title={stepSequence?.title}
                 preTitle={stepSequence?.preTitle}
-                description={stepSequence?.description}
-                steps={stepSequence.steps}
+                descriptionRaw={stepSequence?.descriptionRaw}
+                stepCards={stepSequence?.stepCards}
               />
             </div>
           ))}
         <div className="topo-background-alternate">
           <MediaSection
             header="Videos"
-            items={isLandSteward ? creditClass.landSteward?.videos : creditClass.buyer?.videos}
+            items={isLandSteward ? content?.landSteward?.videos : content?.buyer?.videos}
           />
         </div>
         <div className="topo-background-alternate">
           <ResourcesSection
-            resources={isLandSteward ? creditClass.landSteward.resources : creditClass.buyer.resources}
+            resources={isLandSteward ? content?.landSteward?.resources : content?.buyer?.resources}
           />
         </div>
-        {isLandSteward && <CreditClassConnectSection creditClass={creditClass} />}
+        {isLandSteward && <CreditClassConnectSection connectSection={content?.landSteward?.connectSection} />}
         <SwitchFooter
           activeOption={isLandSteward ? 'Land Steward' : 'Buyer'}
-          buttonText={isLandSteward ? 'get started' : 'buy credits'}
+          buttonText={
+            isLandSteward
+              ? content?.landSteward?.ctaButton?.buttonText || 'get started'
+              : content?.buyer?.ctaButton?.buttonText || 'buy credits'
+          }
           label="I am a:"
           leftOption="Land Steward"
           rightOption="Buyer"

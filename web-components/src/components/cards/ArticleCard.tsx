@@ -6,6 +6,22 @@ import Description from '../description';
 import OutlinedButton from '../buttons/OutlinedButton';
 import PlayIcon from '../icons/PlayIcon';
 
+// TODO When migrating website content to Sanity,
+// remove buttonText props from ArticleCard and use
+// this function instead
+export function getBtnText(type?: string | null): string {
+  switch (type) {
+    case 'video':
+      return 'watch video';
+    case 'article':
+      return 'read article';
+    case 'podcast':
+      return 'listen to podcast';
+    default:
+      return 'read article';
+  }
+}
+
 export interface ArticleCardProps {
   buttonText?: string;
   name: string;

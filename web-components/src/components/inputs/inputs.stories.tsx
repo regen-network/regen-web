@@ -249,10 +249,6 @@ function ToggleVariants(): JSX.Element {
   );
 }
 function RoleInput(): JSX.Element {
-  // const entityGroups = [
-  //   { organizations: [{ name: 'Impact Ag', id: 1 }] },
-  //   { individuals: [{ name: 'Toby Grogan', id: 2 }] },
-  // ];
 
   const entities = [
     { name: 'Impact Ag', id: 1, type: 'Organization' },
@@ -270,8 +266,7 @@ function RoleInput(): JSX.Element {
           actions.resetForm();
         }}
       >
-        {({ handleChange, values }) => {
-          console.log(values);
+        {() => {
           return (
             <Form>
               <OnBoardingCard>

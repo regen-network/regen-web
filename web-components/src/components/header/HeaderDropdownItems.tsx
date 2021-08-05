@@ -4,27 +4,30 @@ import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 
 import Title from '../title';
-import { NavLink, NavLinkProps } from './NavLink';
+import { NavLinkProps } from './NavLink';
 
-const useStyles = makeStyles(theme => ({
-  item: {
-    padding: theme.spacing(1.5, 0),
-    '&:first-of-type': {
-      paddingTop: 0,
+const useStyles = makeStyles(theme => {
+  const { pxToRem } = theme.typography;
+  return {
+    item: {
+      padding: theme.spacing(1.5, 0),
+      '&:first-of-type': {
+        paddingTop: 0,
+      },
+      '&:last-of-type': {
+        paddingBottom: 0,
+      },
     },
-    '&:last-of-type': {
-      paddingBottom: 0,
+    label: {
+      fontSize: pxToRem(14),
+      letterSpacing: '1px',
+      lineHeight: pxToRem(17.57),
+      fontWeight: 800,
+      color: theme.palette.info.dark,
+      textTransform: 'uppercase',
     },
-  },
-  label: {
-    fontSize: '14px',
-    letterSpacing: '1px',
-    lineHeight: theme.typography.pxToRem(17.57),
-    fontWeight: 800,
-    color: theme.palette.info.dark,
-    textTransform: 'uppercase',
-  },
-}));
+  };
+});
 
 export type HeaderDropdownItemProps = {
   title: string;

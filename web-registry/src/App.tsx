@@ -77,7 +77,6 @@ const App: React.FC = (): JSX.Element => {
         <Switch>
           <Route exact path="/">
             <Home />
-            {/* <Redirect to="/projects/wilmot" /> */}
           </Route>
           <Route exact path="/verify-email">
             <VerifyEmail />

@@ -7,6 +7,7 @@ import FieldFormControl from './FieldFormControl';
 import { Label } from '../label';
 import OrganizationIcon from '../icons/OrganizationIcon';
 import UserIcon from '../icons/UserIcon';
+import { AddOrganizationModal } from '../modal/AddOrganizationModal';
 const filter = createFilterOptions<RoleOptionType>();
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -55,62 +56,72 @@ const RoleField: React.FC<Props> = ({
   ...fieldProps
 }) => {
   const { form, field } = fieldProps;
+  const [newOrganizationName, setNewOrganizationName] = useState('');
 
   const styles = useStyles();
   return (
-    <FieldFormControl
-      className={className}
-      label={label}
-      disabled={form.isSubmitting}
-      optional={optional}
-      {...fieldProps}
-    >
-      {({ handleChange, handleBlur }) => (
-        <Autocomplete
-          id="combo-box"
-          options={options || []}
-          freeSolo
-          selectOnFocus
-          clearOnBlur
-          handleHomeEndKeys
-          getOptionLabel={o => (o.name && getOptionLabel ? getOptionLabel(o) : '')} //
-          renderOption={o => o.name || o}
-          onChange={(event, value, r) => {
-            handleChange(value.id);
-          }}
-          onBlur={handleBlur}
-          style={{ width: 300 }}
-          renderInput={props => (
-            <TextField {...props} placeholder="Start typing or choose entity" variant="outlined" />
-          )}
-          filterOptions={(options, params) => {
-            const filtered = filter(options, params);
+    <>
+      <FieldFormControl
+        className={className}
+        label={label}
+        disabled={form.isSubmitting}
+        optional={optional}
+        {...fieldProps}
+      >
+        {({ handleChange, handleBlur }) => (
+          <Autocomplete
+            id="combo-box"
+            options={options || []}
+            freeSolo
+            selectOnFocus
+            clearOnBlur
+            handleHomeEndKeys
+            getOptionLabel={o => (o.name && getOptionLabel ? getOptionLabel(o) : '')} //
+            renderOption={o => o.name || o}
+            onChange={(event, value, r) => {
+              handleChange(value.id);
+            }}
+            onBlur={handleBlur}
+            style={{ width: 300 }}
+            renderInput={props => (
+              <TextField {...props} placeholder="Start typing or choose entity" variant="outlined" />
+            )}
+            filterOptions={(options, params) => {
+              const filtered = filter(options, params);
 
-            // Suggest the creation of a new value
-            if (params.inputValue !== '') {
-              filtered.push(
-                ((
-                  <div className={styles.add} onClick={() => console.log('add org', params.inputValue)}>
-                    <OrganizationIcon />
-                    <Label className={styles.label}>+ Add New Organization</Label>
-                  </div>
-                ) as unknown) as RoleOptionType,
-              );
-              filtered.push(
-                ((
-                  <div className={styles.add} onClick={() => console.log('add indiv', params.inputValue)}>
-                    <UserIcon />
-                    <Label className={styles.label}>+ Add New Individual</Label>
-                  </div>
-                ) as unknown) as RoleOptionType,
-              );
-            }
+              // Suggest the creation of a new value
+              if (params.inputValue !== '') {
+                filtered.push(
+                  ((
+                    <div className={styles.add} onClick={() => setNewOrganizationName(params.inputValue)}>
+                      <OrganizationIcon />
+                      <Label className={styles.label}>+ Add New Organization</Label>
+                    </div>
+                  ) as unknown) as RoleOptionType,
+                );
+                filtered.push(
+                  ((
+                    <div className={styles.add} onClick={() => console.log('add indiv', params.inputValue)}>
+                      <UserIcon />
+                      <Label className={styles.label}>+ Add New Individual</Label>
+                    </div>
+                  ) as unknown) as RoleOptionType,
+                );
+              }
 
-            return filtered;
-          }}
+              return filtered;
+            }}
+          />
+        )}
+      </FieldFormControl>
+      {newOrganizationName && (
+        <AddOrganizationModal
+          organizationName={newOrganizationName}
+          onClose={() => setNewOrganizationName('')}
+          onSubmit={console.log}
         />
       )}
-    </FieldFormControl>
+    </>
   );
 };
 

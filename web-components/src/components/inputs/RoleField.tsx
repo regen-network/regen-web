@@ -37,6 +37,7 @@ interface Props extends FieldProps {
   options?: any[];
   getOptionLabel?: (v: any) => string;
   triggerOnChange?: (v: any) => Promise<void>;
+  mapboxToken: string;
 }
 
 interface RoleOptionType {
@@ -53,6 +54,7 @@ const RoleField: React.FC<Props> = ({
   optional,
   placeholder,
   triggerOnChange,
+  mapboxToken,
   ...fieldProps
 }) => {
   const { form, field } = fieldProps;
@@ -119,6 +121,7 @@ const RoleField: React.FC<Props> = ({
           organizationName={newOrganizationName}
           onClose={() => setNewOrganizationName('')}
           onSubmit={console.log}
+          mapboxToken={mapboxToken}
         />
       )}
     </>

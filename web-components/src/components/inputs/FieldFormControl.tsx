@@ -43,6 +43,9 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       fontSize: theme.spacing(3),
     },
   }),
+  label: {
+    marginBottom: theme.spacing(3),
+  },
 }));
 
 /**
@@ -78,6 +81,7 @@ export default function FieldFormControl({
   return (
     <FormControl className={className} fullWidth>
       <FormLabel
+        className={styles.label}
         label={label}
         labelSubText={labelSubText}
         optional={optional}

@@ -275,6 +275,7 @@ function RoleInput(): JSX.Element {
                   options={entities}
                   getOptionLabel={entity => entity.name}
                   name="role"
+                  mapboxToken={process.env.STORYBOOK_MAPBOX_TOKEN}
                 />
               </OnBoardingCard>
               <Button color="primary" variant="contained" fullWidth type="submit">

@@ -6,6 +6,7 @@ import { FieldProps } from 'formik';
 import FieldFormControl from './FieldFormControl';
 import { Label } from '../label';
 import OrganizationIcon from '../icons/OrganizationIcon';
+import UserIcon from '../icons/UserIcon';
 const filter = createFilterOptions<RoleOptionType>();
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -15,17 +16,14 @@ const useStyles = makeStyles((theme: Theme) => ({
     padding: theme.spacing(1.25),
     cursor: 'pointer',
   },
-  addNews: {
-    display: 'flex',
-    flexDirection: 'column',
-    // minHeight: 96.5, //
-  },
   add: {
     display: 'flex',
+    alignItems: 'center',
   },
   label: {
     fontSize: theme.typography.pxToRem(12),
     color: theme.palette.secondary.main,
+    marginLeft: theme.spacing(2),
   },
 }));
 
@@ -101,7 +99,8 @@ const RoleField: React.FC<Props> = ({
               filtered.push(
                 ((
                   <div className={styles.add} onClick={() => console.log('add indiv', params.inputValue)}>
-                    icon<Label className={styles.label}>+ Add New Individual</Label>
+                    <UserIcon />
+                    <Label className={styles.label}>+ Add New Individual</Label>
                   </div>
                 ) as unknown) as RoleOptionType,
               );

@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { makeStyles, Theme, TextField } from '@material-ui/core';
-import { Autocomplete } from '@material-ui/lab';
+import Autocomplete, { createFilterOptions } from '@material-ui/lab/Autocomplete';
+
 import { FieldProps } from 'formik';
 import FieldFormControl from './FieldFormControl';
-// import TextField from './TextField';
+import { Label } from '../label';
+const filter = createFilterOptions<RoleOptionType>();
 
 const useStyles = makeStyles((theme: Theme) => ({
   result: {
@@ -11,6 +13,18 @@ const useStyles = makeStyles((theme: Theme) => ({
     backgroundColor: theme.palette.primary.main,
     padding: theme.spacing(1.25),
     cursor: 'pointer',
+  },
+  addNews: {
+    display: 'flex',
+    flexDirection: 'column',
+    // minHeight: 96.5, //
+  },
+  add: {
+    display: 'flex',
+  },
+  label: {
+    fontSize: theme.typography.pxToRem(12),
+    color: theme.palette.secondary.main,
   },
 }));
 
@@ -23,6 +37,12 @@ interface Props extends FieldProps {
   options?: any[];
   getOptionLabel?: (v: any) => string;
   triggerOnChange?: (v: any) => Promise<void>;
+}
+
+interface RoleOptionType {
+  inputValue?: string;
+  name: string;
+  id?: number;
 }
 
 const RoleField: React.FC<Props> = ({
@@ -50,7 +70,12 @@ const RoleField: React.FC<Props> = ({
         <Autocomplete
           id="combo-box"
           options={options || []}
-          getOptionLabel={getOptionLabel}
+          freeSolo
+          selectOnFocus
+          clearOnBlur
+          handleHomeEndKeys
+          getOptionLabel={o => (o.name && getOptionLabel ? getOptionLabel(o) : '')} //
+          renderOption={o => o.name || o}
           onChange={(event, value, r) => {
             handleChange(value.id);
           }}
@@ -59,14 +84,29 @@ const RoleField: React.FC<Props> = ({
           renderInput={props => (
             <TextField {...props} placeholder="Start typing or choose entity" variant="outlined" />
           )}
-          // renderInput={props => (
-          //   <SelectTextField
-          //     {...fieldProps}
-          //     options={options || []}
-          //     onChange={handleChange}
-          //     onBlur={handleBlur}
-          //   />
-          // )}
+          filterOptions={(options, params) => {
+            const filtered = filter(options, params);
+
+            // Suggest the creation of a new value
+            if (params.inputValue !== '') {
+              filtered.push(
+                ((
+                  <div className={styles.add} onClick={() => console.log('clicked org')}>
+                    icon<Label className={styles.label}>+ Add New Organization</Label>
+                  </div>
+                ) as unknown) as RoleOptionType,
+              );
+              filtered.push(
+                ((
+                  <div className={styles.add} onClick={() => console.log('clicked indiv')}>
+                    icon<Label className={styles.label}>+ Add New Individual</Label>
+                  </div>
+                ) as unknown) as RoleOptionType,
+              );
+            }
+
+            return filtered;
+          }}
         />
       )}
     </FieldFormControl>

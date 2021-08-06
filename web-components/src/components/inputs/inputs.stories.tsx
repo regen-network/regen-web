@@ -271,7 +271,6 @@ function RoleInput(): JSX.Element {
             <Form>
               <OnBoardingCard>
                 <Field
-                  label="Role"
                   component={RoleField}
                   options={entities}
                   getOptionLabel={entity => entity.name}

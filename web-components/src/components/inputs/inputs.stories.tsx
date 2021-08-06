@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FormLabel, Button } from '@material-ui/core';
 import { Formik, Form, Field } from 'formik';
 import { RadioGroup } from 'formik-material-ui';
@@ -249,33 +249,44 @@ function ToggleVariants(): JSX.Element {
   );
 }
 function RoleInput(): JSX.Element {
-
-  const entities = [
-    { name: 'Impact Ag', id: 1, type: 'Organization' },
-    { name: 'Toby Grogan', id: 2, type: 'Individual' },
+  const entitiez = [
+    { legalName: 'Impact Ag', id: 1 },
+    { legalName: 'Toby Grogan', id: 2 },
   ];
+  const [entities, setEntites] = useState(entitiez);
 
+  const addOrg = (org: any): Promise<any> => {
+    org.id = entities[entities.length - 1].id + 1;
+    console.log('addOrg', org);
+    const { legalName, id } = org;
+    const newEntities = [...entities, { legalName, id }];
+    setEntites(newEntities);
+    return Promise.resolve(org);
+  };
+  console.log('entities', entities);
   return (
-    <OnBoardingSection title="Role form" formContainer>
+    <OnBoardingSection title="Person or Organization Field" formContainer>
       <Formik
         initialValues={{
-          role: '',
+          personOrOrgId: '',
         }}
         onSubmit={(values, actions) => {
+          console.log(values);
           alert(JSON.stringify(values, null, 2));
-          actions.resetForm();
+          // actions.resetForm();
         }}
       >
-        {() => {
+        {({ handleChange, setFieldValue }) => {
           return (
             <Form>
               <OnBoardingCard>
                 <Field
                   component={RoleField}
                   options={entities}
-                  getOptionLabel={entity => entity.name}
-                  name="role"
+                  getOptionLabel={entity => entity.legalName}
+                  name="personOrOrgId"
                   mapboxToken={process.env.STORYBOOK_MAPBOX_TOKEN}
+                  onAddOrganization={addOrg}
                 />
               </OnBoardingCard>
               <Button color="primary" variant="contained" fullWidth type="submit">

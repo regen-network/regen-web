@@ -36,7 +36,7 @@ interface Props extends FieldProps {
   placeholder?: string;
   options?: any[];
   getOptionLabel?: (v: any) => string;
-  triggerOnChange?: (v: any) => Promise<void>;
+  onAddOrganization: (v: any) => Promise<any>;
   mapboxToken: string;
 }
 
@@ -53,14 +53,25 @@ const RoleField: React.FC<Props> = ({
   getOptionLabel,
   optional,
   placeholder,
-  triggerOnChange,
   mapboxToken,
+  onAddOrganization,
   ...fieldProps
 }) => {
-  const { form, field } = fieldProps;
-  const [newOrganizationName, setNewOrganizationName] = useState('');
-
   const styles = useStyles();
+  const [newOrganizationName, setNewOrganizationName] = useState('');
+  const { form, field } = fieldProps;
+
+  const addOrganization = async (org: any): Promise<void> => {
+    var mintedOrg = await onAddOrganization(org);
+    console.log('addOrganization mintedOrg', mintedOrg.id);
+    form.setFieldValue(field.name, mintedOrg.id);
+    closeOrganizationModal();
+  };
+
+  const closeOrganizationModal = (): void => {
+    setNewOrganizationName('');
+  };
+
   return (
     <>
       <FieldFormControl
@@ -78,13 +89,12 @@ const RoleField: React.FC<Props> = ({
             selectOnFocus
             clearOnBlur
             handleHomeEndKeys
-            getOptionLabel={o => (o.name && getOptionLabel ? getOptionLabel(o) : '')} //
-            renderOption={o => o.name || o}
+            getOptionLabel={o => (o.legalName && getOptionLabel ? getOptionLabel(o) : '')} //
+            renderOption={o => o.legalName || o}
             onChange={(event, value, r) => {
               handleChange(value.id);
             }}
             onBlur={handleBlur}
-            style={{ width: 300 }}
             renderInput={props => (
               <TextField {...props} placeholder="Start typing or choose entity" variant="outlined" />
             )}
@@ -119,8 +129,8 @@ const RoleField: React.FC<Props> = ({
       {newOrganizationName && (
         <AddOrganizationModal
           organizationName={newOrganizationName}
-          onClose={() => setNewOrganizationName('')}
-          onSubmit={console.log}
+          onClose={closeOrganizationModal}
+          onSubmit={addOrganization}
           mapboxToken={mapboxToken}
         />
       )}

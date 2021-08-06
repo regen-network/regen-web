@@ -5,6 +5,7 @@ import Autocomplete, { createFilterOptions } from '@material-ui/lab/Autocomplete
 import { FieldProps } from 'formik';
 import FieldFormControl from './FieldFormControl';
 import { Label } from '../label';
+import OrganizationIcon from '../icons/OrganizationIcon';
 const filter = createFilterOptions<RoleOptionType>();
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -91,14 +92,15 @@ const RoleField: React.FC<Props> = ({
             if (params.inputValue !== '') {
               filtered.push(
                 ((
-                  <div className={styles.add} onClick={() => console.log('clicked org')}>
-                    icon<Label className={styles.label}>+ Add New Organization</Label>
+                  <div className={styles.add} onClick={() => console.log('add org', params.inputValue)}>
+                    <OrganizationIcon />
+                    <Label className={styles.label}>+ Add New Organization</Label>
                   </div>
                 ) as unknown) as RoleOptionType,
               );
               filtered.push(
                 ((
-                  <div className={styles.add} onClick={() => console.log('clicked indiv')}>
+                  <div className={styles.add} onClick={() => console.log('add indiv', params.inputValue)}>
                     icon<Label className={styles.label}>+ Add New Individual</Label>
                   </div>
                 ) as unknown) as RoleOptionType,

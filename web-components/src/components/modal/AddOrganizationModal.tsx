@@ -7,9 +7,12 @@ import OnBoardingCard from '../cards/OnBoardingCard';
 import PhoneField from '../inputs/PhoneField';
 import ControlledTextField from '../inputs/ControlledTextField';
 import LocationField from '../inputs/LocationField';
+import CheckboxLabel from '../inputs/CheckboxLabel';
 import Title from '../title';
+import Description from '../description';
 import Modal from './';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
+import QuestionIcon from '../icons/QuestionIcon';
 
 interface AddOrganizationModalProps {
   organizationName?: string;
@@ -24,6 +27,7 @@ interface OrgProfileFormValues {
   email: string;
   phone: string;
   location: GeocodeFeature;
+  permissionToShareInfo: boolean;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -31,6 +35,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
+  },
+  card: {
+    marginTop: 0,
   },
   title: {
     [theme.breakpoints.up('sm')]: {
@@ -48,14 +55,16 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   field: {
     marginBottom: theme.spacing(8),
+    '&:last-child': {
+      marginBottom: 0,
+    },
   },
   controls: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
-    // height: 80,
     width: '100%',
-    marginTop: theme.spacing(10),
+    margin: theme.spacing(10, 0),
   },
   button: {
     marginLeft: theme.spacing(2),
@@ -66,6 +75,17 @@ const useStyles = makeStyles((theme: Theme) => ({
   cancelButton: {
     color: theme.palette.grey[500],
     fontSize: theme.spacing(4),
+  },
+  permission: {
+    display: 'flex',
+  },
+  checkboxLabel: {
+    [theme.breakpoints.up('sm')]: {
+      fontSize: theme.spacing(3.5),
+    },
+    [theme.breakpoints.down('xs')]: {
+      fontSize: theme.spacing(3),
+    },
   },
 }));
 
@@ -88,9 +108,13 @@ function AddOrganizationModal({
           validateOnMount
           initialValues={{
             legalName: organizationName,
+            representative: '',
+            email: '',
+            phone: '',
             location: {
               place_name: '',
             } as GeocodeFeature,
+            permissionToShareInfo: false,
           }}
           onSubmit={async (values, { setSubmitting }) => {
             setSubmitting(true);
@@ -105,7 +129,7 @@ function AddOrganizationModal({
           {({ submitForm, submitCount, isValid, isSubmitting, values }) => {
             return (
               <Form translate="yes">
-                <OnBoardingCard>
+                <OnBoardingCard className={styles.card}>
                   <Field
                     className={styles.field}
                     component={ControlledTextField}
@@ -139,6 +163,18 @@ function AddOrganizationModal({
                   />
                   <Field className={styles.field} component={PhoneField} label="Phone number" name="phone" />
                 </OnBoardingCard>
+                <div className={styles.permission}>
+                  <Field
+                    component={CheckboxLabel}
+                    name="permissionToShareInfo"
+                    label={
+                      <Description className={styles.checkboxLabel}>
+                        I have this organization’s permission to share their information with Regen Registry
+                      </Description>
+                    }
+                  />
+                  <QuestionIcon />
+                </div>
                 <div className={styles.controls}>
                   <Button onClick={onClose} className={styles.cancelButton}>
                     cancel

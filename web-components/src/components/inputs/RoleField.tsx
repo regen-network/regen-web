@@ -91,8 +91,9 @@ const RoleField: React.FC<Props> = ({
             handleHomeEndKeys
             getOptionLabel={o => (o.legalName && getOptionLabel ? getOptionLabel(o) : '')} //
             renderOption={o => o.legalName || o}
-            onChange={(event, value, r) => {
-              handleChange(value.id);
+            onChange={(event, value, reason) => {
+              if (value && value.id) handleChange(value.id);
+              handleChange(value);
             }}
             onBlur={handleBlur}
             renderInput={props => (

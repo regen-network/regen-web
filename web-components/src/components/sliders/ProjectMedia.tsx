@@ -16,6 +16,7 @@ export interface Media {
 interface ProjectMediaProps extends OptimizeImageProps {
   gridView?: boolean;
   assets: Media[];
+  imageCredits?: string;
   xsBorderRadius?: boolean;
   mobileHeight?: string | number;
 }
@@ -123,6 +124,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     maxWidth: '37%',
     flexBasis: '37%',
     maxHeight: theme.spacing(113),
+    position: 'relative',
   },
   centreGrid: {
     flexGrow: 0,
@@ -151,6 +153,23 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   grid: {
     padding: theme.spacing(2.5),
   },
+  imageCredits: {
+    color: theme.palette.primary.main,
+    position: 'absolute',
+    [theme.breakpoints.up('sm')]: {
+      fontSize: theme.typography.pxToRem(12),
+      left: theme.typography.pxToRem(13),
+      bottom: theme.typography.pxToRem(9),
+    },
+    [theme.breakpoints.down('xs')]: {
+      fontSize: theme.typography.pxToRem(11),
+      left: theme.typography.pxToRem(9),
+      bottom: theme.typography.pxToRem(6),
+    },
+  },
+  sliderImageContainer: {
+    position: 'relative',
+  },
 }));
 
 function getThumbnailStyle(thumbsTranslate: number): object {
@@ -171,6 +190,7 @@ export default function ProjectMedia({
   mobileHeight,
   imageStorageBaseUrl,
   apiServerUrl,
+  imageCredits,
 }: ProjectMediaProps): JSX.Element {
   const classes = useStyles({ mobileHeight, xsBorderRadius });
   const theme = useTheme();
@@ -247,6 +267,7 @@ export default function ProjectMedia({
               imageStorageBaseUrl={imageStorageBaseUrl}
               apiServerUrl={apiServerUrl}
             />
+            {imageCredits && <div className={classes.imageCredits}>{imageCredits}</div>}
           </Grid>
           <Grid item className={classes.centreGrid}>
             <div className={classes.imageContainer}>
@@ -303,18 +324,25 @@ export default function ProjectMedia({
         >
           {assets.map((item, index) => {
             if (item.type === 'image') {
-              return imageStorageBaseUrl && apiServerUrl ? (
-                <Image
-                  key={index}
-                  src={item.src}
-                  className={classes.item}
-                  alt={item.src}
-                  delay={index > 0 ? 1000 : 0}
-                  imageStorageBaseUrl={imageStorageBaseUrl}
-                  apiServerUrl={apiServerUrl}
-                />
-              ) : (
-                <img key={index} src={item.src} className={classes.item} alt={item.src} />
+              const image =
+                imageStorageBaseUrl && apiServerUrl ? (
+                  <Image
+                    key={index}
+                    src={item.src}
+                    className={classes.item}
+                    alt={item.src}
+                    delay={index > 0 ? 1000 : 0}
+                    imageStorageBaseUrl={imageStorageBaseUrl}
+                    apiServerUrl={apiServerUrl}
+                  />
+                ) : (
+                  <img key={index} src={item.src} className={classes.item} alt={item.src} />
+                );
+
+              return (
+                <div className={classes.sliderImageContainer}>
+                  {image} {imageCredits && <div className={classes.imageCredits}>{imageCredits}</div>}
+                </div>
               );
             } else if (item.type === 'video') {
               return (

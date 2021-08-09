@@ -314,6 +314,7 @@ function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JS
         mobileHeight={theme.spacing(78.75)}
         imageStorageBaseUrl={imageStorageBaseUrl}
         apiServerUrl={apiServerUrl}
+        imageCredits={project.imageCredits}
       />
       <ProjectTopSection
         project={project}

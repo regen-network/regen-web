@@ -67,6 +67,7 @@ export interface Project {
   glanceImgSrc?: string;
   longDescription: string;
   media: Media[];
+  imageCredits?: string;
   image: string;
   map: string;
   keyOutcomesActivities?: string[];

@@ -276,9 +276,8 @@ function RoleInput(): JSX.Element {
           personOrOrgId: '',
         }}
         onSubmit={(values, actions) => {
-          console.log('onSubmit', values);
           alert(JSON.stringify(values, null, 2));
-          // actions.resetForm();
+          actions.resetForm();
         }}
       >
         {({ handleChange, setFieldValue }) => {

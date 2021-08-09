@@ -40,7 +40,6 @@ interface Props extends FieldProps {
   onAddOrganization: (v: any) => Promise<any>;
   onAddIndividual: (v: any) => Promise<any>;
   mapboxToken: string;
-  // value?: string;
 }
 
 interface RoleOptionType {
@@ -53,7 +52,6 @@ const RoleField: React.FC<Props> = ({
   className,
   label,
   options,
-  // value,
   getOptionLabel,
   optional,
   placeholder,
@@ -65,13 +63,10 @@ const RoleField: React.FC<Props> = ({
   const styles = useStyles();
   const [newOrganizationName, setNewOrganizationName] = useState('');
   const [newIndividualName, setNewIndividualName] = useState('');
-  // const [value, setValue] = useState(null);
   const [inputValue, setInputValue] = useState('');
   const { form, field } = fieldProps;
 
   const selectedValue = options && field.value && options.find(o => o.id === field.value);
-  console.log('options ', options);
-  console.log('field ', selectedValue);
 
   const addOrganization = async (org: any): Promise<void> => {
     var mintedOrg = await onAddOrganization(org);
@@ -93,8 +88,6 @@ const RoleField: React.FC<Props> = ({
     setNewIndividualName('');
   };
 
-  // console.log('fieldprops ', fieldProps);
-
   return (
     <>
       <FieldFormControl
@@ -111,9 +104,7 @@ const RoleField: React.FC<Props> = ({
             freeSolo
             selectOnFocus
             clearOnBlur
-            debug //todo: remove
             handleHomeEndKeys
-            // value={field.value}
             inputValue={(selectedValue && selectedValue.label) || inputValue}
             getOptionLabel={o => (o.label && getOptionLabel ? getOptionLabel(o) : '')} //
             getOptionSelected={(o, v) => o.id === field.value}

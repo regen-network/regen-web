@@ -6,19 +6,16 @@ import ContainedButton from '../buttons/ContainedButton';
 import OnBoardingCard from '../cards/OnBoardingCard';
 import PhoneField from '../inputs/PhoneField';
 import ControlledTextField from '../inputs/ControlledTextField';
-import LocationField from '../inputs/LocationField';
 import CheckboxLabel from '../inputs/CheckboxLabel';
 import Title from '../title';
 import Description from '../description';
 import Modal from './';
-import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import QuestionIcon from '../icons/QuestionIcon';
 
-interface AddOrganizationModalProps {
-  organizationName?: string;
+interface AddIndividualModalProps {
+  individualName?: string;
   onClose: () => void;
-  onSubmit: (organization: any) => void; // TODO
-  mapboxToken: string;
+  onSubmit: (individual: any) => void; // TODO
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -80,31 +77,22 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-function AddOrganizationModal({
-  organizationName,
-  onClose,
-  onSubmit,
-  mapboxToken,
-}: AddOrganizationModalProps): JSX.Element {
+function AddIndividualModal({ individualName, onClose, onSubmit }: AddIndividualModalProps): JSX.Element {
   const styles = useStyles();
 
   return (
-    <Modal open={!!organizationName} onClose={onClose} className={styles.modal}>
+    <Modal open={!!individualName} onClose={onClose} className={styles.modal}>
       <div className={styles.root}>
         <Title variant="h4" align="center" className={styles.title}>
-          Add Organization
+          Add Individual
         </Title>
         <Formik
           enableReinitialize
           validateOnMount
           initialValues={{
-            legalName: organizationName,
-            representative: '',
+            name: individualName,
             email: '',
             phone: '',
-            location: {
-              place_name: '',
-            } as GeocodeFeature,
             permissionToShareInfo: false,
           }}
           onSubmit={async (values, { setSubmitting }) => {
@@ -124,27 +112,8 @@ function AddOrganizationModal({
                   <Field
                     className={styles.field}
                     component={ControlledTextField}
-                    label="Organization legal name"
-                    description="This is the name of the farm, ranch, cooperative, non-profit, or other organization."
-                    name="legalName"
-                    placeholder="i.e. Cherrybrook Farms LLC"
-                  />
-                  <Field
-                    className={styles.field}
-                    component={LocationField}
-                    label="Organization location"
-                    description="This address is used for issuing credits.  If you choose to 
-                    show this entity on the project page, only city, state/province, and country will be displayed."
-                    name="location"
-                    placeholder="Start typing the location"
-                    token={mapboxToken}
-                  />
-                  <Field
-                    className={styles.field}
-                    component={ControlledTextField}
-                    label="Organization representative"
-                    description="This is the person who will be signing the project plan (if applicable), and whose name will appear on credit issuance certificates if credits are issued to this organization."
-                    name="representative"
+                    label="Full name"
+                    name="name"
                   />
                   <Field
                     className={styles.field}
@@ -160,7 +129,7 @@ function AddOrganizationModal({
                     name="permissionToShareInfo"
                     label={
                       <Description className={styles.checkboxLabel}>
-                        I have this organization’s permission to share their information with Regen Registry
+                        I have this individual’s permission to share their information with Regen Registry
                       </Description>
                     }
                   />
@@ -183,4 +152,4 @@ function AddOrganizationModal({
   );
 }
 
-export { AddOrganizationModal };
+export { AddIndividualModal };

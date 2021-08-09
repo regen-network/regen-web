@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { makeStyles, Theme, TextField } from '@material-ui/core';
+import { makeStyles, TextField } from '@material-ui/core';
 import Autocomplete, { createFilterOptions } from '@material-ui/lab/Autocomplete';
 
 import { FieldProps } from 'formik';
@@ -8,9 +8,10 @@ import { Label } from '../label';
 import OrganizationIcon from '../icons/OrganizationIcon';
 import UserIcon from '../icons/UserIcon';
 import { AddOrganizationModal } from '../modal/AddOrganizationModal';
+import { AddIndividualModal } from '../modal/AddIndividualModal';
 const filter = createFilterOptions<RoleOptionType>();
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles(theme => ({
   result: {
     border: `1px solid ${theme.palette.info.light}`,
     backgroundColor: theme.palette.primary.main,
@@ -37,12 +38,13 @@ interface Props extends FieldProps {
   options?: any[];
   getOptionLabel?: (v: any) => string;
   onAddOrganization: (v: any) => Promise<any>;
+  onAddIndividual: (v: any) => Promise<any>;
   mapboxToken: string;
 }
 
 interface RoleOptionType {
   inputValue?: string;
-  name: string;
+  label: string;
   id?: number;
 }
 
@@ -55,10 +57,12 @@ const RoleField: React.FC<Props> = ({
   placeholder,
   mapboxToken,
   onAddOrganization,
+  onAddIndividual,
   ...fieldProps
 }) => {
   const styles = useStyles();
   const [newOrganizationName, setNewOrganizationName] = useState('');
+  const [newIndividualName, setNewIndividualName] = useState('');
   const { form, field } = fieldProps;
 
   const addOrganization = async (org: any): Promise<void> => {
@@ -68,8 +72,19 @@ const RoleField: React.FC<Props> = ({
     closeOrganizationModal();
   };
 
+  const addIndividual = async (person: any): Promise<void> => {
+    var mintedPerson = await onAddIndividual(person);
+    console.log('addIndividual mintedPerson', mintedPerson.id);
+    form.setFieldValue(field.name, mintedPerson.id);
+    closeIndividualModal();
+  };
+
   const closeOrganizationModal = (): void => {
     setNewOrganizationName('');
+  };
+
+  const closeIndividualModal = (): void => {
+    setNewIndividualName('');
   };
 
   return (
@@ -88,12 +103,14 @@ const RoleField: React.FC<Props> = ({
             freeSolo
             selectOnFocus
             clearOnBlur
+            debug //todo: remove
             handleHomeEndKeys
-            getOptionLabel={o => (o.legalName && getOptionLabel ? getOptionLabel(o) : '')} //
-            renderOption={o => o.legalName || o}
+            getOptionLabel={o => (o.label && getOptionLabel ? getOptionLabel(o) : '')} //
+            // getOptionSelected={(option, value) => option.label === value.}
+            renderOption={o => o.label || o}
             onChange={(event, value, reason) => {
               if (value && value.id) handleChange(value.id);
-              handleChange(value);
+              if (reason === 'clear') handleChange(value);
             }}
             onBlur={handleBlur}
             renderInput={props => (
@@ -114,7 +131,7 @@ const RoleField: React.FC<Props> = ({
                 );
                 filtered.push(
                   ((
-                    <div className={styles.add} onClick={() => console.log('add indiv', params.inputValue)}>
+                    <div className={styles.add} onClick={() => setNewIndividualName(params.inputValue)}>
                       <UserIcon />
                       <Label className={styles.label}>+ Add New Individual</Label>
                     </div>
@@ -133,6 +150,13 @@ const RoleField: React.FC<Props> = ({
           onClose={closeOrganizationModal}
           onSubmit={addOrganization}
           mapboxToken={mapboxToken}
+        />
+      )}
+      {newIndividualName && (
+        <AddIndividualModal
+          individualName={newIndividualName}
+          onClose={closeIndividualModal}
+          onSubmit={addIndividual}
         />
       )}
     </>

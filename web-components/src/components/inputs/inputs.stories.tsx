@@ -251,18 +251,25 @@ function ToggleVariants(): JSX.Element {
 function RoleInput(): JSX.Element {
   const entitiez = [
     { legalName: 'Impact Ag', id: 1 },
-    { legalName: 'Toby Grogan', id: 2 },
+    { name: 'Toby Grogan', id: 2 },
   ];
-  const [entities, setEntites] = useState(entitiez);
 
-  const addOrg = (org: any): Promise<any> => {
-    org.id = entities[entities.length - 1].id + 1;
-    console.log('addOrg', org);
-    const { legalName, id } = org;
-    const newEntities = [...entities, { legalName, id }];
+  const options = entitiez.map(e => {
+    return {
+      label: e.name || e.legalName,
+      id: e.id,
+    };
+  });
+  const [entities, setEntites] = useState(options);
+
+  const addEntity = (entity: any): Promise<any> => {
+    entity.id = entities[entities.length - 1].id + 1;
+    console.log('addEntity', entity);
+    const newEntities = [...entities, { label: entity.name || entity.legalName, id: entity.id }];
     setEntites(newEntities);
-    return Promise.resolve(org);
+    return Promise.resolve(entity);
   };
+
   console.log('entities', entities);
   return (
     <OnBoardingSection title="Person or Organization Field" formContainer>
@@ -283,10 +290,11 @@ function RoleInput(): JSX.Element {
                 <Field
                   component={RoleField}
                   options={entities}
-                  getOptionLabel={entity => entity.legalName}
+                  getOptionLabel={entity => entity.label}
                   name="personOrOrgId"
                   mapboxToken={process.env.STORYBOOK_MAPBOX_TOKEN}
-                  onAddOrganization={addOrg}
+                  onAddOrganization={addEntity}
+                  onAddIndividual={addEntity}
                 />
               </OnBoardingCard>
               <Button color="primary" variant="contained" fullWidth type="submit">

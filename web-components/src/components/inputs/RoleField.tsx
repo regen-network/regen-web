@@ -40,6 +40,7 @@ interface Props extends FieldProps {
   onAddOrganization: (v: any) => Promise<any>;
   onAddIndividual: (v: any) => Promise<any>;
   mapboxToken: string;
+  // value?: string;
 }
 
 interface RoleOptionType {
@@ -52,6 +53,7 @@ const RoleField: React.FC<Props> = ({
   className,
   label,
   options,
+  // value,
   getOptionLabel,
   optional,
   placeholder,
@@ -63,20 +65,24 @@ const RoleField: React.FC<Props> = ({
   const styles = useStyles();
   const [newOrganizationName, setNewOrganizationName] = useState('');
   const [newIndividualName, setNewIndividualName] = useState('');
+  // const [value, setValue] = useState(null);
+  const [inputValue, setInputValue] = useState('');
   const { form, field } = fieldProps;
+
+  const selectedValue = options && field.value && options.find(o => o.id === field.value);
+  console.log('options ', options);
+  console.log('field ', selectedValue);
 
   const addOrganization = async (org: any): Promise<void> => {
     var mintedOrg = await onAddOrganization(org);
-    console.log('addOrganization mintedOrg', mintedOrg.id);
-    form.setFieldValue(field.name, mintedOrg.id);
     closeOrganizationModal();
+    form.setFieldValue(field.name, mintedOrg.id);
   };
 
   const addIndividual = async (person: any): Promise<void> => {
     var mintedPerson = await onAddIndividual(person);
-    console.log('addIndividual mintedPerson', mintedPerson.id);
-    form.setFieldValue(field.name, mintedPerson.id);
     closeIndividualModal();
+    form.setFieldValue(field.name, mintedPerson.id);
   };
 
   const closeOrganizationModal = (): void => {
@@ -86,6 +92,8 @@ const RoleField: React.FC<Props> = ({
   const closeIndividualModal = (): void => {
     setNewIndividualName('');
   };
+
+  // console.log('fieldprops ', fieldProps);
 
   return (
     <>
@@ -98,19 +106,24 @@ const RoleField: React.FC<Props> = ({
       >
         {({ handleChange, handleBlur }) => (
           <Autocomplete
-            id="combo-box"
+            id="role-combo-box"
             options={options || []}
             freeSolo
             selectOnFocus
             clearOnBlur
             debug //todo: remove
             handleHomeEndKeys
+            // value={field.value}
+            inputValue={(selectedValue && selectedValue.label) || inputValue}
             getOptionLabel={o => (o.label && getOptionLabel ? getOptionLabel(o) : '')} //
-            // getOptionSelected={(option, value) => option.label === value.}
+            getOptionSelected={(o, v) => o.id === field.value}
             renderOption={o => o.label || o}
             onChange={(event, value, reason) => {
               if (value && value.id) handleChange(value.id);
               if (reason === 'clear') handleChange(value);
+            }}
+            onInputChange={(event, newInputValue) => {
+              setInputValue(newInputValue);
             }}
             onBlur={handleBlur}
             renderInput={props => (

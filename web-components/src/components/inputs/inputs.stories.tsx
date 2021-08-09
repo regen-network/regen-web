@@ -264,13 +264,11 @@ function RoleInput(): JSX.Element {
 
   const addEntity = (entity: any): Promise<any> => {
     entity.id = entities[entities.length - 1].id + 1;
-    console.log('addEntity', entity);
     const newEntities = [...entities, { label: entity.name || entity.legalName, id: entity.id }];
     setEntites(newEntities);
     return Promise.resolve(entity);
   };
 
-  console.log('entities', entities);
   return (
     <OnBoardingSection title="Person or Organization Field" formContainer>
       <Formik
@@ -278,7 +276,7 @@ function RoleInput(): JSX.Element {
           personOrOrgId: '',
         }}
         onSubmit={(values, actions) => {
-          console.log(values);
+          console.log('onSubmit', values);
           alert(JSON.stringify(values, null, 2));
           // actions.resetForm();
         }}

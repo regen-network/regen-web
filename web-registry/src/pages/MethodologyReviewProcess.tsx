@@ -1,19 +1,20 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 
 import Modal from 'web-components/lib/components/modal';
 import Section from 'web-components/lib/components/section';
 import Title from 'web-components/lib/components/title';
-import { StepCard, Step } from 'web-components/lib/components/cards/StepCard';
 
 import { HeroTitle, HeroAction, ReviewProcessInfo, BackgroundImgSection } from '../components/molecules';
-import { contentByPage } from '../mocks';
+import { WrappedStepCard } from '../components/atoms';
 
 import typewriterReview from '../assets/typewriter-review.png';
 import topographyImg from '../assets/topography-pattern-cutout-1.png';
 import fernImg from '../assets/fern-in-hands.png';
+
+import { useAllMethodologyReviewProcessPageQuery } from '../generated/sanity-graphql';
+import { client } from '../sanity';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -21,10 +22,6 @@ const useStyles = makeStyles(theme => ({
   },
   section: {
     paddingBottom: theme.spacing(22),
-    [theme.breakpoints.down('xs')]: {
-      paddingLeft: theme.spacing(3),
-      paddingRight: theme.spacing(3),
-    },
   },
   heroMain: {
     maxWidth: theme.typography.pxToRem(775),
@@ -33,23 +30,9 @@ const useStyles = makeStyles(theme => ({
       paddingBottom: theme.spacing(12),
     },
   },
-  heroSection: {
-    [theme.breakpoints.down('xs')]: {
-      paddingLeft: theme.spacing(3),
-      paddingRight: theme.spacing(3),
-    },
-  },
   topoBg: {
     background: theme.palette.grey[50],
     borderTop: `1px solid ${theme.palette.grey[100]}`,
-  },
-  sectionContent: {
-    maxWidth: theme.typography.pxToRem(924),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    alignSelf: 'center',
-    margin: '0 auto',
   },
   modal: {
     padding: 0,
@@ -57,59 +40,23 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-type StepCard = {
-  icon: JSX.Element;
-  step: Step;
-};
-
-// TODO: Once the API is connected, replace this type (it shouldn't be necessary to define it here)
-type ApiCard = typeof contentByPage.HowToCreateMethodology['stepCardSections']['public']['stepCards'];
-const createStepCards = (raw: ApiCard): StepCard[] =>
-  raw.map(({ icon, title, btnText, href, description, isActive, stepNumber, faqs, tagName, image }) => ({
-    icon: <img src={require(`../assets/${icon}`)} alt={title} />,
-    step: {
-      stepNumber,
-      faqs,
-      tagName,
-      isActive,
-      title,
-      description,
-      btnText,
-      imageAlt: image && title,
-      imageSrc: image ? require(`../assets/${image}`) : undefined,
-      onBtnClick: href ? () => void window.open(href, '_blank', 'noopener') : undefined,
-    },
-  }));
-
 const MethodologyReviewProcess: React.FC = () => {
   const styles = useStyles();
   const theme = useTheme();
-  const history = useHistory();
   const [open, setOpen] = useState(false);
+  const [modalLink, setModalLink] = useState<string>();
+  const openModal = (href?: string | null): void => {
+    setModalLink(href || undefined);
+    setOpen(true);
+  };
 
-  const {
-    heroBannerTop,
-    internalReviewSection,
-    externalReviewSection,
-    stepCardSections,
-    heroBannerBottom,
-    modalContent,
-  } = contentByPage.HowToCreateMethodology;
+  const { data } = useAllMethodologyReviewProcessPageQuery({ client });
+  const content = data?.allMethodologyReviewProcessPage?.[0];
 
-  const publicCommentCards = createStepCards(stepCardSections.public.stepCards);
-  const scienceReviewCards = createStepCards(stepCardSections.scientific.stepCards);
-
-  const StepCards: React.FC<{ title: string; stepCards: StepCard[] }> = props => (
-    <>
-      <Title variant="h3" align="center">
-        {props.title}
-      </Title>
-      <Box maxWidth={theme.typography.pxToRem(753)} mt={8}>
-        {props.stepCards.map((card, i) => (
-          <StepCard key={i} icon={card.icon} step={card.step} />
-        ))}
-      </Box>
-    </>
+  const MaxW924: React.FC = ({ children }) => (
+    <Box display={['block', 'flex']} justifyContent="center">
+      <Box maxWidth={theme.typography.pxToRem(924)}>{children}</Box>
+    </Box>
   );
 
   return (
@@ -117,53 +64,49 @@ const MethodologyReviewProcess: React.FC = () => {
       <HeroTitle
         isBanner
         img={typewriterReview}
-        title={heroBannerTop.title}
-        description={heroBannerTop.description}
-        classes={{ main: styles.heroMain, section: styles.heroSection }}
+        title={content?.heroSection?.title}
+        descriptionRaw={content?.heroSection?.descriptionRaw}
+        classes={{ main: styles.heroMain }}
       />
 
       <Section className={styles.section}>
-        <div className={styles.sectionContent}>
-          <ReviewProcessInfo
-            title={internalReviewSection.title}
-            timespan={internalReviewSection.timespan}
-            description={internalReviewSection.description}
-            disclaimerBottom={internalReviewSection.disclaimerBottom}
-            btnText={internalReviewSection.btnText}
-            onBtnClick={() => setOpen(true)}
-          />
-        </div>
+        <MaxW924>
+          <ReviewProcessInfo reviewSection={content?.internalReviewSection} openModal={openModal} />
+        </MaxW924>
       </Section>
 
       <BackgroundImgSection img={topographyImg} classes={{ root: styles.topoBg, section: styles.section }}>
-        <div className={styles.sectionContent}>
-          <ReviewProcessInfo
-            title={externalReviewSection.title}
-            timespan={externalReviewSection.timespan}
-            disclaimerTop={externalReviewSection.disclaimerTop}
-            disclaimerBottom={externalReviewSection.disclaimerBottom}
-            description={externalReviewSection.description}
-          />
-          <Box display="flex" flexDirection="column" mt={[10, 20]} maxWidth={theme.typography.pxToRem(924)}>
-            <StepCards title={stepCardSections.public.title} stepCards={publicCommentCards} />
+        <MaxW924>
+          <ReviewProcessInfo reviewSection={content?.externalReviewSection} openModal={openModal} />
+        </MaxW924>
+        <Box display="flex" alignSelf="center" flexDirection="column" mt={[2, 5]} mx={[-1, 'inherit']}>
+          {content?.externalReviewSection?.stepCardsSubsections?.map(s => (
             <Box mt={[12, 15]}>
-              <StepCards title={stepCardSections.scientific.title} stepCards={scienceReviewCards} />
+              <Title variant="h3" align="center">
+                {s?.title}
+              </Title>
+              <Box maxWidth={theme.typography.pxToRem(753)} mt={8}>
+                {s?.stepCards?.map((stepCard, i) => (
+                  <WrappedStepCard key={i} stepNumber={i} stepCard={stepCard} openModal={openModal} />
+                ))}
+              </Box>
             </Box>
-          </Box>
-        </div>
+          ))}
+        </Box>
       </BackgroundImgSection>
 
       <HeroAction
         isBanner
         img={fernImg}
-        title={heroBannerBottom.title}
-        description={heroBannerBottom.description}
-        actionTxt={heroBannerBottom.btnText}
-        action={() => history.push(heroBannerBottom.href)}
+        bottomBanner={content?.bottomBanner}
+        openModal={(href: string): void => {
+          setModalLink(href);
+          setOpen(true);
+        }}
       />
 
       <Modal open={open} onClose={() => setOpen(false)} className={styles.modal}>
-        <iframe title="airtable-signup-form" src={modalContent} />
+        <iframe title="airtable-signup-form" src={modalLink} />
       </Modal>
     </div>
   );

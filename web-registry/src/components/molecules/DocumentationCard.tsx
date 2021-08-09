@@ -4,8 +4,7 @@ import { makeStyles, Theme } from '@material-ui/core';
 import { ImageLeftCard } from 'web-components/lib/components/cards/ImageLeftCard';
 import Description from 'web-components/lib/components/description';
 import Title from 'web-components/lib/components/title';
-
-import { Label } from '../atoms/Label';
+import { Label } from 'web-components/lib/components/label';
 
 const imageStorageBaseUrl = process.env.REACT_APP_IMAGE_STORAGE_BASE_URL;
 const apiServerUrl = process.env.REACT_APP_API_URI;
@@ -20,6 +19,7 @@ interface DocumentationCardProps {
   buttonText: string;
   buttonUrl: string;
   buttonIcon?: JSX.Element;
+  buttonBlankTarget?: boolean;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -57,6 +57,7 @@ function DocumentationCard({
   imageAlt,
   buttonText,
   buttonUrl,
+  buttonBlankTarget,
   buttonIcon,
   version,
   program,
@@ -75,6 +76,7 @@ function DocumentationCard({
         buttonText={buttonText}
         buttonUrl={buttonUrl}
         buttonIcon={buttonIcon}
+        buttonBlankTarget={buttonBlankTarget}
         imageStorageBaseUrl={imageStorageBaseUrl}
         apiServerUrl={apiServerUrl}
       >

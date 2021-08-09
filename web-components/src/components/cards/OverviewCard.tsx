@@ -1,6 +1,5 @@
 import React from 'react';
 import clsx from 'clsx';
-import ReactHtmlParser from 'react-html-parser';
 import { makeStyles } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 
@@ -15,13 +14,13 @@ interface OverviewCardProps {
     root?: string;
     icon?: string;
   };
-  icon: JSX.Element;
+  icon?: JSX.Element;
   item: OverviewItem;
 }
 
 interface OverviewItem {
   title: string;
-  description: string;
+  description: JSX.Element;
   tooltip?: string;
 }
 
@@ -31,6 +30,7 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'column',
     alignItems: 'center',
     borderColor: theme.palette.grey[100],
+    minWidth: theme.spacing(57.75),
     [theme.breakpoints.up('sm')]: {
       width: theme.spacing(87.625),
       height: theme.spacing(45.75),
@@ -84,6 +84,7 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
+    width: '100%',
   },
   title: {
     fontWeight: 800,
@@ -92,7 +93,9 @@ const useStyles = makeStyles(theme => ({
     textAlign: 'center',
     textTransform: 'uppercase',
     letterSpacing: 1,
-    inlineSize: 'min-content',
+    inlineSize: 'max-content',
+    position: 'relative',
+    display: 'inline-block',
   },
   description: {
     display: 'flex',
@@ -107,6 +110,7 @@ const useStyles = makeStyles(theme => ({
     height: theme.spacing(4.25),
     width: theme.spacing(4.25),
     marginRight: theme.spacing(1.715),
+    display: 'inline-block',
   },
 }));
 
@@ -117,7 +121,7 @@ function OverviewCard({ className, classes, icon, item }: OverviewCardProps): JS
     <Card className={clsx(className, styles.root, classes && classes.root)}>
       <div className={styles.top}>
         <div className={clsx(styles.cardTopThird)} />
-        <div className={clsx(styles.cardTopThird, styles.iconWrap)}>{icon}</div>
+        {icon && <div className={clsx(styles.cardTopThird, styles.iconWrap)}>{icon}</div>}
         <div className={clsx(styles.cardTopThird, styles.cardTopRight)}>
           {item.tooltip && (
             <InfoTooltip title={item.tooltip || ''} arrow placement="top">
@@ -130,10 +134,12 @@ function OverviewCard({ className, classes, icon, item }: OverviewCardProps): JS
       </div>
       <div className={styles.bottom}>
         <Box display="flex" justifyContent="center" pt={2}>
-          <CheckIcon className={styles.check} />
-          <div className={styles.title}>{item.title}</div>
+          <div className={styles.title}>
+            <CheckIcon className={styles.check} />
+            {item.title}
+          </div>
         </Box>
-        <div className={styles.description}>{ReactHtmlParser(item.description)}</div>
+        <div className={styles.description}>{item.description}</div>
       </div>
     </Card>
   );

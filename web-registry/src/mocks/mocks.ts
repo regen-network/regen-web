@@ -4,18 +4,50 @@ import { ItemProps as ProtectedSpeciesItem } from 'web-components/lib/components
 import { Media } from 'web-components/lib/components/sliders/ProjectMedia';
 import { ActionProps } from 'web-components/lib/components/action';
 import { CreditPrice } from 'web-components/lib/components/fixed-footer/BuyFooter';
-import { CreditClass } from 'web-components/lib/components/credits/CreditDetails';
 import { SDG } from 'web-components/lib/components/cards/ProjectTopCard';
-import { ProjectImpactCardProps as Impact } from 'web-components/lib/components/cards/ProjectImpactCard';
-import { Methodology } from 'web-components/lib/components/methodologies';
+
 import mock from './mock.json';
 
 // imgSrc should be either web url or static image filenames within web/src/assets/
 // (eg to load web/src/assets/coorong.jpg, use "coorong.jpg" as imgSrc)
 
+export interface Impact {
+  name: string;
+  description: string;
+  monitored: boolean;
+  imgSrc: string;
+  standard?: string;
+}
+
 export interface ActionGroup {
   title?: string;
   actions: ActionProps[];
+}
+
+export interface CreditClass {
+  id: string;
+  version: string;
+  creditDesigner: string;
+  ecoType: string;
+  ecoServiceType: string;
+  approvedMethodology: string;
+  methodologyUrl: string;
+  methodologyId: string;
+  imgSrc: string;
+}
+
+export interface Methodology {
+  id: string;
+  imageSrc: string;
+  version: string;
+  program: string;
+  methodologyDesigner: string;
+  uncertaintyDeductions: string;
+  measurementApproach: string;
+  creditClassName: string;
+  creditClassImage: string;
+  creditClassImageAltText: string;
+  creditClassUrl: string;
 }
 
 export interface Project {
@@ -40,7 +72,7 @@ export interface Project {
   keyOutcomesActivities?: string[];
   landManagementActions?: ActionGroup[];
   impact: Impact[];
-  creditClass: CreditClass;
+  creditClass: BasicCreditClass;
   additionalCertification?: {
     name: string;
     url: string;
@@ -77,9 +109,16 @@ interface BasicProject {
 }
 
 export interface BasicCreditClass {
-  title: string;
-  description: string;
-  imgSrc: string;
+  name: string;
+  // id: string;
+  description?: string;
+  imgSrc?: string;
+  url?: string;
+  tag?: string;
+  offsetGenerationMethod: string;
+  standard?: boolean;
+  standardUrl?: string;
+  handle?: string;
 }
 
 interface Purchase {
@@ -120,7 +159,6 @@ export interface ProjectOverride {
 }
 
 export interface ProjectMethodology {
-  //TODO: relational?
   name: string;
   id: string;
   url: string;
@@ -130,14 +168,12 @@ export interface Mock {
   creditsIssuer: User;
   projects: Project[];
   projectDefault: ProjectDefault;
-  creditClasses: BasicCreditClass[];
   purchasedCredits: PurchasedCredits[];
-  methodologies: Methodology[];
 }
 
 export const creditsIssuer: User = mock.creditsIssuer;
 export const purchasedCredits: PurchasedCredits[] = mock.purchasedCredits;
 export const projects: Project[] = mock.projects;
 export const projectDefault: ProjectDefault = mock.projectDefault;
-export const creditClasses: BasicCreditClass[] = mock.creditClasses;
-export const methodologies: Methodology[] = mock.methodologies;
+export const creditClasses = mock.creditClasses;
+export const methodologies = mock.methodologies;

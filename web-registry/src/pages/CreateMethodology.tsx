@@ -1,24 +1,25 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import CardMedia from '@material-ui/core/CardMedia';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 import Section from 'web-components/lib/components/section';
-import { StepCard, Step } from 'web-components/lib/components/cards/StepCard';
-import ImpactCard from 'web-components/lib/components/cards/ImpactCard';
 import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';
-import ResourcesCard from 'web-components/lib/components/cards/ResourcesCard';
 import FixedFooter from 'web-components/lib/components/fixed-footer';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import Modal from 'web-components/lib/components/modal';
 
 import { HeroTitle, HeroAction } from '../components/molecules';
 import { StepCardsWithDescription } from '../components/organisms';
-import { outcomes, resources, contentByPage } from '../mocks';
+import { WrappedImpactCard } from '../components/atoms';
+import { WrappedResourcesCard } from '../components/atoms';
 
 import fernImg from '../assets/fern-in-hands.png';
 import writingOnPaperImg from '../assets/writing-on-paper.png';
 import topographyImg from '../assets/topography-pattern-full-1.png';
+
+import { useAllCreateMethodologyPageQuery } from '../generated/sanity-graphql';
+import { client } from '../sanity';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -42,11 +43,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     maxWidth: theme.typography.pxToRem(942),
   },
   outcomeSection: {
-    paddingTop: 0,
-    [theme.breakpoints.up('sm')]: {
-      paddingTop: theme.spacing(10),
-      paddingBottom: theme.spacing(25),
-    },
+    paddingTop: theme.spacing(10),
+    paddingBottom: theme.spacing(25),
     [theme.breakpoints.down('xs')]: {
       paddingTop: theme.spacing(0),
       paddingBottom: theme.spacing(20),
@@ -56,9 +54,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     background: theme.palette.grey[50],
     borderTop: `1px solid ${theme.palette.grey[100]}`,
     borderBottom: `1px solid ${theme.palette.grey[100]}`,
-    [theme.breakpoints.up('sm')]: {
-      paddingBottom: theme.spacing(22.25),
-    },
+    paddingBottom: theme.spacing(22.25),
     [theme.breakpoints.down('xs')]: {
       paddingBottom: theme.spacing(17.75),
     },
@@ -92,68 +88,47 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-type StepCard = {
-  icon: JSX.Element;
-  step: Step;
-};
-
-const openLink = (url: string): void => void window.open(url, '_blank', 'noopener');
-
 const CreateMethodology: React.FC = () => {
   const styles = useStyles();
   const theme = useTheme();
-  const history = useHistory();
   const [open, setOpen] = useState(false);
+  const [modalLink, setModalLink] = useState<string>();
 
-  const {
-    stepCardSection,
-    createCreditClassSection,
-    heroSection,
-    peerReviewSection,
-    footerLink,
-  } = contentByPage.CreateMethodology;
+  const isDesktop = useMediaQuery(theme.breakpoints.up('lg'));
+  const resourceCardsShown = isDesktop ? 3 : 2;
 
-  const outcomeCards = outcomes.map(({ imgSrc, title, description }) => (
-    <ImpactCard name={title} imgSrc={imgSrc} description={description} largeFontSize />
-  ));
+  const { data } = useAllCreateMethodologyPageQuery({ client });
+  const content = data?.allCreateMethodologyPage?.[0];
 
-  const stepCards: StepCard[] = stepCardSection.stepCards.map(
-    ({ icon, title, btnText, href, description, isActive, stepNumber, faqs, tagName }) => ({
-      icon: <img src={require(`../assets/${icon}`)} alt={title} />,
-      step: {
-        stepNumber,
-        faqs,
-        tagName,
-        isActive,
-        title,
-        description,
-        btnText,
-        onBtnClick: href ? (href === 'MODAL' ? () => setOpen(true) : () => openLink(href)) : undefined,
-      },
-    }),
-  );
+  const openModal = (href?: string | null): void => {
+    setModalLink(href || undefined);
+    setOpen(true);
+  };
+
+  const outcomeCards = content?.outcomes?.map(outcome => <WrappedImpactCard outcome={outcome} />);
 
   return (
     <div className={styles.root}>
       <HeroTitle
         isBanner
         img={fernImg}
-        title={heroSection.title}
-        description={heroSection.description}
+        title={content?.heroSection?.title}
+        descriptionRaw={content?.heroSection?.descriptionRaw}
         classes={{ main: styles.heroMain }}
       />
 
       <Section
-        title={stepCardSection.title}
+        title={content?.stepCardSection?.title || ''}
         classes={{ root: styles.topSection, title: styles.methodologyTitle }}
       >
         <StepCardsWithDescription
           className={styles.topSectionCards}
-          stepCards={stepCards}
-          description={stepCardSection.mainDescription}
+          openModal={openModal}
+          stepCards={content?.stepCardSection?.stepCards}
+          descriptionRaw={content?.stepCardSection?.descriptionRaw}
           bottomDescription={{
-            title: stepCardSection.bottomTitle,
-            body: stepCardSection.bottomDescription,
+            title: content?.outcomeSection?.title || '',
+            body: content?.outcomeSection?.descriptionRaw,
           }}
         />
       </Section>
@@ -163,7 +138,7 @@ const CreateMethodology: React.FC = () => {
           itemWidth="90%"
           padding={theme.spacing(2.5)}
           title="Ecological outcomes"
-          arrows={outcomes?.length > 3}
+          arrows={content?.outcomes ? content.outcomes.length > 3 : false}
           slidesToShow={3}
           items={outcomeCards}
         />
@@ -172,22 +147,16 @@ const CreateMethodology: React.FC = () => {
       <CardMedia image={topographyImg} className={styles.resourcesSection}>
         <Section withSlider titleAlign="left">
           <ResponsiveSlider
+            infinite={false}
             itemWidth="90%"
             classes={{ title: styles.resourcesTitle, root: styles.resourcesRoot }}
             padding={theme.spacing(2.5)}
             title="Resources"
             titleVariant="h2"
-            arrows={resources?.length > 3}
-            slidesToShow={3}
-            items={resources.map(({ btnText, description, href, imgSrc, lastUpdated, title }) => (
-              <ResourcesCard
-                image={{ publicURL: require(`../assets/${imgSrc}`) }}
-                title={title}
-                updated={lastUpdated}
-                description={description}
-                buttonText={btnText}
-                link={href.startsWith('http') ? href : require(`../assets/${href}`)}
-              />
+            arrows={content?.resources ? content.resources.length > resourceCardsShown : false}
+            slidesToShow={resourceCardsShown}
+            items={content?.resources?.map(resource => (
+              <WrappedResourcesCard resource={resource} />
             ))}
           />
         </Section>
@@ -195,25 +164,22 @@ const CreateMethodology: React.FC = () => {
 
       <HeroAction
         classes={{ main: styles.bottomSection }}
-        title={peerReviewSection.title}
-        description={peerReviewSection.description}
-        actionTxt={peerReviewSection.btnText}
-        action={() => openLink(peerReviewSection.href)}
+        bottomBanner={content?.peerReviewSection}
+        openModal={openModal}
       />
 
       <HeroAction
+        isBanner
         classes={{ main: styles.bottomSection }}
         img={writingOnPaperImg}
-        title={createCreditClassSection.title}
-        description={createCreditClassSection.description}
-        actionTxt={createCreditClassSection.btnText}
-        action={() => history.push(createCreditClassSection.href)}
+        bottomBanner={content?.createCreditClassSection}
+        openModal={openModal}
       />
       <FixedFooter justify="flex-end">
-        <ContainedButton onClick={() => setOpen(true)}>Submit a methodology</ContainedButton>
+        <ContainedButton onClick={() => openModal(content?.footerLink)}>Submit a methodology</ContainedButton>
       </FixedFooter>
       <Modal open={open} onClose={() => setOpen(false)} className={styles.modal}>
-        <iframe title="airtable-signup-form" src={footerLink} />
+        <iframe title="airtable-signup-form" src={modalLink} />
       </Modal>
     </div>
   );

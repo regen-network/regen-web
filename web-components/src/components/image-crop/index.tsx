@@ -10,6 +10,7 @@ export interface ImageCropProps {
   circularCrop?: boolean;
   onCropSubmit: (blob: HTMLImageElement) => void;
   onCancel: () => void;
+  fixedCrop?: Crop;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -29,13 +30,19 @@ const useStyles = makeStyles((theme: Theme) => ({
     height: 80,
     width: '100%',
     padding: theme.spacing(6),
+    marginTop: theme.spacing(10),
+    [theme.breakpoints.up('sm')]: {
+      paddingRight: 0,
+    },
   },
   button: {
     marginLeft: theme.spacing(2),
-    marginRight: theme.spacing(6),
+    [theme.breakpoints.down('xs')]: {
+      marginRight: theme.spacing(6),
+    },
   },
   cancelButton: {
-    color: theme.palette.grey[400],
+    color: theme.palette.grey[500],
     textTransform: 'none',
     fontSize: theme.spacing(4),
     marginLeft: theme.spacing(2),
@@ -48,16 +55,13 @@ export default function ImageCrop({
   circularCrop,
   onCropSubmit,
   onCancel,
+  fixedCrop,
 }: ImageCropProps): JSX.Element {
   const classes = useStyles();
   const imgRef = useRef<any>(null);
-  const [crop, setCrop] = useState<Crop | undefined>(undefined);
+  const [crop, setCrop] = useState<Crop | undefined>(fixedCrop);
   const [completedCrop, setCompletedCrop] = useState<Crop | undefined>(undefined);
   const mobileMatches = useMediaQuery('(max-width:834px)');
-
-  const onCropComplete = useCallback((newCrop: Crop): void => {
-    setCompletedCrop(newCrop);
-  }, []);
 
   const showCroppedImage = useCallback(async () => {
     if (!!completedCrop) {
@@ -70,44 +74,47 @@ export default function ImageCrop({
     }
   }, [completedCrop, onCropSubmit]);
 
-  const onLoad = useCallback(img => {
-    imgRef.current = img;
-    const imgWidth = img.width;
-    const imgHeight = img.height;
-    const aspect = 1;
-    const isPortrait = imgWidth / aspect < imgHeight * aspect;
-    const isLandscape = imgWidth / aspect > imgHeight * aspect;
-    const width = isPortrait ? 90 : ((imgHeight * aspect) / imgWidth) * 90;
-    const height = isLandscape ? 90 : (imgWidth / aspect / imgHeight) * 90;
-    const y = (100 - height) / 2;
-    const x = (100 - width) / 2;
-    const percentCrop: Crop = {
-      aspect,
-      unit: '%',
-      width,
-      height,
-      x,
-      y,
-    };
+  const onLoad = useCallback(
+    img => {
+      imgRef.current = img;
+      const imgWidth = img.width;
+      const imgHeight = img.height;
+      const aspect = crop?.aspect || 1;
+      const isPortrait = imgWidth / aspect < imgHeight * aspect;
+      const isLandscape = imgWidth / aspect > imgHeight * aspect;
+      const width = isPortrait ? 90 : ((imgHeight * aspect) / imgWidth) * 90;
+      const height = isLandscape ? 90 : (imgWidth / aspect / imgHeight) * 90;
+      const y = (100 - height) / 2;
+      const x = (100 - width) / 2;
+      const percentCrop: Crop = {
+        aspect,
+        unit: '%',
+        width,
+        height,
+        x,
+        y,
+      };
 
-    setCrop(percentCrop);
+      setCrop(percentCrop);
 
-    const pxWidth = isPortrait ? imgWidth * 0.9 : imgHeight * 0.9;
-    const pxHeight = pxWidth; // Square. This calculation will change if we need to support other aspect ratios
-    const pxX = (imgWidth - pxWidth) / 2;
-    const pxY = (imgHeight - pxHeight) / 2;
-    const pxCrop: Crop = {
-      aspect,
-      unit: 'px',
-      width: pxWidth,
-      height: pxHeight,
-      x: pxX,
-      y: pxY,
-    };
-    setCompletedCrop(pxCrop);
+      const pxWidth = isPortrait ? imgWidth * 0.9 : imgHeight * 0.9;
+      const pxHeight = isPortrait ? imgHeight * 0.9 : imgWidth * 0.9;
+      const pxX = (imgWidth - pxWidth) / 2;
+      const pxY = (imgHeight - pxHeight) / 2;
+      const pxCrop: Crop = {
+        aspect,
+        unit: 'px',
+        width: pxWidth,
+        height: pxHeight,
+        x: pxX,
+        y: pxY,
+      };
+      setCompletedCrop(pxCrop);
 
-    return false; // Return false if you set crop state in here.
-  }, []);
+      return false; // Return false if you set crop state in here.
+    },
+    [crop],
+  );
 
   return (
     <div className={classes.root}>
@@ -116,8 +123,8 @@ export default function ImageCrop({
           src={image}
           crop={crop}
           onImageLoaded={onLoad}
-          onChange={(crop: Crop, percentCrop: any) => setCrop(percentCrop)}
-          onComplete={c => onCropComplete(c)}
+          onChange={setCrop}
+          onComplete={setCompletedCrop}
           circularCrop={circularCrop}
           crossorigin="anonymous"
           imageStyle={{ maxHeight: mobileMatches ? 380 : 500 }}

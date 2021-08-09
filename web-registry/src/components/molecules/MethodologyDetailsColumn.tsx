@@ -1,26 +1,22 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
-import ReactHtmlParser from 'react-html-parser';
 import cx from 'clsx';
 
 import Card from 'web-components/lib/components/cards/Card';
 import Title from 'web-components/lib/components/title';
-import Description from 'web-components/lib/components/description';
-import { Methodology } from 'web-components/lib/components/methodologies';
+import { BlockContent }  from 'web-components/lib/components/block-content';
 
-import { Label } from '../atoms/Label';
+import { Methodology } from '../../mocks/mocks';
+import { LineItem } from './LineItem';
+import { Maybe, Scalars } from '../../generated/sanity-graphql';
 
 interface MethodologyDetailsColumnProps {
+  nameRaw?: Maybe<Scalars['JSON']>;
   methodology: Methodology;
   classes?: {
     root?: string;
   };
   className?: string;
-}
-
-interface LineItemProps {
-  label: string;
-  data: string;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -40,33 +36,15 @@ const useStyles = makeStyles((theme: Theme) => ({
   title: {
     marginBottom: theme.spacing(4),
   },
-  lineItem: {
-    marginTop: theme.spacing(4),
-  },
-  label: {
-    fontSize: theme.typography.pxToRem(12),
-    color: theme.palette.primary.contrastText,
-    marginBottom: theme.spacing(2),
-  },
-  data: {
-    fontSize: theme.typography.pxToRem(16),
-    fontWeight: 400,
-  },
 }));
 
 function MethodologyDetailsColumn({
+  nameRaw,
   methodology,
   classes,
   className,
 }: MethodologyDetailsColumnProps): JSX.Element {
   const styles = useStyles();
-
-  const LineItem = ({ label, data }: LineItemProps): JSX.Element => (
-    <div className={styles.lineItem}>
-      <Label className={styles.label}>{label}</Label>
-      <Description className={styles.data}>{ReactHtmlParser(data)}</Description>
-    </div>
-  );
 
   return (
     <div className={cx(classes?.root, className)}>
@@ -74,7 +52,7 @@ function MethodologyDetailsColumn({
         <Title className={styles.title} variant="h4">
           Methodology Details
         </Title>
-        {methodology.name && <LineItem label="methodology name" data={methodology.name} />}
+        {nameRaw && <LineItem label="methodology name" data={<BlockContent content={nameRaw} />} />}
         {methodology.version && <LineItem label="version" data={methodology.version} />}
         {methodology.methodologyDesigner && (
           <LineItem label="methodology designer" data={methodology.methodologyDesigner} />

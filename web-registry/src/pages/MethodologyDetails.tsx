@@ -2,8 +2,6 @@ import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import { useParams } from 'react-router-dom';
 
-import { Methodology } from 'web-components/lib/components/methodologies';
-
 import {
   MethodologyTopSection,
   MethodologySteps,
@@ -12,8 +10,10 @@ import {
   ResourcesSection,
   MethodologyTestSection,
 } from '../components/organisms';
-import { methodologies } from '../mocks';
+import mock from '../mocks/mock.json';
 import topoBackground from '../assets/background.jpg';
+import { useAllMethodologyQuery } from '../generated/sanity-graphql';
+import { client } from '../sanity';
 
 const useStyles = makeStyles<Theme>((theme: Theme) => ({
   root: {
@@ -29,19 +29,33 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
 function MethodologyDetails(): JSX.Element {
   const styles = useStyles();
   let { methodologyId } = useParams<{ methodologyId: string }>();
-  const methodology: Methodology | undefined = methodologies.find(p => p.id === methodologyId);
+  const { data } = useAllMethodologyQuery({ client });
+  const content = data?.allMethodology?.find(methodology => methodology.path === methodologyId);
+  // TODO replace with methodology data from db
+  const methodology = mock.methodologies.find(p => p.id === methodologyId);
 
   if (methodology) {
     return (
       <div className={styles.root}>
-        <MethodologyTopSection methodology={methodology} />
-        <MethodologySteps methodology={methodology} />
-        <MethodologyDocumentationSection methodology={methodology} />
+        <MethodologyTopSection
+          methodology={methodology}
+          nameRaw={content?.nameRaw}
+          descriptionRaw={content?.descriptionRaw}
+        />
+        <MethodologySteps steps={content?.steps} />
+        <MethodologyDocumentationSection
+          methodology={methodology}
+          nameRaw={content?.nameRaw}
+          documentation={content?.documentation}
+        />
         <div className={styles.topoBackground}>
-          <ImpactSection title="Ecological Impact" impacts={methodology.impact} />
+          <ImpactSection title="Ecological Impact" impacts={content?.ecologicalImpact} />
         </div>
-        <ResourcesSection resources={methodology.resources} />
-        <MethodologyTestSection methodology={methodology} />
+        <ResourcesSection resources={content?.resources} />
+        <MethodologyTestSection
+          title={content?.bottomSection?.title}
+          descriptionRaw={content?.bottomSection?.descriptionRaw}
+        />
       </div>
     );
   } else {

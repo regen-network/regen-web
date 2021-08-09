@@ -24,6 +24,7 @@ const styleCallback = (theme: Theme): any => ({
     padding: theme.spacing(2, 4),
     backgroundColor: theme.palette.primary.main,
     boxShadow: 'none',
+    textAlign: 'center',
     '&:hover': {
       backgroundColor: theme.palette.secondary.light,
       boxShadow: 'none',

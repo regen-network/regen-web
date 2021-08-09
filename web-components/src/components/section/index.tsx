@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import { Variant } from '@material-ui/core/styles/createTypography';
 
 import Title from '../title';
+import { parseText } from '../../utils/textParser';
 
 export interface SectionProps {
   children?: any;
@@ -13,7 +14,7 @@ export interface SectionProps {
     title?: string;
     titleWrap?: string;
   };
-  title?: string;
+  title?: string | JSX.Element;
   titleVariant?: Variant;
   withSlider?: boolean;
   titleLineHeight?: string;
@@ -96,7 +97,7 @@ const Section = ({
             variant={titleVariant}
             align={titleAlign}
           >
-            {title}
+            {parseText(title)}
           </Title>
           {titleAlign === 'left' && topRight}
         </div>

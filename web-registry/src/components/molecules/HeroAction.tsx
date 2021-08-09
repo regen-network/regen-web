@@ -1,23 +1,23 @@
 import React from 'react';
 import clsx from 'clsx';
-import ReactHtmlParser from 'react-html-parser';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import Title from 'web-components/lib/components/title';
 import Description from 'web-components/lib/components/description';
+import { BlockContent } from 'web-components/lib/components/block-content';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 
+import { BottomBannerFieldsFragment, Maybe } from '../../generated/sanity-graphql';
+import { onBtnClick } from '../../lib/button';
 import { BackgroundImgSection } from './BackgroundImgSection';
 
 type Props = {
-  actionTxt: string;
-  action: () => void;
+  openModal: (link: string) => void;
+  bottomBanner?: Maybe<BottomBannerFieldsFragment>;
   img?: string;
-  title: string;
   lightBg?: boolean;
-  description?: string;
   isBanner?: boolean;
   classes?: {
     root?: string;
@@ -77,6 +77,7 @@ const HeroAction: React.FC<Props> = ({ classes, ...props }) => {
   const styles = useStyles({ lightBg });
 
   const Button = lightBg ? OutlinedButton : ContainedButton;
+  const button = props.bottomBanner?.button;
 
   return (
     <BackgroundImgSection
@@ -92,16 +93,16 @@ const HeroAction: React.FC<Props> = ({ classes, ...props }) => {
             color={lightBg ? 'textPrimary' : 'primary'}
             className={styles.title}
           >
-            {ReactHtmlParser(props.title)}
+            {props.bottomBanner?.title}
           </Title>
-          {!!props.description && (
+          {!!props.bottomBanner?.descriptionRaw && (
             <Description className={clsx(styles.description, classes?.description)}>
-              {ReactHtmlParser(props.description)}
+              <BlockContent content={props.bottomBanner.descriptionRaw} />
             </Description>
           )}
           <Grid container justify="center">
-            <Button onClick={props.action} className={styles.btn} size="medium">
-              {ReactHtmlParser(props.actionTxt)}
+            <Button onClick={() => onBtnClick(props.openModal, button)} className={styles.btn} size="medium">
+              {button?.buttonText}
             </Button>
           </Grid>
         </div>

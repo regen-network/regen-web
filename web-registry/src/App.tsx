@@ -25,6 +25,7 @@ import {
   // Eligibility,
   // GettingStarted,
   // Home,
+  MediaStep,
   MethodologyReviewProcess,
   NotFoundPage,
   OrganizationProfile,
@@ -39,6 +40,7 @@ import {
   VerifyEmail,
   MethodologyDetails,
   CreateCreditClass,
+  CreditClassDetails,
 } from './pages';
 
 import './App.css';
@@ -138,6 +140,7 @@ const App: React.FC = (): JSX.Element => {
                 />
                 <ProtectedRoute path={`${path}/:projectId/basic-info`} component={BasicInfo} />
                 <ProtectedRoute path={`${path}/:projectId/story`} component={Story} />
+                <ProtectedRoute path={`${path}/:projectId/media`} component={MediaStep} />
 
                 {/* Used for Project Plan flow
                 <ProtectedRoute path={`${path}/:projectId/getting-started`} component={GettingStarted} />
@@ -175,6 +178,14 @@ const App: React.FC = (): JSX.Element => {
               <>
                 {/* <Route path={path} exact component={MethodologiesList} /> TODO */}
                 <Route path={`${path}/:methodologyId`} component={MethodologyDetails} />
+              </>
+            )}
+          />
+          <Route
+            path="/credit-classes"
+            render={({ match: { path } }) => (
+              <>
+                <Route path={`${path}/:creditClassId`} component={CreditClassDetails} />
               </>
             )}
           />

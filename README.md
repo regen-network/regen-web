@@ -11,6 +11,7 @@ The website for the [Regen Network](https://regen.network) decentralized infrast
   - [Development](#development)
   - [Deployment](#deployment)
     - [Registry](#registry)
+      - [GraphQL Type generation](#graphql-type-generation)
     - [Storybook](#storybook)
     - [Website](#website)
     - [Deploying the Custom Login form to Auth0](#deploying-the-custom-login-form-to-auth0)
@@ -96,10 +97,16 @@ yarn build
 To generate Type definitions from our GraphQL Schema, as well as custom react hooks, make sure the [graphQL server is running locally](https://github.com/regen-network/registry-server/blob/5adc07f89c0d4ee74d65779cfad591025c8bebc2/README.md#starting-a-development-server), `cd` into `/web-registry` and run:
 
 ```sh
-yarn graphql:generate-types
+yarn graphql:codegen
 ```
 
 This should be done anytime a `.graphql` file is created or modified.
+
+Similarly, types can be generated for Sanity GraphQL Schema using:
+
+```sh
+yarn graphql:codegen-sanity
+```
 
 ### Storybook
 

@@ -21,7 +21,7 @@ tokenEconomics:
     REGEN token will accrue value from transaction fees on ecological assets and other transactions originated and secured on-chain.
 
 
-    To learn more about Regen Network token economics, please read <a href="https://regen-network.gitlab.io/whitepaper/Economics.pdf" target="_blank">our whitepaper</a>.
+    To learn more about Regen Network token economics, please read [our whitepaper](https://regen-network.gitlab.io/whitepaper/Economics.pdf).
 infoSection:
   title: REGEN token on Osmosis Decentralized Exchange
   subtitle: "Release date: July 2021"
@@ -36,7 +36,7 @@ infoSection:
   imageAltText: Bird
   imageTitle: Bird
 tokenPool:
-  title: REGEN total token pool
+  title: REGEN total token supply
   subtitle: The total supply at mainnet launch was 100 million tokens.
   image: ../../static/media/token-pool.svg
   mobileImage: ../../static/media/token-pool-mobile.svg

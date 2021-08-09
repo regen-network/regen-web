@@ -85,6 +85,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.down('sm')]: {
       width: theme.spacing(73),
     },
+    '@media (max-width: 340px)': {
+      width: theme.spacing(70),
+    },
   },
   separator: {
     border: `0.5px solid ${theme.palette.grey[100]}`,

@@ -22,6 +22,7 @@ export interface ImageLeftCardProps {
   buttonText: string;
   buttonUrl: string;
   buttonIcon?: JSX.Element;
+  buttonBlankTarget?: boolean;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -79,6 +80,7 @@ function ImageLeftCard({
   buttonText,
   buttonUrl,
   buttonIcon,
+  buttonBlankTarget,
 }: ImageLeftCardProps): JSX.Element {
   const styles = useStyles();
 
@@ -97,7 +99,12 @@ function ImageLeftCard({
           {ReactHtmlParser(title)}
         </Title>
         {children && <div className={styles.line}>{children}</div>}
-        <OutlinedButton className={styles.button} startIcon={buttonIcon} href={buttonUrl} target="_blank">
+        <OutlinedButton
+          className={styles.button}
+          startIcon={buttonIcon}
+          href={buttonUrl}
+          target={buttonBlankTarget ? '_blank' : '_self'}
+        >
           {buttonText}
         </OutlinedButton>
       </CardContent>

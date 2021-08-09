@@ -143,7 +143,7 @@ function OpenCropImageModal(props: CropStoryProps): JSX.Element {
         open={open}
         onClose={handleClose}
         onSubmit={handleSubmit}
-        image={uploadedImage}
+        initialImage={uploadedImage}
         circularCrop={props.circularCrop}
       />
       <Card style={{ width: 200, height: 200, marginTop: 32 }}>

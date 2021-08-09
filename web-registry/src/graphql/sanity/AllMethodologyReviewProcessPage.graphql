@@ -1,0 +1,33 @@
+fragment reviewSectionFields on ReviewSection {
+  title
+  timespan
+  descriptionRaw
+  button {
+    ...buttonFields
+  }
+  disclaimerTop
+  disclaimerBottom
+  stepCardsSubsections {
+    ...basicStepCardSectionFields
+  }
+}
+
+query allMethodologyReviewProcessPage {
+  allMethodologyReviewProcessPage {
+    heroSection {
+      ...heroSectionFields
+    }
+    internalReviewSection {
+      ...reviewSectionFields
+    }
+    externalReviewSection {
+      ...reviewSectionFields
+    }
+    bottomBanner {
+      ...bottomBannerFields
+    }
+    metadata {
+      ...pageMetadataFields
+    }
+  }
+}

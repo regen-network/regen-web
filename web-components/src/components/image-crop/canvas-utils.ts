@@ -13,7 +13,7 @@ export async function getCroppedImg(image: HTMLImageElement, crop: Crop): Promis
   const ctx = canvas.getContext('2d');
   const pixelRatio = window.devicePixelRatio;
 
-  if (crop && crop.width && crop.height && crop.x && crop.y) {
+  if (crop && crop.width && crop.height && crop.x !== undefined && crop.y !== undefined) {
     canvas.width = crop.width * pixelRatio;
     canvas.height = crop.height * pixelRatio;
 

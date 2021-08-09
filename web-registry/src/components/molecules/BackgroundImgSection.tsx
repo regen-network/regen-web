@@ -28,7 +28,7 @@ const useStyles = makeStyles<Theme, StyleProps>(theme => ({
       minHeight: props.isBanner ? theme.spacing(125) : 'inherit',
     },
     [theme.breakpoints.down('xs')]: {
-      minHeight: props.isBanner ? theme.spacing(90) : 'inherit',
+      minHeight: props.isBanner ? '90vh' : 'inherit',
     },
   }),
 }));

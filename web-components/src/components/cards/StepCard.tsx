@@ -2,7 +2,6 @@ import React from 'react';
 import { makeStyles, Theme, useTheme } from '@material-ui/core';
 import { CardMedia } from '@material-ui/core';
 import cx from 'clsx';
-import ReactHtmlParser from 'react-html-parser';
 
 import Card from '../cards/Card';
 import ArrowFilledIcon from '../icons/ArrowFilledIcon';
@@ -17,23 +16,23 @@ import ContainedButton from '../buttons/ContainedButton';
 
 export interface StepCardProps {
   className?: string;
-  icon: JSX.Element;
+  icon?: JSX.Element;
   step?: Step;
   apiServerUrl?: string;
   imageStorageBaseUrl?: string;
 }
 
 export interface Step {
-  tagName?: string;
+  tagName?: string | null;
   title: string;
-  description?: string;
+  description?: string | JSX.Element;
   faqs?: QuestionItem[];
-  video?: string;
-  imageSrc?: string;
+  imageSrc?: string | null;
+  videoSrc?: string | null;
   imageAlt?: string;
   isActive?: boolean;
   stepNumber: number | string;
-  btnText?: string;
+  btnText?: string | null;
   onBtnClick?: () => void;
 }
 
@@ -120,6 +119,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     color: theme.palette.info.dark,
     padding: theme.spacing(3.5, 0),
     textAlign: 'center',
+    lineHeight: '145%',
     [theme.breakpoints.down('xs')]: {
       fontSize: theme.spacing(4.5),
     },
@@ -177,11 +177,11 @@ function StepCard({
   return (
     <div className={styles.root}>
       <Card className={cx(className, styles.card, step.isActive && styles.activeCard)}>
-        {step.video && (
+        {step.videoSrc && (
           <CardMedia
             className={styles.media}
             component="iframe"
-            src={step.video}
+            src={step.videoSrc}
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
@@ -201,9 +201,11 @@ function StepCard({
         )}
         <div className={styles.cardTop}>
           <div className={styles.cardTopThird}></div>
-          <div className={cx(styles.cardTopThird, styles.cardTopCenter)}>
-            <StepCircleBadge icon={icon} isActive={step.isActive} />
-          </div>
+          {icon && (
+            <div className={cx(styles.cardTopThird, styles.cardTopCenter)}>
+              <StepCircleBadge icon={icon} isActive={step.isActive} />
+            </div>
+          )}
           <div className={cx(styles.cardTopThird, styles.cardTopRight)}>
             {step.tagName && (
               <Tag className={styles.tag} name={step.tagName} color={theme.palette.secondary.main} />
@@ -217,9 +219,7 @@ function StepCard({
           <Title variant="h4" className={cx(styles.stepTitle, step.isActive && styles.activeTitle)}>
             {step.title}
           </Title>
-          <Description className={styles.stepDescription}>
-            {ReactHtmlParser(step.description || '')}
-          </Description>
+          <Description className={styles.stepDescription}>{step.description}</Description>
           {!!step.btnText && !!step.onBtnClick && (
             <ContainedButton onClick={step.onBtnClick} className={styles.btn}>
               {step.btnText}

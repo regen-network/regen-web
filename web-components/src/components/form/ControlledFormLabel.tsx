@@ -7,6 +7,7 @@ interface Props {
   className?: string;
   disabled?: boolean;
   optional?: boolean;
+  labelSubText?: string;
 }
 
 interface StyleProps {
@@ -15,6 +16,10 @@ interface StyleProps {
 }
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
+  root: {
+    display: 'flex',
+    alignItems: 'baseline',
+  },
   label: props => ({
     lineHeight: '140%',
     transform: 'scale(1)',
@@ -41,12 +46,34 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       },
     },
   }),
+  subLabel: {
+    marginLeft: theme.spacing(1),
+    fontWeight: 'normal',
+    color: theme.palette.info.main,
+    [theme.breakpoints.up('sm')]: {
+      fontSize: theme.spacing(4),
+    },
+    [theme.breakpoints.down('xs')]: {
+      fontSize: theme.spacing(3.5),
+    },
+  },
 }));
 
 /**
  *  manually re-implements MUI's FormLabel component to allow more control over positioning etc
  */
-export default function ControlledFormLabel({ children, className, optional, disabled }: Props): JSX.Element {
-  const classes = useStyles({ optional, disabled });
-  return <label className={clsx(classes.label, className)}>{children}</label>;
+export default function ControlledFormLabel({
+  children,
+  className,
+  optional,
+  disabled,
+  labelSubText,
+}: Props): JSX.Element {
+  const styles = useStyles({ optional, disabled });
+  return (
+    <div className={styles.root}>
+      <label className={clsx(styles.label, className)}>{children}</label>
+      {labelSubText && <label className={styles.subLabel}>&nbsp;{labelSubText}</label>}
+    </div>
+  );
 }

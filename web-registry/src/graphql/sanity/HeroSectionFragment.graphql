@@ -1,0 +1,4 @@
+fragment heroSectionFields on HeroSection {
+  title
+  descriptionRaw
+}

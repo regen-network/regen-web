@@ -321,7 +321,7 @@ function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JS
         geojson={geojson}
         isGISFile={isGISFile}
       />
-      <div className="project-background">
+      <div className="topo-background-alternate">
         <ProjectImpactSection impacts={project.impact} />
       </div>
 
@@ -358,7 +358,7 @@ function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JS
       )} */}
 
       {data?.projectByHandle?.documentsByProjectId?.nodes?.length > 0 && (
-        <div className={clsx('project-background', styles.projectContent)}>
+        <div className={clsx('topo-background-alternate', styles.projectContent)}>
           <Documentation
             txClient={txClient}
             onViewOnLedger={viewOnLedger}
@@ -369,7 +369,7 @@ function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JS
 
       {landManagementActions &&
         landManagementActions.map((actionsType, i) => (
-          <div key={i} className={clsx('project-background', i > 0 ? styles.projectActionsGroup : '')}>
+          <div key={i} className={clsx('topo-background-alternate', i > 0 ? styles.projectActionsGroup : '')}>
             <LandManagementActions
               actions={actionsType.actions}
               title={
@@ -385,7 +385,7 @@ function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JS
       {data?.projectByHandle?.eventsByProjectId?.nodes?.length > 0 && (
         <div
           className={clsx(
-            'project-background',
+            'topo-background-alternate',
             styles.projectDetails,
             styles.projectTimeline,
             styles.projectContent,
@@ -418,7 +418,7 @@ function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JS
       )}
 
       {otherProjects.length > 0 && (
-        <div className="project-background">
+        <div className="topo-background-alternate">
           <MoreProjectsSection projects={otherProjects} />
         </div>
       )}

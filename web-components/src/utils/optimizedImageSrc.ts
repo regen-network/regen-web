@@ -1,5 +1,5 @@
 export function getOptimizedImageSrc(
-  imgSrc: string | undefined,
+  imgSrc: string | undefined | null,
   imageStorageBaseUrl: string | undefined,
   apiServerUri: string | undefined,
 ): string {

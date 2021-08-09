@@ -3,13 +3,18 @@ import { makeStyles, Theme } from '@material-ui/core/styles';
 
 import EyeIcon from 'web-components/lib/components/icons/EyeIcon';
 import Section from 'web-components/lib/components/section';
-import { Methodology } from 'web-components/lib/components/methodologies';
 
 import { DocumentationCard } from '../molecules/DocumentationCard';
 import { MethodologyDetailsColumn } from '../molecules/MethodologyDetailsColumn';
+import { Methodology } from '../../mocks/mocks';
+import { Documentation, Maybe, Scalars } from '../../generated/sanity-graphql';
+import { getBtnHref } from '../../lib/button';
+import { getSanityImgSrc } from '../../lib/imgSrc';
 
 interface Props {
+  nameRaw?: Maybe<Scalars['JSON']>;
   methodology: Methodology;
+  documentation?: Maybe<Documentation>;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -54,34 +59,42 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-function MethodologyDocumentationSection({ methodology }: Props): JSX.Element {
+function MethodologyDocumentationSection({ methodology, documentation, nameRaw }: Props): JSX.Element {
   const styles = useStyles();
 
   return (
     <Section className={styles.section}>
       <div className={styles.main}>
         <div className={styles.cards}>
-          <DocumentationCard
-            mainTitle="Documentation"
-            cardTitle={methodology.documentationTitle}
-            imageSrc={methodology.documentationImage}
-            imageAlt={methodology?.documentationImageAltText}
-            buttonText={'view methodology'}
-            buttonUrl={methodology.documentationUrl}
-            buttonIcon={<EyeIcon />}
-            version={methodology.version}
-            program={methodology.program}
-          />
+          {documentation && (
+            <DocumentationCard
+              mainTitle="Documentation"
+              cardTitle={documentation.title || ''}
+              imageSrc={getSanityImgSrc(documentation.image)}
+              imageAlt={documentation.image?.imageAlt || documentation.title || ''}
+              buttonText={documentation.button?.buttonText || 'view document'}
+              buttonUrl={getBtnHref(documentation.button)}
+              buttonIcon={<EyeIcon />}
+              version={methodology.version}
+              program={methodology.program}
+              buttonBlankTarget={documentation.button?.buttonBlankTarget ? true : false}
+            />
+          )}
           <DocumentationCard
             mainTitle="Related Credit Class"
             cardTitle={methodology.creditClassName}
             imageSrc={methodology.creditClassImage}
             imageAlt={methodology?.creditClassImageAltText}
             buttonText={'learn more'}
-            buttonUrl={methodology.creditClassUrl} //TODO: update JSON to point to new Credit Ckass page when ready
+            buttonUrl={methodology.creditClassUrl}
+            buttonBlankTarget
           />
         </div>
-        <MethodologyDetailsColumn className={styles.detailColumn} methodology={methodology} />
+        <MethodologyDetailsColumn
+          className={styles.detailColumn}
+          nameRaw={nameRaw}
+          methodology={methodology}
+        />
       </div>
     </Section>
   );

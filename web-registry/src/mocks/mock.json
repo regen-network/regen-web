@@ -8,27 +8,21 @@
   },
   "creditClasses": [
     {
-      "title": "Carbon<i>Plus</i> Grasslands",
-      "description": "This credit class is a built as a holistic credit that includes multiple ecological benefits: Carbon Sequestration and Net GHG reduction, increased animal welfare, ecosystem health, and soil health.",
+      "id": "carbonplus-grasslands",
+      "version": "Version 0.9 (beta)",
+      "creditDesigner": "Regen Network Development, Inc",
+      "ecoType": "Grasslands",
+      "ecoServiceType":"Carbon Removal",
+      "approvedMethodology": "Carbon<i>Plus</i> Grasslands Methodology",
+      "methodologyUrl": "/methodologies/carbonplus-grasslands",
+      "methodologyId": "carbonplus-grasslands",
       "imgSrc": "credit-class-grasslands.png"
-    },
-    {
-      "title": "Carbon<i>Plus</i> Forestry",
-      "description": "This credit class is a built as a holistic credit that includes multiple ecological benefits: Carbon Sequestration and Net GHG reduction, ecosystem health, and soil health.",
-      "imgSrc": "credit-class-forestry.png"
     }
   ],
   "methodologies": [
     {
-      "name": "Carbon<i>Plus</i> Grasslands Methodology",
       "id": "carbonplus-grasslands",
-      "description": "The Methodology for GHG and Co-Benefits in Grazing Systems provides a holistic assessment of ecological state indicators for grasslands under regenerative grazing practices. Managed grazing, which involves carefully controlling livestock density and intensity of grazing, has been shown to provide a wide range of ecosystem benefits such as enhanced carbon sequestration, improved soil health, and increased water infiltration. This methodology combines remote sensing data with in-field measurements to provide high quality estimates of soil organic carbon stock and measures additional ecological co-benefits such as animal welfare, ecosystem health, and soil health.",
       "imageSrc": "https://regen-registry.s3.amazonaws.com/methodologies/carbonplus_grasslands/grasslands.png",
-      "imageAlt": "Grasslands",
-      "documentationUrl": "https://regen-registry.s3.amazonaws.com/Methodology+for+GHG+and+Co-Benefits+in+Grazing+Systems.pdf",
-      "documentationTitle": "GHG & Co-Benefits in Grazing Systems Methodology (Beta)",
-      "documentationImage": "https://regen-registry.s3.amazonaws.com/methodologies/carbonplus_grasslands/methodology-doc.png",
-      "documentationImageAltText": "grasslands",
       "version": "0.9 (Beta)",
       "program": "Regen Registry",
       "methodologyDesigner": "Regen Network Development, Inc",
@@ -37,198 +31,7 @@
       "creditClassName": "Carbon<i>Plus</i> Grasslands Credit Class",
       "creditClassImage": "https://regen-registry.s3.amazonaws.com/methodologies/carbonplus_grasslands/credit-class-doc.png",
       "creditClassImageAltText": "Cattle Ranch",
-      "creditClassUrl": "https://regen-registry.s3.amazonaws.com/GHG+and+Co-Benefits+in+Grazing+Systems+Credit+Class.pdf",
-      "testMethodologyTitle": "Test this methodology",
-      "testMethodologyDescription": "Have your own soil samples? Want to learn how this methodology works in your area? So would we! In supporting the movement of #OpenScience, Regen Network Development Inc., hopes to build a community of scientists and land stewards who actively contribute to improving the methods used to monitor ecological landscapes. We encourage anyone interested to contribute to this growing body of knowledge by testing our methodology in your area.<br><br>Reach out to us at <a href=\"mailto:science@regen.network\" target=\"_blank\">science@regen.network</a> to share your results!",
-      "steps":  [
-        {
-          "stepNumber": 1,
-          "title": "Collect in-field soil samples",
-          "isActive": true,
-          "description":
-            "Soil samples collected at strategic points across the property are tested for soil organic carbon, bulk density, and soil health variables.",
-          "imageSrc": "https://regen-registry.s3.amazonaws.com/methodologies/carbonplus_grasslands/soil-sample.png",
-          "imageAlt": "Field",
-          "faqs": [
-            {
-              "question":"How many samples need to be collected?",
-              "answer":"The number of samples needed for a project varies with the project size and landscape variability. Larger projects, or projects in more topographically or ecologically complex areas are more likely to have a wide range of soil organic carbon values. An accurate soil carbon assessment relies on collecting enough samples to capture the spatial variability of the soil. Our Sample Size Calculator provides more information."
-            },
-            {
-              "question": "How are sampling locations determined?",
-              "answer":"Variables highly correlated to soil organic carbon are used to stratify the project area using k-means and conditioned latin hypercube (cLHC) algorithms. The resulting stratification is used to assign sampling locations which cover the full range of SOC values. This approach can help reduce the number of samples needed to measure soil carbon by creating a more efficient sampling design."
-            },
-            {
-              "question":"How are soil samples processed?",
-              "answer":"Soil samples are sent to a certified laboratory where they are processed for soil organic carbon, bulk density, and other soil health metrics. Information on lab certifications and regionally approved soil laboratories can be found in our <a href=\"https://regen-registry.s3.amazonaws.com/Soil+Sampling+Guide.pdf\" target=\"_blank\">Soil Sampling Resource Guide</a>."
-            }
-          ]
-        },
-        {
-          "stepNumber": 2,
-          "title": "Map soil organic carbon",
-          "isActive": true,
-          "description":
-            "Remote sensing data and the lab-tested soil samples are used to estimate soil organic carbon at unsampled locations using statistical models, machine learning, and spatial interpolation.",
-          "imageSrc": "https://regen-registry.s3.amazonaws.com/methodologies/carbonplus_grasslands/soc-map.png",
-          "imageAlt": "SOC Map",
-          "faqs": [
-            {
-              "question": "What is remote sensing?",
-              "answer":
-                "Remote sensing is the process of detecting and monitoring the physical characteristics of an area at a distance. Special cameras mounted on satellites or aircrafts collect images which allow researchers to monitor landscapes without having to visit the location of interest."
-            },
-            {
-              "question": "What remote sensing data is used",
-              "answer":
-                "This methodology uses hyperspectral satellite imagery with a spatial resolution of 20 meters or higher (Sentinel-2, PlanetScope, WorldView, etc…). Regionally available digital elevation models (DEMs), soil variability maps, and historical land management data are also included in the soil carbon estimate."
-            },
-            {
-              "question": "How are remote sensing data used to map soil organic carbon?",
-              "answer":
-                "Satellite imagery and other remote sensing data are paired with soil organic carbon values collected in the field, using GPS coordinates recorded at sample locations to tie the datasets together. Statistical models and machine learning algorithms are then fit to this combined dataset and used to predict percent soil organic carbon at unsampled locations."
-            },
-            {
-              "question": "Is the remote sensing approach always used?",
-              "answer":
-                "No. The scalability of the satellite remote sensing approach from the CarbonPlus methodology for GHG and Co-benefits in Grazing Systems is still under research. Presumably, not all grassland areas will have high correlation between soil organic carbon (SOC) and the spectral reflectance of the grasslands surface. Interpolation methods, such as the kriging, inverse distance weighted (IDW), and spline algorithms, are offered as an alternative to the satellite remote sensing approach."
-            }
-          ]
-        },
-        {
-          "stepNumber": 3,
-          "title": "Quantify soil organic carbon stock",
-          "isActive": true,
-          "description":
-            "Percent soil organic carbon estimates are combined with bulk density measurements from the field to quantify soil organic carbon stocks and CO2 equivalent stocks.",
-          "imageAlt": "SOC Quantification",
-          "imageSrc": "https://regen-registry.s3.amazonaws.com/methodologies/carbonplus_grasslands/stocks-soc.png",
-          "faqs": [
-            {
-              "question": "What’s the difference between percent soil organic carbon and soil organic carbon stocks?",
-              "answer":
-                "Percent soil organic carbon indicates the amount of carbon present in the soil, but does not quantify volumetrically how much carbon is being stored."
-            },
-            {
-              "question": "How are soil organic carbon stocks quantified?",
-              "answer":
-                "Soil organic carbon stocks are quantified by multiplying percent SOC by bulk density and soil depth. To ensure proper estimation of soil organic carbon stocks, any man-made objects such as roads or buildings, woody vegetation, bodies of water and other non-grasslands land types are excluded from the stock estimation."
-            },
-            {
-              "question": "How is bulk density measured?",
-              "answer":
-                "Soil samples collected alongside soil carbon samples are tested for bulk density. Spatial interpolation algorithms and pedotransfer functions are used to estimate bulk density at unsampled locations. "
-            },
-            {
-              "question": "What soil depth is used?",
-              "answer":
-                "The soil depth used for carbon stock quantification is the depth measured in the soil samples, which should remain consistent across sampling locations."
-            },
-            {
-              "question": "How are soil organic carbon stocks converted to CO2 equivalent stocks?",
-              "answer":
-                "Carbon stored in the soil can not be directly compared to carbon found in GHG emissions. To convert soil organic carbon stocks (tonC) to CO2 equivalent stocks (ton CO2-eq) a conversion factor of 3.67 is used"
-            }
-          ]
-        },
-        {
-          "stepNumber": 4,
-          "title": "Calculate creditable carbon change",
-          "isActive": true,
-          "description":
-            "Creditable carbon change is calculated by comparing the measured CO2 equivalent stocks to the baseline year. Deductions are made to account for emissions from the project activity, such as methane emissions, and uncertainty from the soil carbon estimate.",
-          "imageSrc": "https://regen-registry.s3.amazonaws.com/methodologies/carbonplus_grasslands/creditable-carbon-change.png",
-          "imageAlt": "SOC Change",
-          "faqs": [
-            {
-              "question": "How are emissions from grazing livestock accounted for?",
-              "answer":
-                "Each monitoring period the number of animal heads within the project area are recorded and multiplied by regional or IPCC sponsored emission factors to calculate Greenhouse Gas (GHG) emissions."
-            },
-            {
-              "question": "What is an uncertainty deduction?",
-              "answer":
-                "The total uncertainty for a project is the sum of the uncertainties calculated throughout the methodology during a given monitoring period. Sources of uncertainty for creditable carbon stock calculations include percent soil organic carbon estimates, bulk density estimates, and other calculations which could have introduced additional errors."
-            },
-            {
-              "question": "How are uncertainty deductions applied?",
-              "answer":
-                "Uncertainty deductions are scaled to the level of uncertainty. Uncertainty deductions used in this method can be found in Section 3.6.4 of the <a href=\"https://regen-registry.s3.amazonaws.com/Methodology+for+GHG+and+Co-Benefits+in+Grazing+Systems.pdf\" target=\"_blank\">Methodology for GHG and Co-Benefits in Grazing Systems.</a>"
-            }
-          ]
-        },
-        {
-          "stepNumber": 5,
-          "title": "Assess co-benefits",
-          "isActive": true,
-          "description":
-            "Soil health, ecosystem health, and animal welfare are assessed using a combination of remote sensing and in-field data to provide a holistic assessment of the project area beyond carbon sequestration.",
-          "imageSrc": "https://regen-registry.s3.amazonaws.com/methodologies/carbonplus_grasslands/cows.png",
-          "imageAlt": "Cows",
-                    "faqs": [
-            {
-              "question": "How is soil health evaluated?",
-              "answer":
-                "Soil health is evaluated by comparing the lab measured soil health indicators with local soil health benchmarks. Indicators such as pH, Nitrogen, Phosphorus, Potassium, Calcium and Magnesium are included in the assessment."
-            },
-            {
-              "question": "How is animal welfare evaluated?",
-              "answer":
-                "The Animal Welfare assessment is based on local recommendations to outline specific requirements (such as access to feed and water, facilities, animal handling) and a ranking of each according to current practices."
-            },
-            {
-              "question": "How is ecosystem health evaluated?",
-              "answer":
-                "Ecosystem health is assessed through the use of context-dependent indicators of ecosystem vigor, organization, and resilience."
-            }
-          ]
-        }
-      ],
-      "impact": [
-        {
-          "name": "Soil Organic Carbon",
-          "description": "Organic matter contributes to nutrient retention and turnover, soil structure, moisture retention and availability, degradation of pollutants, carbon sequestration and soil resilience.",
-          "monitored": true,
-          "imgSrc": "https://regen-registry.s3.amazonaws.com/projects/wilmot/impact1.png"
-        },
-        {
-          "name": "Animal Welfare",
-          "description": "Animal welfare is an important component in a well managed grazing enterprise. Low stress stock handling techniques have been adopted to ensure animals have higher quality life.",
-          "monitored": false,
-          "imgSrc": "https://regen-registry.s3.amazonaws.com/projects/wilmot/impact2.png"
-        },
-        {
-          "name": "Ecosystem Health",
-          "description": "In the ecological realm, ‘health’ is characterized by system integrity and the exhibition of certain fundamental properties of self-organizing complex systems.",
-          "monitored": false,
-          "imgSrc": "https://regen-registry.s3.amazonaws.com/projects/wilmot/impact3.png"
-        },
-        {
-          "name": "Soil Health",
-          "description": "The capacity of soil to function as a vital living ecosystem that sustains plants, animals, and humans.",
-          "monitored": false,
-          "imgSrc": "https://regen-registry.s3.amazonaws.com/projects/wilmot/impact4.png"
-        }
-      ],
-      "resources": [
-        {
-          "title": "Monitoring Report Template for Grassland Credits",
-          "description": "Use this monitoring template for your project.",
-          "image": { "publicURL": "https://regen-registry.s3.amazonaws.com/methodologies/carbonplus_grasslands/monitor-report.png" },
-          "buttonText": "view template",
-          "link": "https://docs.google.com/document/d/11pIb5nfUvmeGuDRIhuawhtLLNEuoShLSD0vcx3wokHk",
-          "updated": "May 24, 2021"
-        },
-        {
-          "title": "Soil Sampling Guide",
-          "description": "Learn about our guidelines for collecting soil samples.",
-          "image": { "publicURL": "https://regen-registry.s3.amazonaws.com/methodologies/carbonplus_grasslands/soil-sample-guide.png" },
-          "buttonText": "view guide",
-          "link": "https://regen-registry.s3.amazonaws.com/Soil+Sampling+Guide.pdf",
-          "updated": "March 5, 2021"
-
-        }
-      ]
+      "creditClassUrl": "/credit-classes/carbonplus-grasslands"
     }
   ],
   "projectDefault": {
@@ -575,6 +378,7 @@
       "creditClass": {
         "name": "Carbon<i>Plus</i>&nbsp;&nbsp;Grasslands",
         "offsetGenerationMethod": "Carbon removal",
+        "id": "carbonplus-grasslands",
         "description": "Livestock grazing covers over 3.3 billion hectares, or 25 percent of the world’s land area. Managed grazing practices can reverse land degradation, enhance net carbon sequestration, and improve soil and vegetation quality.<br><br>Under managed grazing, carbon sequestration potential is estimated between 16.4 and 26 Gt CO2e sequestered in the period between 2020-2050.<br><br>This credit is designed to significantly increase the amount of hectares under managed grazing worldwide. To that end, the methodology relies on remote sensing to substantially reduce the cost of monitoring carbon sequestration while maintaining scientific rigor.",
         "tag": "soil organic carbon",
         "url": "https://regen-registry.s3.amazonaws.com/GHG+and+Co-Benefits+in+Grazing+Systems+Credit+Class.pdf"
@@ -751,6 +555,7 @@
       "creditClass": {
         "name": "Carbon<i>Plus</i>&nbsp;&nbsp;Grasslands",
         "offsetGenerationMethod": "Carbon removal",
+        "id": "carbonplus-grasslands",
         "description": "Livestock grazing covers over 3.3 billion hectares, or 25 percent of the world’s land area. Managed grazing practices can reverse land degradation, enhance net carbon sequestration, and improve soil and vegetation quality.<br><br>Under managed grazing, carbon sequestration potential is estimated between 16.4 and 26 Gt CO2e sequestered in the period between 2020-2050.<br><br>This credit is designed to significantly increase the amount of hectares under managed grazing worldwide. To that end, the methodology relies on remote sensing to substantially reduce the cost of monitoring carbon sequestration while maintaining scientific rigor.",
         "tag": "soil organic carbon",
         "url": "https://regen-registry.s3.amazonaws.com/GHG+and+Co-Benefits+in+Grazing+Systems+Credit+Class.pdf"
@@ -937,6 +742,7 @@
       "creditClass": {
         "name": "Carbon<i>Plus</i>&nbsp;&nbsp;Grasslands",
         "offsetGenerationMethod": "Carbon removal",
+        "id": "carbonplus-grasslands",
         "description": "Livestock grazing covers over 3.3 billion hectares, or 25 percent of the world’s land area. Managed grazing practices can reverse land degradation, enhance net carbon sequestration, and improve soil and vegetation quality.<br><br>Under managed grazing, carbon sequestration potential is estimated between 16.4 and 26 Gt CO2e sequestered in the period between 2020-2050.<br><br>This credit is designed to significantly increase the amount of hectares under managed grazing worldwide. To that end, the methodology relies on remote sensing to substantially reduce the cost of monitoring carbon sequestration while maintaining scientific rigor.",
         "tag": "soil organic carbon",
         "url": "https://regen-registry.s3.amazonaws.com/GHG+and+Co-Benefits+in+Grazing+Systems+Credit+Class.pdf"
@@ -1102,6 +908,7 @@
       "creditClass": {
         "name": "Carbon<i>Plus</i>&nbsp;&nbsp;Grasslands",
         "offsetGenerationMethod": "Carbon removal",
+        "id": "carbonplus-grasslands",
         "description": "Livestock grazing covers over 3.3 billion hectares, or 25 percent of the world’s land area. Managed grazing practices can reverse land degradation, enhance net carbon sequestration, and improve soil and vegetation quality.<br><br>Under managed grazing, carbon sequestration potential is estimated between 16.4 and 26 Gt CO2e sequestered in the period between 2020-2050.<br><br>This credit is designed to significantly increase the amount of hectares under managed grazing worldwide. To that end, the methodology relies on remote sensing to substantially reduce the cost of monitoring carbon sequestration while maintaining scientific rigor.",
         "tag": "soil organic carbon",
         "url": "https://regen-registry.s3.amazonaws.com/GHG+and+Co-Benefits+in+Grazing+Systems+Credit+Class.pdf"

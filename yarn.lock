@@ -7465,6 +7465,34 @@
   dependencies:
     any-observable "^0.3.0"
 
+"@sanity/block-content-to-hyperscript@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@sanity/block-content-to-hyperscript/-/block-content-to-hyperscript-3.0.0.tgz#a8437b608daac9b7cc4124c490d345fa84d4a267"
+  integrity sha512-uoXWLdFY5LqO8A9sFJqnZWWDCBC+0r3Egeh0bwKQ2EK2Vil5L40iJGNXMZhDB8BnvH+6B4155SU8Q3vY59T6pA==
+  dependencies:
+    "@sanity/generate-help-url" "^0.140.0"
+    "@sanity/image-url" "^0.140.15"
+    hyperscript "^2.0.2"
+    object-assign "^4.1.1"
+
+"@sanity/block-content-to-react@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@sanity/block-content-to-react/-/block-content-to-react-3.0.0.tgz#1deac74763540fdf61b14ad52fb1a01b35d60453"
+  integrity sha512-oHPLlIsulsnL3ITs93RIvUPBI6nAeoSFOUf16vX4T7z4wWywxP39N1DF9mAx2tV6Kjr1fJAx5GF7zfiMXYLaqA==
+  dependencies:
+    "@sanity/block-content-to-hyperscript" "^3.0.0"
+    prop-types "^15.6.2"
+
+"@sanity/generate-help-url@^0.140.0":
+  version "0.140.0"
+  resolved "https://registry.yarnpkg.com/@sanity/generate-help-url/-/generate-help-url-0.140.0.tgz#f60ab75be5fdc346b9f0d1c2a0858aa3c2870109"
+  integrity sha512-H/G/WA9S22TXcXST52CIiTsHx3S2hH0gvK7LnI5w76vfKS0obnDPh8jrPg4xeNRYGPuV9MHYRlyERGpRGoo4Qw==
+
+"@sanity/image-url@^0.140.15":
+  version "0.140.22"
+  resolved "https://registry.yarnpkg.com/@sanity/image-url/-/image-url-0.140.22.tgz#7a65f56bb751f7b1c5dfacfadd34ee10fc4f0fde"
+  integrity sha512-CAmQZnj+KM7FSEYiWlIGDit072syicYuAw0w7R2ctMzHiZ4p9mE/g6dBnYqrqFUrw2J+GpJgPt+RVspKP8vdqA==
+
 "@sindresorhus/is@^0.14.0":
   version "0.14.0"
   resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-0.14.0.tgz#9fb3a3cf3132328151f353de4632e01e52102bea"
@@ -10245,6 +10273,11 @@ atob@^2.1.1, atob@^2.1.2:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/atob/-/atob-2.1.2.tgz#6d9517eb9e030d2436666651e86bd9f6f13533c9"
 
+attr-accept@^2.2.1:
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/attr-accept/-/attr-accept-2.2.2.tgz#646613809660110749e92f2c10833b70968d929b"
+  integrity sha512-7prDjvt9HmqiZ0cl5CRjtS84sEyhsHP2coDkaZKRKVfCDo9s7iw7ChVmar78Gu9pC4SoR/28wFu/G5JJhTnqEg==
+
 auth0-js@^9.14.3:
   version "9.14.3"
   resolved "https://registry.yarnpkg.com/auth0-js/-/auth0-js-9.14.3.tgz#1b6feee3c8a131906694713c82c68f46eabc953c"
@@ -11367,6 +11400,11 @@ browser-resolve@^1.11.3:
   dependencies:
     resolve "1.1.7"
 
+browser-split@0.0.0:
+  version "0.0.0"
+  resolved "https://registry.yarnpkg.com/browser-split/-/browser-split-0.0.0.tgz#41419caef769755929dd518967d3eec0a6262771"
+  integrity sha1-QUGcrvdpdVkp3VGJZ9PuwKYmJ3E=
+
 browser-tabs-lock@1.2.9:
   version "1.2.9"
   resolved "https://registry.yarnpkg.com/browser-tabs-lock/-/browser-tabs-lock-1.2.9.tgz#fa9568471c49de1dbe311a6da95f86794bbe1fdf"
@@ -12198,6 +12236,13 @@ cipher-base@^1.0.0, cipher-base@^1.0.1, cipher-base@^1.0.3:
   dependencies:
     inherits "^2.0.1"
     safe-buffer "^5.0.1"
+
+class-list@~0.1.0, class-list@~0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/class-list/-/class-list-0.1.1.tgz#9b9745192c4179b5da0a0d7633658e3c70d796cb"
+  integrity sha1-m5dFGSxBebXaCg12M2WOPHDXlss=
+  dependencies:
+    indexof "0.0.1"
 
 class-utils@^0.3.5:
   version "0.3.6"
@@ -16121,6 +16166,13 @@ file-loader@^3.0.1:
     loader-utils "^1.0.2"
     schema-utils "^1.0.0"
 
+file-selector@^0.2.2:
+  version "0.2.4"
+  resolved "https://registry.yarnpkg.com/file-selector/-/file-selector-0.2.4.tgz#7b98286f9dbb9925f420130ea5ed0a69238d4d80"
+  integrity sha512-ZDsQNbrv6qRi1YTDOEWzf5J2KjZ9KMI1Q2SGeTkCJmNNW25Jg4TW4UMcmoqcg4WrAyKRcpBXdbWRxkfrOzVRbA==
+  dependencies:
+    tslib "^2.0.3"
+
 file-system-cache@^1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/file-system-cache/-/file-system-cache-1.0.5.tgz#84259b36a2bbb8d3d6eb1021d3132ffe64cfff4f"
@@ -19270,6 +19322,13 @@ html-element-map@^1.2.0:
     array-filter "^1.0.0"
     call-bind "^1.0.2"
 
+html-element@^2.0.0:
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/html-element/-/html-element-2.3.1.tgz#5feb23dd5226467ef8c2faec51a5bf29c4ef5440"
+  integrity sha512-xnFt2ZkbFcjc+JoAtg3Hl89VeEZDjododu4VCPkRvFmBTHHA9U1Nt6hLUWfW2O+6Sl/rT1hHK/PivleX3PdBJQ==
+  dependencies:
+    class-list "~0.1.1"
+
 html-encoding-sniffer@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/html-encoding-sniffer/-/html-encoding-sniffer-1.0.2.tgz#e70d84b94da53aa375e11fe3a351be6642ca46f8"
@@ -19555,6 +19614,15 @@ hyperlinker@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/hyperlinker/-/hyperlinker-1.0.0.tgz#23dc9e38a206b208ee49bc2d6c8ef47027df0c0e"
   integrity sha512-Ty8UblRWFEcfSuIaajM34LdPXIhbs1ajEX/BBPv24J+enSVaEVY63xQ6lTO9VRYS5LAoghIG0IDJ+p+IPzKUQQ==
+
+hyperscript@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/hyperscript/-/hyperscript-2.0.2.tgz#3839cba45554bdfe27bb81c2142d1684f8135af5"
+  integrity sha1-ODnLpFVUvf4nu4HCFC0WhPgTWvU=
+  dependencies:
+    browser-split "0.0.0"
+    class-list "~0.1.0"
+    html-element "^2.0.0"
 
 hyphenate-style-name@^1.0.3:
   version "1.0.3"
@@ -27193,6 +27261,15 @@ react-draggable@^4.0.3:
   dependencies:
     classnames "^2.2.5"
     prop-types "^15.6.0"
+
+react-dropzone@^11.3.4:
+  version "11.3.4"
+  resolved "https://registry.yarnpkg.com/react-dropzone/-/react-dropzone-11.3.4.tgz#aeb098df5c4491e165042c9f0b5e2e7185484740"
+  integrity sha512-B1nzNRZ4F1cnrfEC0T6KXeBN1mCPinu4JCoTrp7NjB+442KSPxqfDrw41QIA2kAwlYs1+wj/0BTedeM5hc2+xw==
+  dependencies:
+    attr-accept "^2.2.1"
+    file-selector "^0.2.2"
+    prop-types "^15.7.2"
 
 react-error-overlay@^3.0.0:
   version "3.0.0"

@@ -114,9 +114,9 @@ coreSection:
       title: Senior Software Engineer
       description: Marie is an ecologically committed full-stack developer with a
         great interest in permaculture. She has been developing web and mobile
-        applications for more than 5 years. She values transparency, fairness
-        and sustainability through the projects she works on. She truly believes
-        in Regen’s mission to promote regenerative agriculture.
+        applications for 10 years. She values transparency, fairness and
+        sustainability through the projects she works on. She truly believes in
+        Regen’s mission to promote regenerative agriculture.
       image: ../../static/media/marie.png
       linkedUrl: https://www.linkedin.com/in/mariegauthier/
       twitterUrl: https://twitter.com/mariegauthier5
@@ -183,14 +183,6 @@ coreSection:
         for carbon sequestration in hardwood forests that address climate
         change.
       image: ../../static/media/sam-bennetts.png
-    - name: Adriana Mihai
-      title: Blockchain Community Liason
-      description: Adriana is a long term community contributor of the @cosmos
-        ecosystem, helping Regen with community awareness through “Last/This
-        week in Regen”. She believes that humanity is at a critical breaking
-        point and Regen’s project on ecological regeneration acts as a beacon of
-        light by adding value to the worldwide efforts in saving the world.
-      image: ../../static/media/adriana-mihai.png
     - image: ../../static/media/daniel-pittman.jpg
       name: Daniel Pittman
       description: Daniel is a highly motivated software engineer experienced with
@@ -299,6 +291,16 @@ coreSection:
         in Chicago and is from Detroit. "
       name: Alex Karana
       title: Product Legal Assistant
+    - image: ../../static/media/ned.png
+      title: Remote Sensing Specialist
+      name: Ned Horning
+      linkedUrl: https://www.linkedin.com/in/ned-horning-a406414/
+      description: Ned is an environmental remote sensing specialist and geospatial
+        jack of all trades with over 35+ years of experience. Ned has spent nine
+        years at NASA’s Goddard Space Flight Center, nine years working as a
+        private consultant, and 18 years with the American Museum of Natural
+        History. He is thrilled to be applying his skills to support planetary
+        regeneration with Regen Network.
 contributorSection:
   title: Contributors
   contributors:
@@ -319,14 +321,6 @@ contributorSection:
       name: Ethan Frey
       image: ../../static/media/ethan-frey.jpg
       linkedUrl: https://www.linkedin.com/in/ethanfrey/
-    - name: Clare Politano
-      title: "Developer "
-      description: Clare is a software engineer dedicated to a regenerative future.
-        She is the co-founder of PayCheck, a transparency and pay equity
-        platform. Clare previously worked in refugee resettlement, sustainable
-        manufacturing, and nutrition and food advocacy.
-      linkedUrl: https://www.linkedin.com/in/clarepolitano/
-      image: ../../static/media/clare-politano.png
     - name: Daniel Swid
       title: Consultant
       description: Daniel has contributed to the foundational success of 5 technology
@@ -393,6 +387,14 @@ contributorSection:
         innovative strategies and incentive mechanisms for carbon asset
         management, ecosystem service payments, and regenerative natural capital
         investment finance.
+    - name: Adriana Mihai
+      title: Blockchain Community Liason
+      description: Adriana is a long term community contributor of the @cosmos
+        ecosystem, helping Regen with community awareness through “Last/This
+        week in Regen”. She believes that humanity is at a critical breaking
+        point and Regen’s project on ecological regeneration acts as a beacon of
+        light by adding value to the worldwide efforts in saving the world.
+      image: ../../static/media/adriana-mihai.png
 advisorSection:
   title: Advisors
   advisors:

@@ -249,25 +249,43 @@ function ToggleVariants(): JSX.Element {
   );
 }
 function RoleInput(): JSX.Element {
-  const entitiez = [
+  const entities = [
     { legalName: 'Impact Ag', id: 1 },
     { name: 'Toby Grogan', id: 2 },
   ];
 
-  const options = entitiez.map(e => {
+  const entityOptions = entities.map(e => {
     return {
       label: e.name || e.legalName,
-      id: e.id,
+      ...e,
     };
   });
-  const [entities, setEntites] = useState(options);
 
-  const addEntity = (entity: any): Promise<any> => {
-    entity.id = entities[entities.length - 1].id + 1;
-    const newEntities = [...entities, { label: entity.name || entity.legalName, id: entity.id }];
-    setEntites(newEntities);
-    return Promise.resolve(entity);
+  const [options, setOptions] = useState<any>(entityOptions);
+
+  const saveEntity = (updatedEntity: any): Promise<any> => {
+    console.log('saveEntity', updatedEntity.id);
+    // console.log('saveEntity', updatedEntity);
+
+    if (!updatedEntity.id) {
+      updatedEntity.id = options[options.length - 1].id + 1;
+      const newOptions = [
+        ...options,
+        { label: updatedEntity.name || updatedEntity.legalName, id: updatedEntity.id },
+      ];
+      setOptions(newOptions);
+    } else {
+      const updatedOptions = options.map(exisitingEntity =>
+        exisitingEntity.id === updatedEntity.id
+          ? { label: updatedEntity.name || updatedEntity.legalName, ...updatedEntity }
+          : exisitingEntity,
+      );
+      setOptions(updatedOptions);
+    }
+    return Promise.resolve(updatedEntity);
   };
+
+  console.log('options', options);
 
   return (
     <OnBoardingSection title="Person or Organization Field" formContainer>
@@ -286,12 +304,12 @@ function RoleInput(): JSX.Element {
               <OnBoardingCard>
                 <Field
                   component={RoleField}
-                  options={entities}
+                  options={options}
                   getOptionLabel={entity => entity.label}
                   name="personOrOrgId"
                   mapboxToken={process.env.STORYBOOK_MAPBOX_TOKEN}
-                  onAddOrganization={addEntity}
-                  onAddIndividual={addEntity}
+                  onSaveOrganization={saveEntity}
+                  onSaveIndividual={saveEntity}
                 />
               </OnBoardingCard>
               <Button color="primary" variant="contained" fullWidth type="submit">

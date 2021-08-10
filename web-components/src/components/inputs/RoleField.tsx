@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { makeStyles, TextField } from '@material-ui/core';
+import { makeStyles, TextField, Button } from '@material-ui/core';
 import Autocomplete, { createFilterOptions } from '@material-ui/lab/Autocomplete';
 import { FieldProps } from 'formik';
 
@@ -12,12 +12,6 @@ import { AddIndividualModal } from '../modal/AddIndividualModal';
 const filter = createFilterOptions<RoleOptionType>();
 
 const useStyles = makeStyles(theme => ({
-  result: {
-    border: `1px solid ${theme.palette.info.light}`,
-    backgroundColor: theme.palette.primary.main,
-    padding: theme.spacing(1.25),
-    cursor: 'pointer',
-  },
   add: {
     display: 'flex',
     alignItems: 'center',
@@ -47,8 +41,8 @@ interface Props extends FieldProps {
   placeholder?: string;
   options?: any[];
   getOptionLabel?: (v: any) => string;
-  onAddOrganization: (v: any) => Promise<any>;
-  onAddIndividual: (v: any) => Promise<any>;
+  onSaveOrganization: (v: any) => Promise<any>;
+  onSaveIndividual: (v: any) => Promise<any>;
   mapboxToken: string;
 }
 
@@ -66,32 +60,32 @@ const RoleField: React.FC<Props> = ({
   optional,
   placeholder,
   mapboxToken,
-  onAddOrganization,
-  onAddIndividual,
+  onSaveOrganization,
+  onSaveIndividual,
   ...fieldProps
 }) => {
   const styles = useStyles();
-  const [newOrganizationName, setNewOrganizationName] = useState('');
+  const [organizationEdit, setOrganizationEdit] = useState<any | null>(null);
   const [newIndividualName, setNewIndividualName] = useState('');
   const [inputValue, setInputValue] = useState('');
   const { form, field } = fieldProps;
 
   const selectedValue = options && field.value && options.find(o => o.id === field.value);
 
-  const addOrganization = async (org: any): Promise<void> => {
-    var mintedOrg = await onAddOrganization(org);
+  const saveOrganization = async (org: any): Promise<void> => {
+    var savedOrg = await onSaveOrganization(org);
     closeOrganizationModal();
-    form.setFieldValue(field.name, mintedOrg.id);
+    form.setFieldValue(field.name, savedOrg.id);
   };
 
-  const addIndividual = async (person: any): Promise<void> => {
-    var mintedPerson = await onAddIndividual(person);
+  const saveIndividual = async (person: any): Promise<void> => {
+    var mintedPerson = await onSaveIndividual(person);
     closeIndividualModal();
     form.setFieldValue(field.name, mintedPerson.id);
   };
 
   const closeOrganizationModal = (): void => {
-    setNewOrganizationName('');
+    setOrganizationEdit(null);
   };
 
   const closeIndividualModal = (): void => {
@@ -122,8 +116,8 @@ const RoleField: React.FC<Props> = ({
             selectOnFocus
             handleHomeEndKeys
             inputValue={(selectedValue && selectedValue.label) || inputValue}
-            getOptionLabel={o => (o.label && getOptionLabel ? getOptionLabel(o) : '')} //
-            getOptionSelected={(o, v) => o.id === field.value}
+            getOptionLabel={o => (o.label && getOptionLabel ? getOptionLabel(o) : '')} //todo
+            getOptionSelected={o => o.id === field.value}
             renderOption={o => o.label || o}
             onChange={(event, value, reason) => {
               if (value && value.id) handleChange(value.id);
@@ -143,7 +137,10 @@ const RoleField: React.FC<Props> = ({
               if (params.inputValue !== '') {
                 filtered.push(
                   ((
-                    <div className={styles.add} onClick={() => setNewOrganizationName(params.inputValue)}>
+                    <div
+                      className={styles.add}
+                      onClick={() => setOrganizationEdit({ legalName: params.inputValue })}
+                    >
                       <OrganizationIcon />
                       <Label className={styles.label}>+ Add New Organization</Label>
                     </div>
@@ -164,11 +161,15 @@ const RoleField: React.FC<Props> = ({
           />
         )}
       </FieldFormControl>
-      {newOrganizationName && (
+      {selectedValue && selectedValue.id && (
+        <Button onClick={() => setOrganizationEdit(selectedValue)}>Edit</Button>
+      )}
+      {organizationEdit && (
         <AddOrganizationModal
-          organizationName={newOrganizationName}
+          // open={organizationModalOpen}
+          organization={organizationEdit}
           onClose={closeOrganizationModal}
-          onSubmit={addOrganization}
+          onSubmit={saveOrganization}
           mapboxToken={mapboxToken}
         />
       )}
@@ -176,7 +177,7 @@ const RoleField: React.FC<Props> = ({
         <AddIndividualModal
           individualName={newIndividualName}
           onClose={closeIndividualModal}
-          onSubmit={addIndividual}
+          onSubmit={saveIndividual}
         />
       )}
     </>

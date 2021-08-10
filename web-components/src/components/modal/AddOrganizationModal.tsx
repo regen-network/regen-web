@@ -16,7 +16,7 @@ import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import QuestionIcon from '../icons/QuestionIcon';
 
 interface AddOrganizationModalProps {
-  organizationName?: string;
+  organization?: any; //TODO
   onClose: () => void;
   onSubmit: (organization: any) => void; // TODO
   mapboxToken: string;
@@ -85,15 +85,18 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 function AddOrganizationModal({
-  organizationName,
+  organization,
   onClose,
   onSubmit,
   mapboxToken,
 }: AddOrganizationModalProps): JSX.Element {
   const styles = useStyles();
 
+  // useEffect TODO: cleanup
+  console.log('AddOrganizationModal', organization);
+
   return (
-    <Modal open={!!organizationName} onClose={onClose} className={styles.modal}>
+    <Modal open={!!organization} onClose={onClose} className={styles.modal}>
       <div className={styles.root}>
         <Title variant="h4" align="center" className={styles.title}>
           Add Organization
@@ -102,7 +105,8 @@ function AddOrganizationModal({
           enableReinitialize
           validateOnMount
           initialValues={{
-            legalName: organizationName,
+            id: organization.id,
+            legalName: organization.legalName,
             representative: '',
             email: '',
             phone: '',

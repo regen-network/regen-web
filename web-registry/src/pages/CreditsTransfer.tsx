@@ -17,22 +17,30 @@ import { loader } from 'graphql.macro';
 
 import Title from 'web-components/lib/components/title';
 import { pluralize } from 'web-components/lib/utils/pluralize';
+import {
+  AccountBalance,
+  TransactionState,
+  useAllCreditVintagesQuery,
+  useAllPartiesQuery,
+  useGetAvailableCreditsQuery,
+  useTransferCreditsMutation,
+} from '../generated/graphql';
 
-const TRANSFER_CREDITS = gql`
-  mutation TransferCredits($input: TransferCreditsInput!) {
-    transferCredits(input: $input) {
-      json
-    }
-  }
-`;
+// const TRANSFER_CREDITS = gql`
+//   mutation TransferCredits($input: TransferCreditsInput!) {
+//     transferCredits(input: $input) {
+//       json
+//     }
+//   }
+// `;
 
-const AVAILABLE_CREDITS = gql`
-  query GetAvailableCredits($vintageId: UUID) {
-    getAvailableCredits(vintageId: $vintageId)
-  }
-`;
+// const AVAILABLE_CREDITS = gql`
+//   query GetAvailableCredits($vintageId: UUID) {
+//     getAvailableCredits(vintageId: $vintageId)
+//   }
+// `;
 
-const ALL_CREDIT_VINTAGES = loader('../graphql/AllCreditVintages.graphql');
+// const ALL_CREDIT_VINTAGES = loader('../graphql/AllCreditVintages.graphql');
 const ALL_PARTIES = loader('../graphql/AllParties.graphql');
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -78,7 +86,7 @@ interface Result {
 function CreditsTransfer(): JSX.Element {
   const classes = useStyles();
 
-  const [transferCredits, { data, loading, error }] = useMutation(TRANSFER_CREDITS, {
+  const [transferCredits, { data, loading, error }] = useTransferCreditsMutation({
     errorPolicy: 'ignore',
   });
   const {
@@ -86,11 +94,11 @@ function CreditsTransfer(): JSX.Element {
     loading: vintagesLoading,
     error: vintagesError,
     refetch: refetchVintages,
-  } = useQuery(ALL_CREDIT_VINTAGES, {
+  } = useAllCreditVintagesQuery({
     errorPolicy: 'ignore',
   });
 
-  const { data: partiesData, loading: partiesLoading, error: partiesError } = useQuery(ALL_PARTIES, {
+  const { data: partiesData, loading: partiesLoading, error: partiesError } = useAllPartiesQuery({
     errorPolicy: 'ignore',
   });
 
@@ -106,7 +114,7 @@ function CreditsTransfer(): JSX.Element {
   const [creditPrice, setCreditPrice] = useState(1);
   const [showResult, setShowResult] = useState(false);
 
-  const { data: availableCreditsData, refetch: refetchAvailableCredits } = useQuery(AVAILABLE_CREDITS, {
+  const { data: availableCreditsData, refetch: refetchAvailableCredits } = useGetAvailableCreditsQuery({
     errorPolicy: 'ignore',
     variables: { vintageId },
   });
@@ -116,10 +124,11 @@ function CreditsTransfer(): JSX.Element {
       setShowResult(false);
     }
     setVintageId(event.target.value as string);
-    setOldBalances(
-      vintagesData.allCreditVintages.nodes.find((node: any) => node.id === event.target.value)
-        .accountBalancesByCreditVintageId.nodes,
-    );
+    const vintages = vintagesData?.allCreditVintages?.nodes?.find(node => node?.id === event.target.value);
+    const balances = vintages?.accountBalancesByCreditVintageId?.nodes;
+    if (balances && balances.length > 0) {
+      setOldBalances(balances as Balance[]); // TODO this is a hack. Ideally `oldBalances` would be typed from the graphql store
+    }
   };
 
   const handleBuyerWalletChange = (event: React.ChangeEvent<{ value: any }>): void => {
@@ -131,7 +140,7 @@ function CreditsTransfer(): JSX.Element {
       const selectedParty = partiesData.allParties.nodes.find(
         (party: any) => party.walletId === event.target.value,
       );
-      setAddressId(selectedParty.addressId);
+      setAddressId(selectedParty?.addressId);
     }
   };
 
@@ -161,10 +170,9 @@ function CreditsTransfer(): JSX.Element {
     vintage = vintagesData.allCreditVintages.nodes.find((node: any) => node.id === vintageId);
     newBalances = vintage.accountBalancesByCreditVintageId.nodes;
 
-    const findOldBalance = (i: number): any =>
-      oldBalances.find((oldBalance: any) => oldBalance.id === newBalances[i].id);
-    const findParty = (i: number): any =>
-      partiesData.allParties.nodes.find((party: any) => party.walletId === newBalances[i].walletId);
+    const findOldBalance = (i: number) => oldBalances.find(oldBalance => oldBalance.id === newBalances[i].id);
+    const findParty = (i: number) =>
+      partiesData?.allParties?.nodes.find(party => party?.walletId === newBalances[i].walletId);
 
     // Build response list of senders/buyer old/new balance
     for (var i: number = 0; i < newBalances.length; i++) {
@@ -205,25 +213,26 @@ function CreditsTransfer(): JSX.Element {
               await transferCredits({
                 variables: {
                   input: {
-                    vintageId,
-                    buyerWalletId,
-                    units,
-                    creditPrice,
-                    txState: 'SUCCEEDED',
                     addressId,
-                    autoRetire: false,
+                    buyerWalletId,
+                    creditPrice,
                     partyId,
+                    units,
                     userId,
+                    vintageId,
+                    autoRetire: false,
+                    txState: TransactionState.Succeeded,
                   },
                 },
               });
               await refetchVintages();
               await refetchAvailableCredits();
               setShowResult(true);
-              setOldBalances(
-                vintagesData.allCreditVintages.nodes.find((node: any) => node.id === vintageId)
-                  .accountBalancesByCreditVintageId.nodes,
-              );
+              const vintage = vintagesData?.allCreditVintages?.nodes?.find(node => node?.id === vintageId);
+              const balances = vintage?.accountBalancesByCreditVintageId?.nodes;
+              if (balances) {
+                setOldBalances(balances as Balance[]);
+              }
             } catch (e) {}
           }
         }}

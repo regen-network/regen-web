@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
-import { useMutation } from '@apollo/client';
 
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -9,13 +8,10 @@ import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import Radio from '@material-ui/core/Radio';
-import { loader } from 'graphql.macro';
 
 import Title from 'web-components/lib/components/title';
 import Geocoder from 'web-components/lib/components/map/Geocoder';
-
-const CREATE_USER = loader('../graphql/ReallyCreateUser.graphql');
-const CREATE_USER_ORGANIZATION = loader('../graphql/CreateUserOrganization.graphql');
+import { useCreateUserOrganizationMutation, useReallyCreateUserMutation } from '../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -31,26 +27,21 @@ const useStyles = makeStyles((theme: Theme) => ({
   button: {
     marginTop: theme.spacing(3),
   },
-  textFields: {
-    [theme.breakpoints.up('sm')]: {
-      width: '33%',
-    },
-  },
 }));
 
-function BuyerCreate(): JSX.Element {
+const BuyerCreate: React.FC<{ onCreate?: (walletId: string) => void }> = ({ onCreate }) => {
   const classes = useStyles();
 
-  const [createUser, { data: userData, error: userError }] = useMutation(CREATE_USER, {
+  const [createUser, { data: userData, error: userError }] = useReallyCreateUserMutation({
     errorPolicy: 'ignore',
   });
 
-  const [createUserOrganization, { data: userOrganizationData, error: userOrganizationError }] = useMutation(
-    CREATE_USER_ORGANIZATION,
-    {
-      errorPolicy: 'ignore',
-    },
-  );
+  const [
+    createUserOrganization,
+    { data: userOrganizationData, error: userOrganizationError },
+  ] = useCreateUserOrganizationMutation({
+    errorPolicy: 'ignore',
+  });
 
   const [buyerType, setBuyerType] = useState<string>('organization');
   const [orgName, setOrgName] = useState<string>('');
@@ -84,8 +75,8 @@ function BuyerCreate(): JSX.Element {
                   },
                 },
               });
-              setAddressId(result.data.createUserOrganization.organization.partyByPartyId.addressId);
-              setWalletId(result.data.createUserOrganization.organization.partyByPartyId.walletId);
+              setAddressId(result.data?.createUserOrganization?.organization?.partyByPartyId?.addressId);
+              setWalletId(result.data?.createUserOrganization?.organization?.partyByPartyId?.walletId);
             } else {
               result = await createUser({
                 variables: {
@@ -98,10 +89,15 @@ function BuyerCreate(): JSX.Element {
                   },
                 },
               });
-              setAddressId(result.data.reallyCreateUser.user.partyByPartyId.addressId);
-              setWalletId(result.data.reallyCreateUser.user.partyByPartyId.walletId);
+              setAddressId(result.data?.reallyCreateUser?.user?.partyByPartyId?.addressId);
+              setWalletId(result.data?.reallyCreateUser?.user?.partyByPartyId?.walletId);
             }
-          } catch (e) {}
+          } catch (e) {
+          } finally {
+            if (onCreate) {
+              onCreate(walletId);
+            }
+          }
         }}
         noValidate
         autoComplete="off"
@@ -119,7 +115,7 @@ function BuyerCreate(): JSX.Element {
           </RadioGroup>
         </FormControl>
         {buyerType === 'organization' ? (
-          <div className={classes.textFields}>
+          <div>
             <TextField
               fullWidth
               className={classes.input}
@@ -164,7 +160,7 @@ function BuyerCreate(): JSX.Element {
             />
           </div>
         ) : (
-          <div className={classes.textFields}>
+          <div>
             <TextField
               fullWidth
               className={classes.input}
@@ -230,6 +226,6 @@ function BuyerCreate(): JSX.Element {
       )}
     </div>
   );
-}
+};
 
 export { BuyerCreate };

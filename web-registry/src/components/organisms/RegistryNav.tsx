@@ -57,7 +57,7 @@ const RegistryNav: React.FC = () => {
   ];
 
   const programHowToItems: HeaderDropdownItemProps[] = [
-    { href: '/create-credit-class', title: 'Create a Credit Class', linkComponent: RegistryNavLink },
+    // { href: '/create-credit-class', title: 'Create a Credit Class', linkComponent: RegistryNavLink },
     { href: '/create-methodology', title: 'Create a Methodology', linkComponent: RegistryNavLink },
     {
       href: '/methodology-review-process',

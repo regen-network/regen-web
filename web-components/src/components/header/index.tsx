@@ -193,7 +193,7 @@ export default function Header({
                   />
                 );
               })}
-              {isRegistry && <RegistryLoginBtns />}
+              {/* {isRegistry && <RegistryLoginBtns />} */}
             </MenuList>
           </Box>
 

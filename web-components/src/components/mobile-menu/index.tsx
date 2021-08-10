@@ -189,7 +189,7 @@ const MobileMenu: React.FC<Props> = ({ menuItems, pathName, linkComponent: Link,
                 )}
               </MenuItem>
             ))}
-            {props.isRegistry && (
+            {/* {props.isRegistry && (
               <>
                 <Divider light className={styles.divider} />
                 <li className={styles.loginBtns}>
@@ -209,7 +209,7 @@ const MobileMenu: React.FC<Props> = ({ menuItems, pathName, linkComponent: Link,
                   )}
                 </li>
               </>
-            )}
+            )} */}
           </div>
         </MenuList>
       </Drawer>

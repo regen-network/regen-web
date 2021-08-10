@@ -5,8 +5,6 @@ import { FieldProps } from 'formik';
 
 import FieldFormControl from './FieldFormControl';
 import { Label } from '../label';
-// import TextField from '../inputs/TextField';
-import Input from '../inputs/Input';
 import OrganizationIcon from '../icons/OrganizationIcon';
 import UserIcon from '../icons/UserIcon';
 import { AddOrganizationModal } from '../modal/AddOrganizationModal';
@@ -100,18 +98,6 @@ const RoleField: React.FC<Props> = ({
     setNewIndividualName('');
   };
 
-  // const openOrganizationModal = (inputValue: string, event?: any): void => {
-  //   console.log('openOrganizationModal', inputValue);
-  //   if (event) event.stopPropagation();
-  //   setNewOrganizationName(inputValue);
-  // };
-
-  // const openIndividualModal = (inputValue: string, event?: any): void => {
-  //   console.log('openIndividualModal', inputValue);
-  //   if (event) event.stopPropagation();
-  //   setNewIndividualName(inputValue);
-  // };
-
   return (
     <>
       <FieldFormControl
@@ -128,7 +114,7 @@ const RoleField: React.FC<Props> = ({
             classes={{
               inputRoot: styles.input,
               paper: styles.paper,
-              popupIndicator: styles.popupIndicator
+              popupIndicator: styles.popupIndicator,
             }}
             options={options || []}
             freeSolo
@@ -148,12 +134,7 @@ const RoleField: React.FC<Props> = ({
             }}
             onBlur={handleBlur}
             renderInput={props => (
-              <TextField
-                {...props}
-                placeholder="Start typing or choose entity"
-                variant="outlined"
-                // InputProps={{endAdornment: }}
-              />
+              <TextField {...props} placeholder="Start typing or choose entity" variant="outlined" />
             )}
             filterOptions={(options, params) => {
               const filtered = filter(options, params);

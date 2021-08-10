@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { makeStyles, TextField } from '@material-ui/core';
 import Autocomplete, { createFilterOptions } from '@material-ui/lab/Autocomplete';
-
 import { FieldProps } from 'formik';
+
 import FieldFormControl from './FieldFormControl';
 import { Label } from '../label';
+// import TextField from '../inputs/TextField';
+import Input from '../inputs/Input';
 import OrganizationIcon from '../icons/OrganizationIcon';
 import UserIcon from '../icons/UserIcon';
 import { AddOrganizationModal } from '../modal/AddOrganizationModal';
@@ -21,11 +23,21 @@ const useStyles = makeStyles(theme => ({
   add: {
     display: 'flex',
     alignItems: 'center',
+    width: '100%',
   },
   label: {
     fontSize: theme.typography.pxToRem(12),
     color: theme.palette.secondary.main,
     marginLeft: theme.spacing(2),
+  },
+  input: {
+    borderRadius: 2,
+  },
+  paper: {
+    borderRadius: 2,
+  },
+  popupIndicator: {
+    color: theme.palette.secondary.main,
   },
 }));
 
@@ -88,6 +100,18 @@ const RoleField: React.FC<Props> = ({
     setNewIndividualName('');
   };
 
+  // const openOrganizationModal = (inputValue: string, event?: any): void => {
+  //   console.log('openOrganizationModal', inputValue);
+  //   if (event) event.stopPropagation();
+  //   setNewOrganizationName(inputValue);
+  // };
+
+  // const openIndividualModal = (inputValue: string, event?: any): void => {
+  //   console.log('openIndividualModal', inputValue);
+  //   if (event) event.stopPropagation();
+  //   setNewIndividualName(inputValue);
+  // };
+
   return (
     <>
       <FieldFormControl
@@ -99,11 +123,17 @@ const RoleField: React.FC<Props> = ({
       >
         {({ handleChange, handleBlur }) => (
           <Autocomplete
+            debug={true}
             id="role-combo-box"
+            classes={{
+              inputRoot: styles.input,
+              paper: styles.paper,
+              popupIndicator: styles.popupIndicator
+            }}
             options={options || []}
             freeSolo
+            forcePopupIcon
             selectOnFocus
-            clearOnBlur
             handleHomeEndKeys
             inputValue={(selectedValue && selectedValue.label) || inputValue}
             getOptionLabel={o => (o.label && getOptionLabel ? getOptionLabel(o) : '')} //
@@ -118,7 +148,12 @@ const RoleField: React.FC<Props> = ({
             }}
             onBlur={handleBlur}
             renderInput={props => (
-              <TextField {...props} placeholder="Start typing or choose entity" variant="outlined" />
+              <TextField
+                {...props}
+                placeholder="Start typing or choose entity"
+                variant="outlined"
+                // InputProps={{endAdornment: }}
+              />
             )}
             filterOptions={(options, params) => {
               const filtered = filter(options, params);

@@ -9,6 +9,7 @@ import ControlledTextField from '../inputs/ControlledTextField';
 import CheckboxLabel from '../inputs/CheckboxLabel';
 import Title from '../title';
 import Description from '../description';
+import Tooltip from '../tooltip/InfoTooltip';
 import Modal from './';
 import QuestionIcon from '../icons/QuestionIcon';
 
@@ -75,6 +76,9 @@ const useStyles = makeStyles((theme: Theme) => ({
       fontSize: theme.spacing(3),
     },
   },
+  iconWrapper: {
+    cursor: 'pointer',
+  },
 }));
 
 function AddIndividualModal({ individualName, onClose, onSubmit }: AddIndividualModalProps): JSX.Element {
@@ -105,7 +109,7 @@ function AddIndividualModal({ individualName, onClose, onSubmit }: AddIndividual
             }
           }}
         >
-          {({ submitForm, submitCount, isValid, isSubmitting, values }) => {
+          {({ submitForm }) => {
             return (
               <Form translate="yes">
                 <OnBoardingCard className={styles.card}>
@@ -133,7 +137,15 @@ function AddIndividualModal({ individualName, onClose, onSubmit }: AddIndividual
                       </Description>
                     }
                   />
-                  <QuestionIcon />
+                  <Tooltip
+                    arrow
+                    placement="top"
+                    title="Even if you work closely with this individual, make sure you have their permission to be part of Regen Registry."
+                  >
+                    <div className={styles.iconWrapper}>
+                      <QuestionIcon />
+                    </div>
+                  </Tooltip>
                 </div>
                 <div className={styles.controls}>
                   <Button onClick={onClose} className={styles.cancelButton}>

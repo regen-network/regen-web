@@ -8,6 +8,7 @@ import PhoneField from '../inputs/PhoneField';
 import ControlledTextField from '../inputs/ControlledTextField';
 import LocationField from '../inputs/LocationField';
 import CheckboxLabel from '../inputs/CheckboxLabel';
+import Tooltip from '../tooltip/InfoTooltip';
 import Title from '../title';
 import Description from '../description';
 import Modal from './';
@@ -78,6 +79,9 @@ const useStyles = makeStyles((theme: Theme) => ({
       fontSize: theme.spacing(3),
     },
   },
+  iconWrapper: {
+    cursor: 'pointer',
+  },
 }));
 
 function AddOrganizationModal({
@@ -117,7 +121,7 @@ function AddOrganizationModal({
             }
           }}
         >
-          {({ submitForm, submitCount, isValid, isSubmitting, values }) => {
+          {({ submitForm }) => {
             return (
               <Form translate="yes">
                 <OnBoardingCard className={styles.card}>
@@ -164,7 +168,15 @@ function AddOrganizationModal({
                       </Description>
                     }
                   />
-                  <QuestionIcon />
+                  <Tooltip
+                    arrow
+                    placement="top"
+                    title="Even if you work closely with this organization, make sure you have their permission to be part of Regen Registry."
+                  >
+                    <div className={styles.iconWrapper}>
+                      <QuestionIcon />
+                    </div>
+                  </Tooltip>
                 </div>
                 <div className={styles.controls}>
                   <Button onClick={onClose} className={styles.cancelButton}>

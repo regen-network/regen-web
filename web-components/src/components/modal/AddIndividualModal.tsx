@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles, Theme, Button } from '@material-ui/core';
 import { Formik, Form, Field } from 'formik';
 
@@ -14,7 +14,7 @@ import Modal from './';
 import QuestionIcon from '../icons/QuestionIcon';
 
 interface AddIndividualModalProps {
-  individualName?: string;
+  individual?: any;
   onClose: () => void;
   onSubmit: (individual: any) => void; // TODO
 }
@@ -81,23 +81,26 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-function AddIndividualModal({ individualName, onClose, onSubmit }: AddIndividualModalProps): JSX.Element {
+function AddIndividualModal({ individual, onClose, onSubmit }: AddIndividualModalProps): JSX.Element {
   const styles = useStyles();
+  const [individualEdit, setIndividualEdit] = useState(individual);
+
+  useEffect(() => {
+    setIndividualEdit(individual);
+  }, [individual]);
 
   return (
-    <Modal open={!!individualName} onClose={onClose} className={styles.modal}>
+    <Modal open={!!individual} onClose={onClose} className={styles.modal}>
       <div className={styles.root}>
         <Title variant="h4" align="center" className={styles.title}>
-          Add Individual
+          {`${individual.id ? 'Edit' : 'Add'} Individual`}
         </Title>
         <Formik
           enableReinitialize
           validateOnMount
           initialValues={{
-            name: individualName,
-            email: '',
-            phone: '',
-            permissionToShareInfo: false,
+            ...individualEdit,
+            permissionToShareInfo: !!individualEdit.permissionToShareInfo,
           }}
           onSubmit={async (values, { setSubmitting }) => {
             setSubmitting(true);
@@ -129,6 +132,7 @@ function AddIndividualModal({ individualName, onClose, onSubmit }: AddIndividual
                 </OnBoardingCard>
                 <div className={styles.permission}>
                   <Field
+                    type="checkbox"
                     component={CheckboxLabel}
                     name="permissionToShareInfo"
                     label={

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles, Theme, Button } from '@material-ui/core';
 import { Formik, Form, Field } from 'formik';
 
@@ -12,7 +12,6 @@ import Tooltip from '../tooltip/InfoTooltip';
 import Title from '../title';
 import Description from '../description';
 import Modal from './';
-import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import QuestionIcon from '../icons/QuestionIcon';
 
 interface AddOrganizationModalProps {
@@ -91,29 +90,24 @@ function AddOrganizationModal({
   mapboxToken,
 }: AddOrganizationModalProps): JSX.Element {
   const styles = useStyles();
+  const [organizationEdit, setOrganizationEdit] = useState({ permissionToShareInfo: false });
 
-  // useEffect TODO: cleanup
-  console.log('AddOrganizationModal', organization);
+  useEffect(() => {
+    setOrganizationEdit(organization);
+  }, [organization]);
 
   return (
     <Modal open={!!organization} onClose={onClose} className={styles.modal}>
       <div className={styles.root}>
         <Title variant="h4" align="center" className={styles.title}>
-          Add Organization
+          {`${organization.id ? 'Edit' : 'Add'} Organization`}
         </Title>
         <Formik
           enableReinitialize
           validateOnMount
           initialValues={{
-            id: organization.id,
-            legalName: organization.legalName,
-            representative: '',
-            email: '',
-            phone: '',
-            location: {
-              place_name: '',
-            } as GeocodeFeature,
-            permissionToShareInfo: false,
+            ...organizationEdit,
+            permissionToShareInfo: !!organizationEdit.permissionToShareInfo,
           }}
           onSubmit={async (values, { setSubmitting }) => {
             setSubmitting(true);
@@ -164,6 +158,7 @@ function AddOrganizationModal({
                 </OnBoardingCard>
                 <div className={styles.permission}>
                   <Field
+                    type="checkbox"
                     component={CheckboxLabel}
                     name="permissionToShareInfo"
                     label={

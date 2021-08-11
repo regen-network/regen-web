@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FormLabel, Button } from '@material-ui/core';
 import { Formik, Form, Field } from 'formik';
 import { RadioGroup } from 'formik-material-ui';
@@ -248,44 +248,45 @@ function ToggleVariants(): JSX.Element {
     </OnBoardingSection>
   );
 }
+
 function RoleInput(): JSX.Element {
-  const entities = [
+  const entitiesInit = [
     { legalName: 'Impact Ag', id: 1 },
     { name: 'Toby Grogan', id: 2 },
   ];
 
-  const entityOptions = entities.map(e => {
-    return {
-      label: e.name || e.legalName,
-      ...e,
-    };
-  });
+  const [entities, setEntities] = useState<any>(entitiesInit);
+  const [options, setOptions] = useState<any>([]);
 
-  const [options, setOptions] = useState<any>(entityOptions);
+  useEffect(() => {
+    console.log('useEffect ents', entities);
+    const entityOptions = entities.map(e => {
+      return {
+        ...e,
+        label: e.name || e.legalName,
+        type: e.legalName ? 'organization' : 'individual',
+      };
+    });
+
+    setOptions(entityOptions);
+  }, [entities]);
+
+  console.log('after options', options);
+
 
   const saveEntity = (updatedEntity: any): Promise<any> => {
-    console.log('saveEntity', updatedEntity.id);
-    // console.log('saveEntity', updatedEntity);
-
     if (!updatedEntity.id) {
-      updatedEntity.id = options[options.length - 1].id + 1;
-      const newOptions = [
-        ...options,
-        { label: updatedEntity.name || updatedEntity.legalName, id: updatedEntity.id },
-      ];
-      setOptions(newOptions);
+      updatedEntity.id = entities[entities.length - 1].id + 1;
+      const newEntities = [...entities, { ...updatedEntity, id: updatedEntity.id }];
+      setEntities(newEntities);
     } else {
-      const updatedOptions = options.map(exisitingEntity =>
-        exisitingEntity.id === updatedEntity.id
-          ? { label: updatedEntity.name || updatedEntity.legalName, ...updatedEntity }
-          : exisitingEntity,
+      const updatedEntities = entities.map(exisitingEntity =>
+        exisitingEntity.id === updatedEntity.id ? { ...updatedEntity } : exisitingEntity,
       );
-      setOptions(updatedOptions);
+      setEntities(updatedEntities);
     }
     return Promise.resolve(updatedEntity);
   };
-
-  console.log('options', options);
 
   return (
     <OnBoardingSection title="Person or Organization Field" formContainer>
@@ -298,7 +299,7 @@ function RoleInput(): JSX.Element {
           actions.resetForm();
         }}
       >
-        {({ handleChange, setFieldValue }) => {
+        {() => {
           return (
             <Form>
               <OnBoardingCard>

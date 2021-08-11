@@ -78,7 +78,7 @@ const RoleField: React.FC<Props> = ({
 }) => {
   const styles = useStyles();
   const [organizationEdit, setOrganizationEdit] = useState<any | null>(null);
-  const [newIndividualName, setNewIndividualName] = useState('');
+  const [individualEdit, setIndividualEdit] = useState<any | null>(null);
   const [inputValue, setInputValue] = useState('');
   const { form, field } = fieldProps;
 
@@ -91,9 +91,9 @@ const RoleField: React.FC<Props> = ({
   };
 
   const saveIndividual = async (person: any): Promise<void> => {
-    var mintedPerson = await onSaveIndividual(person);
+    var savedPerson = await onSaveIndividual(person);
     closeIndividualModal();
-    form.setFieldValue(field.name, mintedPerson.id);
+    form.setFieldValue(field.name, savedPerson.id);
   };
 
   const closeOrganizationModal = (): void => {
@@ -101,7 +101,15 @@ const RoleField: React.FC<Props> = ({
   };
 
   const closeIndividualModal = (): void => {
-    setNewIndividualName('');
+    setIndividualEdit(null);
+  };
+
+  const editEntity = (entity: any): void => {
+    if (entity.type === 'organization') {
+      setOrganizationEdit(entity);
+    } else {
+      setIndividualEdit(entity);
+    }
   };
 
   return (
@@ -160,7 +168,10 @@ const RoleField: React.FC<Props> = ({
                 );
                 filtered.push(
                   ((
-                    <div className={styles.add} onClick={() => setNewIndividualName(params.inputValue)}>
+                    <div
+                      className={styles.add}
+                      onClick={() => setIndividualEdit({ name: params.inputValue })}
+                    >
                       <UserIcon />
                       <Label className={styles.label}>+ Add New Individual</Label>
                     </div>
@@ -174,7 +185,7 @@ const RoleField: React.FC<Props> = ({
         )}
       </FieldFormControl>
       {selectedValue && selectedValue.id && (
-        <OutlinedButton className={styles.edit} onClick={() => setOrganizationEdit(selectedValue)}>
+        <OutlinedButton className={styles.edit} onClick={() => editEntity(selectedValue)}>
           edit entity
         </OutlinedButton>
       )}
@@ -186,9 +197,9 @@ const RoleField: React.FC<Props> = ({
           mapboxToken={mapboxToken}
         />
       )}
-      {newIndividualName && (
+      {individualEdit && (
         <AddIndividualModal
-          individualName={newIndividualName}
+          individual={individualEdit}
           onClose={closeIndividualModal}
           onSubmit={saveIndividual}
         />

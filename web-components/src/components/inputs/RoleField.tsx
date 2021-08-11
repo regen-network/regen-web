@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { makeStyles, TextField, Button } from '@material-ui/core';
+import { makeStyles, TextField, Link } from '@material-ui/core';
 import Autocomplete, { createFilterOptions } from '@material-ui/lab/Autocomplete';
 import { FieldProps } from 'formik';
 
@@ -7,11 +7,16 @@ import FieldFormControl from './FieldFormControl';
 import { Label } from '../label';
 import OrganizationIcon from '../icons/OrganizationIcon';
 import UserIcon from '../icons/UserIcon';
+import OutlinedButton from '../buttons/OutlinedButton';
 import { AddOrganizationModal } from '../modal/AddOrganizationModal';
 import { AddIndividualModal } from '../modal/AddIndividualModal';
 const filter = createFilterOptions<RoleOptionType>();
 
 const useStyles = makeStyles(theme => ({
+  root: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
   add: {
     display: 'flex',
     alignItems: 'center',
@@ -29,6 +34,14 @@ const useStyles = makeStyles(theme => ({
     borderRadius: 2,
   },
   popupIndicator: {
+    color: theme.palette.secondary.main,
+  },
+  edit: {
+    alignSelf: 'flex-end',
+    marginTop: theme.spacing(2),
+  },
+  editLabel: {
+    fontSize: theme.typography.pxToRem(12),
     color: theme.palette.secondary.main,
   },
 }));
@@ -93,7 +106,7 @@ const RoleField: React.FC<Props> = ({
   };
 
   return (
-    <>
+    <div className={styles.root}>
       <FieldFormControl
         className={className}
         label={label}
@@ -162,11 +175,12 @@ const RoleField: React.FC<Props> = ({
         )}
       </FieldFormControl>
       {selectedValue && selectedValue.id && (
-        <Button onClick={() => setOrganizationEdit(selectedValue)}>Edit</Button>
+        <Link className={styles.edit} onClick={() => setOrganizationEdit(selectedValue)}>
+          <Label className={styles.editLabel}>edit entity</Label>
+        </Link>
       )}
       {organizationEdit && (
         <AddOrganizationModal
-          // open={organizationModalOpen}
           organization={organizationEdit}
           onClose={closeOrganizationModal}
           onSubmit={saveOrganization}
@@ -180,7 +194,7 @@ const RoleField: React.FC<Props> = ({
           onSubmit={saveIndividual}
         />
       )}
-    </>
+    </div>
   );
 };
 

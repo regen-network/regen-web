@@ -259,7 +259,6 @@ function RoleInput(): JSX.Element {
   const [options, setOptions] = useState<any>([]);
 
   useEffect(() => {
-    console.log('useEffect ents', entities);
     const entityOptions = entities.map(e => {
       return {
         ...e,
@@ -270,9 +269,6 @@ function RoleInput(): JSX.Element {
 
     setOptions(entityOptions);
   }, [entities]);
-
-  console.log('after options', options);
-
 
   const saveEntity = (updatedEntity: any): Promise<any> => {
     if (!updatedEntity.id) {

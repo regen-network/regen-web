@@ -52,7 +52,6 @@ interface Props extends FieldProps {
   optional?: boolean;
   placeholder?: string;
   options?: any[];
-  getOptionLabel?: (v: any) => string;
   onSaveOrganization: (v: any) => Promise<any>;
   onSaveIndividual: (v: any) => Promise<any>;
   mapboxToken: string;
@@ -68,7 +67,6 @@ const RoleField: React.FC<Props> = ({
   className,
   label,
   options,
-  getOptionLabel,
   optional,
   placeholder,
   mapboxToken,
@@ -135,7 +133,7 @@ const RoleField: React.FC<Props> = ({
             selectOnFocus
             handleHomeEndKeys
             inputValue={(selectedValue && selectedValue.label) || inputValue}
-            getOptionLabel={o => o.label}
+            getOptionLabel={o => o.label || ''}
             getOptionSelected={o => o.id === field.value}
             renderOption={o => o.label || o}
             onChange={(event, value, reason) => {

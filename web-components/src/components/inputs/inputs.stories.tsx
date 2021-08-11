@@ -302,7 +302,6 @@ function RoleInput(): JSX.Element {
                 <Field
                   component={RoleField}
                   options={options}
-                  getOptionLabel={entity => entity.label}
                   name="personOrOrgId"
                   mapboxToken={process.env.STORYBOOK_MAPBOX_TOKEN}
                   onSaveOrganization={saveEntity}

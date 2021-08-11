@@ -92,10 +92,14 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 function IndividualModal({ individual, onClose, onSubmit }: IndividualModalProps): JSX.Element {
   const styles = useStyles();
-  const [individualEdit, setIndividualEdit] = useState(individual);
+  const [individualEdit, setIndividualEdit] = useState<IndividualFormValues | undefined>(undefined);
 
   useEffect(() => {
     setIndividualEdit(individual);
+
+    return function cleanup() {
+      setIndividualEdit(undefined);
+    };
   }, [individual]);
 
   return (

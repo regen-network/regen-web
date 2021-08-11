@@ -2,15 +2,14 @@ import React, { useState } from 'react';
 import { makeStyles, TextField } from '@material-ui/core';
 import Autocomplete, { createFilterOptions } from '@material-ui/lab/Autocomplete';
 import { FieldProps } from 'formik';
-import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 
 import FieldFormControl from './FieldFormControl';
 import { Label } from '../label';
 import OrganizationIcon from '../icons/OrganizationIcon';
 import UserIcon from '../icons/UserIcon';
 import OutlinedButton from '../buttons/OutlinedButton';
-import { OrganizationModal, OrganizationFormValues } from '../modal/OrganizationModal';
-import { IndividualModal, IndividualFormValues } from '../modal/IndividualModal';
+import { OrganizationModal } from '../modal/OrganizationModal';
+import { IndividualModal } from '../modal/IndividualModal';
 const filter = createFilterOptions<RoleOptionType>();
 
 const useStyles = makeStyles(theme => ({
@@ -54,28 +53,15 @@ interface Props extends FieldProps {
   placeholder?: string;
   options?: RoleOptionType[];
   getOptionLabel?: (v: any) => string;
-  onSaveOrganization: (organization: OrganizationFormValues) => Promise<any>;
-  onSaveIndividual: (individual: IndividualFormValues) => Promise<any>;
+  onSaveOrganization: (v: any) => Promise<any>;
+  onSaveIndividual: (v: any) => Promise<any>;
   mapboxToken: string;
 }
 
 interface RoleOptionType {
-  // inputValue?: string;
-  label: string;
-  id: number;
-}
-
-interface EntityOption {
+  inputValue?: string;
   label: string;
   id?: number;
-  type: 'organization' | 'individual';
-  legalName?: string;
-  name?: string;
-  phone?: string;
-  email?: string;
-  representative?: string;
-  permissionToShareInfo?: boolean;
-  location?: GeocodeFeature;
 }
 
 const RoleField: React.FC<Props> = ({
@@ -150,12 +136,14 @@ const RoleField: React.FC<Props> = ({
             selectOnFocus
             handleHomeEndKeys
             inputValue={(selectedValue && selectedValue.label) || inputValue}
-            getOptionLabel={o => (getOptionLabel ? getOptionLabel(o) : o.label)}
+            getOptionLabel={o => (o.label && getOptionLabel ? getOptionLabel(o) : '')} //todo
             getOptionSelected={o => o.id === field.value}
             renderOption={o => o.label || o}
             onChange={(event, value, reason) => {
-              if (value && typeof value !== 'string' && value.id) handleChange(value.id);
-              if (reason === 'clear') handleChange(value);
+              if (typeof value !== 'string') {
+                if (value && value.id) handleChange(value.id);
+                if (reason === 'clear') handleChange(value);
+              }
             }}
             onInputChange={(event, newInputValue) => {
               setInputValue(newInputValue);

@@ -51,7 +51,7 @@ interface Props extends FieldProps {
   label?: string;
   optional?: boolean;
   placeholder?: string;
-  options?: RoleOptionType[];
+  options?: any[];
   getOptionLabel?: (v: any) => string;
   onSaveOrganization: (v: any) => Promise<any>;
   onSaveIndividual: (v: any) => Promise<any>;
@@ -123,7 +123,6 @@ const RoleField: React.FC<Props> = ({
       >
         {({ handleChange, handleBlur }) => (
           <Autocomplete
-            debug={true}
             id="role-combo-box"
             classes={{
               inputRoot: styles.input,
@@ -136,14 +135,12 @@ const RoleField: React.FC<Props> = ({
             selectOnFocus
             handleHomeEndKeys
             inputValue={(selectedValue && selectedValue.label) || inputValue}
-            getOptionLabel={o => (o.label && getOptionLabel ? getOptionLabel(o) : '')} //todo
+            getOptionLabel={o => o.label}
             getOptionSelected={o => o.id === field.value}
             renderOption={o => o.label || o}
             onChange={(event, value, reason) => {
-              if (typeof value !== 'string') {
-                if (value && value.id) handleChange(value.id);
-                if (reason === 'clear') handleChange(value);
-              }
+              if (value && value.id) handleChange(value.id);
+              if (reason === 'clear') handleChange(value);
             }}
             onInputChange={(event, newInputValue) => {
               setInputValue(newInputValue);
@@ -180,7 +177,6 @@ const RoleField: React.FC<Props> = ({
                   ) as unknown) as RoleOptionType,
                 );
               }
-
               return filtered;
             }}
           />

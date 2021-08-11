@@ -34,6 +34,15 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   slider: {
     margin: theme.spacing(0, -1.75),
+    '& .slick-track': {
+      display: 'flex',
+    },
+    '& .slick-slide': {
+      height: 'inherit',
+      '& > div': {
+        height: '100%',
+      },
+    },
   },
   swipe: {
     display: 'flex',
@@ -136,13 +145,14 @@ function ProjectImpactSection({ impacts, title, classes }: ProjectImpactProps): 
           </div>
         ) : (
           <Slider {...settings} ref={slider} className={styles.slider}>
-            {impacts.map(({ name, description, imgSrc, monitored }: Impact, index: number) => (
+            {impacts.map(({ name, description, imgSrc, monitored, standard }: Impact, index: number) => (
               <ProjectImpactCard
                 key={index}
                 className={styles.item}
                 name={name}
                 description={description}
                 imgSrc={imgSrc}
+                standard={standard}
                 monitored={monitored}
               />
             ))}

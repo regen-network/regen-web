@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
-import clsx from 'clsx';
+import cx from 'clsx';
 
 import Card from './Card';
 import Title from '../title';
@@ -24,12 +24,8 @@ interface StyleProps {
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   root: {
-    [theme.breakpoints.up('sm')]: {
-      height: theme.spacing(97.75), // TODO: temporary shorter height until extra content is added. Should be theme.spacing(110.25)
-    },
-    [theme.breakpoints.down('xs')]: {
-      height: theme.spacing(86.25), // TODO: temporary shorter height until extra content is added. Should be theme.spacing(101)
-    },
+    display: 'flex',
+    flexDirection: 'column',
   },
   background: props => ({
     backgroundImage: `url(${props.imgSrc})`,
@@ -58,6 +54,9 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     },
   },
   text: {
+    display: 'flex',
+    flexDirection: 'column',
+    flexGrow: 1,
     [theme.breakpoints.up('sm')]: {
       padding: theme.spacing(5),
     },
@@ -86,9 +85,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   },
   description: {
     fontSize: theme.typography.pxToRem(14),
-  },
-  image: {
-    height: theme.spacing(10),
+    flex: '1 0 auto',
   },
 }));
 
@@ -105,7 +102,7 @@ export default function ProjectImpactCard({
   const classes = useStyles({ imgSrc });
 
   return (
-    <Card className={clsx(classes.root, className)}>
+    <Card className={cx(classes.root, className)}>
       <div className={classes.background}>
         <div className={classes.tag}>{monitored ? 'primary impact' : 'co-benefit'}</div>
         <Title variant="h4" className={classes.title}>
@@ -116,11 +113,11 @@ export default function ProjectImpactCard({
         <Description className={classes.description}>{description}</Description>
         {standard && (
           <Image
-            className={classes.image}
             src={standard}
             alt={standard}
             imageStorageBaseUrl={imageStorageBaseUrl}
             apiServerUrl={apiServerUrl}
+            width={140}
           />
         )}
       </div>

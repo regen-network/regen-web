@@ -16,6 +16,7 @@ export interface Impact {
   description: string;
   monitored: boolean;
   imgSrc: string;
+  standard?: string;
 }
 
 export interface ActionGroup {
@@ -53,25 +54,31 @@ export interface Project {
   id: string; // human-readable id for now
   name: string;
   place: Place;
-  type: string;
+  type?: string;
   area: number;
   areaUnit: string;
   developer?: User;
   steward?: User;
   owner?: User;
   broker?: User;
+  reseller?: User;
   shortDescription: string;
   glanceText?: string[];
   glanceImgSrc?: string;
   longDescription: string;
   media: Media[];
+  imageCredits?: string;
   image: string;
   map: string;
-  keyOutcomesActivities: string[];
+  keyOutcomesActivities?: string[];
   landManagementActions?: ActionGroup[];
   impact: Impact[];
   creditClass: BasicCreditClass;
-  methodology: ProjectMethodology;
+  additionalCertification?: {
+    name: string;
+    url: string;
+  };
+  methodology?: ProjectMethodology;
   protectedSpecies?: ProtectedSpeciesItem[];
   fieldsOverride?: ProjectOverride;
   credits?: {
@@ -91,6 +98,10 @@ export interface Project {
     };
   };
   sdgs?: SDG[];
+  registry: {
+    name: string;
+    image: string;
+  };
 }
 
 interface BasicProject {
@@ -100,11 +111,15 @@ interface BasicProject {
 
 export interface BasicCreditClass {
   name: string;
-  id: string;
-  description: string;
+  // id: string;
+  description?: string;
   imgSrc?: string;
-  pdfUrl?: string;
+  url?: string;
   tag?: string;
+  offsetGenerationMethod: string;
+  standard?: boolean;
+  standardUrl?: string;
+  handle?: string;
 }
 
 interface Purchase {
@@ -147,7 +162,7 @@ export interface ProjectOverride {
 export interface ProjectMethodology {
   name: string;
   id: string;
-  pdfUrl?: string;
+  url: string;
 }
 
 export interface Mock {

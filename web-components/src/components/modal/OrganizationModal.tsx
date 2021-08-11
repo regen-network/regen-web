@@ -34,7 +34,6 @@ export interface OrganizationFormValues {
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
-  modal: {},
   root: {
     display: 'flex',
     flexDirection: 'column',

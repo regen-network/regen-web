@@ -16,7 +16,7 @@ import QuestionIcon from '../icons/QuestionIcon';
 interface IndividualModalProps {
   individual?: IndividualFormValues;
   onClose: () => void;
-  onSubmit: (individual: IndividualFormValues) => void; // TODO
+  onSubmit: (individual: IndividualFormValues) => void;
 }
 
 export interface IndividualFormValues {
@@ -29,7 +29,6 @@ export interface IndividualFormValues {
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
-  modal: {},
   root: {
     display: 'flex',
     flexDirection: 'column',

@@ -3,7 +3,6 @@ import { makeStyles, Theme, Typography, InputProps, InputAdornment } from '@mate
 import { FieldProps } from 'formik';
 import FieldFormControl from './FieldFormControl';
 import Input from './Input';
-import { styles } from '@material-ui/pickers/views/Clock/Clock';
 
 interface ControlledTextFieldProps extends FieldProps, InputProps {
   charLimit?: number;
@@ -43,7 +42,7 @@ export default function ControlledTextField({
   onExampleClick,
   ...inputProps
 }: ControlledTextFieldProps): JSX.Element {
-  const charsLeft = (charLimit || Infinity) - ((field && field.value && field.value.length) || 0); //TODO: test
+  const charsLeft = (charLimit || Infinity) - ((field && field.value && field.value.length) || 0);
 
   function handleFieldChange(
     { target: { value } }: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>,

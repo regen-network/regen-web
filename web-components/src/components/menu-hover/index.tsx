@@ -79,6 +79,8 @@ const MenuHover = ({ text, textColor, dropdownColor, children }: Props): JSX.Ele
         {text} <DropdownIcon color={dropdownColor} />
       </span>
       <Popover
+        disableScrollLock
+        disableRestoreFocus
         id="mouse-over-popover"
         className={styles.popover}
         classes={{
@@ -94,7 +96,6 @@ const MenuHover = ({ text, textColor, dropdownColor, children }: Props): JSX.Ele
           vertical: 'top',
           horizontal: 'right',
         }}
-        disableScrollLock
         PaperProps={{ onMouseEnter: popoverEnter, onMouseLeave: popoverLeave }}
       >
         <Paper className={styles.paper} elevation={5}>

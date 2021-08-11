@@ -8,7 +8,7 @@ import { DocumentationCard } from '../molecules/DocumentationCard';
 import { MethodologyDetailsColumn } from '../molecules/MethodologyDetailsColumn';
 import { Methodology } from '../../mocks/mocks';
 import { Documentation, Maybe, Scalars } from '../../generated/sanity-graphql';
-import { getBtnHref } from '../../lib/button';
+import { getBtnHref, isInternalLink } from '../../lib/button';
 import { getSanityImgSrc } from '../../lib/imgSrc';
 
 interface Props {
@@ -87,7 +87,7 @@ function MethodologyDocumentationSection({ methodology, documentation, nameRaw }
             imageAlt={methodology?.creditClassImageAltText}
             buttonText={'learn more'}
             buttonUrl={methodology.creditClassUrl}
-            buttonBlankTarget
+            buttonBlankTarget={!isInternalLink(methodology.creditClassUrl)}
           />
         </div>
         <MethodologyDetailsColumn

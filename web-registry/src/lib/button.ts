@@ -1,5 +1,7 @@
 import { LinkFieldsFragment, ButtonFieldsFragment, Maybe } from '../generated/sanity-graphql';
 
+export const isInternalLink = (url: string): boolean => url.startsWith('/');
+
 export const openLink = (url: string, blankTarget: boolean): void =>
   void window.open(url, blankTarget ? '_blank' : '_self', 'noopener');
 

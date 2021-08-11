@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { makeStyles, TextField, Link } from '@material-ui/core';
+import { makeStyles, TextField } from '@material-ui/core';
 import Autocomplete, { createFilterOptions } from '@material-ui/lab/Autocomplete';
 import { FieldProps } from 'formik';
 
@@ -38,11 +38,10 @@ const useStyles = makeStyles(theme => ({
   },
   edit: {
     alignSelf: 'flex-end',
-    marginTop: theme.spacing(2),
-  },
-  editLabel: {
+    border: 'none',
     fontSize: theme.typography.pxToRem(12),
-    color: theme.palette.secondary.main,
+    marginTop: theme.spacing(2),
+    padding: theme.spacing(1, 2),
   },
 }));
 
@@ -175,9 +174,9 @@ const RoleField: React.FC<Props> = ({
         )}
       </FieldFormControl>
       {selectedValue && selectedValue.id && (
-        <Link className={styles.edit} onClick={() => setOrganizationEdit(selectedValue)}>
-          <Label className={styles.editLabel}>edit entity</Label>
-        </Link>
+        <OutlinedButton className={styles.edit} onClick={() => setOrganizationEdit(selectedValue)}>
+          edit entity
+        </OutlinedButton>
       )}
       {organizationEdit && (
         <AddOrganizationModal

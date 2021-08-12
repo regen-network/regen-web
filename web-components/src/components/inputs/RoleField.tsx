@@ -77,10 +77,8 @@ const RoleField: React.FC<Props> = ({
   const styles = useStyles();
   const [organizationEdit, setOrganizationEdit] = useState<any | null>(null);
   const [individualEdit, setIndividualEdit] = useState<any | null>(null);
-  const [value, setValue] = useState({});
+  const [value, setValue] = useState<any | null>({});
   const { form, field } = fieldProps;
-
-  const selectedValue = options && field.value && options.find(o => o.id === field.value);
 
   useEffect(() => {
     const selectedValue = options && field.value && options.find(o => o.id === field.value);
@@ -139,7 +137,7 @@ const RoleField: React.FC<Props> = ({
             getOptionSelected={o => o.id === field.value}
             renderOption={o => o.label || o}
             onChange={(event, newValue, reason) => {
-              if (reason === 'select-option') {
+              if (reason === 'select-option' && !newValue.inputValue) {
                 handleChange(newValue.id);
               } else if (typeof newValue === 'string') {
                 setValue({
@@ -195,11 +193,12 @@ const RoleField: React.FC<Props> = ({
           />
         )}
       </FieldFormControl>
-      {selectedValue && selectedValue.id && (
-        <OutlinedButton className={styles.edit} onClick={() => editEntity(selectedValue)}>
-          edit entity
-        </OutlinedButton>
-      )}
+      {value &&
+      value.id && ( //TODO: validate so this does not appear for "myself" or "my organization." That can be done elsewhere.
+          <OutlinedButton className={styles.edit} onClick={() => editEntity(value)}>
+            edit entity
+          </OutlinedButton>
+        )}
       {organizationEdit && (
         <OrganizationModal
           organization={organizationEdit}

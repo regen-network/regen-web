@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles, TextField } from '@material-ui/core';
 import Autocomplete, { createFilterOptions } from '@material-ui/lab/Autocomplete';
 import { FieldProps } from 'formik';
@@ -77,10 +77,15 @@ const RoleField: React.FC<Props> = ({
   const styles = useStyles();
   const [organizationEdit, setOrganizationEdit] = useState<any | null>(null);
   const [individualEdit, setIndividualEdit] = useState<any | null>(null);
-  const [inputValue, setInputValue] = useState('');
+  const [value, setValue] = useState({});
   const { form, field } = fieldProps;
 
   const selectedValue = options && field.value && options.find(o => o.id === field.value);
+
+  useEffect(() => {
+    const selectedValue = options && field.value && options.find(o => o.id === field.value);
+    setValue(selectedValue);
+  }, [field.value, options]);
 
   const saveOrganization = async (org: any): Promise<void> => {
     var savedOrg = await onSaveOrganization(org);
@@ -128,53 +133,63 @@ const RoleField: React.FC<Props> = ({
               popupIndicator: styles.popupIndicator,
             }}
             options={options || []}
-            freeSolo
             forcePopupIcon
-            selectOnFocus
-            handleHomeEndKeys
-            inputValue={(selectedValue && selectedValue.label) || inputValue}
+            value={value}
             getOptionLabel={o => o.label || ''}
             getOptionSelected={o => o.id === field.value}
             renderOption={o => o.label || o}
-            onChange={(event, value, reason) => {
-              if (value && value.id) handleChange(value.id);
-              if (reason === 'clear') handleChange(value);
-            }}
-            onInputChange={(event, newInputValue) => {
-              setInputValue(newInputValue);
+            onChange={(event, newValue, reason) => {
+              if (reason === 'select-option') {
+                handleChange(newValue.id);
+              } else if (typeof newValue === 'string') {
+                setValue({
+                  label: newValue,
+                });
+              } else if (newValue && newValue.inputValue) {
+                // Create a new value from the user input
+                setValue({
+                  label: newValue.inputValue,
+                });
+              } else {
+                setValue(newValue);
+              }
             }}
             onBlur={handleBlur}
             renderInput={props => (
               <TextField {...props} placeholder="Start typing or choose entity" variant="outlined" />
             )}
-            filterOptions={(options, params) => {
-              const filtered = filter(options, params);
+            filterOptions={(options, state) => {
+              const filtered = filter(options, state) as RoleOptionType[];
 
               // Suggest the creation of a new value
-              if (params.inputValue !== '') {
-                filtered.push(
-                  ((
-                    <div
-                      className={styles.add}
-                      onClick={() => setOrganizationEdit({ legalName: params.inputValue })}
-                    >
-                      <OrganizationIcon />
-                      <Label className={styles.label}>+ Add New Organization</Label>
-                    </div>
-                  ) as unknown) as RoleOptionType,
-                );
-                filtered.push(
-                  ((
-                    <div
-                      className={styles.add}
-                      onClick={() => setIndividualEdit({ name: params.inputValue })}
-                    >
-                      <UserIcon />
-                      <Label className={styles.label}>+ Add New Individual</Label>
-                    </div>
-                  ) as unknown) as RoleOptionType,
-                );
-              }
+              filtered.push(
+                ((
+                  <div
+                    className={styles.add}
+                    onClick={e => {
+                      e.stopPropagation();
+                      setOrganizationEdit({ legalName: state.inputValue });
+                    }}
+                  >
+                    <OrganizationIcon />
+                    <Label className={styles.label}>+ Add New Organization</Label>
+                  </div>
+                ) as unknown) as RoleOptionType,
+              );
+              filtered.push(
+                ((
+                  <div
+                    className={styles.add}
+                    onClick={e => {
+                      e.stopPropagation();
+                      setIndividualEdit({ name: state.inputValue });
+                    }}
+                  >
+                    <UserIcon />
+                    <Label className={styles.label}>+ Add New Individual</Label>
+                  </div>
+                ) as unknown) as RoleOptionType,
+              );
               return filtered;
             }}
           />

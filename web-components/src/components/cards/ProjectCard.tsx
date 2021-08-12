@@ -15,7 +15,7 @@ export interface ProjectInfo {
   place: string;
   area: number;
   areaUnit: string;
-  developer: User;
+  registry: User;
 }
 
 interface Info {
@@ -50,7 +50,7 @@ export interface ProjectCardProps {
   place: Place | string;
   area: number;
   areaUnit: string;
-  developer?: User;
+  registry?: User;
   tag?: string;
   onClick?: () => void;
   displayCity?: boolean;
@@ -105,10 +105,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   placeInfo: {
     flex: '1 0 auto',
     [theme.breakpoints.up('sm')]: {
-      padding: `0 ${theme.spacing(5.25)} ${theme.spacing(5.25)}`,
+      padding: theme.spacing(1.75, 5.25, 5.25),
     },
     [theme.breakpoints.down('xs')]: {
-      padding: `0 ${theme.spacing(4.5)} ${theme.spacing(5)}`,
+      padding: theme.spacing(1.75, 4.5, 5),
     },
   },
   userInfo: {
@@ -223,7 +223,7 @@ export default function ProjectCard({
   place,
   area,
   areaUnit,
-  developer,
+  registry,
   onClick,
   tag,
   displayCity = true,
@@ -279,10 +279,10 @@ export default function ProjectCard({
           <span className={classes.comingSoonText}>coming soon</span>
         </div>
       )}
-      {developer && <div className={classes.separator} />}
-      {developer && (
+      {registry && <div className={classes.separator} />}
+      {registry && (
         <div className={classes.userInfo}>
-          <UserInfo user={developer} size="project" />
+          <UserInfo user={registry} size="project" />
         </div>
       )}
       {purchaseInfo && <div className={classes.separator} />}

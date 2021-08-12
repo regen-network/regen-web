@@ -7,19 +7,6 @@ import { useQuery } from '@apollo/client';
 import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 import clsx from 'clsx';
 
-// import { setPageView } from '../lib/ga';
-// import { useLedger, ContextType } from '../ledger';
-// import { Project, ProjectDefault, ActionGroup } from '../mocks';
-// import ProjectTop from './sections/ProjectTop';
-// import ProjectImpact from './sections/ProjectImpact';
-// import MoreProjects from './sections/MoreProjects';
-// import Documentation from './sections/Documentation';
-// import LandManagementActions from './sections/LandManagementActions';
-// import { getImgSrc } from '../lib/imgSrc';
-// import getApiUri from '../lib/apiUri';
-// import { buildIssuanceModalData } from '../lib/transform';
-// import { IssuanceModalData } from 'web-components/lib/components/modal/IssuanceModal';
-
 import { getFormattedDate } from 'web-components/lib/utils/format';
 import IssuanceModal, { IssuanceModalData } from 'web-components/lib/components/modal/IssuanceModal';
 import Title from 'web-components/lib/components/title';
@@ -266,13 +253,20 @@ function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JS
   // Convert kml to geojson
   const mapFile: string = project.map;
   const isGISFile: boolean = /\.(json|kml)$/i.test(mapFile);
+  const isKMLFile: boolean = /\.kml$/i.test(mapFile);
 
   if (!geojson && isGISFile) {
     fetch(mapFile)
       .then(r => r.text())
-      .then(kml => {
-        const dom = new DOMParser().parseFromString(kml, 'text/xml');
-        setGeojson(togeojson.kml(dom));
+      .then(text => {
+        let geojson;
+        if (isKMLFile) {
+          const dom = new DOMParser().parseFromString(text, 'text/xml');
+          geojson = togeojson.kml(dom);
+        } else {
+          geojson = JSON.parse(text);
+        }
+        setGeojson(geojson);
       });
   }
 
@@ -322,6 +316,7 @@ function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JS
         mobileHeight={theme.spacing(78.75)}
         imageStorageBaseUrl={imageStorageBaseUrl}
         apiServerUrl={apiServerUrl}
+        imageCredits={project.imageCredits}
       />
       <ProjectTopSection
         project={project}

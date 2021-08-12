@@ -43,7 +43,6 @@ const useStyles = makeStyles(theme => ({
   },
   overview: {
     display: 'flex',
-    paddingTop: theme.spacing(8),
     [theme.breakpoints.down('xs')]: {
       flexDirection: 'column',
     },
@@ -58,6 +57,9 @@ const useStyles = makeStyles(theme => ({
       flexWrap: 'nowrap',
       overflow: 'scroll',
       marginLeft: theme.spacing(-4),
+      '&::-webkit-scrollbar': {
+        display: 'none',
+      },
     },
   },
   cardItem: {

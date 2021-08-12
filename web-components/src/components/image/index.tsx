@@ -63,10 +63,10 @@ const Image: React.FC<ImageProps> = ({
   // Destructure props and state
   useEffect(() => {
     if (!serverFailed) {
-      const clientWidth = imgRef?.current?.clientWidth || 0;
+      const clientWidth = rest.width || imgRef?.current?.clientWidth || 0;
       setWidth(clientWidth);
     }
-  }, [imgRef, serverFailed]);
+  }, [rest, imgRef, serverFailed]);
 
   useEffect(() => {
     if (!!delay) {

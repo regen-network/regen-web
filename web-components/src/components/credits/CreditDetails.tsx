@@ -12,6 +12,7 @@ interface CreditInfoProps {
   background?: string;
   title: string;
 }
+
 interface CreditClass {
   name: string;
   tag: string;
@@ -169,11 +170,13 @@ export default function CreditInfo({
             {creditClass.name}
           </Title>
         </div>
-        <div className={classes.descriptionItem}>
-          <Typography component="div" className={classes.description}>
-            {ReactHtmlParser(creditClass.description)}
-          </Typography>
-        </div>
+        {creditClass.description && (
+          <div className={classes.descriptionItem}>
+            <Typography component="div" className={classes.description}>
+              {ReactHtmlParser(creditClass.description)}
+            </Typography>
+          </div>
+        )}
         <div className={classes.activitiesTitleContainer}>
           <Title className={classes.activitiesTitle} variant="h4">
             {title}

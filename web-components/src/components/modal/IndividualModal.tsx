@@ -102,7 +102,7 @@ function IndividualModal({ individual, onClose, onSubmit }: IndividualModalProps
   }, [individual]);
 
   return (
-    <Modal open={!!individualEdit} onClose={onClose} className={styles.modal}>
+    <Modal open={!!individualEdit} onClose={onClose}>
       <div className={styles.root}>
         <Title variant="h4" align="center" className={styles.title}>
           {`${individualEdit && individualEdit.id ? 'Edit' : 'Add'} Individual`}

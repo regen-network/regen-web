@@ -108,7 +108,7 @@ function OrganizationModal({
   }, [organization]);
 
   return (
-    <Modal open={!!organizationEdit} onClose={onClose} className={styles.modal}>
+    <Modal open={!!organizationEdit} onClose={onClose}>
       <div className={styles.root}>
         <Title variant="h4" align="center" className={styles.title}>
           {`${organizationEdit && organizationEdit.id ? 'Edit' : 'Add'} Organization`}

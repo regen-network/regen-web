@@ -44,7 +44,12 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     },
   }),
   label: {
-    marginBottom: theme.spacing(3),
+    [theme.breakpoints.up('sm')]: {
+      marginBottom: theme.spacing(3),
+    },
+    [theme.breakpoints.down('xs')]: {
+      marginBottom: theme.spacing(2),
+    },
   },
 }));
 

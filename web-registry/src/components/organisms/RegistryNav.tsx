@@ -68,11 +68,16 @@ const RegistryNav: React.FC = () => {
     // { href: '/become-a-verifier', title: 'Become a Verifier' },
   ];
 
+  /** for pages where we don't want to render full `name` */
+  const titleAlias: { [title: string]: string } = {
+    'The Kasigau Corridor REDD Project - Phase II The Community Ranches': 'Kasigau',
+  };
+
   const menuItems: HeaderMenuItem[] = [
     {
       title: 'Projects',
       dropdownItems: projects.map(p => ({
-        title: p.name,
+        title: titleAlias[p.name] || p.name,
         href: `/projects/${p.id}`,
         linkComponent: RegistryNavLink,
       })),

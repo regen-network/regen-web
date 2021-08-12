@@ -79,7 +79,7 @@ const MenuHover = ({ text, textColor, dropdownColor, children }: Props): JSX.Ele
         {text} <DropdownIcon color={dropdownColor} />
       </span>
       <Popover
-        disableScrollLock
+        // disableScrollLock
         disableRestoreFocus
         id="mouse-over-popover"
         className={styles.popover}

@@ -29,6 +29,23 @@ const useStyles = makeStyles(theme => ({
   },
   input: {
     borderRadius: 2,
+    '&.MuiAutocomplete-inputRoot[class*="MuiOutlinedInput-root"] .MuiAutocomplete-input': {
+      [theme.breakpoints.up('sm')]: {
+        fontSize: theme.spacing(4.5),
+      },
+      [theme.breakpoints.down('xs')]: {
+        paddingLeft: theme.spacing(1),
+        paddingRight: theme.spacing(3.25),
+        paddingTop: theme.spacing(1.625),
+        fontSize: theme.spacing(4),
+      },
+    },
+    '& .MuiOutlinedInput-notchedOutline': {
+      borderColor: theme.palette.grey[100],
+    },
+    '&:hover .MuiOutlinedInput-notchedOutline': {
+      borderColor: theme.palette.grey[100],
+    },
     '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
       border: `1px solid ${theme.palette.grey[100]}`,
     },

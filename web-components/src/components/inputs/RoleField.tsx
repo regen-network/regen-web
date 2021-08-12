@@ -29,9 +29,13 @@ const useStyles = makeStyles(theme => ({
   },
   input: {
     borderRadius: 2,
+    '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+      border: `1px solid ${theme.palette.grey[100]}`,
+    },
   },
   paper: {
     borderRadius: 2,
+    border: `1px solid ${theme.palette.grey[100]}`,
   },
   popupIndicator: {
     color: theme.palette.secondary.main,

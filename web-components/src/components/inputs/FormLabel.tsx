@@ -25,12 +25,10 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     display: 'flex',
     [theme.breakpoints.up('sm')]: {
       marginTop: theme.spacing(1),
-      marginBottom: !!props.description ? theme.spacing(4) : theme.spacing(2),
       fontSize: theme.spacing(3.5),
     },
     [theme.breakpoints.down('xs')]: {
       marginTop: theme.spacing(1),
-      marginBottom: !!props.description ? theme.spacing(3) : theme.spacing(1),
       fontSize: theme.spacing(3),
     },
   }),

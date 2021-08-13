@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { makeStyles, Theme, Button } from '@material-ui/core';
+import { makeStyles, Theme } from '@material-ui/core';
 import { Formik, Form, Field } from 'formik';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
+import cx from 'clsx';
 
+import { Button } from '../buttons/Button';
 import ContainedButton from '../buttons/ContainedButton';
 import OnBoardingCard from '../cards/OnBoardingCard';
 import PhoneField from '../inputs/PhoneField';
@@ -66,17 +68,24 @@ const useStyles = makeStyles((theme: Theme) => ({
     alignItems: 'center',
     justifyContent: 'space-between',
     width: '100%',
-    margin: theme.spacing(10, 0),
+    marginTop: theme.spacing(10),
   },
-  button: {
-    marginLeft: theme.spacing(2),
+  matchFormPadding: {
+    [theme.breakpoints.up('sm')]: {
+      padding: theme.spacing(0, 10),
+    },
     [theme.breakpoints.down('xs')]: {
-      marginRight: theme.spacing(6),
+      padding: theme.spacing(0, 2.5),
     },
   },
+  button: {
+    paddingLeft: theme.spacing(17),
+    paddingRight: theme.spacing(17),
+  },
   cancelButton: {
-    color: theme.palette.grey[500],
-    fontSize: theme.spacing(4),
+    color: theme.palette.info.main,
+    fontSize: theme.typography.pxToRem(12),
+    padding: 0,
   },
   permission: {
     display: 'flex',
@@ -167,7 +176,7 @@ function OrganizationModal({
                   />
                   <Field className={styles.field} component={PhoneField} label="Phone number" name="phone" />
                 </OnBoardingCard>
-                <div className={styles.permission}>
+                <div className={cx(styles.permission, styles.matchFormPadding)}>
                   <Field
                     type="checkbox"
                     component={CheckboxLabel}
@@ -188,7 +197,7 @@ function OrganizationModal({
                     </div>
                   </Tooltip>
                 </div>
-                <div className={styles.controls}>
+                <div className={cx(styles.controls, styles.matchFormPadding)}>
                   <Button onClick={onClose} className={styles.cancelButton}>
                     cancel
                   </Button>

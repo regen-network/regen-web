@@ -15,10 +15,10 @@ const AppFooter: React.FC = () => {
           title: 'Credit Classes',
           href: `/`,
         },
-        {
-          title: 'Methodologies',
-          href: `/`,
-        },
+        // {
+        //   title: 'Methodologies',
+        //   href: `/`,
+        // },
       ],
     },
     {

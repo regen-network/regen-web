@@ -98,7 +98,7 @@ const ReviewProcessInfo: React.FC<{
           <BlockContent content={props.reviewSection?.descriptionRaw} />
         </Description>
       </div>
-      {props.reviewSection?.button && (
+      {props.reviewSection?.button?.buttonText && (
         <div>
           <ContainedButton onClick={() => onBtnClick(props.openModal, props.reviewSection?.button)}>
             {props.reviewSection.button.buttonText}

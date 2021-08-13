@@ -6,6 +6,7 @@ export * from './ProcessStepCard';
 export * from './ProtectedRoute';
 export * from './ProtectedRoute';
 export * from './RegistryNavLink';
+export * from './RegistryIconLink';
 export * from './ScrollToTop';
 export * from './ScrollToTop';
 export * from './WrappedImpactCard';

@@ -1,10 +1,28 @@
 import React from 'react';
-import Footer, { FooterItemProps as FooterItem } from 'web-components/lib/components/footer';
+import { Footer, FooterItemProps as FooterItem } from 'web-components/lib/components/footer/footer-new';
+import { RegistryIconLink } from '../atoms';
 
-function AppFooter(): JSX.Element {
+const AppFooter: React.FC = () => {
   const footerItems: [FooterItem, FooterItem, FooterItem] = [
     {
-      title: 'get involved',
+      title: 'Regen Registry',
+      items: [
+        {
+          title: 'Projects',
+          href: `/`,
+        },
+        {
+          title: 'Credit Classes',
+          href: `/`,
+        },
+        {
+          title: 'Methodologies',
+          href: `/`,
+        },
+      ],
+    },
+    {
+      title: 'stakeholders',
       items: [
         {
           title: 'Buyers',
@@ -14,12 +32,12 @@ function AppFooter(): JSX.Element {
           title: 'Land Stewards',
           href: `${process.env.REACT_APP_WEBSITE_URL}/land-stewards/`,
         },
+        // {
+        //   title: 'Community',
+        //   href: `${process.env.REACT_APP_WEBSITE_URL}/community/`,
+        // },
         {
-          title: 'Community',
-          href: `${process.env.REACT_APP_WEBSITE_URL}/community/`,
-        },
-        {
-          title: 'Developers',
+          title: 'Project Developers',
           href: `${process.env.REACT_APP_WEBSITE_URL}/developers/`,
         },
         {
@@ -33,58 +51,19 @@ function AppFooter(): JSX.Element {
       ],
     },
     {
-      title: 'learn more',
+      title: 'program',
       items: [
         {
-          title: 'Case Studies',
-          href: `${process.env.REACT_APP_WEBSITE_URL}/case-studies/`,
+          title: 'Program Guides',
+          href: 'https://regen-registry.s3.amazonaws.com/Regen+Registry+Program+Guide.pdf',
         },
         {
-          title: 'Resources',
-          href: `${process.env.REACT_APP_WEBSITE_URL}/resources/`,
+          title: 'Create a Credit Class',
+          href: '/create-credit-class',
         },
         {
-          title: 'FAQ',
-          href: `${process.env.REACT_APP_WEBSITE_URL}/faq/`,
-        },
-        {
-          title: 'Team',
-          href: `${process.env.REACT_APP_WEBSITE_URL}/team/`,
-        },
-        {
-          title: 'Contact',
-          href: `${process.env.REACT_APP_WEBSITE_URL}/contact/`,
-        },
-      ],
-    },
-    {
-      title: 'regen',
-      items: [
-        {
-          title: 'Partners',
-          href: `${process.env.REACT_APP_WEBSITE_URL}/partners/`,
-        },
-        {
-          title: 'Media',
-          href: `${process.env.REACT_APP_WEBSITE_URL}/media/`,
-        },
-        {
-          title: 'Careers',
-          href: 'https://apply.workable.com/regen-network/',
-          target: '_blank',
-        },
-        {
-          title: 'Forum',
-          href: 'https://forum.regen.network/',
-          target: '_blank',
-        },
-        {
-          title: 'Press Kit',
-          href: `${process.env.REACT_APP_WEBSITE_URL}/press-kit/`,
-        },
-        {
-          title: 'Invest',
-          href: `${process.env.REACT_APP_WEBSITE_URL}/invest/`,
+          title: 'Create a Methodology',
+          href: '/create-methodology',
         },
       ],
     },
@@ -93,11 +72,12 @@ function AppFooter(): JSX.Element {
   return (
     <Footer
       footerItems={footerItems}
+      iconLink={RegistryIconLink}
       apiUri={process.env.REACT_APP_API_URI}
       privacyUrl="https://www.regen.network/privacy-policy"
       termsUrl="https://www.regen.network/terms-service"
     />
   );
-}
+};
 
 export { AppFooter };

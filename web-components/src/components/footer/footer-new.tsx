@@ -1,0 +1,287 @@
+import React from 'react';
+import cx from 'clsx';
+import { makeStyles, useTheme } from '@material-ui/core';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import Link from '@material-ui/core/Link';
+import Box from '@material-ui/core/Box';
+
+import Title from '../title';
+import Section from '../section';
+import InstagramIcon from '../icons/social/InstagramIcon';
+import TelegramIcon from '../icons/social/TelegramIcon';
+import FacebookIcon from '../icons/social/FacebookIcon';
+import TwitterIcon from '../icons/social/TwitterIcon';
+import LinkedInIcon from '../icons/social/LinkedInIcon';
+import MediumIcon from '../icons/social/MediumIcon';
+import YoutubeIcon from '../icons/social/YoutubeIcon';
+import GithubIcon from '../icons/social/GithubIcon';
+import { HeaderLogoLink } from '../header/HeaderLogoLink';
+
+export interface FooterItemProps {
+  title: string;
+  items: { title: string; href: string; target?: string }[];
+}
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    backgroundColor: theme.palette.info.dark,
+  },
+  section: {
+    // [theme.breakpoints.up('sm')]: {
+    //   paddingBottom: theme.spacing(30),
+    // },
+    // [theme.breakpoints.down('xs')]: {
+    //   paddingBottom: theme.spacing(19),
+    // },
+    '& a': {
+      '&:link, &:visited, &:hover, &:active': {
+        textDecoration: 'none',
+      },
+      '&:hover': {
+        color: theme.palette.info.contrastText,
+      },
+    },
+  },
+  title: {
+    textTransform: 'uppercase',
+    color: theme.palette.primary.main,
+    fontWeight: 800,
+    letterSpacing: '1px',
+    [theme.breakpoints.up('sm')]: {
+      lineHeight: theme.spacing(6.5),
+      marginBottom: theme.spacing(3.75),
+    },
+    [theme.breakpoints.down('xs')]: {
+      lineHeight: theme.spacing(4.5),
+      fontSize: theme.spacing(3.5),
+      marginBottom: theme.spacing(4.5),
+    },
+  },
+  subTitle: {
+    lineHeight: '150%',
+    color: theme.palette.primary.main,
+    padding: 0,
+    [theme.breakpoints.up('sm')]: {
+      fontSize: theme.spacing(4.5),
+      marginBottom: theme.spacing(1.25),
+    },
+    [theme.breakpoints.down('xs')]: {
+      fontSize: theme.spacing(4),
+      marginBottom: theme.spacing(1),
+    },
+  },
+  list: {
+    padding: 0,
+  },
+  mail: {
+    paddingTop: theme.spacing(4),
+  },
+  textField: {
+    paddingRight: theme.spacing(2.5),
+    '& .MuiInputBase-root': {
+      fontSize: theme.spacing(3.5),
+      height: theme.spacing(12.5),
+    },
+  },
+  button: {
+    fontSize: theme.spacing(3.5),
+    height: theme.spacing(12.5),
+    padding: theme.spacing(2.5),
+  },
+  bottomGrid: {
+    [theme.breakpoints.up('sm')]: {
+      marginTop: theme.spacing(8.25),
+      marginBottom: theme.spacing(8.25),
+    },
+    [theme.breakpoints.down('xs')]: {
+      marginTop: theme.spacing(6),
+      marginBottom: theme.spacing(9),
+    },
+  },
+  bottom: {
+    color: theme.palette.primary.main,
+    lineHeight: '150%',
+    fontSize: theme.spacing(3.5),
+  },
+  newsletter: {
+    fontWeight: 'bold',
+    color: theme.palette.secondary.main,
+    lineHeight: '145%',
+    fontSize: theme.spacing(3),
+    paddingBottom: theme.spacing(5),
+    paddingTop: theme.spacing(2.5),
+    display: 'block',
+  },
+  social: {
+    [theme.breakpoints.up('sm')]: {
+      justifyContent: 'center',
+    },
+    [theme.breakpoints.down('xs')]: {
+      marginLeft: theme.spacing(-2),
+      justifyContent: 'space-between',
+    },
+  },
+  separator: {
+    borderTop: 0,
+    borderColor: theme.palette.grey[50],
+    [theme.breakpoints.up('sm')]: {
+      marginTop: theme.spacing(19.75),
+    },
+    [theme.breakpoints.down('xs')]: {
+      marginTop: theme.spacing(18.75),
+    },
+  },
+  icon: {
+    [theme.breakpoints.up('sm')]: {
+      width: theme.spacing(12.75),
+      height: theme.spacing(12.75),
+      marginLeft: theme.spacing(2.5),
+      marginRight: theme.spacing(2.5),
+    },
+    [theme.breakpoints.down('xs')]: {
+      width: theme.spacing(7.75),
+      height: theme.spacing(7.75),
+    },
+  },
+  community: {
+    [theme.breakpoints.up('sm')]: {
+      textAlign: 'center',
+      marginTop: theme.spacing(16.25),
+    },
+  },
+  footerItem: {
+    [theme.breakpoints.down('xs')]: {
+      marginBottom: theme.spacing(11.25),
+    },
+  },
+  smallIcon: {
+    padding: theme.spacing(1.25),
+  },
+  link: {
+    color: theme.palette.secondary.main,
+  },
+}));
+
+const FooterItem = ({ title, items }: FooterItemProps): JSX.Element => {
+  const classes = useStyles({});
+
+  return (
+    <div className={classes.footerItem}>
+      <Title className={classes.title} variant="h5">
+        {title}
+      </Title>
+      <List className={classes.list}>
+        {items.map((item, index) => (
+          <ListItem className={classes.subTitle} key={index}>
+            <Link href={item.href} rel="noopener noreferrer" target={item.target}>
+              {item.title}
+            </Link>
+          </ListItem>
+        ))}
+      </List>
+    </div>
+  );
+};
+
+const Footer: React.FC<{
+  footerItems: [FooterItemProps, FooterItemProps, FooterItemProps];
+  termsUrl: string;
+  privacyUrl: string;
+  iconLink?: React.FC<{ color: string }>;
+  apiUri?: string;
+}> = ({
+  footerItems,
+  termsUrl,
+  privacyUrl,
+  apiUri = 'http://localhost:5000',
+  iconLink: IconLink = HeaderLogoLink,
+}) => {
+  const styles = useStyles();
+  const theme = useTheme();
+
+  return (
+    <div className={styles.root}>
+      <Section classes={{ root: styles.section }}>
+        <Grid container>
+          <Grid item xs={12} lg={3} className={styles.footerItem}>
+            <Box pb={[0, 8]} display="flex" flexDirection="column" alignItems="center" textAlign="center">
+              <IconLink color={theme.palette.primary.main} />
+              <Box mt={4}>
+                <Typography className={styles.subTitle}>
+                  A project of{' '}
+                  <a href="https://www.regen.network" className={styles.link}>
+                    Regen Network
+                    <br /> Development, Inc.
+                  </a>
+                </Typography>
+              </Box>
+            </Box>
+          </Grid>
+          {/* </Hidden> */}
+          <Grid item xs={12} md={4} lg={3}>
+            <FooterItem title={footerItems[0].title} items={footerItems[0].items} />
+          </Grid>
+          <Grid item xs={12} md={4} lg={3}>
+            <FooterItem title={footerItems[1].title} items={footerItems[1].items} />
+          </Grid>
+          <Grid item xs={12} md={4} lg={3}>
+            <FooterItem title={footerItems[2].title} items={footerItems[2].items} />
+          </Grid>
+        </Grid>
+        <div>
+          <Title className={cx(styles.community, styles.title)} variant="h5">
+            join the community
+          </Title>
+          <Grid container wrap="nowrap" className={styles.social}>
+            <Link href="https://www.instagram.com/regennetwork/" rel="noopener noreferrer" target="_blank">
+              <InstagramIcon className={styles.icon} />
+            </Link>
+            <Link href="http://t.me/regennetwork_public" rel="noopener noreferrer" target="_blank">
+              <TelegramIcon className={styles.icon} />
+            </Link>
+            <Link href="https://facebook.com/weareregennetwork" rel="noopener noreferrer" target="_blank">
+              <FacebookIcon className={styles.icon} />
+            </Link>
+            <Link href="http://twitter.com/regen_network" rel="noopener noreferrer" target="_blank">
+              <TwitterIcon className={styles.icon} />
+            </Link>
+            <Link
+              href="https://www.linkedin.com/company/regen-network/"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <LinkedInIcon className={styles.icon} />
+            </Link>
+            <Link href="https://medium.com/regen-network" rel="noopener noreferrer" target="_blank">
+              <MediumIcon className={styles.icon} />
+            </Link>
+            <Link
+              href="https://www.youtube.com/channel/UCICD2WukTY0MbQdQ9Quew3g"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <YoutubeIcon className={cx(styles.smallIcon, styles.icon)} />
+            </Link>
+            <Link href="https://github.com/regen-network/" rel="noopener noreferrer" target="_blank">
+              <GithubIcon className={styles.icon} />
+            </Link>
+          </Grid>
+        </div>
+        <hr className={styles.separator} />
+        <Grid className={styles.bottomGrid} container justify="space-between">
+          <Grid item className={styles.bottom}>
+            <Link href={termsUrl}>Terms</Link> | <Link href={privacyUrl}>Privacy</Link>
+          </Grid>
+          <Grid item className={styles.bottom}>
+            © 2020 Regen Network Development, Inc
+          </Grid>
+        </Grid>
+      </Section>
+    </div>
+  );
+};
+
+export { Footer };

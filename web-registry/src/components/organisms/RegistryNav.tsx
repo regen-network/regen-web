@@ -1,6 +1,6 @@
 import React from 'react';
-import { useTheme, makeStyles } from '@material-ui/core/styles';
-import { useHistory, Link as RouterLink } from 'react-router-dom';
+import { useTheme } from '@material-ui/core/styles';
+import { useHistory } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 import Box from '@material-ui/core/Box';
 
@@ -11,12 +11,10 @@ import {
   HeaderDropdownColumn,
   HeaderDropdownItemProps,
 } from 'web-components/lib/components/header/HeaderDropdownItems';
-import RegistryIcon from 'web-components/lib/components/icons/RegistryIcon';
 
-import { RegistryNavLink } from '../atoms';
+import { RegistryIconLink, RegistryNavLink } from '../atoms';
 
 import { projects } from '../../mocks';
-// import { PeerReviewed } from '../atoms';
 import { ReactComponent as Cow } from '../../assets/svgs/green-cow.svg';
 
 const RegistryNav: React.FC = () => {
@@ -139,7 +137,7 @@ const RegistryNav: React.FC = () => {
     <Header
       isRegistry
       linkComponent={RegistryNavLink}
-      homeLink={LogoLink}
+      homeLink={RegistryIconLink}
       isAuthenticated={isAuthenticated}
       onLogin={() => loginWithRedirect({ redirectUri: window.location.origin })}
       onLogout={() => logout({ returnTo: window.location.origin })}
@@ -153,31 +151,6 @@ const RegistryNav: React.FC = () => {
       fullWidth={fullWidthRegExp.test(pathname)}
       pathName={pathname}
     />
-  );
-};
-
-const useLogoStyles = makeStyles(theme => {
-  const { pxToRem } = theme.typography;
-  return {
-    icon: {
-      height: 'auto',
-      width: pxToRem(117),
-      [theme.breakpoints.down('sm')]: {
-        width: pxToRem(70),
-      },
-      [theme.breakpoints.down('xs')]: {
-        width: pxToRem(62),
-      },
-    },
-  };
-});
-
-const LogoLink: React.FC<{ color: string }> = ({ color }) => {
-  const styles = useLogoStyles();
-  return (
-    <RouterLink to="/">
-      <RegistryIcon className={styles.icon} color={color} />
-    </RouterLink>
   );
 };
 

@@ -227,8 +227,6 @@ function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JS
     txClient = new ServiceClientImpl(api.connection.queryConnection);
   }
 
-  console.log('project.id >>', project.id);
-
   const { data } = useQuery(PROJECT_BY_HANDLE, {
     variables: { handle: project.id },
   });

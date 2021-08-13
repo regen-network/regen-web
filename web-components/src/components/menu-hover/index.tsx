@@ -12,9 +12,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginTop: theme.spacing(4.75),
   },
   text: {
-    // '& ul:selected, & ul:focus': {
-    //   outline: 'none',
-    // },
     '& li.MuiListItem-button:hover': {
       backgroundColor: 'transparent',
     },

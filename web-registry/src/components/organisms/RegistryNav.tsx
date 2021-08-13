@@ -70,7 +70,7 @@ const RegistryNav: React.FC = () => {
 
   /** for pages where we don't want to render full `name` */
   const titleAlias: { [title: string]: string } = {
-    'The Kasigau Corridor REDD Project - Phase II The Community Ranches': 'Kasigau',
+    'The Kasigau Corridor REDD Project - Phase II The Community Ranches': 'Kasigau Corridor',
   };
 
   const menuItems: HeaderMenuItem[] = [

@@ -51,7 +51,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => {
     absolute: {
       [theme.breakpoints.up('sm')]: {
         position: 'absolute',
-        width: '100%',
+        width: '100vw',
       },
     },
     borderBottom: props => ({

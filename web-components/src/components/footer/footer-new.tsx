@@ -151,13 +151,11 @@ const Footer: React.FC<{
   privacyUrl: string;
   iconLink?: React.FC<{ color: string }>;
   linkComponent?: React.FC<{ href: string }>;
-  apiUri?: string;
 }> = ({
   footerItems,
   termsUrl,
   privacyUrl,
   linkComponent: LinkComponent = Link,
-  apiUri = 'http://localhost:5000',
   iconLink: IconLink = HeaderLogoLink,
 }) => {
   const styles = useStyles();

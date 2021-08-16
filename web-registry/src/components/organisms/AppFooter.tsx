@@ -54,7 +54,6 @@ const AppFooter: React.FC = () => {
       footerItems={footerItems}
       iconLink={RegistryIconLink}
       linkComponent={Link}
-      apiUri={process.env.REACT_APP_API_URI}
       privacyUrl="https://www.regen.network/privacy-policy"
       termsUrl="https://www.regen.network/terms-service"
     />

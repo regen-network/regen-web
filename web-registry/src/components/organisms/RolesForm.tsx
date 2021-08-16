@@ -43,14 +43,8 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-//TODO: delete
-const entitiesInit = [
-  { legalName: 'Impact Ag', id: 1 },
-  { name: 'Toby Grogan', id: 2 },
-];
-
 const RolesForm: React.FC<RolesFormProps> = ({ submit, initialValues }) => {
-  const [entities, setEntities] = useState<any>(entitiesInit);
+  const [entities, setEntities] = useState<any>([]);
   const [options, setOptions] = useState<any>([]);
   const styles = useStyles();
 
@@ -70,12 +64,13 @@ const RolesForm: React.FC<RolesFormProps> = ({ submit, initialValues }) => {
 
   const saveEntity = (updatedEntity: any): Promise<any> => {
     if (!updatedEntity.id) {
-      updatedEntity.id = entities[entities.length - 1].id + 1;
-      const newEntities = [...entities, { ...updatedEntity, id: updatedEntity.id }]; //TODO: real DB save #494
+      updatedEntity.id = entities.length ? entities[entities.length - 1].id + 1 : 1; //TODO: real DB save #494
+      const newEntities = [...entities, { ...updatedEntity, id: updatedEntity.id }];
       setEntities(newEntities);
     } else {
-      const updatedEntities = entities.map((exisitingEntity: any) =>
-        exisitingEntity.id === updatedEntity.id ? { ...updatedEntity } : exisitingEntity, //TODO: real DB save #494
+      const updatedEntities = entities.map(
+        (exisitingEntity: any) =>
+          exisitingEntity.id === updatedEntity.id ? { ...updatedEntity } : exisitingEntity, //TODO: real DB save #494
       );
       setEntities(updatedEntities);
     }

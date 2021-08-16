@@ -1,6 +1,6 @@
 import React from 'react';
-import { useTheme } from '@material-ui/core/styles';
-import { useHistory } from 'react-router-dom';
+import { useTheme, makeStyles } from '@material-ui/core/styles';
+import { useHistory, Link as RouterLink } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 import Box from '@material-ui/core/Box';
 
@@ -15,6 +15,7 @@ import {
 import { RegistryIconLink, RegistryNavLink } from '../atoms';
 
 import { projects } from '../../mocks';
+
 import { ReactComponent as Cow } from '../../assets/svgs/green-cow.svg';
 
 const RegistryNav: React.FC = () => {

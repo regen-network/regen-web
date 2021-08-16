@@ -6,6 +6,7 @@ import { CheckboxProps } from 'formik-material-ui';
 import { getIn } from 'formik';
 
 import Checkbox from '../inputs/Checkbox';
+import { styles } from '@material-ui/pickers/views/Clock/Clock';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -28,6 +29,10 @@ const useStyles = makeStyles((theme: Theme) => ({
       },
     },
   },
+  checkbox: {
+    paddingTop: 0,
+    alignSelf: 'baseline',
+  },
 }));
 
 interface CheckboxLabelProps extends CheckboxProps {
@@ -35,7 +40,7 @@ interface CheckboxLabelProps extends CheckboxProps {
 }
 
 export default function CheckboxLabel({ label, ...props }: CheckboxLabelProps): JSX.Element {
-  const classes = useStyles();
+  const styles = useStyles();
   const {
     form: { errors, touched },
     field: { name },
@@ -44,10 +49,18 @@ export default function CheckboxLabel({ label, ...props }: CheckboxLabelProps): 
   const showError = getIn(touched, name) && !!fieldError;
 
   return (
-    <div className={classes.root}>
+    <div className={styles.root}>
       <FormControlLabel
         className={props.className}
-        control={<Checkbox field={props.field} form={props.form} meta={props.meta} />}
+        control={
+          <Checkbox
+            className={styles.checkbox}
+            field={props.field}
+            form={props.form}
+            meta={props.meta}
+            type="checkbox"
+          />
+        }
         label={label}
       />
       {showError && <FormHelperText error={showError}>{fieldError}</FormHelperText>}

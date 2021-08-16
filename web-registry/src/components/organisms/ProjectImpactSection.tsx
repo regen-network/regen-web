@@ -132,9 +132,8 @@ function ProjectImpactSection({ impacts, title, classes }: ProjectImpactProps): 
         {isMobile ? (
           <div className={styles.swipe}>
             {impacts.map(({ name, description, imgSrc, monitored }: Impact, index: number) => (
-              <div className={styles.item}>
+              <div className={styles.item} key={index}>
                 <ProjectImpactCard
-                  key={index}
                   name={name}
                   description={description}
                   imgSrc={imgSrc}

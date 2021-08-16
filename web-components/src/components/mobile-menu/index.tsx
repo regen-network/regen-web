@@ -1,19 +1,27 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import clsx from 'clsx';
+import ReactHtmlParser from 'react-html-parser';
+
 import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import Divider from '@material-ui/core/Divider';
 import MenuList from '@material-ui/core/MenuList';
 import MenuItem from '@material-ui/core/MenuItem';
-import Link from '@material-ui/core/Link';
-import clsx from 'clsx';
+import Box from '@material-ui/core/Box';
 
 import HamburgerIcon from '../icons/HamburgerIcon';
 import ContainedButton from '../buttons/ContainedButton';
 import Button from '@material-ui/core/Button';
 import CloseIcon from '../icons/CloseIcon';
-import { HeaderMenuItem } from '../header';
+import { HeaderMenuItem } from '../header/HeaderMenuHover';
+import { NavLinkProps } from '../header/NavLink';
 
 const useStyles = makeStyles((theme: Theme) => ({
+  root: {
+    display: 'inline-block',
+    padding: theme.spacing(1),
+    'align-items': 'unset',
+  },
   drawer: {
     '& .MuiDrawer-paper': {
       backgroundColor: theme.palette.primary.light,
@@ -25,6 +33,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   menuList: {
     paddingTop: theme.spacing(12.25),
+    paddingBottom: theme.spacing(20),
   },
   menuItem: {
     display: 'block',
@@ -94,37 +103,36 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: '85%',
     margin: '0 auto',
     marginBottom: theme.spacing(8),
-    marginTop: theme.spacing(8),
+    marginTop: theme.spacing(4),
   },
 }));
 
 type Props = {
-  className?: string;
   menuItems?: HeaderMenuItem[];
+  isRegistry?: boolean;
   pathName?: string;
   isAuthenticated?: boolean;
+  linkComponent: React.FC<NavLinkProps>;
   onSignup?: () => void;
   onLogin?: () => void;
   onLogout?: () => void;
 };
 
-const MobileMenu = ({ menuItems, className, pathName, ...props }: Props): JSX.Element => {
+const MobileMenu: React.FC<Props> = ({ menuItems, pathName, linkComponent: Link, ...props }) => {
   const styles = useStyles();
   const theme = useTheme();
   const [open, setOpen] = useState(false);
 
-  const handleOpen = (): void => {
-    setOpen(true);
-  };
+  const handleOpen = () => void setOpen(true);
+  const handleClose = () => void setOpen(false);
 
-  const handleClose = (): void => {
-    setOpen(false);
-  };
-
-  const isRegistry = !!props.onLogin && !!props.onLogout && !!props.onSignup;
+  // close drawer if route changes
+  useEffect(() => {
+    handleClose();
+  }, [pathName]);
 
   return (
-    <div className={className}>
+    <div className={styles.root}>
       <HamburgerIcon
         className={clsx(styles.hamburger, styles.icon)}
         onClick={handleOpen}
@@ -138,57 +146,71 @@ const MobileMenu = ({ menuItems, className, pathName, ...props }: Props): JSX.El
           svgColor={theme.palette.primary.main}
         />
         <MenuList className={styles.menuList}>
-          {menuItems?.map((item, i) => (
-            <MenuItem
-              key={i}
-              className={
-                pathName === item.href ? clsx(styles.menuItem, styles.currentMenuItem) : styles.menuItem
-              }
-            >
-              {item.dropdownItems ? (
-                <>
-                  <span className={styles.subMenuTitle}>{item.title}</span>
-                  <MenuList>
-                    {item.dropdownItems.map((dropdownItem, j) => (
-                      <MenuItem
-                        className={
-                          pathName === dropdownItem.href
-                            ? clsx(styles.subMenuItem, styles.currentMenuItem)
-                            : styles.subMenuItem
-                        }
-                        key={`${i}-${j}`}
-                      >
-                        <Link href={dropdownItem.href}>{dropdownItem.title}</Link>
-                      </MenuItem>
-                    ))}
-                  </MenuList>
-                </>
-              ) : (
-                <Link href={item.href}>{item.title}</Link>
-              )}
-            </MenuItem>
-          ))}
-          {isRegistry && (
-            <>
-              <Divider light className={styles.divider} />
-              <li className={styles.loginBtns}>
-                {props.isAuthenticated ? (
-                  <Button variant="text" className={styles.loginBtn} onClick={props.onLogout}>
-                    Logout
-                  </Button>
+          <div>
+            {menuItems?.map((item, i) => (
+              <MenuItem
+                key={i}
+                className={
+                  pathName === item.href ? clsx(styles.menuItem, styles.currentMenuItem) : styles.menuItem
+                }
+              >
+                {item.dropdownItems ? (
+                  <div>
+                    <span className={styles.subMenuTitle}>{item.title}</span>
+                    <MenuList>
+                      {item.dropdownItems.map((dropdownItem, j) => {
+                        const { svg: SVG } = dropdownItem;
+                        return (
+                          <MenuItem
+                            className={
+                              pathName === dropdownItem.href
+                                ? clsx(styles.subMenuItem, styles.currentMenuItem)
+                                : styles.subMenuItem
+                            }
+                            key={`${i}-${j}`}
+                          >
+                            {SVG && (
+                              <Box mr={2}>
+                                <SVG height={29} width={29} />
+                              </Box>
+                            )}
+                            <Link href={dropdownItem.href} overrideClassname="">
+                              {ReactHtmlParser(dropdownItem.title)}
+                            </Link>
+                          </MenuItem>
+                        );
+                      })}
+                    </MenuList>
+                  </div>
                 ) : (
-                  <>
-                    <Button variant="text" className={styles.loginBtn} onClick={props.onLogin}>
-                      Login
-                    </Button>
-                    <ContainedButton size="small" className={styles.signUpBtn} onClick={props.onSignup}>
-                      Sign Up
-                    </ContainedButton>
-                  </>
+                  <Link overrideClassname="" href={item.href || ''}>
+                    {item.title}
+                  </Link>
                 )}
-              </li>
-            </>
-          )}
+              </MenuItem>
+            ))}
+            {/* {props.isRegistry && (
+              <>
+                <Divider light className={styles.divider} />
+                <li className={styles.loginBtns}>
+                  {props.isAuthenticated ? (
+                    <Button variant="text" className={styles.loginBtn} onClick={props.onLogout}>
+                      Logout
+                    </Button>
+                  ) : (
+                    <>
+                      <Button variant="text" className={styles.loginBtn} onClick={props.onLogin}>
+                        Login
+                      </Button>
+                      <ContainedButton size="small" className={styles.signUpBtn} onClick={props.onSignup}>
+                        Sign Up
+                      </ContainedButton>
+                    </>
+                  )}
+                </li>
+              </>
+            )} */}
+          </div>
         </MenuList>
       </Drawer>
     </div>

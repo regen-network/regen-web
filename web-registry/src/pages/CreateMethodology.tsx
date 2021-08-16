@@ -15,7 +15,7 @@ import { WrappedImpactCard } from '../components/atoms';
 import { WrappedResourcesCard } from '../components/atoms';
 
 import fernImg from '../assets/fern-in-hands.png';
-import writingOnPaperImg from '../assets/writing-on-paper.png';
+// import writingOnPaperImg from '../assets/writing-on-paper.png';
 import topographyImg from '../assets/topography-pattern-full-1.png';
 
 import { useAllCreateMethodologyPageQuery } from '../generated/sanity-graphql';
@@ -168,13 +168,13 @@ const CreateMethodology: React.FC = () => {
         openModal={openModal}
       />
 
-      <HeroAction
+      {/* <HeroAction
         isBanner
         classes={{ main: styles.bottomSection }}
         img={writingOnPaperImg}
         bottomBanner={content?.createCreditClassSection}
         openModal={openModal}
-      />
+      /> */}
       <FixedFooter justify="flex-end">
         <ContainedButton onClick={() => openModal(content?.footerLink)}>Submit a methodology</ContainedButton>
       </FixedFooter>

@@ -327,7 +327,6 @@ export default function ProjectMedia({
               const image =
                 imageStorageBaseUrl && apiServerUrl ? (
                   <Image
-                    key={index}
                     src={item.src}
                     className={classes.item}
                     alt={item.src}
@@ -336,11 +335,11 @@ export default function ProjectMedia({
                     apiServerUrl={apiServerUrl}
                   />
                 ) : (
-                  <img key={index} src={item.src} className={classes.item} alt={item.src} />
+                  <img src={item.src} className={classes.item} alt={item.src} />
                 );
 
               return (
-                <div className={classes.sliderImageContainer}>
+                <div key={index} className={classes.sliderImageContainer}>
                   {image} {imageCredits && <div className={classes.imageCredits}>{imageCredits}</div>}
                 </div>
               );

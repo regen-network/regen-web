@@ -9,7 +9,6 @@ import { truncate, Texts } from './truncate';
 import { FontSizes } from '../../theme/sizing';
 
 interface ReadMoreProps {
-  className?: string;
   children: string;
   maxLength?: number;
   restMinLength?: number;
@@ -41,7 +40,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const ReadMore: React.FC<ReadMoreProps> = ({ className, maxLength = 700, restMinLength = 300, children }) => {
+const ReadMore: React.FC<ReadMoreProps> = ({ maxLength = 700, restMinLength = 300, children }) => {
   const classes = useStyles({});
   const theme = useTheme();
 

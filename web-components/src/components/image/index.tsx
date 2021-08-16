@@ -97,6 +97,8 @@ const Image: React.FC<ImageProps> = ({
       } else {
         setOptimizedSrc(src);
       }
+    } else {
+      setOptimizedSrc(src);
     }
   }, [imgRef, serverFailed, src, imageStorageBaseUrl, options, width, apiServerUrl]);
 

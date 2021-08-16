@@ -8,7 +8,7 @@ import { init as initGA } from './lib/ga';
 
 import CookiesBanner from 'web-components/lib/components/banner/CookiesBanner';
 import { ScrollToTop, ProtectedRoute } from './components/atoms';
-import { /* RegistryNav, */ AppFooter, MarketingNav } from './components/organisms';
+import { RegistryNav, AppFooter } from './components/organisms';
 
 import {
   // Additionality,
@@ -24,6 +24,7 @@ import {
   CreditsTransfer,
   // Eligibility,
   // GettingStarted,
+  Home,
   // Home,
   MediaStep,
   MethodologyReviewProcess,
@@ -72,12 +73,10 @@ const App: React.FC = (): JSX.Element => {
     <BrowserRouter basename={process.env.PUBLIC_URL}>
       <ScrollToTop />
       <div>
-        {/* <RegistryNav /> */}
-        <MarketingNav />
+        <RegistryNav />
         <Switch>
           <Route exact path="/">
-            {/* <Home /> */}
-            <Redirect to="/projects/wilmot" />
+            <Home />
           </Route>
           <Route exact path="/verify-email">
             <VerifyEmail />

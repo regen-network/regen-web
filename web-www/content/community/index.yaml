@@ -1,25 +1,29 @@
 topSection:
-  header: 'Community'
-  body: 'Regen Network is an open, collaborative global community of peers anchored by developers, scientists and validators.'
+  header: Community
+  body: Regen Network™ is an open, collaborative global community of peers
+    anchored by developers, scientists and validators.
 collaborateSection:
-  header: 'Out collaborate the competition'
-  body: >-
-    md//Under the hood of Regen Registry is a decentralized, public ledger that is governed by its users.  This public blockchain, called Regen Ledger, sits alongside a set of open protocols and tools that we build with a wide set of co-creators.
-    <br><br>
-    There are three important groups of engaged super users who, with their powers combined, will regenerate Planet Earth. Corny Captain Planet allusions aside, we are serious about collaboration.
+  header: Out collaborate the competition
+  body: md//Under the hood of Regen Registry is a decentralized, public ledger
+    that is governed by its users.  This public blockchain, called Regen Ledger,
+    sits alongside a set of open protocols and tools that we build with a wide
+    set of co-creators. <br><br> There are three important groups of engaged
+    super users who, with their powers combined, will regenerate Planet Earth.
+    Corny Captain Planet allusions aside, we are serious about collaboration.
   cards:
-    - image: '../../static/media/community-developers.jpg'
-      title: 'Developers'
-      description: 'Code new apps and integrate the network with new user groups.'
-      buttonText: 'Learn More'
-      link: '/developers/'
-    - image: '../../static/media/community-validators.jpg'
-      title: 'Validators'
-      description: 'Secure the decentralized network by running a PoS node on Regen Ledger.'
-      buttonText: 'Learn More'
-      link: '/validators/'
-    - image: '../../static/media/community-scientists.jpg'
-      title: 'Scientists'
-      description: 'Create and publish methodologies for observing ecological state and change.'
-      buttonText: 'Learn More'
-      link: '/science/'
+    - image: ../../static/media/community-developers.jpg
+      title: Developers
+      description: Code new apps and integrate the network with new user groups.
+      buttonText: Learn More
+      link: /developers/
+    - image: ../../static/media/community-validators.jpg
+      title: Validators
+      description: Secure the decentralized network by running a PoS node on Regen Ledger.
+      buttonText: Learn More
+      link: /validators/
+    - image: ../../static/media/community-scientists.jpg
+      title: Scientists
+      description: Create and publish methodologies for observing ecological state and
+        change.
+      buttonText: Learn More
+      link: /science/

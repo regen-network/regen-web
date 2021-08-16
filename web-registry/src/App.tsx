@@ -33,6 +33,7 @@ import {
   Project,
   ProjectList,
   Projects,
+  Roles,
   Seller,
   Signup,
   Story,
@@ -141,6 +142,8 @@ const App: React.FC = (): JSX.Element => {
                 <ProtectedRoute path={`${path}/:projectId/basic-info`} component={BasicInfo} />
                 <ProtectedRoute path={`${path}/:projectId/story`} component={Story} />
                 <ProtectedRoute path={`${path}/:projectId/media`} component={MediaStep} />
+                {/* <ProtectedRoute path={`${path}/:projectId/roles`} component={Roles} /> */}
+                <Route path={`${path}/roles`} component={Roles} />
 
                 {/* Used for Project Plan flow
                 <ProtectedRoute path={`${path}/:projectId/getting-started`} component={GettingStarted} />

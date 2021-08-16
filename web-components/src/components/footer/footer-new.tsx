@@ -1,5 +1,5 @@
 import React from 'react';
-import cx from 'clsx';
+import ReactHtmlParser from 'react-html-parser';
 import { makeStyles, useTheme } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -10,19 +10,14 @@ import Box from '@material-ui/core/Box';
 
 import Title from '../title';
 import Section from '../section';
-import InstagramIcon from '../icons/social/InstagramIcon';
-import TelegramIcon from '../icons/social/TelegramIcon';
-import FacebookIcon from '../icons/social/FacebookIcon';
-import TwitterIcon from '../icons/social/TwitterIcon';
-import LinkedInIcon from '../icons/social/LinkedInIcon';
-import MediumIcon from '../icons/social/MediumIcon';
-import YoutubeIcon from '../icons/social/YoutubeIcon';
-import GithubIcon from '../icons/social/GithubIcon';
 import { HeaderLogoLink } from '../header/HeaderLogoLink';
+
+import { SocialLinks } from './SocialLinks';
 
 export interface FooterItemProps {
   title: string;
   items: { title: string; href: string; target?: string }[];
+  linkComponent?: React.FC<{ href: string }>;
 }
 
 const useStyles = makeStyles(theme => ({
@@ -30,12 +25,6 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.info.dark,
   },
   section: {
-    // [theme.breakpoints.up('sm')]: {
-    //   paddingBottom: theme.spacing(30),
-    // },
-    // [theme.breakpoints.down('xs')]: {
-    //   paddingBottom: theme.spacing(19),
-    // },
     '& a': {
       '&:link, &:visited, &:hover, &:active': {
         textDecoration: 'none',
@@ -115,15 +104,6 @@ const useStyles = makeStyles(theme => ({
     paddingTop: theme.spacing(2.5),
     display: 'block',
   },
-  social: {
-    [theme.breakpoints.up('sm')]: {
-      justifyContent: 'center',
-    },
-    [theme.breakpoints.down('xs')]: {
-      marginLeft: theme.spacing(-2),
-      justifyContent: 'space-between',
-    },
-  },
   separator: {
     borderTop: 0,
     borderColor: theme.palette.grey[50],
@@ -134,51 +114,30 @@ const useStyles = makeStyles(theme => ({
       marginTop: theme.spacing(18.75),
     },
   },
-  icon: {
-    [theme.breakpoints.up('sm')]: {
-      width: theme.spacing(12.75),
-      height: theme.spacing(12.75),
-      marginLeft: theme.spacing(2.5),
-      marginRight: theme.spacing(2.5),
-    },
-    [theme.breakpoints.down('xs')]: {
-      width: theme.spacing(7.75),
-      height: theme.spacing(7.75),
-    },
-  },
-  community: {
-    [theme.breakpoints.up('sm')]: {
-      textAlign: 'center',
-      marginTop: theme.spacing(16.25),
-    },
-  },
   footerItem: {
     [theme.breakpoints.down('xs')]: {
       marginBottom: theme.spacing(11.25),
     },
-  },
-  smallIcon: {
-    padding: theme.spacing(1.25),
   },
   link: {
     color: theme.palette.secondary.main,
   },
 }));
 
-const FooterItem = ({ title, items }: FooterItemProps): JSX.Element => {
+const FooterItem: React.FC<FooterItemProps> = ({ title, items, linkComponent: LinkComponent = Link }) => {
   const classes = useStyles({});
 
   return (
     <div className={classes.footerItem}>
       <Title className={classes.title} variant="h5">
-        {title}
+        {ReactHtmlParser(title)}
       </Title>
       <List className={classes.list}>
         {items.map((item, index) => (
           <ListItem className={classes.subTitle} key={index}>
-            <Link href={item.href} rel="noopener noreferrer" target={item.target}>
-              {item.title}
-            </Link>
+            <LinkComponent href={item.href} rel="noopener noreferrer" target={item.target}>
+              {ReactHtmlParser(item.title)}
+            </LinkComponent>
           </ListItem>
         ))}
       </List>
@@ -191,11 +150,13 @@ const Footer: React.FC<{
   termsUrl: string;
   privacyUrl: string;
   iconLink?: React.FC<{ color: string }>;
+  linkComponent?: React.FC<{ href: string }>;
   apiUri?: string;
 }> = ({
   footerItems,
   termsUrl,
   privacyUrl,
+  linkComponent: LinkComponent = Link,
   apiUri = 'http://localhost:5000',
   iconLink: IconLink = HeaderLogoLink,
 }) => {
@@ -220,56 +181,31 @@ const Footer: React.FC<{
               </Box>
             </Box>
           </Grid>
-          {/* </Hidden> */}
           <Grid item xs={12} md={4} lg={3}>
-            <FooterItem title={footerItems[0].title} items={footerItems[0].items} />
+            <FooterItem
+              title={footerItems[0].title}
+              items={footerItems[0].items}
+              linkComponent={LinkComponent}
+            />
           </Grid>
           <Grid item xs={12} md={4} lg={3}>
-            <FooterItem title={footerItems[1].title} items={footerItems[1].items} />
+            <FooterItem
+              title={footerItems[1].title}
+              items={footerItems[1].items}
+              linkComponent={LinkComponent}
+            />
           </Grid>
           <Grid item xs={12} md={4} lg={3}>
-            <FooterItem title={footerItems[2].title} items={footerItems[2].items} />
+            <FooterItem
+              title={footerItems[2].title}
+              items={footerItems[2].items}
+              linkComponent={LinkComponent}
+            />
           </Grid>
         </Grid>
-        <div>
-          <Title className={cx(styles.community, styles.title)} variant="h5">
-            join the community
-          </Title>
-          <Grid container wrap="nowrap" className={styles.social}>
-            <Link href="https://www.instagram.com/regennetwork/" rel="noopener noreferrer" target="_blank">
-              <InstagramIcon className={styles.icon} />
-            </Link>
-            <Link href="http://t.me/regennetwork_public" rel="noopener noreferrer" target="_blank">
-              <TelegramIcon className={styles.icon} />
-            </Link>
-            <Link href="https://facebook.com/weareregennetwork" rel="noopener noreferrer" target="_blank">
-              <FacebookIcon className={styles.icon} />
-            </Link>
-            <Link href="http://twitter.com/regen_network" rel="noopener noreferrer" target="_blank">
-              <TwitterIcon className={styles.icon} />
-            </Link>
-            <Link
-              href="https://www.linkedin.com/company/regen-network/"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              <LinkedInIcon className={styles.icon} />
-            </Link>
-            <Link href="https://medium.com/regen-network" rel="noopener noreferrer" target="_blank">
-              <MediumIcon className={styles.icon} />
-            </Link>
-            <Link
-              href="https://www.youtube.com/channel/UCICD2WukTY0MbQdQ9Quew3g"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              <YoutubeIcon className={cx(styles.smallIcon, styles.icon)} />
-            </Link>
-            <Link href="https://github.com/regen-network/" rel="noopener noreferrer" target="_blank">
-              <GithubIcon className={styles.icon} />
-            </Link>
-          </Grid>
-        </div>
+
+        <SocialLinks />
+
         <hr className={styles.separator} />
         <Grid className={styles.bottomGrid} container justify="space-between">
           <Grid item className={styles.bottom}>

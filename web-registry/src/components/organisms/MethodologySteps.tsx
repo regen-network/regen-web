@@ -81,7 +81,7 @@ function MethodologySteps({ steps }: Props): JSX.Element {
     >
       <div className={styles.steps}>
         {steps?.stepCards?.map((s, i) => (
-          <WrappedStepCard stepNumber={i} stepCard={s} openModal={() => {}} />
+          <WrappedStepCard key={i} stepNumber={i} stepCard={s} openModal={() => {}} />
         ))}
       </div>
     </OnBoardingSection>

@@ -1,3 +1,4 @@
+export * from './Link';
 export * from './OptimizedImage';
 export * from './OptimizedImage';
 export * from './PeerReviewed';

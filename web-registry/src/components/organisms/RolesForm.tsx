@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 import { Formik, Form, Field } from 'formik';
+import cx from 'clsx';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import OnboardingFooter from 'web-components/lib/components/fixed-footer/OnboardingFooter';
 import { RoleField } from 'web-components/lib/components/inputs/RoleField';
-import FormLabel from 'web-components/lib/components/inputs/FormLabel';
+import Title from 'web-components/lib/components/title';
 
 interface RolesFormProps {
   submit: (values: RolesValues) => Promise<void>;
@@ -14,10 +15,16 @@ interface RolesFormProps {
 
 export interface RolesValues {
   'http://regen.network/landOwner': string;
+  'http://regen.network/landSteward': string;
+  'http://regen.network/projectDeveloper': string;
+  'http://regen.network/projectOriginator': string;
 }
 
 export interface RolesValuesErrors {
-  'http://regen.network/landOwner'?: string;
+  'http://regen.network/landOwner': string;
+  'http://regen.network/landSteward': string;
+  'http://regen.network/projectDeveloper': string;
+  'http://regen.network/projectOriginator': string;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -25,8 +32,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     paddingBottom: 0,
   },
   title: {
-    fontWeight: 800,
-    color: theme.palette.info.dark,
+    fontWeight: 700,
+    color: theme.palette.primary.contrastText,
   },
   description: {
     marginBottom: 0,
@@ -85,6 +92,11 @@ const RolesForm: React.FC<RolesFormProps> = ({ submit, initialValues }) => {
         initialValues={
           initialValues || {
             'http://regen.network/landOwner': initialValues?.['http://regen.network/landOwner'] || '',
+            'http://regen.network/landSteward': initialValues?.['http://regen.network/landSteward'] || '',
+            'http://regen.network/projectDeveloper':
+              initialValues?.['http://regen.network/projectDeveloper'] || '',
+            'http://regen.network/projectOriginator':
+              initialValues?.['http://regen.network/projectOriginator'] || '',
           }
         }
         onSubmit={async (values, { setSubmitting }) => {
@@ -101,13 +113,52 @@ const RolesForm: React.FC<RolesFormProps> = ({ submit, initialValues }) => {
           return (
             <Form translate="yes">
               <OnBoardingCard className={styles.storyCard}>
+                <Title className={cx(styles.title, styles.field)} variant="h6">
+                  You must add one of the following roles.
+                </Title>
                 <Field
                   classes={{ root: styles.field }}
                   component={RoleField}
-                  label="Land owner"
+                  label="Land Owner"
                   optional
                   description="The individual or organization that owns this land."
                   name="['http://regen.network/landOwner']"
+                  options={options}
+                  mapboxToken={process.env.REACT_APP_MAPBOX_TOKEN}
+                  onSaveOrganization={saveEntity}
+                  onSaveIndividual={saveEntity}
+                />
+                <Field
+                  classes={{ root: styles.field }}
+                  component={RoleField}
+                  label="Land Steward"
+                  optional
+                  description="The individual or organization that is performing the work on the ground. This can be a farmer, rancher, conservationist, forester, fisherman, etc."
+                  name="['http://regen.network/landSteward']"
+                  options={options}
+                  mapboxToken={process.env.REACT_APP_MAPBOX_TOKEN}
+                  onSaveOrganization={saveEntity}
+                  onSaveIndividual={saveEntity}
+                />
+                <Field
+                  classes={{ root: styles.field }}
+                  component={RoleField}
+                  label="Project Developer"
+                  optional
+                  description="The individual or organization that is in charge of managing the project and is the main point of contact with Regen Registry. "
+                  name="['http://regen.network/projectDeveloper']"
+                  options={options}
+                  mapboxToken={process.env.REACT_APP_MAPBOX_TOKEN}
+                  onSaveOrganization={saveEntity}
+                  onSaveIndividual={saveEntity}
+                />
+                <Field
+                  classes={{ root: styles.field }}
+                  component={RoleField}
+                  label="Project Originator"
+                  optional
+                  description="The individual or organization that helps initiate the project."
+                  name="['http://regen.network/projectOriginator']"
                   options={options}
                   mapboxToken={process.env.REACT_APP_MAPBOX_TOKEN}
                   onSaveOrganization={saveEntity}

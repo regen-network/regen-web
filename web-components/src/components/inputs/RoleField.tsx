@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { makeStyles, TextField } from '@material-ui/core';
 import Autocomplete, { createFilterOptions } from '@material-ui/lab/Autocomplete';
 import { FieldProps } from 'formik';
+import cx from 'clsx';
 
 import FieldFormControl from './FieldFormControl';
 import { Label } from '../label';
@@ -10,6 +11,7 @@ import UserIcon from '../icons/UserIcon';
 import OutlinedButton from '../buttons/OutlinedButton';
 import { OrganizationModal } from '../modal/OrganizationModal';
 import { IndividualModal } from '../modal/IndividualModal';
+
 const filter = createFilterOptions<RoleOptionType>();
 
 const useStyles = makeStyles(theme => ({
@@ -68,6 +70,9 @@ const useStyles = makeStyles(theme => ({
 
 interface Props extends FieldProps {
   className?: string;
+  classes?: {
+    root?: string;
+  };
   description?: string;
   label?: string;
   optional?: boolean;
@@ -86,6 +91,7 @@ interface RoleOptionType {
 
 const RoleField: React.FC<Props> = ({
   className,
+  classes,
   label,
   options,
   optional,
@@ -135,7 +141,7 @@ const RoleField: React.FC<Props> = ({
   };
 
   return (
-    <div className={styles.root}>
+    <div className={cx(styles.root, classes && classes.root)}>
       <FieldFormControl
         className={className}
         label={label}

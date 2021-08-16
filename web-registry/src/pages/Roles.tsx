@@ -32,6 +32,9 @@ const Roles: React.FC = () => {
     const metadata = data.projectById.metadata;
     initialFieldValues = {
       'http://regen.network/landOwner': metadata['http://regen.network/landOwner'],
+      'http://regen.network/landSteward': metadata['http://regen.network/landSteward'],
+      'http://regen.network/projectDeveloper': metadata['http://regen.network/projectDeveloper'],
+      'http://regen.network/projectOriginator': metadata['http://regen.network/projectOriginator'],
     };
   }
 

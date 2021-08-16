@@ -35,10 +35,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontWeight: 700,
     color: theme.palette.primary.contrastText,
   },
-  description: {
-    marginBottom: 0,
-    fontSize: theme.typography.pxToRem(16),
-  },
   field: {
     marginBottom: theme.spacing(12),
   },
@@ -58,6 +54,8 @@ const RolesForm: React.FC<RolesFormProps> = ({ submit, initialValues }) => {
   const [options, setOptions] = useState<any>([]);
   const styles = useStyles();
 
+  // TODO: getEntities - delete the mocked out logic below. Issue #494
+
   useEffect(() => {
     const entityOptions = entities.map((e: any) => {
       return {
@@ -73,11 +71,11 @@ const RolesForm: React.FC<RolesFormProps> = ({ submit, initialValues }) => {
   const saveEntity = (updatedEntity: any): Promise<any> => {
     if (!updatedEntity.id) {
       updatedEntity.id = entities[entities.length - 1].id + 1;
-      const newEntities = [...entities, { ...updatedEntity, id: updatedEntity.id }];
+      const newEntities = [...entities, { ...updatedEntity, id: updatedEntity.id }]; //TODO: real DB save #494
       setEntities(newEntities);
     } else {
       const updatedEntities = entities.map((exisitingEntity: any) =>
-        exisitingEntity.id === updatedEntity.id ? { ...updatedEntity } : exisitingEntity,
+        exisitingEntity.id === updatedEntity.id ? { ...updatedEntity } : exisitingEntity, //TODO: real DB save #494
       );
       setEntities(updatedEntities);
     }

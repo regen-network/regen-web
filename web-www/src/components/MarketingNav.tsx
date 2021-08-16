@@ -39,15 +39,6 @@ const useStyles = makeStyles(theme => {
   };
 });
 
-const MarketingIcon: React.FC<{ color: string }> = ({ color }) => {
-  const styles = useStyles();
-  return (
-    <a href="/">
-      <RegenIcon className={styles.icon} color={color} />
-    </a>
-  );
-};
-
 const MarketingNav: React.FC<{ location: Location }> = ({ location }) => {
   const theme = useTheme();
   const headerColors: HeaderColors = {
@@ -87,11 +78,11 @@ const MarketingNav: React.FC<{ location: Location }> = ({ location }) => {
   ];
 
   const howToItems: HeaderDropdownItemProps[] = [
-    {
-      title: 'Create a Credit Class',
-      href: 'https://registry.regen.network/create-credit-class/',
-      linkComponent: NavLink,
-    },
+    // {
+    //   title: 'Create a Credit Class',
+    //   href: 'https://registry.regen.network/create-credit-class/',
+    //   linkComponent: NavLink,
+    // },
     {
       title: 'Create a Methodology',
       href: 'https://registry.regen.network/create-methodology/',
@@ -169,6 +160,11 @@ const MarketingNav: React.FC<{ location: Location }> = ({ location }) => {
       dropdownItems: [
         { title: 'Mainnet', href: '/mainnet/', linkComponent: NavLink },
         { title: 'Token', href: '/token/', linkComponent: NavLink },
+        {
+          title: 'Community',
+          href: '/community/',
+          linkComponent: NavLink,
+        },
       ],
     },
     {

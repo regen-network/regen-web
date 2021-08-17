@@ -22,6 +22,7 @@ export * from './ProjectImpactSection';
 export * from './ProjectTopSection';
 export * from './ResourcesSection';
 export * from './RegistryNav';
+export * from './RolesForm';
 export * from './SDGs';
 export * from './StoryForm';
 export * from './StepCardsWithDescription';

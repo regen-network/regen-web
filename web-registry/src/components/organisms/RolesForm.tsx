@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     color: theme.palette.primary.contrastText,
     fontFamily: theme.typography.fontFamily,
     [theme.breakpoints.up('sm')]: {
-      fontSize: theme.typography.pxToRem(16),
+      fontSize: theme.typography.pxToRem(18),
     },
     [theme.breakpoints.down('xs')]: {
       fontSize: theme.typography.pxToRem(16),

@@ -36,7 +36,12 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontSize: theme.typography.pxToRem(16),
   },
   field: {
-    marginBottom: theme.spacing(12),
+    [theme.breakpoints.up('sm')]: {
+      marginBottom: theme.spacing(12),
+    },
+    [theme.breakpoints.down('xs')]: {
+      marginBottom: theme.spacing(10),
+    },
   },
   error: {
     marginTop: 0,

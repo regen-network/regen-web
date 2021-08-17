@@ -4,7 +4,7 @@ newsletterSection:
 featuredSection:
   header: Featured Credit
   title: md// Carbon*Plus* Grasslands
-  link: /registry/projects/wilmot
+  link: /registry
   image: ../../static/media/featured-cow.png
   description: >-
     md// This credit measures carbon sequestration and a suite of co-benefits,

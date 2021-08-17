@@ -34,9 +34,21 @@ const useStyles = makeStyles((theme: Theme) => ({
   title: {
     fontWeight: 700,
     color: theme.palette.primary.contrastText,
+    fontFamily: theme.typography.fontFamily,
+    [theme.breakpoints.up('sm')]: {
+      fontSize: theme.typography.pxToRem(16),
+    },
+    [theme.breakpoints.down('xs')]: {
+      fontSize: theme.typography.pxToRem(16),
+    },
   },
   field: {
-    marginBottom: theme.spacing(12),
+    [theme.breakpoints.up('sm')]: {
+      marginBottom: theme.spacing(12),
+    },
+    [theme.breakpoints.down('xs')]: {
+      marginBottom: theme.spacing(10),
+    },
   },
   error: {
     marginTop: 0,
@@ -44,7 +56,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const RolesForm: React.FC<RolesFormProps> = ({ submit, initialValues }) => {
-  const [entities, setEntities] = useState<any>([]);
+  const [entities, setEntities] = useState<any>([]); //TODO: typings
   const [options, setOptions] = useState<any>([]);
   const styles = useStyles();
 
@@ -106,7 +118,7 @@ const RolesForm: React.FC<RolesFormProps> = ({ submit, initialValues }) => {
           return (
             <Form translate="yes">
               <OnBoardingCard className={styles.storyCard}>
-                <Title className={cx(styles.title, styles.field)} variant="h6">
+                <Title className={cx(styles.title, styles.field)}>
                   You must add one of the following roles.
                 </Title>
                 <Field

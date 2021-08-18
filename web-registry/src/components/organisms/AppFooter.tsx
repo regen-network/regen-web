@@ -34,7 +34,7 @@ const AppFooter: React.FC = () => {
       title: 'program',
       items: [
         {
-          title: 'Program Guides',
+          title: 'Program Guide',
           href: 'https://regen-registry.s3.amazonaws.com/Regen+Registry+Program+Guide.pdf',
         },
         {

@@ -3,7 +3,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import MuiLink from '@material-ui/core/Link';
 
 /**
- * @returns a HTML Anchor for external links, react router for internal links
+ * @returns a Material UI `Link` - will use React Router for local links
  */
 export const Link: React.FC<{ href: string; className?: string }> = ({ href, children, className }) => {
   const isInternalLink = (href: string) => href.startsWith('/');

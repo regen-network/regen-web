@@ -1,3 +1,4 @@
+export * from './Link';
 export * from './OptimizedImage';
 export * from './OptimizedImage';
 export * from './PeerReviewed';
@@ -6,6 +7,7 @@ export * from './ProcessStepCard';
 export * from './ProtectedRoute';
 export * from './ProtectedRoute';
 export * from './RegistryNavLink';
+export * from './RegistryIconLink';
 export * from './ScrollToTop';
 export * from './ScrollToTop';
 export * from './WrappedImpactCard';

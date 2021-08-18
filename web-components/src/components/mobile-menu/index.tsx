@@ -4,14 +4,14 @@ import ReactHtmlParser from 'react-html-parser';
 
 import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
-import Divider from '@material-ui/core/Divider';
+// import Divider from '@material-ui/core/Divider';
 import MenuList from '@material-ui/core/MenuList';
 import MenuItem from '@material-ui/core/MenuItem';
 import Box from '@material-ui/core/Box';
 
 import HamburgerIcon from '../icons/HamburgerIcon';
-import ContainedButton from '../buttons/ContainedButton';
-import Button from '@material-ui/core/Button';
+// import ContainedButton from '../buttons/ContainedButton';
+// import Button from '@material-ui/core/Button';
 import CloseIcon from '../icons/CloseIcon';
 import { HeaderMenuItem } from '../header/HeaderMenuHover';
 import { NavLinkProps } from '../header/NavLink';
@@ -26,6 +26,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     '& .MuiDrawer-paper': {
       backgroundColor: theme.palette.primary.light,
       width: '85%',
+      maxWidth: '350px',
     },
     '& .MuiBackdrop-root, & .MuiDrawer-paper': {
       top: theme.spacing(15),

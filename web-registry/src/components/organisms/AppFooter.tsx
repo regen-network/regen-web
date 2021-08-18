@@ -8,11 +8,11 @@ const AppFooter: React.FC = () => {
       title: 'Regen Registry',
       items: [
         {
-          title: 'Carbon<i>Plus</i> Grasslands Credit <br /> Class',
+          title: 'Carbon<i>Plus</i> Grasslands Credit Class',
           href: '/credit-classes/carbonplus-grasslands',
         },
         {
-          title: 'Carbon<i>Plus</i> Grasslands <br /> Methodology',
+          title: 'Carbon<i>Plus</i> Grasslands Methodology',
           href: '/methodologies/carbonplus-grasslands',
         },
       ],

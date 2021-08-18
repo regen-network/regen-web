@@ -164,7 +164,7 @@ const Footer: React.FC<{
   return (
     <div className={styles.root}>
       <Section classes={{ root: styles.section }}>
-        <Grid container>
+        <Grid container spacing={10}>
           <Grid item xs={12} lg={3} className={styles.footerItem}>
             <Box pb={[0, 8]} display="flex" flexDirection="column" alignItems="center" textAlign="center">
               <IconLink color={theme.palette.primary.main} />

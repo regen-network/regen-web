@@ -89,6 +89,11 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     display: 'flex',
     justifyContent: 'center',
   },
+  followerCount: {
+    display: 'flex',
+    justifyContent: 'center',
+    color: theme.palette.primary.main,
+  },
 }));
 
 export interface IconLabelProps {
@@ -120,6 +125,7 @@ const IconLabel = ({ icon, label, href, small = false }: IconLabelProps): JSX.El
         <div className={classes.iconContainer}>{icon}</div>
       </a>
       <div className={classes.label}>{label}</div>
+      <div className={classes.followerCount}>{12345}</div>
     </div>
   );
 };

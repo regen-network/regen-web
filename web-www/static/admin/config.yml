@@ -24,6 +24,14 @@ collections:
             widget: "object"
             fields:
               - {label: Header, name: header, widget: string}
+              - {label: Telegram sub label (follower count), name: telegramSubLabel, widget: text, required: false}
+              - {label: Twitter sub label (follower count), name: twitterSubLabel, widget: text, required: false}
+              - {label: Discord sub label (follower count), name: discordSubLabel, widget: text, required: false}
+          - label: "Community Section"
+            name: "communitySection"
+            widget: "object"
+            fields:
+              - {label: Header, name: header, widget: string}
               - {label: Body, name: body, widget: text}
           - label: "Collaborate Section"
             name: "collaborateSection"

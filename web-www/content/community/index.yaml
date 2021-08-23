@@ -1,7 +1,11 @@
 topSection:
-  header: Community
-  body: Regen Network is an open, collaborative global community of peers anchored
-    by developers, scientists and validators.
+  header: 'Community'
+  body: 'Regen Network is an open, collaborative global community of peers anchored by developers, scientists and validators.'
+connectSection:
+  header: 'Connnect with our community'
+  telegramSubLabel: '~12,345 followers'
+  twitterSubLabel: '~999,876 followers'
+  discordSubLabel: '~12,345 members'
 collaborateSection:
   header: Out collaborate the competition
   body: md//Under the hood of Regen Registry is a decentralized, public ledger

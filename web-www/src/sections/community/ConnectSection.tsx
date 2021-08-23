@@ -36,9 +36,12 @@ const DevelopersConnectSection = (): JSX.Element => {
           }
         }
       }
-      text: developersYaml {
+      text: communityYaml {
         connectSection {
           header
+          telegramSubLabel
+          twitterSubLabel
+          discordSubLabel
         }
       }
     }
@@ -51,29 +54,28 @@ const DevelopersConnectSection = (): JSX.Element => {
       icon: <TelegramIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />,
       href: 'https://t.me/regennetworkdevannounce',
       label: 'Telegram',
-      subLabel: '~54646 followers',
+      subLabel: content.telegramSubLabel,
     },
 
     {
       icon: <TwitterIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />,
       href: 'https://twitter.com/regen_network',
       label: 'Twitter',
-      subLabel: '~123 followers',
+      subLabel: content.twitterSubLabel,
     },
 
     {
       icon: <TelegramIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />,
       href: 'https://t.me/regennetworkdevannounce',
       label: 'Discord',
-      subLabel: '~54646 members',
+      subLabel: content.discordSubLabel,
     },
   ];
   return (
     <ConnectSection
       className={classes.root}
       itemClassName={classes.item}
-      header={'Connnect with our community'}
-      // header={content.header}
+      header={content.header}
       background={data.background}
       icons={icons}
       titleClassName={classes.title}

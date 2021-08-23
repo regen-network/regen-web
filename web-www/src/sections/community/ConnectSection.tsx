@@ -11,8 +11,12 @@ const useStyles = makeStyles((theme: Theme) => ({
     // marginTop: theme.spacing(24),
   },
   title: {
-    // fontWeight: 'normal',
-    // fontFamily: theme.typography.overline.fontFamily,
+    [theme.breakpoints.up('sm')]: {
+      fontSize: theme.typography.pxToRem(38),
+    },
+    [theme.breakpoints.down('xs')]: {
+      fontSize: theme.typography.pxToRem(24),
+    },
   },
   item: {
     [theme.breakpoints.up('sm')]: {
@@ -47,19 +51,28 @@ const DevelopersConnectSection = (): JSX.Element => {
       icon: <TelegramIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />,
       href: 'https://t.me/regennetworkdevannounce',
       label: 'Telegram',
+      subLabel: '~54646 followers',
     },
 
     {
       icon: <TwitterIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />,
       href: 'https://twitter.com/regen_network',
       label: 'Twitter',
+      subLabel: '~123 followers',
+    },
+
+    {
+      icon: <TelegramIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />,
+      href: 'https://t.me/regennetworkdevannounce',
+      label: 'Discord',
+      subLabel: '~54646 members',
     },
   ];
   return (
     <ConnectSection
       className={classes.root}
       itemClassName={classes.item}
-      header={'connnect with our community'}
+      header={'Connnect with our community'}
       // header={content.header}
       background={data.background}
       icons={icons}

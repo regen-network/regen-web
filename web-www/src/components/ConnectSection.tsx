@@ -92,13 +92,24 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   followerCount: {
     display: 'flex',
     justifyContent: 'center',
+    textAlign: 'center',
     color: theme.palette.primary.main,
+
+    [theme.breakpoints.up('sm')]: {
+      fontSize: theme.typography.pxToRem(18),
+      paddingTop: theme.spacing(5.25),
+    },
+    [theme.breakpoints.down('xs')]: {
+      fontSize: theme.typography.pxToRem(14),
+      paddingTop: theme.spacing(1.5),
+    },
   },
 }));
 
 export interface IconLabelProps {
   icon: JSX.Element;
   label: string;
+  subLabel?: string;
   href: string;
   small?: boolean;
 }
@@ -117,7 +128,7 @@ interface ConnectSectionProps {
   };
 }
 
-const IconLabel = ({ icon, label, href, small = false }: IconLabelProps): JSX.Element => {
+const IconLabel = ({ icon, label, subLabel, href, small = false }: IconLabelProps): JSX.Element => {
   const classes = useStyles({ small });
   return (
     <div className={classes.iconLabel}>
@@ -125,7 +136,7 @@ const IconLabel = ({ icon, label, href, small = false }: IconLabelProps): JSX.El
         <div className={classes.iconContainer}>{icon}</div>
       </a>
       <div className={classes.label}>{label}</div>
-      <div className={classes.followerCount}>{12345}</div>
+      {subLabel && <div className={classes.followerCount}>{subLabel}</div>}
     </div>
   );
 };
@@ -150,10 +161,16 @@ const ConnectSection = ({
       titleClassName={clsx(titleClassName, classes.title)}
       titleVariant={titleVariant}
     >
-      <Grid container spacing={4} justify="center">
+      <Grid container spacing={4} justify="space-between">
         {icons.map((item, i) => (
           <Grid item xs={4} sm={3} className={itemClassName} key={i}>
-            <IconLabel href={item.href} icon={item.icon} small={item.small} label={item.label} />
+            <IconLabel
+              href={item.href}
+              icon={item.icon}
+              small={item.small}
+              label={item.label}
+              subLabel={item.subLabel}
+            />
           </Grid>
         ))}
       </Grid>

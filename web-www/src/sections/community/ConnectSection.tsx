@@ -66,7 +66,7 @@ const CommunityConnectSection = (): JSX.Element => {
 
     {
       icon: <TelegramIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />,
-      href: 'https://discord.com/invite/DZE6yC6KnJ',
+      href: 'https://discord.gg/vTdB8tCf',
       label: 'Discord',
       subLabel: content.discordSubLabel,
     },

@@ -27,6 +27,7 @@ const CommunityPage = ({ location }: props): JSX.Element => {
         imageUrl={data.seoImage.publicURL}
       />
       <TopSection location={location} />
+      {/* <GoToSection /> */}
       <ConnectSection />
       <CollaborateSection />
     </>

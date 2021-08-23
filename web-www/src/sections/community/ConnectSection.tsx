@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const DevelopersConnectSection = (): JSX.Element => {
+const CommunityConnectSection = (): JSX.Element => {
   const data = useStaticQuery(graphql`
     query {
       background: file(relativePath: { eq: "developers-connect-bg.png" }) {
@@ -52,7 +52,7 @@ const DevelopersConnectSection = (): JSX.Element => {
   const icons: IconLabelProps[] = [
     {
       icon: <TelegramIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />,
-      href: 'https://t.me/regennetworkdevannounce',
+      href: 'http://t.me/regennetwork_public',
       label: 'Telegram',
       subLabel: content.telegramSubLabel,
     },
@@ -66,7 +66,7 @@ const DevelopersConnectSection = (): JSX.Element => {
 
     {
       icon: <TelegramIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />,
-      href: 'https://t.me/regennetworkdevannounce',
+      href: 'https://discord.com/invite/DZE6yC6KnJ',
       label: 'Discord',
       subLabel: content.discordSubLabel,
     },
@@ -83,4 +83,4 @@ const DevelopersConnectSection = (): JSX.Element => {
   );
 };
 
-export default DevelopersConnectSection;
+export default CommunityConnectSection;

@@ -6,6 +6,7 @@ const InfoTooltip = withStyles((theme: Theme) => ({
     fontSize: theme.typography.pxToRem(14),
     padding: theme.spacing(3, 4),
     maxWidth: theme.spacing(78),
+    textAlign: 'center',
   },
 }))(Tooltip);
 

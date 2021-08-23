@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { FormLabel, Button } from '@material-ui/core';
 import { Formik, Form, Field } from 'formik';
 import { RadioGroup } from 'formik-material-ui';
@@ -6,6 +6,7 @@ import { withKnobs } from '@storybook/addon-knobs';
 
 import Toggle from './Toggle';
 import TextField from './TextField';
+import { RoleField } from './RoleField';
 import OnBoardingCard from '../cards/OnBoardingCard';
 import OnBoardingSection from '../section/OnBoardingSection';
 // import CheckboxLabel from 'web-components/lib/components/inputs/CheckboxLabel';
@@ -248,4 +249,75 @@ function ToggleVariants(): JSX.Element {
   );
 }
 
+function RoleInput(): JSX.Element {
+  const entitiesInit = [
+    { legalName: 'Impact Ag', id: 1 },
+    { name: 'Toby Grogan', id: 2 },
+  ];
+
+  const [entities, setEntities] = useState<any>(entitiesInit);
+  const [options, setOptions] = useState<any>([]);
+
+  useEffect(() => {
+    const entityOptions = entities.map(e => {
+      return {
+        ...e,
+        label: e.name || e.legalName,
+        type: e.legalName ? 'organization' : 'individual',
+      };
+    });
+
+    setOptions(entityOptions);
+  }, [entities]);
+
+  const saveEntity = (updatedEntity: any): Promise<any> => {
+    if (!updatedEntity.id) {
+      updatedEntity.id = entities[entities.length - 1].id + 1;
+      const newEntities = [...entities, { ...updatedEntity, id: updatedEntity.id }];
+      setEntities(newEntities);
+    } else {
+      const updatedEntities = entities.map(exisitingEntity =>
+        exisitingEntity.id === updatedEntity.id ? { ...updatedEntity } : exisitingEntity,
+      );
+      setEntities(updatedEntities);
+    }
+    return Promise.resolve(updatedEntity);
+  };
+
+  return (
+    <OnBoardingSection title="Person or Organization Field" formContainer>
+      <Formik
+        initialValues={{
+          personOrOrgId: '',
+        }}
+        onSubmit={(values, actions) => {
+          alert(JSON.stringify(values, null, 2));
+          actions.resetForm();
+        }}
+      >
+        {() => {
+          return (
+            <Form>
+              <OnBoardingCard>
+                <Field
+                  component={RoleField}
+                  options={options}
+                  name="personOrOrgId"
+                  mapboxToken={process.env.STORYBOOK_MAPBOX_TOKEN}
+                  onSaveOrganization={saveEntity}
+                  onSaveIndividual={saveEntity}
+                />
+              </OnBoardingCard>
+              <Button color="primary" variant="contained" fullWidth type="submit">
+                Submit
+              </Button>
+            </Form>
+          );
+        }}
+      </Formik>
+    </OnBoardingSection>
+  );
+}
+
 export const toggle = (): JSX.Element => <ToggleVariants />;
+export const rolesInput = (): JSX.Element => <RoleInput />;

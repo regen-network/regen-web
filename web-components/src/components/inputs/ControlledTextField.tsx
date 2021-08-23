@@ -42,7 +42,7 @@ export default function ControlledTextField({
   onExampleClick,
   ...inputProps
 }: ControlledTextFieldProps): JSX.Element {
-  const charsLeft = (charLimit || Infinity) - (field.value?.length || 0);
+  const charsLeft = (charLimit || Infinity) - ((field && field.value && field.value.length) || 0);
 
   function handleFieldChange(
     { target: { value } }: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>,

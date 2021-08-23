@@ -25,6 +25,7 @@ export * from './PostPurchase';
 export * from './Project';
 export * from './ProjectList';
 export * from './Projects';
+export * from './Roles';
 export * from './Seller';
 export * from './Signup';
 export * from './Story';

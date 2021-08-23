@@ -29,9 +29,9 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 /** Custom styles on top of MUI's `Input` component */
-const Input: React.FC<InputProps> = props => {
+const Input: React.FC<InputProps> = ({ className, ...props }) => {
   const styles = useStyles();
-  return <MuiInput {...props} disableUnderline className={cx(styles.input, props?.className)} />;
+  return <MuiInput {...props} disableUnderline className={cx(styles.input, className)} />;
 };
 
 export default Input;

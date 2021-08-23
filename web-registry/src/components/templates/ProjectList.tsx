@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import { Project } from '../../mocks';
-import { User } from 'web-components/lib/components/user/UserInfo';
 import Grid from '@material-ui/core/Grid';
 import projects from '../../assets/projects.png';
 import Title from 'web-components/lib/components/title';
@@ -143,20 +142,8 @@ function ProjectList({ projects }: ProjectsProps): JSX.Element {
         </div>
       </div>
       <div className={classes.projects}>
-        {/**<div className={classes.australia}>australia</div>**/}
         <Grid container className={classes.projectList}>
           {projects.map((p, i) => {
-            let developer: User | undefined;
-            if (p.developer) {
-              developer = {
-                name: p.developer.name,
-                type: p.developer.type,
-              };
-              if (p.developer.imgSrc) {
-                developer.imgSrc = getImgSrc(p.developer.imgSrc);
-              }
-            }
-
             return (
               <Grid className={classes.project} item xs={12} sm={6} md={4} key={p.id}>
                 <Link className={classes.projectLink} to={`/projects/${p.id}`}>
@@ -166,7 +153,11 @@ function ProjectList({ projects }: ProjectsProps): JSX.Element {
                     area={p.area}
                     areaUnit={p.areaUnit}
                     imgSrc={getImgSrc(p.image)}
-                    developer={developer}
+                    registry={{
+                      name: p.registry.name,
+                      imgSrc: p.registry.image,
+                      type: 'organization',
+                    }}
                     tag={p.creditClass.tag}
                     displayCity={false}
                     displayRegion={false}

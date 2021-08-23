@@ -8,7 +8,7 @@ import { init as initGA } from './lib/ga';
 
 import CookiesBanner from 'web-components/lib/components/banner/CookiesBanner';
 import { ScrollToTop, ProtectedRoute } from './components/atoms';
-import { /* RegistryNav, */ AppFooter, MarketingNav } from './components/organisms';
+import { RegistryNav, AppFooter } from './components/organisms';
 
 import {
   // Additionality,
@@ -25,6 +25,7 @@ import {
   CreditsTransfer,
   // Eligibility,
   // GettingStarted,
+  Home,
   // Home,
   MediaStep,
   MethodologyReviewProcess,
@@ -34,6 +35,7 @@ import {
   Project,
   ProjectList,
   Projects,
+  Roles,
   Seller,
   Signup,
   Story,
@@ -73,12 +75,10 @@ const App: React.FC = (): JSX.Element => {
     <BrowserRouter basename={process.env.PUBLIC_URL}>
       <ScrollToTop />
       <div>
-        {/* <RegistryNav /> */}
-        <MarketingNav />
+        <RegistryNav />
         <Switch>
           <Route exact path="/">
-            {/* <Home /> */}
-            <Redirect to="/projects/wilmot" />
+            <Home />
           </Route>
           <Route exact path="/verify-email">
             <VerifyEmail />
@@ -142,6 +142,7 @@ const App: React.FC = (): JSX.Element => {
                 <ProtectedRoute path={`${path}/:projectId/basic-info`} component={BasicInfo} />
                 <ProtectedRoute path={`${path}/:projectId/story`} component={Story} />
                 <ProtectedRoute path={`${path}/:projectId/media`} component={MediaStep} />
+                <ProtectedRoute path={`${path}/:projectId/roles`} component={Roles} />
 
                 {/* Used for Project Plan flow
                 <ProtectedRoute path={`${path}/:projectId/getting-started`} component={GettingStarted} />

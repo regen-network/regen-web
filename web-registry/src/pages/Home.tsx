@@ -69,6 +69,7 @@ const Home: React.FC = () => {
   return (
     <>
       <HeroTitle
+        isBanner
         img={cowsImg}
         title={content?.heroSection?.title}
         descriptionRaw={content?.heroSection?.descriptionRaw}

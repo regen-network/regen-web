@@ -6,6 +6,16 @@ connectSection:
   telegramSubLabel: '~12,345 followers'
   twitterSubLabel: '~999,876 followers'
   discordSubLabel: '~12,345 members'
+goToSection:
+  podcastLabel: 'Hear from the CEO'
+  podcastButtonText: 'go to podcast'
+  podcastButtonHref: 'todo'
+  blogLabel: 'Learn in depth'
+  blogButtonText: 'go to blog'
+  blogButtonHref: 'go to blog'
+  chatLabel: 'Chat with us directly'
+  chatButtonText: 'go to forum'
+  chatButtonHref: 'go to forum'
 collaborateSection:
   header: Out collaborate the competition
   body: md//Under the hood of Regen Registry is a decentralized, public ledger

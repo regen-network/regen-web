@@ -4,6 +4,7 @@ import { graphql, useStaticQuery } from 'gatsby';
 import TopSection from '../sections/community/TopSection';
 import CollaborateSection from '../sections/community/CollaborateSection';
 import ConnectSection from '../sections/community/ConnectSection';
+import GoToSection from '../sections/community/GoToSection';
 import SEO from '../components/seo';
 
 interface props {
@@ -27,7 +28,7 @@ const CommunityPage = ({ location }: props): JSX.Element => {
         imageUrl={data.seoImage.publicURL}
       />
       <TopSection location={location} />
-      {/* <GoToSection /> */}
+      <GoToSection />
       <ConnectSection />
       <CollaborateSection />
     </>

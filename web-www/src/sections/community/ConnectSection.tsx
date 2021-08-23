@@ -7,9 +7,6 @@ import TwitterIcon from 'web-components/lib/components/icons/social/TwitterIcon'
 import TelegramIcon from 'web-components/lib/components/icons/social/TelegramIcon';
 
 const useStyles = makeStyles((theme: Theme) => ({
-  root: {
-    // marginTop: theme.spacing(24),
-  },
   title: {
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.typography.pxToRem(38),
@@ -47,7 +44,7 @@ const CommunityConnectSection = (): JSX.Element => {
     }
   `);
   const content = data.text.connectSection;
-  const classes = useStyles();
+  const styles = useStyles();
   const theme = useTheme();
   const icons: IconLabelProps[] = [
     {
@@ -73,12 +70,11 @@ const CommunityConnectSection = (): JSX.Element => {
   ];
   return (
     <ConnectSection
-      className={classes.root}
-      itemClassName={classes.item}
+      itemClassName={styles.item}
       header={content.header}
       background={data.background}
       icons={icons}
-      titleClassName={classes.title}
+      titleClassName={styles.title}
     />
   );
 };

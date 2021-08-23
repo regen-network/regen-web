@@ -143,7 +143,7 @@ moreQuestionsSection:
     href="/registry/credit-classes/carbonplus-grasslands">CarbonPlus
     Grasslands</a>, reviewing our <a href="/faq/carbonplus%20credits">FAQ</a> or
     jump in with “Start the Process”.
-  firstButtonText: View CarbonPlus Grasslands
+  firstButtonText: View Current Credit
   firstButtonUrl: /registry/credit-classes/carbonplus-grasslands
   secondButtonText: Start the Process
 popup:

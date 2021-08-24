@@ -1,20 +1,16 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
 
 import BackgroundSection from '../../components/BackgroundSection';
 
-interface props {
-  location: Location;
-}
-
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles(() => ({
   section: {
     filter: `drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.05))`,
   },
 }));
 
-const TopSection = ({ location }: props): JSX.Element => {
+const TopSection = (): JSX.Element => {
   const classes = useStyles({});
   const data = useStaticQuery(graphql`
     query {

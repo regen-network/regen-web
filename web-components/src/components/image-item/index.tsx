@@ -8,13 +8,16 @@ import Title from '../title';
 import Description from '../description';
 import ContainedButton from '../buttons/ContainedButton';
 import { getFontSize } from '../../theme/sizing';
-import { styles } from '@material-ui/pickers/views/Clock/Clock';
 
 export interface ImageItemProps {
   img: JSX.Element; // using pure img tag or gatsby-image
   title: string;
   description?: string;
-  imageClassName?: string;
+  className?: string;
+  classes?: {
+    root?: string;
+    image?: string;
+  };
   titleVariant?: Variant;
   buttonText?: Variant;
   buttonHref?: Variant;
@@ -27,6 +30,7 @@ export interface StyleProps {
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   root: {
     textAlign: 'center',
+    paddingBottom: theme.spacing(16),
   },
   title: {
     lineHeight: '150%',
@@ -51,7 +55,8 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
 export default function ImageItem({
   img,
   title,
-  imageClassName,
+  className,
+  classes,
   description,
   titleVariant = 'h4',
   buttonText,
@@ -60,8 +65,8 @@ export default function ImageItem({
   const styles = useStyles({ titleVariant });
 
   return (
-    <div className={styles.root}>
-      <Grid container justify="center" className={clsx(imageClassName, styles.image)}>
+    <div className={clsx(styles.root, classes?.root, className)}>
+      <Grid container justify="center" className={clsx(styles.image, classes?.image)}>
         {img}
       </Grid>
       <Title

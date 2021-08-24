@@ -32,7 +32,7 @@ export default function ImageItems({
       arrows={arrows}
       items={items.map(item => (
         <ImageItem
-          imageClassName={imageClassName}
+          classes={{ image: imageClassName }}
           img={item.img}
           title={item.title}
           titleVariant={titleVariant}

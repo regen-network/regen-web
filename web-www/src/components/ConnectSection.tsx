@@ -13,14 +13,11 @@ interface StyleProps {
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   root: {
     [theme.breakpoints.down('xs')]: {
-      paddingBottom: theme.spacing(7.5),
+      paddingBottom: theme.spacing(17.75),
     },
     [theme.breakpoints.up('sm')]: {
-      paddingBottom: theme.spacing(10),
+      paddingBottom: theme.spacing(22.5),
     },
-  },
-  iconLabel: {
-    paddingBottom: theme.spacing(12.5),
   },
   title: {
     textAlign: 'center',
@@ -131,7 +128,7 @@ interface ConnectSectionProps {
 const IconLabel = ({ icon, label, subLabel, href, small = false }: IconLabelProps): JSX.Element => {
   const classes = useStyles({ small });
   return (
-    <div className={classes.iconLabel}>
+    <div>
       <a href={href} rel="noopener noreferrer" target="_blank" className={classes.link}>
         <div className={classes.iconContainer}>{icon}</div>
       </a>

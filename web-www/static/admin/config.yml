@@ -24,15 +24,50 @@ collections:
             widget: "object"
             fields:
               - {label: Header, name: header, widget: string}
-              - {label: Telegram sub label (follower count), name: telegramSubLabel, widget: text, required: false}
-              - {label: Twitter sub label (follower count), name: twitterSubLabel, widget: text, required: false}
-              - {label: Discord sub label (follower count), name: discordSubLabel, widget: text, required: false}
-          - label: "Community Section"
-            name: "communitySection"
+          - label: "Connect Section"
+            name: "connectSection"
             widget: "object"
             fields:
               - {label: Header, name: header, widget: string}
-              - {label: Body, name: body, widget: text}
+              - {label: Telegram sub label, name: telegramSubLabel, widget: text, required: false}
+              - {label: Telegram URL, name: telegramUrl, widget: text}
+              - {label: Twitter sub label, name: twitterSubLabel, widget: text, required: false}
+              - {label: Twitter URL, name: twitterUrl, widget: text}
+              - {label: Discord sub label, name: discordSubLabel, widget: text, required: false}
+              - {label: Discord URL, name: discordUrl, widget: text}
+
+              goToSection:
+  podcastLabel: 'Hear from the CEO'
+  podcastButtonText: 'go to podcast'
+  podcastButtonHref: 'todo'
+  blogLabel: 'Learn in depth'
+  blogButtonText: 'go to blog'
+  blogButtonHref: 'go to blog'
+  chatLabel: 'Chat with us directly'
+  chatButtonText: 'go to forum'
+  chatButtonHref: 'todo'
+
+          - label: "Go-To Section"
+            name: "goToSection"
+            widget: "object"
+            fields:
+              - {label: Audio/Video label, name: audioLabel, widget: text}
+              - {label: Audio/Video button text, name: audioButtonText, widget: text}
+              - {label: Audio/Video URL, name: audioButtonHref, widget: text}
+              - {label: Blog label, name: blogLabel, widget: text}
+              - {label: Blog button text, name: blogLabel, widget: text}
+              - {label: Blog URL, name: blogButtonHref, widget: text}
+              - {label: Discussion label, name: discussionLabel, widget: text}
+              - {label: Discussion button text, name: discussionLabel, widget: text}
+              - {label: Discussion URL, name: discussionButtonHref, widget: text}
+          - label: "Collective Section"
+            name: "collectiveSection"
+            widget: "object"
+            fields:
+              - {label: Title, name: title, widget: string}
+              - {label: Body, name: body, widget: markdown}
+              - {label: Button Text, name: buttonText, widget: string}
+              - {label: Signup Form URL, name: signupFormUrl, widget: string}
           - label: "Collaborate Section"
             name: "collaborateSection"
             widget: "object"

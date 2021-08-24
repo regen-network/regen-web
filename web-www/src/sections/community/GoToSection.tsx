@@ -17,6 +17,11 @@ const useStyles = makeStyles((theme: Theme) => ({
       flexDirection: 'column',
     },
   },
+  item: {
+    [theme.breakpoints.down('xs')]: {
+      paddingBottom: theme.spacing(16),
+    },
+  },
 }));
 
 const GoToSection = (): JSX.Element => {
@@ -24,15 +29,15 @@ const GoToSection = (): JSX.Element => {
     query {
       text: communityYaml {
         goToSection {
-          podcastLabel
-          podcastButtonText
-          podcastButtonHref
+          audioLabel
+          audioButtonText
+          audioButtonHref
           blogLabel
           blogButtonText
           blogButtonHref
-          chatLabel
-          chatButtonText
-          chatButtonHref
+          discussionLabel
+          discussionButtonText
+          discussionButtonHref
         }
       }
     }
@@ -43,12 +48,14 @@ const GoToSection = (): JSX.Element => {
   return (
     <Section className={styles.root}>
       <ImageItem
+        className={styles.item}
         img={<img src="../media/svgs/podcast.svg" alt="podcast" />}
-        title={content.podcastLabel}
-        buttonText={content.podcastButtonText}
-        buttonHref={content.podcastButtonHref}
+        title={content.audioLabel}
+        buttonText={content.audioButtonText}
+        buttonHref={content.audioButtonHref}
       />
       <ImageItem
+        className={styles.item}
         img={<img src="../media/svgs/blog.svg" alt="blog" />}
         title={content.blogLabel}
         buttonText={content.blogButtonText}
@@ -56,9 +63,9 @@ const GoToSection = (): JSX.Element => {
       />
       <ImageItem
         img={<img src="../media/svgs/discussion.svg" alt="discussion" />}
-        title={content.chatLabel}
-        buttonText={content.chatButtonText}
-        buttonHref={content.chatButtonHref}
+        title={content.discussionLabel}
+        buttonText={content.discussionButtonText}
+        buttonHref={content.discussionButtonHref}
       />
     </Section>
   );

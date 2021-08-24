@@ -15,7 +15,7 @@ interface props {
 const CommunityPage = ({ location }: props): JSX.Element => {
   const data = useStaticQuery(graphql`
     query {
-      seoImage: file(relativePath: { eq: "community-header-sm.jpg" }) {
+      seoImage: file(relativePath: { eq: "community-header.png" }) {
         publicURL
       }
     }
@@ -26,7 +26,7 @@ const CommunityPage = ({ location }: props): JSX.Element => {
         description="The Regen Ledger blockchain enables our community to develop a suite of platforms and applications in service of regenerating human relationships with land - join us."
         title="Community"
         location={location}
-        imageUrl={data.seoImage.publicURL}
+        imageUrl={data?.seoImage?.publicURL}
       />
       <TopSection />
       <GoToSection />

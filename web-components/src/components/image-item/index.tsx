@@ -30,7 +30,6 @@ export interface StyleProps {
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   root: {
     textAlign: 'center',
-    paddingBottom: theme.spacing(16),
   },
   title: {
     lineHeight: '150%',
@@ -46,9 +45,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     },
   },
   button: {
-    [theme.breakpoints.up('sm')]: {
-      marginTop: theme.spacing(4),
-    },
+    marginTop: theme.spacing(4),
   },
 }));
 

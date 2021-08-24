@@ -37,8 +37,11 @@ const CommunityConnectSection = (): JSX.Element => {
         connectSection {
           header
           telegramSubLabel
+          telegramUrl
           twitterSubLabel
+          twitterUrl
           discordSubLabel
+          discordUrl
         }
       }
     }
@@ -49,21 +52,21 @@ const CommunityConnectSection = (): JSX.Element => {
   const icons: IconLabelProps[] = [
     {
       icon: <TelegramIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />,
-      href: 'http://t.me/regennetwork_public',
+      href: content.telegramUrl,
       label: 'Telegram',
       subLabel: content.telegramSubLabel,
     },
 
     {
       icon: <TwitterIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />,
-      href: 'https://twitter.com/regen_network',
+      href: content.twitterUrl,
       label: 'Twitter',
       subLabel: content.twitterSubLabel,
     },
 
     {
       icon: <TelegramIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />,
-      href: 'https://discord.gg/vTdB8tCf',
+      href: content.discordUrl,
       label: 'Discord',
       subLabel: content.discordSubLabel,
     },

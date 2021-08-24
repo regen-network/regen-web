@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import { Theme, makeStyles } from '@material-ui/core';
+import { Theme, makeStyles, useTheme } from '@material-ui/core';
 import clsx from 'clsx';
 import BackgroundImage from 'gatsby-background-image';
 import { FluidObject } from 'gatsby-image';
@@ -11,8 +11,9 @@ import Modal from 'web-components/lib/components/modal';
 import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
 import { MarketingDescription } from '../../components/Description';
 
-const useStyles = makeStyles<Theme>((theme: Theme) => ({
+const useStyles = makeStyles<Theme>(theme => ({
   section: {
+    borderBottom: `1px solid ${theme.palette.grey[100]}`,
     [theme.breakpoints.up('xs')]: {
       paddingBottom: theme.spacing(22.5),
     },
@@ -65,6 +66,7 @@ type QueryData = {
 
 const CollectiveSection = (): JSX.Element => {
   const styles = useStyles();
+  const theme = useTheme();
   const [open, setOpen] = useState(false);
 
   const {
@@ -103,7 +105,12 @@ const CollectiveSection = (): JSX.Element => {
         </MarketingDescription>
         <ContainedButton onClick={() => setOpen(true)}>{buttonText}</ContainedButton>
       </Section>
-      <Modal open={open} onClose={() => setOpen(false)} className={styles.modal}>
+      <Modal
+        open={open}
+        onClose={() => setOpen(false)}
+        className={styles.modal}
+        closeIconColor={theme.palette.info.light}
+      >
         <iframe title="collective-signup-form" src={signupFormUrl} />
       </Modal>
     </BackgroundImage>

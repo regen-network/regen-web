@@ -21,7 +21,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
   },
 }));
 
-export const TokenDescription = ({ children, className }: DescriptionProps): JSX.Element => {
+export const MarketingDescription = ({ children, className }: DescriptionProps): JSX.Element => {
   const styles = useStyles();
 
   return <Description className={clsx(className, styles.root)}>{children}</Description>;

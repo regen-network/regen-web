@@ -45,13 +45,13 @@ const GoToSection = (): JSX.Element => {
         buttonHref={content.podcastButtonHref}
       />
       <ImageItem
-        img={<img src="../media/svgs/blog.svg" alt="verified" />}
+        img={<img src="../media/svgs/blog.svg" alt="blog" />}
         title={content.blogLabel}
         buttonText={content.blogButtonText}
         buttonHref={content.blogButtonHref}
       />
       <ImageItem
-        img={<img src="../media/svgs/discussion.svg" alt="verified" />}
+        img={<img src="../media/svgs/discussion.svg" alt="discussion" />}
         title={content.chatLabel}
         buttonText={content.chatButtonText}
         buttonHref={content.chatButtonHref}

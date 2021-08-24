@@ -4,6 +4,7 @@ import { graphql, useStaticQuery } from 'gatsby';
 import TopSection from '../sections/community/TopSection';
 import CollaborateSection from '../sections/community/CollaborateSection';
 import ConnectSection from '../sections/community/ConnectSection';
+import CollectiveSection from '../sections/community/CollectiveSection';
 import GoToSection from '../sections/community/GoToSection';
 import SEO from '../components/seo';
 
@@ -30,6 +31,7 @@ const CommunityPage = ({ location }: props): JSX.Element => {
       <TopSection location={location} />
       <GoToSection />
       <ConnectSection />
+      <CollectiveSection />
       <CollaborateSection />
     </>
   );

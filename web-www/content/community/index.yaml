@@ -15,7 +15,13 @@ goToSection:
   blogButtonHref: 'go to blog'
   chatLabel: 'Chat with us directly'
   chatButtonText: 'go to forum'
-  chatButtonHref: 'go to forum'
+  chatButtonHref: '#todo'
+collectiveSection:
+  title: 'Support the Regen community'
+  body: >-
+    md//Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. <a>Learn about our collective»</a>
+  buttonText: 'apply now'
+  buttonUrl: '#todo'
 collaborateSection:
   header: Out collaborate the competition
   body: md//Under the hood of Regen Registry is a decentralized, public ledger

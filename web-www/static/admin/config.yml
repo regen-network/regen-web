@@ -35,18 +35,6 @@ collections:
               - {label: Twitter URL, name: twitterUrl, widget: text}
               - {label: Discord sub label, name: discordSubLabel, widget: text, required: false}
               - {label: Discord URL, name: discordUrl, widget: text}
-
-              goToSection:
-  podcastLabel: 'Hear from the CEO'
-  podcastButtonText: 'go to podcast'
-  podcastButtonHref: 'todo'
-  blogLabel: 'Learn in depth'
-  blogButtonText: 'go to blog'
-  blogButtonHref: 'go to blog'
-  chatLabel: 'Chat with us directly'
-  chatButtonText: 'go to forum'
-  chatButtonHref: 'todo'
-
           - label: "Go-To Section"
             name: "goToSection"
             widget: "object"

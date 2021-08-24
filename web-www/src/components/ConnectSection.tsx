@@ -91,7 +91,6 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     justifyContent: 'center',
     textAlign: 'center',
     color: theme.palette.primary.main,
-
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.typography.pxToRem(18),
       paddingTop: theme.spacing(5.25),

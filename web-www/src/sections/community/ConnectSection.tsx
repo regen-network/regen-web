@@ -5,6 +5,7 @@ import { Theme, makeStyles, useTheme } from '@material-ui/core/styles';
 import ConnectSection, { IconLabelProps } from '../../components/ConnectSection';
 import TwitterIcon from 'web-components/lib/components/icons/social/TwitterIcon';
 import TelegramIcon from 'web-components/lib/components/icons/social/TelegramIcon';
+import DiscordIcon from 'web-components/lib/components/icons/social/DiscordIcon';
 
 const useStyles = makeStyles((theme: Theme) => ({
   title: {
@@ -65,10 +66,11 @@ const CommunityConnectSection = (): JSX.Element => {
     },
 
     {
-      icon: <TelegramIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />,
+      icon: <DiscordIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />,
       href: content.discordUrl,
       label: 'Discord',
       subLabel: content.discordSubLabel,
+      small: true,
     },
   ];
   return (

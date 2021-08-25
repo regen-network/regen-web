@@ -301,6 +301,70 @@ coreSection:
         private consultant, and 18 years with the American Museum of Natural
         History. He is thrilled to be applying his skills to support planetary
         regeneration with Regen Network.
+    - image: ../../static/media/darren-kong-team.png
+      name: Darren Kong
+      title: Director of Product for Regen Ledger
+      description: Darren is a product leader and entrepreneur with over a decade of
+        experience in startups and enterprise. As a co-founder of blockchain R&D
+        firm, Other Internet, he has worked closely with crypto protocols, as
+        well as, infrastructure projects. He enjoys gardening, keeping chickens
+        and bees, and cooking; through his work and life, he hopes to help build
+        permanent cultures.
+      linkedUrl: https://www.linkedin.com/in/darrentkong/
+    - image: ../../static/media/likitha-polavarapu-vitwit-team.png
+      name: Likitha Polavarapu
+      title: Software Engineer / Vitwit
+      description: Likhita is a CS graduate from IIIT and is working as a full stack
+        blockchain engineer at Vitwit. She is from an agricultural family and
+        always wanted to bridge the technology gaps in farming. Likhita is
+        currently working on the Cosmos SDK and Regen Ledger and is very
+        passionate about solving climate change.
+      githubUrl: https://github.com/likhita-809
+      linkedUrl: https://www.linkedin.com/in/likhita-polavarapu-148718161/
+    - image: ../../static/media/atheesh-vitwit-team.png
+      name: Atheesh Padala
+      title: Software Engineer / Vitwit
+      description: Atheesh is a software development engineer at Vitwit. He has been
+        working as a fullstack developer in blockchain and web development for
+        more than 3 years, contributing to Regen Ledger and Cosmos-SDK. Atheesh
+        believes in Regen Network's mission to support regenerative agriculture.
+      githubUrl: https://github.com/atheeshp
+      twitterUrl: https://twitter.com/atheeshpadala
+      linkedUrl: https://www.linkedin.com/in/atheesh-padala-6b0495131
+    - image: ../../static/media/kaustubh-vitwit-team.png
+      name: Kaustubh Kapatral
+      title: ValOps Lead / Vitwit
+      description: Kaustubh is a validator infrastructure lead and has been involved
+        in the crypto space since late 2016. He made the jump from mining PoW
+        coins to validating on PoS networks to help minimize the overall
+        environmental impact of large mining server farms. Kaustubh loves
+        playing with client interfaces and is currently working as a QA for
+        Cosmos SDK and Regen Ledger.
+      twitterUrl: https://twitter.com/KKapatral
+      githubUrl: https://github.com/kaustubhkapatral
+      linkedUrl: https://www.linkedin.com/in/kaustubh-kapatral-704a60176/
+    - image: ../../static/media/aleem_vitwit.png
+      name: Aleem MD
+      title: Senior Software Engineer / Vitwit
+      description: Aleem is a senior software engineer at Vitwit. He has been working
+        as a full stack and mobile developer for more than 4 years. He is
+        passionate about agriculture and worked on an image based Crop Disease
+        Detection system using deep learning. Aleem is currently working on the
+        Cosmos SDK and Regen ledger and is interested in distributed systems.
+      githubUrl: https://github.com/aleem1314
+      twitterUrl: https://twitter.com/aleem1314
+      linkedUrl: https://www.linkedin.com/in/md-aleem1314/
+    - image: ../../static/media/anil-vitwit-team.png
+      name: Anil Kumar Kammari
+      title: "Senior Software Engineer / CTO of Vitwit "
+      description: Anil is a Cofounder and CTO of Vitwit, a technology consulting and
+        services company from India. Started his career as a fullstack
+        developer, built interest in decentralization and quantum computing.
+        He’s working closely with the Cosmos ecosystem from 2018 and helping
+        multiple projects with consulting and development.
+      githubUrl: https://github.com/anilcse
+      twitterUrl: https://twitter.com/anilcse_
+      linkedUrl: https://www.linkedin.com/in/anilcse
 contributorSection:
   title: Contributors
   contributors:

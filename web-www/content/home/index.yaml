@@ -1,6 +1,6 @@
 foldSection:
   tagline: Platform for a Thriving Planet
-  description: Regen Network aligns economics with ecology to drive regenerative
+  description: Regen Network™ aligns economics with ecology to drive regenerative
     land management.
 marketplaceSection:
   header: The open marketplace for climate solutions
@@ -29,7 +29,7 @@ marketplaceSection:
       linkUrl: /buyers/
 climateSection:
   header: Reverse climate change through carbon removal that regenerates ecosystems.
-  description: Introducing Carbon<i>Plus</i> - a suite of carbon credits with
+  description: Introducing Carbon<i>Plus</i>™ - a suite of carbon credits with
     ecological co-benefits.
   image: ../../static/media/map.png
   solution:

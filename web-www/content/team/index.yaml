@@ -311,6 +311,28 @@ coreSection:
         and bees, and cooking; through his work and life, he hopes to help build
         permanent cultures.
       linkedUrl: https://www.linkedin.com/in/darrentkong/
+    - image: ../../static/media/anil-vitwit-team.png
+      name: Anil Kumar Kammari
+      title: "Senior Software Engineer / CTO of Vitwit "
+      description: Anil is a Cofounder and CTO of Vitwit, a technology consulting and
+        services company from India. Started his career as a fullstack
+        developer, built interest in decentralization and quantum computing.
+        He’s working closely with the Cosmos ecosystem from 2018 and helping
+        multiple projects with consulting and development.
+      githubUrl: https://github.com/anilcse
+      twitterUrl: https://twitter.com/anilcse_
+      linkedUrl: https://www.linkedin.com/in/anilcse
+    - image: ../../static/media/aleem_vitwit.png
+      name: Aleem MD
+      title: Senior Software Engineer / Vitwit
+      description: Aleem is a senior software engineer at Vitwit. He has been working
+        as a full stack and mobile developer for more than 4 years. He is
+        passionate about agriculture and worked on an image based Crop Disease
+        Detection system using deep learning. Aleem is currently working on the
+        Cosmos SDK and Regen ledger and is interested in distributed systems.
+      githubUrl: https://github.com/aleem1314
+      twitterUrl: https://twitter.com/aleem1314
+      linkedUrl: https://www.linkedin.com/in/md-aleem1314/
     - image: ../../static/media/likitha-polavarapu-vitwit-team.png
       name: Likitha Polavarapu
       title: Software Engineer / Vitwit
@@ -343,28 +365,6 @@ coreSection:
       twitterUrl: https://twitter.com/KKapatral
       githubUrl: https://github.com/kaustubhkapatral
       linkedUrl: https://www.linkedin.com/in/kaustubh-kapatral-704a60176/
-    - image: ../../static/media/aleem_vitwit.png
-      name: Aleem MD
-      title: Senior Software Engineer / Vitwit
-      description: Aleem is a senior software engineer at Vitwit. He has been working
-        as a full stack and mobile developer for more than 4 years. He is
-        passionate about agriculture and worked on an image based Crop Disease
-        Detection system using deep learning. Aleem is currently working on the
-        Cosmos SDK and Regen ledger and is interested in distributed systems.
-      githubUrl: https://github.com/aleem1314
-      twitterUrl: https://twitter.com/aleem1314
-      linkedUrl: https://www.linkedin.com/in/md-aleem1314/
-    - image: ../../static/media/anil-vitwit-team.png
-      name: Anil Kumar Kammari
-      title: "Senior Software Engineer / CTO of Vitwit "
-      description: Anil is a Cofounder and CTO of Vitwit, a technology consulting and
-        services company from India. Started his career as a fullstack
-        developer, built interest in decentralization and quantum computing.
-        He’s working closely with the Cosmos ecosystem from 2018 and helping
-        multiple projects with consulting and development.
-      githubUrl: https://github.com/anilcse
-      twitterUrl: https://twitter.com/anilcse_
-      linkedUrl: https://www.linkedin.com/in/anilcse
 contributorSection:
   title: Contributors
   contributors:

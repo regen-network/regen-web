@@ -43,10 +43,10 @@ collections:
               - {label: Video button text, name: videoButtonText, widget: text}
               - {label: Video URL, name: videoButtonHref, widget: text}
               - {label: Blog label, name: blogLabel, widget: text}
-              - {label: Blog button text, name: blogLabel, widget: text}
+              - {label: Blog button text, name: blogButtonText, widget: text}
               - {label: Blog URL, name: blogButtonHref, widget: text}
               - {label: Discussion label, name: discussionLabel, widget: text}
-              - {label: Discussion button text, name: discussionLabel, widget: text}
+              - {label: Discussion button text, name: discussionButtonText, widget: text}
               - {label: Discussion URL, name: discussionButtonHref, widget: text}
           - label: "Collective Section"
             name: "collectiveSection"

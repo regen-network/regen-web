@@ -3,22 +3,22 @@ topSection:
   body: 'Regen Network is an open, collaborative global community of peers anchored by developers, scientists and validators.'
 connectSection:
   header: 'Connnect with our community'
-  telegramSubLabel: '~12,345 followers'
+  telegramSubLabel: '~2,484 followers'
   telegramUrl: 'http://t.me/regennetwork_public'
-  twitterSubLabel: '~999,876 followers'
+  twitterSubLabel: '~9,883 followers'
   twitterUrl: 'https://twitter.com/regen_network'
-  discordSubLabel: '~12,345 members'
+  discordSubLabel: '~1,752 members'
   discordUrl: 'https://discord.gg/vTdB8tCf'
 goToSection:
   videoLabel: 'Stay up to date'
   videoButtonText: 'go to youtube'
-  videoButtonHref: 'todo'
+  videoButtonHref: 'https://www.youtube.com/channel/UCICD2WukTY0MbQdQ9Quew3g'
   blogLabel: 'Learn in depth'
   blogButtonText: 'go to blog'
-  blogButtonHref: 'go to blog'
+  blogButtonHref: 'https://medium.com/regen-network'
   discussionLabel: 'Join the discussion'
   discussionButtonText: 'go to forum'
-  discussionButtonHref: 'todo'
+  discussionButtonHref: 'https://forum.regen.network/'
 collectiveSection:
   title: 'Support the Regen community'
   body: >-

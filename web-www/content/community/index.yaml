@@ -16,7 +16,7 @@ goToSection:
   blogLabel: 'Learn in depth'
   blogButtonText: 'go to blog'
   blogButtonHref: 'go to blog'
-  discussionLabel: 'Chat with us directly'
+  discussionLabel: 'Join the discussion'
   discussionButtonText: 'go to forum'
   discussionButtonHref: 'todo'
 collectiveSection:

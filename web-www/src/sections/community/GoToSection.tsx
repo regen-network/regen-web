@@ -29,9 +29,9 @@ const GoToSection = (): JSX.Element => {
     query {
       text: communityYaml {
         goToSection {
-          audioLabel
-          audioButtonText
-          audioButtonHref
+          videoLabel
+          videoButtonText
+          videoButtonHref
           blogLabel
           blogButtonText
           blogButtonHref
@@ -49,10 +49,10 @@ const GoToSection = (): JSX.Element => {
     <Section className={styles.root}>
       <ImageItem
         className={styles.item}
-        img={<img src="../media/svgs/podcast.svg" alt="podcast" />}
-        title={content.audioLabel}
-        buttonText={content.audioButtonText}
-        buttonHref={content.audioButtonHref}
+        img={<img src="../media/svgs/video.svg" alt="podcast" />}
+        title={content.videoLabel}
+        buttonText={content.videoButtonText}
+        buttonHref={content.videoButtonHref}
       />
       <ImageItem
         className={styles.item}

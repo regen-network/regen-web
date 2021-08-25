@@ -10,13 +10,13 @@ connectSection:
   discordSubLabel: '~12,345 members'
   discordUrl: 'https://discord.gg/vTdB8tCf'
 goToSection:
-  audioLabel: 'Hear from the CEO'
-  audioButtonText: 'go to podcast'
-  audioButtonHref: 'todo'
+  videoLabel: 'Stay up to date'
+  videoButtonText: 'go to youtube'
+  videoButtonHref: 'todo'
   blogLabel: 'Learn in depth'
   blogButtonText: 'go to blog'
   blogButtonHref: 'go to blog'
-  discussionLabel: 'Join the discussion'
+  discussionLabel: 'Chat with us directly'
   discussionButtonText: 'go to forum'
   discussionButtonHref: 'todo'
 collectiveSection:

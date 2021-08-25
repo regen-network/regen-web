@@ -39,9 +39,9 @@ collections:
             name: "goToSection"
             widget: "object"
             fields:
-              - {label: Audio/Video label, name: audioLabel, widget: text}
-              - {label: Audio/Video button text, name: audioButtonText, widget: text}
-              - {label: Audio/Video URL, name: audioButtonHref, widget: text}
+              - {label: Video label, name: videoLabel, widget: text}
+              - {label: Video button text, name: videoButtonText, widget: text}
+              - {label: Video URL, name: videoButtonHref, widget: text}
               - {label: Blog label, name: blogLabel, widget: text}
               - {label: Blog button text, name: blogLabel, widget: text}
               - {label: Blog URL, name: blogButtonHref, widget: text}

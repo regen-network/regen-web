@@ -22,6 +22,7 @@ import {
   CreditsIssue,
   CreditsRetire,
   CreditsTransfer,
+  EntityDisplay,
   // Eligibility,
   // GettingStarted,
   Home,
@@ -142,6 +143,8 @@ const App: React.FC = (): JSX.Element => {
                 <ProtectedRoute path={`${path}/:projectId/story`} component={Story} />
                 <ProtectedRoute path={`${path}/:projectId/media`} component={MediaStep} />
                 <ProtectedRoute path={`${path}/:projectId/roles`} component={Roles} />
+                {/* <ProtectedRoute path={`${path}/:projectId/entity-display`} component={EntityDisplay} /> */}
+                <Route path={`${path}/entity-display`} component={EntityDisplay} />
 
                 {/* Used for Project Plan flow
                 <ProtectedRoute path={`${path}/:projectId/getting-started`} component={GettingStarted} />

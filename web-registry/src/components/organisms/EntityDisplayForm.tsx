@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { makeStyles, Theme, Link } from '@material-ui/core';
+import { makeStyles, useTheme, Link } from '@material-ui/core';
 import { Formik, Form, Field } from 'formik';
 import cx from 'clsx';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import OnboardingFooter from 'web-components/lib/components/fixed-footer/OnboardingFooter';
+import Toggle from 'web-components/lib/components/inputs/Toggle';
+import ImageField from 'web-components/lib/components/inputs/ImageField';
 import Title from 'web-components/lib/components/title';
 import Description from 'web-components/lib/components/description';
+import OrganizationIcon from 'web-components/lib/components/icons/OrganizationIcon';
+import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
 
 interface EntityDisplayFormProps {
   submit: (values: EntityDisplayValues) => Promise<void>;
@@ -15,15 +19,17 @@ interface EntityDisplayFormProps {
 
 export interface EntityDisplayValues {
   // 'http://regen.network/landOwner': string;
+  checkMe?: boolean;
+  checkMe2?: boolean;
 }
 
 export interface EntityDisplayValuesErrors {
   // 'http://regen.network/landOwner': string;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles(theme => ({
   card: {
-    paddingBottom: 0,
+    // paddingBottom: 0,
   },
   title: {
     fontWeight: 700,
@@ -48,10 +54,30 @@ const useStyles = makeStyles((theme: Theme) => ({
   error: {
     marginTop: 0,
   },
+  activeContent: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  textField: {
+    // '&:first-of-type': {
+    //   marginTop: 0,
+    // },
+    // [theme.breakpoints.up('sm')]: {
+    //   marginTop: theme.typography.pxToRem(40),
+    // },
+    // [theme.breakpoints.down('xs')]: {
+    //   marginTop: theme.typography.pxToRem(33),
+    // },
+  },
+  organizationIcon: {
+    height: theme.spacing(11),
+    width: '100%',
+  },
 }));
 
 const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialValues }) => {
   const styles = useStyles();
+  const theme = useTheme();
 
   return (
     <>
@@ -59,8 +85,9 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialVa
         enableReinitialize
         validateOnMount
         initialValues={
-          initialValues || {
-            'http://regen.network/landOwner': initialValues?.['http://regen.network/landOwner'] || '',
+          initialValues ||
+          {
+            // 'http://regen.network/landOwner': initialValues?.['http://regen.network/landOwner'] || '',
           }
         }
         onSubmit={async (values, { setSubmitting }) => {
@@ -73,7 +100,7 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialVa
           }
         }}
       >
-        {({ submitForm, isValid, isSubmitting }) => {
+        {({ submitForm, isValid, isSubmitting, handleChange, values }) => {
           return (
             <Form translate="yes">
               <OnBoardingCard className={styles.card}>
@@ -81,9 +108,73 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialVa
                 <Description className={cx(styles.description, styles.field)}>
                   Showing more entities increases the salability of the project. You must show at least one
                   entity on the project page. These entities can only be edited in the previous step.&nbsp;
-                  <Link>See an example»</Link>
+                  <Link onClick={() => {}}>See an example»</Link>
                 </Description>
-                <Field classes={{ root: styles.field }} />
+                <Field
+                  className={styles.field}
+                  label="an org"
+                  type="checkbox"
+                  component={Toggle}
+                  onChange={handleChange}
+                  name="checkMe"
+                  checked={!!values.checkMe}
+                  activeContent={
+                    <div className={styles.activeContent}>
+                      <Field
+                        className={styles.field}
+                        component={ControlledTextField}
+                        name="organizationDisplayName"
+                        label="Organization display name"
+                        optional
+                        placeholder="i.e. Cherrybrook Farms"
+                      />
+                      <Field
+                        className={styles.field}
+                        component={ImageField}
+                        label="Organization logo"
+                        name="logo"
+                        fallbackAvatar={
+                          <OrganizationIcon
+                            className={styles.organizationIcon}
+                            color={theme.palette.info.main}
+                          />
+                        }
+                      />
+                      <Field
+                        charLimit={160}
+                        component={ControlledTextField}
+                        label="Short organization description"
+                        name="['http://regen.network/landStewardStory']"
+                        rows={4}
+                        multiline
+                      />
+                    </div>
+                  }
+                />
+                <Field
+                  className={styles.field}
+                  label="a person"
+                  description="recommended to increase salability"
+                  type="checkbox"
+                  component={Toggle}
+                  onChange={handleChange}
+                  name="checkMe2"
+                  checked={!!values.checkMe2}
+                  activeContent={
+                    <div className={styles.activeContent}>
+                      <Field className={styles.field} component={ImageField} label="Bio photo" name="photo" />
+                      <Field
+                        charLimit={160}
+                        component={ControlledTextField}
+                        label="Short personal description"
+                        description="Describe any relevant background and experience."
+                        name="['http://regen.network/landStewardStory']"
+                        rows={4}
+                        multiline
+                      />
+                    </div>
+                  }
+                />
               </OnBoardingCard>
 
               <OnboardingFooter

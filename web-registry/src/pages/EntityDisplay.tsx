@@ -31,6 +31,7 @@ const EntityDisplay: React.FC = () => {
   if (data?.projectById?.metadata) {
     const metadata = data.projectById.metadata;
     initialFieldValues = {
+      checkMe: false, //
       // 'http://regen.network/previewPhoto': metadata['http://regen.network/previewPhoto'],
     };
   }

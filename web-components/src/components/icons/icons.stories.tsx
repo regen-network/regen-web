@@ -1,6 +1,7 @@
 import React from 'react';
 import ArrowDownIcon from 'web-components/lib/components/icons/ArrowDownIcon';
 import AvailableCreditsIcon from 'web-components/lib/components/icons/AvailableCreditsIcon';
+import AvatarIcon from 'web-components/lib/components/icons/AvatarIcon';
 import CloseIcon from 'web-components/lib/components/icons/CloseIcon';
 import CreditsIcon from 'web-components/lib/components/icons/CreditsIcon';
 import CurrentCreditsIcon from 'web-components/lib/components/icons/CurrentCreditsIcon';
@@ -65,6 +66,8 @@ export const arrowIcon = (): JSX.Element => (
 );
 
 export const availableCreditsIcon = (): JSX.Element => <AvailableCreditsIcon />;
+
+export const avatarIcon = (): JSX.Element => <AvatarIcon />;
 
 export const breadcrumbIcon = (): JSX.Element => <BreadcrumbIcon direction={text('direction', 'down')} />;
 

@@ -16,7 +16,7 @@ function Admin(): JSX.Element {
       {isAdmin(user) && (
         <div>
           <p>
-            <Link to="/admin/credits/portal">Credits Portal</Link>
+            <Link to="/admin/credits/create-and-transfer">Create and Transfer</Link>
           </p>
           <p>
             <Link to="/admin/credits/issue">Issue credits</Link>

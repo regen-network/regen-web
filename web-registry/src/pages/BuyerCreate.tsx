@@ -77,6 +77,9 @@ const BuyerCreate: React.FC<{ onCreate?: (walletId: string) => void }> = ({ onCr
               });
               setAddressId(result.data?.createUserOrganization?.organization?.partyByPartyId?.addressId);
               setWalletId(result.data?.createUserOrganization?.organization?.partyByPartyId?.walletId);
+              if (onCreate) {
+                onCreate(result.data?.createUserOrganization?.organization?.partyByPartyId?.walletId);
+              }
             } else {
               result = await createUser({
                 variables: {
@@ -91,13 +94,11 @@ const BuyerCreate: React.FC<{ onCreate?: (walletId: string) => void }> = ({ onCr
               });
               setAddressId(result.data?.reallyCreateUser?.user?.partyByPartyId?.addressId);
               setWalletId(result.data?.reallyCreateUser?.user?.partyByPartyId?.walletId);
+              if (onCreate) {
+                onCreate(result.data?.reallyCreateUser?.user?.partyByPartyId?.walletId);
+              }
             }
-          } catch (e) {
-          } finally {
-            if (onCreate) {
-              onCreate(walletId);
-            }
-          }
+          } catch (e) {}
         }}
         noValidate
         autoComplete="off"

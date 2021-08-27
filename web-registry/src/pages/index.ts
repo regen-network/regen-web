@@ -5,7 +5,7 @@ export * from './BuyerCreate';
 export * from './Certificate';
 export * from './ChooseCreditClass';
 export * from './CreateCreditClass';
-export * from './CreditsPortal';
+export * from './CreditsBuyAndTransfer';
 export * from './CreateMethodology';
 export * from './CreditClassDetails';
 export * from './Credits';

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
-import { useMutation, useQuery, gql } from '@apollo/client';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Select from '@material-ui/core/Select';
@@ -13,35 +12,17 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import { loader } from 'graphql.macro';
 
 import Title from 'web-components/lib/components/title';
 import { pluralize } from 'web-components/lib/utils/pluralize';
 import {
-  AccountBalance,
+  // AccountBalance,
   TransactionState,
   useAllCreditVintagesQuery,
   useAllPartiesQuery,
   useGetAvailableCreditsQuery,
   useTransferCreditsMutation,
 } from '../generated/graphql';
-
-// const TRANSFER_CREDITS = gql`
-//   mutation TransferCredits($input: TransferCreditsInput!) {
-//     transferCredits(input: $input) {
-//       json
-//     }
-//   }
-// `;
-
-// const AVAILABLE_CREDITS = gql`
-//   query GetAvailableCredits($vintageId: UUID) {
-//     getAvailableCredits(vintageId: $vintageId)
-//   }
-// `;
-
-// const ALL_CREDIT_VINTAGES = loader('../graphql/AllCreditVintages.graphql');
-const ALL_PARTIES = loader('../graphql/AllParties.graphql');
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -83,7 +64,7 @@ interface Result {
   walletId: string;
 }
 
-function CreditsTransfer(): JSX.Element {
+const CreditsTransfer: React.FC<{ buyerId?: string }> = ({ buyerId = '' }) => {
   const classes = useStyles();
 
   const [transferCredits, { data, loading, error }] = useTransferCreditsMutation({
@@ -106,7 +87,7 @@ function CreditsTransfer(): JSX.Element {
 
   const [vintageId, setVintageId] = useState('');
   const [oldBalances, setOldBalances] = useState<Balance[]>([]);
-  const [buyerWalletId, setBuyerWalletId] = useState('');
+  const [buyerWalletId, setBuyerWalletId] = useState(buyerId);
   const [addressId, setAddressId] = useState('');
   const [partyId, setPartyId] = useState('');
   const [userId, setUserId] = useState('');
@@ -469,6 +450,6 @@ function CreditsTransfer(): JSX.Element {
       )}
     </div>
   );
-}
+};
 
 export { CreditsTransfer };

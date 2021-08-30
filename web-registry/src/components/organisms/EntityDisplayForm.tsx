@@ -106,6 +106,10 @@ const useStyles = makeStyles(theme => ({
     fontSize: theme.typography.pxToRem(16),
     paddingBottom: theme.spacing(5),
   },
+  toggleDescription: {
+    fontStyle: 'italic',
+    color: theme.palette.info.main,
+  },
   userInfo: {
     [theme.breakpoints.down('xs')]: {
       marginBottom: theme.spacing(12),
@@ -197,6 +201,7 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialVa
                 />
                 <Field
                   className={styles.field}
+                  classes={{ description: styles.toggleDescription }}
                   label="a person"
                   description="recommended to increase salability"
                   type="checkbox"

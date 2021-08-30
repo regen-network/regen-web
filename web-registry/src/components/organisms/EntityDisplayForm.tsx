@@ -48,14 +48,11 @@ const useStyles = makeStyles(theme => ({
     },
   },
   field: {
-    [theme.breakpoints.up('sm')]: {
-      marginBottom: theme.spacing(12),
-    },
-    [theme.breakpoints.down('xs')]: {
-      marginBottom: theme.spacing(10),
-    },
+    marginBottom: theme.spacing(8),
   },
-  description: {},
+  description: {
+    marginBottom: theme.spacing(4),
+  },
   error: {
     marginTop: 0,
   },
@@ -151,7 +148,7 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialVa
             <Form translate="yes">
               <OnBoardingCard className={styles.card}>
                 <Title className={styles.title}>Choose the entities to show on the project page:</Title>
-                <Description className={cx(styles.description, styles.field)}>
+                <Description className={styles.description}>
                   Showing more entities increases the salability of the project. You must show at least one
                   entity on the project page. These entities can only be edited in the previous step.&nbsp;
                   <Link className={styles.link} onClick={() => setModalOpen(true)}>

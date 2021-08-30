@@ -29,10 +29,23 @@ const EntityDisplay: React.FC = () => {
 
   let initialFieldValues: EntityDisplayValues | undefined;
   if (data?.projectById?.metadata) {
-    const metadata = data.projectById.metadata;
+    // const metadata = data.projectById.metadata;
+
+    const metadata = {
+      'regen:landOwner': {
+        'regen:EntityDisplayShape-showOnProjectPage': false,
+        legalName: 'WYELBA test',
+        name: '',
+        logo: '',
+        description: '',
+      },
+    };
+
     initialFieldValues = {
-      checkMe: false, //
-      // 'http://regen.network/previewPhoto': metadata['http://regen.network/previewPhoto'],
+      'regen:landOwner': metadata['regen:landOwner'],
+      // 'regen:landSteward': metadata['regen:landSteward'],
+      // 'regen:projectDeveloper': metadata['regen:projectDeveloper'],
+      // 'regen:projectOriginator': metadata['regen:projectOriginator'],
     };
   }
 
@@ -56,14 +69,12 @@ const EntityDisplay: React.FC = () => {
       });
       // TODO: go to next step
     } catch (e) {
-      // TODO: Should we display the error banner here?
-      // https://github.com/regen-network/regen-registry/issues/555
       // console.log(e);
     }
   }
 
   return (
-    <OnboardingFormTemplate activeStep={activeStep} title="Media" saveAndExit={saveAndExit}>
+    <OnboardingFormTemplate activeStep={activeStep} title="Entity Display" saveAndExit={saveAndExit}>
       <Description className={styles.description}>
         See an example{' '}
         <Link to={exampleProjectUrl} target="_blank">

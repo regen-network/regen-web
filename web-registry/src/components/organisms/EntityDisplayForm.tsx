@@ -18,13 +18,38 @@ import ProjectTopCard from 'web-components/lib/components/cards/ProjectTopCard';
 interface EntityDisplayFormProps {
   submit: (values: EntityDisplayValues) => Promise<void>;
   initialValues?: EntityDisplayValues;
+  // landOwner?: OrganizationDisplayShape | IndividualDisplayShape;
+  // landSteward?: OrganizationDisplayShape | IndividualDisplayShape;
+  // projectDeveloper?: OrganizationDisplayShape | IndividualDisplayShape;
+  // projectOriginator?: OrganizationDisplayShape | IndividualDisplayShape;
 }
 
 export interface EntityDisplayValues {
-  // 'http://regen.network/landOwner': string;
-  checkMe?: boolean;
-  checkMe2?: boolean;
+  'regen:landOwner'?: OrganizationDisplayShape | IndividualDisplayShape;
+  'regen:landSteward'?: OrganizationDisplayShape | IndividualDisplayShape;
+  'regen:projectDeveloper'?: OrganizationDisplayShape | IndividualDisplayShape;
+  'regen:projectOriginator'?: OrganizationDisplayShape | IndividualDisplayShape;
 }
+
+export interface OrganizationDisplayShape {
+  'regen:EntityDisplayShape-showOnProjectPage': boolean;
+  legalName?: string;
+  name?: string;
+  logo?: string;
+  description?: string;
+}
+
+export interface IndividualDisplayShape {
+  'regen:EntityDisplayShape-showOnProjectPage': boolean;
+  legalName?: string;
+  name?: string;
+  image?: string;
+  description?: string;
+}
+
+// export interface EntityDisplayValues {
+//   'regen:EntityDisplayShape-showOnProjectPage': boolean;
+// }
 
 export interface EntityDisplayValuesErrors {
   // 'http://regen.network/landOwner': string;
@@ -112,9 +137,11 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialVa
         enableReinitialize
         validateOnMount
         initialValues={
-          initialValues ||
-          {
-            // 'http://regen.network/landOwner': initialValues?.['http://regen.network/landOwner'] || '',
+          initialValues || {
+            'regen:landOwner': initialValues?.['regen:landOwner'] || undefined,
+            'regen:landSteward': initialValues?.['regen:landSteward'] || undefined,
+            'regen:projectDeveloper': initialValues?.['regen:projectDeveloper'] || undefined,
+            'regen:projectOriginator': initialValues?.['regen:projectOriginator'] || undefined,
           }
         }
         onSubmit={async (values, { setSubmitting }) => {
@@ -128,6 +155,107 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialVa
         }}
       >
         {({ submitForm, isValid, isSubmitting, handleChange, values }) => {
+          // regen:OrganizationDisplayShape
+          //   a sh:NodeShape ;
+          //   sh:targetClass regen:Organization ;
+          //   sh:property regen:EntityDisplayShape-showOnProjectPage ;
+          //   sh:property [
+          //     sh:path schema:name ;
+          //     sh:datatype xsd:string ;
+          //     sh:name "Organization display name" ;
+          //     sh:description "This is the display name on your project page, if you choose to make this entity publically viewable." ;
+          //   ] ;
+          //   sh:property [
+          //     sh:path schema:logo ;
+          //     sh:datatype schema:URL ;
+          //     sh:name "Organization logo" ;
+          //     sh:minCount 1 ;
+          //     sh:maxCount 1 ;
+          //   ] ;
+          //   sh:property [
+          //     sh:path schema:description ;
+          //     sh:datatype xsd:string ;
+          //     sh:name "Short organization description" ;
+          //     sh:minCount 1 ;
+          //     sh:maxCount 1 ;
+          //     sh:maxLength 160 ;
+          //   ] ;
+          // .
+
+          // regen:IndividualDisplayShape
+          //   a sh:NodeShape ;
+          //   sh:targetClass regen:Individual ;
+          //   sh:property regen:EntityDisplayShape-showOnProjectPage ;
+          //   sh:property [
+          //     sh:path schema:image ;
+          //     sh:datatype schema:URL ;
+          //     sh:name "Bio photo" ;
+          //     sh:minCount 1 ;
+          //     sh:maxCount 1 ;
+          //   ] ;
+          //   sh:property [
+          //     sh:path schema:description ;
+          //     sh:datatype xsd:string ;
+          //     sh:name "Short person description" ;
+          //     sh:description "Describe any relevant background and experience." ;
+          //     sh:minCount 1 ;
+          //     sh:maxCount 1 ;
+          //     sh:maxLength 160 ;
+          //   ] ;
+          // .
+
+          // # The following property isn't actually used for validation but could be used for
+          // # form generation later on.
+          // # Indeed, we have a separate form in the UI for choosing which entities to display
+          // # on the project page, but we're actually storing this info as part of regen:landOwner,
+          // # regen:landSteward and regen:projectDeveloper along with the "Roles" info.
+          // sh:property [
+          //   sh:name "Choose the entities to show on the project page:" ;
+          //   sh:description "Showing more entities increases the salability of the project. You must show at least one entity on the project page. These entities can only be edited in the previous step." ;
+          //   sh:group regen:ProjectPageEntityDisplayGroup ;
+          // ] ;
+          // # We should show at least one of the project stakeholders on the project page.
+          // sh:or (
+          //   [
+          //     sh:property [
+          //       sh:path regen:landOwner ;
+          //       sh:minCount 1 ;
+          //       sh:maxCount 1 ;
+          //       sh:xone (
+          //         sh:node regen:IndividualDisplayShape
+          //         sh:node regen:OrganizationDisplayShape
+          //       ) ;
+          //       sh:group regen:ProjectPageEntityDisplayGroup ;
+          //     ]
+          //   ]
+          //   [
+          //     sh:property [
+          //       sh:path regen:landSteward ;
+          //       sh:description "recommended to increase salability" ;
+          //       sh:minCount 1 ;
+          //       sh:maxCount 1 ;
+          //       sh:xone (
+          //         sh:node regen:IndividualDisplayShape
+          //         sh:node regen:OrganizationDisplayShape
+          //       ) ;
+          //       sh:group regen:ProjectPageEntityDisplayGroup ;
+          //     ]
+          //   ]
+          //   [
+          //     sh:property [
+          //       sh:path regen:projectDeveloper ;
+          //       sh:description "recommended to increase salability" ;
+          //       sh:minCount 1 ;
+          //       sh:maxCount 1 ;
+          //       sh:xone (
+          //         sh:node regen:IndividualDisplayShape
+          //         sh:node regen:OrganizationDisplayShape
+          //       ) ;
+          //       sh:group regen:ProjectPageEntityDisplayGroup ;
+          //     ]
+          //   ]
+          // ) ;
+
           return (
             <Form translate="yes">
               <OnBoardingCard>
@@ -139,48 +267,52 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialVa
                     See an example»
                   </Link>
                 </Description>
-                <Field
-                  className={styles.field}
-                  label="an org"
-                  type="checkbox"
-                  component={Toggle}
-                  onChange={handleChange}
-                  name="checkMe"
-                  checked={!!values.checkMe}
-                  activeContent={
-                    <div className={styles.activeContent}>
-                      <Field
-                        className={styles.field}
-                        component={ControlledTextField}
-                        name="organizationDisplayName"
-                        label="Organization display name"
-                        optional
-                        placeholder="i.e. Cherrybrook Farms"
-                      />
-                      <Field
-                        className={styles.field}
-                        component={ImageField}
-                        label="Organization logo"
-                        name="logo"
-                        fallbackAvatar={
-                          <OrganizationIcon
-                            className={styles.organizationIcon}
-                            color={theme.palette.info.main}
-                          />
-                        }
-                      />
-                      <Field
-                        charLimit={160}
-                        component={ControlledTextField}
-                        label="Short organization description"
-                        name="['http://regen.network/landStewardStory']"
-                        rows={4}
-                        multiline
-                      />
-                    </div>
-                  }
-                />
-                <Field
+
+                {values['regen:landOwner'] && (
+                  <Field
+                    className={styles.field}
+                    label={values['regen:landOwner'].legalName}
+                    type="checkbox"
+                    component={Toggle}
+                    onChange={handleChange}
+                    name="regen:EntityDisplayShape-showOnProjectPage"
+                    checked={!!values['regen:landOwner']?.['regen:EntityDisplayShape-showOnProjectPage']}
+                    activeContent={
+                      <div className={styles.activeContent}>
+                        <Field
+                          className={styles.field}
+                          component={ControlledTextField}
+                          name="['regen:landOwner'].name"
+                          label="Organization display name"
+                          optional
+                          placeholder="i.e. Cherrybrook Farms"
+                        />
+                        <Field
+                          className={styles.field}
+                          component={ImageField}
+                          label="Organization logo"
+                          name="['regen:landOwner'].logo"
+                          fallbackAvatar={
+                            <OrganizationIcon
+                              className={styles.organizationIcon}
+                              color={theme.palette.info.main}
+                            />
+                          }
+                        />
+                        <Field
+                          charLimit={160}
+                          component={ControlledTextField}
+                          label="Short organization description"
+                          name="['regen:landOwner'].description"
+                          rows={4}
+                          multiline
+                        />
+                      </div>
+                    }
+                  />
+                )}
+
+                {/* <Field
                   className={styles.field}
                   classes={{ description: styles.toggleDescription }}
                   label="a person"
@@ -204,7 +336,7 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialVa
                       />
                     </div>
                   }
-                />
+                /> */}
               </OnBoardingCard>
 
               <OnboardingFooter

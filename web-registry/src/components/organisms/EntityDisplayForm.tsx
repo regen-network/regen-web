@@ -2,15 +2,20 @@ import React, { useState, useEffect } from 'react';
 import { makeStyles, useTheme, Link } from '@material-ui/core';
 import { Formik, Form, Field } from 'formik';
 import cx from 'clsx';
+import { Link as RouterLink } from 'react-router-dom';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import OnboardingFooter from 'web-components/lib/components/fixed-footer/OnboardingFooter';
 import Toggle from 'web-components/lib/components/inputs/Toggle';
 import ImageField from 'web-components/lib/components/inputs/ImageField';
+import Modal from 'web-components/lib/components/modal';
 import Title from 'web-components/lib/components/title';
+import Card from 'web-components/lib/components/cards/Card';
 import Description from 'web-components/lib/components/description';
 import OrganizationIcon from 'web-components/lib/components/icons/OrganizationIcon';
 import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
+import UserInfoWithTitle from 'web-components/lib/components/user/UserInfoWithTitle';
+import ProjectTopCard from 'web-components/lib/components/cards/ProjectTopCard';
 
 interface EntityDisplayFormProps {
   submit: (values: EntityDisplayValues) => Promise<void>;
@@ -73,9 +78,46 @@ const useStyles = makeStyles(theme => ({
     height: theme.spacing(11),
     width: '100%',
   },
+  link: {
+    cursor: 'pointer',
+  },
+  modalContent: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  modalTitle: {
+    maxWidth: '70%',
+    textAlign: 'center',
+    paddingBottom: theme.spacing(4),
+  },
+  modalCard: {
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    padding: theme.spacing(4),
+  },
+  modalText: {
+    [theme.breakpoints.down('xs')]: {
+      fontSize: theme.spacing(4),
+    },
+  },
+  examplePageText: {
+    fontSize: theme.typography.pxToRem(16),
+    paddingBottom: theme.spacing(5),
+  },
+  userInfo: {
+    [theme.breakpoints.down('xs')]: {
+      marginBottom: theme.spacing(12),
+    },
+    [theme.breakpoints.up('sm')]: {
+      marginBottom: theme.spacing(15),
+    },
+  },
 }));
 
 const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialValues }) => {
+  const [modalOpen, setModalOpen] = useState(false);
   const styles = useStyles();
   const theme = useTheme();
 
@@ -108,7 +150,9 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialVa
                 <Description className={cx(styles.description, styles.field)}>
                   Showing more entities increases the salability of the project. You must show at least one
                   entity on the project page. These entities can only be edited in the previous step.&nbsp;
-                  <Link onClick={() => {}}>See an example»</Link>
+                  <Link className={styles.link} onClick={() => setModalOpen(true)}>
+                    See an example»
+                  </Link>
                 </Description>
                 <Field
                   className={styles.field}
@@ -190,6 +234,40 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialVa
           );
         }}
       </Formik>
+      <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
+        <div className={styles.modalContent}>
+          <Title className={styles.modalTitle} variant="h5">
+            Example of Entity Display
+          </Title>
+          <Description className={styles.examplePageText}>
+            See full{' '}
+            <RouterLink to="/projects/wilmot" target="_blank">
+              project page»
+            </RouterLink>
+          </Description>
+          <Card className={styles.modalCard}>
+            <ProjectTopCard
+              projectDeveloper={{
+                name: 'Impact Ag Partners',
+                imgSrc: 'https://regen-registry.s3.amazonaws.com/projects/wilmot/impactag.jpg',
+                description:
+                  'Impact Ag Partners is a specialist agricultural asset management firm and advisory service which utilises a variety of pathways and partners to measure and monetize natural capital.',
+                type: 'project developer',
+              }}
+              landSteward={{
+                name: 'Wilmot Cattle Co.',
+                type: 'organization',
+                place: {
+                  state: 'New South Wales',
+                  country: 'Australia',
+                },
+                imgSrc: 'https://regen-registry.s3.amazonaws.com/projects/wilmot/wilmot.jpg',
+                description: 'Wilmot Cattle Company is an innovative, regenerative, grass-fed beef business.',
+              }}
+            />
+          </Card>
+        </div>
+      </Modal>
     </>
   );
 };

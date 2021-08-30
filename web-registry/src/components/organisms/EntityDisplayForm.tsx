@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { makeStyles, useTheme, Link } from '@material-ui/core';
 import { Formik, Form, Field } from 'formik';
-import cx from 'clsx';
 import { Link as RouterLink } from 'react-router-dom';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
@@ -14,7 +13,6 @@ import Card from 'web-components/lib/components/cards/Card';
 import Description from 'web-components/lib/components/description';
 import OrganizationIcon from 'web-components/lib/components/icons/OrganizationIcon';
 import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
-import UserInfoWithTitle from 'web-components/lib/components/user/UserInfoWithTitle';
 import ProjectTopCard from 'web-components/lib/components/cards/ProjectTopCard';
 
 interface EntityDisplayFormProps {
@@ -33,9 +31,6 @@ export interface EntityDisplayValuesErrors {
 }
 
 const useStyles = makeStyles(theme => ({
-  card: {
-    // paddingBottom: 0,
-  },
   title: {
     fontWeight: 700,
     color: theme.palette.primary.contrastText,
@@ -59,17 +54,6 @@ const useStyles = makeStyles(theme => ({
   activeContent: {
     display: 'flex',
     flexDirection: 'column',
-  },
-  textField: {
-    // '&:first-of-type': {
-    //   marginTop: 0,
-    // },
-    // [theme.breakpoints.up('sm')]: {
-    //   marginTop: theme.typography.pxToRem(40),
-    // },
-    // [theme.breakpoints.down('xs')]: {
-    //   marginTop: theme.typography.pxToRem(33),
-    // },
   },
   organizationIcon: {
     height: theme.spacing(11),
@@ -146,7 +130,7 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialVa
         {({ submitForm, isValid, isSubmitting, handleChange, values }) => {
           return (
             <Form translate="yes">
-              <OnBoardingCard className={styles.card}>
+              <OnBoardingCard>
                 <Title className={styles.title}>Choose the entities to show on the project page:</Title>
                 <Description className={styles.description}>
                   Showing more entities increases the salability of the project. You must show at least one

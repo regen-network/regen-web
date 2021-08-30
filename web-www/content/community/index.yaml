@@ -2,7 +2,7 @@ topSection:
   header: 'Community'
   body: 'Regen Network is an open, collaborative global community of peers anchored by developers, scientists and validators.'
 connectSection:
-  header: 'Connnect with our community'
+  header: 'Connect with our community'
   telegramSubLabel: '~2,484 followers'
   telegramUrl: 'http://t.me/regennetwork_public'
   twitterSubLabel: '~9,883 followers'

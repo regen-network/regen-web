@@ -42,6 +42,20 @@ const EntityDisplay: React.FC = () => {
           '@type': 'regen:Individual',
           'regen:EntityDisplayShape-showOnProjectPage': false,
           name: 'Joe Doe',
+          photo: '',
+          description: '',
+        },
+        'regen:projectDeveloper': {
+          '@type': 'regen:Individual',
+          'regen:EntityDisplayShape-showOnProjectPage': false,
+          name: 'Jane Goodall',
+          logo: '',
+          description: '',
+        },
+        'regen:projectOriginator': {
+          '@type': 'regen:Organization',
+          'regen:EntityDisplayShape-showOnProjectPage': false,
+          legalName: 'Mad Ag',
           logo: '',
           description: '',
         },
@@ -56,8 +70,8 @@ const EntityDisplay: React.FC = () => {
     initialFieldValues = {
       'regen:landOwner': metadata['regen:landOwner'],
       'regen:landSteward': metadata['regen:landSteward'],
-      // 'regen:projectDeveloper': metadata['regen:projectDeveloper'],
-      // 'regen:projectOriginator': metadata['regen:projectOriginator'],
+      'regen:projectDeveloper': metadata['regen:projectDeveloper'],
+      'regen:projectOriginator': metadata['regen:projectOriginator'],
     };
   }
 

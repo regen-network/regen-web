@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
-import { useMutation, useQuery, gql } from '@apollo/client';
 import Button from '@material-ui/core/Button';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
-import { loader } from 'graphql.macro';
 
 import Title from 'web-components/lib/components/title';
 import { pluralize } from 'web-components/lib/utils/pluralize';
@@ -87,15 +85,17 @@ function CreditsRetire(): JSX.Element {
     setVintageId(event.target.value as string);
     setUnits(getUnits(vintagesData, buyerWalletId, event.target.value as string));
     if (vintagesData && vintagesData.allCreditVintages) {
-      const selectedVintage = vintagesData.allCreditVintages.nodes.find(
-        (vintage: any) => vintage.id === event.target.value,
+      // TODO: the following shouldn't be type cast to `any` but changing throws an error
+      // `creditClassVersionByCreditClassVersionIdAndCreditClassVersionCreatedAt`
+      // doesn't seem to exist on vintages, but I want to check before deleting
+      const selectedVintage: any = vintagesData.allCreditVintages.nodes.find(
+        vintage => vintage?.id === event.target.value,
       );
-      // TODO: the following throws a type error and doesn't seem to exist on vintages, but I want to check before deleting
-      // if (selectedVintage?.creditClassVersionByCreditClassVersionIdAndCreditClassVersionCreatedAt) {
-      //   const selectedCredit =
-      //     selectedVintage.creditClassVersionByCreditClassVersionIdAndCreditClassVersionCreatedAt;
-      //   setCreditName(selectedCredit.name);
-      // }
+      if (selectedVintage?.creditClassVersionByCreditClassVersionIdAndCreditClassVersionCreatedAt) {
+        const selectedCredit =
+          selectedVintage.creditClassVersionByCreditClassVersionIdAndCreditClassVersionCreatedAt;
+        setCreditName(selectedCredit.name);
+      }
     }
   };
 

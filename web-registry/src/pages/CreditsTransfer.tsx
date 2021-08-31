@@ -107,7 +107,7 @@ const CreditsTransfer: React.FC<{ buyerId?: string }> = ({ buyerId = '' }) => {
     if (!partiesData?.allParties?.nodes?.find(node => node?.id === buyerId)) {
       refetchParties();
     }
-  }, [buyerId]);
+  }, [buyerId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const { data: availableCreditsData, refetch: refetchAvailableCredits } = useGetAvailableCreditsQuery({
     errorPolicy: 'ignore',

@@ -131,6 +131,8 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialVa
   const styles = useStyles();
   const theme = useTheme();
 
+  console.log('initialValues', initialValues);
+
   return (
     <>
       <Formik
@@ -138,10 +140,10 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialVa
         validateOnMount
         initialValues={
           initialValues || {
-            'regen:landOwner': initialValues?.['regen:landOwner'] || undefined,
-            'regen:landSteward': initialValues?.['regen:landSteward'] || undefined,
-            'regen:projectDeveloper': initialValues?.['regen:projectDeveloper'] || undefined,
-            'regen:projectOriginator': initialValues?.['regen:projectOriginator'] || undefined,
+            'regen:landOwner': initialValues?.['regen:landOwner'],
+            'regen:landSteward': initialValues?.['regen:landSteward'],
+            'regen:projectDeveloper': initialValues?.['regen:projectDeveloper'],
+            'regen:projectOriginator': initialValues?.['regen:projectOriginator'],
           }
         }
         onSubmit={async (values, { setSubmitting }) => {
@@ -155,6 +157,8 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialVa
         }}
       >
         {({ submitForm, isValid, isSubmitting, handleChange, values }) => {
+          console.log('values', values);
+
           // regen:OrganizationDisplayShape
           //   a sh:NodeShape ;
           //   sh:targetClass regen:Organization ;
@@ -275,7 +279,7 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialVa
                     type="checkbox"
                     component={Toggle}
                     onChange={handleChange}
-                    name="regen:EntityDisplayShape-showOnProjectPage"
+                    name="['regen:landOwner'].['regen:EntityDisplayShape-showOnProjectPage']"
                     checked={!!values['regen:landOwner']?.['regen:EntityDisplayShape-showOnProjectPage']}
                     activeContent={
                       <div className={styles.activeContent}>

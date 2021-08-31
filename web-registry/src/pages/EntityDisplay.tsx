@@ -23,23 +23,27 @@ const EntityDisplay: React.FC = () => {
   const { projectId } = useParams();
 
   const [updateProject] = useUpdateProjectByIdMutation();
-  const { data } = useProjectByIdQuery({
-    variables: { id: projectId },
-  });
+  // const { data } = useProjectByIdQuery({
+  //   variables: { id: projectId },
+  // });
+
+  const data = {
+    projectById: {
+      metadata: {
+        'regen:landOwner': {
+          'regen:EntityDisplayShape-showOnProjectPage': false,
+          legalName: 'WYELBA test',
+          name: '',
+          logo: '',
+          description: '',
+        },
+      },
+    },
+  };
 
   let initialFieldValues: EntityDisplayValues | undefined;
   if (data?.projectById?.metadata) {
-    // const metadata = data.projectById.metadata;
-
-    const metadata = {
-      'regen:landOwner': {
-        'regen:EntityDisplayShape-showOnProjectPage': false,
-        legalName: 'WYELBA test',
-        name: '',
-        logo: '',
-        description: '',
-      },
-    };
+    const metadata = data.projectById.metadata;
 
     initialFieldValues = {
       'regen:landOwner': metadata['regen:landOwner'],

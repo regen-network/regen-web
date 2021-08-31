@@ -10,19 +10,11 @@ import { loader } from 'graphql.macro';
 
 import Title from 'web-components/lib/components/title';
 import { pluralize } from 'web-components/lib/utils/pluralize';
-
-const ALL_CREDIT_VINTAGES = loader('../graphql/AllCreditVintages.graphql');
-const ALL_PARTIES = loader('../graphql/AllParties.graphql');
-
-const RETIRE_CREDITS = gql`
-  mutation RetireCredits($input: RetireCreditsInput!) {
-    retireCredits(input: $input) {
-      retirement {
-        id
-      }
-    }
-  }
-`;
+import {
+  useAllCreditVintagesQuery,
+  useAllPartiesQuery,
+  useRetireCreditsMutation,
+} from '../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -59,9 +51,9 @@ function getUnits(vintagesData: any, walletId: string, vintageId: string): numbe
 }
 
 function CreditsRetire(): JSX.Element {
-  const classes = useStyles();
+  const styles = useStyles();
 
-  const [retireCredits, { data, loading, error }] = useMutation(RETIRE_CREDITS, {
+  const [retireCredits, { data, loading, error }] = useRetireCreditsMutation({
     errorPolicy: 'ignore',
   });
   const {
@@ -69,11 +61,11 @@ function CreditsRetire(): JSX.Element {
     loading: vintagesLoading,
     error: vintagesError,
     refetch: refetchVintages,
-  } = useQuery(ALL_CREDIT_VINTAGES, {
+  } = useAllCreditVintagesQuery({
     errorPolicy: 'ignore',
   });
 
-  const { data: partiesData, loading: partiesLoading, error: partiesError } = useQuery(ALL_PARTIES, {
+  const { data: partiesData, loading: partiesLoading, error: partiesError } = useAllPartiesQuery({
     errorPolicy: 'ignore',
   });
 
@@ -98,11 +90,12 @@ function CreditsRetire(): JSX.Element {
       const selectedVintage = vintagesData.allCreditVintages.nodes.find(
         (vintage: any) => vintage.id === event.target.value,
       );
-      if (selectedVintage?.creditClassVersionByCreditClassVersionIdAndCreditClassVersionCreatedAt) {
-        const selectedCredit =
-          selectedVintage.creditClassVersionByCreditClassVersionIdAndCreditClassVersionCreatedAt;
-        setCreditName(selectedCredit.name);
-      }
+      // TODO: the following throws a type error and doesn't seem to exist on vintages, but I want to check before deleting
+      // if (selectedVintage?.creditClassVersionByCreditClassVersionIdAndCreditClassVersionCreatedAt) {
+      //   const selectedCredit =
+      //     selectedVintage.creditClassVersionByCreditClassVersionIdAndCreditClassVersionCreatedAt;
+      //   setCreditName(selectedCredit.name);
+      // }
     }
   };
 
@@ -116,9 +109,9 @@ function CreditsRetire(): JSX.Element {
       const selectedParty = partiesData.allParties.nodes.find(
         (party: any) => party.walletId === event.target.value,
       );
-      setAddressId(selectedParty.addressId);
-      setBuyerName(selectedParty.name);
-      setBuyerAddress(selectedParty.addressByAddressId.feature.place_name);
+      setAddressId(selectedParty?.addressId);
+      setBuyerName(selectedParty?.name || '');
+      setBuyerAddress(selectedParty?.addressByAddressId?.feature.place_name);
     }
   };
 
@@ -132,10 +125,10 @@ function CreditsRetire(): JSX.Element {
   }
 
   return (
-    <div className={classes.root}>
+    <div className={styles.root}>
       <Title variant="h1">Retire Credits</Title>
       <form
-        className={classes.form}
+        className={styles.form}
         onSubmit={async e => {
           e.preventDefault();
           if (!units) {
@@ -163,7 +156,7 @@ function CreditsRetire(): JSX.Element {
         noValidate
         autoComplete="off"
       >
-        <FormControl className={classes.formControl}>
+        <FormControl className={styles.formControl}>
           <InputLabel required id="credit-vintage-select-label">
             Credit Vintage
           </InputLabel>
@@ -183,7 +176,7 @@ function CreditsRetire(): JSX.Element {
               ))}
           </Select>
         </FormControl>
-        <FormControl className={classes.formControl}>
+        <FormControl className={styles.formControl}>
           <InputLabel required id="buyer-wallet-select-label">
             Buyer
           </InputLabel>
@@ -197,9 +190,9 @@ function CreditsRetire(): JSX.Element {
             {partiesData &&
               partiesData.allParties &&
               partiesData.allParties.nodes.map(
-                (node: any) =>
-                  node.walletId &&
-                  node.addressId &&
+                node =>
+                  node?.walletId &&
+                  node?.addressId &&
                   (!vintage ||
                     (vintage &&
                       vintage.projectByProjectId.developerId !== node.id &&
@@ -212,7 +205,7 @@ function CreditsRetire(): JSX.Element {
               )}
           </Select>
         </FormControl>
-        <Button disabled={!units} className={classes.button} variant="contained" type="submit">
+        <Button disabled={!units} className={styles.button} variant="contained" type="submit">
           Retire
         </Button>
       </form>

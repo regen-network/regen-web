@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -65,7 +65,7 @@ interface Result {
 }
 
 const CreditsTransfer: React.FC<{ buyerId?: string }> = ({ buyerId = '' }) => {
-  const classes = useStyles();
+  const styles = useStyles();
 
   const [transferCredits, { data, loading, error }] = useTransferCreditsMutation({
     errorPolicy: 'ignore',
@@ -79,7 +79,12 @@ const CreditsTransfer: React.FC<{ buyerId?: string }> = ({ buyerId = '' }) => {
     errorPolicy: 'ignore',
   });
 
-  const { data: partiesData, loading: partiesLoading, error: partiesError } = useAllPartiesQuery({
+  const {
+    data: partiesData,
+    loading: partiesLoading,
+    error: partiesError,
+    refetch: refetchParties,
+  } = useAllPartiesQuery({
     errorPolicy: 'ignore',
   });
 
@@ -94,6 +99,15 @@ const CreditsTransfer: React.FC<{ buyerId?: string }> = ({ buyerId = '' }) => {
   const [units, setUnits] = useState(1);
   const [creditPrice, setCreditPrice] = useState(1);
   const [showResult, setShowResult] = useState(false);
+
+  useEffect(() => {
+    if (buyerId && buyerId !== buyerWalletId) {
+      setBuyerWalletId(buyerId);
+    }
+    if (!partiesData?.allParties?.nodes?.find(node => node?.id === buyerId)) {
+      refetchParties();
+    }
+  }, [buyerId]);
 
   const { data: availableCreditsData, refetch: refetchAvailableCredits } = useGetAvailableCreditsQuery({
     errorPolicy: 'ignore',
@@ -182,10 +196,10 @@ const CreditsTransfer: React.FC<{ buyerId?: string }> = ({ buyerId = '' }) => {
   }
 
   return (
-    <div className={classes.root}>
+    <div className={styles.root}>
       <Title variant="h1">Transfer Credits</Title>
       <form
-        className={classes.form}
+        className={styles.form}
         onSubmit={async e => {
           e.preventDefault();
           const confirmAlert = window.confirm('Are you sure you want to transfer credits?');
@@ -220,7 +234,7 @@ const CreditsTransfer: React.FC<{ buyerId?: string }> = ({ buyerId = '' }) => {
         noValidate
         autoComplete="off"
       >
-        <FormControl className={classes.formControl}>
+        <FormControl className={styles.formControl}>
           <InputLabel required id="credit-vintage-select-label">
             Credit Vintage
           </InputLabel>
@@ -240,7 +254,7 @@ const CreditsTransfer: React.FC<{ buyerId?: string }> = ({ buyerId = '' }) => {
               ))}
           </Select>
         </FormControl>
-        <FormControl className={classes.formControl}>
+        <FormControl className={styles.formControl}>
           <InputLabel required id="buyer-wallet-select-label">
             Buyer
           </InputLabel>
@@ -269,7 +283,7 @@ const CreditsTransfer: React.FC<{ buyerId?: string }> = ({ buyerId = '' }) => {
               )}
           </Select>
         </FormControl>
-        <FormControl className={classes.formControl}>
+        <FormControl className={styles.formControl}>
           <InputLabel required id="party-id-select-label">
             Entity doing this transfer
           </InputLabel>
@@ -297,7 +311,7 @@ const CreditsTransfer: React.FC<{ buyerId?: string }> = ({ buyerId = '' }) => {
               )}
           </Select>
         </FormControl>
-        <FormControl className={classes.formControl}>
+        <FormControl className={styles.formControl}>
           <InputLabel required id="user-id-select-label">
             User doing this transfer on behalf of the entity
           </InputLabel>
@@ -327,7 +341,7 @@ const CreditsTransfer: React.FC<{ buyerId?: string }> = ({ buyerId = '' }) => {
           </Select>
         </FormControl>
         <TextField
-          className={classes.input}
+          className={styles.input}
           required
           type="number"
           value={units}
@@ -340,7 +354,7 @@ const CreditsTransfer: React.FC<{ buyerId?: string }> = ({ buyerId = '' }) => {
           label="Units"
         />
         <TextField
-          className={classes.input}
+          className={styles.input}
           required
           type="number"
           value={creditPrice}
@@ -352,7 +366,7 @@ const CreditsTransfer: React.FC<{ buyerId?: string }> = ({ buyerId = '' }) => {
           }}
           label="Credit price"
         />
-        <Button className={classes.button} variant="contained" type="submit">
+        <Button className={styles.button} variant="contained" type="submit">
           Transfer
         </Button>
       </form>

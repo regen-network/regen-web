@@ -10,7 +10,7 @@ import { useShaclGraphByUriQuery } from '../../generated/graphql';
 import { validate, getProjectPageBaseData } from '../../lib/rdf';
 
 export interface ProjectLocationFormValues {
-  'http://regen.network/location': string;
+  'http://schema.org/location': string;
 }
 
 const ProjectLocationForm: React.FC<{
@@ -20,16 +20,17 @@ const ProjectLocationForm: React.FC<{
 }> = ({ submit, initialValues, mapToken }) => {
   const { data: graphData } = useShaclGraphByUriQuery({
     variables: {
-      uri: 'http://regen.network/location',
+      uri: 'http://regen.network/ProjectPageShape',
     },
   });
+  console.log('graphData >>', graphData);
 
   return (
     <Formik
       enableReinitialize
       validateOnMount
       initialValues={{
-        'http://regen.network/location': initialValues?.['http://regen.network/location'] || '',
+        'http://schema.org/location': initialValues?.['http://schema.org/location'] || '',
       }}
       validate={async (values: ProjectLocationFormValues) => {
         const errors: FormikErrors<ProjectLocationFormValues> = {};
@@ -38,7 +39,7 @@ const ProjectLocationForm: React.FC<{
           const report = await validate(
             graphData.shaclGraphByUri.graph,
             projectPageData,
-            'http://regen.network/location',
+            'http://schema.org/location',
           );
           for (const result of report.results) {
             const path: keyof ProjectLocationFormValues = result.path.value;
@@ -66,7 +67,7 @@ const ProjectLocationForm: React.FC<{
                 label="Location"
                 description="Type an address or latitude/longitude coordinates. This is the location that will appear in the project contracts, and on your project page."
                 placeholder="Start typing the location"
-                name="['http://regen.network/location']"
+                name="['http://schema.org/location']"
                 token={mapToken}
               />
             </OnBoardingCard>

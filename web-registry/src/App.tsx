@@ -14,7 +14,6 @@ import {
   // Additionality,
   // Eligibility,
   // GettingStarted,
-  // Home,
   Admin,
   BasicInfo,
   BuyerCreate,

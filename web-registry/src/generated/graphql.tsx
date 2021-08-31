@@ -4942,23 +4942,6 @@ export type GetUserFirstOrganizationPayloadOrganizationEdgeArgs = {
   orderBy?: Maybe<Array<OrganizationsOrderBy>>;
 };
 
-/** All input for the `getUserOrganizations` mutation. */
-export type GetUserOrganizationsInput = {
-  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
-  clientMutationId?: Maybe<Scalars['String']>;
-  userId: Scalars['UUID'];
-};
-
-/** The output of our `getUserOrganizations` mutation. */
-export type GetUserOrganizationsPayload = {
-  __typename?: 'GetUserOrganizationsPayload';
-  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
-  clientMutationId?: Maybe<Scalars['String']>;
-  organizations?: Maybe<Array<Maybe<Organization>>>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query?: Maybe<Query>;
-};
-
 /** All input for the `getWalletContactEmail` mutation. */
 export type GetWalletContactEmailInput = {
   /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
@@ -5678,7 +5661,6 @@ export type Mutation = {
   createUserOrganization?: Maybe<CreateUserOrganizationPayload>;
   createUserOrganizationIfNeeded?: Maybe<CreateUserOrganizationIfNeededPayload>;
   getUserFirstOrganization?: Maybe<GetUserFirstOrganizationPayload>;
-  getUserOrganizations?: Maybe<GetUserOrganizationsPayload>;
   getWalletContactEmail?: Maybe<GetWalletContactEmailPayload>;
   isAdmin?: Maybe<IsAdminPayload>;
   issueCredits?: Maybe<IssueCreditsPayload>;
@@ -5688,8 +5670,6 @@ export type Mutation = {
   reallyCreateUserIfNeeded?: Maybe<ReallyCreateUserIfNeededPayload>;
   retireCredits?: Maybe<RetireCreditsPayload>;
   sendTransferCreditsConfirmation?: Maybe<SendTransferCreditsConfirmationPayload>;
-  test?: Maybe<TestPayload>;
-  testFn?: Maybe<TestFnPayload>;
   transferCredits?: Maybe<TransferCreditsPayload>;
 };
 
@@ -6583,12 +6563,6 @@ export type MutationGetUserFirstOrganizationArgs = {
 
 
 /** The root mutation type which contains root level fields which mutate data. */
-export type MutationGetUserOrganizationsArgs = {
-  input: GetUserOrganizationsInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
 export type MutationGetWalletContactEmailArgs = {
   input: GetWalletContactEmailInput;
 };
@@ -6639,18 +6613,6 @@ export type MutationRetireCreditsArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationSendTransferCreditsConfirmationArgs = {
   input: SendTransferCreditsConfirmationInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationTestArgs = {
-  input: TestInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationTestFnArgs = {
-  input: TestFnInput;
 };
 
 
@@ -6962,8 +6924,6 @@ export enum PartiesOrderBy {
   AddressIdDesc = 'ADDRESS_ID_DESC',
   RolesAsc = 'ROLES_ASC',
   RolesDesc = 'ROLES_DESC',
-  DescrAsc = 'DESCR_ASC',
-  DescrDesc = 'DESCR_DESC',
   DescriptionAsc = 'DESCRIPTION_ASC',
   DescriptionDesc = 'DESCRIPTION_DESC',
   ImageAsc = 'IMAGE_ASC',
@@ -6984,7 +6944,6 @@ export type Party = Node & {
   walletId?: Maybe<Scalars['UUID']>;
   addressId?: Maybe<Scalars['UUID']>;
   roles?: Maybe<Array<Maybe<Scalars['String']>>>;
-  descr?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   image?: Maybe<Scalars['String']>;
   /** Reads a single `Wallet` that is related to this `Party`. */
@@ -7802,8 +7761,6 @@ export type PartyCondition = {
   addressId?: Maybe<Scalars['UUID']>;
   /** Checks for equality with the object’s `roles` field. */
   roles?: Maybe<Array<Maybe<Scalars['String']>>>;
-  /** Checks for equality with the object’s `descr` field. */
-  descr?: Maybe<Scalars['String']>;
   /** Checks for equality with the object’s `description` field. */
   description?: Maybe<Scalars['String']>;
   /** Checks for equality with the object’s `image` field. */
@@ -8036,7 +7993,6 @@ export type PartyInput = {
   walletId?: Maybe<Scalars['UUID']>;
   addressId?: Maybe<Scalars['UUID']>;
   roles?: Maybe<Array<Maybe<Scalars['String']>>>;
-  descr?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   image?: Maybe<Scalars['String']>;
 };
@@ -8375,7 +8331,6 @@ export type PartyPatch = {
   walletId?: Maybe<Scalars['UUID']>;
   addressId?: Maybe<Scalars['UUID']>;
   roles?: Maybe<Array<Maybe<Scalars['String']>>>;
-  descr?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   image?: Maybe<Scalars['String']>;
 };
@@ -11782,38 +11737,6 @@ export enum ShaclGraphsOrderBy {
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
-
-/** All input for the `testFn` mutation. */
-export type TestFnInput = {
-  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
-  clientMutationId?: Maybe<Scalars['String']>;
-};
-
-/** The output of our `testFn` mutation. */
-export type TestFnPayload = {
-  __typename?: 'TestFnPayload';
-  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
-  clientMutationId?: Maybe<Scalars['String']>;
-  json?: Maybe<Scalars['JSON']>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query?: Maybe<Query>;
-};
-
-/** All input for the `test` mutation. */
-export type TestInput = {
-  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
-  clientMutationId?: Maybe<Scalars['String']>;
-};
-
-/** The output of our `test` mutation. */
-export type TestPayload = {
-  __typename?: 'TestPayload';
-  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
-  clientMutationId?: Maybe<Scalars['String']>;
-  json?: Maybe<Scalars['JSON']>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query?: Maybe<Query>;
-};
 
 export type Transaction = Node & {
   __typename?: 'Transaction';

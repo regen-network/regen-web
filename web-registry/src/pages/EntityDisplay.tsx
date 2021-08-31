@@ -31,9 +31,17 @@ const EntityDisplay: React.FC = () => {
     projectById: {
       metadata: {
         'regen:landOwner': {
+          '@type': 'regen:Organization',
           'regen:EntityDisplayShape-showOnProjectPage': false,
           legalName: 'WYELBA test',
           name: '',
+          logo: '',
+          description: '',
+        },
+        'regen:landSteward': {
+          '@type': 'regen:Individual',
+          'regen:EntityDisplayShape-showOnProjectPage': false,
+          name: 'Joe Doe',
           logo: '',
           description: '',
         },
@@ -47,7 +55,7 @@ const EntityDisplay: React.FC = () => {
 
     initialFieldValues = {
       'regen:landOwner': metadata['regen:landOwner'],
-      // 'regen:landSteward': metadata['regen:landSteward'],
+      'regen:landSteward': metadata['regen:landSteward'],
       // 'regen:projectDeveloper': metadata['regen:projectDeveloper'],
       // 'regen:projectOriginator': metadata['regen:projectOriginator'],
     };

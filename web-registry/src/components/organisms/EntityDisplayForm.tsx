@@ -131,6 +131,93 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialVa
   const styles = useStyles();
   const theme = useTheme();
 
+  const getToggle = (entity: any, fieldName: string, handleChange: any, values: any): JSX.Element | null => {
+    if (entity['@type'] === 'regen:Individual') {
+      return <IndividualFormlet fieldName={fieldName} handleChange={handleChange} values={values} />;
+    } else if (entity['@type'] === 'regen:Organization') {
+      return <OrganizationFormlet fieldName={fieldName} handleChange={handleChange} values={values} />;
+    }
+    return null;
+  };
+
+  const OrganizationFormlet: React.FC<any> = ({ handleChange, values, fieldName }) => {
+    return (
+      <Field
+        className={styles.field}
+        label={values[fieldName].legalName}
+        type="checkbox"
+        component={Toggle}
+        onChange={handleChange}
+        name={`[${fieldName}].['regen:EntityDisplayShape-showOnProjectPage']`}
+        checked={!!values[fieldName]?.['regen:EntityDisplayShape-showOnProjectPage']}
+        activeContent={
+          <div className={styles.activeContent}>
+            <Field
+              className={styles.field}
+              component={ControlledTextField}
+              name={`[${fieldName}].name`}
+              label="Organization display name"
+              optional
+              placeholder="i.e. Cherrybrook Farms"
+            />
+            <Field
+              className={styles.field}
+              component={ImageField}
+              label="Organization logo"
+              name={`[${fieldName}].logo`}
+              fallbackAvatar={
+                <OrganizationIcon className={styles.organizationIcon} color={theme.palette.info.main} />
+              }
+            />
+            <Field
+              charLimit={160}
+              component={ControlledTextField}
+              label="Short organization description"
+              name={`[${fieldName}].description`}
+              rows={4}
+              multiline
+            />
+          </div>
+        }
+      />
+    );
+  };
+
+  const IndividualFormlet: React.FC<any> = ({ handleChange, values, fieldName }) => {
+    return (
+      <Field
+        className={styles.field}
+        classes={{ description: styles.toggleDescription }}
+        label={values[fieldName].name}
+        description="recommended to increase salability"
+        type="checkbox"
+        component={Toggle}
+        onChange={handleChange}
+        name={`[${fieldName}].['regen:EntityDisplayShape-showOnProjectPage']`}
+        checked={!!values[fieldName]?.['regen:EntityDisplayShape-showOnProjectPage']}
+        activeContent={
+          <div className={styles.activeContent}>
+            <Field
+              className={styles.field}
+              component={ImageField}
+              label="Bio photo"
+              name={`[${fieldName}].photo`}
+            />
+            <Field
+              charLimit={160}
+              component={ControlledTextField}
+              label="Short personal description"
+              description="Describe any relevant background and experience."
+              name={`[${fieldName}].description`}
+              rows={4}
+              multiline
+            />
+          </div>
+        }
+      />
+    );
+  };
+
   console.log('initialValues', initialValues);
 
   return (
@@ -272,75 +359,19 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialVa
                   </Link>
                 </Description>
 
-                {values['regen:landOwner'] && (
-                  <Field
-                    className={styles.field}
-                    label={values['regen:landOwner'].legalName}
-                    type="checkbox"
-                    component={Toggle}
-                    onChange={handleChange}
-                    name="['regen:landOwner'].['regen:EntityDisplayShape-showOnProjectPage']"
-                    checked={!!values['regen:landOwner']?.['regen:EntityDisplayShape-showOnProjectPage']}
-                    activeContent={
-                      <div className={styles.activeContent}>
-                        <Field
-                          className={styles.field}
-                          component={ControlledTextField}
-                          name="['regen:landOwner'].name"
-                          label="Organization display name"
-                          optional
-                          placeholder="i.e. Cherrybrook Farms"
-                        />
-                        <Field
-                          className={styles.field}
-                          component={ImageField}
-                          label="Organization logo"
-                          name="['regen:landOwner'].logo"
-                          fallbackAvatar={
-                            <OrganizationIcon
-                              className={styles.organizationIcon}
-                              color={theme.palette.info.main}
-                            />
-                          }
-                        />
-                        <Field
-                          charLimit={160}
-                          component={ControlledTextField}
-                          label="Short organization description"
-                          name="['regen:landOwner'].description"
-                          rows={4}
-                          multiline
-                        />
-                      </div>
-                    }
-                  />
-                )}
-
-                {/* <Field
-                  className={styles.field}
-                  classes={{ description: styles.toggleDescription }}
-                  label="a person"
-                  description="recommended to increase salability"
-                  type="checkbox"
-                  component={Toggle}
-                  onChange={handleChange}
-                  name="checkMe2"
-                  checked={!!values.checkMe2}
-                  activeContent={
-                    <div className={styles.activeContent}>
-                      <Field className={styles.field} component={ImageField} label="Bio photo" name="photo" />
-                      <Field
-                        charLimit={160}
-                        component={ControlledTextField}
-                        label="Short personal description"
-                        description="Describe any relevant background and experience."
-                        name="['http://regen.network/landStewardStory']"
-                        rows={4}
-                        multiline
-                      />
-                    </div>
-                  }
-                /> */}
+                {values['regen:landOwner'] &&
+                  getToggle(values['regen:landOwner'], 'regen:landOwner', handleChange, values)}
+                {values['regen:landSteward'] &&
+                  getToggle(values['regen:landSteward'], 'regen:landSteward', handleChange, values)}
+                {values['regen:projectDeveloper'] &&
+                  getToggle(values['regen:projectDeveloper'], 'regen:projectDeveloper', handleChange, values)}
+                {values['regen:projectOriginator'] &&
+                  getToggle(
+                    values['regen:projectOriginator'],
+                    'regen:projectOriginator',
+                    handleChange,
+                    values,
+                  )}
               </OnBoardingCard>
 
               <OnboardingFooter

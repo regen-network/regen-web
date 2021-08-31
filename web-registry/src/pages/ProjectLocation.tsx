@@ -1,11 +1,11 @@
 import React from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 
-import { BasicInfoForm, BasicInfoFormValues } from '../components/organisms';
+import { ProjectLocationForm, ProjectLocationFormValues } from '../components/organisms';
 import { OnboardingFormTemplate } from '../components/templates';
 import { useProjectByIdQuery, useUpdateProjectByIdMutation } from '../generated/graphql';
 
-const BasicInfo: React.FC = () => {
+const ProjectLocation: React.FC = () => {
   const history = useHistory();
   const { projectId } = useParams<{ projectId: string }>();
 
@@ -14,12 +14,11 @@ const BasicInfo: React.FC = () => {
     variables: { id: projectId },
   });
 
-  let initialFieldValues: BasicInfoFormValues | undefined;
+  let initialFieldValues: any | undefined;
   if (data?.projectById?.metadata) {
     const metadata = data.projectById.metadata;
     initialFieldValues = {
-      'http://schema.org/name': metadata['http://schema.org/name'],
-      'http://regen.network/size': metadata['http://regen.network/size'],
+      'http://schema.org/location': metadata['http://schema.org/location'],
     };
   }
 
@@ -27,7 +26,7 @@ const BasicInfo: React.FC = () => {
     // TODO: functionality
   }
 
-  async function submit(values: BasicInfoFormValues): Promise<void> {
+  async function submit(values: ProjectLocationFormValues): Promise<void> {
     const metadata = { ...data?.projectById?.metadata, ...values };
     try {
       await updateProject({
@@ -40,7 +39,7 @@ const BasicInfo: React.FC = () => {
           },
         },
       });
-      history.push(`/project-pages/${projectId}/location`);
+      history.push(`/project-pages/${projectId}/roles`);
     } catch (e) {
       // TODO: Should we display the error banner here?
       // https://github.com/regen-network/regen-registry/issues/555
@@ -49,10 +48,14 @@ const BasicInfo: React.FC = () => {
   }
 
   return (
-    <OnboardingFormTemplate activeStep={0} title="Basic Info" saveAndExit={saveAndExit}>
-      <BasicInfoForm submit={submit} initialValues={initialFieldValues} />
+    <OnboardingFormTemplate activeStep={0} title="Location" saveAndExit={saveAndExit}>
+      <ProjectLocationForm
+        submit={submit}
+        mapToken={process.env.REACT_APP_MAPBOX_TOKEN as string}
+        initialValues={initialFieldValues}
+      />
     </OnboardingFormTemplate>
   );
 };
 
-export { BasicInfo };
+export { ProjectLocation };

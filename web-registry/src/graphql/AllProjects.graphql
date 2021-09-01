@@ -3,6 +3,28 @@ query AllProjects {
     nodes {
       id
       name
+      creditClassByCreditClassId {
+        id
+        methodologyByMethodologyId {
+          id
+          methodologyVersionsById {
+            nodes {
+              id
+              createdAt
+              name
+              version
+            }
+          }
+        }
+        creditClassVersionsById {
+          nodes {
+            id
+            createdAt
+            name
+            version
+          }
+        }
+      }
     }
   }
 }

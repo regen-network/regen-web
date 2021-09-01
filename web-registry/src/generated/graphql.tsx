@@ -15479,6 +15479,27 @@ export type AllProjectsQuery = (
     & { nodes: Array<Maybe<(
       { __typename?: 'Project' }
       & Pick<Project, 'id' | 'name'>
+      & { creditClassByCreditClassId?: Maybe<(
+        { __typename?: 'CreditClass' }
+        & Pick<CreditClass, 'id'>
+        & { methodologyByMethodologyId?: Maybe<(
+          { __typename?: 'Methodology' }
+          & Pick<Methodology, 'id'>
+          & { methodologyVersionsById: (
+            { __typename?: 'MethodologyVersionsConnection' }
+            & { nodes: Array<Maybe<(
+              { __typename?: 'MethodologyVersion' }
+              & Pick<MethodologyVersion, 'id' | 'createdAt' | 'name' | 'version'>
+            )>> }
+          ) }
+        )>, creditClassVersionsById: (
+          { __typename?: 'CreditClassVersionsConnection' }
+          & { nodes: Array<Maybe<(
+            { __typename?: 'CreditClassVersion' }
+            & Pick<CreditClassVersion, 'id' | 'createdAt' | 'name' | 'version'>
+          )>> }
+        ) }
+      )> }
     )>> }
   )> }
 );
@@ -16414,6 +16435,28 @@ export const AllProjectsDocument = gql`
     nodes {
       id
       name
+      creditClassByCreditClassId {
+        id
+        methodologyByMethodologyId {
+          id
+          methodologyVersionsById {
+            nodes {
+              id
+              createdAt
+              name
+              version
+            }
+          }
+        }
+        creditClassVersionsById {
+          nodes {
+            id
+            createdAt
+            name
+            version
+          }
+        }
+      }
     }
   }
 }

@@ -18,21 +18,17 @@ import ProjectTopCard from 'web-components/lib/components/cards/ProjectTopCard';
 interface EntityDisplayFormProps {
   submit: (values: EntityDisplayValues) => Promise<void>;
   initialValues?: EntityDisplayValues;
-  // landOwner?: OrganizationDisplayShape | IndividualDisplayShape;
-  // landSteward?: OrganizationDisplayShape | IndividualDisplayShape;
-  // projectDeveloper?: OrganizationDisplayShape | IndividualDisplayShape;
-  // projectOriginator?: OrganizationDisplayShape | IndividualDisplayShape;
 }
 
 export interface EntityDisplayValues {
-  'regen:landOwner'?: OrganizationDisplayShape | IndividualDisplayShape;
-  'regen:landSteward'?: OrganizationDisplayShape | IndividualDisplayShape;
-  'regen:projectDeveloper'?: OrganizationDisplayShape | IndividualDisplayShape;
-  'regen:projectOriginator'?: OrganizationDisplayShape | IndividualDisplayShape;
+  'http://regen.network/landOwner'?: OrganizationDisplayShape | IndividualDisplayShape;
+  'http://regen.network/landSteward'?: OrganizationDisplayShape | IndividualDisplayShape;
+  'http://regen.network/projectDeveloper'?: OrganizationDisplayShape | IndividualDisplayShape;
+  'http://regen.network/projectOriginator'?: OrganizationDisplayShape | IndividualDisplayShape;
 }
 
 export interface OrganizationDisplayShape {
-  'regen:EntityDisplayShape-showOnProjectPage': boolean;
+  'http://regen.network/EntityDisplayShape-showOnProjectPage': boolean;
   legalName?: string;
   name?: string;
   logo?: string;
@@ -40,7 +36,7 @@ export interface OrganizationDisplayShape {
 }
 
 export interface IndividualDisplayShape {
-  'regen:EntityDisplayShape-showOnProjectPage': boolean;
+  'http://regen.network/EntityDisplayShape-showOnProjectPage': boolean;
   legalName?: string;
   name?: string;
   image?: string;
@@ -48,7 +44,7 @@ export interface IndividualDisplayShape {
 }
 
 // export interface EntityDisplayValues {
-//   'regen:EntityDisplayShape-showOnProjectPage': boolean;
+//   'http://regen.network/EntityDisplayShape-showOnProjectPage': boolean;
 // }
 
 export interface EntityDisplayValuesErrors {
@@ -132,9 +128,9 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialVa
   const theme = useTheme();
 
   const getToggle = (entity: any, fieldName: string, handleChange: any, values: any): JSX.Element | null => {
-    if (entity['@type'] === 'regen:Individual') {
+    if (entity['@type'] === 'http://regen.network/Individual') {
       return <IndividualFormlet fieldName={fieldName} handleChange={handleChange} values={values} />;
-    } else if (entity['@type'] === 'regen:Organization') {
+    } else if (entity['@type'] === 'http://regen.network/Organization') {
       return <OrganizationFormlet fieldName={fieldName} handleChange={handleChange} values={values} />;
     }
     return null;
@@ -144,12 +140,12 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialVa
     return (
       <Field
         className={styles.field}
-        label={values[fieldName].legalName}
+        label={`${values[fieldName].legalName} (${getEntityTypeString(fieldName)})`}
         type="checkbox"
         component={Toggle}
         onChange={handleChange}
-        name={`[${fieldName}].['regen:EntityDisplayShape-showOnProjectPage']`}
-        checked={!!values[fieldName]?.['regen:EntityDisplayShape-showOnProjectPage']}
+        name={`[${fieldName}].['http://regen.network/EntityDisplayShape-showOnProjectPage']`}
+        checked={!!values[fieldName]?.['http://regen.network/EntityDisplayShape-showOnProjectPage']}
         activeContent={
           <div className={styles.activeContent}>
             <Field
@@ -183,18 +179,29 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialVa
     );
   };
 
+  const getEntityTypeString = (fieldName: string): string => {
+    const friendlyNames: any = {
+      'http://regen.network/landOwner': 'land owner',
+      'http://regen.network/landSteward': 'land steward',
+      'http://regen.network/projectDeveloper': 'project developer',
+      'http://regen.network/projectOriginator': 'project originator',
+      default: '',
+    };
+    return friendlyNames[fieldName] || friendlyNames.default;
+  };
+
   const IndividualFormlet: React.FC<any> = ({ handleChange, values, fieldName }) => {
     return (
       <Field
         className={styles.field}
         classes={{ description: styles.toggleDescription }}
-        label={values[fieldName].name}
+        label={`${values[fieldName].name} (${getEntityTypeString(fieldName)})`}
         description="recommended to increase salability"
         type="checkbox"
         component={Toggle}
         onChange={handleChange}
-        name={`[${fieldName}].['regen:EntityDisplayShape-showOnProjectPage']`}
-        checked={!!values[fieldName]?.['regen:EntityDisplayShape-showOnProjectPage']}
+        name={`[${fieldName}].['http://regen.network/EntityDisplayShape-showOnProjectPage']`}
+        checked={!!values[fieldName]?.['http://regen.network/EntityDisplayShape-showOnProjectPage']}
         activeContent={
           <div className={styles.activeContent}>
             <Field
@@ -218,8 +225,6 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialVa
     );
   };
 
-  console.log('initialValues', initialValues);
-
   return (
     <>
       <Formik
@@ -227,10 +232,11 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialVa
         validateOnMount
         initialValues={
           initialValues || {
-            'regen:landOwner': initialValues?.['regen:landOwner'],
-            'regen:landSteward': initialValues?.['regen:landSteward'],
-            'regen:projectDeveloper': initialValues?.['regen:projectDeveloper'],
-            'regen:projectOriginator': initialValues?.['regen:projectOriginator'],
+            'http://regen.network/landOwner': initialValues?.['http://regen.network/landOwner'],
+            'http://regen.network/landSteward': initialValues?.['http://regen.network/landSteward'],
+            'http://regen.network/projectDeveloper': initialValues?.['http://regen.network/projectDeveloper'],
+            'http://regen.network/projectOriginator':
+              initialValues?.['http://regen.network/projectOriginator'],
           }
         }
         onSubmit={async (values, { setSubmitting }) => {
@@ -244,109 +250,6 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialVa
         }}
       >
         {({ submitForm, isValid, isSubmitting, handleChange, values }) => {
-          console.log('values', values);
-
-          // regen:OrganizationDisplayShape
-          //   a sh:NodeShape ;
-          //   sh:targetClass regen:Organization ;
-          //   sh:property regen:EntityDisplayShape-showOnProjectPage ;
-          //   sh:property [
-          //     sh:path schema:name ;
-          //     sh:datatype xsd:string ;
-          //     sh:name "Organization display name" ;
-          //     sh:description "This is the display name on your project page, if you choose to make this entity publically viewable." ;
-          //   ] ;
-          //   sh:property [
-          //     sh:path schema:logo ;
-          //     sh:datatype schema:URL ;
-          //     sh:name "Organization logo" ;
-          //     sh:minCount 1 ;
-          //     sh:maxCount 1 ;
-          //   ] ;
-          //   sh:property [
-          //     sh:path schema:description ;
-          //     sh:datatype xsd:string ;
-          //     sh:name "Short organization description" ;
-          //     sh:minCount 1 ;
-          //     sh:maxCount 1 ;
-          //     sh:maxLength 160 ;
-          //   ] ;
-          // .
-
-          // regen:IndividualDisplayShape
-          //   a sh:NodeShape ;
-          //   sh:targetClass regen:Individual ;
-          //   sh:property regen:EntityDisplayShape-showOnProjectPage ;
-          //   sh:property [
-          //     sh:path schema:image ;
-          //     sh:datatype schema:URL ;
-          //     sh:name "Bio photo" ;
-          //     sh:minCount 1 ;
-          //     sh:maxCount 1 ;
-          //   ] ;
-          //   sh:property [
-          //     sh:path schema:description ;
-          //     sh:datatype xsd:string ;
-          //     sh:name "Short person description" ;
-          //     sh:description "Describe any relevant background and experience." ;
-          //     sh:minCount 1 ;
-          //     sh:maxCount 1 ;
-          //     sh:maxLength 160 ;
-          //   ] ;
-          // .
-
-          // # The following property isn't actually used for validation but could be used for
-          // # form generation later on.
-          // # Indeed, we have a separate form in the UI for choosing which entities to display
-          // # on the project page, but we're actually storing this info as part of regen:landOwner,
-          // # regen:landSteward and regen:projectDeveloper along with the "Roles" info.
-          // sh:property [
-          //   sh:name "Choose the entities to show on the project page:" ;
-          //   sh:description "Showing more entities increases the salability of the project. You must show at least one entity on the project page. These entities can only be edited in the previous step." ;
-          //   sh:group regen:ProjectPageEntityDisplayGroup ;
-          // ] ;
-          // # We should show at least one of the project stakeholders on the project page.
-          // sh:or (
-          //   [
-          //     sh:property [
-          //       sh:path regen:landOwner ;
-          //       sh:minCount 1 ;
-          //       sh:maxCount 1 ;
-          //       sh:xone (
-          //         sh:node regen:IndividualDisplayShape
-          //         sh:node regen:OrganizationDisplayShape
-          //       ) ;
-          //       sh:group regen:ProjectPageEntityDisplayGroup ;
-          //     ]
-          //   ]
-          //   [
-          //     sh:property [
-          //       sh:path regen:landSteward ;
-          //       sh:description "recommended to increase salability" ;
-          //       sh:minCount 1 ;
-          //       sh:maxCount 1 ;
-          //       sh:xone (
-          //         sh:node regen:IndividualDisplayShape
-          //         sh:node regen:OrganizationDisplayShape
-          //       ) ;
-          //       sh:group regen:ProjectPageEntityDisplayGroup ;
-          //     ]
-          //   ]
-          //   [
-          //     sh:property [
-          //       sh:path regen:projectDeveloper ;
-          //       sh:description "recommended to increase salability" ;
-          //       sh:minCount 1 ;
-          //       sh:maxCount 1 ;
-          //       sh:xone (
-          //         sh:node regen:IndividualDisplayShape
-          //         sh:node regen:OrganizationDisplayShape
-          //       ) ;
-          //       sh:group regen:ProjectPageEntityDisplayGroup ;
-          //     ]
-          //   ]
-          // ) ;
-
           return (
             <Form translate="yes">
               <OnBoardingCard>
@@ -359,16 +262,31 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialVa
                   </Link>
                 </Description>
 
-                {values['regen:landOwner'] &&
-                  getToggle(values['regen:landOwner'], 'regen:landOwner', handleChange, values)}
-                {values['regen:landSteward'] &&
-                  getToggle(values['regen:landSteward'], 'regen:landSteward', handleChange, values)}
-                {values['regen:projectDeveloper'] &&
-                  getToggle(values['regen:projectDeveloper'], 'regen:projectDeveloper', handleChange, values)}
-                {values['regen:projectOriginator'] &&
+                {values['http://regen.network/landOwner'] &&
                   getToggle(
-                    values['regen:projectOriginator'],
-                    'regen:projectOriginator',
+                    values['http://regen.network/landOwner'],
+                    'http://regen.network/landOwner',
+                    handleChange,
+                    values,
+                  )}
+                {values['http://regen.network/landSteward'] &&
+                  getToggle(
+                    values['http://regen.network/landSteward'],
+                    'http://regen.network/landSteward',
+                    handleChange,
+                    values,
+                  )}
+                {values['http://regen.network/projectDeveloper'] &&
+                  getToggle(
+                    values['http://regen.network/projectDeveloper'],
+                    'http://regen.network/projectDeveloper',
+                    handleChange,
+                    values,
+                  )}
+                {values['http://regen.network/projectOriginator'] &&
+                  getToggle(
+                    values['http://regen.network/projectOriginator'],
+                    'http://regen.network/projectOriginator',
                     handleChange,
                     values,
                   )}

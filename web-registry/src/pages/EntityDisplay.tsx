@@ -27,34 +27,35 @@ const EntityDisplay: React.FC = () => {
   //   variables: { id: projectId },
   // });
 
+  // TODO: use real data above after UI feedback
   const data = {
     projectById: {
       metadata: {
-        'regen:landOwner': {
-          '@type': 'regen:Organization',
-          'regen:EntityDisplayShape-showOnProjectPage': false,
+        'http://regen.network/landOwner': {
+          '@type': 'http://regen.network/Organization',
+          'http://regen.network/EntityDisplayShape-showOnProjectPage': false,
           legalName: 'WYELBA test',
           name: '',
           logo: '',
           description: '',
         },
-        'regen:landSteward': {
-          '@type': 'regen:Individual',
-          'regen:EntityDisplayShape-showOnProjectPage': false,
+        'http://regen.network/landSteward': {
+          '@type': 'http://regen.network/Individual',
+          'http://regen.network/EntityDisplayShape-showOnProjectPage': false,
           name: 'Joe Doe',
           photo: '',
           description: '',
         },
-        'regen:projectDeveloper': {
-          '@type': 'regen:Individual',
-          'regen:EntityDisplayShape-showOnProjectPage': false,
+        'http://regen.network/projectDeveloper': {
+          '@type': 'http://regen.network/Individual',
+          'http://regen.network/EntityDisplayShape-showOnProjectPage': false,
           name: 'Jane Goodall',
-          logo: '',
+          photo: '',
           description: '',
         },
-        'regen:projectOriginator': {
-          '@type': 'regen:Organization',
-          'regen:EntityDisplayShape-showOnProjectPage': false,
+        'http://regen.network/projectOriginator': {
+          '@type': 'http://regen.network/Organization',
+          'http://regen.network/EntityDisplayShape-showOnProjectPage': false,
           legalName: 'Mad Ag',
           logo: '',
           description: '',
@@ -68,10 +69,10 @@ const EntityDisplay: React.FC = () => {
     const metadata = data.projectById.metadata;
 
     initialFieldValues = {
-      'regen:landOwner': metadata['regen:landOwner'],
-      'regen:landSteward': metadata['regen:landSteward'],
-      'regen:projectDeveloper': metadata['regen:projectDeveloper'],
-      'regen:projectOriginator': metadata['regen:projectOriginator'],
+      'http://regen.network/landOwner': metadata['http://regen.network/landOwner'],
+      'http://regen.network/landSteward': metadata['http://regen.network/landSteward'],
+      'http://regen.network/projectDeveloper': metadata['http://regen.network/projectDeveloper'],
+      'http://regen.network/projectOriginator': metadata['http://regen.network/projectOriginator'],
     };
   }
 

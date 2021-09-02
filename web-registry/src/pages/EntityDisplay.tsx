@@ -25,7 +25,7 @@ const EntityDisplay: React.FC = () => {
   const [updateProject] = useUpdateProjectByIdMutation();
   // const { data } = useProjectByIdQuery({
   //   variables: { id: projectId },
-  // });
+  // }); TODO delete mock data below
 
   // TODO: use real data above after UI feedback
   const data = {
@@ -34,7 +34,7 @@ const EntityDisplay: React.FC = () => {
         'http://regen.network/landOwner': {
           '@type': 'http://regen.network/Organization',
           'http://regen.network/EntityDisplayShape-showOnProjectPage': false,
-          legalName: 'WYELBA test',
+          legalName: 'Wyelba',
           name: '',
           logo: '',
           description: '',
@@ -96,7 +96,7 @@ const EntityDisplay: React.FC = () => {
       });
       // TODO: go to next step
     } catch (e) {
-      // console.log(e);
+      // console.error(e);
     }
   }
 

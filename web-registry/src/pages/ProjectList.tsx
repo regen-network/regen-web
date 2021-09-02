@@ -47,18 +47,23 @@ const ProjectList: React.FC = () => {
     },
   });
 
+  console.log('data', data);
+
+
   const [createProject] = useCreateProjectMutation();
 
   const projects = data?.userByEmail?.projectsByCreatorId.nodes;
-  const isFirstProject: boolean = projects?.length === 0;
+  const isFirstProject: boolean = !projects || projects?.length === 0;
 
   async function submitCreateProject(): Promise<void> {
+
     try {
       const res = await createProject({
         variables: {
           input: {
             project: {
-              creatorId: data?.userByEmail?.id,
+              // creatorId: data?.userByEmail?.id,
+              creatorId: 'e11e06b2-915f-11eb-a373-0ab192efaa7b',
             },
           },
         },
@@ -70,7 +75,7 @@ const ProjectList: React.FC = () => {
     } catch (e) {
       // TODO: Should we display the error banner here?
       // https://github.com/regen-network/regen-registry/issues/555
-      console.log(e);
+      console.error(e);
     }
   }
 

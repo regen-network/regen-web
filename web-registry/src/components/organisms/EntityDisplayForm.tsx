@@ -43,12 +43,8 @@ export interface IndividualDisplayShape {
   description?: string;
 }
 
-// export interface EntityDisplayValues {
-//   'http://regen.network/EntityDisplayShape-showOnProjectPage': boolean;
-// }
-
 export interface EntityDisplayValuesErrors {
-  // 'http://regen.network/landOwner': string;
+  // TODO
 }
 
 const useStyles = makeStyles(theme => ({
@@ -128,30 +124,31 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialVa
   const theme = useTheme();
 
   const getToggle = (entity: any, fieldName: string, handleChange: any, values: any): JSX.Element | null => {
+    const role = fieldName.toString();
     if (entity['@type'] === 'http://regen.network/Individual') {
-      return <IndividualFormlet fieldName={fieldName} handleChange={handleChange} values={values} />;
+      return <IndividualFormlet role={role} handleChange={handleChange} values={values} />;
     } else if (entity['@type'] === 'http://regen.network/Organization') {
-      return <OrganizationFormlet fieldName={fieldName} handleChange={handleChange} values={values} />;
+      return <OrganizationFormlet role={role} handleChange={handleChange} values={values} />;
     }
     return null;
   };
 
-  const OrganizationFormlet: React.FC<any> = ({ handleChange, values, fieldName }) => {
+  const OrganizationFormlet: React.FC<any> = ({ handleChange, values, role }) => {
     return (
       <Field
         className={styles.field}
-        label={`${values[fieldName].legalName} (${getEntityTypeString(fieldName)})`}
+        label={`${values[role].legalName} ${getEntityTypeString(role)}`}
         type="checkbox"
         component={Toggle}
         onChange={handleChange}
-        name={`[${fieldName}].['http://regen.network/EntityDisplayShape-showOnProjectPage']`}
-        checked={!!values[fieldName]?.['http://regen.network/EntityDisplayShape-showOnProjectPage']}
+        name={`['${role}'].['http:\/\/regen\.network\/EntityDisplayShape-showOnProjectPage']`}
+        checked={!!values[role]?.['http://regen.network/EntityDisplayShape-showOnProjectPage']}
         activeContent={
           <div className={styles.activeContent}>
             <Field
               className={styles.field}
               component={ControlledTextField}
-              name={`[${fieldName}].name`}
+              name={`['${role}'].name`}
               label="Organization display name"
               optional
               placeholder="i.e. Cherrybrook Farms"
@@ -160,7 +157,7 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialVa
               className={styles.field}
               component={ImageField}
               label="Organization logo"
-              name={`[${fieldName}].logo`}
+              name={`['${role}'].logo`}
               fallbackAvatar={
                 <OrganizationIcon className={styles.organizationIcon} color={theme.palette.info.main} />
               }
@@ -169,7 +166,7 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialVa
               charLimit={160}
               component={ControlledTextField}
               label="Short organization description"
-              name={`[${fieldName}].description`}
+              name={`['${role}'].description`}
               rows={4}
               multiline
             />
@@ -179,43 +176,32 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialVa
     );
   };
 
-  const getEntityTypeString = (fieldName: string): string => {
-    const friendlyNames: any = {
-      'http://regen.network/landOwner': 'land owner',
-      'http://regen.network/landSteward': 'land steward',
-      'http://regen.network/projectDeveloper': 'project developer',
-      'http://regen.network/projectOriginator': 'project originator',
-      default: '',
-    };
-    return friendlyNames[fieldName] || friendlyNames.default;
-  };
-
-  const IndividualFormlet: React.FC<any> = ({ handleChange, values, fieldName }) => {
+  const IndividualFormlet: React.FC<any> = ({ handleChange, values, role }) => {
     return (
       <Field
         className={styles.field}
         classes={{ description: styles.toggleDescription }}
-        label={`${values[fieldName].name} (${getEntityTypeString(fieldName)})`}
+        label={`${values[role].name} ${getEntityTypeString(role)}`}
         description="recommended to increase salability"
         type="checkbox"
         component={Toggle}
         onChange={handleChange}
-        name={`[${fieldName}].['http://regen.network/EntityDisplayShape-showOnProjectPage']`}
-        checked={!!values[fieldName]?.['http://regen.network/EntityDisplayShape-showOnProjectPage']}
+        name={`['${role}'].['http:\/\/regen\.network\/EntityDisplayShape-showOnProjectPage']`}
+        checked={!!values[role]?.['http://regen.network/EntityDisplayShape-showOnProjectPage']}
         activeContent={
           <div className={styles.activeContent}>
             <Field
               className={styles.field}
               component={ImageField}
               label="Bio photo"
-              name={`[${fieldName}].photo`}
+              name={`[\'${role}\'].photo`}
             />
             <Field
               charLimit={160}
               component={ControlledTextField}
               label="Short personal description"
               description="Describe any relevant background and experience."
-              name={`[${fieldName}].description`}
+              name={`['${role}'].description`}
               rows={4}
               multiline
             />
@@ -223,6 +209,17 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialVa
         }
       />
     );
+  };
+
+  const getEntityTypeString = (shaclRole: string): string => {
+    const friendlyRoles: any = {
+      'http://regen.network/landOwner': '(land owner)',
+      'http://regen.network/landSteward': '(land steward)',
+      'http://regen.network/projectDeveloper': '(project developer)',
+      'http://regen.network/projectOriginator': '(project originator)',
+      default: '',
+    };
+    return friendlyRoles[shaclRole] || friendlyRoles.default;
   };
 
   return (

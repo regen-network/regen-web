@@ -56,7 +56,9 @@ export default function ImageField({
   ...fieldProps
 }: Props): JSX.Element {
   const [initialImage, setInitialImage] = useState('');
+  const styles = useStyles();
   const { form, field } = fieldProps;
+  const inputId = `image-upload-input-${field.name.toString()}`;
 
   function toBase64(file: File): Promise<string | ArrayBuffer | null> {
     return new Promise((resolve, reject) => {
@@ -66,8 +68,6 @@ export default function ImageField({
       reader.onerror = error => reject(error);
     });
   }
-
-  const styles = useStyles();
 
   return (
     <>
@@ -98,9 +98,9 @@ export default function ImageField({
                 }
               }}
               accept="image/*"
-              id="image-upload-input"
+              id={inputId}
             />
-            <label htmlFor="image-upload-input">
+            <label htmlFor={inputId}>
               <OutlinedButton isImageBtn className={styles.button}>
                 Add Image
               </OutlinedButton>

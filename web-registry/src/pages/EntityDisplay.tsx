@@ -6,7 +6,10 @@ import { useParams } from 'react-router-dom';
 import Description from 'web-components/lib/components/description';
 import { OnboardingFormTemplate } from '../components/templates';
 import { EntityDisplayForm, EntityDisplayValues } from '../components/organisms';
-import { useProjectByIdQuery, useUpdateProjectByIdMutation } from '../generated/graphql';
+import {
+  // useProjectByIdQuery, TODO
+  useUpdateProjectByIdMutation,
+} from '../generated/graphql';
 
 const exampleProjectUrl = '/projects/wilmot';
 

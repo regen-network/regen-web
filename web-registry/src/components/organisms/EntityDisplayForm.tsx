@@ -141,7 +141,7 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialVa
         type="checkbox"
         component={Toggle}
         onChange={handleChange}
-        name={`['${role}'].['http:\/\/regen\.network\/EntityDisplayShape-showOnProjectPage']`}
+        name={`['${role}'].['http://regen.network/EntityDisplayShape-showOnProjectPage']`}
         checked={!!values[role]?.['http://regen.network/EntityDisplayShape-showOnProjectPage']}
         activeContent={
           <div className={styles.activeContent}>
@@ -186,7 +186,7 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialVa
         type="checkbox"
         component={Toggle}
         onChange={handleChange}
-        name={`['${role}'].['http:\/\/regen\.network\/EntityDisplayShape-showOnProjectPage']`}
+        name={`['${role}'].['http://regen.network/EntityDisplayShape-showOnProjectPage']`}
         checked={!!values[role]?.['http://regen.network/EntityDisplayShape-showOnProjectPage']}
         activeContent={
           <div className={styles.activeContent}>
@@ -194,7 +194,7 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialVa
               className={styles.field}
               component={ImageField}
               label="Bio photo"
-              name={`[\'${role}\'].photo`}
+              name={`['${role}'].photo`}
             />
             <Field
               charLimit={160}

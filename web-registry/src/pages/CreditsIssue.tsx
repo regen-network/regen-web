@@ -14,6 +14,8 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import { DatePicker } from '@material-ui/pickers';
+import ReactHtmlParser from 'react-html-parser';
 
 import Title from 'web-components/lib/components/title';
 import { useAllProjectsQuery } from '../generated/graphql';
@@ -49,8 +51,12 @@ const useStyles = makeStyles((theme: Theme) => ({
     margin: theme.spacing(1),
     minWidth: 120,
   },
+  datePicker: {
+    display: 'inline-block',
+  },
 }));
 
+// TODO Migrate to use Formik and custom input components
 function CreditsIssue(): JSX.Element {
   const classes = useStyles();
 
@@ -62,13 +68,65 @@ function CreditsIssue(): JSX.Element {
 
   const [projectId, setProjectId] = useState('');
   const [units, setUnits] = useState(10);
+  const [startDate, setStartDate] = useState<Date | null>(null);
+  const [endDate, setEndDate] = useState<Date | null>(null);
+  const [creditClassVersionId, setCreditClassVersionId] = useState<string | null>(null);
+  const [creditClassVersionCreatedAt, setCreditClassVersionCreatedAt] = useState<string | null>(null);
+  const [methodologyVersionId, setMethodologyVersionId] = useState<string | null>(null);
+  const [methodologyVersionCreatedAt, setMethodologyVersionCreatedAt] = useState<string | null>(null);
   const [projectDeveloper, setProjectDeveloper] = useState(100);
   const [landSteward, setLandSteward] = useState(0);
   const [landOwner, setLandOwner] = useState(0);
 
   const handleProjectChange = (event: React.ChangeEvent<{ value: unknown }>): void => {
-    setProjectId(event.target.value as string);
+    const projectId = event.target.value as string;
+    setProjectId(projectId);
+    const project = projectsData?.allProjects?.nodes?.find(node => node?.id === projectId);
+    setCreditClassVersionId(project?.creditClassByCreditClassId?.id);
+    setMethodologyVersionId(project?.creditClassByCreditClassId?.methodologyByMethodologyId?.id);
   };
+
+  const handleCreditClassVersionChange = (event: React.ChangeEvent<{ value: unknown }>): void => {
+    setCreditClassVersionCreatedAt(event.target.value as string);
+  };
+
+  const handleMethodologyVersionChange = (event: React.ChangeEvent<{ value: unknown }>): void => {
+    setMethodologyVersionCreatedAt(event.target.value as string);
+  };
+
+  const creditClassVersionOptions = [];
+  const methodologyVersionOptions = [];
+  if (projectsData?.allProjects?.nodes && projectId) {
+    const project = projectsData.allProjects.nodes.find(node => node?.id === projectId);
+    const node = project;
+    if (node?.creditClassByCreditClassId) {
+      const creditClassVersions = node.creditClassByCreditClassId.creditClassVersionsById?.nodes;
+      if (creditClassVersions) {
+        for (let j = 0; j < creditClassVersions.length; j++) {
+          const cVersion = creditClassVersions[j];
+          if (cVersion) {
+            creditClassVersionOptions.push({
+              label: `${cVersion.name} ${cVersion.version}`,
+              value: cVersion.createdAt,
+            });
+          }
+        }
+      }
+      const methodologyVersions =
+        node.creditClassByCreditClassId.methodologyByMethodologyId?.methodologyVersionsById?.nodes;
+      if (methodologyVersions) {
+        for (let k = 0; k < methodologyVersions.length; k++) {
+          const mVersion = methodologyVersions[k];
+          if (mVersion) {
+            methodologyVersionOptions.push({
+              label: `${mVersion.name} ${mVersion.version}`,
+              value: mVersion.createdAt,
+            });
+          }
+        }
+      }
+    }
+  }
 
   if (projectsLoading) return <div>Loading projects...</div>;
   if (projectsError) return <div>Error! ${projectsError.message}</div>;
@@ -86,10 +144,16 @@ function CreditsIssue(): JSX.Element {
                 input: {
                   projectId,
                   units,
+                  creditClassVersionId,
+                  creditClassVersionCreatedAt,
+                  methodologyVersionId,
+                  methodologyVersionCreatedAt,
+                  startDate,
+                  endDate,
                   initialDistribution: {
-                    projectDeveloper: projectDeveloper / 100,
-                    landSteward: landSteward / 100,
-                    landOwner: landOwner / 100,
+                    'http://regen.network/projectDeveloperDistribution': projectDeveloper / 100,
+                    'http://regen.network/landStewardDistribution': landSteward / 100,
+                    'http://regen.network/landOwnerDistribution': landOwner / 100,
                   },
                 },
               },
@@ -107,13 +171,48 @@ function CreditsIssue(): JSX.Element {
             value={projectId}
             onChange={handleProjectChange}
           >
-            {projectsData &&
-              projectsData.allProjects &&
-              projectsData.allProjects.nodes.map((node: any) => (
-                <MenuItem key={node.id} value={node.id}>
-                  {node.name}
-                </MenuItem>
-              ))}
+            {projectsData?.allProjects?.nodes.map(node => {
+              if (node) {
+                return (
+                  <MenuItem key={node.id} value={node.id}>
+                    {node.name}
+                  </MenuItem>
+                );
+              }
+              return null;
+            })}
+          </Select>
+        </FormControl>
+        <FormControl className={classes.formControl}>
+          <InputLabel id="credit-class-version-select-label">Credit Class Version</InputLabel>
+          <Select
+            labelId="credit-class-version-select-label"
+            id="credit-class-version-select"
+            value={creditClassVersionCreatedAt}
+            onChange={handleCreditClassVersionChange}
+            disabled={!projectId}
+          >
+            {creditClassVersionOptions.map(node => (
+              <MenuItem key={node.label} value={node.value}>
+                {ReactHtmlParser(node.label)}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+        <FormControl className={classes.formControl}>
+          <InputLabel id="methodology-version-select-label">Methodology Version</InputLabel>
+          <Select
+            labelId="methodology-version-select-label"
+            id="methodology-version-select"
+            value={methodologyVersionCreatedAt}
+            onChange={handleMethodologyVersionChange}
+            disabled={!projectId}
+          >
+            {methodologyVersionOptions.map(node => (
+              <MenuItem key={node.label} value={node.value}>
+                {ReactHtmlParser(node.label)}
+              </MenuItem>
+            ))}
           </Select>
         </FormControl>
         {/*<TextField
@@ -123,12 +222,42 @@ function CreditsIssue(): JSX.Element {
           onChange={e => setIssuerPartyId(e.target.value)}
           label="Issuer id"
         />*/}
+        <div className={classes.datePicker}>
+          <InputLabel id="project-select-label">Start Date</InputLabel>
+          <DatePicker
+            autoOk
+            variant="inline"
+            openTo="year"
+            className={classes.input}
+            placeholder="Click to choose a date"
+            views={['year', 'month']}
+            value={startDate}
+            onChange={date => setStartDate(date)}
+            error={false}
+            InputProps={{ disableUnderline: true }}
+          />
+        </div>
+        <div className={classes.datePicker}>
+          <InputLabel id="project-select-label">End Date</InputLabel>
+          <DatePicker
+            autoOk
+            variant="inline"
+            openTo="year"
+            className={classes.input}
+            placeholder="Click to choose a date"
+            views={['year', 'month']}
+            value={endDate}
+            onChange={date => setEndDate(date)}
+            error={false}
+            InputProps={{ disableUnderline: true }}
+          />
+        </div>
         <TextField
           className={classes.input}
           required
           type="number"
           value={units}
-          onChange={e => setUnits(parseInt(e.target.value))}
+          onChange={e => setUnits(parseFloat(e.target.value))}
           label="Units"
         />
         <div className={classes.ownershipTitle}>Ownership breakdown (%):</div>

@@ -1,6 +1,7 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
+import cx from 'clsx';
 
 import Card from './Card';
 import Title from '../title';
@@ -13,6 +14,10 @@ export interface SDG {
 }
 
 interface ProjectTopCardProps {
+  classes?: {
+    root?: string;
+    userInfo?: string;
+  };
   projectDeveloper?: User;
   landSteward?: User;
   landOwner?: User;
@@ -21,8 +26,8 @@ interface ProjectTopCardProps {
   sdgs?: SDG[];
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
-  container: {
+const useStyles = makeStyles(theme => ({
+  root: {
     backgroundColor: theme.palette.grey[50],
     [theme.breakpoints.down('xs')]: {
       padding: `${theme.spacing(8)} ${theme.spacing(7.5)} ${theme.spacing(9)}`,
@@ -108,6 +113,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 export default function ProjectTopCard({
+  classes,
   projectDeveloper,
   landSteward,
   landOwner,
@@ -115,61 +121,59 @@ export default function ProjectTopCard({
   reseller,
   sdgs,
 }: ProjectTopCardProps): JSX.Element {
-  const classes = useStyles({});
+  const styles = useStyles();
   return (
-    <Card>
-      <div className={classes.container}>
-        {sdgs && (
-          <div className={classes.sdgs}>
-            <Title className={classes.sdg} variant="h3">
-              SDGs
-            </Title>
-            <Grid container>
-              {sdgs.map((sdg: SDG, index: number) => (
-                <Grid className={classes.sdgGridItem} key={index} item xs={6}>
-                  <img className={classes.image} alt={sdg.imageUrl} src={sdg.imageUrl} />
-                </Grid>
-                // Previous layout version, keep it here in case we wanna use it in the future
-                // <Grid key={index} className={classes.sdgGrid} container wrap="nowrap" alignItems="center">
-                //   <Grid item>
-                //     <img className={classes.image} alt={sdg.imageUrl} src={sdg.imageUrl} />
-                //   </Grid>
-                //   <Grid item>
-                //     <Title variant="h5">{sdg.title}</Title>
-                //   </Grid>
-                // </Grid>
-              ))}
-            </Grid>
-          </div>
-        )}
-        {projectDeveloper && (
-          <div className={classes.userInfo}>
-            <UserInfoWithTitle size="xl" user={projectDeveloper} title="project developer" />
-          </div>
-        )}
-        {landSteward && (
-          <div className={classes.userInfo}>
-            {/* <hr className={classes.separator} /> */}
-            <UserInfoWithTitle size="xl" user={landSteward} title="land steward" />
-          </div>
-        )}
-        {landOwner && (
-          <div className={classes.userInfo}>
-            {/* <hr className={classes.separator} /> */}
-            <UserInfoWithTitle size="xl" user={landOwner} title="land owner" />
-          </div>
-        )}
-        {broker && (
-          <div className={classes.broker}>
-            <UserInfoWithTitle size="xl" user={broker} title="broker" />
-          </div>
-        )}
-        {reseller && (
-          <div className={classes.broker}>
-            <UserInfoWithTitle size="xl" user={reseller} title="reseller" />
-          </div>
-        )}
-      </div>
+    <Card className={cx(styles.root, classes && classes.root)}>
+      {sdgs && (
+        <div className={styles.sdgs}>
+          <Title className={styles.sdg} variant="h3">
+            SDGs
+          </Title>
+          <Grid container>
+            {sdgs.map((sdg: SDG, index: number) => (
+              <Grid className={styles.sdgGridItem} key={index} item xs={6}>
+                <img className={styles.image} alt={sdg.imageUrl} src={sdg.imageUrl} />
+              </Grid>
+              // Previous layout version, keep it here in case we wanna use it in the future
+              // <Grid key={index} className={styles.sdgGrid} container wrap="nowrap" alignItems="center">
+              //   <Grid item>
+              //     <img className={styles.image} alt={sdg.imageUrl} src={sdg.imageUrl} />
+              //   </Grid>
+              //   <Grid item>
+              //     <Title variant="h5">{sdg.title}</Title>
+              //   </Grid>
+              // </Grid>
+            ))}
+          </Grid>
+        </div>
+      )}
+      {projectDeveloper && (
+        <div className={cx(styles.userInfo, classes && classes.userInfo)}>
+          <UserInfoWithTitle size="xl" user={projectDeveloper} title="project developer" />
+        </div>
+      )}
+      {landSteward && (
+        <div className={cx(styles.userInfo, classes && classes.userInfo)}>
+          {/* <hr className={styles.separator} /> */}
+          <UserInfoWithTitle size="xl" user={landSteward} title="land steward" />
+        </div>
+      )}
+      {landOwner && (
+        <div className={cx(styles.userInfo, classes && classes.userInfo)}>
+          {/* <hr className={styles.separator} /> */}
+          <UserInfoWithTitle size="xl" user={landOwner} title="land owner" />
+        </div>
+      )}
+      {broker && (
+        <div className={styles.broker}>
+          <UserInfoWithTitle size="xl" user={broker} title="broker" />
+        </div>
+      )}
+      {reseller && (
+        <div className={styles.broker}>
+          <UserInfoWithTitle size="xl" user={reseller} title="reseller" />
+        </div>
+      )}
     </Card>
   );
 }

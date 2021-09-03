@@ -95,6 +95,12 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'center',
     padding: theme.spacing(4),
   },
+  projectTopCard: {
+    paddingBottom: 0,
+    [theme.breakpoints.up('sm')]: {
+      paddingTop: theme.spacing(15),
+    },
+  },
   modalText: {
     [theme.breakpoints.down('xs')]: {
       fontSize: theme.spacing(4),
@@ -108,9 +114,10 @@ const useStyles = makeStyles(theme => ({
     fontStyle: 'italic',
     color: theme.palette.info.main,
   },
-  userInfo: {
+  modalUserInfo: {
     [theme.breakpoints.down('xs')]: {
-      marginBottom: theme.spacing(12),
+      paddingBottom: theme.spacing(8),
+      marginBottom: 0,
     },
     [theme.breakpoints.up('sm')]: {
       marginBottom: theme.spacing(15),
@@ -315,6 +322,7 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialVa
           </Description>
           <Card className={styles.modalCard}>
             <ProjectTopCard
+              classes={{ root: styles.projectTopCard, userInfo: styles.modalUserInfo }}
               projectDeveloper={{
                 name: 'Impact Ag Partners',
                 imgSrc: 'https://regen-registry.s3.amazonaws.com/projects/wilmot/impactag.jpg',

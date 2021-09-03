@@ -53,6 +53,7 @@ const GoToSection = (): JSX.Element => {
         title={content.videoLabel}
         buttonText={content.videoButtonText}
         buttonHref={content.videoButtonHref}
+        buttonTarget="_blank"
       />
       <ImageItem
         className={styles.item}
@@ -60,12 +61,14 @@ const GoToSection = (): JSX.Element => {
         title={content.blogLabel}
         buttonText={content.blogButtonText}
         buttonHref={content.blogButtonHref}
+        buttonTarget="_blank"
       />
       <ImageItem
         img={<img src="../media/svgs/discussion.svg" alt="discussion" />}
         title={content.discussionLabel}
         buttonText={content.discussionButtonText}
         buttonHref={content.discussionButtonHref}
+        buttonTarget="_blank"
       />
     </Section>
   );

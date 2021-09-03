@@ -21,6 +21,7 @@ export interface ImageItemProps {
   titleVariant?: Variant;
   buttonText?: Variant;
   buttonHref?: Variant;
+  buttonTarget?: string;
 }
 
 export interface StyleProps {
@@ -58,6 +59,7 @@ export default function ImageItem({
   titleVariant = 'h4',
   buttonText,
   buttonHref,
+  buttonTarget,
 }: ImageItemProps): JSX.Element {
   const styles = useStyles({ titleVariant });
 
@@ -75,7 +77,7 @@ export default function ImageItem({
       </Title>
       {description && <Description fontSize={getFontSize('big')}>{description}</Description>}
       {buttonText && buttonHref && (
-        <ContainedButton className={styles.button} href={buttonHref}>
+        <ContainedButton className={styles.button} href={buttonHref} target={buttonTarget}>
           {buttonText}
         </ContainedButton>
       )}

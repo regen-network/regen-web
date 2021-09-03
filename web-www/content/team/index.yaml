@@ -52,17 +52,6 @@ coreSection:
       linkedUrl: https://www.linkedin.com/in/christian-shearer-b8877312/
       twitterUrl: ""
       githubUrl: ""
-    - name: Ron Steinherz
-      title: Vice President of Product
-      description: Ron brings deep expertise in Product Management and Operations from
-        10+ years in Silicon Valley and Israel, working to develop product
-        innovations such as Web Conferencing, Telecommunications, Internet
-        Connectivity and FinTech. He is passionate about leveraging technology
-        for social and environmental impact.
-      image: ../../static/media/team/ron.jpg
-      linkedUrl: https://www.linkedin.com/in/steinherz/
-      twitterUrl: null
-      githubUrl: null
     - name: Sarah Baxendell
       title: Director of Finance
       description: Sarah specializes in ecological design, product development, and
@@ -164,16 +153,6 @@ coreSection:
       linkedUrl: https://www.linkedin.com/in/erika-logie-3a15647/
       twitterUrl: https://twitter.com/erikalogie
       githubUrl: https://github.com/erikalogie
-    - name: "Sophia Leiker "
-      title: Geospatial Environmental Researcher and Project Analyst
-      description: >
-        Sophia is a geospatial researcher with experience employing remote
-        sensing techniques and GIS analysis to address environmental inquiries.
-        An alumni of UC Berkeley, Sophia has worked as a researcher for NASA
-        DEVELOP, where she led projects studying geospatial applications. She
-        supports the science team in methodology development and project
-        management.
-      image: ../../static/media/sophia.png
     - name: "Sam Bennetts "
       title: Applied Scientist and GIS Developer
       description: Sam is a GIS and remote sensing specialist focused on designing
@@ -365,6 +344,16 @@ coreSection:
       twitterUrl: https://twitter.com/KKapatral
       githubUrl: https://github.com/kaustubhkapatral
       linkedUrl: https://www.linkedin.com/in/kaustubh-kapatral-704a60176/
+    - name: "Sophia Leiker "
+      title: Geospatial Environmental Researcher and Project Analyst
+      description: >
+        Sophia is a geospatial researcher with experience employing remote
+        sensing techniques and GIS analysis to address environmental inquiries.
+        An alumni of UC Berkeley, Sophia has worked as a researcher for NASA
+        DEVELOP, where she led projects studying geospatial applications. She
+        supports the science team in methodology development and project
+        management.
+      image: ../../static/media/sophia.png
 contributorSection:
   title: Contributors
   contributors:

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
@@ -19,26 +19,28 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const CreditsBuyAndTransfer: React.FC = () => {
-  const [buyerId, setBuyerId] = useState('');
+const CreditsCreateAndTransfer: React.FC = () => {
   const [step, setStep] = useState(1);
+  const [buyerWalletId, setBuyerWalletId] = useState('');
+  const [vintageId, setVintageId] = useState('');
 
-  function getStepContent(stepIndex: number): JSX.Element {
+  useEffect(() => {
+    if (!buyerWalletId) setStep(1);
+    if (buyerWalletId && !vintageId) setStep(2);
+    if (buyerWalletId && vintageId) setStep(3);
+  }, [buyerWalletId, vintageId]);
+
+  function renderStep(stepIndex: number): JSX.Element {
     switch (stepIndex) {
       case 1:
-        return <BuyerCreate onCreate={onBuyerCreate} />;
+        return <BuyerCreate onCreate={setBuyerWalletId} />;
       case 2:
-        return <CreditsTransfer buyerId={buyerId} />;
+        return <CreditsTransfer buyerWalletId={buyerWalletId} onTransfer={setVintageId} />;
       case 3:
-        return <CreditsRetire />;
+        return <CreditsRetire buyerWalletId={buyerWalletId} vintageId={vintageId} />;
       default:
         return <></>;
     }
-  }
-
-  function onBuyerCreate(buyerId: string): void {
-    setBuyerId(buyerId);
-    setStep(2);
   }
 
   const styles = useStyles();
@@ -55,10 +57,10 @@ const CreditsBuyAndTransfer: React.FC = () => {
         ))}
       </Stepper>
       <Box display="flex" justifyContent="center" alignItems="center" minWidth="33%">
-        {getStepContent(step)}
+        {renderStep(step)}
       </Box>
     </Box>
   );
 };
 
-export { CreditsBuyAndTransfer };
+export { CreditsCreateAndTransfer };

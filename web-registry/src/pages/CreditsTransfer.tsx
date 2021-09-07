@@ -16,6 +16,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Title from 'web-components/lib/components/title';
 import { pluralize } from 'web-components/lib/utils/pluralize';
 import {
+  Party,
   // AccountBalance,
   TransactionState,
   useAllCreditVintagesQuery,
@@ -64,7 +65,10 @@ interface Result {
   walletId: string;
 }
 
-const CreditsTransfer: React.FC<{ buyerId?: string }> = ({ buyerId = '' }) => {
+const CreditsTransfer: React.FC<{
+  buyerWalletId?: string;
+  onTransfer?: (vintageId: string) => void;
+}> = ({ onTransfer, buyerWalletId: passedBuyerWalletId = '' }) => {
   const styles = useStyles();
 
   const [transferCredits, { data, loading, error }] = useTransferCreditsMutation({
@@ -92,7 +96,7 @@ const CreditsTransfer: React.FC<{ buyerId?: string }> = ({ buyerId = '' }) => {
 
   const [vintageId, setVintageId] = useState('');
   const [oldBalances, setOldBalances] = useState<Balance[]>([]);
-  const [buyerWalletId, setBuyerWalletId] = useState(buyerId);
+  const [buyerWalletId, setBuyerWalletId] = useState(passedBuyerWalletId);
   const [addressId, setAddressId] = useState('');
   const [partyId, setPartyId] = useState('');
   const [userId, setUserId] = useState('');
@@ -101,13 +105,13 @@ const CreditsTransfer: React.FC<{ buyerId?: string }> = ({ buyerId = '' }) => {
   const [showResult, setShowResult] = useState(false);
 
   useEffect(() => {
-    if (buyerId && buyerId !== buyerWalletId) {
-      setBuyerWalletId(buyerId);
+    if (passedBuyerWalletId && passedBuyerWalletId !== buyerWalletId) {
+      setBuyerWalletId(passedBuyerWalletId);
     }
-    if (!partiesData?.allParties?.nodes?.find(node => node?.id === buyerId)) {
+    if (!partiesData?.allParties?.nodes?.find(node => node?.id === passedBuyerWalletId)) {
       refetchParties();
     }
-  }, [buyerId]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [passedBuyerWalletId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const { data: availableCreditsData, refetch: refetchAvailableCredits } = useGetAvailableCreditsQuery({
     errorPolicy: 'ignore',
@@ -165,9 +169,10 @@ const CreditsTransfer: React.FC<{ buyerId?: string }> = ({ buyerId = '' }) => {
     vintage = vintagesData.allCreditVintages.nodes.find((node: any) => node.id === vintageId);
     newBalances = vintage.accountBalancesByCreditVintageId.nodes;
 
-    const findOldBalance = (i: number) => oldBalances.find(oldBalance => oldBalance.id === newBalances[i].id);
-    const findParty = (i: number) =>
-      partiesData?.allParties?.nodes.find(party => party?.walletId === newBalances[i].walletId);
+    const findOldBalance = (i: number): Balance | undefined =>
+      oldBalances.find(oldBalance => oldBalance.id === newBalances[i].id);
+    const findParty = (i: number): Party | undefined =>
+      partiesData?.allParties?.nodes.find(party => party?.walletId === newBalances[i].walletId) as Party; // TODO: we might want to see if there's a way of sharing type definitions between sanity and graphql, or at least extracting this to a `Party | SanityParty` type
 
     // Build response list of senders/buyer old/new balance
     for (var i: number = 0; i < newBalances.length; i++) {
@@ -222,13 +227,18 @@ const CreditsTransfer: React.FC<{ buyerId?: string }> = ({ buyerId = '' }) => {
               });
               await refetchVintages();
               await refetchAvailableCredits();
+              if (onTransfer) {
+                onTransfer(vintageId);
+              }
               setShowResult(true);
               const vintage = vintagesData?.allCreditVintages?.nodes?.find(node => node?.id === vintageId);
               const balances = vintage?.accountBalancesByCreditVintageId?.nodes;
               if (balances) {
                 setOldBalances(balances as Balance[]);
               }
-            } catch (e) {}
+            } catch (e) {
+              console.error('Error transferring credits: ', e); // eslint-disable-line no-console
+            }
           }
         }}
         noValidate

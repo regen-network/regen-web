@@ -48,7 +48,10 @@ function getUnits(vintagesData: any, walletId: string, vintageId: string): numbe
   return 0;
 }
 
-function CreditsRetire(): JSX.Element {
+const CreditsRetire: React.FC<{
+  buyerWalletId?: string;
+  vintageId?: string;
+}> = ({ buyerWalletId: passedBuyerId = '', vintageId: passedVintageId = '' }) => {
   const styles = useStyles();
 
   const [retireCredits, { data, loading, error }] = useRetireCreditsMutation({
@@ -69,8 +72,8 @@ function CreditsRetire(): JSX.Element {
 
   const dateFormat = new Intl.DateTimeFormat('en', { year: 'numeric', month: 'numeric', day: '2-digit' });
 
-  const [vintageId, setVintageId] = useState('');
-  const [buyerWalletId, setBuyerWalletId] = useState('');
+  const [vintageId, setVintageId] = useState(passedVintageId);
+  const [buyerWalletId, setBuyerWalletId] = useState(passedBuyerId);
   const [buyerName, setBuyerName] = useState('');
   const [creditName, setCreditName] = useState('');
   const [buyerAddress, setBuyerAddress] = useState('');
@@ -231,6 +234,6 @@ function CreditsRetire(): JSX.Element {
       )}
     </div>
   );
-}
+};
 
 export { CreditsRetire };

@@ -377,19 +377,19 @@ function CreditsTransfer(): JSX.Element {
             {vintage.projectByProjectId.partyByLandOwnerId && (
               <li>
                 Land Owner ({vintage.projectByProjectId.partyByLandOwnerId.name}):{' '}
-                {100 * vintage.initialDistribution.landOwner || 0}
+                {100 * vintage.initialDistribution['http://regen.network/landOwnerDistribution'] || 0}
               </li>
             )}
             {vintage.projectByProjectId.partyByDeveloperId && (
               <li>
                 Project Developer ({vintage.projectByProjectId.partyByDeveloperId.name}):{' '}
-                {100 * vintage.initialDistribution.projectDeveloper || 0}
+                {100 * vintage.initialDistribution['http://regen.network/projectDeveloperDistribution'] || 0}
               </li>
             )}
             {vintage.projectByProjectId.partyByStewardId && (
               <li>
                 Land Steward ({vintage.projectByProjectId.partyByStewardId.name}):{' '}
-                {100 * vintage.initialDistribution.landSteward || 0}
+                {100 * vintage.initialDistribution['http://regen.network/landStewardDistribution'] || 0}
               </li>
             )}
           </ul>

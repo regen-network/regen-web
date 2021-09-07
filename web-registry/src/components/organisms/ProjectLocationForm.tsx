@@ -16,6 +16,7 @@ export interface ProjectLocationFormValues {
 const ProjectLocationForm: React.FC<{
   mapToken: string;
   submit: (values: ProjectLocationFormValues) => Promise<void>;
+  saveAndExit: (values: ProjectLocationFormValues) => Promise<void>;
   initialValues?: ProjectLocationFormValues;
 }> = ({ submit, initialValues, mapToken }) => {
   const { data: graphData } = useShaclGraphByUriQuery({
@@ -23,7 +24,6 @@ const ProjectLocationForm: React.FC<{
       uri: 'http://regen.network/ProjectPageShape',
     },
   });
-  console.log('graphData >>', graphData);
 
   return (
     <Formik

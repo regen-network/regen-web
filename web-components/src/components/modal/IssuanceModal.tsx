@@ -28,9 +28,9 @@ export interface IssuanceModalData {
   projectName: string;
   standardId: DocumentVersion;
   creditClass: DocumentVersion;
-  creditClassHandle: string;
+  creditClassDocumentId: string;
   methodology: DocumentVersion;
-  methodologyHandle: string;
+  methodologyDocumentId: string;
   txHash?: string;
 }
 
@@ -64,9 +64,9 @@ export default function IssuanceModal({
   projectName,
   standardId,
   creditClass,
-  creditClassHandle,
+  creditClassDocumentId,
   methodology,
-  methodologyHandle,
+  methodologyDocumentId,
   txClient,
   txHash,
   bufferPool,
@@ -163,7 +163,7 @@ export default function IssuanceModal({
         },
         {
           label: 'credit class id',
-          value: creditClassHandle,
+          value: creditClassDocumentId,
         },
         {
           label: 'methodology',
@@ -171,7 +171,7 @@ export default function IssuanceModal({
         },
         {
           label: 'methodology id',
-          value: methodologyHandle,
+          value: methodologyDocumentId,
         },
       ]}
       {...props}

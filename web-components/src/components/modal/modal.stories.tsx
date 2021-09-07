@@ -79,12 +79,12 @@ function OpenLedgerModal(): JSX.Element {
           name: 'CarbonPlus Grasslands',
           version: 'v0.9',
         }}
-        creditClassHandle="RND_CC_0001"
+        creditClassDocumentId="RND_CC_0001"
         methodology={{
           name: 'CarbonPlus Grasslands',
           version: 'v0.9',
         }}
-        methodologyHandle="RND_M0001"
+        methodologyDocumentId="RND_M0001"
       />
     </div>
   );

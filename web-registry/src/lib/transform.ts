@@ -96,19 +96,23 @@ export function buildIssuanceModalData(
       monitoringPeriods,
       projectName: project.name,
       standardId: {
-        name: creditClassVersion?.metadata?.programGuide?.handle,
-        version: creditClassVersion?.metadata?.programGuide?.version,
+        name:
+          creditClassVersion?.metadata?.['http://regen.network/standard']?.[
+            'http://regen.network/documentId'
+          ],
+        version:
+          creditClassVersion?.metadata?.['http://regen.network/standard']?.['http://schema.org/version'],
       },
       creditClass: {
         name: creditClassVersion?.name,
         version: creditClassVersion?.version,
       },
-      creditClassHandle: creditClassVersion?.creditClassById.handle,
+      creditClassDocumentId: creditClassVersion?.documentId,
       methodology: {
         name: methodologyVersion?.name,
         version: methodologyVersion?.version,
       },
-      methodologyHandle: methodologyVersion?.methodologyById.handle,
+      methodologyDocumentId: methodologyVersion?.documentId,
     };
   }
   return null;

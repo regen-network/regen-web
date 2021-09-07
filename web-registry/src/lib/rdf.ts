@@ -45,6 +45,6 @@ export async function validate(shapesJSON: any, dataJSON: any, group?: string): 
 
 export function getProjectPageBaseData(): any {
   return {
-    '@type': 'http://regen.network/ProjectPage',
+    '@type': ['http://regen.network/ProjectPage', 'http://regen.network/Project'],
   };
 }

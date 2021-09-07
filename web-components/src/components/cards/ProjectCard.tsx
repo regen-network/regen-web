@@ -19,18 +19,14 @@ export interface ProjectInfo {
 }
 
 interface Info {
-  id: string;
-  name?: string;
+  documentId?: string | null;
+  name: string;
   version: string;
+  url?: string | null;
 }
 
-interface InfoWithUrl extends Info {
-  url?: string;
-}
-
-interface CreditClassInfo extends Info, InfoWithUrl {
+interface CreditClassInfo extends Info {
   standard: boolean;
-  standardUrl?: string;
 }
 
 interface PurchaseInfo {
@@ -39,8 +35,8 @@ interface PurchaseInfo {
   vintageMetadata: any;
   vintagePeriod: string;
   creditClass: CreditClassInfo;
-  methodology: InfoWithUrl;
-  programGuide: Info;
+  methodology: Info;
+  standard: Info;
   projectType: string;
 }
 
@@ -189,7 +185,15 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-function PurchaseDetails({ title, info, url }: { title: string; info: string; url?: string }): JSX.Element {
+function PurchaseDetails({
+  title,
+  info,
+  url,
+}: {
+  title: string;
+  info: string;
+  url?: string | null;
+}): JSX.Element {
   const classes = useStyles();
   const parsedInfo = ReactHtmlParser(info);
 
@@ -210,11 +214,7 @@ function PurchaseDetails({ title, info, url }: { title: string; info: string; ur
 }
 
 function formatInfo(info: Info): string {
-  return `${info.name ? `${info.name}, ` : ''}${info.id}, ${info.version}`;
-}
-
-function formatStandard(info: CreditClassInfo): string {
-  return `${info.id} Standard ${info.version}`;
+  return `${info.name}, ${info.documentId ? `${info.documentId}, ` : ''}${info.version}`;
 }
 
 export default function ProjectCard({
@@ -244,7 +244,7 @@ export default function ProjectCard({
   const serialNumber: string | undefined =
     purchaseInfo?.vintageMetadata?.['http://regen.network/serialNumber'];
   const additionalCertifications: string[] | undefined =
-    purchaseInfo?.vintageMetadata?.['http://regen.network/additionalCertifications'];
+    purchaseInfo?.vintageMetadata?.['http://regen.network/additionalCertifications']?.['@list'];
 
   return (
     <MediaCard
@@ -315,17 +315,13 @@ export default function ProjectCard({
                 title="methodology"
                 info={formatInfo(purchaseInfo.methodology)}
               />
-              {purchaseInfo.creditClass.standard ? (
-                <PurchaseDetails
-                  url={purchaseInfo.creditClass.standardUrl}
-                  title="standard"
-                  info={formatStandard(purchaseInfo.creditClass)}
-                />
-              ) : (
-                <>
-                  <PurchaseDetails title="program guide" info={formatInfo(purchaseInfo.programGuide)} />
-                  <PurchaseDetails title="project type" info={purchaseInfo.projectType} />
-                </>
+              <PurchaseDetails
+                url={purchaseInfo.standard.url}
+                title="standard"
+                info={formatInfo(purchaseInfo.standard)}
+              />
+              {purchaseInfo.projectType && (
+                <PurchaseDetails title="project type" info={purchaseInfo.projectType} />
               )}
               {additionalCertifications && (
                 <PurchaseDetails

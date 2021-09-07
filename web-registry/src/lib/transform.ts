@@ -95,24 +95,25 @@ export function buildIssuanceModalData(
       vintagePeriod: getFormattedPeriod(creditVintage.startDate, creditVintage.endDate),
       monitoringPeriods,
       projectName: project.name,
-      standardId: {
-        name:
+      standard: {
+        documentId:
           creditClassVersion?.metadata?.['http://regen.network/standard']?.[
             'http://regen.network/documentId'
           ],
+        name: creditClassVersion?.metadata?.['http://regen.network/standard']?.['http://schema.org/name'],
         version:
           creditClassVersion?.metadata?.['http://regen.network/standard']?.['http://schema.org/version'],
       },
       creditClass: {
+        documentId: creditClassVersion?.documentId,
         name: creditClassVersion?.name,
         version: creditClassVersion?.version,
       },
-      creditClassDocumentId: creditClassVersion?.documentId,
       methodology: {
+        documentId: methodologyVersion?.documentId,
         name: methodologyVersion?.name,
         version: methodologyVersion?.version,
       },
-      methodologyDocumentId: methodologyVersion?.documentId,
     };
   }
   return null;

@@ -71,20 +71,21 @@ function OpenLedgerModal(): JSX.Element {
           },
         ]}
         projectName="Wilmot"
-        standardId={{
-          name: 'RND_PG',
+        standard={{
+          documentId: 'RND_PG',
+          name: 'Regen Registry Program Guide',
           version: 'v1.0',
         }}
         creditClass={{
+          documentId: 'RND_CC_0001',
           name: 'CarbonPlus Grasslands',
           version: 'v0.9',
         }}
-        creditClassDocumentId="RND_CC_0001"
         methodology={{
+          documentId: 'RND_M0001',
           name: 'CarbonPlus Grasslands',
           version: 'v0.9',
         }}
-        methodologyDocumentId="RND_M0001"
       />
     </div>
   );

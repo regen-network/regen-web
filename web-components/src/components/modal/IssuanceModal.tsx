@@ -7,11 +7,7 @@ import PartyAddress, { Party } from '../party/PartyAddress';
 import Document, { DocumentInfo } from '../document';
 import { getFormattedDate, getFormattedNumber } from '../../utils/format';
 import { pluralize } from '../../utils/pluralize';
-
-interface DocumentVersion {
-  name: string;
-  version: string;
-}
+import { formatStandardInfo, StandardInfo } from '../../utils/format';
 
 export interface IssuanceModalData {
   link?: string;
@@ -26,11 +22,9 @@ export interface IssuanceModalData {
   vintagePeriod: string;
   monitoringPeriods: DocumentInfo[];
   projectName: string;
-  standardId: DocumentVersion;
-  creditClass: DocumentVersion;
-  creditClassDocumentId: string;
-  methodology: DocumentVersion;
-  methodologyDocumentId: string;
+  standard: StandardInfo;
+  creditClass: StandardInfo;
+  methodology: StandardInfo;
   txHash?: string;
 }
 
@@ -47,10 +41,6 @@ const options = {
   minute: 'numeric',
 };
 
-function getDocumentVersion(doc: DocumentVersion): string {
-  return `${doc.name}, ${doc.version}`;
-}
-
 export default function IssuanceModal({
   link,
   issuer,
@@ -62,11 +52,9 @@ export default function IssuanceModal({
   vintagePeriod,
   monitoringPeriods,
   projectName,
-  standardId,
+  standard,
   creditClass,
-  creditClassDocumentId,
   methodology,
-  methodologyDocumentId,
   txClient,
   txHash,
   bufferPool,
@@ -154,24 +142,16 @@ export default function IssuanceModal({
           value: projectName,
         },
         {
-          label: 'standard id',
-          value: getDocumentVersion(standardId),
-        },
-        {
           label: 'credit class',
-          value: getDocumentVersion(creditClass),
-        },
-        {
-          label: 'credit class id',
-          value: creditClassDocumentId,
+          value: formatStandardInfo(creditClass),
         },
         {
           label: 'methodology',
-          value: getDocumentVersion(methodology),
+          value: formatStandardInfo(methodology),
         },
         {
-          label: 'methodology id',
-          value: methodologyDocumentId,
+          label: 'standard',
+          value: formatStandardInfo(standard),
         },
       ]}
       {...props}

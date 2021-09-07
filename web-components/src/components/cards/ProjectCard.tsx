@@ -8,6 +8,7 @@ import BreadcrumbIcon from '../icons/BreadcrumbIcon';
 import Description from '../description';
 import ProjectPlaceInfo, { Place } from '../place/ProjectPlaceInfo';
 import UserInfo, { User } from '../user/UserInfo';
+import { StandardInfo, formatStandardInfo } from '../../utils/format';
 
 export interface ProjectInfo {
   name: string;
@@ -18,10 +19,7 @@ export interface ProjectInfo {
   registry: User;
 }
 
-interface Info {
-  documentId?: string | null;
-  name: string;
-  version: string;
+interface Info extends StandardInfo {
   url?: string | null;
 }
 
@@ -213,10 +211,6 @@ function PurchaseDetails({
   );
 }
 
-function formatInfo(info: Info): string {
-  return `${info.name}, ${info.documentId ? `${info.documentId}, ` : ''}${info.version}`;
-}
-
 export default function ProjectCard({
   name,
   imgSrc,
@@ -307,18 +301,18 @@ export default function ProjectCard({
                 info={
                   purchaseInfo.creditClass.standard && purchaseInfo.creditClass.name
                     ? purchaseInfo.creditClass.name
-                    : formatInfo(purchaseInfo.creditClass)
+                    : formatStandardInfo(purchaseInfo.creditClass)
                 }
               />
               <PurchaseDetails
                 url={purchaseInfo.methodology.url}
                 title="methodology"
-                info={formatInfo(purchaseInfo.methodology)}
+                info={formatStandardInfo(purchaseInfo.methodology)}
               />
               <PurchaseDetails
                 url={purchaseInfo.standard.url}
                 title="standard"
-                info={formatInfo(purchaseInfo.standard)}
+                info={formatStandardInfo(purchaseInfo.standard)}
               />
               {purchaseInfo.projectType && (
                 <PurchaseDetails title="project type" info={purchaseInfo.projectType} />

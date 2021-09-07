@@ -54,7 +54,6 @@ const useStyles = makeStyles(theme => ({
   community: {
     [theme.breakpoints.up('sm')]: {
       textAlign: 'center',
-      marginTop: theme.spacing(16.25),
     },
   },
   smallIcon: {

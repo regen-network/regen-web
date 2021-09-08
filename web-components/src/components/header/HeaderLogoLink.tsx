@@ -23,7 +23,7 @@ const useStyles = makeStyles<Theme, { isLoaded: boolean }>(theme => {
 export const HeaderLogoLink: React.FC<{ color: string }> = ({ color }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const styles = useStyles({ isLoaded });
-  const location = window.location.href;
+  const location = typeof window !== undefined && window.location && window.location.href;
 
   // TODO: this is a hack to make the SVG render properly in safari - it's not a
   // perfect solution but should work until we can dedicate time to find

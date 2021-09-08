@@ -20,42 +20,36 @@ interface EntityDisplayFormProps {
   initialValues?: EntityDisplayValues;
 }
 
-export interface EntityValues {
-  'http://regen.network/landOwner'?: OrganizationShape | IndividualShape;
-  'http://regen.network/landSteward'?: OrganizationShape | IndividualShape;
-  'http://regen.network/projectDeveloper'?: OrganizationShape | IndividualShape;
-  'http://regen.network/projectOriginator'?: OrganizationShape | IndividualShape;
-}
-
 export interface EntityDisplayValues {
-  'http://regen.network/landOwner'?: OrganizationDisplayShape | IndividualDisplayShape;
-  'http://regen.network/landSteward'?: OrganizationDisplayShape | IndividualDisplayShape;
-  'http://regen.network/projectDeveloper'?: OrganizationDisplayShape | IndividualDisplayShape;
-  'http://regen.network/projectOriginator'?: OrganizationDisplayShape | IndividualDisplayShape;
+  'http://regen.network/landOwner'?: OrganizationDisplayValues | IndividualDisplayValues;
+  'http://regen.network/landSteward'?: OrganizationDisplayValues | IndividualDisplayValues;
+  'http://regen.network/projectDeveloper'?: OrganizationDisplayValues | IndividualDisplayValues;
+  'http://regen.network/projectOriginator'?: OrganizationDisplayValues | IndividualDisplayValues;
 }
 
-export interface OrganizationShape {
+interface OrganizationShape {
   'http://schema.org/legalName'?: string;
 }
 
-export interface IndividualShape {
+interface IndividualShape {
   'http://schema.org/name'?: string;
 }
 
-export interface OrganizationDisplayShape {
+interface OrganizationDisplayShape {
   'http://regen.network/showOnProjectPage': boolean;
-  'http://schema.org/legalName'?: string;
   'http://schema.org/name'?: string;
   'http://schema.org/logo'?: string;
   'http://schema.org/description'?: string;
 }
 
-export interface IndividualDisplayShape {
+interface IndividualDisplayShape {
   'http://regen.network/showOnProjectPage': boolean;
-  'http://schema.org/name'?: string;
   'http://schema.org/image'?: string;
   'http://schema.org/description'?: string;
 }
+
+export interface IndividualDisplayValues extends IndividualShape, IndividualDisplayShape {}
+export interface OrganizationDisplayValues extends OrganizationShape, OrganizationDisplayShape {}
 
 export interface EntityDisplayValuesErrors {
   // TODO

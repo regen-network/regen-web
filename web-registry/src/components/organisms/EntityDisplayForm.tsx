@@ -20,6 +20,13 @@ interface EntityDisplayFormProps {
   initialValues?: EntityDisplayValues;
 }
 
+export interface EntityValues {
+  'http://regen.network/landOwner'?: OrganizationShape | IndividualShape;
+  'http://regen.network/landSteward'?: OrganizationShape | IndividualShape;
+  'http://regen.network/projectDeveloper'?: OrganizationShape | IndividualShape;
+  'http://regen.network/projectOriginator'?: OrganizationShape | IndividualShape;
+}
+
 export interface EntityDisplayValues {
   'http://regen.network/landOwner'?: OrganizationDisplayShape | IndividualDisplayShape;
   'http://regen.network/landSteward'?: OrganizationDisplayShape | IndividualDisplayShape;
@@ -27,20 +34,27 @@ export interface EntityDisplayValues {
   'http://regen.network/projectOriginator'?: OrganizationDisplayShape | IndividualDisplayShape;
 }
 
+export interface OrganizationShape {
+  'http://schema.org/legalName'?: string;
+}
+
+export interface IndividualShape {
+  'http://schema.org/name'?: string;
+}
+
 export interface OrganizationDisplayShape {
-  'http://regen.network/EntityDisplayShape-showOnProjectPage': boolean;
-  legalName?: string;
-  name?: string;
-  logo?: string;
-  description?: string;
+  'http://regen.network/showOnProjectPage': boolean;
+  'http://schema.org/legalName'?: string;
+  'http://schema.org/name'?: string;
+  'http://schema.org/logo'?: string;
+  'http://schema.org/description'?: string;
 }
 
 export interface IndividualDisplayShape {
-  'http://regen.network/EntityDisplayShape-showOnProjectPage': boolean;
-  legalName?: string;
-  name?: string;
-  image?: string;
-  description?: string;
+  'http://regen.network/showOnProjectPage': boolean;
+  'http://schema.org/name'?: string;
+  'http://schema.org/image'?: string;
+  'http://schema.org/description'?: string;
 }
 
 export interface EntityDisplayValuesErrors {
@@ -130,8 +144,10 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialVa
   const styles = useStyles();
   const theme = useTheme();
 
-  const getToggle = (entity: any, fieldName: string, handleChange: any, values: any): JSX.Element | null => {
+  const getToggle = (fieldName: string, handleChange: any, values: any): JSX.Element | null => {
+    const entity = values[fieldName];
     const role = fieldName.toString();
+
     if (entity['@type'] === 'http://regen.network/Individual') {
       return <IndividualFormlet role={role} handleChange={handleChange} values={values} />;
     } else if (entity['@type'] === 'http://regen.network/Organization') {
@@ -144,18 +160,18 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialVa
     return (
       <Field
         className={styles.field}
-        label={`${values[role].legalName} ${getEntityTypeString(role)}`}
+        label={`${values[role]['http://schema.org/legalName']} ${getEntityTypeString(role)}`}
         type="checkbox"
         component={Toggle}
         onChange={handleChange}
-        name={`['${role}'].['http://regen.network/EntityDisplayShape-showOnProjectPage']`}
-        checked={!!values[role]?.['http://regen.network/EntityDisplayShape-showOnProjectPage']}
+        name={`['${role}'].['http://regen.network/showOnProjectPage']`}
+        checked={!!values[role]?.['http://regen.network/showOnProjectPage']}
         activeContent={
           <div className={styles.activeContent}>
             <Field
               className={styles.field}
               component={ControlledTextField}
-              name={`['${role}'].name`}
+              name={`['${role}'].['http://schema.org/name']`}
               label="Organization display name"
               optional
               placeholder="i.e. Cherrybrook Farms"
@@ -164,7 +180,7 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialVa
               className={styles.field}
               component={ImageField}
               label="Organization logo"
-              name={`['${role}'].logo`}
+              name={`['${role}'].['http://schema.org/logo']`}
               fallbackAvatar={
                 <OrganizationIcon className={styles.organizationIcon} color={theme.palette.info.main} />
               }
@@ -173,7 +189,7 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialVa
               charLimit={160}
               component={ControlledTextField}
               label="Short organization description"
-              name={`['${role}'].description`}
+              name={`['${role}'].['http://schema.org/description']`}
               rows={4}
               multiline
             />
@@ -188,27 +204,27 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialVa
       <Field
         className={styles.field}
         classes={{ description: styles.toggleDescription }}
-        label={`${values[role].name} ${getEntityTypeString(role)}`}
+        label={`${values[role]['http://schema.org/name']} ${getEntityTypeString(role)}`}
         description="recommended to increase salability"
         type="checkbox"
         component={Toggle}
         onChange={handleChange}
-        name={`['${role}'].['http://regen.network/EntityDisplayShape-showOnProjectPage']`}
-        checked={!!values[role]?.['http://regen.network/EntityDisplayShape-showOnProjectPage']}
+        name={`['${role}'].['http://regen.network/showOnProjectPage']`}
+        checked={!!values[role]?.['http://regen.network/showOnProjectPage']}
         activeContent={
           <div className={styles.activeContent}>
             <Field
               className={styles.field}
               component={ImageField}
               label="Bio photo"
-              name={`['${role}'].photo`}
+              name={`['${role}'].['http://schema.org/photo']`}
             />
             <Field
               charLimit={160}
               component={ControlledTextField}
               label="Short personal description"
               description="Describe any relevant background and experience."
-              name={`['${role}'].description`}
+              name={`['${role}'].['http://schema.org/description']`}
               rows={4}
               multiline
             />
@@ -267,33 +283,13 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialVa
                 </Description>
 
                 {values['http://regen.network/landOwner'] &&
-                  getToggle(
-                    values['http://regen.network/landOwner'],
-                    'http://regen.network/landOwner',
-                    handleChange,
-                    values,
-                  )}
+                  getToggle('http://regen.network/landOwner', handleChange, values)}
                 {values['http://regen.network/landSteward'] &&
-                  getToggle(
-                    values['http://regen.network/landSteward'],
-                    'http://regen.network/landSteward',
-                    handleChange,
-                    values,
-                  )}
+                  getToggle('http://regen.network/landSteward', handleChange, values)}
                 {values['http://regen.network/projectDeveloper'] &&
-                  getToggle(
-                    values['http://regen.network/projectDeveloper'],
-                    'http://regen.network/projectDeveloper',
-                    handleChange,
-                    values,
-                  )}
+                  getToggle('http://regen.network/projectDeveloper', handleChange, values)}
                 {values['http://regen.network/projectOriginator'] &&
-                  getToggle(
-                    values['http://regen.network/projectOriginator'],
-                    'http://regen.network/projectOriginator',
-                    handleChange,
-                    values,
-                  )}
+                  getToggle('http://regen.network/projectOriginator', handleChange, values)}
               </OnBoardingCard>
 
               <OnboardingFooter

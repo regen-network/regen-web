@@ -108,20 +108,21 @@ const RoleField: React.FC<Props> = ({
   const { form, field } = fieldProps;
 
   useEffect(() => {
-    const selectedValue = options && field.value && options.find(o => o.id === field.value);
+    const selectedValue = options && field.value && options.find(o => o.id === field.value.id);
     setValue(selectedValue);
   }, [field.value, options]);
 
   const saveOrganization = async (org: any): Promise<void> => {
     var savedOrg = await onSaveOrganization(org);
+    console.log(savedOrg);
     closeOrganizationModal();
-    form.setFieldValue(field.name, savedOrg.id);
+    form.setFieldValue(field.name, savedOrg);
   };
 
   const saveIndividual = async (person: any): Promise<void> => {
     var savedPerson = await onSaveIndividual(person);
     closeIndividualModal();
-    form.setFieldValue(field.name, savedPerson.id);
+    form.setFieldValue(field.name, savedPerson);
   };
 
   const closeOrganizationModal = (): void => {
@@ -193,7 +194,7 @@ const RoleField: React.FC<Props> = ({
                     className={styles.add}
                     onClick={e => {
                       e.stopPropagation();
-                      setOrganizationEdit({ legalName: state.inputValue });
+                      setOrganizationEdit({ 'http://schema.org/legalName': state.inputValue });
                     }}
                   >
                     <OrganizationIcon />
@@ -207,7 +208,7 @@ const RoleField: React.FC<Props> = ({
                     className={styles.add}
                     onClick={e => {
                       e.stopPropagation();
-                      setIndividualEdit({ name: state.inputValue });
+                      setIndividualEdit({ 'http://schema.org/name': state.inputValue });
                     }}
                   >
                     <UserIcon />

@@ -66,8 +66,10 @@ const RolesForm: React.FC<RolesFormProps> = ({ submit, initialValues }) => {
     const entityOptions = entities.map((e: any) => {
       return {
         ...e,
-        label: e.name || e.legalName,
-        type: e.legalName ? 'organization' : 'individual',
+        label:
+          e['@type'] === 'http://regen.network/Individual'
+            ? e['http://schema.org/name']
+            : e['http://schema.org/legalName'],
       };
     });
 
@@ -81,8 +83,8 @@ const RolesForm: React.FC<RolesFormProps> = ({ submit, initialValues }) => {
       setEntities(newEntities);
     } else {
       const updatedEntities = entities.map(
-        (exisitingEntity: any) =>
-          exisitingEntity.id === updatedEntity.id ? { ...updatedEntity } : exisitingEntity, //TODO: real DB save #494
+        (existingEntity: any) =>
+          existingEntity.id === updatedEntity.id ? { ...updatedEntity } : existingEntity, //TODO: real DB save #494
       );
       setEntities(updatedEntities);
     }
@@ -114,7 +116,8 @@ const RolesForm: React.FC<RolesFormProps> = ({ submit, initialValues }) => {
           }
         }}
       >
-        {({ submitForm, isValid, isSubmitting }) => {
+        {({ values, submitForm, isValid, isSubmitting }) => {
+          console.log(values)
           return (
             <Form translate="yes">
               <OnBoardingCard className={styles.storyCard}>

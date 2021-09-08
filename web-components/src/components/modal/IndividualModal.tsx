@@ -23,11 +23,11 @@ interface IndividualModalProps {
 
 export interface IndividualFormValues {
   id?: number;
-  type?: string;
-  name?: string;
-  phone?: string;
-  email?: string;
-  permissionToShareInfo?: boolean;
+  '@type': string;
+  'http://schema.org/name'?: string;
+  'http://schema.org/telephone'?: string;
+  'http://schema.org/email'?: string;
+  'http://regen.network/sharePermission'?: boolean;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -121,7 +121,9 @@ function IndividualModal({ individual, onClose, onSubmit }: IndividualModalProps
           validateOnMount
           initialValues={{
             ...individualEdit,
-            permissionToShareInfo: individualEdit && !!individualEdit.permissionToShareInfo,
+            '@type': 'http://regen.network/Individual',
+            'http://regen.network/sharePermission':
+              individualEdit && !!individualEdit['http://regen.network/sharePermission'],
           }}
           onSubmit={async (values, { setSubmitting }) => {
             setSubmitting(true);
@@ -141,21 +143,26 @@ function IndividualModal({ individual, onClose, onSubmit }: IndividualModalProps
                     className={styles.field}
                     component={ControlledTextField}
                     label="Full name"
-                    name="name"
+                    name="['http://schema.org/name']"
                   />
                   <Field
                     className={styles.field}
                     component={ControlledTextField}
                     label="Email address"
-                    name="email"
+                    name="['http://schema.org/email']"
                   />
-                  <Field className={styles.field} component={PhoneField} label="Phone number" name="phone" />
+                  <Field
+                    className={styles.field}
+                    component={PhoneField}
+                    label="Phone number"
+                    name="['http://schema.org/telephone']"
+                  />
                 </OnBoardingCard>
                 <div className={cx(styles.permission, styles.matchFormPadding)}>
                   <Field
                     type="checkbox"
                     component={CheckboxLabel}
-                    name="permissionToShareInfo"
+                    name="['http://regen.network/sharePermission']"
                     label={
                       <Description className={styles.checkboxLabel}>
                         I have this individual’s permission to share their information with Regen Registry

@@ -36,54 +36,35 @@ const EntityDisplay: React.FC = () => {
       metadata: {
         'http://regen.network/landOwner': {
           '@type': 'http://regen.network/Organization',
-          'http://schema.org/legalName': 'Wyelba',
           'http://regen.network/showOnProjectPage': false,
+          'http://schema.org/legalName': 'Wyelba',
           'http://schema.org/name': '',
           'http://schema.org/logo': '',
           'http://schema.org/description': '',
         },
         'http://regen.network/landSteward': {
           '@type': 'http://regen.network/Individual',
-          'http://schema.org/name': 'Joe Doe',
           'http://regen.network/showOnProjectPage': false,
+          'http://schema.org/name': 'Joe Doe',
           'http://schema.org/photo': '',
           'http://schema.org/description': '',
         },
         'http://regen.network/projectDeveloper': {
           '@type': 'http://regen.network/Individual',
-          'http://schema.org/name': 'Jane Goodall',
           'http://regen.network/showOnProjectPage': false,
+          'http://schema.org/name': 'Jane Goodall',
           'http://schema.org/photo': '',
           'http://schema.org/description': '',
         },
         'http://regen.network/projectOriginator': {
           '@type': 'http://regen.network/Organization',
+          'http://regen.network/showOnProjectPage': false,
           'http://schema.org/legalName': 'Mad Ag',
+          'http://schema.org/logo': '',
+          'http://schema.org/description': '',
         },
       },
     },
-  };
-
-  const blankOrganizationDisplayValues = {
-    'http://regen.network/showOnProjectPage': false,
-    'http://schema.org/name': '',
-    'http://schema.org/logo': '',
-    'http://schema.org/description': '',
-  };
-
-  const blankIndividualDisplayValues = {
-    '@type': 'http://regen.network/Individual',
-    'http://regen.network/showOnProjectPage': false,
-    'http://schema.org/logo': '',
-    'http://schema.org/description': '',
-  };
-
-  const getDisplayValues = (entityType: any) => {
-    if (entityType === 'http://regen.network/Individual') {
-      return { ...blankIndividualDisplayValues };
-    } else if (entityType === 'http://regen.network/Organization') {
-      return { ...blankOrganizationDisplayValues };
-    }
   };
 
   let initialFieldValues: EntityDisplayValues | undefined;

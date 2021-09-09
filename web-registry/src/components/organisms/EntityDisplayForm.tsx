@@ -20,6 +20,8 @@ interface EntityDisplayFormProps {
   initialValues?: EntityDisplayValues;
 }
 
+export interface IndividualDisplayValues extends IndividualShape, IndividualDisplayShape {}
+export interface OrganizationDisplayValues extends OrganizationShape, OrganizationDisplayShape {}
 export interface EntityDisplayValues {
   'http://regen.network/landOwner'?: OrganizationDisplayValues | IndividualDisplayValues;
   'http://regen.network/landSteward'?: OrganizationDisplayValues | IndividualDisplayValues;
@@ -27,12 +29,22 @@ export interface EntityDisplayValues {
   'http://regen.network/projectOriginator'?: OrganizationDisplayValues | IndividualDisplayValues;
 }
 
+type EntityFieldName =
+  | 'http://regen.network/landOwner'
+  | 'http://regen.network/landSteward'
+  | 'http://regen.network/projectDeveloper'
+  | 'http://regen.network/projectOriginator';
+
+type EnityType = 'http://regen.network/Individual' | 'http://regen.network/Organization';
+
 interface OrganizationShape {
-  'http://schema.org/legalName'?: string;
+  '@type': EnityType;
+  'http://schema.org/legalName': string;
 }
 
 interface IndividualShape {
-  'http://schema.org/name'?: string;
+  '@type': EnityType;
+  'http://schema.org/name': string;
 }
 
 interface OrganizationDisplayShape {
@@ -47,9 +59,11 @@ interface IndividualDisplayShape {
   'http://schema.org/image'?: string;
   'http://schema.org/description'?: string;
 }
-
-export interface IndividualDisplayValues extends IndividualShape, IndividualDisplayShape {}
-export interface OrganizationDisplayValues extends OrganizationShape, OrganizationDisplayShape {}
+interface FormletProps {
+  role: EntityFieldName;
+  handleChange: any;
+  values: EntityDisplayValues;
+}
 
 export interface EntityDisplayValuesErrors {
   // TODO
@@ -138,19 +152,23 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialVa
   const styles = useStyles();
   const theme = useTheme();
 
-  const getToggle = (fieldName: string, handleChange: any, values: any): JSX.Element | null => {
-    const entity = values[fieldName];
-    const role = fieldName.toString();
-
-    if (entity['@type'] === 'http://regen.network/Individual') {
-      return <IndividualFormlet role={role} handleChange={handleChange} values={values} />;
-    } else if (entity['@type'] === 'http://regen.network/Organization') {
-      return <OrganizationFormlet role={role} handleChange={handleChange} values={values} />;
+  const getToggle = (
+    fieldName: EntityFieldName,
+    handleChange: any,
+    values: EntityDisplayValues,
+  ): JSX.Element | null => {
+    const entity: OrganizationDisplayValues | IndividualDisplayValues | undefined = values[fieldName];
+    if (entity && values) {
+      if (entity['@type'] === 'http://regen.network/Individual') {
+        return <IndividualFormlet role={fieldName} handleChange={handleChange} values={values} />;
+      } else if (entity['@type'] === 'http://regen.network/Organization') {
+        return <OrganizationFormlet role={fieldName} handleChange={handleChange} values={values} />;
+      }
     }
     return null;
   };
 
-  const OrganizationFormlet: React.FC<any> = ({ handleChange, values, role }) => {
+  const OrganizationFormlet: React.FC<FormletProps> = ({ handleChange, values, role }) => {
     return (
       <Field
         className={styles.field}
@@ -193,7 +211,7 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialVa
     );
   };
 
-  const IndividualFormlet: React.FC<any> = ({ handleChange, values, role }) => {
+  const IndividualFormlet: React.FC<FormletProps> = ({ handleChange, values, role }) => {
     return (
       <Field
         className={styles.field}
@@ -228,7 +246,7 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialVa
     );
   };
 
-  const getEntityTypeString = (shaclRole: string): string => {
+  const getEntityTypeString = (shaclRole: EntityFieldName): string => {
     const friendlyRoles: any = {
       'http://regen.network/landOwner': '(land owner)',
       'http://regen.network/landSteward': '(land steward)',

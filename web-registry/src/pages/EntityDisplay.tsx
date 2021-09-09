@@ -67,7 +67,7 @@ const EntityDisplay: React.FC = () => {
     },
   };
 
-  let initialFieldValues: EntityDisplayValues | undefined;
+  let initialFieldValues: EntityDisplayValues;
   if (data?.projectById?.metadata) {
     const metadata = data.projectById.metadata;
 

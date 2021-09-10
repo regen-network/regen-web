@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 
 import Description from 'web-components/lib/components/description';
 import { OnboardingFormTemplate } from '../components/templates';
-import { EntityDisplayForm, EntityDisplayValues } from '../components/organisms';
+import { EntityDisplayForm, EntityDisplayValues, ProjectEntityType } from '../components/organisms';
 import {
   // useProjectByIdQuery, TODO
   useUpdateProjectByIdMutation,
@@ -35,7 +35,7 @@ const EntityDisplay: React.FC = () => {
     projectById: {
       metadata: {
         'http://regen.network/landOwner': {
-          '@type': 'http://regen.network/Organization',
+          '@type': 'http://regen.network/Organization' as ProjectEntityType,
           'http://regen.network/showOnProjectPage': false,
           'http://schema.org/legalName': 'Wyelba',
           'http://schema.org/name': '',
@@ -43,21 +43,21 @@ const EntityDisplay: React.FC = () => {
           'http://schema.org/description': '',
         },
         'http://regen.network/landSteward': {
-          '@type': 'http://regen.network/Individual',
+          '@type': 'http://regen.network/Individual' as ProjectEntityType,
           'http://regen.network/showOnProjectPage': false,
           'http://schema.org/name': 'Joe Doe',
           'http://schema.org/photo': '',
           'http://schema.org/description': '',
         },
         'http://regen.network/projectDeveloper': {
-          '@type': 'http://regen.network/Individual',
+          '@type': 'http://regen.network/Individual' as ProjectEntityType,
           'http://regen.network/showOnProjectPage': false,
           'http://schema.org/name': 'Jane Goodall',
           'http://schema.org/photo': '',
           'http://schema.org/description': '',
         },
         'http://regen.network/projectOriginator': {
-          '@type': 'http://regen.network/Organization',
+          '@type': 'http://regen.network/Organization' as ProjectEntityType,
           'http://regen.network/showOnProjectPage': false,
           'http://schema.org/legalName': 'Mad Ag',
           'http://schema.org/logo': '',
@@ -67,7 +67,7 @@ const EntityDisplay: React.FC = () => {
     },
   };
 
-  let initialFieldValues: EntityDisplayValues;
+  let initialFieldValues: EntityDisplayValues = {};
   if (data?.projectById?.metadata) {
     const metadata = data.projectById.metadata;
 

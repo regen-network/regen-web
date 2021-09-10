@@ -35,19 +35,22 @@ type EntityFieldName =
   | 'http://regen.network/projectDeveloper'
   | 'http://regen.network/projectOriginator';
 
-type EnityType = 'http://regen.network/Individual' | 'http://regen.network/Organization';
+export type ProjectEntityType = 'http://regen.network/Individual' | 'http://regen.network/Organization';
 
 interface OrganizationShape {
-  '@type': EnityType;
+  [key: string]: string | boolean | ProjectEntityType | undefined;
+  '@type': ProjectEntityType;
   'http://schema.org/legalName': string;
 }
 
 interface IndividualShape {
-  '@type': EnityType;
+  [key: string]: string | boolean | ProjectEntityType | undefined;
+  '@type': ProjectEntityType;
   'http://schema.org/name': string;
 }
 
 interface OrganizationDisplayShape {
+  [key: string]: string | boolean | ProjectEntityType | undefined;
   'http://regen.network/showOnProjectPage': boolean;
   'http://schema.org/name'?: string;
   'http://schema.org/logo'?: string;
@@ -55,11 +58,18 @@ interface OrganizationDisplayShape {
 }
 
 interface IndividualDisplayShape {
+  [key: string]: string | boolean | ProjectEntityType | undefined;
   'http://regen.network/showOnProjectPage': boolean;
   'http://schema.org/image'?: string;
   'http://schema.org/description'?: string;
 }
 interface FormletProps {
+  role: EntityFieldName;
+  handleChange: any;
+  values: EntityDisplayValues;
+}
+
+interface IndiividualFormletProps {
   role: EntityFieldName;
   handleChange: any;
   values: EntityDisplayValues;
@@ -157,22 +167,23 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialVa
     handleChange: any,
     values: EntityDisplayValues,
   ): JSX.Element | null => {
-    const entity: OrganizationDisplayValues | IndividualDisplayValues | undefined = values[fieldName];
+    const entity = values[fieldName];
     if (entity && values) {
       if (entity['@type'] === 'http://regen.network/Individual') {
         return <IndividualFormlet role={fieldName} handleChange={handleChange} values={values} />;
       } else if (entity['@type'] === 'http://regen.network/Organization') {
+        // const orgValues = entity as OrganizationDisplayValues;
         return <OrganizationFormlet role={fieldName} handleChange={handleChange} values={values} />;
       }
     }
     return null;
   };
 
-  const OrganizationFormlet: React.FC<FormletProps> = ({ handleChange, values, role }) => {
+  const OrganizationFormlet: React.FC<FormletProps> = ({ role, handleChange, values }) => {
     return (
       <Field
         className={styles.field}
-        label={`${values[role]['http://schema.org/legalName']} ${getEntityTypeString(role)}`}
+        label={`${values[role]?.['http://schema.org/legalName']} ${getEntityTypeString(role)}`}
         type="checkbox"
         component={Toggle}
         onChange={handleChange}
@@ -216,7 +227,7 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialVa
       <Field
         className={styles.field}
         classes={{ description: styles.toggleDescription }}
-        label={`${values[role]['http://schema.org/name']} ${getEntityTypeString(role)}`}
+        label={`${values[role]?.['http://schema.org/name']} ${getEntityTypeString(role)}`}
         description="recommended to increase salability"
         type="checkbox"
         component={Toggle}

@@ -357,15 +357,6 @@ coreSection:
 contributorSection:
   title: Contributors
   contributors:
-    - description: >
-        Will’s background in gift economics and local food systems helped him to
-        start PVGrows, a network in Western MA funding local food system
-        infrastructure, and develop a license for definancializing physical
-        infrastructure, the Gift License. Will is a member of the Board of
-        Directors.
-      title: Co-founder
-      name: Will Szal
-      image: ../../static/media/img06.jpeg
     - description: Ethan Frey has years of experience in distributed systems,
         cryptography, customer-oriented web design, and blockchain. And a strong
         desire to build something meaningful to humankind. He is delighted to

@@ -20,7 +20,10 @@ interface EntityDisplayFormProps {
   initialValues?: EntityDisplayValues;
 }
 
-interface IndividualDisplayValues extends IndividualShape, IndividualDisplayShape {}
+interface IndividualDisplayValues extends IndividualShape, IndividualDisplayShape {
+  [key: string]: string | boolean | undefined;
+}
+
 interface OrganizationDisplayValues extends OrganizationShape, OrganizationDisplayShape {}
 
 export interface EntityDisplayValues {
@@ -56,11 +59,11 @@ interface OrganizationDisplayShape {
 }
 
 interface IndividualDisplayShape {
-  [key: string]: string | boolean | undefined;
   'http://regen.network/showOnProjectPage': boolean;
   'http://schema.org/image'?: string;
   'http://schema.org/description'?: string;
 }
+
 interface FormletProps {
   role: EntityFieldName;
   handleChange: any;

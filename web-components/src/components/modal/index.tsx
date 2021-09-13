@@ -9,6 +9,7 @@ export interface RegenModalProps {
   open: boolean;
   onClose: () => void;
   className?: string;
+  closeIconColor?: string;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -75,7 +76,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const RegenModal: React.FC<RegenModalProps> = ({ open, onClose, children, className }) => {
+const RegenModal: React.FC<RegenModalProps> = ({ open, onClose, children, className, closeIconColor }) => {
   const classes = useStyles({});
   return (
     <Modal open={open} onClose={onClose}>
@@ -83,7 +84,7 @@ const RegenModal: React.FC<RegenModalProps> = ({ open, onClose, children, classN
         <div className={clsx(classes.content, className)}>
           {children}
           <div className={classes.closeIcon} onClick={onClose}>
-            <CloseIcon />
+            <CloseIcon svgColor={closeIconColor} />
           </div>
         </div>
       </RemoveScroll>

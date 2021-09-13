@@ -56,8 +56,8 @@ fragment purchasesFields on PurchasesConnection {
         name
         version
         metadata
+        documentId
         creditClassById {
-          handle
           standard
         }
       }
@@ -65,9 +65,7 @@ fragment purchasesFields on PurchasesConnection {
         name
         version
         metadata
-        methodologyById {
-          handle
-        }
+        documentId
       }
       projectByProjectId {
         name

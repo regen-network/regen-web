@@ -347,6 +347,16 @@ coreSection:
 contributorSection:
   title: Contributors
   contributors:
+    - image: ../../static/media/img06.jpeg
+      name: Will Szal
+      description: Will’s background in gift economics and local food systems helped
+        him to start PVGrows, a network in Western MA funding local food system
+        infrastructure, and develop a license for definancializing physical
+        infrastructure, the Gift License. Will serves as Board President at
+        Regen Foundation.
+      title: Board President - Regen Foundation
+      linkedUrl: https://www.linkedin.com/in/willszal/
+      twitterUrl: https://twitter.com/willszal
     - description: Ethan Frey has years of experience in distributed systems,
         cryptography, customer-oriented web design, and blockchain. And a strong
         desire to build something meaningful to humankind. He is delighted to

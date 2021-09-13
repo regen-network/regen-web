@@ -3,6 +3,7 @@ mutation ReallyCreateUser($input: ReallyCreateUserInput!) {
     user {
       id
       partyByPartyId {
+        id
         walletId
         addressId
       }

@@ -23,6 +23,7 @@ interface IndividualModalProps {
 
 export interface IndividualFormValues {
   id?: string;
+  partyId?: string;
   '@type': string;
   'http://schema.org/name'?: string;
   'http://schema.org/telephone'?: string;

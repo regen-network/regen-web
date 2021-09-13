@@ -26,7 +26,9 @@ interface OrganizationModalProps {
 
 export interface OrganizationFormValues {
   id?: string;
+  partyId?: string;
   ownerId?: string;
+  partyOwnerId?: string;
   '@type': string;
   'http://schema.org/legalName'?: string;
   'http://schema.org/telephone'?: string;

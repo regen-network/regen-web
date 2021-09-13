@@ -115,6 +115,7 @@ const RolesForm: React.FC<RolesFormProps> = ({ submit, initialValues }) => {
           });
           if (userRes?.data?.reallyCreateUser?.user?.id) {
             updatedEntity.id = userRes?.data?.reallyCreateUser?.user?.id;
+            updatedEntity.partyId = userRes?.data?.reallyCreateUser?.user?.partyByPartyId?.id;
           }
         } else {
           const ownerRes = await createUser({
@@ -158,10 +159,20 @@ const RolesForm: React.FC<RolesFormProps> = ({ submit, initialValues }) => {
           await updateUserById({
             variables: {
               input: {
-                email: updat,
+                id: updatedEntity.id,
                 userPatch: {
-                  phoneNumber: values.phone,
-                  roleTitle: values.roleTitle,
+                  email: updatedEntity['http://schema.org/email'],
+                  phoneNumber: updatedEntity['http://schema.org/telephone'],
+                },
+              },
+            },
+          });
+          await updatePartyById({
+            variables: {
+              input: {
+                id: updatedEntity.partyId,
+                partyPatch: {
+                  name: updatedEntity['http://schema.org/name'],
                 },
               },
             },

@@ -6,7 +6,19 @@ import cx from 'clsx';
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import OnboardingFooter from 'web-components/lib/components/fixed-footer/OnboardingFooter';
 import { RoleField } from 'web-components/lib/components/inputs/RoleField';
+import { IndividualFormValues } from 'web-components/lib/components/modal/IndividualModal';
+import { OrganizationFormValues } from 'web-components/lib/components/modal/OrganizationModal';
+
 import Title from 'web-components/lib/components/title';
+
+import {
+  useReallyCreateUserMutation,
+  useReallyCreateOrganizationMutation,
+  useUpdateUserByIdMutation,
+  useUpdatePartyByIdMutation,
+  useUpdateOrganizationByIdMutation,
+  useUpdateAddressByIdMutation,
+} from '../../generated/graphql';
 
 interface RolesFormProps {
   submit: (values: RolesValues) => Promise<void>;
@@ -55,36 +67,114 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
+type FormValues = IndividualFormValues | OrganizationFormValues;
+function isIndividual(e: FormValues): e is IndividualFormValues {
+  if (e['@type'] === 'http://regen.network/Individual') {
+    return true;
+  }
+  return false;
+}
+
 const RolesForm: React.FC<RolesFormProps> = ({ submit, initialValues }) => {
   const [entities, setEntities] = useState<any>([]); //TODO: typings
   const [options, setOptions] = useState<any>([]);
   const styles = useStyles();
+  const [createUser] = useReallyCreateUserMutation();
+  const [createOrganization] = useReallyCreateOrganizationMutation();
+  const [updateUserById] = useUpdateUserByIdMutation();
+  const [updatePartyById] = useUpdatePartyByIdMutation();
+  const [updateOrganizationById] = useUpdateOrganizationByIdMutation();
+  const [updateAddressById] = useUpdateAddressByIdMutation();
 
   // TODO: getEntities - delete the mocked out logic below. Issue #494
 
   useEffect(() => {
-    const entityOptions = entities.map((e: any) => {
+    const entityOptions = entities.map((e: FormValues) => {
       return {
         ...e,
-        label:
-          e['@type'] === 'http://regen.network/Individual'
-            ? e['http://schema.org/name']
-            : e['http://schema.org/legalName'],
+        label: isIndividual(e) ? e['http://schema.org/name'] : e['http://schema.org/legalName'],
       };
     });
 
     setOptions(entityOptions);
   }, [entities]);
 
-  const saveEntity = (updatedEntity: any): Promise<any> => {
+  const saveEntity = async (updatedEntity: FormValues): Promise<any> => {
+    // TODO entity validation
     if (!updatedEntity.id) {
-      updatedEntity.id = entities.length ? entities[entities.length - 1].id + 1 : 1; //TODO: real DB save #494
+      try {
+        if (isIndividual(updatedEntity)) {
+          const userRes = await createUser({
+            variables: {
+              input: {
+                email: updatedEntity['http://schema.org/email'],
+                name: updatedEntity['http://schema.org/name'],
+                phoneNumber: updatedEntity['http://schema.org/telephone'],
+              },
+            },
+          });
+          if (userRes?.data?.reallyCreateUser?.user?.id) {
+            updatedEntity.id = userRes?.data?.reallyCreateUser?.user?.id;
+          }
+        } else {
+          const ownerRes = await createUser({
+            variables: {
+              input: {
+                email: updatedEntity['http://schema.org/email'],
+                name: updatedEntity['http://regen.network/responsiblePerson'],
+                phoneNumber: updatedEntity['http://schema.org/telephone'],
+              },
+            },
+          });
+          if (ownerRes?.data?.reallyCreateUser?.user?.id) {
+            const orgRes = await createOrganization({
+              variables: {
+                input: {
+                  ownerId: ownerRes?.data?.reallyCreateUser?.user?.id,
+                  legalName: updatedEntity['http://schema.org/legalName'],
+                  displayName: updatedEntity['http://schema.org/legalName'],
+                  orgAddress: updatedEntity['http://schema.org/location'],
+                  image: '', // temp value for now until EntityDisplay values are provided
+                  walletAddr: '',
+                },
+              },
+            });
+            if (orgRes?.data?.reallyCreateOrganization?.organization?.id) {
+              updatedEntity.id = orgRes?.data?.reallyCreateOrganization?.organization?.id;
+              updatedEntity.ownerId = ownerRes?.data?.reallyCreateUser?.user?.id;
+            }
+          }
+        }
+      } catch (e) {
+        // TODO: Should we display the error banner here?
+        // https://github.com/regen-network/regen-registry/issues/555
+        console.log(e);
+      }
       const newEntities = [...entities, { ...updatedEntity, id: updatedEntity.id }];
       setEntities(newEntities);
     } else {
-      const updatedEntities = entities.map(
-        (existingEntity: any) =>
-          existingEntity.id === updatedEntity.id ? { ...updatedEntity } : existingEntity, //TODO: real DB save #494
+      try {
+        if (isIndividual(updatedEntity)) {
+          await updateUserById({
+            variables: {
+              input: {
+                email: updat,
+                userPatch: {
+                  phoneNumber: values.phone,
+                  roleTitle: values.roleTitle,
+                },
+              },
+            },
+          });
+        } else {
+        }
+      } catch (e) {
+        // TODO: Should we display the error banner here?
+        // https://github.com/regen-network/regen-registry/issues/555
+        console.log(e);
+      }
+      const updatedEntities = entities.map((existingEntity: any) =>
+        existingEntity.id === updatedEntity.id ? { ...updatedEntity } : existingEntity,
       );
       setEntities(updatedEntities);
     }
@@ -117,7 +207,7 @@ const RolesForm: React.FC<RolesFormProps> = ({ submit, initialValues }) => {
         }}
       >
         {({ values, submitForm, isValid, isSubmitting }) => {
-          console.log(values)
+          console.log(values);
           return (
             <Form translate="yes">
               <OnBoardingCard className={styles.storyCard}>

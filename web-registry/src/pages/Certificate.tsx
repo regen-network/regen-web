@@ -270,7 +270,7 @@ function CertificatePage(): JSX.Element {
                   creditClassVersion?.metadata?.['http://regen.network/offsetGenerationMethod'] ||
                   'Carbon Removal'
                 }
-                creditUnitName={creditClassVersion?.metadata?.['http://regen.network/creditClassUnit']}
+                creditUnitName={creditClassVersion?.metadata?.['http://regen.network/creditDenom']}
                 projectName={project?.name || ''}
                 creditsUnits={units}
                 equivalentTonsCO2={units} // 1 credit <=> 1 ton CO2e
@@ -306,21 +306,34 @@ function CertificatePage(): JSX.Element {
                 vintagePeriod: getFormattedPeriod(vintage.startDate, vintage.endDate),
                 creditClass: {
                   standard: creditClassVersion?.creditClassById?.standard || false,
-                  id: creditClassVersion?.creditClassById?.handle || '',
-                  name: creditClassVersion?.name,
+                  documentId: creditClassVersion?.documentId,
+                  name: creditClassVersion?.name || '',
                   version: creditClassVersion?.version || '',
-                  standardUrl: creditClassVersion?.metadata?.['http://regen.network/standardUrl'],
                   url: creditClassVersion?.metadata?.['http://schema.org/url'],
                 },
                 methodology: {
-                  id: methodologyVersion?.methodologyById?.handle || '',
-                  name: methodologyVersion?.name,
+                  documentId: methodologyVersion?.documentId,
+                  name: methodologyVersion?.name || '',
                   version: methodologyVersion?.version || '',
                   url: methodologyVersion?.metadata?.['http://schema.org/url'],
                 },
-                programGuide: {
-                  id: creditClassVersion?.metadata?.programGuide?.handle,
-                  version: creditClassVersion?.metadata?.programGuide?.version,
+                standard: {
+                  documentId:
+                    creditClassVersion?.metadata?.['http://regen.network/standard']?.[
+                      'http://regen.network/documentId'
+                    ],
+                  name:
+                    creditClassVersion?.metadata?.['http://regen.network/standard']?.[
+                      'http://schema.org/name'
+                    ] || '',
+                  version:
+                    creditClassVersion?.metadata?.['http://regen.network/standard']?.[
+                      'http://schema.org/version'
+                    ] || '',
+                  url:
+                    creditClassVersion?.metadata?.['http://regen.network/standard']?.[
+                      'http://schema.org/url'
+                    ],
                 },
                 projectType: project.type || '',
               }}
@@ -334,7 +347,7 @@ function CertificatePage(): JSX.Element {
   const currentPurchase = data?.allPurchases?.nodes[current];
   const currentVintage = currentPurchase?.creditVintageByCreditVintageId;
   const currentProject = currentVintage?.projectByProjectId;
-  const externalProjectLink = currentProject?.metadata?.['http://regen.network/externalProjectPageLink'];
+  const externalProjectLink = currentProject?.metadata?.['http://regen.network/externalProjectUrl'];
   const issuer = currentVintage?.partyByIssuerId;
   const retirements = currentVintage?.retirementsByCreditVintageId?.nodes?.filter(n =>
     buyerWalletId ? n?.walletId === buyerWalletId : n?.walletId === currentPurchase?.buyerWalletId,

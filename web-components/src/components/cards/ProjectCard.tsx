@@ -8,6 +8,7 @@ import BreadcrumbIcon from '../icons/BreadcrumbIcon';
 import Description from '../description';
 import ProjectPlaceInfo, { Place } from '../place/ProjectPlaceInfo';
 import UserInfo, { User } from '../user/UserInfo';
+import { StandardInfo, formatStandardInfo } from '../../utils/format';
 
 export interface ProjectInfo {
   name: string;
@@ -18,19 +19,12 @@ export interface ProjectInfo {
   registry: User;
 }
 
-interface Info {
-  id: string;
-  name?: string;
-  version: string;
+interface Info extends StandardInfo {
+  url?: string | null;
 }
 
-interface InfoWithUrl extends Info {
-  url?: string;
-}
-
-interface CreditClassInfo extends Info, InfoWithUrl {
+interface CreditClassInfo extends Info {
   standard: boolean;
-  standardUrl?: string;
 }
 
 interface PurchaseInfo {
@@ -39,8 +33,8 @@ interface PurchaseInfo {
   vintageMetadata: any;
   vintagePeriod: string;
   creditClass: CreditClassInfo;
-  methodology: InfoWithUrl;
-  programGuide: Info;
+  methodology: Info;
+  standard: Info;
   projectType: string;
 }
 
@@ -189,7 +183,15 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-function PurchaseDetails({ title, info, url }: { title: string; info: string; url?: string }): JSX.Element {
+function PurchaseDetails({
+  title,
+  info,
+  url,
+}: {
+  title: string;
+  info: string;
+  url?: string | null;
+}): JSX.Element {
   const classes = useStyles();
   const parsedInfo = ReactHtmlParser(info);
 
@@ -207,14 +209,6 @@ function PurchaseDetails({ title, info, url }: { title: string; info: string; ur
       </Description>
     </div>
   );
-}
-
-function formatInfo(info: Info): string {
-  return `${info.name ? `${info.name}, ` : ''}${info.id}, ${info.version}`;
-}
-
-function formatStandard(info: CreditClassInfo): string {
-  return `${info.id} Standard ${info.version}`;
 }
 
 export default function ProjectCard({
@@ -244,7 +238,7 @@ export default function ProjectCard({
   const serialNumber: string | undefined =
     purchaseInfo?.vintageMetadata?.['http://regen.network/serialNumber'];
   const additionalCertifications: string[] | undefined =
-    purchaseInfo?.vintageMetadata?.['http://regen.network/additionalCertifications'];
+    purchaseInfo?.vintageMetadata?.['http://regen.network/additionalCertifications']?.['@list'];
 
   return (
     <MediaCard
@@ -307,25 +301,21 @@ export default function ProjectCard({
                 info={
                   purchaseInfo.creditClass.standard && purchaseInfo.creditClass.name
                     ? purchaseInfo.creditClass.name
-                    : formatInfo(purchaseInfo.creditClass)
+                    : formatStandardInfo(purchaseInfo.creditClass)
                 }
               />
               <PurchaseDetails
                 url={purchaseInfo.methodology.url}
                 title="methodology"
-                info={formatInfo(purchaseInfo.methodology)}
+                info={formatStandardInfo(purchaseInfo.methodology)}
               />
-              {purchaseInfo.creditClass.standard ? (
-                <PurchaseDetails
-                  url={purchaseInfo.creditClass.standardUrl}
-                  title="standard"
-                  info={formatStandard(purchaseInfo.creditClass)}
-                />
-              ) : (
-                <>
-                  <PurchaseDetails title="program guide" info={formatInfo(purchaseInfo.programGuide)} />
-                  <PurchaseDetails title="project type" info={purchaseInfo.projectType} />
-                </>
+              <PurchaseDetails
+                url={purchaseInfo.standard.url}
+                title="standard"
+                info={formatStandardInfo(purchaseInfo.standard)}
+              />
+              {purchaseInfo.projectType && (
+                <PurchaseDetails title="project type" info={purchaseInfo.projectType} />
               )}
               {additionalCertifications && (
                 <PurchaseDetails

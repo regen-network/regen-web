@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles, TextField } from '@material-ui/core';
 import Autocomplete, { createFilterOptions } from '@material-ui/lab/Autocomplete';
-import { FieldProps } from 'formik';
+import { FieldProps, FormikErrors } from 'formik';
 import cx from 'clsx';
 
 import FieldFormControl from './FieldFormControl';
@@ -9,8 +9,8 @@ import { Label } from '../label';
 import OrganizationIcon from '../icons/OrganizationIcon';
 import UserIcon from '../icons/UserIcon';
 import OutlinedButton from '../buttons/OutlinedButton';
-import { OrganizationModal } from '../modal/OrganizationModal';
-import { IndividualModal } from '../modal/IndividualModal';
+import { OrganizationModal, OrganizationFormValues } from '../modal/OrganizationModal';
+import { IndividualModal, IndividualFormValues } from '../modal/IndividualModal';
 
 const filter = createFilterOptions<RoleOptionType>();
 
@@ -77,9 +77,10 @@ interface Props extends FieldProps {
   label?: string;
   optional?: boolean;
   placeholder?: string;
-  options?: any[];
-  onSaveOrganization: (v: any) => Promise<any>;
-  onSaveIndividual: (v: any) => Promise<any>;
+  options?: Option[];
+  onSaveOrganization: (v: OrganizationFormValues) => Promise<any>;
+  onSaveIndividual: (v: IndividualFormValues) => Promise<any>;
+  validateEntity: (values: FormValues) => Promise<FormikErrors<FormValues>>;
   mapboxToken: string;
 }
 
@@ -87,6 +88,23 @@ interface RoleOptionType {
   inputValue?: string;
   label: string;
   id?: number;
+}
+
+interface OptionLabel {
+  label?: string;
+}
+
+interface IndividualOption extends IndividualFormValues, OptionLabel {}
+interface OrganizationOption extends OrganizationFormValues, OptionLabel {}
+
+export type FormValues = IndividualFormValues | OrganizationFormValues;
+export type Option = IndividualOption | OrganizationOption;
+
+export function isIndividual(e: FormValues): e is IndividualFormValues {
+  if (e['@type'] === 'http://regen.network/Individual') {
+    return true;
+  }
+  return false;
 }
 
 const RoleField: React.FC<Props> = ({
@@ -99,10 +117,11 @@ const RoleField: React.FC<Props> = ({
   mapboxToken,
   onSaveOrganization,
   onSaveIndividual,
+  validateEntity,
   ...fieldProps
 }) => {
   const styles = useStyles();
-  const [organizationEdit, setOrganizationEdit] = useState<any | null>(null);
+  const [organizationEdit, setOrganizationEdit] = useState<any | null>();
   const [individualEdit, setIndividualEdit] = useState<any | null>(null);
   const [value, setValue] = useState<any | null>({});
   const { form, field } = fieldProps;
@@ -119,10 +138,10 @@ const RoleField: React.FC<Props> = ({
     form.setFieldValue(field.name, savedOrg);
   };
 
-  const saveIndividual = async (person: any): Promise<void> => {
-    var savedPerson = await onSaveIndividual(person);
+  const saveIndividual = async (user: any): Promise<void> => {
+    var savedUser = await onSaveIndividual(user);
     closeIndividualModal();
-    form.setFieldValue(field.name, savedPerson);
+    form.setFieldValue(field.name, savedUser);
   };
 
   const closeOrganizationModal = (): void => {
@@ -133,11 +152,11 @@ const RoleField: React.FC<Props> = ({
     setIndividualEdit(null);
   };
 
-  const editEntity = (entity: any): void => {
-    if (entity.type === 'organization') {
-      setOrganizationEdit(entity);
-    } else {
+  const editEntity = (entity: FormValues): void => {
+    if (isIndividual(entity)) {
       setIndividualEdit(entity);
+    } else {
+      setOrganizationEdit(entity);
     }
   };
 
@@ -165,6 +184,7 @@ const RoleField: React.FC<Props> = ({
             getOptionSelected={o => o.id === field.value}
             renderOption={o => o.label || o}
             onChange={(event, newValue, reason) => {
+              console.log('newValue', newValue)
               if (reason === 'select-option' && !newValue.inputValue) {
                 handleChange(newValue.id);
               } else if (typeof newValue === 'string') {
@@ -186,7 +206,6 @@ const RoleField: React.FC<Props> = ({
             )}
             filterOptions={(options, state) => {
               const filtered = filter(options, state) as RoleOptionType[];
-
               // Suggest the creation of a new value
               filtered.push(
                 ((
@@ -232,6 +251,7 @@ const RoleField: React.FC<Props> = ({
           organization={organizationEdit}
           onClose={closeOrganizationModal}
           onSubmit={saveOrganization}
+          validate={validateEntity}
           mapboxToken={mapboxToken}
         />
       )}
@@ -240,6 +260,7 @@ const RoleField: React.FC<Props> = ({
           individual={individualEdit}
           onClose={closeIndividualModal}
           onSubmit={saveIndividual}
+          validate={validateEntity}
         />
       )}
     </div>

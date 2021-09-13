@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
-import { Formik, Form, Field } from 'formik';
+import { Formik, Form, Field, FormikErrors } from 'formik';
 import cx from 'clsx';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import OnboardingFooter from 'web-components/lib/components/fixed-footer/OnboardingFooter';
-import { RoleField } from 'web-components/lib/components/inputs/RoleField';
+import { RoleField, FormValues, Option, isIndividual } from 'web-components/lib/components/inputs/RoleField';
+import Title from 'web-components/lib/components/title';
+import { requiredMessage } from 'web-components/lib/components/inputs/validation';
 import { IndividualFormValues } from 'web-components/lib/components/modal/IndividualModal';
 import { OrganizationFormValues } from 'web-components/lib/components/modal/OrganizationModal';
 
-import Title from 'web-components/lib/components/title';
-
+import { validate, getProjectPageBaseData } from '../../lib/rdf';
 import {
   useReallyCreateUserMutation,
   useReallyCreateOrganizationMutation,
@@ -18,6 +19,7 @@ import {
   useUpdatePartyByIdMutation,
   useUpdateOrganizationByIdMutation,
   useUpdateAddressByIdMutation,
+  useShaclGraphByUriQuery,
 } from '../../generated/graphql';
 
 interface RolesFormProps {
@@ -67,18 +69,16 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-type FormValues = IndividualFormValues | OrganizationFormValues;
-function isIndividual(e: FormValues): e is IndividualFormValues {
-  if (e['@type'] === 'http://regen.network/Individual') {
-    return true;
-  }
-  return false;
-}
-
 const RolesForm: React.FC<RolesFormProps> = ({ submit, initialValues }) => {
-  const [entities, setEntities] = useState<any>([]); //TODO: typings
-  const [options, setOptions] = useState<any>([]);
+  const [entities, setEntities] = useState<Array<FormValues>>([]);
+  const [options, setOptions] = useState<Array<Option>>([]);
   const styles = useStyles();
+
+  const { data: graphData } = useShaclGraphByUriQuery({
+    variables: {
+      uri: 'http://regen.network/ProjectPageShape',
+    },
+  });
   const [createUser] = useReallyCreateUserMutation();
   const [createOrganization] = useReallyCreateOrganizationMutation();
   const [updateUserById] = useUpdateUserByIdMutation();
@@ -95,55 +95,137 @@ const RolesForm: React.FC<RolesFormProps> = ({ submit, initialValues }) => {
         label: isIndividual(e) ? e['http://schema.org/name'] : e['http://schema.org/legalName'],
       };
     });
-
     setOptions(entityOptions);
   }, [entities]);
 
-  const saveEntity = async (updatedEntity: FormValues): Promise<any> => {
-    // TODO entity validation
+  const updateUser = async (
+    id: string,
+    partyId: string,
+    email?: string,
+    name?: string,
+    phoneNumber?: string,
+  ): Promise<void> => {
+    await updateUserById({
+      variables: {
+        input: {
+          id,
+          userPatch: {
+            email,
+            phoneNumber,
+          },
+        },
+      },
+    });
+    await updatePartyById({
+      variables: {
+        input: {
+          id: partyId,
+          partyPatch: {
+            name,
+          },
+        },
+      },
+    });
+  };
+
+  const validateEntity = async (e: FormValues): Promise<FormikErrors<FormValues>> => {
+    const errors: FormikErrors<FormValues> = {};
+    if (graphData?.shaclGraphByUri?.graph) {
+      const report = await validate(
+        graphData.shaclGraphByUri.graph,
+        e,
+        'http://regen.network/ProjectPageRolesGroup',
+      );
+      for (const result of report.results) {
+        const path: keyof FormValues = result.path.value;
+        errors[path] = requiredMessage;
+      }
+    }
+    console.log(errors)
+    return errors;
+  };
+
+  const saveIndividual = async (updatedEntity: IndividualFormValues): Promise<FormValues> => {
     if (!updatedEntity.id) {
+      // Create
       try {
-        if (isIndividual(updatedEntity)) {
-          const userRes = await createUser({
+        const userRes = await createUser({
+          variables: {
+            input: {
+              email: updatedEntity['http://schema.org/email'],
+              name: updatedEntity['http://schema.org/name'],
+              phoneNumber: updatedEntity['http://schema.org/telephone'],
+            },
+          },
+        });
+        if (userRes?.data?.reallyCreateUser?.user?.id) {
+          updatedEntity.id = userRes?.data?.reallyCreateUser?.user?.id;
+          updatedEntity.partyId = userRes?.data?.reallyCreateUser?.user?.partyId;
+        }
+      } catch (e) {
+        // TODO: Should we display the error banner here?
+        // https://github.com/regen-network/regen-registry/issues/555
+        console.log(e);
+      }
+      const newEntities = [...entities, { ...updatedEntity, id: updatedEntity.id }];
+      setEntities(newEntities);
+    } else {
+      // Update
+      try {
+        if (updatedEntity.partyId) {
+          await updateUser(
+            updatedEntity.id,
+            updatedEntity.partyId,
+            updatedEntity['http://schema.org/email'],
+            updatedEntity['http://schema.org/name'],
+            updatedEntity['http://schema.org/telephone'],
+          );
+        }
+      } catch (e) {
+        // TODO: Should we display the error banner here?
+        // https://github.com/regen-network/regen-registry/issues/555
+        console.log(e);
+      }
+      const updatedEntities = entities.map((existingEntity: FormValues) =>
+        existingEntity.id === updatedEntity.id ? { ...updatedEntity } : existingEntity,
+      );
+      setEntities(updatedEntities);
+    }
+    return Promise.resolve(updatedEntity);
+  };
+
+  const saveOrganization = async (updatedEntity: OrganizationFormValues): Promise<FormValues> => {
+    if (!updatedEntity.id) {
+      // Create
+      try {
+        const ownerRes = await createUser({
+          variables: {
+            input: {
+              email: updatedEntity['http://schema.org/email'],
+              name: updatedEntity['http://regen.network/responsiblePerson'],
+              phoneNumber: updatedEntity['http://schema.org/telephone'],
+            },
+          },
+        });
+        if (ownerRes?.data?.reallyCreateUser?.user?.id) {
+          const orgRes = await createOrganization({
             variables: {
               input: {
-                email: updatedEntity['http://schema.org/email'],
-                name: updatedEntity['http://schema.org/name'],
-                phoneNumber: updatedEntity['http://schema.org/telephone'],
+                ownerId: ownerRes?.data?.reallyCreateUser?.user?.id,
+                legalName: updatedEntity['http://schema.org/legalName'],
+                orgAddress: updatedEntity['http://schema.org/location'],
+                displayName: '', // temp values for now until EntityDisplay values are provided
+                image: '',
+                walletAddr: '',
               },
             },
           });
-          if (userRes?.data?.reallyCreateUser?.user?.id) {
-            updatedEntity.id = userRes?.data?.reallyCreateUser?.user?.id;
-            updatedEntity.partyId = userRes?.data?.reallyCreateUser?.user?.partyByPartyId?.id;
-          }
-        } else {
-          const ownerRes = await createUser({
-            variables: {
-              input: {
-                email: updatedEntity['http://schema.org/email'],
-                name: updatedEntity['http://regen.network/responsiblePerson'],
-                phoneNumber: updatedEntity['http://schema.org/telephone'],
-              },
-            },
-          });
-          if (ownerRes?.data?.reallyCreateUser?.user?.id) {
-            const orgRes = await createOrganization({
-              variables: {
-                input: {
-                  ownerId: ownerRes?.data?.reallyCreateUser?.user?.id,
-                  legalName: updatedEntity['http://schema.org/legalName'],
-                  displayName: updatedEntity['http://schema.org/legalName'],
-                  orgAddress: updatedEntity['http://schema.org/location'],
-                  image: '', // temp value for now until EntityDisplay values are provided
-                  walletAddr: '',
-                },
-              },
-            });
-            if (orgRes?.data?.reallyCreateOrganization?.organization?.id) {
-              updatedEntity.id = orgRes?.data?.reallyCreateOrganization?.organization?.id;
-              updatedEntity.ownerId = ownerRes?.data?.reallyCreateUser?.user?.id;
-            }
+          if (orgRes?.data?.reallyCreateOrganization?.organization?.id) {
+            updatedEntity.id = orgRes?.data?.reallyCreateOrganization?.organization?.id;
+            updatedEntity.addressId =
+              orgRes?.data?.reallyCreateOrganization?.organization?.partyByPartyId?.addressId;
+            updatedEntity.ownerId = ownerRes?.data?.reallyCreateUser?.user?.id;
+            updatedEntity.ownerPartyId = ownerRes?.data?.reallyCreateUser?.user?.partyId;
           }
         }
       } catch (e) {
@@ -154,37 +236,43 @@ const RolesForm: React.FC<RolesFormProps> = ({ submit, initialValues }) => {
       const newEntities = [...entities, { ...updatedEntity, id: updatedEntity.id }];
       setEntities(newEntities);
     } else {
+      // Update
       try {
-        if (isIndividual(updatedEntity)) {
-          await updateUserById({
-            variables: {
-              input: {
-                id: updatedEntity.id,
-                userPatch: {
-                  email: updatedEntity['http://schema.org/email'],
-                  phoneNumber: updatedEntity['http://schema.org/telephone'],
-                },
+        await updateOrganizationById({
+          variables: {
+            input: {
+              id: updatedEntity.id,
+              organizationPatch: {
+                legalName: updatedEntity['http://schema.org/legalName'],
               },
             },
-          });
-          await updatePartyById({
-            variables: {
-              input: {
-                id: updatedEntity.partyId,
-                partyPatch: {
-                  name: updatedEntity['http://schema.org/name'],
-                },
+          },
+        });
+        await updateAddressById({
+          variables: {
+            input: {
+              id: updatedEntity.addressId,
+              addressPatch: {
+                feature: updatedEntity['http://schema.org/location'],
               },
             },
-          });
-        } else {
+          },
+        });
+        if (updatedEntity.ownerId && updatedEntity.ownerPartyId) {
+          await updateUser(
+            updatedEntity.id,
+            updatedEntity.ownerPartyId,
+            updatedEntity['http://schema.org/email'],
+            updatedEntity['http://regen.network/responsiblePerson'],
+            updatedEntity['http://schema.org/telephone'],
+          );
         }
       } catch (e) {
         // TODO: Should we display the error banner here?
         // https://github.com/regen-network/regen-registry/issues/555
         console.log(e);
       }
-      const updatedEntities = entities.map((existingEntity: any) =>
+      const updatedEntities = entities.map((existingEntity: FormValues) =>
         existingEntity.id === updatedEntity.id ? { ...updatedEntity } : existingEntity,
       );
       setEntities(updatedEntities);
@@ -234,8 +322,9 @@ const RolesForm: React.FC<RolesFormProps> = ({ submit, initialValues }) => {
                   name="['http://regen.network/landOwner']"
                   options={options}
                   mapboxToken={process.env.REACT_APP_MAPBOX_TOKEN}
-                  onSaveOrganization={saveEntity}
-                  onSaveIndividual={saveEntity}
+                  onSaveOrganization={saveOrganization}
+                  onSaveIndividual={saveIndividual}
+                  validateEntity={validateEntity}
                 />
                 <Field
                   classes={{ root: styles.field }}
@@ -246,8 +335,9 @@ const RolesForm: React.FC<RolesFormProps> = ({ submit, initialValues }) => {
                   name="['http://regen.network/landSteward']"
                   options={options}
                   mapboxToken={process.env.REACT_APP_MAPBOX_TOKEN}
-                  onSaveOrganization={saveEntity}
-                  onSaveIndividual={saveEntity}
+                  onSaveOrganization={saveOrganization}
+                  onSaveIndividual={saveIndividual}
+                  validateEntity={validateEntity}
                 />
                 <Field
                   classes={{ root: styles.field }}
@@ -258,8 +348,9 @@ const RolesForm: React.FC<RolesFormProps> = ({ submit, initialValues }) => {
                   name="['http://regen.network/projectDeveloper']"
                   options={options}
                   mapboxToken={process.env.REACT_APP_MAPBOX_TOKEN}
-                  onSaveOrganization={saveEntity}
-                  onSaveIndividual={saveEntity}
+                  onSaveOrganization={saveOrganization}
+                  onSaveIndividual={saveIndividual}
+                  validateEntity={validateEntity}
                 />
                 <Field
                   classes={{ root: styles.field }}
@@ -270,8 +361,9 @@ const RolesForm: React.FC<RolesFormProps> = ({ submit, initialValues }) => {
                   name="['http://regen.network/projectOriginator']"
                   options={options}
                   mapboxToken={process.env.REACT_APP_MAPBOX_TOKEN}
-                  onSaveOrganization={saveEntity}
-                  onSaveIndividual={saveEntity}
+                  onSaveOrganization={saveOrganization}
+                  onSaveIndividual={saveIndividual}
+                  validateEntity={validateEntity}
                 />
               </OnBoardingCard>
 

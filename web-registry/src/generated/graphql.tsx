@@ -15851,6 +15851,10 @@ export type ReallyCreateOrganizationMutation = (
     & { organization?: Maybe<(
       { __typename?: 'Organization' }
       & Pick<Organization, 'id' | 'partyId'>
+      & { partyByPartyId?: Maybe<(
+        { __typename?: 'Party' }
+        & Pick<Party, 'addressId'>
+      )> }
     )> }
   )> }
 );
@@ -15866,7 +15870,7 @@ export type ReallyCreateUserMutation = (
     { __typename?: 'ReallyCreateUserPayload' }
     & { user?: Maybe<(
       { __typename?: 'User' }
-      & Pick<User, 'id'>
+      & Pick<User, 'id' | 'partyId'>
       & { partyByPartyId?: Maybe<(
         { __typename?: 'Party' }
         & Pick<Party, 'walletId' | 'addressId'>
@@ -16880,6 +16884,9 @@ export const ReallyCreateOrganizationDocument = gql`
     organization {
       id
       partyId
+      partyByPartyId {
+        addressId
+      }
     }
   }
 }
@@ -16915,6 +16922,7 @@ export const ReallyCreateUserDocument = gql`
   reallyCreateUser(input: $input) {
     user {
       id
+      partyId
       partyByPartyId {
         walletId
         addressId

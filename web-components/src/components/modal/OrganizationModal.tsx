@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
-import { Formik, Form, Field } from 'formik';
+import { Formik, Form, Field, FormikErrors } from 'formik';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import cx from 'clsx';
 
@@ -21,14 +21,15 @@ interface OrganizationModalProps {
   organization?: OrganizationFormValues;
   onClose: () => void;
   onSubmit: (organization: OrganizationFormValues) => void;
+  validate: (values: OrganizationFormValues) => Promise<FormikErrors<OrganizationFormValues>>;
   mapboxToken: string;
 }
 
 export interface OrganizationFormValues {
   id?: string;
-  partyId?: string;
+  addressId?: string;
   ownerId?: string;
-  partyOwnerId?: string;
+  ownerPartyId?: string;
   '@type': string;
   'http://schema.org/legalName'?: string;
   'http://schema.org/telephone'?: string;
@@ -110,6 +111,7 @@ function OrganizationModal({
   organization,
   onClose,
   onSubmit,
+  validate,
   mapboxToken,
 }: OrganizationModalProps): JSX.Element {
   const styles = useStyles();
@@ -134,6 +136,7 @@ function OrganizationModal({
             'http://regen.network/sharePermission':
               organizationEdit && !!organizationEdit['http://regen.network/sharePermission'],
           }}
+          validate={validate}
           onSubmit={async (values, { setSubmitting }) => {
             setSubmitting(true);
             try {

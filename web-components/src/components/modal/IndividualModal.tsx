@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
-import { Formik, Form, Field } from 'formik';
+import { Formik, Form, Field, FormikErrors } from 'formik';
 import cx from 'clsx';
 
 import { Button } from '../buttons/Button';
@@ -19,6 +19,7 @@ interface IndividualModalProps {
   individual?: IndividualFormValues;
   onClose: () => void;
   onSubmit: (individual: IndividualFormValues) => void;
+  validate: (values: IndividualFormValues) => Promise<FormikErrors<IndividualFormValues>>;
 }
 
 export interface IndividualFormValues {
@@ -99,7 +100,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-function IndividualModal({ individual, onClose, onSubmit }: IndividualModalProps): JSX.Element {
+function IndividualModal({ individual, onClose, onSubmit, validate }: IndividualModalProps): JSX.Element {
   const styles = useStyles();
   const [individualEdit, setIndividualEdit] = useState<IndividualFormValues | undefined>(undefined);
 
@@ -135,6 +136,7 @@ function IndividualModal({ individual, onClose, onSubmit }: IndividualModalProps
               setSubmitting(false);
             }
           }}
+          validate={validate}
         >
           {({ submitForm }) => {
             return (

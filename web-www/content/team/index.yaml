@@ -204,16 +204,6 @@ coreSection:
       githubUrl: https://github.com/technicallyty
       twitterUrl: https://twitter.com/technicallyty
       linkedUrl: https://www.linkedin.com/in/tygoodman/
-    - image: ../../static/media/new-team-member.jpg
-      name: Andrei Ivasko
-      description: Andrei Ivasko holds a Masters degree in Computer science from Freie
-        Universiteat Berlin. Before joining Regen, he worked as a software
-        developer at Bosch, Blockchains LLC and Intlos. Andrei has contributed
-        to Prysm Ethereum 2.0 client, and runs a blockchain meetup in Reno, NV
-        since 2017. He’s interested in Cryptography/Distributed systems.
-      title: Blockchain Engineer
-      linkedUrl: https://www.linkedin.com/in/andreiivasko/
-      githubUrl: https://github.com/cyberbono3
     - description: "Rebecca has worked as a farmer, researcher, and conservationist in
         Texas, Tennessee, and Haiti. An advocate for soil and wildlife
         conservation, she wants to see climate change and land degradation

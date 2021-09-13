@@ -53,7 +53,7 @@ coreSection:
       twitterUrl: ""
       githubUrl: ""
     - name: Sarah Baxendell
-      title: Director of Finance
+      title: Director of Business Development
       description: Sarah specializes in ecological design, product development, and
         green finance. For the past decade, she has worked at the intersection
         of start-ups and community-based nonprofits to develop impact-centric
@@ -334,19 +334,19 @@ coreSection:
       twitterUrl: https://twitter.com/KKapatral
       githubUrl: https://github.com/kaustubhkapatral
       linkedUrl: https://www.linkedin.com/in/kaustubh-kapatral-704a60176/
-    - name: "Sophia Leiker "
-      title: Geospatial Environmental Researcher and Project Analyst
-      description: >
-        Sophia is a geospatial researcher with experience employing remote
-        sensing techniques and GIS analysis to address environmental inquiries.
-        An alumni of UC Berkeley, Sophia has worked as a researcher for NASA
-        DEVELOP, where she led projects studying geospatial applications. She
-        supports the science team in methodology development and project
-        management.
-      image: ../../static/media/sophia.png
 contributorSection:
   title: Contributors
   contributors:
+    - image: ../../static/media/img06.jpeg
+      name: Will Szal
+      description: Will’s background in gift economics and local food systems helped
+        him to start PVGrows, a network in Western MA funding local food system
+        infrastructure, and develop a license for definancializing physical
+        infrastructure, the Gift License. Will serves as Board President at
+        Regen Foundation.
+      title: Board President - Regen Foundation
+      linkedUrl: https://www.linkedin.com/in/willszal/
+      twitterUrl: https://twitter.com/willszal
     - description: Ethan Frey has years of experience in distributed systems,
         cryptography, customer-oriented web design, and blockchain. And a strong
         desire to build something meaningful to humankind. He is delighted to
@@ -429,6 +429,15 @@ contributorSection:
         point and Regen’s project on ecological regeneration acts as a beacon of
         light by adding value to the worldwide efforts in saving the world.
       image: ../../static/media/adriana-mihai.png
+    - image: ../../static/media/sophia-headshot.png
+      name: "Sophia Leiker "
+      description: Sophia is a geospatial researcher with experience employing remote
+        sensing techniques and GIS analysis to address environmental inquiries.
+        An alumni of UC Berkeley, Sophia has worked as a researcher for NASA
+        DEVELOP, where she led projects studying geospatial applications. She
+        supports the science team in methodology development and project
+        management.
+      title: Geospatial Environmental Researcher and Project Analyst
 advisorSection:
   title: Advisors
   advisors:

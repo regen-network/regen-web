@@ -13,6 +13,7 @@ export * from './CreditsIssue';
 export * from './CreditsRetire';
 export * from './CreditsTransfer';
 export * from './Eligibility';
+export * from './EntityDisplay';
 export * from './GettingStarted';
 export * from './Home';
 export * from './MediaStep';

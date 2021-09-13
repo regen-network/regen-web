@@ -6,7 +6,7 @@ import ReactHtmlParser from 'react-html-parser';
 
 import Section from 'web-components/src/components/section';
 import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
-import { TokenDescription as Description } from './Description';
+import { MarketingDescription as Description } from '../../components/Description';
 
 const useStyles = makeStyles<Theme>((theme: Theme) => ({
   content: {

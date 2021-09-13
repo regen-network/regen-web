@@ -24,7 +24,38 @@ collections:
             widget: "object"
             fields:
               - {label: Header, name: header, widget: string}
-              - {label: Body, name: body, widget: text}
+          - label: "Connect Section"
+            name: "connectSection"
+            widget: "object"
+            fields:
+              - {label: Header, name: header, widget: string}
+              - {label: Telegram sub label, name: telegramSubLabel, widget: text, required: false}
+              - {label: Telegram URL, name: telegramUrl, widget: text}
+              - {label: Twitter sub label, name: twitterSubLabel, widget: text, required: false}
+              - {label: Twitter URL, name: twitterUrl, widget: text}
+              - {label: Discord sub label, name: discordSubLabel, widget: text, required: false}
+              - {label: Discord URL, name: discordUrl, widget: text}
+          - label: "Go-To Section"
+            name: "goToSection"
+            widget: "object"
+            fields:
+              - {label: Video label, name: videoLabel, widget: text}
+              - {label: Video button text, name: videoButtonText, widget: text}
+              - {label: Video URL, name: videoButtonHref, widget: text}
+              - {label: Blog label, name: blogLabel, widget: text}
+              - {label: Blog button text, name: blogButtonText, widget: text}
+              - {label: Blog URL, name: blogButtonHref, widget: text}
+              - {label: Discussion label, name: discussionLabel, widget: text}
+              - {label: Discussion button text, name: discussionButtonText, widget: text}
+              - {label: Discussion URL, name: discussionButtonHref, widget: text}
+          - label: "Collective Section"
+            name: "collectiveSection"
+            widget: "object"
+            fields:
+              - {label: Title, name: title, widget: string}
+              - {label: Body, name: body, widget: markdown}
+              - {label: Button Text, name: buttonText, widget: string}
+              - {label: Signup Form URL, name: signupFormUrl, widget: string}
           - label: "Collaborate Section"
             name: "collaborateSection"
             widget: "object"

@@ -20,3 +20,13 @@ export function getFormattedPeriod(start: string, end: string | Date): string {
   }
   return `${startYear}-${new Date(end).getUTCFullYear()}`;
 }
+
+export interface StandardInfo {
+  documentId?: string | null;
+  name: string;
+  version: string;
+}
+
+export function formatStandardInfo(info: StandardInfo): string {
+  return `${info.name}, ${info.documentId ? `${info.documentId}, ` : ''}${info.version}`;
+}

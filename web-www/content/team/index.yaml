@@ -52,19 +52,8 @@ coreSection:
       linkedUrl: https://www.linkedin.com/in/christian-shearer-b8877312/
       twitterUrl: ""
       githubUrl: ""
-    - name: Ron Steinherz
-      title: Vice President of Product
-      description: Ron brings deep expertise in Product Management and Operations from
-        10+ years in Silicon Valley and Israel, working to develop product
-        innovations such as Web Conferencing, Telecommunications, Internet
-        Connectivity and FinTech. He is passionate about leveraging technology
-        for social and environmental impact.
-      image: ../../static/media/team/ron.jpg
-      linkedUrl: https://www.linkedin.com/in/steinherz/
-      twitterUrl: null
-      githubUrl: null
     - name: Sarah Baxendell
-      title: Director of Finance
+      title: Director of Business Development
       description: Sarah specializes in ecological design, product development, and
         green finance. For the past decade, she has worked at the intersection
         of start-ups and community-based nonprofits to develop impact-centric
@@ -164,16 +153,6 @@ coreSection:
       linkedUrl: https://www.linkedin.com/in/erika-logie-3a15647/
       twitterUrl: https://twitter.com/erikalogie
       githubUrl: https://github.com/erikalogie
-    - name: "Sophia Leiker "
-      title: Geospatial Environmental Researcher and Project Analyst
-      description: >
-        Sophia is a geospatial researcher with experience employing remote
-        sensing techniques and GIS analysis to address environmental inquiries.
-        An alumni of UC Berkeley, Sophia has worked as a researcher for NASA
-        DEVELOP, where she led projects studying geospatial applications. She
-        supports the science team in methodology development and project
-        management.
-      image: ../../static/media/sophia.png
     - name: "Sam Bennetts "
       title: Applied Scientist and GIS Developer
       description: Sam is a GIS and remote sensing specialist focused on designing
@@ -221,20 +200,10 @@ coreSection:
         campus club. He has experience working alongside ethereum researchers to
         contribute to the go-ethereum client, as well as developing an award
         winning DeFi hackathon project at ETHOnline.
-      title: Blockchain Developer Intern
+      title: Junior Blockchain Engineer
       githubUrl: https://github.com/technicallyty
       twitterUrl: https://twitter.com/technicallyty
       linkedUrl: https://www.linkedin.com/in/tygoodman/
-    - image: ../../static/media/new-team-member.jpg
-      name: Andrei Ivasko
-      description: Andrei Ivasko holds a Masters degree in Computer science from Freie
-        Universiteat Berlin. Before joining Regen, he worked as a software
-        developer at Bosch, Blockchains LLC and Intlos. Andrei has contributed
-        to Prysm Ethereum 2.0 client, and runs a blockchain meetup in Reno, NV
-        since 2017. He’s interested in Cryptography/Distributed systems.
-      title: Blockchain Engineer
-      linkedUrl: https://www.linkedin.com/in/andreiivasko/
-      githubUrl: https://github.com/cyberbono3
     - description: "Rebecca has worked as a farmer, researcher, and conservationist in
         Texas, Tennessee, and Haiti. An advocate for soil and wildlife
         conservation, she wants to see climate change and land degradation
@@ -368,15 +337,16 @@ coreSection:
 contributorSection:
   title: Contributors
   contributors:
-    - description: >
-        Will’s background in gift economics and local food systems helped him to
-        start PVGrows, a network in Western MA funding local food system
-        infrastructure, and develop a license for definancializing physical
-        infrastructure, the Gift License. Will is a member of the Board of
-        Directors.
-      title: Co-founder
+    - image: ../../static/media/img06.jpeg
       name: Will Szal
-      image: ../../static/media/img06.jpeg
+      description: Will’s background in gift economics and local food systems helped
+        him to start PVGrows, a network in Western MA funding local food system
+        infrastructure, and develop a license for definancializing physical
+        infrastructure, the Gift License. Will serves as Board President at
+        Regen Foundation.
+      title: Board President - Regen Foundation
+      linkedUrl: https://www.linkedin.com/in/willszal/
+      twitterUrl: https://twitter.com/willszal
     - description: Ethan Frey has years of experience in distributed systems,
         cryptography, customer-oriented web design, and blockchain. And a strong
         desire to build something meaningful to humankind. He is delighted to
@@ -459,6 +429,15 @@ contributorSection:
         point and Regen’s project on ecological regeneration acts as a beacon of
         light by adding value to the worldwide efforts in saving the world.
       image: ../../static/media/adriana-mihai.png
+    - image: ../../static/media/sophia-headshot.png
+      name: "Sophia Leiker "
+      description: Sophia is a geospatial researcher with experience employing remote
+        sensing techniques and GIS analysis to address environmental inquiries.
+        An alumni of UC Berkeley, Sophia has worked as a researcher for NASA
+        DEVELOP, where she led projects studying geospatial applications. She
+        supports the science team in methodology development and project
+        management.
+      title: Geospatial Environmental Researcher and Project Analyst
 advisorSection:
   title: Advisors
   advisors:

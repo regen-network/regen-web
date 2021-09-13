@@ -7,7 +7,7 @@ import Section from 'web-components/src/components/section';
 import Title from 'web-components/src/components/title';
 import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
 import DecentralizeIcon from 'web-components/src/components/icons/DecentralizeIcon';
-import { TokenDescription as Description } from './Description';
+import { MarketingDescription as Description } from '../../components/Description';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {

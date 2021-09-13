@@ -119,7 +119,7 @@ export interface BasicCreditClass {
   offsetGenerationMethod: string;
   standard?: boolean;
   standardUrl?: string;
-  handle?: string;
+  standardName?: string;
 }
 
 interface Purchase {

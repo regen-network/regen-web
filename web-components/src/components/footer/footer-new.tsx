@@ -7,6 +7,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import Link from '@material-ui/core/Link';
 import Box from '@material-ui/core/Box';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 import Title from '../title';
 import Section from '../section';
@@ -111,12 +112,7 @@ const useStyles = makeStyles(theme => ({
       marginTop: theme.spacing(19.75),
     },
     [theme.breakpoints.down('xs')]: {
-      marginTop: theme.spacing(18.75),
-    },
-  },
-  footerItem: {
-    [theme.breakpoints.down('xs')]: {
-      marginBottom: theme.spacing(11.25),
+      marginTop: theme.spacing(10),
     },
   },
   link: {
@@ -125,23 +121,23 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const FooterItem: React.FC<FooterItemProps> = ({ title, items, linkComponent: LinkComponent = Link }) => {
-  const classes = useStyles({});
+  const styles = useStyles({});
 
   return (
-    <div className={classes.footerItem}>
-      <Title className={classes.title} variant="h5">
+    <>
+      <Title className={styles.title} variant="h5">
         {ReactHtmlParser(title)}
       </Title>
-      <List className={classes.list}>
+      <List className={styles.list}>
         {items.map((item, index) => (
-          <ListItem className={classes.subTitle} key={index}>
+          <ListItem className={styles.subTitle} key={index}>
             <LinkComponent href={item.href} rel="noopener noreferrer" target={item.target}>
               {ReactHtmlParser(item.title)}
             </LinkComponent>
           </ListItem>
         ))}
       </List>
-    </div>
+    </>
   );
 };
 
@@ -160,12 +156,13 @@ const Footer: React.FC<{
 }) => {
   const styles = useStyles();
   const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
 
   return (
     <div className={styles.root}>
       <Section classes={{ root: styles.section }}>
         <Grid container spacing={10}>
-          <Grid item xs={12} lg={3} className={styles.footerItem}>
+          <Grid item xs={12} lg={3}>
             <Box pb={[0, 8]} display="flex" flexDirection="column" alignItems="center" textAlign="center">
               <IconLink color={theme.palette.primary.main} />
               <Box mt={4}>
@@ -202,7 +199,9 @@ const Footer: React.FC<{
           </Grid>
         </Grid>
 
-        <SocialLinks />
+        <Box mt={[10, 16.25]}>
+          <SocialLinks />
+        </Box>
 
         <hr className={styles.separator} />
         <Grid className={styles.bottomGrid} container justify="space-between">

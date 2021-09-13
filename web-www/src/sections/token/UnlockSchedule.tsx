@@ -5,7 +5,7 @@ import clsx from 'clsx';
 
 import Section from 'web-components/src/components/section';
 import BarChart from 'web-components/src/components/charts/BarChart';
-import { TokenDescription as Description } from './Description';
+import { MarketingDescription as Description } from '../../components/Description';
 
 const useStyles = makeStyles<Theme>((theme: Theme) => ({
   root: {

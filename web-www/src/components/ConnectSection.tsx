@@ -13,14 +13,11 @@ interface StyleProps {
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   root: {
     [theme.breakpoints.down('xs')]: {
-      paddingBottom: theme.spacing(7.5),
+      paddingBottom: theme.spacing(17.75),
     },
     [theme.breakpoints.up('sm')]: {
-      paddingBottom: theme.spacing(10),
+      paddingBottom: theme.spacing(22.5),
     },
-  },
-  iconLabel: {
-    paddingBottom: theme.spacing(12.5),
   },
   title: {
     textAlign: 'center',
@@ -89,11 +86,26 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     display: 'flex',
     justifyContent: 'center',
   },
+  followerCount: {
+    display: 'flex',
+    justifyContent: 'center',
+    textAlign: 'center',
+    color: theme.palette.primary.main,
+    [theme.breakpoints.up('sm')]: {
+      fontSize: theme.typography.pxToRem(18),
+      paddingTop: theme.spacing(5.25),
+    },
+    [theme.breakpoints.down('xs')]: {
+      fontSize: theme.typography.pxToRem(14),
+      paddingTop: theme.spacing(1.5),
+    },
+  },
 }));
 
 export interface IconLabelProps {
   icon: JSX.Element;
   label: string;
+  subLabel?: string;
   href: string;
   small?: boolean;
 }
@@ -112,14 +124,15 @@ interface ConnectSectionProps {
   };
 }
 
-const IconLabel = ({ icon, label, href, small = false }: IconLabelProps): JSX.Element => {
+const IconLabel = ({ icon, label, subLabel, href, small = false }: IconLabelProps): JSX.Element => {
   const classes = useStyles({ small });
   return (
-    <div className={classes.iconLabel}>
+    <div>
       <a href={href} rel="noopener noreferrer" target="_blank" className={classes.link}>
         <div className={classes.iconContainer}>{icon}</div>
       </a>
       <div className={classes.label}>{label}</div>
+      {subLabel && <div className={classes.followerCount}>{subLabel}</div>}
     </div>
   );
 };
@@ -144,10 +157,16 @@ const ConnectSection = ({
       titleClassName={clsx(titleClassName, classes.title)}
       titleVariant={titleVariant}
     >
-      <Grid container spacing={4} justify="center">
+      <Grid container spacing={4} justify="space-between">
         {icons.map((item, i) => (
           <Grid item xs={4} sm={3} className={itemClassName} key={i}>
-            <IconLabel href={item.href} icon={item.icon} small={item.small} label={item.label} />
+            <IconLabel
+              href={item.href}
+              icon={item.icon}
+              small={item.small}
+              label={item.label}
+              subLabel={item.subLabel}
+            />
           </Grid>
         ))}
       </Grid>

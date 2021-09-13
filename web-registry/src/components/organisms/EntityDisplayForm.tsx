@@ -20,8 +20,9 @@ interface EntityDisplayFormProps {
   initialValues?: EntityDisplayValues;
 }
 
-export interface IndividualDisplayValues extends IndividualShape, IndividualDisplayShape {}
-export interface OrganizationDisplayValues extends OrganizationShape, OrganizationDisplayShape {}
+interface IndividualDisplayValues extends IndividualShape, IndividualDisplayShape {}
+interface OrganizationDisplayValues extends OrganizationShape, OrganizationDisplayShape {}
+
 export interface EntityDisplayValues {
   'http://regen.network/landOwner'?: OrganizationDisplayValues | IndividualDisplayValues;
   'http://regen.network/landSteward'?: OrganizationDisplayValues | IndividualDisplayValues;
@@ -38,19 +39,16 @@ type EntityFieldName =
 export type ProjectEntityType = 'http://regen.network/Individual' | 'http://regen.network/Organization';
 
 interface OrganizationShape {
-  [key: string]: string | boolean | ProjectEntityType | undefined;
   '@type': ProjectEntityType;
   'http://schema.org/legalName': string;
 }
 
 interface IndividualShape {
-  [key: string]: string | boolean | ProjectEntityType | undefined;
   '@type': ProjectEntityType;
   'http://schema.org/name': string;
 }
 
 interface OrganizationDisplayShape {
-  [key: string]: string | boolean | ProjectEntityType | undefined;
   'http://regen.network/showOnProjectPage': boolean;
   'http://schema.org/name'?: string;
   'http://schema.org/logo'?: string;
@@ -58,7 +56,7 @@ interface OrganizationDisplayShape {
 }
 
 interface IndividualDisplayShape {
-  [key: string]: string | boolean | ProjectEntityType | undefined;
+  [key: string]: string | boolean | undefined;
   'http://regen.network/showOnProjectPage': boolean;
   'http://schema.org/image'?: string;
   'http://schema.org/description'?: string;
@@ -67,16 +65,6 @@ interface FormletProps {
   role: EntityFieldName;
   handleChange: any;
   values: EntityDisplayValues;
-}
-
-interface IndiividualFormletProps {
-  role: EntityFieldName;
-  handleChange: any;
-  values: EntityDisplayValues;
-}
-
-export interface EntityDisplayValuesErrors {
-  // TODO
 }
 
 const useStyles = makeStyles(theme => ({
@@ -172,7 +160,6 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialVa
       if (entity['@type'] === 'http://regen.network/Individual') {
         return <IndividualFormlet role={fieldName} handleChange={handleChange} values={values} />;
       } else if (entity['@type'] === 'http://regen.network/Organization') {
-        // const orgValues = entity as OrganizationDisplayValues;
         return <OrganizationFormlet role={fieldName} handleChange={handleChange} values={values} />;
       }
     }

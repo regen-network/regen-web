@@ -5,11 +5,8 @@ import { useParams } from 'react-router-dom';
 
 import Description from 'web-components/lib/components/description';
 import { OnboardingFormTemplate } from '../components/templates';
-import { EntityDisplayForm, EntityDisplayValues, ProjectEntityType } from '../components/organisms';
-import {
-  // useProjectByIdQuery, TODO
-  useUpdateProjectByIdMutation,
-} from '../generated/graphql';
+import { EntityDisplayForm, EntityDisplayValues } from '../components/organisms';
+import { useProjectByIdQuery, useUpdateProjectByIdMutation } from '../generated/graphql';
 
 const exampleProjectUrl = '/projects/wilmot';
 
@@ -26,46 +23,9 @@ const EntityDisplay: React.FC = () => {
   const { projectId } = useParams();
 
   const [updateProject] = useUpdateProjectByIdMutation();
-  // const { data } = useProjectByIdQuery({
-  //   variables: { id: projectId },
-  // }); TODO delete mock data below
-
-  // TODO: use real data above after UI feedback
-  const data = {
-    projectById: {
-      metadata: {
-        'http://regen.network/landOwner': {
-          '@type': 'http://regen.network/Organization' as ProjectEntityType,
-          'http://regen.network/showOnProjectPage': false,
-          'http://schema.org/legalName': 'Wyelba',
-          'http://schema.org/name': '',
-          'http://schema.org/logo': '',
-          'http://schema.org/description': '',
-        },
-        'http://regen.network/landSteward': {
-          '@type': 'http://regen.network/Individual' as ProjectEntityType,
-          'http://regen.network/showOnProjectPage': false,
-          'http://schema.org/name': 'Joe Doe',
-          'http://schema.org/photo': '',
-          'http://schema.org/description': '',
-        },
-        'http://regen.network/projectDeveloper': {
-          '@type': 'http://regen.network/Individual' as ProjectEntityType,
-          'http://regen.network/showOnProjectPage': false,
-          'http://schema.org/name': 'Jane Goodall',
-          'http://schema.org/photo': '',
-          'http://schema.org/description': '',
-        },
-        'http://regen.network/projectOriginator': {
-          '@type': 'http://regen.network/Organization' as ProjectEntityType,
-          'http://regen.network/showOnProjectPage': false,
-          'http://schema.org/legalName': 'Mad Ag',
-          'http://schema.org/logo': '',
-          'http://schema.org/description': '',
-        },
-      },
-    },
-  };
+  const { data } = useProjectByIdQuery({
+    variables: { id: projectId },
+  });
 
   let initialFieldValues: EntityDisplayValues = {};
   if (data?.projectById?.metadata) {

@@ -27,6 +27,7 @@ interface OrganizationModalProps {
 
 export interface OrganizationFormValues {
   id?: string;
+  partyId?: string;
   addressId?: string;
   ownerId?: string;
   ownerPartyId?: string;
@@ -116,7 +117,7 @@ function OrganizationModal({
 }: OrganizationModalProps): JSX.Element {
   const styles = useStyles();
   const [organizationEdit, setOrganizationEdit] = useState<OrganizationFormValues | undefined>(organization);
-
+  console.log('organization', organization)
   useEffect(() => {
     setOrganizationEdit(organization);
   }, [organization]);
@@ -147,7 +148,8 @@ function OrganizationModal({
             }
           }}
         >
-          {({ submitForm }) => {
+          {({ values, submitForm }) => {
+            console.log('org values', values)
             return (
               <Form translate="yes">
                 <OnBoardingCard className={styles.card}>

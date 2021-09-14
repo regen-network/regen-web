@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { makeStyles, Theme } from '@material-ui/core/styles';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 
 import Description from 'web-components/lib/components/description';
 import { OnboardingFormTemplate } from '../components/templates';
@@ -20,6 +20,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 const Roles: React.FC = () => {
   const styles = useStyles();
   const activeStep = 0;
+  const history = useHistory();
   const { projectId } = useParams();
 
   const [updateProject] = useUpdateProjectByIdMutation();
@@ -45,18 +46,43 @@ const Roles: React.FC = () => {
 
   async function submit(values: RolesValues): Promise<void> {
     const metadata = { ...data?.projectById?.metadata, ...values };
+    let projectPatch: {
+      metadata: any;
+      landOwnerId?: string;
+      stewardId?: string;
+      developerId?: string;
+      originatorId?: string;
+    } = { metadata };
+
+    if (values['http://regen.network/landOwner']?.partyId) {
+      projectPatch = { landOwnerId: values['http://regen.network/landOwner']?.partyId, ...projectPatch };
+    }
+    if (values['http://regen.network/landSteward']?.partyId) {
+      projectPatch = { stewardId: values['http://regen.network/landSteward']?.partyId, ...projectPatch };
+    }
+    if (values['http://regen.network/projectDeveloper']?.partyId) {
+      projectPatch = {
+        developerId: values['http://regen.network/projectDeveloper']?.partyId,
+        ...projectPatch,
+      };
+    }
+    if (values['http://regen.network/projectOriginator']?.partyId) {
+      projectPatch = {
+        originatorId: values['http://regen.network/projectOriginator']?.partyId,
+        ...projectPatch,
+      };
+    }
+
     try {
       await updateProject({
         variables: {
           input: {
             id: projectId,
-            projectPatch: {
-              metadata,
-            },
+            projectPatch,
           },
         },
       });
-      // TODO: go to next step
+      history.push(`/project-pages/${projectId}/entity-display`);
     } catch (e) {
       // TODO: Should we display the error banner here?
       // https://github.com/regen-network/regen-registry/issues/555

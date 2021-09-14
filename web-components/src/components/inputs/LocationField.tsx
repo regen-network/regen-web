@@ -86,7 +86,14 @@ const LocationField: React.FC<Props> = ({
                 key={index}
                 className={classes.result}
                 onClick={() => {
-                  handleChange(item);
+                  handleChange({
+                    '@context': {
+                      '@vocab': 'https://purl.org/geojson/vocab#',
+                      type: '@type',
+                      coordinates: { '@container': '@list' },
+                    },
+                    ...item,
+                  });
                   setShowResults(false);
                 }}
               >

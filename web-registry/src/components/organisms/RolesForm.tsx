@@ -5,7 +5,7 @@ import cx from 'clsx';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import OnboardingFooter from 'web-components/lib/components/fixed-footer/OnboardingFooter';
-import { RoleField, FormValues, Option, isIndividual } from 'web-components/lib/components/inputs/RoleField';
+import { RoleField, FormValues } from 'web-components/lib/components/inputs/RoleField';
 import Title from 'web-components/lib/components/title';
 import { requiredMessage } from 'web-components/lib/components/inputs/validation';
 import { IndividualFormValues } from 'web-components/lib/components/modal/IndividualModal';
@@ -28,18 +28,13 @@ interface RolesFormProps {
 }
 
 export interface RolesValues {
-  'http://regen.network/landOwner': string;
-  'http://regen.network/landSteward': string;
-  'http://regen.network/projectDeveloper': string;
-  'http://regen.network/projectOriginator': string;
+  'http://regen.network/landOwner'?: FormValues;
+  'http://regen.network/landSteward'?: FormValues;
+  'http://regen.network/projectDeveloper'?: FormValues;
+  'http://regen.network/projectOriginator'?: FormValues;
 }
 
-export interface RolesValuesErrors {
-  'http://regen.network/landOwner': string;
-  'http://regen.network/landSteward': string;
-  'http://regen.network/projectDeveloper': string;
-  'http://regen.network/projectOriginator': string;
-}
+const rolesErrorMessage = 'You must add one of the following roles.';
 
 const useStyles = makeStyles((theme: Theme) => ({
   storyCard: {
@@ -71,9 +66,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const RolesForm: React.FC<RolesFormProps> = ({ submit, initialValues }) => {
   const [entities, setEntities] = useState<Array<FormValues>>([]);
-  const [options, setOptions] = useState<Array<Option>>([]);
   const styles = useStyles();
-
   const { data: graphData } = useShaclGraphByUriQuery({
     variables: {
       uri: 'http://regen.network/ProjectPageShape',
@@ -86,17 +79,10 @@ const RolesForm: React.FC<RolesFormProps> = ({ submit, initialValues }) => {
   const [updateOrganizationById] = useUpdateOrganizationByIdMutation();
   const [updateAddressById] = useUpdateAddressByIdMutation();
 
-  // TODO: getEntities - delete the mocked out logic below. Issue #494
-
   useEffect(() => {
-    const entityOptions = entities.map((e: FormValues) => {
-      return {
-        ...e,
-        label: isIndividual(e) ? e['http://schema.org/name'] : e['http://schema.org/legalName'],
-      };
-    });
-    setOptions(entityOptions);
-  }, [entities]);
+    const initEntities = Object.values(initialValues || {}).filter(v => !!v) as Array<FormValues>;
+    setEntities(initEntities);
+  }, [initialValues]);
 
   const updateUser = async (
     id: string,
@@ -141,7 +127,25 @@ const RolesForm: React.FC<RolesFormProps> = ({ submit, initialValues }) => {
         errors[path] = requiredMessage;
       }
     }
-    console.log(errors)
+    return errors;
+  };
+
+  const validateProject = async (values: RolesValues): Promise<FormikErrors<RolesValues>> => {
+    const errors: FormikErrors<RolesValues> = {};
+    if (graphData?.shaclGraphByUri?.graph) {
+      const projectPageData = { ...getProjectPageBaseData(), ...values };
+      const report = await validate(
+        graphData.shaclGraphByUri.graph,
+        projectPageData,
+        'http://regen.network/ProjectPageRolesGroup',
+      );
+      if (!report.conforms) {
+        errors['http://regen.network/landOwner'] = rolesErrorMessage;
+        errors['http://regen.network/landSteward'] = rolesErrorMessage;
+        errors['http://regen.network/projectDeveloper'] = rolesErrorMessage;
+        errors['http://regen.network/projectOriginator'] = rolesErrorMessage;
+      }
+    }
     return errors;
   };
 
@@ -222,6 +226,7 @@ const RolesForm: React.FC<RolesFormProps> = ({ submit, initialValues }) => {
           });
           if (orgRes?.data?.reallyCreateOrganization?.organization?.id) {
             updatedEntity.id = orgRes?.data?.reallyCreateOrganization?.organization?.id;
+            updatedEntity.partyId = orgRes?.data?.reallyCreateOrganization?.organization?.partyId;
             updatedEntity.addressId =
               orgRes?.data?.reallyCreateOrganization?.organization?.partyByPartyId?.addressId;
             updatedEntity.ownerId = ownerRes?.data?.reallyCreateUser?.user?.id;
@@ -234,6 +239,7 @@ const RolesForm: React.FC<RolesFormProps> = ({ submit, initialValues }) => {
         console.log(e);
       }
       const newEntities = [...entities, { ...updatedEntity, id: updatedEntity.id }];
+      console.log('newEntities', newEntities);
       setEntities(newEntities);
     } else {
       // Update
@@ -287,12 +293,11 @@ const RolesForm: React.FC<RolesFormProps> = ({ submit, initialValues }) => {
         validateOnMount
         initialValues={
           initialValues || {
-            'http://regen.network/landOwner': initialValues?.['http://regen.network/landOwner'] || '',
-            'http://regen.network/landSteward': initialValues?.['http://regen.network/landSteward'] || '',
-            'http://regen.network/projectDeveloper':
-              initialValues?.['http://regen.network/projectDeveloper'] || '',
+            'http://regen.network/landOwner': initialValues?.['http://regen.network/landOwner'],
+            'http://regen.network/landSteward': initialValues?.['http://regen.network/landSteward'],
+            'http://regen.network/projectDeveloper': initialValues?.['http://regen.network/projectDeveloper'],
             'http://regen.network/projectOriginator':
-              initialValues?.['http://regen.network/projectOriginator'] || '',
+              initialValues?.['http://regen.network/projectOriginator'],
           }
         }
         onSubmit={async (values, { setSubmitting }) => {
@@ -304,9 +309,10 @@ const RolesForm: React.FC<RolesFormProps> = ({ submit, initialValues }) => {
             setSubmitting(false);
           }
         }}
+        validate={validateProject}
       >
         {({ values, submitForm, isValid, isSubmitting }) => {
-          console.log(values);
+          console.log('form values', values)
           return (
             <Form translate="yes">
               <OnBoardingCard className={styles.storyCard}>
@@ -320,7 +326,7 @@ const RolesForm: React.FC<RolesFormProps> = ({ submit, initialValues }) => {
                   optional
                   description="The individual or organization that owns this land."
                   name="['http://regen.network/landOwner']"
-                  options={options}
+                  options={entities}
                   mapboxToken={process.env.REACT_APP_MAPBOX_TOKEN}
                   onSaveOrganization={saveOrganization}
                   onSaveIndividual={saveIndividual}
@@ -333,7 +339,7 @@ const RolesForm: React.FC<RolesFormProps> = ({ submit, initialValues }) => {
                   optional
                   description="The individual or organization that is performing the work on the ground. This can be a farmer, rancher, conservationist, forester, fisherman, etc."
                   name="['http://regen.network/landSteward']"
-                  options={options}
+                  options={entities}
                   mapboxToken={process.env.REACT_APP_MAPBOX_TOKEN}
                   onSaveOrganization={saveOrganization}
                   onSaveIndividual={saveIndividual}
@@ -346,7 +352,7 @@ const RolesForm: React.FC<RolesFormProps> = ({ submit, initialValues }) => {
                   optional
                   description="The individual or organization that is in charge of managing the project and is the main point of contact with Regen Registry. "
                   name="['http://regen.network/projectDeveloper']"
-                  options={options}
+                  options={entities}
                   mapboxToken={process.env.REACT_APP_MAPBOX_TOKEN}
                   onSaveOrganization={saveOrganization}
                   onSaveIndividual={saveIndividual}
@@ -359,7 +365,7 @@ const RolesForm: React.FC<RolesFormProps> = ({ submit, initialValues }) => {
                   optional
                   description="The individual or organization that helps initiate the project."
                   name="['http://regen.network/projectOriginator']"
-                  options={options}
+                  options={entities}
                   mapboxToken={process.env.REACT_APP_MAPBOX_TOKEN}
                   onSaveOrganization={saveOrganization}
                   onSaveIndividual={saveIndividual}

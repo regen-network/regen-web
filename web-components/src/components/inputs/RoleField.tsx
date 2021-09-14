@@ -77,7 +77,7 @@ interface Props extends FieldProps {
   label?: string;
   optional?: boolean;
   placeholder?: string;
-  options?: Option[];
+  options?: FormValues[];
   onSaveOrganization: (v: OrganizationFormValues) => Promise<any>;
   onSaveIndividual: (v: IndividualFormValues) => Promise<any>;
   validateEntity: (values: FormValues) => Promise<FormikErrors<FormValues>>;
@@ -86,7 +86,6 @@ interface Props extends FieldProps {
 
 interface RoleOptionType {
   inputValue?: string;
-  label: string;
   id?: number;
 }
 
@@ -105,6 +104,14 @@ export function isIndividual(e: FormValues): e is IndividualFormValues {
     return true;
   }
   return false;
+}
+
+function getLabel(o: any): string | undefined {
+  return o.id
+    ? isIndividual(o)
+      ? o['http://schema.org/name']
+      : o['http://schema.org/legalName']
+    : undefined;
 }
 
 const RoleField: React.FC<Props> = ({
@@ -133,7 +140,6 @@ const RoleField: React.FC<Props> = ({
 
   const saveOrganization = async (org: any): Promise<void> => {
     var savedOrg = await onSaveOrganization(org);
-    console.log(savedOrg);
     closeOrganizationModal();
     form.setFieldValue(field.name, savedOrg);
   };
@@ -180,13 +186,14 @@ const RoleField: React.FC<Props> = ({
             options={options || []}
             forcePopupIcon
             value={value}
-            getOptionLabel={o => o.label || ''}
+            getOptionLabel={o => getLabel(o) || ''}
             getOptionSelected={o => o.id === field.value}
-            renderOption={o => o.label || o}
+            renderOption={o => getLabel(o) || o}
             onChange={(event, newValue, reason) => {
-              console.log('newValue', newValue)
+              console.log('newValue', newValue);
+              console.log('reason', reason);
               if (reason === 'select-option' && !newValue.inputValue) {
-                handleChange(newValue.id);
+                handleChange(newValue);
               } else if (typeof newValue === 'string') {
                 setValue({
                   label: newValue,

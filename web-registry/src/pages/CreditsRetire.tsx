@@ -5,6 +5,8 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
+import Input from '@material-ui/core/Input';
+import Box from '@material-ui/core/Box';
 
 import Title from 'web-components/lib/components/title';
 import { pluralize } from 'web-components/lib/utils/pluralize';
@@ -50,8 +52,8 @@ function getUnits(vintagesData: any, walletId: string, vintageId: string): numbe
 
 const CreditsRetire: React.FC<{
   buyerWalletId?: string;
-  vintageId?: string;
-}> = ({ buyerWalletId: passedBuyerId = '', vintageId: passedVintageId = '' }) => {
+  creditVintageId?: string;
+}> = ({ buyerWalletId: passedBuyerId = '', creditVintageId: passedVintageId = '' }) => {
   const styles = useStyles();
 
   const [retireCredits, { data, loading, error }] = useRetireCreditsMutation({
@@ -72,7 +74,7 @@ const CreditsRetire: React.FC<{
 
   const dateFormat = new Intl.DateTimeFormat('en', { year: 'numeric', month: 'numeric', day: '2-digit' });
 
-  const [vintageId, setVintageId] = useState(passedVintageId);
+  const [creditVintageId, setVintageId] = useState(passedVintageId);
   const [buyerWalletId, setBuyerWalletId] = useState(passedBuyerId);
   const [buyerName, setBuyerName] = useState('');
   const [creditName, setCreditName] = useState('');
@@ -80,6 +82,7 @@ const CreditsRetire: React.FC<{
   const [addressId, setAddressId] = useState('');
   const [units, setUnits] = useState(0);
   const [showResult, setShowResult] = useState(false);
+  const [metadata, setMetadata] = useState<null | string>(null);
 
   const handleVintageChange = (event: React.ChangeEvent<{ value: unknown }>): void => {
     if (showResult) {
@@ -107,7 +110,7 @@ const CreditsRetire: React.FC<{
       setShowResult(false);
     }
     setBuyerWalletId(event.target.value as string);
-    setUnits(getUnits(vintagesData, event.target.value as string, vintageId));
+    setUnits(getUnits(vintagesData, event.target.value as string, creditVintageId));
     if (partiesData && partiesData.allParties) {
       const selectedParty = partiesData.allParties.nodes.find(
         (party: any) => party.walletId === event.target.value,
@@ -123,8 +126,14 @@ const CreditsRetire: React.FC<{
   if (partiesError) return <div>Error! ${partiesError.message}</div>;
 
   let vintage: any;
-  if (partiesData && partiesData.allParties && vintagesData && vintagesData.allCreditVintages && vintageId) {
-    vintage = vintagesData.allCreditVintages.nodes.find((node: any) => node.id === vintageId);
+  if (
+    partiesData &&
+    partiesData.allParties &&
+    vintagesData &&
+    vintagesData.allCreditVintages &&
+    creditVintageId
+  ) {
+    vintage = vintagesData.allCreditVintages.nodes.find((node: any) => node.id === creditVintageId);
   }
 
   return (
@@ -143,15 +152,18 @@ const CreditsRetire: React.FC<{
               await retireCredits({
                 variables: {
                   input: {
-                    vintageId,
-                    buyerWalletId,
-                    units,
-                    addressId,
+                    retirement: {
+                      creditVintageId,
+                      walletId: buyerWalletId,
+                      units,
+                      addressId,
+                      metadata: metadata ? { 'http://www.schema.org/url': metadata } : null,
+                    },
                   },
                 },
               });
               await refetchVintages();
-              setUnits(getUnits(vintagesData, buyerWalletId, vintageId));
+              setUnits(getUnits(vintagesData, buyerWalletId, creditVintageId));
               setShowResult(true);
             } catch (e) {}
           }
@@ -159,62 +171,72 @@ const CreditsRetire: React.FC<{
         noValidate
         autoComplete="off"
       >
-        <FormControl className={styles.formControl}>
-          <InputLabel required id="credit-vintage-select-label">
-            Credit Vintage
-          </InputLabel>
-          <Select
-            required
-            labelId="credit-vintage-select-label"
-            id="credit-vintage-select"
-            value={vintageId}
-            onChange={handleVintageChange}
-          >
-            {vintagesData &&
-              vintagesData.allCreditVintages &&
-              vintagesData.allCreditVintages.nodes.map((node: any) => (
-                <MenuItem key={node.id} value={node.id}>
-                  {node.projectByProjectId.name} - {dateFormat.format(new Date(node.createdAt))}
-                </MenuItem>
-              ))}
-          </Select>
-        </FormControl>
-        <FormControl className={styles.formControl}>
-          <InputLabel required id="buyer-wallet-select-label">
-            Buyer
-          </InputLabel>
-          <Select
-            required
-            labelId="buyer-wallet-select-label"
-            id="buyer-wallet-select"
-            value={buyerWalletId}
-            onChange={handleBuyerWalletChange}
-          >
-            {partiesData &&
-              partiesData.allParties &&
-              partiesData.allParties.nodes.map(
-                node =>
-                  node?.walletId &&
-                  node?.addressId &&
-                  (!vintage ||
-                    (vintage &&
-                      vintage.projectByProjectId.developerId !== node.id &&
-                      vintage.projectByProjectId.stewardId !== node.id &&
-                      vintage.projectByProjectId.landOwnerId !== node.id)) && (
-                    <MenuItem key={node.id} value={node.walletId}>
-                      {node.name} ({node.type.toLowerCase()}){' '}
-                    </MenuItem>
-                  ),
-              )}
-          </Select>
-        </FormControl>
-        <Button disabled={!units} className={styles.button} variant="contained" type="submit">
-          Retire
-        </Button>
+        <Box display="flex" flexDirection="column">
+          <FormControl className={styles.formControl}>
+            <InputLabel required id="credit-vintage-select-label">
+              Credit Vintage
+            </InputLabel>
+            <Select
+              required
+              labelId="credit-vintage-select-label"
+              id="credit-vintage-select"
+              value={creditVintageId}
+              onChange={handleVintageChange}
+            >
+              {vintagesData &&
+                vintagesData.allCreditVintages &&
+                vintagesData.allCreditVintages.nodes.map((node: any) => (
+                  <MenuItem key={node.id} value={node.id}>
+                    {node.projectByProjectId.name} - {dateFormat.format(new Date(node.createdAt))}
+                  </MenuItem>
+                ))}
+            </Select>
+          </FormControl>
+          <FormControl className={styles.formControl}>
+            <InputLabel required id="buyer-wallet-select-label">
+              Buyer
+            </InputLabel>
+            <Select
+              required
+              labelId="buyer-wallet-select-label"
+              id="buyer-wallet-select"
+              value={buyerWalletId}
+              onChange={handleBuyerWalletChange}
+            >
+              {partiesData &&
+                partiesData.allParties &&
+                partiesData.allParties.nodes.map(
+                  node =>
+                    node?.walletId &&
+                    node?.addressId &&
+                    (!vintage ||
+                      (vintage &&
+                        vintage.projectByProjectId.developerId !== node.id &&
+                        vintage.projectByProjectId.stewardId !== node.id &&
+                        vintage.projectByProjectId.landOwnerId !== node.id)) && (
+                      <MenuItem key={node.id} value={node.walletId}>
+                        {node.name} ({node.type.toLowerCase()}){' '}
+                      </MenuItem>
+                    ),
+                )}
+            </Select>
+          </FormControl>
+          <FormControl>
+            <InputLabel id="metadata-label">Retirement Link Url</InputLabel>
+            <Input
+              value={metadata}
+              onChange={({ target: { value } }) => setMetadata(value)}
+              id="retirement-link-input"
+            />
+          </FormControl>
+          <Button disabled={!units} className={styles.button} variant="contained" type="submit">
+            Retire
+          </Button>
+        </Box>
       </form>
       {loading && <div>Loading...</div>}
       {!showResult && <div>Available credits to retire: {units}</div>}
-      {data && data.retireCredits && showResult && (
+      {data && data.createRetirement && showResult && (
         <div>
           <p>
             {units} {pluralize(units, 'credit')} successfully retired.

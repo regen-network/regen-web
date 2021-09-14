@@ -37,7 +37,7 @@ const CreditsCreateAndTransfer: React.FC = () => {
       case 2:
         return <CreditsTransfer buyerWalletId={buyerWalletId} onTransfer={setVintageId} />;
       case 3:
-        return <CreditsRetire buyerWalletId={buyerWalletId} vintageId={vintageId} />;
+        return <CreditsRetire buyerWalletId={buyerWalletId} creditVintageId={vintageId} />;
       default:
         return <></>;
     }

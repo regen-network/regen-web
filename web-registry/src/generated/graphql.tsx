@@ -5646,7 +5646,6 @@ export type Mutation = {
   reallyCreateOrganizationIfNeeded?: Maybe<ReallyCreateOrganizationIfNeededPayload>;
   reallyCreateUser?: Maybe<ReallyCreateUserPayload>;
   reallyCreateUserIfNeeded?: Maybe<ReallyCreateUserIfNeededPayload>;
-  retireCredits?: Maybe<RetireCreditsPayload>;
   sendTransferCreditsConfirmation?: Maybe<SendTransferCreditsConfirmationPayload>;
   transferCredits?: Maybe<TransferCreditsPayload>;
 };
@@ -6555,12 +6554,6 @@ export type MutationReallyCreateUserArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationReallyCreateUserIfNeededArgs = {
   input: ReallyCreateUserIfNeededInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationRetireCreditsArgs = {
-  input: RetireCreditsInput;
 };
 
 
@@ -11436,40 +11429,6 @@ export type RegistryUsersByProjectRegistryIdAndCreatorIdManyToManyEdgeProjectsBy
   condition?: Maybe<ProjectCondition>;
 };
 
-/** All input for the `retireCredits` mutation. */
-export type RetireCreditsInput = {
-  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
-  clientMutationId?: Maybe<Scalars['String']>;
-  vintageId: Scalars['UUID'];
-  buyerWalletId: Scalars['UUID'];
-  addressId: Scalars['UUID'];
-  units: Scalars['BigFloat'];
-};
-
-/** The output of our `retireCredits` mutation. */
-export type RetireCreditsPayload = {
-  __typename?: 'RetireCreditsPayload';
-  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
-  clientMutationId?: Maybe<Scalars['String']>;
-  retirement?: Maybe<Retirement>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query?: Maybe<Query>;
-  /** Reads a single `Wallet` that is related to this `Retirement`. */
-  walletByWalletId?: Maybe<Wallet>;
-  /** Reads a single `Address` that is related to this `Retirement`. */
-  addressByAddressId?: Maybe<Address>;
-  /** Reads a single `CreditVintage` that is related to this `Retirement`. */
-  creditVintageByCreditVintageId?: Maybe<CreditVintage>;
-  /** An edge for our `Retirement`. May be used by Relay 1. */
-  retirementEdge?: Maybe<RetirementsEdge>;
-};
-
-
-/** The output of our `retireCredits` mutation. */
-export type RetireCreditsPayloadRetirementEdgeArgs = {
-  orderBy?: Maybe<Array<RetirementsOrderBy>>;
-};
-
 export type Retirement = Node & {
   __typename?: 'Retirement';
   /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
@@ -15435,14 +15394,14 @@ export type IssueCreditsMutation = (
 );
 
 export type RetireCreditsMutationVariables = Exact<{
-  input: RetireCreditsInput;
+  input: CreateRetirementInput;
 }>;
 
 
 export type RetireCreditsMutation = (
   { __typename?: 'Mutation' }
-  & { retireCredits?: Maybe<(
-    { __typename?: 'RetireCreditsPayload' }
+  & { createRetirement?: Maybe<(
+    { __typename?: 'CreateRetirementPayload' }
     & { retirement?: Maybe<(
       { __typename?: 'Retirement' }
       & Pick<Retirement, 'id'>
@@ -16549,8 +16508,8 @@ export type IssueCreditsMutationHookResult = ReturnType<typeof useIssueCreditsMu
 export type IssueCreditsMutationResult = Apollo.MutationResult<IssueCreditsMutation>;
 export type IssueCreditsMutationOptions = Apollo.BaseMutationOptions<IssueCreditsMutation, IssueCreditsMutationVariables>;
 export const RetireCreditsDocument = gql`
-    mutation RetireCredits($input: RetireCreditsInput!) {
-  retireCredits(input: $input) {
+    mutation RetireCredits($input: CreateRetirementInput!) {
+  createRetirement(input: $input) {
     retirement {
       id
     }

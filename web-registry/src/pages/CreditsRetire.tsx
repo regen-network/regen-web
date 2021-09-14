@@ -82,7 +82,7 @@ const CreditsRetire: React.FC<{
   const [addressId, setAddressId] = useState('');
   const [units, setUnits] = useState(0);
   const [showResult, setShowResult] = useState(false);
-  const [metadata, setMetadata] = useState<null | string>(null);
+  const [retireUrl, setRetireUrl] = useState<null | string>(null);
 
   const handleVintageChange = (event: React.ChangeEvent<{ value: unknown }>): void => {
     if (showResult) {
@@ -157,7 +157,10 @@ const CreditsRetire: React.FC<{
                       walletId: buyerWalletId,
                       units,
                       addressId,
-                      metadata: metadata ? { 'http://www.schema.org/url': metadata } : null,
+                      // NOTE: if this component is ever pre-populated with
+                      // existing data, we'll need to copy that over before
+                      // saving ie `{ ...existingMetadata, [schemaUrl]: retireUrl }`
+                      metadata: retireUrl ? { 'http://www.schema.org/url': retireUrl } : null,
                     },
                   },
                 },
@@ -224,8 +227,8 @@ const CreditsRetire: React.FC<{
           <FormControl>
             <InputLabel id="metadata-label">Retirement Link Url</InputLabel>
             <Input
-              value={metadata}
-              onChange={({ target: { value } }) => setMetadata(value)}
+              value={retireUrl}
+              onChange={({ target: { value } }) => setRetireUrl(value)}
               id="retirement-link-input"
             />
           </FormControl>

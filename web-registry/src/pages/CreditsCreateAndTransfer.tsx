@@ -48,7 +48,7 @@ const CreditsCreateAndTransfer: React.FC = () => {
   return (
     <Box>
       <Stepper className={styles.stepper} activeStep={step} alternativeLabel>
-        {['Create Buyer', 'Transfer Credits', 'Complete'].map((label, i) => (
+        {['Create Buyer', 'Transfer Credits', 'Retire'].map((label, i) => (
           <Step key={label}>
             <StepLabel className={styles.label} onClick={() => setStep(i + 1)}>
               {label}

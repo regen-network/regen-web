@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import Box from '@material-ui/core/Box';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -26,9 +27,6 @@ import {
 } from '../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
-  root: {
-    padding: theme.spacing(5),
-  },
   input: {
     padding: theme.spacing(1),
   },
@@ -201,7 +199,7 @@ const CreditsTransfer: React.FC<{
   }
 
   return (
-    <div className={styles.root}>
+    <Box p={5}>
       <Title variant="h1">Transfer Credits</Title>
       <form
         className={styles.form}
@@ -244,147 +242,152 @@ const CreditsTransfer: React.FC<{
         noValidate
         autoComplete="off"
       >
-        <FormControl className={styles.formControl}>
-          <InputLabel required id="credit-vintage-select-label">
-            Credit Vintage
-          </InputLabel>
-          <Select
+        <Box display="flex" flexDirection="column">
+          <FormControl className={styles.formControl}>
+            <InputLabel required id="credit-vintage-select-label">
+              Credit Vintage
+            </InputLabel>
+            <Select
+              required
+              labelId="credit-vintage-select-label"
+              id="credit-vintage-select"
+              value={vintageId}
+              onChange={handleVintageChange}
+            >
+              {vintagesData &&
+                vintagesData.allCreditVintages &&
+                vintagesData.allCreditVintages.nodes.map((node: any) => (
+                  <MenuItem key={node.id} value={node.id}>
+                    {node.projectByProjectId.name} - {dateFormat.format(new Date(node.createdAt))}
+                  </MenuItem>
+                ))}
+            </Select>
+          </FormControl>
+          {!passedBuyerWalletId && (
+            <FormControl className={styles.formControl}>
+              <InputLabel required id="buyer-wallet-select-label">
+                Buyer
+              </InputLabel>
+              <Select
+                required
+                labelId="buyer-wallet-select-label"
+                id="buyer-wallet-select"
+                value={buyerWalletId}
+                onChange={handleBuyerWalletChange}
+              >
+                {partiesData &&
+                  partiesData.allParties &&
+                  partiesData.allParties.nodes.map(
+                    (node: any) =>
+                      node.walletId &&
+                      node.addressId &&
+                      (!vintage ||
+                        (vintage &&
+                          vintage.projectByProjectId.developerId !== node.id &&
+                          vintage.projectByProjectId.stewardId !== node.id &&
+                          vintage.projectByProjectId.landOwnerId !== node.id)) && (
+                        <MenuItem key={node.id} value={node.walletId}>
+                          {node.name} ({node.type.toLowerCase()}){' '}
+                        </MenuItem>
+                      ),
+                  )}
+              </Select>
+            </FormControl>
+          )}
+
+          <FormControl className={styles.formControl}>
+            <InputLabel required id="party-id-select-label">
+              Entity doing this transfer
+            </InputLabel>
+            <Select
+              required
+              labelId="party-id-select-label"
+              id="party-id-select"
+              value={partyId}
+              onChange={handlePartyIdChange}
+            >
+              {partiesData &&
+                partiesData.allParties &&
+                partiesData.allParties.nodes.map(
+                  (node: any) =>
+                    node.type === 'ORGANIZATION' && // only show organization for now
+                    (!vintage ||
+                      (vintage &&
+                        vintage.projectByProjectId.developerId !== node.id &&
+                        vintage.projectByProjectId.stewardId !== node.id &&
+                        vintage.projectByProjectId.landOwnerId !== node.id)) && (
+                      <MenuItem key={node.id} value={node.id}>
+                        {node.name}
+                      </MenuItem>
+                    ),
+                )}
+            </Select>
+          </FormControl>
+          <FormControl className={styles.formControl}>
+            <InputLabel required id="user-id-select-label">
+              User doing this transfer on behalf of the entity
+            </InputLabel>
+            <Select
+              required
+              labelId="user-id-select-label"
+              id="user-id-select"
+              value={userId}
+              onChange={handleUserIdChange}
+            >
+              {partiesData &&
+                partiesData.allParties &&
+                partiesData.allParties.nodes.map(
+                  (node: any) =>
+                    node.type === 'USER' &&
+                    node.userByPartyId &&
+                    (!vintage ||
+                      (vintage &&
+                        vintage.projectByProjectId.developerId !== node.id &&
+                        vintage.projectByProjectId.stewardId !== node.id &&
+                        vintage.projectByProjectId.landOwnerId !== node.id)) && (
+                      <MenuItem key={node.id} value={node.userByPartyId.id}>
+                        {node.name}
+                      </MenuItem>
+                    ),
+                )}
+            </Select>
+          </FormControl>
+          <TextField
+            className={styles.input}
             required
-            labelId="credit-vintage-select-label"
-            id="credit-vintage-select"
-            value={vintageId}
-            onChange={handleVintageChange}
-          >
-            {vintagesData &&
-              vintagesData.allCreditVintages &&
-              vintagesData.allCreditVintages.nodes.map((node: any) => (
-                <MenuItem key={node.id} value={node.id}>
-                  {node.projectByProjectId.name} - {dateFormat.format(new Date(node.createdAt))}
-                </MenuItem>
-              ))}
-          </Select>
-        </FormControl>
-        <FormControl className={styles.formControl}>
-          <InputLabel required id="buyer-wallet-select-label">
-            Buyer
-          </InputLabel>
-          <Select
+            type="number"
+            value={units}
+            onChange={e => {
+              if (showResult) {
+                setShowResult(false);
+              }
+              setUnits(Math.max(0.01, parseFloat(e.target.value)));
+            }}
+            label="Units"
+          />
+          <TextField
+            className={styles.input}
             required
-            labelId="buyer-wallet-select-label"
-            id="buyer-wallet-select"
-            value={buyerWalletId}
-            onChange={handleBuyerWalletChange}
-          >
-            {partiesData &&
-              partiesData.allParties &&
-              partiesData.allParties.nodes.map(
-                (node: any) =>
-                  node.walletId &&
-                  node.addressId &&
-                  (!vintage ||
-                    (vintage &&
-                      vintage.projectByProjectId.developerId !== node.id &&
-                      vintage.projectByProjectId.stewardId !== node.id &&
-                      vintage.projectByProjectId.landOwnerId !== node.id)) && (
-                    <MenuItem key={node.id} value={node.walletId}>
-                      {node.name} ({node.type.toLowerCase()}){' '}
-                    </MenuItem>
-                  ),
-              )}
-          </Select>
-        </FormControl>
-        <FormControl className={styles.formControl}>
-          <InputLabel required id="party-id-select-label">
-            Entity doing this transfer
-          </InputLabel>
-          <Select
-            required
-            labelId="party-id-select-label"
-            id="party-id-select"
-            value={partyId}
-            onChange={handlePartyIdChange}
-          >
-            {partiesData &&
-              partiesData.allParties &&
-              partiesData.allParties.nodes.map(
-                (node: any) =>
-                  node.type === 'ORGANIZATION' && // only show organization for now
-                  (!vintage ||
-                    (vintage &&
-                      vintage.projectByProjectId.developerId !== node.id &&
-                      vintage.projectByProjectId.stewardId !== node.id &&
-                      vintage.projectByProjectId.landOwnerId !== node.id)) && (
-                    <MenuItem key={node.id} value={node.id}>
-                      {node.name}
-                    </MenuItem>
-                  ),
-              )}
-          </Select>
-        </FormControl>
-        <FormControl className={styles.formControl}>
-          <InputLabel required id="user-id-select-label">
-            User doing this transfer on behalf of the entity
-          </InputLabel>
-          <Select
-            required
-            labelId="user-id-select-label"
-            id="user-id-select"
-            value={userId}
-            onChange={handleUserIdChange}
-          >
-            {partiesData &&
-              partiesData.allParties &&
-              partiesData.allParties.nodes.map(
-                (node: any) =>
-                  node.type === 'USER' &&
-                  node.userByPartyId &&
-                  (!vintage ||
-                    (vintage &&
-                      vintage.projectByProjectId.developerId !== node.id &&
-                      vintage.projectByProjectId.stewardId !== node.id &&
-                      vintage.projectByProjectId.landOwnerId !== node.id)) && (
-                    <MenuItem key={node.id} value={node.userByPartyId.id}>
-                      {node.name}
-                    </MenuItem>
-                  ),
-              )}
-          </Select>
-        </FormControl>
-        <TextField
-          className={styles.input}
-          required
-          type="number"
-          value={units}
-          onChange={e => {
-            if (showResult) {
-              setShowResult(false);
-            }
-            setUnits(Math.max(0.01, parseFloat(e.target.value)));
-          }}
-          label="Units"
-        />
-        <TextField
-          className={styles.input}
-          required
-          type="number"
-          value={creditPrice}
-          onChange={e => {
-            if (showResult) {
-              setShowResult(false);
-            }
-            setCreditPrice(Math.max(0.01, parseFloat(e.target.value)));
-          }}
-          label="Credit price"
-        />
-        <Button className={styles.button} variant="contained" type="submit">
-          Transfer
-        </Button>
+            type="number"
+            value={creditPrice}
+            onChange={e => {
+              if (showResult) {
+                setShowResult(false);
+              }
+              setCreditPrice(Math.max(0.01, parseFloat(e.target.value)));
+            }}
+            label="Credit price"
+          />
+          <Button className={styles.button} variant="contained" type="submit">
+            Transfer
+          </Button>
+        </Box>
       </form>
       {loading && <div>Loading...</div>}
       {vintage && vintage.projectByProjectId && vintage.projectByProjectId.partyByLandOwnerId && (
         <div>Project land owner: {vintage.projectByProjectId.partyByLandOwnerId.name}</div>
       )}
-      {vintage && vintage.initialDistribution && vintage.projectByProjectId && (
+      {vintage && vintage.initialDistribution && vintage.projectByProjectId && !passedBuyerWalletId && (
         <div>
           Ownership breakdown (%):
           <ul>
@@ -472,7 +475,7 @@ const CreditsTransfer: React.FC<{
           ))}
         </div>
       )}
-    </div>
+    </Box>
   );
 };
 export { CreditsTransfer };

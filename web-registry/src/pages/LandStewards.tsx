@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
-import { useStaticQuery, graphql } from 'gatsby';
 
 import SEO from '../components/seo';
 import TopSection from '../sections/land-stewards/TopSection';
@@ -15,10 +14,6 @@ import FixedFooter from 'web-components/lib/components/fixed-footer';
 import Modal from 'web-components/lib/components/modal';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 
-interface props {
-  location: Location;
-}
-
 const useStyles = makeStyles((theme: Theme) => ({
   modal: {
     padding: 0,
@@ -26,8 +21,8 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const LandStewardsPage = ({ location }: props): JSX.Element => {
-  const classes = useStyles();
+const LandStewardsPage = (): JSX.Element => {
+  const styles = useStyles();
 
   const [open, setOpen] = useState(false);
   const handleOpen = (): void => {
@@ -38,19 +33,8 @@ const LandStewardsPage = ({ location }: props): JSX.Element => {
     setOpen(false);
   };
 
-  const data = useStaticQuery(graphql`
-    query {
-      seoImage: file(relativePath: { eq: "land-stewards-top.jpg" }) {
-        publicURL
-      }
-      text: landStewardsYaml {
-        popup {
-          buttonText
-          airtableLink
-        }
-      }
-    }
-  `);
+  // const { data } = useAllLandStewardsPageQuery({ client });
+  // const content = data?.allLandStewardsPage?.[0];
 
   return (
     <>
@@ -72,11 +56,11 @@ const LandStewardsPage = ({ location }: props): JSX.Element => {
           <ContainedButton onClick={handleOpen}>{data.text.popup.buttonText}</ContainedButton>
         </>
       </FixedFooter>
-      <Modal open={open} onClose={handleClose} className={classes.modal}>
+      <Modal open={open} onClose={handleClose} className={styles.modal}>
         <iframe title="airtable-signup-form" src={data.text.popup.airtableLink} />
       </Modal>
     </>
   );
 };
 
-export default LandStewardsPage;
+export { LandStewardsPage };

@@ -5646,6 +5646,7 @@ export type Mutation = {
   reallyCreateOrganizationIfNeeded?: Maybe<ReallyCreateOrganizationIfNeededPayload>;
   reallyCreateUser?: Maybe<ReallyCreateUserPayload>;
   reallyCreateUserIfNeeded?: Maybe<ReallyCreateUserIfNeededPayload>;
+  retireCredits?: Maybe<RetireCreditsPayload>;
   sendTransferCreditsConfirmation?: Maybe<SendTransferCreditsConfirmationPayload>;
   transferCredits?: Maybe<TransferCreditsPayload>;
 };
@@ -6554,6 +6555,12 @@ export type MutationReallyCreateUserArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationReallyCreateUserIfNeededArgs = {
   input: ReallyCreateUserIfNeededInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationRetireCreditsArgs = {
+  input: RetireCreditsInput;
 };
 
 
@@ -11429,6 +11436,41 @@ export type RegistryUsersByProjectRegistryIdAndCreatorIdManyToManyEdgeProjectsBy
   condition?: Maybe<ProjectCondition>;
 };
 
+/** All input for the `retireCredits` mutation. */
+export type RetireCreditsInput = {
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
+  clientMutationId?: Maybe<Scalars['String']>;
+  vintageId: Scalars['UUID'];
+  buyerWalletId: Scalars['UUID'];
+  addressId: Scalars['UUID'];
+  units: Scalars['BigFloat'];
+  metadata?: Maybe<Scalars['JSON']>;
+};
+
+/** The output of our `retireCredits` mutation. */
+export type RetireCreditsPayload = {
+  __typename?: 'RetireCreditsPayload';
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
+  clientMutationId?: Maybe<Scalars['String']>;
+  retirement?: Maybe<Retirement>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** Reads a single `Wallet` that is related to this `Retirement`. */
+  walletByWalletId?: Maybe<Wallet>;
+  /** Reads a single `Address` that is related to this `Retirement`. */
+  addressByAddressId?: Maybe<Address>;
+  /** Reads a single `CreditVintage` that is related to this `Retirement`. */
+  creditVintageByCreditVintageId?: Maybe<CreditVintage>;
+  /** An edge for our `Retirement`. May be used by Relay 1. */
+  retirementEdge?: Maybe<RetirementsEdge>;
+};
+
+
+/** The output of our `retireCredits` mutation. */
+export type RetireCreditsPayloadRetirementEdgeArgs = {
+  orderBy?: Maybe<Array<RetirementsOrderBy>>;
+};
+
 export type Retirement = Node & {
   __typename?: 'Retirement';
   /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
@@ -15340,6 +15382,22 @@ export type CreateProjectMutation = (
   )> }
 );
 
+export type CreateRetirementMutationVariables = Exact<{
+  input: CreateRetirementInput;
+}>;
+
+
+export type CreateRetirementMutation = (
+  { __typename?: 'Mutation' }
+  & { createRetirement?: Maybe<(
+    { __typename?: 'CreateRetirementPayload' }
+    & { retirement?: Maybe<(
+      { __typename?: 'Retirement' }
+      & Pick<Retirement, 'id'>
+    )> }
+  )> }
+);
+
 export type CreateUserOrganizationMutationVariables = Exact<{
   input: CreateUserOrganizationInput;
 }>;
@@ -15390,22 +15448,6 @@ export type IssueCreditsMutation = (
   & { issueCredits?: Maybe<(
     { __typename?: 'IssueCreditsPayload' }
     & Pick<IssueCreditsPayload, 'json'>
-  )> }
-);
-
-export type RetireCreditsMutationVariables = Exact<{
-  input: CreateRetirementInput;
-}>;
-
-
-export type RetireCreditsMutation = (
-  { __typename?: 'Mutation' }
-  & { createRetirement?: Maybe<(
-    { __typename?: 'CreateRetirementPayload' }
-    & { retirement?: Maybe<(
-      { __typename?: 'Retirement' }
-      & Pick<Retirement, 'id'>
-    )> }
   )> }
 );
 
@@ -16396,6 +16438,41 @@ export function useCreateProjectMutation(baseOptions?: Apollo.MutationHookOption
 export type CreateProjectMutationHookResult = ReturnType<typeof useCreateProjectMutation>;
 export type CreateProjectMutationResult = Apollo.MutationResult<CreateProjectMutation>;
 export type CreateProjectMutationOptions = Apollo.BaseMutationOptions<CreateProjectMutation, CreateProjectMutationVariables>;
+export const CreateRetirementDocument = gql`
+    mutation CreateRetirement($input: CreateRetirementInput!) {
+  createRetirement(input: $input) {
+    retirement {
+      id
+    }
+  }
+}
+    `;
+export type CreateRetirementMutationFn = Apollo.MutationFunction<CreateRetirementMutation, CreateRetirementMutationVariables>;
+
+/**
+ * __useCreateRetirementMutation__
+ *
+ * To run a mutation, you first call `useCreateRetirementMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateRetirementMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createRetirementMutation, { data, loading, error }] = useCreateRetirementMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useCreateRetirementMutation(baseOptions?: Apollo.MutationHookOptions<CreateRetirementMutation, CreateRetirementMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateRetirementMutation, CreateRetirementMutationVariables>(CreateRetirementDocument, options);
+      }
+export type CreateRetirementMutationHookResult = ReturnType<typeof useCreateRetirementMutation>;
+export type CreateRetirementMutationResult = Apollo.MutationResult<CreateRetirementMutation>;
+export type CreateRetirementMutationOptions = Apollo.BaseMutationOptions<CreateRetirementMutation, CreateRetirementMutationVariables>;
 export const CreateUserOrganizationDocument = gql`
     mutation CreateUserOrganization($input: CreateUserOrganizationInput!) {
   createUserOrganization(input: $input) {
@@ -16507,41 +16584,6 @@ export function useIssueCreditsMutation(baseOptions?: Apollo.MutationHookOptions
 export type IssueCreditsMutationHookResult = ReturnType<typeof useIssueCreditsMutation>;
 export type IssueCreditsMutationResult = Apollo.MutationResult<IssueCreditsMutation>;
 export type IssueCreditsMutationOptions = Apollo.BaseMutationOptions<IssueCreditsMutation, IssueCreditsMutationVariables>;
-export const RetireCreditsDocument = gql`
-    mutation RetireCredits($input: CreateRetirementInput!) {
-  createRetirement(input: $input) {
-    retirement {
-      id
-    }
-  }
-}
-    `;
-export type RetireCreditsMutationFn = Apollo.MutationFunction<RetireCreditsMutation, RetireCreditsMutationVariables>;
-
-/**
- * __useRetireCreditsMutation__
- *
- * To run a mutation, you first call `useRetireCreditsMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useRetireCreditsMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [retireCreditsMutation, { data, loading, error }] = useRetireCreditsMutation({
- *   variables: {
- *      input: // value for 'input'
- *   },
- * });
- */
-export function useRetireCreditsMutation(baseOptions?: Apollo.MutationHookOptions<RetireCreditsMutation, RetireCreditsMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<RetireCreditsMutation, RetireCreditsMutationVariables>(RetireCreditsDocument, options);
-      }
-export type RetireCreditsMutationHookResult = ReturnType<typeof useRetireCreditsMutation>;
-export type RetireCreditsMutationResult = Apollo.MutationResult<RetireCreditsMutation>;
-export type RetireCreditsMutationOptions = Apollo.BaseMutationOptions<RetireCreditsMutation, RetireCreditsMutationVariables>;
 export const TransferCreditsDocument = gql`
     mutation TransferCredits($input: TransferCreditsInput!) {
   transferCredits(input: $input) {

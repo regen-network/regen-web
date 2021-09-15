@@ -13,7 +13,7 @@ import { pluralize } from 'web-components/lib/utils/pluralize';
 import {
   useAllCreditVintagesQuery,
   useAllPartiesQuery,
-  useRetireCreditsMutation,
+  useCreateRetirementMutation,
 } from '../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -56,7 +56,7 @@ const CreditsRetire: React.FC<{
 }> = ({ buyerWalletId: passedBuyerId = '', creditVintageId: passedVintageId = '' }) => {
   const styles = useStyles();
 
-  const [retireCredits, { data, loading, error }] = useRetireCreditsMutation({
+  const [createRetirement, { data, loading, error }] = useCreateRetirementMutation({
     errorPolicy: 'ignore',
   });
   const {
@@ -149,7 +149,7 @@ const CreditsRetire: React.FC<{
           const confirmAlert = window.confirm('Are you sure you want to retire credits?');
           if (confirmAlert) {
             try {
-              await retireCredits({
+              await createRetirement({
                 variables: {
                   input: {
                     retirement: {

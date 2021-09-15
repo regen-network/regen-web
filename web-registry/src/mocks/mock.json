@@ -187,7 +187,7 @@
         }
       ],
       "creditClass": {
-        "handle": "VCS",
+        "standardName": "VCS",
         "name": "REDD+",
         "url": "https://redd.unfccc.int/",
         "standardUrl": "https://verra.org/wp-content/uploads/2019/09/VCS_Standard_v4.0.pdf",

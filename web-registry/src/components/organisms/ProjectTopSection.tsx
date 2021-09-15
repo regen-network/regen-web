@@ -283,11 +283,11 @@ function ProjectTopSection({ project, projectDefault, geojson, isGISFile }: Proj
             />
             <div className={classes.creditClassInfo}>
               {project.creditClass.standard &&
-                project.creditClass.handle &&
+                project.creditClass.standardName &&
                 project.creditClass.standardUrl && (
                   <ProjectTopLink
                     label="standard"
-                    name={project.creditClass.handle}
+                    name={project.creditClass.standardName}
                     url={project.creditClass.standardUrl}
                     standard={project.creditClass.standard}
                   />

@@ -6,14 +6,22 @@ import Grid from '@material-ui/core/Grid';
 
 import Title from '../title';
 import Description from '../description';
+import ContainedButton from '../buttons/ContainedButton';
 import { getFontSize } from '../../theme/sizing';
 
 export interface ImageItemProps {
   img: JSX.Element; // using pure img tag or gatsby-image
   title: string;
-  description: string;
-  imageClassName?: string;
+  description?: string;
+  className?: string;
+  classes?: {
+    root?: string;
+    image?: string;
+  };
   titleVariant?: Variant;
+  buttonText?: Variant;
+  buttonHref?: Variant;
+  buttonTarget?: string;
 }
 
 export interface StyleProps {
@@ -30,36 +38,49 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   },
   image: {
     height: theme.spacing(32.5),
+    marginBottom: theme.spacing(4),
   },
   h3title: {
     [theme.breakpoints.down('xs')]: {
       fontSize: theme.spacing(5.25),
     },
   },
+  button: {
+    marginTop: theme.spacing(4),
+  },
 }));
 
 export default function ImageItem({
   img,
   title,
-  imageClassName,
+  className,
+  classes,
   description,
   titleVariant = 'h4',
+  buttonText,
+  buttonHref,
+  buttonTarget,
 }: ImageItemProps): JSX.Element {
-  const classes = useStyles({ titleVariant });
+  const styles = useStyles({ titleVariant });
 
   return (
-    <div className={classes.root}>
-      <Grid container justify="center" className={clsx(imageClassName, classes.image)}>
+    <div className={clsx(styles.root, classes?.root, className)}>
+      <Grid container justify="center" className={clsx(styles.image, classes?.image)}>
         {img}
       </Grid>
       <Title
         align="center"
         variant={titleVariant}
-        className={titleVariant === 'h3' ? clsx(classes.title, classes.h3title) : classes.title}
+        className={titleVariant === 'h3' ? clsx(styles.title, styles.h3title) : styles.title}
       >
         {title}
       </Title>
-      <Description fontSize={getFontSize('big')}>{description}</Description>
+      {description && <Description fontSize={getFontSize('big')}>{description}</Description>}
+      {buttonText && buttonHref && (
+        <ContainedButton className={styles.button} href={buttonHref} target={buttonTarget}>
+          {buttonText}
+        </ContainedButton>
+      )}
     </div>
   );
 }

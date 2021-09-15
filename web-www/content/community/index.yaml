@@ -1,7 +1,30 @@
 topSection:
-  header: Community
-  body: Regen Network is an open, collaborative global community of peers anchored
-    by developers, scientists and validators.
+  header: 'Community'
+  body: 'Regen Network is an open, collaborative global community of peers anchored by developers, scientists and validators.'
+connectSection:
+  header: 'Connect with our community'
+  telegramSubLabel: '~2,484 followers'
+  telegramUrl: 'http://t.me/regennetwork_public'
+  twitterSubLabel: '~9,883 followers'
+  twitterUrl: 'https://twitter.com/regen_network'
+  discordSubLabel: '~1,752 members'
+  discordUrl: 'https://discord.gg/vTdB8tCf'
+goToSection:
+  videoLabel: 'Stay up to date'
+  videoButtonText: 'go to youtube'
+  videoButtonHref: 'https://www.youtube.com/channel/UCICD2WukTY0MbQdQ9Quew3g'
+  blogLabel: 'Learn in depth'
+  blogButtonText: 'go to blog'
+  blogButtonHref: 'https://medium.com/regen-network'
+  discussionLabel: 'Join the discussion'
+  discussionButtonText: 'go to forum'
+  discussionButtonHref: 'https://forum.regen.network/'
+collectiveSection:
+  title: 'Support the Regen community'
+  body: >-
+    md//As a community oriented blockchain project, our goal is to reward attempts at building a stronger community by incentivizing efforts by current members and motivating new members to also contribute. Together, we can make the Regen Network community stand out and grow to new heights!
+  buttonText: 'apply now'
+  signupFormUrl: 'https://rb8zs4cbb73.typeform.com/to/Q399xBBn'
 collaborateSection:
   header: Out collaborate the competition
   body: md//Under the hood of Regen Registry is a decentralized, public ledger

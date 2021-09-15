@@ -9838,18 +9838,6 @@
             "deprecationReason": null
           },
           {
-            "name": "handle",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "uri",
             "description": null,
             "args": [],
@@ -11616,16 +11604,6 @@
             "defaultValue": null
           },
           {
-            "name": "handle",
-            "description": "Checks for equality with the object’s `handle` field.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
             "name": "uri",
             "description": "Checks for equality with the object’s `uri` field.",
             "type": {
@@ -11707,16 +11685,6 @@
                 "name": "UUID",
                 "ofType": null
               }
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "handle",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
             },
             "defaultValue": null
           },
@@ -13066,16 +13034,6 @@
             "defaultValue": null
           },
           {
-            "name": "handle",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
             "name": "uri",
             "description": null,
             "type": {
@@ -13905,6 +13863,18 @@
             "deprecationReason": null
           },
           {
+            "name": "documentId",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "creditClassById",
             "description": "Reads a single `CreditClass` that is related to this `CreditClassVersion`.",
             "args": [],
@@ -14118,6 +14088,16 @@
               "ofType": null
             },
             "defaultValue": null
+          },
+          {
+            "name": "documentId",
+            "description": "Checks for equality with the object’s `documentId` field.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
           }
         ],
         "interfaces": null,
@@ -14231,6 +14211,16 @@
               "ofType": null
             },
             "defaultValue": null
+          },
+          {
+            "name": "documentId",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
           }
         ],
         "interfaces": null,
@@ -14325,6 +14315,16 @@
           },
           {
             "name": "image",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "documentId",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -14578,6 +14578,18 @@
           },
           {
             "name": "IMAGE_DESC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "DOCUMENT_ID_ASC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "DOCUMENT_ID_DESC",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
@@ -15440,18 +15452,6 @@
           },
           {
             "name": "METHODOLOGY_ID_DESC",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "HANDLE_ASC",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "HANDLE_DESC",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
@@ -21241,41 +21241,6 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "DeleteCreditClassByHandleInput",
-        "description": "All input for the `deleteCreditClassByHandle` mutation.",
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "clientMutationId",
-            "description": "An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "handle",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "defaultValue": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
         "name": "DeleteCreditClassByIdInput",
         "description": "All input for the `deleteCreditClassById` mutation.",
         "fields": null,
@@ -22448,41 +22413,6 @@
         ],
         "inputFields": null,
         "interfaces": [],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "DeleteMethodologyByHandleInput",
-        "description": "All input for the `deleteMethodologyByHandle` mutation.",
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "clientMutationId",
-            "description": "An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "handle",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "defaultValue": null
-          }
-        ],
-        "interfaces": null,
         "enumValues": null,
         "possibleTypes": null
       },
@@ -29122,18 +29052,6 @@
             "deprecationReason": null
           },
           {
-            "name": "HANDLE_ASC",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "HANDLE_DESC",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "PRIMARY_KEY_ASC",
             "description": null,
             "isDeprecated": false,
@@ -29229,18 +29147,6 @@
                 "name": "UUID",
                 "ofType": null
               }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "handle",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -29599,16 +29505,6 @@
               "ofType": null
             },
             "defaultValue": null
-          },
-          {
-            "name": "handle",
-            "description": "Checks for equality with the object’s `handle` field.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
           }
         ],
         "interfaces": null,
@@ -29662,16 +29558,6 @@
                 "name": "UUID",
                 "ofType": null
               }
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "handle",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
             },
             "defaultValue": null
           }
@@ -29942,16 +29828,6 @@
               "ofType": null
             },
             "defaultValue": null
-          },
-          {
-            "name": "handle",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
           }
         ],
         "interfaces": null,
@@ -30102,6 +29978,18 @@
             "type": {
               "kind": "SCALAR",
               "name": "JSON",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "documentId",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
               "ofType": null
             },
             "isDeprecated": false,
@@ -30321,6 +30209,16 @@
               "ofType": null
             },
             "defaultValue": null
+          },
+          {
+            "name": "documentId",
+            "description": "Checks for equality with the object’s `documentId` field.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
           }
         ],
         "interfaces": null,
@@ -30434,6 +30332,16 @@
               "ofType": null
             },
             "defaultValue": null
+          },
+          {
+            "name": "documentId",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
           }
         ],
         "interfaces": null,
@@ -30532,6 +30440,16 @@
             "type": {
               "kind": "SCALAR",
               "name": "JSON",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "documentId",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
               "ofType": null
             },
             "defaultValue": null
@@ -30781,6 +30699,18 @@
           },
           {
             "name": "FILES_DESC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "DOCUMENT_ID_ASC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "DOCUMENT_ID_DESC",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
@@ -32208,33 +32138,6 @@
             "deprecationReason": null
           },
           {
-            "name": "updateCreditClassByHandle",
-            "description": "Updates a single `CreditClass` using a unique key and a patch.",
-            "args": [
-              {
-                "name": "input",
-                "description": "The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.",
-                "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "UpdateCreditClassByHandleInput",
-                    "ofType": null
-                  }
-                },
-                "defaultValue": null
-              }
-            ],
-            "type": {
-              "kind": "OBJECT",
-              "name": "UpdateCreditClassPayload",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "updateCreditClassVersion",
             "description": "Updates a single `CreditClassVersion` using its globally unique id and a patch.",
             "args": [
@@ -32571,33 +32474,6 @@
                   "ofType": {
                     "kind": "INPUT_OBJECT",
                     "name": "UpdateMethodologyByIdInput",
-                    "ofType": null
-                  }
-                },
-                "defaultValue": null
-              }
-            ],
-            "type": {
-              "kind": "OBJECT",
-              "name": "UpdateMethodologyPayload",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "updateMethodologyByHandle",
-            "description": "Updates a single `Methodology` using a unique key and a patch.",
-            "args": [
-              {
-                "name": "input",
-                "description": "The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.",
-                "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "UpdateMethodologyByHandleInput",
                     "ofType": null
                   }
                 },
@@ -33828,33 +33704,6 @@
             "deprecationReason": null
           },
           {
-            "name": "deleteCreditClassByHandle",
-            "description": "Deletes a single `CreditClass` using a unique key.",
-            "args": [
-              {
-                "name": "input",
-                "description": "The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.",
-                "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "DeleteCreditClassByHandleInput",
-                    "ofType": null
-                  }
-                },
-                "defaultValue": null
-              }
-            ],
-            "type": {
-              "kind": "OBJECT",
-              "name": "DeleteCreditClassPayload",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "deleteCreditClassVersion",
             "description": "Deletes a single `CreditClassVersion` using its globally unique id.",
             "args": [
@@ -34191,33 +34040,6 @@
                   "ofType": {
                     "kind": "INPUT_OBJECT",
                     "name": "DeleteMethodologyByIdInput",
-                    "ofType": null
-                  }
-                },
-                "defaultValue": null
-              }
-            ],
-            "type": {
-              "kind": "OBJECT",
-              "name": "DeleteMethodologyPayload",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "deleteMethodologyByHandle",
-            "description": "Deletes a single `Methodology` using a unique key.",
-            "args": [
-              {
-                "name": "input",
-                "description": "The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.",
-                "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "DeleteMethodologyByHandleInput",
                     "ofType": null
                   }
                 },
@@ -61041,33 +60863,6 @@
             "deprecationReason": null
           },
           {
-            "name": "creditClassByHandle",
-            "description": null,
-            "args": [
-              {
-                "name": "handle",
-                "description": null,
-                "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
-                  }
-                },
-                "defaultValue": null
-              }
-            ],
-            "type": {
-              "kind": "OBJECT",
-              "name": "CreditClass",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "creditClassVersionByIdAndCreatedAt",
             "description": null,
             "args": [
@@ -61256,33 +61051,6 @@
                   "ofType": {
                     "kind": "SCALAR",
                     "name": "UUID",
-                    "ofType": null
-                  }
-                },
-                "defaultValue": null
-              }
-            ],
-            "type": {
-              "kind": "OBJECT",
-              "name": "Methodology",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "methodologyByHandle",
-            "description": null,
-            "args": [
-              {
-                "name": "handle",
-                "description": null,
-                "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "String",
                     "ofType": null
                   }
                 },
@@ -69316,55 +69084,6 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "UpdateCreditClassByHandleInput",
-        "description": "All input for the `updateCreditClassByHandle` mutation.",
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "clientMutationId",
-            "description": "An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "creditClassPatch",
-            "description": "An object where the defined keys will be set on the `CreditClass` being updated.",
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "CreditClassPatch",
-                "ofType": null
-              }
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "handle",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "defaultValue": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
         "name": "UpdateCreditClassByIdInput",
         "description": "All input for the `updateCreditClassById` mutation.",
         "fields": null,
@@ -70647,55 +70366,6 @@
         ],
         "inputFields": null,
         "interfaces": [],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "UpdateMethodologyByHandleInput",
-        "description": "All input for the `updateMethodologyByHandle` mutation.",
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "clientMutationId",
-            "description": "An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "methodologyPatch",
-            "description": "An object where the defined keys will be set on the `Methodology` being updated.",
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "MethodologyPatch",
-                "ofType": null
-              }
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "handle",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "defaultValue": null
-          }
-        ],
-        "interfaces": null,
         "enumValues": null,
         "possibleTypes": null
       },

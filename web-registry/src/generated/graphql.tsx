@@ -1803,7 +1803,6 @@ export type CreditClass = Node & {
   updatedAt: Scalars['Datetime'];
   designerId?: Maybe<Scalars['UUID']>;
   methodologyId: Scalars['UUID'];
-  handle?: Maybe<Scalars['String']>;
   uri: Scalars['String'];
   standard: Scalars['Boolean'];
   /** Reads a single `Party` that is related to this `CreditClass`. */
@@ -2055,8 +2054,6 @@ export type CreditClassCondition = {
   designerId?: Maybe<Scalars['UUID']>;
   /** Checks for equality with the object’s `methodologyId` field. */
   methodologyId?: Maybe<Scalars['UUID']>;
-  /** Checks for equality with the object’s `handle` field. */
-  handle?: Maybe<Scalars['String']>;
   /** Checks for equality with the object’s `uri` field. */
   uri?: Maybe<Scalars['String']>;
   /** Checks for equality with the object’s `standard` field. */
@@ -2070,7 +2067,6 @@ export type CreditClassInput = {
   updatedAt?: Maybe<Scalars['Datetime']>;
   designerId?: Maybe<Scalars['UUID']>;
   methodologyId: Scalars['UUID'];
-  handle?: Maybe<Scalars['String']>;
   uri?: Maybe<Scalars['String']>;
   standard?: Maybe<Scalars['Boolean']>;
 };
@@ -2293,7 +2289,6 @@ export type CreditClassPatch = {
   updatedAt?: Maybe<Scalars['Datetime']>;
   designerId?: Maybe<Scalars['UUID']>;
   methodologyId?: Maybe<Scalars['UUID']>;
-  handle?: Maybe<Scalars['String']>;
   uri?: Maybe<Scalars['String']>;
   standard?: Maybe<Scalars['Boolean']>;
 };
@@ -2419,6 +2414,7 @@ export type CreditClassVersion = Node & {
   stateMachine?: Maybe<Scalars['JSON']>;
   metadata?: Maybe<Scalars['JSON']>;
   image: Scalars['String'];
+  documentId?: Maybe<Scalars['String']>;
   /** Reads a single `CreditClass` that is related to this `CreditClassVersion`. */
   creditClassById?: Maybe<CreditClass>;
   /** Reads and enables pagination through a set of `CreditVintage`. */
@@ -2456,6 +2452,8 @@ export type CreditClassVersionCondition = {
   metadata?: Maybe<Scalars['JSON']>;
   /** Checks for equality with the object’s `image` field. */
   image?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `documentId` field. */
+  documentId?: Maybe<Scalars['String']>;
 };
 
 /** An input for mutations affecting `CreditClassVersion` */
@@ -2469,6 +2467,7 @@ export type CreditClassVersionInput = {
   stateMachine?: Maybe<Scalars['JSON']>;
   metadata?: Maybe<Scalars['JSON']>;
   image?: Maybe<Scalars['String']>;
+  documentId?: Maybe<Scalars['String']>;
 };
 
 /** Represents an update to a `CreditClassVersion`. Fields that are set will be updated. */
@@ -2482,6 +2481,7 @@ export type CreditClassVersionPatch = {
   stateMachine?: Maybe<Scalars['JSON']>;
   metadata?: Maybe<Scalars['JSON']>;
   image?: Maybe<Scalars['String']>;
+  documentId?: Maybe<Scalars['String']>;
 };
 
 /** A connection to a list of `CreditClassVersion` values. */
@@ -2527,6 +2527,8 @@ export enum CreditClassVersionsOrderBy {
   MetadataDesc = 'METADATA_DESC',
   ImageAsc = 'IMAGE_ASC',
   ImageDesc = 'IMAGE_DESC',
+  DocumentIdAsc = 'DOCUMENT_ID_ASC',
+  DocumentIdDesc = 'DOCUMENT_ID_DESC',
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
@@ -2674,8 +2676,6 @@ export enum CreditClassesOrderBy {
   DesignerIdDesc = 'DESIGNER_ID_DESC',
   MethodologyIdAsc = 'METHODOLOGY_ID_ASC',
   MethodologyIdDesc = 'METHODOLOGY_ID_DESC',
-  HandleAsc = 'HANDLE_ASC',
-  HandleDesc = 'HANDLE_DESC',
   UriAsc = 'URI_ASC',
   UriDesc = 'URI_DESC',
   StandardAsc = 'STANDARD_ASC',
@@ -3588,13 +3588,6 @@ export type DeleteAdminPayloadAdminEdgeArgs = {
   orderBy?: Maybe<Array<AdminsOrderBy>>;
 };
 
-/** All input for the `deleteCreditClassByHandle` mutation. */
-export type DeleteCreditClassByHandleInput = {
-  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
-  clientMutationId?: Maybe<Scalars['String']>;
-  handle: Scalars['String'];
-};
-
 /** All input for the `deleteCreditClassById` mutation. */
 export type DeleteCreditClassByIdInput = {
   /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
@@ -3839,13 +3832,6 @@ export type DeleteFlywaySchemaHistoryPayload = {
 /** The output of our delete `FlywaySchemaHistory` mutation. */
 export type DeleteFlywaySchemaHistoryPayloadFlywaySchemaHistoryEdgeArgs = {
   orderBy?: Maybe<Array<FlywaySchemaHistoriesOrderBy>>;
-};
-
-/** All input for the `deleteMethodologyByHandle` mutation. */
-export type DeleteMethodologyByHandleInput = {
-  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
-  clientMutationId?: Maybe<Scalars['String']>;
-  handle: Scalars['String'];
 };
 
 /** All input for the `deleteMethodologyById` mutation. */
@@ -5037,8 +5023,6 @@ export enum MethodologiesOrderBy {
   UpdatedAtDesc = 'UPDATED_AT_DESC',
   AuthorIdAsc = 'AUTHOR_ID_ASC',
   AuthorIdDesc = 'AUTHOR_ID_DESC',
-  HandleAsc = 'HANDLE_ASC',
-  HandleDesc = 'HANDLE_DESC',
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
@@ -5051,7 +5035,6 @@ export type Methodology = Node & {
   createdAt: Scalars['Datetime'];
   updatedAt: Scalars['Datetime'];
   authorId: Scalars['UUID'];
-  handle?: Maybe<Scalars['String']>;
   /** Reads a single `Party` that is related to this `Methodology`. */
   partyByAuthorId?: Maybe<Party>;
   /** Reads and enables pagination through a set of `MethodologyVersion`. */
@@ -5105,8 +5088,6 @@ export type MethodologyCondition = {
   updatedAt?: Maybe<Scalars['Datetime']>;
   /** Checks for equality with the object’s `authorId` field. */
   authorId?: Maybe<Scalars['UUID']>;
-  /** Checks for equality with the object’s `handle` field. */
-  handle?: Maybe<Scalars['String']>;
 };
 
 /** An input for mutations affecting `Methodology` */
@@ -5115,7 +5096,6 @@ export type MethodologyInput = {
   createdAt?: Maybe<Scalars['Datetime']>;
   updatedAt?: Maybe<Scalars['Datetime']>;
   authorId: Scalars['UUID'];
-  handle?: Maybe<Scalars['String']>;
 };
 
 /** A connection to a list of `Party` values, with data from `CreditClass`. */
@@ -5160,7 +5140,6 @@ export type MethodologyPatch = {
   createdAt?: Maybe<Scalars['Datetime']>;
   updatedAt?: Maybe<Scalars['Datetime']>;
   authorId?: Maybe<Scalars['UUID']>;
-  handle?: Maybe<Scalars['String']>;
 };
 
 export type MethodologyVersion = Node & {
@@ -5176,6 +5155,7 @@ export type MethodologyVersion = Node & {
   boundary?: Maybe<Scalars['String']>;
   metadata?: Maybe<Scalars['JSON']>;
   files?: Maybe<Scalars['JSON']>;
+  documentId?: Maybe<Scalars['String']>;
   /** Reads a single `Methodology` that is related to this `MethodologyVersion`. */
   methodologyById?: Maybe<Methodology>;
   /** Reads and enables pagination through a set of `CreditVintage`. */
@@ -5213,6 +5193,8 @@ export type MethodologyVersionCondition = {
   metadata?: Maybe<Scalars['JSON']>;
   /** Checks for equality with the object’s `files` field. */
   files?: Maybe<Scalars['JSON']>;
+  /** Checks for equality with the object’s `documentId` field. */
+  documentId?: Maybe<Scalars['String']>;
 };
 
 /** An input for mutations affecting `MethodologyVersion` */
@@ -5226,6 +5208,7 @@ export type MethodologyVersionInput = {
   boundary?: Maybe<Scalars['String']>;
   metadata?: Maybe<Scalars['JSON']>;
   files?: Maybe<Scalars['JSON']>;
+  documentId?: Maybe<Scalars['String']>;
 };
 
 /** Represents an update to a `MethodologyVersion`. Fields that are set will be updated. */
@@ -5239,6 +5222,7 @@ export type MethodologyVersionPatch = {
   boundary?: Maybe<Scalars['String']>;
   metadata?: Maybe<Scalars['JSON']>;
   files?: Maybe<Scalars['JSON']>;
+  documentId?: Maybe<Scalars['String']>;
 };
 
 /** A connection to a list of `MethodologyVersion` values. */
@@ -5284,6 +5268,8 @@ export enum MethodologyVersionsOrderBy {
   MetadataDesc = 'METADATA_DESC',
   FilesAsc = 'FILES_ASC',
   FilesDesc = 'FILES_DESC',
+  DocumentIdAsc = 'DOCUMENT_ID_ASC',
+  DocumentIdDesc = 'DOCUMENT_ID_DESC',
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
@@ -5438,8 +5424,6 @@ export type Mutation = {
   updateCreditClass?: Maybe<UpdateCreditClassPayload>;
   /** Updates a single `CreditClass` using a unique key and a patch. */
   updateCreditClassById?: Maybe<UpdateCreditClassPayload>;
-  /** Updates a single `CreditClass` using a unique key and a patch. */
-  updateCreditClassByHandle?: Maybe<UpdateCreditClassPayload>;
   /** Updates a single `CreditClassVersion` using its globally unique id and a patch. */
   updateCreditClassVersion?: Maybe<UpdateCreditClassVersionPayload>;
   /** Updates a single `CreditClassVersion` using a unique key and a patch. */
@@ -5466,8 +5450,6 @@ export type Mutation = {
   updateMethodology?: Maybe<UpdateMethodologyPayload>;
   /** Updates a single `Methodology` using a unique key and a patch. */
   updateMethodologyById?: Maybe<UpdateMethodologyPayload>;
-  /** Updates a single `Methodology` using a unique key and a patch. */
-  updateMethodologyByHandle?: Maybe<UpdateMethodologyPayload>;
   /** Updates a single `MethodologyVersion` using its globally unique id and a patch. */
   updateMethodologyVersion?: Maybe<UpdateMethodologyVersionPayload>;
   /** Updates a single `MethodologyVersion` using a unique key and a patch. */
@@ -5558,8 +5540,6 @@ export type Mutation = {
   deleteCreditClass?: Maybe<DeleteCreditClassPayload>;
   /** Deletes a single `CreditClass` using a unique key. */
   deleteCreditClassById?: Maybe<DeleteCreditClassPayload>;
-  /** Deletes a single `CreditClass` using a unique key. */
-  deleteCreditClassByHandle?: Maybe<DeleteCreditClassPayload>;
   /** Deletes a single `CreditClassVersion` using its globally unique id. */
   deleteCreditClassVersion?: Maybe<DeleteCreditClassVersionPayload>;
   /** Deletes a single `CreditClassVersion` using a unique key. */
@@ -5586,8 +5566,6 @@ export type Mutation = {
   deleteMethodology?: Maybe<DeleteMethodologyPayload>;
   /** Deletes a single `Methodology` using a unique key. */
   deleteMethodologyById?: Maybe<DeleteMethodologyPayload>;
-  /** Deletes a single `Methodology` using a unique key. */
-  deleteMethodologyByHandle?: Maybe<DeleteMethodologyPayload>;
   /** Deletes a single `MethodologyVersion` using its globally unique id. */
   deleteMethodologyVersion?: Maybe<DeleteMethodologyVersionPayload>;
   /** Deletes a single `MethodologyVersion` using a unique key. */
@@ -5885,12 +5863,6 @@ export type MutationUpdateCreditClassByIdArgs = {
 
 
 /** The root mutation type which contains root level fields which mutate data. */
-export type MutationUpdateCreditClassByHandleArgs = {
-  input: UpdateCreditClassByHandleInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdateCreditClassVersionArgs = {
   input: UpdateCreditClassVersionInput;
 };
@@ -5965,12 +5937,6 @@ export type MutationUpdateMethodologyArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdateMethodologyByIdArgs = {
   input: UpdateMethodologyByIdInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationUpdateMethodologyByHandleArgs = {
-  input: UpdateMethodologyByHandleInput;
 };
 
 
@@ -6245,12 +6211,6 @@ export type MutationDeleteCreditClassByIdArgs = {
 
 
 /** The root mutation type which contains root level fields which mutate data. */
-export type MutationDeleteCreditClassByHandleArgs = {
-  input: DeleteCreditClassByHandleInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
 export type MutationDeleteCreditClassVersionArgs = {
   input: DeleteCreditClassVersionInput;
 };
@@ -6325,12 +6285,6 @@ export type MutationDeleteMethodologyArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationDeleteMethodologyByIdArgs = {
   input: DeleteMethodologyByIdInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationDeleteMethodologyByHandleArgs = {
-  input: DeleteMethodologyByHandleInput;
 };
 
 
@@ -10215,7 +10169,6 @@ export type Query = Node & {
   adminById?: Maybe<Admin>;
   adminByAuth0Sub?: Maybe<Admin>;
   creditClassById?: Maybe<CreditClass>;
-  creditClassByHandle?: Maybe<CreditClass>;
   creditClassVersionByIdAndCreatedAt?: Maybe<CreditClassVersion>;
   creditVintageById?: Maybe<CreditVintage>;
   creditVintageByEventId?: Maybe<CreditVintage>;
@@ -10223,7 +10176,6 @@ export type Query = Node & {
   eventById?: Maybe<Event>;
   flywaySchemaHistoryByInstalledRank?: Maybe<FlywaySchemaHistory>;
   methodologyById?: Maybe<Methodology>;
-  methodologyByHandle?: Maybe<Methodology>;
   methodologyVersionByIdAndCreatedAt?: Maybe<MethodologyVersion>;
   mrvById?: Maybe<Mrv>;
   organizationById?: Maybe<Organization>;
@@ -10643,12 +10595,6 @@ export type QueryCreditClassByIdArgs = {
 
 
 /** The root query type which gives access points into the data universe. */
-export type QueryCreditClassByHandleArgs = {
-  handle: Scalars['String'];
-};
-
-
-/** The root query type which gives access points into the data universe. */
 export type QueryCreditClassVersionByIdAndCreatedAtArgs = {
   id: Scalars['UUID'];
   createdAt: Scalars['Datetime'];
@@ -10688,12 +10634,6 @@ export type QueryFlywaySchemaHistoryByInstalledRankArgs = {
 /** The root query type which gives access points into the data universe. */
 export type QueryMethodologyByIdArgs = {
   id: Scalars['UUID'];
-};
-
-
-/** The root query type which gives access points into the data universe. */
-export type QueryMethodologyByHandleArgs = {
-  handle: Scalars['String'];
 };
 
 
@@ -12051,15 +11991,6 @@ export type UpdateAdminPayloadAdminEdgeArgs = {
   orderBy?: Maybe<Array<AdminsOrderBy>>;
 };
 
-/** All input for the `updateCreditClassByHandle` mutation. */
-export type UpdateCreditClassByHandleInput = {
-  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** An object where the defined keys will be set on the `CreditClass` being updated. */
-  creditClassPatch: CreditClassPatch;
-  handle: Scalars['String'];
-};
-
 /** All input for the `updateCreditClassById` mutation. */
 export type UpdateCreditClassByIdInput = {
   /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
@@ -12324,15 +12255,6 @@ export type UpdateFlywaySchemaHistoryPayload = {
 /** The output of our update `FlywaySchemaHistory` mutation. */
 export type UpdateFlywaySchemaHistoryPayloadFlywaySchemaHistoryEdgeArgs = {
   orderBy?: Maybe<Array<FlywaySchemaHistoriesOrderBy>>;
-};
-
-/** All input for the `updateMethodologyByHandle` mutation. */
-export type UpdateMethodologyByHandleInput = {
-  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** An object where the defined keys will be set on the `Methodology` being updated. */
-  methodologyPatch: MethodologyPatch;
-  handle: Scalars['String'];
 };
 
 /** All input for the `updateMethodologyById` mutation. */
@@ -15613,18 +15535,10 @@ export type CreditVintageFieldsFragment = (
   & Pick<CreditVintage, 'id' | 'createdAt' | 'startDate' | 'endDate' | 'initialDistribution' | 'units' | 'certificateLink' | 'txHash'>
   & { creditClassVersionByCreditClassVersionIdAndCreditClassVersionCreatedAt?: Maybe<(
     { __typename?: 'CreditClassVersion' }
-    & Pick<CreditClassVersion, 'name' | 'version' | 'metadata'>
-    & { creditClassById?: Maybe<(
-      { __typename?: 'CreditClass' }
-      & Pick<CreditClass, 'handle'>
-    )> }
+    & Pick<CreditClassVersion, 'name' | 'version' | 'metadata' | 'documentId'>
   )>, methodologyVersionByMethodologyVersionIdAndMethodologyVersionCreatedAt?: Maybe<(
     { __typename?: 'MethodologyVersion' }
-    & Pick<MethodologyVersion, 'name' | 'version'>
-    & { methodologyById?: Maybe<(
-      { __typename?: 'Methodology' }
-      & Pick<Methodology, 'handle'>
-    )> }
+    & Pick<MethodologyVersion, 'name' | 'version' | 'documentId'>
   )>, walletByTokenizerId?: Maybe<(
     { __typename?: 'Wallet' }
     & Pick<Wallet, 'addr'>
@@ -15796,18 +15710,14 @@ export type PurchasesFieldsFragment = (
         & Pick<Party, 'name' | 'image'>
       )>, creditClassVersionByCreditClassVersionIdAndCreditClassVersionCreatedAt?: Maybe<(
         { __typename?: 'CreditClassVersion' }
-        & Pick<CreditClassVersion, 'name' | 'version' | 'metadata'>
+        & Pick<CreditClassVersion, 'name' | 'version' | 'metadata' | 'documentId'>
         & { creditClassById?: Maybe<(
           { __typename?: 'CreditClass' }
-          & Pick<CreditClass, 'handle' | 'standard'>
+          & Pick<CreditClass, 'standard'>
         )> }
       )>, methodologyVersionByMethodologyVersionIdAndMethodologyVersionCreatedAt?: Maybe<(
         { __typename?: 'MethodologyVersion' }
-        & Pick<MethodologyVersion, 'name' | 'version' | 'metadata'>
-        & { methodologyById?: Maybe<(
-          { __typename?: 'Methodology' }
-          & Pick<Methodology, 'handle'>
-        )> }
+        & Pick<MethodologyVersion, 'name' | 'version' | 'metadata' | 'documentId'>
       )>, projectByProjectId?: Maybe<(
         { __typename?: 'Project' }
         & Pick<Project, 'name' | 'area' | 'areaUnit' | 'image' | 'type' | 'handle' | 'metadata'>
@@ -16056,16 +15966,12 @@ export const CreditVintageFieldsFragmentDoc = gql`
     name
     version
     metadata
-    creditClassById {
-      handle
-    }
+    documentId
   }
   methodologyVersionByMethodologyVersionIdAndMethodologyVersionCreatedAt {
     name
     version
-    methodologyById {
-      handle
-    }
+    documentId
   }
   walletByTokenizerId {
     addr
@@ -16156,8 +16062,8 @@ export const PurchasesFieldsFragmentDoc = gql`
         name
         version
         metadata
+        documentId
         creditClassById {
-          handle
           standard
         }
       }
@@ -16165,9 +16071,7 @@ export const PurchasesFieldsFragmentDoc = gql`
         name
         version
         metadata
-        methodologyById {
-          handle
-        }
+        documentId
       }
       projectByProjectId {
         name

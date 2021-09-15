@@ -39,16 +39,12 @@ fragment creditVintageFields on CreditVintage {
     name
     version
     metadata
-    creditClassById {
-      handle
-    }
+    documentId
   }
   methodologyVersionByMethodologyVersionIdAndMethodologyVersionCreatedAt {
     name
     version
-    methodologyById {
-      handle
-    }
+    documentId
   }
   walletByTokenizerId {
     addr

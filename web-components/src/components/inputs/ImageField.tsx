@@ -4,9 +4,12 @@ import { FieldProps } from 'formik';
 import OutlinedButton from '../buttons/OutlinedButton';
 import FieldFormControl from './FieldFormControl';
 import CropImageModal from '../modal/CropImageModal';
+import AvatarIcon from '../icons/AvatarIcon';
 
 const useStyles = makeStyles((theme: Theme) => ({
   avatar: {
+    backgroundColor: theme.palette.grey[100],
+    color: theme.palette.info.main,
     [theme.breakpoints.up('sm')]: {
       height: theme.spacing(22),
       width: theme.spacing(22),
@@ -37,6 +40,7 @@ interface Props extends FieldProps {
   description?: string;
   label?: string;
   optional?: boolean;
+  fallbackAvatar?: JSX.Element;
   transformValue?: (v: any) => any;
   triggerOnChange?: (v: any) => Promise<void>;
 }
@@ -46,12 +50,15 @@ export default function ImageField({
   className,
   label,
   optional,
+  fallbackAvatar,
   transformValue,
   triggerOnChange,
   ...fieldProps
 }: Props): JSX.Element {
   const [initialImage, setInitialImage] = useState('');
+  const styles = useStyles();
   const { form, field } = fieldProps;
+  const inputId = `image-upload-input-${field.name.toString()}`;
 
   function toBase64(file: File): Promise<string | ArrayBuffer | null> {
     return new Promise((resolve, reject) => {
@@ -61,8 +68,6 @@ export default function ImageField({
       reader.onerror = error => reject(error);
     });
   }
-
-  const styles = useStyles();
 
   return (
     <>
@@ -75,7 +80,9 @@ export default function ImageField({
       >
         {() => (
           <Box display="flex" alignItems="center">
-            <Avatar className={styles.avatar} src={field.value} />
+            <Avatar className={styles.avatar} src={field.value}>
+              {fallbackAvatar || <AvatarIcon />}
+            </Avatar>
 
             <input
               type="file"
@@ -91,9 +98,9 @@ export default function ImageField({
                 }
               }}
               accept="image/*"
-              id="image-upload-input"
+              id={inputId}
             />
-            <label htmlFor="image-upload-input">
+            <label htmlFor={inputId}>
               <OutlinedButton isImageBtn className={styles.button}>
                 Add Image
               </OutlinedButton>

@@ -151,6 +151,7 @@ function CreditsIssue(): JSX.Element {
                   startDate,
                   endDate,
                   initialDistribution: {
+                    '@type': 'http://regen.network/CreditVintage',
                     'http://regen.network/projectDeveloperDistribution': projectDeveloper / 100,
                     'http://regen.network/landStewardDistribution': landSteward / 100,
                     'http://regen.network/landOwnerDistribution': landOwner / 100,

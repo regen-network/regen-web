@@ -53,7 +53,7 @@ coreSection:
       twitterUrl: ""
       githubUrl: ""
     - name: Sarah Baxendell
-      title: Director of Finance
+      title: Director of Business Development
       description: Sarah specializes in ecological design, product development, and
         green finance. For the past decade, she has worked at the intersection
         of start-ups and community-based nonprofits to develop impact-centric
@@ -200,20 +200,10 @@ coreSection:
         campus club. He has experience working alongside ethereum researchers to
         contribute to the go-ethereum client, as well as developing an award
         winning DeFi hackathon project at ETHOnline.
-      title: Blockchain Developer Intern
+      title: Junior Blockchain Engineer
       githubUrl: https://github.com/technicallyty
       twitterUrl: https://twitter.com/technicallyty
       linkedUrl: https://www.linkedin.com/in/tygoodman/
-    - image: ../../static/media/new-team-member.jpg
-      name: Andrei Ivasko
-      description: Andrei Ivasko holds a Masters degree in Computer science from Freie
-        Universiteat Berlin. Before joining Regen, he worked as a software
-        developer at Bosch, Blockchains LLC and Intlos. Andrei has contributed
-        to Prysm Ethereum 2.0 client, and runs a blockchain meetup in Reno, NV
-        since 2017. He’s interested in Cryptography/Distributed systems.
-      title: Blockchain Engineer
-      linkedUrl: https://www.linkedin.com/in/andreiivasko/
-      githubUrl: https://github.com/cyberbono3
     - description: "Rebecca has worked as a farmer, researcher, and conservationist in
         Texas, Tennessee, and Haiti. An advocate for soil and wildlife
         conservation, she wants to see climate change and land degradation
@@ -344,28 +334,19 @@ coreSection:
       twitterUrl: https://twitter.com/KKapatral
       githubUrl: https://github.com/kaustubhkapatral
       linkedUrl: https://www.linkedin.com/in/kaustubh-kapatral-704a60176/
-    - name: "Sophia Leiker "
-      title: Geospatial Environmental Researcher and Project Analyst
-      description: >
-        Sophia is a geospatial researcher with experience employing remote
-        sensing techniques and GIS analysis to address environmental inquiries.
-        An alumni of UC Berkeley, Sophia has worked as a researcher for NASA
-        DEVELOP, where she led projects studying geospatial applications. She
-        supports the science team in methodology development and project
-        management.
-      image: ../../static/media/sophia.png
 contributorSection:
   title: Contributors
   contributors:
-    - description: >
-        Will’s background in gift economics and local food systems helped him to
-        start PVGrows, a network in Western MA funding local food system
-        infrastructure, and develop a license for definancializing physical
-        infrastructure, the Gift License. Will is a member of the Board of
-        Directors.
-      title: Co-founder
+    - image: ../../static/media/img06.jpeg
       name: Will Szal
-      image: ../../static/media/img06.jpeg
+      description: Will’s background in gift economics and local food systems helped
+        him to start PVGrows, a network in Western MA funding local food system
+        infrastructure, and develop a license for definancializing physical
+        infrastructure, the Gift License. Will serves as Board President at
+        Regen Foundation.
+      title: Board President - Regen Foundation
+      linkedUrl: https://www.linkedin.com/in/willszal/
+      twitterUrl: https://twitter.com/willszal
     - description: Ethan Frey has years of experience in distributed systems,
         cryptography, customer-oriented web design, and blockchain. And a strong
         desire to build something meaningful to humankind. He is delighted to
@@ -448,6 +429,15 @@ contributorSection:
         point and Regen’s project on ecological regeneration acts as a beacon of
         light by adding value to the worldwide efforts in saving the world.
       image: ../../static/media/adriana-mihai.png
+    - image: ../../static/media/sophia-headshot.png
+      name: "Sophia Leiker "
+      description: Sophia is a geospatial researcher with experience employing remote
+        sensing techniques and GIS analysis to address environmental inquiries.
+        An alumni of UC Berkeley, Sophia has worked as a researcher for NASA
+        DEVELOP, where she led projects studying geospatial applications. She
+        supports the science team in methodology development and project
+        management.
+      title: Geospatial Environmental Researcher and Project Analyst
 advisorSection:
   title: Advisors
   advisors:

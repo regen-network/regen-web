@@ -2,7 +2,11 @@ import React, { useState } from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 import { FieldProps } from 'formik';
 import MapboxClient from '@mapbox/mapbox-sdk';
-import mbxGeocoder, { GeocodeQueryType, GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
+import mbxGeocoder, {
+  GeocodeQueryType,
+  GeocodeFeature,
+  GeocodeRequest,
+} from '@mapbox/mapbox-sdk/services/geocoding';
 import FieldFormControl from './FieldFormControl';
 import Input from './Input';
 
@@ -66,17 +70,35 @@ const LocationField: React.FC<Props> = ({
             onChange={({ target: { value } }) => {
               handleChange(value);
               if (value.length > 1) {
-                geocoderService
-                  .forwardGeocode({
-                    types,
-                    mode: 'mapbox.places',
-                    query: value,
-                  })
-                  .send()
-                  .then(res => {
-                    setFeatures(res.body.features);
-                    setShowResults(true);
-                  });
+                const isCoordinates = /^[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?),\s*[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)$/.test(
+                  value,
+                );
+                if (isCoordinates) {
+                  const [longitude, lattitude] = value.split(',').map(Number) as [number, number];
+                  const coordinates: [number, number] = [longitude, lattitude];
+                  geocoderService
+                    .reverseGeocode({
+                      mode: 'mapbox.places',
+                      query: coordinates,
+                    })
+                    .send()
+                    .then(({ body }) => {
+                      setFeatures(body.features);
+                      setShowResults(true);
+                    });
+                } else {
+                  geocoderService
+                    .forwardGeocode({
+                      types,
+                      mode: 'mapbox.places',
+                      query: value,
+                    })
+                    .send()
+                    .then(res => {
+                      setFeatures(res.body.features);
+                      setShowResults(true);
+                    });
+                }
               }
             }}
           />

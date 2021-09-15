@@ -167,10 +167,14 @@ const CreditsTransfer: React.FC<{
     vintage = vintagesData.allCreditVintages.nodes.find((node: any) => node.id === vintageId);
     newBalances = vintage.accountBalancesByCreditVintageId.nodes;
 
+    // TODO: type coersion below shouldn't be necessary, but there's some discrepency between our
+    // generated types. This is just adding TS types to the existing code and
+    // shouldn't create new bugs, but might bet worth removing the type coersion and
+    // fixing in the future
     const findOldBalance = (i: number): Balance | undefined =>
       oldBalances.find(oldBalance => oldBalance.id === newBalances[i].id);
     const findParty = (i: number): Party | undefined =>
-      partiesData?.allParties?.nodes.find(party => party?.walletId === newBalances[i].walletId) as Party; // TODO: we might want to see if there's a way of sharing type definitions between sanity and graphql, or at least extracting this to a `Party | SanityParty` type
+      partiesData?.allParties?.nodes.find(party => party?.walletId === newBalances[i].walletId) as Party;
 
     // Build response list of senders/buyer old/new balance
     for (var i: number = 0; i < newBalances.length; i++) {
@@ -235,6 +239,8 @@ const CreditsTransfer: React.FC<{
                 setOldBalances(balances as Balance[]);
               }
             } catch (e) {
+              // TODO: Should we display the error banner here?
+              // https://github.com/regen-network/regen-registry/issues/555
               console.error('Error transferring credits: ', e); // eslint-disable-line no-console
             }
           }

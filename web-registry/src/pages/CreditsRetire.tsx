@@ -168,7 +168,10 @@ const CreditsRetire: React.FC<{
               await refetchVintages();
               setUnits(getUnits(vintagesData, buyerWalletId, creditVintageId));
               setShowResult(true);
-            } catch (e) {}
+            } catch (e) {
+              // TODO: Should we display the error banner here?
+              // https://github.com/regen-network/regen-registry/issues/555
+            }
           }
         }}
         noValidate

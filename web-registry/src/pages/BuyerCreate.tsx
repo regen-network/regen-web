@@ -98,7 +98,10 @@ const BuyerCreate: React.FC<{ onCreate?: (walletId: string) => void }> = ({ onCr
                 onCreate(result.data?.reallyCreateUser?.user?.partyByPartyId?.walletId);
               }
             }
-          } catch (e) {}
+          } catch (e) {
+            // TODO: Should we display the error banner here?
+            // https://github.com/regen-network/regen-registry/issues/555
+          }
         }}
         noValidate
         autoComplete="off"

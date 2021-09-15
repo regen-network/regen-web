@@ -1,18 +1,23 @@
 import React, { useState } from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 
-import SEO from '../components/seo';
-import TopSection from '../sections/land-stewards/TopSection';
-import ImageItemsSection from '../sections/land-stewards/ImageItemsSection';
-import JoinFarmersSection from '../sections/land-stewards/JoinFarmersSection';
-import PracticesOutcomesSection from '../sections/land-stewards/PracticesOutcomesSection';
-import MoreQuestionsSection from '../sections/land-stewards/MoreQuestionsSection';
-import TimelineSection from '../sections/land-stewards/TimelineSection';
-import FeaturedSection from '../sections/shared/FeaturedSection';
+// import SEO from '../components/seo';
+// import TopSection from '../sections/land-stewards/TopSection';
+// import ImageItemsSection from '../sections/land-stewards/ImageItemsSection';
+// import JoinFarmersSection from '../sections/land-stewards/JoinFarmersSection';
+// import PracticesOutcomesSection from '../sections/land-stewards/PracticesOutcomesSection';
+// import MoreQuestionsSection from '../sections/land-stewards/MoreQuestionsSection';
+// import TimelineSection from '../sections/land-stewards/TimelineSection';
+// import FeaturedSection from '../sections/shared/FeaturedSection';
 
 import FixedFooter from 'web-components/lib/components/fixed-footer';
 import Modal from 'web-components/lib/components/modal';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
+
+import { useAllLandStewardsPageQuery } from '../generated/sanity-graphql';
+import { client } from '../sanity';
+import { HeroTitle } from '../components/molecules';
+import landStewardsHero from '../assets/land-stewards-top.jpg';
 
 const useStyles = makeStyles((theme: Theme) => ({
   modal: {
@@ -21,7 +26,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const LandStewardsPage = (): JSX.Element => {
+const LandStewards = (): JSX.Element => {
   const styles = useStyles();
 
   const [open, setOpen] = useState(false);
@@ -33,34 +38,39 @@ const LandStewardsPage = (): JSX.Element => {
     setOpen(false);
   };
 
-  // const { data } = useAllLandStewardsPageQuery({ client });
-  // const content = data?.allLandStewardsPage?.[0];
+  const { data } = useAllLandStewardsPageQuery({ client });
+  const content = data?.allLandStewardsPage?.[0];
+  console.log('content', content);
 
   return (
     <>
-      <SEO
+      {/* <SEO
         description="Issue and sell ecosystem service credits to buyers around the world - get paid for your ecological stewardship."
         title="For Land Stewards"
         location={location}
         imageUrl={data.seoImage.publicURL}
       />
-      <TopSection />
+      */}
+      <HeroTitle
+        title={content?.heroSection?.title}
+        descriptionRaw={content?.heroSection?.descriptionRaw}
+        img={landStewardsHero}
+      />
+      {/*
       <ImageItemsSection />
       <JoinFarmersSection />
       <PracticesOutcomesSection />
       <TimelineSection />
       <FeaturedSection />
-      <MoreQuestionsSection startSellerFlow={handleOpen} />
+      <MoreQuestionsSection startSellerFlow={handleOpen} /> */}
       <FixedFooter justify="flex-end">
-        <>
-          <ContainedButton onClick={handleOpen}>{data.text.popup.buttonText}</ContainedButton>
-        </>
+        <>{/* <ContainedButton onClick={handleOpen}>{data.text.popup.buttonText}</ContainedButton> */}</>
       </FixedFooter>
       <Modal open={open} onClose={handleClose} className={styles.modal}>
-        <iframe title="airtable-signup-form" src={data.text.popup.airtableLink} />
+        {/* <iframe title="airtable-signup-form" src={data.text.popup.airtableLink} /> */}
       </Modal>
     </>
   );
 };
 
-export { LandStewardsPage };
+export { LandStewards };

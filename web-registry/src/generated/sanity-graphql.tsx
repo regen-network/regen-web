@@ -902,6 +902,26 @@ export type ImageFilter = {
   crop?: Maybe<SanityImageCropFilter>;
 };
 
+export type ImageItemsSection = {
+  __typename?: 'ImageItemsSection';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  imageCards?: Maybe<Array<Maybe<Card>>>;
+};
+
+export type ImageItemsSectionFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  title?: Maybe<StringFilter>;
+};
+
+export type ImageItemsSectionSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  title?: Maybe<SortOrder>;
+};
+
 export type ImageSorting = {
   _key?: Maybe<SortOrder>;
   _type?: Maybe<SortOrder>;
@@ -955,6 +975,53 @@ export type LandStewardSorting = {
   projectsTitle?: Maybe<SortOrder>;
   ctaButton?: Maybe<ButtonSorting>;
   connectSection?: Maybe<ConnectSectionSorting>;
+};
+
+export type LandStewardsPage = Document & {
+  __typename?: 'LandStewardsPage';
+  /** Document ID */
+  _id?: Maybe<Scalars['ID']>;
+  /** Document type */
+  _type?: Maybe<Scalars['String']>;
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars['DateTime']>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars['DateTime']>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars['String']>;
+  _key?: Maybe<Scalars['String']>;
+  heroSection?: Maybe<HeroSection>;
+  imageItemsSection?: Maybe<ImageItemsSection>;
+  footerLink?: Maybe<Scalars['String']>;
+  metadata?: Maybe<PageMetadata>;
+};
+
+export type LandStewardsPageFilter = {
+  /** Apply filters on document level */
+  _?: Maybe<Sanity_DocumentFilter>;
+  _id?: Maybe<IdFilter>;
+  _type?: Maybe<StringFilter>;
+  _createdAt?: Maybe<DatetimeFilter>;
+  _updatedAt?: Maybe<DatetimeFilter>;
+  _rev?: Maybe<StringFilter>;
+  _key?: Maybe<StringFilter>;
+  heroSection?: Maybe<HeroSectionFilter>;
+  imageItemsSection?: Maybe<ImageItemsSectionFilter>;
+  footerLink?: Maybe<StringFilter>;
+  metadata?: Maybe<PageMetadataFilter>;
+};
+
+export type LandStewardsPageSorting = {
+  _id?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  _createdAt?: Maybe<SortOrder>;
+  _updatedAt?: Maybe<SortOrder>;
+  _rev?: Maybe<SortOrder>;
+  _key?: Maybe<SortOrder>;
+  heroSection?: Maybe<HeroSectionSorting>;
+  imageItemsSection?: Maybe<ImageItemsSectionSorting>;
+  footerLink?: Maybe<SortOrder>;
+  metadata?: Maybe<PageMetadataSorting>;
 };
 
 export type Link = {
@@ -1253,6 +1320,7 @@ export type RootQuery = {
   MethodologyReviewProcessPage?: Maybe<MethodologyReviewProcessPage>;
   Methodology?: Maybe<Methodology>;
   CreditClass?: Maybe<CreditClass>;
+  LandStewardsPage?: Maybe<LandStewardsPage>;
   SanityImageAsset?: Maybe<SanityImageAsset>;
   SanityFileAsset?: Maybe<SanityFileAsset>;
   Document?: Maybe<Document>;
@@ -1269,6 +1337,7 @@ export type RootQuery = {
   allMethodologyReviewProcessPage: Array<MethodologyReviewProcessPage>;
   allMethodology: Array<Methodology>;
   allCreditClass: Array<CreditClass>;
+  allLandStewardsPage: Array<LandStewardsPage>;
   allSanityImageAsset: Array<SanityImageAsset>;
   allSanityFileAsset: Array<SanityFileAsset>;
   allDocument: Array<Document>;
@@ -1336,6 +1405,11 @@ export type RootQueryMethodologyArgs = {
 
 
 export type RootQueryCreditClassArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type RootQueryLandStewardsPageArgs = {
   id: Scalars['ID'];
 };
 
@@ -1454,6 +1528,14 @@ export type RootQueryAllMethodologyArgs = {
 export type RootQueryAllCreditClassArgs = {
   where?: Maybe<CreditClassFilter>;
   sort?: Maybe<Array<CreditClassSorting>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+};
+
+
+export type RootQueryAllLandStewardsPageArgs = {
+  where?: Maybe<LandStewardsPageFilter>;
+  sort?: Maybe<Array<LandStewardsPageSorting>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
@@ -2179,6 +2261,31 @@ export type AllHomePageQuery = (
   )> }
 );
 
+export type AllLandStewardsPageQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllLandStewardsPageQuery = (
+  { __typename?: 'RootQuery' }
+  & { allLandStewardsPage: Array<(
+    { __typename?: 'LandStewardsPage' }
+    & Pick<LandStewardsPage, 'footerLink'>
+    & { heroSection?: Maybe<(
+      { __typename?: 'HeroSection' }
+      & HeroSectionFieldsFragment
+    )>, imageItemsSection?: Maybe<(
+      { __typename?: 'ImageItemsSection' }
+      & Pick<ImageItemsSection, 'title'>
+      & { imageCards?: Maybe<Array<Maybe<(
+        { __typename?: 'Card' }
+        & CardFieldsFragment
+      )>>> }
+    )>, metadata?: Maybe<(
+      { __typename?: 'PageMetadata' }
+      & PageMetadataFieldsFragment
+    )> }
+  )> }
+);
+
 export type AllMethodologyQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -2851,6 +2958,54 @@ export function useAllHomePageLazyQuery(baseOptions?: Apollo.LazyQueryHookOption
 export type AllHomePageQueryHookResult = ReturnType<typeof useAllHomePageQuery>;
 export type AllHomePageLazyQueryHookResult = ReturnType<typeof useAllHomePageLazyQuery>;
 export type AllHomePageQueryResult = Apollo.QueryResult<AllHomePageQuery, AllHomePageQueryVariables>;
+export const AllLandStewardsPageDocument = gql`
+    query allLandStewardsPage {
+  allLandStewardsPage {
+    heroSection {
+      ...heroSectionFields
+    }
+    imageItemsSection {
+      title
+      imageCards {
+        ...cardFields
+      }
+    }
+    footerLink
+    metadata {
+      ...pageMetadataFields
+    }
+  }
+}
+    ${HeroSectionFieldsFragmentDoc}
+${CardFieldsFragmentDoc}
+${PageMetadataFieldsFragmentDoc}`;
+
+/**
+ * __useAllLandStewardsPageQuery__
+ *
+ * To run a query within a React component, call `useAllLandStewardsPageQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAllLandStewardsPageQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAllLandStewardsPageQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useAllLandStewardsPageQuery(baseOptions?: Apollo.QueryHookOptions<AllLandStewardsPageQuery, AllLandStewardsPageQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AllLandStewardsPageQuery, AllLandStewardsPageQueryVariables>(AllLandStewardsPageDocument, options);
+      }
+export function useAllLandStewardsPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllLandStewardsPageQuery, AllLandStewardsPageQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AllLandStewardsPageQuery, AllLandStewardsPageQueryVariables>(AllLandStewardsPageDocument, options);
+        }
+export type AllLandStewardsPageQueryHookResult = ReturnType<typeof useAllLandStewardsPageQuery>;
+export type AllLandStewardsPageLazyQueryHookResult = ReturnType<typeof useAllLandStewardsPageLazyQuery>;
+export type AllLandStewardsPageQueryResult = Apollo.QueryResult<AllLandStewardsPageQuery, AllLandStewardsPageQueryVariables>;
 export const AllMethodologyDocument = gql`
     query allMethodology {
   allMethodology {

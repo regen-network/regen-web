@@ -7,3 +7,5 @@ const client = new ApolloClient({
 });
 
 export { client };
+
+// https://jm12rn9t.api.sanity.io/v1/graphql/staging/default

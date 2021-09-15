@@ -1,0 +1,17 @@
+query allLandStewardsPage {
+  allLandStewardsPage {
+    heroSection {
+      ...heroSectionFields
+    }
+    imageItemsSection {
+      title
+      imageCards {
+        ...cardFields
+      }
+    }
+    footerLink
+    metadata {
+      ...pageMetadataFields
+    }
+  }
+}

@@ -123,6 +123,7 @@ const RegistryNav: React.FC = () => {
     '/create-methodology': theme.palette.primary.main,
     '/create-credit-class': theme.palette.primary.main,
     '/methodology-review-process': theme.palette.primary.main,
+    '/land-stewards': theme.palette.primary.main,
   };
 
   const isTransparent =
@@ -132,6 +133,7 @@ const RegistryNav: React.FC = () => {
       '/methodology-review-process',
       '/create-credit-class',
       '/certificate',
+      '/land-stewards',
     ].some(route => pathname.startsWith(route));
 
   return (

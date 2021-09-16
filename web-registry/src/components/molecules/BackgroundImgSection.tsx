@@ -47,16 +47,16 @@ const useStyles = makeStyles<Theme, StyleProps>(theme => ({
 
 const BackgroundImgSection: React.FC<Props> = ({ classes, ...props }) => {
   const styles = useStyles({ isBanner: !!props.isBanner, linearGradient: props?.linearGradient });
+  let background = `url(${props.img}) no-repeat center center`;
+  if (props.linearGradient) {
+    background = `${props?.linearGradient}, ${background}`;
+  }
 
   return (
     <CardMedia
       // image={props.linearGradient ? undefined : props.img}
       classes={{ root: cx(styles.root, classes?.root) }}
-      style={{
-        background: props?.linearGradient
-          ? `${props?.linearGradient}, url(${props.img}) no-repeat center center`
-          : `url(${props.img}) no-repeat center center`,
-      }}
+      style={{ background }}
     >
       <Section classes={{ root: cx(styles.section, classes?.section) }}>
         <div className={cx(styles.main, classes && classes.main)}>{props.children}</div>

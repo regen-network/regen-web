@@ -14,11 +14,15 @@ import cx from 'clsx';
 import FixedFooter from 'web-components/lib/components/fixed-footer';
 import Modal from 'web-components/lib/components/modal';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
+import { ImageItemProps } from 'web-components/lib/components/image-item';
+import ImageItems from 'web-components/lib/components/sliders/ImageItems';
+import Section from 'web-components/lib/components/section';
 
 import { useAllLandStewardsPageQuery } from '../generated/sanity-graphql';
 import { client } from '../sanity';
 import { HeroTitle } from '../components/molecules';
 import landStewardsHero from '../assets/land-stewards-top.jpg';
+import { title } from 'process';
 
 const useStyles = makeStyles((theme: Theme) => ({
   modal: {
@@ -67,6 +71,19 @@ const LandStewards = (): JSX.Element => {
         img={landStewardsHero}
         linearGradient="linear-gradient(209.83deg, rgba(250, 235, 209, 0.8) 11.05%, rgba(125, 201, 191, 0.8) 43.17%, rgba(81, 93, 137, 0.8) 75.29%)"
       />
+      <Section withSlider title={content?.imageItemsSection?.title || ''}>
+        {content?.imageItemsSection?.imageCards && (
+          <ImageItems
+            items={content?.imageItemsSection?.imageCards?.map(i => {
+              return {
+                img: <img src={i?.icon?.asset?.url || ''} />,
+                title: i?.title || '',
+                description: i?.descriptionRaw[0]?.children[0]?.text,
+              };
+            })}
+          />
+        )}
+      </Section>
       {/*
       <ImageItemsSection />
       <JoinFarmersSection />

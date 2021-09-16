@@ -586,6 +586,31 @@ export type DocumentationSorting = {
   image?: Maybe<CustomImageSorting>;
 };
 
+export type DualImageSection = {
+  __typename?: 'DualImageSection';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  left?: Maybe<ImageTitleDescription>;
+  right?: Maybe<ImageTitleDescription>;
+};
+
+export type DualImageSectionFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  title?: Maybe<StringFilter>;
+  left?: Maybe<ImageTitleDescriptionFilter>;
+  right?: Maybe<ImageTitleDescriptionFilter>;
+};
+
+export type DualImageSectionSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  title?: Maybe<SortOrder>;
+  left?: Maybe<ImageTitleDescriptionSorting>;
+  right?: Maybe<ImageTitleDescriptionSorting>;
+};
+
 export type EcologicalImpact = Document & {
   __typename?: 'EcologicalImpact';
   /** Document ID */
@@ -929,6 +954,31 @@ export type ImageSorting = {
   crop?: Maybe<SanityImageCropSorting>;
 };
 
+export type ImageTitleDescription = {
+  __typename?: 'ImageTitleDescription';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  boldText?: Maybe<Scalars['String']>;
+  label?: Maybe<Scalars['String']>;
+  image?: Maybe<CustomImage>;
+};
+
+export type ImageTitleDescriptionFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  boldText?: Maybe<StringFilter>;
+  label?: Maybe<StringFilter>;
+  image?: Maybe<CustomImageFilter>;
+};
+
+export type ImageTitleDescriptionSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  boldText?: Maybe<SortOrder>;
+  label?: Maybe<SortOrder>;
+  image?: Maybe<CustomImageSorting>;
+};
+
 export type IntFilter = {
   /** Checks if the value is equal to the given input. */
   eq?: Maybe<Scalars['Int']>;
@@ -992,6 +1042,7 @@ export type LandStewardsPage = Document & {
   _key?: Maybe<Scalars['String']>;
   heroSection?: Maybe<HeroSection>;
   imageItemsSection?: Maybe<ImageItemsSection>;
+  joinFarmersSection?: Maybe<DualImageSection>;
   footerLink?: Maybe<Scalars['String']>;
   metadata?: Maybe<PageMetadata>;
 };
@@ -1007,6 +1058,7 @@ export type LandStewardsPageFilter = {
   _key?: Maybe<StringFilter>;
   heroSection?: Maybe<HeroSectionFilter>;
   imageItemsSection?: Maybe<ImageItemsSectionFilter>;
+  joinFarmersSection?: Maybe<DualImageSectionFilter>;
   footerLink?: Maybe<StringFilter>;
   metadata?: Maybe<PageMetadataFilter>;
 };
@@ -1020,6 +1072,7 @@ export type LandStewardsPageSorting = {
   _key?: Maybe<SortOrder>;
   heroSection?: Maybe<HeroSectionSorting>;
   imageItemsSection?: Maybe<ImageItemsSectionSorting>;
+  joinFarmersSection?: Maybe<DualImageSectionSorting>;
   footerLink?: Maybe<SortOrder>;
   metadata?: Maybe<PageMetadataSorting>;
 };
@@ -2279,6 +2332,16 @@ export type AllLandStewardsPageQuery = (
         { __typename?: 'Card' }
         & CardFieldsFragment
       )>>> }
+    )>, joinFarmersSection?: Maybe<(
+      { __typename?: 'DualImageSection' }
+      & Pick<DualImageSection, 'title'>
+      & { left?: Maybe<(
+        { __typename?: 'ImageTitleDescription' }
+        & ImageTitleDescriptionFieldsFragment
+      )>, right?: Maybe<(
+        { __typename?: 'ImageTitleDescription' }
+        & ImageTitleDescriptionFieldsFragment
+      )> }
     )>, metadata?: Maybe<(
       { __typename?: 'PageMetadata' }
       & PageMetadataFieldsFragment
@@ -2434,6 +2497,15 @@ export type EcologicalOutcomeFieldsFragment = (
 export type HeroSectionFieldsFragment = (
   { __typename?: 'HeroSection' }
   & Pick<HeroSection, 'title' | 'descriptionRaw'>
+);
+
+export type ImageTitleDescriptionFieldsFragment = (
+  { __typename?: 'ImageTitleDescription' }
+  & Pick<ImageTitleDescription, 'boldText' | 'label'>
+  & { image?: Maybe<(
+    { __typename?: 'CustomImage' }
+    & CustomImageFieldsFragment
+  )> }
 );
 
 export type LinkFieldsFragment = (
@@ -2625,6 +2697,15 @@ export const HeroSectionFieldsFragmentDoc = gql`
   descriptionRaw
 }
     `;
+export const ImageTitleDescriptionFieldsFragmentDoc = gql`
+    fragment imageTitleDescriptionFields on ImageTitleDescription {
+  boldText
+  label
+  image {
+    ...customImageFields
+  }
+}
+    ${CustomImageFieldsFragmentDoc}`;
 export const MediaFieldsFragmentDoc = gql`
     fragment mediaFields on Media {
   title
@@ -2970,6 +3051,15 @@ export const AllLandStewardsPageDocument = gql`
         ...cardFields
       }
     }
+    joinFarmersSection {
+      title
+      left {
+        ...imageTitleDescriptionFields
+      }
+      right {
+        ...imageTitleDescriptionFields
+      }
+    }
     footerLink
     metadata {
       ...pageMetadataFields
@@ -2978,6 +3068,7 @@ export const AllLandStewardsPageDocument = gql`
 }
     ${HeroSectionFieldsFragmentDoc}
 ${CardFieldsFragmentDoc}
+${ImageTitleDescriptionFieldsFragmentDoc}
 ${PageMetadataFieldsFragmentDoc}`;
 
 /**

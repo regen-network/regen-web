@@ -9,6 +9,15 @@ query allLandStewardsPage {
         ...cardFields
       }
     }
+    joinFarmersSection {
+      title
+      left {
+        ...imageTitleDescriptionFields
+      }
+      right {
+        ...imageTitleDescriptionFields
+      }
+    }
     footerLink
     metadata {
       ...pageMetadataFields

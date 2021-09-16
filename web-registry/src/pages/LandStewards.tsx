@@ -5,7 +5,7 @@ import cx from 'clsx';
 
 // import TopSection from '../sections/land-stewards/TopSection';
 // import ImageItemsSection from '../sections/land-stewards/ImageItemsSection';
-// import JoinFarmersSection from '../sections/land-stewards/JoinFarmersSection';
+import { TwoImageSection } from '../components/molecules/TwoImageSection';
 // import PracticesOutcomesSection from '../sections/land-stewards/PracticesOutcomesSection';
 // import MoreQuestionsSection from '../sections/land-stewards/MoreQuestionsSection';
 // import TimelineSection from '../sections/land-stewards/TimelineSection';
@@ -93,9 +93,9 @@ const LandStewards = (): JSX.Element => {
           />
         )}
       </Section>
+      {content?.joinFarmersSection && <TwoImageSection content={content.joinFarmersSection} />}
       {/*
-      <JoinFarmersSection />
-      <PracticesOutcomesSection />
+    <PracticesOutcomesSection />
       <TimelineSection />
       <FeaturedSection />
       <MoreQuestionsSection startSellerFlow={handleOpen} /> */}

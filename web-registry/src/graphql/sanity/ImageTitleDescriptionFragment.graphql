@@ -1,0 +1,7 @@
+fragment imageTitleDescriptionFields on ImageTitleDescription {
+  boldText
+  label
+  image {
+    ...customImageFields
+  }
+}

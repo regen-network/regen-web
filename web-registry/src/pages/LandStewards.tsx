@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
+import { useLocation } from 'react-router-dom';
 import cx from 'clsx';
 
-// import SEO from '../components/seo';
 // import TopSection from '../sections/land-stewards/TopSection';
 // import ImageItemsSection from '../sections/land-stewards/ImageItemsSection';
 // import JoinFarmersSection from '../sections/land-stewards/JoinFarmersSection';
@@ -17,6 +17,7 @@ import ContainedButton from 'web-components/lib/components/buttons/ContainedButt
 import { ImageItemProps } from 'web-components/lib/components/image-item';
 import ImageItems from 'web-components/lib/components/sliders/ImageItems';
 import Section from 'web-components/lib/components/section';
+import SEO from 'web-components/lib/components/seo';
 
 import { useAllLandStewardsPageQuery } from '../generated/sanity-graphql';
 import { client } from '../sanity';
@@ -50,19 +51,27 @@ const LandStewards = (): JSX.Element => {
     setOpen(false);
   };
 
+  const location = useLocation();
   const { data } = useAllLandStewardsPageQuery({ client });
   const content = data?.allLandStewardsPage?.[0];
   console.log('content', content);
 
+  const siteMetadata = {
+    title: `For Land Stewards`,
+    description: content?.metadata?.description || '',
+    author: `RND, Inc.`,
+    siteUrl: window.location.href,
+  };
+
   return (
     <>
-      {/* <SEO
-        description="Issue and sell ecosystem service credits to buyers around the world - get paid for your ecological stewardship."
-        title="For Land Stewards"
+      <SEO
         location={location}
-        imageUrl={data.seoImage.publicURL}
+        description={siteMetadata.description}
+        title={siteMetadata.title}
+        imageUrl={content?.metadata?.openGraphImage?.asset?.url || landStewardsHero} // TODO
+        siteMetadata={siteMetadata}
       />
-      */}
       <HeroTitle
         classes={{ main: styles.heroMain }}
         isBanner
@@ -76,7 +85,7 @@ const LandStewards = (): JSX.Element => {
           <ImageItems
             items={content?.imageItemsSection?.imageCards?.map(i => {
               return {
-                img: <img src={i?.icon?.asset?.url || ''} />,
+                img: <img src={i?.icon?.asset?.url || ''} alt={`${i?.title} icon`} />,
                 title: i?.title || '',
                 description: i?.descriptionRaw[0]?.children[0]?.text,
               };
@@ -85,7 +94,6 @@ const LandStewards = (): JSX.Element => {
         )}
       </Section>
       {/*
-      <ImageItemsSection />
       <JoinFarmersSection />
       <PracticesOutcomesSection />
       <TimelineSection />

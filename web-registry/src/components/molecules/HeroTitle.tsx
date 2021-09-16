@@ -11,6 +11,7 @@ type Props = {
   img: string;
   title?: string | null;
   descriptionRaw?: Maybe<Scalars['JSON']> | string;
+  linearGradient?: string;
   isBanner?: boolean;
   classes?: {
     title?: string;
@@ -58,7 +59,11 @@ const HeroTitle: React.FC<Props> = ({ classes, ...props }) => {
     <BackgroundImgSection
       isBanner={props.isBanner}
       img={props.img}
-      classes={{ main: cx(styles.main, classes?.main), section: classes?.section }}
+      linearGradient={props?.linearGradient}
+      classes={{
+        main: cx(styles.main, classes?.main),
+        section: classes?.section,
+      }}
     >
       {props.title && (
         <Typography variant="h1" className={cx(styles.title, classes?.title)}>

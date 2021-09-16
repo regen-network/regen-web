@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
+import cx from 'clsx';
 
 // import SEO from '../components/seo';
 // import TopSection from '../sections/land-stewards/TopSection';
@@ -23,6 +24,13 @@ const useStyles = makeStyles((theme: Theme) => ({
   modal: {
     padding: 0,
     overflow: 'hidden',
+  },
+  heroMain: {
+    maxWidth: theme.typography.pxToRem(775),
+    paddingBottom: theme.spacing(20),
+    [theme.breakpoints.down('xs')]: {
+      paddingBottom: theme.spacing(12),
+    },
   },
 }));
 
@@ -52,9 +60,12 @@ const LandStewards = (): JSX.Element => {
       />
       */}
       <HeroTitle
+        classes={{ main: styles.heroMain }}
+        isBanner
         title={content?.heroSection?.title}
         descriptionRaw={content?.heroSection?.descriptionRaw}
         img={landStewardsHero}
+        linearGradient="linear-gradient(209.83deg, rgba(250, 235, 209, 0.8) 11.05%, rgba(125, 201, 191, 0.8) 43.17%, rgba(81, 93, 137, 0.8) 75.29%)"
       />
       {/*
       <ImageItemsSection />

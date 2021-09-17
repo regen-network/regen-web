@@ -1,0 +1,97 @@
+import React from 'react';
+import { makeStyles, Theme, useTheme } from '@material-ui/core';
+import clsx from 'clsx';
+
+import { ImageItemProps } from 'web-components/lib/components/image-item';
+import ImageItems from 'web-components/lib/components/sliders/ImageItems';
+import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';
+import ImpactCard from 'web-components/lib/components/cards/ImpactCard';
+import Description from 'web-components/lib/components/description';
+import Section from 'web-components/lib/components/section';
+
+const useStyles = makeStyles((theme: Theme) => ({
+  root: {
+    [theme.breakpoints.down('xs')]: {
+      paddingBottom: theme.spacing(14),
+    },
+    [theme.breakpoints.up('sm')]: {
+      paddingBottom: theme.spacing(25),
+    },
+  },
+  outcomes: {
+    '& .slick-slide': {
+      '& div:first-child': {
+        height: '100%',
+      },
+    },
+  },
+  slider: {
+    [theme.breakpoints.down('xs')]: {
+      paddingTop: theme.spacing(12),
+    },
+    [theme.breakpoints.up('sm')]: {
+      paddingTop: theme.spacing(20.75),
+    },
+  },
+  note: {
+    float: 'right',
+    paddingTop: theme.spacing(7.25),
+  },
+  title: {
+    [theme.breakpoints.up('lg')]: {
+      paddingLeft: theme.spacing(40),
+      paddingRight: theme.spacing(40),
+    },
+  },
+}));
+
+interface Props {
+  content: any; //TODO
+}
+
+const PracticesOutcomesSection: React.FC<Props> = ({ content }) => {
+  const classes = useStyles();
+  const theme = useTheme();
+
+  const practiceItems: ImageItemProps[] =
+    content?.practices?.imageCards?.map((i: any) => ({
+      img: <img src={i?.icon?.asset?.url || ''} alt={`${i?.title}`} />,
+      title: i?.title || '',
+      description: i?.descriptionRaw[0]?.children[0]?.text,
+    })) || [];
+
+  const outcomeElements: JSX.Element[] = content.outcomes.imageCards.map(
+    ({ icon, title, descriptionRaw }: any) => (
+      <ImpactCard
+        name={title}
+        imgSrc={icon?.asset?.url}
+        description={descriptionRaw[0]?.children[0]?.text}
+        largeFontSize
+      />
+    ),
+  );
+
+  return (
+    <Section withSlider classes={{ root: classes.root, title: classes.title }} title={content.header}>
+      <ImageItems
+        className={classes.slider}
+        title={content?.practices?.title}
+        arrows
+        slidesToShow={4}
+        items={practiceItems}
+      />
+      <ResponsiveSlider
+        itemWidth="90%"
+        padding={theme.spacing(2.5)}
+        className={clsx(classes.outcomes, classes.slider)}
+        title={content?.outcomes?.title}
+        arrows
+        slidesToShow={3}
+        items={outcomeElements}
+      />
+      <Description className={classes.note}>{content?.note}</Description>
+    </Section>
+  );
+};
+
+export { PracticesOutcomesSection };

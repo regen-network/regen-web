@@ -3,7 +3,6 @@ import { makeStyles, Theme } from '@material-ui/core/styles';
 import { useLocation } from 'react-router-dom';
 import cx from 'clsx';
 
-// import PracticesOutcomesSection from '../sections/land-stewards/PracticesOutcomesSection';
 // import MoreQuestionsSection from '../sections/land-stewards/MoreQuestionsSection';
 // import TimelineSection from '../sections/land-stewards/TimelineSection';
 // import FeaturedSection from '../sections/shared/FeaturedSection';
@@ -15,7 +14,12 @@ import SEO from 'web-components/lib/components/seo';
 
 import { useAllLandStewardsPageQuery } from '../generated/sanity-graphql';
 import { client } from '../sanity';
-import { HeroTitle, ImageItemsSection, TwoImageSection } from '../components/molecules';
+import {
+  HeroTitle,
+  ImageItemsSection,
+  TwoImageSection,
+  PracticesOutcomesSection,
+} from '../components/molecules';
 import landStewardsHero from '../assets/land-stewards-top.jpg';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -52,7 +56,7 @@ const LandStewards = (): JSX.Element => {
   const siteMetadata = {
     title: `For Land Stewards`,
     description: content?.metadata?.description || '',
-    author: `RND, Inc.`,
+    author: `RND, Inc.`, //TODO
     siteUrl: window.location.href,
   };
 
@@ -73,10 +77,14 @@ const LandStewards = (): JSX.Element => {
         img={landStewardsHero}
         linearGradient="linear-gradient(209.83deg, rgba(250, 235, 209, 0.8) 11.05%, rgba(125, 201, 191, 0.8) 43.17%, rgba(81, 93, 137, 0.8) 75.29%)"
       />
-      {content?.imageItemsSection && <ImageItemsSection content={content.imageItemsSection} />}
+      {content?.designedForFarmersSection && (
+        <ImageItemsSection content={content.designedForFarmersSection} />
+      )}
       {content?.joinFarmersSection && <TwoImageSection content={content.joinFarmersSection} />}
+      {content?.practicesOutcomesSection && (
+        <PracticesOutcomesSection content={content.practicesOutcomesSection} />
+      )}
       {/*
-    <PracticesOutcomesSection />
       <TimelineSection />
       <FeaturedSection />
       <MoreQuestionsSection startSellerFlow={handleOpen} /> */}

@@ -26,7 +26,7 @@ const ImageItemsSection: React.FC<Props> = ({ content }) => {
   const styles = useStyles();
   const imageItems: ImageItemProps[] =
     content?.imageCards?.map((i: any) => ({
-      img: <img src={i?.icon?.asset?.url || ''} alt={`${i?.title} icon`} />,
+      img: <img src={i?.icon?.asset?.url || ''} alt={`${i?.title}`} />,
       title: i?.title || '',
       description: i?.descriptionRaw[0]?.children[0]?.text,
     })) || [];

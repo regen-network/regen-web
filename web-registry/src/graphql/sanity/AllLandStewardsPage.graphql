@@ -3,7 +3,7 @@ query allLandStewardsPage {
     heroSection {
       ...heroSectionFields
     }
-    imageItemsSection {
+    designedForFarmersSection {
       title
       imageCards {
         ...cardFields
@@ -12,10 +12,26 @@ query allLandStewardsPage {
     joinFarmersSection {
       title
       left {
-        ...imageTitleDescriptionFields
+        ...imageBoldTextLabelFields
       }
       right {
-        ...imageTitleDescriptionFields
+        ...imageBoldTextLabelFields
+      }
+    }
+    practicesOutcomesSection {
+      title
+      note
+      practices {
+        title
+        imageCards {
+          ...cardFields
+        }
+      }
+      outcomes {
+        title
+        imageCards {
+          ...cardFields
+        }
       }
     }
     footerLink

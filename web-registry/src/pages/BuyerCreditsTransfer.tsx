@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const CreditsCreateAndTransfer: React.FC = () => {
+const BuyerCreditsTransfer: React.FC = () => {
   const [step, setStep] = useState(1);
   const [buyerWalletId, setBuyerWalletId] = useState('');
   const [vintageId, setVintageId] = useState('');
@@ -63,4 +63,4 @@ const CreditsCreateAndTransfer: React.FC = () => {
   );
 };
 
-export { CreditsCreateAndTransfer };
+export { BuyerCreditsTransfer };

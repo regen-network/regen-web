@@ -13,7 +13,7 @@ import { pluralize } from 'web-components/lib/utils/pluralize';
 import {
   useAllCreditVintagesQuery,
   useAllPartiesQuery,
-  useCreateRetirementMutation,
+  useRetireCreditsMutation,
 } from '../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -56,7 +56,7 @@ const CreditsRetire: React.FC<{
 }> = ({ buyerWalletId: passedBuyerId = '', creditVintageId: passedVintageId = '' }) => {
   const styles = useStyles();
 
-  const [createRetirement, { data, loading, error }] = useCreateRetirementMutation({
+  const [retireCredits, { data, loading, error }] = useRetireCreditsMutation({
     errorPolicy: 'ignore',
   });
   const {
@@ -74,7 +74,7 @@ const CreditsRetire: React.FC<{
 
   const dateFormat = new Intl.DateTimeFormat('en', { year: 'numeric', month: 'numeric', day: '2-digit' });
 
-  const [creditVintageId, setVintageId] = useState(passedVintageId);
+  const [vintageId, setVintageId] = useState(passedVintageId);
   const [buyerWalletId, setBuyerWalletId] = useState(passedBuyerId);
   const [buyerName, setBuyerName] = useState('');
   const [creditName, setCreditName] = useState('');
@@ -110,7 +110,7 @@ const CreditsRetire: React.FC<{
       setShowResult(false);
     }
     setBuyerWalletId(event.target.value as string);
-    setUnits(getUnits(vintagesData, event.target.value as string, creditVintageId));
+    setUnits(getUnits(vintagesData, event.target.value as string, vintageId));
     if (partiesData && partiesData.allParties) {
       const selectedParty = partiesData.allParties.nodes.find(
         (party: any) => party.walletId === event.target.value,
@@ -126,14 +126,8 @@ const CreditsRetire: React.FC<{
   if (partiesError) return <div>Error! ${partiesError.message}</div>;
 
   let vintage: any;
-  if (
-    partiesData &&
-    partiesData.allParties &&
-    vintagesData &&
-    vintagesData.allCreditVintages &&
-    creditVintageId
-  ) {
-    vintage = vintagesData.allCreditVintages.nodes.find((node: any) => node.id === creditVintageId);
+  if (partiesData && partiesData.allParties && vintagesData && vintagesData.allCreditVintages && vintageId) {
+    vintage = vintagesData.allCreditVintages.nodes.find((node: any) => node.id === vintageId);
   }
 
   return (
@@ -149,28 +143,24 @@ const CreditsRetire: React.FC<{
           const confirmAlert = window.confirm('Are you sure you want to retire credits?');
           if (confirmAlert) {
             try {
-              await createRetirement({
+              await retireCredits({
                 variables: {
                   input: {
-                    retirement: {
-                      creditVintageId,
-                      walletId: buyerWalletId,
-                      units,
-                      addressId,
-                      // NOTE: if this component is ever pre-populated with
-                      // existing data, we'll need to copy that over before
-                      // saving ie `{ ...existingMetadata, [schemaUrl]: retireUrl }`
-                      metadata: retireUrl ? { 'http://www.schema.org/url': retireUrl } : null,
-                    },
+                    vintageId,
+                    buyerWalletId,
+                    units,
+                    addressId,
+                    metadata: retireUrl
+                      ? { '@type': 'http://regen.network/Retirement', 'http://www.schema.org/url': retireUrl }
+                      : null,
                   },
                 },
               });
               await refetchVintages();
-              setUnits(getUnits(vintagesData, buyerWalletId, creditVintageId));
+              setUnits(getUnits(vintagesData, buyerWalletId, vintageId));
               setShowResult(true);
             } catch (e) {
-              // TODO: Should we display the error banner here?
-              // https://github.com/regen-network/regen-registry/issues/555
+              console.error('Error retiring credits: ', e); // eslint-disable-line no-console
             }
           }
         }}
@@ -186,7 +176,7 @@ const CreditsRetire: React.FC<{
               required
               labelId="credit-vintage-select-label"
               id="credit-vintage-select"
-              value={creditVintageId}
+              value={vintageId}
               onChange={handleVintageChange}
             >
               {vintagesData &&
@@ -242,7 +232,7 @@ const CreditsRetire: React.FC<{
       </form>
       {loading && <div>Loading...</div>}
       {!showResult && <div>Available credits to retire: {units}</div>}
-      {data && data.createRetirement && showResult && (
+      {data && data.retireCredits && showResult && (
         <div>
           <p>
             {units} {pluralize(units, 'credit')} successfully retired.

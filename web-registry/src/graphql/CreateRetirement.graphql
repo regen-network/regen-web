@@ -1,7 +1,0 @@
-mutation CreateRetirement($input: CreateRetirementInput!) {
-  createRetirement(input: $input) {
-    retirement {
-      id
-    }
-  }
-}

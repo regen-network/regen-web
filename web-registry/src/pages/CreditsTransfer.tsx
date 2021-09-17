@@ -239,8 +239,6 @@ const CreditsTransfer: React.FC<{
                 setOldBalances(balances as Balance[]);
               }
             } catch (e) {
-              // TODO: Should we display the error banner here?
-              // https://github.com/regen-network/regen-registry/issues/555
               console.error('Error transferring credits: ', e); // eslint-disable-line no-console
             }
           }

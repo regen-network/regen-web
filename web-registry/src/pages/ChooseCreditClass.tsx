@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 const ChooseCreditClass: React.FC = () => {
   const classes = useStyles();
   const history = useHistory();
-  const { projectId } = useParams();
+  const { projectId } = useParams<{ projectId: string }>();
 
   const { data: creditClassesData } = useAllCreditClassesQuery();
   const { data: graphData } = useShaclGraphByUriQuery({
@@ -77,7 +77,7 @@ const ChooseCreditClass: React.FC = () => {
           history.push(`/project-pages/${projectId}/basic-info`);
         } catch (e) {
           // TODO: Should we display the error banner here?
-          // https://github.com/regen-network/regen-registry/issues/555
+          // https://github.com/regen-network/regen-registry/issues/554
           console.log(e);
         }
       }

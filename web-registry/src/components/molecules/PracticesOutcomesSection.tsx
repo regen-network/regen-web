@@ -60,7 +60,7 @@ const PracticesOutcomesSection: React.FC<Props> = ({ content }) => {
       description: i?.descriptionRaw[0]?.children[0]?.text,
     })) || [];
 
-  const outcomeElements: JSX.Element[] = content.outcomes.imageCards.map(
+  const outcomeElements: JSX.Element[] = content?.outcomes?.imageCards.map(
     ({ icon, title, descriptionRaw }: any) => (
       <ImpactCard
         name={title}
@@ -72,12 +72,12 @@ const PracticesOutcomesSection: React.FC<Props> = ({ content }) => {
   );
 
   return (
-    <Section withSlider classes={{ root: classes.root, title: classes.title }} title={content.header}>
+    <Section withSlider classes={{ root: classes.root, title: classes.title }} title={content.title}>
       <ImageItems
         className={classes.slider}
         title={content?.practices?.title}
         arrows
-        slidesToShow={4}
+        slidesToShow={content?.practices?.imageCards?.length > 3 ? 4 : content?.practices?.imageCards?.length}
         items={practiceItems}
       />
       <ResponsiveSlider
@@ -86,7 +86,7 @@ const PracticesOutcomesSection: React.FC<Props> = ({ content }) => {
         className={clsx(classes.outcomes, classes.slider)}
         title={content?.outcomes?.title}
         arrows
-        slidesToShow={3}
+        slidesToShow={content?.outcomes?.imageCards?.length > 2 ? 3 : content?.outcomes?.imageCards?.length}
         items={outcomeElements}
       />
       <Description className={classes.note}>{content?.note}</Description>

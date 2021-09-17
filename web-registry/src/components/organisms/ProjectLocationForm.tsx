@@ -37,15 +37,7 @@ const ProjectLocationForm: React.FC<{
       validate={async (values: ProjectLocationFormValues) => {
         const errors: FormikErrors<ProjectLocationFormValues> = {};
         if (graphData?.shaclGraphByUri?.graph) {
-          const vocabContext = {
-            '@context': {
-              '@vocab': 'https://purl.org/geojson/vocab#',
-              type: '@type',
-              coordinates: { '@container': '@list' },
-            },
-          };
-
-          const projectPageData = { ...getProjectPageBaseData(), ...vocabContext, ...values };
+          const projectPageData = { ...getProjectPageBaseData(), ...values };
 
           const report = await validate(
             graphData.shaclGraphByUri.graph,

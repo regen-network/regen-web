@@ -64,16 +64,14 @@ const LocationField: React.FC<Props> = ({
               setTimeout(() => setShowResults(false), 200); // without the timeout, `onBlur` fires before the click event on the results list, so the value doesn't properly update. There's probably a better solution to this, but it works fo rnow
             }}
             onChange={({ target: { value } }) => {
-              console.log('form location value >>', value);
-
               handleChange(value);
               if (value.length > 1) {
                 const isCoordinates = /^[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?),\s*[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)$/.test(
                   value,
                 );
                 if (isCoordinates) {
-                  const [longitude, lattitude] = value.split(',').map(Number) as [number, number];
-                  const coordinates: [number, number] = [longitude, lattitude];
+                  const [longitude, latitude] = value.split(',').map(Number) as [number, number];
+                  const coordinates: [number, number] = [longitude, latitude];
                   geocoderService
                     .reverseGeocode({
                       mode: 'mapbox.places',
@@ -106,7 +104,14 @@ const LocationField: React.FC<Props> = ({
                 key={index}
                 className={classes.result}
                 onClick={() => {
-                  handleChange(item);
+                  handleChange({
+                    '@context': {
+                      '@vocab': 'https://purl.org/geojson/vocab#',
+                      type: '@type',
+                      coordinates: { '@container': '@list' },
+                    },
+                    ...item,
+                  });
                   setShowResults(false);
                 }}
               >

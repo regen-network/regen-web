@@ -18,12 +18,7 @@ const ProjectLocation: React.FC = () => {
   if (projectData?.projectById?.metadata) {
     const metadata = projectData.projectById.metadata;
     initialFieldValues = {
-      '@context': {
-        '@vocab': 'https://purl.org/geojson/vocab#',
-        type: '@type',
-        coordinates: { '@container': '@list' },
-      },
-      'http://schema.org/location': metadata?.['http://schema.org/location'] || '',
+      'http://schema.org/location': metadata?.['http://schema.org/location'] || {},
     };
   }
 
@@ -53,7 +48,7 @@ const ProjectLocation: React.FC = () => {
       });
     } catch (e) {
       // TODO: Should we display the error banner here?
-      // https://github.com/regen-network/regen-registry/issues/555
+      // https://github.com/regen-network/regen-registry/issues/554
       console.error('error saving location', e); // eslint-disable-line no-console
     }
   }

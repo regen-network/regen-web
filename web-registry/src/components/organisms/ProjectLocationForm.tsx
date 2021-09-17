@@ -5,12 +5,13 @@ import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import { requiredMessage } from 'web-components/lib/components/inputs/validation';
 import OnboardingFooter from 'web-components/lib/components/fixed-footer/OnboardingFooter';
 import LocationField from 'web-components/lib/components/inputs/LocationField';
+import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 
 import { useShaclGraphByUriQuery } from '../../generated/graphql';
 import { validate, getProjectPageBaseData } from '../../lib/rdf';
 
 export interface ProjectLocationFormValues {
-  'http://schema.org/location': string;
+  'http://schema.org/location': Partial<GeocodeFeature> | string; // the string union is just for formik errors - there is possibly a betteer solution, but this seems easiest for now
 }
 
 const ProjectLocationForm: React.FC<{
@@ -29,18 +30,29 @@ const ProjectLocationForm: React.FC<{
     <Formik
       enableReinitialize
       validateOnMount
+      validateOnBlur
       initialValues={{
-        'http://schema.org/location': initialValues?.['http://schema.org/location'] || '',
+        'http://schema.org/location': initialValues?.['http://schema.org/location'] || {},
       }}
       validate={async (values: ProjectLocationFormValues) => {
         const errors: FormikErrors<ProjectLocationFormValues> = {};
         if (graphData?.shaclGraphByUri?.graph) {
-          const projectPageData = { ...getProjectPageBaseData(), ...values };
+          const vocabContext = {
+            '@context': {
+              '@vocab': 'https://purl.org/geojson/vocab#',
+              type: '@type',
+              coordinates: { '@container': '@list' },
+            },
+          };
+
+          const projectPageData = { ...getProjectPageBaseData(), ...vocabContext, ...values };
+
           const report = await validate(
             graphData.shaclGraphByUri.graph,
             projectPageData,
-            'http://schema.org/location',
+            'http://regen.network/ProjectPageLocationGroup',
           );
+
           for (const result of report.results) {
             const path: keyof ProjectLocationFormValues = result.path.value;
             errors[path] = requiredMessage;

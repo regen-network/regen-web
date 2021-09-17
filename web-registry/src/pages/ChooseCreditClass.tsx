@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 const ChooseCreditClass: React.FC = () => {
   const classes = useStyles();
   const history = useHistory();
-  const { projectId } = useParams();
+  const { projectId } = useParams<{ projectId: string }>();
 
   const { data: creditClassesData } = useAllCreditClassesQuery();
   const { data: graphData } = useShaclGraphByUriQuery({

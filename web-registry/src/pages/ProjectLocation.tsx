@@ -18,7 +18,12 @@ const ProjectLocation: React.FC = () => {
   if (projectData?.projectById?.metadata) {
     const metadata = projectData.projectById.metadata;
     initialFieldValues = {
-      'http://schema.org/location': metadata['http://schema.org/location'],
+      '@context': {
+        '@vocab': 'https://purl.org/geojson/vocab#',
+        type: '@type',
+        coordinates: { '@container': '@list' },
+      },
+      'http://schema.org/location': metadata?.['http://schema.org/location'] || '',
     };
   }
 

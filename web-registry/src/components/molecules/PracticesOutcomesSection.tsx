@@ -9,6 +9,8 @@ import ImpactCard from 'web-components/lib/components/cards/ImpactCard';
 import Description from 'web-components/lib/components/description';
 import Section from 'web-components/lib/components/section';
 
+import { PracticesOutcomesSection as PracticesOutcomesSectionProps } from '../../generated/sanity-graphql';
+
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     [theme.breakpoints.down('xs')]: {
@@ -46,47 +48,47 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 interface Props {
-  content: any; //TODO
+  content: PracticesOutcomesSectionProps;
 }
 
 const PracticesOutcomesSection: React.FC<Props> = ({ content }) => {
   const classes = useStyles();
   const theme = useTheme();
+  const { practices, outcomes, title } = content;
 
   const practiceItems: ImageItemProps[] =
-    content?.practices?.imageCards?.map((i: any) => ({
+    practices?.imageCards?.map((i: any) => ({
       img: <img src={i?.icon?.asset?.url || ''} alt={`${i?.title}`} />,
       title: i?.title || '',
       description: i?.descriptionRaw[0]?.children[0]?.text,
     })) || [];
 
-  const outcomeElements: JSX.Element[] = content?.outcomes?.imageCards.map(
-    ({ icon, title, descriptionRaw }: any) => (
+  const outcomeElements: JSX.Element[] =
+    outcomes?.imageCards?.map(({ icon, title, descriptionRaw }: any) => (
       <ImpactCard
         name={title}
         imgSrc={icon?.asset?.url}
         description={descriptionRaw[0]?.children[0]?.text}
         largeFontSize
       />
-    ),
-  );
+    )) || [];
 
   return (
-    <Section withSlider classes={{ root: classes.root, title: classes.title }} title={content.title}>
+    <Section withSlider classes={{ root: classes.root, title: classes.title }} title={title || ''}>
       <ImageItems
         className={classes.slider}
-        title={content?.practices?.title}
+        title={practices?.title || ''}
         arrows
-        slidesToShow={content?.practices?.imageCards?.length > 3 ? 4 : content?.practices?.imageCards?.length}
+        slidesToShow={practiceItems.length <= 3 ? practiceItems.length : 4}
         items={practiceItems}
       />
       <ResponsiveSlider
         itemWidth="90%"
         padding={theme.spacing(2.5)}
         className={clsx(classes.outcomes, classes.slider)}
-        title={content?.outcomes?.title}
+        title={content?.outcomes?.title || ''}
         arrows
-        slidesToShow={content?.outcomes?.imageCards?.length > 2 ? 3 : content?.outcomes?.imageCards?.length}
+        slidesToShow={outcomeElements.length <= 2 ? outcomeElements.length : 3}
         items={outcomeElements}
       />
       <Description className={classes.note}>{content?.note}</Description>

@@ -22,16 +22,10 @@ query allLandStewardsPage {
       title
       note
       practices {
-        title
-        imageCards {
-          ...cardFields
-        }
+        ...landManagementPracticeFields
       }
       outcomes {
-        title
-        imageCards {
-          ...cardFields
-        }
+        ...ecologicalOutcomeFields
       }
     }
     footerLink

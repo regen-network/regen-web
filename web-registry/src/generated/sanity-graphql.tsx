@@ -995,6 +995,48 @@ export type IntFilter = {
 };
 
 
+export type LandManagementPractice = Document & {
+  __typename?: 'LandManagementPractice';
+  /** Document ID */
+  _id?: Maybe<Scalars['ID']>;
+  /** Document type */
+  _type?: Maybe<Scalars['String']>;
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars['DateTime']>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars['DateTime']>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars['String']>;
+  _key?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  descriptionRaw?: Maybe<Scalars['JSON']>;
+  icon?: Maybe<Image>;
+};
+
+export type LandManagementPracticeFilter = {
+  /** Apply filters on document level */
+  _?: Maybe<Sanity_DocumentFilter>;
+  _id?: Maybe<IdFilter>;
+  _type?: Maybe<StringFilter>;
+  _createdAt?: Maybe<DatetimeFilter>;
+  _updatedAt?: Maybe<DatetimeFilter>;
+  _rev?: Maybe<StringFilter>;
+  _key?: Maybe<StringFilter>;
+  title?: Maybe<StringFilter>;
+  icon?: Maybe<ImageFilter>;
+};
+
+export type LandManagementPracticeSorting = {
+  _id?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  _createdAt?: Maybe<SortOrder>;
+  _updatedAt?: Maybe<SortOrder>;
+  _rev?: Maybe<SortOrder>;
+  _key?: Maybe<SortOrder>;
+  title?: Maybe<SortOrder>;
+  icon?: Maybe<ImageSorting>;
+};
+
 export type LandSteward = {
   __typename?: 'LandSteward';
   _key?: Maybe<Scalars['String']>;
@@ -1287,8 +1329,8 @@ export type PracticesOutcomesSection = {
   _type?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
   note?: Maybe<Scalars['String']>;
-  practices?: Maybe<ImageItemsSection>;
-  outcomes?: Maybe<ImageItemsSection>;
+  practices?: Maybe<Array<Maybe<LandManagementPractice>>>;
+  outcomes?: Maybe<Array<Maybe<EcologicalOutcome>>>;
 };
 
 export type PracticesOutcomesSectionFilter = {
@@ -1296,8 +1338,6 @@ export type PracticesOutcomesSectionFilter = {
   _type?: Maybe<StringFilter>;
   title?: Maybe<StringFilter>;
   note?: Maybe<StringFilter>;
-  practices?: Maybe<ImageItemsSectionFilter>;
-  outcomes?: Maybe<ImageItemsSectionFilter>;
 };
 
 export type PracticesOutcomesSectionSorting = {
@@ -1305,8 +1345,6 @@ export type PracticesOutcomesSectionSorting = {
   _type?: Maybe<SortOrder>;
   title?: Maybe<SortOrder>;
   note?: Maybe<SortOrder>;
-  practices?: Maybe<ImageItemsSectionSorting>;
-  outcomes?: Maybe<ImageItemsSectionSorting>;
 };
 
 export type Resource = Document & {
@@ -1398,6 +1436,7 @@ export type RootQuery = {
   Media?: Maybe<Media>;
   Sdg?: Maybe<Sdg>;
   EcologicalOutcome?: Maybe<EcologicalOutcome>;
+  LandManagementPractice?: Maybe<LandManagementPractice>;
   HomePage?: Maybe<HomePage>;
   CreateCreditClassPage?: Maybe<CreateCreditClassPage>;
   CreateMethodologyPage?: Maybe<CreateMethodologyPage>;
@@ -1415,6 +1454,7 @@ export type RootQuery = {
   allMedia: Array<Media>;
   allSdg: Array<Sdg>;
   allEcologicalOutcome: Array<EcologicalOutcome>;
+  allLandManagementPractice: Array<LandManagementPractice>;
   allHomePage: Array<HomePage>;
   allCreateCreditClassPage: Array<CreateCreditClassPage>;
   allCreateMethodologyPage: Array<CreateMethodologyPage>;
@@ -1459,6 +1499,11 @@ export type RootQuerySdgArgs = {
 
 
 export type RootQueryEcologicalOutcomeArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type RootQueryLandManagementPracticeArgs = {
   id: Scalars['ID'];
 };
 
@@ -1564,6 +1609,14 @@ export type RootQueryAllSdgArgs = {
 export type RootQueryAllEcologicalOutcomeArgs = {
   where?: Maybe<EcologicalOutcomeFilter>;
   sort?: Maybe<Array<EcologicalOutcomeSorting>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+};
+
+
+export type RootQueryAllLandManagementPracticeArgs = {
+  where?: Maybe<LandManagementPracticeFilter>;
+  sort?: Maybe<Array<LandManagementPracticeSorting>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
@@ -2376,21 +2429,13 @@ export type AllLandStewardsPageQuery = (
     )>, practicesOutcomesSection?: Maybe<(
       { __typename?: 'PracticesOutcomesSection' }
       & Pick<PracticesOutcomesSection, 'title' | 'note'>
-      & { practices?: Maybe<(
-        { __typename?: 'ImageItemsSection' }
-        & Pick<ImageItemsSection, 'title'>
-        & { imageCards?: Maybe<Array<Maybe<(
-          { __typename?: 'Card' }
-          & CardFieldsFragment
-        )>>> }
-      )>, outcomes?: Maybe<(
-        { __typename?: 'ImageItemsSection' }
-        & Pick<ImageItemsSection, 'title'>
-        & { imageCards?: Maybe<Array<Maybe<(
-          { __typename?: 'Card' }
-          & CardFieldsFragment
-        )>>> }
-      )> }
+      & { practices?: Maybe<Array<Maybe<(
+        { __typename?: 'LandManagementPractice' }
+        & LandManagementPracticeFieldsFragment
+      )>>>, outcomes?: Maybe<Array<Maybe<(
+        { __typename?: 'EcologicalOutcome' }
+        & EcologicalOutcomeFieldsFragment
+      )>>> }
     )>, metadata?: Maybe<(
       { __typename?: 'PageMetadata' }
       & PageMetadataFieldsFragment
@@ -2554,6 +2599,18 @@ export type ImageBoldTextLabelFieldsFragment = (
   & { image?: Maybe<(
     { __typename?: 'CustomImage' }
     & CustomImageFieldsFragment
+  )> }
+);
+
+export type LandManagementPracticeFieldsFragment = (
+  { __typename?: 'LandManagementPractice' }
+  & Pick<LandManagementPractice, 'title' | 'descriptionRaw'>
+  & { icon?: Maybe<(
+    { __typename?: 'Image' }
+    & { asset?: Maybe<(
+      { __typename?: 'SanityImageAsset' }
+      & Pick<SanityImageAsset, 'url'>
+    )> }
   )> }
 );
 
@@ -2755,6 +2812,17 @@ export const ImageBoldTextLabelFieldsFragmentDoc = gql`
   }
 }
     ${CustomImageFieldsFragmentDoc}`;
+export const LandManagementPracticeFieldsFragmentDoc = gql`
+    fragment landManagementPracticeFields on LandManagementPractice {
+  title
+  descriptionRaw
+  icon {
+    asset {
+      url
+    }
+  }
+}
+    `;
 export const MediaFieldsFragmentDoc = gql`
     fragment mediaFields on Media {
   title
@@ -3113,16 +3181,10 @@ export const AllLandStewardsPageDocument = gql`
       title
       note
       practices {
-        title
-        imageCards {
-          ...cardFields
-        }
+        ...landManagementPracticeFields
       }
       outcomes {
-        title
-        imageCards {
-          ...cardFields
-        }
+        ...ecologicalOutcomeFields
       }
     }
     footerLink
@@ -3134,6 +3196,8 @@ export const AllLandStewardsPageDocument = gql`
     ${HeroSectionFieldsFragmentDoc}
 ${CardFieldsFragmentDoc}
 ${ImageBoldTextLabelFieldsFragmentDoc}
+${LandManagementPracticeFieldsFragmentDoc}
+${EcologicalOutcomeFieldsFragmentDoc}
 ${PageMetadataFieldsFragmentDoc}`;
 
 /**

@@ -5,11 +5,15 @@ import clsx from 'clsx';
 import { ImageItemProps } from 'web-components/lib/components/image-item';
 import ImageItems from 'web-components/lib/components/sliders/ImageItems';
 import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';
-import ImpactCard from 'web-components/lib/components/cards/ImpactCard';
 import Description from 'web-components/lib/components/description';
 import Section from 'web-components/lib/components/section';
 
-import { PracticesOutcomesSection as PracticesOutcomesSectionProps } from '../../generated/sanity-graphql';
+import { WrappedImpactCard } from '../atoms';
+import {
+  PracticesOutcomesSection as PracticesOutcomesSectionProps,
+  LandManagementPractice,
+  Maybe,
+} from '../../generated/sanity-graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -57,27 +61,19 @@ const PracticesOutcomesSection: React.FC<Props> = ({ content }) => {
   const { practices, outcomes, title } = content;
 
   const practiceItems: ImageItemProps[] =
-    practices?.imageCards?.map((i: any) => ({
-      img: <img src={i?.icon?.asset?.url || ''} alt={`${i?.title}`} />,
+    practices?.map((i: Maybe<LandManagementPractice>) => ({
+      img: <img src={i?.icon?.asset?.url || ''} alt={`${i?.icon?.asset?.label}`} />,
       title: i?.title || '',
       description: i?.descriptionRaw[0]?.children[0]?.text,
     })) || [];
 
-  const outcomeElements: JSX.Element[] =
-    outcomes?.imageCards?.map(({ icon, title, descriptionRaw }: any) => (
-      <ImpactCard
-        name={title}
-        imgSrc={icon?.asset?.url}
-        description={descriptionRaw[0]?.children[0]?.text}
-        largeFontSize
-      />
-    )) || [];
+  const outcomeCards = outcomes?.map(outcome => <WrappedImpactCard outcome={outcome} />) || [];
 
   return (
     <Section withSlider classes={{ root: classes.root, title: classes.title }} title={title || ''}>
       <ImageItems
         className={classes.slider}
-        title={practices?.title || ''}
+        title="Land Management Practices"
         arrows
         slidesToShow={practiceItems.length <= 3 ? practiceItems.length : 4}
         items={practiceItems}
@@ -86,10 +82,10 @@ const PracticesOutcomesSection: React.FC<Props> = ({ content }) => {
         itemWidth="90%"
         padding={theme.spacing(2.5)}
         className={clsx(classes.outcomes, classes.slider)}
-        title={content?.outcomes?.title || ''}
+        title="Ecological Outcomes"
         arrows
-        slidesToShow={outcomeElements.length <= 2 ? outcomeElements.length : 3}
-        items={outcomeElements}
+        slidesToShow={outcomeCards.length <= 2 ? outcomeCards.length : 3}
+        items={outcomeCards}
       />
       <Description className={classes.note}>{content?.note}</Description>
     </Section>

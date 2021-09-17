@@ -86,8 +86,8 @@ const ProjectLocationForm: React.FC<{
             <OnboardingFooter
               saveText={'Save and Next'}
               onSave={submitForm}
-              onPrev={() => null} // TODO https://github.com/regen-network/regen-web/issues/655
-              onNext={() => null} // TODO https://github.com/regen-network/regen-web/issues/655
+              onPrev={() => null} // TODO https://github.com/regen-network/regen-registry/issues/561
+              onNext={() => null} // TODO https://github.com/regen-network/regen-registry/issues/561
               hideProgress={false} // TODO
               saveDisabled={!isValid || isSubmitting}
               percentComplete={0} // TODO

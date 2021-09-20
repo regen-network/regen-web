@@ -10,6 +10,10 @@ import Radio from '../inputs/Radio';
 import Checkbox from '../inputs/Checkbox';
 
 interface ToggleProps extends FieldProps {
+  classes?: {
+    root?: string;
+    description?: string;
+  };
   label: string;
   type?: 'checkbox' | 'radio';
   checked: boolean;
@@ -101,6 +105,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const Toggle: React.FC<ToggleProps> = ({
+  classes,
   label,
   checked,
   description,
@@ -114,17 +119,17 @@ const Toggle: React.FC<ToggleProps> = ({
   form,
   meta,
 }) => {
-  const classes = useStyles();
+  const styles = useStyles();
 
   return (
-    <div className={clsx(classes.root, checked && classes.active)}>
-      <div className={classes.top}>
+    <div className={clsx(styles.root, checked && styles.active, classes && classes.root)}>
+      <div className={styles.top}>
         <FormControlLabel
           control={
             type === 'checkbox' ? (
-              <Checkbox className={classes.checkbox} field={field} form={form} meta={meta} type="checkbox" />
+              <Checkbox className={styles.checkbox} field={field} form={form} meta={meta} type="checkbox" />
             ) : (
-              <Radio className={classes.radio} />
+              <Radio className={styles.radio} />
             )
           }
           label={label}
@@ -132,13 +137,13 @@ const Toggle: React.FC<ToggleProps> = ({
           disabled={disabled}
           checked={checked}
           classes={{
-            root: classes.formControlLabelRoot,
-            label: description && classes.formControlLabelWithDescription,
+            root: styles.formControlLabelRoot,
+            label: description && styles.formControlLabelWithDescription,
           }}
         />
         {tooltip && (
           <Tooltip arrow placement="top" title={tooltip}>
-            <div className={classes.info}>
+            <div className={styles.info}>
               <InfoIconOutlined />
             </div>
           </Tooltip>
@@ -147,18 +152,19 @@ const Toggle: React.FC<ToggleProps> = ({
       {description && (
         <div
           className={clsx(
-            classes.description,
-            type === 'checkbox' && classes.descriptionCheckbox,
-            disabled && classes.disabled,
-            disabled && type === 'checkbox' && classes.disabledDescriptionCheckbox,
+            styles.description,
+            type === 'checkbox' && styles.descriptionCheckbox,
+            disabled && styles.disabled,
+            disabled && type === 'checkbox' && styles.disabledDescriptionCheckbox,
+            classes && classes.description,
           )}
         >
           {description}
         </div>
       )}
-      {content && <div className={classes.content}>{content}</div>}
+      {content && <div className={styles.content}>{content}</div>}
       {activeContent && (
-        <Collapse in={checked} classes={{ wrapperInner: classes.content }}>
+        <Collapse in={checked} classes={{ wrapperInner: styles.content }}>
           {activeContent}
         </Collapse>
       )}

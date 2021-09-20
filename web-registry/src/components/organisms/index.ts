@@ -7,6 +7,7 @@ export * from './CreditClassConnectSection';
 export * from './CreditClassOverviewSection';
 export * from './CreditsPurchaseForm';
 export * from './Documentation';
+export * from './EntityDisplayForm';
 export * from './ImpactSection';
 export * from './IncludesGrasslandsForm';
 export * from './LandManagementActions';

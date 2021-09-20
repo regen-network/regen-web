@@ -1086,6 +1086,7 @@ export type LandStewardsPage = Document & {
   designedForFarmersSection?: Maybe<ImageItemsSection>;
   joinFarmersSection?: Maybe<DualImageSection>;
   practicesOutcomesSection?: Maybe<PracticesOutcomesSection>;
+  timelineSection?: Maybe<TimelineSection>;
   footerLink?: Maybe<Scalars['String']>;
   metadata?: Maybe<PageMetadata>;
 };
@@ -1103,6 +1104,7 @@ export type LandStewardsPageFilter = {
   designedForFarmersSection?: Maybe<ImageItemsSectionFilter>;
   joinFarmersSection?: Maybe<DualImageSectionFilter>;
   practicesOutcomesSection?: Maybe<PracticesOutcomesSectionFilter>;
+  timelineSection?: Maybe<TimelineSectionFilter>;
   footerLink?: Maybe<StringFilter>;
   metadata?: Maybe<PageMetadataFilter>;
 };
@@ -1118,6 +1120,7 @@ export type LandStewardsPageSorting = {
   designedForFarmersSection?: Maybe<ImageItemsSectionSorting>;
   joinFarmersSection?: Maybe<DualImageSectionSorting>;
   practicesOutcomesSection?: Maybe<PracticesOutcomesSectionSorting>;
+  timelineSection?: Maybe<TimelineSectionSorting>;
   footerLink?: Maybe<SortOrder>;
   metadata?: Maybe<PageMetadataSorting>;
 };
@@ -1328,6 +1331,7 @@ export type PracticesOutcomesSection = {
   _key?: Maybe<Scalars['String']>;
   _type?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
+  /** (optional) */
   note?: Maybe<Scalars['String']>;
   practices?: Maybe<Array<Maybe<LandManagementPractice>>>;
   outcomes?: Maybe<Array<Maybe<EcologicalOutcome>>>;
@@ -1437,6 +1441,8 @@ export type RootQuery = {
   Sdg?: Maybe<Sdg>;
   EcologicalOutcome?: Maybe<EcologicalOutcome>;
   LandManagementPractice?: Maybe<LandManagementPractice>;
+  TimelineItem?: Maybe<TimelineItem>;
+  Tag?: Maybe<Tag>;
   HomePage?: Maybe<HomePage>;
   CreateCreditClassPage?: Maybe<CreateCreditClassPage>;
   CreateMethodologyPage?: Maybe<CreateMethodologyPage>;
@@ -1455,6 +1461,8 @@ export type RootQuery = {
   allSdg: Array<Sdg>;
   allEcologicalOutcome: Array<EcologicalOutcome>;
   allLandManagementPractice: Array<LandManagementPractice>;
+  allTimelineItem: Array<TimelineItem>;
+  allTag: Array<Tag>;
   allHomePage: Array<HomePage>;
   allCreateCreditClassPage: Array<CreateCreditClassPage>;
   allCreateMethodologyPage: Array<CreateMethodologyPage>;
@@ -1504,6 +1512,16 @@ export type RootQueryEcologicalOutcomeArgs = {
 
 
 export type RootQueryLandManagementPracticeArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type RootQueryTimelineItemArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type RootQueryTagArgs = {
   id: Scalars['ID'];
 };
 
@@ -1617,6 +1635,22 @@ export type RootQueryAllEcologicalOutcomeArgs = {
 export type RootQueryAllLandManagementPracticeArgs = {
   where?: Maybe<LandManagementPracticeFilter>;
   sort?: Maybe<Array<LandManagementPracticeSorting>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+};
+
+
+export type RootQueryAllTimelineItemArgs = {
+  where?: Maybe<TimelineItemFilter>;
+  sort?: Maybe<Array<TimelineItemSorting>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+};
+
+
+export type RootQueryAllTagArgs = {
+  where?: Maybe<TagFilter>;
+  sort?: Maybe<Array<TagSorting>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
@@ -2213,6 +2247,113 @@ export type StringFilter = {
   nin?: Maybe<Array<Scalars['String']>>;
 };
 
+export type Tag = Document & {
+  __typename?: 'Tag';
+  /** Document ID */
+  _id?: Maybe<Scalars['ID']>;
+  /** Document type */
+  _type?: Maybe<Scalars['String']>;
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars['DateTime']>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars['DateTime']>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars['String']>;
+  _key?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  color?: Maybe<Scalars['String']>;
+};
+
+export type TagFilter = {
+  /** Apply filters on document level */
+  _?: Maybe<Sanity_DocumentFilter>;
+  _id?: Maybe<IdFilter>;
+  _type?: Maybe<StringFilter>;
+  _createdAt?: Maybe<DatetimeFilter>;
+  _updatedAt?: Maybe<DatetimeFilter>;
+  _rev?: Maybe<StringFilter>;
+  _key?: Maybe<StringFilter>;
+  name?: Maybe<StringFilter>;
+  color?: Maybe<StringFilter>;
+};
+
+export type TagSorting = {
+  _id?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  _createdAt?: Maybe<SortOrder>;
+  _updatedAt?: Maybe<SortOrder>;
+  _rev?: Maybe<SortOrder>;
+  _key?: Maybe<SortOrder>;
+  name?: Maybe<SortOrder>;
+  color?: Maybe<SortOrder>;
+};
+
+export type TimelineItem = Document & {
+  __typename?: 'TimelineItem';
+  /** Document ID */
+  _id?: Maybe<Scalars['ID']>;
+  /** Document type */
+  _type?: Maybe<Scalars['String']>;
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars['DateTime']>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars['DateTime']>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars['String']>;
+  _key?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  /** (optional) */
+  url?: Maybe<Scalars['String']>;
+  image?: Maybe<Image>;
+  tags?: Maybe<Array<Maybe<Tag>>>;
+};
+
+export type TimelineItemFilter = {
+  /** Apply filters on document level */
+  _?: Maybe<Sanity_DocumentFilter>;
+  _id?: Maybe<IdFilter>;
+  _type?: Maybe<StringFilter>;
+  _createdAt?: Maybe<DatetimeFilter>;
+  _updatedAt?: Maybe<DatetimeFilter>;
+  _rev?: Maybe<StringFilter>;
+  _key?: Maybe<StringFilter>;
+  title?: Maybe<StringFilter>;
+  url?: Maybe<StringFilter>;
+  image?: Maybe<ImageFilter>;
+};
+
+export type TimelineItemSorting = {
+  _id?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  _createdAt?: Maybe<SortOrder>;
+  _updatedAt?: Maybe<SortOrder>;
+  _rev?: Maybe<SortOrder>;
+  _key?: Maybe<SortOrder>;
+  title?: Maybe<SortOrder>;
+  url?: Maybe<SortOrder>;
+  image?: Maybe<ImageSorting>;
+};
+
+export type TimelineSection = {
+  __typename?: 'TimelineSection';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  header?: Maybe<Scalars['String']>;
+  timelineItems?: Maybe<Array<Maybe<TimelineItem>>>;
+};
+
+export type TimelineSectionFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  header?: Maybe<StringFilter>;
+};
+
+export type TimelineSectionSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  header?: Maybe<SortOrder>;
+};
+
 export type AllCreateCreditClassPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -2435,6 +2576,13 @@ export type AllLandStewardsPageQuery = (
       )>>>, outcomes?: Maybe<Array<Maybe<(
         { __typename?: 'EcologicalOutcome' }
         & EcologicalOutcomeFieldsFragment
+      )>>> }
+    )>, timelineSection?: Maybe<(
+      { __typename?: 'TimelineSection' }
+      & Pick<TimelineSection, 'header'>
+      & { timelineItems?: Maybe<Array<Maybe<(
+        { __typename?: 'TimelineItem' }
+        & TimelineItemFieldsFragment
       )>>> }
     )>, metadata?: Maybe<(
       { __typename?: 'PageMetadata' }
@@ -2677,6 +2825,26 @@ export type StepCardFieldsFragment = (
   )> }
 );
 
+export type TimelineItemFieldsFragment = (
+  { __typename?: 'TimelineItem' }
+  & Pick<TimelineItem, 'title' | 'url'>
+  & { image?: Maybe<(
+    { __typename?: 'Image' }
+    & { asset?: Maybe<(
+      { __typename?: 'SanityImageAsset' }
+      & Pick<SanityImageAsset, 'url'>
+    )> }
+  )>, tags?: Maybe<Array<Maybe<(
+    { __typename?: 'Tag' }
+    & TagFieldsFragment
+  )>>> }
+);
+
+export type TagFieldsFragment = (
+  { __typename?: 'Tag' }
+  & Pick<Tag, 'name' | 'color'>
+);
+
 export const LinkFieldsFragmentDoc = gql`
     fragment linkFields on Link {
   buttonHref
@@ -2860,6 +3028,26 @@ export const ResourceFieldsFragmentDoc = gql`
 }
     ${CustomImageFieldsFragmentDoc}
 ${ButtonFieldsFragmentDoc}`;
+export const TagFieldsFragmentDoc = gql`
+    fragment tagFields on Tag {
+  name
+  color
+}
+    `;
+export const TimelineItemFieldsFragmentDoc = gql`
+    fragment timelineItemFields on TimelineItem {
+  title
+  url
+  image {
+    asset {
+      url
+    }
+  }
+  tags {
+    ...tagFields
+  }
+}
+    ${TagFieldsFragmentDoc}`;
 export const AllCreateCreditClassPageDocument = gql`
     query allCreateCreditClassPage {
   allCreateCreditClassPage {
@@ -3187,6 +3375,12 @@ export const AllLandStewardsPageDocument = gql`
         ...ecologicalOutcomeFields
       }
     }
+    timelineSection {
+      header
+      timelineItems {
+        ...timelineItemFields
+      }
+    }
     footerLink
     metadata {
       ...pageMetadataFields
@@ -3198,6 +3392,7 @@ ${CardFieldsFragmentDoc}
 ${ImageBoldTextLabelFieldsFragmentDoc}
 ${LandManagementPracticeFieldsFragmentDoc}
 ${EcologicalOutcomeFieldsFragmentDoc}
+${TimelineItemFieldsFragmentDoc}
 ${PageMetadataFieldsFragmentDoc}`;
 
 /**

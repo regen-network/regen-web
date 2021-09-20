@@ -19,6 +19,7 @@ import {
   ImageItemsSection,
   TwoImageSection,
   PracticesOutcomesSection,
+  TimelineSection,
 } from '../components/molecules';
 import landStewardsHero from '../assets/land-stewards-top.jpg';
 
@@ -84,8 +85,9 @@ const LandStewards = (): JSX.Element => {
       {content?.practicesOutcomesSection && (
         <PracticesOutcomesSection content={content.practicesOutcomesSection} />
       )}
+      {content?.timelineSection && <TimelineSection content={content.timelineSection} />}
+
       {/*
-      <TimelineSection />
       <FeaturedSection />
       <MoreQuestionsSection startSellerFlow={handleOpen} /> */}
       <FixedFooter justify="flex-end">

@@ -28,6 +28,12 @@ query allLandStewardsPage {
         ...ecologicalOutcomeFields
       }
     }
+    timelineSection {
+      header
+      timelineItems {
+        ...timelineItemFields
+      }
+    }
     footerLink
     metadata {
       ...pageMetadataFields

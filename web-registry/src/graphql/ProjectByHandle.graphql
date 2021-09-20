@@ -1,10 +1,16 @@
 fragment partyFields on Party {
+  id
+  type
   name
   description
   organizationByPartyId {
     ...organizationFields
   }
+  userByPartyId {
+    id
+  }
   addressByAddressId {
+    id
     feature
   }
   walletByWalletId {
@@ -17,6 +23,8 @@ fragment organizationFields on Organization {
   organizationMembersByOrganizationId(condition: { isOwner: true }) {
     nodes {
       userByMemberId {
+        id
+        partyId
         partyByPartyId {
           name
           roles
@@ -25,6 +33,12 @@ fragment organizationFields on Organization {
     }
   }
 }
+
+# fragment userFields on User {
+#   id
+#   email
+#   phoneNumber
+# }
 
 fragment creditVintageFields on CreditVintage {
   id

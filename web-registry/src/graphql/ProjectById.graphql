@@ -1,6 +1,18 @@
 query ProjectById($id: UUID!) {
   projectById(id: $id) {
     metadata
+    partyByDeveloperId {
+      ...partyFields
+    }
+    partyByStewardId {
+      ...partyFields
+    }
+    partyByLandOwnerId {
+      ...partyFields
+    }
+    partyByOriginatorId {
+      ...partyFields
+    }
     creditClassByCreditClassId {
       id
       creditClassVersionsById(orderBy: CREATED_AT_DESC, first: 1) {

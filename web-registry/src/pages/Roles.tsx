@@ -4,9 +4,16 @@ import { makeStyles, Theme } from '@material-ui/core/styles';
 import { useHistory, useParams } from 'react-router-dom';
 
 import Description from 'web-components/lib/components/description';
+import { FormValues, isIndividual } from 'web-components/lib/components/inputs/RoleField';
 import { OnboardingFormTemplate } from '../components/templates';
 import { RolesForm, RolesValues } from '../components/organisms';
-import { useProjectByIdQuery, useUpdateProjectByIdMutation } from '../generated/graphql';
+import {
+  useProjectByIdQuery,
+  useUpdateProjectByIdMutation,
+  PartyFieldsFragment,
+  Maybe,
+  ProjectPatch,
+} from '../generated/graphql';
 
 const exampleProjectUrl = '/projects/wilmot';
 
@@ -16,6 +23,57 @@ const useStyles = makeStyles((theme: Theme) => ({
     padding: theme.spacing(2, 0, 1),
   },
 }));
+
+function getPartyIds(
+  party?: Maybe<{ __typename?: 'Party' } & PartyFieldsFragment>,
+): Partial<FormValues> | null {
+  if (party) {
+    const p = {
+      partyId: party.id,
+    };
+    if (party.type === 'USER' && party.userByPartyId?.id) {
+      return { id: party.userByPartyId.id, ...p };
+    }
+    if (party.type === 'ORGANIZATION' && party.organizationByPartyId) {
+      const members = party.organizationByPartyId.organizationMembersByOrganizationId?.nodes;
+      return {
+        id: party.organizationByPartyId.id,
+        addressId: party.addressByAddressId?.id,
+        ownerPartyId: members?.length && members[0]?.userByMemberId?.partyId,
+        ownerId: members?.length && members[0]?.userByMemberId?.id,
+        ...p,
+      };
+    }
+  }
+
+  return null;
+}
+
+function stripPartyIds(values: FormValues | undefined): FormValues | undefined {
+  if (values) {
+    delete values.id;
+    delete values.partyId;
+    if (!isIndividual(values)) {
+      delete values.addressId;
+      delete values.ownerId;
+      delete values.ownerPartyId;
+    }
+  }
+  return values;
+}
+function stripIds(values: RolesValues): RolesValues {
+  if (values) {
+    return {
+      'http://regen.network/landOwner': stripPartyIds(values['http://regen.network/landOwner']),
+      'http://regen.network/landSteward': stripPartyIds(values['http://regen.network/landSteward']),
+      'http://regen.network/projectDeveloper': stripPartyIds(values['http://regen.network/projectDeveloper']),
+      'http://regen.network/projectOriginator': stripPartyIds(
+        values['http://regen.network/projectOriginator'],
+      ),
+    };
+  }
+  return values;
+}
 
 const Roles: React.FC = () => {
   const styles = useStyles();
@@ -32,10 +90,22 @@ const Roles: React.FC = () => {
   if (data?.projectById?.metadata) {
     const metadata = data.projectById.metadata;
     initialFieldValues = {
-      'http://regen.network/landOwner': metadata['http://regen.network/landOwner'],
-      'http://regen.network/landSteward': metadata['http://regen.network/landSteward'],
-      'http://regen.network/projectDeveloper': metadata['http://regen.network/projectDeveloper'],
-      'http://regen.network/projectOriginator': metadata['http://regen.network/projectOriginator'],
+      'http://regen.network/landOwner': {
+        ...metadata['http://regen.network/landOwner'],
+        ...getPartyIds(data?.projectById?.partyByLandOwnerId),
+      },
+      'http://regen.network/landSteward': {
+        ...metadata['http://regen.network/landSteward'],
+        ...getPartyIds(data?.projectById?.partyByStewardId),
+      },
+      'http://regen.network/projectDeveloper': {
+        ...metadata['http://regen.network/projectDeveloper'],
+        ...getPartyIds(data?.projectById?.partyByDeveloperId),
+      },
+      'http://regen.network/projectOriginator': {
+        ...metadata['http://regen.network/projectOriginator'],
+        ...getPartyIds(data?.projectById?.partyByOriginatorId),
+      },
     };
   }
 
@@ -45,14 +115,8 @@ const Roles: React.FC = () => {
   };
 
   async function submit(values: RolesValues): Promise<void> {
-    const metadata = { ...data?.projectById?.metadata, ...values };
-    let projectPatch: {
-      metadata: any;
-      landOwnerId?: string;
-      stewardId?: string;
-      developerId?: string;
-      originatorId?: string;
-    } = { metadata };
+    const metadata = { ...data?.projectById?.metadata, ...stripIds(values) };
+    let projectPatch: ProjectPatch = { metadata };
 
     if (values['http://regen.network/landOwner']?.partyId) {
       projectPatch = { landOwnerId: values['http://regen.network/landOwner']?.partyId, ...projectPatch };

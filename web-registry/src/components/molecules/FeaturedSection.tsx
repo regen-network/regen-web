@@ -8,6 +8,9 @@ import ContainedButton from 'web-components/lib/components/buttons/ContainedButt
 import Title from 'web-components/lib/components/title';
 import Section from 'web-components/lib/components/section';
 import { BlockContent } from 'web-components/lib/components/block-content';
+import { Image } from 'web-components/lib/components/image';
+
+import { FeaturedSection as FeaturedSectionProps } from '../../generated/sanity-graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -17,11 +20,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   title: {
     lineHeight: '140%',
+    marginBottom: theme.spacing(4.5),
     [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
       paddingTop: theme.spacing(5),
-    },
-    '& p': {
-      margin: 0,
     },
   },
   description: {
@@ -73,36 +74,41 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 interface Props {
-  content: any; //TODO
+  content: FeaturedSectionProps; //TODO
 }
 
 const FeaturedSection: React.FC<Props> = ({ content }) => {
   const styles = useStyles();
 
-  return (
-    <Section className={styles.root} title={content?.header} titleVariant="subtitle2">
-      <div className={styles.card}>
-        <GreenCard>
-          <Grid className={styles.grid} container wrap="nowrap">
-            <Grid item xs={12} className={styles.text}>
-              <Title className={styles.title} variant="h3">
-                <BlockContent content={content?.title} />
-              </Title>
-              <Typography component="div" className={styles.description}>
-                <BlockContent content={content?.descriptionRaw} />
-              </Typography>
-              <ContainedButton href={content?.link} className={styles.button}>
-                more details
-              </ContainedButton>
+  if (content?.header && content.titleRaw && content.descriptionRaw && content.link && content.image) {
+    return (
+      <Section className={styles.root} title={content.header} titleVariant="subtitle2">
+        <div className={styles.card}>
+          <GreenCard>
+            <Grid className={styles.grid} container wrap="nowrap">
+              <Grid item xs={12} className={styles.text}>
+                <Title className={styles.title} variant="h3">
+                  <BlockContent content={content.titleRaw} />
+                </Title>
+                <Typography component="div" className={styles.description}>
+                  <BlockContent content={content.descriptionRaw} />
+                </Typography>
+                <ContainedButton href={content.link} className={styles.button}>
+                  more details
+                </ContainedButton>
+              </Grid>
+              <Grid item xs={12}>
+                <Image src={content.image?.image?.asset?.url || ''} alt={content.image?.imageAlt || ''} />
+              </Grid>
             </Grid>
-            <Grid item xs={12}>
-              <img src={''} />
-            </Grid>
-          </Grid>
-        </GreenCard>
-      </div>
-    </Section>
-  );
+          </GreenCard>
+        </div>
+      </Section>
+    );
+  } else {
+    console.error('Missing some fields. Please check Sanity');
+    return <></>;
+  }
 };
 
 export { FeaturedSection };

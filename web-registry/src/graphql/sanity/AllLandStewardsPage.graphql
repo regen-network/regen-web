@@ -34,6 +34,9 @@ query allLandStewardsPage {
         ...timelineItemFields
       }
     }
+    featuredSection {
+      ...featuredSectionFields
+    }
     footerLink
     metadata {
       ...pageMetadataFields

@@ -756,6 +756,52 @@ export type FaqSorting = {
   question?: Maybe<SortOrder>;
 };
 
+export type FeaturedSection = Document & {
+  __typename?: 'FeaturedSection';
+  /** Document ID */
+  _id?: Maybe<Scalars['ID']>;
+  /** Document type */
+  _type?: Maybe<Scalars['String']>;
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars['DateTime']>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars['DateTime']>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars['String']>;
+  _key?: Maybe<Scalars['String']>;
+  header?: Maybe<Scalars['String']>;
+  titleRaw?: Maybe<Scalars['JSON']>;
+  link?: Maybe<Scalars['String']>;
+  image?: Maybe<CustomImage>;
+  descriptionRaw?: Maybe<Scalars['JSON']>;
+};
+
+export type FeaturedSectionFilter = {
+  /** Apply filters on document level */
+  _?: Maybe<Sanity_DocumentFilter>;
+  _id?: Maybe<IdFilter>;
+  _type?: Maybe<StringFilter>;
+  _createdAt?: Maybe<DatetimeFilter>;
+  _updatedAt?: Maybe<DatetimeFilter>;
+  _rev?: Maybe<StringFilter>;
+  _key?: Maybe<StringFilter>;
+  header?: Maybe<StringFilter>;
+  link?: Maybe<StringFilter>;
+  image?: Maybe<CustomImageFilter>;
+};
+
+export type FeaturedSectionSorting = {
+  _id?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  _createdAt?: Maybe<SortOrder>;
+  _updatedAt?: Maybe<SortOrder>;
+  _rev?: Maybe<SortOrder>;
+  _key?: Maybe<SortOrder>;
+  header?: Maybe<SortOrder>;
+  link?: Maybe<SortOrder>;
+  image?: Maybe<CustomImageSorting>;
+};
+
 export type File = {
   __typename?: 'File';
   _key?: Maybe<Scalars['String']>;
@@ -1087,6 +1133,7 @@ export type LandStewardsPage = Document & {
   joinFarmersSection?: Maybe<DualImageSection>;
   practicesOutcomesSection?: Maybe<PracticesOutcomesSection>;
   timelineSection?: Maybe<TimelineSection>;
+  featuredSection?: Maybe<FeaturedSection>;
   footerLink?: Maybe<Scalars['String']>;
   metadata?: Maybe<PageMetadata>;
 };
@@ -1105,6 +1152,7 @@ export type LandStewardsPageFilter = {
   joinFarmersSection?: Maybe<DualImageSectionFilter>;
   practicesOutcomesSection?: Maybe<PracticesOutcomesSectionFilter>;
   timelineSection?: Maybe<TimelineSectionFilter>;
+  featuredSection?: Maybe<FeaturedSectionFilter>;
   footerLink?: Maybe<StringFilter>;
   metadata?: Maybe<PageMetadataFilter>;
 };
@@ -1450,6 +1498,7 @@ export type RootQuery = {
   Methodology?: Maybe<Methodology>;
   CreditClass?: Maybe<CreditClass>;
   LandStewardsPage?: Maybe<LandStewardsPage>;
+  FeaturedSection?: Maybe<FeaturedSection>;
   SanityImageAsset?: Maybe<SanityImageAsset>;
   SanityFileAsset?: Maybe<SanityFileAsset>;
   Document?: Maybe<Document>;
@@ -1470,6 +1519,7 @@ export type RootQuery = {
   allMethodology: Array<Methodology>;
   allCreditClass: Array<CreditClass>;
   allLandStewardsPage: Array<LandStewardsPage>;
+  allFeaturedSection: Array<FeaturedSection>;
   allSanityImageAsset: Array<SanityImageAsset>;
   allSanityFileAsset: Array<SanityFileAsset>;
   allDocument: Array<Document>;
@@ -1557,6 +1607,11 @@ export type RootQueryCreditClassArgs = {
 
 
 export type RootQueryLandStewardsPageArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type RootQueryFeaturedSectionArgs = {
   id: Scalars['ID'];
 };
 
@@ -1707,6 +1762,14 @@ export type RootQueryAllCreditClassArgs = {
 export type RootQueryAllLandStewardsPageArgs = {
   where?: Maybe<LandStewardsPageFilter>;
   sort?: Maybe<Array<LandStewardsPageSorting>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+};
+
+
+export type RootQueryAllFeaturedSectionArgs = {
+  where?: Maybe<FeaturedSectionFilter>;
+  sort?: Maybe<Array<FeaturedSectionSorting>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
@@ -2584,6 +2647,9 @@ export type AllLandStewardsPageQuery = (
         { __typename?: 'TimelineItem' }
         & TimelineItemFieldsFragment
       )>>> }
+    )>, featuredSection?: Maybe<(
+      { __typename?: 'FeaturedSection' }
+      & FeaturedSectionFieldsFragment
     )>, metadata?: Maybe<(
       { __typename?: 'PageMetadata' }
       & PageMetadataFieldsFragment
@@ -2730,6 +2796,15 @@ export type EcologicalImpactRelationFieldsFragment = (
 export type EcologicalOutcomeFieldsFragment = (
   { __typename?: 'EcologicalOutcome' }
   & Pick<EcologicalOutcome, 'title' | 'descriptionRaw'>
+  & { image?: Maybe<(
+    { __typename?: 'CustomImage' }
+    & CustomImageFieldsFragment
+  )> }
+);
+
+export type FeaturedSectionFieldsFragment = (
+  { __typename?: 'FeaturedSection' }
+  & Pick<FeaturedSection, 'header' | 'titleRaw' | 'link' | 'descriptionRaw'>
   & { image?: Maybe<(
     { __typename?: 'CustomImage' }
     & CustomImageFieldsFragment
@@ -2963,6 +3038,17 @@ export const EcologicalOutcomeFieldsFragmentDoc = gql`
   image {
     ...customImageFields
   }
+}
+    ${CustomImageFieldsFragmentDoc}`;
+export const FeaturedSectionFieldsFragmentDoc = gql`
+    fragment featuredSectionFields on FeaturedSection {
+  header
+  titleRaw
+  link
+  image {
+    ...customImageFields
+  }
+  descriptionRaw
 }
     ${CustomImageFieldsFragmentDoc}`;
 export const HeroSectionFieldsFragmentDoc = gql`
@@ -3381,6 +3467,9 @@ export const AllLandStewardsPageDocument = gql`
         ...timelineItemFields
       }
     }
+    featuredSection {
+      ...featuredSectionFields
+    }
     footerLink
     metadata {
       ...pageMetadataFields
@@ -3393,6 +3482,7 @@ ${ImageBoldTextLabelFieldsFragmentDoc}
 ${LandManagementPracticeFieldsFragmentDoc}
 ${EcologicalOutcomeFieldsFragmentDoc}
 ${TimelineItemFieldsFragmentDoc}
+${FeaturedSectionFieldsFragmentDoc}
 ${PageMetadataFieldsFragmentDoc}`;
 
 /**

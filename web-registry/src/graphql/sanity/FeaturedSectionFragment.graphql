@@ -1,0 +1,9 @@
+fragment featuredSectionFields on FeaturedSection {
+  header
+  titleRaw
+  link
+  image {
+    ...customImageFields
+  }
+  descriptionRaw
+}

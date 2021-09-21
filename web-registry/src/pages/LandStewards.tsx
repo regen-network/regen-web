@@ -86,8 +86,7 @@ const LandStewards = (): JSX.Element => {
         <PracticesOutcomesSection content={content.practicesOutcomesSection} />
       )}
       {content?.timelineSection && <TimelineSection content={content.timelineSection} />}
-
-      <FeaturedSection content={content?.joinFarmersSection} />
+      {content?.featuredSection && <FeaturedSection content={content.featuredSection} />}
       {/*
       <MoreQuestionsSection startSellerFlow={handleOpen} /> */}
       <FixedFooter justify="flex-end">

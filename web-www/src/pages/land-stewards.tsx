@@ -54,16 +54,16 @@ const LandStewardsPage = ({ location }: props): JSX.Element => {
 
   return (
     <>
-      <SEO
+      {/* <SEO
         description="Issue and sell ecosystem service credits to buyers around the world - get paid for your ecological stewardship."
         title="For Land Stewards"
         location={location}
         imageUrl={data.seoImage.publicURL}
-      />
-      <TopSection />
+      /> */}
+      {/* <TopSection />
       <ImageItemsSection />
       <JoinFarmersSection />
-      <PracticesOutcomesSection />
+      <PracticesOutcomesSection /> */}
       <TimelineSection />
       <FeaturedSection />
       <MoreQuestionsSection startSellerFlow={handleOpen} />

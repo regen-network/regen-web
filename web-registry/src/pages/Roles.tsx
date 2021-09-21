@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import { useHistory, useParams } from 'react-router-dom';
+import { useAuth0 } from '@auth0/auth0-react';
 
 import Description from 'web-components/lib/components/description';
 import { FormValues, isIndividual } from 'web-components/lib/components/inputs/RoleField';
@@ -9,6 +10,7 @@ import { OnboardingFormTemplate } from '../components/templates';
 import { RolesForm, RolesValues } from '../components/organisms';
 import {
   useProjectByIdQuery,
+  useGetOrganizationProfileByEmailQuery,
   useUpdateProjectByIdMutation,
   PartyFieldsFragment,
   Maybe,
@@ -61,6 +63,7 @@ function stripPartyIds(values: FormValues | undefined): FormValues | undefined {
   }
   return values;
 }
+
 function stripIds(values: RolesValues): RolesValues {
   if (values) {
     return {
@@ -80,10 +83,18 @@ const Roles: React.FC = () => {
   const activeStep = 0;
   const history = useHistory();
   const { projectId } = useParams();
+  const { user } = useAuth0();
+  const userEmail = user?.email;
 
   const [updateProject] = useUpdateProjectByIdMutation();
   const { data } = useProjectByIdQuery({
     variables: { id: projectId },
+  });
+  const { data: userProfileData } = useGetOrganizationProfileByEmailQuery({
+    skip: !userEmail,
+    variables: {
+      email: userEmail,
+    },
   });
 
   let initialFieldValues: RolesValues | undefined;
@@ -115,8 +126,8 @@ const Roles: React.FC = () => {
   };
 
   async function submit(values: RolesValues): Promise<void> {
-    const metadata = { ...data?.projectById?.metadata, ...stripIds(values) };
-    let projectPatch: ProjectPatch = { metadata };
+    let projectPatch: ProjectPatch = {};
+    console.log('submit values', values);
 
     if (values['http://regen.network/landOwner']?.partyId) {
       projectPatch = { landOwnerId: values['http://regen.network/landOwner']?.partyId, ...projectPatch };
@@ -136,6 +147,9 @@ const Roles: React.FC = () => {
         ...projectPatch,
       };
     }
+
+    const metadata = { ...data?.projectById?.metadata, ...stripIds(values) };
+    projectPatch = { metadata, ...projectPatch };
 
     try {
       await updateProject({
@@ -162,7 +176,7 @@ const Roles: React.FC = () => {
           project page»
         </Link>
       </Description>
-      <RolesForm submit={submit} initialValues={initialFieldValues} />
+      <RolesForm submit={submit} initialValues={initialFieldValues} projectCreator={userProfileData} />
     </OnboardingFormTemplate>
   );
 };

@@ -16778,7 +16778,7 @@ export type AllCreditClassesQuery = (
     { __typename?: 'CreditClassesConnection' }
     & { nodes: Array<Maybe<(
       { __typename?: 'CreditClass' }
-      & Pick<CreditClass, 'id' | 'uri'>
+      & Pick<CreditClass, 'id' | 'uri' | 'standard'>
       & { creditClassVersionsById: (
         { __typename?: 'CreditClassVersionsConnection' }
         & { nodes: Array<Maybe<(
@@ -16970,10 +16970,10 @@ export type GetOrganizationProfileByEmailQuery = (
   { __typename?: 'Query' }
   & { userByEmail?: Maybe<(
     { __typename?: 'User' }
-    & Pick<User, 'id'>
+    & Pick<User, 'id' | 'email' | 'phoneNumber' | 'partyId'>
     & { partyByPartyId?: Maybe<(
       { __typename?: 'Party' }
-      & Pick<Party, 'name'>
+      & Pick<Party, 'id' | 'name'>
       & { walletByWalletId?: Maybe<(
         { __typename?: 'Wallet' }
         & Pick<Wallet, 'addr'>
@@ -16984,7 +16984,7 @@ export type GetOrganizationProfileByEmailQuery = (
         { __typename?: 'OrganizationMember' }
         & { organizationByOrganizationId?: Maybe<(
           { __typename?: 'Organization' }
-          & Pick<Organization, 'legalName' | 'partyId'>
+          & Pick<Organization, 'id' | 'legalName' | 'partyId'>
           & { partyByPartyId?: Maybe<(
             { __typename?: 'Party' }
             & Pick<Party, 'name' | 'image' | 'description'>
@@ -17704,6 +17704,7 @@ export const AllCreditClassesDocument = gql`
     nodes {
       id
       uri
+      standard
       creditClassVersionsById(orderBy: CREATED_AT_DESC, first: 1) {
         nodes {
           name
@@ -18067,7 +18068,11 @@ export const GetOrganizationProfileByEmailDocument = gql`
     query GetOrganizationProfileByEmail($email: String!) {
   userByEmail(email: $email) {
     id
+    email
+    phoneNumber
+    partyId
     partyByPartyId {
+      id
       name
       walletByWalletId {
         addr
@@ -18076,6 +18081,7 @@ export const GetOrganizationProfileByEmailDocument = gql`
     organizationMembersByMemberId(condition: {isOwner: true}) {
       nodes {
         organizationByOrganizationId {
+          id
           legalName
           partyId
           partyByPartyId {

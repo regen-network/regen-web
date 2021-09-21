@@ -132,7 +132,6 @@ const RoleField: React.FC<Props> = ({
   const [individualEdit, setIndividualEdit] = useState<any | null>(null);
   const [value, setValue] = useState<any | null>({});
   const { form, field } = fieldProps;
-
   useEffect(() => {
     const selectedValue = options && field.value && options.find(o => o.id === field.value.id);
     setValue(selectedValue);
@@ -141,13 +140,21 @@ const RoleField: React.FC<Props> = ({
   const saveOrganization = async (org: any): Promise<void> => {
     var savedOrg = await onSaveOrganization(org);
     closeOrganizationModal();
-    form.setFieldValue(field.name, savedOrg);
+    for (const fieldName in form.values) {
+      if (form.values[fieldName].id === savedOrg.id) {
+        form.setFieldValue(`['${fieldName}']`, savedOrg);
+      }
+    }
   };
 
   const saveIndividual = async (user: any): Promise<void> => {
     var savedUser = await onSaveIndividual(user);
     closeIndividualModal();
-    form.setFieldValue(field.name, savedUser);
+    for (const fieldName in form.values) {
+      if (form.values[fieldName].id === savedUser.id || field.name === `['${fieldName}']`) {
+        form.setFieldValue(`['${fieldName}']`, savedUser);
+      }
+    }
   };
 
   const closeOrganizationModal = (): void => {
@@ -188,7 +195,7 @@ const RoleField: React.FC<Props> = ({
             value={value}
             getOptionLabel={o => getLabel(o) || ''}
             getOptionSelected={o => o.id === field.value}
-            renderOption={o => getLabel(o) || o}
+            renderOption={o => {console.log('renderOPtion', o); return getLabel(o) || o}}
             onChange={(event, newValue, reason) => {
               console.log('newValue', newValue);
               console.log('reason', reason);
@@ -247,12 +254,11 @@ const RoleField: React.FC<Props> = ({
           />
         )}
       </FieldFormControl>
-      {value &&
-      value.id && ( //TODO: validate so this does not appear for "myself" or "my organization." That can be done elsewhere.
-          <OutlinedButton className={styles.edit} onClick={() => editEntity(value)}>
-            edit entity
-          </OutlinedButton>
-        )}
+      {value && value.id && !value.projectCreator && (
+        <OutlinedButton className={styles.edit} onClick={() => editEntity(value)}>
+          edit entity
+        </OutlinedButton>
+      )}
       {organizationEdit && (
         <OrganizationModal
           organization={organizationEdit}

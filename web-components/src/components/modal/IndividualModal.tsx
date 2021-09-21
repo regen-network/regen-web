@@ -25,6 +25,7 @@ interface IndividualModalProps {
 export interface IndividualFormValues {
   id?: string;
   partyId?: string;
+  projectCreator?: boolean;
   '@type': string;
   'http://schema.org/name'?: string;
   'http://schema.org/telephone'?: string;
@@ -138,7 +139,7 @@ function IndividualModal({ individual, onClose, onSubmit, validate }: Individual
           }}
           validate={validate}
         >
-          {({ submitForm }) => {
+          {({ submitForm, isValid, isSubmitting }) => {
             return (
               <Form translate="yes">
                 <OnBoardingCard className={styles.card}>
@@ -186,7 +187,11 @@ function IndividualModal({ individual, onClose, onSubmit, validate }: Individual
                   <Button onClick={onClose} className={styles.cancelButton}>
                     cancel
                   </Button>
-                  <ContainedButton onClick={submitForm} className={styles.button}>
+                  <ContainedButton
+                    onClick={submitForm}
+                    className={styles.button}
+                    disabled={!isValid || isSubmitting}
+                  >
                     save
                   </ContainedButton>
                 </div>

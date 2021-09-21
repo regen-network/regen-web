@@ -20,11 +20,13 @@ import {
   useUpdateOrganizationByIdMutation,
   useUpdateAddressByIdMutation,
   useShaclGraphByUriQuery,
+  GetOrganizationProfileByEmailQuery,
 } from '../../generated/graphql';
 
 interface RolesFormProps {
   submit: (values: RolesValues) => Promise<void>;
   initialValues?: RolesValues;
+  projectCreator?: GetOrganizationProfileByEmailQuery;
 }
 
 export interface RolesValues {
@@ -64,7 +66,40 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const RolesForm: React.FC<RolesFormProps> = ({ submit, initialValues }) => {
+function getEntity(query?: GetOrganizationProfileByEmailQuery): FormValues | null {
+  const user = query?.userByEmail;
+  if (user) {
+    const org = user?.organizationMembersByMemberId?.nodes[0]?.organizationByOrganizationId;
+    if (org) {
+      return {
+        '@type': 'http://regen.network/Organization',
+        id: org.id,
+        partyId: org.partyId,
+        'http://schema.org/legalName': org.legalName,
+        'http://schema.org/telephone': user.phoneNumber || undefined,
+        'http://schema.org/email': user.email,
+        'http://regen.network/responsiblePerson': user.partyByPartyId?.name,
+        'http://regen.network/sharePermission': true,
+        'http://schema.org/location': org.partyByPartyId?.addressByAddressId?.feature,
+        projectCreator: true,
+      };
+    } else {
+      return {
+        '@type': 'http://regen.network/User',
+        id: user.id,
+        partyId: user.partyId,
+        'http://schema.org/name': user.partyByPartyId?.name,
+        'http://schema.org/telephone': user.phoneNumber || undefined,
+        'http://schema.org/email': user.email,
+        'http://regen.network/sharePermission': true,
+        projectCreator: true,
+      };
+    }
+  }
+  return null;
+}
+
+const RolesForm: React.FC<RolesFormProps> = ({ submit, initialValues, projectCreator }) => {
   const [entities, setEntities] = useState<Array<FormValues>>([]);
   const styles = useStyles();
   const { data: graphData } = useShaclGraphByUriQuery({
@@ -80,9 +115,20 @@ const RolesForm: React.FC<RolesFormProps> = ({ submit, initialValues }) => {
   const [updateAddressById] = useUpdateAddressByIdMutation();
 
   useEffect(() => {
-    const initEntities = Object.values(initialValues || {}).filter(v => !!v) as Array<FormValues>;
-    setEntities(initEntities);
-  }, [initialValues]);
+    let initEntities: Array<FormValues> = [];
+    if (initialValues) {
+      initEntities = Object.values(initialValues).filter(
+        // Remove duplicates and empty values
+        (v, i, self) => self.findIndex(t => t.id === v.id) === i && !!v?.['@type'],
+      );
+    }
+    const creatorEntity = getEntity(projectCreator);
+    if (creatorEntity) {
+      setEntities([creatorEntity, ...initEntities]);
+    } else {
+      setEntities(initEntities);
+    }
+  }, [initialValues, projectCreator]);
 
   const updateUser = async (
     id: string,
@@ -171,7 +217,7 @@ const RolesForm: React.FC<RolesFormProps> = ({ submit, initialValues }) => {
         // https://github.com/regen-network/regen-registry/issues/555
         console.log(e);
       }
-      const newEntities = [...entities, { ...updatedEntity, id: updatedEntity.id }];
+      const newEntities = [...entities, { ...updatedEntity }];
       setEntities(newEntities);
     } else {
       // Update
@@ -238,8 +284,7 @@ const RolesForm: React.FC<RolesFormProps> = ({ submit, initialValues }) => {
         // https://github.com/regen-network/regen-registry/issues/555
         console.log(e);
       }
-      const newEntities = [...entities, { ...updatedEntity, id: updatedEntity.id }];
-      console.log('newEntities', newEntities);
+      const newEntities = [...entities, { ...updatedEntity }];
       setEntities(newEntities);
     } else {
       // Update
@@ -279,7 +324,7 @@ const RolesForm: React.FC<RolesFormProps> = ({ submit, initialValues }) => {
         console.log(e);
       }
       const updatedEntities = entities.map((existingEntity: FormValues) =>
-        existingEntity.id === updatedEntity.id ? { ...updatedEntity } : existingEntity,
+        existingEntity.id === updatedEntity.id ? updatedEntity : existingEntity,
       );
       setEntities(updatedEntities);
     }
@@ -312,7 +357,6 @@ const RolesForm: React.FC<RolesFormProps> = ({ submit, initialValues }) => {
         validate={validateProject}
       >
         {({ values, submitForm, isValid, isSubmitting }) => {
-          console.log('form values', values)
           return (
             <Form translate="yes">
               <OnBoardingCard className={styles.storyCard}>

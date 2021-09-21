@@ -27,6 +27,7 @@ interface OrganizationModalProps {
 
 export interface OrganizationFormValues {
   id?: string;
+  projectCreator?: boolean;
   partyId?: string;
   addressId?: string;
   ownerId?: string;
@@ -117,7 +118,7 @@ function OrganizationModal({
 }: OrganizationModalProps): JSX.Element {
   const styles = useStyles();
   const [organizationEdit, setOrganizationEdit] = useState<OrganizationFormValues | undefined>(organization);
-  console.log('organization', organization)
+
   useEffect(() => {
     setOrganizationEdit(organization);
   }, [organization]);
@@ -148,8 +149,7 @@ function OrganizationModal({
             }
           }}
         >
-          {({ values, submitForm }) => {
-            console.log('org values', values)
+          {({ values, submitForm, isValid, isSubmitting }) => {
             return (
               <Form translate="yes">
                 <OnBoardingCard className={styles.card}>
@@ -216,7 +216,11 @@ function OrganizationModal({
                   <Button onClick={onClose} className={styles.cancelButton}>
                     cancel
                   </Button>
-                  <ContainedButton onClick={submitForm} className={styles.button}>
+                  <ContainedButton
+                    onClick={submitForm}
+                    className={styles.button}
+                    disabled={!isValid || isSubmitting}
+                  >
                     save
                   </ContainedButton>
                 </div>

@@ -4,7 +4,6 @@ import { useLocation } from 'react-router-dom';
 import cx from 'clsx';
 
 // import MoreQuestionsSection from '../sections/land-stewards/MoreQuestionsSection';
-// import TimelineSection from '../sections/land-stewards/TimelineSection';
 // import FeaturedSection from '../sections/shared/FeaturedSection';
 
 import FixedFooter from 'web-components/lib/components/fixed-footer';
@@ -20,6 +19,7 @@ import {
   TwoImageSection,
   PracticesOutcomesSection,
   TimelineSection,
+  FeaturedSection,
 } from '../components/molecules';
 import landStewardsHero from '../assets/land-stewards-top.jpg';
 
@@ -87,8 +87,8 @@ const LandStewards = (): JSX.Element => {
       )}
       {content?.timelineSection && <TimelineSection content={content.timelineSection} />}
 
+      <FeaturedSection content={content?.joinFarmersSection} />
       {/*
-      <FeaturedSection />
       <MoreQuestionsSection startSellerFlow={handleOpen} /> */}
       <FixedFooter justify="flex-end">
         <>{/* <ContainedButton onClick={handleOpen}>{data.text.popup.buttonText}</ContainedButton> */}</>

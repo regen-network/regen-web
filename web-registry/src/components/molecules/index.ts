@@ -8,3 +8,4 @@ export * from './ImageItemsSection';
 export * from './TwoImageSection';
 export * from './PracticesOutcomesSection';
 export * from './TimelineSection';
+export * from './FeaturedSection';

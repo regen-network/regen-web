@@ -195,10 +195,8 @@ const RoleField: React.FC<Props> = ({
             value={value}
             getOptionLabel={o => getLabel(o) || ''}
             getOptionSelected={o => o.id === field.value}
-            renderOption={o => {console.log('renderOPtion', o); return getLabel(o) || o}}
+            renderOption={o => getLabel(o) || o}
             onChange={(event, newValue, reason) => {
-              console.log('newValue', newValue);
-              console.log('reason', reason);
               if (reason === 'select-option' && !newValue.inputValue) {
                 handleChange(newValue);
               } else if (typeof newValue === 'string') {

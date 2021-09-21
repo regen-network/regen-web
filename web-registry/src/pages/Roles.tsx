@@ -127,7 +127,6 @@ const Roles: React.FC = () => {
 
   async function submit(values: RolesValues): Promise<void> {
     let projectPatch: ProjectPatch = {};
-    console.log('submit values', values);
 
     if (values['http://regen.network/landOwner']?.partyId) {
       projectPatch = { landOwnerId: values['http://regen.network/landOwner']?.partyId, ...projectPatch };

@@ -88,7 +88,6 @@ const LandStewards = (): JSX.Element => {
   const location = useLocation();
   const { data } = useAllLandStewardsPageQuery({ client });
   const content = data?.allLandStewardsPage?.[0];
-  console.log('content', content);
 
   const siteMetadata = {
     title: `For Land Stewards`,
@@ -139,7 +138,7 @@ const LandStewards = (): JSX.Element => {
       )}
 
       <FixedFooter justify="flex-end">
-        <ContainedButton onClick={() => openModal(content?.footerLink || '')}>
+        <ContainedButton onClick={() => openModal(content?.footerLink)}>
           {content?.footerButtonText}
         </ContainedButton>
       </FixedFooter>

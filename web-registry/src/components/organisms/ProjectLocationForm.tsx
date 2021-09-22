@@ -11,7 +11,7 @@ import { useShaclGraphByUriQuery } from '../../generated/graphql';
 import { validate, getProjectPageBaseData } from '../../lib/rdf';
 
 export interface ProjectLocationFormValues {
-  'http://schema.org/location': Partial<GeocodeFeature> | string; // the string union is just for formik errors - there is possibly a betteer solution, but this seems easiest for now
+  'http://schema.org/location': Partial<GeocodeFeature>;
 }
 
 const ProjectLocationForm: React.FC<{
@@ -35,7 +35,7 @@ const ProjectLocationForm: React.FC<{
         'http://schema.org/location': initialValues?.['http://schema.org/location'] || {},
       }}
       validate={async (values: ProjectLocationFormValues) => {
-        const errors: FormikErrors<ProjectLocationFormValues> = {};
+        const errors: FormikErrors<ProjectLocationFormValues | { [path: string]: string }> = {};
         if (graphData?.shaclGraphByUri?.graph) {
           const projectPageData = { ...getProjectPageBaseData(), ...values };
 

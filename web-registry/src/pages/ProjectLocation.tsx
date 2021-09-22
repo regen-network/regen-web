@@ -3,13 +3,18 @@ import { useHistory, useParams } from 'react-router-dom';
 
 import { ProjectLocationForm, ProjectLocationFormValues } from '../components/organisms';
 import { OnboardingFormTemplate } from '../components/templates';
-import { useProjectByIdQuery, useUpdateProjectByIdMutation } from '../generated/graphql';
+import {
+  useProjectByIdQuery,
+  useUpdateProjectByIdMutation,
+  useCreateAddressMutation,
+} from '../generated/graphql';
 
 const ProjectLocation: React.FC = () => {
   const history = useHistory();
   const { projectId } = useParams<{ projectId: string }>();
 
   const [updateProject] = useUpdateProjectByIdMutation();
+  const [createAddress] = useCreateAddressMutation();
   const { data: projectData } = useProjectByIdQuery({
     variables: { id: projectId },
   });
@@ -29,28 +34,39 @@ const ProjectLocation: React.FC = () => {
   }
 
   async function submit(values: ProjectLocationFormValues): Promise<void> {
-    await saveValues(values);
-    history.push(`/project-pages/${projectId}/roles`);
+    try {
+      await saveValues(values);
+      history.push(`/project-pages/${projectId}/roles`);
+    } catch (e) {
+      //   // TODO: Should we display the error banner here?
+      //   // https://github.com/regen-network/regen-registry/issues/554
+      console.error(e); // eslint-disable-line no-console
+    }
   }
 
   async function saveValues(values: ProjectLocationFormValues): Promise<void> {
     const metadata = { ...projectData?.projectById?.metadata, ...values };
-    try {
-      await updateProject({
-        variables: {
-          input: {
-            id: projectId,
-            projectPatch: {
-              metadata,
-            },
+    const { data: addressData } = await createAddress({
+      variables: {
+        input: {
+          address: {
+            feature: values['http://schema.org/location'],
           },
         },
-      });
-    } catch (e) {
-      // TODO: Should we display the error banner here?
-      // https://github.com/regen-network/regen-registry/issues/554
-      console.error('error saving location', e); // eslint-disable-line no-console
-    }
+      },
+    });
+
+    await updateProject({
+      variables: {
+        input: {
+          id: projectId,
+          projectPatch: {
+            metadata,
+            addressId: addressData?.createAddress?.address?.id,
+          },
+        },
+      },
+    });
   }
 
   return (

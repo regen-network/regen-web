@@ -37,6 +37,9 @@ query allLandStewardsPage {
     featuredSection {
       ...featuredSectionFields
     }
+    moreQuestionsSection {
+      ...bottomBannerFields
+    }
     footerLink
     metadata {
       ...pageMetadataFields

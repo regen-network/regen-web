@@ -74,7 +74,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 interface Props {
-  content: FeaturedSectionProps; //TODO
+  content: FeaturedSectionProps;
 }
 
 const FeaturedSection: React.FC<Props> = ({ content }) => {

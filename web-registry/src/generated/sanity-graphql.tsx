@@ -65,6 +65,8 @@ export type BottomBanner = {
   title?: Maybe<Scalars['String']>;
   descriptionRaw?: Maybe<Scalars['JSON']>;
   button?: Maybe<Button>;
+  secondButton?: Maybe<Button>;
+  image?: Maybe<CustomImage>;
 };
 
 export type BottomBannerFilter = {
@@ -72,6 +74,8 @@ export type BottomBannerFilter = {
   _type?: Maybe<StringFilter>;
   title?: Maybe<StringFilter>;
   button?: Maybe<ButtonFilter>;
+  secondButton?: Maybe<ButtonFilter>;
+  image?: Maybe<CustomImageFilter>;
 };
 
 export type BottomBannerSorting = {
@@ -79,6 +83,8 @@ export type BottomBannerSorting = {
   _type?: Maybe<SortOrder>;
   title?: Maybe<SortOrder>;
   button?: Maybe<ButtonSorting>;
+  secondButton?: Maybe<ButtonSorting>;
+  image?: Maybe<CustomImageSorting>;
 };
 
 export type Button = {
@@ -1134,6 +1140,7 @@ export type LandStewardsPage = Document & {
   practicesOutcomesSection?: Maybe<PracticesOutcomesSection>;
   timelineSection?: Maybe<TimelineSection>;
   featuredSection?: Maybe<FeaturedSection>;
+  moreQuestionsSection?: Maybe<BottomBanner>;
   footerLink?: Maybe<Scalars['String']>;
   metadata?: Maybe<PageMetadata>;
 };
@@ -1153,6 +1160,7 @@ export type LandStewardsPageFilter = {
   practicesOutcomesSection?: Maybe<PracticesOutcomesSectionFilter>;
   timelineSection?: Maybe<TimelineSectionFilter>;
   featuredSection?: Maybe<FeaturedSectionFilter>;
+  moreQuestionsSection?: Maybe<BottomBannerFilter>;
   footerLink?: Maybe<StringFilter>;
   metadata?: Maybe<PageMetadataFilter>;
 };
@@ -1169,6 +1177,7 @@ export type LandStewardsPageSorting = {
   joinFarmersSection?: Maybe<DualImageSectionSorting>;
   practicesOutcomesSection?: Maybe<PracticesOutcomesSectionSorting>;
   timelineSection?: Maybe<TimelineSectionSorting>;
+  moreQuestionsSection?: Maybe<BottomBannerSorting>;
   footerLink?: Maybe<SortOrder>;
   metadata?: Maybe<PageMetadataSorting>;
 };
@@ -2650,6 +2659,9 @@ export type AllLandStewardsPageQuery = (
     )>, featuredSection?: Maybe<(
       { __typename?: 'FeaturedSection' }
       & FeaturedSectionFieldsFragment
+    )>, moreQuestionsSection?: Maybe<(
+      { __typename?: 'BottomBanner' }
+      & BottomBannerFieldsFragment
     )>, metadata?: Maybe<(
       { __typename?: 'PageMetadata' }
       & PageMetadataFieldsFragment
@@ -2744,6 +2756,12 @@ export type BottomBannerFieldsFragment = (
   & { button?: Maybe<(
     { __typename?: 'Button' }
     & ButtonFieldsFragment
+  )>, secondButton?: Maybe<(
+    { __typename?: 'Button' }
+    & ButtonFieldsFragment
+  )>, image?: Maybe<(
+    { __typename?: 'CustomImage' }
+    & CustomImageFieldsFragment
   )> }
 );
 
@@ -3006,8 +3024,15 @@ export const BottomBannerFieldsFragmentDoc = gql`
   button {
     ...buttonFields
   }
+  secondButton {
+    ...buttonFields
+  }
+  image {
+    ...customImageFields
+  }
 }
-    ${ButtonFieldsFragmentDoc}`;
+    ${ButtonFieldsFragmentDoc}
+${CustomImageFieldsFragmentDoc}`;
 export const CardFieldsFragmentDoc = gql`
     fragment cardFields on Card {
   title
@@ -3470,6 +3495,9 @@ export const AllLandStewardsPageDocument = gql`
     featuredSection {
       ...featuredSectionFields
     }
+    moreQuestionsSection {
+      ...bottomBannerFields
+    }
     footerLink
     metadata {
       ...pageMetadataFields
@@ -3483,6 +3511,7 @@ ${LandManagementPracticeFieldsFragmentDoc}
 ${EcologicalOutcomeFieldsFragmentDoc}
 ${TimelineItemFieldsFragmentDoc}
 ${FeaturedSectionFieldsFragmentDoc}
+${BottomBannerFieldsFragmentDoc}
 ${PageMetadataFieldsFragmentDoc}`;
 
 /**

@@ -1,5 +1,5 @@
 import React from 'react';
-import clsx from 'clsx';
+import cx from 'clsx';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 
@@ -22,6 +22,8 @@ type Props = {
   classes?: {
     root?: string;
     main?: string;
+    section?: string;
+    title?: string;
     description?: string;
   };
 };
@@ -32,6 +34,19 @@ type StyleProps = {
 
 const useStyles = makeStyles<Theme, StyleProps>(theme => ({
   main: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignContent: 'center',
+    justifyContent: 'center',
+  },
+  // section: {
+  //   display: 'flex',
+  //   alignContent: 'center',
+  //   justifyContent: 'center',
+  // },
+  content: {
+    display: 'flex',
+    flexDirection: 'column',
     alignContent: 'center',
     justifyContent: 'center',
   },
@@ -44,7 +59,7 @@ const useStyles = makeStyles<Theme, StyleProps>(theme => ({
     },
   },
   btn: {
-    marginTop: theme.spacing(10),
+    margin: theme.spacing(10, 4, 0),
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.typography.pxToRem(21),
       padding: theme.spacing(2, 8),
@@ -78,25 +93,30 @@ const HeroAction: React.FC<Props> = ({ classes, ...props }) => {
 
   const Button = lightBg ? OutlinedButton : ContainedButton;
   const button = props.bottomBanner?.button;
+  const secondButton = props.bottomBanner?.secondButton;
 
   return (
     <BackgroundImgSection
       img={props.img || ''}
-      classes={{ main: styles.main, root: classes?.root }}
+      classes={{
+        main: cx(styles.main, classes?.main),
+        root: classes?.root,
+        section: cx(styles.section, classes?.section),
+      }}
       isBanner={props.isBanner}
     >
       <Grid container justify="center">
-        <div className={clsx(styles.main, classes?.main)}>
+        <div className={styles.content}>
           <Title
             align="center"
             variant="h2"
             color={lightBg ? 'textPrimary' : 'primary'}
-            className={styles.title}
+            className={cx(styles.title, classes?.title)}
           >
             {props.bottomBanner?.title}
           </Title>
           {!!props.bottomBanner?.descriptionRaw && (
-            <Description className={clsx(styles.description, classes?.description)}>
+            <Description className={cx(styles.description, classes?.description)}>
               <BlockContent content={props.bottomBanner.descriptionRaw} />
             </Description>
           )}
@@ -104,6 +124,15 @@ const HeroAction: React.FC<Props> = ({ classes, ...props }) => {
             <Button onClick={() => onBtnClick(props.openModal, button)} className={styles.btn} size="medium">
               {button?.buttonText}
             </Button>
+            {secondButton?.buttonText && (
+              <OutlinedButton
+                onClick={() => onBtnClick(props.openModal, secondButton)}
+                className={styles.btn}
+                size="medium"
+              >
+                {secondButton?.buttonText}
+              </OutlinedButton>
+            )}
           </Grid>
         </div>
       </Grid>

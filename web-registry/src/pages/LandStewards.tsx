@@ -1,14 +1,10 @@
 import React, { useState } from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import { useLocation } from 'react-router-dom';
-import cx from 'clsx';
-
-// import MoreQuestionsSection from '../sections/land-stewards/MoreQuestionsSection';
-// import FeaturedSection from '../sections/shared/FeaturedSection';
 
 import FixedFooter from 'web-components/lib/components/fixed-footer';
 import Modal from 'web-components/lib/components/modal';
-import Section from 'web-components/lib/components/section';
+import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import SEO from 'web-components/lib/components/seo';
 
 import { useAllLandStewardsPageQuery } from '../generated/sanity-graphql';
@@ -20,6 +16,7 @@ import {
   PracticesOutcomesSection,
   TimelineSection,
   FeaturedSection,
+  HeroAction,
 } from '../components/molecules';
 import landStewardsHero from '../assets/land-stewards-top.jpg';
 
@@ -35,17 +32,35 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingBottom: theme.spacing(12),
     },
   },
+  bottomHeroSection: {
+    display: 'flex',
+    justifyContent: 'center',
+    paddingTop: theme.spacing(56.25),
+    paddingBottom: theme.spacing(56.25),
+    '& a': {
+      color: theme.palette.secondary.light,
+      '&:link': {
+        textDecoration: 'underline',
+      },
+    },
+  },
+  bottomHeroMain: {
+    maxWidth: theme.spacing(200),
+    minHeight: 0,
+  },
 }));
 
 const LandStewards = (): JSX.Element => {
   const styles = useStyles();
-
   const [open, setOpen] = useState(false);
-  const handleOpen = (): void => {
+  const [modalLink, setModalLink] = useState<string | undefined>();
+
+  const openModal = (href?: string | null): void => {
+    setModalLink(href || undefined);
     setOpen(true);
   };
 
-  const handleClose = (): void => {
+  const closeModal = (): void => {
     setOpen(false);
   };
 
@@ -87,13 +102,32 @@ const LandStewards = (): JSX.Element => {
       )}
       {content?.timelineSection && <TimelineSection content={content.timelineSection} />}
       {content?.featuredSection && <FeaturedSection content={content.featuredSection} />}
-      {/*
-      <MoreQuestionsSection startSellerFlow={handleOpen} /> */}
+      {content?.moreQuestionsSection && (
+        <HeroAction
+          classes={{
+            main: styles.bottomHeroMain,
+            section: styles.bottomHeroSection,
+          }}
+          isBanner
+          img={content?.moreQuestionsSection?.image?.image?.asset?.url || ''}
+          bottomBanner={content?.moreQuestionsSection}
+          openModal={openModal}
+        />
+      )}
+
       <FixedFooter justify="flex-end">
-        <>{/* <ContainedButton onClick={handleOpen}>{data.text.popup.buttonText}</ContainedButton> */}</>
+        {content?.moreQuestionsSection?.secondButton?.buttonLink && (
+          <ContainedButton
+            onClick={() =>
+              openModal(content?.moreQuestionsSection?.secondButton?.buttonLink?.buttonHref || '')
+            }
+          >
+            open
+          </ContainedButton>
+        )}
       </FixedFooter>
-      <Modal open={open} onClose={handleClose} className={styles.modal}>
-        {/* <iframe title="airtable-signup-form" src={data.text.popup.airtableLink} /> */}
+      <Modal open={open} onClose={closeModal} className={styles.modal}>
+        <iframe title="airtable-signup-land-steward" src={modalLink} />
       </Modal>
     </>
   );

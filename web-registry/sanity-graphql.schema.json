@@ -341,6 +341,30 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "secondButton",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "Button",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "image",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "CustomImage",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "inputFields": null,
@@ -393,6 +417,26 @@
               "ofType": null
             },
             "defaultValue": null
+          },
+          {
+            "name": "secondButton",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "ButtonFilter",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "image",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "CustomImageFilter",
+              "ofType": null
+            },
+            "defaultValue": null
           }
         ],
         "interfaces": null,
@@ -441,6 +485,26 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "ButtonSorting",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "secondButton",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "ButtonSorting",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "image",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "CustomImageSorting",
               "ofType": null
             },
             "defaultValue": null
@@ -8596,6 +8660,18 @@
             "deprecationReason": null
           },
           {
+            "name": "moreQuestionsSection",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "BottomBanner",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "footerLink",
             "description": null,
             "args": [],
@@ -8768,6 +8844,16 @@
             "defaultValue": null
           },
           {
+            "name": "moreQuestionsSection",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "BottomBannerFilter",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "footerLink",
             "description": null,
             "type": {
@@ -8904,6 +8990,16 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "TimelineSectionSorting",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "moreQuestionsSection",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "BottomBannerSorting",
               "ofType": null
             },
             "defaultValue": null

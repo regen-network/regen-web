@@ -1141,6 +1141,8 @@ export type LandStewardsPage = Document & {
   timelineSection?: Maybe<TimelineSection>;
   featuredSection?: Maybe<FeaturedSection>;
   moreQuestionsSection?: Maybe<BottomBanner>;
+  footerButtonText?: Maybe<Scalars['String']>;
+  /** This opens in a modal */
   footerLink?: Maybe<Scalars['String']>;
   metadata?: Maybe<PageMetadata>;
 };
@@ -1161,6 +1163,7 @@ export type LandStewardsPageFilter = {
   timelineSection?: Maybe<TimelineSectionFilter>;
   featuredSection?: Maybe<FeaturedSectionFilter>;
   moreQuestionsSection?: Maybe<BottomBannerFilter>;
+  footerButtonText?: Maybe<StringFilter>;
   footerLink?: Maybe<StringFilter>;
   metadata?: Maybe<PageMetadataFilter>;
 };
@@ -1178,6 +1181,7 @@ export type LandStewardsPageSorting = {
   practicesOutcomesSection?: Maybe<PracticesOutcomesSectionSorting>;
   timelineSection?: Maybe<TimelineSectionSorting>;
   moreQuestionsSection?: Maybe<BottomBannerSorting>;
+  footerButtonText?: Maybe<SortOrder>;
   footerLink?: Maybe<SortOrder>;
   metadata?: Maybe<PageMetadataSorting>;
 };
@@ -2618,7 +2622,7 @@ export type AllLandStewardsPageQuery = (
   { __typename?: 'RootQuery' }
   & { allLandStewardsPage: Array<(
     { __typename?: 'LandStewardsPage' }
-    & Pick<LandStewardsPage, 'footerLink'>
+    & Pick<LandStewardsPage, 'footerButtonText' | 'footerLink'>
     & { heroSection?: Maybe<(
       { __typename?: 'HeroSection' }
       & HeroSectionFieldsFragment
@@ -3498,6 +3502,7 @@ export const AllLandStewardsPageDocument = gql`
     moreQuestionsSection {
       ...bottomBannerFields
     }
+    footerButtonText
     footerLink
     metadata {
       ...pageMetadataFields

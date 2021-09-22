@@ -8672,8 +8672,20 @@
             "deprecationReason": null
           },
           {
-            "name": "footerLink",
+            "name": "footerButtonText",
             "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "footerLink",
+            "description": "This opens in a modal",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -8854,6 +8866,16 @@
             "defaultValue": null
           },
           {
+            "name": "footerButtonText",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringFilter",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "footerLink",
             "description": null,
             "type": {
@@ -9000,6 +9022,16 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "BottomBannerSorting",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "footerButtonText",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "SortOrder",
               "ofType": null
             },
             "defaultValue": null

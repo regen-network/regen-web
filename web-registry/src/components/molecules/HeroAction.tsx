@@ -25,6 +25,7 @@ type Props = {
     section?: string;
     title?: string;
     description?: string;
+    button?: string;
   };
 };
 
@@ -39,11 +40,6 @@ const useStyles = makeStyles<Theme, StyleProps>(theme => ({
     alignContent: 'center',
     justifyContent: 'center',
   },
-  // section: {
-  //   display: 'flex',
-  //   alignContent: 'center',
-  //   justifyContent: 'center',
-  // },
   content: {
     display: 'flex',
     flexDirection: 'column',
@@ -67,6 +63,9 @@ const useStyles = makeStyles<Theme, StyleProps>(theme => ({
     [theme.breakpoints.down('xs')]: {
       fontSize: theme.typography.pxToRem(18),
       padding: theme.spacing(2, 4),
+      '&:nth-child(2)': {
+        marginTop: theme.spacing(6),
+      },
     },
   },
   description: props => ({
@@ -121,13 +120,17 @@ const HeroAction: React.FC<Props> = ({ classes, ...props }) => {
             </Description>
           )}
           <Grid container justify="center">
-            <Button onClick={() => onBtnClick(props.openModal, button)} className={styles.btn} size="medium">
+            <Button
+              onClick={() => onBtnClick(props.openModal, button)}
+              className={cx(styles.btn, classes?.button)}
+              size="medium"
+            >
               {button?.buttonText}
             </Button>
             {secondButton?.buttonText && (
               <OutlinedButton
                 onClick={() => onBtnClick(props.openModal, secondButton)}
-                className={styles.btn}
+                className={cx(styles.btn, classes?.button)}
                 size="medium"
               >
                 {secondButton?.buttonText}

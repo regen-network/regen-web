@@ -43,10 +43,16 @@ const useStyles = makeStyles((theme: Theme) => ({
         textDecoration: 'underline',
       },
     },
+    [theme.breakpoints.down('xs')]: {
+      marginTop: theme.spacing(20),
+    },
   },
   bottomHeroMain: {
     maxWidth: theme.spacing(200),
     minHeight: 0,
+  },
+  bottomHeroButton: {
+    width: theme.spacing(72),
   },
 }));
 
@@ -107,6 +113,7 @@ const LandStewards = (): JSX.Element => {
           classes={{
             main: styles.bottomHeroMain,
             section: styles.bottomHeroSection,
+            button: styles.bottomHeroButton,
           }}
           isBanner
           img={content?.moreQuestionsSection?.image?.image?.asset?.url || ''}
@@ -116,15 +123,9 @@ const LandStewards = (): JSX.Element => {
       )}
 
       <FixedFooter justify="flex-end">
-        {content?.moreQuestionsSection?.secondButton?.buttonLink && (
-          <ContainedButton
-            onClick={() =>
-              openModal(content?.moreQuestionsSection?.secondButton?.buttonLink?.buttonHref || '')
-            }
-          >
-            open
-          </ContainedButton>
-        )}
+        <ContainedButton onClick={() => openModal(content?.footerLink || '')}>
+          {content?.footerButtonText}
+        </ContainedButton>
       </FixedFooter>
       <Modal open={open} onClose={closeModal} className={styles.modal}>
         <iframe title="airtable-signup-land-steward" src={modalLink} />

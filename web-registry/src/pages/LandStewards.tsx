@@ -48,11 +48,26 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   bottomHeroMain: {
-    maxWidth: theme.spacing(200),
+    maxWidth: theme.spacing(192),
     minHeight: 0,
   },
+  bottomHeroDescription: {
+    [theme.breakpoints.down('xs')]: {
+      fontSize: theme.typography.pxToRem(20),
+    },
+  },
   bottomHeroButton: {
-    width: theme.spacing(72),
+    paddingLeft: theme.spacing(4),
+    paddingRight: theme.spacing(4),
+    [theme.breakpoints.up('sm')]: {
+      width: theme.spacing(76),
+    },
+    [theme.breakpoints.down('xs')]: {
+      width: theme.spacing(72),
+      '&:first-child': {
+        marginTop: theme.spacing(8),
+      },
+    },
   },
 }));
 
@@ -113,6 +128,7 @@ const LandStewards = (): JSX.Element => {
           classes={{
             main: styles.bottomHeroMain,
             section: styles.bottomHeroSection,
+            description: styles.bottomHeroDescription,
             button: styles.bottomHeroButton,
           }}
           isBanner

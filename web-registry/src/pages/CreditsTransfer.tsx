@@ -81,12 +81,7 @@ const CreditsTransfer: React.FC<{
     errorPolicy: 'ignore',
   });
 
-  const {
-    data: partiesData,
-    loading: partiesLoading,
-    error: partiesError,
-    refetch: refetchParties,
-  } = useAllPartiesQuery({
+  const { data: partiesData, loading: partiesLoading, error: partiesError } = useAllPartiesQuery({
     errorPolicy: 'ignore',
   });
 
@@ -103,13 +98,9 @@ const CreditsTransfer: React.FC<{
   const [showResult, setShowResult] = useState(false);
 
   useEffect(() => {
-    if (passedBuyerWalletId && passedBuyerWalletId !== buyerWalletId) {
-      setBuyerWalletId(passedBuyerWalletId);
-    }
-    if (!partiesData?.allParties?.nodes?.find(node => node?.id === passedBuyerWalletId)) {
-      refetchParties();
-    }
-  }, [passedBuyerWalletId]); // eslint-disable-line react-hooks/exhaustive-deps
+    const buyerParty = partiesData?.allParties?.nodes?.find(node => node?.walletId === buyerWalletId);
+    setAddressId(buyerParty?.addressId);
+  }, [partiesData, buyerWalletId]);
 
   const { data: availableCreditsData, refetch: refetchAvailableCredits } = useGetAvailableCreditsQuery({
     errorPolicy: 'ignore',

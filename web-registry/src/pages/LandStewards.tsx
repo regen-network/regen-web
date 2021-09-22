@@ -19,6 +19,7 @@ import {
   HeroAction,
 } from '../components/molecules';
 import landStewardsHero from '../assets/land-stewards-top.jpg';
+import moreQuestionsBg from '../assets/more-questions-bg.png';
 
 const useStyles = makeStyles((theme: Theme) => ({
   modal: {
@@ -131,6 +132,7 @@ const LandStewards = (): JSX.Element => {
             button: styles.bottomHeroButton,
           }}
           isBanner
+          // img={moreQuestionsBg}
           img={content?.moreQuestionsSection?.image?.image?.asset?.url || ''}
           bottomBanner={content?.moreQuestionsSection}
           openModal={openModal}

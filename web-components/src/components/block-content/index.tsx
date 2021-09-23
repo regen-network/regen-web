@@ -1,8 +1,7 @@
 import React from 'react';
 import BlockContent from '@sanity/block-content-to-react';
 import { makeStyles, Theme } from '@material-ui/core';
-import cx from 'clsx';
-import Tooltip from '../tooltip';
+import { UnderlineTooltip } from '../tooltip/UnderlineTooltip';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -13,24 +12,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       marginBottom: 0,
     },
   },
-  underline: {
-    color: theme.palette.info.contrastText,
-    borderBottom: `3px dashed ${theme.palette.info.contrastText}`,
-  },
-  tooltip: {
-    cursor: 'pointer',
-  },
 }));
-
-const UnderlineTooltip: React.FC = (props: any) => {
-  const styles = useStyles();
-
-  return (
-    <Tooltip arrow placement="top" title={props.title} className={cx(props.title && styles.tooltip)}>
-      <span className={styles.underline}>{props.children}</span>
-    </Tooltip>
-  );
-};
 
 const CustomBlockContent: React.FC<{ content?: any; tooltipText?: string }> = ({ content, tooltipText }) => {
   const styles = useStyles();

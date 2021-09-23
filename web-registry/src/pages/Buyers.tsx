@@ -46,8 +46,8 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const BuyersPage = (): JSX.Element => {
   const styles = useStyles();
-  const [open, setOpen] = useState(false);
   const location = useLocation();
+  const [open, setOpen] = useState(false);
   const { data } = useAllBuyersPageQuery({ client });
   const content = data?.allBuyersPage?.[0];
 

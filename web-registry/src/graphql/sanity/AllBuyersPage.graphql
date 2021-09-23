@@ -1,0 +1,18 @@
+query allBuyersPage {
+  allBuyersPage {
+    heroSection {
+      ...heroSectionFields
+    }
+
+
+    featuredSection {
+      ...featuredSectionFields
+    }
+
+    footerButtonText
+    footerLink
+    metadata {
+      ...pageMetadataFields
+    }
+  }
+}

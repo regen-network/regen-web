@@ -122,13 +122,14 @@ const RegistryNav: React.FC = () => {
     '/certificate': theme.palette.primary.main,
     '/create-methodology': theme.palette.primary.main,
     '/create-credit-class': theme.palette.primary.main,
-    '/methodology-review-process': theme.palette.primary.main,
     '/land-stewards': theme.palette.primary.main,
+    '/methodology-review-process': theme.palette.primary.main,
   };
 
   const isTransparent =
     pathname === '/' ||
     [
+      '/buyers',
       '/create-methodology',
       '/methodology-review-process',
       '/create-credit-class',

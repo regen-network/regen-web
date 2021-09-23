@@ -102,7 +102,7 @@ const LandStewards = (): JSX.Element => {
         location={location}
         description={siteMetadata.description}
         title={siteMetadata.title}
-        imageUrl={content?.metadata?.openGraphImage?.asset?.url || landStewardsHero} // TODO
+        imageUrl={content?.metadata?.openGraphImage?.asset?.url || landStewardsHero}
         siteMetadata={siteMetadata}
       />
       <HeroTitle

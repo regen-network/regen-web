@@ -2,6 +2,7 @@ export * from './Additionality';
 export * from './Admin';
 export * from './BasicInfo';
 export * from './BuyerCreate';
+export * from './Buyers';
 export * from './Certificate';
 export * from './ChooseCreditClass';
 export * from './CreateCreditClass';

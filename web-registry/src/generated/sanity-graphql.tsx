@@ -142,6 +142,56 @@ export type BuyerSorting = {
   ctaButton?: Maybe<ButtonSorting>;
 };
 
+export type BuyersPage = Document & {
+  __typename?: 'BuyersPage';
+  /** Document ID */
+  _id?: Maybe<Scalars['ID']>;
+  /** Document type */
+  _type?: Maybe<Scalars['String']>;
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars['DateTime']>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars['DateTime']>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars['String']>;
+  _key?: Maybe<Scalars['String']>;
+  heroSection?: Maybe<HeroSection>;
+  featuredSection?: Maybe<FeaturedSection>;
+  footerButtonText?: Maybe<Scalars['String']>;
+  /** This opens in a modal */
+  footerLink?: Maybe<Scalars['String']>;
+  metadata?: Maybe<PageMetadata>;
+};
+
+export type BuyersPageFilter = {
+  /** Apply filters on document level */
+  _?: Maybe<Sanity_DocumentFilter>;
+  _id?: Maybe<IdFilter>;
+  _type?: Maybe<StringFilter>;
+  _createdAt?: Maybe<DatetimeFilter>;
+  _updatedAt?: Maybe<DatetimeFilter>;
+  _rev?: Maybe<StringFilter>;
+  _key?: Maybe<StringFilter>;
+  heroSection?: Maybe<HeroSectionFilter>;
+  featuredSection?: Maybe<FeaturedSectionFilter>;
+  footerButtonText?: Maybe<StringFilter>;
+  footerLink?: Maybe<StringFilter>;
+  metadata?: Maybe<PageMetadataFilter>;
+};
+
+export type BuyersPageSorting = {
+  _id?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  _createdAt?: Maybe<SortOrder>;
+  _updatedAt?: Maybe<SortOrder>;
+  _rev?: Maybe<SortOrder>;
+  _key?: Maybe<SortOrder>;
+  heroSection?: Maybe<HeroSectionSorting>;
+  footerButtonText?: Maybe<SortOrder>;
+  footerLink?: Maybe<SortOrder>;
+  metadata?: Maybe<PageMetadataSorting>;
+};
+
 export type Card = {
   __typename?: 'Card';
   _key?: Maybe<Scalars['String']>;
@@ -1510,6 +1560,7 @@ export type RootQuery = {
   MethodologyReviewProcessPage?: Maybe<MethodologyReviewProcessPage>;
   Methodology?: Maybe<Methodology>;
   CreditClass?: Maybe<CreditClass>;
+  BuyersPage?: Maybe<BuyersPage>;
   LandStewardsPage?: Maybe<LandStewardsPage>;
   FeaturedSection?: Maybe<FeaturedSection>;
   SanityImageAsset?: Maybe<SanityImageAsset>;
@@ -1531,6 +1582,7 @@ export type RootQuery = {
   allMethodologyReviewProcessPage: Array<MethodologyReviewProcessPage>;
   allMethodology: Array<Methodology>;
   allCreditClass: Array<CreditClass>;
+  allBuyersPage: Array<BuyersPage>;
   allLandStewardsPage: Array<LandStewardsPage>;
   allFeaturedSection: Array<FeaturedSection>;
   allSanityImageAsset: Array<SanityImageAsset>;
@@ -1615,6 +1667,11 @@ export type RootQueryMethodologyArgs = {
 
 
 export type RootQueryCreditClassArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type RootQueryBuyersPageArgs = {
   id: Scalars['ID'];
 };
 
@@ -1767,6 +1824,14 @@ export type RootQueryAllMethodologyArgs = {
 export type RootQueryAllCreditClassArgs = {
   where?: Maybe<CreditClassFilter>;
   sort?: Maybe<Array<CreditClassSorting>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+};
+
+
+export type RootQueryAllBuyersPageArgs = {
+  where?: Maybe<BuyersPageFilter>;
+  sort?: Maybe<Array<BuyersPageSorting>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
@@ -2429,6 +2494,27 @@ export type TimelineSectionSorting = {
   _type?: Maybe<SortOrder>;
   header?: Maybe<SortOrder>;
 };
+
+export type AllBuyersPageQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllBuyersPageQuery = (
+  { __typename?: 'RootQuery' }
+  & { allBuyersPage: Array<(
+    { __typename?: 'BuyersPage' }
+    & Pick<BuyersPage, 'footerButtonText' | 'footerLink'>
+    & { heroSection?: Maybe<(
+      { __typename?: 'HeroSection' }
+      & HeroSectionFieldsFragment
+    )>, featuredSection?: Maybe<(
+      { __typename?: 'FeaturedSection' }
+      & FeaturedSectionFieldsFragment
+    )>, metadata?: Maybe<(
+      { __typename?: 'PageMetadata' }
+      & PageMetadataFieldsFragment
+    )> }
+  )> }
+);
 
 export type AllCreateCreditClassPageQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -3163,6 +3249,52 @@ export const TimelineItemFieldsFragmentDoc = gql`
   }
 }
     ${TagFieldsFragmentDoc}`;
+export const AllBuyersPageDocument = gql`
+    query allBuyersPage {
+  allBuyersPage {
+    heroSection {
+      ...heroSectionFields
+    }
+    featuredSection {
+      ...featuredSectionFields
+    }
+    footerButtonText
+    footerLink
+    metadata {
+      ...pageMetadataFields
+    }
+  }
+}
+    ${HeroSectionFieldsFragmentDoc}
+${FeaturedSectionFieldsFragmentDoc}
+${PageMetadataFieldsFragmentDoc}`;
+
+/**
+ * __useAllBuyersPageQuery__
+ *
+ * To run a query within a React component, call `useAllBuyersPageQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAllBuyersPageQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAllBuyersPageQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useAllBuyersPageQuery(baseOptions?: Apollo.QueryHookOptions<AllBuyersPageQuery, AllBuyersPageQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AllBuyersPageQuery, AllBuyersPageQueryVariables>(AllBuyersPageDocument, options);
+      }
+export function useAllBuyersPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllBuyersPageQuery, AllBuyersPageQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AllBuyersPageQuery, AllBuyersPageQueryVariables>(AllBuyersPageDocument, options);
+        }
+export type AllBuyersPageQueryHookResult = ReturnType<typeof useAllBuyersPageQuery>;
+export type AllBuyersPageLazyQueryHookResult = ReturnType<typeof useAllBuyersPageLazyQuery>;
+export type AllBuyersPageQueryResult = Apollo.QueryResult<AllBuyersPageQuery, AllBuyersPageQueryVariables>;
 export const AllCreateCreditClassPageDocument = gql`
     query allCreateCreditClassPage {
   allCreateCreditClassPage {

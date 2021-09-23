@@ -12,6 +12,7 @@ import { useAllBuyersPageQuery } from '../generated/sanity-graphql';
 
 import { HeroTitle, FeaturedSection, HeroAction } from '../components/molecules';
 
+import Tooltip from 'web-components/lib/components/tooltip';
 import SEO from 'web-components/lib/components/seo';
 import MoreInfoForm from 'web-components/lib/components/form/MoreInfoForm';
 import FixedFooter from 'web-components/lib/components/fixed-footer';
@@ -20,7 +21,7 @@ import EmailIcon from 'web-components/lib/components/icons/EmailIcon';
 import Modal from 'web-components/lib/components/modal';
 import Banner from 'web-components/lib/components/banner';
 
-import buyersHero from '../assets/maximize-impact.png';
+import buyersHero from '../assets/buyers-top.jpg';
 
 const useStyles = makeStyles((theme: Theme) => ({
   heroMain: {
@@ -89,13 +90,29 @@ const BuyersPage = (): JSX.Element => {
         isBanner
         title={content?.heroSection?.title}
         descriptionRaw={content?.heroSection?.descriptionRaw}
+
+        // body={
+        //   <span>
+        //     {content.body.start}{' '}
+        //     <Tooltip
+        //       arrow
+        //       placement="top"
+        //       title="Ecosystem services are the benefits people receive from healthy ecosystems, including clean air and water, resilient food systems, and mitigation of extreme climate events."
+        //     >
+        //       <span className={classes.tooltip}>{content.body.underlined}</span>
+        //     </Tooltip>{' '}
+        //     {content.body.end}
+        //   </span>
+        // }
+
         img={buyersHero}
         linearGradient="linear-gradient(180deg, rgba(255, 249, 238, 0.74) 0%, rgba(255, 249, 238, 0) 27.6%), linear-gradient(209.5deg, #FAEBD1 12.63%, #7DC9BF 44.03%, #515D89 75.43%)"
       />
-      {/* <TopSection /> */}
       {/* <ImageGridSection /> */}
+
       {/* <ApproachSection />
       <InvestingSection /> */}
+
       {/* <FeaturedSection /> */}
       {/* <ComingSoonSection /> */}
       {/* <FAQSection /> */}

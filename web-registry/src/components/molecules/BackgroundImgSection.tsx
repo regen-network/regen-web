@@ -29,39 +29,46 @@ const useStyles = makeStyles<Theme, StyleProps>(theme => ({
     '-o-background-size': 'cover !important',
     backgroundSize: 'cover !important',
   },
-  main: props => ({
-    display: 'flex',
-    flexFlow: 'column nowrap',
-    [theme.breakpoints.up('sm')]: {
-      minHeight: props.isBanner ? theme.spacing(125) : 'inherit',
-    },
-    [theme.breakpoints.down('xs')]: {
-      minHeight: props.isBanner ? '90vh' : 'inherit',
-    },
-  }),
   section: {
     zIndex: 1,
     position: 'relative',
   },
+  main: props => ({
+    display: 'flex',
+    flexFlow: 'column nowrap',
+    [theme.breakpoints.up('sm')]: {
+      height: props.isBanner ? theme.spacing(125) : 'inherit',
+    },
+    [theme.breakpoints.down('xs')]: {
+      height: props.isBanner ? '90vh' : 'inherit',
+    },
+  }),
+  backgroundGradient: props => ({
+    position: 'relative',
+    '&::after': {
+      content: '""',
+      top: 0,
+      left: 0,
+      position: 'absolute',
+      backgroundImage: props.linearGradient,
+      height: '100%',
+      width: '100%',
+      opacity: 0.8,
+    },
+  }),
 }));
 
 const BackgroundImgSection: React.FC<Props> = ({ classes, ...props }) => {
   const styles = useStyles({ isBanner: !!props.isBanner, linearGradient: props?.linearGradient });
-  let background = `url(${props.img}) no-repeat center center`;
-  if (props.linearGradient) {
-    background = `${props?.linearGradient}, ${background}`;
-  }
 
   return (
-    <CardMedia
-      // image={props.linearGradient ? undefined : props.img}
-      classes={{ root: cx(styles.root, classes?.root) }}
-      style={{ background }}
-    >
-      <Section classes={{ root: cx(styles.section, classes?.section) }}>
-        <div className={cx(styles.main, classes && classes.main)}>{props.children}</div>
-      </Section>
-    </CardMedia>
+    <div className={props?.linearGradient ? styles.backgroundGradient : ''}>
+      <CardMedia image={props.img} classes={{ root: cx(styles.root, classes?.root) }}>
+        <Section classes={{ root: cx(styles.section, classes?.section) }}>
+          <div className={cx(styles.main, classes && classes.main)}>{props.children}</div>
+        </Section>
+      </CardMedia>
+    </div>
   );
 };
 

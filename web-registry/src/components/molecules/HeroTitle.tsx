@@ -12,6 +12,7 @@ type Props = {
   title?: string | null;
   descriptionRaw?: Maybe<Scalars['JSON']> | string;
   linearGradient?: string;
+  tooltipText?: Maybe<string>;
   isBanner?: boolean;
   classes?: {
     title?: string;
@@ -72,7 +73,7 @@ const HeroTitle: React.FC<Props> = ({ classes, ...props }) => {
       )}
       {props.descriptionRaw && (
         <Typography variant="h4" className={cx(styles.description, classes?.description)}>
-          <BlockContent content={props.descriptionRaw} />
+          <BlockContent content={props.descriptionRaw} tooltipText={props?.tooltipText || ''} />
         </Typography>
       )}
     </BackgroundImgSection>

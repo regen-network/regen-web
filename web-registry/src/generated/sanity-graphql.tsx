@@ -946,18 +946,22 @@ export type HeroSection = {
   _type?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
   descriptionRaw?: Maybe<Scalars['JSON']>;
+  /** (Optional) If any text is underlined in the description, it will show this message when hovered */
+  tooltipText?: Maybe<Scalars['String']>;
 };
 
 export type HeroSectionFilter = {
   _key?: Maybe<StringFilter>;
   _type?: Maybe<StringFilter>;
   title?: Maybe<StringFilter>;
+  tooltipText?: Maybe<StringFilter>;
 };
 
 export type HeroSectionSorting = {
   _key?: Maybe<SortOrder>;
   _type?: Maybe<SortOrder>;
   title?: Maybe<SortOrder>;
+  tooltipText?: Maybe<SortOrder>;
 };
 
 export type HomePage = Document & {
@@ -2921,7 +2925,7 @@ export type FeaturedSectionFieldsFragment = (
 
 export type HeroSectionFieldsFragment = (
   { __typename?: 'HeroSection' }
-  & Pick<HeroSection, 'title' | 'descriptionRaw'>
+  & Pick<HeroSection, 'title' | 'descriptionRaw' | 'tooltipText'>
 );
 
 export type ImageBoldTextLabelFieldsFragment = (
@@ -3170,6 +3174,7 @@ export const HeroSectionFieldsFragmentDoc = gql`
     fragment heroSectionFields on HeroSection {
   title
   descriptionRaw
+  tooltipText
 }
     `;
 export const ImageBoldTextLabelFieldsFragmentDoc = gql`

@@ -12,7 +12,6 @@ import { useAllBuyersPageQuery } from '../generated/sanity-graphql';
 
 import { HeroTitle, FeaturedSection, HeroAction } from '../components/molecules';
 
-import Tooltip from 'web-components/lib/components/tooltip';
 import SEO from 'web-components/lib/components/seo';
 import MoreInfoForm from 'web-components/lib/components/form/MoreInfoForm';
 import FixedFooter from 'web-components/lib/components/fixed-footer';
@@ -32,17 +31,17 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
 
-  callButton: {
-    marginLeft: theme.spacing(4.25),
-    [theme.breakpoints.down('xs')]: {
-      padding: `${theme.spacing(1.875)} ${theme.spacing(7.5)}`,
-      fontSize: '1.125rem',
-    },
-    [theme.breakpoints.up('sm')]: {
-      padding: `${theme.spacing(2.5)} ${theme.spacing(12.5)}`,
-      fontSize: '1.3125rem',
-    },
-  },
+  // callButton: {
+  //   marginLeft: theme.spacing(4.25),
+  //   [theme.breakpoints.down('xs')]: {
+  //     padding: `${theme.spacing(1.875)} ${theme.spacing(7.5)}`,
+  //     fontSize: '1.125rem',
+  //   },
+  //   [theme.breakpoints.up('sm')]: {
+  //     padding: `${theme.spacing(2.5)} ${theme.spacing(12.5)}`,
+  //     fontSize: '1.3125rem',
+  //   },
+  // },
 }));
 
 const BuyersPage = (): JSX.Element => {
@@ -90,21 +89,7 @@ const BuyersPage = (): JSX.Element => {
         isBanner
         title={content?.heroSection?.title}
         descriptionRaw={content?.heroSection?.descriptionRaw}
-
-        // body={
-        //   <span>
-        //     {content.body.start}{' '}
-        //     <Tooltip
-        //       arrow
-        //       placement="top"
-        //       title="Ecosystem services are the benefits people receive from healthy ecosystems, including clean air and water, resilient food systems, and mitigation of extreme climate events."
-        //     >
-        //       <span className={classes.tooltip}>{content.body.underlined}</span>
-        //     </Tooltip>{' '}
-        //     {content.body.end}
-        //   </span>
-        // }
-
+        tooltipText={content?.heroSection?.tooltipText}
         img={buyersHero}
         linearGradient="linear-gradient(180deg, rgba(255, 249, 238, 0.74) 0%, rgba(255, 249, 238, 0) 27.6%), linear-gradient(209.5deg, #FAEBD1 12.63%, #7DC9BF 44.03%, #515D89 75.43%)"
       />

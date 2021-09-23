@@ -1,9 +1,10 @@
 import React from 'react';
 import BlockContent from '@sanity/block-content-to-react';
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
+
 import { UnderlineTooltip } from '../tooltip/UnderlineTooltip';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     '& p:first-child': {
       marginTop: 0,

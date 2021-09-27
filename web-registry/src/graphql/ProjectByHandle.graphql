@@ -34,12 +34,6 @@ fragment organizationFields on Organization {
   }
 }
 
-# fragment userFields on User {
-#   id
-#   email
-#   phoneNumber
-# }
-
 fragment creditVintageFields on CreditVintage {
   id
   createdAt

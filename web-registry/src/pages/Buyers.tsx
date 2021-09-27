@@ -5,13 +5,6 @@ import { useLocation } from 'react-router-dom';
 import { client } from '../sanity';
 import { useAllBuyersPageQuery } from '../generated/sanity-graphql';
 
-// import ImageGridSection from '../sections/buyers/ImageGridSection';
-
-// import ComingSoonSection from '../sections/shared/ComingSoonSection';
-// import FAQSection from '../sections/buyers/FAQSection';
-
-import { HeroTitle, FeaturedSection, HeroAction } from '../components/molecules';
-
 import SEO from 'web-components/lib/components/seo';
 import MoreInfoForm from 'web-components/lib/components/form/MoreInfoForm';
 import FixedFooter from 'web-components/lib/components/fixed-footer';
@@ -20,7 +13,15 @@ import EmailIcon from 'web-components/lib/components/icons/EmailIcon';
 import Modal from 'web-components/lib/components/modal';
 import Banner from 'web-components/lib/components/banner';
 
+// import ImageGridSection from '../sections/buyers/ImageGridSection';
+// import FAQSection from '../sections/buyers/FAQSection';
+
+import { HeroTitle, FeaturedSection, HeroAction } from '../components/molecules';
+import { MoreProjectsSection } from '../components/organisms';
+
 import buyersHero from '../assets/buyers-top.jpg';
+import mock from '../mocks/mock.json';
+import { Project } from '../mocks';
 
 const useStyles = makeStyles((theme: Theme) => ({
   heroMain: {
@@ -42,14 +43,22 @@ const useStyles = makeStyles((theme: Theme) => ({
   //     fontSize: '1.3125rem',
   //   },
   // },
+
+  title: {
+    [theme.breakpoints.down('xs')]: {
+      fontSize: theme.typography.pxToRem(32),
+    },
+  },
 }));
 
 const BuyersPage = (): JSX.Element => {
   const styles = useStyles();
   const location = useLocation();
   const [open, setOpen] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
   const { data } = useAllBuyersPageQuery({ client });
   const content = data?.allBuyersPage?.[0];
+  const projects: Project[] = mock?.projects;
 
   const siteMetadata = {
     title: `For Buyers`,
@@ -71,6 +80,18 @@ const BuyersPage = (): JSX.Element => {
       setOpen(false);
     }
   }, [location]);
+
+  const getAllProjects = (): JSX.Element => {
+    const projects: Project[] = mock?.projects;
+
+    return projects?.length > 0 ? (
+      <div className="topo-background">
+        <MoreProjectsSection classes={{ title: styles.title }} title={'Projects'} projects={projects} />
+      </div>
+    ) : (
+      <></>
+    );
+  };
 
   return (
     <>
@@ -98,13 +119,19 @@ const BuyersPage = (): JSX.Element => {
       {/* <ApproachSection />
       <InvestingSection /> */}
 
-      {/* <FeaturedSection /> */}
-      {/* <ComingSoonSection /> */}
+      {content?.featuredSection && <FeaturedSection content={content?.featuredSection} />}
+      {projects?.length > 0 ? (
+        <div className="topo-background">
+          <MoreProjectsSection classes={{ title: styles.title }} title={'Projects'} projects={projects} />
+        </div>
+      ) : (
+        <></>
+      )}
       {/* <FAQSection /> */}
       <FixedFooter justify="flex-end">
         <>
           <ContainedButton onClick={handleOpen} startIcon={<EmailIcon />}>
-            send me more info
+            {content?.footerButtonText}
           </ContainedButton>
           {/* {<OutlinedButton className={classes.callButton} startIcon={<PhoneIcon />}>schedule a call</OutlinedButton>} */}
         </>
@@ -113,17 +140,10 @@ const BuyersPage = (): JSX.Element => {
         <MoreInfoForm
           apiUrl={process.env.REACT_APP_API_URI || ''}
           onClose={handleClose}
-          onSubmit={() => {
-            // navigate('/buyers', {
-            //   state: { submitted: true },
-            //   replace: true,
-            // });
-          }}
+          onSubmit={() => setSubmitted(true)}
         />
       </Modal>
-      {location && location.state && location.state.submitted && (
-        <Banner text="Thanks for submitting your information!" />
-      )}
+      {submitted && <Banner text="Thanks for submitting your information!" />}
     </>
   );
 };

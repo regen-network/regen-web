@@ -140,8 +140,9 @@ const RoleField: React.FC<Props> = ({
   const saveOrganization = async (org: any): Promise<void> => {
     var savedOrg = await onSaveOrganization(org);
     closeOrganizationModal();
+    form.setFieldValue(field.name, savedOrg);
     for (const fieldName in form.values) {
-      if (form.values[fieldName].id === savedOrg.id) {
+      if (form.values[fieldName].id === savedOrg.id && `['${fieldName}']` !== field.name) {
         form.setFieldValue(`['${fieldName}']`, savedOrg);
       }
     }
@@ -150,8 +151,9 @@ const RoleField: React.FC<Props> = ({
   const saveIndividual = async (user: any): Promise<void> => {
     var savedUser = await onSaveIndividual(user);
     closeIndividualModal();
+    form.setFieldValue(field.name, savedUser);
     for (const fieldName in form.values) {
-      if (form.values[fieldName].id === savedUser.id || field.name === `['${fieldName}']`) {
+      if (form.values[fieldName].id === savedUser.id && `['${fieldName}']` !== field.name) {
         form.setFieldValue(`['${fieldName}']`, savedUser);
       }
     }

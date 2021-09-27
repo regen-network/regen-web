@@ -8,9 +8,10 @@ query allBuyersPage {
     featuredSection {
       ...featuredSectionFields
     }
-
+    faqSection {
+      ...bottomBannerFields
+    }
     footerButtonText
-    footerLink
     metadata {
       ...pageMetadataFields
     }

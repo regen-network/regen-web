@@ -31,6 +31,9 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingBottom: theme.spacing(12),
     },
   },
+  bottomHeroSection: {
+    paddingTop: 0,
+  },
 
   // callButton: {
   //   marginLeft: theme.spacing(4.25),
@@ -81,18 +84,6 @@ const BuyersPage = (): JSX.Element => {
     }
   }, [location]);
 
-  const getAllProjects = (): JSX.Element => {
-    const projects: Project[] = mock?.projects;
-
-    return projects?.length > 0 ? (
-      <div className="topo-background">
-        <MoreProjectsSection classes={{ title: styles.title }} title={'Projects'} projects={projects} />
-      </div>
-    ) : (
-      <></>
-    );
-  };
-
   return (
     <>
       <SEO
@@ -127,7 +118,16 @@ const BuyersPage = (): JSX.Element => {
       ) : (
         <></>
       )}
-      {/* <FAQSection /> */}
+      {content?.faqSection && (
+        <HeroAction
+          classes={{ section: styles.bottomHeroSection }}
+          isBanner
+          img={content?.faqSection?.image?.image?.asset?.url || ''}
+          bottomBanner={content?.faqSection}
+          openModal={() => {}}
+        />
+      )}
+
       <FixedFooter justify="flex-end">
         <>
           <ContainedButton onClick={handleOpen} startIcon={<EmailIcon />}>

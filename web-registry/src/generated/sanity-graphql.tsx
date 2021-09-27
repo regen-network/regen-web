@@ -157,6 +157,7 @@ export type BuyersPage = Document & {
   _key?: Maybe<Scalars['String']>;
   heroSection?: Maybe<HeroSection>;
   featuredSection?: Maybe<FeaturedSection>;
+  faqSection?: Maybe<BottomBanner>;
   footerButtonText?: Maybe<Scalars['String']>;
   /** This opens in a modal */
   footerLink?: Maybe<Scalars['String']>;
@@ -174,6 +175,7 @@ export type BuyersPageFilter = {
   _key?: Maybe<StringFilter>;
   heroSection?: Maybe<HeroSectionFilter>;
   featuredSection?: Maybe<FeaturedSectionFilter>;
+  faqSection?: Maybe<BottomBannerFilter>;
   footerButtonText?: Maybe<StringFilter>;
   footerLink?: Maybe<StringFilter>;
   metadata?: Maybe<PageMetadataFilter>;
@@ -187,6 +189,7 @@ export type BuyersPageSorting = {
   _rev?: Maybe<SortOrder>;
   _key?: Maybe<SortOrder>;
   heroSection?: Maybe<HeroSectionSorting>;
+  faqSection?: Maybe<BottomBannerSorting>;
   footerButtonText?: Maybe<SortOrder>;
   footerLink?: Maybe<SortOrder>;
   metadata?: Maybe<PageMetadataSorting>;
@@ -2513,6 +2516,9 @@ export type AllBuyersPageQuery = (
     )>, featuredSection?: Maybe<(
       { __typename?: 'FeaturedSection' }
       & FeaturedSectionFieldsFragment
+    )>, faqSection?: Maybe<(
+      { __typename?: 'BottomBanner' }
+      & BottomBannerFieldsFragment
     )>, metadata?: Maybe<(
       { __typename?: 'PageMetadata' }
       & PageMetadataFieldsFragment
@@ -3263,6 +3269,9 @@ export const AllBuyersPageDocument = gql`
     featuredSection {
       ...featuredSectionFields
     }
+    faqSection {
+      ...bottomBannerFields
+    }
     footerButtonText
     footerLink
     metadata {
@@ -3272,6 +3281,7 @@ export const AllBuyersPageDocument = gql`
 }
     ${HeroSectionFieldsFragmentDoc}
 ${FeaturedSectionFieldsFragmentDoc}
+${BottomBannerFieldsFragmentDoc}
 ${PageMetadataFieldsFragmentDoc}`;
 
 /**

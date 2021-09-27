@@ -1066,6 +1066,18 @@
             "deprecationReason": null
           },
           {
+            "name": "faqSection",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "BottomBanner",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "footerButtonText",
             "description": null,
             "args": [],
@@ -1220,6 +1232,16 @@
             "defaultValue": null
           },
           {
+            "name": "faqSection",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "BottomBannerFilter",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "footerButtonText",
             "description": null,
             "type": {
@@ -1326,6 +1348,16 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "HeroSectionSorting",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "faqSection",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "BottomBannerSorting",
               "ofType": null
             },
             "defaultValue": null

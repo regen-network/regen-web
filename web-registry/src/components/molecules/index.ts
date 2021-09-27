@@ -9,3 +9,4 @@ export * from './TwoImageSection';
 export * from './PracticesOutcomesSection';
 export * from './TimelineSection';
 export * from './FeaturedSection';
+export * from './ImageGridSection';

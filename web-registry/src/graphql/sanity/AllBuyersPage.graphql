@@ -3,8 +3,9 @@ query allBuyersPage {
     heroSection {
       ...heroSectionFields
     }
-
-
+    imageGridSection {
+      ...imageGridSectionFields
+    }
     featuredSection {
       ...featuredSectionFields
     }

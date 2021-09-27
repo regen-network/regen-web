@@ -156,11 +156,10 @@ export type BuyersPage = Document & {
   _rev?: Maybe<Scalars['String']>;
   _key?: Maybe<Scalars['String']>;
   heroSection?: Maybe<HeroSection>;
+  imageGridSection?: Maybe<ImageGridSection>;
   featuredSection?: Maybe<FeaturedSection>;
   faqSection?: Maybe<BottomBanner>;
   footerButtonText?: Maybe<Scalars['String']>;
-  /** This opens in a modal */
-  footerLink?: Maybe<Scalars['String']>;
   metadata?: Maybe<PageMetadata>;
 };
 
@@ -174,10 +173,10 @@ export type BuyersPageFilter = {
   _rev?: Maybe<StringFilter>;
   _key?: Maybe<StringFilter>;
   heroSection?: Maybe<HeroSectionFilter>;
+  imageGridSection?: Maybe<ImageGridSectionFilter>;
   featuredSection?: Maybe<FeaturedSectionFilter>;
   faqSection?: Maybe<BottomBannerFilter>;
   footerButtonText?: Maybe<StringFilter>;
-  footerLink?: Maybe<StringFilter>;
   metadata?: Maybe<PageMetadataFilter>;
 };
 
@@ -189,9 +188,9 @@ export type BuyersPageSorting = {
   _rev?: Maybe<SortOrder>;
   _key?: Maybe<SortOrder>;
   heroSection?: Maybe<HeroSectionSorting>;
+  imageGridSection?: Maybe<ImageGridSectionSorting>;
   faqSection?: Maybe<BottomBannerSorting>;
   footerButtonText?: Maybe<SortOrder>;
-  footerLink?: Maybe<SortOrder>;
   metadata?: Maybe<PageMetadataSorting>;
 };
 
@@ -1061,6 +1060,68 @@ export type ImageFilter = {
   crop?: Maybe<SanityImageCropFilter>;
 };
 
+export type ImageGridItem = Document & {
+  __typename?: 'ImageGridItem';
+  /** Document ID */
+  _id?: Maybe<Scalars['ID']>;
+  /** Document type */
+  _type?: Maybe<Scalars['String']>;
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars['DateTime']>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars['DateTime']>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars['String']>;
+  _key?: Maybe<Scalars['String']>;
+  header?: Maybe<Scalars['String']>;
+  descriptionRaw?: Maybe<Scalars['JSON']>;
+  image?: Maybe<CustomImage>;
+};
+
+export type ImageGridItemFilter = {
+  /** Apply filters on document level */
+  _?: Maybe<Sanity_DocumentFilter>;
+  _id?: Maybe<IdFilter>;
+  _type?: Maybe<StringFilter>;
+  _createdAt?: Maybe<DatetimeFilter>;
+  _updatedAt?: Maybe<DatetimeFilter>;
+  _rev?: Maybe<StringFilter>;
+  _key?: Maybe<StringFilter>;
+  header?: Maybe<StringFilter>;
+  image?: Maybe<CustomImageFilter>;
+};
+
+export type ImageGridItemSorting = {
+  _id?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  _createdAt?: Maybe<SortOrder>;
+  _updatedAt?: Maybe<SortOrder>;
+  _rev?: Maybe<SortOrder>;
+  _key?: Maybe<SortOrder>;
+  header?: Maybe<SortOrder>;
+  image?: Maybe<CustomImageSorting>;
+};
+
+export type ImageGridSection = {
+  __typename?: 'ImageGridSection';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  backgroundImage?: Maybe<CustomImage>;
+  items?: Maybe<Array<Maybe<ImageGridItem>>>;
+};
+
+export type ImageGridSectionFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  backgroundImage?: Maybe<CustomImageFilter>;
+};
+
+export type ImageGridSectionSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  backgroundImage?: Maybe<CustomImageSorting>;
+};
+
 export type ImageItemsSection = {
   __typename?: 'ImageItemsSection';
   _key?: Maybe<Scalars['String']>;
@@ -1570,6 +1631,7 @@ export type RootQuery = {
   BuyersPage?: Maybe<BuyersPage>;
   LandStewardsPage?: Maybe<LandStewardsPage>;
   FeaturedSection?: Maybe<FeaturedSection>;
+  ImageGridItem?: Maybe<ImageGridItem>;
   SanityImageAsset?: Maybe<SanityImageAsset>;
   SanityFileAsset?: Maybe<SanityFileAsset>;
   Document?: Maybe<Document>;
@@ -1592,6 +1654,7 @@ export type RootQuery = {
   allBuyersPage: Array<BuyersPage>;
   allLandStewardsPage: Array<LandStewardsPage>;
   allFeaturedSection: Array<FeaturedSection>;
+  allImageGridItem: Array<ImageGridItem>;
   allSanityImageAsset: Array<SanityImageAsset>;
   allSanityFileAsset: Array<SanityFileAsset>;
   allDocument: Array<Document>;
@@ -1689,6 +1752,11 @@ export type RootQueryLandStewardsPageArgs = {
 
 
 export type RootQueryFeaturedSectionArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type RootQueryImageGridItemArgs = {
   id: Scalars['ID'];
 };
 
@@ -1855,6 +1923,14 @@ export type RootQueryAllLandStewardsPageArgs = {
 export type RootQueryAllFeaturedSectionArgs = {
   where?: Maybe<FeaturedSectionFilter>;
   sort?: Maybe<Array<FeaturedSectionSorting>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+};
+
+
+export type RootQueryAllImageGridItemArgs = {
+  where?: Maybe<ImageGridItemFilter>;
+  sort?: Maybe<Array<ImageGridItemSorting>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
@@ -2509,10 +2585,13 @@ export type AllBuyersPageQuery = (
   { __typename?: 'RootQuery' }
   & { allBuyersPage: Array<(
     { __typename?: 'BuyersPage' }
-    & Pick<BuyersPage, 'footerButtonText' | 'footerLink'>
+    & Pick<BuyersPage, 'footerButtonText'>
     & { heroSection?: Maybe<(
       { __typename?: 'HeroSection' }
       & HeroSectionFieldsFragment
+    )>, imageGridSection?: Maybe<(
+      { __typename?: 'ImageGridSection' }
+      & ImageGridSectionFieldsFragment
     )>, featuredSection?: Maybe<(
       { __typename?: 'FeaturedSection' }
       & FeaturedSectionFieldsFragment
@@ -2943,6 +3022,26 @@ export type ImageBoldTextLabelFieldsFragment = (
   )> }
 );
 
+export type ImageGridItemFieldsFragment = (
+  { __typename?: 'ImageGridItem' }
+  & Pick<ImageGridItem, 'header' | 'descriptionRaw'>
+  & { image?: Maybe<(
+    { __typename?: 'CustomImage' }
+    & CustomImageFieldsFragment
+  )> }
+);
+
+export type ImageGridSectionFieldsFragment = (
+  { __typename?: 'ImageGridSection' }
+  & { backgroundImage?: Maybe<(
+    { __typename?: 'CustomImage' }
+    & CustomImageFieldsFragment
+  )>, items?: Maybe<Array<Maybe<(
+    { __typename?: 'ImageGridItem' }
+    & ImageGridItemFieldsFragment
+  )>>> }
+);
+
 export type LandManagementPracticeFieldsFragment = (
   { __typename?: 'LandManagementPractice' }
   & Pick<LandManagementPractice, 'title' | 'descriptionRaw'>
@@ -3192,6 +3291,26 @@ export const ImageBoldTextLabelFieldsFragmentDoc = gql`
   }
 }
     ${CustomImageFieldsFragmentDoc}`;
+export const ImageGridItemFieldsFragmentDoc = gql`
+    fragment imageGridItemFields on ImageGridItem {
+  header
+  descriptionRaw
+  image {
+    ...customImageFields
+  }
+}
+    ${CustomImageFieldsFragmentDoc}`;
+export const ImageGridSectionFieldsFragmentDoc = gql`
+    fragment imageGridSectionFields on ImageGridSection {
+  backgroundImage {
+    ...customImageFields
+  }
+  items {
+    ...imageGridItemFields
+  }
+}
+    ${CustomImageFieldsFragmentDoc}
+${ImageGridItemFieldsFragmentDoc}`;
 export const LandManagementPracticeFieldsFragmentDoc = gql`
     fragment landManagementPracticeFields on LandManagementPractice {
   title
@@ -3266,6 +3385,9 @@ export const AllBuyersPageDocument = gql`
     heroSection {
       ...heroSectionFields
     }
+    imageGridSection {
+      ...imageGridSectionFields
+    }
     featuredSection {
       ...featuredSectionFields
     }
@@ -3273,13 +3395,13 @@ export const AllBuyersPageDocument = gql`
       ...bottomBannerFields
     }
     footerButtonText
-    footerLink
     metadata {
       ...pageMetadataFields
     }
   }
 }
     ${HeroSectionFieldsFragmentDoc}
+${ImageGridSectionFieldsFragmentDoc}
 ${FeaturedSectionFieldsFragmentDoc}
 ${BottomBannerFieldsFragmentDoc}
 ${PageMetadataFieldsFragmentDoc}`;

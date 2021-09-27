@@ -2,9 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import { useLocation } from 'react-router-dom';
 
-import { client } from '../sanity';
-import { useAllBuyersPageQuery } from '../generated/sanity-graphql';
-
 import SEO from 'web-components/lib/components/seo';
 import MoreInfoForm from 'web-components/lib/components/form/MoreInfoForm';
 import FixedFooter from 'web-components/lib/components/fixed-footer';
@@ -13,12 +10,10 @@ import EmailIcon from 'web-components/lib/components/icons/EmailIcon';
 import Modal from 'web-components/lib/components/modal';
 import Banner from 'web-components/lib/components/banner';
 
-// import ImageGridSection from '../sections/buyers/ImageGridSection';
-// import FAQSection from '../sections/buyers/FAQSection';
-
-import { HeroTitle, FeaturedSection, HeroAction } from '../components/molecules';
+import { HeroTitle, FeaturedSection, HeroAction, ImageGridSection } from '../components/molecules';
 import { MoreProjectsSection } from '../components/organisms';
-
+import { client } from '../sanity';
+import { useAllBuyersPageQuery } from '../generated/sanity-graphql';
 import buyersHero from '../assets/buyers-top.jpg';
 import mock from '../mocks/mock.json';
 import { Project } from '../mocks';
@@ -34,7 +29,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   bottomHeroSection: {
     paddingTop: 0,
   },
-
   // callButton: {
   //   marginLeft: theme.spacing(4.25),
   //   [theme.breakpoints.down('xs')]: {
@@ -46,7 +40,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   //     fontSize: '1.3125rem',
   //   },
   // },
-
   title: {
     [theme.breakpoints.down('xs')]: {
       fontSize: theme.typography.pxToRem(32),
@@ -105,11 +98,9 @@ const BuyersPage = (): JSX.Element => {
         img={buyersHero}
         linearGradient="linear-gradient(180deg, rgba(255, 249, 238, 0.74) 0%, rgba(255, 249, 238, 0) 27.6%), linear-gradient(209.5deg, #FAEBD1 12.63%, #7DC9BF 44.03%, #515D89 75.43%)"
       />
-      {/* <ImageGridSection /> */}
-
+      {content?.imageGridSection && <ImageGridSection content={content?.imageGridSection} />}
       {/* <ApproachSection />
       <InvestingSection /> */}
-
       {content?.featuredSection && <FeaturedSection content={content?.featuredSection} />}
       {projects?.length > 0 ? (
         <div className="topo-background">

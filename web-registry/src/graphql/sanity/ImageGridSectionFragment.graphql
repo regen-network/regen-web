@@ -1,0 +1,8 @@
+fragment imageGridSectionFields on ImageGridSection {
+  backgroundImage {
+    ...customImageFields
+  }
+  items {
+    ...imageGridItemFields
+  }
+}

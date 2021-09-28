@@ -25,7 +25,7 @@ interface Props {
 const ImageItemsSection: React.FC<Props> = ({ content }) => {
   const styles = useStyles();
   const imageItems: ImageItemProps[] =
-    content?.imageCards?.map((i: any) => ({
+    content?.imageCards?.map(i => ({
       img: <img src={i?.icon?.asset?.url || ''} alt={`${i?.title}`} />,
       title: i?.title || '',
       description: i?.descriptionRaw[0]?.children[0]?.text,

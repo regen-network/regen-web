@@ -18,37 +18,6 @@ import buyersHero from '../assets/buyers-top.jpg';
 import mock from '../mocks/mock.json';
 import { Project } from '../mocks';
 
-// TODO: saving this commented-out yaml because yaml file is getting deleted
-// approachSection:
-//   header: Our innovative approach directly incentivizes land stewards to do good
-//     for the planet
-//   imageItems:
-//     - header: Maximize ecological return
-//       image: ../../static/media/eco-return.svg
-//       description: Make a bigger impact–Regen runs without expensive middlemen
-//         auditors or verification agencies.
-//     - header: Verified outcomes
-//       image: ../../static/media/verified-outcomes.svg
-//       description: Software-based and remote-sensing monitoring keeps costs low and
-//         transparency high.
-//     - header: Share impact through story
-//       image: ../../static/media/story.svg
-//       description: Demonstrate climate commitments to your customers through photos,
-//         video, stories, and updates.
-// investingSection:
-//   header: Investing in Land Stewards
-//   note: "*Transaction Costs in Carbon Offset Markets"
-//   noteLink: https://www.c-agg.org/wp-content/uploads/Zook_C-AGG_Presentation_March_8.pdf
-//   items:
-//     - header: < $.30 of every dollar*
-//       image: ../../static/media/other-org.svg
-//       caption: "other organizations:"
-//       description: goes to land stewards
-//     - header: "> $.80 of every dollar"
-//       image: ../../static/media/buying-through-regen.svg
-//       caption: "buying through regen:"
-//       description: goes to land stewards
-
 const useStyles = makeStyles((theme: Theme) => ({
   heroMain: {
     maxWidth: theme.typography.pxToRem(775),

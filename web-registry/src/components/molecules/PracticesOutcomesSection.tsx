@@ -9,11 +9,7 @@ import Description from 'web-components/lib/components/description';
 import Section from 'web-components/lib/components/section';
 
 import { WrappedImpactCard } from '../atoms';
-import {
-  PracticesOutcomesSection as PracticesOutcomesSectionProps,
-  LandManagementPractice,
-  Maybe,
-} from '../../generated/sanity-graphql';
+import { PracticesOutcomesSection as PracticesOutcomesSectionProps } from '../../generated/sanity-graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -61,7 +57,7 @@ const PracticesOutcomesSection: React.FC<Props> = ({ content }) => {
   const { practices, outcomes, title } = content;
 
   const practiceItems: ImageItemProps[] =
-    practices?.map((i: Maybe<LandManagementPractice>) => ({
+    practices?.map(i => ({
       img: <img src={i?.icon?.asset?.url || ''} alt={`${i?.icon?.asset?.label}`} />,
       title: i?.title || '',
       description: i?.descriptionRaw[0]?.children[0]?.text,

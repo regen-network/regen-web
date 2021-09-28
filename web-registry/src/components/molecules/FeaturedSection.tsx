@@ -14,9 +14,7 @@ import { FeaturedSection as FeaturedSectionProps } from '../../generated/sanity-
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    [theme.breakpoints.up(theme.breakpoints.values.tablet)]: {
-      paddingBottom: theme.spacing(22.5),
-    },
+    paddingBottom: theme.spacing(22.5),
   },
   title: {
     lineHeight: '140%',
@@ -46,7 +44,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   button: {
     [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
-      width: '60%',
+      width: '65%',
     },
     [theme.breakpoints.up('sm')]: {
       paddingRight: theme.spacing(7),

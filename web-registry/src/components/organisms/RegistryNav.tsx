@@ -17,6 +17,8 @@ import { RegistryIconLink, RegistryNavLink } from '../atoms';
 import { projects } from '../../mocks';
 
 import { ReactComponent as Cow } from '../../assets/svgs/green-cow.svg';
+import { ReactComponent as BuyersIcon } from '../../assets/svgs/buyers.svg';
+import { ReactComponent as LandStewardsIcon } from '../../assets/svgs/land-stewards.svg';
 
 const RegistryNav: React.FC = () => {
   const history = useHistory();
@@ -43,6 +45,21 @@ const RegistryNav: React.FC = () => {
       href: '/methodologies/carbonplus-grasslands',
       svg: Cow,
       /* right: () => <PeerReviewed />, */
+    },
+  ];
+
+  const stakeholderItems: HeaderDropdownItemProps[] = [
+    {
+      linkComponent: RegistryNavLink,
+      title: 'Buyers',
+      href: '/buyers',
+      svg: BuyersIcon,
+    },
+    {
+      linkComponent: RegistryNavLink,
+      title: 'Land Stewards',
+      href: '/land-stewards',
+      svg: LandStewardsIcon,
     },
   ];
 
@@ -96,6 +113,11 @@ const RegistryNav: React.FC = () => {
       title: 'Methodologies',
       dropdownItems: methodologyItems,
       render: () => <HeaderDropdownColumn items={methodologyItems} linkComponent={RegistryNavLink} />,
+    },
+    {
+      title: 'Stakeholders',
+      dropdownItems: stakeholderItems,
+      render: () => <HeaderDropdownColumn items={stakeholderItems} linkComponent={RegistryNavLink} />,
     },
     {
       title: 'Program',

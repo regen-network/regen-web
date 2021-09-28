@@ -570,6 +570,38 @@ collections:
                   - {label: "Name", name: name, widget: string}
                   - {label: "role", name: role, widget: markdown}
                   - {label: "Description", name: description, widget: markdown}
+                      - label: "Practices and Outcomes Section"
+          - name: "practicesOutcomesSection"
+            widget: "object"
+            fields:
+              - {label: Header, name: header, widget: string}
+              - {label: Note, name: note, widget: string}
+              - label: "Practices"
+                name: practices
+                widget: object
+                fields:
+                  - {label: Header, name: header, widget: string}
+                  - label: "Items"
+                    name: items
+                    widget: list
+                    collapsed: false
+                    fields:
+                      - {label: "Header", name: header, widget: string}
+                      - {label: "Image", name: image, widget: image}
+                      - {label: "Description", name: description, widget: text}
+              - label: "Outcomes"
+                name: outcomes
+                widget: object
+                fields:
+                  - {label: Header, name: header, widget: string}
+                  - label: "Items"
+                    name: items
+                    widget: list
+                    collapsed: false
+                    fields:
+                      - {label: "Header", name: header, widget: string}
+                      - {label: "Image", name: image, widget: image}
+                      - {label: "Description", name: description, widget: text}
       - label: "Shared sections"
         name: "shared"
         file: "web-www/content/shared/index.yaml"

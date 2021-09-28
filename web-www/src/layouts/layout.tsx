@@ -23,8 +23,8 @@ interface BoolProps {
 
 const Layout: React.FC<Props> = ({ children, location }) => {
   const footerPaddingBottom: BoolProps = {
-    '/buyers/': true,
-    '/land-stewards/': true,
+    'https://registry.regen.network/buyers/': true,
+    'https://registry.regen.network/land-stewards/': true,
   };
 
   const footerItems: [FooterItem, FooterItem, FooterItem] = [
@@ -33,11 +33,11 @@ const Layout: React.FC<Props> = ({ children, location }) => {
       items: [
         {
           title: 'Buyers',
-          href: '/buyers/',
+          href: 'https://registry.regen.network/buyers/', //TODO: delete here?
         },
         {
           title: 'Land Stewards',
-          href: '/land-stewards/',
+          href: 'https://registry.regen.network/land-stewards/', //TODO: delete here?
         },
         {
           title: 'Community',

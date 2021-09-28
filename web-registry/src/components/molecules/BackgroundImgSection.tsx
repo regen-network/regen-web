@@ -23,12 +23,6 @@ type StyleProps = {
 };
 
 const useStyles = makeStyles<Theme, StyleProps>(theme => ({
-  root: {
-    '-webkit-background-size': 'cover !important', //TODO: test with non-gradients, is there a better way?
-    '-moz-background-size': 'cover !important',
-    '-o-background-size': 'cover !important',
-    backgroundSize: 'cover !important',
-  },
   section: {
     zIndex: 1,
     position: 'relative',
@@ -66,7 +60,7 @@ const BackgroundImgSection: React.FC<Props> = ({ classes, ...props }) => {
 
   return (
     <div className={props?.linearGradient ? styles.backgroundGradient : ''}>
-      <CardMedia image={props.img} classes={{ root: cx(styles.root, classes?.root) }}>
+      <CardMedia image={props.img} classes={{ root: classes?.root }}>
         <Section classes={{ root: cx(styles.section, classes?.section) }}>
           <div className={cx(styles.main, classes && classes.main)}>{props.children}</div>
         </Section>

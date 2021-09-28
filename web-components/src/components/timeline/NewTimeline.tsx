@@ -82,7 +82,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     },
     [theme.breakpoints.down('xs')]: {
       paddingTop: theme.spacing(4),
-      paddingBottom: theme.spacing(4),
+      paddingBottom: theme.spacing(2),
       paddingRight: 0,
     },
     '&:after': {
@@ -113,6 +113,8 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   tags: {
     textAlign: 'left',
     marginBottom: theme.spacing(4),
+    display: 'flex',
+    flexWrap: 'wrap',
   },
   connector: {
     backgroundColor: theme.palette.grey[100],
@@ -166,6 +168,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     paddingBottom: theme.spacing(4),
     [theme.breakpoints.down('xs')]: {
       fontSize: theme.spacing(5.25),
+      paddingBottom: theme.spacing(3),
     },
     '& a': {
       cursor: 'pointer',

@@ -1,3 +1,7 @@
+require('dotenv').config({
+  path: `.env.${process.env.NODE_ENV}`,
+});
+
 module.exports = {
   siteMetadata: {
     title: `Regen Network`,
@@ -7,6 +11,15 @@ module.exports = {
   },
   plugins: [
     'gatsby-plugin-layout',
+    {
+      resolve: `gatsby-source-sanity`,
+      options: {
+        projectId: process.env.SANITY_PROJECT_ID,
+        dataset: process.env.NODE_ENV === 'production' ? 'production' : 'staging',
+        token: process.env.SANITY_TOKEN,
+        graphqlTag: 'default',
+      },
+    },
     {
       resolve: `gatsby-plugin-netlify`,
       options: {

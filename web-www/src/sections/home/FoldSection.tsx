@@ -88,7 +88,7 @@ let useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const HomeFoldSection = ({ className }: Props) => {
+const HomeFoldSection: React.FC<Props> = ({ className }) => {
   const classes = useStyles({});
   const data = useStaticQuery(graphql`
     query {

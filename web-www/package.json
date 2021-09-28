@@ -26,6 +26,7 @@
     "gatsby-plugin-typescript": "",
     "gatsby-remark-images": "^3.3.25",
     "gatsby-source-filesystem": "^2.3.0",
+    "gatsby-source-sanity": "6.0.5",
     "gatsby-transformer-remark": "^2.8.25",
     "gatsby-transformer-sharp": "^2.5.0",
     "gatsby-transformer-yaml-plus": "^0.2.2",
@@ -46,6 +47,12 @@
     "web-components": "0.0.0"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "1.21.4",
+    "@graphql-codegen/introspection": "1.18.2",
+    "@graphql-codegen/typescript": "1.22.0",
+    "@graphql-codegen/typescript-graphql-files-modules": "1.18.1",
+    "@graphql-codegen/typescript-operations": "^1.18.0",
+    "@graphql-codegen/typescript-react-apollo": "2.2.4",
     "@types/styled-components": "^5.0.1",
     "prettier": "2.0.5"
   },
@@ -59,6 +66,7 @@
     "start": "npm run develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
+    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
+    "graphql:codegen-sanity": "graphql-codegen --config sanity-codegen.yml"
   }
 }

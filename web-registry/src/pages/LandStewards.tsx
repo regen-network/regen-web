@@ -30,6 +30,16 @@ const useStyles = makeStyles((theme: Theme) => ({
     paddingBottom: theme.spacing(20),
     [theme.breakpoints.down('xs')]: {
       paddingBottom: theme.spacing(12),
+      '& h1': {
+        lineHeight: '130%',
+      },
+      '& h4': {
+        marginTop: theme.spacing(3),
+      },
+      '& p': {
+        fontSize: theme.typography.pxToRem(18),
+        lineHeight: '160%',
+      },
     },
   },
   bottomHeroSection: {
@@ -53,7 +63,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   bottomHeroDescription: {
     [theme.breakpoints.down('xs')]: {
-      fontSize: theme.typography.pxToRem(20),
+      '& p': {
+        fontSize: theme.typography.pxToRem(20),
+      },
     },
   },
   bottomHeroButton: {
@@ -92,7 +104,7 @@ const LandStewards = (): JSX.Element => {
   const siteMetadata = {
     title: `For Land Stewards`,
     description: content?.metadata?.description || '',
-    author: `RND, Inc.`, //TODO
+    author: `RND, Inc.`,
     siteUrl: window.location.href,
   };
 
@@ -130,7 +142,6 @@ const LandStewards = (): JSX.Element => {
             description: styles.bottomHeroDescription,
             button: styles.bottomHeroButton,
           }}
-          isBanner
           img={content?.moreQuestionsSection?.image?.image?.asset?.url || ''}
           bottomBanner={content?.moreQuestionsSection}
           openModal={openModal}

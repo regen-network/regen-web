@@ -55,6 +55,16 @@ const useStyles = makeStyles((theme: Theme) => ({
     paddingBottom: theme.spacing(20),
     [theme.breakpoints.down('xs')]: {
       paddingBottom: theme.spacing(12),
+      '& h1': {
+        lineHeight: '130%',
+      },
+      '& h4': {
+        marginTop: theme.spacing(3),
+      },
+      '& p': {
+        fontSize: theme.typography.pxToRem(18),
+        lineHeight: '160%',
+      },
     },
   },
   bottomHeroSection: {
@@ -90,7 +100,7 @@ const BuyersPage = (): JSX.Element => {
   const siteMetadata = {
     title: `For Buyers`,
     description: content?.metadata?.description || '',
-    author: `RND, Inc.`, //TODO
+    author: `RND, Inc.`,
     siteUrl: window.location.href,
   };
 

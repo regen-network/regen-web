@@ -32,6 +32,9 @@ const useStyles = makeStyles<Theme, StyleProps>(theme => ({
   section: {
     zIndex: 1,
     position: 'relative',
+    [theme.breakpoints.down('xs')]: {
+      paddingTop: 0,
+    },
   },
   main: props => ({
     display: 'flex',
@@ -40,7 +43,7 @@ const useStyles = makeStyles<Theme, StyleProps>(theme => ({
       height: props.isBanner ? theme.spacing(125) : 'inherit',
     },
     [theme.breakpoints.down('xs')]: {
-      height: props.isBanner ? '90vh' : 'inherit',
+      height: props.isBanner ? '74vh' : 'inherit',
     },
   }),
   backgroundGradient: props => ({

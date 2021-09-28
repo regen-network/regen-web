@@ -116,18 +116,18 @@ const RolesForm: React.FC<RolesFormProps> = ({ submit, initialValues, projectCre
 
   useEffect(() => {
     let initEntities: Array<FormValues> = [];
+    const creatorEntity = getEntity(projectCreator);
     if (initialValues) {
-      initEntities = Object.values(initialValues).filter(
+      let values = Object.values(initialValues);
+      if (creatorEntity) {
+        values = [creatorEntity, ...values];
+      }
+      initEntities = values.filter(
         // Remove duplicates and empty values
         (v, i, self) => self.findIndex(t => t.id === v.id) === i && !!v?.['@type'],
       );
     }
-    const creatorEntity = getEntity(projectCreator);
-    if (creatorEntity) {
-      setEntities([creatorEntity, ...initEntities]);
-    } else {
-      setEntities(initEntities);
-    }
+    setEntities(initEntities);
   }, [initialValues, projectCreator]);
 
   const updateUser = async (

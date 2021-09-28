@@ -88,7 +88,7 @@ const ChooseCreditClass: React.FC = () => {
     <OnBoardingSection title="Choose a credit class">
       <Grid container justify="center" className={classes.main}>
         {creditClassesData?.allCreditClasses?.nodes.map((c, i) =>
-          c?.creditClassVersionsById?.nodes?.[0] ? (
+          !c?.standard && c?.creditClassVersionsById?.nodes?.[0] ? (
             <Grid key={i} item className={classes.item}>
               <ImageActionCard
                 btnText="Choose credit class"

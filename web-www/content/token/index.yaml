@@ -26,11 +26,10 @@ infoSection:
   title: REGEN token on Osmosis Decentralized Exchange
   subtitle: "Release date: July 2021"
   body: md//REGEN tokens are now available on the [Osmosis Decentralized
-    Exchange](https://app.osmosis.zone/). Token holders may also participate in
-    providing liquidity in the [REGEN:ATOM](https://app.osmosis.zone/pool/22)
-    and [REGEN:OSMO](https://app.osmosis.zone/pool/42) pools.
-    [Osmosis](https://medium.com/@Osmosis) is a Cosmos-Hub based automated
-    market maker (AMM) protocol built for liquidity providers.
+    Exchange](https://app.osmosis.zone/) and [Gravity Decentralized Exchange via
+    Emeris](https://emeris.com/). Token holders may also participate in
+    providing liquidity in [REGEN:ATOM](https://app.osmosis.zone/pool/22) pools
+    and [REGEN:OSMO](https://app.osmosis.zone/pool/42) (Osmosis only) pools.
   signupText: ""
   image: ../../static/media/token-bird.jpg
   imageAltText: Bird

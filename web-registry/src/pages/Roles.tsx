@@ -147,6 +147,11 @@ const Roles: React.FC = () => {
       };
     }
 
+    // We're striping the ids to not bloat the database with unnecessary data.
+    // Those ids are only stored in the local state in order to be able to
+    // update the related entities.
+    // But there are not needed to make the project metadata valid
+    // and are already stored through project relations (i.e. developerId, stewardId, etc.)
     const metadata = { ...data?.projectById?.metadata, ...stripIds(values) };
     projectPatch = { metadata, ...projectPatch };
 
@@ -162,7 +167,7 @@ const Roles: React.FC = () => {
       history.push(`/project-pages/${projectId}/entity-display`);
     } catch (e) {
       // TODO: Should we display the error banner here?
-      // https://github.com/regen-network/regen-registry/issues/555
+      // https://github.com/regen-network/regen-registry/issues/554
       // console.log(e);
     }
   }

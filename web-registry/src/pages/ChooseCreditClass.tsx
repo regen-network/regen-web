@@ -77,7 +77,7 @@ const ChooseCreditClass: React.FC = () => {
           history.push(`/project-pages/${projectId}/basic-info`);
         } catch (e) {
           // TODO: Should we display the error banner here?
-          // https://github.com/regen-network/regen-registry/issues/555
+          // https://github.com/regen-network/regen-registry/issues/554
           console.log(e);
         }
       }
@@ -88,7 +88,7 @@ const ChooseCreditClass: React.FC = () => {
     <OnBoardingSection title="Choose a credit class">
       <Grid container justify="center" className={classes.main}>
         {creditClassesData?.allCreditClasses?.nodes.map((c, i) =>
-          c?.creditClassVersionsById?.nodes?.[0] ? (
+          !c?.standard && c?.creditClassVersionsById?.nodes?.[0] ? (
             <Grid key={i} item className={classes.item}>
               <ImageActionCard
                 btnText="Choose credit class"

@@ -251,8 +251,8 @@ function ToggleVariants(): JSX.Element {
 
 function RoleInput(): JSX.Element {
   const entitiesInit = [
-    { legalName: 'Impact Ag', id: 1 },
-    { name: 'Toby Grogan', id: 2 },
+    { '@type': 'http://regen.network/Organization', 'http://schema.org/legalName': 'Impact Ag', id: 1 },
+    { '@type': 'http://regen.network/User', 'http://schema.org/name': 'Toby Grogan', id: 2 },
   ];
 
   const [entities, setEntities] = useState<any>(entitiesInit);
@@ -262,8 +262,7 @@ function RoleInput(): JSX.Element {
     const entityOptions = entities.map(e => {
       return {
         ...e,
-        label: e.name || e.legalName,
-        type: e.legalName ? 'organization' : 'individual',
+        label: e['http://schema.org/name'] || e['http://schema.org/legalName'],
       };
     });
 
@@ -276,8 +275,8 @@ function RoleInput(): JSX.Element {
       const newEntities = [...entities, { ...updatedEntity, id: updatedEntity.id }];
       setEntities(newEntities);
     } else {
-      const updatedEntities = entities.map(exisitingEntity =>
-        exisitingEntity.id === updatedEntity.id ? { ...updatedEntity } : exisitingEntity,
+      const updatedEntities = entities.map(existingEntity =>
+        existingEntity.id === updatedEntity.id ? { ...updatedEntity } : existingEntity,
       );
       setEntities(updatedEntities);
     }

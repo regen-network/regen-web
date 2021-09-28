@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
-import { Formik, Form, Field } from 'formik';
+import { Formik, Form, Field, FormikErrors } from 'formik';
 import cx from 'clsx';
 
 import { Button } from '../buttons/Button';
@@ -19,15 +19,18 @@ interface IndividualModalProps {
   individual?: IndividualFormValues;
   onClose: () => void;
   onSubmit: (individual: IndividualFormValues) => void;
+  validate: (values: IndividualFormValues) => Promise<FormikErrors<IndividualFormValues>>;
 }
 
 export interface IndividualFormValues {
-  id?: number;
-  type?: string;
-  name?: string;
-  phone?: string;
-  email?: string;
-  permissionToShareInfo?: boolean;
+  id?: string;
+  partyId?: string;
+  projectCreator?: boolean;
+  '@type': string;
+  'http://schema.org/name'?: string;
+  'http://schema.org/telephone'?: string;
+  'http://schema.org/email'?: string;
+  'http://regen.network/sharePermission'?: boolean;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -98,7 +101,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-function IndividualModal({ individual, onClose, onSubmit }: IndividualModalProps): JSX.Element {
+function IndividualModal({ individual, onClose, onSubmit, validate }: IndividualModalProps): JSX.Element {
   const styles = useStyles();
   const [individualEdit, setIndividualEdit] = useState<IndividualFormValues | undefined>(undefined);
 
@@ -121,7 +124,9 @@ function IndividualModal({ individual, onClose, onSubmit }: IndividualModalProps
           validateOnMount
           initialValues={{
             ...individualEdit,
-            permissionToShareInfo: individualEdit && !!individualEdit.permissionToShareInfo,
+            '@type': 'http://regen.network/Individual',
+            'http://regen.network/sharePermission':
+              individualEdit && !!individualEdit['http://regen.network/sharePermission'],
           }}
           onSubmit={async (values, { setSubmitting }) => {
             setSubmitting(true);
@@ -132,8 +137,9 @@ function IndividualModal({ individual, onClose, onSubmit }: IndividualModalProps
               setSubmitting(false);
             }
           }}
+          validate={validate}
         >
-          {({ submitForm }) => {
+          {({ submitForm, isValid, isSubmitting }) => {
             return (
               <Form translate="yes">
                 <OnBoardingCard className={styles.card}>
@@ -141,21 +147,26 @@ function IndividualModal({ individual, onClose, onSubmit }: IndividualModalProps
                     className={styles.field}
                     component={ControlledTextField}
                     label="Full name"
-                    name="name"
+                    name="['http://schema.org/name']"
                   />
                   <Field
                     className={styles.field}
                     component={ControlledTextField}
                     label="Email address"
-                    name="email"
+                    name="['http://schema.org/email']"
                   />
-                  <Field className={styles.field} component={PhoneField} label="Phone number" name="phone" />
+                  <Field
+                    className={styles.field}
+                    component={PhoneField}
+                    label="Phone number"
+                    name="['http://schema.org/telephone']"
+                  />
                 </OnBoardingCard>
                 <div className={cx(styles.permission, styles.matchFormPadding)}>
                   <Field
                     type="checkbox"
                     component={CheckboxLabel}
-                    name="permissionToShareInfo"
+                    name="['http://regen.network/sharePermission']"
                     label={
                       <Description className={styles.checkboxLabel}>
                         I have this individual’s permission to share their information with Regen Registry
@@ -176,7 +187,11 @@ function IndividualModal({ individual, onClose, onSubmit }: IndividualModalProps
                   <Button onClick={onClose} className={styles.cancelButton}>
                     cancel
                   </Button>
-                  <ContainedButton onClick={submitForm} className={styles.button}>
+                  <ContainedButton
+                    onClick={submitForm}
+                    className={styles.button}
+                    disabled={!isValid || isSubmitting}
+                  >
                     save
                   </ContainedButton>
                 </div>

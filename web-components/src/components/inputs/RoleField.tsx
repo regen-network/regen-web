@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles, TextField } from '@material-ui/core';
 import Autocomplete, { createFilterOptions } from '@material-ui/lab/Autocomplete';
-import { FieldProps } from 'formik';
+import { FieldProps, FormikErrors } from 'formik';
 import cx from 'clsx';
 
 import FieldFormControl from './FieldFormControl';
@@ -9,8 +9,8 @@ import { Label } from '../label';
 import OrganizationIcon from '../icons/OrganizationIcon';
 import UserIcon from '../icons/UserIcon';
 import OutlinedButton from '../buttons/OutlinedButton';
-import { OrganizationModal } from '../modal/OrganizationModal';
-import { IndividualModal } from '../modal/IndividualModal';
+import { OrganizationModal, OrganizationFormValues } from '../modal/OrganizationModal';
+import { IndividualModal, IndividualFormValues } from '../modal/IndividualModal';
 
 const filter = createFilterOptions<RoleOptionType>();
 
@@ -77,16 +77,41 @@ interface Props extends FieldProps {
   label?: string;
   optional?: boolean;
   placeholder?: string;
-  options?: any[];
-  onSaveOrganization: (v: any) => Promise<any>;
-  onSaveIndividual: (v: any) => Promise<any>;
+  options?: FormValues[];
+  onSaveOrganization: (v: OrganizationFormValues) => Promise<any>;
+  onSaveIndividual: (v: IndividualFormValues) => Promise<any>;
+  validateEntity: (values: FormValues) => Promise<FormikErrors<FormValues>>;
   mapboxToken: string;
 }
 
 interface RoleOptionType {
   inputValue?: string;
-  label: string;
   id?: number;
+}
+
+interface OptionLabel {
+  label?: string;
+}
+
+interface IndividualOption extends IndividualFormValues, OptionLabel {}
+interface OrganizationOption extends OrganizationFormValues, OptionLabel {}
+
+export type FormValues = IndividualFormValues | OrganizationFormValues;
+export type Option = IndividualOption | OrganizationOption;
+
+export function isIndividual(e: FormValues): e is IndividualFormValues {
+  if (e['@type'] === 'http://regen.network/Individual') {
+    return true;
+  }
+  return false;
+}
+
+function getLabel(o: any): string | undefined {
+  return o.id
+    ? isIndividual(o)
+      ? o['http://schema.org/name']
+      : o['http://schema.org/legalName']
+    : undefined;
 }
 
 const RoleField: React.FC<Props> = ({
@@ -99,29 +124,39 @@ const RoleField: React.FC<Props> = ({
   mapboxToken,
   onSaveOrganization,
   onSaveIndividual,
+  validateEntity,
   ...fieldProps
 }) => {
   const styles = useStyles();
-  const [organizationEdit, setOrganizationEdit] = useState<any | null>(null);
+  const [organizationEdit, setOrganizationEdit] = useState<any | null>();
   const [individualEdit, setIndividualEdit] = useState<any | null>(null);
   const [value, setValue] = useState<any | null>({});
   const { form, field } = fieldProps;
-
   useEffect(() => {
-    const selectedValue = options && field.value && options.find(o => o.id === field.value);
+    const selectedValue = options && field.value && options.find(o => o.id === field.value.id);
     setValue(selectedValue);
   }, [field.value, options]);
 
   const saveOrganization = async (org: any): Promise<void> => {
     var savedOrg = await onSaveOrganization(org);
     closeOrganizationModal();
-    form.setFieldValue(field.name, savedOrg.id);
+    form.setFieldValue(field.name, savedOrg);
+    for (const fieldName in form.values) {
+      if (form.values[fieldName].id === savedOrg.id && `['${fieldName}']` !== field.name) {
+        form.setFieldValue(`['${fieldName}']`, savedOrg);
+      }
+    }
   };
 
-  const saveIndividual = async (person: any): Promise<void> => {
-    var savedPerson = await onSaveIndividual(person);
+  const saveIndividual = async (user: any): Promise<void> => {
+    var savedUser = await onSaveIndividual(user);
     closeIndividualModal();
-    form.setFieldValue(field.name, savedPerson.id);
+    form.setFieldValue(field.name, savedUser);
+    for (const fieldName in form.values) {
+      if (form.values[fieldName].id === savedUser.id && `['${fieldName}']` !== field.name) {
+        form.setFieldValue(`['${fieldName}']`, savedUser);
+      }
+    }
   };
 
   const closeOrganizationModal = (): void => {
@@ -132,11 +167,11 @@ const RoleField: React.FC<Props> = ({
     setIndividualEdit(null);
   };
 
-  const editEntity = (entity: any): void => {
-    if (entity.type === 'organization') {
-      setOrganizationEdit(entity);
-    } else {
+  const editEntity = (entity: FormValues): void => {
+    if (isIndividual(entity)) {
       setIndividualEdit(entity);
+    } else {
+      setOrganizationEdit(entity);
     }
   };
 
@@ -160,12 +195,12 @@ const RoleField: React.FC<Props> = ({
             options={options || []}
             forcePopupIcon
             value={value}
-            getOptionLabel={o => o.label || ''}
+            getOptionLabel={o => getLabel(o) || ''}
             getOptionSelected={o => o.id === field.value}
-            renderOption={o => o.label || o}
+            renderOption={o => getLabel(o) || o}
             onChange={(event, newValue, reason) => {
               if (reason === 'select-option' && !newValue.inputValue) {
-                handleChange(newValue.id);
+                handleChange(newValue);
               } else if (typeof newValue === 'string') {
                 setValue({
                   label: newValue,
@@ -185,7 +220,6 @@ const RoleField: React.FC<Props> = ({
             )}
             filterOptions={(options, state) => {
               const filtered = filter(options, state) as RoleOptionType[];
-
               // Suggest the creation of a new value
               filtered.push(
                 ((
@@ -193,7 +227,7 @@ const RoleField: React.FC<Props> = ({
                     className={styles.add}
                     onClick={e => {
                       e.stopPropagation();
-                      setOrganizationEdit({ legalName: state.inputValue });
+                      setOrganizationEdit({ 'http://schema.org/legalName': state.inputValue });
                     }}
                   >
                     <OrganizationIcon />
@@ -207,7 +241,7 @@ const RoleField: React.FC<Props> = ({
                     className={styles.add}
                     onClick={e => {
                       e.stopPropagation();
-                      setIndividualEdit({ name: state.inputValue });
+                      setIndividualEdit({ 'http://schema.org/name': state.inputValue });
                     }}
                   >
                     <UserIcon />
@@ -220,17 +254,17 @@ const RoleField: React.FC<Props> = ({
           />
         )}
       </FieldFormControl>
-      {value &&
-      value.id && ( //TODO: validate so this does not appear for "myself" or "my organization." That can be done elsewhere.
-          <OutlinedButton className={styles.edit} onClick={() => editEntity(value)}>
-            edit entity
-          </OutlinedButton>
-        )}
+      {value && value.id && !value.projectCreator && (
+        <OutlinedButton className={styles.edit} onClick={() => editEntity(value)}>
+          edit entity
+        </OutlinedButton>
+      )}
       {organizationEdit && (
         <OrganizationModal
           organization={organizationEdit}
           onClose={closeOrganizationModal}
           onSubmit={saveOrganization}
+          validate={validateEntity}
           mapboxToken={mapboxToken}
         />
       )}
@@ -239,6 +273,7 @@ const RoleField: React.FC<Props> = ({
           individual={individualEdit}
           onClose={closeIndividualModal}
           onSubmit={saveIndividual}
+          validate={validateEntity}
         />
       )}
     </div>

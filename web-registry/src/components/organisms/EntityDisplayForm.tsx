@@ -14,17 +14,20 @@ import Description from 'web-components/lib/components/description';
 import OrganizationIcon from 'web-components/lib/components/icons/OrganizationIcon';
 import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
 import ProjectTopCard from 'web-components/lib/components/cards/ProjectTopCard';
+import { isIndividual } from 'web-components/lib/components/inputs/RoleField';
+import { OrganizationFormValues } from 'web-components/lib/components/modal/OrganizationModal';
+import { IndividualFormValues } from 'web-components/lib/components/modal/IndividualModal';
 
 interface EntityDisplayFormProps {
   submit: (values: EntityDisplayValues) => Promise<void>;
   initialValues?: EntityDisplayValues;
 }
 
-interface IndividualDisplayValues extends IndividualShape, IndividualDisplayShape {
-  [key: string]: string | boolean | undefined;
+interface IndividualDisplayValues extends IndividualFormValues, IndividualDisplayShape {
+  // [key: string]: string | boolean | undefined;
 }
 
-interface OrganizationDisplayValues extends OrganizationShape, OrganizationDisplayShape {}
+interface OrganizationDisplayValues extends OrganizationFormValues, OrganizationDisplayShape {}
 
 export interface EntityDisplayValues {
   'http://regen.network/landOwner'?: OrganizationDisplayValues | IndividualDisplayValues;
@@ -33,23 +36,7 @@ export interface EntityDisplayValues {
   'http://regen.network/projectOriginator'?: OrganizationDisplayValues | IndividualDisplayValues;
 }
 
-type EntityFieldName =
-  | 'http://regen.network/landOwner'
-  | 'http://regen.network/landSteward'
-  | 'http://regen.network/projectDeveloper'
-  | 'http://regen.network/projectOriginator';
-
-export type ProjectEntityType = 'http://regen.network/Individual' | 'http://regen.network/Organization';
-
-interface OrganizationShape {
-  '@type': ProjectEntityType;
-  'http://schema.org/legalName': string;
-}
-
-interface IndividualShape {
-  '@type': ProjectEntityType;
-  'http://schema.org/name': string;
-}
+type EntityFieldName = keyof EntityDisplayValues;
 
 interface OrganizationDisplayShape {
   'http://regen.network/showOnProjectPage': boolean;
@@ -69,6 +56,10 @@ interface FormletProps {
   handleChange: any;
   values: EntityDisplayValues;
 }
+
+// interface OrganizationFormlet extends FormletProps {
+//   values:
+// }
 
 const useStyles = makeStyles(theme => ({
   title: {
@@ -160,9 +151,9 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialVa
   ): JSX.Element | null => {
     const entity = values[fieldName];
     if (entity && values) {
-      if (entity['@type'] === 'http://regen.network/Individual') {
+      if (isIndividual(entity)) {
         return <IndividualFormlet role={fieldName} handleChange={handleChange} values={values} />;
-      } else if (entity['@type'] === 'http://regen.network/Organization') {
+      } else {
         return <OrganizationFormlet role={fieldName} handleChange={handleChange} values={values} />;
       }
     }
@@ -248,7 +239,7 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialVa
   };
 
   const getEntityTypeString = (shaclRole: EntityFieldName): string => {
-    const friendlyRoles: any = {
+    const friendlyRoles: { [key in EntityFieldName | 'default']: string } = {
       'http://regen.network/landOwner': '(land owner)',
       'http://regen.network/landSteward': '(land steward)',
       'http://regen.network/projectDeveloper': '(project developer)',

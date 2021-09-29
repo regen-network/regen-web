@@ -32,7 +32,7 @@ export interface OrganizationFormValues {
   addressId?: string;
   ownerId?: string;
   ownerPartyId?: string;
-  '@type': string;
+  '@type': 'http://regen.network/Individual';
   'http://schema.org/legalName'?: string;
   'http://schema.org/telephone'?: string;
   'http://schema.org/email'?: string;

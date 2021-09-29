@@ -26,7 +26,7 @@ export interface IndividualFormValues {
   id?: string;
   partyId?: string;
   projectCreator?: boolean;
-  '@type': string;
+  '@type': 'http://regen.network/Individual';
   'http://schema.org/name'?: string;
   'http://schema.org/telephone'?: string;
   'http://schema.org/email'?: string;

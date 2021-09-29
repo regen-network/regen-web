@@ -427,8 +427,8 @@ collections:
                   - {label: "Name", name: name, widget: string}
                   - {label: "role", name: role, widget: markdown}
                   - {label: "Description", name: description, widget: markdown}
-                      - label: "Practices and Outcomes Section"
-          - name: "practicesOutcomesSection"
+          - label: "Practices and Outcomes Section"
+            name: "practicesOutcomesSection"
             widget: "object"
             fields:
               - {label: Header, name: header, widget: string}

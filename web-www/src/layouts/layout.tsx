@@ -33,11 +33,11 @@ const Layout: React.FC<Props> = ({ children, location }) => {
       items: [
         {
           title: 'Buyers',
-          href: 'https://registry.regen.network/buyers/', //TODO: delete here?
+          href: 'https://registry.regen.network/buyers/',
         },
         {
           title: 'Land Stewards',
-          href: 'https://registry.regen.network/land-stewards/', //TODO: delete here?
+          href: 'https://registry.regen.network/land-stewards/',
         },
         {
           title: 'Community',

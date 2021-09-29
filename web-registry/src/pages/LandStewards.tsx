@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import { useLocation } from 'react-router-dom';
 
 import FixedFooter from 'web-components/lib/components/fixed-footer';
@@ -20,7 +20,7 @@ import {
 } from '../components/molecules';
 import landStewardsHero from '../assets/land-stewards-top.jpg';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles(theme => ({
   modal: {
     padding: 0,
     overflow: 'hidden',
@@ -114,7 +114,7 @@ const LandStewards = (): JSX.Element => {
         location={location}
         description={siteMetadata.description}
         title={siteMetadata.title}
-        imageUrl={content?.metadata?.openGraphImage?.asset?.url || landStewardsHero}
+        imageUrl={content?.metadata?.openGraphImage?.asset?.url || ''}
         siteMetadata={siteMetadata}
       />
       <HeroTitle

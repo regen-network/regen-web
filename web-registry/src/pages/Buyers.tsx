@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import React, { useState } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 import { useLocation } from 'react-router-dom';
 
 import SEO from 'web-components/lib/components/seo';
@@ -18,7 +18,7 @@ import buyersHero from '../assets/buyers-top.jpg';
 import mock from '../mocks/mock.json';
 import { Project } from '../mocks';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles(theme => ({
   heroMain: {
     maxWidth: theme.typography.pxToRem(775),
     paddingBottom: theme.spacing(20),
@@ -39,17 +39,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   bottomHeroSection: {
     paddingTop: 0,
   },
-  // callButton: {
-  //   marginLeft: theme.spacing(4.25),
-  //   [theme.breakpoints.down('xs')]: {
-  //     padding: `${theme.spacing(1.875)} ${theme.spacing(7.5)}`,
-  //     fontSize: '1.125rem',
-  //   },
-  //   [theme.breakpoints.up('sm')]: {
-  //     padding: `${theme.spacing(2.5)} ${theme.spacing(12.5)}`,
-  //     fontSize: '1.3125rem',
-  //   },
-  // },
   title: {
     [theme.breakpoints.down('xs')]: {
       fontSize: theme.typography.pxToRem(32),
@@ -81,12 +70,6 @@ const BuyersPage = (): JSX.Element => {
     setOpen(false);
   };
 
-  useEffect(() => {
-    if (location && location.state && location.state.submitted) {
-      setOpen(false);
-    }
-  }, [location]);
-
   return (
     <>
       <SEO
@@ -96,7 +79,7 @@ const BuyersPage = (): JSX.Element => {
           'Buy carbon credits and other ecosystem system service credits to meet your climate commitments and sustainability goals.'
         }
         title={siteMetadata.title}
-        imageUrl={content?.metadata?.openGraphImage?.asset?.url || buyersHero}
+        imageUrl={content?.metadata?.openGraphImage?.asset?.url || ''}
         siteMetadata={siteMetadata}
       />
       <HeroTitle
@@ -134,7 +117,6 @@ const BuyersPage = (): JSX.Element => {
           <ContainedButton onClick={handleOpen} startIcon={<EmailIcon />}>
             {content?.footerButtonText}
           </ContainedButton>
-          {/* {<OutlinedButton className={classes.callButton} startIcon={<PhoneIcon />}>schedule a call</OutlinedButton>} */}
         </>
       </FixedFooter>
       <Modal open={open} onClose={handleClose}>

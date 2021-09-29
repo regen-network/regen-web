@@ -22,11 +22,6 @@ interface BoolProps {
 }
 
 const Layout: React.FC<Props> = ({ children, location }) => {
-  const footerPaddingBottom: BoolProps = {
-    'https://registry.regen.network/buyers/': true,
-    'https://registry.regen.network/land-stewards/': true,
-  };
-
   const footerItems: [FooterItem, FooterItem, FooterItem] = [
     {
       title: 'get involved',
@@ -127,7 +122,6 @@ const Layout: React.FC<Props> = ({ children, location }) => {
           privacyUrl="/privacy-policy"
           termsUrl="/terms-service"
           apiUri={process.env.GATSBY_API_URI}
-          paddingBottom={footerPaddingBottom[location.pathname]}
         />
       </footer>
     </>

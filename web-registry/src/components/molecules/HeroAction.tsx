@@ -39,6 +39,7 @@ const useStyles = makeStyles<Theme, StyleProps>(theme => ({
     flexDirection: 'column',
     alignContent: 'center',
     justifyContent: 'center',
+    margin: '0 auto',
   },
   content: {
     display: 'flex',

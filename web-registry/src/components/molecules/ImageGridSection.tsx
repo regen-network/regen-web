@@ -13,10 +13,10 @@ const useStyles = makeStyles<Theme>(theme => ({
   card: {
     borderRadius: 0,
     [theme.breakpoints.down('xs')]: {
-      height: 283,
+      height: theme.spacing(70.75),
     },
     [theme.breakpoints.up('sm')]: {
-      height: 634,
+      height: theme.spacing(158.5),
     },
   },
   cardMedia: {

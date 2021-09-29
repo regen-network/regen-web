@@ -6,7 +6,6 @@ import { CheckboxProps } from 'formik-material-ui';
 import { getIn } from 'formik';
 
 import Checkbox from '../inputs/Checkbox';
-import { styles } from '@material-ui/pickers/views/Clock/Clock';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {

@@ -198,7 +198,7 @@ export default function Footer({
   footerItems,
   termsUrl,
   privacyUrl,
-  paddingBottom,
+  paddingBottom = false,
   apiUri = 'http://localhost:5000',
 }: FooterProps): JSX.Element {
   const classes = useStyles({ paddingBottom });

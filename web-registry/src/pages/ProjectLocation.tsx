@@ -6,6 +6,7 @@ import { OnboardingFormTemplate } from '../components/templates';
 import {
   useProjectByIdQuery,
   useUpdateProjectByIdMutation,
+  useUpdateAddressByIdMutation,
   useCreateAddressMutation,
 } from '../generated/graphql';
 
@@ -15,6 +16,7 @@ const ProjectLocation: React.FC = () => {
 
   const [updateProject] = useUpdateProjectByIdMutation();
   const [createAddress] = useCreateAddressMutation();
+  const [updateAddress] = useUpdateAddressByIdMutation();
   const { data: projectData } = useProjectByIdQuery({
     variables: { id: projectId },
   });
@@ -46,15 +48,32 @@ const ProjectLocation: React.FC = () => {
 
   async function saveValues(values: ProjectLocationFormValues): Promise<void> {
     const metadata = { ...projectData?.projectById?.metadata, ...values };
-    const { data: addressData } = await createAddress({
-      variables: {
-        input: {
-          address: {
-            feature: values['http://schema.org/location'],
+    const feature = values['http://schema.org/location'];
+    let addressId = projectData?.projectById?.addressId;
+    // if there's a current address associated with project, update it, otherwise create a new one
+    if (!addressId) {
+      const { data: addressData } = await createAddress({
+        variables: {
+          input: {
+            address: {
+              feature,
+            },
           },
         },
-      },
-    });
+      });
+      addressId = addressData?.createAddress?.address?.id;
+    } else {
+      await updateAddress({
+        variables: {
+          input: {
+            id: addressId,
+            addressPatch: {
+              feature,
+            },
+          },
+        },
+      });
+    }
 
     await updateProject({
       variables: {
@@ -62,7 +81,7 @@ const ProjectLocation: React.FC = () => {
           id: projectId,
           projectPatch: {
             metadata,
-            addressId: addressData?.createAddress?.address?.id,
+            addressId,
           },
         },
       },

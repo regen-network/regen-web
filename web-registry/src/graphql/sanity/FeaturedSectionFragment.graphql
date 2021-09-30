@@ -1,9 +1,11 @@
 fragment featuredSectionFields on FeaturedSection {
   header
   titleRaw
-  link
+  descriptionRaw
+  button {
+    ...buttonFields
+  }
   image {
     ...customImageFields
   }
-  descriptionRaw
 }

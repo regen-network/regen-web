@@ -40,8 +40,9 @@ query allLandStewardsPage {
     moreQuestionsSection {
       ...bottomBannerFields
     }
-    footerButtonText
-    footerLink
+    footerButton {
+      ...buttonFields
+    }
     metadata {
       ...pageMetadataFields
     }

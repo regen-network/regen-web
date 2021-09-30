@@ -78,7 +78,7 @@ interface Props {
 const FeaturedSection: React.FC<Props> = ({ content }) => {
   const styles = useStyles();
 
-  if (content?.header && content.titleRaw && content.descriptionRaw && content.link && content.image) {
+  if (content?.header && content.titleRaw && content.descriptionRaw && content.button && content.image) {
     return (
       <Section className={styles.root} title={content.header} titleVariant="subtitle2">
         <div className={styles.card}>
@@ -91,7 +91,10 @@ const FeaturedSection: React.FC<Props> = ({ content }) => {
                 <Typography component="div" className={styles.description}>
                   <BlockContent content={content.descriptionRaw} />
                 </Typography>
-                <ContainedButton href={content.link} className={styles.button}>
+                <ContainedButton
+                  href={content?.button?.buttonLink?.buttonHref || ''}
+                  className={styles.button}
+                >
                   more details
                 </ContainedButton>
               </Grid>

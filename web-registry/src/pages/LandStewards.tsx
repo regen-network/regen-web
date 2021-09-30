@@ -151,8 +151,8 @@ const LandStewards = (): JSX.Element => {
       )}
 
       <FixedFooter justify="flex-end">
-        <ContainedButton onClick={() => openModal(content?.footerLink)}>
-          {content?.footerButtonText}
+        <ContainedButton onClick={() => openModal(content?.footerButton?.buttonLink?.buttonHref)}>
+          {content?.footerButton?.buttonText}
         </ContainedButton>
       </FixedFooter>
       <Modal open={open} onClose={closeModal} className={styles.modal}>

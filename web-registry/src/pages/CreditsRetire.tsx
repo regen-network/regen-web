@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Select from '@material-ui/core/Select';
@@ -84,12 +84,15 @@ const CreditsRetire: React.FC<{
   const [showResult, setShowResult] = useState(false);
   const [retireUrl, setRetireUrl] = useState<null | string>(null);
 
+  useEffect(() => {
+    setUnits(getUnits(vintagesData, buyerWalletId, vintageId));
+  }, [vintageId, buyerWalletId, vintagesData]);
+
   const handleVintageChange = (event: React.ChangeEvent<{ value: unknown }>): void => {
     if (showResult) {
       setShowResult(false);
     }
     setVintageId(event.target.value as string);
-    setUnits(getUnits(vintagesData, buyerWalletId, event.target.value as string));
     if (vintagesData && vintagesData.allCreditVintages) {
       // TODO: the following shouldn't be type cast to `any` but changing throws an error
       // `creditClassVersionByCreditClassVersionIdAndCreditClassVersionCreatedAt`

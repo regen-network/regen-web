@@ -111,7 +111,9 @@ const CreditsTransfer: React.FC<{
     if (showResult) {
       setShowResult(false);
     }
-    setVintageId(event.target.value as string);
+    const vintageId = event.target.value as string;
+    setVintageId(vintageId);
+    refetchAvailableCredits({ vintageId });
     const vintages = vintagesData?.allCreditVintages?.nodes?.find(node => node?.id === event.target.value);
     const balances = vintages?.accountBalancesByCreditVintageId?.nodes;
     if (balances && balances.length > 0) {

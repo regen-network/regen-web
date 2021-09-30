@@ -28,9 +28,6 @@ function SEO({
   const path = location && location.pathname ? location.pathname : '';
   const metaDescription = description || siteMetadata.description;
 
-  console.log('seo path', path); //TODO: testing - delete
-  console.log('seo siteMetadata', siteMetadata);
-
   return (
     <Helmet
       htmlAttributes={{

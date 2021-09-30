@@ -100,10 +100,6 @@ const LandStewards = (): JSX.Element => {
   const { data } = useAllLandStewardsPageQuery({ client });
   const content = data?.allLandStewardsPage?.[0];
 
-  // console.log('content?.metadata?', content?.metadata);
-  console.log('window.location', window.location);
-  console.log('location', location);
-
   const siteMetadata = {
     title: 'For Land Stewards',
     description:

@@ -80,15 +80,13 @@ const BuyersPage = (): JSX.Element => {
 
   return (
     <>
-      {siteMetadata && (
-        <SEO
-          location={location}
-          description={siteMetadata.description}
-          title={siteMetadata.title}
-          imageUrl={siteMetadata.imageUrl}
-          siteMetadata={siteMetadata}
-        />
-      )}
+      <SEO
+        location={location}
+        description={siteMetadata.description}
+        title={siteMetadata.title}
+        imageUrl={siteMetadata.imageUrl}
+        siteMetadata={siteMetadata}
+      />
       <HeroTitle
         classes={{ main: styles.heroMain }}
         isBanner

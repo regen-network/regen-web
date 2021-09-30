@@ -4663,11 +4663,6 @@
             "kind": "OBJECT",
             "name": "Tag",
             "ofType": null
-          },
-          {
-            "kind": "OBJECT",
-            "name": "TimelineItem",
-            "ofType": null
           }
         ]
       },
@@ -6361,12 +6356,12 @@
             "deprecationReason": null
           },
           {
-            "name": "link",
+            "name": "button",
             "description": null,
             "args": [],
             "type": {
-              "kind": "SCALAR",
-              "name": "String",
+              "kind": "OBJECT",
+              "name": "Button",
               "ofType": null
             },
             "isDeprecated": false,
@@ -6495,11 +6490,11 @@
             "defaultValue": null
           },
           {
-            "name": "link",
+            "name": "button",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "StringFilter",
+              "name": "ButtonFilter",
               "ofType": null
             },
             "defaultValue": null
@@ -6596,11 +6591,11 @@
             "defaultValue": null
           },
           {
-            "name": "link",
+            "name": "button",
             "description": null,
             "type": {
-              "kind": "ENUM",
-              "name": "SortOrder",
+              "kind": "INPUT_OBJECT",
+              "name": "ButtonSorting",
               "ofType": null
             },
             "defaultValue": null
@@ -9599,24 +9594,12 @@
             "deprecationReason": null
           },
           {
-            "name": "footerButtonText",
+            "name": "footerButton",
             "description": null,
             "args": [],
             "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "footerLink",
-            "description": "This opens in a modal",
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
+              "kind": "OBJECT",
+              "name": "Button",
               "ofType": null
             },
             "isDeprecated": false,
@@ -9793,21 +9776,11 @@
             "defaultValue": null
           },
           {
-            "name": "footerButtonText",
+            "name": "footerButton",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "StringFilter",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "footerLink",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFilter",
+              "name": "ButtonFilter",
               "ofType": null
             },
             "defaultValue": null
@@ -9954,21 +9927,11 @@
             "defaultValue": null
           },
           {
-            "name": "footerButtonText",
+            "name": "footerButton",
             "description": null,
             "type": {
-              "kind": "ENUM",
-              "name": "SortOrder",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "footerLink",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "SortOrder",
+              "kind": "INPUT_OBJECT",
+              "name": "ButtonSorting",
               "ofType": null
             },
             "defaultValue": null
@@ -12620,33 +12583,6 @@
             "deprecationReason": null
           },
           {
-            "name": "TimelineItem",
-            "description": null,
-            "args": [
-              {
-                "name": "id",
-                "description": "TimelineItem document ID",
-                "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "ID",
-                    "ofType": null
-                  }
-                },
-                "defaultValue": null
-              }
-            ],
-            "type": {
-              "kind": "OBJECT",
-              "name": "TimelineItem",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "Tag",
             "description": null,
             "args": [
@@ -13600,79 +13536,6 @@
                   "ofType": {
                     "kind": "OBJECT",
                     "name": "LandManagementPractice",
-                    "ofType": null
-                  }
-                }
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "allTimelineItem",
-            "description": null,
-            "args": [
-              {
-                "name": "where",
-                "description": null,
-                "type": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "TimelineItemFilter",
-                  "ofType": null
-                },
-                "defaultValue": null
-              },
-              {
-                "name": "sort",
-                "description": null,
-                "type": {
-                  "kind": "LIST",
-                  "name": null,
-                  "ofType": {
-                    "kind": "NON_NULL",
-                    "name": null,
-                    "ofType": {
-                      "kind": "INPUT_OBJECT",
-                      "name": "TimelineItemSorting",
-                      "ofType": null
-                    }
-                  }
-                },
-                "defaultValue": null
-              },
-              {
-                "name": "limit",
-                "description": "Max documents to return",
-                "type": {
-                  "kind": "SCALAR",
-                  "name": "Int",
-                  "ofType": null
-                },
-                "defaultValue": null
-              },
-              {
-                "name": "offset",
-                "description": "Offset at which to start returning documents from",
-                "type": {
-                  "kind": "SCALAR",
-                  "name": "Int",
-                  "ofType": null
-                },
-                "defaultValue": null
-              }
-            ],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "LIST",
-                "name": null,
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "OBJECT",
-                    "name": "TimelineItem",
                     "ofType": null
                   }
                 }
@@ -18951,7 +18814,7 @@
           },
           {
             "name": "color",
-            "description": null,
+            "description": "Must be a legal CSS color, as in https://www.w3schools.com/cssref/css_colors_legal.asp",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -19171,12 +19034,12 @@
         "description": null,
         "fields": [
           {
-            "name": "_id",
-            "description": "Document ID",
+            "name": "_key",
+            "description": null,
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "ID",
+              "name": "String",
               "ofType": null
             },
             "isDeprecated": false,
@@ -19184,54 +19047,6 @@
           },
           {
             "name": "_type",
-            "description": "Document type",
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "_createdAt",
-            "description": "Date the document was created",
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "DateTime",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "_updatedAt",
-            "description": "Date the document was last modified",
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "DateTime",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "_rev",
-            "description": "Current document revision",
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "_key",
             "description": null,
             "args": [],
             "type": {
@@ -19256,7 +19071,7 @@
           },
           {
             "name": "url",
-            "description": "(optional)",
+            "description": "(Optional)",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -19296,13 +19111,7 @@
           }
         ],
         "inputFields": null,
-        "interfaces": [
-          {
-            "kind": "INTERFACE",
-            "name": "Document",
-            "ofType": null
-          }
-        ],
+        "interfaces": [],
         "enumValues": null,
         "possibleTypes": null
       },
@@ -19313,67 +19122,17 @@
         "fields": null,
         "inputFields": [
           {
-            "name": "_",
-            "description": "Apply filters on document level",
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "Sanity_DocumentFilter",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "_id",
+            "name": "_key",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "IDFilter",
+              "name": "StringFilter",
               "ofType": null
             },
             "defaultValue": null
           },
           {
             "name": "_type",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFilter",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "_createdAt",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "DatetimeFilter",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "_updatedAt",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "DatetimeFilter",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "_rev",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFilter",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "_key",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
@@ -19424,7 +19183,7 @@
         "fields": null,
         "inputFields": [
           {
-            "name": "_id",
+            "name": "_key",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -19435,46 +19194,6 @@
           },
           {
             "name": "_type",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "SortOrder",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "_createdAt",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "SortOrder",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "_updatedAt",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "SortOrder",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "_rev",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "SortOrder",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "_key",
             "description": null,
             "type": {
               "kind": "ENUM",

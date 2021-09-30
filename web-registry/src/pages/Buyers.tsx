@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { useLocation } from 'react-router-dom';
 
@@ -51,16 +51,24 @@ const BuyersPage = (): JSX.Element => {
   const location = useLocation();
   const [open, setOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [siteMetadata, setSiteMetadata] = useState<any>(null);
   const { data } = useAllBuyersPageQuery({ client });
   const content = data?.allBuyersPage?.[0];
   const projects: Project[] = mock?.projects;
 
-  const siteMetadata = {
-    title: `For Buyers`,
-    description: content?.metadata?.description || '',
-    author: `RND, Inc.`,
-    siteUrl: window.location.href,
-  };
+  useEffect(() => {
+    const siteMetadata = {
+      title: 'For Buyers',
+      description:
+        content?.metadata?.description ||
+        'Buy carbon credits and other ecosystem system service credits to meet your climate commitments and sustainability goals.',
+      author: 'Regen Network Development, Inc.',
+      siteUrl: window.location.href,
+      imageUrl: content?.metadata?.openGraphImage?.asset?.url || '',
+    };
+
+    setSiteMetadata(siteMetadata);
+  }, [content]);
 
   const handleOpen = (): void => {
     setOpen(true);
@@ -72,16 +80,15 @@ const BuyersPage = (): JSX.Element => {
 
   return (
     <>
-      <SEO
-        location={location}
-        description={
-          siteMetadata.description ||
-          'Buy carbon credits and other ecosystem system service credits to meet your climate commitments and sustainability goals.'
-        }
-        title={siteMetadata.title}
-        imageUrl={content?.metadata?.openGraphImage?.asset?.url || ''}
-        siteMetadata={siteMetadata}
-      />
+      {siteMetadata && (
+        <SEO
+          location={location}
+          description={siteMetadata.description}
+          title={siteMetadata.title}
+          imageUrl={siteMetadata.imageUrl}
+          siteMetadata={siteMetadata}
+        />
+      )}
       <HeroTitle
         classes={{ main: styles.heroMain }}
         isBanner

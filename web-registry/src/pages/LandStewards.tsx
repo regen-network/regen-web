@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { useLocation } from 'react-router-dom';
-
 import FixedFooter from 'web-components/lib/components/fixed-footer';
 import Modal from 'web-components/lib/components/modal';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
@@ -87,6 +86,7 @@ const LandStewards = (): JSX.Element => {
   const styles = useStyles();
   const [open, setOpen] = useState(false);
   const [modalLink, setModalLink] = useState<string | undefined>();
+  const location = useLocation();
 
   const openModal = (href?: string | null): void => {
     setModalLink(href || undefined);
@@ -97,15 +97,21 @@ const LandStewards = (): JSX.Element => {
     setOpen(false);
   };
 
-  const location = useLocation();
   const { data } = useAllLandStewardsPageQuery({ client });
   const content = data?.allLandStewardsPage?.[0];
 
+  // console.log('content?.metadata?', content?.metadata);
+  console.log('window.location', window.location);
+  console.log('location', location);
+
   const siteMetadata = {
-    title: `For Land Stewards`,
-    description: content?.metadata?.description || '',
-    author: `RND, Inc.`,
+    title: 'For Land Stewards',
+    description:
+      content?.metadata?.description ||
+      'Issue and sell ecosystem service credits to buyers around the world - get paid for your ecological stewardship.',
+    author: 'Regen Network Development, Inc.',
     siteUrl: window.location.href,
+    imageUrl: content?.metadata?.openGraphImage?.asset?.url || '',
   };
 
   return (
@@ -114,7 +120,7 @@ const LandStewards = (): JSX.Element => {
         location={location}
         description={siteMetadata.description}
         title={siteMetadata.title}
-        imageUrl={content?.metadata?.openGraphImage?.asset?.url || ''}
+        imageUrl={siteMetadata.imageUrl}
         siteMetadata={siteMetadata}
       />
       <HeroTitle

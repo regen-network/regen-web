@@ -1,7 +1,11 @@
 query GetOrganizationProfileByEmail($email: String!) {
   userByEmail(email: $email) {
     id
+    email
+    phoneNumber
+    partyId
     partyByPartyId {
+      id
       name
       walletByWalletId {
         addr
@@ -10,6 +14,7 @@ query GetOrganizationProfileByEmail($email: String!) {
     organizationMembersByMemberId(condition: { isOwner: true }) {
       nodes {
         organizationByOrganizationId {
+          id
           legalName
           partyId
           partyByPartyId {

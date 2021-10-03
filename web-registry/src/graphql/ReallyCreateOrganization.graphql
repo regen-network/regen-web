@@ -3,6 +3,9 @@ mutation ReallyCreateOrganization($input: ReallyCreateOrganizationInput!) {
     organization {
       id
       partyId
+      partyByPartyId {
+        addressId
+      }
     }
   }
 }

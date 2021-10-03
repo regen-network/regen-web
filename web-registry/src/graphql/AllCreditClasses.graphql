@@ -3,6 +3,7 @@ query AllCreditClasses {
     nodes {
       id
       uri
+      standard
       creditClassVersionsById(orderBy: CREATED_AT_DESC, first: 1) {
         nodes {
           name

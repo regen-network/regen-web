@@ -62,7 +62,7 @@ const MediaStep: React.FC = () => {
       // TODO: go to next step
     } catch (e) {
       // TODO: Should we display the error banner here?
-      // https://github.com/regen-network/regen-registry/issues/555
+      // https://github.com/regen-network/regen-registry/issues/554
       // console.log(e);
     }
   }

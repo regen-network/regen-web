@@ -11,6 +11,8 @@ type Props = {
   img: string;
   title?: string | null;
   descriptionRaw?: Maybe<Scalars['JSON']> | string;
+  linearGradient?: string;
+  tooltipText?: Maybe<string>;
   isBanner?: boolean;
   classes?: {
     title?: string;
@@ -49,7 +51,8 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 /**
- * Hero section with title, description and background image justified to the lower left with our section component
+ * Hero section with title, description and background image justified to the lower left with our section component.
+ * Optional tooltip when using underlined text in description.
  */
 const HeroTitle: React.FC<Props> = ({ classes, ...props }) => {
   const styles = useStyles();
@@ -58,7 +61,11 @@ const HeroTitle: React.FC<Props> = ({ classes, ...props }) => {
     <BackgroundImgSection
       isBanner={props.isBanner}
       img={props.img}
-      classes={{ main: cx(styles.main, classes?.main), section: classes?.section }}
+      linearGradient={props?.linearGradient}
+      classes={{
+        main: cx(styles.main, classes?.main),
+        section: classes?.section,
+      }}
     >
       {props.title && (
         <Typography variant="h1" className={cx(styles.title, classes?.title)}>
@@ -67,7 +74,7 @@ const HeroTitle: React.FC<Props> = ({ classes, ...props }) => {
       )}
       {props.descriptionRaw && (
         <Typography variant="h4" className={cx(styles.description, classes?.description)}>
-          <BlockContent content={props.descriptionRaw} />
+          <BlockContent content={props.descriptionRaw} tooltipText={props?.tooltipText || ''} />
         </Typography>
       )}
     </BackgroundImgSection>

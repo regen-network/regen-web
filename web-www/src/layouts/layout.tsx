@@ -22,22 +22,17 @@ interface BoolProps {
 }
 
 const Layout: React.FC<Props> = ({ children, location }) => {
-  const footerPaddingBottom: BoolProps = {
-    '/buyers/': true,
-    '/land-stewards/': true,
-  };
-
   const footerItems: [FooterItem, FooterItem, FooterItem] = [
     {
       title: 'get involved',
       items: [
         {
           title: 'Buyers',
-          href: '/buyers/',
+          href: 'https://registry.regen.network/buyers/',
         },
         {
           title: 'Land Stewards',
-          href: '/land-stewards/',
+          href: 'https://registry.regen.network/land-stewards/',
         },
         {
           title: 'Community',
@@ -127,7 +122,6 @@ const Layout: React.FC<Props> = ({ children, location }) => {
           privacyUrl="/privacy-policy"
           termsUrl="/terms-service"
           apiUri={process.env.GATSBY_API_URI}
-          paddingBottom={footerPaddingBottom[location.pathname]}
         />
       </footer>
     </>

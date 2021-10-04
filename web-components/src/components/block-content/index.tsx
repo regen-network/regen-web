@@ -1,24 +1,10 @@
 import React from 'react';
 import BlockContent from '@sanity/block-content-to-react';
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
 
-const serializers = {
-  marks: {
-    link: (props: any) => {
-      const { mark, children } = props;
-      const { blank, href } = mark;
-      return blank ? (
-        <a href={href} target="_blank" rel="noreferrer noopener">
-          {children}
-        </a>
-      ) : (
-        <a href={href}>{children}</a>
-      );
-    },
-  },
-};
+import { UnderlineTooltip } from '../tooltip/UnderlineTooltip';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     '& p:first-child': {
       marginTop: 0,
@@ -29,8 +15,26 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const CustomBlockContent: React.FC<{ content?: any }> = ({ content }) => {
+const CustomBlockContent: React.FC<{ content?: any; tooltipText?: string }> = ({ content, tooltipText }) => {
   const styles = useStyles();
+
+  const serializers = {
+    marks: {
+      link: (props: any) => {
+        const { mark, children } = props;
+        const { blank, href } = mark;
+        return blank ? (
+          <a href={href} target="_blank" rel="noreferrer noopener">
+            {children}
+          </a>
+        ) : (
+          <a href={href}>{children}</a>
+        );
+      },
+      underline: (props: any) => <UnderlineTooltip {...props} title={tooltipText} />,
+    },
+  };
+
   if (content) {
     return (
       <div className={styles.root}>

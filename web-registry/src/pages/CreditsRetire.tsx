@@ -85,7 +85,9 @@ const CreditsRetire: React.FC<{
   const [retireUrl, setRetireUrl] = useState<null | string>(null);
 
   useEffect(() => {
-    setUnits(getUnits(vintagesData, buyerWalletId, vintageId));
+    if (vintagesData && vintagesData.allCreditVintages) {
+      setUnits(getUnits(vintagesData, buyerWalletId, vintageId));
+    }
   }, [vintageId, buyerWalletId, vintagesData]);
 
   const handleVintageChange = (event: React.ChangeEvent<{ value: unknown }>): void => {

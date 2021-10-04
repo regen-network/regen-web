@@ -19,7 +19,7 @@ export interface ImageProps extends OptimizeImageProps {
   delay?: number;
 }
 
-const useStyles = makeStyles<Theme>((theme: Theme) => ({
+const useStyles = makeStyles<Theme>(theme => ({
   figure: {
     marginBlockStart: 0,
     marginBlockEnd: 0,

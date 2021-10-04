@@ -30,8 +30,6 @@ const TitleDescriptionSection = (): JSX.Element => {
               header
               description
             }
-          }
-          outcomes: landStewardsYaml {
             practicesOutcomesSection {
               outcomes {
                 header
@@ -50,11 +48,12 @@ const TitleDescriptionSection = (): JSX.Element => {
       `}
       render={data => {
         const content = data.content.titleDescriptionSection;
-        const outcomes = data.outcomes.practicesOutcomesSection.outcomes;
+        const outcomes = data.content.practicesOutcomesSection.outcomes;
 
-        const outcomesElement: JSX.Element[] = outcomes.items.map(({ image, header, description }) => (
+        const outcomesElement: JSX.Element[] = outcomes?.items?.map(({ image, header, description }) => (
           <ImpactCard name={header} imgSrc={image.publicURL} description={description} largeFontSize />
         ));
+
         return (
           <Section>
             <TitleDescription title={content.header} description={content.description}></TitleDescription>

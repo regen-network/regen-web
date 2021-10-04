@@ -74,15 +74,15 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     paddingRight: theme.spacing(5.75),
     paddingLeft: theme.spacing(5.75),
     [theme.breakpoints.up('sm')]: {
-      paddingTop: theme.spacing(7.5),
-      paddingBottom: theme.spacing(9.5),
+      paddingTop: theme.spacing(4),
+      paddingBottom: theme.spacing(4),
     },
     [theme.breakpoints.up('md')]: {
       marginLeft: props.even ? theme.spacing(3) : theme.spacing(-3),
     },
     [theme.breakpoints.down('xs')]: {
-      paddingTop: theme.spacing(5.75),
-      paddingBottom: theme.spacing(8),
+      paddingTop: theme.spacing(4),
+      paddingBottom: theme.spacing(2),
       paddingRight: 0,
     },
     '&:after': {
@@ -112,6 +112,9 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   }),
   tags: {
     textAlign: 'left',
+    marginBottom: theme.spacing(4),
+    display: 'flex',
+    flexWrap: 'wrap',
   },
   connector: {
     backgroundColor: theme.palette.grey[100],
@@ -146,17 +149,17 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     paddingRight: theme.spacing(2.375),
   },
   number: {
+    display: 'flex',
+    alignItems: 'center',
     color: theme.palette.grey[100],
     fontWeight: 900,
     fontFamily: theme.typography.h1.fontFamily,
     paddingRight: theme.spacing(5),
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.spacing(22.5),
-      marginTop: theme.spacing(10),
     },
     [theme.breakpoints.down('xs')]: {
       fontSize: theme.spacing(15),
-      marginTop: theme.spacing(9),
     },
   },
   title: {
@@ -165,13 +168,18 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     paddingBottom: theme.spacing(4),
     [theme.breakpoints.down('xs')]: {
       fontSize: theme.spacing(5.25),
+      paddingBottom: theme.spacing(3),
     },
     '& a': {
       cursor: 'pointer',
     },
   },
   text: {
+    [theme.breakpoints.up('sm')]: {
+      paddingTop: theme.spacing(5),
+    },
     [theme.breakpoints.down('xs')]: {
+      paddingTop: theme.spacing(3),
       paddingRight: theme.spacing(5.75),
     },
   },

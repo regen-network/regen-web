@@ -5,7 +5,9 @@
 /nonus_investors  /invest/  200
 /rainforestfoundation.html  /case-studies/  200
 /faq.html  /faq/  200
-/farmers_signup.html  /land-stewards/  200
+/farmers_signup.html  https://registry.regen.network/land-stewards/  200
+/land-stewards/  https://registry.regen.network/land-stewards/  200
+/buyers/  https://registry.regen.network/buyers/  200
 /team.html#partners  /partners/  200
 /openteam.html  /partners/  200
 /media.html  /media/  200

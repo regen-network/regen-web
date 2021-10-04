@@ -25,6 +25,11 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     fontFamily: theme.typography.h1.fontFamily,
     padding: `${theme.spacing(0.75)} ${theme.spacing(2)}`,
     marginRight: theme.spacing(2.5),
+    marginBottom: theme.spacing(2.5),
+    whiteSpace: 'nowrap',
+    '&:last-child': {
+      marginRight: 0,
+    },
   }),
 }));
 

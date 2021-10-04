@@ -1,0 +1,12 @@
+fragment timelineItemFields on TimelineItem {
+  title
+  url
+  image {
+    asset {
+      url
+    }
+  }
+  tags {
+    ...tagFields
+  }
+}

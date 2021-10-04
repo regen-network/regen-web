@@ -43,8 +43,12 @@ const useStyles = makeStyles((theme: Theme) => ({
       marginLeft: theme.spacing(-4),
     },
   },
-  bottomSection: {
+  bottomSectionWidth: {
     maxWidth: theme.spacing(175),
+  },
+  bottomSection: {
+    display: 'flex',
+    justifyContent: 'center',
   },
   modal: {
     padding: 0,
@@ -97,7 +101,7 @@ const Home: React.FC = () => {
 
       <HeroAction
         isBanner
-        classes={{ main: styles.bottomSection }}
+        classes={{ main: styles.bottomSectionWidth, section: styles.bottomSection }}
         img={horsesImg}
         openModal={(href: string): void => {
           setModalLink(href);

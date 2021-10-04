@@ -124,8 +124,8 @@ const MobileMenu: React.FC<Props> = ({ menuItems, pathName, linkComponent: Link,
   const theme = useTheme();
   const [open, setOpen] = useState(false);
 
-  const handleOpen = () => void setOpen(true);
-  const handleClose = () => void setOpen(false);
+  const handleOpen = (): void => setOpen(true);
+  const handleClose = (): void => setOpen(false);
 
   // close drawer if route changes
   useEffect(() => {

@@ -1,4 +1,3 @@
-import { Overrides } from '@material-ui/core/styles/overrides';
 import { MuiPickersOverrides } from '@material-ui/pickers/typings/overrides';
 
 type overridesNameToClassKey = {

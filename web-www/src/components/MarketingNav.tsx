@@ -43,8 +43,6 @@ const MarketingNav: React.FC<{ location: Location }> = ({ location }) => {
   const theme = useTheme();
   const headerColors: HeaderColors = {
     '/': theme.palette.primary.main,
-    '/land-stewards/': theme.palette.primary.main,
-    '/buyers/': theme.palette.primary.light,
     '/resources/': theme.palette.primary.main,
     '/privacy-policy/': theme.palette.primary.light,
     '/terms-service/': theme.palette.primary.light,
@@ -66,7 +64,7 @@ const MarketingNav: React.FC<{ location: Location }> = ({ location }) => {
   // Links in rest of the site must use the trailing '/'
   // in order for these to work appropriately
   const headerNoBorderBottomPages: RegExp = new RegExp(
-    '//|/buyers/|/partners/|/contact/|/validators/|/land-stewards/|/resources/|/media/|/team/|/developers/|/science/|/invest/|/case-studies/|/press-kit/|/community/|/wallet-address-registration/|/mainnet/|/token/|/case-studies/[a-z-]+//',
+    '//|/partners/|/contact/|/validators/|/resources/|/media/|/team/|/developers/|/science/|/invest/|/case-studies/|/press-kit/|/community/|/wallet-address-registration/|/mainnet/|/token/|/case-studies/[a-z-]+//',
   );
 
   const standardItems: HeaderDropdownItemProps[] = [
@@ -96,8 +94,18 @@ const MarketingNav: React.FC<{ location: Location }> = ({ location }) => {
   ];
 
   const stakeholderItemsRegistry: HeaderDropdownItemProps[] = [
-    { title: 'Buyers', href: '/buyers/', svg: BuyersIcon, linkComponent: NavLink },
-    { title: 'Land Stewards', href: '/land-stewards/', svg: LandStewardsIcon, linkComponent: NavLink },
+    {
+      title: 'Buyers',
+      href: 'https://registry.regen.network/buyers/',
+      svg: BuyersIcon,
+      linkComponent: NavLink,
+    },
+    {
+      title: 'Land Stewards',
+      href: 'https://registry.regen.network/land-stewards/',
+      svg: LandStewardsIcon,
+      linkComponent: NavLink,
+    },
   ];
 
   const stakeholderItemsCommunity: HeaderDropdownItemProps[] = [

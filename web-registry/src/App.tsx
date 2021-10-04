@@ -17,6 +17,7 @@ import {
   Admin,
   BasicInfo,
   BuyerCreate,
+  BuyersPage,
   CertificatePage,
   ChooseCreditClass,
   CreateCreditClass,
@@ -28,6 +29,8 @@ import {
   CreditsTransfer,
   EntityDisplay,
   Home,
+  // Home,
+  LandStewards,
   MediaStep,
   MethodologyDetails,
   MethodologyReviewProcess,
@@ -96,8 +99,10 @@ const App: React.FC = (): JSX.Element => {
           <Route exact path="/projects/impactag/admin">
             <Redirect to="/projects/wilmot/admin" />
           </Route>
+          <Route exact path="/buyers" component={BuyersPage} />
           <Route exact path="/create-methodology" component={CreateMethodology} />
           <Route exact path="/create-credit-class" component={CreateCreditClass} />
+          <Route exact path="/land-stewards" component={LandStewards} />
           <Route exact path="/methodology-review-process" component={MethodologyReviewProcess} />
           <Route
             path="/projects"

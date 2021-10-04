@@ -65,6 +65,8 @@ export type BottomBanner = {
   title?: Maybe<Scalars['String']>;
   descriptionRaw?: Maybe<Scalars['JSON']>;
   button?: Maybe<Button>;
+  secondButton?: Maybe<Button>;
+  image?: Maybe<CustomImage>;
 };
 
 export type BottomBannerFilter = {
@@ -72,6 +74,8 @@ export type BottomBannerFilter = {
   _type?: Maybe<StringFilter>;
   title?: Maybe<StringFilter>;
   button?: Maybe<ButtonFilter>;
+  secondButton?: Maybe<ButtonFilter>;
+  image?: Maybe<CustomImageFilter>;
 };
 
 export type BottomBannerSorting = {
@@ -79,6 +83,8 @@ export type BottomBannerSorting = {
   _type?: Maybe<SortOrder>;
   title?: Maybe<SortOrder>;
   button?: Maybe<ButtonSorting>;
+  secondButton?: Maybe<ButtonSorting>;
+  image?: Maybe<CustomImageSorting>;
 };
 
 export type Button = {
@@ -134,6 +140,58 @@ export type BuyerSorting = {
   heroSection?: Maybe<HeroSectionSorting>;
   projectsTitle?: Maybe<SortOrder>;
   ctaButton?: Maybe<ButtonSorting>;
+};
+
+export type BuyersPage = Document & {
+  __typename?: 'BuyersPage';
+  /** Document ID */
+  _id?: Maybe<Scalars['ID']>;
+  /** Document type */
+  _type?: Maybe<Scalars['String']>;
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars['DateTime']>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars['DateTime']>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars['String']>;
+  _key?: Maybe<Scalars['String']>;
+  heroSection?: Maybe<HeroSection>;
+  imageGridSection?: Maybe<ImageGridSection>;
+  featuredSection?: Maybe<FeaturedSection>;
+  faqSection?: Maybe<BottomBanner>;
+  footerButtonText?: Maybe<Scalars['String']>;
+  metadata?: Maybe<PageMetadata>;
+};
+
+export type BuyersPageFilter = {
+  /** Apply filters on document level */
+  _?: Maybe<Sanity_DocumentFilter>;
+  _id?: Maybe<IdFilter>;
+  _type?: Maybe<StringFilter>;
+  _createdAt?: Maybe<DatetimeFilter>;
+  _updatedAt?: Maybe<DatetimeFilter>;
+  _rev?: Maybe<StringFilter>;
+  _key?: Maybe<StringFilter>;
+  heroSection?: Maybe<HeroSectionFilter>;
+  imageGridSection?: Maybe<ImageGridSectionFilter>;
+  featuredSection?: Maybe<FeaturedSectionFilter>;
+  faqSection?: Maybe<BottomBannerFilter>;
+  footerButtonText?: Maybe<StringFilter>;
+  metadata?: Maybe<PageMetadataFilter>;
+};
+
+export type BuyersPageSorting = {
+  _id?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  _createdAt?: Maybe<SortOrder>;
+  _updatedAt?: Maybe<SortOrder>;
+  _rev?: Maybe<SortOrder>;
+  _key?: Maybe<SortOrder>;
+  heroSection?: Maybe<HeroSectionSorting>;
+  imageGridSection?: Maybe<ImageGridSectionSorting>;
+  faqSection?: Maybe<BottomBannerSorting>;
+  footerButtonText?: Maybe<SortOrder>;
+  metadata?: Maybe<PageMetadataSorting>;
 };
 
 export type Card = {
@@ -586,6 +644,31 @@ export type DocumentationSorting = {
   image?: Maybe<CustomImageSorting>;
 };
 
+export type DualImageSection = {
+  __typename?: 'DualImageSection';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  left?: Maybe<ImageBoldTextLabel>;
+  right?: Maybe<ImageBoldTextLabel>;
+};
+
+export type DualImageSectionFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  title?: Maybe<StringFilter>;
+  left?: Maybe<ImageBoldTextLabelFilter>;
+  right?: Maybe<ImageBoldTextLabelFilter>;
+};
+
+export type DualImageSectionSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  title?: Maybe<SortOrder>;
+  left?: Maybe<ImageBoldTextLabelSorting>;
+  right?: Maybe<ImageBoldTextLabelSorting>;
+};
+
 export type EcologicalImpact = Document & {
   __typename?: 'EcologicalImpact';
   /** Document ID */
@@ -731,6 +814,52 @@ export type FaqSorting = {
   question?: Maybe<SortOrder>;
 };
 
+export type FeaturedSection = Document & {
+  __typename?: 'FeaturedSection';
+  /** Document ID */
+  _id?: Maybe<Scalars['ID']>;
+  /** Document type */
+  _type?: Maybe<Scalars['String']>;
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars['DateTime']>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars['DateTime']>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars['String']>;
+  _key?: Maybe<Scalars['String']>;
+  header?: Maybe<Scalars['String']>;
+  titleRaw?: Maybe<Scalars['JSON']>;
+  button?: Maybe<Button>;
+  image?: Maybe<CustomImage>;
+  descriptionRaw?: Maybe<Scalars['JSON']>;
+};
+
+export type FeaturedSectionFilter = {
+  /** Apply filters on document level */
+  _?: Maybe<Sanity_DocumentFilter>;
+  _id?: Maybe<IdFilter>;
+  _type?: Maybe<StringFilter>;
+  _createdAt?: Maybe<DatetimeFilter>;
+  _updatedAt?: Maybe<DatetimeFilter>;
+  _rev?: Maybe<StringFilter>;
+  _key?: Maybe<StringFilter>;
+  header?: Maybe<StringFilter>;
+  button?: Maybe<ButtonFilter>;
+  image?: Maybe<CustomImageFilter>;
+};
+
+export type FeaturedSectionSorting = {
+  _id?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  _createdAt?: Maybe<SortOrder>;
+  _updatedAt?: Maybe<SortOrder>;
+  _rev?: Maybe<SortOrder>;
+  _key?: Maybe<SortOrder>;
+  header?: Maybe<SortOrder>;
+  button?: Maybe<ButtonSorting>;
+  image?: Maybe<CustomImageSorting>;
+};
+
 export type File = {
   __typename?: 'File';
   _key?: Maybe<Scalars['String']>;
@@ -819,18 +948,22 @@ export type HeroSection = {
   _type?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
   descriptionRaw?: Maybe<Scalars['JSON']>;
+  /** (Optional) If any text is underlined in the description, it will show this message when hovered */
+  tooltipText?: Maybe<Scalars['String']>;
 };
 
 export type HeroSectionFilter = {
   _key?: Maybe<StringFilter>;
   _type?: Maybe<StringFilter>;
   title?: Maybe<StringFilter>;
+  tooltipText?: Maybe<StringFilter>;
 };
 
 export type HeroSectionSorting = {
   _key?: Maybe<SortOrder>;
   _type?: Maybe<SortOrder>;
   title?: Maybe<SortOrder>;
+  tooltipText?: Maybe<SortOrder>;
 };
 
 export type HomePage = Document & {
@@ -894,12 +1027,119 @@ export type Image = {
   crop?: Maybe<SanityImageCrop>;
 };
 
+export type ImageBoldTextLabel = {
+  __typename?: 'ImageBoldTextLabel';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  boldText?: Maybe<Scalars['String']>;
+  label?: Maybe<Scalars['String']>;
+  image?: Maybe<CustomImage>;
+};
+
+export type ImageBoldTextLabelFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  boldText?: Maybe<StringFilter>;
+  label?: Maybe<StringFilter>;
+  image?: Maybe<CustomImageFilter>;
+};
+
+export type ImageBoldTextLabelSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  boldText?: Maybe<SortOrder>;
+  label?: Maybe<SortOrder>;
+  image?: Maybe<CustomImageSorting>;
+};
+
 export type ImageFilter = {
   _key?: Maybe<StringFilter>;
   _type?: Maybe<StringFilter>;
   asset?: Maybe<SanityImageAssetFilter>;
   hotspot?: Maybe<SanityImageHotspotFilter>;
   crop?: Maybe<SanityImageCropFilter>;
+};
+
+export type ImageGridItem = Document & {
+  __typename?: 'ImageGridItem';
+  /** Document ID */
+  _id?: Maybe<Scalars['ID']>;
+  /** Document type */
+  _type?: Maybe<Scalars['String']>;
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars['DateTime']>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars['DateTime']>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars['String']>;
+  _key?: Maybe<Scalars['String']>;
+  header?: Maybe<Scalars['String']>;
+  descriptionRaw?: Maybe<Scalars['JSON']>;
+  image?: Maybe<CustomImage>;
+};
+
+export type ImageGridItemFilter = {
+  /** Apply filters on document level */
+  _?: Maybe<Sanity_DocumentFilter>;
+  _id?: Maybe<IdFilter>;
+  _type?: Maybe<StringFilter>;
+  _createdAt?: Maybe<DatetimeFilter>;
+  _updatedAt?: Maybe<DatetimeFilter>;
+  _rev?: Maybe<StringFilter>;
+  _key?: Maybe<StringFilter>;
+  header?: Maybe<StringFilter>;
+  image?: Maybe<CustomImageFilter>;
+};
+
+export type ImageGridItemSorting = {
+  _id?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  _createdAt?: Maybe<SortOrder>;
+  _updatedAt?: Maybe<SortOrder>;
+  _rev?: Maybe<SortOrder>;
+  _key?: Maybe<SortOrder>;
+  header?: Maybe<SortOrder>;
+  image?: Maybe<CustomImageSorting>;
+};
+
+export type ImageGridSection = {
+  __typename?: 'ImageGridSection';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  backgroundImage?: Maybe<CustomImage>;
+  items?: Maybe<Array<Maybe<ImageGridItem>>>;
+};
+
+export type ImageGridSectionFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  backgroundImage?: Maybe<CustomImageFilter>;
+};
+
+export type ImageGridSectionSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  backgroundImage?: Maybe<CustomImageSorting>;
+};
+
+export type ImageItemsSection = {
+  __typename?: 'ImageItemsSection';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  imageCards?: Maybe<Array<Maybe<Card>>>;
+};
+
+export type ImageItemsSectionFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  title?: Maybe<StringFilter>;
+};
+
+export type ImageItemsSectionSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  title?: Maybe<SortOrder>;
 };
 
 export type ImageSorting = {
@@ -924,6 +1164,48 @@ export type IntFilter = {
   lte?: Maybe<Scalars['Int']>;
 };
 
+
+export type LandManagementPractice = Document & {
+  __typename?: 'LandManagementPractice';
+  /** Document ID */
+  _id?: Maybe<Scalars['ID']>;
+  /** Document type */
+  _type?: Maybe<Scalars['String']>;
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars['DateTime']>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars['DateTime']>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars['String']>;
+  _key?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  descriptionRaw?: Maybe<Scalars['JSON']>;
+  icon?: Maybe<Image>;
+};
+
+export type LandManagementPracticeFilter = {
+  /** Apply filters on document level */
+  _?: Maybe<Sanity_DocumentFilter>;
+  _id?: Maybe<IdFilter>;
+  _type?: Maybe<StringFilter>;
+  _createdAt?: Maybe<DatetimeFilter>;
+  _updatedAt?: Maybe<DatetimeFilter>;
+  _rev?: Maybe<StringFilter>;
+  _key?: Maybe<StringFilter>;
+  title?: Maybe<StringFilter>;
+  icon?: Maybe<ImageFilter>;
+};
+
+export type LandManagementPracticeSorting = {
+  _id?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  _createdAt?: Maybe<SortOrder>;
+  _updatedAt?: Maybe<SortOrder>;
+  _rev?: Maybe<SortOrder>;
+  _key?: Maybe<SortOrder>;
+  title?: Maybe<SortOrder>;
+  icon?: Maybe<ImageSorting>;
+};
 
 export type LandSteward = {
   __typename?: 'LandSteward';
@@ -955,6 +1237,67 @@ export type LandStewardSorting = {
   projectsTitle?: Maybe<SortOrder>;
   ctaButton?: Maybe<ButtonSorting>;
   connectSection?: Maybe<ConnectSectionSorting>;
+};
+
+export type LandStewardsPage = Document & {
+  __typename?: 'LandStewardsPage';
+  /** Document ID */
+  _id?: Maybe<Scalars['ID']>;
+  /** Document type */
+  _type?: Maybe<Scalars['String']>;
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars['DateTime']>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars['DateTime']>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars['String']>;
+  _key?: Maybe<Scalars['String']>;
+  heroSection?: Maybe<HeroSection>;
+  designedForFarmersSection?: Maybe<ImageItemsSection>;
+  joinFarmersSection?: Maybe<DualImageSection>;
+  practicesOutcomesSection?: Maybe<PracticesOutcomesSection>;
+  timelineSection?: Maybe<TimelineSection>;
+  featuredSection?: Maybe<FeaturedSection>;
+  moreQuestionsSection?: Maybe<BottomBanner>;
+  footerButton?: Maybe<Button>;
+  metadata?: Maybe<PageMetadata>;
+};
+
+export type LandStewardsPageFilter = {
+  /** Apply filters on document level */
+  _?: Maybe<Sanity_DocumentFilter>;
+  _id?: Maybe<IdFilter>;
+  _type?: Maybe<StringFilter>;
+  _createdAt?: Maybe<DatetimeFilter>;
+  _updatedAt?: Maybe<DatetimeFilter>;
+  _rev?: Maybe<StringFilter>;
+  _key?: Maybe<StringFilter>;
+  heroSection?: Maybe<HeroSectionFilter>;
+  designedForFarmersSection?: Maybe<ImageItemsSectionFilter>;
+  joinFarmersSection?: Maybe<DualImageSectionFilter>;
+  practicesOutcomesSection?: Maybe<PracticesOutcomesSectionFilter>;
+  timelineSection?: Maybe<TimelineSectionFilter>;
+  featuredSection?: Maybe<FeaturedSectionFilter>;
+  moreQuestionsSection?: Maybe<BottomBannerFilter>;
+  footerButton?: Maybe<ButtonFilter>;
+  metadata?: Maybe<PageMetadataFilter>;
+};
+
+export type LandStewardsPageSorting = {
+  _id?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  _createdAt?: Maybe<SortOrder>;
+  _updatedAt?: Maybe<SortOrder>;
+  _rev?: Maybe<SortOrder>;
+  _key?: Maybe<SortOrder>;
+  heroSection?: Maybe<HeroSectionSorting>;
+  designedForFarmersSection?: Maybe<ImageItemsSectionSorting>;
+  joinFarmersSection?: Maybe<DualImageSectionSorting>;
+  practicesOutcomesSection?: Maybe<PracticesOutcomesSectionSorting>;
+  timelineSection?: Maybe<TimelineSectionSorting>;
+  moreQuestionsSection?: Maybe<BottomBannerSorting>;
+  footerButton?: Maybe<ButtonSorting>;
+  metadata?: Maybe<PageMetadataSorting>;
 };
 
 export type Link = {
@@ -1158,6 +1501,31 @@ export type PageMetadataSorting = {
   openGraphImage?: Maybe<ImageSorting>;
 };
 
+export type PracticesOutcomesSection = {
+  __typename?: 'PracticesOutcomesSection';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  /** (optional) */
+  note?: Maybe<Scalars['String']>;
+  practices?: Maybe<Array<Maybe<LandManagementPractice>>>;
+  outcomes?: Maybe<Array<Maybe<EcologicalOutcome>>>;
+};
+
+export type PracticesOutcomesSectionFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  title?: Maybe<StringFilter>;
+  note?: Maybe<StringFilter>;
+};
+
+export type PracticesOutcomesSectionSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  title?: Maybe<SortOrder>;
+  note?: Maybe<SortOrder>;
+};
+
 export type Resource = Document & {
   __typename?: 'Resource';
   /** Document ID */
@@ -1247,12 +1615,18 @@ export type RootQuery = {
   Media?: Maybe<Media>;
   Sdg?: Maybe<Sdg>;
   EcologicalOutcome?: Maybe<EcologicalOutcome>;
+  LandManagementPractice?: Maybe<LandManagementPractice>;
+  Tag?: Maybe<Tag>;
   HomePage?: Maybe<HomePage>;
   CreateCreditClassPage?: Maybe<CreateCreditClassPage>;
   CreateMethodologyPage?: Maybe<CreateMethodologyPage>;
   MethodologyReviewProcessPage?: Maybe<MethodologyReviewProcessPage>;
   Methodology?: Maybe<Methodology>;
   CreditClass?: Maybe<CreditClass>;
+  BuyersPage?: Maybe<BuyersPage>;
+  LandStewardsPage?: Maybe<LandStewardsPage>;
+  FeaturedSection?: Maybe<FeaturedSection>;
+  ImageGridItem?: Maybe<ImageGridItem>;
   SanityImageAsset?: Maybe<SanityImageAsset>;
   SanityFileAsset?: Maybe<SanityFileAsset>;
   Document?: Maybe<Document>;
@@ -1263,12 +1637,18 @@ export type RootQuery = {
   allMedia: Array<Media>;
   allSdg: Array<Sdg>;
   allEcologicalOutcome: Array<EcologicalOutcome>;
+  allLandManagementPractice: Array<LandManagementPractice>;
+  allTag: Array<Tag>;
   allHomePage: Array<HomePage>;
   allCreateCreditClassPage: Array<CreateCreditClassPage>;
   allCreateMethodologyPage: Array<CreateMethodologyPage>;
   allMethodologyReviewProcessPage: Array<MethodologyReviewProcessPage>;
   allMethodology: Array<Methodology>;
   allCreditClass: Array<CreditClass>;
+  allBuyersPage: Array<BuyersPage>;
+  allLandStewardsPage: Array<LandStewardsPage>;
+  allFeaturedSection: Array<FeaturedSection>;
+  allImageGridItem: Array<ImageGridItem>;
   allSanityImageAsset: Array<SanityImageAsset>;
   allSanityFileAsset: Array<SanityFileAsset>;
   allDocument: Array<Document>;
@@ -1310,6 +1690,16 @@ export type RootQueryEcologicalOutcomeArgs = {
 };
 
 
+export type RootQueryLandManagementPracticeArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type RootQueryTagArgs = {
+  id: Scalars['ID'];
+};
+
+
 export type RootQueryHomePageArgs = {
   id: Scalars['ID'];
 };
@@ -1336,6 +1726,26 @@ export type RootQueryMethodologyArgs = {
 
 
 export type RootQueryCreditClassArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type RootQueryBuyersPageArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type RootQueryLandStewardsPageArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type RootQueryFeaturedSectionArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type RootQueryImageGridItemArgs = {
   id: Scalars['ID'];
 };
 
@@ -1411,6 +1821,22 @@ export type RootQueryAllEcologicalOutcomeArgs = {
 };
 
 
+export type RootQueryAllLandManagementPracticeArgs = {
+  where?: Maybe<LandManagementPracticeFilter>;
+  sort?: Maybe<Array<LandManagementPracticeSorting>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+};
+
+
+export type RootQueryAllTagArgs = {
+  where?: Maybe<TagFilter>;
+  sort?: Maybe<Array<TagSorting>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+};
+
+
 export type RootQueryAllHomePageArgs = {
   where?: Maybe<HomePageFilter>;
   sort?: Maybe<Array<HomePageSorting>>;
@@ -1454,6 +1880,38 @@ export type RootQueryAllMethodologyArgs = {
 export type RootQueryAllCreditClassArgs = {
   where?: Maybe<CreditClassFilter>;
   sort?: Maybe<Array<CreditClassSorting>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+};
+
+
+export type RootQueryAllBuyersPageArgs = {
+  where?: Maybe<BuyersPageFilter>;
+  sort?: Maybe<Array<BuyersPageSorting>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+};
+
+
+export type RootQueryAllLandStewardsPageArgs = {
+  where?: Maybe<LandStewardsPageFilter>;
+  sort?: Maybe<Array<LandStewardsPageSorting>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+};
+
+
+export type RootQueryAllFeaturedSectionArgs = {
+  where?: Maybe<FeaturedSectionFilter>;
+  sort?: Maybe<Array<FeaturedSectionSorting>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+};
+
+
+export type RootQueryAllImageGridItemArgs = {
+  where?: Maybe<ImageGridItemFilter>;
+  sort?: Maybe<Array<ImageGridItemSorting>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
@@ -1994,6 +2452,122 @@ export type StringFilter = {
   nin?: Maybe<Array<Scalars['String']>>;
 };
 
+export type Tag = Document & {
+  __typename?: 'Tag';
+  /** Document ID */
+  _id?: Maybe<Scalars['ID']>;
+  /** Document type */
+  _type?: Maybe<Scalars['String']>;
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars['DateTime']>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars['DateTime']>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars['String']>;
+  _key?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  /** Must be a legal CSS color, as in https://www.w3schools.com/cssref/css_colors_legal.asp */
+  color?: Maybe<Scalars['String']>;
+};
+
+export type TagFilter = {
+  /** Apply filters on document level */
+  _?: Maybe<Sanity_DocumentFilter>;
+  _id?: Maybe<IdFilter>;
+  _type?: Maybe<StringFilter>;
+  _createdAt?: Maybe<DatetimeFilter>;
+  _updatedAt?: Maybe<DatetimeFilter>;
+  _rev?: Maybe<StringFilter>;
+  _key?: Maybe<StringFilter>;
+  name?: Maybe<StringFilter>;
+  color?: Maybe<StringFilter>;
+};
+
+export type TagSorting = {
+  _id?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  _createdAt?: Maybe<SortOrder>;
+  _updatedAt?: Maybe<SortOrder>;
+  _rev?: Maybe<SortOrder>;
+  _key?: Maybe<SortOrder>;
+  name?: Maybe<SortOrder>;
+  color?: Maybe<SortOrder>;
+};
+
+export type TimelineItem = {
+  __typename?: 'TimelineItem';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  /** (Optional) */
+  url?: Maybe<Scalars['String']>;
+  image?: Maybe<Image>;
+  tags?: Maybe<Array<Maybe<Tag>>>;
+};
+
+export type TimelineItemFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  title?: Maybe<StringFilter>;
+  url?: Maybe<StringFilter>;
+  image?: Maybe<ImageFilter>;
+};
+
+export type TimelineItemSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  title?: Maybe<SortOrder>;
+  url?: Maybe<SortOrder>;
+  image?: Maybe<ImageSorting>;
+};
+
+export type TimelineSection = {
+  __typename?: 'TimelineSection';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  header?: Maybe<Scalars['String']>;
+  timelineItems?: Maybe<Array<Maybe<TimelineItem>>>;
+};
+
+export type TimelineSectionFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  header?: Maybe<StringFilter>;
+};
+
+export type TimelineSectionSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  header?: Maybe<SortOrder>;
+};
+
+export type AllBuyersPageQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllBuyersPageQuery = (
+  { __typename?: 'RootQuery' }
+  & { allBuyersPage: Array<(
+    { __typename?: 'BuyersPage' }
+    & Pick<BuyersPage, 'footerButtonText'>
+    & { heroSection?: Maybe<(
+      { __typename?: 'HeroSection' }
+      & HeroSectionFieldsFragment
+    )>, imageGridSection?: Maybe<(
+      { __typename?: 'ImageGridSection' }
+      & ImageGridSectionFieldsFragment
+    )>, featuredSection?: Maybe<(
+      { __typename?: 'FeaturedSection' }
+      & FeaturedSectionFieldsFragment
+    )>, faqSection?: Maybe<(
+      { __typename?: 'BottomBanner' }
+      & BottomBannerFieldsFragment
+    )>, metadata?: Maybe<(
+      { __typename?: 'PageMetadata' }
+      & PageMetadataFieldsFragment
+    )> }
+  )> }
+);
+
 export type AllCreateCreditClassPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -2179,6 +2753,66 @@ export type AllHomePageQuery = (
   )> }
 );
 
+export type AllLandStewardsPageQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllLandStewardsPageQuery = (
+  { __typename?: 'RootQuery' }
+  & { allLandStewardsPage: Array<(
+    { __typename?: 'LandStewardsPage' }
+    & { heroSection?: Maybe<(
+      { __typename?: 'HeroSection' }
+      & HeroSectionFieldsFragment
+    )>, designedForFarmersSection?: Maybe<(
+      { __typename?: 'ImageItemsSection' }
+      & Pick<ImageItemsSection, 'title'>
+      & { imageCards?: Maybe<Array<Maybe<(
+        { __typename?: 'Card' }
+        & CardFieldsFragment
+      )>>> }
+    )>, joinFarmersSection?: Maybe<(
+      { __typename?: 'DualImageSection' }
+      & Pick<DualImageSection, 'title'>
+      & { left?: Maybe<(
+        { __typename?: 'ImageBoldTextLabel' }
+        & ImageBoldTextLabelFieldsFragment
+      )>, right?: Maybe<(
+        { __typename?: 'ImageBoldTextLabel' }
+        & ImageBoldTextLabelFieldsFragment
+      )> }
+    )>, practicesOutcomesSection?: Maybe<(
+      { __typename?: 'PracticesOutcomesSection' }
+      & Pick<PracticesOutcomesSection, 'title' | 'note'>
+      & { practices?: Maybe<Array<Maybe<(
+        { __typename?: 'LandManagementPractice' }
+        & LandManagementPracticeFieldsFragment
+      )>>>, outcomes?: Maybe<Array<Maybe<(
+        { __typename?: 'EcologicalOutcome' }
+        & EcologicalOutcomeFieldsFragment
+      )>>> }
+    )>, timelineSection?: Maybe<(
+      { __typename?: 'TimelineSection' }
+      & Pick<TimelineSection, 'header'>
+      & { timelineItems?: Maybe<Array<Maybe<(
+        { __typename?: 'TimelineItem' }
+        & TimelineItemFieldsFragment
+      )>>> }
+    )>, featuredSection?: Maybe<(
+      { __typename?: 'FeaturedSection' }
+      & FeaturedSectionFieldsFragment
+    )>, moreQuestionsSection?: Maybe<(
+      { __typename?: 'BottomBanner' }
+      & BottomBannerFieldsFragment
+    )>, footerButton?: Maybe<(
+      { __typename?: 'Button' }
+      & ButtonFieldsFragment
+    )>, metadata?: Maybe<(
+      { __typename?: 'PageMetadata' }
+      & PageMetadataFieldsFragment
+    )> }
+  )> }
+);
+
 export type AllMethodologyQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -2266,6 +2900,12 @@ export type BottomBannerFieldsFragment = (
   & { button?: Maybe<(
     { __typename?: 'Button' }
     & ButtonFieldsFragment
+  )>, secondButton?: Maybe<(
+    { __typename?: 'Button' }
+    & ButtonFieldsFragment
+  )>, image?: Maybe<(
+    { __typename?: 'CustomImage' }
+    & CustomImageFieldsFragment
   )> }
 );
 
@@ -2324,9 +2964,62 @@ export type EcologicalOutcomeFieldsFragment = (
   )> }
 );
 
+export type FeaturedSectionFieldsFragment = (
+  { __typename?: 'FeaturedSection' }
+  & Pick<FeaturedSection, 'header' | 'titleRaw' | 'descriptionRaw'>
+  & { button?: Maybe<(
+    { __typename?: 'Button' }
+    & ButtonFieldsFragment
+  )>, image?: Maybe<(
+    { __typename?: 'CustomImage' }
+    & CustomImageFieldsFragment
+  )> }
+);
+
 export type HeroSectionFieldsFragment = (
   { __typename?: 'HeroSection' }
-  & Pick<HeroSection, 'title' | 'descriptionRaw'>
+  & Pick<HeroSection, 'title' | 'descriptionRaw' | 'tooltipText'>
+);
+
+export type ImageBoldTextLabelFieldsFragment = (
+  { __typename?: 'ImageBoldTextLabel' }
+  & Pick<ImageBoldTextLabel, 'boldText' | 'label'>
+  & { image?: Maybe<(
+    { __typename?: 'CustomImage' }
+    & CustomImageFieldsFragment
+  )> }
+);
+
+export type ImageGridItemFieldsFragment = (
+  { __typename?: 'ImageGridItem' }
+  & Pick<ImageGridItem, 'header' | 'descriptionRaw'>
+  & { image?: Maybe<(
+    { __typename?: 'CustomImage' }
+    & CustomImageFieldsFragment
+  )> }
+);
+
+export type ImageGridSectionFieldsFragment = (
+  { __typename?: 'ImageGridSection' }
+  & { backgroundImage?: Maybe<(
+    { __typename?: 'CustomImage' }
+    & CustomImageFieldsFragment
+  )>, items?: Maybe<Array<Maybe<(
+    { __typename?: 'ImageGridItem' }
+    & ImageGridItemFieldsFragment
+  )>>> }
+);
+
+export type LandManagementPracticeFieldsFragment = (
+  { __typename?: 'LandManagementPractice' }
+  & Pick<LandManagementPractice, 'title' | 'descriptionRaw'>
+  & { icon?: Maybe<(
+    { __typename?: 'Image' }
+    & { asset?: Maybe<(
+      { __typename?: 'SanityImageAsset' }
+      & Pick<SanityImageAsset, 'url'>
+    )> }
+  )> }
 );
 
 export type LinkFieldsFragment = (
@@ -2390,6 +3083,26 @@ export type StepCardFieldsFragment = (
     { __typename?: 'CustomImage' }
     & CustomImageFieldsFragment
   )> }
+);
+
+export type TimelineItemFieldsFragment = (
+  { __typename?: 'TimelineItem' }
+  & Pick<TimelineItem, 'title' | 'url'>
+  & { image?: Maybe<(
+    { __typename?: 'Image' }
+    & { asset?: Maybe<(
+      { __typename?: 'SanityImageAsset' }
+      & Pick<SanityImageAsset, 'url'>
+    )> }
+  )>, tags?: Maybe<Array<Maybe<(
+    { __typename?: 'Tag' }
+    & TagFieldsFragment
+  )>>> }
+);
+
+export type TagFieldsFragment = (
+  { __typename?: 'Tag' }
+  & Pick<Tag, 'name' | 'color'>
 );
 
 export const LinkFieldsFragmentDoc = gql`
@@ -2478,8 +3191,15 @@ export const BottomBannerFieldsFragmentDoc = gql`
   button {
     ...buttonFields
   }
+  secondButton {
+    ...buttonFields
+  }
+  image {
+    ...customImageFields
+  }
 }
-    ${ButtonFieldsFragmentDoc}`;
+    ${ButtonFieldsFragmentDoc}
+${CustomImageFieldsFragmentDoc}`;
 export const CardFieldsFragmentDoc = gql`
     fragment cardFields on Card {
   title
@@ -2512,10 +3232,65 @@ export const EcologicalOutcomeFieldsFragmentDoc = gql`
   }
 }
     ${CustomImageFieldsFragmentDoc}`;
+export const FeaturedSectionFieldsFragmentDoc = gql`
+    fragment featuredSectionFields on FeaturedSection {
+  header
+  titleRaw
+  descriptionRaw
+  button {
+    ...buttonFields
+  }
+  image {
+    ...customImageFields
+  }
+}
+    ${ButtonFieldsFragmentDoc}
+${CustomImageFieldsFragmentDoc}`;
 export const HeroSectionFieldsFragmentDoc = gql`
     fragment heroSectionFields on HeroSection {
   title
   descriptionRaw
+  tooltipText
+}
+    `;
+export const ImageBoldTextLabelFieldsFragmentDoc = gql`
+    fragment imageBoldTextLabelFields on ImageBoldTextLabel {
+  boldText
+  label
+  image {
+    ...customImageFields
+  }
+}
+    ${CustomImageFieldsFragmentDoc}`;
+export const ImageGridItemFieldsFragmentDoc = gql`
+    fragment imageGridItemFields on ImageGridItem {
+  header
+  descriptionRaw
+  image {
+    ...customImageFields
+  }
+}
+    ${CustomImageFieldsFragmentDoc}`;
+export const ImageGridSectionFieldsFragmentDoc = gql`
+    fragment imageGridSectionFields on ImageGridSection {
+  backgroundImage {
+    ...customImageFields
+  }
+  items {
+    ...imageGridItemFields
+  }
+}
+    ${CustomImageFieldsFragmentDoc}
+${ImageGridItemFieldsFragmentDoc}`;
+export const LandManagementPracticeFieldsFragmentDoc = gql`
+    fragment landManagementPracticeFields on LandManagementPractice {
+  title
+  descriptionRaw
+  icon {
+    asset {
+      url
+    }
+  }
 }
     `;
 export const MediaFieldsFragmentDoc = gql`
@@ -2555,6 +3330,79 @@ export const ResourceFieldsFragmentDoc = gql`
 }
     ${CustomImageFieldsFragmentDoc}
 ${ButtonFieldsFragmentDoc}`;
+export const TagFieldsFragmentDoc = gql`
+    fragment tagFields on Tag {
+  name
+  color
+}
+    `;
+export const TimelineItemFieldsFragmentDoc = gql`
+    fragment timelineItemFields on TimelineItem {
+  title
+  url
+  image {
+    asset {
+      url
+    }
+  }
+  tags {
+    ...tagFields
+  }
+}
+    ${TagFieldsFragmentDoc}`;
+export const AllBuyersPageDocument = gql`
+    query allBuyersPage {
+  allBuyersPage {
+    heroSection {
+      ...heroSectionFields
+    }
+    imageGridSection {
+      ...imageGridSectionFields
+    }
+    featuredSection {
+      ...featuredSectionFields
+    }
+    faqSection {
+      ...bottomBannerFields
+    }
+    footerButtonText
+    metadata {
+      ...pageMetadataFields
+    }
+  }
+}
+    ${HeroSectionFieldsFragmentDoc}
+${ImageGridSectionFieldsFragmentDoc}
+${FeaturedSectionFieldsFragmentDoc}
+${BottomBannerFieldsFragmentDoc}
+${PageMetadataFieldsFragmentDoc}`;
+
+/**
+ * __useAllBuyersPageQuery__
+ *
+ * To run a query within a React component, call `useAllBuyersPageQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAllBuyersPageQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAllBuyersPageQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useAllBuyersPageQuery(baseOptions?: Apollo.QueryHookOptions<AllBuyersPageQuery, AllBuyersPageQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AllBuyersPageQuery, AllBuyersPageQueryVariables>(AllBuyersPageDocument, options);
+      }
+export function useAllBuyersPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllBuyersPageQuery, AllBuyersPageQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AllBuyersPageQuery, AllBuyersPageQueryVariables>(AllBuyersPageDocument, options);
+        }
+export type AllBuyersPageQueryHookResult = ReturnType<typeof useAllBuyersPageQuery>;
+export type AllBuyersPageLazyQueryHookResult = ReturnType<typeof useAllBuyersPageLazyQuery>;
+export type AllBuyersPageQueryResult = Apollo.QueryResult<AllBuyersPageQuery, AllBuyersPageQueryVariables>;
 export const AllCreateCreditClassPageDocument = gql`
     query allCreateCreditClassPage {
   allCreateCreditClassPage {
@@ -2851,6 +3699,94 @@ export function useAllHomePageLazyQuery(baseOptions?: Apollo.LazyQueryHookOption
 export type AllHomePageQueryHookResult = ReturnType<typeof useAllHomePageQuery>;
 export type AllHomePageLazyQueryHookResult = ReturnType<typeof useAllHomePageLazyQuery>;
 export type AllHomePageQueryResult = Apollo.QueryResult<AllHomePageQuery, AllHomePageQueryVariables>;
+export const AllLandStewardsPageDocument = gql`
+    query allLandStewardsPage {
+  allLandStewardsPage {
+    heroSection {
+      ...heroSectionFields
+    }
+    designedForFarmersSection {
+      title
+      imageCards {
+        ...cardFields
+      }
+    }
+    joinFarmersSection {
+      title
+      left {
+        ...imageBoldTextLabelFields
+      }
+      right {
+        ...imageBoldTextLabelFields
+      }
+    }
+    practicesOutcomesSection {
+      title
+      note
+      practices {
+        ...landManagementPracticeFields
+      }
+      outcomes {
+        ...ecologicalOutcomeFields
+      }
+    }
+    timelineSection {
+      header
+      timelineItems {
+        ...timelineItemFields
+      }
+    }
+    featuredSection {
+      ...featuredSectionFields
+    }
+    moreQuestionsSection {
+      ...bottomBannerFields
+    }
+    footerButton {
+      ...buttonFields
+    }
+    metadata {
+      ...pageMetadataFields
+    }
+  }
+}
+    ${HeroSectionFieldsFragmentDoc}
+${CardFieldsFragmentDoc}
+${ImageBoldTextLabelFieldsFragmentDoc}
+${LandManagementPracticeFieldsFragmentDoc}
+${EcologicalOutcomeFieldsFragmentDoc}
+${TimelineItemFieldsFragmentDoc}
+${FeaturedSectionFieldsFragmentDoc}
+${BottomBannerFieldsFragmentDoc}
+${ButtonFieldsFragmentDoc}
+${PageMetadataFieldsFragmentDoc}`;
+
+/**
+ * __useAllLandStewardsPageQuery__
+ *
+ * To run a query within a React component, call `useAllLandStewardsPageQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAllLandStewardsPageQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAllLandStewardsPageQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useAllLandStewardsPageQuery(baseOptions?: Apollo.QueryHookOptions<AllLandStewardsPageQuery, AllLandStewardsPageQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AllLandStewardsPageQuery, AllLandStewardsPageQueryVariables>(AllLandStewardsPageDocument, options);
+      }
+export function useAllLandStewardsPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllLandStewardsPageQuery, AllLandStewardsPageQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AllLandStewardsPageQuery, AllLandStewardsPageQueryVariables>(AllLandStewardsPageDocument, options);
+        }
+export type AllLandStewardsPageQueryHookResult = ReturnType<typeof useAllLandStewardsPageQuery>;
+export type AllLandStewardsPageLazyQueryHookResult = ReturnType<typeof useAllLandStewardsPageLazyQuery>;
+export type AllLandStewardsPageQueryResult = Apollo.QueryResult<AllLandStewardsPageQuery, AllLandStewardsPageQueryVariables>;
 export const AllMethodologyDocument = gql`
     query allMethodology {
   allMethodology {

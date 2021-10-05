@@ -3,7 +3,7 @@ import { useTheme, makeStyles, IconButton } from '@material-ui/core';
 import { WalletIcon } from 'web-components/lib/components/icons/WalletIcon';
 import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 
-import { useWallet, ContextType, checkForWallet } from '../../wallet';
+import { useWallet, ContextType } from '../../wallet';
 
 interface Keplr {
   enable: (chainId: string) => Promise<void>;
@@ -70,7 +70,7 @@ const WalletButton: React.FC = () => {
   const [showAlert, setShowAlert] = useState(false);
   const chainId = 'regen-hambach-1';
 
-  const { wallet } = useWallet();
+  const { wallet, getWallet } = useWallet();
 
   console.log('useWallet wallet', wallet);
 
@@ -162,7 +162,7 @@ const WalletButton: React.FC = () => {
           // features: ['stargate'],
         })
         .then(() => {
-          checkForWallet();
+          getWallet && getWallet();
         })
         .catch(() => {
           // setWallet('');

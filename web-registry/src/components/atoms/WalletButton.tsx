@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState } from 'react';
 import { useTheme, makeStyles, IconButton } from '@material-ui/core';
 import { WalletIcon } from 'web-components/lib/components/icons/WalletIcon';
 import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
@@ -18,9 +18,14 @@ interface ChainKey {
   isNanoLedger: boolean;
 }
 
+interface OfflineSigner {
+  getAccounts: () => Promise<any>;
+}
+
 declare global {
   interface Window {
     keplr?: Keplr;
+    getOfflineSigner: (chainId: string) => OfflineSigner;
   }
 }
 
@@ -63,8 +68,14 @@ const WalletButton: React.FC = () => {
   const [showAlert, setShowAlert] = useState(false);
   const chainId = 'regen-hambach-1';
 
+  window.onload = async () => {
+    if (!wallet) {
+      await checkForWallet();
+    }
+  };
+
   const checkForWallet = async (): Promise<void> => {
-    if (!wallet && window.keplr) {
+    if (window.keplr && !wallet) {
       // Enabling before using the Keplr is recommended.
       // This method will ask the user whether or not to allow access if they haven't visited this website.
       // Also, it will request user to unlock the wallet if the wallet is locked.
@@ -74,12 +85,6 @@ const WalletButton: React.FC = () => {
       }
     }
   };
-
-  const checkForWalletUseCallback = useCallback(checkForWallet, []);
-
-  useEffect(() => {
-    checkForWalletUseCallback();
-  }, [checkForWalletUseCallback]);
 
   const connectToKeplr = async (): Promise<any> => {
     if (window.keplr) {

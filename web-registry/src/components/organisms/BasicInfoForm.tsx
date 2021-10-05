@@ -13,11 +13,6 @@ import OnboardingFooter from 'web-components/lib/components/fixed-footer/Onboard
 import { useShaclGraphByUriQuery } from '../../generated/graphql';
 import { validate, getProjectPageBaseData } from '../../lib/rdf';
 
-interface BasicInfoFormProps {
-  submit: (values: BasicInfoFormValues) => Promise<void>;
-  initialValues?: BasicInfoFormValues;
-}
-
 export interface BasicInfoFormValues {
   'http://schema.org/name': string;
   'http://regen.network/size': {
@@ -70,7 +65,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const BasicInfoForm: React.FC<BasicInfoFormProps> = ({ submit, initialValues }) => {
+const BasicInfoForm: React.FC<{
+  submit: (values: BasicInfoFormValues) => Promise<void>;
+  initialValues?: BasicInfoFormValues;
+}> = ({ submit, initialValues }) => {
   const classes = useStyles();
   const { data: graphData } = useShaclGraphByUriQuery({
     variables: {
@@ -164,8 +162,8 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({ submit, initialValues }) 
             <OnboardingFooter
               saveText={'Save and Next'}
               onSave={submitForm}
-              onPrev={() => null} // TODO https://github.com/regen-network/regen-web/issues/655
-              onNext={() => null} // TODO https://github.com/regen-network/regen-web/issues/655
+              onPrev={() => null} // TODO https://github.com/regen-network/regen-registry/issues/561
+              onNext={() => null} // TODO https://github.com/regen-network/regen-registry/issues/561
               hideProgress={false} // TODO
               saveDisabled={!isValid || isSubmitting}
               percentComplete={0} // TODO

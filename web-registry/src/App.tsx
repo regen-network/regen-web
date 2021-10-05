@@ -12,30 +12,34 @@ import { RegistryNav, AppFooter } from './components/organisms';
 
 import {
   // Additionality,
+  // Eligibility,
+  // GettingStarted,
   Admin,
   BasicInfo,
   BuyerCreate,
   BuyersPage,
   CertificatePage,
   ChooseCreditClass,
+  CreateCreditClass,
   CreateMethodology,
+  CreditClassDetails,
   Credits,
   CreditsIssue,
   CreditsRetire,
   CreditsTransfer,
   EntityDisplay,
-  // Eligibility,
-  // GettingStarted,
   Home,
   // Home,
   LandStewards,
   MediaStep,
+  MethodologyDetails,
   MethodologyReviewProcess,
   NotFoundPage,
   OrganizationProfile,
   PostPurchase,
   Project,
   ProjectList,
+  ProjectLocation,
   Projects,
   Roles,
   Seller,
@@ -43,9 +47,6 @@ import {
   Story,
   UserProfile,
   VerifyEmail,
-  MethodologyDetails,
-  CreateCreditClass,
-  CreditClassDetails,
 } from './pages';
 
 import './App.css';
@@ -144,6 +145,7 @@ const App: React.FC = (): JSX.Element => {
                   component={ChooseCreditClass}
                 />
                 <ProtectedRoute path={`${path}/:projectId/basic-info`} component={BasicInfo} />
+                <ProtectedRoute path={`${path}/:projectId/location`} component={ProjectLocation} />
                 <ProtectedRoute path={`${path}/:projectId/story`} component={Story} />
                 <ProtectedRoute path={`${path}/:projectId/media`} component={MediaStep} />
                 <ProtectedRoute path={`${path}/:projectId/roles`} component={Roles} />

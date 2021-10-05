@@ -3,7 +3,7 @@ import { useTheme, makeStyles, IconButton } from '@material-ui/core';
 import { WalletIcon } from 'web-components/lib/components/icons/WalletIcon';
 import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 
-import { useWallet } from '../../wallet';
+import { useWallet, chainId } from '../../wallet';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -42,9 +42,6 @@ const WalletButton: React.FC = () => {
   const theme = useTheme();
   const { wallet, getWallet } = useWallet();
   const [showAlert, setShowAlert] = useState(false);
-  const chainId = 'regen-hambach-1';
-
-  console.log('useWallet wallet', wallet);
 
   const connectToKeplr = async (): Promise<any> => {
     if (window.keplr) {

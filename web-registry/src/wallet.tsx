@@ -26,15 +26,14 @@ declare global {
   }
 }
 
-const chainId = 'regen-hambach-1';
-
-export type ContextType = {
+type ContextType = {
   wallet?: any;
   getWallet?: () => Promise<void>;
 };
 
 const wallet = {};
 const WalletContext = createContext<ContextType>({ wallet });
+export const chainId = 'regen-hambach-1'; //TODO env
 
 export const WalletProvider: React.FC = ({ children }) => {
   const [wallet, setWallet] = useState<any>();

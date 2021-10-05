@@ -3,6 +3,8 @@ import { useTheme, makeStyles, IconButton } from '@material-ui/core';
 import { WalletIcon } from 'web-components/lib/components/icons/WalletIcon';
 import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 
+import { useWallet, ContextType, checkForWallet } from '../../wallet';
+
 interface Keplr {
   enable: (chainId: string) => Promise<void>;
   experimentalSuggestChain: (chainOptions: object) => Promise<void>;
@@ -64,27 +66,13 @@ const useStyles = makeStyles(theme => ({
 const WalletButton: React.FC = () => {
   const styles = useStyles();
   const theme = useTheme();
-  const [wallet, setWallet] = useState('');
+  // const [wallet, setWallet] = useState('');
   const [showAlert, setShowAlert] = useState(false);
   const chainId = 'regen-hambach-1';
 
-  window.onload = async () => {
-    if (!wallet) {
-      await checkForWallet();
-    }
-  };
+  const { wallet } = useWallet();
 
-  const checkForWallet = async (): Promise<void> => {
-    if (window.keplr && !wallet) {
-      // Enabling before using the Keplr is recommended.
-      // This method will ask the user whether or not to allow access if they haven't visited this website.
-      // Also, it will request user to unlock the wallet if the wallet is locked.
-      const key = await window.keplr.getKey(chainId);
-      if (key && key.bech32Address) {
-        setWallet(key.bech32Address.substring(0, 10) + '...');
-      }
-    }
-  };
+  console.log('useWallet wallet', wallet);
 
   const connectToKeplr = async (): Promise<any> => {
     if (window.keplr) {
@@ -177,7 +165,7 @@ const WalletButton: React.FC = () => {
           checkForWallet();
         })
         .catch(() => {
-          setWallet('');
+          // setWallet('');
         });
     } else {
       setShowAlert(true);
@@ -192,7 +180,7 @@ const WalletButton: React.FC = () => {
           <WalletIcon color={wallet ? theme.palette.secondary.main : theme.palette.info.dark} />
         </IconButton>
       </div>
-      <span className={styles.walletAddress}>{wallet}</span>
+      <span className={styles.walletAddress}>{wallet?.shortAddress}</span>
       {showAlert && <ErrorBanner text="Please install Keplr extension to use Regen Ledger features" />}
     </div>
   );

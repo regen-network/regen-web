@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, createContext } from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { useAuth0, OAuthError } from '@auth0/auth0-react';
 

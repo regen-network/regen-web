@@ -52,8 +52,6 @@ const WalletButton: React.FC = () => {
     }
   };
 
-  console.log('wallet', wallet);
-
   return chainId ? (
     <div className={styles.root}>
       <div className={styles.walletButtonWrapper}>

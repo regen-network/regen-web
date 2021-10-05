@@ -1,4 +1,31 @@
-import React, { useState, useEffect, createContext } from 'react';
+import React, { useState, createContext } from 'react';
+
+interface Keplr {
+  enable: (chainId: string) => Promise<void>;
+  experimentalSuggestChain: (chainOptions: object) => Promise<void>;
+  getKey: (chainId: string) => Promise<ChainKey>;
+}
+
+interface ChainKey {
+  name: string;
+  algo: string;
+  pubKey: Uint8Array;
+  address: Uint8Array;
+  bech32Address: string;
+  isNanoLedger: boolean;
+}
+
+// interface OfflineSigner {
+//   getAccounts: () => Promise<any>;
+// }
+
+declare global {
+  interface Window {
+    keplr?: Keplr;
+    // getOfflineSigner: (chainId: string) => OfflineSigner;
+  }
+}
+
 const chainId = 'regen-hambach-1';
 
 export type ContextType = {

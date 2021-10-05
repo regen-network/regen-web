@@ -1,4 +1,4 @@
-import React, { createContext } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';

@@ -3,33 +3,7 @@ import { useTheme, makeStyles, IconButton } from '@material-ui/core';
 import { WalletIcon } from 'web-components/lib/components/icons/WalletIcon';
 import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 
-import { useWallet, ContextType } from '../../wallet';
-
-interface Keplr {
-  enable: (chainId: string) => Promise<void>;
-  experimentalSuggestChain: (chainOptions: object) => Promise<void>;
-  getKey: (chainId: string) => Promise<ChainKey>;
-}
-
-interface ChainKey {
-  name: string;
-  algo: string;
-  pubKey: Uint8Array;
-  address: Uint8Array;
-  bech32Address: string;
-  isNanoLedger: boolean;
-}
-
-interface OfflineSigner {
-  getAccounts: () => Promise<any>;
-}
-
-declare global {
-  interface Window {
-    keplr?: Keplr;
-    getOfflineSigner: (chainId: string) => OfflineSigner;
-  }
-}
+import { useWallet } from '../../wallet';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -66,11 +40,9 @@ const useStyles = makeStyles(theme => ({
 const WalletButton: React.FC = () => {
   const styles = useStyles();
   const theme = useTheme();
-  // const [wallet, setWallet] = useState('');
+  const { wallet, getWallet } = useWallet();
   const [showAlert, setShowAlert] = useState(false);
   const chainId = 'regen-hambach-1';
-
-  const { wallet, getWallet } = useWallet();
 
   console.log('useWallet wallet', wallet);
 

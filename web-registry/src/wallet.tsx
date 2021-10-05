@@ -49,7 +49,6 @@ export const WalletProvider: React.FC = ({ children }) => {
 
   const getWallet = async (): Promise<void> => {
     const key = await checkForWallet();
-    console.log('key', key);
 
     if (key && key.bech32Address) {
       const keplrWallet = {

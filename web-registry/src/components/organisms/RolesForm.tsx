@@ -85,7 +85,7 @@ function getEntity(query?: GetOrganizationProfileByEmailQuery): FormValues | nul
       };
     } else {
       return {
-        '@type': 'http://regen.network/User',
+        '@type': 'http://regen.network/Individual',
         id: user.id,
         partyId: user.partyId,
         'http://schema.org/name': user.partyByPartyId?.name,
@@ -126,6 +126,8 @@ const RolesForm: React.FC<RolesFormProps> = ({ submit, initialValues, projectCre
         // Remove duplicates and empty values
         (v, i, self) => self.findIndex(t => t.id === v.id) === i && !!v?.['@type'],
       );
+    } else if (creatorEntity) {
+      initEntities = [creatorEntity];
     }
     setEntities(initEntities);
   }, [initialValues, projectCreator]);

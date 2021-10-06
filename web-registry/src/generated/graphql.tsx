@@ -17152,7 +17152,7 @@ export type ProjectByIdQuery = (
   { __typename?: 'Query' }
   & { projectById?: Maybe<(
     { __typename?: 'Project' }
-    & Pick<Project, 'metadata'>
+    & Pick<Project, 'metadata' | 'developerId' | 'originatorId' | 'landOwnerId' | 'stewardId'>
     & { partyByDeveloperId?: Maybe<(
       { __typename?: 'Party' }
       & PartyFieldsFragment
@@ -18260,6 +18260,10 @@ export const ProjectByIdDocument = gql`
     query ProjectById($id: UUID!) {
   projectById(id: $id) {
     metadata
+    developerId
+    originatorId
+    landOwnerId
+    stewardId
     partyByDeveloperId {
       ...partyFields
     }

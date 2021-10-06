@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 
 import Modal, { RegenModalProps } from 'web-components/lib/components/modal';
+import { BuyCreditsForm, BuyCreditsValues } from './BuyCreditsForm';
 
 interface BuyCreditsModalProps extends RegenModalProps {
   onClose: () => void;
@@ -31,9 +32,13 @@ const useStyles = makeStyles(theme => ({
 const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({ open, onClose }) => {
   const styles = useStyles();
 
+  const submit = async (values: BuyCreditsValues): Promise<void> => {
+    console.log('submit ', values);
+  };
+
   return (
     <Modal open={open} onClose={onClose}>
-      hi
+      <BuyCreditsForm submit={submit} />
     </Modal>
   );
 };

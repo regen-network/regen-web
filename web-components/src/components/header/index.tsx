@@ -35,6 +35,7 @@ interface HeaderProps {
   linkComponent?: React.FC<NavLinkProps>;
   homeLink?: React.FC<{ color: string }>;
   isRegistry?: boolean;
+  extras?: JSX.Element;
   onSignup?: () => void;
   onLogin?: () => void;
   onLogout?: () => void;
@@ -145,6 +146,7 @@ export default function Header({
   absolute = true,
   fullWidth = false,
   pathName = '/',
+  extras,
 }: HeaderProps): JSX.Element {
   const theme = useTheme();
   const isTablet = useMediaQuery(theme.breakpoints.down('sm'));
@@ -194,6 +196,7 @@ export default function Header({
                 );
               })}
               {/* {isRegistry && <RegistryLoginBtns />} */}
+              {isRegistry && extras}
             </MenuList>
           </Box>
 

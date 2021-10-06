@@ -12,7 +12,7 @@ import {
   HeaderDropdownItemProps,
 } from 'web-components/lib/components/header/HeaderDropdownItems';
 
-import { RegistryIconLink, RegistryNavLink } from '../atoms';
+import { RegistryIconLink, RegistryNavLink, WalletButton } from '../atoms';
 
 import { projects } from '../../mocks';
 
@@ -176,6 +176,11 @@ const RegistryNav: React.FC = () => {
       borderBottom={false} // TODO there's a bug that prevents this from changing dynanmicly on route change so it shows on pages it shouldnt
       fullWidth={fullWidthRegExp.test(pathname)}
       pathName={pathname}
+      extras={
+        <Box display="flex" justifyContent="center" alignItems="center">
+          <WalletButton />
+        </Box>
+      }
     />
   );
 };

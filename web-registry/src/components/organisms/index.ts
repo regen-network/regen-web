@@ -30,3 +30,4 @@ export * from './StepCardsWithDescription';
 export * from './StepsSection';
 export * from './StoryForm';
 export * from './UserCredits';
+export * from './BuyCreditsModal';

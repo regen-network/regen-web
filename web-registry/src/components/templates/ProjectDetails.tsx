@@ -34,6 +34,7 @@ import {
   MoreProjectsSection,
   CreditsPurchaseForm,
   LandManagementActions,
+  BuyCreditsModal,
 } from '../organisms';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -280,6 +281,7 @@ function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JS
 
   const [issuanceModalData, setIssuanceModalData] = useState<IssuanceModalData | null>(null);
   const [issuanceModalOpen, setIssuanceModalOpen] = useState(false);
+  const [isBuyCreditsModalOpen, setBuyCreditsModalOpen] = useState(false);
 
   const viewOnLedger = (creditVintage: any): void => {
     if (creditVintage?.txHash) {
@@ -442,6 +444,7 @@ function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JS
             send me more info
           </ContainedButton>
           {/* {<OutlinedButton className={styles.callButton} startIcon={<PhoneIcon />}>schedule a call</OutlinedButton>} */}
+          <ContainedButton onClick={() => setBuyCreditsModalOpen(true)}>buy</ContainedButton>
         </>
       </FixedFooter>
       <Modal open={open} onClose={handleClose}>
@@ -462,6 +465,7 @@ function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JS
           {...issuanceModalData}
         />
       )}
+      <BuyCreditsModal open={isBuyCreditsModalOpen} onClose={() => setBuyCreditsModalOpen(false)} />
       {submitted && <Banner text="Thanks for submitting your information!" />}
     </div>
   );

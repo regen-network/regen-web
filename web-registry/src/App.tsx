@@ -27,7 +27,7 @@ import {
   // GettingStarted,
   Home,
   // Home,
-  MediaStep,
+  Media,
   MethodologyReviewProcess,
   NotFoundPage,
   OrganizationProfile,
@@ -141,7 +141,7 @@ const App: React.FC = (): JSX.Element => {
                 />
                 <ProtectedRoute path={`${path}/:projectId/basic-info`} component={BasicInfo} />
                 <ProtectedRoute path={`${path}/:projectId/story`} component={Story} />
-                <ProtectedRoute path={`${path}/:projectId/media`} component={MediaStep} />
+                <ProtectedRoute path={`${path}/:projectId/media`} component={Media} />
                 <ProtectedRoute path={`${path}/:projectId/roles`} component={Roles} />
                 <ProtectedRoute path={`${path}/:projectId/entity-display`} component={EntityDisplay} />
 

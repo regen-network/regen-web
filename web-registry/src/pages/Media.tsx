@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const MediaStep: React.FC = () => {
+const Media: React.FC = () => {
   const styles = useStyles();
   const activeStep = 0;
   const { projectId } = useParams();
@@ -32,12 +32,12 @@ const MediaStep: React.FC = () => {
     const metadata = data.projectById.metadata;
     initialFieldValues = {
       'http://regen.network/previewPhoto': metadata['http://regen.network/previewPhoto'],
-      'http://regen.network/galleryLeft': metadata['http://regen.network/galleryLeft'],
-      'http://regen.network/galleryTop': metadata['http://regen.network/galleryTop'],
-      'http://regen.network/galleryBottom': metadata['http://regen.network/galleryBottom'],
-      'http://regen.network/galleryRight': metadata['http://regen.network/galleryRight'],
+      'http://regen.network/galleryPhotos': metadata['http://regen.network/galleryPhotos'],
+      // 'http://regen.network/galleryTop': metadata['http://regen.network/galleryTop'],
+      // 'http://regen.network/galleryBottom': metadata['http://regen.network/galleryBottom'],
+      // 'http://regen.network/galleryRight': metadata['http://regen.network/galleryRight'],
       'http://regen.network/landStewardPhoto': metadata['http://regen.network/landStewardPhoto'],
-      'http://regen.network/videoUrl': metadata['http://regen.network/videoUrl'],
+      'http://regen.network/videoURL': metadata['http://regen.network/videoURL'],
     };
   }
 
@@ -80,4 +80,4 @@ const MediaStep: React.FC = () => {
   );
 };
 
-export { MediaStep };
+export { Media };

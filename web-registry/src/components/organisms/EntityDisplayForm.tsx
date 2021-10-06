@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { makeStyles, useTheme, Link } from '@material-ui/core';
-import { Formik, Form, Field, FormikErrors } from 'formik';
+import { Formik, Form, Field } from 'formik';
 import { Link as RouterLink } from 'react-router-dom';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
@@ -21,6 +21,7 @@ import { requiredMessage } from 'web-components/lib/components/inputs/validation
 
 import { validate, getProjectPageBaseData } from '../../lib/rdf';
 import { useShaclGraphByUriQuery } from '../../generated/graphql';
+import { urlType } from './MediaForm';
 
 interface EntityDisplayFormProps {
   submit: (values: EntityDisplayValues) => Promise<void>;
@@ -45,19 +46,13 @@ export type EntityFieldName = keyof EntityDisplayValues;
 interface OrganizationDisplayShape {
   'http://regen.network/showOnProjectPage': boolean;
   'http://schema.org/name'?: string;
-  'http://schema.org/logo'?: {
-    '@type': string;
-    '@value'?: string;
-  };
+  'http://schema.org/logo'?: urlType;
   'http://schema.org/description'?: string;
 }
 
 interface IndividualDisplayShape {
   'http://regen.network/showOnProjectPage': boolean;
-  'http://schema.org/image'?: {
-    '@type': string;
-    '@value'?: string;
-  };
+  'http://schema.org/image'?: urlType;
   'http://schema.org/description'?: string;
 }
 
@@ -277,7 +272,7 @@ const IndividualFormlet: React.FC<IndividualFormletProps> = ({
             className={styles.field}
             component={ImageField}
             label="Bio photo"
-            name={`['${role}'].['http://schema.org/photo'].@value`}
+            name={`['${role}'].['http://schema.org/image'].@value`}
           />
           <Field
             charLimit={160}
@@ -305,7 +300,7 @@ function getToggle(
   ) => void,
 ): JSX.Element | null {
   const entity = values[fieldName];
-  if (entity && values) {
+  if (entity) {
     if (isIndividual(entity)) {
       return (
         <IndividualFormlet
@@ -333,7 +328,7 @@ function getInitialValues(values?: DisplayValues): DisplayValues | undefined {
   if (!values) {
     return undefined;
   }
-  const initialURL = { '@type': 'http://schema.org/URL', '@value': undefined };
+  const initialURL: urlType = { '@type': 'http://schema.org/URL' };
   if (isIndividual(values)) {
     return {
       ...{ 'http://schema.org/image': initialURL },
@@ -392,7 +387,11 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialVa
                 );
                 for (const result of report.results) {
                   const path: any = result.path.value;
-                  errors[role as EntityFieldName] = { [path]: requiredMessage };
+                  const error =
+                    path === 'http://schema.org/image' || path === 'http://schema.org/logo'
+                      ? { '@value': requiredMessage }
+                      : requiredMessage;
+                  errors[role as EntityFieldName] = { [path]: error };
                 }
               }
             }
@@ -410,6 +409,7 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialVa
               }
             }
           }
+          console.log(errors)
           return errors;
         }}
         onSubmit={async (values, { setSubmitting }) => {

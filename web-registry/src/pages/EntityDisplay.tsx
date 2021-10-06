@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { makeStyles, Theme } from '@material-ui/core/styles';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 
 import Description from 'web-components/lib/components/description';
 import { OnboardingFormTemplate } from '../components/templates';
@@ -39,6 +39,7 @@ const EntityDisplay: React.FC = () => {
   const styles = useStyles();
   const activeStep = 0;
   const { projectId } = useParams();
+  const history = useHistory();
 
   const [updateProject] = useUpdateProjectByIdMutation();
   const [updatePartyById] = useUpdatePartyByIdMutation();
@@ -100,7 +101,7 @@ const EntityDisplay: React.FC = () => {
           },
         },
       });
-      // TODO: go to next step
+      history.push(`/project-pages/${projectId}/story`);
     } catch (e) {
       // TODO: display the error banner in case of server error
       // https://github.com/regen-network/regen-registry/issues/554

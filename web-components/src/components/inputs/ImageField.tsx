@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { makeStyles, Theme, Box, Avatar, FormHelperText } from '@material-ui/core';
-import { FieldProps, getIn } from 'formik';
+import { makeStyles, Theme, Box, Avatar } from '@material-ui/core';
+import { FieldProps } from 'formik';
 
 import OutlinedButton from '../buttons/OutlinedButton';
 import FieldFormControl from './FieldFormControl';
@@ -62,8 +62,6 @@ export default function ImageField({
     form,
     field: { name, value },
   } = fieldProps;
-  const fieldError = getIn(form.errors, name);
-  const showError = getIn(form.touched, name) && !!fieldError;
   const inputId = `image-upload-input-${name.toString()}`;
 
   function toBase64(file: File): Promise<string | ArrayBuffer | null> {
@@ -114,15 +112,18 @@ export default function ImageField({
           </Box>
         )}
       </FieldFormControl>
-      {showError && <FormHelperText error={showError}>{fieldError}</FormHelperText>}
       <CropImageModal
         circularCrop
         initialImage={initialImage}
         open={!!initialImage}
-        onClose={() => setInitialImage('')}
+        onClose={() => {
+          setInitialImage('');
+          form.setFieldTouched(name, true);
+        }}
         onSubmit={croppedImage => {
           setInitialImage('');
           form.setFieldValue(name, croppedImage.src);
+          form.setFieldTouched(name, true);
         }}
       />
     </>

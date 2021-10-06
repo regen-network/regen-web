@@ -40,10 +40,7 @@ const BasicInfo: React.FC = () => {
           },
         },
       });
-      // This should go to `/project-pages/${projectId}/location`
-      // which is not implemented yet,
-      // so just using /story for now for testing purposes
-      history.push(`/project-pages/${projectId}/story`);
+      history.push(`/project-pages/${projectId}/location`);
     } catch (e) {
       // TODO: Should we display the error banner here?
       // https://github.com/regen-network/regen-registry/issues/554

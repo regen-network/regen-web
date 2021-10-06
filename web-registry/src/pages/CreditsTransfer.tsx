@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -64,9 +64,10 @@ interface Result {
 }
 
 const CreditsTransfer: React.FC<{
+  addressId?: string;
   buyerWalletId?: string;
   onTransfer?: (vintageId: string) => void;
-}> = ({ onTransfer, buyerWalletId: passedBuyerWalletId = '' }) => {
+}> = ({ onTransfer, addressId: passedAddressId, buyerWalletId: passedBuyerWalletId = '' }) => {
   const styles = useStyles();
 
   const [transferCredits, { data, loading, error }] = useTransferCreditsMutation({
@@ -90,17 +91,12 @@ const CreditsTransfer: React.FC<{
   const [vintageId, setVintageId] = useState('');
   const [oldBalances, setOldBalances] = useState<Balance[]>([]);
   const [buyerWalletId, setBuyerWalletId] = useState(passedBuyerWalletId);
-  const [addressId, setAddressId] = useState('');
+  const [addressId, setAddressId] = useState(passedAddressId);
   const [partyId, setPartyId] = useState('');
   const [userId, setUserId] = useState('');
   const [units, setUnits] = useState(1);
   const [creditPrice, setCreditPrice] = useState(1);
   const [showResult, setShowResult] = useState(false);
-
-  useEffect(() => {
-    const buyerParty = partiesData?.allParties?.nodes?.find(node => node?.walletId === buyerWalletId);
-    setAddressId(buyerParty?.addressId);
-  }, [partiesData, buyerWalletId]);
 
   const { data: availableCreditsData, refetch: refetchAvailableCredits } = useGetAvailableCreditsQuery({
     errorPolicy: 'ignore',
@@ -117,7 +113,7 @@ const CreditsTransfer: React.FC<{
     const vintages = vintagesData?.allCreditVintages?.nodes?.find(node => node?.id === event.target.value);
     const balances = vintages?.accountBalancesByCreditVintageId?.nodes;
     if (balances && balances.length > 0) {
-      setOldBalances(balances as Balance[]); // TODO this is a hack. Ideally `oldBalances` would be typed from the graphql store
+      setOldBalances(balances as Balance[]);
     }
   };
 

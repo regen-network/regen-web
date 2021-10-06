@@ -51,9 +51,14 @@ function getUnits(vintagesData: any, walletId: string, vintageId: string): numbe
 }
 
 const CreditsRetire: React.FC<{
+  addressId?: string;
   buyerWalletId?: string;
   creditVintageId?: string;
-}> = ({ buyerWalletId: passedBuyerId = '', creditVintageId: passedVintageId = '' }) => {
+}> = ({
+  addressId: passedAddressId = '',
+  buyerWalletId: passedBuyerId = '',
+  creditVintageId: passedVintageId = '',
+}) => {
   const styles = useStyles();
 
   const [retireCredits, { data, loading, error }] = useRetireCreditsMutation({
@@ -79,7 +84,7 @@ const CreditsRetire: React.FC<{
   const [buyerName, setBuyerName] = useState('');
   const [creditName, setCreditName] = useState('');
   const [buyerAddress, setBuyerAddress] = useState('');
-  const [addressId, setAddressId] = useState('');
+  const [addressId, setAddressId] = useState(passedAddressId);
   const [units, setUnits] = useState(0);
   const [showResult, setShowResult] = useState(false);
   const [retireUrl, setRetireUrl] = useState<null | string>(null);
@@ -98,7 +103,7 @@ const CreditsRetire: React.FC<{
     if (vintagesData && vintagesData.allCreditVintages) {
       // TODO: the following shouldn't be type cast to `any` but changing throws an error
       // `creditClassVersionByCreditClassVersionIdAndCreditClassVersionCreatedAt`
-      // doesn't seem to exist on vintages, but I want to check before deleting
+      // doesn't seem to exist on vintages - possibly delete?
       const selectedVintage: any = vintagesData.allCreditVintages.nodes.find(
         vintage => vintage?.id === event.target.value,
       );

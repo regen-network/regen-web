@@ -29,7 +29,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const BuyerCreate: React.FC<{ onCreate?: (walletId: string) => void }> = ({ onCreate }) => {
+const BuyerCreate: React.FC<{ onCreate?: (walletId: string, addressId: string) => void }> = ({
+  onCreate,
+}) => {
   const classes = useStyles();
 
   const [createUser, { data: userData, error: userError }] = useReallyCreateUserMutation({
@@ -75,10 +77,13 @@ const BuyerCreate: React.FC<{ onCreate?: (walletId: string) => void }> = ({ onCr
                   },
                 },
               });
-              setAddressId(result.data?.createUserOrganization?.organization?.partyByPartyId?.addressId);
-              setWalletId(result.data?.createUserOrganization?.organization?.partyByPartyId?.walletId);
+              const newAddressId =
+                result.data?.createUserOrganization?.organization?.partyByPartyId?.addressId;
+              const newWalletId = result.data?.createUserOrganization?.organization?.partyByPartyId?.walletId;
+              setAddressId(newAddressId);
+              setWalletId(newWalletId);
               if (onCreate) {
-                onCreate(result.data?.createUserOrganization?.organization?.partyByPartyId?.walletId);
+                onCreate(newWalletId, newAddressId);
               }
             } else {
               result = await createUser({
@@ -92,10 +97,12 @@ const BuyerCreate: React.FC<{ onCreate?: (walletId: string) => void }> = ({ onCr
                   },
                 },
               });
-              setAddressId(result.data?.reallyCreateUser?.user?.partyByPartyId?.addressId);
-              setWalletId(result.data?.reallyCreateUser?.user?.partyByPartyId?.walletId);
+              const newAddressId = result.data?.reallyCreateUser?.user?.partyByPartyId?.addressId;
+              const newWalletId = result.data?.reallyCreateUser?.user?.partyByPartyId?.walletId;
+              setAddressId(newAddressId);
+              setWalletId(newWalletId);
               if (onCreate) {
-                onCreate(result.data?.reallyCreateUser?.user?.partyByPartyId?.walletId);
+                onCreate(newWalletId, newAddressId);
               }
             }
           } catch (e) {

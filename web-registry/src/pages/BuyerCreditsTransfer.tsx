@@ -23,21 +23,33 @@ const BuyerCreditsTransfer: React.FC = () => {
   const [step, setStep] = useState(1);
   const [buyerWalletId, setBuyerWalletId] = useState('');
   const [vintageId, setVintageId] = useState('');
+  const [addressId, setAddressId] = useState('');
 
   useEffect(() => {
     if (!buyerWalletId) setStep(1);
-    if (buyerWalletId && !vintageId) setStep(2);
-    if (buyerWalletId && vintageId) setStep(3);
-  }, [buyerWalletId, vintageId]);
+    if (buyerWalletId && addressId && !vintageId) setStep(2);
+    if (buyerWalletId && addressId && vintageId) setStep(3);
+  }, [buyerWalletId, vintageId, addressId]);
 
   function renderStep(stepIndex: number): JSX.Element {
     switch (stepIndex) {
       case 1:
-        return <BuyerCreate onCreate={setBuyerWalletId} />;
+        return (
+          <BuyerCreate
+            onCreate={(walletId, addressId) => {
+              setBuyerWalletId(walletId);
+              setAddressId(addressId);
+            }}
+          />
+        );
       case 2:
-        return <CreditsTransfer buyerWalletId={buyerWalletId} onTransfer={setVintageId} />;
+        return (
+          <CreditsTransfer addressId={addressId} buyerWalletId={buyerWalletId} onTransfer={setVintageId} />
+        );
       case 3:
-        return <CreditsRetire buyerWalletId={buyerWalletId} creditVintageId={vintageId} />;
+        return (
+          <CreditsRetire buyerWalletId={buyerWalletId} creditVintageId={vintageId} addressId={addressId} />
+        );
       default:
         return <></>;
     }

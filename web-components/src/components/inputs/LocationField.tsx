@@ -66,17 +66,35 @@ const LocationField: React.FC<Props> = ({
             onChange={({ target: { value } }) => {
               handleChange(value);
               if (value.length > 1) {
-                geocoderService
-                  .forwardGeocode({
-                    types,
-                    mode: 'mapbox.places',
-                    query: value,
-                  })
-                  .send()
-                  .then(res => {
-                    setFeatures(res.body.features);
-                    setShowResults(true);
-                  });
+                const isCoordinates = /^[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?),\s*[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)$/.test(
+                  value,
+                );
+                if (isCoordinates) {
+                  const [longitude, latitude] = value.split(',').map(Number) as [number, number];
+                  const coordinates: [number, number] = [longitude, latitude];
+                  geocoderService
+                    .reverseGeocode({
+                      mode: 'mapbox.places',
+                      query: coordinates,
+                    })
+                    .send()
+                    .then(({ body }) => {
+                      setFeatures(body.features);
+                      setShowResults(true);
+                    });
+                } else {
+                  geocoderService
+                    .forwardGeocode({
+                      types,
+                      mode: 'mapbox.places',
+                      query: value,
+                    })
+                    .send()
+                    .then(res => {
+                      setFeatures(res.body.features);
+                      setShowResults(true);
+                    });
+                }
               }
             }}
           />

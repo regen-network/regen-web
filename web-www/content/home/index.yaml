@@ -19,14 +19,14 @@ marketplaceSection:
       description: Get paid for your ecological practices, such as cover cropping,
         crop rotation, agroforestry, rotational grazing, and more.
       linkText: Learn more
-      linkUrl: /land-stewards/
+      linkUrl: https://registry.regen.network/land-stewards/
     - caption: Buyers
       image: ../../static/media/buyers.png
       header: Purchase credits
       description: Whether you are an individual or a business looking to take climate
         action, we make it easy to sponsor ecological practices.
       linkText: Browse Projects
-      linkUrl: /buyers/
+      linkUrl: https://registry.regen.network/buyers/
 climateSection:
   header: Reverse climate change through carbon removal that regenerates ecosystems.
   description: Introducing Carbon<i>Plus</i>™ - a suite of carbon credits with

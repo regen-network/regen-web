@@ -1,0 +1,20 @@
+query allBuyersPage {
+  allBuyersPage {
+    heroSection {
+      ...heroSectionFields
+    }
+    imageGridSection {
+      ...imageGridSectionFields
+    }
+    featuredSection {
+      ...featuredSectionFields
+    }
+    faqSection {
+      ...bottomBannerFields
+    }
+    footerButtonText
+    metadata {
+      ...pageMetadataFields
+    }
+  }
+}

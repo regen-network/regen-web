@@ -102,3 +102,70 @@ communitySection:
         movement to accelerate innovative ways for monitoring, verifying and
         reporting of Ecosystem Services? Get in touch with us at
         [science@regen.network](mailto:science@regen.network)
+practicesOutcomesSection:
+  header: Get paid for these practices, outcomes, and more:*
+  note: "*These credits are not yet ready. Sign up now to get notified when
+    available!"
+  practices:
+    header: land management practices
+    items:
+      - image: ../../static/media/no-till.svg
+        header: No-Till
+        description: The practice of limiting soil disturbance by refraining from
+          tilling reduces soil erosion and increases soil health.
+      - image: ../../static/media/cover-cropping.svg
+        header: Cover cropping
+        description: Cover crops maintain soil coverage during non-crop periods rather
+          than for the purpose of being harvested reducing erosion and
+          increasing soil health.
+      - image: ../../static/media/crop-rotation.svg
+        header: Crop rotation
+        description: Growing a series of different types of crops in a rotational
+          sequence over the same area increases soil fertility, reduces erosion,
+          and more.
+      - image: ../../static/media/rotational-grazing.svg
+        header: Rotational grazing
+        description: A management plan moving grazing livestock between pastures on a
+          regular basis increases soil health and improves forage quality.
+      - image: ../../static/media/agroforestry.svg
+        header: Agroforestry
+        description: A land-use management system in which trees or shrubs are grown
+          around or among crops or pastureland.
+      - image: ../../static/media/riparian-zones.svg
+        header: Riparian protection
+        description: Protecting the area between land and a river or stream stabilizes
+          soil, encourages biodiversity, and protects water quality.
+      - image: ../../static/media/perennials.svg
+        header: Perennials
+        description: Perennial plants can hold soil to prevent erosion, capture
+          dissolved nitrogen, and reduce the need for herbicides.
+      - image: ../../static/media/buffer-strips.svg
+        header: Buffers strips
+        description: An area of land maintained in permanent vegetation designed to
+          intercept pollutants that help to improve air, soil, and water
+          quality.
+  outcomes:
+    header: ecological outcomes
+    items:
+      - image: ../../static/media/carbon-sequestration.jpg
+        header: Carbon sequestration
+        description: Sequestering carbon in SOC is one way to mitigate climate change.
+      - image: ../../static/media/above-ground-biomass.png
+        header: Above ground biomass
+        description: Increasing all living biomass which is located above the ground.
+      - image: ../../static/media/soil-health.png
+        header: Soil health
+        description: Healthy soil acts as a vital living ecosystem that sustains plants,
+          animals, and humans.
+      - image: ../../static/media/animal-welfare.png
+        header: Animal welfare
+        description: Animals play an important role in the maintenance of balance in an
+          ecosystem.
+      - image: ../../static/media/ecosystem-health.png
+        header: Ecosystem health
+        description: Robust ecosystems provide a home for humans, plants, and animals to
+          flourish.
+      - image: ../../static/media/enhance-biodiversity.png
+        header: Enhance biodiversity
+        description: The diversity of plants and animals is of vital importance to our
+          well-being.

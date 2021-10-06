@@ -4,4 +4,10 @@ fragment bottomBannerFields on BottomBanner {
   button {
     ...buttonFields
   }
+  secondButton {
+    ...buttonFields
+  }
+  image {
+    ...customImageFields
+  }
 }

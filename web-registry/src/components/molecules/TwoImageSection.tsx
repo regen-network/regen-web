@@ -1,9 +1,10 @@
 import React from 'react';
-import { graphql, useStaticQuery } from 'gatsby';
+import { makeStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import BackgroundImage from 'gatsby-background-image';
-import { makeStyles, Theme } from '@material-ui/core';
 import Title from 'web-components/lib/components/title';
+import { Image } from 'web-components/lib/components/image';
+
+import { DualImageSection } from '../../generated/sanity-graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -89,70 +90,42 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const JoinFarmersSection: React.FC = () => {
+interface Props {
+  content: DualImageSection;
+}
+
+const TwoImageSection: React.FC<Props> = ({ content }) => {
   const classes = useStyles();
 
-  const data = useStaticQuery(graphql`
-    query {
-      text: landStewardsYaml {
-        joinFarmersSection {
-          header
-          farmers {
-            amount
-            label
-            image {
-              childImageSharp {
-                fluid(quality: 90) {
-                  ...GatsbyImageSharpFluid_withWebp
-                }
-              }
-            }
-          }
-          land {
-            amount
-            label
-            image {
-              childImageSharp {
-                fluid(quality: 90) {
-                  ...GatsbyImageSharpFluid_withWebp
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  `);
-  const content = data.text.joinFarmersSection;
   return (
     <Grid container className={classes.root}>
       <div className={classes.titleContainer}>
         <Title variant="h5" className={classes.title}>
-          {content.header}
+          {content?.title}
         </Title>
       </div>
       <Grid item xs={12} sm={6}>
-        <BackgroundImage Tag="div" fluid={content.farmers.image.childImageSharp.fluid}>
+        <Image backgroundImage src={content?.left?.image?.image?.asset?.url || ''}>
           <div className={classes.item}>
-            <Title className={classes.amount}>{content.farmers.amount}</Title>
+            <Title className={classes.amount}>{content?.left?.boldText}</Title>
             <div className={classes.labelContainer}>
-              <span className={classes.label}>{content.farmers.label}</span>
+              <span className={classes.label}>{content?.left?.label}</span>
             </div>
           </div>
-        </BackgroundImage>
+        </Image>
       </Grid>
       <Grid item xs={12} sm={6}>
-        <BackgroundImage Tag="div" fluid={content.land.image.childImageSharp.fluid}>
+        <Image backgroundImage src={content?.right?.image?.image?.asset?.url || ''}>
           <div className={classes.item}>
-            <Title className={classes.amount}>{content.land.amount}</Title>
+            <Title className={classes.amount}>{content?.right?.boldText}</Title>
             <div className={classes.labelContainer}>
-              <span className={classes.label}>{content.land.label}</span>
+              <span className={classes.label}>{content?.right?.label}</span>
             </div>
           </div>
-        </BackgroundImage>
+        </Image>
       </Grid>
     </Grid>
   );
 };
 
-export default JoinFarmersSection;
+export { TwoImageSection };

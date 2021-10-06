@@ -33,9 +33,6 @@ const Media: React.FC = () => {
     initialFieldValues = {
       'http://regen.network/previewPhoto': metadata['http://regen.network/previewPhoto'],
       'http://regen.network/galleryPhotos': metadata['http://regen.network/galleryPhotos'],
-      // 'http://regen.network/galleryTop': metadata['http://regen.network/galleryTop'],
-      // 'http://regen.network/galleryBottom': metadata['http://regen.network/galleryBottom'],
-      // 'http://regen.network/galleryRight': metadata['http://regen.network/galleryRight'],
       'http://regen.network/landStewardPhoto': metadata['http://regen.network/landStewardPhoto'],
       'http://regen.network/videoURL': metadata['http://regen.network/videoURL'],
     };

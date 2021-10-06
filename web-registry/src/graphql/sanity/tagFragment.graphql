@@ -1,0 +1,4 @@
+fragment tagFields on Tag {
+  name
+  color
+}

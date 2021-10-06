@@ -9,7 +9,7 @@ import { getFontSize } from '../../theme/sizing';
 export interface ImageGridProps {
   img: JSX.Element; // using pure img tag or gatsby-image
   title: string;
-  description: string;
+  description: string | JSX.Element;
   even: boolean;
 }
 

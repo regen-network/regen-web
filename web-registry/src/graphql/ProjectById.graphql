@@ -5,6 +5,7 @@ query ProjectById($id: UUID!) {
     originatorId
     landOwnerId
     stewardId
+    addressId
     partyByDeveloperId {
       ...partyFields
     }

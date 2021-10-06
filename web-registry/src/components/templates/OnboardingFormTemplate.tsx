@@ -1,4 +1,5 @@
 import React from 'react';
+import Box from '@material-ui/core/Box';
 
 import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
 import { PlanStepper } from '../molecules';
@@ -19,7 +20,7 @@ const OnboardingFormTemplate: React.FC<Props> = props => {
         onLinkClick={props.saveAndExit}
         formContainer
       >
-        {props.children}
+        <Box minHeight="50vh">{props.children}</Box>
       </OnBoardingSection>
     </>
   );

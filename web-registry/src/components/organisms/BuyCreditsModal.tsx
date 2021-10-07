@@ -3,9 +3,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Formik, Form, Field } from 'formik';
 
 import Modal, { RegenModalProps } from 'web-components/lib/components/modal';
+import Title from 'web-components/lib/components/title';
+import Description from 'web-components/lib/components/description';
 import FormLabel from 'web-components/lib/components/inputs/FormLabel';
-import RegenTextField from 'web-components/lib/components/inputs/TextField';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
+import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
 
 interface BuyCreditsModalProps extends RegenModalProps {
   onClose: () => void;
@@ -22,8 +24,18 @@ const useStyles = makeStyles(theme => ({
     borderRadius: theme.spacing(2),
   },
   title: {
-    fontFamily: theme.typography.h1.fontFamily,
-    fontWeight: 900,
+    [theme.breakpoints.up('sm')]: {
+      paddingTop: 0,
+      paddingBottom: theme.spacing(7.5),
+      paddingLeft: theme.spacing(7.5),
+      paddingRight: theme.spacing(7.5),
+    },
+    [theme.breakpoints.down('xs')]: {
+      paddingTop: theme.spacing(8),
+      paddingBottom: theme.spacing(6),
+      paddingLeft: 0,
+      paddingRight: 0,
+    },
   },
   btn: {
     marginTop: theme.spacing(4),
@@ -37,8 +49,16 @@ const useStyles = makeStyles(theme => ({
   },
 
   description: {
-    marginBottom: 0,
     fontSize: theme.typography.pxToRem(16),
+    '& a': {
+      cursor: 'pointer',
+    },
+    [theme.breakpoints.up('sm')]: {
+      marginBottom: theme.spacing(3),
+    },
+    [theme.breakpoints.down('xs')]: {
+      // marginBottom: theme.spacing(10),
+    },
   },
   field: {
     [theme.breakpoints.up('sm')]: {
@@ -46,6 +66,14 @@ const useStyles = makeStyles(theme => ({
     },
     [theme.breakpoints.down('xs')]: {
       marginBottom: theme.spacing(10),
+    },
+  },
+  groupTitle: {
+    [theme.breakpoints.up('sm')]: {
+      marginBottom: theme.spacing(3),
+    },
+    [theme.breakpoints.down('xs')]: {
+      // marginBottom: theme.spacing(10),
     },
   },
   error: {
@@ -62,41 +90,59 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({ open, onClose, initia
 
   return (
     <Modal open={open} onClose={onClose}>
-      <Formik
-        enableReinitialize
-        validateOnMount
-        initialValues={
-          initialValues || {
-            'http://regen.network/test': initialValues?.['http://regen.network/test'] || '',
+      <div className={styles.root}>
+        <Title variant="h4" align="center" className={styles.title}>
+          Buy Credits
+        </Title>
+        <Formik
+          enableReinitialize
+          validateOnMount
+          initialValues={
+            initialValues || {
+              'http://regen.network/test': initialValues?.['http://regen.network/test'] || '',
+            }
           }
-        }
-        onSubmit={async (values, { setSubmitting }) => {
-          setSubmitting(true);
-          try {
-            await submit(values);
-            setSubmitting(false);
-          } catch (e) {
-            setSubmitting(false);
-          }
-        }}
-      >
-        {({ submitForm, isValid, isSubmitting }) => {
-          return (
-            <>
-              <Form translate="yes">
-                <Field
-                  className={styles.field}
-                  component={RegenTextField}
-                  label="test"
-                  description="desc"
-                  name="['http://regen.network/test']"
-                />
-              </Form>
-              <ContainedButton onClick={submitForm}>submeezy</ContainedButton>
-            </>
-          );
-        }}
-      </Formik>
+          onSubmit={async (values, { setSubmitting }) => {
+            setSubmitting(true);
+            try {
+              await submit(values);
+              setSubmitting(false);
+            } catch (e) {
+              setSubmitting(false);
+            }
+          }}
+        >
+          {({ submitForm, isValid, isSubmitting }) => {
+            return (
+              <>
+                <Form translate="yes">
+                  <Title className={styles.groupTitle} variant="h5">
+                    Retirement Beneficiary
+                  </Title>
+                  <Field
+                    className={styles.field}
+                    component={ControlledTextField}
+                    label="Your name or organization name"
+                    description="Please note that this name will be publically viewable on the ledger."
+                    name="retirementBeneficiary"
+                    optional
+                  />
+                  <Title className={styles.groupTitle} variant="h5">
+                    Credit Retirement Location
+                  </Title>
+                  <Description className={styles.description}>
+                    Please enter a location for the retirement of these credits. This prevents{' '}
+                    <a href="#">double counting</a> of credits in different locations. These credits will
+                    auto-retire.
+                  </Description>
+                  <Field className={styles.field} component={ControlledTextField} label="City" name="city" />
+                </Form>
+                <ContainedButton onClick={submitForm}>purchase</ContainedButton>
+              </>
+            );
+          }}
+        </Formik>
+      </div>
     </Modal>
   );
 };

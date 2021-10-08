@@ -471,7 +471,11 @@ function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JS
           {...issuanceModalData}
         />
       )}
-      <BuyCreditsModal open={isBuyCreditsModalOpen} onClose={() => setBuyCreditsModalOpen(false)} />
+      <BuyCreditsModal
+        open={isBuyCreditsModalOpen}
+        onClose={() => setBuyCreditsModalOpen(false)}
+        project={project}
+      />
       {submitted && <Banner text="Thanks for submitting your information!" />}
     </div>
   );

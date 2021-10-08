@@ -6,6 +6,7 @@ import axios from 'axios';
 import { Formik, Form, Field } from 'formik';
 import { RadioGroup } from 'formik-material-ui';
 import cx from 'clsx';
+import ReactHtmlParser from 'react-html-parser';
 
 import Modal, { RegenModalProps } from 'web-components/lib/components/modal';
 import Card from 'web-components/lib/components/cards/Card';
@@ -13,21 +14,27 @@ import Title from 'web-components/lib/components/title';
 import Description from 'web-components/lib/components/description';
 import SelectTextField, { Option } from 'web-components/lib/components/inputs/SelectTextField';
 import Toggle from 'web-components/lib/components/inputs/Toggle';
-import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
 import NumberTextField from 'web-components/lib/components/inputs/NumberTextField';
 import { RegenTokenIcon } from 'web-components/lib/components/icons/RegenTokenIcon';
 import { Label } from 'web-components/lib/components/label';
 import { Image } from 'web-components/lib/components/image';
+import Submit from 'web-components/lib/components/form/Submit';
 
 import { countries } from '../../lib/countries';
+import { Project } from '../../mocks';
 
 const useStyles = makeStyles(theme => ({
   root: {
     height: '100%',
     borderRadius: theme.spacing(2),
+    paddingBottom: theme.spacing(12),
   },
-  title: {
+  flexColumn: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  mainTitle: {
     [theme.breakpoints.up('sm')]: {
       paddingTop: 0,
       paddingBottom: theme.spacing(7.5),
@@ -49,17 +56,19 @@ const useStyles = makeStyles(theme => ({
   thumbnailCard: {
     display: 'flex',
     alignItems: 'center',
-    height: 107,
+    height: 107, //
   },
   cardContent: {
     display: 'flex',
-    flexDirection: 'column',
+    alignItems: 'center',
     '&:last-child': {
       paddingBottom: theme.spacing(4),
     },
   },
   projectThumbnail: {
     height: 50, //todo
+    width: 50, //todo
+    borderRadius: 5,
   },
 
   description: {
@@ -158,6 +167,7 @@ const useStyles = makeStyles(theme => ({
 interface BuyCreditsModalProps extends RegenModalProps {
   onClose: () => void;
   initialValues?: BuyCreditsValues;
+  project: Project;
 }
 
 export interface BuyCreditsValues {
@@ -169,7 +179,7 @@ export interface BuyCreditsValues {
   creditCount: number;
 }
 
-const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({ open, onClose, initialValues }) => {
+const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({ open, onClose, initialValues, project }) => {
   const styles = useStyles();
   const [stateOptions, setStateOptions] = useState<Option[]>([]);
   const initialCountry = 'US';
@@ -204,9 +214,23 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({ open, onClose, initia
   return (
     <Modal open={open} onClose={onClose}>
       <div className={styles.root}>
-        <Title variant="h4" align="center" className={styles.title}>
+        <Title variant="h3" align="center" className={styles.mainTitle}>
           Buy Credits
         </Title>
+        <Card className={cx(styles.thumbnailCard, styles.field)}>
+          <CardContent className={styles.cardContent}>
+            <Image
+              className={cx(styles.projectThumbnail, styles.marginRight)}
+              src={project.creditClass?.imgSrc || ''}
+              // imageStorageBaseUrl={imageStorageBaseUrl}
+              // apiServerUrl={apiServerUrl}
+            />
+            <div className={styles.flexColumn}>
+              <Title variant="h5">{ReactHtmlParser(project.creditClass.name)} Credits</Title>
+              <Description>{project.name}</Description>
+            </div>
+          </CardContent>
+        </Card>
         <Formik
           enableReinitialize
           validateOnMount
@@ -230,23 +254,9 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({ open, onClose, initia
             }
           }}
         >
-          {({ submitForm, isValid, isSubmitting, values }) => {
+          {({ submitForm, isValid, isSubmitting, submitCount, values }) => {
             return (
-              <>
-                <Card className={cx(styles.thumbnailCard, styles.field)}>
-                  <Image
-                    className={styles.projectThumbnail}
-                    src={''}
-                    // alt={imageAlt}
-                    // imageStorageBaseUrl={imageStorageBaseUrl}
-                    // apiServerUrl={apiServerUrl}
-                  />
-                  <CardContent className={styles.cardContent}>
-                    <Title variant="h5">CarbonPlus Grassland Credits</Title>
-                    <Description>Wilmot</Description>
-                  </CardContent>
-                </Card>
-
+              <div>
                 <Form translate="yes">
                   <div className={styles.field}>
                     <Title className={styles.groupTitle} variant="h5">
@@ -340,8 +350,17 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({ open, onClose, initia
                     </Grid>
                   </Grid>
                 </Form>
-                <ContainedButton onClick={submitForm}>purchase</ContainedButton>
-              </>
+                <Submit
+                  // className={styles.field}
+                  isSubmitting={isSubmitting}
+                  onClose={onClose}
+                  // status={status} TODO
+                  isValid={isValid}
+                  submitCount={submitCount}
+                  submitForm={submitForm}
+                  label="purchase"
+                />
+              </div>
             );
           }}
         </Formik>

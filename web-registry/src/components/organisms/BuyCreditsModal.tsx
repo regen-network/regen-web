@@ -1,22 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import axios from 'axios';
 import { Formik, Form, Field } from 'formik';
+import cx from 'clsx';
 
 import Modal, { RegenModalProps } from 'web-components/lib/components/modal';
 import Title from 'web-components/lib/components/title';
 import Description from 'web-components/lib/components/description';
 import FormLabel from 'web-components/lib/components/inputs/FormLabel';
+import SelectTextField, { Option } from 'web-components/lib/components/inputs/SelectTextField';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
 
-interface BuyCreditsModalProps extends RegenModalProps {
-  onClose: () => void;
-  initialValues?: BuyCreditsValues;
-}
-
-export interface BuyCreditsValues {
-  'http://regen.network/test': string;
-}
+import { countries } from '../../lib/countries';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -79,10 +76,64 @@ const useStyles = makeStyles(theme => ({
   error: {
     marginTop: 0,
   },
+
+  stateCountryGrid: {
+    [theme.breakpoints.up('sm')]: {
+      flexWrap: 'nowrap',
+    },
+  },
+  stateCountryTextField: {
+    marginTop: theme.spacing(6),
+    [theme.breakpoints.up('sm')]: {
+      '&:first-of-type': {
+        marginRight: theme.spacing(2.375),
+      },
+      '&:last-of-type': {
+        marginLeft: theme.spacing(2.375),
+      },
+    },
+  },
 }));
+
+interface BuyCreditsModalProps extends RegenModalProps {
+  onClose: () => void;
+  initialValues?: BuyCreditsValues;
+}
+
+export interface BuyCreditsValues {
+  retirementBeneficiary: string;
+  city: string;
+  state: string;
+  country: string;
+}
 
 const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({ open, onClose, initialValues }) => {
   const styles = useStyles();
+  const [stateOptions, setStateOptions] = useState<Option[]>([]);
+  const initialCountry = 'US';
+
+  const searchState = async (countryId: string): Promise<void> => {
+    const resp = await axios({
+      url: 'https://geodata.solutions/api/api.php?type=getStates&countryId=' + countryId,
+      method: 'POST',
+    });
+    const respOK = resp && resp.status === 200;
+    if (respOK) {
+      const data = await resp.data;
+      const options = Object.keys(data.result).map(key => ({
+        value: data.result[key],
+        label: data.result[key],
+      }));
+      options.unshift({ value: '', label: 'Please choose a state' });
+      setStateOptions(options);
+    }
+  };
+
+  useEffect(() => {
+    if (stateOptions.length === 0) {
+      searchState(initialCountry);
+    }
+  });
 
   const submit = async (values: BuyCreditsValues): Promise<void> => {
     console.log('submit ', values);
@@ -99,7 +150,10 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({ open, onClose, initia
           validateOnMount
           initialValues={
             initialValues || {
-              'http://regen.network/test': initialValues?.['http://regen.network/test'] || '',
+              retirementBeneficiary: '',
+              city: '',
+              state: '',
+              country: initialCountry,
             }
           }
           onSubmit={async (values, { setSubmitting }) => {
@@ -135,7 +189,33 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({ open, onClose, initia
                     <a href="#">double counting</a> of credits in different locations. These credits will
                     auto-retire.
                   </Description>
-                  <Field className={styles.field} component={ControlledTextField} label="City" name="city" />
+                  <Field
+                    // className={styles.cityTextField}
+                    component={ControlledTextField}
+                    label="City"
+                    name="city"
+                  />
+                  <Grid container alignItems="center" className={cx(styles.stateCountryGrid, styles.field)}>
+                    <Grid item xs={12} sm={6} className={styles.stateCountryTextField}>
+                      <Field
+                        options={stateOptions}
+                        component={SelectTextField}
+                        label="State / Province / Region"
+                        name="state"
+                        // errors={matches}
+                      />
+                    </Grid>
+                    <Grid item xs={12} sm={6} className={styles.stateCountryTextField}>
+                      <Field
+                        component={SelectTextField}
+                        options={Object.keys(countries).map(key => ({ value: key, label: countries[key] }))}
+                        name="country"
+                        label="Country"
+                        triggerOnChange={searchState}
+                        // errors={matches}
+                      />
+                    </Grid>
+                  </Grid>
                 </Form>
                 <ContainedButton onClick={submitForm}>purchase</ContainedButton>
               </>

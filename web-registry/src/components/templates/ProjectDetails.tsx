@@ -306,6 +306,8 @@ function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JS
     siteUrl: `${window.location.origin}/registry`,
   };
 
+  // project.creditPrice = { unitPrice: 15.12, currency: 'USD' };
+
   return (
     <div className={styles.root}>
       <SEO location={location} siteMetadata={siteMetadata} title={project.name} imageUrl={project.image} />
@@ -443,7 +445,11 @@ function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JS
           <ContainedButton onClick={handleOpen} startIcon={<EmailIcon />}>
             send me more info
           </ContainedButton>
-          {/* {<OutlinedButton className={styles.callButton} startIcon={<PhoneIcon />}>schedule a call</OutlinedButton>} */}
+          {/* {
+            <OutlinedButton className={styles.callButton} startIcon={<PhoneIcon />}>
+              schedule a call
+            </OutlinedButton>
+          } */}
           <ContainedButton onClick={() => setBuyCreditsModalOpen(true)}>buy</ContainedButton>
         </>
       </FixedFooter>

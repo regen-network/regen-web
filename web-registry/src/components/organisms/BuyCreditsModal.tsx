@@ -14,6 +14,9 @@ import SelectTextField, { Option } from 'web-components/lib/components/inputs/Se
 import Toggle from 'web-components/lib/components/inputs/Toggle';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
+import NumberTextField from 'web-components/lib/components/inputs/NumberTextField';
+import { RegenTokenIcon } from 'web-components/lib/components/icons/RegenTokenIcon';
+import { Label } from 'web-components/lib/components/label';
 
 import { countries } from '../../lib/countries';
 
@@ -95,6 +98,48 @@ const useStyles = makeStyles(theme => ({
       },
     },
   },
+
+  creditInput: {
+    width: 170, //todo
+  },
+  regenPerCredit: {
+    fontSize: theme.typography.pxToRem(16),
+    color: theme.palette.info.main,
+    marginBottom: theme.spacing(3),
+  },
+
+  creditWidget: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+  regenDisplay: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  regenCount: {
+    display: 'flex',
+    alignItems: 'baseline',
+  },
+  regenCountNumber: {
+    marginRight: theme.spacing(2),
+  },
+  currencyEquivalent: {
+    color: theme.palette.info.dark,
+    fontSize: theme.typography.pxToRem(16),
+  },
+  icon: {
+    height: theme.typography.pxToRem(26),
+    alignSelf: 'flex-start',
+    marginRight: theme.spacing(2),
+  },
+  regenLabel: {
+    color: theme.palette.info.dark,
+    fontSize: theme.typography.pxToRem(14),
+    marginRight: theme.spacing(2),
+  },
+  marginRight: {
+    marginRight: theme.spacing(4),
+  },
 }));
 
 interface BuyCreditsModalProps extends RegenModalProps {
@@ -171,12 +216,39 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({ open, onClose, initia
           }}
         >
           {({ submitForm, isValid, isSubmitting, values }) => {
-            console.log('values["retirementAction"]', values['retirementAction']);
             return (
               <>
                 <Form translate="yes">
-                  <Title variant="h5">Retirement of Credits</Title>
-                  <Field className={cx(styles.field)} component={RadioGroup} name="retirementAction">
+                  <div className={styles.field}>
+                    <Title className={styles.groupTitle} variant="h5">
+                      Number of credits
+                    </Title>
+                    <Description className={styles.regenPerCredit}>5 REGEN each</Description>
+                    <div className={styles.creditWidget}>
+                      <div className={styles.marginRight}>
+                        <Field
+                          className={cx(styles.creditInput)}
+                          component={NumberTextField}
+                          name="creditCount"
+                        />
+                      </div>
+                      <Title className={styles.marginRight} variant="h6">
+                        =
+                      </Title>
+                      <div className={cx(styles.regenDisplay, styles.marginRight)}>
+                        <div className={styles.regenCount}>
+                          <RegenTokenIcon className={styles.icon} />
+                          <Title variant="h4" className={styles.regenCountNumber}>
+                            500
+                          </Title>
+                          <Label className={styles.regenLabel}>REGEN</Label>
+                        </div>
+                        <div className={styles.currencyEquivalent}>($2345 USD)</div>
+                      </div>
+                    </div>
+                  </div>
+                  <Title variant="h5">Retirement of credits</Title>
+                  <Field className={styles.field} component={RadioGroup} name="retirementAction">
                     <Field
                       component={Toggle}
                       type="radio"
@@ -195,7 +267,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({ open, onClose, initia
                     />
                   </Field>
                   <Title className={styles.groupTitle} variant="h5">
-                    Retirement Beneficiary
+                    Retirement beneficiary
                   </Title>
                   <Field
                     className={styles.field}
@@ -206,7 +278,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({ open, onClose, initia
                     optional
                   />
                   <Title className={styles.groupTitle} variant="h5">
-                    Credit Retirement Location
+                    Credit retirement location
                   </Title>
                   <Description className={styles.description}>
                     Please enter a location for the retirement of these credits. This prevents{' '}
@@ -226,7 +298,6 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({ open, onClose, initia
                         component={SelectTextField}
                         label="State / Province / Region"
                         name="state"
-                        // errors={matches}
                       />
                     </Grid>
                     <Grid item xs={12} sm={6} className={styles.stateCountryTextField}>
@@ -236,7 +307,6 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({ open, onClose, initia
                         name="country"
                         label="Country"
                         triggerOnChange={searchState}
-                        // errors={matches}
                       />
                     </Grid>
                   </Grid>

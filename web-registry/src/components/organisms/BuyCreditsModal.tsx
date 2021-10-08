@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
+import CardContent from '@material-ui/core/CardContent';
 import axios from 'axios';
 import { Formik, Form, Field } from 'formik';
 import { RadioGroup } from 'formik-material-ui';
 import cx from 'clsx';
 
 import Modal, { RegenModalProps } from 'web-components/lib/components/modal';
+import Card from 'web-components/lib/components/cards/Card';
 import Title from 'web-components/lib/components/title';
 import Description from 'web-components/lib/components/description';
-import FormLabel from 'web-components/lib/components/inputs/FormLabel';
 import SelectTextField, { Option } from 'web-components/lib/components/inputs/SelectTextField';
 import Toggle from 'web-components/lib/components/inputs/Toggle';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
@@ -17,6 +18,7 @@ import ControlledTextField from 'web-components/lib/components/inputs/Controlled
 import NumberTextField from 'web-components/lib/components/inputs/NumberTextField';
 import { RegenTokenIcon } from 'web-components/lib/components/icons/RegenTokenIcon';
 import { Label } from 'web-components/lib/components/label';
+import { Image } from 'web-components/lib/components/image';
 
 import { countries } from '../../lib/countries';
 
@@ -43,11 +45,21 @@ const useStyles = makeStyles(theme => ({
     marginTop: theme.spacing(4),
     width: '100%',
   },
+
+  thumbnailCard: {
+    display: 'flex',
+    alignItems: 'center',
+    height: 107,
+  },
   cardContent: {
-    height: '100%',
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'space-between',
+    '&:last-child': {
+      paddingBottom: theme.spacing(4),
+    },
+  },
+  projectThumbnail: {
+    height: 50, //todo
   },
 
   description: {
@@ -221,6 +233,20 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({ open, onClose, initia
           {({ submitForm, isValid, isSubmitting, values }) => {
             return (
               <>
+                <Card className={cx(styles.thumbnailCard, styles.field)}>
+                  <Image
+                    className={styles.projectThumbnail}
+                    src={''}
+                    // alt={imageAlt}
+                    // imageStorageBaseUrl={imageStorageBaseUrl}
+                    // apiServerUrl={apiServerUrl}
+                  />
+                  <CardContent className={styles.cardContent}>
+                    <Title variant="h5">CarbonPlus Grassland Credits</Title>
+                    <Description>Wilmot</Description>
+                  </CardContent>
+                </Card>
+
                 <Form translate="yes">
                   <div className={styles.field}>
                     <Title className={styles.groupTitle} variant="h5">
@@ -246,7 +272,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({ open, onClose, initia
                           </Title>
                           <Label className={styles.regenLabel}>REGEN</Label>
                         </div>
-                        <div className={styles.currencyEquivalent}>($2345 USD)</div>
+                        <div className={styles.currencyEquivalent}>($2345.00 USD)</div>
                       </div>
                     </div>
                   </div>

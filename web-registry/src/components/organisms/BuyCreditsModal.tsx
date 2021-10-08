@@ -136,6 +136,7 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.info.dark,
     fontSize: theme.typography.pxToRem(14),
     marginRight: theme.spacing(2),
+    lineHeight: '18px',
   },
   marginRight: {
     marginRight: theme.spacing(4),
@@ -153,6 +154,7 @@ export interface BuyCreditsValues {
   state: string;
   country: string;
   retirementAction: string;
+  creditCount: number;
 }
 
 const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({ open, onClose, initialValues }) => {
@@ -198,6 +200,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({ open, onClose, initia
           validateOnMount
           initialValues={
             initialValues || {
+              creditCount: 0,
               retirementBeneficiary: '',
               city: '',
               state: '',

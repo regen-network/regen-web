@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import axios from 'axios';
 import { Formik, Form, Field } from 'formik';
+import { RadioGroup } from 'formik-material-ui';
 import cx from 'clsx';
 
 import Modal, { RegenModalProps } from 'web-components/lib/components/modal';
@@ -10,6 +11,7 @@ import Title from 'web-components/lib/components/title';
 import Description from 'web-components/lib/components/description';
 import FormLabel from 'web-components/lib/components/inputs/FormLabel';
 import SelectTextField, { Option } from 'web-components/lib/components/inputs/SelectTextField';
+import Toggle from 'web-components/lib/components/inputs/Toggle';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
 
@@ -105,6 +107,7 @@ export interface BuyCreditsValues {
   city: string;
   state: string;
   country: string;
+  retirementAction: string;
 }
 
 const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({ open, onClose, initialValues }) => {
@@ -154,6 +157,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({ open, onClose, initia
               city: '',
               state: '',
               country: initialCountry,
+              retirementAction: 'autoretire',
             }
           }
           onSubmit={async (values, { setSubmitting }) => {
@@ -166,10 +170,30 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({ open, onClose, initia
             }
           }}
         >
-          {({ submitForm, isValid, isSubmitting }) => {
+          {({ submitForm, isValid, isSubmitting, values }) => {
+            console.log('values["retirementAction"]', values['retirementAction']);
             return (
               <>
                 <Form translate="yes">
+                  <Title variant="h5">Retirement of Credits</Title>
+                  <Field className={cx(styles.field)} component={RadioGroup} name="retirementAction">
+                    <Field
+                      component={Toggle}
+                      type="radio"
+                      value="autoretire"
+                      checked={values['retirementAction'] === 'autoretire'}
+                      label="Auto-retire credits"
+                      description="These credits will be retired upon purchase and will not be tradeable."
+                    />
+                    <Field
+                      component={Toggle}
+                      type="radio"
+                      value="manual"
+                      checked={values['retirementAction'] === 'manual'}
+                      label="Retire credits manually"
+                      description="These credits will be a tradeable asset. They can be retired later via Regen Registry."
+                    />
+                  </Field>
                   <Title className={styles.groupTitle} variant="h5">
                     Retirement Beneficiary
                   </Title>

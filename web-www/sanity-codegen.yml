@@ -1,8 +1,7 @@
 overwrite: true
 schema: 'https://jm12rn9t.api.sanity.io/v1/graphql/staging/default'
-# TODO remove this comment when .graphql files are added
-# documents:
-#   - 'src/graphql/*.graphql'
+documents:
+  - 'src/graphql/*.graphql'
 generates:
   src/generated/sanity-graphql.tsx:
     plugins:

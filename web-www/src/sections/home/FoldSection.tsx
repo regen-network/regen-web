@@ -6,6 +6,8 @@ import BackgroundImage from 'gatsby-background-image';
 import VideoPopup from '../../components/videoPopup';
 import Typography from '@material-ui/core/Typography';
 import Title from 'web-components/lib/components/title';
+import { useAllHomePageWebQuery } from '../../generated/sanity-graphql';
+import { client } from '../../../sanity';
 
 interface Props {
   className?: string;
@@ -89,8 +91,10 @@ let useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const HomeFoldSection: React.FC<Props> = ({ className }) => {
-  const classes = useStyles({});
-  const data = useStaticQuery(graphql`
+  const styles = useStyles({});
+  const { data } = useAllHomePageWebQuery({ client });
+  const content = data?.allHomePageWeb?.[0].homeFoldSection;
+  const imgQuery = useStaticQuery(graphql`
     query {
       desktop: file(relativePath: { eq: "image43.jpg" }) {
         childImageSharp {
@@ -99,30 +103,24 @@ const HomeFoldSection: React.FC<Props> = ({ className }) => {
           }
         }
       }
-      text: homeYaml {
-        foldSection {
-          tagline
-          description
-        }
-      }
     }
   `);
-  const imageData = data.desktop.childImageSharp.fluid;
-  const content = data.text.foldSection;
+  const imageData = imgQuery.desktop.childImageSharp.fluid;
+
   return (
     <BackgroundImage
       Tag="section"
-      className={clsx(classes.root, className)}
+      className={clsx(styles.root, className)}
       fluid={imageData}
       backgroundColor={`#040e18`}
     >
-      <div className={classes.backgroundGradient}></div>
+      <div className={styles.backgroundGradient}></div>
       <VideoPopup />
-      <Title align="center" color="primary" variant="h1" className={classes.title}>
-        {content.tagline}
+      <Title align="center" color="primary" variant="h1" className={styles.title}>
+        {content?.title}
       </Title>
-      <div className={classes.tag}>
-        <Typography variant="body1">{content.description}</Typography>
+      <div className={styles.tag}>
+        <Typography variant="body1">{content?.description}</Typography>
       </div>
     </BackgroundImage>
   );

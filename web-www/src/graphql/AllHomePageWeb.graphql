@@ -1,0 +1,21 @@
+query allHomePageWeb {
+  allHomePageWeb {
+    homeFoldSection {
+      title
+      description
+    }
+    marketplaceSection {
+      header
+      tooltip
+      body {
+        green
+        middle
+        popover
+        end
+      }
+      callToActions {
+        ...callToActionFields
+      }
+    }
+  }
+}

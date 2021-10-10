@@ -1,12 +1,6 @@
-foldSection:
-  tagline: Platform for a Thriving Planet
-  description: Regen Network™ aligns economics with ecology to drive regenerative
-    land management.
 marketplaceSection:
   header: The open marketplace for climate solutions
-  tooltip: Ecosystem services are the benefits people receive from healthy
-    ecosystems, including clean air and water, resilient food systems, and
-    mitigation of extreme climate events.
+  tooltip: Ecosystem services are the benefits people receive from healthy ecosystems, including clean air and water, resilient food systems, and mitigation of extreme climate events.
   body:
     green: Regen Registry
     middle: allows land stewards to sell their
@@ -16,8 +10,7 @@ marketplaceSection:
     - caption: Land Stewards
       image: ../../static/media/land-stewards.png
       header: Register a project
-      description: Get paid for your ecological practices, such as cover cropping,
-        crop rotation, agroforestry, rotational grazing, and more.
+      description: Get paid for your ecological practices, such as cover cropping, crop rotation, agroforestry, rotational grazing, and more.
       linkText: Learn more
       linkUrl: https://registry.regen.network/land-stewards/
     - caption: Buyers

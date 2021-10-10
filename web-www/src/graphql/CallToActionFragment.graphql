@@ -1,0 +1,15 @@
+fragment callToActionFields on CallToAction {
+  caption
+  # image {
+  #   #   # asset {
+  #   #   # fixed(quality: 90, width: 159) {
+  #   # ...SanityImageFixed
+  #   #   # }
+  #   #   # }
+  #   # sanityImageAsset
+  # }
+  header
+  description
+  linkText
+  linkUrl
+}

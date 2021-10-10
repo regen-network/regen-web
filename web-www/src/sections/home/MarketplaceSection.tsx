@@ -7,6 +7,8 @@ import Title from 'web-components/lib/components/title';
 import Section from 'web-components/src/components/section';
 import Img from 'gatsby-image';
 import Tooltip from 'web-components/lib/components/tooltip';
+import { useAllHomePageWebQuery } from '../../generated/sanity-graphql';
+import { client } from '../../../sanity';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -122,7 +124,9 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const MarketplaceSection = (): JSX.Element => {
-  const data = useStaticQuery(graphql`
+  const { data } = useAllHomePageWebQuery({ client });
+  const content = data?.allHomePageWeb?.[0];
+  const dataOld = useStaticQuery(graphql`
     query {
       text: homeYaml {
         marketplaceSection {
@@ -153,23 +157,23 @@ const MarketplaceSection = (): JSX.Element => {
     }
   `);
 
-  const content = data.text.marketplaceSection;
+  const contentOld = dataOld.text.marketplaceSection;
 
   const classes = useStyles({});
   return (
     <Section className={classes.root}>
       <div className={classes.inner}>
-        <div className={classes.smallTag}>{content.header}</div>
+        <div className={classes.smallTag}>{contentOld.header}</div>
         <Title variant="h2" align="center">
-          <span className={classes.green}>{content.body.green} </span>
-          {content.body.middle}{' '}
-          <Tooltip arrow placement="top" title={content.tooltip}>
-            <span className={classes.popover}>{content.body.popover}</span>
+          <span className={classes.green}>{contentOld.body.green} </span>
+          {contentOld.body.middle}{' '}
+          <Tooltip arrow placement="top" title={contentOld.tooltip}>
+            <span className={classes.popover}>{contentOld.body.popover}</span>
           </Tooltip>{' '}
-          {content.body.end}
+          {contentOld.body.end}
         </Title>
         <Grid container spacing={3}>
-          {content.callToActions.map(cta => {
+          {contentOld.callToActions.map(cta => {
             return (
               <Grid key={cta.header} className={classes.gridItem} item xs>
                 <Img fixed={cta.image.childImageSharp.fixed} />

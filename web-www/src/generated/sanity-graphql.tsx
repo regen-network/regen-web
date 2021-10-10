@@ -1,8 +1,10 @@
 import { gql } from '@apollo/client';
+import * as Apollo from '@apollo/client';
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+const defaultOptions =  {}
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -47,6 +49,34 @@ export type Block = {
   children?: Maybe<Array<Maybe<Span>>>;
   style?: Maybe<Scalars['String']>;
   list?: Maybe<Scalars['String']>;
+};
+
+export type BodyGreenTextWithPopover = {
+  __typename?: 'BodyGreenTextWithPopover';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  green?: Maybe<Scalars['String']>;
+  middle?: Maybe<Scalars['String']>;
+  popover?: Maybe<Scalars['String']>;
+  end?: Maybe<Scalars['String']>;
+};
+
+export type BodyGreenTextWithPopoverFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  green?: Maybe<StringFilter>;
+  middle?: Maybe<StringFilter>;
+  popover?: Maybe<StringFilter>;
+  end?: Maybe<StringFilter>;
+};
+
+export type BodyGreenTextWithPopoverSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  green?: Maybe<SortOrder>;
+  middle?: Maybe<SortOrder>;
+  popover?: Maybe<SortOrder>;
+  end?: Maybe<SortOrder>;
 };
 
 export type BooleanFilter = {
@@ -190,6 +220,40 @@ export type BuyersPageSorting = {
   faqSection?: Maybe<BottomBannerSorting>;
   footerButtonText?: Maybe<SortOrder>;
   metadata?: Maybe<PageMetadataSorting>;
+};
+
+export type CallToAction = {
+  __typename?: 'CallToAction';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  caption?: Maybe<Scalars['String']>;
+  image?: Maybe<Image>;
+  header?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  linkText?: Maybe<Scalars['String']>;
+  linkUrl?: Maybe<Scalars['String']>;
+};
+
+export type CallToActionFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  caption?: Maybe<StringFilter>;
+  image?: Maybe<ImageFilter>;
+  header?: Maybe<StringFilter>;
+  description?: Maybe<StringFilter>;
+  linkText?: Maybe<StringFilter>;
+  linkUrl?: Maybe<StringFilter>;
+};
+
+export type CallToActionSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  caption?: Maybe<SortOrder>;
+  image?: Maybe<ImageSorting>;
+  header?: Maybe<SortOrder>;
+  description?: Maybe<SortOrder>;
+  linkText?: Maybe<SortOrder>;
+  linkUrl?: Maybe<SortOrder>;
 };
 
 export type Card = {
@@ -827,7 +891,7 @@ export type FeaturedSection = Document & {
   _key?: Maybe<Scalars['String']>;
   header?: Maybe<Scalars['String']>;
   titleRaw?: Maybe<Scalars['JSON']>;
-  link?: Maybe<Scalars['String']>;
+  button?: Maybe<Button>;
   image?: Maybe<CustomImage>;
   descriptionRaw?: Maybe<Scalars['JSON']>;
 };
@@ -842,7 +906,7 @@ export type FeaturedSectionFilter = {
   _rev?: Maybe<StringFilter>;
   _key?: Maybe<StringFilter>;
   header?: Maybe<StringFilter>;
-  link?: Maybe<StringFilter>;
+  button?: Maybe<ButtonFilter>;
   image?: Maybe<CustomImageFilter>;
 };
 
@@ -854,7 +918,7 @@ export type FeaturedSectionSorting = {
   _rev?: Maybe<SortOrder>;
   _key?: Maybe<SortOrder>;
   header?: Maybe<SortOrder>;
-  link?: Maybe<SortOrder>;
+  button?: Maybe<ButtonSorting>;
   image?: Maybe<CustomImageSorting>;
 };
 
@@ -1003,6 +1067,47 @@ export type HomePageSorting = {
   _key?: Maybe<SortOrder>;
   heroSection?: Maybe<HeroSectionSorting>;
   bottomBanner?: Maybe<BottomBannerSorting>;
+};
+
+export type HomePageWeb = Document & {
+  __typename?: 'HomePageWeb';
+  /** Document ID */
+  _id?: Maybe<Scalars['ID']>;
+  /** Document type */
+  _type?: Maybe<Scalars['String']>;
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars['DateTime']>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars['DateTime']>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars['String']>;
+  _key?: Maybe<Scalars['String']>;
+  homeFoldSection?: Maybe<TitleAndDescription>;
+  marketplaceSection?: Maybe<MarketplaceSection>;
+};
+
+export type HomePageWebFilter = {
+  /** Apply filters on document level */
+  _?: Maybe<Sanity_DocumentFilter>;
+  _id?: Maybe<IdFilter>;
+  _type?: Maybe<StringFilter>;
+  _createdAt?: Maybe<DatetimeFilter>;
+  _updatedAt?: Maybe<DatetimeFilter>;
+  _rev?: Maybe<StringFilter>;
+  _key?: Maybe<StringFilter>;
+  homeFoldSection?: Maybe<TitleAndDescriptionFilter>;
+  marketplaceSection?: Maybe<MarketplaceSectionFilter>;
+};
+
+export type HomePageWebSorting = {
+  _id?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  _createdAt?: Maybe<SortOrder>;
+  _updatedAt?: Maybe<SortOrder>;
+  _rev?: Maybe<SortOrder>;
+  _key?: Maybe<SortOrder>;
+  homeFoldSection?: Maybe<TitleAndDescriptionSorting>;
+  marketplaceSection?: Maybe<MarketplaceSectionSorting>;
 };
 
 export type IdFilter = {
@@ -1257,9 +1362,7 @@ export type LandStewardsPage = Document & {
   timelineSection?: Maybe<TimelineSection>;
   featuredSection?: Maybe<FeaturedSection>;
   moreQuestionsSection?: Maybe<BottomBanner>;
-  footerButtonText?: Maybe<Scalars['String']>;
-  /** This opens in a modal */
-  footerLink?: Maybe<Scalars['String']>;
+  footerButton?: Maybe<Button>;
   metadata?: Maybe<PageMetadata>;
 };
 
@@ -1279,8 +1382,7 @@ export type LandStewardsPageFilter = {
   timelineSection?: Maybe<TimelineSectionFilter>;
   featuredSection?: Maybe<FeaturedSectionFilter>;
   moreQuestionsSection?: Maybe<BottomBannerFilter>;
-  footerButtonText?: Maybe<StringFilter>;
-  footerLink?: Maybe<StringFilter>;
+  footerButton?: Maybe<ButtonFilter>;
   metadata?: Maybe<PageMetadataFilter>;
 };
 
@@ -1297,8 +1399,7 @@ export type LandStewardsPageSorting = {
   practicesOutcomesSection?: Maybe<PracticesOutcomesSectionSorting>;
   timelineSection?: Maybe<TimelineSectionSorting>;
   moreQuestionsSection?: Maybe<BottomBannerSorting>;
-  footerButtonText?: Maybe<SortOrder>;
-  footerLink?: Maybe<SortOrder>;
+  footerButton?: Maybe<ButtonSorting>;
   metadata?: Maybe<PageMetadataSorting>;
 };
 
@@ -1323,6 +1424,32 @@ export type LinkSorting = {
   _key?: Maybe<SortOrder>;
   _type?: Maybe<SortOrder>;
   buttonHref?: Maybe<SortOrder>;
+};
+
+export type MarketplaceSection = {
+  __typename?: 'MarketplaceSection';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  header?: Maybe<Scalars['String']>;
+  tooltip?: Maybe<Scalars['String']>;
+  body?: Maybe<BodyGreenTextWithPopover>;
+  callToActions?: Maybe<Array<Maybe<CallToAction>>>;
+};
+
+export type MarketplaceSectionFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  header?: Maybe<StringFilter>;
+  tooltip?: Maybe<StringFilter>;
+  body?: Maybe<BodyGreenTextWithPopoverFilter>;
+};
+
+export type MarketplaceSectionSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  header?: Maybe<SortOrder>;
+  tooltip?: Maybe<SortOrder>;
+  body?: Maybe<BodyGreenTextWithPopoverSorting>;
 };
 
 export type Media = Document & {
@@ -1618,9 +1745,9 @@ export type RootQuery = {
   Sdg?: Maybe<Sdg>;
   EcologicalOutcome?: Maybe<EcologicalOutcome>;
   LandManagementPractice?: Maybe<LandManagementPractice>;
-  TimelineItem?: Maybe<TimelineItem>;
   Tag?: Maybe<Tag>;
   HomePage?: Maybe<HomePage>;
+  HomePageWeb?: Maybe<HomePageWeb>;
   CreateCreditClassPage?: Maybe<CreateCreditClassPage>;
   CreateMethodologyPage?: Maybe<CreateMethodologyPage>;
   MethodologyReviewProcessPage?: Maybe<MethodologyReviewProcessPage>;
@@ -1641,9 +1768,9 @@ export type RootQuery = {
   allSdg: Array<Sdg>;
   allEcologicalOutcome: Array<EcologicalOutcome>;
   allLandManagementPractice: Array<LandManagementPractice>;
-  allTimelineItem: Array<TimelineItem>;
   allTag: Array<Tag>;
   allHomePage: Array<HomePage>;
+  allHomePageWeb: Array<HomePageWeb>;
   allCreateCreditClassPage: Array<CreateCreditClassPage>;
   allCreateMethodologyPage: Array<CreateMethodologyPage>;
   allMethodologyReviewProcessPage: Array<MethodologyReviewProcessPage>;
@@ -1699,17 +1826,17 @@ export type RootQueryLandManagementPracticeArgs = {
 };
 
 
-export type RootQueryTimelineItemArgs = {
-  id: Scalars['ID'];
-};
-
-
 export type RootQueryTagArgs = {
   id: Scalars['ID'];
 };
 
 
 export type RootQueryHomePageArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type RootQueryHomePageWebArgs = {
   id: Scalars['ID'];
 };
 
@@ -1838,14 +1965,6 @@ export type RootQueryAllLandManagementPracticeArgs = {
 };
 
 
-export type RootQueryAllTimelineItemArgs = {
-  where?: Maybe<TimelineItemFilter>;
-  sort?: Maybe<Array<TimelineItemSorting>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-};
-
-
 export type RootQueryAllTagArgs = {
   where?: Maybe<TagFilter>;
   sort?: Maybe<Array<TagSorting>>;
@@ -1857,6 +1976,14 @@ export type RootQueryAllTagArgs = {
 export type RootQueryAllHomePageArgs = {
   where?: Maybe<HomePageFilter>;
   sort?: Maybe<Array<HomePageSorting>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+};
+
+
+export type RootQueryAllHomePageWebArgs = {
+  where?: Maybe<HomePageWebFilter>;
+  sort?: Maybe<Array<HomePageWebSorting>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
@@ -2483,6 +2610,7 @@ export type Tag = Document & {
   _rev?: Maybe<Scalars['String']>;
   _key?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
+  /** Must be a legal CSS color, as in https://www.w3schools.com/cssref/css_colors_legal.asp */
   color?: Maybe<Scalars['String']>;
 };
 
@@ -2510,47 +2638,28 @@ export type TagSorting = {
   color?: Maybe<SortOrder>;
 };
 
-export type TimelineItem = Document & {
+export type TimelineItem = {
   __typename?: 'TimelineItem';
-  /** Document ID */
-  _id?: Maybe<Scalars['ID']>;
-  /** Document type */
-  _type?: Maybe<Scalars['String']>;
-  /** Date the document was created */
-  _createdAt?: Maybe<Scalars['DateTime']>;
-  /** Date the document was last modified */
-  _updatedAt?: Maybe<Scalars['DateTime']>;
-  /** Current document revision */
-  _rev?: Maybe<Scalars['String']>;
   _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
-  /** (optional) */
+  /** (Optional) */
   url?: Maybe<Scalars['String']>;
   image?: Maybe<Image>;
   tags?: Maybe<Array<Maybe<Tag>>>;
 };
 
 export type TimelineItemFilter = {
-  /** Apply filters on document level */
-  _?: Maybe<Sanity_DocumentFilter>;
-  _id?: Maybe<IdFilter>;
-  _type?: Maybe<StringFilter>;
-  _createdAt?: Maybe<DatetimeFilter>;
-  _updatedAt?: Maybe<DatetimeFilter>;
-  _rev?: Maybe<StringFilter>;
   _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
   title?: Maybe<StringFilter>;
   url?: Maybe<StringFilter>;
   image?: Maybe<ImageFilter>;
 };
 
 export type TimelineItemSorting = {
-  _id?: Maybe<SortOrder>;
-  _type?: Maybe<SortOrder>;
-  _createdAt?: Maybe<SortOrder>;
-  _updatedAt?: Maybe<SortOrder>;
-  _rev?: Maybe<SortOrder>;
   _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
   title?: Maybe<SortOrder>;
   url?: Maybe<SortOrder>;
   image?: Maybe<ImageSorting>;
@@ -2575,3 +2684,114 @@ export type TimelineSectionSorting = {
   _type?: Maybe<SortOrder>;
   header?: Maybe<SortOrder>;
 };
+
+export type TitleAndDescription = {
+  __typename?: 'TitleAndDescription';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+};
+
+export type TitleAndDescriptionFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  title?: Maybe<StringFilter>;
+  description?: Maybe<StringFilter>;
+};
+
+export type TitleAndDescriptionSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  title?: Maybe<SortOrder>;
+  description?: Maybe<SortOrder>;
+};
+
+export type AllHomePageWebQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllHomePageWebQuery = (
+  { __typename?: 'RootQuery' }
+  & { allHomePageWeb: Array<(
+    { __typename?: 'HomePageWeb' }
+    & { homeFoldSection?: Maybe<(
+      { __typename?: 'TitleAndDescription' }
+      & Pick<TitleAndDescription, 'title' | 'description'>
+    )>, marketplaceSection?: Maybe<(
+      { __typename?: 'MarketplaceSection' }
+      & Pick<MarketplaceSection, 'header' | 'tooltip'>
+      & { body?: Maybe<(
+        { __typename?: 'BodyGreenTextWithPopover' }
+        & Pick<BodyGreenTextWithPopover, 'green' | 'middle' | 'popover' | 'end'>
+      )>, callToActions?: Maybe<Array<Maybe<(
+        { __typename?: 'CallToAction' }
+        & CallToActionFieldsFragment
+      )>>> }
+    )> }
+  )> }
+);
+
+export type CallToActionFieldsFragment = (
+  { __typename?: 'CallToAction' }
+  & Pick<CallToAction, 'caption' | 'header' | 'description' | 'linkText' | 'linkUrl'>
+);
+
+export const CallToActionFieldsFragmentDoc = gql`
+    fragment callToActionFields on CallToAction {
+  caption
+  header
+  description
+  linkText
+  linkUrl
+}
+    `;
+export const AllHomePageWebDocument = gql`
+    query allHomePageWeb {
+  allHomePageWeb {
+    homeFoldSection {
+      title
+      description
+    }
+    marketplaceSection {
+      header
+      tooltip
+      body {
+        green
+        middle
+        popover
+        end
+      }
+      callToActions {
+        ...callToActionFields
+      }
+    }
+  }
+}
+    ${CallToActionFieldsFragmentDoc}`;
+
+/**
+ * __useAllHomePageWebQuery__
+ *
+ * To run a query within a React component, call `useAllHomePageWebQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAllHomePageWebQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAllHomePageWebQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useAllHomePageWebQuery(baseOptions?: Apollo.QueryHookOptions<AllHomePageWebQuery, AllHomePageWebQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AllHomePageWebQuery, AllHomePageWebQueryVariables>(AllHomePageWebDocument, options);
+      }
+export function useAllHomePageWebLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllHomePageWebQuery, AllHomePageWebQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AllHomePageWebQuery, AllHomePageWebQueryVariables>(AllHomePageWebDocument, options);
+        }
+export type AllHomePageWebQueryHookResult = ReturnType<typeof useAllHomePageWebQuery>;
+export type AllHomePageWebLazyQueryHookResult = ReturnType<typeof useAllHomePageWebLazyQuery>;
+export type AllHomePageWebQueryResult = Apollo.QueryResult<AllHomePageWebQuery, AllHomePageWebQueryVariables>;

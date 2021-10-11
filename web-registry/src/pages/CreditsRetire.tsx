@@ -56,7 +56,7 @@ const CreditsRetire: React.FC<{
   creditVintageId?: string;
 }> = ({
   addressId: passedAddressId = '',
-  buyerWalletId: passedBuyerId = '',
+  buyerWalletId: passedBuyerWalletId = '',
   creditVintageId: passedVintageId = '',
 }) => {
   const styles = useStyles();
@@ -80,7 +80,7 @@ const CreditsRetire: React.FC<{
   const dateFormat = new Intl.DateTimeFormat('en', { year: 'numeric', month: 'numeric', day: '2-digit' });
 
   const [vintageId, setVintageId] = useState(passedVintageId);
-  const [buyerWalletId, setBuyerWalletId] = useState(passedBuyerId);
+  const [buyerWalletId, setBuyerWalletId] = useState(passedBuyerWalletId);
   const [buyerName, setBuyerName] = useState('');
   const [creditName, setCreditName] = useState('');
   const [buyerAddress, setBuyerAddress] = useState('');
@@ -167,7 +167,6 @@ const CreditsRetire: React.FC<{
                 },
               });
               await refetchVintages();
-              setUnits(getUnits(vintagesData, buyerWalletId, vintageId));
               setShowResult(true);
             } catch (e) {
               console.error('Error retiring credits: ', e); // eslint-disable-line no-console
@@ -247,9 +246,9 @@ const CreditsRetire: React.FC<{
           <p>
             {units} {pluralize(units, 'credit')} successfully retired.
           </p>
-          <p>Buyer: {buyerName}</p>
-          <p>Location: {buyerAddress}</p>
-          <p>Credit: {creditName}</p>
+          {buyerName && <p>Buyer: {buyerName}</p>}
+          {buyerAddress && <p>Location: {buyerAddress}</p>}
+          {creditName && <p>Credit: {creditName}</p>}
         </div>
       )}
       {error && (

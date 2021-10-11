@@ -83,7 +83,7 @@ const EntityDisplay: React.FC = () => {
           const value: DisplayValues = values[role as EntityFieldName] as DisplayValues;
           const roleIdFieldName: roleIdField = rolesMap[role as EntityFieldName];
           const roleId = data.projectById[roleIdFieldName];
-          if (value['http://regen.network/showOnProjectPage'] && roleId) {
+          if (value?.['http://regen.network/showOnProjectPage'] && roleId) {
             await updatePartyById({
               variables: {
                 input: {

@@ -409,7 +409,6 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialVa
               }
             }
           }
-          console.log(errors)
           return errors;
         }}
         onSubmit={async (values, { setSubmitting }) => {

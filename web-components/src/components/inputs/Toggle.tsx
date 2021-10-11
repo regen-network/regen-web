@@ -122,13 +122,6 @@ const Toggle: React.FC<ToggleProps> = ({
   triggerOnChange,
 }) => {
   const styles = useStyles();
-  const onChange = (e: React.ChangeEvent<any>): void => {
-    const value = e.target.checked;
-    form.setFieldValue(field.name, value);
-    if (triggerOnChange) {
-      triggerOnChange(value);
-    }
-  };
 
   return (
     <div className={clsx(styles.root, checked && styles.active, classes && classes.root)}>
@@ -141,7 +134,7 @@ const Toggle: React.FC<ToggleProps> = ({
                 field={field}
                 form={form}
                 meta={meta}
-                onChange={onChange}
+                triggerOnChange={triggerOnChange}
                 type="checkbox"
               />
             ) : (
@@ -151,7 +144,7 @@ const Toggle: React.FC<ToggleProps> = ({
           label={label}
           value={value}
           disabled={disabled}
-          // checked={checked}
+          checked={checked}
           classes={{
             root: styles.formControlLabelRoot,
             label: description && styles.formControlLabelWithDescription,

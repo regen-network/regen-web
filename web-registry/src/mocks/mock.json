@@ -751,7 +751,12 @@
         "name": "Carbon<i>Plus</i>&nbsp;&nbsp;Grasslands",
         "id": "carbonplus-grasslands",
         "url": "https://regen-registry.s3.amazonaws.com/Methodology+for+GHG+and+Co-Benefits+in+Grazing+Systems.pdf"
-      }
+      },
+      "creditPrice": {
+        "unitPrice": 27.5,
+        "currency": "USD"
+      },
+      "stripePrice": "price_1Hgu5rJol3OwGs5e4g7CEGv6"
     },
     {
       "id": "pillango",

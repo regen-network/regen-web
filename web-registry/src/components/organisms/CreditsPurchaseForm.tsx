@@ -299,7 +299,7 @@ function CreditsPurchaseForm({ creditPrice, stripePrice, onClose }: CreditsPurch
                 price: stripePrice,
                 units,
                 cancelUrl: window.location.href,
-                successUrl: `/post-purchase/${projectId}/${walletId}/${encodeURI(name)}`,
+                successUrl: `${window.location.origin}/post-purchase/${projectId}/${walletId}/${encodeURI(name)}`,
                 customerEmail: email,
                 clientReferenceId: JSON.stringify({ walletId, addressId, name }),
               },
@@ -318,6 +318,7 @@ function CreditsPurchaseForm({ creditPrice, stripePrice, onClose }: CreditsPurch
             }
             setSubmitting(false);
           } catch (e) {
+            console.log('error', e)
             setStatus({ serverError: 'Server error' }); // TODO: display more explicit msg?
             setSubmitting(false);
           }

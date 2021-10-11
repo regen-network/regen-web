@@ -436,13 +436,13 @@ function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JS
         </Modal>
       )}
 
-      <FixedFooter justify="flex-end">
+      {/* <FixedFooter justify="flex-end">
         <>
           <ContainedButton onClick={handleOpen} startIcon={<EmailIcon />}>
             send me more info
-          </ContainedButton>
+          </ContainedButton> */}
           {/* {<OutlinedButton className={styles.callButton} startIcon={<PhoneIcon />}>schedule a call</OutlinedButton>} */}
-        </>
+        {/* </>
       </FixedFooter>
       <Modal open={open} onClose={handleClose}>
         <MoreInfoForm
@@ -453,7 +453,7 @@ function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JS
             setSubmitted(true);
           }}
         />
-      </Modal>
+      </Modal> */}
       {issuanceModalData && (
         <IssuanceModal
           txClient={txClient}

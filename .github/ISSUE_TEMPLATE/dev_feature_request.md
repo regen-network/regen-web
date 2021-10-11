@@ -1,8 +1,8 @@
 ---
-name: Feature request
+name: Design feature request
 about: Suggest an idea for this project
 title: ''
-labels: dev
+labels: design
 assignees: ''
 
 ---
@@ -23,5 +23,5 @@ ____
 #### For Admin Use
 
 - [ ] Not duplicate issue
-- [ ] Appropriate labels applied
+- [ ] Appropriate labels and zenhub epics applied
 - [ ] Appropriate contributors tagged

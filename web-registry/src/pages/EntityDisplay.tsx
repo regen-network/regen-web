@@ -35,6 +35,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
+function getInitialValues(value: any): any {
+  return value?.['@type'] ? value : undefined;
+}
+
 const EntityDisplay: React.FC = () => {
   const styles = useStyles();
   const activeStep = 0;
@@ -54,10 +58,14 @@ const EntityDisplay: React.FC = () => {
       const metadata = data.projectById.metadata;
 
       setInitialValues({
-        'http://regen.network/landOwner': metadata['http://regen.network/landOwner'],
-        'http://regen.network/landSteward': metadata['http://regen.network/landSteward'],
-        'http://regen.network/projectDeveloper': metadata['http://regen.network/projectDeveloper'],
-        'http://regen.network/projectOriginator': metadata['http://regen.network/projectOriginator'],
+        'http://regen.network/landOwner': getInitialValues(metadata['http://regen.network/landOwner']),
+        'http://regen.network/landSteward': getInitialValues(metadata['http://regen.network/landSteward']),
+        'http://regen.network/projectDeveloper': getInitialValues(
+          metadata['http://regen.network/projectDeveloper'],
+        ),
+        'http://regen.network/projectOriginator': getInitialValues(
+          metadata['http://regen.network/projectOriginator'],
+        ),
       });
     }
   }, [data]);

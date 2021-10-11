@@ -1,25 +1,3 @@
-marketplaceSection:
-  header: The open marketplace for climate solutions
-  tooltip: Ecosystem services are the benefits people receive from healthy ecosystems, including clean air and water, resilient food systems, and mitigation of extreme climate events.
-  body:
-    green: Regen Registry
-    middle: allows land stewards to sell their
-    popover: ecosystem services
-    end: directly to buyers around the world.
-  callToActions:
-    - caption: Land Stewards
-      image: ../../static/media/land-stewards.png
-      header: Register a project
-      description: Get paid for your ecological practices, such as cover cropping, crop rotation, agroforestry, rotational grazing, and more.
-      linkText: Learn more
-      linkUrl: https://registry.regen.network/land-stewards/
-    - caption: Buyers
-      image: ../../static/media/buyers.png
-      header: Purchase credits
-      description: Whether you are an individual or a business looking to take climate
-        action, we make it easy to sponsor ecological practices.
-      linkText: Browse Projects
-      linkUrl: https://registry.regen.network/buyers/
 climateSection:
   header: Reverse climate change through carbon removal that regenerates ecosystems.
   description: Introducing Carbon<i>Plus</i>™ - a suite of carbon credits with

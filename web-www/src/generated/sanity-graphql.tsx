@@ -2734,11 +2734,24 @@ export type AllHomePageWebQuery = (
 export type CallToActionFieldsFragment = (
   { __typename?: 'CallToAction' }
   & Pick<CallToAction, 'caption' | 'header' | 'description' | 'linkText' | 'linkUrl'>
+  & { image?: Maybe<(
+    { __typename?: 'Image' }
+    & { asset?: Maybe<(
+      { __typename?: 'SanityImageAsset' }
+      & Pick<SanityImageAsset, 'url' | 'altText'>
+    )> }
+  )> }
 );
 
 export const CallToActionFieldsFragmentDoc = gql`
     fragment callToActionFields on CallToAction {
   caption
+  image {
+    asset {
+      url
+      altText
+    }
+  }
   header
   description
   linkText

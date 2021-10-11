@@ -125,64 +125,37 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const MarketplaceSection = (): JSX.Element => {
   const { data } = useAllHomePageWebQuery({ client });
-  const content = data?.allHomePageWeb?.[0];
-  const dataOld = useStaticQuery(graphql`
-    query {
-      text: homeYaml {
-        marketplaceSection {
-          header
-          tooltip
-          body {
-            green
-            middle
-            popover
-            end
-          }
-          callToActions {
-            image {
-              childImageSharp {
-                fixed(quality: 90, width: 159) {
-                  ...GatsbyImageSharpFixed_withWebp
-                }
-              }
-            }
-            caption
-            header
-            description
-            linkText
-            linkUrl
-          }
-        }
-      }
-    }
-  `);
-
-  const contentOld = dataOld.text.marketplaceSection;
+  const content = data?.allHomePageWeb?.[0].marketplaceSection;
 
   const classes = useStyles({});
   return (
     <Section className={classes.root}>
       <div className={classes.inner}>
-        <div className={classes.smallTag}>{contentOld.header}</div>
+        <div className={classes.smallTag}>{content?.header}</div>
         <Title variant="h2" align="center">
-          <span className={classes.green}>{contentOld.body.green} </span>
-          {contentOld.body.middle}{' '}
-          <Tooltip arrow placement="top" title={contentOld.tooltip}>
-            <span className={classes.popover}>{contentOld.body.popover}</span>
+          <span className={classes.green}>{content?.body?.green} </span>
+          {content?.body?.middle}{' '}
+          <Tooltip arrow placement="top" title={content?.tooltip || ''}>
+            <span className={classes.popover}>{content?.body?.popover}</span>
           </Tooltip>{' '}
-          {contentOld.body.end}
+          {content?.body?.end}
         </Title>
         <Grid container spacing={3}>
-          {contentOld.callToActions.map(cta => {
-            return (
-              <Grid key={cta.header} className={classes.gridItem} item xs>
-                <Img fixed={cta.image.childImageSharp.fixed} />
+          {content?.callToActions?.map((cta, i) => {
+            return !cta ? null : (
+              <Grid key={cta.header || i} className={classes.gridItem} item xs>
+                {/* <Img fixed={cta.image.childImageSharp.fixed} /> */}
+                <img
+                  src={cta.image?.asset?.url || ''}
+                  alt={cta.image?.asset?.altText || ''}
+                  style={{ width: '159px' }}
+                />
                 <div className={classes.smallTitle}>{cta.caption}</div>
                 <Title className={classes.h3} variant="h3" align="center">
                   {cta.header}
                 </Title>
                 <p>{cta.description}</p>
-                <ContainedButton href={cta.linkUrl} className={classes.button}>
+                <ContainedButton href={cta.linkUrl || ''} className={classes.button}>
                   {cta.linkText}
                 </ContainedButton>
               </Grid>

@@ -46,6 +46,7 @@ const EntityDisplay: React.FC = () => {
   const [updatePartyById] = useUpdatePartyByIdMutation();
   const { data } = useProjectByIdQuery({
     variables: { id: projectId },
+    fetchPolicy: 'cache-and-network',
   });
 
   useEffect(() => {

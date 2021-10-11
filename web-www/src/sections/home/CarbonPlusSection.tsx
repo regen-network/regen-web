@@ -8,6 +8,8 @@ import ReactHtmlParser from 'react-html-parser';
 import Title from 'web-components/lib/components/title';
 import Description from 'web-components/lib/components/description';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
+import { useAllHomePageWebQuery } from '../../generated/sanity-graphql';
+import { client } from '../../../sanity';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -90,7 +92,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const CarbonplusSection = (): JSX.Element => {
-  const data = useStaticQuery(graphql`
+  const imgData = useStaticQuery(graphql`
     query {
       cow: file(relativePath: { eq: "cow.png" }) {
         childImageSharp {
@@ -99,41 +101,34 @@ const CarbonplusSection = (): JSX.Element => {
           }
         }
       }
-      text: homeYaml {
-        carbonPlusSection {
-          smallHeader {
-            featured
-            creditName
-          }
-          header
-          description
-          linkText
-          linkUrl
-        }
-      }
     }
   `);
-  const classes = useStyles({});
-  const content = data.text.carbonPlusSection;
+  const { data } = useAllHomePageWebQuery({ client });
+  const content = data?.allHomePageWeb?.[0].carbonPlusSection;
+  const styles = useStyles({});
+  // const content = imgData.text.carbonPlusSection;
+  console.log('content', content);
 
   return (
-    <div className={classes.root}>
-      <Grid className={classes.grid} container wrap="nowrap">
-        <Grid item xs={12} className={classes.text}>
-          <Title variant="h6" className={classes.smallHeader}>
-            <span className={classes.featured}>{content.smallHeader.featured} </span>
-            <span className={classes.creditName}>{ReactHtmlParser(content.smallHeader.creditName)}</span>
+    <div className={styles.root}>
+      <Grid className={styles.grid} container wrap="nowrap">
+        <Grid item xs={12} className={styles.text}>
+          <Title variant="h6" className={styles.smallHeader}>
+            <span className={styles.featured}>{content?.smallHeaderFeatured} </span>
+            <span className={styles.creditName}>{ReactHtmlParser(content?.smallHeaderCreditName)}</span>
           </Title>
-          <Title className={classes.header} variant="h3">
-            {ReactHtmlParser(content.header)}
+          <Title className={styles.header} variant="h3">
+            {ReactHtmlParser(content?.header || '')}
           </Title>
-          <Description className={classes.description}>{ReactHtmlParser(content.description)}</Description>
-          <ContainedButton className={classes.button} href={content.linkUrl}>
-            {content.linkText}
+          <Description className={styles.description}>
+            {ReactHtmlParser(content?.description || '')}
+          </Description>
+          <ContainedButton className={styles.button} href={content?.linkUrl}>
+            {content?.linkText}
           </ContainedButton>
         </Grid>
-        <Grid className={classes.imageContainer} item xs={12}>
-          <Img className={classes.image} fluid={data.cow.childImageSharp.fluid} />
+        <Grid className={styles.imageContainer} item xs={12}>
+          <Img className={styles.image} fluid={imgData.cow.childImageSharp.fluid} />
         </Grid>
       </Grid>
     </div>

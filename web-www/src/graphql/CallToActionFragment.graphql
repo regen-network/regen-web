@@ -1,17 +1,7 @@
 fragment callToActionFields on CallToAction {
   caption
   image {
-    asset {
-      url
-      altText
-    }
-    # asset {
-    #   childImageSharp {
-    #     fixed(quality: 90, width: 159) {
-    #       ...GatsbyImageSharpFixed_withWebp
-    #     }
-    #   }
-    # }
+    ...simpleImageFields
   }
   header
   description

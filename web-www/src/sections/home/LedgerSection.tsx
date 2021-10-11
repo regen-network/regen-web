@@ -7,6 +7,8 @@ import { makeStyles, Theme } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import Title from 'web-components/lib/components/title';
 import Img from 'gatsby-image';
+import { useAllHomePageWebQuery } from '../../generated/sanity-graphql';
+import { client } from '../../../sanity';
 
 let useStyles = makeStyles((theme: Theme) => ({
   grid: {
@@ -85,8 +87,8 @@ let useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const HomeLedger = () => {
-  const data = useStaticQuery(graphql`
+const HomeLedger: React.FC = () => {
+  const imgData = useStaticQuery(graphql`
     query {
       bg: file(relativePath: { eq: "farm-background.png" }) {
         childImageSharp {
@@ -102,29 +104,26 @@ const HomeLedger = () => {
           }
         }
       }
-      text: homeYaml {
-        ledgerSection {
-          description
-        }
-      }
     }
   `);
-  const classes = useStyles();
-  const content = data.text.ledgerSection; // TODO add title content to yaml once structure for styling set
+
+  const { data } = useAllHomePageWebQuery({ client: client });
+  const description = data?.allHomePageWeb?.[0].ledgerDescription;
+  const styles = useStyles();
 
   return (
-    <BackgroundImage Tag="section" fluid={data.bg.childImageSharp.fluid}>
-      <Grid className={classes.grid} container alignItems="center" wrap="nowrap">
-        <Grid className={classes.imgContainer} item xs={12}>
-          <Img className={classes.img} fluid={data.ledger.childImageSharp.fluid} />
+    <BackgroundImage Tag="section" fluid={imgData.bg.childImageSharp.fluid}>
+      <Grid className={styles.grid} container alignItems="center" wrap="nowrap">
+        <Grid className={styles.imgContainer} item xs={12}>
+          <Img className={styles.img} fluid={imgData.ledger.childImageSharp.fluid} />
         </Grid>
-        <Grid item xs={12} className={classes.text}>
-          <Title align="left" variant="h1" className={classes.title}>
-            <span className={classes.green}>Regen Ledger</span> powers{' '}
-            <span className={classes.green}>Regen Registry</span>
+        <Grid item xs={12} className={styles.text}>
+          <Title align="left" variant="h1" className={styles.title}>
+            <span className={styles.green}>Regen Ledger</span> powers{' '}
+            <span className={styles.green}>Regen Registry</span>
           </Title>
-          <Typography className={classes.description}>{content.description}</Typography>
-          <ContainedButton href="/developers" className={classes.button}>
+          <Typography className={styles.description}>{description}</Typography>
+          <ContainedButton href="/developers" className={styles.button}>
             Learn More
           </ContainedButton>
         </Grid>

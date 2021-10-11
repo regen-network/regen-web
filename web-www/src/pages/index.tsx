@@ -20,7 +20,7 @@ interface props {
 
 const IndexPage = ({ location }: props): JSX.Element => {
   const theme = useTheme();
-  const data = useStaticQuery(graphql`
+  const imgData = useStaticQuery(graphql`
     query {
       seoImage: file(relativePath: { eq: "science.png" }) {
         publicURL
@@ -44,14 +44,14 @@ const IndexPage = ({ location }: props): JSX.Element => {
 
   return (
     <>
-      <SEO location={location} title="Regen Network" imageUrl={data.seoImage.publicURL} />
+      <SEO location={location} title="Regen Network" imageUrl={imgData.seoImage.publicURL} />
       <HomeFoldSection />
       <MarketplaceSection />
       <EmailSubmitSection />
       <Box display={{ xs: 'block', sm: 'none' }}>
         <BackgroundImage
           Tag="div"
-          fluid={data.backgroundMobile.childImageSharp.fluid}
+          fluid={imgData.backgroundMobile.childImageSharp.fluid}
           backgroundColor={theme.palette.grey['50']}
           style={{
             backgroundPosition: 'left 70%',
@@ -64,7 +64,7 @@ const IndexPage = ({ location }: props): JSX.Element => {
       <Box display={{ xs: 'none', sm: 'block' }}>
         <BackgroundImage
           Tag="div"
-          fluid={data.background.childImageSharp.fluid}
+          fluid={imgData.background.childImageSharp.fluid}
           backgroundColor={theme.palette.grey['50']}
         >
           <ClimateSection />

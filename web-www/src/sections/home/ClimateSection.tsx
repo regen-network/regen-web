@@ -1,13 +1,14 @@
 import React from 'react';
 import { makeStyles, Theme, useTheme } from '@material-ui/core';
-import { useStaticQuery, graphql } from 'gatsby';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
-import Img from 'gatsby-image';
+// import Img from 'gatsby-image';
 import ReactHtmlParser from 'react-html-parser';
 import clsx from 'clsx';
 
 import Title from 'web-components/lib/components/title';
 import Card from 'web-components/lib/components/cards/Card';
+import { useAllHomePageWebQuery } from '../../generated/sanity-graphql';
+import { client } from '../../../sanity';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -170,68 +171,47 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const ClimateSection = (): JSX.Element => {
-  const data = useStaticQuery(graphql`
-    query {
-      text: homeYaml {
-        climateSection {
-          header
-          description
-          solution {
-            header
-            description
-          }
-          problem {
-            header
-            description
-          }
-          image {
-            childImageSharp {
-              fluid(quality: 90) {
-                ...GatsbyImageSharpFluid_withWebp
-              }
-            }
-          }
-        }
-      }
-    }
-  `);
-  const classes = useStyles();
+  const { data } = useAllHomePageWebQuery({ client });
+  const content = data?.allHomePageWeb?.[0].climateSection;
+  const styles = useStyles();
   const theme = useTheme();
   const downSm = useMediaQuery(theme.breakpoints.down('sm'));
-  const content = data.text.climateSection;
+  // const contentOld = dataold.text.climateSection;
+  const imgData = content?.image?.asset;
 
   return (
-    <div className={classes.root}>
-      <hr className={clsx(classes.line, classes.problemLine)} />
+    <div className={styles.root}>
+      <hr className={clsx(styles.line, styles.problemLine)} />
       <Card
-        className={clsx(classes.card, classes.problemCard)}
+        className={clsx(styles.card, styles.problemCard)}
         borderColor={theme.palette.grey['100']}
         borderRadius="10px"
       >
-        <Title className={classes.cardTitle} variant="body2">
-          {content.problem.header}
+        <Title className={styles.cardTitle} variant="body2">
+          {content?.problem?.title}
         </Title>
-        <div className={classes.cardContent}>{content.problem.description}</div>
+        <div className={styles.cardContent}>{content?.problem?.description}</div>
       </Card>
-      <Img className={classes.image} fluid={content.image.childImageSharp.fluid} />
-      {!downSm && <hr className={clsx(classes.line, classes.solutionLine)} />}
+      {/* <Img className={styles.image} fluid={content?.image.childImageSharp.fluid} /> */}
+      <img className={styles.image} src={imgData?.url || ''} alt={imgData?.altText || ''} />
+      {!downSm && <hr className={clsx(styles.line, styles.solutionLine)} />}
       <Card
-        className={clsx(classes.card, classes.solutionCard)}
+        className={clsx(styles.card, styles.solutionCard)}
         borderColor={theme.palette.grey['100']}
         borderRadius="10px"
       >
-        <Title className={classes.cardTitle} variant="body2">
-          {content.solution.header}
+        <Title className={styles.cardTitle} variant="body2">
+          {content?.solution?.title}
         </Title>
-        <div className={classes.cardContent}>{content.solution.description}</div>
-        {downSm && <hr className={clsx(classes.line, classes.solutionLine)} />}
+        <div className={styles.cardContent}>{content?.solution?.description}</div>
+        {downSm && <hr className={clsx(styles.line, styles.solutionLine)} />}
       </Card>
-      <div className={classes.titleContainer}>
-        <Title variant="h1" className={classes.title}>
-          {content.header}
+      <div className={styles.titleContainer}>
+        <Title variant="h1" className={styles.title}>
+          {content?.header}
         </Title>
-        <Title variant="h3" className={classes.description}>
-          {ReactHtmlParser(content.description)}
+        <Title variant="h3" className={styles.description}>
+          {ReactHtmlParser(content?.description || '')}
         </Title>
       </div>
     </div>

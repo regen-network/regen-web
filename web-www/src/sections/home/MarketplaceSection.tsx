@@ -2,10 +2,9 @@ import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import { useStaticQuery, graphql } from 'gatsby';
 import Title from 'web-components/lib/components/title';
 import Section from 'web-components/src/components/section';
-import Img from 'gatsby-image';
+// import Img from 'gatsby-image';
 import Tooltip from 'web-components/lib/components/tooltip';
 import { useAllHomePageWebQuery } from '../../generated/sanity-graphql';
 import { client } from '../../../sanity';
@@ -126,36 +125,36 @@ const useStyles = makeStyles((theme: Theme) => ({
 const MarketplaceSection = (): JSX.Element => {
   const { data } = useAllHomePageWebQuery({ client });
   const content = data?.allHomePageWeb?.[0].marketplaceSection;
+  const styles = useStyles({});
 
-  const classes = useStyles({});
   return (
-    <Section className={classes.root}>
-      <div className={classes.inner}>
-        <div className={classes.smallTag}>{content?.header}</div>
+    <Section className={styles.root}>
+      <div className={styles.inner}>
+        <div className={styles.smallTag}>{content?.header}</div>
         <Title variant="h2" align="center">
-          <span className={classes.green}>{content?.body?.green} </span>
+          <span className={styles.green}>{content?.body?.green} </span>
           {content?.body?.middle}{' '}
           <Tooltip arrow placement="top" title={content?.tooltip || ''}>
-            <span className={classes.popover}>{content?.body?.popover}</span>
+            <span className={styles.popover}>{content?.body?.popover}</span>
           </Tooltip>{' '}
           {content?.body?.end}
         </Title>
         <Grid container spacing={3}>
           {content?.callToActions?.map((cta, i) => {
             return !cta ? null : (
-              <Grid key={cta.header || i} className={classes.gridItem} item xs>
+              <Grid key={cta.header || i} className={styles.gridItem} item xs>
                 {/* <Img fixed={cta.image.childImageSharp.fixed} /> */}
                 <img
                   src={cta.image?.asset?.url || ''}
                   alt={cta.image?.asset?.altText || ''}
                   style={{ width: '159px' }}
                 />
-                <div className={classes.smallTitle}>{cta.caption}</div>
-                <Title className={classes.h3} variant="h3" align="center">
+                <div className={styles.smallTitle}>{cta.caption}</div>
+                <Title className={styles.h3} variant="h3" align="center">
                   {cta.header}
                 </Title>
                 <p>{cta.description}</p>
-                <ContainedButton href={cta.linkUrl || ''} className={classes.button}>
+                <ContainedButton href={cta.linkUrl || ''} className={styles.button}>
                   {cta.linkText}
                 </ContainedButton>
               </Grid>

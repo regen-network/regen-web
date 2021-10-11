@@ -17,5 +17,39 @@ query allHomePageWeb {
         ...callToActionFields
       }
     }
+    climateSection {
+      header
+      description
+      image {
+        ...simpleImageFields
+      }
+      solution {
+        title
+        description
+      }
+      problem {
+        title
+        description
+      }
+    }
+    carbonPlusSection {
+      smallHeaderFeatured
+      smallHeaderCreditName
+      header
+      description
+      linkText
+      linkUrl
+    }
+    ledgerDescription
+    valuesSection {
+      header
+      imageItems {
+        title
+        description
+        image {
+          ...simpleImageFields
+        }
+      }
+    }
   }
 }

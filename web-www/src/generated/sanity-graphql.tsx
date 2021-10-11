@@ -256,6 +256,40 @@ export type CallToActionSorting = {
   linkUrl?: Maybe<SortOrder>;
 };
 
+export type CarbonPlusSection = {
+  __typename?: 'CarbonPlusSection';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  smallHeaderFeatured?: Maybe<Scalars['String']>;
+  smallHeaderCreditName?: Maybe<Scalars['String']>;
+  header?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  linkText?: Maybe<Scalars['String']>;
+  linkUrl?: Maybe<Scalars['String']>;
+};
+
+export type CarbonPlusSectionFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  smallHeaderFeatured?: Maybe<StringFilter>;
+  smallHeaderCreditName?: Maybe<StringFilter>;
+  header?: Maybe<StringFilter>;
+  description?: Maybe<StringFilter>;
+  linkText?: Maybe<StringFilter>;
+  linkUrl?: Maybe<StringFilter>;
+};
+
+export type CarbonPlusSectionSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  smallHeaderFeatured?: Maybe<SortOrder>;
+  smallHeaderCreditName?: Maybe<SortOrder>;
+  header?: Maybe<SortOrder>;
+  description?: Maybe<SortOrder>;
+  linkText?: Maybe<SortOrder>;
+  linkUrl?: Maybe<SortOrder>;
+};
+
 export type Card = {
   __typename?: 'Card';
   _key?: Maybe<Scalars['String']>;
@@ -278,6 +312,37 @@ export type CardSorting = {
   _type?: Maybe<SortOrder>;
   title?: Maybe<SortOrder>;
   icon?: Maybe<ImageSorting>;
+};
+
+export type ClimateSection = {
+  __typename?: 'ClimateSection';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  header?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  image?: Maybe<Image>;
+  solution?: Maybe<TitleAndDescription>;
+  problem?: Maybe<TitleAndDescription>;
+};
+
+export type ClimateSectionFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  header?: Maybe<StringFilter>;
+  description?: Maybe<StringFilter>;
+  image?: Maybe<ImageFilter>;
+  solution?: Maybe<TitleAndDescriptionFilter>;
+  problem?: Maybe<TitleAndDescriptionFilter>;
+};
+
+export type ClimateSectionSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  header?: Maybe<SortOrder>;
+  description?: Maybe<SortOrder>;
+  image?: Maybe<ImageSorting>;
+  solution?: Maybe<TitleAndDescriptionSorting>;
+  problem?: Maybe<TitleAndDescriptionSorting>;
 };
 
 export type ConnectSection = {
@@ -1084,6 +1149,10 @@ export type HomePageWeb = Document & {
   _key?: Maybe<Scalars['String']>;
   homeFoldSection?: Maybe<TitleAndDescription>;
   marketplaceSection?: Maybe<MarketplaceSection>;
+  climateSection?: Maybe<ClimateSection>;
+  carbonPlusSection?: Maybe<CarbonPlusSection>;
+  ledgerDescription?: Maybe<Scalars['String']>;
+  valuesSection?: Maybe<ValuesSection>;
 };
 
 export type HomePageWebFilter = {
@@ -1097,6 +1166,10 @@ export type HomePageWebFilter = {
   _key?: Maybe<StringFilter>;
   homeFoldSection?: Maybe<TitleAndDescriptionFilter>;
   marketplaceSection?: Maybe<MarketplaceSectionFilter>;
+  climateSection?: Maybe<ClimateSectionFilter>;
+  carbonPlusSection?: Maybe<CarbonPlusSectionFilter>;
+  ledgerDescription?: Maybe<StringFilter>;
+  valuesSection?: Maybe<ValuesSectionFilter>;
 };
 
 export type HomePageWebSorting = {
@@ -1108,6 +1181,10 @@ export type HomePageWebSorting = {
   _key?: Maybe<SortOrder>;
   homeFoldSection?: Maybe<TitleAndDescriptionSorting>;
   marketplaceSection?: Maybe<MarketplaceSectionSorting>;
+  climateSection?: Maybe<ClimateSectionSorting>;
+  carbonPlusSection?: Maybe<CarbonPlusSectionSorting>;
+  ledgerDescription?: Maybe<SortOrder>;
+  valuesSection?: Maybe<ValuesSectionSorting>;
 };
 
 export type IdFilter = {
@@ -1250,6 +1327,31 @@ export type ImageSorting = {
   _type?: Maybe<SortOrder>;
   hotspot?: Maybe<SanityImageHotspotSorting>;
   crop?: Maybe<SanityImageCropSorting>;
+};
+
+export type ImageTitleDescription = {
+  __typename?: 'ImageTitleDescription';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  image?: Maybe<Image>;
+};
+
+export type ImageTitleDescriptionFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  title?: Maybe<StringFilter>;
+  description?: Maybe<StringFilter>;
+  image?: Maybe<ImageFilter>;
+};
+
+export type ImageTitleDescriptionSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  title?: Maybe<SortOrder>;
+  description?: Maybe<SortOrder>;
+  image?: Maybe<ImageSorting>;
 };
 
 export type IntFilter = {
@@ -2707,6 +2809,26 @@ export type TitleAndDescriptionSorting = {
   description?: Maybe<SortOrder>;
 };
 
+export type ValuesSection = {
+  __typename?: 'ValuesSection';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  header?: Maybe<Scalars['String']>;
+  imageItems?: Maybe<Array<Maybe<ImageTitleDescription>>>;
+};
+
+export type ValuesSectionFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  header?: Maybe<StringFilter>;
+};
+
+export type ValuesSectionSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  header?: Maybe<SortOrder>;
+};
+
 export type AllHomePageWebQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -2714,6 +2836,7 @@ export type AllHomePageWebQuery = (
   { __typename?: 'RootQuery' }
   & { allHomePageWeb: Array<(
     { __typename?: 'HomePageWeb' }
+    & Pick<HomePageWeb, 'ledgerDescription'>
     & { homeFoldSection?: Maybe<(
       { __typename?: 'TitleAndDescription' }
       & Pick<TitleAndDescription, 'title' | 'description'>
@@ -2727,6 +2850,33 @@ export type AllHomePageWebQuery = (
         { __typename?: 'CallToAction' }
         & CallToActionFieldsFragment
       )>>> }
+    )>, climateSection?: Maybe<(
+      { __typename?: 'ClimateSection' }
+      & Pick<ClimateSection, 'header' | 'description'>
+      & { image?: Maybe<(
+        { __typename?: 'Image' }
+        & SimpleImageFieldsFragment
+      )>, solution?: Maybe<(
+        { __typename?: 'TitleAndDescription' }
+        & Pick<TitleAndDescription, 'title' | 'description'>
+      )>, problem?: Maybe<(
+        { __typename?: 'TitleAndDescription' }
+        & Pick<TitleAndDescription, 'title' | 'description'>
+      )> }
+    )>, carbonPlusSection?: Maybe<(
+      { __typename?: 'CarbonPlusSection' }
+      & Pick<CarbonPlusSection, 'smallHeaderFeatured' | 'smallHeaderCreditName' | 'header' | 'description' | 'linkText' | 'linkUrl'>
+    )>, valuesSection?: Maybe<(
+      { __typename?: 'ValuesSection' }
+      & Pick<ValuesSection, 'header'>
+      & { imageItems?: Maybe<Array<Maybe<(
+        { __typename?: 'ImageTitleDescription' }
+        & Pick<ImageTitleDescription, 'title' | 'description'>
+        & { image?: Maybe<(
+          { __typename?: 'Image' }
+          & SimpleImageFieldsFragment
+        )> }
+      )>>> }
     )> }
   )> }
 );
@@ -2736,28 +2886,38 @@ export type CallToActionFieldsFragment = (
   & Pick<CallToAction, 'caption' | 'header' | 'description' | 'linkText' | 'linkUrl'>
   & { image?: Maybe<(
     { __typename?: 'Image' }
-    & { asset?: Maybe<(
-      { __typename?: 'SanityImageAsset' }
-      & Pick<SanityImageAsset, 'url' | 'altText'>
-    )> }
+    & SimpleImageFieldsFragment
   )> }
 );
 
+export type SimpleImageFieldsFragment = (
+  { __typename?: 'Image' }
+  & { asset?: Maybe<(
+    { __typename?: 'SanityImageAsset' }
+    & Pick<SanityImageAsset, 'url' | 'altText'>
+  )> }
+);
+
+export const SimpleImageFieldsFragmentDoc = gql`
+    fragment simpleImageFields on Image {
+  asset {
+    url
+    altText
+  }
+}
+    `;
 export const CallToActionFieldsFragmentDoc = gql`
     fragment callToActionFields on CallToAction {
   caption
   image {
-    asset {
-      url
-      altText
-    }
+    ...simpleImageFields
   }
   header
   description
   linkText
   linkUrl
 }
-    `;
+    ${SimpleImageFieldsFragmentDoc}`;
 export const AllHomePageWebDocument = gql`
     query allHomePageWeb {
   allHomePageWeb {
@@ -2778,9 +2938,44 @@ export const AllHomePageWebDocument = gql`
         ...callToActionFields
       }
     }
+    climateSection {
+      header
+      description
+      image {
+        ...simpleImageFields
+      }
+      solution {
+        title
+        description
+      }
+      problem {
+        title
+        description
+      }
+    }
+    carbonPlusSection {
+      smallHeaderFeatured
+      smallHeaderCreditName
+      header
+      description
+      linkText
+      linkUrl
+    }
+    ledgerDescription
+    valuesSection {
+      header
+      imageItems {
+        title
+        description
+        image {
+          ...simpleImageFields
+        }
+      }
+    }
   }
 }
-    ${CallToActionFieldsFragmentDoc}`;
+    ${CallToActionFieldsFragmentDoc}
+${SimpleImageFieldsFragmentDoc}`;
 
 /**
  * __useAllHomePageWebQuery__

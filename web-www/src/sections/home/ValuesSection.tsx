@@ -8,12 +8,10 @@ import Img from 'gatsby-image';
 import { ImageItemProps } from 'web-components/lib/components/image-item';
 import ImageItems from 'web-components/lib/components/sliders/ImageItems';
 import Section from 'web-components/src/components/section';
+import { useAllHomePageWebQuery } from '../../generated/sanity-graphql';
+import { client } from '../../../sanity';
 
-interface Props {
-  className?: string;
-}
-
-let useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles((theme: Theme) => ({
   root: {
     [theme.breakpoints.down('xs')]: {
       paddingBottom: theme.spacing(14),
@@ -56,8 +54,8 @@ let useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const HomeValues = ({ className }: Props) => {
-  const data = useStaticQuery(graphql`
+const HomeValues: React.FC<{ className?: string }> = ({ className }) => {
+  const imgData = useStaticQuery(graphql`
     query {
       bg: file(relativePath: { eq: "topo-bg-top.png" }) {
         childImageSharp {
@@ -73,55 +71,36 @@ const HomeValues = ({ className }: Props) => {
           }
         }
       }
-      text: homeYaml {
-        valuesSection {
-          header
-          imageItems {
-            image {
-              childImageSharp {
-                fixed(quality: 90, width: 120) {
-                  ...GatsbyImageSharpFixed_withWebp
-                }
-              }
-              extension
-              publicURL
-            }
-            header
-            description
-          }
-        }
-      }
     }
   `);
-  const content = data.text.valuesSection;
-  const classes = useStyles();
+  const { data } = useAllHomePageWebQuery({ client });
+  const content = data?.allHomePageWeb?.[0].valuesSection;
+  const styles = useStyles();
 
-  const imageItems: ImageItemProps[] = content.imageItems.map(({ image, header: title, description }) => ({
-    img:
-      !image.childImageSharp && image.extension === 'svg' ? (
-        <img src={image.publicURL} alt={image.publicURL} />
-      ) : (
-        <Img fixed={image.childImageSharp.fixed} />
-      ),
-    title,
-    description,
-  }));
+  const imageItems: ImageItemProps[] = (content?.imageItems || []).map(item => {
+    const imgData = item?.image?.asset;
+    return {
+      title: item?.title || '',
+      description: item?.description || '',
+      img: <img src={imgData?.url || ''} alt={imgData?.altText || ''} />,
+    };
+  }) as ImageItemProps[];
 
   return (
     <BackgroundImage
       Tag="section"
-      className={clsx(className, classes.section)}
-      fluid={data.bg.childImageSharp.fluid}
+      className={clsx(className, styles.section)}
+      fluid={imgData.bg.childImageSharp.fluid}
     >
       <Section
         withSlider
-        className={classes.root}
+        className={styles.root}
         titleVariant="h1"
         titleLineHeight="130%"
-        title={content.header}
+        title={content?.header || ''}
       >
-        <div className={classes.sliderContainer}>
-          <ImageItems imageClassName={classes.image} titleVariant="h3" items={imageItems} />
+        <div className={styles.sliderContainer}>
+          <ImageItems imageClassName={styles.image} titleVariant="h3" items={imageItems} />
         </div>
       </Section>
     </BackgroundImage>

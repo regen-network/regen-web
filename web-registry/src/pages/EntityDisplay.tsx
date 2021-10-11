@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import { useHistory, useParams } from 'react-router-dom';
@@ -40,6 +40,7 @@ const EntityDisplay: React.FC = () => {
   const activeStep = 0;
   const { projectId } = useParams();
   const history = useHistory();
+  const [initialValues, setInitialValues] = useState<EntityDisplayValues | undefined>();
 
   const [updateProject] = useUpdateProjectByIdMutation();
   const [updatePartyById] = useUpdatePartyByIdMutation();
@@ -47,17 +48,18 @@ const EntityDisplay: React.FC = () => {
     variables: { id: projectId },
   });
 
-  let initialFieldValues: EntityDisplayValues = {};
-  if (data?.projectById?.metadata) {
-    const metadata = data.projectById.metadata;
+  useEffect(() => {
+    if (data?.projectById?.metadata) {
+      const metadata = data.projectById.metadata;
 
-    initialFieldValues = {
-      'http://regen.network/landOwner': metadata['http://regen.network/landOwner'],
-      'http://regen.network/landSteward': metadata['http://regen.network/landSteward'],
-      'http://regen.network/projectDeveloper': metadata['http://regen.network/projectDeveloper'],
-      'http://regen.network/projectOriginator': metadata['http://regen.network/projectOriginator'],
-    };
-  }
+      setInitialValues({
+        'http://regen.network/landOwner': metadata['http://regen.network/landOwner'],
+        'http://regen.network/landSteward': metadata['http://regen.network/landSteward'],
+        'http://regen.network/projectDeveloper': metadata['http://regen.network/projectDeveloper'],
+        'http://regen.network/projectOriginator': metadata['http://regen.network/projectOriginator'],
+      });
+    }
+  }, [data]);
 
   const saveAndExit = (): Promise<void> => {
     // TODO: functionality
@@ -116,7 +118,7 @@ const EntityDisplay: React.FC = () => {
           project page»
         </Link>
       </Description>
-      <EntityDisplayForm submit={submit} initialValues={initialFieldValues} />
+      <EntityDisplayForm submit={submit} initialValues={initialValues} />
     </OnboardingFormTemplate>
   );
 };

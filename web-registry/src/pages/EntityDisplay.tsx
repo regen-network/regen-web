@@ -76,32 +76,32 @@ const EntityDisplay: React.FC = () => {
   };
 
   async function submit(values: EntityDisplayValues): Promise<void> {
-    // update project stakeholders' parties
-    if (data?.projectById) {
-      for (const role in values) {
-        const value: DisplayValues = values[role as EntityFieldName] as DisplayValues;
-        const roleIdFieldName: roleIdField = rolesMap[role as EntityFieldName];
-        const roleId = data.projectById[roleIdFieldName];
-        if (value['http://regen.network/showOnProjectPage'] && roleId) {
-          await updatePartyById({
-            variables: {
-              input: {
-                id: roleId,
-                partyPatch: {
-                  description: value['http://schema.org/description'],
-                  image: isIndividual(value)
-                    ? value['http://schema.org/image']?.['@value']
-                    : value['http://schema.org/logo']?.['@value'],
+    try {
+      // update project stakeholders' parties
+      if (data?.projectById) {
+        for (const role in values) {
+          const value: DisplayValues = values[role as EntityFieldName] as DisplayValues;
+          const roleIdFieldName: roleIdField = rolesMap[role as EntityFieldName];
+          const roleId = data.projectById[roleIdFieldName];
+          if (value['http://regen.network/showOnProjectPage'] && roleId) {
+            await updatePartyById({
+              variables: {
+                input: {
+                  id: roleId,
+                  partyPatch: {
+                    description: value['http://schema.org/description'],
+                    image: isIndividual(value)
+                      ? value['http://schema.org/image']?.['@value']
+                      : value['http://schema.org/logo']?.['@value'],
+                  },
                 },
               },
-            },
-          });
+            });
+          }
         }
       }
-    }
-    // update project metadata
-    const metadata = { ...data?.projectById?.metadata, ...values };
-    try {
+      // update project metadata
+      const metadata = { ...data?.projectById?.metadata, ...values };
       await updateProject({
         variables: {
           input: {

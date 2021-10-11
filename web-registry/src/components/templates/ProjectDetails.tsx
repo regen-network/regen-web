@@ -14,16 +14,16 @@ import Timeline from 'web-components/lib/components/timeline';
 import ProjectMedia from 'web-components/lib/components/sliders/ProjectMedia';
 import BuyFooter from 'web-components/lib/components/fixed-footer/BuyFooter';
 import Modal from 'web-components/lib/components/modal';
-import MoreInfoForm from 'web-components/lib/components/form/MoreInfoForm';
+// import MoreInfoForm from 'web-components/lib/components/form/MoreInfoForm';
 import Banner from 'web-components/lib/components/banner';
 import SEO from 'web-components/lib/components/seo';
-import FixedFooter from 'web-components/lib/components/fixed-footer';
-import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import EmailIcon from 'web-components/lib/components/icons/EmailIcon';
+// import FixedFooter from 'web-components/lib/components/fixed-footer';
+// import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
+// import EmailIcon from 'web-components/lib/components/icons/EmailIcon';
 
 import { setPageView } from '../../lib/ga';
 import { getImgSrc } from '../../lib/imgSrc';
-import getApiUri from '../../lib/apiUri';
+// import getApiUri from '../../lib/apiUri';
 import { buildIssuanceModalData } from '../../lib/transform';
 import { useLedger, ContextType } from '../../ledger';
 import { Project, ProjectDefault, ActionGroup } from '../../mocks';
@@ -231,7 +231,8 @@ function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JS
     variables: { handle: project.id },
   });
 
-  const [submitted, setSubmitted] = useState(false);
+  // const [submitted, setSubmitted] = useState(false);
+  const [submitted] = useState(false);
   const location = useLocation();
   useEffect(() => {
     setPageView(location);

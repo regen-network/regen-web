@@ -192,6 +192,7 @@ const RoleField: React.FC<Props> = ({
               paper: styles.paper,
               popupIndicator: styles.popupIndicator,
             }}
+            disableClearable
             options={options || []}
             forcePopupIcon
             value={value}

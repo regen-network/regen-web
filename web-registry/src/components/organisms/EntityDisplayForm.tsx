@@ -378,7 +378,7 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialVa
             // for roles shown on project page
             for (const role in values) {
               const value: DisplayValues = values[role as EntityFieldName] as DisplayValues;
-              if (value['http://regen.network/showOnProjectPage']) {
+              if (value?.['http://regen.network/showOnProjectPage']) {
                 validateProject = false;
                 const report = await validate(
                   graphData.shaclGraphByUri.graph,

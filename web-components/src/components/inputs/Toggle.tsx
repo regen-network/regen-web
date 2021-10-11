@@ -134,6 +134,7 @@ const Toggle: React.FC<ToggleProps> = ({
                 field={field}
                 form={form}
                 meta={meta}
+                indeterminate={false}
                 triggerOnChange={triggerOnChange}
                 type="checkbox"
               />

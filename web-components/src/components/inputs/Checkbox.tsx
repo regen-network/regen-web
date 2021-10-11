@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 const Checkbox: React.FC<CheckboxProps> = (props: CheckboxProps) => {
   const classes = useStyles();
   const { form, field, triggerOnChange } = props;
+
   const onChange = (e: React.ChangeEvent<any>): void => {
     const value = e.target.checked;
     form.setFieldValue(field.name, value);

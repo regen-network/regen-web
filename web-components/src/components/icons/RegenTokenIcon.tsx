@@ -1,22 +1,14 @@
 import React from 'react';
 import SvgIcon from '@material-ui/core/SvgIcon';
-import { makeStyles } from '@material-ui/core';
-import cx from 'clsx';
 
 interface IconProps {
   className?: string;
 }
 
-const useStyles = makeStyles(theme => ({
-  root: {},
-}));
-
 function RegenTokenIcon({ className }: IconProps): JSX.Element {
-  const styles = useStyles();
-
   return (
     <SvgIcon
-      className={cx(styles.root, className)}
+      className={className}
       width="70"
       height="70"
       viewBox="0 0 70 70"
@@ -86,8 +78,8 @@ function RegenTokenIcon({ className }: IconProps): JSX.Element {
           y2="-2.55798e-06"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#3FAD6C" />
-          <stop offset="1" stop-color="#6EC2B7" />
+          <stop stopColor="#3FAD6C" />
+          <stop offset="1" stopColor="#6EC2B7" />
         </linearGradient>
       </defs>
     </SvgIcon>

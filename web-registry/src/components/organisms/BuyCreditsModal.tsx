@@ -54,7 +54,7 @@ const useStyles = makeStyles(theme => ({
   thumbnailCard: {
     display: 'flex',
     alignItems: 'center',
-    height: 107, //
+    height: theme.spacing(26.75),
   },
   cardContent: {
     display: 'flex',
@@ -64,11 +64,10 @@ const useStyles = makeStyles(theme => ({
     },
   },
   projectThumbnail: {
-    height: 50, //todo
-    width: 50, //todo
+    height: theme.spacing(12.5),
+    width: theme.spacing(12.5),
     borderRadius: 5,
   },
-
   description: {
     fontSize: theme.typography.pxToRem(16),
     '& a': {
@@ -100,7 +99,6 @@ const useStyles = makeStyles(theme => ({
   error: {
     marginTop: 0,
   },
-
   stateCountryGrid: {
     [theme.breakpoints.up('sm')]: {
       flexWrap: 'nowrap',
@@ -120,23 +118,17 @@ const useStyles = makeStyles(theme => ({
   postalCodeField: {
     marginTop: theme.spacing(6),
   },
-
   creditInput: {
-    width: 170, //todo
+    width: theme.spacing(42.5),
   },
   regenPerCredit: {
     fontSize: theme.typography.pxToRem(16),
     color: theme.palette.info.main,
     marginBottom: theme.spacing(3),
   },
-
   creditWidget: {
     display: 'flex',
     alignItems: 'center',
-  },
-  regenDisplay: {
-    display: 'flex',
-    flexDirection: 'column',
   },
   regenCount: {
     display: 'flex',
@@ -175,7 +167,7 @@ interface BuyCreditsModalProps extends RegenModalProps {
 
 export interface BuyCreditsValues {
   retirementBeneficiary: string;
-  state: string;
+  stateProvince: string;
   country: string;
   postalCode: string;
   retirementAction: string;
@@ -218,10 +210,8 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
   });
 
   const submit = async (values: BuyCreditsValues): Promise<void> => {
-    console.log('submit ', values);
+    // console.log('submit ', values); TODO: purchase flow
   };
-
-  console.log('project.creditClass ', project.creditClass);
 
   return (
     <Modal open={open} onClose={onClose}>
@@ -251,7 +241,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
             initialValues || {
               creditCount: 0,
               retirementBeneficiary: '',
-              state: '',
+              stateProvince: '',
               country: initialCountry,
               postalCode: '',
               retirementAction: 'autoretire',
@@ -287,7 +277,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                       <Title className={styles.marginRight} variant="h6">
                         =
                       </Title>
-                      <div className={cx(styles.regenDisplay, styles.marginRight)}>
+                      <div className={cx(styles.flexColumn, styles.marginRight)}>
                         <div className={styles.regenCount}>
                           <RegenTokenIcon className={styles.icon} />
                           <Title variant="h4" className={styles.regenCountNumber}>
@@ -334,7 +324,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                   </Title>
                   <Description className={styles.description}>
                     Please enter a location for the retirement of these credits. This prevents{' '}
-                    <a href="#">double counting</a> of credits in different locations. These credits will
+                    <a href="/">double counting</a> of credits in different locations. These credits will
                     auto-retire.
                   </Description>
                   <Grid container alignItems="center" className={styles.stateCountryGrid}>
@@ -343,7 +333,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                         options={stateOptions}
                         component={SelectTextField}
                         label="State / Province / Region"
-                        name="state"
+                        name="stateProvince"
                       />
                     </Grid>
                     <Grid item xs={12} sm={6} className={styles.stateCountryTextField}>

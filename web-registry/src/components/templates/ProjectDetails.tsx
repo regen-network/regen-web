@@ -475,6 +475,8 @@ function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JS
         open={isBuyCreditsModalOpen}
         onClose={() => setBuyCreditsModalOpen(false)}
         project={project}
+        imageStorageBaseUrl={imageStorageBaseUrl}
+        apiServerUrl={apiServerUrl}
       />
       {submitted && <Banner text="Thanks for submitting your information!" />}
     </div>

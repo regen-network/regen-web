@@ -23,12 +23,12 @@ import Submit from 'web-components/lib/components/form/Submit';
 
 import { countries } from '../../lib/countries';
 import { Project } from '../../mocks';
+import fallbackImage from '../../assets/time-controlled-rotational-grazing.jpg'; //TODO: more generic fallback
 
 const useStyles = makeStyles(theme => ({
   root: {
     height: '100%',
     borderRadius: theme.spacing(2),
-    paddingBottom: theme.spacing(12),
   },
   flexColumn: {
     display: 'flex',
@@ -48,11 +48,9 @@ const useStyles = makeStyles(theme => ({
       paddingRight: 0,
     },
   },
-  btn: {
-    marginTop: theme.spacing(4),
-    width: '100%',
+  formWrapper: {
+    paddingBottom: theme.spacing(12),
   },
-
   thumbnailCard: {
     display: 'flex',
     alignItems: 'center',
@@ -119,6 +117,9 @@ const useStyles = makeStyles(theme => ({
       },
     },
   },
+  postalCodeField: {
+    marginTop: theme.spacing(6),
+  },
 
   creditInput: {
     width: 170, //todo
@@ -168,18 +169,27 @@ interface BuyCreditsModalProps extends RegenModalProps {
   onClose: () => void;
   initialValues?: BuyCreditsValues;
   project: Project;
+  apiServerUrl?: string;
+  imageStorageBaseUrl?: string;
 }
 
 export interface BuyCreditsValues {
   retirementBeneficiary: string;
-  city: string;
   state: string;
   country: string;
+  postalCode: string;
   retirementAction: string;
   creditCount: number;
 }
 
-const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({ open, onClose, initialValues, project }) => {
+const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
+  open,
+  onClose,
+  initialValues,
+  project,
+  apiServerUrl,
+  imageStorageBaseUrl,
+}) => {
   const styles = useStyles();
   const [stateOptions, setStateOptions] = useState<Option[]>([]);
   const initialCountry = 'US';
@@ -211,6 +221,8 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({ open, onClose, initia
     console.log('submit ', values);
   };
 
+  console.log('project.creditClass ', project.creditClass);
+
   return (
     <Modal open={open} onClose={onClose}>
       <div className={styles.root}>
@@ -221,9 +233,10 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({ open, onClose, initia
           <CardContent className={styles.cardContent}>
             <Image
               className={cx(styles.projectThumbnail, styles.marginRight)}
-              src={project.creditClass?.imgSrc || ''}
-              // imageStorageBaseUrl={imageStorageBaseUrl}
-              // apiServerUrl={apiServerUrl}
+              src={project.creditClass?.imgSrc || fallbackImage}
+              imageStorageBaseUrl={imageStorageBaseUrl}
+              apiServerUrl={apiServerUrl}
+              backgroundImage
             />
             <div className={styles.flexColumn}>
               <Title variant="h5">{ReactHtmlParser(project.creditClass.name)} Credits</Title>
@@ -238,9 +251,9 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({ open, onClose, initia
             initialValues || {
               creditCount: 0,
               retirementBeneficiary: '',
-              city: '',
               state: '',
               country: initialCountry,
+              postalCode: '',
               retirementAction: 'autoretire',
             }
           }
@@ -256,7 +269,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({ open, onClose, initia
         >
           {({ submitForm, isValid, isSubmitting, submitCount, values }) => {
             return (
-              <div>
+              <div className={styles.formWrapper}>
                 <Form translate="yes">
                   <div className={styles.field}>
                     <Title className={styles.groupTitle} variant="h5">
@@ -324,13 +337,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({ open, onClose, initia
                     <a href="#">double counting</a> of credits in different locations. These credits will
                     auto-retire.
                   </Description>
-                  <Field
-                    // className={styles.cityTextField}
-                    component={ControlledTextField}
-                    label="City"
-                    name="city"
-                  />
-                  <Grid container alignItems="center" className={cx(styles.stateCountryGrid, styles.field)}>
+                  <Grid container alignItems="center" className={styles.stateCountryGrid}>
                     <Grid item xs={12} sm={6} className={styles.stateCountryTextField}>
                       <Field
                         options={stateOptions}
@@ -349,6 +356,12 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({ open, onClose, initia
                       />
                     </Grid>
                   </Grid>
+                  <Field
+                    className={cx(styles.field, styles.postalCodeField)}
+                    component={ControlledTextField}
+                    label="Postal Code"
+                    name="postalCode"
+                  />
                 </Form>
                 <Submit
                   // className={styles.field}

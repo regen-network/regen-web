@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import { Link } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import CardContent from '@material-ui/core/CardContent';
 import axios from 'axios';
@@ -35,14 +36,13 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'column',
   },
   mainTitle: {
+    paddingTop: 0,
     [theme.breakpoints.up('sm')]: {
-      paddingTop: 0,
       paddingBottom: theme.spacing(7.5),
       paddingLeft: theme.spacing(7.5),
       paddingRight: theme.spacing(7.5),
     },
     [theme.breakpoints.down('xs')]: {
-      paddingTop: theme.spacing(8),
       paddingBottom: theme.spacing(6),
       paddingLeft: 0,
       paddingRight: 0,
@@ -55,6 +55,25 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     alignItems: 'center',
     height: theme.spacing(26.75),
+    '& a': {
+      color: theme.palette.secondary.main,
+      textDecoration: 'none',
+      fontWeight: 700,
+      '&:link, &:visited, &:hover, &:active': {
+        textDecoration: 'none',
+      },
+      [theme.breakpoints.up('sm')]: {
+        fontSize: theme.typography.pxToRem(18),
+      },
+      [theme.breakpoints.down('xs')]: {
+        fontSize: theme.typography.pxToRem(12),
+      },
+    },
+  },
+  creditTitle: {
+    [theme.breakpoints.down('xs')]: {
+      fontSize: theme.typography.pxToRem(16),
+    },
   },
   cardContent: {
     display: 'flex',
@@ -69,15 +88,16 @@ const useStyles = makeStyles(theme => ({
     borderRadius: 5,
   },
   description: {
-    fontSize: theme.typography.pxToRem(16),
     '& a': {
       cursor: 'pointer',
     },
     [theme.breakpoints.up('sm')]: {
+      fontSize: theme.typography.pxToRem(16),
       marginBottom: theme.spacing(3),
     },
     [theme.breakpoints.down('xs')]: {
-      // marginBottom: theme.spacing(10),
+      marginBottom: 0,
+      fontSize: theme.typography.pxToRem(14),
     },
   },
   field: {
@@ -89,15 +109,7 @@ const useStyles = makeStyles(theme => ({
     },
   },
   groupTitle: {
-    [theme.breakpoints.up('sm')]: {
-      marginBottom: theme.spacing(3),
-    },
-    [theme.breakpoints.down('xs')]: {
-      // marginBottom: theme.spacing(10),
-    },
-  },
-  error: {
-    marginTop: 0,
+    marginBottom: theme.spacing(2),
   },
   stateCountryGrid: {
     [theme.breakpoints.up('sm')]: {
@@ -229,8 +241,12 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
               backgroundImage
             />
             <div className={styles.flexColumn}>
-              <Title variant="h5">{ReactHtmlParser(project.creditClass.name)} Credits</Title>
-              <Description>{project.name}</Description>
+              <Title className={styles.creditTitle} variant="h5">
+                {ReactHtmlParser(project.creditClass.name)} Credits
+              </Title>
+              <Link to={`/projects/${project.id}`} target="_blank">
+                {project.name}
+              </Link>
             </div>
           </CardContent>
         </Card>
@@ -265,7 +281,10 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                     <Title className={styles.groupTitle} variant="h5">
                       Number of credits
                     </Title>
-                    <Description className={styles.regenPerCredit}>5 REGEN each</Description>
+                    <Description className={styles.regenPerCredit}>
+                      {`5 REGEN each.  ${(project?.credits?.issued || 0) -
+                        (project?.credits?.purchased || 0)} credits available`}
+                    </Description>
                     <div className={styles.creditWidget}>
                       <div className={styles.marginRight}>
                         <Field
@@ -289,7 +308,9 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                       </div>
                     </div>
                   </div>
-                  <Title variant="h5">Retirement of credits</Title>
+                  <Title className={styles.groupTitle} variant="h5">
+                    Retirement of credits
+                  </Title>
                   <Field className={styles.field} component={RadioGroup} name="retirementAction">
                     <Field
                       component={Toggle}
@@ -354,7 +375,6 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                   />
                 </Form>
                 <Submit
-                  // className={styles.field}
                   isSubmitting={isSubmitting}
                   onClose={onClose}
                   // status={status} TODO

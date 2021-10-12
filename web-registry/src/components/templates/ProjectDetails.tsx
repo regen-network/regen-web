@@ -306,7 +306,13 @@ function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JS
     siteUrl: `${window.location.origin}/registry`,
   };
 
-  // project.creditPrice = { unitPrice: 15.12, currency: 'USD' };
+  // TODO: ### for UI testing. Delete  below before merge! #######
+  project.creditPrice = { unitPrice: 15.12, currency: 'USD' };
+  project.credits = {
+    issued: 10000,
+    purchased: 7500,
+  };
+  // ###### DELETE mock price data above ####
 
   return (
     <div className={styles.root}>
@@ -428,7 +434,9 @@ function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JS
         </div>
       )}
 
-      {project.creditPrice && <BuyFooter onClick={handleOpen} creditPrice={project.creditPrice} />}
+      {project.creditPrice && (
+        <BuyFooter onClick={() => setBuyCreditsModalOpen(true)} creditPrice={project.creditPrice} />
+      )}
       {project.creditPrice && project.stripePrice && (
         <Modal open={open} onClose={handleClose}>
           <CreditsPurchaseForm
@@ -440,19 +448,20 @@ function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JS
         </Modal>
       )}
 
-      <FixedFooter justify="flex-end">
-        <>
-          <ContainedButton onClick={handleOpen} startIcon={<EmailIcon />}>
-            send me more info
-          </ContainedButton>
-          {/* {
+      {!project.creditPrice && (
+        <FixedFooter justify="flex-end">
+          <>
+            <ContainedButton onClick={handleOpen} startIcon={<EmailIcon />}>
+              send me more info
+            </ContainedButton>
+            {/*
             <OutlinedButton className={styles.callButton} startIcon={<PhoneIcon />}>
               schedule a call
             </OutlinedButton>
-          } */}
-          <ContainedButton onClick={() => setBuyCreditsModalOpen(true)}>buy</ContainedButton>
-        </>
-      </FixedFooter>
+          */}
+          </>
+        </FixedFooter>
+      )}
       <Modal open={open} onClose={handleClose}>
         <MoreInfoForm
           apiUrl={getApiUri()}
@@ -471,13 +480,15 @@ function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JS
           {...issuanceModalData}
         />
       )}
-      <BuyCreditsModal
-        open={isBuyCreditsModalOpen}
-        onClose={() => setBuyCreditsModalOpen(false)}
-        project={project}
-        imageStorageBaseUrl={imageStorageBaseUrl}
-        apiServerUrl={apiServerUrl}
-      />
+      {project.creditPrice && (
+        <BuyCreditsModal
+          open={isBuyCreditsModalOpen}
+          onClose={() => setBuyCreditsModalOpen(false)}
+          project={project}
+          imageStorageBaseUrl={imageStorageBaseUrl}
+          apiServerUrl={apiServerUrl}
+        />
+      )}
       {submitted && <Banner text="Thanks for submitting your information!" />}
     </div>
   );

@@ -219,7 +219,7 @@ const BuyerCreate: React.FC<{ onCreate?: (walletId: string, addressId: string) =
         <div>
           Error:
           {userError.graphQLErrors.map(({ message }, i) => (
-            <span key={i}> {message}</span>
+            <span key={i}> {getErrorMessage(message)}</span>
           ))}
         </div>
       )}

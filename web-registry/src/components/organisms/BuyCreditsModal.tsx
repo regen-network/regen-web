@@ -18,9 +18,11 @@ import Toggle from 'web-components/lib/components/inputs/Toggle';
 import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
 import NumberTextField from 'web-components/lib/components/inputs/NumberTextField';
 import { RegenTokenIcon } from 'web-components/lib/components/icons/RegenTokenIcon';
+import InfoIcon from 'web-components/lib/components/icons/InfoIcon';
 import { Label } from 'web-components/lib/components/label';
 import { Image } from 'web-components/lib/components/image';
 import Submit from 'web-components/lib/components/form/Submit';
+import Tooltip from 'web-components/lib/components/tooltip/InfoTooltip';
 
 import { countries } from '../../lib/countries';
 import { Project } from '../../mocks';
@@ -30,6 +32,9 @@ const useStyles = makeStyles(theme => ({
   root: {
     height: '100%',
     borderRadius: theme.spacing(2),
+  },
+  flex: {
+    display: 'flex',
   },
   flexColumn: {
     display: 'flex',
@@ -110,6 +115,7 @@ const useStyles = makeStyles(theme => ({
   },
   groupTitle: {
     marginBottom: theme.spacing(2),
+    marginRight: theme.spacing(2),
   },
   stateCountryGrid: {
     [theme.breakpoints.up('sm')]: {
@@ -142,30 +148,43 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     alignItems: 'center',
   },
+  regenIcon: {
+    height: theme.typography.pxToRem(26),
+    alignSelf: 'flex-start',
+    marginRight: theme.spacing(1.5),
+  },
   regenCount: {
     display: 'flex',
     alignItems: 'baseline',
   },
   regenCountNumber: {
-    marginRight: theme.spacing(2),
+    marginRight: theme.spacing(1.5),
+  },
+  regenLabel: {
+    [theme.breakpoints.up('sm')]: {
+      lineHeight: '18px',
+      fontSize: theme.typography.pxToRem(14),
+    },
+    [theme.breakpoints.down('xs')]: {
+      lineHeight: '15.06px',
+      letterSpacing: '1px',
+      fontSize: theme.typography.pxToRem(12),
+    },
   },
   currencyEquivalent: {
     color: theme.palette.info.dark,
     fontSize: theme.typography.pxToRem(16),
   },
-  icon: {
-    height: theme.typography.pxToRem(26),
-    alignSelf: 'flex-start',
-    marginRight: theme.spacing(2),
-  },
-  regenLabel: {
-    color: theme.palette.info.dark,
-    fontSize: theme.typography.pxToRem(14),
-    marginRight: theme.spacing(2),
-    lineHeight: '18px',
-  },
   marginRight: {
     marginRight: theme.spacing(4),
+  },
+  info: {
+    cursor: 'pointer',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    fontWeight: 'bold',
+    fontSize: theme.typography.pxToRem(16),
   },
 }));
 
@@ -298,7 +317,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                       </Title>
                       <div className={cx(styles.flexColumn, styles.marginRight)}>
                         <div className={styles.regenCount}>
-                          <RegenTokenIcon className={styles.icon} />
+                          <RegenTokenIcon className={styles.regenIcon} />
                           <Title variant="h4" className={styles.regenCountNumber}>
                             500
                           </Title>
@@ -340,9 +359,16 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                     name="retirementBeneficiary"
                     optional
                   />
-                  <Title className={styles.groupTitle} variant="h5">
-                    Credit retirement location
-                  </Title>
+                  <div className={styles.flex}>
+                    <Title className={styles.groupTitle} variant="h5">
+                      Credit retirement location
+                    </Title>
+                    <Tooltip arrow placement="top" title="TODO">
+                      <div>
+                        <InfoIcon className={styles.info} />
+                      </div>
+                    </Tooltip>
+                  </div>
                   <Description className={styles.description}>
                     Please enter a location for the retirement of these credits. This prevents{' '}
                     <a href="/">double counting</a> of credits in different locations. These credits will

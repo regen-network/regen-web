@@ -25,6 +25,7 @@ import {
   CreditClassDetails,
   Credits,
   CreditsIssue,
+  BuyerCreditsTransfer,
   CreditsRetire,
   CreditsTransfer,
   EntityDisplay,
@@ -169,13 +170,17 @@ const App: React.FC = (): JSX.Element => {
             path="/admin"
             render={({ match: { path } }) => (
               <>
-                <Route path={path} component={Admin} exact />
+                <ProtectedRoute path={path} component={Admin} exact />
                 {isAdmin(user) && (
                   <>
-                    <Route path={`${path}/credits/issue`} component={CreditsIssue} />
-                    <Route path={`${path}/credits/transfer`} component={CreditsTransfer} />
-                    <Route path={`${path}/credits/retire`} component={CreditsRetire} />
-                    <Route path={`${path}/buyer/create`} component={BuyerCreate} />
+                    <ProtectedRoute
+                      path={`${path}/credits/create-and-transfer`}
+                      component={BuyerCreditsTransfer}
+                    />
+                    <ProtectedRoute path={`${path}/credits/issue`} component={CreditsIssue} />
+                    <ProtectedRoute path={`${path}/credits/transfer`} component={CreditsTransfer} />
+                    <ProtectedRoute path={`${path}/credits/retire`} component={CreditsRetire} />
+                    <ProtectedRoute path={`${path}/buyer/create`} component={BuyerCreate} />
                   </>
                 )}
               </>

@@ -1,0 +1,5 @@
+mutation IssueCredits($input: IssueCreditsInput!) {
+  issueCredits(input: $input) {
+    json
+  }
+}

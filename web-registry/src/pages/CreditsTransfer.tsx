@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
-import { useMutation, useQuery, gql } from '@apollo/client';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import Box from '@material-ui/core/Box';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -13,32 +13,20 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import { loader } from 'graphql.macro';
 
 import Title from 'web-components/lib/components/title';
 import { pluralize } from 'web-components/lib/utils/pluralize';
-
-const TRANSFER_CREDITS = gql`
-  mutation TransferCredits($input: TransferCreditsInput!) {
-    transferCredits(input: $input) {
-      json
-    }
-  }
-`;
-
-const AVAILABLE_CREDITS = gql`
-  query GetAvailableCredits($vintageId: UUID) {
-    getAvailableCredits(vintageId: $vintageId)
-  }
-`;
-
-const ALL_CREDIT_VINTAGES = loader('../graphql/AllCreditVintages.graphql');
-const ALL_PARTIES = loader('../graphql/AllParties.graphql');
+import {
+  Party,
+  // AccountBalance,
+  TransactionState,
+  useAllCreditVintagesQuery,
+  useAllPartiesQuery,
+  useGetAvailableCreditsQuery,
+  useTransferCreditsMutation,
+} from '../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
-  root: {
-    padding: theme.spacing(5),
-  },
   input: {
     padding: theme.spacing(1),
   },
@@ -75,10 +63,14 @@ interface Result {
   walletId: string;
 }
 
-function CreditsTransfer(): JSX.Element {
-  const classes = useStyles();
+const CreditsTransfer: React.FC<{
+  addressId?: string;
+  buyerWalletId?: string;
+  onTransfer?: (vintageId: string) => void;
+}> = ({ onTransfer, addressId: passedAddressId, buyerWalletId: passedBuyerWalletId = '' }) => {
+  const styles = useStyles();
 
-  const [transferCredits, { data, loading, error }] = useMutation(TRANSFER_CREDITS, {
+  const [transferCredits, { data, loading, error }] = useTransferCreditsMutation({
     errorPolicy: 'ignore',
   });
   const {
@@ -86,11 +78,11 @@ function CreditsTransfer(): JSX.Element {
     loading: vintagesLoading,
     error: vintagesError,
     refetch: refetchVintages,
-  } = useQuery(ALL_CREDIT_VINTAGES, {
+  } = useAllCreditVintagesQuery({
     errorPolicy: 'ignore',
   });
 
-  const { data: partiesData, loading: partiesLoading, error: partiesError } = useQuery(ALL_PARTIES, {
+  const { data: partiesData, loading: partiesLoading, error: partiesError } = useAllPartiesQuery({
     errorPolicy: 'ignore',
   });
 
@@ -98,15 +90,15 @@ function CreditsTransfer(): JSX.Element {
 
   const [vintageId, setVintageId] = useState('');
   const [oldBalances, setOldBalances] = useState<Balance[]>([]);
-  const [buyerWalletId, setBuyerWalletId] = useState('');
-  const [addressId, setAddressId] = useState('');
+  const [buyerWalletId, setBuyerWalletId] = useState(passedBuyerWalletId);
+  const [addressId, setAddressId] = useState(passedAddressId);
   const [partyId, setPartyId] = useState('');
   const [userId, setUserId] = useState('');
   const [units, setUnits] = useState(1);
   const [creditPrice, setCreditPrice] = useState(1);
   const [showResult, setShowResult] = useState(false);
 
-  const { data: availableCreditsData, refetch: refetchAvailableCredits } = useQuery(AVAILABLE_CREDITS, {
+  const { data: availableCreditsData, refetch: refetchAvailableCredits } = useGetAvailableCreditsQuery({
     errorPolicy: 'ignore',
     variables: { vintageId },
   });
@@ -115,11 +107,14 @@ function CreditsTransfer(): JSX.Element {
     if (showResult) {
       setShowResult(false);
     }
-    setVintageId(event.target.value as string);
-    setOldBalances(
-      vintagesData.allCreditVintages.nodes.find((node: any) => node.id === event.target.value)
-        .accountBalancesByCreditVintageId.nodes,
-    );
+    const vintageId = event.target.value as string;
+    setVintageId(vintageId);
+    refetchAvailableCredits({ vintageId });
+    const vintages = vintagesData?.allCreditVintages?.nodes?.find(node => node?.id === event.target.value);
+    const balances = vintages?.accountBalancesByCreditVintageId?.nodes;
+    if (balances && balances.length > 0) {
+      setOldBalances(balances as Balance[]);
+    }
   };
 
   const handleBuyerWalletChange = (event: React.ChangeEvent<{ value: any }>): void => {
@@ -131,7 +126,7 @@ function CreditsTransfer(): JSX.Element {
       const selectedParty = partiesData.allParties.nodes.find(
         (party: any) => party.walletId === event.target.value,
       );
-      setAddressId(selectedParty.addressId);
+      setAddressId(selectedParty?.addressId);
     }
   };
 
@@ -161,10 +156,14 @@ function CreditsTransfer(): JSX.Element {
     vintage = vintagesData.allCreditVintages.nodes.find((node: any) => node.id === vintageId);
     newBalances = vintage.accountBalancesByCreditVintageId.nodes;
 
-    const findOldBalance = (i: number): any =>
-      oldBalances.find((oldBalance: any) => oldBalance.id === newBalances[i].id);
-    const findParty = (i: number): any =>
-      partiesData.allParties.nodes.find((party: any) => party.walletId === newBalances[i].walletId);
+    // TODO: type coersion below shouldn't be necessary, but there's some discrepency between our
+    // generated types. This is just adding TS types to the existing code and
+    // shouldn't create new bugs, but might bet worth removing the type coersion and
+    // fixing in the future
+    const findOldBalance = (i: number): Balance | undefined =>
+      oldBalances.find(oldBalance => oldBalance.id === newBalances[i].id);
+    const findParty = (i: number): Party | undefined =>
+      partiesData?.allParties?.nodes.find(party => party?.walletId === newBalances[i].walletId) as Party;
 
     // Build response list of senders/buyer old/new balance
     for (var i: number = 0; i < newBalances.length; i++) {
@@ -193,10 +192,10 @@ function CreditsTransfer(): JSX.Element {
   }
 
   return (
-    <div className={classes.root}>
+    <Box p={5}>
       <Title variant="h1">Transfer Credits</Title>
       <form
-        className={classes.form}
+        className={styles.form}
         onSubmit={async e => {
           e.preventDefault();
           const confirmAlert = window.confirm('Are you sure you want to transfer credits?');
@@ -205,172 +204,183 @@ function CreditsTransfer(): JSX.Element {
               await transferCredits({
                 variables: {
                   input: {
-                    vintageId,
-                    buyerWalletId,
-                    units,
-                    creditPrice,
-                    txState: 'SUCCEEDED',
                     addressId,
-                    autoRetire: false,
+                    buyerWalletId,
+                    creditPrice,
                     partyId,
+                    units,
                     userId,
+                    vintageId,
+                    autoRetire: false,
+                    txState: TransactionState.Succeeded,
                   },
                 },
               });
               await refetchVintages();
               await refetchAvailableCredits();
+              if (onTransfer) {
+                onTransfer(vintageId);
+              }
               setShowResult(true);
-              setOldBalances(
-                vintagesData.allCreditVintages.nodes.find((node: any) => node.id === vintageId)
-                  .accountBalancesByCreditVintageId.nodes,
-              );
-            } catch (e) {}
+              const vintage = vintagesData?.allCreditVintages?.nodes?.find(node => node?.id === vintageId);
+              const balances = vintage?.accountBalancesByCreditVintageId?.nodes;
+              if (balances) {
+                setOldBalances(balances as Balance[]);
+              }
+            } catch (e) {
+              console.error('Error transferring credits: ', e); // eslint-disable-line no-console
+            }
           }
         }}
         noValidate
         autoComplete="off"
       >
-        <FormControl className={classes.formControl}>
-          <InputLabel required id="credit-vintage-select-label">
-            Credit Vintage
-          </InputLabel>
-          <Select
+        <Box display="flex" flexDirection="column">
+          <FormControl className={styles.formControl}>
+            <InputLabel required id="credit-vintage-select-label">
+              Credit Vintage
+            </InputLabel>
+            <Select
+              required
+              labelId="credit-vintage-select-label"
+              id="credit-vintage-select"
+              value={vintageId}
+              onChange={handleVintageChange}
+            >
+              {vintagesData &&
+                vintagesData.allCreditVintages &&
+                vintagesData.allCreditVintages.nodes.map((node: any) => (
+                  <MenuItem key={node.id} value={node.id}>
+                    {node.projectByProjectId.name} - {dateFormat.format(new Date(node.createdAt))}
+                  </MenuItem>
+                ))}
+            </Select>
+          </FormControl>
+          {!passedBuyerWalletId && (
+            <FormControl className={styles.formControl}>
+              <InputLabel required id="buyer-wallet-select-label">
+                Buyer
+              </InputLabel>
+              <Select
+                required
+                labelId="buyer-wallet-select-label"
+                id="buyer-wallet-select"
+                value={buyerWalletId}
+                onChange={handleBuyerWalletChange}
+              >
+                {partiesData &&
+                  partiesData.allParties &&
+                  partiesData.allParties.nodes.map(
+                    (node: any) =>
+                      node.walletId &&
+                      node.addressId &&
+                      (!vintage ||
+                        (vintage &&
+                          vintage.projectByProjectId.developerId !== node.id &&
+                          vintage.projectByProjectId.stewardId !== node.id &&
+                          vintage.projectByProjectId.landOwnerId !== node.id)) && (
+                        <MenuItem key={node.id} value={node.walletId}>
+                          {node.name} ({node.type.toLowerCase()}){' '}
+                        </MenuItem>
+                      ),
+                  )}
+              </Select>
+            </FormControl>
+          )}
+
+          <FormControl className={styles.formControl}>
+            <InputLabel required id="party-id-select-label">
+              Entity doing this transfer
+            </InputLabel>
+            <Select
+              required
+              labelId="party-id-select-label"
+              id="party-id-select"
+              value={partyId}
+              onChange={handlePartyIdChange}
+            >
+              {partiesData &&
+                partiesData.allParties &&
+                partiesData.allParties.nodes.map(
+                  (node: any) =>
+                    node.type === 'ORGANIZATION' && // only show organization for now
+                    (!vintage ||
+                      (vintage &&
+                        vintage.projectByProjectId.developerId !== node.id &&
+                        vintage.projectByProjectId.stewardId !== node.id &&
+                        vintage.projectByProjectId.landOwnerId !== node.id)) && (
+                      <MenuItem key={node.id} value={node.id}>
+                        {node.name}
+                      </MenuItem>
+                    ),
+                )}
+            </Select>
+          </FormControl>
+          <FormControl className={styles.formControl}>
+            <InputLabel required id="user-id-select-label">
+              User doing this transfer on behalf of the entity
+            </InputLabel>
+            <Select
+              required
+              labelId="user-id-select-label"
+              id="user-id-select"
+              value={userId}
+              onChange={handleUserIdChange}
+            >
+              {partiesData &&
+                partiesData.allParties &&
+                partiesData.allParties.nodes.map(
+                  (node: any) =>
+                    node.type === 'USER' &&
+                    node.userByPartyId &&
+                    (!vintage ||
+                      (vintage &&
+                        vintage.projectByProjectId.developerId !== node.id &&
+                        vintage.projectByProjectId.stewardId !== node.id &&
+                        vintage.projectByProjectId.landOwnerId !== node.id)) && (
+                      <MenuItem key={node.id} value={node.userByPartyId.id}>
+                        {node.name}
+                      </MenuItem>
+                    ),
+                )}
+            </Select>
+          </FormControl>
+          <TextField
+            className={styles.input}
             required
-            labelId="credit-vintage-select-label"
-            id="credit-vintage-select"
-            value={vintageId}
-            onChange={handleVintageChange}
-          >
-            {vintagesData &&
-              vintagesData.allCreditVintages &&
-              vintagesData.allCreditVintages.nodes.map((node: any) => (
-                <MenuItem key={node.id} value={node.id}>
-                  {node.projectByProjectId.name} - {dateFormat.format(new Date(node.createdAt))}
-                </MenuItem>
-              ))}
-          </Select>
-        </FormControl>
-        <FormControl className={classes.formControl}>
-          <InputLabel required id="buyer-wallet-select-label">
-            Buyer
-          </InputLabel>
-          <Select
+            type="number"
+            value={units}
+            onChange={e => {
+              if (showResult) {
+                setShowResult(false);
+              }
+              setUnits(Math.max(0.01, parseFloat(e.target.value)));
+            }}
+            label="Units"
+          />
+          <TextField
+            className={styles.input}
             required
-            labelId="buyer-wallet-select-label"
-            id="buyer-wallet-select"
-            value={buyerWalletId}
-            onChange={handleBuyerWalletChange}
-          >
-            {partiesData &&
-              partiesData.allParties &&
-              partiesData.allParties.nodes.map(
-                (node: any) =>
-                  node.walletId &&
-                  node.addressId &&
-                  (!vintage ||
-                    (vintage &&
-                      vintage.projectByProjectId.developerId !== node.id &&
-                      vintage.projectByProjectId.stewardId !== node.id &&
-                      vintage.projectByProjectId.landOwnerId !== node.id)) && (
-                    <MenuItem key={node.id} value={node.walletId}>
-                      {node.name} ({node.type.toLowerCase()}){' '}
-                    </MenuItem>
-                  ),
-              )}
-          </Select>
-        </FormControl>
-        <FormControl className={classes.formControl}>
-          <InputLabel required id="party-id-select-label">
-            Entity doing this transfer
-          </InputLabel>
-          <Select
-            required
-            labelId="party-id-select-label"
-            id="party-id-select"
-            value={partyId}
-            onChange={handlePartyIdChange}
-          >
-            {partiesData &&
-              partiesData.allParties &&
-              partiesData.allParties.nodes.map(
-                (node: any) =>
-                  node.type === 'ORGANIZATION' && // only show organization for now
-                  (!vintage ||
-                    (vintage &&
-                      vintage.projectByProjectId.developerId !== node.id &&
-                      vintage.projectByProjectId.stewardId !== node.id &&
-                      vintage.projectByProjectId.landOwnerId !== node.id)) && (
-                    <MenuItem key={node.id} value={node.id}>
-                      {node.name}
-                    </MenuItem>
-                  ),
-              )}
-          </Select>
-        </FormControl>
-        <FormControl className={classes.formControl}>
-          <InputLabel required id="user-id-select-label">
-            User doing this transfer on behalf of the entity
-          </InputLabel>
-          <Select
-            required
-            labelId="user-id-select-label"
-            id="user-id-select"
-            value={userId}
-            onChange={handleUserIdChange}
-          >
-            {partiesData &&
-              partiesData.allParties &&
-              partiesData.allParties.nodes.map(
-                (node: any) =>
-                  node.type === 'USER' &&
-                  node.userByPartyId &&
-                  (!vintage ||
-                    (vintage &&
-                      vintage.projectByProjectId.developerId !== node.id &&
-                      vintage.projectByProjectId.stewardId !== node.id &&
-                      vintage.projectByProjectId.landOwnerId !== node.id)) && (
-                    <MenuItem key={node.id} value={node.userByPartyId.id}>
-                      {node.name}
-                    </MenuItem>
-                  ),
-              )}
-          </Select>
-        </FormControl>
-        <TextField
-          className={classes.input}
-          required
-          type="number"
-          value={units}
-          onChange={e => {
-            if (showResult) {
-              setShowResult(false);
-            }
-            setUnits(Math.max(0.01, parseFloat(e.target.value)));
-          }}
-          label="Units"
-        />
-        <TextField
-          className={classes.input}
-          required
-          type="number"
-          value={creditPrice}
-          onChange={e => {
-            if (showResult) {
-              setShowResult(false);
-            }
-            setCreditPrice(Math.max(0.01, parseFloat(e.target.value)));
-          }}
-          label="Credit price"
-        />
-        <Button className={classes.button} variant="contained" type="submit">
-          Transfer
-        </Button>
+            type="number"
+            value={creditPrice}
+            onChange={e => {
+              if (showResult) {
+                setShowResult(false);
+              }
+              setCreditPrice(Math.max(0.01, parseFloat(e.target.value)));
+            }}
+            label="Credit price"
+          />
+          <Button className={styles.button} variant="contained" type="submit">
+            Transfer
+          </Button>
+        </Box>
       </form>
       {loading && <div>Loading...</div>}
       {vintage && vintage.projectByProjectId && vintage.projectByProjectId.partyByLandOwnerId && (
         <div>Project land owner: {vintage.projectByProjectId.partyByLandOwnerId.name}</div>
       )}
-      {vintage && vintage.initialDistribution && vintage.projectByProjectId && (
+      {vintage && vintage.initialDistribution && vintage.projectByProjectId && !passedBuyerWalletId && (
         <div>
           Ownership breakdown (%):
           <ul>
@@ -458,8 +468,7 @@ function CreditsTransfer(): JSX.Element {
           ))}
         </div>
       )}
-    </div>
+    </Box>
   );
-}
-
+};
 export { CreditsTransfer };

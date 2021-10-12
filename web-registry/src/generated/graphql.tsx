@@ -16136,6 +16136,42 @@ export type CreateUserOrganizationIfNeededMutation = (
   )> }
 );
 
+export type IssueCreditsMutationVariables = Exact<{
+  input: IssueCreditsInput;
+}>;
+
+
+export type IssueCreditsMutation = (
+  { __typename?: 'Mutation' }
+  & { issueCredits?: Maybe<(
+    { __typename?: 'IssueCreditsPayload' }
+    & Pick<IssueCreditsPayload, 'json'>
+  )> }
+);
+
+export type TransferCreditsMutationVariables = Exact<{
+  input: TransferCreditsInput;
+}>;
+
+
+export type TransferCreditsMutation = (
+  { __typename?: 'Mutation' }
+  & { transferCredits?: Maybe<(
+    { __typename?: 'TransferCreditsPayload' }
+    & Pick<TransferCreditsPayload, 'json'>
+  )> }
+);
+
+export type GetAvailableCreditsQueryVariables = Exact<{
+  vintageId?: Maybe<Scalars['UUID']>;
+}>;
+
+
+export type GetAvailableCreditsQuery = (
+  { __typename?: 'Query' }
+  & Pick<Query, 'getAvailableCredits'>
+);
+
 export type GetOrganizationProfileByEmailQueryVariables = Exact<{
   email: Scalars['String'];
 }>;
@@ -16549,6 +16585,22 @@ export type ReallyCreateUserIfNeededMutation = (
         { __typename?: 'Party' }
         & Pick<Party, 'walletId' | 'addressId'>
       )> }
+    )> }
+  )> }
+);
+
+export type RetireCreditsMutationVariables = Exact<{
+  input: RetireCreditsInput;
+}>;
+
+
+export type RetireCreditsMutation = (
+  { __typename?: 'Mutation' }
+  & { retireCredits?: Maybe<(
+    { __typename?: 'RetireCreditsPayload' }
+    & { retirement?: Maybe<(
+      { __typename?: 'Retirement' }
+      & Pick<Retirement, 'id'>
     )> }
   )> }
 );
@@ -17239,6 +17291,105 @@ export function useCreateUserOrganizationIfNeededMutation(baseOptions?: Apollo.M
 export type CreateUserOrganizationIfNeededMutationHookResult = ReturnType<typeof useCreateUserOrganizationIfNeededMutation>;
 export type CreateUserOrganizationIfNeededMutationResult = Apollo.MutationResult<CreateUserOrganizationIfNeededMutation>;
 export type CreateUserOrganizationIfNeededMutationOptions = Apollo.BaseMutationOptions<CreateUserOrganizationIfNeededMutation, CreateUserOrganizationIfNeededMutationVariables>;
+export const IssueCreditsDocument = gql`
+    mutation IssueCredits($input: IssueCreditsInput!) {
+  issueCredits(input: $input) {
+    json
+  }
+}
+    `;
+export type IssueCreditsMutationFn = Apollo.MutationFunction<IssueCreditsMutation, IssueCreditsMutationVariables>;
+
+/**
+ * __useIssueCreditsMutation__
+ *
+ * To run a mutation, you first call `useIssueCreditsMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useIssueCreditsMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [issueCreditsMutation, { data, loading, error }] = useIssueCreditsMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useIssueCreditsMutation(baseOptions?: Apollo.MutationHookOptions<IssueCreditsMutation, IssueCreditsMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<IssueCreditsMutation, IssueCreditsMutationVariables>(IssueCreditsDocument, options);
+      }
+export type IssueCreditsMutationHookResult = ReturnType<typeof useIssueCreditsMutation>;
+export type IssueCreditsMutationResult = Apollo.MutationResult<IssueCreditsMutation>;
+export type IssueCreditsMutationOptions = Apollo.BaseMutationOptions<IssueCreditsMutation, IssueCreditsMutationVariables>;
+export const TransferCreditsDocument = gql`
+    mutation TransferCredits($input: TransferCreditsInput!) {
+  transferCredits(input: $input) {
+    json
+  }
+}
+    `;
+export type TransferCreditsMutationFn = Apollo.MutationFunction<TransferCreditsMutation, TransferCreditsMutationVariables>;
+
+/**
+ * __useTransferCreditsMutation__
+ *
+ * To run a mutation, you first call `useTransferCreditsMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useTransferCreditsMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [transferCreditsMutation, { data, loading, error }] = useTransferCreditsMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useTransferCreditsMutation(baseOptions?: Apollo.MutationHookOptions<TransferCreditsMutation, TransferCreditsMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<TransferCreditsMutation, TransferCreditsMutationVariables>(TransferCreditsDocument, options);
+      }
+export type TransferCreditsMutationHookResult = ReturnType<typeof useTransferCreditsMutation>;
+export type TransferCreditsMutationResult = Apollo.MutationResult<TransferCreditsMutation>;
+export type TransferCreditsMutationOptions = Apollo.BaseMutationOptions<TransferCreditsMutation, TransferCreditsMutationVariables>;
+export const GetAvailableCreditsDocument = gql`
+    query GetAvailableCredits($vintageId: UUID) {
+  getAvailableCredits(vintageId: $vintageId)
+}
+    `;
+
+/**
+ * __useGetAvailableCreditsQuery__
+ *
+ * To run a query within a React component, call `useGetAvailableCreditsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetAvailableCreditsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetAvailableCreditsQuery({
+ *   variables: {
+ *      vintageId: // value for 'vintageId'
+ *   },
+ * });
+ */
+export function useGetAvailableCreditsQuery(baseOptions?: Apollo.QueryHookOptions<GetAvailableCreditsQuery, GetAvailableCreditsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetAvailableCreditsQuery, GetAvailableCreditsQueryVariables>(GetAvailableCreditsDocument, options);
+      }
+export function useGetAvailableCreditsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetAvailableCreditsQuery, GetAvailableCreditsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetAvailableCreditsQuery, GetAvailableCreditsQueryVariables>(GetAvailableCreditsDocument, options);
+        }
+export type GetAvailableCreditsQueryHookResult = ReturnType<typeof useGetAvailableCreditsQuery>;
+export type GetAvailableCreditsLazyQueryHookResult = ReturnType<typeof useGetAvailableCreditsLazyQuery>;
+export type GetAvailableCreditsQueryResult = Apollo.QueryResult<GetAvailableCreditsQuery, GetAvailableCreditsQueryVariables>;
 export const GetOrganizationProfileByEmailDocument = gql`
     query GetOrganizationProfileByEmail($email: String!) {
   userByEmail(email: $email) {
@@ -17677,6 +17828,41 @@ export function useReallyCreateUserIfNeededMutation(baseOptions?: Apollo.Mutatio
 export type ReallyCreateUserIfNeededMutationHookResult = ReturnType<typeof useReallyCreateUserIfNeededMutation>;
 export type ReallyCreateUserIfNeededMutationResult = Apollo.MutationResult<ReallyCreateUserIfNeededMutation>;
 export type ReallyCreateUserIfNeededMutationOptions = Apollo.BaseMutationOptions<ReallyCreateUserIfNeededMutation, ReallyCreateUserIfNeededMutationVariables>;
+export const RetireCreditsDocument = gql`
+    mutation RetireCredits($input: RetireCreditsInput!) {
+  retireCredits(input: $input) {
+    retirement {
+      id
+    }
+  }
+}
+    `;
+export type RetireCreditsMutationFn = Apollo.MutationFunction<RetireCreditsMutation, RetireCreditsMutationVariables>;
+
+/**
+ * __useRetireCreditsMutation__
+ *
+ * To run a mutation, you first call `useRetireCreditsMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useRetireCreditsMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [retireCreditsMutation, { data, loading, error }] = useRetireCreditsMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useRetireCreditsMutation(baseOptions?: Apollo.MutationHookOptions<RetireCreditsMutation, RetireCreditsMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<RetireCreditsMutation, RetireCreditsMutationVariables>(RetireCreditsDocument, options);
+      }
+export type RetireCreditsMutationHookResult = ReturnType<typeof useRetireCreditsMutation>;
+export type RetireCreditsMutationResult = Apollo.MutationResult<RetireCreditsMutation>;
+export type RetireCreditsMutationOptions = Apollo.BaseMutationOptions<RetireCreditsMutation, RetireCreditsMutationVariables>;
 export const ShaclGraphByUriDocument = gql`
     query ShaclGraphByUri($uri: String!) {
   shaclGraphByUri(uri: $uri) {

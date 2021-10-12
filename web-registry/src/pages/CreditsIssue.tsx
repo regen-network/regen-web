@@ -151,7 +151,7 @@ function CreditsIssue(): JSX.Element {
                   startDate,
                   endDate,
                   initialDistribution: {
-                    '@type': 'http://regen.network/CreditVintage',
+                    // '@type': 'http://regen.network/CreditVintage', TODO this is now set on the backend, but that's creating issues in credits transfer so leaving this for reference
                     'http://regen.network/projectDeveloperDistribution': projectDeveloper / 100,
                     'http://regen.network/landStewardDistribution': landSteward / 100,
                     'http://regen.network/landOwnerDistribution': landOwner / 100,

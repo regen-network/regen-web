@@ -41,3 +41,9 @@ export type SignupCode =
   | 'unauthorized'
   | 'user_exists'
   | 'username_exists';
+
+export function getErrorMessage(message: string): string {
+  return message === `duplicate key value violates unique constraint "user_email_key"`
+    ? errors.invalid_signup
+    : message;
+}

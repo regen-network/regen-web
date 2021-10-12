@@ -29966,7 +29966,7 @@ exports[`Storyshots Components|Icons Regen Token Icon 1`] = `
   }
 >
   <WithStyles(CssBaseline) />
-  <Component />
+  <RegenTokenIcon />
 </ContextProvider>
 `;
 

@@ -131,7 +131,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 interface CreditsPurchaseFormProps {
-  creditPrice:  CreditPrice;
+  creditPrice: CreditPrice;
   stripePrice: string;
   onClose: () => void;
 }

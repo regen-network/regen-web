@@ -312,7 +312,7 @@ function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JS
     issued: 10000,
     purchased: 7500,
   };
-  // ###### DELETE mock price data above ####
+  // ###### DELETE mock credit issuance data above ####
 
   return (
     <div className={styles.root}>

@@ -11,6 +11,7 @@ import Radio from '@material-ui/core/Radio';
 
 import Title from 'web-components/lib/components/title';
 import Geocoder from 'web-components/lib/components/map/Geocoder';
+import { getErrorMessage } from 'web-components/lib/components/form/errors';
 import { useCreateUserOrganizationMutation, useReallyCreateUserMutation } from '../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -34,16 +35,12 @@ const BuyerCreate: React.FC<{ onCreate?: (walletId: string, addressId: string) =
 }) => {
   const classes = useStyles();
 
-  const [createUser, { data: userData, error: userError }] = useReallyCreateUserMutation({
-    errorPolicy: 'ignore',
-  });
+  const [createUser, { data: userData, error: userError }] = useReallyCreateUserMutation();
 
   const [
     createUserOrganization,
     { data: userOrganizationData, error: userOrganizationError },
-  ] = useCreateUserOrganizationMutation({
-    errorPolicy: 'ignore',
-  });
+  ] = useCreateUserOrganizationMutation();
 
   const [buyerType, setBuyerType] = useState<string>('organization');
   const [orgName, setOrgName] = useState<string>('');
@@ -230,7 +227,7 @@ const BuyerCreate: React.FC<{ onCreate?: (walletId: string, addressId: string) =
         <div>
           Error:
           {userOrganizationError.graphQLErrors.map(({ message }, i) => (
-            <span key={i}> {message}</span>
+            <span key={i}> {getErrorMessage(message)}</span>
           ))}
         </div>
       )}

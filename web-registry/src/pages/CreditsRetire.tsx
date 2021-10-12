@@ -64,12 +64,7 @@ const CreditsRetire: React.FC<{
   const [retireCredits, { data, loading, error }] = useRetireCreditsMutation({
     errorPolicy: 'ignore',
   });
-  const {
-    data: vintagesData,
-    loading: vintagesLoading,
-    error: vintagesError,
-    refetch: refetchVintages,
-  } = useAllCreditVintagesQuery({
+  const { data: vintagesData, loading: vintagesLoading, error: vintagesError } = useAllCreditVintagesQuery({
     errorPolicy: 'ignore',
   });
 
@@ -166,7 +161,6 @@ const CreditsRetire: React.FC<{
                   },
                 },
               });
-              await refetchVintages();
               setShowResult(true);
             } catch (e) {
               console.error('Error retiring credits: ', e); // eslint-disable-line no-console

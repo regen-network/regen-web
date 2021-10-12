@@ -19,7 +19,7 @@ import {
   validateEmail,
   invalidEmailMessage,
 } from '../inputs/validation';
-import { errors, SignupCode, LoginCode } from './errors';
+import { errors, SignupCode, LoginCode, getErrorMessage } from './errors';
 
 interface LoginFormProps {
   signupFromLogin?: string; // link to loginFromSignup page
@@ -160,9 +160,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
           if (e.description === 'Wrong email or password.') {
             errorMessage = errors.invalid_user_password;
           }
-          if (e.message === `duplicate key value violates unique constraint "user_email_key"`) {
-            errorMessage = errors.invalid_signup;
-          }
+          errorMessage = getErrorMessage(e.message);
           setStatus(errorMessage);
           setSubmitting(false);
         }

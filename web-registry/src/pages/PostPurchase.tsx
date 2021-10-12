@@ -171,6 +171,11 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingTop: theme.spacing(2.5),
     },
   },
+  shareIcons: {
+    [theme.breakpoints.up('sm')]: {
+      justifyContent: 'center',
+    },
+  },
 }));
 
 function GridItem({ label, value }: { label: string; value: any }): JSX.Element {
@@ -282,6 +287,7 @@ function PostPurchase(): JSX.Element {
               {projectData.projectByHandle.metadata.shareTagline}
             </Description>
             <ShareIcons
+              className={classes.shareIcons}
               url={url}
               telegramShare={
                 projectData.projectByHandle.creditClassByCreditClassId.creditClassVersionsById.nodes[0]

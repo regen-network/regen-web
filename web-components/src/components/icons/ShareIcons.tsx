@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
+import cx from 'clsx';
 
 import TwitterIcon from './social/TwitterIcon';
 import FacebookIcon from './social/FacebookIcon';
@@ -15,6 +16,7 @@ interface ShareIconsProps {
   twitterShare?: string;
   telegramShare?: string;
   xsSize?: number;
+  className?: string;
 }
 
 interface StyleProps {
@@ -60,6 +62,7 @@ export default function ShareIcons({
   twitterShare = '',
   telegramShare = '',
   xsSize,
+  className,
 }: ShareIconsProps): JSX.Element {
   const theme = useTheme();
   const classes = useStyles({ xsSize });
@@ -67,7 +70,7 @@ export default function ShareIcons({
 
   return (
     <>
-      <Grid container className={classes.root} spacing={4}>
+      <Grid container className={cx(className, classes.root)} spacing={4}>
         <Grid item>
           <a
             href={`https://twitter.com/intent/tweet?url=${url}&text=${twitterShare}`}

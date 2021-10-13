@@ -5,19 +5,9 @@ import Typography from '@material-ui/core/Typography';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import Link from '@material-ui/core/Link';
-import clsx from 'clsx';
 
 import Title from '../title';
 import Section from '../section';
-import InstagramIcon from '../icons/social/InstagramIcon';
-import TelegramIcon from '../icons/social/TelegramIcon';
-import FacebookIcon from '../icons/social/FacebookIcon';
-import TwitterIcon from '../icons/social/TwitterIcon';
-import LinkedInIcon from '../icons/social/LinkedInIcon';
-import MediumIcon from '../icons/social/MediumIcon';
-import YoutubeIcon from '../icons/social/YoutubeIcon';
-import GithubIcon from '../icons/social/GithubIcon';
-import DiscordIcon from '../icons/social/DiscordIcon';
 import NewsletterForm from '../form/NewsletterForm';
 import { SocialLinks } from './SocialLinks';
 
@@ -128,15 +118,6 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     paddingTop: theme.spacing(2.5),
     display: 'block',
   },
-  social: {
-    [theme.breakpoints.up('sm')]: {
-      justifyContent: 'center',
-    },
-    [theme.breakpoints.down('xs')]: {
-      marginLeft: theme.spacing(-2),
-      justifyContent: 'space-between',
-    },
-  },
   separator: {
     borderTop: 0,
     borderColor: theme.palette.grey[50],
@@ -145,18 +126,6 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     },
     [theme.breakpoints.down('xs')]: {
       marginTop: theme.spacing(18.75),
-    },
-  },
-  icon: {
-    [theme.breakpoints.up('sm')]: {
-      width: theme.spacing(12.75),
-      height: theme.spacing(12.75),
-      marginLeft: theme.spacing(2.5),
-      marginRight: theme.spacing(2.5),
-    },
-    [theme.breakpoints.down('xs')]: {
-      width: theme.spacing(7.75),
-      height: theme.spacing(7.75),
     },
   },
   community: {
@@ -169,9 +138,6 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     [theme.breakpoints.down('xs')]: {
       marginBottom: theme.spacing(11.25),
     },
-  },
-  smallIcon: {
-    padding: theme.spacing(1.25),
   },
 }));
 

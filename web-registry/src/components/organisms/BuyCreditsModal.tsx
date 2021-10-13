@@ -186,6 +186,9 @@ const useStyles = makeStyles(theme => ({
     fontWeight: 'bold',
     fontSize: theme.typography.pxToRem(16),
   },
+  toggle: {
+    backgroundColor: theme.palette.primary.main,
+  },
 }));
 
 interface BuyCreditsModalProps extends RegenModalProps {
@@ -332,6 +335,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                   </Title>
                   <Field className={styles.field} component={RadioGroup} name="retirementAction">
                     <Field
+                      className={styles.toggle}
                       component={Toggle}
                       type="radio"
                       value="autoretire"
@@ -340,6 +344,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                       description="These credits will be retired upon purchase and will not be tradeable."
                     />
                     <Field
+                      className={styles.toggle}
                       component={Toggle}
                       type="radio"
                       value="manual"
@@ -379,8 +384,9 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                       <Field
                         options={stateOptions}
                         component={SelectTextField}
-                        label="State / Province / Region"
+                        label="State / Region"
                         name="stateProvince"
+                        optional
                       />
                     </Grid>
                     <Grid item xs={12} sm={6} className={styles.stateCountryTextField}>
@@ -398,6 +404,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                     component={ControlledTextField}
                     label="Postal Code"
                     name="postalCode"
+                    optional
                   />
                 </Form>
                 <Submit

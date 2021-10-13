@@ -375,9 +375,8 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                     </Tooltip>
                   </div>
                   <Description className={styles.description}>
-                    Please enter a location for the retirement of these credits. This prevents{' '}
-                    <a href="/">double counting</a> of credits in different locations. These credits will
-                    auto-retire.
+                    Please enter a location for the retirement of these credits. This prevents double counting
+                    of credits in different locations. These credits will auto-retire.
                   </Description>
                   <Grid container alignItems="center" className={styles.stateCountryGrid}>
                     <Grid item xs={12} sm={6} className={styles.stateCountryTextField}>

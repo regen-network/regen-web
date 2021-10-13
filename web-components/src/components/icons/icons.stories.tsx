@@ -24,6 +24,7 @@ import BreadcrumbIcon from 'web-components/lib/components/icons/BreadcrumbIcon';
 import FacebookIcon from 'web-components/lib/components/icons/social/FacebookIcon';
 import InstagramIcon from 'web-components/lib/components/icons/social/InstagramIcon';
 import TelegramIcon from 'web-components/lib/components/icons/social/TelegramIcon';
+import DiscordIcon from 'web-components/lib/components/icons/social/DiscordIcon';
 import TwitterIcon from 'web-components/lib/components/icons/social/TwitterIcon';
 import LinkedInIcon from 'web-components/lib/components/icons/social/LinkedInIcon';
 import MediumIcon from 'web-components/lib/components/icons/social/MediumIcon';
@@ -117,6 +118,8 @@ export const linkedInIcon = (): JSX.Element => <LinkedInIcon />;
 export const mediumIcon = (): JSX.Element => <MediumIcon />;
 
 export const telegramIcon = (): JSX.Element => <TelegramIcon />;
+
+export const discordIcon = (): JSX.Element => <DiscordIcon />;
 
 export const twitterIcon = (): JSX.Element => <TwitterIcon />;
 

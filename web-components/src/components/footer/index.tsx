@@ -17,7 +17,9 @@ import LinkedInIcon from '../icons/social/LinkedInIcon';
 import MediumIcon from '../icons/social/MediumIcon';
 import YoutubeIcon from '../icons/social/YoutubeIcon';
 import GithubIcon from '../icons/social/GithubIcon';
+import DiscordIcon from '../icons/social/DiscordIcon';
 import NewsletterForm from '../form/NewsletterForm';
+import { SocialLinks } from './SocialLinks';
 
 export interface FooterItemProps {
   title: string;
@@ -235,52 +237,14 @@ export default function Footer({
             {/* <Link className={classes.newsletter}>See archive of past newsletters»</Link> */}
           </Grid>
         </Grid>
-        <div>
-          <Title className={clsx(classes.community, classes.title)} variant="h5">
-            join the community
-          </Title>
-          <Grid container wrap="nowrap" className={classes.social}>
-            <Link href="https://www.instagram.com/regennetwork/" rel="noopener noreferrer" target="_blank">
-              <InstagramIcon className={classes.icon} />
-            </Link>
-            <Link href="http://t.me/regennetwork_public" rel="noopener noreferrer" target="_blank">
-              <TelegramIcon className={classes.icon} />
-            </Link>
-            <Link href="https://facebook.com/weareregennetwork" rel="noopener noreferrer" target="_blank">
-              <FacebookIcon className={classes.icon} />
-            </Link>
-            <Link href="http://twitter.com/regen_network" rel="noopener noreferrer" target="_blank">
-              <TwitterIcon className={classes.icon} />
-            </Link>
-            <Link
-              href="https://www.linkedin.com/company/regen-network/"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              <LinkedInIcon className={classes.icon} />
-            </Link>
-            <Link href="https://medium.com/regen-network" rel="noopener noreferrer" target="_blank">
-              <MediumIcon className={classes.icon} />
-            </Link>
-            <Link
-              href="https://www.youtube.com/channel/UCICD2WukTY0MbQdQ9Quew3g"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              <YoutubeIcon className={clsx(classes.smallIcon, classes.icon)} />
-            </Link>
-            <Link href="https://github.com/regen-network/" rel="noopener noreferrer" target="_blank">
-              <GithubIcon className={classes.icon} />
-            </Link>
-          </Grid>
-        </div>
+        <SocialLinks className={classes.community} />
         <hr className={classes.separator} />
         <Grid className={classes.bottomGrid} container justify="space-between">
           <Grid item className={classes.bottom}>
             <Link href={termsUrl}>Terms</Link> | <Link href={privacyUrl}>Privacy</Link>
           </Grid>
           <Grid item className={classes.bottom}>
-            © 2020 Regen Network Development, Inc
+            © 2021 Regen Network Development, Inc
           </Grid>
         </Grid>
       </Section>

@@ -1,4 +1,5 @@
 import React, { useState, createContext } from 'react';
+import { SigningCosmosClient } from '@cosmjs/launchpad';
 
 interface Keplr {
   enable: (chainId: string) => Promise<void>;
@@ -23,12 +24,14 @@ interface KeplrWallet {
 declare global {
   interface Window {
     keplr?: Keplr;
+    getOfflineSigner?: (chainId: string) => any; //todo
   }
 }
 
 type ContextType = {
   wallet?: any;
   suggestChain?: () => Promise<void>;
+  sendTokens?: (amount: number, recipient: string) => Promise<string>;
 };
 
 const WalletContext = createContext<ContextType>({});
@@ -165,7 +168,49 @@ export const WalletProvider: React.FC = ({ children }) => {
     }
   };
 
-  return <WalletContext.Provider value={{ wallet, suggestChain }}>{children}</WalletContext.Provider>;
+  const sendTokens = async (amount: number, recipient: string): Promise<string> => {
+    // amount = parseFloat(amount);
+    // if (isNaN(amount)) {
+    //   alert('Invalid amount');
+    //   return false;
+    // }
+
+    if (chainId && chainRestEndpoint) {
+      amount *= 1000000;
+      amount = Math.floor(amount);
+
+      await window?.keplr?.enable(chainId);
+      const offlineSigner = window.getOfflineSigner && window.getOfflineSigner(chainId);
+
+      const accounts = await offlineSigner.getAccounts();
+
+      // Initialize the gaia api with the offline signer that is injected by Keplr extension.
+      const cosmJS = new SigningCosmosClient(chainRestEndpoint, accounts[0].address, offlineSigner);
+
+      const result: any = await cosmJS.sendTokens(recipient, [
+        {
+          denom: 'uregen',
+          amount: amount.toString(),
+        },
+      ]);
+
+      console.log('sendTokens result: ', result);
+
+      if (result && result?.code !== undefined && result.code !== 0) {
+        alert('Failed to send tx: ' + result?.log || result.rawLog);
+      } else {
+        alert('Succeed to send tx');
+      }
+
+      return Promise.resolve(result.transactionHash);
+    }
+
+    return Promise.reject('no chain id or rest endpoint');
+  };
+
+  return (
+    <WalletContext.Provider value={{ wallet, suggestChain, sendTokens }}>{children}</WalletContext.Provider>
+  );
 };
 
 export const useWallet = (): ContextType => React.useContext(WalletContext);

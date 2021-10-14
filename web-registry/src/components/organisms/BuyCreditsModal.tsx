@@ -28,6 +28,7 @@ import Tooltip from 'web-components/lib/components/tooltip/InfoTooltip';
 import { countries } from '../../lib/countries';
 import { Project } from '../../mocks';
 import fallbackImage from '../../assets/time-controlled-rotational-grazing.jpg'; //TODO: more generic fallback
+import { useWallet } from '../../wallet';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -218,6 +219,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
   imageStorageBaseUrl,
 }) => {
   const styles = useStyles();
+  const walletContext = useWallet();
   const [stateOptions, setStateOptions] = useState<Option[]>([]);
   const initialCountry = 'US';
 
@@ -245,7 +247,15 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
   });
 
   const submit = async (values: BuyCreditsValues): Promise<void> => {
-    // console.log('submit ', values); TODO: purchase flow
+    //  regen1df675r9vnf7pdedn4sf26svdsem3ugavgxmy46  : test account 1
+    //  regen18hj7m3skrsrr8lfvwqh66r7zruzdvp6ylwxrx4  : test account 2
+
+    const recipient = 'regen18hj7m3skrsrr8lfvwqh66r7zruzdvp6ylwxrx4'; //TODO
+    const amount = values.creditCount;
+    if (walletContext.sendTokens) {
+      const result = await walletContext.sendTokens(amount, recipient);
+      console.log('submit result ', result);
+    }
   };
 
   return (

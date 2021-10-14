@@ -1,5 +1,5 @@
 import React from 'react';
-import { useTheme, makeStyles } from '@material-ui/core/styles';
+import { useTheme } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 
 import Header, { HeaderColors } from 'web-components/lib/components/header';
@@ -17,27 +17,10 @@ import LandStewardsIcon from '../../static/media/svgs/nav-dropdown/land-stewards
 import DevelopersIcon from '../../static/media/svgs/nav-dropdown/developers.svg';
 import ScientistIcon from '../../static/media/svgs/nav-dropdown/scientists.svg';
 import ValidatorsIcon from '../../static/media/svgs/nav-dropdown/validators.svg';
-import RegenIcon from '../../../web-components/lib/components/icons/RegenIcon';
 
 interface BoolProps {
   [key: string]: boolean;
 }
-
-const useStyles = makeStyles(theme => {
-  const { pxToRem } = theme.typography;
-  return {
-    icon: {
-      height: 'auto',
-      width: pxToRem(186),
-      [theme.breakpoints.down('sm')]: {
-        width: pxToRem(111),
-      },
-      [theme.breakpoints.down('xs')]: {
-        width: pxToRem(104),
-      },
-    },
-  };
-});
 
 const MarketingNav: React.FC<{ location: Location }> = ({ location }) => {
   const theme = useTheme();
@@ -182,6 +165,7 @@ const MarketingNav: React.FC<{ location: Location }> = ({ location }) => {
         { title: 'Resources', href: '/resources/', linkComponent: NavLink },
         { title: 'FAQ', href: '/faq/', linkComponent: NavLink },
         { title: 'Team', href: '/team/', linkComponent: NavLink },
+        { title: 'Careers', href: 'https://apply.workable.com/regen-network/', linkComponent: NavLink },
       ],
     },
   ];

@@ -5,19 +5,11 @@ import Typography from '@material-ui/core/Typography';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import Link from '@material-ui/core/Link';
-import clsx from 'clsx';
 
 import Title from '../title';
 import Section from '../section';
-import InstagramIcon from '../icons/social/InstagramIcon';
-import TelegramIcon from '../icons/social/TelegramIcon';
-import FacebookIcon from '../icons/social/FacebookIcon';
-import TwitterIcon from '../icons/social/TwitterIcon';
-import LinkedInIcon from '../icons/social/LinkedInIcon';
-import MediumIcon from '../icons/social/MediumIcon';
-import YoutubeIcon from '../icons/social/YoutubeIcon';
-import GithubIcon from '../icons/social/GithubIcon';
 import NewsletterForm from '../form/NewsletterForm';
+import { SocialLinks } from './SocialLinks';
 
 export interface FooterItemProps {
   title: string;
@@ -126,15 +118,6 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     paddingTop: theme.spacing(2.5),
     display: 'block',
   },
-  social: {
-    [theme.breakpoints.up('sm')]: {
-      justifyContent: 'center',
-    },
-    [theme.breakpoints.down('xs')]: {
-      marginLeft: theme.spacing(-2),
-      justifyContent: 'space-between',
-    },
-  },
   separator: {
     borderTop: 0,
     borderColor: theme.palette.grey[50],
@@ -143,18 +126,6 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     },
     [theme.breakpoints.down('xs')]: {
       marginTop: theme.spacing(18.75),
-    },
-  },
-  icon: {
-    [theme.breakpoints.up('sm')]: {
-      width: theme.spacing(12.75),
-      height: theme.spacing(12.75),
-      marginLeft: theme.spacing(2.5),
-      marginRight: theme.spacing(2.5),
-    },
-    [theme.breakpoints.down('xs')]: {
-      width: theme.spacing(7.75),
-      height: theme.spacing(7.75),
     },
   },
   community: {
@@ -167,9 +138,6 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     [theme.breakpoints.down('xs')]: {
       marginBottom: theme.spacing(11.25),
     },
-  },
-  smallIcon: {
-    padding: theme.spacing(1.25),
   },
 }));
 
@@ -235,52 +203,14 @@ export default function Footer({
             {/* <Link className={classes.newsletter}>See archive of past newsletters»</Link> */}
           </Grid>
         </Grid>
-        <div>
-          <Title className={clsx(classes.community, classes.title)} variant="h5">
-            join the community
-          </Title>
-          <Grid container wrap="nowrap" className={classes.social}>
-            <Link href="https://www.instagram.com/regennetwork/" rel="noopener noreferrer" target="_blank">
-              <InstagramIcon className={classes.icon} />
-            </Link>
-            <Link href="http://t.me/regennetwork_public" rel="noopener noreferrer" target="_blank">
-              <TelegramIcon className={classes.icon} />
-            </Link>
-            <Link href="https://facebook.com/weareregennetwork" rel="noopener noreferrer" target="_blank">
-              <FacebookIcon className={classes.icon} />
-            </Link>
-            <Link href="http://twitter.com/regen_network" rel="noopener noreferrer" target="_blank">
-              <TwitterIcon className={classes.icon} />
-            </Link>
-            <Link
-              href="https://www.linkedin.com/company/regen-network/"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              <LinkedInIcon className={classes.icon} />
-            </Link>
-            <Link href="https://medium.com/regen-network" rel="noopener noreferrer" target="_blank">
-              <MediumIcon className={classes.icon} />
-            </Link>
-            <Link
-              href="https://www.youtube.com/channel/UCICD2WukTY0MbQdQ9Quew3g"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              <YoutubeIcon className={clsx(classes.smallIcon, classes.icon)} />
-            </Link>
-            <Link href="https://github.com/regen-network/" rel="noopener noreferrer" target="_blank">
-              <GithubIcon className={classes.icon} />
-            </Link>
-          </Grid>
-        </div>
+        <SocialLinks className={classes.community} />
         <hr className={classes.separator} />
         <Grid className={classes.bottomGrid} container justify="space-between">
           <Grid item className={classes.bottom}>
             <Link href={termsUrl}>Terms</Link> | <Link href={privacyUrl}>Privacy</Link>
           </Grid>
           <Grid item className={classes.bottom}>
-            © 2020 Regen Network Development, Inc
+            © 2021 Regen Network Development, Inc
           </Grid>
         </Grid>
       </Section>

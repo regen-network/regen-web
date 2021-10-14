@@ -13,6 +13,11 @@ import LinkedInIcon from '../icons/social/LinkedInIcon';
 import MediumIcon from '../icons/social/MediumIcon';
 import YoutubeIcon from '../icons/social/YoutubeIcon';
 import GithubIcon from '../icons/social/GithubIcon';
+import DiscordIcon from '../icons/social/DiscordIcon';
+
+interface Props {
+  className?: string;
+}
 
 const useStyles = makeStyles(theme => ({
   title: {
@@ -59,13 +64,16 @@ const useStyles = makeStyles(theme => ({
   smallIcon: {
     padding: theme.spacing(1.25),
   },
+  discord: {
+    marginTop: theme.spacing(0.5),
+  },
 }));
 
-const SocialLinks: React.FC = () => {
+const SocialLinks: React.FC<Props> = ({ className }) => {
   const styles = useStyles();
 
   return (
-    <div>
+    <div className={className}>
       <Title className={cx(styles.community, styles.title)} variant="h5">
         join the community
       </Title>
@@ -101,6 +109,9 @@ const SocialLinks: React.FC = () => {
         </Link>
         <Link href="https://github.com/regen-network/" rel="noopener noreferrer" target="_blank">
           <GithubIcon className={styles.icon} />
+        </Link>
+        <Link href="https://discord.gg/regen-network" rel="noopener noreferrer" target="_blank">
+          <DiscordIcon className={cx(styles.smallIcon, styles.icon, styles.discord)} />
         </Link>
       </Grid>
     </div>

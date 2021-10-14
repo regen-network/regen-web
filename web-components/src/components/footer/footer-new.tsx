@@ -207,7 +207,7 @@ const Footer: React.FC<{
             <Link href={termsUrl}>Terms</Link> | <Link href={privacyUrl}>Privacy</Link>
           </Grid>
           <Grid item className={styles.bottom}>
-            © 2020 Regen Network Development, Inc
+            © 2021 Regen Network Development, Inc
           </Grid>
         </Grid>
       </Section>

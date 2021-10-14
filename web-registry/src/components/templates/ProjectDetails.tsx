@@ -26,6 +26,7 @@ import { getImgSrc } from '../../lib/imgSrc';
 import getApiUri from '../../lib/apiUri';
 import { buildIssuanceModalData } from '../../lib/transform';
 import { useLedger, ContextType } from '../../ledger';
+import { chainId } from '../../wallet';
 import { Project, ProjectDefault, ActionGroup } from '../../mocks';
 import {
   Documentation,
@@ -306,14 +307,6 @@ function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JS
     siteUrl: `${window.location.origin}/registry`,
   };
 
-  // TODO: ### for UI testing. Delete  below before merge! #######
-  project.creditPrice = { unitPrice: 15.12, currency: 'USD' };
-  project.credits = {
-    issued: 10000,
-    purchased: 7500,
-  };
-  // ###### DELETE mock credit issuance data above ####
-
   return (
     <div className={styles.root}>
       <SEO location={location} siteMetadata={siteMetadata} title={project.name} imageUrl={project.image} />
@@ -434,7 +427,7 @@ function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JS
         </div>
       )}
 
-      {project.creditPrice && (
+      {chainId && project.creditPrice && (
         <BuyFooter onClick={() => setBuyCreditsModalOpen(true)} creditPrice={project.creditPrice} />
       )}
       {project.creditPrice && project.stripePrice && (
@@ -480,7 +473,7 @@ function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JS
           {...issuanceModalData}
         />
       )}
-      {project.creditPrice && (
+      {chainId && project.creditPrice && (
         <BuyCreditsModal
           open={isBuyCreditsModalOpen}
           onClose={() => setBuyCreditsModalOpen(false)}

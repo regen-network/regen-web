@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import CardContent from '@material-ui/core/CardContent';
+import Collapse from '@material-ui/core/Collapse';
 import axios from 'axios';
 import { Formik, Form, Field } from 'formik';
 import { RadioGroup } from 'formik-material-ui';
@@ -353,58 +354,67 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                       description="These credits will be a tradeable asset. They can be retired later via Regen Registry."
                     />
                   </Field>
-                  <Title className={styles.groupTitle} variant="h5">
-                    Retirement beneficiary
-                  </Title>
-                  <Field
-                    className={styles.field}
-                    component={ControlledTextField}
-                    label="Your name or organization name"
-                    description="Please note that this name will be publically viewable on the ledger."
-                    name="retirementBeneficiary"
-                    optional
-                  />
-                  <div className={styles.flex}>
+                  <Collapse in={values['retirementAction'] === 'autoretire'}>
                     <Title className={styles.groupTitle} variant="h5">
-                      Credit retirement location
+                      Retirement beneficiary
                     </Title>
-                    <Tooltip arrow placement="top" title="TODO">
-                      <div>
-                        <InfoIcon className={styles.info} />
-                      </div>
-                    </Tooltip>
-                  </div>
-                  <Description className={styles.description}>
-                    Please enter a location for the retirement of these credits. This prevents double counting
-                    of credits in different locations. These credits will auto-retire.
-                  </Description>
-                  <Grid container alignItems="center" className={styles.stateCountryGrid}>
-                    <Grid item xs={12} sm={6} className={styles.stateCountryTextField}>
-                      <Field
-                        options={stateOptions}
-                        component={SelectTextField}
-                        label="State / Region"
-                        name="stateProvince"
-                        optional
-                      />
+                    <Field
+                      className={styles.field}
+                      component={ControlledTextField}
+                      label="Your name or organization name"
+                      description="Please note that this name will be publically viewable on the ledger."
+                      name="retirementBeneficiary"
+                      optional
+                    />
+                    <div className={styles.flex}>
+                      <Title className={styles.groupTitle} variant="h5">
+                        Credit retirement location
+                      </Title>
+                      <Tooltip
+                        arrow
+                        placement="top"
+                        title="The retirement location can be where you live or your business operates."
+                      >
+                        <div>
+                          <InfoIcon className={styles.info} />
+                        </div>
+                      </Tooltip>
+                    </div>
+                    <Description className={styles.description}>
+                      Please enter a location for the retirement of these credits. This prevents double
+                      counting of credits in different locations. These credits will auto-retire.
+                    </Description>
+                    <Grid container alignItems="center" className={styles.stateCountryGrid}>
+                      <Grid item xs={12} sm={6} className={styles.stateCountryTextField}>
+                        <Field
+                          options={stateOptions}
+                          component={SelectTextField}
+                          label="State / Region"
+                          name="stateProvince"
+                          optional
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={6} className={styles.stateCountryTextField}>
+                        <Field
+                          component={SelectTextField}
+                          options={Object.keys(countries).map(key => ({
+                            value: key,
+                            label: countries[key],
+                          }))}
+                          name="country"
+                          label="Country"
+                          triggerOnChange={searchState}
+                        />
+                      </Grid>
                     </Grid>
-                    <Grid item xs={12} sm={6} className={styles.stateCountryTextField}>
-                      <Field
-                        component={SelectTextField}
-                        options={Object.keys(countries).map(key => ({ value: key, label: countries[key] }))}
-                        name="country"
-                        label="Country"
-                        triggerOnChange={searchState}
-                      />
-                    </Grid>
-                  </Grid>
-                  <Field
-                    className={cx(styles.field, styles.postalCodeField)}
-                    component={ControlledTextField}
-                    label="Postal Code"
-                    name="postalCode"
-                    optional
-                  />
+                    <Field
+                      className={cx(styles.field, styles.postalCodeField)}
+                      component={ControlledTextField}
+                      label="Postal Code"
+                      name="postalCode"
+                      optional
+                    />
+                  </Collapse>
                 </Form>
                 <Submit
                   isSubmitting={isSubmitting}

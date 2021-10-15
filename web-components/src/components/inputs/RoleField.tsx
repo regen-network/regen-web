@@ -100,7 +100,7 @@ export type FormValues = IndividualFormValues | OrganizationFormValues;
 export type Option = IndividualOption | OrganizationOption;
 
 export function isIndividual(e: FormValues): e is IndividualFormValues {
-  if (e['@type'] === 'http://regen.network/Individual') {
+  if (e['@type'] && e['@type'].includes('http://regen.network/Individual')) {
     return true;
   }
   return false;
@@ -192,6 +192,7 @@ const RoleField: React.FC<Props> = ({
               paper: styles.paper,
               popupIndicator: styles.popupIndicator,
             }}
+            disableClearable
             options={options || []}
             forcePopupIcon
             value={value}

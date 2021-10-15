@@ -1,30 +1,60 @@
 import React from 'react';
-import { makeStyles, Theme, useMediaQuery, useTheme, Grid } from '@material-ui/core';
-import { Formik, Form, Field } from 'formik';
+import { makeStyles, Theme, useMediaQuery, useTheme, Grid, FormHelperText } from '@material-ui/core';
+import { Formik, Form, Field, getIn } from 'formik';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import OnboardingFooter from 'web-components/lib/components/fixed-footer/OnboardingFooter';
 import { ImageDrop } from 'web-components/lib/components/inputs/ImageDrop';
 // import { VideoInput } from 'web-components/lib/components/inputs/VideoInput'; //TODO: make this component easier to use with share links from youtube, vimeo, etc
 import FormLabel from 'web-components/lib/components/inputs/FormLabel';
+import { requiredMessage } from 'web-components/lib/components/inputs/validation';
+
+import { validate, getProjectPageBaseData } from '../../lib/rdf';
+import { useShaclGraphByUriQuery } from '../../generated/graphql';
 
 interface MediaFormProps {
   submit: (values: MediaValues) => Promise<void>;
   initialValues?: MediaValues;
 }
 
-export interface MediaValues {
-  'http://regen.network/previewPhoto': string;
-  'http://regen.network/galleryLeft': string;
-  'http://regen.network/galleryTop': string;
-  'http://regen.network/galleryBottom': string;
-  'http://regen.network/galleryRight': string;
-  'http://regen.network/landStewardPhoto': string;
-  'http://regen.network/videoUrl': string;
+export interface urlType {
+  '@type': 'http://schema.org/URL';
+  '@value'?: string;
 }
 
+interface urlList {
+  '@list': Array<urlType>;
+}
+
+export interface MediaValues {
+  'http://regen.network/previewPhoto'?: urlType;
+  'http://regen.network/galleryPhotos'?: urlList;
+  'http://regen.network/landStewardPhoto'?: urlType;
+  'http://regen.network/videoURL'?: urlType;
+}
+
+type valueObject = { '@value'?: string };
 export interface MediaValuesErrors {
-  'http://regen.network/previewPhoto'?: string;
+  'http://regen.network/previewPhoto'?: valueObject;
+  'http://regen.network/galleryPhotos'?: string;
+  'http://regen.network/landStewardPhoto'?: valueObject;
+  'http://regen.network/videoURL'?: valueObject;
+}
+
+function getURLInitialValue(value?: urlType): urlType {
+  return (
+    value || {
+      '@type': 'http://schema.org/URL',
+    }
+  );
+}
+
+function getURLListInitialValue(value?: urlList): urlList {
+  return (
+    value || {
+      '@list': Array(4).fill(getURLInitialValue(undefined)),
+    }
+  );
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -44,7 +74,18 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   error: {
-    marginTop: 0,
+    color: theme.palette.error.main,
+    borderColor: theme.palette.error.main,
+    marginTop: theme.spacing(1),
+    marginBottom: 0,
+    fontFamily: '"Lato",-apple-system,sans-serif',
+    fontWeight: 'bold',
+    [theme.breakpoints.up('sm')]: {
+      fontSize: theme.spacing(3.5),
+    },
+    [theme.breakpoints.down('xs')]: {
+      fontSize: theme.spacing(3),
+    },
   },
   fullSizeMedia: {
     width: '100%',
@@ -82,24 +123,57 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
   const theme = useTheme();
   const isTabletOrLarger = useMediaQuery(theme.breakpoints.up('sm'));
   const cropAspect = { aspect: 322 / 211 }; // px values pulled from mockups (width / height)
+  const { data: graphData } = useShaclGraphByUriQuery({
+    variables: {
+      uri: 'http://regen.network/ProjectPageShape',
+    },
+  });
 
   return (
     <>
       <Formik
         enableReinitialize
         validateOnMount
-        initialValues={
-          initialValues || {
-            'http://regen.network/previewPhoto': initialValues?.['http://regen.network/previewPhoto'] || '',
-            'http://regen.network/galleryLeft': initialValues?.['http://regen.network/galleryLeft'] || '',
-            'http://regen.network/galleryTop': initialValues?.['http://regen.network/galleryTop'] || '',
-            'http://regen.network/galleryBottom': initialValues?.['http://regen.network/galleryBottom'] || '',
-            'http://regen.network/galleryRight': initialValues?.['http://regen.network/galleryRight'] || '',
-            'http://regen.network/landStewardPhoto':
-              initialValues?.['http://regen.network/landStewardPhoto'] || '',
-            'http://regen.network/videoUrl': initialValues?.['http://regen.network/videoUrl'] || '',
+        initialValues={{
+          'http://regen.network/previewPhoto': getURLInitialValue(
+            initialValues?.['http://regen.network/previewPhoto'],
+          ),
+          'http://regen.network/galleryPhotos': getURLListInitialValue(
+            initialValues?.['http://regen.network/galleryPhotos'],
+          ),
+          'http://regen.network/landStewardPhoto': getURLInitialValue(
+            initialValues?.['http://regen.network/landStewardPhoto'],
+          ),
+          'http://regen.network/videoURL': getURLInitialValue(
+            initialValues?.['http://regen.network/videoURL'],
+          ),
+        }}
+        validate={async (values): Promise<MediaValuesErrors> => {
+          const errors: MediaValuesErrors = {};
+          if (graphData?.shaclGraphByUri?.graph) {
+            const projectPageData = { ...getProjectPageBaseData(), ...values };
+            const report = await validate(
+              graphData.shaclGraphByUri.graph,
+              projectPageData,
+              'http://regen.network/ProjectPageMediaGroup',
+            );
+            for (const result of report.results) {
+              const path: string | undefined = result.path?.value;
+              if (path) {
+                if (path === 'http://regen.network/previewPhoto') {
+                  errors[path] = { '@value': requiredMessage };
+                } else {
+                  // for gallery photos, display general error message below "Gallery Photos" section
+                  errors['http://regen.network/galleryPhotos'] = 'You must add 4 photos';
+                }
+              } else {
+                // or constraint not satisfied on regen:landStewardPhoto/regen:videoURL
+                errors['http://regen.network/landStewardPhoto'] = { '@value': requiredMessage };
+              }
+            }
           }
-        }
+          return errors;
+        }}
         onSubmit={async (values, { setSubmitting }) => {
           setSubmitting(true);
           try {
@@ -110,7 +184,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
           }
         }}
       >
-        {({ submitForm, isValid, isSubmitting }) => {
+        {({ submitForm, isValid, isSubmitting, errors, touched }) => {
           return (
             <Form translate="yes">
               <OnBoardingCard className={styles.storyCard}>
@@ -121,7 +195,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                   description="Choose the summary photo that will show up in project previews."
                   buttonText="+ Add preview Photo"
                   fixedCrop={cropAspect}
-                  name="['http://regen.network/previewPhoto']"
+                  name="['http://regen.network/previewPhoto'].@value"
                 />
                 <div className={styles.field}>
                   <FormLabel
@@ -136,7 +210,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                         component={ImageDrop}
                         buttonText="+ Add Photo"
                         fixedCrop={cropAspect}
-                        name="['http://regen.network/galleryLeft']"
+                        name="['http://regen.network/galleryPhotos'].@list[0].@value" // left
                       />
                     </Grid>
                     {isTabletOrLarger ? (
@@ -146,7 +220,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                             classes={{ button: styles.smallButton }}
                             component={ImageDrop}
                             fixedCrop={cropAspect}
-                            name="['http://regen.network/galleryTop']"
+                            name="['http://regen.network/galleryPhotos'].@list[1].@value" // top
                             hideDragText
                           />
                         </Grid>
@@ -155,7 +229,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                             classes={{ button: styles.smallButton }}
                             component={ImageDrop}
                             fixedCrop={cropAspect}
-                            name="['http://regen.network/galleryBottom']"
+                            name="['http://regen.network/galleryPhotos'].@list[2].@value" // bottom
                             hideDragText
                           />
                         </Grid>
@@ -189,10 +263,19 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                         component={ImageDrop}
                         buttonText="+ Add Photo"
                         fixedCrop={cropAspect}
-                        name="['http://regen.network/galleryRight']"
+                        name="['http://regen.network/galleryPhotos'].@list[3].@value" // right
                       />
                     </Grid>
                   </Grid>
+                  {errors?.['http://regen.network/galleryPhotos'] &&
+                    (getIn(touched, `['http://regen.network/galleryPhotos'].@list[0].@value`) ||
+                      getIn(touched, `['http://regen.network/galleryPhotos'].@list[1].@value`) ||
+                      getIn(touched, `['http://regen.network/galleryPhotos'].@list[2].@value`) ||
+                      getIn(touched, `['http://regen.network/galleryPhotos'].@list[3].@value`)) && (
+                      <FormHelperText className={styles.error}>
+                        {errors?.['http://regen.network/galleryPhotos']}
+                      </FormHelperText>
+                    )}
                 </div>
                 {/* <Field
                   classes={{ root: styles.field }}
@@ -200,7 +283,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                   label="Video url"
                   optional
                   description="Copy and paste a video url from YouTube, Vimeo, or Facebook."
-                  name="['http://regen.network/videoUrl']"
+                  name="['http://regen.network/videoURL'].@value"
                 /> */}
                 <Field
                   classes={{ root: styles.field, main: styles.fullSizeMedia }}
@@ -210,7 +293,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                   description="Upload a nice portrait of the land stewards and their families. This should be different from the other photos of land stewards you uploaded in the gallery above."
                   buttonText="+ Add Photo"
                   fixedCrop={cropAspect}
-                  name="['http://regen.network/landStewardPhoto']"
+                  name="['http://regen.network/landStewardPhoto'].@value"
                 />
               </OnBoardingCard>
 

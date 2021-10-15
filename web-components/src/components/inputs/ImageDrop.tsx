@@ -146,11 +146,13 @@ function ImageDrop({
 
   const handleCropModalClose = (): void => {
     setInitialImage('');
+    form.setFieldTouched(field.name, true);
     setCropModalOpen(false);
   };
 
   const handleCropModalSubmit = (croppedImage: HTMLImageElement): void => {
     form.setFieldValue(field.name, croppedImage.src);
+    form.setFieldTouched(field.name, true);
     setCropModalOpen(false);
   };
 

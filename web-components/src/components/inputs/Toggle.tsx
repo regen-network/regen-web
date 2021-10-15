@@ -23,6 +23,7 @@ interface ToggleProps extends FieldProps {
   tooltip?: string;
   disabled?: boolean;
   value?: string;
+  triggerOnChange?: (v: any) => Promise<void>;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -118,6 +119,7 @@ const Toggle: React.FC<ToggleProps> = ({
   field,
   form,
   meta,
+  triggerOnChange,
 }) => {
   const styles = useStyles();
 
@@ -127,7 +129,15 @@ const Toggle: React.FC<ToggleProps> = ({
         <FormControlLabel
           control={
             type === 'checkbox' ? (
-              <Checkbox className={styles.checkbox} field={field} form={form} meta={meta} type="checkbox" />
+              <Checkbox
+                className={styles.checkbox}
+                field={field}
+                form={form}
+                meta={meta}
+                indeterminate={false}
+                triggerOnChange={triggerOnChange}
+                type="checkbox"
+              />
             ) : (
               <Radio className={styles.radio} />
             )

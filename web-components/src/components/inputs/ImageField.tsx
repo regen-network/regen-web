@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { makeStyles, Theme, Box, Avatar } from '@material-ui/core';
 import { FieldProps } from 'formik';
+
 import OutlinedButton from '../buttons/OutlinedButton';
 import FieldFormControl from './FieldFormControl';
 import CropImageModal from '../modal/CropImageModal';
@@ -57,8 +58,11 @@ export default function ImageField({
 }: Props): JSX.Element {
   const [initialImage, setInitialImage] = useState('');
   const styles = useStyles();
-  const { form, field } = fieldProps;
-  const inputId = `image-upload-input-${field.name.toString()}`;
+  const {
+    form,
+    field: { name, value },
+  } = fieldProps;
+  const inputId = `image-upload-input-${name.toString()}`;
 
   function toBase64(file: File): Promise<string | ArrayBuffer | null> {
     return new Promise((resolve, reject) => {
@@ -80,7 +84,7 @@ export default function ImageField({
       >
         {() => (
           <Box display="flex" alignItems="center">
-            <Avatar className={styles.avatar} src={field.value}>
+            <Avatar className={styles.avatar} src={value}>
               {fallbackAvatar || <AvatarIcon />}
             </Avatar>
 
@@ -112,10 +116,14 @@ export default function ImageField({
         circularCrop
         initialImage={initialImage}
         open={!!initialImage}
-        onClose={() => setInitialImage('')}
+        onClose={() => {
+          setInitialImage('');
+          form.setFieldTouched(name, true);
+        }}
         onSubmit={croppedImage => {
           setInitialImage('');
-          form.setFieldValue(field.name, croppedImage.src);
+          form.setFieldValue(name, croppedImage.src);
+          form.setFieldTouched(name, true);
         }}
       />
     </>

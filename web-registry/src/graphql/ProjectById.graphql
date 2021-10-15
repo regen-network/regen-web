@@ -1,6 +1,10 @@
 query ProjectById($id: UUID!) {
   projectById(id: $id) {
     metadata
+    developerId
+    originatorId
+    landOwnerId
+    stewardId
     addressId
     partyByDeveloperId {
       ...partyFields

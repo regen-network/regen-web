@@ -14,61 +14,73 @@ import Description from 'web-components/lib/components/description';
 import OrganizationIcon from 'web-components/lib/components/icons/OrganizationIcon';
 import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
 import ProjectTopCard from 'web-components/lib/components/cards/ProjectTopCard';
+import { isIndividual } from 'web-components/lib/components/inputs/RoleField';
+import { OrganizationFormValues } from 'web-components/lib/components/modal/OrganizationModal';
+import { IndividualFormValues } from 'web-components/lib/components/modal/IndividualModal';
+import { requiredMessage } from 'web-components/lib/components/inputs/validation';
+
+import { validate, getProjectPageBaseData } from '../../lib/rdf';
+import { useShaclGraphByUriQuery } from '../../generated/graphql';
+import { urlType } from './MediaForm';
 
 interface EntityDisplayFormProps {
   submit: (values: EntityDisplayValues) => Promise<void>;
   initialValues?: EntityDisplayValues;
 }
 
-interface IndividualDisplayValues extends IndividualShape, IndividualDisplayShape {
-  [key: string]: string | boolean | undefined;
-}
+interface IndividualDisplayValues extends IndividualFormValues, IndividualDisplayShape {}
 
-interface OrganizationDisplayValues extends OrganizationShape, OrganizationDisplayShape {}
+interface OrganizationDisplayValues extends OrganizationFormValues, OrganizationDisplayShape {}
+
+export type DisplayValues = OrganizationDisplayValues | IndividualDisplayValues;
 
 export interface EntityDisplayValues {
-  'http://regen.network/landOwner'?: OrganizationDisplayValues | IndividualDisplayValues;
-  'http://regen.network/landSteward'?: OrganizationDisplayValues | IndividualDisplayValues;
-  'http://regen.network/projectDeveloper'?: OrganizationDisplayValues | IndividualDisplayValues;
-  'http://regen.network/projectOriginator'?: OrganizationDisplayValues | IndividualDisplayValues;
+  'http://regen.network/landOwner'?: DisplayValues;
+  'http://regen.network/landSteward'?: DisplayValues;
+  'http://regen.network/projectDeveloper'?: DisplayValues;
+  'http://regen.network/projectOriginator'?: DisplayValues;
 }
 
-type EntityFieldName =
-  | 'http://regen.network/landOwner'
-  | 'http://regen.network/landSteward'
-  | 'http://regen.network/projectDeveloper'
-  | 'http://regen.network/projectOriginator';
-
-export type ProjectEntityType = 'http://regen.network/Individual' | 'http://regen.network/Organization';
-
-interface OrganizationShape {
-  '@type': ProjectEntityType;
-  'http://schema.org/legalName': string;
-}
-
-interface IndividualShape {
-  '@type': ProjectEntityType;
-  'http://schema.org/name': string;
-}
+export type EntityFieldName = keyof EntityDisplayValues;
 
 interface OrganizationDisplayShape {
   'http://regen.network/showOnProjectPage': boolean;
   'http://schema.org/name'?: string;
-  'http://schema.org/logo'?: string;
+  'http://schema.org/logo'?: urlType;
   'http://schema.org/description'?: string;
 }
 
 interface IndividualDisplayShape {
   'http://regen.network/showOnProjectPage': boolean;
-  'http://schema.org/image'?: string;
+  'http://schema.org/image'?: urlType;
   'http://schema.org/description'?: string;
 }
 
 interface FormletProps {
   role: EntityFieldName;
-  handleChange: any;
-  values: EntityDisplayValues;
+  setFieldValue: (field: string, value: any, shouldValidate?: boolean | undefined) => void;
+  setFieldTouched: (
+    field: string,
+    isTouched?: boolean | undefined,
+    shouldValidate?: boolean | undefined,
+  ) => void;
 }
+
+interface OrganizationFormletProps extends FormletProps {
+  entity: OrganizationDisplayValues;
+}
+
+interface IndividualFormletProps extends FormletProps {
+  entity: IndividualDisplayValues;
+}
+
+type Errors = {
+  [key in EntityFieldName | 'generic']?:
+    | {
+        [key in keyof DisplayValues]?: string;
+      }
+    | string;
+};
 
 const useStyles = makeStyles(theme => ({
   title: {
@@ -148,130 +160,257 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+function getEntityTypeString(shaclRole: EntityFieldName): string {
+  const friendlyRoles: { [key in EntityFieldName | 'default']: string } = {
+    'http://regen.network/landOwner': '(land owner)',
+    'http://regen.network/landSteward': '(land steward)',
+    'http://regen.network/projectDeveloper': '(project developer)',
+    'http://regen.network/projectOriginator': '(project originator)',
+    default: '',
+  };
+  return friendlyRoles[shaclRole] || friendlyRoles.default;
+}
+
+async function setType(
+  role: string,
+  type: string,
+  value: boolean,
+  setFieldValue: (field: string, value: any, shouldValidate?: boolean | undefined) => void,
+  setFieldTouched: (
+    field: string,
+    isTouched?: boolean | undefined,
+    shouldValidate?: boolean | undefined,
+  ) => void,
+): Promise<void> {
+  const fieldName: string = `['${role}'].['@type']`;
+  await setFieldValue(
+    fieldName,
+    value
+      ? [`http://regen.network/${type}`, `http://regen.network/${type}Display`]
+      : `http://regen.network/${type}`,
+  );
+  setFieldTouched(fieldName, true);
+}
+
+const OrganizationFormlet: React.FC<OrganizationFormletProps> = ({
+  role,
+  entity,
+  setFieldValue,
+  setFieldTouched,
+}) => {
+  const styles = useStyles();
+  const theme = useTheme();
+  const triggerOnChange = async (value: boolean): Promise<void> => {
+    setType(role, 'Organization', value, setFieldValue, setFieldTouched);
+  };
+  return (
+    <Field
+      className={styles.field}
+      label={`${entity?.['http://schema.org/legalName']} ${getEntityTypeString(role)}`}
+      type="checkbox"
+      component={Toggle}
+      name={`['${role}'].['http://regen.network/showOnProjectPage']`}
+      checked={!!entity?.['http://regen.network/showOnProjectPage']}
+      triggerOnChange={triggerOnChange}
+      activeContent={
+        <div className={styles.activeContent}>
+          <Field
+            className={styles.field}
+            component={ControlledTextField}
+            name={`['${role}'].['http://schema.org/name']`}
+            label="Organization display name"
+            optional
+            placeholder="i.e. Cherrybrook Farms"
+          />
+          <Field
+            className={styles.field}
+            component={ImageField}
+            label="Organization logo"
+            name={`['${role}'].['http://schema.org/logo'].@value`}
+            fallbackAvatar={
+              <OrganizationIcon className={styles.organizationIcon} color={theme.palette.info.main} />
+            }
+          />
+          <Field
+            charLimit={160}
+            component={ControlledTextField}
+            label="Short organization description"
+            name={`['${role}'].['http://schema.org/description']`}
+            rows={4}
+            multiline
+          />
+        </div>
+      }
+    />
+  );
+};
+
+const IndividualFormlet: React.FC<IndividualFormletProps> = ({
+  entity,
+  role,
+  setFieldValue,
+  setFieldTouched,
+}) => {
+  const styles = useStyles();
+  const triggerOnChange = async (value: boolean): Promise<void> => {
+    setType(role, 'Individual', value, setFieldValue, setFieldTouched);
+  };
+  return (
+    <Field
+      className={styles.field}
+      classes={{ description: styles.toggleDescription }}
+      label={`${entity['http://schema.org/name']} ${getEntityTypeString(role)}`}
+      description="recommended to increase salability"
+      type="checkbox"
+      component={Toggle}
+      name={`['${role}'].['http://regen.network/showOnProjectPage']`}
+      checked={!!entity['http://regen.network/showOnProjectPage']}
+      triggerOnChange={triggerOnChange}
+      activeContent={
+        <div className={styles.activeContent}>
+          <Field
+            className={styles.field}
+            component={ImageField}
+            label="Bio photo"
+            name={`['${role}'].['http://schema.org/image'].@value`}
+          />
+          <Field
+            charLimit={160}
+            component={ControlledTextField}
+            label="Short personal description"
+            description="Describe any relevant background and experience."
+            name={`['${role}'].['http://schema.org/description']`}
+            rows={4}
+            multiline
+          />
+        </div>
+      }
+    />
+  );
+};
+
+function getToggle(
+  fieldName: EntityFieldName,
+  values: EntityDisplayValues,
+  setFieldValue: (field: string, value: any, shouldValidate?: boolean | undefined) => void,
+  setFieldTouched: (
+    field: string,
+    isTouched?: boolean | undefined,
+    shouldValidate?: boolean | undefined,
+  ) => void,
+): JSX.Element | null {
+  const entity = values[fieldName];
+  if (entity) {
+    if (isIndividual(entity)) {
+      return (
+        <IndividualFormlet
+          role={fieldName}
+          entity={entity}
+          setFieldValue={setFieldValue}
+          setFieldTouched={setFieldTouched}
+        />
+      );
+    } else {
+      return (
+        <OrganizationFormlet
+          role={fieldName}
+          entity={entity}
+          setFieldValue={setFieldValue}
+          setFieldTouched={setFieldTouched}
+        />
+      );
+    }
+  }
+  return null;
+}
+
+function getInitialValues(values?: DisplayValues): DisplayValues | undefined {
+  if (!values) {
+    return undefined;
+  }
+  const initialURL: urlType = { '@type': 'http://schema.org/URL' };
+  if (isIndividual(values)) {
+    return {
+      ...{ 'http://schema.org/image': initialURL },
+      ...values,
+    };
+  } else {
+    return {
+      ...{ 'http://schema.org/logo': initialURL },
+      ...values,
+    };
+  }
+}
+
 const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialValues }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const styles = useStyles();
-  const theme = useTheme();
-
-  const getToggle = (
-    fieldName: EntityFieldName,
-    handleChange: any,
-    values: EntityDisplayValues,
-  ): JSX.Element | null => {
-    const entity = values[fieldName];
-    if (entity && values) {
-      if (entity['@type'] === 'http://regen.network/Individual') {
-        return <IndividualFormlet role={fieldName} handleChange={handleChange} values={values} />;
-      } else if (entity['@type'] === 'http://regen.network/Organization') {
-        return <OrganizationFormlet role={fieldName} handleChange={handleChange} values={values} />;
-      }
-    }
-    return null;
-  };
-
-  const OrganizationFormlet: React.FC<FormletProps> = ({ role, handleChange, values }) => {
-    return (
-      <Field
-        className={styles.field}
-        label={`${values[role]?.['http://schema.org/legalName']} ${getEntityTypeString(role)}`}
-        type="checkbox"
-        component={Toggle}
-        onChange={handleChange}
-        name={`['${role}'].['http://regen.network/showOnProjectPage']`}
-        checked={!!values[role]?.['http://regen.network/showOnProjectPage']}
-        activeContent={
-          <div className={styles.activeContent}>
-            <Field
-              className={styles.field}
-              component={ControlledTextField}
-              name={`['${role}'].['http://schema.org/name']`}
-              label="Organization display name"
-              optional
-              placeholder="i.e. Cherrybrook Farms"
-            />
-            <Field
-              className={styles.field}
-              component={ImageField}
-              label="Organization logo"
-              name={`['${role}'].['http://schema.org/logo']`}
-              fallbackAvatar={
-                <OrganizationIcon className={styles.organizationIcon} color={theme.palette.info.main} />
-              }
-            />
-            <Field
-              charLimit={160}
-              component={ControlledTextField}
-              label="Short organization description"
-              name={`['${role}'].['http://schema.org/description']`}
-              rows={4}
-              multiline
-            />
-          </div>
-        }
-      />
-    );
-  };
-
-  const IndividualFormlet: React.FC<FormletProps> = ({ handleChange, values, role }) => {
-    return (
-      <Field
-        className={styles.field}
-        classes={{ description: styles.toggleDescription }}
-        label={`${values[role]?.['http://schema.org/name']} ${getEntityTypeString(role)}`}
-        description="recommended to increase salability"
-        type="checkbox"
-        component={Toggle}
-        onChange={handleChange}
-        name={`['${role}'].['http://regen.network/showOnProjectPage']`}
-        checked={!!values[role]?.['http://regen.network/showOnProjectPage']}
-        activeContent={
-          <div className={styles.activeContent}>
-            <Field
-              className={styles.field}
-              component={ImageField}
-              label="Bio photo"
-              name={`['${role}'].['http://schema.org/photo']`}
-            />
-            <Field
-              charLimit={160}
-              component={ControlledTextField}
-              label="Short personal description"
-              description="Describe any relevant background and experience."
-              name={`['${role}'].['http://schema.org/description']`}
-              rows={4}
-              multiline
-            />
-          </div>
-        }
-      />
-    );
-  };
-
-  const getEntityTypeString = (shaclRole: EntityFieldName): string => {
-    const friendlyRoles: any = {
-      'http://regen.network/landOwner': '(land owner)',
-      'http://regen.network/landSteward': '(land steward)',
-      'http://regen.network/projectDeveloper': '(project developer)',
-      'http://regen.network/projectOriginator': '(project originator)',
-      default: '',
-    };
-    return friendlyRoles[shaclRole] || friendlyRoles.default;
-  };
+  const { data: graphData } = useShaclGraphByUriQuery({
+    variables: {
+      uri: 'http://regen.network/ProjectPageShape',
+    },
+  });
 
   return (
     <>
       <Formik
         enableReinitialize
         validateOnMount
-        initialValues={
-          initialValues || {
-            'http://regen.network/landOwner': initialValues?.['http://regen.network/landOwner'],
-            'http://regen.network/landSteward': initialValues?.['http://regen.network/landSteward'],
-            'http://regen.network/projectDeveloper': initialValues?.['http://regen.network/projectDeveloper'],
-            'http://regen.network/projectOriginator':
-              initialValues?.['http://regen.network/projectOriginator'],
+        initialValues={{
+          'http://regen.network/landOwner': getInitialValues(
+            initialValues?.['http://regen.network/landOwner'],
+          ),
+          'http://regen.network/landSteward': getInitialValues(
+            initialValues?.['http://regen.network/landSteward'],
+          ),
+          'http://regen.network/projectDeveloper': getInitialValues(
+            initialValues?.['http://regen.network/projectDeveloper'],
+          ),
+          'http://regen.network/projectOriginator': getInitialValues(
+            initialValues?.['http://regen.network/projectOriginator'],
+          ),
+        }}
+        validate={async (values: EntityDisplayValues): Promise<Errors> => {
+          const errors: Errors = {};
+          let validateProject: boolean = true;
+          if (graphData?.shaclGraphByUri?.graph) {
+            // Validate role specific data so we can display field specific errors
+            // for roles shown on project page
+            for (const role in values) {
+              const value: DisplayValues = values[role as EntityFieldName] as DisplayValues;
+              if (value?.['http://regen.network/showOnProjectPage']) {
+                validateProject = false;
+                const report = await validate(
+                  graphData.shaclGraphByUri.graph,
+                  value,
+                  'http://regen.network/ProjectPageEntityDisplayGroup',
+                );
+                for (const result of report.results) {
+                  const path: any = result.path.value;
+                  const error =
+                    path === 'http://schema.org/image' || path === 'http://schema.org/logo'
+                      ? { '@value': requiredMessage }
+                      : requiredMessage;
+                  errors[role as EntityFieldName] = { [path]: error };
+                }
+              }
+            }
+            if (validateProject) {
+              const projectPageData = { ...getProjectPageBaseData(), ...values };
+              const report = await validate(
+                graphData.shaclGraphByUri.graph,
+                projectPageData,
+                'http://regen.network/ProjectPageEntityDisplayGroup',
+              );
+              if (!report.conforms) {
+                // TODO: display the error banner in case of generic error
+                // https://github.com/regen-network/regen-registry/issues/554
+                errors['generic'] = 'You must show at least one of the following roles on the project page';
+              }
+            }
           }
-        }
+          return errors;
+        }}
         onSubmit={async (values, { setSubmitting }) => {
           setSubmitting(true);
           try {
@@ -282,7 +421,7 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialVa
           }
         }}
       >
-        {({ submitForm, isValid, isSubmitting, handleChange, values }) => {
+        {({ submitForm, isValid, isSubmitting, values, setFieldValue, setFieldTouched }) => {
           return (
             <Form translate="yes">
               <OnBoardingCard>
@@ -296,13 +435,13 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialVa
                 </Description>
 
                 {values['http://regen.network/landOwner'] &&
-                  getToggle('http://regen.network/landOwner', handleChange, values)}
+                  getToggle('http://regen.network/landOwner', values, setFieldValue, setFieldTouched)}
                 {values['http://regen.network/landSteward'] &&
-                  getToggle('http://regen.network/landSteward', handleChange, values)}
+                  getToggle('http://regen.network/landSteward', values, setFieldValue, setFieldTouched)}
                 {values['http://regen.network/projectDeveloper'] &&
-                  getToggle('http://regen.network/projectDeveloper', handleChange, values)}
+                  getToggle('http://regen.network/projectDeveloper', values, setFieldValue, setFieldTouched)}
                 {values['http://regen.network/projectOriginator'] &&
-                  getToggle('http://regen.network/projectOriginator', handleChange, values)}
+                  getToggle('http://regen.network/projectOriginator', values, setFieldValue, setFieldTouched)}
               </OnBoardingCard>
 
               <OnboardingFooter

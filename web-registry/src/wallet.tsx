@@ -1,5 +1,7 @@
 import React, { useState, createContext } from 'react';
 import { SigningCosmosClient } from '@cosmjs/launchpad';
+// import { SigningStargateClient } from '@cosmjs/stargate';
+import { Window as KeplrWindow } from '@keplr-wallet/types';
 
 interface Keplr {
   enable: (chainId: string) => Promise<void>;
@@ -22,10 +24,8 @@ interface KeplrWallet {
 }
 
 declare global {
-  interface Window {
-    keplr?: Keplr;
-    getOfflineSigner?: (chainId: string) => any; //todo
-  }
+  // eslint-disable-next-line @typescript-eslint/no-empty-interface
+  interface Window extends KeplrWindow {}
 }
 
 type ContextType = {
@@ -73,7 +73,7 @@ export const WalletProvider: React.FC = ({ children }) => {
   };
 
   const suggestChain = async (): Promise<void> => {
-    if (window.keplr) {
+    if (window.keplr && chainId && chainName && chainRpc && chainRestEndpoint) {
       return window.keplr
         .experimentalSuggestChain({
           // Chain-id of the Regen chain.
@@ -180,29 +180,32 @@ export const WalletProvider: React.FC = ({ children }) => {
       amount = Math.floor(amount);
 
       await window?.keplr?.enable(chainId);
-      const offlineSigner = window.getOfflineSigner && window.getOfflineSigner(chainId);
+      const offlineSigner = window.getOfflineSigner && (await window.getOfflineSigner(chainId));
 
-      const accounts = await offlineSigner.getAccounts();
+      if (!!offlineSigner) {
+        const accounts = await offlineSigner.getAccounts();
 
-      // Initialize the gaia api with the offline signer that is injected by Keplr extension.
-      const cosmJS = new SigningCosmosClient(chainRestEndpoint, accounts[0].address, offlineSigner);
+        console.log('accounts', accounts);
+        // Initialize the gaia api with the offline signer that is injected by Keplr extension.
+        const cosmJS = new SigningCosmosClient(chainRestEndpoint, accounts[0].address, offlineSigner);
 
-      const result: any = await cosmJS.sendTokens(recipient, [
-        {
-          denom: 'uregen',
-          amount: amount.toString(),
-        },
-      ]);
+        const result = await cosmJS.sendTokens(recipient, [
+          {
+            denom: 'uregen',
+            amount: amount.toString(),
+          },
+        ]);
 
-      console.log('sendTokens result: ', result);
+        console.log('sendTokens result: ', result);
 
-      if (result && result?.code !== undefined && result.code !== 0) {
-        alert('Failed to send tx: ' + result?.log || result.rawLog);
-      } else {
-        alert('Succeed to send tx');
+        // if (result && result?.code !== undefined && result.code !== 0) {
+        //   alert('Failed to send tx: ' + result?.log || result.rawLog);
+        // } else {
+        //   alert('Succeed to send tx');
+        // }
+
+        return Promise.resolve(result.transactionHash);
       }
-
-      return Promise.resolve(result.transactionHash);
     }
 
     return Promise.reject('no chain id or rest endpoint');

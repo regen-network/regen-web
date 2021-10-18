@@ -13,6 +13,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontFamily: theme.typography.h1.fontFamily,
     fontWeight: 800,
     textTransform: 'uppercase',
+    letterSpacing: '1px',
   },
 }));
 function Label({ children, className }: LabelProps): JSX.Element {

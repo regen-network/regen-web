@@ -1,6 +1,5 @@
 import React, { useState, createContext } from 'react';
-// import { SigningCosmosClient } from '@cosmjs/launchpad';
-import { SigningStargateClient } from '@cosmjs/stargate';
+import { assertIsBroadcastTxSuccess, SigningStargateClient } from '@cosmjs/stargate';
 import { Window as KeplrWindow } from '@keplr-wallet/types';
 
 interface Keplr {
@@ -31,7 +30,7 @@ declare global {
 type ContextType = {
   wallet?: any;
   suggestChain?: () => Promise<void>;
-  sendTokens?: (amount: number, recipient: string) => Promise<string>;
+  sendTokens?: (amount: number, recipient: string) => Promise<void>;
 };
 
 const WalletContext = createContext<ContextType>({});
@@ -168,50 +167,25 @@ export const WalletProvider: React.FC = ({ children }) => {
     }
   };
 
-  const defaultSigningClientOptions = {
-    broadcastPollIntervalMs: 300,
-    broadcastTimeoutMs: 8_000,
-  };
-
-  const sendTokens = async (amount: number, recipient: string): Promise<string> => {
-    // amount = parseFloat(amount);
-    // if (isNaN(amount)) {
-    //   alert('Invalid amount');
-    //   return false;
-    // }
-
+  const sendTokens = async (amount: number, recipient: string): Promise<void> => {
     if (chainId && chainRpc) {
       amount *= 1000000;
       amount = Math.floor(amount);
 
       await window?.keplr?.enable(chainId);
-      const offlineSigner = window.getOfflineSigner && (await window.getOfflineSigner(chainId));
+      const offlineSigner = !!window.getOfflineSigner && (await window.getOfflineSigner(chainId));
 
-      if (!!offlineSigner) {
+      if (offlineSigner) {
         const accounts = await offlineSigner.getAccounts();
-        const client = await SigningStargateClient.connectWithSigner(
-          chainRpc,
-          offlineSigner,
-          defaultSigningClientOptions,
-        );
-        // const msg = MsgDelegate.fromPartial({
-        //   delegatorAddress: faucet.address0,
-        //   validatorAddress: validator.validatorAddress,
-        //   amount: coin(1234, "ustake"),
-        // });
-        // const msgAny: MsgDelegateEncodeObject = {
-        //   typeUrl: "/cosmos.staking.v1beta1.MsgDelegate",
-        //   value: msg,
-        // };
-        console.log('client', client);
+        const client = await SigningStargateClient.connectWithSigner(chainRpc, offlineSigner);
         const fee = {
           amount: [
             {
               denom: 'uregen',
-              amount: '1000',
+              amount: '5000',
             },
           ],
-          gas: '150000', // 150k
+          gas: '200000', // 200k
         };
 
         const coinAmount = [
@@ -220,36 +194,14 @@ export const WalletProvider: React.FC = ({ children }) => {
             amount: amount.toString(),
           },
         ];
-        const balance = await client.getBalance(accounts[0].address, 'uregen');
+        // const balance = await client.getBalance(accounts[0].address, 'uregen'); <-- this works
 
-        if (parseFloat(balance.amount) > amount) {
-          // const sign = await client.sign(accounts[0].address, recipient, coinAmount, fee);
-          const result = await client.sendTokens(accounts[0].address, recipient, coinAmount, fee, 'test');
-          // console.log('accounts', accounts);
-          // // Initialize the gaia api with the offline signer that is injected by Keplr extension.
-          // const cosmJS = new SigningCosmosClient(chainRestEndpoint, accounts[0].address, offlineSigner);
+        const result = await client.sendTokens(accounts[0].address, recipient, coinAmount, fee, 'test'); // <-- this throws pub
+        console.log('result', result);
 
-          // const result = await cosmJS.sendTokens(recipient, [
-          //   {
-          //     denom: 'uregen',
-          //     amount: amount.toString(),
-          //   },
-          // ]);
-
-          console.log('sendTokens result: ', result);
-
-          // if (result && result?.code !== undefined && result.code !== 0) {
-          //   alert('Failed to send tx: ' + result?.log || result.rawLog);
-          // } else {
-          //   alert('Succeed to send tx');
-          // }
-
-          return Promise.resolve(result.transactionHash);
-        }
+        assertIsBroadcastTxSuccess(result);
       }
     }
-
-    return Promise.reject('no chain id or rest endpoint');
   };
 
   return (

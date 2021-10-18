@@ -253,8 +253,14 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
     const recipient = 'regen18hj7m3skrsrr8lfvwqh66r7zruzdvp6ylwxrx4'; //TODO
     const amount = values.creditCount;
     if (walletContext.sendTokens) {
-      const result = await walletContext.sendTokens(amount, recipient);
-      console.log('submit result ', result);
+      await walletContext.sendTokens(amount, recipient);
+      // console.log('submit result ', result);
+    }
+  };
+
+  const fknSend = (): void => {
+    if (walletContext.sendTokens) {
+      walletContext.sendTokens(3, 'regen18hj7m3skrsrr8lfvwqh66r7zruzdvp6ylwxrx4');
     }
   };
 
@@ -425,6 +431,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                       optional
                     />
                   </Collapse>
+                  <button onClick={() => fknSend()}>sendTokens</button>
                 </Form>
                 <Submit
                   isSubmitting={isSubmitting}

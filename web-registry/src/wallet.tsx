@@ -1,6 +1,6 @@
 import React, { useState, createContext } from 'react';
-import { SigningCosmosClient } from '@cosmjs/launchpad';
-// import { SigningStargateClient } from '@cosmjs/stargate';
+// import { SigningCosmosClient } from '@cosmjs/launchpad';
+import { SigningStargateClient } from '@cosmjs/stargate';
 import { Window as KeplrWindow } from '@keplr-wallet/types';
 
 interface Keplr {
@@ -168,6 +168,11 @@ export const WalletProvider: React.FC = ({ children }) => {
     }
   };
 
+  const defaultSigningClientOptions = {
+    broadcastPollIntervalMs: 300,
+    broadcastTimeoutMs: 8_000,
+  };
+
   const sendTokens = async (amount: number, recipient: string): Promise<string> => {
     // amount = parseFloat(amount);
     // if (isNaN(amount)) {
@@ -175,7 +180,7 @@ export const WalletProvider: React.FC = ({ children }) => {
     //   return false;
     // }
 
-    if (chainId && chainRestEndpoint) {
+    if (chainId && chainRpc) {
       amount *= 1000000;
       amount = Math.floor(amount);
 
@@ -184,27 +189,63 @@ export const WalletProvider: React.FC = ({ children }) => {
 
       if (!!offlineSigner) {
         const accounts = await offlineSigner.getAccounts();
+        const client = await SigningStargateClient.connectWithSigner(
+          chainRpc,
+          offlineSigner,
+          defaultSigningClientOptions,
+        );
+        // const msg = MsgDelegate.fromPartial({
+        //   delegatorAddress: faucet.address0,
+        //   validatorAddress: validator.validatorAddress,
+        //   amount: coin(1234, "ustake"),
+        // });
+        // const msgAny: MsgDelegateEncodeObject = {
+        //   typeUrl: "/cosmos.staking.v1beta1.MsgDelegate",
+        //   value: msg,
+        // };
+        console.log('client', client);
+        const fee = {
+          amount: [
+            {
+              denom: 'uregen',
+              amount: '1000',
+            },
+          ],
+          gas: '150000', // 150k
+        };
 
-        console.log('accounts', accounts);
-        // Initialize the gaia api with the offline signer that is injected by Keplr extension.
-        const cosmJS = new SigningCosmosClient(chainRestEndpoint, accounts[0].address, offlineSigner);
-
-        const result = await cosmJS.sendTokens(recipient, [
+        const coinAmount = [
           {
             denom: 'uregen',
             amount: amount.toString(),
           },
-        ]);
+        ];
+        const balance = await client.getBalance(accounts[0].address, 'uregen');
 
-        console.log('sendTokens result: ', result);
+        if (parseFloat(balance.amount) > amount) {
+          // const sign = await client.sign(accounts[0].address, recipient, coinAmount, fee);
+          const result = await client.sendTokens(accounts[0].address, recipient, coinAmount, fee, 'test');
+          // console.log('accounts', accounts);
+          // // Initialize the gaia api with the offline signer that is injected by Keplr extension.
+          // const cosmJS = new SigningCosmosClient(chainRestEndpoint, accounts[0].address, offlineSigner);
 
-        // if (result && result?.code !== undefined && result.code !== 0) {
-        //   alert('Failed to send tx: ' + result?.log || result.rawLog);
-        // } else {
-        //   alert('Succeed to send tx');
-        // }
+          // const result = await cosmJS.sendTokens(recipient, [
+          //   {
+          //     denom: 'uregen',
+          //     amount: amount.toString(),
+          //   },
+          // ]);
 
-        return Promise.resolve(result.transactionHash);
+          console.log('sendTokens result: ', result);
+
+          // if (result && result?.code !== undefined && result.code !== 0) {
+          //   alert('Failed to send tx: ' + result?.log || result.rawLog);
+          // } else {
+          //   alert('Succeed to send tx');
+          // }
+
+          return Promise.resolve(result.transactionHash);
+        }
       }
     }
 

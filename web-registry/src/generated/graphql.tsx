@@ -6235,6 +6235,7 @@ export type Mutation = {
   reallyCreateOrganizationIfNeeded?: Maybe<ReallyCreateOrganizationIfNeededPayload>;
   reallyCreateUser?: Maybe<ReallyCreateUserPayload>;
   reallyCreateUserIfNeeded?: Maybe<ReallyCreateUserIfNeededPayload>;
+  retireCredits?: Maybe<RetireCreditsPayload>;
   sendTransferCreditsConfirmation?: Maybe<SendTransferCreditsConfirmationPayload>;
   test?: Maybe<TestPayload>;
   testFn?: Maybe<TestFnPayload>;
@@ -7151,6 +7152,12 @@ export type MutationReallyCreateUserArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationReallyCreateUserIfNeededArgs = {
   input: ReallyCreateUserIfNeededInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationRetireCreditsArgs = {
+  input: RetireCreditsInput;
 };
 
 
@@ -12646,6 +12653,47 @@ export type RegistryUsersByProjectRegistryIdAndCreatorIdManyToManyEdgeProjectsBy
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+};
+
+/** All input for the `retireCredits` mutation. */
+export type RetireCreditsInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  vintageId: Scalars['UUID'];
+  buyerWalletId: Scalars['UUID'];
+  addressId: Scalars['UUID'];
+  units: Scalars['BigFloat'];
+  metadata?: Maybe<Scalars['JSON']>;
+};
+
+/** The output of our `retireCredits` mutation. */
+export type RetireCreditsPayload = {
+  __typename?: 'RetireCreditsPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  retirement?: Maybe<Retirement>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** Reads a single `Wallet` that is related to this `Retirement`. */
+  walletByWalletId?: Maybe<Wallet>;
+  /** Reads a single `Address` that is related to this `Retirement`. */
+  addressByAddressId?: Maybe<Address>;
+  /** Reads a single `CreditVintage` that is related to this `Retirement`. */
+  creditVintageByCreditVintageId?: Maybe<CreditVintage>;
+  /** An edge for our `Retirement`. May be used by Relay 1. */
+  retirementEdge?: Maybe<RetirementsEdge>;
+};
+
+
+/** The output of our `retireCredits` mutation. */
+export type RetireCreditsPayloadRetirementEdgeArgs = {
+  orderBy?: Maybe<Array<RetirementsOrderBy>>;
 };
 
 export type Retirement = Node & {

@@ -431,7 +431,9 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                       optional
                     />
                   </Collapse>
-                  <button onClick={() => fknSend()}>sendTokens</button>
+                  <button onClick={() => fknSend()} type="button">
+                    sendTokens
+                  </button>
                 </Form>
                 <Submit
                   isSubmitting={isSubmitting}

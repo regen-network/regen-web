@@ -195,10 +195,7 @@ export const WalletProvider: React.FC = ({ children }) => {
           },
         ];
         // const balance = await client.getBalance(accounts[0].address, 'uregen'); <-- this works
-
-        const result = await client.sendTokens(accounts[0].address, recipient, coinAmount, fee, 'test'); // <-- this throws pub
-        console.log('result', result);
-
+        const result = await client.sendTokens(accounts[0].address, recipient, coinAmount, fee, 'test'); // <-- this throws Pubkey type_url undefined not recognized
         assertIsBroadcastTxSuccess(result);
       }
     }

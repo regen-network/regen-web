@@ -37,6 +37,7 @@ import {
   LandManagementActions,
   BuyCreditsModal,
 } from '../organisms';
+import { ProcessingModal } from '../molecules';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -222,6 +223,8 @@ const PROJECT_BY_HANDLE = loader('../../graphql/ProjectByHandle.graphql');
 
 function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JSX.Element {
   const { api }: ContextType = useLedger();
+  const [pendingTx, setPendingTx] = useState<string | undefined>();
+  const [purchaseConfirmation, setPurchaseConfirmation] = useState();
   const imageStorageBaseUrl = process.env.REACT_APP_IMAGE_STORAGE_BASE_URL;
   const apiServerUrl = process.env.REACT_APP_API_URI;
   let txClient: ServiceClientImpl | undefined;
@@ -280,9 +283,13 @@ function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JS
     setOpen(false);
   };
 
+  const handlePendingTx = (pendingTx: string): void => {
+    setPendingTx(pendingTx);
+  };
+
   const [issuanceModalData, setIssuanceModalData] = useState<IssuanceModalData | null>(null);
   const [issuanceModalOpen, setIssuanceModalOpen] = useState(false);
-  const [isBuyCreditsModalOpen, setBuyCreditsModalOpen] = useState(false);
+  const [isBuyCreditsModalOpen, setIsBuyCreditsModalOpen] = useState(false);
 
   const viewOnLedger = (creditVintage: any): void => {
     if (creditVintage?.txHash) {
@@ -306,6 +313,14 @@ function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JS
     author: `Regen Network`,
     siteUrl: `${window.location.origin}/registry`,
   };
+
+  // TODO: ### for UI testing. Delete  below before merge! #######
+  project.creditPrice = { unitPrice: 15.12, currency: 'USD' };
+  project.credits = {
+    issued: 10000,
+    purchased: 7500,
+  };
+  // ###### DELETE mock credit issuance data above ####
 
   return (
     <div className={styles.root}>
@@ -427,21 +442,9 @@ function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JS
         </div>
       )}
 
-      {chainId && project.creditPrice && (
-        <BuyFooter onClick={() => setBuyCreditsModalOpen(true)} creditPrice={project.creditPrice} />
-      )}
-      {project.creditPrice && project.stripePrice && (
-        <Modal open={open} onClose={handleClose}>
-          <CreditsPurchaseForm
-            onClose={handleClose}
-            creditPrice={project.creditPrice}
-            stripePrice={project.stripePrice}
-          />
-          {/*<iframe title="airtable-presale-form" src={project.presaleUrl} />*/}
-        </Modal>
-      )}
-
-      {!project.creditPrice && (
+      {chainId && project.creditPrice ? (
+        <BuyFooter onClick={() => setIsBuyCreditsModalOpen(true)} creditPrice={project.creditPrice} />
+      ) : (
         <FixedFooter justify="flex-end">
           <>
             <ContainedButton onClick={handleOpen} startIcon={<EmailIcon />}>
@@ -454,6 +457,17 @@ function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JS
           */}
           </>
         </FixedFooter>
+      )}
+
+      {project.creditPrice && project.stripePrice && (
+        <Modal open={open} onClose={handleClose}>
+          <CreditsPurchaseForm
+            onClose={handleClose}
+            creditPrice={project.creditPrice}
+            stripePrice={project.stripePrice}
+          />
+          {/*<iframe title="airtable-presale-form" src={project.presaleUrl} />*/}
+        </Modal>
       )}
       <Modal open={open} onClose={handleClose}>
         <MoreInfoForm
@@ -474,13 +488,18 @@ function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JS
         />
       )}
       {chainId && project.creditPrice && (
-        <BuyCreditsModal
-          open={isBuyCreditsModalOpen}
-          onClose={() => setBuyCreditsModalOpen(false)}
-          project={project}
-          imageStorageBaseUrl={imageStorageBaseUrl}
-          apiServerUrl={apiServerUrl}
-        />
+        <>
+          <BuyCreditsModal
+            open={isBuyCreditsModalOpen}
+            onClose={() => setIsBuyCreditsModalOpen(false)}
+            onTxQueued={pendingTx => handlePendingTx(pendingTx)}
+            project={project}
+            imageStorageBaseUrl={imageStorageBaseUrl}
+            apiServerUrl={apiServerUrl}
+          />
+          <ProcessingModal open={!!pendingTx} pendingTx={pendingTx} onClose={() => setPendingTx(undefined)} />
+          {/* <ConfirmationModal open={!!purchaseConfirmation} data={purchaseConfirmation} /> */}
+        </>
       )}
       {submitted && <Banner text="Thanks for submitting your information!" />}
     </div>

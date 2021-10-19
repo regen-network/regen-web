@@ -193,7 +193,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 interface BuyCreditsModalProps extends RegenModalProps {
-  onClose: () => void;
+  onTxQueued: (pendingTx: string) => void;
   initialValues?: BuyCreditsValues;
   project: Project;
   apiServerUrl?: string;
@@ -212,6 +212,7 @@ export interface BuyCreditsValues {
 const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
   open,
   onClose,
+  onTxQueued,
   initialValues,
   project,
   apiServerUrl,
@@ -245,7 +246,10 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
   });
 
   const submit = async (values: BuyCreditsValues): Promise<void> => {
-    // console.log('submit ', values); TODO: purchase flow
+    setTimeout(() => {
+      onTxQueued('abd123');
+      onClose();
+    }, 1000);
   };
 
   return (

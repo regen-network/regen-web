@@ -54,6 +54,7 @@ import SatelliteIcon from 'web-components/lib/components/icons/SatelliteIcon';
 import SoilSampleIcon from 'web-components/lib/components/icons/SoilSampleIcon';
 import TrashIcon from 'web-components/lib/components/icons/TrashIcon';
 import { WalletIcon } from 'web-components/lib/components/icons/WalletIcon';
+import { RegenTokenIcon } from 'web-components/lib/components/icons/RegenTokenIcon';
 
 import { withKnobs, text } from '@storybook/addon-knobs';
 
@@ -174,3 +175,5 @@ export const soilSampleIcon = (): JSX.Element => <SoilSampleIcon />;
 export const trashIcon = (): JSX.Element => <TrashIcon />;
 
 export const walletIcon = (): JSX.Element => <WalletIcon />;
+
+export const regenTokenIcon = (): JSX.Element => <RegenTokenIcon />;

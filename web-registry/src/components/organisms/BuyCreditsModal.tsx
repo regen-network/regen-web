@@ -9,7 +9,6 @@ import { Formik, Form, Field } from 'formik';
 import { RadioGroup } from 'formik-material-ui';
 import cx from 'clsx';
 import ReactHtmlParser from 'react-html-parser';
-// import { ServiceClientImpl, GetTxResponse } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 
 import Modal, { RegenModalProps } from 'web-components/lib/components/modal';
 import Card from 'web-components/lib/components/cards/Card';
@@ -252,7 +251,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
     const amount = values.creditCount;
     if (walletContext.sendTokens) {
       const txHash = await walletContext.sendTokens(amount, recipient);
-      console.log('txHash: ', txHash);
+      alert(`TX Hash: ${txHash}`);
     }
   };
 

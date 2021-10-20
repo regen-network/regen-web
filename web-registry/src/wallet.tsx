@@ -32,7 +32,6 @@ const WalletContext = createContext<ContextType>({});
 export const chainId = process.env.REACT_APP_LEDGER_CHAIN_ID;
 const chainName = process.env.REACT_APP_LEDGER_CHAIN_NAME;
 const chainRpc = `${process.env.REACT_APP_API_URI}/ledger`;
-// const chainRpc = process.env.REACT_APP_LEDGER_RPC;
 const chainRestEndpoint = process.env.REACT_APP_LEDGER_REST_ENDPOINT;
 
 export const WalletProvider: React.FC = ({ children }) => {
@@ -180,7 +179,7 @@ export const WalletProvider: React.FC = ({ children }) => {
               amount: '100',
             },
           ],
-          gas: '100000', // 100k
+          gas: '200000',
         };
 
         const coinAmount = [
@@ -191,9 +190,10 @@ export const WalletProvider: React.FC = ({ children }) => {
         ];
         const result = await client.sendTokens(accounts[0].address, recipient, coinAmount, fee, 'test');
         console.log('result', result);
-
         assertIsBroadcastTxSuccess(result);
+
         return result.transactionHash;
+        // TODO: error handling
       }
     }
     return Promise.reject('No chain id or enpoint provided');

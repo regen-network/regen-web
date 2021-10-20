@@ -27,7 +27,6 @@ import Tooltip from 'web-components/lib/components/tooltip/InfoTooltip';
 
 import { countries } from '../../lib/countries';
 import { Project } from '../../mocks';
-import fallbackImage from '../../assets/time-controlled-rotational-grazing.jpg'; //TODO: more generic fallback
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -258,7 +257,10 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
           <CardContent className={styles.cardContent}>
             <Image
               className={cx(styles.projectThumbnail, styles.marginRight)}
-              src={project.creditClass?.imgSrc || fallbackImage}
+              src={
+                project.creditClass?.imgSrc ||
+                'https://regen-registry.s3.amazonaws.com/projects/wilmot/time-controlled-rotational-grazing.jpg'
+              } // TODO: more generic fallback
               imageStorageBaseUrl={imageStorageBaseUrl}
               apiServerUrl={apiServerUrl}
               backgroundImage

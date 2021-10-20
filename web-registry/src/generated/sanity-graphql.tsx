@@ -682,6 +682,7 @@ export type EcologicalImpact = Document & {
   /** Current document revision */
   _rev?: Maybe<Scalars['String']>;
   _key?: Maybe<Scalars['String']>;
+  iri?: Maybe<Slug>;
   name?: Maybe<Scalars['String']>;
   descriptionRaw?: Maybe<Scalars['JSON']>;
   image?: Maybe<CustomImage>;
@@ -696,6 +697,7 @@ export type EcologicalImpactFilter = {
   _updatedAt?: Maybe<DatetimeFilter>;
   _rev?: Maybe<StringFilter>;
   _key?: Maybe<StringFilter>;
+  iri?: Maybe<SlugFilter>;
   name?: Maybe<StringFilter>;
   image?: Maybe<CustomImageFilter>;
 };
@@ -729,6 +731,7 @@ export type EcologicalImpactSorting = {
   _updatedAt?: Maybe<SortOrder>;
   _rev?: Maybe<SortOrder>;
   _key?: Maybe<SortOrder>;
+  iri?: Maybe<SlugSorting>;
   name?: Maybe<SortOrder>;
   image?: Maybe<CustomImageSorting>;
 };
@@ -2319,6 +2322,7 @@ export type Sdg = Document & {
   /** Current document revision */
   _rev?: Maybe<Scalars['String']>;
   _key?: Maybe<Scalars['String']>;
+  iri?: Maybe<Slug>;
   title?: Maybe<Scalars['String']>;
   image?: Maybe<CustomImage>;
 };
@@ -2332,6 +2336,7 @@ export type SdgFilter = {
   _updatedAt?: Maybe<DatetimeFilter>;
   _rev?: Maybe<StringFilter>;
   _key?: Maybe<StringFilter>;
+  iri?: Maybe<SlugFilter>;
   title?: Maybe<StringFilter>;
   image?: Maybe<CustomImageFilter>;
 };
@@ -2343,6 +2348,7 @@ export type SdgSorting = {
   _updatedAt?: Maybe<SortOrder>;
   _rev?: Maybe<SortOrder>;
   _key?: Maybe<SortOrder>;
+  iri?: Maybe<SlugSorting>;
   title?: Maybe<SortOrder>;
   image?: Maybe<CustomImageSorting>;
 };

@@ -319,7 +319,7 @@ function ProjectTopSection({ project, projectDefault, geojson, isGISFile }: Proj
               )}
             </div>
           </div>
-          {project.glanceImgSrc && project.glanceText && (
+          {((geojson && isGISFile) || project.glanceImgSrc) && project.glanceText && (
             <LazyLoad offset={50} once>
               <div className={classes.glanceCard}>
                 <GlanceCard

@@ -247,20 +247,11 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
   });
 
   const submit = async (values: BuyCreditsValues): Promise<void> => {
-    //  regen1df675r9vnf7pdedn4sf26svdsem3ugavgxmy46  : test account 1
-    //  regen18hj7m3skrsrr8lfvwqh66r7zruzdvp6ylwxrx4  : test account 2
-
-    const recipient = 'regen18hj7m3skrsrr8lfvwqh66r7zruzdvp6ylwxrx4'; //TODO
+    const recipient = 'regen18hj7m3skrsrr8lfvwqh66r7zruzdvp6ylwxrx4'; // test account
     const amount = values.creditCount;
     if (walletContext.sendTokens) {
-      await walletContext.sendTokens(amount, recipient);
-      // console.log('submit result ', result);
-    }
-  };
-
-  const fknSend = (): void => {
-    if (walletContext.sendTokens) {
-      walletContext.sendTokens(3, 'regen18hj7m3skrsrr8lfvwqh66r7zruzdvp6ylwxrx4');
+      const txHash = await walletContext.sendTokens(amount, recipient);
+      console.log('txHash: ', txHash);
     }
   };
 
@@ -431,9 +422,6 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                       optional
                     />
                   </Collapse>
-                  <button onClick={() => fknSend()} type="button">
-                    sendTokens
-                  </button>
                 </Form>
                 <Submit
                   isSubmitting={isSubmitting}

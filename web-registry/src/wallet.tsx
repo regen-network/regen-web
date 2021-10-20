@@ -2,12 +2,6 @@ import React, { useState, createContext } from 'react';
 import { assertIsBroadcastTxSuccess, SigningStargateClient } from '@cosmjs/stargate';
 import { Window as KeplrWindow } from '@keplr-wallet/types';
 
-interface Keplr {
-  enable: (chainId: string) => Promise<void>;
-  experimentalSuggestChain: (chainOptions: object) => Promise<void>;
-  getKey: (chainId: string) => Promise<ChainKey>;
-}
-
 interface ChainKey {
   name: string;
   algo: string;
@@ -28,9 +22,9 @@ declare global {
 }
 
 type ContextType = {
-  wallet?: any;
+  wallet?: KeplrWallet;
   suggestChain?: () => Promise<void>;
-  sendTokens?: (amount: number, recipient: string) => Promise<void>;
+  sendTokens?: (amount: number, recipient: string) => Promise<string>;
 };
 
 const WalletContext = createContext<ContextType>({});
@@ -41,7 +35,7 @@ const chainRpc = process.env.REACT_APP_LEDGER_RPC;
 const chainRestEndpoint = process.env.REACT_APP_LEDGER_REST_ENDPOINT;
 
 export const WalletProvider: React.FC = ({ children }) => {
-  const [wallet, setWallet] = useState<KeplrWallet | null>();
+  const [wallet, setWallet] = useState<KeplrWallet | undefined>();
 
   window.onload = async () => {
     if (!wallet) {
@@ -162,12 +156,12 @@ export const WalletProvider: React.FC = ({ children }) => {
           getWallet();
         })
         .catch(() => {
-          setWallet(null);
+          setWallet(undefined);
         });
     }
   };
 
-  const sendTokens = async (amount: number, recipient: string): Promise<void> => {
+  const sendTokens = async (amount: number, recipient: string): Promise<string> => {
     if (chainId && chainRpc) {
       amount *= 1000000;
       amount = Math.floor(amount);
@@ -182,10 +176,10 @@ export const WalletProvider: React.FC = ({ children }) => {
           amount: [
             {
               denom: 'uregen',
-              amount: '5000',
+              amount: '100',
             },
           ],
-          gas: '200000', // 200k
+          gas: '100000', // 100k
         };
 
         const coinAmount = [
@@ -194,11 +188,14 @@ export const WalletProvider: React.FC = ({ children }) => {
             amount: amount.toString(),
           },
         ];
-        // const balance = await client.getBalance(accounts[0].address, 'uregen'); <-- this works
-        const result = await client.sendTokens(accounts[0].address, recipient, coinAmount, fee, 'test'); // <-- this throws Pubkey type_url undefined not recognized
+        const result = await client.sendTokens(accounts[0].address, recipient, coinAmount, fee, 'test');
+        console.log('result', result);
+
         assertIsBroadcastTxSuccess(result);
+        return result.transactionHash;
       }
     }
+    return Promise.reject('No chain id or enpoint provided');
   };
 
   return (

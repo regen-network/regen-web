@@ -9,7 +9,7 @@ import { Formik, Form, Field } from 'formik';
 import { RadioGroup } from 'formik-material-ui';
 import cx from 'clsx';
 import ReactHtmlParser from 'react-html-parser';
-import { ServiceClientImpl, GetTxResponse } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
+// import { ServiceClientImpl, GetTxResponse } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 
 import Modal, { RegenModalProps } from 'web-components/lib/components/modal';
 import Card from 'web-components/lib/components/cards/Card';

@@ -1,0 +1,51 @@
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+
+import Description from 'web-components/lib/components/description';
+import Title from 'web-components/lib/components/title';
+import Modal, { RegenModalProps } from 'web-components/lib/components/modal';
+import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
+import ShieldIcon from 'web-components/lib/components/icons/ShieldIcon';
+
+interface Props extends RegenModalProps {
+  data?: any; //todo broadcastresult
+}
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    [theme.breakpoints.up('md')]: {
+      height: 556, //todo
+    },
+    [theme.breakpoints.down('xs')]: {
+      padding: 0,
+    },
+  },
+}));
+
+const ConfirmationModal: React.FC<Props> = ({ open, onClose, data }) => {
+  const styles = useStyles();
+
+  return (
+    <Modal className={styles.root} open={open} onClose={onClose}>
+      <Title align="center" variant="h3">
+        Congrats! Your purchase was successful.
+      </Title>
+      <Description align="center">{data?.transactionHash}</Description>
+      {data && (
+        <OutlinedButton
+          href={`http://hambach.regen.aneka.io/txs/${data?.transactionHash}`}
+          target="_blank"
+          startIcon={<ShieldIcon />}
+        >
+          view on regen ledger
+        </OutlinedButton>
+      )}
+    </Modal>
+  );
+};
+
+export { ConfirmationModal };

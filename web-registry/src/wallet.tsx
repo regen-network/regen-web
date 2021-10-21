@@ -1,5 +1,5 @@
 import React, { useState, createContext } from 'react';
-import { assertIsBroadcastTxSuccess, SigningStargateClient } from '@cosmjs/stargate';
+import { assertIsBroadcastTxSuccess, SigningStargateClient, BroadcastTxResponse } from '@cosmjs/stargate';
 import { Window as KeplrWindow } from '@keplr-wallet/types';
 
 interface ChainKey {
@@ -25,7 +25,7 @@ type ContextType = {
   wallet?: KeplrWallet;
   suggestChain?: () => Promise<void>;
   sendTokens?: (amount: number, recipient: string) => Promise<string>;
-  txHash?: string;
+  txResult?: BroadcastTxResponse;
 };
 
 const WalletContext = createContext<ContextType>({});
@@ -37,7 +37,7 @@ const chainRestEndpoint = process.env.REACT_APP_LEDGER_REST_ENDPOINT;
 
 export const WalletProvider: React.FC = ({ children }) => {
   const [wallet, setWallet] = useState<KeplrWallet | undefined>();
-  const [txHash, setTxHash] = useState('');
+  const [txResult, setTxResult] = useState<BroadcastTxResponse | undefined>(undefined);
 
   window.onload = async () => {
     if (!wallet) {
@@ -174,7 +174,7 @@ export const WalletProvider: React.FC = ({ children }) => {
       if (offlineSigner) {
         const accounts = await offlineSigner.getAccounts();
         const client = await SigningStargateClient.connectWithSigner(chainRpc, offlineSigner, {
-          broadcastPollIntervalMs: 3000, // 3 seconds
+          broadcastPollIntervalMs: 4000, //todo
         });
         const fee = {
           amount: [
@@ -195,8 +195,8 @@ export const WalletProvider: React.FC = ({ children }) => {
         const result = await client.sendTokens(accounts[0].address, recipient, coinAmount, fee, 'test2');
 
         console.log('result', result);
-        // assertIsBroadcastTxSuccess(result);
-        setTxHash(result.transactionHash);
+        assertIsBroadcastTxSuccess(result);
+        setTxResult(result);
 
         return result.transactionHash;
         // TODO: error handling
@@ -206,7 +206,7 @@ export const WalletProvider: React.FC = ({ children }) => {
   };
 
   return (
-    <WalletContext.Provider value={{ wallet, suggestChain, sendTokens, txHash }}>
+    <WalletContext.Provider value={{ wallet, suggestChain, sendTokens, txResult }}>
       {children}
     </WalletContext.Provider>
   );

@@ -37,7 +37,7 @@ import {
   LandManagementActions,
   BuyCreditsModal,
 } from '../organisms';
-import { ProcessingModal } from '../molecules';
+import { ProcessingModal, ConfirmationModal } from '../molecules';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -223,9 +223,9 @@ const PROJECT_BY_HANDLE = loader('../../graphql/ProjectByHandle.graphql');
 
 function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JSX.Element {
   const { api }: ContextType = useLedger();
-  const { txHash } = useWallet();
-  const [isTxPending, setIsTxPending] = useState(false);
-  const [purchaseConfirmation, setPurchaseConfirmation] = useState();
+  const { txResult } = useWallet();
+  const [isProcessingModalOpen, setIsProcessingModalOpen] = useState(false);
+  const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
   const imageStorageBaseUrl = process.env.REACT_APP_IMAGE_STORAGE_BASE_URL;
   const apiServerUrl = process.env.REACT_APP_API_URI;
   let txClient: ServiceClientImpl | undefined;
@@ -301,6 +301,13 @@ function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JS
       }
       setIssuanceModalOpen(true);
     }
+  };
+
+  const handleProcessingModalClose = () => {
+    if (txResult && txResult.transactionHash) {
+      setIsConfirmationModalOpen(true);
+    }
+    setIsProcessingModalOpen(false);
   };
 
   const siteMetadata = {
@@ -489,13 +496,21 @@ function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JS
           <BuyCreditsModal
             open={isBuyCreditsModalOpen}
             onClose={() => setIsBuyCreditsModalOpen(false)}
-            onTxQueued={() => setIsTxPending(true)}
+            onTxQueued={() => setIsProcessingModalOpen(true)}
             project={project}
             imageStorageBaseUrl={imageStorageBaseUrl}
             apiServerUrl={apiServerUrl}
           />
-          <ProcessingModal open={isTxPending} txHash={txHash} onClose={() => setIsTxPending(false)} />
-          {/* <ConfirmationModal open={!!purchaseConfirmation} data={purchaseConfirmation} /> */}
+          <ProcessingModal
+            open={isProcessingModalOpen}
+            txHash={txResult?.transactionHash}
+            onClose={handleProcessingModalClose}
+          />
+          <ConfirmationModal
+            open={!!isConfirmationModalOpen}
+            onClose={() => setIsConfirmationModalOpen(false)}
+            data={txResult}
+          />
         </>
       )}
       {submitted && <Banner text="Thanks for submitting your information!" />}

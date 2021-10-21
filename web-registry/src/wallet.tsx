@@ -25,6 +25,7 @@ type ContextType = {
   wallet?: KeplrWallet;
   suggestChain?: () => Promise<void>;
   sendTokens?: (amount: number, recipient: string) => Promise<string>;
+  txHash?: string;
 };
 
 const WalletContext = createContext<ContextType>({});
@@ -36,6 +37,7 @@ const chainRestEndpoint = process.env.REACT_APP_LEDGER_REST_ENDPOINT;
 
 export const WalletProvider: React.FC = ({ children }) => {
   const [wallet, setWallet] = useState<KeplrWallet | undefined>();
+  const [txHash, setTxHash] = useState('');
 
   window.onload = async () => {
     if (!wallet) {
@@ -171,7 +173,9 @@ export const WalletProvider: React.FC = ({ children }) => {
 
       if (offlineSigner) {
         const accounts = await offlineSigner.getAccounts();
-        const client = await SigningStargateClient.connectWithSigner(chainRpc, offlineSigner);
+        const client = await SigningStargateClient.connectWithSigner(chainRpc, offlineSigner, {
+          broadcastPollIntervalMs: 3000, // 3 seconds
+        });
         const fee = {
           amount: [
             {
@@ -188,9 +192,11 @@ export const WalletProvider: React.FC = ({ children }) => {
             amount: amount.toString(),
           },
         ];
-        const result = await client.sendTokens(accounts[0].address, recipient, coinAmount, fee, 'test');
+        const result = await client.sendTokens(accounts[0].address, recipient, coinAmount, fee, 'test2');
+
         console.log('result', result);
-        assertIsBroadcastTxSuccess(result);
+        // assertIsBroadcastTxSuccess(result);
+        setTxHash(result.transactionHash);
 
         return result.transactionHash;
         // TODO: error handling
@@ -200,7 +206,9 @@ export const WalletProvider: React.FC = ({ children }) => {
   };
 
   return (
-    <WalletContext.Provider value={{ wallet, suggestChain, sendTokens }}>{children}</WalletContext.Provider>
+    <WalletContext.Provider value={{ wallet, suggestChain, sendTokens, txHash }}>
+      {children}
+    </WalletContext.Provider>
   );
 };
 

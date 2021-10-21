@@ -26,7 +26,7 @@ import { getImgSrc } from '../../lib/imgSrc';
 import getApiUri from '../../lib/apiUri';
 import { buildIssuanceModalData } from '../../lib/transform';
 import { useLedger, ContextType } from '../../ledger';
-import { chainId } from '../../wallet';
+import { chainId, useWallet } from '../../wallet';
 import { Project, ProjectDefault, ActionGroup } from '../../mocks';
 import {
   Documentation,
@@ -223,7 +223,8 @@ const PROJECT_BY_HANDLE = loader('../../graphql/ProjectByHandle.graphql');
 
 function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JSX.Element {
   const { api }: ContextType = useLedger();
-  const [pendingTx, setPendingTx] = useState<string | undefined>();
+  const { txHash } = useWallet();
+  const [isTxPending, setIsTxPending] = useState(false);
   const [purchaseConfirmation, setPurchaseConfirmation] = useState();
   const imageStorageBaseUrl = process.env.REACT_APP_IMAGE_STORAGE_BASE_URL;
   const apiServerUrl = process.env.REACT_APP_API_URI;
@@ -281,10 +282,6 @@ function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JS
 
   const handleClose = (): void => {
     setOpen(false);
-  };
-
-  const handlePendingTx = (pendingTx: string): void => {
-    setPendingTx(pendingTx);
   };
 
   const [issuanceModalData, setIssuanceModalData] = useState<IssuanceModalData | null>(null);
@@ -492,12 +489,12 @@ function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JS
           <BuyCreditsModal
             open={isBuyCreditsModalOpen}
             onClose={() => setIsBuyCreditsModalOpen(false)}
-            onTxQueued={pendingTx => handlePendingTx(pendingTx)}
+            onTxQueued={() => setIsTxPending(true)}
             project={project}
             imageStorageBaseUrl={imageStorageBaseUrl}
             apiServerUrl={apiServerUrl}
           />
-          <ProcessingModal open={!!pendingTx} pendingTx={pendingTx} onClose={() => setPendingTx(undefined)} />
+          <ProcessingModal open={isTxPending} txHash={txHash} onClose={() => setIsTxPending(false)} />
           {/* <ConfirmationModal open={!!purchaseConfirmation} data={purchaseConfirmation} /> */}
         </>
       )}

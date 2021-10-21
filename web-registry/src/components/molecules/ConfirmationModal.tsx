@@ -1,5 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import { BroadcastTxResponse } from '@cosmjs/stargate';
 
 import Description from 'web-components/lib/components/description';
 import Title from 'web-components/lib/components/title';
@@ -8,7 +9,7 @@ import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton
 import ShieldIcon from 'web-components/lib/components/icons/ShieldIcon';
 
 interface Props extends RegenModalProps {
-  data?: any; //todo broadcastresult
+  data?: BroadcastTxResponse;
 }
 
 const useStyles = makeStyles(theme => ({
@@ -18,7 +19,7 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center',
     justifyContent: 'space-between',
     [theme.breakpoints.up('md')]: {
-      height: 556, //todo
+      height: theme.spacing(139),
     },
     [theme.breakpoints.down('xs')]: {
       padding: 0,

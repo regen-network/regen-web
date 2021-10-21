@@ -18,14 +18,14 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center',
     justifyContent: 'space-between',
     [theme.breakpoints.up('md')]: {
-      height: 458, //todo
+      height: theme.spacing(114.5),
     },
     [theme.breakpoints.down('xs')]: {
       padding: 0,
     },
   },
   spinner: {
-    marginTop: 19,
+    marginTop: theme.spacing(4.75),
     marginBottom: theme.spacing(4),
   },
 }));

@@ -223,7 +223,7 @@ const PROJECT_BY_HANDLE = loader('../../graphql/ProjectByHandle.graphql');
 
 function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JSX.Element {
   const { api }: ContextType = useLedger();
-  const { txResult } = useWallet();
+  const walletContext = useWallet();
   const [isProcessingModalOpen, setIsProcessingModalOpen] = useState(false);
   const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
   const imageStorageBaseUrl = process.env.REACT_APP_IMAGE_STORAGE_BASE_URL;
@@ -303,11 +303,17 @@ function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JS
     }
   };
 
-  const handleProcessingModalClose = () => {
-    if (txResult && txResult.transactionHash) {
+  const handleProcessingModalClose = (): void => {
+    if (walletContext?.txResult?.transactionHash) {
       setIsConfirmationModalOpen(true);
     }
     setIsProcessingModalOpen(false);
+  };
+
+  const handleConfirmationModalClose = (): void => {
+    setIsProcessingModalOpen(false);
+    setIsConfirmationModalOpen(false);
+    walletContext.setTxResult(undefined);
   };
 
   const siteMetadata = {
@@ -502,14 +508,14 @@ function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JS
             apiServerUrl={apiServerUrl}
           />
           <ProcessingModal
-            open={isProcessingModalOpen}
-            txHash={txResult?.transactionHash}
+            open={!walletContext?.txResult?.transactionHash && isProcessingModalOpen}
+            txHash={walletContext?.txResult?.transactionHash}
             onClose={handleProcessingModalClose}
           />
           <ConfirmationModal
-            open={!!isConfirmationModalOpen}
-            onClose={() => setIsConfirmationModalOpen(false)}
-            data={txResult}
+            open={!!isConfirmationModalOpen || !!walletContext?.txResult?.transactionHash}
+            onClose={handleConfirmationModalClose}
+            data={walletContext.txResult}
           />
         </>
       )}

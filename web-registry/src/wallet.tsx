@@ -26,9 +26,12 @@ type ContextType = {
   suggestChain?: () => Promise<void>;
   sendTokens?: (amount: number, recipient: string) => Promise<string>;
   txResult?: BroadcastTxResponse;
+  setTxResult: (txResult: BroadcastTxResponse | undefined) => void;
 };
 
-const WalletContext = createContext<ContextType>({});
+const WalletContext = createContext<ContextType>({
+  setTxResult: (txResult: BroadcastTxResponse | undefined) => {},
+});
 
 export const chainId = process.env.REACT_APP_LEDGER_CHAIN_ID;
 const chainName = process.env.REACT_APP_LEDGER_CHAIN_NAME;
@@ -174,7 +177,7 @@ export const WalletProvider: React.FC = ({ children }) => {
       if (offlineSigner) {
         const accounts = await offlineSigner.getAccounts();
         const client = await SigningStargateClient.connectWithSigner(chainRpc, offlineSigner, {
-          broadcastPollIntervalMs: 4000, //todo
+          broadcastPollIntervalMs: 7000, //todo
         });
         const fee = {
           amount: [
@@ -206,7 +209,7 @@ export const WalletProvider: React.FC = ({ children }) => {
   };
 
   return (
-    <WalletContext.Provider value={{ wallet, suggestChain, sendTokens, txResult }}>
+    <WalletContext.Provider value={{ wallet, suggestChain, sendTokens, txResult, setTxResult }}>
       {children}
     </WalletContext.Provider>
   );

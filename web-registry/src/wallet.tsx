@@ -177,7 +177,8 @@ export const WalletProvider: React.FC = ({ children }) => {
       if (offlineSigner) {
         const accounts = await offlineSigner.getAccounts();
         const client = await SigningStargateClient.connectWithSigner(chainRpc, offlineSigner, {
-          broadcastPollIntervalMs: 7000, //todo
+          broadcastPollIntervalMs: 1000,
+          broadcastTimeoutMs: 60000, //todo
         });
         const fee = {
           amount: [
@@ -195,7 +196,7 @@ export const WalletProvider: React.FC = ({ children }) => {
             amount: amount.toString(),
           },
         ];
-        const result = await client.sendTokens(accounts[0].address, recipient, coinAmount, fee, 'test2');
+        const result = await client.sendTokens(accounts[0].address, recipient, coinAmount, fee);
 
         console.log('result', result);
         assertIsBroadcastTxSuccess(result);

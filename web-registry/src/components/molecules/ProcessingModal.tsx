@@ -44,9 +44,9 @@ const ProcessingModal: React.FC<Props> = ({ open, onClose, txHash }) => {
       <Description align="center">
         This may take up to 10 minutes. Meanwhile, feel free to continue browsing the marketplace.
       </Description>
-      {txHash && (
+      {txHash && ( //TODO: CosmJs acutally doesn't return a transactionHash until the tx is complete, so this may never be seen.
         <OutlinedButton
-          href={`http://hambach.regen.aneka.io/txs/${txHash}`}
+          href={`${process.env.REACT_APP_LEDGER_EXPLORER}/txs/${txHash}`}
           target="_blank"
           startIcon={<ShieldIcon />}
         >

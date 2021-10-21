@@ -35,9 +35,9 @@ const ConfirmationModal: React.FC<Props> = ({ open, onClose, data }) => {
         Congrats! Your purchase was successful.
       </Title>
       <Description align="center">{data?.transactionHash}</Description>
-      {data && (
+      {data?.transactionHash && (
         <OutlinedButton
-          href={`http://hambach.regen.aneka.io/txs/${data?.transactionHash}`}
+          href={`${process.env.REACT_APP_LEDGER_EXPLORER}/txs/${data?.transactionHash}`}
           target="_blank"
           startIcon={<ShieldIcon />}
         >

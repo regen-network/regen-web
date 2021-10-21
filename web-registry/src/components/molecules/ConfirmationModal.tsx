@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     padding: '29px 21px',
     width: '100%',
-    height: 177,
+    height: 177, //TODO:
     justifyContent: 'space-between',
   },
   iconContainer: {

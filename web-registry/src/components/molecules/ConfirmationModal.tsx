@@ -31,6 +31,7 @@ const ConfirmationModal: React.FC<Props> = ({ open, onClose, data }) => {
 
   return (
     <Modal className={styles.root} open={open} onClose={onClose}>
+      <img src={require('../../assets/cow-illustration.png')} alt="cows celebrating" />
       <Title align="center" variant="h3">
         Congrats! Your purchase was successful.
       </Title>

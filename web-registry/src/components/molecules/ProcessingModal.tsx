@@ -7,8 +7,6 @@ import Modal, { RegenModalProps } from 'web-components/lib/components/modal';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 import ShieldIcon from 'web-components/lib/components/icons/ShieldIcon';
 
-import spinner from './spinner.svg';
-
 interface Props extends RegenModalProps {
   txHash?: string;
 }
@@ -37,7 +35,13 @@ const ProcessingModal: React.FC<Props> = ({ open, onClose, txHash }) => {
 
   return (
     <Modal className={styles.root} open={open} onClose={onClose}>
-      <img className={styles.spinner} src={spinner} height={48} width={48} alt="processing" />
+      <img
+        className={styles.spinner}
+        src={require('../../assets/svgs/spinner.svg')}
+        height={48}
+        width={48}
+        alt="processing"
+      />
       <Title align="center" variant="h3">
         Please wait while transaction processes
       </Title>

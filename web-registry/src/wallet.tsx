@@ -12,7 +12,7 @@ interface ChainKey {
   isNanoLedger: boolean;
 }
 
-interface KeplrWallet {
+interface Sender {
   address: string;
   shortAddress: string;
 }
@@ -23,9 +23,8 @@ declare global {
 }
 
 type ContextType = {
-  wallet?: KeplrWallet;
+  wallet?: Sender;
   suggestChain?: () => Promise<void>;
-  sendTokens?: (amount: number, recipient: string) => Promise<string>;
   signSend?: (amount: number, recipient: string) => Promise<Uint8Array>;
   broadcast?: (txBytes: Uint8Array) => Promise<string>;
   txResult?: BroadcastTxResponse;
@@ -40,13 +39,19 @@ export const chainId = process.env.REACT_APP_LEDGER_CHAIN_ID;
 const chainName = process.env.REACT_APP_LEDGER_CHAIN_NAME;
 const chainRpc = `${process.env.REACT_APP_API_URI}/ledger`;
 const chainRestEndpoint = process.env.REACT_APP_LEDGER_REST_ENDPOINT;
+const emptySender = { address: '', shortAddress: '' };
 
 export const WalletProvider: React.FC = ({ children }) => {
-  const [wallet, setWallet] = useState<KeplrWallet | undefined>();
+  const [sender, setSender] = useState<Sender>(emptySender);
   const [txResult, setTxResult] = useState<BroadcastTxResponse | undefined>(undefined);
 
+  const defaultClientOptions = {
+    broadcastPollIntervalMs: 1000,
+    broadcastTimeoutMs: 60000, //t
+  };
+
   window.onload = async () => {
-    if (!wallet) {
+    if (!sender.address) {
       await getWallet();
     }
   };
@@ -55,11 +60,11 @@ export const WalletProvider: React.FC = ({ children }) => {
     const key = await checkForWallet();
 
     if (key && key.bech32Address) {
-      const keplrWallet = {
+      const sender = {
         address: key.bech32Address,
         shortAddress: `${key.bech32Address.substring(0, 10)}...`,
       };
-      setWallet(keplrWallet);
+      setSender(sender);
     }
   };
 
@@ -164,122 +169,79 @@ export const WalletProvider: React.FC = ({ children }) => {
           getWallet();
         })
         .catch(() => {
-          setWallet(undefined);
+          setSender(emptySender);
         });
     }
-  };
-
-  const sendTokens = async (amount: number, recipient: string): Promise<string> => {
-    if (chainId && chainRpc) {
-      amount *= 1000000;
-      amount = Math.floor(amount);
-
-      await window?.keplr?.enable(chainId);
-      const offlineSigner = !!window.getOfflineSigner && (await window.getOfflineSigner(chainId));
-
-      if (offlineSigner) {
-        const accounts = await offlineSigner.getAccounts();
-        const client = await SigningStargateClient.connectWithSigner(chainRpc, offlineSigner, {
-          broadcastPollIntervalMs: 1000,
-          broadcastTimeoutMs: 60000, //todo
-        });
-        const fee = {
-          amount: [
-            {
-              denom: 'uregen',
-              amount: '100',
-            },
-          ],
-          gas: '200000',
-        };
-
-        const coinAmount = [
-          {
-            denom: 'uregen',
-            amount: amount.toString(),
-          },
-        ];
-        const result = await client.sendTokens(accounts[0].address, recipient, coinAmount, fee);
-
-        console.log('result', result);
-        assertIsBroadcastTxSuccess(result);
-        setTxResult(result);
-
-        return result.transactionHash;
-        // TODO: error handling
-      }
-    }
-    return Promise.reject('No chain id or enpoint provided');
   };
 
   const signSend = async (amount: number, recipient: string): Promise<Uint8Array> => {
-    if (chainId && chainRpc) {
-      amount *= 1000000;
-      amount = Math.floor(amount);
+    amount *= 1000000;
+    amount = Math.floor(amount);
 
-      await window?.keplr?.enable(chainId);
-      const offlineSigner = !!window.getOfflineSigner && (await window.getOfflineSigner(chainId));
+    const client = await getClient();
+    const fee = {
+      amount: [
+        {
+          denom: 'uregen',
+          amount: '100',
+        },
+      ],
+      gas: '200000',
+    };
 
-      if (offlineSigner) {
-        const [sender] = await offlineSigner.getAccounts();
-        console.log('senderaddress', sender.address);
-        const client = await SigningStargateClient.connectWithSigner(chainRpc, offlineSigner, {
-          broadcastPollIntervalMs: 1000,
-          broadcastTimeoutMs: 60000, //todo
-        });
-        const fee = {
-          amount: [
-            {
-              denom: 'uregen',
-              amount: '100',
-            },
-          ],
-          gas: '200000',
-        };
+    const msgSend = {
+      fromAddress: sender.address,
+      toAddress: recipient,
+      amount: [
+        {
+          denom: 'uregen',
+          amount: amount.toString(),
+        },
+      ],
+    };
+    const msgAny = {
+      typeUrl: '/cosmos.bank.v1beta1.MsgSend',
+      value: msgSend,
+    };
 
-        const msgSend = {
-          fromAddress: sender.address,
-          toAddress: recipient,
-          amount: [
-            {
-              denom: 'uregen',
-              amount: amount.toString(),
-            },
-          ],
-        };
-        const msgAny = {
-          typeUrl: '/cosmos.bank.v1beta1.MsgSend',
-          value: msgSend,
-        };
+    const txRaw = await client.sign(sender.address, [msgAny], fee, 'sign test');
+    const txBytes = TxRaw.encode(txRaw).finish();
 
-        const txRaw = await client.sign(sender.address, [msgAny], fee, 'sign test');
-        const txBytes = TxRaw.encode(txRaw).finish();
-
-        return txBytes;
-        // TODO: error handling
-      }
-    }
-    return Promise.reject('No chain id or enpoint provided');
+    return txBytes;
+    // TODO: error handling
   };
 
   const broadcast = async (txBytes: Uint8Array): Promise<string> => {
+    const client = await getClient();
+    const result = await client.broadcastTx(Uint8Array.from(txBytes));
+    console.log('result', result);
+    assertIsBroadcastTxSuccess(result);
+    setTxResult(result);
+
+    return result.transactionHash;
+  };
+
+  const getClient = async (): Promise<SigningStargateClient> => {
     if (chainId && chainRpc) {
       await window?.keplr?.enable(chainId);
       const offlineSigner = !!window.getOfflineSigner && (await window.getOfflineSigner(chainId));
 
       if (offlineSigner) {
-        const client = await SigningStargateClient.connectWithSigner(chainRpc, offlineSigner, {
-          broadcastPollIntervalMs: 1000,
-          broadcastTimeoutMs: 60000, //todo
-        });
+        if (!sender.address) {
+          const [senderAccount] = await offlineSigner.getAccounts();
+          setSender({
+            address: senderAccount.address,
+            shortAddress: `${senderAccount.address.substring(0, 10)}...`,
+          });
+        }
 
-        const result = await client.broadcastTx(Uint8Array.from(txBytes));
-        console.log('result', result);
-        assertIsBroadcastTxSuccess(result);
-        setTxResult(result);
+        const client = await SigningStargateClient.connectWithSigner(
+          chainRpc,
+          offlineSigner,
+          defaultClientOptions,
+        );
 
-        return result.transactionHash;
-        // TODO: error handling
+        return client;
       }
     }
     return Promise.reject('No chain id or enpoint provided');
@@ -287,7 +249,7 @@ export const WalletProvider: React.FC = ({ children }) => {
 
   return (
     <WalletContext.Provider
-      value={{ wallet, suggestChain, sendTokens, signSend, broadcast, txResult, setTxResult }}
+      value={{ wallet: sender, suggestChain, signSend, broadcast, txResult, setTxResult }}
     >
       {children}
     </WalletContext.Provider>

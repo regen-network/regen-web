@@ -183,7 +183,7 @@ export const WalletProvider: React.FC = ({ children }) => {
       amount: [
         {
           denom: 'uregen',
-          amount: '100',
+          amount: '100', //TODO: what should fee and gas be?
         },
       ],
       gas: '200000',
@@ -204,7 +204,7 @@ export const WalletProvider: React.FC = ({ children }) => {
       value: msgSend,
     };
 
-    const txRaw = await client.sign(sender.address, [msgAny], fee, 'sign test');
+    const txRaw = await client.sign(sender.address, [msgAny], fee, '');
     const txBytes = TxRaw.encode(txRaw).finish();
 
     return txBytes;

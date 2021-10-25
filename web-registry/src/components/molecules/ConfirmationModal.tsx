@@ -29,12 +29,28 @@ const useStyles = makeStyles(theme => ({
       padding: theme.spacing(8, 4),
     },
   },
+  cows: {
+    height: theme.spacing(20),
+  },
+  title: {
+    [theme.breakpoints.up('sm')]: {
+      lineHeight: theme.typography.pxToRem(44.8),
+    },
+    [theme.breakpoints.down('xs')]: {
+      lineHeight: theme.typography.pxToRem(34.8),
+    },
+  },
   card: {
     display: 'flex',
     padding: '29px 21px',
     width: '100%',
-    height: theme.spacing(44.25),
     justifyContent: 'space-between',
+    [theme.breakpoints.up('sm')]: {
+      height: theme.spacing(44.25),
+    },
+    [theme.breakpoints.down('xs')]: {
+      height: theme.spacing(57.5),
+    },
   },
   iconContainer: {
     background: theme.palette.secondary.contrastText,
@@ -78,13 +94,28 @@ const useStyles = makeStyles(theme => ({
     marginRight: theme.spacing(4),
   },
   creditCount: {
-    height: theme.typography.pxToRem(54),
     display: 'flex',
-    alignItems: 'center',
+    [theme.breakpoints.up('sm')]: {
+      alignItems: 'center',
+      height: theme.typography.pxToRem(54),
+    },
+    [theme.breakpoints.down('xs')]: {
+      fontSize: theme.typography.pxToRem(32),
+    },
   },
   verticalSpacing: {
     [theme.breakpoints.down('xs')]: {
-      margin: theme.spacing(4, 0),
+      marginBottom: theme.spacing(6),
+    },
+  },
+  hideIfMobile: {
+    [theme.breakpoints.down('xs')]: {
+      display: 'none',
+    },
+  },
+  hideIfDesktop: {
+    [theme.breakpoints.up('sm')]: {
+      display: 'none',
     },
   },
 }));
@@ -95,11 +126,11 @@ const ConfirmationModal: React.FC<Props> = ({ open, onClose, data }) => {
   return (
     <Modal className={styles.root} open={open} onClose={onClose}>
       <img
-        className={styles.verticalSpacing}
+        className={cx(styles.cows, styles.verticalSpacing)}
         src={require('../../assets/cow-illustration.png')}
         alt="cows celebrating"
       />
-      <Title className={styles.verticalSpacing} align="center" variant="h3">
+      <Title className={cx(styles.title, styles.verticalSpacing)} align="center" variant="h3">
         Congrats! Your purchase was successful.
       </Title>
       <Card className={cx(styles.card, styles.verticalSpacing)}>
@@ -111,6 +142,9 @@ const ConfirmationModal: React.FC<Props> = ({ open, onClose, data }) => {
           />
         </Avatar>
         <div className={styles.creditDetails}>
+          <Title className={(styles.creditCount, styles.hideIfDesktop)} variant="h3">
+            500
+          </Title>
           <Title variant="h6">Regen - Ecocredits</Title>
           <Label className={styles.classId}>C01-20190101-20201010-02</Label>
           <span className={styles.creditDescription}>
@@ -127,7 +161,7 @@ const ConfirmationModal: React.FC<Props> = ({ open, onClose, data }) => {
             </a>
           </div>
         </div>
-        <Title className={styles.creditCount} align="center" variant="h3">
+        <Title className={cx(styles.creditCount, styles.hideIfMobile)} align="center" variant="h3">
           500
         </Title>
       </Card>

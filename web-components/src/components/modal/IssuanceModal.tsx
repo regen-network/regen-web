@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 
-import LedgerModal from './LedgerModal';
+import LedgerModal, { Party } from './LedgerModal';
 import { RegenModalProps } from './';
-import PartyAddress, { Party } from '../party/PartyAddress';
+import PartyAddress from '../party/PartyAddress';
 import Document, { DocumentInfo } from '../document';
 import { getFormattedDate, getFormattedNumber } from '../../utils/format';
 import { pluralize } from '../../utils/pluralize';

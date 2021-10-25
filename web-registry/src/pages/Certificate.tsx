@@ -309,13 +309,13 @@ function CertificatePage(): JSX.Element {
                   documentId: creditClassVersion?.documentId,
                   name: creditClassVersion?.name || '',
                   version: creditClassVersion?.version || '',
-                  url: creditClassVersion?.metadata?.['http://schema.org/url'],
+                  url: creditClassVersion?.metadata?.['http://schema.org/url']?.['@value'],
                 },
                 methodology: {
                   documentId: methodologyVersion?.documentId,
                   name: methodologyVersion?.name || '',
                   version: methodologyVersion?.version || '',
-                  url: methodologyVersion?.metadata?.['http://schema.org/url'],
+                  url: methodologyVersion?.metadata?.['http://schema.org/url']?.['@value'],
                 },
                 standard: {
                   documentId:
@@ -333,7 +333,7 @@ function CertificatePage(): JSX.Element {
                   url:
                     creditClassVersion?.metadata?.['http://regen.network/standard']?.[
                       'http://schema.org/url'
-                    ],
+                    ]?.['@value'],
                 },
                 projectType: project.type || '',
               }}

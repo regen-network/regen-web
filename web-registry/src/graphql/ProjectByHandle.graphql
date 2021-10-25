@@ -3,6 +3,7 @@ fragment partyFields on Party {
   type
   name
   description
+  image
   organizationByPartyId {
     ...organizationFields
   }
@@ -77,6 +78,24 @@ query ProjectByHandle($handle: String!) {
       }
     }
     name
+    metadata
+    creditClassByCreditClassId {
+      standard
+      creditClassVersionsById(orderBy: CREATED_AT_DESC, first: 1) {
+        nodes {
+          name
+          metadata
+        }
+      }
+      methodologyByMethodologyId {
+        methodologyVersionsById(orderBy: CREATED_AT_DESC, first: 1) {
+          nodes {
+            name
+            metadata
+          }
+        }
+      }
+    }
     partyByDeveloperId {
       ...partyFields
     }
@@ -84,6 +103,12 @@ query ProjectByHandle($handle: String!) {
       ...partyFields
     }
     partyByLandOwnerId {
+      ...partyFields
+    }
+    partyByBrokerId {
+      ...partyFields
+    }
+    partyByResellerId {
       ...partyFields
     }
     documentsByProjectId {

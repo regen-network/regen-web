@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import * as togeojson from '@mapbox/togeojson';
-import { useLocation } from 'react-router-dom';
-import { loader } from 'graphql.macro';
-import { useQuery } from '@apollo/client';
+import { useLocation, useParams } from 'react-router-dom';
 import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 import clsx from 'clsx';
 
@@ -20,14 +18,14 @@ import SEO from 'web-components/lib/components/seo';
 import FixedFooter from 'web-components/lib/components/fixed-footer';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import EmailIcon from 'web-components/lib/components/icons/EmailIcon';
+import { DisplayValues } from 'web-components/lib/components/user/UserInfo';
 
 import { setPageView } from '../../lib/ga';
-import { getImgSrc } from '../../lib/imgSrc';
 import getApiUri from '../../lib/apiUri';
 import { buildIssuanceModalData } from '../../lib/transform';
 import { useLedger, ContextType } from '../../ledger';
 import { chainId } from '../../wallet';
-import { Project, ProjectDefault, ActionGroup } from '../../mocks';
+import { Project, ProjectDefault } from '../../mocks';
 import {
   Documentation,
   ProjectTopSection,
@@ -37,6 +35,7 @@ import {
   LandManagementActions,
   BuyCreditsModal,
 } from '../organisms';
+import { useProjectByHandleQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -218,10 +217,13 @@ interface ProjectProps {
   projectDefault: ProjectDefault;
 }
 
-const PROJECT_BY_HANDLE = loader('../../graphql/ProjectByHandle.graphql');
+function getVisiblePartyName(party?: DisplayValues): string | undefined {
+  return party?.['http://regen.network/showOnProjectPage'] ? party?.['http://schema.org/name'] : undefined;
+}
 
 function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JSX.Element {
   const { api }: ContextType = useLedger();
+  const { projectId } = useParams<{ projectId: string }>();
   const imageStorageBaseUrl = process.env.REACT_APP_IMAGE_STORAGE_BASE_URL;
   const apiServerUrl = process.env.REACT_APP_API_URI;
   let txClient: ServiceClientImpl | undefined;
@@ -229,9 +231,10 @@ function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JS
     txClient = new ServiceClientImpl(api.connection.queryConnection);
   }
 
-  const { data } = useQuery(PROJECT_BY_HANDLE, {
-    variables: { handle: project.id },
+  const { data } = useProjectByHandleQuery({
+    variables: { handle: projectId },
   });
+  const metadata = data?.projectByHandle?.metadata;
 
   const [submitted, setSubmitted] = useState(false);
   const location = useLocation();
@@ -241,17 +244,13 @@ function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JS
 
   const styles = useStyles();
   const theme = useTheme();
-  const landManagementActions: ActionGroup[] | undefined = project.landManagementActions?.map(group => ({
-    ...group,
-    actions: group.actions.map(action => ({ ...action, imgSrc: getImgSrc(action.imgSrc) })),
-  }));
 
-  const otherProjects: Project[] = projects.filter(p => p.id !== project.id);
+  const otherProjects: Project[] = projects.filter(p => p.id !== projectId);
 
   const [geojson, setGeojson] = useState<any | null>(null);
 
   // Convert kml to geojson
-  const mapFile: string = project.map;
+  const mapFile: string = metadata?.['http://regen.network/boundaries']?.['@value'];
   const isGISFile: boolean = /\.(json|kml)$/i.test(mapFile);
   const isKMLFile: boolean = /\.kml$/i.test(mapFile);
 
@@ -287,44 +286,52 @@ function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JS
   const viewOnLedger = (creditVintage: any): void => {
     if (creditVintage?.txHash) {
       if (creditVintage.txHash !== issuanceModalData?.txHash) {
-        const issuanceData = buildIssuanceModalData(
-          data.projectByHandle,
-          data.projectByHandle.documentsByProjectId.nodes,
-          creditVintage,
-        );
-
+        const issuanceData = buildIssuanceModalData(data, creditVintage);
         setIssuanceModalData(issuanceData);
       }
       setIssuanceModalOpen(true);
     }
   };
 
+  const creditClassName =
+    data?.projectByHandle?.creditClassByCreditClassId?.creditClassVersionsById?.nodes?.[0]?.name;
+  const partyName =
+    getVisiblePartyName(metadata?.['http://regen.network/landSteward']) ||
+    getVisiblePartyName(metadata?.['http://regen.network/projectDeveloper']) ||
+    getVisiblePartyName(metadata?.['http://regen.network/landOwner']) ||
+    getVisiblePartyName(metadata?.['http://regen.network/projectOriginator']);
+  const projectAddress = metadata?.['http://schema.org/location']?.place_name;
   const siteMetadata = {
     title: `Regen Network Registry`,
-    description: `Learn about Regen Network's ${project.creditClass.name} credits sourced from ${project
-      .steward?.name || project.developer?.name} in ${project.place.state}, ${project.place.country}.`,
+    description:
+      creditClassName && partyName && projectAddress
+        ? `Learn about ${creditClassName} credits sourced from ${partyName} in ${projectAddress}.`
+        : '',
     author: `Regen Network`,
     siteUrl: `${window.location.origin}/registry`,
   };
 
   return (
     <div className={styles.root}>
-      <SEO location={location} siteMetadata={siteMetadata} title={project.name} imageUrl={project.image} />
+      <SEO
+        location={location}
+        siteMetadata={siteMetadata}
+        title={metadata?.['http://schema.org/name']}
+        imageUrl={metadata?.['http://schema.org/image']?.['@value']}
+      />
 
       <ProjectMedia
-        assets={project.media.filter(item => item.type === 'image')}
+        assets={metadata?.['http://regen.network/galleryPhotos'].map((photo: { '@value': string }) => ({
+          imgSrc: photo['@value'],
+          type: 'image',
+        }))}
         gridView
         mobileHeight={theme.spacing(78.75)}
         imageStorageBaseUrl={imageStorageBaseUrl}
         apiServerUrl={apiServerUrl}
-        imageCredits={project.imageCredits}
+        imageCredits={metadata?.['http://schema.org/creditText']}
       />
-      <ProjectTopSection
-        project={project}
-        projectDefault={projectDefault}
-        geojson={geojson}
-        isGISFile={isGISFile}
-      />
+      <ProjectTopSection data={data} geojson={geojson} isGISFile={isGISFile} />
       <div className="topo-background-alternate">
         <ProjectImpactSection impacts={project.impact} />
       </div>
@@ -361,65 +368,66 @@ function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JS
         </div>
       )} */}
 
-      {data?.projectByHandle?.documentsByProjectId?.nodes?.length > 0 && (
-        <div className={clsx('topo-background-alternate', styles.projectContent)}>
-          <Documentation
-            txClient={txClient}
-            onViewOnLedger={viewOnLedger}
-            documents={data.projectByHandle.documentsByProjectId.nodes}
-          />
-        </div>
-      )}
+      {data?.projectByHandle?.documentsByProjectId?.nodes &&
+        data.projectByHandle.documentsByProjectId.nodes.length > 0 && (
+          <div className={clsx('topo-background-alternate', styles.projectContent)}>
+            <Documentation
+              txClient={txClient}
+              onViewOnLedger={viewOnLedger}
+              documents={data?.projectByHandle?.documentsByProjectId?.nodes.map(doc => ({
+                name: doc?.name || '',
+                type: doc?.type || '',
+                date: doc?.date || '',
+                url: doc?.url || '',
+                ledger: '',
+                eventByEventId: doc?.eventByEventId,
+              }))}
+            />
+          </div>
+        )}
 
-      {landManagementActions &&
-        landManagementActions.map((actionsType, i) => (
+      {metadata?.['http://regen.network/landManagementActions']?.['@list'] &&
+        metadata?.['http://regen.network/landManagementActions']?.['@list'].map((actions: any, i: number) => (
           <div key={i} className={clsx('topo-background-alternate', i > 0 ? styles.projectActionsGroup : '')}>
             <LandManagementActions
-              actions={actionsType.actions}
-              title={
-                project.fieldsOverride && project.fieldsOverride.landManagementActions
-                  ? project.fieldsOverride.landManagementActions.title
-                  : projectDefault.landManagementActions.title
-              }
-              subtitle={actionsType.title || projectDefault.landManagementActions.subtitle}
+              actions={actions.map((action: any) => ({
+                name: action['http://schema.org/name'],
+                description: action['http://schema.org/description'],
+                imgSrc: action['http://schema.org/image']?.['@value'],
+              }))}
+              title="Land Management Actions"
+              subtitle="This is how the project developers are planning to achieve the primary impact."
             />
           </div>
         ))}
 
-      {data?.projectByHandle?.eventsByProjectId?.nodes?.length > 0 && (
-        <div
-          className={clsx(
-            'topo-background-alternate',
-            styles.projectDetails,
-            styles.projectTimeline,
-            styles.projectContent,
-          )}
-        >
-          <Title className={styles.timelineTitle} variant="h2">
-            {project.fieldsOverride && project.fieldsOverride.timeline
-              ? project.fieldsOverride.timeline.title
-              : projectDefault.timeline.title}
-          </Title>
-          <Timeline
-            txClient={txClient}
-            onViewOnLedger={viewOnLedger}
-            events={data.projectByHandle.eventsByProjectId.nodes.map(
-              (node: {
-                // TODO use generated types from graphql schema
-                date: string;
-                summary: string;
-                description?: string;
-                creditVintageByEventId?: any;
-              }) => ({
-                date: getFormattedDate(node.date, { year: 'numeric', month: 'long', day: 'numeric' }),
-                summary: node.summary,
-                description: node.description,
-                creditVintage: node.creditVintageByEventId,
-              }),
+      {data?.projectByHandle?.eventsByProjectId?.nodes &&
+        data.projectByHandle.eventsByProjectId.nodes.length > 0 && (
+          <div
+            className={clsx(
+              'topo-background-alternate',
+              styles.projectDetails,
+              styles.projectTimeline,
+              styles.projectContent,
             )}
-          />
-        </div>
-      )}
+          >
+            <Title className={styles.timelineTitle} variant="h2">
+              {project.fieldsOverride && project.fieldsOverride.timeline
+                ? project.fieldsOverride.timeline.title
+                : projectDefault.timeline.title}
+            </Title>
+            <Timeline
+              txClient={txClient}
+              onViewOnLedger={viewOnLedger}
+              events={data.projectByHandle.eventsByProjectId.nodes.map(node => ({
+                date: getFormattedDate(node?.date, { year: 'numeric', month: 'long', day: 'numeric' }),
+                summary: node?.summary || '',
+                description: node?.description || '',
+                creditVintage: node?.creditVintageByEventId,
+              }))}
+            />
+          </div>
+        )}
 
       {otherProjects.length > 0 && (
         <div className="topo-background-alternate">

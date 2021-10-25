@@ -12,28 +12,24 @@ export default {
 
 const user: User = {
   name: 'Odonata',
-  place: {
-    city: 'South Melbourne',
-    state: 'Victoria',
-    country: 'Australia',
-  },
+  location: 'South Melbourne, Victoria, Australia',
   type: 'organization',
-  imgSrc: 'http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png',
+  image: 'http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png',
   description: 'Odonata is a not-for-profit entity supporting biodiversity impact solutions.',
 };
 
-const { name, imgSrc } = user;
+const { name, image } = user;
 
-export const mediumUserAvatar = (): JSX.Element => <UserAvatar alt={name} src={text('imgSrc', imgSrc)} />;
+export const mediumUserAvatar = (): JSX.Element => <UserAvatar alt={name} src={text('image', image)} />;
 
 export const bigUserAvatar = (): JSX.Element => (
-  <UserAvatar alt={name} src={text('imgSrc', imgSrc)} size="big" />
+  <UserAvatar alt={name} src={text('image', image)} size="big" />
 );
 
 export const userAvatarWithLink = (): JSX.Element => (
   <UserAvatar
     alt={name}
-    src={text('imgSrc', imgSrc)}
+    src={text('image', image)}
     size="big"
     href={text('href', 'http://www.odonata.org.au')}
   />

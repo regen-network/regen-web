@@ -1,18 +1,21 @@
 import { IssuanceModalData } from 'web-components/lib/components/modal/IssuanceModal';
-import { Party } from 'web-components/lib/components/party/PartyAddress';
+import { Party } from 'web-components/lib/components/modal/LedgerModal';
 import { DocumentInfo } from 'web-components/lib/components/document';
 import { getFormattedPeriod } from 'web-components/lib/utils/format';
-import { Document } from 'web-components/lib/components/table';
+
+import { ProjectByHandleQuery, PartyFieldsFragment, Maybe } from '../generated/graphql';
+import { EntityDisplayValues, EntityFieldName } from '../components/organisms/EntityDisplayForm';
 
 // buildIssuanceModalData builds some IssuanceModalData to provide
 // to a Timeline Event based on some optional credit vintage data.
 // TODO get generated type for creditVintage and project from graphql schema.
 export function buildIssuanceModalData(
-  project: any,
-  documents: Document[],
+  data?: ProjectByHandleQuery,
   creditVintage?: any,
 ): IssuanceModalData | null {
-  if (creditVintage) {
+  const project = data?.projectByHandle;
+  if (project && creditVintage) {
+    const documents = project.documentsByProjectId.nodes;
     const issuerWallet = creditVintage.walletByTokenizerId;
     const issuerParty = issuerWallet.partiesByWalletId.nodes[0]; // have party-wallet 1-1 relation?
 
@@ -69,12 +72,15 @@ export function buildIssuanceModalData(
     }
 
     const monitoringPeriods: DocumentInfo[] = documents
-      .filter(doc => doc.type === 'Monitoring')
+      .filter(doc => doc?.type === 'Monitoring')
       .map(doc => {
         return {
-          name: doc.name,
-          info: doc.name.toLowerCase().indexOf('monitoring') > -1 ? 'monitoring report' : 'data',
-          link: doc.url,
+          name: doc?.name || '',
+          info:
+            doc?.name && doc.name.toLowerCase().indexOf('monitoring') > -1
+              ? 'monitoring report'
+              : 'data' || '',
+          link: doc?.url || '',
         };
       });
 
@@ -94,7 +100,7 @@ export function buildIssuanceModalData(
       txHash: creditVintage.txHash,
       vintagePeriod: getFormattedPeriod(creditVintage.startDate, creditVintage.endDate),
       monitoringPeriods,
-      projectName: project.name,
+      projectName: project.name || '',
       standard: {
         documentId:
           creditClassVersion?.metadata?.['http://regen.network/standard']?.[
@@ -119,33 +125,13 @@ export function buildIssuanceModalData(
   return null;
 }
 
-function getParty(party: {
-  name: string;
-  description?: string;
-  addressByAddressId?: {
-    feature?: {
-      place_name?: string;
-    };
-  };
-  walletByWalletId?: {
-    addr: string;
-  };
-  organizationByPartyId: {
-    organizationMembersByOrganizationId: {
-      nodes: {
-        userByMemberId: {
-          partyByPartyId: {
-            name: string;
-            roles?: string[];
-          };
-        };
-      }[];
-    };
-  };
-}): Party {
+function getParty(party?: Maybe<PartyFieldsFragment>): Party | undefined {
+  if (!party) {
+    return undefined;
+  }
   const partyOrg = party.organizationByPartyId;
   const partyUser =
-    partyOrg.organizationMembersByOrganizationId &&
+    partyOrg?.organizationMembersByOrganizationId &&
     partyOrg.organizationMembersByOrganizationId.nodes &&
     partyOrg.organizationMembersByOrganizationId.nodes.length &&
     partyOrg.organizationMembersByOrganizationId.nodes[0] &&
@@ -157,15 +143,29 @@ function getParty(party: {
 
   return {
     name: party.name,
+    location: partyAddress || '',
+    description: party.description || '',
+    type: party.type,
+    image: party.image || '',
     address: (party.walletByWalletId && party.walletByWalletId.addr) || '',
     role:
       (partyUser &&
-        partyUser.partyByPartyId.roles &&
+        partyUser.partyByPartyId?.roles &&
         partyUser.partyByPartyId.roles.length &&
         partyUser.partyByPartyId.roles[0]) ||
       '',
-    individual: (partyUser && partyUser.partyByPartyId.name) || '',
-    location: partyAddress || '',
-    description: party.description,
+    individual: (partyUser && partyUser.partyByPartyId?.name) || '',
   };
+}
+
+export function getDisplayParty(
+  metadata: EntityDisplayValues,
+  role: EntityFieldName,
+  party?: Maybe<PartyFieldsFragment>,
+): Party | undefined {
+  const showOnProjectPage = metadata[role]?.['http://regen.network/showOnProjectPage'];
+  if (showOnProjectPage) {
+    return getParty(party);
+  }
+  return undefined;
 }

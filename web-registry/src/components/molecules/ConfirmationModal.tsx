@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Avatar } from '@material-ui/core';
 import { BroadcastTxResponse } from '@cosmjs/stargate';
+import cx from 'clsx';
 
 import Card from 'web-components/lib/components/cards/Card';
 import Title from 'web-components/lib/components/title';
@@ -17,22 +18,22 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'space-between',
     [theme.breakpoints.up('md')]: {
+      justifyContent: 'space-between',
       paddingLeft: theme.spacing(8),
       paddingRight: theme.spacing(8),
       paddingBottom: theme.spacing(20),
       height: theme.spacing(139),
     },
     [theme.breakpoints.down('xs')]: {
-      padding: 0,
+      padding: theme.spacing(8, 4),
     },
   },
   card: {
     display: 'flex',
     padding: '29px 21px',
     width: '100%',
-    height: 177, //TODO:
+    height: theme.spacing(44.25),
     justifyContent: 'space-between',
   },
   iconContainer: {
@@ -81,6 +82,11 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     alignItems: 'center',
   },
+  verticalSpacing: {
+    [theme.breakpoints.down('xs')]: {
+      margin: theme.spacing(4, 0),
+    },
+  },
 }));
 
 const ConfirmationModal: React.FC<Props> = ({ open, onClose, data }) => {
@@ -88,11 +94,15 @@ const ConfirmationModal: React.FC<Props> = ({ open, onClose, data }) => {
 
   return (
     <Modal className={styles.root} open={open} onClose={onClose}>
-      <img src={require('../../assets/cow-illustration.png')} alt="cows celebrating" />
-      <Title align="center" variant="h3">
+      <img
+        className={styles.verticalSpacing}
+        src={require('../../assets/cow-illustration.png')}
+        alt="cows celebrating"
+      />
+      <Title className={styles.verticalSpacing} align="center" variant="h3">
         Congrats! Your purchase was successful.
       </Title>
-      <Card className={styles.card}>
+      <Card className={cx(styles.card, styles.verticalSpacing)}>
         <Avatar className={styles.iconContainer}>
           <img
             className={styles.icon}

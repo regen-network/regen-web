@@ -1,5 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import cx from 'clsx';
 
 import Description from 'web-components/lib/components/description';
 import Title from 'web-components/lib/components/title';
@@ -16,17 +17,45 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'space-between',
     [theme.breakpoints.up('md')]: {
+      justifyContent: 'space-between',
       height: theme.spacing(114.5),
     },
     [theme.breakpoints.down('xs')]: {
-      padding: 0,
+      padding: theme.spacing(4),
     },
   },
   spinner: {
     marginTop: theme.spacing(4.75),
     marginBottom: theme.spacing(4),
+  },
+  title: {
+    [theme.breakpoints.up('sm')]: {
+      lineHeight: theme.typography.pxToRem(44.8),
+    },
+    [theme.breakpoints.down('xs')]: {
+      lineHeight: theme.typography.pxToRem(34.8),
+    },
+  },
+  description: {
+    padding: theme.spacing(0, 4),
+    [theme.breakpoints.up('sm')]: {
+      fontSize: theme.typography.pxToRem(18),
+    },
+    [theme.breakpoints.down('xs')]: {
+      fontSize: theme.typography.pxToRem(16),
+      marginBottom: theme.spacing(8),
+    },
+  },
+  verticalSpacing: {
+    [theme.breakpoints.down('xs')]: {
+      marginBottom: theme.spacing(6),
+    },
+  },
+  button: {
+    padding: theme.spacing(2, 6),
+    fontSize: theme.typography.pxToRem(18),
+    marginBottom: theme.spacing(2),
   },
 }));
 
@@ -36,19 +65,20 @@ const ProcessingModal: React.FC<Props> = ({ open, onClose, txHash }) => {
   return (
     <Modal className={styles.root} open={open} onClose={onClose}>
       <img
-        className={styles.spinner}
+        className={cx(styles.verticalSpacing, styles.spinner)}
         src={require('../../assets/svgs/spinner.svg')}
         height={48}
         width={48}
         alt="processing"
       />
-      <Title align="center" variant="h3">
+      <Title className={cx(styles.title, styles.verticalSpacing)} align="center" variant="h3">
         Please wait while transaction processes
       </Title>
-      <Description align="center">
+      <Description className={cx(styles.description, styles.verticalSpacing)} align="center">
         This may take up to 10 minutes. Meanwhile, feel free to continue browsing the marketplace.
       </Description>
       <OutlinedButton
+        className={styles.button}
         href={`${process.env.REACT_APP_BLOCK_EXPLORER}/txs/${txHash}`}
         target="_blank"
         startIcon={<ShieldIcon />}

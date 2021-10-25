@@ -48,15 +48,14 @@ const ProcessingModal: React.FC<Props> = ({ open, onClose, txHash }) => {
       <Description align="center">
         This may take up to 10 minutes. Meanwhile, feel free to continue browsing the marketplace.
       </Description>
-      {txHash && ( //TODO: CosmJs actually doesn't return a transactionHash until the tx is complete, so this may never be seen.
-        <OutlinedButton
-          href={`${process.env.REACT_APP_BLOCK_EXPLORER}/txs/${txHash}`}
-          target="_blank"
-          startIcon={<ShieldIcon />}
-        >
-          view on regen ledger
-        </OutlinedButton>
-      )}
+      <OutlinedButton
+        href={`${process.env.REACT_APP_BLOCK_EXPLORER}/txs/${txHash}`}
+        target="_blank"
+        startIcon={<ShieldIcon />}
+        disabled={!txHash}
+      >
+        view on regen ledger
+      </OutlinedButton>
     </Modal>
   );
 };

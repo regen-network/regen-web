@@ -1,6 +1,7 @@
 import React, { useState, createContext } from 'react';
 import { assertIsBroadcastTxSuccess, SigningStargateClient, BroadcastTxResponse } from '@cosmjs/stargate';
 import { Window as KeplrWindow } from '@keplr-wallet/types';
+import { TxRaw } from 'cosmjs-types/cosmos/tx/v1beta1/tx';
 
 interface ChainKey {
   name: string;
@@ -25,6 +26,8 @@ type ContextType = {
   wallet?: KeplrWallet;
   suggestChain?: () => Promise<void>;
   sendTokens?: (amount: number, recipient: string) => Promise<string>;
+  signSend?: (amount: number, recipient: string) => Promise<Uint8Array>;
+  broadcast?: (txBytes: Uint8Array) => Promise<string>;
   txResult?: BroadcastTxResponse;
   setTxResult: (txResult: BroadcastTxResponse | undefined) => void;
 };
@@ -209,8 +212,83 @@ export const WalletProvider: React.FC = ({ children }) => {
     return Promise.reject('No chain id or enpoint provided');
   };
 
+  const signSend = async (amount: number, recipient: string): Promise<Uint8Array> => {
+    if (chainId && chainRpc) {
+      amount *= 1000000;
+      amount = Math.floor(amount);
+
+      await window?.keplr?.enable(chainId);
+      const offlineSigner = !!window.getOfflineSigner && (await window.getOfflineSigner(chainId));
+
+      if (offlineSigner) {
+        const [sender] = await offlineSigner.getAccounts();
+        console.log('senderaddress', sender.address);
+        const client = await SigningStargateClient.connectWithSigner(chainRpc, offlineSigner, {
+          broadcastPollIntervalMs: 1000,
+          broadcastTimeoutMs: 60000, //todo
+        });
+        const fee = {
+          amount: [
+            {
+              denom: 'uregen',
+              amount: '100',
+            },
+          ],
+          gas: '200000',
+        };
+
+        const msgSend = {
+          fromAddress: sender.address,
+          toAddress: recipient,
+          amount: [
+            {
+              denom: 'uregen',
+              amount: amount.toString(),
+            },
+          ],
+        };
+        const msgAny = {
+          typeUrl: '/cosmos.bank.v1beta1.MsgSend',
+          value: msgSend,
+        };
+
+        const txRaw = await client.sign(sender.address, [msgAny], fee, 'sign test');
+        const txBytes = TxRaw.encode(txRaw).finish();
+
+        return txBytes;
+        // TODO: error handling
+      }
+    }
+    return Promise.reject('No chain id or enpoint provided');
+  };
+
+  const broadcast = async (txBytes: Uint8Array): Promise<string> => {
+    if (chainId && chainRpc) {
+      await window?.keplr?.enable(chainId);
+      const offlineSigner = !!window.getOfflineSigner && (await window.getOfflineSigner(chainId));
+
+      if (offlineSigner) {
+        const client = await SigningStargateClient.connectWithSigner(chainRpc, offlineSigner, {
+          broadcastPollIntervalMs: 1000,
+          broadcastTimeoutMs: 60000, //todo
+        });
+
+        const result = await client.broadcastTx(Uint8Array.from(txBytes));
+        console.log('result', result);
+        assertIsBroadcastTxSuccess(result);
+        setTxResult(result);
+
+        return result.transactionHash;
+        // TODO: error handling
+      }
+    }
+    return Promise.reject('No chain id or enpoint provided');
+  };
+
   return (
-    <WalletContext.Provider value={{ wallet, suggestChain, sendTokens, txResult, setTxResult }}>
+    <WalletContext.Provider
+      value={{ wallet, suggestChain, sendTokens, signSend, broadcast, txResult, setTxResult }}
+    >
       {children}
     </WalletContext.Provider>
   );

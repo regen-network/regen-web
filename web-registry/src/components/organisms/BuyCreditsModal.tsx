@@ -194,7 +194,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 interface BuyCreditsModalProps extends RegenModalProps {
-  onTxQueued: () => void;
+  onTxQueued: (txRaw: any) => void;
   initialValues?: BuyCreditsValues;
   project: Project;
   apiServerUrl?: string;
@@ -250,9 +250,9 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
   const submit = async (values: BuyCreditsValues): Promise<void> => {
     const recipient = 'regen18hj7m3skrsrr8lfvwqh66r7zruzdvp6ylwxrx4'; // test account
     const amount = values.creditCount;
-    if (walletContext.sendTokens) {
-      walletContext.sendTokens(amount, recipient);
-      onTxQueued();
+    if (walletContext.signSend && walletContext.broadcast) {
+      const txRaw = await walletContext.signSend(amount, recipient);
+      onTxQueued(txRaw);
       onClose();
     }
   };

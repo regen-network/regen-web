@@ -316,6 +316,13 @@ function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JS
     walletContext.setTxResult(undefined);
   };
 
+  const handleTxQueued = (txRaw: Uint8Array): void => {
+    setIsProcessingModalOpen(true);
+    if (walletContext?.broadcast) {
+      walletContext.broadcast(txRaw);
+    }
+  };
+
   const siteMetadata = {
     title: `Regen Network Registry`,
     description: `Learn about Regen Network's ${project.creditClass.name} credits sourced from ${project
@@ -502,7 +509,7 @@ function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JS
           <BuyCreditsModal
             open={isBuyCreditsModalOpen}
             onClose={() => setIsBuyCreditsModalOpen(false)}
-            onTxQueued={() => setIsProcessingModalOpen(true)}
+            onTxQueued={txRaw => handleTxQueued(txRaw)}
             project={project}
             imageStorageBaseUrl={imageStorageBaseUrl}
             apiServerUrl={apiServerUrl}

@@ -3070,6 +3070,23 @@ export type ResourceFieldsFragment = (
   )> }
 );
 
+export type SdgByIriQueryVariables = Exact<{
+  iris?: Maybe<Array<Scalars['String']> | Scalars['String']>;
+}>;
+
+
+export type SdgByIriQuery = (
+  { __typename?: 'RootQuery' }
+  & { allSdg: Array<(
+    { __typename?: 'Sdg' }
+    & Pick<Sdg, 'title'>
+    & { image?: Maybe<(
+      { __typename?: 'CustomImage' }
+      & CustomImageFieldsFragment
+    )> }
+  )> }
+);
+
 export type StepCardFieldsFragment = (
   { __typename?: 'StepCard' }
   & Pick<StepCard, 'isActive' | 'title' | 'descriptionRaw' | 'tagName' | 'videoSrc'>
@@ -3906,3 +3923,41 @@ export function useAllMethodologyReviewProcessPageLazyQuery(baseOptions?: Apollo
 export type AllMethodologyReviewProcessPageQueryHookResult = ReturnType<typeof useAllMethodologyReviewProcessPageQuery>;
 export type AllMethodologyReviewProcessPageLazyQueryHookResult = ReturnType<typeof useAllMethodologyReviewProcessPageLazyQuery>;
 export type AllMethodologyReviewProcessPageQueryResult = Apollo.QueryResult<AllMethodologyReviewProcessPageQuery, AllMethodologyReviewProcessPageQueryVariables>;
+export const SdgByIriDocument = gql`
+    query SdgByIri($iris: [String!]) {
+  allSdg(where: {iri: {current: {in: $iris}}}) {
+    title
+    image {
+      ...customImageFields
+    }
+  }
+}
+    ${CustomImageFieldsFragmentDoc}`;
+
+/**
+ * __useSdgByIriQuery__
+ *
+ * To run a query within a React component, call `useSdgByIriQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSdgByIriQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSdgByIriQuery({
+ *   variables: {
+ *      iris: // value for 'iris'
+ *   },
+ * });
+ */
+export function useSdgByIriQuery(baseOptions?: Apollo.QueryHookOptions<SdgByIriQuery, SdgByIriQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<SdgByIriQuery, SdgByIriQueryVariables>(SdgByIriDocument, options);
+      }
+export function useSdgByIriLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SdgByIriQuery, SdgByIriQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<SdgByIriQuery, SdgByIriQueryVariables>(SdgByIriDocument, options);
+        }
+export type SdgByIriQueryHookResult = ReturnType<typeof useSdgByIriQuery>;
+export type SdgByIriLazyQueryHookResult = ReturnType<typeof useSdgByIriLazyQuery>;
+export type SdgByIriQueryResult = Apollo.QueryResult<SdgByIriQuery, SdgByIriQueryVariables>;

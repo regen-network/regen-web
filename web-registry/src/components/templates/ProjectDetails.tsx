@@ -18,14 +18,13 @@ import SEO from 'web-components/lib/components/seo';
 import FixedFooter from 'web-components/lib/components/fixed-footer';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import EmailIcon from 'web-components/lib/components/icons/EmailIcon';
-import { DisplayValues } from 'web-components/lib/components/user/UserInfo';
+import { CreditPrice } from 'web-components/lib/components/fixed-footer/BuyFooter';
 
 import { setPageView } from '../../lib/ga';
 import getApiUri from '../../lib/apiUri';
 import { buildIssuanceModalData } from '../../lib/transform';
 import { useLedger, ContextType } from '../../ledger';
 import { chainId } from '../../wallet';
-import { Project, ProjectDefault } from '../../mocks';
 import {
   Documentation,
   ProjectTopSection,
@@ -35,6 +34,7 @@ import {
   LandManagementActions,
   BuyCreditsModal,
 } from '../organisms';
+import { DisplayValues } from '../organisms/EntityDisplayForm';
 import { useProjectByHandleQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -211,17 +211,20 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
 }));
-interface ProjectProps {
-  project: Project;
-  projects: Project[];
-  projectDefault: ProjectDefault;
+
+interface Project {
+  creditPrice?: CreditPrice;
+  stripePrice?: string;
 }
+
+// Update for testing purchase credits modal
+const project: Project = {};
 
 function getVisiblePartyName(party?: DisplayValues): string | undefined {
   return party?.['http://regen.network/showOnProjectPage'] ? party?.['http://schema.org/name'] : undefined;
 }
 
-function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JSX.Element {
+function ProjectDetails(): JSX.Element {
   const { api }: ContextType = useLedger();
   const { projectId } = useParams<{ projectId: string }>();
   const imageStorageBaseUrl = process.env.REACT_APP_IMAGE_STORAGE_BASE_URL;
@@ -336,38 +339,6 @@ function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JS
         <ProjectImpactSection impacts={project.impact} />
       </div>
 
-      {/* {protectedSpecies.length > 0 && (
-        <div
-          className={`${styles.projectDetails} ${styles.projectContent} ${styles.projectImpactContainer}`}
-        >
-          <Title variant="h3">
-            {project.fieldsOverride && project.fieldsOverride.nonMonitoredImpact
-              ? project.fieldsOverride.nonMonitoredImpact.title
-              : projectDefault.nonMonitoredImpact.title}
-          </Title>
-          <Description>
-            {project.fieldsOverride &&
-            project.fieldsOverride.nonMonitoredImpact &&
-            project.fieldsOverride.nonMonitoredImpact.subtitle
-              ? project.fieldsOverride.nonMonitoredImpact.subtitle
-              : projectDefault.nonMonitoredImpact.subtitle}
-          </Description>
-          <Grid container className={`${styles.projectGrid} ${styles.projectImpactGrid}`}>
-            {impact.map((item, index) => (
-              <Grid
-                item
-                xs={12}
-                sm={4}
-                className={`${styles.projectGridItem} ${styles.projectImpact}`}
-                key={`${index}-${item.name}`}
-              >
-                <ImpactCard name={item.name} description={item.description} imgSrc={item.imgSrc} />
-              </Grid>
-            ))}
-          </Grid>
-        </div>
-      )} */}
-
       {data?.projectByHandle?.documentsByProjectId?.nodes &&
         data.projectByHandle.documentsByProjectId.nodes.length > 0 && (
           <div className={clsx('topo-background-alternate', styles.projectContent)}>
@@ -412,9 +383,7 @@ function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JS
             )}
           >
             <Title className={styles.timelineTitle} variant="h2">
-              {project.fieldsOverride && project.fieldsOverride.timeline
-                ? project.fieldsOverride.timeline.title
-                : projectDefault.timeline.title}
+              Timeline
             </Title>
             <Timeline
               txClient={txClient}

@@ -15,10 +15,12 @@ import ProjectTopCard from 'web-components/lib/components/cards/ProjectTopCard';
 import ArrowIcon from 'web-components/lib/components/icons/ArrowDownIcon';
 import ReadMore from 'web-components/lib/components/read-more';
 import { ProjectByHandleQuery } from '../../generated/graphql';
+import { useSdgByIriQuery } from '../../generated/sanity-graphql';
 import { getParty, getDisplayParty } from '../../lib/transform';
+import { getSanityImgSrc } from '../../lib/imgSrc';
 
 interface ProjectTopProps {
-  data: ProjectByHandleQuery;
+  data?: ProjectByHandleQuery;
   geojson?: any;
   isGISFile?: boolean;
 }
@@ -283,6 +285,19 @@ function ProjectTopSection({ data, geojson, isGISFile }: ProjectTopProps): JSX.E
   const quote = metadata?.['http://regen.network/projectQuote'];
   const additionalCertification = metadata?.['http://regen.network/additionalCertification'];
   const glanceText = metadata?.['http://regen.network/glanceText']?.['@list'];
+  const sdgIris = creditClassVersion?.metadata?.['http://regen.network/SDGs']?.['@list']?.map(
+    (sdg: { '@id': string }) => sdg['@id'],
+  );
+  const { data: sdgData } = useSdgByIriQuery({
+    variables: {
+      iris: sdgIris,
+    },
+    skip: !sdgIris,
+  });
+  const sdgs = sdgData?.allSdg.map(s => ({
+    title: s.title || '',
+    imageUrl: getSanityImgSrc(s.image),
+  }));
 
   return (
     <Section classes={{ root: classes.section }}>
@@ -433,7 +448,7 @@ function ProjectTopSection({ data, geojson, isGISFile }: ProjectTopProps): JSX.E
             )}
             broker={getParty(data?.projectByHandle?.partyByBrokerId)}
             reseller={getParty(data?.projectByHandle?.partyByResellerId)}
-            sdgs={project.sdgs}
+            sdgs={sdgs}
           />
         </Grid>
       </Grid>

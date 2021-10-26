@@ -125,7 +125,7 @@ export function buildIssuanceModalData(
   return null;
 }
 
-function getParty(party?: Maybe<PartyFieldsFragment>): Party | undefined {
+export function getParty(party?: Maybe<PartyFieldsFragment>): Party | undefined {
   if (!party) {
     return undefined;
   }

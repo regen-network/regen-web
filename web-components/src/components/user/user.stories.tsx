@@ -13,7 +13,7 @@ export default {
 const user: User = {
   name: 'Odonata',
   location: 'South Melbourne, Victoria, Australia',
-  type: 'organization',
+  type: 'ORGANIZATION',
   image: 'http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png',
   description: 'Odonata is a not-for-profit entity supporting biodiversity impact solutions.',
 };

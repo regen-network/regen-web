@@ -47,7 +47,7 @@ export const WalletProvider: React.FC = ({ children }) => {
 
   const defaultClientOptions = {
     broadcastPollIntervalMs: 1000,
-    broadcastTimeoutMs: 60000, //t
+    broadcastTimeoutMs: 60000,
   };
 
   window.onload = async () => {

@@ -14,11 +14,10 @@ import {
 
 import { RegistryIconLink, RegistryNavLink, WalletButton } from '../atoms';
 
-import { projects } from '../../mocks';
-
 import { ReactComponent as Cow } from '../../assets/svgs/green-cow.svg';
 import { ReactComponent as BuyersIcon } from '../../assets/svgs/buyers.svg';
 import { ReactComponent as LandStewardsIcon } from '../../assets/svgs/land-stewards.svg';
+import { useMoreProjectsQuery } from '../../generated/graphql';
 
 const RegistryNav: React.FC = () => {
   const history = useHistory();
@@ -26,6 +25,7 @@ const RegistryNav: React.FC = () => {
   const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
   const theme = useTheme();
   const fullWidthRegExp: RegExp = /projects\/[a-z-]+/;
+  const { data: projectsData } = useMoreProjectsQuery();
 
   //  each custom dropdown still needs to be passed `dropdownItems` to render
   //  correctly on mobile, so I declare here to avoid duplicate code
@@ -92,9 +92,9 @@ const RegistryNav: React.FC = () => {
   const menuItems: HeaderMenuItem[] = [
     {
       title: 'Projects',
-      dropdownItems: projects.map(p => ({
-        title: titleAlias[p.name] || p.name,
-        href: `/projects/${p.id}`,
+      dropdownItems: projectsData?.allProjects?.nodes?.map(p => ({
+        title: titleAlias[p?.metadata?.['http://schema.org/name']] || p?.metadata?.['http://schema.org/name'],
+        href: `/projects/${p?.handle}`,
         linkComponent: RegistryNavLink,
       })),
     },

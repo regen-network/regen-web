@@ -9,7 +9,6 @@ export * from './CreateCreditClass';
 export * from './BuyerCreditsTransfer';
 export * from './CreateMethodology';
 export * from './CreditClassDetails';
-export * from './Credits';
 export * from './CreditsIssue';
 export * from './CreditsRetire';
 export * from './CreditsTransfer';

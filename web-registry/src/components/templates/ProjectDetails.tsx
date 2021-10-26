@@ -34,8 +34,11 @@ import {
   LandManagementActions,
   BuyCreditsModal,
 } from '../organisms';
+import { Credits } from '../organisms/BuyCreditsModal';
 import { DisplayValues } from '../organisms/EntityDisplayForm';
-import { useProjectByHandleQuery } from '../../generated/graphql';
+import { useMoreProjectsQuery, useProjectByHandleQuery } from '../../generated/graphql';
+import { useEcologicalImpactByIriQuery } from '../../generated/sanity-graphql';
+import { client } from '../../sanity';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -215,6 +218,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 interface Project {
   creditPrice?: CreditPrice;
   stripePrice?: string;
+  credits?: Credits;
 }
 
 // Update for testing purchase credits modal
@@ -238,6 +242,7 @@ function ProjectDetails(): JSX.Element {
     variables: { handle: projectId },
   });
   const metadata = data?.projectByHandle?.metadata;
+  const { data: projectsData } = useMoreProjectsQuery();
 
   const [submitted, setSubmitted] = useState(false);
   const location = useLocation();
@@ -248,7 +253,7 @@ function ProjectDetails(): JSX.Element {
   const styles = useStyles();
   const theme = useTheme();
 
-  const otherProjects: Project[] = projects.filter(p => p.id !== projectId);
+  const otherProjects = projectsData?.allProjects?.nodes?.filter(p => p?.handle !== projectId);
 
   const [geojson, setGeojson] = useState<any | null>(null);
 
@@ -296,8 +301,9 @@ function ProjectDetails(): JSX.Element {
     }
   };
 
-  const creditClassName =
-    data?.projectByHandle?.creditClassByCreditClassId?.creditClassVersionsById?.nodes?.[0]?.name;
+  const creditClassVersion =
+    data?.projectByHandle?.creditClassByCreditClassId?.creditClassVersionsById?.nodes?.[0];
+  const creditClassName = creditClassVersion?.name;
   const partyName =
     getVisiblePartyName(metadata?.['http://regen.network/landSteward']) ||
     getVisiblePartyName(metadata?.['http://regen.network/projectDeveloper']) ||
@@ -314,6 +320,22 @@ function ProjectDetails(): JSX.Element {
     siteUrl: `${window.location.origin}/registry`,
   };
 
+  const coBenefitsIris =
+    creditClassVersion?.metadata?.['http://regen.network/coBenefits']?.['@list']?.map(
+      (impact: { '@id': string }) => impact['@id'],
+    ) || [];
+  const impactIris = [
+    creditClassVersion?.metadata?.['http://regen.network/indicator']?.['@id'],
+    ...coBenefitsIris,
+  ];
+  const { data: impactData } = useEcologicalImpactByIriQuery({
+    client,
+    variables: {
+      iris: impactIris,
+    },
+    skip: !impactIris,
+  });
+
   return (
     <div className={styles.root}>
       <SEO
@@ -324,10 +346,12 @@ function ProjectDetails(): JSX.Element {
       />
 
       <ProjectMedia
-        assets={metadata?.['http://regen.network/galleryPhotos'].map((photo: { '@value': string }) => ({
-          imgSrc: photo['@value'],
-          type: 'image',
-        }))}
+        assets={
+          metadata?.['http://regen.network/galleryPhotos']?.['@list']?.map((photo: { '@value': string }) => ({
+            src: photo['@value'],
+            type: 'image',
+          })) || []
+        }
         gridView
         mobileHeight={theme.spacing(78.75)}
         imageStorageBaseUrl={imageStorageBaseUrl}
@@ -336,7 +360,7 @@ function ProjectDetails(): JSX.Element {
       />
       <ProjectTopSection data={data} geojson={geojson} isGISFile={isGISFile} />
       <div className="topo-background-alternate">
-        <ProjectImpactSection impacts={project.impact} />
+        <ProjectImpactSection data={impactData} />
       </div>
 
       {data?.projectByHandle?.documentsByProjectId?.nodes &&
@@ -357,20 +381,21 @@ function ProjectDetails(): JSX.Element {
           </div>
         )}
 
-      {metadata?.['http://regen.network/landManagementActions']?.['@list'] &&
-        metadata?.['http://regen.network/landManagementActions']?.['@list'].map((actions: any, i: number) => (
-          <div key={i} className={clsx('topo-background-alternate', i > 0 ? styles.projectActionsGroup : '')}>
-            <LandManagementActions
-              actions={actions.map((action: any) => ({
+      {metadata?.['http://regen.network/landManagementActions']?.['@list'] && (
+        <div className="topo-background-alternate">
+          <LandManagementActions
+            actions={metadata?.['http://regen.network/landManagementActions']?.['@list']?.map(
+              (action: any) => ({
                 name: action['http://schema.org/name'],
                 description: action['http://schema.org/description'],
                 imgSrc: action['http://schema.org/image']?.['@value'],
-              }))}
-              title="Land Management Actions"
-              subtitle="This is how the project developers are planning to achieve the primary impact."
-            />
-          </div>
-        ))}
+              }),
+            )}
+            title="Land Management Actions"
+            subtitle="This is how the project developers are planning to achieve the primary impact."
+          />
+        </div>
+      )}
 
       {data?.projectByHandle?.eventsByProjectId?.nodes &&
         data.projectByHandle.eventsByProjectId.nodes.length > 0 && (
@@ -398,7 +423,7 @@ function ProjectDetails(): JSX.Element {
           </div>
         )}
 
-      {otherProjects.length > 0 && (
+      {otherProjects && otherProjects.length > 0 && (
         <div className="topo-background-alternate">
           <MoreProjectsSection projects={otherProjects} />
         </div>
@@ -450,11 +475,17 @@ function ProjectDetails(): JSX.Element {
           {...issuanceModalData}
         />
       )}
-      {chainId && project.creditPrice && (
+      {data && creditClassVersion && chainId && project.creditPrice && (
         <BuyCreditsModal
           open={isBuyCreditsModalOpen}
           onClose={() => setBuyCreditsModalOpen(false)}
-          project={project}
+          project={{
+            id: projectId,
+            name: data.projectByHandle?.metadata?.['http://schema.org/name'],
+            image: data.projectByHandle?.metadata?.['http://regen.network/previewPhoto'],
+            creditDenom: creditClassVersion.metadata?.['http://regen.network/creditDenom'] || creditClassName,
+            credits: project.credits,
+          }}
           imageStorageBaseUrl={imageStorageBaseUrl}
           apiServerUrl={apiServerUrl}
         />

@@ -22,7 +22,7 @@ export interface Party extends User {
   address: string;
 }
 
-interface Item {
+export interface Item {
   label: string;
   value?: JSX.Element | string;
 }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 
-import LedgerModal, { Party } from './LedgerModal';
+import LedgerModal, { Party, Item } from './LedgerModal';
 import { RegenModalProps } from './';
 import PartyAddress from '../party/PartyAddress';
 import Document, { DocumentInfo } from '../document';
@@ -11,7 +11,7 @@ import { formatStandardInfo, StandardInfo } from '../../utils/format';
 
 export interface IssuanceModalData {
   link?: string;
-  issuer: Party;
+  issuer?: Party;
   issuees: Party[];
   timestamp: string | Date;
   numberOfCredits: number; // net amount, ie total minus (bufferPool + permanenceReversalBuffer)
@@ -63,6 +63,14 @@ export default function IssuanceModal({
 }: IssuanceModalProps): JSX.Element {
   const [party, setParty] = useState<Party | null>(null);
 
+  let summary: Item[] = [];
+  if (issuer)
+    summary = [
+      {
+        label: 'issued by',
+        value: <PartyAddress name={issuer.name} address={issuer.address} onClick={() => setParty(issuer)} />,
+      },
+    ];
   return (
     <LedgerModal
       txClient={txClient}
@@ -71,12 +79,7 @@ export default function IssuanceModal({
       party={party}
       handleBack={() => setParty(null)}
       summary={[
-        {
-          label: 'issued by',
-          value: (
-            <PartyAddress name={issuer.name} address={issuer.address} onClick={() => setParty(issuer)} />
-          ),
-        },
+        ...summary,
         {
           label: 'issued to',
           value: (

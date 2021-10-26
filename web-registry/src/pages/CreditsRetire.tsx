@@ -186,7 +186,7 @@ const CreditsRetire: React.FC<{
                 vintagesData.allCreditVintages &&
                 vintagesData.allCreditVintages.nodes.map((node: any) => (
                   <MenuItem key={node.id} value={node.id}>
-                    {node.projectByProjectId.name} - {dateFormat.format(new Date(node.createdAt))}
+                    {node.projectByProjectId.metadata?.['http://schema.org/name']} - {dateFormat.format(new Date(node.createdAt))}
                   </MenuItem>
                 ))}
             </Select>

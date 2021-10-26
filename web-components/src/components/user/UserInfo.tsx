@@ -8,9 +8,9 @@ import OrganizationIcon from '../icons/OrganizationIcon';
 
 export interface User {
   name: string;
-  type: string; // user or organization
+  type: string; // USER or ORGANIZATION
   location?: string;
-  image?: string;
+  image?: string | null;
   description?: string;
   link?: string;
 }

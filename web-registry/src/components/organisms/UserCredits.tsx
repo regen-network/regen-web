@@ -2,7 +2,6 @@ import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import { Link } from 'react-router-dom';
-import { PurchasedCredits } from '../../mocks';
 import Title from 'web-components/lib/components/title';
 import PurchasedCreditsCard from 'web-components/lib/components/cards/PurchasedCreditsCard';
 import TotalCreditsIcon from 'web-components/lib/components/icons/TotalCreditsIcon';
@@ -107,6 +106,24 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
 }));
+
+interface Purchase {
+  total: number;
+  date: Date | string;
+}
+
+interface BasicProject {
+  id: string;
+  name: string;
+}
+
+interface PurchasedCredits {
+  userId: string;
+  project: BasicProject;
+  currentPurchase: Purchase;
+  totalPurchased: number;
+  totalAvailable: number;
+}
 
 interface PurchasedCreditsProps {
   credits: PurchasedCredits;

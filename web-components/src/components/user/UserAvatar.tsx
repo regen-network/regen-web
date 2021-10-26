@@ -5,7 +5,7 @@ import { getSize, Sizes } from '../../theme/sizing';
 
 interface UserAvatarProps {
   alt?: string;
-  src?: string;
+  src?: string | null;
   size?: string;
   border?: boolean;
   href?: string;
@@ -43,13 +43,14 @@ export default function UserAvatar({
   const spacing: Sizes = getSize(size);
   // TODO: is fallback icon when src not provided ok? what about the bg color?
   const classes = useStyles({ spacing, border });
-  const avatar = icon ? (
-    <Avatar className={classes.root} alt={alt}>
-      {icon}
-    </Avatar>
-  ) : (
-    <Avatar className={classes.root} alt={alt} src={src} />
-  );
+  const avatar =
+    !src || icon ? (
+      <Avatar className={classes.root} alt={alt}>
+        {icon}
+      </Avatar>
+    ) : (
+      <Avatar className={classes.root} alt={alt} src={src} />
+    );
 
   if (href) {
     return (

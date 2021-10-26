@@ -1,0 +1,20 @@
+fragment moreProjectFields on Project {
+  handle
+  metadata
+  creditClassByCreditClassId {
+    uri
+  }
+  partyByRegistryId {
+    name
+    image
+    type
+  }
+}
+
+query MoreProjects {
+  allProjects {
+    nodes {
+      ...moreProjectFields
+    }
+  }
+}

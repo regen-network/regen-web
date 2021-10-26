@@ -68,10 +68,6 @@ fragment purchasesFields on PurchasesConnection {
         documentId
       }
       projectByProjectId {
-        name
-        area
-        areaUnit
-        image
         type
         handle
         metadata

@@ -12,7 +12,7 @@ query AllCreditVintages {
         }
       }
       projectByProjectId {
-        name
+        metadata
         developerId
         stewardId
         landOwnerId

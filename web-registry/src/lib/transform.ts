@@ -27,21 +27,21 @@ export function buildIssuanceModalData(
         project.partyByDeveloperId
       ) {
         const projectDeveloper = getParty(project.partyByDeveloperId);
-        issuees.push(projectDeveloper);
+        if (projectDeveloper) issuees.push(projectDeveloper);
       }
       if (
         creditVintage.initialDistribution['http://regen.network/landStewardDistribution'] > 0 &&
         project.partyByStewardId
       ) {
         const landSteward = getParty(project.partyByStewardId);
-        issuees.push(landSteward);
+        if (landSteward) issuees.push(landSteward);
       }
       if (
         creditVintage.initialDistribution['http://regen.network/landOwnerDistribution'] > 0 &&
         project.partyByLandOwnerId
       ) {
         const landOwner = getParty(project.partyByLandOwnerId);
-        issuees.push(landOwner);
+        if (landOwner) issuees.push(landOwner);
       }
     }
 
@@ -100,7 +100,7 @@ export function buildIssuanceModalData(
       txHash: creditVintage.txHash,
       vintagePeriod: getFormattedPeriod(creditVintage.startDate, creditVintage.endDate),
       monitoringPeriods,
-      projectName: project.name || '',
+      projectName: project.metadata?.['http://schema.org/name'] || '',
       standard: {
         documentId:
           creditClassVersion?.metadata?.['http://regen.network/standard']?.[
@@ -159,11 +159,11 @@ export function getParty(party?: Maybe<PartyFieldsFragment>): Party | undefined 
 }
 
 export function getDisplayParty(
-  metadata: EntityDisplayValues,
   role: EntityFieldName,
+  metadata?: EntityDisplayValues,
   party?: Maybe<PartyFieldsFragment>,
 ): Party | undefined {
-  const showOnProjectPage = metadata[role]?.['http://regen.network/showOnProjectPage'];
+  const showOnProjectPage = metadata?.[role]?.['http://regen.network/showOnProjectPage'];
   if (showOnProjectPage) {
     return getParty(party);
   }

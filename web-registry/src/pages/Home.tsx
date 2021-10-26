@@ -7,12 +7,13 @@ import Section from 'web-components/lib/components/section';
 import Modal from 'web-components/lib/components/modal';
 import { HeroTitle, HeroAction } from '../components/molecules';
 import { ProjectCards, CreditClassCards } from '../components/organisms';
-import { projects, creditClasses } from '../mocks';
+import { creditClasses } from '../mocks';
 
 import cowsImg from '../assets/cows-by-barn.png';
 import topographyImg from '../assets/background.jpg';
 import horsesImg from '../assets/horses-grazing.png';
 
+import { useMoreProjectsQuery } from '../generated/graphql';
 import { useAllHomePageQuery, useAllCreditClassQuery } from '../generated/sanity-graphql';
 import { client } from '../sanity';
 
@@ -67,6 +68,7 @@ const Home: React.FC = () => {
   const { data: creditClassData } = useAllCreditClassQuery({ client });
   const content = data?.allHomePage?.[0];
   const creditClassesContent = creditClassData?.allCreditClass;
+  const { data: projectsData } = useMoreProjectsQuery();
 
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
@@ -80,11 +82,16 @@ const Home: React.FC = () => {
         classes={{ description: styles.topSectionDescription }}
       />
 
-      <CardMedia image={topographyImg}>
-        <Section title="Projects" classes={{ root: styles.section, title: styles.title }}>
-          <ProjectCards projects={projects} classes={{ root: styles.projectCards }} />
-        </Section>
-      </CardMedia>
+      {projectsData?.allProjects?.nodes && (
+        <CardMedia image={topographyImg}>
+          <Section title="Projects" classes={{ root: styles.section, title: styles.title }}>
+            <ProjectCards
+              projects={projectsData?.allProjects?.nodes}
+              classes={{ root: styles.projectCards }}
+            />
+          </Section>
+        </CardMedia>
+      )}
 
       <Section
         title="Credit Classes"

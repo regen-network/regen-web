@@ -18,6 +18,8 @@ import { ProjectByHandleQuery } from '../../generated/graphql';
 import { useSdgByIriQuery } from '../../generated/sanity-graphql';
 import { getParty, getDisplayParty } from '../../lib/transform';
 import { getSanityImgSrc } from '../../lib/imgSrc';
+import { qudtUnit, qudtUnitMap } from '../../lib/rdf';
+import { client } from '../../sanity';
 
 interface ProjectTopProps {
   data?: ProjectByHandleQuery;
@@ -263,11 +265,6 @@ function ProjectTopLink({
   );
 }
 
-const qudtUnit = {
-  'http://qudt.org/1.1/vocab/unit#HA': 'hectares',
-  'http://qudt.org/1.1/vocab/unit#AC': 'acres',
-};
-
 function ProjectTopSection({ data, geojson, isGISFile }: ProjectTopProps): JSX.Element {
   const classes = useStyles();
 
@@ -277,7 +274,7 @@ function ProjectTopSection({ data, geojson, isGISFile }: ProjectTopProps): JSX.E
   const metadata = data?.projectByHandle?.metadata;
   const videoURL = metadata?.['http://regen.network/videoURL']?.['@value'];
   const landStewardPhoto = metadata?.['http://regen.network/landStewardPhoto']?.['@value'];
-  const unit: 'http://qudt.org/1.1/vocab/unit#HA' | 'http://qudt.org/1.1/vocab/unit#AC' =
+  const unit: qudtUnit =
     metadata?.['http://regen.network/size']?.['http://qudt.org/1.1/schema/qudt#unit']?.['@value'];
   const creditClass = data?.projectByHandle?.creditClassByCreditClassId;
   const creditClassVersion = creditClass?.creditClassVersionsById?.nodes?.[0];
@@ -289,6 +286,7 @@ function ProjectTopSection({ data, geojson, isGISFile }: ProjectTopProps): JSX.E
     (sdg: { '@id': string }) => sdg['@id'],
   );
   const { data: sdgData } = useSdgByIriQuery({
+    client,
     variables: {
       iris: sdgIris,
     },
@@ -313,7 +311,7 @@ function ProjectTopSection({ data, geojson, isGISFile }: ProjectTopProps): JSX.E
                   '@value'
                 ]
               }
-              areaUnit={qudtUnit[unit]}
+              areaUnit={qudtUnitMap[unit]}
             />
             <div className={classes.creditClassInfo}>
               {creditClass && creditClassVersion && (
@@ -411,7 +409,7 @@ function ProjectTopSection({ data, geojson, isGISFile }: ProjectTopProps): JSX.E
             {metadata?.['http://regen.network/landStewardStoryTitle']}
           </Title>
           <ReadMore maxLength={450} restMinLength={300}>
-            {metadata?.['http://regen.network/landStewardStory']}
+            {metadata?.['http://regen.network/landStewardStory'] || ''}
           </ReadMore>
           {quote && (
             <div>
@@ -432,18 +430,18 @@ function ProjectTopSection({ data, geojson, isGISFile }: ProjectTopProps): JSX.E
         <Grid item xs={12} md={4} className={classes.leftGrid}>
           <ProjectTopCard
             projectDeveloper={getDisplayParty(
-              metadata,
               'http://regen.network/projectDeveloper',
+              metadata,
               data?.projectByHandle?.partyByDeveloperId,
             )}
             landSteward={getDisplayParty(
-              metadata,
               'http://regen.network/landSteward',
+              metadata,
               data?.projectByHandle?.partyByStewardId,
             )}
             landOwner={getDisplayParty(
-              metadata,
               'http://regen.network/landOwner',
+              metadata,
               data?.projectByHandle?.partyByLandOwnerId,
             )}
             broker={getParty(data?.projectByHandle?.partyByBrokerId)}

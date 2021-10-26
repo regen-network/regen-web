@@ -13,12 +13,14 @@ import Section from 'web-components/lib/components/section';
 import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
 import UserAvatar from 'web-components/lib/components/user/UserAvatar';
 import { getFormattedPeriod } from 'web-components/lib/utils/format';
+
 import {
   useAllPurchasesByStripeIdQuery,
   useAllPurchasesByWalletIdQuery,
   Maybe,
   ProjectPartyFragment,
 } from '../generated/graphql';
+import { qudtUnit, qudtUnitMap } from '../lib/rdf';
 
 import background from '../assets/certificate-bg.png';
 import pageBackground from '../assets/certificate-page-bg.jpg';
@@ -271,7 +273,7 @@ function CertificatePage(): JSX.Element {
                   'Carbon Removal'
                 }
                 creditUnitName={creditClassVersion?.metadata?.['http://regen.network/creditDenom']}
-                projectName={project?.name || ''}
+                projectName={project?.metadata?.['http://schema.org/name'] || ''}
                 creditsUnits={units}
                 equivalentTonsCO2={units} // 1 credit <=> 1 ton CO2e
                 buyerName={node?.walletByBuyerWalletId?.partiesByWalletId.nodes[0]?.name || ''}
@@ -294,11 +296,21 @@ function CertificatePage(): JSX.Element {
           projects.push(
             <ProjectCard
               href={project.handle ? `/projects/${project.handle}` : undefined}
-              name={project.name || ''}
-              imgSrc={project.image || ''}
-              place={project.addressByAddressId?.feature?.place_name || ''}
-              area={project.area || 0}
-              areaUnit={project.areaUnit || ''}
+              name={project.metadata?.['http://schema.org/name']}
+              imgSrc={project.metadata?.['http://regen.network/previewPhoto']?.['@value']}
+              place={project.metadata?.['http://schema.org/location']?.place_name}
+              area={
+                project.metadata?.['http://regen.network/size']?.[
+                  'http://qudt.org/1.1/schema/qudt#numericValue'
+                ]?.['@value']
+              }
+              areaUnit={
+                qudtUnitMap[
+                  project.metadata?.['http://regen.network/size']?.['http://qudt.org/1.1/schema/qudt#unit']?.[
+                    '@value'
+                  ] as qudtUnit
+                ]
+              }
               purchaseInfo={{
                 units,
                 vintageId: vintage.id,

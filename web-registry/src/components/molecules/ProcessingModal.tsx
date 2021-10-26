@@ -18,15 +18,14 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'column',
     alignItems: 'center',
     [theme.breakpoints.up('md')]: {
-      justifyContent: 'space-between',
-      height: theme.spacing(114.5),
+      height: 'auto',
     },
     [theme.breakpoints.down('xs')]: {
       padding: theme.spacing(4),
     },
   },
   spinner: {
-    marginTop: theme.spacing(4.75),
+    marginTop: theme.spacing(4),
     marginBottom: theme.spacing(4),
   },
   title: {
@@ -48,14 +47,11 @@ const useStyles = makeStyles(theme => ({
     },
   },
   verticalSpacing: {
-    [theme.breakpoints.down('xs')]: {
-      marginBottom: theme.spacing(6),
-    },
+    marginBottom: theme.spacing(6),
   },
   button: {
     padding: theme.spacing(2, 6),
     fontSize: theme.typography.pxToRem(18),
-    marginBottom: theme.spacing(2),
   },
 }));
 
@@ -77,15 +73,16 @@ const ProcessingModal: React.FC<Props> = ({ open, onClose, txHash }) => {
       <Description className={cx(styles.description, styles.verticalSpacing)} align="center">
         This may take up to 10 minutes. Meanwhile, feel free to continue browsing the marketplace.
       </Description>
-      <OutlinedButton
-        className={styles.button}
-        href={`${process.env.REACT_APP_BLOCK_EXPLORER}/txs/${txHash}`}
-        target="_blank"
-        startIcon={<ShieldIcon />}
-        disabled={!txHash}
-      >
-        view on regen ledger
-      </OutlinedButton>
+      {txHash && (
+        <OutlinedButton
+          className={cx(styles.button, styles.verticalSpacing)}
+          href={`${process.env.REACT_APP_BLOCK_EXPLORER}/txs/${txHash}`}
+          target="_blank"
+          startIcon={<ShieldIcon />}
+        >
+          view on regen ledger
+        </OutlinedButton>
+      )}
     </Modal>
   );
 };

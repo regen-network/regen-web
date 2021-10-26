@@ -46,7 +46,7 @@ export const WalletProvider: React.FC = ({ children }) => {
   const [txResult, setTxResult] = useState<BroadcastTxResponse | undefined>(undefined);
 
   const defaultClientOptions = {
-    broadcastPollIntervalMs: 1000,
+    broadcastPollIntervalMs: 8000,
     broadcastTimeoutMs: 60000,
   };
 
@@ -214,7 +214,6 @@ export const WalletProvider: React.FC = ({ children }) => {
   const broadcast = async (txBytes: Uint8Array): Promise<string> => {
     const client = await getClient();
     const result = await client.broadcastTx(Uint8Array.from(txBytes));
-    console.log('result', result);
     assertIsBroadcastTxSuccess(result);
     setTxResult(result);
 

@@ -30,7 +30,9 @@ const useStyles = makeStyles(theme => ({
     },
   },
   cows: {
-    height: theme.spacing(20),
+    [theme.breakpoints.down('xs')]: {
+      height: theme.spacing(20),
+    },
   },
   title: {
     [theme.breakpoints.up('sm')]: {

@@ -44,7 +44,7 @@ const useStyles = makeStyles(theme => ({
   },
   card: {
     display: 'flex',
-    padding: '29px 21px',
+    padding: theme.spacing(7.25, 5.25),
     width: '100%',
     justifyContent: 'space-between',
     [theme.breakpoints.up('sm')]: {

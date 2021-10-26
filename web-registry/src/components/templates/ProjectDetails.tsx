@@ -316,10 +316,10 @@ function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JS
     walletContext.setTxResult(undefined);
   };
 
-  const handleTxQueued = (txRaw: Uint8Array): void => {
+  const handleTxQueued = (txBytes: Uint8Array): void => {
     setIsProcessingModalOpen(true);
     if (walletContext?.broadcast) {
-      walletContext.broadcast(txRaw);
+      walletContext.broadcast(txBytes);
     }
   };
 

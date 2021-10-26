@@ -40,15 +40,14 @@ const chainName = process.env.REACT_APP_LEDGER_CHAIN_NAME;
 const chainRpc = `${process.env.REACT_APP_API_URI}/ledger`;
 const chainRestEndpoint = process.env.REACT_APP_LEDGER_REST_ENDPOINT;
 const emptySender = { address: '', shortAddress: '' };
+const defaultClientOptions = {
+  broadcastPollIntervalMs: 1000,
+  broadcastTimeoutMs: 600000,
+};
 
 export const WalletProvider: React.FC = ({ children }) => {
   const [sender, setSender] = useState<Sender>(emptySender);
   const [txResult, setTxResult] = useState<BroadcastTxResponse | undefined>(undefined);
-
-  const defaultClientOptions = {
-    broadcastPollIntervalMs: 8000,
-    broadcastTimeoutMs: 60000,
-  };
 
   window.onload = async () => {
     if (!sender.address) {
@@ -174,6 +173,9 @@ export const WalletProvider: React.FC = ({ children }) => {
     }
   };
 
+  /**
+   * Sign a transaction for sending tokens to a reciptient
+   */
   const signSend = async (amount: number, recipient: string): Promise<Uint8Array> => {
     amount *= 1000000;
     amount = Math.floor(amount);
@@ -211,9 +213,12 @@ export const WalletProvider: React.FC = ({ children }) => {
     // TODO: error handling
   };
 
-  const broadcast = async (txBytes: Uint8Array): Promise<string> => {
+  /**
+   * Broadcast a signed transaction and wait for transaction hash
+   */
+  const broadcast = async (signedTxBytes: Uint8Array): Promise<string> => {
     const client = await getClient();
-    const result = await client.broadcastTx(Uint8Array.from(txBytes));
+    const result = await client.broadcastTx(signedTxBytes);
     assertIsBroadcastTxSuccess(result);
     setTxResult(result);
 

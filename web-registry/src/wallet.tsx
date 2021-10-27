@@ -228,7 +228,7 @@ export const WalletProvider: React.FC = ({ children }) => {
   const getClient = async (): Promise<SigningStargateClient> => {
     if (chainId && chainRpc) {
       await window?.keplr?.enable(chainId);
-      const offlineSigner = !!window.getOfflineSigner && (await window.getOfflineSigner(chainId));
+      const offlineSigner = !!window.getOfflineSignerAuto && (await window.getOfflineSignerAuto(chainId));
 
       if (offlineSigner) {
         if (!sender.address) {

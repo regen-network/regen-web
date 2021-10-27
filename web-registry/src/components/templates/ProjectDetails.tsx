@@ -36,8 +36,9 @@ import {
   CreditsPurchaseForm,
   LandManagementActions,
   BuyCreditsModal,
+  ProcessingModal,
+  ConfirmationModal,
 } from '../organisms';
-import { ProcessingModal, ConfirmationModal } from '../molecules';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -330,14 +331,6 @@ function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JS
     author: `Regen Network`,
     siteUrl: `${window.location.origin}/registry`,
   };
-
-  // TODO: ### for UI testing. Delete  below before merge! #######
-  project.creditPrice = { unitPrice: 15.12, currency: 'USD' };
-  project.credits = {
-    issued: 10000,
-    purchased: 7500,
-  };
-  // ###### DELETE mock credit issuance data above ####
 
   return (
     <div className={styles.root}>

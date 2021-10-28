@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { makeStyles, Theme, Link } from '@material-ui/core';
+import { makeStyles, Theme, Link, Grid } from '@material-ui/core';
 import { graphql, useStaticQuery } from 'gatsby';
 import Img from 'gatsby-image';
-import Grid from '@material-ui/core/Grid';
 import ReactHtmlParser from 'react-html-parser';
+import cx from 'clsx';
 
 import Card from 'web-components/lib/components/cards/Card';
 import Title from 'web-components/lib/components/title';
@@ -24,9 +24,14 @@ const useStyles = makeStyles<Theme>(theme => ({
     borderColor: theme.palette.grey[100],
     borderRadius: '10px',
     background: theme.palette.grey[50],
-    padding: theme.spacing(8),
-    height: theme.spacing(89.75),
     justifyContent: 'space-between',
+    [theme.breakpoints.up('sm')]: {
+      padding: theme.spacing(8),
+      height: theme.spacing(89.75),
+    },
+    [theme.breakpoints.down('xs')]: {
+      padding: theme.spacing(8, 4),
+    },
   },
   image: {
     maxHeight: theme.spacing(28),
@@ -34,12 +39,23 @@ const useStyles = makeStyles<Theme>(theme => ({
   },
   title: {
     lineHeight: '34.8px',
+    [theme.breakpoints.down('xs')]: {
+      fontSize: theme.typography.pxToRem(24),
+    },
   },
   description: {
-    fontSize: theme.typography.pxToRem(22),
+    [theme.breakpoints.up('sm')]: {
+      fontSize: theme.typography.pxToRem(22),
+    },
+    [theme.breakpoints.down('xs')]: {
+      fontSize: theme.typography.pxToRem(18),
+    },
   },
   link: {
     cursor: 'pointer',
+  },
+  verticalSpacing: {
+    marginBottom: theme.spacing(4),
   },
 }));
 
@@ -82,8 +98,11 @@ const CallToAction = (): JSX.Element => {
           return (
             <Grid key={cta.header} item xs>
               <Card className={styles.card}>
-                <Img className={styles.image} fixed={cta.image.childImageSharp.fixed} />
-                <Title className={styles.title} variant="h4" align="center">
+                <Img
+                  className={cx(styles.image, styles.verticalSpacing)}
+                  fixed={cta.image.childImageSharp.fixed}
+                />
+                <Title className={cx(styles.title, styles.verticalSpacing)} variant="h4" align="center">
                   {cta.header}
                 </Title>
                 <Description className={styles.description} align="center">

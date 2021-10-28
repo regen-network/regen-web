@@ -106,6 +106,10 @@ const Layout: React.FC<Props> = ({ children, location }) => {
           title: 'Invest',
           href: '/invest/',
         },
+        {
+          title: 'Fund',
+          href: '/fund/',
+        },
       ],
     },
   ];

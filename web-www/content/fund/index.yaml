@@ -1,0 +1,28 @@
+seo:
+  title: Regen Ecosystem Fund
+  description: The Regen Ecosystem Fund is dedicated to identifying and investing in early-stage ventures that
+    have massive upside and strategic network value. We believe this program will supercharge Regen Network’s
+    strategy to out-cooperate the competition, by allowing for seamless issuance of top-tier quality ecosystem service credits. 
+    Our goal is to build a strong, diverse platform that can serve as the backbone for an emerging economy based on living capital.
+topSection:
+  header: Regen Ecosystem Fund
+foldSection:
+  title: Regen Ecosystem Fund 
+  body: The Regen Ecosystem Fund is dedicated to identifying and investing in early-stage ventures that
+    have massive upside and strategic network value. We believe this program will supercharge Regen Network’s
+    strategy to out-cooperate the competition, by allowing for seamless issuance of top-tier quality ecosystem service credits. 
+    Our goal is to build a strong, diverse platform that can serve as the backbone for an emerging economy based on living capital.
+callToActionSection:
+  callToActions:
+    - caption: Startup
+      image: ../../static/media/land-stewards.png
+      header: Are you an early stage start-up in the ecocredit space looking for investment?
+      description: Contact us at 
+      linkText: ecosystemfund@regen.network
+      linkUrl: mailto:ecosystemfund@regen.network
+    - caption: Investor
+      image: ../../static/media/buyers.png
+      header: Interested in investing in the Regen Ecosystem Fund? 
+      description: Fill out this form to get started.
+      linkText: this form
+      linkUrl: https://registry.regen.network/buyers/

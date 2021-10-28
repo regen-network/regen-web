@@ -47,7 +47,7 @@ const MarketingNav: React.FC<{ location: Location }> = ({ location }) => {
   // Links in rest of the site must use the trailing '/'
   // in order for these to work appropriately
   const headerNoBorderBottomPages: RegExp = new RegExp(
-    '//|/partners/|/contact/|/validators/|/resources/|/media/|/team/|/developers/|/science/|/invest/|/case-studies/|/press-kit/|/community/|/wallet-address-registration/|/mainnet/|/token/|/case-studies/[a-z-]+//',
+    '//|/partners/|/contact/|/validators/|/resources/|/media/|/team/|/developers/|/science/|/invest/|/case-studies/|/press-kit/|/community/|/wallet-address-registration/|/mainnet/|/token/|/fund/|/case-studies/[a-z-]+//',
   );
 
   const standardItems: HeaderDropdownItemProps[] = [

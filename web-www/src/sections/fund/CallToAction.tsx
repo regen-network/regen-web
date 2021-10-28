@@ -29,9 +29,11 @@ const useStyles = makeStyles<Theme>(theme => ({
     borderRadius: '10px',
   },
   image: {
-    maxHeight: 111,
-    maxWidth: 111,
-    marginBottom: theme.spacing(6),
+    maxHeight: 112,
+    maxWidth: 112,
+  },
+  title: {
+    lineHeight: '34.8px',
   },
   description: {
     fontSize: theme.typography.pxToRem(22),
@@ -81,10 +83,10 @@ const CallToAction = (): JSX.Element => {
             <Grid key={cta.header} item xs>
               <Card className={styles.card}>
                 <Img className={styles.image} fixed={cta.image.childImageSharp.fixed} />
-                <Title variant="h4" align="center">
+                <Title className={styles.title} variant="h4" align="center">
                   {cta.header}
                 </Title>
-                <Description className={styles.description}>
+                <Description className={styles.description} align="center">
                   {cta.descriptionWithModalLink ? (
                     <>
                       {cta.descriptionWithModalLink.beginning}{' '}

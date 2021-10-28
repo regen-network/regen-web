@@ -14,15 +14,13 @@ foldSection:
     Our goal is to build a strong, diverse platform that can serve as the backbone for an emerging economy based on living capital.
 calltoActionSection:
   callToActions:
-    - caption: Startup
-      image: ../../static/media/land-stewards.png
+    - image: ../../static/media/land-stewards.png
       header: Are you an early stage start-up in the ecocredit space looking for investment?
-      description: Contact us at 
-      linkText: ecosystemfund@regen.network
-      linkUrl: mailto:ecosystemfund@regen.network
-    - caption: Investor
-      image: ../../static/media/buyers.png
+      description: Contact us at <a href="mailto:ecosystemfund@regen.network">ecosystemfund@regen.network</a>.
+    - image: ../../static/media/buyers.png
       header: Interested in investing in the Regen Ecosystem Fund? 
-      description: Fill out this form to get started.
-      linkText: this form
-      linkUrl: https://registry.regen.network/buyers/
+      descriptionWithModalLink:
+        beginning: Fill out 
+        linkText: this form
+        linkUrl: https://registry.regen.network/buyers/
+        end: to get started.

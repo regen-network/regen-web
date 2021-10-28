@@ -1,12 +1,15 @@
-import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
+import React, { useState } from 'react';
+import { makeStyles, Theme, Link } from '@material-ui/core';
 import { graphql, useStaticQuery } from 'gatsby';
 import Img from 'gatsby-image';
 import Grid from '@material-ui/core/Grid';
+import ReactHtmlParser from 'react-html-parser';
 
 import Card from 'web-components/lib/components/cards/Card';
 import Title from 'web-components/lib/components/title';
+import Description from 'web-components/lib/components/description';
 import Section from 'web-components/src/components/section';
+import Modal from 'web-components/src/components/modal';
 
 const useStyles = makeStyles<Theme>(theme => ({
   root: {
@@ -20,6 +23,21 @@ const useStyles = makeStyles<Theme>(theme => ({
     alignItems: 'center',
     padding: theme.spacing(8),
     background: theme.palette.grey[50],
+    height: theme.spacing(89.75),
+    justifyContent: 'space-between',
+    borderColor: theme.palette.grey[100],
+    borderRadius: '10px',
+  },
+  image: {
+    maxHeight: 111,
+    maxWidth: 111,
+    marginBottom: theme.spacing(6),
+  },
+  description: {
+    fontSize: theme.typography.pxToRem(22),
+  },
+  link: {
+    cursor: 'pointer',
   },
 }));
 
@@ -38,11 +56,14 @@ const CallToAction = (): JSX.Element => {
                 }
               }
             }
-            caption
             header
             description
-            linkText
-            linkUrl
+            descriptionWithModalLink {
+              beginning
+              linkText
+              linkUrl
+              end
+            }
           }
         }
       }
@@ -50,6 +71,7 @@ const CallToAction = (): JSX.Element => {
   `);
 
   const content = data.text.calltoActionSection;
+  const [modalIframeLink, setModalIframeLink] = useState<string>('');
 
   return (
     <Section className={styles.root}>
@@ -58,16 +80,34 @@ const CallToAction = (): JSX.Element => {
           return (
             <Grid key={cta.header} item xs>
               <Card className={styles.card}>
-                <Img fixed={cta.image.childImageSharp.fixed} />
+                <Img className={styles.image} fixed={cta.image.childImageSharp.fixed} />
                 <Title variant="h4" align="center">
                   {cta.header}
                 </Title>
-                <p>{cta.description}</p>
+                <Description className={styles.description}>
+                  {cta.descriptionWithModalLink ? (
+                    <>
+                      {cta.descriptionWithModalLink.beginning}{' '}
+                      <Link
+                        className={styles.link}
+                        onClick={() => setModalIframeLink(cta.descriptionWithModalLink.linkUrl)}
+                      >
+                        {cta.descriptionWithModalLink.linkText}
+                      </Link>{' '}
+                      {cta.descriptionWithModalLink.end}
+                    </>
+                  ) : (
+                    ReactHtmlParser(cta.description)
+                  )}
+                </Description>
               </Card>
             </Grid>
           );
         })}
       </Grid>
+      <Modal open={!!modalIframeLink} onClose={() => setModalIframeLink('')} className={styles.modal}>
+        <iframe title="cta-modal-iframe-link" src={modalIframeLink} />
+      </Modal>
     </Section>
   );
 };

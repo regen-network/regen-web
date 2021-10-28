@@ -4,7 +4,7 @@ import { useStaticQuery, graphql, PageProps } from 'gatsby';
 import SEO from '../components/seo';
 import TopSection from '../sections/fund/TopSection';
 import FoldSection from '../sections/fund/FoldSection';
-// import CallToActionSection from '../sections/fund/CallToActionSection';
+import CallToAction from '../sections/fund/CallToAction';
 
 const TokenPage = ({ location }: PageProps): JSX.Element => {
   const data = useStaticQuery(graphql`
@@ -31,7 +31,7 @@ const TokenPage = ({ location }: PageProps): JSX.Element => {
       />
       <TopSection />
       <FoldSection />
-      {/* <CallToActionSection /> */}
+      <CallToAction />
     </>
   );
 };

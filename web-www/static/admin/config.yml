@@ -976,7 +976,7 @@ collections:
               - {label: "Title", name: title, widget: string}
               - {label: "Body", name: body, widget: markdown}
           - label: "Call To Action Section"
-            name: callToActionSection
+            name: calltoActionSection
             widget: object
             fields:
               - label: "Call To Actions"

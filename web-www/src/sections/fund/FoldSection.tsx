@@ -31,7 +31,7 @@ const FoldSection = (): JSX.Element => {
 
   return (
     <Section>
-      <TitleDescription title={title} description={body}></TitleDescription>
+      <TitleDescription title={title} description={body} />
     </Section>
   );
 };

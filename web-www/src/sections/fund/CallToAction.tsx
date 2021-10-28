@@ -21,16 +21,16 @@ const useStyles = makeStyles<Theme>(theme => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    padding: theme.spacing(8),
-    background: theme.palette.grey[50],
-    height: theme.spacing(89.75),
-    justifyContent: 'space-between',
     borderColor: theme.palette.grey[100],
     borderRadius: '10px',
+    background: theme.palette.grey[50],
+    padding: theme.spacing(8),
+    height: theme.spacing(89.75),
+    justifyContent: 'space-between',
   },
   image: {
-    maxHeight: 112,
-    maxWidth: 112,
+    maxHeight: theme.spacing(28),
+    maxWidth: theme.spacing(28),
   },
   title: {
     lineHeight: '34.8px',
@@ -77,7 +77,7 @@ const CallToAction = (): JSX.Element => {
 
   return (
     <Section className={styles.root}>
-      <Grid container spacing={3}>
+      <Grid container spacing={5}>
         {content.callToActions.map((cta: any) => {
           return (
             <Grid key={cta.header} item xs>

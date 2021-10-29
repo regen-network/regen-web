@@ -165,6 +165,7 @@ const MarketingNav: React.FC<{ location: Location }> = ({ location }) => {
         { title: 'Resources', href: '/resources/', linkComponent: NavLink },
         { title: 'FAQ', href: '/faq/', linkComponent: NavLink },
         { title: 'Team', href: '/team/', linkComponent: NavLink },
+        { title: 'Fund', href: '/fund/', linkComponent: NavLink },
         { title: 'Careers', href: 'https://apply.workable.com/regen-network/', linkComponent: NavLink },
       ],
     },

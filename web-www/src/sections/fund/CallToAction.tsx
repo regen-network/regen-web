@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { makeStyles, Theme, Link, Grid } from '@material-ui/core';
+import { makeStyles, Theme, Link, Grid, Avatar } from '@material-ui/core';
 import { graphql, useStaticQuery } from 'gatsby';
 import Img from 'gatsby-image';
 import ReactHtmlParser from 'react-html-parser';
@@ -33,9 +33,11 @@ const useStyles = makeStyles<Theme>(theme => ({
       padding: theme.spacing(8, 4),
     },
   },
-  image: {
-    maxHeight: theme.spacing(28),
-    maxWidth: theme.spacing(28),
+  greenCircle: {
+    backgroundColor: theme.palette.secondary.light,
+    width: theme.spacing(28),
+    height: theme.spacing(28),
+    overflow: 'initial',
   },
   title: {
     lineHeight: '34.8px',
@@ -98,10 +100,9 @@ const CallToAction = (): JSX.Element => {
           return (
             <Grid key={cta.header} item xs>
               <Card className={styles.card}>
-                <Img
-                  className={cx(styles.image, styles.verticalSpacing)}
-                  fixed={cta.image.childImageSharp.fixed}
-                />
+                <Avatar className={cx(styles.greenCircle, styles.verticalSpacing)}>
+                  <Img fixed={cta.image.childImageSharp.fixed} />
+                </Avatar>
                 <Title className={cx(styles.title, styles.verticalSpacing)} variant="h4" align="center">
                   {cta.header}
                 </Title>

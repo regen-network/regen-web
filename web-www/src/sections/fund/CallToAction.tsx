@@ -19,6 +19,7 @@ const useStyles = makeStyles<Theme>(theme => ({
   },
   card: {
     display: 'flex',
+    flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
     borderColor: theme.palette.grey[100],
@@ -27,7 +28,7 @@ const useStyles = makeStyles<Theme>(theme => ({
     justifyContent: 'space-between',
     [theme.breakpoints.up('sm')]: {
       padding: theme.spacing(8),
-      height: theme.spacing(89.75),
+      height: '100%',
     },
     [theme.breakpoints.down('xs')]: {
       padding: theme.spacing(8, 4),

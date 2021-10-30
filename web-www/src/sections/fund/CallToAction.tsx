@@ -98,7 +98,7 @@ const CallToAction = (): JSX.Element => {
       <Grid container spacing={5}>
         {content.callToActions.map((cta: any) => {
           return (
-            <Grid key={cta.header} item xs>
+            <Grid key={cta.header} item sm={6}>
               <Card className={styles.card}>
                 <Avatar className={cx(styles.greenCircle, styles.verticalSpacing)}>
                   <Img fixed={cta.image.childImageSharp.fixed} />

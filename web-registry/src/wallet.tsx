@@ -206,11 +206,14 @@ export const WalletProvider: React.FC = ({ children }) => {
       value: msgSend,
     };
 
-    const txRaw = await client.sign(sender.address, [msgAny], fee, '');
-    const txBytes = TxRaw.encode(txRaw).finish();
-
-    return txBytes;
-    // TODO: error handling
+    try {
+      const txRaw = await client.sign(sender.address, [msgAny], fee, '');
+      const txBytes = TxRaw.encode(txRaw).finish();
+      return txBytes;
+    } catch (err) {
+      alert(`Client sign error: ${err}`);
+      return Promise.reject();
+    }
   };
 
   /**
@@ -227,28 +230,33 @@ export const WalletProvider: React.FC = ({ children }) => {
 
   const getClient = async (): Promise<SigningStargateClient> => {
     if (chainId && chainRpc) {
-      await window?.keplr?.enable(chainId);
-      const offlineSigner = !!window.getOfflineSignerAuto && (await window.getOfflineSignerAuto(chainId));
+      try {
+        await window?.keplr?.enable(chainId);
+        const offlineSigner = !!window.getOfflineSignerAuto && (await window.getOfflineSignerAuto(chainId));
 
-      if (offlineSigner) {
-        if (!sender.address) {
-          const [senderAccount] = await offlineSigner.getAccounts();
-          setSender({
-            address: senderAccount.address,
-            shortAddress: `${senderAccount.address.substring(0, 10)}...`,
-          });
+        if (offlineSigner) {
+          if (!sender.address) {
+            const [senderAccount] = await offlineSigner.getAccounts();
+            setSender({
+              address: senderAccount.address,
+              shortAddress: `${senderAccount.address.substring(0, 10)}...`,
+            });
+          }
+
+          const client = await SigningStargateClient.connectWithSigner(
+            chainRpc,
+            offlineSigner,
+            defaultClientOptions,
+          );
+
+          return client;
         }
-
-        const client = await SigningStargateClient.connectWithSigner(
-          chainRpc,
-          offlineSigner,
-          defaultClientOptions,
-        );
-
-        return client;
+      } catch (err) {
+        alert(`Wallet error: ${err}`);
+        return Promise.reject();
       }
     }
-    return Promise.reject('No chain id or enpoint provided');
+    return Promise.reject('No chain id or endpoint provided');
   };
 
   return (

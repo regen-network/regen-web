@@ -345,13 +345,6 @@ function ProjectDetails(): JSX.Element {
     siteUrl: `${window.location.origin}/registry`,
   };
 
-  // TODO: ### for UI testing. Delete  below before merge! #######
-  project.creditPrice = { unitPrice: 15.12, currency: 'USD' };
-  project.credits = {
-    issued: 10000,
-    purchased: 7500,
-  };
-  // ###### DELETE mock credit issuance data above ####
   const coBenefitsIris =
     creditClassVersion?.metadata?.['http://regen.network/coBenefits']?.['@list']?.map(
       (impact: { '@id': string }) => impact['@id'],

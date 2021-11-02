@@ -26,6 +26,7 @@ import { getImgSrc } from '../../lib/imgSrc';
 import getApiUri from '../../lib/apiUri';
 import { buildIssuanceModalData } from '../../lib/transform';
 import { useLedger, ContextType } from '../../ledger';
+import { chainId } from '../../wallet';
 import { Project, ProjectDefault, ActionGroup } from '../../mocks';
 import {
   Documentation,
@@ -34,6 +35,7 @@ import {
   MoreProjectsSection,
   CreditsPurchaseForm,
   LandManagementActions,
+  BuyCreditsModal,
 } from '../organisms';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -280,6 +282,7 @@ function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JS
 
   const [issuanceModalData, setIssuanceModalData] = useState<IssuanceModalData | null>(null);
   const [issuanceModalOpen, setIssuanceModalOpen] = useState(false);
+  const [isBuyCreditsModalOpen, setBuyCreditsModalOpen] = useState(false);
 
   const viewOnLedger = (creditVintage: any): void => {
     if (creditVintage?.txHash) {
@@ -424,7 +427,9 @@ function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JS
         </div>
       )}
 
-      {project.creditPrice && <BuyFooter onClick={handleOpen} creditPrice={project.creditPrice} />}
+      {chainId && project.creditPrice && (
+        <BuyFooter onClick={() => setBuyCreditsModalOpen(true)} creditPrice={project.creditPrice} />
+      )}
       {project.creditPrice && project.stripePrice && (
         <Modal open={open} onClose={handleClose}>
           <CreditsPurchaseForm
@@ -436,14 +441,20 @@ function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JS
         </Modal>
       )}
 
-      <FixedFooter justify="flex-end">
-        <>
-          <ContainedButton onClick={handleOpen} startIcon={<EmailIcon />}>
-            send me more info
-          </ContainedButton>
-          {/* {<OutlinedButton className={styles.callButton} startIcon={<PhoneIcon />}>schedule a call</OutlinedButton>} */}
-        </>
-      </FixedFooter>
+      {!project.creditPrice && (
+        <FixedFooter justify="flex-end">
+          <>
+            <ContainedButton onClick={handleOpen} startIcon={<EmailIcon />}>
+              send me more info
+            </ContainedButton>
+            {/*
+            <OutlinedButton className={styles.callButton} startIcon={<PhoneIcon />}>
+              schedule a call
+            </OutlinedButton>
+          */}
+          </>
+        </FixedFooter>
+      )}
       <Modal open={open} onClose={handleClose}>
         <MoreInfoForm
           apiUrl={getApiUri()}
@@ -460,6 +471,15 @@ function ProjectDetails({ projects, project, projectDefault }: ProjectProps): JS
           open={issuanceModalOpen}
           onClose={() => setIssuanceModalOpen(false)}
           {...issuanceModalData}
+        />
+      )}
+      {chainId && project.creditPrice && (
+        <BuyCreditsModal
+          open={isBuyCreditsModalOpen}
+          onClose={() => setBuyCreditsModalOpen(false)}
+          project={project}
+          imageStorageBaseUrl={imageStorageBaseUrl}
+          apiServerUrl={apiServerUrl}
         />
       )}
       {submitted && <Banner text="Thanks for submitting your information!" />}

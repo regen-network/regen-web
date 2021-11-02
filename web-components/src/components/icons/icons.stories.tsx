@@ -24,6 +24,7 @@ import BreadcrumbIcon from 'web-components/lib/components/icons/BreadcrumbIcon';
 import FacebookIcon from 'web-components/lib/components/icons/social/FacebookIcon';
 import InstagramIcon from 'web-components/lib/components/icons/social/InstagramIcon';
 import TelegramIcon from 'web-components/lib/components/icons/social/TelegramIcon';
+import DiscordIcon from 'web-components/lib/components/icons/social/DiscordIcon';
 import TwitterIcon from 'web-components/lib/components/icons/social/TwitterIcon';
 import LinkedInIcon from 'web-components/lib/components/icons/social/LinkedInIcon';
 import MediumIcon from 'web-components/lib/components/icons/social/MediumIcon';
@@ -52,6 +53,8 @@ import CountingIcon from 'web-components/lib/components/icons/CountingIcon';
 import SatelliteIcon from 'web-components/lib/components/icons/SatelliteIcon';
 import SoilSampleIcon from 'web-components/lib/components/icons/SoilSampleIcon';
 import TrashIcon from 'web-components/lib/components/icons/TrashIcon';
+import { WalletIcon } from 'web-components/lib/components/icons/WalletIcon';
+import { RegenTokenIcon } from 'web-components/lib/components/icons/RegenTokenIcon';
 
 import { withKnobs, text } from '@storybook/addon-knobs';
 
@@ -117,6 +120,8 @@ export const mediumIcon = (): JSX.Element => <MediumIcon />;
 
 export const telegramIcon = (): JSX.Element => <TelegramIcon />;
 
+export const discordIcon = (): JSX.Element => <DiscordIcon />;
+
 export const twitterIcon = (): JSX.Element => <TwitterIcon />;
 
 export const youtubeIcon = (): JSX.Element => <YoutubeIcon />;
@@ -168,3 +173,7 @@ export const satelliteIcon = (): JSX.Element => <SatelliteIcon />;
 export const soilSampleIcon = (): JSX.Element => <SoilSampleIcon />;
 
 export const trashIcon = (): JSX.Element => <TrashIcon />;
+
+export const walletIcon = (): JSX.Element => <WalletIcon />;
+
+export const regenTokenIcon = (): JSX.Element => <RegenTokenIcon />;

@@ -25,13 +25,14 @@ import {
   CreditClassDetails,
   Credits,
   CreditsIssue,
+  BuyerCreditsTransfer,
   CreditsRetire,
   CreditsTransfer,
   EntityDisplay,
   Home,
   // Home,
   LandStewards,
-  MediaStep,
+  Media,
   MethodologyDetails,
   MethodologyReviewProcess,
   NotFoundPage,
@@ -147,7 +148,7 @@ const App: React.FC = (): JSX.Element => {
                 <ProtectedRoute path={`${path}/:projectId/basic-info`} component={BasicInfo} />
                 <ProtectedRoute path={`${path}/:projectId/location`} component={ProjectLocation} />
                 <ProtectedRoute path={`${path}/:projectId/story`} component={Story} />
-                <ProtectedRoute path={`${path}/:projectId/media`} component={MediaStep} />
+                <ProtectedRoute path={`${path}/:projectId/media`} component={Media} />
                 <ProtectedRoute path={`${path}/:projectId/roles`} component={Roles} />
                 <ProtectedRoute path={`${path}/:projectId/entity-display`} component={EntityDisplay} />
 
@@ -169,13 +170,17 @@ const App: React.FC = (): JSX.Element => {
             path="/admin"
             render={({ match: { path } }) => (
               <>
-                <Route path={path} component={Admin} exact />
+                <ProtectedRoute path={path} component={Admin} exact />
                 {isAdmin(user) && (
                   <>
-                    <Route path={`${path}/credits/issue`} component={CreditsIssue} />
-                    <Route path={`${path}/credits/transfer`} component={CreditsTransfer} />
-                    <Route path={`${path}/credits/retire`} component={CreditsRetire} />
-                    <Route path={`${path}/buyer/create`} component={BuyerCreate} />
+                    <ProtectedRoute
+                      path={`${path}/credits/create-and-transfer`}
+                      component={BuyerCreditsTransfer}
+                    />
+                    <ProtectedRoute path={`${path}/credits/issue`} component={CreditsIssue} />
+                    <ProtectedRoute path={`${path}/credits/transfer`} component={CreditsTransfer} />
+                    <ProtectedRoute path={`${path}/credits/retire`} component={CreditsRetire} />
+                    <ProtectedRoute path={`${path}/buyer/create`} component={BuyerCreate} />
                   </>
                 )}
               </>

@@ -52,10 +52,10 @@ function getPartyIds(
 }
 
 function stripPartyIds(values: FormValues | undefined): FormValues | undefined {
-  if (values) {
+  if (values?.id && values?.partyId) {
     delete values.id;
     delete values.partyId;
-    if (!isIndividual(values)) {
+    if (!isIndividual(values) && values?.addressId && values?.ownerId && values?.ownerPartyId) {
       delete values.addressId;
       delete values.ownerId;
       delete values.ownerPartyId;

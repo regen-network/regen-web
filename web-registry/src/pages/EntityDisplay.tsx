@@ -1,14 +1,32 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { makeStyles, Theme } from '@material-ui/core/styles';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 
 import Description from 'web-components/lib/components/description';
 import { OnboardingFormTemplate } from '../components/templates';
-import { EntityDisplayForm, EntityDisplayValues } from '../components/organisms';
-import { useProjectByIdQuery, useUpdateProjectByIdMutation } from '../generated/graphql';
+import {
+  EntityDisplayForm,
+  EntityDisplayValues,
+  EntityFieldName,
+  DisplayValues,
+} from '../components/organisms';
+import {
+  useProjectByIdQuery,
+  useUpdateProjectByIdMutation,
+  useUpdatePartyByIdMutation,
+} from '../generated/graphql';
+import { isIndividual } from 'web-components/lib/components/inputs/RoleField';
 
 const exampleProjectUrl = '/projects/wilmot';
+
+type roleIdField = 'developerId' | 'stewardId' | 'landOwnerId' | 'originatorId';
+const rolesMap: { [key in EntityFieldName]: roleIdField } = {
+  'http://regen.network/projectDeveloper': 'developerId',
+  'http://regen.network/landSteward': 'stewardId',
+  'http://regen.network/landOwner': 'landOwnerId',
+  'http://regen.network/projectOriginator': 'originatorId',
+};
 
 const useStyles = makeStyles((theme: Theme) => ({
   description: {
@@ -17,27 +35,40 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
+function getInitialValues(value: any): any {
+  return value?.['@type'] ? value : undefined;
+}
+
 const EntityDisplay: React.FC = () => {
   const styles = useStyles();
   const activeStep = 0;
   const { projectId } = useParams();
+  const history = useHistory();
+  const [initialValues, setInitialValues] = useState<EntityDisplayValues | undefined>();
 
   const [updateProject] = useUpdateProjectByIdMutation();
+  const [updatePartyById] = useUpdatePartyByIdMutation();
   const { data } = useProjectByIdQuery({
     variables: { id: projectId },
+    fetchPolicy: 'cache-and-network',
   });
 
-  let initialFieldValues: EntityDisplayValues = {};
-  if (data?.projectById?.metadata) {
-    const metadata = data.projectById.metadata;
+  useEffect(() => {
+    if (data?.projectById?.metadata) {
+      const metadata = data.projectById.metadata;
 
-    initialFieldValues = {
-      'http://regen.network/landOwner': metadata['http://regen.network/landOwner'],
-      'http://regen.network/landSteward': metadata['http://regen.network/landSteward'],
-      'http://regen.network/projectDeveloper': metadata['http://regen.network/projectDeveloper'],
-      'http://regen.network/projectOriginator': metadata['http://regen.network/projectOriginator'],
-    };
-  }
+      setInitialValues({
+        'http://regen.network/landOwner': getInitialValues(metadata['http://regen.network/landOwner']),
+        'http://regen.network/landSteward': getInitialValues(metadata['http://regen.network/landSteward']),
+        'http://regen.network/projectDeveloper': getInitialValues(
+          metadata['http://regen.network/projectDeveloper'],
+        ),
+        'http://regen.network/projectOriginator': getInitialValues(
+          metadata['http://regen.network/projectOriginator'],
+        ),
+      });
+    }
+  }, [data]);
 
   const saveAndExit = (): Promise<void> => {
     // TODO: functionality
@@ -45,8 +76,32 @@ const EntityDisplay: React.FC = () => {
   };
 
   async function submit(values: EntityDisplayValues): Promise<void> {
-    const metadata = { ...data?.projectById?.metadata, ...values };
     try {
+      // update project stakeholders' parties
+      if (data?.projectById) {
+        for (const role in values) {
+          const value: DisplayValues = values[role as EntityFieldName] as DisplayValues;
+          const roleIdFieldName: roleIdField = rolesMap[role as EntityFieldName];
+          const roleId = data.projectById[roleIdFieldName];
+          if (value?.['http://regen.network/showOnProjectPage'] && roleId) {
+            await updatePartyById({
+              variables: {
+                input: {
+                  id: roleId,
+                  partyPatch: {
+                    description: value['http://schema.org/description'],
+                    image: isIndividual(value)
+                      ? value['http://schema.org/image']?.['@value']
+                      : value['http://schema.org/logo']?.['@value'],
+                  },
+                },
+              },
+            });
+          }
+        }
+      }
+      // update project metadata
+      const metadata = { ...data?.projectById?.metadata, ...values };
       await updateProject({
         variables: {
           input: {
@@ -57,9 +112,10 @@ const EntityDisplay: React.FC = () => {
           },
         },
       });
-      // TODO: go to next step
+      history.push(`/project-pages/${projectId}/story`);
     } catch (e) {
-      // console.error(e);
+      // TODO: display the error banner in case of server error
+      // https://github.com/regen-network/regen-registry/issues/554
     }
   }
 
@@ -71,7 +127,7 @@ const EntityDisplay: React.FC = () => {
           project page»
         </Link>
       </Description>
-      <EntityDisplayForm submit={submit} initialValues={initialFieldValues} />
+      <EntityDisplayForm submit={submit} initialValues={initialValues} />
     </OnboardingFormTemplate>
   );
 };

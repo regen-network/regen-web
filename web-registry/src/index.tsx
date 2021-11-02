@@ -12,6 +12,7 @@ import { IntercomProvider } from 'react-use-intercom';
 import { Auth0Provider } from '@auth0/auth0-react';
 import { AuthApolloProvider } from './apollo';
 import { LedgerProvider } from './ledger';
+import { WalletProvider } from './wallet';
 // import history from './lib/history';
 
 const config = {
@@ -44,13 +45,15 @@ ReactDOM.render(
     <AuthApolloProvider>
       <IntercomProvider appId={intercomId} autoBoot>
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
-          <LedgerProvider>
-            <ThemeProvider injectFonts>
-              {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-              <CssBaseline />
-              <App />
-            </ThemeProvider>
-          </LedgerProvider>
+          <WalletProvider>
+            <LedgerProvider>
+              <ThemeProvider injectFonts>
+                {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+                <CssBaseline />
+                <App />
+              </ThemeProvider>
+            </LedgerProvider>
+          </WalletProvider>
         </MuiPickersUtilsProvider>
       </IntercomProvider>
     </AuthApolloProvider>

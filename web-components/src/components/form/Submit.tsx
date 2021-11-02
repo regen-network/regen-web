@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import ContainedButton from '../buttons/ContainedButton';
 
 interface SubmitProps {
+  className?: string;
   submitCount: number;
   isValid: boolean;
   isSubmitting: boolean;
@@ -58,7 +59,8 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function Cancel({
+export default function Submit({
+  className,
   isSubmitting,
   onClose,
   status,
@@ -69,7 +71,7 @@ export default function Cancel({
 }: SubmitProps): JSX.Element {
   const classes = useStyles();
   return (
-    <Grid container wrap="nowrap" alignItems="center" justify="flex-end">
+    <Grid className={className} container wrap="nowrap" alignItems="center" justify="flex-end">
       <Grid
         xs={5}
         item

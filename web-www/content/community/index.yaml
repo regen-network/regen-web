@@ -4,11 +4,11 @@ topSection:
     by developers, scientists and validators.
 connectSection:
   header: Connect with our community
-  telegramSubLabel: ~2,484 followers
+  telegramSubLabel: 2600+ subscribers
   telegramUrl: http://t.me/regennetwork_public
-  twitterSubLabel: ~9,883 followers
+  twitterSubLabel: 11k+ followers
   twitterUrl: https://twitter.com/regen_network
-  discordSubLabel: ~1,752 members
+  discordSubLabel: 1800+ members
   discordUrl: https://discord.gg/regen-network
 goToSection:
   blogButtonText: go to blog

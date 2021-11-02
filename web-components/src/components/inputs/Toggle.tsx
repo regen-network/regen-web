@@ -10,6 +10,7 @@ import Radio from '../inputs/Radio';
 import Checkbox from '../inputs/Checkbox';
 
 interface ToggleProps extends FieldProps {
+  className?: string;
   classes?: {
     root?: string;
     description?: string;
@@ -23,6 +24,7 @@ interface ToggleProps extends FieldProps {
   tooltip?: string;
   disabled?: boolean;
   value?: string;
+  triggerOnChange?: (v: any) => Promise<void>;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -47,7 +49,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   active: {
     backgroundColor: theme.palette.grey[50],
     boxShadow: theme.shadows[1],
-    border: `1px solid ${theme.palette.secondary.light}`,
+    border: `1px solid ${theme.palette.secondary.contrastText}`,
     '& .MuiTypography-body1': {
       fontWeight: 'bold',
     },
@@ -105,6 +107,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const Toggle: React.FC<ToggleProps> = ({
+  className,
   classes,
   label,
   checked,
@@ -118,16 +121,25 @@ const Toggle: React.FC<ToggleProps> = ({
   field,
   form,
   meta,
+  triggerOnChange,
 }) => {
   const styles = useStyles();
 
   return (
-    <div className={clsx(styles.root, checked && styles.active, classes && classes.root)}>
+    <div className={clsx(styles.root, checked && styles.active, className, classes && classes.root)}>
       <div className={styles.top}>
         <FormControlLabel
           control={
             type === 'checkbox' ? (
-              <Checkbox className={styles.checkbox} field={field} form={form} meta={meta} type="checkbox" />
+              <Checkbox
+                className={styles.checkbox}
+                field={field}
+                form={form}
+                meta={meta}
+                indeterminate={false}
+                triggerOnChange={triggerOnChange}
+                type="checkbox"
+              />
             ) : (
               <Radio className={styles.radio} />
             )

@@ -11,12 +11,18 @@ import InfoIcon from '../icons/InfoIcon';
 import DropdownIcon from '../icons/DropdownIcon';
 import ContainedButton from '../buttons/ContainedButton';
 import Title from '../title';
-import { Party } from '../party/PartyAddress';
 import Tooltip from '../tooltip';
 import BreadcrumbIcon from '../icons/BreadcrumbIcon';
+import { User } from '../user/UserInfo';
 import { parseText } from '../../utils/textParser';
 
-interface Item {
+export interface Party extends User {
+  role: string;
+  individual: string;
+  address: string;
+}
+
+export interface Item {
   label: string;
   value?: JSX.Element | string;
 }

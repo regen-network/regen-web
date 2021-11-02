@@ -6,11 +6,12 @@ import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
-import { User } from 'web-components/lib/components/user/UserInfo';
-import { Project } from '../../mocks';
+
+import { MoreProjectFieldsFragment, Maybe } from '../../generated/graphql';
+import { qudtUnit, qudtUnitMap } from '../../lib/rdf';
 
 type Props = {
-  projects: Project[];
+  projects: Array<Maybe<MoreProjectFieldsFragment | undefined>>;
   classes?: {
     root?: string;
   };
@@ -66,49 +67,55 @@ const ProjectCards: React.FC<Props> = props => {
   const imageStorageBaseUrl = process.env.REACT_APP_IMAGE_STORAGE_BASE_URL;
   const apiServerUrl = process.env.REACT_APP_API_URI;
 
-  const LinkedProject: React.FC<{ project: Project; registry: User }> = ({ project, registry }) => (
+  const LinkedProject: React.FC<{
+    project: MoreProjectFieldsFragment;
+  }> = ({ project }) => (
     <ProjectCard
-      name={project.name}
-      imgSrc={project.image}
+      name={project.metadata?.['http://schema.org/name']}
+      imgSrc={project.metadata?.['http://regen.network/previewPhoto']?.['@value']}
       imageStorageBaseUrl={imageStorageBaseUrl}
       apiServerUrl={apiServerUrl}
-      place={project.place}
-      area={project.area}
-      areaUnit={project.areaUnit}
-      registry={registry}
+      place={project.metadata?.['http://schema.org/location']?.place_name}
+      area={
+        project.metadata?.['http://regen.network/size']?.['http://qudt.org/1.1/schema/qudt#numericValue']?.[
+          '@value'
+        ]
+      }
+      areaUnit={
+        qudtUnitMap[
+          project.metadata?.['http://regen.network/size']?.['http://qudt.org/1.1/schema/qudt#unit']?.[
+            '@value'
+          ] as qudtUnit
+        ]
+      }
+      registry={project.partyByRegistryId}
     />
   );
 
   return isMobile ? (
     <div className={styles.swipe}>
-      {props.projects.map(project => (
-        <Link className={styles.swipeItem} key={project.id} href={`/projects/${project.id}`}>
-          <LinkedProject
-            project={project}
-            registry={{
-              name: project.registry.name,
-              type: 'organization',
-              imgSrc: project.registry.image,
-            }}
-          />
-        </Link>
+      {props.projects.map((project, i) => (
+        <>
+          {project && (
+            <Link className={styles.swipeItem} key={project.handle || i} href={`/projects/${project.handle}`}>
+              <LinkedProject project={project} />
+            </Link>
+          )}
+        </>
       ))}
     </div>
   ) : (
     <Grid container className={clsx(styles.root, props.classes && props.classes.root)} spacing={5}>
-      {props.projects.map(project => (
-        <Grid item sm={6} md={4} key={project.id} className={styles.item}>
-          <Link className={styles.projectCard} href={`/projects/${project.id}`}>
-            <LinkedProject
-              project={project}
-              registry={{
-                name: project.registry.name,
-                type: 'organization',
-                imgSrc: project.registry.image,
-              }}
-            />
-          </Link>
-        </Grid>
+      {props.projects.map((project, i) => (
+        <>
+          {project && (
+            <Grid item sm={6} md={4} key={project.handle || i} className={styles.item}>
+              <Link className={styles.projectCard} href={`/projects/${project.handle}`}>
+                <LinkedProject project={project} />
+              </Link>
+            </Grid>
+          )}
+        </>
       ))}
     </Grid>
   );

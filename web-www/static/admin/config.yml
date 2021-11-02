@@ -953,6 +953,49 @@ collections:
               - {label: "Header", name: header, widget: string}
               - {label: "Button Text", name: buttonText, widget: string}
               - {label: "Input Text", name: inputText, widget: string}
+      - label: "Ecosystem Fund"
+        name: fund
+        file: "web-www/content/fund/index.yaml"
+        fields:
+          - label: "SEO"
+            name: seo
+            widget: object
+            fields:
+              - {label: "Title", name: title, widget: string}
+              - {label: "Description", name: description, widget: string}
+          - label: "Top Section"
+            name: topSection
+            widget: object
+            fields:
+              - {label: "Header", name: header, widget: string}
+              - {label: "Body", name: body, widget: string}
+          - label: "Above the Fold Section"
+            name: foldSection
+            widget: object
+            fields:
+              - {label: "Title", name: title, widget: string}
+              - {label: "Body", name: body, widget: markdown}
+          - label: "Call To Action Section"
+            name: calltoActionSection
+            widget: object
+            fields:
+              - label: "Call To Actions"
+                name: "callToActions"
+                widget: list
+                collapsed: false
+                fields:
+                  - {label: "Image", name: image, widget: image}
+                  - {label: "Header", name: header, widget: string}
+                  - {label: "Description", name: description, widget: markdown, required: false}
+                  - label: "Description with modal link"
+                    name: descriptionWithModalLink
+                    widget: object
+                    required: false
+                    fields:
+                      - {label: "Beginning", name: beginning, widget: string}
+                      - {label: "Link Text", name: linkText, widget: string}
+                      - {label: "Link URL", name: linkUrl, widget: string}
+                      - {label: "End", name: end, widget: string}
   - label: "Case Studies content"
     name: "case-study-items"
     media_folder: '../../static/media'

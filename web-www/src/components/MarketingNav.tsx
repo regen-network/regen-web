@@ -47,7 +47,7 @@ const MarketingNav: React.FC<{ location: Location }> = ({ location }) => {
   // Links in rest of the site must use the trailing '/'
   // in order for these to work appropriately
   const headerNoBorderBottomPages: RegExp = new RegExp(
-    '//|/partners/|/contact/|/validators/|/resources/|/media/|/team/|/developers/|/science/|/invest/|/case-studies/|/press-kit/|/community/|/wallet-address-registration/|/mainnet/|/token/|/case-studies/[a-z-]+//',
+    '//|/partners/|/contact/|/validators/|/resources/|/media/|/team/|/developers/|/science/|/invest/|/case-studies/|/press-kit/|/community/|/wallet-address-registration/|/mainnet/|/token/|/fund/|/case-studies/[a-z-]+//',
   );
 
   const standardItems: HeaderDropdownItemProps[] = [
@@ -165,6 +165,7 @@ const MarketingNav: React.FC<{ location: Location }> = ({ location }) => {
         { title: 'Resources', href: '/resources/', linkComponent: NavLink },
         { title: 'FAQ', href: '/faq/', linkComponent: NavLink },
         { title: 'Team', href: '/team/', linkComponent: NavLink },
+        // { title: 'Fund', href: '/fund/', linkComponent: NavLink },
         { title: 'Careers', href: 'https://apply.workable.com/regen-network/', linkComponent: NavLink },
       ],
     },

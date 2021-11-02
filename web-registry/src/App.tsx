@@ -23,7 +23,6 @@ import {
   CreateCreditClass,
   CreateMethodology,
   CreditClassDetails,
-  Credits,
   CreditsIssue,
   BuyerCreditsTransfer,
   CreditsRetire,
@@ -41,7 +40,6 @@ import {
   Project,
   ProjectList,
   ProjectLocation,
-  Projects,
   Roles,
   Seller,
   Signup,
@@ -109,7 +107,7 @@ const App: React.FC = (): JSX.Element => {
             path="/projects"
             render={({ match: { path } }) => (
               <>
-                <Route path={path} component={Projects} exact>
+                <Route path={path} exact>
                   <Redirect to="/projects/wilmot" />
                 </Route>
                 <Route path={`${path}/:projectId`} component={Project} />
@@ -121,16 +119,6 @@ const App: React.FC = (): JSX.Element => {
             render={({ match: { path } }) => (
               <>
                 <Route path={`${path}/:projectId/:walletId/:name`} component={PostPurchase} />
-              </>
-            )}
-          />
-          <Route
-            path="/credits"
-            render={({ match: { path } }) => (
-              <>
-                <Route path={`${path}/:projectId`} component={Credits}>
-                  <Redirect to="/projects/wilmot" />
-                </Route>
               </>
             )}
           />

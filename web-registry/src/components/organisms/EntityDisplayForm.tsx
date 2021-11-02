@@ -473,19 +473,16 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialVa
               classes={{ root: styles.projectTopCard, userInfo: styles.modalUserInfo }}
               projectDeveloper={{
                 name: 'Impact Ag Partners',
-                imgSrc: 'https://regen-registry.s3.amazonaws.com/projects/wilmot/impactag.jpg',
+                type: 'ORGANIZATION',
+                image: 'https://regen-registry.s3.amazonaws.com/projects/wilmot/impactag.jpg',
                 description:
                   'Impact Ag Partners is a specialist agricultural asset management firm and advisory service which utilises a variety of pathways and partners to measure and monetize natural capital.',
-                type: 'project developer',
               }}
               landSteward={{
                 name: 'Wilmot Cattle Co.',
-                type: 'organization',
-                place: {
-                  state: 'New South Wales',
-                  country: 'Australia',
-                },
-                imgSrc: 'https://regen-registry.s3.amazonaws.com/projects/wilmot/wilmot.jpg',
+                type: 'ORGANIZATION',
+                location: 'New South Wales, Australia',
+                image: 'https://regen-registry.s3.amazonaws.com/projects/wilmot/wilmot.jpg',
                 description: 'Wilmot Cattle Company is an innovative, regenerative, grass-fed beef business.',
               }}
             />

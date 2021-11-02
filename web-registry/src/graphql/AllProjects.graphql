@@ -2,7 +2,7 @@ query AllProjects {
   allProjects {
     nodes {
       id
-      name
+      metadata
       creditClassByCreditClassId {
         id
         methodologyByMethodologyId {

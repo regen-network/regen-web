@@ -3217,6 +3217,18 @@
             "deprecationReason": null
           },
           {
+            "name": "iri",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "Slug",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "path",
             "description": "This will be used in the credit class page url: \"/credit-classes/{path}\"",
             "args": [],
@@ -3413,6 +3425,16 @@
             "defaultValue": null
           },
           {
+            "name": "iri",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "SlugFilter",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "path",
             "description": null,
             "type": {
@@ -3509,6 +3531,16 @@
             "type": {
               "kind": "ENUM",
               "name": "SortOrder",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "iri",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "SlugSorting",
               "ofType": null
             },
             "defaultValue": null
@@ -5274,6 +5306,18 @@
             "deprecationReason": null
           },
           {
+            "name": "iri",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "Slug",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "descriptionRaw",
             "description": null,
             "args": [],
@@ -5287,6 +5331,18 @@
           },
           {
             "name": "image",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "CustomImage",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "standard",
             "description": null,
             "args": [],
             "type": {
@@ -5396,7 +5452,27 @@
             "defaultValue": null
           },
           {
+            "name": "iri",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "SlugFilter",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "image",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "CustomImageFilter",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "standard",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
@@ -5638,7 +5714,27 @@
             "defaultValue": null
           },
           {
+            "name": "iri",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "SlugSorting",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "image",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "CustomImageSorting",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "standard",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
@@ -17710,6 +17806,18 @@
             "deprecationReason": null
           },
           {
+            "name": "iri",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "Slug",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "image",
             "description": null,
             "args": [],
@@ -17820,6 +17928,16 @@
             "defaultValue": null
           },
           {
+            "name": "iri",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "SlugFilter",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "image",
             "description": null,
             "type": {
@@ -17906,6 +18024,16 @@
             "type": {
               "kind": "ENUM",
               "name": "SortOrder",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "iri",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "SlugSorting",
               "ofType": null
             },
             "defaultValue": null

@@ -48,3 +48,9 @@ export function getProjectPageBaseData(): any {
     '@type': ['http://regen.network/ProjectPage', 'http://regen.network/Project'],
   };
 }
+
+export type qudtUnit = 'http://qudt.org/1.1/vocab/unit#HA' | 'http://qudt.org/1.1/vocab/unit#AC';
+export const qudtUnitMap = {
+  'http://qudt.org/1.1/vocab/unit#HA': 'hectares',
+  'http://qudt.org/1.1/vocab/unit#AC': 'acres',
+};

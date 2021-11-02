@@ -26,8 +26,6 @@ import Submit from 'web-components/lib/components/form/Submit';
 import Tooltip from 'web-components/lib/components/tooltip/InfoTooltip';
 
 import { countries } from '../../lib/countries';
-import { Project } from '../../mocks';
-import fallbackImage from '../../assets/time-controlled-rotational-grazing.jpg'; //TODO: more generic fallback
 import { useWallet } from '../../wallet';
 
 const useStyles = makeStyles(theme => ({
@@ -193,10 +191,21 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+export interface Credits {
+  purchased: number;
+  issued: number; // total number of issued credits
+}
+
 interface BuyCreditsModalProps extends RegenModalProps {
   onTxQueued: (txBytes: Uint8Array) => void;
   initialValues?: BuyCreditsValues;
-  project: Project;
+  project: {
+    id: string;
+    name?: string | null;
+    image?: string;
+    creditDenom?: string;
+    credits?: Credits;
+  };
   apiServerUrl?: string;
   imageStorageBaseUrl?: string;
 }
@@ -267,14 +276,17 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
           <CardContent className={styles.cardContent}>
             <Image
               className={cx(styles.projectThumbnail, styles.marginRight)}
-              src={project.creditClass?.imgSrc || fallbackImage}
+              src={
+                project.image ||
+                'https://regen-registry.s3.amazonaws.com/projects/wilmot/time-controlled-rotational-grazing.jpg'
+              } // TODO: more generic fallback
               imageStorageBaseUrl={imageStorageBaseUrl}
               apiServerUrl={apiServerUrl}
               backgroundImage
             />
             <div className={styles.flexColumn}>
               <Title className={styles.creditTitle} variant="h5">
-                {ReactHtmlParser(project.creditClass.name)} Credits
+                {project.creditDenom && ReactHtmlParser(project.creditDenom)} Credits
               </Title>
               <Link to={`/projects/${project.id}`} target="_blank">
                 {project.name}

@@ -9,7 +9,7 @@ import { Image } from '../image';
 
 export interface ProjectImpactCardProps {
   className?: string;
-  name: string;
+  name?: string | null;
   description: JSX.Element | string;
   imgSrc: string;
   monitored?: boolean;

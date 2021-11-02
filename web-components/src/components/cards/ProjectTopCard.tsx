@@ -132,7 +132,7 @@ export default function ProjectTopCard({
           <Grid container>
             {sdgs.map((sdg: SDG, index: number) => (
               <Grid className={styles.sdgGridItem} key={index} item xs={6}>
-                <img className={styles.image} alt={sdg.imageUrl} src={sdg.imageUrl} />
+                <img className={styles.image} alt={sdg.title || sdg.imageUrl} src={sdg.imageUrl} />
               </Grid>
               // Previous layout version, keep it here in case we wanna use it in the future
               // <Grid key={index} className={styles.sdgGrid} container wrap="nowrap" alignItems="center">

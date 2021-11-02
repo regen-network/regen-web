@@ -12,7 +12,6 @@ import { SwitchFooter } from 'web-components/lib/components/fixed-footer/SwitchF
 import { BlockContent } from 'web-components/lib/components/block-content';
 
 import mock from '../mocks/mock.json';
-import { Project } from '../mocks';
 import { HeroTitle } from '../components/molecules';
 import {
   ImpactSection,
@@ -26,6 +25,7 @@ import {
 import hero from '../assets/credit-class-grasslands-hero.png';
 import getApiUri from '../lib/apiUri';
 import { onBtnClick } from '../lib/button';
+import { useMoreProjectsQuery } from '../generated/graphql';
 import { useAllCreditClassQuery } from '../generated/sanity-graphql';
 import { client } from '../sanity';
 
@@ -127,13 +127,14 @@ function CreditClassDetail({ isLandSteward }: CreditDetailsProps): JSX.Element {
   const { data } = useAllCreditClassQuery({ client });
   const content = data?.allCreditClass?.find(creditClass => creditClass.path === creditClassId);
   const creditClass = mock?.creditClasses.find(creditClass => creditClass.id === creditClassId);
+  const { data: projectsData } = useMoreProjectsQuery();
 
   const getFeaturedProjects = (): JSX.Element => {
-    const featuredProjects = mock?.projects.filter(project =>
-      content?.landSteward?.featuredProjectIds?.some(projectId => projectId === project.id),
+    const featuredProjects = projectsData?.allProjects?.nodes?.filter(project =>
+      content?.landSteward?.featuredProjectIds?.some(projectId => projectId === project?.handle),
     );
 
-    return featuredProjects?.length > 0 ? (
+    return featuredProjects && featuredProjects.length > 0 ? (
       <div className="topo-background-alternate">
         <MoreProjectsSection
           classes={{ root: styles.sectionPadding, title: styles.title }}
@@ -147,9 +148,11 @@ function CreditClassDetail({ isLandSteward }: CreditDetailsProps): JSX.Element {
   };
 
   const getAllProjects = (): JSX.Element => {
-    const projects: Project[] = mock?.projects.filter(project => project?.creditClass?.id === creditClassId);
+    const projects = projectsData?.allProjects?.nodes?.filter(
+      project => project?.creditClassByCreditClassId?.uri === content?.iri?.current,
+    );
 
-    return projects?.length > 0 ? (
+    return projects && projects.length > 0 ? (
       <div className="topo-background-alternate">
         <MoreProjectsSection
           classes={{ root: styles.sectionPadding, title: styles.title }}

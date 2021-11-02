@@ -25,7 +25,6 @@ import getApiUri from '../../lib/apiUri';
 import { buildIssuanceModalData } from '../../lib/transform';
 import { useLedger, ContextType } from '../../ledger';
 import { chainId, useWallet } from '../../wallet';
-import { Project, ProjectDefault, ActionGroup } from '../../mocks';
 import {
   Documentation,
   ProjectTopSection,
@@ -34,11 +33,11 @@ import {
   CreditsPurchaseForm,
   LandManagementActions,
   BuyCreditsModal,
-  Credits,
   ProcessingModal,
   ConfirmationModal,
-  DisplayValues,
 } from '../organisms';
+import { Credits } from '../organisms/BuyCreditsModal';
+import { DisplayValues } from '../organisms/EntityDisplayForm';
 import { useMoreProjectsQuery, useProjectByHandleQuery } from '../../generated/graphql';
 import { useEcologicalImpactByIriQuery } from '../../generated/sanity-graphql';
 import { client } from '../../sanity';
@@ -486,6 +485,7 @@ function ProjectDetails(): JSX.Element {
             creditPrice={project.creditPrice}
             stripePrice={project.stripePrice}
           />
+          {/*<iframe title="airtable-presale-form" src={project.presaleUrl} />*/}
         </Modal>
       )}
       <Modal open={open} onClose={handleClose}>

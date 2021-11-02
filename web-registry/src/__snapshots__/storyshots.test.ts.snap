@@ -41127,13 +41127,7 @@ exports[`Storyshots Components|Place Project Place Info 1`] = `
   <ProjectPlaceInfo
     area={440}
     areaUnit="hectares"
-    place={
-      Object {
-        "city": "Melbourne",
-        "country": "Australia",
-        "state": "Victoria",
-      }
-    }
+    place="Melbourne, Victoria, Australia"
   />
 </ContextProvider>
 `;
@@ -47496,14 +47490,10 @@ exports[`Storyshots Components|User Big User Info 1`] = `
     user={
       Object {
         "description": "Odonata is a not-for-profit entity supporting biodiversity impact solutions.",
-        "imgSrc": "http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png",
+        "image": "http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png",
+        "location": "South Melbourne, Victoria, Australia",
         "name": "Odonata",
-        "place": Object {
-          "city": "South Melbourne",
-          "country": "Australia",
-          "state": "Victoria",
-        },
-        "type": "organization",
+        "type": "ORGANIZATION",
       }
     }
   />
@@ -47889,14 +47879,10 @@ exports[`Storyshots Components|User Column User Info 1`] = `
     user={
       Object {
         "description": "Odonata is a not-for-profit entity supporting biodiversity impact solutions.",
-        "imgSrc": "http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png",
+        "image": "http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png",
+        "location": "South Melbourne, Victoria, Australia",
         "name": "Odonata",
-        "place": Object {
-          "city": "South Melbourne",
-          "country": "Australia",
-          "state": "Victoria",
-        },
-        "type": "organization",
+        "type": "ORGANIZATION",
       }
     }
   />
@@ -49040,14 +49026,10 @@ exports[`Storyshots Components|User Medium User Info 1`] = `
     user={
       Object {
         "description": "Odonata is a not-for-profit entity supporting biodiversity impact solutions.",
-        "imgSrc": "http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png",
+        "image": "http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png",
+        "location": "South Melbourne, Victoria, Australia",
         "name": "Odonata",
-        "place": Object {
-          "city": "South Melbourne",
-          "country": "Australia",
-          "state": "Victoria",
-        },
-        "type": "organization",
+        "type": "ORGANIZATION",
       }
     }
   />
@@ -49816,14 +49798,10 @@ exports[`Storyshots Components|User With Title 1`] = `
     user={
       Object {
         "description": "Odonata is a not-for-profit entity supporting biodiversity impact solutions.",
-        "imgSrc": "http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png",
+        "image": "http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png",
+        "location": "South Melbourne, Victoria, Australia",
         "name": "Odonata",
-        "place": Object {
-          "city": "South Melbourne",
-          "country": "Australia",
-          "state": "Victoria",
-        },
-        "type": "organization",
+        "type": "ORGANIZATION",
       }
     }
   />

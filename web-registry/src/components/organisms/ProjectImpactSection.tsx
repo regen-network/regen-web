@@ -9,10 +9,13 @@ import cx from 'clsx';
 import ProjectImpactCard from 'web-components/lib/components/cards/ProjectImpactCard';
 import Section from 'web-components/lib/components/section';
 import PrevNextButton from 'web-components/lib/components/buttons/PrevNextButton';
-import { Impact } from '../../mocks/mocks';
+import { BlockContent } from 'web-components/lib/components/block-content';
+
+import { EcologicalImpactByIriQuery } from '../../generated/sanity-graphql';
+import { getSanityImgSrc } from '../../lib/imgSrc';
 
 interface ProjectImpactProps {
-  impacts: Impact[];
+  data: EcologicalImpactByIriQuery | undefined;
   title?: string;
   classes?: {
     root?: string;
@@ -82,7 +85,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-function ProjectImpactSection({ impacts, title, classes }: ProjectImpactProps): JSX.Element {
+function ProjectImpactSection({ data, title, classes }: ProjectImpactProps): JSX.Element {
   const styles = useStyles();
   const theme: Theme = useTheme();
   const isMobile: boolean = useMediaQuery(theme.breakpoints.down('xs'));
@@ -96,6 +99,8 @@ function ProjectImpactSection({ impacts, title, classes }: ProjectImpactProps): 
     arrows: false,
     lazyload: true,
   };
+
+  const impact = data?.allEcologicalImpact;
 
   let slider: any = useRef(null);
 
@@ -112,53 +117,57 @@ function ProjectImpactSection({ impacts, title, classes }: ProjectImpactProps): 
   }, [slider]);
 
   return (
-    <Section
-      classes={{ root: cx(styles.root, classes?.root), title: styles.title }}
-      title={title || 'Impact'}
-      titleVariant="h2"
-      titleAlign="left"
-      topRight={
-        <>
-          {!isMobile && impacts.length > slidesCount && (
-            <Grid container justify="flex-end" className={styles.buttons}>
-              <PrevNextButton direction="prev" onClick={slickPrev} />
-              <PrevNextButton direction="next" onClick={slickNext} />
-            </Grid>
-          )}
-        </>
-      }
-    >
-      <LazyLoad offset={300}>
-        {isMobile ? (
-          <div className={styles.swipe}>
-            {impacts.map(({ name, description, imgSrc, monitored }: Impact, index: number) => (
-              <div className={styles.item} key={index}>
-                <ProjectImpactCard
-                  name={name}
-                  description={description}
-                  imgSrc={imgSrc}
-                  monitored={monitored}
-                />
+    <>
+      {impact && (
+        <Section
+          classes={{ root: cx(styles.root, classes?.root), title: styles.title }}
+          title={title || 'Impact'}
+          titleVariant="h2"
+          titleAlign="left"
+          topRight={
+            <>
+              {!isMobile && impact.length > slidesCount && (
+                <Grid container justify="flex-end" className={styles.buttons}>
+                  <PrevNextButton direction="prev" onClick={slickPrev} />
+                  <PrevNextButton direction="next" onClick={slickNext} />
+                </Grid>
+              )}
+            </>
+          }
+        >
+          <LazyLoad offset={300}>
+            {isMobile ? (
+              <div className={styles.swipe}>
+                {impact.map(({ name, descriptionRaw, image }, index: number) => (
+                  <div className={styles.item} key={index}>
+                    <ProjectImpactCard
+                      name={name}
+                      description={<BlockContent content={descriptionRaw} />}
+                      imgSrc={getSanityImgSrc(image)}
+                      monitored={index === 0}
+                    />
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-        ) : (
-          <Slider {...settings} ref={slider} className={styles.slider}>
-            {impacts.map(({ name, description, imgSrc, monitored, standard }: Impact, index: number) => (
-              <ProjectImpactCard
-                key={index}
-                className={styles.item}
-                name={name}
-                description={description}
-                imgSrc={imgSrc}
-                standard={standard}
-                monitored={monitored}
-              />
-            ))}
-          </Slider>
-        )}
-      </LazyLoad>
-    </Section>
+            ) : (
+              <Slider {...settings} ref={slider} className={styles.slider}>
+                {impact.map(({ name, descriptionRaw, image, standard }, index: number) => (
+                  <ProjectImpactCard
+                    key={index}
+                    className={styles.item}
+                    name={name}
+                    description={<BlockContent content={descriptionRaw} />}
+                    imgSrc={getSanityImgSrc(image)}
+                    standard={getSanityImgSrc(standard)}
+                    monitored={index === 0}
+                  />
+                ))}
+              </Slider>
+            )}
+          </LazyLoad>
+        </Section>
+      )}
+    </>
   );
 }
 

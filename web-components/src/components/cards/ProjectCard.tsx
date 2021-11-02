@@ -6,18 +6,9 @@ import ReactHtmlParser from 'react-html-parser';
 import MediaCard from './MediaCard';
 import BreadcrumbIcon from '../icons/BreadcrumbIcon';
 import Description from '../description';
-import ProjectPlaceInfo, { Place } from '../place/ProjectPlaceInfo';
+import ProjectPlaceInfo from '../place/ProjectPlaceInfo';
 import UserInfo, { User } from '../user/UserInfo';
 import { StandardInfo, formatStandardInfo } from '../../utils/format';
-
-export interface ProjectInfo {
-  name: string;
-  imgSrc: string;
-  place: string;
-  area: number;
-  areaUnit: string;
-  registry: User;
-}
 
 interface Info extends StandardInfo {
   url?: string | null;
@@ -41,10 +32,10 @@ interface PurchaseInfo {
 export interface ProjectCardProps {
   name: string;
   imgSrc: string;
-  place: Place | string;
+  place: string;
   area: number;
   areaUnit: string;
-  registry?: User;
+  registry?: User | null;
   tag?: string;
   onClick?: () => void;
   displayCity?: boolean;

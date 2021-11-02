@@ -5,11 +5,12 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import cx from 'clsx';
 
 import Section from 'web-components/lib/components/section';
-import { Project } from '../../mocks';
+
+import { MoreProjectFieldsFragment, Maybe } from '../../generated/graphql';
 import { ProjectCards } from './ProjectCards';
 
 interface MoreProjectsProps {
-  projects: Project[];
+  projects: Array<Maybe<MoreProjectFieldsFragment | undefined>>;
   title?: string;
   classes?: {
     root?: string;

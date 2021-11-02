@@ -1,7 +1,7 @@
 import * as React from 'react';
 import PlaceInfo from 'web-components/lib/components/place/PlaceInfo';
-import ProjectPlaceInfo, { Place } from 'web-components/lib/components/place/ProjectPlaceInfo';
-import { withKnobs, text, number, object } from '@storybook/addon-knobs';
+import ProjectPlaceInfo from 'web-components/lib/components/place/ProjectPlaceInfo';
+import { withKnobs, text, number } from '@storybook/addon-knobs';
 
 export default {
   title: 'Components|Place',
@@ -9,15 +9,11 @@ export default {
   decorators: [withKnobs],
 };
 
-const place: Place = {
-  city: 'Melbourne',
-  state: 'Victoria',
-  country: 'Australia',
-};
+const place = 'Melbourne, Victoria, Australia';
 
 export const projectPlaceInfo = (): JSX.Element => (
   <ProjectPlaceInfo
-    place={object('place', place)}
+    place={text('place', place)}
     area={number('area', 440)}
     areaUnit={text('areaUnit', 'hectares')}
   />

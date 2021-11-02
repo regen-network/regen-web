@@ -6,8 +6,6 @@ import Link from '@material-ui/core/Link';
 import cx from 'clsx';
 import LazyLoad from 'react-lazyload';
 
-import { Project, ProjectDefault } from '../../mocks';
-import { Media } from 'web-components/lib/components/sliders/ProjectMedia';
 import Section from 'web-components/lib/components/section';
 import Title from 'web-components/lib/components/title';
 import ProjectPlaceInfo from 'web-components/lib/components/place/ProjectPlaceInfo';
@@ -16,10 +14,15 @@ import Description from 'web-components/lib/components/description';
 import ProjectTopCard from 'web-components/lib/components/cards/ProjectTopCard';
 import ArrowIcon from 'web-components/lib/components/icons/ArrowDownIcon';
 import ReadMore from 'web-components/lib/components/read-more';
+import { ProjectByHandleQuery } from '../../generated/graphql';
+import { useSdgByIriQuery } from '../../generated/sanity-graphql';
+import { getParty, getDisplayParty } from '../../lib/transform';
+import { getSanityImgSrc } from '../../lib/imgSrc';
+import { qudtUnit, qudtUnitMap } from '../../lib/rdf';
+import { client } from '../../sanity';
 
 interface ProjectTopProps {
-  project: Project;
-  projectDefault: ProjectDefault;
+  data?: ProjectByHandleQuery;
   geojson?: any;
   isGISFile?: boolean;
 }
@@ -262,69 +265,113 @@ function ProjectTopLink({
   );
 }
 
-function ProjectTopSection({ project, projectDefault, geojson, isGISFile }: ProjectTopProps): JSX.Element {
+function ProjectTopSection({ data, geojson, isGISFile }: ProjectTopProps): JSX.Element {
   const classes = useStyles();
 
-  const videos: Media | Media[] | undefined = project.media.filter(item => item.type === 'video');
   const imageStorageBaseUrl = process.env.REACT_APP_IMAGE_STORAGE_BASE_URL;
   const apiServerUrl = process.env.REACT_APP_API_URI;
+
+  const metadata = data?.projectByHandle?.metadata;
+  const videoURL = metadata?.['http://regen.network/videoURL']?.['@value'];
+  const landStewardPhoto = metadata?.['http://regen.network/landStewardPhoto']?.['@value'];
+  const unit: qudtUnit =
+    metadata?.['http://regen.network/size']?.['http://qudt.org/1.1/schema/qudt#unit']?.['@value'];
+  const creditClass = data?.projectByHandle?.creditClassByCreditClassId;
+  const creditClassVersion = creditClass?.creditClassVersionsById?.nodes?.[0];
+  const methodologyVersion = creditClass?.methodologyByMethodologyId?.methodologyVersionsById?.nodes?.[0];
+  const quote = metadata?.['http://regen.network/projectQuote'];
+  const additionalCertification = metadata?.['http://regen.network/additionalCertification'];
+  const glanceText = metadata?.['http://regen.network/glanceText']?.['@list'];
+  const sdgIris = creditClassVersion?.metadata?.['http://regen.network/SDGs']?.['@list']?.map(
+    (sdg: { '@id': string }) => sdg['@id'],
+  );
+  const { data: sdgData } = useSdgByIriQuery({
+    client,
+    variables: {
+      iris: sdgIris,
+    },
+    skip: !sdgIris,
+  });
+  const sdgs = sdgData?.allSdg.map(s => ({
+    title: s.title || '',
+    imageUrl: getSanityImgSrc(s.image),
+  }));
 
   return (
     <Section classes={{ root: classes.section }}>
       <Grid container>
         <Grid item xs={12} md={8} className={classes.rightGrid}>
-          <Title variant="h1">{project.name}</Title>
+          <Title variant="h1">{metadata?.['http://schema.org/name']}</Title>
           <div className={classes.projectPlace}>
             <ProjectPlaceInfo
               iconClassName={classes.icon}
-              place={project.place}
-              area={project.area}
-              areaUnit={project.areaUnit}
+              place={metadata?.['http://schema.org/location']?.place_name}
+              area={
+                metadata?.['http://regen.network/size']?.['http://qudt.org/1.1/schema/qudt#numericValue']?.[
+                  '@value'
+                ]
+              }
+              areaUnit={qudtUnitMap[unit]}
             />
             <div className={classes.creditClassInfo}>
-              {project.creditClass.standard &&
-                project.creditClass.standardName &&
-                project.creditClass.standardUrl && (
+              {creditClass && creditClassVersion && (
+                <>
+                  {creditClass.standard &&
+                    creditClassVersion?.metadata?.['http://regen.network/standard']?.[
+                      'http://schema.org/name'
+                    ] &&
+                    creditClassVersion?.metadata?.['http://regen.network/standard']?.[
+                      'http://schema.org/url'
+                    ]?.['@value'] && (
+                      <ProjectTopLink
+                        label="standard"
+                        name={
+                          creditClassVersion?.metadata?.['http://regen.network/standard']?.[
+                            'http://schema.org/name'
+                          ]
+                        }
+                        url={
+                          creditClassVersion?.metadata?.['http://regen.network/standard']?.[
+                            'http://schema.org/url'
+                          ]?.['@value']
+                        }
+                        standard={creditClass.standard}
+                      />
+                    )}
                   <ProjectTopLink
-                    label="standard"
-                    name={project.creditClass.standardName}
-                    url={project.creditClass.standardUrl}
-                    standard={project.creditClass.standard}
+                    label={`credit class${creditClass.standard ? ' (type)' : ''}`}
+                    name={creditClassVersion.name}
+                    url={creditClassVersion.metadata?.['http://schema.org/url']?.['@value']}
+                    standard={creditClass.standard}
                   />
-                )}
-              <ProjectTopLink
-                label={`credit class${project.creditClass.standard ? ' (type)' : ''}`}
-                name={project.creditClass.name}
-                url={project.creditClass.url}
-                standard={project.creditClass.standard}
-              />
-              <ProjectTopLink
-                label="offset generation method"
-                name={project.creditClass.offsetGenerationMethod}
-              />
-              {project.methodology && (
+                  <ProjectTopLink
+                    label="offset generation method"
+                    name={creditClassVersion.metadata?.['http://regen.network/offsetGenerationMethod']}
+                  />
+                </>
+              )}
+              {methodologyVersion && (
                 <ProjectTopLink
                   label="methodology"
-                  name={project.methodology.name}
-                  url={project.methodology.url}
+                  name={methodologyVersion.name}
+                  url={methodologyVersion.metadata?.['http://schema.org/url']?.['@value']}
                 />
               )}
-              {project.additionalCertification && (
+              {creditClass && additionalCertification && (
                 <ProjectTopLink
                   label="additional certification"
-                  name={project.additionalCertification.name}
-                  url={project.additionalCertification.url}
-                  standard={project.creditClass.standard}
+                  name={additionalCertification?.['http://schema.org/name']}
+                  url={additionalCertification?.['http://schema.org/url']?.['@value']}
+                  standard={creditClass.standard}
                 />
               )}
             </div>
           </div>
-          {project.glanceImgSrc && project.glanceText && (
+          {geojson && isGISFile && glanceText && (
             <LazyLoad offset={50} once>
               <div className={classes.glanceCard}>
                 <GlanceCard
-                  imgSrc={project.glanceImgSrc}
-                  text={project.glanceText}
+                  text={glanceText}
                   imageStorageBaseUrl={imageStorageBaseUrl}
                   apiServerUrl={apiServerUrl}
                   geojson={geojson}
@@ -334,61 +381,72 @@ function ProjectTopSection({ project, projectDefault, geojson, isGISFile }: Proj
             </LazyLoad>
           )}
           <Title className={classes.story} variant="h2">
-            {project.fieldsOverride && project.fieldsOverride.story
-              ? project.fieldsOverride.story.title
-              : projectDefault.story.title}
+            Story
           </Title>
           <Description className={classes.description}>
-            {ReactHtmlParser(project.shortDescription)}
+            {ReactHtmlParser(metadata?.['http://regen.network/landStory'])}
           </Description>
           <LazyLoad offset={50}>
-            {videos.length > 0 &&
-              (/https:\/\/www.youtube.com\/embed\/[a-zA-Z0-9_.-]+/.test(videos[0].src) ||
-              /https:\/\/player.vimeo.com\/video\/[a-zA-Z0-9_.-]+/.test(videos[0].src) ? (
+            {videoURL &&
+              (/https:\/\/www.youtube.com\/embed\/[a-zA-Z0-9_.-]+/.test(videoURL) ||
+              /https:\/\/player.vimeo.com\/video\/[a-zA-Z0-9_.-]+/.test(videoURL) ? (
                 <iframe
                   className={cx(classes.iframe, classes.media)}
-                  title={project.name}
-                  src={videos[0].src}
+                  title={metadata?.['http://schema.org/name']}
+                  src={videoURL}
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 ></iframe>
               ) : (
-                <video className={classes.media} controls poster={videos[0].preview}>
-                  <source src={videos[0].src} />
+                <video className={classes.media} controls>
+                  <source src={videoURL} />
                 </video>
               ))}
-            {/* Show latest image for now */}
-            {project.media.length > 4 && project.media[4].type === 'image' && (
-              <img className={classes.media} alt={project.media[4].src} src={project.media[4].src} />
+            {landStewardPhoto && (
+              <img className={classes.media} alt={landStewardPhoto} src={landStewardPhoto} />
             )}
           </LazyLoad>
           <Title variant="h4" className={classes.tagline}>
-            {project.tagline}
+            {metadata?.['http://regen.network/landStewardStoryTitle']}
           </Title>
           <ReadMore maxLength={450} restMinLength={300}>
-            {project.longDescription}
+            {metadata?.['http://regen.network/landStewardStory'] || ''}
           </ReadMore>
-          {project.quote && (
+          {quote && (
             <div>
               <Title variant="h4" className={cx(classes.quote, classes.tagline)}>
                 <span className={cx(classes.firstQuote, classes.quotes)}>“</span>
-                <span className={classes.textQuote}>{project.quote.text}</span>
+                <span className={classes.textQuote}>{quote['http://regen.network/quote']}</span>
                 <span className={cx(classes.secondQuote, classes.quotes)}>”</span>
               </Title>
               <Title variant="h6" className={classes.quotePersonName}>
-                {project.quote.person.name}
+                {quote['http://schema.org/name']}
               </Title>
-              <Description className={classes.quotePersonRole}>{project.quote.person.role}</Description>
+              <Description className={classes.quotePersonRole}>
+                {quote['http://schema.org/jobTitle']}
+              </Description>
             </div>
           )}
         </Grid>
         <Grid item xs={12} md={4} className={classes.leftGrid}>
           <ProjectTopCard
-            projectDeveloper={project.developer}
-            landSteward={project.steward}
-            landOwner={project.owner}
-            broker={project.broker}
-            reseller={project.reseller}
-            sdgs={project.sdgs}
+            projectDeveloper={getDisplayParty(
+              'http://regen.network/projectDeveloper',
+              metadata,
+              data?.projectByHandle?.partyByDeveloperId,
+            )}
+            landSteward={getDisplayParty(
+              'http://regen.network/landSteward',
+              metadata,
+              data?.projectByHandle?.partyByStewardId,
+            )}
+            landOwner={getDisplayParty(
+              'http://regen.network/landOwner',
+              metadata,
+              data?.projectByHandle?.partyByLandOwnerId,
+            )}
+            broker={getParty(data?.projectByHandle?.partyByBrokerId)}
+            reseller={getParty(data?.projectByHandle?.partyByResellerId)}
+            sdgs={sdgs}
           />
         </Grid>
       </Grid>

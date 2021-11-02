@@ -43,7 +43,7 @@ function SDGs({ sdgs }: Props): JSX.Element {
         <img
           key={sdg?.title || i}
           className={styles.image}
-          alt={sdg?.title || 'sdg'}
+          alt={sdg?.title || getSanityImgSrc(sdg?.image)}
           src={getSanityImgSrc(sdg?.image)}
         />
       ))}

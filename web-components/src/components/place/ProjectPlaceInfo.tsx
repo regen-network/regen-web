@@ -1,18 +1,10 @@
 import * as React from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 
-import { getFormattedPlace } from './place';
 import PlaceInfo from './PlaceInfo';
 
-export interface Place {
-  city?: string;
-  region?: string;
-  state: string;
-  country: string;
-}
-
 interface ProjectPlaceInfoProps {
-  place: Place | string;
+  place: string;
   area: number;
   areaUnit: string;
   fontSize?: string;
@@ -44,11 +36,9 @@ export default function ProjectPlaceInfo({
 }: ProjectPlaceInfoProps): JSX.Element {
   const classes = useStyles({});
   const displayedArea: string = new Intl.NumberFormat('en-US').format(area);
-  const formattedPlace: string =
-    typeof place === 'string' ? place : getFormattedPlace(place, displayCity, displayRegion, displayCountry);
   return (
     <PlaceInfo fontSize={fontSize} smFontSize={smFontSize} color={color} iconClassName={iconClassName}>
-      {formattedPlace}
+      {place}
       <span className={classes.separator}>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
       {displayedArea} {areaUnit}
     </PlaceInfo>

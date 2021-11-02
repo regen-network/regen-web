@@ -14,9 +14,8 @@ import { HeroTitle, FeaturedSection, HeroAction, ImageGridSection } from '../com
 import { MoreProjectsSection } from '../components/organisms';
 import { client } from '../sanity';
 import { useAllBuyersPageQuery } from '../generated/sanity-graphql';
+import { useMoreProjectsQuery } from '../generated/graphql';
 import buyersHero from '../assets/buyers-top.jpg';
-import mock from '../mocks/mock.json';
-import { Project } from '../mocks';
 
 const useStyles = makeStyles(theme => ({
   heroMain: {
@@ -53,7 +52,7 @@ const BuyersPage = (): JSX.Element => {
   const [submitted, setSubmitted] = useState(false);
   const { data } = useAllBuyersPageQuery({ client });
   const content = data?.allBuyersPage?.[0];
-  const projects: Project[] = mock?.projects;
+  const { data: projectsData } = useMoreProjectsQuery();
 
   const siteMetadata = {
     title: 'For Buyers',
@@ -95,12 +94,14 @@ const BuyersPage = (): JSX.Element => {
       {/* <ApproachSection />
       <InvestingSection /> */}
       {content?.featuredSection && <FeaturedSection content={content?.featuredSection} />}
-      {projects?.length > 0 ? (
+      {projectsData?.allProjects?.nodes && (
         <div className="topo-background">
-          <MoreProjectsSection classes={{ title: styles.title }} title={'Projects'} projects={projects} />
+          <MoreProjectsSection
+            classes={{ title: styles.title }}
+            title={'Projects'}
+            projects={projectsData?.allProjects?.nodes}
+          />
         </div>
-      ) : (
-        <></>
       )}
       {content?.faqSection && (
         <HeroAction

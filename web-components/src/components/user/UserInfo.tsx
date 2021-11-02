@@ -4,17 +4,15 @@ import Grid, { GridDirection } from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import UserAvatar from './UserAvatar';
 import { getFontSize } from '../../theme/sizing';
-import { getFormattedPlace } from '../place/place';
-import { Place } from '../place/ProjectPlaceInfo';
 import OrganizationIcon from '../icons/OrganizationIcon';
 
 export interface User {
   name: string;
-  place?: Place;
-  imgSrc?: string;
+  type: string; // USER or ORGANIZATION
+  location?: string;
+  image?: string | null;
   description?: string;
   link?: string;
-  type: string; // user or organization
 }
 
 interface UserInfoProps {
@@ -22,9 +20,6 @@ interface UserInfoProps {
   size?: string;
   direction?: GridDirection;
   border?: boolean;
-  displayCity?: boolean;
-  displayCountry?: boolean;
-  displayRegion?: boolean;
   icon?: any;
 }
 
@@ -84,9 +79,6 @@ export default function UserInfo({
   direction,
   border = true,
   icon,
-  displayCity = true,
-  displayRegion = true,
-  displayCountry = true,
 }: UserInfoProps): JSX.Element {
   const classes = useStyles({ description: user.description, direction, size });
   const name = <Typography className={classes.name}>{user.name}</Typography>;
@@ -96,11 +88,11 @@ export default function UserInfo({
       <Grid item>
         <UserAvatar
           alt={user.name}
-          src={user.imgSrc}
+          src={user.image}
           href={user.link}
           size={size}
           border={border}
-          icon={!user.imgSrc && user.type === 'organization' ? <OrganizationIcon /> : icon}
+          icon={!user.image && user.type === 'ORGANIZATION' ? <OrganizationIcon /> : icon}
         />
       </Grid>
       <Grid item className={classes.text}>
@@ -111,11 +103,7 @@ export default function UserInfo({
         ) : (
           name
         )}
-        {user.place && (
-          <Typography className={classes.place}>
-            {getFormattedPlace(user.place, displayCity, displayRegion, displayCountry)}
-          </Typography>
-        )}
+        {user.location && <Typography className={classes.place}>{user.location}</Typography>}
         {user.description && <Typography className={classes.description}>{user.description}</Typography>}
       </Grid>
     </Grid>

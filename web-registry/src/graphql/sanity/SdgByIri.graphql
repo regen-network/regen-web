@@ -1,0 +1,8 @@
+query SdgByIri($iris: [String!]) {
+  allSdg(where: { iri: { current: { in: $iris } } }) {
+    title
+    image {
+      ...customImageFields
+    }
+  }
+}

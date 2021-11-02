@@ -419,6 +419,7 @@ export type CreditClass = Document & {
   _rev?: Maybe<Scalars['String']>;
   _key?: Maybe<Scalars['String']>;
   nameRaw?: Maybe<Scalars['JSON']>;
+  iri?: Maybe<Slug>;
   /** This will be used in the credit class page url: "/credit-classes/{path}" */
   path?: Maybe<Scalars['String']>;
   descriptionRaw?: Maybe<Scalars['JSON']>;
@@ -439,6 +440,7 @@ export type CreditClassFilter = {
   _updatedAt?: Maybe<DatetimeFilter>;
   _rev?: Maybe<StringFilter>;
   _key?: Maybe<StringFilter>;
+  iri?: Maybe<SlugFilter>;
   path?: Maybe<StringFilter>;
   buyer?: Maybe<BuyerFilter>;
   landSteward?: Maybe<LandStewardFilter>;
@@ -451,6 +453,7 @@ export type CreditClassSorting = {
   _updatedAt?: Maybe<SortOrder>;
   _rev?: Maybe<SortOrder>;
   _key?: Maybe<SortOrder>;
+  iri?: Maybe<SlugSorting>;
   path?: Maybe<SortOrder>;
   buyer?: Maybe<BuyerSorting>;
   landSteward?: Maybe<LandStewardSorting>;
@@ -683,8 +686,10 @@ export type EcologicalImpact = Document & {
   _rev?: Maybe<Scalars['String']>;
   _key?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
+  iri?: Maybe<Slug>;
   descriptionRaw?: Maybe<Scalars['JSON']>;
   image?: Maybe<CustomImage>;
+  standard?: Maybe<CustomImage>;
 };
 
 export type EcologicalImpactFilter = {
@@ -697,7 +702,9 @@ export type EcologicalImpactFilter = {
   _rev?: Maybe<StringFilter>;
   _key?: Maybe<StringFilter>;
   name?: Maybe<StringFilter>;
+  iri?: Maybe<SlugFilter>;
   image?: Maybe<CustomImageFilter>;
+  standard?: Maybe<CustomImageFilter>;
 };
 
 export type EcologicalImpactRelation = {
@@ -730,7 +737,9 @@ export type EcologicalImpactSorting = {
   _rev?: Maybe<SortOrder>;
   _key?: Maybe<SortOrder>;
   name?: Maybe<SortOrder>;
+  iri?: Maybe<SlugSorting>;
   image?: Maybe<CustomImageSorting>;
+  standard?: Maybe<CustomImageSorting>;
 };
 
 export type EcologicalOutcome = Document & {
@@ -2320,6 +2329,7 @@ export type Sdg = Document & {
   _rev?: Maybe<Scalars['String']>;
   _key?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
+  iri?: Maybe<Slug>;
   image?: Maybe<CustomImage>;
 };
 
@@ -2333,6 +2343,7 @@ export type SdgFilter = {
   _rev?: Maybe<StringFilter>;
   _key?: Maybe<StringFilter>;
   title?: Maybe<StringFilter>;
+  iri?: Maybe<SlugFilter>;
   image?: Maybe<CustomImageFilter>;
 };
 
@@ -2344,6 +2355,7 @@ export type SdgSorting = {
   _rev?: Maybe<SortOrder>;
   _key?: Maybe<SortOrder>;
   title?: Maybe<SortOrder>;
+  iri?: Maybe<SlugSorting>;
   image?: Maybe<CustomImageSorting>;
 };
 
@@ -2663,7 +2675,10 @@ export type AllCreditClassQuery = (
   & { allCreditClass: Array<(
     { __typename?: 'CreditClass' }
     & Pick<CreditClass, 'path' | 'nameRaw' | 'descriptionRaw' | 'shortDescriptionRaw'>
-    & { ecologicalImpact?: Maybe<Array<Maybe<(
+    & { iri?: Maybe<(
+      { __typename?: 'Slug' }
+      & Pick<Slug, 'current'>
+    )>, ecologicalImpact?: Maybe<Array<Maybe<(
       { __typename?: 'EcologicalImpactRelation' }
       & EcologicalImpactRelationFieldsFragment
     )>>>, overviewCards?: Maybe<Array<Maybe<(
@@ -3010,6 +3025,26 @@ export type ImageGridSectionFieldsFragment = (
   )>>> }
 );
 
+export type EcologicalImpactByIriQueryVariables = Exact<{
+  iris?: Maybe<Array<Scalars['String']> | Scalars['String']>;
+}>;
+
+
+export type EcologicalImpactByIriQuery = (
+  { __typename?: 'RootQuery' }
+  & { allEcologicalImpact: Array<(
+    { __typename?: 'EcologicalImpact' }
+    & Pick<EcologicalImpact, 'name' | 'descriptionRaw'>
+    & { image?: Maybe<(
+      { __typename?: 'CustomImage' }
+      & CustomImageFieldsFragment
+    )>, standard?: Maybe<(
+      { __typename?: 'CustomImage' }
+      & CustomImageFieldsFragment
+    )> }
+  )> }
+);
+
 export type LandManagementPracticeFieldsFragment = (
   { __typename?: 'LandManagementPractice' }
   & Pick<LandManagementPractice, 'title' | 'descriptionRaw'>
@@ -3061,6 +3096,23 @@ export type ResourceFieldsFragment = (
   )>, button?: Maybe<(
     { __typename?: 'Button' }
     & ButtonFieldsFragment
+  )> }
+);
+
+export type SdgByIriQueryVariables = Exact<{
+  iris?: Maybe<Array<Scalars['String']> | Scalars['String']>;
+}>;
+
+
+export type SdgByIriQuery = (
+  { __typename?: 'RootQuery' }
+  & { allSdg: Array<(
+    { __typename?: 'Sdg' }
+    & Pick<Sdg, 'title'>
+    & { image?: Maybe<(
+      { __typename?: 'CustomImage' }
+      & CustomImageFieldsFragment
+    )> }
   )> }
 );
 
@@ -3552,6 +3604,9 @@ export const AllCreditClassDocument = gql`
     query allCreditClass {
   allCreditClass {
     path
+    iri {
+      current
+    }
     nameRaw
     descriptionRaw
     shortDescriptionRaw
@@ -3900,3 +3955,83 @@ export function useAllMethodologyReviewProcessPageLazyQuery(baseOptions?: Apollo
 export type AllMethodologyReviewProcessPageQueryHookResult = ReturnType<typeof useAllMethodologyReviewProcessPageQuery>;
 export type AllMethodologyReviewProcessPageLazyQueryHookResult = ReturnType<typeof useAllMethodologyReviewProcessPageLazyQuery>;
 export type AllMethodologyReviewProcessPageQueryResult = Apollo.QueryResult<AllMethodologyReviewProcessPageQuery, AllMethodologyReviewProcessPageQueryVariables>;
+export const EcologicalImpactByIriDocument = gql`
+    query EcologicalImpactByIri($iris: [String!]) {
+  allEcologicalImpact(where: {iri: {current: {in: $iris}}}) {
+    name
+    descriptionRaw
+    image {
+      ...customImageFields
+    }
+    standard {
+      ...customImageFields
+    }
+  }
+}
+    ${CustomImageFieldsFragmentDoc}`;
+
+/**
+ * __useEcologicalImpactByIriQuery__
+ *
+ * To run a query within a React component, call `useEcologicalImpactByIriQuery` and pass it any options that fit your needs.
+ * When your component renders, `useEcologicalImpactByIriQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useEcologicalImpactByIriQuery({
+ *   variables: {
+ *      iris: // value for 'iris'
+ *   },
+ * });
+ */
+export function useEcologicalImpactByIriQuery(baseOptions?: Apollo.QueryHookOptions<EcologicalImpactByIriQuery, EcologicalImpactByIriQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<EcologicalImpactByIriQuery, EcologicalImpactByIriQueryVariables>(EcologicalImpactByIriDocument, options);
+      }
+export function useEcologicalImpactByIriLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<EcologicalImpactByIriQuery, EcologicalImpactByIriQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<EcologicalImpactByIriQuery, EcologicalImpactByIriQueryVariables>(EcologicalImpactByIriDocument, options);
+        }
+export type EcologicalImpactByIriQueryHookResult = ReturnType<typeof useEcologicalImpactByIriQuery>;
+export type EcologicalImpactByIriLazyQueryHookResult = ReturnType<typeof useEcologicalImpactByIriLazyQuery>;
+export type EcologicalImpactByIriQueryResult = Apollo.QueryResult<EcologicalImpactByIriQuery, EcologicalImpactByIriQueryVariables>;
+export const SdgByIriDocument = gql`
+    query SdgByIri($iris: [String!]) {
+  allSdg(where: {iri: {current: {in: $iris}}}) {
+    title
+    image {
+      ...customImageFields
+    }
+  }
+}
+    ${CustomImageFieldsFragmentDoc}`;
+
+/**
+ * __useSdgByIriQuery__
+ *
+ * To run a query within a React component, call `useSdgByIriQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSdgByIriQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSdgByIriQuery({
+ *   variables: {
+ *      iris: // value for 'iris'
+ *   },
+ * });
+ */
+export function useSdgByIriQuery(baseOptions?: Apollo.QueryHookOptions<SdgByIriQuery, SdgByIriQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<SdgByIriQuery, SdgByIriQueryVariables>(SdgByIriDocument, options);
+      }
+export function useSdgByIriLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SdgByIriQuery, SdgByIriQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<SdgByIriQuery, SdgByIriQueryVariables>(SdgByIriDocument, options);
+        }
+export type SdgByIriQueryHookResult = ReturnType<typeof useSdgByIriQuery>;
+export type SdgByIriLazyQueryHookResult = ReturnType<typeof useSdgByIriLazyQuery>;
+export type SdgByIriQueryResult = Apollo.QueryResult<SdgByIriQuery, SdgByIriQueryVariables>;

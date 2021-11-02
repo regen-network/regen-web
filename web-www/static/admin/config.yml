@@ -968,9 +968,14 @@ collections:
             widget: object
             fields:
               - {label: "Header", name: header, widget: string}
-              - {label: "Body", name: body, widget: string, required: false}
           - label: "Above the Fold Section"
             name: foldSection
+            widget: object
+            fields:
+              - {label: "Title", name: title, widget: string}
+              - {label: "Body", name: body, widget: markdown}
+          - label: "Thesis Section"
+            name: thesisSection
             widget: object
             fields:
               - {label: "Title", name: title, widget: string}

@@ -1,7 +1,6 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import { Theme, makeStyles } from '@material-ui/core';
-import ReactHtmlParser from 'react-html-parser';
 
 import BackgroundSection from '../../components/BackgroundSection';
 

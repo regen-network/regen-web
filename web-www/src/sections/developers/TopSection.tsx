@@ -23,7 +23,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
 }));
 
 const TopSection = (): JSX.Element => {
-  const classes = useStyles();
+  const styles = useStyles();
   const data = useStaticQuery(graphql`
     query {
       background: file(relativePath: { eq: "developers-top-image.jpg" }) {
@@ -49,9 +49,9 @@ const TopSection = (): JSX.Element => {
       header={content.header}
       body={content.body}
       imageData={imageData}
-      titleClassName={classes.title}
+      titleClassName={styles.title}
       titleVariant="h2"
-      className={classes.topSection}
+      className={styles.topSection}
     />
   );
 };

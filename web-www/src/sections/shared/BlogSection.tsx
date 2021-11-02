@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const BlogSection = () => {
+const BlogSection: React.FC = () => {
   const data = useStaticQuery(graphql`
     query {
       text: sharedYaml {

@@ -8,8 +8,7 @@ import ReactHtmlParser from 'react-html-parser';
 import Title from 'web-components/lib/components/title';
 import Description from 'web-components/lib/components/description';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import { useAllHomePageWebQuery } from '../../generated/sanity-graphql';
-import { client } from '../../../sanity';
+import { CarbonPlusSection as CarbonPlusProps } from '../../generated/sanity-graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -91,7 +90,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const CarbonplusSection = (): JSX.Element => {
+const CarbonplusSection: React.FC<{ content?: CarbonPlusProps | null }> = ({ content }): JSX.Element => {
   const imgData = useStaticQuery(graphql`
     query {
       cow: file(relativePath: { eq: "cow.png" }) {
@@ -103,11 +102,7 @@ const CarbonplusSection = (): JSX.Element => {
       }
     }
   `);
-  const { data } = useAllHomePageWebQuery({ client });
-  const content = data?.allHomePageWeb?.[0].carbonPlusSection;
   const styles = useStyles({});
-  // const content = imgData.text.carbonPlusSection;
-  console.log('content', content);
 
   return (
     <div className={styles.root}>
@@ -115,7 +110,7 @@ const CarbonplusSection = (): JSX.Element => {
         <Grid item xs={12} className={styles.text}>
           <Title variant="h6" className={styles.smallHeader}>
             <span className={styles.featured}>{content?.smallHeaderFeatured} </span>
-            <span className={styles.creditName}>{ReactHtmlParser(content?.smallHeaderCreditName)}</span>
+            <span className={styles.creditName}>{ReactHtmlParser(content?.smallHeaderCreditName || '')}</span>
           </Title>
           <Title className={styles.header} variant="h3">
             {ReactHtmlParser(content?.header || '')}
@@ -123,7 +118,7 @@ const CarbonplusSection = (): JSX.Element => {
           <Description className={styles.description}>
             {ReactHtmlParser(content?.description || '')}
           </Description>
-          <ContainedButton className={styles.button} href={content?.linkUrl}>
+          <ContainedButton className={styles.button} href={content?.linkUrl || ''}>
             {content?.linkText}
           </ContainedButton>
         </Grid>

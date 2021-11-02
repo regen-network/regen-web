@@ -3,12 +3,12 @@ import { graphql, useStaticQuery } from 'gatsby';
 import BackgroundImage from 'gatsby-background-image';
 import { makeStyles, Theme } from '@material-ui/core';
 import clsx from 'clsx';
-import Img from 'gatsby-image';
+// import Img from 'gatsby-image';
 
 import { ImageItemProps } from 'web-components/lib/components/image-item';
 import ImageItems from 'web-components/lib/components/sliders/ImageItems';
 import Section from 'web-components/src/components/section';
-import { useAllHomePageWebQuery } from '../../generated/sanity-graphql';
+import { useAllHomePageWebQuery, ValuesSection as ValuesProps } from '../../generated/sanity-graphql';
 import { client } from '../../../sanity';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -54,7 +54,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const HomeValues: React.FC<{ className?: string }> = ({ className }) => {
+const HomeValues: React.FC<{ className?: string; content?: ValuesProps | null }> = ({
+  className,
+  content,
+}) => {
   const imgData = useStaticQuery(graphql`
     query {
       bg: file(relativePath: { eq: "topo-bg-top.png" }) {
@@ -73,8 +76,6 @@ const HomeValues: React.FC<{ className?: string }> = ({ className }) => {
       }
     }
   `);
-  const { data } = useAllHomePageWebQuery({ client });
-  const content = data?.allHomePageWeb?.[0].valuesSection;
   const styles = useStyles();
 
   const imageItems: ImageItemProps[] = (content?.imageItems || []).map(item => {

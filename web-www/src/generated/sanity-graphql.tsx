@@ -321,8 +321,8 @@ export type ClimateSection = {
   header?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   image?: Maybe<Image>;
-  solution?: Maybe<TitleAndDescription>;
-  problem?: Maybe<TitleAndDescription>;
+  solution?: Maybe<TitleBody>;
+  problem?: Maybe<TitleBody>;
 };
 
 export type ClimateSectionFilter = {
@@ -331,8 +331,8 @@ export type ClimateSectionFilter = {
   header?: Maybe<StringFilter>;
   description?: Maybe<StringFilter>;
   image?: Maybe<ImageFilter>;
-  solution?: Maybe<TitleAndDescriptionFilter>;
-  problem?: Maybe<TitleAndDescriptionFilter>;
+  solution?: Maybe<TitleBodyFilter>;
+  problem?: Maybe<TitleBodyFilter>;
 };
 
 export type ClimateSectionSorting = {
@@ -341,8 +341,8 @@ export type ClimateSectionSorting = {
   header?: Maybe<SortOrder>;
   description?: Maybe<SortOrder>;
   image?: Maybe<ImageSorting>;
-  solution?: Maybe<TitleAndDescriptionSorting>;
-  problem?: Maybe<TitleAndDescriptionSorting>;
+  solution?: Maybe<TitleBodySorting>;
+  problem?: Maybe<TitleBodySorting>;
 };
 
 export type ConnectSection = {
@@ -667,6 +667,196 @@ export type DatetimeFilter = {
   lt?: Maybe<Scalars['DateTime']>;
   /** Checks if the value is lesser than or equal to the given input. */
   lte?: Maybe<Scalars['DateTime']>;
+};
+
+export type DevApproachSection = {
+  __typename?: 'DevApproachSection';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  caption?: Maybe<Scalars['String']>;
+  header?: Maybe<Scalars['String']>;
+  bodyRaw?: Maybe<Scalars['JSON']>;
+};
+
+export type DevApproachSectionFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  caption?: Maybe<StringFilter>;
+  header?: Maybe<StringFilter>;
+};
+
+export type DevApproachSectionSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  caption?: Maybe<SortOrder>;
+  header?: Maybe<SortOrder>;
+};
+
+export type DevCareersSection = {
+  __typename?: 'DevCareersSection';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  caption?: Maybe<Scalars['String']>;
+  header?: Maybe<Scalars['String']>;
+  bodyRaw?: Maybe<Scalars['JSON']>;
+  button?: Maybe<Button>;
+};
+
+export type DevCareersSectionFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  caption?: Maybe<StringFilter>;
+  header?: Maybe<StringFilter>;
+  button?: Maybe<ButtonFilter>;
+};
+
+export type DevCareersSectionSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  caption?: Maybe<SortOrder>;
+  header?: Maybe<SortOrder>;
+  button?: Maybe<ButtonSorting>;
+};
+
+export type DevLedgerSection = {
+  __typename?: 'DevLedgerSection';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  cosmosImage?: Maybe<CustomImage>;
+  header?: Maybe<Scalars['String']>;
+  bodyRaw?: Maybe<Scalars['JSON']>;
+};
+
+export type DevLedgerSectionFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  cosmosImage?: Maybe<CustomImageFilter>;
+  header?: Maybe<StringFilter>;
+};
+
+export type DevLedgerSectionSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  cosmosImage?: Maybe<CustomImageSorting>;
+  header?: Maybe<SortOrder>;
+};
+
+export type DevOpenAgSection = {
+  __typename?: 'DevOpenAgSection';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  image?: Maybe<CustomImage>;
+  header?: Maybe<Scalars['String']>;
+  bodyRaw?: Maybe<Scalars['JSON']>;
+};
+
+export type DevOpenAgSectionFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  image?: Maybe<CustomImageFilter>;
+  header?: Maybe<StringFilter>;
+};
+
+export type DevOpenAgSectionSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  image?: Maybe<CustomImageSorting>;
+  header?: Maybe<SortOrder>;
+};
+
+export type DevTestnetSection = {
+  __typename?: 'DevTestnetSection';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  header?: Maybe<Scalars['String']>;
+  rightColumnLabel?: Maybe<Scalars['String']>;
+  rightColumnContentRaw?: Maybe<Scalars['JSON']>;
+  leftColumnLabel?: Maybe<Scalars['String']>;
+  leftColumnContentRaw?: Maybe<Scalars['JSON']>;
+  button?: Maybe<Button>;
+  address?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+};
+
+export type DevTestnetSectionFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  header?: Maybe<StringFilter>;
+  rightColumnLabel?: Maybe<StringFilter>;
+  leftColumnLabel?: Maybe<StringFilter>;
+  button?: Maybe<ButtonFilter>;
+  address?: Maybe<StringFilter>;
+  description?: Maybe<StringFilter>;
+};
+
+export type DevTestnetSectionSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  header?: Maybe<SortOrder>;
+  rightColumnLabel?: Maybe<SortOrder>;
+  leftColumnLabel?: Maybe<SortOrder>;
+  button?: Maybe<ButtonSorting>;
+  address?: Maybe<SortOrder>;
+  description?: Maybe<SortOrder>;
+};
+
+export type DevelopersPage = Document & {
+  __typename?: 'DevelopersPage';
+  /** Document ID */
+  _id?: Maybe<Scalars['ID']>;
+  /** Document type */
+  _type?: Maybe<Scalars['String']>;
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars['DateTime']>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars['DateTime']>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars['String']>;
+  _key?: Maybe<Scalars['String']>;
+  topSection?: Maybe<TitleBody>;
+  approachSection?: Maybe<DevApproachSection>;
+  involvedSectionHeader?: Maybe<Scalars['String']>;
+  ledgerSection?: Maybe<DevLedgerSection>;
+  openAgSection?: Maybe<DevOpenAgSection>;
+  connectSectionHeader?: Maybe<Scalars['String']>;
+  careersSection?: Maybe<DevCareersSection>;
+  testnetSection?: Maybe<DevTestnetSection>;
+};
+
+export type DevelopersPageFilter = {
+  /** Apply filters on document level */
+  _?: Maybe<Sanity_DocumentFilter>;
+  _id?: Maybe<IdFilter>;
+  _type?: Maybe<StringFilter>;
+  _createdAt?: Maybe<DatetimeFilter>;
+  _updatedAt?: Maybe<DatetimeFilter>;
+  _rev?: Maybe<StringFilter>;
+  _key?: Maybe<StringFilter>;
+  topSection?: Maybe<TitleBodyFilter>;
+  approachSection?: Maybe<DevApproachSectionFilter>;
+  involvedSectionHeader?: Maybe<StringFilter>;
+  ledgerSection?: Maybe<DevLedgerSectionFilter>;
+  openAgSection?: Maybe<DevOpenAgSectionFilter>;
+  connectSectionHeader?: Maybe<StringFilter>;
+  careersSection?: Maybe<DevCareersSectionFilter>;
+  testnetSection?: Maybe<DevTestnetSectionFilter>;
+};
+
+export type DevelopersPageSorting = {
+  _id?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  _createdAt?: Maybe<SortOrder>;
+  _updatedAt?: Maybe<SortOrder>;
+  _rev?: Maybe<SortOrder>;
+  _key?: Maybe<SortOrder>;
+  topSection?: Maybe<TitleBodySorting>;
+  approachSection?: Maybe<DevApproachSectionSorting>;
+  involvedSectionHeader?: Maybe<SortOrder>;
+  ledgerSection?: Maybe<DevLedgerSectionSorting>;
+  openAgSection?: Maybe<DevOpenAgSectionSorting>;
+  connectSectionHeader?: Maybe<SortOrder>;
+  careersSection?: Maybe<DevCareersSectionSorting>;
+  testnetSection?: Maybe<DevTestnetSectionSorting>;
 };
 
 export type Doc = Document & {
@@ -1147,12 +1337,12 @@ export type HomePageWeb = Document & {
   /** Current document revision */
   _rev?: Maybe<Scalars['String']>;
   _key?: Maybe<Scalars['String']>;
-  homeFoldSection?: Maybe<TitleAndDescription>;
+  homeFoldSection?: Maybe<TitleBody>;
   marketplaceSection?: Maybe<MarketplaceSection>;
   climateSection?: Maybe<ClimateSection>;
   carbonPlusSection?: Maybe<CarbonPlusSection>;
   ledgerDescription?: Maybe<Scalars['String']>;
-  valuesSection?: Maybe<ValuesSection>;
+  valuesSection?: Maybe<HomeValuesSection>;
 };
 
 export type HomePageWebFilter = {
@@ -1164,12 +1354,12 @@ export type HomePageWebFilter = {
   _updatedAt?: Maybe<DatetimeFilter>;
   _rev?: Maybe<StringFilter>;
   _key?: Maybe<StringFilter>;
-  homeFoldSection?: Maybe<TitleAndDescriptionFilter>;
+  homeFoldSection?: Maybe<TitleBodyFilter>;
   marketplaceSection?: Maybe<MarketplaceSectionFilter>;
   climateSection?: Maybe<ClimateSectionFilter>;
   carbonPlusSection?: Maybe<CarbonPlusSectionFilter>;
   ledgerDescription?: Maybe<StringFilter>;
-  valuesSection?: Maybe<ValuesSectionFilter>;
+  valuesSection?: Maybe<HomeValuesSectionFilter>;
 };
 
 export type HomePageWebSorting = {
@@ -1179,12 +1369,32 @@ export type HomePageWebSorting = {
   _updatedAt?: Maybe<SortOrder>;
   _rev?: Maybe<SortOrder>;
   _key?: Maybe<SortOrder>;
-  homeFoldSection?: Maybe<TitleAndDescriptionSorting>;
+  homeFoldSection?: Maybe<TitleBodySorting>;
   marketplaceSection?: Maybe<MarketplaceSectionSorting>;
   climateSection?: Maybe<ClimateSectionSorting>;
   carbonPlusSection?: Maybe<CarbonPlusSectionSorting>;
   ledgerDescription?: Maybe<SortOrder>;
-  valuesSection?: Maybe<ValuesSectionSorting>;
+  valuesSection?: Maybe<HomeValuesSectionSorting>;
+};
+
+export type HomeValuesSection = {
+  __typename?: 'HomeValuesSection';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  header?: Maybe<Scalars['String']>;
+  imageItems?: Maybe<Array<Maybe<ValuesImageItem>>>;
+};
+
+export type HomeValuesSectionFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  header?: Maybe<StringFilter>;
+};
+
+export type HomeValuesSectionSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  header?: Maybe<SortOrder>;
 };
 
 export type IdFilter = {
@@ -1327,31 +1537,6 @@ export type ImageSorting = {
   _type?: Maybe<SortOrder>;
   hotspot?: Maybe<SanityImageHotspotSorting>;
   crop?: Maybe<SanityImageCropSorting>;
-};
-
-export type ImageTitleDescription = {
-  __typename?: 'ImageTitleDescription';
-  _key?: Maybe<Scalars['String']>;
-  _type?: Maybe<Scalars['String']>;
-  title?: Maybe<Scalars['String']>;
-  description?: Maybe<Scalars['String']>;
-  image?: Maybe<Image>;
-};
-
-export type ImageTitleDescriptionFilter = {
-  _key?: Maybe<StringFilter>;
-  _type?: Maybe<StringFilter>;
-  title?: Maybe<StringFilter>;
-  description?: Maybe<StringFilter>;
-  image?: Maybe<ImageFilter>;
-};
-
-export type ImageTitleDescriptionSorting = {
-  _key?: Maybe<SortOrder>;
-  _type?: Maybe<SortOrder>;
-  title?: Maybe<SortOrder>;
-  description?: Maybe<SortOrder>;
-  image?: Maybe<ImageSorting>;
 };
 
 export type IntFilter = {
@@ -1839,6 +2024,7 @@ export type ReviewSectionSorting = {
 
 export type RootQuery = {
   __typename?: 'RootQuery';
+  DevelopersPage?: Maybe<DevelopersPage>;
   Resource?: Maybe<Resource>;
   Faq?: Maybe<Faq>;
   Doc?: Maybe<Doc>;
@@ -1862,6 +2048,7 @@ export type RootQuery = {
   SanityImageAsset?: Maybe<SanityImageAsset>;
   SanityFileAsset?: Maybe<SanityFileAsset>;
   Document?: Maybe<Document>;
+  allDevelopersPage: Array<DevelopersPage>;
   allResource: Array<Resource>;
   allFaq: Array<Faq>;
   allDoc: Array<Doc>;
@@ -1885,6 +2072,11 @@ export type RootQuery = {
   allSanityImageAsset: Array<SanityImageAsset>;
   allSanityFileAsset: Array<SanityFileAsset>;
   allDocument: Array<Document>;
+};
+
+
+export type RootQueryDevelopersPageArgs = {
+  id: Scalars['ID'];
 };
 
 
@@ -2000,6 +2192,14 @@ export type RootQuerySanityFileAssetArgs = {
 
 export type RootQueryDocumentArgs = {
   id: Scalars['ID'];
+};
+
+
+export type RootQueryAllDevelopersPageArgs = {
+  where?: Maybe<DevelopersPageFilter>;
+  sort?: Maybe<Array<DevelopersPageSorting>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
 };
 
 
@@ -2787,47 +2987,98 @@ export type TimelineSectionSorting = {
   header?: Maybe<SortOrder>;
 };
 
-export type TitleAndDescription = {
-  __typename?: 'TitleAndDescription';
+export type TitleBody = {
+  __typename?: 'TitleBody';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  body?: Maybe<Scalars['String']>;
+};
+
+export type TitleBodyFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  title?: Maybe<StringFilter>;
+  body?: Maybe<StringFilter>;
+};
+
+export type TitleBodySorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  title?: Maybe<SortOrder>;
+  body?: Maybe<SortOrder>;
+};
+
+export type ValuesImageItem = {
+  __typename?: 'ValuesImageItem';
   _key?: Maybe<Scalars['String']>;
   _type?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
+  image?: Maybe<Image>;
 };
 
-export type TitleAndDescriptionFilter = {
+export type ValuesImageItemFilter = {
   _key?: Maybe<StringFilter>;
   _type?: Maybe<StringFilter>;
   title?: Maybe<StringFilter>;
   description?: Maybe<StringFilter>;
+  image?: Maybe<ImageFilter>;
 };
 
-export type TitleAndDescriptionSorting = {
+export type ValuesImageItemSorting = {
   _key?: Maybe<SortOrder>;
   _type?: Maybe<SortOrder>;
   title?: Maybe<SortOrder>;
   description?: Maybe<SortOrder>;
+  image?: Maybe<ImageSorting>;
 };
 
-export type ValuesSection = {
-  __typename?: 'ValuesSection';
-  _key?: Maybe<Scalars['String']>;
-  _type?: Maybe<Scalars['String']>;
-  header?: Maybe<Scalars['String']>;
-  imageItems?: Maybe<Array<Maybe<ImageTitleDescription>>>;
-};
+export type AllDevelopersPageQueryVariables = Exact<{ [key: string]: never; }>;
 
-export type ValuesSectionFilter = {
-  _key?: Maybe<StringFilter>;
-  _type?: Maybe<StringFilter>;
-  header?: Maybe<StringFilter>;
-};
 
-export type ValuesSectionSorting = {
-  _key?: Maybe<SortOrder>;
-  _type?: Maybe<SortOrder>;
-  header?: Maybe<SortOrder>;
-};
+export type AllDevelopersPageQuery = (
+  { __typename?: 'RootQuery' }
+  & { allDevelopersPage: Array<(
+    { __typename?: 'DevelopersPage' }
+    & Pick<DevelopersPage, 'involvedSectionHeader' | 'connectSectionHeader'>
+    & { topSection?: Maybe<(
+      { __typename?: 'TitleBody' }
+      & Pick<TitleBody, 'title' | 'body'>
+    )>, approachSection?: Maybe<(
+      { __typename?: 'DevApproachSection' }
+      & Pick<DevApproachSection, 'caption' | 'header' | 'bodyRaw'>
+    )>, ledgerSection?: Maybe<(
+      { __typename?: 'DevLedgerSection' }
+      & Pick<DevLedgerSection, 'header' | 'bodyRaw'>
+      & { cosmosImage?: Maybe<(
+        { __typename?: 'CustomImage' }
+        & CustomImageFieldsFragment
+      )> }
+    )>, openAgSection?: Maybe<(
+      { __typename?: 'DevOpenAgSection' }
+      & Pick<DevOpenAgSection, 'header' | 'bodyRaw'>
+      & { image?: Maybe<(
+        { __typename?: 'CustomImage' }
+        & CustomImageFieldsFragment
+      )> }
+    )>, careersSection?: Maybe<(
+      { __typename?: 'DevCareersSection' }
+      & Pick<DevCareersSection, 'caption' | 'header' | 'bodyRaw'>
+      & { button?: Maybe<(
+        { __typename?: 'Button' }
+        & ButtonFieldsFragment
+      )> }
+    )>, testnetSection?: Maybe<(
+      { __typename?: 'DevTestnetSection' }
+      & Pick<DevTestnetSection, 'rightColumnLabel' | 'rightColumnContentRaw' | 'header' | 'address' | 'leftColumnLabel' | 'leftColumnContentRaw' | 'description'>
+      & { button?: Maybe<(
+        { __typename?: 'Button' }
+        & ButtonFieldsFragment
+      )> }
+    )> }
+  )> }
+);
 
 export type AllHomePageWebQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -2838,8 +3089,8 @@ export type AllHomePageWebQuery = (
     { __typename?: 'HomePageWeb' }
     & Pick<HomePageWeb, 'ledgerDescription'>
     & { homeFoldSection?: Maybe<(
-      { __typename?: 'TitleAndDescription' }
-      & Pick<TitleAndDescription, 'title' | 'description'>
+      { __typename?: 'TitleBody' }
+      & Pick<TitleBody, 'title' | 'body'>
     )>, marketplaceSection?: Maybe<(
       { __typename?: 'MarketplaceSection' }
       & Pick<MarketplaceSection, 'header' | 'tooltip'>
@@ -2857,21 +3108,21 @@ export type AllHomePageWebQuery = (
         { __typename?: 'Image' }
         & SimpleImageFieldsFragment
       )>, solution?: Maybe<(
-        { __typename?: 'TitleAndDescription' }
-        & Pick<TitleAndDescription, 'title' | 'description'>
+        { __typename?: 'TitleBody' }
+        & Pick<TitleBody, 'title' | 'body'>
       )>, problem?: Maybe<(
-        { __typename?: 'TitleAndDescription' }
-        & Pick<TitleAndDescription, 'title' | 'description'>
+        { __typename?: 'TitleBody' }
+        & Pick<TitleBody, 'title' | 'body'>
       )> }
     )>, carbonPlusSection?: Maybe<(
       { __typename?: 'CarbonPlusSection' }
       & Pick<CarbonPlusSection, 'smallHeaderFeatured' | 'smallHeaderCreditName' | 'header' | 'description' | 'linkText' | 'linkUrl'>
     )>, valuesSection?: Maybe<(
-      { __typename?: 'ValuesSection' }
-      & Pick<ValuesSection, 'header'>
+      { __typename?: 'HomeValuesSection' }
+      & Pick<HomeValuesSection, 'header'>
       & { imageItems?: Maybe<Array<Maybe<(
-        { __typename?: 'ImageTitleDescription' }
-        & Pick<ImageTitleDescription, 'title' | 'description'>
+        { __typename?: 'ValuesImageItem' }
+        & Pick<ValuesImageItem, 'title' | 'description'>
         & { image?: Maybe<(
           { __typename?: 'Image' }
           & SimpleImageFieldsFragment
@@ -2881,12 +3132,54 @@ export type AllHomePageWebQuery = (
   )> }
 );
 
+export type ButtonFieldsFragment = (
+  { __typename?: 'Button' }
+  & Pick<Button, 'buttonText' | 'buttonModal' | 'buttonBlankTarget'>
+  & { buttonLink?: Maybe<(
+    { __typename?: 'Link' }
+    & LinkFieldsFragment
+  )> }
+);
+
 export type CallToActionFieldsFragment = (
   { __typename?: 'CallToAction' }
   & Pick<CallToAction, 'caption' | 'header' | 'description' | 'linkText' | 'linkUrl'>
   & { image?: Maybe<(
     { __typename?: 'Image' }
     & SimpleImageFieldsFragment
+  )> }
+);
+
+export type CustomImageFieldsFragment = (
+  { __typename?: 'CustomImage' }
+  & Pick<CustomImage, 'imageAlt' | 'imageHref'>
+  & { image?: Maybe<(
+    { __typename?: 'Image' }
+    & { asset?: Maybe<(
+      { __typename?: 'SanityImageAsset' }
+      & Pick<SanityImageAsset, 'altText' | 'url'>
+    )> }
+  )> }
+);
+
+export type FeaturedSectionFieldsFragment = (
+  { __typename?: 'FeaturedSection' }
+  & Pick<FeaturedSection, 'header' | 'titleRaw' | 'descriptionRaw'>
+  & { button?: Maybe<(
+    { __typename?: 'Button' }
+    & ButtonFieldsFragment
+  )>, image?: Maybe<(
+    { __typename?: 'CustomImage' }
+    & CustomImageFieldsFragment
+  )> }
+);
+
+export type LinkFieldsFragment = (
+  { __typename?: 'Link' }
+  & Pick<Link, 'buttonHref'>
+  & { buttonDoc?: Maybe<(
+    { __typename?: 'Doc' }
+    & Pick<Doc, 'href'>
   )> }
 );
 
@@ -2918,12 +3211,135 @@ export const CallToActionFieldsFragmentDoc = gql`
   linkUrl
 }
     ${SimpleImageFieldsFragmentDoc}`;
+export const LinkFieldsFragmentDoc = gql`
+    fragment linkFields on Link {
+  buttonHref
+  buttonDoc {
+    href
+  }
+}
+    `;
+export const ButtonFieldsFragmentDoc = gql`
+    fragment buttonFields on Button {
+  buttonText
+  buttonLink {
+    ...linkFields
+  }
+  buttonModal
+  buttonBlankTarget
+}
+    ${LinkFieldsFragmentDoc}`;
+export const CustomImageFieldsFragmentDoc = gql`
+    fragment customImageFields on CustomImage {
+  imageAlt
+  imageHref
+  image {
+    asset {
+      altText
+      url
+    }
+  }
+}
+    `;
+export const FeaturedSectionFieldsFragmentDoc = gql`
+    fragment featuredSectionFields on FeaturedSection {
+  header
+  titleRaw
+  descriptionRaw
+  button {
+    ...buttonFields
+  }
+  image {
+    ...customImageFields
+  }
+}
+    ${ButtonFieldsFragmentDoc}
+${CustomImageFieldsFragmentDoc}`;
+export const AllDevelopersPageDocument = gql`
+    query allDevelopersPage {
+  allDevelopersPage {
+    topSection {
+      title
+      body
+    }
+    approachSection {
+      caption
+      header
+      bodyRaw
+    }
+    involvedSectionHeader
+    ledgerSection {
+      cosmosImage {
+        ...customImageFields
+      }
+      header
+      bodyRaw
+    }
+    openAgSection {
+      image {
+        ...customImageFields
+      }
+      header
+      bodyRaw
+    }
+    connectSectionHeader
+    careersSection {
+      caption
+      header
+      bodyRaw
+      button {
+        ...buttonFields
+      }
+    }
+    testnetSection {
+      rightColumnLabel
+      rightColumnContentRaw
+      button {
+        ...buttonFields
+      }
+      header
+      address
+      leftColumnLabel
+      leftColumnContentRaw
+      description
+    }
+  }
+}
+    ${CustomImageFieldsFragmentDoc}
+${ButtonFieldsFragmentDoc}`;
+
+/**
+ * __useAllDevelopersPageQuery__
+ *
+ * To run a query within a React component, call `useAllDevelopersPageQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAllDevelopersPageQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAllDevelopersPageQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useAllDevelopersPageQuery(baseOptions?: Apollo.QueryHookOptions<AllDevelopersPageQuery, AllDevelopersPageQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AllDevelopersPageQuery, AllDevelopersPageQueryVariables>(AllDevelopersPageDocument, options);
+      }
+export function useAllDevelopersPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllDevelopersPageQuery, AllDevelopersPageQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AllDevelopersPageQuery, AllDevelopersPageQueryVariables>(AllDevelopersPageDocument, options);
+        }
+export type AllDevelopersPageQueryHookResult = ReturnType<typeof useAllDevelopersPageQuery>;
+export type AllDevelopersPageLazyQueryHookResult = ReturnType<typeof useAllDevelopersPageLazyQuery>;
+export type AllDevelopersPageQueryResult = Apollo.QueryResult<AllDevelopersPageQuery, AllDevelopersPageQueryVariables>;
 export const AllHomePageWebDocument = gql`
     query allHomePageWeb {
   allHomePageWeb {
     homeFoldSection {
       title
-      description
+      body
     }
     marketplaceSection {
       header
@@ -2946,11 +3362,11 @@ export const AllHomePageWebDocument = gql`
       }
       solution {
         title
-        description
+        body
       }
       problem {
         title
-        description
+        body
       }
     }
     carbonPlusSection {

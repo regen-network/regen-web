@@ -6,14 +6,9 @@ import BackgroundImage from 'gatsby-background-image';
 import VideoPopup from '../../components/videoPopup';
 import Typography from '@material-ui/core/Typography';
 import Title from 'web-components/lib/components/title';
-import { useAllHomePageWebQuery } from '../../generated/sanity-graphql';
-import { client } from '../../../sanity';
+import { TitleAndDescription } from '../../generated/sanity-graphql';
 
-interface Props {
-  className?: string;
-}
-
-let useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles((theme: Theme) => ({
   root: {
     'text-shadow': '0px 4px 10px rgba(0, 0, 0, 0.1)',
     'text-align': 'center',
@@ -90,10 +85,11 @@ let useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const HomeFoldSection: React.FC<Props> = ({ className }) => {
+const HomeFoldSection: React.FC<{ className?: string; content?: TitleAndDescription | null }> = ({
+  className,
+  content,
+}) => {
   const styles = useStyles({});
-  const { data } = useAllHomePageWebQuery({ client });
-  const content = data?.allHomePageWeb?.[0].homeFoldSection;
   const imgQuery = useStaticQuery(graphql`
     query {
       desktop: file(relativePath: { eq: "image43.jpg" }) {

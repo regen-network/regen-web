@@ -6,8 +6,7 @@ import Title from 'web-components/lib/components/title';
 import Section from 'web-components/src/components/section';
 // import Img from 'gatsby-image';
 import Tooltip from 'web-components/lib/components/tooltip';
-import { useAllHomePageWebQuery } from '../../generated/sanity-graphql';
-import { client } from '../../../sanity';
+import { MarketplaceSection as MarketplaceProps } from '../../generated/sanity-graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -122,9 +121,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const MarketplaceSection = (): JSX.Element => {
-  const { data } = useAllHomePageWebQuery({ client });
-  const content = data?.allHomePageWeb?.[0].marketplaceSection;
+const MarketplaceSection: React.FC<{ content?: MarketplaceProps | null }> = ({ content }) => {
   const styles = useStyles({});
 
   return (

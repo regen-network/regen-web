@@ -2,7 +2,7 @@ query allHomePageWeb {
   allHomePageWeb {
     homeFoldSection {
       title
-      description
+      body
     }
     marketplaceSection {
       header
@@ -25,11 +25,11 @@ query allHomePageWeb {
       }
       solution {
         title
-        description
+        body
       }
       problem {
         title
-        description
+        body
       }
     }
     carbonPlusSection {

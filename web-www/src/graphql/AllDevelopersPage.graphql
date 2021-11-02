@@ -1,0 +1,49 @@
+query allDevelopersPage {
+  allDevelopersPage {
+    topSection {
+      title
+      body
+    }
+    approachSection {
+      caption
+      header
+      bodyRaw
+    }
+    involvedSectionHeader
+    ledgerSection {
+      cosmosImage {
+        ...customImageFields
+      }
+      header
+      bodyRaw
+    }
+    openAgSection {
+      image {
+        ...customImageFields
+      }
+      header
+      bodyRaw
+    }
+    connectSectionHeader
+    careersSection {
+      caption
+      header
+      bodyRaw
+      button {
+        ...buttonFields
+      }
+    }
+    testnetSection {
+      rightColumnLabel
+      rightColumnContentRaw
+      button {
+        ...buttonFields
+      }
+      header
+      address
+      leftColumnLabel
+      leftColumnContentRaw
+      description
+    }
+  }
+}

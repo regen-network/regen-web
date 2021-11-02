@@ -13,12 +13,10 @@ import ClimateSection from '../sections/home/ClimateSection';
 import CarbonPlusSection from '../sections/home/CarbonPlusSection';
 import EmailSubmitSection from '../sections/shared/EmailSubmitSection';
 import BlogSection from '../sections/shared/BlogSection';
+import { useAllHomePageWebQuery } from '../generated/sanity-graphql';
+import { client } from '../../sanity';
 
-interface props {
-  location: Location;
-}
-
-const IndexPage = ({ location }: props): JSX.Element => {
+const IndexPage: React.FC<{ location: Location }> = ({ location }) => {
   const theme = useTheme();
   const imgData = useStaticQuery(graphql`
     query {
@@ -42,11 +40,14 @@ const IndexPage = ({ location }: props): JSX.Element => {
     }
   `);
 
+  const { data } = useAllHomePageWebQuery({ client });
+  const content = data?.allHomePageWeb?.[0];
+
   return (
     <>
       <SEO location={location} title="Regen Network" imageUrl={imgData.seoImage.publicURL} />
-      <HomeFoldSection />
-      <MarketplaceSection />
+      <HomeFoldSection content={content?.homeFoldSection} />
+      <MarketplaceSection content={content?.marketplaceSection} />
       <EmailSubmitSection />
       <Box display={{ xs: 'block', sm: 'none' }}>
         <BackgroundImage
@@ -57,9 +58,9 @@ const IndexPage = ({ location }: props): JSX.Element => {
             backgroundPosition: 'left 70%',
           }}
         >
-          <ClimateSection />
+          <ClimateSection content={content?.climateSection} />
         </BackgroundImage>
-        <CarbonPlusSection />
+        <CarbonPlusSection content={content?.carbonPlusSection} />
       </Box>
       <Box display={{ xs: 'none', sm: 'block' }}>
         <BackgroundImage
@@ -67,12 +68,12 @@ const IndexPage = ({ location }: props): JSX.Element => {
           fluid={imgData.background.childImageSharp.fluid}
           backgroundColor={theme.palette.grey['50']}
         >
-          <ClimateSection />
-          <CarbonPlusSection />
+          <ClimateSection content={content?.climateSection} />
+          <CarbonPlusSection content={content?.carbonPlusSection} />
         </BackgroundImage>
       </Box>
-      <HomeLedger />
-      <HomeValuesSection />
+      <HomeLedger description={content?.ledgerDescription || ''} />
+      <HomeValuesSection content={content?.valuesSection} />
       <BlogSection />
     </>
   );

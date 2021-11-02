@@ -7,8 +7,7 @@ import clsx from 'clsx';
 
 import Title from 'web-components/lib/components/title';
 import Card from 'web-components/lib/components/cards/Card';
-import { useAllHomePageWebQuery } from '../../generated/sanity-graphql';
-import { client } from '../../../sanity';
+import { ClimateSection as ClimateProps } from '../../generated/sanity-graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -170,13 +169,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const ClimateSection = (): JSX.Element => {
-  const { data } = useAllHomePageWebQuery({ client });
-  const content = data?.allHomePageWeb?.[0].climateSection;
+const ClimateSection: React.FC<{ content?: ClimateProps | null }> = ({ content }): JSX.Element => {
   const styles = useStyles();
   const theme = useTheme();
   const downSm = useMediaQuery(theme.breakpoints.down('sm'));
-  // const contentOld = dataold.text.climateSection;
   const imgData = content?.image?.asset;
 
   return (

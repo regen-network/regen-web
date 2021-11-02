@@ -7,8 +7,6 @@ import { makeStyles, Theme } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import Title from 'web-components/lib/components/title';
 import Img from 'gatsby-image';
-import { useAllHomePageWebQuery } from '../../generated/sanity-graphql';
-import { client } from '../../../sanity';
 
 let useStyles = makeStyles((theme: Theme) => ({
   grid: {
@@ -87,7 +85,7 @@ let useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const HomeLedger: React.FC = () => {
+const HomeLedger: React.FC<{ description: string }> = ({ description }) => {
   const imgData = useStaticQuery(graphql`
     query {
       bg: file(relativePath: { eq: "farm-background.png" }) {
@@ -107,8 +105,6 @@ const HomeLedger: React.FC = () => {
     }
   `);
 
-  const { data } = useAllHomePageWebQuery({ client: client });
-  const description = data?.allHomePageWeb?.[0].ledgerDescription;
   const styles = useStyles();
 
   return (

@@ -478,7 +478,6 @@ function ProjectDetails(): JSX.Element {
             creditPrice={project.creditPrice}
             stripePrice={project.stripePrice}
           />
-          {/*<iframe title="airtable-presale-form" src={project.presaleUrl} />*/}
         </Modal>
       )}
       <Modal open={open} onClose={handleClose}>

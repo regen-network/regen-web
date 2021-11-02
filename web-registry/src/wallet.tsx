@@ -1,6 +1,7 @@
 import React, { useState, createContext } from 'react';
-import { assertIsBroadcastTxSuccess, SigningStargateClient } from '@cosmjs/stargate';
+import { assertIsBroadcastTxSuccess, SigningStargateClient, BroadcastTxResponse } from '@cosmjs/stargate';
 import { Window as KeplrWindow } from '@keplr-wallet/types';
+import { TxRaw } from 'cosmjs-types/cosmos/tx/v1beta1/tx';
 
 interface ChainKey {
   name: string;
@@ -11,7 +12,7 @@ interface ChainKey {
   isNanoLedger: boolean;
 }
 
-interface KeplrWallet {
+interface Sender {
   address: string;
   shortAddress: string;
 }
@@ -22,23 +23,34 @@ declare global {
 }
 
 type ContextType = {
-  wallet?: KeplrWallet;
+  wallet?: Sender;
   suggestChain?: () => Promise<void>;
-  sendTokens?: (amount: number, recipient: string) => Promise<string>;
+  signSend?: (amount: number, recipient: string) => Promise<Uint8Array>;
+  broadcast?: (txBytes: Uint8Array) => Promise<string>;
+  txResult?: BroadcastTxResponse;
+  setTxResult: (txResult: BroadcastTxResponse | undefined) => void;
 };
 
-const WalletContext = createContext<ContextType>({});
+const WalletContext = createContext<ContextType>({
+  setTxResult: (txResult: BroadcastTxResponse | undefined) => {},
+});
 
 export const chainId = process.env.REACT_APP_LEDGER_CHAIN_ID;
 const chainName = process.env.REACT_APP_LEDGER_CHAIN_NAME;
 const chainRpc = `${process.env.REACT_APP_API_URI}/ledger`;
 const chainRestEndpoint = process.env.REACT_APP_LEDGER_REST_ENDPOINT;
+const emptySender = { address: '', shortAddress: '' };
+const defaultClientOptions = {
+  broadcastPollIntervalMs: 1000,
+  broadcastTimeoutMs: 600000,
+};
 
 export const WalletProvider: React.FC = ({ children }) => {
-  const [wallet, setWallet] = useState<KeplrWallet | undefined>();
+  const [sender, setSender] = useState<Sender>(emptySender);
+  const [txResult, setTxResult] = useState<BroadcastTxResponse | undefined>(undefined);
 
   window.onload = async () => {
-    if (!wallet) {
+    if (!sender.address) {
       await getWallet();
     }
   };
@@ -47,11 +59,11 @@ export const WalletProvider: React.FC = ({ children }) => {
     const key = await checkForWallet();
 
     if (key && key.bech32Address) {
-      const keplrWallet = {
+      const sender = {
         address: key.bech32Address,
         shortAddress: `${key.bech32Address.substring(0, 10)}...`,
       };
-      setWallet(keplrWallet);
+      setSender(sender);
     }
   };
 
@@ -156,51 +168,103 @@ export const WalletProvider: React.FC = ({ children }) => {
           getWallet();
         })
         .catch(() => {
-          setWallet(undefined);
+          setSender(emptySender);
         });
     }
   };
 
-  const sendTokens = async (amount: number, recipient: string): Promise<string> => {
+  /**
+   * Sign a transaction for sending tokens to a reciptient
+   */
+  const signSend = async (amount: number, recipient: string): Promise<Uint8Array> => {
+    amount *= 1000000;
+    amount = Math.floor(amount);
+
+    const client = await getClient();
+    const fee = {
+      amount: [
+        {
+          denom: 'uregen',
+          amount: '100', //TODO: what should fee and gas be?
+        },
+      ],
+      gas: '200000',
+    };
+
+    const msgSend = {
+      fromAddress: sender.address,
+      toAddress: recipient,
+      amount: [
+        {
+          denom: 'uregen',
+          amount: amount.toString(),
+        },
+      ],
+    };
+    const msgAny = {
+      typeUrl: '/cosmos.bank.v1beta1.MsgSend',
+      value: msgSend,
+    };
+
+    try {
+      const txRaw = await client.sign(sender.address, [msgAny], fee, '');
+      const txBytes = TxRaw.encode(txRaw).finish();
+      return txBytes;
+    } catch (err) {
+      alert(`Client sign error: ${err}`);
+      return Promise.reject();
+    }
+  };
+
+  /**
+   * Broadcast a signed transaction and wait for transaction hash
+   */
+  const broadcast = async (signedTxBytes: Uint8Array): Promise<string> => {
+    const client = await getClient();
+    const result = await client.broadcastTx(signedTxBytes);
+    assertIsBroadcastTxSuccess(result);
+    setTxResult(result);
+
+    return result.transactionHash;
+  };
+
+  const getClient = async (): Promise<SigningStargateClient> => {
     if (chainId && chainRpc) {
-      amount *= 1000000;
-      amount = Math.floor(amount);
+      try {
+        await window?.keplr?.enable(chainId);
+        const offlineSigner = !!window.getOfflineSignerAuto && (await window.getOfflineSignerAuto(chainId));
 
-      await window?.keplr?.enable(chainId);
-      const offlineSigner = !!window.getOfflineSigner && (await window.getOfflineSigner(chainId));
+        if (offlineSigner) {
+          if (!sender.address) {
+            const [senderAccount] = await offlineSigner.getAccounts();
+            setSender({
+              address: senderAccount.address,
+              shortAddress: `${senderAccount.address.substring(0, 10)}...`,
+            });
+          }
 
-      if (offlineSigner) {
-        const accounts = await offlineSigner.getAccounts();
-        const client = await SigningStargateClient.connectWithSigner(chainRpc, offlineSigner);
-        const fee = {
-          amount: [
-            {
-              denom: 'uregen',
-              amount: '100',
-            },
-          ],
-          gas: '200000',
-        };
+          const client = await SigningStargateClient.connectWithSigner(
+            chainRpc,
+            offlineSigner,
+            defaultClientOptions,
+          );
 
-        const coinAmount = [
-          {
-            denom: 'uregen',
-            amount: amount.toString(),
-          },
-        ];
-        const result = await client.sendTokens(accounts[0].address, recipient, coinAmount, fee, 'test');
-        console.log('result', result);
-        assertIsBroadcastTxSuccess(result);
-
-        return result.transactionHash;
-        // TODO: error handling
+          return client;
+        }
+      } catch (err) {
+        alert(`Wallet error: ${err}`);
+        return Promise.reject();
       }
     }
-    return Promise.reject('No chain id or enpoint provided');
+    return Promise.reject('No chain id or endpoint provided');
   };
 
   return (
-    <WalletContext.Provider value={{ wallet, suggestChain, sendTokens }}>{children}</WalletContext.Provider>
+    <WalletContext.Provider
+      value={{ wallet: sender, suggestChain, signSend, broadcast, txResult, setTxResult }}
+    >
+      {children}
+    </WalletContext.Provider>
   );
 };
 

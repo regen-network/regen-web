@@ -2,23 +2,15 @@ seo:
   title: Regen Ecosystem Fund
   description: Regen Ecosystem Fund (REF) is the ecosystem venture fund of Regen
     Network. REF will fund the rapid, decentralized global growth of the Regen
-    Network ecosystem. Regen Network is a community dedicated to building the
-    Payments for Ecosystem Services (PES) markets and foundational climate
-    finance infrastructure to regenerate ecological health, with the carbon
-    markets being our beachhead market. Launched in April of 2021, the Regen
-    Ledger is our open-source Proof-of-Stake ecological blockchain, built on the
-    Cosmos SDK. The Regen Ecosystem Fund will focus on strategic early-stage
-    investments to accelerate the adoption of Regen Network.This will create a
-    vibrant ecosystem of companies using Regen Ledger and the $REGEN token as
-    their backbone for ecological accounting, eco-credit provisioning, and
-    Payments for Ecosystem Services.
+    Network ecosystem.
 topSection:
   header: Regen Ecosystem Fund
-foldSection:
-  title: Fund Strategy
   body: Regen Ecosystem Fund (REF) is the ecosystem venture fund of Regen Network.
     REF will fund the rapid, decentralized global growth of the Regen Network
-    ecosystem. <br/><br/> Regen Network is a community dedicated to building the
+    ecosystem.
+foldSection:
+  title: Fund Strategy
+  body: Regen Network is a community dedicated to building the
     Payments for Ecosystem Services (PES) markets and foundational climate
     finance infrastructure to regenerate ecological health, with the carbon
     markets being our beachhead market. Launched in April of 2021, the Regen

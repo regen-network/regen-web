@@ -1,4 +1,4 @@
-fragment buttonFields on Button {
+fragment buttonFields on SanityButton {
   buttonText
   buttonLink {
     ...linkFields

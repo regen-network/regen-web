@@ -1,5 +1,5 @@
 # TODO - these images aren't optimized. Stop-gap until we figure out what to do about sanity + gatsby image
-fragment simpleImageFields on Image {
+fragment simpleImageFields on SanityImage {
   asset {
     url
     altText

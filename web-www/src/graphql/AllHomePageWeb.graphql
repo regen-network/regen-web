@@ -1,55 +1,60 @@
-query allHomePageWeb {
-  allHomePageWeb {
-    homeFoldSection {
-      title
-      body
-    }
-    marketplaceSection {
-      header
-      tooltip
-      body {
-        green
-        middle
-        popover
-        end
-      }
-      callToActions {
-        ...callToActionFields
-      }
-    }
-    climateSection {
-      header
-      description
-      image {
-        ...simpleImageFields
-      }
-      solution {
-        title
-        body
-      }
-      problem {
-        title
-        body
-      }
-    }
-    carbonPlusSection {
-      smallHeaderFeatured
-      smallHeaderCreditName
-      header
-      description
-      linkText
-      linkUrl
-    }
-    ledgerDescription
-    valuesSection {
-      header
-      imageItems {
-        title
-        description
-        image {
-          ...simpleImageFields
-        }
-      }
-    }
-  }
-}
+# query allHomePageWeb {
+#   allSanityHomePageWeb {
+#     nodes {
+#       homeFoldSection {
+#         title
+#         body
+#         image {
+#           ...ImageWithPreview
+#         }
+#       }
+#       marketplaceSection {
+#         header
+#         tooltip
+#         body {
+#           green
+#           middle
+#           popover
+#           end
+#         }
+#         callToActions {
+#           ...callToActionFields
+#         }
+#       }
+#       climateSection {
+#         header
+#         description
+#         image {
+#           ...ImageWithPreview
+#         }
+#         solution {
+#           title
+#           body
+#         }
+#         problem {
+#           title
+#           body
+#         }
+#       }
+#       carbonPlusSection {
+#         smallHeaderFeatured
+#         smallHeaderCreditName
+#         header
+#         description
+#         linkText
+#         linkUrl
+#       }
+#       ledgerDescription
+#       valuesSection {
+#         header
+#         imageItems {
+#           title
+#           description
+#           image {
+#             ...ImageWithPreview
+#           }
+#         }
+#       }
+#     }
+#   }
+# }

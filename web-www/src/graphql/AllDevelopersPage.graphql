@@ -1,49 +1,51 @@
-query allDevelopersPage {
-  allDevelopersPage {
-    topSection {
-      title
-      body
-    }
-    approachSection {
-      caption
-      header
-      bodyRaw
-    }
-    involvedSectionHeader
-    ledgerSection {
-      cosmosImage {
-        ...customImageFields
-      }
-      header
-      bodyRaw
-    }
-    openAgSection {
-      image {
-        ...customImageFields
-      }
-      header
-      bodyRaw
-    }
-    connectSectionHeader
-    careersSection {
-      caption
-      header
-      bodyRaw
-      button {
-        ...buttonFields
-      }
-    }
-    testnetSection {
-      rightColumnLabel
-      rightColumnContentRaw
-      button {
-        ...buttonFields
-      }
-      header
-      address
-      leftColumnLabel
-      leftColumnContentRaw
-      description
-    }
-  }
-}
+# query allSanityDevelopersPage {
+#   allSanityDevelopersPage {
+#     nodes {
+#       topSection {
+#         title
+#         body
+#       }
+#       approachSection {
+#         caption
+#         header
+#         body
+#       }
+#       involvedSectionHeader
+#       ledgerSection {
+#         cosmosImage {
+#           ...customImageFields
+#         }
+#         header
+#         body
+#       }
+#       openAgSection {
+#         image {
+#           ...customImageFields
+#         }
+#         header
+#         bodyRaw
+#       }
+#       connectSectionHeader
+#       careersSection {
+#         caption
+#         header
+#         bodyRaw
+#         button {
+#           ...buttonFields
+#         }
+#       }
+#       testnetSection {
+#         rightColumnLabel
+#         rightColumnContentRaw
+#         button {
+#           ...buttonFields
+#         }
+#         header
+#         address
+#         leftColumnLabel
+#         leftColumnContentRaw
+#         description
+#       }
+#     }
+#   }
+# }

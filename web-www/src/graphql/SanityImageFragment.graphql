@@ -1,0 +1,27 @@
+# fragment Image on SanityImage {
+#   hotspot {
+#     height
+#     width
+#     x
+#     y
+#   }
+#   crop {
+#     bottom
+#     left
+#     right
+#     top
+#   }
+#   asset {
+#     _id
+#     url
+#   }
+# }
+# fragment ImageWithPreview on SanityImage {
+#   ...Image
+#   asset {
+#     url
+#     metadata {
+#       preview: lqip
+#     }
+#   }
+# }

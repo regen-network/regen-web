@@ -1,4 +1,5 @@
 import { ApolloClient, InMemoryCache } from '@apollo/client';
+import imageUrlBuilder from '@sanity/image-url';
 
 // client for querying data from Sanity (CMS)
 const client = new ApolloClient({
@@ -6,4 +7,9 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-export { client };
+const imgBuilder = imageUrlBuilder({
+  projectId: `${process.env.SANITY_PROJECT_ID}`,
+  dataset: `${process.env.SANITY_DATASET}`,
+});
+
+export { client, imgBuilder };

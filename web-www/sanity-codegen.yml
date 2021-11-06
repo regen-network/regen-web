@@ -1,7 +1,12 @@
 overwrite: true
-schema: 'https://jm12rn9t.api.sanity.io/v1/graphql/staging/default'
+# schema: 'https://jm12rn9t.api.sanity.io/v1/graphql/staging/default'
+schema: 'http://localhost:8000/___graphql'
 documents:
+  # - 'node_modules/gatsby*/!(node_modules)/**/*.js'
+  # - 'node_modules/gatsby-source-sanity/fragments/*/*.js'
+  - './node_modules/gatsby-*/**/*.js'
   - 'src/graphql/*.graphql'
+  - 'src/graphql/**/*.ts'
 generates:
   src/generated/sanity-graphql.tsx:
     plugins:
@@ -10,6 +15,7 @@ generates:
       - 'typescript-react-apollo'
     config:
       withHooks: true
+      useExplicitTyping: true
   ./sanity-graphql.schema.json:
     plugins:
       - 'introspection'

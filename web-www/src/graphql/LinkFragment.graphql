@@ -1,4 +1,4 @@
-fragment linkFields on Link {
+fragment linkFields on SanityLink {
   buttonHref
   buttonDoc {
     href

@@ -21,6 +21,14 @@ module.exports = {
       },
     },
     {
+      resolve: 'gatsby-plugin-sanity-image',
+      options: {
+        projectId: process.env.SANITY_PROJECT_ID,
+        dataset: process.env.NODE_ENV === 'production' ? 'production' : 'staging',
+        watchMode: true,
+      },
+    },
+    {
       resolve: `gatsby-plugin-netlify`,
       options: {
         headers: {

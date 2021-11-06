@@ -13,12 +13,12 @@ import ClimateSection from '../sections/home/ClimateSection';
 import CarbonPlusSection from '../sections/home/CarbonPlusSection';
 import EmailSubmitSection from '../sections/shared/EmailSubmitSection';
 import BlogSection from '../sections/shared/BlogSection';
-import { useAllHomePageWebQuery } from '../generated/sanity-graphql';
+import { SanityHomePageWeb, useAllHomePageWebQuery } from '../generated/sanity-graphql';
 import { client } from '../../sanity';
 
 const IndexPage: React.FC<{ location: Location }> = ({ location }) => {
   const theme = useTheme();
-  const imgData = useStaticQuery(graphql`
+  const data: SanityHomePageWeb = useStaticQuery(graphql`
     query {
       seoImage: file(relativePath: { eq: "science.png" }) {
         publicURL
@@ -37,22 +37,82 @@ const IndexPage: React.FC<{ location: Location }> = ({ location }) => {
           }
         }
       }
+      allSanityHomePageWeb {
+        nodes {
+          homeFoldSection {
+            title
+            body
+            image {
+              ...ImageWithPreview
+            }
+          }
+          marketplaceSection {
+            header
+            tooltip
+            body {
+              green
+              middle
+              popover
+              end
+            }
+            callToActions {
+              ...callToActionFields
+            }
+          }
+          climateSection {
+            header
+            description
+            image {
+              ...ImageWithPreview
+            }
+            solution {
+              title
+              body
+            }
+            problem {
+              title
+              body
+            }
+          }
+          carbonPlusSection {
+            smallHeaderFeatured
+            smallHeaderCreditName
+            header
+            description
+            linkText
+            linkUrl
+          }
+          ledgerDescription
+          valuesSection {
+            header
+            imageItems {
+              title
+              description
+              image {
+                ...ImageWithPreview
+              }
+            }
+          }
+        }
+      }
     }
   `);
 
-  const { data } = useAllHomePageWebQuery({ client });
-  const content = data?.allHomePageWeb?.[0];
+  // const { data } = useAllHomePageWebQuery();
+  const content = data?.allSanityHomePageWeb?.nodes?.[0];
+  console.log('data >>', data);
+  console.log('content >>', content);
 
   return (
     <>
-      <SEO location={location} title="Regen Network" imageUrl={imgData.seoImage.publicURL} />
+      <SEO location={location} title="Regen Network" imageUrl={data.seoImage.publicURL} />
       <HomeFoldSection content={content?.homeFoldSection} />
       <MarketplaceSection content={content?.marketplaceSection} />
       <EmailSubmitSection />
       <Box display={{ xs: 'block', sm: 'none' }}>
         <BackgroundImage
           Tag="div"
-          fluid={imgData.backgroundMobile.childImageSharp.fluid}
+          fluid={data.backgroundMobile.childImageSharp.fluid}
           backgroundColor={theme.palette.grey['50']}
           style={{
             backgroundPosition: 'left 70%',
@@ -65,7 +125,7 @@ const IndexPage: React.FC<{ location: Location }> = ({ location }) => {
       <Box display={{ xs: 'none', sm: 'block' }}>
         <BackgroundImage
           Tag="div"
-          fluid={imgData.background.childImageSharp.fluid}
+          fluid={data.background.childImageSharp.fluid}
           backgroundColor={theme.palette.grey['50']}
         >
           <ClimateSection content={content?.climateSection} />

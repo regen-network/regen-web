@@ -1,13 +1,15 @@
 import React from 'react';
 import { makeStyles, Theme, useTheme } from '@material-ui/core';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
-// import Img from 'gatsby-image';
+import SanityImage from 'gatsby-plugin-sanity-image';
+import Img from 'gatsby-image';
 import ReactHtmlParser from 'react-html-parser';
 import clsx from 'clsx';
 
 import Title from 'web-components/lib/components/title';
 import Card from 'web-components/lib/components/cards/Card';
 import { ClimateSection as ClimateProps } from '../../generated/sanity-graphql';
+import { imgBuilder } from '../../../sanity';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -174,6 +176,7 @@ const ClimateSection: React.FC<{ content?: ClimateProps | null }> = ({ content }
   const theme = useTheme();
   const downSm = useMediaQuery(theme.breakpoints.down('sm'));
   const imgData = content?.image?.asset;
+  const imgId = imgData?._id;
 
   return (
     <div className={styles.root}>
@@ -186,10 +189,21 @@ const ClimateSection: React.FC<{ content?: ClimateProps | null }> = ({ content }
         <Title className={styles.cardTitle} variant="body2">
           {content?.problem?.title}
         </Title>
-        <div className={styles.cardContent}>{content?.problem?.description}</div>
+        <div className={styles.cardContent}>{content?.problem?.body}</div>
       </Card>
-      {/* <Img className={styles.image} fluid={content?.image.childImageSharp.fluid} /> */}
-      <img className={styles.image} src={imgData?.url || ''} alt={imgData?.altText || ''} />
+      {/* <Img className={styles.image} fluid={content?.image?.childImageSharp?.fluid} /> */}
+      {/* TODO: Convert img after migration */}
+      {/* <img className={styles.image} src={`${imgData?.url}`} alt={`${imgData?.altText}`} /> */}
+      {imgId && (
+        <img
+          className={styles.image}
+          src={imgBuilder
+            .image(imgId)
+            .width(400)
+            .url()}
+          alt={imgData?.altText || ''}
+        />
+      )}
       {!downSm && <hr className={clsx(styles.line, styles.solutionLine)} />}
       <Card
         className={clsx(styles.card, styles.solutionCard)}
@@ -199,7 +213,7 @@ const ClimateSection: React.FC<{ content?: ClimateProps | null }> = ({ content }
         <Title className={styles.cardTitle} variant="body2">
           {content?.solution?.title}
         </Title>
-        <div className={styles.cardContent}>{content?.solution?.description}</div>
+        <div className={styles.cardContent}>{content?.solution?.body}</div>
         {downSm && <hr className={clsx(styles.line, styles.solutionLine)} />}
       </Card>
       <div className={styles.titleContainer}>

@@ -1,7 +1,9 @@
-fragment featuredSectionFields on FeaturedSection {
+fragment featuredSectionFields on SanityFeaturedSection {
   header
-  titleRaw
-  descriptionRaw
+  # titleRaw
+  _rawTitle
+  _rawDescription
+  # descriptionRaw
   button {
     ...buttonFields
   }

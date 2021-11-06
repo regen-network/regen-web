@@ -1,10 +1,10 @@
-fragment callToActionFields on CallToAction {
-  caption
-  image {
-    ...simpleImageFields
-  }
-  header
-  description
-  linkText
-  linkUrl
-}
+# fragment callToActionFields on SanityCallToAction {
+#   caption
+#   image {
+#     ...simpleImageFields
+#   }
+#   header
+#   description
+#   linkText
+#   linkUrl
+# }

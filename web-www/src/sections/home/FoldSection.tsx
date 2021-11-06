@@ -6,7 +6,7 @@ import BackgroundImage from 'gatsby-background-image';
 import VideoPopup from '../../components/videoPopup';
 import Typography from '@material-ui/core/Typography';
 import Title from 'web-components/lib/components/title';
-import { TitleAndDescription } from '../../generated/sanity-graphql';
+import { HomeFoldSection as HomeFoldSectionType } from '../../generated/sanity-graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -85,7 +85,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const HomeFoldSection: React.FC<{ className?: string; content?: TitleAndDescription | null }> = ({
+const HomeFoldSection: React.FC<{ className?: string; content?: HomeFoldSectionType | null }> = ({
   className,
   content,
 }) => {
@@ -102,6 +102,8 @@ const HomeFoldSection: React.FC<{ className?: string; content?: TitleAndDescript
     }
   `);
   const imageData = imgQuery.desktop.childImageSharp.fluid;
+  const test = content?.image;
+  console.log('test', test);
 
   return (
     <BackgroundImage
@@ -116,7 +118,7 @@ const HomeFoldSection: React.FC<{ className?: string; content?: TitleAndDescript
         {content?.title}
       </Title>
       <div className={styles.tag}>
-        <Typography variant="body1">{content?.description}</Typography>
+        <Typography variant="body1">{content?.body}</Typography>
       </div>
     </BackgroundImage>
   );

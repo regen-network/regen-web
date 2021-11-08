@@ -13,127 +13,65 @@ import ClimateSection from '../sections/home/ClimateSection';
 import CarbonPlusSection from '../sections/home/CarbonPlusSection';
 import EmailSubmitSection from '../sections/shared/EmailSubmitSection';
 import BlogSection from '../sections/shared/BlogSection';
-import { SanityHomePageWeb, useAllHomePageWebQuery } from '../generated/sanity-graphql';
-import { client } from '../../sanity';
+import { HomePageQueryQuery } from '../generated/graphql';
 
-const IndexPage: React.FC<{ location: Location }> = ({ location }) => {
-  const theme = useTheme();
-  const data: SanityHomePageWeb = useStaticQuery(graphql`
-    query {
-      seoImage: file(relativePath: { eq: "science.png" }) {
-        publicURL
-      }
-      background: file(relativePath: { eq: "home-climate-bg.jpg" }) {
-        childImageSharp {
-          fluid(quality: 90) {
-            ...GatsbyImageSharpFluid_withWebp
-          }
-        }
-      }
-      backgroundMobile: file(relativePath: { eq: "home-climate-bg-mobile.jpg" }) {
-        childImageSharp {
-          fluid(quality: 90) {
-            ...GatsbyImageSharpFluid_withWebp
-          }
-        }
-      }
-      allSanityHomePageWeb {
-        nodes {
-          homeFoldSection {
-            title
-            body
-            image {
-              ...ImageWithPreview
-            }
-          }
-          marketplaceSection {
-            header
-            tooltip
-            body {
-              green
-              middle
-              popover
-              end
-            }
-            callToActions {
-              ...callToActionFields
-            }
-          }
-          climateSection {
-            header
-            description
-            image {
-              ...ImageWithPreview
-            }
-            solution {
-              title
-              body
-            }
-            problem {
-              title
-              body
-            }
-          }
-          carbonPlusSection {
-            smallHeaderFeatured
-            smallHeaderCreditName
-            header
-            description
-            linkText
-            linkUrl
-          }
-          ledgerDescription
-          valuesSection {
-            header
-            imageItems {
-              title
-              description
-              image {
-                ...ImageWithPreview
-              }
-            }
-          }
+export const allHomePageQuery = graphql`
+  query homePageQuery {
+    seoImage: file(relativePath: { eq: "science.png" }) {
+      publicURL
+    }
+    background: file(relativePath: { eq: "home-climate-bg.jpg" }) {
+      childImageSharp {
+        fluid(quality: 90) {
+          ...GatsbyImageSharpFluid_withWebp
         }
       }
     }
-  `);
+    backgroundMobile: file(relativePath: { eq: "home-climate-bg-mobile.jpg" }) {
+      childImageSharp {
+        fluid(quality: 90) {
+          ...GatsbyImageSharpFluid_withWebp
+        }
+      }
+    }
+  }
+`;
 
-  // const { data } = useAllHomePageWebQuery();
-  const content = data?.allSanityHomePageWeb?.nodes?.[0];
-  console.log('data >>', data);
-  console.log('content >>', content);
+const IndexPage: React.FC<{ location: Location }> = ({ location }) => {
+  const theme = useTheme();
+  const data: HomePageQueryQuery = useStaticQuery(allHomePageQuery);
 
   return (
     <>
-      <SEO location={location} title="Regen Network" imageUrl={data.seoImage.publicURL} />
-      <HomeFoldSection content={content?.homeFoldSection} />
-      <MarketplaceSection content={content?.marketplaceSection} />
+      <SEO location={location} title="Regen Network" imageUrl={`${data?.seoImage?.publicURL}`} />
+      <HomeFoldSection />
+      <MarketplaceSection />
       <EmailSubmitSection />
       <Box display={{ xs: 'block', sm: 'none' }}>
         <BackgroundImage
           Tag="div"
-          fluid={data.backgroundMobile.childImageSharp.fluid}
+          fluid={data?.backgroundMobile?.childImageSharp?.fluid as any}
           backgroundColor={theme.palette.grey['50']}
           style={{
             backgroundPosition: 'left 70%',
           }}
         >
-          <ClimateSection content={content?.climateSection} />
+          <ClimateSection />
         </BackgroundImage>
-        <CarbonPlusSection content={content?.carbonPlusSection} />
+        <CarbonPlusSection />
       </Box>
       <Box display={{ xs: 'none', sm: 'block' }}>
         <BackgroundImage
           Tag="div"
-          fluid={data.background.childImageSharp.fluid}
+          fluid={data?.background?.childImageSharp?.fluid as any}
           backgroundColor={theme.palette.grey['50']}
         >
-          <ClimateSection content={content?.climateSection} />
-          <CarbonPlusSection content={content?.carbonPlusSection} />
+          <ClimateSection />
+          <CarbonPlusSection />
         </BackgroundImage>
       </Box>
-      <HomeLedger description={content?.ledgerDescription || ''} />
-      <HomeValuesSection content={content?.valuesSection} />
+      <HomeLedger />
+      <HomeValuesSection />
       <BlogSection />
     </>
   );

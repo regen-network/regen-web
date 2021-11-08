@@ -7,6 +7,7 @@ import { makeStyles, Theme } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import Title from 'web-components/lib/components/title';
 import Img from 'gatsby-image';
+import { HomeLedgerSectionQuery } from '../../generated/graphql';
 
 let useStyles = makeStyles((theme: Theme) => ({
   grid: {
@@ -85,9 +86,9 @@ let useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const HomeLedger: React.FC<{ description: string }> = ({ description }) => {
-  const imgData = useStaticQuery(graphql`
-    query {
+const HomeLedger: React.FC = () => {
+  const data: HomeLedgerSectionQuery = useStaticQuery(graphql`
+    query homeLedgerSection {
       bg: file(relativePath: { eq: "farm-background.png" }) {
         childImageSharp {
           fluid(quality: 90, maxWidth: 1920) {
@@ -102,23 +103,29 @@ const HomeLedger: React.FC<{ description: string }> = ({ description }) => {
           }
         }
       }
+      allSanityHomePageWeb {
+        nodes {
+          ledgerDescription
+        }
+      }
     }
   `);
 
   const styles = useStyles();
+  const content = data.allSanityHomePageWeb.nodes[0];
 
   return (
-    <BackgroundImage Tag="section" fluid={imgData.bg.childImageSharp.fluid}>
+    <BackgroundImage Tag="section" fluid={data?.bg?.childImageSharp?.fluid as any}>
       <Grid className={styles.grid} container alignItems="center" wrap="nowrap">
         <Grid className={styles.imgContainer} item xs={12}>
-          <Img className={styles.img} fluid={imgData.ledger.childImageSharp.fluid} />
+          <Img className={styles.img} fluid={data?.ledger?.childImageSharp?.fluid as any} />
         </Grid>
         <Grid item xs={12} className={styles.text}>
           <Title align="left" variant="h1" className={styles.title}>
             <span className={styles.green}>Regen Ledger</span> powers{' '}
             <span className={styles.green}>Regen Registry</span>
           </Title>
-          <Typography className={styles.description}>{description}</Typography>
+          <Typography className={styles.description}>{content?.ledgerDescription}</Typography>
           <ContainedButton href="/developers" className={styles.button}>
             Learn More
           </ContainedButton>

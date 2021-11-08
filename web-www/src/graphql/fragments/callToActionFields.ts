@@ -4,7 +4,7 @@ export const callToActionFields = graphql`
   fragment callToActionFields on SanityCallToAction {
     caption
     image {
-      ...ImageWithPreview
+      ...Image
     }
     header
     description

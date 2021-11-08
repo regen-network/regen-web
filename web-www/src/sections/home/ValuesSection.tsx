@@ -10,6 +10,8 @@ import ImageItems from 'web-components/lib/components/sliders/ImageItems';
 import Section from 'web-components/src/components/section';
 import { useAllHomePageWebQuery, ValuesSection as ValuesProps } from '../../generated/sanity-graphql';
 import { client } from '../../../sanity';
+import { HomeValuesSectionQuery } from '../../generated/graphql';
+import SanityImage from 'gatsby-plugin-sanity-image';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -54,12 +56,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const HomeValues: React.FC<{ className?: string; content?: ValuesProps | null }> = ({
-  className,
-  content,
-}) => {
-  const imgData = useStaticQuery(graphql`
-    query {
+const HomeValues: React.FC<{ className?: string }> = ({ className }) => {
+  const imgData: HomeValuesSectionQuery = useStaticQuery(graphql`
+    query homeValuesSection {
       bg: file(relativePath: { eq: "topo-bg-top.png" }) {
         childImageSharp {
           fluid(quality: 90, maxWidth: 1920) {
@@ -74,16 +73,31 @@ const HomeValues: React.FC<{ className?: string; content?: ValuesProps | null }>
           }
         }
       }
+      allSanityHomePageWeb {
+        nodes {
+          valuesSection {
+            header
+            imageItems {
+              title
+              description
+              image {
+                ...Image
+              }
+            }
+          }
+        }
+      }
     }
   `);
   const styles = useStyles();
 
+  const content = imgData.allSanityHomePageWeb.nodes[0].valuesSection;
+
   const imageItems: ImageItemProps[] = (content?.imageItems || []).map(item => {
-    const imgData = item?.image?.asset;
     return {
       title: item?.title || '',
       description: item?.description || '',
-      img: <img src={imgData?.url || ''} alt={imgData?.altText || ''} />,
+      img: <SanityImage {...(item?.image as any)} alt={item?.title} />,
     };
   }) as ImageItemProps[];
 
@@ -91,7 +105,7 @@ const HomeValues: React.FC<{ className?: string; content?: ValuesProps | null }>
     <BackgroundImage
       Tag="section"
       className={clsx(className, styles.section)}
-      fluid={imgData.bg.childImageSharp.fluid}
+      fluid={imgData?.bg?.childImageSharp?.fluid as any}
     >
       <Section
         withSlider

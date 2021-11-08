@@ -54,7 +54,6 @@
     "@graphql-codegen/typescript": "1.22.0",
     "@graphql-codegen/typescript-graphql-files-modules": "1.18.1",
     "@graphql-codegen/typescript-operations": "^1.18.0",
-    "@graphql-codegen/typescript-react-apollo": "2.2.4",
     "@types/styled-components": "^5.0.1",
     "prettier": "2.0.5"
   },
@@ -69,6 +68,6 @@
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
-    "graphql:codegen-sanity": "graphql-codegen --config sanity-codegen.yml"
+    "graphql:codegen": "graphql-codegen --config codegen.yml"
   }
 }

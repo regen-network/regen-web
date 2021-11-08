@@ -1,0 +1,10 @@
+fragment customImageFields on SanityCustomImage {
+  imageAlt
+  imageHref
+  image {
+    asset {
+      altText
+      url
+    }
+  }
+}

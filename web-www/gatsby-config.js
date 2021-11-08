@@ -18,6 +18,7 @@ module.exports = {
         dataset: process.env.NODE_ENV === 'production' ? 'production' : 'staging',
         token: process.env.SANITY_TOKEN,
         graphqlTag: 'default',
+        watchMode: true,
       },
     },
     {

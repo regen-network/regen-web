@@ -6,7 +6,8 @@ import BackgroundImage from 'gatsby-background-image';
 import VideoPopup from '../../components/videoPopup';
 import Typography from '@material-ui/core/Typography';
 import Title from 'web-components/lib/components/title';
-import { HomeFoldSection as HomeFoldSectionType } from '../../generated/sanity-graphql';
+
+import { HomeFoldSectionQuery, ImageSharpFluid, SanityHomeFoldSection } from '../../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -85,13 +86,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const HomeFoldSection: React.FC<{ className?: string; content?: HomeFoldSectionType | null }> = ({
-  className,
-  content,
-}) => {
+const HomeFoldSection: React.FC<{ className?: string }> = ({ className }) => {
   const styles = useStyles({});
-  const imgQuery = useStaticQuery(graphql`
-    query {
+  const query: HomeFoldSectionQuery = useStaticQuery(graphql`
+    query homeFoldSection {
       desktop: file(relativePath: { eq: "image43.jpg" }) {
         childImageSharp {
           fluid(quality: 90, maxWidth: 1920) {
@@ -99,17 +97,27 @@ const HomeFoldSection: React.FC<{ className?: string; content?: HomeFoldSectionT
           }
         }
       }
+      allSanityHomePageWeb {
+        nodes {
+          homeFoldSection {
+            title
+            body
+            image {
+              ...ImageWithPreview
+            }
+          }
+        }
+      }
     }
   `);
-  const imageData = imgQuery.desktop.childImageSharp.fluid;
-  const test = content?.image;
-  console.log('test', test);
+  const imageData = query?.desktop?.childImageSharp?.fluid;
+  const content = query?.allSanityHomePageWeb?.nodes?.[0]?.homeFoldSection;
 
   return (
     <BackgroundImage
       Tag="section"
       className={clsx(styles.root, className)}
-      fluid={imageData}
+      fluid={imageData as any}
       backgroundColor={`#040e18`}
     >
       <div className={styles.backgroundGradient}></div>

@@ -7,6 +7,9 @@ import Section from 'web-components/src/components/section';
 // import Img from 'gatsby-image';
 import Tooltip from 'web-components/lib/components/tooltip';
 import { MarketplaceSection as MarketplaceProps } from '../../generated/sanity-graphql';
+import { graphql, useStaticQuery } from 'gatsby';
+import { HomeMarketPlaceSectionQuery } from '../../generated/graphql';
+import SanityImage from 'gatsby-plugin-sanity-image';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -121,8 +124,31 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const MarketplaceSection: React.FC<{ content?: MarketplaceProps | null }> = ({ content }) => {
+const MarketplaceSection: React.FC = () => {
   const styles = useStyles({});
+  const query: HomeMarketPlaceSectionQuery = useStaticQuery(graphql`
+    query homeMarketPlaceSection {
+      allSanityHomePageWeb {
+        nodes {
+          marketplaceSection {
+            header
+            tooltip
+            body {
+              green
+              middle
+              popover
+              end
+            }
+            callToActions {
+              ...callToActionFields
+            }
+          }
+        }
+      }
+    }
+  `);
+
+  const content = query?.allSanityHomePageWeb?.nodes[0]?.marketplaceSection;
 
   return (
     <Section className={styles.root}>
@@ -140,12 +166,7 @@ const MarketplaceSection: React.FC<{ content?: MarketplaceProps | null }> = ({ c
           {content?.callToActions?.map((cta, i) => {
             return !cta ? null : (
               <Grid key={cta.header || i} className={styles.gridItem} item xs>
-                {/* <Img fixed={cta.image.childImageSharp.fixed} /> */}
-                <img
-                  src={cta.image?.asset?.url || ''}
-                  alt={cta.image?.asset?.altText || ''}
-                  style={{ width: '159px' }}
-                />
+                <SanityImage {...(cta.image as any)} width={159} style={{ width: '159px' }} />
                 <div className={styles.smallTitle}>{cta.caption}</div>
                 <Title className={styles.h3} variant="h3" align="center">
                   {cta.header}

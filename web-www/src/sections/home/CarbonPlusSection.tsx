@@ -8,7 +8,7 @@ import ReactHtmlParser from 'react-html-parser';
 import Title from 'web-components/lib/components/title';
 import Description from 'web-components/lib/components/description';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import { CarbonPlusSection as CarbonPlusProps } from '../../generated/sanity-graphql';
+import { HomeCarbonplusSectionQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -90,9 +90,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const CarbonplusSection: React.FC<{ content?: CarbonPlusProps | null }> = ({ content }): JSX.Element => {
-  const imgData = useStaticQuery(graphql`
-    query {
+const CarbonplusSection: React.FC = (): JSX.Element => {
+  const data: HomeCarbonplusSectionQuery = useStaticQuery(graphql`
+    query homeCarbonplusSection {
       cow: file(relativePath: { eq: "cow.png" }) {
         childImageSharp {
           fluid(quality: 90) {
@@ -100,8 +100,22 @@ const CarbonplusSection: React.FC<{ content?: CarbonPlusProps | null }> = ({ con
           }
         }
       }
+      allSanityHomePageWeb {
+        nodes {
+          carbonPlusSection {
+            smallHeaderFeatured
+            smallHeaderCreditName
+            header
+            description
+            linkText
+            linkUrl
+          }
+        }
+      }
     }
   `);
+
+  const content = data.allSanityHomePageWeb.nodes[0].carbonPlusSection;
   const styles = useStyles({});
 
   return (
@@ -123,7 +137,7 @@ const CarbonplusSection: React.FC<{ content?: CarbonPlusProps | null }> = ({ con
           </ContainedButton>
         </Grid>
         <Grid className={styles.imageContainer} item xs={12}>
-          <Img className={styles.image} fluid={imgData.cow.childImageSharp.fluid} />
+          <Img className={styles.image} fluid={data?.cow?.childImageSharp?.fluid as any} />
         </Grid>
       </Grid>
     </div>

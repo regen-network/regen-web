@@ -1,15 +1,14 @@
 import React from 'react';
+import { graphql, useStaticQuery } from 'gatsby';
 import { makeStyles, Theme, useTheme } from '@material-ui/core';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import SanityImage from 'gatsby-plugin-sanity-image';
-import Img from 'gatsby-image';
 import ReactHtmlParser from 'react-html-parser';
 import clsx from 'clsx';
 
 import Title from 'web-components/lib/components/title';
 import Card from 'web-components/lib/components/cards/Card';
-import { ClimateSection as ClimateProps } from '../../generated/sanity-graphql';
-import { imgBuilder } from '../../../sanity';
+import { HomeClimateSectionQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -171,12 +170,35 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const ClimateSection: React.FC<{ content?: ClimateProps | null }> = ({ content }): JSX.Element => {
+const ClimateSection: React.FC = (): JSX.Element => {
   const styles = useStyles();
   const theme = useTheme();
   const downSm = useMediaQuery(theme.breakpoints.down('sm'));
-  const imgData = content?.image?.asset;
-  const imgId = imgData?._id;
+  const query: HomeClimateSectionQuery = useStaticQuery(graphql`
+    query homeClimateSection {
+      allSanityHomePageWeb {
+        nodes {
+          climateSection {
+            header
+            description
+            image {
+              ...ImageWithPreview
+            }
+            solution {
+              title
+              body
+            }
+            problem {
+              title
+              body
+            }
+          }
+        }
+      }
+    }
+  `);
+
+  const content = query?.allSanityHomePageWeb?.nodes[0]?.climateSection;
 
   return (
     <div className={styles.root}>
@@ -191,19 +213,7 @@ const ClimateSection: React.FC<{ content?: ClimateProps | null }> = ({ content }
         </Title>
         <div className={styles.cardContent}>{content?.problem?.body}</div>
       </Card>
-      {/* <Img className={styles.image} fluid={content?.image?.childImageSharp?.fluid} /> */}
-      {/* TODO: Convert img after migration */}
-      {/* <img className={styles.image} src={`${imgData?.url}`} alt={`${imgData?.altText}`} /> */}
-      {imgId && (
-        <img
-          className={styles.image}
-          src={imgBuilder
-            .image(imgId)
-            .width(400)
-            .url()}
-          alt={imgData?.altText || ''}
-        />
-      )}
+      <SanityImage {...(content?.image as any)} className={styles.image} />
       {!downSm && <hr className={clsx(styles.line, styles.solutionLine)} />}
       <Card
         className={clsx(styles.card, styles.solutionCard)}

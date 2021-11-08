@@ -1,9 +1,10 @@
 import React from 'react';
-import { graphql, StaticQuery } from 'gatsby';
+import { graphql, useStaticQuery } from 'gatsby';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 
 import TitleDescription from 'web-components/lib/components/title-description';
 import Section from 'web-components/lib/components/section';
+import { DevApproachSectionQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
   caption: {
@@ -32,32 +33,30 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const ApproachSection = (): JSX.Element => {
-  const classes = useStyles();
+const query = graphql`
+  query devApproachSection {
+    allSanityDevelopersPage {
+      nodes {
+        approachSection {
+          caption
+          header
+          _rawBody
+        }
+      }
+    }
+  }
+`;
+
+const ApproachSection: React.FC = () => {
+  const styles = useStyles();
+  const data: DevApproachSectionQuery = useStaticQuery(query);
+  const content = data?.allSanityDevelopersPage?.nodes?.[0].approachSection;
 
   return (
-    <StaticQuery
-      query={graphql`
-        query {
-          content: developersYaml {
-            approachSection {
-              header
-              body
-              caption
-            }
-          }
-        }
-      `}
-      render={data => {
-        const content = data.content.approachSection;
-        return (
-          <Section className={classes.section}>
-            <div className={classes.caption}>{content.caption}</div>
-            <TitleDescription title={content.header} description={content.body} />
-          </Section>
-        );
-      }}
-    />
+    <Section className={styles.section}>
+      <div className={styles.caption}>{content?.caption}</div>
+      <TitleDescription title={`${content?.header}`} description={content?._rawBody} />
+    </Section>
   );
 };
 

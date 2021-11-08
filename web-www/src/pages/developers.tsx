@@ -10,18 +10,16 @@ import OpenAgSection from '../sections/developers/OpenAgSection';
 import ConnectSection from '../sections/developers/ConnectSection';
 import CareersSection from '../sections/developers/CareersSection';
 
-interface props {
-  location: Location;
-}
-
-const DevelopersPage = ({ location }: props): JSX.Element => {
-  const data = useStaticQuery(graphql`
-    query {
-      seoImage: file(relativePath: { eq: "developers-top-image.jpg" }) {
-        publicURL
-      }
+const query = graphql`
+  query {
+    seoImage: file(relativePath: { eq: "developers-top-image.jpg" }) {
+      publicURL
     }
-  `);
+  }
+`;
+
+const DevelopersPage: React.FC<{ location: Location }> = ({ location }) => {
+  const data = useStaticQuery(query);
   return (
     <>
       <SEO

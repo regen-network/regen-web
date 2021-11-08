@@ -12,5 +12,9 @@ generates:
       - 'typescript'
       - 'typescript-operations'
     config:
+      # avoidOptionals: 
+      #   field: true
+      #   inputValue: true
+      #   object: true
+      #   defaultValue: true
       withHooks: true
-      useExplicitTyping: false

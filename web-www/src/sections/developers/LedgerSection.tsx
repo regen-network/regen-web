@@ -1,19 +1,22 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import { Theme, makeStyles } from '@material-ui/core/styles';
+import Box from '@material-ui/core/Box';
 import Img from 'gatsby-image';
+import SanityImage from 'gatsby-plugin-sanity-image';
 
 import Section from 'web-components/lib/components/section';
 import TitleDescription from 'web-components/lib/components/title-description';
+import { DevLedgerSectionQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
-  img: {
-    zIndex: -1,
-  },
-  sectionWrapper: {
+  root: {
     position: 'relative',
     width: '100vw',
     paddingBottom: theme.spacing(25),
+  },
+  img: {
+    zIndex: -1,
   },
   bgGradient: {
     width: '100%',
@@ -38,46 +41,48 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const LedgerSection = (): JSX.Element => {
-  const data = useStaticQuery(graphql`
-    query {
-      background: file(relativePath: { eq: "developers-ledger-bg.jpg" }) {
-        childImageSharp {
-          fluid(quality: 90) {
-            ...GatsbyImageSharpFluid_withWebp
-          }
+const query = graphql`
+  query devLedgerSection {
+    background: file(relativePath: { eq: "developers-ledger-bg.jpg" }) {
+      childImageSharp {
+        fluid(quality: 90) {
+          ...GatsbyImageSharpFluid_withWebp
         }
       }
-      text: developersYaml {
+    }
+    allSanityDevelopersPage {
+      nodes {
         ledgerSection {
           header
-          body
+          _rawBody
           cosmosImage {
-            childImageSharp {
-              fluid(quality: 90) {
-                ...GatsbyImageSharpFluid_withWebp
-              }
-            }
+            ...ImageWithPreview
           }
         }
       }
     }
-  `);
-  const content = data.text.ledgerSection;
-  const imageData = data.background.childImageSharp.fluid;
-  const classes = useStyles();
+  }
+`;
+
+const LedgerSection = (): JSX.Element => {
+  const data: DevLedgerSectionQuery = useStaticQuery(query);
+  const content = data?.allSanityDevelopersPage?.nodes[0]?.ledgerSection;
+  const backgroundImg = data?.background?.childImageSharp?.fluid;
+  const styles = useStyles();
   return (
-    <div className={classes.sectionWrapper}>
+    <div className={styles.root}>
       <Section>
-        <Img className={classes.cosmosImg} fluid={content.cosmosImage.childImageSharp.fluid} />
+        <Box display="flex" justifyContent="center">
+          <SanityImage className={styles.cosmosImg} alt="cosmos image" {...(content?.cosmosImage as any)} />
+        </Box>
         <TitleDescription
-          className={classes.titleDesc}
-          title={content.header}
-          description={content.body}
-        ></TitleDescription>
+          className={styles.titleDesc}
+          title={`${content?.header}`}
+          description={content?._rawBody}
+        />
       </Section>
-      <div className={classes.bgGradient}>
-        <Img className={classes.img} fluid={imageData} />
+      <div className={styles.bgGradient}>
+        <Img className={styles.img} alt="background" fluid={backgroundImg as any} />
       </div>
     </div>
   );

@@ -111,7 +111,7 @@ const HomeFoldSection: React.FC<{ className?: string }> = ({ className }) => {
     }
   `);
   const imageData = query?.desktop?.childImageSharp?.fluid;
-  const content = query?.allSanityHomePageWeb?.nodes?.[0]?.homeFoldSection;
+  const content = query.allSanityHomePageWeb.nodes[0].homeFoldSection;
 
   return (
     <BackgroundImage

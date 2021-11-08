@@ -1,8 +1,0 @@
-fragment buttonFields on SanityButton {
-  buttonText
-  buttonLink {
-    ...linkFields
-  }
-  buttonModal
-  buttonBlankTarget
-}

@@ -1,13 +1,14 @@
 import React from 'react';
-import { graphql, StaticQuery } from 'gatsby';
+import { graphql, useStaticQuery } from 'gatsby';
 import { makeStyles, Theme } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
-import Img from 'gatsby-image';
-import ReactHtmlParser from 'react-html-parser';
+import SanityImage from 'gatsby-plugin-sanity-image';
 
 import Title from 'web-components/lib/components/title';
 import Description from 'web-components/lib/components/description';
+import { BlockContent } from 'web-components/src/components/block-content';
 import BackgroundSection from '../../components/BackgroundSection';
+import { DevOpenAgSectionQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
   section: {
@@ -37,59 +38,55 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const OpenAgSection = (): JSX.Element => {
-  const classes = useStyles();
-
-  return (
-    <StaticQuery
-      query={graphql`
-        query {
-          background: file(relativePath: { eq: "developers-topo-bg.jpg" }) {
-            childImageSharp {
-              fluid(quality: 90) {
-                ...GatsbyImageSharpFluid_withWebp
-              }
-            }
-          }
-          content: developersYaml {
-            openAgSection {
-              header
-              image {
-                childImageSharp {
-                  fluid(quality: 90) {
-                    ...GatsbyImageSharpFluid_withWebp
-                  }
-                }
-              }
-              body
-            }
+const query = graphql`
+  query devOpenAgSection {
+    background: file(relativePath: { eq: "developers-topo-bg.jpg" }) {
+      childImageSharp {
+        fluid(quality: 90) {
+          ...GatsbyImageSharpFluid_withWebp
+        }
+      }
+    }
+    allSanityDevelopersPage {
+      nodes {
+        openAgSection {
+          header
+          _rawBody
+          image {
+            ...ImageWithPreview
           }
         }
-      `}
-      render={data => {
-        const content = data.content.openAgSection;
-        return (
-          <BackgroundSection
-            linearGradient="unset"
-            topSection={false}
-            imageData={data.background.childImageSharp.fluid}
-            className={classes.section}
-          >
-            <Grid container alignItems="center" spacing={8}>
-              <Grid item xs={12} sm={6}>
-                <Img className={classes.image} fluid={content.image.childImageSharp.fluid} />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <Title className={classes.title} variant="h3">
-                  {content.header}
-                </Title>
-                <Description className={classes.description}>{ReactHtmlParser(content.body)}</Description>
-              </Grid>
-            </Grid>
-          </BackgroundSection>
-        );
-      }}
-    />
+      }
+    }
+  }
+`;
+
+const OpenAgSection: React.FC = () => {
+  const styles = useStyles();
+  const data: DevOpenAgSectionQuery = useStaticQuery(query);
+  const content = data?.allSanityDevelopersPage?.nodes[0].openAgSection;
+
+  return (
+    <BackgroundSection
+      linearGradient="unset"
+      topSection={false}
+      imageData={data?.background?.childImageSharp?.fluid as any}
+      className={styles.section}
+    >
+      <Grid container alignItems="center" spacing={8}>
+        <Grid item xs={12} sm={6}>
+          <SanityImage alt={`${content?.header}`} className={styles.image} {...(content?.image as any)} />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <Title className={styles.title} variant="h3">
+            {content?.header}
+          </Title>
+          <Description className={styles.description}>
+            <BlockContent content={content?._rawBody} />
+          </Description>
+        </Grid>
+      </Grid>
+    </BackgroundSection>
   );
 };
 

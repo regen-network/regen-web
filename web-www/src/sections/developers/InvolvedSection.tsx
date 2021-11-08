@@ -7,6 +7,7 @@ import RegenLogoIcon from 'web-components/lib/components/icons/RegenLogoIcon';
 import DiscordIcon from 'web-components/lib/components/icons/social/DiscordIcon';
 import GithubIcon from 'web-components/lib/components/icons/social/GithubIcon';
 import WhitepaperIcon from 'web-components/lib/components/icons/WhitepaperIcon';
+import { DevInvolvedSectionQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
   title: {
@@ -20,26 +21,28 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const InvolvedSection = (): JSX.Element => {
-  const data = useStaticQuery(graphql`
-    query {
-      background: file(relativePath: { eq: "developers-involved-bg.png" }) {
-        childImageSharp {
-          fluid(quality: 90) {
-            ...GatsbyImageSharpFluid_withWebp
-          }
-        }
-      }
-      text: developersYaml {
-        involvedSection {
-          header
+const query = graphql`
+  query devInvolvedSection {
+    background: file(relativePath: { eq: "developers-involved-bg.png" }) {
+      childImageSharp {
+        fluid(quality: 90) {
+          ...GatsbyImageSharpFluid_withWebp
         }
       }
     }
-  `);
-  const content = data.text.involvedSection;
-  const classes = useStyles();
+    allSanityDevelopersPage {
+      nodes {
+        involvedSectionHeader
+      }
+    }
+  }
+`;
+
+const InvolvedSection = (): JSX.Element => {
+  const styles = useStyles();
   const theme = useTheme();
+
+  const data: DevInvolvedSectionQuery = useStaticQuery(query);
   const icons: IconLabelProps[] = [
     {
       icon: <GithubIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />,
@@ -67,11 +70,11 @@ const InvolvedSection = (): JSX.Element => {
   ];
   return (
     <ConnectSection
-      header={content.header}
-      background={data.background}
+      header={`${data?.allSanityDevelopersPage?.nodes?.[0]?.involvedSectionHeader}`}
+      background={data?.background as any}
       icons={icons}
-      titleClassName={classes.title}
-      className={classes.section}
+      titleClassName={styles.title}
+      className={styles.section}
     />
   );
 };

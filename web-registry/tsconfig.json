@@ -7,8 +7,12 @@
     "resolveJsonModule": true,
     "rootDir": "src",
     "allowJs": true,
-    "jsx": "preserve",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "jsx": "react",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "module": "esnext",
     "noEmit": true
   },

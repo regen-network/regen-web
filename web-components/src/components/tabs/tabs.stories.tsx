@@ -5,7 +5,7 @@ import Table, { Data } from 'web-components/lib/components/table';
 import CreditDetails, { CreditInfoProps } from 'web-components/lib/components/credits/CreditDetails';
 
 export default {
-  title: 'Components|Tabs',
+  title: 'Tabs',
   component: Tabs,
 };
 

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Storyshots Components|Action Action 1`] = `
+exports[`Storyshots Action Action 1`] = `
 <ContextProvider
   value={
     Object {
@@ -382,7 +382,7 @@ exports[`Storyshots Components|Action Action 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Blog Post Blog Post 1`] = `
+exports[`Storyshots Blog Post Blog Post 1`] = `
 <ContextProvider
   value={
     Object {
@@ -778,7 +778,7 @@ exports[`Storyshots Components|Blog Post Blog Post 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Buttons Contained Button 1`] = `
+exports[`Storyshots Buttons Contained Button 1`] = `
 <ContextProvider
   value={
     Object {
@@ -1158,7 +1158,7 @@ exports[`Storyshots Components|Buttons Contained Button 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Buttons Next Button 1`] = `
+exports[`Storyshots Buttons Next Button 1`] = `
 <ContextProvider
   value={
     Object {
@@ -1538,7 +1538,7 @@ exports[`Storyshots Components|Buttons Next Button 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Buttons Outlined Button 1`] = `
+exports[`Storyshots Buttons Outlined Button 1`] = `
 <ContextProvider
   value={
     Object {
@@ -1920,7 +1920,7 @@ exports[`Storyshots Components|Buttons Outlined Button 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Buttons Prev Button 1`] = `
+exports[`Storyshots Buttons Prev Button 1`] = `
 <ContextProvider
   value={
     Object {
@@ -2300,7 +2300,7 @@ exports[`Storyshots Components|Buttons Prev Button 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Cards Create Project Card 1`] = `
+exports[`Storyshots Cards Create Project Card 1`] = `
 <ContextProvider
   value={
     Object {
@@ -2681,7 +2681,7 @@ exports[`Storyshots Components|Cards Create Project Card 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Cards Create Project Card Add Another 1`] = `
+exports[`Storyshots Cards Create Project Card Add Another 1`] = `
 <ContextProvider
   value={
     Object {
@@ -3062,7 +3062,7 @@ exports[`Storyshots Components|Cards Create Project Card Add Another 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Cards Glance Card 1`] = `
+exports[`Storyshots Cards Glance Card 1`] = `
 <ContextProvider
   value={
     Object {
@@ -3448,7 +3448,7 @@ exports[`Storyshots Components|Cards Glance Card 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Cards Green Card 1`] = `
+exports[`Storyshots Cards Green Card 1`] = `
 <ContextProvider
   value={
     Object {
@@ -3830,7 +3830,7 @@ exports[`Storyshots Components|Cards Green Card 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Cards Green Top Icon Card 1`] = `
+exports[`Storyshots Cards Green Top Icon Card 1`] = `
 <ContextProvider
   value={
     Object {
@@ -4213,7 +4213,7 @@ exports[`Storyshots Components|Cards Green Top Icon Card 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Cards Image Action Card 1`] = `
+exports[`Storyshots Cards Image Action Card 1`] = `
 <ContextProvider
   value={
     Object {
@@ -4597,7 +4597,7 @@ exports[`Storyshots Components|Cards Image Action Card 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Cards Impact Card 1`] = `
+exports[`Storyshots Cards Impact Card 1`] = `
 <ContextProvider
   value={
     Object {
@@ -4979,7 +4979,7 @@ exports[`Storyshots Components|Cards Impact Card 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Cards Map Card 1`] = `
+exports[`Storyshots Cards Map Card 1`] = `
 <ContextProvider
   value={
     Object {
@@ -5363,7 +5363,7 @@ exports[`Storyshots Components|Cards Map Card 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Cards Monitored Impact Card 1`] = `
+exports[`Storyshots Cards Monitored Impact Card 1`] = `
 <ContextProvider
   value={
     Object {
@@ -5746,7 +5746,7 @@ exports[`Storyshots Components|Cards Monitored Impact Card 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Cards On Boarding Card 1`] = `
+exports[`Storyshots Cards On Boarding Card 1`] = `
 <ContextProvider
   value={
     Object {
@@ -6126,7 +6126,7 @@ exports[`Storyshots Components|Cards On Boarding Card 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Cards Overview Card 1`] = `
+exports[`Storyshots Cards Overview Card 1`] = `
 <ContextProvider
   value={
     Object {
@@ -6513,7 +6513,7 @@ exports[`Storyshots Components|Cards Overview Card 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Cards Overview Cards Group 1`] = `
+exports[`Storyshots Cards Overview Cards Group 1`] = `
 <ContextProvider
   value={
     Object {
@@ -6891,7 +6891,7 @@ exports[`Storyshots Components|Cards Overview Cards Group 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Cards Project Card 1`] = `
+exports[`Storyshots Cards Project Card 1`] = `
 <ContextProvider
   value={
     Object {
@@ -7291,7 +7291,7 @@ exports[`Storyshots Components|Cards Project Card 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Cards Project Top Card 1`] = `
+exports[`Storyshots Cards Project Top Card 1`] = `
 <ContextProvider
   value={
     Object {
@@ -7695,7 +7695,7 @@ exports[`Storyshots Components|Cards Project Top Card 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Cards Purchased Credits Card 1`] = `
+exports[`Storyshots Cards Purchased Credits Card 1`] = `
 <ContextProvider
   value={
     Object {
@@ -8078,7 +8078,7 @@ exports[`Storyshots Components|Cards Purchased Credits Card 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Cards Step Card 1`] = `
+exports[`Storyshots Cards Step Card 1`] = `
 <ContextProvider
   value={
     Object {
@@ -8483,7 +8483,7 @@ exports[`Storyshots Components|Cards Step Card 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Certificate Certificate 1`] = `
+exports[`Storyshots Certificate Certificate 1`] = `
 <ContextProvider
   value={
     Object {
@@ -8889,7 +8889,7 @@ exports[`Storyshots Components|Certificate Certificate 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Charts Bar Chart 1`] = `
+exports[`Storyshots Charts Bar Chart 1`] = `
 <ContextProvider
   value={
     Object {
@@ -9432,7 +9432,7 @@ exports[`Storyshots Components|Charts Bar Chart 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Credits Credit Details 1`] = `
+exports[`Storyshots Credits Credit Details 1`] = `
 <ContextProvider
   value={
     Object {
@@ -9828,7 +9828,7 @@ exports[`Storyshots Components|Credits Credit Details 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Credits Credits Gauge 1`] = `
+exports[`Storyshots Credits Credits Gauge 1`] = `
 <ContextProvider
   value={
     Object {
@@ -10209,7 +10209,7 @@ exports[`Storyshots Components|Credits Credits Gauge 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Description Description 1`] = `
+exports[`Storyshots Description Description 1`] = `
 <ContextProvider
   value={
     Object {
@@ -10589,7 +10589,7 @@ exports[`Storyshots Components|Description Description 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Document Document 1`] = `
+exports[`Storyshots Document Document 1`] = `
 <ContextProvider
   value={
     Object {
@@ -10971,7 +10971,7 @@ exports[`Storyshots Components|Document Document 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|FAQ Category 1`] = `
+exports[`Storyshots FAQ Category 1`] = `
 <ContextProvider
   value={
     Object {
@@ -11363,7 +11363,7 @@ exports[`Storyshots Components|FAQ Category 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|FAQ Faq 1`] = `
+exports[`Storyshots FAQ Faq 1`] = `
 <ContextProvider
   value={
     Object {
@@ -11760,7 +11760,7 @@ exports[`Storyshots Components|FAQ Faq 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|FAQ Navigation 1`] = `
+exports[`Storyshots FAQ Navigation 1`] = `
 <ContextProvider
   value={
     Object {
@@ -12148,7 +12148,7 @@ exports[`Storyshots Components|FAQ Navigation 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|FAQ Question 1`] = `
+exports[`Storyshots FAQ Question 1`] = `
 <ContextProvider
   value={
     Object {
@@ -12532,7 +12532,7 @@ exports[`Storyshots Components|FAQ Question 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Footers Fixed Footer 1`] = `
+exports[`Storyshots Footers Fixed Footer 1`] = `
 <ContextProvider
   value={
     Object {
@@ -12914,7 +12914,7 @@ exports[`Storyshots Components|Footers Fixed Footer 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Footers Onboarding Footer 1`] = `
+exports[`Storyshots Footers Onboarding Footer 1`] = `
 <ContextProvider
   value={
     Object {
@@ -13300,7 +13300,7 @@ exports[`Storyshots Components|Footers Onboarding Footer 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Footers Switch Footer 1`] = `
+exports[`Storyshots Footers Switch Footer 1`] = `
 <ContextProvider
   value={
     Object {
@@ -13678,7 +13678,7 @@ exports[`Storyshots Components|Footers Switch Footer 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Forms Login Form 1`] = `
+exports[`Storyshots Forms Login Form 1`] = `
 <ContextProvider
   value={
     Object {
@@ -14061,7 +14061,7 @@ exports[`Storyshots Components|Forms Login Form 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Forms Sign Up Form 1`] = `
+exports[`Storyshots Forms Sign Up Form 1`] = `
 <ContextProvider
   value={
     Object {
@@ -14444,7 +14444,7 @@ exports[`Storyshots Components|Forms Sign Up Form 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Forms User Profile 1`] = `
+exports[`Storyshots Forms User Profile 1`] = `
 <ContextProvider
   value={
     Object {
@@ -14835,7 +14835,7 @@ exports[`Storyshots Components|Forms User Profile 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Icons Accountability Icon 1`] = `
+exports[`Storyshots Icons Accountability Icon 1`] = `
 <ContextProvider
   value={
     Object {
@@ -15213,7 +15213,7 @@ exports[`Storyshots Components|Icons Accountability Icon 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Icons Arrow Icon 1`] = `
+exports[`Storyshots Icons Arrow Icon 1`] = `
 <ContextProvider
   value={
     Object {
@@ -15594,7 +15594,7 @@ exports[`Storyshots Components|Icons Arrow Icon 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Icons Available Credits Icon 1`] = `
+exports[`Storyshots Icons Available Credits Icon 1`] = `
 <ContextProvider
   value={
     Object {
@@ -15972,7 +15972,7 @@ exports[`Storyshots Components|Icons Available Credits Icon 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Icons Avatar Icon 1`] = `
+exports[`Storyshots Icons Avatar Icon 1`] = `
 <ContextProvider
   value={
     Object {
@@ -16350,7 +16350,7 @@ exports[`Storyshots Components|Icons Avatar Icon 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Icons Block Icon 1`] = `
+exports[`Storyshots Icons Block Icon 1`] = `
 <ContextProvider
   value={
     Object {
@@ -16730,7 +16730,7 @@ exports[`Storyshots Components|Icons Block Icon 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Icons Breadcrumb Icon 1`] = `
+exports[`Storyshots Icons Breadcrumb Icon 1`] = `
 <ContextProvider
   value={
     Object {
@@ -17110,7 +17110,7 @@ exports[`Storyshots Components|Icons Breadcrumb Icon 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Icons Check Icon 1`] = `
+exports[`Storyshots Icons Check Icon 1`] = `
 <ContextProvider
   value={
     Object {
@@ -17488,7 +17488,7 @@ exports[`Storyshots Components|Icons Check Icon 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Icons Checked Icon 1`] = `
+exports[`Storyshots Icons Checked Icon 1`] = `
 <ContextProvider
   value={
     Object {
@@ -17866,7 +17866,7 @@ exports[`Storyshots Components|Icons Checked Icon 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Icons Close Icon 1`] = `
+exports[`Storyshots Icons Close Icon 1`] = `
 <ContextProvider
   value={
     Object {
@@ -18244,7 +18244,7 @@ exports[`Storyshots Components|Icons Close Icon 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Icons Co Benefits Icon 1`] = `
+exports[`Storyshots Icons Co Benefits Icon 1`] = `
 <ContextProvider
   value={
     Object {
@@ -18622,7 +18622,7 @@ exports[`Storyshots Components|Icons Co Benefits Icon 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Icons Counting Icon 1`] = `
+exports[`Storyshots Icons Counting Icon 1`] = `
 <ContextProvider
   value={
     Object {
@@ -19000,7 +19000,7 @@ exports[`Storyshots Components|Icons Counting Icon 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Icons Credits Icon 1`] = `
+exports[`Storyshots Icons Credits Icon 1`] = `
 <ContextProvider
   value={
     Object {
@@ -19380,7 +19380,7 @@ exports[`Storyshots Components|Icons Credits Icon 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Icons Current Credits Icon 1`] = `
+exports[`Storyshots Icons Current Credits Icon 1`] = `
 <ContextProvider
   value={
     Object {
@@ -19760,7 +19760,7 @@ exports[`Storyshots Components|Icons Current Credits Icon 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Icons Discord Icon 1`] = `
+exports[`Storyshots Icons Discord Icon 1`] = `
 <ContextProvider
   value={
     Object {
@@ -20138,7 +20138,7 @@ exports[`Storyshots Components|Icons Discord Icon 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Icons Document Icon 1`] = `
+exports[`Storyshots Icons Document Icon 1`] = `
 <ContextProvider
   value={
     Object {
@@ -20516,7 +20516,7 @@ exports[`Storyshots Components|Icons Document Icon 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Icons Dropdown Icon 1`] = `
+exports[`Storyshots Icons Dropdown Icon 1`] = `
 <ContextProvider
   value={
     Object {
@@ -20894,7 +20894,7 @@ exports[`Storyshots Components|Icons Dropdown Icon 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Icons Email Icon 1`] = `
+exports[`Storyshots Icons Email Icon 1`] = `
 <ContextProvider
   value={
     Object {
@@ -21272,7 +21272,7 @@ exports[`Storyshots Components|Icons Email Icon 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Icons Eye Icon 1`] = `
+exports[`Storyshots Icons Eye Icon 1`] = `
 <ContextProvider
   value={
     Object {
@@ -21650,7 +21650,7 @@ exports[`Storyshots Components|Icons Eye Icon 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Icons Facebook Icon 1`] = `
+exports[`Storyshots Icons Facebook Icon 1`] = `
 <ContextProvider
   value={
     Object {
@@ -22028,7 +22028,7 @@ exports[`Storyshots Components|Icons Facebook Icon 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Icons Farmer Icon 1`] = `
+exports[`Storyshots Icons Farmer Icon 1`] = `
 <ContextProvider
   value={
     Object {
@@ -22406,7 +22406,7 @@ exports[`Storyshots Components|Icons Farmer Icon 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Icons Github Icon 1`] = `
+exports[`Storyshots Icons Github Icon 1`] = `
 <ContextProvider
   value={
     Object {
@@ -22784,7 +22784,7 @@ exports[`Storyshots Components|Icons Github Icon 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Icons Info Icon 1`] = `
+exports[`Storyshots Icons Info Icon 1`] = `
 <ContextProvider
   value={
     Object {
@@ -23162,7 +23162,7 @@ exports[`Storyshots Components|Icons Info Icon 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Icons Info Icon Outlined 1`] = `
+exports[`Storyshots Icons Info Icon Outlined 1`] = `
 <ContextProvider
   value={
     Object {
@@ -23540,7 +23540,7 @@ exports[`Storyshots Components|Icons Info Icon Outlined 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Icons Instagram Icon 1`] = `
+exports[`Storyshots Icons Instagram Icon 1`] = `
 <ContextProvider
   value={
     Object {
@@ -23918,7 +23918,7 @@ exports[`Storyshots Components|Icons Instagram Icon 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Icons Interface Icon 1`] = `
+exports[`Storyshots Icons Interface Icon 1`] = `
 <ContextProvider
   value={
     Object {
@@ -24296,7 +24296,7 @@ exports[`Storyshots Components|Icons Interface Icon 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Icons Link Icon 1`] = `
+exports[`Storyshots Icons Link Icon 1`] = `
 <ContextProvider
   value={
     Object {
@@ -24676,7 +24676,7 @@ exports[`Storyshots Components|Icons Link Icon 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Icons Linked In Icon 1`] = `
+exports[`Storyshots Icons Linked In Icon 1`] = `
 <ContextProvider
   value={
     Object {
@@ -25054,7 +25054,7 @@ exports[`Storyshots Components|Icons Linked In Icon 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Icons Medium Icon 1`] = `
+exports[`Storyshots Icons Medium Icon 1`] = `
 <ContextProvider
   value={
     Object {
@@ -25432,7 +25432,7 @@ exports[`Storyshots Components|Icons Medium Icon 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Icons Minus Icon 1`] = `
+exports[`Storyshots Icons Minus Icon 1`] = `
 <ContextProvider
   value={
     Object {
@@ -25810,7 +25810,7 @@ exports[`Storyshots Components|Icons Minus Icon 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Icons Organization Icon 1`] = `
+exports[`Storyshots Icons Organization Icon 1`] = `
 <ContextProvider
   value={
     Object {
@@ -26188,7 +26188,7 @@ exports[`Storyshots Components|Icons Organization Icon 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Icons Phone Icon 1`] = `
+exports[`Storyshots Icons Phone Icon 1`] = `
 <ContextProvider
   value={
     Object {
@@ -26566,7 +26566,7 @@ exports[`Storyshots Components|Icons Phone Icon 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Icons Pin Icon 1`] = `
+exports[`Storyshots Icons Pin Icon 1`] = `
 <ContextProvider
   value={
     Object {
@@ -26946,7 +26946,7 @@ exports[`Storyshots Components|Icons Pin Icon 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Icons Play Icon 1`] = `
+exports[`Storyshots Icons Play Icon 1`] = `
 <ContextProvider
   value={
     Object {
@@ -27324,7 +27324,7 @@ exports[`Storyshots Components|Icons Play Icon 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Icons Plus Icon 1`] = `
+exports[`Storyshots Icons Plus Icon 1`] = `
 <ContextProvider
   value={
     Object {
@@ -27702,7 +27702,7 @@ exports[`Storyshots Components|Icons Plus Icon 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Icons Pointer Icon 1`] = `
+exports[`Storyshots Icons Pointer Icon 1`] = `
 <ContextProvider
   value={
     Object {
@@ -28080,7 +28080,7 @@ exports[`Storyshots Components|Icons Pointer Icon 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Icons Print Icon 1`] = `
+exports[`Storyshots Icons Print Icon 1`] = `
 <ContextProvider
   value={
     Object {
@@ -28458,7 +28458,7 @@ exports[`Storyshots Components|Icons Print Icon 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Icons Regen Icon 1`] = `
+exports[`Storyshots Icons Regen Icon 1`] = `
 <ContextProvider
   value={
     Object {
@@ -28836,7 +28836,7 @@ exports[`Storyshots Components|Icons Regen Icon 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Icons Regen Ledger Icon 1`] = `
+exports[`Storyshots Icons Regen Ledger Icon 1`] = `
 <ContextProvider
   value={
     Object {
@@ -29214,7 +29214,7 @@ exports[`Storyshots Components|Icons Regen Ledger Icon 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Icons Regen Logo Icon 1`] = `
+exports[`Storyshots Icons Regen Logo Icon 1`] = `
 <ContextProvider
   value={
     Object {
@@ -29592,7 +29592,7 @@ exports[`Storyshots Components|Icons Regen Logo Icon 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Icons Regen Token Icon 1`] = `
+exports[`Storyshots Icons Regen Token Icon 1`] = `
 <ContextProvider
   value={
     Object {
@@ -29970,7 +29970,7 @@ exports[`Storyshots Components|Icons Regen Token Icon 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Icons Registration Icon 1`] = `
+exports[`Storyshots Icons Registration Icon 1`] = `
 <ContextProvider
   value={
     Object {
@@ -30348,7 +30348,7 @@ exports[`Storyshots Components|Icons Registration Icon 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Icons Review Icon 1`] = `
+exports[`Storyshots Icons Review Icon 1`] = `
 <ContextProvider
   value={
     Object {
@@ -30726,7 +30726,7 @@ exports[`Storyshots Components|Icons Review Icon 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Icons Satellite Icon 1`] = `
+exports[`Storyshots Icons Satellite Icon 1`] = `
 <ContextProvider
   value={
     Object {
@@ -31104,7 +31104,7 @@ exports[`Storyshots Components|Icons Satellite Icon 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Icons Shaded Credits Icon 1`] = `
+exports[`Storyshots Icons Shaded Credits Icon 1`] = `
 <ContextProvider
   value={
     Object {
@@ -31482,7 +31482,7 @@ exports[`Storyshots Components|Icons Shaded Credits Icon 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Icons Shield Icon 1`] = `
+exports[`Storyshots Icons Shield Icon 1`] = `
 <ContextProvider
   value={
     Object {
@@ -31860,7 +31860,7 @@ exports[`Storyshots Components|Icons Shield Icon 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Icons Soil Sample Icon 1`] = `
+exports[`Storyshots Icons Soil Sample Icon 1`] = `
 <ContextProvider
   value={
     Object {
@@ -32238,7 +32238,7 @@ exports[`Storyshots Components|Icons Soil Sample Icon 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Icons Telegram Icon 1`] = `
+exports[`Storyshots Icons Telegram Icon 1`] = `
 <ContextProvider
   value={
     Object {
@@ -32616,7 +32616,7 @@ exports[`Storyshots Components|Icons Telegram Icon 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Icons Total Credits Icon 1`] = `
+exports[`Storyshots Icons Total Credits Icon 1`] = `
 <ContextProvider
   value={
     Object {
@@ -32994,7 +32994,7 @@ exports[`Storyshots Components|Icons Total Credits Icon 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Icons Trash Icon 1`] = `
+exports[`Storyshots Icons Trash Icon 1`] = `
 <ContextProvider
   value={
     Object {
@@ -33372,7 +33372,7 @@ exports[`Storyshots Components|Icons Trash Icon 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Icons Trust Document Icon 1`] = `
+exports[`Storyshots Icons Trust Document Icon 1`] = `
 <ContextProvider
   value={
     Object {
@@ -33750,7 +33750,7 @@ exports[`Storyshots Components|Icons Trust Document Icon 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Icons Trust Icon 1`] = `
+exports[`Storyshots Icons Trust Icon 1`] = `
 <ContextProvider
   value={
     Object {
@@ -34128,7 +34128,7 @@ exports[`Storyshots Components|Icons Trust Icon 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Icons Twitter Icon 1`] = `
+exports[`Storyshots Icons Twitter Icon 1`] = `
 <ContextProvider
   value={
     Object {
@@ -34506,7 +34506,7 @@ exports[`Storyshots Components|Icons Twitter Icon 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Icons Verified Icon 1`] = `
+exports[`Storyshots Icons Verified Icon 1`] = `
 <ContextProvider
   value={
     Object {
@@ -34886,7 +34886,7 @@ exports[`Storyshots Components|Icons Verified Icon 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Icons Wallet Icon 1`] = `
+exports[`Storyshots Icons Wallet Icon 1`] = `
 <ContextProvider
   value={
     Object {
@@ -35264,7 +35264,7 @@ exports[`Storyshots Components|Icons Wallet Icon 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Icons Whitepaper Icon 1`] = `
+exports[`Storyshots Icons Whitepaper Icon 1`] = `
 <ContextProvider
   value={
     Object {
@@ -35644,7 +35644,7 @@ exports[`Storyshots Components|Icons Whitepaper Icon 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Icons Youtube Icon 1`] = `
+exports[`Storyshots Icons Youtube Icon 1`] = `
 <ContextProvider
   value={
     Object {
@@ -36022,7 +36022,7 @@ exports[`Storyshots Components|Icons Youtube Icon 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Image Grid Image Grid 1`] = `
+exports[`Storyshots Image Grid Image Grid 1`] = `
 <ContextProvider
   value={
     Object {
@@ -36410,7 +36410,7 @@ exports[`Storyshots Components|Image Grid Image Grid 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Image Image Default Quality 100 1`] = `
+exports[`Storyshots Image Image Default Quality 100 1`] = `
 <ContextProvider
   value={
     Object {
@@ -36805,7 +36805,7 @@ exports[`Storyshots Components|Image Image Default Quality 100 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Image Item Image Item 1`] = `
+exports[`Storyshots Image Item Image Item 1`] = `
 <ContextProvider
   value={
     Object {
@@ -37192,7 +37192,7 @@ exports[`Storyshots Components|Image Item Image Item 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Image Original Image 1`] = `
+exports[`Storyshots Image Original Image 1`] = `
 <ContextProvider
   value={
     Object {
@@ -37573,7 +37573,7 @@ exports[`Storyshots Components|Image Original Image 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Inputs Roles Input 1`] = `
+exports[`Storyshots Inputs Roles Input 1`] = `
 <ContextProvider
   value={
     Object {
@@ -37951,7 +37951,7 @@ exports[`Storyshots Components|Inputs Roles Input 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Inputs Toggle 1`] = `
+exports[`Storyshots Inputs Toggle 1`] = `
 <ContextProvider
   value={
     Object {
@@ -38329,7 +38329,7 @@ exports[`Storyshots Components|Inputs Toggle 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Map Map 1`] = `
+exports[`Storyshots Map Map 1`] = `
 <ContextProvider
   value={
     Object {
@@ -38854,7 +38854,7 @@ exports[`Storyshots Components|Map Map 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Modal Crop Round Image Modal 1`] = `
+exports[`Storyshots Modal Crop Round Image Modal 1`] = `
 <ContextProvider
   value={
     Object {
@@ -39234,7 +39234,7 @@ exports[`Storyshots Components|Modal Crop Round Image Modal 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Modal Crop Square Image Modal 1`] = `
+exports[`Storyshots Modal Crop Square Image Modal 1`] = `
 <ContextProvider
   value={
     Object {
@@ -39612,7 +39612,7 @@ exports[`Storyshots Components|Modal Crop Square Image Modal 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Modal Ledger Modal 1`] = `
+exports[`Storyshots Modal Ledger Modal 1`] = `
 <ContextProvider
   value={
     Object {
@@ -39990,7 +39990,7 @@ exports[`Storyshots Components|Modal Ledger Modal 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Modal Modal 1`] = `
+exports[`Storyshots Modal Modal 1`] = `
 <ContextProvider
   value={
     Object {
@@ -40368,7 +40368,7 @@ exports[`Storyshots Components|Modal Modal 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Party Party Address 1`] = `
+exports[`Storyshots Party Party Address 1`] = `
 <ContextProvider
   value={
     Object {
@@ -40750,7 +40750,7 @@ exports[`Storyshots Components|Party Party Address 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Place Project Place Info 1`] = `
+exports[`Storyshots Place Project Place Info 1`] = `
 <ContextProvider
   value={
     Object {
@@ -41132,7 +41132,7 @@ exports[`Storyshots Components|Place Project Place Info 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|ReadMore Read More 1`] = `
+exports[`Storyshots ReadMore Read More 1`] = `
 <ContextProvider
   value={
     Object {
@@ -41521,7 +41521,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Sliders Project Media 1`] = `
+exports[`Storyshots Sliders Project Media 1`] = `
 <ContextProvider
   value={
     Object {
@@ -41923,7 +41923,7 @@ exports[`Storyshots Components|Sliders Project Media 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Sliders Protected Species 1`] = `
+exports[`Storyshots Sliders Protected Species 1`] = `
 <ContextProvider
   value={
     Object {
@@ -42356,7 +42356,7 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Table Mrv Table 1`] = `
+exports[`Storyshots Table Mrv Table 1`] = `
 <ContextProvider
   value={
     Object {
@@ -42757,7 +42757,7 @@ exports[`Storyshots Components|Table Mrv Table 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Tabs Mrv Tabs 1`] = `
+exports[`Storyshots Tabs Mrv Tabs 1`] = `
 <ContextProvider
   value={
     Object {
@@ -43189,7 +43189,7 @@ exports[`Storyshots Components|Tabs Mrv Tabs 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Timeline New Timeline 1`] = `
+exports[`Storyshots Timeline New Timeline 1`] = `
 <ContextProvider
   value={
     Object {
@@ -43621,7 +43621,7 @@ exports[`Storyshots Components|Timeline New Timeline 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Timeline Timeline 1`] = `
+exports[`Storyshots Timeline Timeline 1`] = `
 <ContextProvider
   value={
     Object {
@@ -44030,7 +44030,7 @@ exports[`Storyshots Components|Timeline Timeline 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Timeline Timeline Item 1`] = `
+exports[`Storyshots Timeline Timeline Item 1`] = `
 <ContextProvider
   value={
     Object {
@@ -44416,7 +44416,7 @@ exports[`Storyshots Components|Timeline Timeline Item 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Title Main Title 1`] = `
+exports[`Storyshots Title Main Title 1`] = `
 <ContextProvider
   value={
     Object {
@@ -44798,7 +44798,7 @@ exports[`Storyshots Components|Title Main Title 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Title Subtitle 1`] = `
+exports[`Storyshots Title Subtitle 1`] = `
 <ContextProvider
   value={
     Object {
@@ -45180,7 +45180,7 @@ exports[`Storyshots Components|Title Subtitle 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Title Title 1`] = `
+exports[`Storyshots Title Title 1`] = `
 <ContextProvider
   value={
     Object {
@@ -45562,7 +45562,7 @@ exports[`Storyshots Components|Title Title 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|TitleDescription Description 1`] = `
+exports[`Storyshots TitleDescription Description 1`] = `
 <ContextProvider
   value={
     Object {
@@ -45943,7 +45943,7 @@ exports[`Storyshots Components|TitleDescription Description 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Tooltip Info 1`] = `
+exports[`Storyshots Tooltip Info 1`] = `
 <ContextProvider
   value={
     Object {
@@ -46336,7 +46336,7 @@ exports[`Storyshots Components|Tooltip Info 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Tooltip Main Title 1`] = `
+exports[`Storyshots Tooltip Main Title 1`] = `
 <ContextProvider
   value={
     Object {
@@ -46729,7 +46729,7 @@ exports[`Storyshots Components|Tooltip Main Title 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|User Big User Avatar 1`] = `
+exports[`Storyshots User Big User Avatar 1`] = `
 <ContextProvider
   value={
     Object {
@@ -47111,7 +47111,7 @@ exports[`Storyshots Components|User Big User Avatar 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|User Big User Info 1`] = `
+exports[`Storyshots User Big User Info 1`] = `
 <ContextProvider
   value={
     Object {
@@ -47500,7 +47500,7 @@ exports[`Storyshots Components|User Big User Info 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|User Column User Info 1`] = `
+exports[`Storyshots User Column User Info 1`] = `
 <ContextProvider
   value={
     Object {
@@ -47889,7 +47889,7 @@ exports[`Storyshots Components|User Column User Info 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|User Fallback User Avatar 1`] = `
+exports[`Storyshots User Fallback User Avatar 1`] = `
 <ContextProvider
   value={
     Object {
@@ -48267,7 +48267,7 @@ exports[`Storyshots Components|User Fallback User Avatar 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|User Medium User Avatar 1`] = `
+exports[`Storyshots User Medium User Avatar 1`] = `
 <ContextProvider
   value={
     Object {
@@ -48648,7 +48648,7 @@ exports[`Storyshots Components|User Medium User Avatar 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|User Medium User Info 1`] = `
+exports[`Storyshots User Medium User Info 1`] = `
 <ContextProvider
   value={
     Object {
@@ -49036,7 +49036,7 @@ exports[`Storyshots Components|User Medium User Info 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|User User Avatar With Link 1`] = `
+exports[`Storyshots User User Avatar With Link 1`] = `
 <ContextProvider
   value={
     Object {
@@ -49419,7 +49419,7 @@ exports[`Storyshots Components|User User Avatar With Link 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|User With Title 1`] = `
+exports[`Storyshots User With Title 1`] = `
 <ContextProvider
   value={
     Object {

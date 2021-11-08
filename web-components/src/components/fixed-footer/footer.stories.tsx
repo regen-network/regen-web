@@ -1,14 +1,12 @@
 import * as React from 'react';
-import { withKnobs, number, boolean, text } from '@storybook/addon-knobs';
 
 import FixedFooter from 'web-components/lib/components/fixed-footer';
 import OnboardingFooter from 'web-components/lib/components/fixed-footer/OnboardingFooter';
 import { SwitchFooter } from 'web-components/lib/components/fixed-footer/SwitchFooter';
 
 export default {
-  title: 'Components|Footers',
+  title: 'Footers',
   component: FixedFooter,
-  decorators: [withKnobs],
 };
 
 const submit = async (): Promise<void> => {
@@ -26,12 +24,12 @@ export const fixedFooter = (): JSX.Element => (
 export const onboardingFooter = (): JSX.Element => (
   <OnboardingFooter
     onSave={submit}
-    saveText={text('Save text', 'Save and Next')}
-    onPrev={boolean('Prev', true) ? () => null : null}
-    onNext={boolean('Next', true) ? () => null : null}
-    hideProgress={boolean('hideProgress', false)}
-    saveDisabled={boolean('Disable save', false)}
-    percentComplete={number('Percent Complete', 33, { min: 0, max: 100 })}
+    saveText={'Save and Next'}
+    onPrev={() => null}
+    onNext={() => null}
+    hideProgress={false}
+    saveDisabled={false}
+    percentComplete={33}
   />
 );
 

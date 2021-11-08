@@ -5,7 +5,7 @@ import ContainedButton from 'web-components/lib/components/buttons/ContainedButt
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 
 export default {
-  title: 'Components|Buttons',
+  title: 'Buttons',
   component: OutlinedButton,
 };
 

@@ -2,12 +2,10 @@ import * as React from 'react';
 import Map from 'web-components/lib/components/map';
 // import Geocoder from 'web-components/lib/components/map/Geocoder';
 // import * as togeojson from '@mapbox/togeojson';
-import { withKnobs, object } from '@storybook/addon-knobs';
 
 export default {
-  title: 'Components|Map',
+  title: 'Map',
   component: Map,
-  decorators: [withKnobs],
 };
 
 // const kml: string = `<?xml version="1.0" encoding="utf-8" ?><kml xmlns="http://www.opengis.net/kml/2.2"><Document id="root_doc"><Schema name="Reveg_upper" id="Reveg_upper"><SimpleField name="tessellate" type="int"></SimpleField></Schema><Folder><name>Reveg_upper</name><Placemark><name>Reveg upper</name><Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style><ExtendedData><SchemaData schemaUrl="#Reveg_upper"><SimpleData name="tessellate">1</SimpleData></SchemaData></ExtendedData><Polygon><outerBoundaryIs><LinearRing><coordinates>139.301964544446,-35.7334349941573 139.302618507057,-35.734016351157 139.30292109905,-35.7311592633386 139.302927249187,-35.7307320552533 139.301964544446,-35.7334349941573</coordinates></LinearRing></outerBoundaryIs></Polygon></Placemark></Folder></Document></kml>`;
@@ -108,9 +106,7 @@ const geojson = {
   ],
 };
 
-export const map = (): JSX.Element => (
-  <Map geojson={object('geojson', geojson)} token={process.env.STORYBOOK_MAPBOX_TOKEN} />
-);
+export const map = (): JSX.Element => <Map geojson={geojson} token={process.env.STORYBOOK_MAPBOX_TOKEN} />;
 
 // export const geocoder = (): JSX.Element => {
 //   return (

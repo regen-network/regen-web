@@ -4,7 +4,7 @@ import moment from 'moment';
 import BarChart from './BarChart';
 
 export default {
-  title: 'Components|Charts',
+  title: 'Charts',
   component: BarChart,
 };
 

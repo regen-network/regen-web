@@ -2,7 +2,7 @@ import * as React from 'react';
 import Table, { Data } from 'web-components/lib/components/table';
 
 export default {
-  title: 'Components|Table',
+  title: 'Table',
   component: Table,
 };
 

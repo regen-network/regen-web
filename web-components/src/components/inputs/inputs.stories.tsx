@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { FormLabel, Button } from '@material-ui/core';
 import { Formik, Form, Field } from 'formik';
 import { RadioGroup } from 'formik-material-ui';
-import { withKnobs } from '@storybook/addon-knobs';
 
 import Toggle from './Toggle';
 import TextField from './TextField';
@@ -11,23 +10,21 @@ import OnBoardingCard from '../cards/OnBoardingCard';
 import OnBoardingSection from '../section/OnBoardingSection';
 // import CheckboxLabel from 'web-components/lib/components/inputs/CheckboxLabel';
 // import SelectTextField, { Option } from 'web-components/lib/components/inputs/SelectTextField';
-// import { withKnobs, text, boolean } from '@storybook/addon-knobs';
 
 export default {
-  title: 'Components|Inputs',
+  title: 'Inputs',
   component: TextField,
-  decorators: [withKnobs],
 };
 
 // function EditableTextField(): JSX.Element {
 //   const [value, setValue] = useState('');
 //   return (
 //     <TextField
-//       required={boolean('Required', true)}
-//       type={text('Type', 'text')}
+//       required={true}
+//       type={'text'}
 //       value={value}
 //       onChange={e => setValue(e.target.value)}
-//       label={text('Label', 'Label')}
+//       label={'Label'}
 //     />
 //   );
 // }
@@ -56,10 +53,10 @@ export default {
 //   return (
 //     <SelectTextField
 //       options={currencies}
-//       required={boolean('Required', true)}
+//       required={true}
 //       value={value}
 //       onChange={e => setValue(e.target.value)}
-//       label={text('Label', 'Currency')}
+//       label={'Currency'}
 //     />
 //   );
 // }
@@ -70,7 +67,7 @@ export default {
 //     <CheckboxLabel
 //       checked={value}
 //       onChange={e => setValue(e.target.checked)}
-//       label={text('Label', 'This is a label')}
+//       label={'This is a label'}
 //     />
 //   );
 // }

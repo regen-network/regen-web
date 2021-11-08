@@ -1,6 +1,5 @@
 import * as React from 'react';
 import CreditDetails, { CreditInfoProps } from 'web-components/lib/components/credits/CreditDetails';
-import { withKnobs, array, number, object } from '@storybook/addon-knobs';
 
 // import Credits from 'web-components/lib/components/credits/';
 // import Gauge from 'web-components/lib/components/credits/Gauge';
@@ -15,9 +14,8 @@ import CreditsGauge from 'web-components/lib/components/credits/CreditsGauge';
 // };
 
 export default {
-  title: 'Components|Credits',
+  title: 'Credits',
   component: CreditDetails,
-  decorators: [withKnobs],
 };
 
 const details: CreditInfoProps = {
@@ -37,16 +35,14 @@ const details: CreditInfoProps = {
 
 export const creditDetails = (): JSX.Element => (
   <CreditDetails
-    creditClass={object('creditClass', details.creditClass)}
-    activities={array('activities', details.activities, ':')}
+    creditClass={details.creditClass}
+    activities={details.activities}
     background="./background.jpg"
     title="Key activities and outcomes"
   />
 );
 
-export const creditsGauge = (): JSX.Element => (
-  <CreditsGauge purchased={number('purchased', 1527)} issued={number('total issued', 2237)} />
-);
+export const creditsGauge = (): JSX.Element => <CreditsGauge purchased={1527} issued={2237} />;
 
 // export const creditsWithGauge = (): JSX.Element => (
 //   <Credits

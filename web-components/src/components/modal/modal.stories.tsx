@@ -5,7 +5,7 @@ import CropImageModal from 'web-components/lib/components/modal/CropImageModal';
 import { Button, Card, Avatar, CardMedia } from '@material-ui/core';
 
 export default {
-  title: 'Components|Modal',
+  title: 'Modal',
   component: Modal,
 };
 

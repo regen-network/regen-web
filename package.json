@@ -59,9 +59,10 @@
   },
   "resolutions": {
     "webpack": "4.41.2",
-    "babel-eslint": "10.0.3"
+    "babel-eslint": "^10.1.0"
   },
   "husky": {
     "hooks": {}
-  }
+  },
+  "version": "0.0.0"
 }

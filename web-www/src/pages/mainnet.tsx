@@ -9,8 +9,6 @@ import FixedFooter from 'web-components/lib/components/fixed-footer';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import MediaSection from '../sections/mainnet/MediaSection';
 
-interface Props extends PageProps {}
-
 type QueryData = {
   background: {
     publicURL: string;

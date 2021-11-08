@@ -1,3 +1,6 @@
+# TODO these aren't actually used by the codebase, but are needed for the
+# codegen to work around a bug with gatsby-source-sanity
+
 fragment GatsbyImageSharpFluid_withWebp on ImageSharpFluid {
   base64
   aspectRatio

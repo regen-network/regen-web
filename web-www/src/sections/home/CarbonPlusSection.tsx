@@ -90,31 +90,32 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const CarbonplusSection: React.FC = (): JSX.Element => {
-  const data: HomeCarbonplusSectionQuery = useStaticQuery(graphql`
-    query homeCarbonplusSection {
-      cow: file(relativePath: { eq: "cow.png" }) {
-        childImageSharp {
-          fluid(quality: 90) {
-            ...GatsbyImageSharpFluid_withWebp
-          }
-        }
-      }
-      allSanityHomePageWeb {
-        nodes {
-          carbonPlusSection {
-            smallHeaderFeatured
-            smallHeaderCreditName
-            header
-            description
-            linkText
-            linkUrl
-          }
+const query = graphql`
+  query homeCarbonplusSection {
+    cow: file(relativePath: { eq: "cow.png" }) {
+      childImageSharp {
+        fluid(quality: 90) {
+          ...GatsbyImageSharpFluid_withWebp
         }
       }
     }
-  `);
+    allSanityHomePageWeb {
+      nodes {
+        carbonPlusSection {
+          smallHeaderFeatured
+          smallHeaderCreditName
+          header
+          description
+          linkText
+          linkUrl
+        }
+      }
+    }
+  }
+`;
 
+const CarbonplusSection: React.FC = (): JSX.Element => {
+  const data: HomeCarbonplusSectionQuery = useStaticQuery(query);
   const content = data.allSanityHomePageWeb.nodes[0].carbonPlusSection;
   const styles = useStyles({});
 

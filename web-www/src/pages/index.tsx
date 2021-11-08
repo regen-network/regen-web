@@ -1,5 +1,5 @@
 import React from 'react';
-import { useStaticQuery, graphql } from 'gatsby';
+import { useStaticQuery, graphql, PageProps } from 'gatsby';
 import { useTheme } from '@material-ui/core';
 import BackgroundImage from 'gatsby-background-image';
 import Box from '@material-ui/core/Box';
@@ -37,7 +37,7 @@ export const allHomePageQuery = graphql`
   }
 `;
 
-const IndexPage: React.FC<{ location: Location }> = ({ location }) => {
+const IndexPage: React.FC<PageProps> = ({ location }) => {
   const theme = useTheme();
   const data: HomePageQueryQuery = useStaticQuery(allHomePageQuery);
 

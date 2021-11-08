@@ -1,5 +1,5 @@
 import React from 'react';
-import { useStaticQuery, graphql } from 'gatsby';
+import { useStaticQuery, graphql, PageProps } from 'gatsby';
 
 import SEO from '../components/seo';
 import TopSection from '../sections/developers/TopSection';
@@ -18,7 +18,7 @@ const query = graphql`
   }
 `;
 
-const DevelopersPage: React.FC<{ location: Location }> = ({ location }) => {
+const DevelopersPage: React.FC<PageProps> = ({ location }) => {
   const data = useStaticQuery(query);
   return (
     <>

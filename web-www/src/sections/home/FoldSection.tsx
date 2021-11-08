@@ -7,7 +7,7 @@ import VideoPopup from '../../components/videoPopup';
 import Typography from '@material-ui/core/Typography';
 import Title from 'web-components/lib/components/title';
 
-import { HomeFoldSectionQuery, ImageSharpFluid, SanityHomeFoldSection } from '../../generated/graphql';
+import { HomeFoldSectionQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -86,38 +86,39 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const HomeFoldSection: React.FC<{ className?: string }> = ({ className }) => {
-  const styles = useStyles({});
-  const query: HomeFoldSectionQuery = useStaticQuery(graphql`
-    query homeFoldSection {
-      desktop: file(relativePath: { eq: "image43.jpg" }) {
-        childImageSharp {
-          fluid(quality: 90, maxWidth: 1920) {
-            ...GatsbyImageSharpFluid_withWebp
-          }
+const query = graphql`
+  query homeFoldSection {
+    desktop: file(relativePath: { eq: "image43.jpg" }) {
+      childImageSharp {
+        fluid(quality: 90, maxWidth: 1920) {
+          ...GatsbyImageSharpFluid_withWebp
         }
       }
-      allSanityHomePageWeb {
-        nodes {
-          homeFoldSection {
-            title
-            body
-            image {
-              ...ImageWithPreview
-            }
+    }
+    allSanityHomePageWeb {
+      nodes {
+        homeFoldSection {
+          title
+          body
+          image {
+            ...ImageWithPreview
           }
         }
       }
     }
-  `);
-  const imageData = query?.desktop?.childImageSharp?.fluid;
-  const content = query.allSanityHomePageWeb.nodes[0].homeFoldSection;
+  }
+`;
+
+const HomeFoldSection: React.FC<{ className?: string }> = ({ className }) => {
+  const styles = useStyles({});
+  const data: HomeFoldSectionQuery = useStaticQuery(query);
+  const content = data.allSanityHomePageWeb.nodes[0].homeFoldSection;
 
   return (
     <BackgroundImage
       Tag="section"
       className={clsx(styles.root, className)}
-      fluid={imageData as any}
+      fluid={data?.desktop?.childImageSharp?.fluid as any}
       backgroundColor={`#040e18`}
     >
       <div className={styles.backgroundGradient}></div>

@@ -1,4 +1,5 @@
 import React from 'react';
+import SanityImage from 'gatsby-plugin-sanity-image';
 import { graphql, useStaticQuery } from 'gatsby';
 import BackgroundImage from 'gatsby-background-image';
 import { makeStyles, Theme } from '@material-ui/core';
@@ -8,10 +9,7 @@ import clsx from 'clsx';
 import { ImageItemProps } from 'web-components/lib/components/image-item';
 import ImageItems from 'web-components/lib/components/sliders/ImageItems';
 import Section from 'web-components/src/components/section';
-import { useAllHomePageWebQuery, ValuesSection as ValuesProps } from '../../generated/sanity-graphql';
-import { client } from '../../../sanity';
 import { HomeValuesSectionQuery } from '../../generated/graphql';
-import SanityImage from 'gatsby-plugin-sanity-image';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -56,48 +54,50 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const HomeValues: React.FC<{ className?: string }> = ({ className }) => {
-  const imgData: HomeValuesSectionQuery = useStaticQuery(graphql`
-    query homeValuesSection {
-      bg: file(relativePath: { eq: "topo-bg-top.png" }) {
-        childImageSharp {
-          fluid(quality: 90, maxWidth: 1920) {
-            ...GatsbyImageSharpFluid_withWebp
-          }
+const query = graphql`
+  query homeValuesSection {
+    bg: file(relativePath: { eq: "topo-bg-top.png" }) {
+      childImageSharp {
+        fluid(quality: 90, maxWidth: 1920) {
+          ...GatsbyImageSharpFluid_withWebp
         }
       }
-      ellipse: file(relativePath: { eq: "green-ellipse.png" }) {
-        childImageSharp {
-          fixed(quality: 90, width: 120) {
-            ...GatsbyImageSharpFixed_withWebp
-          }
+    }
+    ellipse: file(relativePath: { eq: "green-ellipse.png" }) {
+      childImageSharp {
+        fixed(quality: 90, width: 120) {
+          ...GatsbyImageSharpFixed_withWebp
         }
       }
-      allSanityHomePageWeb {
-        nodes {
-          valuesSection {
-            header
-            imageItems {
-              title
-              description
-              image {
-                ...Image
-              }
+    }
+    allSanityHomePageWeb {
+      nodes {
+        valuesSection {
+          header
+          imageItems {
+            title
+            description
+            image {
+              ...Image
             }
           }
         }
       }
     }
-  `);
+  }
+`;
+
+const HomeValues: React.FC<{ className?: string }> = ({ className }) => {
+  const data: HomeValuesSectionQuery = useStaticQuery(query);
   const styles = useStyles();
 
-  const content = imgData.allSanityHomePageWeb.nodes[0].valuesSection;
+  const content = data.allSanityHomePageWeb.nodes[0].valuesSection;
 
   const imageItems: ImageItemProps[] = (content?.imageItems || []).map(item => {
     return {
       title: item?.title || '',
       description: item?.description || '',
-      img: <SanityImage {...(item?.image as any)} alt={item?.title} />,
+      img: <SanityImage {...(item?.image as any)} alt={item?.title || ''} />,
     };
   }) as ImageItemProps[];
 
@@ -105,7 +105,7 @@ const HomeValues: React.FC<{ className?: string }> = ({ className }) => {
     <BackgroundImage
       Tag="section"
       className={clsx(className, styles.section)}
-      fluid={imgData?.bg?.childImageSharp?.fluid as any}
+      fluid={data?.bg?.childImageSharp?.fluid as any}
     >
       <Section
         withSlider

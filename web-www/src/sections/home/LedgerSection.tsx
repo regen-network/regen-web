@@ -86,30 +86,32 @@ let useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const HomeLedger: React.FC = () => {
-  const data: HomeLedgerSectionQuery = useStaticQuery(graphql`
-    query homeLedgerSection {
-      bg: file(relativePath: { eq: "farm-background.png" }) {
-        childImageSharp {
-          fluid(quality: 90, maxWidth: 1920) {
-            ...GatsbyImageSharpFluid_withWebp
-          }
-        }
-      }
-      ledger: file(relativePath: { eq: "ledger.png" }) {
-        childImageSharp {
-          fluid(quality: 90) {
-            ...GatsbyImageSharpFluid_withWebp
-          }
-        }
-      }
-      allSanityHomePageWeb {
-        nodes {
-          ledgerDescription
+const query = graphql`
+  query homeLedgerSection {
+    bg: file(relativePath: { eq: "farm-background.png" }) {
+      childImageSharp {
+        fluid(quality: 90, maxWidth: 1920) {
+          ...GatsbyImageSharpFluid_withWebp
         }
       }
     }
-  `);
+    ledger: file(relativePath: { eq: "ledger.png" }) {
+      childImageSharp {
+        fluid(quality: 90) {
+          ...GatsbyImageSharpFluid_withWebp
+        }
+      }
+    }
+    allSanityHomePageWeb {
+      nodes {
+        ledgerDescription
+      }
+    }
+  }
+`;
+
+const HomeLedger: React.FC = () => {
+  const data: HomeLedgerSectionQuery = useStaticQuery(query);
 
   const styles = useStyles();
   const content = data.allSanityHomePageWeb.nodes[0];

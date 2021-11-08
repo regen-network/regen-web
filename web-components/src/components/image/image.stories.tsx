@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Image } from 'web-components/lib/components/image';
+import { ImageDrop } from 'web-components/lib/components/inputs/ImageDrop';
 import { withKnobs, number } from '@storybook/addon-knobs';
 
 export default {
@@ -38,3 +39,15 @@ export const imageDefaultQuality100 = (): JSX.Element => {
 };
 
 export const originalImage = (): JSX.Element => <img src={imageSrc} alt="Wilmot" />;
+
+// export const imageDrop = (): JSX.Element => (
+//   <Field
+//     classes={{ root: styles.field, main: styles.fullSizeMedia }}
+//     component={ImageDrop}
+//     label="Preview photo"
+//     description="Choose the summary photo that will show up in project previews."
+//     buttonText="+ Add preview Photo"
+//     fixedCrop={cropAspect}
+//     name="['http://regen.network/previewPhoto'].@value"
+//   />
+// );

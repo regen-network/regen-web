@@ -11,6 +11,7 @@ import { requiredMessage } from 'web-components/lib/components/inputs/validation
 
 import { validate, getProjectPageBaseData } from '../../lib/rdf';
 import { useShaclGraphByUriQuery } from '../../generated/graphql';
+import getApiUri from '../../lib/apiUri';
 
 interface MediaFormProps {
   submit: (values: MediaValues) => Promise<void>;
@@ -121,6 +122,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
   const styles = useStyles();
   const theme = useTheme();
+  const apiUri = getApiUri();
   const isTabletOrLarger = useMediaQuery(theme.breakpoints.up('sm'));
   const cropAspect = { aspect: 322 / 211 }; // px values pulled from mockups (width / height)
   const { data: graphData } = useShaclGraphByUriQuery({
@@ -196,6 +198,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                   buttonText="+ Add preview Photo"
                   fixedCrop={cropAspect}
                   name="['http://regen.network/previewPhoto'].@value"
+                  apiServerUrl={apiUri}
                 />
                 <div className={styles.field}>
                   <FormLabel

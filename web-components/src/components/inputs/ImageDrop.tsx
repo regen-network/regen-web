@@ -12,6 +12,7 @@ import CropImageModal from '../modal/CropImageModal';
 import TrashIcon from '../icons/TrashIcon';
 import { Image } from '../image';
 import { Label } from '../label';
+import { uploadImage } from '../../utils/uploadFile';
 
 export interface ImageDropProps extends FieldProps {
   className?: string;
@@ -26,6 +27,7 @@ export interface ImageDropProps extends FieldProps {
   buttonText?: string;
   fixedCrop?: Crop;
   hideDragText?: boolean;
+  apiServerUrl?: string;
 }
 
 const useStyles = makeStyles(theme => ({
@@ -92,6 +94,7 @@ function ImageDrop({
   buttonText,
   fixedCrop,
   hideDragText,
+  apiServerUrl,
   ...fieldProps
 }: ImageDropProps): JSX.Element {
   const [cropModalOpen, setCropModalOpen] = useState(false);
@@ -150,10 +153,28 @@ function ImageDrop({
     setCropModalOpen(false);
   };
 
-  const handleCropModalSubmit = (croppedImage: HTMLImageElement): void => {
-    form.setFieldValue(field.name, croppedImage.src);
+  const handleCropModalSubmit = async (croppedImage: HTMLImageElement): Promise<void> => {
+    const projectId = 'test-project';
+    const projectPath = `projects/${projectId}`;
+
+    const imageFile = await srcToFile(croppedImage.src, 'testname', 'image/png');
+    console.log('imageFile', imageFile);
+
+    const storedImageUrl = await uploadImage(imageFile, projectPath, apiServerUrl);
+
+    form.setFieldValue(field.name, storedImageUrl);
     form.setFieldTouched(field.name, true);
     setCropModalOpen(false);
+  };
+
+  const srcToFile = async (src: string, fileName: string, mimeType: string): Promise<File> => {
+    return fetch(src)
+      .then(function(res) {
+        return res.arrayBuffer();
+      })
+      .then(function(buf) {
+        return new File([buf], fileName, { type: mimeType });
+      });
   };
 
   const handleDelete = (): void => {

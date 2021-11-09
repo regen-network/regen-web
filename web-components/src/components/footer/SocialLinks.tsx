@@ -78,16 +78,32 @@ const SocialLinks: React.FC<Props> = ({ className }) => {
         join the community
       </Title>
       <Grid container wrap="nowrap" className={styles.social}>
-        <Link href="https://www.instagram.com/regennetwork/" rel="noopener noreferrer" target="_blank">
+        <Link
+          href="https://www.instagram.com/regennetwork/"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
           <InstagramIcon className={styles.icon} />
         </Link>
-        <Link href="http://t.me/regennetwork_public" rel="noopener noreferrer" target="_blank">
+        <Link
+          href="http://t.me/regennetwork_public"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
           <TelegramIcon className={styles.icon} />
         </Link>
-        <Link href="https://facebook.com/weareregennetwork" rel="noopener noreferrer" target="_blank">
+        <Link
+          href="https://facebook.com/weareregennetwork"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
           <FacebookIcon className={styles.icon} />
         </Link>
-        <Link href="http://twitter.com/regen_network" rel="noopener noreferrer" target="_blank">
+        <Link
+          href="http://twitter.com/regen_network"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
           <TwitterIcon className={styles.icon} />
         </Link>
         <Link
@@ -97,7 +113,11 @@ const SocialLinks: React.FC<Props> = ({ className }) => {
         >
           <LinkedInIcon className={styles.icon} />
         </Link>
-        <Link href="https://medium.com/regen-network" rel="noopener noreferrer" target="_blank">
+        <Link
+          href="https://medium.com/regen-network"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
           <MediumIcon className={styles.icon} />
         </Link>
         <Link
@@ -107,11 +127,21 @@ const SocialLinks: React.FC<Props> = ({ className }) => {
         >
           <YoutubeIcon className={cx(styles.smallIcon, styles.icon)} />
         </Link>
-        <Link href="https://github.com/regen-network/" rel="noopener noreferrer" target="_blank">
+        <Link
+          href="https://github.com/regen-network/"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
           <GithubIcon className={styles.icon} />
         </Link>
-        <Link href="https://discord.gg/regen-network" rel="noopener noreferrer" target="_blank">
-          <DiscordIcon className={cx(styles.smallIcon, styles.icon, styles.discord)} />
+        <Link
+          href="https://discord.gg/regen-network"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          <DiscordIcon
+            className={cx(styles.smallIcon, styles.icon, styles.discord)}
+          />
         </Link>
       </Grid>
     </div>

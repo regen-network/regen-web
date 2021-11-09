@@ -12,7 +12,12 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-function TelegramIcon({ className, color, onMouseEnter, onMouseLeave }: Props): JSX.Element {
+function TelegramIcon({
+  className,
+  color,
+  onMouseEnter,
+  onMouseLeave,
+}: Props): JSX.Element {
   const classes = useStyles();
 
   return (

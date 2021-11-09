@@ -13,7 +13,22 @@ export interface TeamSectionProps {
   bgUrl: string;
   className?: string;
   titleClassName?: string;
-  gridMd?: boolean | 'auto' | 4 | 1 | 2 | 3 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | undefined;
+  gridMd?:
+    | boolean
+    | 'auto'
+    | 4
+    | 1
+    | 2
+    | 3
+    | 5
+    | 6
+    | 7
+    | 8
+    | 9
+    | 10
+    | 11
+    | 12
+    | undefined;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -58,7 +73,14 @@ const TeamSection = ({
       <Grid justify="center" container direction="row">
         {members.map((m: any, index: any) => {
           return (
-            <Grid className={classes.item} xs={12} sm={6} md={gridMd} item key={index}>
+            <Grid
+              className={classes.item}
+              xs={12}
+              sm={6}
+              md={gridMd}
+              item
+              key={index}
+            >
               <TeamItem
                 name={m.name}
                 title={m.title}

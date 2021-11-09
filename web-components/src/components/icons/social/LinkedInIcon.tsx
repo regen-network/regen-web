@@ -12,7 +12,12 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-function LinkedInIcon({ className, color, onMouseEnter, onMouseLeave }: Props): JSX.Element {
+function LinkedInIcon({
+  className,
+  color,
+  onMouseEnter,
+  onMouseLeave,
+}: Props): JSX.Element {
   const classes = useStyles();
 
   return (

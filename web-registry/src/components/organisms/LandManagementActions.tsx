@@ -81,11 +81,17 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-function LandManagementActions({ actions, title, subtitle }: LandManagementActionsProps): JSX.Element {
+function LandManagementActions({
+  actions,
+  title,
+  subtitle,
+}: LandManagementActionsProps): JSX.Element {
   const styles = useStyles({});
   const theme: Theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
-  const isTablet: boolean = useMediaQuery(theme.breakpoints.between('xs', 'sm'));
+  const isTablet: boolean = useMediaQuery(
+    theme.breakpoints.between('xs', 'sm'),
+  );
   const slidesCount = isTablet ? 2 : 3;
 
   const settings = {
@@ -132,7 +138,11 @@ function LandManagementActions({ actions, title, subtitle }: LandManagementActio
         <div className={styles.swipe}>
           {actions.map(action => (
             <div className={styles.item} key={action.name}>
-              <Action name={action.name} description={action.description} imgSrc={action.imgSrc} />
+              <Action
+                name={action.name}
+                description={action.description}
+                imgSrc={action.imgSrc}
+              />
             </div>
           ))}
         </div>

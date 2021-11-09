@@ -73,8 +73,14 @@ const HeroTitle: React.FC<Props> = ({ classes, ...props }) => {
         </Typography>
       )}
       {props.descriptionRaw && (
-        <Typography variant="h4" className={cx(styles.description, classes?.description)}>
-          <BlockContent content={props.descriptionRaw} tooltipText={props?.tooltipText || ''} />
+        <Typography
+          variant="h4"
+          className={cx(styles.description, classes?.description)}
+        >
+          <BlockContent
+            content={props.descriptionRaw}
+            tooltipText={props?.tooltipText || ''}
+          />
         </Typography>
       )}
     </BackgroundImgSection>

@@ -188,7 +188,9 @@ function PurchaseDetails({
 
   return (
     <div>
-      <span className={clsx(classes.details, classes.detailsContent)}>{title}: </span>
+      <span className={clsx(classes.details, classes.detailsContent)}>
+        {title}:{' '}
+      </span>
       <Description className={classes.detailsContent}>
         {url ? (
           <a href={url} target="_blank" rel="noopener noreferrer">
@@ -229,7 +231,9 @@ export default function ProjectCard({
   const serialNumber: string | undefined =
     purchaseInfo?.vintageMetadata?.['http://regen.network/serialNumber'];
   const additionalCertifications: string[] | undefined =
-    purchaseInfo?.vintageMetadata?.['http://regen.network/additionalCertifications']?.['@list'];
+    purchaseInfo?.vintageMetadata?.[
+      'http://regen.network/additionalCertifications'
+    ]?.['@list'];
 
   return (
     <MediaCard
@@ -273,9 +277,18 @@ export default function ProjectCard({
       {purchaseInfo && <div className={classes.separator} />}
       {purchaseInfo && (
         <div className={classes.purchaseInfo}>
-          <span className={classes.units}>{purchaseInfo.units} credits purchased</span>
-          <span onClick={() => setOpen(!open)} className={clsx(classes.viewDetails, classes.details)}>
-            <BreadcrumbIcon direction={open ? 'up' : 'down'} className={classes.icon} /> view details
+          <span className={classes.units}>
+            {purchaseInfo.units} credits purchased
+          </span>
+          <span
+            onClick={() => setOpen(!open)}
+            className={clsx(classes.viewDetails, classes.details)}
+          >
+            <BreadcrumbIcon
+              direction={open ? 'up' : 'down'}
+              className={classes.icon}
+            />{' '}
+            view details
           </span>
           {open && (
             <div className={classes.purchaseDetails}>
@@ -285,12 +298,18 @@ export default function ProjectCard({
                   info={serialNumber || purchaseInfo.vintageId.substring(0, 8)}
                 />
               )}
-              <PurchaseDetails title="vintage period" info={purchaseInfo.vintagePeriod} />
+              <PurchaseDetails
+                title="vintage period"
+                info={purchaseInfo.vintagePeriod}
+              />
               <PurchaseDetails
                 url={purchaseInfo.creditClass.url}
-                title={`credit class${purchaseInfo.creditClass.standard ? ' (type)' : ''}`}
+                title={`credit class${
+                  purchaseInfo.creditClass.standard ? ' (type)' : ''
+                }`}
                 info={
-                  purchaseInfo.creditClass.standard && purchaseInfo.creditClass.name
+                  purchaseInfo.creditClass.standard &&
+                  purchaseInfo.creditClass.name
                     ? purchaseInfo.creditClass.name
                     : formatStandardInfo(purchaseInfo.creditClass)
                 }
@@ -306,7 +325,10 @@ export default function ProjectCard({
                 info={formatStandardInfo(purchaseInfo.standard)}
               />
               {purchaseInfo.projectType && (
-                <PurchaseDetails title="project type" info={purchaseInfo.projectType} />
+                <PurchaseDetails
+                  title="project type"
+                  info={purchaseInfo.projectType}
+                />
               )}
               {additionalCertifications && (
                 <PurchaseDetails

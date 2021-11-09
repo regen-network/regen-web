@@ -62,14 +62,20 @@ const GreenTopIconCard: React.FC<Props> = props => {
   return (
     <Card className={clsx(classes.root, props.className)}>
       <div className={classes.imgWrap}>
-        <img className={classes.img} src={props.imgSrc} alt={props.description} />
+        <img
+          className={classes.img}
+          src={props.imgSrc}
+          alt={props.description}
+        />
       </div>
 
       <Grid container direction="column" className={classes.main}>
         <Typography variant="h1" className={classes.title}>
           {props.title}
         </Typography>
-        <Typography className={classes.description}>{props.description}</Typography>
+        <Typography className={classes.description}>
+          {props.description}
+        </Typography>
         <div className={classes.btnWrap}>
           <OutlinedButton
             className={classes.btn}

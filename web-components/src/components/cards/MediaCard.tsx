@@ -61,16 +61,21 @@ const useStyles = makeStyles((theme: Theme) => ({
     bottom: 0,
     width: '100%',
     borderRadius: '9px 9px 0px 0px',
-    background: 'linear-gradient(180.28deg, rgba(0, 0, 0, 0) 65.91%, rgba(0, 0, 0, 0.6) 99.59%)',
+    background:
+      'linear-gradient(180.28deg, rgba(0, 0, 0, 0) 65.91%, rgba(0, 0, 0, 0.6) 99.59%)',
   },
   title: {
     lineHeight: '150%',
     borderTop: `1px solid ${theme.palette.grey[100]}`,
     [theme.breakpoints.up('sm')]: {
-      padding: `${theme.spacing(4.5)} ${theme.spacing(5.25)} ${theme.spacing(0.8)}`,
+      padding: `${theme.spacing(4.5)} ${theme.spacing(5.25)} ${theme.spacing(
+        0.8,
+      )}`,
     },
     [theme.breakpoints.down('xs')]: {
-      padding: `${theme.spacing(4)} ${theme.spacing(4.5)} ${theme.spacing(0.8)}`,
+      padding: `${theme.spacing(4)} ${theme.spacing(4.5)} ${theme.spacing(
+        0.8,
+      )}`,
     },
     overflow: 'hidden',
     display: '-webkit-box',
@@ -122,7 +127,12 @@ export default function MediaCard({
     </Image>
   );
 
-  const media = <CardMedia className={cx(imageClassName, classes.image)} component={optimizedImage} />;
+  const media = (
+    <CardMedia
+      className={cx(imageClassName, classes.image)}
+      component={optimizedImage}
+    />
+  );
 
   return (
     <Card
@@ -143,7 +153,9 @@ export default function MediaCard({
       {name && (
         <Title
           className={
-            titleVariant === 'h4' && titleOverwrite ? cx(classes.h4title, classes.title) : classes.title
+            titleVariant === 'h4' && titleOverwrite
+              ? cx(classes.h4title, classes.title)
+              : classes.title
           }
           variant={titleVariant}
         >

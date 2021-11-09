@@ -21,7 +21,9 @@ interface OrganizationModalProps {
   organization?: OrganizationFormValues;
   onClose: () => void;
   onSubmit: (organization: OrganizationFormValues) => void;
-  validate: (values: OrganizationFormValues) => Promise<FormikErrors<OrganizationFormValues>>;
+  validate: (
+    values: OrganizationFormValues,
+  ) => Promise<FormikErrors<OrganizationFormValues>>;
   mapboxToken: string;
 }
 
@@ -117,7 +119,9 @@ function OrganizationModal({
   mapboxToken,
 }: OrganizationModalProps): JSX.Element {
   const styles = useStyles();
-  const [organizationEdit, setOrganizationEdit] = useState<OrganizationFormValues | undefined>(organization);
+  const [organizationEdit, setOrganizationEdit] = useState<
+    OrganizationFormValues | undefined
+  >(organization);
 
   useEffect(() => {
     setOrganizationEdit(organization);
@@ -127,7 +131,9 @@ function OrganizationModal({
     <Modal open={!!organizationEdit} onClose={onClose}>
       <div className={styles.root}>
         <Title variant="h4" align="center" className={styles.title}>
-          {`${organizationEdit && organizationEdit.id ? 'Edit' : 'Add'} Organization`}
+          {`${
+            organizationEdit && organizationEdit.id ? 'Edit' : 'Add'
+          } Organization`}
         </Title>
         <Formik
           enableReinitialize
@@ -136,7 +142,8 @@ function OrganizationModal({
             ...organizationEdit,
             '@type': 'http://regen.network/Organization',
             'http://regen.network/sharePermission':
-              organizationEdit && !!organizationEdit['http://regen.network/sharePermission'],
+              organizationEdit &&
+              !!organizationEdit['http://regen.network/sharePermission'],
           }}
           validate={validate}
           onSubmit={async (values, { setSubmitting }) => {
@@ -198,7 +205,8 @@ function OrganizationModal({
                     name="['http://regen.network/sharePermission']"
                     label={
                       <Description className={styles.checkboxLabel}>
-                        I have this organization’s permission to share their information with Regen Registry
+                        I have this organization’s permission to share their
+                        information with Regen Registry
                       </Description>
                     }
                   />

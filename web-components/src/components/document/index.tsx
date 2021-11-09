@@ -31,12 +31,21 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function Document({ name, info, link }: DocumentInfo): JSX.Element {
+export default function Document({
+  name,
+  info,
+  link,
+}: DocumentInfo): JSX.Element {
   const classes = useStyles();
   return (
     <div className={classes.root}>
       <span>{name} </span>
-      <a className={classes.link} href={link} target="_blank" rel="noopener noreferrer">
+      <a
+        className={classes.link}
+        href={link}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         View {info} »
       </a>
     </div>

@@ -115,7 +115,10 @@ export default function GlanceCard({
         <Grid xs={12} sm={5} item>
           <div className={classes.mapWrapper}>
             {geojson && isGISFile ? (
-              <StaticMap geojson={geojson} token={process.env.REACT_APP_MAPBOX_TOKEN} />
+              <StaticMap
+                geojson={geojson}
+                token={process.env.REACT_APP_MAPBOX_TOKEN}
+              />
             ) : (
               imgSrc && (
                 <Image

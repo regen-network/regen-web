@@ -44,7 +44,7 @@ const CaseStudy = ({ data, location }: Props): JSX.Element => {
 };
 
 export const query = graphql`
-  query($slug: String!) {
+  query ($slug: String!) {
     allCaseStudyItemsYaml(filter: { slug: { eq: $slug } }) {
       nodes {
         id

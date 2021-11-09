@@ -1,5 +1,11 @@
 import React from 'react';
-import { makeStyles, Theme, MenuList, useTheme, useMediaQuery } from '@material-ui/core';
+import {
+  makeStyles,
+  Theme,
+  MenuList,
+  useTheme,
+  useMediaQuery,
+} from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import cx from 'clsx';
@@ -57,7 +63,9 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => {
     },
     borderBottom: props => ({
       [theme.breakpoints.up('sm')]: {
-        borderBottom: props.borderBottom ? `1px ${theme.palette.grey[100]} solid` : 'none',
+        borderBottom: props.borderBottom
+          ? `1px ${theme.palette.grey[100]} solid`
+          : 'none',
       },
       [theme.breakpoints.down('xs')]: {
         borderBottom: `1px ${theme.palette.grey[100]} solid`,
@@ -162,7 +170,11 @@ export default function Header({
           <Button variant="text" className={styles.loginBtn} onClick={onLogin}>
             Login
           </Button>
-          <ContainedButton size="small" className={styles.signUpBtn} onClick={onSignup}>
+          <ContainedButton
+            size="small"
+            className={styles.signUpBtn}
+            onClick={onSignup}
+          >
             Sign Up
           </ContainedButton>
         </Box>
@@ -181,7 +193,9 @@ export default function Header({
     >
       <Container disableGutters maxWidth={fullWidth ? false : 'xl'}>
         <Box className={styles.header} px={[4, 5, 6]}>
-          <HomeLink color={isTablet ? theme.palette.primary.contrastText : color} />
+          <HomeLink
+            color={isTablet ? theme.palette.primary.contrastText : color}
+          />
           <Box display={{ xs: 'none', md: 'block' }}>
             <MenuList className={styles.menuList}>
               {menuItems?.map((item, index) => {

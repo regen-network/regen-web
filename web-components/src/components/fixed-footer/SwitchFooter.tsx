@@ -149,13 +149,19 @@ const SwitchFooter: React.FC<SwitchFooterProps> = ({
           {label && <span className={styles.label}>{label}</span>}
           <div className={styles.toggleContainer}>
             <div
-              className={clsx(styles.option, activeOption === leftOption ? styles.active : styles.inactive)}
+              className={clsx(
+                styles.option,
+                activeOption === leftOption ? styles.active : styles.inactive,
+              )}
               onClick={onToggleClick}
             >
               {leftOption}
             </div>
             <div
-              className={clsx(styles.option, activeOption === rightOption ? styles.active : styles.inactive)}
+              className={clsx(
+                styles.option,
+                activeOption === rightOption ? styles.active : styles.inactive,
+              )}
               onClick={onToggleClick}
             >
               {rightOption}

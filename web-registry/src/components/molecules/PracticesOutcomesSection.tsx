@@ -58,15 +58,22 @@ const PracticesOutcomesSection: React.FC<Props> = ({ content }) => {
 
   const practiceItems: ImageItemProps[] =
     practices?.map(i => ({
-      img: <img src={i?.icon?.asset?.url || ''} alt={`${i?.icon?.asset?.label}`} />,
+      img: (
+        <img src={i?.icon?.asset?.url || ''} alt={`${i?.icon?.asset?.label}`} />
+      ),
       title: i?.title || '',
       description: i?.descriptionRaw[0]?.children[0]?.text,
     })) || [];
 
-  const outcomeCards = outcomes?.map(outcome => <WrappedImpactCard outcome={outcome} />) || [];
+  const outcomeCards =
+    outcomes?.map(outcome => <WrappedImpactCard outcome={outcome} />) || [];
 
   return (
-    <Section withSlider classes={{ root: classes.root, title: classes.title }} title={title || ''}>
+    <Section
+      withSlider
+      classes={{ root: classes.root, title: classes.title }}
+      title={title || ''}
+    >
       <ImageItems
         className={classes.slider}
         title="Land Management Practices"

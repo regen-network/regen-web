@@ -62,13 +62,24 @@ export default function Timeline({
           // Use completedItemIndex if available to color past timeline items
           if (completedItemIndex || completedItemIndex === 0) {
             circleColor =
-              index <= completedItemIndex ? theme.palette.secondary.main : theme.palette.info.main;
-            barColor = index < completedItemIndex ? theme.palette.secondary.main : theme.palette.info.main;
+              index <= completedItemIndex
+                ? theme.palette.secondary.main
+                : theme.palette.info.main;
+            barColor =
+              index < completedItemIndex
+                ? theme.palette.secondary.main
+                : theme.palette.info.main;
           } else {
             // else we should provide valid dates for events so we can compare them with present date
             const eventDate = new Date(event.date);
-            circleColor = eventDate <= new Date() ? theme.palette.secondary.main : theme.palette.info.main;
-            if (index + 1 < events.length && new Date() < new Date(events[index + 1].date)) {
+            circleColor =
+              eventDate <= new Date()
+                ? theme.palette.secondary.main
+                : theme.palette.info.main;
+            if (
+              index + 1 < events.length &&
+              new Date() < new Date(events[index + 1].date)
+            ) {
               barColor = theme.palette.info.main;
             } else {
               barColor = circleColor;

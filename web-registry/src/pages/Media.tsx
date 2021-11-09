@@ -6,7 +6,10 @@ import { useParams } from 'react-router-dom';
 import Description from 'web-components/lib/components/description';
 import { OnboardingFormTemplate } from '../components/templates';
 import { MediaForm, MediaValues } from '../components/organisms';
-import { useProjectByIdQuery, useUpdateProjectByIdMutation } from '../generated/graphql';
+import {
+  useProjectByIdQuery,
+  useUpdateProjectByIdMutation,
+} from '../generated/graphql';
 
 const exampleProjectUrl = '/projects/wilmot';
 
@@ -31,10 +34,14 @@ const Media: React.FC = () => {
   if (data?.projectById?.metadata) {
     const metadata = data.projectById.metadata;
     initialFieldValues = {
-      'http://regen.network/previewPhoto': metadata['http://regen.network/previewPhoto'],
-      'http://regen.network/galleryPhotos': metadata['http://regen.network/galleryPhotos'],
-      'http://regen.network/landStewardPhoto': metadata['http://regen.network/landStewardPhoto'],
-      'http://regen.network/videoURL': metadata['http://regen.network/videoURL'],
+      'http://regen.network/previewPhoto':
+        metadata['http://regen.network/previewPhoto'],
+      'http://regen.network/galleryPhotos':
+        metadata['http://regen.network/galleryPhotos'],
+      'http://regen.network/landStewardPhoto':
+        metadata['http://regen.network/landStewardPhoto'],
+      'http://regen.network/videoURL':
+        metadata['http://regen.network/videoURL'],
     };
   }
 
@@ -65,7 +72,11 @@ const Media: React.FC = () => {
   }
 
   return (
-    <OnboardingFormTemplate activeStep={activeStep} title="Media" saveAndExit={saveAndExit}>
+    <OnboardingFormTemplate
+      activeStep={activeStep}
+      title="Media"
+      saveAndExit={saveAndExit}
+    >
       <Description className={styles.description}>
         See an example{' '}
         <Link to={exampleProjectUrl} target="_blank">

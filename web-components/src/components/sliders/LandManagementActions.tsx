@@ -19,7 +19,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   item: {
     [theme.breakpoints.up('sm')]: {
-      padding: `${theme.spacing(3.5)} ${theme.spacing(2.5)} ${theme.spacing(2.5)}`,
+      padding: `${theme.spacing(3.5)} ${theme.spacing(2.5)} ${theme.spacing(
+        2.5,
+      )}`,
     },
   },
   buttons: {
@@ -34,7 +36,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function LandManagementActions({ actions }: LandManagementActionsProps): JSX.Element {
+export default function LandManagementActions({
+  actions,
+}: LandManagementActionsProps): JSX.Element {
   const classes = useStyles({});
   const theme: Theme = useTheme();
   const slides: number = useMediaQuery(theme.breakpoints.up('sm')) ? 3 : 1;
@@ -66,7 +70,11 @@ export default function LandManagementActions({ actions }: LandManagementActions
       <Slider {...settings} ref={slider} className={classes.root}>
         {actions.map((action, index) => (
           <div className={classes.item} key={index}>
-            <Action name={action.name} description={action.description} imgSrc={action.imgSrc} />
+            <Action
+              name={action.name}
+              description={action.description}
+              imgSrc={action.imgSrc}
+            />
           </div>
         ))}
       </Slider>

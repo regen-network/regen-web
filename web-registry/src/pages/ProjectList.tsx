@@ -6,7 +6,10 @@ import { useHistory } from 'react-router-dom';
 
 import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
 import CreateProjectCard from 'web-components/lib/components/cards/CreateProjectCard';
-import { useCreateProjectMutation, useGetUserProfileByEmailQuery } from '../generated/graphql';
+import {
+  useCreateProjectMutation,
+  useGetUserProfileByEmailQuery,
+} from '../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
   subtitle: {
@@ -75,9 +78,14 @@ const ProjectList: React.FC = () => {
   }
 
   return (
-    <OnBoardingSection formContainer title={isFirstProject ? 'Create a Project' : 'Projects'}>
+    <OnBoardingSection
+      formContainer
+      title={isFirstProject ? 'Create a Project' : 'Projects'}
+    >
       {isFirstProject && (
-        <Typography className={classes.subtitle}>Get started with your first project.</Typography>
+        <Typography className={classes.subtitle}>
+          Get started with your first project.
+        </Typography>
       )}
       <div className={classes.cards}>
         {/* TODO: Existing Projects. see regen-network/regen-registry#360 */}

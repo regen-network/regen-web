@@ -26,7 +26,13 @@ const useStyles = makeStyles((theme: Theme) => ({
 const StepCircleBadge: React.FC<Props> = ({ className, icon, isActive }) => {
   const classes = useStyles();
 
-  return <div className={clsx(className, classes.circle, isActive && classes.active)}>{icon}</div>;
+  return (
+    <div
+      className={clsx(className, classes.circle, isActive && classes.active)}
+    >
+      {icon}
+    </div>
+  );
 };
 
 export default StepCircleBadge;

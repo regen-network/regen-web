@@ -105,7 +105,10 @@ const TwoImageSection: React.FC<Props> = ({ content }) => {
         </Title>
       </div>
       <Grid item xs={12} sm={6}>
-        <Image backgroundImage src={content?.left?.image?.image?.asset?.url || ''}>
+        <Image
+          backgroundImage
+          src={content?.left?.image?.image?.asset?.url || ''}
+        >
           <div className={classes.item}>
             <Title className={classes.amount}>{content?.left?.boldText}</Title>
             <div className={classes.labelContainer}>
@@ -115,7 +118,10 @@ const TwoImageSection: React.FC<Props> = ({ content }) => {
         </Image>
       </Grid>
       <Grid item xs={12} sm={6}>
-        <Image backgroundImage src={content?.right?.image?.image?.asset?.url || ''}>
+        <Image
+          backgroundImage
+          src={content?.right?.image?.image?.asset?.url || ''}
+        >
           <div className={classes.item}>
             <Title className={classes.amount}>{content?.right?.boldText}</Title>
             <div className={classes.labelContainer}>

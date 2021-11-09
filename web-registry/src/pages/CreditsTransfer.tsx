@@ -67,12 +67,17 @@ const CreditsTransfer: React.FC<{
   addressId?: string;
   buyerWalletId?: string;
   onTransfer?: (vintageId: string) => void;
-}> = ({ onTransfer, addressId: passedAddressId, buyerWalletId: passedBuyerWalletId = '' }) => {
+}> = ({
+  onTransfer,
+  addressId: passedAddressId,
+  buyerWalletId: passedBuyerWalletId = '',
+}) => {
   const styles = useStyles();
 
-  const [transferCredits, { data, loading, error }] = useTransferCreditsMutation({
-    errorPolicy: 'ignore',
-  });
+  const [transferCredits, { data, loading, error }] =
+    useTransferCreditsMutation({
+      errorPolicy: 'ignore',
+    });
   const {
     data: vintagesData,
     loading: vintagesLoading,
@@ -82,11 +87,19 @@ const CreditsTransfer: React.FC<{
     errorPolicy: 'ignore',
   });
 
-  const { data: partiesData, loading: partiesLoading, error: partiesError } = useAllPartiesQuery({
+  const {
+    data: partiesData,
+    loading: partiesLoading,
+    error: partiesError,
+  } = useAllPartiesQuery({
     errorPolicy: 'ignore',
   });
 
-  const dateFormat = new Intl.DateTimeFormat('en', { year: 'numeric', month: 'numeric', day: '2-digit' });
+  const dateFormat = new Intl.DateTimeFormat('en', {
+    year: 'numeric',
+    month: 'numeric',
+    day: '2-digit',
+  });
 
   const [vintageId, setVintageId] = useState('');
   const [oldBalances, setOldBalances] = useState<Balance[]>([]);
@@ -98,26 +111,33 @@ const CreditsTransfer: React.FC<{
   const [creditPrice, setCreditPrice] = useState(1);
   const [showResult, setShowResult] = useState(false);
 
-  const { data: availableCreditsData, refetch: refetchAvailableCredits } = useGetAvailableCreditsQuery({
-    errorPolicy: 'ignore',
-    variables: { vintageId },
-  });
+  const { data: availableCreditsData, refetch: refetchAvailableCredits } =
+    useGetAvailableCreditsQuery({
+      errorPolicy: 'ignore',
+      variables: { vintageId },
+    });
 
-  const handleVintageChange = (event: React.ChangeEvent<{ value: unknown }>): void => {
+  const handleVintageChange = (
+    event: React.ChangeEvent<{ value: unknown }>,
+  ): void => {
     if (showResult) {
       setShowResult(false);
     }
     const vintageId = event.target.value as string;
     setVintageId(vintageId);
     refetchAvailableCredits({ vintageId });
-    const vintages = vintagesData?.allCreditVintages?.nodes?.find(node => node?.id === event.target.value);
+    const vintages = vintagesData?.allCreditVintages?.nodes?.find(
+      node => node?.id === event.target.value,
+    );
     const balances = vintages?.accountBalancesByCreditVintageId?.nodes;
     if (balances && balances.length > 0) {
       setOldBalances(balances as Balance[]);
     }
   };
 
-  const handleBuyerWalletChange = (event: React.ChangeEvent<{ value: any }>): void => {
+  const handleBuyerWalletChange = (
+    event: React.ChangeEvent<{ value: any }>,
+  ): void => {
     if (showResult) {
       setShowResult(false);
     }
@@ -130,14 +150,18 @@ const CreditsTransfer: React.FC<{
     }
   };
 
-  const handlePartyIdChange = (event: React.ChangeEvent<{ value: any }>): void => {
+  const handlePartyIdChange = (
+    event: React.ChangeEvent<{ value: any }>,
+  ): void => {
     if (showResult) {
       setShowResult(false);
     }
     setPartyId(event.target.value as string);
   };
 
-  const handleUserIdChange = (event: React.ChangeEvent<{ value: any }>): void => {
+  const handleUserIdChange = (
+    event: React.ChangeEvent<{ value: any }>,
+  ): void => {
     if (showResult) {
       setShowResult(false);
     }
@@ -152,8 +176,16 @@ const CreditsTransfer: React.FC<{
   let sendersBalances: Result[] = [];
   let receiverBalance: Result | undefined;
   let vintage: any;
-  if (partiesData && partiesData.allParties && vintagesData && vintagesData.allCreditVintages && vintageId) {
-    vintage = vintagesData.allCreditVintages.nodes.find((node: any) => node.id === vintageId);
+  if (
+    partiesData &&
+    partiesData.allParties &&
+    vintagesData &&
+    vintagesData.allCreditVintages &&
+    vintageId
+  ) {
+    vintage = vintagesData.allCreditVintages.nodes.find(
+      (node: any) => node.id === vintageId,
+    );
     newBalances = vintage.accountBalancesByCreditVintageId.nodes;
 
     // TODO: type coersion below shouldn't be necessary, but there's some discrepency between our
@@ -163,14 +195,20 @@ const CreditsTransfer: React.FC<{
     const findOldBalance = (i: number): Balance | undefined =>
       oldBalances.find(oldBalance => oldBalance.id === newBalances[i].id);
     const findParty = (i: number): Party | undefined =>
-      partiesData?.allParties?.nodes.find(party => party?.walletId === newBalances[i].walletId) as Party;
+      partiesData?.allParties?.nodes.find(
+        party => party?.walletId === newBalances[i].walletId,
+      ) as Party;
 
     // Build response list of senders/buyer old/new balance
     for (var i: number = 0; i < newBalances.length; i++) {
       const oldBalance = findOldBalance(i);
       const party = findParty(i);
       if (party) {
-        if (oldBalance && parseFloat(oldBalance.liquidBalance) > parseFloat(newBalances[i].liquidBalance)) {
+        if (
+          oldBalance &&
+          parseFloat(oldBalance.liquidBalance) >
+            parseFloat(newBalances[i].liquidBalance)
+        ) {
           // sender
           sendersBalances.push({
             walletId: party.walletId,
@@ -183,7 +221,10 @@ const CreditsTransfer: React.FC<{
           receiverBalance = {
             walletId: party.walletId,
             name: party.name,
-            oldBalance: oldBalance && oldBalance.liquidBalance ? oldBalance.liquidBalance : '0',
+            oldBalance:
+              oldBalance && oldBalance.liquidBalance
+                ? oldBalance.liquidBalance
+                : '0',
             newBalance: newBalances[i].liquidBalance,
           };
         }
@@ -198,7 +239,9 @@ const CreditsTransfer: React.FC<{
         className={styles.form}
         onSubmit={async e => {
           e.preventDefault();
-          const confirmAlert = window.confirm('Are you sure you want to transfer credits?');
+          const confirmAlert = window.confirm(
+            'Are you sure you want to transfer credits?',
+          );
           if (confirmAlert) {
             try {
               await transferCredits({
@@ -222,7 +265,9 @@ const CreditsTransfer: React.FC<{
                 onTransfer(vintageId);
               }
               setShowResult(true);
-              const vintage = vintagesData?.allCreditVintages?.nodes?.find(node => node?.id === vintageId);
+              const vintage = vintagesData?.allCreditVintages?.nodes?.find(
+                node => node?.id === vintageId,
+              );
               const balances = vintage?.accountBalancesByCreditVintageId?.nodes;
               if (balances) {
                 setOldBalances(balances as Balance[]);
@@ -251,7 +296,12 @@ const CreditsTransfer: React.FC<{
                 vintagesData.allCreditVintages &&
                 vintagesData.allCreditVintages.nodes.map((node: any) => (
                   <MenuItem key={node.id} value={node.id}>
-                    {node.projectByProjectId.metadata?.['http://schema.org/name']} - {dateFormat.format(new Date(node.createdAt))}
+                    {
+                      node.projectByProjectId.metadata?.[
+                        'http://schema.org/name'
+                      ]
+                    }{' '}
+                    - {dateFormat.format(new Date(node.createdAt))}
                   </MenuItem>
                 ))}
             </Select>
@@ -278,7 +328,8 @@ const CreditsTransfer: React.FC<{
                         (vintage &&
                           vintage.projectByProjectId.developerId !== node.id &&
                           vintage.projectByProjectId.stewardId !== node.id &&
-                          vintage.projectByProjectId.landOwnerId !== node.id)) && (
+                          vintage.projectByProjectId.landOwnerId !==
+                            node.id)) && (
                         <MenuItem key={node.id} value={node.walletId}>
                           {node.name} ({node.type.toLowerCase()}){' '}
                         </MenuItem>
@@ -308,7 +359,8 @@ const CreditsTransfer: React.FC<{
                       (vintage &&
                         vintage.projectByProjectId.developerId !== node.id &&
                         vintage.projectByProjectId.stewardId !== node.id &&
-                        vintage.projectByProjectId.landOwnerId !== node.id)) && (
+                        vintage.projectByProjectId.landOwnerId !==
+                          node.id)) && (
                       <MenuItem key={node.id} value={node.id}>
                         {node.name}
                       </MenuItem>
@@ -337,7 +389,8 @@ const CreditsTransfer: React.FC<{
                       (vintage &&
                         vintage.projectByProjectId.developerId !== node.id &&
                         vintage.projectByProjectId.stewardId !== node.id &&
-                        vintage.projectByProjectId.landOwnerId !== node.id)) && (
+                        vintage.projectByProjectId.landOwnerId !==
+                          node.id)) && (
                       <MenuItem key={node.id} value={node.userByPartyId.id}>
                         {node.name}
                       </MenuItem>
@@ -377,36 +430,59 @@ const CreditsTransfer: React.FC<{
         </Box>
       </form>
       {loading && <div>Loading...</div>}
-      {vintage && vintage.projectByProjectId && vintage.projectByProjectId.partyByLandOwnerId && (
-        <div>Project land owner: {vintage.projectByProjectId.partyByLandOwnerId.name}</div>
-      )}
-      {vintage && vintage.initialDistribution && vintage.projectByProjectId && !passedBuyerWalletId && (
-        <div>
-          Ownership breakdown (%):
-          <ul>
-            {vintage.projectByProjectId.partyByLandOwnerId && (
-              <li>
-                Land Owner ({vintage.projectByProjectId.partyByLandOwnerId.name}):{' '}
-                {100 * vintage.initialDistribution['http://regen.network/landOwnerDistribution'] || 0}
-              </li>
-            )}
-            {vintage.projectByProjectId.partyByDeveloperId && (
-              <li>
-                Project Developer ({vintage.projectByProjectId.partyByDeveloperId.name}):{' '}
-                {100 * vintage.initialDistribution['http://regen.network/projectDeveloperDistribution'] || 0}
-              </li>
-            )}
-            {vintage.projectByProjectId.partyByStewardId && (
-              <li>
-                Land Steward ({vintage.projectByProjectId.partyByStewardId.name}):{' '}
-                {100 * vintage.initialDistribution['http://regen.network/landStewardDistribution'] || 0}
-              </li>
-            )}
-          </ul>
-        </div>
-      )}
+      {vintage &&
+        vintage.projectByProjectId &&
+        vintage.projectByProjectId.partyByLandOwnerId && (
+          <div>
+            Project land owner:{' '}
+            {vintage.projectByProjectId.partyByLandOwnerId.name}
+          </div>
+        )}
+      {vintage &&
+        vintage.initialDistribution &&
+        vintage.projectByProjectId &&
+        !passedBuyerWalletId && (
+          <div>
+            Ownership breakdown (%):
+            <ul>
+              {vintage.projectByProjectId.partyByLandOwnerId && (
+                <li>
+                  Land Owner (
+                  {vintage.projectByProjectId.partyByLandOwnerId.name}):{' '}
+                  {100 *
+                    vintage.initialDistribution[
+                      'http://regen.network/landOwnerDistribution'
+                    ] || 0}
+                </li>
+              )}
+              {vintage.projectByProjectId.partyByDeveloperId && (
+                <li>
+                  Project Developer (
+                  {vintage.projectByProjectId.partyByDeveloperId.name}):{' '}
+                  {100 *
+                    vintage.initialDistribution[
+                      'http://regen.network/projectDeveloperDistribution'
+                    ] || 0}
+                </li>
+              )}
+              {vintage.projectByProjectId.partyByStewardId && (
+                <li>
+                  Land Steward (
+                  {vintage.projectByProjectId.partyByStewardId.name}):{' '}
+                  {100 *
+                    vintage.initialDistribution[
+                      'http://regen.network/landStewardDistribution'
+                    ] || 0}
+                </li>
+              )}
+            </ul>
+          </div>
+        )}
       {availableCreditsData && availableCreditsData.getAvailableCredits && (
-        <div>Available credits to transfer: {availableCreditsData.getAvailableCredits}</div>
+        <div>
+          Available credits to transfer:{' '}
+          {availableCreditsData.getAvailableCredits}
+        </div>
       )}
       {data && data.transferCredits && receiverBalance && showResult && (
         <div>
@@ -452,8 +528,12 @@ const CreditsTransfer: React.FC<{
                 <TableRow key={receiverBalance.name}>
                   <TableCell scope="row">{receiverBalance.name}</TableCell>
                   <TableCell>{receiverBalance.walletId}</TableCell>
-                  <TableCell align="right">{receiverBalance.oldBalance}</TableCell>
-                  <TableCell align="right">{receiverBalance.newBalance}</TableCell>
+                  <TableCell align="right">
+                    {receiverBalance.oldBalance}
+                  </TableCell>
+                  <TableCell align="right">
+                    {receiverBalance.newBalance}
+                  </TableCell>
                 </TableRow>
               </TableBody>
             </Table>

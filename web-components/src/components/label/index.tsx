@@ -19,7 +19,9 @@ const useStyles = makeStyles((theme: Theme) => ({
 function Label({ children, className }: LabelProps): JSX.Element {
   const styles = useStyles();
 
-  return <Typography className={cx(styles.root, className)}>{children}</Typography>;
+  return (
+    <Typography className={cx(styles.root, className)}>{children}</Typography>
+  );
 }
 
 export { Label };

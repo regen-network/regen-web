@@ -20,7 +20,10 @@ const useStyles = makeStyles<Theme, StyleProps>(theme => ({
   }),
 }));
 
-export default function DecentralizeIcon({ height, width }: DecentralizeIconProps): JSX.Element {
+export default function DecentralizeIcon({
+  height,
+  width,
+}: DecentralizeIconProps): JSX.Element {
   const classes = useStyles({ height, width });
 
   return (

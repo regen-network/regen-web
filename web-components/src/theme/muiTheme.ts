@@ -128,7 +128,9 @@ const theme = createMuiTheme({
       fontSize: '0.875rem',
     },
     overline: {
-      fontFamily: ['PT Mono', '"Lato"', '-apple-system', 'sans-serif'].join(','),
+      fontFamily: ['PT Mono', '"Lato"', '-apple-system', 'sans-serif'].join(
+        ',',
+      ),
     },
   },
   breakpoints: defaultTheme.breakpoints,

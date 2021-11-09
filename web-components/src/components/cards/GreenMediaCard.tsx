@@ -30,7 +30,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function GreenMediaCard({ className, imageUrl, link }: GreenMediaCardProps): JSX.Element {
+export default function GreenMediaCard({
+  className,
+  imageUrl,
+  link,
+}: GreenMediaCardProps): JSX.Element {
   const classes = useStyles();
 
   return (

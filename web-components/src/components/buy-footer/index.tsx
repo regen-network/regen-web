@@ -96,7 +96,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function BuyFooter({ creditPrice, href, onClick }: BuyFooterProps): JSX.Element {
+export default function BuyFooter({
+  creditPrice,
+  href,
+  onClick,
+}: BuyFooterProps): JSX.Element {
   const classes = useStyles({});
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up('sm'));
@@ -119,7 +123,9 @@ export default function BuyFooter({ creditPrice, href, onClick }: BuyFooterProps
                   minimumFractionDigits: 2,
                 }).format(creditPrice.unitPrice)}
               </span>
-              <span className={classes.creditsText}>/credit {creditPrice.currency}</span>
+              <span className={classes.creditsText}>
+                /credit {creditPrice.currency}
+              </span>
             </Typography>
           </Grid>
         )}

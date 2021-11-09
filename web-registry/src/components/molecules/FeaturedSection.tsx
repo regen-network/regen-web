@@ -78,9 +78,19 @@ interface Props {
 const FeaturedSection: React.FC<Props> = ({ content }) => {
   const styles = useStyles();
 
-  if (content?.header && content.titleRaw && content.descriptionRaw && content.button && content.image) {
+  if (
+    content?.header &&
+    content.titleRaw &&
+    content.descriptionRaw &&
+    content.button &&
+    content.image
+  ) {
     return (
-      <Section className={styles.root} title={content.header} titleVariant="subtitle2">
+      <Section
+        className={styles.root}
+        title={content.header}
+        titleVariant="subtitle2"
+      >
         <div className={styles.card}>
           <GreenCard>
             <Grid className={styles.grid} container wrap="nowrap">
@@ -99,7 +109,10 @@ const FeaturedSection: React.FC<Props> = ({ content }) => {
                 </ContainedButton>
               </Grid>
               <Grid item xs={12}>
-                <Image src={content.image?.image?.asset?.url || ''} alt={content.image?.imageAlt || ''} />
+                <Image
+                  src={content.image?.image?.asset?.url || ''}
+                  alt={content.image?.imageAlt || ''}
+                />
               </Grid>
             </Grid>
           </GreenCard>

@@ -75,14 +75,22 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-function MethodologyTopSection({ methodology, nameRaw, descriptionRaw }: Props): JSX.Element {
+function MethodologyTopSection({
+  methodology,
+  nameRaw,
+  descriptionRaw,
+}: Props): JSX.Element {
   const styles = useStyles();
 
   return (
     <div className={styles.top}>
       <div className={styles.content}>
         <div className={styles.imageContainer}>
-          <OptimizedImage className={styles.image} src={methodology.imageSrc} alt={methodology.id} />
+          <OptimizedImage
+            className={styles.image}
+            src={methodology.imageSrc}
+            alt={methodology.id}
+          />
         </div>
         <div className={styles.text}>
           <Title variant="h1">

@@ -28,7 +28,10 @@ function getScoreLabel(score: number): string {
   return `Password strength: ${scores[score]}`;
 }
 
-export default function PasswordField({ signup = false, ...props }: PasswordFieldProps): JSX.Element {
+export default function PasswordField({
+  signup = false,
+  ...props
+}: PasswordFieldProps): JSX.Element {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up('sm'));
   const classes = useStyles();
@@ -44,7 +47,9 @@ export default function PasswordField({ signup = false, ...props }: PasswordFiel
     field: { name, value },
   } = props;
 
-  const handleMouseDownPassword = (event: React.MouseEvent<HTMLElement>): void => {
+  const handleMouseDownPassword = (
+    event: React.MouseEvent<HTMLElement>,
+  ): void => {
     event.preventDefault();
   };
 
@@ -69,7 +74,11 @@ export default function PasswordField({ signup = false, ...props }: PasswordFiel
           onClick={() => setShowPassword(!showPassword)}
           onMouseDown={handleMouseDownPassword}
         >
-          <EyeIcon className={classes.eyeIcon} color={theme.palette.secondary.dark} visible={showPassword} />
+          <EyeIcon
+            className={classes.eyeIcon}
+            color={theme.palette.secondary.dark}
+            visible={showPassword}
+          />
         </IconButton>
       }
       {...props}

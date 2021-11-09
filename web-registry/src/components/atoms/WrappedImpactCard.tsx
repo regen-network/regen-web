@@ -2,7 +2,10 @@ import React from 'react';
 
 import ImpactCard from 'web-components/lib/components/cards/ImpactCard';
 import { BlockContent } from 'web-components/lib/components/block-content';
-import { EcologicalOutcomeFieldsFragment, Maybe } from '../../generated/sanity-graphql';
+import {
+  EcologicalOutcomeFieldsFragment,
+  Maybe,
+} from '../../generated/sanity-graphql';
 import { getSanityImgSrc } from '../../lib/imgSrc';
 
 /**

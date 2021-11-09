@@ -54,7 +54,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function FixedFooter({ children, justify }: FixedFooterProps): JSX.Element {
+export default function FixedFooter({
+  children,
+  justify,
+}: FixedFooterProps): JSX.Element {
   const classes = useStyles({});
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up('sm'));

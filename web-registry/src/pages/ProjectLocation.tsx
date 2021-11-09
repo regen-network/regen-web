@@ -1,7 +1,10 @@
 import React from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 
-import { ProjectLocationForm, ProjectLocationFormValues } from '../components/organisms';
+import {
+  ProjectLocationForm,
+  ProjectLocationFormValues,
+} from '../components/organisms';
 import { OnboardingFormTemplate } from '../components/templates';
 import {
   useProjectByIdQuery,
@@ -25,7 +28,8 @@ const ProjectLocation: React.FC = () => {
   if (projectData?.projectById?.metadata) {
     const metadata = projectData.projectById.metadata;
     initialFieldValues = {
-      'http://schema.org/location': metadata?.['http://schema.org/location'] || {},
+      'http://schema.org/location':
+        metadata?.['http://schema.org/location'] || {},
     };
   }
 
@@ -89,7 +93,11 @@ const ProjectLocation: React.FC = () => {
   }
 
   return (
-    <OnboardingFormTemplate activeStep={0} title="Location" saveAndExit={saveAndExit}>
+    <OnboardingFormTemplate
+      activeStep={0}
+      title="Location"
+      saveAndExit={saveAndExit}
+    >
       <ProjectLocationForm
         submit={submit}
         saveAndExit={saveAndExit}

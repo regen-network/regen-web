@@ -114,14 +114,23 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function OverviewCard({ className, classes, icon, item }: OverviewCardProps): JSX.Element {
+function OverviewCard({
+  className,
+  classes,
+  icon,
+  item,
+}: OverviewCardProps): JSX.Element {
   const styles = useStyles();
 
   return (
     <Card className={clsx(className, styles.root, classes && classes.root)}>
       <div className={styles.top}>
         <div className={clsx(styles.cardTopThird)} />
-        {icon && <div className={clsx(styles.cardTopThird, styles.iconWrap)}>{icon}</div>}
+        {icon && (
+          <div className={clsx(styles.cardTopThird, styles.iconWrap)}>
+            {icon}
+          </div>
+        )}
         <div className={clsx(styles.cardTopThird, styles.cardTopRight)}>
           {item.tooltip && (
             <InfoTooltip title={item.tooltip || ''} arrow placement="top">

@@ -31,7 +31,8 @@ interface StyleProps {
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   text: props => ({
-    marginLeft: props.size === 'project' ? theme.spacing(3.5) : theme.spacing(4.8),
+    marginLeft:
+      props.size === 'project' ? theme.spacing(3.5) : theme.spacing(4.8),
     textAlign: props.direction === 'column' ? 'center' : 'left',
     alignSelf: 'center',
   }),
@@ -42,7 +43,10 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     [theme.breakpoints.down('xs')]: {
       fontSize: getFontSize(props.size).xs,
     },
-    fontFamily: props.size === 'xl' ? theme.typography.h1.fontFamily : theme.typography.fontFamily,
+    fontFamily:
+      props.size === 'xl'
+        ? theme.typography.h1.fontFamily
+        : theme.typography.fontFamily,
     fontWeight: props.size === 'xl' ? 900 : 'bold',
   }),
   link: {
@@ -92,19 +96,36 @@ export default function UserInfo({
           href={user.link}
           size={size}
           border={border}
-          icon={!user.image && user.type === 'ORGANIZATION' ? <OrganizationIcon /> : icon}
+          icon={
+            !user.image && user.type === 'ORGANIZATION' ? (
+              <OrganizationIcon />
+            ) : (
+              icon
+            )
+          }
         />
       </Grid>
       <Grid item className={classes.text}>
         {user.link ? (
-          <a className={classes.link} href={user.link} target="_blank" rel="noopener noreferrer">
+          <a
+            className={classes.link}
+            href={user.link}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             {name}
           </a>
         ) : (
           name
         )}
-        {user.location && <Typography className={classes.place}>{user.location}</Typography>}
-        {user.description && <Typography className={classes.description}>{user.description}</Typography>}
+        {user.location && (
+          <Typography className={classes.place}>{user.location}</Typography>
+        )}
+        {user.description && (
+          <Typography className={classes.description}>
+            {user.description}
+          </Typography>
+        )}
       </Grid>
     </Grid>
   );

@@ -58,7 +58,11 @@ export const OnboardingSubmit: React.FC<Props> = ({
           {cancelText}
         </ContainedButton>
       )}
-      <ContainedButton onClick={onSubmit} className={classes.button} disabled={disabled}>
+      <ContainedButton
+        onClick={onSubmit}
+        className={classes.button}
+        disabled={disabled}
+      >
         {submitText}
       </ContainedButton>
     </Grid>

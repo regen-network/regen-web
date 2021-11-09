@@ -1,5 +1,11 @@
 import React, { useCallback, useEffect } from 'react';
-import { ApolloClient, InMemoryCache, ApolloProvider, ApolloLink, HttpLink } from '@apollo/client';
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  ApolloLink,
+  HttpLink,
+} from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { useAuth0 } from '@auth0/auth0-react';
 
@@ -9,8 +15,11 @@ interface AuthApolloProviderProps {
   children?: any;
 }
 
-export const AuthApolloProvider = ({ children }: AuthApolloProviderProps): any => {
-  const { user, isLoading, isAuthenticated, getAccessTokenSilently } = useAuth0();
+export const AuthApolloProvider = ({
+  children,
+}: AuthApolloProviderProps): any => {
+  const { user, isLoading, isAuthenticated, getAccessTokenSilently } =
+    useAuth0();
   const apiUri = getApiUri();
 
   const login = useCallback(async (): Promise<void> => {

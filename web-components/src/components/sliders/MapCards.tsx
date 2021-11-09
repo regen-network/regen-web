@@ -29,7 +29,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function MapCards({ features, afterChange }: MapCardsProps): JSX.Element {
+export default function MapCards({
+  features,
+  afterChange,
+}: MapCardsProps): JSX.Element {
   const classes = useStyles({});
   const theme = useTheme();
   const settings = {
@@ -43,7 +46,9 @@ export default function MapCards({ features, afterChange }: MapCardsProps): JSX.
     <div>
       <Slider
         {...settings}
-        afterChange={index => afterChange(features[index] ? features[index].id : null)}
+        afterChange={index =>
+          afterChange(features[index] ? features[index].id : null)
+        }
         className={classes.root}
       >
         {features.map((item, index) => (

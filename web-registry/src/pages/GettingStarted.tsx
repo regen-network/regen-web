@@ -98,7 +98,8 @@ const steps: Step[] = [
     title: 'Review and Submit',
     tagName: 'immediate',
     isActive: true,
-    description: 'Review your project plan to make sure all entries are correct.',
+    description:
+      'Review your project plan to make sure all entries are correct.',
   },
   {
     stepNumber: 3,
@@ -114,7 +115,8 @@ const steps: Step[] = [
     title: 'Create a project page',
     tagName: 'immediate',
     isActive: false,
-    description: 'This marketing page help advertise your project to potential buyers.',
+    description:
+      'This marketing page help advertise your project to potential buyers.',
   },
   {
     stepNumber: 5,
@@ -172,14 +174,38 @@ const GettingStarted: React.FC = () => {
   return (
     <OnBoardingSection formContainer title="Getting Started">
       <div className={classes.content}>
-        <StepCard step={stepsMap['1']} icon={<InterfaceIcon className={classes.interfaceIcon} />} />
-        <StepCard step={stepsMap['2']} icon={<ReviewIcon className={classes.reviewIcon} />} />
-        <StepCard step={stepsMap['3']} icon={<TrustDocumentIcon className={classes.trustDocumentIcon} />} />
-        <StepCard step={stepsMap['4']} icon={<RegistrationIcon className={classes.registrationIcon} />} />
-        <StepCard step={stepsMap['5']} icon={<AccountabilityIcon className={classes.accountabilityIcon} />} />
-        <StepCard step={stepsMap['6']} icon={<FarmerIcon className={classes.farmerIcon} />} />
-        <StepCard step={stepsMap['7']} icon={<TrustIcon className={classes.trustIcon} />} />
-        <StepCard step={stepsMap['8']} icon={<ShadedCreditsIcon className={classes.creditsIcon} />} />
+        <StepCard
+          step={stepsMap['1']}
+          icon={<InterfaceIcon className={classes.interfaceIcon} />}
+        />
+        <StepCard
+          step={stepsMap['2']}
+          icon={<ReviewIcon className={classes.reviewIcon} />}
+        />
+        <StepCard
+          step={stepsMap['3']}
+          icon={<TrustDocumentIcon className={classes.trustDocumentIcon} />}
+        />
+        <StepCard
+          step={stepsMap['4']}
+          icon={<RegistrationIcon className={classes.registrationIcon} />}
+        />
+        <StepCard
+          step={stepsMap['5']}
+          icon={<AccountabilityIcon className={classes.accountabilityIcon} />}
+        />
+        <StepCard
+          step={stepsMap['6']}
+          icon={<FarmerIcon className={classes.farmerIcon} />}
+        />
+        <StepCard
+          step={stepsMap['7']}
+          icon={<TrustIcon className={classes.trustIcon} />}
+        />
+        <StepCard
+          step={stepsMap['8']}
+          icon={<ShadedCreditsIcon className={classes.creditsIcon} />}
+        />
       </div>
     </OnBoardingSection>
   );

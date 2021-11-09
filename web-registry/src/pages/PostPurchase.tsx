@@ -173,7 +173,13 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-function GridItem({ label, value }: { label: string; value: any }): JSX.Element {
+function GridItem({
+  label,
+  value,
+}: {
+  label: string;
+  value: any;
+}): JSX.Element {
   const classes = useStyles();
   return (
     <Grid container alignItems="center" className={classes.gridItem}>
@@ -189,7 +195,8 @@ function GridItem({ label, value }: { label: string; value: any }): JSX.Element 
 
 function PostPurchase(): JSX.Element {
   const classes = useStyles();
-  let { walletId, projectId, name } = useParams<{ walletId: string; projectId: string; name: string }>();
+  let { walletId, projectId, name } =
+    useParams<{ walletId: string; projectId: string; name: string }>();
   const options = { year: 'numeric', month: 'short', day: 'numeric' };
 
   const { data: projectData } = useQuery(PROJECT, {
@@ -207,7 +214,11 @@ function PostPurchase(): JSX.Element {
   const units: number | undefined =
     walletData &&
     walletData.walletById &&
-    sum(walletData.walletById.purchasesByBuyerWalletId.nodes[0].transactionsByPurchaseId.nodes, 'units');
+    sum(
+      walletData.walletById.purchasesByBuyerWalletId.nodes[0]
+        .transactionsByPurchaseId.nodes,
+      'units',
+    );
 
   return (
     <>
@@ -226,53 +237,62 @@ function PostPurchase(): JSX.Element {
             </Description>
           )}
         </div>
-        {projectData && projectData.projectByHandle && walletData && walletData.walletById && (
-          <GreenCard className={classes.card}>
-            <Grid container className={classes.grid}>
-              <Grid item xs={12} md={6}>
-                <Title className={classes.cardTitle} variant="h3">
-                  Order summary
-                </Title>
-                <GridItem
-                  label="credit"
-                  value={ReactHtmlParser(
-                    projectData.projectByHandle.creditClassByCreditClassId.creditClassVersionsById.nodes[0]
-                      .name,
-                  )}
-                />
-                <GridItem label="project" value={<a href={url}>{projectData.projectByHandle.name}</a>} />
-                <GridItem label="# of credits" value={units} />
-                <GridItem
-                  label="total price"
-                  value={`$${new Intl.NumberFormat('en-US', {
-                    minimumFractionDigits: 2,
-                  }).format(
-                    walletData.walletById.purchasesByBuyerWalletId.nodes[0].transactionsByPurchaseId.nodes[0]
-                      .creditPrice * units,
-                  )} USD`}
-                />
-                <GridItem
-                  label="date"
-                  value={new Date(
-                    walletData.walletById.purchasesByBuyerWalletId.nodes[0].createdAt,
-                  ).toLocaleDateString('en-US', options)}
-                />
-                <GridItem label="owner" value={name} />
-                <GridItem
-                  label="transaction id"
-                  value={walletData.walletById.purchasesByBuyerWalletId.nodes[0].id.slice(0, 8)}
-                />
+        {projectData &&
+          projectData.projectByHandle &&
+          walletData &&
+          walletData.walletById && (
+            <GreenCard className={classes.card}>
+              <Grid container className={classes.grid}>
+                <Grid item xs={12} md={6}>
+                  <Title className={classes.cardTitle} variant="h3">
+                    Order summary
+                  </Title>
+                  <GridItem
+                    label="credit"
+                    value={ReactHtmlParser(
+                      projectData.projectByHandle.creditClassByCreditClassId
+                        .creditClassVersionsById.nodes[0].name,
+                    )}
+                  />
+                  <GridItem
+                    label="project"
+                    value={<a href={url}>{projectData.projectByHandle.name}</a>}
+                  />
+                  <GridItem label="# of credits" value={units} />
+                  <GridItem
+                    label="total price"
+                    value={`$${new Intl.NumberFormat('en-US', {
+                      minimumFractionDigits: 2,
+                    }).format(
+                      walletData.walletById.purchasesByBuyerWalletId.nodes[0]
+                        .transactionsByPurchaseId.nodes[0].creditPrice * units,
+                    )} USD`}
+                  />
+                  <GridItem
+                    label="date"
+                    value={new Date(
+                      walletData.walletById.purchasesByBuyerWalletId.nodes[0].createdAt,
+                    ).toLocaleDateString('en-US', options)}
+                  />
+                  <GridItem label="owner" value={name} />
+                  <GridItem
+                    label="transaction id"
+                    value={walletData.walletById.purchasesByBuyerWalletId.nodes[0].id.slice(
+                      0,
+                      8,
+                    )}
+                  />
+                </Grid>
+                <Grid item xs={12} md={6}>
+                  <img
+                    className={classes.image}
+                    alt={projectData.projectByHandle.image}
+                    src={projectData.projectByHandle.image}
+                  />
+                </Grid>
               </Grid>
-              <Grid item xs={12} md={6}>
-                <img
-                  className={classes.image}
-                  alt={projectData.projectByHandle.image}
-                  src={projectData.projectByHandle.image}
-                />
-              </Grid>
-            </Grid>
-          </GreenCard>
-        )}
+            </GreenCard>
+          )}
         {projectData && projectData.projectByHandle && (
           <div className={classes.share}>
             <Title variant="h4" align="center">
@@ -284,12 +304,12 @@ function PostPurchase(): JSX.Element {
             <ShareIcons
               url={url}
               telegramShare={
-                projectData.projectByHandle.creditClassByCreditClassId.creditClassVersionsById.nodes[0]
-                  .metadata.telegramShare
+                projectData.projectByHandle.creditClassByCreditClassId
+                  .creditClassVersionsById.nodes[0].metadata.telegramShare
               }
               twitterShare={
-                projectData.projectByHandle.creditClassByCreditClassId.creditClassVersionsById.nodes[0]
-                  .metadata.twitterShare
+                projectData.projectByHandle.creditClassByCreditClassId
+                  .creditClassVersionsById.nodes[0].metadata.twitterShare
               }
             />
           </div>

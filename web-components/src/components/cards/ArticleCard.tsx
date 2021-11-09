@@ -95,7 +95,13 @@ export default function ArticleCard({
 }: ArticleCardProps): JSX.Element {
   const classes = useStyles({});
   return (
-    <MediaCard className={className} name={name} imgSrc={imgSrc} backgroundGradient={false} elevation={1}>
+    <MediaCard
+      className={className}
+      name={name}
+      imgSrc={imgSrc}
+      backgroundGradient={false}
+      elevation={1}
+    >
       {play && (
         <div className={classes.play}>
           <PlayIcon className={classes.icon} />

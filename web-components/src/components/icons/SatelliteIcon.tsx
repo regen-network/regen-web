@@ -7,7 +7,12 @@ interface IconProps {
 
 export default function SatelliteIcon({ className }: IconProps): JSX.Element {
   return (
-    <SvgIcon className={className} width="146" height="146" viewBox="0 0 146 146">
+    <SvgIcon
+      className={className}
+      width="146"
+      height="146"
+      viewBox="0 0 146 146"
+    >
       <svg fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
           d="M72.5381 86.7956C71.9523 87.3813 71.0025 87.3813 70.4167 86.7956L58.6821 75.0609C58.0963 74.4751 58.0963 73.5254 58.6821 72.9396L95.6441 35.9776C96.2299 35.3918 97.1796 35.3918 97.7654 35.9776L109.5 47.7123C110.086 48.298 110.086 49.2478 109.5 49.8336L72.5381 86.7956Z"
@@ -51,21 +56,84 @@ export default function SatelliteIcon({ className }: IconProps): JSX.Element {
           stroke="#4FB573"
           strokeWidth="3"
         />
-        <line x1="53.9521" y1="53.9521" x2="63.2021" y2="44.7021" stroke="#4FB573" strokeWidth="2" />
-        <line x1="101.884" y1="101.884" x2="111.134" y2="92.6339" stroke="#4FB573" strokeWidth="2" />
-        <line x1="48.9066" y1="48.9067" x2="58.1566" y2="39.6566" stroke="#4FB573" strokeWidth="2" />
-        <line x1="96.8385" y1="96.8385" x2="106.089" y2="87.5885" stroke="#4FB573" strokeWidth="2" />
-        <line x1="43.8612" y1="43.8613" x2="53.1112" y2="34.6112" stroke="#4FB573" strokeWidth="2" />
-        <line x1="91.7931" y1="91.7931" x2="101.043" y2="82.5431" stroke="#4FB573" strokeWidth="2" />
-        <line x1="64.043" y1="53.6844" x2="43.8612" y2="33.5026" stroke="#4FB573" strokeWidth="2" />
-        <line x1="111.975" y1="101.616" x2="91.7931" y2="81.4344" stroke="#4FB573" strokeWidth="2" />
+        <line
+          x1="53.9521"
+          y1="53.9521"
+          x2="63.2021"
+          y2="44.7021"
+          stroke="#4FB573"
+          strokeWidth="2"
+        />
+        <line
+          x1="101.884"
+          y1="101.884"
+          x2="111.134"
+          y2="92.6339"
+          stroke="#4FB573"
+          strokeWidth="2"
+        />
+        <line
+          x1="48.9066"
+          y1="48.9067"
+          x2="58.1566"
+          y2="39.6566"
+          stroke="#4FB573"
+          strokeWidth="2"
+        />
+        <line
+          x1="96.8385"
+          y1="96.8385"
+          x2="106.089"
+          y2="87.5885"
+          stroke="#4FB573"
+          strokeWidth="2"
+        />
+        <line
+          x1="43.8612"
+          y1="43.8613"
+          x2="53.1112"
+          y2="34.6112"
+          stroke="#4FB573"
+          strokeWidth="2"
+        />
+        <line
+          x1="91.7931"
+          y1="91.7931"
+          x2="101.043"
+          y2="82.5431"
+          stroke="#4FB573"
+          strokeWidth="2"
+        />
+        <line
+          x1="64.043"
+          y1="53.6844"
+          x2="43.8612"
+          y2="33.5026"
+          stroke="#4FB573"
+          strokeWidth="2"
+        />
+        <line
+          x1="111.975"
+          y1="101.616"
+          x2="91.7931"
+          y2="81.4344"
+          stroke="#4FB573"
+          strokeWidth="2"
+        />
         <path
           d="M58.9027 95.3853C58.4168 95.8712 57.6289 95.8712 57.1429 95.3853L49.2513 87.4936C48.7654 87.0077 48.7654 86.2198 49.2513 85.7338L49.8335 85.1517C52.4987 82.4865 56.8197 82.4865 59.4849 85.1517C62.1501 87.8168 62.1501 92.1379 59.4849 94.8031L58.9027 95.3853Z"
           fill="#DCF0E3"
           stroke="#4FB573"
           strokeWidth="3"
         />
-        <line x1="47.2248" y1="97.6794" x2="54.793" y2="90.1112" stroke="#4FB573" strokeWidth="2" />
+        <line
+          x1="47.2248"
+          y1="97.6794"
+          x2="54.793"
+          y2="90.1112"
+          stroke="#4FB573"
+          strokeWidth="2"
+        />
         <ellipse
           cx="45.4092"
           cy="99.2275"

@@ -1,5 +1,11 @@
 import React from 'react';
-import { makeStyles, Theme, Typography, InputProps, InputAdornment } from '@material-ui/core';
+import {
+  makeStyles,
+  Theme,
+  Typography,
+  InputProps,
+  InputAdornment,
+} from '@material-ui/core';
 import { FieldProps } from 'formik';
 import FieldFormControl from './FieldFormControl';
 import Input from './Input';
@@ -42,13 +48,18 @@ export default function ControlledTextField({
   onExampleClick,
   ...inputProps
 }: ControlledTextFieldProps): JSX.Element {
-  const charsLeft = (charLimit || Infinity) - ((field && field.value && field.value.length) || 0);
+  const charsLeft =
+    (charLimit || Infinity) -
+    ((field && field.value && field.value.length) || 0);
 
   function handleFieldChange(
-    { target: { value } }: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>,
+    {
+      target: { value },
+    }: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>,
     handleFn: (val: string) => void,
   ): void {
-    const text = charLimit && charsLeft <= charLimit ? value.slice(0, charLimit) : value;
+    const text =
+      charLimit && charsLeft <= charLimit ? value.slice(0, charLimit) : value;
     handleFn(text);
   }
 
@@ -75,14 +86,23 @@ export default function ControlledTextField({
             value={field.value}
             disabled={form.isSubmitting}
             startAdornment={
-              startAdornment ? <InputAdornment position="start">{startAdornment}</InputAdornment> : null
+              startAdornment ? (
+                <InputAdornment position="start">
+                  {startAdornment}
+                </InputAdornment>
+              ) : null
             }
             endAdornment={
-              endAdornment ? <InputAdornment position="end">{endAdornment}</InputAdornment> : null
+              endAdornment ? (
+                <InputAdornment position="end">{endAdornment}</InputAdornment>
+              ) : null
             }
           />
           {charLimit && (
-            <Typography variant="body1" className={classes.charCount}>{`${charsLeft} character${
+            <Typography
+              variant="body1"
+              className={classes.charCount}
+            >{`${charsLeft} character${
               charsLeft === 1 ? '' : 's'
             } remaining`}</Typography>
           )}

@@ -15,7 +15,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function CreditPlaceInfo({ place, outcome, fontSize }: CreditPlaceInfoProps): JSX.Element {
+export default function CreditPlaceInfo({
+  place,
+  outcome,
+  fontSize,
+}: CreditPlaceInfoProps): JSX.Element {
   const classes = useStyles({});
   const theme = useTheme();
 

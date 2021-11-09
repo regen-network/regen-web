@@ -13,8 +13,14 @@ export const outlinedButton = (): JSX.Element => (
   <OutlinedButton startIcon={<ArrowDownwardIcon />}>read more</OutlinedButton>
 );
 
-export const containedButton: React.FC = () => <ContainedButton>Contained</ContainedButton>;
+export const containedButton: React.FC = () => (
+  <ContainedButton>Contained</ContainedButton>
+);
 
-export const nextButton = (): JSX.Element => <PrevNextButton direction="next" />;
+export const nextButton = (): JSX.Element => (
+  <PrevNextButton direction="next" />
+);
 
-export const prevButton = (): JSX.Element => <PrevNextButton direction="prev" />;
+export const prevButton = (): JSX.Element => (
+  <PrevNextButton direction="prev" />
+);

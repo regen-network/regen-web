@@ -74,7 +74,11 @@ const RegistryNav: React.FC = () => {
 
   const programHowToItems: HeaderDropdownItemProps[] = [
     // { href: '/create-credit-class', title: 'Create a Credit Class', linkComponent: RegistryNavLink },
-    { href: '/create-methodology', title: 'Create a Methodology', linkComponent: RegistryNavLink },
+    {
+      href: '/create-methodology',
+      title: 'Create a Methodology',
+      linkComponent: RegistryNavLink,
+    },
     {
       href: '/methodology-review-process',
       title: 'Methodology Review Process',
@@ -86,14 +90,17 @@ const RegistryNav: React.FC = () => {
 
   /** for pages where we don't want to render full `name` */
   const titleAlias: { [title: string]: string } = {
-    'The Kasigau Corridor REDD Project - Phase II The Community Ranches': 'Kasigau Corridor',
+    'The Kasigau Corridor REDD Project - Phase II The Community Ranches':
+      'Kasigau Corridor',
   };
 
   const menuItems: HeaderMenuItem[] = [
     {
       title: 'Projects',
       dropdownItems: projectsData?.allProjects?.nodes?.map(p => ({
-        title: titleAlias[p?.metadata?.['http://schema.org/name']] || p?.metadata?.['http://schema.org/name'],
+        title:
+          titleAlias[p?.metadata?.['http://schema.org/name']] ||
+          p?.metadata?.['http://schema.org/name'],
         href: `/projects/${p?.handle}`,
         linkComponent: RegistryNavLink,
       })),
@@ -112,12 +119,22 @@ const RegistryNav: React.FC = () => {
     {
       title: 'Methodologies',
       dropdownItems: methodologyItems,
-      render: () => <HeaderDropdownColumn items={methodologyItems} linkComponent={RegistryNavLink} />,
+      render: () => (
+        <HeaderDropdownColumn
+          items={methodologyItems}
+          linkComponent={RegistryNavLink}
+        />
+      ),
     },
     {
       title: 'Stakeholders',
       dropdownItems: stakeholderItems,
-      render: () => <HeaderDropdownColumn items={stakeholderItems} linkComponent={RegistryNavLink} />,
+      render: () => (
+        <HeaderDropdownColumn
+          items={stakeholderItems}
+          linkComponent={RegistryNavLink}
+        />
+      ),
     },
     {
       title: 'Program',
@@ -132,7 +149,11 @@ const RegistryNav: React.FC = () => {
             />
           </Box>
           <Box display="flex" flexDirection="column">
-            <HeaderDropdownColumn title="How Tos" items={programHowToItems} linkComponent={RegistryNavLink} />
+            <HeaderDropdownColumn
+              title="How Tos"
+              items={programHowToItems}
+              linkComponent={RegistryNavLink}
+            />
           </Box>
         </Box>
       ),
@@ -169,7 +190,11 @@ const RegistryNav: React.FC = () => {
       onLogout={() => logout({ returnTo: window.location.origin })}
       onSignup={() => history.push('/signup')}
       menuItems={menuItems}
-      color={headerColors[pathname] ? headerColors[pathname] : theme.palette.primary.light}
+      color={
+        headerColors[pathname]
+          ? headerColors[pathname]
+          : theme.palette.primary.light
+      }
       transparent={isTransparent}
       absolute={isTransparent}
       // borderBottom={!isTransparent}

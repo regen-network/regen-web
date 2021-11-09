@@ -44,7 +44,9 @@ const EntityDisplay: React.FC = () => {
   const activeStep = 0;
   const { projectId } = useParams();
   const history = useHistory();
-  const [initialValues, setInitialValues] = useState<EntityDisplayValues | undefined>();
+  const [initialValues, setInitialValues] = useState<
+    EntityDisplayValues | undefined
+  >();
 
   const [updateProject] = useUpdateProjectByIdMutation();
   const [updatePartyById] = useUpdatePartyByIdMutation();
@@ -58,8 +60,12 @@ const EntityDisplay: React.FC = () => {
       const metadata = data.projectById.metadata;
 
       setInitialValues({
-        'http://regen.network/landOwner': getInitialValues(metadata['http://regen.network/landOwner']),
-        'http://regen.network/landSteward': getInitialValues(metadata['http://regen.network/landSteward']),
+        'http://regen.network/landOwner': getInitialValues(
+          metadata['http://regen.network/landOwner'],
+        ),
+        'http://regen.network/landSteward': getInitialValues(
+          metadata['http://regen.network/landSteward'],
+        ),
         'http://regen.network/projectDeveloper': getInitialValues(
           metadata['http://regen.network/projectDeveloper'],
         ),
@@ -80,8 +86,11 @@ const EntityDisplay: React.FC = () => {
       // update project stakeholders' parties
       if (data?.projectById) {
         for (const role in values) {
-          const value: DisplayValues = values[role as EntityFieldName] as DisplayValues;
-          const roleIdFieldName: roleIdField = rolesMap[role as EntityFieldName];
+          const value: DisplayValues = values[
+            role as EntityFieldName
+          ] as DisplayValues;
+          const roleIdFieldName: roleIdField =
+            rolesMap[role as EntityFieldName];
           const roleId = data.projectById[roleIdFieldName];
           if (value?.['http://regen.network/showOnProjectPage'] && roleId) {
             await updatePartyById({
@@ -120,7 +129,11 @@ const EntityDisplay: React.FC = () => {
   }
 
   return (
-    <OnboardingFormTemplate activeStep={activeStep} title="Entity Display" saveAndExit={saveAndExit}>
+    <OnboardingFormTemplate
+      activeStep={activeStep}
+      title="Entity Display"
+      saveAndExit={saveAndExit}
+    >
       <Description className={styles.description}>
         See an example{' '}
         <Link to={exampleProjectUrl} target="_blank">

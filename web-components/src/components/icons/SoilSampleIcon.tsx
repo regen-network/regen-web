@@ -14,7 +14,12 @@ export default function SoilSampleIcon({ className }: IconProps): JSX.Element {
       viewBox="0 0 59 94"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <path d="M13 38L41 38" stroke="#4FB573" strokeWidth="3" strokeLinecap="round" />
+      <path
+        d="M13 38L41 38"
+        stroke="#4FB573"
+        strokeWidth="3"
+        strokeLinecap="round"
+      />
       <path
         d="M16.7692 51.3043V38H34.4923V51.3043L50 92H2L16.7692 51.3043Z"
         fill="white"
@@ -39,10 +44,26 @@ export default function SoilSampleIcon({ className }: IconProps): JSX.Element {
         strokeWidth="3"
         strokeLinejoin="round"
       />
-      <path d="M39.8696 16.7693L48.9491 21.0204" stroke="#4FB573" strokeWidth="2" />
-      <path d="M40.5949 17.517L37.6305 9.70172" stroke="#4FB573" strokeWidth="2" />
-      <path d="M34.534 22.8671L45.7153 27.4882" stroke="#4FB573" strokeWidth="2" />
-      <path d="M34.9356 23.1763L31.1627 12.9356" stroke="#4FB573" strokeWidth="2" />
+      <path
+        d="M39.8696 16.7693L48.9491 21.0204"
+        stroke="#4FB573"
+        strokeWidth="2"
+      />
+      <path
+        d="M40.5949 17.517L37.6305 9.70172"
+        stroke="#4FB573"
+        strokeWidth="2"
+      />
+      <path
+        d="M34.534 22.8671L45.7153 27.4882"
+        stroke="#4FB573"
+        strokeWidth="2"
+      />
+      <path
+        d="M34.9356 23.1763L31.1627 12.9356"
+        stroke="#4FB573"
+        strokeWidth="2"
+      />
       <path
         d="M50.5 8C50.5 8 38.5 14.5 31 30C23.5 45.5 24.5 71 24.5 71"
         stroke="#4FB573"

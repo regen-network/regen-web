@@ -153,14 +153,19 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 interface EnhancedTableProps {
   classes: ReturnType<typeof useStyles>;
-  onRequestSort: (event: React.MouseEvent<unknown>, property: keyof DocumentRowData) => void;
+  onRequestSort: (
+    event: React.MouseEvent<unknown>,
+    property: keyof DocumentRowData,
+  ) => void;
   order: Order;
   orderBy: string;
 }
 
 function EnhancedTableHead(props: EnhancedTableProps): JSX.Element {
   const { classes, order, orderBy, onRequestSort } = props;
-  const createSortHandler = (property: keyof DocumentRowData) => (event: React.MouseEvent<unknown>) => {
+  const createSortHandler = (property: keyof DocumentRowData) => (
+    event: React.MouseEvent<unknown>,
+  ) => {
     onRequestSort(event, property);
   };
 
@@ -212,17 +217,28 @@ export default function RegenTable({
     }
   }
 
-  const handleRequestSort = (event: React.MouseEvent<unknown>, property: keyof DocumentRowData): void => {
+  const handleRequestSort = (
+    event: React.MouseEvent<unknown>,
+    property: keyof DocumentRowData,
+  ): void => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
     setOrderBy(property);
   };
 
-  const options = { year: 'numeric', month: 'long', day: 'numeric' };
+  const options: Intl.DateTimeFormatOptions = {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  };
 
   let hasViewOnLedgerColumn: boolean = false;
   for (const r of rows) {
-    if (r.eventByEventId?.creditVintageByEventId?.txHash && txClient && onViewOnLedger) {
+    if (
+      r.eventByEventId?.creditVintageByEventId?.txHash &&
+      txClient &&
+      onViewOnLedger
+    ) {
       hasViewOnLedgerColumn = true;
     }
   }
@@ -242,17 +258,29 @@ export default function RegenTable({
             .map((row, index) => {
               const labelId = `enhanced-table-checkbox-${index}`;
               const hasViewOnLedger =
-                row.eventByEventId?.creditVintageByEventId?.txHash && txClient && onViewOnLedger;
+                row.eventByEventId?.creditVintageByEventId?.txHash &&
+                txClient &&
+                onViewOnLedger;
               return (
                 <TableRow
                   tabIndex={-1}
                   key={row.name}
-                  className={clsx(classes.row, canClickRow && classes.rowClickable)}
+                  className={clsx(
+                    classes.row,
+                    canClickRow && classes.rowClickable,
+                  )}
                   onClick={() => handleClickNavigate(row.url)}
                 >
-                  <TableCell className={clsx(classes.cell, classes.nameCell)} id={labelId} scope="row">
+                  <TableCell
+                    className={clsx(classes.cell, classes.nameCell)}
+                    id={labelId}
+                    scope="row"
+                  >
                     <div className={classes.name}>
-                      <DocumentIcon className={classes.icon} fileType={row?.name?.split('.')?.pop()} />{' '}
+                      <DocumentIcon
+                        className={classes.icon}
+                        fileType={row?.name?.split('.')?.pop()}
+                      />{' '}
                       {row.name}
                     </div>
                   </TableCell>
@@ -260,13 +288,21 @@ export default function RegenTable({
                     {row.type}
                   </TableCell>
                   <TableCell className={classes.cell} align="left">
-                    {typeof row.date === 'string' && getFormattedDate(row.date, options)}
+                    {typeof row.date === 'string' &&
+                      getFormattedDate(row.date, options)}
                   </TableCell>
                   {hasViewOnLedger && onViewOnLedger && (
-                    <TableCell className={clsx(classes.cell, classes.documentCell)} align="right">
+                    <TableCell
+                      className={clsx(classes.cell, classes.documentCell)}
+                      align="right"
+                    >
                       <ContainedButton
                         className={clsx(classes.button, classes.ledgerBtn)}
-                        onClick={() => onViewOnLedger(row.eventByEventId.creditVintageByEventId)}
+                        onClick={() =>
+                          onViewOnLedger(
+                            row.eventByEventId.creditVintageByEventId,
+                          )
+                        }
                         startIcon={<ShieldIcon />}
                       >
                         view on ledger
@@ -274,11 +310,25 @@ export default function RegenTable({
                     </TableCell>
                   )}
                   {hasViewOnLedgerColumn && !hasViewOnLedger && (
-                    <TableCell className={clsx(classes.cell, classes.documentCell)} align="right"></TableCell>
+                    <TableCell
+                      className={clsx(classes.cell, classes.documentCell)}
+                      align="right"
+                    ></TableCell>
                   )}
-                  <TableCell className={clsx(classes.cell, classes.documentCell)} align="right">
-                    <a href={row.url} target="_blank" rel="noopener noreferrer" className={classes.link}>
-                      <OutlinedButton startIcon={<EyeIcon />} className={classes.button}>
+                  <TableCell
+                    className={clsx(classes.cell, classes.documentCell)}
+                    align="right"
+                  >
+                    <a
+                      href={row.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={classes.link}
+                    >
+                      <OutlinedButton
+                        startIcon={<EyeIcon />}
+                        className={classes.button}
+                      >
                         view document
                       </OutlinedButton>
                     </a>

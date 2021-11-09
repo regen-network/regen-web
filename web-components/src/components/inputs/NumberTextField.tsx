@@ -59,7 +59,10 @@ export default function NumberTextField({
             item
             className={classes.arrow}
             onClick={(): void =>
-              setFieldValue(name, max ? Math.min(max, value + increment) : value + increment)
+              setFieldValue(
+                name,
+                max ? Math.min(max, value + increment) : value + increment,
+              )
             }
           >
             <SpinIcon />
@@ -68,7 +71,10 @@ export default function NumberTextField({
             item
             className={classes.arrow}
             onClick={(): void =>
-              setFieldValue(name, min ? Math.max(min, value - increment) : value - increment)
+              setFieldValue(
+                name,
+                min ? Math.max(min, value - increment) : value - increment,
+              )
             }
           >
             <SpinIcon direction="down" />

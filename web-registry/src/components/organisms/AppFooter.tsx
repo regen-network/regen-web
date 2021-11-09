@@ -1,5 +1,8 @@
 import React from 'react';
-import { Footer, FooterItemProps as FooterItem } from 'web-components/lib/components/footer/footer-new';
+import {
+  Footer,
+  FooterItemProps as FooterItem,
+} from 'web-components/lib/components/footer/footer-new';
 import { RegistryIconLink, Link } from '../atoms';
 
 const AppFooter: React.FC = () => {
@@ -35,7 +38,8 @@ const AppFooter: React.FC = () => {
       items: [
         {
           title: 'Program Guide',
-          href: 'https://regen-registry.s3.amazonaws.com/Regen+Registry+Program+Guide.pdf',
+          href:
+            'https://regen-registry.s3.amazonaws.com/Regen+Registry+Program+Guide.pdf',
         },
         {
           title: 'Create a Methodology',

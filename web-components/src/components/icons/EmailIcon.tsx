@@ -3,7 +3,12 @@ import SvgIcon from '@material-ui/core/SvgIcon';
 
 import withHoverColor, { Props } from './withHoverColor';
 
-function EmailIcon({ color = 'white', className, onMouseEnter, onMouseLeave }: Props): JSX.Element {
+function EmailIcon({
+  color = 'white',
+  className,
+  onMouseEnter,
+  onMouseLeave,
+}: Props): JSX.Element {
   return (
     <SvgIcon
       viewBox="0 0 20 15"
@@ -11,7 +16,16 @@ function EmailIcon({ color = 'white', className, onMouseEnter, onMouseLeave }: P
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
-      <rect x="1" y="1" width="18" height="13" rx="2" fill="transparent" stroke={color} strokeWidth="2" />
+      <rect
+        x="1"
+        y="1"
+        width="18"
+        height="13"
+        rx="2"
+        fill="transparent"
+        stroke={color}
+        strokeWidth="2"
+      />
       <rect
         x="1"
         y="1.81213"

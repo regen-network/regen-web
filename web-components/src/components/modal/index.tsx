@@ -37,7 +37,9 @@ const useStyles = makeStyles((theme: Theme) => ({
       transform: 'translate(-50%, -50%)',
       top: '50%',
       left: '50%',
-      padding: `${theme.spacing(10.75)} ${theme.spacing(16.5)} ${theme.spacing(15)}`,
+      padding: `${theme.spacing(10.75)} ${theme.spacing(16.5)} ${theme.spacing(
+        15,
+      )}`,
     },
     maxWidth: theme.spacing(150),
     [theme.breakpoints.up('md')]: {
@@ -54,7 +56,9 @@ const useStyles = makeStyles((theme: Theme) => ({
       width: '100%',
       height: '100%',
       transform: 'none',
-      padding: `${theme.spacing(13.25)} ${theme.spacing(4)} ${theme.spacing(20)}`,
+      padding: `${theme.spacing(13.25)} ${theme.spacing(4)} ${theme.spacing(
+        20,
+      )}`,
     },
     backgroundColor: theme.palette.grey[50],
     border: `1px solid ${theme.palette.grey[50]}`,
@@ -76,7 +80,13 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const RegenModal: React.FC<RegenModalProps> = ({ open, onClose, children, className, closeIconColor }) => {
+const RegenModal: React.FC<RegenModalProps> = ({
+  open,
+  onClose,
+  children,
+  className,
+  closeIconColor,
+}) => {
   const classes = useStyles({});
   return (
     <Modal open={open} onClose={onClose}>

@@ -4,7 +4,10 @@ import { makeStyles, Theme } from '@material-ui/core/styles';
 import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
 
 import { WrappedStepCard } from '../atoms/WrappedStepCard';
-import { Maybe, BasicStepCardSectionFieldsFragment } from '../../generated/sanity-graphql';
+import {
+  Maybe,
+  BasicStepCardSectionFieldsFragment,
+} from '../../generated/sanity-graphql';
 
 type Props = {
   steps?: Maybe<BasicStepCardSectionFieldsFragment>;
@@ -81,7 +84,12 @@ function MethodologySteps({ steps }: Props): JSX.Element {
     >
       <div className={styles.steps}>
         {steps?.stepCards?.map((s, i) => (
-          <WrappedStepCard key={i} stepNumber={i} stepCard={s} openModal={() => {}} />
+          <WrappedStepCard
+            key={i}
+            stepNumber={i}
+            stepCard={s}
+            openModal={() => {}}
+          />
         ))}
       </div>
     </OnBoardingSection>

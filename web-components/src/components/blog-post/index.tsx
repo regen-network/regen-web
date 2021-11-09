@@ -55,7 +55,12 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function BlogPost({ header, description, img, url }: BlogPostProps): JSX.Element {
+export default function BlogPost({
+  header,
+  description,
+  img,
+  url,
+}: BlogPostProps): JSX.Element {
   const classes = useStyles({});
   return (
     <div>
@@ -64,7 +69,12 @@ export default function BlogPost({ header, description, img, url }: BlogPostProp
         {header}
       </Title>
       <Typography className={classes.description}>{description}</Typography>
-      <OutlinedButton className={classes.button} href={url} target="_blank" rel="noopener noreferrer">
+      <OutlinedButton
+        className={classes.button}
+        href={url}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         read more
       </OutlinedButton>
     </div>

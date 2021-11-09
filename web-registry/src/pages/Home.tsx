@@ -14,7 +14,10 @@ import topographyImg from '../assets/background.jpg';
 import horsesImg from '../assets/horses-grazing.png';
 
 import { useMoreProjectsQuery } from '../generated/graphql';
-import { useAllHomePageQuery, useAllCreditClassQuery } from '../generated/sanity-graphql';
+import {
+  useAllHomePageQuery,
+  useAllCreditClassQuery,
+} from '../generated/sanity-graphql';
 import { client } from '../sanity';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -84,7 +87,10 @@ const Home: React.FC = () => {
 
       {projectsData?.allProjects?.nodes && (
         <CardMedia image={topographyImg}>
-          <Section title="Projects" classes={{ root: styles.section, title: styles.title }}>
+          <Section
+            title="Projects"
+            classes={{ root: styles.section, title: styles.title }}
+          >
             <ProjectCards
               projects={projectsData?.allProjects?.nodes}
               classes={{ root: styles.projectCards }}
@@ -108,7 +114,10 @@ const Home: React.FC = () => {
 
       <HeroAction
         isBanner
-        classes={{ main: styles.bottomSectionWidth, section: styles.bottomSection }}
+        classes={{
+          main: styles.bottomSectionWidth,
+          section: styles.bottomSection,
+        }}
         img={horsesImg}
         openModal={(href: string): void => {
           setModalLink(href);
@@ -117,7 +126,11 @@ const Home: React.FC = () => {
         bottomBanner={content?.bottomBanner}
       />
 
-      <Modal open={open} onClose={() => setOpen(false)} className={styles.modal}>
+      <Modal
+        open={open}
+        onClose={() => setOpen(false)}
+        className={styles.modal}
+      >
         <iframe title="airtable-signup-form" src={modalLink} />
       </Modal>
     </>

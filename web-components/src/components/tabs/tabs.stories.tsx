@@ -2,7 +2,9 @@ import * as React from 'react';
 import Tabs, { RegenTab } from 'web-components/lib/components/tabs';
 import Table, { Data } from 'web-components/lib/components/table';
 
-import CreditDetails, { CreditInfoProps } from 'web-components/lib/components/credits/CreditDetails';
+import CreditDetails, {
+  CreditInfoProps,
+} from 'web-components/lib/components/credits/CreditDetails';
 
 export default {
   title: 'Tabs',
@@ -63,4 +65,6 @@ const documentationTab: RegenTab = {
 
 const tabs: RegenTab[] = [creditDetailsTab, documentationTab];
 
-export const mrvTabs = (): JSX.Element => <Tabs background="./background.jpg" tabs={tabs} />;
+export const mrvTabs = (): JSX.Element => (
+  <Tabs background="./background.jpg" tabs={tabs} />
+);

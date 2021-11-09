@@ -11,7 +11,10 @@ import Description from 'web-components/lib/components/description';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import { Label } from 'web-components/lib/components/label';
 
-import { ReviewSectionFieldsFragment, Maybe } from '../../generated/sanity-graphql';
+import {
+  ReviewSectionFieldsFragment,
+  Maybe,
+} from '../../generated/sanity-graphql';
 import { onBtnClick } from '../../lib/button';
 
 const useStyles = makeStyles(theme => ({
@@ -80,7 +83,9 @@ const ReviewProcessInfo: React.FC<{
     >
       {props.reviewSection?.disclaimerTop && (
         <div>
-          <Typography className={styles.disclaimerTop}>{props.reviewSection?.disclaimerTop}</Typography>
+          <Typography className={styles.disclaimerTop}>
+            {props.reviewSection?.disclaimerTop}
+          </Typography>
         </div>
       )}
       <div>
@@ -90,7 +95,9 @@ const ReviewProcessInfo: React.FC<{
       </div>
       {props.reviewSection?.timespan && (
         <div>
-          <Label className={styles.timespan}>{props.reviewSection?.timespan}</Label>
+          <Label className={styles.timespan}>
+            {props.reviewSection?.timespan}
+          </Label>
         </div>
       )}
       <div>
@@ -100,14 +107,20 @@ const ReviewProcessInfo: React.FC<{
       </div>
       {props.reviewSection?.button?.buttonText && (
         <div>
-          <ContainedButton onClick={() => onBtnClick(props.openModal, props.reviewSection?.button)}>
+          <ContainedButton
+            onClick={() =>
+              onBtnClick(props.openModal, props.reviewSection?.button)
+            }
+          >
             {props.reviewSection.button.buttonText}
           </ContainedButton>
         </div>
       )}
       {props.reviewSection?.disclaimerBottom && (
         <div>
-          <Typography className={styles.disclaimerBottom}>{props.reviewSection?.disclaimerBottom}</Typography>
+          <Typography className={styles.disclaimerBottom}>
+            {props.reviewSection?.disclaimerBottom}
+          </Typography>
         </div>
       )}
     </Box>

@@ -3,8 +3,15 @@ import { Party } from 'web-components/lib/components/modal/LedgerModal';
 import { DocumentInfo } from 'web-components/lib/components/document';
 import { getFormattedPeriod } from 'web-components/lib/utils/format';
 
-import { ProjectByHandleQuery, PartyFieldsFragment, Maybe } from '../generated/graphql';
-import { EntityDisplayValues, EntityFieldName } from '../components/organisms/EntityDisplayForm';
+import {
+  ProjectByHandleQuery,
+  PartyFieldsFragment,
+  Maybe,
+} from '../generated/graphql';
+import {
+  EntityDisplayValues,
+  EntityFieldName,
+} from '../components/organisms/EntityDisplayForm';
 
 // buildIssuanceModalData builds some IssuanceModalData to provide
 // to a Timeline Event based on some optional credit vintage data.
@@ -23,21 +30,27 @@ export function buildIssuanceModalData(
     if (creditVintage.initialDistribution) {
       // Check credit vintage initial distribution to define the issuees
       if (
-        creditVintage.initialDistribution['http://regen.network/projectDeveloperDistribution'] > 0 &&
+        creditVintage.initialDistribution[
+          'http://regen.network/projectDeveloperDistribution'
+        ] > 0 &&
         project.partyByDeveloperId
       ) {
         const projectDeveloper = getParty(project.partyByDeveloperId);
         if (projectDeveloper) issuees.push(projectDeveloper);
       }
       if (
-        creditVintage.initialDistribution['http://regen.network/landStewardDistribution'] > 0 &&
+        creditVintage.initialDistribution[
+          'http://regen.network/landStewardDistribution'
+        ] > 0 &&
         project.partyByStewardId
       ) {
         const landSteward = getParty(project.partyByStewardId);
         if (landSteward) issuees.push(landSteward);
       }
       if (
-        creditVintage.initialDistribution['http://regen.network/landOwnerDistribution'] > 0 &&
+        creditVintage.initialDistribution[
+          'http://regen.network/landOwnerDistribution'
+        ] > 0 &&
         project.partyByLandOwnerId
       ) {
         const landOwner = getParty(project.partyByLandOwnerId);
@@ -67,7 +80,8 @@ export function buildIssuanceModalData(
       numberOfCredits = numberOfCredits - bufferPool;
     }
     if (permanenceReversalBufferDist) {
-      permanenceReversalBuffer = permanenceReversalBufferDist * creditVintage.units;
+      permanenceReversalBuffer =
+        permanenceReversalBufferDist * creditVintage.units;
       numberOfCredits = numberOfCredits - permanenceReversalBuffer;
     }
 
@@ -98,7 +112,10 @@ export function buildIssuanceModalData(
         link: creditVintage.certificateLink,
       },
       txHash: creditVintage.txHash,
-      vintagePeriod: getFormattedPeriod(creditVintage.startDate, creditVintage.endDate),
+      vintagePeriod: getFormattedPeriod(
+        creditVintage.startDate,
+        creditVintage.endDate,
+      ),
       monitoringPeriods,
       projectName: project.metadata?.['http://schema.org/name'] || '',
       standard: {
@@ -106,9 +123,13 @@ export function buildIssuanceModalData(
           creditClassVersion?.metadata?.['http://regen.network/standard']?.[
             'http://regen.network/documentId'
           ],
-        name: creditClassVersion?.metadata?.['http://regen.network/standard']?.['http://schema.org/name'],
+        name: creditClassVersion?.metadata?.['http://regen.network/standard']?.[
+          'http://schema.org/name'
+        ],
         version:
-          creditClassVersion?.metadata?.['http://regen.network/standard']?.['http://schema.org/version'],
+          creditClassVersion?.metadata?.['http://regen.network/standard']?.[
+            'http://schema.org/version'
+          ],
       },
       creditClass: {
         documentId: creditClassVersion?.documentId,
@@ -125,7 +146,9 @@ export function buildIssuanceModalData(
   return null;
 }
 
-export function getParty(party?: Maybe<PartyFieldsFragment>): Party | undefined {
+export function getParty(
+  party?: Maybe<PartyFieldsFragment>,
+): Party | undefined {
   if (!party) {
     return undefined;
   }
@@ -163,7 +186,8 @@ export function getDisplayParty(
   metadata?: EntityDisplayValues,
   party?: Maybe<PartyFieldsFragment>,
 ): Party | undefined {
-  const showOnProjectPage = metadata?.[role]?.['http://regen.network/showOnProjectPage'];
+  const showOnProjectPage =
+    metadata?.[role]?.['http://regen.network/showOnProjectPage'];
   if (showOnProjectPage) {
     return getParty(party);
   }

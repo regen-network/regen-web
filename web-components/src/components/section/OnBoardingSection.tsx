@@ -98,7 +98,14 @@ const OnBoardingSection: React.FC<OnBoardingSectionProps> = ({
         )
       }
     >
-      <div className={cx(formContainer && styles.formWrap, !!classes && classes.formWrap)}>{p.children}</div>
+      <div
+        className={cx(
+          formContainer && styles.formWrap,
+          !!classes && classes.formWrap,
+        )}
+      >
+        {p.children}
+      </div>
     </Section>
   );
 };

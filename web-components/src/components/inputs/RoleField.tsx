@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles, TextField } from '@material-ui/core';
-import Autocomplete, { createFilterOptions } from '@material-ui/lab/Autocomplete';
+import Autocomplete, {
+  createFilterOptions,
+} from '@material-ui/lab/Autocomplete';
 import { FieldProps, FormikErrors } from 'formik';
 import cx from 'clsx';
 
@@ -9,8 +11,14 @@ import { Label } from '../label';
 import OrganizationIcon from '../icons/OrganizationIcon';
 import UserIcon from '../icons/UserIcon';
 import OutlinedButton from '../buttons/OutlinedButton';
-import { OrganizationModal, OrganizationFormValues } from '../modal/OrganizationModal';
-import { IndividualModal, IndividualFormValues } from '../modal/IndividualModal';
+import {
+  OrganizationModal,
+  OrganizationFormValues,
+} from '../modal/OrganizationModal';
+import {
+  IndividualModal,
+  IndividualFormValues,
+} from '../modal/IndividualModal';
 
 const filter = createFilterOptions<RoleOptionType>();
 
@@ -31,17 +39,18 @@ const useStyles = makeStyles(theme => ({
   },
   input: {
     borderRadius: 2,
-    '&.MuiAutocomplete-inputRoot[class*="MuiOutlinedInput-root"] .MuiAutocomplete-input': {
-      [theme.breakpoints.up('sm')]: {
-        fontSize: theme.spacing(4.5),
+    '&.MuiAutocomplete-inputRoot[class*="MuiOutlinedInput-root"] .MuiAutocomplete-input':
+      {
+        [theme.breakpoints.up('sm')]: {
+          fontSize: theme.spacing(4.5),
+        },
+        [theme.breakpoints.down('xs')]: {
+          paddingLeft: theme.spacing(1),
+          paddingRight: theme.spacing(3.25),
+          paddingTop: theme.spacing(1.625),
+          fontSize: theme.spacing(4),
+        },
       },
-      [theme.breakpoints.down('xs')]: {
-        paddingLeft: theme.spacing(1),
-        paddingRight: theme.spacing(3.25),
-        paddingTop: theme.spacing(1.625),
-        fontSize: theme.spacing(4),
-      },
-    },
     '& .MuiOutlinedInput-notchedOutline': {
       borderColor: theme.palette.grey[100],
     },
@@ -133,7 +142,8 @@ const RoleField: React.FC<Props> = ({
   const [value, setValue] = useState<any | null>({});
   const { form, field } = fieldProps;
   useEffect(() => {
-    const selectedValue = options && field.value && options.find(o => o.id === field.value.id);
+    const selectedValue =
+      options && field.value && options.find(o => o.id === field.value.id);
     setValue(selectedValue);
   }, [field.value, options]);
 
@@ -142,7 +152,10 @@ const RoleField: React.FC<Props> = ({
     closeOrganizationModal();
     form.setFieldValue(field.name, savedOrg);
     for (const fieldName in form.values) {
-      if (form.values[fieldName].id === savedOrg.id && `['${fieldName}']` !== field.name) {
+      if (
+        form.values[fieldName].id === savedOrg.id &&
+        `['${fieldName}']` !== field.name
+      ) {
         form.setFieldValue(`['${fieldName}']`, savedOrg);
       }
     }
@@ -153,7 +166,10 @@ const RoleField: React.FC<Props> = ({
     closeIndividualModal();
     form.setFieldValue(field.name, savedUser);
     for (const fieldName in form.values) {
-      if (form.values[fieldName].id === savedUser.id && `['${fieldName}']` !== field.name) {
+      if (
+        form.values[fieldName].id === savedUser.id &&
+        `['${fieldName}']` !== field.name
+      ) {
         form.setFieldValue(`['${fieldName}']`, savedUser);
       }
     }
@@ -217,38 +233,48 @@ const RoleField: React.FC<Props> = ({
             }}
             onBlur={handleBlur}
             renderInput={props => (
-              <TextField {...props} placeholder="Start typing or choose entity" variant="outlined" />
+              <TextField
+                {...props}
+                placeholder="Start typing or choose entity"
+                variant="outlined"
+              />
             )}
             filterOptions={(options, state) => {
               const filtered = filter(options, state) as RoleOptionType[];
               // Suggest the creation of a new value
               filtered.push(
-                ((
+                (
                   <div
                     className={styles.add}
                     onClick={e => {
                       e.stopPropagation();
-                      setOrganizationEdit({ 'http://schema.org/legalName': state.inputValue });
+                      setOrganizationEdit({
+                        'http://schema.org/legalName': state.inputValue,
+                      });
                     }}
                   >
                     <OrganizationIcon />
-                    <Label className={styles.label}>+ Add New Organization</Label>
+                    <Label className={styles.label}>
+                      + Add New Organization
+                    </Label>
                   </div>
-                ) as unknown) as RoleOptionType,
+                ) as unknown as RoleOptionType,
               );
               filtered.push(
-                ((
+                (
                   <div
                     className={styles.add}
                     onClick={e => {
                       e.stopPropagation();
-                      setIndividualEdit({ 'http://schema.org/name': state.inputValue });
+                      setIndividualEdit({
+                        'http://schema.org/name': state.inputValue,
+                      });
                     }}
                   >
                     <UserIcon />
                     <Label className={styles.label}>+ Add New Individual</Label>
                   </div>
-                ) as unknown) as RoleOptionType,
+                ) as unknown as RoleOptionType,
               );
               return filtered;
             }}
@@ -256,7 +282,10 @@ const RoleField: React.FC<Props> = ({
         )}
       </FieldFormControl>
       {value && value.id && !value.projectCreator && (
-        <OutlinedButton className={styles.edit} onClick={() => editEntity(value)}>
+        <OutlinedButton
+          className={styles.edit}
+          onClick={() => editEntity(value)}
+        >
           edit entity
         </OutlinedButton>
       )}

@@ -6,7 +6,9 @@ import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1
 import clsx from 'clsx';
 
 import { getFormattedDate } from 'web-components/lib/utils/format';
-import IssuanceModal, { IssuanceModalData } from 'web-components/lib/components/modal/IssuanceModal';
+import IssuanceModal, {
+  IssuanceModalData,
+} from 'web-components/lib/components/modal/IssuanceModal';
 import Title from 'web-components/lib/components/title';
 import Timeline from 'web-components/lib/components/timeline';
 import ProjectMedia from 'web-components/lib/components/sliders/ProjectMedia';
@@ -36,7 +38,10 @@ import {
 } from '../organisms';
 import { Credits } from '../organisms/BuyCreditsModal';
 import { DisplayValues } from '../organisms/EntityDisplayForm';
-import { useMoreProjectsQuery, useProjectByHandleQuery } from '../../generated/graphql';
+import {
+  useMoreProjectsQuery,
+  useProjectByHandleQuery,
+} from '../../generated/graphql';
 import { useEcologicalImpactByIriQuery } from '../../generated/sanity-graphql';
 import { client } from '../../sanity';
 
@@ -115,7 +120,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   projectGridItem: {
     [theme.breakpoints.up('sm')]: {
-      padding: `${theme.spacing(3.5)} ${theme.spacing(2.5)} ${theme.spacing(2.5)}`,
+      padding: `${theme.spacing(3.5)} ${theme.spacing(2.5)} ${theme.spacing(
+        2.5,
+      )}`,
     },
     [theme.breakpoints.down('xs')]: {
       paddingBottom: theme.spacing(8),
@@ -225,7 +232,9 @@ interface Project {
 const project: Project = {};
 
 function getVisiblePartyName(party?: DisplayValues): string | undefined {
-  return party?.['http://regen.network/showOnProjectPage'] ? party?.['http://schema.org/name'] : undefined;
+  return party?.['http://regen.network/showOnProjectPage']
+    ? party?.['http://schema.org/name']
+    : undefined;
 }
 
 function ProjectDetails(): JSX.Element {
@@ -253,12 +262,15 @@ function ProjectDetails(): JSX.Element {
   const styles = useStyles();
   const theme = useTheme();
 
-  const otherProjects = projectsData?.allProjects?.nodes?.filter(p => p?.handle !== projectId);
+  const otherProjects = projectsData?.allProjects?.nodes?.filter(
+    p => p?.handle !== projectId,
+  );
 
   const [geojson, setGeojson] = useState<any | null>(null);
 
   // Convert kml to geojson
-  const mapFile: string = metadata?.['http://regen.network/boundaries']?.['@value'];
+  const mapFile: string =
+    metadata?.['http://regen.network/boundaries']?.['@value'];
   const isGISFile: boolean = /\.(json|kml)$/i.test(mapFile);
   const isKMLFile: boolean = /\.kml$/i.test(mapFile);
 
@@ -287,7 +299,8 @@ function ProjectDetails(): JSX.Element {
     setOpen(false);
   };
 
-  const [issuanceModalData, setIssuanceModalData] = useState<IssuanceModalData | null>(null);
+  const [issuanceModalData, setIssuanceModalData] =
+    useState<IssuanceModalData | null>(null);
   const [issuanceModalOpen, setIssuanceModalOpen] = useState(false);
   const [isBuyCreditsModalOpen, setBuyCreditsModalOpen] = useState(false);
 
@@ -302,7 +315,8 @@ function ProjectDetails(): JSX.Element {
   };
 
   const creditClassVersion =
-    data?.projectByHandle?.creditClassByCreditClassId?.creditClassVersionsById?.nodes?.[0];
+    data?.projectByHandle?.creditClassByCreditClassId?.creditClassVersionsById
+      ?.nodes?.[0];
   const creditClassName = creditClassVersion?.name;
   const partyName =
     getVisiblePartyName(metadata?.['http://regen.network/landSteward']) ||
@@ -321,9 +335,9 @@ function ProjectDetails(): JSX.Element {
   };
 
   const coBenefitsIris =
-    creditClassVersion?.metadata?.['http://regen.network/coBenefits']?.['@list']?.map(
-      (impact: { '@id': string }) => impact['@id'],
-    ) || [];
+    creditClassVersion?.metadata?.['http://regen.network/coBenefits']?.[
+      '@list'
+    ]?.map((impact: { '@id': string }) => impact['@id']) || [];
   const impactIris = [
     creditClassVersion?.metadata?.['http://regen.network/indicator']?.['@id'],
     ...coBenefitsIris,
@@ -347,10 +361,12 @@ function ProjectDetails(): JSX.Element {
 
       <ProjectMedia
         assets={
-          metadata?.['http://regen.network/galleryPhotos']?.['@list']?.map((photo: { '@value': string }) => ({
-            src: photo['@value'],
-            type: 'image',
-          })) || []
+          metadata?.['http://regen.network/galleryPhotos']?.['@list']?.map(
+            (photo: { '@value': string }) => ({
+              src: photo['@value'],
+              type: 'image',
+            }),
+          ) || []
         }
         gridView
         mobileHeight={theme.spacing(78.75)}
@@ -365,18 +381,22 @@ function ProjectDetails(): JSX.Element {
 
       {data?.projectByHandle?.documentsByProjectId?.nodes &&
         data.projectByHandle.documentsByProjectId.nodes.length > 0 && (
-          <div className={clsx('topo-background-alternate', styles.projectContent)}>
+          <div
+            className={clsx('topo-background-alternate', styles.projectContent)}
+          >
             <Documentation
               txClient={txClient}
               onViewOnLedger={viewOnLedger}
-              documents={data?.projectByHandle?.documentsByProjectId?.nodes.map(doc => ({
-                name: doc?.name || '',
-                type: doc?.type || '',
-                date: doc?.date || '',
-                url: doc?.url || '',
-                ledger: '',
-                eventByEventId: doc?.eventByEventId,
-              }))}
+              documents={data?.projectByHandle?.documentsByProjectId?.nodes.map(
+                doc => ({
+                  name: doc?.name || '',
+                  type: doc?.type || '',
+                  date: doc?.date || '',
+                  url: doc?.url || '',
+                  ledger: '',
+                  eventByEventId: doc?.eventByEventId,
+                }),
+              )}
             />
           </div>
         )}
@@ -384,13 +404,13 @@ function ProjectDetails(): JSX.Element {
       {metadata?.['http://regen.network/landManagementActions']?.['@list'] && (
         <div className="topo-background-alternate">
           <LandManagementActions
-            actions={metadata?.['http://regen.network/landManagementActions']?.['@list']?.map(
-              (action: any) => ({
-                name: action['http://schema.org/name'],
-                description: action['http://schema.org/description'],
-                imgSrc: action['http://schema.org/image']?.['@value'],
-              }),
-            )}
+            actions={metadata?.['http://regen.network/landManagementActions']?.[
+              '@list'
+            ]?.map((action: any) => ({
+              name: action['http://schema.org/name'],
+              description: action['http://schema.org/description'],
+              imgSrc: action['http://schema.org/image']?.['@value'],
+            }))}
             title="Land Management Actions"
             subtitle="This is how the project developers are planning to achieve the primary impact."
           />
@@ -413,12 +433,18 @@ function ProjectDetails(): JSX.Element {
             <Timeline
               txClient={txClient}
               onViewOnLedger={viewOnLedger}
-              events={data.projectByHandle.eventsByProjectId.nodes.map(node => ({
-                date: getFormattedDate(node?.date, { year: 'numeric', month: 'long', day: 'numeric' }),
-                summary: node?.summary || '',
-                description: node?.description || '',
-                creditVintage: node?.creditVintageByEventId,
-              }))}
+              events={data.projectByHandle.eventsByProjectId.nodes.map(
+                node => ({
+                  date: getFormattedDate(node?.date, {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                  }),
+                  summary: node?.summary || '',
+                  description: node?.description || '',
+                  creditVintage: node?.creditVintageByEventId,
+                }),
+              )}
             />
           </div>
         )}
@@ -430,7 +456,10 @@ function ProjectDetails(): JSX.Element {
       )}
 
       {chainId && project.creditPrice && (
-        <BuyFooter onClick={() => setBuyCreditsModalOpen(true)} creditPrice={project.creditPrice} />
+        <BuyFooter
+          onClick={() => setBuyCreditsModalOpen(true)}
+          creditPrice={project.creditPrice}
+        />
       )}
       {project.creditPrice && project.stripePrice && (
         <Modal open={open} onClose={handleClose}>
@@ -482,8 +511,14 @@ function ProjectDetails(): JSX.Element {
           project={{
             id: projectId,
             name: data.projectByHandle?.metadata?.['http://schema.org/name'],
-            image: data.projectByHandle?.metadata?.['http://regen.network/previewPhoto'],
-            creditDenom: creditClassVersion.metadata?.['http://regen.network/creditDenom'] || creditClassName,
+            image:
+              data.projectByHandle?.metadata?.[
+                'http://regen.network/previewPhoto'
+              ],
+            creditDenom:
+              creditClassVersion.metadata?.[
+                'http://regen.network/creditDenom'
+              ] || creditClassName,
             credits: project.credits,
           }}
           imageStorageBaseUrl={imageStorageBaseUrl}

@@ -16,12 +16,17 @@ const useStyles = makeStyles((theme: Theme) => ({
       padding: `${theme.spacing(6)} ${theme.spacing(5)} ${theme.spacing(10)}`,
     },
     [theme.breakpoints.up('sm')]: {
-      padding: `${theme.spacing(10.75)} ${theme.spacing(10)} ${theme.spacing(16.25)}`,
+      padding: `${theme.spacing(10.75)} ${theme.spacing(10)} ${theme.spacing(
+        16.25,
+      )}`,
     },
   },
 }));
 
-export default function GreenCard({ children, className }: GreenCardProps): JSX.Element {
+export default function GreenCard({
+  children,
+  className,
+}: GreenCardProps): JSX.Element {
   const classes = useStyles();
   const theme = useTheme();
 

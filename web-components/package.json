@@ -59,6 +59,6 @@
   "devDependencies": {
     "@types/mapbox__mapbox-sdk": "^0.11.1",
     "@types/react-lazyload": "^3.1.0",
-    "prettier": "2.0.5"
+    "prettier": "2.4.1"
   }
 }

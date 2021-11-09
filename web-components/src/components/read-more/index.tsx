@@ -40,7 +40,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const ReadMore: React.FC<ReadMoreProps> = ({ maxLength = 700, restMinLength = 300, children }) => {
+const ReadMore: React.FC<ReadMoreProps> = ({
+  maxLength = 700,
+  restMinLength = 300,
+  children,
+}) => {
   const classes = useStyles({});
   const theme = useTheme();
 
@@ -60,7 +64,10 @@ const ReadMore: React.FC<ReadMoreProps> = ({ maxLength = 700, restMinLength = 30
         expanded ? (
           <ArrowDownIcon direction="up" color={theme.palette.secondary.main} />
         ) : (
-          <ArrowDownIcon direction="down" color={theme.palette.secondary.main} />
+          <ArrowDownIcon
+            direction="down"
+            color={theme.palette.secondary.main}
+          />
         )
       }
     >

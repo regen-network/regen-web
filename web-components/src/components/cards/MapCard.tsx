@@ -35,11 +35,15 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     position: 'relative',
     [theme.breakpoints.up('sm')]: {
       borderTop: props => `solid 9px ${props.color}`,
-      padding: `${theme.spacing(9.5)} ${theme.spacing(7.75)} ${theme.spacing(7.25)}`,
+      padding: `${theme.spacing(9.5)} ${theme.spacing(7.75)} ${theme.spacing(
+        7.25,
+      )}`,
     },
     [theme.breakpoints.down('xs')]: {
       borderTop: props => `solid 6px ${props.color}`,
-      padding: `${theme.spacing(6)} ${theme.spacing(3.75)} ${theme.spacing(4.25)}`,
+      padding: `${theme.spacing(6)} ${theme.spacing(3.75)} ${theme.spacing(
+        4.25,
+      )}`,
     },
   },
   name: {

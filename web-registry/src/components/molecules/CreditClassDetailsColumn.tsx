@@ -131,18 +131,38 @@ function CreditClassDetailsColumn({
             </Title>
           </div>
         </div>
-        {nameRaw && <LineItem label="credit name" data={<BlockContent content={nameRaw} />} />}
-        {creditClass.version && <LineItem label="version" data={creditClass.version} />}
-        {creditClass.creditDesigner && <LineItem label="credit designer" data={creditClass.creditDesigner} />}
-        {creditClass.ecoType && <LineItem label="ecotype" data={creditClass.ecoType} />}
+        {nameRaw && (
+          <LineItem
+            label="credit name"
+            data={<BlockContent content={nameRaw} />}
+          />
+        )}
+        {creditClass.version && (
+          <LineItem label="version" data={creditClass.version} />
+        )}
+        {creditClass.creditDesigner && (
+          <LineItem label="credit designer" data={creditClass.creditDesigner} />
+        )}
+        {creditClass.ecoType && (
+          <LineItem label="ecotype" data={creditClass.ecoType} />
+        )}
         {creditClass.ecoServiceType && (
-          <LineItem label="carbon removal or emission reduction" data={creditClass.ecoServiceType} />
+          <LineItem
+            label="carbon removal or emission reduction"
+            data={creditClass.ecoServiceType}
+          />
         )}
         {creditClass.approvedMethodology && (
-          <LineItem label="approved methodology" data={creditClass.approvedMethodology} />
+          <LineItem
+            label="approved methodology"
+            data={creditClass.approvedMethodology}
+          />
         )}
         {creditClass.methodologyUrl && (
-          <OutlinedButton classes={{ root: styles.button }} href={creditClass.methodologyUrl}>
+          <OutlinedButton
+            classes={{ root: styles.button }}
+            href={creditClass.methodologyUrl}
+          >
             view methodology»
           </OutlinedButton>
         )}

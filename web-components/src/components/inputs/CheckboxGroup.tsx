@@ -61,7 +61,11 @@ interface CheckboxGroupProps extends FieldProps {
   }[];
 }
 
-export default function CheckboxGroup({ label, options, ...props }: CheckboxGroupProps): JSX.Element {
+export default function CheckboxGroup({
+  label,
+  options,
+  ...props
+}: CheckboxGroupProps): JSX.Element {
   const classes = useStyles();
   const {
     form: { setFieldValue, errors },
@@ -98,7 +102,9 @@ export default function CheckboxGroup({ label, options, ...props }: CheckboxGrou
           />
         ))}
       </FormGroup>
-      {errors && errors[name] && <span className="MuiFormHelperText-root Mui-error">{errors[name]}</span>}
+      {errors && errors[name] && (
+        <span className="MuiFormHelperText-root Mui-error">{errors[name]}</span>
+      )}
     </FormControl>
   );
 }

@@ -59,7 +59,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-function MethodologyDocumentationSection({ methodology, documentation, nameRaw }: Props): JSX.Element {
+function MethodologyDocumentationSection({
+  methodology,
+  documentation,
+  nameRaw,
+}: Props): JSX.Element {
   const styles = useStyles();
 
   return (
@@ -71,13 +75,17 @@ function MethodologyDocumentationSection({ methodology, documentation, nameRaw }
               mainTitle="Documentation"
               cardTitle={documentation.title || ''}
               imageSrc={getSanityImgSrc(documentation.image)}
-              imageAlt={documentation.image?.imageAlt || documentation.title || ''}
+              imageAlt={
+                documentation.image?.imageAlt || documentation.title || ''
+              }
               buttonText={documentation.button?.buttonText || 'view document'}
               buttonUrl={getBtnHref(documentation.button)}
               buttonIcon={<EyeIcon />}
               version={methodology.version}
               program={methodology.program}
-              buttonBlankTarget={documentation.button?.buttonBlankTarget ? true : false}
+              buttonBlankTarget={
+                documentation.button?.buttonBlankTarget ? true : false
+              }
             />
           )}
           <DocumentationCard

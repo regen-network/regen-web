@@ -85,11 +85,17 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-function ProjectImpactSection({ data, title, classes }: ProjectImpactProps): JSX.Element {
+function ProjectImpactSection({
+  data,
+  title,
+  classes,
+}: ProjectImpactProps): JSX.Element {
   const styles = useStyles();
   const theme: Theme = useTheme();
   const isMobile: boolean = useMediaQuery(theme.breakpoints.down('xs'));
-  const isTablet: boolean = useMediaQuery(theme.breakpoints.between('xs', 'sm'));
+  const isTablet: boolean = useMediaQuery(
+    theme.breakpoints.between('xs', 'sm'),
+  );
   const slidesCount: number = isTablet ? 2 : 3;
 
   const settings = {
@@ -120,7 +126,10 @@ function ProjectImpactSection({ data, title, classes }: ProjectImpactProps): JSX
     <>
       {impact && (
         <Section
-          classes={{ root: cx(styles.root, classes?.root), title: styles.title }}
+          classes={{
+            root: cx(styles.root, classes?.root),
+            title: styles.title,
+          }}
           title={title || 'Impact'}
           titleVariant="h2"
           titleAlign="left"
@@ -138,30 +147,37 @@ function ProjectImpactSection({ data, title, classes }: ProjectImpactProps): JSX
           <LazyLoad offset={300}>
             {isMobile ? (
               <div className={styles.swipe}>
-                {impact.map(({ name, descriptionRaw, image }, index: number) => (
-                  <div className={styles.item} key={index}>
-                    <ProjectImpactCard
-                      name={name}
-                      description={<BlockContent content={descriptionRaw} />}
-                      imgSrc={getSanityImgSrc(image)}
-                      monitored={index === 0}
-                    />
-                  </div>
-                ))}
+                {impact.map(
+                  ({ name, descriptionRaw, image }, index: number) => (
+                    <div className={styles.item} key={index}>
+                      <ProjectImpactCard
+                        name={name}
+                        description={<BlockContent content={descriptionRaw} />}
+                        imgSrc={getSanityImgSrc(image)}
+                        monitored={index === 0}
+                      />
+                    </div>
+                  ),
+                )}
               </div>
             ) : (
               <Slider {...settings} ref={slider} className={styles.slider}>
-                {impact.map(({ name, descriptionRaw, image, standard }, index: number) => (
-                  <ProjectImpactCard
-                    key={index}
-                    className={styles.item}
-                    name={name}
-                    description={<BlockContent content={descriptionRaw} />}
-                    imgSrc={getSanityImgSrc(image)}
-                    standard={getSanityImgSrc(standard)}
-                    monitored={index === 0}
-                  />
-                ))}
+                {impact.map(
+                  (
+                    { name, descriptionRaw, image, standard },
+                    index: number,
+                  ) => (
+                    <ProjectImpactCard
+                      key={index}
+                      className={styles.item}
+                      name={name}
+                      description={<BlockContent content={descriptionRaw} />}
+                      imgSrc={getSanityImgSrc(image)}
+                      standard={getSanityImgSrc(standard)}
+                      monitored={index === 0}
+                    />
+                  ),
+                )}
               </Slider>
             )}
           </LazyLoad>

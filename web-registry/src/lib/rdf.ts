@@ -21,7 +21,11 @@ async function loadDataset(jsonLd: string): Promise<DatasetExt> {
 // using the SHACL graph in shapesJSON.
 // If an optional group is passed, it will validate against shapes
 // of the given sh:group.
-export async function validate(shapesJSON: any, dataJSON: any, group?: string): ValidationReport {
+export async function validate(
+  shapesJSON: any,
+  dataJSON: any,
+  group?: string,
+): ValidationReport {
   const shapes = await loadDataset(JSON.stringify(shapesJSON));
   const data = await loadDataset(JSON.stringify(dataJSON));
 
@@ -45,11 +49,16 @@ export async function validate(shapesJSON: any, dataJSON: any, group?: string): 
 
 export function getProjectPageBaseData(): any {
   return {
-    '@type': ['http://regen.network/ProjectPage', 'http://regen.network/Project'],
+    '@type': [
+      'http://regen.network/ProjectPage',
+      'http://regen.network/Project',
+    ],
   };
 }
 
-export type qudtUnit = 'http://qudt.org/1.1/vocab/unit#HA' | 'http://qudt.org/1.1/vocab/unit#AC';
+export type qudtUnit =
+  | 'http://qudt.org/1.1/vocab/unit#HA'
+  | 'http://qudt.org/1.1/vocab/unit#AC';
 export const qudtUnitMap = {
   'http://qudt.org/1.1/vocab/unit#HA': 'hectares',
   'http://qudt.org/1.1/vocab/unit#AC': 'acres',

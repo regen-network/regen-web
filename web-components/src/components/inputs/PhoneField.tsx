@@ -22,7 +22,9 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     width: '100% !important',
     border: `1px solid ${theme.palette.grey[100]} !important`,
     borderRadius: '2px !important',
-    color: props.disabled ? theme.palette.info.main : theme.palette.primary.contrastText,
+    color: props.disabled
+      ? theme.palette.info.main
+      : theme.palette.primary.contrastText,
     fontFamily: theme.typography.fontFamily,
     [theme.breakpoints.up('sm')]: {
       padding: theme.spacing(7.4),

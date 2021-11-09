@@ -84,7 +84,8 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     position: 'absolute',
     top: theme.spacing(4),
     width: '100%',
-    background: 'linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #FFFFFF 61.46%)',
+    background:
+      'linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #FFFFFF 61.46%)',
     [theme.breakpoints.up('sm')]: {
       height: theme.spacing(21.75),
     },
@@ -209,10 +210,17 @@ const Question = ({
   return (
     <div className={clsx(classes.root, classNames?.root)} id={id}>
       <div className={clsx(classes.container, classNames?.container)}>
-        <Title variant="h5" className={clsx(classes.question, classNames?.question)} onClick={handleClick}>
+        <Title
+          variant="h5"
+          className={clsx(classes.question, classNames?.question)}
+          onClick={handleClick}
+        >
           {question}
           {open ? (
-            <BreadcrumbIcon className={clsx(classes.icon, classNames?.icon)} direction="up" />
+            <BreadcrumbIcon
+              className={clsx(classes.icon, classNames?.icon)}
+              direction="up"
+            />
           ) : (
             <BreadcrumbIcon className={clsx(classes.icon, classNames?.icon)} />
           )}
@@ -240,7 +248,10 @@ const Question = ({
                 }}
                 className={classes.anchorLink}
               >
-                <LinkIcon className={classes.linkIcon} color={theme.palette.secondary.dark} />
+                <LinkIcon
+                  className={classes.linkIcon}
+                  color={theme.palette.secondary.dark}
+                />
                 <span className={classes.copyText}>copy question link</span>
               </a>
             )

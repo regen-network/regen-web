@@ -49,7 +49,12 @@ interface Props {
  *
  * @param object contains text, color, children. Where text is the anchor text. Color is a string for link text color, and children are MenuItems typically with Links.
  */
-const MenuHover = ({ text, textColor, dropdownColor, children }: Props): JSX.Element => {
+const MenuHover = ({
+  text,
+  textColor,
+  dropdownColor,
+  children,
+}: Props): JSX.Element => {
   const [openedPopover, setOpenedPopover] = useState(false);
   const popoverAnchor = useRef(null);
 
@@ -96,7 +101,9 @@ const MenuHover = ({ text, textColor, dropdownColor, children }: Props): JSX.Ele
         PaperProps={{ onMouseEnter: popoverEnter, onMouseLeave: popoverLeave }}
       >
         <Paper className={styles.paper} elevation={5}>
-          <MenuList classes={{ root: styles.text, padding: styles.noOutline }}>{children}</MenuList>
+          <MenuList classes={{ root: styles.text, padding: styles.noOutline }}>
+            {children}
+          </MenuList>
         </Paper>
       </Popover>
     </div>

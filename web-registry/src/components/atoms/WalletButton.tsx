@@ -56,11 +56,17 @@ const WalletButton: React.FC = () => {
     <div className={styles.root}>
       <div className={styles.walletButtonWrapper}>
         <IconButton className={styles.walletButton} onClick={connectToKeplr}>
-          <WalletIcon color={wallet ? theme.palette.secondary.main : theme.palette.info.dark} />
+          <WalletIcon
+            color={
+              wallet ? theme.palette.secondary.main : theme.palette.info.dark
+            }
+          />
         </IconButton>
       </div>
       <span className={styles.walletAddress}>{wallet?.shortAddress}</span>
-      {showAlert && <ErrorBanner text="Please install Keplr extension to use Regen Ledger features" />}
+      {showAlert && (
+        <ErrorBanner text="Please install Keplr extension to use Regen Ledger features" />
+      )}
     </div>
   ) : (
     <></>

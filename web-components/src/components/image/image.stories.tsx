@@ -6,7 +6,8 @@ export default {
   component: Image,
 };
 
-const imageSrc = 'https://regen-registry.s3.amazonaws.com/projects/wilmot/image1.png';
+const imageSrc =
+  'https://regen-registry.s3.amazonaws.com/projects/wilmot/image1.png';
 const imageStorageBaseUrl = process.env.STORYBOOK_IMAGE_STORAGE_BASE_URL;
 const apiServerUrl = process.env.STORYBOOK_API_URI;
 
@@ -18,7 +19,6 @@ const apiServerUrl = process.env.STORYBOOK_API_URI;
 // };
 
 export const imageDefaultQuality100 = (): JSX.Element => {
-
   return (
     <div style={{ width: 521, height: 486 }}>
       <Image
@@ -32,4 +32,6 @@ export const imageDefaultQuality100 = (): JSX.Element => {
   );
 };
 
-export const originalImage = (): JSX.Element => <img src={imageSrc} alt="Wilmot" />;
+export const originalImage = (): JSX.Element => (
+  <img src={imageSrc} alt="Wilmot" />
+);

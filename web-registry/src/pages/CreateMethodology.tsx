@@ -105,7 +105,9 @@ const CreateMethodology: React.FC = () => {
     setOpen(true);
   };
 
-  const outcomeCards = content?.outcomes?.map(outcome => <WrappedImpactCard outcome={outcome} />);
+  const outcomeCards = content?.outcomes?.map(outcome => (
+    <WrappedImpactCard outcome={outcome} />
+  ));
 
   return (
     <div className={styles.root}>
@@ -149,11 +151,18 @@ const CreateMethodology: React.FC = () => {
           <ResponsiveSlider
             infinite={false}
             itemWidth="90%"
-            classes={{ title: styles.resourcesTitle, root: styles.resourcesRoot }}
+            classes={{
+              title: styles.resourcesTitle,
+              root: styles.resourcesRoot,
+            }}
             padding={theme.spacing(2.5)}
             title="Resources"
             titleVariant="h2"
-            arrows={content?.resources ? content.resources.length > resourceCardsShown : false}
+            arrows={
+              content?.resources
+                ? content.resources.length > resourceCardsShown
+                : false
+            }
             slidesToShow={resourceCardsShown}
             items={content?.resources?.map(resource => (
               <WrappedResourcesCard resource={resource} />
@@ -176,9 +185,15 @@ const CreateMethodology: React.FC = () => {
         openModal={openModal}
       /> */}
       <FixedFooter justify="flex-end">
-        <ContainedButton onClick={() => openModal(content?.footerLink)}>Submit a methodology</ContainedButton>
+        <ContainedButton onClick={() => openModal(content?.footerLink)}>
+          Submit a methodology
+        </ContainedButton>
       </FixedFooter>
-      <Modal open={open} onClose={() => setOpen(false)} className={styles.modal}>
+      <Modal
+        open={open}
+        onClose={() => setOpen(false)}
+        className={styles.modal}
+      >
         <iframe title="airtable-signup-form" src={modalLink} />
       </Modal>
     </div>

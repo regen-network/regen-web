@@ -52,7 +52,11 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   }),
 }));
 
-export default function Banner({ text, color, duration = 5000 }: BannerProps): JSX.Element {
+export default function Banner({
+  text,
+  color,
+  duration = 5000,
+}: BannerProps): JSX.Element {
   const classes = useStyles({ color });
   const [open, setOpen] = useState(true);
 

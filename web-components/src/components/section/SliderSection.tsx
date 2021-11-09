@@ -53,11 +53,17 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-function SliderSection({ items, title, classes }: SliderSectionProps): JSX.Element {
+function SliderSection({
+  items,
+  title,
+  classes,
+}: SliderSectionProps): JSX.Element {
   const styles = useStyles();
   const theme: Theme = useTheme();
   const isMobile: boolean = useMediaQuery(theme.breakpoints.down('xs'));
-  const isTablet: boolean = useMediaQuery(theme.breakpoints.between('xs', 'sm'));
+  const isTablet: boolean = useMediaQuery(
+    theme.breakpoints.between('xs', 'sm'),
+  );
   const isDesktop: boolean = useMediaQuery(theme.breakpoints.up('sm'));
   const slidesCount: number = isMobile ? 1 : isTablet ? 2 : 3;
   const showArrows: boolean = (isTablet || isDesktop) && items?.length > 3;

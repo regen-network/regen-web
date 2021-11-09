@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
-import { useParams, useHistory, useRouteMatch, Switch, Route } from 'react-router-dom';
+import {
+  useParams,
+  useHistory,
+  useRouteMatch,
+  Switch,
+  Route,
+} from 'react-router-dom';
 import cx from 'clsx';
 
 import Section from 'web-components/lib/components/section';
@@ -125,13 +131,19 @@ function CreditClassDetail({ isLandSteward }: CreditDetailsProps): JSX.Element {
   let { creditClassId } = useParams<{ creditClassId: string }>();
 
   const { data } = useAllCreditClassQuery({ client });
-  const content = data?.allCreditClass?.find(creditClass => creditClass.path === creditClassId);
-  const creditClass = mock?.creditClasses.find(creditClass => creditClass.id === creditClassId);
+  const content = data?.allCreditClass?.find(
+    creditClass => creditClass.path === creditClassId,
+  );
+  const creditClass = mock?.creditClasses.find(
+    creditClass => creditClass.id === creditClassId,
+  );
   const { data: projectsData } = useMoreProjectsQuery();
 
   const getFeaturedProjects = (): JSX.Element => {
     const featuredProjects = projectsData?.allProjects?.nodes?.filter(project =>
-      content?.landSteward?.featuredProjectIds?.some(projectId => projectId === project?.handle),
+      content?.landSteward?.featuredProjectIds?.some(
+        projectId => projectId === project?.handle,
+      ),
     );
 
     return featuredProjects && featuredProjects.length > 0 ? (
@@ -149,7 +161,8 @@ function CreditClassDetail({ isLandSteward }: CreditDetailsProps): JSX.Element {
 
   const getAllProjects = (): JSX.Element => {
     const projects = projectsData?.allProjects?.nodes?.filter(
-      project => project?.creditClassByCreditClassId?.uri === content?.iri?.current,
+      project =>
+        project?.creditClassByCreditClassId?.uri === content?.iri?.current,
     );
 
     return projects && projects.length > 0 ? (
@@ -178,7 +191,11 @@ function CreditClassDetail({ isLandSteward }: CreditDetailsProps): JSX.Element {
   };
 
   const setContent = (): void => {
-    history.push(`/credit-classes/${creditClassId}/${isLandSteward ? 'buyer' : 'land-steward'}`);
+    history.push(
+      `/credit-classes/${creditClassId}/${
+        isLandSteward ? 'buyer' : 'land-steward'
+      }`,
+    );
   };
 
   if (creditClass) {
@@ -188,7 +205,9 @@ function CreditClassDetail({ isLandSteward }: CreditDetailsProps): JSX.Element {
           isBanner
           img={hero}
           title={
-            isLandSteward ? content?.landSteward?.heroSection?.title : content?.buyer?.heroSection?.title
+            isLandSteward
+              ? content?.landSteward?.heroSection?.title
+              : content?.buyer?.heroSection?.title
           }
           descriptionRaw={
             isLandSteward
@@ -198,8 +217,14 @@ function CreditClassDetail({ isLandSteward }: CreditDetailsProps): JSX.Element {
           classes={{ main: styles.heroMain }}
         />
         <Section
-          title={content?.nameRaw ? <BlockContent content={content?.nameRaw} /> : ''}
-          classes={{ root: styles.introSection, title: styles.title, titleWrap: styles.titleWrap }}
+          title={
+            content?.nameRaw ? <BlockContent content={content?.nameRaw} /> : ''
+          }
+          classes={{
+            root: styles.introSection,
+            title: styles.title,
+            titleWrap: styles.titleWrap,
+          }}
         >
           <Description className={styles.sectionDescription}>
             <BlockContent content={content?.descriptionRaw} />
@@ -207,7 +232,10 @@ function CreditClassDetail({ isLandSteward }: CreditDetailsProps): JSX.Element {
         </Section>
         <div className="topo-background-alternate">
           {content?.ecologicalImpact && (
-            <ImpactSection title="Ecological Impact" impacts={content?.ecologicalImpact} />
+            <ImpactSection
+              title="Ecological Impact"
+              impacts={content?.ecologicalImpact}
+            />
           )}
           {!isLandSteward && (
             <CreditClassOverviewSection
@@ -235,7 +263,10 @@ function CreditClassDetail({ isLandSteward }: CreditDetailsProps): JSX.Element {
         {!isLandSteward && getAllProjects()}
         {isLandSteward &&
           content?.landSteward?.steps?.map((stepSequence, index) => (
-            <div className={cx('topo-background-alternate', styles.flex)} key={index}>
+            <div
+              className={cx('topo-background-alternate', styles.flex)}
+              key={index}
+            >
               <StepsSection
                 className={styles.stepsSection}
                 title={stepSequence?.title}
@@ -248,12 +279,20 @@ function CreditClassDetail({ isLandSteward }: CreditDetailsProps): JSX.Element {
         <div className="topo-background-alternate">
           <MediaSection
             header="Videos"
-            items={isLandSteward ? content?.landSteward?.videos : content?.buyer?.videos}
+            items={
+              isLandSteward
+                ? content?.landSteward?.videos
+                : content?.buyer?.videos
+            }
           />
         </div>
         <div className="topo-background-alternate">
           <ResourcesSection
-            resources={isLandSteward ? content?.landSteward?.resources : content?.buyer?.resources}
+            resources={
+              isLandSteward
+                ? content?.landSteward?.resources
+                : content?.buyer?.resources
+            }
           />
         </div>
         {/* {isLandSteward && <CreditClassConnectSection connectSection={content?.landSteward?.connectSection} />} TODO: hidden until resource is ready */}
@@ -270,7 +309,11 @@ function CreditClassDetail({ isLandSteward }: CreditDetailsProps): JSX.Element {
           onCtaClick={onCtaClick}
           onToggleClick={setContent}
         />
-        <Modal open={!!modalIframeLink} onClose={() => setModalIframeLink('')} className={styles.modal}>
+        <Modal
+          open={!!modalIframeLink}
+          onClose={() => setModalIframeLink('')}
+          className={styles.modal}
+        >
           <iframe title="modal-iframe-link" src={modalIframeLink} />
         </Modal>
         <Modal open={isBuyerModalOpen} onClose={() => setBuyerModalOpen(false)}>

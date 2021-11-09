@@ -29,7 +29,12 @@ export const HeaderLogoLink: React.FC<{ color: string }> = ({ color }) => {
   // something more long-term. You can see the bug by visiting the /community
   // page in safari
   useEffect(() => {
-    if (typeof window !== 'undefined' && window.location && window.location.href) setIsLoaded(!isLoaded);
+    if (
+      typeof window !== 'undefined' &&
+      window.location &&
+      window.location.href
+    )
+      setIsLoaded(!isLoaded);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (

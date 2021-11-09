@@ -10,13 +10,22 @@ import { BlockContent } from 'web-components/lib/components/block-content';
 
 import { CreditClass } from '../../mocks';
 import { getImgSrc } from '../../lib/imgSrc';
-import { CreditClass as CreditClassContent, Maybe } from '../../generated/sanity-graphql';
+import {
+  CreditClass as CreditClassContent,
+  Maybe,
+} from '../../generated/sanity-graphql';
 
 type Props = {
   btnText: string;
   creditClasses: CreditClass[];
   creditClassesContent?: Maybe<Array<CreditClassContent>>;
-  justify?: 'center' | 'space-around' | 'space-between' | 'space-evenly' | 'flex-end' | 'flex-start';
+  justify?:
+    | 'center'
+    | 'space-around'
+    | 'space-between'
+    | 'space-evenly'
+    | 'flex-end'
+    | 'flex-start';
   classes?: {
     root?: string;
     card?: string;
@@ -36,7 +45,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const CreditClassCards: React.FC<Props> = ({ justify = 'center', ...props }) => {
+const CreditClassCards: React.FC<Props> = ({
+  justify = 'center',
+  ...props
+}) => {
   const history = useHistory();
   const styles = useStyles();
   const theme = useTheme();
@@ -50,7 +62,9 @@ const CreditClassCards: React.FC<Props> = ({ justify = 'center', ...props }) => 
       spacing={isMobile ? 0 : 5}
     >
       {props.creditClasses.map((c, i) => {
-        const creditClassContent = props.creditClassesContent?.find(creditClass => creditClass.path === c.id);
+        const creditClassContent = props.creditClassesContent?.find(
+          creditClass => creditClass.path === c.id,
+        );
         return (
           <Grid
             item
@@ -63,10 +77,16 @@ const CreditClassCards: React.FC<Props> = ({ justify = 'center', ...props }) => 
             <ImageActionCard
               key={i}
               btnText={props.btnText}
-              description={<BlockContent content={creditClassContent?.shortDescriptionRaw} />}
+              description={
+                <BlockContent
+                  content={creditClassContent?.shortDescriptionRaw}
+                />
+              }
               imgSrc={getImgSrc(c.imgSrc)}
               onClick={() => {
-                const path = creditClassContent?.path && `/credit-classes/${creditClassContent?.path}`;
+                const path =
+                  creditClassContent?.path &&
+                  `/credit-classes/${creditClassContent?.path}`;
                 if (path) {
                   history.push(path);
                 }

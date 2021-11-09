@@ -5,7 +5,9 @@ import { loader } from 'graphql.macro';
 import { useHistory } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 
-import LoginForm, { Values } from 'web-components/lib/components/form/LoginForm';
+import LoginForm, {
+  Values,
+} from 'web-components/lib/components/form/LoginForm';
 import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
 import auth0 from '../auth0';
 import getApiUri from '../lib/apiUri';
@@ -27,7 +29,7 @@ function Signup(): JSX.Element {
             email,
             password,
           },
-          function(err) {
+          function (err) {
             if (err) {
               reject(err);
             } else {
@@ -76,7 +78,11 @@ function Signup(): JSX.Element {
       <LoginForm
         submit={submit}
         termsLink="/terms-service/"
-        loginFromSignup={() => loginWithRedirect({ redirectUri: `${window.location.origin}/user-profile` })}
+        loginFromSignup={() =>
+          loginWithRedirect({
+            redirectUri: `${window.location.origin}/user-profile`,
+          })
+        }
         privacyLink="/privacy-policy/"
       />
     </OnBoardingSection>

@@ -22,7 +22,10 @@ const OnBoardingCard: React.FC<Props> = ({ children, className }) => {
   const classes = useStyles();
   const theme = useTheme();
   return (
-    <Card borderColor={theme.palette.grey[100]} className={clsx(classes.root, className)}>
+    <Card
+      borderColor={theme.palette.grey[100]}
+      className={clsx(classes.root, className)}
+    >
       {children}
     </Card>
   );

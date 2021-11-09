@@ -93,10 +93,18 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       [theme.breakpoints.up('md')]: {
         right: props.even ? 'auto' : theme.spacing(-2),
         left: props.even ? theme.spacing(-2) : 'auto',
-        borderRight: props.even ? 'none' : `1px solid ${theme.palette.info.light}`,
-        borderTop: props.even ? 'none' : `1px solid ${theme.palette.info.light}`,
-        borderLeft: props.even ? `1px solid ${theme.palette.info.light}` : 'none',
-        borderBottom: props.even ? `1px solid ${theme.palette.info.light}` : 'none',
+        borderRight: props.even
+          ? 'none'
+          : `1px solid ${theme.palette.info.light}`,
+        borderTop: props.even
+          ? 'none'
+          : `1px solid ${theme.palette.info.light}`,
+        borderLeft: props.even
+          ? `1px solid ${theme.palette.info.light}`
+          : 'none',
+        borderBottom: props.even
+          ? `1px solid ${theme.palette.info.light}`
+          : 'none',
       },
       [theme.breakpoints.down('sm')]: {
         left: theme.spacing(-2),
@@ -237,7 +245,11 @@ export default function NewTimeline({ items }: Props): JSX.Element {
                   <TimelineConnector className={clsx(connectorClassName)} />
                 </TimelineSeparator>
                 <TimelineContent>
-                  <Content item={item} index={index} onTitleClick={setIframeSrc} />
+                  <Content
+                    item={item}
+                    index={index}
+                    onTitleClick={setIframeSrc}
+                  />
                 </TimelineContent>
               </TimelineItem>
             );
@@ -268,7 +280,11 @@ export default function NewTimeline({ items }: Props): JSX.Element {
           })}
         </Timeline>
       </Box>
-      <Modal open={!!iframeSrc} onClose={() => setIframeSrc('')} className={classes.modal}>
+      <Modal
+        open={!!iframeSrc}
+        onClose={() => setIframeSrc('')}
+        className={classes.modal}
+      >
         <iframe title="airtable-signup-form" src={iframeSrc} />
       </Modal>
     </>

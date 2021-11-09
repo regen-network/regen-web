@@ -5,9 +5,28 @@ import SvgIcon from '@material-ui/core/SvgIcon';
 export default function PointerIcon(): JSX.Element {
   return (
     <SvgIcon fontSize="large" viewBox="0 0 70 43">
-      <svg width="70" height="43" viewBox="0 0 70 43" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="70" height="43">
-          <rect width="70" height="43" transform="matrix(1 0 0 -1 0 43)" fill="#C4C4C4" />
+      <svg
+        width="70"
+        height="43"
+        viewBox="0 0 70 43"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <mask
+          id="mask0"
+          mask-type="alpha"
+          maskUnits="userSpaceOnUse"
+          x="0"
+          y="0"
+          width="70"
+          height="43"
+        >
+          <rect
+            width="70"
+            height="43"
+            transform="matrix(1 0 0 -1 0 43)"
+            fill="#C4C4C4"
+          />
         </mask>
         <g mask="url(#mask0)">
           <g filter="url(#filter0_d)">
@@ -39,9 +58,21 @@ export default function PointerIcon(): JSX.Element {
             />
             <feOffset dy="4" />
             <feGaussianBlur stdDeviation="5" />
-            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
-            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
-            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+            <feColorMatrix
+              type="matrix"
+              values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
+            />
+            <feBlend
+              mode="normal"
+              in2="BackgroundImageFix"
+              result="effect1_dropShadow"
+            />
+            <feBlend
+              mode="normal"
+              in="SourceGraphic"
+              in2="effect1_dropShadow"
+              result="shape"
+            />
           </filter>
         </defs>
       </svg>

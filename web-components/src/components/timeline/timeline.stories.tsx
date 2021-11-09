@@ -1,7 +1,9 @@
 import * as React from 'react';
 import TimelineItem from 'web-components/lib/components/timeline/TimelineItem';
 import Timeline, { Event } from 'web-components/lib/components/timeline';
-import NewTimeline, { Item } from 'web-components/lib/components/timeline/NewTimeline';
+import NewTimeline, {
+  Item,
+} from 'web-components/lib/components/timeline/NewTimeline';
 import theme from '../../theme/muiTheme';
 
 export default {
@@ -42,7 +44,9 @@ const events: Event[] = [
   },
 ];
 
-export const timeline = (): JSX.Element => <Timeline events={events} completedItemIndex={1} />;
+export const timeline = (): JSX.Element => (
+  <Timeline events={events} completedItemIndex={1} />
+);
 export const timelineItem = (): JSX.Element => (
   <TimelineItem
     date={events[0].date as string}

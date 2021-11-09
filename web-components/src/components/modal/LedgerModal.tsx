@@ -3,7 +3,10 @@ import { makeStyles, Theme, withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import clsx from 'clsx';
 import ReactHtmlParser from 'react-html-parser';
-import { ServiceClientImpl, GetTxResponse } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
+import {
+  ServiceClientImpl,
+  GetTxResponse,
+} from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 
 import Modal, { RegenModalProps } from './index';
 import RegenLedgerIcon from '../icons/RegenLedgerIcon';
@@ -137,7 +140,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     position: 'absolute',
     top: theme.spacing(4),
     width: '100%',
-    background: 'linear-gradient(180deg, rgba(250, 250, 250, 0) 0%, #FAFAFA 100%)',
+    background:
+      'linear-gradient(180deg, rgba(250, 250, 250, 0) 0%, #FAFAFA 100%)',
     height: theme.spacing(15.15),
   },
   ledgerIconContainer: {
@@ -262,10 +266,18 @@ function SummaryItem({ item }: { item: Item }): JSX.Element {
     <>
       {item.value ? (
         <Grid container className={classes.summaryItem}>
-          <Grid className={clsx(classes.label, classes.summaryLabel)} xs={4} item>
+          <Grid
+            className={clsx(classes.label, classes.summaryLabel)}
+            xs={4}
+            item
+          >
             {item.label}
           </Grid>
-          <Grid xs={8} className={clsx(classes.value, classes.summaryValue)} item>
+          <Grid
+            xs={8}
+            className={clsx(classes.value, classes.summaryValue)}
+            item
+          >
             {parseText(item.value)}
           </Grid>
         </Grid>
@@ -316,15 +328,28 @@ export default function LedgerModal({
             Entity Information
           </Title>
           <SummaryItem item={{ label: 'organization', value: party.name }} />
-          <SummaryItem item={{ label: 'individual', value: party.individual }} />
+          <SummaryItem
+            item={{ label: 'individual', value: party.individual }}
+          />
           <SummaryItem item={{ label: 'role', value: party.role }} />
-          <SummaryItem item={{ label: 'account address', value: party.address }} />
+          <SummaryItem
+            item={{ label: 'account address', value: party.address }}
+          />
           <SummaryItem item={{ label: 'location', value: party.location }} />
-          {party.description && <SummaryItem item={{ label: 'description', value: party.description }} />}
+          {party.description && (
+            <SummaryItem
+              item={{ label: 'description', value: party.description }}
+            />
+          )}
         </>
       ) : (
         <>
-          <Grid container alignItems="center" justify="center" className={classes.title}>
+          <Grid
+            container
+            alignItems="center"
+            justify="center"
+            className={classes.title}
+          >
             <Title variant="h5">Summary</Title>
             <CustomTooltip
               arrow
@@ -346,7 +371,9 @@ export default function LedgerModal({
             <>
               <Grid container wrap="nowrap" className={classes.blockchainTitle}>
                 <Grid item container alignItems="center">
-                  <div className={clsx(classes.label, classes.blockchain)}>blockchain data (devnet)</div>
+                  <div className={clsx(classes.label, classes.blockchain)}>
+                    blockchain data (devnet)
+                  </div>
                   <CustomTooltip
                     arrow
                     placement="top"
@@ -368,74 +395,137 @@ export default function LedgerModal({
                 </Grid>
               </Grid>
               <div
-                className={open ? classes.blockchainData : clsx(classes.blockchainData, classes.collapsed)}
+                className={
+                  open
+                    ? classes.blockchainData
+                    : clsx(classes.blockchainData, classes.collapsed)
+                }
               >
                 <Grid container className={classes.blockchainItem}>
-                  <Grid className={clsx(classes.label, classes.blockchainLabel)} xs={4} item>
+                  <Grid
+                    className={clsx(classes.label, classes.blockchainLabel)}
+                    xs={4}
+                    item
+                  >
                     hash
                   </Grid>
-                  <Grid xs={8} item className={clsx(classes.value, classes.blockchainValue)}>
+                  <Grid
+                    xs={8}
+                    item
+                    className={clsx(classes.value, classes.blockchainValue)}
+                  >
                     {txRes.txResponse.txhash}
                   </Grid>
                 </Grid>
                 <Grid container className={classes.blockchainItem}>
-                  <Grid className={clsx(classes.label, classes.blockchainLabel)} xs={4} item>
+                  <Grid
+                    className={clsx(classes.label, classes.blockchainLabel)}
+                    xs={4}
+                    item
+                  >
                     height
                   </Grid>
-                  <Grid xs={8} item className={clsx(classes.value, classes.blockchainValue)}>
+                  <Grid
+                    xs={8}
+                    item
+                    className={clsx(classes.value, classes.blockchainValue)}
+                  >
                     {numberFormat.format(txRes.txResponse.height.low)}
                   </Grid>
                 </Grid>
                 <Grid container className={classes.blockchainItem}>
-                  <Grid className={clsx(classes.label, classes.blockchainLabel)} xs={4} item>
+                  <Grid
+                    className={clsx(classes.label, classes.blockchainLabel)}
+                    xs={4}
+                    item
+                  >
                     status
                   </Grid>
-                  <Grid xs={8} item className={clsx(classes.value, classes.blockchainValue)}>
-                    {txRes.txResponse.code === 0 && <span className={classes.success}>success</span>}
+                  <Grid
+                    xs={8}
+                    item
+                    className={clsx(classes.value, classes.blockchainValue)}
+                  >
+                    {txRes.txResponse.code === 0 && (
+                      <span className={classes.success}>success</span>
+                    )}
                   </Grid>
                 </Grid>
                 {txRes.txResponse.timestamp && (
                   <Grid container className={classes.blockchainItem}>
-                    <Grid className={clsx(classes.label, classes.blockchainLabel)} xs={4} item>
+                    <Grid
+                      className={clsx(classes.label, classes.blockchainLabel)}
+                      xs={4}
+                      item
+                    >
                       timestamp
                     </Grid>
-                    <Grid xs={8} item className={clsx(classes.value, classes.blockchainValue)}>
+                    <Grid
+                      xs={8}
+                      item
+                      className={clsx(classes.value, classes.blockchainValue)}
+                    >
                       {txRes.txResponse.timestamp}
                     </Grid>
                   </Grid>
                 )}
                 <Grid container className={classes.blockchainItem}>
-                  <Grid className={clsx(classes.label, classes.blockchainLabel)} xs={4} item>
+                  <Grid
+                    className={clsx(classes.label, classes.blockchainLabel)}
+                    xs={4}
+                    item
+                  >
                     memo
                   </Grid>
-                  <Grid xs={8} item className={clsx(classes.value, classes.blockchainValue)}>
+                  <Grid
+                    xs={8}
+                    item
+                    className={clsx(classes.value, classes.blockchainValue)}
+                  >
                     {(txRes.tx.body && txRes.tx.body.memo) || '-'}
                   </Grid>
                 </Grid>
                 <Grid container className={classes.blockchainItem}>
-                  <Grid className={clsx(classes.label, classes.blockchainLabel)} xs={4} item>
+                  <Grid
+                    className={clsx(classes.label, classes.blockchainLabel)}
+                    xs={4}
+                    item
+                  >
                     transaction fee
                   </Grid>
-                  <Grid xs={8} item className={clsx(classes.value, classes.blockchainValue)}>
+                  <Grid
+                    xs={8}
+                    item
+                    className={clsx(classes.value, classes.blockchainValue)}
+                  >
                     {txRes.tx.authInfo &&
                     txRes.tx.authInfo.fee &&
                     txRes.tx.authInfo.fee.amount &&
                     txRes.tx.authInfo.fee.amount.length
-                      ? `${numberFormat.format(parseFloat(txRes.tx.authInfo.fee.amount[0].amount))} ${
-                          txRes.tx.authInfo.fee.amount[0].denom
-                        }`
+                      ? `${numberFormat.format(
+                          parseFloat(txRes.tx.authInfo.fee.amount[0].amount),
+                        )} ${txRes.tx.authInfo.fee.amount[0].denom}`
                       : '0'}
                   </Grid>
                 </Grid>
                 <Grid container className={classes.blockchainItem}>
-                  <Grid className={clsx(classes.label, classes.blockchainLabel)} xs={12} sm={4} item>
+                  <Grid
+                    className={clsx(classes.label, classes.blockchainLabel)}
+                    xs={12}
+                    sm={4}
+                    item
+                  >
                     transaction data
                   </Grid>
                   <Grid
                     xs={12}
                     sm={8}
                     item
-                    className={clsx(classes.logs, classes.value, classes.blockchainValue)}
+                    className={clsx(
+                      classes.logs,
+                      classes.value,
+                      classes.blockchainValue,
+                    )}
                   >
                     {ReactHtmlParser(
                       JSON.stringify(txRes.txResponse.logs, null, 2)
@@ -447,7 +537,11 @@ export default function LedgerModal({
                 {open ? null : <div className={classes.gradient} />}
               </div>
               {link && (
-                <ContainedButton href={link} target="_blank" className={classes.button}>
+                <ContainedButton
+                  href={link}
+                  target="_blank"
+                  className={classes.button}
+                >
                   review on regen ledger
                 </ContainedButton>
               )}

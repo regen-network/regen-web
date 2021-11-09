@@ -126,7 +126,14 @@ const Toggle: React.FC<ToggleProps> = ({
   const styles = useStyles();
 
   return (
-    <div className={clsx(styles.root, checked && styles.active, className, classes && classes.root)}>
+    <div
+      className={clsx(
+        styles.root,
+        checked && styles.active,
+        className,
+        classes && classes.root,
+      )}
+    >
       <div className={styles.top}>
         <FormControlLabel
           control={
@@ -167,7 +174,9 @@ const Toggle: React.FC<ToggleProps> = ({
             styles.description,
             type === 'checkbox' && styles.descriptionCheckbox,
             disabled && styles.disabled,
-            disabled && type === 'checkbox' && styles.disabledDescriptionCheckbox,
+            disabled &&
+              type === 'checkbox' &&
+              styles.disabledDescriptionCheckbox,
             classes && classes.description,
           )}
         >

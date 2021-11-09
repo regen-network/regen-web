@@ -99,10 +99,22 @@ const App: React.FC = (): JSX.Element => {
             <Redirect to="/projects/wilmot/admin" />
           </Route>
           <Route exact path="/buyers" component={BuyersPage} />
-          <Route exact path="/create-methodology" component={CreateMethodology} />
-          <Route exact path="/create-credit-class" component={CreateCreditClass} />
+          <Route
+            exact
+            path="/create-methodology"
+            component={CreateMethodology}
+          />
+          <Route
+            exact
+            path="/create-credit-class"
+            component={CreateCreditClass}
+          />
           <Route exact path="/land-stewards" component={LandStewards} />
-          <Route exact path="/methodology-review-process" component={MethodologyReviewProcess} />
+          <Route
+            exact
+            path="/methodology-review-process"
+            component={MethodologyReviewProcess}
+          />
           <Route
             path="/projects"
             render={({ match: { path } }) => (
@@ -118,12 +130,18 @@ const App: React.FC = (): JSX.Element => {
             path="/post-purchase"
             render={({ match: { path } }) => (
               <>
-                <Route path={`${path}/:projectId/:walletId/:name`} component={PostPurchase} />
+                <Route
+                  path={`${path}/:projectId/:walletId/:name`}
+                  component={PostPurchase}
+                />
               </>
             )}
           />
           <ProtectedRoute path="/user-profile" component={UserProfile} />
-          <ProtectedRoute path="/organization-profile" component={OrganizationProfile} />
+          <ProtectedRoute
+            path="/organization-profile"
+            component={OrganizationProfile}
+          />
           <Route
             path="/project-pages"
             render={({ match: { path } }) => (
@@ -133,12 +151,30 @@ const App: React.FC = (): JSX.Element => {
                   path={`${path}/:projectId/choose-credit-class`}
                   component={ChooseCreditClass}
                 />
-                <ProtectedRoute path={`${path}/:projectId/basic-info`} component={BasicInfo} />
-                <ProtectedRoute path={`${path}/:projectId/location`} component={ProjectLocation} />
-                <ProtectedRoute path={`${path}/:projectId/story`} component={Story} />
-                <ProtectedRoute path={`${path}/:projectId/media`} component={Media} />
-                <ProtectedRoute path={`${path}/:projectId/roles`} component={Roles} />
-                <ProtectedRoute path={`${path}/:projectId/entity-display`} component={EntityDisplay} />
+                <ProtectedRoute
+                  path={`${path}/:projectId/basic-info`}
+                  component={BasicInfo}
+                />
+                <ProtectedRoute
+                  path={`${path}/:projectId/location`}
+                  component={ProjectLocation}
+                />
+                <ProtectedRoute
+                  path={`${path}/:projectId/story`}
+                  component={Story}
+                />
+                <ProtectedRoute
+                  path={`${path}/:projectId/media`}
+                  component={Media}
+                />
+                <ProtectedRoute
+                  path={`${path}/:projectId/roles`}
+                  component={Roles}
+                />
+                <ProtectedRoute
+                  path={`${path}/:projectId/entity-display`}
+                  component={EntityDisplay}
+                />
 
                 {/* Used for Project Plan flow
                 <ProtectedRoute path={`${path}/:projectId/getting-started`} component={GettingStarted} />
@@ -165,10 +201,22 @@ const App: React.FC = (): JSX.Element => {
                       path={`${path}/credits/create-and-transfer`}
                       component={BuyerCreditsTransfer}
                     />
-                    <ProtectedRoute path={`${path}/credits/issue`} component={CreditsIssue} />
-                    <ProtectedRoute path={`${path}/credits/transfer`} component={CreditsTransfer} />
-                    <ProtectedRoute path={`${path}/credits/retire`} component={CreditsRetire} />
-                    <ProtectedRoute path={`${path}/buyer/create`} component={BuyerCreate} />
+                    <ProtectedRoute
+                      path={`${path}/credits/issue`}
+                      component={CreditsIssue}
+                    />
+                    <ProtectedRoute
+                      path={`${path}/credits/transfer`}
+                      component={CreditsTransfer}
+                    />
+                    <ProtectedRoute
+                      path={`${path}/credits/retire`}
+                      component={CreditsRetire}
+                    />
+                    <ProtectedRoute
+                      path={`${path}/buyer/create`}
+                      component={BuyerCreate}
+                    />
                   </>
                 )}
               </>
@@ -179,7 +227,10 @@ const App: React.FC = (): JSX.Element => {
             render={({ match: { path } }) => (
               <>
                 {/* <Route path={path} exact component={MethodologiesList} /> TODO */}
-                <Route path={`${path}/:methodologyId`} component={MethodologyDetails} />
+                <Route
+                  path={`${path}/:methodologyId`}
+                  component={MethodologyDetails}
+                />
               </>
             )}
           />
@@ -187,7 +238,10 @@ const App: React.FC = (): JSX.Element => {
             path="/credit-classes"
             render={({ match: { path } }) => (
               <>
-                <Route path={`${path}/:creditClassId`} component={CreditClassDetails} />
+                <Route
+                  path={`${path}/:creditClassId`}
+                  component={CreditClassDetails}
+                />
               </>
             )}
           />

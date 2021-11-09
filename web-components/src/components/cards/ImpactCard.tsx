@@ -62,7 +62,8 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   }),
   description: props => ({
     [theme.breakpoints.up('sm')]: {
-      fontSize: props.largeFontSize || props.monitored ? '1.125rem' : '0.875rem',
+      fontSize:
+        props.largeFontSize || props.monitored ? '1.125rem' : '0.875rem',
       paddingBottom: props.monitored ? theme.spacing(10) : theme.spacing(0),
     },
     [theme.breakpoints.down('xs')]: {
@@ -98,7 +99,8 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     position: 'absolute',
     bottom: 0,
     width: '100%',
-    background: 'linear-gradient(180deg, rgba(250, 250, 250, 0) 2.48%, #FAFAFA 64.06%)',
+    background:
+      'linear-gradient(180deg, rgba(250, 250, 250, 0) 2.48%, #FAFAFA 64.06%)',
   }),
   monitoredIcon: {
     // [theme.breakpoints.down('xs')]: {

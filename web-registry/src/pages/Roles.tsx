@@ -5,7 +5,10 @@ import { useHistory, useParams } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 
 import Description from 'web-components/lib/components/description';
-import { FormValues, isIndividual } from 'web-components/lib/components/inputs/RoleField';
+import {
+  FormValues,
+  isIndividual,
+} from 'web-components/lib/components/inputs/RoleField';
 import { OnboardingFormTemplate } from '../components/templates';
 import { RolesForm, RolesValues } from '../components/organisms';
 import {
@@ -37,7 +40,8 @@ function getPartyIds(
       return { id: party.userByPartyId.id, ...p };
     }
     if (party.type === 'ORGANIZATION' && party.organizationByPartyId) {
-      const members = party.organizationByPartyId.organizationMembersByOrganizationId?.nodes;
+      const members =
+        party.organizationByPartyId.organizationMembersByOrganizationId?.nodes;
       return {
         id: party.organizationByPartyId.id,
         addressId: party.addressByAddressId?.id,
@@ -55,7 +59,12 @@ function stripPartyIds(values: FormValues | undefined): FormValues | undefined {
   if (values?.id && values?.partyId) {
     delete values.id;
     delete values.partyId;
-    if (!isIndividual(values) && values?.addressId && values?.ownerId && values?.ownerPartyId) {
+    if (
+      !isIndividual(values) &&
+      values?.addressId &&
+      values?.ownerId &&
+      values?.ownerPartyId
+    ) {
       delete values.addressId;
       delete values.ownerId;
       delete values.ownerPartyId;
@@ -67,9 +76,15 @@ function stripPartyIds(values: FormValues | undefined): FormValues | undefined {
 function stripIds(values: RolesValues): RolesValues {
   if (values) {
     return {
-      'http://regen.network/landOwner': stripPartyIds(values['http://regen.network/landOwner']),
-      'http://regen.network/landSteward': stripPartyIds(values['http://regen.network/landSteward']),
-      'http://regen.network/projectDeveloper': stripPartyIds(values['http://regen.network/projectDeveloper']),
+      'http://regen.network/landOwner': stripPartyIds(
+        values['http://regen.network/landOwner'],
+      ),
+      'http://regen.network/landSteward': stripPartyIds(
+        values['http://regen.network/landSteward'],
+      ),
+      'http://regen.network/projectDeveloper': stripPartyIds(
+        values['http://regen.network/projectDeveloper'],
+      ),
       'http://regen.network/projectOriginator': stripPartyIds(
         values['http://regen.network/projectOriginator'],
       ),
@@ -129,10 +144,16 @@ const Roles: React.FC = () => {
     let projectPatch: ProjectPatch = {};
 
     if (values['http://regen.network/landOwner']?.partyId) {
-      projectPatch = { landOwnerId: values['http://regen.network/landOwner']?.partyId, ...projectPatch };
+      projectPatch = {
+        landOwnerId: values['http://regen.network/landOwner']?.partyId,
+        ...projectPatch,
+      };
     }
     if (values['http://regen.network/landSteward']?.partyId) {
-      projectPatch = { stewardId: values['http://regen.network/landSteward']?.partyId, ...projectPatch };
+      projectPatch = {
+        stewardId: values['http://regen.network/landSteward']?.partyId,
+        ...projectPatch,
+      };
     }
     if (values['http://regen.network/projectDeveloper']?.partyId) {
       projectPatch = {
@@ -173,14 +194,22 @@ const Roles: React.FC = () => {
   }
 
   return (
-    <OnboardingFormTemplate activeStep={activeStep} title="Roles" saveAndExit={saveAndExit}>
+    <OnboardingFormTemplate
+      activeStep={activeStep}
+      title="Roles"
+      saveAndExit={saveAndExit}
+    >
       <Description className={styles.description}>
         See an example{' '}
         <Link to={exampleProjectUrl} target="_blank">
           project page»
         </Link>
       </Description>
-      <RolesForm submit={submit} initialValues={initialFieldValues} projectCreator={userProfileData} />
+      <RolesForm
+        submit={submit}
+        initialValues={initialFieldValues}
+        projectCreator={userProfileData}
+      />
     </OnboardingFormTemplate>
   );
 };

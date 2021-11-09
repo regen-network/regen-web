@@ -20,7 +20,12 @@ const PlanStepper: React.FC<PlanStepperProps> = ({ activeStep }) => {
   const classes = useStyles();
 
   return (
-    <Stepper className={classes.stepper} activeStep={activeStep} steps={steps} background={background} />
+    <Stepper
+      className={classes.stepper}
+      activeStep={activeStep}
+      steps={steps}
+      background={background}
+    />
   );
 };
 

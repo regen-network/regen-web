@@ -55,22 +55,47 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const options = { year: 'numeric', month: 'short', day: 'numeric' };
+const options: Intl.DateTimeFormatOptions = {
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric',
+};
 
-export default function CreditCard({ number, description, date, icon }: CreditCardProps): JSX.Element {
+export default function CreditCard({
+  number,
+  description,
+  date,
+  icon,
+}: CreditCardProps): JSX.Element {
   const classes = useStyles({});
   const theme = useTheme();
   return (
-    <Card borderRadius="10px" borderColor={theme.palette.grey[100]} elevation={1} height="100%">
+    <Card
+      borderRadius="10px"
+      borderColor={theme.palette.grey[100]}
+      elevation={1}
+      height="100%"
+    >
       <div className={classes.container}>
         <div className={classes.iconContainer}>
-          <Grid className={classes.icon} container alignItems="center" justify="center">
+          <Grid
+            className={classes.icon}
+            container
+            alignItems="center"
+            justify="center"
+          >
             {icon}
           </Grid>
         </div>
-        <div className={classes.number}>{new Intl.NumberFormat('en-US').format(number)}</div>
+        <div className={classes.number}>
+          {new Intl.NumberFormat('en-US').format(number)}
+        </div>
         <div className={classes.description}>{description}</div>
-        {date && <div className={classes.date}>{new Date(date).toLocaleDateString('en-US', options)}</div>}
+        {date && (
+          <div className={classes.date}>
+            {new Date(date).toLocaleDateString('en-US', options)}
+          </div>
+        )}
       </div>
     </Card>
   );

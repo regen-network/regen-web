@@ -7,7 +7,11 @@ import axios from 'axios';
 
 import Title from '../title';
 import TextField from '../inputs/TextField';
-import { requiredMessage, validateEmail, invalidEmailMessage } from '../inputs/validation';
+import {
+  requiredMessage,
+  validateEmail,
+  invalidEmailMessage,
+} from '../inputs/validation';
 import CheckboxGroup from '../inputs/CheckboxGroup';
 import SelectTextField from '../inputs/SelectTextField';
 import Submit from './Submit';
@@ -55,7 +59,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function MoreInfoForm({ onClose, onSubmit, apiUrl }: MoreInfoFormProps): JSX.Element {
+export default function MoreInfoForm({
+  onClose,
+  onSubmit,
+  apiUrl,
+}: MoreInfoFormProps): JSX.Element {
   const classes = useStyles();
   return (
     <div>
@@ -128,12 +136,24 @@ export default function MoreInfoForm({ onClose, onSubmit, apiUrl }: MoreInfoForm
             });
         }}
       >
-        {({ values, errors, submitForm, isSubmitting, isValid, submitCount, status }) => {
+        {({
+          values,
+          errors,
+          submitForm,
+          isSubmitting,
+          isValid,
+          submitCount,
+          status,
+        }) => {
           return (
             <div>
               <Form className={classes.form} translate="yes">
                 <div>
-                  <Field component={TextField} label="Your full name" name="name" />
+                  <Field
+                    component={TextField}
+                    label="Your full name"
+                    name="name"
+                  />
                   <Field
                     component={TextField}
                     className={classes.textField}
@@ -151,7 +171,11 @@ export default function MoreInfoForm({ onClose, onSubmit, apiUrl }: MoreInfoForm
                     optional
                   />
                 </div>
-                <Grid container alignItems="center" className={classes.textField}>
+                <Grid
+                  container
+                  alignItems="center"
+                  className={classes.textField}
+                >
                   <Grid item xs={6}>
                     <Field
                       options={[
@@ -159,10 +183,22 @@ export default function MoreInfoForm({ onClose, onSubmit, apiUrl }: MoreInfoForm
                         { value: '<$500', label: '<$500' },
                         { value: '$501 - $1,000', label: '$501 - $1,000' },
                         { value: '$1,001 - $5,000', label: '$1,001 - $5,000' },
-                        { value: '$5,001 - $10,000', label: '$5,001 - $10,000' },
-                        { value: '$10,001 - $50,000', label: '$10,001 - $50,000' },
-                        { value: '$50,001 - $100,000', label: '$50,001 - $100,000' },
-                        { value: '$100,001 - $500,000', label: '$100,001 - $500,000' },
+                        {
+                          value: '$5,001 - $10,000',
+                          label: '$5,001 - $10,000',
+                        },
+                        {
+                          value: '$10,001 - $50,000',
+                          label: '$10,001 - $50,000',
+                        },
+                        {
+                          value: '$50,001 - $100,000',
+                          label: '$50,001 - $100,000',
+                        },
+                        {
+                          value: '$100,001 - $500,000',
+                          label: '$100,001 - $500,000',
+                        },
                         { value: '$500,001+', label: '$500,001+' },
                       ]}
                       component={SelectTextField}

@@ -60,7 +60,9 @@ export default function ImageCrop({
   const classes = useStyles();
   const imgRef = useRef<any>(null);
   const [crop, setCrop] = useState<Crop | undefined>(fixedCrop);
-  const [completedCrop, setCompletedCrop] = useState<Crop | undefined>(undefined);
+  const [completedCrop, setCompletedCrop] = useState<Crop | undefined>(
+    undefined,
+  );
   const mobileMatches = useMediaQuery('(max-width:834px)');
 
   const showCroppedImage = useCallback(async () => {
@@ -134,7 +136,11 @@ export default function ImageCrop({
         <Button onClick={onCancel} className={classes.cancelButton}>
           Cancel
         </Button>
-        <ContainedButton onClick={showCroppedImage} className={classes.button} disabled={!completedCrop}>
+        <ContainedButton
+          onClick={showCroppedImage}
+          className={classes.button}
+          disabled={!completedCrop}
+        >
           Apply
         </ContainedButton>
       </div>

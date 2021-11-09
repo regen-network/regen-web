@@ -81,8 +81,11 @@ const BasicInfoForm: React.FC<{
       enableReinitialize
       validateOnMount
       initialValues={{
-        'http://schema.org/name': initialValues?.['http://schema.org/name'] || '',
-        'http://regen.network/size': initialValues?.['http://regen.network/size'] || {
+        'http://schema.org/name':
+          initialValues?.['http://schema.org/name'] || '',
+        'http://regen.network/size': initialValues?.[
+          'http://regen.network/size'
+        ] || {
           'http://qudt.org/1.1/schema/qudt#numericValue': {
             '@type': 'http://www.w3.org/2001/XMLSchema#double',
             '@value': undefined,
@@ -152,8 +155,14 @@ const BasicInfoForm: React.FC<{
                     component={SelectTextField}
                     name="['http://regen.network/size'].['http://qudt.org/1.1/schema/qudt#unit'].@value"
                     options={[
-                      { value: 'http://qudt.org/1.1/vocab/unit#HA', label: 'Hectares' },
-                      { value: 'http://qudt.org/1.1/vocab/unit#AC', label: 'Acres' },
+                      {
+                        value: 'http://qudt.org/1.1/vocab/unit#HA',
+                        label: 'Hectares',
+                      },
+                      {
+                        value: 'http://qudt.org/1.1/vocab/unit#AC',
+                        label: 'Acres',
+                      },
                     ]}
                   />
                 </div>

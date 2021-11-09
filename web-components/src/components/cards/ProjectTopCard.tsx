@@ -33,7 +33,9 @@ const useStyles = makeStyles(theme => ({
       padding: `${theme.spacing(8)} ${theme.spacing(7.5)} ${theme.spacing(9)}`,
     },
     [theme.breakpoints.up('sm')]: {
-      padding: `${theme.spacing(10.9)} ${theme.spacing(5)} ${theme.spacing(12.5)}`,
+      padding: `${theme.spacing(10.9)} ${theme.spacing(5)} ${theme.spacing(
+        12.5,
+      )}`,
     },
   },
   separator: {
@@ -132,7 +134,11 @@ export default function ProjectTopCard({
           <Grid container>
             {sdgs.map((sdg: SDG, index: number) => (
               <Grid className={styles.sdgGridItem} key={index} item xs={6}>
-                <img className={styles.image} alt={sdg.title || sdg.imageUrl} src={sdg.imageUrl} />
+                <img
+                  className={styles.image}
+                  alt={sdg.title || sdg.imageUrl}
+                  src={sdg.imageUrl}
+                />
               </Grid>
               // Previous layout version, keep it here in case we wanna use it in the future
               // <Grid key={index} className={styles.sdgGrid} container wrap="nowrap" alignItems="center">
@@ -149,13 +155,21 @@ export default function ProjectTopCard({
       )}
       {projectDeveloper && (
         <div className={cx(styles.userInfo, classes && classes.userInfo)}>
-          <UserInfoWithTitle size="xl" user={projectDeveloper} title="project developer" />
+          <UserInfoWithTitle
+            size="xl"
+            user={projectDeveloper}
+            title="project developer"
+          />
         </div>
       )}
       {landSteward && (
         <div className={cx(styles.userInfo, classes && classes.userInfo)}>
           {/* <hr className={styles.separator} /> */}
-          <UserInfoWithTitle size="xl" user={landSteward} title="land steward" />
+          <UserInfoWithTitle
+            size="xl"
+            user={landSteward}
+            title="land steward"
+          />
         </div>
       )}
       {landOwner && (

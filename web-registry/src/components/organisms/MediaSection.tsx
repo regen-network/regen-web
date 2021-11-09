@@ -1,7 +1,9 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 
-import ArticleCard, { getBtnText } from 'web-components/lib/components/cards/ArticleCard';
+import ArticleCard, {
+  getBtnText,
+} from 'web-components/lib/components/cards/ArticleCard';
 import { getFormattedDate } from 'web-components/lib/utils/format';
 import { SliderSection } from 'web-components/lib/components/section/SliderSection';
 

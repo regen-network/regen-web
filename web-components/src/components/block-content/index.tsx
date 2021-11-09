@@ -15,7 +15,10 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const CustomBlockContent: React.FC<{ content?: any; tooltipText?: string }> = ({ content, tooltipText }) => {
+const CustomBlockContent: React.FC<{ content?: any; tooltipText?: string }> = ({
+  content,
+  tooltipText,
+}) => {
   const styles = useStyles();
 
   const serializers = {
@@ -31,7 +34,9 @@ const CustomBlockContent: React.FC<{ content?: any; tooltipText?: string }> = ({
           <a href={href}>{children}</a>
         );
       },
-      underline: (props: any) => <UnderlineTooltip {...props} title={tooltipText} />,
+      underline: (props: any) => (
+        <UnderlineTooltip {...props} title={tooltipText} />
+      ),
     },
   };
 

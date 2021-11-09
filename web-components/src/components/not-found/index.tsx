@@ -109,10 +109,16 @@ const NotFound = ({ img, home = '/' }: NotFoundProps): JSX.Element => {
           Oops! Page not found.
         </Title>
         <Typography align="center" className={classes.text}>
-          The page you are looking for might have been temporarily removed or had its name changed.
+          The page you are looking for might have been temporarily removed or
+          had its name changed.
         </Typography>
-        <ContainedButton style={{ whiteSpace: 'nowrap' }} href={home} className={classes.button}>
-          Visit Our Homepage <Box display={{ xs: 'none', sm: 'inline' }}>{'\u00A0'}Instead</Box>
+        <ContainedButton
+          style={{ whiteSpace: 'nowrap' }}
+          href={home}
+          className={classes.button}
+        >
+          Visit Our Homepage{' '}
+          <Box display={{ xs: 'none', sm: 'inline' }}>{'\u00A0'}Instead</Box>
         </ContainedButton>
       </div>
     </div>

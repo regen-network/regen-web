@@ -31,7 +31,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const MoreProjectsSection = ({ classes, projects, title }: MoreProjectsProps): JSX.Element => {
+const MoreProjectsSection = ({
+  classes,
+  projects,
+  title,
+}: MoreProjectsProps): JSX.Element => {
   const styles = useStyles();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
@@ -40,7 +44,10 @@ const MoreProjectsSection = ({ classes, projects, title }: MoreProjectsProps): J
     <Section
       title={title || 'More Projects'}
       titleAlign={isMobile ? 'left' : 'center'}
-      classes={{ root: cx(styles.root, classes?.root), title: cx(styles.title, classes?.title) }}
+      classes={{
+        root: cx(styles.root, classes?.root),
+        title: cx(styles.title, classes?.title),
+      }}
     >
       <LazyLoad offset={300}>
         <ProjectCards projects={projects} />

@@ -143,7 +143,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
 
 const FooterItem = ({ title, items }: FooterItemProps): JSX.Element => {
   const classes = useStyles({});
-
+  console.log('ITEMS', items)
   return (
     <div className={classes.footerItem}>
       <Title className={classes.title} variant="h5">
@@ -152,7 +152,11 @@ const FooterItem = ({ title, items }: FooterItemProps): JSX.Element => {
       <List className={classes.list}>
         {items.map((item, index) => (
           <ListItem className={classes.subTitle} key={index}>
-            <Link href={item.href} rel="noopener noreferrer" target={item.target}>
+            <Link
+              href={item.href}
+              rel="noopener noreferrer"
+              target={item.target}
+            >
               {item.title}
             </Link>
           </ListItem>
@@ -176,13 +180,22 @@ export default function Footer({
       <Section classes={{ root: classes.section }}>
         <Grid container>
           <Grid item xs={12} sm={3}>
-            <FooterItem title={footerItems[0].title} items={footerItems[0].items} />
+            <FooterItem
+              title={footerItems[0].title}
+              items={footerItems[0].items}
+            />
           </Grid>
           <Grid item xs={12} sm={3}>
-            <FooterItem title={footerItems[1].title} items={footerItems[1].items} />
+            <FooterItem
+              title={footerItems[1].title}
+              items={footerItems[1].items}
+            />
           </Grid>
           <Grid item xs={12} sm={2}>
-            <FooterItem title={footerItems[2].title} items={footerItems[2].items} />
+            <FooterItem
+              title={footerItems[2].title}
+              items={footerItems[2].items}
+            />
           </Grid>
           <Grid item xs={12} sm={4} className={classes.footerItem}>
             <Title className={classes.title} variant="h5">
@@ -207,7 +220,8 @@ export default function Footer({
         <hr className={classes.separator} />
         <Grid className={classes.bottomGrid} container justify="space-between">
           <Grid item className={classes.bottom}>
-            <Link href={termsUrl}>Terms</Link> | <Link href={privacyUrl}>Privacy</Link>
+            <Link href={termsUrl}>Terms</Link> |{' '}
+            <Link href={privacyUrl}>Privacy</Link>
           </Grid>
           <Grid item className={classes.bottom}>
             © 2021 Regen Network Development, Inc

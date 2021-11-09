@@ -18,7 +18,12 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-function RegenLogoIcon({ className, color = '#4FB573', onMouseEnter, onMouseLeave }: Props): JSX.Element {
+function RegenLogoIcon({
+  className,
+  color = '#4FB573',
+  onMouseEnter,
+  onMouseLeave,
+}: Props): JSX.Element {
   const classes = useStyles({});
 
   return (

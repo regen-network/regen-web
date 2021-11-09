@@ -71,13 +71,20 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function Action({ name, description, imgSrc, className }: ActionProps): JSX.Element {
+export default function Action({
+  name,
+  description,
+  imgSrc,
+  className,
+}: ActionProps): JSX.Element {
   const classes = useStyles({});
   const theme = useTheme();
 
   const [expanded, setExpanded] = useState(false);
   const texts: Texts = truncate(description, 310, 100);
-  const desc: string = expanded ? texts.truncated + ' ' + texts.rest : texts.truncated;
+  const desc: string = expanded
+    ? texts.truncated + ' ' + texts.rest
+    : texts.truncated;
 
   const handleChange = (): void => {
     setExpanded(prev => !prev);
@@ -93,9 +100,17 @@ export default function Action({ name, description, imgSrc, className }: ActionP
           <span className={classes.readMore} onClick={handleChange}>
             read {expanded ? 'less' : 'more'}
             {expanded ? (
-              <ArrowDownIcon className={classes.icon} direction="up" color={theme.palette.secondary.main} />
+              <ArrowDownIcon
+                className={classes.icon}
+                direction="up"
+                color={theme.palette.secondary.main}
+              />
             ) : (
-              <ArrowDownIcon className={classes.icon} direction="down" color={theme.palette.secondary.main} />
+              <ArrowDownIcon
+                className={classes.icon}
+                direction="down"
+                color={theme.palette.secondary.main}
+              />
             )}
           </span>
         )}

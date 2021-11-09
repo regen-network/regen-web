@@ -71,7 +71,13 @@ export default function Submit({
 }: SubmitProps): JSX.Element {
   const classes = useStyles();
   return (
-    <Grid className={className} container wrap="nowrap" alignItems="center" justify="flex-end">
+    <Grid
+      className={className}
+      container
+      wrap="nowrap"
+      alignItems="center"
+      justify="flex-end"
+    >
       <Grid
         xs={5}
         item
@@ -84,7 +90,14 @@ export default function Submit({
       >
         cancel
       </Grid>
-      <Grid xs={7} item container direction="column" justify="flex-end" className={classes.submitButton}>
+      <Grid
+        xs={7}
+        item
+        container
+        direction="column"
+        justify="flex-end"
+        className={classes.submitButton}
+      >
         <Grid item>
           <ContainedButton
             className={classes.button}

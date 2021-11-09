@@ -68,7 +68,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const Navigation = ({ categories, onClick, category }: NavigationProps): JSX.Element => {
+const Navigation = ({
+  categories,
+  onClick,
+  category,
+}: NavigationProps): JSX.Element => {
   const classes = useStyles();
 
   return (

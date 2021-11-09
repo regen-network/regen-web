@@ -122,8 +122,15 @@ function ImageDrop({
     noKeyboard: true,
   });
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    if (event && event.target && event.target.files && event.target.files.length > 0) {
+  const handleFileChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ): void => {
+    if (
+      event &&
+      event.target &&
+      event.target.files &&
+      event.target.files.length > 0
+    ) {
       const file = event.target.files[0];
       toBase64(file).then(base64String => {
         if (typeof base64String === 'string') {
@@ -174,8 +181,16 @@ function ImageDrop({
         {() =>
           field.value ? (
             <div className={cx(styles.preview, classes?.main)}>
-              <Image className={styles.previewImage} src={field.value} backgroundImage />
-              <IconButton classes={{ root: styles.deleteButton }} onClick={handleDelete} aria-label="delete">
+              <Image
+                className={styles.previewImage}
+                src={field.value}
+                backgroundImage
+              />
+              <IconButton
+                classes={{ root: styles.deleteButton }}
+                onClick={handleDelete}
+                aria-label="delete"
+              >
                 <TrashIcon color={theme.palette.error.light} />
               </IconButton>
             </div>
@@ -208,7 +223,10 @@ function ImageDrop({
                   id={`btn-file-input-${field.name}`}
                 />
                 <label htmlFor={`btn-file-input-${field.name}`}>
-                  <OutlinedButton classes={{ root: cx(styles.button, classes?.button) }} isImageBtn>
+                  <OutlinedButton
+                    classes={{ root: cx(styles.button, classes?.button) }}
+                    isImageBtn
+                  >
                     {buttonText || '+ add'}
                   </OutlinedButton>
                 </label>

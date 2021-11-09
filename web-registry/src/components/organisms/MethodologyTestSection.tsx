@@ -51,7 +51,10 @@ function MethodologyTestSection({ title, descriptionRaw }: Props): JSX.Element {
   const styles = useStyles();
 
   return (
-    <BackgroundImgSection img={testMethodologyImg} classes={{ main: styles.main, section: styles.section }}>
+    <BackgroundImgSection
+      img={testMethodologyImg}
+      classes={{ main: styles.main, section: styles.section }}
+    >
       {title && (
         <Title className={styles.title} variant="h2" align="center">
           {title}

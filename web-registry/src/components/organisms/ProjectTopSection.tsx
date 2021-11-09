@@ -239,7 +239,12 @@ function ProjectTopLink({
         standard ? (
           <div className={cx(classes.creditClassName, classes.darkText)}>
             {ReactHtmlParser(name)}
-            <Link className={classes.arrowLink} href={url} rel="noopener noreferrer" target="_blank">
+            <Link
+              className={classes.arrowLink}
+              href={url}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
               <ArrowIcon
                 className={classes.arrowIcon}
                 direction="next"
@@ -259,13 +264,19 @@ function ProjectTopLink({
           </Link>
         )
       ) : (
-        <div className={cx(classes.creditClassName, classes.darkText)}>{ReactHtmlParser(name)}</div>
+        <div className={cx(classes.creditClassName, classes.darkText)}>
+          {ReactHtmlParser(name)}
+        </div>
       )}
     </div>
   );
 }
 
-function ProjectTopSection({ data, geojson, isGISFile }: ProjectTopProps): JSX.Element {
+function ProjectTopSection({
+  data,
+  geojson,
+  isGISFile,
+}: ProjectTopProps): JSX.Element {
   const classes = useStyles();
 
   const imageStorageBaseUrl = process.env.REACT_APP_IMAGE_STORAGE_BASE_URL;
@@ -273,18 +284,24 @@ function ProjectTopSection({ data, geojson, isGISFile }: ProjectTopProps): JSX.E
 
   const metadata = data?.projectByHandle?.metadata;
   const videoURL = metadata?.['http://regen.network/videoURL']?.['@value'];
-  const landStewardPhoto = metadata?.['http://regen.network/landStewardPhoto']?.['@value'];
+  const landStewardPhoto =
+    metadata?.['http://regen.network/landStewardPhoto']?.['@value'];
   const unit: qudtUnit =
-    metadata?.['http://regen.network/size']?.['http://qudt.org/1.1/schema/qudt#unit']?.['@value'];
+    metadata?.['http://regen.network/size']?.[
+      'http://qudt.org/1.1/schema/qudt#unit'
+    ]?.['@value'];
   const creditClass = data?.projectByHandle?.creditClassByCreditClassId;
   const creditClassVersion = creditClass?.creditClassVersionsById?.nodes?.[0];
-  const methodologyVersion = creditClass?.methodologyByMethodologyId?.methodologyVersionsById?.nodes?.[0];
+  const methodologyVersion =
+    creditClass?.methodologyByMethodologyId?.methodologyVersionsById
+      ?.nodes?.[0];
   const quote = metadata?.['http://regen.network/projectQuote'];
-  const additionalCertification = metadata?.['http://regen.network/additionalCertification'];
+  const additionalCertification =
+    metadata?.['http://regen.network/additionalCertification'];
   const glanceText = metadata?.['http://regen.network/glanceText']?.['@list'];
-  const sdgIris = creditClassVersion?.metadata?.['http://regen.network/SDGs']?.['@list']?.map(
-    (sdg: { '@id': string }) => sdg['@id'],
-  );
+  const sdgIris = creditClassVersion?.metadata?.['http://regen.network/SDGs']?.[
+    '@list'
+  ]?.map((sdg: { '@id': string }) => sdg['@id']);
   const { data: sdgData } = useSdgByIriQuery({
     client,
     variables: {
@@ -307,9 +324,9 @@ function ProjectTopSection({ data, geojson, isGISFile }: ProjectTopProps): JSX.E
               iconClassName={classes.icon}
               place={metadata?.['http://schema.org/location']?.place_name}
               area={
-                metadata?.['http://regen.network/size']?.['http://qudt.org/1.1/schema/qudt#numericValue']?.[
-                  '@value'
-                ]
+                metadata?.['http://regen.network/size']?.[
+                  'http://qudt.org/1.1/schema/qudt#numericValue'
+                ]?.['@value']
               }
               areaUnit={qudtUnitMap[unit]}
             />
@@ -317,36 +334,46 @@ function ProjectTopSection({ data, geojson, isGISFile }: ProjectTopProps): JSX.E
               {creditClass && creditClassVersion && (
                 <>
                   {creditClass.standard &&
-                    creditClassVersion?.metadata?.['http://regen.network/standard']?.[
-                      'http://schema.org/name'
-                    ] &&
-                    creditClassVersion?.metadata?.['http://regen.network/standard']?.[
-                      'http://schema.org/url'
-                    ]?.['@value'] && (
+                    creditClassVersion?.metadata?.[
+                      'http://regen.network/standard'
+                    ]?.['http://schema.org/name'] &&
+                    creditClassVersion?.metadata?.[
+                      'http://regen.network/standard'
+                    ]?.['http://schema.org/url']?.['@value'] && (
                       <ProjectTopLink
                         label="standard"
                         name={
-                          creditClassVersion?.metadata?.['http://regen.network/standard']?.[
-                            'http://schema.org/name'
-                          ]
+                          creditClassVersion?.metadata?.[
+                            'http://regen.network/standard'
+                          ]?.['http://schema.org/name']
                         }
                         url={
-                          creditClassVersion?.metadata?.['http://regen.network/standard']?.[
-                            'http://schema.org/url'
-                          ]?.['@value']
+                          creditClassVersion?.metadata?.[
+                            'http://regen.network/standard'
+                          ]?.['http://schema.org/url']?.['@value']
                         }
                         standard={creditClass.standard}
                       />
                     )}
                   <ProjectTopLink
-                    label={`credit class${creditClass.standard ? ' (type)' : ''}`}
+                    label={`credit class${
+                      creditClass.standard ? ' (type)' : ''
+                    }`}
                     name={creditClassVersion.name}
-                    url={creditClassVersion.metadata?.['http://schema.org/url']?.['@value']}
+                    url={
+                      creditClassVersion.metadata?.['http://schema.org/url']?.[
+                        '@value'
+                      ]
+                    }
                     standard={creditClass.standard}
                   />
                   <ProjectTopLink
                     label="offset generation method"
-                    name={creditClassVersion.metadata?.['http://regen.network/offsetGenerationMethod']}
+                    name={
+                      creditClassVersion.metadata?.[
+                        'http://regen.network/offsetGenerationMethod'
+                      ]
+                    }
                   />
                 </>
               )}
@@ -354,14 +381,22 @@ function ProjectTopSection({ data, geojson, isGISFile }: ProjectTopProps): JSX.E
                 <ProjectTopLink
                   label="methodology"
                   name={methodologyVersion.name}
-                  url={methodologyVersion.metadata?.['http://schema.org/url']?.['@value']}
+                  url={
+                    methodologyVersion.metadata?.['http://schema.org/url']?.[
+                      '@value'
+                    ]
+                  }
                 />
               )}
               {creditClass && additionalCertification && (
                 <ProjectTopLink
                   label="additional certification"
                   name={additionalCertification?.['http://schema.org/name']}
-                  url={additionalCertification?.['http://schema.org/url']?.['@value']}
+                  url={
+                    additionalCertification?.['http://schema.org/url']?.[
+                      '@value'
+                    ]
+                  }
                   standard={creditClass.standard}
                 />
               )}
@@ -388,8 +423,12 @@ function ProjectTopSection({ data, geojson, isGISFile }: ProjectTopProps): JSX.E
           </Description>
           <LazyLoad offset={50}>
             {videoURL &&
-              (/https:\/\/www.youtube.com\/embed\/[a-zA-Z0-9_.-]+/.test(videoURL) ||
-              /https:\/\/player.vimeo.com\/video\/[a-zA-Z0-9_.-]+/.test(videoURL) ? (
+              (/https:\/\/www.youtube.com\/embed\/[a-zA-Z0-9_.-]+/.test(
+                videoURL,
+              ) ||
+              /https:\/\/player.vimeo.com\/video\/[a-zA-Z0-9_.-]+/.test(
+                videoURL,
+              ) ? (
                 <iframe
                   className={cx(classes.iframe, classes.media)}
                   title={metadata?.['http://schema.org/name']}
@@ -402,7 +441,11 @@ function ProjectTopSection({ data, geojson, isGISFile }: ProjectTopProps): JSX.E
                 </video>
               ))}
             {landStewardPhoto && (
-              <img className={classes.media} alt={landStewardPhoto} src={landStewardPhoto} />
+              <img
+                className={classes.media}
+                alt={landStewardPhoto}
+                src={landStewardPhoto}
+              />
             )}
           </LazyLoad>
           <Title variant="h4" className={classes.tagline}>
@@ -413,10 +456,19 @@ function ProjectTopSection({ data, geojson, isGISFile }: ProjectTopProps): JSX.E
           </ReadMore>
           {quote && (
             <div>
-              <Title variant="h4" className={cx(classes.quote, classes.tagline)}>
-                <span className={cx(classes.firstQuote, classes.quotes)}>“</span>
-                <span className={classes.textQuote}>{quote['http://regen.network/quote']}</span>
-                <span className={cx(classes.secondQuote, classes.quotes)}>”</span>
+              <Title
+                variant="h4"
+                className={cx(classes.quote, classes.tagline)}
+              >
+                <span className={cx(classes.firstQuote, classes.quotes)}>
+                  “
+                </span>
+                <span className={classes.textQuote}>
+                  {quote['http://regen.network/quote']}
+                </span>
+                <span className={cx(classes.secondQuote, classes.quotes)}>
+                  ”
+                </span>
               </Title>
               <Title variant="h6" className={classes.quotePersonName}>
                 {quote['http://schema.org/name']}

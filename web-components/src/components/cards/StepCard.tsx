@@ -176,7 +176,13 @@ function StepCard({
   const theme = useTheme();
   return (
     <div className={styles.root}>
-      <Card className={cx(className, styles.card, step.isActive && styles.activeCard)}>
+      <Card
+        className={cx(
+          className,
+          styles.card,
+          step.isActive && styles.activeCard,
+        )}
+      >
         {step.videoSrc && (
           <CardMedia
             className={styles.media}
@@ -208,25 +214,42 @@ function StepCard({
           )}
           <div className={cx(styles.cardTopThird, styles.cardTopRight)}>
             {step.tagName && (
-              <Tag className={styles.tag} name={step.tagName} color={theme.palette.secondary.main} />
+              <Tag
+                className={styles.tag}
+                name={step.tagName}
+                color={theme.palette.secondary.main}
+              />
             )}
           </div>
         </div>
         <div className={styles.cardBottom}>
-          <Title variant="h6" className={cx(styles.step, step.isActive && styles.activeColor)}>
+          <Title
+            variant="h6"
+            className={cx(styles.step, step.isActive && styles.activeColor)}
+          >
             step {step.stepNumber}
           </Title>
-          <Title variant="h4" className={cx(styles.stepTitle, step.isActive && styles.activeTitle)}>
+          <Title
+            variant="h4"
+            className={cx(
+              styles.stepTitle,
+              step.isActive && styles.activeTitle,
+            )}
+          >
             {step.title}
           </Title>
-          <Description className={styles.stepDescription}>{step.description}</Description>
+          <Description className={styles.stepDescription}>
+            {step.description}
+          </Description>
           {!!step.btnText && !!step.onBtnClick && (
             <ContainedButton onClick={step.onBtnClick} className={styles.btn}>
               {step.btnText}
             </ContainedButton>
           )}
         </div>
-        {step.faqs && step.faqs.length > 0 && <StepFAQs questionItems={step.faqs} isActive={step.isActive} />}
+        {step.faqs && step.faqs.length > 0 && (
+          <StepFAQs questionItems={step.faqs} isActive={step.isActive} />
+        )}
       </Card>
       <ArrowFilledIcon className="down-arrow" color={theme.palette.info.main} />
     </div>

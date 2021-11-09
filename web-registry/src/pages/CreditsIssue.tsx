@@ -60,9 +60,15 @@ const useStyles = makeStyles((theme: Theme) => ({
 function CreditsIssue(): JSX.Element {
   const classes = useStyles();
 
-  const [issueCredits, { data, loading, error }] = useMutation(ISSUE_CREDITS, { errorPolicy: 'ignore' });
+  const [issueCredits, { data, loading, error }] = useMutation(ISSUE_CREDITS, {
+    errorPolicy: 'ignore',
+  });
 
-  const { data: projectsData, loading: projectsLoading, error: projectsError } = useAllProjectsQuery({
+  const {
+    data: projectsData,
+    loading: projectsLoading,
+    error: projectsError,
+  } = useAllProjectsQuery({
     errorPolicy: 'ignore',
   });
 
@@ -70,37 +76,56 @@ function CreditsIssue(): JSX.Element {
   const [units, setUnits] = useState(10);
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
-  const [creditClassVersionId, setCreditClassVersionId] = useState<string | null>(null);
-  const [creditClassVersionCreatedAt, setCreditClassVersionCreatedAt] = useState<string | null>(null);
-  const [methodologyVersionId, setMethodologyVersionId] = useState<string | null>(null);
-  const [methodologyVersionCreatedAt, setMethodologyVersionCreatedAt] = useState<string | null>(null);
+  const [creditClassVersionId, setCreditClassVersionId] = useState<
+    string | null
+  >(null);
+  const [creditClassVersionCreatedAt, setCreditClassVersionCreatedAt] =
+    useState<string | null>(null);
+  const [methodologyVersionId, setMethodologyVersionId] = useState<
+    string | null
+  >(null);
+  const [methodologyVersionCreatedAt, setMethodologyVersionCreatedAt] =
+    useState<string | null>(null);
   const [projectDeveloper, setProjectDeveloper] = useState(100);
   const [landSteward, setLandSteward] = useState(0);
   const [landOwner, setLandOwner] = useState(0);
 
-  const handleProjectChange = (event: React.ChangeEvent<{ value: unknown }>): void => {
+  const handleProjectChange = (
+    event: React.ChangeEvent<{ value: unknown }>,
+  ): void => {
     const projectId = event.target.value as string;
     setProjectId(projectId);
-    const project = projectsData?.allProjects?.nodes?.find(node => node?.id === projectId);
+    const project = projectsData?.allProjects?.nodes?.find(
+      node => node?.id === projectId,
+    );
     setCreditClassVersionId(project?.creditClassByCreditClassId?.id);
-    setMethodologyVersionId(project?.creditClassByCreditClassId?.methodologyByMethodologyId?.id);
+    setMethodologyVersionId(
+      project?.creditClassByCreditClassId?.methodologyByMethodologyId?.id,
+    );
   };
 
-  const handleCreditClassVersionChange = (event: React.ChangeEvent<{ value: unknown }>): void => {
+  const handleCreditClassVersionChange = (
+    event: React.ChangeEvent<{ value: unknown }>,
+  ): void => {
     setCreditClassVersionCreatedAt(event.target.value as string);
   };
 
-  const handleMethodologyVersionChange = (event: React.ChangeEvent<{ value: unknown }>): void => {
+  const handleMethodologyVersionChange = (
+    event: React.ChangeEvent<{ value: unknown }>,
+  ): void => {
     setMethodologyVersionCreatedAt(event.target.value as string);
   };
 
   const creditClassVersionOptions = [];
   const methodologyVersionOptions = [];
   if (projectsData?.allProjects?.nodes && projectId) {
-    const project = projectsData.allProjects.nodes.find(node => node?.id === projectId);
+    const project = projectsData.allProjects.nodes.find(
+      node => node?.id === projectId,
+    );
     const node = project;
     if (node?.creditClassByCreditClassId) {
-      const creditClassVersions = node.creditClassByCreditClassId.creditClassVersionsById?.nodes;
+      const creditClassVersions =
+        node.creditClassByCreditClassId.creditClassVersionsById?.nodes;
       if (creditClassVersions) {
         for (let j = 0; j < creditClassVersions.length; j++) {
           const cVersion = creditClassVersions[j];
@@ -113,7 +138,8 @@ function CreditsIssue(): JSX.Element {
         }
       }
       const methodologyVersions =
-        node.creditClassByCreditClassId.methodologyByMethodologyId?.methodologyVersionsById?.nodes;
+        node.creditClassByCreditClassId.methodologyByMethodologyId
+          ?.methodologyVersionsById?.nodes;
       if (methodologyVersions) {
         for (let k = 0; k < methodologyVersions.length; k++) {
           const mVersion = methodologyVersions[k];
@@ -152,9 +178,12 @@ function CreditsIssue(): JSX.Element {
                   endDate,
                   initialDistribution: {
                     // '@type': 'http://regen.network/CreditVintage', TODO this is now set on the backend, but that's creating issues in credits transfer so leaving this for reference
-                    'http://regen.network/projectDeveloperDistribution': projectDeveloper / 100,
-                    'http://regen.network/landStewardDistribution': landSteward / 100,
-                    'http://regen.network/landOwnerDistribution': landOwner / 100,
+                    'http://regen.network/projectDeveloperDistribution':
+                      projectDeveloper / 100,
+                    'http://regen.network/landStewardDistribution':
+                      landSteward / 100,
+                    'http://regen.network/landOwnerDistribution':
+                      landOwner / 100,
                   },
                 },
               },
@@ -185,7 +214,9 @@ function CreditsIssue(): JSX.Element {
           </Select>
         </FormControl>
         <FormControl className={classes.formControl}>
-          <InputLabel id="credit-class-version-select-label">Credit Class Version</InputLabel>
+          <InputLabel id="credit-class-version-select-label">
+            Credit Class Version
+          </InputLabel>
           <Select
             labelId="credit-class-version-select-label"
             id="credit-class-version-select"
@@ -201,7 +232,9 @@ function CreditsIssue(): JSX.Element {
           </Select>
         </FormControl>
         <FormControl className={classes.formControl}>
-          <InputLabel id="methodology-version-select-label">Methodology Version</InputLabel>
+          <InputLabel id="methodology-version-select-label">
+            Methodology Version
+          </InputLabel>
           <Select
             labelId="methodology-version-select-label"
             id="methodology-version-select"
@@ -304,7 +337,11 @@ function CreditsIssue(): JSX.Element {
               </TableHead>
               <TableBody>
                 {data.issueCredits.json.accountBalances.map(
-                  (row: { name: string; percentage: number; amount: number }) => (
+                  (row: {
+                    name: string;
+                    percentage: number;
+                    amount: number;
+                  }) => (
                     <TableRow key={row.name}>
                       <TableCell scope="row">
                         {row.name

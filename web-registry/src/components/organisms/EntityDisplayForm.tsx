@@ -28,9 +28,13 @@ interface EntityDisplayFormProps {
   initialValues?: EntityDisplayValues;
 }
 
-interface IndividualDisplayValues extends IndividualFormValues, IndividualDisplayShape {}
+interface IndividualDisplayValues
+  extends IndividualFormValues,
+    IndividualDisplayShape {}
 
-interface OrganizationDisplayValues extends OrganizationFormValues, OrganizationDisplayShape {}
+interface OrganizationDisplayValues
+  extends OrganizationFormValues,
+    OrganizationDisplayShape {}
 
 export type DisplayValues = OrganizationDisplayValues | IndividualDisplayValues;
 
@@ -58,7 +62,11 @@ interface IndividualDisplayShape {
 
 interface FormletProps {
   role: EntityFieldName;
-  setFieldValue: (field: string, value: any, shouldValidate?: boolean | undefined) => void;
+  setFieldValue: (
+    field: string,
+    value: any,
+    shouldValidate?: boolean | undefined,
+  ) => void;
   setFieldTouched: (
     field: string,
     isTouched?: boolean | undefined,
@@ -175,7 +183,11 @@ async function setType(
   role: string,
   type: string,
   value: boolean,
-  setFieldValue: (field: string, value: any, shouldValidate?: boolean | undefined) => void,
+  setFieldValue: (
+    field: string,
+    value: any,
+    shouldValidate?: boolean | undefined,
+  ) => void,
   setFieldTouched: (
     field: string,
     isTouched?: boolean | undefined,
@@ -206,7 +218,9 @@ const OrganizationFormlet: React.FC<OrganizationFormletProps> = ({
   return (
     <Field
       className={styles.field}
-      label={`${entity?.['http://schema.org/legalName']} ${getEntityTypeString(role)}`}
+      label={`${entity?.['http://schema.org/legalName']} ${getEntityTypeString(
+        role,
+      )}`}
       type="checkbox"
       component={Toggle}
       name={`['${role}'].['http://regen.network/showOnProjectPage']`}
@@ -228,7 +242,10 @@ const OrganizationFormlet: React.FC<OrganizationFormletProps> = ({
             label="Organization logo"
             name={`['${role}'].['http://schema.org/logo'].@value`}
             fallbackAvatar={
-              <OrganizationIcon className={styles.organizationIcon} color={theme.palette.info.main} />
+              <OrganizationIcon
+                className={styles.organizationIcon}
+                color={theme.palette.info.main}
+              />
             }
           />
           <Field
@@ -292,7 +309,11 @@ const IndividualFormlet: React.FC<IndividualFormletProps> = ({
 function getToggle(
   fieldName: EntityFieldName,
   values: EntityDisplayValues,
-  setFieldValue: (field: string, value: any, shouldValidate?: boolean | undefined) => void,
+  setFieldValue: (
+    field: string,
+    value: any,
+    shouldValidate?: boolean | undefined,
+  ) => void,
   setFieldTouched: (
     field: string,
     isTouched?: boolean | undefined,
@@ -342,7 +363,10 @@ function getInitialValues(values?: DisplayValues): DisplayValues | undefined {
   }
 }
 
-const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialValues }) => {
+const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({
+  submit,
+  initialValues,
+}) => {
   const [modalOpen, setModalOpen] = useState(false);
   const styles = useStyles();
   const { data: graphData } = useShaclGraphByUriQuery({
@@ -377,7 +401,9 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialVa
             // Validate role specific data so we can display field specific errors
             // for roles shown on project page
             for (const role in values) {
-              const value: DisplayValues = values[role as EntityFieldName] as DisplayValues;
+              const value: DisplayValues = values[
+                role as EntityFieldName
+              ] as DisplayValues;
               if (value?.['http://regen.network/showOnProjectPage']) {
                 validateProject = false;
                 const report = await validate(
@@ -388,7 +414,8 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialVa
                 for (const result of report.results) {
                   const path: any = result.path.value;
                   const error =
-                    path === 'http://schema.org/image' || path === 'http://schema.org/logo'
+                    path === 'http://schema.org/image' ||
+                    path === 'http://schema.org/logo'
                       ? { '@value': requiredMessage }
                       : requiredMessage;
                   errors[role as EntityFieldName] = { [path]: error };
@@ -396,7 +423,10 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialVa
               }
             }
             if (validateProject) {
-              const projectPageData = { ...getProjectPageBaseData(), ...values };
+              const projectPageData = {
+                ...getProjectPageBaseData(),
+                ...values,
+              };
               const report = await validate(
                 graphData.shaclGraphByUri.graph,
                 projectPageData,
@@ -405,7 +435,8 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialVa
               if (!report.conforms) {
                 // TODO: display the error banner in case of generic error
                 // https://github.com/regen-network/regen-registry/issues/554
-                errors['generic'] = 'You must show at least one of the following roles on the project page';
+                errors['generic'] =
+                  'You must show at least one of the following roles on the project page';
               }
             }
           }
@@ -421,27 +452,60 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialVa
           }
         }}
       >
-        {({ submitForm, isValid, isSubmitting, values, setFieldValue, setFieldTouched }) => {
+        {({
+          submitForm,
+          isValid,
+          isSubmitting,
+          values,
+          setFieldValue,
+          setFieldTouched,
+        }) => {
           return (
             <Form translate="yes">
               <OnBoardingCard>
-                <Title className={styles.title}>Choose the entities to show on the project page:</Title>
+                <Title className={styles.title}>
+                  Choose the entities to show on the project page:
+                </Title>
                 <Description className={styles.description}>
-                  Showing more entities increases the salability of the project. You must show at least one
-                  entity on the project page. These entities can only be edited in the previous step.&nbsp;
-                  <Link className={styles.link} onClick={() => setModalOpen(true)}>
+                  Showing more entities increases the salability of the project.
+                  You must show at least one entity on the project page. These
+                  entities can only be edited in the previous step.&nbsp;
+                  <Link
+                    className={styles.link}
+                    onClick={() => setModalOpen(true)}
+                  >
                     See an example»
                   </Link>
                 </Description>
 
                 {values['http://regen.network/landOwner'] &&
-                  getToggle('http://regen.network/landOwner', values, setFieldValue, setFieldTouched)}
+                  getToggle(
+                    'http://regen.network/landOwner',
+                    values,
+                    setFieldValue,
+                    setFieldTouched,
+                  )}
                 {values['http://regen.network/landSteward'] &&
-                  getToggle('http://regen.network/landSteward', values, setFieldValue, setFieldTouched)}
+                  getToggle(
+                    'http://regen.network/landSteward',
+                    values,
+                    setFieldValue,
+                    setFieldTouched,
+                  )}
                 {values['http://regen.network/projectDeveloper'] &&
-                  getToggle('http://regen.network/projectDeveloper', values, setFieldValue, setFieldTouched)}
+                  getToggle(
+                    'http://regen.network/projectDeveloper',
+                    values,
+                    setFieldValue,
+                    setFieldTouched,
+                  )}
                 {values['http://regen.network/projectOriginator'] &&
-                  getToggle('http://regen.network/projectOriginator', values, setFieldValue, setFieldTouched)}
+                  getToggle(
+                    'http://regen.network/projectOriginator',
+                    values,
+                    setFieldValue,
+                    setFieldTouched,
+                  )}
               </OnBoardingCard>
 
               <OnboardingFooter
@@ -470,11 +534,15 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialVa
           </Description>
           <Card className={styles.modalCard}>
             <ProjectTopCard
-              classes={{ root: styles.projectTopCard, userInfo: styles.modalUserInfo }}
+              classes={{
+                root: styles.projectTopCard,
+                userInfo: styles.modalUserInfo,
+              }}
               projectDeveloper={{
                 name: 'Impact Ag Partners',
                 type: 'ORGANIZATION',
-                image: 'https://regen-registry.s3.amazonaws.com/projects/wilmot/impactag.jpg',
+                image:
+                  'https://regen-registry.s3.amazonaws.com/projects/wilmot/impactag.jpg',
                 description:
                   'Impact Ag Partners is a specialist agricultural asset management firm and advisory service which utilises a variety of pathways and partners to measure and monetize natural capital.',
               }}
@@ -482,8 +550,10 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialVa
                 name: 'Wilmot Cattle Co.',
                 type: 'ORGANIZATION',
                 location: 'New South Wales, Australia',
-                image: 'https://regen-registry.s3.amazonaws.com/projects/wilmot/wilmot.jpg',
-                description: 'Wilmot Cattle Company is an innovative, regenerative, grass-fed beef business.',
+                image:
+                  'https://regen-registry.s3.amazonaws.com/projects/wilmot/wilmot.jpg',
+                description:
+                  'Wilmot Cattle Company is an innovative, regenerative, grass-fed beef business.',
               }}
             />
           </Card>

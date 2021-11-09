@@ -15,7 +15,12 @@ export const certificate = (): JSX.Element => (
     buyerName="Marie Gauthier"
     date={'10-10-2020'}
     stakeholders={[
-      { companyName: 'Regen Network', personName: 'Christian Shearer', personRole: 'CEO', label: 'issuer' },
+      {
+        companyName: 'Regen Network',
+        personName: 'Christian Shearer',
+        personRole: 'CEO',
+        label: 'issuer',
+      },
       {
         companyName: 'John Doe Ltd',
         personName: 'John Doe',

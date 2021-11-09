@@ -8,7 +8,12 @@ import Title from 'web-components/lib/components/title';
 import { OverviewCard } from 'web-components/lib/components/cards/OverviewCard';
 import { BlockContent } from 'web-components/lib/components/block-content';
 
-import { CardFieldsFragment, Sdg, Maybe, Scalars } from '../../generated/sanity-graphql';
+import {
+  CardFieldsFragment,
+  Sdg,
+  Maybe,
+  Scalars,
+} from '../../generated/sanity-graphql';
 import { SDGs } from './SDGs';
 import { CreditClassDetailsColumn } from '../molecules/CreditClassDetailsColumn';
 import { CreditClass } from '../../mocks/mocks';
@@ -93,7 +98,9 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const OverviewCards: React.FC<{ cards?: Maybe<Array<Maybe<CardFieldsFragment>>> }> = props => {
+const OverviewCards: React.FC<{
+  cards?: Maybe<Array<Maybe<CardFieldsFragment>>>;
+}> = props => {
   const styles = useStyles();
   return (
     <Grid container spacing={4} className={styles.cardWrap}>
@@ -102,9 +109,14 @@ const OverviewCards: React.FC<{ cards?: Maybe<Array<Maybe<CardFieldsFragment>>> 
           <OverviewCard
             className={styles.overviewCard}
             icon={
-              card?.icon?.asset?.url ? <img src={card.icon.asset.url} alt={card?.title || ''} /> : undefined
+              card?.icon?.asset?.url ? (
+                <img src={card.icon.asset.url} alt={card?.title || ''} />
+              ) : undefined
             }
-            item={{ title: card?.title || '', description: <BlockContent content={card?.descriptionRaw} /> }}
+            item={{
+              title: card?.title || '',
+              description: <BlockContent content={card?.descriptionRaw} />,
+            }}
           />
         </Grid>
       ))}
@@ -126,7 +138,10 @@ const CreditClassOverviewSection: React.FC<CreditClassOverviewSectionProps> = ({
   return (
     <>
       <Section
-        classes={{ root: cx(styles.sectionRoot, className), title: styles.title }}
+        classes={{
+          root: cx(styles.sectionRoot, className),
+          title: styles.title,
+        }}
         title="Overview"
         titleVariant="h2"
         titleAlign="left"
@@ -141,11 +156,18 @@ const CreditClassOverviewSection: React.FC<CreditClassOverviewSectionProps> = ({
               <SDGs sdgs={sdgs} />
             </div>
           )}
-          <CreditClassDetailsColumn nameRaw={nameRaw} creditClass={creditClass} />
+          <CreditClassDetailsColumn
+            nameRaw={nameRaw}
+            creditClass={creditClass}
+          />
         </div>
       </Section>
       {!isMobile && sdgs && (
-        <Section classes={{ root: styles.sdgsSection, title: styles.title }} title="SDGs" titleAlign="left">
+        <Section
+          classes={{ root: styles.sdgsSection, title: styles.title }}
+          title="SDGs"
+          titleAlign="left"
+        >
           <SDGs sdgs={sdgs} />
         </Section>
       )}

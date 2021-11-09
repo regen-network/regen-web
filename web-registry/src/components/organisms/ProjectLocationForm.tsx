@@ -32,10 +32,13 @@ const ProjectLocationForm: React.FC<{
       validateOnMount
       validateOnBlur
       initialValues={{
-        'http://schema.org/location': initialValues?.['http://schema.org/location'] || {},
+        'http://schema.org/location':
+          initialValues?.['http://schema.org/location'] || {},
       }}
       validate={async (values: ProjectLocationFormValues) => {
-        const errors: FormikErrors<ProjectLocationFormValues | { [path: string]: string }> = {};
+        const errors: FormikErrors<
+          ProjectLocationFormValues | { [path: string]: string }
+        > = {};
         if (graphData?.shaclGraphByUri?.graph) {
           const projectPageData = { ...getProjectPageBaseData(), ...values };
 

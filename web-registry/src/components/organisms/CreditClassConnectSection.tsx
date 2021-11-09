@@ -72,7 +72,11 @@ function CreditClassConnectSection({ connectSection }: Props): JSX.Element {
   return (
     <BackgroundImgSection
       img={creditClassConnectImg}
-      classes={{ root: styles.connectRoot, main: styles.main, section: styles.section }}
+      classes={{
+        root: styles.connectRoot,
+        main: styles.main,
+        section: styles.section,
+      }}
     >
       <Title className={styles.header} variant="h2" align="center">
         {connectSection?.title || 'Connect and Learn'}
@@ -83,7 +87,12 @@ function CreditClassConnectSection({ connectSection }: Props): JSX.Element {
             className={styles.iconLabel}
             key={link?.name || i}
             label={link?.name || ''}
-            icon={<img src={link?.icon?.asset?.url || ''} alt={link?.name || 'connect'} />}
+            icon={
+              <img
+                src={link?.icon?.asset?.url || ''}
+                alt={link?.name || 'connect'}
+              />
+            }
             descriptionRaw={link?.descriptionRaw}
             href={getLinkHref(link?.href)}
           />

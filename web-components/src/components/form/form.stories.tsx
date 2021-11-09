@@ -17,7 +17,10 @@ const submit = async (): Promise<void> => {
 
 export const userProfile = (): JSX.Element => (
   <OnBoardingSection formContainer title="User Profile">
-    <UserProfileForm submit={() => null} initialValues={{ name: 'Name', roleTitle: 'Role title' }} />
+    <UserProfileForm
+      submit={() => null}
+      initialValues={{ name: 'Name', roleTitle: 'Role title' }}
+    />
   </OnBoardingSection>
 );
 

@@ -8,8 +8,13 @@ export default {
 
 const actionName: string = 'Reduce pest populations';
 const actionSrc: string = '/pest.png';
-const actionDescription: string = 'Monitor and reduce the population of foxes, cats, dingos/wild dogs.';
+const actionDescription: string =
+  'Monitor and reduce the population of foxes, cats, dingos/wild dogs.';
 
 export const action = (): JSX.Element => (
-  <Action name={actionName} description={actionDescription} imgSrc={actionSrc} />
+  <Action
+    name={actionName}
+    description={actionDescription}
+    imgSrc={actionSrc}
+  />
 );

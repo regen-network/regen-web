@@ -34,7 +34,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function PartyAddress({ onClick, name, address }: PartyAddressProps): JSX.Element {
+export default function PartyAddress({
+  onClick,
+  name,
+  address,
+}: PartyAddressProps): JSX.Element {
   const classes = useStyles();
   const [showAddress, setShowAddress] = useState<boolean>(false);
 

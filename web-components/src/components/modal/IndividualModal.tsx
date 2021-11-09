@@ -19,7 +19,9 @@ interface IndividualModalProps {
   individual?: IndividualFormValues;
   onClose: () => void;
   onSubmit: (individual: IndividualFormValues) => void;
-  validate: (values: IndividualFormValues) => Promise<FormikErrors<IndividualFormValues>>;
+  validate: (
+    values: IndividualFormValues,
+  ) => Promise<FormikErrors<IndividualFormValues>>;
 }
 
 export interface IndividualFormValues {
@@ -101,9 +103,16 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-function IndividualModal({ individual, onClose, onSubmit, validate }: IndividualModalProps): JSX.Element {
+function IndividualModal({
+  individual,
+  onClose,
+  onSubmit,
+  validate,
+}: IndividualModalProps): JSX.Element {
   const styles = useStyles();
-  const [individualEdit, setIndividualEdit] = useState<IndividualFormValues | undefined>(undefined);
+  const [individualEdit, setIndividualEdit] = useState<
+    IndividualFormValues | undefined
+  >(undefined);
 
   useEffect(() => {
     setIndividualEdit(individual);
@@ -126,7 +135,8 @@ function IndividualModal({ individual, onClose, onSubmit, validate }: Individual
             ...individualEdit,
             '@type': 'http://regen.network/Individual',
             'http://regen.network/sharePermission':
-              individualEdit && !!individualEdit['http://regen.network/sharePermission'],
+              individualEdit &&
+              !!individualEdit['http://regen.network/sharePermission'],
           }}
           onSubmit={async (values, { setSubmitting }) => {
             setSubmitting(true);
@@ -169,7 +179,8 @@ function IndividualModal({ individual, onClose, onSubmit, validate }: Individual
                     name="['http://regen.network/sharePermission']"
                     label={
                       <Description className={styles.checkboxLabel}>
-                        I have this individual’s permission to share their information with Regen Registry
+                        I have this individual’s permission to share their
+                        information with Regen Registry
                       </Description>
                     }
                   />

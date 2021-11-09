@@ -51,33 +51,34 @@ const Seller = (): JSX.Element => {
   }, [getAccessTokenSilently, user]);
 
   const viewDashboard = useCallback(
-    (account?: boolean) => (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-      const getLoginLink = async (): Promise<void> => {
-        try {
-          const accessToken = await getAccessTokenSilently();
-          const apiUri = getApiUri();
-          const res = await axios({
-            method: 'POST',
-            url: `${apiUri}/create-login-link`,
-            data: {
-              accountId: data?.userByEmail?.stripeAccountId,
-            },
-            headers: { authorization: `Bearer ${accessToken}` },
-          });
-          let url = res.data.url;
-          if (account) {
-            // Directly link to the account tab
-            url = url + '#/account';
+    (account?: boolean) =>
+      (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        const getLoginLink = async (): Promise<void> => {
+          try {
+            const accessToken = await getAccessTokenSilently();
+            const apiUri = getApiUri();
+            const res = await axios({
+              method: 'POST',
+              url: `${apiUri}/create-login-link`,
+              data: {
+                accountId: data?.userByEmail?.stripeAccountId,
+              },
+              headers: { authorization: `Bearer ${accessToken}` },
+            });
+            let url = res.data.url;
+            if (account) {
+              // Directly link to the account tab
+              url = url + '#/account';
+            }
+            window.open(url, '_blank') || window.location.assign(url);
+          } catch (e) {
+            // TODO handle error, no design yet
+            // console.log(e.message);
           }
-          window.open(url, '_blank') || window.location.assign(url);
-        } catch (e) {
-          // TODO handle error, no design yet
-          // console.log(e.message);
-        }
-      };
+        };
 
-      getLoginLink();
-    },
+        getLoginLink();
+      },
     [data, getAccessTokenSilently],
   );
 
@@ -97,7 +98,11 @@ const Seller = (): JSX.Element => {
               )}
               <div>
                 <ContainedButton
-                  style={{ fontSize: '1.25rem', marginTop: '1rem', padding: '1rem' }}
+                  style={{
+                    fontSize: '1.25rem',
+                    marginTop: '1rem',
+                    padding: '1rem',
+                  }}
                   onClick={viewDashboard(true)}
                 >
                   View stripe account
@@ -105,7 +110,11 @@ const Seller = (): JSX.Element => {
               </div>
               <div>
                 <OutlinedButton
-                  style={{ fontSize: '1.25rem', marginTop: '1rem', padding: '1rem' }}
+                  style={{
+                    fontSize: '1.25rem',
+                    marginTop: '1rem',
+                    padding: '1rem',
+                  }}
                   onClick={viewDashboard()}
                 >
                   View payouts on stripe
@@ -113,11 +122,15 @@ const Seller = (): JSX.Element => {
               </div>
             </div>
           ) : (
-            <ContainedButton onClick={accountSetup}>Account Setup</ContainedButton>
+            <ContainedButton onClick={accountSetup}>
+              Account Setup
+            </ContainedButton>
           ))}
       </div>
       <div style={{ textAlign: 'center' }}>
-        <AdminNav redirectUri={`${window.location.origin}/projects/wilmot/admin`} />
+        <AdminNav
+          redirectUri={`${window.location.origin}/projects/wilmot/admin`}
+        />
       </div>
     </div>
   );

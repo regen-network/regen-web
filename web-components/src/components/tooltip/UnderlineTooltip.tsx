@@ -21,7 +21,12 @@ const UnderlineTooltip: React.FC<Props> = props => {
   const styles = useStyles();
 
   return (
-    <Tooltip arrow placement="top" title={props.title || ''} className={cx(props.title && styles.tooltip)}>
+    <Tooltip
+      arrow
+      placement="top"
+      title={props.title || ''}
+      className={cx(props.title && styles.tooltip)}
+    >
       <span className={styles.underline}>{props.children}</span>
     </Tooltip>
   );

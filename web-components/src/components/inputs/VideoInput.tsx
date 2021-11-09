@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import { CardMedia, IconButton, Collapse, LinearProgress } from '@material-ui/core';
+import {
+  CardMedia,
+  IconButton,
+  Collapse,
+  LinearProgress,
+} from '@material-ui/core';
 import { FieldProps } from 'formik';
 import cx from 'clsx';
 
@@ -119,7 +124,10 @@ function VideoInput({
           {!!field.value && (
             <>
               <Collapse
-                classes={{ entered: styles.collapse, hidden: styles.collapseHidden }}
+                classes={{
+                  entered: styles.collapse,
+                  hidden: styles.collapseHidden,
+                }}
                 in={iframeLoaded}
               >
                 <Card className={styles.preview}>
@@ -139,7 +147,9 @@ function VideoInput({
                   </IconButton>
                 </Card>
               </Collapse>
-              {!iframeLoaded && <LinearProgress color="secondary" className={styles.progress} />}
+              {!iframeLoaded && (
+                <LinearProgress color="secondary" className={styles.progress} />
+              )}
             </>
           )}
 

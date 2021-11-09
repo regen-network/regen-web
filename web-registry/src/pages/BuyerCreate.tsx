@@ -12,7 +12,10 @@ import Radio from '@material-ui/core/Radio';
 import Title from 'web-components/lib/components/title';
 import Geocoder from 'web-components/lib/components/map/Geocoder';
 import { getErrorMessage } from 'web-components/lib/components/form/errors';
-import { useCreateUserOrganizationMutation, useReallyCreateUserMutation } from '../generated/graphql';
+import {
+  useCreateUserOrganizationMutation,
+  useReallyCreateUserMutation,
+} from '../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -30,12 +33,13 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const BuyerCreate: React.FC<{ onCreate?: (walletId: string, addressId: string) => void }> = ({
-  onCreate,
-}) => {
+const BuyerCreate: React.FC<{
+  onCreate?: (walletId: string, addressId: string) => void;
+}> = ({ onCreate }) => {
   const classes = useStyles();
 
-  const [createUser, { data: userData, error: userError }] = useReallyCreateUserMutation();
+  const [createUser, { data: userData, error: userError }] =
+    useReallyCreateUserMutation();
 
   const [
     createUserOrganization,
@@ -75,8 +79,11 @@ const BuyerCreate: React.FC<{ onCreate?: (walletId: string, addressId: string) =
                 },
               });
               const newAddressId =
-                result.data?.createUserOrganization?.organization?.partyByPartyId?.addressId;
-              const newWalletId = result.data?.createUserOrganization?.organization?.partyByPartyId?.walletId;
+                result.data?.createUserOrganization?.organization
+                  ?.partyByPartyId?.addressId;
+              const newWalletId =
+                result.data?.createUserOrganization?.organization
+                  ?.partyByPartyId?.walletId;
               setAddressId(newAddressId);
               setWalletId(newWalletId);
               if (onCreate) {
@@ -94,8 +101,10 @@ const BuyerCreate: React.FC<{ onCreate?: (walletId: string, addressId: string) =
                   },
                 },
               });
-              const newAddressId = result.data?.reallyCreateUser?.user?.partyByPartyId?.addressId;
-              const newWalletId = result.data?.reallyCreateUser?.user?.partyByPartyId?.walletId;
+              const newAddressId =
+                result.data?.reallyCreateUser?.user?.partyByPartyId?.addressId;
+              const newWalletId =
+                result.data?.reallyCreateUser?.user?.partyByPartyId?.walletId;
               setAddressId(newAddressId);
               setWalletId(newWalletId);
               if (onCreate) {
@@ -117,8 +126,16 @@ const BuyerCreate: React.FC<{ onCreate?: (walletId: string, addressId: string) =
             value={buyerType}
             onChange={({ target: { value } }) => setBuyerType(value)}
           >
-            <FormControlLabel value="organization" control={<Radio />} label="Organization" />
-            <FormControlLabel value="user" control={<Radio />} label="Individual person" />
+            <FormControlLabel
+              value="organization"
+              control={<Radio />}
+              label="Organization"
+            />
+            <FormControlLabel
+              value="user"
+              control={<Radio />}
+              label="Individual person"
+            />
           </RadioGroup>
         </FormControl>
         {buyerType === 'organization' ? (

@@ -7,7 +7,11 @@ import clsx from 'clsx';
 
 import TextField from '../inputs/TextField';
 import ContainedButton from '../buttons/ContainedButton';
-import { requiredMessage, validateEmail, invalidEmailMessage } from '../inputs/validation';
+import {
+  requiredMessage,
+  validateEmail,
+  invalidEmailMessage,
+} from '../inputs/validation';
 
 interface NewsletterFormProps {
   submitLabel?: string;
@@ -16,8 +20,38 @@ interface NewsletterFormProps {
   textFieldClassName?: string;
   buttonClassName?: string;
   gridXs?: {
-    textField: boolean | 'auto' | 4 | 5 | 8 | 1 | 2 | 3 | 6 | 7 | 9 | 10 | 11 | 12 | undefined;
-    button: boolean | 'auto' | 4 | 5 | 8 | 1 | 2 | 3 | 6 | 7 | 9 | 10 | 11 | 12 | undefined;
+    textField:
+      | boolean
+      | 'auto'
+      | 4
+      | 5
+      | 8
+      | 1
+      | 2
+      | 3
+      | 6
+      | 7
+      | 9
+      | 10
+      | 11
+      | 12
+      | undefined;
+    button:
+      | boolean
+      | 'auto'
+      | 4
+      | 5
+      | 8
+      | 1
+      | 2
+      | 3
+      | 6
+      | 7
+      | 9
+      | 10
+      | 11
+      | 12
+      | undefined;
   };
 }
 
@@ -112,7 +146,15 @@ export default function NewsletterForm({
           });
       }}
     >
-      {({ values, errors, submitForm, isSubmitting, isValid, submitCount, status }) => {
+      {({
+        values,
+        errors,
+        submitForm,
+        isSubmitting,
+        isValid,
+        submitCount,
+        status,
+      }) => {
         if (status && status.success) {
           return (
             <div className={classes.success}>

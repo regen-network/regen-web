@@ -119,7 +119,12 @@ type Props = {
   onLogout?: () => void;
 };
 
-const MobileMenu: React.FC<Props> = ({ menuItems, pathName, linkComponent: Link, ...props }) => {
+const MobileMenu: React.FC<Props> = ({
+  menuItems,
+  pathName,
+  linkComponent: Link,
+  ...props
+}) => {
   const styles = useStyles();
   const theme = useTheme();
   const [open, setOpen] = useState(false);
@@ -140,7 +145,13 @@ const MobileMenu: React.FC<Props> = ({ menuItems, pathName, linkComponent: Link,
         width="29px"
         height="22px"
       />
-      <Drawer elevation={0} className={styles.drawer} anchor="right" open={open} onClose={handleClose}>
+      <Drawer
+        elevation={0}
+        className={styles.drawer}
+        anchor="right"
+        open={open}
+        onClose={handleClose}
+      >
         <CloseIcon
           className={clsx(styles.close, styles.icon)}
           onClick={handleClose}
@@ -152,7 +163,9 @@ const MobileMenu: React.FC<Props> = ({ menuItems, pathName, linkComponent: Link,
               <MenuItem
                 key={i}
                 className={
-                  pathName === item.href ? clsx(styles.menuItem, styles.currentMenuItem) : styles.menuItem
+                  pathName === item.href
+                    ? clsx(styles.menuItem, styles.currentMenuItem)
+                    : styles.menuItem
                 }
               >
                 {item.dropdownItems ? (
@@ -165,7 +178,10 @@ const MobileMenu: React.FC<Props> = ({ menuItems, pathName, linkComponent: Link,
                           <MenuItem
                             className={
                               pathName === dropdownItem.href
-                                ? clsx(styles.subMenuItem, styles.currentMenuItem)
+                                ? clsx(
+                                    styles.subMenuItem,
+                                    styles.currentMenuItem,
+                                  )
                                 : styles.subMenuItem
                             }
                             key={`${i}-${j}`}

@@ -3,7 +3,10 @@ import { useHistory, useParams } from 'react-router-dom';
 
 import { BasicInfoForm, BasicInfoFormValues } from '../components/organisms';
 import { OnboardingFormTemplate } from '../components/templates';
-import { useProjectByIdQuery, useUpdateProjectByIdMutation } from '../generated/graphql';
+import {
+  useProjectByIdQuery,
+  useUpdateProjectByIdMutation,
+} from '../generated/graphql';
 
 const BasicInfo: React.FC = () => {
   const history = useHistory();
@@ -49,7 +52,11 @@ const BasicInfo: React.FC = () => {
   }
 
   return (
-    <OnboardingFormTemplate activeStep={0} title="Basic Info" saveAndExit={saveAndExit}>
+    <OnboardingFormTemplate
+      activeStep={0}
+      title="Basic Info"
+      saveAndExit={saveAndExit}
+    >
       <BasicInfoForm submit={submit} initialValues={initialFieldValues} />
     </OnboardingFormTemplate>
   );

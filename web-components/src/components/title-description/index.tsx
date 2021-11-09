@@ -47,7 +47,9 @@ export default function TitleDescription({
       <Title align="center" variant="h2">
         {title}
       </Title>
-      <Description className={classes.description}>{ReactHtmlParser(description)}</Description>
+      <Description className={classes.description}>
+        {ReactHtmlParser(description)}
+      </Description>
       {children && <div>{children}</div>}
     </div>
   );

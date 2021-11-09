@@ -38,7 +38,10 @@ interface CheckboxLabelProps extends CheckboxProps {
   label: React.ReactNode;
 }
 
-export default function CheckboxLabel({ label, ...props }: CheckboxLabelProps): JSX.Element {
+export default function CheckboxLabel({
+  label,
+  ...props
+}: CheckboxLabelProps): JSX.Element {
   const styles = useStyles();
   const {
     form: { errors, touched },
@@ -62,7 +65,9 @@ export default function CheckboxLabel({ label, ...props }: CheckboxLabelProps): 
         }
         label={label}
       />
-      {showError && <FormHelperText error={showError}>{fieldError}</FormHelperText>}
+      {showError && (
+        <FormHelperText error={showError}>{fieldError}</FormHelperText>
+      )}
     </div>
   );
 }

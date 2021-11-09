@@ -36,7 +36,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const UserProfileForm: React.FC<UserProfileFormProps> = ({ submit, initialValues }) => {
+const UserProfileForm: React.FC<UserProfileFormProps> = ({
+  submit,
+  initialValues,
+}) => {
   const classes = useStyles();
   return (
     <Formik
@@ -52,7 +55,10 @@ const UserProfileForm: React.FC<UserProfileFormProps> = ({ submit, initialValues
       }
       validate={(values: UserProfileValues) => {
         const errors: Partial<UserProfileValues> = {};
-        const errorFields: Array<keyof UserProfileValues> = ['name', 'roleTitle'];
+        const errorFields: Array<keyof UserProfileValues> = [
+          'name',
+          'roleTitle',
+        ];
         errorFields.forEach(value => {
           if (!values[value]) {
             errors[value] = requiredMessage;

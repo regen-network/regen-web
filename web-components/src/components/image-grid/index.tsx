@@ -104,7 +104,12 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   }),
 }));
 
-export default function ImageGrid({ img, title, description, even }: ImageGridProps): JSX.Element {
+export default function ImageGrid({
+  img,
+  title,
+  description,
+  even,
+}: ImageGridProps): JSX.Element {
   const classes = useStyles({ even });
 
   return (
@@ -116,7 +121,10 @@ export default function ImageGrid({ img, title, description, even }: ImageGridPr
         <Title variant="h2" className={classes.title}>
           {title}
         </Title>
-        <Description className={classes.description} fontSize={getFontSize('xl')}>
+        <Description
+          className={classes.description}
+          fontSize={getFontSize('xl')}
+        >
           {description}
         </Description>
       </Grid>

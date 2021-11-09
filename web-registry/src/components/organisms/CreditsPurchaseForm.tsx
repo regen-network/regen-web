@@ -15,7 +15,9 @@ import Description from 'web-components/lib/components/description';
 import CheckboxLabel from 'web-components/lib/components/inputs/CheckboxLabel';
 import TextField from 'web-components/lib/components/inputs/TextField';
 import NumberTextField from 'web-components/lib/components/inputs/NumberTextField';
-import SelectTextField, { Option } from 'web-components/lib/components/inputs/SelectTextField';
+import SelectTextField, {
+  Option,
+} from 'web-components/lib/components/inputs/SelectTextField';
 import { CreditPrice } from 'web-components/lib/components/buy-footer';
 import {
   requiredMessage,
@@ -29,7 +31,9 @@ import { countries } from '../../lib/countries';
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_API_KEY || '');
 
 const CREATE_USER = loader('../../graphql/ReallyCreateUserIfNeeded.graphql');
-const CREATE_USER_ORGANIZATION = loader('../../graphql/CreateUserOrganizationIfNeeded.graphql');
+const CREATE_USER_ORGANIZATION = loader(
+  '../../graphql/CreateUserOrganizationIfNeeded.graphql',
+);
 const CREATE_ADDRESS = loader('../../graphql/CreateAddress.graphql');
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -148,7 +152,11 @@ interface Values {
   country: string;
 }
 
-function CreditsPurchaseForm({ creditPrice, stripePrice, onClose }: CreditsPurchaseFormProps): JSX.Element {
+function CreditsPurchaseForm({
+  creditPrice,
+  stripePrice,
+  onClose,
+}: CreditsPurchaseFormProps): JSX.Element {
   const classes = useStyles();
   const initialCountry = 'US';
   const { projectId } = useParams<{ projectId: string }>();
@@ -170,7 +178,9 @@ function CreditsPurchaseForm({ creditPrice, stripePrice, onClose }: CreditsPurch
 
   const searchState = async (countryId: string): Promise<void> => {
     const resp = await axios({
-      url: 'https://geodata.solutions/api/api.php?type=getStates&countryId=' + countryId,
+      url:
+        'https://geodata.solutions/api/api.php?type=getStates&countryId=' +
+        countryId,
       method: 'POST',
     });
     const respOK = resp && resp.status === 200;
@@ -233,7 +243,17 @@ function CreditsPurchaseForm({ creditPrice, stripePrice, onClose }: CreditsPurch
           return errors;
         }}
         onSubmit={async (
-          { orgType, units, email, name, orgName, city, state, country, updates },
+          {
+            orgType,
+            units,
+            email,
+            name,
+            orgName,
+            city,
+            state,
+            country,
+            updates,
+          },
           { setSubmitting, setStatus },
         ) => {
           setSubmitting(true);
@@ -276,7 +296,9 @@ function CreditsPurchaseForm({ creditPrice, stripePrice, onClose }: CreditsPurch
                   },
                 },
               });
-              walletId = result.data.createUserOrganizationIfNeeded.organization.partyByPartyId.walletId;
+              walletId =
+                result.data.createUserOrganizationIfNeeded.organization
+                  .partyByPartyId.walletId;
             } else {
               result = await createUser({
                 variables: {
@@ -289,19 +311,29 @@ function CreditsPurchaseForm({ creditPrice, stripePrice, onClose }: CreditsPurch
                   },
                 },
               });
-              walletId = result.data.reallyCreateUserIfNeeded.user.partyByPartyId.walletId;
+              walletId =
+                result.data.reallyCreateUserIfNeeded.user.partyByPartyId
+                  .walletId;
             }
 
             // Redirect to Stripe Checkout page
             const response = axios.post(
-              `${process.env.REACT_APP_API_URI || 'http://localhost:5000'}/create-checkout-session`,
+              `${
+                process.env.REACT_APP_API_URI || 'http://localhost:5000'
+              }/create-checkout-session`,
               {
                 price: stripePrice,
                 units,
                 cancelUrl: window.location.href,
-                successUrl: `/post-purchase/${projectId}/${walletId}/${encodeURI(name)}`,
+                successUrl: `/post-purchase/${projectId}/${walletId}/${encodeURI(
+                  name,
+                )}`,
                 customerEmail: email,
-                clientReferenceId: JSON.stringify({ walletId, addressId, name }),
+                clientReferenceId: JSON.stringify({
+                  walletId,
+                  addressId,
+                  name,
+                }),
               },
             );
 
@@ -323,13 +355,21 @@ function CreditsPurchaseForm({ creditPrice, stripePrice, onClose }: CreditsPurch
           }
         }}
       >
-        {({ values, errors, submitForm, isSubmitting, isValid, submitCount, status }) => {
+        {({
+          values,
+          errors,
+          submitForm,
+          isSubmitting,
+          isValid,
+          submitCount,
+          status,
+        }) => {
           const formattedUnitPrice: string = new Intl.NumberFormat('en-US', {
             minimumFractionDigits: 2,
           }).format(creditPrice.unitPrice);
-          const formattedTotal: string = new Intl.NumberFormat('en-US', { minimumFractionDigits: 2 }).format(
-            values.units * creditPrice.unitPrice,
-          );
+          const formattedTotal: string = new Intl.NumberFormat('en-US', {
+            minimumFractionDigits: 2,
+          }).format(values.units * creditPrice.unitPrice);
 
           return (
             <div>
@@ -338,9 +378,14 @@ function CreditsPurchaseForm({ creditPrice, stripePrice, onClose }: CreditsPurch
                   Number of credits
                 </Title>
                 <Description>
-                  (${formattedUnitPrice} {creditPrice.currency}/each), includes 10% service fee
+                  (${formattedUnitPrice} {creditPrice.currency}/each), includes
+                  10% service fee
                 </Description>
-                <Grid container alignItems="center" className={classes.unitsGrid}>
+                <Grid
+                  container
+                  alignItems="center"
+                  className={classes.unitsGrid}
+                >
                   <Grid item xs={6}>
                     <Field
                       component={NumberTextField}
@@ -352,16 +397,25 @@ function CreditsPurchaseForm({ creditPrice, stripePrice, onClose }: CreditsPurch
                   <Grid item xs={6}>
                     <Typography>
                       <span className={classes.units}>= ${formattedTotal}</span>
-                      <span className={classes.currency}>{creditPrice.currency}</span>
+                      <span className={classes.currency}>
+                        {creditPrice.currency}
+                      </span>
                     </Typography>
                   </Grid>
                 </Grid>
 
-                <Title className={`${classes.subtitle} ${classes.otherTitle}`} variant="h5">
+                <Title
+                  className={`${classes.subtitle} ${classes.otherTitle}`}
+                  variant="h5"
+                >
                   Credit ownership
                 </Title>
                 <div className={classes.textFields}>
-                  <Field component={TextField} label="Your full name" name="name" />
+                  <Field
+                    component={TextField}
+                    label="Your full name"
+                    name="name"
+                  />
                   <Field
                     component={TextField}
                     className={classes.textField}
@@ -389,16 +443,34 @@ function CreditsPurchaseForm({ creditPrice, stripePrice, onClose }: CreditsPurch
                   </div>
                 )}
 
-                <Title className={`${classes.subtitle} ${classes.otherTitle}`} variant="h5">
+                <Title
+                  className={`${classes.subtitle} ${classes.otherTitle}`}
+                  variant="h5"
+                >
                   Location of purchase
                 </Title>
                 <Description>
-                  Please enter a location for the retirement of these credits. This prevents double counting
-                  of credits in different locations. Note, these credits will be retired upon purchase.
+                  Please enter a location for the retirement of these credits.
+                  This prevents double counting of credits in different
+                  locations. Note, these credits will be retired upon purchase.
                 </Description>
-                <Field component={TextField} className={classes.cityTextField} label="City" name="city" />
-                <Grid container alignItems="center" className={classes.stateCountryGrid}>
-                  <Grid item xs={12} sm={6} className={classes.stateCountryTextField}>
+                <Field
+                  component={TextField}
+                  className={classes.cityTextField}
+                  label="City"
+                  name="city"
+                />
+                <Grid
+                  container
+                  alignItems="center"
+                  className={classes.stateCountryGrid}
+                >
+                  <Grid
+                    item
+                    xs={12}
+                    sm={6}
+                    className={classes.stateCountryTextField}
+                  >
                     <Field
                       options={stateOptions}
                       component={SelectTextField}
@@ -407,10 +479,18 @@ function CreditsPurchaseForm({ creditPrice, stripePrice, onClose }: CreditsPurch
                       errors={matches}
                     />
                   </Grid>
-                  <Grid item xs={12} sm={6} className={classes.stateCountryTextField}>
+                  <Grid
+                    item
+                    xs={12}
+                    sm={6}
+                    className={classes.stateCountryTextField}
+                  >
                     <Field
                       component={SelectTextField}
-                      options={Object.keys(countries).map(key => ({ value: key, label: countries[key] }))}
+                      options={Object.keys(countries).map(key => ({
+                        value: key,
+                        label: countries[key],
+                      }))}
                       name="country"
                       label="Country"
                       triggerOnChange={searchState}

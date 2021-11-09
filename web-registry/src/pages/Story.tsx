@@ -6,7 +6,10 @@ import { useParams, useHistory } from 'react-router-dom';
 import Description from 'web-components/lib/components/description';
 import { OnboardingFormTemplate } from '../components/templates';
 import { StoryForm, StoryValues } from '../components/organisms';
-import { useProjectByIdQuery, useUpdateProjectByIdMutation } from '../generated/graphql';
+import {
+  useProjectByIdQuery,
+  useUpdateProjectByIdMutation,
+} from '../generated/graphql';
 
 const exampleProjectUrl = '/projects/wilmot';
 
@@ -32,10 +35,14 @@ const Story: React.FC = () => {
   if (data?.projectById?.metadata) {
     const metadata = data.projectById.metadata;
     initialFieldValues = {
-      'http://regen.network/landStory': metadata['http://regen.network/landStory'],
-      'http://regen.network/landStewardStory': metadata['http://regen.network/landStory'],
-      'http://regen.network/landStewardStoryTitle': metadata['http://regen.network/landStewardStoryTitle'],
-      'http://regen.network/projectQuote': metadata['http://regen.network/projectQuote'],
+      'http://regen.network/landStory':
+        metadata['http://regen.network/landStory'],
+      'http://regen.network/landStewardStory':
+        metadata['http://regen.network/landStory'],
+      'http://regen.network/landStewardStoryTitle':
+        metadata['http://regen.network/landStewardStoryTitle'],
+      'http://regen.network/projectQuote':
+        metadata['http://regen.network/projectQuote'],
     };
   }
 
@@ -66,14 +73,22 @@ const Story: React.FC = () => {
   }
 
   return (
-    <OnboardingFormTemplate activeStep={activeStep} title="Story" saveAndExit={saveAndExit}>
+    <OnboardingFormTemplate
+      activeStep={activeStep}
+      title="Story"
+      saveAndExit={saveAndExit}
+    >
       <Description className={styles.description}>
         See an example{' '}
         <Link to={exampleProjectUrl} target="_blank">
           project page»
         </Link>
       </Description>
-      <StoryForm submit={submit} initialValues={initialFieldValues} exampleProjectUrl={exampleProjectUrl} />
+      <StoryForm
+        submit={submit}
+        initialValues={initialFieldValues}
+        exampleProjectUrl={exampleProjectUrl}
+      />
     </OnboardingFormTemplate>
   );
 };

@@ -7,7 +7,11 @@ import Description from 'web-components/lib/components/description';
 import Title from 'web-components/lib/components/title';
 import { BlockContent } from 'web-components/lib/components/block-content';
 import { WrappedStepCard } from '../atoms';
-import { StepCardFieldsFragment, Maybe, Scalars } from '../../generated/sanity-graphql';
+import {
+  StepCardFieldsFragment,
+  Maybe,
+  Scalars,
+} from '../../generated/sanity-graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
   description: {
@@ -56,7 +60,13 @@ const StepCardsWithDescription: React.FC<{
   stepCards?: Maybe<Array<Maybe<StepCardFieldsFragment>>>;
   openModal: (link: string) => void;
   className?: string;
-}> = ({ stepCards, className, descriptionRaw, bottomDescription, openModal }) => {
+}> = ({
+  stepCards,
+  className,
+  descriptionRaw,
+  bottomDescription,
+  openModal,
+}) => {
   const styles = useStyles();
 
   return (
@@ -68,7 +78,11 @@ const StepCardsWithDescription: React.FC<{
       )}
       <Grid container justify="center" className={styles.stepCardsContainer}>
         {stepCards?.map((card, i) => (
-          <WrappedStepCard stepNumber={i} stepCard={card} openModal={openModal} />
+          <WrappedStepCard
+            stepNumber={i}
+            stepCard={card}
+            openModal={openModal}
+          />
         ))}
       </Grid>
       {!!bottomDescription && (
@@ -76,7 +90,9 @@ const StepCardsWithDescription: React.FC<{
           <Title align="center" className={styles.bottomTitle}>
             {bottomDescription.title}
           </Title>
-          <Description className={cx(styles.description, styles.bottomDescription)}>
+          <Description
+            className={cx(styles.description, styles.bottomDescription)}
+          >
             <BlockContent content={bottomDescription.body} />
           </Description>
         </>

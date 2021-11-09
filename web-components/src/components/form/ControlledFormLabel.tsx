@@ -23,7 +23,9 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   label: props => ({
     lineHeight: '140%',
     transform: 'scale(1)',
-    color: props.disabled ? theme.palette.info.main : theme.palette.primary.contrastText,
+    color: props.disabled
+      ? theme.palette.info.main
+      : theme.palette.primary.contrastText,
     fontFamily: theme.typography.fontFamily,
     fontWeight: 'bold',
     position: 'relative',
@@ -73,7 +75,9 @@ export default function ControlledFormLabel({
   return (
     <div className={styles.root}>
       <label className={clsx(styles.label, className)}>{children}</label>
-      {labelSubText && <label className={styles.subLabel}>&nbsp;{labelSubText}</label>}
+      {labelSubText && (
+        <label className={styles.subLabel}>&nbsp;{labelSubText}</label>
+      )}
     </div>
   );
 }

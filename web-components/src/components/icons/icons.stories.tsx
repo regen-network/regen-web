@@ -61,13 +61,17 @@ export default {
   component: ArrowDownIcon,
 };
 
-export const arrowIcon = (): JSX.Element => <ArrowDownIcon color={'#000'} direction={'down'} />;
+export const arrowIcon = (): JSX.Element => (
+  <ArrowDownIcon color={'#000'} direction={'down'} />
+);
 
 export const availableCreditsIcon = (): JSX.Element => <AvailableCreditsIcon />;
 
 export const avatarIcon = (): JSX.Element => <AvatarIcon />;
 
-export const breadcrumbIcon = (): JSX.Element => <BreadcrumbIcon direction={'down'} />;
+export const breadcrumbIcon = (): JSX.Element => (
+  <BreadcrumbIcon direction={'down'} />
+);
 
 export const closeIcon = (): JSX.Element => <CloseIcon />;
 
@@ -79,7 +83,9 @@ export const documentIcon = (): JSX.Element => <DocumentIcon />;
 
 export const creditsIcon = (): JSX.Element => <CreditsIcon color={'#000'} />;
 
-export const currentCreditsIcon = (): JSX.Element => <CurrentCreditsIcon color={'#4FB573'} />;
+export const currentCreditsIcon = (): JSX.Element => (
+  <CurrentCreditsIcon color={'#4FB573'} />
+);
 
 export const organizationIcon = (): JSX.Element => <OrganizationIcon />;
 
@@ -123,7 +129,9 @@ export const youtubeIcon = (): JSX.Element => <YoutubeIcon />;
 
 export const githubIcon = (): JSX.Element => <GithubIcon />;
 
-export const whitepaperIcon = (): JSX.Element => <WhitepaperIcon color="black" />;
+export const whitepaperIcon = (): JSX.Element => (
+  <WhitepaperIcon color="black" />
+);
 
 export const blockIcon = (): JSX.Element => <BlockIcon color="black" />;
 

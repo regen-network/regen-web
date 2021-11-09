@@ -238,7 +238,11 @@ export default function ProjectMedia({
             height={60}
             src={
               imageStorageBaseUrl && apiServerUrl
-                ? getOptimizedImageSrc(assets[i].thumbnail, imageStorageBaseUrl, apiServerUrl)
+                ? getOptimizedImageSrc(
+                    assets[i].thumbnail,
+                    imageStorageBaseUrl,
+                    apiServerUrl,
+                  )
                 : assets[i].thumbnail || ''
             }
             alt={assets[i].thumbnail}
@@ -267,7 +271,9 @@ export default function ProjectMedia({
               imageStorageBaseUrl={imageStorageBaseUrl}
               apiServerUrl={apiServerUrl}
             />
-            {imageCredits && <div className={classes.imageCredits}>{imageCredits}</div>}
+            {imageCredits && (
+              <div className={classes.imageCredits}>{imageCredits}</div>
+            )}
           </Grid>
           <Grid item className={classes.centreGrid}>
             <div className={classes.imageContainer}>
@@ -305,11 +311,16 @@ export default function ProjectMedia({
           className={classes.root}
           beforeChange={(oldIndex: number, newIndex: number) => {
             const indexDifference: number = Math.abs(oldIndex - newIndex);
-            const thumbnailsElement = thumbnailsWrapper && thumbnailsWrapper.current;
+            const thumbnailsElement =
+              thumbnailsWrapper && thumbnailsWrapper.current;
             if (thumbnailsElement) {
-              if (thumbnailsElement.scrollWidth > thumbnailsWrapperWidth && thumbnailsWrapperWidth > 0) {
+              if (
+                thumbnailsElement.scrollWidth > thumbnailsWrapperWidth &&
+                thumbnailsWrapperWidth > 0
+              ) {
                 const perIndexScroll =
-                  (thumbnailsElement.scrollWidth - thumbnailsWrapperWidth) / (assets.length - 1);
+                  (thumbnailsElement.scrollWidth - thumbnailsWrapperWidth) /
+                  (assets.length - 1);
                 const scroll = indexDifference * perIndexScroll;
                 if (scroll > 0) {
                   if (oldIndex < newIndex) {
@@ -340,12 +351,20 @@ export default function ProjectMedia({
 
               return (
                 <div key={index} className={classes.sliderImageContainer}>
-                  {image} {imageCredits && <div className={classes.imageCredits}>{imageCredits}</div>}
+                  {image}{' '}
+                  {imageCredits && (
+                    <div className={classes.imageCredits}>{imageCredits}</div>
+                  )}
                 </div>
               );
             } else if (item.type === 'video') {
               return (
-                <video key={index} className={classes.item} controls poster={item.preview}>
+                <video
+                  key={index}
+                  className={classes.item}
+                  controls
+                  poster={item.preview}
+                >
                   <source src={item.src} />
                 </video>
               );

@@ -3,7 +3,9 @@ import { ItemProps } from 'web-components/lib/components/sliders/Item';
 import ProtectedSpecies, {
   ProtectedSpeciesProps,
 } from 'web-components/lib/components/sliders/ProtectedSpecies';
-import ProjectMedia, { Media } from 'web-components/lib/components/sliders/ProjectMedia';
+import ProjectMedia, {
+  Media,
+} from 'web-components/lib/components/sliders/ProjectMedia';
 
 import Grid from '@material-ui/core/Grid';
 
@@ -17,7 +19,18 @@ const item: ItemProps = {
   imgSrc: './melaleuca-b.png',
 };
 
-const species: ProtectedSpeciesProps = [item, item, item, item, item, item, item, item, item, item];
+const species: ProtectedSpeciesProps = [
+  item,
+  item,
+  item,
+  item,
+  item,
+  item,
+  item,
+  item,
+  item,
+  item,
+];
 
 // export const protectedSpeciesItem = (): JSX.Element => (
 //   <Item name={text('Name', item.name)} imgSrc={item.imgSrc} />
@@ -39,7 +52,8 @@ const assets: Media[] = [
   },
   {
     src: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-    thumbnail: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/BigBuckBunny.jpg',
+    thumbnail:
+      'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/BigBuckBunny.jpg',
     type: 'video',
   },
 ];

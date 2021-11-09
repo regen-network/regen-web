@@ -15,7 +15,11 @@ const useStyles = makeStyles<Theme, PlayIconProps>((theme: Theme) => ({
   }),
 }));
 
-export default function PlayIcon({ width, height, className }: PlayIconProps): JSX.Element {
+export default function PlayIcon({
+  width,
+  height,
+  className,
+}: PlayIconProps): JSX.Element {
   const classes = useStyles({ width, height });
 
   return (

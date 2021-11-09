@@ -1,6 +1,11 @@
 import React from 'react';
 import { FieldProps, getIn } from 'formik';
-import { Theme, makeStyles, FormHelperText, FormControl } from '@material-ui/core';
+import {
+  Theme,
+  makeStyles,
+  FormHelperText,
+  FormControl,
+} from '@material-ui/core';
 
 import FormLabel from './FormLabel';
 
@@ -82,7 +87,12 @@ export default function FieldFormControl({
   }
 
   const hasError = fieldTouched && errorMessage;
-  const styles = useStyles({ optional, disabled, description, error: hasError });
+  const styles = useStyles({
+    optional,
+    disabled,
+    description,
+    error: hasError,
+  });
   return (
     <FormControl className={className} fullWidth>
       <FormLabel
@@ -95,7 +105,9 @@ export default function FieldFormControl({
       />
       {children({ handleChange, handleBlur })}
 
-      {hasError && <FormHelperText className={styles.error}>{errorMessage}</FormHelperText>}
+      {hasError && (
+        <FormHelperText className={styles.error}>{errorMessage}</FormHelperText>
+      )}
     </FormControl>
   );
 }

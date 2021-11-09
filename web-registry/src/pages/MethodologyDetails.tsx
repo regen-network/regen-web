@@ -30,7 +30,9 @@ function MethodologyDetails(): JSX.Element {
   const styles = useStyles();
   let { methodologyId } = useParams<{ methodologyId: string }>();
   const { data } = useAllMethodologyQuery({ client });
-  const content = data?.allMethodology?.find(methodology => methodology.path === methodologyId);
+  const content = data?.allMethodology?.find(
+    methodology => methodology.path === methodologyId,
+  );
   // TODO replace with methodology data from db
   const methodology = mock.methodologies.find(p => p.id === methodologyId);
 
@@ -49,7 +51,10 @@ function MethodologyDetails(): JSX.Element {
           documentation={content?.documentation}
         />
         <div className={styles.topoBackground}>
-          <ImpactSection title="Ecological Impact" impacts={content?.ecologicalImpact} />
+          <ImpactSection
+            title="Ecological Impact"
+            impacts={content?.ecologicalImpact}
+          />
         </div>
         <ResourcesSection resources={content?.resources} />
         <MethodologyTestSection

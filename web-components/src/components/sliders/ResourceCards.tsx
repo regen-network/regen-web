@@ -98,7 +98,14 @@ export default function ResourceCards({
       ) : (
         <Grid container>
           {items.map((item, index) => (
-            <Grid item xs={4} md={5} lg={4} key={index} className={classes.item}>
+            <Grid
+              item
+              xs={4}
+              md={5}
+              lg={4}
+              key={index}
+              className={classes.item}
+            >
               <ResourcesCard
                 image={item.image}
                 title={item.title}

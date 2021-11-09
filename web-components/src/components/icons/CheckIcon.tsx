@@ -7,7 +7,13 @@ interface IconProps {
 
 export default function CheckIcon({ className }: IconProps): JSX.Element {
   return (
-    <SvgIcon className={className} width="18" height="17" viewBox="0 0 18 17" fill="none">
+    <SvgIcon
+      className={className}
+      width="18"
+      height="17"
+      viewBox="0 0 18 17"
+      fill="none"
+    >
       <mask
         id="path-1-outside-1"
         maskUnits="userSpaceOnUse"

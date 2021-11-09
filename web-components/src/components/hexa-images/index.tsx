@@ -230,7 +230,12 @@ export default function HexaImages({ items }: HexaImagesProps): JSX.Element {
           >
             {selected === i && <div className={classes.hexagon} />}
             {/* <div className={classes.hexagon} /> */}
-            <img className={classes.image} key={i} src={item.imgSrc} alt={item.name} />
+            <img
+              className={classes.image}
+              key={i}
+              src={item.imgSrc}
+              alt={item.name}
+            />
           </Grid>
         ))}
       </Grid>

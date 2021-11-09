@@ -26,7 +26,11 @@ async function connect(): Promise<RegenApi | undefined> {
   return api;
 }
 
-const LedgerContext = React.createContext<ContextType>({ loading: false, api: undefined, error: undefined });
+const LedgerContext = React.createContext<ContextType>({
+  loading: false,
+  api: undefined,
+  error: undefined,
+});
 
 export const LedgerProvider: React.FC = ({ children }) => {
   const [api, setApi] = useState<RegenApi | undefined>(undefined);
@@ -49,7 +53,11 @@ export const LedgerProvider: React.FC = ({ children }) => {
     getApi();
   }, []);
 
-  return <LedgerContext.Provider value={{ error, loading, api }}>{children}</LedgerContext.Provider>;
+  return (
+    <LedgerContext.Provider value={{ error, loading, api }}>
+      {children}
+    </LedgerContext.Provider>
+  );
 };
 
 export const useLedger = (): ContextType => React.useContext(LedgerContext);

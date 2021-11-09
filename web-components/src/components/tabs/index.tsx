@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
-import { makeStyles, useTheme, withStyles, Theme } from '@material-ui/core/styles';
+import {
+  makeStyles,
+  useTheme,
+  withStyles,
+  Theme,
+} from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
@@ -100,23 +105,38 @@ const CustomTab = withStyles((theme: Theme) => ({
   },
 }))(Tab);
 
-export default function RegenTabs({ tabs, background }: RegenTabsProps): JSX.Element {
+export default function RegenTabs({
+  tabs,
+  background,
+}: RegenTabsProps): JSX.Element {
   const classes = useStyles({ background });
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up('sm'));
 
   const [value, setValue] = useState(0);
 
-  const handleChange = (event: React.ChangeEvent<{}>, newValue: number): void => {
+  const handleChange = (
+    event: React.ChangeEvent<{}>,
+    newValue: number,
+  ): void => {
     setValue(newValue);
   };
 
   return (
     <div className={classes.root}>
       <div>
-        <CustomTabs variant="fullWidth" value={value} onChange={handleChange} aria-label="mrv">
+        <CustomTabs
+          variant="fullWidth"
+          value={value}
+          onChange={handleChange}
+          aria-label="mrv"
+        >
           {tabs.map((tab, index) => (
-            <CustomTab key={`tab-${index}`} label={tab.label} {...a11yProps(index)} />
+            <CustomTab
+              key={`tab-${index}`}
+              label={tab.label}
+              {...a11yProps(index)}
+            />
           ))}
           {matches && <CustomTab disabled />}
         </CustomTabs>

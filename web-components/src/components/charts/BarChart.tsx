@@ -13,9 +13,13 @@ import {
 
 export interface BarChartProps extends VictoryBarProps {
   data: any[];
-  tickFormatX?: any[] | ((tick: any, index: number, ticks: any[]) => string | number);
+  tickFormatX?:
+    | any[]
+    | ((tick: any, index: number, ticks: any[]) => string | number);
   tickValuesX?: any[];
-  tickFormatY?: any[] | ((tick: any, index: number, ticks: any[]) => string | number);
+  tickFormatY?:
+    | any[]
+    | ((tick: any, index: number, ticks: any[]) => string | number);
   tickValuesY?: any[];
 }
 
@@ -47,7 +51,10 @@ export default function RegenBarChart({
         <defs>
           <linearGradient id="grad1" x1="0%" y1="0%" x2="0%" y2="100%">
             <stop offset="0.46%" stopColor={theme.palette.secondary.main} />
-            <stop offset="100%" stopColor={theme.palette.secondary.contrastText} />
+            <stop
+              offset="100%"
+              stopColor={theme.palette.secondary.contrastText}
+            />
           </linearGradient>
           <linearGradient id="hoverGradient" x1="0%" y1="0%" x2="0%" y2="100%">
             <stop offset="0%" stopColor="#515D89" />
@@ -105,7 +112,9 @@ export default function RegenBarChart({
                 return [
                   {
                     target: 'data',
-                    mutation: () => ({ style: { fill: 'url(#hoverGradient)' } }),
+                    mutation: () => ({
+                      style: { fill: 'url(#hoverGradient)' },
+                    }),
                   },
                   {
                     target: 'labels',

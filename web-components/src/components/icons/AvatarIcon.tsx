@@ -19,9 +19,21 @@ export default function AvatarIcon({ className }: IconProps): JSX.Element {
 
   return (
     <SvgIcon className={cx(styles.root, className)} viewBox="0 0 97 97">
-      <svg width="97" height="97" viewBox="0 0 97 97" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg
+        width="97"
+        height="97"
+        viewBox="0 0 97 97"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
         <circle cx="48.5" cy="48.5" r="48.5" fill="#D2D5D9" />
-        <ellipse cx="48.5" cy="36.7522" rx="19.7593" ry="19.7593" fill="#8F8F8F" />
+        <ellipse
+          cx="48.5"
+          cy="36.7522"
+          rx="19.7593"
+          ry="19.7593"
+          fill="#8F8F8F"
+        />
         <path
           fillRule="evenodd"
           clipRule="evenodd"

@@ -29,7 +29,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const CreateProjectCard: React.FC<CreateProjectCardProps> = ({ className, onClick, isFirstProject }) => {
+const CreateProjectCard: React.FC<CreateProjectCardProps> = ({
+  className,
+  onClick,
+  isFirstProject,
+}) => {
   const classes = useStyles();
 
   return (

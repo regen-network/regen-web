@@ -130,12 +130,18 @@ const LandStewards = (): JSX.Element => {
       {content?.designedForFarmersSection && (
         <ImageItemsSection content={content.designedForFarmersSection} />
       )}
-      {content?.joinFarmersSection && <TwoImageSection content={content.joinFarmersSection} />}
+      {content?.joinFarmersSection && (
+        <TwoImageSection content={content.joinFarmersSection} />
+      )}
       {content?.practicesOutcomesSection && (
         <PracticesOutcomesSection content={content.practicesOutcomesSection} />
       )}
-      {content?.timelineSection && <TimelineSection content={content.timelineSection} />}
-      {content?.featuredSection && <FeaturedSection content={content.featuredSection} />}
+      {content?.timelineSection && (
+        <TimelineSection content={content.timelineSection} />
+      )}
+      {content?.featuredSection && (
+        <FeaturedSection content={content.featuredSection} />
+      )}
       {content?.moreQuestionsSection && (
         <HeroAction
           classes={{
@@ -151,7 +157,11 @@ const LandStewards = (): JSX.Element => {
       )}
 
       <FixedFooter justify="flex-end">
-        <ContainedButton onClick={() => openModal(content?.footerButton?.buttonLink?.buttonHref)}>
+        <ContainedButton
+          onClick={() =>
+            openModal(content?.footerButton?.buttonLink?.buttonHref)
+          }
+        >
           {content?.footerButton?.buttonText}
         </ContainedButton>
       </FixedFooter>

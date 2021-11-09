@@ -157,8 +157,9 @@ function ToggleVariants(): JSX.Element {
                         padding: 16,
                       }}
                     >
-                      active content active content active content active content active content active
+                      active content active content active content active
                       content active content active content active content
+                      active content active content
                     </div>
                   }
                   description="description lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
@@ -235,7 +236,12 @@ function ToggleVariants(): JSX.Element {
                   />
                 </Field>
               </OnBoardingCard>
-              <Button color="primary" variant="contained" fullWidth type="submit">
+              <Button
+                color="primary"
+                variant="contained"
+                fullWidth
+                type="submit"
+              >
                 Submit
               </Button>
             </Form>
@@ -248,8 +254,16 @@ function ToggleVariants(): JSX.Element {
 
 function RoleInput(): JSX.Element {
   const entitiesInit = [
-    { '@type': 'http://regen.network/Organization', 'http://schema.org/legalName': 'Impact Ag', id: 1 },
-    { '@type': 'http://regen.network/User', 'http://schema.org/name': 'Toby Grogan', id: 2 },
+    {
+      '@type': 'http://regen.network/Organization',
+      'http://schema.org/legalName': 'Impact Ag',
+      id: 1,
+    },
+    {
+      '@type': 'http://regen.network/User',
+      'http://schema.org/name': 'Toby Grogan',
+      id: 2,
+    },
   ];
 
   const [entities, setEntities] = useState<any>(entitiesInit);
@@ -269,11 +283,16 @@ function RoleInput(): JSX.Element {
   const saveEntity = (updatedEntity: any): Promise<any> => {
     if (!updatedEntity.id) {
       updatedEntity.id = entities[entities.length - 1].id + 1;
-      const newEntities = [...entities, { ...updatedEntity, id: updatedEntity.id }];
+      const newEntities = [
+        ...entities,
+        { ...updatedEntity, id: updatedEntity.id },
+      ];
       setEntities(newEntities);
     } else {
       const updatedEntities = entities.map(existingEntity =>
-        existingEntity.id === updatedEntity.id ? { ...updatedEntity } : existingEntity,
+        existingEntity.id === updatedEntity.id
+          ? { ...updatedEntity }
+          : existingEntity,
       );
       setEntities(updatedEntities);
     }
@@ -304,7 +323,12 @@ function RoleInput(): JSX.Element {
                   onSaveIndividual={saveEntity}
                 />
               </OnBoardingCard>
-              <Button color="primary" variant="contained" fullWidth type="submit">
+              <Button
+                color="primary"
+                variant="contained"
+                fullWidth
+                type="submit"
+              >
                 Submit
               </Button>
             </Form>

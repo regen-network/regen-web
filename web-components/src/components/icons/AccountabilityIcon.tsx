@@ -14,7 +14,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function AccountabilityIcon({ className, isActive }: IconProps): JSX.Element {
+export default function AccountabilityIcon({
+  className,
+  isActive,
+}: IconProps): JSX.Element {
   const classes = useStyles();
 
   return isActive ? (

@@ -105,7 +105,8 @@ export const AdditionalityForm: React.FC<AdditionalityFormProps> = props => {
           <Form>
             <OnBoardingCard className={classes.card}>
               <ControlledFormLabel className={classes.sectionLabel}>
-                Which regenerative practices have you been applying and for how long?
+                Which regenerative practices have you been applying and for how
+                long?
               </ControlledFormLabel>
               <Field component={RadioGroup} name="includesGrasslands">
                 <Field
@@ -184,8 +185,8 @@ export const AdditionalityForm: React.FC<AdditionalityFormProps> = props => {
 
             <OnBoardingCard className={classes.card}>
               <ControlledFormLabel>
-                Prior to adopting these regenerative practices (going back 5 years prior) how were you using
-                the land?
+                Prior to adopting these regenerative practices (going back 5
+                years prior) how were you using the land?
               </ControlledFormLabel>
               <Field component={RadioGroup} name="includesGrasslands">
                 <Field
@@ -216,7 +217,9 @@ export const AdditionalityForm: React.FC<AdditionalityFormProps> = props => {
             </OnBoardingCard>
 
             <OnBoardingCard className={classes.card}>
-              <ControlledFormLabel>Prior environmental conditions</ControlledFormLabel>
+              <ControlledFormLabel>
+                Prior environmental conditions
+              </ControlledFormLabel>
               <Field
                 component={ControlledTextField}
                 description="Relevant environmental changes within the project area. These include changes in vegetation such as clearing or planting, hydrology, soil conditions, or other."

@@ -14,7 +14,10 @@ export interface SelectTextFieldProps extends TextFieldProps {
   options?: Option[];
 }
 
-export default function SelectTextField({ options, ...props }: SelectTextFieldProps): JSX.Element {
+export default function SelectTextField({
+  options,
+  ...props
+}: SelectTextFieldProps): JSX.Element {
   return (
     <TextField
       {...props}

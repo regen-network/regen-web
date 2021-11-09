@@ -87,11 +87,24 @@ const Section = ({
   topRight,
   withSlider = false,
 }: SectionProps): JSX.Element => {
-  const styles = useStyles({ withSlider, titleLineHeight, titleAlign, titleColor, topRight: !!topRight });
+  const styles = useStyles({
+    withSlider,
+    titleLineHeight,
+    titleAlign,
+    titleColor,
+    topRight: !!topRight,
+  });
   return (
-    <section className={clsx(styles.root, className || (classes && classes.root))}>
+    <section
+      className={clsx(styles.root, className || (classes && classes.root))}
+    >
       {title && (
-        <div className={clsx(classes && classes.titleWrap, topRight && styles.spaceBetween)}>
+        <div
+          className={clsx(
+            classes && classes.titleWrap,
+            topRight && styles.spaceBetween,
+          )}
+        >
           <Title
             className={clsx(styles.title, classes && classes.title)}
             variant={titleVariant}

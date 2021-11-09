@@ -65,19 +65,33 @@ export default function ImageItem({
 
   return (
     <div className={clsx(styles.root, classes?.root, className)}>
-      <Grid container justify="center" className={clsx(styles.image, classes?.image)}>
+      <Grid
+        container
+        justify="center"
+        className={clsx(styles.image, classes?.image)}
+      >
         {img}
       </Grid>
       <Title
         align="center"
         variant={titleVariant}
-        className={titleVariant === 'h3' ? clsx(styles.title, styles.h3title) : styles.title}
+        className={
+          titleVariant === 'h3'
+            ? clsx(styles.title, styles.h3title)
+            : styles.title
+        }
       >
         {title}
       </Title>
-      {description && <Description fontSize={getFontSize('big')}>{description}</Description>}
+      {description && (
+        <Description fontSize={getFontSize('big')}>{description}</Description>
+      )}
       {buttonText && buttonHref && (
-        <ContainedButton className={styles.button} href={buttonHref} target={buttonTarget}>
+        <ContainedButton
+          className={styles.button}
+          href={buttonHref}
+          target={buttonTarget}
+        >
           {buttonText}
         </ContainedButton>
       )}

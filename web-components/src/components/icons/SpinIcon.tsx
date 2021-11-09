@@ -32,7 +32,9 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   }),
 }));
 
-export default function SpinIcon({ direction = 'up' }: SpinIconProps): JSX.Element {
+export default function SpinIcon({
+  direction = 'up',
+}: SpinIconProps): JSX.Element {
   const rotate: string = directionRotate[direction];
   const classes = useStyles({ rotate });
   return (

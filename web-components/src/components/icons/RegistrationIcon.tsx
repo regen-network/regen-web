@@ -40,11 +40,51 @@ function RegistrationIcon({ className, isActive }: IconProps): JSX.Element {
         mask="url(#path-1-inside-1)"
       />
       <path d="M2 14H82" stroke="#4FB573" strokeWidth="2" />
-      <rect x="47" y="28" width="3" height="23" rx="0.25" transform="rotate(-90 47 28)" fill="#4FB573" />
-      <rect x="47" y="34" width="2" height="28" rx="0.25" transform="rotate(-90 47 34)" fill="#4FB573" />
-      <rect x="47" y="39" width="2" height="28" rx="0.25" transform="rotate(-90 47 39)" fill="#4FB573" />
-      <rect x="47" y="44" width="2" height="28" rx="0.25" transform="rotate(-90 47 44)" fill="#4FB573" />
-      <rect x="47" y="49" width="2" height="15" rx="0.25" transform="rotate(-90 47 49)" fill="#4FB573" />
+      <rect
+        x="47"
+        y="28"
+        width="3"
+        height="23"
+        rx="0.25"
+        transform="rotate(-90 47 28)"
+        fill="#4FB573"
+      />
+      <rect
+        x="47"
+        y="34"
+        width="2"
+        height="28"
+        rx="0.25"
+        transform="rotate(-90 47 34)"
+        fill="#4FB573"
+      />
+      <rect
+        x="47"
+        y="39"
+        width="2"
+        height="28"
+        rx="0.25"
+        transform="rotate(-90 47 39)"
+        fill="#4FB573"
+      />
+      <rect
+        x="47"
+        y="44"
+        width="2"
+        height="28"
+        rx="0.25"
+        transform="rotate(-90 47 44)"
+        fill="#4FB573"
+      />
+      <rect
+        x="47"
+        y="49"
+        width="2"
+        height="15"
+        rx="0.25"
+        transform="rotate(-90 47 49)"
+        fill="#4FB573"
+      />
       <circle cx="8" cy="8" r="2" fill="#4FB573" />
       <circle cx="14" cy="8" r="2" fill="#4FB573" />
       <circle cx="20" cy="8" r="2" fill="#4FB573" />
@@ -62,7 +102,11 @@ function RegistrationIcon({ className, isActive }: IconProps): JSX.Element {
         strokeWidth="6"
         mask="url(#path-11-inside-2)"
       />
-      <path d="M30 40V49H17V40V39.4909L23.5 33.3732L30 39.4909V40Z" stroke="#4FB573" strokeWidth="2" />
+      <path
+        d="M30 40V49H17V40V39.4909L23.5 33.3732L30 39.4909V40Z"
+        stroke="#4FB573"
+        strokeWidth="2"
+      />
       <mask id="path-13-inside-3" fill="white">
         <path d="M30 33C30 31.3431 31.3431 30 33 30C34.6569 30 36 31.3431 36 33V49.75C36 49.8881 35.8881 50 35.75 50H30.25C30.1119 50 30 49.8881 30 49.75V33Z" />
       </mask>
@@ -98,7 +142,13 @@ function RegistrationIcon({ className, isActive }: IconProps): JSX.Element {
         strokeWidth="2"
         mask="url(#path-15-inside-5)"
       />
-      <line x1="20.3201" y1="43.6159" x2="26.3201" y2="48.6159" stroke="#4FB573" />
+      <line
+        x1="20.3201"
+        y1="43.6159"
+        x2="26.3201"
+        y2="48.6159"
+        stroke="#4FB573"
+      />
       <path d="M31 37H35" stroke="#4FB573" />
       <path d="M31 42H35" stroke="#4FB573" />
       <line
@@ -176,9 +226,27 @@ function RegistrationIcon({ className, isActive }: IconProps): JSX.Element {
         transform="rotate(-90 55.9524 59.2266)"
         fill="#8F8F8F"
       />
-      <ellipse cx="9.52378" cy="10.242" rx="2.38095" ry="2.38949" fill="#8F8F8F" />
-      <ellipse cx="16.6666" cy="10.242" rx="2.38095" ry="2.38949" fill="#8F8F8F" />
-      <ellipse cx="23.8094" cy="10.242" rx="2.38095" ry="2.38949" fill="#8F8F8F" />
+      <ellipse
+        cx="9.52378"
+        cy="10.242"
+        rx="2.38095"
+        ry="2.38949"
+        fill="#8F8F8F"
+      />
+      <ellipse
+        cx="16.6666"
+        cy="10.242"
+        rx="2.38095"
+        ry="2.38949"
+        fill="#8F8F8F"
+      />
+      <ellipse
+        cx="23.8094"
+        cy="10.242"
+        rx="2.38095"
+        ry="2.38949"
+        fill="#8F8F8F"
+      />
       <mask id="path-11-inside-2" fill="white">
         <rect x="10.7144" y="26.9685" width="39.2857" height="34.6476" rx="2" />
       </mask>
@@ -208,7 +276,13 @@ function RegistrationIcon({ className, isActive }: IconProps): JSX.Element {
         mask="url(#path-13-inside-3)"
       />
       <mask id="path-14-inside-4" fill="white">
-        <rect x="23.8096" y="52.0581" width="8.33333" height="7.16846" rx="0.25" />
+        <rect
+          x="23.8096"
+          y="52.0581"
+          width="8.33333"
+          height="7.16846"
+          rx="0.25"
+        />
       </mask>
       <rect
         x="23.8096"

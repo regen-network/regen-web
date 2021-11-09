@@ -37,9 +37,14 @@ const OverviewCards: React.FC<{
           <OverviewCard
             className={styles.overviewCard}
             icon={
-              card?.icon?.asset?.url ? <img src={card.icon.asset.url} alt={card?.title || ''} /> : undefined
+              card?.icon?.asset?.url ? (
+                <img src={card.icon.asset.url} alt={card?.title || ''} />
+              ) : undefined
             }
-            item={{ title: card?.title || '', description: <BlockContent content={card?.descriptionRaw} /> }}
+            item={{
+              title: card?.title || '',
+              description: <BlockContent content={card?.descriptionRaw} />,
+            }}
           />
         </Grid>
       ))}

@@ -41,9 +41,19 @@ export default function RegenCard({
   borderRadius,
   className,
 }: RegenCardProps): JSX.Element {
-  const classes = useStyles({ width, height, borderColor, borderRadius, onClick });
+  const classes = useStyles({
+    width,
+    height,
+    borderColor,
+    borderRadius,
+    onClick,
+  });
   return (
-    <Card onClick={onClick} className={`${classes.root} ${className}`} elevation={elevation}>
+    <Card
+      onClick={onClick}
+      className={`${classes.root} ${className}`}
+      elevation={elevation}
+    >
       {children}
     </Card>
   );

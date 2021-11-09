@@ -105,7 +105,9 @@ const CreateCreditClass: React.FC = () => {
     setOpen(true);
   };
 
-  const outcomeCards = content?.outcomes?.map(outcome => <WrappedImpactCard outcome={outcome} />);
+  const outcomeCards = content?.outcomes?.map(outcome => (
+    <WrappedImpactCard outcome={outcome} />
+  ));
 
   const SubtitleAndDescription: React.FC<{
     title: string;
@@ -152,7 +154,11 @@ const CreateCreditClass: React.FC = () => {
         classes={{ root: styles.padBottom, title: styles.sectionTitle }}
       >
         <Box display={['block', 'flex']} justifyContent="center">
-          <Box maxWidth={theme.typography.pxToRem(942)} mt={[6, 8.75]} mx={[-1, 'inherit']}>
+          <Box
+            maxWidth={theme.typography.pxToRem(942)}
+            mt={[6, 8.75]}
+            mx={[-1, 'inherit']}
+          >
             <StepCardsWithDescription
               openModal={openModal}
               stepCards={content?.stepCardSection?.stepCards}
@@ -174,7 +180,9 @@ const CreateCreditClass: React.FC = () => {
               descriptionRaw={content?.creditTypeSection?.descriptionTopRaw}
             />
             <OverviewWrap>
-              <OverviewCards cards={content?.creditTypeSection?.institutionalCards} />
+              <OverviewCards
+                cards={content?.creditTypeSection?.institutionalCards}
+              />
             </OverviewWrap>
           </Box>
           <Box mt={[15, 22]} pb={[4, 8]}>
@@ -183,7 +191,9 @@ const CreateCreditClass: React.FC = () => {
               descriptionRaw={content?.creditTypeSection?.descriptionBottomRaw}
             />
             <OverviewWrap>
-              <OverviewCards cards={content?.creditTypeSection?.flexCreditCards} />
+              <OverviewCards
+                cards={content?.creditTypeSection?.flexCreditCards}
+              />
             </OverviewWrap>
           </Box>
         </Section>
@@ -210,11 +220,18 @@ const CreateCreditClass: React.FC = () => {
           <ResponsiveSlider
             infinite={false}
             itemWidth="90%"
-            classes={{ title: styles.resourcesTitle, root: styles.resourcesRoot }}
+            classes={{
+              title: styles.resourcesTitle,
+              root: styles.resourcesRoot,
+            }}
             padding={theme.spacing(2.5)}
             title="Resources"
             titleVariant="h2"
-            arrows={content?.resources ? content.resources.length > resourceCardsShown : false}
+            arrows={
+              content?.resources
+                ? content.resources.length > resourceCardsShown
+                : false
+            }
             slidesToShow={resourceCardsShown}
             items={content?.resources?.map(resource => (
               <WrappedResourcesCard resource={resource} />
@@ -235,7 +252,11 @@ const CreateCreditClass: React.FC = () => {
           Submit a Credit Class
         </ContainedButton>
       </FixedFooter>
-      <Modal open={open} onClose={() => setOpen(false)} className={styles.modal}>
+      <Modal
+        open={open}
+        onClose={() => setOpen(false)}
+        className={styles.modal}
+      >
         <iframe title="airtable-signup-form" src={modalLink} />
       </Modal>
     </div>

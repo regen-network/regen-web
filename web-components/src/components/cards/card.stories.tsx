@@ -36,8 +36,10 @@ const projectDeveloper: User = {
     state: 'Victoria',
     country: 'Australia',
   },
-  imgSrc: 'http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png',
-  description: 'Odonata is a not-for-profit entity supporting biodiversity impact solutions.',
+  imgSrc:
+    'http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png',
+  description:
+    'Odonata is a not-for-profit entity supporting biodiversity impact solutions.',
 };
 
 const landSteward: User = {
@@ -48,11 +50,15 @@ const landSteward: User = {
     country: 'Australia',
   },
   imgSrc: '/tribe.png',
-  description: 'The Ngarrindjeri culture is centered around the lower lakes of the Murray River.',
+  description:
+    'The Ngarrindjeri culture is centered around the lower lakes of the Murray River.',
 };
 
 export const projectTopCard = (): JSX.Element => (
-  <ProjectTopCard projectDeveloper={projectDeveloper} landSteward={landSteward} />
+  <ProjectTopCard
+    projectDeveloper={projectDeveloper}
+    landSteward={landSteward}
+  />
 );
 
 export const impactCard = (): JSX.Element => (
@@ -103,7 +109,8 @@ export const projectCard = (): JSX.Element => (
     developer={{
       name: 'Odonata',
       type: 'user',
-      imgSrc: 'http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png',
+      imgSrc:
+        'http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png',
     }}
     tag="biodiversity"
     onClick={onClick}
@@ -156,9 +163,13 @@ export const greenTopIconCard = (): JSX.Element => (
   </>
 );
 
-export const onBoardingCard = (): JSX.Element => <OnBoardingCard>some content</OnBoardingCard>;
+export const onBoardingCard = (): JSX.Element => (
+  <OnBoardingCard>some content</OnBoardingCard>
+);
 
-export const createProjectCard = (): JSX.Element => <CreateProjectCard isFirstProject onClick={() => {}} />;
+export const createProjectCard = (): JSX.Element => (
+  <CreateProjectCard isFirstProject onClick={() => {}} />
+);
 
 export const createProjectCardAddAnother = (): JSX.Element => (
   <CreateProjectCard isFirstProject={false} onClick={() => {}} />
@@ -227,26 +238,58 @@ function OverviewCards(): JSX.Element {
     },
     {
       title: 'no tooltip',
-      description: 'Two lines: Blockchain data: data stored on the Regen Ledger.',
+      description:
+        'Two lines: Blockchain data: data stored on the Regen Ledger.',
     },
     {
       title: 'with a link',
-      description: 'A new practice adopted from &nbsp;<a href="#">pre-approved list</a>',
+      description:
+        'A new practice adopted from &nbsp;<a href="#">pre-approved list</a>',
       tooltip: 'test',
     },
-    { title: 'unique', tooltip: 'test 2', description: 'Avoiding double issuance' },
-    { title: 'short', tooltip: 'test 2', description: 'single line description' },
-    { title: 'short', tooltip: 'test 2', description: 'single line description' },
+    {
+      title: 'unique',
+      tooltip: 'test 2',
+      description: 'Avoiding double issuance',
+    },
+    {
+      title: 'short',
+      tooltip: 'test 2',
+      description: 'single line description',
+    },
+    {
+      title: 'short',
+      tooltip: 'test 2',
+      description: 'single line description',
+    },
   ];
 
   return (
     <div className={styles.root}>
-      <OverviewCard icon={<TrustIcon className={styles.trustIcon} isActive />} item={items[0]} />
-      <OverviewCard icon={<CurrentCreditsIcon className={styles.creditsIcon} />} item={items[1]} />
-      <OverviewCard icon={<CurrentCreditsIcon className={styles.creditsIcon} />} item={items[3]} />
-      <OverviewCard icon={<TrustIcon className={styles.trustIcon} isActive />} item={items[2]} />
-      <OverviewCard icon={<TrustIcon className={styles.trustIcon} isActive />} item={items[4]} />
-      <OverviewCard icon={<TrustIcon className={styles.trustIcon} isActive />} item={items[5]} />
+      <OverviewCard
+        icon={<TrustIcon className={styles.trustIcon} isActive />}
+        item={items[0]}
+      />
+      <OverviewCard
+        icon={<CurrentCreditsIcon className={styles.creditsIcon} />}
+        item={items[1]}
+      />
+      <OverviewCard
+        icon={<CurrentCreditsIcon className={styles.creditsIcon} />}
+        item={items[3]}
+      />
+      <OverviewCard
+        icon={<TrustIcon className={styles.trustIcon} isActive />}
+        item={items[2]}
+      />
+      <OverviewCard
+        icon={<TrustIcon className={styles.trustIcon} isActive />}
+        item={items[4]}
+      />
+      <OverviewCard
+        icon={<TrustIcon className={styles.trustIcon} isActive />}
+        item={items[5]}
+      />
     </div>
   );
 }
@@ -257,7 +300,8 @@ export const overviewCard = (): JSX.Element => (
     item={{
       title: 'sample',
       tooltip: 'Example tooltip',
-      description: 'Icon must be styled in each use. It is shown here unstyled.',
+      description:
+        'Icon must be styled in each use. It is shown here unstyled.',
     }}
   />
 );

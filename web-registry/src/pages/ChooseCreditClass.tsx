@@ -49,7 +49,10 @@ const ChooseCreditClass: React.FC = () => {
   });
   const [updateProject] = useUpdateProjectByIdMutation();
 
-  async function handleSelection(creditClassId: string, creditClassUri: string): Promise<void> {
+  async function handleSelection(
+    creditClassId: string,
+    creditClassUri: string,
+  ): Promise<void> {
     if (graphData?.shaclGraphByUri?.graph) {
       const metadata = getProjectPageBaseData();
       metadata['http://regen.network/creditClass'] = {
@@ -93,7 +96,9 @@ const ChooseCreditClass: React.FC = () => {
               <ImageActionCard
                 btnText="Choose credit class"
                 className={classes.card}
-                description={c.creditClassVersionsById?.nodes[0].description || ''}
+                description={
+                  c.creditClassVersionsById?.nodes[0].description || ''
+                }
                 imgSrc={c.creditClassVersionsById?.nodes[0].image}
                 onClick={() => handleSelection(c.id, c.uri)}
                 title={c.creditClassVersionsById?.nodes[0].name}

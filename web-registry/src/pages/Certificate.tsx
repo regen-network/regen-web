@@ -3,7 +3,9 @@ import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import ReactToPrint from 'react-to-print';
 
-import Certificate, { StakeholderInfo } from 'web-components/lib/components/certificate';
+import Certificate, {
+  StakeholderInfo,
+} from 'web-components/lib/components/certificate';
 import Title from 'web-components/lib/components/title';
 import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';
 import ShareIcons from 'web-components/lib/components/icons/ShareIcons';
@@ -217,7 +219,10 @@ function CertificatePage(): JSX.Element {
         const units: number = Math.round(
           node.transactionsByPurchaseId?.nodes
             .map(n => (n ? parseFloat(n.units) : 0))
-            .reduce((accumulator: number, currentValue: number) => accumulator + currentValue),
+            .reduce(
+              (accumulator: number, currentValue: number) =>
+                accumulator + currentValue,
+            ),
         );
 
         const vintage = node.creditVintageByCreditVintageId;
@@ -228,7 +233,9 @@ function CertificatePage(): JSX.Element {
           const landOwnerInfo = getStakeholderInfo(
             'Land Owner',
             project.partyByLandOwnerId,
-            vintage.initialDistribution?.['http://regen.network/landOwnerDistribution'],
+            vintage.initialDistribution?.[
+              'http://regen.network/landOwnerDistribution'
+            ],
           );
           if (landOwnerInfo) {
             projectStakeholders.push(landOwnerInfo);
@@ -236,7 +243,9 @@ function CertificatePage(): JSX.Element {
           const landStewardInfo = getStakeholderInfo(
             'Land Steward',
             project.partyByStewardId,
-            vintage.initialDistribution?.['http://regen.network/landStewardDistribution'],
+            vintage.initialDistribution?.[
+              'http://regen.network/landStewardDistribution'
+            ],
           );
           if (landStewardInfo) {
             projectStakeholders.push(landStewardInfo);
@@ -244,13 +253,16 @@ function CertificatePage(): JSX.Element {
           const projectDeveloperInfo = getStakeholderInfo(
             'Project Developer',
             project.partyByDeveloperId,
-            vintage.initialDistribution?.['http://regen.network/projectDeveloperDistribution'],
+            vintage.initialDistribution?.[
+              'http://regen.network/projectDeveloperDistribution'
+            ],
           );
           if (projectDeveloperInfo) {
             projectStakeholders.push(projectDeveloperInfo);
           }
 
-          const tokenizer = vintage.walletByTokenizerId?.partiesByWalletId.nodes[0];
+          const tokenizer =
+            vintage.walletByTokenizerId?.partiesByWalletId.nodes[0];
 
           const creditClassVersion =
             vintage.creditClassVersionByCreditClassVersionIdAndCreditClassVersionCreatedAt;
@@ -260,7 +272,12 @@ function CertificatePage(): JSX.Element {
           items.push(
             <div
               ref={element => {
-                if (element && ref && ref.current && ref.current.length < nodes.length) {
+                if (
+                  element &&
+                  ref &&
+                  ref.current &&
+                  ref.current.length < nodes.length
+                ) {
                   ref.current.push(element);
                 }
               }}
@@ -269,14 +286,24 @@ function CertificatePage(): JSX.Element {
                 background={background}
                 creditName={creditClassVersion?.name || ''}
                 certificateTitle={
-                  creditClassVersion?.metadata?.['http://regen.network/offsetGenerationMethod'] ||
-                  'Carbon Removal'
+                  creditClassVersion?.metadata?.[
+                    'http://regen.network/offsetGenerationMethod'
+                  ] || 'Carbon Removal'
                 }
-                creditUnitName={creditClassVersion?.metadata?.['http://regen.network/creditDenom']}
-                projectName={project?.metadata?.['http://schema.org/name'] || ''}
+                creditUnitName={
+                  creditClassVersion?.metadata?.[
+                    'http://regen.network/creditDenom'
+                  ]
+                }
+                projectName={
+                  project?.metadata?.['http://schema.org/name'] || ''
+                }
                 creditsUnits={units}
                 equivalentTonsCO2={units} // 1 credit <=> 1 ton CO2e
-                buyerName={node?.walletByBuyerWalletId?.partiesByWalletId.nodes[0]?.name || ''}
+                buyerName={
+                  node?.walletByBuyerWalletId?.partiesByWalletId.nodes[0]
+                    ?.name || ''
+                }
                 date={node.createdAt}
                 stakeholders={[
                   {
@@ -297,8 +324,14 @@ function CertificatePage(): JSX.Element {
             <ProjectCard
               href={project.handle ? `/projects/${project.handle}` : undefined}
               name={project.metadata?.['http://schema.org/name']}
-              imgSrc={project.metadata?.['http://regen.network/previewPhoto']?.['@value']}
-              place={project.metadata?.['http://schema.org/location']?.place_name}
+              imgSrc={
+                project.metadata?.['http://regen.network/previewPhoto']?.[
+                  '@value'
+                ]
+              }
+              place={
+                project.metadata?.['http://schema.org/location']?.place_name
+              }
               area={
                 project.metadata?.['http://regen.network/size']?.[
                   'http://qudt.org/1.1/schema/qudt#numericValue'
@@ -306,46 +339,53 @@ function CertificatePage(): JSX.Element {
               }
               areaUnit={
                 qudtUnitMap[
-                  project.metadata?.['http://regen.network/size']?.['http://qudt.org/1.1/schema/qudt#unit']?.[
-                    '@value'
-                  ] as qudtUnit
+                  project.metadata?.['http://regen.network/size']?.[
+                    'http://qudt.org/1.1/schema/qudt#unit'
+                  ]?.['@value'] as qudtUnit
                 ]
               }
               purchaseInfo={{
                 units,
                 vintageId: vintage.id,
                 vintageMetadata: vintage.metadata,
-                vintagePeriod: getFormattedPeriod(vintage.startDate, vintage.endDate),
+                vintagePeriod: getFormattedPeriod(
+                  vintage.startDate,
+                  vintage.endDate,
+                ),
                 creditClass: {
-                  standard: creditClassVersion?.creditClassById?.standard || false,
+                  standard:
+                    creditClassVersion?.creditClassById?.standard || false,
                   documentId: creditClassVersion?.documentId,
                   name: creditClassVersion?.name || '',
                   version: creditClassVersion?.version || '',
-                  url: creditClassVersion?.metadata?.['http://schema.org/url']?.['@value'],
+                  url: creditClassVersion?.metadata?.[
+                    'http://schema.org/url'
+                  ]?.['@value'],
                 },
                 methodology: {
                   documentId: methodologyVersion?.documentId,
                   name: methodologyVersion?.name || '',
                   version: methodologyVersion?.version || '',
-                  url: methodologyVersion?.metadata?.['http://schema.org/url']?.['@value'],
+                  url: methodologyVersion?.metadata?.[
+                    'http://schema.org/url'
+                  ]?.['@value'],
                 },
                 standard: {
                   documentId:
-                    creditClassVersion?.metadata?.['http://regen.network/standard']?.[
-                      'http://regen.network/documentId'
-                    ],
+                    creditClassVersion?.metadata?.[
+                      'http://regen.network/standard'
+                    ]?.['http://regen.network/documentId'],
                   name:
-                    creditClassVersion?.metadata?.['http://regen.network/standard']?.[
-                      'http://schema.org/name'
-                    ] || '',
+                    creditClassVersion?.metadata?.[
+                      'http://regen.network/standard'
+                    ]?.['http://schema.org/name'] || '',
                   version:
-                    creditClassVersion?.metadata?.['http://regen.network/standard']?.[
-                      'http://schema.org/version'
-                    ] || '',
-                  url:
-                    creditClassVersion?.metadata?.['http://regen.network/standard']?.[
-                      'http://schema.org/url'
-                    ]?.['@value'],
+                    creditClassVersion?.metadata?.[
+                      'http://regen.network/standard'
+                    ]?.['http://schema.org/version'] || '',
+                  url: creditClassVersion?.metadata?.[
+                    'http://regen.network/standard'
+                  ]?.['http://schema.org/url']?.['@value'],
                 },
                 projectType: project.type || '',
               }}
@@ -359,11 +399,15 @@ function CertificatePage(): JSX.Element {
   const currentPurchase = data?.allPurchases?.nodes[current];
   const currentVintage = currentPurchase?.creditVintageByCreditVintageId;
   const currentProject = currentVintage?.projectByProjectId;
-  const externalProjectLink = currentProject?.metadata?.['http://regen.network/externalProjectUrl'];
+  const externalProjectLink =
+    currentProject?.metadata?.['http://regen.network/externalProjectUrl'];
   const issuer = currentVintage?.partyByIssuerId;
-  const retirements = currentVintage?.retirementsByCreditVintageId?.nodes?.filter(n =>
-    buyerWalletId ? n?.walletId === buyerWalletId : n?.walletId === currentPurchase?.buyerWalletId,
-  );
+  const retirements =
+    currentVintage?.retirementsByCreditVintageId?.nodes?.filter(n =>
+      buyerWalletId
+        ? n?.walletId === buyerWalletId
+        : n?.walletId === currentPurchase?.buyerWalletId,
+    );
 
   return (
     <div className={classes.root}>
@@ -386,8 +430,15 @@ function CertificatePage(): JSX.Element {
       </div>
       {issuer && (
         <div className={classes.issuer}>
-          <Grid container alignItems="center" justify="center" className={classes.issuerInfo}>
-            {issuer.image && <UserAvatar src={issuer.image} alt={issuer.image} />}
+          <Grid
+            container
+            alignItems="center"
+            justify="center"
+            className={classes.issuerInfo}
+          >
+            {issuer.image && (
+              <UserAvatar src={issuer.image} alt={issuer.image} />
+            )}
             <Title className={classes.issuerName} variant="h4">
               View on {issuer.name}
             </Title>
@@ -405,7 +456,11 @@ function CertificatePage(): JSX.Element {
               ),
           )}
           {externalProjectLink && (
-            <OutlinedButton href={externalProjectLink} target="_blank" className={classes.projectPageButton}>
+            <OutlinedButton
+              href={externalProjectLink}
+              target="_blank"
+              className={classes.projectPageButton}
+            >
               project page»
             </OutlinedButton>
           )}
@@ -416,7 +471,10 @@ function CertificatePage(): JSX.Element {
           <Title className={classes.shareTitle} variant="h4">
             Share
           </Title>
-          <ShareIcons xsSize={theme.spacing(10)} url={`${window.location.origin}/buyers`} />
+          <ShareIcons
+            xsSize={theme.spacing(10)}
+            url={`${window.location.origin}/buyers`}
+          />
         </Grid>
         {data?.allPurchases?.nodes && (
           <Grid item xs={12} sm={6}>
@@ -433,7 +491,10 @@ function CertificatePage(): JSX.Element {
       </Grid>
       {data?.allPurchases?.nodes && (
         <div className={classes.projects}>
-          <Section classes={{ title: classes.projectsTitle }} title="Projects Supported">
+          <Section
+            classes={{ title: classes.projectsTitle }}
+            title="Projects Supported"
+          >
             <Grid container spacing={5}>
               {projects.map((project, i) => (
                 <Grid item xs={12} sm={4} key={i}>
@@ -450,10 +511,14 @@ function CertificatePage(): JSX.Element {
 
 function getStakeholderInfo(
   label: string,
-  stakeholder?: Maybe<{ __typename?: 'Party' | undefined } & ProjectPartyFragment>,
+  stakeholder?: Maybe<
+    { __typename?: 'Party' | undefined } & ProjectPartyFragment
+  >,
   distribution: number | undefined = 0,
 ): StakeholderInfo | null {
-  const orgMember = stakeholder?.organizationByPartyId?.organizationMembersByOrganizationId?.nodes[0];
+  const orgMember =
+    stakeholder?.organizationByPartyId?.organizationMembersByOrganizationId
+      ?.nodes[0];
   const person = orgMember?.userByMemberId?.partyByPartyId;
   if (distribution > 0) {
     return {

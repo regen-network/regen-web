@@ -7,7 +7,14 @@ import { Variant } from '@material-ui/core/styles/createTypography';
 interface TitleProps {
   variant?: Variant;
   children?: any;
-  color?: 'inherit' | 'initial' | 'textPrimary' | 'primary' | 'secondary' | 'textSecondary' | 'error';
+  color?:
+    | 'inherit'
+    | 'initial'
+    | 'textPrimary'
+    | 'primary'
+    | 'secondary'
+    | 'textSecondary'
+    | 'error';
   className?: string;
   onClick?: React.MouseEventHandler;
   align?: 'left' | 'right' | 'inherit' | 'center' | 'justify';

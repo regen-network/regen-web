@@ -26,16 +26,24 @@ interface StyleProps {
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   root: props => ({
-    backgroundImage: props.background ? `url("${props.background}")` : 'transparent',
+    backgroundImage: props.background
+      ? `url("${props.background}")`
+      : 'transparent',
     backgroundSize: 'cover',
-    border: props.background ? `1px solid ${theme.palette.secondary.contrastText}` : 'none',
+    border: props.background
+      ? `1px solid ${theme.palette.secondary.contrastText}`
+      : 'none',
     borderRadius: props.background ? '5px' : 'none',
     position: 'relative',
     [theme.breakpoints.up('sm')]: {
-      padding: `${theme.spacing(14.5)} ${theme.spacing(8)} ${theme.spacing(18)}`,
+      padding: `${theme.spacing(14.5)} ${theme.spacing(8)} ${theme.spacing(
+        18,
+      )}`,
     },
     [theme.breakpoints.down('xs')]: {
-      padding: `${theme.spacing(14)} ${theme.spacing(5)} ${theme.spacing(11.5)}`,
+      padding: `${theme.spacing(14)} ${theme.spacing(5)} ${theme.spacing(
+        11.5,
+      )}`,
     },
   }),
   topBar: {
@@ -190,7 +198,11 @@ export default function CreditInfo({
               </Typography>
             )}
             {activities.map((activity, index) => (
-              <Typography component="div" key={index} className={classes.activity}>
+              <Typography
+                component="div"
+                key={index}
+                className={classes.activity}
+              >
                 <div className={classes.bullet}>•</div>
                 <li>{activity}</li>
               </Typography>

@@ -11,8 +11,16 @@ interface MapProps {
 }
 
 export default function Map({ geojson, token }: MapProps): JSX.Element {
-  const [viewPort, setViewPort] = useState({ zoom: 11, latitude: 0.0, longitude: 0.0 });
-  const [boundary, setBoundary] = useState({ zoom: 11, latitude: 0.0, longitude: 0.0 });
+  const [viewPort, setViewPort] = useState({
+    zoom: 11,
+    latitude: 0.0,
+    longitude: 0.0,
+  });
+  const [boundary, setBoundary] = useState({
+    zoom: 11,
+    latitude: 0.0,
+    longitude: 0.0,
+  });
 
   const onLoad = (): void => {
     if (viewPort) {

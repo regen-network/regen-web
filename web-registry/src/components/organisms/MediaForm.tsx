@@ -1,5 +1,12 @@
 import React from 'react';
-import { makeStyles, Theme, useMediaQuery, useTheme, Grid, FormHelperText } from '@material-ui/core';
+import {
+  makeStyles,
+  Theme,
+  useMediaQuery,
+  useTheme,
+  Grid,
+  FormHelperText,
+} from '@material-ui/core';
 import { Formik, Form, Field, getIn } from 'formik';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
@@ -164,11 +171,14 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                   errors[path] = { '@value': requiredMessage };
                 } else {
                   // for gallery photos, display general error message below "Gallery Photos" section
-                  errors['http://regen.network/galleryPhotos'] = 'You must add 4 photos';
+                  errors['http://regen.network/galleryPhotos'] =
+                    'You must add 4 photos';
                 }
               } else {
                 // or constraint not satisfied on regen:landStewardPhoto/regen:videoURL
-                errors['http://regen.network/landStewardPhoto'] = { '@value': requiredMessage };
+                errors['http://regen.network/landStewardPhoto'] = {
+                  '@value': requiredMessage,
+                };
               }
             }
           }
@@ -214,7 +224,12 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                       />
                     </Grid>
                     {isTabletOrLarger ? (
-                      <Grid item sm={3} className={styles.centerImages} direction="column">
+                      <Grid
+                        item
+                        sm={3}
+                        className={styles.centerImages}
+                        direction="column"
+                      >
                         <Grid item sm={12} className={styles.centerSmall}>
                           <Field
                             classes={{ button: styles.smallButton }}
@@ -236,7 +251,12 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                       </Grid>
                     ) : (
                       <>
-                        <Grid item xs={6} sm={12} className={styles.galleryImage}>
+                        <Grid
+                          item
+                          xs={6}
+                          sm={12}
+                          className={styles.galleryImage}
+                        >
                           <Field
                             classes={{ button: styles.smallButton }}
                             component={ImageDrop}
@@ -245,7 +265,12 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                             buttonText="+ Add Photo"
                           />
                         </Grid>
-                        <Grid item xs={6} sm={12} className={styles.galleryImage}>
+                        <Grid
+                          item
+                          xs={6}
+                          sm={12}
+                          className={styles.galleryImage}
+                        >
                           <Field
                             classes={{ button: styles.smallButton }}
                             component={ImageDrop}
@@ -268,10 +293,22 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                     </Grid>
                   </Grid>
                   {errors?.['http://regen.network/galleryPhotos'] &&
-                    (getIn(touched, `['http://regen.network/galleryPhotos'].@list[0].@value`) ||
-                      getIn(touched, `['http://regen.network/galleryPhotos'].@list[1].@value`) ||
-                      getIn(touched, `['http://regen.network/galleryPhotos'].@list[2].@value`) ||
-                      getIn(touched, `['http://regen.network/galleryPhotos'].@list[3].@value`)) && (
+                    (getIn(
+                      touched,
+                      `['http://regen.network/galleryPhotos'].@list[0].@value`,
+                    ) ||
+                      getIn(
+                        touched,
+                        `['http://regen.network/galleryPhotos'].@list[1].@value`,
+                      ) ||
+                      getIn(
+                        touched,
+                        `['http://regen.network/galleryPhotos'].@list[2].@value`,
+                      ) ||
+                      getIn(
+                        touched,
+                        `['http://regen.network/galleryPhotos'].@list[3].@value`,
+                      )) && (
                       <FormHelperText className={styles.error}>
                         {errors?.['http://regen.network/galleryPhotos']}
                       </FormHelperText>

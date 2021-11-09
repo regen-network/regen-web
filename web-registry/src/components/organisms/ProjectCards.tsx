@@ -72,20 +72,22 @@ const ProjectCards: React.FC<Props> = props => {
   }> = ({ project }) => (
     <ProjectCard
       name={project.metadata?.['http://schema.org/name']}
-      imgSrc={project.metadata?.['http://regen.network/previewPhoto']?.['@value']}
+      imgSrc={
+        project.metadata?.['http://regen.network/previewPhoto']?.['@value']
+      }
       imageStorageBaseUrl={imageStorageBaseUrl}
       apiServerUrl={apiServerUrl}
       place={project.metadata?.['http://schema.org/location']?.place_name}
       area={
-        project.metadata?.['http://regen.network/size']?.['http://qudt.org/1.1/schema/qudt#numericValue']?.[
-          '@value'
-        ]
+        project.metadata?.['http://regen.network/size']?.[
+          'http://qudt.org/1.1/schema/qudt#numericValue'
+        ]?.['@value']
       }
       areaUnit={
         qudtUnitMap[
-          project.metadata?.['http://regen.network/size']?.['http://qudt.org/1.1/schema/qudt#unit']?.[
-            '@value'
-          ] as qudtUnit
+          project.metadata?.['http://regen.network/size']?.[
+            'http://qudt.org/1.1/schema/qudt#unit'
+          ]?.['@value'] as qudtUnit
         ]
       }
       registry={project.partyByRegistryId}
@@ -97,7 +99,11 @@ const ProjectCards: React.FC<Props> = props => {
       {props.projects.map((project, i) => (
         <>
           {project && (
-            <Link className={styles.swipeItem} key={project.handle || i} href={`/projects/${project.handle}`}>
+            <Link
+              className={styles.swipeItem}
+              key={project.handle || i}
+              href={`/projects/${project.handle}`}
+            >
               <LinkedProject project={project} />
             </Link>
           )}
@@ -105,12 +111,25 @@ const ProjectCards: React.FC<Props> = props => {
       ))}
     </div>
   ) : (
-    <Grid container className={clsx(styles.root, props.classes && props.classes.root)} spacing={5}>
+    <Grid
+      container
+      className={clsx(styles.root, props.classes && props.classes.root)}
+      spacing={5}
+    >
       {props.projects.map((project, i) => (
         <>
           {project && (
-            <Grid item sm={6} md={4} key={project.handle || i} className={styles.item}>
-              <Link className={styles.projectCard} href={`/projects/${project.handle}`}>
+            <Grid
+              item
+              sm={6}
+              md={4}
+              key={project.handle || i}
+              className={styles.item}
+            >
+              <Link
+                className={styles.projectCard}
+                href={`/projects/${project.handle}`}
+              >
                 <LinkedProject project={project} />
               </Link>
             </Grid>

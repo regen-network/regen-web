@@ -36,7 +36,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const Category = ({ questions, name, questionId }: CategoryProps): JSX.Element => {
+const Category = ({
+  questions,
+  name,
+  questionId,
+}: CategoryProps): JSX.Element => {
   const classes = useStyles();
 
   return (

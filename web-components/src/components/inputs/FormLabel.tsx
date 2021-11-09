@@ -73,13 +73,20 @@ export default function FormLabel({
   return (
     <div className={className}>
       {label && (
-        <ControlledFormLabel optional={optional} disabled={disabled} labelSubText={labelSubText}>
+        <ControlledFormLabel
+          optional={optional}
+          disabled={disabled}
+          labelSubText={labelSubText}
+        >
           {label}
         </ControlledFormLabel>
       )}
       {description && (
         <div className={styles.description}>
-          <Typography variant="body1" className={clsx(styles.descriptionText, styles.txtGray)}>
+          <Typography
+            variant="body1"
+            className={clsx(styles.descriptionText, styles.txtGray)}
+          >
             {description}
             {onExampleClick && (
               <span className={styles.example} onClick={onExampleClick}>

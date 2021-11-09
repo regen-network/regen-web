@@ -15,7 +15,8 @@ interface CookiesBannerProps {
 }
 
 const rejectCookieName: string = 'cookies-rejected';
-const cookieName: string = 'gatsby-plugin-google-analytics-gdpr_cookies-enabled';
+const cookieName: string =
+  'gatsby-plugin-google-analytics-gdpr_cookies-enabled';
 
 function getCookieValue(name: string): string | undefined {
   let cookieValue = Cookies.get(name);
@@ -147,14 +148,17 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function CookiesBanner({ privacyUrl }: CookiesBannerProps): JSX.Element | null {
+export default function CookiesBanner({
+  privacyUrl,
+}: CookiesBannerProps): JSX.Element | null {
   const classes = useStyles({});
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     if (
       getCookieValue(rejectCookieName) !== 'true' &&
-      (getCookieValue(cookieName) === undefined || getCookieValue(cookieName) === 'false')
+      (getCookieValue(cookieName) === undefined ||
+        getCookieValue(cookieName) === 'false')
     ) {
       setVisible(true);
     }
@@ -174,10 +178,16 @@ export default function CookiesBanner({ privacyUrl }: CookiesBannerProps): JSX.E
     return (
       <Backdrop className={classes.backdrop} open>
         <div className={classes.background}>
-          <Grid container wrap="nowrap" alignItems="center" justify="space-between" className={classes.root}>
+          <Grid
+            container
+            wrap="nowrap"
+            alignItems="center"
+            justify="space-between"
+            className={classes.root}
+          >
             <Typography className={classes.text}>
-              We use cookies to provide you with a great user experience. By using this site, you accept our
-              use of{' '}
+              We use cookies to provide you with a great user experience. By
+              using this site, you accept our use of{' '}
               <Link className={classes.link} href={privacyUrl}>
                 cookies policy
               </Link>

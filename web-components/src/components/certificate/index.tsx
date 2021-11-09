@@ -48,10 +48,14 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     backgroundColor: theme.palette.primary.main,
     border: `1px solid ${theme.palette.grey[100]}`,
     [theme.breakpoints.up('sm')]: {
-      padding: `${theme.spacing(9.25)} ${theme.spacing(18.75)} ${theme.spacing(12.5)}`,
+      padding: `${theme.spacing(9.25)} ${theme.spacing(18.75)} ${theme.spacing(
+        12.5,
+      )}`,
     },
     [theme.breakpoints.down('xs')]: {
-      padding: `${theme.spacing(3.25)} ${theme.spacing(2.75)} ${theme.spacing(7.25)}`,
+      padding: `${theme.spacing(3.25)} ${theme.spacing(2.75)} ${theme.spacing(
+        7.25,
+      )}`,
     },
   },
   bannerSide: {
@@ -73,10 +77,14 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     height: 0,
     borderStyle: 'solid',
     [theme.breakpoints.up('sm')]: {
-      borderWidth: `${theme.spacing(10.875)} 0 ${theme.spacing(10.875)} ${theme.spacing(5)}`,
+      borderWidth: `${theme.spacing(10.875)} 0 ${theme.spacing(
+        10.875,
+      )} ${theme.spacing(5)}`,
     },
     [theme.breakpoints.down('xs')]: {
-      borderWidth: `${theme.spacing(4)} 0 ${theme.spacing(4)} ${theme.spacing(1.85)}`,
+      borderWidth: `${theme.spacing(4)} 0 ${theme.spacing(4)} ${theme.spacing(
+        1.85,
+      )}`,
     },
     borderColor: `transparent transparent transparent ${theme.palette.primary.main}`,
   },
@@ -212,9 +220,19 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
 }));
 
 const formater = new Intl.NumberFormat('en-US');
-const options = { year: 'numeric', month: 'long', day: 'numeric' };
+const options: Intl.DateTimeFormatOptions = {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+};
 
-function Stakeholder({ info, total }: { info: StakeholderInfo; total: number }): JSX.Element {
+function Stakeholder({
+  info,
+  total,
+}: {
+  info: StakeholderInfo;
+  total: number;
+}): JSX.Element {
   const classes = useStyles({});
 
   return (
@@ -267,10 +285,15 @@ export default function Certificate({
           Credits:{' '}
           <b>
             {formater.format(creditsUnits)}{' '}
-            {ReactHtmlParser(creditUnitName ? pluralize(creditsUnits, creditUnitName) : creditName)}
+            {ReactHtmlParser(
+              creditUnitName
+                ? pluralize(creditsUnits, creditUnitName)
+                : creditName,
+            )}
           </b>
           <br />
-          Equivalent to: <b>{formater.format(equivalentTonsCO2)} tons of CO2e</b>
+          Equivalent to:{' '}
+          <b>{formater.format(equivalentTonsCO2)} tons of CO2e</b>
           <br />
           Project: <b>{projectName}</b>
           <br />

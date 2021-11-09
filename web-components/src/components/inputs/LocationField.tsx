@@ -2,7 +2,10 @@ import React, { useState } from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 import { FieldProps } from 'formik';
 import MapboxClient from '@mapbox/mapbox-sdk';
-import mbxGeocoder, { GeocodeQueryType, GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
+import mbxGeocoder, {
+  GeocodeQueryType,
+  GeocodeFeature,
+} from '@mapbox/mapbox-sdk/services/geocoding';
 import FieldFormControl from './FieldFormControl';
 import Input from './Input';
 
@@ -66,11 +69,14 @@ const LocationField: React.FC<Props> = ({
             onChange={({ target: { value } }) => {
               handleChange(value);
               if (value.length > 1) {
-                const isCoordinates = /^[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?),\s*[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)$/.test(
-                  value,
-                );
+                const isCoordinates =
+                  /^[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?),\s*[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)$/.test(
+                    value,
+                  );
                 if (isCoordinates) {
-                  const [longitude, latitude] = value.split(',').map(Number) as [number, number];
+                  const [longitude, latitude] = value
+                    .split(',')
+                    .map(Number) as [number, number];
                   const coordinates: [number, number] = [longitude, latitude];
                   geocoderService
                     .reverseGeocode({

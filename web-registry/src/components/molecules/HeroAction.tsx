@@ -9,7 +9,10 @@ import Description from 'web-components/lib/components/description';
 import { BlockContent } from 'web-components/lib/components/block-content';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 
-import { BottomBannerFieldsFragment, Maybe } from '../../generated/sanity-graphql';
+import {
+  BottomBannerFieldsFragment,
+  Maybe,
+} from '../../generated/sanity-graphql';
 import { onBtnClick } from '../../lib/button';
 import { BackgroundImgSection } from './BackgroundImgSection';
 
@@ -70,7 +73,9 @@ const useStyles = makeStyles<Theme, StyleProps>(theme => ({
     },
   },
   description: props => ({
-    color: props.lightBg ? theme.palette.text.primary : theme.palette.primary.main,
+    color: props.lightBg
+      ? theme.palette.text.primary
+      : theme.palette.primary.main,
     marginTop: theme.spacing(4),
     textAlign: 'center',
     [theme.breakpoints.up('sm')]: {
@@ -116,7 +121,9 @@ const HeroAction: React.FC<Props> = ({ classes, ...props }) => {
             {props.bottomBanner?.title}
           </Title>
           {!!props.bottomBanner?.descriptionRaw && (
-            <Description className={cx(styles.description, classes?.description)}>
+            <Description
+              className={cx(styles.description, classes?.description)}
+            >
               <BlockContent content={props.bottomBanner.descriptionRaw} />
             </Description>
           )}

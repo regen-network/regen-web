@@ -47,7 +47,12 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const FAQ = ({ navigate, header, categories, questionId }: Props): JSX.Element => {
+const FAQ = ({
+  navigate,
+  header,
+  categories,
+  questionId,
+}: Props): JSX.Element => {
   const classes = useStyles();
   if (!categories.length) {
     return <></>;
@@ -72,10 +77,18 @@ const FAQ = ({ navigate, header, categories, questionId }: Props): JSX.Element =
     <>
       <Box display={{ xs: 'none', sm: 'block' }}>
         <div className={classes.navigation}>
-          <Navigation category={category.header} categories={categoriesHeader} onClick={handleClick} />
+          <Navigation
+            category={category.header}
+            categories={categoriesHeader}
+            onClick={handleClick}
+          />
         </div>
         <div>
-          <Category questionId={questionId} name={category.header} questions={category.questions} />
+          <Category
+            questionId={questionId}
+            name={category.header}
+            questions={category.questions}
+          />
         </div>
       </Box>
 
@@ -86,7 +99,11 @@ const FAQ = ({ navigate, header, categories, questionId }: Props): JSX.Element =
               <BreadcrumbIcon className={classes.icon} direction="prev" />
               back
             </div>
-            <Category questionId={questionId} name={category.header} questions={category.questions} />
+            <Category
+              questionId={questionId}
+              name={category.header}
+              questions={category.questions}
+            />
           </div>
         ) : (
           <div className={classes.navigation}>

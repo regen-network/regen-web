@@ -1,5 +1,7 @@
 import * as React from 'react';
-import CreditDetails, { CreditInfoProps } from 'web-components/lib/components/credits/CreditDetails';
+import CreditDetails, {
+  CreditInfoProps,
+} from 'web-components/lib/components/credits/CreditDetails';
 
 // import Credits from 'web-components/lib/components/credits/';
 // import Gauge from 'web-components/lib/components/credits/Gauge';
@@ -42,7 +44,9 @@ export const creditDetails = (): JSX.Element => (
   />
 );
 
-export const creditsGauge = (): JSX.Element => <CreditsGauge purchased={1527} issued={2237} />;
+export const creditsGauge = (): JSX.Element => (
+  <CreditsGauge purchased={1527} issued={2237} />
+);
 
 // export const creditsWithGauge = (): JSX.Element => (
 //   <Credits

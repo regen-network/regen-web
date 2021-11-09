@@ -104,7 +104,9 @@ export default function ProjectImpactCard({
   return (
     <Card className={cx(classes.root, className)}>
       <div className={classes.background}>
-        <div className={classes.tag}>{monitored ? 'primary impact' : 'co-benefit'}</div>
+        <div className={classes.tag}>
+          {monitored ? 'primary impact' : 'co-benefit'}
+        </div>
         <Title variant="h4" className={classes.title}>
           {name}
         </Title>

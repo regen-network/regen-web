@@ -75,7 +75,10 @@ export default function ShareIcons({
             target="_blank"
             className={classes.iconContainer}
           >
-            <TwitterIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />
+            <TwitterIcon
+              color={theme.palette.primary.main}
+              hoverColor={theme.palette.secondary.main}
+            />
           </a>
         </Grid>
         <Grid item>
@@ -85,7 +88,10 @@ export default function ShareIcons({
             target="_blank"
             className={classes.iconContainer}
           >
-            <FacebookIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />
+            <FacebookIcon
+              color={theme.palette.primary.main}
+              hoverColor={theme.palette.secondary.main}
+            />
           </a>
         </Grid>
         <Grid item>
@@ -95,7 +101,10 @@ export default function ShareIcons({
             target="_blank"
             className={classes.iconContainer}
           >
-            <LinkedInIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />
+            <LinkedInIcon
+              color={theme.palette.primary.main}
+              hoverColor={theme.palette.secondary.main}
+            />
           </a>
         </Grid>
         <Grid item>
@@ -105,7 +114,10 @@ export default function ShareIcons({
             target="_blank"
             className={classes.iconContainer}
           >
-            <TelegramIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />
+            <TelegramIcon
+              color={theme.palette.primary.main}
+              hoverColor={theme.palette.secondary.main}
+            />
           </a>
         </Grid>
         <Grid item>

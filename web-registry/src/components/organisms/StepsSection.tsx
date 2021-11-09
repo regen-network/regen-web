@@ -8,7 +8,11 @@ import Description from 'web-components/lib/components/description';
 import Title from 'web-components/lib/components/title';
 import { BlockContent } from 'web-components/lib/components/block-content';
 
-import { StepCardFieldsFragment, Maybe, Scalars } from '../../generated/sanity-graphql';
+import {
+  StepCardFieldsFragment,
+  Maybe,
+  Scalars,
+} from '../../generated/sanity-graphql';
 import { WrappedStepCard } from '../atoms';
 
 type Props = {
@@ -79,7 +83,13 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-function StepsSection({ className, stepCards, title, preTitle, descriptionRaw }: Props): JSX.Element {
+function StepsSection({
+  className,
+  stepCards,
+  title,
+  preTitle,
+  descriptionRaw,
+}: Props): JSX.Element {
   const styles = useStyles();
   const [modalIframeLink, setModalIframeLink] = useState<string>('');
 
@@ -101,10 +111,19 @@ function StepsSection({ className, stepCards, title, preTitle, descriptionRaw }:
       </div>
       <div className={styles.steps}>
         {stepCards?.map((card, i) => (
-          <WrappedStepCard key={i} stepNumber={i} stepCard={card} openModal={setModalIframeLink} />
+          <WrappedStepCard
+            key={i}
+            stepNumber={i}
+            stepCard={card}
+            openModal={setModalIframeLink}
+          />
         ))}
       </div>
-      <Modal open={!!modalIframeLink} onClose={() => setModalIframeLink('')} className={styles.modal}>
+      <Modal
+        open={!!modalIframeLink}
+        onClose={() => setModalIframeLink('')}
+        className={styles.modal}
+      >
         <iframe title="modal-iframe-link" src={modalIframeLink} />
       </Modal>
     </OnBoardingSection>

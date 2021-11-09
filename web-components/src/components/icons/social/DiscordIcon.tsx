@@ -12,7 +12,12 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-function DiscordIcon({ className, color, onMouseEnter, onMouseLeave }: Props): JSX.Element {
+function DiscordIcon({
+  className,
+  color,
+  onMouseEnter,
+  onMouseLeave,
+}: Props): JSX.Element {
   const classes = useStyles();
 
   return (
@@ -36,7 +41,12 @@ function DiscordIcon({ className, color, onMouseEnter, onMouseLeave }: Props): J
       </g>
       <defs>
         <clipPath id="clip0">
-          <rect width="60" height="69.6" fill={color} transform="translate(0.200195 0.399994)" />
+          <rect
+            width="60"
+            height="69.6"
+            fill={color}
+            transform="translate(0.200195 0.399994)"
+          />
         </clipPath>
       </defs>
     </SvgIcon>

@@ -203,20 +203,43 @@ export default function ResponsiveSlider({
 
   return (
     <div className={cx(styles.root, className || (classes && classes.root))}>
-      <Grid container wrap="nowrap" alignItems="center" className={classes && classes.headerWrap}>
+      <Grid
+        container
+        wrap="nowrap"
+        alignItems="center"
+        className={classes && classes.headerWrap}
+      >
         {renderTitle ? (
           renderTitle()
         ) : title ? (
           <Grid xs={12} sm={8} item>
-            <Title variant={titleVariant} className={cx(styles.title, classes && classes.title)}>
+            <Title
+              variant={titleVariant}
+              className={cx(styles.title, classes && classes.title)}
+            >
               {title}
             </Title>
           </Grid>
         ) : null}
         {items.length > 1 && arrows && desktop && (
-          <Grid xs={12} sm={4} container item justify="flex-end" className={styles.buttons}>
-            <PrevNextButton direction="prev" onClick={slickPrev} disabled={prevDisabled} />
-            <PrevNextButton direction="next" onClick={slickNext} disabled={nextDisabled} />
+          <Grid
+            xs={12}
+            sm={4}
+            container
+            item
+            justify="flex-end"
+            className={styles.buttons}
+          >
+            <PrevNextButton
+              direction="prev"
+              onClick={slickPrev}
+              disabled={prevDisabled}
+            />
+            <PrevNextButton
+              direction="next"
+              onClick={slickNext}
+              disabled={nextDisabled}
+            />
           </Grid>
         )}
       </Grid>

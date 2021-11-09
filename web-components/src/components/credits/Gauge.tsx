@@ -30,7 +30,12 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   }),
 }));
 
-export default function Gauge({ amount, totalAmount, height, borderRadius }: GaugeProps): JSX.Element {
+export default function Gauge({
+  amount,
+  totalAmount,
+  height,
+  borderRadius,
+}: GaugeProps): JSX.Element {
   const classes = useStyles({
     percentage: totalAmount ? (100 * amount) / totalAmount : 0,
     height,

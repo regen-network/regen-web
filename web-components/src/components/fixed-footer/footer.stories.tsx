@@ -34,7 +34,9 @@ export const onboardingFooter = (): JSX.Element => (
 );
 
 const SwitchFooterDemo = (): JSX.Element => {
-  const [activeOption, setActiveOption] = React.useState<'Buyer' | 'Land Steward'>('Buyer');
+  const [activeOption, setActiveOption] = React.useState<
+    'Buyer' | 'Land Steward'
+  >('Buyer');
 
   const toggle = (): void => {
     if (activeOption === 'Buyer') {

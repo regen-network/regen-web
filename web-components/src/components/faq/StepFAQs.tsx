@@ -94,11 +94,20 @@ const StepFAQs: React.FC<StepFAQProps> = ({ questionItems, isActive }) => {
         <Title variant="h6" className={classes.title}>
           top faqs
         </Title>
-        <Button className={classes.addButton} onClick={() => setIsExpanded(!isExpanded)}>
+        <Button
+          className={classes.addButton}
+          onClick={() => setIsExpanded(!isExpanded)}
+        >
           {isExpanded ? (
-            <MinusIcon className={classes.expandCollapse} color={theme.palette.secondary.main} />
+            <MinusIcon
+              className={classes.expandCollapse}
+              color={theme.palette.secondary.main}
+            />
           ) : (
-            <PlusIcon className={classes.expandCollapse} color={theme.palette.secondary.main} />
+            <PlusIcon
+              className={classes.expandCollapse}
+              color={theme.palette.secondary.main}
+            />
           )}
         </Button>
       </div>
@@ -109,7 +118,10 @@ const StepFAQs: React.FC<StepFAQProps> = ({ questionItems, isActive }) => {
             classNames={{
               root: classes.questionRoot,
               container: classes.questionContainer,
-              gradient: clsx(classes.gradient, !isActive && classes.inactiveGradient),
+              gradient: clsx(
+                classes.gradient,
+                !isActive && classes.inactiveGradient,
+              ),
               question: classes.questionTitle,
               answer: classes.answer,
               collapsed: classes.collapsedAnswer,

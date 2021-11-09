@@ -119,7 +119,11 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const FooterItem: React.FC<FooterItemProps> = ({ title, items, linkComponent: LinkComponent = Link }) => {
+const FooterItem: React.FC<FooterItemProps> = ({
+  title,
+  items,
+  linkComponent: LinkComponent = Link,
+}) => {
   const styles = useStyles({});
 
   return (
@@ -130,7 +134,11 @@ const FooterItem: React.FC<FooterItemProps> = ({ title, items, linkComponent: Li
       <List className={styles.list}>
         {items.map((item, index) => (
           <ListItem className={styles.subTitle} key={index}>
-            <LinkComponent href={item.href} rel="noopener noreferrer" target={item.target}>
+            <LinkComponent
+              href={item.href}
+              rel="noopener noreferrer"
+              target={item.target}
+            >
               {ReactHtmlParser(item.title)}
             </LinkComponent>
           </ListItem>
@@ -161,7 +169,13 @@ const Footer: React.FC<{
       <Section classes={{ root: styles.section }}>
         <Grid container spacing={10}>
           <Grid item xs={12} lg={3}>
-            <Box pb={[0, 8]} display="flex" flexDirection="column" alignItems="center" textAlign="center">
+            <Box
+              pb={[0, 8]}
+              display="flex"
+              flexDirection="column"
+              alignItems="center"
+              textAlign="center"
+            >
               <IconLink color={theme.palette.primary.main} />
               <Box mt={4}>
                 <Typography className={styles.subTitle}>
@@ -204,7 +218,8 @@ const Footer: React.FC<{
         <hr className={styles.separator} />
         <Grid className={styles.bottomGrid} container justify="space-between">
           <Grid item className={styles.bottom}>
-            <Link href={termsUrl}>Terms</Link> | <Link href={privacyUrl}>Privacy</Link>
+            <Link href={termsUrl}>Terms</Link> |{' '}
+            <Link href={privacyUrl}>Privacy</Link>
           </Grid>
           <Grid item className={styles.bottom}>
             © 2021 Regen Network Development, Inc

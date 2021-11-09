@@ -36,8 +36,14 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-function getUnits(vintagesData: any, walletId: string, vintageId: string): number {
-  const vintage = vintagesData.allCreditVintages.nodes.find((node: any) => node.id === vintageId);
+function getUnits(
+  vintagesData: any,
+  walletId: string,
+  vintageId: string,
+): number {
+  const vintage = vintagesData.allCreditVintages.nodes.find(
+    (node: any) => node.id === vintageId,
+  );
   if (!vintage) {
     return 0;
   }
@@ -64,15 +70,27 @@ const CreditsRetire: React.FC<{
   const [retireCredits, { data, loading, error }] = useRetireCreditsMutation({
     errorPolicy: 'ignore',
   });
-  const { data: vintagesData, loading: vintagesLoading, error: vintagesError } = useAllCreditVintagesQuery({
+  const {
+    data: vintagesData,
+    loading: vintagesLoading,
+    error: vintagesError,
+  } = useAllCreditVintagesQuery({
     errorPolicy: 'ignore',
   });
 
-  const { data: partiesData, loading: partiesLoading, error: partiesError } = useAllPartiesQuery({
+  const {
+    data: partiesData,
+    loading: partiesLoading,
+    error: partiesError,
+  } = useAllPartiesQuery({
     errorPolicy: 'ignore',
   });
 
-  const dateFormat = new Intl.DateTimeFormat('en', { year: 'numeric', month: 'numeric', day: '2-digit' });
+  const dateFormat = new Intl.DateTimeFormat('en', {
+    year: 'numeric',
+    month: 'numeric',
+    day: '2-digit',
+  });
 
   const [vintageId, setVintageId] = useState(passedVintageId);
   const [buyerWalletId, setBuyerWalletId] = useState(passedBuyerWalletId);
@@ -90,7 +108,9 @@ const CreditsRetire: React.FC<{
     }
   }, [vintageId, buyerWalletId, vintagesData]);
 
-  const handleVintageChange = (event: React.ChangeEvent<{ value: unknown }>): void => {
+  const handleVintageChange = (
+    event: React.ChangeEvent<{ value: unknown }>,
+  ): void => {
     if (showResult) {
       setShowResult(false);
     }
@@ -102,7 +122,9 @@ const CreditsRetire: React.FC<{
       const selectedVintage: any = vintagesData.allCreditVintages.nodes.find(
         vintage => vintage?.id === event.target.value,
       );
-      if (selectedVintage?.creditClassVersionByCreditClassVersionIdAndCreditClassVersionCreatedAt) {
+      if (
+        selectedVintage?.creditClassVersionByCreditClassVersionIdAndCreditClassVersionCreatedAt
+      ) {
         const selectedCredit =
           selectedVintage.creditClassVersionByCreditClassVersionIdAndCreditClassVersionCreatedAt;
         setCreditName(selectedCredit.name);
@@ -110,7 +132,9 @@ const CreditsRetire: React.FC<{
     }
   };
 
-  const handleBuyerWalletChange = (event: React.ChangeEvent<{ value: unknown }>): void => {
+  const handleBuyerWalletChange = (
+    event: React.ChangeEvent<{ value: unknown }>,
+  ): void => {
     if (showResult) {
       setShowResult(false);
     }
@@ -131,8 +155,16 @@ const CreditsRetire: React.FC<{
   if (partiesError) return <div>Error! ${partiesError.message}</div>;
 
   let vintage: any;
-  if (partiesData && partiesData.allParties && vintagesData && vintagesData.allCreditVintages && vintageId) {
-    vintage = vintagesData.allCreditVintages.nodes.find((node: any) => node.id === vintageId);
+  if (
+    partiesData &&
+    partiesData.allParties &&
+    vintagesData &&
+    vintagesData.allCreditVintages &&
+    vintageId
+  ) {
+    vintage = vintagesData.allCreditVintages.nodes.find(
+      (node: any) => node.id === vintageId,
+    );
   }
 
   return (
@@ -145,7 +177,9 @@ const CreditsRetire: React.FC<{
           if (!units) {
             return;
           }
-          const confirmAlert = window.confirm('Are you sure you want to retire credits?');
+          const confirmAlert = window.confirm(
+            'Are you sure you want to retire credits?',
+          );
           if (confirmAlert) {
             try {
               await retireCredits({
@@ -156,7 +190,10 @@ const CreditsRetire: React.FC<{
                     units,
                     addressId,
                     metadata: retireUrl
-                      ? { '@type': 'http://regen.network/Retirement', 'http://www.schema.org/url': retireUrl }
+                      ? {
+                          '@type': 'http://regen.network/Retirement',
+                          'http://www.schema.org/url': retireUrl,
+                        }
                       : null,
                   },
                 },
@@ -186,7 +223,12 @@ const CreditsRetire: React.FC<{
                 vintagesData.allCreditVintages &&
                 vintagesData.allCreditVintages.nodes.map((node: any) => (
                   <MenuItem key={node.id} value={node.id}>
-                    {node.projectByProjectId.metadata?.['http://schema.org/name']} - {dateFormat.format(new Date(node.createdAt))}
+                    {
+                      node.projectByProjectId.metadata?.[
+                        'http://schema.org/name'
+                      ]
+                    }{' '}
+                    - {dateFormat.format(new Date(node.createdAt))}
                   </MenuItem>
                 ))}
             </Select>
@@ -212,7 +254,8 @@ const CreditsRetire: React.FC<{
                       (vintage &&
                         vintage.projectByProjectId.developerId !== node.id &&
                         vintage.projectByProjectId.stewardId !== node.id &&
-                        vintage.projectByProjectId.landOwnerId !== node.id)) && (
+                        vintage.projectByProjectId.landOwnerId !==
+                          node.id)) && (
                       <MenuItem key={node.id} value={node.walletId}>
                         {node.name} ({node.type.toLowerCase()}){' '}
                       </MenuItem>
@@ -228,7 +271,12 @@ const CreditsRetire: React.FC<{
               id="retirement-link-input"
             />
           </FormControl>
-          <Button disabled={!units} className={styles.button} variant="contained" type="submit">
+          <Button
+            disabled={!units}
+            className={styles.button}
+            variant="contained"
+            type="submit"
+          >
             Retire
           </Button>
         </Box>

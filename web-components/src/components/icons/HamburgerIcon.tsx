@@ -15,7 +15,12 @@ const useStyles = makeStyles<Theme, props>((theme: Theme) => ({
   }),
 }));
 
-export default function HamburgerIcon({ width, height, className, ...props }: props): JSX.Element {
+export default function HamburgerIcon({
+  width,
+  height,
+  className,
+  ...props
+}: props): JSX.Element {
   const classes = useStyles({ width, height });
 
   return (

@@ -45,7 +45,11 @@ export default function Description({
 }: DescriptionProps): JSX.Element {
   const classes = useStyles({ fontSize });
   return (
-    <Typography {...props} component="div" className={clsx(classes.root, className)}>
+    <Typography
+      {...props}
+      component="div"
+      className={clsx(classes.root, className)}
+    >
       {children}
     </Typography>
   );

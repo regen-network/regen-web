@@ -103,7 +103,12 @@ const IconLabel = ({
   const styles = useStyles({ small });
   return (
     <div className={cx(styles.root, className)}>
-      <a href={href} rel="noopener noreferrer" target="_blank" className={styles.link}>
+      <a
+        href={href}
+        rel="noopener noreferrer"
+        target="_blank"
+        className={styles.link}
+      >
         <Avatar className={styles.iconContainer}>{icon}</Avatar>
       </a>
       <div className={styles.textContainer}>

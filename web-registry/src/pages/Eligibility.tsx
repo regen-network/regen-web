@@ -1,7 +1,10 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 
-import { IncludesGrasslandsForm, IncludesGrasslandsValues } from '../components/organisms';
+import {
+  IncludesGrasslandsForm,
+  IncludesGrasslandsValues,
+} from '../components/organisms';
 import { OnboardingFormTemplate } from '../components/templates';
 
 const Eligibility: React.FC = () => {
@@ -15,7 +18,9 @@ const Eligibility: React.FC = () => {
     history.push('/project-plans/eligibility/additionality');
   }
 
-  async function submitIncludesGrasslands(values: IncludesGrasslandsValues): Promise<void> {
+  async function submitIncludesGrasslands(
+    values: IncludesGrasslandsValues,
+  ): Promise<void> {
     // TODO: functionality:
     // if includesGrasslands === true, next screen is 'Eligibility: Land Use History'
     // if includesGrasslands === false, next screen is 'Sorry, you are not eligible for this credit class.'
@@ -25,7 +30,11 @@ const Eligibility: React.FC = () => {
   }
 
   return (
-    <OnboardingFormTemplate activeStep={0} title="Eligibility" saveAndExit={saveAndExit}>
+    <OnboardingFormTemplate
+      activeStep={0}
+      title="Eligibility"
+      saveAndExit={saveAndExit}
+    >
       <IncludesGrasslandsForm submit={submitIncludesGrasslands} />
     </OnboardingFormTemplate>
   );

@@ -132,7 +132,11 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   }),
 }));
 
-function TriggerTextField({ triggerOnChange, transformValue, ...props }: TriggerTextFieldProps): JSX.Element {
+function TriggerTextField({
+  triggerOnChange,
+  transformValue,
+  ...props
+}: TriggerTextFieldProps): JSX.Element {
   const {
     form: { setFieldValue },
     field: { name },
@@ -169,7 +173,9 @@ export default function RegenTextField({
         startAdornment: startAdornment ? (
           <InputAdornment position="start">{startAdornment}</InputAdornment>
         ) : null,
-        endAdornment: endAdornment ? <InputAdornment position="end">{endAdornment}</InputAdornment> : null,
+        endAdornment: endAdornment ? (
+          <InputAdornment position="end">{endAdornment}</InputAdornment>
+        ) : null,
       }}
       InputLabelProps={{ focused: false, required: false }}
       fullWidth

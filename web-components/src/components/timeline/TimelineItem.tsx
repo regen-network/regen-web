@@ -55,10 +55,14 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       [theme.breakpoints.up('sm')]: {
         right: props.odd ? 'auto' : theme.spacing(-2),
         left: props.odd ? theme.spacing(-2) : 'auto',
-        borderRight: props.odd ? 'none' : `1px solid ${theme.palette.grey[100]}`,
+        borderRight: props.odd
+          ? 'none'
+          : `1px solid ${theme.palette.grey[100]}`,
         borderTop: props.odd ? 'none' : `1px solid ${theme.palette.grey[100]}`,
         borderLeft: props.odd ? `1px solid ${theme.palette.grey[100]}` : 'none',
-        borderBottom: props.odd ? `1px solid ${theme.palette.grey[100]}` : 'none',
+        borderBottom: props.odd
+          ? `1px solid ${theme.palette.grey[100]}`
+          : 'none',
         top: props.last ? 'auto' : theme.spacing(2),
         bottom: props.last ? theme.spacing(2) : 'auto',
       },
@@ -101,8 +105,12 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   bar: props => ({
     backgroundColor: props.barColor,
     [theme.breakpoints.up('sm')]: {
-      right: props.odd ? 'auto' : `calc(${theme.spacing(-7.75 - 1.5 / 2)} - 1px)`,
-      left: props.odd ? `calc(${theme.spacing(-7.75 - 1.5 / 2)} - 1px)` : 'auto',
+      right: props.odd
+        ? 'auto'
+        : `calc(${theme.spacing(-7.75 - 1.5 / 2)} - 1px)`,
+      left: props.odd
+        ? `calc(${theme.spacing(-7.75 - 1.5 / 2)} - 1px)`
+        : 'auto',
       top: props.last ? 'auto' : theme.spacing(5.75 + 1.75),
       bottom: props.last ? theme.spacing(5.75 + 1.75) : 'auto',
       width: theme.spacing(1.5),
@@ -125,8 +133,12 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     position: 'absolute',
     boxSizing: 'border-box',
     [theme.breakpoints.up('sm')]: {
-      right: props.odd ? 'auto' : `calc(${theme.spacing(-7.75 - 5.75 / 2)} - 1px)`,
-      left: props.odd ? `calc(${theme.spacing(-7.75 - 5.75 / 2)} - 1px)` : 'auto',
+      right: props.odd
+        ? 'auto'
+        : `calc(${theme.spacing(-7.75 - 5.75 / 2)} - 1px)`,
+      left: props.odd
+        ? `calc(${theme.spacing(-7.75 - 5.75 / 2)} - 1px)`
+        : 'auto',
       top: props.last ? 'auto' : theme.spacing(2),
       bottom: props.last ? theme.spacing(2) : 'auto',
       width: theme.spacing(5.75),
@@ -181,7 +193,11 @@ export default function TimelineItem({
       <Title className={classes.summary} variant="h5">
         {summary}
       </Title>
-      {description && <div className={classes.description}>{ReactHtmlParser(description)}</div>}
+      {description && (
+        <div className={classes.description}>
+          {ReactHtmlParser(description)}
+        </div>
+      )}
       {creditVintage && txClient && (
         <ContainedButton
           className={classes.ledgerBtn}

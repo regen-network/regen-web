@@ -30,7 +30,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-function Documentation({ txClient, onViewOnLedger, documents }: DocumentationProps): JSX.Element {
+function Documentation({
+  txClient,
+  onViewOnLedger,
+  documents,
+}: DocumentationProps): JSX.Element {
   const styles = useStyles();
 
   return (

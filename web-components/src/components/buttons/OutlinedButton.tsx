@@ -11,7 +11,9 @@ interface OutlinedButtonProps extends ButtonProps {
 // MUI won't allow passing `component="span"` when extending `ButtonProps`,
 // which we need for html image uplaoding, so this is a workaround (recommended
 // by the MUI team) (see: https://github.com/mui-org/material-ui/issues/9716)
-const SpanButton: React.FC = props => <Button variant="contained" component="span" {...props} />;
+const SpanButton: React.FC = props => (
+  <Button variant="contained" component="span" {...props} />
+);
 
 const styleCallback = (theme: Theme): any => ({
   root: {
@@ -35,7 +37,10 @@ const styleCallback = (theme: Theme): any => ({
 const CustomButton = withStyles(styleCallback)(Button);
 const CustomLabel = withStyles(styleCallback)(SpanButton);
 
-export default function OutlinedButton({ isImageBtn, ...props }: OutlinedButtonProps): JSX.Element {
+export default function OutlinedButton({
+  isImageBtn,
+  ...props
+}: OutlinedButtonProps): JSX.Element {
   const Component = isImageBtn ? CustomLabel : CustomButton;
   return (
     <Component color="secondary" {...props}>

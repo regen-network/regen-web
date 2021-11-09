@@ -15,6 +15,8 @@ export const mainTitle = (): JSX.Element => (
 
 export const info = (): JSX.Element => (
   <InfoTooltip title={'tooltip content'} arrow placement="bottom">
-    <div style={{ position: 'absolute', top: '14rem' }}>Smaller tooltip. hover or touch me</div>
+    <div style={{ position: 'absolute', top: '14rem' }}>
+      Smaller tooltip. hover or touch me
+    </div>
   </InfoTooltip>
 );

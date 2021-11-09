@@ -45,7 +45,10 @@ const ImageGridSection: React.FC<Props> = ({ content }) => {
           <ImageGrid
             img={
               <Card className={styles.card}>
-                <CardMedia className={styles.cardMedia} image={item?.image?.image?.asset?.url || ''} />
+                <CardMedia
+                  className={styles.cardMedia}
+                  image={item?.image?.image?.asset?.url || ''}
+                />
               </Card>
             }
             title={item?.header || ''}

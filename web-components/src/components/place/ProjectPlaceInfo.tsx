@@ -37,7 +37,12 @@ export default function ProjectPlaceInfo({
   const classes = useStyles({});
   const displayedArea: string = new Intl.NumberFormat('en-US').format(area);
   return (
-    <PlaceInfo fontSize={fontSize} smFontSize={smFontSize} color={color} iconClassName={iconClassName}>
+    <PlaceInfo
+      fontSize={fontSize}
+      smFontSize={smFontSize}
+      color={color}
+      iconClassName={iconClassName}
+    >
       {place}
       <span className={classes.separator}>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
       {displayedArea} {areaUnit}

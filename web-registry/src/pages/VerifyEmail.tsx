@@ -62,7 +62,8 @@ function VerifyEmail(): JSX.Element {
     <OnBoardingSection formContainer title="Please confirm your email address">
       <OnBoardingCard>
         <Description className={classes.description}>
-          We've just sent a confirmation email to: <a href={`mailto:${email}`}>{email}</a>.
+          We've just sent a confirmation email to:{' '}
+          <a href={`mailto:${email}`}>{email}</a>.
         </Description>
         <br />
         <Description className={classes.description}>

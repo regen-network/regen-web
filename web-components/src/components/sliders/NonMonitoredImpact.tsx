@@ -31,7 +31,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function NonMonitoredImpact({ impact }: NonMonitoredImpactProps): JSX.Element {
+export default function NonMonitoredImpact({
+  impact,
+}: NonMonitoredImpactProps): JSX.Element {
   const classes = useStyles({});
   const settings = {
     speed: 500,

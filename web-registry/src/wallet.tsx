@@ -1,5 +1,8 @@
 import React, { useState, createContext } from 'react';
-import { assertIsBroadcastTxSuccess, SigningStargateClient } from '@cosmjs/stargate';
+import {
+  assertIsBroadcastTxSuccess,
+  SigningStargateClient,
+} from '@cosmjs/stargate';
 import { Window as KeplrWindow } from '@keplr-wallet/types';
 
 interface ChainKey {
@@ -161,17 +164,24 @@ export const WalletProvider: React.FC = ({ children }) => {
     }
   };
 
-  const sendTokens = async (amount: number, recipient: string): Promise<string> => {
+  const sendTokens = async (
+    amount: number,
+    recipient: string,
+  ): Promise<string> => {
     if (chainId && chainRpc) {
       amount *= 1000000;
       amount = Math.floor(amount);
 
       await window?.keplr?.enable(chainId);
-      const offlineSigner = !!window.getOfflineSigner && (await window.getOfflineSigner(chainId));
+      const offlineSigner =
+        !!window.getOfflineSigner && (await window.getOfflineSigner(chainId));
 
       if (offlineSigner) {
         const accounts = await offlineSigner.getAccounts();
-        const client = await SigningStargateClient.connectWithSigner(chainRpc, offlineSigner);
+        const client = await SigningStargateClient.connectWithSigner(
+          chainRpc,
+          offlineSigner,
+        );
         const fee = {
           amount: [
             {
@@ -188,7 +198,13 @@ export const WalletProvider: React.FC = ({ children }) => {
             amount: amount.toString(),
           },
         ];
-        const result = await client.sendTokens(accounts[0].address, recipient, coinAmount, fee, 'test');
+        const result = await client.sendTokens(
+          accounts[0].address,
+          recipient,
+          coinAmount,
+          fee,
+          'test',
+        );
         console.log('result', result);
         assertIsBroadcastTxSuccess(result);
 
@@ -200,7 +216,9 @@ export const WalletProvider: React.FC = ({ children }) => {
   };
 
   return (
-    <WalletContext.Provider value={{ wallet, suggestChain, sendTokens }}>{children}</WalletContext.Provider>
+    <WalletContext.Provider value={{ wallet, suggestChain, sendTokens }}>
+      {children}
+    </WalletContext.Provider>
   );
 };
 

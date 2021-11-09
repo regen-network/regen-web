@@ -44,11 +44,19 @@ const BuyerCreditsTransfer: React.FC = () => {
         );
       case 2:
         return (
-          <CreditsTransfer addressId={addressId} buyerWalletId={buyerWalletId} onTransfer={setVintageId} />
+          <CreditsTransfer
+            addressId={addressId}
+            buyerWalletId={buyerWalletId}
+            onTransfer={setVintageId}
+          />
         );
       case 3:
         return (
-          <CreditsRetire buyerWalletId={buyerWalletId} creditVintageId={vintageId} addressId={addressId} />
+          <CreditsRetire
+            buyerWalletId={buyerWalletId}
+            creditVintageId={vintageId}
+            addressId={addressId}
+          />
         );
       default:
         return <></>;
@@ -68,7 +76,12 @@ const BuyerCreditsTransfer: React.FC = () => {
           </Step>
         ))}
       </Stepper>
-      <Box display="flex" justifyContent="center" alignItems="center" minWidth="33%">
+      <Box
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        minWidth="33%"
+      >
         {renderStep(step)}
       </Box>
     </Box>

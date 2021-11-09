@@ -3,7 +3,14 @@ import clsx from 'clsx';
 import { useHistory } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 
-import { FormControl, RadioGroup, FormControlLabel, Radio, Collapse, Zoom } from '@material-ui/core';
+import {
+  FormControl,
+  RadioGroup,
+  FormControlLabel,
+  Radio,
+  Collapse,
+  Zoom,
+} from '@material-ui/core';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 
 import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
@@ -62,7 +69,9 @@ const OrganizationProfile: React.FC = () => {
   const [acctType, setAcctType] = useState<AcctType>('user');
   const [error, setError] = useState<Error | null>(null);
   const [isSubmitting, setSubmitting] = useState<boolean>(false);
-  const [initialFieldValues, setInitialFieldValues] = useState<OrgProfileFormValues | undefined>();
+  const [initialFieldValues, setInitialFieldValues] = useState<
+    OrgProfileFormValues | undefined
+  >();
   const userEmail = user?.email;
 
   const { data: orgProfile } = useGetOrganizationProfileByEmailQuery({
@@ -72,7 +81,8 @@ const OrganizationProfile: React.FC = () => {
   });
   const userByEmail = orgProfile?.userByEmail;
   const userOrg =
-    orgProfile?.userByEmail?.organizationMembersByMemberId.nodes[0]?.organizationByOrganizationId;
+    orgProfile?.userByEmail?.organizationMembersByMemberId.nodes[0]
+      ?.organizationByOrganizationId;
 
   useEffect(() => {
     if (!userByEmail || !userOrg) return;
@@ -103,7 +113,9 @@ const OrganizationProfile: React.FC = () => {
   });
 
   function handleSkip(): void {
-    console.log('TODO: save that a user bypassed this step / is personal? Or just go to next'); // eslint-disable-line no-console
+    console.log(
+      'TODO: save that a user bypassed this step / is personal? Or just go to next',
+    ); // eslint-disable-line no-console
   }
 
   async function submitOrgProfile(values: OrgProfileFormValues): Promise<void> {
@@ -119,7 +131,8 @@ const OrganizationProfile: React.FC = () => {
               legalName: values.legalName,
               displayName: values.displayName,
               orgAddress: values.location,
-              walletAddr: userByEmail?.partyByPartyId?.walletByWalletId?.addr || '',
+              walletAddr:
+                userByEmail?.partyByPartyId?.walletByWalletId?.addr || '',
               image: values.logo,
               ownerId: orgProfile?.userByEmail?.id,
             },

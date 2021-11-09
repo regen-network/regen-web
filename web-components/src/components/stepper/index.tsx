@@ -77,7 +77,12 @@ const RegenStepConnector = withStyles((theme: Theme) => ({
   },
 }))(StepConnector);
 
-const RegenStepper = ({ className, activeStep, steps, background }: StepperProps): JSX.Element => {
+const RegenStepper = ({
+  className,
+  activeStep,
+  steps,
+  background,
+}: StepperProps): JSX.Element => {
   const classes = useStyles({ background });
 
   return (

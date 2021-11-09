@@ -1,7 +1,9 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 
-import Timeline, { Item } from 'web-components/lib/components/timeline/NewTimeline';
+import Timeline, {
+  Item,
+} from 'web-components/lib/components/timeline/NewTimeline';
 import Section from 'web-components/lib/components/section';
 
 import {
@@ -49,13 +51,23 @@ const TimelineSection: React.FC<Props> = ({ content }) => {
       imgSrc: t?.image?.asset?.url || '',
       title: t?.title || '',
       url: t?.url || '',
-      tags: t?.tags?.map((tag: Maybe<Tag>) => ({ name: tag?.name || '', color: tag?.color || '' })) || [],
+      tags:
+        t?.tags?.map((tag: Maybe<Tag>) => ({
+          name: tag?.name || '',
+          color: tag?.color || '',
+        })) || [],
     })) || [];
 
   return (
     <div className={styles.root}>
-      <Section title={content.header || ''} classes={{ title: styles.title }} titleVariant="subtitle2">
-        <div className={styles.timeline}>{items.length > 0 && <Timeline items={items} />}</div>
+      <Section
+        title={content.header || ''}
+        classes={{ title: styles.title }}
+        titleVariant="subtitle2"
+      >
+        <div className={styles.timeline}>
+          {items.length > 0 && <Timeline items={items} />}
+        </div>
       </Section>
     </div>
   );

@@ -10,7 +10,9 @@ import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import Description from 'web-components/lib/components/description';
 import Banner from 'web-components/lib/components/banner';
 import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
-import UserProfileForm, { UserProfileValues } from 'web-components/lib/components/form/UserProfileForm';
+import UserProfileForm, {
+  UserProfileValues,
+} from 'web-components/lib/components/form/UserProfileForm';
 import getApiUri from '../lib/apiUri';
 import {
   useGetUserProfileByEmailQuery,
@@ -72,11 +74,14 @@ function UserProfile(): JSX.Element {
   const [error, setError] = useState<Error | null>(null);
   const [status, setStatus] = useState<string | null>(null);
   const [isSubmitting, setSubmitting] = useState<boolean>(false);
-  const [initialFieldValues, setInitialFieldValues] = useState<UserProfileValues | undefined>();
+  const [initialFieldValues, setInitialFieldValues] = useState<
+    UserProfileValues | undefined
+  >();
 
   useEffect(() => {
     if (!userProfileData?.userByEmail) return;
-    const { roleTitle, phoneNumber, partyByPartyId } = userProfileData.userByEmail;
+    const { roleTitle, phoneNumber, partyByPartyId } =
+      userProfileData.userByEmail;
     setInitialFieldValues({
       name: partyByPartyId?.name || '',
       roleTitle: roleTitle || '',
@@ -153,7 +158,12 @@ function UserProfile(): JSX.Element {
           {!isSubmitting && status && <Banner text={status} />}
         </>
       )}
-      {showForm && <UserProfileForm submit={submitUserProfile} initialValues={initialFieldValues} />}
+      {showForm && (
+        <UserProfileForm
+          submit={submitUserProfile}
+          initialValues={initialFieldValues}
+        />
+      )}
     </OnBoardingSection>
   );
 }

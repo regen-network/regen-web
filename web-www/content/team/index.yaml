@@ -64,6 +64,16 @@ coreSection:
       linkedUrl: https://www.linkedin.com/in/sarahashleybaxendell/
       twitterUrl: null
       githubUrl: null
+    - description: Mark’s expertise is in corporate finance, treasury, and
+        operations.  He also brings a wealth of experience within the startup
+        and SMB space having managed an M&A practice, worked at a PE firm,  and
+        co-founded a HR tech startup in the AI/micro skill assessment
+        space.  Mark has an innate curiosity about identifying inefficiencies
+        and implementing processes to achieve better results.
+      title: CFO
+      name: Mark DeRugeriis
+      image: ../../static/media/mark.png
+      linkedUrl: https://www.linkedin.com/in/markderugeriis/
     - name: Cory Levinson
       title: Senior Technical Project Manager
       description: Cory is a software engineer and technical product manager who
@@ -334,6 +344,25 @@ coreSection:
       twitterUrl: https://twitter.com/KKapatral
       githubUrl: https://github.com/kaustubhkapatral
       linkedUrl: https://www.linkedin.com/in/kaustubh-kapatral-704a60176/
+    - image: ../../static/media/tica_lubin.png
+      name: Tica Lubin
+      title: Science Program Coordinator
+      description: "Tica is a program manager and science communicator with over 20
+        years of experience managing design projects and developing content for
+        museums, start-ups and non-profit organizations.  She is passionate
+        about climate change work, pursuing  a Master’s in Sustainable Design
+        focusing on incorporating seaweed as an alternative economic source for
+        fishing communities.  "
+      linkedUrl: https://www.linkedin.com/in/ticalubin
+    - image: ../../static/media/ayaz.png
+      name: Ayaz Khan
+      title: CPA, CMA
+      description: Ayaz is the Co-Founder of Bottom Line Accounting Solutions, an
+        accounting services company in Toronto, Canada. He has extensive
+        accounting and finance experience in the tech startup space working with
+        SaaS, E-commerce and FinTech companies as a Fractional Controller and
+        Financial Operations Lead. He comes from a family of farmers and owns a
+        lemon orchard in Asia.
 contributorSection:
   title: Contributors
   contributors:

@@ -334,6 +334,16 @@ coreSection:
       twitterUrl: https://twitter.com/KKapatral
       githubUrl: https://github.com/kaustubhkapatral
       linkedUrl: https://www.linkedin.com/in/kaustubh-kapatral-704a60176/
+    - image: ../../static/media/tica_lubin.png
+      name: Tica Lubin
+      title: Science Program Coordinator
+      description: "Tica is a program manager and science communicator with over 20
+        years of experience managing design projects and developing content for
+        museums, start-ups and non-profit organizations.  She is passionate
+        about climate change work, pursuing  a Master’s in Sustainable Design
+        focusing on incorporating seaweed as an alternative economic source for
+        fishing communities.  "
+      linkedUrl: https://www.linkedin.com/in/ticalubin
 contributorSection:
   title: Contributors
   contributors:

@@ -1,7 +1,7 @@
 import React from 'react';
-import { Theme, makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
+import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
 import { graphql, StaticQuery } from 'gatsby';
 import Img, { FluidObject } from 'gatsby-image';
 import ReactHtmlParser from 'react-html-parser';

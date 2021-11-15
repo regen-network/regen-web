@@ -1,12 +1,13 @@
 import React from 'react';
-import { makeStyles, TypographyVariant } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@mui/styles';
+import { TypographyVariant } from '@mui/material/styles';
+import Typography from '@mui/material/Typography';
 import clsx from 'clsx';
 import BackgroundImage from 'gatsby-background-image';
-import Box from '@material-ui/core/Box';
+import Box from '@mui/material/Box';
 
 import Title from 'web-components/lib/components/title';
-import { Theme } from 'web-components/lib/theme/muiTheme';
+import { DefaultTheme as Theme } from 'web-components/lib/theme/muiTheme';
 
 interface Props {
   className?: string;

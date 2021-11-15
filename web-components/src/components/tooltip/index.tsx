@@ -1,5 +1,5 @@
-import { withStyles, Theme } from '@material-ui/core';
-import Tooltip from '@material-ui/core/Tooltip';
+import { withStyles, DefaultTheme as Theme } from '@mui/styles';
+import Tooltip from '@mui/material/Tooltip';
 
 function arrowGenerator(): any {
   return {
@@ -50,7 +50,7 @@ function arrowGenerator(): any {
 
 const CustomTooltip = withStyles((theme: Theme) => ({
   popper: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       width: '90%',
     },
   },
@@ -60,7 +60,7 @@ const CustomTooltip = withStyles((theme: Theme) => ({
     background: theme.palette.grey[50],
     border: `1px solid ${theme.palette.grey[600]}`,
     borderRadius: '5px',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(5.25),
       padding: `${theme.spacing(6)} ${theme.spacing(3.75)}`,
       marginLeft: theme.spacing(2),

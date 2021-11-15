@@ -1,6 +1,7 @@
 import React from 'react';
 import cx from 'clsx';
-import { makeStyles, MenuItem, useTheme } from '@material-ui/core';
+import { makeStyles, useTheme } from '@mui/styles';
+import { MenuItem } from '@mui/material';
 
 import MenuHover from '../menu-hover';
 import { NavLinkProps } from './NavLink';

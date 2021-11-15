@@ -1,8 +1,8 @@
 import React from 'react';
-import { useTheme } from '@material-ui/core/styles';
+import { useTheme } from '@mui/styles';
 import { useHistory } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
-import Box from '@material-ui/core/Box';
+import Box from '@mui/material/Box';
 
 import Header, { HeaderColors } from 'web-components/lib/components/header';
 import { HeaderMenuItem } from 'web-components/lib/components/header/HeaderMenuHover';

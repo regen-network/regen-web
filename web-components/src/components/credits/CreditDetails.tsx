@@ -1,7 +1,7 @@
 import React from 'react';
-import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
+import { makeStyles, DefaultTheme as Theme, useTheme } from '@mui/styles';
 import ReactHtmlParser from 'react-html-parser';
-import Typography from '@material-ui/core/Typography';
+import Typography from '@mui/material/Typography';
 
 import Title from '../title';
 import CreditsIcon from '../icons/CreditsIcon';
@@ -40,7 +40,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
         18,
       )}`,
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       padding: `${theme.spacing(14)} ${theme.spacing(5)} ${theme.spacing(
         11.5,
       )}`,
@@ -75,7 +75,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.spacing(4.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(3.5),
     },
     display: 'flex',
@@ -90,13 +90,13 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingTop: theme.spacing(1.75),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(1.25),
     },
   },
   icon: {
     marginRight: theme.spacing(2.5),
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       display: 'block',
       marginBottom: theme.spacing(2),
     },
@@ -111,7 +111,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       display: 'grid',
       gridTemplateColumns: '66% 33%',
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       display: 'block',
     },
   },
@@ -139,7 +139,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     },
   },
   activitiesTitleContainer: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginTop: theme.spacing(7),
     },
   },
@@ -147,7 +147,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       marginTop: theme.spacing(3.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: '1.125rem',
     },
   },

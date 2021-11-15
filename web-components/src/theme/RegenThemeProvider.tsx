@@ -1,6 +1,16 @@
-import { ThemeProvider } from '@material-ui/core/styles';
+import {
+  ThemeProvider,
+  Theme,
+  StyledEngineProvider,
+} from '@mui/material/styles';
 import * as React from 'react';
 import theme from './muiTheme';
+
+declare module '@mui/styles/defaultTheme' {
+  // eslint-disable-next-line @typescript-eslint/no-empty-interface
+  interface DefaultTheme extends Theme {}
+}
+
 interface Props {
   readonly injectFonts?: boolean;
   readonly injectStyles?: (props?: any) => void;
@@ -20,7 +30,11 @@ const MedulasThemeProvider = ({
     require('web-components/src/theme/fonts.css');
   }
 
-  return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
+  return (
+    <StyledEngineProvider injectFirst>
+      <ThemeProvider theme={theme}>{children}</ThemeProvider>
+    </StyledEngineProvider>
+  );
 };
 
 export default MedulasThemeProvider;

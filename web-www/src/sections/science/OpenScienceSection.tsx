@@ -1,6 +1,6 @@
 import React from 'react';
 import { graphql, StaticQuery } from 'gatsby';
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 
 import Title from 'web-components/lib/components/title';
 import Description from 'web-components/lib/components/description';

@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import clsx from 'clsx';
-import { makeStyles, Theme } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-// import TablePagination from '@material-ui/core/TablePagination';
-import TableRow from '@material-ui/core/TableRow';
-import TableSortLabel from '@material-ui/core/TableSortLabel';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+// import TablePagination from '@mui/material/TablePagination';
+import TableRow from '@mui/material/TableRow';
+import TableSortLabel from '@mui/material/TableSortLabel';
 import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 
 import { getComparator, stableSort, Order } from './sort';
@@ -60,7 +60,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       maxHeight: theme.spacing(119.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       maxHeight: theme.spacing(88.5),
     },
     '&::-webkit-scrollbar': {
@@ -86,7 +86,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: '1.125rem',
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: '1rem',
     },
     '&:nth-child(odd)': {
@@ -121,7 +121,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       fontSize: theme.spacing(8),
       paddingRight: theme.spacing(3.25),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(8),
       paddingRight: theme.spacing(3.75),
     },
@@ -142,7 +142,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: 'inherit',
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(2.75),
     },
   },
@@ -163,11 +163,11 @@ interface EnhancedTableProps {
 
 function EnhancedTableHead(props: EnhancedTableProps): JSX.Element {
   const { classes, order, orderBy, onRequestSort } = props;
-  const createSortHandler = (property: keyof DocumentRowData) => (
-    event: React.MouseEvent<unknown>,
-  ) => {
-    onRequestSort(event, property);
-  };
+  const createSortHandler =
+    (property: keyof DocumentRowData) =>
+    (event: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
+      onRequestSort(event, property);
+    };
 
   return (
     <TableHead>
@@ -177,7 +177,7 @@ function EnhancedTableHead(props: EnhancedTableProps): JSX.Element {
             className={classes.headerCell}
             key={headCell.id}
             align="left"
-            padding="default"
+            padding="normal"
             sortDirection={orderBy === headCell.id ? order : false}
           >
             <TableSortLabel

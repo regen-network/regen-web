@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
-import CardMedia from '@material-ui/core/CardMedia';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { makeStyles, DefaultTheme as Theme, useTheme } from '@mui/styles';
+import CardMedia from '@mui/material/CardMedia';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 import Section from 'web-components/lib/components/section';
 import Modal from 'web-components/lib/components/modal';

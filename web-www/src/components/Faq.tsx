@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { PageProps, navigate } from 'gatsby';
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 
 import SEO from '../components/seo';
 import Section from 'web-components/src/components/section';

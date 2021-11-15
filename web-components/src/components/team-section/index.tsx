@@ -1,6 +1,6 @@
 import React from 'react';
-import { Theme, makeStyles } from '@material-ui/core';
-import Grid from '@material-ui/core/Grid';
+import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+import Grid from '@mui/material/Grid';
 import clsx from 'clsx';
 
 import TeamItem, { TeamItemProps } from '../team-item';
@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingBottom: theme.spacing(25),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(21.5),
     },
   },
@@ -70,7 +70,7 @@ const TeamSection = ({
         title: clsx(titleClassName, classes.title),
       }}
     >
-      <Grid justify="center" container direction="row">
+      <Grid justifyContent="center" container direction="row">
         {members.map((m: any, index: any) => {
           return (
             <Grid

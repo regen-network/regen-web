@@ -6,7 +6,7 @@ import {
   useTheme,
   Grid,
   FormHelperText,
-} from '@material-ui/core';
+} from '@mui/material';
 import { Formik, Form, Field, getIn } from 'formik';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';

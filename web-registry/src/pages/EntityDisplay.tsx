@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import { useHistory, useParams } from 'react-router-dom';
 
 import Description from 'web-components/lib/components/description';
@@ -42,7 +42,7 @@ function getInitialValues(value: any): any {
 const EntityDisplay: React.FC = () => {
   const styles = useStyles();
   const activeStep = 0;
-  const { projectId } = useParams();
+  const { projectId } = useParams<{ projectId: string }>();
   const history = useHistory();
   const [initialValues, setInitialValues] = useState<
     EntityDisplayValues | undefined

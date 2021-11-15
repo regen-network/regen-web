@@ -1,6 +1,6 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import Grid from '@mui/material/Grid';
 import { useQuery, gql } from '@apollo/client';
 import { useParams } from 'react-router-dom';
 import ReactHtmlParser from 'react-html-parser';
@@ -195,9 +195,16 @@ function GridItem({
 
 function PostPurchase(): JSX.Element {
   const classes = useStyles();
-  let { walletId, projectId, name } =
-    useParams<{ walletId: string; projectId: string; name: string }>();
-  const options = { year: 'numeric', month: 'short', day: 'numeric' };
+  let { walletId, projectId, name } = useParams<{
+    walletId: string;
+    projectId: string;
+    name: string;
+  }>();
+  const options: Intl.DateTimeFormatOptions = {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  };
 
   const { data: projectData } = useQuery(PROJECT, {
     errorPolicy: 'ignore',
@@ -259,15 +266,18 @@ function PostPurchase(): JSX.Element {
                     value={<a href={url}>{projectData.projectByHandle.name}</a>}
                   />
                   <GridItem label="# of credits" value={units} />
-                  <GridItem
-                    label="total price"
-                    value={`$${new Intl.NumberFormat('en-US', {
-                      minimumFractionDigits: 2,
-                    }).format(
-                      walletData.walletById.purchasesByBuyerWalletId.nodes[0]
-                        .transactionsByPurchaseId.nodes[0].creditPrice * units,
-                    )} USD`}
-                  />
+                  {units && (
+                    <GridItem
+                      label="total price"
+                      value={`$${new Intl.NumberFormat('en-US', {
+                        minimumFractionDigits: 2,
+                      }).format(
+                        walletData.walletById.purchasesByBuyerWalletId.nodes[0]
+                          .transactionsByPurchaseId.nodes[0].creditPrice *
+                          units,
+                      )} USD`}
+                    />
+                  )}
                   <GridItem
                     label="date"
                     value={new Date(

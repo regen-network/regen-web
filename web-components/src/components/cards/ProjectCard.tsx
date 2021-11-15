@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useTheme, makeStyles, Theme } from '@material-ui/core/styles';
+import { useTheme, makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import clsx from 'clsx';
 import ReactHtmlParser from 'react-html-parser';
 
@@ -67,7 +67,7 @@ function getAbbreviation(unit: string): string {
 
 const useStyles = makeStyles((theme: Theme) => ({
   mediaCard: {
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       width: theme.spacing(73),
     },
     '@media (max-width: 340px)': {
@@ -81,7 +81,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       marginRight: theme.spacing(5.25),
       marginLeft: theme.spacing(5.25),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       // marginTop: theme.spacing(4.5),
       marginRight: theme.spacing(4.5),
       marginLeft: theme.spacing(4.5),
@@ -92,7 +92,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       padding: theme.spacing(1.75, 5.25, 5.25),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       padding: theme.spacing(1.75, 4.5, 5),
     },
   },
@@ -100,7 +100,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       padding: `${theme.spacing(5.25)} ${theme.spacing(5.25)}`,
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       padding: `${theme.spacing(5.25)} ${theme.spacing(4.5)}`,
     },
   },
@@ -159,7 +159,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       marginLeft: theme.spacing(5.25),
       paddingBottom: theme.spacing(5.75),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginRight: theme.spacing(4.5),
       marginLeft: theme.spacing(4.5),
       paddingBottom: theme.spacing(4),

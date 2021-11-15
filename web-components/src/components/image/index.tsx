@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import clsx from 'clsx';
 
 import { getOptimizedImageSrc } from '../../utils/optimizedImageSrc';

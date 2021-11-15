@@ -1,7 +1,7 @@
 import React from 'react';
 import { graphql, StaticQuery } from 'gatsby';
 import BackgroundImage from 'gatsby-background-image';
-import { Theme, makeStyles } from '@material-ui/core/styles';
+import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
 
 import TeamSection from 'web-components/lib/components/team-section';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';

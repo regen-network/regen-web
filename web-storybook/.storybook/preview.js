@@ -1,18 +1,18 @@
 import React from 'react';
 import { addDecorator, addParameters, configure } from '@storybook/react';
 import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
-import { CssBaseline } from '@material-ui/core';
-import { MuiThemeProvider } from '@material-ui/core/styles';
+import { CssBaseline } from '@mui/material';
+import { ThemeProvider } from '@mui/material/styles';
 
 import theme from 'web-components/lib/theme/muiTheme';
 import 'web-components/src/theme/fonts.css';
 
 export const decorators = [
   (Story) => (
-    <MuiThemeProvider theme={theme}>
+    <ThemeProvider theme={theme}>
     <CssBaseline />
       <Story />
-    </MuiThemeProvider>
+    </ThemeProvider>
   ),
 ];
 

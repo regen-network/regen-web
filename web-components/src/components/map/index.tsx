@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import bbox from '@turf/bbox';
 // import { FeatureCollection } from 'geojson'; TODO
 // import { AllGeoJSON } from '@turf/helpers';
-import { makeStyles, useTheme, Theme } from '@material-ui/core/styles';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { makeStyles, useTheme, DefaultTheme as Theme } from '@mui/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import ReactMapGL, {
   Popup,
   Marker,
@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       height: theme.spacing(150),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       height: theme.spacing(121),
     },
     '& .mapboxgl-marker svg': {
@@ -82,7 +82,7 @@ const useStyles = makeStyles((theme: Theme) => ({
         },
       },
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       display: 'none',
     },
   },
@@ -112,7 +112,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       top: theme.spacing(5),
       right: theme.spacing(5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       top: theme.spacing(3.75),
       right: theme.spacing(3.75),
     },

@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import { WebAuth } from 'auth0-js';
 import axios from 'axios';
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';

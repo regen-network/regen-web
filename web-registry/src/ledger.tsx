@@ -6,7 +6,7 @@ import getApiUri from './lib/apiUri';
 export type ContextType = {
   loading: boolean;
   api: RegenApi | undefined;
-  error: Error | undefined;
+  error: unknown;
 };
 
 async function connect(): Promise<RegenApi | undefined> {
@@ -35,7 +35,7 @@ const LedgerContext = React.createContext<ContextType>({
 export const LedgerProvider: React.FC = ({ children }) => {
   const [api, setApi] = useState<RegenApi | undefined>(undefined);
   const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<Error | undefined>(undefined);
+  const [error, setError] = useState<unknown>(undefined);
 
   useEffect(() => {
     const getApi = async (): Promise<void> => {

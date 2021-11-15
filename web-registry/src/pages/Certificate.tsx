@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
-import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
+import { makeStyles, DefaultTheme as Theme, useTheme } from '@mui/styles';
+import Grid from '@mui/material/Grid';
 import ReactToPrint from 'react-to-print';
 
 import Certificate, {
@@ -28,7 +28,7 @@ import background from '../assets/certificate-bg.png';
 import pageBackground from '../assets/certificate-page-bg.jpg';
 import projectsBackground from '../assets/certificate-projects-bg.jpg';
 
-declare module '@material-ui/core/styles/createBreakpoints' {
+declare module '@mui/material/styles/createBreakpoints' {
   interface BreakpointOverrides {
     xs: true;
     sm: true;

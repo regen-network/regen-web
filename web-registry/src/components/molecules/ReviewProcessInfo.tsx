@@ -1,9 +1,9 @@
 import React from 'react';
 import cx from 'clsx';
 
-import { makeStyles } from '@material-ui/core/styles';
-import Box from '@material-ui/core/Box';
-import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@mui/styles';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
 
 import Title from 'web-components/lib/components/title';
 import { BlockContent } from 'web-components/lib/components/block-content';

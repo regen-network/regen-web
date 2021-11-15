@@ -1,6 +1,6 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
-import Typography from '@material-ui/core/Typography';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import Typography from '@mui/material/Typography';
 
 import UserInfo, { User } from '../user/UserInfo';
 
@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       fontSize: '0.75rem',
       marginBottom: theme.spacing(5.2),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: '0.6875rem',
       marginBottom: theme.spacing(4),
     },

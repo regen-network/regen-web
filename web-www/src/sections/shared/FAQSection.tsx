@@ -1,5 +1,5 @@
 import React, { ReactChild } from 'react';
-import { Theme, makeStyles, useTheme } from '@material-ui/core/styles';
+import { DefaultTheme as Theme, makeStyles, useTheme } from '@mui/styles';
 import BackgroundImage from 'gatsby-background-image';
 import { Link } from 'gatsby';
 import { FluidObject } from 'gatsby-image';

@@ -2,16 +2,16 @@ import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import ReactHtmlParser from 'react-html-parser';
 
-import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-// import Divider from '@material-ui/core/Divider';
-import MenuList from '@material-ui/core/MenuList';
-import MenuItem from '@material-ui/core/MenuItem';
-import Box from '@material-ui/core/Box';
+import { makeStyles, DefaultTheme as Theme, useTheme } from '@mui/styles';
+import Drawer from '@mui/material/Drawer';
+// import Divider from '@mui/material/Divider';
+import MenuList from '@mui/material/MenuList';
+import MenuItem from '@mui/material/MenuItem';
+import Box from '@mui/material/Box';
 
 import HamburgerIcon from '../icons/HamburgerIcon';
 // import ContainedButton from '../buttons/ContainedButton';
-// import Button from '@material-ui/core/Button';
+// import Button from '@mui/material/Button';
 import CloseIcon from '../icons/CloseIcon';
 import { HeaderMenuItem } from '../header/HeaderMenuHover';
 import { NavLinkProps } from '../header/NavLink';

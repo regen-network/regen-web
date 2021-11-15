@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import {
   useParams,
   useHistory,

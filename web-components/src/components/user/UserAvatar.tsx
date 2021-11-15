@@ -1,6 +1,6 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
-import Avatar from '@material-ui/core/Avatar';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import Avatar from '@mui/material/Avatar';
 import { getSize, Sizes } from '../../theme/sizing';
 
 interface UserAvatarProps {
@@ -24,7 +24,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       width: theme.spacing(props.spacing.sm),
       height: theme.spacing(props.spacing.sm),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       width: theme.spacing(props.spacing.xs),
       height: theme.spacing(props.spacing.xs),
     },

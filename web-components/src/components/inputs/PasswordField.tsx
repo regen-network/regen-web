@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useTheme, makeStyles, Theme } from '@material-ui/core/styles';
+import { useTheme, makeStyles, DefaultTheme as Theme } from '@mui/styles';
 // import zxcvbn, { ZXCVBNScore } from 'zxcvbn';
 // import { ZXCVBNResult } from 'zxcvbn';
-import IconButton from '@material-ui/core/IconButton';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+import IconButton from '@mui/material/IconButton';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 import EyeIcon from '../icons/EyeIcon';
 import TextField, { RegenTextFieldProps } from './TextField';
@@ -73,7 +73,7 @@ export default function PasswordField({
           aria-label="toggle password visibility"
           onClick={() => setShowPassword(!showPassword)}
           onMouseDown={handleMouseDownPassword}
-        >
+          size="large">
           <EyeIcon
             className={classes.eyeIcon}
             color={theme.palette.secondary.dark}

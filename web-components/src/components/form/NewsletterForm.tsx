@@ -1,6 +1,6 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import Grid from '@mui/material/Grid';
 import axios from 'axios';
 import { Formik, Form, Field } from 'formik';
 import clsx from 'clsx';
@@ -65,7 +65,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     margin: '0 auto',
   },
   textField: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingRight: theme.spacing(1.75),
     },
     [theme.breakpoints.up('sm')]: {
@@ -73,7 +73,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     '& .MuiInputBase-root': {
       lineHeight: '150%',
-      [theme.breakpoints.down('xs')]: {
+      [theme.breakpoints.down('sm')]: {
         fontSize: theme.spacing(4),
         height: theme.spacing(15),
         padding: theme.spacing(5),
@@ -92,7 +92,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   button: {
     letterSpacing: '1px',
     width: '100%',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(3.5),
       lineHeight: theme.spacing(4.5),
       height: theme.spacing(15),

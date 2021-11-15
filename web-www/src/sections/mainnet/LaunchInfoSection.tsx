@@ -8,7 +8,7 @@ import {
   Theme,
   Typography,
   LinearProgress,
-} from '@material-ui/core';
+} from '@mui/material';
 import Img, { FluidObject } from 'gatsby-image';
 import { getFormattedDate } from 'web-components/src/utils/format';
 import clsx from 'clsx';

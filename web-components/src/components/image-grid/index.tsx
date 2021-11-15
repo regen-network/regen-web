@@ -1,6 +1,6 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
-import Grid from '@material-ui/core/Grid';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import Grid from '@mui/material/Grid';
 
 import Title from '../title';
 import Description from '../description';
@@ -31,7 +31,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       paddingLeft: props.even ? theme.spacing(37.5) : theme.spacing(10),
       paddingRight: props.even ? theme.spacing(10) : theme.spacing(37.5),
     },
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       paddingLeft: theme.spacing(10),
       paddingRight: theme.spacing(10),
     },
@@ -40,7 +40,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       flexBasis: '50%',
       maxWidth: '50%',
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingRight: theme.spacing(4),
       paddingLeft: theme.spacing(4),
     },
@@ -62,7 +62,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       marginBottom: theme.spacing(3),
       marginTop: theme.spacing(4),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       lineHeight: '145%',
       marginBottom: theme.spacing(3.5),
     },

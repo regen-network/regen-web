@@ -1,6 +1,6 @@
 import React from 'react';
 import { graphql, StaticQuery } from 'gatsby';
-import { Theme, makeStyles } from '@material-ui/core/';
+import { Theme, makeStyles } from '@mui/material/';
 
 import BackgroundSection from '../../components/BackgroundSection';
 

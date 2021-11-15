@@ -1,6 +1,6 @@
 import React, { useRef, useCallback } from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import Grid from '@mui/material/Grid';
 import ProtectedSpeciesItem, { ItemProps } from './Item';
 import Slider from 'react-slick';
 import PrevNextButton from '../buttons/PrevNextButton';
@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       marginBottom: theme.spacing(5.75),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginBottom: theme.spacing(4.5),
     },
   },
@@ -68,7 +68,7 @@ export default function ProtectedSpecies({
         ))}
       </Slider>
       {species.length > 4 && (
-        <Grid container justify="flex-end" className={classes.buttons}>
+        <Grid container justifyContent="flex-end" className={classes.buttons}>
           <PrevNextButton direction="prev" onClick={slickPrev} />
           <PrevNextButton direction="next" onClick={slickNext} />
         </Grid>

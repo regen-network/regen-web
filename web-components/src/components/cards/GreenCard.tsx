@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, useTheme, Theme } from '@material-ui/core';
+import { makeStyles, useTheme, DefaultTheme as Theme } from '@mui/styles';
 import Card from './Card';
 import clsx from 'clsx';
 
@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   root: {
     borderTop: `solid 10px ${theme.palette.secondary.dark}`,
     backgroundColor: theme.palette.grey['200'],
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       padding: `${theme.spacing(6)} ${theme.spacing(5)} ${theme.spacing(10)}`,
     },
     [theme.breakpoints.up('sm')]: {

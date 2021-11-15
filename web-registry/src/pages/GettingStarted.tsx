@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 
 import AccountabilityIcon from 'web-components/lib/components/icons/AccountabilityIcon';
 import FarmerIcon from 'web-components/lib/components/icons/FarmerIcon';

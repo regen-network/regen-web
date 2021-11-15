@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import { FieldProps } from 'formik';
 import MapboxClient from '@mapbox/mapbox-sdk';
 import mbxGeocoder, {

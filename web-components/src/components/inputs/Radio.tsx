@@ -1,10 +1,6 @@
 import React from 'react';
-import {
-  makeStyles,
-  Theme,
-  Radio as MuiRadio,
-  RadioProps,
-} from '@material-ui/core';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import { Radio as MuiRadio, RadioProps } from '@mui/material';
 import clsx from 'clsx';
 
 const useStyles = makeStyles((theme: Theme) => ({

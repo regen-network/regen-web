@@ -1,8 +1,8 @@
 import React from 'react';
 import clsx from 'clsx';
-import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
+import { makeStyles, DefaultTheme as Theme, useTheme } from '@mui/styles';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
 
 import OutlinedButton from '../buttons/OutlinedButton';
 import MediaCard from '../cards/MediaCard';

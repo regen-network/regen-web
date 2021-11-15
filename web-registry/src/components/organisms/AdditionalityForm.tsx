@@ -1,8 +1,8 @@
 import React from 'react';
 import { Formik, Form, Field } from 'formik';
 import { RadioGroup } from 'formik-material-ui';
-import { makeStyles, Theme } from '@material-ui/core/styles';
-import { Typography } from '@material-ui/core';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import { Typography } from '@mui/material';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import Toggle from 'web-components/lib/components/inputs/Toggle';
@@ -14,8 +14,6 @@ import { requiredMessage } from 'web-components/lib/components/inputs/validation
 interface AdditionalityFormProps {
   submit: (values: AdditionalityValues) => Promise<void>;
 }
-
-type RegenerativePractice = { name: string; startDate: string };
 
 export interface AdditionalityValues {
   rotationalGrazing: string;

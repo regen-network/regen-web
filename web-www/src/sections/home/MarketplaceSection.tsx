@@ -1,6 +1,6 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
-import Grid from '@material-ui/core/Grid';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import Grid from '@mui/material/Grid';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import { useStaticQuery, graphql } from 'gatsby';
 import Title from 'web-components/lib/components/title';

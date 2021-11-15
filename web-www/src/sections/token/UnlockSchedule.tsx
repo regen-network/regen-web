@@ -1,6 +1,6 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import { Theme, makeStyles } from '@material-ui/core';
+import { Theme, makeStyles } from '@mui/material';
 import clsx from 'clsx';
 
 import Section from 'web-components/src/components/section';

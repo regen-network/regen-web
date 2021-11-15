@@ -1,15 +1,10 @@
 import React from 'react';
-import {
-  makeStyles,
-  Theme,
-  MenuList,
-  useTheme,
-  useMediaQuery,
-} from '@material-ui/core';
-import Button from '@material-ui/core/Button';
-import Container from '@material-ui/core/Container';
+import { makeStyles, DefaultTheme as Theme, useTheme } from '@mui/styles';
+import { MenuList, useMediaQuery } from '@mui/material';
+import Button from '@mui/material/Button';
+import Container from '@mui/material/Container';
 import cx from 'clsx';
-import Box from '@material-ui/core/Box';
+import Box from '@mui/material/Box';
 
 import MobileMenu from '../mobile-menu';
 import ContainedButton from '../buttons/ContainedButton';
@@ -67,7 +62,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => {
           ? `1px ${theme.palette.grey[100]} solid`
           : 'none',
       },
-      [theme.breakpoints.down('xs')]: {
+      [theme.breakpoints.down('sm')]: {
         borderBottom: `1px ${theme.palette.grey[100]} solid`,
       },
     }),
@@ -80,7 +75,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => {
       alignItems: 'center',
       justifyContent: 'space-between',
       height: '110px',
-      [theme.breakpoints.down('sm')]: {
+      [theme.breakpoints.down('md')]: {
         padding: theme.spacing(2.5, 3.75),
         height: theme.spacing(15),
         color: theme.palette.primary.light,
@@ -124,7 +119,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => {
     signUpBtn: {
       padding: theme.spacing(2, 7),
       fontSize: pxToRem(12),
-      [theme.breakpoints.down('sm')]: {
+      [theme.breakpoints.down('md')]: {
         padding: theme.spacing(2, 4),
         fontSize: pxToRem(9),
       },
@@ -157,7 +152,7 @@ export default function Header({
   extras,
 }: HeaderProps): JSX.Element {
   const theme = useTheme();
-  const isTablet = useMediaQuery(theme.breakpoints.down('sm'));
+  const isTablet = useMediaQuery(theme.breakpoints.down('md'));
 
   const RegistryLoginBtns: React.FC = () => (
     <li>

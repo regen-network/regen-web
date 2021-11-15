@@ -1,6 +1,6 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
-import Box from '@material-ui/core/Box';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import Box from '@mui/material/Box';
 
 import Navigation from './Navigation';
 import Category from './Category';

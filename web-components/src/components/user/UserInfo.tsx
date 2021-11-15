@@ -1,7 +1,7 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
-import Grid, { GridDirection } from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import Grid, { GridDirection } from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
 import UserAvatar from './UserAvatar';
 import { getFontSize } from '../../theme/sizing';
 import OrganizationIcon from '../icons/OrganizationIcon';
@@ -30,17 +30,17 @@ interface StyleProps {
 }
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
-  text: props => ({
+  text: (props: StyleProps) => ({
     marginLeft:
       props.size === 'project' ? theme.spacing(3.5) : theme.spacing(4.8),
     textAlign: props.direction === 'column' ? 'center' : 'left',
     alignSelf: 'center',
   }),
-  name: props => ({
+  name: (props: StyleProps) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: getFontSize(props.size).sm,
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: getFontSize(props.size).xs,
     },
     fontFamily:
@@ -59,7 +59,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: getFontSize('medium').sm,
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: getFontSize('medium').xs,
     },
     color: theme.palette.info.dark,
@@ -69,7 +69,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: getFontSize('small').sm,
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: getFontSize('small').xs,
     },
     paddingBottom: theme.spacing(2.8),

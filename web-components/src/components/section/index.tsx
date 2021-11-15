@@ -1,7 +1,7 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import clsx from 'clsx';
-import { Variant } from '@material-ui/core/styles/createTypography';
+import { Variant } from '@mui/material/styles/createTypography';
 
 import Title from '../title';
 import { parseText } from '../../utils/textParser';
@@ -43,11 +43,11 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       paddingRight: theme.spacing(37.5),
       paddingLeft: theme.spacing(37.5),
     },
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       paddingRight: theme.spacing(10),
       paddingLeft: theme.spacing(10),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingRight: props.withSlider ? 0 : theme.spacing(4),
       paddingLeft: theme.spacing(4),
       paddingTop: theme.spacing(17.75),
@@ -61,7 +61,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     color: props.titleColor || 'inherit',
     lineHeight: props.titleLineHeight || '140%',
     textAlign: props.titleAlign || (props.topRight ? 'left' : 'center'),
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingRight: props.withSlider ? theme.spacing(4) : 0,
     },
   }),

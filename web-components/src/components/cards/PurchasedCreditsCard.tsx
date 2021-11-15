@@ -1,6 +1,6 @@
 import React from 'react';
-import { makeStyles, useTheme, Theme } from '@material-ui/core';
-import Grid from '@material-ui/core/Grid';
+import { makeStyles, useTheme, DefaultTheme as Theme } from '@mui/styles';
+import Grid from '@mui/material/Grid';
 import Card from './Card';
 
 interface CreditCardProps {
@@ -82,7 +82,7 @@ export default function CreditCard({
             className={classes.icon}
             container
             alignItems="center"
-            justify="center"
+            justifyContent="center"
           >
             {icon}
           </Grid>

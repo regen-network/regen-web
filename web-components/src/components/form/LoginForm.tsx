@@ -1,8 +1,8 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import { Formik, Form, Field } from 'formik';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
+import Link from '@mui/material/Link';
+import Grid from '@mui/material/Grid';
 
 import Description from '../description';
 import TextField from '../inputs/TextField';
@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       marginTop: theme.spacing(8.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginTop: theme.spacing(8.5),
     },
   },
@@ -57,7 +57,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.spacing(4.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(4),
     },
     '& a': {
@@ -68,7 +68,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.spacing(3.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(3),
     },
   },
@@ -81,7 +81,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingTop: theme.spacing(3.75),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(1.25),
     },
   },
@@ -90,7 +90,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       marginTop: theme.spacing(8),
       marginRight: theme.spacing(10),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginTop: theme.spacing(6.25),
       marginRight: theme.spacing(2.5),
     },
@@ -99,7 +99,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       marginTop: theme.spacing(7.75),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginTop: theme.spacing(4.75),
     },
   },
@@ -107,7 +107,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingLeft: theme.spacing(11),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingLeft: theme.spacing(6),
     },
   },
@@ -248,7 +248,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
                   </>
                 )}
               </div>
-              <Grid container justify="flex-end">
+              <Grid container justifyContent="flex-end">
                 <ContainedButton
                   onClick={submitForm}
                   className={classes.button}

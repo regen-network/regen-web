@@ -1,6 +1,7 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import { Grid, makeStyles, Theme, Typography } from '@material-ui/core';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import { Grid, Typography } from '@mui/material';
 
 import BackgroundSection from '../../components/BackgroundSection';
 import { FluidObject } from 'gatsby-image';

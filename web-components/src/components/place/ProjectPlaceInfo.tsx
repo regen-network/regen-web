@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 
 import PlaceInfo from './PlaceInfo';
 

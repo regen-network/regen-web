@@ -1,8 +1,8 @@
 import React from 'react';
-import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
+import { makeStyles, DefaultTheme as Theme, useTheme } from '@mui/styles';
+import Grid from '@mui/material/Grid';
 import ReactHtmlParser from 'react-html-parser';
-import Link from '@material-ui/core/Link';
+import Link from '@mui/material/Link';
 import cx from 'clsx';
 import LazyLoad from 'react-lazyload';
 

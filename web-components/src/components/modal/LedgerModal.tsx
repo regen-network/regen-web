@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { makeStyles, Theme, withStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
+import { makeStyles, DefaultTheme as Theme, withStyles } from '@mui/styles';
+import Grid from '@mui/material/Grid';
 import clsx from 'clsx';
 import ReactHtmlParser from 'react-html-parser';
 import {
@@ -66,7 +66,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       fontSize: theme.spacing(3.5),
       lineHeight: theme.spacing(4.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(2.75),
       lineHeight: theme.spacing(3.5),
     },
@@ -75,7 +75,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingBottom: theme.spacing(6.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(4.5),
     },
   },
@@ -83,7 +83,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingBottom: theme.spacing(6.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(5),
     },
   },
@@ -92,7 +92,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       fontSize: theme.spacing(3),
       lineHeight: theme.spacing(3.75),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(2.5),
       lineHeight: theme.spacing(3.25),
     },
@@ -102,7 +102,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       marginTop: theme.spacing(6),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginTop: theme.spacing(3),
     },
   },
@@ -111,7 +111,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.spacing(3.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(3),
     },
   },
@@ -149,7 +149,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingBottom: theme.spacing(9.25),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(6.25),
     },
   },
@@ -157,7 +157,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingBottom: theme.spacing(9.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(7.5),
     },
   },
@@ -174,7 +174,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       marginTop: theme.spacing(-1.5),
       paddingLeft: theme.spacing(7.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginTop: theme.spacing(-1),
       paddingLeft: theme.spacing(3.75),
     },
@@ -200,7 +200,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.spacing(4.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(3.5),
     },
   },
@@ -208,7 +208,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.spacing(4),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(3),
     },
   },
@@ -217,7 +217,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingTop: theme.spacing(1.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(1),
     },
   },
@@ -226,7 +226,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       marginTop: theme.spacing(12.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginTop: theme.spacing(7.5),
       fontSize: theme.spacing(3.5),
     },
@@ -241,7 +241,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingTop: theme.spacing(2),
       paddingBottom: theme.spacing(2),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(1.25),
       paddingBottom: theme.spacing(1.25),
     },
@@ -347,7 +347,7 @@ export default function LedgerModal({
           <Grid
             container
             alignItems="center"
-            justify="center"
+            justifyContent="center"
             className={classes.title}
           >
             <Title variant="h5">Summary</Title>

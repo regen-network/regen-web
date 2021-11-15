@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
+import { makeStyles, DefaultTheme as Theme, useTheme } from '@mui/styles';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
 import axios from 'axios';
 import { loadStripe } from '@stripe/stripe-js';
 import { useParams } from 'react-router-dom';
 import { loader } from 'graphql.macro';
 import { useMutation } from '@apollo/client';
 import { Formik, Form, Field } from 'formik';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 import Title from 'web-components/lib/components/title';
 import Description from 'web-components/lib/components/description';

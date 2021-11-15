@@ -1,10 +1,11 @@
 import React, { useState, useCallback, useRef } from 'react';
 import ReactCrop, { Crop } from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
-import { makeStyles, Theme, Button } from '@material-ui/core';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import { Button } from '@mui/material';
 import ContainedButton from '../buttons/ContainedButton';
 import { getCroppedImg } from './canvas-utils';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+import useMediaQuery from '@mui/material/useMediaQuery';
 export interface ImageCropProps {
   image: string;
   circularCrop?: boolean;
@@ -37,7 +38,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   button: {
     marginLeft: theme.spacing(2),
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginRight: theme.spacing(6),
     },
   },

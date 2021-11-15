@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { makeStyles, useTheme, Theme } from '@material-ui/core/styles';
-import Fade from '@material-ui/core/Fade';
+import { makeStyles, useTheme, DefaultTheme as Theme } from '@mui/styles';
+import Fade from '@mui/material/Fade';
 
 import OutlinedButton from '../buttons/OutlinedButton';
 import Description from '../description';
@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.typography.pxToRem(18),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.typography.pxToRem(14),
     },
   },

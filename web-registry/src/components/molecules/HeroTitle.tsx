@@ -1,7 +1,7 @@
 import React from 'react';
 import cx from 'clsx';
-import { makeStyles, Theme } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import Typography from '@mui/material/Typography';
 
 import { BlockContent } from 'web-components/lib/components/block-content';
 import { BackgroundImgSection } from './BackgroundImgSection';

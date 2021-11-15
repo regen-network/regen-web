@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 
 import { ImageLeftCard } from 'web-components/lib/components/cards/ImageLeftCard';
 import Description from 'web-components/lib/components/description';

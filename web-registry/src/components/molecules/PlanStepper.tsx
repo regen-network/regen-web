@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 
 import background from '../../assets/topography-pattern-full-1.png';
 import Stepper from 'web-components/lib/components/stepper';

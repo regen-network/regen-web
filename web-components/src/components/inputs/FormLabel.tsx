@@ -1,5 +1,6 @@
 import React from 'react';
-import { Theme, makeStyles, Typography } from '@material-ui/core';
+import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+import { Typography } from '@mui/material';
 import clsx from 'clsx';
 
 import ControlledFormLabel from '../form/ControlledFormLabel';
@@ -27,7 +28,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       marginTop: theme.spacing(1),
       fontSize: theme.spacing(3.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginTop: theme.spacing(1),
       fontSize: theme.spacing(3),
     },
@@ -36,7 +37,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.spacing(3.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(3),
     },
   },
@@ -51,7 +52,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       height: theme.spacing(3.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       height: theme.spacing(3),
     },
   },

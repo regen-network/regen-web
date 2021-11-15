@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 
 import EyeIcon from 'web-components/lib/components/icons/EyeIcon';
 import Section from 'web-components/lib/components/section';

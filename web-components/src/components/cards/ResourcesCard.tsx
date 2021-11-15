@@ -1,6 +1,6 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
-import Typography from '@material-ui/core/Typography';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import Typography from '@mui/material/Typography';
 
 import OutlinedButton from '../buttons/OutlinedButton';
 import EyeIcon from '../icons/EyeIcon';
@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   text: {
     flex: '1 0 auto',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingLeft: theme.spacing(5),
       paddingRight: theme.spacing(5),
       paddingTop: 'unset',
@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     lineHeight: theme.spacing(3.75),
     color: theme.palette.info.main,
     fontSize: theme.spacing(3),
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(1.25),
     },
     [theme.breakpoints.up('sm')]: {
@@ -81,7 +81,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       marginBottom: theme.spacing(7.5),
       marginTop: theme.spacing(5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       margin: '0 auto',
       width: '100%',
       marginBottom: theme.spacing(7.5),
@@ -93,7 +93,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginRight: theme.spacing(1.25),
   },
   buttonWrapper: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingRight: theme.spacing(4),
       paddingLeft: theme.spacing(4),
     },

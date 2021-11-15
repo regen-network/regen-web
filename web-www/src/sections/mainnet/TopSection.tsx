@@ -1,7 +1,8 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import { FluidObject } from 'gatsby-image';
-import { makeStyles, Theme, Typography } from '@material-ui/core';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import { Typography } from '@mui/material';
 
 import Countdown from 'web-components/src/components/countdown';
 import BackgroundSection from '../../components/BackgroundSection';

@@ -1,14 +1,14 @@
 import React from 'react';
-import SvgIcon from '@material-ui/core/SvgIcon';
+import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
 
 interface VerifiedIconProps {
   color: string;
-  fontSize?: 'inherit' | 'default' | 'small' | 'large';
+  fontSize?: SvgIconProps['fontSize'];
 }
 
 export default function VerifiedIcon({
   color,
-  fontSize = 'default',
+  fontSize = 'inherit',
 }: VerifiedIconProps): JSX.Element {
   return (
     <SvgIcon fontSize={fontSize}>

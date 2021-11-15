@@ -1,6 +1,6 @@
 import React from 'react';
-import { makeStyles, Theme, withStyles } from '@material-ui/core/styles';
-import { Stepper, Step, StepLabel, StepConnector } from '@material-ui/core';
+import { makeStyles, DefaultTheme as Theme, withStyles } from '@mui/styles';
+import { Stepper, Step, StepLabel, StepConnector } from '@mui/material';
 import clsx from 'clsx';
 
 import RegenStepIcon from './StepIcon';
@@ -27,7 +27,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     width: '100%',
     backgroundColor: 'transparent',
     padding: theme.spacing(3.75),
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       padding: theme.spacing(3.5, 0),
     },
   },
@@ -42,7 +42,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       color: theme.palette.info.dark,
       marginTop: theme.spacing(1),
 
-      [theme.breakpoints.down('xs')]: {
+      [theme.breakpoints.down('sm')]: {
         fontSize: theme.spacing(3),
       },
     },
@@ -56,7 +56,7 @@ const RegenStepConnector = withStyles((theme: Theme) => ({
       left: `calc(-50% + ${theme.spacing(3.75)})`,
       right: `calc(50% + ${theme.spacing(3.75)})`,
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       top: theme.spacing(2.75),
       left: `calc(-50% + ${theme.spacing(2.5)})`,
       right: `calc(50% + ${theme.spacing(2.5)})`,

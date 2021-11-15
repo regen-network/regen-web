@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { makeStyles, Theme, Box, Avatar } from '@material-ui/core';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import { Box, Avatar } from '@mui/material';
 import { FieldProps } from 'formik';
 
 import OutlinedButton from '../buttons/OutlinedButton';
@@ -16,7 +17,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       width: theme.spacing(22),
       marginRight: theme.spacing(5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       height: theme.spacing(20),
       width: theme.spacing(20),
       marginRight: theme.spacing(3),
@@ -28,7 +29,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingRight: theme.spacing(10),
       paddingLeft: theme.spacing(10),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(3),
       paddingRight: theme.spacing(8),
       paddingLeft: theme.spacing(8),

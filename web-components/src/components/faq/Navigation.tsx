@@ -1,9 +1,9 @@
 import React from 'react';
-import { withStyles, makeStyles, Theme } from '@material-ui/core';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import Box from '@material-ui/core/Box';
+import { withStyles, makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import List from '@mui/material/List';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
+import Box from '@mui/material/Box';
 
 import BreadcrumbIcon from '../icons/BreadcrumbIcon';
 
@@ -20,7 +20,7 @@ const StyledList = withStyles(theme => ({
     [theme.breakpoints.up('sm')]: {
       background: 'transparent',
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       background: theme.palette.primary.main,
       borderRadius: '10px',
       boxShadow: theme.shadows[1],
@@ -48,7 +48,7 @@ const StyledListItem = withStyles(theme => ({
         color: theme.palette.grey[500],
       },
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       lineHeight: theme.spacing(17.5),
       paddingLeft: theme.spacing(7),
       paddingRight: theme.spacing(5),
@@ -57,11 +57,11 @@ const StyledListItem = withStyles(theme => ({
       },
     },
   },
-}))(ListItem);
+}))(ListItemButton);
 
 const useStyles = makeStyles((theme: Theme) => ({
   icon: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       height: theme.spacing(3.5),
       width: theme.spacing(5.75),
     },
@@ -80,7 +80,6 @@ const Navigation = ({
       {categories.map((name, i) => (
         <StyledListItem
           key={i}
-          button
           selected={category ? category === name : false}
           onClick={() => {
             onClick(name);

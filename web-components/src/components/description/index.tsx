@@ -1,6 +1,6 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
-import Typography, { TypographyProps } from '@material-ui/core/Typography';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import Typography, { TypographyProps } from '@mui/material/Typography';
 import { getFontSize, FontSizes } from '../../theme/sizing';
 import clsx from 'clsx';
 
@@ -23,7 +23,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: props.fontSize.sm,
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: props.fontSize.xs,
     },
     '& a': {

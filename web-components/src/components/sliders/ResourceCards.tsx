@@ -1,7 +1,8 @@
 import React from 'react';
-import { useTheme, Theme, makeStyles, useMediaQuery } from '@material-ui/core';
+import { useTheme, DefaultTheme as Theme, makeStyles } from '@mui/styles';
 import clsx from 'clsx';
-import Grid from '@material-ui/core/Grid';
+import Grid from '@mui/material/Grid';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import Slider from 'react-slick';
 
 import ResourcesCard, { ResourcesCardProps } from '../cards/ResourcesCard';
@@ -15,11 +16,11 @@ export interface ResourceCardsProps {
 
 const useStyles = makeStyles((theme: Theme) => ({
   slider: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       width: '95%',
     },
     '& .slick-list': {
-      [theme.breakpoints.down('md')]: {
+      [theme.breakpoints.down('lg')]: {
         overflow: 'visible',
       },
     },
@@ -27,7 +28,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       display: 'flex',
       '& .slick-slide': {
         height: 'inherit',
-        [theme.breakpoints.down('xs')]: {
+        [theme.breakpoints.down('sm')]: {
           paddingRight: theme.spacing(4.125),
           '&:last-child': {
             paddingRight: 0,
@@ -41,7 +42,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   item: {
     height: 'inherit',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       width: '100%',
     },
     [theme.breakpoints.up('sm')]: {
@@ -60,7 +61,7 @@ export default function ResourceCards({
   const theme = useTheme();
   const classes = useStyles();
   const desktop = useMediaQuery(theme.breakpoints.up('md'));
-  const mobile = useMediaQuery(theme.breakpoints.down('xs'));
+  const mobile = useMediaQuery(theme.breakpoints.down('sm'));
   const tablet = useMediaQuery(theme.breakpoints.up('sm'));
   let slides;
   if (desktop) slides = 2;

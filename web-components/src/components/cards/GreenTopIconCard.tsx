@@ -1,5 +1,6 @@
 import React from 'react';
-import { makeStyles, Theme, Typography, Grid } from '@material-ui/core';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import { Typography, Grid } from '@mui/material';
 import clsx from 'clsx';
 
 import Card from './Card';

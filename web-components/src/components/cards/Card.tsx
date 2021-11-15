@@ -1,6 +1,6 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
-import Card from '@material-ui/core/Card';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import Card from '@mui/material/Card';
 
 interface RegenCardProps {
   children?: any;

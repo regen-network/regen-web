@@ -1,6 +1,6 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
-import Box from '@material-ui/core/Box';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import Box from '@mui/material/Box';
 
 import { ReactComponent as Ribbon } from '../../assets/svgs/yellow-ribbon.svg';
 

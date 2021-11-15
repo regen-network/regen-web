@@ -1,6 +1,6 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import { Theme, makeStyles, useTheme } from '@material-ui/core/styles';
+import { DefaultTheme as Theme, makeStyles, useTheme } from '@mui/styles';
 
 import ConnectSection, { IconLabelProps } from '../../components/ConnectSection';
 import RegenLogoIcon from 'web-components/lib/components/icons/RegenLogoIcon';

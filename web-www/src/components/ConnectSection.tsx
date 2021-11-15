@@ -1,6 +1,6 @@
 import React from 'react';
-import { Theme, makeStyles, TypographyVariant } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
+import { Theme, makeStyles, TypographyVariant } from '@mui/material/styles';
+import Grid from '@mui/material/Grid';
 import clsx from 'clsx';
 import { FluidObject } from 'gatsby-image';
 

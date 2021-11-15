@@ -1,8 +1,8 @@
 import React from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
-import { useTheme } from '@material-ui/core';
+import { useTheme } from '@mui/material';
 import BackgroundImage from 'gatsby-background-image';
-import Box from '@material-ui/core/Box';
+import Box from '@mui/material/Box';
 
 import SEO from '../components/seo';
 import HomeFoldSection from '../sections/home/FoldSection';

@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 
 import GreenCard from '../cards/GreenCard';
 import Title from '../title';
@@ -14,7 +14,7 @@ interface CategoryProps {
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     backgroundColor: theme.palette.primary.main,
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       padding: `${theme.spacing(6)} 0 ${theme.spacing(12.5)}`,
     },
     [theme.breakpoints.up('sm')]: {
@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontWeight: 800,
     color: theme.palette.secondary.dark,
     textTransform: 'uppercase',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(3.5),
       padding: `0 ${theme.spacing(5.25)}`,
     },

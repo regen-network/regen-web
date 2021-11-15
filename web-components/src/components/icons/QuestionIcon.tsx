@@ -1,5 +1,5 @@
 import React from 'react';
-import { SvgIcon, useTheme } from '@material-ui/core';
+import { SvgIcon, useTheme } from '@mui/material';
 import clsx from 'clsx';
 
 interface IconProps {

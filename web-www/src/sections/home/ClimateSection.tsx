@@ -1,7 +1,7 @@
 import React from 'react';
-import { makeStyles, Theme, useTheme } from '@material-ui/core';
+import { makeStyles, DefaultTheme as Theme, useTheme } from '@mui/styles';
 import { useStaticQuery, graphql } from 'gatsby';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import Img from 'gatsby-image';
 import ReactHtmlParser from 'react-html-parser';
 import clsx from 'clsx';

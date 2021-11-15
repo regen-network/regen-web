@@ -1,8 +1,8 @@
 import React from 'react';
-import { makeStyles, Theme, useTheme } from '@material-ui/core';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { makeStyles, DefaultTheme as Theme, useTheme } from '@mui/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import Slider from 'react-slick';
-import Grid from '@material-ui/core/Grid';
+import Grid from '@mui/material/Grid';
 
 import ProjectCard, { ProjectCardProps } from '../cards/ProjectCard';
 
@@ -12,7 +12,7 @@ export interface ProjectCardsProps {
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(10.25),
     },
     [theme.breakpoints.up('sm')]: {
@@ -20,11 +20,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   slider: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       width: '85%',
     },
     '& .slick-list': {
-      [theme.breakpoints.down('md')]: {
+      [theme.breakpoints.down('lg')]: {
         overflow: 'visible',
       },
     },
@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       display: 'flex',
       '& .slick-slide': {
         height: 'inherit',
-        [theme.breakpoints.down('xs')]: {
+        [theme.breakpoints.down('sm')]: {
           paddingRight: theme.spacing(4.125),
           '&:last-child': {
             paddingRight: 0,
@@ -66,7 +66,7 @@ export default function ProjectCardsSlider({
   const classes = useStyles({});
   const theme = useTheme();
   const desktop = useMediaQuery(theme.breakpoints.up('md'));
-  const mobile = useMediaQuery(theme.breakpoints.down('xs'));
+  const mobile = useMediaQuery(theme.breakpoints.down('sm'));
   const slides: number = mobile ? 1 : 2;
 
   const settings = {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useStaticQuery, graphql, PageProps } from 'gatsby';
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 
 import SEO from '../components/seo';
 import TopSection from '../sections/token/TopSection';

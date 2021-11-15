@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@mui/styles';
 import {
   CardMedia,
   IconButton,
   Collapse,
   LinearProgress,
-} from '@material-ui/core';
+} from '@mui/material';
 import { FieldProps } from 'formik';
 import cx from 'clsx';
 
@@ -50,7 +50,7 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up('sm')]: {
       height: theme.typography.pxToRem(318),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       height: theme.typography.pxToRem(210),
     },
   },
@@ -142,7 +142,7 @@ function VideoInput({
                     classes={{ root: styles.deleteButton }}
                     onClick={handleDelete}
                     aria-label="delete"
-                  >
+                    size="large">
                     <TrashIcon color={theme.palette.error.light} />
                   </IconButton>
                 </Card>

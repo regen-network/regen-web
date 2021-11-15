@@ -1,6 +1,6 @@
 import React from 'react';
-import SvgIcon from '@material-ui/core/SvgIcon';
-import { useTheme, Theme } from '@material-ui/core';
+import SvgIcon from '@mui/material/SvgIcon';
+import { useTheme, DefaultTheme as Theme } from '@mui/styles';
 
 type Props = {
   fileType?: string;

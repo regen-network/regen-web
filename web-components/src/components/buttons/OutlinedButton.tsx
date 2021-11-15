@@ -1,6 +1,6 @@
 import React from 'react';
-import { withStyles, Theme } from '@material-ui/core/styles';
-import Button, { ButtonProps } from '@material-ui/core/Button';
+import { withStyles, DefaultTheme as Theme } from '@mui/styles';
+import Button, { ButtonProps } from '@mui/material/Button';
 
 interface OutlinedButtonProps extends ButtonProps {
   target?: string;

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@mui/styles';
 import { useLocation } from 'react-router-dom';
 
 import SEO from 'web-components/lib/components/seo';

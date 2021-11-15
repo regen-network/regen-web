@@ -7,7 +7,7 @@ import ProjectMedia, {
   Media,
 } from 'web-components/lib/components/sliders/ProjectMedia';
 
-import Grid from '@material-ui/core/Grid';
+import Grid from '@mui/material/Grid';
 
 export default {
   title: 'Sliders',

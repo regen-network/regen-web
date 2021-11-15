@@ -1,8 +1,8 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
-import { Variant } from '@material-ui/core/styles/createTypography';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import { Variant } from '@mui/material/styles/createTypography';
 import clsx from 'clsx';
-import Grid from '@material-ui/core/Grid';
+import Grid from '@mui/material/Grid';
 
 import Title from '../title';
 import Description from '../description';
@@ -41,7 +41,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     marginBottom: theme.spacing(4),
   },
   h3title: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(5.25),
     },
   },
@@ -67,7 +67,7 @@ export default function ImageItem({
     <div className={clsx(styles.root, classes?.root, className)}>
       <Grid
         container
-        justify="center"
+        justifyContent="center"
         className={clsx(styles.image, classes?.image)}
       >
         {img}

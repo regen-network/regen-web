@@ -1,7 +1,7 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@mui/styles';
 import PlayIcon from 'web-components/lib/components/icons/PlayIcon';
-import Modal from '@material-ui/core/Modal';
+import Modal from '@mui/material/Modal';
 
 const useStyles = makeStyles(theme => ({
   root: {

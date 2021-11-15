@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, useTheme, Theme } from '@material-ui/core/styles';
+import { makeStyles, useTheme, DefaultTheme as Theme } from '@mui/styles';
 import ArrowDownIcon from '../icons/ArrowDownIcon';
 
 interface PrevNextButtonProps {
@@ -23,7 +23,7 @@ const useStyles = makeStyles<Theme, { disabled: boolean }>(theme => ({
       width: theme.spacing(12.5),
       height: theme.spacing(12.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       width: theme.spacing(10),
       height: theme.spacing(10),
     },

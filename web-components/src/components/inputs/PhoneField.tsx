@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import { FieldProps } from 'formik';
 import PhoneInput from 'react-phone-input-2';
 
@@ -32,7 +32,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       lineHeight: `${theme.typography.pxToRem(24)} !important`,
       height: `${theme.spacing(15)} !important`,
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       padding: theme.spacing(6),
       fontSize: `${theme.typography.pxToRem(14)} !important`,
       lineHeight: `${theme.typography.pxToRem(21)} !important`,

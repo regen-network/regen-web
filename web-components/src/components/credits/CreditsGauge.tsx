@@ -1,6 +1,6 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
-import Grid from '@material-ui/core/Grid';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import Grid from '@mui/material/Grid';
 import Gauge from './Gauge';
 import GaugeText from './GaugeText';
 import { pluralize } from '../../utils/pluralize';
@@ -22,7 +22,7 @@ export default function CreditsGauge(props: CreditsProps): JSX.Element {
   const available: number = props.issued - props.purchased;
   return (
     <Grid container direction="column">
-      <Grid item container direction="row" justify="space-between">
+      <Grid item container direction="row" justifyContent="space-between">
         {props.purchased > 0 && (
           <GaugeText
             format

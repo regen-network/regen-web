@@ -1,6 +1,7 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import { makeStyles, Theme, Typography, useTheme } from '@material-ui/core';
+import { makeStyles, DefaultTheme as Theme, useTheme } from '@mui/styles';
+import { Typography } from '@mui/material';
 
 import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';
 import Section from 'web-components/src/components/section';

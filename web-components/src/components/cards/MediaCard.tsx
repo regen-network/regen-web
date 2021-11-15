@@ -1,7 +1,7 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
-import CardMedia from '@material-ui/core/CardMedia';
-import { Variant } from '@material-ui/core/styles/createTypography';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import CardMedia from '@mui/material/CardMedia';
+import { Variant } from '@mui/material/styles/createTypography';
 import cx from 'clsx';
 
 import Card from './Card';
@@ -72,7 +72,7 @@ const useStyles = makeStyles((theme: Theme) => ({
         0.8,
       )}`,
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       padding: `${theme.spacing(4)} ${theme.spacing(4.5)} ${theme.spacing(
         0.8,
       )}`,
@@ -86,7 +86,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   h4title: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(4.5),
     },
   },

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Theme, makeStyles, useMediaQuery, useTheme } from '@material-ui/core';
+import { Theme, makeStyles, useMediaQuery, useTheme } from '@mui/material';
 import { graphql, useStaticQuery } from 'gatsby';
 import clsx from 'clsx';
 

@@ -1,6 +1,6 @@
 import React from 'react';
-import { Theme, makeStyles } from '@material-ui/core/styles';
-import { Avatar } from '@material-ui/core';
+import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+import { Avatar } from '@mui/material';
 import cx from 'clsx';
 
 import Description from 'web-components/lib/components/description';

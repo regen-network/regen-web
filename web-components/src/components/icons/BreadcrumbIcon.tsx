@@ -1,6 +1,6 @@
 import React from 'react';
-import SvgIcon from '@material-ui/core/SvgIcon';
-import { makeStyles, Theme } from '@material-ui/core';
+import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import clsx from 'clsx';
 
 import { directionRotate } from './ArrowDownIcon';
@@ -8,7 +8,7 @@ import { directionRotate } from './ArrowDownIcon';
 interface Props {
   className?: string;
   direction?: 'next' | 'prev' | 'down' | 'up';
-  onClick?: React.MouseEventHandler;
+  onClick?: SvgIconProps['onClick'];
 }
 
 interface StyleProps {

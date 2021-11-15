@@ -1,10 +1,10 @@
 import React from 'react';
 import BackgroundImage from 'gatsby-background-image';
 import { graphql, useStaticQuery } from 'gatsby';
-import Grid from '@material-ui/core/Grid';
+import Grid from '@mui/material/Grid';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import { makeStyles, Theme } from '@material-ui/core';
-import Typography from '@material-ui/core/Typography';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import Typography from '@mui/material/Typography';
 import Title from 'web-components/lib/components/title';
 import Img from 'gatsby-image';
 

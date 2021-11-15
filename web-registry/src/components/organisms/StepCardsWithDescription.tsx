@@ -1,7 +1,7 @@
 import React from 'react';
 import cx from 'clsx';
-import { makeStyles, Theme } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import Grid from '@mui/material/Grid';
 
 import Description from 'web-components/lib/components/description';
 import Title from 'web-components/lib/components/title';

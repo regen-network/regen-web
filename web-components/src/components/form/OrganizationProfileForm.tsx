@@ -1,5 +1,5 @@
 import React from 'react';
-import { Theme, makeStyles } from '@material-ui/core';
+import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
 import { Form, Formik, Field } from 'formik';
 
 import ControlledTextField from '../inputs/ControlledTextField';
@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       marginTop: theme.typography.pxToRem(40),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginTop: theme.typography.pxToRem(33),
     },
   },

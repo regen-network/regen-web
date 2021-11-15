@@ -1,6 +1,6 @@
 import React from 'react';
 import BlockContent from '@sanity/block-content-to-react';
-import { makeStyles } from '@material-ui/core';
+import { makeStyles } from '@mui/styles';
 
 import { UnderlineTooltip } from '../tooltip/UnderlineTooltip';
 

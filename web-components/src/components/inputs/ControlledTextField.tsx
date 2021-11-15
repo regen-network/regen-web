@@ -1,11 +1,6 @@
 import React from 'react';
-import {
-  makeStyles,
-  Theme,
-  Typography,
-  InputProps,
-  InputAdornment,
-} from '@material-ui/core';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import { Typography, InputProps, InputAdornment } from '@mui/material';
 import { FieldProps } from 'formik';
 import FieldFormControl from './FieldFormControl';
 import Input from './Input';
@@ -26,7 +21,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       marginBottom: theme.spacing(4),
       fontSize: theme.spacing(3.3),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginTop: theme.spacing(1),
       marginBottom: theme.spacing(3),
       fontSize: theme.spacing(3),

@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 
 import { getSanityImgSrc } from '../../lib/imgSrc';
 import { Sdg, Maybe } from '../../generated/sanity-graphql';

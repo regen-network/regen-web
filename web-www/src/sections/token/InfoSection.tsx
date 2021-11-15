@@ -1,6 +1,6 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import { Theme, makeStyles, CardContent, Typography } from '@material-ui/core';
+import { Theme, makeStyles, CardContent, Typography } from '@mui/material';
 import Img, { FluidObject } from 'gatsby-image';
 import ReactHtmlParser from 'react-html-parser';
 

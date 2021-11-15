@@ -1,7 +1,7 @@
 import React, { useCallback, useRef } from 'react';
-import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { makeStyles, DefaultTheme as Theme, useTheme } from '@mui/styles';
+import Grid from '@mui/material/Grid';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import LazyLoad from 'react-lazyload';
 import Slider from 'react-slick';
 import cx from 'clsx';

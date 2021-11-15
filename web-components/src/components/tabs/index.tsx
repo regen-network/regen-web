@@ -3,11 +3,11 @@ import {
   makeStyles,
   useTheme,
   withStyles,
-  Theme,
-} from '@material-ui/core/styles';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+  DefaultTheme as Theme,
+} from '@mui/styles';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 export interface RegenTab {
   label: string;
@@ -64,7 +64,7 @@ const CustomTab = withStyles((theme: Theme) => ({
     color: theme.palette.secondary.main,
     backgroundColor: theme.palette.info.light,
     maxWidth: 'none',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: '0.875rem',
       // padding: `${theme.spacing(6)} ${theme.spacing(5.5)}`,
     },

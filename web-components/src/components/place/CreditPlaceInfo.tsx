@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
-import { useTheme } from '@material-ui/core/styles';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import { useTheme } from '@mui/styles';
 import PlaceInfo from './PlaceInfo';
 
 interface CreditPlaceInfoProps {

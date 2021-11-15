@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import { Formik, Form, Field, FormikErrors } from 'formik';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import cx from 'clsx';
@@ -58,7 +58,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingLeft: theme.spacing(7.5),
       paddingRight: theme.spacing(7.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(8),
       paddingBottom: theme.spacing(6),
       paddingLeft: 0,
@@ -82,7 +82,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       padding: theme.spacing(0, 10),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       padding: theme.spacing(0, 2.5),
     },
   },
@@ -102,7 +102,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.spacing(3.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(3),
     },
   },

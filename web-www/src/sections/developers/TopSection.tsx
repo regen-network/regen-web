@@ -1,6 +1,6 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import { Theme, makeStyles } from '@material-ui/core/styles';
+import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
 import BackgroundSection from '../../components/BackgroundSection';
 
 const useStyles = makeStyles<Theme>((theme: Theme) => ({

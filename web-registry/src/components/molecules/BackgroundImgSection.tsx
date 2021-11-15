@@ -1,7 +1,7 @@
 import React from 'react';
 import cx from 'clsx';
-import { makeStyles, Theme } from '@material-ui/core/styles';
-import CardMedia from '@material-ui/core/CardMedia';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import CardMedia from '@mui/material/CardMedia';
 
 import Section from 'web-components/lib/components/section';
 

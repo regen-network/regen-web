@@ -1,6 +1,6 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
-import Modal from '@material-ui/core/Modal';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import Modal from '@mui/material/Modal';
 import clsx from 'clsx';
 import CloseIcon from '../icons/CloseIcon';
 import { RemoveScroll } from 'react-remove-scroll';
@@ -46,11 +46,11 @@ const useStyles = makeStyles((theme: Theme) => ({
       width: '50%',
       height: '90%',
     },
-    [theme.breakpoints.between('sm', 'sm')]: {
+    [theme.breakpoints.between('sm', 'md')]: {
       width: '70%',
       height: '90%',
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       left: '0px',
       top: '0px',
       width: '100%',

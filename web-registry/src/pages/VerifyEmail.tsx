@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
-import Link from '@material-ui/core/Link';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import Link from '@mui/material/Link';
 import axios from 'axios';
 
 import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';

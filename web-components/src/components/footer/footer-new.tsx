@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactHtmlParser from 'react-html-parser';
-import { makeStyles, useTheme } from '@material-ui/core';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import Link from '@material-ui/core/Link';
-import Box from '@material-ui/core/Box';
+import { makeStyles, useTheme } from '@mui/styles';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import Link from '@mui/material/Link';
+import Box from '@mui/material/Box';
 
 import Title from '../title';
 import Section from '../section';
@@ -43,7 +43,7 @@ const useStyles = makeStyles(theme => ({
       lineHeight: theme.spacing(6.5),
       marginBottom: theme.spacing(3.75),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       lineHeight: theme.spacing(4.5),
       fontSize: theme.spacing(3.5),
       marginBottom: theme.spacing(4.5),
@@ -57,7 +57,7 @@ const useStyles = makeStyles(theme => ({
       fontSize: theme.spacing(4.5),
       marginBottom: theme.spacing(1.25),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(4),
       marginBottom: theme.spacing(1),
     },
@@ -85,7 +85,7 @@ const useStyles = makeStyles(theme => ({
       marginTop: theme.spacing(8.25),
       marginBottom: theme.spacing(8.25),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginTop: theme.spacing(6),
       marginBottom: theme.spacing(9),
     },
@@ -110,7 +110,7 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up('sm')]: {
       marginTop: theme.spacing(19.75),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginTop: theme.spacing(10),
     },
   },
@@ -216,7 +216,7 @@ const Footer: React.FC<{
         </Box>
 
         <hr className={styles.separator} />
-        <Grid className={styles.bottomGrid} container justify="space-between">
+        <Grid className={styles.bottomGrid} container justifyContent="space-between">
           <Grid item className={styles.bottom}>
             <Link href={termsUrl}>Terms</Link> |{' '}
             <Link href={privacyUrl}>Privacy</Link>

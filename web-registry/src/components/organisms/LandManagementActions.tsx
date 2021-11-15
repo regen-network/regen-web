@@ -1,7 +1,7 @@
 import React, { useRef, useCallback } from 'react';
-import { makeStyles, useTheme, Theme } from '@material-ui/core/styles';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import Grid from '@material-ui/core/Grid';
+import { makeStyles, useTheme, DefaultTheme as Theme } from '@mui/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import Grid from '@mui/material/Grid';
 import Slider from 'react-slick';
 
 import Section from 'web-components/lib/components/section';

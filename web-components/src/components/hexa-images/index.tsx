@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import Grid from '@mui/material/Grid';
 import ReactHtmlParser from 'react-html-parser';
 
 import Title from '../title';
@@ -25,12 +25,12 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up(theme.breakpoints.values.tablet)]: {
       justifyContent: 'space-between',
     },
-    [theme.breakpoints.between(theme.breakpoints.values.tablet, 'md')]: {
+    [theme.breakpoints.between(theme.breakpoints.values.tablet, 'lg')]: {
       height: theme.spacing(87.5),
     },
   },
   image: {
-    [theme.breakpoints.between('sm', 'md')]: {
+    [theme.breakpoints.between('sm', 'lg')]: {
       height: theme.spacing(34.5),
       width: theme.spacing(30),
       top: theme.spacing(-0.75),
@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       top: theme.spacing(-1.75),
       left: theme.spacing(1.25),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       height: theme.spacing(21.5),
       width: theme.spacing(18.5),
       top: theme.spacing(-0.75),
@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   item: {
     position: 'relative',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       height: theme.spacing(20),
       width: theme.spacing(20),
       '&:nth-child(4)': {
@@ -63,7 +63,7 @@ const useStyles = makeStyles((theme: Theme) => ({
         marginTop: theme.spacing(-2),
       },
     },
-    [theme.breakpoints.between('sm', 'md')]: {
+    [theme.breakpoints.between('sm', 'lg')]: {
       height: theme.spacing(31.25),
       width: theme.spacing(33),
       '&:nth-child(4)': {
@@ -92,7 +92,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    [theme.breakpoints.between('sm', 'md')]: {
+    [theme.breakpoints.between('sm', 'lg')]: {
       height: theme.spacing(33),
       width: theme.spacing(19),
     },
@@ -100,7 +100,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       height: theme.spacing(44.25),
       width: theme.spacing(25.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       height: theme.spacing(20),
       width: theme.spacing(11.5),
     },
@@ -130,14 +130,14 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   images: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       width: theme.spacing(70),
     },
     [theme.breakpoints.up('lg')]: {
       width: theme.spacing(161.5),
       height: theme.spacing(84.75),
     },
-    [theme.breakpoints.between('sm', 'md')]: {
+    [theme.breakpoints.between('sm', 'lg')]: {
       width: theme.spacing(116.25),
       height: theme.spacing(60),
     },
@@ -154,7 +154,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
       paddingTop: theme.spacing(8),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(3.5),
     },
   },
@@ -178,7 +178,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       lineHeight: theme.spacing(5.75),
       paddingBottom: theme.spacing(4.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(3.5),
       lineHeight: theme.spacing(4.5),
       paddingBottom: theme.spacing(3.5),

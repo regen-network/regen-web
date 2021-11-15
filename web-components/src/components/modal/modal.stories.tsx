@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Modal from 'web-components/lib/components/modal';
 import IssuanceModal from 'web-components/lib/components/modal/IssuanceModal';
 import CropImageModal from 'web-components/lib/components/modal/CropImageModal';
-import { Button, Card, Avatar, CardMedia } from '@material-ui/core';
+import { Button, Card, Avatar, CardMedia } from '@mui/material';
 
 export default {
   title: 'Modal',

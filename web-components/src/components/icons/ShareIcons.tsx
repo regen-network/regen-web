@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import Grid from '@material-ui/core/Grid';
-import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
+import Grid from '@mui/material/Grid';
+import { makeStyles, DefaultTheme as Theme, useTheme } from '@mui/styles';
 
 import TwitterIcon from './social/TwitterIcon';
 import FacebookIcon from './social/FacebookIcon';
@@ -28,7 +28,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     display: 'block',
     width: theme.spacing(12.5),
     height: theme.spacing(12.5),
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       width: props.xsSize || theme.spacing(12.5),
       height: props.xsSize || theme.spacing(12.5),
     },
@@ -49,7 +49,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       justifyContent: 'left',
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       justifyContent: 'center',
     },
   },

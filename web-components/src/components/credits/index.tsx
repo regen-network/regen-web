@@ -1,6 +1,6 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
-import Grid from '@material-ui/core/Grid';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import Grid from '@mui/material/Grid';
 import Gauge from './Gauge';
 import GaugeText from './GaugeText';
 import { pluralize } from '../../utils/pluralize';
@@ -32,7 +32,7 @@ export default function Credits(props: CreditsProps): JSX.Element {
       <Grid item className={classes.gauge}>
         <Gauge amount={props.amount} totalAmount={props.totalAmount} />
       </Grid>
-      <Grid item container direction="row" justify="space-between">
+      <Grid item container direction="row" justifyContent="space-between">
         <GaugeText
           number={props.numberOfHolders}
           label={`credit ${pluralize(props.numberOfHolders, 'holder')}`}

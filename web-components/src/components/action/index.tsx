@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { makeStyles, Theme, useTheme } from '@material-ui/core';
-import Typography from '@material-ui/core/Typography';
+import { makeStyles, DefaultTheme as Theme, useTheme } from '@mui/styles';
+import Typography from '@mui/material/Typography';
 import ReactHtmlParser from 'react-html-parser';
 import clsx from 'clsx';
 
@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       width: theme.spacing(74.5),
     },
   },
@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingTop: theme.spacing(2.5),
       paddingBottom: theme.spacing(2.25),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(4),
       paddingTop: theme.spacing(2.8),
       paddingBottom: theme.spacing(1.2),

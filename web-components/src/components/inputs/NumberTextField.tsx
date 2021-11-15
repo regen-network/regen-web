@@ -1,7 +1,7 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import { TextFieldProps } from 'formik-material-ui';
-import Grid from '@material-ui/core/Grid';
+import Grid from '@mui/material/Grid';
 import TextField from './TextField';
 import SpinIcon from '../icons/SpinIcon';
 

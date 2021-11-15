@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { makeStyles, TextField } from '@material-ui/core';
-import Autocomplete, {
-  createFilterOptions,
-} from '@material-ui/lab/Autocomplete';
+import { makeStyles } from '@mui/styles';
+import { TextField } from '@mui/material';
+import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete';
 import { FieldProps, FormikErrors } from 'formik';
 import cx from 'clsx';
 
@@ -44,7 +43,7 @@ const useStyles = makeStyles(theme => ({
         [theme.breakpoints.up('sm')]: {
           fontSize: theme.spacing(4.5),
         },
-        [theme.breakpoints.down('xs')]: {
+        [theme.breakpoints.down('sm')]: {
           paddingLeft: theme.spacing(1),
           paddingRight: theme.spacing(3.25),
           paddingTop: theme.spacing(1.625),
@@ -213,10 +212,10 @@ const RoleField: React.FC<Props> = ({
             forcePopupIcon
             value={value}
             getOptionLabel={o => getLabel(o) || ''}
-            getOptionSelected={o => o.id === field.value}
+            isOptionEqualToValue={o => o.id === field.value}
             renderOption={o => getLabel(o) || o}
             onChange={(event, newValue, reason) => {
-              if (reason === 'select-option' && !newValue.inputValue) {
+              if (reason === 'selectOption' && !newValue.inputValue) {
                 handleChange(newValue);
               } else if (typeof newValue === 'string') {
                 setValue({

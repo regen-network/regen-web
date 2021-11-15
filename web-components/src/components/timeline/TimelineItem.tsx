@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import ReactHtmlParser from 'react-html-parser';
 import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 
@@ -42,7 +42,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       marginRight: props.odd ? '0' : theme.spacing(7.75),
       marginLeft: props.odd ? theme.spacing(7.75) : '0',
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       width: '100%',
       marginRight: 0, // theme.spacing(5.75),
       marginBottom: theme.spacing(5),
@@ -66,7 +66,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
         top: props.last ? 'auto' : theme.spacing(2),
         bottom: props.last ? theme.spacing(2) : 'auto',
       },
-      [theme.breakpoints.down('xs')]: {
+      [theme.breakpoints.down('sm')]: {
         left: theme.spacing(-2),
         borderLeft: `1px solid ${theme.palette.grey[100]}`,
         borderBottom: `1px solid ${theme.palette.grey[100]}`,
@@ -82,7 +82,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     lineHeight: '150%',
     color: theme.palette.info.main,
     paddingBottom: theme.spacing(0.75),
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: '0.875rem',
     },
   },
@@ -92,7 +92,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       fontSize: '0.875rem',
       lineHeight: '150%',
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: '0.75rem',
       lineHeight: '145%',
     },
@@ -116,7 +116,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       width: theme.spacing(1.5),
       height: '100%',
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       display: props.last ? 'none' : 'inherit',
       left: theme.spacing(-5.75 - 1 / 2),
       top: theme.spacing(4.5 + 1.75),
@@ -145,7 +145,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       height: theme.spacing(5.75),
       borderWidth: theme.spacing(1),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       left: theme.spacing(-5.75 - 4.5 / 2),
       top: theme.spacing(2),
       width: theme.spacing(4.5),

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Theme, makeStyles } from '@material-ui/core';
+import { Theme, makeStyles } from '@mui/material';
 import clsx from 'clsx';
 
 import Description, { DescriptionProps } from 'web-components/src/components/description';

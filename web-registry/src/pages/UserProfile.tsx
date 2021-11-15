@@ -2,8 +2,8 @@ import React, { useCallback, useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth0 } from '@auth0/auth0-react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
-import Link from '@material-ui/core/Link';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import Link from '@mui/material/Link';
 
 import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
@@ -64,14 +64,14 @@ function UserProfile(): JSX.Element {
   const { data: userProfileData } = useGetUserProfileByEmailQuery({
     skip: !userEmail,
     variables: {
-      email: userEmail,
+      email: userEmail as string,
     },
   });
 
   const [updateUserByEmail] = useUpdateUserByEmailMutation();
   const [updatePartyById] = useUpdatePartyByIdMutation();
 
-  const [error, setError] = useState<Error | null>(null);
+  const [error, setError] = useState<unknown>(null);
   const [status, setStatus] = useState<string | null>(null);
   const [isSubmitting, setSubmitting] = useState<boolean>(false);
   const [initialFieldValues, setInitialFieldValues] = useState<
@@ -114,7 +114,7 @@ function UserProfile(): JSX.Element {
       await updateUserByEmail({
         variables: {
           input: {
-            email: userEmail,
+            email: userEmail as string,
             userPatch: {
               phoneNumber: values.phone,
               roleTitle: values.roleTitle,
@@ -154,7 +154,9 @@ function UserProfile(): JSX.Element {
               <Link onClick={resendEmail}>Resend</Link> confirmation email.
             </Description>
           </OnBoardingCard>
-          {!isSubmitting && error && <ErrorBanner text={error.toString()} />}
+          {!isSubmitting && error instanceof Object && (
+            <ErrorBanner text={error.toString()} />
+          )}
           {!isSubmitting && status && <Banner text={status} />}
         </>
       )}

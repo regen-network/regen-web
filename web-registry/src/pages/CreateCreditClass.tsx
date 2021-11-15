@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import CardMedia from '@material-ui/core/CardMedia';
-import Box from '@material-ui/core/Box';
-import Grid from '@material-ui/core/Grid';
+import { makeStyles, useTheme } from '@mui/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import CardMedia from '@mui/material/CardMedia';
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
 
 import Section from 'web-components/lib/components/section';
 import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';

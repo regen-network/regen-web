@@ -1,6 +1,6 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
-import { Typography } from '@material-ui/core';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import { Typography } from '@mui/material';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useHistory } from 'react-router-dom';
 
@@ -46,7 +46,7 @@ const ProjectList: React.FC = () => {
   const { data } = useGetUserProfileByEmailQuery({
     skip: !userEmail,
     variables: {
-      email: userEmail,
+      email: userEmail as string,
     },
   });
 

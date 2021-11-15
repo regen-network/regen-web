@@ -2,7 +2,7 @@ import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import BackgroundImage from 'gatsby-background-image';
 import { FluidObject } from 'gatsby-image';
-import { Theme, makeStyles } from '@material-ui/core';
+import { Theme, makeStyles } from '@mui/material';
 
 import TokenPool from './TokenPool';
 

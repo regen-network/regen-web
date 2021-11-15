@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import Box from '@material-ui/core/Box';
+import { makeStyles, useTheme } from '@mui/styles';
+import Box from '@mui/material/Box';
 
 import Modal from 'web-components/lib/components/modal';
 import Section from 'web-components/lib/components/section';

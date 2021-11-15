@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
-import Snackbar from '@material-ui/core/Snackbar';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import Snackbar from '@mui/material/Snackbar';
 
 export interface BannerBaseProps {
   text: string;
@@ -30,7 +30,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       paddingRight: theme.spacing(37.5),
       paddingLeft: theme.spacing(37.5),
     },
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       paddingRight: theme.spacing(10),
       paddingLeft: theme.spacing(10),
     },
@@ -44,7 +44,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       paddingBottom: theme.spacing(5),
       fontSize: theme.spacing(5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       padding: theme.spacing(3.25),
       fontSize: theme.spacing(3.5),
       height: theme.spacing(11.5),

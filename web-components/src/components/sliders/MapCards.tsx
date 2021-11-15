@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, Theme, useTheme } from '@material-ui/core';
+import { makeStyles, DefaultTheme as Theme, useTheme } from '@mui/styles';
 import Slider from 'react-slick';
 import MapCard from '../cards/MapCard';
 

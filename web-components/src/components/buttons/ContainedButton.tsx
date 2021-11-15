@@ -1,6 +1,6 @@
 import React from 'react';
-import { withStyles, Theme } from '@material-ui/core/styles';
-import Button, { ButtonProps } from '@material-ui/core/Button';
+import { withStyles, DefaultTheme as Theme } from '@mui/styles';
+import Button, { ButtonProps } from '@mui/material/Button';
 
 interface ContainedButtonProps extends ButtonProps {
   target?: string;
@@ -16,7 +16,7 @@ const CustomButton = withStyles((theme: Theme) => ({
     letterSpacing: '1px',
     boxShadow: 'none',
     whiteSpace: 'nowrap',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       padding: theme.spacing(3, 6),
       fontSize: '1.125rem',
     },

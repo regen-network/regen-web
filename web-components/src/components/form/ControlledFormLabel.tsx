@@ -1,6 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
-import { Theme, makeStyles } from '@material-ui/core';
+import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
 
 interface Props {
   children: React.ReactNode;
@@ -26,6 +26,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     color: props.disabled
       ? theme.palette.info.main
       : theme.palette.primary.contrastText,
+      
     fontFamily: theme.typography.fontFamily,
     fontWeight: 'bold',
     position: 'relative',
@@ -33,7 +34,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.spacing(4.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(4),
     },
     '&::after': {
@@ -43,7 +44,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       [theme.breakpoints.up('sm')]: {
         fontSize: theme.spacing(4),
       },
-      [theme.breakpoints.down('xs')]: {
+      [theme.breakpoints.down('sm')]: {
         fontSize: theme.spacing(3.5),
       },
     },
@@ -55,7 +56,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.spacing(4),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(3.5),
     },
   },

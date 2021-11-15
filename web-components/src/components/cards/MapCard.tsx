@@ -1,9 +1,9 @@
 import React from 'react';
-import { makeStyles, useTheme, Theme } from '@material-ui/core';
-import Grid from '@material-ui/core/Grid';
+import { makeStyles, useTheme, DefaultTheme as Theme } from '@mui/styles';
+import Grid from '@mui/material/Grid';
 import Card from './Card';
 import CloseIcon from '../icons/CloseIcon';
-// import useMediaQuery from '@material-ui/core/useMediaQuery';
+// import useMediaQuery from '@mui/material/useMediaQuery';
 
 export interface MapCardProps {
   name: string;
@@ -25,7 +25,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       height: theme.spacing(25),
       paddingRight: theme.spacing(5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       width: theme.spacing(19.25),
       height: theme.spacing(19.25),
       paddingRight: theme.spacing(3.75),
@@ -39,7 +39,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
         7.25,
       )}`,
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       borderTop: props => `solid 6px ${props.color}`,
       padding: `${theme.spacing(6)} ${theme.spacing(3.75)} ${theme.spacing(
         4.25,
@@ -51,7 +51,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: '1.375rem',
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: '1rem',
     },
     fontFamily: theme.typography.fontFamily,
@@ -65,7 +65,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       paddingTop: theme.spacing(3),
       fontSize: '1rem',
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(2),
       fontSize: '0.75rem',
     },

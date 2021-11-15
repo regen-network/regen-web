@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useTheme, makeStyles, IconButton } from '@material-ui/core';
+import { useTheme, makeStyles, IconButton } from '@mui/material';
 import { WalletIcon } from 'web-components/lib/components/icons/WalletIcon';
 import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 

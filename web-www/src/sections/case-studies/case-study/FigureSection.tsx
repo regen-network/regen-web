@@ -1,6 +1,6 @@
 import React from 'react';
-import { Theme, makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
+import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+import Grid from '@mui/material/Grid';
 import Img, { FluidObject } from 'gatsby-image';
 
 import BackgroundSection from '../../../components/BackgroundSection';

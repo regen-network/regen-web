@@ -1,7 +1,7 @@
 import React from 'react';
 import LazyLoad from 'react-lazyload';
-import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { makeStyles, DefaultTheme as Theme, useTheme } from '@mui/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import cx from 'clsx';
 
 import Section from 'web-components/lib/components/section';

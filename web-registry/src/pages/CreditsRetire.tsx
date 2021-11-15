@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormControl from '@material-ui/core/FormControl';
-import Input from '@material-ui/core/Input';
-import Box from '@material-ui/core/Box';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import Button from '@mui/material/Button';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import InputLabel from '@mui/material/InputLabel';
+import FormControl from '@mui/material/FormControl';
+import Input from '@mui/material/Input';
+import Box from '@mui/material/Box';
 
 import Title from 'web-components/lib/components/title';
 import { pluralize } from 'web-components/lib/utils/pluralize';

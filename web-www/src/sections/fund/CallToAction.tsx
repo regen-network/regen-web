@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { makeStyles, Theme, Link, Grid, Avatar } from '@material-ui/core';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import { Link, Grid, Avatar } from '@mui/material';
 import { graphql, useStaticQuery } from 'gatsby';
 import Img from 'gatsby-image';
 import ReactHtmlParser from 'react-html-parser';

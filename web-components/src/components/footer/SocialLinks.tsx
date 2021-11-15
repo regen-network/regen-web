@@ -1,8 +1,8 @@
 import React from 'react';
 import cx from 'clsx';
-import { makeStyles } from '@material-ui/core';
-import Grid from '@material-ui/core/Grid';
-import Link from '@material-ui/core/Link';
+import { makeStyles } from '@mui/styles';
+import Grid from '@mui/material/Grid';
+import Link from '@mui/material/Link';
 
 import Title from '../title';
 import InstagramIcon from '../icons/social/InstagramIcon';
@@ -29,7 +29,7 @@ const useStyles = makeStyles(theme => ({
       lineHeight: theme.spacing(6.5),
       marginBottom: theme.spacing(3.75),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       lineHeight: theme.spacing(4.5),
       fontSize: theme.spacing(3.5),
       marginBottom: theme.spacing(4.5),
@@ -39,7 +39,7 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up('sm')]: {
       justifyContent: 'center',
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginLeft: theme.spacing(-2),
       justifyContent: 'space-between',
     },
@@ -51,7 +51,7 @@ const useStyles = makeStyles(theme => ({
       marginLeft: theme.spacing(2.5),
       marginRight: theme.spacing(2.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       width: theme.spacing(7.75),
       height: theme.spacing(7.75),
     },

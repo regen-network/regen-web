@@ -1,10 +1,6 @@
 import React from 'react';
-import {
-  makeStyles,
-  Theme,
-  Input as MuiInput,
-  InputProps,
-} from '@material-ui/core';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import { Input as MuiInput, InputProps } from '@mui/material';
 import cx from 'clsx';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -17,7 +13,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       fontSize: theme.typography.pxToRem(16),
       lineHeight: theme.typography.pxToRem(24),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       padding: theme.spacing(2),
       fontSize: theme.typography.pxToRem(14),
       lineHeight: theme.typography.pxToRem(21),

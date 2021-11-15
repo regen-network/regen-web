@@ -1,5 +1,5 @@
 import React from 'react';
-import { useTheme } from '@material-ui/core/styles';
+import { useTheme } from '@mui/styles';
 
 import Banner, { BannerBaseProps } from './';
 

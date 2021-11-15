@@ -1,9 +1,9 @@
 import React from 'react';
-import { makeStyles, useTheme, Theme } from '@material-ui/core';
-import Grid from '@material-ui/core/Grid';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { makeStyles, useTheme, DefaultTheme as Theme } from '@mui/styles';
+import Grid from '@mui/material/Grid';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
-import Typography from '@material-ui/core/Typography';
+import Typography from '@mui/material/Typography';
 import CurrentCreditsIcon from '../icons/CurrentCreditsIcon';
 import ContainedButton from '../buttons/ContainedButton';
 import FixedFooter from './';
@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: '1.125rem',
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: '0.75rem',
     },
   },
@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: '1.3125rem',
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: '1.125rem',
     },
   },
@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingLeft: theme.spacing(3.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingLeft: theme.spacing(1.5),
     },
   },

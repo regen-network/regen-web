@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import { useHistory, useParams } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 
@@ -97,7 +97,7 @@ const Roles: React.FC = () => {
   const styles = useStyles();
   const activeStep = 0;
   const history = useHistory();
-  const { projectId } = useParams();
+  const { projectId } = useParams<{ projectId: string }>();
   const { user } = useAuth0();
   const userEmail = user?.email;
 
@@ -108,7 +108,7 @@ const Roles: React.FC = () => {
   const { data: userProfileData } = useGetOrganizationProfileByEmailQuery({
     skip: !userEmail,
     variables: {
-      email: userEmail,
+      email: userEmail as string,
     },
   });
 

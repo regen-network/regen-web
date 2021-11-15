@@ -1,6 +1,6 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import { Theme, makeStyles } from '@material-ui/core/styles';
+import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
 import Img from 'gatsby-image';
 
 import Section from 'web-components/lib/components/section';

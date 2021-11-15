@@ -1,6 +1,6 @@
 import React from 'react';
-import { makeStyles, useTheme, useMediaQuery } from '@material-ui/core';
-import Grid from '@material-ui/core/Grid';
+import { makeStyles, useTheme, useMediaQuery } from '@mui/material';
+import Grid from '@mui/material/Grid';
 import cx from 'clsx';
 
 import Section from 'web-components/lib/components/section';

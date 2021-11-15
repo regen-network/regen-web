@@ -1,8 +1,8 @@
-import { createMuiTheme } from '@material-ui/core/styles';
-import { ThemeOptions } from '@material-ui/core/styles/createMuiTheme';
-import { MuiPickersOverrides } from '@material-ui/pickers/typings/overrides';
+import { createTheme, adaptV4Theme } from '@mui/material/styles';
+// import { DeprecatedThemeOptions } from '@mui/material/styles/createTheme';
+// import { MuiPickersOverrides } from '@mui/lab/typings/overrides';
 
-declare module '@material-ui/core/styles/createBreakpoints' {
+declare module '@mui/material/styles' {
   interface BreakpointOverrides {
     xs: true;
     sm: true;
@@ -13,7 +13,7 @@ declare module '@material-ui/core/styles/createBreakpoints' {
   }
 }
 
-const defaultTheme = createMuiTheme({
+const defaultTheme = createTheme({
   breakpoints: {
     values: {
       xs: 0,
@@ -26,7 +26,7 @@ const defaultTheme = createMuiTheme({
   },
 });
 
-const theme = createMuiTheme({
+const theme = createTheme(adaptV4Theme({
   palette: {
     primary: {
       main: '#fff',
@@ -61,14 +61,14 @@ const theme = createMuiTheme({
     // contrastThreshold: 3,
     // tonalOffset: 0.2,
   },
-  spacing: factor => `${0.25 * factor}rem`,
+  spacing: (factor: number) => `${0.25 * factor}rem`,
   typography: {
     fontFamily: ['"Lato"', '-apple-system', 'sans-serif'].join(','),
     h1: {
       [defaultTheme.breakpoints.up('sm')]: {
         fontSize: '3rem',
       },
-      [defaultTheme.breakpoints.down('xs')]: {
+      [defaultTheme.breakpoints.down('sm')]: {
         fontSize: '2rem',
       },
       fontFamily: ['"Muli"', '-apple-system', 'sans-serif'].join(','),
@@ -77,7 +77,7 @@ const theme = createMuiTheme({
       [defaultTheme.breakpoints.up('sm')]: {
         fontSize: '2.375rem',
       },
-      [defaultTheme.breakpoints.down('xs')]: {
+      [defaultTheme.breakpoints.down('sm')]: {
         fontSize: '1.5rem',
       },
     },
@@ -85,7 +85,7 @@ const theme = createMuiTheme({
       [defaultTheme.breakpoints.up('sm')]: {
         fontSize: '2rem',
       },
-      [defaultTheme.breakpoints.down('xs')]: {
+      [defaultTheme.breakpoints.down('sm')]: {
         fontSize: '1.5rem', // possible override: 1.3125rem
       },
     },
@@ -93,7 +93,7 @@ const theme = createMuiTheme({
       [defaultTheme.breakpoints.up('sm')]: {
         fontSize: '1.5rem',
       },
-      [defaultTheme.breakpoints.down('xs')]: {
+      [defaultTheme.breakpoints.down('sm')]: {
         fontSize: '1.3125rem', // possible override: 1.125rem
       },
     },
@@ -101,7 +101,7 @@ const theme = createMuiTheme({
       [defaultTheme.breakpoints.up('sm')]: {
         fontSize: '1.3125rem',
       },
-      [defaultTheme.breakpoints.down('xs')]: {
+      [defaultTheme.breakpoints.down('sm')]: {
         fontSize: '1.125rem',
       },
     },
@@ -112,7 +112,7 @@ const theme = createMuiTheme({
       [defaultTheme.breakpoints.up('sm')]: {
         fontSize: '2.375rem',
       },
-      [defaultTheme.breakpoints.down('xs')]: {
+      [defaultTheme.breakpoints.down('sm')]: {
         fontSize: '2rem',
       },
     },
@@ -120,7 +120,7 @@ const theme = createMuiTheme({
       [defaultTheme.breakpoints.up('sm')]: {
         fontSize: '1rem',
       },
-      [defaultTheme.breakpoints.down('xs')]: {
+      [defaultTheme.breakpoints.down('sm')]: {
         fontSize: '0.875rem',
       },
     },
@@ -177,9 +177,9 @@ const theme = createMuiTheme({
       },
     },
   },
-});
+}));
 
-const muiPickersOverrides: MuiPickersOverrides = {
+const muiPickersOverrides = {
   // see: https://github1s.com/mui-org/material-ui-pickers/blob/HEAD/lib/src/typings/overrides.ts
   MuiPickersDatePickerRoot: {
     toolbar: {
@@ -216,14 +216,14 @@ const muiPickersOverrides: MuiPickersOverrides = {
   },
 };
 
-const themeObject: ThemeOptions = {
+const themeObject = {
   ...theme,
   overrides: {
     ...muiPickersOverrides,
   },
 };
 
-const regenTheme = createMuiTheme(themeObject);
+const regenTheme = createTheme(adaptV4Theme(themeObject));
 type Theme = typeof regenTheme;
 
 export { Theme }; // avoid having to do manual type definitions for added breakpoint values by importing here instead of MUI

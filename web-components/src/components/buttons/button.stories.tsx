@@ -2,7 +2,7 @@ import * as React from 'react';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 import PrevNextButton from 'web-components/lib/components/buttons/PrevNextButton';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 
 export default {
   title: 'Buttons',

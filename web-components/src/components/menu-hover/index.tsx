@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import { Popover, MenuList, Paper, Theme } from '@material-ui/core';
+import { makeStyles } from '@mui/styles';
+import { DefaultTheme as Theme } from '@mui/styles';
+import { Popover, MenuList, Paper } from '@mui/material';
 import DropdownIcon from '../icons/DropdownIcon';
 
 const useStyles = makeStyles((theme: Theme) => ({

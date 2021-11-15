@@ -1,7 +1,7 @@
 import React, { useRef, useCallback } from 'react';
-import { makeStyles, useTheme, Theme } from '@material-ui/core/styles';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import Grid from '@material-ui/core/Grid';
+import { makeStyles, useTheme, DefaultTheme as Theme } from '@mui/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import Grid from '@mui/material/Grid';
 // import LandManagementActionsItem, { ItemProps } from './Item';
 import Slider from 'react-slick';
 import PrevNextButton from '../buttons/PrevNextButton';
@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   buttons: {
     paddingTop: theme.spacing(0.25),
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(3.75),
       paddingBottom: theme.spacing(10),
     },
@@ -79,7 +79,7 @@ export default function LandManagementActions({
         ))}
       </Slider>
       {actions.length > slides && (
-        <Grid container justify="flex-end" className={classes.buttons}>
+        <Grid container justifyContent="flex-end" className={classes.buttons}>
           <PrevNextButton direction="prev" onClick={slickPrev} />
           <PrevNextButton direction="next" onClick={slickNext} />
         </Grid>

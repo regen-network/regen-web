@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { makeStyles, Theme, Collapse, useTheme } from '@material-ui/core';
-import { Button } from '@material-ui/core';
+import { makeStyles, DefaultTheme as Theme, useTheme } from '@mui/styles';
+import { Collapse } from '@mui/material';
+import { Button } from '@mui/material';
 import clsx from 'clsx';
 
 import MinusIcon from '../icons/MinusIcon';
@@ -66,7 +67,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   answer: {
     paddingBottom: theme.spacing(4),
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(4),
     },
   },

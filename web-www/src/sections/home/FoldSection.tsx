@@ -1,10 +1,10 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import clsx from 'clsx';
 import BackgroundImage from 'gatsby-background-image';
 import VideoPopup from '../../components/videoPopup';
-import Typography from '@material-ui/core/Typography';
+import Typography from '@mui/material/Typography';
 import Title from 'web-components/lib/components/title';
 
 interface Props {

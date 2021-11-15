@@ -1,11 +1,11 @@
 import React from 'react';
-import { makeStyles, useTheme, Theme } from '@material-ui/core';
-import Grid, { GridJustification } from '@material-ui/core/Grid';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { makeStyles, useTheme, DefaultTheme as Theme } from '@mui/styles';
+import Grid, { GridProps } from '@mui/material/Grid';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 interface FixedFooterProps {
   children?: any;
-  justify?: GridJustification;
+  justify?: GridProps['justifyContent'];
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       height: theme.spacing(24),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       height: theme.spacing(19),
     },
     boxShadow: theme.shadows[7],
@@ -30,11 +30,11 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingRight: theme.spacing(37.5),
       paddingLeft: theme.spacing(37.5),
     },
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       paddingRight: theme.spacing(10),
       paddingLeft: theme.spacing(10),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       height: theme.spacing(19),
       paddingRight: theme.spacing(4),
       paddingLeft: theme.spacing(4),
@@ -68,7 +68,9 @@ export default function FixedFooter({
         container
         wrap="nowrap"
         alignItems="center"
-        justify={justify ? justify : matches ? 'flex-end' : 'space-between'}
+        justifyContent={
+          justify ? justify : matches ? 'flex-end' : 'space-between'
+        }
         className={classes.root}
       >
         {children}

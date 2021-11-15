@@ -1,6 +1,6 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
-import Typography from '@material-ui/core/Typography';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import Typography from '@mui/material/Typography';
 import MediaCard from './MediaCard';
 import CreditPlaceInfo from '../place/CreditPlaceInfo';
 import Credits from '../credits';

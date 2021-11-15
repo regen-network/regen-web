@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import { Theme, makeStyles, Collapse } from '@material-ui/core';
+import { Theme, makeStyles, Collapse } from '@mui/material';
 import ReCAPTCHA from 'react-google-recaptcha';
 import axios from 'axios';
 

@@ -1,14 +1,14 @@
 import React from 'react';
 import clsx from 'clsx';
-import { Theme } from '@material-ui/core';
+import { DefaultTheme as Theme } from '@mui/styles';
 import {
   withStyles,
   createStyles,
   makeStyles,
   useTheme,
-} from '@material-ui/styles';
-import LinearProgress from '@material-ui/core/LinearProgress';
-import Grid from '@material-ui/core/Grid';
+} from '@mui/styles';
+import LinearProgress from '@mui/material/LinearProgress';
+import Grid from '@mui/material/Grid';
 
 import FixedFooter from './';
 import ArrowDownIcon from '../icons/ArrowDownIcon';
@@ -25,7 +25,7 @@ const StyledLinearProgress = withStyles((theme: Theme) =>
       [theme.breakpoints.up('sm')]: {
         height: theme.spacing(1.75),
       },
-      [theme.breakpoints.down('xs')]: {
+      [theme.breakpoints.down('sm')]: {
         height: theme.spacing(1.5),
       },
       borderRadius: theme.spacing(0, 2, 2, 0),
@@ -62,7 +62,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       justifyContent: 'space-between',
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       justifyContent: 'flex-end',
     },
   }),
@@ -71,7 +71,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       justifyContent: 'space-between',
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       justifyContent: 'flex-end',
     },
   },
@@ -82,7 +82,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.spacing(4),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(3),
     },
   },

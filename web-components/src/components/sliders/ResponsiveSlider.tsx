@@ -1,8 +1,8 @@
 import React, { useState, useRef, useCallback } from 'react';
-import { makeStyles, Theme, useTheme } from '@material-ui/core';
-import { Variant } from '@material-ui/core/styles/createTypography';
-import Grid from '@material-ui/core/Grid';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { makeStyles, DefaultTheme as Theme, useTheme } from '@mui/styles';
+import { Variant } from '@mui/material/styles/createTypography';
+import Grid from '@mui/material/Grid';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import Slider, { Settings as SlickSettings } from 'react-slick';
 import cx from 'clsx';
 
@@ -22,7 +22,7 @@ export interface ResponsiveSliderProps {
     title?: string;
     headerWrap?: string;
   };
-  padding?: number;
+  padding?: string | number;
   itemWidth?: string;
   infinite?: boolean;
   dots?: boolean;
@@ -31,14 +31,14 @@ export interface ResponsiveSliderProps {
 
 interface StyleProps {
   gridView: boolean;
-  padding?: number;
+  padding?: string | number;
   title?: string;
   itemWidth?: string;
 }
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   root: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(11.75),
     },
     [theme.breakpoints.up('sm')]: {
@@ -46,7 +46,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     },
   },
   slider: props => ({
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       width: props.itemWidth || '70%',
       paddingTop: props.title ? theme.spacing(4) : 0,
     },
@@ -91,7 +91,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
         height: 'inherit',
         display: 'flex',
         margin: theme.spacing(4, 0),
-        [theme.breakpoints.down('xs')]: {
+        [theme.breakpoints.down('sm')]: {
           paddingRight: theme.spacing(5),
           '&:last-child': {
             paddingRight: 0,
@@ -110,7 +110,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     textTransform: 'uppercase',
     fontWeight: 800,
     color: theme.palette.info.main,
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(3.5),
     },
   },
@@ -153,7 +153,7 @@ export default function ResponsiveSlider({
 
   const xl = useMediaQuery(theme.breakpoints.up('xl'));
   const desktop = useMediaQuery(theme.breakpoints.up('tablet'));
-  const mobile = useMediaQuery(theme.breakpoints.down('xs'));
+  const mobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const gridView: boolean = !slidesToShow && desktop && !xl && items.length > 3;
   const rows: number = gridView ? 2 : 1;
@@ -227,7 +227,7 @@ export default function ResponsiveSlider({
             sm={4}
             container
             item
-            justify="flex-end"
+            justifyContent="flex-end"
             className={styles.buttons}
           >
             <PrevNextButton

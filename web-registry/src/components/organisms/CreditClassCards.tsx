@@ -1,9 +1,9 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import clsx from 'clsx';
-import { makeStyles, Theme, useTheme } from '@material-ui/core';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import Grid from '@material-ui/core/Grid';
+import { makeStyles, DefaultTheme as Theme, useTheme } from '@mui/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import Grid from '@mui/material/Grid';
 
 import ImageActionCard from 'web-components/lib/components/cards/ImageActionCard';
 import { BlockContent } from 'web-components/lib/components/block-content';

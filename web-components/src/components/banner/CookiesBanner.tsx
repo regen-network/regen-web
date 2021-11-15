@@ -1,9 +1,9 @@
 import React, { useCallback, useState, useEffect } from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
-import Grid from '@material-ui/core/Grid';
-import Link from '@material-ui/core/Link';
-import Typography from '@material-ui/core/Typography';
-import Backdrop from '@material-ui/core/Backdrop';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import Grid from '@mui/material/Grid';
+import Link from '@mui/material/Link';
+import Typography from '@mui/material/Typography';
+import Backdrop from '@mui/material/Backdrop';
 import Cookies from 'js-cookie';
 
 // TODO use Section component
@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       height: theme.spacing(19),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(5),
       paddingBottom: theme.spacing(5),
     },
@@ -71,11 +71,11 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingRight: theme.spacing(37.5),
       paddingLeft: theme.spacing(37.5),
     },
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       paddingRight: theme.spacing(10),
       paddingLeft: theme.spacing(10),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       height: theme.spacing(19),
       paddingRight: theme.spacing(4),
       paddingLeft: theme.spacing(4),
@@ -103,7 +103,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.spacing(4),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(3),
     },
   },
@@ -113,7 +113,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       height: theme.spacing(8.75),
       minWidth: theme.spacing(33.25),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       height: theme.spacing(8.75),
       minWidth: theme.spacing(22),
     },
@@ -125,7 +125,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingLeft: theme.spacing(8.5),
       fontSize: theme.spacing(3.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(2.5),
       fontSize: theme.spacing(3),
       textAlign: 'center',
@@ -139,7 +139,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       flexDirection: 'row',
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       flexDirection: 'column',
     },
   },
@@ -182,7 +182,7 @@ export default function CookiesBanner({
             container
             wrap="nowrap"
             alignItems="center"
-            justify="space-between"
+            justifyContent="space-between"
             className={classes.root}
           >
             <Typography className={classes.text}>

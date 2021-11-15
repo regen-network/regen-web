@@ -1,6 +1,6 @@
 import React from 'react';
-import SvgIcon from '@material-ui/core/SvgIcon';
-import { makeStyles, Theme } from '@material-ui/core';
+import SvgIcon from '@mui/material/SvgIcon';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import clsx from 'clsx';
 
 import withHoverColor, { Props } from './withHoverColor';
@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       width: theme.spacing(16),
       height: theme.spacing(16.25),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       width: theme.spacing(12.5),
       height: theme.spacing(12.75),
     },

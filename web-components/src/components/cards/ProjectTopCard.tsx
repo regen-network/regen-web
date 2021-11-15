@@ -1,6 +1,6 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
+import { makeStyles } from '@mui/styles';
+import Grid from '@mui/material/Grid';
 import cx from 'clsx';
 
 import Card from './Card';
@@ -29,7 +29,7 @@ interface ProjectTopCardProps {
 const useStyles = makeStyles(theme => ({
   root: {
     backgroundColor: theme.palette.grey[50],
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       padding: `${theme.spacing(8)} ${theme.spacing(7.5)} ${theme.spacing(9)}`,
     },
     [theme.breakpoints.up('sm')]: {
@@ -49,7 +49,7 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
   },
   sdg: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(3),
     },
     [theme.breakpoints.up('sm')]: {
@@ -57,7 +57,7 @@ const useStyles = makeStyles(theme => ({
     },
   },
   sdgs: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(14.25),
     },
     [theme.breakpoints.up('sm')]: {
@@ -65,7 +65,7 @@ const useStyles = makeStyles(theme => ({
     },
   },
   userInfo: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginBottom: theme.spacing(12),
     },
     [theme.breakpoints.up('sm')]: {
@@ -74,7 +74,7 @@ const useStyles = makeStyles(theme => ({
   },
   sdgGridItem: {
     '&:nth-child(odd)': {
-      [theme.breakpoints.down('xs')]: {
+      [theme.breakpoints.down('sm')]: {
         paddingRight: theme.spacing(5.5 / 2),
       },
       [theme.breakpoints.up('sm')]: {
@@ -82,14 +82,14 @@ const useStyles = makeStyles(theme => ({
       },
     },
     '&:nth-child(even)': {
-      [theme.breakpoints.down('xs')]: {
+      [theme.breakpoints.down('sm')]: {
         paddingLeft: theme.spacing(5.5 / 2),
       },
       [theme.breakpoints.up('sm')]: {
         paddingLeft: theme.spacing(6.8 / 2),
       },
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(5.5),
     },
     [theme.breakpoints.up('sm')]: {
@@ -98,7 +98,7 @@ const useStyles = makeStyles(theme => ({
   },
   sdgGrid: {
     '&:not(:last-child)': {
-      [theme.breakpoints.down('xs')]: {
+      [theme.breakpoints.down('sm')]: {
         paddingBottom: theme.spacing(6.25),
       },
       [theme.breakpoints.up('sm')]: {

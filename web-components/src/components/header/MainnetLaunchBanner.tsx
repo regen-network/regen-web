@@ -1,6 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
-import { Link, makeStyles, Theme, Typography } from '@material-ui/core';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import { Link, Typography } from '@mui/material';
 
 import Countdown from '../countdown';
 
@@ -17,7 +18,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('md')]: {
       padding: theme.spacing(5, 0),
     },
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       padding: theme.spacing(4, 0),
       borderBottom: `5px solid ${bannerBlue}`, // TODO: this is a hack to get around a weird display glitch that seems to be caused by the mobile drawer
     },
@@ -28,7 +29,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('md')]: {
       fontSize: theme.spacing(5),
     },
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       fontSize: theme.spacing(4),
     },
   },

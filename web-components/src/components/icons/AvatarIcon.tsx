@@ -1,6 +1,6 @@
 import React from 'react';
-import SvgIcon from '@material-ui/core/SvgIcon';
-import { makeStyles } from '@material-ui/core';
+import SvgIcon from '@mui/material/SvgIcon';
+import { makeStyles } from '@mui/styles';
 import cx from 'clsx';
 
 interface IconProps {

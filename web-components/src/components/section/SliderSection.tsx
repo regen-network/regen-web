@@ -1,6 +1,6 @@
 import React from 'react';
-import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { makeStyles, DefaultTheme as Theme, useTheme } from '@mui/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import LazyLoad from 'react-lazyload';
 import cx from 'clsx';
 
@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingTop: theme.spacing(30),
       paddingBottom: theme.spacing(30),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(20),
       paddingBottom: theme.spacing(20),
     },
@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.typography.pxToRem(38),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.typography.pxToRem(32),
     },
   },
@@ -60,9 +60,9 @@ function SliderSection({
 }: SliderSectionProps): JSX.Element {
   const styles = useStyles();
   const theme: Theme = useTheme();
-  const isMobile: boolean = useMediaQuery(theme.breakpoints.down('xs'));
+  const isMobile: boolean = useMediaQuery(theme.breakpoints.down('sm'));
   const isTablet: boolean = useMediaQuery(
-    theme.breakpoints.between('xs', 'sm'),
+    theme.breakpoints.between('xs', 'md'),
   );
   const isDesktop: boolean = useMediaQuery(theme.breakpoints.up('sm'));
   const slidesCount: number = isMobile ? 1 : isTablet ? 2 : 3;

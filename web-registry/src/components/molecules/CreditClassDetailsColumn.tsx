@@ -1,6 +1,6 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core';
-import { Avatar } from '@material-ui/core';
+import { makeStyles } from '@mui/styles';
+import { Avatar } from '@mui/material';
 import cx from 'clsx';
 
 import Card from 'web-components/lib/components/cards/Card';

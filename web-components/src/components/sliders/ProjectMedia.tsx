@@ -1,6 +1,7 @@
 import React, { useState, useRef, useCallback, useLayoutEffect } from 'react';
-import { makeStyles, Theme, useMediaQuery, useTheme } from '@material-ui/core';
-import Grid from '@material-ui/core/Grid';
+import { makeStyles, DefaultTheme as Theme, useTheme } from '@mui/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import Grid from '@mui/material/Grid';
 import Slider from 'react-slick';
 import PlayIcon from '../icons/PlayIcon';
 import { Image, OptimizeImageProps } from '../image';
@@ -28,11 +29,11 @@ interface StyleProps {
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   root: props => ({
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginBottom: theme.spacing(8.75),
     },
     '& .slick-slide img': {
-      [theme.breakpoints.down('xs')]: {
+      [theme.breakpoints.down('sm')]: {
         height: props.mobileHeight ? props.mobileHeight : 'inherit',
         objectFit: props.mobileHeight ? 'cover' : 'inherit',
         objectPosition: '0% 0%',
@@ -62,7 +63,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
           },
         },
       },
-      [theme.breakpoints.down('xs')]: {
+      [theme.breakpoints.down('sm')]: {
         height: theme.spacing(6),
         '& ul': {
           margin: '8px 0 -6.5px',
@@ -109,7 +110,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       borderRadius: '5px',
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       borderRadius: props.xsBorderRadius ? '5px' : 'none',
     },
   }),
@@ -161,7 +162,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       left: theme.typography.pxToRem(13),
       bottom: theme.typography.pxToRem(9),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.typography.pxToRem(11),
       left: theme.typography.pxToRem(9),
       bottom: theme.typography.pxToRem(6),

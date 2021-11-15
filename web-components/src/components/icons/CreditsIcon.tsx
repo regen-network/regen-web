@@ -1,9 +1,9 @@
 import React from 'react';
-import SvgIcon from '@material-ui/core/SvgIcon';
+import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
 
 interface CreditsIconProps {
   color: string;
-  fontSize?: 'inherit' | 'default' | 'small' | 'large';
+  fontSize?: SvgIconProps['fontSize'];
 }
 
 export default function CreditsIcon({

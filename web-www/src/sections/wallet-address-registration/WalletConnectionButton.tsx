@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import { Theme, makeStyles } from '@material-ui/core';
+import { Theme, makeStyles } from '@mui/material';
 import ReactHtmlParser from 'react-html-parser';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import { Alert, AlertTitle } from '@material-ui/lab';
+import { Alert, AlertTitle } from '@mui/lab';
 
 interface WalletConnectionButtonProps {
   isKeplrDetected: boolean;

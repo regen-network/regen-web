@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
+import { makeStyles, DefaultTheme as Theme, useTheme } from '@mui/styles';
 import clsx from 'clsx';
 
 import BreadcrumbIcon from '../icons/BreadcrumbIcon';
@@ -44,13 +44,13 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       paddingTop: props.first ? theme.spacing(7) : theme.spacing(12.5),
       paddingBottom: theme.spacing(12.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: props.first ? theme.spacing(7) : theme.spacing(10.75),
       paddingBottom: theme.spacing(10.75),
     },
   }),
   container: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       padding: `0 ${theme.spacing(5.25)}`,
     },
     [theme.breakpoints.up('sm')]: {
@@ -74,7 +74,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       width: theme.spacing(8.25),
       marginLeft: theme.spacing(5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       height: theme.spacing(3.5),
       width: theme.spacing(5.75),
       marginLeft: theme.spacing(3.125),
@@ -89,7 +89,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       height: theme.spacing(21.75),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       height: theme.spacing(18),
     },
   },
@@ -98,7 +98,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       maxHeight: theme.spacing(21.75),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       maxHeight: theme.spacing(18),
     },
   },
@@ -132,7 +132,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       fontSize: theme.spacing(4.5),
       marginRight: theme.spacing(14.25),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(4),
       marginRight: theme.spacing(5.75),
     },
@@ -157,7 +157,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       width: theme.spacing(7.5),
       height: theme.spacing(7.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       width: theme.spacing(5.5),
       height: theme.spacing(5.5),
     },

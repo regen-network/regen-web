@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@mui/styles';
 import { useLocation } from 'react-router-dom';
 import FixedFooter from 'web-components/lib/components/fixed-footer';
 import Modal from 'web-components/lib/components/modal';

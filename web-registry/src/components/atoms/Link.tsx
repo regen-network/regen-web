@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import MuiLink from '@material-ui/core/Link';
+import MuiLink from '@mui/material/Link';
 
 /**
  * @returns a Material UI `Link` - will use React Router for local links

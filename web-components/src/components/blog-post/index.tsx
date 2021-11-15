@@ -1,6 +1,6 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
-import Typography from '@material-ui/core/Typography';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import Typography from '@mui/material/Typography';
 import Title from '../title';
 import OutlinedButton from '../buttons/OutlinedButton';
 
@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       width: '100%',
       borderRadius: '10px',
       border: `1px solid ${theme.palette.info.light}`,
-      [theme.breakpoints.down('xs')]: {
+      [theme.breakpoints.down('sm')]: {
         height: theme.spacing(50.75),
       },
       [theme.breakpoints.up('sm')]: {
@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingTop: theme.spacing(5),
       paddingBottom: theme.spacing(3),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(3.25),
       paddingBottom: theme.spacing(2),
     },
@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.spacing(4),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(3.5),
     },
     color: theme.palette.info.dark,

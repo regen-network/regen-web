@@ -1,7 +1,8 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import { FieldProps } from 'formik';
-import { DatePicker, DatePickerView } from '@material-ui/pickers';
+import { DatePicker } from '@mui/lab';
+import TextField from '@mui/material/TextField';
 
 import FieldFormControl from './FieldFormControl';
 
@@ -10,7 +11,6 @@ interface DatePickProps extends FieldProps {
   label: string;
   optional?: boolean;
   placeholder?: string;
-  pickerViews: DatePickerView[];
 }
 
 interface StyleProps {
@@ -36,7 +36,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       padding: theme.spacing(3.5),
       fontSize: `${theme.spacing(3.5)}`,
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       padding: theme.spacing(3.25),
       fontSize: `${theme.spacing(4)}`,
     },
@@ -51,7 +51,6 @@ export default function DatePickField({
   className,
   optional = false,
   placeholder,
-  pickerViews,
   ...fieldProps
 }: DatePickProps): JSX.Element {
   const { form, field } = fieldProps;
@@ -67,16 +66,17 @@ export default function DatePickField({
     >
       {({ handleChange }) => (
         <DatePicker
-          autoOk
-          variant="inline"
+          // autoOk
+          // variant="inline"
+          renderInput={params => <TextField {...params} />}
           openTo="year"
           disabled={form.isSubmitting}
           className={classes.input}
-          placeholder="Click to choose a date"
+          toolbarPlaceholder="Click to choose a date"
           views={['year', 'month']}
           value={field.value}
           onChange={handleChange}
-          error={false}
+          // error={false}
           InputProps={{ disableUnderline: true }}
         />
       )}

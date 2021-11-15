@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Title from 'web-components/lib/components/title';
-// import { Variant } from '@material-ui/core/styles/createTypography';
+// import { Variant } from '@mui/material/styles/createTypography';
 
 // interface Options {
 //   h1: Variant;

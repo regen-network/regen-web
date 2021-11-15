@@ -10,8 +10,8 @@ import {
   Radio,
   Collapse,
   Zoom,
-} from '@material-ui/core';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+} from '@mui/material';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 
 import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
@@ -67,7 +67,7 @@ const OrganizationProfile: React.FC = () => {
   const history = useHistory();
   const { user } = useAuth0();
   const [acctType, setAcctType] = useState<AcctType>('user');
-  const [error, setError] = useState<Error | null>(null);
+  const [error, setError] = useState<unknown>(null);
   const [isSubmitting, setSubmitting] = useState<boolean>(false);
   const [initialFieldValues, setInitialFieldValues] = useState<
     OrgProfileFormValues | undefined
@@ -77,7 +77,7 @@ const OrganizationProfile: React.FC = () => {
   const { data: orgProfile } = useGetOrganizationProfileByEmailQuery({
     skip: !userEmail,
     errorPolicy: 'ignore',
-    variables: { email: userEmail },
+    variables: { email: userEmail as string },
   });
   const userByEmail = orgProfile?.userByEmail;
   const userOrg =
@@ -191,7 +191,9 @@ const OrganizationProfile: React.FC = () => {
 
   return (
     <OnBoardingSection formContainer title="Organization Profile">
-      {!isSubmitting && error && <ErrorBanner text={error.toString()} />}
+      {!isSubmitting && error instanceof Object && (
+        <ErrorBanner text={error.toString()} />
+      )}
 
       <OnBoardingCard className={styles.topCard}>
         <FormControl component="fieldset" fullWidth>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import { useParams } from 'react-router-dom';
 
 import Description from 'web-components/lib/components/description';
@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 const Media: React.FC = () => {
   const styles = useStyles();
   const activeStep = 0;
-  const { projectId } = useParams();
+  const { projectId } = useParams<{ projectId: string }>();
 
   const [updateProject] = useUpdateProjectByIdMutation();
   const { data } = useProjectByIdQuery({

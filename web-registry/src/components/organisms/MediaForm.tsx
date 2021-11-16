@@ -214,6 +214,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                         buttonText="+ Add Photo"
                         fixedCrop={cropAspect}
                         name="['http://regen.network/galleryPhotos'].@list[0].@value" // left
+                        apiServerUrl={apiUri}
                       />
                     </Grid>
                     {isTabletOrLarger ? (
@@ -225,6 +226,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                             fixedCrop={cropAspect}
                             name="['http://regen.network/galleryPhotos'].@list[1].@value" // top
                             hideDragText
+                            apiServerUrl={apiUri}
                           />
                         </Grid>
                         <Grid item sm={12} className={styles.centerSmall}>
@@ -234,6 +236,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                             fixedCrop={cropAspect}
                             name="['http://regen.network/galleryPhotos'].@list[2].@value" // bottom
                             hideDragText
+                            apiServerUrl={apiUri}
                           />
                         </Grid>
                       </Grid>
@@ -246,6 +249,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                             fixedCrop={cropAspect}
                             name="['http://regen.network/galleryTop']"
                             buttonText="+ Add Photo"
+                            apiServerUrl={apiUri}
                           />
                         </Grid>
                         <Grid item xs={6} sm={12} className={styles.galleryImage}>
@@ -255,6 +259,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                             fixedCrop={cropAspect}
                             name="['http://regen.network/galleryBottom']"
                             buttonText="+ Add Photo"
+                            apiServerUrl={apiUri}
                           />
                         </Grid>
                       </>
@@ -267,6 +272,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                         buttonText="+ Add Photo"
                         fixedCrop={cropAspect}
                         name="['http://regen.network/galleryPhotos'].@list[3].@value" // right
+                        apiServerUrl={apiUri}
                       />
                     </Grid>
                   </Grid>
@@ -297,6 +303,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                   buttonText="+ Add Photo"
                   fixedCrop={cropAspect}
                   name="['http://regen.network/landStewardPhoto'].@value"
+                  apiServerUrl={apiUri}
                 />
               </OnBoardingCard>
 

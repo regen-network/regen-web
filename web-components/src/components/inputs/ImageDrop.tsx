@@ -99,6 +99,7 @@ function ImageDrop({
 }: ImageDropProps): JSX.Element {
   const [cropModalOpen, setCropModalOpen] = useState(false);
   const [initialImage, setInitialImage] = useState('');
+  const [fileName, setFileName] = useState('');
   const styles = useStyles();
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up('tablet'));
@@ -128,6 +129,7 @@ function ImageDrop({
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     if (event && event.target && event.target.files && event.target.files.length > 0) {
       const file = event.target.files[0];
+      setFileName(file.name);
       toBase64(file).then(base64String => {
         if (typeof base64String === 'string') {
           setCropModalOpen(true);
@@ -149,47 +151,22 @@ function ImageDrop({
 
   const handleCropModalClose = (): void => {
     setInitialImage('');
+    setFileName('');
     form.setFieldTouched(field.name, true);
     setCropModalOpen(false);
   };
 
   const handleCropModalSubmit = async (croppedImage: HTMLImageElement): Promise<void> => {
-    const projectId = 'test-project';
+    const projectId = 'ahoyhoi'; //TODO
     const projectPath = `projects/${projectId}`;
-
-    // console.log('croppedImage.src', croppedImage.src);
-    // const imageBlob = await dataURItoBlob(croppedImage.src);
-
-    // const imageBlob = await fetch(croppedImage.src)
-    //   .then(res => res.blob())
-    //   .then(myBlob => {
-    //     console.log('myBlob', myBlob);
-    //     return myBlob;
-    //     // logs: Blob { size: 1024, type: "image/jpeg" }
-    //   });
-
-    let imageFile = await srcToFile(croppedImage.src, croppedImage.name, 'image/jpeg');
-
-    console.log('is a File? ', imageFile instanceof File, imageFile);
-    console.log('is a Blob? ', imageFile instanceof Blob);
+    const imageFile = await srcToFile(croppedImage.src, fileName, 'image/png');
     const result: any = await uploadImage(imageFile, projectPath, apiServerUrl);
-    console.log('result ', result);
 
     if (result) {
       form.setFieldValue(field.name, result);
       form.setFieldTouched(field.name, true);
       setCropModalOpen(false);
     }
-  };
-
-  const blobToFile = (theBlob: Blob, fileName: string): File => {
-    var b: any = theBlob;
-    //A Blob() is almost a File() - it's just missing the two properties below which we will add
-    b.lastModified = new Date();
-    b.name = fileName;
-
-    //Cast to a File() type
-    return new File([b], b.name);
   };
 
   const srcToFile = async (src: string, fileName: string, mimeType: string): Promise<File> => {
@@ -205,6 +182,7 @@ function ImageDrop({
   const handleDelete = (): void => {
     form.setFieldValue(field.name, undefined);
     setInitialImage('');
+    setFileName('');
   };
 
   return (

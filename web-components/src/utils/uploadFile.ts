@@ -16,22 +16,9 @@ export async function uploadImage(
   const respOK = resp && resp.status === 200;
   if (respOK) {
     const data = await resp.data;
-    // const storedImageUrl = data.result;
 
-    console.log('data ', data);
     return data.imageUrl;
   } else {
     return 'check request';
   }
 }
-
-// async function postImage({ image, description }) {
-//   const formData = new FormData();
-//   formData.append('image', image);
-//   formData.append('description', description);
-
-//   const result = await axios.post('/images', formData, {
-//     headers: { 'Content-Type': 'multipart/form-data' },
-//   });
-//   return result.data;
-// }

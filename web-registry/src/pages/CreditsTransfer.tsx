@@ -3,7 +3,7 @@ import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
-import Select from '@mui/material/Select';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
@@ -117,13 +117,11 @@ const CreditsTransfer: React.FC<{
       variables: { vintageId },
     });
 
-  const handleVintageChange = (
-    event: React.ChangeEvent<{ value: unknown }>,
-  ): void => {
+  const handleVintageChange = (event: SelectChangeEvent<string>): void => {
     if (showResult) {
       setShowResult(false);
     }
-    const vintageId = event.target.value as string;
+    const vintageId = event.target.value;
     setVintageId(vintageId);
     refetchAvailableCredits({ vintageId });
     const vintages = vintagesData?.allCreditVintages?.nodes?.find(
@@ -135,13 +133,11 @@ const CreditsTransfer: React.FC<{
     }
   };
 
-  const handleBuyerWalletChange = (
-    event: React.ChangeEvent<{ value: any }>,
-  ): void => {
+  const handleBuyerWalletChange = (event: SelectChangeEvent<string>): void => {
     if (showResult) {
       setShowResult(false);
     }
-    setBuyerWalletId(event.target.value as string);
+    setBuyerWalletId(event.target.value);
     if (partiesData && partiesData.allParties) {
       const selectedParty = partiesData.allParties.nodes.find(
         (party: any) => party.walletId === event.target.value,
@@ -150,22 +146,18 @@ const CreditsTransfer: React.FC<{
     }
   };
 
-  const handlePartyIdChange = (
-    event: React.ChangeEvent<{ value: any }>,
-  ): void => {
+  const handlePartyIdChange = (event: SelectChangeEvent<string>): void => {
     if (showResult) {
       setShowResult(false);
     }
-    setPartyId(event.target.value as string);
+    setPartyId(event.target.value);
   };
 
-  const handleUserIdChange = (
-    event: React.ChangeEvent<{ value: any }>,
-  ): void => {
+  const handleUserIdChange = (event: SelectChangeEvent<string>): void => {
     if (showResult) {
       setShowResult(false);
     }
-    setUserId(event.target.value as string);
+    setUserId(event.target.value);
   };
 
   if (vintagesLoading || partiesLoading) return <div>Loading...</div>;

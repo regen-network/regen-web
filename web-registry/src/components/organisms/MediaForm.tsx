@@ -1,12 +1,6 @@
 import React from 'react';
-import {
-  makeStyles,
-  Theme,
-  useMediaQuery,
-  useTheme,
-  Grid,
-  FormHelperText,
-} from '@mui/material';
+import { makeStyles, useTheme } from '@mui/styles';
+import { useMediaQuery, Grid, FormHelperText } from '@mui/material';
 import { Formik, Form, Field, getIn } from 'formik';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
@@ -64,7 +58,7 @@ function getURLListInitialValue(value?: urlList): urlList {
   );
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles(theme => ({
   storyCard: {
     paddingBottom: 0,
   },

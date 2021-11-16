@@ -473,7 +473,7 @@ function ProjectDetails(): JSX.Element {
       )}
 
       {!project.creditPrice && (
-        <FixedFooter justify="flex-end">
+        <FixedFooter justifyContent="flex-end">
           <>
             <ContainedButton onClick={handleOpen} startIcon={<EmailIcon />}>
               send me more info

@@ -24,7 +24,7 @@ export interface ImageDropProps extends FieldProps {
   optional?: boolean;
   labelSubText?: string;
   buttonText?: string;
-  fixedCrop?: Crop;
+  fixedCrop: Partial<Crop>;
   hideDragText?: boolean;
 }
 

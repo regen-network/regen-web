@@ -106,7 +106,7 @@ const Home: React.FC = () => {
       >
         <CreditClassCards
           btnText="Learn More"
-          justify={isMobile ? 'center' : 'flex-start'}
+          justifyContent={isMobile ? 'center' : 'flex-start'}
           creditClasses={creditClasses} // mock/db data
           creditClassesContent={creditClassesContent} // CMS data
         />

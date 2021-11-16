@@ -136,7 +136,7 @@ function UserCredits({ credits }: PurchasedCreditsProps): JSX.Element {
       <Grid
         container
         alignItems="flex-end"
-        justify="space-between"
+        justifyContent="space-between"
         className={classes.title}
       >
         <Grid item sm={6} xs={12}>

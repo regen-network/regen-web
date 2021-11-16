@@ -6,12 +6,13 @@ import { Button } from '@mui/material';
 import ContainedButton from '../buttons/ContainedButton';
 import { getCroppedImg } from './canvas-utils';
 import useMediaQuery from '@mui/material/useMediaQuery';
+
 export interface ImageCropProps {
   image: string;
   circularCrop?: boolean;
   onCropSubmit: (blob: HTMLImageElement) => void;
   onCancel: () => void;
-  fixedCrop?: Crop;
+  fixedCrop: Partial<Crop>;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -60,7 +61,7 @@ export default function ImageCrop({
 }: ImageCropProps): JSX.Element {
   const classes = useStyles();
   const imgRef = useRef<any>(null);
-  const [crop, setCrop] = useState<Crop | undefined>(fixedCrop);
+  const [crop, setCrop] = useState<Partial<Crop>>(fixedCrop);
   const [completedCrop, setCompletedCrop] = useState<Crop | undefined>(
     undefined,
   );

@@ -184,7 +184,7 @@ const CreateMethodology: React.FC = () => {
         bottomBanner={content?.createCreditClassSection}
         openModal={openModal}
       /> */}
-      <FixedFooter justify="flex-end">
+      <FixedFooter justifyContent="flex-end">
         <ContainedButton onClick={() => openModal(content?.footerLink)}>
           Submit a methodology
         </ContainedButton>

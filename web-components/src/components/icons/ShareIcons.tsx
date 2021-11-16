@@ -14,11 +14,11 @@ interface ShareIconsProps {
   url: string;
   twitterShare?: string;
   telegramShare?: string;
-  xsSize?: number;
+  xsSize?: string | number;
 }
 
 interface StyleProps {
-  xsSize?: number;
+  xsSize?: string | number;
 }
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({

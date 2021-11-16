@@ -5,7 +5,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 
 interface FixedFooterProps {
   children?: any;
-  justify?: GridProps['justifyContent'];
+  justifyContent?: GridProps['justifyContent'];
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -56,7 +56,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 export default function FixedFooter({
   children,
-  justify,
+  justifyContent,
 }: FixedFooterProps): JSX.Element {
   const classes = useStyles({});
   const theme = useTheme();
@@ -69,7 +69,11 @@ export default function FixedFooter({
         wrap="nowrap"
         alignItems="center"
         justifyContent={
-          justify ? justify : matches ? 'flex-end' : 'space-between'
+          justifyContent
+            ? justifyContent
+            : matches
+            ? 'flex-end'
+            : 'space-between'
         }
         className={classes.root}
       >

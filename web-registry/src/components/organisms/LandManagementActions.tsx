@@ -125,7 +125,11 @@ function LandManagementActions({
       topRight={
         <>
           {!isMobile && actions.length > slidesCount && (
-            <Grid container justify="flex-end" className={styles.buttons}>
+            <Grid
+              container
+              justifyContent="flex-end"
+              className={styles.buttons}
+            >
               <PrevNextButton direction="prev" onClick={slickPrev} />
               <PrevNextButton direction="next" onClick={slickNext} />
             </Grid>

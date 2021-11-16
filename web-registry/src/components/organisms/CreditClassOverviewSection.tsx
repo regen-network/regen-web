@@ -1,5 +1,6 @@
 import React from 'react';
-import { makeStyles, useTheme, useMediaQuery } from '@mui/material';
+import { makeStyles, useTheme } from '@mui/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import Grid from '@mui/material/Grid';
 import cx from 'clsx';
 

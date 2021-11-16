@@ -156,7 +156,7 @@ const LandStewards = (): JSX.Element => {
         />
       )}
 
-      <FixedFooter justify="flex-end">
+      <FixedFooter justifyContent="flex-end">
         <ContainedButton
           onClick={() =>
             openModal(content?.footerButton?.buttonLink?.buttonHref)

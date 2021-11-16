@@ -116,7 +116,7 @@ const CreateCreditClass: React.FC = () => {
   }> = props => {
     const align = props.align || (isMobile ? 'left' : 'center');
     return (
-      <Grid container justify="center">
+      <Grid container justifyContent="center">
         <Box maxWidth={theme.typography.pxToRem(948)}>
           <Title align={align} variant="h3">
             {props.title}
@@ -247,7 +247,7 @@ const CreateCreditClass: React.FC = () => {
         bottomBanner={content?.bottomBanner}
         openModal={openModal}
       />
-      <FixedFooter justify="flex-end">
+      <FixedFooter justifyContent="flex-end">
         <ContainedButton onClick={() => openModal(content?.footerLink)}>
           Submit a Credit Class
         </ContainedButton>

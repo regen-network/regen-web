@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
-import { fieldToTextField, TextFieldProps } from 'formik-material-ui';
+import { fieldToTextField, TextFieldProps } from 'formik-mui';
 import MuiTextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import clsx from 'clsx';

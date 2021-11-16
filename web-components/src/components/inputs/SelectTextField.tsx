@@ -3,7 +3,7 @@ import React from 'react';
 import DropdownIcon from '../icons/DropdownIcon';
 import TextField from './TextField';
 // import { StandardTextFieldProps as TextFieldProps } from '@mui/material/TextField';
-import { TextFieldProps } from 'formik-material-ui';
+import { TextFieldProps } from 'formik-mui';
 
 export interface Option {
   value: string;

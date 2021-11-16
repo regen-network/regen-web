@@ -110,7 +110,7 @@ const HeroAction: React.FC<Props> = ({ classes, ...props }) => {
       }}
       isBanner={props.isBanner}
     >
-      <Grid container justify="center">
+      <Grid container justifyContent="center">
         <div className={styles.content}>
           <Title
             align="center"
@@ -127,7 +127,7 @@ const HeroAction: React.FC<Props> = ({ classes, ...props }) => {
               <BlockContent content={props.bottomBanner.descriptionRaw} />
             </Description>
           )}
-          <Grid container justify="center">
+          <Grid container justifyContent="center">
             <Button
               onClick={() => onBtnClick(props.openModal, button)}
               className={cx(styles.btn, classes?.button)}

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Formik, Form, Field } from 'formik';
-import { RadioGroup } from 'formik-material-ui';
+import { RadioGroup } from 'formik-mui';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import Toggle from 'web-components/lib/components/inputs/Toggle';

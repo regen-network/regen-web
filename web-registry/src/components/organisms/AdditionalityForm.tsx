@@ -1,6 +1,6 @@
 import React from 'react';
 import { Formik, Form, Field } from 'formik';
-import { RadioGroup } from 'formik-material-ui';
+import { RadioGroup } from 'formik-mui';
 import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import { Typography } from '@mui/material';
 

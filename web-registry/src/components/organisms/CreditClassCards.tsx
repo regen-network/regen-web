@@ -19,7 +19,7 @@ type Props = {
   btnText: string;
   creditClasses: CreditClass[];
   creditClassesContent?: Maybe<Array<CreditClassContent>>;
-  justify?:
+  justifyContent?:
     | 'center'
     | 'space-around'
     | 'space-between'
@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const CreditClassCards: React.FC<Props> = ({
-  justify = 'center',
+  justifyContent = 'center',
   ...props
 }) => {
   const history = useHistory();
@@ -57,7 +57,7 @@ const CreditClassCards: React.FC<Props> = ({
   return (
     <Grid
       container
-      justify={justify}
+      justifyContent={justifyContent}
       className={clsx(styles.root, props.classes && props.classes.root)}
       spacing={isMobile ? 0 : 5}
     >

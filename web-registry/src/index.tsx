@@ -1,19 +1,37 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { MuiPickersUtilsProvider } from '@mui/lab';
-import DateFnsUtils from '@date-io/date-fns';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+// import DateFnsUtils from '@date-io/date-fns';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import ThemeProvider from 'web-components/lib/theme/RegenThemeProvider';
 import CssBaseline from '@mui/material/CssBaseline';
 import { IntercomProvider } from 'react-use-intercom';
+import { Theme } from '@mui/material/styles';
 
 import { Auth0Provider } from '@auth0/auth0-react';
 import { AuthApolloProvider } from './apollo';
 import { LedgerProvider } from './ledger';
 import { WalletProvider } from './wallet';
 // import history from './lib/history';
+
+declare module '@mui/material/styles' {
+  interface BreakpointOverrides {
+    xs: true;
+    sm: true;
+    tablet: true; // adds the `tablet` breakpoint
+    md: true;
+    lg: true;
+    xl: true;
+  }
+}
+
+declare module '@mui/styles/defaultTheme' {
+  // eslint-disable-next-line @typescript-eslint/no-empty-interface
+  interface DefaultTheme extends Theme {}
+}
 
 const config = {
   domain:
@@ -46,7 +64,7 @@ ReactDOM.render(
   >
     <AuthApolloProvider>
       <IntercomProvider appId={intercomId} autoBoot>
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
           <WalletProvider>
             <LedgerProvider>
               <ThemeProvider injectFonts>
@@ -56,7 +74,7 @@ ReactDOM.render(
               </ThemeProvider>
             </LedgerProvider>
           </WalletProvider>
-        </MuiPickersUtilsProvider>
+        </LocalizationProvider>
       </IntercomProvider>
     </AuthApolloProvider>
   </Auth0Provider>,

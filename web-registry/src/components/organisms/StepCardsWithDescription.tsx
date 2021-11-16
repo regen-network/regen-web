@@ -70,13 +70,17 @@ const StepCardsWithDescription: React.FC<{
   const styles = useStyles();
 
   return (
-    <Grid container justify="center" className={className}>
+    <Grid container justifyContent="center" className={className}>
       {descriptionRaw && (
         <Description className={cx(styles.description, styles.topDescription)}>
           <BlockContent content={descriptionRaw} />
         </Description>
       )}
-      <Grid container justify="center" className={styles.stepCardsContainer}>
+      <Grid
+        container
+        justifyContent="center"
+        className={styles.stepCardsContainer}
+      >
         {stepCards?.map((card, i) => (
           <WrappedStepCard
             stepNumber={i}

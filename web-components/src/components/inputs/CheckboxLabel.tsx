@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import FormControlLabel, { FormControlLabelProps } from '@mui/material/FormControlLabel';
 import FormHelperText from '@mui/material/FormHelperText';
-import { CheckboxProps } from 'formik-material-ui';
+import { CheckboxProps } from 'formik-mui';
 import { getIn } from 'formik';
 
 import Checkbox from '../inputs/Checkbox';

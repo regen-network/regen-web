@@ -238,7 +238,7 @@ const PopIn: React.FC<{ isOpen: boolean }> = ({ children, isOpen }) => {
     <div style={{ display: 'flex' }}>
       <Zoom in={isOpen}>
         <div>
-          <Collapse in={isOpen} collapsedHeight={0}>
+          <Collapse in={isOpen} collapsedSize={0}>
             <div>{children}</div>
           </Collapse>
         </div>

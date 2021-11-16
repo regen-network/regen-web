@@ -59,7 +59,7 @@ const ReadMore: React.FC<ReadMoreProps> = ({
   const ReadButton = (): JSX.Element => (
     <OutlinedButton
       onClick={handleChange}
-      classes={{ root: classes.button, label: classes.buttonLabel }}
+      classes={{ root: classes.button, outlined: classes.buttonLabel }}
       endIcon={
         expanded ? (
           <ArrowDownIcon direction="up" color={theme.palette.secondary.main} />

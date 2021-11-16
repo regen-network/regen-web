@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import Button from '@mui/material/Button';
-import Select from '@mui/material/Select';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
@@ -108,13 +108,11 @@ const CreditsRetire: React.FC<{
     }
   }, [vintageId, buyerWalletId, vintagesData]);
 
-  const handleVintageChange = (
-    event: React.ChangeEvent<{ value: unknown }>,
-  ): void => {
+  const handleVintageChange = (event: SelectChangeEvent<string>): void => {
     if (showResult) {
       setShowResult(false);
     }
-    setVintageId(event.target.value as string);
+    setVintageId(event.target.value);
     if (vintagesData && vintagesData.allCreditVintages) {
       // TODO: the following shouldn't be type cast to `any` but changing throws an error
       // `creditClassVersionByCreditClassVersionIdAndCreditClassVersionCreatedAt`
@@ -132,14 +130,12 @@ const CreditsRetire: React.FC<{
     }
   };
 
-  const handleBuyerWalletChange = (
-    event: React.ChangeEvent<{ value: unknown }>,
-  ): void => {
+  const handleBuyerWalletChange = (event: SelectChangeEvent<string>): void => {
     if (showResult) {
       setShowResult(false);
     }
-    setBuyerWalletId(event.target.value as string);
-    setUnits(getUnits(vintagesData, event.target.value as string, vintageId));
+    setBuyerWalletId(event.target.value);
+    setUnits(getUnits(vintagesData, event.target.value, vintageId));
     if (partiesData && partiesData.allParties) {
       const selectedParty = partiesData.allParties.nodes.find(
         (party: any) => party.walletId === event.target.value,

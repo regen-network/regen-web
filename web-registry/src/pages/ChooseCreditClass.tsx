@@ -89,7 +89,7 @@ const ChooseCreditClass: React.FC = () => {
 
   return (
     <OnBoardingSection title="Choose a credit class">
-      <Grid container justify="center" className={classes.main}>
+      <Grid container justifyContent="center" className={classes.main}>
         {creditClassesData?.allCreditClasses?.nodes.map((c, i) =>
           !c?.standard && c?.creditClassVersionsById?.nodes?.[0] ? (
             <Grid key={i} item className={classes.item}>

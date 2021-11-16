@@ -6,7 +6,7 @@ import CardContent from '@mui/material/CardContent';
 import Collapse from '@mui/material/Collapse';
 import axios from 'axios';
 import { Formik, Form, Field } from 'formik';
-import { RadioGroup } from 'formik-material-ui';
+import { RadioGroup } from 'formik-mui';
 import cx from 'clsx';
 import ReactHtmlParser from 'react-html-parser';
 

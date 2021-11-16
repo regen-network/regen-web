@@ -4,7 +4,7 @@ import { useMutation } from '@apollo/client';
 import { gql } from '@apollo/client';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import Select from '@mui/material/Select';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
@@ -74,26 +74,26 @@ function CreditsIssue(): JSX.Element {
 
   const [projectId, setProjectId] = useState('');
   const [units, setUnits] = useState(10);
-  const [startDate, setStartDate] = useState<Date | null>(null);
-  const [endDate, setEndDate] = useState<Date | null>(null);
+  const [startDate, setStartDate] = useState<Date | undefined | null>(
+    undefined,
+  );
+  const [endDate, setEndDate] = useState<Date | undefined | null>(undefined);
   const [creditClassVersionId, setCreditClassVersionId] = useState<
-    string | null
-  >(null);
+    string | undefined
+  >(undefined);
   const [creditClassVersionCreatedAt, setCreditClassVersionCreatedAt] =
-    useState<string | null>(null);
+    useState<string | undefined>(undefined);
   const [methodologyVersionId, setMethodologyVersionId] = useState<
-    string | null
-  >(null);
+    string | undefined
+  >(undefined);
   const [methodologyVersionCreatedAt, setMethodologyVersionCreatedAt] =
-    useState<string | null>(null);
+    useState<string | undefined>(undefined);
   const [projectDeveloper, setProjectDeveloper] = useState(100);
   const [landSteward, setLandSteward] = useState(0);
   const [landOwner, setLandOwner] = useState(0);
 
-  const handleProjectChange = (
-    event: React.ChangeEvent<{ value: unknown }>,
-  ): void => {
-    const projectId = event.target.value as string;
+  const handleProjectChange = (event: SelectChangeEvent<string>): void => {
+    const projectId = event.target.value;
     setProjectId(projectId);
     const project = projectsData?.allProjects?.nodes?.find(
       node => node?.id === projectId,
@@ -105,15 +105,15 @@ function CreditsIssue(): JSX.Element {
   };
 
   const handleCreditClassVersionChange = (
-    event: React.ChangeEvent<{ value: unknown }>,
+    event: SelectChangeEvent<string>,
   ): void => {
-    setCreditClassVersionCreatedAt(event.target.value as string);
+    setCreditClassVersionCreatedAt(event.target.value);
   };
 
   const handleMethodologyVersionChange = (
-    event: React.ChangeEvent<{ value: unknown }>,
+    event: SelectChangeEvent<string>,
   ): void => {
-    setMethodologyVersionCreatedAt(event.target.value as string);
+    setMethodologyVersionCreatedAt(event.target.value);
   };
 
   const creditClassVersionOptions = [];
@@ -259,30 +259,32 @@ function CreditsIssue(): JSX.Element {
         <div className={classes.datePicker}>
           <InputLabel id="project-select-label">Start Date</InputLabel>
           <DatePicker
-            autoOk
-            variant="inline"
+            // autoOk
+            // variant="inline"
+            renderInput={params => <TextField {...params} />}
             openTo="year"
             className={classes.input}
-            placeholder="Click to choose a date"
+            toolbarPlaceholder="Click to choose a date"
             views={['year', 'month']}
             value={startDate}
             onChange={date => setStartDate(date)}
-            error={false}
+            // error={false}
             InputProps={{ disableUnderline: true }}
           />
         </div>
         <div className={classes.datePicker}>
           <InputLabel id="project-select-label">End Date</InputLabel>
           <DatePicker
-            autoOk
-            variant="inline"
+            // autoOk
+            // variant="inline"
+            renderInput={params => <TextField {...params} />}
             openTo="year"
             className={classes.input}
-            placeholder="Click to choose a date"
+            toolbarPlaceholder="Click to choose a date"
             views={['year', 'month']}
             value={endDate}
             onChange={date => setEndDate(date)}
-            error={false}
+            // error={false}
             InputProps={{ disableUnderline: true }}
           />
         </div>

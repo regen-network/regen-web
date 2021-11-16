@@ -4,7 +4,7 @@ import MuiCheckbox from '@mui/material/Checkbox';
 import {
   fieldToCheckbox,
   CheckboxProps as MuiCheckboxProps,
-} from 'formik-material-ui';
+} from 'formik-mui';
 
 import CheckedIcon from '../icons/CheckedIcon';
 import UncheckedIcon from '../icons/UncheckedIcon';

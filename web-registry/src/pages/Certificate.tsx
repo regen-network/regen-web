@@ -28,16 +28,6 @@ import background from '../assets/certificate-bg.png';
 import pageBackground from '../assets/certificate-page-bg.jpg';
 import projectsBackground from '../assets/certificate-projects-bg.jpg';
 
-declare module '@mui/material/styles/createBreakpoints' {
-  interface BreakpointOverrides {
-    xs: true;
-    sm: true;
-    tablet: true; // adds the `tablet` breakpoint
-    md: true;
-    lg: true;
-    xl: true;
-  }
-}
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     backgroundColor: theme.palette.primary.main,
@@ -433,7 +423,7 @@ function CertificatePage(): JSX.Element {
           <Grid
             container
             alignItems="center"
-            justify="center"
+            justifyContent="center"
             className={classes.issuerInfo}
           >
             {issuer.image && (

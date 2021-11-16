@@ -12,7 +12,7 @@ export interface CropImageModalProps {
   onSubmit: (image: HTMLImageElement) => void;
   circularCrop?: boolean;
   initialImage: string;
-  fixedCrop?: Crop;
+  fixedCrop?: Partial<Crop>;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -50,7 +50,7 @@ export default function CropImageModal({
   onSubmit,
   circularCrop,
   initialImage,
-  fixedCrop,
+  fixedCrop = {},
 }: CropImageModalProps): JSX.Element {
   const classes = useStyles();
 

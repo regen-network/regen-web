@@ -44,10 +44,10 @@ export function canvasToBlob(canvas: HTMLCanvasElement): Promise<HTMLImageElemen
       const newImg = document.createElement('img');
       const url = URL.createObjectURL(file);
 
-      newImg.onload = () => {
-        // no longer need to read the blob so it's revoked
-        URL.revokeObjectURL(url);
-      };
+      // newImg.onload = () => {
+      //   // no longer need to read the blob so it's revoked
+      //   URL.revokeObjectURL(url);
+      // };
 
       newImg.src = url;
 

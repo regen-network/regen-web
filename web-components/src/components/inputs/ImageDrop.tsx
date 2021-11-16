@@ -157,14 +157,39 @@ function ImageDrop({
     const projectId = 'test-project';
     const projectPath = `projects/${projectId}`;
 
-    const imageFile = await srcToFile(croppedImage.src, 'testname', 'image/png');
-    console.log('imageFile', imageFile);
+    // console.log('croppedImage.src', croppedImage.src);
+    // const imageBlob = await dataURItoBlob(croppedImage.src);
 
-    const storedImageUrl = await uploadImage(imageFile, projectPath, apiServerUrl);
+    // const imageBlob = await fetch(croppedImage.src)
+    //   .then(res => res.blob())
+    //   .then(myBlob => {
+    //     console.log('myBlob', myBlob);
+    //     return myBlob;
+    //     // logs: Blob { size: 1024, type: "image/jpeg" }
+    //   });
 
-    form.setFieldValue(field.name, storedImageUrl);
-    form.setFieldTouched(field.name, true);
-    setCropModalOpen(false);
+    let imageFile = await srcToFile(croppedImage.src, croppedImage.name, 'image/jpeg');
+
+    console.log('is a File? ', imageFile instanceof File, imageFile);
+    console.log('is a Blob? ', imageFile instanceof Blob);
+    const result: any = await uploadImage(imageFile, projectPath, apiServerUrl);
+    console.log('result ', result);
+
+    if (result) {
+      form.setFieldValue(field.name, result);
+      form.setFieldTouched(field.name, true);
+      setCropModalOpen(false);
+    }
+  };
+
+  const blobToFile = (theBlob: Blob, fileName: string): File => {
+    var b: any = theBlob;
+    //A Blob() is almost a File() - it's just missing the two properties below which we will add
+    b.lastModified = new Date();
+    b.name = fileName;
+
+    //Cast to a File() type
+    return new File([b], b.name);
   };
 
   const srcToFile = async (src: string, fileName: string, mimeType: string): Promise<File> => {

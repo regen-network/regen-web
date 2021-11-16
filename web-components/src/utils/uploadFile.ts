@@ -16,10 +16,10 @@ export async function uploadImage(
   const respOK = resp && resp.status === 200;
   if (respOK) {
     const data = await resp.data;
-    const storedImageUrl = data.result;
+    // const storedImageUrl = data.result;
 
-    console.log('uploadImage ', storedImageUrl);
-    return storedImageUrl;
+    console.log('data ', data);
+    return data.imageUrl;
   } else {
     return 'check request';
   }

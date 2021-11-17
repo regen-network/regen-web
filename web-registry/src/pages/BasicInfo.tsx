@@ -10,7 +10,7 @@ import {
 
 const BasicInfo: React.FC = () => {
   const navigate = useNavigate();
-  const { projectId } = useParams<{ projectId: string }>();
+  const { projectId } = useParams();
 
   const [updateProject] = useUpdateProjectByIdMutation();
   const { data } = useProjectByIdQuery({

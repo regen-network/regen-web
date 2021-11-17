@@ -38,10 +38,8 @@ const BuyerCreate: React.FC<{
 }> = ({ onCreate }) => {
   const classes = useStyles();
 
-  const [
-    createUser,
-    { data: userData, error: userError },
-  ] = useReallyCreateUserMutation();
+  const [createUser, { data: userData, error: userError }] =
+    useReallyCreateUserMutation();
 
   const [
     createUserOrganization,

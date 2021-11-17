@@ -42,7 +42,7 @@ function getInitialValues(value: any): any {
 const EntityDisplay: React.FC = () => {
   const styles = useStyles();
   const activeStep = 0;
-  const { projectId } = useParams<{ projectId: string }>();
+  const { projectId } = useParams();
   const navigate = useNavigate();
   const [initialValues, setInitialValues] = useState<
     EntityDisplayValues | undefined

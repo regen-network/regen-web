@@ -195,11 +195,7 @@ function GridItem({
 
 function PostPurchase(): JSX.Element {
   const classes = useStyles();
-  let { walletId, projectId, name } = useParams<{
-    walletId: string;
-    projectId: string;
-    name: string;
-  }>();
+  let { walletId, projectId, name } = useParams();
   const options: Intl.DateTimeFormatOptions = {
     year: 'numeric',
     month: 'short',

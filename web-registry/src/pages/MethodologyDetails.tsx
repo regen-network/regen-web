@@ -28,7 +28,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
 
 function MethodologyDetails(): JSX.Element {
   const styles = useStyles();
-  let { methodologyId } = useParams<{ methodologyId: string }>();
+  let { methodologyId } = useParams();
   const { data } = useAllMethodologyQuery({ client });
   const content = data?.allMethodology?.find(
     methodology => methodology.path === methodologyId,

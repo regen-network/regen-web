@@ -66,8 +66,7 @@ const RegistryNav: React.FC = () => {
   const programStandardItems: HeaderDropdownItemProps[] = [
     {
       linkComponent: NavLink,
-      href:
-        'https://regen-registry.s3.amazonaws.com/Regen+Registry+Program+Guide.pdf',
+      href: 'https://regen-registry.s3.amazonaws.com/Regen+Registry+Program+Guide.pdf',
       title: 'Program Guide',
     },
     // { href: '/process', title: 'Process' },

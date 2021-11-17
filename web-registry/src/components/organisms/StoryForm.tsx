@@ -121,8 +121,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 const examples: FieldNameExamples = {
   'http://regen.network/landStory': {
     type: 'Story of the Land',
-    text:
-      'Wilmot is an extraordinary property high in the New England Tablelands at Ebor, New South Wales, Australia. Set on 1,854ha and at approximately 1,200m above sea level, average annual rainfall of 1,200mm, highly fertile volcanic basalt soils, and complimented by a series of pristine spring fed, year-round natural waterways including five waterfalls, it is quite simply a unique environment for growing cattle.',
+    text: 'Wilmot is an extraordinary property high in the New England Tablelands at Ebor, New South Wales, Australia. Set on 1,854ha and at approximately 1,200m above sea level, average annual rainfall of 1,200mm, highly fertile volcanic basalt soils, and complimented by a series of pristine spring fed, year-round natural waterways including five waterfalls, it is quite simply a unique environment for growing cattle.',
   },
   'http://regen.network/landStewardStory': {
     type: 'Story of the Land Stewards',
@@ -137,8 +136,7 @@ const examples: FieldNameExamples = {
   },
   'http://regen.network/projectQuote': {
     type: 'Quote',
-    text:
-      'We feel privileged to have the opportunity to manage cattle in a truly holistic and regenerative way on such a remarkable property.',
+    text: 'We feel privileged to have the opportunity to manage cattle in a truly holistic and regenerative way on such a remarkable property.',
   },
 };
 

@@ -24,7 +24,7 @@ const Story: React.FC = () => {
   const styles = useStyles();
   const navigate = useNavigate();
   const activeStep = 0;
-  const { projectId } = useParams<{ projectId: string }>();
+  const { projectId } = useParams();
 
   const [updateProject] = useUpdateProjectByIdMutation();
   const { data } = useProjectByIdQuery({

@@ -239,7 +239,8 @@ function getVisiblePartyName(party?: DisplayValues): string | undefined {
 
 function ProjectDetails(): JSX.Element {
   const { api }: ContextType = useLedger();
-  const { projectId } = useParams<{ projectId: string }>();
+  const { projectId } = useParams();
+
   const imageStorageBaseUrl = process.env.REACT_APP_IMAGE_STORAGE_BASE_URL;
   const apiServerUrl = process.env.REACT_APP_API_URI;
   let txClient: ServiceClientImpl | undefined;
@@ -248,7 +249,8 @@ function ProjectDetails(): JSX.Element {
   }
 
   const { data } = useProjectByHandleQuery({
-    variables: { handle: projectId },
+    skip: !projectId,
+    variables: { handle: projectId as string },
   });
   const metadata = data?.projectByHandle?.metadata;
   const { data: projectsData } = useMoreProjectsQuery();
@@ -299,10 +301,8 @@ function ProjectDetails(): JSX.Element {
     setOpen(false);
   };
 
-  const [
-    issuanceModalData,
-    setIssuanceModalData,
-  ] = useState<IssuanceModalData | null>(null);
+  const [issuanceModalData, setIssuanceModalData] =
+    useState<IssuanceModalData | null>(null);
   const [issuanceModalOpen, setIssuanceModalOpen] = useState(false);
   const [isBuyCreditsModalOpen, setBuyCreditsModalOpen] = useState(false);
 
@@ -511,7 +511,7 @@ function ProjectDetails(): JSX.Element {
           open={isBuyCreditsModalOpen}
           onClose={() => setBuyCreditsModalOpen(false)}
           project={{
-            id: projectId,
+            id: projectId as string,
             name: data.projectByHandle?.metadata?.['http://schema.org/name'],
             image:
               data.projectByHandle?.metadata?.[

@@ -159,7 +159,7 @@ function CreditsPurchaseForm({
 }: CreditsPurchaseFormProps): JSX.Element {
   const classes = useStyles();
   const initialCountry = 'US';
-  const { projectId } = useParams<{ projectId: string }>();
+  const { projectId } = useParams();
   const [stateOptions, setStateOptions] = useState<Option[]>([]);
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up('sm'));

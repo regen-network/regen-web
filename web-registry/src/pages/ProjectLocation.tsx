@@ -15,7 +15,7 @@ import {
 
 const ProjectLocation: React.FC = () => {
   const navigate = useNavigate();
-  const { projectId } = useParams<{ projectId: string }>();
+  const { projectId } = useParams();
 
   const [updateProject] = useUpdateProjectByIdMutation();
   const [createAddress] = useCreateAddressMutation();

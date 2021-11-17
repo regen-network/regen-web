@@ -120,7 +120,7 @@ function CreditClassDetail({ isLandSteward }: CreditDetailsProps): JSX.Element {
   const styles = useStyles();
   const navigate = useNavigate();
 
-  let { creditClassId } = useParams<{ creditClassId: string }>();
+  let { creditClassId } = useParams();
 
   const { data } = useAllCreditClassQuery({ client });
   const content = data?.allCreditClass?.find(

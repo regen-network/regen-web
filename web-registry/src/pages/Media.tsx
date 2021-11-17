@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 const Media: React.FC = () => {
   const styles = useStyles();
   const activeStep = 0;
-  const { projectId } = useParams<{ projectId: string }>();
+  const { projectId } = useParams();
 
   const [updateProject] = useUpdateProjectByIdMutation();
   const { data } = useProjectByIdQuery({

@@ -97,7 +97,7 @@ const Roles: React.FC = () => {
   const styles = useStyles();
   const activeStep = 0;
   const navigate = useNavigate();
-  const { projectId } = useParams<{ projectId: string }>();
+  const { projectId } = useParams();
   const { user } = useAuth0();
   const userEmail = user?.email;
 

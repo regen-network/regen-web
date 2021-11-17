@@ -8,7 +8,7 @@ import { init as initGA } from './lib/ga';
 
 import CookiesBanner from 'web-components/lib/components/banner/CookiesBanner';
 import { ScrollToTop, ProtectedRoute } from './components/atoms';
-import { RegistryNav, AppFooter } from './components/organisms';
+import { RegistryNav } from './components/organisms';
 
 import {
   // Additionality,
@@ -70,7 +70,7 @@ const App: React.FC = (): JSX.Element => {
     authError.error_description.indexOf('email_not_verified:') > -1
   ) {
     const email: string = authError.error_description.split(':')[1];
-    navigate(`/verify-email?email=${email}`);
+    history.push(`/verify-email?email=${email}`);
   }
 
   return (
@@ -97,13 +97,13 @@ const App: React.FC = (): JSX.Element => {
             path="post-purchase/:projectId/:walletId/:name"
             element={<PostPurchase />}
           />
-          <ProtectedRoute path="/user-profile" component={UserProfile} />
+          {/* <ProtectedRoute path="/user-profile" component={UserProfile} />
           <ProtectedRoute
             path="/organization-profile"
             component={OrganizationProfile}
-          />
+          /> */}
           <Route path="/project-pages" element={<ProjectList />}>
-            <ProtectedRoute component={ProjectList} />
+            {/* <ProtectedRoute component={ProjectList} />
             <ProtectedRoute
               path=":projectId/choose-credit-class"
               component={ChooseCreditClass}
@@ -122,12 +122,12 @@ const App: React.FC = (): JSX.Element => {
             <ProtectedRoute
               path=":projectId/entity-display"
               component={EntityDisplay}
-            />
+            /> */}
           </Route>
           <Route path="/admin" element={<Admin />}>
             {isAdmin(user) && (
               <>
-                <ProtectedRoute
+                {/* <ProtectedRoute
                   path="credits/create-and-transfer"
                   component={BuyerCreditsTransfer}
                 />
@@ -140,7 +140,7 @@ const App: React.FC = (): JSX.Element => {
                   path="credits/retire"
                   component={CreditsRetire}
                 />
-                <ProtectedRoute path="buyer/create" component={BuyerCreate} />
+                <ProtectedRoute path="buyer/create" component={BuyerCreate} /> */}
               </>
             )}
           </Route>
@@ -156,9 +156,7 @@ const App: React.FC = (): JSX.Element => {
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
         <CookiesBanner privacyUrl="https://www.regen.network/privacy-policy/" />
-        <footer>
-          <AppFooter />
-        </footer>
+        <footer>{/* <AppFooter /> */}</footer>
       </div>
     </BrowserRouter>
   );

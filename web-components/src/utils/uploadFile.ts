@@ -22,3 +22,20 @@ export async function uploadImage(
     return 'check request';
   }
 }
+
+export async function deleteImage(
+  projectId: string,
+  fileName: string,
+  apiServerUrl: string | undefined,
+): Promise<string> {
+  const resp = await axios.delete(`${apiServerUrl}/images/${projectId}/${fileName}`);
+
+  const respOK = resp && resp.status === 200;
+  if (respOK) {
+    const data = await resp.data;
+
+    return data.imageUrl;
+  } else {
+    return 'check request';
+  }
+}

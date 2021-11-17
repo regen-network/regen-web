@@ -12,7 +12,7 @@ import CropImageModal from '../modal/CropImageModal';
 import TrashIcon from '../icons/TrashIcon';
 import { Image } from '../image';
 import { Label } from '../label';
-import { uploadImage } from '../../utils/uploadFile';
+import { uploadImage, deleteImage } from '../../utils/uploadFile';
 
 export interface ImageDropProps extends FieldProps {
   className?: string;
@@ -104,6 +104,8 @@ function ImageDrop({
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up('tablet'));
   const { form, field } = fieldProps;
+  const projectId = 'springfield'; //TODO
+  const projectPath = `projects/${projectId}`;
 
   const handleDrop = (files: File[]): void => {
     if (files && files.length > 0) {
@@ -157,8 +159,6 @@ function ImageDrop({
   };
 
   const handleCropModalSubmit = async (croppedImage: HTMLImageElement): Promise<void> => {
-    const projectId = 'ahoyhoi'; //TODO
-    const projectPath = `projects/${projectId}`;
     const imageFile = await srcToFile(croppedImage.src, fileName, 'image/png');
     const result: any = await uploadImage(imageFile, projectPath, apiServerUrl);
 
@@ -179,7 +179,10 @@ function ImageDrop({
       });
   };
 
-  const handleDelete = (): void => {
+  const handleDelete = async (): Promise<void> => {
+    const fileLocation = `${projectId}/${fileName}`;
+    console.log('fileLocation ', fileLocation);
+    await deleteImage(projectId, fileName, apiServerUrl);
     form.setFieldValue(field.name, undefined);
     setInitialImage('');
     setFileName('');

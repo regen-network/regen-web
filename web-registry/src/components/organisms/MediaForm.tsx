@@ -4,7 +4,7 @@ import { Formik, Form, Field, getIn } from 'formik';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import OnboardingFooter from 'web-components/lib/components/fixed-footer/OnboardingFooter';
-import { ImageDrop } from 'web-components/lib/components/inputs/ImageDrop';
+import { ImageUpload } from 'web-components/lib/components/inputs/ImageUpload';
 // import { VideoInput } from 'web-components/lib/components/inputs/VideoInput'; //TODO: make this component easier to use with share links from youtube, vimeo, etc
 import FormLabel from 'web-components/lib/components/inputs/FormLabel';
 import { requiredMessage } from 'web-components/lib/components/inputs/validation';
@@ -192,7 +192,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
               <OnBoardingCard className={styles.storyCard}>
                 <Field
                   classes={{ root: styles.field, main: styles.fullSizeMedia }}
-                  component={ImageDrop}
+                  component={ImageUpload}
                   label="Preview photo"
                   description="Choose the summary photo that will show up in project previews."
                   buttonText="+ Add preview Photo"
@@ -210,7 +210,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                     <Grid item xs={6} sm="auto" className={styles.galleryImage}>
                       <Field
                         classes={{ button: styles.smallButton }}
-                        component={ImageDrop}
+                        component={ImageUpload}
                         buttonText="+ Add Photo"
                         fixedCrop={cropAspect}
                         name="['http://regen.network/galleryPhotos'].@list[0].@value" // left
@@ -222,7 +222,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                         <Grid item sm={12} className={styles.centerSmall}>
                           <Field
                             classes={{ button: styles.smallButton }}
-                            component={ImageDrop}
+                            component={ImageUpload}
                             fixedCrop={cropAspect}
                             name="['http://regen.network/galleryPhotos'].@list[1].@value" // top
                             hideDragText
@@ -232,7 +232,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                         <Grid item sm={12} className={styles.centerSmall}>
                           <Field
                             classes={{ button: styles.smallButton }}
-                            component={ImageDrop}
+                            component={ImageUpload}
                             fixedCrop={cropAspect}
                             name="['http://regen.network/galleryPhotos'].@list[2].@value" // bottom
                             hideDragText
@@ -245,7 +245,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                         <Grid item xs={6} sm={12} className={styles.galleryImage}>
                           <Field
                             classes={{ button: styles.smallButton }}
-                            component={ImageDrop}
+                            component={ImageUpload}
                             fixedCrop={cropAspect}
                             name="['http://regen.network/galleryTop']"
                             buttonText="+ Add Photo"
@@ -255,7 +255,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                         <Grid item xs={6} sm={12} className={styles.galleryImage}>
                           <Field
                             classes={{ button: styles.smallButton }}
-                            component={ImageDrop}
+                            component={ImageUpload}
                             fixedCrop={cropAspect}
                             name="['http://regen.network/galleryBottom']"
                             buttonText="+ Add Photo"
@@ -268,7 +268,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                     <Grid item xs={6} sm="auto" className={styles.galleryImage}>
                       <Field
                         classes={{ button: styles.smallButton }}
-                        component={ImageDrop}
+                        component={ImageUpload}
                         buttonText="+ Add Photo"
                         fixedCrop={cropAspect}
                         name="['http://regen.network/galleryPhotos'].@list[3].@value" // right
@@ -296,7 +296,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                 /> */}
                 <Field
                   classes={{ root: styles.field, main: styles.fullSizeMedia }}
-                  component={ImageDrop}
+                  component={ImageUpload}
                   label="Land Steward photo"
                   // labelSubText="(required if you don’t add a video)" TODO: uncomment when video input is ready
                   description="Upload a nice portrait of the land stewards and their families. This should be different from the other photos of land stewards you uploaded in the gallery above."

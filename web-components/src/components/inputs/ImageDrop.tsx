@@ -12,7 +12,6 @@ import CropImageModal from '../modal/CropImageModal';
 import TrashIcon from '../icons/TrashIcon';
 import { Image } from '../image';
 import { Label } from '../label';
-import { uploadImage, deleteImage } from '../../utils/s3';
 
 export interface ImageDropProps extends FieldProps {
   className?: string;
@@ -27,7 +26,8 @@ export interface ImageDropProps extends FieldProps {
   buttonText?: string;
   fixedCrop?: Crop;
   hideDragText?: boolean;
-  apiServerUrl?: string;
+  onDelete?: (fileName: string) => Promise<void>;
+  onUpload?: (imageFile: File) => Promise<string>;
 }
 
 const useStyles = makeStyles(theme => ({
@@ -94,7 +94,8 @@ function ImageDrop({
   buttonText,
   fixedCrop,
   hideDragText,
-  apiServerUrl,
+  onUpload,
+  onDelete,
   ...fieldProps
 }: ImageDropProps): JSX.Element {
   const [cropModalOpen, setCropModalOpen] = useState(false);
@@ -104,8 +105,6 @@ function ImageDrop({
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up('tablet'));
   const { form, field } = fieldProps;
-  const projectId = 'springfield'; //TODO
-  const projectPath = `projects/${projectId}`;
 
   const handleDrop = (files: File[]): void => {
     if (files && files.length > 0) {
@@ -159,8 +158,14 @@ function ImageDrop({
   };
 
   const handleCropModalSubmit = async (croppedImage: HTMLImageElement): Promise<void> => {
-    const imageFile = await srcToFile(croppedImage.src, fileName, 'image/png');
-    const result: any = await uploadImage(imageFile, projectPath, apiServerUrl);
+    let result = '';
+
+    if (onUpload) {
+      const imageFile = await srcToFile(croppedImage.src, fileName, 'image/png');
+      result = await onUpload(imageFile);
+    } else {
+      result = croppedImage.src;
+    }
 
     if (result) {
       form.setFieldValue(field.name, result);
@@ -171,17 +176,13 @@ function ImageDrop({
 
   const srcToFile = async (src: string, fileName: string, mimeType: string): Promise<File> => {
     return fetch(src)
-      .then(function(res) {
-        return res.arrayBuffer();
-      })
-      .then(function(buf) {
-        return new File([buf], fileName, { type: mimeType });
-      });
+      .then(res => res.arrayBuffer())
+      .then(buf => new File([buf], fileName, { type: mimeType }));
   };
 
   const handleDelete = async (): Promise<void> => {
-    if (field.value && fileName) {
-      await deleteImage(projectId, fileName, apiServerUrl);
+    if (onDelete) {
+      await onDelete(fileName);
     }
     form.setFieldValue(field.name, undefined);
     setInitialImage('');

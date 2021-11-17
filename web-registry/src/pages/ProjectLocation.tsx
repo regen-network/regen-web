@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import {
   ProjectLocationForm,
@@ -14,7 +14,7 @@ import {
 } from '../generated/graphql';
 
 const ProjectLocation: React.FC = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const { projectId } = useParams<{ projectId: string }>();
 
   const [updateProject] = useUpdateProjectByIdMutation();
@@ -42,7 +42,7 @@ const ProjectLocation: React.FC = () => {
   async function submit(values: ProjectLocationFormValues): Promise<void> {
     try {
       await saveValues(values);
-      history.push(`/project-pages/${projectId}/roles`);
+      navigate(`/project-pages/${projectId}/roles`);
     } catch (e) {
       //   // TODO: Should we display the error banner here?
       //   // https://github.com/regen-network/regen-registry/issues/554

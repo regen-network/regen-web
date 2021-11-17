@@ -143,7 +143,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
 
 const FooterItem = ({ title, items }: FooterItemProps): JSX.Element => {
   const classes = useStyles({});
-  console.log('ITEMS', items)
+  console.log('ITEMS', items);
   return (
     <div className={classes.footerItem}>
       <Title className={classes.title} variant="h5">
@@ -218,7 +218,11 @@ export default function Footer({
         </Grid>
         <SocialLinks className={classes.community} />
         <hr className={classes.separator} />
-        <Grid className={classes.bottomGrid} container justifyContent="space-between">
+        <Grid
+          className={classes.bottomGrid}
+          container
+          justifyContent="space-between"
+        >
           <Grid item className={classes.bottom}>
             <Link href={termsUrl}>Terms</Link> |{' '}
             <Link href={privacyUrl}>Privacy</Link>

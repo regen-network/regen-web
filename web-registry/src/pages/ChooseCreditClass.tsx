@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import Grid from '@mui/material/Grid';
-import { useHistory, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
 import ImageActionCard from 'web-components/lib/components/cards/ImageActionCard';
@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const ChooseCreditClass: React.FC = () => {
   const classes = useStyles();
-  const history = useHistory();
+  const navigate = useNavigate();
   const { projectId } = useParams<{ projectId: string }>();
 
   const { data: creditClassesData } = useAllCreditClassesQuery();
@@ -77,7 +77,7 @@ const ChooseCreditClass: React.FC = () => {
               },
             },
           });
-          history.push(`/project-pages/${projectId}/basic-info`);
+          navigate(`/project-pages/${projectId}/basic-info`);
         } catch (e) {
           // TODO: Should we display the error banner here?
           // https://github.com/regen-network/regen-registry/issues/554

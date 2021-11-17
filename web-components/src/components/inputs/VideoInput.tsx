@@ -1,11 +1,6 @@
 import React, { useState } from 'react';
 import { makeStyles, useTheme } from '@mui/styles';
-import {
-  CardMedia,
-  IconButton,
-  Collapse,
-  LinearProgress,
-} from '@mui/material';
+import { CardMedia, IconButton, Collapse, LinearProgress } from '@mui/material';
 import { FieldProps } from 'formik';
 import cx from 'clsx';
 
@@ -142,7 +137,8 @@ function VideoInput({
                     classes={{ root: styles.deleteButton }}
                     onClick={handleDelete}
                     aria-label="delete"
-                    size="large">
+                    size="large"
+                  >
                     <TrashIcon color={theme.palette.error.light} />
                   </IconButton>
                 </Card>

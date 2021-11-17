@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
-import { useHistory, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import Description from 'web-components/lib/components/description';
 import { OnboardingFormTemplate } from '../components/templates';
@@ -43,7 +43,7 @@ const EntityDisplay: React.FC = () => {
   const styles = useStyles();
   const activeStep = 0;
   const { projectId } = useParams<{ projectId: string }>();
-  const history = useHistory();
+  const navigate = useNavigate();
   const [initialValues, setInitialValues] = useState<
     EntityDisplayValues | undefined
   >();
@@ -121,7 +121,7 @@ const EntityDisplay: React.FC = () => {
           },
         },
       });
-      history.push(`/project-pages/${projectId}/story`);
+      navigate(`/project-pages/${projectId}/story`);
     } catch (e) {
       // TODO: display the error banner in case of server error
       // https://github.com/regen-network/regen-registry/issues/554

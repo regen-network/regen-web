@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import { Typography } from '@mui/material';
 import { useAuth0 } from '@auth0/auth0-react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
 import CreateProjectCard from 'web-components/lib/components/cards/CreateProjectCard';
@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const ProjectList: React.FC = () => {
   const classes = useStyles();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   // TODO Create provider to get directly user data if logged in
   // https://github.com/regen-network/regen-registry/issues/555
@@ -68,7 +68,7 @@ const ProjectList: React.FC = () => {
       });
       const projectId = res.data?.createProject?.project?.id;
       if (projectId) {
-        history.push(`/project-pages/${projectId}/choose-credit-class`);
+        navigate(`/project-pages/${projectId}/choose-credit-class`);
       }
     } catch (e) {
       // TODO: Should we display the error banner here?

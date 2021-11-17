@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
-import { useHistory, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 
 import Description from 'web-components/lib/components/description';
@@ -96,7 +96,7 @@ function stripIds(values: RolesValues): RolesValues {
 const Roles: React.FC = () => {
   const styles = useStyles();
   const activeStep = 0;
-  const history = useHistory();
+  const navigate = useNavigate();
   const { projectId } = useParams<{ projectId: string }>();
   const { user } = useAuth0();
   const userEmail = user?.email;
@@ -185,7 +185,7 @@ const Roles: React.FC = () => {
           },
         },
       });
-      history.push(`/project-pages/${projectId}/entity-display`);
+      navigate(`/project-pages/${projectId}/entity-display`);
     } catch (e) {
       // TODO: Should we display the error banner here?
       // https://github.com/regen-network/regen-registry/issues/554

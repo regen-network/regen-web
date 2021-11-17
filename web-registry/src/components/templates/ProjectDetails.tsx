@@ -299,8 +299,10 @@ function ProjectDetails(): JSX.Element {
     setOpen(false);
   };
 
-  const [issuanceModalData, setIssuanceModalData] =
-    useState<IssuanceModalData | null>(null);
+  const [
+    issuanceModalData,
+    setIssuanceModalData,
+  ] = useState<IssuanceModalData | null>(null);
   const [issuanceModalOpen, setIssuanceModalOpen] = useState(false);
   const [isBuyCreditsModalOpen, setBuyCreditsModalOpen] = useState(false);
 

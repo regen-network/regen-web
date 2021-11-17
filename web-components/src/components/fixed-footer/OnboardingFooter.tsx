@@ -1,12 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 import { DefaultTheme as Theme } from '@mui/styles';
-import {
-  withStyles,
-  createStyles,
-  makeStyles,
-  useTheme,
-} from '@mui/styles';
+import { withStyles, createStyles, makeStyles, useTheme } from '@mui/styles';
 import LinearProgress from '@mui/material/LinearProgress';
 import Grid from '@mui/material/Grid';
 

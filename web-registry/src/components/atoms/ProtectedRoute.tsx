@@ -6,7 +6,7 @@ interface Props extends RouteProps {
   component: React.ComponentType;
 }
 const ProtectedRoute: React.FC<Props> = ({ component, ...args }) => (
-  <Route component={withAuthenticationRequired(component)} {...args} />
+  <Route element={<>{withAuthenticationRequired(component)}</>} {...args} />
 );
 
 export { ProtectedRoute };

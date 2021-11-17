@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { BasicInfoForm, BasicInfoFormValues } from '../components/organisms';
 import { OnboardingFormTemplate } from '../components/templates';
@@ -9,7 +9,7 @@ import {
 } from '../generated/graphql';
 
 const BasicInfo: React.FC = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const { projectId } = useParams<{ projectId: string }>();
 
   const [updateProject] = useUpdateProjectByIdMutation();
@@ -43,7 +43,7 @@ const BasicInfo: React.FC = () => {
           },
         },
       });
-      history.push(`/project-pages/${projectId}/location`);
+      navigate(`/project-pages/${projectId}/location`);
     } catch (e) {
       // TODO: Should we display the error banner here?
       // https://github.com/regen-network/regen-registry/issues/554

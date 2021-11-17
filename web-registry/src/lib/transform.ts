@@ -123,9 +123,10 @@ export function buildIssuanceModalData(
           creditClassVersion?.metadata?.['http://regen.network/standard']?.[
             'http://regen.network/documentId'
           ],
-        name: creditClassVersion?.metadata?.['http://regen.network/standard']?.[
-          'http://schema.org/name'
-        ],
+        name:
+          creditClassVersion?.metadata?.['http://regen.network/standard']?.[
+            'http://schema.org/name'
+          ],
         version:
           creditClassVersion?.metadata?.['http://regen.network/standard']?.[
             'http://schema.org/version'

@@ -26,7 +26,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     color: props.disabled
       ? theme.palette.info.main
       : theme.palette.primary.contrastText,
-      
+
     fontFamily: theme.typography.fontFamily,
     fontWeight: 'bold',
     position: 'relative',

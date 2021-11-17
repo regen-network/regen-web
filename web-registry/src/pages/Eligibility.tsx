@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import {
   IncludesGrasslandsForm,
@@ -8,14 +8,14 @@ import {
 import { OnboardingFormTemplate } from '../components/templates';
 
 const Eligibility: React.FC = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   async function saveAndExit(): Promise<void> {
     // TODO: functionality
   }
 
   function next(): void {
-    history.push('/project-plans/eligibility/additionality');
+    navigate('/project-plans/eligibility/additionality');
   }
 
   async function submitIncludesGrasslands(

@@ -1,12 +1,6 @@
 import React, { useState } from 'react';
 import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
-import {
-  useParams,
-  useHistory,
-  useRouteMatch,
-  Switch,
-  Route,
-} from 'react-router-dom';
+import { useParams, useNavigate, Routes, Route } from 'react-router-dom';
 import cx from 'clsx';
 
 import Section from 'web-components/lib/components/section';
@@ -104,20 +98,18 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
 }));
 
 function CreditClassDetails(): JSX.Element {
-  let { path } = useRouteMatch();
-
   return (
-    <Switch>
-      <Route exact path={path}>
-        <CreditClassDetail isLandSteward={true} />
-      </Route>
-      <Route path={`${path}/buyer`}>
-        <CreditClassDetail isLandSteward={false} />
-      </Route>
-      <Route path={`${path}/land-steward`}>
-        <CreditClassDetail isLandSteward={true} />
-      </Route>
-    </Switch>
+    <Routes>
+      <Route path="/" element={<CreditClassDetail isLandSteward={true} />} />
+      <Route
+        path="buyer"
+        element={<CreditClassDetail isLandSteward={false} />}
+      />
+      <Route
+        path="land-steward"
+        element={<CreditClassDetail isLandSteward={true} />}
+      />
+    </Routes>
   );
 }
 
@@ -126,7 +118,7 @@ function CreditClassDetail({ isLandSteward }: CreditDetailsProps): JSX.Element {
   const [isBuyerModalOpen, setBuyerModalOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const styles = useStyles();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   let { creditClassId } = useParams<{ creditClassId: string }>();
 
@@ -191,7 +183,7 @@ function CreditClassDetail({ isLandSteward }: CreditDetailsProps): JSX.Element {
   };
 
   const setContent = (): void => {
-    history.push(
+    navigate(
       `/credit-classes/${creditClassId}/${
         isLandSteward ? 'buyer' : 'land-steward'
       }`,

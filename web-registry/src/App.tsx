@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useAuth0, OAuthError } from '@auth0/auth0-react';
 
 import { createBrowserHistory } from 'history';
@@ -70,7 +70,7 @@ const App: React.FC = (): JSX.Element => {
     authError.error_description.indexOf('email_not_verified:') > -1
   ) {
     const email: string = authError.error_description.split(':')[1];
-    history.push(`/verify-email?email=${email}`);
+    navigate(`/verify-email?email=${email}`);
   }
 
   return (
@@ -78,175 +78,83 @@ const App: React.FC = (): JSX.Element => {
       <ScrollToTop />
       <div>
         <RegistryNav />
-        <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route exact path="/verify-email">
-            <VerifyEmail />
-          </Route>
-          <Route exact path="/signup">
-            <Signup />
-          </Route>
-          <Route exact path="/certificate">
-            <CertificatePage />
-          </Route>
-          <Route exact path={`/projects/wilmot/admin`} component={Seller} />
-          <Route exact path="/projects/impactag">
-            <Redirect to="/projects/wilmot" />
-          </Route>
-          <Route exact path="/projects/impactag/admin">
-            <Redirect to="/projects/wilmot/admin" />
-          </Route>
-          <Route exact path="/buyers" component={BuyersPage} />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="verify-email" element={<VerifyEmail />} />
+          <Route path="signup" element={<Signup />} />
+          <Route path="certificate" element={<CertificatePage />} />
+          <Route path="projects/wilmot/admin" element={<Seller />} />
+          <Route path="buyers" element={<BuyersPage />} />
+          <Route path="create-methodology" element={<CreateMethodology />} />
+          <Route path="create-credit-class" element={<CreateCreditClass />} />
+          <Route path="land-stewards" element={<LandStewards />} />
           <Route
-            exact
-            path="/create-methodology"
-            component={CreateMethodology}
+            path="methodology-review-process"
+            element={<MethodologyReviewProcess />}
           />
+          <Route path="projects/:projectId" element={<Project />} />
           <Route
-            exact
-            path="/create-credit-class"
-            component={CreateCreditClass}
-          />
-          <Route exact path="/land-stewards" component={LandStewards} />
-          <Route
-            exact
-            path="/methodology-review-process"
-            component={MethodologyReviewProcess}
-          />
-          <Route
-            path="/projects"
-            render={({ match: { path } }) => (
-              <>
-                <Route path={path} exact>
-                  <Redirect to="/projects/wilmot" />
-                </Route>
-                <Route path={`${path}/:projectId`} component={Project} />
-              </>
-            )}
-          />
-          <Route
-            path="/post-purchase"
-            render={({ match: { path } }) => (
-              <>
-                <Route
-                  path={`${path}/:projectId/:walletId/:name`}
-                  component={PostPurchase}
-                />
-              </>
-            )}
+            path="post-purchase/:projectId/:walletId/:name"
+            element={<PostPurchase />}
           />
           <ProtectedRoute path="/user-profile" component={UserProfile} />
           <ProtectedRoute
             path="/organization-profile"
             component={OrganizationProfile}
           />
-          <Route
-            path="/project-pages"
-            render={({ match: { path } }) => (
+          <Route path="/project-pages" element={<ProjectList />}>
+            <ProtectedRoute component={ProjectList} />
+            <ProtectedRoute
+              path=":projectId/choose-credit-class"
+              component={ChooseCreditClass}
+            />
+            <ProtectedRoute
+              path=":projectId/basic-info"
+              component={BasicInfo}
+            />
+            <ProtectedRoute
+              path=":projectId/location"
+              component={ProjectLocation}
+            />
+            <ProtectedRoute path=":projectId/story" component={Story} />
+            <ProtectedRoute path=":projectId/media" component={Media} />
+            <ProtectedRoute path=":projectId/roles" component={Roles} />
+            <ProtectedRoute
+              path=":projectId/entity-display"
+              component={EntityDisplay}
+            />
+          </Route>
+          <Route path="/admin" element={<Admin />}>
+            {isAdmin(user) && (
               <>
-                <ProtectedRoute path={path} exact component={ProjectList} />
                 <ProtectedRoute
-                  path={`${path}/:projectId/choose-credit-class`}
-                  component={ChooseCreditClass}
+                  path="credits/create-and-transfer"
+                  component={BuyerCreditsTransfer}
+                />
+                <ProtectedRoute path="credits/issue" component={CreditsIssue} />
+                <ProtectedRoute
+                  path="credits/transfer"
+                  component={CreditsTransfer}
                 />
                 <ProtectedRoute
-                  path={`${path}/:projectId/basic-info`}
-                  component={BasicInfo}
+                  path="credits/retire"
+                  component={CreditsRetire}
                 />
-                <ProtectedRoute
-                  path={`${path}/:projectId/location`}
-                  component={ProjectLocation}
-                />
-                <ProtectedRoute
-                  path={`${path}/:projectId/story`}
-                  component={Story}
-                />
-                <ProtectedRoute
-                  path={`${path}/:projectId/media`}
-                  component={Media}
-                />
-                <ProtectedRoute
-                  path={`${path}/:projectId/roles`}
-                  component={Roles}
-                />
-                <ProtectedRoute
-                  path={`${path}/:projectId/entity-display`}
-                  component={EntityDisplay}
-                />
-
-                {/* Used for Project Plan flow
-                <ProtectedRoute path={`${path}/:projectId/getting-started`} component={GettingStarted} />
-                <Route
-                  path={`${path}/eligibility`}
-                  render={({ match: { path } }) => (
-                    <>
-                      <ProtectedRoute path={path} exact component={Eligibility} />
-                      <ProtectedRoute path={`${path}/additionality`} component={Additionality} />
-                    </>
-                  )}
-                /> */}
+                <ProtectedRoute path="buyer/create" component={BuyerCreate} />
               </>
             )}
+          </Route>
+          {/* <Route path="methodologies" element={<MethodologiesList />} /> TODO */}
+          <Route
+            path="methodologies/:methodologyId"
+            element={<MethodologyDetails />}
           />
           <Route
-            path="/admin"
-            render={({ match: { path } }) => (
-              <>
-                <ProtectedRoute path={path} component={Admin} exact />
-                {isAdmin(user) && (
-                  <>
-                    <ProtectedRoute
-                      path={`${path}/credits/create-and-transfer`}
-                      component={BuyerCreditsTransfer}
-                    />
-                    <ProtectedRoute
-                      path={`${path}/credits/issue`}
-                      component={CreditsIssue}
-                    />
-                    <ProtectedRoute
-                      path={`${path}/credits/transfer`}
-                      component={CreditsTransfer}
-                    />
-                    <ProtectedRoute
-                      path={`${path}/credits/retire`}
-                      component={CreditsRetire}
-                    />
-                    <ProtectedRoute
-                      path={`${path}/buyer/create`}
-                      component={BuyerCreate}
-                    />
-                  </>
-                )}
-              </>
-            )}
+            path="credit-classes/:creditClassId"
+            element={<CreditClassDetails />}
           />
-          <Route
-            path="/methodologies"
-            render={({ match: { path } }) => (
-              <>
-                {/* <Route path={path} exact component={MethodologiesList} /> TODO */}
-                <Route
-                  path={`${path}/:methodologyId`}
-                  component={MethodologyDetails}
-                />
-              </>
-            )}
-          />
-          <Route
-            path="/credit-classes"
-            render={({ match: { path } }) => (
-              <>
-                <Route
-                  path={`${path}/:creditClassId`}
-                  component={CreditClassDetails}
-                />
-              </>
-            )}
-          />
-          <Route path="*" component={NotFoundPage} />
-        </Switch>
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
         <CookiesBanner privacyUrl="https://www.regen.network/privacy-policy/" />
         <footer>
           <AppFooter />

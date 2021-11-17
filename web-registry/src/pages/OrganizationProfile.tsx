@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import clsx from 'clsx';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 
 import {
@@ -64,7 +64,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 type AcctType = 'user' | 'organization';
 
 const OrganizationProfile: React.FC = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const { user } = useAuth0();
   const [acctType, setAcctType] = useState<AcctType>('user');
   const [error, setError] = useState<unknown>(null);
@@ -226,7 +226,7 @@ const OrganizationProfile: React.FC = () => {
           submit={submitOrgProfile}
           mapToken={process.env.REACT_APP_MAPBOX_TOKEN as string}
           skip={handleSkip}
-          goBack={() => history.push('/user-profile')}
+          goBack={() => navigate('/user-profile')}
         />
       </PopIn>
     </OnBoardingSection>

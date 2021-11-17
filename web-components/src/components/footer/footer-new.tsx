@@ -216,7 +216,11 @@ const Footer: React.FC<{
         </Box>
 
         <hr className={styles.separator} />
-        <Grid className={styles.bottomGrid} container justifyContent="space-between">
+        <Grid
+          className={styles.bottomGrid}
+          container
+          justifyContent="space-between"
+        >
           <Grid item className={styles.bottom}>
             <Link href={termsUrl}>Terms</Link> |{' '}
             <Link href={privacyUrl}>Privacy</Link>

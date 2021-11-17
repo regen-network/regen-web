@@ -348,17 +348,19 @@ function CertificatePage(): JSX.Element {
                   documentId: creditClassVersion?.documentId,
                   name: creditClassVersion?.name || '',
                   version: creditClassVersion?.version || '',
-                  url: creditClassVersion?.metadata?.[
-                    'http://schema.org/url'
-                  ]?.['@value'],
+                  url:
+                    creditClassVersion?.metadata?.['http://schema.org/url']?.[
+                      '@value'
+                    ],
                 },
                 methodology: {
                   documentId: methodologyVersion?.documentId,
                   name: methodologyVersion?.name || '',
                   version: methodologyVersion?.version || '',
-                  url: methodologyVersion?.metadata?.[
-                    'http://schema.org/url'
-                  ]?.['@value'],
+                  url:
+                    methodologyVersion?.metadata?.['http://schema.org/url']?.[
+                      '@value'
+                    ],
                 },
                 standard: {
                   documentId:
@@ -373,9 +375,10 @@ function CertificatePage(): JSX.Element {
                     creditClassVersion?.metadata?.[
                       'http://regen.network/standard'
                     ]?.['http://schema.org/version'] || '',
-                  url: creditClassVersion?.metadata?.[
-                    'http://regen.network/standard'
-                  ]?.['http://schema.org/url']?.['@value'],
+                  url:
+                    creditClassVersion?.metadata?.[
+                      'http://regen.network/standard'
+                    ]?.['http://schema.org/url']?.['@value'],
                 },
                 projectType: project.type || '',
               }}
@@ -392,12 +395,12 @@ function CertificatePage(): JSX.Element {
   const externalProjectLink =
     currentProject?.metadata?.['http://regen.network/externalProjectUrl'];
   const issuer = currentVintage?.partyByIssuerId;
-  const retirements =
-    currentVintage?.retirementsByCreditVintageId?.nodes?.filter(n =>
+  const retirements = currentVintage?.retirementsByCreditVintageId?.nodes?.filter(
+    n =>
       buyerWalletId
         ? n?.walletId === buyerWalletId
         : n?.walletId === currentPurchase?.buyerWalletId,
-    );
+  );
 
   return (
     <div className={classes.root}>

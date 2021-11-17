@@ -1,14 +1,6 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import {
-  Grid,
-  createStyles,
-  withStyles,
-  makeStyles,
-  Theme,
-  Typography,
-  LinearProgress,
-} from '@mui/material';
+import { Grid, createStyles, withStyles, makeStyles, Theme, Typography, LinearProgress } from '@mui/material';
 import Img, { FluidObject } from 'gatsby-image';
 import { getFormattedDate } from 'web-components/src/utils/format';
 import clsx from 'clsx';

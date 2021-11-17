@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import clsx from 'clsx';
 import { makeStyles, DefaultTheme as Theme, useTheme } from '@mui/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -49,7 +49,7 @@ const CreditClassCards: React.FC<Props> = ({
   justifyContent = 'center',
   ...props
 }) => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const styles = useStyles();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
@@ -88,7 +88,7 @@ const CreditClassCards: React.FC<Props> = ({
                   creditClassContent?.path &&
                   `/credit-classes/${creditClassContent?.path}`;
                 if (path) {
-                  history.push(path);
+                  navigate(path);
                 }
               }}
               title={<BlockContent content={creditClassContent?.nameRaw} />}

@@ -158,7 +158,7 @@ function OrganizationModal({
         >
           {({ values, submitForm, isValid, isSubmitting }) => {
             return (
-              <Form translate="yes">
+              <Form>
                 <OnBoardingCard className={styles.card}>
                   <Field
                     className={styles.field}

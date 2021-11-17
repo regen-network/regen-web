@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 import Description from 'web-components/lib/components/description';
 import { OnboardingFormTemplate } from '../components/templates';
@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const Story: React.FC = () => {
   const styles = useStyles();
-  const history = useHistory();
+  const navigate = useNavigate();
   const activeStep = 0;
   const { projectId } = useParams<{ projectId: string }>();
 
@@ -64,7 +64,7 @@ const Story: React.FC = () => {
           },
         },
       });
-      history.push(`/project-pages/${projectId}/media`);
+      navigate(`/project-pages/${projectId}/media`);
     } catch (e) {
       // TODO: Should we display the error banner here?
       // https://github.com/regen-network/regen-registry/issues/554

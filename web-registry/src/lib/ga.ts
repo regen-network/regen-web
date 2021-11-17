@@ -29,11 +29,9 @@ function initializeGA(): void {
       storage: 'none', // disable cookies for google analytics
       clientId: clientFingerprint, // set custom client fingerprint
     };
-    window.GATSBY_PLUGIN_GOOGLE_ANALYTICS_GDPR_RUNNING_WITH_MODE =
-      GA_MODE_RUNNING_COOKIES_DISABLED;
+    window.GATSBY_PLUGIN_GOOGLE_ANALYTICS_GDPR_RUNNING_WITH_MODE = GA_MODE_RUNNING_COOKIES_DISABLED;
   } else {
-    window.GATSBY_PLUGIN_GOOGLE_ANALYTICS_GDPR_RUNNING_WITH_MODE =
-      GA_MODE_RUNNING_COOKIES_ENABLED;
+    window.GATSBY_PLUGIN_GOOGLE_ANALYTICS_GDPR_RUNNING_WITH_MODE = GA_MODE_RUNNING_COOKIES_ENABLED;
   }
 
   // var ractGaOptions = { gaOptions: gaOptions };

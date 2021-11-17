@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTheme } from '@mui/styles';
-import { useHistory } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 import Box from '@mui/material/Box';
 
@@ -20,8 +20,8 @@ import { ReactComponent as LandStewardsIcon } from '../../assets/svgs/land-stewa
 import { useMoreProjectsQuery } from '../../generated/graphql';
 
 const RegistryNav: React.FC = () => {
-  const history = useHistory();
-  const { pathname } = history.location;
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
   const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
   const theme = useTheme();
   const fullWidthRegExp: RegExp = /projects\/[a-z-]+/;
@@ -66,7 +66,8 @@ const RegistryNav: React.FC = () => {
   const programStandardItems: HeaderDropdownItemProps[] = [
     {
       linkComponent: NavLink,
-      href: 'https://regen-registry.s3.amazonaws.com/Regen+Registry+Program+Guide.pdf',
+      href:
+        'https://regen-registry.s3.amazonaws.com/Regen+Registry+Program+Guide.pdf',
       title: 'Program Guide',
     },
     // { href: '/process', title: 'Process' },
@@ -188,7 +189,7 @@ const RegistryNav: React.FC = () => {
       isAuthenticated={isAuthenticated}
       onLogin={() => loginWithRedirect({ redirectUri: window.location.origin })}
       onLogout={() => logout({ returnTo: window.location.origin })}
-      onSignup={() => history.push('/signup')}
+      onSignup={() => navigate('/signup')}
       menuItems={menuItems}
       color={
         headerColors[pathname]

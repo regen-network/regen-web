@@ -168,80 +168,83 @@ function ImageDrop({
     setInitialImage('');
   };
 
-  return <>
-    <FieldFormControl
-      className={cx(styles.root, classes?.root, className)}
-      label={label}
-      disabled={form.isSubmitting}
-      optional={optional}
-      labelSubText={labelSubText}
-      {...fieldProps}
-    >
-      {() =>
-        field.value ? (
-          <div className={cx(styles.preview, classes?.main)}>
-            <Image
-              className={styles.previewImage}
-              src={field.value}
-              backgroundImage
-            />
-            <IconButton
-              classes={{ root: styles.deleteButton }}
-              onClick={handleDelete}
-              aria-label="delete"
-              size="large">
-              <TrashIcon color={theme.palette.error.light} />
-            </IconButton>
-          </div>
-        ) : (
-          <div className={cx('container', styles.main, classes?.main)}>
-            <div
-              {...getRootProps({
-                className: cx('dropzone', styles.drop),
-              })}
-            >
-              {isDesktop && !hideDragText && (
-                <>
-                  <Label className={styles.label}>drag and drop</Label>
-                  <span className={styles.or}>or</span>
-                </>
-              )}
-              <input
-                {...getInputProps({
-                  defaultValue: '',
-                  contentEditable: false,
-                  draggable: false,
-                  spellCheck: false,
-                })}
+  return (
+    <>
+      <FieldFormControl
+        className={cx(styles.root, classes?.root, className)}
+        label={label}
+        disabled={form.isSubmitting}
+        optional={optional}
+        labelSubText={labelSubText}
+        {...fieldProps}
+      >
+        {() =>
+          field.value ? (
+            <div className={cx(styles.preview, classes?.main)}>
+              <Image
+                className={styles.previewImage}
+                src={field.value}
+                backgroundImage
               />
-              <input
-                type="file"
-                hidden
-                onChange={handleFileChange}
-                accept="image/*"
-                id={`btn-file-input-${field.name}`}
-              />
-              <label htmlFor={`btn-file-input-${field.name}`}>
-                <OutlinedButton
-                  classes={{ root: cx(styles.button, classes?.button) }}
-                  isImageBtn
-                >
-                  {buttonText || '+ add'}
-                </OutlinedButton>
-              </label>
+              <IconButton
+                classes={{ root: styles.deleteButton }}
+                onClick={handleDelete}
+                aria-label="delete"
+                size="large"
+              >
+                <TrashIcon color={theme.palette.error.light} />
+              </IconButton>
             </div>
-          </div>
-        )
-      }
-    </FieldFormControl>
-    <CropImageModal
-      open={cropModalOpen}
-      onClose={handleCropModalClose}
-      onSubmit={handleCropModalSubmit}
-      initialImage={initialImage}
-      fixedCrop={fixedCrop}
-    />
-  </>;
+          ) : (
+            <div className={cx('container', styles.main, classes?.main)}>
+              <div
+                {...getRootProps({
+                  className: cx('dropzone', styles.drop),
+                })}
+              >
+                {isDesktop && !hideDragText && (
+                  <>
+                    <Label className={styles.label}>drag and drop</Label>
+                    <span className={styles.or}>or</span>
+                  </>
+                )}
+                <input
+                  {...getInputProps({
+                    defaultValue: '',
+                    contentEditable: false,
+                    draggable: false,
+                    spellCheck: false,
+                  })}
+                />
+                <input
+                  type="file"
+                  hidden
+                  onChange={handleFileChange}
+                  accept="image/*"
+                  id={`btn-file-input-${field.name}`}
+                />
+                <label htmlFor={`btn-file-input-${field.name}`}>
+                  <OutlinedButton
+                    classes={{ root: cx(styles.button, classes?.button) }}
+                    isImageBtn
+                  >
+                    {buttonText || '+ add'}
+                  </OutlinedButton>
+                </label>
+              </div>
+            </div>
+          )
+        }
+      </FieldFormControl>
+      <CropImageModal
+        open={cropModalOpen}
+        onClose={handleCropModalClose}
+        onSubmit={handleCropModalSubmit}
+        initialImage={initialImage}
+        fixedCrop={fixedCrop}
+      />
+    </>
+  );
 }
 
 export { ImageDrop };

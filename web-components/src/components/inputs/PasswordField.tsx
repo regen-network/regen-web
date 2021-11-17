@@ -73,7 +73,8 @@ export default function PasswordField({
           aria-label="toggle password visibility"
           onClick={() => setShowPassword(!showPassword)}
           onMouseDown={handleMouseDownPassword}
-          size="large">
+          size="large"
+        >
           <EyeIcon
             className={classes.eyeIcon}
             color={theme.palette.secondary.dark}

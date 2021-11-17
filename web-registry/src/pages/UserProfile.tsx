@@ -1,5 +1,5 @@
 import React, { useCallback, useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth0 } from '@auth0/auth0-react';
 import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
@@ -37,7 +37,7 @@ const messageExpired: string = 'Access expired.';
 
 function UserProfile(): JSX.Element {
   const { user } = useAuth0();
-  const history = useHistory();
+  const navigate = useNavigate();
   const userEmail = user?.email;
 
   // Get any URL parameters from auth0 after email verification
@@ -135,7 +135,7 @@ function UserProfile(): JSX.Element {
         },
       });
       search.set('message', 'User profile created!');
-      history.push('/organization-profile'); // TODO: programmatically handle routing?
+      navigate('/organization-profile'); // TODO: programmatically handle routing?
     } catch (e) {
       setError(e);
     } finally {

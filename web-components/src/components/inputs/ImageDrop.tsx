@@ -12,7 +12,7 @@ import CropImageModal from '../modal/CropImageModal';
 import TrashIcon from '../icons/TrashIcon';
 import { Image } from '../image';
 import { Label } from '../label';
-import { uploadImage, deleteImage } from '../../utils/uploadFile';
+import { uploadImage, deleteImage } from '../../utils/s3';
 
 export interface ImageDropProps extends FieldProps {
   className?: string;
@@ -180,9 +180,9 @@ function ImageDrop({
   };
 
   const handleDelete = async (): Promise<void> => {
-    const fileLocation = `${projectId}/${fileName}`;
-    console.log('fileLocation ', fileLocation);
-    await deleteImage(projectId, fileName, apiServerUrl);
+    if (field.value && fileName) {
+      await deleteImage(projectId, fileName, apiServerUrl);
+    }
     form.setFieldValue(field.name, undefined);
     setInitialImage('');
     setFileName('');

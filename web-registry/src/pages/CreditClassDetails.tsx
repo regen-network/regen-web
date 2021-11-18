@@ -100,7 +100,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
 function CreditClassDetails(): JSX.Element {
   return (
     <Routes>
-      <Route path="/" element={<CreditClassDetail isLandSteward={true} />} />
+      <Route path="/*" element={<CreditClassDetail isLandSteward={true} />} />
       <Route
         path="buyer"
         element={<CreditClassDetail isLandSteward={false} />}

@@ -20,6 +20,7 @@ import { IndividualFormValues } from 'web-components/lib/components/modal/Indivi
 import { requiredMessage } from 'web-components/lib/components/inputs/validation';
 
 import { validate, getProjectPageBaseData } from '../../lib/rdf';
+import getApiUri from '../../lib/apiUri';
 import { useShaclGraphByUriQuery } from '../../generated/graphql';
 import { urlType } from './MediaForm';
 
@@ -200,6 +201,7 @@ const OrganizationFormlet: React.FC<OrganizationFormletProps> = ({
 }) => {
   const styles = useStyles();
   const theme = useTheme();
+  const apiUri = getApiUri();
   const { projectId } = useParams();
 
   const triggerOnChange = async (value: boolean): Promise<void> => {
@@ -228,6 +230,7 @@ const OrganizationFormlet: React.FC<OrganizationFormletProps> = ({
             className={styles.field}
             component={ImageUpload}
             projectId={projectId}
+            apiServerUrl={apiUri}
             label="Organization logo"
             name={`['${role}'].['http://schema.org/logo'].@value`}
             fallbackAvatar={
@@ -256,6 +259,7 @@ const IndividualFormlet: React.FC<IndividualFormletProps> = ({
 }) => {
   const styles = useStyles();
   const { projectId } = useParams();
+  const apiUri = getApiUri();
   const triggerOnChange = async (value: boolean): Promise<void> => {
     setType(role, 'Individual', value, setFieldValue, setFieldTouched);
   };
@@ -275,9 +279,10 @@ const IndividualFormlet: React.FC<IndividualFormletProps> = ({
           <Field
             className={styles.field}
             component={ImageUpload}
-            projectId={projectId}
             label="Bio photo"
             name={`['${role}'].['http://schema.org/image'].@value`}
+            projectId={projectId}
+            apiServerUrl={apiUri}
           />
           <Field
             charLimit={160}

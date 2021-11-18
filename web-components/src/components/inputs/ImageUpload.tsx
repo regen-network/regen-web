@@ -29,7 +29,7 @@ function ImageUpload({ apiServerUrl, projectId, isDrop, ...props }: ImageUploadP
   return isDrop ? (
     <ImageDrop {...props} onDelete={handleDelete} onUpload={handleUpload} />
   ) : (
-    <ImageField {...props} onDelete={handleDelete} onUpload={handleUpload} />
+    <ImageField {...props} onUpload={handleUpload} />
   );
 }
 

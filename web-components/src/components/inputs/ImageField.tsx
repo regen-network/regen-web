@@ -45,7 +45,6 @@ interface Props extends FieldProps {
   fallbackAvatar?: JSX.Element;
   transformValue?: (v: any) => any;
   triggerOnChange?: (v: any) => Promise<void>;
-  onDelete?: (fileName: string) => Promise<void>;
   onUpload?: (imageFile: File) => Promise<string>;
 }
 
@@ -57,7 +56,6 @@ export default function ImageField({
   fallbackAvatar,
   transformValue,
   triggerOnChange,
-  onDelete,
   onUpload,
   ...fieldProps
 }: Props): JSX.Element {

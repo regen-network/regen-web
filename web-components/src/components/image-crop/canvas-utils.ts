@@ -55,3 +55,9 @@ export function canvasToBlob(canvas: HTMLCanvasElement): Promise<HTMLImageElemen
     }, 'image/jpeg');
   });
 }
+
+export async function srcToFile(src: string, fileName: string, mimeType: string): Promise<File> {
+  return fetch(src)
+    .then(res => res.arrayBuffer())
+    .then(buf => new File([buf], fileName, { type: mimeType }));
+}

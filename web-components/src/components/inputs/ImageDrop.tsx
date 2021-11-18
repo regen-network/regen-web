@@ -12,6 +12,7 @@ import CropImageModal from '../modal/CropImageModal';
 import TrashIcon from '../icons/TrashIcon';
 import { Image } from '../image';
 import { Label } from '../label';
+import { srcToFile } from '../image-crop/canvas-utils';
 
 export interface ImageDropProps extends FieldProps {
   className?: string;
@@ -172,12 +173,6 @@ function ImageDrop({
       form.setFieldTouched(field.name, true);
       setCropModalOpen(false);
     }
-  };
-
-  const srcToFile = async (src: string, fileName: string, mimeType: string): Promise<File> => {
-    return fetch(src)
-      .then(res => res.arrayBuffer())
-      .then(buf => new File([buf], fileName, { type: mimeType }));
   };
 
   const handleDelete = async (): Promise<void> => {

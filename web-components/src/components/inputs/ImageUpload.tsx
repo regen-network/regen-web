@@ -1,17 +1,19 @@
 import React from 'react';
 
 import { ImageDrop, ImageDropProps } from './ImageDrop';
+import ImageField from './ImageField';
 import { uploadImage, deleteImage } from '../../utils/s3';
 
 export interface ImageUploadProps extends ImageDropProps {
   apiServerUrl?: string;
   projectId?: string;
+  isDrop?: boolean;
 }
 
 /**
  * For use with Project Images. After Cropping an Image, it will upload to S3 under that projects ID.
  */
-function ImageUpload({ apiServerUrl, projectId, ...props }: ImageUploadProps): JSX.Element {
+function ImageUpload({ apiServerUrl, projectId, isDrop, ...props }: ImageUploadProps): JSX.Element {
   const projectPath = `projects/${projectId}`;
 
   const handleUpload = async (imageFile: File): Promise<string> => {
@@ -24,7 +26,11 @@ function ImageUpload({ apiServerUrl, projectId, ...props }: ImageUploadProps): J
     }
   };
 
-  return <ImageDrop {...props} onDelete={handleDelete} onUpload={handleUpload} />;
+  return isDrop ? (
+    <ImageDrop {...props} onDelete={handleDelete} onUpload={handleUpload} />
+  ) : (
+    <ImageField {...props} onDelete={handleDelete} onUpload={handleUpload} />
+  );
 }
 
 export { ImageUpload };

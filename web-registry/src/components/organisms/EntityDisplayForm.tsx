@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { makeStyles, useTheme, Link } from '@material-ui/core';
 import { Formik, Form, Field } from 'formik';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useParams } from 'react-router-dom';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import OnboardingFooter from 'web-components/lib/components/fixed-footer/OnboardingFooter';
 import Toggle from 'web-components/lib/components/inputs/Toggle';
-import ImageField from 'web-components/lib/components/inputs/ImageField';
 import Modal from 'web-components/lib/components/modal';
 import Title from 'web-components/lib/components/title';
 import Card from 'web-components/lib/components/cards/Card';
@@ -14,6 +13,7 @@ import Description from 'web-components/lib/components/description';
 import OrganizationIcon from 'web-components/lib/components/icons/OrganizationIcon';
 import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
 import ProjectTopCard from 'web-components/lib/components/cards/ProjectTopCard';
+import { ImageUpload } from 'web-components/lib/components/inputs/ImageUpload';
 import { isIndividual } from 'web-components/lib/components/inputs/RoleField';
 import { OrganizationFormValues } from 'web-components/lib/components/modal/OrganizationModal';
 import { IndividualFormValues } from 'web-components/lib/components/modal/IndividualModal';
@@ -200,6 +200,8 @@ const OrganizationFormlet: React.FC<OrganizationFormletProps> = ({
 }) => {
   const styles = useStyles();
   const theme = useTheme();
+  const { projectId } = useParams();
+
   const triggerOnChange = async (value: boolean): Promise<void> => {
     setType(role, 'Organization', value, setFieldValue, setFieldTouched);
   };
@@ -224,7 +226,8 @@ const OrganizationFormlet: React.FC<OrganizationFormletProps> = ({
           />
           <Field
             className={styles.field}
-            component={ImageField}
+            component={ImageUpload}
+            projectId={projectId}
             label="Organization logo"
             name={`['${role}'].['http://schema.org/logo'].@value`}
             fallbackAvatar={
@@ -252,6 +255,7 @@ const IndividualFormlet: React.FC<IndividualFormletProps> = ({
   setFieldTouched,
 }) => {
   const styles = useStyles();
+  const { projectId } = useParams();
   const triggerOnChange = async (value: boolean): Promise<void> => {
     setType(role, 'Individual', value, setFieldValue, setFieldTouched);
   };
@@ -270,7 +274,8 @@ const IndividualFormlet: React.FC<IndividualFormletProps> = ({
         <div className={styles.activeContent}>
           <Field
             className={styles.field}
-            component={ImageField}
+            component={ImageUpload}
+            projectId={projectId}
             label="Bio photo"
             name={`['${role}'].['http://schema.org/image'].@value`}
           />

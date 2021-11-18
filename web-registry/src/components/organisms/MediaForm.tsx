@@ -202,6 +202,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                   name="['http://regen.network/previewPhoto'].@value"
                   apiServerUrl={apiUri}
                   projectId={projectId}
+                  isDrop
                 />
                 <div className={styles.field}>
                   <FormLabel
@@ -219,6 +220,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                         name="['http://regen.network/galleryPhotos'].@list[0].@value" // left
                         apiServerUrl={apiUri}
                         projectId={projectId}
+                        isDrop
                       />
                     </Grid>
                     {isTabletOrLarger ? (
@@ -232,6 +234,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                             hideDragText
                             apiServerUrl={apiUri}
                             projectId={projectId}
+                            isDrop
                           />
                         </Grid>
                         <Grid item sm={12} className={styles.centerSmall}>
@@ -243,6 +246,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                             hideDragText
                             apiServerUrl={apiUri}
                             projectId={projectId}
+                            isDrop
                           />
                         </Grid>
                       </Grid>
@@ -257,6 +261,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                             buttonText="+ Add Photo"
                             apiServerUrl={apiUri}
                             projectId={projectId}
+                            isDrop
                           />
                         </Grid>
                         <Grid item xs={6} sm={12} className={styles.galleryImage}>
@@ -268,6 +273,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                             buttonText="+ Add Photo"
                             apiServerUrl={apiUri}
                             projectId={projectId}
+                            isDrop
                           />
                         </Grid>
                       </>
@@ -282,6 +288,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                         name="['http://regen.network/galleryPhotos'].@list[3].@value" // right
                         apiServerUrl={apiUri}
                         projectId={projectId}
+                        isDrop
                       />
                     </Grid>
                   </Grid>
@@ -314,6 +321,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                   name="['http://regen.network/landStewardPhoto'].@value"
                   apiServerUrl={apiUri}
                   projectId={projectId}
+                  isDrop
                 />
               </OnBoardingCard>
 

@@ -9,7 +9,7 @@ export interface ImageUploadProps extends ImageDropProps {
 }
 
 /**
- * After Cropping an Image, it will upload to S3
+ * For use with Project Images. After Cropping an Image, it will upload to S3 under that projects ID.
  */
 function ImageUpload({ apiServerUrl, projectId, ...props }: ImageUploadProps): JSX.Element {
   const projectPath = `projects/${projectId}`;

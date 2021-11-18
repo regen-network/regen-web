@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles, Theme, useMediaQuery, useTheme, Grid, FormHelperText } from '@material-ui/core';
 import { Formik, Form, Field, getIn } from 'formik';
+import { useParams } from 'react-router-dom';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import OnboardingFooter from 'web-components/lib/components/fixed-footer/OnboardingFooter';
@@ -123,6 +124,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
   const styles = useStyles();
   const theme = useTheme();
   const apiUri = getApiUri();
+  const { projectId } = useParams();
   const isTabletOrLarger = useMediaQuery(theme.breakpoints.up('sm'));
   const cropAspect = { aspect: 322 / 211 }; // px values pulled from mockups (width / height)
   const { data: graphData } = useShaclGraphByUriQuery({
@@ -199,6 +201,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                   fixedCrop={cropAspect}
                   name="['http://regen.network/previewPhoto'].@value"
                   apiServerUrl={apiUri}
+                  projectId={projectId}
                 />
                 <div className={styles.field}>
                   <FormLabel
@@ -215,6 +218,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                         fixedCrop={cropAspect}
                         name="['http://regen.network/galleryPhotos'].@list[0].@value" // left
                         apiServerUrl={apiUri}
+                        projectId={projectId}
                       />
                     </Grid>
                     {isTabletOrLarger ? (
@@ -227,6 +231,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                             name="['http://regen.network/galleryPhotos'].@list[1].@value" // top
                             hideDragText
                             apiServerUrl={apiUri}
+                            projectId={projectId}
                           />
                         </Grid>
                         <Grid item sm={12} className={styles.centerSmall}>
@@ -237,6 +242,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                             name="['http://regen.network/galleryPhotos'].@list[2].@value" // bottom
                             hideDragText
                             apiServerUrl={apiUri}
+                            projectId={projectId}
                           />
                         </Grid>
                       </Grid>
@@ -250,6 +256,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                             name="['http://regen.network/galleryTop']"
                             buttonText="+ Add Photo"
                             apiServerUrl={apiUri}
+                            projectId={projectId}
                           />
                         </Grid>
                         <Grid item xs={6} sm={12} className={styles.galleryImage}>
@@ -260,6 +267,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                             name="['http://regen.network/galleryBottom']"
                             buttonText="+ Add Photo"
                             apiServerUrl={apiUri}
+                            projectId={projectId}
                           />
                         </Grid>
                       </>
@@ -273,6 +281,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                         fixedCrop={cropAspect}
                         name="['http://regen.network/galleryPhotos'].@list[3].@value" // right
                         apiServerUrl={apiUri}
+                        projectId={projectId}
                       />
                     </Grid>
                   </Grid>
@@ -304,6 +313,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                   fixedCrop={cropAspect}
                   name="['http://regen.network/landStewardPhoto'].@value"
                   apiServerUrl={apiUri}
+                  projectId={projectId}
                 />
               </OnBoardingCard>
 

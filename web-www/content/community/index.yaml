@@ -1,7 +1,6 @@
 topSection:
   header: Community
-  body: Regen Network is an open, collaborative global community of peers anchored
-    by developers, scientists and validators.
+  body: Regen Network is an open, collaborative global community of peers anchored by developers, scientists and validators.
 connectSection:
   header: Connect with our community
   telegramSubLabel: 2600+ subscribers
@@ -22,20 +21,12 @@ goToSection:
   blogButtonHref: https://medium.com/regen-network
 collectiveSection:
   title: Support the Regen community
-  body: md//As a community oriented blockchain project, our goal is to reward
-    attempts at building a stronger community by incentivizing efforts by
-    current members and motivating new members to also contribute. Together, we
-    can make the Regen Network community stand out and grow to new heights!
+  body: md//As a community oriented blockchain project, our goal is to reward attempts at building a stronger community by incentivizing efforts by current members and motivating new members to also contribute. Together, we can make the Regen Network community stand out and grow to new heights!
   buttonText: apply now
   signupFormUrl: https://rb8zs4cbb73.typeform.com/to/Q399xBBn
 collaborateSection:
   header: Out collaborate the competition
-  body: md//Under the hood of Regen Registry is a decentralized, public ledger
-    that is governed by its users.  This public blockchain, called Regen Ledger,
-    sits alongside a set of open protocols and tools that we build with a wide
-    set of co-creators. <br><br> There are three important groups of engaged
-    super users who, with their powers combined, will regenerate Planet Earth.
-    Corny Captain Planet allusions aside, we are serious about collaboration.
+  body: md//Under the hood of Regen Registry is a decentralized, public ledger that is governed by its users.  This public blockchain, called Regen Ledger, sits alongside a set of open protocols and tools that we build with a wide set of co-creators. <br><br> There are three important groups of engaged super users who, with their powers combined, will regenerate Planet Earth. Corny Captain Planet allusions aside, we are serious about collaboration.
   cards:
     - image: ../../static/media/community-developers.jpg
       title: Developers
@@ -49,7 +40,6 @@ collaborateSection:
       link: /validators/
     - image: ../../static/media/scientists.png
       title: Scientists
-      description: Create and publish methodologies for observing ecological state and
-        change.
+      description: Create and publish methodologies for observing ecological state and change.
       buttonText: Learn More
       link: /science/

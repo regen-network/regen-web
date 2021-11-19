@@ -1,5 +1,5 @@
 import React from 'react';
-import { graphql, useStaticQuery } from 'gatsby';
+import { graphql, PageProps, useStaticQuery } from 'gatsby';
 
 import TopSection from '../sections/community/TopSection';
 import CollaborateSection from '../sections/community/CollaborateSection';
@@ -8,11 +8,7 @@ import CollectiveSection from '../sections/community/CollectiveSection';
 import GoToSection from '../sections/community/GoToSection';
 import SEO from '../components/seo';
 
-interface props {
-  location: Location;
-}
-
-const CommunityPage = ({ location }: props): JSX.Element => {
+const CommunityPage: React.FC<PageProps> = ({ location }) => {
   const data = useStaticQuery(graphql`
     query {
       seoImage: file(relativePath: { eq: "community-header.png" }) {

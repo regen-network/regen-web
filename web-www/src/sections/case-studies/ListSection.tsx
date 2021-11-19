@@ -54,7 +54,7 @@ const query = graphql`
   }
 `;
 
-const ListSection: React.FC = (): JSX.Element => {
+const ListSection: React.FC = () => {
   const styles = useStyles();
   const { sanityCaseStudiesPage: data } = useStaticQuery<CaseStudiesListSectionQuery>(query);
   return (

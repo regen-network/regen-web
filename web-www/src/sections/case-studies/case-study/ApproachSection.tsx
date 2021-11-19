@@ -1,7 +1,7 @@
 import React from 'react';
 import { Theme, makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import { graphql, StaticQuery, useStaticQuery } from 'gatsby';
+import { graphql, useStaticQuery } from 'gatsby';
 import ReactHtmlParser from 'react-html-parser';
 import Img, { FluidObject } from 'gatsby-image';
 
@@ -193,7 +193,7 @@ const ApproachSection: React.FC<SanityCaseStudyApproachSection> = ({
         <Grid item xs={12} md={6}>
           <Img className={classes.image} fluid={figureImage?.image?.asset?.fluid as FluidObject} />
           <Description className={classes.figureTitle}>
-            {<BlockContent content={_rawFigureTitle} />}
+            <BlockContent content={_rawFigureTitle} />
           </Description>
         </Grid>
         <Grid item xs={12} md={6}>

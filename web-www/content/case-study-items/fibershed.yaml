@@ -2,24 +2,16 @@ name: Fibershed
 slug: fibershed
 cardImage: ../../static/media/fibershed-card.png
 background: ../../static/media/fibershed-top-bg.png
-description: Fibershed is a California-based nonprofit organization that
-  develops fiber and textile systems through a focus on carbon farming, regional
-  production and fiber processing, and public education.
+description: Fibershed is a California-based nonprofit organization that develops fiber and textile systems through a focus on carbon farming, regional production and fiber processing, and public education.
 aboutSection:
   about: >-
-    md//<a href="https://fibershed.org/" target="_blank">Fibershed</a> is a
-    nonprofit organization that develops fiber and textile systems through a
-    focus on carbon farming, regional production and fiber processing, and
-    public education. Their producer membership includes over 100 agricultural
-    fiber producers in 51 counties in Northern and Central California.
-
+    md//<a href="https://fibershed.org/" target="_blank">Fibershed</a> is a nonprofit organization that develops fiber and textile systems through a focus on carbon farming, regional production and fiber processing, and public education. Their producer membership includes over 100 agricultural fiber producers in 51 counties in Northern and Central California.
 
     Fibershed cultivates textile cultures designed to build soil carbon stocks on the working landscapes on which they depend, while directly enhancing the strength of regional economies. Through strategic grazing, conservation tillage, and a host of scientifically vetted soil carbon enhancing practices, their supply chains create ‘climate beneficial’ textiles and clothing that will become the new standard in a world looking to rapidly mitigate the effects of climate change. Read our Fibershed [blog here](https://medium.com/regen-network/modern-day-pastoralism-re-defining-the-economics-of-rotational-sheep-grazing-on-california-94d02c652234).
   mapImage: ../../static/media/fibershed-map.png
   aboutImage: ../../static/media/fibershed-about.png
   practice: Rotational Grazing and Prescribed Grazing
-  biome: Transition Zone - Temperate / Mediterranean / Subtropical Climate,
-    Predominantly Oak Woodland
+  biome: Transition Zone - Temperate / Mediterranean / Subtropical Climate, Predominantly Oak Woodland
   region: Northern California
 contextSection:
   image: ../../static/media/fibershed-context.png
@@ -28,12 +20,9 @@ contextSection:
     - text: Regenerative grazing and monitoring is expensive to implement.
     - text: Farmers need external funding to launch regenerative land management.
 approachSection:
-  description: With amplified data collection and storage through Regen Network’s
-    tools, Fibershed can obtain funding that furthers and compensates their
-    regenerative practices.
-  details: md//Using remote sensing tools and direct measurement algorithms
-    provided by Regen Network, Fibershed can verify the positive ecological
-    impact of prescribed grazing practices at the farm level.
+  description: With amplified data collection and storage through Regen Network’s tools, Fibershed can obtain funding that furthers and compensates their regenerative practices.
+   
+  details: md//Using remote sensing tools and direct measurement algorithms provided by Regen Network, Fibershed can verify the positive ecological impact of prescribed grazing practices at the farm level.
   results: |-
     md//**Qualitative:** Detection of grazing in vineyards using NDVI
     **Quantitative:** 87% accuracy
@@ -41,26 +30,18 @@ approachSection:
     field data. To that end, we recently applied for NRCS Conservation
     Innovation Grant (CIG) in the hope of scaling this throughout California.
   figureImage: ../../static/media/fibershed-figure1.png
-  figureTitle: "Figure 1: Ground data collected using Esri’s Collector app during
-    the 2019-2020 winter grazing season by Kaos Sheep Outfit Shepherds."
+  figureTitle: "Figure 1: Ground data collected using Esri’s Collector app during the 2019-2020 winter grazing season by Kaos Sheep Outfit Shepherds."
 figureSection:
   background: ../../static/media/fibershed-figure-bg.png
-  title: "Figure 2 and 3: The mapped areas show a set of 21 distinct polygons that
-    were evaluated for changes in NDVI in the 2019 pilot. NDVI changes were then
-    utilized to map grazing operations with 87% accuracy."
+  title: "Figure 2 and 3: The mapped areas show a set of 21 distinct polygons that were evaluated for changes in NDVI in the 2019 pilot. NDVI changes were then utilized to map grazing operations with 87% accuracy."
   figures:
     - image: ../../static/media/fibershed-figure2.png
     - image: ../../static/media/fibershed-figure3-1-.webp
 fundingSection:
   image: ../../static/media/fibershed-funding.png
-  details: md//Creating a project on Regen Registry and storing monitoring data as
-    immutable records on Regen Ledger which provides an important layer of
-    transparency and accountability to funders.
-  results: md//Project page on Regen Registry targeted to go live in Q4; Regen
-    Ledger integration to be added in subsequent phase.
-  next: md//To that end, we recently applied and were awarded the NRCS
-    Conservation Innovation Grant (CIG) which may lead to scaling the program
-    scaling throughout California.
+  details: md//Creating a project on Regen Registry and storing monitoring data as immutable records on Regen Ledger which provides an important layer of transparency and accountability to funders.
+  results: md//Project page on Regen Registry targeted to go live in Q4; Regen Ledger integration to be added in subsequent phase.
+  next: md//To that end, we recently applied and were awarded the NRCS Conservation Innovation Grant (CIG) which may lead to scaling the program scaling throughout California.
 conclusionSection:
   description: >-
     md//Remote sensing is a cost-effective way to verify grazing on a large
@@ -74,9 +55,7 @@ conclusionSection:
       title: Robert and Jaime of Kaos Sheep Outfit, Mendocino, California
 bottomSection:
   background: ../../static/media/fibershed-bottom-bg.png
-  quote: We experience our collaboration with Regen Network as a critical joint
-    venture to explore how to properly value the work of those who commit their
-    lives to regenerating landscapes at the watershed scale.
+  quote: We experience our collaboration with Regen Network as a critical joint venture to explore how to properly value the work of those who commit their lives to regenerating landscapes at the watershed scale.
   person:
     name: Rebecca Burgess
     image: ../../static/media/fibershed-rebecca.png

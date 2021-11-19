@@ -2,8 +2,7 @@ import React from 'react';
 import { Theme, makeStyles, useTheme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
-import { graphql, StaticQuery, useStaticQuery } from 'gatsby';
-import ReactHtmlParser from 'react-html-parser';
+import { graphql, useStaticQuery } from 'gatsby';
 import { FluidObject } from 'gatsby-image';
 import BackgroundImage from 'gatsby-background-image';
 

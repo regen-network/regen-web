@@ -173,22 +173,20 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const query = graphql`
   query homeClimateSection {
-    allSanityHomePageWeb {
-      nodes {
-        climateSection {
-          header
-          description
-          image {
-            ...ImageWithPreview
-          }
-          solution {
-            title
-            body
-          }
-          problem {
-            title
-            body
-          }
+    sanityHomePageWeb {
+      climateSection {
+        header
+        description
+        image {
+          ...ImageWithPreview
+        }
+        solution {
+          title
+          body
+        }
+        problem {
+          title
+          body
         }
       }
     }
@@ -199,9 +197,8 @@ const ClimateSection: React.FC = (): JSX.Element => {
   const styles = useStyles();
   const theme = useTheme();
   const downSm = useMediaQuery(theme.breakpoints.down('sm'));
-  const data: HomeClimateSectionQuery = useStaticQuery(query);
-
-  const content = data?.allSanityHomePageWeb?.nodes[0]?.climateSection;
+  const data = useStaticQuery<HomeClimateSectionQuery>(query);
+  const content = data.sanityHomePageWeb?.climateSection;
 
   return (
     <div className={styles.root}>

@@ -99,25 +99,23 @@ const query = graphql`
         }
       }
     }
-    allSanityHomePageWeb {
-      nodes {
-        carbonPlusSection {
-          smallHeaderFeatured
-          smallHeaderCreditName
-          header
-          description
-          linkText
-          linkUrl
-        }
+    sanityHomePageWeb {
+      carbonPlusSection {
+        smallHeaderFeatured
+        smallHeaderCreditName
+        header
+        description
+        linkText
+        linkUrl
       }
     }
   }
 `;
 
 const CarbonplusSection: React.FC = (): JSX.Element => {
-  const data: HomeCarbonplusSectionQuery = useStaticQuery(query);
-  const content = data.allSanityHomePageWeb.nodes[0].carbonPlusSection;
-  const styles = useStyles({});
+  const data = useStaticQuery<HomeCarbonplusSectionQuery>(query);
+  const content = data.sanityHomePageWeb?.carbonPlusSection;
+  const styles = useStyles();
 
   return (
     <div className={styles.root}>

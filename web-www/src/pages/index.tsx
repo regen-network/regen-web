@@ -13,10 +13,10 @@ import ClimateSection from '../sections/home/ClimateSection';
 import CarbonPlusSection from '../sections/home/CarbonPlusSection';
 import EmailSubmitSection from '../sections/shared/EmailSubmitSection';
 import BlogSection from '../sections/shared/BlogSection';
-import { HomePageQueryQuery } from '../generated/graphql';
+import { HomePageWebQuery } from '../generated/graphql';
 
-export const allHomePageQuery = graphql`
-  query homePageQuery {
+const query = graphql`
+  query homePageWeb {
     seoImage: file(relativePath: { eq: "science.png" }) {
       publicURL
     }
@@ -39,7 +39,7 @@ export const allHomePageQuery = graphql`
 
 const IndexPage: React.FC<PageProps> = ({ location }) => {
   const theme = useTheme();
-  const data: HomePageQueryQuery = useStaticQuery(allHomePageQuery);
+  const data = useStaticQuery<HomePageWebQuery>(query);
 
   return (
     <>

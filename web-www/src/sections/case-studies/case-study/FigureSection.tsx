@@ -5,29 +5,10 @@ import Img, { FluidObject } from 'gatsby-image';
 
 import BackgroundSection from '../../../components/BackgroundSection';
 import Description from 'web-components/lib/components/description';
-
-interface Figure {
-  title?: string;
-  spacing?: string;
-  image: {
-    childImageSharp: {
-      fluid: FluidObject;
-    };
-  };
-}
-
-interface FigureSectionProps {
-  title?: string;
-  background: {
-    childImageSharp: {
-      fluid: FluidObject;
-    };
-  };
-  figures: Figure[];
-}
+import { SanityCaseStudyFigure, SanityCaseStudyFigureSection } from '../../../generated/graphql';
 
 interface StyleProps {
-  figures: Figure[];
+  figures: SanityCaseStudyFigure[] | any[];
 }
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
@@ -60,20 +41,19 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   }),
 }));
 
-const FigureSection = ({ background, title, figures }: FigureSectionProps): JSX.Element => {
-  const classes = useStyles({ figures });
-
+const FigureSection: React.FC<SanityCaseStudyFigureSection> = ({ background, title, figures }) => {
+  const styles = useStyles({ figures: figures ?? [] });
   return (
-    <BackgroundSection topSection={false} linearGradient="unset" imageData={background.childImageSharp.fluid}>
+    <BackgroundSection topSection={false} linearGradient="unset" imageData={background?.image?.asset?.fluid}>
       <Grid container spacing={4}>
-        {figures.map((figure: Figure, i: number) => (
-          <Grid key={i} item xs={12} className={classes.item}>
-            <Img fluid={figure.image.childImageSharp.fluid} className={classes.image} />
-            {figure.title && <Description className={classes.figureTitle}>{figure.title}</Description>}
+        {figures?.map((figure, i) => (
+          <Grid key={i} item xs={12} className={styles.item}>
+            <Img fluid={figure?.image?.image?.asset?.fluid as FluidObject} className={styles.image} />
+            {figure?.title && <Description className={styles.figureTitle}>{figure.title}</Description>}
           </Grid>
         ))}
       </Grid>
-      {title && <Description className={classes.figureTitle}>{title}</Description>}
+      {title && <Description className={styles.figureTitle}>{title}</Description>}
     </BackgroundSection>
   );
 };

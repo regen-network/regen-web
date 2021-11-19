@@ -102,25 +102,22 @@ const query = graphql`
         }
       }
     }
-    allSanityHomePageWeb {
-      nodes {
-        ledgerDescription
-      }
+    sanityHomePageWeb {
+      ledgerDescription
     }
   }
 `;
 
 const HomeLedger: React.FC = () => {
-  const data: HomeLedgerSectionQuery = useStaticQuery(query);
-
   const styles = useStyles();
-  const content = data.allSanityHomePageWeb.nodes[0];
+  const data = useStaticQuery<HomeLedgerSectionQuery>(query);
+  const content = data.sanityHomePageWeb;
 
   return (
-    <BackgroundImage Tag="section" fluid={data?.bg?.childImageSharp?.fluid as any}>
+    <BackgroundImage Tag="section" fluid={data.bg?.childImageSharp?.fluid as any}>
       <Grid className={styles.grid} container alignItems="center" wrap="nowrap">
         <Grid className={styles.imgContainer} item xs={12}>
-          <Img className={styles.img} fluid={data?.ledger?.childImageSharp?.fluid as any} />
+          <Img className={styles.img} fluid={data.ledger?.childImageSharp?.fluid as any} />
         </Grid>
         <Grid item xs={12} className={styles.text}>
           <Title align="left" variant="h1" className={styles.title}>

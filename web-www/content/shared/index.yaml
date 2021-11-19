@@ -16,9 +16,7 @@ blogSection:
   header: Regen Network Blog
   posts:
     - header: Regen Network Sells Out $10.5M Round, Launches Regen Ledger
-      description: "Regen Network Development, Inc (RND) has announced the
-        much-anticipated mainnet launch of Regen Ledger, a Proof-of-Stake (PoS)
-        blockchain focused on ecological data, assets, and agreements. "
+      description: "Regen Network Development, Inc (RND) has announced the much-anticipated mainnet launch of Regen Ledger, a Proof-of-Stake (PoS) blockchain focused on ecological data, assets, and agreements."
       image: ../../static/media/rocket-launch-67643_1920-1-768x514.jpeg
       url: https://www.banklesstimes.com/2021/04/16/regen-network-sells-out-10-5m-round-launches-regen-ledger/
     - header: Regen Community Update
@@ -26,9 +24,7 @@ blogSection:
       image: ../../static/media/mainnet-launch-5-.png
       url: https://medium.com/regen-network/regen-network-community-update-65fb4f445187
     - header: Regen Network Announces Historic Carbon Credit Sale in Australia
-      description: Agtech start-up Regen Network announces the historic sale of soil
-        carbon credits to Microsoft, one of the largest soil carbon credit
-        issuances ever in Australia.
+      description: Agtech start-up Regen Network announces the historic sale of soil carbon credits to Microsoft, one of the largest soil carbon credit issuances ever in Australia.
       image: ../../static/media/cattle_wilmott.png
       url: http://bit.ly/regensale
 comingSoonSection:

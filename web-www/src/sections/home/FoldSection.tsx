@@ -95,15 +95,10 @@ const query = graphql`
         }
       }
     }
-    allSanityHomePageWeb {
-      nodes {
-        homeFoldSection {
-          title
-          body
-          image {
-            ...ImageWithPreview
-          }
-        }
+    sanityHomePageWeb {
+      homeFoldSection {
+        title
+        body
       }
     }
   }
@@ -111,8 +106,8 @@ const query = graphql`
 
 const HomeFoldSection: React.FC<{ className?: string }> = ({ className }) => {
   const styles = useStyles({});
-  const data: HomeFoldSectionQuery = useStaticQuery(query);
-  const content = data.allSanityHomePageWeb.nodes[0].homeFoldSection;
+  const data = useStaticQuery<HomeFoldSectionQuery>(query);
+  const content = data.sanityHomePageWeb?.homeFoldSection;
 
   return (
     <BackgroundImage

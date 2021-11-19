@@ -75,31 +75,33 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const MediaSection: React.FC = () => {
-  const {
-    text: { header, categories },
-  } = useStaticQuery<QueryData>(graphql`
-    query {
-      text: mediaYaml {
-        header
-        categories {
-          name
-          buttonText
-          showPlay
-          items {
-            title
-            date
-            author
-            url
-            isMainnet
-            image {
-              publicURL
-            }
+const query = graphql`
+  query {
+    text: mediaYaml {
+      header
+      categories {
+        name
+        buttonText
+        showPlay
+        items {
+          title
+          date
+          author
+          url
+          isMainnet
+          image {
+            publicURL
           }
         }
       }
     }
-  `);
+  }
+`;
+
+const MediaSection: React.FC = () => {
+  const {
+    text: { header, categories },
+  } = useStaticQuery<QueryData>(query);
   const classes = useStyles();
   const theme = useTheme();
   const allItems: CardItem[] = categories.reduce((prev: CardItem[], curr) => {

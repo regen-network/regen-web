@@ -2,23 +2,13 @@ import React from 'react';
 import { Theme, makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
-import { graphql, StaticQuery } from 'gatsby';
+import { graphql, useStaticQuery } from 'gatsby';
 import Img, { FluidObject } from 'gatsby-image';
-import ReactHtmlParser from 'react-html-parser';
 
 import Section from 'web-components/lib/components/section';
 import { TitleWithParagraphs } from './ApproachSection';
-
-interface FundingSectionProps {
-  details: string;
-  results: string;
-  next: string;
-  image: {
-    childImageSharp: {
-      fluid: FluidObject;
-    };
-  };
-}
+import { CaseStudyFundingSectionQuery, SanityCaseStudyFundingSection } from '../../../generated/graphql';
+import { BlockContent } from 'web-components/src/components/block-content';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -46,52 +36,52 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const FundingSection = ({ details, results, next, image }: FundingSectionProps): JSX.Element => {
+const query = graphql`
+  query CaseStudyFundingSection {
+    sanityCaseStudiesPage {
+      fundingSection {
+        _rawHeader
+        details
+        results
+        next
+      }
+    }
+  }
+`;
+
+const FundingSection: React.FC<SanityCaseStudyFundingSection> = ({
+  _rawDetails,
+  _rawResults,
+  _rawNext,
+  image,
+}) => {
   const classes = useStyles();
+  const data = useStaticQuery<CaseStudyFundingSectionQuery>(query);
+  const content = data?.sanityCaseStudiesPage?.fundingSection;
+
   return (
-    <StaticQuery
-      query={graphql`
-        query {
-          text: caseStudiesYaml {
-            caseStudies {
-              fundingSection {
-                header
-                details
-                results
-                next
-              }
-            }
-          }
-        }
-      `}
-      render={data => {
-        const content = data.text.caseStudies.fundingSection;
-        return (
-          <Section className={classes.root}>
-            <Box display={{ xs: 'block', sm: 'none' }}>
-              <Img className={classes.image} fluid={image.childImageSharp.fluid} />
-            </Box>
-            <Grid container spacing={10}>
-              <Grid item xs={12} md={6}>
-                <TitleWithParagraphs
-                  title={<div className={classes.title}>{ReactHtmlParser(content.header)}</div>}
-                  paragraphs={[
-                    { title: content.details, content: details },
-                    { title: content.results, content: results },
-                    { title: content.next, content: next },
-                  ]}
-                />
-              </Grid>
-              <Grid item xs={12} md={6}>
-                <Box display={{ xs: 'none', sm: 'block' }}>
-                  <Img className={classes.image} fluid={image.childImageSharp.fluid} />
-                </Box>
-              </Grid>
-            </Grid>
-          </Section>
-        );
-      }}
-    />
+    <Section className={classes.root}>
+      <Box display={{ xs: 'block', sm: 'none' }}>
+        <Img className={classes.image} fluid={image?.image?.asset?.fluid as FluidObject} />
+      </Box>
+      <Grid container spacing={10}>
+        <Grid item xs={12} md={6}>
+          <TitleWithParagraphs
+            title={<div className={classes.title}>{<BlockContent content={content?._rawHeader} />}</div>}
+            paragraphs={[
+              { title: content?.details || '', content: _rawDetails },
+              { title: content?.results || '', content: _rawResults },
+              { title: content?.next || '', content: _rawNext },
+            ]}
+          />
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <Box display={{ xs: 'none', sm: 'block' }}>
+            <Img className={classes.image} fluid={image?.image?.asset?.fluid as FluidObject} />
+          </Box>
+        </Grid>
+      </Grid>
+    </Section>
   );
 };
 

@@ -1,13 +1,13 @@
 import React from 'react';
+import { graphql, useStaticQuery } from 'gatsby';
 import SanityImage from 'gatsby-plugin-sanity-image';
 import { makeStyles, Theme } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import Title from 'web-components/lib/components/title';
 import Section from 'web-components/src/components/section';
-// import Img from 'gatsby-image';
 import Tooltip from 'web-components/lib/components/tooltip';
-import { graphql, useStaticQuery } from 'gatsby';
+
 import { HomeMarketPlaceSectionQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -125,20 +125,18 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const query = graphql`
   query homeMarketPlaceSection {
-    allSanityHomePageWeb {
-      nodes {
-        marketplaceSection {
-          header
-          tooltip
-          body {
-            green
-            middle
-            popover
-            end
-          }
-          callToActions {
-            ...callToActionFields
-          }
+    sanityHomePageWeb {
+      marketplaceSection {
+        header
+        tooltip
+        body {
+          green
+          middle
+          popover
+          end
+        }
+        callToActions {
+          ...callToActionFields
         }
       }
     }
@@ -147,8 +145,8 @@ const query = graphql`
 
 const MarketplaceSection: React.FC = () => {
   const styles = useStyles({});
-  const data: HomeMarketPlaceSectionQuery = useStaticQuery(query);
-  const content = data?.allSanityHomePageWeb?.nodes[0]?.marketplaceSection;
+  const data = useStaticQuery<HomeMarketPlaceSectionQuery>(query);
+  const content = data.sanityHomePageWeb?.marketplaceSection;
 
   return (
     <Section className={styles.root}>

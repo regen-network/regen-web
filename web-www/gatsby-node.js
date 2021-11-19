@@ -47,6 +47,28 @@ exports.createPages = async ({ graphql, actions }) => {
       }
     }
   `);
+  const result2 = await graphql(`
+    query {
+      allSanityCaseStudyPage {
+        nodes {
+          slug {
+            current
+          }
+        }
+      }
+    }
+  `);
+
+  result2.data.allSanityCaseStudyPage.nodes.forEach(item => {
+    createPage({
+      path: `case-studies-new/${item.slug.current}`,
+      component: path.resolve(`./src/templates/CaseStudy.tsx`),
+      context: {
+        slug: item.slug.current,
+      },
+    });
+  });
+
   result.data.allCaseStudyItemsYaml.nodes.forEach(item => {
     createPage({
       path: `case-studies/${item.slug}`,

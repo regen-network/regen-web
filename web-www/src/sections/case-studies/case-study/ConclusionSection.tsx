@@ -1,28 +1,18 @@
 import React from 'react';
 import { Theme, makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import { graphql, StaticQuery } from 'gatsby';
-import ReactHtmlParser from 'react-html-parser';
+import { graphql, useStaticQuery } from 'gatsby';
 import Img, { FluidObject } from 'gatsby-image';
 import clsx from 'clsx';
 
 import BackgroundSection from '../../../components/BackgroundSection';
 import Title from 'web-components/lib/components/title';
 import Description from 'web-components/lib/components/description';
-
-interface Image {
-  image: {
-    childImageSharp: {
-      fluid: FluidObject;
-    };
-  };
-  title?: string;
-}
-
-interface ConclusionSectionProps {
-  description: string;
-  images: Image[];
-}
+import { BlockContent } from 'web-components/src/components/block-content';
+import {
+  CaseStudyConclusionSectionQuery,
+  SanityCaseStudyConclusionSection,
+} from '../../../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -67,63 +57,53 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const ConclusionSection = ({ description, images }: ConclusionSectionProps): JSX.Element => {
-  const classes = useStyles();
-
-  return (
-    <StaticQuery
-      query={graphql`
-        query {
-          bg: file(relativePath: { eq: "topo-bg-top.png" }) {
-            childImageSharp {
-              fluid(quality: 90) {
-                ...GatsbyImageSharpFluid_withWebp
-              }
-            }
-          }
-          text: caseStudiesYaml {
-            caseStudies {
-              conclusionSection {
-                header
-              }
-            }
-          }
+const query = graphql`
+  query CaseStudyConclusionSection {
+    bg: file(relativePath: { eq: "topo-bg-top.png" }) {
+      childImageSharp {
+        fluid(quality: 90) {
+          ...GatsbyImageSharpFluid_withWebp
         }
-      `}
-      render={data => {
-        const content = data.text.caseStudies.conclusionSection;
-        return (
-          <BackgroundSection
-            topSection={false}
-            linearGradient="unset"
-            imageData={data.bg.childImageSharp.fluid}
-            className={classes.root}
-          >
-            <Grid container spacing={8} alignItems="center">
-              <Grid item xs={12} sm={5}>
-                {images.map((img: Image, i: number) => (
-                  <div key={i}>
-                    <Img
-                      fluid={img.image.childImageSharp.fluid}
-                      className={
-                        images.length > 1 && i > 0 ? clsx(classes.withMargin, classes.image) : classes.image
-                      }
-                    />
-                    {img.title && <Description className={classes.imageTitle}>{img.title}</Description>}
-                  </div>
-                ))}
-              </Grid>
-              <Grid item xs={12} sm={7}>
-                <Title variant="h2" className={classes.title}>
-                  {content.header}
-                </Title>
-                <Description className={classes.description}>{ReactHtmlParser(description)}</Description>
-              </Grid>
-            </Grid>
-          </BackgroundSection>
-        );
-      }}
-    />
+      }
+    }
+    sanityCaseStudiesPage {
+      conclusionSectionHeader
+    }
+  }
+`;
+
+const ConclusionSection: React.FC<SanityCaseStudyConclusionSection> = ({ _rawDescription, images }) => {
+  const styles = useStyles();
+  const { bg, sanityCaseStudiesPage: content } = useStaticQuery<CaseStudyConclusionSectionQuery>(query);
+  return (
+    <BackgroundSection
+      topSection={false}
+      linearGradient="unset"
+      imageData={bg?.childImageSharp?.fluid}
+      className={styles.root}
+    >
+      <Grid container spacing={8} alignItems="center">
+        <Grid item xs={12} sm={5}>
+          {images?.map((img, i) => (
+            <div key={i}>
+              <Img
+                fluid={img?.image?.image?.asset?.fluid as FluidObject}
+                className={images.length > 1 && i > 0 ? clsx(styles.withMargin, styles.image) : styles.image}
+              />
+              {img?.title && <Description className={styles.imageTitle}>{img.title}</Description>}
+            </div>
+          ))}
+        </Grid>
+        <Grid item xs={12} sm={7}>
+          <Title variant="h2" className={styles.title}>
+            {content?.conclusionSectionHeader}
+          </Title>
+          <Description className={styles.description}>
+            <BlockContent content={_rawDescription} />
+          </Description>
+        </Grid>
+      </Grid>
+    </BackgroundSection>
   );
 };
 

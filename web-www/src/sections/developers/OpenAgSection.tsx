@@ -63,7 +63,7 @@ const query = graphql`
 
 const OpenAgSection: React.FC = () => {
   const styles = useStyles();
-  const data: DevOpenAgSectionQuery = useStaticQuery(query);
+  const data = useStaticQuery<DevOpenAgSectionQuery>(query);
   const content = data?.allSanityDevelopersPage?.nodes[0].openAgSection;
 
   return (

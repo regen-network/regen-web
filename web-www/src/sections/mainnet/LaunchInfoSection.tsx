@@ -166,7 +166,7 @@ const LaunchInfoSection: React.FC = () => {
       launchInfoSection: { card, image, title },
     },
   } = useStaticQuery<QueryData>(graphql`
-    query {
+    query mainnetLaunchInfo {
       text: mainnetYaml {
         launchDate
         launchInfoSection {

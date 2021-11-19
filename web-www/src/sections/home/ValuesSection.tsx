@@ -63,23 +63,14 @@ const query = graphql`
         }
       }
     }
-    ellipse: file(relativePath: { eq: "green-ellipse.png" }) {
-      childImageSharp {
-        fixed(quality: 90, width: 120) {
-          ...GatsbyImageSharpFixed_withWebp
-        }
-      }
-    }
-    allSanityHomePageWeb {
-      nodes {
-        valuesSection {
-          header
-          imageItems {
-            title
-            description
-            image {
-              ...Image
-            }
+    sanityHomePageWeb {
+      valuesSection {
+        header
+        imageItems {
+          title
+          description
+          image {
+            ...Image
           }
         }
       }
@@ -88,10 +79,9 @@ const query = graphql`
 `;
 
 const HomeValues: React.FC<{ className?: string }> = ({ className }) => {
-  const data: HomeValuesSectionQuery = useStaticQuery(query);
   const styles = useStyles();
-
-  const content = data.allSanityHomePageWeb.nodes[0].valuesSection;
+  const { bg, sanityHomePageWeb } = useStaticQuery<HomeValuesSectionQuery>(query);
+  const content = sanityHomePageWeb?.valuesSection;
 
   const imageItems: ImageItemProps[] = (content?.imageItems || []).map(item => {
     return {
@@ -105,7 +95,7 @@ const HomeValues: React.FC<{ className?: string }> = ({ className }) => {
     <BackgroundImage
       Tag="section"
       className={clsx(className, styles.section)}
-      fluid={data?.bg?.childImageSharp?.fluid as any}
+      fluid={bg?.childImageSharp?.fluid as any}
     >
       <Section
         withSlider

@@ -1,11 +1,12 @@
 import React from 'react';
+import SanityImage from 'gatsby-plugin-sanity-image';
 import { makeStyles, Theme } from '@material-ui/core';
 import { useStaticQuery, graphql } from 'gatsby';
-import Img from 'gatsby-image';
-import BackgroundImage from 'gatsby-background-image';
 
 import BlogPosts from 'web-components/lib/components/sliders/BlogPosts';
+import { BlogPostProps } from 'web-components/lib/components/blog-post';
 import Section from 'web-components/src/components/section';
+import { SharedBlogSectionQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
@@ -35,42 +36,49 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const BlogSection: React.FC = () => {
-  const data = useStaticQuery(graphql`
-    query {
-      text: sharedYaml {
-        blogSection {
+const query = graphql`
+  query sharedBlogSection {
+    sanitySharedSections {
+      blog {
+        header
+        posts {
           header
-          posts {
-            image {
-              childImageSharp {
-                fluid(quality: 90) {
-                  ...GatsbyImageSharpFluid_withWebp
-                }
-              }
-            }
-            header
-            url
-            description
+          url
+          _rawDescription
+          image {
+            ...customImageFields
           }
         }
       }
     }
-  `);
-  const classes = useStyles();
+  }
+`;
 
-  const content = data.text.blogSection;
+const BlogSection: React.FC = () => {
+  const styles = useStyles();
+  const { sanitySharedSections } = useStaticQuery<SharedBlogSectionQuery>(query);
+  const content = sanitySharedSections?.blog;
+  const posts: BlogPostProps[] =
+    content?.posts?.map(
+      post =>
+        ({
+          header: post?.header,
+          description: post?._rawDescription,
+          url: post?.url,
+          img: (
+            <SanityImage
+              className={styles.image}
+              alt={post?.image?.imageAlt}
+              {...(post?.image?.image as any)}
+            />
+          ),
+        } as BlogPostProps),
+    ) ?? [];
+
   return (
-    <div className={classes.container}>
-      <Section withSlider className={classes.root} title={content.header} titleVariant="h1">
-        <BlogPosts
-          posts={content.posts.map(({ header, description, url, image }) => ({
-            header,
-            description,
-            url,
-            img: <BackgroundImage className={classes.image} Tag="div" fluid={image.childImageSharp.fluid} />,
-          }))}
-        />
+    <div className={styles.container}>
+      <Section withSlider className={styles.root} title={content?.header || ''} titleVariant="h1">
+        <BlogPosts posts={posts} />
       </Section>
     </div>
   );

@@ -3,12 +3,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useLocation } from 'react-router-dom';
 
 import SEO from 'web-components/lib/components/seo';
-import MoreInfoForm from 'web-components/lib/components/form/MoreInfoForm';
 import FixedFooter from 'web-components/lib/components/fixed-footer';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import EmailIcon from 'web-components/lib/components/icons/EmailIcon';
 import Modal from 'web-components/lib/components/modal';
-import Banner from 'web-components/lib/components/banner';
 
 import { HeroTitle, FeaturedSection, HeroAction, ImageGridSection } from '../components/molecules';
 import { MoreProjectsSection } from '../components/organisms';
@@ -43,13 +41,16 @@ const useStyles = makeStyles(theme => ({
       fontSize: theme.typography.pxToRem(32),
     },
   },
+  modal: {
+    padding: 0,
+    overflow: 'hidden',
+  },
 }));
 
 const BuyersPage = (): JSX.Element => {
   const styles = useStyles();
   const location = useLocation();
   const [open, setOpen] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
   const { data } = useAllBuyersPageQuery({ client });
   const content = data?.allBuyersPage?.[0];
   const { data: projectsData } = useMoreProjectsQuery();
@@ -120,14 +121,12 @@ const BuyersPage = (): JSX.Element => {
           </ContainedButton>
         </>
       </FixedFooter>
-      <Modal open={open} onClose={handleClose}>
-        <MoreInfoForm
-          apiUrl={process.env.REACT_APP_API_URI || ''}
-          onClose={handleClose}
-          onSubmit={() => setSubmitted(true)}
+      <Modal className={styles.modal} open={open} onClose={handleClose}>
+        <iframe
+          title="airtable-buyer-intake"
+          src="https://airtable.com/embed/shrijZlxJdSmj7H8J?backgroundColor=green"
         />
       </Modal>
-      {submitted && <Banner text="Thanks for submitting your information!" />}
     </>
   );
 };
